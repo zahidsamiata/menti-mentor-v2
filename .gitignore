@@ -1,0 +1,52 @@
+# ── Monorepo kök .gitignore ───────────────────────────────────────────────────
+# Geliştirme dizinindeki tüm projeleri kapsar.
+
+# Bağımlılıklar
+node_modules/
+**/node_modules/
+
+# Derleme çıktıları
+dist/
+.next/
+out/
+**/dist/
+**/.next/
+
+# ── Ortam değişkeni dosyaları (KRİTİK — asla commit edilmemeli) ──────────────
+.env
+.env.*
+!.env.example
+!.env.compose          # Şablon dosyası — gerçek değer içermez, commit edilebilir
+!**/.env.example
+!**/.env.*.example
+
+# Docker override dosyaları (production secret'ları)
+.env.compose.local
+docker-compose.override.yml
+
+# Loglar
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Prisma
+*.db
+prisma/migrations/dev.db
+
+# Claude Code ve RTK yerel yapılandırma
+.claude/
+.rtk/

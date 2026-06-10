@@ -1,0 +1,95 @@
+##
+# Menti-Mentor SaaS — Production Docker Compose
+#
+# Servisler:
+#   postgres  — PostgreSQL 16 (kalıcı volume)
+#   backend   — Express API (migration sonrası başlar)
+#   frontend  — Next.js standalone server
+#
+# Kullanım:
+#   cp .env.compose .env.compose.local   # gizli değerleri doldur
+#   docker compose --env-file .env.compose.local up -d
+##
+
+services:
+  # ── PostgreSQL ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD zorunlu}
+      POSTGRES_DB: ${POSTGRES_DB:-menti_mentor}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  # ── Backend ─────────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./Menti Mentör proje
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-menti_mentor}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET zorunlu — min 32 karakter}
+      PLATFORM_ADMIN_KEY: ${PLATFORM_ADMIN_KEY:?PLATFORM_ADMIN_KEY zorunlu}
+      PORT: 3000
+      ALLOWED_ORIGINS: ${FRONTEND_URL:-http://localhost:3001}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3001}
+      FRONTEND_OAUTH_CALLBACK_URL: ${FRONTEND_URL:-http://localhost:3001}/oauth/callback
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GOOGLE_REDIRECT_URI: ${BACKEND_URL:-http://localhost:3000}/api/auth/google/callback
+      LINKEDIN_CLIENT_ID: ${LINKEDIN_CLIENT_ID:-}
+      LINKEDIN_CLIENT_SECRET: ${LINKEDIN_CLIENT_SECRET:-}
+      LINKEDIN_REDIRECT_URI: ${BACKEND_URL:-http://localhost:3000}/api/auth/linkedin/callback
+    ports:
+      - "${BACKEND_PORT:-3000}:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - internal
+      - public
+
+  # ── Frontend ─────────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./menti-mentor-frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${BACKEND_URL:-http://localhost:3000}
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+    ports:
+      - "${FRONTEND_PORT:-3001}:3001"
+    networks:
+      - public
+
+volumes:
+  postgres_data:
+
+networks:
+  internal:  # backend ↔ postgres (dışa kapalı)
+  public:    # frontend ↔ backend (dışa açık)

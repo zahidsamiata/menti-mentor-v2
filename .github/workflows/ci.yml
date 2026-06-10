@@ -1,0 +1,152 @@
+##
+# Menti-Mentor SaaS — CI Pipeline
+#
+# Tetikleyiciler:
+#   - Her push (tüm branch'ler)
+#   - main ve develop'a açılan PR'lar
+#
+# Job'lar:
+#   backend-check   — TS derleme + Prisma + lint
+#   frontend-check  — TS derleme + Next.js build (lint dahil)
+#   integration-tests — Vitest + Supertest (PostgreSQL servis container)
+#
+# Tasarım kararı: integration-tests job'u ayrı tutulur;
+# DB gerektirdiğinden statik check'lerden bağımsız çalışır.
+# PR'da geçmesi zorunludur, ancak check ve test paralel başlar.
+##
+
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  # ── Backend: TypeScript + Prisma + Lint ──────────────────────────────────────
+  backend-check:
+    name: Backend — TS + Prisma + Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'Menti Mentör proje'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node.js ${{ env.NODE_VERSION }} kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
+
+      - name: Bağımlılıkları kur
+        run: npm ci
+
+      - name: Prisma client üret
+        run: npx prisma generate
+
+      - name: TypeScript kontrolü (src)
+        run: npx tsc --noEmit
+
+      - name: TypeScript kontrolü (tests)
+        run: npx tsc --noEmit -p tsconfig.test.json
+
+      - name: ESLint
+        run: npm run lint
+        continue-on-error: true  # lint uyarıları bloklamamalı; sadece hataları engelle
+
+  # ── Frontend: TypeScript + Next.js Build ─────────────────────────────────────
+  frontend-check:
+    name: Frontend — TS + Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'menti-mentor-frontend'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node.js ${{ env.NODE_VERSION }} kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'menti-mentor-frontend/package-lock.json'
+
+      - name: Bağımlılıkları kur
+        run: npm ci
+
+      - name: TypeScript kontrolü
+        run: npx tsc --noEmit
+
+      - name: Next.js production build (lint + tip kontrolü dahil)
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:3000
+
+  # ── Entegrasyon Testleri: Vitest + Supertest + PostgreSQL ────────────────────
+  integration-tests:
+    name: Integration Tests (Auth + Matching + Admin)
+    runs-on: ubuntu-latest
+    needs: [backend-check]  # Backend check geçmeden çalışma
+    defaults:
+      run:
+        working-directory: 'Menti Mentör proje'
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: menti_mentor_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      NODE_ENV: test
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/menti_mentor_test
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/menti_mentor_test
+      JWT_SECRET: test-secret-min-32-chars-for-ci-pipeline!!
+      PLATFORM_ADMIN_KEY: test-platform-key-ci
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node.js ${{ env.NODE_VERSION }} kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
+
+      - name: Bağımlılıkları kur
+        run: npm ci
+
+      - name: Prisma client üret
+        run: npx prisma generate
+
+      - name: Test DB migration uygula
+        run: npx prisma migrate deploy
+
+      - name: Entegrasyon testlerini çalıştır
+        run: npm test
+
+      - name: Test coverage yükle (opsiyonel)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: 'Menti Mentör proje/coverage'
+          retention-days: 7

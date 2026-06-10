@@ -1,0 +1,37 @@
+# ── Frontend .gitignore ───────────────────────────────────────────────────────
+
+# Bağımlılıklar
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Test çıktıları
+/coverage
+
+# Next.js
+/.next/
+/out/
+/build
+
+# ── Ortam değişkeni dosyaları (asla commit edilmemeli) ───────────────────────
+.env
+.env.*
+!.env.example
+!.env.local.example   # Şablon dosyaları commit edilebilir
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
