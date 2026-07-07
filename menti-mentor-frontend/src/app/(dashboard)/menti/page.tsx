@@ -14,6 +14,7 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { matchingApi, matchRequestApi } from '@/lib/api/matching';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
+import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import type { MentorListItem } from '@/types/matching';
 
 const DISC_COLORS: Record<string, string> = {
@@ -143,7 +144,8 @@ export default function MentiDashboardPage() {
         </div>
       )}
 
-      {/* Günün Sorusu — profil tamamlanmamışsa göster */}
+      {/* Profil güvenilirliği + günün sorusu */}
+      {user?.id && <DiscConfidenceWidget userId={user.id} />}
       {user?.id && <DailyQuestionWidget userId={user.id} />}
 
       {/* Metrikler — sadece onaylı kullanıcılar için gerçek veri */}

@@ -1,5 +1,6 @@
 import type { ApiResult } from '@/types/api';
 import type { RequestOptions } from './client';
+import type { DiscPreviewResponse } from '@/types/discTest';
 
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
@@ -77,4 +78,8 @@ export const questionsApi = {
       method: 'POST',
       body: { questionId, value },
     }),
+
+  /** GET /api/users/:userId/adaptive-test/preview — anlık discVector.confidence */
+  getDiscPreview: (api: BoundClient, userId: string): Promise<ApiResult<DiscPreviewResponse>> =>
+    api<DiscPreviewResponse>(`/api/users/${userId}/adaptive-test/preview`),
 };
