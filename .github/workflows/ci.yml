@@ -9,10 +9,6 @@
 #   backend-check   — TS derleme + Prisma + lint
 #   frontend-check  — TS derleme + Next.js build (lint dahil)
 #   integration-tests — Vitest + Supertest (PostgreSQL servis container)
-#
-# Tasarım kararı: integration-tests job'u ayrı tutulur;
-# DB gerektirdiğinden statik check'lerden bağımsız çalışır.
-# PR'da geçmesi zorunludur, ancak check ve test paralel başlar.
 ##
 
 name: CI
@@ -25,15 +21,14 @@ on:
 
 env:
   NODE_VERSION: '22'
+  BACKEND_DIR: 'Menti Mentör proje'
+  FRONTEND_DIR: 'menti-mentor-frontend'
 
 jobs:
   # ── Backend: TypeScript + Prisma + Lint ──────────────────────────────────────
   backend-check:
     name: Backend — TS + Prisma + Lint
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'Menti Mentör proje'
 
     steps:
       - uses: actions/checkout@v4
@@ -45,31 +40,33 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
+          cache-dependency-path: '${{ env.BACKEND_DIR }}/package-lock.json'
 
       - name: Bağımlılıkları kur
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npm ci
 
       - name: Prisma client üret
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npx prisma generate
 
       - name: TypeScript kontrolü (src)
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npx tsc --noEmit
 
       - name: TypeScript kontrolü (tests)
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npx tsc --noEmit -p tsconfig.test.json
 
       - name: ESLint
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npm run lint
-        continue-on-error: true  # lint uyarıları bloklamamalı; sadece hataları engelle
+        continue-on-error: true
 
   # ── Frontend: TypeScript + Next.js Build ─────────────────────────────────────
   frontend-check:
     name: Frontend — TS + Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'menti-mentor-frontend'
 
     steps:
       - uses: actions/checkout@v4
@@ -79,15 +76,18 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: 'menti-mentor-frontend/package-lock.json'
+          cache-dependency-path: '${{ env.FRONTEND_DIR }}/package-lock.json'
 
       - name: Bağımlılıkları kur
+        working-directory: ${{ env.FRONTEND_DIR }}
         run: npm ci
 
       - name: TypeScript kontrolü
+        working-directory: ${{ env.FRONTEND_DIR }}
         run: npx tsc --noEmit
 
       - name: Next.js production build (lint + tip kontrolü dahil)
+        working-directory: ${{ env.FRONTEND_DIR }}
         run: npm run build
         env:
           NEXT_PUBLIC_API_URL: http://localhost:3000
@@ -96,10 +96,7 @@ jobs:
   integration-tests:
     name: Integration Tests (Auth + Matching + Admin)
     runs-on: ubuntu-latest
-    needs: [backend-check]  # Backend check geçmeden çalışma
-    defaults:
-      run:
-        working-directory: 'Menti Mentör proje'
+    needs: [backend-check]
 
     services:
       postgres:
@@ -133,18 +130,22 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
+          cache-dependency-path: '${{ env.BACKEND_DIR }}/package-lock.json'
 
       - name: Bağımlılıkları kur
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npm ci
 
       - name: Prisma client üret
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npx prisma generate
 
       - name: Test DB migration uygula
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npx prisma migrate deploy
 
       - name: Entegrasyon testlerini çalıştır
+        working-directory: ${{ env.BACKEND_DIR }}
         run: npm test
 
       - name: Test coverage yükle (opsiyonel)
@@ -152,5 +153,5 @@ jobs:
         if: always()
         with:
           name: coverage-report
-          path: 'Menti Mentör proje/coverage'
+          path: '${{ env.BACKEND_DIR }}/coverage'
           retention-days: 7
