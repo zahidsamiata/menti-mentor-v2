@@ -64,6 +64,7 @@ export function selfServeRegister(data: {
   tenantName: string;
   slug: string;
   programTemplate: 'MEZUN' | 'KULUP' | 'GONULLU' | 'OZEL';
+  kvkkConsent: boolean; // KVKK Md.5 — açık rıza; backend z.literal(true) ile zorunlu
 }): Promise<ApiResult<SelfServeRegisterResponse>> {
   return apiClient<SelfServeRegisterResponse>('/api/tenants/self-serve/register', {
     method: 'POST',
