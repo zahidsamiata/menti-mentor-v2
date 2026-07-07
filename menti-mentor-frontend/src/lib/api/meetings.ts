@@ -33,11 +33,39 @@ export interface CheckIn {
   openNote?: string;
 }
 
+export interface AvailabilityBlock {
+  weekday: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface AvailabilityResponse {
+  mentorUserId: string;
+  blocks: AvailabilityBlock[];
+}
+
+export interface BookMeetingPayload {
+  mentorUserId: string;
+  matchId?: string;
+  format: 'ONLINE' | 'IN_PERSON' | 'PHONE';
+  startsAt: string;
+  endsAt: string;
+  locationUrl?: string;
+  locationText?: string;
+  phoneNumber?: string;
+}
+
 export const meetingsApi = {
   list: (api: BoundClient, params: { status?: string } = {}): Promise<ApiResult<MeetingsListResponse>> => {
     const qs = params.status ? `?status=${params.status}` : '';
     return api<MeetingsListResponse>(`/api/meetings${qs}`);
   },
+
+  getAvailability: (api: BoundClient, mentorUserId: string): Promise<ApiResult<AvailabilityResponse>> =>
+    api<AvailabilityResponse>(`/api/meetings/availability?mentorUserId=${mentorUserId}`),
+
+  bookMeeting: (api: BoundClient, payload: BookMeetingPayload): Promise<ApiResult<{ meeting: Meeting; awaitingMentorApproval: boolean }>> =>
+    api(`/api/meetings/book`, { method: 'POST', body: payload }),
 
   approveMeeting: (api: BoundClient, meetingId: string): Promise<ApiResult<{ meeting: Meeting }>> =>
     api<{ meeting: Meeting }>(`/api/meetings/${meetingId}/approve`, { method: 'POST' }),

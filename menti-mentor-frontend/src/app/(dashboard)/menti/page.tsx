@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
@@ -26,6 +27,7 @@ export default function MentiDashboardPage() {
   const { user } = useAuth();
   const { tenant } = useTenant();
   const api = useApiClient();
+  const router = useRouter();
 
   const needsDiscTest = !user?.discType;
   const isApproved = user?.approvalStatus === 'APPROVED';
@@ -182,14 +184,23 @@ export default function MentiDashboardPage() {
                       </div>
                     </div>
                   </div>
-                  <Button
-                    size="sm"
-                    variant={sentIds.has(mentor.id) ? 'secondary' : 'default'}
-                    disabled={sentIds.has(mentor.id)}
-                    onClick={() => !sentIds.has(mentor.id) && openModal(mentor)}
-                  >
-                    {sentIds.has(mentor.id) ? 'Gönderildi ✓' : 'Talep Gönder'}
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => router.push(`/book-meeting?mentorId=${mentor.id}`)}
+                    >
+                      Randevu Al
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={sentIds.has(mentor.id) ? 'secondary' : 'default'}
+                      disabled={sentIds.has(mentor.id)}
+                      onClick={() => !sentIds.has(mentor.id) && openModal(mentor)}
+                    >
+                      {sentIds.has(mentor.id) ? 'Gönderildi ✓' : 'Mesaj'}
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>

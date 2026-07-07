@@ -31,6 +31,7 @@ export default function QuestionsPage() {
   const [newText, setNewText] = useState('');
   const [newDimension, setNewDimension] = useState<string>('GENERAL');
   const [newType, setNewType] = useState<string>('CORE');
+  const [newCategory, setNewCategory] = useState<string>('STK_CUSTOM');
   const [adding, setAdding] = useState(false);
 
   async function handleHide(q: Question) {
@@ -59,6 +60,7 @@ export default function QuestionsPage() {
       text: newText.trim(),
       discDimension: newDimension,
       type: newType,
+      category: newCategory,
       tenantScoped: true,
     });
     setAdding(false);
@@ -119,6 +121,13 @@ export default function QuestionsPage() {
               >
                 <option value="CORE">CORE</option>
                 <option value="DEEPENING">DEEPENING</option>
+              </select>
+              <select
+                className="rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
+              >
+                <option value="STK_CUSTOM">STK Özel (takip/öğrenme)</option>
               </select>
               <Button size="sm" onClick={handleAdd} disabled={adding || !newText.trim()}>
                 {adding ? 'Ekleniyor…' : 'Ekle'}

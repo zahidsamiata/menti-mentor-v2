@@ -24,15 +24,17 @@ export function DailyQuestionWidget({ userId }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [justAnswered, setJustAnswered] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
+  if (dismissed) return null;
 
   if (isLoading) return null;
-  if (!data || data.done) return null; // Test bitti, widget gizle
+  if (!data || data.done) return null; // Tüm sorular bitti
 
   const { question, progress } = data;
   if (!question) return null;
-
-  // Zaten yeterince soru cevaplandıysa widget'ı çok baskın yapma
-  if (progress.completionPercent >= 80) return null;
+  // Test tamamlandıysa widget gizle — zorunlu değil zaten, isteyenler devam edebilir
+  if (progress.isComplete) return null;
 
   async function handleSubmit() {
     if (selected === null || !question) return;
@@ -93,11 +95,11 @@ export function DailyQuestionWidget({ userId }: Props) {
                 disabled={selected === null || submitting}
                 onClick={handleSubmit}
               >
-                {submitting ? 'Kaydediliyor…' : 'Gönder'}
+                {submitting ? 'Kaydediliyor…' : 'Gönder ve devam et'}
               </Button>
               <button
                 className="text-xs text-muted-foreground hover:text-foreground"
-                onClick={() => { /* kullanıcı sonraya bırakabilir */ }}
+                onClick={() => setDismissed(true)}
               >
                 Daha sonra
               </button>

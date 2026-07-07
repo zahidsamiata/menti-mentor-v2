@@ -46,7 +46,7 @@ export const questionsApi = {
 
   create: (
     api: BoundClient,
-    data: { text: string; type?: string; discDimension?: string; order?: number; tenantScoped?: boolean },
+    data: { text: string; type?: string; discDimension?: string; order?: number; tenantScoped?: boolean; category?: string },
   ) => api('/api/questions', { method: 'POST', body: data }),
 
   update: (
