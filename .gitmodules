@@ -1,0 +1,4 @@
+[submodule "Menti Mentör proje"]
+	path = Menti Mentör proje
+	url = https://github.com/zahidsamiata/menti-mentor.git
+	branch = main
