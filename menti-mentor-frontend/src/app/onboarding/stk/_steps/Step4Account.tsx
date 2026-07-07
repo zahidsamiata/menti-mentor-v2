@@ -44,6 +44,7 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
       tenantName:      data.tenantName,
       slug:            data.slug,
       programTemplate: data.programTemplate,
+      kvkkConsent:     data.kvkkConsent, // KVKK Md.5 — backend z.literal(true) ile doğrular
     });
 
     if (!regResult.ok) {

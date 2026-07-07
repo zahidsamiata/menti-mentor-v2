@@ -8,7 +8,7 @@ export interface Meeting {
   tenantId: string;
   mentorUserId: string;
   mentiUserId: string;
-  status: 'PENDING' | 'SCHEDULED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+  status: 'PENDING' | 'SCHEDULED' | 'IN_PROGRESS' | 'APPROVED' | 'COMPLETED' | 'CANCELLED';
   format: 'ONLINE' | 'IN_PERSON' | 'PHONE';
   startsAt: string;
   endsAt: string;
