@@ -157,7 +157,8 @@ export default function RegisterContent() {
   const [email,     setEmail]     = useState('');
   const [password,  setPassword]  = useState('');
   const [confirm,   setConfirm]   = useState('');
-  const [errors,    setErrors]    = useState<{ email?: string; password?: string; confirm?: string }>({});
+  const [errors,    setErrors]    = useState<{ email?: string; password?: string; confirm?: string; kvkk?: string }>({});
+  const [kvkkConsent, setKvkkConsent] = useState(false);
   const [submitErr, setSubmitErr] = useState<string | null>(null);
   const [loading,   setLoading]   = useState(false);
 
@@ -189,6 +190,9 @@ export default function RegisterContent() {
     if (password !== confirm) {
       e.confirm = 'Şifreler eşleşmiyor.';
     }
+    if (!kvkkConsent) {
+      e.kvkk = 'KVKK kapsamında veri işleme onayı zorunludur.';
+    }
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -212,7 +216,7 @@ export default function RegisterContent() {
     // fullName: minimum sürtünme — email öneki, onboarding'de güncellenir
     const fullName = email.split('@')[0]?.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, '') || 'Kullanıcı';
 
-    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug });
+    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true });
 
     if (!regResult.ok) {
       setLoading(false);
@@ -386,6 +390,32 @@ export default function RegisterContent() {
               Şifreler eşleşiyor
             </p>
           )}
+
+          {/* ── KVKK onayı ───────────────────────────────────────────── */}
+          <div className="space-y-1">
+            <label className="flex items-start gap-2.5 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={kvkkConsent}
+                onChange={(e) => {
+                  setKvkkConsent(e.target.checked);
+                  if (e.target.checked) setErrors((p) => ({ ...p, kvkk: undefined }));
+                }}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+                aria-invalid={!!errors.kvkk}
+                disabled={loading}
+              />
+              <span className="text-xs text-muted-foreground leading-relaxed">
+                <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
+                  Kişisel Verilerin Korunması Kanunu (KVKK)
+                </a>
+                {' '}kapsamında verilerimin işlenmesine açık rıza veriyorum. (Zorunlu)
+              </span>
+            </label>
+            {errors.kvkk && (
+              <p role="alert" className="text-xs text-destructive pl-6">{errors.kvkk}</p>
+            )}
+          </div>
 
           {/* ── Genel hata ───────────────────────────────────────────── */}
           {submitErr && (

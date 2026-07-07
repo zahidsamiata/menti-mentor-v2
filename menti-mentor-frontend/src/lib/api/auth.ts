@@ -12,6 +12,7 @@ export interface RegisterPayload {
   fullName: string;
   role: 'MENTOR' | 'MENTI';
   tenantSlug: string;
+  kvkkConsent: boolean; // KVKK Md.5 — backend z.literal(true) ile zorunlu
 }
 
 export interface RegisterResponse {

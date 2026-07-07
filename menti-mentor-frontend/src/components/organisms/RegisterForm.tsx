@@ -29,6 +29,7 @@ const buildInitial = (tenantSlug: string): RegisterFormValues => ({
   fullName: '',
   role: 'MENTI',
   tenantSlug,
+  kvkkConsent: false as unknown as true, // başlangıçta işaretlenmemiş; Zod'da literal(true) zorunlu
 });
 
 export function RegisterForm({ initialTenantSlug = '' }: RegisterFormProps) {
@@ -37,11 +38,12 @@ export function RegisterForm({ initialTenantSlug = '' }: RegisterFormProps) {
 
   const onSubmit = async (values: RegisterFormValues) => {
     const result = await authApi.register({
-      email: values.email,
-      password: values.password,
-      fullName: values.fullName,
-      role: values.role,
-      tenantSlug: values.tenantSlug,
+      email:       values.email,
+      password:    values.password,
+      fullName:    values.fullName,
+      role:        values.role,
+      tenantSlug:  values.tenantSlug,
+      kvkkConsent: values.kvkkConsent,
     });
 
     if (!result.ok) {
@@ -172,6 +174,28 @@ export function RegisterForm({ initialTenantSlug = '' }: RegisterFormProps) {
           disabled={form.isSubmitting}
         />
       )}
+
+      {/* KVKK onayı */}
+      <div className="space-y-1">
+        <label className="flex items-start gap-2.5 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={form.values.kvkkConsent === true}
+            onChange={(e) => form.setValue('kvkkConsent', e.target.checked as unknown as true)}
+            className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+            disabled={form.isSubmitting}
+          />
+          <span className="text-xs text-muted-foreground leading-relaxed">
+            <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
+              KVKK
+            </a>
+            {' '}kapsamında verilerimin işlenmesine açık rıza veriyorum. (Zorunlu)
+          </span>
+        </label>
+        {form.errors.kvkkConsent && (
+          <p className="text-xs text-destructive pl-6">{form.errors.kvkkConsent}</p>
+        )}
+      </div>
 
       <Button type="submit" className="w-full" disabled={form.isSubmitting}>
         {form.isSubmitting ? 'Kayıt oluşturuluyor…' : 'Kayıt Ol'}

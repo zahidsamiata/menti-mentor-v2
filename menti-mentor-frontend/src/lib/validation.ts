@@ -21,6 +21,7 @@ export const registerSchema = z.object({
   fullName: z.string().min(2, 'Ad soyad en az 2 karakter olmalı').max(120),
   role: z.enum(['MENTOR', 'MENTI'], { message: 'Rol seçin' }),
   tenantSlug: z.string().min(1, 'Kuruluş kodu zorunlu'),
+  kvkkConsent: z.literal(true, { message: 'KVKK onayı zorunludur.' }),
 }).refine((d) => d.password === d.confirmPassword, {
   message: 'Şifreler eşleşmiyor',
   path: ['confirmPassword'],
