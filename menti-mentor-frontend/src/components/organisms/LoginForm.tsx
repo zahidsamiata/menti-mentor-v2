@@ -22,24 +22,44 @@ import { useFormState } from '@/hooks/useFormState';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
 
 interface LoginFormProps {
-  /** Giriş sonrası yönlendirilecek sayfa (varsayılan: /dashboard) */
-  redirectTo?: string;
   /** OAuth düğmeleri için tenant slug (URL'den okunur) */
   tenantSlug?: string;
 }
 
+// Giriş sonrası akıllı yönlendirme (dokümandaki durum tablosuna birebir uyar):
+//   status PENDING  → /pending-approval
+//   status APPROVED → rol bazlı:
+//     ADMIN   → /admin/waiting-room
+//     MENTOR  → discType yoksa /disc-test, varsa /mentor
+//     MENTI   → discType yoksa /disc-test, varsa /menti
+// Not: Platform admin (/platform) ayrı endpoint'ten giriş yapar; buradan yönlendirilmez.
+function getSmartRedirect(user: { role: string; approvalStatus: string; discType: string | null }): string {
+  if (user.approvalStatus === 'PENDING') return '/pending-approval';
+  if (user.role === 'ADMIN') return '/admin/waiting-room';
+  if (!user.discType) return '/disc-test';
+  if (user.role === 'MENTOR') return '/mentor';
+  if (user.role === 'MENTI') return '/menti';
+  return '/dashboard';
+}
+
 const INITIAL: LoginFormValues = { email: '', password: '' };
 
-export function LoginForm({ redirectTo = '/dashboard', tenantSlug }: LoginFormProps) {
+export function LoginForm({ tenantSlug }: LoginFormProps) {
   const router = useRouter();
   const { login } = useAuth();
   const form = useFormState(loginSchema, INITIAL);
 
   const onSubmit = async (values: LoginFormValues) => {
     try {
-      await login(values);
-      router.push(redirectTo);
+      const userData = await login(values);
+      router.push(getSmartRedirect(userData));
     } catch (err) {
+      // PENDING: backend JWT vermeden 403 atar — biz yine de /pending-approval'a yönlendiririz.
+      const code = (err as Error & { code?: string }).code;
+      if (code === 'HESAP_ONAY_BEKLENIYOR') {
+        router.push('/pending-approval');
+        return;
+      }
       form.setServerError(err instanceof Error ? err.message : 'Giriş başarısız. Bilgilerinizi kontrol edin.');
     }
   };

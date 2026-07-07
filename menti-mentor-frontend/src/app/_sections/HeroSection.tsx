@@ -65,8 +65,8 @@ export function HeroSection() {
             size="lg"
             className="h-12 px-8 text-base bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 border-0 text-white shadow-xl shadow-indigo-500/30 gap-2"
           >
-            <Link href="/register">
-              Hemen Ücretsiz Başlat (Self-Serve)
+            <Link href="/onboarding/stk">
+              Kurumunu Ücretsiz Kur
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </Button>

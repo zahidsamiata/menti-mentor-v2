@@ -149,14 +149,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // ── Giriş ───────────────────────────────────────────────────────────────
 
-  const login = useCallback(async (credentials: LoginCredentials) => {
+  const login = useCallback(async (credentials: LoginCredentials): Promise<LoginResponse['user']> => {
     const result = await apiClient<LoginResponse>('/api/auth/login', {
       method: 'POST',
       body: credentials,
     });
 
     if (!result.ok) {
-      throw new Error(result.error.message ?? 'Giriş başarısız.');
+      // Backend hata kodunu hataya ekle — LoginForm'da PENDING yönlendirmesi için gerekli.
+      const err = new Error(result.error.message ?? 'Giriş başarısız.');
+      Object.assign(err, { code: result.error.error });
+      throw err;
     }
 
     const { accessToken: newToken, refreshToken, expiresIn, user: userData } = result.data;
@@ -165,6 +168,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(userData as AuthUser);
     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
     scheduleTokenRefresh(expiresIn);
+    return userData;
   }, [scheduleTokenRefresh]);
 
   // ── OAuth token ile giriş (Google / LinkedIn callback) ──────────────────

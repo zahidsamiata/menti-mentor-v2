@@ -9,6 +9,8 @@
 import type { Metadata } from 'next';
 import { Navbar }         from './_sections/Navbar';
 import { HeroSection }    from './_sections/HeroSection';
+import { PainSection }    from './_sections/PainSection';
+import { EngineSection }  from './_sections/EngineSection';
 import { AlgorithmBento } from './_sections/AlgorithmBento';
 import { GameSection }    from './_sections/GameSection';
 import { AdminCockpit }   from './_sections/AdminCockpit';
@@ -26,6 +28,8 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <HeroSection />
+        <PainSection />
+        <EngineSection />
         <AlgorithmBento />
         <GameSection />
         <AdminCockpit />
