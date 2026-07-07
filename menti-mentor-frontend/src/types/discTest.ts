@@ -56,6 +56,12 @@ export interface DiscVector {
   confidence: number;
 }
 
+/** GET /api/users/:id/adaptive-test/preview yanıtı */
+export interface DiscPreviewResponse {
+  discVector: DiscVector;
+  note: string;
+}
+
 /**
  * Backend `POST /api/questions/:id/respond` yanıt yapısı.
  * progress: faz kararı bu nesneden alınır (isDeepening, isComplete).

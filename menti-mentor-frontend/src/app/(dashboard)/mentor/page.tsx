@@ -14,6 +14,7 @@ import { useQuery } from '@/hooks/useQuery';
 import { matchingApi, mentorFilterApi } from '@/lib/api/matching';
 import { meetingsApi } from '@/lib/api/meetings';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
+import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import type { DiscType, MentorFilter } from '@/types/matching';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
@@ -121,7 +122,8 @@ export default function MentorDashboardPage() {
         </Button>
       </div>
 
-      {/* Günün Sorusu */}
+      {/* Profil güvenilirliği + günün sorusu */}
+      {user?.id && <DiscConfidenceWidget userId={user.id} />}
       {user?.id && <DailyQuestionWidget userId={user.id} />}
 
       {/* Metrikler */}
