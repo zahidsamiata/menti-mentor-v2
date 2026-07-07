@@ -445,13 +445,23 @@ export default function RegisterContent() {
           {/* ── Gizlilik notu ────────────────────────────────────────── */}
           <p className="text-center text-[11px] text-muted-foreground leading-relaxed">
             Kayıt olarak{' '}
-            <span className="underline underline-offset-2 cursor-pointer hover:text-foreground transition-colors">
+            <a
+              href="/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-foreground transition-colors"
+            >
               Kullanım Koşullarını
-            </span>{' '}
+            </a>{' '}
             ve{' '}
-            <span className="underline underline-offset-2 cursor-pointer hover:text-foreground transition-colors">
+            <a
+              href="/gizlilik"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-foreground transition-colors"
+            >
               Gizlilik Politikasını
-            </span>{' '}
+            </a>{' '}
             kabul etmiş olursunuz.
           </p>
         </form>

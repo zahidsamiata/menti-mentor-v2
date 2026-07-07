@@ -128,7 +128,7 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
                 Kişisel Verilerin Korunması Kanunu (KVKK)
               </a>{' '}
               kapsamında kişisel verilerimin işlenmesine açık rızam ile{' '}
-              <a href="/kullanim-kosullari" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
                 Kullanım Koşullarını
               </a>{' '}
               okudum, kabul ediyorum.
