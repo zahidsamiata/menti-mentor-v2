@@ -34,6 +34,20 @@ export const adminApi = {
     return api<AdminUsersResponse>(`/api/admin/users?${qs.toString()}`);
   },
 
+  // Bekleme odası: yalnızca PENDING kullanıcıları döner (sayfalama yok — tüm liste)
+  listPendingUsers: (api: BoundClient): Promise<ApiResult<AdminUsersResponse>> =>
+    api<AdminUsersResponse>('/api/admin/users?approvalStatus=PENDING'),
+
+  // Tek noktadan onay/ret — approveUser / rejectUser'ı sarmalar
+  updateUserStatus: (
+    api: BoundClient,
+    userId: string,
+    status: 'APPROVED' | 'REJECTED',
+  ): Promise<ApiResult<ApproveUserResponse | RejectUserResponse>> =>
+    status === 'APPROVED'
+      ? api<ApproveUserResponse>(`/api/admin/users/${userId}/approve`, { method: 'POST' })
+      : api<RejectUserResponse>(`/api/admin/users/${userId}/reject`, { method: 'POST' }),
+
   approveUser: (api: BoundClient, userId: string): Promise<ApiResult<ApproveUserResponse>> =>
     api<ApproveUserResponse>(`/api/admin/users/${userId}/approve`, { method: 'POST' }),
 

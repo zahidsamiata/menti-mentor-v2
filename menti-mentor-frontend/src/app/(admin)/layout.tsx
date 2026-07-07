@@ -15,9 +15,10 @@ import { TenantLogo } from '@/components/atoms/TenantLogo';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
-  { href: '/admin/approvals', label: 'Onay Kuyruğu',    icon: '👤' },
-  { href: '/admin/tags',      label: 'Etiket Yönetimi', icon: '🏷️' },
-  { href: '/admin/kpi',       label: 'KPI Paneli',      icon: '📊' },
+  { href: '/admin/waiting-room', label: 'Bekleme Odası',   icon: '⏳' },
+  { href: '/admin/approvals',    label: 'Onay Kuyruğu',    icon: '👤' },
+  { href: '/admin/tags',         label: 'Etiket Yönetimi', icon: '🏷️' },
+  { href: '/admin/kpi',          label: 'KPI Paneli',      icon: '📊' },
 ] as const;
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
