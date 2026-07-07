@@ -1,14 +1,12 @@
 ##
 # Menti-Mentor SaaS — CI Pipeline
 #
-# Tetikleyiciler:
-#   - Her push (tüm branch'ler)
-#   - main ve develop'a açılan PR'lar
+# Monorepo yapısı:
+#   - Backend  (submodule): "Menti Mentör proje/"
+#   - Frontend (regular dir): "menti-mentor-frontend/"
 #
-# Job'lar:
-#   backend-check   — TS derleme + Prisma + lint
-#   frontend-check  — TS derleme + Next.js build (lint dahil)
-#   integration-tests — Vitest + Supertest (PostgreSQL servis container)
+# Tüm yollar sabit yazılmıştır; env-var genişlemesi with: bloklarında
+# güvenilmez olabileceğinden kaldırıldı.
 ##
 
 name: CI
@@ -21,8 +19,6 @@ on:
 
 env:
   NODE_VERSION: '22'
-  BACKEND_DIR: 'Menti Mentör proje'
-  FRONTEND_DIR: 'menti-mentor-frontend'
 
 jobs:
   # ── Backend: TypeScript + Prisma + Lint ──────────────────────────────────────
@@ -31,7 +27,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Repoyu ve submodule'ları çek
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -40,26 +37,26 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: '${{ env.BACKEND_DIR }}/package-lock.json'
+          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
 
       - name: Bağımlılıkları kur
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npm ci
 
       - name: Prisma client üret
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npx prisma generate
 
       - name: TypeScript kontrolü (src)
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npx tsc --noEmit
 
       - name: TypeScript kontrolü (tests)
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npx tsc --noEmit -p tsconfig.test.json
 
       - name: ESLint
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npm run lint
         continue-on-error: true
 
@@ -69,25 +66,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Repoyu çek
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Node.js ${{ env.NODE_VERSION }} kur
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: '${{ env.FRONTEND_DIR }}/package-lock.json'
+          cache-dependency-path: 'menti-mentor-frontend/package-lock.json'
 
       - name: Bağımlılıkları kur
-        working-directory: ${{ env.FRONTEND_DIR }}
+        working-directory: 'menti-mentor-frontend'
         run: npm ci
 
       - name: TypeScript kontrolü
-        working-directory: ${{ env.FRONTEND_DIR }}
+        working-directory: 'menti-mentor-frontend'
         run: npx tsc --noEmit
 
       - name: Next.js production build (lint + tip kontrolü dahil)
-        working-directory: ${{ env.FRONTEND_DIR }}
+        working-directory: 'menti-mentor-frontend'
         run: npm run build
         env:
           NEXT_PUBLIC_API_URL: http://localhost:3000
@@ -121,7 +121,8 @@ jobs:
       PLATFORM_ADMIN_KEY: test-platform-key-ci
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Repoyu ve submodule'ları çek
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -130,22 +131,22 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: '${{ env.BACKEND_DIR }}/package-lock.json'
+          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
 
       - name: Bağımlılıkları kur
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npm ci
 
       - name: Prisma client üret
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npx prisma generate
 
       - name: Test DB migration uygula
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npx prisma migrate deploy
 
       - name: Entegrasyon testlerini çalıştır
-        working-directory: ${{ env.BACKEND_DIR }}
+        working-directory: 'Menti Mentör proje'
         run: npm test
 
       - name: Test coverage yükle (opsiyonel)
@@ -153,5 +154,5 @@ jobs:
         if: always()
         with:
           name: coverage-report
-          path: '${{ env.BACKEND_DIR }}/coverage'
+          path: 'Menti Mentör proje/coverage'
           retention-days: 7
