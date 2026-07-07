@@ -48,9 +48,9 @@ export function Navbar() {
             asChild
             className="hidden md:flex gap-1.5 bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 border-0 text-white shadow-lg shadow-indigo-500/25 shrink-0"
           >
-            <Link href="/register">
+            <Link href="/onboarding/stk">
               <Sparkles className="h-3.5 w-3.5" aria-hidden />
-              Derneğini Kur (Ücretsiz)
+              Kurumunu Kaydet
             </Link>
           </Button>
 
@@ -82,12 +82,12 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="/register"
+              href="/onboarding/stk"
               onClick={() => setOpen(false)}
               className="mt-2 flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white"
             >
               <Sparkles className="h-4 w-4" aria-hidden />
-              Derneğini Kur (Ücretsiz)
+              Kurumunu Kaydet
             </Link>
           </div>
         </div>
