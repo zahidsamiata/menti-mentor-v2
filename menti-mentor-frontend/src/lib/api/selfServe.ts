@@ -51,12 +51,12 @@ export interface InvitationResponse {
   tenant: { id: string; name: string; slug: string };
 }
 
-/** GET /api/self-serve/check-slug?slug=xxx — auth gerektirmez */
+/** GET /api/tenants/self-serve/check-slug?slug=xxx — auth gerektirmez */
 export function checkSlugAvailability(slug: string): Promise<ApiResult<SlugCheckResponse>> {
-  return apiClient<SlugCheckResponse>(`/api/self-serve/check-slug?slug=${encodeURIComponent(slug)}`);
+  return apiClient<SlugCheckResponse>(`/api/tenants/self-serve/check-slug?slug=${encodeURIComponent(slug)}`);
 }
 
-/** POST /api/self-serve/register — tenant + admin kullanıcısı oluşturur, JWT döner */
+/** POST /api/tenants/self-serve/register — tenant + admin kullanıcısı oluşturur, JWT döner */
 export function selfServeRegister(data: {
   email: string;
   password: string;
@@ -65,7 +65,7 @@ export function selfServeRegister(data: {
   slug: string;
   programTemplate: 'MEZUN' | 'KULUP' | 'GONULLU' | 'OZEL';
 }): Promise<ApiResult<SelfServeRegisterResponse>> {
-  return apiClient<SelfServeRegisterResponse>('/api/self-serve/register', {
+  return apiClient<SelfServeRegisterResponse>('/api/tenants/self-serve/register', {
     method: 'POST',
     body: data,
   });
