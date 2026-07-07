@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { matchingApi, matchRequestApi } from '@/lib/api/matching';
+import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import type { MentorListItem } from '@/types/matching';
 
 const DISC_COLORS: Record<string, string> = {
@@ -124,6 +125,9 @@ export default function MentiDashboardPage() {
           </p>
         </div>
       )}
+
+      {/* Günün Sorusu — profil tamamlanmamışsa göster */}
+      {user?.id && <DailyQuestionWidget userId={user.id} />}
 
       {/* Metrikler — sadece onaylı kullanıcılar için gerçek veri */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">

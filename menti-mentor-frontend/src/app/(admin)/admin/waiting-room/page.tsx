@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
+import { CoachingSuggestionsDialog } from '@/components/organisms/CoachingSuggestionsDialog';
 import type { AdminUser } from '@/types/admin';
 
 const DISC_COLORS: Record<string, string> = {
@@ -25,6 +26,7 @@ export default function WaitingRoomPage() {
   const [actionError, setActionError] = useState<string | null>(null);
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [rejectTarget, setRejectTarget] = useState<AdminUser | null>(null);
+  const [suggestionsTarget, setSuggestionsTarget] = useState<AdminUser | null>(null);
 
   const handleAction = useCallback(
     async (userId: string, status: 'APPROVED' | 'REJECTED') => {
@@ -164,6 +166,15 @@ export default function WaitingRoomPage() {
                       <div className="flex items-center justify-end gap-2">
                         <Button
                           size="sm"
+                          variant="outline"
+                          className="text-xs"
+                          disabled={isProcessing}
+                          onClick={() => setSuggestionsTarget(user)}
+                        >
+                          Öneriler
+                        </Button>
+                        <Button
+                          size="sm"
                           disabled={isProcessing}
                           onClick={() => handleAction(user.id, 'APPROVED')}
                         >
@@ -186,6 +197,16 @@ export default function WaitingRoomPage() {
             </tbody>
           </table>
         </div>
+      )}
+
+      {/* Koçluk Önerileri Diyaloğu */}
+      {suggestionsTarget && (
+        <CoachingSuggestionsDialog
+          userId={suggestionsTarget.id}
+          userName={suggestionsTarget.fullName}
+          open={suggestionsTarget !== null}
+          onClose={() => setSuggestionsTarget(null)}
+        />
       )}
 
       {/* Ret onay diyaloğu */}

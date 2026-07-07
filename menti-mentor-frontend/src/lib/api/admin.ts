@@ -60,6 +60,10 @@ export const adminApi = {
       body: { feedbackNote },
     }),
 
+  // ── Koçluk Önerileri ────────────────────────────────────────────────────────
+  getCoachingSuggestions: (api: BoundClient, userId: string) =>
+    api(`/api/admin/users/${userId}/coaching-suggestions`),
+
   // ── Taxonomy ──────────────────────────────────────────────────────────────
   listPendingTags: (api: BoundClient, page = 1): Promise<ApiResult<PendingTagsResponse>> =>
     api<PendingTagsResponse>(`/api/admin/tags/pending?page=${page}`),

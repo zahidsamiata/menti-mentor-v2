@@ -12,6 +12,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { matchingApi, mentorFilterApi } from '@/lib/api/matching';
+import { meetingsApi } from '@/lib/api/meetings';
+import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import type { DiscType, MentorFilter } from '@/types/matching';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
@@ -39,6 +41,23 @@ export default function MentorDashboardPage() {
     [api, user?.id],
     { enabled: Boolean(user?.id) },
   );
+
+  // ── Onay bekleyen toplantı talepleri ────────────────────────────────────────
+  const { data: pendingMeetings, refetch: refetchPending } = useQuery(
+    () => meetingsApi.list(api, { status: 'PENDING' }),
+    [api],
+    { enabled: Boolean(user?.id) },
+  );
+
+  const [meetingActionId, setMeetingActionId] = useState<string | null>(null);
+
+  async function handleMeetingAction(meetingId: string, action: 'approve' | 'reject') {
+    setMeetingActionId(meetingId);
+    if (action === 'approve') { await meetingsApi.approveMeeting(api, meetingId); }
+    else { await meetingsApi.rejectMeeting(api, meetingId); }
+    setMeetingActionId(null);
+    refetchPending();
+  }
 
   // ── Filtre: mevcut tercihleri yükle ─────────────────────────────────────────
   const { data: savedFilter, isLoading: filterLoading } = useQuery(
@@ -102,12 +121,59 @@ export default function MentorDashboardPage() {
         </Button>
       </div>
 
+      {/* Günün Sorusu */}
+      {user?.id && <DailyQuestionWidget userId={user.id} />}
+
       {/* Metrikler */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {PLACEHOLDER_METRICS.map((m) => (
           <DashboardMetricCard key={m.label} label={m.label} value={m.value} color={m.color} />
         ))}
       </div>
+
+      {/* ── Onay Kuyruğu ─────────────────────────────────────────────────────── */}
+      {(pendingMeetings?.items?.length ?? 0) > 0 && (
+        <Card className="border-amber-300 dark:border-amber-700">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-base">Toplantı Talepleri</CardTitle>
+            <Badge variant="warning" className="text-xs">
+              {pendingMeetings!.items.length} bekliyor
+            </Badge>
+          </CardHeader>
+          <CardContent className="divide-y divide-border">
+            {pendingMeetings!.items.map((m) => {
+              const start = new Date(m.startsAt).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' });
+              const isActing = meetingActionId === m.id;
+              return (
+                <div key={m.id} className="flex items-center justify-between py-3 gap-3">
+                  <div>
+                    <p className="text-sm font-medium">{start}</p>
+                    <p className="text-xs text-muted-foreground">{m.format}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      disabled={isActing}
+                      onClick={() => handleMeetingAction(m.id, 'approve')}
+                    >
+                      {isActing ? '…' : 'Onayla'}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-destructive border-destructive/40"
+                      disabled={isActing}
+                      onClick={() => handleMeetingAction(m.id, 'reject')}
+                    >
+                      Reddet
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </CardContent>
+        </Card>
+      )}
 
       {/* ── Filtrelerim ─────────────────────────────────────────────────────── */}
       <Card>
