@@ -27,11 +27,11 @@ interface LoginFormProps {
 }
 
 // Giriş sonrası akıllı yönlendirme (dokümandaki durum tablosuna birebir uyar):
-//   status PENDING  → /pending-approval
+//   status PENDING  → /pending-approval  (backend 403 → catch bloğu yakalar)
 //   status APPROVED → rol bazlı:
 //     ADMIN   → /admin/waiting-room
-//     MENTOR  → discType yoksa /disc-test, varsa /mentor
-//     MENTI   → discType yoksa /disc-test, varsa /menti
+//     MENTOR  → discType yoksa /onboarding (8-soru DISC), varsa /mentor
+//     MENTI   → discType yoksa /onboarding (8-soru DISC), varsa /menti
 // Not: Platform admin (/platform) ayrı endpoint'ten giriş yapar; buradan yönlendirilmez.
 function getSmartRedirect(user: { role: string; approvalStatus: string; discType: string | null }): string {
   if (user.approvalStatus === 'PENDING') return '/pending-approval';
