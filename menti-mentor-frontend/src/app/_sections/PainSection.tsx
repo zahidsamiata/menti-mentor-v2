@@ -27,7 +27,7 @@ export function PainSection() {
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
             Mentörlük programlarının{' '}
-            <span className="text-rose-400">%67'si</span>
+            <span className="text-rose-400">%67&apos;si</span>
             {' '}başladığı gibi bitmez.
           </h2>
           <p className="mt-4 text-slate-400 max-w-xl mx-auto">

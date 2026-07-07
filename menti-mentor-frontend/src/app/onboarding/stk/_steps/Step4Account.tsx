@@ -58,9 +58,10 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
     localStorage.setItem('mm_refresh_token', refreshToken);
 
     // 2. Branding varsa güncelle (logo veya renk varsayılandan farklıysa)
+    // onboardingStep: 'DONE' — backend enum ['PENDING','TEMPLATE','LOGO','PREVIEW','DONE']
     if (data.logoUrl || data.primaryColor !== '#6366f1') {
       await updateOnboarding(tenant.id, accessToken, {
-        onboardingStep: 'INVITE',
+        onboardingStep: 'DONE',
         ...(data.logoUrl      && { logoUrl: data.logoUrl }),
         ...(data.primaryColor && { primaryColor: data.primaryColor }),
       });
