@@ -1,13 +1,6 @@
 'use client';
 
-/**
- * Menti Dashboard
- *
- * Öncelikli eylem: DISC testi tamamlanmamışsa banner göster.
- * Metriks: eşleşme talebi durumu, toplantı sayısı, DISC boyutları.
- * Sprint 14'te API verileriyle doldurulacak.
- */
-
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
@@ -16,26 +9,75 @@ import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard'
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useApiClient } from '@/hooks/useApiClient';
+import { useQuery } from '@/hooks/useQuery';
+import { matchingApi, matchRequestApi } from '@/lib/api/matching';
+import type { MentorListItem } from '@/types/matching';
 
-const PLACEHOLDER_METRICS = [
-  { label: 'Gönderilen Talepler',    value: 2,  color: 'brand'   as const },
-  { label: 'Onaylanan Eşleşmeler',   value: 1,  color: 'success' as const },
-  { label: 'Tamamlanan Toplantılar', value: 3,  color: 'neutral' as const },
-  { label: 'DISC Güven Skoru',       value: '%72', color: 'warning' as const },
-];
-
-// DISC vektör placeholder — Sprint 14'te API'den gelecek
-const DISC_VECTOR = { D: 18, I: 42, S: 28, C: 12 };
 const DISC_COLORS: Record<string, string> = {
   D: 'bg-red-400', I: 'bg-yellow-400', S: 'bg-green-400', C: 'bg-blue-400',
+};
+const DISC_LABELS: Record<string, string> = {
+  D: 'Dominant', I: 'Influential', S: 'Steady', C: 'Conscientious',
 };
 
 export default function MentiDashboardPage() {
   const { user } = useAuth();
   const { tenant } = useTenant();
+  const api = useApiClient();
 
-  // DISC profili tamamlanmamış uyarısı (gerçek veri Sprint 14'te)
   const needsDiscTest = !user?.discType;
+  const isApproved = user?.approvalStatus === 'APPROVED';
+
+  // Mentor listesi
+  const { data: mentorsData, isLoading: mentorsLoading } = useQuery(
+    () => matchingApi.listMentors(api),
+    [api],
+    { enabled: isApproved && !needsDiscTest },
+  );
+
+  // Talep modalı state
+  const [selectedMentor, setSelectedMentor] = useState<MentorListItem | null>(null);
+  const [message, setMessage] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [sentIds, setSentIds] = useState<Set<string>>(new Set());
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const el = dialogRef.current;
+    if (!el) return;
+    if (selectedMentor) { el.showModal(); } else { el.close(); }
+  }, [selectedMentor]);
+
+  function openModal(mentor: MentorListItem) {
+    setMessage('');
+    setSendError(null);
+    setSelectedMentor(mentor);
+  }
+
+  function closeModal() {
+    setSelectedMentor(null);
+  }
+
+  async function handleSend() {
+    if (!user || !selectedMentor) return;
+    setSending(true);
+    setSendError(null);
+    const result = await matchRequestApi.create(api, {
+      requesterUserId: user.id,
+      targetType: 'USER',
+      targetId: selectedMentor.id,
+      requestMessage: message.trim() || undefined,
+    });
+    setSending(false);
+    if (result.ok) {
+      setSentIds((prev) => new Set(prev).add(selectedMentor.id));
+      closeModal();
+    } else {
+      setSendError(result.error.message ?? 'Talep gönderilemedi.');
+    }
+  }
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -50,11 +92,8 @@ export default function MentiDashboardPage() {
             </p>
           </div>
         </div>
-        <Badge
-          variant={user?.approvalStatus === 'APPROVED' ? 'success' : 'warning'}
-          className="text-xs"
-        >
-          {user?.approvalStatus === 'APPROVED' ? 'Onaylandı' : 'Onay Bekleniyor'}
+        <Badge variant={isApproved ? 'success' : 'warning'} className="text-xs">
+          {isApproved ? 'Onaylandı' : 'Onay Bekleniyor'}
         </Badge>
       </div>
 
@@ -73,40 +112,28 @@ export default function MentiDashboardPage() {
         </div>
       )}
 
-      {/* Metrikler */}
+      {/* Bekleme odası banner */}
+      {!needsDiscTest && !isApproved && (
+        <div className="rounded-2xl border-2 border-dashed border-amber-400/50 bg-amber-50 dark:bg-amber-950/20 p-6">
+          <h3 className="font-semibold text-sm text-amber-800 dark:text-amber-300">
+            Bekleme Odasındasınız
+          </h3>
+          <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
+            DISC testiniz tamamlandı. Dernek yöneticiniz profilinizi inceleyip onayladığında
+            mentor listesine erişebileceksiniz.
+          </p>
+        </div>
+      )}
+
+      {/* Metrikler — sadece onaylı kullanıcılar için gerçek veri */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {PLACEHOLDER_METRICS.map((m) => (
-          <DashboardMetricCard key={m.label} label={m.label} value={m.value} color={m.color} />
-        ))}
+        <DashboardMetricCard label="Gönderilen Talepler" value={sentIds.size} color="brand" />
+        <DashboardMetricCard label="Onaylanan Eşleşmeler" value={0} color="success" />
+        <DashboardMetricCard label="Tamamlanan Toplantılar" value={0} color="neutral" />
+        <DashboardMetricCard label="DISC Profili" value={user?.discType ?? '—'} color="warning" />
       </div>
 
-      {/* DISC Vektör görselleştirme */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">DISC Boyutlarım</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {Object.entries(DISC_VECTOR).map(([dim, value]) => (
-            <div key={dim} className="flex items-center gap-3">
-              <span className="w-4 text-xs font-bold text-muted-foreground">{dim}</span>
-              <div className="flex-1">
-                <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
-                  <div
-                    className={`h-full rounded-full transition-all duration-700 ${DISC_COLORS[dim]}`}
-                    style={{ width: `${value}%` }}
-                  />
-                </div>
-              </div>
-              <span className="w-8 text-right text-xs font-medium">{value}%</span>
-            </div>
-          ))}
-          <p className="text-xs text-muted-foreground pt-1">
-            * Placeholder veri — Sprint 14&apos;te gerçek DISC vektörüyle güncellenir
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Önerilen Mentorlar placeholder */}
+      {/* Önerilen Mentorlar */}
       <Card>
         <CardHeader>
           <CardTitle className="text-base">Önerilen Mentorlar</CardTitle>
@@ -116,13 +143,99 @@ export default function MentiDashboardPage() {
             <p className="text-sm text-muted-foreground text-center py-6">
               DISC profilinizi tamamladıktan sonra size uygun mentorlar burada görünecek.
             </p>
-          ) : (
+          ) : !isApproved ? (
             <p className="text-sm text-muted-foreground text-center py-6">
-              Sprint 14&apos;te mentor listesi API&apos;ye bağlanacak.
+              Yönetici onayı bekleniyor. Onay sonrasında mentor listesine erişebilirsiniz.
             </p>
+          ) : mentorsLoading ? (
+            <div className="flex flex-col gap-3 py-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-16 rounded-xl bg-muted animate-pulse" />
+              ))}
+            </div>
+          ) : !mentorsData?.items.length ? (
+            <p className="text-sm text-muted-foreground text-center py-6">
+              Şu an uygun mentor bulunamadı.
+            </p>
+          ) : (
+            <div className="divide-y divide-border">
+              {mentorsData.items.map((mentor) => (
+                <div key={mentor.id} className="flex items-center justify-between py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-sm font-semibold">
+                      {mentor.fullName[0]}
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">{mentor.fullName}</p>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        {mentor.discType && (
+                          <span className={`inline-block h-2 w-2 rounded-full ${DISC_COLORS[mentor.discType]}`} />
+                        )}
+                        <p className="text-xs text-muted-foreground">
+                          {mentor.discType ? DISC_LABELS[mentor.discType] : 'Profil yok'}
+                          {mentor.sectorTags.length > 0 && ` · ${mentor.sectorTags.slice(0, 2).join(', ')}`}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant={sentIds.has(mentor.id) ? 'secondary' : 'default'}
+                    disabled={sentIds.has(mentor.id)}
+                    onClick={() => !sentIds.has(mentor.id) && openModal(mentor)}
+                  >
+                    {sentIds.has(mentor.id) ? 'Gönderildi ✓' : 'Talep Gönder'}
+                  </Button>
+                </div>
+              ))}
+            </div>
           )}
         </CardContent>
       </Card>
+
+      {/* Talep Gönder Modalı */}
+      <dialog
+        ref={dialogRef}
+        className="rounded-2xl border border-border bg-card p-6 shadow-xl w-full max-w-md backdrop:bg-black/50"
+        onCancel={closeModal}
+      >
+        {selectedMentor && (
+          <>
+            <h2 className="text-lg font-semibold">
+              {selectedMentor.fullName} · Talep Gönder
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Kendinizi kısaca tanıtın ve bu mentorla neden eşleşmek istediğinizi yazın.
+            </p>
+
+            <textarea
+              className="mt-4 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
+              rows={5}
+              maxLength={1000}
+              placeholder="Merhaba, ben... Bu eşleşmeden beklentim..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              autoFocus
+            />
+            <p className="mt-1 text-right text-xs text-muted-foreground">
+              {message.length}/1000
+            </p>
+
+            {sendError && (
+              <p className="mt-2 text-xs text-destructive">{sendError}</p>
+            )}
+
+            <div className="mt-4 flex justify-end gap-2">
+              <Button variant="outline" onClick={closeModal} disabled={sending}>
+                Vazgeç
+              </Button>
+              <Button onClick={handleSend} disabled={sending}>
+                {sending ? 'Gönderiliyor…' : 'Gönder'}
+              </Button>
+            </div>
+          </>
+        )}
+      </dialog>
     </div>
   );
 }
