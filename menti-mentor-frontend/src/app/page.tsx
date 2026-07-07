@@ -20,6 +20,22 @@ export const metadata: Metadata = {
   description:
     'Dernekler, STK\'lar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
     'kapalı devre mentörlük platformu. Kurulum 10 dakika, sonsuza kadar ücretsiz.',
+  openGraph: {
+    title:       'MentiMentor — İnsan Kimyasıyla Akıllı Mentörlük',
+    description: 'DISC mizaç tabanlı mentörlük platformu. Ücretsiz, kurulumu 10 dakika.',
+    type:        'website',
+    locale:      'tr_TR',
+    siteName:    'MentiMentor',
+  },
+  twitter: {
+    card:        'summary_large_image',
+    title:       'MentiMentor — Akıllı Mentörlük',
+    description: 'DISC mizaç tabanlı mentörlük platformu. Dernekler ve STK\'lar için.',
+  },
+  robots: {
+    index:  true,
+    follow: true,
+  },
 };
 
 export default function LandingPage() {
