@@ -149,7 +149,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // ── Giriş ───────────────────────────────────────────────────────────────
 
-  const login = useCallback(async (credentials: LoginCredentials) => {
+  const login = useCallback(async (credentials: LoginCredentials): Promise<LoginResponse['user']> => {
     const result = await apiClient<LoginResponse>('/api/auth/login', {
       method: 'POST',
       body: credentials,
@@ -165,6 +165,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(userData as AuthUser);
     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
     scheduleTokenRefresh(expiresIn);
+    return userData;
   }, [scheduleTokenRefresh]);
 
   // ── OAuth token ile giriş (Google / LinkedIn callback) ──────────────────

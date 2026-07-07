@@ -23,7 +23,7 @@ export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
   expiresIn: number;
-  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus'>;
+  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'needsOrientation'>;
   tenant: {
     id: string;
     name: string;
@@ -46,7 +46,8 @@ export interface AuthContextValue {
   accessToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (credentials: LoginCredentials) => Promise<void>;
+  /** Başarılı girişte login response'undaki user verisini döner (smart redirect için). */
+  login: (credentials: LoginCredentials) => Promise<LoginResponse['user']>;
   logout: () => Promise<void>;
   /** 401 interceptor tarafından çağrılır; yeni token veya null döner */
   refreshAccessToken: () => Promise<string | null>;
