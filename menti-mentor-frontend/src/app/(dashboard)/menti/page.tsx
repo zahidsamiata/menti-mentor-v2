@@ -32,11 +32,18 @@ export default function MentiDashboardPage() {
   const needsDiscTest = !user?.discType;
   const isApproved = user?.approvalStatus === 'APPROVED';
 
-  // Mentor listesi — onaylı kullanıcılar için tam liste, bekleyenler için sadece sayı
+  // ONAYLANMIŞ: tam mentor listesi (PII dahil)
   const { data: mentorsData, isLoading: mentorsLoading } = useQuery(
     () => matchingApi.listMentors(api),
     [api],
-    { enabled: !needsDiscTest }, // Hem onaylı hem PENDING (DISC tamamsa) için çek
+    { enabled: isApproved && !needsDiscTest },
+  );
+
+  // PENDING + DISC tamamsa: PII-free sayım (KVKK — mentor isimleri tarayıcıya gönderilmez)
+  const { data: mentorCountData } = useQuery(
+    () => matchingApi.countMentors(api),
+    [api],
+    { enabled: !isApproved && !needsDiscTest },
   );
 
   // Talep modalı state
@@ -115,17 +122,18 @@ export default function MentiDashboardPage() {
         </div>
       )}
 
-      {/* Bekleme odası banner — anonim mentor sayısını göster */}
+      {/* Bekleme odası banner — PII-free mentor sayısı (KVKK) */}
       {!needsDiscTest && !isApproved && (
         <div className="rounded-2xl border-2 border-dashed border-amber-400/50 bg-amber-50 dark:bg-amber-950/20 p-6 space-y-2">
           <h3 className="font-semibold text-sm text-amber-800 dark:text-amber-300">
             Bekleme Odasındasınız
           </h3>
-          {mentorsData && mentorsData.items.length > 0 ? (
+          {mentorCountData && mentorCountData.count >= 3 ? (
+            // Küçük havuz koruması: eşik altında (<3) sayı gösterme — kimliği daraltabilir
             <p className="text-xs text-amber-700 dark:text-amber-400">
               Profiliniz analiz edildi.{' '}
-              <strong className="font-semibold">{mentorsData.items.length} uygun mentor profili</strong>{' '}
-              tespit edildi — onay sonrası eşleşme başlayacak.
+              <strong className="font-semibold">{mentorCountData.count} onaylı mentor</strong>{' '}
+              bu programda yer alıyor — yönetici onayı sonrası eşleşme başlayacak.
             </p>
           ) : (
             <p className="text-xs text-amber-700 dark:text-amber-400">
