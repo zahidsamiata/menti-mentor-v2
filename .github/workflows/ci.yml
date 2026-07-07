@@ -36,8 +36,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
 
       - name: Bağımlılıkları kur
         working-directory: 'Menti Mentör proje'
@@ -75,8 +73,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: 'menti-mentor-frontend/package-lock.json'
 
       - name: Bağımlılıkları kur
         working-directory: 'menti-mentor-frontend'
@@ -130,8 +126,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: 'Menti Mentör proje/package-lock.json'
 
       - name: Bağımlılıkları kur
         working-directory: 'Menti Mentör proje'
