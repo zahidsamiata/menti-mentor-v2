@@ -11,9 +11,13 @@ import type {
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
 export const matchingApi = {
-  // Menti için: tenant içindeki aktif mentorları listele
+  // Menti için: tenant içindeki aktif mentorları listele (SADECE ONAYLANAN kullanıcılar çağırmalı)
   listMentors: (api: BoundClient): Promise<ApiResult<MentorsListResponse>> =>
     api<MentorsListResponse>('/api/users?role=MENTOR&isActive=true'),
+
+  // PENDING menti için: PII içermeyen mentor sayısı (KVKK — isim/e-posta gönderilmez)
+  countMentors: (api: BoundClient): Promise<ApiResult<{ count: number }>> =>
+    api<{ count: number }>('/api/users/mentor-count'),
 
   // Mentor için: algoritmik sıralanmış menti adaylarını getir
   getRankedMentis: (
