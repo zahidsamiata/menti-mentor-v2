@@ -54,6 +54,12 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
       const userData = await login(values);
       router.push(getSmartRedirect(userData));
     } catch (err) {
+      // PENDING: backend JWT vermeden 403 atar — biz yine de /pending-approval'a yönlendiririz.
+      const code = (err as Error & { code?: string }).code;
+      if (code === 'HESAP_ONAY_BEKLENIYOR') {
+        router.push('/pending-approval');
+        return;
+      }
       form.setServerError(err instanceof Error ? err.message : 'Giriş başarısız. Bilgilerinizi kontrol edin.');
     }
   };

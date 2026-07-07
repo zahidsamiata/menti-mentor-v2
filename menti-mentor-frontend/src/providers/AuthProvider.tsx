@@ -156,7 +156,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (!result.ok) {
-      throw new Error(result.error.message ?? 'Giriş başarısız.');
+      // Backend hata kodunu hataya ekle — LoginForm'da PENDING yönlendirmesi için gerekli.
+      const err = new Error(result.error.message ?? 'Giriş başarısız.');
+      Object.assign(err, { code: result.error.error });
+      throw err;
     }
 
     const { accessToken: newToken, refreshToken, expiresIn, user: userData } = result.data;
