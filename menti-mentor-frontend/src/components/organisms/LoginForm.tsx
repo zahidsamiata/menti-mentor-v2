@@ -36,7 +36,8 @@ interface LoginFormProps {
 function getSmartRedirect(user: { role: string; approvalStatus: string; discType: string | null }): string {
   if (user.approvalStatus === 'PENDING') return '/pending-approval';
   if (user.role === 'ADMIN') return '/admin/waiting-room';
-  if (!user.discType) return '/disc-test';
+  // /disc-test = adaptif Likert (mevcut kullanıcı). Yeni kullanıcı (discType=null) → /onboarding.
+  if (!user.discType) return '/onboarding';
   if (user.role === 'MENTOR') return '/mentor';
   if (user.role === 'MENTI') return '/menti';
   return '/dashboard';

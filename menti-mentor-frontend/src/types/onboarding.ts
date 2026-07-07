@@ -44,9 +44,24 @@ export interface SubmitDiscResponse {
   };
 }
 
+export type ExpectationCategory =
+  | 'KARIYER_YONLENDIRME'
+  | 'TEKNIK_BECERI'
+  | 'IS_STAJ_BAGLANTISI'
+  | 'GIRISIMCILIK'
+  | 'KISISEL_GELISIM'
+  | 'SEKTOR_TANIMA';
+
+export type TimeCommitment = 'AYDA_1' | 'AYDA_2_3' | 'HAFTADA_1' | 'HAFTADA_2_PLUS';
+export type InteractionStyle = 'GOREV_BAZLI' | 'SOHBET_BAZLI';
+
 /** POST /api/users/profile/complete body */
 export interface ProfileData {
-  sector:          string;
-  skills:          string[];
-  experienceYears: number;
+  sector:                string;
+  skills:                string[];
+  experienceYears:       number;
+  // Rol-spesifik (opsiyonel)
+  expectationCategories?: ExpectationCategory[];
+  timeCommitment?:        TimeCommitment;
+  interactionStyle?:      InteractionStyle;
 }

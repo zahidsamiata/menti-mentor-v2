@@ -32,11 +32,11 @@ export default function MentiDashboardPage() {
   const needsDiscTest = !user?.discType;
   const isApproved = user?.approvalStatus === 'APPROVED';
 
-  // Mentor listesi
+  // Mentor listesi — onaylı kullanıcılar için tam liste, bekleyenler için sadece sayı
   const { data: mentorsData, isLoading: mentorsLoading } = useQuery(
     () => matchingApi.listMentors(api),
     [api],
-    { enabled: isApproved && !needsDiscTest },
+    { enabled: !needsDiscTest }, // Hem onaylı hem PENDING (DISC tamamsa) için çek
   );
 
   // Talep modalı state
@@ -115,16 +115,23 @@ export default function MentiDashboardPage() {
         </div>
       )}
 
-      {/* Bekleme odası banner */}
+      {/* Bekleme odası banner — anonim mentor sayısını göster */}
       {!needsDiscTest && !isApproved && (
-        <div className="rounded-2xl border-2 border-dashed border-amber-400/50 bg-amber-50 dark:bg-amber-950/20 p-6">
+        <div className="rounded-2xl border-2 border-dashed border-amber-400/50 bg-amber-50 dark:bg-amber-950/20 p-6 space-y-2">
           <h3 className="font-semibold text-sm text-amber-800 dark:text-amber-300">
             Bekleme Odasındasınız
           </h3>
-          <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
-            DISC testiniz tamamlandı. Dernek yöneticiniz profilinizi inceleyip onayladığında
-            mentor listesine erişebileceksiniz.
-          </p>
+          {mentorsData && mentorsData.items.length > 0 ? (
+            <p className="text-xs text-amber-700 dark:text-amber-400">
+              Profiliniz analiz edildi.{' '}
+              <strong className="font-semibold">{mentorsData.items.length} uygun mentor profili</strong>{' '}
+              tespit edildi — onay sonrası eşleşme başlayacak.
+            </p>
+          ) : (
+            <p className="text-xs text-amber-700 dark:text-amber-400">
+              DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentor listesine erişebilirsiniz.
+            </p>
+          )}
         </div>
       )}
 

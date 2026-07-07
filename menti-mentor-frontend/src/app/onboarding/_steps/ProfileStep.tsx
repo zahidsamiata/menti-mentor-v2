@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import type { ProfileData } from '@/types/onboarding';
+import type { ProfileData, ExpectationCategory, TimeCommitment, InteractionStyle } from '@/types/onboarding';
+import type { UserRole } from '@/types/auth';
 
 // ─── Statik veriler ────────────────────────────────────────────────────────────
 
@@ -29,31 +30,69 @@ const EXPERIENCE_OPTIONS = [
   { label: '8+ Yıl',   sub: 'Alanımda uzmanlaştım',        years: 10 },
 ] as const;
 
+const EXPECTATION_OPTIONS: { value: ExpectationCategory; label: string }[] = [
+  { value: 'KARIYER_YONLENDIRME', label: 'Kariyer Yönlendirme' },
+  { value: 'TEKNIK_BECERI',       label: 'Teknik Beceri Geliştirme' },
+  { value: 'IS_STAJ_BAGLANTISI',  label: 'İş / Staj Bağlantısı' },
+  { value: 'GIRISIMCILIK',        label: 'Girişimcilik' },
+  { value: 'KISISEL_GELISIM',     label: 'Kişisel Gelişim' },
+  { value: 'SEKTOR_TANIMA',       label: 'Sektör Tanıma' },
+];
+
+const TIME_COMMITMENT_OPTIONS: { value: TimeCommitment; label: string; sub: string }[] = [
+  { value: 'AYDA_1',          label: 'Ayda 1 görüşme',     sub: 'Yoğun takvimler için' },
+  { value: 'AYDA_2_3',        label: 'Ayda 2-3 görüşme',   sub: 'Dengeli tempo' },
+  { value: 'HAFTADA_1',       label: 'Haftada 1 görüşme',  sub: 'Aktif program' },
+  { value: 'HAFTADA_2_PLUS',  label: 'Haftada 2+ görüşme', sub: 'Yoğun program' },
+];
+
+const INTERACTION_OPTIONS: { value: InteractionStyle; label: string; desc: string }[] = [
+  { value: 'GOREV_BAZLI',   label: 'Görev Bazlı',  desc: 'Belirli hedefler ve aksiyonlar üzerinden ilerlemek' },
+  { value: 'SOHBET_BAZLI',  label: 'Sohbet Bazlı', desc: 'Açık keşif ve fikir alışverişi yapmak' },
+];
+
 // ─── Props ────────────────────────────────────────────────────────────────────
 
 interface ProfileStepProps {
-  onComplete:  (data: ProfileData) => void;
+  role?:         UserRole;
+  onComplete:   (data: ProfileData) => void;
   isSubmitting: boolean;
   error:        string | null;
 }
 
 // ─── ProfileStep ─────────────────────────────────────────────────────────────
 
-export function ProfileStep({ onComplete, isSubmitting, error }: ProfileStepProps) {
+export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileStepProps) {
   const [sector,      setSector]      = useState('');
   const [skills,      setSkills]      = useState<string[]>([]);
   const [expYears,    setExpYears]    = useState<number | null>(null);
+  // Rol-spesifik
+  const [expectations,    setExpectations]    = useState<ExpectationCategory[]>([]);
+  const [timeCommitment,  setTimeCommitment]  = useState<TimeCommitment | null>(null);
+  const [interactionStyle, setInteractionStyle] = useState<InteractionStyle | null>(null);
 
   const toggleSkill = (skill: string) =>
     setSkills((prev) =>
       prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill],
     );
 
+  const toggleExpectation = (cat: ExpectationCategory) =>
+    setExpectations((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
+    );
+
   const canSubmit = sector !== '' && expYears !== null;
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    onComplete({ sector, skills, experienceYears: expYears! });
+    onComplete({
+      sector,
+      skills,
+      experienceYears: expYears!,
+      ...(role === 'MENTI' && expectations.length > 0 && { expectationCategories: expectations }),
+      ...(role === 'MENTOR' && timeCommitment   && { timeCommitment  }),
+      ...(role === 'MENTOR' && interactionStyle && { interactionStyle }),
+    });
   };
 
   return (
@@ -148,6 +187,92 @@ export function ProfileStep({ onComplete, isSubmitting, error }: ProfileStepProp
           })}
         </div>
       </fieldset>
+
+      {/* ── Menti: Beklenti chip'leri ─────────────────────────────────── */}
+      {role === 'MENTI' && (
+        <fieldset>
+          <legend className="text-sm font-semibold text-foreground mb-3">
+            Bu mentörlükten beklentin{' '}
+            <span className="text-xs text-muted-foreground font-normal">(birden fazla seçilebilir)</span>
+          </legend>
+          <div className="flex flex-wrap gap-2">
+            {EXPECTATION_OPTIONS.map(({ value, label }) => {
+              const selected = expectations.includes(value);
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => toggleExpectation(value)}
+                  className={cn(
+                    'rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all',
+                    selected
+                      ? 'bg-primary/15 text-primary border-primary shadow-sm scale-105'
+                      : 'bg-background text-muted-foreground border-border hover:border-primary/50',
+                  )}
+                  aria-pressed={selected}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </fieldset>
+      )}
+
+      {/* ── Mentor: Zaman kotası + etkileşim tarzı ────────────────────── */}
+      {role === 'MENTOR' && (
+        <>
+          <fieldset>
+            <legend className="text-sm font-semibold text-foreground mb-3">
+              Zaman Kotası
+            </legend>
+            <div className="grid grid-cols-2 gap-2">
+              {TIME_COMMITMENT_OPTIONS.map(({ value, label, sub }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setTimeCommitment(value)}
+                  className={cn(
+                    'rounded-xl border p-3 text-left transition-all',
+                    timeCommitment === value
+                      ? 'bg-primary/10 border-primary text-foreground'
+                      : 'bg-card border-border hover:border-primary/40',
+                  )}
+                  aria-pressed={timeCommitment === value}
+                >
+                  <p className="text-sm font-bold">{label}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{sub}</p>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend className="text-sm font-semibold text-foreground mb-3">
+              Mentorluk Tarzı
+            </legend>
+            <div className="grid grid-cols-2 gap-2">
+              {INTERACTION_OPTIONS.map(({ value, label, desc }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setInteractionStyle(value)}
+                  className={cn(
+                    'rounded-xl border p-3 text-left transition-all',
+                    interactionStyle === value
+                      ? 'bg-primary/10 border-primary text-foreground'
+                      : 'bg-card border-border hover:border-primary/40',
+                  )}
+                  aria-pressed={interactionStyle === value}
+                >
+                  <p className="text-sm font-bold">{label}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+        </>
+      )}
 
       {/* ── Hata ─────────────────────────────────────────────────────── */}
       {error && (

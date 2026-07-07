@@ -22,6 +22,7 @@ import { ProfileStep }  from './_steps/ProfileStep';
 import { DiscTestStep } from './_steps/DiscTestStep';
 import { ResultStep }   from './_steps/ResultStep';
 import type { DiscAnswer, DiscQuestion, DiscResultCard, ProfileData } from '@/types/onboarding';
+import type { UserRole } from '@/types/auth';
 import { cn } from '@/lib/utils';
 
 // ─── Adım göstergesi ─────────────────────────────────────────────────────────
@@ -84,6 +85,7 @@ function LoadingShell() {
 
 export default function OnboardingContent() {
   const { user, accessToken, isLoading: authLoading } = useAuth();
+  const userRole: UserRole | undefined = user?.role as UserRole | undefined;
 
   const [step,           setStep]           = useState<StepIndex>(0);
   const [questions,      setQuestions]      = useState<DiscQuestion[]>([]);
@@ -165,6 +167,7 @@ export default function OnboardingContent() {
         {/* Adım içeriği */}
         {step === 0 && (
           <ProfileStep
+            role={userRole}
             onComplete={handleProfileComplete}
             isSubmitting={isSubmitting}
             error={stepError}
