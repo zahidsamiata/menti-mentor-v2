@@ -1,4 +1,4 @@
-[submodule "Menti Mentör proje"]
-	path = Menti Mentör proje
+[submodule "backend"]
+	path = backend
 	url = https://github.com/zahidsamiata/menti-mentor.git
 	branch = main
