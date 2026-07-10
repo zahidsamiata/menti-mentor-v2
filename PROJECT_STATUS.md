@@ -17,11 +17,11 @@
 
 ```
 C:\Users\...\Geliştirme\                  ← git kökü (menti-mentor-v2.git)
-├── Menti Mentör proje/                   ← SUBMODULE → menti-mentor.git
+├── backend/                              ← SUBMODULE → menti-mentor.git
 │   ├── src/                              ← Express 5 + TypeScript backend
 │   ├── prisma/                           ← Schema + migration'lar
 │   └── tests/                            ← vitest (72 test)
-├── menti-mentor-frontend/                ← Next.js 14 frontend (normal klasör)
+├── frontend/                             ← Next.js 14 frontend (normal klasör)
 │   └── src/app/                          ← Route'lar ve bileşenler
 ├── .github/workflows/ci.yml              ← Çatı repo CI (backend+frontend+integration)
 └── PROJECT_STATUS.md                     ← Bu dosya
@@ -38,9 +38,9 @@ C:\Users\...\Geliştirme\                  ← git kökü (menti-mentor-v2.git)
 >
 > ```bash
 > cd "Geliştirme/"
-> cd "Menti Mentör proje" && git checkout main && git pull
+> cd backend && git checkout main && git pull
 > cd ..
-> git add "Menti Mentör proje"
+> git add backend
 > git commit -m "chore: backend submodule <hash>'e güncellendi"
 > git push
 > ```
@@ -70,8 +70,7 @@ C:\Users\...\Geliştirme\                  ← git kökü (menti-mentor-v2.git)
 - `backend-check`: submodule checkout → tsc (src + tests) + ESLint
 - `frontend-check`: tsc + `next build`
 - `integration-tests` (backend-check sonrası): postgres:16 + `prisma migrate deploy` + vitest
-- ⚠️ `gh run watch` ESLint `exit 2` raporlayabilir ama job SUCCESS olabilir;
-  gerçek sonuç için `gh run view <id> --json jobs` ile job-level conclusion'a bak.
+- ESLint artık hard gate: lint hatası `backend-check`'i ve dolayısıyla `integration-tests`'i bloklar.
 
 ---
 
@@ -169,10 +168,10 @@ Taşınmamış içerik: `analytics/friction/`, `analytics/ideal/`, `platform/` s
 
 ```bash
 # Belirli bir dosyayı geri almak için:
-git -C "Menti Mentör proje" show de6be04 -- web/<dosya_yolu>
+git -C backend show de6be04 -- web/<dosya_yolu>
 
 # Tüm dizini geri almak için:
-git -C "Menti Mentör proje" checkout de6be04 -- web/
+git -C backend checkout de6be04 -- web/
 ```
 
 ---
@@ -183,8 +182,8 @@ git -C "Menti Mentör proje" checkout de6be04 -- web/
 |---|-------|-----------------|
 | 1 | 110× `as unknown as RequestHandler` route dosyalarında | `RequestWithTenant` → `RequestHandler` yapısal uyumsuzluğu; zararsız, 110 yerdeki refactor riskten fazla değer üretmez |
 | 2 | TR/EN karışık error kodları (`TENANT_BULUNAMADI` vs `NOT_FOUND`) | Frontend bu kodları string olarak işliyor, davranışı kırmaz; standartlaştırma kozmetik |
-| 3 | `Untitled` dosyası backend root'ta | Geliştirme notu; kozmetik, takım kuralı oluşturularak temizlenir |
-| 4 | `tests/cron-probe.ts` ve `tests/k1-probe.ts` `tests/` içinde | Manuel doğrulama araçları; `.test.ts` uzantısı olmadığından vitest çalıştırmaz. `scripts/` taşınması kozmetik |
+| 3 | `tests/cron-probe.ts` ve `tests/k1-probe.ts` yeniden sayıldı | Manuel doğrulama araçları; `scripts/` taşınması kozmetik |
+| 4 | `tests/cron-probe.ts` ve `tests/k1-probe.ts` `tests/` içinde | Manuel doğrulama araçları; `.test.ts` uzantısı olmadığından vitest çalıştırmaz |
 | 5 | Root repo (`menti-mentor-v2`) README.md yok | İşlevsel değil, içerik bu dosyada |
 | 6 | `-v2` GitHub ismi yanıltıcı | Repo rename PR gerektirir, takım kararı |
 
@@ -194,7 +193,7 @@ git -C "Menti Mentör proje" checkout de6be04 -- web/
 
 ### Zorunlu Env Değişkenleri
 
-`.env.example` dosyasına bakınız (`Menti Mentör proje/.env.example`).
+`.env.example` dosyasına bakınız (`backend/.env.example`).
 
 | Değişken | Açıklama | Kritiklik |
 |----------|----------|-----------|

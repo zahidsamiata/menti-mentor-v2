@@ -12,7 +12,7 @@
     "build:frontend": "npm --prefix frontend run build",
     "test:backend": "npm --prefix backend test",
     "docker:up": "docker compose --env-file .env.compose.local up -d",
-    "docker:down": "docker compose down",
+    "docker:down": "docker compose --env-file .env.compose.local down",
     "docker:build": "docker compose --env-file .env.compose.local build"
   }
 }

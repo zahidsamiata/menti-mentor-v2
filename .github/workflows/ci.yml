@@ -67,7 +67,7 @@ jobs:
       - name: Repoyu çek
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: false
           persist-credentials: false
 
       - name: Node.js ${{ env.NODE_VERSION }} kur
@@ -143,7 +143,7 @@ jobs:
 
       - name: Entegrasyon testlerini çalıştır
         working-directory: 'backend'
-        run: npm test
+        run: npm run test:coverage
 
       - name: Test coverage yükle (opsiyonel)
         uses: actions/upload-artifact@v4
