@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
@@ -32,9 +33,18 @@ const PLACEHOLDER_METRICS = [
 ];
 
 export default function MentorDashboardPage() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const { tenant } = useTenant();
   const api = useApiClient();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user) { router.replace('/login'); return; }
+    if (user.role !== 'MENTOR' && user.role !== 'ADMIN') {
+      router.replace('/dashboard');
+    }
+  }, [user, isLoading, router]);
 
   // ── Aday listesi ────────────────────────────────────────────────────────────
   const { data: candidatesData, isLoading: candidatesLoading } = useQuery(

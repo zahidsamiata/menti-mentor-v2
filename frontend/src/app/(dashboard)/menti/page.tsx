@@ -25,10 +25,18 @@ const DISC_LABELS: Record<string, string> = {
 };
 
 export default function MentiDashboardPage() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const { tenant } = useTenant();
   const api = useApiClient();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user) { router.replace('/login'); return; }
+    if (user.role !== 'MENTI') {
+      router.replace('/dashboard');
+    }
+  }, [user, isLoading, router]);
 
   const needsDiscTest = !user?.discType;
   const isApproved = user?.approvalStatus === 'APPROVED';
