@@ -83,6 +83,10 @@ jobs:
         working-directory: 'frontend'
         run: npx tsc --noEmit
 
+      - name: Vitest (birim testler)
+        working-directory: 'frontend'
+        run: npm test
+
       - name: Next.js production build (lint + tip kontrolü dahil)
         working-directory: 'frontend'
         run: npm run build
