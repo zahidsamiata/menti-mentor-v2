@@ -110,6 +110,7 @@ Landing sayfası (OG/Twitter meta, robots.txt, KVKK uyumlu — çerez yok), tasl
 - `20260707140000_add_draft_tenant_email_fields` (Faz 3 Tenant alanları)
 - `20260707150000_add_kvkk_consent_at` (Tenant consent)
 - `20260707160000_add_user_kvkk_consent_at` (User consent)
+- `20260712000000_add_tenant_verification` (kurum doğrulama: TenantVerificationStatus enum + 4 alan)
 
 ### Temizlik
 - `web/` (82 dosya, eski Bento Grid frontend) silindi — bkz. Bölüm 4
