@@ -7,7 +7,7 @@
  *  3. Rol ayrımı — mentor/menti sayfaları (İş 3c, güvenlik)
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 // jsdom, <dialog> showModal/close metodlarını tanımlamaz — polyfill.
