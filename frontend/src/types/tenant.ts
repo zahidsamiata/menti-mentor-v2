@@ -6,7 +6,7 @@
 export interface TenantBranding {
   id: string;
   name: string;           // Internal name
-  displayName: string;    // Kullanıcıya gösterilen isim
+  displayName: string | null; // Kullanıcıya gösterilen isim — Prisma'da String? (nullable)
   slug: string;
   logoUrl: string | null;
   /** Hex renk kodu — örn. "#6366f1". CSS custom property'e dönüştürülür. */

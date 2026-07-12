@@ -18,11 +18,13 @@ interface TenantLogoProps {
 }
 
 export function TenantLogo({ tenant, className, size = 32 }: TenantLogoProps) {
+  const label = tenant.displayName ?? '';
+
   if (tenant.logoUrl) {
     return (
       <Image
         src={tenant.logoUrl}
-        alt={`${tenant.displayName} logosu`}
+        alt={label ? `${label} logosu` : 'Tenant logosu'}
         width={size}
         height={size}
         className={cn('object-contain', className)}
@@ -32,11 +34,11 @@ export function TenantLogo({ tenant, className, size = 32 }: TenantLogoProps) {
   }
 
   // Logo yoksa: baş harfler + brand arka plan rengi
-  const initials = tenant.displayName
+  const initials = label
     .split(' ')
     .slice(0, 2)
     .map((word) => word[0]?.toUpperCase() ?? '')
-    .join('');
+    .join('') || '?';
 
   return (
     <span
@@ -46,7 +48,7 @@ export function TenantLogo({ tenant, className, size = 32 }: TenantLogoProps) {
         className,
       )}
       style={{ width: size, height: size, fontSize: size * 0.4 }}
-      aria-label={`${tenant.displayName} logosu`}
+      aria-label={label ? `${label} logosu` : 'Tenant logosu'}
     >
       {initials}
     </span>

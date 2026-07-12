@@ -57,8 +57,8 @@ function BookMeetingContent() {
     const endMin   = selectedEnd.getUTCHours()   * 60 + selectedEnd.getUTCMinutes();
     return (availability.blocks as Array<{weekday:string;startTime:string;endTime:string}>).some((blk) => {
       if (blk.weekday !== weekday) return false;
-      const [sh, sm] = blk.startTime.split(':').map(Number);
-      const [eh, em] = blk.endTime.split(':').map(Number);
+      const [sh, sm] = (blk.startTime ?? '0:0').split(':').map(Number);
+      const [eh, em] = (blk.endTime ?? '0:0').split(':').map(Number);
       return startMin >= ((sh ?? 0) * 60 + (sm ?? 0)) && endMin <= ((eh ?? 0) * 60 + (em ?? 0));
     });
   })();

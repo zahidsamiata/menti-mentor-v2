@@ -58,7 +58,7 @@ export function TenantProvider({
     });
 
     // Sayfa başlığını tenant adıyla güncelle
-    document.title = `${tenant.displayName} — Mentoring`;
+    document.title = `${tenant.displayName ?? tenant.name} — Mentoring`;
   }, [tenant]);
 
   return (

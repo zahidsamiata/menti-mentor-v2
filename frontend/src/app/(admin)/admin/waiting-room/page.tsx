@@ -146,10 +146,10 @@ export default function WaitingRoomPage() {
 
                     {/* Sektörler */}
                     <td className="px-4 py-3 max-w-[200px]">
-                      {user.sectorTags.length > 0 ? (
+                      {(user.sectorTags ?? []).length > 0 ? (
                         <span className="text-xs text-muted-foreground">
-                          {user.sectorTags.slice(0, 2).join(', ')}
-                          {user.sectorTags.length > 2 && ` +${user.sectorTags.length - 2}`}
+                          {(user.sectorTags ?? []).slice(0, 2).join(', ')}
+                          {(user.sectorTags ?? []).length > 2 && ` +${(user.sectorTags ?? []).length - 2}`}
                         </span>
                       ) : (
                         <span className="text-muted-foreground">—</span>
