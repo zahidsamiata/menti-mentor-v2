@@ -69,6 +69,7 @@ async function executeRequest<T>(
       method,
       headers,
       body: body !== undefined ? JSON.stringify(body) : undefined,
+      credentials: 'include',
     });
 
     if (response.status === 204) return { ok: true, data: undefined as T };

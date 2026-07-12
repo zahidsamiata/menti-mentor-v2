@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
@@ -14,37 +15,73 @@ interface Props {
   onNext: () => void;
 }
 
-function validate(data: WizardData): Record<string, string> {
+const GENERIC_DOMAINS = new Set([
+  'gmail.com', 'googlemail.com', 'hotmail.com', 'hotmail.co.uk',
+  'outlook.com', 'yahoo.com', 'yahoo.co.uk', 'ymail.com',
+  'yandex.com', 'yandex.ru', 'icloud.com', 'me.com', 'mac.com',
+  'proton.me', 'protonmail.com', 'protonmail.ch', 'live.com',
+  'msn.com', 'aol.com', 'mail.com',
+]);
+
+type DomainTier = 'INSTITUTION' | 'EDU' | 'GENERIC';
+
+function classifyDomain(email: string): DomainTier {
+  const domain = email.split('@')[1]?.toLowerCase() ?? '';
+  if (GENERIC_DOMAINS.has(domain)) return 'GENERIC';
+  if (domain.endsWith('.edu.tr')) return 'EDU';
+  return 'INSTITUTION';
+}
+
+function validate(data: WizardData, tier: DomainTier, institutionRole: string, verificationNote: string): Record<string, string> {
   const errs: Record<string, string> = {};
   if (!data.fullName.trim()) errs['fullName'] = 'Ad soyad zorunludur.';
   if (!data.email.includes('@')) errs['email'] = 'Geçerli bir e-posta adresi girin.';
   if (data.password.length < 8)  errs['password'] = 'Şifre en az 8 karakter olmalı.';
   if (!data.kvkkConsent) errs['kvkk'] = 'Devam etmek için onay vermeniz gerekiyor.';
+  if (tier !== 'INSTITUTION') {
+    if (!institutionRole.trim()) errs['institutionRole'] = 'Kurumunuzdaki görevinizi belirtin.';
+    if (!verificationNote.trim()) errs['verificationNote'] = 'Kanıt linki veya açıklama zorunludur.';
+  }
   return errs;
 }
 
 export function Step4Account({ data, onUpdate, onNext }: Props) {
-  const [errors,      setErrors]      = useState<Record<string, string>>({});
-  const [serverError, setServerError] = useState('');
-  const [loading,     setLoading]     = useState(false);
+  const router = useRouter();
+  const [errors,          setErrors]          = useState<Record<string, string>>({});
+  const [serverError,     setServerError]      = useState('');
+  const [loading,         setLoading]          = useState(false);
+  const [domainTier,      setDomainTier]       = useState<DomainTier>('INSTITUTION');
+  const [institutionRole, setInstitutionRole]  = useState('');
+  const [verificationNote, setVerificationNote] = useState('');
+
+  useEffect(() => {
+    if (data.email.includes('@')) {
+      setDomainTier(classifyDomain(data.email));
+    }
+  }, [data.email]);
+
+  const needsVerification = domainTier !== 'INSTITUTION';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const errs = validate(data);
+    const errs = validate(data, domainTier, institutionRole, verificationNote);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
 
     setLoading(true);
     setServerError('');
 
-    // 1. Tenant + admin kaydı yap
     const regResult = await selfServeRegister({
-      email:           data.email,
-      password:        data.password,
-      name:            data.fullName,
-      tenantName:      data.tenantName,
-      slug:            data.slug,
-      programTemplate: data.programTemplate,
-      kvkkConsent:     data.kvkkConsent, // KVKK Md.5 — backend z.literal(true) ile doğrular
+      email:            data.email,
+      password:         data.password,
+      name:             data.fullName,
+      tenantName:       data.tenantName,
+      slug:             data.slug,
+      programTemplate:  data.programTemplate,
+      kvkkConsent:      data.kvkkConsent,
+      ...(needsVerification && {
+        institutionRole,
+        verificationNote,
+      }),
     });
 
     if (!regResult.ok) {
@@ -53,13 +90,14 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
       return;
     }
 
-    const { tenant, accessToken, refreshToken } = regResult.data;
+    const { tenant, accessToken } = regResult.data;
+    // refreshToken HttpOnly cookie'de — localStorage'a yazmıyoruz
 
-    // refreshToken'ı localStorage'a koy (AuthProvider ile senkron)
-    localStorage.setItem('mm_refresh_token', refreshToken);
+    if (tenant.verificationStatus === 'PENDING_REVIEW') {
+      router.push('/onboarding/stk/pending-review');
+      return;
+    }
 
-    // 2. Branding varsa güncelle (logo veya renk varsayılandan farklıysa)
-    // onboardingStep: 'DONE' — backend enum ['PENDING','TEMPLATE','LOGO','PREVIEW','DONE']
     if (data.logoUrl || data.primaryColor !== '#6366f1') {
       await updateOnboarding(tenant.id, accessToken, {
         onboardingStep: 'DONE',
@@ -68,7 +106,6 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
       });
     }
 
-    // Wizard state'e tenantId + adminToken kaydet
     onUpdate({ tenantId: tenant.id, adminToken: accessToken });
     setLoading(false);
     onNext();
@@ -101,6 +138,40 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
           error={errors['email']}
           disabled={loading}
         />
+
+        {needsVerification && data.email.includes('@') && (
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800 space-y-1">
+            <p className="font-medium">
+              {domainTier === 'EDU'
+                ? '.edu.tr e-posta adresiyle kayıt — başvurunuz incelenecektir.'
+                : 'Kurumsal e-posta adresiyle daha hızlı onaylanırsınız. Aşağıdaki alanları doldurarak devam edebilirsiniz.'}
+            </p>
+          </div>
+        )}
+
+        {needsVerification && (
+          <>
+            <FormField
+              label="Kurumunuzdaki Göreviniz"
+              name="institutionRole"
+              placeholder="Örn: Kulüp Başkanı, Koordinatör"
+              value={institutionRole}
+              onChange={(e) => { setInstitutionRole(e.target.value); setErrors((p) => ({ ...p, institutionRole: '' })); }}
+              error={errors['institutionRole']}
+              disabled={loading}
+            />
+            <FormField
+              label="Kanıt (Link veya Açıklama)"
+              name="verificationNote"
+              placeholder="Kulüp sosyal medya linki, danışman hoca e-postası veya web adresi"
+              value={verificationNote}
+              onChange={(e) => { setVerificationNote(e.target.value); setErrors((p) => ({ ...p, verificationNote: '' })); }}
+              error={errors['verificationNote']}
+              disabled={loading}
+            />
+          </>
+        )}
+
         <FormField
           label="Şifre"
           name="password"
@@ -113,7 +184,6 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
           disabled={loading}
         />
 
-        {/* KVKK açık rıza */}
         <div className="space-y-1">
           <label className="flex items-start gap-3 cursor-pointer group">
             <input

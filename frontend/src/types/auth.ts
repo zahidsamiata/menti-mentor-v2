@@ -18,10 +18,9 @@ export interface AuthUser {
   needsOrientation: boolean;
 }
 
-/** POST /api/auth/login yanıtı */
+/** POST /api/auth/login yanıtı — refreshToken artık HttpOnly cookie'de */
 export interface LoginResponse {
   accessToken: string;
-  refreshToken: string;
   expiresIn: number;
   user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'needsOrientation'>;
   tenant: {
@@ -33,10 +32,9 @@ export interface LoginResponse {
   } | null;
 }
 
-/** POST /api/auth/refresh yanıtı */
+/** POST /api/auth/refresh yanıtı — refreshToken artık HttpOnly cookie'de */
 export interface RefreshResponse {
   accessToken: string;
-  refreshToken: string;
   expiresIn: number;
 }
 
@@ -53,10 +51,9 @@ export interface AuthContextValue {
   refreshAccessToken: () => Promise<string | null>;
   /**
    * OAuth callback sayfası tarafından çağrılır.
-   * URL parametrelerinden gelen token çiftini AuthProvider state'ine bağlar.
-   * /me endpoint'ini çağırarak user profilini yükler.
+   * refreshToken artık HttpOnly cookie'de — sadece accessToken + expiresIn alır.
    */
-  loginWithTokens: (accessToken: string, refreshToken: string, expiresIn: number) => Promise<void>;
+  loginWithTokens: (accessToken: string, expiresIn: number) => Promise<void>;
 }
 
 export interface LoginCredentials {

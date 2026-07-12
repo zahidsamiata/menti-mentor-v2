@@ -27,16 +27,15 @@ function OAuthCallbackInner() {
     }
 
     const accessToken = params.get('accessToken');
-    const refreshToken = params.get('refreshToken');
     const expiresIn = parseInt(params.get('expiresIn') ?? '3600', 10);
 
-    if (!accessToken || !refreshToken) {
+    if (!accessToken) {
       router.replace('/login?error=GECERSIZ_CALLBACK');
       return;
     }
 
-    // Token'ları AuthProvider state'ine bağla ve kullanıcı profilini yükle
-    loginWithTokens(accessToken, refreshToken, expiresIn)
+    // refreshToken HttpOnly cookie'de (backend redirect'te set etti)
+    loginWithTokens(accessToken, expiresIn)
       .then(() => {
         const isNewUser = params.get('isNewUser') === 'true';
         router.replace(isNewUser ? '/dashboard?welcome=1' : '/dashboard');
