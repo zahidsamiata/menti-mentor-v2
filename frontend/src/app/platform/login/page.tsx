@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { platformLogin, setPlatformToken } from '@/lib/api/platform';
+import { platformLogin } from '@/lib/api/platform';
 
 export default function PlatformLoginPage() {
   const router = useRouter();
@@ -16,8 +16,7 @@ export default function PlatformLoginPage() {
     setError(null);
     setLoading(true);
     try {
-      const { accessToken } = await platformLogin(email, password);
-      setPlatformToken(accessToken);
+      await platformLogin(email, password);
       router.push('/platform/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Giriş başarısız.');

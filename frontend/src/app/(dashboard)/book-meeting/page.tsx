@@ -37,14 +37,18 @@ function BookMeetingContent() {
     { enabled: Boolean(mentorId) },
   );
 
-  const [format, setFormat]     = useState<'ONLINE' | 'IN_PERSON' | 'PHONE'>('ONLINE');
-  const [date, setDate]         = useState('');
-  const [time, setTime]         = useState('');
-  const [duration, setDuration] = useState(60);
-  const [location, setLocation] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError]           = useState<string | null>(null);
-  const [success, setSuccess]       = useState(false);
+  const [format, setFormat]           = useState<'ONLINE' | 'IN_PERSON' | 'PHONE'>('ONLINE');
+  const [date, setDate]               = useState('');
+  const [time, setTime]               = useState('');
+  const [duration, setDuration]       = useState(60);
+  const [location, setLocation]       = useState('');
+  const [requestMessage, setMsg]      = useState('');
+  const [submitting, setSubmitting]   = useState(false);
+  const [error, setError]             = useState<string | null>(null);
+  const [success, setSuccess]         = useState(false);
+
+  const msgLen = requestMessage.length;
+  const msgValid = msgLen >= 50 && msgLen <= 500;
 
   const selectedStart = date && time ? new Date(`${date}T${time}:00`) : null;
   const selectedEnd   = selectedStart ? addMinutes(selectedStart, duration) : null;
@@ -66,10 +70,15 @@ function BookMeetingContent() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!user || !selectedStart || !selectedEnd) return;
+    if (!msgValid) {
+      setError('Niyet mesajı 50-500 karakter arasında olmalıdır.');
+      return;
+    }
     setSubmitting(true); setError(null);
     const result = await meetingsApi.bookMeeting(api, {
       mentorUserId: mentorId, matchId, format,
       startsAt: selectedStart.toISOString(), endsAt: selectedEnd.toISOString(),
+      requestMessage,
       ...(format === 'ONLINE'    && location ? { locationUrl:  location } : {}),
       ...(format === 'IN_PERSON' && location ? { locationText: location } : {}),
       ...(format === 'PHONE'     && location ? { phoneNumber:  location } : {}),
@@ -159,7 +168,34 @@ function BookMeetingContent() {
             className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm" />
         </div>
 
-        <Button type="submit" className="w-full" disabled={submitting || !date || !time}>
+        <div className="space-y-1">
+          <label className="text-sm font-medium">
+            Neden bu görüşmeyi istiyorsunuz? <span className="text-destructive">*</span>
+          </label>
+          <textarea
+            required
+            value={requestMessage}
+            onChange={(e) => setMsg(e.target.value)}
+            maxLength={500}
+            rows={4}
+            placeholder="Hangi konuda deneyiminden faydalanmak istiyorsunuz? Hedeflerinizi, beklentilerinizi ve bu mentörü neden seçtiğinizi kısaca yazın. (50-500 karakter)"
+            className={`w-full rounded-xl border bg-background px-3 py-2 text-sm resize-none ${
+              requestMessage.length > 0 && !msgValid
+                ? 'border-destructive'
+                : 'border-border'
+            }`}
+          />
+          <div className="flex justify-between text-xs">
+            <span className={msgLen > 0 && msgLen < 50 ? 'text-destructive' : 'text-muted-foreground'}>
+              {msgLen < 50 && msgLen > 0 ? `En az ${50 - msgLen} karakter daha yazın` : ''}
+            </span>
+            <span className={msgLen > 450 ? 'text-amber-500' : 'text-muted-foreground'}>
+              {msgLen}/500
+            </span>
+          </div>
+        </div>
+
+        <Button type="submit" className="w-full" disabled={submitting || !date || !time || !msgValid}>
           {submitting ? 'Gönderiliyor…' : 'Randevu Talebini Gönder'}
         </Button>
         <p className="text-xs text-muted-foreground text-center">Talebiniz mentöre iletilecek, onaylaması gerekiyor.</p>

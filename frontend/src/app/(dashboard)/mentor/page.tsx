@@ -156,29 +156,67 @@ export default function MentorDashboardPage() {
             {pendingMeetings!.items.map((m) => {
               const start = new Date(m.startsAt).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' });
               const isActing = meetingActionId === m.id;
+              const score = m.match ? Math.round(m.match.predictedScore * 100) : null;
+              const compatReason = m.match
+                ? [
+                    m.match.sectorScore > 0.4 ? 'Ortak sektör' : null,
+                    m.match.characterScore > 0.4 ? 'Karakter uyumu' : null,
+                  ].filter(Boolean).join(' · ')
+                : null;
               return (
-                <div key={m.id} className="flex items-center justify-between py-3 gap-3">
-                  <div>
-                    <p className="text-sm font-medium">{start}</p>
-                    <p className="text-xs text-muted-foreground">{m.format}</p>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      size="sm"
-                      disabled={isActing}
-                      onClick={() => handleMeetingAction(m.id, 'approve')}
-                    >
-                      {isActing ? '…' : 'Onayla'}
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="text-destructive border-destructive/40"
-                      disabled={isActing}
-                      onClick={() => handleMeetingAction(m.id, 'reject')}
-                    >
-                      Reddet
-                    </Button>
+                <div key={m.id} className="py-4 space-y-3">
+                  {/* Niyet mesajı — en üstte, belirgin */}
+                  {m.requestMessage && (
+                    <blockquote className="border-l-4 border-primary pl-3 bg-primary/5 rounded-r-lg py-2 pr-2">
+                      <p className="text-sm leading-relaxed">{m.requestMessage}</p>
+                    </blockquote>
+                  )}
+
+                  {/* Uyum gerekçesi + skor */}
+                  {(compatReason || score !== null) && (
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {compatReason && (
+                        <span className="text-xs bg-muted rounded-full px-2.5 py-1">{compatReason}</span>
+                      )}
+                      {score !== null && (
+                        <span className="text-xs font-semibold text-primary">%{score} uyum</span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Menti profili + tarih-format */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="space-y-1 min-w-0">
+                      {m.menti?.fullName && (
+                        <p className="text-sm font-medium truncate">{m.menti.fullName}</p>
+                      )}
+                      {m.menti?.sectorTags && m.menti.sectorTags.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                          {m.menti.sectorTags.slice(0, 3).map((t) => (
+                            <span key={t} className="text-xs bg-muted rounded px-1.5 py-0.5">{t}</span>
+                          ))}
+                        </div>
+                      )}
+                      <p className="text-xs text-muted-foreground">{start} · {m.format}</p>
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <Button
+                        size="sm"
+                        disabled={isActing}
+                        onClick={() => handleMeetingAction(m.id, 'approve')}
+                      >
+                        {isActing ? '…' : 'Onayla'}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-destructive border-destructive/40"
+                        disabled={isActing}
+                        onClick={() => handleMeetingAction(m.id, 'reject')}
+                      >
+                        Reddet
+                      </Button>
+                    </div>
                   </div>
                 </div>
               );

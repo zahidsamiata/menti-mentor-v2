@@ -2,25 +2,15 @@ import { apiClient } from './client';
 
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
-// Platform admin token'ı localStorage'da saklanır (sadece platform sayfaları kullanır).
-export function getPlatformToken(): string | null {
-  if (typeof window === 'undefined') return null;
-  return localStorage.getItem('platform_token');
-}
-export function setPlatformToken(token: string) {
-  localStorage.setItem('platform_token', token);
-}
-export function clearPlatformToken() {
-  localStorage.removeItem('platform_token');
-}
+// Platform admin oturumu HttpOnly cookie ile yönetilir — localStorage kullanılmaz.
+// Token tarayıcı tarafından otomatik gönderilir; frontend'in okuması/saklaması gerekmez.
 
 async function platformFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const token = getPlatformToken();
   const res = await fetch(`${BASE}${path}`, {
     ...options,
+    credentials: 'include', // HttpOnly cookie'yi otomatik gönder
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...((options.headers as Record<string, string>) ?? {}),
     },
   });
@@ -31,11 +21,15 @@ async function platformFetch<T>(path: string, options: RequestInit = {}): Promis
   return res.json() as Promise<T>;
 }
 
-export async function platformLogin(email: string, password: string): Promise<{ accessToken: string }> {
-  return platformFetch<{ accessToken: string }>('/api/platform/auth', {
+export async function platformLogin(email: string, password: string): Promise<{ ok: boolean }> {
+  return platformFetch<{ ok: boolean }>('/api/platform/auth', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   });
+}
+
+export async function platformLogout(): Promise<void> {
+  await platformFetch<{ ok: boolean }>('/api/platform/logout', { method: 'POST' });
 }
 
 export async function getPlatformStats() {
