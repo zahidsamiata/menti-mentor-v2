@@ -31,6 +31,49 @@
 
 <!-- /çalışma-kuralları -->
 
+<!-- güvenlik-kuralları -->
+## Güvenlik Kuralları — kod yazarken UY
+
+### Her yeni endpoint için ZORUNLU kontrol
+- Auth gerekli mi? requireAuth() / requireRole() eklendi mi?
+- Doğru rol mü? (platform admin ≠ tenant admin ≠ MENTOR ≠ MENTI)
+- Tenant izolasyonu: sorgu tenantId ile filtreleniyor mu?
+- IDOR: kullanıcı başkasının kaynağına ID tahmin ederek erişebilir mi?
+  (kendi kaydı mı diye kontrol et — sadece "giriş yapmış" yetmez)
+- Zod ile girdi doğrulama var mı?
+- KASITLI public olan endpoint'ler: login, register, health, unsubscribe,
+  invitation join, suspicion report. Bunun DIŞINDA public endpoint YOK.
+
+### Veri döndürürken
+- Explicit `select` kullan — `password` ASLA dönmesin.
+- Over-fetching yapma: sadece gereken alanlar. PII gereksiz yere sızmasın.
+- Hata mesajları iç detay sızdırmasın (stack trace, DB hatası, dosya yolu).
+
+### Frontend guard yeterli DEĞİL
+- Frontend'de bir şeyi gizlemek = güvenlik değil. Backend'de de guard olmalı.
+- Kullanıcı API'yi doğrudan çağırabilir.
+
+### Token / sır
+- Token'lar HttpOnly cookie'de. localStorage'a token YAZMA.
+- Sır (API key, şifre, secret) koda YAZMA — env'den oku.
+- Sır'ı log'a, response'a, hata mesajına BASMA.
+
+### Public endpoint eklerken
+- Rate limit var mı? Boyut sınırı var mı? Spam/kötüye kullanım korumalı mı?
+
+### Hassas veri eklerken (yeni alan/model)
+- Bu veri PII mi? Kim görmeli, kim görmemeli?
+- KVKK: toplanması meşru mu, silinebiliyor mu?
+- Kişi hakkında yazılan yorumlar (feedback vb.) — o kişi görmeli mi?
+
+### Bağımlılık
+- Yeni paket eklerken npm audit çalıştır. HIGH/CRITICAL varsa ekleme.
+
+### Şüphedeysen
+- Güvenlik açısından emin değilsen DUR ve kullanıcıya sor. Tahmin yürütme.
+
+<!-- /güvenlik-kuralları -->
+
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer) - Token-Optimized Commands
 
