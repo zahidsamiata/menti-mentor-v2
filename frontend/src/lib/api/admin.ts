@@ -76,4 +76,16 @@ export const adminApi = {
 
   rejectTag: (api: BoundClient, tagId: string): Promise<ApiResult<TagActionResponse>> =>
     api<TagActionResponse>(`/api/admin/tags/${tagId}/reject`, { method: 'POST' }),
+
+  // ── Çoklu Admin ───────────────────────────────────────────────────────────
+  listAdmins: (api: BoundClient) =>
+    api<{ items: { id: string; fullName: string; email: string; createdAt: string }[]; total: number }>(
+      '/api/admin/managers'
+    ),
+
+  promoteToAdmin: (api: BoundClient, userId: string) =>
+    api<{ ok: boolean }>(`/api/admin/users/${userId}/promote-admin`, { method: 'POST' }),
+
+  demoteFromAdmin: (api: BoundClient, userId: string) =>
+    api<{ ok: boolean }>(`/api/admin/users/${userId}/demote-admin`, { method: 'POST' }),
 };

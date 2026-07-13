@@ -76,6 +76,17 @@ export function InvitationCard({ data, token }: InvitationCardProps) {
       <div className="space-y-3">
         <RoleBadge role={data.role} />
 
+        {/* Davet eden şeffaflığı */}
+        {data.invitedByName && (
+          <p className="text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">{data.invitedByName}</span>
+            {data.invitedByTitle && (
+              <span className="text-muted-foreground"> ({data.invitedByTitle})</span>
+            )}
+            {' '}sizi davet etti.
+          </p>
+        )}
+
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground leading-tight text-balance">
           {data.tenantName} Mentörlük Ağına
           <br />
@@ -131,6 +142,14 @@ export function InvitationCard({ data, token }: InvitationCardProps) {
           Bilgileriniz KVKK uyumlu, kapalı devre ve güvendedir.
         </p>
       </div>
+
+      {/* Şüphe bildirimi linki */}
+      <p className="text-xs text-muted-foreground">
+        Bu daveti tanımıyor musunuz?{' '}
+        <Link href="/bildir" className="underline hover:text-foreground transition-colors">
+          Bildirin
+        </Link>
+      </p>
 
     </div>
   );

@@ -11,6 +11,8 @@ export interface InvitationData {
   primaryColor:    string;
   programTemplate: string | null;
   plan:            string;
+  invitedByName:   string | null;
+  invitedByTitle:  string | null;
 }
 
 export interface InvitationTokenError {
