@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { matchingApi, matchRequestApi } from '@/lib/api/matching';
+import { agreementsApi } from '@/lib/api/agreements';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import type { MentorListItem } from '@/types/matching';
@@ -38,8 +39,15 @@ export default function MentiDashboardPage() {
     }
   }, [user, isLoading, router]);
 
-  const needsDiscTest = !user?.discType;
-  const isApproved = user?.approvalStatus === 'APPROVED';
+  const needsDiscTest     = !user?.discType;
+  const isApproved        = user?.approvalStatus === 'APPROVED';
+  const needsOrientation  = user?.needsOrientation === true;
+
+  const { data: agreementData } = useQuery(
+    () => agreementsApi.getActive(api),
+    [api],
+    { enabled: isApproved && !needsOrientation },
+  );
 
   // ONAYLANMIŞ: tam mentor listesi (PII dahil)
   const { data: mentorsData, isLoading: mentorsLoading } = useQuery(
@@ -115,6 +123,36 @@ export default function MentiDashboardPage() {
           {isApproved ? 'Onaylandı' : 'Onay Bekleniyor'}
         </Badge>
       </div>
+
+      {/* Oryantasyon kilidi uyarısı */}
+      {needsOrientation && (
+        <div className="rounded-2xl border-2 border-dashed border-destructive/50 bg-destructive/5 p-6 flex items-center justify-between gap-4">
+          <div>
+            <h3 className="font-semibold text-sm text-destructive">Görüşme Kilidi Aktif</h3>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Son görüşmedeki hazırlık puanınız düşük bulundu. Kısa rehberi tamamladığınızda kilit otomatik kaldırılır.
+            </p>
+          </div>
+          <Button asChild size="sm" variant="destructive">
+            <Link href="/menti/orientation-guide">Rehbere Başla →</Link>
+          </Button>
+        </div>
+      )}
+
+      {/* Anlaşma yenileme uyarısı */}
+      {agreementData?.status === 'RENEWAL_PENDING' && (
+        <div className="rounded-2xl border-2 border-dashed border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-6 flex items-center justify-between gap-4">
+          <div>
+            <h3 className="font-semibold text-sm text-amber-800 dark:text-amber-300">Mentörlük Anlaşmanız Bitmek Üzere</h3>
+            <p className="text-xs text-amber-700 dark:text-amber-400 mt-0.5">
+              Devam etmek istiyor musunuz? Yenileme veya onurlu bitiş seçeneğini seçin.
+            </p>
+          </div>
+          <Button asChild size="sm" variant="outline">
+            <Link href={`/menti/agreement/${agreementData.id}`}>Karar Ver →</Link>
+          </Button>
+        </div>
+      )}
 
       {/* DISC testi tamamlanmamış uyarısı */}
       {needsDiscTest && (
