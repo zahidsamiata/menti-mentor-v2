@@ -4,6 +4,7 @@
   "private": true,
   "description": "Menti-Mentor SaaS monorepo — backend (submodule) + frontend",
   "scripts": {
+    "verify": "bash scripts/verify.sh",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev",
     "lint:backend": "npm --prefix backend run lint",

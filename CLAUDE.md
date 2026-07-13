@@ -1,3 +1,36 @@
+<!-- çalışma-kuralları -->
+# Çalışma Kuralları (her oturumda geçerli)
+
+## Push Öncesi — ZORUNLU
+- **Her push öncesi `npm run verify` koş.** Yeşil değilse push yok.
+- verify = CI ile birebir aynı: backend tsc + tsc-test + eslint + frontend tsc + vitest + build + entegrasyon testleri.
+- `scripts/verify.sh` içeriği CI workflow ile eşlenmiş tutulur.
+
+## Branch Akışı — DOĞRUDAN main'E PUSH YOK
+- Her iş feature branch'te yapılır: `git checkout -b feat/xxx`
+- PR açılır → CI iki repoda da yeşil → merge.
+- Main hep yeşil kalır, "Run failed" maili gitmez.
+
+## CI Kontrolü — İKİ REPO
+- Her push sonrası `gh run list --limit 3` HEM backend HEM çatı repo için kontrol edilir.
+- Biri yeşil diye diğeri atlanmaz.
+
+## Submodule Senkronizasyonu
+- Backend değişince aynı tur içinde pointer güncellenir ve çatı push edilir.
+- Backend push ile pointer güncellemesi arasında ASLA ara commit/push olmaz.
+- Sıra: backend commit → backend push → çatı repo `git add backend` → çatı commit → çatı push.
+
+## API/Şema Değişikliği
+- Endpoint veya Prisma şeması değişince "bunu kim kullanıyor?" taraması yapılır: testler, frontend, diğer servisler.
+
+## Migration Kuralı
+- Neon shadow-DB sorunu: `IF NOT EXISTS` SQL + `db execute` + `migrate resolve`. `db push --accept-data-loss` YASAK.
+
+## Belirsiz / Riskli Durumda
+- DUR ve kullanıcıya raporla. Tahmin yürüterek riskli adım atmak yasak.
+
+<!-- /çalışma-kuralları -->
+
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer) - Token-Optimized Commands
 
