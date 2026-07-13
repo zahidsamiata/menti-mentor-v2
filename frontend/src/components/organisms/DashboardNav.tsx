@@ -9,13 +9,13 @@ const NAV_BY_ROLE: Record<string, { href: string; label: string; icon: string }[
   MENTI: [
     { href: '/menti',    label: 'Ana Sayfa',    icon: '🏠' },
     { href: '/meetings', label: 'Görüşmelerim', icon: '📅' },
-    { href: '/disc-test', label: 'Profil',      icon: '👤' },
+    { href: '/profile',  label: 'Profil',       icon: '👤' },
   ],
   MENTOR: [
     { href: '/mentor',               label: 'Ana Sayfa',    icon: '🏠' },
     { href: '/mentor/availability',  label: 'Müsaitliğim',  icon: '📆' },
     { href: '/meetings',             label: 'Görüşmelerim', icon: '📅' },
-    { href: '/disc-test',            label: 'Profil',       icon: '👤' },
+    { href: '/profile',              label: 'Profil',       icon: '👤' },
   ],
 };
 
