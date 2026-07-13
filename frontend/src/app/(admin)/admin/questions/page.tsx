@@ -80,7 +80,7 @@ export default function QuestionsPage() {
         <div>
           <h1 className="text-2xl font-bold">Soru Yönetimi</h1>
           <p className="text-sm text-muted-foreground">
-            Global sorular kilitlidir (gizlenebilir). Kuruma özel sorular ekleyip yönetebilirsiniz.
+            DISC soruları sistem tarafından yönetilir, değiştirilemez. Kuruma özel sorular ekleyip yönetebilirsiniz.
           </p>
         </div>
         <Button size="sm" onClick={() => setShowAddForm((v) => !v)}>
@@ -148,8 +148,8 @@ export default function QuestionsPage() {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base">Global Sorular</CardTitle>
-                <Badge variant="secondary" className="text-xs">🔒 Kilitli — sadece gizlenebilir</Badge>
+                <CardTitle className="text-base">DISC Soruları</CardTitle>
+                <Badge variant="secondary" className="text-xs">🔒 Sistem tarafından yönetilir</Badge>
               </div>
             </CardHeader>
             <CardContent className="divide-y divide-border">
@@ -163,15 +163,9 @@ export default function QuestionsPage() {
                       <span className="text-xs text-muted-foreground">sıra: {q.order}</span>
                     </div>
                   </div>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="shrink-0 text-xs"
-                    disabled={loadingId === q.id}
-                    onClick={() => handleHide(q)}
-                  >
-                    {loadingId === q.id ? '…' : 'Gizle'}
-                  </Button>
+                  <Badge variant="secondary" className="text-xs shrink-0 text-muted-foreground">
+                    Sistem sorusu
+                  </Badge>
                 </div>
               ))}
             </CardContent>
