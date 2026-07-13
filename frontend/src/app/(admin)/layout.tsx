@@ -8,21 +8,26 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
 import { cn } from '@/lib/utils';
 
-const NAV_ITEMS = [
-  { href: '/admin/waiting-room',      label: 'Bekleme Odası',   icon: '⏳' },
-  { href: '/admin/approvals',         label: 'Onay Kuyruğu',    icon: '👤' },
-  { href: '/admin/managers',          label: 'Yöneticiler',     icon: '🛡️' },
-  { href: '/admin/invite',            label: 'Davet Oluştur',   icon: '📨' },
-  { href: '/admin/algorithm-tuner',   label: 'Algoritma',       icon: '🧠' },
-  { href: '/admin/questions',         label: 'Soru Yönetimi',   icon: '❓' },
-  { href: '/admin/tags',              label: 'Etiket Yönetimi', icon: '🏷️' },
-  { href: '/admin/kpi',               label: 'KPI Paneli',      icon: '📊' },
+// Ana sekmeler — kulüp başkanının her girişte kullandığı işlevler
+const PRIMARY_NAV = [
+  { href: '/admin/approvals',  label: 'Onay',   icon: '👤' },
+  { href: '/admin/invite',     label: 'Davet',  icon: '📨' },
+  { href: '/admin/kpi',        label: 'Program', icon: '📊' },
+] as const;
+
+// Gelişmiş — nadir kullanılan, varsayılan olarak daraltılmış
+const ADVANCED_NAV = [
+  { href: '/admin/waiting-room',    label: 'Bekleme Odası',   icon: '⏳' },
+  { href: '/admin/managers',        label: 'Yöneticiler',     icon: '🛡️' },
+  { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
+  { href: '/admin/questions',       label: 'Soru Yönetimi',   icon: '❓' },
+  { href: '/admin/tags',            label: 'Etiket Yönetimi', icon: '🏷️' },
 ] as const;
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
@@ -30,6 +35,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { user, isLoading } = useAuth();
   const { tenant } = useTenant();
+  const [advancedOpen, setAdvancedOpen] = useState(
+    ADVANCED_NAV.some(({ href }) => pathname.startsWith(href)),
+  );
 
   // ADMIN olmayan kullanıcıyı yönlendir
   useEffect(() => {
@@ -54,8 +62,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         </div>
 
         {/* Navigasyon */}
-        <nav className="flex-1 p-3 space-y-1">
-          {NAV_ITEMS.map(({ href, label, icon }) => (
+        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+          {/* Ana sekmeler */}
+          {PRIMARY_NAV.map(({ href, label, icon }) => (
             <Link
               key={href}
               href={href}
@@ -70,6 +79,36 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               {label}
             </Link>
           ))}
+
+          {/* Gelişmiş ayarlar — daraltılabilir */}
+          <div className="pt-2">
+            <button
+              onClick={() => setAdvancedOpen((v) => !v)}
+              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs text-muted-foreground hover:bg-muted transition-colors"
+            >
+              <span>Gelişmiş</span>
+              <span className="text-xs">{advancedOpen ? '▲' : '▼'}</span>
+            </button>
+            {advancedOpen && (
+              <div className="mt-1 space-y-1">
+                {ADVANCED_NAV.map(({ href, label, icon }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={cn(
+                      'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors',
+                      pathname.startsWith(href)
+                        ? 'bg-primary text-primary-foreground font-medium'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+                    )}
+                  >
+                    <span>{icon}</span>
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Alt bilgi */}

@@ -209,13 +209,21 @@ export default function MentiDashboardPage() {
         </CardHeader>
         <CardContent>
           {needsDiscTest ? (
-            <p className="text-sm text-muted-foreground text-center py-6">
-              DISC profilinizi tamamladıktan sonra size uygun mentorlar burada görünecek.
-            </p>
+            <div className="text-center py-8 space-y-3">
+              <p className="text-sm text-muted-foreground">
+                DISC profilinizi tamamladıktan sonra size uygun mentorlar burada görünecek.
+              </p>
+              <Button asChild size="sm">
+                <Link href="/disc-test">DISC Testini Başlat →</Link>
+              </Button>
+            </div>
           ) : !isApproved ? (
-            <p className="text-sm text-muted-foreground text-center py-6">
-              Yönetici onayı bekleniyor. Onay sonrasında mentor listesine erişebilirsiniz.
-            </p>
+            <div className="text-center py-8 space-y-2">
+              <p className="text-sm font-medium">Yönetici onayı bekleniyor</p>
+              <p className="text-xs text-muted-foreground">
+                Profiliniz inceleniyor. Onay sonrasında mentor listesine erişip randevu alabilirsiniz.
+              </p>
+            </div>
           ) : mentorsLoading ? (
             <div className="flex flex-col gap-3 py-4">
               {[1, 2, 3].map((i) => (
@@ -223,9 +231,16 @@ export default function MentiDashboardPage() {
               ))}
             </div>
           ) : !mentorsData?.items.length ? (
-            <p className="text-sm text-muted-foreground text-center py-6">
-              Şu an uygun mentor bulunamadı.
-            </p>
+            <div className="text-center py-8 space-y-2">
+              <p className="text-sm font-medium">Şu an uygun mentor bulunamadı</p>
+              <p className="text-xs text-muted-foreground">
+                Programınıza henüz mentor katılmamış ya da profilinizle eşleşen mentor yok.
+                DISC profilinizin güncel olduğundan emin olun.
+              </p>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/disc-test">DISC Profilini Güncelle →</Link>
+              </Button>
+            </div>
           ) : (
             <div className="divide-y divide-border">
               {mentorsData.items.map((mentor) => (

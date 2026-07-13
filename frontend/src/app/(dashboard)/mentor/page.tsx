@@ -342,9 +342,21 @@ export default function MentorDashboardPage() {
               ))}
             </div>
           ) : !candidatesData?.items.length ? (
-            <p className="text-sm text-muted-foreground text-center py-6">
-              Mevcut filtrelerinize uyan menti adayı bulunamadı.
-            </p>
+            <div className="text-center py-8 space-y-2">
+              <p className="text-sm font-medium">Menti adayı bulunamadı</p>
+              <p className="text-xs text-muted-foreground">
+                Filtreleriniz çok kısıtlayıcı olabilir.
+              </p>
+              <button
+                onClick={() => {
+                  setFilter((p) => ({ ...p, minCompatibilityScore: 0, blockedDiscTypes: [] }));
+                  setFilterSaved(false);
+                }}
+                className="text-xs text-primary underline underline-offset-2 hover:no-underline"
+              >
+                Filtreleri sıfırla →
+              </button>
+            </div>
           ) : (
             <div className="divide-y divide-border">
               {candidatesData.items.map((c) => (
