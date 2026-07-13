@@ -3,8 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  getPlatformToken,
-  clearPlatformToken,
+  platformLogout,
   getPlatformStats,
   listPendingTenants,
   listAllTenants,
@@ -36,10 +35,7 @@ export default function PlatformDashboard() {
   const [error, setError]         = useState<string | null>(null);
   const [actionMsg, setActionMsg] = useState<string | null>(null);
 
-  const token = typeof window !== 'undefined' ? getPlatformToken() : null;
-
   const loadData = useCallback(async (currentTab: Tab) => {
-    if (!token) { router.push('/platform/login'); return; }
     setLoading(true); setError(null);
     try {
       if (currentTab === 'overview') {
@@ -60,7 +56,6 @@ export default function PlatformDashboard() {
       }
     } catch (e) {
       if (e instanceof Error && e.message.includes('401')) {
-        clearPlatformToken();
         router.push('/platform/login');
       } else {
         setError(e instanceof Error ? e.message : 'Hata oluştu.');
@@ -68,7 +63,7 @@ export default function PlatformDashboard() {
     } finally {
       setLoading(false);
     }
-  }, [token, router]);
+  }, [router]);
 
   useEffect(() => { void loadData(tab); }, [tab, loadData]);
 
@@ -123,7 +118,7 @@ export default function PlatformDashboard() {
       <header className="border-b border-slate-800 px-6 py-4 flex items-center justify-between">
         <h1 className="text-lg font-bold text-white">MentiMentor Platform Yönetimi</h1>
         <button
-          onClick={() => { clearPlatformToken(); router.push('/platform/login'); }}
+          onClick={() => { void platformLogout().finally(() => router.push('/platform/login')); }}
           className="text-sm text-slate-400 hover:text-white transition-colors"
         >
           Çıkış
