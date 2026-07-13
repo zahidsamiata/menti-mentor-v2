@@ -76,6 +76,25 @@ C:\Users\...\Geliştirme\                  ← git kökü (menti-mentor-v2.git)
 
 ## 3. Tamamlananlar
 
+### Platform Admin + Çoklu Admin + Davet + Şüphe (20260713)
+- **Platform admin paneli**: `/platform/login` + `/platform/dashboard` (stats/bekleyen/kurumlar/şüphe/loglar)
+  - Auth: `email` (PLATFORM_ADMIN_EMAIL env) + `password` (PLATFORM_ADMIN_KEY) → JWT
+  - Bekleyen kurum onay/ret, tüm kurumları dondur/aktifleştir
+- **Çoklu admin**: `GET /api/admin/managers`, `POST promote-admin`, `POST demote-admin`
+  - Son admin guard: kurumun son yöneticisi çıkarılamaz
+  - Admin panel "Yöneticiler" sekmesi
+- **Davet metni oluşturucu**: Admin panel "Davet Oluştur" sayfası
+  - Varsayılan MENTİ/MENTOR × E-POSTA/WHATSAPP metinleri (kodda sabit)
+  - DB'ye kaydedilebilir (`InvitationTemplate` tablosu) — bir sonraki girişte yüklenir
+  - `invitedByName` + `invitedByTitle` JWT claim'lerine eklendi (30 gün süreli)
+  - Kopyala butonu + link oluştur
+- **Şüphe bildirimi**: `POST /api/suspicion-reports` (public) + platform admin yönetim
+  - `/bildir` public sayfası, join sayfasında "Bu daveti tanımıyor musun? Bildirin" linki
+- **Davet şeffaflığı**: `InvitationCard`'da davet eden adı/görevi gösteriliyor
+- **Profil**: `avatarUrl`, `linkedinUrl`, `instagramUrl` alanları (User modeli + migration)
+  - Google OAuth avatar kaydı; `PATCH /api/users/me/social` endpoint
+- **Migration**: `20260713000000_add_suspicion_report_invitation_template_user_social`
+
 ### Güvenlik
 - **P0 deadlock**: matching'de level-3 fallback sonsuz döngüsü giderildi
 - **P1 statik skor**: sektör skoru her zaman 0 dönüyordu, düzeltildi
@@ -111,6 +130,7 @@ Landing sayfası (OG/Twitter meta, robots.txt, KVKK uyumlu — çerez yok), tasl
 - `20260707150000_add_kvkk_consent_at` (Tenant consent)
 - `20260707160000_add_user_kvkk_consent_at` (User consent)
 - `20260712000000_add_tenant_verification` (kurum doğrulama: TenantVerificationStatus enum + 4 alan)
+- `20260713000000_add_suspicion_report_invitation_template_user_social` (SuspicionReport + InvitationTemplate + User sosyal alanlar)
 
 ### Temizlik
 - `web/` (82 dosya, eski Bento Grid frontend) silindi — bkz. Bölüm 4
@@ -200,7 +220,8 @@ git -C backend checkout de6be04 -- web/
 |----------|----------|-----------|
 | `DATABASE_URL` | Neon bağlantı string'i | **Zorunlu** |
 | `JWT_SECRET` | En az 32 karakter, tahmin edilemez | **Zorunlu** |
-| `PLATFORM_ADMIN_KEY` | Super-admin API anahtarı | **Zorunlu** |
+| `PLATFORM_ADMIN_KEY` | Super-admin şifre (platform login password) | **Zorunlu** |
+| `PLATFORM_ADMIN_EMAIL` | Platform admin e-posta (default: admin@platform.local) | Opsiyonel |
 | `BACKEND_URL` | Express sunucusunun public URL'i | **Zorunlu** — ayrı-domain deploy'da unsubscribe e-posta linki buna bağlı. Atlanırsa kullanıcılar abonelikten çıkamaz |
 | `FRONTEND_URL` | Next.js uygulamasının public URL'i | **Zorunlu** |
 | `SMTP_USER` + `SMTP_PASS` | Gmail uygulama şifresi | Zorunlu (e-postalar için) |
@@ -217,4 +238,4 @@ Migration öncesi oluşturulan `Tenant` ve `User` kayıtlarında `kvkkConsentAt`
 
 ---
 
-*Son güncelleme: 2026-07-08*
+*Son güncelleme: 2026-07-13*
