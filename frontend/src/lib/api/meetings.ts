@@ -3,6 +3,20 @@ import type { RequestOptions } from './client';
 
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
+export interface MentiProfile {
+  id: string;
+  fullName: string;
+  sectorTags: string[];
+  expectationCategories: string[];
+}
+
+export interface MeetingMatch {
+  id: string;
+  predictedScore: number;
+  sectorScore: number;
+  characterScore: number;
+}
+
 export interface Meeting {
   id: string;
   tenantId: string;
@@ -13,6 +27,9 @@ export interface Meeting {
   startsAt: string;
   endsAt: string;
   notes: string | null;
+  requestMessage: string | null;
+  menti?: MentiProfile;
+  match?: MeetingMatch | null;
   awaitingMentorApproval?: boolean;
 }
 
@@ -53,6 +70,7 @@ export interface BookMeetingPayload {
   locationUrl?: string;
   locationText?: string;
   phoneNumber?: string;
+  requestMessage: string;
 }
 
 export const meetingsApi = {
