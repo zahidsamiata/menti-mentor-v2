@@ -201,6 +201,19 @@ describe('Dashboard Yönlendirme (DashboardPage)', () => {
       expect(routerReplace).toHaveBeenCalledWith('/menti');
     });
   });
+
+  it('ADMIN kullanıcı → /admin\'e yönlendirir (mentor değil)', async () => {
+    vi.mocked(useAuth).mockReturnValue({
+      user: makeUser({ role: 'ADMIN' }), isLoading: false,
+    } as never);
+
+    render(<DashboardPage />);
+
+    await waitFor(() => {
+      expect(routerReplace).toHaveBeenCalledWith('/admin');
+    });
+    expect(routerReplace).not.toHaveBeenCalledWith('/mentor');
+  });
 });
 
 // ─── İŞ 3c — Rol Ayrımı ──────────────────────────────────────────────────────

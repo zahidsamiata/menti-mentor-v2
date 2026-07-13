@@ -73,14 +73,28 @@ export interface BookMeetingPayload {
   requestMessage: string;
 }
 
+export interface SaveAvailabilityPayload {
+  blocks: { weekday: string; startTime: string; endTime: string }[];
+}
+
 export const meetingsApi = {
-  list: (api: BoundClient, params: { status?: string } = {}): Promise<ApiResult<MeetingsListResponse>> => {
-    const qs = params.status ? `?status=${params.status}` : '';
-    return api<MeetingsListResponse>(`/api/meetings${qs}`);
+  list: (
+    api: BoundClient,
+    params: { status?: string; mentorId?: string; mentiId?: string } = {},
+  ): Promise<ApiResult<MeetingsListResponse>> => {
+    const qs = new URLSearchParams();
+    if (params.status)   qs.set('status', params.status);
+    if (params.mentorId) qs.set('mentorId', params.mentorId);
+    if (params.mentiId)  qs.set('mentiId', params.mentiId);
+    const q = qs.toString();
+    return api<MeetingsListResponse>(`/api/meetings${q ? `?${q}` : ''}`);
   },
 
   getAvailability: (api: BoundClient, mentorUserId: string): Promise<ApiResult<AvailabilityResponse>> =>
     api<AvailabilityResponse>(`/api/meetings/availability?mentorUserId=${mentorUserId}`),
+
+  saveAvailability: (api: BoundClient, payload: SaveAvailabilityPayload): Promise<ApiResult<AvailabilityResponse>> =>
+    api<AvailabilityResponse>('/api/meetings/availability', { method: 'POST', body: payload }),
 
   bookMeeting: (api: BoundClient, payload: BookMeetingPayload): Promise<ApiResult<{ meeting: Meeting; awaitingMentorApproval: boolean }>> =>
     api(`/api/meetings/book`, { method: 'POST', body: payload }),

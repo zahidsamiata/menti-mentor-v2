@@ -20,7 +20,7 @@ export default function DashboardPage() {
     const routes: Record<string, string> = {
       MENTOR: '/mentor',
       MENTI:  '/menti',
-      ADMIN:  '/mentor', // Sprint 14'te /admin
+      ADMIN:  '/admin',
     };
     router.replace(routes[user.role] ?? '/login');
   }, [user, isLoading, router]);
