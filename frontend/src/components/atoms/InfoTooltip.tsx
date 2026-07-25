@@ -19,10 +19,10 @@ import { Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface InfoTooltipSource {
-  /** Kaynağın görünen adı (ör. "Harvard Business Review, 2024"). */
+  /** Kaynağın görünen adı / akademik künye (ör. "DuBois et al. (2011), ..."). */
   label: string;
-  /** Kaynağın URL'i. */
-  url: string;
+  /** Kaynağın URL'i. Opsiyonel — yoksa künye düz metin olarak render edilir. */
+  url?: string;
 }
 
 interface InfoTooltipProps {
@@ -107,17 +107,23 @@ export function InfoTooltip({
           {sources && sources.length > 0 && (
             <span className="mt-2 block border-t border-white/10 pt-2">
               <span className="block font-semibold text-slate-400">Kaynak</span>
-              {sources.map((s) => (
-                <a
-                  key={s.url}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 block truncate text-indigo-400 hover:text-indigo-300 hover:underline"
-                >
-                  {s.label}
-                </a>
-              ))}
+              {sources.map((s) =>
+                s.url ? (
+                  <a
+                    key={s.url}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 block text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >
+                    {s.label}
+                  </a>
+                ) : (
+                  <span key={s.label} className="mt-1 block text-slate-400">
+                    {s.label}
+                  </span>
+                ),
+              )}
             </span>
           )}
         </span>
