@@ -1,7 +1,8 @@
 import { X, CheckCircle2 } from 'lucide-react';
+import { InfoTooltip } from '@/components/atoms/InfoTooltip';
 
 const BEFORE = [
-  "Spreadsheet'ta kim kimle eşleşti takip etmek",
+  'Excel tablosunda kim kimle eşleşti takip etmek',
   "WhatsApp grubuna mentor duyurusu atıp beklemek",
   "Yanlış kişiyi eşleştirip çakışmaları çözmek",
   "Kim kaç görüşme yaptı bilmemek",
@@ -10,8 +11,8 @@ const BEFORE = [
 
 const AFTER = [
   'Bir tıkla DISC + sektör tabanlı akıllı eşleştirme',
-  'Toksik çiftler sistemin kendisi engeller',
-  'Yönetici paneli tüm programı tek ekranda gösterir',
+  'Çatışma riskli eşleşmeleri sistem otomatik engeller',
+  'Tüm eşleşmeler ve ilerleme tek ekranda',
   'Her eşleşmenin ilerleme takibi otomatik',
   'Veriyle desteklenen "neden çalıştı" raporları',
 ];
@@ -26,12 +27,31 @@ export function PainSection() {
             Tanıyor musunuz?
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-            Mentörlük programlarının{' '}
-            <span className="text-rose-400">%67&apos;si</span>
-            {' '}başladığı gibi bitmez.
+            Başarısız mentorlukların kökeninde çoğu zaman{' '}
+            <span className="text-rose-400">yanlış eşleşme</span>
+            {' '}vardır.
+            <InfoTooltip
+              className="ml-2"
+              label="Bu bulguların akademik kaynakları"
+              detail="Mentorluk araştırmalarında olumsuz deneyimlerin temel kategorilerinden biri 'ikili içindeki uyumsuzluk'tur — mentör ve mentinin değer, tutum ve tarz farkı. Eşleşmelerin önemli bir kısmı erken kopar; kısa veya kötü eşleşmeler menti için hiç mentorluk almamaktan daha kötü sonuç verebilir. Buna karşın ilgi ve uyuma göre yapılan eşleştirme, mentorluğun ölçülen etkisini küçükten ortaya (yaklaşık iki katına) çıkarabilir. (Bulgular ağırlıklı olarak gençlik ve akademik mentorluk literatüründendir.)"
+              sources={[
+                {
+                  label: 'DuBois et al. (2011), Psychological Science in the Public Interest 12(2):57-91',
+                  url: 'https://journals.sagepub.com/doi/abs/10.1177/1529100611414806',
+                },
+                {
+                  label: 'Eby & McManus (2004), Journal of Vocational Behavior 65:255-275',
+                  url: 'https://www.sciencedirect.com/science/article/abs/pii/S0001879103001143',
+                },
+                {
+                  label: 'Grossman & Rhodes (2002), American Journal of Community Psychology 30(2):199-219',
+                },
+              ]}
+            />
           </h2>
           <p className="mt-4 text-slate-400 max-w-xl mx-auto">
-            Sorun motivasyon eksikliği değil. Sorun, eşleştirmeyi elle yapıyor olmanız.
+            Sorun motivasyon değil. Araştırmalar, mentör-menti uyumuna göre yapılan eşleştirmenin
+            mentorluğun etkisini ikiye katlayabildiğini gösteriyor.
           </p>
         </div>
 

@@ -18,7 +18,7 @@ import { AdminCockpit }   from './_sections/AdminCockpit';
 export const metadata: Metadata = {
   title: 'MentiMentor — İnsan Kimyasıyla Akıllı Mentörlük',
   description:
-    'Dernekler, STK\'lar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
+    'Dernekler, vakıflar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
     'kapalı devre mentörlük platformu. Kurulum 10 dakika, sonsuza kadar ücretsiz.',
   openGraph: {
     title:       'MentiMentor — İnsan Kimyasıyla Akıllı Mentörlük',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card:        'summary_large_image',
     title:       'MentiMentor — Akıllı Mentörlük',
-    description: 'DISC mizaç tabanlı mentörlük platformu. Dernekler ve STK\'lar için.',
+    description: 'DISC mizaç tabanlı mentörlük platformu. Dernekler ve vakıflar için.',
   },
   robots: {
     index:  true,
