@@ -26,7 +26,7 @@ export function EngineSection() {
             bak.
           </h2>
           <p className="mt-4 text-slate-400 max-w-xl mx-auto">
-            İki boyutlu bilimsel skor: kim kiminle çalışır, kim çatışır?
+            İki boyutlu davranışsal skor: kim kiminle çalışır, kim çatışır?
           </p>
         </div>
 

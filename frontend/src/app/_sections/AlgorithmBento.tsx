@@ -174,7 +174,7 @@ function PsychometricBento() {
           <span className="text-sm font-semibold text-slate-300">Psikometrik Derinlik</span>
         </div>
         <p className="text-xs text-slate-500 leading-relaxed">
-          Bilimsel DISC mizaç motoru. Tamamlayıcı profiller güçlü, çakışanlar engellenir.
+          DISC davranış modeline dayalı mizaç motoru. Tamamlayıcı profiller güçlü, çakışanlar engellenir.
         </p>
       </div>
 
