@@ -52,7 +52,7 @@ export function HeroSection() {
 
         {/* Alt başlık */}
         <p className="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed text-balance">
-          Dernekler, STK&apos;lar ve üniversite kulüpleri için kapalı devre,{' '}
+          Dernekler, vakıflar ve üniversite kulüpleri için kapalı devre,{' '}
           <strong className="text-slate-200 font-semibold">DISC davranış modeline dayalı</strong>{' '}
           akıllı mentörlük altyapısı. Kurulum sadece 10 dakika,{' '}
           <strong className="text-slate-200 font-semibold">sonsuza kadar ücretsiz.</strong>
