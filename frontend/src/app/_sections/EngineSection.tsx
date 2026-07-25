@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Briefcase, Brain, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { InfoTooltip } from '@/components/atoms/InfoTooltip';
 
 const DISC_TYPES = [
   { dim: 'D', label: 'Öncü',      color: 'text-orange-400',  bg: 'bg-orange-500/10',  border: 'border-orange-500/20', desc: 'Kararlı, hızlı, sonuç odaklı' },
@@ -44,8 +45,23 @@ export function EngineSection() {
               </div>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Mentor ve mentinin sektör etiketleri Jaccard benzerliğiyle karşılaştırılır.
-              Ortak alan yoksa skor sıfır — güçlü alan örtüşmesi doğrudan transfer sağlar.
+              Mentör ve mentinin sektör/alan etiketlerinin ne kadar örtüştüğüne bakılır.
+              Ortak alan yoksa skor sıfır; güçlü örtüşme yüksek skor sağlar.
+              <InfoTooltip
+                className="ml-1.5"
+                label="Örtüşme skoru teknik olarak nasıl hesaplanır?"
+                detail="Teknik olarak bu, Jaccard benzerlik katsayısı ile hesaplanır. Jaccard, iki kümenin ortak eleman sayısını (kesişim), toplam benzersiz eleman sayısına (birleşim) böler ve 0 ile 1 arasında bir değer verir: 0 = hiç ortak etiket yok, 1 = etiketler tamamen aynı. Formül: J(A,B) = |A ∩ B| / |A ∪ B|. İlk kez Paul Jaccard tarafından 1901'de tanımlanmıştır."
+                sources={[
+                  {
+                    label: 'Jaccard index — Wikipedia',
+                    url: 'https://en.wikipedia.org/wiki/Jaccard_index',
+                  },
+                  {
+                    label: 'NVIDIA — Similarity in graphs: Jaccard',
+                    url: 'https://developer.nvidia.com/blog/similarity-in-graphs-jaccard-versus-the-overlap-coefficient/',
+                  },
+                ]}
+              />
             </p>
           </div>
 
@@ -56,7 +72,24 @@ export function EngineSection() {
               </div>
               <div>
                 <p className="text-2xl font-extrabold text-white">%40</p>
-                <p className="text-sm font-semibold text-violet-400">DISC Mizaç Uyumu</p>
+                <p className="text-sm font-semibold text-violet-400">
+                  DISC Mizaç Uyumu
+                  <InfoTooltip
+                    className="ml-1.5"
+                    label="Neden DISC?"
+                    detail="DISC, davranış tarzlarını dört boyutta tanımlayan bir modeldir: Dominance (Baskınlık), Influence (Etki), Steadiness (İstikrar), Conscientiousness (Titizlik). Temeli, psikolog William Moulton Marston'ın 1928 tarihli 'Emotions of Normal People' kitabına dayanır. DISC'i seçtik çünkü iş ve iletişim bağlamında basit, anlaşılır ve yaygın kullanılan bir çerçevedir; kişilerin nasıl iletişim kurmayı ve çalışmayı tercih ettiğini hızlıca ortak bir dile döker. DISC bir iletişim/tarz aracıdır — kişilik tanısı ya da performans tahmini aracı değildir; eşleştirmede yalnızca tarz uyumunu değerlendirmek için kullanılır."
+                    sources={[
+                      {
+                        label: 'DISC assessment — Wikipedia (Marston, 1928)',
+                        url: 'https://en.wikipedia.org/wiki/DISC_assessment',
+                      },
+                      {
+                        label: 'JobCannon — History of DISC assessment',
+                        url: 'https://jobcannon.io/blog/history-of-disc-assessment',
+                      },
+                    ]}
+                  />
+                </p>
               </div>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
@@ -83,6 +116,25 @@ export function EngineSection() {
           Belirli DISC kombinasyonları (örn. iki yüksek D profili) mentorluk bağlamında sistematik
           çatışma üretir. Bu çiftler algoritmik hard-gate ile eşleştirme havuzundan tamamen çıkarılır —
           skor düşürme değil, tam engelleme.
+          <InfoTooltip
+            className="ml-1.5"
+            label="İki baskın D profili neden engelleniyor?"
+            detail="DISC uygulama literatüründe iki yüksek-D (baskın) profilin, özellikle görev/kontrol bağlamında güç çatışması eğilimi gösterdiği yaygın olarak gözlenir: her iki taraf da yönetmek ve son kararı vermek ister, bu da işbirliği yerine güç mücadelesine dönüşebilir. Buna karşın tamamlayıcı profiller (örn. D + S) en uyumlu kombinasyonlardan biri sayılır. Bu kural bir garanti değil, uygulama gözlemine dayalı bir risk azaltma tercihidir ve sistem geri bildirimiyle güncellenir."
+            sources={[
+              {
+                label: 'Assessments 24x7 — DISC styles',
+                url: 'https://blog.assessments24x7.com/disc-styles/',
+              },
+              {
+                label: 'Crystal — DISC D+D relationship',
+                url: 'https://www.crystalknows.com/disc/d-d-relationship',
+              },
+              {
+                label: 'Crystal — DISC D+S relationship',
+                url: 'https://www.crystalknows.com/disc/d-s-relationship',
+              },
+            ]}
+          />
         </div>
 
         <div className="text-center">

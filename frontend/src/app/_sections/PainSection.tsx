@@ -1,4 +1,5 @@
 import { X, CheckCircle2 } from 'lucide-react';
+import { InfoTooltip } from '@/components/atoms/InfoTooltip';
 
 const BEFORE = [
   "Spreadsheet'ta kim kimle eşleşti takip etmek",
@@ -27,8 +28,23 @@ export function PainSection() {
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
             Mentörlük programlarının{' '}
-            <span className="text-rose-400">%67&apos;si</span>
-            {' '}başladığı gibi bitmez.
+            <span className="text-rose-400">büyük kısmı</span>
+            {' '}planlandığı gibi ilerlemez.
+            <InfoTooltip
+              className="ml-2"
+              label="Mentorluk programlarının neden başarısız olduğuna dair kaynaklar"
+              detail="Araştırmalar mentorluk programlarının çoğunlukla motivasyon eksikliğinden değil; yapısal nedenlerden — belirsiz hedefler, yanlış eşleştirme, sürekli geri bildirim eksikliği — başarısız olduğunu gösterir."
+              sources={[
+                {
+                  label: 'MentorGain — Why mentoring relationships fail',
+                  url: 'https://www.mentorgain.com/blog/why-mentoring-relationships-fail-in-organizations',
+                },
+                {
+                  label: 'Together Platform — Mentorship program mistakes',
+                  url: 'https://www.togetherplatform.com/blog/mentorship-program-mistakes',
+                },
+              ]}
+            />
           </h2>
           <p className="mt-4 text-slate-400 max-w-xl mx-auto">
             Sorun motivasyon eksikliği değil. Sorun, eşleştirmeyi elle yapıyor olmanız.
