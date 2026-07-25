@@ -74,7 +74,7 @@ export function HeroSection() {
           <Button asChild variant="outline" size="lg"
             className="h-12 px-8 text-base border-white/20 text-slate-300 bg-transparent hover:bg-white/5 hover:text-white hover:border-white/30"
           >
-            <Link href="#algorithm">Nasıl Çalışır?</Link>
+            <Link href="/metodoloji">Nasıl Çalışır?</Link>
           </Button>
         </div>
 
