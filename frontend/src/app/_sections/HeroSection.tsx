@@ -1,12 +1,6 @@
 import Link from 'next/link';
-import { ArrowRight, Shield, Zap, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const SOCIAL_PROOF = [
-  { icon: Users,  label: 'Aktif Kurum',   value: '120+' },
-  { icon: Zap,    label: 'Eşleşme',       value: '3.400+' },
-  { icon: Shield, label: 'Engellenen Toksik Eşleşme', value: '890+' },
-] as const;
 
 export function HeroSection() {
   return (
@@ -76,19 +70,6 @@ export function HeroSection() {
           >
             <Link href="/metodoloji">Nasıl Çalışır?</Link>
           </Button>
-        </div>
-
-        {/* Sosyal kanıt sayaçları */}
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
-          {SOCIAL_PROOF.map(({ icon: Icon, label, value }) => (
-            <div key={label} className="flex flex-col items-center gap-1">
-              <div className="flex items-center gap-1.5">
-                <Icon className="h-4 w-4 text-indigo-400" aria-hidden />
-                <span className="text-2xl font-extrabold text-white">{value}</span>
-              </div>
-              <span className="text-xs text-slate-500">{label}</span>
-            </div>
-          ))}
         </div>
       </div>
 
