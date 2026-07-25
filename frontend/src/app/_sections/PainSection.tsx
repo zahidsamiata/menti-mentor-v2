@@ -2,7 +2,7 @@ import { X, CheckCircle2 } from 'lucide-react';
 import { InfoTooltip } from '@/components/atoms/InfoTooltip';
 
 const BEFORE = [
-  "Spreadsheet'ta kim kimle eşleşti takip etmek",
+  'Excel tablosunda kim kimle eşleşti takip etmek',
   "WhatsApp grubuna mentor duyurusu atıp beklemek",
   "Yanlış kişiyi eşleştirip çakışmaları çözmek",
   "Kim kaç görüşme yaptı bilmemek",
@@ -11,8 +11,8 @@ const BEFORE = [
 
 const AFTER = [
   'Bir tıkla DISC + sektör tabanlı akıllı eşleştirme',
-  'Toksik çiftler sistemin kendisi engeller',
-  'Yönetici paneli tüm programı tek ekranda gösterir',
+  'Çatışma riskli eşleşmeleri sistem otomatik engeller',
+  'Tüm eşleşmeler ve ilerleme tek ekranda',
   'Her eşleşmenin ilerleme takibi otomatik',
   'Veriyle desteklenen "neden çalıştı" raporları',
 ];
