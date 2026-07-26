@@ -35,6 +35,18 @@ export interface CertTopicResult {
   passed: boolean;
 }
 
+/** STK admin: konu aç/kapat bilgisi. */
+export interface CertTopicInfo {
+  topic: string;
+  isRedLine: boolean;
+  variantCount: number;
+  enabled: boolean;
+}
+
+export interface CertTopicsResponse {
+  topics: CertTopicInfo[];
+}
+
 /** POST /api/scoring/certify yanıtı. */
 export interface CertResult {
   certScore: number;
