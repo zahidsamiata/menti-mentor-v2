@@ -64,4 +64,9 @@ export interface ProfileData {
   expectationCategories?: ExpectationCategory[];
   timeCommitment?:        TimeCommitment;
   interactionStyle?:      InteractionStyle;
+  // Opsiyonel veri toplama (UserProfile skorlama alanları — Aşama 1)
+  goals?:                 string[];
+  schools?:               string[];
+  companies?:             string[];
+  communities?:           string[];
 }

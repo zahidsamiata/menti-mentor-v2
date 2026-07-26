@@ -70,6 +70,13 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
   const [expectations,    setExpectations]    = useState<ExpectationCategory[]>([]);
   const [timeCommitment,  setTimeCommitment]  = useState<TimeCommitment | null>(null);
   const [interactionStyle, setInteractionStyle] = useState<InteractionStyle | null>(null);
+  // Opsiyonel bağlam verisi (virgülle ayrılmış serbest metin — boş bırakılabilir)
+  const [schoolsRaw,     setSchoolsRaw]     = useState('');
+  const [companiesRaw,   setCompaniesRaw]   = useState('');
+  const [communitiesRaw, setCommunitiesRaw] = useState('');
+
+  const parseList = (raw: string): string[] =>
+    raw.split(',').map((s) => s.trim()).filter(Boolean);
 
   const toggleSkill = (skill: string) =>
     setSkills((prev) =>
@@ -85,6 +92,9 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
 
   const handleSubmit = () => {
     if (!canSubmit) return;
+    const schools     = parseList(schoolsRaw);
+    const companies   = parseList(companiesRaw);
+    const communities = parseList(communitiesRaw);
     onComplete({
       sector,
       skills,
@@ -92,6 +102,12 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
       ...(role === 'MENTI' && expectations.length > 0 && { expectationCategories: expectations }),
       ...(role === 'MENTOR' && timeCommitment   && { timeCommitment  }),
       ...(role === 'MENTOR' && interactionStyle && { interactionStyle }),
+      // Menti'nin ilgi/becerileri aynı zamanda hedefleridir → goalTags
+      ...(role === 'MENTI' && skills.length > 0 && { goals: skills }),
+      // Opsiyonel bağlam verisi — yalnızca girilmişse gönder
+      ...(schools.length     > 0 && { schools }),
+      ...(companies.length   > 0 && { companies }),
+      ...(communities.length > 0 && { communities }),
     });
   };
 
@@ -273,6 +289,45 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
           </fieldset>
         </>
       )}
+
+      {/* ── Opsiyonel bağlam (okul / şirket / topluluk) ───────────────── */}
+      <fieldset>
+        <legend className="text-sm font-semibold text-foreground mb-1">
+          Bağlam{' '}
+          <span className="text-xs text-muted-foreground font-normal">
+            (isteğe bağlı — daha iyi eşleşme için, boş bırakabilirsin)
+          </span>
+        </legend>
+        <p className="text-xs text-muted-foreground mb-3">
+          Birden fazla değeri virgülle ayırabilirsin.
+        </p>
+        <div className="space-y-3">
+          <input
+            type="text"
+            value={schoolsRaw}
+            onChange={(e) => setSchoolsRaw(e.target.value)}
+            placeholder="Okul(lar) — ör. Boğaziçi Üniversitesi, ODTÜ"
+            aria-label="Okullar (isteğe bağlı, virgülle ayrılmış)"
+            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+          />
+          <input
+            type="text"
+            value={companiesRaw}
+            onChange={(e) => setCompaniesRaw(e.target.value)}
+            placeholder="Şirket(ler) — ör. Trendyol, Getir"
+            aria-label="Şirketler (isteğe bağlı, virgülle ayrılmış)"
+            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+          />
+          <input
+            type="text"
+            value={communitiesRaw}
+            onChange={(e) => setCommunitiesRaw(e.target.value)}
+            placeholder="Topluluk / dernek(ler) — ör. AIESEC, TEGV"
+            aria-label="Topluluklar (isteğe bağlı, virgülle ayrılmış)"
+            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+          />
+        </div>
+      </fieldset>
 
       {/* ── Hata ─────────────────────────────────────────────────────── */}
       {error && (
