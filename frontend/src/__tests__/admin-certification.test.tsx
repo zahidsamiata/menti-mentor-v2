@@ -1,25 +1,35 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import AdminCertificationPage from '@/app/(admin)/admin/certification/page';
 
-/** Paket E — STK admin: sertifika konularını aç/kapat. */
+/** STK admin: konu aç/kapat, red-line kilitli, eşik özeti. */
 
-let topicsState = [
-  { topic: 'gizlilik-guven', isRedLine: true, variantCount: 2, enabled: true },
-  { topic: 'aktif-dinleme', isRedLine: false, variantCount: 2, enabled: true },
-];
+type T = { topic: string; isRedLine: boolean; variantCount: number; enabled: boolean; locked: boolean };
+function overview(topics: T[]) {
+  const activeCount = topics.filter((t) => t.enabled).length;
+  return { topics, activeCount, requiredToPass: Math.ceil(activeCount * 0.8), minActiveTopics: 5, threshold: 0.8 };
+}
+
+// 6 açık konu (min 5 üstü): 1 red-line kilitli + 5 normal.
+function freshState() {
+  return overview([
+    { topic: 'gizlilik-guven', isRedLine: true, variantCount: 2, enabled: true, locked: true },
+    { topic: 'aktif-dinleme', isRedLine: false, variantCount: 2, enabled: true, locked: false },
+    { topic: 'sinir-koyma', isRedLine: false, variantCount: 2, enabled: true, locked: false },
+    { topic: 'beklentileri-hizalama', isRedLine: false, variantCount: 2, enabled: true, locked: false },
+    { topic: 'aktif-dinleme-2', isRedLine: false, variantCount: 2, enabled: true, locked: false },
+    { topic: 'kulturel-farkliliklara-saygi', isRedLine: false, variantCount: 2, enabled: true, locked: false },
+  ]);
+}
+
+let state = freshState();
 
 const apiMock = vi.fn(async (path: string, opts?: { method?: string; body?: { topic: string; enabled: boolean } }) => {
-  if (path === '/api/scoring/certification/topics' && (!opts || opts.method !== 'PATCH')) {
-    return { ok: true, data: { topics: topicsState } };
-  }
   if (path === '/api/scoring/certification/topics' && opts?.method === 'PATCH') {
-    topicsState = topicsState.map((t) =>
-      t.topic === opts.body!.topic ? { ...t, enabled: opts.body!.enabled } : t,
-    );
-    return { ok: true, data: { topics: topicsState } };
+    state = overview(state.topics.map((t) => (t.topic === opts.body!.topic ? { ...t, enabled: opts.body!.enabled } : t)));
+    return { ok: true, data: state };
   }
-  return { ok: false, error: { error: 'X' }, status: 500 };
+  return { ok: true, data: state };
 });
 
 vi.mock('@/hooks/useApiClient', () => ({ useApiClient: () => apiMock }));
@@ -28,26 +38,34 @@ vi.mock('@/providers/AuthProvider', () => ({
 }));
 
 describe('AdminCertificationPage', () => {
-  it('konuları listeler ve toggle ile kapatır', async () => {
+  beforeEach(() => {
+    state = freshState();
+    apiMock.mockClear();
+  });
+
+  it('eşik özetini gösterir; red-line kilitli, normal togglelanabilir', async () => {
     render(<AdminCertificationPage />);
+    await screen.findByText(/Şu an/);       // özet metni
+    expect(screen.getByText('Gizlilik & güven')).toBeInTheDocument();
 
-    // Konu başlıkları okunabilir etiketle görünür
-    await screen.findByText('Gizlilik & güven');
-    expect(screen.getByText('Aktif dinleme & yargılamama')).toBeInTheDocument();
-
-    // İki switch (aç/kapat) render edilir
     const switches = screen.getAllByRole('switch');
-    expect(switches.length).toBe(2);
-    expect(switches[0]).toHaveAttribute('aria-checked', 'true');
+    expect(switches.length).toBe(6);
+    expect(switches[0]).toBeDisabled();          // red-line kilitli (ilk = gizlilik-guven)
+    expect(switches[1]).not.toBeDisabled();      // normal, 6>min5 → togglelanabilir
+  });
 
-    // İlk konuyu kapat
-    fireEvent.click(switches[0]!);
-    await waitFor(() => {
-      expect(screen.getAllByRole('switch')[0]).toHaveAttribute('aria-checked', 'false');
-    });
-    expect(apiMock).toHaveBeenCalledWith(
-      '/api/scoring/certification/topics',
-      expect.objectContaining({ method: 'PATCH' }),
+  it('normal konuyu kapatır (PATCH çağrılır)', async () => {
+    render(<AdminCertificationPage />);
+    await screen.findByText(/Şu an/);
+
+    const switches = screen.getAllByRole('switch');
+    fireEvent.click(switches[1]!);
+
+    await waitFor(() =>
+      expect(apiMock).toHaveBeenCalledWith(
+        '/api/scoring/certification/topics',
+        expect.objectContaining({ method: 'PATCH' }),
+      ),
     );
   });
 });

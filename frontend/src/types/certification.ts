@@ -41,10 +41,16 @@ export interface CertTopicInfo {
   isRedLine: boolean;
   variantCount: number;
   enabled: boolean;
+  locked: boolean;   // red-line → kapatılamaz
 }
 
+/** Panel özeti — eşik backend'de hesaplanır, UI sadece gösterir. */
 export interface CertTopicsResponse {
   topics: CertTopicInfo[];
+  activeCount: number;
+  requiredToPass: number;
+  minActiveTopics: number;
+  threshold: number;
 }
 
 /** POST /api/scoring/certify yanıtı. */
