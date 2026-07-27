@@ -28,6 +28,7 @@ const ADVANCED_NAV = [
   { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
   { href: '/admin/questions',       label: 'Soru Yönetimi',   icon: '❓' },
   { href: '/admin/tags',            label: 'Etiket Yönetimi', icon: '🏷️' },
+  { href: '/admin/certification',   label: 'Sertifika Konuları', icon: '🎓' },
 ] as const;
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
