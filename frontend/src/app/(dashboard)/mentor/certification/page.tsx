@@ -131,6 +131,11 @@ export default function MentorCertificationPage() {
     setSubmitting(false);
     if (res.ok) {
       setResult(res.data);
+    } else if (res.error.error === 'COOLDOWN_ACTIVE') {
+      // 2 denemeden sonra bekleme — düşük baskılı, destekleyici mesaj.
+      setSubmitError('Şimdilik bir mola verelim. Kısa bir bekleme sonrası tekrar deneyebilirsin — acele yok.');
+    } else if (res.error.error === 'NO_ACTIVE_TOPICS') {
+      setSubmitError('Şu an açık sertifika konusu yok. Lütfen kurum yöneticinle iletişime geç.');
     } else {
       setSubmitError('Değerlendirme gönderilemedi. Lütfen tekrar deneyin.');
     }
