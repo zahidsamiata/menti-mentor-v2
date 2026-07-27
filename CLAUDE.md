@@ -29,6 +29,15 @@
 ## Belirsiz / Riskli Durumda
 - DUR ve kullanıcıya raporla. Tahmin yürüterek riskli adım atmak yasak.
 
+## Koşullu Paralellik — hızlan ama çakıştırma
+- Bir iş, gerçekten BAĞIMSIZ parçalara ayrılıyorsa (aynı dosyalara/duruma/repo-submodule'e dokunmayan
+  ve birbirinin çıktısına bağlı olmayan) → paralel alt-agent'larla yürüt, hızlandır.
+- Parçalar aynı dosyaya/repoya/submodule'e ya da birbirinin çıktısına bağımlıysa → SIRALI yürüt.
+  Özellikle şunlar HER ZAMAN sıralıdır: migration, merge, submodule pointer güncelleme, paylaşılan
+  servis/config dosyaları. Burada paralellik çakışma ve veri bozulması riski taşır.
+- Paralel başlatmadan ÖNCE parçaların gerçekten bağımsız olduğunu doğrula. Şüphede kalırsan sıralı git:
+  doğruluk ve güvenlik hızdan önce gelir.
+
 <!-- /çalışma-kuralları -->
 
 <!-- güvenlik-kuralları -->
