@@ -74,6 +74,42 @@
 
 <!-- /güvenlik-kuralları -->
 
+<!-- temiz-kod -->
+## Temiz Kod & Sürdürülebilirlik — kod yazarken UY
+
+> Bu proje uzun ömürlüdür. Kod, yıllar sonra başka biri açtığında (belki sen değil)
+> rahatça anlaşılıp güvenle geliştirilebilir olmalı. "Çalışıyor" yetmez; "anlaşılır ve
+> değiştirilebilir" olmalı.
+
+### İsimlendirme & yapı
+- Açık, niyet belli isimler kullan (`d`, `tmp`, `data2` değil). İsim, ne yaptığını anlatsın.
+- Tek sorumluluk: bir fonksiyon/dosya tek iş yapsın. Uzayan fonksiyonu böl.
+- Katman ayrımı: iş mantığı (service) ↔ HTTP (controller) ↔ UI (component) ↔ veri (Prisma)
+  karışmasın. Mantığı controller/component içine gömme; saf, test edilebilir fonksiyona çıkar.
+
+### Sabitler & tekrar
+- Sihirli sayı/dize YOK. Eşik, limit, süre gibi değerler tek bir config/const'ta toplanır
+  (örn. `CERT_CONFIG`). Aynı değer iki yerde elle yazılmaz.
+- DRY: aynı mantığı kopyalama; ortak yardımcıya al. Ama erken/aşırı soyutlama da yapma —
+  iki kez tekrar edince çıkar, bir kez için değil.
+
+### Yorumlar
+- Yorum "ne"yi değil "neden"i anlatır (kod zaten ne yaptığını söyler). Sıra dışı bir karar,
+  bir kısıt (Neon shadow-DB gibi) veya bir tuzak varsa yaz.
+- Ölü kod / yorum satırına alınmış kod bırakma — sil (git geçmişi zaten tutar).
+
+### Test edilebilirlik & bağımlılık
+- Çekirdek mantığı DB/HTTP'den arındırılmış saf fonksiyon yaz; birim testi kolaylaşır.
+- Yeni bağımlılık ekleme (gerçekten gerekmedikçe). Eklerken `npm audit` (güvenlik kuralı).
+
+### Stil & mimari kayıt
+- MEVCUT stile ve konvansiyonlara uy; kendi stilini dayatma. Yeni dosya, komşularına benzesin
+  (isimlendirme, yorum yoğunluğu, dosya düzeni).
+- Önemli/kalıcı bir mimari kararı (neden böyle yapıldı) CLAUDE.md'ye veya ilgili dosyanın
+  başına kısa not olarak düş; sonraki geliştirici tahmin etmesin.
+
+<!-- /temiz-kod -->
+
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer) - Token-Optimized Commands
 
