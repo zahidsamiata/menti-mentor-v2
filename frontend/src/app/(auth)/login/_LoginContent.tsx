@@ -22,9 +22,18 @@ export default function LoginContent() {
   const params = useSearchParams();
   const errorCode = params.get('error');
   const tenantSlug = params.get('tenant') ?? undefined;
+  // reset-password başarıyla tamamlanınca buraya yönlendirilir.
+  const resetDone = params.get('reset') === 'success';
 
   return (
     <>
+      {resetDone && (
+        <AlertMessage
+          type="success"
+          message="Şifreniz güncellendi. Yeni şifrenizle giriş yapabilirsiniz."
+          className="mb-4"
+        />
+      )}
       {errorCode && (
         <AlertMessage
           type="error"

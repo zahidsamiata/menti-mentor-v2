@@ -45,4 +45,19 @@ export const authApi = {
       body: { refreshToken },
       token: accessToken,
     }),
+
+  // Şifre sıfırlama e-postası tetikler. Backend, kullanıcı tespitini önlemek için
+  // e-posta kayıtlı olmasa da aynı generic mesajı döndürür.
+  forgotPassword: (email: string) =>
+    apiClient<{ message: string }>('/api/auth/forgot-password', {
+      method: 'POST',
+      body: { email },
+    }),
+
+  // E-postadaki token + yeni şifre ile şifreyi günceller.
+  resetPassword: (token: string, password: string) =>
+    apiClient<{ message: string }>('/api/auth/reset-password', {
+      method: 'POST',
+      body: { token, password },
+    }),
 };
