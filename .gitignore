@@ -16,7 +16,9 @@ out/
 .env
 .env.*
 !.env.example
-!.env.compose          # Şablon dosyası — gerçek değer içermez, commit edilebilir
+# .env.compose: şablon (gerçek değer içermez) — commit edilebilir.
+# Not: gitignore satır-içi yorum desteklemez; yorum ayrı satırda olmalı yoksa negasyon bozulur.
+!.env.compose
 !**/.env.example
 !**/.env.*.example
 
