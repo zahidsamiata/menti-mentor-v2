@@ -16,6 +16,7 @@ import { matchingApi, matchRequestApi } from '@/lib/api/matching';
 import { agreementsApi } from '@/lib/api/agreements';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
+import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
 import type { MentorListItem } from '@/types/matching';
 
 const DISC_COLORS: Record<string, string> = {
@@ -193,6 +194,9 @@ export default function MentiDashboardPage() {
       {/* Profil güvenilirliği + günün sorusu */}
       {user?.id && <DiscConfidenceWidget userId={user.id} />}
       {user?.id && <DailyQuestionWidget userId={user.id} />}
+
+      {/* Öğrenme Yolculuğu — DISC sonrası davet (menti sertifikaya girmez) */}
+      {!needsDiscTest && <LearningJourneyCard />}
 
       {/* Metrikler — sadece onaylı kullanıcılar için gerçek veri */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">

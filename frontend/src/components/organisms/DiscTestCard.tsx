@@ -21,6 +21,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { LikertScale } from '@/components/molecules/LikertScale';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { DiscNoPressureNote } from '@/components/molecules/DiscNoPressureNote';
 import {
   DISC_DIMENSION_COLORS,
   DISC_DIMENSION_LABELS,
@@ -152,6 +153,9 @@ export function DiscTestCard({
         question={question}
       />
 
+      {/* Baskısızlık mesajı — her soruda görünür (sınav değil, kendini keşfet) */}
+      <DiscNoPressureNote />
+
       {/* Soru kartı */}
       <div
         ref={cardRef}
@@ -160,8 +164,9 @@ export function DiscTestCard({
         aria-label={`Soru ${questionNumber}: ${question.text}`}
         className="rounded-2xl border border-border bg-card p-8 shadow-sm focus:outline-none"
       >
-        <p className="text-lg font-medium leading-relaxed text-foreground mb-8 min-h-[4rem]">
-          {question.text}
+        <p className="text-lg font-medium leading-relaxed text-foreground mb-2">{question.text}</p>
+        <p className="text-sm text-muted-foreground mb-8">
+          Bu sana ne kadar benziyor? Kendine en yakın olanı işaretle — sen nasıl birisin, birlikte keşfedelim.
         </p>
         <LikertScale value={selected} onChange={handleSelect} disabled={isSubmitting} />
       </div>
@@ -169,7 +174,7 @@ export function DiscTestCard({
       {error && <AlertMessage type="error" message={error} />}
 
       <p className="text-center text-xs text-muted-foreground">
-        Cevabınızı seçtiğinizde otomatik olarak ilerler
+        Kendine en yakın olanı seç — seçtiğinde kendiliğinden ilerler. Acele yok.
       </p>
     </div>
   );

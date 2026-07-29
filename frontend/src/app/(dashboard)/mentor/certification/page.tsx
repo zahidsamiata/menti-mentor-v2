@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
 import { Button } from '@/components/ui/button';
@@ -60,6 +61,8 @@ export default function MentorCertificationPage() {
   const [result, setResult]         = useState<CertResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  // 2 denemeden sonra bekleme (cooldown) — bu sırada öğrenme yolculuğuna davet ederiz.
+  const [cooldownActive, setCooldownActive] = useState(false);
 
   const loadQuestions = useCallback(async () => {
     setLoading(true);
@@ -127,12 +130,14 @@ export default function MentorCertificationPage() {
   async function submit() {
     setSubmitting(true);
     setSubmitError(null);
+    setCooldownActive(false);
     const res = await certificationApi.certify(api, firstAttempts);
     setSubmitting(false);
     if (res.ok) {
       setResult(res.data);
     } else if (res.error.error === 'COOLDOWN_ACTIVE') {
       // 2 denemeden sonra bekleme — düşük baskılı, destekleyici mesaj.
+      setCooldownActive(true);
       setSubmitError('Şimdilik bir mola verelim. Kısa bir bekleme sonrası tekrar deneyebilirsin — acele yok.');
     } else if (res.error.error === 'NO_ACTIVE_TOPICS') {
       setSubmitError('Şu an açık sertifika konusu yok. Lütfen kurum yöneticinle iletişime geç.');
@@ -302,6 +307,22 @@ export default function MentorCertificationPage() {
           )}
 
           {submitError && <AlertMessage type="error" message={submitError} />}
+
+          {/* Köprü: bekleme sırasında öğrenme yolculuğuna davet — kaldığın
+              mentorluk konularını sıcak senaryolarla pekiştirebilirsin. */}
+          {cooldownActive && (
+            <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold flex items-center gap-2">🚀 Bu arada: Öğrenme Yolculuğu</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Beklerken zorlandığın konuları sıcak, baskısız senaryolarla pekiştir. Sınav değil — sadece keşif.
+                </p>
+              </div>
+              <Button asChild size="sm" variant="outline">
+                <Link href="/learning-journey">Yolculuğa git →</Link>
+              </Button>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

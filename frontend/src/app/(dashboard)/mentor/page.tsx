@@ -16,6 +16,7 @@ import { matchingApi, mentorFilterApi } from '@/lib/api/matching';
 import { meetingsApi } from '@/lib/api/meetings';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
+import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
 import type { DiscType, MentorFilter } from '@/types/matching';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
@@ -136,13 +137,16 @@ export default function MentorDashboardPage() {
       {user?.id && <DiscConfidenceWidget userId={user.id} />}
       {user?.id && <DailyQuestionWidget userId={user.id} />}
 
-      {/* ── Sertifika akademisi ──────────────────────────────────────────────── */}
+      {/* ── Öğrenme Yolculuğu (sertifikadan ÖNCE — davetkâr, baskısız) ────────── */}
+      <LearningJourneyCard />
+
+      {/* ── Sertifika akademisi (yolculuktan sonra) ──────────────────────────── */}
       <Card className="border-primary/30 bg-primary/5">
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4">
           <div>
             <p className="text-sm font-semibold flex items-center gap-2">🎓 Mentör Sertifikası</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Gerçek mentorluk senaryolarıyla öğren, ilk-deneme oranın %80&apos;i geçince sertifikalı ol.
+              Öğrenme yolculuğunu tamamladıysan hazırsın: gerçek senaryolarla öğren, ilk-deneme oranın %80&apos;i geçince sertifikalı ol.
             </p>
           </div>
           <Button asChild size="sm">

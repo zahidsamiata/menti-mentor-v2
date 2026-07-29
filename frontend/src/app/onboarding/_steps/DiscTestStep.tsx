@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { DiscNoPressureNote } from '@/components/molecules/DiscNoPressureNote';
 import type { DiscAnswer, DiscQuestion } from '@/types/onboarding';
 
 // ─── Üst ilerleme çubuğu ──────────────────────────────────────────────────────
@@ -147,6 +148,9 @@ export function DiscTestStep({
     <div className="space-y-0">
       {/* İlerleme başlığı — sabit */}
       <ProgressHeader current={currentIndex + 1} total={total} percent={percent} />
+
+      {/* Baskısızlık mesajı — her adımda görünür (sınav değil, keşif) */}
+      <DiscNoPressureNote className="mb-5" />
 
       {/* Soru kartı — fade geçişi */}
       <div

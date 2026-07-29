@@ -26,9 +26,10 @@ const ADVANCED_NAV = [
   { href: '/admin/waiting-room',    label: 'Bekleme Odası',   icon: '⏳' },
   { href: '/admin/managers',        label: 'Yöneticiler',     icon: '🛡️' },
   { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
-  { href: '/admin/questions',       label: 'Soru Yönetimi',   icon: '❓' },
-  { href: '/admin/tags',            label: 'Etiket Yönetimi', icon: '🏷️' },
-  { href: '/admin/certification',   label: 'Sertifika Konuları', icon: '🎓' },
+  { href: '/admin/questions',        label: 'Soru Yönetimi',      icon: '❓' },
+  { href: '/admin/tags',             label: 'Etiket Yönetimi',    icon: '🏷️' },
+  { href: '/admin/certification',    label: 'Sertifika Konuları', icon: '🎓' },
+  { href: '/admin/learning-journey', label: 'Öğrenme Yolculuğu',  icon: '🚀' },
 ] as const;
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
