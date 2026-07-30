@@ -267,7 +267,11 @@ export default function PlatformDashboard() {
               </thead>
               <tbody>
                 {tenants.map((t) => (
-                  <tr key={t.id} className="border-t border-slate-800 hover:bg-slate-800/30">
+                  <tr
+                    key={t.id}
+                    onClick={() => router.push(`/platform/tenants/${t.id}`)}
+                    className="border-t border-slate-800 hover:bg-slate-800/30 cursor-pointer"
+                  >
                     <td className="px-4 py-3 text-white">{t.displayName ?? t.name}</td>
                     <td className="px-4 py-3 text-slate-400 font-mono text-xs">{t.slug}</td>
                     <td className="px-4 py-3">
@@ -284,12 +288,12 @@ export default function PlatformDashboard() {
                     <td className="px-4 py-3 text-slate-400">{t._count?.users ?? '—'}</td>
                     <td className="px-4 py-3">
                       {t.isActive ? (
-                        <button onClick={() => handleFreeze(t.id)}
+                        <button onClick={(e) => { e.stopPropagation(); void handleFreeze(t.id); }}
                           className="text-xs text-red-400 hover:text-red-300">
                           Dondur
                         </button>
                       ) : (
-                        <button onClick={() => handleActivate(t.id)}
+                        <button onClick={(e) => { e.stopPropagation(); void handleActivate(t.id); }}
                           className="text-xs text-green-400 hover:text-green-300">
                           Aktifleştir
                         </button>
