@@ -44,6 +44,8 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-menti_mentor}
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET zorunlu — min 32 karakter}
       PLATFORM_ADMIN_KEY: ${PLATFORM_ADMIN_KEY:?PLATFORM_ADMIN_KEY zorunlu}
+      # Platform admin giriş e-postası — tanımsızsa config.ts admin@platform.local'e düşer.
+      PLATFORM_ADMIN_EMAIL: ${PLATFORM_ADMIN_EMAIL:-admin@platform.local}
       PORT: 3000
       ALLOWED_ORIGINS: ${FRONTEND_URL:-http://localhost:3001}
       # Generic SMTP relay (Resend/Brevo) — backend emailService bunları okur.
