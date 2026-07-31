@@ -25,6 +25,7 @@ import { authApi }    from '@/lib/api/auth';
 import { buildTenantThemeVars } from '@/lib/branding';
 import { useAuth }    from '@/providers/AuthProvider';
 import { cn }         from '@/lib/utils';
+import { REGISTER_MESSAGES, resolveRegisterError } from '@/lib/registerMessages';
 import type { InvitationData } from '@/types/invitation';
 
 // ─── İlerleme Göstergesi ──────────────────────────────────────────────────────
@@ -207,7 +208,7 @@ export default function RegisterContent() {
     const role       = invitation?.role ?? 'MENTI';
 
     if (!tenantSlug) {
-      setSubmitErr('Davet bilgisi eksik. Lütfen davet linkinizi kullanarak kayıt olun.');
+      setSubmitErr(REGISTER_MESSAGES.MISSING_INVITE);
       return;
     }
 
@@ -220,7 +221,7 @@ export default function RegisterContent() {
 
     if (!regResult.ok) {
       setLoading(false);
-      setSubmitErr(regResult.error.message ?? 'Kayıt başarısız. Lütfen tekrar deneyin.');
+      setSubmitErr(resolveRegisterError(regResult.error));
       return;
     }
 
@@ -230,7 +231,7 @@ export default function RegisterContent() {
       router.push('/onboarding');
     } catch {
       setLoading(false);
-      setSubmitErr('Hesap oluşturuldu ancak otomatik giriş başarısız. Lütfen giriş yapın.');
+      setSubmitErr(REGISTER_MESSAGES.AUTOLOGIN_REDIRECT);
       router.push('/login');
     }
   }
