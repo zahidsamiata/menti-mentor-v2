@@ -24,7 +24,7 @@ function CopyButton({ text }: { text: string }) {
       onClick={() => void copy()}
       className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium border border-border bg-muted hover:bg-muted/80 transition-colors"
     >
-      {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" aria-hidden /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />}
+      {copied ? <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />}
       {copied ? 'Kopyalandı!' : 'Kopyala'}
     </button>
   );

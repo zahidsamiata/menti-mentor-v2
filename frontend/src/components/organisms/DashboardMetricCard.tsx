@@ -17,8 +17,8 @@ interface DashboardMetricCardProps {
 
 const COLOR_MAP: Record<NonNullable<DashboardMetricCardProps['color']>, string> = {
   brand:   'text-primary bg-primary/10',
-  success: 'text-emerald-700 bg-emerald-50',
-  warning: 'text-amber-700 bg-amber-50',
+  success: 'text-emerald-700 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-500/10',
+  warning: 'text-amber-700 bg-amber-50 dark:text-amber-400 dark:bg-amber-500/10',
   neutral: 'text-muted-foreground bg-muted',
 };
 

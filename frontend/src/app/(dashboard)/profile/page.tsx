@@ -355,7 +355,7 @@ export default function ProfilePage() {
         <p className="text-sm text-destructive text-center" role="alert">{saveError}</p>
       )}
       {saved && (
-        <p className="text-sm text-green-600 text-center font-medium" role="status">
+        <p className="text-sm text-emerald-600 dark:text-emerald-400 text-center font-medium" role="status">
           Profil başarıyla kaydedildi.
         </p>
       )}

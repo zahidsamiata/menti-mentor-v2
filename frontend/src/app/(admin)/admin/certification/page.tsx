@@ -111,7 +111,7 @@ export default function AdminCertificationPage() {
                       <CardTitle className="text-sm flex items-center gap-2 flex-wrap">
                         {label(t.topic)}
                         {t.isRedLine && (
-                          <Badge className="bg-red-100 text-red-800 border border-red-300 text-[10px]">
+                          <Badge className="bg-destructive/10 text-destructive border border-destructive/30 text-[10px]">
                             Kritik · kilitli
                           </Badge>
                         )}
@@ -132,7 +132,7 @@ export default function AdminCertificationPage() {
                       disabled={disableToggle}
                       onClick={() => toggle(t.topic, !t.enabled)}
                       className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                        t.enabled ? 'bg-green-500' : 'bg-muted-foreground/40'
+                        t.enabled ? 'bg-emerald-500 dark:bg-green-500' : 'bg-muted-foreground/40'
                       }`}
                     >
                       <span

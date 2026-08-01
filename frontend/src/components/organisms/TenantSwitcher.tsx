@@ -79,27 +79,27 @@ export default function TenantSwitcher({
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex w-full items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-left transition-colors duration-150 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1"
+        className="flex w-full items-center gap-3 rounded-xl border border-border bg-card px-3 py-2.5 text-left transition-colors duration-150 hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
       >
         <TenantAvatar name={activeMembership.name} logoUrl={activeMembership.logoUrl} />
         <div className="min-w-0 flex-1">
-          <div className="truncate text-sm font-semibold text-slate-800">
+          <div className="truncate text-sm font-semibold text-foreground">
             {activeMembership.name}
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-slate-400">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <span>{ROLE_LABEL[activeMembership.role]}</span>
             {activeMembership.isCertified && (
               <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
             )}
           </div>
         </div>
-        <ChevronsUpDown className="h-4 w-4 shrink-0 text-slate-400" />
+        <ChevronsUpDown className="h-4 w-4 shrink-0 text-muted-foreground" />
       </button>
 
       {open && (
-        <div className="absolute left-0 right-0 z-50 mt-2 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
+        <div className="absolute left-0 right-0 z-50 mt-2 overflow-hidden rounded-xl border border-border bg-card shadow-xl">
           <div className="px-3 py-2">
-            <p className="text-[11px] font-medium uppercase tracking-wide text-slate-400">
+            <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
               Kurumların
             </p>
           </div>
@@ -113,7 +113,7 @@ export default function TenantSwitcher({
                   type="button"
                   onClick={() => handleSwitch(membership.tenantId)}
                   className={`flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors duration-150 ${
-                    isActive ? 'bg-indigo-50' : 'hover:bg-slate-50'
+                    isActive ? 'bg-primary/10' : 'hover:bg-muted'
                   }`}
                 >
                   <TenantAvatar
@@ -122,27 +122,27 @@ export default function TenantSwitcher({
                     small
                   />
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm font-medium text-slate-800">
+                    <div className="truncate text-sm font-medium text-foreground">
                       {membership.name}
                     </div>
-                    <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <span>{ROLE_LABEL[membership.role]}</span>
                       {membership.isCertified && (
-                        <span className="inline-flex items-center gap-0.5 rounded bg-emerald-50 px-1 text-[10px] font-medium text-emerald-600">
+                        <span className="inline-flex items-center gap-0.5 rounded bg-emerald-50 px-1 text-[10px] font-medium text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
                           <BadgeCheck className="h-3 w-3" /> Sertifikalı
                         </span>
                       )}
                     </div>
                   </div>
                   {isActive && (
-                    <Check className="h-4 w-4 shrink-0 text-indigo-600" />
+                    <Check className="h-4 w-4 shrink-0 text-primary" />
                   )}
                 </button>
               );
             })}
           </div>
 
-          <div className="border-t border-slate-100 p-1.5">
+          <div className="border-t border-border p-1.5">
             {onAddTenant && (
               <button
                 type="button"
@@ -150,9 +150,9 @@ export default function TenantSwitcher({
                   onAddTenant();
                   setOpen(false);
                 }}
-                className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-slate-600 transition-colors duration-150 hover:bg-slate-50"
+                className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors duration-150 hover:bg-muted"
               >
-                <span className="flex h-7 w-7 items-center justify-center rounded-md border border-dashed border-slate-300">
+                <span className="flex h-7 w-7 items-center justify-center rounded-md border border-dashed border-border">
                   <Plus className="h-4 w-4" />
                 </span>
                 Yeni kuruma katıl
@@ -162,7 +162,7 @@ export default function TenantSwitcher({
               <button
                 type="button"
                 onClick={onSignOut}
-                className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-slate-500 transition-colors duration-150 hover:bg-rose-50 hover:text-rose-600"
+                className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors duration-150 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
               >
                 <span className="flex h-7 w-7 items-center justify-center">
                   <LogOut className="h-4 w-4" />

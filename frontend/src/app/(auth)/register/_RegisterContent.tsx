@@ -385,7 +385,7 @@ export default function RegisterContent() {
 
           {/* Eşleşme onayı */}
           {confirm.length > 0 && password === confirm && (
-            <p className="flex items-center gap-1 text-xs text-emerald-600 -mt-2">
+            <p className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 -mt-2">
               <CheckCircle2 className="h-3.5 w-3.5 shrink-0" aria-hidden />
               Şifreler eşleşiyor
             </p>

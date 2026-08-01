@@ -54,7 +54,7 @@ export default function ManagersPage() {
               {data.items.length > 1 && (
                 <button
                   onClick={() => handleDemote(admin.id, admin.fullName)}
-                  className="text-xs text-red-500 hover:text-red-600 transition-colors"
+                  className="text-xs text-destructive hover:text-destructive/80 transition-colors"
                 >
                   Yöneticilikten çıkar
                 </button>

@@ -339,7 +339,7 @@ export default function MentorDashboardPage() {
                   {filterSaving ? 'Kaydediliyor…' : 'Filtreleri Kaydet'}
                 </Button>
                 {filterSaved && (
-                  <span className="text-xs text-green-600">✓ Kaydedildi</span>
+                  <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>
                 )}
               </div>
             </>
