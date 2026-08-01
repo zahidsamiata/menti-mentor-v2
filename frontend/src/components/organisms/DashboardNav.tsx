@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
+import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 const NAV_BY_ROLE: Record<string, { href: string; label: string; icon: string }[]> = {
@@ -50,6 +51,9 @@ export function DashboardNav() {
             </Link>
           );
         })}
+        <div className="ml-auto shrink-0 pl-2">
+          <ThemeToggle />
+        </div>
       </nav>
     </header>
   );
