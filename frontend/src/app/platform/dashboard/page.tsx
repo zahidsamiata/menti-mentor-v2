@@ -20,6 +20,7 @@ import {
   type SuspicionReport,
   type SystemLog,
 } from '@/lib/api/platform';
+import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 
 type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'logs';
 
@@ -117,12 +118,15 @@ export default function PlatformDashboard() {
       {/* Header */}
       <header className="border-b border-border px-6 py-4 flex items-center justify-between">
         <h1 className="text-lg font-bold text-foreground">MentiMentor Platform Yönetimi</h1>
-        <button
-          onClick={() => { void platformLogout().finally(() => router.push('/platform/login')); }}
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Çıkış
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={() => { void platformLogout().finally(() => router.push('/platform/login')); }}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Çıkış
+          </button>
+        </div>
       </header>
 
       {/* Tabs */}

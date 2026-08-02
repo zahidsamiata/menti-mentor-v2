@@ -13,6 +13,7 @@ import { LogOut } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
+import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 // Ana sekmeler — kulüp başkanının her girişte kullandığı işlevler
@@ -72,6 +73,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <div className="flex h-14 items-center gap-2 px-4 border-b border-border">
           {tenant && <TenantLogo tenant={tenant} size={28} />}
           <span className="text-sm font-semibold truncate">{tenant?.displayName ?? 'Admin'}</span>
+          <div className="ml-auto shrink-0">
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Navigasyon */}
