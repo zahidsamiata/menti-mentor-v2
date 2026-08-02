@@ -15,6 +15,8 @@ import type {
   PendingTagsResponse,
   TagActionResponse,
   MergeTagResponse,
+  AdminMatchesResponse,
+  CertResultsResponse,
 } from '@/types/admin';
 import type { RequestOptions } from './client';
 
@@ -59,6 +61,22 @@ export const adminApi = {
       method: 'POST',
       body: { feedbackNote },
     }),
+
+  // ── Eşleşmeler (A1) ───────────────────────────────────────────────────────
+  listMatches: (api: BoundClient, params: { status?: string; page?: number } = {}) => {
+    const qs = new URLSearchParams();
+    if (params.status) qs.set('status', params.status);
+    if (params.page) qs.set('page', String(params.page));
+    return api<AdminMatchesResponse>(`/api/admin/matches?${qs.toString()}`);
+  },
+
+  // ── Sertifika sonuçları (A4) ──────────────────────────────────────────────
+  listCertResults: (api: BoundClient, params: { status?: string; page?: number } = {}) => {
+    const qs = new URLSearchParams();
+    if (params.status) qs.set('status', params.status);
+    if (params.page) qs.set('page', String(params.page));
+    return api<CertResultsResponse>(`/api/admin/mentors/certification-results?${qs.toString()}`);
+  },
 
   // ── Koçluk Önerileri ────────────────────────────────────────────────────────
   getCoachingSuggestions: (api: BoundClient, userId: string) =>

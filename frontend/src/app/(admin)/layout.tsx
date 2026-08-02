@@ -24,6 +24,11 @@ const PRIMARY_NAV = [
 
 // Gelişmiş — nadir kullanılan, varsayılan olarak daraltılmış
 const ADVANCED_NAV = [
+  { href: '/admin/mentor-havuzu',   label: 'Mentör Havuzu',   icon: '👥' },
+  { href: '/admin/menti-havuzu',    label: 'Menti Havuzu',    icon: '👫' },
+  { href: '/admin/eslesmeler',      label: 'Eşleşmeler',      icon: '🔗' },
+  { href: '/admin/sertifika-sonuclari', label: 'Sertifika Sonuç', icon: '📜' },
+  { href: '/admin/branding',        label: 'Marka',           icon: '🎨' },
   { href: '/admin/waiting-room',    label: 'Bekleme Odası',   icon: '⏳' },
   { href: '/admin/managers',        label: 'Yöneticiler',     icon: '🛡️' },
   { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
