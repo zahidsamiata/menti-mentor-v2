@@ -11,9 +11,11 @@ import type {
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
 export const matchingApi = {
-  // Menti için: tenant içindeki aktif mentorları listele (SADECE ONAYLANAN kullanıcılar çağırmalı)
+  // Menti için: tenant içindeki aktif mentorları listele (SADECE ONAYLANAN kullanıcılar çağırmalı).
+  // /api/users artık sayfalı (varsayılan 50); menti-tarama tam listeyi beklediğinden max sayfa
+  // boyutu (100) istenir. 100+ mentörlü tenant'ta gerçek sayfalama/arama UX'i gerekir (follow-up).
   listMentors: (api: BoundClient): Promise<ApiResult<MentorsListResponse>> =>
-    api<MentorsListResponse>('/api/users?role=MENTOR&isActive=true'),
+    api<MentorsListResponse>('/api/users?role=MENTOR&isActive=true&pageSize=100'),
 
   // PENDING menti için: PII içermeyen mentor sayısı (KVKK — isim/e-posta gönderilmez)
   countMentors: (api: BoundClient): Promise<ApiResult<{ count: number }>> =>
