@@ -15,6 +15,24 @@ import type { ApiError, ApiResult } from '@/types/api';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
+/**
+ * Doğrulama (Zod) hatalarında backend `message` alanı GÖNDERMEZ; yalnızca
+ * `details` (flatten: { formErrors, fieldErrors }) döner. Bu durumda details'teki
+ * (zaten Türkçe) ilk anlamlı mesajı `message`'a taşırız — böylece tüm çağıranlar
+ * `error.message` üzerinden generic "Hata" yerine anlamlı açıklama görür.
+ * GÜVENLİK: yalnızca Zod'un kullanıcı-dostu alan mesajları yüzeye çıkar; stack/DB/iç detay YOK.
+ */
+function withValidationMessage(err: ApiError): ApiError {
+  if (err.message) return err;
+  const d = err.details as unknown as
+    | { formErrors?: string[]; fieldErrors?: Record<string, string[]> }
+    | undefined;
+  const fromField = d?.fieldErrors ? Object.values(d.fieldErrors).flat().find(Boolean) : undefined;
+  const fromForm = d?.formErrors?.find(Boolean);
+  const msg = fromField ?? fromForm;
+  return msg ? { ...err, message: msg } : err;
+}
+
 export interface RequestOptions {
   method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT';
   body?: unknown;
@@ -76,7 +94,7 @@ async function executeRequest<T>(
 
     const json = await response.json() as T | ApiError;
 
-    if (!response.ok) return { ok: false, error: json as ApiError, status: response.status };
+    if (!response.ok) return { ok: false, error: withValidationMessage(json as ApiError), status: response.status };
     return { ok: true, data: json as T };
   } catch {
     return { ok: false, error: { error: 'NETWORK_ERROR', message: 'Sunucuya ulaşılamıyor.' }, status: 0 };
