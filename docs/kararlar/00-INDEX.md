@@ -29,7 +29,7 @@ docs/
 | `03-psikometri-ve-algoritma.md` | DISC/OCEAN, arketipler, eşleşme formülü, SJT, sertifikasyon | Eşleştirme/skorlama işi |
 | `04-guvenlik-ve-kvkk.md` | Tenant izolasyonu, IDOR, P0/P1 riskler, KVKK, sunucu güvenliği | Güvenlik/KVKK işi |
 | `05-ozellikler-ve-paneller.md` | Paneller, admin akışları, takvim/feedback, sertifika | Özellik/panel işi |
-| `06-tasarim-ux.md` | Tema, landing, tipografi, onboarding, UX | Tasarım/UX işi — ⚠️ **EKSİK, eklenecek** |
+| `06-tasarim-ux.md` | Tema, landing, tipografi, onboarding, UX | Tasarım/UX işi |
 | `07-calisma-tarzi.md` | Prompt felsefesi, DevSecOps şablonu, kurallar | Her prompt öncesi |
 | `08-acik-sorular.md` | Karara bağlanmamışlar (yaş, veri sorumlusu vb.) | Karar gerektiğinde |
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
