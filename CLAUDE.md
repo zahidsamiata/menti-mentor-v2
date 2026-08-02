@@ -1,6 +1,12 @@
 <!-- çalışma-kuralları -->
 # Çalışma Kuralları (her oturumda geçerli)
 
+## 📁 Proje Hafızası — nereye bakılır
+- Güncel durum + tam resim: PROJECT_STATUS.md
+- Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
+- Geçmiş raporlar: docs/raporlar/
+- Yeni bir işe başlarken: önce docs/kararlar/09-DURUM.md oku (nerede kaldık).
+
 ## Push Öncesi — ZORUNLU
 - **Her push öncesi `npm run verify` koş.** Yeşil değilse push yok.
 - verify = CI ile birebir aynı: backend tsc + tsc-test + eslint + frontend tsc + vitest + build + entegrasyon testleri.
@@ -25,6 +31,12 @@
 
 ## Migration Kuralı
 - Neon shadow-DB sorunu: `IF NOT EXISTS` SQL + `db execute` + `migrate resolve`. `db push --accept-data-loss` YASAK.
+
+## ⚠️ CANLI = LOKAL AYNI DB (kritik)
+- Canlı ve lokal AYNI Neon DB'sini paylaşıyor (ep-fancy-tooth-ab4u5xhr).
+- Lokalde DB'ye yazmak = canlıyı anında etkilemek. Seed/migration/DB işleminde onay al.
+- Tehlikeli seed.ts / npm run seed / prisma db seed VERİ SİLER — asla çalıştırma.
+  Güvenli: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs.
 
 ## Belirsiz / Riskli Durumda
 - DUR ve kullanıcıya raporla. Tahmin yürüterek riskli adım atmak yasak.
