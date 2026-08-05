@@ -17,6 +17,9 @@ import type {
   MergeTagResponse,
   AdminMatchesResponse,
   CertResultsResponse,
+  HealthMetricsData,
+  NudgeKind,
+  NudgeResponse,
 } from '@/types/admin';
 import type { RequestOptions } from './client';
 
@@ -26,6 +29,13 @@ export const adminApi = {
   // ── KPI ───────────────────────────────────────────────────────────────────
   getKpi: (api: BoundClient): Promise<ApiResult<KpiData>> =>
     api<KpiData>('/api/admin/kpi'),
+
+  // ── Program Sağlığı / Retention (drill-down + dürtme) ──────────────────────
+  getHealthMetrics: (api: BoundClient): Promise<ApiResult<HealthMetricsData>> =>
+    api<HealthMetricsData>('/api/admin/health-metrics'),
+
+  nudgeUser: (api: BoundClient, userId: string, kind: NudgeKind = 'GENERIC'): Promise<ApiResult<NudgeResponse>> =>
+    api<NudgeResponse>(`/api/admin/users/${userId}/nudge`, { method: 'POST', body: { kind } }),
 
   // ── Kullanıcı Yönetimi ────────────────────────────────────────────────────
   listUsers: (api: BoundClient, params: { approvalStatus?: string; role?: string; page?: number } = {}) => {

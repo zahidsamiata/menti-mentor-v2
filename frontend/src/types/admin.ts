@@ -104,6 +104,39 @@ export interface KpiData {
   };
 }
 
+// ─── Program Sağlığı / Retention ("kimse kaynıyor mu") — drill-down ──────────
+
+export interface HealthMetricMember {
+  id: string;
+  fullName: string;
+  avatarUrl?: string | null;
+  role?: string;
+  lastLoginAt?: string | null;
+  createdAt?: string;
+}
+
+export interface DeadMatchItem {
+  optInId: string;
+  mentorId: string;
+  mentiId: string;
+  mentorName: string;
+  mentiName: string;
+  since: string;
+}
+
+export interface HealthMetricsData {
+  tenantId: string;
+  generatedAt: string;
+  thresholds: { passiveDays: number; staleMatchDays: number };
+  supplyDemand: { mentors: number; mentis: number; ratio: number | null };
+  mentorlessMenti: { count: number; items: HealthMetricMember[] };
+  deadMatches: { count: number; items: DeadMatchItem[] };
+  passiveMembers: { count: number; items: HealthMetricMember[] };
+}
+
+export type NudgeKind = 'PASSIVE' | 'DEAD_MATCH' | 'GENERIC';
+export interface NudgeResponse { ok: boolean; targetUserId: string; sentAt: string }
+
 // ─── Düzeltme notu için önceden tanımlı mesajlar ─────────────────────────────
 
 export const CORRECTION_NOTE_PRESETS = [
