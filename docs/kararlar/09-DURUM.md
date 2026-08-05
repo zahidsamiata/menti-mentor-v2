@@ -1,21 +1,32 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-02 (platform admin turu: KVKK audit + UserReport + sistem sağlığı) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-05 (MERGE TURU TAMAMLANDI — tüm birikim main'de/canlıda) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+## 🚀 MERGE TURU TAMAMLANDI (2026-08-05)
+**Biriken TÜM iş iki repoda main'e merge edildi; iki main CI de YEŞİL. Bekleyen birikim = SIFIR.**
+- **Backend** (menti-mentor) PR #26 → main. Yeni main HEAD **`dacc171`** (merge-commit). Main CI ✅.
+- **Çatı** (menti-mentor-v2) PR #32 → main. Yeni main HEAD **`5dfe539`**; backend pointer **`a0e1a69`** (getUser IDOR fix dahil, canlıda). Main CI ✅.
+- **getUser IDOR fix** (`a0e1a69`): ham DISC vektörü/PII yalnızca self/admin — tenant-içi sızıntı kapandı.
+- **PR #28 incelendi:** iyi huylu bakım işi (backend pointer→`b313601` + `PLATFORM_ADMIN_EMAIL` env passthrough), ürün sahibinin kendi hesabından; `a0e1a69` onu kapsıyor → **iş/veri kaybı yok, süreç ihlali yok**.
+- **Çatı merge yöntemi:** rebase, commit'lenmemiş `PROJECT_STATUS.md` yüzünden engellendi → **merge** ile çözüldü (tek pointer çakışması `a0e1a69` tutularak; force-push yok; `PROJECT_STATUS.md`'ye dokunulmadı).
+- **⚠️ Foto volume (AÇIK — ürün sahibi doğrulamalı):** merge autodeploy'u tetikledi. Dokploy'da `UPLOAD_DIR=/app/uploads` + `/app/uploads` kalıcı volume aktifleşmeli. Panel erişimi olmadığından doğrulanamadı. Doğrulama: foto yükle → redeploy → **duruyor mu**. Talimat: `docs/kararlar/dokploy-foto-volume-talimati.md`. Foto sorunu merge'i geri aldırmaz, ayrı ele alınır (uid 1001 yazma izni olabilir).
+
+**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy) · (2) **login brute-force rate-limit** (PR #27 kalanı, canlı-öncesi) · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
 
 ## 🧭 SON DURUM ÖZETİ (DEVİR)
-**Bitenler (bu döneme kadar, hepsi commit'li, MERGE EDİLMEDİ):** güvenlik (2 IDOR + timezone) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
+**Bitenler (hepsi MERGE EDİLDİ — main'de/canlıda):** güvenlik (2 IDOR + timezone + **getUser IDOR fix**) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
 
 **4-rol metodolojisi (strateji→kıyas→aksiyon):** STK yönetici ✅ (strateji+kıyas+aksiyon TAMAM) · **Platform admin ✅ (strateji+kıyas+aksiyon TAMAM)** · Mentör ⬜ · Menti ⬜.
 
-**Sıradakiler:** (1) **MERGE TURU** — push + CI yeşil + submodule pointer + Dokploy `UPLOAD_DIR`/volume (merge kararı Zahid'de) · (2) mentör/menti mevcut-kıyas · (3) hayalet-mod / ön-tanımlı davet turu.
+**Sıradakiler:** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy) · (2) **login rate-limit** (PR #27 kalanı) · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti kıyas · (6) hayalet-mod/davet turu.
 
 **🔴 KIRMIZI KURALLAR:** Canlı = lokal aynı Neon → DB işleminde onay al · main'e merge = canlıya deploy (autodeploy açık) → merge kararı Zahid'de · tehlikeli seed asla · PR aç merge etme · submodule sırası: backend push → çatı pointer → çatı push (ara commit yok).
 
 ## ⚡ TEK BAKIŞTA
 - **Canlı:** sivilkapasite.org ayakta (Dokploy). Mail (Resend) çalışıyor.
 - **DB:** Canlı = lokal aynı Neon. DISC soruları (20) + öğrenme aşamaları (13) yüklendi. **`lastLoginAt` alanı eklendi (migration uygulandı).**
-- **Açık PR'lar:** Hiçbiri merge edilmedi. Çok sayıda iş PR/commit'lerde bekliyor (foto + retention turu dahil).
-- **Bugün kapandı:** 2 IDOR açığı + timezone bug + fotoğraf altyapısı + STK yönetici retention turu + **Platform admin turu (KVKK audit + UserReport şikayet + otomatik tespit + sistem sağlığı)**.
-- **Sıradaki (bkz. 10 güncel öncelik kuyruğu):** **MERGE TURU (push+CI+pointer, Dokploy foto volume)** → mentör/menti mevcut-kıyas → kart+sayfalama tasarımı → hayalet-mod/davet.
+- **Açık PR'lar:** #26 + #32 MERGE EDİLDİ (2026-08-05). Backend main `dacc171`, çatı main `5dfe539`. Bekleyen birikim = SIFIR. (#27 login rate-limit hâlâ açık.)
+- **Bugün kapandı:** **MERGE TURU** — tüm birikim (güvenlik+foto+retention+platform admin+getUser IDOR fix) main'de/canlıda, iki main CI yeşil.
+- **Sıradaki:** foto volume doğrulama (Dokploy) → login rate-limit → kapsamlı güvenlik denetimi → dijital ayak izi temizliği → mentör/menti kıyas.
 - **Açık kararlar:** tema DISC renk (light) + kart DISC gösterim biçimi + foto ne zaman zorunlu + **otomatik-nudge KVKK/rıza** (bkz. 08).
 
 ## ✅ SON YAPILANLAR (2026-08-02 — PLATFORM ADMIN TURU: audit + şikayet + sağlık)
