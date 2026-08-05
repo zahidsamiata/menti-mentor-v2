@@ -1,13 +1,40 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-02 (geç oturum: güvenlik + foto + STK yönetici retention/aktivite turu) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-02 (platform admin turu: KVKK audit + UserReport + sistem sağlığı) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+## 🧭 SON DURUM ÖZETİ (DEVİR)
+**Bitenler (bu döneme kadar, hepsi commit'li, MERGE EDİLMEDİ):** güvenlik (2 IDOR + timezone) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
+
+**4-rol metodolojisi (strateji→kıyas→aksiyon):** STK yönetici ✅ (strateji+kıyas+aksiyon TAMAM) · **Platform admin ✅ (strateji+kıyas+aksiyon TAMAM)** · Mentör ⬜ · Menti ⬜.
+
+**Sıradakiler:** (1) **MERGE TURU** — push + CI yeşil + submodule pointer + Dokploy `UPLOAD_DIR`/volume (merge kararı Zahid'de) · (2) mentör/menti mevcut-kıyas · (3) hayalet-mod / ön-tanımlı davet turu.
+
+**🔴 KIRMIZI KURALLAR:** Canlı = lokal aynı Neon → DB işleminde onay al · main'e merge = canlıya deploy (autodeploy açık) → merge kararı Zahid'de · tehlikeli seed asla · PR aç merge etme · submodule sırası: backend push → çatı pointer → çatı push (ara commit yok).
 
 ## ⚡ TEK BAKIŞTA
 - **Canlı:** sivilkapasite.org ayakta (Dokploy). Mail (Resend) çalışıyor.
 - **DB:** Canlı = lokal aynı Neon. DISC soruları (20) + öğrenme aşamaları (13) yüklendi. **`lastLoginAt` alanı eklendi (migration uygulandı).**
 - **Açık PR'lar:** Hiçbiri merge edilmedi. Çok sayıda iş PR/commit'lerde bekliyor (foto + retention turu dahil).
-- **Bugün kapandı:** 2 IDOR açığı + timezone bug + fotoğraf altyapısı + **STK yönetici retention/aktivite turu (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down)**.
-- **Sıradaki (bkz. 10 güncel öncelik kuyruğu):** MERGE TURU (+ Dokploy foto volume) → profil-düzenleme keşfi → kart+sayfalama tasarımı → **PLATFORM ADMIN keşfi** (lastLoginAt'i o da kullanacak).
+- **Bugün kapandı:** 2 IDOR açığı + timezone bug + fotoğraf altyapısı + STK yönetici retention turu + **Platform admin turu (KVKK audit + UserReport şikayet + otomatik tespit + sistem sağlığı)**.
+- **Sıradaki (bkz. 10 güncel öncelik kuyruğu):** **MERGE TURU (push+CI+pointer, Dokploy foto volume)** → mentör/menti mevcut-kıyas → kart+sayfalama tasarımı → hayalet-mod/davet.
 - **Açık kararlar:** tema DISC renk (light) + kart DISC gösterim biçimi + foto ne zaman zorunlu + **otomatik-nudge KVKK/rıza** (bkz. 08).
+
+## ✅ SON YAPILANLAR (2026-08-02 — PLATFORM ADMIN TURU: audit + şikayet + sağlık)
+> Hepsi commit'li, **HİÇBİRİ merge edilmedi** (çatı `feat/light-theme`, backend `feat/platform-panel-deep`).
+> Temeli: platform admin envanterindeki 3 kritik eksik (bkz. docs/raporlar/platform-admin-panel-envanteri).
+
+**İŞ 1 — KVKK erişim loglama (backend `8eb1614`, frontend `36a8bd9`) — MIGRATION YOK:**
+- Mevcut `SystemLog` AUDIT deseni yeniden kullanıldı (yeni tablo yok). `platformAudit.ts → auditPlatformAction()`.
+- Tüm hassas platform aksiyonları loglanıyor (approve/reject/freeze/activate/review + drill-down). Sadece "ne yapıldı" (action+hedef ID+IP) — DISC/PII değeri ASLA. Panelde "Denetim İzi (AUDIT)" filtresi.
+
+**İŞ 2 — Kullanıcı şikayeti + otomatik tespit (backend `7cfc8d5`, frontend `59a2abe`) — MIGRATION `20260805010000_add_user_report` (onaylı uygulandı, additive):**
+- `UserReport` modeli + `POST /users/:id/report` (tenant izolasyonu + self/spam engeli). Tenant admin `/admin/reports`, platform `/platform/user-reports`.
+- Basit otomatik tespit v1 (`abuseDetection.service.ts`): çok şikayet alan (≥2) + çok reddedilen talep (≥3). Ağır ML yok.
+- Frontend: `ReportUserButton` (menti/mentör kartları) + platform "Kullanıcı Şikayetleri" sekmesi (şikayet + anomali).
+
+**İŞ 3 — Sistem sağlığı paneli (backend `528502b`, frontend `8c0d469`) — MIGRATION YOK:**
+- `/api/platform/health` genişletildi: mail (SMTP config) durumu + son 24s kritik hata sayısı. Frontend: yeşil/kırmızı özet (DB/mail/hata/uptime) + logs "Hatalar" (ERROR) filtresi.
+
+**⚠️ Yol notları:** reviewedBy='platform-admin' sabit (çoklu platform admin olursa gerçek kimlik yazılmalı); user-reports 200 tavanlı, sayfalama yok (canlı-sonrası). Platform strateji dosyası (platform-admin-strateji.md) projede YOK — üretilmemiş.
 
 ## ✅ SON YAPILANLAR (2026-08-02 — STK YÖNETİCİ RETENTION/AKTİVİTE TURU)
 > Hepsi commit'li, **HİÇBİRİ merge edilmedi** (çatı `feat/light-theme`, backend `feat/platform-panel-deep`).

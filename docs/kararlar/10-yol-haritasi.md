@@ -26,7 +26,10 @@
      - docs/raporlar/menti-persona-ve-sevdirme-2026-08-02.md (talep tarafı — tutmak zor, kırılgan; bekleme anı riski)
      - docs/raporlar/mentor-persona-ve-sevdirme-2026-08-02.md (arz tarafı — en kıt kaynak; mentörü tutmak mentiden önce gelir)
      - docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md (3 yönetici personası + 3 temel soru + metrik taslağı)
-5. **PLATFORM ADMIN KEŞFİ (PLANLA)** — 4-rol metodolojisinin (STK yönetici ✅ → **platform admin** → mentör → menti) sıradaki rolü. `lastLoginAt`'i platform admin de kullanacak → STK ile ortak eksikler tek yerde birleştirilecek. (Not: STK yönetici metodolojisi — strateji ✅ + kıyas ✅ + aksiyon ✅ — büyük ölçüde tamam; kalan hayalet-mod/ön-tanımlı davet ayrı tur, bkz. katilim-modeli notu.)
+5. **PLATFORM ADMIN — ✅ TAMAM (strateji+kıyas+aksiyon).** Aksiyon turu bitti: KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli (bkz. 09-DURUM). 4-rol metodolojisinde sırada **mentör → menti** var.
+   - 🟡 **Küçük yol notları (canlı-sonrası, acil değil):**
+     - (a) `reviewedBy='platform-admin'` **sabit metin** — tek platform admin olduğu için şimdilik yeterli; çoklu platform admin gelirse gerçek kimlik yazılmalı.
+     - (b) `GET /platform/user-reports` **200 tavanlı, sayfalama YOK** — şikayet sayısı büyürse gerçek sayfalama gerekir.
 6. **HAYALET-BACKEND LİSTESİ** — hayalet-backend raporundaki bulguları tek tek bağla/sil/ertele (Zahid ile birlikte karar).
 7. **SEKTÖR SKORU = İŞ 7** (aşağıdaki eski plandaki İŞ 7 ile aynı) — 5-bileşenli `sector-scorer`'ı canlı yola bağla. **Canlı eşleşmeyi değiştirir → staging ŞART → staging sonrası.**
 8. **MENTİ MENTÖR-TARAMA UX** — 100+ mentörlü tenant için gerçek arama/sayfalama (sinyal gelince; kart tasarımı bunu kısmen çözecek).
