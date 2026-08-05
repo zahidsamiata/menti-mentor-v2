@@ -27,6 +27,7 @@ Temizlik turu (O1-O4) hazır, CI yeşil. Merge edilirse çatı pointer'ı yine h
   - **O2** — `listUsers` (menti mentör-tarama) over-fetch: `email` + serbest-metin `bio/expertise/target` peer'a dönmüyor (kart yalnız fullName/discType/sectorTags/avatar kullanıyor — doğrulandı). Admin havuzu farklı endpoint, etkilenmez.
   - **O3** — createUser/updateUser JSON alanları (`temperament/volunteer/pastProjects/education`) `z.any()` → `boundedJson` 20KB cap (JSON bomba koruması).
   - **O4** — createUser response explicit select (ham obje `password/discVector/selfProfile` sızdırmıyordu → güvenli subset).
+  - **O5 (strateji doğrulama turunda bulundu, PR #31'e eklendi)** — **onaysız mentör havuz sızıntısı kapatıldı**: `GET /api/users` (menti mentör-tarama) approvalStatus filtrelemiyordu → PENDING mentör menti havuzunda görünüp talep alabiliyordu. `listUsers` where'ine `approvalStatus:'APPROVED'` eklendi (rol-bağımsız; mentör→menti yönü zaten filtreliydi). Admin ayrı endpoint, etkilenmez. Test: `listusers-approval-filter.test.ts`. Commit `be295e2`, CI ✅.
 - **Atlanan (bilinçli, 09'a not):** 🟢 düşük tutarlılık maddeleri (adminSettings desen tutarlılığı, admin over-fetch) — fonksiyonel güvenlik değil → **gelecek tidiness turu**.
 - **Kalan sıradaki:** (1) **Foto volume doğrulama** (PO, Dokploy — tek açık teknik doğrulama; PARALEL, ajan işine dokunmaz) · (2) **dijital ayak izi temizliği** · (3) mentör/menti mevcut-kıyas (4-rol metodolojisi).
 

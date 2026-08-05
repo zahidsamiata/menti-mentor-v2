@@ -135,6 +135,7 @@ Kıyas bekliyor: stk-yonetici-panel-envanteri (kod keşfi).*
 
 ### ⚠️ YANLIŞ / EKSİK (belge diyor ama kod farklı)
 - **Hayalet mod "havuzda görünmez" KISMEN uygulanmış** (Bölüm 4) — onay kapısı VAR (register `approvalStatus:'PENDING'`, `controllers/authController.ts:159`; approve/reject). Mentör→menti yönü doğru filtreli: menti adayları `approvalStatus:'APPROVED'` süzülüyor (`services/matching.ts:132`) → onaysız menti mentöre görünmez. **AMA** menti→mentör havuzu (`listUsers`, `controllers/userController.ts` where = tenantId+role+isActive) approvalStatus **filtrelemiyor**; register `isActive`'i set etmiyor → schema default `true`. Sonuç: **onaysız (PENDING) bir mentör, menti'nin havuzunda görünür/talep alabilir** → "havuzda görünmez" bu yönde tam değil. (Follow-up adayı: `listUsers` where'ine `approvalStatus:'APPROVED'`.)
+  - **(Güncelleme 2026-08-05: DÜZELTİLDİ → PR #31, commit `be295e2`.** `listUsers` where'ine `approvalStatus:'APPROVED'` eklendi (rol-bağımsız); PENDING üye artık peer havuzunda görünmüyor. Test: `listusers-approval-filter.test.ts`. CI yeşil.)
 
 ### ❓ Teyit edilemeyen
 - **Yol B — ön-tanımlı davet OTOMATİK onay** (Bölüm 4) — davet altyapısı (InvitationTemplate + `/invitations/:token/join`) var, ama "kayıt olunca sistem OTOMATİK onaylar" davranışı kodda net konumlanmadı → teyit gerek.
