@@ -15,6 +15,11 @@ import type {
   PendingTagsResponse,
   TagActionResponse,
   MergeTagResponse,
+  AdminMatchesResponse,
+  CertResultsResponse,
+  HealthMetricsData,
+  NudgeKind,
+  NudgeResponse,
 } from '@/types/admin';
 import type { RequestOptions } from './client';
 
@@ -24,6 +29,13 @@ export const adminApi = {
   // ── KPI ───────────────────────────────────────────────────────────────────
   getKpi: (api: BoundClient): Promise<ApiResult<KpiData>> =>
     api<KpiData>('/api/admin/kpi'),
+
+  // ── Program Sağlığı / Retention (drill-down + dürtme) ──────────────────────
+  getHealthMetrics: (api: BoundClient): Promise<ApiResult<HealthMetricsData>> =>
+    api<HealthMetricsData>('/api/admin/health-metrics'),
+
+  nudgeUser: (api: BoundClient, userId: string, kind: NudgeKind = 'GENERIC'): Promise<ApiResult<NudgeResponse>> =>
+    api<NudgeResponse>(`/api/admin/users/${userId}/nudge`, { method: 'POST', body: { kind } }),
 
   // ── Kullanıcı Yönetimi ────────────────────────────────────────────────────
   listUsers: (api: BoundClient, params: { approvalStatus?: string; role?: string; page?: number } = {}) => {
@@ -59,6 +71,22 @@ export const adminApi = {
       method: 'POST',
       body: { feedbackNote },
     }),
+
+  // ── Eşleşmeler (A1) ───────────────────────────────────────────────────────
+  listMatches: (api: BoundClient, params: { status?: string; page?: number } = {}) => {
+    const qs = new URLSearchParams();
+    if (params.status) qs.set('status', params.status);
+    if (params.page) qs.set('page', String(params.page));
+    return api<AdminMatchesResponse>(`/api/admin/matches?${qs.toString()}`);
+  },
+
+  // ── Sertifika sonuçları (A4) ──────────────────────────────────────────────
+  listCertResults: (api: BoundClient, params: { status?: string; page?: number } = {}) => {
+    const qs = new URLSearchParams();
+    if (params.status) qs.set('status', params.status);
+    if (params.page) qs.set('page', String(params.page));
+    return api<CertResultsResponse>(`/api/admin/mentors/certification-results?${qs.toString()}`);
+  },
 
   // ── Koçluk Önerileri ────────────────────────────────────────────────────────
   getCoachingSuggestions: (api: BoundClient, userId: string) =>

@@ -57,6 +57,9 @@ vi.mock('@/components/atoms/TenantLogo',               () => ({ TenantLogo: () =
 vi.mock('@/components/organisms/DailyQuestionWidget',  () => ({ DailyQuestionWidget: () => null }));
 vi.mock('@/components/organisms/DiscConfidenceWidget', () => ({ DiscConfidenceWidget: () => null }));
 vi.mock('@/components/organisms/DashboardMetricCard',  () => ({ DashboardMetricCard: () => null }));
+// ThemeToggle useTheme() çağırır → ThemeProvider ister. Nav testleri provider sarmaz;
+// diğer bileşenler gibi null'a mock'la (D21 ile DashboardNav'a eklendi, test güncellenmemişti).
+vi.mock('@/components/molecules/ThemeToggle',          () => ({ ThemeToggle: () => null }));
 
 import { useAuth } from '@/providers/AuthProvider';
 import { DashboardNav } from '@/components/organisms/DashboardNav';

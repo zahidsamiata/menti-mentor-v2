@@ -9,9 +9,11 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState, type ReactNode } from 'react';
+import { LogOut } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
+import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 // Ana sekmeler — kulüp başkanının her girişte kullandığı işlevler
@@ -23,6 +25,11 @@ const PRIMARY_NAV = [
 
 // Gelişmiş — nadir kullanılan, varsayılan olarak daraltılmış
 const ADVANCED_NAV = [
+  { href: '/admin/mentor-havuzu',   label: 'Mentör Havuzu',   icon: '👥' },
+  { href: '/admin/menti-havuzu',    label: 'Menti Havuzu',    icon: '👫' },
+  { href: '/admin/eslesmeler',      label: 'Eşleşmeler',      icon: '🔗' },
+  { href: '/admin/sertifika-sonuclari', label: 'Sertifika Sonuç', icon: '📜' },
+  { href: '/admin/branding',        label: 'Marka',           icon: '🎨' },
   { href: '/admin/waiting-room',    label: 'Bekleme Odası',   icon: '⏳' },
   { href: '/admin/managers',        label: 'Yöneticiler',     icon: '🛡️' },
   { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
@@ -35,8 +42,13 @@ const ADVANCED_NAV = [
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, logout } = useAuth();
   const { tenant } = useTenant();
+
+  async function handleLogout() {
+    await logout();
+    router.replace('/login');
+  }
   const [advancedOpen, setAdvancedOpen] = useState(
     ADVANCED_NAV.some(({ href }) => pathname.startsWith(href)),
   );
@@ -61,6 +73,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <div className="flex h-14 items-center gap-2 px-4 border-b border-border">
           {tenant && <TenantLogo tenant={tenant} size={28} />}
           <span className="text-sm font-semibold truncate">{tenant?.displayName ?? 'Admin'}</span>
+          <div className="ml-auto shrink-0">
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Navigasyon */}
@@ -113,10 +128,20 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </div>
         </nav>
 
-        {/* Alt bilgi */}
-        <div className="p-3 border-t border-border">
-          <p className="text-xs text-muted-foreground truncate">{user.fullName}</p>
-          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+        {/* Alt bilgi + çıkış */}
+        <div className="p-3 border-t border-border space-y-2">
+          <div>
+            <p className="text-xs text-muted-foreground truncate">{user.fullName}</p>
+            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <LogOut className="h-4 w-4" aria-hidden />
+            Çıkış Yap
+          </button>
         </div>
       </aside>
 

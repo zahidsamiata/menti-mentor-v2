@@ -259,7 +259,7 @@ export default function InvitePage() {
         />
       </div>
 
-      {msg && <p className="text-sm text-red-500">{msg}</p>}
+      {msg && <p className="text-sm text-destructive">{msg}</p>}
 
       {/* Aksiyonlar */}
       <div className="flex gap-3">

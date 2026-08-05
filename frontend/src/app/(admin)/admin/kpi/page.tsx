@@ -4,6 +4,7 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
 import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard';
+import { ProgramHealthSection } from '@/components/organisms/ProgramHealthSection';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -76,6 +77,9 @@ export default function KpiPage() {
           </div>
         </>
       )}
+
+      {/* Program Sağlığı — "kimse kaynıyor mu" drill-down + dürtme (kişi-bazlı, admin-only) */}
+      <ProgramHealthSection />
     </div>
   );
 }

@@ -71,18 +71,18 @@ function MentorAvailability({ initialBlocks = [], onSaveAvailability }: MeetingS
     DAYS.find((d) => d.value === weekday)?.label ?? weekday;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
       <div className="mb-5 flex items-center gap-2">
-        <Calendar className="h-5 w-5 text-indigo-600" />
-        <h3 className="text-base font-semibold text-slate-800">Müsaitlik Saatlerin</h3>
+        <Calendar className="h-5 w-5 text-primary" />
+        <h3 className="text-base font-semibold text-foreground">Müsaitlik Saatlerin</h3>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-end gap-3 rounded-xl bg-slate-50 p-4">
+      <div className="mb-4 flex flex-wrap items-end gap-3 rounded-xl bg-muted p-4">
         <Field label="Gün">
           <select
             value={draft.weekday}
             onChange={(e) => setDraft({ ...draft, weekday: e.target.value as Weekday })}
-            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+            className="rounded-lg border border-border bg-card px-3 py-2 text-sm"
           >
             {DAYS.map((d) => (
               <option key={d.value} value={d.value}>{d.label}</option>
@@ -97,7 +97,7 @@ function MentorAvailability({ initialBlocks = [], onSaveAvailability }: MeetingS
         </Field>
         <button
           onClick={addBlock}
-          className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700"
+          className="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
         >
           <Plus className="h-4 w-4" /> Ekle
         </button>
@@ -105,25 +105,25 @@ function MentorAvailability({ initialBlocks = [], onSaveAvailability }: MeetingS
 
       <div className="space-y-2">
         {blocks.length === 0 && (
-          <p className="py-4 text-center text-sm text-slate-400">Henüz müsaitlik eklemedin</p>
+          <p className="py-4 text-center text-sm text-muted-foreground">Henüz müsaitlik eklemedin</p>
         )}
         {blocks.map((b) => (
           <div
             key={b.id}
-            className="flex items-center justify-between rounded-lg border border-slate-100 bg-white px-4 py-2.5"
+            className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-2.5"
           >
             <div className="flex items-center gap-3 text-sm">
-              <span className="rounded-md bg-indigo-50 px-2 py-0.5 font-medium text-indigo-700">
+              <span className="rounded-md bg-primary/10 px-2 py-0.5 font-medium text-primary">
                 {dayLabel(b.weekday)}
               </span>
-              <span className="flex items-center gap-1 text-slate-600">
+              <span className="flex items-center gap-1 text-muted-foreground">
                 <Clock className="h-3.5 w-3.5" />
                 {b.startTime} – {b.endTime}
               </span>
             </div>
             <button
               onClick={() => removeBlock(b.id)}
-              className="text-slate-300 transition hover:text-rose-500"
+              className="text-muted-foreground transition hover:text-rose-500"
             >
               <X className="h-4 w-4" />
             </button>
@@ -133,7 +133,7 @@ function MentorAvailability({ initialBlocks = [], onSaveAvailability }: MeetingS
 
       <button
         onClick={() => onSaveAvailability?.(blocks)}
-        className="mt-5 w-full rounded-xl bg-slate-900 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+        className="mt-5 w-full rounded-xl bg-foreground py-3 text-sm font-semibold text-background transition hover:bg-foreground/90"
       >
         Müsaitliği Kaydet
       </button>
@@ -149,13 +149,13 @@ function MentiBooking({ availableBlocks = [], onBook }: MeetingSchedulerProps) {
     DAYS.find((d) => d.value === weekday)?.label ?? weekday;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
       <div className="mb-5 flex items-center gap-2">
-        <Calendar className="h-5 w-5 text-indigo-600" />
-        <h3 className="text-base font-semibold text-slate-800">Görüşme Planla</h3>
+        <Calendar className="h-5 w-5 text-primary" />
+        <h3 className="text-base font-semibold text-foreground">Görüşme Planla</h3>
       </div>
 
-      <p className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-400">Uygun saatler</p>
+      <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">Uygun saatler</p>
       <div className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {availableBlocks.map((b) => {
           const active = selectedBlock?.id === b.id;
@@ -165,18 +165,18 @@ function MentiBooking({ availableBlocks = [], onBook }: MeetingSchedulerProps) {
               onClick={() => setSelectedBlock(b)}
               className={`rounded-xl border px-3 py-2.5 text-left text-sm transition ${
                 active
-                  ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-500'
-                  : 'border-slate-200 hover:border-slate-300'
+                  ? 'border-primary bg-primary/10 ring-1 ring-primary'
+                  : 'border-border hover:border-muted-foreground/40'
               }`}
             >
-              <div className="font-medium text-slate-800">{dayLabel(b.weekday)}</div>
-              <div className="text-xs text-slate-500">{b.startTime} – {b.endTime}</div>
+              <div className="font-medium text-foreground">{dayLabel(b.weekday)}</div>
+              <div className="text-xs text-muted-foreground">{b.startTime} – {b.endTime}</div>
             </button>
           );
         })}
       </div>
 
-      <p className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-400">Görüşme formatı</p>
+      <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">Görüşme formatı</p>
       <div className="mb-6 grid grid-cols-3 gap-2">
         {FORMATS.map(({ key, label, icon: Icon }) => {
           const active = format === key;
@@ -186,8 +186,8 @@ function MentiBooking({ availableBlocks = [], onBook }: MeetingSchedulerProps) {
               onClick={() => setFormat(key)}
               className={`flex flex-col items-center gap-1.5 rounded-xl border py-3 transition ${
                 active
-                  ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                  : 'border-slate-200 text-slate-600 hover:border-slate-300'
+                  ? 'border-primary bg-primary/10 text-primary'
+                  : 'border-border text-muted-foreground hover:border-muted-foreground/40'
               }`}
             >
               <Icon className="h-5 w-5" />
@@ -200,7 +200,7 @@ function MentiBooking({ availableBlocks = [], onBook }: MeetingSchedulerProps) {
       <button
         disabled={!selectedBlock}
         onClick={() => selectedBlock && onBook?.(selectedBlock, format)}
-        className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-400"
+        className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground"
       >
         <Check className="h-4 w-4" />
         Görüşmeyi Oluştur
@@ -212,7 +212,7 @@ function MentiBooking({ availableBlocks = [], onBook }: MeetingSchedulerProps) {
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-xs font-medium text-slate-500">{label}</span>
+      <span className="text-xs font-medium text-muted-foreground">{label}</span>
       {children}
     </div>
   );
@@ -223,7 +223,7 @@ function TimeSelect({ value, onChange }: { value: string; onChange: (v: string) 
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+      className="rounded-lg border border-border bg-card px-3 py-2 text-sm"
     >
       {HOURS.map((h) => <option key={h}>{h}</option>)}
     </select>

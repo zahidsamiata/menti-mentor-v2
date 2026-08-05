@@ -189,7 +189,7 @@ function BookMeetingContent() {
             <span className={msgLen > 0 && msgLen < 50 ? 'text-destructive' : 'text-muted-foreground'}>
               {msgLen < 50 && msgLen > 0 ? `En az ${50 - msgLen} karakter daha yazın` : ''}
             </span>
-            <span className={msgLen > 450 ? 'text-amber-500' : 'text-muted-foreground'}>
+            <span className={msgLen > 450 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}>
               {msgLen}/500
             </span>
           </div>

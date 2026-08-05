@@ -24,30 +24,30 @@ export default function ProfileStrengthCard({
   }, [percent]);
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50">
-            <Sparkles className="h-4 w-4 text-indigo-600" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+            <Sparkles className="h-4 w-4 text-primary" />
           </div>
-          <span className="text-sm font-semibold text-slate-800">Profil Gücün</span>
+          <span className="text-sm font-semibold text-foreground">Profil Gücün</span>
         </div>
-        <span className="text-lg font-bold tabular-nums text-indigo-600">%{percent}</span>
+        <span className="text-lg font-bold tabular-nums text-primary">%{percent}</span>
       </div>
 
-      <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+      <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-muted">
         <div
           className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-1000 ease-out"
           style={{ width: `${animatedPercent}%` }}
         />
       </div>
 
-      <p className="mt-3 text-xs text-slate-500">{hint}</p>
+      <p className="mt-3 text-xs text-muted-foreground">{hint}</p>
 
       {pendingQuestions > 0 && (
         <button
           onClick={onContinue}
-          className="mt-4 flex w-full items-center justify-between rounded-xl bg-indigo-50 px-4 py-3 text-sm font-medium text-indigo-700 transition hover:bg-indigo-100"
+          className="mt-4 flex w-full items-center justify-between rounded-xl bg-primary/10 px-4 py-3 text-sm font-medium text-primary transition hover:bg-primary/20"
         >
           <span className="flex items-center gap-2">
             <Zap className="h-4 w-4" />

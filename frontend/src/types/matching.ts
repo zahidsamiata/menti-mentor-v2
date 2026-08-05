@@ -10,6 +10,8 @@ export interface MentorListItem {
   bioSummary: string | null;
   expertiseDetails: string | null;
   isActive: boolean;
+  // Profil fotoğrafı — yoksa kartta baş-harf avatarına düşülür.
+  avatarUrl?: string | null;
 }
 
 export interface MentorsListResponse {
@@ -21,6 +23,8 @@ export interface RankedMenti {
   mentiId: string;
   mentiName: string;
   mentiTenantId: string;
+  // Profil fotoğrafı — yoksa kartta baş-harf avatarına düşülür.
+  mentiAvatarUrl?: string | null;
   totalScore: number;
   sectorScore: number;
   discScore: number;

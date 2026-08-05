@@ -14,7 +14,7 @@ export default function PendingApprovalPage() {
         {/* İkon */}
         <div className="flex justify-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 border border-amber-500/20">
-            <Clock className="h-8 w-8 text-amber-400" aria-hidden />
+            <Clock className="h-8 w-8 text-amber-600 dark:text-amber-400" aria-hidden />
           </div>
         </div>
 

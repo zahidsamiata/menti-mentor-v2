@@ -61,9 +61,9 @@ export interface ScenarioGuideEngineProps {
 }
 
 const OUTCOME_STYLE: Record<ScenarioOutcome, { badge: string; icon: string }> = {
-  correct: { badge: 'bg-green-100 text-green-800 border-green-300', icon: '✅' },
-  warn: { badge: 'bg-amber-100 text-amber-800 border-amber-300', icon: '⚠️' },
-  wrong: { badge: 'bg-red-100 text-red-800 border-red-300', icon: '❌' },
+  correct: { badge: 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800', icon: '✅' },
+  warn: { badge: 'bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800', icon: '⚠️' },
+  wrong: { badge: 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800', icon: '❌' },
 };
 
 const SELECT_ERROR = 'Seçimin kaydedilemedi. Lütfen tekrar dene.';
@@ -207,7 +207,7 @@ export function ScenarioGuideEngine({
 
       {/* Tamamlandı ekranı */}
       {done && (
-        <Card className="border-green-300 bg-green-50 dark:bg-green-950/20">
+        <Card className="border-green-300 bg-green-50 dark:border-green-800 dark:bg-green-950/20">
           <CardContent className="p-6 text-center space-y-4">
             <div className="text-4xl">{completion.emoji ?? '🎉'}</div>
             <h2 className="text-lg font-semibold">{completion.title}</h2>

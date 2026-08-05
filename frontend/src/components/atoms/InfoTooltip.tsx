@@ -86,8 +86,8 @@ export function InfoTooltip({
         onBlur={() => setOpen(false)}
         className={cn(
           'inline-flex h-4 w-4 items-center justify-center rounded-full',
-          'text-slate-400 hover:text-slate-200 transition-colors',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950',
+          'text-muted-foreground hover:text-foreground transition-colors',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-background',
         )}
       >
         <Info className="h-3.5 w-3.5" aria-hidden />
@@ -99,14 +99,14 @@ export function InfoTooltip({
           role="tooltip"
           className={cn(
             'absolute left-1/2 top-full z-50 mt-2 w-72 -translate-x-1/2',
-            'rounded-lg border border-white/10 bg-slate-900 p-3 text-left shadow-xl',
-            'text-xs leading-relaxed text-slate-300',
+            'rounded-lg border border-border bg-card p-3 text-left shadow-xl',
+            'text-xs leading-relaxed text-muted-foreground',
           )}
         >
           {detail}
           {sources && sources.length > 0 && (
-            <span className="mt-2 block border-t border-white/10 pt-2">
-              <span className="block font-semibold text-slate-400">Kaynak</span>
+            <span className="mt-2 block border-t border-border pt-2">
+              <span className="block font-semibold text-muted-foreground">Kaynak</span>
               {sources.map((s) =>
                 s.url ? (
                   <a
@@ -114,12 +114,12 @@ export function InfoTooltip({
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-1 block text-indigo-400 hover:text-indigo-300 hover:underline"
+                    className="mt-1 block text-primary hover:text-primary/80 hover:underline"
                   >
                     {s.label}
                   </a>
                 ) : (
-                  <span key={s.label} className="mt-1 block text-slate-400">
+                  <span key={s.label} className="mt-1 block text-muted-foreground">
                     {s.label}
                   </span>
                 ),

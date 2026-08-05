@@ -14,8 +14,8 @@ interface AlertMessageProps {
 
 const STYLES: Record<AlertMessageProps['type'], string> = {
   error:   'bg-destructive/10 border-destructive/30 text-destructive',
-  success: 'bg-emerald-50 border-emerald-200 text-emerald-800',
-  info:    'bg-blue-50 border-blue-200 text-blue-800',
+  success: 'bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-950/20 dark:border-emerald-800 dark:text-emerald-300',
+  info:    'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-950/20 dark:border-blue-800 dark:text-blue-300',
 };
 
 export function AlertMessage({ type, message, className }: AlertMessageProps) {

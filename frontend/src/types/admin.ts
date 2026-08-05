@@ -22,6 +22,8 @@ export interface AdminUser {
   needsOrientation: boolean;
   approvalStatus: ApprovalStatus;
   createdAt: string;
+  // Profil fotoğrafı — yoksa kartta baş-harf avatarına düşülür.
+  avatarUrl?: string | null;
 }
 
 export type AdminUsersResponse = PaginatedResponse<AdminUser>;
@@ -47,6 +49,43 @@ export type PendingTagsResponse = PaginatedResponse<PendingTag>;
 export type TagActionResponse   = { message: string; tagId: string };
 export type MergeTagResponse    = { message: string; tagId: string; from: string; into: string };
 
+// ─── Eşleşme Paneli (A1) — PII yok: yalnızca ad + arketip + skor ─────────────
+
+export type MatchStatus = 'ACTIVE' | 'COMPLETED' | 'EARLY_EXIT' | 'DISSOLVED';
+
+export interface AdminMatch {
+  id: string;
+  mentorName: string;
+  mentiName: string;
+  predictedScore: number;
+  sectorScore: number;
+  characterScore: number;
+  mentorArchetype: string;
+  mentiArchetype: string;
+  status: MatchStatus;
+  meetingCount: number;
+  createdAt: string;
+}
+
+export type AdminMatchesResponse = PaginatedResponse<AdminMatch>;
+
+// ─── Sertifika Sonuç Panosu (A4) ─────────────────────────────────────────────
+
+export type CertificationStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'CERTIFIED' | 'FAILED' | 'COOLDOWN';
+
+export interface MentorCertResult {
+  userId: string;
+  fullName: string;
+  isCertified: boolean;
+  certificationStatus: CertificationStatus;
+  certScore: number | null;
+  certAttempts: number;
+  certifiedAt: string | null;
+  cooldownUntil: string | null;
+}
+
+export type CertResultsResponse = PaginatedResponse<MentorCertResult>;
+
 // ─── KPI ─────────────────────────────────────────────────────────────────────
 
 export interface KpiData {
@@ -64,6 +103,39 @@ export interface KpiData {
     activeJobListings: number;
   };
 }
+
+// ─── Program Sağlığı / Retention ("kimse kaynıyor mu") — drill-down ──────────
+
+export interface HealthMetricMember {
+  id: string;
+  fullName: string;
+  avatarUrl?: string | null;
+  role?: string;
+  lastLoginAt?: string | null;
+  createdAt?: string;
+}
+
+export interface DeadMatchItem {
+  optInId: string;
+  mentorId: string;
+  mentiId: string;
+  mentorName: string;
+  mentiName: string;
+  since: string;
+}
+
+export interface HealthMetricsData {
+  tenantId: string;
+  generatedAt: string;
+  thresholds: { passiveDays: number; staleMatchDays: number };
+  supplyDemand: { mentors: number; mentis: number; ratio: number | null };
+  mentorlessMenti: { count: number; items: HealthMetricMember[] };
+  deadMatches: { count: number; items: DeadMatchItem[] };
+  passiveMembers: { count: number; items: HealthMetricMember[] };
+}
+
+export type NudgeKind = 'PASSIVE' | 'DEAD_MATCH' | 'GENERIC';
+export interface NudgeResponse { ok: boolean; targetUserId: string; sentAt: string }
 
 // ─── Düzeltme notu için önceden tanımlı mesajlar ─────────────────────────────
 

@@ -77,8 +77,31 @@ export async function reviewReport(id: string, note?: string) {
   });
 }
 
-export async function getPlatformLogs(limit = 100) {
-  return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}`);
+export async function getPlatformLogs(limit = 100, category?: string, level?: string) {
+  const cat = category ? `&category=${encodeURIComponent(category)}` : '';
+  const lvl = level ? `&level=${encodeURIComponent(level)}` : '';
+  return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}${cat}${lvl}`);
+}
+
+export async function getPlatformHealth() {
+  return platformFetch<PlatformHealth>('/api/platform/health');
+}
+
+// ─── Kullanıcı şikayetleri + otomatik tespit ─────────────────────────────────
+export async function listUserReports(status?: string) {
+  const q = status ? `?status=${status}` : '';
+  return platformFetch<{ items: UserReport[]; total: number }>(`/api/platform/user-reports${q}`);
+}
+
+export async function reviewUserReport(id: string, status: 'REVIEWED' | 'DISMISSED', note?: string) {
+  return platformFetch<{ ok: boolean }>(`/api/platform/user-reports/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status, note }),
+  });
+}
+
+export async function getAnomalies() {
+  return platformFetch<{ items: AnomalyFlag[]; total: number }>('/api/platform/anomalies');
 }
 
 // ─── Şüphe bildirimi (public) ────────────────────────────────────────────────
@@ -157,5 +180,39 @@ export interface SystemLog {
   level: string;
   category: string;
   message: string;
+  meta?: Record<string, unknown> | null;
   createdAt: string;
+}
+
+export interface UserReport {
+  id: string;
+  tenantId: string;
+  tenantName: string;
+  reason: string;
+  description: string | null;
+  status: string;
+  reviewNote: string | null;
+  createdAt: string;
+  reporter: { fullName: string };
+  target: { fullName: string };
+}
+
+export interface AnomalyFlag {
+  userId: string;
+  fullName: string;
+  tenantId: string;
+  reportCount: number;
+  rejectionCount: number;
+  reasons: string[];
+}
+
+export interface PlatformHealth {
+  status: string;
+  db: string;
+  mail: string;
+  recentErrors: number;
+  env: string;
+  uptime: number;
+  memory: { heapUsed: number; heapTotal: number; rss: number };
+  nodeVersion: string;
 }

@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
+import { UserAvatar } from '@/components/atoms/UserAvatar';
+import { ReportUserButton } from '@/components/organisms/ReportUserButton';
 import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -339,7 +341,7 @@ export default function MentorDashboardPage() {
                   {filterSaving ? 'Kaydediliyor…' : 'Filtreleri Kaydet'}
                 </Button>
                 {filterSaved && (
-                  <span className="text-xs text-green-600">✓ Kaydedildi</span>
+                  <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>
                 )}
               </div>
             </>
@@ -381,9 +383,7 @@ export default function MentorDashboardPage() {
               {candidatesData.items.map((c) => (
                 <div key={c.mentiId} className="flex items-center justify-between py-3">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-sm font-semibold">
-                      {c.mentiName[0]}
-                    </div>
+                    <UserAvatar src={c.mentiAvatarUrl} name={c.mentiName} size={36} />
                     <div>
                       <p className="text-sm font-medium">{c.mentiName}</p>
                       <p className="text-xs text-muted-foreground">
@@ -402,6 +402,7 @@ export default function MentorDashboardPage() {
                     {c.warnings.length > 0 && (
                       <Badge variant="destructive" className="text-xs">Uyarı</Badge>
                     )}
+                    <ReportUserButton targetUserId={c.mentiId} targetName={c.mentiName} />
                   </div>
                 </div>
               ))}

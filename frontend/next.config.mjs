@@ -34,10 +34,30 @@ function buildImagePatterns() {
     ? process.env.TENANT_IMAGE_DOMAINS.split(',').map((d) => d.trim()).filter(Boolean)
     : [];
 
-  return [...new Set([...defaultDomains, ...envDomains])].map((hostname) => ({
+  const patterns = [...new Set([...defaultDomains, ...envDomains])].map((hostname) => ({
     protocol: /** @type {'https'} */ ('https'),
     hostname,
   }));
+
+  // Backend origin — kullanıcının yüklediği avatarlar <backend>/uploads/... yolundan
+  // servis edilir. Host, NEXT_PUBLIC_API_URL'den türetilir: dev'de http://localhost:3000,
+  // canlıda https://api.sivilkapasite.org. Böylece next/image bu kaynağa izin verir.
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (apiUrl) {
+    try {
+      const u = new URL(apiUrl);
+      patterns.push({
+        protocol: /** @type {'https'} */ (u.protocol.replace(':', '')),
+        hostname: u.hostname,
+        ...(u.port ? { port: u.port } : {}),
+        pathname: '/uploads/**',
+      });
+    } catch {
+      // Geçersiz URL — sessizce atla, varsayılan domainlerle devam et.
+    }
+  }
+
+  return patterns;
 }
 
 export default nextConfig;

@@ -67,7 +67,7 @@ export function Step1Slug({ data, onUpdate, onNext }: Props) {
 
   const SlugIcon = () => {
     if (slugStatus === 'checking') return <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />;
-    if (slugStatus === 'available') return <CheckCircle2 className="h-4 w-4 text-emerald-500" />;
+    if (slugStatus === 'available') return <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />;
     if (slugStatus === 'taken' || slugStatus === 'invalid') return <XCircle className="h-4 w-4 text-destructive" />;
     return null;
   };
@@ -112,7 +112,7 @@ export function Step1Slug({ data, onUpdate, onNext }: Props) {
           </div>
 
           {slugStatus === 'available' && (
-            <p className="text-xs text-emerald-600">Bu adres kullanılabilir.</p>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400">Bu adres kullanılabilir.</p>
           )}
           {slugStatus === 'taken' && (
             <p className="text-xs text-destructive">Bu adres başka bir kurum tarafından alınmış.</p>

@@ -1,14 +1,19 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, type ChangeEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { Button } from '@/components/ui/button';
+import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { cn } from '@/lib/utils';
-import type { UserProfileData } from '@/lib/api/profile';
+import type { UserProfileData, AvatarUploadResponse } from '@/lib/api/profile';
+
+// İstemci ön-kontrolü — asıl doğrulama backend'de (magic-byte). Backend limitiyle eşlenir.
+const AVATAR_ACCEPT = 'image/jpeg,image/png,image/webp';
+const AVATAR_MAX_BYTES = 5 * 1024 * 1024;
 
 // ─── Statik seçenekler (ProfileStep ile aynı kural seti) ─────────────────────
 
@@ -45,6 +50,11 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+
+  // Profil fotoğrafı
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
 
   // Form alanları
   const [bioSummary,       setBioSummary]       = useState('');
@@ -85,7 +95,40 @@ export default function ProfilePage() {
     setSkills(profile.skills ?? []);
     setLinkedinUrl(profile.linkedinUrl ?? '');
     setInstagramUrl(profile.instagramUrl ?? '');
+    setAvatarUrl(profile.avatarUrl ?? null);
   }, [profile]);
+
+  // Fotoğraf seçildiğinde: istemci ön-kontrolü → yükle → yeni avatarı göster.
+  const handleAvatarSelect = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // aynı dosyanın tekrar seçilebilmesi için input'u temizle
+    if (!file) return;
+
+    setAvatarError(null);
+    if (!AVATAR_ACCEPT.split(',').includes(file.type)) {
+      setAvatarError('Yalnızca JPEG, PNG veya WEBP formatında fotoğraf yükleyebilirsiniz.');
+      return;
+    }
+    if (file.size > AVATAR_MAX_BYTES) {
+      setAvatarError('Fotoğraf boyutu en fazla 5MB olabilir.');
+      return;
+    }
+
+    setAvatarUploading(true);
+    const formData = new FormData();
+    formData.append('avatar', file);
+    const result = await api<AvatarUploadResponse>('/api/users/me/avatar', {
+      method: 'POST',
+      body: formData,
+    });
+    setAvatarUploading(false);
+
+    if (result.ok) {
+      setAvatarUrl(result.data.avatarUrl);
+    } else {
+      setAvatarError(result.error.message ?? 'Fotoğraf yüklenemedi. Lütfen tekrar deneyin.');
+    }
+  };
 
   const toggleSkill = (skill: string) =>
     setSkills((prev) =>
@@ -136,10 +179,34 @@ export default function ProfilePage() {
   return (
     <div className="max-w-2xl mx-auto space-y-8 pb-16">
 
-      {/* ── Başlık ────────────────────────────────────────────────────── */}
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">{user.fullName}</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">{user.email}</p>
+      {/* ── Başlık + Profil fotoğrafı ─────────────────────────────────── */}
+      <div className="flex items-center gap-4">
+        <div className="flex flex-col items-center gap-1.5">
+          <UserAvatar src={avatarUrl} name={user.fullName} size={72} />
+          {/* Foto opsiyonel: label+gizli input deseni (erişilebilir dosya seçici). */}
+          <label
+            className={cn(
+              'cursor-pointer text-xs text-primary hover:underline',
+              avatarUploading && 'pointer-events-none opacity-60',
+            )}
+          >
+            {avatarUploading ? 'Yükleniyor…' : 'Fotoğraf yükle'}
+            <input
+              type="file"
+              accept={AVATAR_ACCEPT}
+              className="hidden"
+              disabled={avatarUploading}
+              onChange={handleAvatarSelect}
+            />
+          </label>
+        </div>
+        <div className="min-w-0">
+          <h1 className="text-2xl font-bold text-foreground truncate">{user.fullName}</h1>
+          <p className="text-sm text-muted-foreground mt-0.5 truncate">{user.email}</p>
+          {avatarError && (
+            <p className="text-xs text-destructive mt-1" role="alert">{avatarError}</p>
+          )}
+        </div>
       </div>
 
       {/* ── DISC sonucu (salt okunur) ─────────────────────────────────── */}
@@ -355,7 +422,7 @@ export default function ProfilePage() {
         <p className="text-sm text-destructive text-center" role="alert">{saveError}</p>
       )}
       {saved && (
-        <p className="text-sm text-green-600 text-center font-medium" role="status">
+        <p className="text-sm text-emerald-600 dark:text-emerald-400 text-center font-medium" role="status">
           Profil başarıyla kaydedildi.
         </p>
       )}

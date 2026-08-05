@@ -55,24 +55,26 @@
     --primary-foreground: 0 0% 100%;
   }
 
-  /* Karanlık mod (sisteme bağlı) */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 222 47% 6%;
-      --foreground: 213 31% 91%;
-      --card: 222 47% 9%;
-      --card-foreground: 213 31% 91%;
-      --popover: 222 47% 9%;
-      --popover-foreground: 213 31% 91%;
-      --border: 216 34% 17%;
-      --input: 216 34% 17%;
-      --muted: 223 47% 11%;
-      --muted-foreground: 215 20% 65%;
-      --secondary: 222 47% 11%;
-      --secondary-foreground: 210 40% 98%;
-      --accent: 216 34% 17%;
-      --accent-foreground: 210 40% 98%;
-    }
+  /* ── Karanlık mod — `.dark` class'ı ile (ThemeProvider yönetir) ──────
+     Önceden `@media (prefers-color-scheme)` ile OS'a bağlıydı; artık class-bazlı
+     (tailwind darkMode: ['class'] ile uyumlu). İlk ziyarette sistem tercihi
+     ThemeProvider tarafından okunur, sonra kullanıcı seçimi localStorage'da tutulur.
+     :root = LIGHT tema (varsayılan token seti). */
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 213 31% 91%;
+    --card: 222 47% 9%;
+    --card-foreground: 213 31% 91%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 213 31% 91%;
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215 20% 65%;
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
   }
 }
 

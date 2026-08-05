@@ -96,7 +96,7 @@ export default function AlgorithmTunerPage() {
             <Button size="sm" onClick={saveFrequency} disabled={freqSaving}>
               {freqSaving ? 'Kaydediliyor…' : 'Kaydet'}
             </Button>
-            {freqSaved && <span className="text-xs text-green-600">✓ Kaydedildi</span>}
+            {freqSaved && <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>}
           </div>
         </CardContent>
       </Card>
