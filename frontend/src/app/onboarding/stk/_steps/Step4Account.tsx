@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { selfServeRegister, updateOnboarding } from '@/lib/api/selfServe';
+import { REGISTER_MESSAGES } from '@/lib/registerMessages';
 import { cn } from '@/lib/utils';
 import type { WizardData } from '../_StkOnboardingContent';
 
@@ -86,7 +87,9 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
 
     if (!regResult.ok) {
       setLoading(false);
-      setServerError(regResult.error.message ?? 'Kayıt başarısız. Lütfen tekrar deneyin.');
+      // STK'ya özel backend mesajları (ör. slug alınmış) korunur; yalnızca
+      // genel fallback paylaşılan sabitten gelir (dağınık string yerine).
+      setServerError(regResult.error.message ?? REGISTER_MESSAGES.GENERIC_FAIL);
       return;
     }
 
