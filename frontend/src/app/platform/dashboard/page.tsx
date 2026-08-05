@@ -17,7 +17,9 @@ import {
   listUserReports,
   reviewUserReport,
   getAnomalies,
+  getPlatformHealth,
   type PlatformStats,
+  type PlatformHealth,
   type PendingTenant,
   type TenantItem,
   type SuspicionReport,
@@ -33,6 +35,7 @@ export default function PlatformDashboard() {
   const router = useRouter();
   const [tab, setTab]             = useState<Tab>('overview');
   const [stats, setStats]         = useState<PlatformStats | null>(null);
+  const [health, setHealth]       = useState<PlatformHealth | null>(null);
   const [pending, setPending]     = useState<PendingTenant[]>([]);
   const [tenants, setTenants]     = useState<TenantItem[]>([]);
   const [reports, setReports]     = useState<SuspicionReport[]>([]);
@@ -48,8 +51,9 @@ export default function PlatformDashboard() {
     setLoading(true); setError(null);
     try {
       if (currentTab === 'overview') {
-        const s = await getPlatformStats();
+        const [s, h] = await Promise.all([getPlatformStats(), getPlatformHealth()]);
         setStats(s);
+        setHealth(h);
       } else if (currentTab === 'pending') {
         const r = await listPendingTenants();
         setPending(r.items);
@@ -64,7 +68,9 @@ export default function PlatformDashboard() {
         setUserReports(rep.items);
         setAnomalies(anom.items);
       } else if (currentTab === 'logs') {
-        const r = await getPlatformLogs(200, logCategory || undefined);
+        // AUDIT bir kategori, ERROR bir seviyedir → doğru parametreye eşle.
+        const isError = logCategory === 'ERROR';
+        const r = await getPlatformLogs(200, isError ? undefined : (logCategory || undefined), isError ? 'ERROR' : undefined);
         setLogs(r.items);
       }
     } catch (e) {
@@ -185,6 +191,21 @@ export default function PlatformDashboard() {
         {/* OVERVIEW */}
         {!loading && tab === 'overview' && stats && (
           <div className="space-y-6">
+            {/* Sistem Sağlığı — basit yeşil/kırmızı özet */}
+            {health && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <HealthPill label="Veritabanı" ok={health.db === 'connected'} okText="Bağlı" badText="Kesik" />
+                <HealthPill label="E-posta (SMTP)" ok={health.mail === 'configured'} okText="Yapılandırılmış" badText="Eksik yapılandırma" />
+                <HealthPill label="Son 24s Kritik Hata" ok={health.recentErrors === 0} okText="0 hata" badText={`${health.recentErrors} hata`} />
+                <div className="rounded-xl border border-border bg-card p-3">
+                  <p className="text-xs text-muted-foreground">Çalışma Süresi</p>
+                  <p className="text-sm font-semibold text-foreground mt-1">
+                    {Math.floor(health.uptime / 3600)}s {Math.floor((health.uptime % 3600) / 60)}dk
+                  </p>
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 { label: 'Kurumlar',   value: stats.totals.tenants },
@@ -421,11 +442,12 @@ export default function PlatformDashboard() {
         {/* LOGS */}
         {!loading && tab === 'logs' && (
           <div className="space-y-3">
-            {/* Filtre: Tümü / Denetim İzi (AUDIT — kim neye baktı/ne yaptı) */}
+            {/* Filtre: Tümü / Denetim İzi (AUDIT) / Hatalar (ERROR seviyesi) */}
             <div className="flex gap-2">
               {[
                 { key: '', label: 'Tümü' },
                 { key: 'AUDIT', label: 'Denetim İzi' },
+                { key: 'ERROR', label: 'Hatalar' },
               ].map((f) => (
                 <button
                   key={f.key}
@@ -476,6 +498,19 @@ export default function PlatformDashboard() {
           </div>
         )}
       </main>
+    </div>
+  );
+}
+
+/** Basit yeşil/kırmızı sağlık göstergesi (nokta + etiket). */
+function HealthPill({ label, ok, okText, badText }: { label: string; ok: boolean; okText: string; badText: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-card p-3">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <p className={`text-sm font-semibold mt-1 flex items-center gap-1.5 ${ok ? 'text-emerald-600 dark:text-emerald-400' : 'text-destructive'}`}>
+        <span className={`inline-block h-2 w-2 rounded-full ${ok ? 'bg-emerald-500' : 'bg-red-500'}`} />
+        {ok ? okText : badText}
+      </p>
     </div>
   );
 }

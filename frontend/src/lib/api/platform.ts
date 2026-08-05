@@ -77,9 +77,14 @@ export async function reviewReport(id: string, note?: string) {
   });
 }
 
-export async function getPlatformLogs(limit = 100, category?: string) {
-  const q = category ? `&category=${encodeURIComponent(category)}` : '';
-  return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}${q}`);
+export async function getPlatformLogs(limit = 100, category?: string, level?: string) {
+  const cat = category ? `&category=${encodeURIComponent(category)}` : '';
+  const lvl = level ? `&level=${encodeURIComponent(level)}` : '';
+  return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}${cat}${lvl}`);
+}
+
+export async function getPlatformHealth() {
+  return platformFetch<PlatformHealth>('/api/platform/health');
 }
 
 // ─── Kullanıcı şikayetleri + otomatik tespit ─────────────────────────────────
@@ -199,4 +204,15 @@ export interface AnomalyFlag {
   reportCount: number;
   rejectionCount: number;
   reasons: string[];
+}
+
+export interface PlatformHealth {
+  status: string;
+  db: string;
+  mail: string;
+  recentErrors: number;
+  env: string;
+  uptime: number;
+  memory: { heapUsed: number; heapTotal: number; rss: number };
+  nodeVersion: string;
 }
