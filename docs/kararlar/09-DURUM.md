@@ -1,5 +1,17 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-05 (MERGE TURU TAMAMLANDI — tüm birikim main'de/canlıda) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-05 (GÜVENLİK TURU: PR #30 MERGED + temizlik PR #31 hazır) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+## 🔒 GÜVENLİK TURU KAPANDI (2026-08-05)
+**PR #30 canlıya alındı, denetimin kalan maddeleri (O1-O4) temizlik PR'ında hazır. Güvenlik açısından bekleyen fonksiyonel açık kalmadı.**
+- **PR #30 MERGED** (backend). Yeni **backend main HEAD `3f67024`** (merge-commit). Analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit → **canlıda**. Main CI ✅. Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı** (Dokploy erişimi ajanda yok).
+- **Çatı pointer hizalandı** (PR #34 MERGED): yeni **çatı main HEAD `d3505f9`**, backend pointer **`3f67024`** (backend main ile hizalı). İki repo senkron. Frontend autodeploy no-op (fonksiyonel değişiklik yok).
+- **Temizlik turu → PR #31 HAZIR** (backend `chore/security-cleanup`, CI ✅, **merge PO'da**): güvenlik denetiminin kalan 🟡 maddeleri:
+  - **O1** — 4 public endpoint'e IP-bazlı rate-limit (loginRateLimiter deseni, env-ayarlanabilir): `POST /auth/register` (10/dk), `POST /suspicion-reports` (5/dk), `GET /invitations/:token/join` (20/dk — kampüs NAT toplu katılımı için makul; imzalı JWT'de brute-force zaten infeasible), `GET /tenants/self-serve/check-slug` (30/dk). Test: register + invitation-join.
+  - **O2** — `listUsers` (menti mentör-tarama) over-fetch: `email` + serbest-metin `bio/expertise/target` peer'a dönmüyor (kart yalnız fullName/discType/sectorTags/avatar kullanıyor — doğrulandı). Admin havuzu farklı endpoint, etkilenmez.
+  - **O3** — createUser/updateUser JSON alanları (`temperament/volunteer/pastProjects/education`) `z.any()` → `boundedJson` 20KB cap (JSON bomba koruması).
+  - **O4** — createUser response explicit select (ham obje `password/discVector/selfProfile` sızdırmıyordu → güvenli subset).
+- **Atlanan (bilinçli, 09'a not):** 🟢 düşük tutarlılık maddeleri (adminSettings desen tutarlılığı, admin over-fetch) — fonksiyonel güvenlik değil → **gelecek tidiness turu**.
+- **Kalan sıradaki:** (1) **Foto volume doğrulama** (PO, Dokploy — tek açık teknik doğrulama; PARALEL, ajan işine dokunmaz) · (2) **dijital ayak izi temizliği** · (3) mentör/menti mevcut-kıyas (4-rol metodolojisi).
 
 ## 🚀 MERGE TURU TAMAMLANDI (2026-08-05)
 **Biriken TÜM iş iki repoda main'e merge edildi; iki main CI de YEŞİL. Bekleyen birikim = SIFIR.**
@@ -11,7 +23,7 @@
 - **Çatı merge yöntemi:** rebase, commit'lenmemiş `PROJECT_STATUS.md` yüzünden engellendi → **merge** ile çözüldü (tek pointer çakışması `a0e1a69` tutularak; force-push yok; `PROJECT_STATUS.md`'ye dokunulmadı).
 - **⚠️ Foto volume (AÇIK — ürün sahibi doğrulamalı):** merge autodeploy'u tetikledi. Dokploy'da `UPLOAD_DIR=/app/uploads` + `/app/uploads` kalıcı volume aktifleşmeli. Panel erişimi olmadığından doğrulanamadı. Doğrulama: foto yükle → redeploy → **duruyor mu**. Talimat: `docs/kararlar/dokploy-foto-volume-talimati.md`. Foto sorunu merge'i geri aldırmaz, ayrı ele alınır (uid 1001 yazma izni olabilir).
 
-**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy — tek açık teknik doğrulama) · (2) ~~login rate-limit / clubs IDOR~~ ✅ **PR #29 MERGED (canlıda)** · (3) ~~kapsamlı güvenlik denetimi~~ ✅ **YAPILDI → PR #30 HAZIR** (backend, CI yeşil, merge PO'da): analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit. Denetimin kalan 🟡'leri (listUsers over-fetch, JSON `z.any()` cap, diğer public IP-limit) ayrı **temizlik turu**na bırakıldı · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
+**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy — tek açık teknik doğrulama) · (2) ~~login rate-limit / clubs IDOR~~ ✅ **PR #29 MERGED (canlıda)** · (3) ~~kapsamlı güvenlik denetimi~~ ✅ **PR #30 MERGED (canlıda)**: analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit · (3b) ~~denetimin kalan 🟡'leri (listUsers over-fetch, JSON `z.any()` cap, public IP-limit)~~ ✅ **TEMİZLİK TURU → PR #31 HAZIR** (O1-O4, CI yeşil, merge PO'da) · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
 
 ## 🧭 SON DURUM ÖZETİ (DEVİR)
 **Bitenler (hepsi MERGE EDİLDİ — main'de/canlıda):** güvenlik (2 IDOR + timezone + **getUser IDOR fix**) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
