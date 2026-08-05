@@ -216,3 +216,113 @@ export interface PlatformHealth {
   memory: { heapUsed: number; heapTotal: number; rss: number };
   nodeVersion: string;
 }
+
+// ─── Kurum derin görünüm (platform deep-view) — recover: eski PR #29'dan ───
+export type TenantMemberRole = 'ADMIN' | 'MENTOR' | 'MENTI';
+
+export type MeetingStatus =
+  | 'PENDING'
+  | 'SCHEDULED'
+  | 'IN_PROGRESS'
+  | 'APPROVED'
+  | 'COMPLETED'
+  | 'CANCELLED';
+
+export interface TenantOverview {
+  tenant: {
+    id: string;
+    name: string;
+    slug: string;
+    verificationStatus: string;
+    plan: string;
+    isActive: boolean;
+    createdAt: string;
+  };
+  counts: {
+    mentors: number;
+    mentis: number;
+    admins: number;
+    members: number;
+    meetings: number;
+    meetingsByStatus: Partial<Record<MeetingStatus, number>>;
+  };
+  activity: {
+    lastMeetingAt: string | null;
+    lastMemberJoinedAt: string | null;
+  };
+}
+
+export interface TenantMember {
+  id: string;
+  fullName: string;
+  role: TenantMemberRole;
+  isActive: boolean;
+  joinedAt: string;
+  emailMasked: string;
+  discType: string | null;
+  certificationStatus: string;
+  isCertified: boolean;
+  learningJourneyCompletedAt: string | null;
+}
+
+export interface TenantMembersResponse {
+  total: number;
+  page: number;
+  members: TenantMember[];
+}
+
+export interface TenantMeeting {
+  id: string;
+  startsAt: string;
+  status: string;
+  format: string;
+  hasFeedback: boolean;
+  mentor: { id: string; fullName: string };
+  menti: { id: string; fullName: string };
+}
+
+export interface TenantMeetingsResponse {
+  total: number;
+  page: number;
+  meetings: TenantMeeting[];
+}
+
+export interface DiscDistributionItem {
+  discType: string;
+  count: number;
+}
+
+export interface TenantAnalytics {
+  totalWithDisc: number;
+  discDistribution: DiscDistributionItem[];
+}
+
+export async function getTenantOverview(id: string) {
+  return platformFetch<TenantOverview>(`/api/platform/tenants/${id}/overview`);
+}
+
+export async function listTenantMembers(
+  id: string,
+  opts: { role?: TenantMemberRole; page?: number } = {}
+) {
+  const params = new URLSearchParams();
+  if (opts.role) params.set('role', opts.role);
+  if (opts.page) params.set('page', String(opts.page));
+  const q = params.toString() ? `?${params.toString()}` : '';
+  return platformFetch<TenantMembersResponse>(`/api/platform/tenants/${id}/members${q}`);
+}
+
+export async function listTenantMeetings(
+  id: string,
+  opts: { status?: string; page?: number } = {}
+) {
+  const params = new URLSearchParams();
+  if (opts.status) params.set('status', opts.status);
+  if (opts.page) params.set('page', String(opts.page));
+  const q = params.toString() ? `?${params.toString()}` : '';
+  return platformFetch<TenantMeetingsResponse>(`/api/platform/tenants/${id}/meetings${q}`);
+}
+
+export async function getTenantAnalytics(id: string) {
+  return platformFetch<TenantAnalytics>(`/api/platform/tenants/${id}/analytics`);
+}
