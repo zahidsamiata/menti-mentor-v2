@@ -10,7 +10,7 @@
 - **Çatı merge yöntemi:** rebase, commit'lenmemiş `PROJECT_STATUS.md` yüzünden engellendi → **merge** ile çözüldü (tek pointer çakışması `a0e1a69` tutularak; force-push yok; `PROJECT_STATUS.md`'ye dokunulmadı).
 - **⚠️ Foto volume (AÇIK — ürün sahibi doğrulamalı):** merge autodeploy'u tetikledi. Dokploy'da `UPLOAD_DIR=/app/uploads` + `/app/uploads` kalıcı volume aktifleşmeli. Panel erişimi olmadığından doğrulanamadı. Doğrulama: foto yükle → redeploy → **duruyor mu**. Talimat: `docs/kararlar/dokploy-foto-volume-talimati.md`. Foto sorunu merge'i geri aldırmaz, ayrı ele alınır (uid 1001 yazma izni olabilir).
 
-**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy) · (2) **login brute-force rate-limit** (PR #27 kalanı, canlı-öncesi) · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
+**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy) · (2) ~~login brute-force rate-limit~~ ✅ **PR #29 HAZIR** (backend branch `security/clubs-idor-login-ratelimit`, CI yeşil — `/clubs` IDOR kapısı + login rate-limit; PR #27'nin bugün main'de eksik iki parçası elle alındı, getUser-403 atlandı çünkü field-strip zaten var; **merge PO'da**) · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
 
 ## 🧭 SON DURUM ÖZETİ (DEVİR)
 **Bitenler (hepsi MERGE EDİLDİ — main'de/canlıda):** güvenlik (2 IDOR + timezone + **getUser IDOR fix**) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
