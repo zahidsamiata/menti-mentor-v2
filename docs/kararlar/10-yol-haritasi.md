@@ -6,6 +6,27 @@
 
 ---
 
+## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum — EN GÜNCEL)
+
+> Aşağıdaki eski "İŞ 0–8" planının çoğu tamamlandı (mail, IDOR, timezone, foto). Bu kuyruk
+> güncel önceliği yansıtır; öncelik sırasını Zahid değiştirebilir. Eski plan referans olarak altta durur.
+
+1. **MERGE TURU** — biriken tüm PR/commit'ler (#26–#32 + bugünküler: güvenlik, foto), CI yeşilse.
+   - Submodule pointer sırası **kritik**: backend push → çatı `git add backend` → çatı commit → çatı push (ara commit yok).
+   - **Merge kararı Zahid'de.** + **Dokploy foto volume ayarı bu turda** (persistent volume `/app/uploads` + `UPLOAD_DIR=/app/uploads` env + `NEXT_PUBLIC_API_URL` kontrolü).
+2. **PROFİL-DÜZENLEME KEŞFİ (PLANLA)** — kullanıcı bilgilerini/fotosunu **kayıttan SONRA** güncelleyebiliyor mu, silebiliyor/ekleyebiliyor mu? Profil düzenleme sayfası var mı, eksik mi?
+3. **KART + SAYFALAMA TASARIMI** — 06-tasarim-ux'taki kararlara göre. Backend **%90 hazır** (kart-havuz-backend-envanteri raporu). %UYUM İŞ 7'ye bağlı değil, bugünkü skorla çalışır.
+4. **RETENTION TURU** (büyük; teknik + davranışsal) — 3 aşamalı:
+   - a. **Keşif (PLANLA):** hesap/veri korunuyor mu; cleanup cron kimi siliyor; `lastLoginAt`/aktiflik verisi var mı; kullanıcıyı geri getiren ne var (bildirim/öğrenme/oyunlaştırma).
+   - b. **Metrik belirleme (Zahid kararı):** yönetici panelinde hangi anlamlı veriler.
+   - c. **Uygulama — YÖNETİCİ İSTATİSTİK PANELİ:** önce özet sayı/grafik → tıklayınca alt kişiler (**drill-down**). Kişi-bazlı liste değil, anlamlı istatistik öncelik. + pasifi dürtme araçları.
+   - Referans: docs/raporlar/yonetici-persona-ve-metrikler.md (⚠️ henüz eklenmedi — kullanıcı yükleyecek).
+5. **HAYALET-BACKEND LİSTESİ** — hayalet-backend raporundaki bulguları tek tek bağla/sil/ertele (Zahid ile birlikte karar).
+6. **SEKTÖR SKORU = İŞ 7** (aşağıdaki eski plandaki İŞ 7 ile aynı) — 5-bileşenli `sector-scorer`'ı canlı yola bağla. **Canlı eşleşmeyi değiştirir → staging ŞART → staging sonrası.**
+7. **MENTİ MENTÖR-TARAMA UX** — 100+ mentörlü tenant için gerçek arama/sayfalama (sinyal gelince; kart tasarımı bunu kısmen çözecek).
+
+---
+
 ## 🔄 ŞU AN ÜZERİNDE (devam eden — bitmeden diğerlerine geçme)
 
 ### İŞ 0 — MAIL ALTYAPISI (Resend + domain + bounce guard) — BAŞLADI
