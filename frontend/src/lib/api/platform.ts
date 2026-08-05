@@ -82,6 +82,23 @@ export async function getPlatformLogs(limit = 100, category?: string) {
   return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}${q}`);
 }
 
+// ─── Kullanıcı şikayetleri + otomatik tespit ─────────────────────────────────
+export async function listUserReports(status?: string) {
+  const q = status ? `?status=${status}` : '';
+  return platformFetch<{ items: UserReport[]; total: number }>(`/api/platform/user-reports${q}`);
+}
+
+export async function reviewUserReport(id: string, status: 'REVIEWED' | 'DISMISSED', note?: string) {
+  return platformFetch<{ ok: boolean }>(`/api/platform/user-reports/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status, note }),
+  });
+}
+
+export async function getAnomalies() {
+  return platformFetch<{ items: AnomalyFlag[]; total: number }>('/api/platform/anomalies');
+}
+
 // ─── Şüphe bildirimi (public) ────────────────────────────────────────────────
 export async function submitSuspicionReport(data: {
   tenantName: string;
@@ -160,4 +177,26 @@ export interface SystemLog {
   message: string;
   meta?: Record<string, unknown> | null;
   createdAt: string;
+}
+
+export interface UserReport {
+  id: string;
+  tenantId: string;
+  tenantName: string;
+  reason: string;
+  description: string | null;
+  status: string;
+  reviewNote: string | null;
+  createdAt: string;
+  reporter: { fullName: string };
+  target: { fullName: string };
+}
+
+export interface AnomalyFlag {
+  userId: string;
+  fullName: string;
+  tenantId: string;
+  reportCount: number;
+  rejectionCount: number;
+  reasons: string[];
 }

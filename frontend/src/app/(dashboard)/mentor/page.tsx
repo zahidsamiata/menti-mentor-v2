@@ -7,6 +7,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
+import { ReportUserButton } from '@/components/organisms/ReportUserButton';
 import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -401,6 +402,7 @@ export default function MentorDashboardPage() {
                     {c.warnings.length > 0 && (
                       <Badge variant="destructive" className="text-xs">Uyarı</Badge>
                     )}
+                    <ReportUserButton targetUserId={c.mentiId} targetName={c.mentiName} />
                   </div>
                 </div>
               ))}

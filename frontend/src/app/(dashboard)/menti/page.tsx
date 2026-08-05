@@ -7,6 +7,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
+import { ReportUserButton } from '@/components/organisms/ReportUserButton';
 import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -281,6 +282,7 @@ export default function MentiDashboardPage() {
                     >
                       {sentIds.has(mentor.id) ? 'Gönderildi ✓' : 'Mesaj'}
                     </Button>
+                    <ReportUserButton targetUserId={mentor.id} targetName={mentor.fullName} />
                   </div>
                 </div>
               ))}

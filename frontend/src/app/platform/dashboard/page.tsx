@@ -14,15 +14,20 @@ import {
   listSuspicionReports,
   reviewReport,
   getPlatformLogs,
+  listUserReports,
+  reviewUserReport,
+  getAnomalies,
   type PlatformStats,
   type PendingTenant,
   type TenantItem,
   type SuspicionReport,
   type SystemLog,
+  type UserReport,
+  type AnomalyFlag,
 } from '@/lib/api/platform';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 
-type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'logs';
+type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'abuse' | 'logs';
 
 export default function PlatformDashboard() {
   const router = useRouter();
@@ -32,6 +37,8 @@ export default function PlatformDashboard() {
   const [tenants, setTenants]     = useState<TenantItem[]>([]);
   const [reports, setReports]     = useState<SuspicionReport[]>([]);
   const [logs, setLogs]           = useState<SystemLog[]>([]);
+  const [userReports, setUserReports] = useState<UserReport[]>([]);
+  const [anomalies, setAnomalies] = useState<AnomalyFlag[]>([]);
   const [logCategory, setLogCategory] = useState<string>(''); // '' = tümü, 'AUDIT' = denetim izi, 'ERROR' = hatalar
   const [loading, setLoading]     = useState(true);
   const [error, setError]         = useState<string | null>(null);
@@ -52,6 +59,10 @@ export default function PlatformDashboard() {
       } else if (currentTab === 'reports') {
         const r = await listSuspicionReports();
         setReports(r.items);
+      } else if (currentTab === 'abuse') {
+        const [rep, anom] = await Promise.all([listUserReports(), getAnomalies()]);
+        setUserReports(rep.items);
+        setAnomalies(anom.items);
       } else if (currentTab === 'logs') {
         const r = await getPlatformLogs(200, logCategory || undefined);
         setLogs(r.items);
@@ -106,11 +117,19 @@ export default function PlatformDashboard() {
     void loadData(tab);
   }
 
+  async function handleReviewUserReport(id: string, status: 'REVIEWED' | 'DISMISSED') {
+    const note = window.prompt('İnceleme notu (opsiyonel):') ?? undefined;
+    await reviewUserReport(id, status, note);
+    notify(status === 'DISMISSED' ? 'Şikayet reddedildi.' : 'Şikayet incelendi.');
+    void loadData(tab);
+  }
+
   const tabs: { key: Tab; label: string; badge?: number }[] = [
     { key: 'overview', label: 'Genel Bakış' },
     { key: 'pending',  label: 'Bekleyen Başvurular', badge: stats?.totals.pendingTenants },
     { key: 'tenants',  label: 'Tüm Kurumlar' },
     { key: 'reports',  label: 'Şüphe Bildirimleri', badge: stats?.totals.unreviewedReports },
+    { key: 'abuse',    label: 'Kullanıcı Şikayetleri' },
     { key: 'logs',     label: 'Sistem Logları' },
   ];
 
@@ -332,6 +351,70 @@ export default function PlatformDashboard() {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* USER REPORTS + ANOMALIES */}
+        {!loading && tab === 'abuse' && (
+          <div className="space-y-6">
+            {/* Otomatik tespit (basit kural v1) */}
+            <div>
+              <h2 className="text-sm font-semibold text-muted-foreground mb-3">
+                Otomatik İşaretlenenler <span className="font-normal">(çok şikayet / çok reddedilen — v1)</span>
+              </h2>
+              {anomalies.length === 0 ? (
+                <p className="text-muted-foreground text-sm">İşaretli kullanıcı yok.</p>
+              ) : (
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {anomalies.map((a) => (
+                    <div key={a.userId} className="rounded-xl border border-yellow-700/50 bg-yellow-900/10 p-3">
+                      <p className="font-medium text-foreground text-sm truncate">{a.fullName}</p>
+                      <p className="text-xs text-muted-foreground">{a.reasons.join(' · ')}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Kullanıcı şikayetleri */}
+            <div>
+              <h2 className="text-sm font-semibold text-muted-foreground mb-3">Kullanıcı Şikayetleri</h2>
+              <div className="space-y-3">
+                {userReports.length === 0 && <p className="text-muted-foreground text-sm">Şikayet yok.</p>}
+                {userReports.map((r) => (
+                  <div key={r.id} className={`rounded-xl border p-5 ${r.status !== 'OPEN' ? 'border-border bg-card opacity-60' : 'border-yellow-700/50 bg-yellow-900/10'}`}>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1 min-w-0">
+                        <p className="font-semibold text-foreground text-sm">
+                          {r.reporter.fullName} → {r.target.fullName}
+                          <span className="ml-2 text-xs font-normal text-muted-foreground">({r.reason})</span>
+                        </p>
+                        <p className="text-xs text-muted-foreground">Kurum: {r.tenantName} · {r.status}</p>
+                        {r.description && <p className="text-sm text-muted-foreground mt-1">{r.description}</p>}
+                        {r.reviewNote && <p className="text-xs text-muted-foreground mt-1">Not: {r.reviewNote}</p>}
+                        <p className="text-xs text-muted-foreground">{new Date(r.createdAt).toLocaleString('tr-TR')}</p>
+                      </div>
+                      {r.status === 'OPEN' && (
+                        <div className="flex flex-col gap-2 shrink-0">
+                          <button
+                            onClick={() => handleReviewUserReport(r.id, 'REVIEWED')}
+                            className="rounded-lg bg-muted hover:bg-muted/80 px-3 py-1.5 text-sm font-medium text-foreground transition-colors"
+                          >
+                            İncelendi
+                          </button>
+                          <button
+                            onClick={() => handleReviewUserReport(r.id, 'DISMISSED')}
+                            className="rounded-lg px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            Reddet
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
