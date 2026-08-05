@@ -1,5 +1,5 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-06 (GÜVENLİK TURU KAPANDI + ESKİ PR TURU: 5 eski PR kapatıldı, 4'ü recover PR'larda kurtarıldı #32/#36/#37/#38 — merge PO'da) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-06 (GÜVENLİK + ESKİ PR TURU KAPANDI: 4 recover PR MERGED → canlıda; backend main `7828c8e`, çatı main `10e5c93`; PR kuyruğu GERÇEKTEN SIFIR) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 
 ## 📌 AÇIK İŞLER (ürün sahibi elinde — kaybolmasın)
 
@@ -22,11 +22,14 @@ Merge turu öncesi (2026-07-30/31) kalan 5 eski PR ele alındı. **Kanıtlı tri
 - **Çatı #29** (platform derin görünüm FE) → **KURTARILDI → recover PR #36** (çatı). Backend+API zaten canlıda, UI eksikti; platform.ts'e 4 fonksiyon eklendi (merge, overwrite değil) + dashboard cerrahi link. **KAPATILDI**.
 - **Çatı #30** (kayıt hata UX FE) → **KURTARILDI → recover PR #37** (çatı). #32 ile çift (error-kodu sözleşmesi). Tema regresyonu atlandı. **KAPATILDI**.
 - **Çatı #31** (CLAUDE.md 7 ders) → **KURTARILDI → recover PR #38** (çatı). 7 ders güncel CLAUDE.md'ye çakışmasız işlendi. **KAPATILDI**.
-- **Durum:** 5 eski PR **kapatıldı**; 4 yeni recover PR (**#32 backend, #36/#37/#38 çatı**) açık, dört CI de ✅, **merge kararı PO'da**. Base-dead PR'lar (feat/platform-panel-deep) merge edilemezdi → kurtarma cherry-pick/uyarlama ile yapıldı.
+- **Durum (2026-08-06 GÜNCEL): 4 recover PR MERGED → canlıda.** Backend main **`7828c8e`** (recover #32), çatı main **`10e5c93`** (pointer `7828c8e` + #36 deep-view UI + #37 register-UX + #38 CLAUDE.md dersleri). İki main CI ✅. 5 eski PR kapatıldı. **Frontend autodeploy gerçek** (yeni platform deep-view sayfası) + backend autodeploy (register mesajları) → **ürün sahibi deploy'ları doğrulamalı**. PR kuyruğu = **GERÇEKTEN SIFIR**.
+
+### 🎨 PLATFORM DEEP-VIEW UI — TEMA UYUMU (açık iş, sonraki tur)
+Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle** merge edildi (fonksiyon doğru, light-theme öncesi). Sayfa/bileşenler (`/platform/tenants/[id]` + 4 bileşen) tema-değişkeni (`bg-card`/`text-foreground` vb.) yerine hardcoded slate kullanıyor → panelin geri kalanıyla stil tutarsız. **İş:** slate→tema-değişkeni geçişi (kozmetik, düşük risk). Fonksiyonel değil, aciliyet düşük.
 
 ## 🔒 GÜVENLİK TURU KAPANDI (2026-08-06)
 **PR #30 + PR #31 canlıya alındı; güvenlik denetiminin TÜM maddeleri (O1-O5) main'de/canlıda. Hedeflenen güvenlik iş kuyruğu = temiz.**
-**Eski PR turu (2026-08-06) TAMAMLANDI:** merge turu öncesi 5 eski PR ele alındı → 5'i kapatıldı, 4'ü recover PR'larında kurtarıldı (#32/#36/#37/#38). Detay: yukarıdaki "✅ ESKİ AÇIK PR TURU" bloğu. Kanıtlı triyaj "muhtemelen superseded" varsayımını çürüttü (4/5 benzersiz içerik taşıyordu).
+**Eski PR turu (2026-08-06) TAMAMLANDI + MERGED:** 5 eski PR kapatıldı; 4 recover PR (#32/#36/#37/#38) main'e MERGE edildi → canlıda (backend `7828c8e`, çatı `10e5c93`). Detay: yukarıdaki "✅ ESKİ AÇIK PR TURU" bloğu. Kanıtlı triyaj "muhtemelen superseded" varsayımını çürüttü (4/5 benzersiz içerik taşıyordu). Kalan: #36 tema uyumu (yukarıda 🎨).
 - **PR #30 MERGED** (backend). Yeni **backend main HEAD `3f67024`** (merge-commit). Analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit → **canlıda**. Main CI ✅. Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı** (Dokploy erişimi ajanda yok).
 - **Çatı pointer hizalandı** (PR #34 MERGED): yeni **çatı main HEAD `d3505f9`**, backend pointer **`3f67024`** (backend main ile hizalı). İki repo senkron. Frontend autodeploy no-op (fonksiyonel değişiklik yok).
 - **Temizlik turu → PR #31 MERGED** (backend main `70a14d8`, çatı main `c6a05b9` — pointer PR #35 ile hizalı, iki CI ✅; O1-O5 **canlıda**). Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı**. İçerik — güvenlik denetiminin kalan 🟡 maddeleri:
