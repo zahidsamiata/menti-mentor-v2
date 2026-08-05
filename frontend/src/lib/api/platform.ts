@@ -77,8 +77,9 @@ export async function reviewReport(id: string, note?: string) {
   });
 }
 
-export async function getPlatformLogs(limit = 100) {
-  return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}`);
+export async function getPlatformLogs(limit = 100, category?: string) {
+  const q = category ? `&category=${encodeURIComponent(category)}` : '';
+  return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}${q}`);
 }
 
 // ─── Şüphe bildirimi (public) ────────────────────────────────────────────────
@@ -157,5 +158,6 @@ export interface SystemLog {
   level: string;
   category: string;
   message: string;
+  meta?: Record<string, unknown> | null;
   createdAt: string;
 }

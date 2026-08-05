@@ -32,6 +32,7 @@ export default function PlatformDashboard() {
   const [tenants, setTenants]     = useState<TenantItem[]>([]);
   const [reports, setReports]     = useState<SuspicionReport[]>([]);
   const [logs, setLogs]           = useState<SystemLog[]>([]);
+  const [logCategory, setLogCategory] = useState<string>(''); // '' = tümü, 'AUDIT' = denetim izi, 'ERROR' = hatalar
   const [loading, setLoading]     = useState(true);
   const [error, setError]         = useState<string | null>(null);
   const [actionMsg, setActionMsg] = useState<string | null>(null);
@@ -52,7 +53,7 @@ export default function PlatformDashboard() {
         const r = await listSuspicionReports();
         setReports(r.items);
       } else if (currentTab === 'logs') {
-        const r = await getPlatformLogs(200);
+        const r = await getPlatformLogs(200, logCategory || undefined);
         setLogs(r.items);
       }
     } catch (e) {
@@ -64,7 +65,7 @@ export default function PlatformDashboard() {
     } finally {
       setLoading(false);
     }
-  }, [router]);
+  }, [router, logCategory]);
 
   useEffect(() => { void loadData(tab); }, [tab, loadData]);
 
@@ -336,21 +337,59 @@ export default function PlatformDashboard() {
 
         {/* LOGS */}
         {!loading && tab === 'logs' && (
-          <div className="rounded-xl border border-border overflow-hidden">
-            {logs.map((log) => (
-              <div key={log.id} className="border-b border-border last:border-0 px-4 py-2.5 flex gap-3 text-sm">
-                <span className={`font-mono text-xs px-1.5 py-0.5 rounded shrink-0 ${
-                  log.level === 'ERROR' ? 'bg-red-900/60 text-destructive' :
-                  log.level === 'WARN'  ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
-                  'bg-muted text-muted-foreground'
-                }`}>{log.level}</span>
-                <span className="text-muted-foreground text-xs shrink-0">{log.category}</span>
-                <span className="text-foreground flex-1 truncate">{log.message}</span>
-                <span className="text-muted-foreground text-xs whitespace-nowrap">
-                  {new Date(log.createdAt).toLocaleString('tr-TR')}
-                </span>
-              </div>
-            ))}
+          <div className="space-y-3">
+            {/* Filtre: Tümü / Denetim İzi (AUDIT — kim neye baktı/ne yaptı) */}
+            <div className="flex gap-2">
+              {[
+                { key: '', label: 'Tümü' },
+                { key: 'AUDIT', label: 'Denetim İzi' },
+              ].map((f) => (
+                <button
+                  key={f.key}
+                  onClick={() => setLogCategory(f.key)}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-medium border transition-colors ${
+                    logCategory === f.key
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-border text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+
+            {logCategory === 'AUDIT' && (
+              <p className="text-xs text-muted-foreground">
+                Platform yöneticisinin kurum/kullanıcı verisine erişim ve aksiyonlarının denetim izi (KVKK). İçerik değil, yalnızca eylem loglanır.
+              </p>
+            )}
+
+            <div className="rounded-xl border border-border overflow-hidden">
+              {logs.length === 0 && <p className="px-4 py-3 text-sm text-muted-foreground">Kayıt yok.</p>}
+              {logs.map((log) => {
+                const meta = (log.meta ?? null) as Record<string, unknown> | null;
+                const target = meta?.['targetTenantId'] ?? meta?.['targetId'];
+                return (
+                  <div key={log.id} className="border-b border-border last:border-0 px-4 py-2.5 flex gap-3 text-sm">
+                    <span className={`font-mono text-xs px-1.5 py-0.5 rounded shrink-0 ${
+                      log.level === 'ERROR' ? 'bg-red-900/60 text-destructive' :
+                      log.level === 'WARN'  ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
+                      log.category === 'AUDIT' ? 'bg-blue-900/60 text-blue-600 dark:text-blue-400' :
+                      'bg-muted text-muted-foreground'
+                    }`}>{log.category === 'AUDIT' ? 'AUDIT' : log.level}</span>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-foreground truncate block">{log.message}</span>
+                      {log.category === 'AUDIT' && target != null && (
+                        <span className="text-muted-foreground text-xs">hedef: {String(target)} · IP: {String(meta?.['ip'] ?? '—')}</span>
+                      )}
+                    </div>
+                    <span className="text-muted-foreground text-xs whitespace-nowrap">
+                      {new Date(log.createdAt).toLocaleString('tr-TR')}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
       </main>
