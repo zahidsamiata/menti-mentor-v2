@@ -1,6 +1,23 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 **Son güncelleme:** 2026-08-05 (GÜVENLİK TURU: PR #30 MERGED + temizlik PR #31 hazır) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 
+## 📌 AÇIK İŞLER (ürün sahibi elinde — kaybolmasın)
+
+### ⏳ FOTO VOLUME DOĞRULAMA — ERTELENDİ (ürün sahibi hazır olduğunda)
+Dokploy'da `UPLOAD_DIR=/app/uploads` + volume panelden eklendi ama **canlıda doğrulanmadı**.
+Test adımları (`docs/kararlar/dokploy-foto-volume-talimati.md`'de detaylı):
+1. Backend deploy 'done' (yeşil) mi kontrol et.
+2. Uygulamada bir profil fotosu yükle → görünüyor mu.
+3. Backend'i **Redeploy** et.
+4. Redeploy sonrası foto **HÂLÂ duruyor mu** → duruyorsa volume çalışıyor. ✅
+
+Foto yüklenmiyor/görünmüyor/kayboluyorsa: muhtemelen **uid 1001 yazma izni** sorunu →
+ayrı ele alınır. Bu iş canlıyı **bloklamaz** (henüz gerçek foto yok); aciliyet düşük ama
+**gerçek foto yüklemeye başlamadan ÖNCE tamamlanmalı.**
+
+### 🟢 PR #31 MERGE KARARI — ürün sahibinde
+Temizlik turu (O1-O4) hazır, CI yeşil. Merge edilirse çatı pointer'ı yine hizalanmalı (aşağı bak).
+
 ## 🔒 GÜVENLİK TURU KAPANDI (2026-08-05)
 **PR #30 canlıya alındı, denetimin kalan maddeleri (O1-O4) temizlik PR'ında hazır. Güvenlik açısından bekleyen fonksiyonel açık kalmadı.**
 - **PR #30 MERGED** (backend). Yeni **backend main HEAD `3f67024`** (merge-commit). Analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit → **canlıda**. Main CI ✅. Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı** (Dokploy erişimi ajanda yok).
