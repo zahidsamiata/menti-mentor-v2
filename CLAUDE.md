@@ -1,6 +1,16 @@
 <!-- çalışma-kuralları -->
 # Çalışma Kuralları (her oturumda geçerli)
 
+## Çalışma Sözleşmesi — mod & onay
+- **Mod bildir**: her turda mod net olsun — PLAN (salt-okuma) / BYPASS (uygula) / MANUEL-ONAY (öner→onay→uygula).
+- **Geri-alınamaz adımda DUR**: merge, prod deploy, prod DB yazımı (backfill/migration), force-push, external
+  servise gönderim → önce DUR, onay bekle.
+- **PR aç, MERGE ETME**: merge kararı kullanıcınındır. Push + PR yeterli.
+- **Uçtan uca yürüt**: iş verilince tek turda kapsamlı ilerle; karar gerekeni "kullanıcı kararı gerekli: …" diye
+  NOT et, gereksiz durma.
+- **SHA/commit/branch tahmin etme**: durumu git'ten DOĞRULA, hafızadan varsayma.
+- **Dürüst pushback**: yanlış/riskli görüneni söyle; testi/CI'ı yeşil GÖSTERME — gerçek durumu ver.
+
 ## 📁 Proje Hafızası — nereye bakılır
 - Güncel durum + tam resim: PROJECT_STATUS.md
 - Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
@@ -11,6 +21,13 @@
 - **Her push öncesi `npm run verify` koş.** Yeşil değilse push yok.
 - verify = CI ile birebir aynı: backend tsc + tsc-test + eslint + frontend tsc + vitest + build + entegrasyon testleri.
 - `scripts/verify.sh` içeriği CI workflow ile eşlenmiş tutulur.
+
+## verify ↔ CI farkı — dikkat
+- `npm run verify` backend entegrasyon testlerini `TEST_DATABASE_URL` guard'ına tabi koşar. Lokalde TEST_DATABASE_URL
+  YOKSA testler guard'la DURUR (canlı Neon'a truncate atmaz) → yeşil sanma; asıl kanıt CI'dadır.
+- Backend CI yalnızca `main` hedefli PR/push'ta tetiklenir. Stacked (panel/feature-base) PR'larda backend CI koşmaz
+  → gerçek CI ancak main-base olunca çıkar. Çatı (umbrella) CI her branch'te koşar ve backend suite'ini submodule
+  pointer'ı üzerinden çalıştırır.
 
 ## Branch Akışı — DOĞRUDAN main'E PUSH YOK
 - Her iş feature branch'te yapılır: `git checkout -b feat/xxx`
@@ -29,6 +46,12 @@
 ## API/Şema Değişikliği
 - Endpoint veya Prisma şeması değişince "bunu kim kullanıyor?" taraması yapılır: testler, frontend, diğer servisler.
 
+## Veri Modeli — Kurum-içi rol/sayım kaynağı
+- Kurum-içi rol ve sayım (admin panel, KPI dahil) **`TenantMembership.role`** üzerindendir — `User.role` DEĞİL.
+  Bir kullanıcı farklı kurumlarda farklı rolde olabilir.
+- Her kullanıcı-katılım akışında (kayıt, OAuth, rol atama/çıkarma) `ensureMembership()` / `ensureMembershipSafe()`
+  (`membership.ts` servisi) çağrılır — idempotent, non-fatal (ana akışı bozmaz).
+
 ## Migration Kuralı
 - Neon shadow-DB sorunu: `IF NOT EXISTS` SQL + `db execute` + `migrate resolve`. `db push --accept-data-loss` YASAK.
 
@@ -37,6 +60,22 @@
 - Lokalde DB'ye yazmak = canlıyı anında etkilemek. Seed/migration/DB işleminde onay al.
 - Tehlikeli seed.ts / npm run seed / prisma db seed VERİ SİLER — asla çalıştırma.
   Güvenli: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs.
+
+## Ortam / Veritabanı — PROD ≠ DEV ≠ TEST
+- **Lokal geliştirme**: `backend/.env` → ana Neon (`ep-fancy-tooth-ab4u5xhr`, eu-west-2/İrlanda). Bu CANLI veri;
+  lokalde ona bağlıyken DB'ye YAZMA (salt-okuma sorgu, PII maskeli).
+- **Test**: `TEST_DATABASE_URL` (izole DB) beklenir. Yoksa guard (`assertTestDatabase.ts`) devreye girer — canlı
+  Neon'a TRUNCATE atılmaz, suite durur.
+- **CI**: ephemeral localhost Postgres (service container). `.env.test` gitignored → CI'a girmez; test env
+  `tests/setup.ts`'te set edilir.
+- **PROD**: docker-compose Postgres (`@postgres:5432`), Neon değil. Migration/backfill prod'da prod `DATABASE_URL` ile.
+- **Kural**: hangi DB'ye bağlı olduğunu ÖNCE host'tan doğrula (secret'sız). Yanlış DB'de iş yapma.
+
+## Neon test branch — geçici izole DB koreografisi
+- İzole test için ayrı Neon branch açılırsa: (1) mevcut `.env`'i yedekle, (2) yeni host'u kanıtla (secret'sız),
+  (3) iş bitince ana DB'ye GERİ DÖN. `.env.testbranch-temp` gibi geçici secret dosyaları iş sonunda silinir.
+- PC restart eski dev-server process'lerini kapatır — yeni oturumda `:3000/:3001` boş olabilir; yanlış DB'de
+  dinleyen stale process'e güvenme, portu doğrula.
 
 ## Belirsiz / Riskli Durumda
 - DUR ve kullanıcıya raporla. Tahmin yürüterek riskli adım atmak yasak.
@@ -90,6 +129,14 @@
 ### Bağımlılık
 - Yeni paket eklerken npm audit çalıştır. HIGH/CRITICAL varsa ekleme.
 
+### Yeniden kullanılacak kalıplar (bu projede mevcut)
+- **Ownership (`:id` IDOR)**: `requireSelfOrAdmin(paramName)` middleware (`authorize.ts`) — sahibi/ADMIN değilse
+  403. Yeni `:id`/`:userId` endpoint'inde inline yazma, route'a bunu ekle.
+- **Login/public brute-force**: IP-bazlı `loginRateLimiter` / `platformAuthRateLimiter` (`rateLimiter.ts`)
+  pattern'ini uyarla; `generalRateLimiter` tenant-key'lidir, public endpoint'te zayıftır.
+- **Kullanıcıya görünen mesajlar**: dağınık inline string yerine merkezi modül (`registerMessages.ts` / kod-bazlı
+  resolver). Enumeration-safe tut (hesap varlığını sızdırma).
+
 ### Şüphedeysen
 - Güvenlik açısından emin değilsen DUR ve kullanıcıya sor. Tahmin yürütme.
 
@@ -128,6 +175,10 @@
   (isimlendirme, yorum yoğunluğu, dosya düzeni).
 - Önemli/kalıcı bir mimari kararı (neden böyle yapıldı) CLAUDE.md'ye veya ilgili dosyanın
   başına kısa not olarak düş; sonraki geliştirici tahmin etmesin.
+
+### Dil
+- Kullanıcıya görünen her metin (hata/uyarı/buton/mesaj) TÜRKÇE; kod iç mekaniği (değişken/fonksiyon/commit/
+  error-code) İngilizce.
 
 <!-- /temiz-kod -->
 
