@@ -43,7 +43,9 @@
 - **DISC renk TON kararı (light):** hâlâ açık (bkz. 06 D22) — kart rozetini de etkiler. ❓
 
 ## 🟡 RETENTION / YÖNETİCİ PANELİ (2026-08-02 geç oturum)
-- **Yönetici paneli çekirdek metrikleri:** hangi anlamlı veriler gösterilecek? Retention turunda Zahid seçecek. ❓
+- ~~**Yönetici paneli çekirdek metrikleri:**~~ İlk set YAPILDI (mentörsüz menti / ölü eşleşme / pasif üye / arz-talep — health-metrics). Genişletme (görüşme sayıları, onboarding-%) hâlâ açık. 🟡
+- **Otomatik-nudge (KVKK/rıza):** Pasif üyelere OTOMATİK toplu re-engagement maili gönderilsin mi? Elle nudge yapıldı; otomatik = istenmeden mail (rıza/opt-out tasarımı gerekir) → bilinçli ERTELENDİ. Karar + tasarım Zahid'de. ❓
+- **Pasif/ölü eşiği:** pasif=30g, ölü-eşleşme=14g default kondu — bu eşikler doğru mu, tenant başına ayarlanabilir mi (query'de var, UI'de yok)? ❓
 - **(İdeal) Gerçek kullanıcılarla görüşme — ÜÇ TARAF:** yönetici + mentör + menti. Üçü için de gerçek görüşme, persona taslaklarını (üç sevdirme belgesi) doğrular. Şu an hepsi "eğitimli taslak". ⚪
 - Referanslar (3 persona seti): docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md · mentor-persona-ve-sevdirme-2026-08-02.md · menti-persona-ve-sevdirme-2026-08-02.md.
 

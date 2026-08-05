@@ -1,13 +1,37 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-02 (geç oturum: güvenlik fix'leri + fotoğraf altyapısı + kart/retention kararları) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-02 (geç oturum: güvenlik + foto + STK yönetici retention/aktivite turu) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 
 ## ⚡ TEK BAKIŞTA
 - **Canlı:** sivilkapasite.org ayakta (Dokploy). Mail (Resend) çalışıyor.
-- **DB:** Canlı = lokal aynı Neon. DISC soruları (20) + öğrenme aşamaları (13) yüklendi.
-- **Açık PR'lar:** Hiçbiri merge edilmedi. Çok sayıda iş PR/commit'lerde bekliyor (bugün foto altyapısı da eklendi).
-- **Bugün kapandı:** 2 IDOR açığı + timezone bug + fotoğraf altyapısı (upload+kart gösterimi).
-- **Sıradaki (bkz. 10 güncel öncelik kuyruğu):** MERGE TURU (+ Dokploy foto volume) → profil-düzenleme keşfi → kart+sayfalama tasarımı → retention turu.
-- **Açık kararlar:** tema DISC renk (light) + kart DISC gösterim biçimi + foto ne zaman zorunlu (bkz. 08).
+- **DB:** Canlı = lokal aynı Neon. DISC soruları (20) + öğrenme aşamaları (13) yüklendi. **`lastLoginAt` alanı eklendi (migration uygulandı).**
+- **Açık PR'lar:** Hiçbiri merge edilmedi. Çok sayıda iş PR/commit'lerde bekliyor (foto + retention turu dahil).
+- **Bugün kapandı:** 2 IDOR açığı + timezone bug + fotoğraf altyapısı + **STK yönetici retention/aktivite turu (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down)**.
+- **Sıradaki (bkz. 10 güncel öncelik kuyruğu):** MERGE TURU (+ Dokploy foto volume) → profil-düzenleme keşfi → kart+sayfalama tasarımı → **PLATFORM ADMIN keşfi** (lastLoginAt'i o da kullanacak).
+- **Açık kararlar:** tema DISC renk (light) + kart DISC gösterim biçimi + foto ne zaman zorunlu + **otomatik-nudge KVKK/rıza** (bkz. 08).
+
+## ✅ SON YAPILANLAR (2026-08-02 — STK YÖNETİCİ RETENTION/AKTİVİTE TURU)
+> Hepsi commit'li, **HİÇBİRİ merge edilmedi** (çatı `feat/light-theme`, backend `feat/platform-panel-deep`).
+> Temeli: STK yönetici envanterindeki 5 eksik (bkz. docs/raporlar/stk-yonetici-panel-envanteri).
+
+**1. `lastLoginAt` / aktivite altyapısı — RETENTION TEMELİ (backend `1895ca5`):**
+- `User.lastLoginAt DateTime?` eklendi. **MIGRATION Zahid onayıyla canlı Neon'a uygulandı** (nullable, veri kaybı yok, `IF NOT EXISTS`).
+- Yeniden kullanılabilir `recordUserActivity(userId)` (non-fatal) 3 auth noktasına bağlandı: local login, token refresh, OAuth. "Login değil aktivite" — refresh'te de tazelenir (uzun oturum yanlış pasif görünmesin).
+- ⚠️ Bu alan **platform admin panelini de besleyecek** (ortak veri — iki kez yazılmasın).
+
+**2. "Kimse kaynıyor mu" metrikleri (backend `e0edb4f`):**
+- `GET /api/admin/health-metrics` + `retentionMetrics.service.ts`: mentörsüz menti, ölü eşleşme (onaylı opt-in ama hiç görüşme), pasif üye (lastLoginAt eşiği, default 30g), arz-talep dengesi. Eşikler query ile ayarlanabilir.
+- **Tenant izolasyonu korundu** (her sorgu tenantId). PII: sadece ad/rol/zaman — ham discVector/email DÖNMEZ.
+
+**3. Nudge / dürtme (backend `465ae47`):**
+- `POST /api/admin/users/:id/nudge` — yönetici elle re-engagement. Mevcut mail altyapısı (Resend/SMTP) kullanıldı.
+- **Spam limiti 24s** (SystemLog'dan kontrol) + **denetim logu** (AUDIT, sadece ID — PII yok).
+- **Otomatik dürtme YAPILMADI:** cron altyapısı var AMA pasif üyelere otomatik toplu mail = istenmeden re-engagement (KVKK/rıza) → "riskli durumda dur" gereği bağlanmadı; rıza/opt-out tasarımıyla ayrı iş olarak NOT düşüldü (bkz. 08 açık soru).
+
+**4. KPI drill-down + Hatırlat butonu (çatı `b39b8bd`):**
+- `/admin/kpi`'ye `ProgramHealthSection`: özet sayıya tıkla → o gruptaki kişiler. Pasif üye + ölü eşleşme satırlarında "Hatırlat" (nudge) butonu (durum + 429 gösterimi), "+N daha" truncation.
+
+**5. Katılım modeli — SADECE KEŞİF/NOT (çatı `e5c738a`, kod yazılmadı):**
+- Not: docs/raporlar/katilim-modeli-mevcut-durum-notu-2026-08-02.md. Mevcut: ✅ ön-tanımlı davet mesajı (InvitationTemplate) + ✅ imzalı-token davet linki + ✅ admin elle üye ekleme. ❌ "Hayalet mod" (kişi katılmadan pasif hesap + sonra aktive) YOK, ❌ toplu davet YOK → ayrı tur.
 
 ## ✅ SON YAPILANLAR (2026-08-02 — GEÇ OTURUM: güvenlik + foto + kararlar)
 > Hepsi commit'li, **HİÇBİRİ merge edilmedi** (branch'ler: çatı `feat/light-theme`, backend `feat/platform-panel-deep`).

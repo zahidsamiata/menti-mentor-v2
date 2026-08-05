@@ -20,13 +20,16 @@
    - a. **Keşif (PLANLA):** hesap/veri korunuyor mu; cleanup cron kimi siliyor; `lastLoginAt`/aktiflik verisi var mı; kullanıcıyı geri getiren ne var (bildirim/öğrenme/oyunlaştırma).
    - b. **Metrik belirleme (Zahid kararı):** yönetici panelinde hangi anlamlı veriler.
    - c. **Uygulama — YÖNETİCİ İSTATİSTİK PANELİ:** önce özet sayı/grafik → tıklayınca alt kişiler (**drill-down**). Kişi-bazlı liste değil, anlamlı istatistik öncelik. + pasifi dürtme araçları.
+   - ✅ **DURUM (2026-08-02): STK-yönetici dilimi BÜYÜK ÖLÇÜDE YAPILDI** — `lastLoginAt` temeli (`1895ca5`) + kaynayan-üye metrikleri (`e0edb4f`) + elle nudge (`465ae47`) + KPI drill-down (`b39b8bd`). Bkz. 09-DURUM retention bloğu.
+   - 🟡 **KALAN (davranışsal + genişletme):** otomatik-nudge (KVKK/rıza — bkz. 08); mentör/menti "sevdirme" deneyimi (persona belgeleri); onboarding "aha"; görüşme sayıları/onboarding-% metrikleri; menti/mentör tarafı retention panelleri (şimdiki panel yönetici içindi).
    - **Referanslar — 3 persona belgesi (bu turun temeli):** menti/mentör/yönetici sevdirme belgeleri retention turunun temelidir; keşif + metrik + panel bunlardan türer:
      - docs/raporlar/menti-persona-ve-sevdirme-2026-08-02.md (talep tarafı — tutmak zor, kırılgan; bekleme anı riski)
      - docs/raporlar/mentor-persona-ve-sevdirme-2026-08-02.md (arz tarafı — en kıt kaynak; mentörü tutmak mentiden önce gelir)
      - docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md (3 yönetici personası + 3 temel soru + metrik taslağı)
-5. **HAYALET-BACKEND LİSTESİ** — hayalet-backend raporundaki bulguları tek tek bağla/sil/ertele (Zahid ile birlikte karar).
-6. **SEKTÖR SKORU = İŞ 7** (aşağıdaki eski plandaki İŞ 7 ile aynı) — 5-bileşenli `sector-scorer`'ı canlı yola bağla. **Canlı eşleşmeyi değiştirir → staging ŞART → staging sonrası.**
-7. **MENTİ MENTÖR-TARAMA UX** — 100+ mentörlü tenant için gerçek arama/sayfalama (sinyal gelince; kart tasarımı bunu kısmen çözecek).
+5. **PLATFORM ADMIN KEŞFİ (PLANLA)** — 4-rol metodolojisinin (STK yönetici ✅ → **platform admin** → mentör → menti) sıradaki rolü. `lastLoginAt`'i platform admin de kullanacak → STK ile ortak eksikler tek yerde birleştirilecek. (Not: STK yönetici metodolojisi — strateji ✅ + kıyas ✅ + aksiyon ✅ — büyük ölçüde tamam; kalan hayalet-mod/ön-tanımlı davet ayrı tur, bkz. katilim-modeli notu.)
+6. **HAYALET-BACKEND LİSTESİ** — hayalet-backend raporundaki bulguları tek tek bağla/sil/ertele (Zahid ile birlikte karar).
+7. **SEKTÖR SKORU = İŞ 7** (aşağıdaki eski plandaki İŞ 7 ile aynı) — 5-bileşenli `sector-scorer`'ı canlı yola bağla. **Canlı eşleşmeyi değiştirir → staging ŞART → staging sonrası.**
+8. **MENTİ MENTÖR-TARAMA UX** — 100+ mentörlü tenant için gerçek arama/sayfalama (sinyal gelince; kart tasarımı bunu kısmen çözecek).
 
 ---
 
