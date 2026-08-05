@@ -45,7 +45,7 @@
 ## 🟡 RETENTION / YÖNETİCİ PANELİ (2026-08-02 geç oturum)
 - **Yönetici paneli çekirdek metrikleri:** hangi anlamlı veriler gösterilecek? Retention turunda Zahid seçecek. ❓
 - **(İdeal) Gerçek kulüp/dernek yöneticileriyle görüşme:** persona taslağını doğrulamak için. ⚪
-- Referans: docs/raporlar/yonetici-persona-ve-metrikler.md (⚠️ henüz docs/raporlar'a eklenmedi — kullanıcı yükleyecek).
+- Referans: docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md (3 persona + 3 temel soru + metrik taslağı).
 
 ## KARAR VERİLDİKÇE
 Bir soru karara bağlanınca: ilgili konu belgesine (01-07) taşı, buradan sil, 09-DURUM.md'yi güncelle.

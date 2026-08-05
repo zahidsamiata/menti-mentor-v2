@@ -20,7 +20,7 @@
    - a. **Keşif (PLANLA):** hesap/veri korunuyor mu; cleanup cron kimi siliyor; `lastLoginAt`/aktiflik verisi var mı; kullanıcıyı geri getiren ne var (bildirim/öğrenme/oyunlaştırma).
    - b. **Metrik belirleme (Zahid kararı):** yönetici panelinde hangi anlamlı veriler.
    - c. **Uygulama — YÖNETİCİ İSTATİSTİK PANELİ:** önce özet sayı/grafik → tıklayınca alt kişiler (**drill-down**). Kişi-bazlı liste değil, anlamlı istatistik öncelik. + pasifi dürtme araçları.
-   - Referans: docs/raporlar/yonetici-persona-ve-metrikler.md (⚠️ henüz eklenmedi — kullanıcı yükleyecek).
+   - Referans: docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md (3 persona + metrik taslağı).
 5. **HAYALET-BACKEND LİSTESİ** — hayalet-backend raporundaki bulguları tek tek bağla/sil/ertele (Zahid ile birlikte karar).
 6. **SEKTÖR SKORU = İŞ 7** (aşağıdaki eski plandaki İŞ 7 ile aynı) — 5-bileşenli `sector-scorer`'ı canlı yola bağla. **Canlı eşleşmeyi değiştirir → staging ŞART → staging sonrası.**
 7. **MENTİ MENTÖR-TARAMA UX** — 100+ mentörlü tenant için gerçek arama/sayfalama (sinyal gelince; kart tasarımı bunu kısmen çözecek).
