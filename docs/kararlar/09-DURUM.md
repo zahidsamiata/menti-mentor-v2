@@ -1,5 +1,5 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-06 (GÜVENLİK TURU KAPANDI: PR #31 MERGED — PR KUYRUĞU SIFIR) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-06 (GÜVENLİK TURU KAPANDI: PR #31 MERGED; güvenlik iş kuyruğu temiz — ⚠️ 5 ESKİ PR triyaj bekliyor) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 
 ## 📌 AÇIK İŞLER (ürün sahibi elinde — kaybolmasın)
 
@@ -15,8 +15,17 @@ Foto yüklenmiyor/görünmüyor/kayboluyorsa: muhtemelen **uid 1001 yazma izni**
 ayrı ele alınır. Bu iş canlıyı **bloklamaz** (henüz gerçek foto yok); aciliyet düşük ama
 **gerçek foto yüklemeye başlamadan ÖNCE tamamlanmalı.**
 
-## 🔒 GÜVENLİK TURU KAPANDI (2026-08-06) — PR KUYRUĞU SIFIR
-**PR #30 + PR #31 canlıya alındı; güvenlik denetiminin TÜM maddeleri (O1-O5) main'de/canlıda. Bekleyen açık PR = SIFIR.**
+### 🧹 ESKİ AÇIK PR TRİYAJI — ürün sahibi kararı (kapat/incele)
+Merge turu öncesi (2026-07-30/31) kalan 5 eski PR açık; hiçbiri hedeflenen güncel işin parçası değil:
+- **Backend #27** (IDOR + login rate-limit) + **#28** (kayıt mesajları) — base `feat/platform-panel-deep` (main DEĞİL); içerikleri zaten main'de (#27 → PR #29 ile, #28 → `a0e1a69` ile). → muhtemelen **KAPAT** (superseded).
+- **Çatı #29** (platform derin görünüm frontend) — merge turu (PR #32) frontend'i aldı → muhtemelen **superseded**.
+- **Çatı #30** (kayıt hata UX frontend) — tek `MERGEABLE` olan; içeriği main'de var mı **İNCELE**, yoksa değerlendir, varsa kapat.
+- **Çatı #31** (CLAUDE.md güncelleme) — içerik güncel CLAUDE.md'de var mı **İNCELE**.
+- **Not:** Ajan otonom KAPATMADI (dışa dönük karar). Ayrı kısa triyaj turu: her birini "main'de var mı" diye doğrula → superseded ise kapat.
+
+## 🔒 GÜVENLİK TURU KAPANDI (2026-08-06)
+**PR #30 + PR #31 canlıya alındı; güvenlik denetiminin TÜM maddeleri (O1-O5) main'de/canlıda. Hedeflenen güvenlik iş kuyruğu = temiz.**
+**⚠️ DÜZELTME (kanıt):** "PR kuyruğu tamamen sıfır" DEĞİL — merge turu ÖNCESİ (2026-07-30/31) **5 eski PR hâlâ açık**: backend #27/#28 (base `feat/platform-panel-deep`, main değil → içerik zaten main'de: #27→#29, #28→a0e1a69), çatı #29/#30/#31 (eski frontend/docs, merge turuyla büyük ölçüde superseded). Bunlar **hedeflenen işin parçası değil**; ayrı triyaj bekliyor (bkz. AÇIK İŞLER).
 - **PR #30 MERGED** (backend). Yeni **backend main HEAD `3f67024`** (merge-commit). Analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit → **canlıda**. Main CI ✅. Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı** (Dokploy erişimi ajanda yok).
 - **Çatı pointer hizalandı** (PR #34 MERGED): yeni **çatı main HEAD `d3505f9`**, backend pointer **`3f67024`** (backend main ile hizalı). İki repo senkron. Frontend autodeploy no-op (fonksiyonel değişiklik yok).
 - **Temizlik turu → PR #31 MERGED** (backend main `70a14d8`, çatı main `c6a05b9` — pointer PR #35 ile hizalı, iki CI ✅; O1-O5 **canlıda**). Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı**. İçerik — güvenlik denetiminin kalan 🟡 maddeleri:
