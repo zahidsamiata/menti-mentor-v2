@@ -4,13 +4,14 @@
 ## 🚀 MERGE TURU TAMAMLANDI (2026-08-05)
 **Biriken TÜM iş iki repoda main'e merge edildi; iki main CI de YEŞİL. Bekleyen birikim = SIFIR.**
 - **Backend** (menti-mentor) PR #26 → main. Yeni main HEAD **`dacc171`** (merge-commit). Main CI ✅.
-- **Çatı** (menti-mentor-v2) PR #32 → main. Yeni main HEAD **`5dfe539`**; backend pointer **`a0e1a69`** (getUser IDOR fix dahil, canlıda). Main CI ✅.
+- **Çatı** (menti-mentor-v2) PR #32 → main; sonra pointer hizalama PR #33 → main. Güncel çatı main HEAD **`962889c`**; backend pointer **`975c03f`** (backend main HEAD'ine hizalı). Main CI ✅.
 - **getUser IDOR fix** (`a0e1a69`): ham DISC vektörü/PII yalnızca self/admin — tenant-içi sızıntı kapandı.
+- **PR #29 MERGED (backend main `975c03f`):** PR #27'nin main'de eksik iki parçası — **`/users/:userId/clubs` IDOR kapısı** (`requireSelfOrAdmin`) + **login brute-force rate-limit** (`loginRateLimiter`, 10/dk/IP) — canlıda. getUser-403 + f11134e bilinçli atlandı (field-strip zaten var). Çatı pointer PR #33 ile `975c03f`'ye hizalandı (çatı main `962889c`), frontend autodeploy no-op tetiklendi.
 - **PR #28 incelendi:** iyi huylu bakım işi (backend pointer→`b313601` + `PLATFORM_ADMIN_EMAIL` env passthrough), ürün sahibinin kendi hesabından; `a0e1a69` onu kapsıyor → **iş/veri kaybı yok, süreç ihlali yok**.
 - **Çatı merge yöntemi:** rebase, commit'lenmemiş `PROJECT_STATUS.md` yüzünden engellendi → **merge** ile çözüldü (tek pointer çakışması `a0e1a69` tutularak; force-push yok; `PROJECT_STATUS.md`'ye dokunulmadı).
 - **⚠️ Foto volume (AÇIK — ürün sahibi doğrulamalı):** merge autodeploy'u tetikledi. Dokploy'da `UPLOAD_DIR=/app/uploads` + `/app/uploads` kalıcı volume aktifleşmeli. Panel erişimi olmadığından doğrulanamadı. Doğrulama: foto yükle → redeploy → **duruyor mu**. Talimat: `docs/kararlar/dokploy-foto-volume-talimati.md`. Foto sorunu merge'i geri aldırmaz, ayrı ele alınır (uid 1001 yazma izni olabilir).
 
-**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy) · (2) ~~login brute-force rate-limit~~ ✅ **PR #29 HAZIR** (backend branch `security/clubs-idor-login-ratelimit`, CI yeşil — `/clubs` IDOR kapısı + login rate-limit; PR #27'nin bugün main'de eksik iki parçası elle alındı, getUser-403 atlandı çünkü field-strip zaten var; **merge PO'da**) · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
+**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy — tek açık teknik doğrulama) · (2) ~~login rate-limit / clubs IDOR~~ ✅ **PR #29 MERGED (canlıda)** · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
 
 ## 🧭 SON DURUM ÖZETİ (DEVİR)
 **Bitenler (hepsi MERGE EDİLDİ — main'de/canlıda):** güvenlik (2 IDOR + timezone + **getUser IDOR fix**) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
