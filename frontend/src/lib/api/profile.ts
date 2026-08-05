@@ -27,10 +27,16 @@ export interface UserProfileData {
   sectorTags: string[];
   linkedinUrl: string | null;
   instagramUrl: string | null;
+  avatarUrl: string | null;
   expectationCategories: string[];
   timeCommitment: string | null;
   interactionStyle: string | null;
   approvalStatus: string;
+}
+
+/** POST /api/users/me/avatar yanıtı — yeni profil fotoğrafı URL'i. */
+export interface AvatarUploadResponse {
+  avatarUrl: string;
 }
 
 export interface ProfileUpdatePayload {

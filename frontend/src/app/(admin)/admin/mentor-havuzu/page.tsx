@@ -17,6 +17,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { UserAvatar } from '@/components/atoms/UserAvatar';
 import type { ApprovalStatus } from '@/types/auth';
 
 // DISC arketipi için tema-uyumlu renkler (waiting-room ile aynı palet).
@@ -105,9 +106,7 @@ export default function MentorHavuzuPage() {
                       {/* Ad */}
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold">
-                            {user.fullName[0]?.toUpperCase()}
-                          </div>
+                          <UserAvatar src={user.avatarUrl} name={user.fullName} size={32} className="text-xs" />
                           <span className="font-medium truncate max-w-[180px]">{user.fullName}</span>
                         </div>
                       </td>

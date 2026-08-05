@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
+import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -381,9 +382,7 @@ export default function MentorDashboardPage() {
               {candidatesData.items.map((c) => (
                 <div key={c.mentiId} className="flex items-center justify-between py-3">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-sm font-semibold">
-                      {c.mentiName[0]}
-                    </div>
+                    <UserAvatar src={c.mentiAvatarUrl} name={c.mentiName} size={36} />
                     <div>
                       <p className="text-sm font-medium">{c.mentiName}</p>
                       <p className="text-xs text-muted-foreground">

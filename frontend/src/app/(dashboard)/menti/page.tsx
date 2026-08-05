@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
+import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -250,9 +251,7 @@ export default function MentiDashboardPage() {
               {mentorsData.items.map((mentor) => (
                 <div key={mentor.id} className="flex items-center justify-between py-3">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-sm font-semibold">
-                      {mentor.fullName[0]}
-                    </div>
+                    <UserAvatar src={mentor.avatarUrl} name={mentor.fullName} size={36} />
                     <div>
                       <p className="text-sm font-medium">{mentor.fullName}</p>
                       <div className="flex items-center gap-1.5 mt-0.5">

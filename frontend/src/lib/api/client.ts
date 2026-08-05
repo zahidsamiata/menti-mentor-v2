@@ -75,10 +75,12 @@ async function executeRequest<T>(
   tenantId: string | undefined,
   extra: Record<string, string>,
 ): Promise<ApiResult<T>> {
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-    ...extra,
-  };
+  // FormData (dosya yükleme) gönderiliyorsa Content-Type'ı ELLE set ETME — tarayıcının
+  // multipart boundary'yi kendisi eklemesi gerekir. Aksi hâlde backend body'yi parse edemez.
+  const isFormData = typeof FormData !== 'undefined' && body instanceof FormData;
+
+  const headers: Record<string, string> = { ...extra };
+  if (!isFormData) headers['Content-Type'] = 'application/json';
   if (token) headers['Authorization'] = `Bearer ${token}`;
   if (tenantId) headers['X-Tenant-Id'] = tenantId;
 
@@ -86,7 +88,12 @@ async function executeRequest<T>(
     const response = await fetch(`${BASE_URL}${path}`, {
       method,
       headers,
-      body: body !== undefined ? JSON.stringify(body) : undefined,
+      body:
+        body === undefined
+          ? undefined
+          : isFormData
+            ? (body as FormData)
+            : JSON.stringify(body),
       credentials: 'include',
     });
 

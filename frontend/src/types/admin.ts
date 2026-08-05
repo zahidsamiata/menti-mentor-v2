@@ -22,6 +22,8 @@ export interface AdminUser {
   needsOrientation: boolean;
   approvalStatus: ApprovalStatus;
   createdAt: string;
+  // Profil fotoğrafı — yoksa kartta baş-harf avatarına düşülür.
+  avatarUrl?: string | null;
 }
 
 export type AdminUsersResponse = PaginatedResponse<AdminUser>;
