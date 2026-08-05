@@ -1,5 +1,5 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-05 (GÜVENLİK TURU: PR #30 MERGED + temizlik PR #31 hazır) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-06 (GÜVENLİK TURU KAPANDI: PR #31 MERGED — PR KUYRUĞU SIFIR) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 
 ## 📌 AÇIK İŞLER (ürün sahibi elinde — kaybolmasın)
 
@@ -15,14 +15,11 @@ Foto yüklenmiyor/görünmüyor/kayboluyorsa: muhtemelen **uid 1001 yazma izni**
 ayrı ele alınır. Bu iş canlıyı **bloklamaz** (henüz gerçek foto yok); aciliyet düşük ama
 **gerçek foto yüklemeye başlamadan ÖNCE tamamlanmalı.**
 
-### 🟢 PR #31 MERGE KARARI — ürün sahibinde
-Temizlik turu (O1-O4) hazır, CI yeşil. Merge edilirse çatı pointer'ı yine hizalanmalı (aşağı bak).
-
-## 🔒 GÜVENLİK TURU KAPANDI (2026-08-05)
-**PR #30 canlıya alındı, denetimin kalan maddeleri (O1-O4) temizlik PR'ında hazır. Güvenlik açısından bekleyen fonksiyonel açık kalmadı.**
+## 🔒 GÜVENLİK TURU KAPANDI (2026-08-06) — PR KUYRUĞU SIFIR
+**PR #30 + PR #31 canlıya alındı; güvenlik denetiminin TÜM maddeleri (O1-O5) main'de/canlıda. Bekleyen açık PR = SIFIR.**
 - **PR #30 MERGED** (backend). Yeni **backend main HEAD `3f67024`** (merge-commit). Analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit → **canlıda**. Main CI ✅. Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı** (Dokploy erişimi ajanda yok).
 - **Çatı pointer hizalandı** (PR #34 MERGED): yeni **çatı main HEAD `d3505f9`**, backend pointer **`3f67024`** (backend main ile hizalı). İki repo senkron. Frontend autodeploy no-op (fonksiyonel değişiklik yok).
-- **Temizlik turu → PR #31 HAZIR** (backend `chore/security-cleanup`, CI ✅, **merge PO'da**): güvenlik denetiminin kalan 🟡 maddeleri:
+- **Temizlik turu → PR #31 MERGED** (backend main `70a14d8`, çatı main `c6a05b9` — pointer PR #35 ile hizalı, iki CI ✅; O1-O5 **canlıda**). Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı**. İçerik — güvenlik denetiminin kalan 🟡 maddeleri:
   - **O1** — 4 public endpoint'e IP-bazlı rate-limit (loginRateLimiter deseni, env-ayarlanabilir): `POST /auth/register` (10/dk), `POST /suspicion-reports` (5/dk), `GET /invitations/:token/join` (20/dk — kampüs NAT toplu katılımı için makul; imzalı JWT'de brute-force zaten infeasible), `GET /tenants/self-serve/check-slug` (30/dk). Test: register + invitation-join.
   - **O2** — `listUsers` (menti mentör-tarama) over-fetch: `email` + serbest-metin `bio/expertise/target` peer'a dönmüyor (kart yalnız fullName/discType/sectorTags/avatar kullanıyor — doğrulandı). Admin havuzu farklı endpoint, etkilenmez.
   - **O3** — createUser/updateUser JSON alanları (`temperament/volunteer/pastProjects/education`) `z.any()` → `boundedJson` 20KB cap (JSON bomba koruması).
