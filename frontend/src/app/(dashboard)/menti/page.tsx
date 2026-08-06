@@ -14,7 +14,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
-import { matchingApi, matchRequestApi } from '@/lib/api/matching';
+import { matchingApi } from '@/lib/api/matching';
+import { conversationsApi } from '@/lib/api/conversations';
 import { agreementsApi } from '@/lib/api/agreements';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
@@ -92,20 +93,22 @@ export default function MentiDashboardPage() {
 
   async function handleSend() {
     if (!user || !selectedMentor) return;
+    const body = message.trim();
+    // İlk mesaj ZORUNLU — konuşma bu mesajla başlar.
+    if (!body) { setSendError('Lütfen bir mesaj yazın.'); return; }
     setSending(true);
     setSendError(null);
-    const result = await matchRequestApi.create(api, {
-      requesterUserId: user.id,
-      targetType: 'USER',
-      targetId: selectedMentor.id,
-      requestMessage: message.trim() || undefined,
+    const result = await conversationsApi.start(api, {
+      mentorUserId: selectedMentor.id,
+      message: body,
     });
     setSending(false);
     if (result.ok) {
       setSentIds((prev) => new Set(prev).add(selectedMentor.id));
       closeModal();
+      router.push(`/messages/${result.data.conversation.id}`);
     } else {
-      setSendError(result.error.message ?? 'Talep gönderilemedi.');
+      setSendError(result.error.message ?? 'Mesaj gönderilemedi.');
     }
   }
 
@@ -300,23 +303,23 @@ export default function MentiDashboardPage() {
         {selectedMentor && (
           <>
             <h2 className="text-lg font-semibold">
-              {selectedMentor.fullName} · Talep Gönder
+              {selectedMentor.fullName} · Mesaj Gönder
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Kendinizi kısaca tanıtın ve bu mentorla neden eşleşmek istediğinizi yazın.
+              Kendinizi kısaca tanıtın ve neden eşleşmek istediğinizi yazın. Bu ilk mesajla konuşma başlar.
             </p>
 
             <textarea
               className="mt-4 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
               rows={5}
-              maxLength={1000}
+              maxLength={2000}
               placeholder="Merhaba, ben... Bu eşleşmeden beklentim..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               autoFocus
             />
             <p className="mt-1 text-right text-xs text-muted-foreground">
-              {message.length}/1000
+              {message.length}/2000
             </p>
 
             {sendError && (
@@ -327,7 +330,7 @@ export default function MentiDashboardPage() {
               <Button variant="outline" onClick={closeModal} disabled={sending}>
                 Vazgeç
               </Button>
-              <Button onClick={handleSend} disabled={sending}>
+              <Button onClick={handleSend} disabled={sending || message.trim().length === 0}>
                 {sending ? 'Gönderiliyor…' : 'Gönder'}
               </Button>
             </div>

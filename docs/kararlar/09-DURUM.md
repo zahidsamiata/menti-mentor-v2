@@ -3,6 +3,17 @@
 
 ## 📌 AÇIK İŞLER (ürün sahibi elinde — kaybolmasın)
 
+### 💬 CHAT v1 (menti↔mentör mesajlaşma) — PR HAZIR, MERGE PO'DA (2026-08-06)
+Tam inşa bitti (backend + okundu-bazlı e-posta + frontend inbox/thread + çan/rozet). **PR'lar açık, MERGE YOK.**
+- **PR'lar:** backend `menti-mentor#33` · çatı `menti-mentor-v2#40` (base `docs/merge-turu-devir`). Branch: iki repoda `feat/chat-messaging`.
+- **Migration:** `Conversation`+`Message` Faz 1'de canlı=lokal DB'ye uygulandı (additive, PO onaylı). Bu turda yeni migration YOK.
+- **Kapsam:** menti zorunlu ilk mesajla açar (hemen açık) · katılımcı-bazlı yetki (yabancı 404, admin aynı-tenant okur) · okundu-bazlı mail (okunmamış yokken ilk mesajda) · polling (gerçek zamanlı yok).
+- **İKİ REPO CI YEŞİL** ✅ (backend #33 `ci` pass; çatı #40 Backend-TS+Lint ✅ + Frontend-TS+Build ✅ + Integration Tests ✅). Entegrasyon testleri CI'da postgres'e karşı geçti.
+- **Bir hata bulundu+giderildi:** çatı frontend job'ı vitest de koşuyor; `MessagesBell` nav'a eklenince `ux-fixes.test.tsx` (api'yi `() => ({})` mock'luyor) patladı → child'ı null'a mock'layarak düzeltildi (38 test geçti). Ders: yerel doğrulamaya **frontend vitest** de eklenmeli (sadece build+tsc yetmez).
+- **Detay + bilinen sınırlar:** `docs/kararlar/chat-v1-teslim.md` (ürün sahibi buradan inceler).
+- **Bilinen sınırlar (PO kararı):** eski `MatchRequest.requestMessage` backfill YOK (kapsam) · `VisibilityOptIn.requestMessage` ölü alan DROP'u ertelendi (şema değişikliği → ayrı tur) · `Meeting.requestMessage` ayrı akış, dokunulmadı.
+- **Sonraki:** PO PR'ları (#33/#40) inceleyip revize/merge kararı verecek. MERGE YAPILMADI.
+
 ### ⏳ FOTO VOLUME DOĞRULAMA — ERTELENDİ (ürün sahibi hazır olduğunda)
 Dokploy'da `UPLOAD_DIR=/app/uploads` + volume panelden eklendi ama **canlıda doğrulanmadı**.
 Test adımları (`docs/kararlar/dokploy-foto-volume-talimati.md`'de detaylı):
