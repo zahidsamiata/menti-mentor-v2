@@ -5,18 +5,21 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
+import { MessagesBell } from '@/components/organisms/MessagesBell';
 import { cn } from '@/lib/utils';
 
 const NAV_BY_ROLE: Record<string, { href: string; label: string; icon: string }[]> = {
   MENTI: [
     { href: '/menti',             label: 'Ana Sayfa',    icon: '🏠' },
     { href: '/learning-journey',  label: 'Yolculuk',     icon: '🚀' },
+    { href: '/messages',          label: 'Mesajlar',     icon: '💬' },
     { href: '/meetings',          label: 'Görüşmelerim', icon: '📅' },
     { href: '/profile',           label: 'Profil',       icon: '👤' },
   ],
   MENTOR: [
     { href: '/mentor',               label: 'Ana Sayfa',    icon: '🏠' },
     { href: '/learning-journey',     label: 'Yolculuk',     icon: '🚀' },
+    { href: '/messages',             label: 'Mesajlar',     icon: '💬' },
     { href: '/mentor/availability',  label: 'Müsaitliğim',  icon: '📆' },
     { href: '/meetings',             label: 'Görüşmelerim', icon: '📅' },
     { href: '/profile',              label: 'Profil',       icon: '👤' },
@@ -62,6 +65,7 @@ export function DashboardNav() {
           <span className="hidden sm:inline max-w-[140px] truncate text-xs text-muted-foreground">
             {user.fullName}
           </span>
+          <MessagesBell />
           <ThemeToggle />
           <button
             type="button"
