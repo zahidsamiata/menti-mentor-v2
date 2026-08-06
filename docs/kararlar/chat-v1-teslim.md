@@ -1,8 +1,9 @@
 # Chat v1 — Teslim Dökümanı (menti↔mentör talep mesajlaşma)
 
-**Tarih:** 2026-08-06 · **Durum:** PR hazır, MERGE YOK — inceleme/revizyon kararı ürün sahibinde.
+**Tarih:** 2026-08-06 · **Durum:** PR hazır, **iki repo CI YEŞİL** ✅, MERGE YOK — inceleme/revizyon kararı ürün sahibinde.
 **PR'lar:** backend `menti-mentor#33` · çatı `menti-mentor-v2#40` (base `docs/merge-turu-devir`).
 **Branch:** iki repoda `feat/chat-messaging`.
+**CI:** backend `ci` pass · çatı Backend-TS+Lint + Frontend-TS+Build + Integration Tests pass.
 
 > Ürün sahibi bu belgeyi okuyup beğenmediği/revize istediği yerleri işaretler; revizyon sonrası merge.
 
