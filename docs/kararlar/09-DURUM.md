@@ -38,6 +38,13 @@ Merge turu öncesi (2026-07-30/31) kalan 5 eski PR ele alındı. **Kanıtlı tri
 ### 🎨 PLATFORM DEEP-VIEW UI — TEMA UYUMU (açık iş, sonraki tur)
 Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle** merge edildi (fonksiyon doğru, light-theme öncesi). Sayfa/bileşenler (`/platform/tenants/[id]` + 4 bileşen) tema-değişkeni (`bg-card`/`text-foreground` vb.) yerine hardcoded slate kullanıyor → panelin geri kalanıyla stil tutarsız. **İş:** slate→tema-değişkeni geçişi (kozmetik, düşük risk). Fonksiyonel değil, aciliyet düşük.
 
+### 🔒 DİJİTAL AYAK İZİ — DERİN KISIM (ürün sahibi hazır olduğunda, web işi)
+Belge nötrleme YAPILDI (PR hazır: çatı `menti-mentor-v2#42`, branch `chore/docs-neutralize-names`). Ama asıl iz **Git commit author bilgisinde + repo'nun PUBLIC olmasında**. Yapılacak (kod değil, GitHub web ayarı):
+1. **İki repoyu da private yap:** `menti-mentor-v2` (çatı) + `menti-mentor` (backend submodule) — ikisi de Settings > Danger Zone > Make private.
+2. **Private sonrası Dokploy'un repoya hâlâ eriştiğini doğrula** (deploy token/bağlantı) — erişim koparsa autodeploy durur, önce bunu teyit et.
+3. **Git author geçmişini yeniden yazma ÖNERİLMİYOR** (çok riskli — tüm commit hash'leri değişir, submodule bozulur). Private yapmak daha güvenli çözüm.
+- **Aciliyet: düşük.** Belge nötrleme yeterli ilk adım.
+
 ## 🔒 GÜVENLİK TURU KAPANDI (2026-08-06)
 **PR #30 + PR #31 canlıya alındı; güvenlik denetiminin TÜM maddeleri (O1-O5) main'de/canlıda. Hedeflenen güvenlik iş kuyruğu = temiz.**
 **Eski PR turu (2026-08-06) TAMAMLANDI + MERGED:** 5 eski PR kapatıldı; 4 recover PR (#32/#36/#37/#38) main'e MERGE edildi → canlıda (backend `7828c8e`, çatı `10e5c93`). Detay: yukarıdaki "✅ ESKİ AÇIK PR TURU" bloğu. Kanıtlı triyaj "muhtemelen superseded" varsayımını çürüttü (4/5 benzersiz içerik taşıyordu). Kalan: #36 tema uyumu (yukarıda 🎨).
