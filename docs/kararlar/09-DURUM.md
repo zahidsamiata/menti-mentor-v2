@@ -1,5 +1,14 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-09 (CHAT CANLIYA TAŞINIYOR: backend #33 MERGED, frontend PR #47 AÇIK → aşağıdaki ⚠️ GÜNCELLEME; backend main `0ec6b2b`) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-09 (CHAT TAM CANLIDA: frontend #47 + #48 MERGED, pointer `0ec6b2b` senkron → aşağıdaki ⚠️ GÜNCELLEME; backend main `0ec6b2b`) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+> ⚠️ **GÜNCELLEME (2026-08-09) — CHAT TAM CANLIDA (frontend merge edildi, chat işi kapandı):**
+> - **Frontend #47 MERGED → canlıda.** inbox/thread + `MessagesBell` (45sn polling) + `conversations.ts` + menti ilk-mesaj + nav.
+>   Çatı main submodule pointer = **`0ec6b2b`** = backend main HEAD (doğrulandı, senkron). İki repo main CI ✅. Açık PR = SIFIR.
+> - **DB doğrulandı (salt-okuma):** canlı Neon'da `Conversation` + `Message` tabloları **VAR** (boş), kolonlar şemayla birebir,
+>   `_prisma_migrations`'ta `add_chat_conversation_message` **applied** (2026-08-06, rolled_back=null). → önceki "prod migration
+>   davranışı TEYİT GEREK" çekincesi bu DB için **kapandı** (canlı=lokal aynı Neon). Bu turda DB'ye YAZILMADI.
+> - **#48 MERGED** (bir önceki "taşınıyor" notu). Bu not onu GÜNCELLER: frontend artık AÇIK değil, **MERGED**.
+> - **CHAT İŞİ KAPANDI.** Kalan tek şey: **ürün sahibi uçtan uca canlı test** (menti→mentör ilk mesaj · thread · çan rozeti · okundu).
 
 > ⚠️ **GÜNCELLEME (2026-08-09) — CHAT CANLIYA TAŞINIYOR (backend canlıda, frontend merge PO'da):**
 > - **Backend #33 MERGED → canlıda.** 6 konuşma ucu + Conversation/Message şeması + okundu-bazlı e-posta main'de.
