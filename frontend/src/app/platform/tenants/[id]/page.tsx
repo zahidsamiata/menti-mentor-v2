@@ -28,12 +28,12 @@ const TABS: { key: DetailTab; label: string }[] = [
 ];
 
 function tenantStatusBadge(tenant: TenantOverview['tenant']) {
-  if (!tenant.isActive) return { cls: 'bg-red-900/60 text-red-400', label: 'Dondurulmuş' };
+  if (!tenant.isActive) return { cls: 'bg-red-900/60 text-destructive', label: 'Dondurulmuş' };
   if (tenant.verificationStatus === 'PENDING_REVIEW')
-    return { cls: 'bg-yellow-900/60 text-yellow-400', label: tenant.verificationStatus };
+    return { cls: 'bg-yellow-900/60 text-amber-600 dark:text-amber-400', label: tenant.verificationStatus };
   if (tenant.verificationStatus === 'APPROVED' || tenant.verificationStatus === 'AUTO_APPROVED')
-    return { cls: 'bg-green-900/60 text-green-400', label: tenant.verificationStatus };
-  return { cls: 'bg-slate-700 text-slate-400', label: tenant.verificationStatus };
+    return { cls: 'bg-green-900/60 text-emerald-600 dark:text-emerald-400', label: tenant.verificationStatus };
+  return { cls: 'bg-muted text-muted-foreground', label: tenant.verificationStatus };
 }
 
 export default function TenantDetailPage() {
@@ -143,45 +143,45 @@ export default function TenantDetailPage() {
 
   return (
     <div className="min-h-screen">
-      <header className="border-b border-slate-800 px-6 py-4">
+      <header className="border-b border-border px-6 py-4">
         <Link
           href="/platform/dashboard"
-          className="text-sm text-slate-400 hover:text-white transition-colors"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           ← Tüm Kurumlar
         </Link>
       </header>
 
       <main className="px-6 py-6 space-y-6">
-        {loading && <p className="text-slate-400 text-sm">Yükleniyor…</p>}
-        {error && !loading && <p className="text-red-400 text-sm">{error}</p>}
+        {loading && <p className="text-muted-foreground text-sm">Yükleniyor…</p>}
+        {error && !loading && <p className="text-destructive text-sm">{error}</p>}
 
         {!loading && !error && overview && (
           <>
             {/* Kurum başlığı */}
-            <div className="rounded-xl bg-slate-800/60 border border-slate-700 p-5">
+            <div className="rounded-xl bg-card border border-border p-5">
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-xl font-bold text-white">{overview.tenant.name}</h1>
+                <h1 className="text-xl font-bold text-foreground">{overview.tenant.name}</h1>
                 {badge && (
                   <span className={`text-xs px-2 py-0.5 rounded-full ${badge.cls}`}>
                     {badge.label}
                   </span>
                 )}
-                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
                   {overview.tenant.plan}
                 </span>
                 <span
                   className={`text-xs px-2 py-0.5 rounded-full ${
                     overview.tenant.isActive
-                      ? 'bg-green-900/60 text-green-400'
-                      : 'bg-red-900/60 text-red-400'
+                      ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400'
+                      : 'bg-red-900/60 text-destructive'
                   }`}
                 >
                   {overview.tenant.isActive ? 'Aktif' : 'Pasif'}
                 </span>
               </div>
-              <p className="text-xs text-slate-400 font-mono mt-2">slug: {overview.tenant.slug}</p>
-              <div className="flex flex-wrap gap-x-6 gap-y-1 mt-3 text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground font-mono mt-2">slug: {overview.tenant.slug}</p>
+              <div className="flex flex-wrap gap-x-6 gap-y-1 mt-3 text-xs text-muted-foreground">
                 <span>
                   Oluşturulma: {new Date(overview.tenant.createdAt).toLocaleString('tr-TR')}
                 </span>
@@ -205,15 +205,15 @@ export default function TenantDetailPage() {
 
             {/* Sekme çubuğu */}
             <div>
-              <nav className="border-b border-slate-800 flex gap-1">
+              <nav className="border-b border-border flex gap-1">
                 {TABS.map((t) => (
                   <button
                     key={t.key}
                     onClick={() => setTab(t.key)}
                     className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                       tab === t.key
-                        ? 'border-indigo-500 text-indigo-400'
-                        : 'border-transparent text-slate-400 hover:text-white'
+                        ? 'border-primary text-primary'
+                        : 'border-transparent text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     {t.label}

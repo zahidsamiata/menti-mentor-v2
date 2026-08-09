@@ -18,11 +18,11 @@ const ROLE_LABEL: Record<TenantMemberRole, string> = {
 function roleBadgeClass(role: TenantMemberRole): string {
   switch (role) {
     case 'ADMIN':
-      return 'bg-indigo-900/60 text-indigo-400';
+      return 'bg-primary/15 text-primary';
     case 'MENTOR':
-      return 'bg-sky-900/60 text-sky-400';
+      return 'bg-sky-900/60 text-sky-600 dark:text-sky-400';
     case 'MENTI':
-      return 'bg-slate-700 text-slate-300';
+      return 'bg-muted text-muted-foreground';
   }
 }
 
@@ -46,8 +46,8 @@ export function MembersTable({
             onClick={() => onRoleFilterChange(f.key)}
             className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
               roleFilter === f.key
-                ? 'bg-indigo-600 text-white'
-                : 'bg-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-muted text-muted-foreground hover:text-foreground'
             }`}
           >
             {f.label}
@@ -56,13 +56,13 @@ export function MembersTable({
       </div>
 
       {loading ? (
-        <p className="text-slate-400 text-sm">Yükleniyor…</p>
+        <p className="text-muted-foreground text-sm">Yükleniyor…</p>
       ) : members.length === 0 ? (
-        <p className="text-slate-400 text-sm">Üye bulunamadı.</p>
+        <p className="text-muted-foreground text-sm">Üye bulunamadı.</p>
       ) : (
-        <div className="rounded-xl border border-slate-700 overflow-x-auto">
+        <div className="rounded-xl border border-border overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-slate-800 text-slate-400">
+            <thead className="bg-muted text-muted-foreground">
               <tr>
                 <th className="px-4 py-3 text-left">Ad</th>
                 <th className="px-4 py-3 text-left">Rol</th>
@@ -76,33 +76,33 @@ export function MembersTable({
             </thead>
             <tbody>
               {members.map((m) => (
-                <tr key={m.id} className="border-t border-slate-800 hover:bg-slate-800/30">
-                  <td className="px-4 py-3 text-white">{m.fullName}</td>
+                <tr key={m.id} className="border-t border-border hover:bg-muted/50">
+                  <td className="px-4 py-3 text-foreground">{m.fullName}</td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full ${roleBadgeClass(m.role)}`}>
                       {ROLE_LABEL[m.role]}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-slate-400 font-mono text-xs">{m.emailMasked}</td>
-                  <td className="px-4 py-3 text-slate-300">{m.discType ?? '—'}</td>
+                  <td className="px-4 py-3 text-muted-foreground font-mono text-xs">{m.emailMasked}</td>
+                  <td className="px-4 py-3 text-foreground">{m.discType ?? '—'}</td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full ${
-                      m.isCertified ? 'bg-green-900/60 text-green-400' : 'bg-slate-700 text-slate-400'
+                      m.isCertified ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-muted text-muted-foreground'
                     }`}>
                       {m.certificationStatus}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-slate-400 text-xs whitespace-nowrap">
+                  <td className="px-4 py-3 text-muted-foreground text-xs whitespace-nowrap">
                     {m.learningJourneyCompletedAt
                       ? new Date(m.learningJourneyCompletedAt).toLocaleDateString('tr-TR')
                       : '—'}
                   </td>
-                  <td className="px-4 py-3 text-slate-400 text-xs whitespace-nowrap">
+                  <td className="px-4 py-3 text-muted-foreground text-xs whitespace-nowrap">
                     {new Date(m.joinedAt).toLocaleDateString('tr-TR')}
                   </td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full ${
-                      m.isActive ? 'bg-green-900/60 text-green-400' : 'bg-red-900/60 text-red-400'
+                      m.isActive ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-red-900/60 text-destructive'
                     }`}>
                       {m.isActive ? 'Aktif' : 'Pasif'}
                     </span>
