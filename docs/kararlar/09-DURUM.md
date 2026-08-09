@@ -1,5 +1,17 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-09 (TEMİZLİK TURU CANLIYA ALINDI: 5 PR merged → aşağıdaki ⚠️ GÜNCELLEME; backend main `3d89ba7`, çatı main `019cbea`) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-09 (CHAT CANLIYA TAŞINIYOR: backend #33 MERGED, frontend PR #47 AÇIK → aşağıdaki ⚠️ GÜNCELLEME; backend main `0ec6b2b`) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+> ⚠️ **GÜNCELLEME (2026-08-09) — CHAT CANLIYA TAŞINIYOR (backend canlıda, frontend merge PO'da):**
+> - **Backend #33 MERGED → canlıda.** 6 konuşma ucu + Conversation/Message şeması + okundu-bazlı e-posta main'de.
+>   Yeni **backend main HEAD `0ec6b2b`**.
+> - **⚠️ Migration ÇALIŞTIRILMADI:** `add_chat_conversation_message` migration dosyası artık main'de ama bu turda
+>   `prisma migrate`/`db execute` **koşulmadı, DB'ye dokunulmadı**. Additive + `IF NOT EXISTS` (idempotent) → güvenli beklenir;
+>   **prod deploy migration davranışı TEYİT GEREK** (ürün sahibi doğrulamalı).
+> - **Frontend PR #47 (`feat/chat-frontend-live`) AÇIK — MERGE PO'DA.** Güncel main'den cherry-pick (temiz taban):
+>   inbox/thread sayfaları + `MessagesBell` (45sn polling) + `conversations.ts` API client + menti ilk-mesaj + nav.
+>   Submodule pointer → `0ec6b2b`. İki repo CI ✅. **Merge = uçtan uca canlı test sonrası PO kararı.**
+> - **#40 KAPATILDI (superseded)** — stale `docs/merge-turu-devir` tabanı + 28-commit divergence taşıyordu; #47 onun temiz hâli.
+> - Bu not, aşağıdaki (bir önceki) "CHAT CANLIDA DEĞİL" düzeltmesini GÜNCELLER: artık backend canlıda, frontend merge bekliyor.
 
 > ⚠️ **GÜNCELLEME (2026-08-09) — TEMİZLİK TURU CANLIYA ALINDI (ürün sahibi onayıyla merge edildi):**
 > 5 PR main'e merge edildi (autodeploy = canlıda), iki repo main CI ✅:
