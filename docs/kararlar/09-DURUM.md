@@ -1,5 +1,18 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-06 (GÜVENLİK + ESKİ PR TURU KAPANDI: 4 recover PR MERGED → canlıda; backend main `7828c8e`, çatı main `10e5c93`; PR kuyruğu GERÇEKTEN SIFIR) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-09 (TEMİZLİK TURU CANLIYA ALINDI: 5 PR merged → aşağıdaki ⚠️ GÜNCELLEME; backend main `3d89ba7`, çatı main `019cbea`) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+> ⚠️ **GÜNCELLEME (2026-08-09) — TEMİZLİK TURU CANLIYA ALINDI (ürün sahibi onayıyla merge edildi):**
+> 5 PR main'e merge edildi (autodeploy = canlıda), iki repo main CI ✅:
+> - **#43** platform derin-görünüş tema geçişi (çatı, frontend-only, kozmetik).
+> - **#42** belgelerde kişi adı nötrleme (çatı, docs-only).
+> - **#45** CLAUDE.md kalıcı kurallar (çatı, docs-only).
+> - **VisibilityOptIn ölü kod:** backend **#34** (kod, tek dosya `mentiRequestController.ts` — ŞEMAYA DOKUNMADI) +
+>   çatı **#44** (09-DURUM notu) + **submodule pointer bump** `7828c8e → 3d89ba7`. Çatı main pointer = backend main HEAD (doğrulandı).
+> - **⚠️ VisibilityOptIn ŞEMA kolonu DROP'u HÂLÂ BEKLİYOR** — `prisma/schema.prisma`'daki `requestMessage` kolonu duruyor; DROP = migration
+>   → ayrı, PO-onaylı bir migration turunda (DB'ye dokunan bir işle birlikte) yapılacak. Kod artık bu kolonu yazmıyor/okumuyor.
+> - **DÜZELTME — CHAT CANLIDA DEĞİL:** chat PR'ları **#33/#40 hâlâ AÇIK** (bu turda ELLENMEDİ, ayrı akış). Önceki keşifte
+>   doğrulandı: backend chat endpoint'leri hazır ama **frontend main'e bağlı değil** → chat henüz canlı bir özellik değil.
+>   Aşağıdaki "CHAT v1" bloğunun "tam inşa bitti" ifadesi bu düzeltmeyle okunmalı.
 
 ## 📌 AÇIK İŞLER (ürün sahibi elinde — kaybolmasın)
 
