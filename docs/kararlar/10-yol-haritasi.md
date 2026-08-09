@@ -6,7 +6,66 @@
 
 ---
 
-## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum — EN GÜNCEL)
+## 🆕 (2026-08-10) KOPUK-UÇ ENVANTERİ + MENTÖR KARAR EKRANI (chat CANLI sonrası — EN GÜNCEL)
+
+> Chat v1 canlıya alındı (backend #33 MERGED main'de, frontend #47/#48 MERGED). Bu blok, chat
+> sonrası GÜNCEL kopuk-uç taramasını ve kalıcı bir iş notunu toplar. Kanıtlar dosya:satır.
+> Aşağıdaki maddeler **İŞ 6 (HAYALET-BACKEND LİSTESİ)** kapsamına girer — sil/bağla/ertele
+> kararı ürün sahibinde.
+
+### ⭐ KALICI İŞ — Mentör karar ekranında menti mesajı (boyut: M)
+- **Durum bugün:** Mentör talep karar ekranı (`frontend/src/app/(dashboard)/mentor/page.tsx:167-247`,
+  "Toplantı Talepleri" onay kuyruğu) şu an **`Meeting.requestMessage`** gösteriyor
+  (`mentor/page.tsx:190-193` blockquote "Niyet mesajı"). Backend `listMeetings`
+  (`backend/src/controllers/meetingController.ts:152-177`) bu alanı döndürüyor.
+- **Kopukluk:** Chat'in ilk mesajı (`Conversation`/`Message`, `startConversation`
+  `conversationController.ts:104-182`) **AYRI** ve karar ekranına bağlı **DEĞİL**.
+  `Conversation` → `MatchRequest`'e bağlı; karar ekranı `Meeting` sorguluyor; **`Conversation↔Meeting`
+  arası FK yok**. Chat'in ayrıca kabul/ret karar ekranı da yok.
+- **Risk:** Chat, talep-anı mesajının yerini alırsa menti açılış mesajı yalnızca `/messages` inbox'ta
+  kalır → mentör mesajı görmeden (veya ayrı ekrana giderek) karar verebilir.
+- **İş:** `listMeetings`'e menti+mentör çiftinin `Conversation` ilk mesajını ekle
+  (`Conversation`'da `mentorUserId_mentiUserId` unique index var → lookup kolay) — **BE orta** +
+  FE karar kartında render — **küçük**. Toplam **M**. Yeni endpoint gerekmez.
+- **Ön koşul (chat canlı): ✅ TAMAMLANDI.**
+
+### (B) Ölü backend uçları (kod VAR → frontend çağırmıyor)
+- **`super-admin` router tümü ölü (4 endpoint):** `backend/src/routes/superAdminRoutes.ts:14-19`
+  (`GET /dashboard`, `PATCH /tenants/:id/status`, `GET /tenants/pending`, `PATCH /tenants/:id/verify`).
+  `server.ts:105`'te `/api/super-admin`'e mount edilmiş AMA frontend'de **sıfır referans** (grep boş).
+  Aynı işi `/api/platform` (mount `server.ts:84`, controller platformController) yapıyor ve frontend
+  onu kullanıyor → **super-admin legacy DUPLİKE küme**. Karar: **sil** (öneri) veya bağla.
+- **Menti visibility opt-in legacy uçları:** `backend/src/routes/userRoutes.ts:76-81, 139-152`
+  (`POST /mentors/:id/visibility-optin`, `POST /mentis/:id/request-visibility`,
+  `GET /mentors/:id/pending-visibility-requests`, `PATCH .../visibility-optin/:optInId/respond`,
+  controller `mentiRequestController`). Frontend'de **çağrılmıyor** (grep boş) → chat opt-in akışının
+  yerini aldığı eski "Akış B". Karar: sil/ertele (şema kolonu `VisibilityOptIn` DROP ayrı tur).
+
+### (C) Yarım/placeholder özellikler (UI VAR → backend eksik/stub)
+- **Mentör metrik kartları placeholder:** `frontend/src/app/(dashboard)/mentor/page.tsx:31-36`
+  `PLACEHOLDER_METRICS` (Aktif Mentilerim / Bekleyen Talepler / Ortalama NPS / Tamamlanan) hepsi
+  "—" gösteriyor; mentöre özel metrik endpoint'i yok. **Canlıda görünür.** (TEYİT GEREK: KPI
+  endpoint'i admin içindir, mentör-bazlı değil.)
+- **"Yaklaşan Toplantılar" placeholder:** `mentor/page.tsx:414-423` "Toplantı modülü yakında buraya
+  entegre edilecek." — boş kart. **Canlıda görünür.**
+- **Push bildirim stub:** `backend/src/services/notificationService.ts` — gerçek push (FCM/Expo) yok,
+  SystemLog'a yazıyor. **Canlıda kullanıcıya görünmez** (in-app unread/e-posta üzerinden idare ediliyor).
+
+### (D) Karşılıksız frontend çağrısı — YOK ✅
+- Frontend'in tüm API çağrılarının backend karşılığı **VAR** (0 adet 404-beklentisi). Prefix/method
+  eşleşmeleri tutarlı. `PATCH /api/tenants/:id/settings` `adminSettingsRoutes` (`server.ts:102`) ile
+  karşılanıyor (bir ara-taramada "mount yok" sanıldı — **yanlış**, mount VAR).
+
+### Öncelik önerisi (kullanıcıyı en çok etkileyen → en az)
+1. **Mentör metrik + "Yaklaşan Toplantılar" placeholder** — canlıda mentör bunları boş görüyor
+   (deneyim/güven etkisi yüksek). Retention "mentör sevdirme" işiyle örtüşür (bkz. kuyruk md.4).
+2. **Mentör karar ekranında menti mesajı (M)** — chat büyürse doğrudan karar kalitesini etkiler.
+3. **super-admin ölü küme + visibility legacy uçları** — kullanıcıya görünmez ama güvenlik/bakım
+   yükü (auth'lu ama kullanılmayan yüzey). Temizlik/İŞ 6 turunda sil.
+
+---
+
+## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum)
 
 > Aşağıdaki eski "İŞ 0–8" planının çoğu tamamlandı (mail, IDOR, timezone, foto). Bu kuyruk
 > güncel önceliği yansıtır; öncelik sırasını ürün sahibi değiştirebilir. Eski plan referans olarak altta durur.
