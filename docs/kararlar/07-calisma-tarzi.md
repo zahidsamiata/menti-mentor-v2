@@ -2,7 +2,7 @@
 **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler (ortak), bugünkü oturum
 
 > Bu, her Claude Code promptunun ve her çalışma turunun uyması gereken çerçeve.
-> Kullanıcı (Zahid) teknik detaya çok hakim değil — kararları sade dille açıkla, öner, gerekçelendir.
+> Kullanıcı (ürün sahibi) teknik detaya çok hakim değil — kararları sade dille açıkla, öner, gerekçelendir.
 
 ## PROMPT STANDARDI (8 UNSUR — her kapsamlı prompt)
 1. **BÜYÜK RESİM** — nereye gidiyoruz, bu adım ne tamamlıyor, sonrası ne. Parçayı değil bütünü göster.
@@ -15,8 +15,8 @@
 8. **KAPANIŞ + YOL HARİTASI** — ne oldu, sıradaki adım, güncel durum.
 
 ## GENEL İLKELER
-- **"PR aç, MERGE ETME"** güvenlik ağı — Zahid en sonda inceler.
-- **Ürün kararı Zahid'de.** Claude analiz+seçenek sunar, dürüst pushback yapar, körü körüne onaylamaz.
+- **"PR aç, MERGE ETME"** güvenlik ağı — ürün sahibi en sonda inceler.
+- **Ürün kararı ürün sahibinde.** Claude analiz+seçenek sunar, dürüst pushback yapar, körü körüne onaylamaz.
 - **Aşırı mühendislik/erken optimizasyon YOK.** Gerçek ihtiyaç olmadan özellik yok. Sinyal gelince yap.
 - **Kapsamlı/uçtan uca tek prompt** — parça parça "şunu yap dur" değil.
 - **DB/prod refleksleri (bu oturumda eklendi):** "Bu kalıcı içerik mi geçici test mi?" + "Bu lokal DB canlıyı etkiler mi?" + "Script'in içinde delete/truncate/mail yan etkisi var mı?" + canlı DB çıkarsa DUR-onay bekle.
@@ -43,7 +43,7 @@
 ## HAFIZA SİSTEMİ (bu oturumda kuruldu)
 - **CLAUDE.md** = değişmeyen çekirdek kurallar (KISA, şişirilmez). Claude Code her açılışta otomatik okur.
 - **docs/*.md** = durum + geçmiş + kararlar (bu belgeler). Gerektiğinde okunur.
-- **MASTER devir belgesi** = yeni Claude CHAT'i için. Zahid yeni chat açınca yükler.
+- **MASTER devir belgesi** = yeni Claude CHAT'i için. Ürün sahibi yeni chat açınca yükler.
 - Her önemli oturum sonunda docs güncellenir.
 
 ## DOKÜMAN TONU (dış paydaş — hoca/abi/ortak)

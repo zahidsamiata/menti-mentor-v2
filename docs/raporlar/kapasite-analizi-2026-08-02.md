@@ -1,6 +1,6 @@
 # Kapasite / Ölçeklenme Analizi
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma (kod okundu, çalıştırılmadı) · **Soru:** kullanıcı artınca hangi kod patlar?
-**Önemli:** Hiçbir kod değişmedi. Bu bir ÖNLEM raporu (gerçek kullanıcı ~sıfır). Uygulama kararı Zahid'de.
+**Önemli:** Hiçbir kod değişmedi. Bu bir ÖNLEM raporu (gerçek kullanıcı ~sıfır). Uygulama kararı ürün sahibinde.
 
 > Güven etiketi: **DOĞRULANDI** (dosya birebir okundu) · **teyit önerilir** (keşif ajanı bulgusu, satır/ifade gevşek olabilir).
 

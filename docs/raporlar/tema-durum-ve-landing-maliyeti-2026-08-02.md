@@ -1,5 +1,5 @@
 # Tema Durumu + Landing Maliyeti
-**Tarih:** 2026-08-02 · **Mod:** salt-okuma · **Önemli:** Landing'e/temaya dokunulmadı. Bu rapor Zahid'in "maliyet yüksekse ertele" kararının girdisidir.
+**Tarih:** 2026-08-02 · **Mod:** salt-okuma · **Önemli:** Landing'e/temaya dokunulmadı. Bu rapor ürün sahibinin "maliyet yüksekse ertele" kararının girdisidir.
 
 ---
 
