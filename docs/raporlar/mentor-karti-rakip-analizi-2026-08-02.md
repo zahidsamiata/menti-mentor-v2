@@ -1,13 +1,13 @@
 # MENTÖR / MENTİ KARTI — RAKİP ANALİZİ
 **Tarih:** 2026-08-02 · **Amaç:** Menti mentör-tarama sayfası kart tasarımı için karar girdisi
-**Not:** Bu bir araştırma özeti. Nihai karar (hangi bilgi, kaç kart/sayfa) Zahid'de. Yeni oturumda kullanılacak.
+**Not:** Bu bir araştırma özeti. Nihai karar (hangi bilgi, kaç kart/sayfa) ürün sahibinde. Yeni oturumda kullanılacak.
 
 ---
 
 ## İNCELENEN RAKİPLER
 - **ADPList** — dünyanın en büyük ücretsiz mentörlük platformu (40.000+ mentör). Referans standart.
 - **MentorCruise** — ücretli/uzman mentörlük pazaryeri.
-- **Mentornity** — Zahid'in gösterdiği örnek (Türk STK/kulüp bağlamına yakın).
+- **Mentornity** — ürün sahibinin gösterdiği örnek (Türk STK/kulüp bağlamına yakın).
 - **Genel kart-UI pratikleri** — LinkedIn/Amazon/Dribbble profil-kartı desenleri.
 
 ---
@@ -55,10 +55,10 @@ ADPList mentör kriteri: net, profesyonel, gülümseyen foto; çizgi film/güne�
 
 ---
 
-## 3. SAYFALAMA (Zahid'in asıl endişesi)
+## 3. SAYFALAMA (ürün sahibinin asıl endişesi)
 
 Rakiplerin hiçbiri tek sayfada 100 kart göstermiyor — hepsi **grid + sayfalama/sonsuz kaydırma**.
-Zahid'in sezgisi doğru: **sayfa başına ~12-20 kart, altında sayfa numaraları.**
+ürün sahibinin sezgisi doğru: **sayfa başına ~12-20 kart, altında sayfa numaraları.**
 - 300 mentör → sayfa başına ~20 → ~15 sayfa. Yığılma olmaz.
 - ADPList'te ek olarak **arama kutusu** (isim/unvan/şirket) + **filtre** (uzmanlık/dil/müsaitlik) var.
 → MentiMentor için: sayfalama **öncelik**; arama/filtre **ikinci adım** (sektör/DISC'e göre filtre çok değerli olur).
@@ -82,7 +82,7 @@ Zahid'in sezgisi doğru: **sayfa başına ~12-20 kart, altında sayfa numaralar�
 
 ---
 
-## 5. AÇIK KARARLAR (yeni oturumda Zahid'e sorulacak)
+## 5. AÇIK KARARLAR (yeni oturumda ürün sahibine sorulacak)
 - Kartta DISC nasıl gösterilsin — sadece harf rozeti mi (D/I/S/C), renk kodlu mu, kelime mi ("Baskın")?
 - Sektör etiketi kaç tane gösterilsin (2 mi 3 mü), fazlası "+N" mı?
 - Sayfa başına tam kaç kart (15 / 18 / 20)?
@@ -93,7 +93,7 @@ Zahid'in sezgisi doğru: **sayfa başına ~12-20 kart, altında sayfa numaralar�
 
 ## 6. 🟢 ZAHİD'İN KESİNLEŞEN KARARLARI (2026-08-02)
 
-Rakip analizi sonrası Zahid şu kararları verdi — yeni oturumda bunlara göre tasarlanacak:
+Rakip analizi sonrası ürün sahibi şu kararları verdi — yeni oturumda bunlara göre tasarlanacak:
 
 1. **Rating/yıldız YOK → "Uyum yüzdesi" var.** Kartta "%X uyum" gösterilecek.
    Uyum = **sektör etiketi uyumu + DISC uyum skoru** birleşimi (mevcut eşleştirme

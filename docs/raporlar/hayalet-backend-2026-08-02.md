@@ -1,7 +1,7 @@
 # Hayalet-Backend Raporu
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma (kod okundu, çalıştırılmadı)
 **Amaç:** Yazılmış ama kullanıcıya çıkmayan / yarım bağlı / ölü / kırık kod envanteri.
-**Önemli:** Hiçbir kod değişmedi/silinmedi. Silme/bağlama kararı Zahid'de.
+**Önemli:** Hiçbir kod değişmedi/silinmedi. Silme/bağlama kararı ürün sahibinde.
 
 > Güven etiketi: **DOĞRULANDI** (route/dosya varlığı okunarak teyit) · **teyit gerek** (frontend-çağrı yokluğu dinamik çağrı ihtimaliyle %100 değil).
 > ⚠️ Kural: hiçbir şeye kesin "ölü/sil" denmedi — "muhtemel hayalet, teyit gerek" dili kullanıldı.
@@ -20,7 +20,7 @@ Route varlığı **DOĞRULANDI** (`backend/src/routes/*` okundu); frontend çağ
 | `POST /api/admin/cron/run-tuning` | `adminRoutes.ts:68` | debug/manuel | Cron manuel tetik (bilinçli olabilir) |
 | `POST /api/admin/cron/run-purge` | `adminRoutes.ts:69` | debug/manuel | Cron manuel tetik (bilinçli olabilir) |
 
-**Öneri:** compute-profile / rank-mentors → **araştır** (SJT akışı bağlanacak mı, yoksa uyuyor mu?). rematch / confirm → frontend'e bağlanacaksa değerli; run-tuning/run-purge muhtemelen bilinçli debug → **Zahid'e sor**.
+**Öneri:** compute-profile / rank-mentors → **araştır** (SJT akışı bağlanacak mı, yoksa uyuyor mu?). rematch / confirm → frontend'e bağlanacaksa değerli; run-tuning/run-purge muhtemelen bilinçli debug → **ürün sahibine sor**.
 
 ## 2. Yarım bağlı
 - **AlgorithmTuner:** backend tam (`algorithmTuner.ts` + `getPendingTuning/approve/reject`), admin UI (`algorithm-tuner/page.tsx`) bağlı. Ama manuel cron tetik endpoint'leri (yukarıda) debug amaçlı → yarım/izole. *(teyit gerek)*

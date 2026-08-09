@@ -1,7 +1,7 @@
 # STK YÖNETİCİ PERSONASI + METRİK TASLAĞI
 **Tarih:** 2026-08-02 · **Amaç:** Yönetici paneli + retention tasarımı için temel referans
 **Uyarı:** Bu bir *eğitimli taslak* — gerçek yöneticilerle konuşmanın yerini tutmaz.
-Nihai kararlar (hangi metrik, hangi ekran) Zahid'de. Gerçek kullanıcı görüşmesiyle doğrulanmalı.
+Nihai kararlar (hangi metrik, hangi ekran) ürün sahibinde. Gerçek kullanıcı görüşmesiyle doğrulanmalı.
 
 ---
 
@@ -61,7 +61,7 @@ vermiyorsa panelde yeri yok:
 
 ---
 
-## 4. METRİK TASLAĞI (aday — Zahid süzecek)
+## 4. METRİK TASLAĞI (aday — ürün sahibi süzecek)
 
 > İlke: **Az ve anlamlı.** Kalabalık panel = kullanılmayan panel.
 > Öncelik: 🟢 çekirdek (mutlaka) · 🟡 değerli (ikinci dalga) · ⚪ ileride.
@@ -91,7 +91,7 @@ vermiyorsa panelde yeri yok:
 ## 5. PANEL TASARIM İLKELERİ (nasıl gösterilmeli)
 
 1. **Önce özet, sonra detay (drill-down).** Panel açılınca büyük sayılar/durum.
-   Bir sayı ilgini çekerse tıkla → altındaki kişiler. (Zahid'in kararı: kişi listesi
+   Bir sayı ilgini çekerse tıkla → altındaki kişiler. (ürün sahibinin kararı: kişi listesi
    değil, önce anlamlı veri; tıklayınca kişiler.)
 2. **Okumadan anlaşılmalı.** Büyük rakam + renk (yeşil/kırmızı) + ok (↑/↓).
    Yönetici rapor indirmeye uğraşmamalı.
@@ -103,7 +103,7 @@ vermiyorsa panelde yeri yok:
 
 ---
 
-## 6. DAHA DERİN SORULAR (metriği bunlar belirler — Zahid/gerçek yönetici cevaplamalı)
+## 6. DAHA DERİN SORULAR (metriği bunlar belirler — ürün sahibi/gerçek yönetici cevaplamalı)
 
 Standart "ne görmek istersin"in ötesinde, asıl karar anlarına inen sorular:
 
@@ -123,7 +123,7 @@ Standart "ne görmek istersin"in ötesinde, asıl karar anlarına inen sorular:
 
 ## 7. SONRAKİ ADIM ÖNERİSİ
 
-1. **Zahid süzer:** Yukarıdaki metriklerden çekirdek 6-8'i seçer (🟢'lar öneri).
+1. **Ürün sahibi süzer:** Yukarıdaki metriklerden çekirdek 6-8'i seçer (🟢'lar öneri).
 2. **Kod keşfi (retention turu, Aşama 1):** Bu metriklerin verisi backend'de var mı?
    (lastLoginAt, görüşme sayısı, eşleşme durumu, onboarding tamamlama... çekilebiliyor mu.)
    Envanter: "şu metrik hazır, şu metrik için veri eklemek gerek."

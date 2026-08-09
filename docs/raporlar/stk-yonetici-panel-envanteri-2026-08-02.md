@@ -3,7 +3,7 @@
 **Tarih:** 2026-08-02
 **Mod:** Salt-okuma keşif. Kod değişmedi.
 **Rol:** STK YÖNETİCİSİ = **tenant admin** (role `ADMIN`, bir dernek/kulüp başkanı, SADECE kendi kurumunu yönetir).
-**Yetki felsefesi (Zahid):** DENGELİ — yönetici izlesin + kritik birkaç aksiyon alabilsin.
+**Yetki felsefesi (ürün sahibi):** DENGELİ — yönetici izlesin + kritik birkaç aksiyon alabilsin.
 **Amaç:** STK yönetici stratejisini gerçek kod zemini üstüne kurmak — şu an ne var, ne görüyor, ne değiştirebiliyor, dengeli-yetki açısından ne eksik.
 **Yöntem:** 3 Explore agent'ı (frontend `(admin)` sayfaları, backend admin controller/route/middleware, Prisma şeması). Güvenlik-kritik bulgular elle teyit edildi. Her bulgu dosya:satır kanıtlı.
 

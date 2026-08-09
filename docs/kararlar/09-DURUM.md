@@ -71,7 +71,7 @@ Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle
 
 **Sıradakiler:** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy) · (2) **login rate-limit** (PR #27 kalanı) · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti kıyas · (6) hayalet-mod/davet turu.
 
-**🔴 KIRMIZI KURALLAR:** Canlı = lokal aynı Neon → DB işleminde onay al · main'e merge = canlıya deploy (autodeploy açık) → merge kararı Zahid'de · tehlikeli seed asla · PR aç merge etme · submodule sırası: backend push → çatı pointer → çatı push (ara commit yok).
+**🔴 KIRMIZI KURALLAR:** Canlı = lokal aynı Neon → DB işleminde onay al · main'e merge = canlıya deploy (autodeploy açık) → merge kararı ürün sahibinde · tehlikeli seed asla · PR aç merge etme · submodule sırası: backend push → çatı pointer → çatı push (ara commit yok).
 
 ## ⚡ TEK BAKIŞTA
 - **Canlı:** sivilkapasite.org ayakta (Dokploy). Mail (Resend) çalışıyor.
@@ -104,7 +104,7 @@ Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle
 > Temeli: STK yönetici envanterindeki 5 eksik (bkz. docs/raporlar/stk-yonetici-panel-envanteri).
 
 **1. `lastLoginAt` / aktivite altyapısı — RETENTION TEMELİ (backend `1895ca5`):**
-- `User.lastLoginAt DateTime?` eklendi. **MIGRATION Zahid onayıyla canlı Neon'a uygulandı** (nullable, veri kaybı yok, `IF NOT EXISTS`).
+- `User.lastLoginAt DateTime?` eklendi. **MIGRATION ürün sahibi onayıyla canlı Neon'a uygulandı** (nullable, veri kaybı yok, `IF NOT EXISTS`).
 - Yeniden kullanılabilir `recordUserActivity(userId)` (non-fatal) 3 auth noktasına bağlandı: local login, token refresh, OAuth. "Login değil aktivite" — refresh'te de tazelenir (uzun oturum yanlış pasif görünmesin).
 - ⚠️ Bu alan **platform admin panelini de besleyecek** (ortak veri — iki kez yazılmasın).
 
@@ -143,7 +143,7 @@ Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle
 - **Backend** (`3bee4ba`, `27cc788`, `1ab33cb`): `POST /api/users/me/avatar` — multer + magic-byte içerik doğrulaması (jpeg/png/webp, SVG red) + 5MB sınırı + kullanıcı-başı rate limit + güvenli rastgele isim (path traversal yok) + eski foto silme + `/uploads` statik güvenli servis (nosniff/CSP sandbox). `avatarUrl` havuz/aday/getUser select'lerine eklendi.
 - **Frontend** (`278c142`, `26687cd`): `UserAvatar` atom (foto yoksa baş-harf fallback) + profil sayfası yükleme + 3 havuz kartında gösterim + apiClient FormData desteği + next.config remotePatterns.
 - **Depolama:** KALICI DİSK (Dokploy persistent volume). Foto **OPSİYONEL** (ileride zorunlu).
-- **⚠️ Dokploy'da yapılacak (Zahid):** persistent volume mount `/app/uploads` + `UPLOAD_DIR=/app/uploads` env + `NEXT_PUBLIC_API_URL` kontrolü.
+- **⚠️ Dokploy'da yapılacak (ürün sahibi):** persistent volume mount `/app/uploads` + `UPLOAD_DIR=/app/uploads` env + `NEXT_PUBLIC_API_URL` kontrolü.
 
 **Bugünkü ürün kararları:** kart tasarımı + mesajlaşma (yok, niyet mektubu) + tema/landing (canlı-sonrası) → **06-tasarim-ux**'a; yeni öncelik kuyruğu → **10-yol-haritasi**'na; yeni açık sorular → **08**'e işlendi.
 
@@ -163,7 +163,7 @@ Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle
 - **PR #27/#28** (güvenlik paketi), **PR #30** (UX), **PR #31** (CLAUDE.md).
 - Merge runbook: teshis-raporu'nda. Sıra: backend PR → çatı pointer bump → çatı PR. b3 membership backfill dikkat.
 
-## ⏳ BEKLEYEN İŞLER (öncelik Zahid'de)
+## ⏳ BEKLEYEN İŞLER (öncelik ürün sahibinde)
 
 ### 🔴 Canlı-öncesi kritik
 - ~~2 yeni IDOR fix (/mentors/:mentorId/candidates + /requests/:id).~~ ✅ YAPILDI (backend `161ae00`).
@@ -192,8 +192,8 @@ Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle
 ## 📌 KALICI HATIRLATMALAR
 - Canlı = lokal aynı DB → DB işleminde onay al (detay: 02).
 - Tehlikeli seed.ts asla çalıştırma (detay: 02).
-- PR aç, merge etme (Zahid inceler).
-- Ürün kararı Zahid'de, dürüst pushback yap.
+- PR aç, merge etme (ürün sahibi inceler).
+- Ürün kararı ürün sahibinde, dürüst pushback yap.
 
 ## GÜNCELLEME NOTU
 Bu belge her oturum sonunda güncellenmeli. Karara bağlanan açık sorular 08'den ilgili belgeye taşınmalı.

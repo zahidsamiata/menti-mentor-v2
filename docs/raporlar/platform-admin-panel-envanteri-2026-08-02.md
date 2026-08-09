@@ -2,8 +2,8 @@
 
 **Tarih:** 2026-08-02
 **Mod:** Salt-okuma keşif. Kod değişmedi.
-**Rol:** PLATFORM ADMIN (sistem sahibi = Zahid, TÜM sistemi yönetir; `isPlatformAdmin`, `/api/platform/*`).
-**Strateji felsefesi (Zahid):** "BASİT YÜZEY + DERİN ARKA ODA" — sade dashboard, istenince en detaya (kurum→kullanıcı→görüşme) inme; tam görünürlük ama loglu.
+**Rol:** PLATFORM ADMIN (sistem sahibi = ürün sahibi, TÜM sistemi yönetir; `isPlatformAdmin`, `/api/platform/*`).
+**Strateji felsefesi (ürün sahibi):** "BASİT YÜZEY + DERİN ARKA ODA" — sade dashboard, istenince en detaya (kurum→kullanıcı→görüşme) inme; tam görünürlük ama loglu.
 **Yöntem:** 3 Explore agent'ı (backend platform controller/route/middleware, frontend `platform/` sayfaları, Prisma). İki headline bulgu (drill-down frontend'de yok, lastLoginAt platform'da yok) elle teyit edildi. Her bulgu dosya:satır kanıtlı.
 
 > ⚠️ **KRİTİK AYRIM:** Platform admin (sistem sahibi, `/api/platform/*`, `isPlatformAdmin`) **≠** STK yönetici

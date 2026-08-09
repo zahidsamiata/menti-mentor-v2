@@ -1,8 +1,8 @@
 # Depo Denetimi Raporu
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma · **Kapsam:** repo hijyeni (boş/artık/yanlış-yerleşim/isimlendirme)
-**Önemli:** Hiçbir dosya silinmedi/taşınmadı. Bu rapor yalnızca karar girdisidir; temizlik kararı Zahid'de.
+**Önemli:** Hiçbir dosya silinmedi/taşınmadı. Bu rapor yalnızca karar girdisidir; temizlik kararı ürün sahibinde.
 
-> Risk kodları: 🟢 kesin güvenli · 🟡 teyit iste · 🔴 dokunma, Zahid'e sor
+> Risk kodları: 🟢 kesin güvenli · 🟡 teyit iste · 🔴 dokunma, ürün sahibine sor
 > node_modules, .git, dist, .next taramadan hariç tutuldu (build/dependency artefaktı).
 
 ---
@@ -18,7 +18,7 @@ Repo **büyük ölçüde temiz ve profesyonel**. Klasik hijyen borcu (`.bak/.old
 - **YOL:** `./Menti Mentör proje/` (içinde tek dosya: `Untitled`, 0 byte)
 - **SORUN:** Amaç belirsiz bir klasör; backend/frontend ile ilişkisi yok, git'te izlenmiyor (`git status` → `?? "Menti Ment\303\266r proje/"`). İçindeki `Untitled` boş.
 - **KANIT:** Git status untracked listesi + klasör içeriği yüzeysel tarama (0-byte `Untitled`).
-- **ÖNERİ:** **DOKUNMA — Zahid'e sor.** Eski proje dump'ı/referans mı, geçici mi? Karara göre sil / `docs/arsiv/`'e taşı. İçeriğine derin girilmedi (büyükse ayrı iş).
+- **ÖNERİ:** **DOKUNMA — ürün sahibine sor.** Eski proje dump'ı/referans mı, geçici mi? Karara göre sil / `docs/arsiv/`'e taşı. İçeriğine derin girilmedi (büyükse ayrı iş).
 - **RİSK:** 🔴 (amaç bilinmeden silmek veri kaybı riski). Ayrıca isim konvansiyon dışı (Türkçe karakter + boşluk; repo geneli kebab-case: `backend`, `frontend`, `docs`).
 
 ### 🟡 2. `backend/.env.backup-anaDB`
@@ -51,7 +51,7 @@ Repo **büyük ölçüde temiz ve profesyonel**. Klasik hijyen borcu (`.bak/.old
 |---|---|---|
 | Boş dosya | 1 | `Menti Mentör proje/Untitled` (0 byte) |
 | Artık/yedek | 1 | `backend/.env.backup-anaDB` (🟡 teyit) |
-| Yanlış yerleşim / belirsiz | 1 | `Menti Mentör proje/` klasörü (🔴 Zahid'e sor) |
+| Yanlış yerleşim / belirsiz | 1 | `Menti Mentör proje/` klasörü (🔴 ürün sahibine sor) |
 | İsimlendirme dışı | 1 | aynı klasör (Türkçe+boşluk) |
 
-**Önerilen temizlik hacmi:** düşük. Tek gerçek karar = `Menti Mentör proje/` klasörünün akıbeti (Zahid). Diğerleri lokal/git-dışı, düşük öncelik. **Hiçbiri silinmedi.**
+**Önerilen temizlik hacmi:** düşük. Tek gerçek karar = `Menti Mentör proje/` klasörünün akıbeti (ürün sahibi). Diğerleri lokal/git-dışı, düşük öncelik. **Hiçbiri silinmedi.**

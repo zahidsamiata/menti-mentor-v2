@@ -1,7 +1,7 @@
 # MENTİ PERSONASI + SEVDİRME STRATEJİSİ
 **Tarih:** 2026-08-02 · **Amaç:** Menti deneyimi (onboarding + arayüz + retention) tasarımına yön vermek
 **Kardeş belgeler:** `mentor-persona-ve-sevdirme.md` · `yonetici-persona-ve-metrikler.md`
-**Durum:** Eğitimli taslak. Gerçek mentilerle görüşme ile doğrulanmalı. Nihai kararlar Zahid'de.
+**Durum:** Eğitimli taslak. Gerçek mentilerle görüşme ile doğrulanmalı. Nihai kararlar ürün sahibinde.
 
 ---
 
@@ -138,7 +138,7 @@ Yolculuk yuvası (öğrenme aşamaları) menti'ye özgü ve kritiktir — hem il
 1. **Kod keşfi:** Menti onboarding'i "aha" veriyor mu (DISC özgüven aşısı gibi mi, kuru mu)?
    Bekleme anı dolduruluyor mu, boş ekran mı? Öğrenme yolculuğu menti panelinde aktif mi?
    Ret nasıl gösteriliyor — çıplak mı, alternatifli mi?
-2. **Zahid kararı:** Hangi sevdirme öğesi canlı-öncesi (özellikle "bekleme anı doldurma" +
+2. **Ürün sahibi kararı:** Hangi sevdirme öğesi canlı-öncesi (özellikle "bekleme anı doldurma" +
    "DISC özgüven sunumu" güçlü aday), hangisi sonra.
 3. **Uygulama:** Menti onboarding + bekleme-anı deneyimi + kart keşfi (retention turuyla birleşir).
 4. **Doğrulama (ideal):** 3-5 gerçek menti (öğrenci) ile görüşme — "seni ne cesaretlendirdi,

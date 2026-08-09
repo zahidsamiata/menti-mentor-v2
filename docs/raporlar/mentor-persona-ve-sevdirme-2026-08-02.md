@@ -1,7 +1,7 @@
 # MENTÖR PERSONASI + SEVDİRME STRATEJİSİ
 **Tarih:** 2026-08-02 · **Amaç:** Mentör deneyimi (onboarding + arayüz + retention) tasarımına yön vermek
 **Kardeş belgeler:** `menti-persona-ve-sevdirme.md` · `yonetici-persona-ve-metrikler.md`
-**Durum:** Eğitimli taslak. Gerçek mentörlerle görüşme ile doğrulanmalı. Nihai kararlar Zahid'de.
+**Durum:** Eğitimli taslak. Gerçek mentörlerle görüşme ile doğrulanmalı. Nihai kararlar ürün sahibinde.
 
 ---
 
@@ -116,7 +116,7 @@ farklı duygu.
 
 1. **Kod keşfi:** Mentör onboarding'i ilk girişte "aha" veriyor mu, yoksa boş panele mi
    düşürüyor? DISC sonucu hediye gibi mi sunuluyor? Panel 3 yuvayı içeriyor mu?
-2. **Zahid kararı:** Hangi sevdirme öğesi canlı-öncesi (ilk aha + DISC sunumu güçlü aday),
+2. **Ürün sahibi kararı:** Hangi sevdirme öğesi canlı-öncesi (ilk aha + DISC sunumu güçlü aday),
    hangisi sonra (rozet/sertifika, bildirim ritmi).
 3. **Uygulama:** Retention turu ile birleştir (mentör onboarding + panel).
 4. **Doğrulama (ideal):** "Arkadaş ısrarıyla gelmiş" 2-3 gerçek mentörle görüşme —

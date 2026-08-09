@@ -1,7 +1,7 @@
 # Katılım Modeli — Mevcut Durum Notu (İŞ 5, kod yazılmadı)
 
 **Tarih:** 2026-08-02
-**Bağlam:** Retention turu (İŞ 1-4) sırasında çıkan İŞ 5 — Zahid'in "hayalet mod + ön-tanımlı
+**Bağlam:** Retention turu (İŞ 1-4) sırasında çıkan İŞ 5 — ürün sahibinin "hayalet mod + ön-tanımlı
 davet" fikri BÜYÜK, AYRI bir tur olacak. Bu turda SADECE mevcut davet+approve akışının bunu ne
 kadar karşıladığı NOT edildi. **Kod yazılmadı.** Her bulgu dosya:satır kanıtlı.
 
@@ -37,7 +37,7 @@ kadar karşıladığı NOT edildi. **Kod yazılmadı.** Her bulgu dosya:satır k
 
 ## Sonuç
 Mevcut akış **"davet mesajı (şablon) + imzalı link + yöneticinin elle üye eklemesi"** üçlüsünü
-karşılıyor. Ancak Zahid'in kastettiği **"hayalet mod"** — yönetici kişileri önceden sisteme koyar,
+karşılıyor. Ancak ürün sahibinin kastettiği **"hayalet mod"** — yönetici kişileri önceden sisteme koyar,
 onlar pasif dururken program planlaması/eşleştirme/istatistik için sayılır, kişi sonradan aktive
 olur — **YOK.** Bu, ayrı bir tur (**hayalet-mod / davet turu**) olarak ele alınmalı.
 

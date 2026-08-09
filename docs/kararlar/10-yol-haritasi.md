@@ -9,16 +9,16 @@
 ## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum — EN GÜNCEL)
 
 > Aşağıdaki eski "İŞ 0–8" planının çoğu tamamlandı (mail, IDOR, timezone, foto). Bu kuyruk
-> güncel önceliği yansıtır; öncelik sırasını Zahid değiştirebilir. Eski plan referans olarak altta durur.
+> güncel önceliği yansıtır; öncelik sırasını ürün sahibi değiştirebilir. Eski plan referans olarak altta durur.
 
 1. **MERGE TURU** — biriken tüm PR/commit'ler (#26–#32 + bugünküler: güvenlik, foto), CI yeşilse.
    - Submodule pointer sırası **kritik**: backend push → çatı `git add backend` → çatı commit → çatı push (ara commit yok).
-   - **Merge kararı Zahid'de.** + **Dokploy foto volume ayarı bu turda** (persistent volume `/app/uploads` + `UPLOAD_DIR=/app/uploads` env + `NEXT_PUBLIC_API_URL` kontrolü).
+   - **Merge kararı ürün sahibinde.** + **Dokploy foto volume ayarı bu turda** (persistent volume `/app/uploads` + `UPLOAD_DIR=/app/uploads` env + `NEXT_PUBLIC_API_URL` kontrolü).
 2. **PROFİL-DÜZENLEME KEŞFİ (PLANLA)** — kullanıcı bilgilerini/fotosunu **kayıttan SONRA** güncelleyebiliyor mu, silebiliyor/ekleyebiliyor mu? Profil düzenleme sayfası var mı, eksik mi?
 3. **KART + SAYFALAMA TASARIMI** — 06-tasarim-ux'taki kararlara göre. Backend **%90 hazır** (kart-havuz-backend-envanteri raporu). %UYUM İŞ 7'ye bağlı değil, bugünkü skorla çalışır.
 4. **RETENTION TURU** (büyük; teknik + davranışsal) — 3 aşamalı:
    - a. **Keşif (PLANLA):** hesap/veri korunuyor mu; cleanup cron kimi siliyor; `lastLoginAt`/aktiflik verisi var mı; kullanıcıyı geri getiren ne var (bildirim/öğrenme/oyunlaştırma).
-   - b. **Metrik belirleme (Zahid kararı):** yönetici panelinde hangi anlamlı veriler.
+   - b. **Metrik belirleme (ürün sahibi kararı):** yönetici panelinde hangi anlamlı veriler.
    - c. **Uygulama — YÖNETİCİ İSTATİSTİK PANELİ:** önce özet sayı/grafik → tıklayınca alt kişiler (**drill-down**). Kişi-bazlı liste değil, anlamlı istatistik öncelik. + pasifi dürtme araçları.
    - ✅ **DURUM (2026-08-02): STK-yönetici dilimi BÜYÜK ÖLÇÜDE YAPILDI** — `lastLoginAt` temeli (`1895ca5`) + kaynayan-üye metrikleri (`e0edb4f`) + elle nudge (`465ae47`) + KPI drill-down (`b39b8bd`). Bkz. 09-DURUM retention bloğu.
    - 🟡 **KALAN (davranışsal + genişletme):** otomatik-nudge (KVKK/rıza — bkz. 08); mentör/menti "sevdirme" deneyimi (persona belgeleri); onboarding "aha"; görüşme sayıları/onboarding-% metrikleri; menti/mentör tarafı retention panelleri (şimdiki panel yönetici içindi).
@@ -30,7 +30,7 @@
    - 🟡 **Küçük yol notları (canlı-sonrası, acil değil):**
      - (a) `reviewedBy='platform-admin'` **sabit metin** — tek platform admin olduğu için şimdilik yeterli; çoklu platform admin gelirse gerçek kimlik yazılmalı.
      - (b) `GET /platform/user-reports` **200 tavanlı, sayfalama YOK** — şikayet sayısı büyürse gerçek sayfalama gerekir.
-6. **HAYALET-BACKEND LİSTESİ** — hayalet-backend raporundaki bulguları tek tek bağla/sil/ertele (Zahid ile birlikte karar).
+6. **HAYALET-BACKEND LİSTESİ** — hayalet-backend raporundaki bulguları tek tek bağla/sil/ertele (ürün sahibi ile birlikte karar).
 7. **SEKTÖR SKORU = İŞ 7** (aşağıdaki eski plandaki İŞ 7 ile aynı) — 5-bileşenli `sector-scorer`'ı canlı yola bağla. **Canlı eşleşmeyi değiştirir → staging ŞART → staging sonrası.**
 8. **MENTİ MENTÖR-TARAMA UX** — 100+ mentörlü tenant için gerçek arama/sayfalama (sinyal gelince; kart tasarımı bunu kısmen çözecek).
 
