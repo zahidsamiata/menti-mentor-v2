@@ -11,8 +11,9 @@ Tam inşa bitti (backend + okundu-bazlı e-posta + frontend inbox/thread + çan/
 - **İKİ REPO CI YEŞİL** ✅ (backend #33 `ci` pass; çatı #40 Backend-TS+Lint ✅ + Frontend-TS+Build ✅ + Integration Tests ✅). Entegrasyon testleri CI'da postgres'e karşı geçti.
 - **Bir hata bulundu+giderildi:** çatı frontend job'ı vitest de koşuyor; `MessagesBell` nav'a eklenince `ux-fixes.test.tsx` (api'yi `() => ({})` mock'luyor) patladı → child'ı null'a mock'layarak düzeltildi (38 test geçti). Ders: yerel doğrulamaya **frontend vitest** de eklenmeli (sadece build+tsc yetmez).
 - **Detay + bilinen sınırlar:** `docs/kararlar/chat-v1-teslim.md` (ürün sahibi buradan inceler).
-- **Bilinen sınırlar (PO kararı):** eski `MatchRequest.requestMessage` backfill YOK (kapsam) · `VisibilityOptIn.requestMessage` ölü alan DROP'u ertelendi (şema değişikliği → ayrı tur) · `Meeting.requestMessage` ayrı akış, dokunulmadı.
-- **Sonraki:** PO PR'ları (#33/#40) inceleyip revize/merge kararı verecek. MERGE YAPILMADI.
+- **Bilinen sınırlar (PO kararı):** eski `MatchRequest.requestMessage` backfill YOK (kapsam) · `VisibilityOptIn.requestMessage` ölü alan **KOD tarafı temizlendi**, şema kolonu DROP'u ertelendi (bkz. aşağı) · `Meeting.requestMessage` ayrı akış, dokunulmadı.
+- **🧹 `VisibilityOptIn.requestMessage` ölü kod temizliği — KOD YAPILDI, ŞEMA ERTELENDİ (PR açık, MERGE YOK):** Frontend hiç kullanmıyordu (chat v1 bu niyet-mesajı akışının yerini aldı; grep: 0 referans). Kod tarafı ölü referanslar kaldırıldı (`mentiRequestController.ts` — validation alanı + upsert create/update yazımları + pending-list select). **PR:** backend `menti-mentor#34` (branch `chore/remove-visibilityoptin-deadcode`, base main). tsc+eslint temiz, backend CI ✅. **⚠️ ÖLÜ ŞEMA — SONRA SİLİNECEK:** `prisma/schema.prisma` `VisibilityOptIn.requestMessage` **kolonu duruyor** (DROP = migration → "DB şeması değişmez" kuralı gereği bu turda YAPILMADI). Kolon artık hiçbir kod tarafından yazılmıyor/okunmuyor — **gelecekte DB'ye dokunan bir işle birlikte, PO-onaylı bir DROP migration'ıyla temizlenecek**.
+- **Sonraki:** PO PR'ları (#33/#40/backend#34) inceleyip revize/merge kararı verecek. MERGE YAPILMADI.
 
 ### ⏳ FOTO VOLUME DOĞRULAMA — ERTELENDİ (ürün sahibi hazır olduğunda)
 Dokploy'da `UPLOAD_DIR=/app/uploads` + volume panelden eklendi ama **canlıda doğrulanmadı**.
