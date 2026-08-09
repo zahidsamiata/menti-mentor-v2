@@ -11,9 +11,9 @@ export function KpiCards({ counts }: { counts: TenantOverview['counts'] }) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {cards.map((c) => (
-        <div key={c.label} className="rounded-xl bg-slate-800/60 border border-slate-700 p-4">
-          <p className="text-xs text-slate-400">{c.label}</p>
-          <p className="text-2xl font-bold mt-1 text-white">{c.value}</p>
+        <div key={c.label} className="rounded-xl bg-card border border-border p-4">
+          <p className="text-xs text-muted-foreground">{c.label}</p>
+          <p className="text-2xl font-bold mt-1 text-foreground">{c.value}</p>
         </div>
       ))}
     </div>
