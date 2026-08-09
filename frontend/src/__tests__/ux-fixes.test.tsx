@@ -60,6 +60,9 @@ vi.mock('@/components/organisms/DashboardMetricCard',  () => ({ DashboardMetricC
 // ThemeToggle useTheme() çağırır → ThemeProvider ister. Nav testleri provider sarmaz;
 // diğer bileşenler gibi null'a mock'la (D21 ile DashboardNav'a eklendi, test güncellenmemişti).
 vi.mock('@/components/molecules/ThemeToggle',          () => ({ ThemeToggle: () => null }));
+// MessagesBell useApiClient() ile unread-count sorgular (mock'lanan api fonksiyon değil).
+// Nav testi API katmanını kapsamaz — diğer child'lar gibi null'a mock'la.
+vi.mock('@/components/organisms/MessagesBell',          () => ({ MessagesBell: () => null }));
 
 import { useAuth } from '@/providers/AuthProvider';
 import { DashboardNav } from '@/components/organisms/DashboardNav';
