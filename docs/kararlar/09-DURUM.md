@@ -1,21 +1,84 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-02 (platform admin turu: KVKK audit + UserReport + sistem sağlığı) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-06 (GÜVENLİK + ESKİ PR TURU KAPANDI: 4 recover PR MERGED → canlıda; backend main `7828c8e`, çatı main `10e5c93`; PR kuyruğu GERÇEKTEN SIFIR) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+## 📌 AÇIK İŞLER (ürün sahibi elinde — kaybolmasın)
+
+### 💬 CHAT v1 (menti↔mentör mesajlaşma) — PR HAZIR, MERGE PO'DA (2026-08-06)
+Tam inşa bitti (backend + okundu-bazlı e-posta + frontend inbox/thread + çan/rozet). **PR'lar açık, MERGE YOK.**
+- **PR'lar:** backend `menti-mentor#33` · çatı `menti-mentor-v2#40` (base `docs/merge-turu-devir`). Branch: iki repoda `feat/chat-messaging`.
+- **Migration:** `Conversation`+`Message` Faz 1'de canlı=lokal DB'ye uygulandı (additive, PO onaylı). Bu turda yeni migration YOK.
+- **Kapsam:** menti zorunlu ilk mesajla açar (hemen açık) · katılımcı-bazlı yetki (yabancı 404, admin aynı-tenant okur) · okundu-bazlı mail (okunmamış yokken ilk mesajda) · polling (gerçek zamanlı yok).
+- **İKİ REPO CI YEŞİL** ✅ (backend #33 `ci` pass; çatı #40 Backend-TS+Lint ✅ + Frontend-TS+Build ✅ + Integration Tests ✅). Entegrasyon testleri CI'da postgres'e karşı geçti.
+- **Bir hata bulundu+giderildi:** çatı frontend job'ı vitest de koşuyor; `MessagesBell` nav'a eklenince `ux-fixes.test.tsx` (api'yi `() => ({})` mock'luyor) patladı → child'ı null'a mock'layarak düzeltildi (38 test geçti). Ders: yerel doğrulamaya **frontend vitest** de eklenmeli (sadece build+tsc yetmez).
+- **Detay + bilinen sınırlar:** `docs/kararlar/chat-v1-teslim.md` (ürün sahibi buradan inceler).
+- **Bilinen sınırlar (PO kararı):** eski `MatchRequest.requestMessage` backfill YOK (kapsam) · `VisibilityOptIn.requestMessage` ölü alan DROP'u ertelendi (şema değişikliği → ayrı tur) · `Meeting.requestMessage` ayrı akış, dokunulmadı.
+- **Sonraki:** PO PR'ları (#33/#40) inceleyip revize/merge kararı verecek. MERGE YAPILMADI.
+
+### ⏳ FOTO VOLUME DOĞRULAMA — ERTELENDİ (ürün sahibi hazır olduğunda)
+Dokploy'da `UPLOAD_DIR=/app/uploads` + volume panelden eklendi ama **canlıda doğrulanmadı**.
+Test adımları (`docs/kararlar/dokploy-foto-volume-talimati.md`'de detaylı):
+1. Backend deploy 'done' (yeşil) mi kontrol et.
+2. Uygulamada bir profil fotosu yükle → görünüyor mu.
+3. Backend'i **Redeploy** et.
+4. Redeploy sonrası foto **HÂLÂ duruyor mu** → duruyorsa volume çalışıyor. ✅
+
+Foto yüklenmiyor/görünmüyor/kayboluyorsa: muhtemelen **uid 1001 yazma izni** sorunu →
+ayrı ele alınır. Bu iş canlıyı **bloklamaz** (henüz gerçek foto yok); aciliyet düşük ama
+**gerçek foto yüklemeye başlamadan ÖNCE tamamlanmalı.**
+
+### ✅ ESKİ AÇIK PR TURU — TAMAMLANDI (2026-08-06): triyaj + kurtarma + kapatma
+Merge turu öncesi (2026-07-30/31) kalan 5 eski PR ele alındı. **Kanıtlı triyaj, önceki "muhtemelen superseded" varsayımını ÇÜRÜTTÜ:** 5'in yalnız 1'i (backend #27 kodu) superseded; **4'ü main'de OLMAYAN benzersiz iş taşıyordu** → yeni recover PR'larında kurtarıldı.
+- **Backend #27** (IDOR + login rate-limit) → **KAPATILDI** (superseded, kanıtlı): requireSelfOrAdmin+loginRateLimiter kodu + login testi main'de; /clubs IDOR coverage `clubs-idor.test.ts`'te; /users/:id 403-yaklaşımı bilinçli field-strip ile değiştirilmiş.
+- **Backend #28** (REGISTER_MESSAGES) → **KURTARILDI → recover PR #32** (backend). "a0e1a69 kapsıyor" notu YANLIŞMIŞ; refactor main'de yoktu. Uyarlama: success mesajı 2 yerde → enumeration-safety için ikisi de bağlandı. **KAPATILDI**.
+- **Çatı #29** (platform derin görünüm FE) → **KURTARILDI → recover PR #36** (çatı). Backend+API zaten canlıda, UI eksikti; platform.ts'e 4 fonksiyon eklendi (merge, overwrite değil) + dashboard cerrahi link. **KAPATILDI**.
+- **Çatı #30** (kayıt hata UX FE) → **KURTARILDI → recover PR #37** (çatı). #32 ile çift (error-kodu sözleşmesi). Tema regresyonu atlandı. **KAPATILDI**.
+- **Çatı #31** (CLAUDE.md 7 ders) → **KURTARILDI → recover PR #38** (çatı). 7 ders güncel CLAUDE.md'ye çakışmasız işlendi. **KAPATILDI**.
+- **Durum (2026-08-06 GÜNCEL): 4 recover PR MERGED → canlıda.** Backend main **`7828c8e`** (recover #32), çatı main **`10e5c93`** (pointer `7828c8e` + #36 deep-view UI + #37 register-UX + #38 CLAUDE.md dersleri). İki main CI ✅. 5 eski PR kapatıldı. **Frontend autodeploy gerçek** (yeni platform deep-view sayfası) + backend autodeploy (register mesajları) → **ürün sahibi deploy'ları doğrulamalı**. PR kuyruğu = **GERÇEKTEN SIFIR**.
+
+### 🎨 PLATFORM DEEP-VIEW UI — TEMA UYUMU (açık iş, sonraki tur)
+Recover PR #36 (platform kurum derin-görünüm UI) **eski slate/indigo stiliyle** merge edildi (fonksiyon doğru, light-theme öncesi). Sayfa/bileşenler (`/platform/tenants/[id]` + 4 bileşen) tema-değişkeni (`bg-card`/`text-foreground` vb.) yerine hardcoded slate kullanıyor → panelin geri kalanıyla stil tutarsız. **İş:** slate→tema-değişkeni geçişi (kozmetik, düşük risk). Fonksiyonel değil, aciliyet düşük.
+
+## 🔒 GÜVENLİK TURU KAPANDI (2026-08-06)
+**PR #30 + PR #31 canlıya alındı; güvenlik denetiminin TÜM maddeleri (O1-O5) main'de/canlıda. Hedeflenen güvenlik iş kuyruğu = temiz.**
+**Eski PR turu (2026-08-06) TAMAMLANDI + MERGED:** 5 eski PR kapatıldı; 4 recover PR (#32/#36/#37/#38) main'e MERGE edildi → canlıda (backend `7828c8e`, çatı `10e5c93`). Detay: yukarıdaki "✅ ESKİ AÇIK PR TURU" bloğu. Kanıtlı triyaj "muhtemelen superseded" varsayımını çürüttü (4/5 benzersiz içerik taşıyordu). Kalan: #36 tema uyumu (yukarıda 🎨).
+- **PR #30 MERGED** (backend). Yeni **backend main HEAD `3f67024`** (merge-commit). Analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit → **canlıda**. Main CI ✅. Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı** (Dokploy erişimi ajanda yok).
+- **Çatı pointer hizalandı** (PR #34 MERGED): yeni **çatı main HEAD `d3505f9`**, backend pointer **`3f67024`** (backend main ile hizalı). İki repo senkron. Frontend autodeploy no-op (fonksiyonel değişiklik yok).
+- **Temizlik turu → PR #31 MERGED** (backend main `70a14d8`, çatı main `c6a05b9` — pointer PR #35 ile hizalı, iki CI ✅; O1-O5 **canlıda**). Autodeploy tetiklendi → **ürün sahibi backend canlı deploy'unu doğrulamalı**. İçerik — güvenlik denetiminin kalan 🟡 maddeleri:
+  - **O1** — 4 public endpoint'e IP-bazlı rate-limit (loginRateLimiter deseni, env-ayarlanabilir): `POST /auth/register` (10/dk), `POST /suspicion-reports` (5/dk), `GET /invitations/:token/join` (20/dk — kampüs NAT toplu katılımı için makul; imzalı JWT'de brute-force zaten infeasible), `GET /tenants/self-serve/check-slug` (30/dk). Test: register + invitation-join.
+  - **O2** — `listUsers` (menti mentör-tarama) over-fetch: `email` + serbest-metin `bio/expertise/target` peer'a dönmüyor (kart yalnız fullName/discType/sectorTags/avatar kullanıyor — doğrulandı). Admin havuzu farklı endpoint, etkilenmez.
+  - **O3** — createUser/updateUser JSON alanları (`temperament/volunteer/pastProjects/education`) `z.any()` → `boundedJson` 20KB cap (JSON bomba koruması).
+  - **O4** — createUser response explicit select (ham obje `password/discVector/selfProfile` sızdırmıyordu → güvenli subset).
+  - **O5 (strateji doğrulama turunda bulundu, PR #31'e eklendi)** — **onaysız mentör havuz sızıntısı kapatıldı**: `GET /api/users` (menti mentör-tarama) approvalStatus filtrelemiyordu → PENDING mentör menti havuzunda görünüp talep alabiliyordu. `listUsers` where'ine `approvalStatus:'APPROVED'` eklendi (rol-bağımsız; mentör→menti yönü zaten filtreliydi). Admin ayrı endpoint, etkilenmez. Test: `listusers-approval-filter.test.ts`. Commit `be295e2`, CI ✅.
+- **Atlanan (bilinçli, 09'a not):** 🟢 düşük tutarlılık maddeleri (adminSettings desen tutarlılığı, admin over-fetch) — fonksiyonel güvenlik değil → **gelecek tidiness turu**.
+- **Kalan sıradaki:** (1) **Foto volume doğrulama** (PO, Dokploy — tek açık teknik doğrulama; PARALEL, ajan işine dokunmaz) · (2) **dijital ayak izi temizliği** · (3) mentör/menti mevcut-kıyas (4-rol metodolojisi).
+
+## 🚀 MERGE TURU TAMAMLANDI (2026-08-05)
+**Biriken TÜM iş iki repoda main'e merge edildi; iki main CI de YEŞİL. Bekleyen birikim = SIFIR.**
+- **Backend** (menti-mentor) PR #26 → main. Yeni main HEAD **`dacc171`** (merge-commit). Main CI ✅.
+- **Çatı** (menti-mentor-v2) PR #32 → main; sonra pointer hizalama PR #33 → main. Güncel çatı main HEAD **`962889c`**; backend pointer **`975c03f`** (backend main HEAD'ine hizalı). Main CI ✅.
+- **getUser IDOR fix** (`a0e1a69`): ham DISC vektörü/PII yalnızca self/admin — tenant-içi sızıntı kapandı.
+- **PR #29 MERGED (backend main `975c03f`):** PR #27'nin main'de eksik iki parçası — **`/users/:userId/clubs` IDOR kapısı** (`requireSelfOrAdmin`) + **login brute-force rate-limit** (`loginRateLimiter`, 10/dk/IP) — canlıda. getUser-403 + f11134e bilinçli atlandı (field-strip zaten var). Çatı pointer PR #33 ile `975c03f`'ye hizalandı (çatı main `962889c`), frontend autodeploy no-op tetiklendi.
+- **PR #28 incelendi:** iyi huylu bakım işi (backend pointer→`b313601` + `PLATFORM_ADMIN_EMAIL` env passthrough), ürün sahibinin kendi hesabından; `a0e1a69` onu kapsıyor → **iş/veri kaybı yok, süreç ihlali yok**.
+- **Çatı merge yöntemi:** rebase, commit'lenmemiş `PROJECT_STATUS.md` yüzünden engellendi → **merge** ile çözüldü (tek pointer çakışması `a0e1a69` tutularak; force-push yok; `PROJECT_STATUS.md`'ye dokunulmadı).
+- **⚠️ Foto volume (AÇIK — ürün sahibi doğrulamalı):** merge autodeploy'u tetikledi. Dokploy'da `UPLOAD_DIR=/app/uploads` + `/app/uploads` kalıcı volume aktifleşmeli. Panel erişimi olmadığından doğrulanamadı. Doğrulama: foto yükle → redeploy → **duruyor mu**. Talimat: `docs/kararlar/dokploy-foto-volume-talimati.md`. Foto sorunu merge'i geri aldırmaz, ayrı ele alınır (uid 1001 yazma izni olabilir).
+
+**Sıradaki (öncelik):** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy — tek açık teknik doğrulama) · (2) ~~login rate-limit / clubs IDOR~~ ✅ **PR #29 MERGED (canlıda)** · (3) ~~kapsamlı güvenlik denetimi~~ ✅ **PR #30 MERGED (canlıda)**: analytics IDOR (ham DISC PII) + meeting ownership + password-reset rate-limit · (3b) ~~denetimin kalan 🟡'leri (listUsers over-fetch, JSON `z.any()` cap, public IP-limit)~~ ✅ **TEMİZLİK TURU → PR #31 HAZIR** (O1-O4, CI yeşil, merge PO'da) · (4) **dijital ayak izi temizliği** · (5) mentör/menti mevcut-kıyas.
 
 ## 🧭 SON DURUM ÖZETİ (DEVİR)
-**Bitenler (bu döneme kadar, hepsi commit'li, MERGE EDİLMEDİ):** güvenlik (2 IDOR + timezone) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
+**Bitenler (hepsi MERGE EDİLDİ — main'de/canlıda):** güvenlik (2 IDOR + timezone + **getUser IDOR fix**) · kapasite (sayfalama) · **fotoğraf altyapısı** · **STK yönetici retention/aktivite turu** (lastLoginAt + kaynayan-üye metrikleri + nudge + drill-down) · **Platform admin turu** (KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli).
 
 **4-rol metodolojisi (strateji→kıyas→aksiyon):** STK yönetici ✅ (strateji+kıyas+aksiyon TAMAM) · **Platform admin ✅ (strateji+kıyas+aksiyon TAMAM)** · Mentör ⬜ · Menti ⬜.
 
-**Sıradakiler:** (1) **MERGE TURU** — push + CI yeşil + submodule pointer + Dokploy `UPLOAD_DIR`/volume (merge kararı Zahid'de) · (2) mentör/menti mevcut-kıyas · (3) hayalet-mod / ön-tanımlı davet turu.
+**Sıradakiler:** (1) **Foto volume doğrulama** (ürün sahibi, Dokploy) · (2) **login rate-limit** (PR #27 kalanı) · (3) **kapsamlı güvenlik denetimi** · (4) **dijital ayak izi temizliği** · (5) mentör/menti kıyas · (6) hayalet-mod/davet turu.
 
 **🔴 KIRMIZI KURALLAR:** Canlı = lokal aynı Neon → DB işleminde onay al · main'e merge = canlıya deploy (autodeploy açık) → merge kararı Zahid'de · tehlikeli seed asla · PR aç merge etme · submodule sırası: backend push → çatı pointer → çatı push (ara commit yok).
 
 ## ⚡ TEK BAKIŞTA
 - **Canlı:** sivilkapasite.org ayakta (Dokploy). Mail (Resend) çalışıyor.
 - **DB:** Canlı = lokal aynı Neon. DISC soruları (20) + öğrenme aşamaları (13) yüklendi. **`lastLoginAt` alanı eklendi (migration uygulandı).**
-- **Açık PR'lar:** Hiçbiri merge edilmedi. Çok sayıda iş PR/commit'lerde bekliyor (foto + retention turu dahil).
-- **Bugün kapandı:** 2 IDOR açığı + timezone bug + fotoğraf altyapısı + STK yönetici retention turu + **Platform admin turu (KVKK audit + UserReport şikayet + otomatik tespit + sistem sağlığı)**.
-- **Sıradaki (bkz. 10 güncel öncelik kuyruğu):** **MERGE TURU (push+CI+pointer, Dokploy foto volume)** → mentör/menti mevcut-kıyas → kart+sayfalama tasarımı → hayalet-mod/davet.
+- **Açık PR'lar:** #26 + #32 MERGE EDİLDİ (2026-08-05). Backend main `dacc171`, çatı main `5dfe539`. Bekleyen birikim = SIFIR. (#27 login rate-limit hâlâ açık.)
+- **Bugün kapandı:** **MERGE TURU** — tüm birikim (güvenlik+foto+retention+platform admin+getUser IDOR fix) main'de/canlıda, iki main CI yeşil.
+- **Sıradaki:** foto volume doğrulama (Dokploy) → login rate-limit → kapsamlı güvenlik denetimi → dijital ayak izi temizliği → mentör/menti kıyas.
 - **Açık kararlar:** tema DISC renk (light) + kart DISC gösterim biçimi + foto ne zaman zorunlu + **otomatik-nudge KVKK/rıza** (bkz. 08).
 
 ## ✅ SON YAPILANLAR (2026-08-02 — PLATFORM ADMIN TURU: audit + şikayet + sağlık)
