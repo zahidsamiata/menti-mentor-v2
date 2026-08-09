@@ -89,6 +89,33 @@
 - Paralel başlatmadan ÖNCE parçaların gerçekten bağımsız olduğunu doğrula. Şüphede kalırsan sıralı git:
   doğruluk ve güvenlik hızdan önce gelir.
 
+## Kişi Adı Yasağı — KALICI
+- Hiçbir kod/yorum/commit/PR/belgeye kişi adı YAZMA. Nötr terim kullan ("ürün sahibi" / "PO").
+- Mevcut belgelerdeki isimler ayrı bir temizlik işinde giderilir; yeni içeriğe isim eklenmez.
+
+## Model Yönlendirme — mod başında öner
+- Her prompt başında MOD ile birlikte önerilen modeli belirt.
+- **Sonnet** → basit iş (belge, keşif/okuma, küçük fix). **Opus** → karmaşık/riskli iş (migration,
+  güvenlik, çok-dosyalı refactor, üretim merge).
+- Emin değilsen Opus seç + kısa gerekçe yaz.
+
+## Hata Felsefesi — panik yok
+- Ters giderse sırayla: (1) önce sorunu ARAŞTIR + KANITLA (teşhis + kanıt), (2) sonra çözüm + risk
+  değerlendir, (3) net ve düşük riskliyse çöz; belirsizse DUR ve sor.
+- Panikle deneme-yanılma düzeltme YAPMA.
+
+## Belge Eş-Zamanlılığı — iş bitince 09-DURUM
+- Her iş tamamlanınca aynı tur/commit içinde `docs/kararlar/09-DURUM.md` güncellenir (docs branch'inde).
+- İşlenecek: ne yapıldı + PR no + bilinen sınırlar. Sonraki oturum nerede kalındığını buradan görür.
+
+## Git Fetch Önce — lokal main geride kalabilir
+- Main durumu (ahead/behind, merge oldu mu) kontrol edilecekse ÖNCE `git fetch origin`.
+- Lokal main güncel değilken yapılan teşhis yanlış olur (yaşandı).
+
+## Belge Düzeltme Deseni — tarihsel iz korunur
+- Eski/yanlış çıkan bir kararı SİLME; üstüne `⚠️ GÜNCELLEME (tarih): …` notu ekle.
+- Böylece kararın neden değiştiği ve tarihsel iz korunur.
+
 <!-- /çalışma-kuralları -->
 
 <!-- güvenlik-kuralları -->
