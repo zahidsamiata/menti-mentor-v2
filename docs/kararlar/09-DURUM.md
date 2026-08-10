@@ -1,5 +1,26 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
-**Son güncelleme:** 2026-08-09 (CHAT TAM CANLIDA: frontend #47 + #48 MERGED, pointer `0ec6b2b` senkron → aşağıdaki ⚠️ GÜNCELLEME; backend main `0ec6b2b`) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+**Son güncelleme:** 2026-08-10 (MENTÖR PANELİ TAM CANLIDA + Taraf-2 ölü kod silindi + unutulmuş-niyet envanteri #54; backend main HEAD `afc2769`, pointer senkron → aşağıdaki ⚠️ GÜNCELLEME) · Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
+
+> ⚠️ **GÜNCELLEME (2026-08-10) — MENTÖR PANELİ TAM CANLIDA + ölü kod silindi + niyet envanteri:**
+> Bu oturumda merge edilen işler (hepsi canlıda, iki repo main CI ✅, açık PR = SIFIR):
+> - **MENTÖR PANELİ TAM CANLIDA:** metrik endpoint `GET /api/mentors/:mentorId/dashboard-metrics`
+>   (backend **#36**, IDOR korumalı `requireSelfOrAdmin` — salt-okuma, yeni tablo/kolon YOK) +
+>   metrik FE (çatı **#52**) + **Yaklaşan Toplantılar** (çatı **#51**, FE-only). Panel artık placeholder
+>   yerine gerçek metrik (aktif menti · bekleyen · tamamlanan · ortalama NPS) + yaklaşan onaylı toplantı gösteriyor.
+>   - #51↔#52 `mentor/page.tsx` çakışması "iki sorgu bloğunu da tut" ile çözüldü (deterministik).
+> - **ÖLÜ KOD SİLİNDİ — menti-driven görünürlük talebi (Taraf-2):** `mentiRequestController.ts` (3 handler) +
+>   `userRoutes` 3 rota (backend **#35** + çatı pointer **#50**). 0 frontend/0 test/0 iç çağrı; opt-in gate
+>   eşleşme akışından zaten kaldırılmıştı (`requestController.ts:17`). **`VisibilityOptIn` ŞEMA kolonu HÂLÂ
+>   DURUYOR** (DROP ayrı, PO-onaylı migration turu).
+> - **UNUTULMUŞ-NİYET ENVANTERİ:** `docs/kararlar/unutulmus-niyet-envanteri-2026-08-10.md` (**#54 MERGED**).
+>   4 kaynaktan (belge/kod/yarım-özellik/strateji) kanıtlı; kritik K1–K7 (KVKK yasal + OAuth consent + güvenlik).
+> - **Pointer:** backend main HEAD **`afc2769`** = çatı main submodule pointer (doğrulandı, senkron).
+> - **Bu turda DB'ye/şemaya DOKUNULMADI.** Kalan: aşağıdaki ⏳ bekleyen (ürün sahibi manuel testleri).
+>
+> **⏳ BEKLEYEN (ürün sahibi elinde — kod değil, kaybolmasın):**
+> - Canlı **chat uçtan uca testi** (menti→mentör ilk mesaj · thread · çan rozeti · okundu).
+> - **Foto volume doğrulama** (Dokploy redeploy sonrası kalıcılık — `dokploy-foto-volume-talimati.md`).
+> - **Mentör paneli metriklerini canlıda gözle görme** (gerçek veri doluyor mu).
 
 > ⚠️ **GÜNCELLEME (2026-08-09) — CHAT TAM CANLIDA (frontend merge edildi, chat işi kapandı):**
 > - **Frontend #47 MERGED → canlıda.** inbox/thread + `MessagesBell` (45sn polling) + `conversations.ts` + menti ilk-mesaj + nav.
