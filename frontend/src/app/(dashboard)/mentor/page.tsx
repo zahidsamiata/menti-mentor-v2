@@ -63,6 +63,18 @@ export default function MentorDashboardPage() {
     { enabled: Boolean(user?.id) },
   );
 
+  // ── Yaklaşan (onaylı) toplantılar ───────────────────────────────────────────
+  // Onaylı görüşme = SCHEDULED (approveMeetingByMentor bu statüyü set eder). Geçmiş
+  // görüşmeleri elemek için startsAt≥now filtresi FE'de uygulanır (listMeetings tarihe göre döner).
+  const { data: scheduledMeetings } = useQuery(
+    () => meetingsApi.list(api, { status: 'SCHEDULED' }),
+    [api],
+    { enabled: Boolean(user?.id) },
+  );
+  const upcomingMeetings = (scheduledMeetings?.items ?? [])
+    .filter((m) => new Date(m.startsAt).getTime() >= Date.now())
+    .sort((a, b) => new Date(a.startsAt).getTime() - new Date(b.startsAt).getTime());
+
   const [meetingActionId, setMeetingActionId] = useState<string | null>(null);
 
   async function handleMeetingAction(meetingId: string, action: 'approve' | 'reject') {
@@ -411,15 +423,40 @@ export default function MentorDashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Yaklaşan Toplantılar placeholder */}
+      {/* Yaklaşan (onaylı) toplantılar */}
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-base">Yaklaşan Toplantılar</CardTitle>
+          {upcomingMeetings.length > 0 && (
+            <Badge variant="secondary" className="text-xs">{upcomingMeetings.length}</Badge>
+          )}
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground text-center py-6">
-            Toplantı modülü yakında buraya entegre edilecek.
-          </p>
+          {upcomingMeetings.length === 0 ? (
+            <p className="text-sm text-muted-foreground text-center py-6">
+              Yaklaşan toplantınız yok.
+            </p>
+          ) : (
+            <div className="divide-y divide-border">
+              {upcomingMeetings.map((m) => {
+                const when = new Date(m.startsAt).toLocaleString('tr-TR', {
+                  dateStyle: 'medium',
+                  timeStyle: 'short',
+                });
+                return (
+                  <div key={m.id} className="py-3 flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      {m.menti?.fullName && (
+                        <p className="text-sm font-medium truncate">{m.menti.fullName}</p>
+                      )}
+                      <p className="text-xs text-muted-foreground">{when} · {m.format}</p>
+                    </div>
+                    <Badge variant="success" className="text-xs shrink-0">Onaylı</Badge>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
