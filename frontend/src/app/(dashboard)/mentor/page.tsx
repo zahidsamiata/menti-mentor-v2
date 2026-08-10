@@ -16,6 +16,7 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { matchingApi, mentorFilterApi } from '@/lib/api/matching';
 import { meetingsApi } from '@/lib/api/meetings';
+import { mentorMetricsApi, type MentorDashboardMetrics } from '@/lib/api/mentorMetrics';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
@@ -28,11 +29,17 @@ const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
   { value: 'C', label: 'C — Conscientious',  color: 'text-blue-500' },
 ];
 
-const PLACEHOLDER_METRICS = [
-  { label: 'Aktif Mentilerim',       value: '—',  color: 'brand'   as const },
-  { label: 'Bekleyen Talepler',      value: '—',  color: 'warning' as const },
-  { label: 'Ortalama NPS',           value: '—',  color: 'success' as const },
-  { label: 'Tamamlanan Toplantılar', value: '—',  color: 'neutral' as const },
+// Metrik kartı tanımları — değer, dashboard-metrics endpoint'inden doldurulur.
+// Veri henüz gelmediyse ya da alan null ise "—" gösterilir (kırılma yok).
+const METRIC_DEFS: {
+  label: string;
+  color: 'brand' | 'warning' | 'success' | 'neutral';
+  value: (m: MentorDashboardMetrics) => number | null;
+}[] = [
+  { label: 'Aktif Mentilerim',       color: 'brand',   value: (m) => m.activeMentis },
+  { label: 'Bekleyen Talepler',      color: 'warning', value: (m) => m.pendingRequests },
+  { label: 'Ortalama NPS',           color: 'success', value: (m) => m.avgNps },
+  { label: 'Tamamlanan Toplantılar', color: 'neutral', value: (m) => m.completedMeetings },
 ];
 
 export default function MentorDashboardPage() {
@@ -60,6 +67,13 @@ export default function MentorDashboardPage() {
   const { data: pendingMeetings, refetch: refetchPending } = useQuery(
     () => meetingsApi.list(api, { status: 'PENDING' }),
     [api],
+    { enabled: Boolean(user?.id) },
+  );
+
+  // ── Panel özet metrikleri ───────────────────────────────────────────────────
+  const { data: metrics } = useQuery(
+    () => mentorMetricsApi.get(api, user?.id ?? ''),
+    [api, user?.id],
     { enabled: Boolean(user?.id) },
   );
 
@@ -159,9 +173,17 @@ export default function MentorDashboardPage() {
 
       {/* Metrikler */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {PLACEHOLDER_METRICS.map((m) => (
-          <DashboardMetricCard key={m.label} label={m.label} value={m.value} color={m.color} />
-        ))}
+        {METRIC_DEFS.map((def) => {
+          const raw = metrics ? def.value(metrics) : null;
+          return (
+            <DashboardMetricCard
+              key={def.label}
+              label={def.label}
+              value={raw === null ? '—' : String(raw)}
+              color={def.color}
+            />
+          );
+        })}
       </div>
 
       {/* ── Onay Kuyruğu ─────────────────────────────────────────────────────── */}
