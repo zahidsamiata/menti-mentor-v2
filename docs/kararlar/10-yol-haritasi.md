@@ -6,7 +6,48 @@
 
 ---
 
-## 🆕 (2026-08-10) KOPUK-UÇ ENVANTERİ + MENTÖR KARAR EKRANI (chat CANLI sonrası — EN GÜNCEL)
+## 🎯 SIRADAKİ İŞLER (2026-08-10 — EN GÜNCEL, öncelik sırasıyla)
+
+> Bu blok bu oturumun kararlarına + unutulmuş-niyet envanterine (`unutulmus-niyet-envanteri-2026-08-10.md`,
+> #54 MERGED) dayanır. Detaylar o belgede ve 09-DURUM'da. Her iş tek tek, ürün sahibi başlattıkça yapılır.
+> **Mentör paneli TAM CANLIDA** (#36+#52+#51), **Taraf-2 ölü kod silindi** (#35+#50) — bunlar BİTTİ.
+
+### 🔴 A) STK ADMIN PANELİ — 13 BULGU (ürün sahibi test etti; İLK ADIM: salt-okuma keşif "backend hazır mı / ne kadar iş")
+1. **Giriş ekranı** şifre göster/gizle butonu yok (+ kayıt + şifre-sıfırlama ekranları da).
+2. **Admin sol menü** sıralama/gruplama gözden geçir (tasarım kararı bekliyor).
+3. **Havuz tablosu "Sektörler" kolonu** — çoklu değer nasıl gösterilecek.
+4. **DISC gösterimi tek harf** — ikincil/karma tip backend'de tutuluyor mu (keşif) + gösterim kararı.
+5. **Havuz sayfası layout** (tasarım kararı).
+6. **Algoritma Kalibrasyon Merkezi** sayfası çok boş — eşleştirme ağırlıkları backend'de var mı (evet: 0.60/0.40 hardcoded), sayfa ne göstermeli.
+7. **Yöneticiler sayfası** işlevi belirsiz — atama/çıkarma/yetki backend'de var mı (evet: `promote-admin`/`demote-admin`, max 3).
+8. **Soru Yönetimi:** ifadelerin puanlama/cevap-tipi görünmüyor (keşifle netleşecek).
+9. **CORE/DEEPENING İngilizce** — Türkçeleştir (enum mu görünüm mü, keşif).
+10. **Yeni soru formu** cevap tipi (şıklı/açık uçlu) seçimi yok.
+11. **Yeni soru formunda** tek seçenekli gereksiz dropdown.
+12. **Etiket Yönetimi:** sayfa amacı doğru; hazır sistem etiketleri nerede tanımlı (teyit).
+13. **Sertifika Konuları:** içerik/senaryo görünmüyor + "kurum ekleyemez" tasarım gerekçesi (topic1-5 placeholder mı gerçek mi).
+→ **İlk adım (PLANLA):** 13 madde için "backend hazır mı / ne kadar iş (S/M/L)" salt-okuma keşfi; sonra ürün sahibi öncelik verir.
+
+### 🔴 B) KVKK / YASAL (envanter #54 K1–K5 — ÜRETİM ÖNCESİ KRİTİK)
+- **K1** Yasal metinler TASLAK (`/kvkk`, `/gizlilik`, `/terms` — "taslak niteliğinde") → hukukçu incelemesi.
+- **K2** OAuth kullanıcılarında `kvkkConsentAt` NULL (register/self-serve set ediyor, `oauth/` etmiyor) → **kod** işi.
+- **K3** Migration-öncesi eski kayıt consent politikası yok → **karar** (yeniden-rıza / bulk / erteleme).
+- **K4** Yaş 18+ input/doğrulama yok (terms "18+" diyor) → karar + kod.
+- **K5** Veri sorumlusu kimliği + sunucu konumu (Neon/Hostinger) beyanı yok → karar + içerik.
+
+### 🟡 C) DİĞER (envanter #54 + önceki turlar)
+- **Sektör skoru stub** (`sector-scorer.service.ts` sabit 50 dönüyor) → 5-bileşen canlı yola bağla (**staging şart**, canlı eşleşmeyi değiştirir).
+- **K6** Admin sayfaları client-side guard → server `middleware.ts` hardening (API zaten backend-korumalı, veri sızıntısı değil).
+- **super-admin router + `setVisibilityOptIn` (Taraf-1)** kararı: sil / bağla / ertele (ikisi de "niyetli ama bağlanmamış" — super-admin testli, Taraf-1 yarım admin manuel-eşleştirme).
+- **`VisibilityOptIn` şema kolonu DROP'u** → ayrı, PO-onaylı migration turu (DB'ye dokunan bir işle birlikte).
+- **Foto volume** doğrulama (Dokploy — ürün sahibi işi).
+
+### 🟢 D) ÜRÜN SAHİBİ MANUEL (kod değil)
+- Chat canlı uçtan uca test · foto Dokploy testi · repoları PRIVATE yapma (GitHub ayarı).
+
+---
+
+## 🆕 (2026-08-10) KOPUK-UÇ ENVANTERİ + MENTÖR KARAR EKRANI (chat CANLI sonrası)
 
 > Chat v1 canlıya alındı (backend #33 MERGED main'de, frontend #47/#48 MERGED). Bu blok, chat
 > sonrası GÜNCEL kopuk-uç taramasını ve kalıcı bir iş notunu toplar. Kanıtlar dosya:satır.
