@@ -117,6 +117,20 @@ keşfi yapıldı, çoğu **mevcut `Meeting` verisinden** gelebilir:
 **Toplam:** Yaklaşan Toplantılar **S** (yeni endpoint yok) · Mentör metrikleri **M** (1 hafif
 agregasyon endpoint + FE). İnşa ayrı tur; retention "mentör sevdirme" işiyle (kuyruk md.4) örtüşür.
 
+### ✅ İNŞA EDİLDİ (2026-08-10 — hepsi MERGE YOK, ürün sahibi merge kararında)
+Yukarıdaki iki plan da inşa edildi; PR'lar açık, **canlıya çıkış ürün sahibinin merge kararında**:
+- **Yaklaşan Toplantılar** — FE-only: `mentor/page.tsx` placeholder → onaylı (`SCHEDULED`) & `startsAt≥now`
+  toplantıları tarihe göre listeler, boşsa "Yaklaşan toplantınız yok". Mevcut
+  `meetingsApi.list({status:'SCHEDULED'})` kullanıldı, **yeni endpoint yok**. → **FE PR #51** (çatı).
+- **Mentör metrik kartları** — hafif okuma endpoint'i planlandığı gibi:
+  `GET /api/mentors/:mentorId/dashboard-metrics` (`mentorMetricsController.ts`), **IDOR korumalı**
+  (`requireRole('ADMIN','MENTOR')` + `requireSelfOrAdmin('mentorId')`). 4 metrik: bekleyen/tamamlanan
+  (Meeting count) · aktif menti (distinct Meeting SCHEDULED/IN_PROGRESS/COMPLETED) · ortalama NPS
+  (`FeedbackLog.npsScore` agregasyonu, veri yoksa `null`→"—"). **Yeni tablo/kolon yok**, salt-okuma.
+  → **backend PR #36** + **çatı pointer PR #52** (pointer → backend `d2673575`).
+- **Merge sırası (ürün sahibi):** önce backend #36 → sonra #52 (pointer backend main HEAD'e re-sync
+  gerekebilir) · #51 bağımsız (FE-only). Üçü de CI yeşil, MERGEABLE.
+
 ---
 
 ## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum)
