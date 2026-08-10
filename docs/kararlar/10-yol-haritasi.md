@@ -76,7 +76,23 @@
   `userRoutes` 3 rota. Gerçekten ölü: 0 frontend / 0 test / 0 iç çağrı; opt-in gate eşleşme
   akışından zaten kaldırılmıştı (`requestController.ts:17`). **Şemaya/DB'ye dokunulmadı**
   (`VisibilityOptIn` tablosu duruyor — `VisibilityOptIn` kolon DROP'u ayrı onaylı migration turu).
-  - PR: backend **#35** · çatı pointer **#50** (base main, MERGE YOK — ürün sahibi kararı).
+  - PR: backend **#35** · çatı pointer **#50** → **✅ MERGED (2026-08-10)**, canlıda silindi.
+    Çatı pointer = backend main HEAD `152cf93` (doğrulandı). `VisibilityOptIn` şema kolonu **hâlâ
+    duruyor** (DROP ayrı onaylı migration turu).
+
+### 📜 SİLİNEN TARAF-2 NEYDİ? (arşiv-keşif — ürün sahibine sade özet)
+- **Ne hayal ediyordu:** Gizlilik-önce (KVKK) bir *el sıkışma*. Menti bir mentöre "beni görebilir
+  misin / profilimi sana açayım mı" **görünürlük talebi** gönderiyordu (`request-visibility`). Mentör
+  bekleyen talepleri görüp **onaylıyor/reddediyordu** (`respond`). ONAY (`VisibilityOptIn=APPROVED`)
+  gelmeden menti'nin profil detayları (ad, DISC, sektör) mentöre açılmıyor ve eşleşme isteği
+  oluşturulamıyordu. "Taraf-2" = bu el sıkışmanın *menti-başlatan* yönü (Taraf-1 = mentör-başlatan,
+  `setVisibilityOptIn` — hâlâ duruyor).
+- **Neden ölü:** Aynı gün (2026-07-07) doğdu (`de6be04` 10:51) ve ~40 dk sonra (`99f68a1` 11:30
+  "direct messaging … AI removed") eşleşme akışından **opt-in onay adımı kaldırıldı** — menti artık
+  mentöre *doğrudan* talep/mesaj gönderiyor (bu, sonradan **chat**'e evrildi). El sıkışma kapısı
+  atlandığı için Taraf-2 uçları hiçbir yerden çağrılmaz oldu.
+- **Tek cümle:** *"Menti profilini mentöre açmak için önce izin isteyen bir onay-kapısıydı; ürün
+  doğrudan-iletişim (sonra chat) modeline geçince gereksiz kaldı."*
 
 ### 🔨 YARIM ÖZELLİK İNŞA PLANI (2026-08-10 keşfi — İNŞA EDİLMEDİ, ürün sahibi onayında)
 Mentör paneli (`frontend/src/app/(dashboard)/mentor/page.tsx`) iki placeholder içeriyor; veri kaynağı
