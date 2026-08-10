@@ -63,6 +63,44 @@
 3. **super-admin ölü küme + visibility legacy uçları** — kullanıcıya görünmez ama güvenlik/bakım
    yükü (auth'lu ama kullanılmayan yüzey). Temizlik/İŞ 6 turunda sil.
 
+### ⚠️ GÜNCELLEME (2026-08-10) — silme turu sonucu + revizyon
+Ölü-uç silme turunda silmeden önceki son teyit, önceki envanterin bazı "ölü" iddialarını **çürüttü**:
+- **super-admin router → SİLİNMEDİ.** `backend/tests/tenant-verification.test.ts:153,172,204`
+  `/api/super-admin/tenants/:id/verify` ve `/pending` uçlarını **davranışsal test ediyor** → dead
+  legacy değil, frontend'e henüz bağlanmamış **testli yetenek**. (Yukarıdaki (B)/öncelik-3'te "ölü"
+  sanılmıştı — düzeltildi.)
+- **`setVisibilityOptIn` (Taraf-1, `matchingController`) → SİLİNMEDİ.** Docs
+  `stk-yonetici-panel-envanteri-2026-08-02.md:70` bunu "yarım admin manuel-eşleştirme, teyit gerek"
+  olarak işaretliyor + aktif controller içinde. **TEYİT GEREK**, ayrı karar.
+- **Menti-driven görünürlük talebi (Taraf-2) → SİLİNDİ.** `mentiRequestController.ts` (3 handler) +
+  `userRoutes` 3 rota. Gerçekten ölü: 0 frontend / 0 test / 0 iç çağrı; opt-in gate eşleşme
+  akışından zaten kaldırılmıştı (`requestController.ts:17`). **Şemaya/DB'ye dokunulmadı**
+  (`VisibilityOptIn` tablosu duruyor — `VisibilityOptIn` kolon DROP'u ayrı onaylı migration turu).
+  - PR: backend **#35** · çatı pointer **#50** (base main, MERGE YOK — ürün sahibi kararı).
+
+### 🔨 YARIM ÖZELLİK İNŞA PLANI (2026-08-10 keşfi — İNŞA EDİLMEDİ, ürün sahibi onayında)
+Mentör paneli (`frontend/src/app/(dashboard)/mentor/page.tsx`) iki placeholder içeriyor; veri kaynağı
+keşfi yapıldı, çoğu **mevcut `Meeting` verisinden** gelebilir:
+
+- **Mentör metrik kartları** (`mentor/page.tsx:31-36` `PLACEHOLDER_METRICS`):
+  - *Bekleyen Talepler* → **veri HAZIR**: sayfa zaten `pendingMeetings` çekiyor (status=PENDING) →
+    `.items.length` bas. **S** (sadece FE).
+  - *Tamamlanan Toplantılar* → **veri HAZIR**: `Meeting` where mentorUserId=me & status=COMPLETED
+    sayımı. `listMeetings` status filtresi var. **S** (FE'de mevcut endpoint'le, veya küçük count).
+  - *Aktif Mentilerim* → **veri VAR (KISMİ)**: distinct menti (Meeting APPROVED/SCHEDULED/COMPLETED)
+    veya aktif `Agreement`. **S/M** (agregasyon nerede: FE'de türet veya küçük endpoint).
+  - *Ortalama NPS* → **veri KISMİ**: `Meeting.hasFeedback` + feedback (npsScore/starRating) var ama
+    mentör-bazlı ortalama sorgusu **YOK** → küçük agregasyon endpoint gerekir. **M**.
+  - **Öneri:** 4 metriği tek hafif endpoint'te topla — `GET /api/mentors/:mentorId/dashboard-metrics`
+    (ownership guard `requireSelfOrAdmin`) → tek sorgu bloğu; FE'de placeholder yerine bas. Toplam **M**.
+- **"Yaklaşan Toplantılar"** (`mentor/page.tsx:414-423` placeholder kart):
+  - **veri HAZIR**: `Meeting` where mentorUserId=me & status∈{SCHEDULED,APPROVED} & startsAt≥now,
+    `startsAt asc`. `listMeetings` (`meetingController.ts:152-177`) zaten status filtresi destekliyor →
+    yeni endpoint **gerekmez**; FE `meetingsApi.list({status:'SCHEDULED'})` çağırıp render eder. **S**.
+
+**Toplam:** Yaklaşan Toplantılar **S** (yeni endpoint yok) · Mentör metrikleri **M** (1 hafif
+agregasyon endpoint + FE). İnşa ayrı tur; retention "mentör sevdirme" işiyle (kuyruk md.4) örtüşür.
+
 ---
 
 ## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum)
