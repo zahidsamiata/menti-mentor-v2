@@ -6,7 +6,120 @@
 
 ---
 
-## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum — EN GÜNCEL)
+## 🆕 (2026-08-10) KOPUK-UÇ ENVANTERİ + MENTÖR KARAR EKRANI (chat CANLI sonrası — EN GÜNCEL)
+
+> Chat v1 canlıya alındı (backend #33 MERGED main'de, frontend #47/#48 MERGED). Bu blok, chat
+> sonrası GÜNCEL kopuk-uç taramasını ve kalıcı bir iş notunu toplar. Kanıtlar dosya:satır.
+> Aşağıdaki maddeler **İŞ 6 (HAYALET-BACKEND LİSTESİ)** kapsamına girer — sil/bağla/ertele
+> kararı ürün sahibinde.
+
+### ⭐ KALICI İŞ — Mentör karar ekranında menti mesajı (boyut: M)
+- **Durum bugün:** Mentör talep karar ekranı (`frontend/src/app/(dashboard)/mentor/page.tsx:167-247`,
+  "Toplantı Talepleri" onay kuyruğu) şu an **`Meeting.requestMessage`** gösteriyor
+  (`mentor/page.tsx:190-193` blockquote "Niyet mesajı"). Backend `listMeetings`
+  (`backend/src/controllers/meetingController.ts:152-177`) bu alanı döndürüyor.
+- **Kopukluk:** Chat'in ilk mesajı (`Conversation`/`Message`, `startConversation`
+  `conversationController.ts:104-182`) **AYRI** ve karar ekranına bağlı **DEĞİL**.
+  `Conversation` → `MatchRequest`'e bağlı; karar ekranı `Meeting` sorguluyor; **`Conversation↔Meeting`
+  arası FK yok**. Chat'in ayrıca kabul/ret karar ekranı da yok.
+- **Risk:** Chat, talep-anı mesajının yerini alırsa menti açılış mesajı yalnızca `/messages` inbox'ta
+  kalır → mentör mesajı görmeden (veya ayrı ekrana giderek) karar verebilir.
+- **İş:** `listMeetings`'e menti+mentör çiftinin `Conversation` ilk mesajını ekle
+  (`Conversation`'da `mentorUserId_mentiUserId` unique index var → lookup kolay) — **BE orta** +
+  FE karar kartında render — **küçük**. Toplam **M**. Yeni endpoint gerekmez.
+- **Ön koşul (chat canlı): ✅ TAMAMLANDI.**
+
+### (B) Ölü backend uçları (kod VAR → frontend çağırmıyor)
+- **`super-admin` router tümü ölü (4 endpoint):** `backend/src/routes/superAdminRoutes.ts:14-19`
+  (`GET /dashboard`, `PATCH /tenants/:id/status`, `GET /tenants/pending`, `PATCH /tenants/:id/verify`).
+  `server.ts:105`'te `/api/super-admin`'e mount edilmiş AMA frontend'de **sıfır referans** (grep boş).
+  Aynı işi `/api/platform` (mount `server.ts:84`, controller platformController) yapıyor ve frontend
+  onu kullanıyor → **super-admin legacy DUPLİKE küme**. Karar: **sil** (öneri) veya bağla.
+- **Menti visibility opt-in legacy uçları:** `backend/src/routes/userRoutes.ts:76-81, 139-152`
+  (`POST /mentors/:id/visibility-optin`, `POST /mentis/:id/request-visibility`,
+  `GET /mentors/:id/pending-visibility-requests`, `PATCH .../visibility-optin/:optInId/respond`,
+  controller `mentiRequestController`). Frontend'de **çağrılmıyor** (grep boş) → chat opt-in akışının
+  yerini aldığı eski "Akış B". Karar: sil/ertele (şema kolonu `VisibilityOptIn` DROP ayrı tur).
+
+### (C) Yarım/placeholder özellikler (UI VAR → backend eksik/stub)
+- **Mentör metrik kartları placeholder:** `frontend/src/app/(dashboard)/mentor/page.tsx:31-36`
+  `PLACEHOLDER_METRICS` (Aktif Mentilerim / Bekleyen Talepler / Ortalama NPS / Tamamlanan) hepsi
+  "—" gösteriyor; mentöre özel metrik endpoint'i yok. **Canlıda görünür.** (TEYİT GEREK: KPI
+  endpoint'i admin içindir, mentör-bazlı değil.)
+- **"Yaklaşan Toplantılar" placeholder:** `mentor/page.tsx:414-423` "Toplantı modülü yakında buraya
+  entegre edilecek." — boş kart. **Canlıda görünür.**
+- **Push bildirim stub:** `backend/src/services/notificationService.ts` — gerçek push (FCM/Expo) yok,
+  SystemLog'a yazıyor. **Canlıda kullanıcıya görünmez** (in-app unread/e-posta üzerinden idare ediliyor).
+
+### (D) Karşılıksız frontend çağrısı — YOK ✅
+- Frontend'in tüm API çağrılarının backend karşılığı **VAR** (0 adet 404-beklentisi). Prefix/method
+  eşleşmeleri tutarlı. `PATCH /api/tenants/:id/settings` `adminSettingsRoutes` (`server.ts:102`) ile
+  karşılanıyor (bir ara-taramada "mount yok" sanıldı — **yanlış**, mount VAR).
+
+### Öncelik önerisi (kullanıcıyı en çok etkileyen → en az)
+1. **Mentör metrik + "Yaklaşan Toplantılar" placeholder** — canlıda mentör bunları boş görüyor
+   (deneyim/güven etkisi yüksek). Retention "mentör sevdirme" işiyle örtüşür (bkz. kuyruk md.4).
+2. **Mentör karar ekranında menti mesajı (M)** — chat büyürse doğrudan karar kalitesini etkiler.
+3. **super-admin ölü küme + visibility legacy uçları** — kullanıcıya görünmez ama güvenlik/bakım
+   yükü (auth'lu ama kullanılmayan yüzey). Temizlik/İŞ 6 turunda sil.
+
+### ⚠️ GÜNCELLEME (2026-08-10) — silme turu sonucu + revizyon
+Ölü-uç silme turunda silmeden önceki son teyit, önceki envanterin bazı "ölü" iddialarını **çürüttü**:
+- **super-admin router → SİLİNMEDİ.** `backend/tests/tenant-verification.test.ts:153,172,204`
+  `/api/super-admin/tenants/:id/verify` ve `/pending` uçlarını **davranışsal test ediyor** → dead
+  legacy değil, frontend'e henüz bağlanmamış **testli yetenek**. (Yukarıdaki (B)/öncelik-3'te "ölü"
+  sanılmıştı — düzeltildi.)
+- **`setVisibilityOptIn` (Taraf-1, `matchingController`) → SİLİNMEDİ.** Docs
+  `stk-yonetici-panel-envanteri-2026-08-02.md:70` bunu "yarım admin manuel-eşleştirme, teyit gerek"
+  olarak işaretliyor + aktif controller içinde. **TEYİT GEREK**, ayrı karar.
+- **Menti-driven görünürlük talebi (Taraf-2) → SİLİNDİ.** `mentiRequestController.ts` (3 handler) +
+  `userRoutes` 3 rota. Gerçekten ölü: 0 frontend / 0 test / 0 iç çağrı; opt-in gate eşleşme
+  akışından zaten kaldırılmıştı (`requestController.ts:17`). **Şemaya/DB'ye dokunulmadı**
+  (`VisibilityOptIn` tablosu duruyor — `VisibilityOptIn` kolon DROP'u ayrı onaylı migration turu).
+  - PR: backend **#35** · çatı pointer **#50** → **✅ MERGED (2026-08-10)**, canlıda silindi.
+    Çatı pointer = backend main HEAD `152cf93` (doğrulandı). `VisibilityOptIn` şema kolonu **hâlâ
+    duruyor** (DROP ayrı onaylı migration turu).
+
+### 📜 SİLİNEN TARAF-2 NEYDİ? (arşiv-keşif — ürün sahibine sade özet)
+- **Ne hayal ediyordu:** Gizlilik-önce (KVKK) bir *el sıkışma*. Menti bir mentöre "beni görebilir
+  misin / profilimi sana açayım mı" **görünürlük talebi** gönderiyordu (`request-visibility`). Mentör
+  bekleyen talepleri görüp **onaylıyor/reddediyordu** (`respond`). ONAY (`VisibilityOptIn=APPROVED`)
+  gelmeden menti'nin profil detayları (ad, DISC, sektör) mentöre açılmıyor ve eşleşme isteği
+  oluşturulamıyordu. "Taraf-2" = bu el sıkışmanın *menti-başlatan* yönü (Taraf-1 = mentör-başlatan,
+  `setVisibilityOptIn` — hâlâ duruyor).
+- **Neden ölü:** Aynı gün (2026-07-07) doğdu (`de6be04` 10:51) ve ~40 dk sonra (`99f68a1` 11:30
+  "direct messaging … AI removed") eşleşme akışından **opt-in onay adımı kaldırıldı** — menti artık
+  mentöre *doğrudan* talep/mesaj gönderiyor (bu, sonradan **chat**'e evrildi). El sıkışma kapısı
+  atlandığı için Taraf-2 uçları hiçbir yerden çağrılmaz oldu.
+- **Tek cümle:** *"Menti profilini mentöre açmak için önce izin isteyen bir onay-kapısıydı; ürün
+  doğrudan-iletişim (sonra chat) modeline geçince gereksiz kaldı."*
+
+### 🔨 YARIM ÖZELLİK İNŞA PLANI (2026-08-10 keşfi — İNŞA EDİLMEDİ, ürün sahibi onayında)
+Mentör paneli (`frontend/src/app/(dashboard)/mentor/page.tsx`) iki placeholder içeriyor; veri kaynağı
+keşfi yapıldı, çoğu **mevcut `Meeting` verisinden** gelebilir:
+
+- **Mentör metrik kartları** (`mentor/page.tsx:31-36` `PLACEHOLDER_METRICS`):
+  - *Bekleyen Talepler* → **veri HAZIR**: sayfa zaten `pendingMeetings` çekiyor (status=PENDING) →
+    `.items.length` bas. **S** (sadece FE).
+  - *Tamamlanan Toplantılar* → **veri HAZIR**: `Meeting` where mentorUserId=me & status=COMPLETED
+    sayımı. `listMeetings` status filtresi var. **S** (FE'de mevcut endpoint'le, veya küçük count).
+  - *Aktif Mentilerim* → **veri VAR (KISMİ)**: distinct menti (Meeting APPROVED/SCHEDULED/COMPLETED)
+    veya aktif `Agreement`. **S/M** (agregasyon nerede: FE'de türet veya küçük endpoint).
+  - *Ortalama NPS* → **veri KISMİ**: `Meeting.hasFeedback` + feedback (npsScore/starRating) var ama
+    mentör-bazlı ortalama sorgusu **YOK** → küçük agregasyon endpoint gerekir. **M**.
+  - **Öneri:** 4 metriği tek hafif endpoint'te topla — `GET /api/mentors/:mentorId/dashboard-metrics`
+    (ownership guard `requireSelfOrAdmin`) → tek sorgu bloğu; FE'de placeholder yerine bas. Toplam **M**.
+- **"Yaklaşan Toplantılar"** (`mentor/page.tsx:414-423` placeholder kart):
+  - **veri HAZIR**: `Meeting` where mentorUserId=me & status∈{SCHEDULED,APPROVED} & startsAt≥now,
+    `startsAt asc`. `listMeetings` (`meetingController.ts:152-177`) zaten status filtresi destekliyor →
+    yeni endpoint **gerekmez**; FE `meetingsApi.list({status:'SCHEDULED'})` çağırıp render eder. **S**.
+
+**Toplam:** Yaklaşan Toplantılar **S** (yeni endpoint yok) · Mentör metrikleri **M** (1 hafif
+agregasyon endpoint + FE). İnşa ayrı tur; retention "mentör sevdirme" işiyle (kuyruk md.4) örtüşür.
+
+---
+
+## 🆕 GÜNCEL ÖNCELİK KUYRUĞU (2026-08-02 geç oturum)
 
 > Aşağıdaki eski "İŞ 0–8" planının çoğu tamamlandı (mail, IDOR, timezone, foto). Bu kuyruk
 > güncel önceliği yansıtır; öncelik sırasını ürün sahibi değiştirebilir. Eski plan referans olarak altta durur.
