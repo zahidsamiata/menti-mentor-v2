@@ -66,6 +66,31 @@ Yatay tablo → **KART görünümü**. Kart içeriği **bakan kişinin ROLÜNE g
 - Kör bir sayı yerine **anlamlı, güven veren metin.**
 - Havuz kartı işinin (KARAR 2) **parçası.**
 
+### KARAR 11 — DISC gösterim biçimi (baskın + ikincil HARF)
+- **ŞİMDİ (uygulanacak):** Havuz kartında/listesinde tek harf yerine **baskın + ikincil tip HARF olarak** gösterilir
+  (ör. **"DI"**). **Yüzde dağılımı GÖSTERİLMEZ.** "Tek harf çok keskin, ikili karakter görünsün" ihtiyacını çözer.
+- **KARAR 5 ile TAM UYUMLU:** yüzde = ham DISC vektörü → hiçbir rolde gösterilmez; yalnız türetilmiş **harf** görünür.
+- **⚠️ Bağ — bulgu B4'ün güvenli çözümü:** B4 (DISC ikincil gösterim) önceki turda "backend'e yeni PII alanı eklemek
+  gerekiyor" diye ertelenmişti. İkincil **HARF** (yüzde değil) türetilmiş/az-riskli bir değer olduğundan bu yolla
+  **güvenle yapılabilir.** **DevSecOps:** yine de backend ham vektör **sızdırmadan** uygulanmalı — türetilmiş ikincil
+  harf ≠ ham yüzde vektörü. (İlgili: `stk-admin-bulgu-envanteri-2026-08-11.md` B4.)
+- **🔍 İLERİDE (şimdi YAPILMAYACAK — gelecek entegrasyon adayı, kaybolmasın):** Yüzde dağılımı (ör. "%60 D, %30 I")
+  **SADECE yöneticiye** gösterilebilir. KVKK gerekçesi + rıza + ek iş gerektirdiği için ertelendi.
+  **Karar:** şimdilik yalnız **harf (seçenek A)**; **yüzde-yöneticiye (seçenek B)** ileri faz.
+
+### KARAR 12 — Sektör/etiket havuzu (kesinleşmiş ilke + 🔍 keşif gerektiren uygulama)
+- **İLKE (✅ kesinleşti):** Sisteme, hedef kitleye (menti-mentör, STK dünyası) uygun **HAZIR bir başlangıç
+  etiket/sektör havuzu** tanımlanır. Kullanıcı profilini doldururken bu havuzdan **SEÇER.** Havuz **kapalı değildir**
+  — kullanıcı listede olmayan etiket **ÖNEREBİLİR.** Öneriler **dernek yöneticisi onayından** geçer (mevcut Etiket
+  Yönetimi kuyruğu: Bekleyen/Onaylanan/Reddedilen bunu zaten yapıyor).
+- **KRİTİK GEREKÇE:** Etiketler yalnızca görsel değil — **EŞLEŞTİRME MOTORUNUN GİRDİSİ.** Uyum skoru etiket
+  örtüşmesine bağlı hesaplanır. Bu yüzden **kontrollü/standart havuz ŞART:** serbest metin olursa ("yazılım" vs
+  "software" vs "yazılım geliştirme") sistem bunları farklı sanar, **eşleşme bozulur.** Yönetici onayı bu tutarlılığı korur.
+- **🔍 KEŞİF GEREK (kod başlamadan):** Başlangıç havuzu **nerede/nasıl** tanımlanacak — seed mi, admin-yönetilir tablo mu?
+  Bu, keşifteki bulgu **B12** ("hazır sistem etiketleri şemada/seed'de BULUNAMADI — grep boş") eksiğini kapatır.
+  **Çapraz-ref:** B12 (`stk-admin-bulgu-envanteri-2026-08-11.md`) + eşleştirme skorlama (uyum = etiket örtüşme).
+  Şema/seed'e dokunacağı için **PO onayı + ayrı tur** gerekir.
+
 ---
 
 ## 🔍 KEŞİF / KARAR BEKLEYEN (kod başlamadan önce netleşmeli)
@@ -97,7 +122,11 @@ Yatay tablo → **KART görünümü**. Kart içeriği **bakan kişinin ROLÜNE g
 ---
 
 ## Özet
-- **Kesinleşmiş (uygulanacak):** 6 karar — KARAR 1, 2, 3, 4, 5, 7.
+- **Kesinleşmiş (uygulanacak):** 8 karar — KARAR 1, 2, 3, 4, 5, 7, **11**, **12** (ilke).
+  - KARAR 11 & 12'nin ayrıca **🔍 ileri-faz / keşif alt-notları** var (yüzde-yöneticiye; havuzun nerede tanımlanacağı).
 - **Keşif/karar bekleyen (vizyon/araştırma):** 4 karar — KARAR 6, 8, 9, 10.
-- **Çapraz bağlar:** KARAR 2 ↔ bulgu B4 (birlikte planla) · KARAR 6 ↔ yol haritası F6 (birlikte değerlendir) ·
-  KARAR 5 & 9 ↔ KVKK/PII (backend `CLAUDE.md`).
+- **Çapraz bağlar:**
+  - KARAR 2 ↔ bulgu B4 (birlikte planla); **KARAR 11 = B4'ün güvenli çözümü** (ikincil harf, yüzde değil).
+  - KARAR 6 ↔ yol haritası F6 (birlikte değerlendir).
+  - **KARAR 12 ↔ bulgu B12** (hazır etiket havuzu eksiği) + **eşleştirme skorlama** (uyum = etiket örtüşme).
+  - KARAR 5, 9, 11, 12 ↔ **KVKK/PII** (backend `CLAUDE.md`) — DISC/veri sızıntı frenleri.
