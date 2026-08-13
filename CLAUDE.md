@@ -104,9 +104,19 @@
   değerlendir, (3) net ve düşük riskliyse çöz; belirsizse DUR ve sor.
 - Panikle deneme-yanılma düzeltme YAPMA.
 
-## Belge Eş-Zamanlılığı — iş bitince 09-DURUM
-- Her iş tamamlanınca aynı tur/commit içinde `docs/kararlar/09-DURUM.md` güncellenir (docs branch'inde).
-- İşlenecek: ne yapıldı + PR no + bilinen sınırlar. Sonraki oturum nerede kalındığını buradan görür.
+## Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI (atlanamaz)
+> ⚠️ GÜNCELLEME (2026-08-11): Eski "iş bitince 09-DURUM güncellenir" kuralı bu **atlanamaz bitiş adımıyla**
+> güçlendirildi (kararlar yazılıp unutuluyor sorununu kökten önlemek için). İçerik kaybı yok — genişletildi.
+
+- **Her BYPASS (kod/iş yapan) tur, aşağıdaki belge-senkron kontrolü yapılmadan TAMAMLANMIŞ SAYILMAZ.**
+  Aynı tur/commit (docs branch'inde) içinde şunlar KONTROL EDİLİR ve gerekiyorsa güncellenir:
+  1. **İş/özellik tamamlandıysa →** `docs/kararlar/09-DURUM.md` güncellenir: ne yapıldı + PR no + bilinen sınırlar.
+     (Sonraki oturum nerede kalındığını buradan görür.)
+  2. **İş kuyruğu değiştiyse** (madde düştü / eklendi / önceliği değişti) **→** `docs/kararlar/10-yol-haritasi.md` güncellenir.
+  3. **Güncelleme gerekmiyorsa** (ör. salt-okuma PLANLA turu veya durumu değiştirmeyen iş) **→** bu AÇIKÇA belirtilir:
+     "belge güncellemesi gerekmedi: [neden]".
+- Bu adım atlanırsa **tur EKSİK sayılır** — kapanış raporunda belge-senkron durumu her zaman belirtilir.
+- Belge hijyeni geçerli: eskiyi SİLME → `⚠️ GÜNCELLEME (tarih): …` notuyla ekle veya `docs/arsiv/`'e taşı (bkz. "Belge Düzeltme Deseni").
 
 ## Git Fetch Önce — lokal main geride kalabilir
 - Main durumu (ahead/behind, merge oldu mu) kontrol edilecekse ÖNCE `git fetch origin`.
