@@ -1,9 +1,12 @@
 # MENTİMENTOR / SİVİLKAPASİTE — BELGE HARİTASI (INDEX)
-**Son güncelleme:** 2026-08-02 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
+**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-11 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
 
 > Bu belgeler, birden fazla sohbetten toplanan kararların konu bazlı derlemesidir.
 > Claude Code / yeni Claude chat'i, ihtiyaç duyduğu konunun belgesini okur — hepsini değil.
 > Bu sayede context şişmez.
+>
+> **Belge düzeni kuralları:** `belge-duzeni-rehberi.md` (canonical — 6 kural: canonical/tür/yaşayan-dondurulmuş/adlandırma/INDEX/işaretleme).
+> Etiketler: **🔄 YAŞAYAN** (güncel tutulur) · **📸 DONDURULMUŞ** (o günün fotoğrafı, güncellenmez).
 
 ## Marka/İsim (netleşti 2026-08-02)
 - **Sivilkapasite** = ana marka (canlı: sivilkapasite.org).
@@ -34,6 +37,21 @@ docs/
 | `08-acik-sorular.md` | Karara bağlanmamışlar (yaş, veri sorumlusu vb.) | Karar gerektiğinde |
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
 | `10-yol-haritasi.md` | Sıradaki işler yol haritası (İŞ 0–8, sıra + bağımlılık) | Sıradaki iş kararı |
+
+## Yeni belgeler — 2026-08-11 oturumu (`docs/kararlar/`)
+| Belge | İçerik | Tür |
+|---|---|---|
+| `belge-duzeni-rehberi.md` | Belge düzeni 6 kuralı (canonical) | 🔄 YAŞAYAN · canonical (düzen) |
+| `tasarim-kararlari-admin-2026-08-11.md` | STK admin tasarım kararları (12 karar; menü, kart, DISC mahremiyet, etiket havuzu) | 🔄 YAŞAYAN (kararlar eklenebilir) |
+| `stk-admin-bulgu-envanteri-2026-08-11.md` | STK admin 13-bulgu keşfi (backend hazır mı / S-M-L) | 📸 DONDURULMUŞ (keşif) |
+| `belge-aksiyon-denetimi-2026-08-11.md` | 34 belgedeki kararlar gerçekle kıyas (YAPILDI/UNUTULDU/…) | 📸 DONDURULMUŞ (denetim) |
+| `chat-v1-teslim.md` · `dokploy-foto-volume-talimati.md` | Chat v1 teslim · foto volume talimatı | 📸 DONDURULMUŞ |
+| `belge-denetimi-2026-08-10.md` · `unutulmus-niyet-envanteri-2026-08-10.md` | 09/10 denetimi · unutulmuş niyet envanteri | 📸 DONDURULMUŞ |
+
+## Devir belgeleri — `docs/devir/` (2026-08-11)
+| Klasör | İçerik | Tür |
+|---|---|---|
+| `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu) | 📸 DONDURULMUŞ (devir fotoğrafı) |
 
 ## Raporlar — `docs/raporlar/`
 | Belge | İçerik |

@@ -1,6 +1,7 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**Son güncelleme:** 2026-08-10 (belge temizliği: eskimiş/çelişkili bloklar arşive taşındı → tek tutarlı durum).
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-11 (bu oturum belgeleri merge oldu → "açık PR"
+bloğu gerçek merge durumuna çekildi). Önceki: 2026-08-10 (belge temizliği: eskimiş/çelişkili bloklar arşive taşındı).
 Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 **Sıradaki işler + öncelik:** `docs/kararlar/10-yol-haritasi.md`. **2026-08-10 öncesi tam geçmiş:**
 `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`. **Belge denetimi (neden temizlendi):**
@@ -29,15 +30,20 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   fotoğraf altyapısı · timezone fix · IDOR fix'leri** — hepsi MERGED, canlıda (geçmiş detay arşivde).
 - **Unutulmuş-niyet envanteri** (`unutulmus-niyet-envanteri-2026-08-10.md`, #54) + **belge denetimi** (#56) MERGED.
 
-## 🔧 AÇIK PR — BU TURDA (merge PO'da)
-- **STK admin 13-bulgu keşfi:** `docs/kararlar/stk-admin-bulgu-envanteri-2026-08-11.md` (13/13 kanıtlı; "arka-var-ön-yok" 3 madde).
-- **STK admin UI bağlama (S işler):** 3 küçük "arka-var-ön-yok"/UI işi bağlandı — **B7** Yönetici atama UI
-  (backend `promote/demote` zaten vardı, ön yüze bağlandı), **B9** CORE/DEEPENING görünen etiket Türkçeleştirme
-  (enum-safe; DB değeri değişmedi), **B1** şifre göster/gizle (paylaşılan `PasswordField` molekülü → login + reset).
-  Salt-frontend, şema/DB dokunulmadı. **PR: (aşağıda no).**
+## ✅ CANLIDA / KAPANMIŞ — bu oturum (2026-08-11)
+> ⚠️ GÜNCELLEME (2026-08-11): Bu blok önce "🔧 AÇIK PR — BU TURDA (merge PO'da)" başlığındaydı ve `PR: (aşağıda no)`
+> placeholder içeriyordu. O PR'ların **HEPSİ merge oldu** → bilgi bayatladı, gerçek merge durumuyla güncellendi
+> (Belge Düzeltme Deseni / belge-duzeni-rehberi Kural 6). **Açık PR: 0, masa temiz.**
+- **STK admin UI bağlama (S işler) — #62 MERGED, CANLIDA:** **B7** Yönetici atama UI (backend `promote/demote`
+  zaten vardı, ön yüze bağlandı) · **B9** CORE/DEEPENING görünen etiket Türkçeleştirme (enum-safe; DB değeri
+  değişmedi) · **B1** şifre göster/gizle (paylaşılan `PasswordField` molekülü → login + reset). Salt-frontend.
   - **Bilinen sınır / ertelendi:** **B4** (DISC ikincil/karma gösterim) bu turdan ÇIKARILDI — ikincil tipi göstermek
-    backend'e yeni türetilmiş DISC alanı eklemeyi gerektiriyor; backend `CLAUDE.md` bunu PII sınıfında tutuyor
-    ("yeni alanı sınıflandırmadan user-facing select'e ekleme") → PO/uyum kararı + ayrı backend turu gerekir.
+    backend'e yeni türetilmiş DISC alanı eklemeyi gerektiriyor; backend `CLAUDE.md` bunu PII sınıfında tutuyor →
+    PO/uyum kararı + ayrı backend turu gerekir. (İlgili karar: `tasarim-kararlari-admin-2026-08-11.md` KARAR 11.)
+- **Belge işleri — hepsi MERGED (bu oturum):** STK admin 13-bulgu keşfi (`stk-admin-bulgu-envanteri-2026-08-11.md`,
+  📸 dondurulmuş) · belge-aksiyon denetimi **#59** · yol haritası 7 madde/F bölümü **#60** · CLAUDE.md belge-senkron
+  kuralı **#61** · tasarım kararları (`tasarim-kararlari-admin-2026-08-11.md`) **#63** · devir belgeleri (`docs/devir/`) **#58**.
+- **Belge düzeni kalıcı temeli — bu tur:** `belge-duzeni-rehberi.md` (6 kural) + CLAUDE.md "Belge Düzeni" bağlaması.
 
 ## 4-rol metodolojisi (strateji→kıyas→aksiyon)
 STK yönetici ✅ · Platform admin ✅ · **Mentör ✅** (panel + chat canlıda) · **Menti ⬜** (sıradaki).
