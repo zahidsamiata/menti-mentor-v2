@@ -14,6 +14,9 @@ const DISC_COLORS: Record<string, string> = {
   D: 'text-red-500', I: 'text-yellow-500', S: 'text-green-500', C: 'text-blue-500', GENERAL: 'text-gray-400',
 };
 
+// Soru tipi enum'u (CORE/DEEPENING) DB değeridir — DEĞİŞMEZ. Yalnızca görünen etiket Türkçe.
+const TYPE_LABELS: Record<string, string> = { CORE: 'Temel', DEEPENING: 'Derinleştirme' };
+
 export default function QuestionsPage() {
   const api = useApiClient();
 
@@ -119,8 +122,8 @@ export default function QuestionsPage() {
                 value={newType}
                 onChange={(e) => setNewType(e.target.value)}
               >
-                <option value="CORE">CORE</option>
-                <option value="DEEPENING">DEEPENING</option>
+                <option value="CORE">Temel</option>
+                <option value="DEEPENING">Derinleştirme</option>
               </select>
               <select
                 className="rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
@@ -159,7 +162,7 @@ export default function QuestionsPage() {
                     <p className="text-sm">{q.text}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <span className={`text-xs font-bold ${DISC_COLORS[q.discDimension]}`}>{q.discDimension}</span>
-                      <Badge variant="secondary" className="text-xs">{q.type}</Badge>
+                      <Badge variant="secondary" className="text-xs">{TYPE_LABELS[q.type] ?? q.type}</Badge>
                       <span className="text-xs text-muted-foreground">sıra: {q.order}</span>
                     </div>
                   </div>
@@ -184,7 +187,7 @@ export default function QuestionsPage() {
                       <p className="text-sm">{q.text}</p>
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`text-xs font-bold ${DISC_COLORS[q.discDimension]}`}>{q.discDimension}</span>
-                        <Badge variant="secondary" className="text-xs">{q.type}</Badge>
+                        <Badge variant="secondary" className="text-xs">{TYPE_LABELS[q.type] ?? q.type}</Badge>
                         <Badge variant="brand" className="text-xs">Özel</Badge>
                       </div>
                     </div>

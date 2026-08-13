@@ -11,7 +11,7 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { FormField } from '@/components/molecules/FormField';
+import { PasswordField } from '@/components/molecules/PasswordField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { useFormState } from '@/hooks/useFormState';
 import { resetPasswordSchema, type ResetPasswordFormValues } from '@/lib/validation';
@@ -38,24 +38,20 @@ export function ResetPasswordForm({ token }: { token: string }) {
     <form onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-4">
       {form.serverError && <AlertMessage type="error" message={form.serverError} />}
 
-      <FormField
+      <PasswordField
         label="Yeni Şifre"
         name="password"
-        type="password"
         autoComplete="new-password"
-        placeholder="••••••••"
         value={form.values.password}
         onChange={form.handleChange}
         error={form.errors.password}
         disabled={form.isSubmitting}
       />
 
-      <FormField
+      <PasswordField
         label="Yeni Şifre (Tekrar)"
         name="confirmPassword"
-        type="password"
         autoComplete="new-password"
-        placeholder="••••••••"
         value={form.values.confirmPassword}
         onChange={form.handleChange}
         error={form.errors.confirmPassword}
