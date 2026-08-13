@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
+import { PasswordField } from '@/components/molecules/PasswordField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { OAuthButtons } from '@/components/molecules/OAuthButtons';
 import { useAuth } from '@/providers/AuthProvider';
@@ -83,12 +84,10 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
         disabled={form.isSubmitting}
       />
 
-      <FormField
+      <PasswordField
         label="Şifre"
         name="password"
-        type="password"
         autoComplete="current-password"
-        placeholder="••••••••"
         value={form.values.password}
         onChange={form.handleChange}
         error={form.errors.password}

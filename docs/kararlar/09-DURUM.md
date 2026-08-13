@@ -29,6 +29,16 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   fotoğraf altyapısı · timezone fix · IDOR fix'leri** — hepsi MERGED, canlıda (geçmiş detay arşivde).
 - **Unutulmuş-niyet envanteri** (`unutulmus-niyet-envanteri-2026-08-10.md`, #54) + **belge denetimi** (#56) MERGED.
 
+## 🔧 AÇIK PR — BU TURDA (merge PO'da)
+- **STK admin 13-bulgu keşfi:** `docs/kararlar/stk-admin-bulgu-envanteri-2026-08-11.md` (13/13 kanıtlı; "arka-var-ön-yok" 3 madde).
+- **STK admin UI bağlama (S işler):** 3 küçük "arka-var-ön-yok"/UI işi bağlandı — **B7** Yönetici atama UI
+  (backend `promote/demote` zaten vardı, ön yüze bağlandı), **B9** CORE/DEEPENING görünen etiket Türkçeleştirme
+  (enum-safe; DB değeri değişmedi), **B1** şifre göster/gizle (paylaşılan `PasswordField` molekülü → login + reset).
+  Salt-frontend, şema/DB dokunulmadı. **PR: (aşağıda no).**
+  - **Bilinen sınır / ertelendi:** **B4** (DISC ikincil/karma gösterim) bu turdan ÇIKARILDI — ikincil tipi göstermek
+    backend'e yeni türetilmiş DISC alanı eklemeyi gerektiriyor; backend `CLAUDE.md` bunu PII sınıfında tutuyor
+    ("yeni alanı sınıflandırmadan user-facing select'e ekleme") → PO/uyum kararı + ayrı backend turu gerekir.
+
 ## 4-rol metodolojisi (strateji→kıyas→aksiyon)
 STK yönetici ✅ · Platform admin ✅ · **Mentör ✅** (panel + chat canlıda) · **Menti ⬜** (sıradaki).
 

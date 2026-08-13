@@ -13,6 +13,11 @@
 
 ## 🔴 A) STK ADMİN PANELİ — 13 BULGU (ürün sahibi test etti)
 **İlk adım (PLANLA):** her madde için "backend hazır mı / ne kadar iş (S/M/L)" salt-okuma keşfi; sonra öncelik.
+> ⚠️ GÜNCELLEME (2026-08-11): Keşif tamamlandı → `stk-admin-bulgu-envanteri-2026-08-11.md` (13/13 kanıtlı).
+> İlk inşa turu (S işler, açık PR): **md.7 (Yöneticiler atama UI)**, **md.9 (CORE/DEEPENING Türkçe etiket, enum-safe)**,
+> **md.1 (şifre göster/gizle)** bağlandı. **md.4 (DISC ikincil gösterim) ERTELENDİ** — backend'e yeni PII-sınıfı DISC
+> alanı eklemeyi gerektiriyor (backend CLAUDE.md), PO/uyum kararı + ayrı backend turu gerek. Kalan md.2/3/5/6/8/10-13
+> hâlâ açık. Detay/tip/S-M-L: envanter belgesi.
 1. Giriş ekranı şifre göster/gizle butonu yok (+ kayıt + şifre-sıfırlama ekranları).
 2. Admin sol menü sıralama/gruplama gözden geçir (tasarım kararı).
 3. Havuz tablosu "Sektörler" kolonu — çoklu değer nasıl gösterilecek.
