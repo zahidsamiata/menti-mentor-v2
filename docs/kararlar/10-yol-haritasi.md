@@ -5,7 +5,8 @@
 > planı dahil) `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`'de. Kaynak denetim:
 > `docs/kararlar/belge-denetimi-2026-08-10.md` + `unutulmus-niyet-envanteri-2026-08-10.md`.
 >
-> **Son güncelleme:** 2026-08-10 (belge temizliği — çözülmüş/eskimiş maddeler çıkarıldı, açıklar öncelik kuyruğuna alındı).
+> **Son güncelleme:** 2026-08-11 (belge-aksiyon denetiminden kurtarılan 7 PO-onaylı madde **F bölümüne** eklendi;
+> A–E dokunulmadı). Önceki: 2026-08-10 (belge temizliği — çözülmüş/eskimiş maddeler çıkarıldı).
 > **İşler tek tek, ürün sahibi başlattıkça yapılır. Öncelik sırasını ürün sahibi değiştirebilir.**
 
 ---
@@ -53,6 +54,44 @@
 
 ## 🟢 E) ÜRÜN SAHİBİ MANUEL (kod değil)
 - Chat canlı uçtan uca test · foto Dokploy volume testi · mentör metriklerini canlıda gözle görme · repoları PRIVATE yapma.
+
+## 🟣 F) DENETİMDEN KURTARILAN İŞLER (belge-aksiyon-denetimi-2026-08-11 · PO onayı 2026-08-11)
+> Belge-aksiyon denetimi (PR #59) "unutulmuş ama değerli" maddeleri çıkardı; ürün sahibi bunları tek tek gözden
+> geçirip aşağıdaki 7'sini SEÇTİ. Bir daha kaybolmasınlar diye buraya alındı. Öncelik/etiket her maddede.
+> A–E öncelik kademesi bozulmasın diye ayrı bölüm; her madde ilgili A–E temasına çapraz-referanslı.
+
+- **F1 — Fotoğraf yükleme (client-side):** *Yapılacak iş.* Kullanıcı kendi fotoğrafını yükleyebilsin (upload
+  endpoint + UI); `avatarUrl` DB'de var ama şu an yalnız OAuth'tan geliyor, kullanıcı yükleyemiyor.
+  **ÖN KOŞUL BAĞI:** kart tasarımındaki "foto zorunlu" kararı bu iş gelmeden uygulanamaz (ilişkili: D Landing UX — kart).
+  *kaynak: belge-aksiyon-denetimi-2026-08-11.md · PO onayı 2026-08-11.*
+- **F2 — Platform drill-down UI:** *Yapılacak iş (backend hazır, ön yüz bağlanacak).* 4 endpoint hazır
+  (`platformTenantController.ts`: overview/members/meetings/analytics); frontend bağlanmamış → platform admin
+  kurum detayına inemiyor. *kaynak: belge-aksiyon-denetimi-2026-08-11.md · PO onayı 2026-08-11.*
+- **F3 — Tenant hard-delete (KVKK Md.7):** *ÖNCE KEŞİF + PO KARARI — doğrudan kodlanmaz.* GERİ-ALINAMAZ, DB'ye
+  dokunur (canlı=lokal aynı Neon). Şu an yalnız freeze (soft) var. Keşif: gerçek silme mi / anonimleştirme mi,
+  ilişkili kayıt/FK'lara ne olacak, mevcut `gdprService` ile ilişki → sonra PO kararı → ANCAK sonra kod.
+  (ilişkili: B KVKK/Yasal.) *kaynak: belge-aksiyon-denetimi-2026-08-11.md · PO onayı 2026-08-11.*
+- **F4 — Landing slogan güncelleme:** *ÖNCE TAM METİN + PO ONAYI, SONRA UYGULA (bu turda uygulama YOK).* Karar
+  verilen tam metin (`06-tasarim-ux.md:21` kanıtı): **H1 = "Mentörlük programınızı doğru eşleşmelerle,
+  zahmetsizce yönetin."** · **alt = "DISC davranış modeline göre mentör ve mentileri eşleştirin, tüm süreci tek
+  panelden takip edin."** (Eski/zayıf: "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin".) PO tam metni
+  onaylayınca `frontend/src/app/page.tsx` güncellenecek. (ilişkili: D Landing UX — slogan zaten listede.)
+  *kaynak: belge-aksiyon-denetimi-2026-08-11.md · PO onayı 2026-08-11.*
+- **F5 — Eşleşme hesaplama tetikleyicisi:** *KEŞİF + PO KARARI (ürün kararı).* Event-driven mi, sayfa-açılınca mı
+  karara bağlanmamış (`08-acik-sorular.md:20`). Önce mevcut tetik davranışını keşfet → sonra PO karar versin.
+  (ilişkili: C Algoritma.) *kaynak: belge-aksiyon-denetimi-2026-08-11.md · PO onayı 2026-08-11.*
+- **F6 — Hayalet mod + toplu CSV davet:** *AYRI BÜYÜK TUR, PO ONAYLI.* Pasif ön-oluşturulmuş üye + toplu içe
+  aktarma; şemada YOK → yeni model/alan → migration → PO onayı ŞART. STK onboarding'i hızlandırma değeri var.
+  Ayrı büyük iş kalemi. *kaynak: belge-aksiyon-denetimi-2026-08-11.md · PO onayı 2026-08-11.*
+- **F7 — KPI drill-down (sayıdan kişiye):** *Yapılacak iş.* Özet sayılar var (ör. "15 mentörsüz menti") ama kişi
+  listesine inilemiyor → yönetici aksiyona geçemiyor. Backend veri var; UI drill-down bağlanacak.
+  (ilişkili: A/C admin metrikleri.) *kaynak: belge-aksiyon-denetimi-2026-08-11.md · PO onayı 2026-08-11.*
+
+> **Denetimdeki 3 "sınırda" madde — teyit sonucu (yeni madde EKLENMEDİ):**
+> - **Mentör otomatik dürtme (nudge):** ZATEN VAR → C bölümü "Retention davranışsal kalan: otomatik-nudge …" (satır 45).
+> - **Bekleme salonu bildirim izni:** ZATEN VAR → C bölümü "… bekleme salonu bildirim izni (envanter #54 D)" (satır 45).
+> - **Yumuşak lacivert tema:** ⚠️ TEYİT GEREK — D "Landing UX paketi" (satır 52) "slogan · kart · light-tema DISC
+>   renk/rozet" içeriyor ama "lacivert" adı geçmiyor; muhtemelen bu paketin içinde, PO netleştirsin. Uydurulmadı.
 
 ---
 
