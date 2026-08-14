@@ -1,4 +1,5 @@
 # STK YÖNETİCİ PANELİ — STRATEJİ (İDEAL TASARIM)
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Amaç:** STK yöneticisi (tenant admin) panelinin OLMASI GEREKEN hâli
 **Yöntem:** Önce ideal (bu belge) → sonra kod keşfiyle kıyas → sonra aksiyon planı.
 **Yetki felsefesi (ürün sahibi):** DENGELİ — yönetici izlesin + kritik birkaç aksiyon alabilsin.
@@ -78,6 +79,7 @@ Rastgele kimse giremez. İki davet-bazlı yol:
 1. Yönetici davet linki gönderir.
 2. Kişi tüm aşamaları tamamlar (kayıt + DISC + profil).
 3. Yönetici onaylayana kadar **HAYALET/PASİF mod** — sistemde var ama havuzda görünmez, eşleşmez.
+   - **⚠️ GÜNCELLEME (2026-08-14):** Bu davranış (PENDING üye peer havuzunda görünmemeli) PR #31 / commit `be295e2` ile fiilen sağlandı — bkz. aşağıda "⚠️ YANLIŞ / EKSİK" bölümündeki düzeltme notu. Güncel durum: uygulanmış.
 4. Yönetici onaylar → aktifleşir, havuza girer.
 → Kullanım: "tanımadığım biri geldi, önce bakayım."
 

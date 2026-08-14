@@ -1,4 +1,5 @@
 # STK YÖNETİCİ PERSONASI + METRİK TASLAĞI
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Amaç:** Yönetici paneli + retention tasarımı için temel referans
 **Uyarı:** Bu bir *eğitimli taslak* — gerçek yöneticilerle konuşmanın yerini tutmaz.
 Nihai kararlar (hangi metrik, hangi ekran) ürün sahibinde. Gerçek kullanıcı görüşmesiyle doğrulanmalı.
