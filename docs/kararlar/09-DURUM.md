@@ -77,3 +77,7 @@ STK yönetici ✅ · Platform admin ✅ · **Mentör ✅** (panel + chat canlıd
 ## GÜNCELLEME NOTU
 Bu belge yalnızca **ŞU AN**'ı tutar (tek tutarlı durum). Tamamlanan işler buraya kısa özet olarak yazılır,
 detaylı geçmiş arşive taşınır. Karara bağlanan açık sorular 08'e/ilgili belgeye işlenir.
+
+> ⚠️ 2026-08-14: **Karar-statü haritası çıkarıldı** — `00-karar-statu-haritasi-2026-08-14.md` (PR açık). ~72 kararın
+> plan/kod/çelişki statüsü; kritik bulgu: eski "yapılmadı" sanılan çok iş aslında 🟩 TAM (platform/KPI drill-down,
+> foto upload), roadmap F1/F2/F7 bayat. Sıradaki: durum panosu → v1/v2 önceliklendirme (ayrı turlar).

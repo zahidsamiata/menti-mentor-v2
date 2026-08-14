@@ -48,6 +48,7 @@ docs/
 | `chat-v1-teslim.md` · `dokploy-foto-volume-talimati.md` | Chat v1 teslim · foto volume talimatı | 📸 DONDURULMUŞ |
 | `belge-denetimi-2026-08-10.md` · `unutulmus-niyet-envanteri-2026-08-10.md` | 09/10 denetimi · unutulmuş niyet envanteri | 📸 DONDURULMUŞ |
 | `belge-temizlik-haritasi-2026-08-14.md` | 44 belgenin 6-kural taraması (etiket/INDEX/gruplama/bayat haritası) | 📸 DONDURULMUŞ (keşif) |
+| `00-karar-statu-haritasi-2026-08-14.md` | ~72 kararın 3-boyutlu (plan/kod/çelişki) renkli statü haritası; 🟨 az-işle-kazanç öne çıkarılmış | 📸 DONDURULMUŞ (statü haritası) |
 
 > **Denetim kümesi (birlikte okunur):** `belge-aksiyon-denetimi-2026-08-11` (kararlar gerçekle kıyas) · `belge-denetimi-2026-08-10` (09/10 denetimi) · `unutulmus-niyet-envanteri-2026-08-10` (unutulan niyetler) · `belge-temizlik-haritasi-2026-08-14` (düzen taraması). Farklı kapsam/tarih — birleştirilmez, çapraz referanslıdır.
 
