@@ -1,4 +1,5 @@
 # STK Admin Paneli — Tasarım Kararları (2026-08-11)
+**🔄 YAŞAYAN** (kararlar eklenebilir) · ilişkili keşif: `stk-admin-bulgu-envanteri-2026-08-11.md`
 
 > **Amaç:** STK admin panelinin tasarım/ürün kararlarını kalıcı olarak arşivlemek. Bu kararlar **bu oturumda
 > ürün sahibi tarafından verildi** ve şimdiye dek yalnızca sohbette duruyordu (projenin kronik sorunu: değerli

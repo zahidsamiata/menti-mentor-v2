@@ -1,4 +1,5 @@
 # MENTÖR / MENTİ KARTI — RAKİP ANALİZİ
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Amaç:** Menti mentör-tarama sayfası kart tasarımı için karar girdisi
 **Not:** Bu bir araştırma özeti. Nihai karar (hangi bilgi, kaç kart/sayfa) ürün sahibinde. Yeni oturumda kullanılacak.
 

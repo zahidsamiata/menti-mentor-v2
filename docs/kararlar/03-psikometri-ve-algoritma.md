@@ -1,4 +1,5 @@
 # 03 — PSİKOMETRİ VE EŞLEŞTİRME ALGORİTMASI
+**🔄 YAŞAYAN** (canonical: psikometri ve eşleştirme algoritması)
 **Son güncelleme:** 2026-08-02 · Kaynak: psikometri/algoritma chat'i (ana), repo-inceleme chat'i
 
 > UYARI: Bu tasarımın çoğu psikometri chat'inde kodlandı ama bazı parçalar reçete/tasarım

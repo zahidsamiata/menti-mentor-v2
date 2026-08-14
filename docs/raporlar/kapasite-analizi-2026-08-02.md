@@ -1,4 +1,5 @@
 # Kapasite / Ölçeklenme Analizi
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma (kod okundu, çalıştırılmadı) · **Soru:** kullanıcı artınca hangi kod patlar?
 **Önemli:** Hiçbir kod değişmedi. Bu bir ÖNLEM raporu (gerçek kullanıcı ~sıfır). Uygulama kararı ürün sahibinde.
 

@@ -1,4 +1,5 @@
 # Depo Denetimi Raporu
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma · **Kapsam:** repo hijyeni (boş/artık/yanlış-yerleşim/isimlendirme)
 **Önemli:** Hiçbir dosya silinmedi/taşınmadı. Bu rapor yalnızca karar girdisidir; temizlik kararı ürün sahibinde.
 

@@ -1,4 +1,5 @@
 # MENTİMENTOR — SOHBET KARAR & DURUM ÖZETİ (devir/hafıza belgesi)
+**📸 DONDURULMUŞ** (arşiv — eski devir/özet; tarih ~2026-08-02, kesin değil; güncel karar 01–10'da)
 
 ## KÜNYE
 - **Ana tema:** Ağırlıklı olarak mail altyapısının (kırık Gmail SMTP → Resend) canlıya alınması + platform admin panelinin derinleştirilmesi (kurum detayı: mentör/menti/görüşme/DISC) + bir dizi güvenli veri/DB operasyonu (test verisi seed, global içerik seed, DB switch). Yan konular: landing slogan/UX, güvenlik felsefesi, hukuki metin, ölçeklenebilirlik.
