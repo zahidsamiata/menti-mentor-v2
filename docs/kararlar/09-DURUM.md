@@ -67,3 +67,7 @@ STK yönetici ✅ · Platform admin ✅ · **Mentör ✅** (panel + chat canlıd
 ## GÜNCELLEME NOTU
 Bu belge yalnızca **ŞU AN**'ı tutar (tek tutarlı durum). Tamamlanan işler buraya kısa özet olarak yazılır,
 detaylı geçmiş arşive taşınır. Karara bağlanan açık sorular 08'e/ilgili belgeye işlenir.
+
+> ⚠️ 2026-08-14: **Durum panosu çıkarıldı** — `00-DURUM-PANOSU.md` (🔄, PR açık): 92 kararın tek-bakışta renkli
+> statüsü (31 🟩 tam · 17 🟨/🟧 az-işle-kazanç · 18 🟥 hiç). Kaynak: ham harita `00-karar-statu-haritasi-2026-08-14`.
+> Sıradaki: yol haritası v1/v2 önceliklendirme (ayrı tur, PO çerçeve verecek).
