@@ -1,4 +1,5 @@
 # Katılım Modeli — Mevcut Durum Notu (İŞ 5, kod yazılmadı)
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 
 **Tarih:** 2026-08-02
 **Bağlam:** Retention turu (İŞ 1-4) sırasında çıkan İŞ 5 — ürün sahibinin "hayalet mod + ön-tanımlı

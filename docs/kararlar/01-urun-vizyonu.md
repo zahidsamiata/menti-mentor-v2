@@ -1,4 +1,5 @@
 # 01 — ÜRÜN VİZYONU
+**🔄 YAŞAYAN** (canonical: ürün vizyonu)
 **Son güncelleme:** 2026-08-02 · Kaynak: PRD/isim chat'i, strateji chat'i, psikometri chat'i, mail/panel chat'i
 
 ## NE?

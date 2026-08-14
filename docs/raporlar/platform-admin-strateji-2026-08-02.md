@@ -1,4 +1,5 @@
 # PLATFORM ADMIN PANELİ — STRATEJİ (İDEAL TASARIM)
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Amaç:** Platform admin (sistem sahibi = ürün sahibi) panelinin OLMASI GEREKEN hâli
 **Kardeş belge:** `stk-yonetici-strateji.md` (tenant admin — kendi kurumunu yöneten)
 **Yöntem:** Önce ideal (bu belge) → kod keşfiyle kıyas → aksiyon planı.
@@ -102,6 +103,7 @@ AMA **basit arayüz** (günlük bakışta sade, sakin; karmaşa yok).
 
 Platform admin aksiyon turu yapıldı:
 - ✅ **KVKK audit log** (AdminAuditLog tablosu — migration, onaylı) — Bölüm 4.
+  - **⚠️ GÜNCELLEME (2026-08-14):** Kodda `AdminAuditLog` tablosu YOK; denetim kaydı mevcut `SystemLog` modeline AUDIT kategorisiyle yazılıyor (`platformAudit.ts`). "AdminAuditLog tablosu/migration" ifadesi YANLIŞ — loglama çalışıyor ama tablo adı hatalı. Detay: aşağıda "⚠️ YANLIŞ / EKSİK" bölümü.
 - ✅ **Kötüye kullanım** (kullanıcı şikayeti/report + basit otomatik tespit) — Bölüm 2C.
 - ✅ **Sistem sağlığı paneli** (özet + son hatalar) — Bölüm 2B.
 

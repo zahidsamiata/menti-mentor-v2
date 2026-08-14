@@ -1,4 +1,5 @@
 # MentiMentor — Kapsamlı Teşhis + Yol Haritası Raporu
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Kapsam:** niyet vs mevcut-kod envanteri (salt-okuma, kanıtlı) + merge runbook + KVKK + güvenlik
 **Durum kodları:** ✅ var · ⚠️ yarım · ❌ yok · 🐛 bozuk · 🔒 bilinçli kısıt
 **Genel örüntü:** Backend (model + endpoint) büyük ölçüde HAZIR; eksik olan çoğunlukla **admin UI panelleri**. Birkaç gerçek bug var.

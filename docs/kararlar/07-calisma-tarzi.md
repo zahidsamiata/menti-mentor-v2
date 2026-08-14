@@ -1,4 +1,5 @@
 # 07 — ÇALIŞMA TARZI VE PROMPT FELSEFESİ
+**🔄 YAŞAYAN** (canonical: çalışma tarzı ve prompt felsefesi)
 **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler (ortak), bugünkü oturum
 
 > Bu, her Claude Code promptunun ve her çalışma turunun uyması gereken çerçeve.

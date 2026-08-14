@@ -4,6 +4,10 @@
 > Kaynak: `docs/kararlar/09-DURUM.md`, `belge-denetimi-2026-08-10.md`, `chat-v1-teslim.md`, git.
 > **UYARI (bağlam devri):** Aşağıdaki PR numaraları belgelerden alındı; bağlam devrinde eskimiş olabilir.
 > **İş yapmadan önce `gh pr list --state open` + `git log` ile git'ten DOĞRULA** (bkz. 06-devir-kilavuzu).
+>
+> **⚠️ GÜNCELLEME (2026-08-14):** Git durumu ilerledi — çatı main `0aaeac7` (#64), açık PR **#65** (belge temizliği,
+> salt-docs). En güncel oturum özeti + tam bekleyen liste: **`docs/devir/07-oturum-2026-08-14.md`**.
+> Aşağıdaki "devir anı" (2026-08-11) SHA/PR değerleri o güne aittir.
 
 ---
 

@@ -1,4 +1,5 @@
 # MentiMentor — Admin Panelleri Keşif + Tasarım Raporu
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma keşif (7 paralel ajan) · **Amaç:** 6 admin panelini KODLAMADAN önce tasarımı netleştirmek
 **Kaynak:** `docs/teshis-raporu-2026-08-02.md` Grup A. Her karar mevcut koda dayalı (dosya:satır).
 

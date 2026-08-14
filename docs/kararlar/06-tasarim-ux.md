@@ -1,4 +1,5 @@
 # 06 — TASARIM VE UX
+**🔄 YAŞAYAN** (canonical: tasarım ve UX)
 **Son güncelleme:** 2026-08-02 (geç oturum: kart tasarımı + foto + tema/landing güncellemesi) · Kaynak: mail/panel chat'i, bugünkü oturum
 
 ## TEMA (dark/light)
