@@ -1,4 +1,5 @@
 # MENTİ PERSONASI + SEVDİRME STRATEJİSİ
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Amaç:** Menti deneyimi (onboarding + arayüz + retention) tasarımına yön vermek
 **Kardeş belgeler:** `mentor-persona-ve-sevdirme.md` · `yonetici-persona-ve-metrikler.md`
 **Durum:** Eğitimli taslak. Gerçek mentilerle görüşme ile doğrulanmalı. Nihai kararlar ürün sahibinde.

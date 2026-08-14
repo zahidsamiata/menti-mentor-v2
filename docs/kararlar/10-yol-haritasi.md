@@ -1,4 +1,5 @@
 # MentiMentor — Yol Haritası (SIRADAKİ İŞLER)
+**🔄 YAŞAYAN** (canonical: iş kuyruğu — sıradaki açık işler)
 
 > Bu belge yalnızca **BUNDAN SONRA yapılacak açık işleri** öncelik sırasıyla tutar. Tamamlanan işler
 > burada durmaz — güncel durum `docs/kararlar/09-DURUM.md`'de; 2026-08-10 öncesi tam geçmiş (eski İŞ 0-8

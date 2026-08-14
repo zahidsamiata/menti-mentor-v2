@@ -1,4 +1,5 @@
 # Platform Admin Paneli — Envanter (Keşif)
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 
 **Tarih:** 2026-08-02
 **Mod:** Salt-okuma keşif. Kod değişmedi.

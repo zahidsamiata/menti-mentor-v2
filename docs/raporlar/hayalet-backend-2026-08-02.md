@@ -1,4 +1,5 @@
 # Hayalet-Backend Raporu
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma (kod okundu, çalıştırılmadı)
 **Amaç:** Yazılmış ama kullanıcıya çıkmayan / yarım bağlı / ölü / kırık kod envanteri.
 **Önemli:** Hiçbir kod değişmedi/silinmedi. Silme/bağlama kararı ürün sahibinde.

@@ -1,5 +1,5 @@
 # MENTİMENTOR / SİVİLKAPASİTE — BELGE HARİTASI (INDEX)
-**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-11 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
+**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-14 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
 
 > Bu belgeler, birden fazla sohbetten toplanan kararların konu bazlı derlemesidir.
 > Claude Code / yeni Claude chat'i, ihtiyaç duyduğu konunun belgesini okur — hepsini değil.
@@ -47,23 +47,68 @@ docs/
 | `belge-aksiyon-denetimi-2026-08-11.md` | 34 belgedeki kararlar gerçekle kıyas (YAPILDI/UNUTULDU/…) | 📸 DONDURULMUŞ (denetim) |
 | `chat-v1-teslim.md` · `dokploy-foto-volume-talimati.md` | Chat v1 teslim · foto volume talimatı | 📸 DONDURULMUŞ |
 | `belge-denetimi-2026-08-10.md` · `unutulmus-niyet-envanteri-2026-08-10.md` | 09/10 denetimi · unutulmuş niyet envanteri | 📸 DONDURULMUŞ |
+| `belge-temizlik-haritasi-2026-08-14.md` | 44 belgenin 6-kural taraması (etiket/INDEX/gruplama/bayat haritası) | 📸 DONDURULMUŞ (keşif) |
+
+> **Denetim kümesi (birlikte okunur):** `belge-aksiyon-denetimi-2026-08-11` (kararlar gerçekle kıyas) · `belge-denetimi-2026-08-10` (09/10 denetimi) · `unutulmus-niyet-envanteri-2026-08-10` (unutulan niyetler) · `belge-temizlik-haritasi-2026-08-14` (düzen taraması). Farklı kapsam/tarih — birleştirilmez, çapraz referanslıdır.
 
 ## Devir belgeleri — `docs/devir/` (2026-08-11)
 | Klasör | İçerik | Tür |
 |---|---|---|
 | `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu) | 📸 DONDURULMUŞ (devir fotoğrafı) |
 
-## Raporlar — `docs/raporlar/`
+> **Canonical eşleşmesi (Kural 1 — devir belgeleri özet/kopyadır, güncel bilgi kararlar/'da):**
+> `01`→`07-calisma-tarzi` · `02`→`09-DURUM` · `03`→`04-guvenlik-ve-kvkk` · `04`→`10-yol-haritasi` (A) + `stk-admin-bulgu-envanteri` · `05`→`09-DURUM` + `10-yol-haritasi` (C/E) · `06`→kendisi (devir prosedürü).
+
+## Raporlar — `docs/raporlar/` (📸 DONDURULMUŞ — hepsi 2026-08-02 keşif fotoğrafı)
+> Bir-kerelik keşif/analiz çıktıları; güncellenmez. Güncel durum daima `09-DURUM.md`'de.
+> Konu kümelerine göre gruplu (kardeş belgeler birlikte okunur).
+
+**Teşhis / genel**
 | Belge | İçerik |
 |---|---|
 | `teshis-raporu-2026-08-02.md` | Niyet vs mevcut-kod envanteri, merge runbook, KVKK, güvenlik |
 | `admin-panelleri-tasarim-2026-08-02.md` | 6 admin panelinin keşif + tasarım kartları |
+| `depo-denetimi-2026-08-02.md` | Repo hijyeni (boş/artık/yanlış-yerleşim/isimlendirme) |
+
+**Persona üçlüsü** (birlikte okunur — menti/mentör/yönetici)
+| Belge | İçerik |
+|---|---|
+| `menti-persona-ve-sevdirme-2026-08-02.md` | Menti personası + onboarding/retention |
+| `mentor-persona-ve-sevdirme-2026-08-02.md` | Mentör personası + retention |
+| `yonetici-persona-ve-metrikler-2026-08-02.md` | Yönetici personası + metrik taslağı |
+
+**Panel envanteri** (kardeş çift — platform ↔ tenant)
+| Belge | İçerik |
+|---|---|
+| `platform-admin-panel-envanteri-2026-08-02.md` | Platform admin paneli mevcut-durum envanteri |
+| `stk-yonetici-panel-envanteri-2026-08-02.md` | STK yönetici (tenant admin) paneli envanteri |
+
+**Panel stratejisi** (kardeş çift — ideal tasarım)
+| Belge | İçerik |
+|---|---|
+| `platform-admin-strateji-2026-08-02.md` | Platform admin paneli ideal hâli |
+| `stk-yonetici-strateji-2026-08-02.md` | STK yönetici paneli ideal hâli |
+
+**Backend envanteri**
+| Belge | İçerik |
+|---|---|
+| `hayalet-backend-2026-08-02.md` | Yarım bağlı / ölü / kırık kod envanteri |
+| `kart-havuz-backend-envanteri-2026-08-02.md` | Kart/havuz/uyum/niyet-mektubu/foto backend envanteri |
+
+**Diğer keşif**
+| Belge | İçerik |
+|---|---|
+| `kapasite-analizi-2026-08-02.md` | Ölçeklenme/performans önlem raporu |
+| `katilim-modeli-mevcut-durum-notu-2026-08-02.md` | Katılım/davet modeli mevcut durum (İŞ 5) |
+| `mentor-karti-rakip-analizi-2026-08-02.md` | Menti kart tasarımı rakip analizi |
+| `tema-durum-ve-landing-maliyeti-2026-08-02.md` | Tema durumu + landing maliyeti |
 
 ## Arşiv — `docs/arsiv/`
 | Belge | Neden arşivde |
 |---|---|
 | `SOHBET-KARAR-OZETI-devir.md` | Eski devir/özet belgesi — güncel karar 01–10'da |
 | `strateji-ve-guvenlik-denetimi.md` | Eski strateji/güvenlik denetimi — güncel güvenlik 04'te |
+| `09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md` | 09-DURUM + 10-yol-haritası'nın 2026-08-10 öncesi tam hâli (tarihsel) |
 
 ## ⚠️ En kritik iki gerçek (her zaman hatırla)
 1. **Canlı ve lokal AYNI Neon DB'sini paylaşıyor** (`ep-fancy-tooth-ab4u5xhr`). Lokalde DB'ye yazmak = canlıyı etkilemek. Detay: `02-mimari-ve-altyapi.md`.
