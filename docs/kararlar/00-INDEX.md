@@ -47,6 +47,7 @@ docs/
 | `belge-aksiyon-denetimi-2026-08-11.md` | 34 belgedeki kararlar gerçekle kıyas (YAPILDI/UNUTULDU/…) | 📸 DONDURULMUŞ (denetim) |
 | `chat-v1-teslim.md` · `dokploy-foto-volume-talimati.md` | Chat v1 teslim · foto volume talimatı | 📸 DONDURULMUŞ |
 | `belge-denetimi-2026-08-10.md` · `unutulmus-niyet-envanteri-2026-08-10.md` | 09/10 denetimi · unutulmuş niyet envanteri | 📸 DONDURULMUŞ |
+| `00-karar-statu-haritasi-2026-08-14.md` | ~72 kararın 3-boyutlu (plan/kod/çelişki) renkli statü haritası; 🟨 az-işle-kazanç öne çıkarılmış | 📸 DONDURULMUŞ (statü haritası) |
 
 ## Devir belgeleri — `docs/devir/` (2026-08-11)
 | Klasör | İçerik | Tür |
