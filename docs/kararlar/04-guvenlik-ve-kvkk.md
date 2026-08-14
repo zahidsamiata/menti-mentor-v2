@@ -1,4 +1,5 @@
 # 04 — GÜVENLİK VE KVKK
+**🔄 YAŞAYAN** (canonical: güvenlik ve KVKK)
 **Son güncelleme:** 2026-08-02 · Kaynak: strateji/güvenlik chat'i, repo-inceleme chat'i, mail/panel chat'i, bugünkü teşhis
 
 > UYARI: Bazı güvenlik maddeleri "kod görülmeden" yazılmış hipotezlerdi (strateji chat'i).

@@ -1,4 +1,5 @@
 # PLATFORM ADMIN PANELİ — STRATEJİ (İDEAL TASARIM)
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Amaç:** Platform admin (sistem sahibi = ürün sahibi) panelinin OLMASI GEREKEN hâli
 **Kardeş belge:** `stk-yonetici-strateji.md` (tenant admin — kendi kurumunu yöneten)
 **Yöntem:** Önce ideal (bu belge) → kod keşfiyle kıyas → aksiyon planı.

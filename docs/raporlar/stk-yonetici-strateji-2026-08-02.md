@@ -1,4 +1,5 @@
 # STK YÖNETİCİ PANELİ — STRATEJİ (İDEAL TASARIM)
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
 **Tarih:** 2026-08-02 · **Amaç:** STK yöneticisi (tenant admin) panelinin OLMASI GEREKEN hâli
 **Yöntem:** Önce ideal (bu belge) → sonra kod keşfiyle kıyas → sonra aksiyon planı.
 **Yetki felsefesi (ürün sahibi):** DENGELİ — yönetici izlesin + kritik birkaç aksiyon alabilsin.

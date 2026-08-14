@@ -1,4 +1,5 @@
 # Dokploy — Fotoğraf İçin Kalıcı Disk (MERGE ÖNCESİ ŞART)
+**📸 DONDURULMUŞ** (operasyon talimatı — canlı-öncesi şart; klasör yeri TEYİT: bkz. temizlik haritası)
 
 **Neden:** Backend main'e merge edilince autodeploy tetiklenir. O an kalıcı disk hazır
 DEĞİLSE, yüklenen fotoğraflar container'ın geçici (ephemeral) diskine yazılır ve **her

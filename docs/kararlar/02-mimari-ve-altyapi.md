@@ -1,4 +1,5 @@
 # 02 — MİMARİ VE ALTYAPI
+**🔄 YAŞAYAN** (canonical: mimari ve altyapı)
 **Son güncelleme:** 2026-08-02 · Kaynak: PRD/repo-inceleme chat'i, mail/panel chat'i, bugünkü oturum
 
 ## 🔴🔴 EN KRİTİK GERÇEK — CANLI = LOKAL AYNI DB

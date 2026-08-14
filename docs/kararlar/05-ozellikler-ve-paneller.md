@@ -1,4 +1,5 @@
 # 05 — ÖZELLİKLER VE PANELLER
+**🔄 YAŞAYAN** (canonical: özellikler ve paneller)
 **Son güncelleme:** 2026-08-02 · Kaynak: mail/panel chat'i, psikometri chat'i, bugünkü oturum
 
 ## PLATFORM ADMIN PANELİ (mail/panel chat'inde kodlandı)

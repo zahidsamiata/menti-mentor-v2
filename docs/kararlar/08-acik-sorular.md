@@ -1,4 +1,5 @@
 # 08 — AÇIK SORULAR VE KARARA BAĞLANMAYANLAR
+**🔄 YAŞAYAN** (canonical: açık sorular / karar kuyruğu) · bkz. dondurulmuş keşif `unutulmus-niyet-envanteri-2026-08-10.md` (konu çakışması: KVKK / fotoğraf / eşleşme tetikleyicisi)
 **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler
 
 > Bunlar HENÜZ karara bağlanmamış konular. Karar verildikçe ilgili belgeye taşınır + buradan silinir.
