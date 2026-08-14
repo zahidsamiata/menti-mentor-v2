@@ -1,7 +1,8 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-14 (oturum kapanışı: #64 merge, IDOR çelişkisi
-kod keşfiyle çözüldü, belge temizliği PR #65 açık — kapanış özeti: `docs/devir/07-oturum-2026-08-14.md`).
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-14 (oturum kapanışı: bu oturumun 5 belge PR'ı
+[#65 belge temizliği · #66 devir · #67 karar-statü haritası · #68 durum panosu · #69 v1/v2 yol haritası] MERGED →
+**açık PR: 0, masa temiz**; IDOR çelişkisi kod keşfiyle çözüldü — kapanış özeti: `docs/devir/07-oturum-2026-08-14.md`).
 Önceki: 2026-08-11 (oturum belgeleri merge oldu → "açık PR" bloğu gerçek merge durumuna çekildi).
 Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 **Sıradaki işler + öncelik:** `docs/kararlar/10-yol-haritasi.md`. **2026-08-10 öncesi tam geçmiş:**
@@ -14,9 +15,9 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 - **Canlı:** sivilkapasite.org ayakta (Dokploy). **Mail çalışıyor** (generic SMTP relay — Resend/Brevo;
   Gmail App Password kaldırıldı, `emailService.ts`). Forgot/reset-password akışı tam.
 - **DB:** Canlı = lokal aynı Neon (`ep-fancy-tooth-ab4u5xhr`). DISC soruları (20) + öğrenme aşamaları (13) yüklü.
-- **Backend main HEAD:** `afc2769` · çatı main HEAD `0aaeac7` (#64) · submodule pointer = `afc2769` (senkron, doğrulandı).
-- **Açık PR:** çatı **#65** (belge temizliği, salt-docs, CI yeşil, merge PO'da) · backend **sıfır**.
-  > ⚠️ GÜNCELLEME (2026-08-14): önceki "SIFIR" değeri #65 açılınca bayatladı (Belge Düzeltme Deseni / Kural 6).
+- **Backend main HEAD:** `afc2769` · çatı main HEAD `e817a2d` (#69) · submodule pointer = `afc2769` (senkron, doğrulandı).
+- **Açık PR:** çatı **0** · backend **0** — **masa temiz** (2026-08-14: bu oturumun 5 belge PR'ı #65–#69 sırayla MERGED).
+  > ⚠️ GÜNCELLEME (2026-08-14): bu satır #65–#69 açıkken "çatı #65 (merge PO'da)" diyordu; 5 PR merge olunca gerçeğe (açık PR 0) çekildi (Belge Düzeltme Deseni / Kural 6).
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
 
 ## 🔴 GÜVENLİK — CANLI ÖNCESİ AÇIK (2026-08-14 denetimi)
@@ -63,8 +64,11 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 - **IDOR çelişkisi ÇÖZÜLDÜ (kod keşfi):** `/mentors/:mentorId/candidates` + `/requests/:id` tenant izolasyonu +
   sahiplik kontrolü ile **KORUMALI — açık YOK** (düzeltme `161ae00`; `matchingController.ts:45-52`,
   `requestController.ts:116-121`). `04-guvenlik-ve-kvkk`'deki "düzeltilmedi" notu ✅ ile güncellendi.
-- **Belge düzeni uygulaması — PR #65 AÇIK (merge PO'da):** 44 belgeye tür etiketi + INDEX tamamlama + gruplama
-  (FAZ 1); 7 bayat bilgi kanıtla ⚠️/✅ işaretlendi (FAZ 2). Harita: `belge-temizlik-haritasi-2026-08-14.md`. **Salt-docs.**
+- **Bu oturumun 5 belge PR'ı MERGED (main'de) — #65–#69:** belge düzeni uygulaması (44 belgeye tür etiketi + INDEX
+  tamamlama + gruplama + 7 bayat işaret; `belge-temizlik-haritasi-2026-08-14`, #65) · devir belgeleri güncelleme
+  (`devir/07-oturum-2026-08-14`, #66) · karar-statü haritası (`00-karar-statu-haritasi-2026-08-14`, #67) · durum panosu
+  (`00-DURUM-PANOSU`, #68) · v1/v2 yol haritası (#69). **Hepsi salt-docs.**
+- **🔴 KARAR 5 DISC güvenlik açığı** (yukarıda "GÜVENLİK" bölümü) → yol haritası **v1 #1** (canlı-öncesi ŞART).
 - **#64 belge düzeni rehberi** (6 kural) + CLAUDE.md "Belge Düzeni" bağlaması MERGED (oturum başı).
 
 ## 4-rol metodolojisi (strateji→kıyas→aksiyon)
