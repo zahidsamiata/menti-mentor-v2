@@ -93,11 +93,44 @@ Her karar **üç boyutta** işaretlenir (plan ile kod AYRI sorular):
 
 <!-- KÜME 4 -->
 ## KÜME 4 — Tasarım & UX (06 + tasarim-kararlari-admin 12 KARAR + landing)
-_(işleniyor)_
+> **NOT:** tasarım-kararları belgede kayıtlı ama **çoğu koda geçmemiş** → en büyük 🟥/🟨 kümesi burada. Yol haritasına iş kalemi olarak bağlı değiller (PO önceliklendirmesi gerekli).
+| Karar (tasarim-kararlari-admin) | Plan | Kod | Çelişki | Kanıt / Not |
+|---|---|---|---|---|
+| **KARAR 1 — Sol menü 4-grup gruplama** | ~A md.2 | 🟥 | | `frontend/(admin)/layout.tsx:19-40` hâlâ "3 öğe + Gelişmiş(11)"; 4-grup yok |
+| **KARAR 2 — Havuz KART görünümü (role-göre)** | ~A md.5 | 🟨 | | backend `buildPublicItem` (`matchingController.ts`) `compatibilityReason` üretiyor; **frontend havuz hâlâ TABLO** (`admin/mentor-havuzu\|menti-havuzu/page.tsx`) → ★ arka kısmen var/ön yok |
+| **KARAR 3 — Durum rozeti (Onaylı/Bekliyor/Pasif, yönetici-only)** | — | 🟥 | | havuz tablosunda sadece onay-durumu var; tasarımdaki iç-yönetim rozeti yok |
+| **KARAR 4 — Sertifika rozeti ("Sertifikalı ✓", herkes)** | — | 🟥 | | grep boş; mentör kartında sertifika rozeti render edilmiyor |
+| **KARAR 5 — DISC mahremiyet asimetri** (menti mentörün DISC'ini görmez) | — | 🟨 | ❓ | yüzde hiç gösterilmiyor ✓; **ama menti→mentör DISC gizleme backend'de kanıtlanamadı** → **güvenlik/PII TEYİT GEREK** (DTO role-ayrışması; frontend gizleme yetmez) |
+| **KARAR 7 — "Neden uyumlu" Katman 1** | — | 🟨 | | backend `compatibilityReason` var; **frontend `RankedMenti` tipinde alan yok + kart yok** → görünmüyor (KARAR 2 ile birlikte) |
+| **KARAR 11 — DISC baskın+ikincil HARF ("DI"), yüzde yok** | ~A md.4 | 🟥 | | havuzda tek harf; ikincil harf türetme/gösterim yok. (B4 "güvenli harf yolu" ama yapılmadı) |
+| **KARAR 12 — Sektör/etiket başlangıç havuzu** | ~A md.12 | 🟨 | ❓ | `seed.ts` SECTOR_POOL (50+ etiket) VAR + öneri kuyruğu (PendingTag) VAR; **admin-yönetilir "sistem etiketi" tablosu YOK** → seed mi tablo mu **keşif/PO** (B12 açığı) |
+| **KARAR 6 — Otomatik onay (önden davet→onaylı)** | ~F6 | ❓ | ❓ | `InvitationTemplate` var; **davet→otomatik-onay tetiği kodda yok** → keşif + PO |
+| **KARAR 8 — "Neden uyumlu" Katman 2** | — | 🔵 | | bilinçli erteleme (ürün olgunlaşınca) |
+| **KARAR 9 — Mentör yaklaşım kılavuzu Katman 3 (vizyon)** | — | 🔵 | | KVKK rıza + mahremiyet + etik karar ÖNCE; "vizyon kutusu", canlı-öncesi erken |
+| **KARAR 10 — Sektör kolonu (veri girişi boşluğu)** | ~A md.3 | 🔵 | | canlı-SONRASINA ertelendi; blocker değil (VERİ girişi sorunu, gösterim değil) |
+| **F4 — Landing slogan** (tam metin hazır) | VAR (F4) | 🟥 | ❓ | karar+tam metin `10-yol F4`/`06:21`; `frontend/src/app/page.tsx` hâlâ eski slogan → **PO tam metni onaylayınca uygulanır** |
+| Dark/light tema altyapısı | — | 🟩 | | `ThemeProvider.tsx` + `ThemeToggle.tsx` |
+| ThemeToggle admin/platform nav'a (D21) | VAR (D) | 🟨 | | menti/mentör nav'da VAR; admin/platform'da yok |
+| Yumuşak lacivert tema + Landing UX paketi (tooltip/WCAG/kart) | VAR (D) | 🔵 | ❓ | 10-yol D; "lacivert" adı roadmap'te net değil → paket içinde mi PO netleştirsin (canlı-sonrası) |
 
 <!-- KÜME 5 -->
 ## KÜME 5 — STK Admin 13 Bulgusu (yol haritası A)
-_(işleniyor)_
+> Kaynak: `stk-admin-bulgu-envanteri-2026-08-11`. #62'de md.1/7/9 bağlandı; md.4 ertelendi; kalanlar açık. Güncel kod doğrulandı.
+| Bulgu | Plan | Kod | Çelişki | Kanıt / Not |
+|---|---|---|---|---|
+| **md.1 — Şifre göster/gizle** | VAR (A) | 🟩 | | #62; `PasswordField` login+register+reset (`_RegisterContent.tsx:89-126`) |
+| **md.7 — Yönetici atama UI** | VAR (A) | 🟩 | | #62; `admin/managers/page.tsx:66-124` |
+| **md.9 — CORE/DEEPENING Türkçe** | VAR (A) | 🟩 | | #62; `admin/questions/page.tsx:18` TYPE_LABELS (Temel/Derinleştirme) |
+| **md.8 — Soru puanlama/cevap-tipi görünürlüğü** | VAR (A) | 🟩 | | `admin/questions/page.tsx` type/dimension + yeni-soru select'leri render ediliyor |
+| **md.13 — Sertifika Konuları (topic1-5)** | VAR (A) | 🟩 | | `seed-certification.ts:37-80` gerçek senaryolar (placeholder değil) |
+| **md.6 — Algoritma Kalibrasyon Merkezi** | VAR (A/C) | 🟧 | | sayfa VAR (`admin/algorithm-tuner/page.tsx`) ama **sadece rapor-frekansı** gösteriyor; **ağırlık (0.60/0.40) ayarı/gösterimi YOK** → yarım |
+| **md.10 — Yeni soru cevap tipi (şıklı/açık uçlu) seçimi** | VAR (A) | 🟨 | ❓ | soru formunda CORE/DEEPENING + DISC select var; **cevap-tipi (şıklı/açık) seçimi ayrı** → belirsiz, teyit |
+| **md.11 — Gereksiz tek-seçenekli dropdown** | VAR (A) | ❓ | | minor UI temizliği; güncel formda teyit gerek |
+| **md.2 — Sol menü gruplama** | VAR (A) | 🟥 | | = KARAR 1 (KÜME 4); layout 3+Gelişmiş |
+| **md.5 — Havuz layout** | VAR (A) | 🟨 | | = KARAR 2 (KÜME 4); tablo→kart yapılmadı |
+| **md.3 — Havuz "Sektörler" kolonu çoklu gösterim** | VAR (A) | 🔵 | | = KARAR 10; canlı-sonrası (veri girişi boşluğu) |
+| **md.4 — DISC ikincil/karma gösterim** | VAR (A) | 🟥 | | ertelendi (#62 dışı); KARAR 11 harf yolu var ama yapılmadı |
+| **md.12 — Etiket Yönetimi sistem etiketleri nerede** | VAR (A) | 🟨 | ❓ | = KARAR 12; seed'de var, admin tablo yok |
 
 <!-- KÜME 6 -->
 ## KÜME 6 — Algoritma · Altyapı · Denetimden Kurtarılanlar (yol haritası C/D/F)
