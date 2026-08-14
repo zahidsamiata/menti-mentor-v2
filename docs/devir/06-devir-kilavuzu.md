@@ -3,6 +3,11 @@
 > **Amaç:** Bağlam devri sonrası yeni sohbetin **hatasız kaldığı yerden** devam etmesi. Bu klasördeki
 > 6 belge senin hafızan — ama **PR numaraları/SHA'lar devir anına aittir, git'ten doğrula** (bağlam
 > dolduğu için hafızaya güvenme; bu projenin "SHA tahmin etme, doğrula" kuralı).
+>
+> **⚠️ GÜNCELLEME (2026-08-14):** Bu kılavuz + 01–06 seti 2026-08-11 fotoğrafıdır. **Önce
+> `docs/devir/07-oturum-2026-08-14.md`'yi oku** (en güncel durum + tam bekleyen liste). Güncel git değerleri:
+> çatı main `0aaeac7` (#64), backend `afc2769` (senkron), açık PR **#65** (belge temizliği). Aşağıdaki
+> "devir anındaki değerler (çatı `da6a138`)" 2026-08-11'e aittir — git'ten doğrula.
 
 ---
 

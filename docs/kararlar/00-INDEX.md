@@ -51,10 +51,11 @@ docs/
 
 > **Denetim kümesi (birlikte okunur):** `belge-aksiyon-denetimi-2026-08-11` (kararlar gerçekle kıyas) · `belge-denetimi-2026-08-10` (09/10 denetimi) · `unutulmus-niyet-envanteri-2026-08-10` (unutulan niyetler) · `belge-temizlik-haritasi-2026-08-14` (düzen taraması). Farklı kapsam/tarih — birleştirilmez, çapraz referanslıdır.
 
-## Devir belgeleri — `docs/devir/` (2026-08-11)
+## Devir belgeleri — `docs/devir/` (2026-08-11 seti + 2026-08-14 güncelleme)
 | Klasör | İçerik | Tür |
 |---|---|---|
-| `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu) | 📸 DONDURULMUŞ (devir fotoğrafı) |
+| `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu) | 📸 DONDURULMUŞ (2026-08-11) |
+| `docs/devir/07-oturum-2026-08-14.md` | 2026-08-14 oturum kapanışı: git durumu + yapılanlar + TAM bekleyen liste (yeni oturum önce bunu + 09-DURUM okur) | 📸 DONDURULMUŞ (2026-08-14) |
 
 > **Canonical eşleşmesi (Kural 1 — devir belgeleri özet/kopyadır, güncel bilgi kararlar/'da):**
 > `01`→`07-calisma-tarzi` · `02`→`09-DURUM` · `03`→`04-guvenlik-ve-kvkk` · `04`→`10-yol-haritasi` (A) + `stk-admin-bulgu-envanteri` · `05`→`09-DURUM` + `10-yol-haritasi` (C/E) · `06`→kendisi (devir prosedürü).

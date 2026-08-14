@@ -9,6 +9,10 @@
 > **Son güncelleme:** 2026-08-11 (belge-aksiyon denetiminden kurtarılan 7 PO-onaylı madde **F bölümüne** eklendi;
 > A–E dokunulmadı). Önceki: 2026-08-10 (belge temizliği — çözülmüş/eskimiş maddeler çıkarıldı).
 > **İşler tek tek, ürün sahibi başlattıkça yapılır. Öncelik sırasını ürün sahibi değiştirebilir.**
+>
+> **⚠️ GÜNCELLEME (2026-08-14):** Bu oturumda kuyruğa eklenen meta-işler (henüz A–F'e önceliklendirilmedi):
+> PR #65 merge · 6 arşiv teyidi · **karar-statü taraması** (kararlar+raporlar 3-boyutlu durum) · **durum panosu** ·
+> **v1/v2 önceliklendirme** (PO çerçeve verecek → 10-yol yeniden dizilecek). Tam liste: `docs/devir/07-oturum-2026-08-14.md` (C).
 
 ---
 

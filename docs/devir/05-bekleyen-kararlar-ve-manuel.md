@@ -3,6 +3,10 @@
 > **Amaç:** Kod dışı bekleyenler tek yerde: ürün sahibi kararı bekleyen teknik kararlar + ürün sahibinin
 > elle yapacağı işler + kağıt üstünde kalmış unutulmuş niyetler. Kaynak: `10-yol-haritasi.md` (C/E),
 > `09-DURUM.md`, `unutulmus-niyet-envanteri-2026-08-10.md`, `belge-denetimi-2026-08-10.md`, `chat-v1-teslim.md`.
+>
+> **⚠️ GÜNCELLEME (2026-08-14):** Bu liste 2026-08-11 fotoğrafıdır. Güncellenmiş TAM bekleyen liste (PR #65 merge,
+> 6 arşiv teyidi, karar-statü taraması, durum panosu, v1/v2 önceliklendirme dahil):
+> **`docs/devir/07-oturum-2026-08-14.md`** (C bölümü).
 
 ---
 
