@@ -25,6 +25,7 @@ Backend büyük ölçüde hazırdı, eksik olan UI'dı. Hepsi tenant-izole + KVK
 - **Bağlamsal feedback:** Görüşme endsAt'ı geçince sağ altta MeetingFeedbackCard (2 saatlik pencere; feedbackPrompted çift-tetiklemeyi önler).
 - **Kademeli feedback:** Emoji (rapportScore) → Çip (P1-P5) → Açık uç; slider (progressScore); dipte "farklı birini dene" (earlyExit, suçlamasız).
 - Bağlam: MeetingContext/MeetingProvider, meetingController. UYARI: timezone bug'ı tespit edildi (UTC vs Europe/Istanbul), düzeltilmedi. ⏳
+  - **✅ GÜNCELLEME (2026-08-14): DÜZELTİLDİ** — commit `6a30f21` (bookMeeting UTC/Istanbul tutarsızlığı giderildi). Yukarıdaki "düzeltilmedi ⏳" ifadesi BAYAT.
 
 ## ÖĞRENME YOLCULUĞU / OYUNLAŞTIRMA
 - Keşif motoru (learningJourney.service.ts, 550 satır): Durum→Seçenek→Outcome+Feedback.

@@ -20,7 +20,7 @@
 ## STACK
 - **Monorepo:** Çatı repo (frontend) + backend ayrı repoda **git submodule**. Repo: zahidsamiata/menti-mentor-v2.
 - **Backend:** TypeScript + Express 5 + Prisma ORM. ~18.000 satır, 117 dosya, 144 endpoint, 31 migration, 60+ model.
-- **Frontend:** Next.js **15.5.20** (dikkat: bazı eski belgelerde 14.2.35 yazıyor — çelişki, güncel olan 15.5.20), React 18, Tailwind, Radix UI. ~14.600 satır, 37 sayfa, 30 bileşen.
+- **Frontend:** Next.js **15.5.20** (dikkat: bazı eski belgelerde 14.2.35 yazıyor — çelişki, güncel olan 15.5.20; **✅ 2026-08-14 `frontend/package.json` ile doğrulandı**), React 18, Tailwind, Radix UI. ~14.600 satır, 37 sayfa, 30 bileşen.
 - **DB:** PostgreSQL — **Neon (serverless)**. VPS'te DEĞİL.
 - **Test:** Vitest + Supertest, 169 test bloğu.
 

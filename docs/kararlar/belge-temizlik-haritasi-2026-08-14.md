@@ -87,6 +87,7 @@ Durum kodları: `düzenli` · `bayat` (⚠️ işaretleme gerek) · `arşiv-aday
 > Kural 6: silinmez, üstüne `⚠️ GÜNCELLEME (tarih): …` notu konur. Aşağıdakiler PO onayıyla işaretlenmeli.
 
 1. **`04-guvenlik-ve-kvkk` s.28-29 — KRİTİK/ÇELİŞKİ:** 2 IDOR için iki denetçi ZIT kanıt verdi ("korumalı" ↔ "bozuk"). **Canlı öncesi doğrulama şart.** ⚠️ DOĞRULAMA GEREK notu.
+   - **✅ ÇÖZÜLDÜ (2026-08-14):** Kod keşfi IDOR açığı OLMADIĞINI kanıtladı (tenant+sahiplik korumalı; commit `161ae00`). `04-guvenlik-ve-kvkk.md` ve `belge-aksiyon-denetimi-2026-08-11.md` belgelerine ✅ çözüm notu işlendi.
 2. **`platform-admin-strateji` s.74 ↔ s.137-138:** gövde "AdminAuditLog tablosu (migration)" der; kod-doğrulama notu "ayrı tablo YOK, SystemLog'a AUDIT yazılıyor" der. Gövde düzeltilmeli/işaretlenmeli.
 3. **`stk-yonetici-strateji` s.81-87 ↔ s.137-139:** gövde "hayalet mod havuzda görünmez" der; not "KISMEN yanlış, PR #31'de düzeltildi" der.
 4. **`02-mimari` s.22/s.40:** Next.js 14.2.35 ↔ 15.5.20 sürüm çelişkisi; eski VPS/PaaS notları.

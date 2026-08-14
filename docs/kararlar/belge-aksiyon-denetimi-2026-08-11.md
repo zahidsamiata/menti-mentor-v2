@@ -61,6 +61,7 @@
 | X-Tenant-Id güvensiz, JWT çapraz-doğrula | YAPILDI | `tenant.ts` cross-tenant 403 |
 | **`/mentors/:mentorId/candidates` IDOR** | **TEYİT GEREK (ÇELİŞKİ)** | Denetçi-1: `matchingController.ts` yetki kontrolü VAR (korumalı görünüyor). Denetçi teshis: "BOZUK". **Çelişki → canlı doğrulama şart** |
 | **`/requests/:id` IDOR** | **TEYİT GEREK (ÇELİŞKİ)** | Denetçi-1: `requestController.ts` üyelik doğrulaması VAR. teshis: "BOZUK". **Çelişki → doğrula** |
+| ↳ **✅ ÇÖZÜLDÜ (2026-08-14)** — her iki IDOR | **KORUMALI — açık YOK** | Kod keşfi: her iki endpoint tenant izolasyonu + sahiplik kontrolü ile korumalı; düzeltme commit `161ae00` (`matchingController.ts:45-52`, `requestController.ts:116-121`). Çelişki kapandı: Denetçi-1 haklı; teshis "BOZUK" bulgusu eskimiş. |
 | certified/qualityMultiplier UserProfile→TenantMembership | YAPILDI (kısmi) | `schema.prisma` TenantMembership'te alanlar VAR; tüm okumaların oradan olduğu TEYİT GEREK (K7) |
 | DISC ham profil asla gösterilmez | YAPILDI | `matchingController.ts` buildPublicItem maskeleme |
 | Audit log (KVKK Md.12) | YAPILDI | `platformAudit.ts` (SystemLog'a AUDIT) |
