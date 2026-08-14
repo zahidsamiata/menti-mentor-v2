@@ -134,13 +134,83 @@ Her karar **üç boyutta** işaretlenir (plan ile kod AYRI sorular):
 
 <!-- KÜME 6 -->
 ## KÜME 6 — Algoritma · Altyapı · Denetimden Kurtarılanlar (yol haritası C/D/F)
-_(işleniyor)_
+| Karar | Plan | Kod | Çelişki | Kanıt / Not |
+|---|---|---|---|---|
+| Sektör skoru servisi bağla (eski İŞ 7) | VAR (C) | 🟨 | | (KÜME 1) `sector-scorer.service.ts` yazılı, canlı yola bağlı değil → **staging şart** |
+| Eşleştirmeyi birleştir (eski İŞ 8) | VAR (C) | 🔵 | | İŞ 7 sonrası, staging'de |
+| super-admin router + `setVisibilityOptIn` (Taraf-1) | VAR (C) | ❓ | ❓ | "niyetli ama bağlanmamış"; ikisi de kasıtlı korundu (testli) → **sil/bağla/ertele PO kararı** (`userRoutes.ts:76-81`) |
+| `VisibilityOptIn.requestMessage` şema kolonu DROP | VAR (C) | 🔵 | | ertelenmiş teknik borç; DB'ye dokunur → PO-onaylı ayrı migration turu |
+| Retention davranışsal — otomatik nudge (cron) | VAR (C) | 🟥 | | manuel `nudgeUser` VAR; otomatik zamanlı nudge yok |
+| **Staging ortamı (eski İŞ 5)** | VAR (D) | 🟥 | | `staging.sivilkapasite.org` + ayrı Neon branch + Dokploy 2. app yok — canlı-riskli işlerin ön koşulu |
+| Ortam temizliği — merged worktree/branch sil (eski İŞ 1) | VAR (D) | 🟥 | | `cati-lj/cati-bump/cati-compose` hâlâ var; PO manuel + teyit (`git branch --merged`) |
+| Onay paneli tamamlama — bildirim maili (eski İŞ 3) | VAR (D) | 🟨 | ❓ | mail altyapısı hazır; kurum onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` bağlanmadı |
+| Öğrenme yolculuğu kalan uçları (eski İŞ 4) | VAR (D) | ❓ | | kod MERGED; DISC ton + STK düzenleme + içerik onayı + uçtan uca test → teyit |
+| **F1 — Fotoğraf yükleme** | VAR (F1) | 🟩 | ❓ | **kod TAM** (`avatarController.ts` + `profile/page.tsx`) → **F1 roadmap maddesi bayat olabilir; PO teyit** ("foto zorunlu kart" bağı ayrı iş) |
+| **F2 — Platform drill-down UI** | VAR (F2) | 🟩 | ❓ | **TAM** (KÜME 3) → F2 bayat |
+| **F3 — Tenant hard-delete (KVKK Md.7)** | VAR (F3) | 🟥 | | sadece freeze (soft); hard-delete endpoint yok. **GERİ-ALINAMAZ + DB → keşif + PO ÖNCE** |
+| **F4 — Landing slogan** | VAR (F4) | 🟥 | ❓ | (KÜME 4) tam metin hazır; kod eski slogan → PO onayı |
+| **F5 — Eşleşme hesaplama tetikleyicisi** | VAR (F5) | ❓ | ❓ | event-driven mi sayfa-açılınca mı karara bağlanmamış (`08:20`) → keşif + PO |
+| **F6 — Hayalet mod + toplu CSV davet** | VAR (F6) | 🟥 | | şemada YOK → yeni model/migration → **ayrı büyük tur, PO onaylı** |
+| **F7 — KPI drill-down** | VAR (F7) | 🟩 | ❓ | **TAM** (KÜME 3) → F7 bayat |
 
 <!-- KÜME 7 -->
 ## KÜME 7 — Unutulmuş Niyetler & PO Manuel (yol haritası E + envanter C)
-_(işleniyor)_
+| Karar | Plan | Kod | Çelişki | Kanıt / Not |
+|---|---|---|---|---|
+| Chat uçtan uca canlı test | VAR (E) | ⬜ | | PO manuel — kod değil |
+| Foto Dokploy volume testi | VAR (E) | ⬜ | | PO manuel; **merge/autodeploy'dan ÖNCE ŞART** (yoksa foto sessizce silinir) |
+| Mentör metriklerini canlıda gözle görme | VAR (E) | ⬜ | | PO manuel |
+| Repoları PRIVATE yapma | VAR (E) | ⬜ | | PO manuel (GitHub web + Dokploy erişim teyidi) |
+| Bekleme salonu bildirim izni (`Notification.requestPermission`) | VAR (C-env) | 🟥 | | bekleme salonu VAR; tarayıcı bildirim izni istemi kodda yok (grep boş) |
+| Mentör görünürlük opt-in ekranı ("7a") | env | 🟨 | ❓ | backend `setVisibilityOptIn`+tablo var; FE opt-in ekranı belirsiz → teyit |
+| STK "iki-aha modeli" (önizleme + gerçek aha) | env | ❓ | | onboarding wizard var; "canlı veri ile aha" tam değil → teyit |
+| Push bildirim (gerçek Expo/FCM) | env | 🟧 | | `notificationService.ts:49` TODO; sabit `sent:true` stub (biliniyor; in-app/e-posta idare ediyor) |
+| `.env.backup-*` temizliği | env | ⬜ | ❓ | gitignore'lu; env geçişi bitince PO siler |
+| İlk-aha / reddi yumuşat / emeği görünür (persona fikirleri) | — | ❓ | | veri/altyapı var; "hediye gibi sunum" UI render teyit (persona raporları fikir ağırlıklı) |
 
 ---
 
 ## ÖZET
-_(en sonda — toplam sayı + kategori dağılımı + 🟨 vurgu listesi + en büyük 🟥/❓ kümeleri)_
+
+**Toplam taranan karar/madde:** ~72 (7 küme). Aşağıdaki dağılım BOYUT B (kod) birincil statüsüne göre yaklaşıktır
+(bazı satır çift-kategorili; kesin sayım pano turunda netleşecek).
+
+### Kategori dağılımı (yaklaşık)
+| Kod statüsü | ~Sayı | Kısa |
+|---|---|---|
+| 🟩 TAM BİTTİ | ~27 | çekirdek eşleştirme/güvenlik/panel/chat + #62 admin UI + platform&KPI drill-down + foto upload |
+| 🟨 ARKA VAR / ÖN YOK ★ | ~13 | **az işle kazanç — aşağıda liste** |
+| 🟧 YARIM KALDI | ~3 | md.6 kalibrasyon · K2 OAuth consent · push stub |
+| 🟥 HİÇ BAŞLANMADI | ~15 | tasarım-kararları (menü/rozet/DISC-harf) · K4 yaş · K6 guard · F3/F6 · staging |
+| 🔵 SIRADA (bilinçli) | ~7 | Katman 2/3 · sektör kolonu · eşleştirme birleştirme · VisibilityOptIn DROP |
+| ⬜ KOD-DIŞI | ~9 | freemium/modül politikası · PO manuel işler · altyapı güvenliği |
+| ❓ BELİRSİZ (birincil) | ~4 | Match persist · otomatik onay · iki-aha · F5 tetikleyici |
+| ❌ ÇELİŞKİ | 0 | (tek çelişki — 2 IDOR — ✅ çözüldü: korumalı) |
+
+### ★ 🟨 "ARKA VAR / ÖN YOK" — az işle kazanç (PO'nun en çok istediği)
+1. **SJT/scoring endpoint'leri** (`/scoring/compute-profile`, `/rank-mentors`) — backend hazır, FE çağrısı yok → **bağla mı sil mi PO**.
+2. **Havuz KART görünümü + "neden uyumlu" (KARAR 2/7)** — backend `compatibilityReason` üretiyor, FE hâlâ tablo + tip eksik.
+3. **md.6 Algoritma Kalibrasyon (🟧)** — sayfa var, ağırlık (0.60/0.40) UI'ı yok.
+4. **K2 OAuth `kvkkConsentAt` (🟧)** — küçük backend fix (local/self-serve set ediyor, OAuth etmiyor).
+5. **Sektör/etiket başlangıç havuzu (KARAR 12)** — seed'de var, admin-yönetilir tablo yok.
+6. **K5 sunucu konumu beyanı** — veri sorumlusu var, hosting konumu içerik eklenecek.
+7. **Onay paneli bildirim maili** — mail altyapısı hazır, bağlanmadı (başvuran sessiz kalıyor).
+8. **Mentör görünürlük opt-in ekranı (7a)** — backend var, FE ekranı belirsiz.
+9. **ThemeToggle admin/platform nav** — menti/mentör'de var, admin/platform'da yok.
+10. **Sektör skoru servisi** — 5-bileşen yazılı, canlı yola bağlı değil (⚠️ canlı-riskli → staging şart).
+
+### ⚠️ Roadmap bayat olabilir (kod bitmiş ama F maddesi "yapılacak" diyor) — PO teyit
+- **F1 (foto upload), F2 (platform drill-down), F7 (KPI drill-down) → kod TAM.** Yol haritası F bölümü bu 3'ü hâlâ "yapılacak iş" sayıyor → **önceliklendirme turunda düzeltilmeli.**
+
+### En büyük 🟥 kümeleri (hiç başlanmadı)
+- **Tasarım-kararları (KÜME 4):** sol menü 4-grup (KARAR 1/md.2) · durum rozeti (KARAR 3) · sertifika rozeti (KARAR 4) · DISC ikincil harf (KARAR 11/md.4). Belgede kayıtlı, koda geçmemiş, yol haritasına bağlanmamış.
+- **KVKK:** K4 yaş 18+ doğrulama · K6 admin server-side guard (savunma-derinliği).
+- **F3 tenant hard-delete** (GERİ-ALINAMAZ+DB, keşif+PO önce) · **F6 hayalet mod+CSV** (migration, ayrı büyük tur) · **staging ortamı**.
+
+### En kritik ❓ (PO kararı gerekli — güvenlik önce)
+- **KARAR 5 — DISC mahremiyet asimetrisi:** menti→mentör DISC tipi gizleme backend'de kanıtlanamadı → **güvenlik/PII teyidi şart** (DTO role-ayrışması; frontend gizleme yetmez).
+- **F5 eşleşme tetikleyicisi** · **KARAR 6 otomatik onay** · **super-admin/Taraf-1 sil-bağla-ertele** · **Match DB persist**.
+
+---
+> **Sonraki adım (AYRI tur):** Bu ham harita → tek-bakışta renkli **DURUM PANOSU** (`00-DURUM-PANOSU`) → sonra
+> yol haritası **v1/v2 önceliklendirme** (PO çerçeveyi verecek). Bu belge önceliklendirme yapmaz.
