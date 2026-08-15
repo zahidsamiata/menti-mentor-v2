@@ -21,14 +21,20 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 - **Backend main HEAD:** `afc2769` · çatı main HEAD `e817a2d` (#69) · submodule pointer = `afc2769` (senkron, doğrulandı).
   > ⚠️ GÜNCELLEME (2026-08-15): KARAR 5 merge sonrası → **backend main HEAD `0850eaa`** (#37) · **çatı main HEAD `4c48a8e`** (#71)
   > · **submodule pointer = `0850eaa` (backend main HEAD ile TAM SENKRON, `git submodule status` + `ls-tree` ile doğrulandı)**.
+  > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): 4 kod PR merge sonrası → **backend main HEAD `379658a`** (#38+#39) · **çatı main HEAD `c3e4626`** (#73+#74) · **submodule pointer = `379658a` (backend main HEAD ile TAM SENKRON, `ls-tree` == `rev-parse` doğrulandı)**.
 - **Açık PR:** çatı **0** · backend **0** — **masa temiz** (2026-08-14: bu oturumun 5 belge PR'ı #65–#69 sırayla MERGED).
   > ⚠️ GÜNCELLEME (2026-08-14): bu satır #65–#69 açıkken "çatı #65 (merge PO'da)" diyordu; 5 PR merge olunca gerçeğe (açık PR 0) çekildi (Belge Düzeltme Deseni / Kural 6).
   > ⚠️ GÜNCELLEME (2026-08-15): artık **açık PR: backend #37 + çatı #71** — KARAR 5 DISC güvenlik düzeltmesi, **merge PO'da** (bkz. "🟡 GÜVENLİK" bölümü).
   > ⚠️ GÜNCELLEME (2026-08-15, aynı gün geç): #37 + #71 **MERGED, canlıda** → **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ GÜVENLİK" bölümü).
   > ⚠️ GÜNCELLEME (2026-08-15, v1 turu): yeni v1 işleri açıldı → **açık PR: bu docs (#72) · KVKK backend #38 + çatı #73 · havuz-kart backend #39 + çatı #74** — hepsi **merge PO'da** (bkz. "🚧 BU OTURUM — v1 İŞLERİ" bölümü). İki repo tüm CI yeşil.
+  > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): **4 kod PR sırayla MERGED, canlıda** (#38→#73→#39→#74, `--merge`). **Açık PR yalnız bu docs (#72)** — kod PR: çatı 0 · backend 0. #74'te submodule pointer çakışması backend main HEAD'e bump ile çözüldü. İki repo main CI yeşil.
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
 
-## 🚧 BU OTURUM — v1 İŞLERİ (PR açık, merge PO'da; 2026-08-15)
+## ✅ BU OTURUM — v1 İŞLERİ MERGED, CANLIDA (2026-08-15)
+> ⚠️ GÜNCELLEME (2026-08-15, merge turu): **4 kod PR sırayla MERGED, canlıya deploy oldu** (#38→#73→#39→#74, `--merge`).
+> Submodule TAM SENKRON (`379658a`). İki repo main CI yeşil. Regresyon testleri (oauth-kvkk-consent, mentor-matches, disc-visibility)
+> CI Integration suite'te geçiyor. Açık PR yalnız bu docs (#72). **Aşağıdaki maddeler artık "tamamlandı" — merge oldu.**
+> ---
 > ⚠️ GÜNCELLEME (2026-08-15): KARAR 5 sonrası v1 işleri kodlandı. **Hepsi PR açık, merge PO'da** (henüz merge YOK →
 > "tamamlandı" denmez). İki repo tüm CI yeşil (backend entegrasyon suite CI'da geçiyor). Merge sırası PO'da (aşağıda öneri).
 
