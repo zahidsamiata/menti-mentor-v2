@@ -63,11 +63,18 @@ docs/
 > **Canonical eşleşmesi (Kural 1 — devir belgeleri özet/kopyadır, güncel bilgi kararlar/'da):**
 > `01`→`07-calisma-tarzi` · `02`→`09-DURUM` · `03`→`04-guvenlik-ve-kvkk` · `04`→`10-yol-haritasi` (A) + `stk-admin-bulgu-envanteri` · `05`→`09-DURUM` + `10-yol-haritasi` (C/E) · `06`→kendisi (devir prosedürü).
 
-## Raporlar — `docs/raporlar/` (📸 DONDURULMUŞ — hepsi 2026-08-02 keşif fotoğrafı)
+## Raporlar — `docs/raporlar/` (📸 DONDURULMUŞ — keşif fotoğrafları)
 > Bir-kerelik keşif/analiz çıktıları; güncellenmez. Güncel durum daima `09-DURUM.md`'de.
 > Konu kümelerine göre gruplu (kardeş belgeler birlikte okunur).
 
-**Teşhis / genel**
+**Değerlendirme/test/soru envanteri (2026-08-15)**
+| Belge | İçerik |
+|---|---|
+| `degerlendirme-test-soru-envanteri-2026-08-15.md` | 6 değerlendirme sistemi + yönetici yetki/görünürlük + soru/cevap envanteri (#78) |
+| `icerik/00-icerik-index.md` + `icerik/*` | Her testin TAM soru/cevap içeriği (DISC/sertifika/öğrenme yolculuğu/SJT/STK-custom) + seed↔canlı tutarlılık (#79) |
+| `eksikler-derinlestirilmis-2026-08-15.md` | 7 eksik derin analiz (DISC-yaklaşım 3 seçenek, sertifika 5→20, admin düzenleme UI vb.) (#79) |
+
+**Teşhis / genel (2026-08-02)**
 | Belge | İçerik |
 |---|---|
 | `teshis-raporu-2026-08-02.md` | Niyet vs mevcut-kod envanteri, merge runbook, KVKK, güvenlik |
