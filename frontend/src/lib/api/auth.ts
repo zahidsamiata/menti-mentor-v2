@@ -12,7 +12,9 @@ export interface RegisterPayload {
   fullName: string;
   role: 'MENTOR' | 'MENTI';
   tenantSlug: string;
-  kvkkConsent: boolean; // KVKK Md.5 — backend z.literal(true) ile zorunlu
+  // KVKK Md.5 — backend z.literal(true) ile zorunlu. K4 (18+ beyanı) bu onayın
+  // metnine gömülü (PO kararı: tek kutu) — ayrı alan yok.
+  kvkkConsent: boolean;
 }
 
 export interface RegisterResponse {
