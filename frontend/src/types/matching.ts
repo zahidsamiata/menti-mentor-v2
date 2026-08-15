@@ -21,6 +21,23 @@ export interface MentorsListResponse {
   total: number;
 }
 
+// Menti → Mentör uyum kartı (GET /mentis/:mentiId/mentor-matches).
+// KARAR 5: discType YOK — menti mentörün DISC tipini görmez, yalnız uyum skoru (yüzde)
+// + jenerik gerekçe. Backend (buildMentiFacingMentorItem) bu şekli garanti eder.
+export interface MentorMatch {
+  mentorId: string;
+  mentorName: string;
+  mentorAvatarUrl?: string | null;
+  sectorTags: string[];
+  skills: string[];
+  matchScore: number;          // 0-100 uyum yüzdesi
+  compatibilityReason: string; // jenerik ("Ortak sektör…" / "İletişim tarzları uyumlu")
+}
+
+export interface MentorMatchesResponse {
+  items: MentorMatch[];
+}
+
 export interface RankedMenti {
   mentiId: string;
   mentiName: string;
