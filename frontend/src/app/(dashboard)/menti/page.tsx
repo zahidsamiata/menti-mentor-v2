@@ -22,13 +22,6 @@ import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidge
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
 import type { MentorListItem } from '@/types/matching';
 
-const DISC_COLORS: Record<string, string> = {
-  D: 'bg-red-400', I: 'bg-yellow-400', S: 'bg-green-400', C: 'bg-blue-400',
-};
-const DISC_LABELS: Record<string, string> = {
-  D: 'Dominant', I: 'Influential', S: 'Steady', C: 'Conscientious',
-};
-
 export default function MentiDashboardPage() {
   const { user, isLoading } = useAuth();
   const { tenant } = useTenant();
@@ -258,13 +251,13 @@ export default function MentiDashboardPage() {
                     <UserAvatar src={mentor.avatarUrl} name={mentor.fullName} size={36} />
                     <div>
                       <p className="text-sm font-medium">{mentor.fullName}</p>
+                      {/* KARAR 5: menti mentörün DISC tipini GÖRMEZ — kartta yalnızca sektör
+                          gösterilir. Backend zaten discType göndermiyor; bu ek savunma katmanı. */}
                       <div className="flex items-center gap-1.5 mt-0.5">
-                        {mentor.discType && (
-                          <span className={`inline-block h-2 w-2 rounded-full ${DISC_COLORS[mentor.discType]}`} />
-                        )}
                         <p className="text-xs text-muted-foreground">
-                          {mentor.discType ? DISC_LABELS[mentor.discType] : 'Profil yok'}
-                          {mentor.sectorTags.length > 0 && ` · ${mentor.sectorTags.slice(0, 2).join(', ')}`}
+                          {mentor.sectorTags.length > 0
+                            ? mentor.sectorTags.slice(0, 3).join(', ')
+                            : 'Sektör belirtilmemiş'}
                         </p>
                       </div>
                     </div>
