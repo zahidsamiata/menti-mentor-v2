@@ -158,8 +158,9 @@ export default function RegisterContent() {
   const [email,     setEmail]     = useState('');
   const [password,  setPassword]  = useState('');
   const [confirm,   setConfirm]   = useState('');
-  const [errors,    setErrors]    = useState<{ email?: string; password?: string; confirm?: string; kvkk?: string }>({});
+  const [errors,    setErrors]    = useState<{ email?: string; password?: string; confirm?: string; kvkk?: string; age?: string }>({});
   const [kvkkConsent, setKvkkConsent] = useState(false);
+  const [ageConsent, setAgeConsent] = useState(false); // K4 — 18+ öz-beyan kapısı
   const [submitErr, setSubmitErr] = useState<string | null>(null);
   const [loading,   setLoading]   = useState(false);
 
@@ -194,6 +195,9 @@ export default function RegisterContent() {
     if (!kvkkConsent) {
       e.kvkk = 'KVKK kapsamında veri işleme onayı zorunludur.';
     }
+    if (!ageConsent) {
+      e.age = '18 yaşından büyük olduğunuzu onaylamanız gerekir.';
+    }
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -217,7 +221,7 @@ export default function RegisterContent() {
     // fullName: minimum sürtünme — email öneki, onboarding'de güncellenir
     const fullName = email.split('@')[0]?.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, '') || 'Kullanıcı';
 
-    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true });
+    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true, ageConsent: true });
 
     if (!regResult.ok) {
       setLoading(false);
@@ -415,6 +419,29 @@ export default function RegisterContent() {
             </label>
             {errors.kvkk && (
               <p role="alert" className="text-xs text-destructive pl-6">{errors.kvkk}</p>
+            )}
+          </div>
+
+          {/* ── 18+ yaş onayı (K4) ───────────────────────────────────── */}
+          <div className="space-y-1">
+            <label className="flex items-start gap-2.5 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={ageConsent}
+                onChange={(e) => {
+                  setAgeConsent(e.target.checked);
+                  if (e.target.checked) setErrors((p) => ({ ...p, age: undefined }));
+                }}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+                aria-invalid={!!errors.age}
+                disabled={loading}
+              />
+              <span className="text-xs text-muted-foreground leading-relaxed">
+                18 yaşından büyük olduğumu beyan ederim. (Zorunlu)
+              </span>
+            </label>
+            {errors.age && (
+              <p role="alert" className="text-xs text-destructive pl-6">{errors.age}</p>
             )}
           </div>
 

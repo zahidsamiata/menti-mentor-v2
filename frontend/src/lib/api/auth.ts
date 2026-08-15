@@ -13,6 +13,7 @@ export interface RegisterPayload {
   role: 'MENTOR' | 'MENTI';
   tenantSlug: string;
   kvkkConsent: boolean; // KVKK Md.5 — backend z.literal(true) ile zorunlu
+  ageConsent: boolean;  // K4 — 18+ öz-beyan; backend z.literal(true) ile zorunlu
 }
 
 export interface RegisterResponse {

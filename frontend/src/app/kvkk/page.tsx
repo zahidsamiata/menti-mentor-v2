@@ -88,6 +88,23 @@ export default function KvkkPage() {
             </ul>
           </div>
 
+          <div className="space-y-2">
+            <h2 className="text-lg font-semibold">8. Sunucu Konumu ve Yurt Dışı Aktarım</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Kişisel verileriniz, İrlanda (Avrupa Birliği) bölgesinde bulunan veri merkezlerinde
+              barındırılan yönetilen PostgreSQL veritabanı hizmeti üzerinde saklanır. Uygulama
+              sunucuları da aynı hizmet sağlayıcı altyapısı üzerinde çalışır. Bu nedenle
+              verileriniz, KVKK Madde 9 kapsamında Türkiye dışında (yurt dışında) işlenmekte ve
+              saklanmaktadır.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Kullanılan altyapı sağlayıcıları, Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR)
+              standartlarına tabidir. Platforma üye olurken verdiğiniz açık rıza, verilerinizin bu
+              yurt dışı sunucularda işlenmesini de kapsar. Barındırma sağlayıcısı veya bölgesi
+              değişirse bu metin güncellenir.
+            </p>
+          </div>
+
           <div className="rounded-lg border border-border bg-muted/50 p-4 text-sm text-muted-foreground">
             <strong className="text-foreground">Not:</strong> Bu metin taslak niteliğinde olup
             platforma ait hukuki aydınlatma metninin tamamlanmış hâli yerine geçmez. Sorularınız
