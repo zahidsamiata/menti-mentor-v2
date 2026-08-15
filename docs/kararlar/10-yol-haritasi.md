@@ -32,9 +32,12 @@
    - **Çelişki:** kod `discType`'ı bilinçli public tasarlamış (yorum s.138) — KARAR 5 (2026-08-11) daha yeni PO kararı → **KARAR 5 kazanır**.
    - **İş:** viewer-role + target-role farkındalıklı select (menti→mentör **gizle**; mentör→menti **göster**; admin hepsi). Tek yönlü kaldırma mentörün meşru görünümünü bozar.
    - **⚠️ ÖN-KOŞUL:** havuz kart işi (v1-C, KARAR 2/7) **bu düzeltmeden SONRA** yapılır — yoksa açığı ekrana taşır.
-2. **K2 — OAuth `kvkkConsentAt`** (KVKK) — `oauthService.ts` OAuth kullanıcıda consent set etmiyor (local/self-serve ediyor). ★ küçük backend fix (S).
-3. **K4 — Yaş 18+ doğrulama** (KVKK) — kayıt formunda yaş input + backend alan/kontrol yok (terms "18+" diyor). Karar + kod.
-4. **K5 — Sunucu konumu beyanı** (KVKK) — veri sorumlusu metni var; hosting/sunucu konumu beyanı yok. İçerik (S).
+2. **✅ K2 — OAuth `kvkkConsentAt`** (KVKK) — `oauthService.ts` OAuth kullanıcıda consent set etmiyor (local/self-serve ediyor). ★ küçük backend fix (S).
+   > ⚠️ GÜNCELLEME (2026-08-15): **PR açık, merge PO'da** (backend #38 + çatı #73). OAuth `handleNewUser` + self-serve kurucu admin `new Date()` set eder; test `oauth-kvkk-consent.test.ts`.
+3. **✅ K4 — Yaş 18+ doğrulama** (KVKK) — kayıt formunda yaş input + backend alan/kontrol yok (terms "18+" diyor). Karar + kod.
+   > ⚠️ GÜNCELLEME (2026-08-15): **PR açık, merge PO'da** (backend #38 + çatı #73). **PO kararı: ayrı kutu DEĞİL** → tek KVKK onayının metnine gömüldü ("...ve 18 yaşından büyük olduğumu beyan ederim"). DB'ye yaş yazılmaz (şema yok) — öz-beyan kapısı.
+4. **✅ K5 — Sunucu konumu beyanı** (KVKK) — veri sorumlusu metni var; hosting/sunucu konumu beyanı yok. İçerik (S).
+   > ⚠️ GÜNCELLEME (2026-08-15): **PR açık, merge PO'da** (çatı #73). `kvkk/page.tsx` "8. Sunucu Konumu ve Yurt Dışı Aktarım" (İrlanda/AB, KVKK Md.9). Taslak-not disclaimer'ı kapsamı korur (hukukçu gözden geçirebilir).
 
 > **Not:** K1 yasal metinler ✅ yazılı (hukukçu onayı ayrı, PO/dış iş). K3 (eski kayıt consent politikası) → aşağıda "❓ önce karar".
 
@@ -47,6 +50,7 @@
 ## v1-C · STK ADMİN PANEL — TAM GÖRÜNSÜN (görünüm eksikleri)
 7. **Havuz KART görünümü + "Neden uyumlu" L1 (KARAR 2 + KARAR 7 · =md.5)** — backend `compatibilityReason` üretiyor, FE hâlâ tablo + tip eksik. **⚠️ KARAR 5 düzeltmesinden SONRA** (kart bakan-role göre ayrışmalı: menti→mentör DISC göstermez).
    > ⚠️ GÜNCELLEME (2026-08-15): **ön-koşul KARŞILANDI** — KARAR 5 düzeltmesi canlıda (#37+#71). Bu iş artık yapılabilir → **sıradaki v1 adayı**. Kart, mevcut merkezi `canViewerSeeDiscType` kuralından beslenir (menti→mentör DISC göstermez; bakan-role göre ayrışma hazır).
+   > ⚠️ GÜNCELLEME (2026-08-15, kısmi): **menti→mentör yönü PR açık (backend #39 + çatı #74), merge PO'da.** GÜVENLİ YOL: `computeTotalScore` ters yönde → `rankMentorsForMenti` (yeni salt-okuma endpoint `GET /mentis/:id/mentor-matches`, canlı eşleştirme değişmedi). Menti kartı %skor + jenerik gerekçe gösterir; **KARAR 5: mentör discType/discScore menti response'unda YOK** (test: `mentor-matches.test.ts`). **KALAN (follow-up):** mentör→menti aday kartı DISC+gerekçeli (RankedMenti'ye menti discType eklenmeli — KARAR 5 izin verir) + yönetici havuz kartları (md.10/11 rozetlerle).
 8. **Sol menü 4-grup gruplama (KARAR 1 · =md.2)** — `layout.tsx` hâlâ "3+Gelişmiş"; tasarım: Günlük İşler / İnsanlar / Program&İçerik / Ayarlar&Kurulum.
 9. **Algoritma Kalibrasyon sayfası (md.6)** — sayfa var ama sadece rapor-frekansı; ağırlık (0.60/0.40) gösterimi/ayarı yok.
 10. **Durum rozeti (KARAR 3)** — Onaylı/Bekliyor/Pasif, yalnız yönetici görür; render edilmiyor.
