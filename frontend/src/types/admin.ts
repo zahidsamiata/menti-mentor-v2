@@ -24,6 +24,8 @@ export interface AdminUser {
   createdAt: string;
   // Profil fotoğrafı — yoksa kartta baş-harf avatarına düşülür.
   avatarUrl?: string | null;
+  // Sertifika rozeti (KARAR 4) — kurum-içi sertifika (TenantMembership.isCertified). Mentörlerde anlamlı.
+  isCertified: boolean;
 }
 
 export type AdminUsersResponse = PaginatedResponse<AdminUser>;

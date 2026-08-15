@@ -92,6 +92,7 @@ export default function MentorHavuzuPage() {
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">DISC</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Sektörler</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Durum</th>
+                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Sertifika</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kayıt</th>
                 </tr>
               </thead>
@@ -144,6 +145,15 @@ export default function MentorHavuzuPage() {
                         <Badge variant={approval.variant} className="text-xs">
                           {approval.label}
                         </Badge>
+                      </td>
+
+                      {/* Sertifika — KARAR 4: yalnız pozitif rozet, sertifikasızda etiket yok */}
+                      <td className="px-4 py-3">
+                        {user.isCertified ? (
+                          <Badge variant="success" className="text-xs">✓ Sertifikalı</Badge>
+                        ) : (
+                          <span className="text-muted-foreground">—</span>
+                        )}
                       </td>
 
                       {/* Kayıt */}
