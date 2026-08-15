@@ -18,7 +18,7 @@
 
 ## v1-A · 🔴 GÜVENLİK & YASAL BLOCKER (canlı-öncesi ŞART)
 
-1. **🟡 KARAR 5 — DISC güvenlik açığı düzeltmesi** — **v1 #1, canlı-öncesi ŞART.** *Düzeltme PR AÇIK, merge PO'da (backend #37 + çatı bu PR).*
+1. **🟡 KARAR 5 — DISC güvenlik açığı düzeltmesi** — **v1 #1, canlı-öncesi ŞART.** *Düzeltme PR AÇIK, merge PO'da (backend #37 + çatı #71).*
    > ⚠️ GÜNCELLEME (2026-08-15): düzeltme kodlandı → **PR açık, merge bekliyor** (henüz merge YOK). Merkezi `discVisibility.ts`
    > (`canViewerSeeDiscType`): `listUsers`+`getUser` menti→mentör `discType`/`discResultCard`'ı response'tan çıkarır; FE menti kartı
    > DISC göstermez; regresyon testi eklendi. Gerçek kanıt CI'da (lokal entegrasyon TEST_DATABASE_URL guard'ıyla durur). Detay: `09-DURUM.md` "🟡 GÜVENLİK".
