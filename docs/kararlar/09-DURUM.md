@@ -1,8 +1,10 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-15 (KARAR 5 DISC güvenlik açığı düzeltildi ve
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-15 (**5-PR masa temizliği merge'i**: menü 4-grup #76,
+sertifika rozeti kişi-geneli #40+#77, envanter+içerik raporları #78+#79 → hepsi CANLIDA; çatı main `444c025` · backend `5eafbbd` ·
+açık PR 0/0; **v1 #8 + #11 tamamlandı, #10 zaten mevcuttu** — bkz. "✅ MASA TEMİZLİĞİ"). Önceki: KARAR 5 DISC güvenlik açığı düzeltildi ve
 CANLIYA merge edildi: backend #37 + çatı #71 MERGED, submodule pointer senkron, iki repo main CI yeşil → **v1 #1
-tamamlandı**; sıradaki v1 adayı havuz kart işi KARAR 2/7).
+tamamlandı**.
 Önceki: 2026-08-14 (oturum kapanışı: bu oturumun 5 belge PR'ı
 [#65 belge temizliği · #66 devir · #67 karar-statü haritası · #68 durum panosu · #69 v1/v2 yol haritası] MERGED →
 **açık PR: 0, masa temiz**; IDOR çelişkisi kod keşfiyle çözüldü — kapanış özeti: `docs/devir/07-oturum-2026-08-14.md`).
@@ -22,6 +24,7 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > ⚠️ GÜNCELLEME (2026-08-15): KARAR 5 merge sonrası → **backend main HEAD `0850eaa`** (#37) · **çatı main HEAD `4c48a8e`** (#71)
   > · **submodule pointer = `0850eaa` (backend main HEAD ile TAM SENKRON, `git submodule status` + `ls-tree` ile doğrulandı)**.
   > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): 4 kod PR merge sonrası → **backend main HEAD `379658a`** (#38+#39) · **çatı main HEAD `c3e4626`** (#73+#74) · **submodule pointer = `379658a` (backend main HEAD ile TAM SENKRON, `ls-tree` == `rev-parse` doğrulandı)**.
+  > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): masa temizliği merge'i sonrası → **çatı main HEAD `444c025`** (#77) · **backend main HEAD `5eafbbd`** (#40) · **submodule pointer = `5eafbbd` (backend main HEAD ile TAM SENKRON, `git submodule status` doğrulandı)**. Merge sırası: #78→#79→#76→#40→#77 (#77 pointer'ı #40 merge commit'ine bump edildi). İki repo her adımda main CI yeşil.
 - **Açık PR:** çatı **0** · backend **0** — **masa temiz** (2026-08-14: bu oturumun 5 belge PR'ı #65–#69 sırayla MERGED).
   > ⚠️ GÜNCELLEME (2026-08-14): bu satır #65–#69 açıkken "çatı #65 (merge PO'da)" diyordu; 5 PR merge olunca gerçeğe (açık PR 0) çekildi (Belge Düzeltme Deseni / Kural 6).
   > ⚠️ GÜNCELLEME (2026-08-15): artık **açık PR: backend #37 + çatı #71** — KARAR 5 DISC güvenlik düzeltmesi, **merge PO'da** (bkz. "🟡 GÜVENLİK" bölümü).
@@ -29,7 +32,16 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > ⚠️ GÜNCELLEME (2026-08-15, v1 turu): yeni v1 işleri açıldı → **açık PR: bu docs (#72) · KVKK backend #38 + çatı #73 · havuz-kart backend #39 + çatı #74** — hepsi **merge PO'da** (bkz. "🚧 BU OTURUM — v1 İŞLERİ" bölümü). İki repo tüm CI yeşil.
   > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): **4 kod PR sırayla MERGED, canlıda** (#38→#73→#39→#74, `--merge`). **Açık PR yalnız bu docs (#72)** — kod PR: çatı 0 · backend 0. #74'te submodule pointer çakışması backend main HEAD'e bump ile çözüldü. İki repo main CI yeşil.
   > ⚠️ GÜNCELLEME (2026-08-15, devir turu): #72 de **MERGED** (çatı main HEAD `cafd68c`) → açık PR gerçekte **çatı 0 · backend 0** (git + `gh pr list` kanıtlı). Yukarıdaki "docs (#72) açık" ifadesi **eskimiştir.** Oturum kapanışı: `docs/devir/08-oturum-2026-08-15.md`.
+  > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): sonraki turlarda 5 PR daha açılıp merge edildi (#76 menü · #40+#77 rozet · #78 envanter · #79 içerik). Merge sonrası **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ MASA TEMİZLİĞİ" bölümü).
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
+
+## ✅ MASA TEMİZLİĞİ — 5 PR MERGED, CANLIDA (2026-08-15, geç oturumlar)
+> Çatı main `444c025` · backend main `5eafbbd` · submodule senkron · açık PR 0/0 (git doğrulandı).
+- **v1 #8 — admin sol menü 4-grup (çatı #76):** ✅ TAMAMLANDI, canlıda. Gruplar: Günlük İşler · İnsanlar · Program & İçerik · Ayarlar & Kurulum (KARAR 1). Salt-frontend (`(admin)/layout.tsx`).
+- **v1 #11 — sertifika rozeti (backend #40 + çatı #77):** ✅ TAMAMLANDI, canlıda. **KİŞİ-GENELİ:** kişi HERHANGİ bir kurumda sertifikalıysa mentör havuzunda "✓ Sertifikalı" görünür — `TenantMembership.isCertified` üzerinden `some()` ile türetilir. `UserProfile.isCertified` **bakımsız** (hiç yazılmıyor) olduğu için kullanılmadı (kod kanıtıyla; migration gerekmedi).
+- **v1 #10 — durum rozeti:** ✅ **ZATEN MEVCUTTU** (kod gerçeği — yol haritasında ⏳ görünüyordu ama yanlıştı). Mentör + menti havuz tablosunda "Durum" sütunu `APPROVAL_META` ile Onaylı/Bekliyor/Reddedildi gösteriyor (`mentor-havuzu/page.tsx`, `menti-havuzu/page.tsx`); admin-only. Yeniden yapılmadı, teyit edildi.
+- **Raporlar (çatı #78 + #79):** değerlendirme/test/soru envanteri (`docs/raporlar/degerlendirme-test-soru-envanteri-2026-08-15.md`) + içerik dökümü (`docs/raporlar/icerik/`) + derinleştirilmiş eksik analizi (`docs/raporlar/eksikler-derinlestirilmis-2026-08-15.md`). Canlı DB salt-okuma sayımıyla seed↔canlı tutarlılığı doğrulandı.
+  - ⚠️ **Kritik tespit:** sertifika bankası kodda 20 senaryo ama **canlıda yalnız 5 soru** (seed edilmemiş). Ayrıca STK-custom canlıda 1 (envanterin "0"ı düzeltildi). Detay: eksikler raporu.
 
 ## ✅ BU OTURUM — v1 İŞLERİ MERGED, CANLIDA (2026-08-15)
 > ⚠️ GÜNCELLEME (2026-08-15, merge turu): **4 kod PR sırayla MERGED, canlıya deploy oldu** (#38→#73→#39→#74, `--merge`).

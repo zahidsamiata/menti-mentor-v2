@@ -5,8 +5,9 @@
 > Bu belge yalnızca **BUNDAN SONRA yapılacak açık işleri** öncelik sırasıyla tutar. Biten işler burada durmaz —
 > güncel durum `09-DURUM.md`'de; 2026-08-10 öncesi tam geçmiş `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`'de.
 >
-> **Son güncelleme:** 2026-08-15 (**v1 #1 = KARAR 5 DISC güvenlik ✅ tamamlandı, canlıda** — backend #37 + çatı #71 MERGED;
-> sıradaki v1 adayı = **md.7 havuz kart işi (KARAR 2/7)**, ön-koşul artık karşılandı). Önceki: 2026-08-14 (**v1/v2
+> **Son güncelleme:** 2026-08-15 (**5-PR masa temizliği merge'i, canlıda**: **#8 menü 4-grup ✅ (#76)** · **#11 sertifika rozeti ✅ kişi-geneli (#40+#77)** · **#10 durum rozeti ✅ zaten mevcuttu** (kod gerçeği düzeltmesi) · envanter/içerik raporları #78+#79.
+> Çatı main `444c025` · backend `5eafbbd` · açık PR 0/0. **v1-C kalan ~6 iş** (#5,6,7-follow-up,9,12,13). Yeni tespitler v1-D (#29-34) eklendi: İş 2+3 migration ONAYLI, sertifika 5→20, DISC-yaklaşım boşluğu vb.
+> Önceki: **v1 #1 = KARAR 5 DISC güvenlik ✅** — backend #37 + çatı #71 MERGED). Önceki: 2026-08-14 (**v1/v2
 > önceliklendirme** — kaynak: `00-karar-statu-haritasi-2026-08-14.md` + `00-DURUM-PANOSU.md` + KARAR 5 güvenlik denetimi.
 > Biten işler [F1/F2/F7] düşürüldü, tasarım kararları eklendi). Önceki: 2026-08-11 (F bölümü 7 madde).
 > **Statüler karar-statü haritasından gelir (dosya:satır kanıtlı).**
@@ -48,13 +49,26 @@
 7. **Havuz KART görünümü + "Neden uyumlu" L1 (KARAR 2 + KARAR 7 · =md.5)** — backend `compatibilityReason` üretiyor, FE hâlâ tablo + tip eksik. **⚠️ KARAR 5 düzeltmesinden SONRA** (kart bakan-role göre ayrışmalı: menti→mentör DISC göstermez).
    > ⚠️ GÜNCELLEME (2026-08-15): **ön-koşul KARŞILANDI** — KARAR 5 düzeltmesi canlıda (#37+#71). Bu iş artık yapılabilir → **sıradaki v1 adayı**. Kart, mevcut merkezi `canViewerSeeDiscType` kuralından beslenir (menti→mentör DISC göstermez; bakan-role göre ayrışma hazır).
    > ⚠️ GÜNCELLEME (2026-08-15, merge turu): **menti→mentör yönü MERGED, canlıda (#39+#74).** Kalan (mentör→menti kartı DISC+gerekçeli + yönetici havuz kartları md.10/11) follow-up.
+   > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): **yönetici havuz md.10 durum rozeti ZATEN VARDI + md.11 sertifika rozeti canlıda (#40+#77).** Kalan follow-up: yalnız **mentör→menti aday kartı DISC+gerekçeli** (RankedMenti'ye menti discType; KARAR 5 izin verir).
    > ⚠️ GÜNCELLEME (2026-08-15, kısmi): **menti→mentör yönü PR açık (backend #39 + çatı #74), merge PO'da.** GÜVENLİ YOL: `computeTotalScore` ters yönde → `rankMentorsForMenti` (yeni salt-okuma endpoint `GET /mentis/:id/mentor-matches`, canlı eşleştirme değişmedi). Menti kartı %skor + jenerik gerekçe gösterir; **KARAR 5: mentör discType/discScore menti response'unda YOK** (test: `mentor-matches.test.ts`). **KALAN (follow-up):** mentör→menti aday kartı DISC+gerekçeli (RankedMenti'ye menti discType eklenmeli — KARAR 5 izin verir) + yönetici havuz kartları (md.10/11 rozetlerle).
-8. **Sol menü 4-grup gruplama (KARAR 1 · =md.2)** — `layout.tsx` hâlâ "3+Gelişmiş"; tasarım: Günlük İşler / İnsanlar / Program&İçerik / Ayarlar&Kurulum.
+8. **Sol menü 4-grup gruplama (KARAR 1 · =md.2)** — ~~`layout.tsx` hâlâ "3+Gelişmiş"~~.
+   > ⚠️ GÜNCELLEME (2026-08-15): ✅ **TAMAMLANDI, CANLIDA (çatı #76).** 4 grup uygulandı: Günlük İşler · İnsanlar · Program & İçerik · Ayarlar & Kurulum. Salt-frontend (`(admin)/layout.tsx`).
 9. **Algoritma Kalibrasyon sayfası (md.6)** — sayfa var ama sadece rapor-frekansı; ağırlık (0.60/0.40) gösterimi/ayarı yok.
-10. **Durum rozeti (KARAR 3)** — Onaylı/Bekliyor/Pasif, yalnız yönetici görür; render edilmiyor.
-11. **Sertifika rozeti (KARAR 4)** — "Sertifikalı ✓", herkes görür; mentör kartında yok.
+10. **Durum rozeti (KARAR 3)** — Onaylı/Bekliyor/Pasif, yalnız yönetici görür.
+    > ⚠️ GÜNCELLEME (2026-08-15): ✅ **ZATEN MEVCUTTU** (kod gerçeği — ⏳ yanlıştı). Mentör+menti havuz tablosunda "Durum" sütunu `APPROVAL_META` ile Onaylı/Bekliyor/Reddedildi gösteriyor (`mentor-havuzu/page.tsx`, `menti-havuzu/page.tsx`); admin-only. Yeniden yapılmadı, teyit edildi.
+11. **Sertifika rozeti (KARAR 4)** — "Sertifikalı ✓", herkes görür.
+    > ⚠️ GÜNCELLEME (2026-08-15): ✅ **TAMAMLANDI, CANLIDA (backend #40 + çatı #77).** **KİŞİ-GENELİ** — kişi herhangi bir kurumda sertifikalıysa mentör havuzunda "✓ Sertifikalı"; `TenantMembership.isCertified` `some()` ile türetilir (`UserProfile.isCertified` bakımsız → kullanılmadı; migration gerekmedi).
 12. **DISC baskın+ikincil HARF "DI" (KARAR 11 · =md.4)** — havuzda tek harf; ikincil harf türetme/gösterim yok. Türetilmiş **harf** (yüzde değil) PII-güvenli; KARAR 5 düzeltmesiyle uyumlu uygulanmalı.
 13. **Soru cevap-tipi seçimi (md.10)** — soru formunda şıklı/açık-uçlu seçimi. *(⚠️ kapsam belirsiz — aşağıda teyit.)*
+
+## v1-D · ★ 2026-08-15 KEŞİF TESPİTLERİ (yeni — PO önceliklendirir)
+> Kaynak: `docs/raporlar/degerlendirme-test-soru-envanteri-2026-08-15.md` + `icerik/` + `eksikler-derinlestirilmis-2026-08-15.md`.
+29. **İş 2+3 migration — ONAYLI, bekliyor (ayrı migration turu)** — "kim onayladı/reddetti" izi (approvedBy/At, rejectedBy/At) + red gerekçesi (rejectionReason). **5 nullable additive alan** (User), veri kaybı yok. PO onayladı → ayrı, kontrollü migration turu (canlı=lokal Neon; `IF NOT EXISTS` + `migrate resolve`, `db push` yasak). Sonra İş 2 (imza + FE) → İş 3 P1/P2/P3 (gerekçe alanı → kullanıcı görür → REJECTED→PENDING tekrar-başvuru).
+30. **⚠️ Sertifika bankası canlıda eksik (5 vs 20)** — kodda 20 senaryo (`seed-certification.ts`), canlıda yalnız 5 soru (salt-okuma sayımı). Zengin banka seed edilmemiş → `seedCertification()` kontrollü çalıştırma. **Canlı DB yazımı → PO onayı ZORUNLU** (tehlikeli tam `seed.ts` değil; bu fonksiyon idempotent/silmez ama canlıda çalışır).
+31. **DISC-tipine-özel "mentiye yaklaşım" içeriği YOK (en büyük içerik boşluğu)** — hiçbir testte mentinin DISC tipine göre uyarlanan yaklaşım içeriği yok. 3 seçenek (eksikler raporu): (1) statik yaklaşım kılavuzu (M, önerilen) · (2) SJT'yi menti-DISC koşullu genişletme (L, migration) · (3) sertifikaya tip-özel varyant (L, önerilmez). Kısmen v2 #20 (KARAR 9) ile ilişkili — PO netleştirir.
+32. **Admin soru düzenleme UI (S)** — backend PATCH hazır (`questionController.ts`), FE'de düzenle butonu yok → salt-frontend, hızlı kazanç.
+33. **Çift DISC seed temizliği + SJT belge-kod çelişkisi (S)** — `seed.ts` (32 soru) ile `seed-questions.ts` (20, canlıda olan) çelişiyor → tek kaynağa indir. Ayrıca `03-psikometri` "4 pedagojik SJT" der, kodda 3 var → SJT genişlet ya da belgeyi düzelt.
+34. **Öğrenme yolculuğu tamamlanma görünürlüğü (S)** — yönetici kimin tamamladığını göremiyor (`learningJourneyCompletedAt` admin select'te yok); retention için faydalı.
 
 ---
 
