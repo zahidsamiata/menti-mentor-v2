@@ -1,6 +1,9 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-14 (oturum kapanışı: bu oturumun 5 belge PR'ı
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-15 (KARAR 5 DISC güvenlik açığı düzeltildi ve
+CANLIYA merge edildi: backend #37 + çatı #71 MERGED, submodule pointer senkron, iki repo main CI yeşil → **v1 #1
+tamamlandı**; sıradaki v1 adayı havuz kart işi KARAR 2/7).
+Önceki: 2026-08-14 (oturum kapanışı: bu oturumun 5 belge PR'ı
 [#65 belge temizliği · #66 devir · #67 karar-statü haritası · #68 durum panosu · #69 v1/v2 yol haritası] MERGED →
 **açık PR: 0, masa temiz**; IDOR çelişkisi kod keşfiyle çözüldü — kapanış özeti: `docs/devir/07-oturum-2026-08-14.md`).
 Önceki: 2026-08-11 (oturum belgeleri merge oldu → "açık PR" bloğu gerçek merge durumuna çekildi).
@@ -16,12 +19,49 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   Gmail App Password kaldırıldı, `emailService.ts`). Forgot/reset-password akışı tam.
 - **DB:** Canlı = lokal aynı Neon (`ep-fancy-tooth-ab4u5xhr`). DISC soruları (20) + öğrenme aşamaları (13) yüklü.
 - **Backend main HEAD:** `afc2769` · çatı main HEAD `e817a2d` (#69) · submodule pointer = `afc2769` (senkron, doğrulandı).
+  > ⚠️ GÜNCELLEME (2026-08-15): KARAR 5 merge sonrası → **backend main HEAD `0850eaa`** (#37) · **çatı main HEAD `4c48a8e`** (#71)
+  > · **submodule pointer = `0850eaa` (backend main HEAD ile TAM SENKRON, `git submodule status` + `ls-tree` ile doğrulandı)**.
+  > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): 4 kod PR merge sonrası → **backend main HEAD `379658a`** (#38+#39) · **çatı main HEAD `c3e4626`** (#73+#74) · **submodule pointer = `379658a` (backend main HEAD ile TAM SENKRON, `ls-tree` == `rev-parse` doğrulandı)**.
 - **Açık PR:** çatı **0** · backend **0** — **masa temiz** (2026-08-14: bu oturumun 5 belge PR'ı #65–#69 sırayla MERGED).
   > ⚠️ GÜNCELLEME (2026-08-14): bu satır #65–#69 açıkken "çatı #65 (merge PO'da)" diyordu; 5 PR merge olunca gerçeğe (açık PR 0) çekildi (Belge Düzeltme Deseni / Kural 6).
   > ⚠️ GÜNCELLEME (2026-08-15): artık **açık PR: backend #37 + çatı #71** — KARAR 5 DISC güvenlik düzeltmesi, **merge PO'da** (bkz. "🟡 GÜVENLİK" bölümü).
+  > ⚠️ GÜNCELLEME (2026-08-15, aynı gün geç): #37 + #71 **MERGED, canlıda** → **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ GÜVENLİK" bölümü).
+  > ⚠️ GÜNCELLEME (2026-08-15, v1 turu): yeni v1 işleri açıldı → **açık PR: bu docs (#72) · KVKK backend #38 + çatı #73 · havuz-kart backend #39 + çatı #74** — hepsi **merge PO'da** (bkz. "🚧 BU OTURUM — v1 İŞLERİ" bölümü). İki repo tüm CI yeşil.
+  > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): **4 kod PR sırayla MERGED, canlıda** (#38→#73→#39→#74, `--merge`). **Açık PR yalnız bu docs (#72)** — kod PR: çatı 0 · backend 0. #74'te submodule pointer çakışması backend main HEAD'e bump ile çözüldü. İki repo main CI yeşil.
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
 
-## 🟡 GÜVENLİK — CANLI ÖNCESİ AÇIK → DÜZELTME PR AÇIK (merge PO'da)
+## ✅ BU OTURUM — v1 İŞLERİ MERGED, CANLIDA (2026-08-15)
+> ⚠️ GÜNCELLEME (2026-08-15, merge turu): **4 kod PR sırayla MERGED, canlıya deploy oldu** (#38→#73→#39→#74, `--merge`).
+> Submodule TAM SENKRON (`379658a`). İki repo main CI yeşil. Regresyon testleri (oauth-kvkk-consent, mentor-matches, disc-visibility)
+> CI Integration suite'te geçiyor. Açık PR yalnız bu docs (#72). **Aşağıdaki maddeler artık "tamamlandı" — merge oldu.**
+> ---
+> ⚠️ GÜNCELLEME (2026-08-15): KARAR 5 sonrası v1 işleri kodlandı. **Hepsi PR açık, merge PO'da** (henüz merge YOK →
+> "tamamlandı" denmez). İki repo tüm CI yeşil (backend entegrasyon suite CI'da geçiyor). Merge sırası PO'da (aşağıda öneri).
+
+- **KVKK v1-A (backend #38 + çatı #73):**
+  - **K2 — `kvkkConsentAt` ispat yükü:** OAuth `handleNewUser` + self-serve kurucu admin `create` `new Date()` set eder
+    (önceden NULL). `oauthService.ts` + `selfServeController.ts`. Test: `oauth-kvkk-consent.test.ts`.
+  - **K5 — sunucu konumu/yurt dışı aktarım beyanı:** `kvkk/page.tsx` "8. Sunucu Konumu ve Yurt Dışı Aktarım" (İrlanda/AB, KVKK Md.9).
+  - **K4 — 18+ beyanı:** **PO kararı: AYRI kutu DEĞİL** → tek KVKK onay kutusunun metnine gömüldü ("...ve 18 yaşından
+    büyük olduğumu beyan ederim"). Ayrı `ageConsent` alanı (ilk denemede eklenmişti) **geri alındı**. DB'ye yaş yazılmaz (şema yok).
+- **Havuz kart / menti→mentör uyum skoru (backend #39 + çatı #74) — v1-C kısmi:**
+  - **GÜVENLİ YOL:** mevcut skorlama motoru (`computeTotalScore`) **ters yönde** okundu — `rankMentorsForMenti` (yeni
+    salt-okuma yolu). **Canlı eşleştirme (`rankMentisForMentor`) DEĞİŞMEDİ.** Yeni endpoint `GET /mentis/:mentiId/mentor-matches`
+    (IDOR: `requireSelfOrAdmin`).
+  - **KARAR 5 güvenlik:** menti response'unda mentörün `discType`/`discScore` YOK; `compatibilityReason` jenerik (harf sızmaz).
+    Menti yalnız **%uyum skoru + jenerik gerekçe** görür. Test: `mentor-matches.test.ts` (discType YOK + harf sızmaz + IDOR 403).
+  - **FE:** `menti/page.tsx` mentör havuzu satır-listesi → **KART** (skor + neden uyumlu). `MentorMatch` tipi (discType yok).
+  - **⚠️ KALAN v1-C (bu turda YOK — follow-up):** (1) **mentör→menti aday kartı** DISC+gerekçeli (RankedMenti'ye menti
+    `discType` eklenmeli — KARAR 5 mentör→menti'ye izin verir → backend+çatı turu) · (2) **yönetici havuz kartları**
+    (tablo→kart + durum rozeti KARAR 3 + sertifika rozeti KARAR 4, `tenantMembership.isCertified` DTO'ya) · (3) **sol menü
+    4-grup** (KARAR 1). Bunlar `10-yol-haritasi.md` md.7/8/10/11'de.
+
+## ✅ GÜVENLİK — KARAR 5 DÜZELTİLDİ, CANLIDA (backend #37 + çatı #71 MERGED)
+> ⚠️ GÜNCELLEME (2026-08-15, merge turu): açık **KAPANDI, canlıda**. Backend **#37** (`0850eaa`) + çatı **#71** (`4c48a8e`)
+> `--merge` ile MERGED; submodule pointer `0850eaa` backend main HEAD ile **tam senkron**; iki repo main CI yeşil; autodeploy
+> ile canlıya çıktı. Regresyon testi `disc-visibility.test.ts` CI'da (Integration suite) geçiyor → açığın geri gelmesi guard'lı.
+> **v1 #1 canlı-öncesi ŞART karşılandı.** Havuz kart işi (KARAR 2/7) ön-koşulu artık karşılandı → yapılabilir (sıradaki aday).
+> ---
 > ⚠️ GÜNCELLEME (2026-08-15): bu açık **kod düzeltmesiyle kapatıldı**, PR açık, **merge PO'da** (henüz merge YOK →
 > "tamamlandı" denmez). Backend **PR #37** (`menti-mentor`) + çatı **PR #71** (`menti-mentor-v2`: FE gizleme + submodule pointer + bu docs).
 > Fix: merkezi `services/discVisibility.ts` → `canViewerSeeDiscType(viewer,target)` (ADMIN hepsi · MENTOR→MENTI görür ·
@@ -40,6 +80,7 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 - `10-yol-haritasi.md` gerçekle hizalandı + v1/v2 etiketlendi (kaynak: `00-karar-statu-haritasi-2026-08-14`). Biten işler
   (F1 foto upload / F2 platform drill-down / F7 KPI drill-down) düşürüldü; tasarım kararları (KARAR 1/3/4/11) eklendi.
   **v1 #1 = KARAR 5 güvenlik.** Sıradaki: v1 işlerini tek tek kodlama turları.
+  > ⚠️ GÜNCELLEME (2026-08-15): **v1 #1 (KARAR 5) ✅ tamamlandı, canlıda** (#37+#71). Sıradaki v1 adayı: **havuz KART görünümü + "Neden uyumlu" L1 (KARAR 2/7)** — DISC güvenliği kapandığı için ön-koşul karşılandı, artık yapılabilir.
 
 ## ✅ CANLIDA / KAPANMIŞ (kod main'de)
 - **CHAT v1 — TAM CANLIDA.** menti↔mentör mesajlaşma: inbox/thread + `MessagesBell` (45sn polling) +
