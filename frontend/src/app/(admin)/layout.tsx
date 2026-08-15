@@ -8,7 +8,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { LogOut } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
@@ -16,27 +16,45 @@ import { TenantLogo } from '@/components/atoms/TenantLogo';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { cn } from '@/lib/utils';
 
-// Ana sekmeler — kulüp başkanının her girişte kullandığı işlevler
-const PRIMARY_NAV = [
-  { href: '/admin/approvals',  label: 'Onay',   icon: '👤' },
-  { href: '/admin/invite',     label: 'Davet',  icon: '📨' },
-  { href: '/admin/kpi',        label: 'Program', icon: '📊' },
-] as const;
-
-// Gelişmiş — nadir kullanılan, varsayılan olarak daraltılmış
-const ADVANCED_NAV = [
-  { href: '/admin/mentor-havuzu',   label: 'Mentör Havuzu',   icon: '👥' },
-  { href: '/admin/menti-havuzu',    label: 'Menti Havuzu',    icon: '👫' },
-  { href: '/admin/eslesmeler',      label: 'Eşleşmeler',      icon: '🔗' },
-  { href: '/admin/sertifika-sonuclari', label: 'Sertifika Sonuç', icon: '📜' },
-  { href: '/admin/branding',        label: 'Marka',           icon: '🎨' },
-  { href: '/admin/waiting-room',    label: 'Bekleme Odası',   icon: '⏳' },
-  { href: '/admin/managers',        label: 'Yöneticiler',     icon: '🛡️' },
-  { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
-  { href: '/admin/questions',        label: 'Soru Yönetimi',      icon: '❓' },
-  { href: '/admin/tags',             label: 'Etiket Yönetimi',    icon: '🏷️' },
-  { href: '/admin/certification',    label: 'Sertifika Konuları', icon: '🎓' },
-  { href: '/admin/learning-journey', label: 'Öğrenme Yolculuğu',  icon: '🚀' },
+// Sol menü — KARAR 1: 4 mantıksal grup, sıklığa göre sıralı.
+// Kaynak: docs/kararlar/tasarim-kararlari-admin-2026-08-11.md (KARAR 1).
+// Tüm öğeler ADMIN'e görünür (rol gating layout seviyesinde; öğe-bazlı gizleme yok).
+const NAV_GROUPS = [
+  {
+    title: 'Günlük İşler',
+    items: [
+      { href: '/admin/approvals',    label: 'Onay',          icon: '👤' },
+      { href: '/admin/invite',       label: 'Davet',         icon: '📨' },
+      { href: '/admin/waiting-room', label: 'Bekleme Odası', icon: '⏳' },
+      { href: '/admin/eslesmeler',   label: 'Eşleşmeler',    icon: '🔗' },
+    ],
+  },
+  {
+    title: 'İnsanlar',
+    items: [
+      { href: '/admin/mentor-havuzu', label: 'Mentör Havuzu', icon: '👥' },
+      { href: '/admin/menti-havuzu',  label: 'Menti Havuzu',  icon: '👫' },
+      { href: '/admin/managers',      label: 'Yöneticiler',   icon: '🛡️' },
+    ],
+  },
+  {
+    title: 'Program & İçerik',
+    items: [
+      { href: '/admin/kpi',                 label: 'Program',            icon: '📊' },
+      { href: '/admin/questions',           label: 'Soru Yönetimi',      icon: '❓' },
+      { href: '/admin/certification',       label: 'Sertifika Konuları', icon: '🎓' },
+      { href: '/admin/sertifika-sonuclari', label: 'Sertifika Sonuç',    icon: '📜' },
+      { href: '/admin/learning-journey',    label: 'Öğrenme Yolculuğu',  icon: '🚀' },
+    ],
+  },
+  {
+    title: 'Ayarlar & Kurulum',
+    items: [
+      { href: '/admin/branding',        label: 'Marka',           icon: '🎨' },
+      { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
+      { href: '/admin/tags',            label: 'Etiket Yönetimi', icon: '🏷️' },
+    ],
+  },
 ] as const;
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
@@ -49,9 +67,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     await logout();
     router.replace('/login');
   }
-  const [advancedOpen, setAdvancedOpen] = useState(
-    ADVANCED_NAV.some(({ href }) => pathname.startsWith(href)),
-  );
 
   // ADMIN olmayan kullanıcıyı yönlendir
   useEffect(() => {
@@ -78,54 +93,30 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
 
-        {/* Navigasyon */}
-        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-          {/* Ana sekmeler */}
-          {PRIMARY_NAV.map(({ href, label, icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors',
-                pathname.startsWith(href)
-                  ? 'bg-primary text-primary-foreground font-medium'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-              )}
-            >
-              <span>{icon}</span>
-              {label}
-            </Link>
+        {/* Navigasyon — KARAR 1: 4 mantıksal grup, her grup başlıklı */}
+        <nav className="flex-1 p-3 space-y-4 overflow-y-auto">
+          {NAV_GROUPS.map((group) => (
+            <div key={group.title} className="space-y-1">
+              <p className="px-3 pb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
+                {group.title}
+              </p>
+              {group.items.map(({ href, label, icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className={cn(
+                    'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors',
+                    pathname.startsWith(href)
+                      ? 'bg-primary text-primary-foreground font-medium'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+                  )}
+                >
+                  <span>{icon}</span>
+                  {label}
+                </Link>
+              ))}
+            </div>
           ))}
-
-          {/* Gelişmiş ayarlar — daraltılabilir */}
-          <div className="pt-2">
-            <button
-              onClick={() => setAdvancedOpen((v) => !v)}
-              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs text-muted-foreground hover:bg-muted transition-colors"
-            >
-              <span>Gelişmiş</span>
-              <span className="text-xs">{advancedOpen ? '▲' : '▼'}</span>
-            </button>
-            {advancedOpen && (
-              <div className="mt-1 space-y-1">
-                {ADVANCED_NAV.map(({ href, label, icon }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    className={cn(
-                      'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors',
-                      pathname.startsWith(href)
-                        ? 'bg-primary text-primary-foreground font-medium'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-                    )}
-                  >
-                    <span>{icon}</span>
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
         </nav>
 
         {/* Alt bilgi + çıkış */}
