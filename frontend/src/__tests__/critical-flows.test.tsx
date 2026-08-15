@@ -157,7 +157,7 @@ describe('KVKK Onay Zorunluluğu — Kayıt Formu (RegisterContent)', () => {
     fireEvent.click(screen.getByRole('button', { name: /hesabımı oluştur/i }));
 
     await waitFor(() => {
-      expect(screen.getByText('KVKK kapsamında veri işleme onayı zorunludur.')).toBeInTheDocument();
+      expect(screen.getByText('KVKK onayı ve 18+ beyanı zorunludur.')).toBeInTheDocument();
     });
     expect(authApi.register).not.toHaveBeenCalled();
   });

@@ -159,6 +159,7 @@ export default function RegisterContent() {
   const [password,  setPassword]  = useState('');
   const [confirm,   setConfirm]   = useState('');
   const [errors,    setErrors]    = useState<{ email?: string; password?: string; confirm?: string; kvkk?: string }>({});
+  // K4 (18+ beyanı) ayrı kutu değil — tek KVKK onayının metnine gömülü (PO kararı).
   const [kvkkConsent, setKvkkConsent] = useState(false);
   const [submitErr, setSubmitErr] = useState<string | null>(null);
   const [loading,   setLoading]   = useState(false);
@@ -192,7 +193,7 @@ export default function RegisterContent() {
       e.confirm = 'Şifreler eşleşmiyor.';
     }
     if (!kvkkConsent) {
-      e.kvkk = 'KVKK kapsamında veri işleme onayı zorunludur.';
+      e.kvkk = 'KVKK onayı ve 18+ beyanı zorunludur.';
     }
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -410,7 +411,8 @@ export default function RegisterContent() {
                 <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
                   Kişisel Verilerin Korunması Kanunu (KVKK)
                 </a>
-                {' '}kapsamında verilerimin işlenmesine açık rıza veriyorum. (Zorunlu)
+                {' '}kapsamında verilerimin işlenmesine açık rıza veriyor ve 18 yaşından büyük
+                olduğumu beyan ediyorum. (Zorunlu)
               </span>
             </label>
             {errors.kvkk && (
