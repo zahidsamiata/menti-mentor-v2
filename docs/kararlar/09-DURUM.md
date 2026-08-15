@@ -28,6 +28,7 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > ⚠️ GÜNCELLEME (2026-08-15, aynı gün geç): #37 + #71 **MERGED, canlıda** → **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ GÜVENLİK" bölümü).
   > ⚠️ GÜNCELLEME (2026-08-15, v1 turu): yeni v1 işleri açıldı → **açık PR: bu docs (#72) · KVKK backend #38 + çatı #73 · havuz-kart backend #39 + çatı #74** — hepsi **merge PO'da** (bkz. "🚧 BU OTURUM — v1 İŞLERİ" bölümü). İki repo tüm CI yeşil.
   > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): **4 kod PR sırayla MERGED, canlıda** (#38→#73→#39→#74, `--merge`). **Açık PR yalnız bu docs (#72)** — kod PR: çatı 0 · backend 0. #74'te submodule pointer çakışması backend main HEAD'e bump ile çözüldü. İki repo main CI yeşil.
+  > ⚠️ GÜNCELLEME (2026-08-15, devir turu): #72 de **MERGED** (çatı main HEAD `cafd68c`) → açık PR gerçekte **çatı 0 · backend 0** (git + `gh pr list` kanıtlı). Yukarıdaki "docs (#72) açık" ifadesi **eskimiştir.** Oturum kapanışı: `docs/devir/08-oturum-2026-08-15.md`.
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
 
 ## ✅ BU OTURUM — v1 İŞLERİ MERGED, CANLIDA (2026-08-15)
