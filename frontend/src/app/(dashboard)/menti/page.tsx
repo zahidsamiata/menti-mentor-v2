@@ -20,7 +20,7 @@ import { agreementsApi } from '@/lib/api/agreements';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
-import type { MentorListItem } from '@/types/matching';
+import type { MentorMatch } from '@/types/matching';
 
 export default function MentiDashboardPage() {
   const { user, isLoading } = useAuth();
@@ -46,11 +46,12 @@ export default function MentiDashboardPage() {
     { enabled: isApproved && !needsOrientation },
   );
 
-  // ONAYLANMIŞ: tam mentor listesi (PII dahil)
+  // ONAYLANMIŞ: uyum skorlu mentör kartları (KARAR 5 güvenli — discType dönmez).
+  // Menti kendi id'siyle "bana uygun mentörler"i uyum yüzdesiyle görür.
   const { data: mentorsData, isLoading: mentorsLoading } = useQuery(
-    () => matchingApi.listMentors(api),
-    [api],
-    { enabled: isApproved && !needsDiscTest },
+    () => matchingApi.mentorMatches(api, user?.id ?? ''),
+    [api, user?.id],
+    { enabled: isApproved && !needsDiscTest && !!user?.id },
   );
 
   // PENDING + DISC tamamsa: PII-free sayım (KVKK — mentor isimleri tarayıcıya gönderilmez)
@@ -61,7 +62,7 @@ export default function MentiDashboardPage() {
   );
 
   // Talep modalı state
-  const [selectedMentor, setSelectedMentor] = useState<MentorListItem | null>(null);
+  const [selectedMentor, setSelectedMentor] = useState<MentorMatch | null>(null);
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
@@ -74,7 +75,7 @@ export default function MentiDashboardPage() {
     if (selectedMentor) { el.showModal(); } else { el.close(); }
   }, [selectedMentor]);
 
-  function openModal(mentor: MentorListItem) {
+  function openModal(mentor: MentorMatch) {
     setMessage('');
     setSendError(null);
     setSelectedMentor(mentor);
@@ -92,12 +93,12 @@ export default function MentiDashboardPage() {
     setSending(true);
     setSendError(null);
     const result = await conversationsApi.start(api, {
-      mentorUserId: selectedMentor.id,
+      mentorUserId: selectedMentor.mentorId,
       message: body,
     });
     setSending(false);
     if (result.ok) {
-      setSentIds((prev) => new Set(prev).add(selectedMentor.id));
+      setSentIds((prev) => new Set(prev).add(selectedMentor.mentorId));
       closeModal();
       router.push(`/messages/${result.data.conversation.id}`);
     } else {
@@ -244,41 +245,56 @@ export default function MentiDashboardPage() {
               </Button>
             </div>
           ) : (
-            <div className="divide-y divide-border">
+            // Havuz KART görünümü (KARAR 2/7): uyum skoru (yüzde) + "neden uyumlu" L1.
+            // KARAR 5: menti mentörün DISC tipini GÖRMEZ — kart yalnız skor + jenerik
+            // gerekçe + sektör gösterir; backend discType göndermez (ek savunma katmanı).
+            <div className="grid gap-3 sm:grid-cols-2">
               {mentorsData.items.map((mentor) => (
-                <div key={mentor.id} className="flex items-center justify-between py-3">
-                  <div className="flex items-center gap-3">
-                    <UserAvatar src={mentor.avatarUrl} name={mentor.fullName} size={36} />
-                    <div>
-                      <p className="text-sm font-medium">{mentor.fullName}</p>
-                      {/* KARAR 5: menti mentörün DISC tipini GÖRMEZ — kartta yalnızca sektör
-                          gösterilir. Backend zaten discType göndermiyor; bu ek savunma katmanı. */}
-                      <div className="flex items-center gap-1.5 mt-0.5">
-                        <p className="text-xs text-muted-foreground">
+                <div
+                  key={mentor.mentorId}
+                  className="rounded-xl border border-border bg-card p-4 flex flex-col gap-3"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <UserAvatar src={mentor.mentorAvatarUrl} name={mentor.mentorName} size={40} />
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium truncate">{mentor.mentorName}</p>
+                        <p className="text-xs text-muted-foreground truncate">
                           {mentor.sectorTags.length > 0
                             ? mentor.sectorTags.slice(0, 3).join(', ')
                             : 'Sektör belirtilmemiş'}
                         </p>
                       </div>
                     </div>
+                    {/* Uyum skoru — yüzde. DISC gerekçesi gösterilmez (KARAR 5). */}
+                    <div className="shrink-0 text-right">
+                      <span className="text-lg font-bold text-primary tabular-nums">%{mentor.matchScore}</span>
+                      <p className="text-[10px] text-muted-foreground leading-none">uyum</p>
+                    </div>
                   </div>
-                  <div className="flex gap-2">
+
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium text-foreground">Neden uyumlu: </span>
+                    {mentor.compatibilityReason}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => router.push(`/book-meeting?mentorId=${mentor.id}`)}
+                      onClick={() => router.push(`/book-meeting?mentorId=${mentor.mentorId}`)}
                     >
                       Randevu Al
                     </Button>
                     <Button
                       size="sm"
-                      variant={sentIds.has(mentor.id) ? 'secondary' : 'default'}
-                      disabled={sentIds.has(mentor.id)}
-                      onClick={() => !sentIds.has(mentor.id) && openModal(mentor)}
+                      variant={sentIds.has(mentor.mentorId) ? 'secondary' : 'default'}
+                      disabled={sentIds.has(mentor.mentorId)}
+                      onClick={() => !sentIds.has(mentor.mentorId) && openModal(mentor)}
                     >
-                      {sentIds.has(mentor.id) ? 'Gönderildi ✓' : 'Mesaj'}
+                      {sentIds.has(mentor.mentorId) ? 'Gönderildi ✓' : 'Mesaj'}
                     </Button>
-                    <ReportUserButton targetUserId={mentor.id} targetName={mentor.fullName} />
+                    <ReportUserButton targetUserId={mentor.mentorId} targetName={mentor.mentorName} />
                   </div>
                 </div>
               ))}
@@ -296,7 +312,7 @@ export default function MentiDashboardPage() {
         {selectedMentor && (
           <>
             <h2 className="text-lg font-semibold">
-              {selectedMentor.fullName} · Mesaj Gönder
+              {selectedMentor.mentorName} · Mesaj Gönder
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
               Kendinizi kısaca tanıtın ve neden eşleşmek istediğinizi yazın. Bu ilk mesajla konuşma başlar.

@@ -2,6 +2,7 @@ import type { ApiResult } from '@/types/api';
 import type { RequestOptions } from './client';
 import type {
   MentorsListResponse,
+  MentorMatchesResponse,
   RankedMentisResponse,
   MatchRequest,
   CreateMatchRequestPayload,
@@ -16,6 +17,11 @@ export const matchingApi = {
   // boyutu (100) istenir. 100+ mentörlü tenant'ta gerçek sayfalama/arama UX'i gerekir (follow-up).
   listMentors: (api: BoundClient): Promise<ApiResult<MentorsListResponse>> =>
     api<MentorsListResponse>('/api/users?role=MENTOR&isActive=true&pageSize=100'),
+
+  // Menti için: kendisine uygun mentörleri UYUM SKORUYLA getir (KARAR 5 güvenli — discType yok).
+  // IDOR: backend requireSelfOrAdmin ile korur; mentiId kendi id'si olmalı.
+  mentorMatches: (api: BoundClient, mentiId: string): Promise<ApiResult<MentorMatchesResponse>> =>
+    api<MentorMatchesResponse>(`/api/mentis/${mentiId}/mentor-matches?limit=100`),
 
   // PENDING menti için: PII içermeyen mentor sayısı (KVKK — isim/e-posta gönderilmez)
   countMentors: (api: BoundClient): Promise<ApiResult<{ count: number }>> =>
