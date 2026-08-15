@@ -4,7 +4,9 @@ export interface MentorListItem {
   id: string;
   fullName: string;
   email: string;
-  discType: DiscType | null;
+  // KARAR 5: menti→mentör bakışında backend discType'ı response'a HİÇ koymaz → alan gelmez.
+  // Bu yüzden opsiyonel; menti bağlamında UI zaten DISC göstermez (savunma-derinliği).
+  discType?: DiscType | null;
   sectorTags: string[];
   skills: string[];
   bioSummary: string | null;
