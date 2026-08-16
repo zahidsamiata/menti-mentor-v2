@@ -104,7 +104,7 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
             <div className="rounded-2xl border border-border bg-muted/40 p-4">
               <h2 className="text-base font-semibold">Başvurunuz hakkında</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Başvurunuzu tamamlamak için birkaç güncelleme gerekiyor. Aşağıdaki notu inceleyip tekrar başvurabilirsiniz —
+                Başvurunuz şu an onaylanmadı. Aşağıdaki notu inceleyebilir, dilerseniz tekrar başvurabilirsiniz —
                 daha önce doldurduğunuz test ve profil bilgileriniz korunur.
               </p>
               {rejected.reason && (
