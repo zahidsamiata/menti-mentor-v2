@@ -63,8 +63,12 @@ export const adminApi = {
   approveUser: (api: BoundClient, userId: string): Promise<ApiResult<ApproveUserResponse>> =>
     api<ApproveUserResponse>(`/api/admin/users/${userId}/approve`, { method: 'POST' }),
 
-  rejectUser: (api: BoundClient, userId: string): Promise<ApiResult<RejectUserResponse>> =>
-    api<RejectUserResponse>(`/api/admin/users/${userId}/reject`, { method: 'POST' }),
+  // İş 3 P1: opsiyonel red gerekçesi (≤500; kullanıcıya gösterilebilir → PII yazılmamalı).
+  rejectUser: (api: BoundClient, userId: string, reason?: string): Promise<ApiResult<RejectUserResponse>> =>
+    api<RejectUserResponse>(`/api/admin/users/${userId}/reject`, {
+      method: 'POST',
+      ...(reason && reason.trim().length > 0 ? { body: { reason: reason.trim() } } : {}),
+    }),
 
   requestCorrection: (api: BoundClient, userId: string, feedbackNote: string): Promise<ApiResult<CorrectionResponse>> =>
     api<CorrectionResponse>(`/api/admin/users/${userId}/request-correction`, {

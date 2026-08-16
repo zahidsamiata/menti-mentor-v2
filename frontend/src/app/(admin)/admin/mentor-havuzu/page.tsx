@@ -140,11 +140,33 @@ export default function MentorHavuzuPage() {
                         )}
                       </td>
 
-                      {/* Durum */}
+                      {/* Durum + onay/red izi (İş 2) + red gerekçesi (İş 3) — yalnız admin */}
                       <td className="px-4 py-3">
                         <Badge variant={approval.variant} className="text-xs">
                           {approval.label}
                         </Badge>
+                        {user.approvalStatus === 'APPROVED' && user.approvedAt && (
+                          <p className="mt-1 text-[11px] text-muted-foreground">
+                            Onay: {new Date(user.approvedAt).toLocaleDateString('tr-TR')}
+                          </p>
+                        )}
+                        {user.approvalStatus === 'REJECTED' && (
+                          <>
+                            {user.rejectedAt && (
+                              <p className="mt-1 text-[11px] text-muted-foreground">
+                                Red: {new Date(user.rejectedAt).toLocaleDateString('tr-TR')}
+                              </p>
+                            )}
+                            {user.rejectionReason && (
+                              <p
+                                className="mt-0.5 text-[11px] italic text-muted-foreground max-w-[180px] truncate"
+                                title={user.rejectionReason}
+                              >
+                                “{user.rejectionReason}”
+                              </p>
+                            )}
+                          </>
+                        )}
                       </td>
 
                       {/* Sertifika — KARAR 4: yalnız pozitif rozet, sertifikasızda etiket yok */}
