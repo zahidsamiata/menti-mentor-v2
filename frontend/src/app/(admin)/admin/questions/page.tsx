@@ -29,6 +29,12 @@ export default function QuestionsPage() {
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<Question | null>(null);
 
+  // Kuruma özel soru düzenleme — yalnız metin (backend PATCH yalnız text/order/isRequired/isActive kabul eder,
+  // discDimension/type yapısaldır ve değiştirilmez). Aynı anda tek soru düzenlenir.
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editText, setEditText] = useState('');
+  const [savingEdit, setSavingEdit] = useState(false);
+
   // Yeni soru formu
   const [showAddForm, setShowAddForm] = useState(false);
   const [newText, setNewText] = useState('');
@@ -54,6 +60,32 @@ export default function QuestionsPage() {
     setLoadingId(null);
     if (result.ok) refetch();
     else setActionError((result as { ok: false; error: { message?: string } }).error.message ?? 'Hata');
+  }
+
+  function startEdit(q: Question) {
+    setActionError(null);
+    setEditingId(q.id);
+    setEditText(q.text);
+  }
+
+  function cancelEdit() {
+    setEditingId(null);
+    setEditText('');
+  }
+
+  async function handleUpdate(q: Question) {
+    const trimmed = editText.trim();
+    if (!trimmed || trimmed === q.text) { cancelEdit(); return; }
+    setSavingEdit(true);
+    setActionError(null);
+    const result = await questionsApi.update(api, q.id, { text: trimmed });
+    setSavingEdit(false);
+    if (result.ok) {
+      cancelEdit();
+      refetch();
+    } else {
+      setActionError((result as { ok: false; error: { message?: string } }).error.message ?? 'Hata');
+    }
   }
 
   async function handleAdd() {
@@ -183,23 +215,60 @@ export default function QuestionsPage() {
               <CardContent className="divide-y divide-border">
                 {tenantQuestions.map((q) => (
                   <div key={q.id} className="flex items-start justify-between gap-3 py-3">
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm">{q.text}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className={`text-xs font-bold ${DISC_COLORS[q.discDimension]}`}>{q.discDimension}</span>
-                        <Badge variant="secondary" className="text-xs">{TYPE_LABELS[q.type] ?? q.type}</Badge>
-                        <Badge variant="brand" className="text-xs">Özel</Badge>
+                    {editingId === q.id ? (
+                      <div className="flex-1 min-w-0 space-y-2">
+                        <textarea
+                          className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
+                          rows={3}
+                          value={editText}
+                          onChange={(e) => setEditText(e.target.value)}
+                          autoFocus
+                        />
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size="sm"
+                            onClick={() => handleUpdate(q)}
+                            disabled={savingEdit || !editText.trim() || editText.trim() === q.text}
+                          >
+                            {savingEdit ? 'Kaydediliyor…' : 'Kaydet'}
+                          </Button>
+                          <Button size="sm" variant="outline" onClick={cancelEdit} disabled={savingEdit}>
+                            Vazgeç
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="shrink-0 text-xs text-destructive border-destructive/40"
-                      disabled={loadingId === q.id}
-                      onClick={() => setConfirmDelete(q)}
-                    >
-                      Sil
-                    </Button>
+                    ) : (
+                      <>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm">{q.text}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className={`text-xs font-bold ${DISC_COLORS[q.discDimension]}`}>{q.discDimension}</span>
+                            <Badge variant="secondary" className="text-xs">{TYPE_LABELS[q.type] ?? q.type}</Badge>
+                            <Badge variant="brand" className="text-xs">Özel</Badge>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-xs"
+                            disabled={loadingId === q.id || editingId !== null}
+                            onClick={() => startEdit(q)}
+                          >
+                            Düzenle
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-xs text-destructive border-destructive/40"
+                            disabled={loadingId === q.id || editingId !== null}
+                            onClick={() => setConfirmDelete(q)}
+                          >
+                            Sil
+                          </Button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 ))}
               </CardContent>
