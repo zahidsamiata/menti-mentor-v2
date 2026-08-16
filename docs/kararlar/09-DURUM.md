@@ -26,6 +26,7 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): 4 kod PR merge sonrası → **backend main HEAD `379658a`** (#38+#39) · **çatı main HEAD `c3e4626`** (#73+#74) · **submodule pointer = `379658a` (backend main HEAD ile TAM SENKRON, `ls-tree` == `rev-parse` doğrulandı)**.
   > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): masa temizliği merge'i sonrası → **çatı main HEAD `444c025`** (#77) · **backend main HEAD `5eafbbd`** (#40) · **submodule pointer = `5eafbbd` (backend main HEAD ile TAM SENKRON, `git submodule status` doğrulandı)**. Merge sırası: #78→#79→#76→#40→#77 (#77 pointer'ı #40 merge commit'ine bump edildi). İki repo her adımda main CI yeşil.
   > ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): onay/red izi + gerekçe merge sonrası → **çatı main HEAD `b66e07c`** (#82) · **backend main HEAD `ed84806`** (#41) · **submodule pointer = `ed84806` (senkron)**. Merge sırası: #41→#81 (pointer bump)→#82. **Migration canlıya uygulandı** (User'a 5 nullable kolon).
+  > ⚠️ GÜNCELLEME (2026-08-16, yönetici-adı + İş 3 P2/P3): #42+#83 (yönetici-adı) → #84 (docs) → #43+#85 (İş 3 P2/P3) MERGED. Son: **çatı main HEAD `513ba84`** · **backend main HEAD `a9fc0bf`** · **submodule pointer = `a9fc0bf` (senkron)**. Açık PR 0/0.
 - **Açık PR:** çatı **0** · backend **0** — **masa temiz** (2026-08-14: bu oturumun 5 belge PR'ı #65–#69 sırayla MERGED).
   > ⚠️ GÜNCELLEME (2026-08-14): bu satır #65–#69 açıkken "çatı #65 (merge PO'da)" diyordu; 5 PR merge olunca gerçeğe (açık PR 0) çekildi (Belge Düzeltme Deseni / Kural 6).
   > ⚠️ GÜNCELLEME (2026-08-15): artık **açık PR: backend #37 + çatı #71** — KARAR 5 DISC güvenlik düzeltmesi, **merge PO'da** (bkz. "🟡 GÜVENLİK" bölümü).
@@ -36,6 +37,14 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): sonraki turlarda 5 PR daha açılıp merge edildi (#76 menü · #40+#77 rozet · #78 envanter · #79 içerik). Merge sonrası **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ MASA TEMİZLİĞİ" bölümü).
   > ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): #80 (docs) + #41+#81 (İş 2+P1 backend) + #82 (İş 2/3 FE) MERGED, canlıda. **Açık:** yönetici-adı gösterimi (backend #42 + çatı #83, CI yeşil, merge PO'da) + bu docs PR. Kod PR: onlar dışında 0. (bkz. "✅ İŞ 2 + İŞ 3 P1" bölümü.)
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
+
+## ✅ İŞ 3 P2/P3 — REDDEDİLEN KULLANICI AKIŞI, CANLIDA (2026-08-16)
+> Çatı main `513ba84` · backend main `a9fc0bf` · submodule senkron · açık PR 0/0. Yaklaşım: **Yol 1** (token vermeden).
+- **P2 (gerekçe görme) — backend #43 + çatı #85, canlıda:** reddedilen kullanıcı doğru şifreyle giriş deneyince **token VERİLMEZ**; 403 yanıtında `rejectionReason` + `canReapply` döner; FE kibar red ekranı gösterir. **Enumeration-safe:** REJECTED kontrolü `bcrypt.compare`'den SONRA (yanlış şifre → generic 401, red bilgisi sızmaz). Token olmadığından reddedilen hiçbir korumalı sayfaya erişemez.
+- **P3 (tekrar başvuru) — canlıda:** `POST /api/auth/reapply` (public, rate-limit) — email+şifre doğrular (enumeration-safe), yalnız **kendi** hesabını (IDOR yok) `REJECTED→PENDING` yapar, `isActive=true`. **Red geçmişi KORUNUR** (`rejectionReason`/`rejectedBy`/`rejectedAt` silinmez — çok-yönetici). Test/DISC/profil verisine dokunulmaz.
+- **Kibar red e-postası:** destekleyici ton, "düzeltme" vaat etmez (Yol 1'de uygulama-içi düzeltme yok), "dilerseniz tekrar başvurabilirsiniz, verileriniz korunur". Best-effort.
+- **Testler:** enumeration (P2+reapply yanlış şifre generic), IDOR-durum (reapply yalnız REJECTED), geçiş + geçmiş koruma + test-verisi koruma. CI'da geçti.
+- **⚠️ KABUL EDİLEN SINIR (PO):** (1) **PENDING durumu login'de şifre-öncesi sızıyor** (mevcut, kapsam dışı) → ileride "giriş enumeration sertleştirme" ile ele alınacak (10-yol-haritasi). (2) **Uygulama-içi profil düzeltme YOK** (Yol 1); istenirse Yol 2 mimarisiyle ayrı iş.
 
 ## ✅ İŞ 2 + İŞ 3 P1 — ONAY/RED İZİ + GEREKÇE, CANLIDA (2026-08-16)
 > Çatı main `b66e07c` · backend main `ed84806` · açık PR: yönetici-adı (#42+#83, merge PO'da).
