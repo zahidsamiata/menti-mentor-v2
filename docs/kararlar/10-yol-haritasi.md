@@ -7,7 +7,8 @@
 >
 > **Son güncelleme:** 2026-08-15 (**5-PR masa temizliği merge'i, canlıda**: **#8 menü 4-grup ✅ (#76)** · **#11 sertifika rozeti ✅ kişi-geneli (#40+#77)** · **#10 durum rozeti ✅ zaten mevcuttu** (kod gerçeği düzeltmesi) · envanter/içerik raporları #78+#79.
 > Çatı main `444c025` · backend `5eafbbd` · açık PR 0/0. **v1-C kalan ~6 iş** (#5,6,7-follow-up,9,12,13). Yeni tespitler v1-D (#29-34) eklendi: İş 2+3 migration ONAYLI, sertifika 5→20, DISC-yaklaşım boşluğu vb.
-> Önceki: **v1 #1 = KARAR 5 DISC güvenlik ✅** — backend #37 + çatı #71 MERGED). Önceki: 2026-08-14 (**v1/v2
+> Önceki: **v1 #1 = KARAR 5 DISC güvenlik ✅** — backend #37 + çatı #71 MERGED).
+> **2026-08-16:** İş 2 + İş 3 (P1+P2+P3) tümü ✅ CANLIDA (#41-#43, #81-#85) — onay/red izi + gerekçe + yönetici-adı + reddedilen kullanıcı akışı. Yeni işler v1-E (#35-#37: iki tip red, aktif kullanıcı çıkarma, enumeration sertleştirme). Önceki: 2026-08-14 (**v1/v2
 > önceliklendirme** — kaynak: `00-karar-statu-haritasi-2026-08-14.md` + `00-DURUM-PANOSU.md` + KARAR 5 güvenlik denetimi.
 > Biten işler [F1/F2/F7] düşürüldü, tasarım kararları eklendi). Önceki: 2026-08-11 (F bölümü 7 madde).
 > **Statüler karar-statü haritasından gelir (dosya:satır kanıtlı).**
@@ -63,8 +64,20 @@
 
 ## v1-D · ★ 2026-08-15 KEŞİF TESPİTLERİ (yeni — PO önceliklendirir)
 > Kaynak: `docs/raporlar/degerlendirme-test-soru-envanteri-2026-08-15.md` + `icerik/` + `eksikler-derinlestirilmis-2026-08-15.md`.
-29. **İş 2 + İş 3 P1 — ✅ CANLIDA (2026-08-16)** — migration uygulandı (User'a 5 nullable alan); "kim onayladı/reddetti" izi + red gerekçesi kaydı (backend #41+#81), FE gösterimi (#82), yönetici-adı gösterimi (backend #42 + çatı #83, merge PO'da).
-    > ⚠️ GÜNCELLEME (2026-08-16): İş 2 (izi) + İş 3 **P1** (gerekçe kaydı + admin gösterim) tamamlandı/canlıda. **KALAN — İş 3 P2/P3 (AYRI TUR, auth/güvenlik kararı):** reddedilen kullanıcının kendi ekranında gerekçe görmesi (P2) + REJECTED→PENDING tekrar başvuru + başvuru revizyonu (P3). Reddedilen `isActive=false` → login generic 401 (enumeration koruması); bu akışı değiştirmek PO ürün+güvenlik kararı gerektirir.
+29. **İş 2 + İş 3 (P1+P2+P3) — ✅ TAMAMEN CANLIDA (2026-08-16)** — migration (User'a 5 nullable alan) + onay/red izi + red gerekçesi + yönetici-adı gösterimi + reddedilen kullanıcı akışı.
+    > ⚠️ GÜNCELLEME (2026-08-16): İş 2 (izi) + İş 3 P1 (gerekçe) + yönetici-adı canlıda (#41+#81+#82+#42+#83).
+    > ⚠️ GÜNCELLEME (2026-08-16, P2/P3): **İş 3 P2/P3 de CANLIDA (#43+#85, Yol 1).** Reddedilen kullanıcı doğru şifreyle gerekçesini görür (token yok, enumeration-safe) + `POST /api/auth/reapply` ile tekrar başvurur (REJECTED→PENDING, red geçmişi korunur, IDOR-safe). Kibar red e-postası. **İş 3 ailesi kapandı.** Kabul edilen sınırlar → yeni maddeler #35-#37.
+30. **⚠️ Sertifika bankası canlıda eksik (5 vs 20)** — kodda 20 senaryo (`seed-certification.ts`), canlıda yalnız 5 soru (salt-okuma sayımı). Zengin banka seed edilmemiş → `seedCertification()` kontrollü çalıştırma. **Canlı DB yazımı → PO onayı ZORUNLU** (tehlikeli tam `seed.ts` değil; bu fonksiyon idempotent/silmez ama canlıda çalışır).
+31. **DISC-tipine-özel "mentiye yaklaşım" içeriği YOK (en büyük içerik boşluğu)** — hiçbir testte mentinin DISC tipine göre uyarlanan yaklaşım içeriği yok. 3 seçenek (eksikler raporu): (1) statik yaklaşım kılavuzu (M, önerilen) · (2) SJT'yi menti-DISC koşullu genişletme (L, migration) · (3) sertifikaya tip-özel varyant (L, önerilmez). Kısmen v2 #20 (KARAR 9) ile ilişkili — PO netleştirir.
+32. **Admin soru düzenleme UI (S)** — backend PATCH hazır (`questionController.ts`), FE'de düzenle butonu yok → salt-frontend, hızlı kazanç.
+33. **Çift DISC seed temizliği + SJT belge-kod çelişkisi (S)** — `seed.ts` (32 soru) ile `seed-questions.ts` (20, canlıda olan) çelişiyor → tek kaynağa indir. Ayrıca `03-psikometri` "4 pedagojik SJT" der, kodda 3 var → SJT genişlet ya da belgeyi düzelt.
+34. **Öğrenme yolculuğu tamamlanma görünürlüğü (S)** — yönetici kimin tamamladığını göremiyor (`learningJourneyCompletedAt` admin select'te yok); retention için faydalı.
+
+## v1-E · ★ YÖNETİCİ KULLANICI YÖNETİMİ + GÜVENLİK (2026-08-16 tespitleri — PO ileride)
+> İş 3 P2/P3 turundan çıkan yeni işler. Şimdi kodlanMADI; kayda geçti.
+35. **İki tip red: "düzeltme iste" vs "kalıcı reddet/ghost" (M-L, migration olası)** — Şu an tek tip red (kibar e-posta + tekrar başvuru). İSTENEN: yönetici reddederken seçsin: (a) **Düzeltme iste** → mevcut akış (e-posta + kullanıcı gerekçe görür + tekrar başvurur); (b) **Kalıcı reddet/ghost** → kullanıcıya HİÇ bildirim gitmez (sessiz), tekrar başvuramaz, sistemde görünmez. Gerekçe: kuruma uygun olmayan kişiye "tekrar başvurabilirsiniz" demek yanlış. Muhtemelen backend'e red-tipi alanı (migration, canlı DB → PO onayı) + 2 buton + e-posta ayrımı.
+36. **Onaylanmış (aktif) kullanıcıyı sistemden çıkarma (⚠️ önce KEŞİF)** — yönetici zaten onaylanmış menti/mentörü sonradan çıkarabilmeli (red değil; kabul edilmişi pasifleştirme/atma). **Kodda ZATEN VAR MI belirsiz** → ayrı turda önce git'ten doğrula (isActive=false/demote var mı), eksikse yap.
+37. **Giriş enumeration sertleştirme (PENDING dahil) — güvenlik** — mevcut login PENDING durumunu **şifre-öncesi** sızdırıyor (`authController.ts:254`). İleride tüm giriş güvenliğiyle birlikte ele alınacak (durum bilgisi yalnız şifre sonrası). *(İş 3 P2 turunda REJECTED zaten şifre-sonrasına taşındı; PENDING kaldı.)*
 30. **⚠️ Sertifika bankası canlıda eksik (5 vs 20)** — kodda 20 senaryo (`seed-certification.ts`), canlıda yalnız 5 soru (salt-okuma sayımı). Zengin banka seed edilmemiş → `seedCertification()` kontrollü çalıştırma. **Canlı DB yazımı → PO onayı ZORUNLU** (tehlikeli tam `seed.ts` değil; bu fonksiyon idempotent/silmez ama canlıda çalışır).
 31. **DISC-tipine-özel "mentiye yaklaşım" içeriği YOK (en büyük içerik boşluğu)** — hiçbir testte mentinin DISC tipine göre uyarlanan yaklaşım içeriği yok. 3 seçenek (eksikler raporu): (1) statik yaklaşım kılavuzu (M, önerilen) · (2) SJT'yi menti-DISC koşullu genişletme (L, migration) · (3) sertifikaya tip-özel varyant (L, önerilmez). Kısmen v2 #20 (KARAR 9) ile ilişkili — PO netleştirir.
 32. **Admin soru düzenleme UI (S)** — backend PATCH hazır (`questionController.ts`), FE'de düzenle butonu yok → salt-frontend, hızlı kazanç.
