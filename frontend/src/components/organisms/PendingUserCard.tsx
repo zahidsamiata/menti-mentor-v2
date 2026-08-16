@@ -19,7 +19,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
-import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
+import { RejectReasonDialog } from '@/components/molecules/RejectReasonDialog';
 import { CorrectionNoteDialog } from '@/components/molecules/CorrectionNoteDialog';
 import { useMutation } from '@/hooks/useMutation';
 import { useApiClient } from '@/hooks/useApiClient';
@@ -44,9 +44,9 @@ export function PendingUserCard({ user, onActionComplete }: PendingUserCardProps
     { onSuccess: onActionComplete, onError: setActionError },
   );
 
-  // Reddet
+  // Reddet — opsiyonel gerekçe ile (İş 3 P1)
   const reject = useMutation(
-    () => adminApi.rejectUser(api, user.id),
+    (reason: string) => adminApi.rejectUser(api, user.id, reason),
     { onSuccess: () => { setDialog('none'); onActionComplete(); }, onError: (e) => { setActionError(e); setDialog('none'); } },
   );
 
@@ -140,14 +140,11 @@ export function PendingUserCard({ user, onActionComplete }: PendingUserCardProps
         </CardContent>
       </Card>
 
-      <ConfirmDialog
+      <RejectReasonDialog
         open={dialog === 'reject'}
-        title="Kullanıcıyı Reddet"
-        description={`${user.fullName} adlı kullanıcı reddedilecek ve eşleşme havuzuna alınmayacak.`}
-        confirmLabel="Reddet"
-        variant="danger"
+        userName={user.fullName}
         isLoading={reject.isLoading}
-        onConfirm={() => reject.mutate(undefined as never)}
+        onConfirm={(reason) => reject.mutate(reason)}
         onCancel={() => setDialog('none')}
       />
 

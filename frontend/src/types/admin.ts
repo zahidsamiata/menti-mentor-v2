@@ -26,6 +26,12 @@ export interface AdminUser {
   avatarUrl?: string | null;
   // Sertifika rozeti (KARAR 4) — kurum-içi sertifika (TenantMembership.isCertified). Mentörlerde anlamlı.
   isCertified: boolean;
+  // Onay/red denetim izi (İş 2) + red gerekçesi (İş 3 P1) — yalnız admin görür. userId (ham gösterilmez).
+  approvedBy?: string | null;
+  approvedAt?: string | null;
+  rejectedBy?: string | null;
+  rejectedAt?: string | null;
+  rejectionReason?: string | null;
 }
 
 export type AdminUsersResponse = PaginatedResponse<AdminUser>;
