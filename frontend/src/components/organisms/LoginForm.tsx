@@ -11,6 +11,7 @@
  *  2. Backend API hataları → form başında AlertMessage
  */
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -20,6 +21,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { OAuthButtons } from '@/components/molecules/OAuthButtons';
 import { useAuth } from '@/providers/AuthProvider';
 import { useFormState } from '@/hooks/useFormState';
+import { authApi } from '@/lib/api/auth';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
 
 interface LoginFormProps {
@@ -51,20 +53,82 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
   const { login } = useAuth();
   const form = useFormState(loginSchema, INITIAL);
 
+  // İş 3 P2/P3: reddedilen kullanıcı için red ekranı + tekrar başvuru state'i.
+  const [rejected, setRejected] = useState<{ reason: string | null } | null>(null);
+  const [reapplyStatus, setReapplyStatus] = useState<'idle' | 'loading' | 'done'>('idle');
+  const [reapplyError, setReapplyError] = useState<string | null>(null);
+
   const onSubmit = async (values: LoginFormValues) => {
     try {
       const userData = await login(values);
       router.push(getSmartRedirect(userData));
     } catch (err) {
       // PENDING: backend JWT vermeden 403 atar — biz yine de /pending-approval'a yönlendiririz.
-      const code = (err as Error & { code?: string }).code;
-      if (code === 'HESAP_ONAY_BEKLENIYOR') {
+      const e = err as Error & { code?: string; rejectionReason?: string | null; canReapply?: boolean };
+      if (e.code === 'HESAP_ONAY_BEKLENIYOR') {
         router.push('/pending-approval');
+        return;
+      }
+      // REDDEDİLDİ: gerekçe + tekrar-başvuru ekranı (giriş bilgileri formda duruyor → reapply için kullanılır).
+      if (e.code === 'HESAP_REDDEDILDI') {
+        setRejected({ reason: e.rejectionReason ?? null });
         return;
       }
       form.setServerError(err instanceof Error ? err.message : 'Giriş başarısız. Bilgilerinizi kontrol edin.');
     }
   };
+
+  async function handleReapply() {
+    setReapplyStatus('loading');
+    setReapplyError(null);
+    const res = await authApi.reapply(form.values.email, form.values.password);
+    if (res.ok) {
+      setReapplyStatus('done');
+    } else {
+      setReapplyStatus('idle');
+      setReapplyError(res.error.message ?? 'Tekrar başvuru başarısız. Lütfen sonra deneyin.');
+    }
+  }
+
+  // ── Reddedilen kullanıcı ekranı (kibar; gerekçe + tekrar başvuru) ──
+  if (rejected) {
+    return (
+      <div className="space-y-4">
+        {reapplyStatus === 'done' ? (
+          <AlertMessage
+            type="success"
+            message="Başvurunuz yeniden alındı ve değerlendirme için yöneticinize iletildi. Onaylandığında giriş yapabilirsiniz."
+          />
+        ) : (
+          <>
+            <div className="rounded-2xl border border-border bg-muted/40 p-4">
+              <h2 className="text-base font-semibold">Başvurunuz hakkında</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Başvurunuz şu an onaylanmadı. Aşağıdaki notu inceleyebilir, dilerseniz tekrar başvurabilirsiniz —
+                daha önce doldurduğunuz test ve profil bilgileriniz korunur.
+              </p>
+              {rejected.reason && (
+                <p className="mt-3 rounded-lg bg-background border border-border p-3 text-sm">
+                  <span className="font-medium">Not: </span>{rejected.reason}
+                </p>
+              )}
+            </div>
+            {reapplyError && <AlertMessage type="error" message={reapplyError} />}
+            <Button className="w-full" onClick={handleReapply} disabled={reapplyStatus === 'loading'}>
+              {reapplyStatus === 'loading' ? 'Gönderiliyor…' : 'Tekrar Başvur'}
+            </Button>
+            <button
+              type="button"
+              onClick={() => { setRejected(null); setReapplyError(null); }}
+              className="w-full text-center text-sm text-muted-foreground hover:underline"
+            >
+              ← Geri dön
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-4">

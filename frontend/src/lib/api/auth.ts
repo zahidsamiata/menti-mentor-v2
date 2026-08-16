@@ -35,6 +35,13 @@ export const authApi = {
       body: payload,
     }),
 
+  // İş 3 P3: reddedilen kullanıcı aynı e-posta+şifreyle tekrar başvurur (REJECTED→PENDING).
+  reapply: (email: string, password: string) =>
+    apiClient<{ message: string; approvalStatus: string }>('/api/auth/reapply', {
+      method: 'POST',
+      body: { email, password },
+    }),
+
   refresh: (refreshToken: string) =>
     apiClient<RefreshResponse>('/api/auth/refresh', {
       method: 'POST',
