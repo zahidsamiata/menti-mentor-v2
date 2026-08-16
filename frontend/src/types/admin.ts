@@ -32,6 +32,9 @@ export interface AdminUser {
   rejectedBy?: string | null;
   rejectedAt?: string | null;
   rejectionReason?: string | null;
+  // İş 2: onaylayan/reddeden yöneticinin adı (backend tenant-scoped çözer; yoksa null → "bir yönetici").
+  approvedByName?: string | null;
+  rejectedByName?: string | null;
 }
 
 export type AdminUsersResponse = PaginatedResponse<AdminUser>;

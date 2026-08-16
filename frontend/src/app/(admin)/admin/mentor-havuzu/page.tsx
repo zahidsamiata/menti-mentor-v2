@@ -147,14 +147,14 @@ export default function MentorHavuzuPage() {
                         </Badge>
                         {user.approvalStatus === 'APPROVED' && user.approvedAt && (
                           <p className="mt-1 text-[11px] text-muted-foreground">
-                            Onay: {new Date(user.approvedAt).toLocaleDateString('tr-TR')}
+                            Onaylayan: {user.approvedByName ?? 'bir yönetici'} · {new Date(user.approvedAt).toLocaleDateString('tr-TR')}
                           </p>
                         )}
                         {user.approvalStatus === 'REJECTED' && (
                           <>
                             {user.rejectedAt && (
                               <p className="mt-1 text-[11px] text-muted-foreground">
-                                Red: {new Date(user.rejectedAt).toLocaleDateString('tr-TR')}
+                                Reddeden: {user.rejectedByName ?? 'bir yönetici'} · {new Date(user.rejectedAt).toLocaleDateString('tr-TR')}
                               </p>
                             )}
                             {user.rejectionReason && (
