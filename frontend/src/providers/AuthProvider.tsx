@@ -131,7 +131,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     if (!result.ok) {
       const err = new Error(result.error.message ?? 'Giriş başarısız.');
-      Object.assign(err, { code: result.error.error });
+      // İş 3 P2: reddedilen kullanıcı için gerekçe + tekrar-başvuru bayrağını da taşı.
+      Object.assign(err, {
+        code: result.error.error,
+        rejectionReason: result.error.rejectionReason ?? null,
+        canReapply: result.error.canReapply ?? false,
+      });
       throw err;
     }
 

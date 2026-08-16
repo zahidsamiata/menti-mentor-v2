@@ -8,6 +8,9 @@ export interface ApiError {
   error: string;
   message?: string;
   details?: Record<string, string[]>;
+  // İş 3 P2: reddedilen kullanıcı girişinde backend gerekçeyi + tekrar-başvuru bilgisini taşır.
+  rejectionReason?: string | null;
+  canReapply?: boolean;
 }
 
 /** fetch wrapper'ının dönüş tipi. */
