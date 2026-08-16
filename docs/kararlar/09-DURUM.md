@@ -25,6 +25,7 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > · **submodule pointer = `0850eaa` (backend main HEAD ile TAM SENKRON, `git submodule status` + `ls-tree` ile doğrulandı)**.
   > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): 4 kod PR merge sonrası → **backend main HEAD `379658a`** (#38+#39) · **çatı main HEAD `c3e4626`** (#73+#74) · **submodule pointer = `379658a` (backend main HEAD ile TAM SENKRON, `ls-tree` == `rev-parse` doğrulandı)**.
   > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): masa temizliği merge'i sonrası → **çatı main HEAD `444c025`** (#77) · **backend main HEAD `5eafbbd`** (#40) · **submodule pointer = `5eafbbd` (backend main HEAD ile TAM SENKRON, `git submodule status` doğrulandı)**. Merge sırası: #78→#79→#76→#40→#77 (#77 pointer'ı #40 merge commit'ine bump edildi). İki repo her adımda main CI yeşil.
+  > ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): onay/red izi + gerekçe merge sonrası → **çatı main HEAD `b66e07c`** (#82) · **backend main HEAD `ed84806`** (#41) · **submodule pointer = `ed84806` (senkron)**. Merge sırası: #41→#81 (pointer bump)→#82. **Migration canlıya uygulandı** (User'a 5 nullable kolon).
 - **Açık PR:** çatı **0** · backend **0** — **masa temiz** (2026-08-14: bu oturumun 5 belge PR'ı #65–#69 sırayla MERGED).
   > ⚠️ GÜNCELLEME (2026-08-14): bu satır #65–#69 açıkken "çatı #65 (merge PO'da)" diyordu; 5 PR merge olunca gerçeğe (açık PR 0) çekildi (Belge Düzeltme Deseni / Kural 6).
   > ⚠️ GÜNCELLEME (2026-08-15): artık **açık PR: backend #37 + çatı #71** — KARAR 5 DISC güvenlik düzeltmesi, **merge PO'da** (bkz. "🟡 GÜVENLİK" bölümü).
@@ -33,7 +34,17 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): **4 kod PR sırayla MERGED, canlıda** (#38→#73→#39→#74, `--merge`). **Açık PR yalnız bu docs (#72)** — kod PR: çatı 0 · backend 0. #74'te submodule pointer çakışması backend main HEAD'e bump ile çözüldü. İki repo main CI yeşil.
   > ⚠️ GÜNCELLEME (2026-08-15, devir turu): #72 de **MERGED** (çatı main HEAD `cafd68c`) → açık PR gerçekte **çatı 0 · backend 0** (git + `gh pr list` kanıtlı). Yukarıdaki "docs (#72) açık" ifadesi **eskimiştir.** Oturum kapanışı: `docs/devir/08-oturum-2026-08-15.md`.
   > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): sonraki turlarda 5 PR daha açılıp merge edildi (#76 menü · #40+#77 rozet · #78 envanter · #79 içerik). Merge sonrası **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ MASA TEMİZLİĞİ" bölümü).
+  > ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): #80 (docs) + #41+#81 (İş 2+P1 backend) + #82 (İş 2/3 FE) MERGED, canlıda. **Açık:** yönetici-adı gösterimi (backend #42 + çatı #83, CI yeşil, merge PO'da) + bu docs PR. Kod PR: onlar dışında 0. (bkz. "✅ İŞ 2 + İŞ 3 P1" bölümü.)
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
+
+## ✅ İŞ 2 + İŞ 3 P1 — ONAY/RED İZİ + GEREKÇE, CANLIDA (2026-08-16)
+> Çatı main `b66e07c` · backend main `ed84806` · açık PR: yönetici-adı (#42+#83, merge PO'da).
+- **Migration CANLIDA (additive/nullable, veri kaybı yok):** `User`'a `approvedBy`, `approvedAt`, `rejectedBy`, `rejectedAt`, `rejectionReason`. Yöntem: `db execute` (IF NOT EXISTS) + `migrate resolve --applied`; salt-okuma SELECT ile doğrulandı. `db push` kullanılmadı.
+- **İş 2 (kim onayladı/reddetti izi) — backend #41 + çatı #81, canlıda:** `approveUser`/`rejectUser` yapan yöneticiyi + zamanı kaydeder; `approveUser` eski red izini temizler. `adminListUsers` denetim alanlarını döndürür (yalnız admin, audit).
+- **İş 3 P1 (red gerekçesi) — canlıda:** `rejectUser` opsiyonel `reason` (≤500) → `rejectionReason`; `requestCorrection` `feedbackNote`'u kalıcı kaydeder (önceden yalnız e-posta).
+- **İş 2/3 FE — çatı #82, canlıda:** havuz tablolarında onay/red tarihi + red gerekçesi (title ile tam metin) + reddet akışında gerekçe kutusu (`RejectReasonDialog`, PII uyarısı). Yalnız admin.
+- **Yönetici-adı gösterimi (backend #42 + çatı #83, merge PO'da):** `approvedBy`/`rejectedBy` userId'si TEK sorgu + TENANT-SCOPED `fullName`'e çözülür (`approvedByName`/`rejectedByName`); çapraz-tenant isim sızmaz; havuzda "Onaylayan/Reddeden: [Ad] · [tarih]".
+- **⏳ KALAN (AYRI TUR — auth/güvenlik kararı):** İş 3 **P2** (reddedilen kullanıcı kendi ekranında gerekçe görür) + **P3** (REJECTED→PENDING tekrar başvuru + başvuru revizyonu). Reddedilen `isActive=false` → login generic 401 (enumeration koruması); bu akışı değiştirmek PO ürün+güvenlik kararı.
 
 ## ✅ MASA TEMİZLİĞİ — 5 PR MERGED, CANLIDA (2026-08-15, geç oturumlar)
 > Çatı main `444c025` · backend main `5eafbbd` · submodule senkron · açık PR 0/0 (git doğrulandı).
