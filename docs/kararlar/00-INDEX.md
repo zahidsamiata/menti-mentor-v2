@@ -1,5 +1,5 @@
 # MENTİMENTOR / SİVİLKAPASİTE — BELGE HARİTASI (INDEX)
-**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-15 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
+**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-16 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
 
 > Bu belgeler, birden fazla sohbetten toplanan kararların konu bazlı derlemesidir.
 > Claude Code / yeni Claude chat'i, ihtiyaç duyduğu konunun belgesini okur — hepsini değil.
@@ -37,6 +37,7 @@ docs/
 | `08-acik-sorular.md` | Karara bağlanmamışlar (yaş, veri sorumlusu vb.) | Karar gerektiğinde |
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
 | `10-yol-haritasi.md` | Sıradaki işler yol haritası (İŞ 0–8, sıra + bağımlılık) | Sıradaki iş kararı |
+| `11-tasarim-kararlari-yasam-dongusu-ve-disc.md` | Yaşam döngüsü + DISC gösterim kararları (KARAR 1 DISC çoklu harf/#12 · KARAR 2 ghost red/2a · KARAR 3 kullanıcı çıkarma/2b · KARAR 4 FE tam Türkçe) | #12 / 2a / 2b işine başlarken |
 
 ## Yeni belgeler — 2026-08-11 oturumu (`docs/kararlar/`)
 | Belge | İçerik | Tür |
