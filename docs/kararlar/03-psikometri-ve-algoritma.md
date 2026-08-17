@@ -45,6 +45,7 @@
 - **3. sütun: Mentörlük Yetkinliği** — 5 boyut (P1 Pedagoji, P2 Geri bildirim, P3 Empati, P4 Adanmışlık, P5 Uyarlanabilirlik).
 - **"Önce Eğit, Sonra Kalibre Et":** Sertifikasyon = kabul kapısı (0→1); kalite çarpanı = gerçek performans (1'den başlar). Yeni mentör düşük çarpanla yargılanmaz.
 - **Mini Akademi:** 4 modül (Yönlendir/Dinle/Güvenli alan/Sınırlar), ~6 dk puansız + 4 pedagojik SJT.
+  > ⚠️ GÜNCELLEME (2026-08-17): **BELGE-KOD ÇELİŞKİSİ — kod gerçeği = 3 SJT, "4" tasarım niyetidir.** `backend/prisma/seed.ts` `SJT_QUESTIONS` dizisinde **tam 3 soru** var (Q_MENTOR_CORE_01, Q_MENTI_CORE_01, Q_MENTI_FOLLOWUP_N_01, satır 530-573; doğrulandı) — ve bunlar OCEAN kalibrasyonu içindir, "Mini Akademi" modülü olarak kodlanmamıştır. İçeriği 4'e (niyet) genişletme = seed+içerik işi → **PO kararı** (yol haritası #33). Kod DEĞİŞMEDİ; yalnız bu not eklendi (envanter/içerik raporları da "kod 3, belge 4" der).
 - **Baraj 65 + kırmızı-çizgi + cooldown:** 12 puan üzerinden %65 baraj VE hiçbir kırmızı-çizgi (isRedLine) sorusunda 0 puanlık şık seçilmemeli; 2. başarısızlıktan sonra 24s cooldown; baraj geçen çarpan=1.0.
 - Bağlam: `certification.service.ts`, PASS_THRESHOLD=65, CERT_CONFIG (passRateThreshold 0.8).
 
