@@ -17,7 +17,7 @@
 
 | Kategori | Sayı | Tek cümle |
 |---|:---:|---|
-| 🔴/🟡/🔵 **v1 açık iş** | **10** | ⚡ küçük işler paketi turu: **#34 + #7(A) + #9-gösterim → 🔀 PR'da** (backend #49 + çatı). Kalan: cevap-tipi(#13), kurum-maili(#6), 2a/2b/#7-B tasarım-hazır, içerik/seed/PO + yeni **9a** ağırlık-ayar (migration bekliyor) + **#37** kurum düzeltme-iste (şema) |
+| 🔴/🟡/🔵 **v1 açık iş** | **7** | ⚡ küçük işler paketi turu: **#34 + #7(A) + #9-gösterim → ✅ CANLIDA** (backend #49 + çatı #102 merged). Kalan: cevap-tipi(#13), kurum-maili(#6), 2a/2b/#7-B tasarım-hazır, içerik/seed/PO + yeni **9a** ağırlık-ayar (migration bekliyor) + **#37** kurum düzeltme-iste (şema) |
 | ❓ **karar/keşif bekliyor** | **6** | K6 admin-guard, sektör/etiket havuzu, K3 eski-kayıt consent, #36 önce-keşif, **9b** scoring dekoratif-kalibrasyon (yeni bulgu), #37 kurum düzeltme-iste (kısmen) |
 | 💀 **ölü kod / yarım bağlantı** | **9 kalem** | Çoğu TEK yarım özelliğin parçası: "eşleşme-sonrası değerlendirme/metrik" (#7 tasarımıyla bağlanacak) |
 | 🔵 **v2 backlog** | **15** | Hiç dokunulmadı (14-28: algoritma/DB-riskli/ileri-faz/retention) |
@@ -39,13 +39,13 @@
 | No | İş | Durum | Tür | Ne gerekiyor (somut sıradaki adım) | Kanıt | Migration? | Boy |
 |---|---|:---:|---|---|---|:---:|:---:|
 | 6 | Onay/red maili — **kurum/destek** kısmı | 🟡 | yarım-kaldı | Kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` env bağla (kullanıcı maili ✅ çalışıyor) | `10-yol:md.6`; tam-envanter C3 | Hayır | S-M |
-| 7 | Havuz kartı (A) + eşleşme-sonrası değerlendirme (B) | (A) 🔀 PR'da / (B) 🔵 | (A) PR'da + (B) tasarım-hazır | (A) **YAPILDI 🔀** aday kartı gerekçe FE render (çatı PR, DISC harfi hariç); (B) = **#7 sistem tasarımı** (bkz. C) | (A) `mentor/page.tsx` compatibilityReason render + `RankedMenti` tipi (çatı PR); (B) `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | (A) Hayır (B) Evet | (A) S (B) L |
-| 9 | Algoritma kalibrasyon ağırlık UI (0.60/0.40) | 🔀 PR'da (gösterim) | kısmi-yapıldı | **GÖSTERİM YAPILDI 🔀** (çatı PR): "Mevcut Ağırlıklar" kartı %60/%40 + salt-okuma endpoint. **AYARLAMA YAPILMADI** → madde (a) migration turu | `algorithm-tuner/page.tsx` kart + `GET /algorithm-tuner/weights` (backend #49) | Hayır (gösterim) / Evet (ayar) | S |
+| 7 | Havuz kartı (A) + eşleşme-sonrası değerlendirme (B) | (A) ✅ CANLIDA / (B) 🔵 | (A) TAMAMLANDI + (B) tasarım-hazır | (A) **✅ CANLIDA** aday kartı gerekçe FE render (çatı #102, DISC harfi hariç); (B) = **#7 sistem tasarımı** (bkz. C) | (A) main `mentor/page.tsx` compatibilityReason (2×) + `RankedMenti` tipi; (B) `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | (A) Hayır (B) Evet | (A) S (B) L |
+| 9 | Algoritma kalibrasyon ağırlık UI (0.60/0.40) | ✅ CANLIDA (gösterim) | gösterim TAMAMLANDI | **GÖSTERİM ✅ CANLIDA** (backend #49 + çatı #102): "Mevcut Ağırlıklar" kartı %60/%40 + salt-okuma endpoint. **AYARLAMA YAPILMADI** → madde 9a migration turu | main `algorithm-tuner/page.tsx` kart (2×) + `GET /algorithm-tuner/weights` | Hayır (gösterim) / Evet (ayar) | S |
 | 13 | Soru cevap-tipi seçimi (şıklı/açık-uçlu) | 🔴 ❓ | hiç-başlanmadı | Kapsam belirsiz (tipler/validation/skoring) → **PO netleştir**; sonra şema alanı = migration | tam-envanter A4; `schema.prisma` alan yok | **Evet** | M |
 | 30 | Sertifika bankası 5→20 canlı seed | 🔴 | içerik-eksik | `seedCertification()` kontrollü çalıştır (idempotent) → **canlı DB yazımı, PO onayı ZORUNLU** | tam-envanter A5; canlı ~5, kod 20 | **Evet (seed)** | S |
 | 31 | DISC-tipine-özel "mentiye yaklaşım" içeriği | 🔵 | içerik-eksik | 3 seçenek (statik kılavuz M / SJT koşullu L / sertifika varyant L) → PO seçsin | tam-envanter A6; `eksikler-...:9-18` | Seçeneğe göre | M-L |
 | 33 | SJT belge-kod (3 vs 4) + seed↔canlı (32 vs 20) kalan | 🔴 ❓ | içerik-eksik | (a) seed↔canlı: re-seed mi trim mi (canlı DB, PO); (b) SJT 3→4 içerik genişletme (PO) | tam-envanter C4; `03-psikometri:47` "4", kod 3 | **Evet (a)** | S |
-| 34 | Öğrenme-yolculuğu tamamlanma görünürlüğü (STK admin) | 🔀 PR'da | YAPILDI (merge bekliyor) | **YAPILDI 🔀** (backend #49 + çatı PR): `adminListUsers`'a `learningJourneyCompletedAt` + havuz kolonu. Test var | 🟩 `adminController.ts:320-329` alan döner + test; `menti/mentor-havuzu` kolonu | Hayır | S |
+| 34 | Öğrenme-yolculuğu tamamlanma görünürlüğü (STK admin) | ✅ CANLIDA | TAMAMLANDI | **✅ CANLIDA** (backend #49 → `18cfc42` + çatı #102 → `0fd4942`, merged): `adminListUsers`'a `learningJourneyCompletedAt` + havuz kolonu. Test var | 🟩 main `adminController.ts` alan döner (4×) + test; `menti/mentor-havuzu` kolonu (2×) | Hayır | S |
 | 35 | **(2a)** İki tip red: "düzeltme iste" vs "kalıcı/ghost sessiz red" (KARAR 2) | 🔵 | tasarım-hazır | Backend red-tipi alanı + 2 buton + e-posta ayrımı (ghost = sessiz, tekrar-başvuru yok) | `11-tasarim-kararlari` KARAR 2; `10-yol:md.35` | **Evet (muhtemel)** | M-L |
 | 36 | **(2b)** Onaylanmış (aktif) kullanıcıyı sistemden çıkarma (KARAR 3) | 🔵 ❓ | tasarım-hazır + önce-keşif | **ÖNCE git'ten doğrula** (isActive=false/demote kodda var mı?), eksikse yap | `11-tasarim-kararlari` KARAR 3; `10-yol:md.36` | ❓ (keşif sonrası) | M |
 

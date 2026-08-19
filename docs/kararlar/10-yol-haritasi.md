@@ -29,7 +29,7 @@
 **🟢 v1 açık işler (canlı-öncesi, PO başlattıkça):**
 - **6** — Onay paneli bildirim maili · *KALAN:* kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` (kullanıcı maili zaten çalışıyor).
 - **7** — Havuz KART + "neden uyumlu" follow-up · *ERTELENDİ:* (A) mentör→menti aday kartı gerekçe/DISC mi, (B) eşleşme-takip panosu mu → PO netleştirecek (sıfırdan değil, kısmen mevcut).
-- **9** — Algoritma kalibrasyon ağırlık (0.60/0.40) **gösterimi 🔀 PR'da** (backend #49 + çatı); ayarlanabilirlik **9a** (migration) açık.
+- **9** — Algoritma kalibrasyon ağırlık (0.60/0.40) **gösterimi ✅ CANLIDA** (backend #49 + çatı #102 merged); ayarlanabilirlik **9a** (migration) açık.
 - **13** — Soru cevap-tipi seçimi · *AÇIK* — migration (canlı DB) + kapsam belirsiz → PO netleştir, onaylı ayrı tur.
 - **30** — Sertifika bankası 5→20 seed · *AÇIK* — canlı DB yazımı → PO onayı zorunlu.
 - **31** — DISC-tipine-özel "mentiye yaklaşım" içeriği · *AÇIK* — en büyük içerik boşluğu, PO netleştir.
@@ -80,11 +80,13 @@
    > ⚠️ GÜNCELLEME (2026-08-19, #7 AŞAMA 1 PR'da 🔀): (B) okuması tasarlandı+aşamalandı (`degerlendirme-metrik-sistemi-tasarim-2026-08-19.md`) ve **AŞAMA 1 (migration'sız uçları bağla) PR'da** — backend **#48** + çatı **#100** (MERGE OLMADI). Bağlanan: kalite puanı kalıcı yazım + yönetici görünürlüğü (havuz "Kalite Puanı" kolonu, eşleşmeler "Risk" rozeti) + ölü `findMatchesDueForCheckpoint` cron'a (LOG-ONLY). KVKK: puan/sinyal yalnız yönetici. **AŞAMA 2** (migration'lı): otomatik pasifleştirme + tenant eşik alanı + checkpoint gerçek bildirim. **AŞAMA 3:** yeniden değerlendirme + onay döngüsü + pasif-hatırlatma. Detay: `09-DURUM.md` "🔀 #7 AŞAMA 1".
    > ⚠️ GÜNCELLEME (2026-08-19, merge turu): **AŞAMA 1 ✅ MERGED, CANLIDA** — backend #48 (→ `b5f4b88`) + çatı #100 (→ `ef2b995`, pointer senkron) merge edildi; iki main CI yeşil. Bağlanan uçlar autodeploy ile canlıda. **AŞAMA 2/3 hâlâ AÇIK** (yukarıdaki kapsam).
    > ⚠️ GÜNCELLEME (2026-08-19, küçük işler paketi turu — (A) 🔀 YAPILDI, PR'da): md.5 (A) literal kapsamı = mentör→menti aday kartı "neden uyumlu" gerekçesi FE render edildi (`mentor/page.tsx` + `RankedMenti` tipi). Backend `compatibilityReason` zaten üretiyordu; sadece FE bağlandı. **⚠️ menti DISC HARFİ EKLENMEDİ** (KARAR 3↔5 uzlaştırması PO'da — jenerik metin, tip sızmaz). Çatı PR (MERGE OLMADI). (A) merge sonrası **KAPANIR**; (B) = Aşama 2/3 açık.
+   > ⚠️ GÜNCELLEME (2026-08-19, merge turu): **(A) ✅ MERGED, CANLIDA** — backend #49 (`18cfc42`) + çatı #102 (`0fd4942`) merge; kod gerçeği main'de doğrulandı (`mentor/page.tsx` compatibilityReason 2×). (A) **KAPANDI**; (B) Aşama 2/3 açık.
 8. **Sol menü 4-grup gruplama (KARAR 1 · =md.2)** — ~~`layout.tsx` hâlâ "3+Gelişmiş"~~.
    > ⚠️ GÜNCELLEME (2026-08-15): ✅ **TAMAMLANDI, CANLIDA (çatı #76).** 4 grup uygulandı: Günlük İşler · İnsanlar · Program & İçerik · Ayarlar & Kurulum. Salt-frontend (`(admin)/layout.tsx`).
 9. **Algoritma Kalibrasyon sayfası (md.6)** — sayfa var ama sadece rapor-frekansı; ağırlık (0.60/0.40) gösterimi/ayarı yok.
    > ⚠️ GÜNCELLEME (2026-08-17): 2026-08-17 brief'i "yapıldı" dedi ama **kod-doğrulama NEGATİF** — `(admin)/admin/algorithm-tuner/page.tsx`'te 0.60/0.40 ağırlık gösterimi grep'te YOK. **AÇIK kalıyor** (kod gerçeği esas).
    > ⚠️ GÜNCELLEME (2026-08-19, küçük işler paketi turu — 🔀 GÖSTERİM YAPILDI, AYAR AYRI): "Mevcut Eşleştirme Ağırlıkları" kartı (%60/%40 + açıklama) + salt-okuma endpoint `GET /api/admin/algorithm-tuner/weights` eklendi (backend #49 + çatı PR, MERGE OLMADI). **AYARLANABİLİRLİK YAPILMADI** (bilinçli sınır: tenant-bazlı şema alanı = migration + canlı eşleştirme değişikliği → 00-KARAR-TAKIP **9a**, PO onaylı migration turu). **Bulgu 9b:** `scoring.ts:96` hardcoded 0.6/0.4 kullanır, saklanan ağırlığı okumaz (kalibrasyon dekoratif). Gösterim kısmı merge sonrası kapanır; ayar+9b açık kalır.
+   > ⚠️ GÜNCELLEME (2026-08-19, merge turu): **GÖSTERİM ✅ MERGED, CANLIDA** — backend #49 + çatı #102 merge; main'de doğrulandı (`algorithm-tuner/page.tsx` "Mevcut Eşleştirme Ağırlıkları" 2×). Gösterim **KAPANDI**; **9a** (ayarlanabilirlik, migration) + **9b** (scoring dekoratif) açık.
 10. **Durum rozeti (KARAR 3)** — Onaylı/Bekliyor/Pasif, yalnız yönetici görür.
     > ⚠️ GÜNCELLEME (2026-08-15): ✅ **ZATEN MEVCUTTU** (kod gerçeği — ⏳ yanlıştı). Mentör+menti havuz tablosunda "Durum" sütunu `APPROVAL_META` ile Onaylı/Bekliyor/Reddedildi gösteriyor (`mentor-havuzu/page.tsx`, `menti-havuzu/page.tsx`); admin-only. Yeniden yapılmadı, teyit edildi.
 11. **Sertifika rozeti (KARAR 4)** — "Sertifikalı ✓", herkes görür.
@@ -108,6 +110,7 @@
 34. **Öğrenme yolculuğu tamamlanma görünürlüğü (S)** — yönetici kimin tamamladığını göremiyor (`learningJourneyCompletedAt` admin select'te yok); retention için faydalı.
     > ⚠️ GÜNCELLEME (2026-08-17): brief "yapıldı" dedi ama **kod-doğrulama NEGATİF** — `learningJourneyCompletedAt` STK `adminController` select'inde YOK (yalnız `platformTenantController` = platform süper-admin drill-down'da var). STK yönetici hâlâ göremiyor → **AÇIK** (kod gerçeği esas). *(v1-E'deki kopyası 2026-08-19'da arşive alındı: `docs/arsiv/yol-haritasi-kopya-kayitlar-2026-08-19.md`; bu v1-D kaydı asıl.)*
     > ⚠️ GÜNCELLEME (2026-08-19, küçük işler paketi turu — 🔀 YAPILDI, PR'da): `adminListUsers` select'ine `learningJourneyCompletedAt` eklendi (tenant-scoped batch) + menti/mentör havuzuna "Öğrenme Yolculuğu" kolonu. Test var. Backend **#49** + çatı PR (MERGE OLMADI). Kod gerçeği artık POZİTİF → merge sonrası **KAPANIR**.
+    > ⚠️ GÜNCELLEME (2026-08-19, merge turu): **✅ MERGED, CANLIDA** — backend #49 (`18cfc42`) + çatı #102 (`0fd4942`) merge; main'de doğrulandı (`adminController.ts` alan 4× + havuz kolonu 2×). **KAPANDI** (STK yöneticisi artık kimin tamamladığını havuzda görür).
 
 ## v1-E · ★ YÖNETİCİ KULLANICI YÖNETİMİ + GÜVENLİK (2026-08-16 tespitleri — PO ileride)
 > İş 3 P2/P3 turundan çıkan yeni işler. Şimdi kodlanMADI; kayda geçti.

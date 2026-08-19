@@ -16,10 +16,10 @@
 > **backend main HEAD `b5f4b88`**, **submodule pointer `b5f4b88` (senkron)**, **açık kod PR 0/0** (git doğrulandı).
 > İki main CI yeşil. #7 Aşama 1 artık **CANLIDA** (autodeploy). Detay: aşağıdaki "🔀 #7 AŞAMA 1" bölümü (✅ MERGED notu).
 >
-> **⚡ GÜNCELLEME (2026-08-19, küçük işler paketi turu — YENİ AÇIK PR):** başlangıç snapshot: çatı main `9c1e1cd`,
-> backend main `b5f4b88`, pointer senkron. **YENİ AÇIK KOD PR (MERGE OLMADI):** backend **#49** + çatı **(bu tur açılıyor)**
-> — #34 (öğrenme yolculuğu STK görünürlüğü) + #7(A) (aday kartı gerekçe FE) + #9-kısmi (ağırlık salt-okuma gösterim).
-> Migration/şema/seed SIFIR. Detay: aşağıdaki "🔀 KÜÇÜK İŞLER PAKETİ" bölümü.
+> **⚡ GÜNCELLEME (2026-08-19, küçük işler paketi — ✅ MERGED, CANLIDA — GÜNCEL SNAPSHOT):** #34 + #7(A) + #9-gösterim
+> PR'ları MERGED → **çatı main HEAD `0fd4942`**, **backend main HEAD `18cfc42`**, **submodule pointer `18cfc42` (senkron)**,
+> **açık kod PR 0/0** (git doğrulandı). İki main CI yeşil. Backend #49 → `18cfc42`; çatı #102 → `0fd4942` (pointer backend main
+> HEAD'e bump edildi, ileri-sarım teyitli). Bağlanan uçlar artık **CANLIDA** (autodeploy). Detay: "✅ KÜÇÜK İŞLER PAKETİ" bölümü.
 >
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
@@ -55,8 +55,11 @@
 - **Doğrulama:** backend PR #48 CI **yeşil** (entegrasyon+unit CI'da geçti); FE lokal tsc ✓ · vitest 38/38 ✓ · build ✓. Lokal backend entegrasyon testleri TEST_DATABASE_URL guard'ıyla durur (canlıya truncate yok) — asıl kanıt CI.
 - **Merge sırası (PO için):** backend #48 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı #100 merge.
 
-## 🔀 KÜÇÜK İŞLER PAKETİ — #34 + #7(A) + #9-kısmi — PR'DA (MERGE OLMADI) (2026-08-19)
-> Backend **#49** + çatı **(bu tur açıldı)**. Üç açık maddeyi tek turda kapattı; hepsi **migration'sız**, düşük riskli, farklı dosyalar. Sema değişmedi, DB'ye yazılmadı, seed çalıştırılmadı.
+## ✅ KÜÇÜK İŞLER PAKETİ — #34 + #7(A) + #9-gösterim — MERGED, CANLIDA (2026-08-19)
+> **⚡ GÜNCELLEME (2026-08-19, merge turu):** ~~PR'DA (MERGE OLMADI)~~ → **MERGED, canlıda.** Backend **#49** → backend main `18cfc42`;
+> çatı **#102** → çatı main `0fd4942` (pointer backend main HEAD `18cfc42`'ye bump, ileri-sarım teyitli: `8d1d1dd` ANCESTOR `18cfc42`); pointer senkron; iki main CI yeşil. Kod gerçeği main'de doğrulandı. Aşağıdaki uçlar artık CANLIDA (autodeploy). MERGE EDİLDİ.
+>
+> Backend **#49** + çatı **#102**. Üç açık maddeyi tek turda kapattı; hepsi **migration'sız**, düşük riskli, farklı dosyalar. Sema değişmedi, DB'ye yazılmadı, seed çalıştırılmadı.
 - **#34 — Öğrenme yolculuğu tamamlanma görünürlüğü (STK yönetici):** `adminListUsers` select'ine `learningJourneyCompletedAt` eklendi (mevcut tenant-scoped `tenantMembership` batch sorgusundan — qualityMultiplier ile aynı, N+1 yok). Platform admin'de ZATEN vardı; artık STK yöneticisi de menti/mentör havuzunda "Öğrenme Yolculuğu" kolonunda görür (tamamlandıysa tarih rozeti, yoksa "—"). KVKK: Analytical, PII değil. Test eklendi (alan döner + tamamlamayan null).
 - **#7(A) — Aday menti kartı "neden uyumlu" gerekçesi:** backend `compatibilityReason`'ı ZATEN üretiyordu (`buildPublicItem`), FE render etmiyordu. Mentör dashboard aday kartında jenerik gerekçe render edildi; `RankedMenti` FE tipine alan eklendi. **⚠️ DISC harfi/tipi EKLENMEDİ** (KARAR 3/5 uzlaştırması PO'da — jenerik metin sızdırmaz).
 - **#9-kısmi — Eşleştirme ağırlığı GÖSTERİMİ (ayarlama YOK):** kalibrasyon sayfası ağırlıkları yalnız bekleyen öneri varken gösteriyordu; artık "Mevcut Eşleştirme Ağırlıkları" kartı her zaman %60/%40 + açıklama gösterir. Yeni salt-okuma endpoint `GET /api/admin/algorithm-tuner/weights` (`getAlgorithmWeights` kaynağı). **Ayarlanabilirlik YAPILMADI** (input/slider/kaydet yok) — tenant-bazlı şema alanı + canlı eşleştirme değişikliği gerektirir → PO onaylı migration turu (bkz. 00-KARAR-TAKIP yeni madde a).
