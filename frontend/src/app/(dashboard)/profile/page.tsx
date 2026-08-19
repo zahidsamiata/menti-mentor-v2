@@ -215,8 +215,9 @@ export default function ProfilePage() {
           <span className="text-3xl">{discMeta.icon}</span>
           <div className="flex-1">
             <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">DISC Tipin</p>
+            {/* #12: DISC çoklu harf (ör. "Di"); arketip birincil harfe göre. */}
             <p className={cn('text-lg font-bold', discMeta.color)}>
-              {user.discType} — {discMeta.archetype}
+              {user.discLetters || user.discType} — {discMeta.archetype}
             </p>
           </div>
           <Link
