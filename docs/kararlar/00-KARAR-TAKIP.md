@@ -98,6 +98,12 @@
 > - 🟡 **feedback şema alanları** (`periodic*` vb.) → hâlâ yazılmıyor (değerlendirme formu Aşama 3).
 > - ⏭️ **Otomatik pasifleştirme + tenant eşik alanı** → Aşama 2 (şema = migration = PO onayı gerekli).
 
+> **⚡ GÜNCELLEME (2026-08-19, merge turu) — #7 Aşama 1 ✅ MERGED, CANLIDA:** yukarıdaki 🔀 PR'lar merge edildi
+> (backend #48 → backend main `b5f4b88`; çatı #100 → çatı main `ef2b995`; pointer senkron; iki main CI yeşil).
+> Yani **✅🔀 kalemleri artık ✅ CANLIDA** (autodeploy açık): D1 checkpoint cron (LOG-ONLY), kalite puanı kalıcı
+> yazım + yönetici "Kalite Puanı" kolonu, F1 risk sinyali + eşleşmeler "Risk" rozeti. **Hâlâ AÇIK (Aşama 2/3):**
+> 🟡 F5/F6 ContextualFeedbackHost, 🟡 feedback `periodic*` alanları, ⏭️ otomatik pasifleştirme + tenant eşik (migration).
+
 | Kalem | Yer (kanıt 🟩) | Ne / Niyet | Neye bağlanacak → hangi iş biter |
 |---|---|---|---|
 | **D1** `findMatchesDueForCheckpoint` | `backend/.../feedback.service.ts:71` (0 çağrı) | Dönemsel checkpoint'i gelen eşleşmeleri bulur — **periyodik değerlendirme tetikleyicisi** | #7 cron/periyodik metrik toplama → dönemsel değerlendirme otomatikleşir |
