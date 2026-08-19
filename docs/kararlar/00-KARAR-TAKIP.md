@@ -17,8 +17,8 @@
 
 | Kategori | Sayı | Tek cümle |
 |---|:---:|---|
-| 🔴/🟡/🔵 **v1 açık iş** | **10** | Canlı-öncesi kalan: 4 küçük (kalibrasyon UI, cevap-tipi, öğrenme-yolculuğu STK, kurum-maili) + 3 tasarım-hazır (2a/2b/#7) + 3 içerik/seed/PO |
-| ❓ **karar/keşif bekliyor** | **4** | K6 admin-guard, sektör/etiket havuzu, K3 eski-kayıt consent, #36 önce-keşif |
+| 🔴/🟡/🔵 **v1 açık iş** | **10** | ⚡ küçük işler paketi turu: **#34 + #7(A) + #9-gösterim → 🔀 PR'da** (backend #49 + çatı). Kalan: cevap-tipi(#13), kurum-maili(#6), 2a/2b/#7-B tasarım-hazır, içerik/seed/PO + yeni **9a** ağırlık-ayar (migration bekliyor) + **#37** kurum düzeltme-iste (şema) |
+| ❓ **karar/keşif bekliyor** | **6** | K6 admin-guard, sektör/etiket havuzu, K3 eski-kayıt consent, #36 önce-keşif, **9b** scoring dekoratif-kalibrasyon (yeni bulgu), #37 kurum düzeltme-iste (kısmen) |
 | 💀 **ölü kod / yarım bağlantı** | **9 kalem** | Çoğu TEK yarım özelliğin parçası: "eşleşme-sonrası değerlendirme/metrik" (#7 tasarımıyla bağlanacak) |
 | 🔵 **v2 backlog** | **15** | Hiç dokunulmadı (14-28: algoritma/DB-riskli/ileri-faz/retention) |
 | ✅ **canlıda (v1)** | **~10** | KARAR 5, K2, K5, menü, rozetler, DISC harf, İş 2+3, admin soru UI, login enumeration |
@@ -39,13 +39,13 @@
 | No | İş | Durum | Tür | Ne gerekiyor (somut sıradaki adım) | Kanıt | Migration? | Boy |
 |---|---|:---:|---|---|---|:---:|:---:|
 | 6 | Onay/red maili — **kurum/destek** kısmı | 🟡 | yarım-kaldı | Kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` env bağla (kullanıcı maili ✅ çalışıyor) | `10-yol:md.6`; tam-envanter C3 | Hayır | S-M |
-| 7 | Havuz kartı (A) + eşleşme-sonrası değerlendirme (B) | 🟡 / 🔵 | yarım-kaldı + tasarım-hazır | (A) mentör→menti aday kartı gerekçe FE render (backend üretiyor); (B) = **#7 sistem tasarımı** (bkz. C) | `matchingController.ts:10-16` üretir, `mentor/page.tsx` render yok; `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | (A) Hayır (B) Evet | (A) S (B) L |
-| 9 | Algoritma kalibrasyon ağırlık UI (0.60/0.40) | 🔴 | hiç-başlanmadı | `algorithm-tuner` sayfasına ağırlık gösterimi/ayarı ekle (şu an sadece rapor-frekansı) | `09-DURUM` (grep negatif) | Hayır | S |
+| 7 | Havuz kartı (A) + eşleşme-sonrası değerlendirme (B) | (A) 🔀 PR'da / (B) 🔵 | (A) PR'da + (B) tasarım-hazır | (A) **YAPILDI 🔀** aday kartı gerekçe FE render (çatı PR, DISC harfi hariç); (B) = **#7 sistem tasarımı** (bkz. C) | (A) `mentor/page.tsx` compatibilityReason render + `RankedMenti` tipi (çatı PR); (B) `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | (A) Hayır (B) Evet | (A) S (B) L |
+| 9 | Algoritma kalibrasyon ağırlık UI (0.60/0.40) | 🔀 PR'da (gösterim) | kısmi-yapıldı | **GÖSTERİM YAPILDI 🔀** (çatı PR): "Mevcut Ağırlıklar" kartı %60/%40 + salt-okuma endpoint. **AYARLAMA YAPILMADI** → madde (a) migration turu | `algorithm-tuner/page.tsx` kart + `GET /algorithm-tuner/weights` (backend #49) | Hayır (gösterim) / Evet (ayar) | S |
 | 13 | Soru cevap-tipi seçimi (şıklı/açık-uçlu) | 🔴 ❓ | hiç-başlanmadı | Kapsam belirsiz (tipler/validation/skoring) → **PO netleştir**; sonra şema alanı = migration | tam-envanter A4; `schema.prisma` alan yok | **Evet** | M |
 | 30 | Sertifika bankası 5→20 canlı seed | 🔴 | içerik-eksik | `seedCertification()` kontrollü çalıştır (idempotent) → **canlı DB yazımı, PO onayı ZORUNLU** | tam-envanter A5; canlı ~5, kod 20 | **Evet (seed)** | S |
 | 31 | DISC-tipine-özel "mentiye yaklaşım" içeriği | 🔵 | içerik-eksik | 3 seçenek (statik kılavuz M / SJT koşullu L / sertifika varyant L) → PO seçsin | tam-envanter A6; `eksikler-...:9-18` | Seçeneğe göre | M-L |
 | 33 | SJT belge-kod (3 vs 4) + seed↔canlı (32 vs 20) kalan | 🔴 ❓ | içerik-eksik | (a) seed↔canlı: re-seed mi trim mi (canlı DB, PO); (b) SJT 3→4 içerik genişletme (PO) | tam-envanter C4; `03-psikometri:47` "4", kod 3 | **Evet (a)** | S |
-| 34 | Öğrenme-yolculuğu tamamlanma görünürlüğü (STK admin) | 🟡 | yarım-kaldı | `learningJourneyCompletedAt`'i STK `adminController` select'ine ekle (platform admin'de ZATEN var) | 🟩 `platformTenantController.ts:177,202` var; `adminController` yok | Hayır | S |
+| 34 | Öğrenme-yolculuğu tamamlanma görünürlüğü (STK admin) | 🔀 PR'da | YAPILDI (merge bekliyor) | **YAPILDI 🔀** (backend #49 + çatı PR): `adminListUsers`'a `learningJourneyCompletedAt` + havuz kolonu. Test var | 🟩 `adminController.ts:320-329` alan döner + test; `menti/mentor-havuzu` kolonu | Hayır | S |
 | 35 | **(2a)** İki tip red: "düzeltme iste" vs "kalıcı/ghost sessiz red" (KARAR 2) | 🔵 | tasarım-hazır | Backend red-tipi alanı + 2 buton + e-posta ayrımı (ghost = sessiz, tekrar-başvuru yok) | `11-tasarim-kararlari` KARAR 2; `10-yol:md.35` | **Evet (muhtemel)** | M-L |
 | 36 | **(2b)** Onaylanmış (aktif) kullanıcıyı sistemden çıkarma (KARAR 3) | 🔵 ❓ | tasarım-hazır + önce-keşif | **ÖNCE git'ten doğrula** (isActive=false/demote kodda var mı?), eksikse yap | `11-tasarim-kararlari` KARAR 3; `10-yol:md.36` | ❓ (keşif sonrası) | M |
 
@@ -57,6 +57,9 @@
 | — | Sektör/etiket başlangıç havuzu (admin-tablo, KARAR 12) | ❓ | seed mi / admin-yönetilir tablo mu → şema+PO kararı | tam-envanter A9; `tasarim-kararlari-admin` | Evet |
 | K3 | Eski kayıt consent politikası | ❓ | yeniden-rıza / bulk / erteleme → PO ürün+hukuk kararı | tam-envanter A3; `08-acik-sorular` | Evet (backfill) |
 | — | K4 yaş **verisi** doğrulaması (beyan ✅ ama veri yok) | ❓ | Şemada yaş alanı yok; öz-beyan yeterli mi yoksa veri-doğrulama mı → PO | 🟩 `schema.prisma` yaş alanı yok (A1) | Evet |
+| 9a | **Eşleştirme ağırlığı AYARLANABİLİRLİĞİ** (tenant bazlı) | 🔵 tasarım-hazır | **PO kararı alındı:** varsayılan %60/%40, dernek değiştirebilsin ama **5'er adımla** (küsürat yok), iki ağırlık toplamı hep %100 (biri artınca diğeri azalır). FE: slider ya da +/−, biçim uygulayıcıya. **Migration gerekli** (tenant-bazlı alan) + canlı eşleştirmeyi etkiler → #7 Aşama 2 ile birlikte, PO onaylı migration turu. **Ön iş: madde 9b** | 🟩 `algorithmTuner.ts:28-37` (STEP=0.05, MIN/MAX var); #9 gösterim 🔀 PR'da | **Evet** |
+| 9b | **`scoring.ts` saklanan ağırlığı yoksayıyor** (kalibrasyon dekoratif) | ❓ bulgu | #9 turunda keşfedildi: canlı eşleştirme (`scoring.ts:96` → `matching.ts`) hardcoded 0.6/0.4 kullanır; `getAlgorithmWeights` (Tenant.tenantVocabulary) YALNIZ kalibrasyon UI'ında okunur → approve edilen ağırlık canlıya YANSIMAZ. Düzeltilmeli mi (PO+staging) → 9a ile birleşebilir | 🟩 `getAlgorithmWeights` çağıran: yalnız `algorithmTuner.ts:109`; canlı yol `scoring.ts:96` hardcoded | Hayır (kod) |
+| 37 | **Kurum (STK) başvurusu "DÜZELTME İSTE" akışı** (red değil, revizyon talebi) | 🟡 kısmen | **FAZ 4 keşif (bu tur):** kurum onay/red VAR (`platformController.ts:236-270`, `verificationStatus` enum), ama **"düzeltme iste" YOK**; kişi tarafı `requestCorrection` (`adminController.ts:679-724`) deseni ~%70 uyarlanabilir. **Kritik:** kuruma onay/redde ŞU AN **hiç mail gitmiyor**. Gerekir: Tenant'a `correctionRequestedAt`/`correctionFeedback` (veya `verificationNote` JSON) + `sendTenantCorrectionNotification` + endpoint. **Şema gerekli** (küçük). PO: yapalım mı, öncelik? | 🟩 `platformController.ts:236-270`; kişi deseni `adminController.ts:679-724` | Evet (küçük) |
 
 ### B.3 — v2 backlog (madde 14-28, hiç dokunulmadı)
 
