@@ -141,6 +141,23 @@
 - (Opsiyonel güvenlik ağı) `.gitattributes`'a `docs/kararlar/09-DURUM.md merge=union` eklenebilir — ANCAK union
   çelişkili satırları da birleştirir (iki dal farklı "Açık PR: X" yazarsa ikisi de kalır) → yalnız saf-append bölge için güvenli, tek başına önerilmez.
 
+## Karar-Takip Disiplini — "arkada ne kaldı" bir daha unutulmasın
+> Amaç: alınan ama uygulanmayan kararlar, yarım işler ve bağlanmamış (ölü) kod görünür kalsın; ürün sahibi
+> canlıda eksik keşfetmesin. Tek canonical: `docs/kararlar/00-KARAR-TAKIP.md` (🔄 açık iş/karar/ölü-kod takibi).
+
+- **KURAL 1 — Oturum başında OKU + hatırlat (proaktif):** Her yeni oturumun İLK adımı `00-KARAR-TAKIP.md`'yi okumak
+  ve ürün sahibine **açık maddeleri** (🔴/🟡/🔵/❓) kısaca hatırlatmaktır. Ürün sahibi "arkada ne kaldı?" diye
+  sormak zorunda kalmamalı — ajan proaktif söyler.
+- **KURAL 2 — Tur sonunda GÜNCELLE (zorunlu bitiş adımı):** Her BYPASS (iş yapan) tur bitişinde `00-KARAR-TAKIP.md`
+  güncellenir: tamamlanan iş ✅'a çekilir **(yalnız KOD GERÇEĞİYLE doğrulanarak — belge asla koddan önce "yapıldı"
+  demez)**, yarım kalan 🟡 olarak nedeniyle işaretlenir, turda çıkan yeni iş/karar 🔴 satır olarak EKLENİR.
+  Gerekmiyorsa açıkça "karar-takip güncellemesi gerekmedi: [neden]" denir. Atlanırsa **tur EKSİK sayılır.**
+- **09-DURUM/10-yol ile ilişki (çakışmaz, tamamlar):** `00-KARAR-TAKIP` = "**ne kaldı**" görünürlüğü (açık iş +
+  ölü kod + karar tek bakışta) · `09-DURUM` = "**şu an ne oldu**" anlatısı · `10-yol-haritasi` = öncelikli sıra.
+  Yukarıdaki "Belge Senkronizasyonu" bitiş adımı geçerliliğini korur; bu ona EK bir adımdır.
+- **Ölü kod ilkesi:** ölü/bağlanmamış kod için "sil" varsayılan DEĞİL — önce **niyeti anla + neye bağlanacağını**
+  bul (çoğu yarım özelliğin parçası). Gerçek terk adayı "❓ bilinçli terk mi, PO kararı" işaretlenir; silme PO kararıdır.
+
 ## Git Fetch Önce — lokal main geride kalabilir
 - Main durumu (ahead/behind, merge oldu mu) kontrol edilecekse ÖNCE `git fetch origin`.
 - Lokal main güncel değilken yapılan teşhis yanlış olur (yaşandı).

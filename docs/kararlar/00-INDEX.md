@@ -8,13 +8,14 @@
 > **Belge düzeni kuralları:** `belge-duzeni-rehberi.md` (canonical — 6 kural: canonical/tür/yaşayan-dondurulmuş/adlandırma/INDEX/işaretleme).
 > Etiketler: **🔄 YAŞAYAN** (güncel tutulur) · **📸 DONDURULMUŞ** (o günün fotoğrafı, güncellenmez).
 
-## ▶ BURADAN BAŞLA — yeni gelen okuma yolu (5 adım, sırayla)
-Yeni katılan biri (ajan dahil) bu 5 belgeyi bu sırayla okursa 15 dakikada tam resmi görür:
+## ▶ BURADAN BAŞLA — yeni gelen okuma yolu (6 adım, sırayla)
+Yeni katılan biri (ajan dahil) bu 6 belgeyi bu sırayla okursa 15 dakikada tam resmi görür:
 1. **`CLAUDE.md`** (repo kökü) — nasıl çalışıyoruz? (mod/onay, güvenlik, DB uyarıları, submodule/merge kuralları)
 2. **`docs/kararlar/00-INDEX.md`** (bu belge) — ne nerede? (belge haritası)
 3. **`docs/kararlar/09-DURUM.md`** — bugün ne durumdayız? (ŞU AN ne bitti/ne bekliyor · canonical güncel durum)
-4. **`docs/kararlar/10-yol-haritasi.md`** — ne yapılacak? (aktif açık işler + v2 backlog · biten işler: `10-yol-tamamlananlar.md`)
-5. **`docs/kararlar/00-DURUM-PANOSU.md`** — kararlar nerede? (tek-bakışta renkli statü panosu)
+4. **`docs/kararlar/00-KARAR-TAKIP.md`** — **arkada ne kaldı?** (açık iş + yarım + ölü kod + uygulanmamış karar, tek bakışta · her oturum başında oku)
+5. **`docs/kararlar/10-yol-haritasi.md`** — ne yapılacak? (aktif açık işler + v2 backlog · biten işler: `10-yol-tamamlananlar.md`)
+6. **`docs/kararlar/00-DURUM-PANOSU.md`** — kararlar nerede? (tek-bakışta renkli statü panosu)
 
 Derin gerekçe gerekince: `01–11` numaralı kararlar/ belgeleri + ilgili `raporlar/` keşif fotoğrafı.
 
@@ -47,6 +48,7 @@ docs/
 | `07-calisma-tarzi.md` | Prompt felsefesi, DevSecOps şablonu, kurallar | Her prompt öncesi |
 | `08-acik-sorular.md` | Karara bağlanmamışlar (yaş, veri sorumlusu vb.) | Karar gerektiğinde |
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
+| `00-KARAR-TAKIP.md` | **NE KALDI:** açık iş + yarım + ölü kod + uygulanmamış karar tek bakışta (🔄 canonical takip; kanıtlı, kod-doğrulamalı) | **Her oturum başında** (arkada ne kaldı) |
 | `10-yol-haritasi.md` | Aktif iş kuyruğu: üstte açık-işler hızlı-index · v1 (numaralı) · v2 backlog (14-28) | Sıradaki iş kararı |
 | `10-yol-tamamlananlar.md` | Biten v1 işlerinin kaydı (özet + PR/tarih; detay 09-DURUM) — 🔄 refakat belge | "ne bitti" bakışı |
 | `11-tasarim-kararlari-yasam-dongusu-ve-disc.md` | Yaşam döngüsü + DISC gösterim kararları (KARAR 1 DISC çoklu harf/#12 · KARAR 2 ghost red/2a · KARAR 3 kullanıcı çıkarma/2b · KARAR 4 FE tam Türkçe) | #12 / 2a / 2b işine başlarken |
