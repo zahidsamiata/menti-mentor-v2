@@ -1,5 +1,7 @@
 # 01 — FELSEFE VE ÇALIŞMA TARZI (yeni sohbet önce bunu oku)
 
+**📸 DONDURULMUŞ** — oturum devir notu (felsefe / çalışma tarzı; kalıcı referans).
+
 > **Amaç:** Bu proje aylardır tek bir çalışma disipliniyle yürüyor. Yeni sohbet, bu disiplini
 > ilk turdan uygulasın diye burada topladık. Kaynak: `CLAUDE.md` (kök) + `docs/kararlar/07-calisma-tarzi.md`.
 > **Kişi adı yok** — kullanıcıdan "ürün sahihi" / "PO" diye söz edilir.

@@ -1,5 +1,7 @@
 # 04 — STK ADMİN PANELİ: 13 BULGU (yol haritası A — öncelik yüksek)
 
+**📸 DONDURULMUŞ** — oturum devir notu (admin bulguları).
+
 > **Amaç:** Ürün sahibinin STK admin panelini test edip çıkardığı 13 bulguyu tek yerde tutmak.
 > Kaynak: `10-yol-haritasi.md` (A bölümü, 13 madde tam metin). **İlk adım PLANLA keşfi:**
 > her madde için "backend hazır mı / iş boyu S/M/L".

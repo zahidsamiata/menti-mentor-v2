@@ -1,5 +1,7 @@
 # Unutulmuş Niyet Envanteri (2026-08-10)
 
+**📸 DONDURULMUŞ (2026-08-10)** — keşif (unutulmuş niyet envanteri).
+
 > **Amaç:** Aylardır süren projede "yapmayı düşündüğümüz / tasvir ettiğimiz ama hiç ya da yarım
 > aksiyona geçtiğimiz" niyetleri tek yerde toplamak. Ürün sahibi bunları gözden geçirip
 > **"hâlâ istiyorum / geçersiz / unutmuşum"** diye ayıklayacak.

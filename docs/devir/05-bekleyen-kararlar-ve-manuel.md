@@ -1,5 +1,7 @@
 # 05 — BEKLEYEN KARARLAR VE ÜRÜN SAHİBİ MANUEL İŞLERİ
 
+**📸 DONDURULMUŞ** — oturum devir notu (bekleyen kararlar / manuel işler).
+
 > **Amaç:** Kod dışı bekleyenler tek yerde: ürün sahibi kararı bekleyen teknik kararlar + ürün sahibinin
 > elle yapacağı işler + kağıt üstünde kalmış unutulmuş niyetler. Kaynak: `10-yol-haritasi.md` (C/E),
 > `09-DURUM.md`, `unutulmus-niyet-envanteri-2026-08-10.md`, `belge-denetimi-2026-08-10.md`, `chat-v1-teslim.md`.

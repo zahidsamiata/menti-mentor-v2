@@ -1,5 +1,7 @@
 # 02 — PROJE DURUMU (şu an nerede, kanıtlı)
 
+**📸 DONDURULMUŞ** — oturum devir notu (o günkü proje durumu). Güncel durum için: `docs/kararlar/09-DURUM.md`.
+
 > **Amaç:** Yeni sohbet, projenin canlı/tamamlanmış durumunu tek yerden kanıtla görsün.
 > Kaynak: `docs/kararlar/09-DURUM.md`, `belge-denetimi-2026-08-10.md`, `chat-v1-teslim.md`, git.
 > **UYARI (bağlam devri):** Aşağıdaki PR numaraları belgelerden alındı; bağlam devrinde eskimiş olabilir.

@@ -12,7 +12,8 @@
 - **Dürüst pushback**: yanlış/riskli görüneni söyle; testi/CI'ı yeşil GÖSTERME — gerçek durumu ver.
 
 ## 📁 Proje Hafızası — nereye bakılır
-- Güncel durum + tam resim: PROJECT_STATUS.md
+- **Güncel durum (canonical, ŞU AN): docs/kararlar/09-DURUM.md** — her oturum başında oku.
+- Genel tanıtım (dondurulmuş onboarding): PROJECT_STATUS.md — güncel durum İÇİN DEĞİL (bkz. 09-DURUM).
 - Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
 - Geçmiş raporlar: docs/raporlar/
 - Yeni bir işe başlarken: önce docs/kararlar/09-DURUM.md oku (nerede kaldık).

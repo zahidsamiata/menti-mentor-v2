@@ -1,7 +1,13 @@
 # PROJECT_STATUS.md
 
+> **📸 DONDURULMUŞ / DEPRECATED (2026-08-19)** — Bu belge artık **güncel durum için canonical DEĞİLDİR.**
+> "Şu an neredeyiz" (güncel SHA/PR/iş durumu) için tek gerçek kaynağı: **`docs/kararlar/09-DURUM.md`**.
+> Belge haritası: **`docs/kararlar/00-INDEX.md`**. Aşağıdaki içerik projenin **genel tanıtımı** (vizyon, mimari özet,
+> yeni-gelen onboarding'i) olarak korunur; "güncel durum/ilerleme" iddiaları 9 Ağustos'tan eskidir — güncel için 09-DURUM'a bak.
+> (Silme yok — Belge Düzeltme Deseni / belge-duzeni-rehberi Kural 6.)
+
 > Projeye aylar sonra dönen biri veya yeni bir geliştirici için:
-> bu dosyayı okuyarak 10 dakikada tam resmi görebilirsin.
+> bu dosya projenin genel tanıtımını verir; **güncel durum için 09-DURUM.md'ye** geç.
 
 ---
 

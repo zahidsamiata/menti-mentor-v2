@@ -1,5 +1,7 @@
 # Belge Denetimi — 09-DURUM.md + 10-yol-haritasi.md (2026-08-10)
 
+**📸 DONDURULMUŞ (2026-08-10)** — belge denetimi fotoğrafı.
+
 > **Amaç:** İki hafıza belgesi aylardır katman katman büyüdü; içinde çözülmüş/eskimiş/çelişkili maddeler
 > birikti. Bu denetim her maddeyi **gerçekle (kod + git)** kıyaslar: hâlâ geçerli mi / çözülmüş mü /
 > eskimiş mi / çelişkili mi. Amaç, ürün sahibinin "belgeyi şöyle temizleyelim" kararına temel olmak.
