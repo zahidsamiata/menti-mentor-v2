@@ -28,6 +28,9 @@ export interface AdminUser {
   avatarUrl?: string | null;
   // Sertifika rozeti (KARAR 4) — kurum-içi sertifika (TenantMembership.isCertified). Mentörlerde anlamlı.
   isCertified: boolean;
+  // #7 Aşama 1: kişi kalite puanı (ham çarpan 0.8–1.2, nötr 1.0). YALNIZ yönetici görür (KVKK §5).
+  // Mentörlerde anlamlı (feedback-türevi); üyelik yoksa null. FE 5 üzerinden puana çevirir.
+  qualityMultiplier?: number | null;
   // Onay/red denetim izi (İş 2) + red gerekçesi (İş 3 P1) — yalnız admin görür. userId (ham gösterilmez).
   approvedBy?: string | null;
   approvedAt?: string | null;
@@ -66,6 +69,9 @@ export type MergeTagResponse    = { message: string; tagId: string; from: string
 
 export type MatchStatus = 'ACTIVE' | 'COMPLETED' | 'EARLY_EXIT' | 'DISSOLVED';
 
+// #7 Aşama 1: çift ilişki-sağlığı risk sinyali (yalnız yönetici görür). Veri yoksa INSUFFICIENT_DATA.
+export type RiskSignal = 'GREEN' | 'YELLOW' | 'RED' | 'INSUFFICIENT_DATA';
+
 export interface AdminMatch {
   id: string;
   mentorName: string;
@@ -78,6 +84,9 @@ export interface AdminMatch {
   status: MatchStatus;
   meetingCount: number;
   createdAt: string;
+  // #7 Aşama 1: son görüşmelerin check-in'lerinden türeyen risk sinyali + gerekçeler.
+  riskSignal?: RiskSignal;
+  riskReasons?: string[];
 }
 
 export type AdminMatchesResponse = PaginatedResponse<AdminMatch>;
