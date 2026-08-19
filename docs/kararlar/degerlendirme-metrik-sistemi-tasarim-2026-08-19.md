@@ -210,3 +210,19 @@ Salt-okuma keşif + tek tasarım belgesi. **SIFIR** kod/migration/DB/seed. Açı
 #93+#94; #37: backend #46 / çatı #91+#92) **dokunulmadı** — PO merge'ini bekliyor. Bu belge ayrı docs branch'te
 PR olarak açıldı, **MERGE EDİLMEDİ**. Sıradaki adımı PO seçer (Aşama 1'e girmeden önce açık merge kuyruğunu
 temizlemek dahil).
+
+> **⚡ GÜNCELLEME (2026-08-19) — AŞAMA 1 UYGULANDI (PR'da, MERGE OLMADI):** backend **#48** + çatı **#100**.
+> **Bağlanan (migration'sız):** (1) kalite puanı `TenantMembership.qualityMultiplier`'a kalıcı yazım (event-driven,
+> `persistMentorQualityMultiplier`); (2) yönetici görünürlüğü — mentör havuzu "Kalite Puanı" kolonu + eşleşmeler
+> "Risk" rozeti (`adminListUsers`/`adminListMatches`; §5 KVKK: yalnız yönetici); (3) ölü `findMatchesDueForCheckpoint`
+> günlük cron'a (`runCheckpointFeedbackReminderCron`, **LOG-ONLY**). Puan kaynağı KORUNDU: `Feedback`
+> (guidance/resourceSharing/trust) — §7 Açık Nokta 1 bu turda değişmedi, mevcut `computeMentorQualityMultiplier` esas alındı.
+>
+> **AŞAMA 1'den AŞAMA 2'ye KAYAN (bilinçli — migration/PO onayı gerekli):**
+> - Otomatik pasifleştirme KODU + tenant eşik alanı + açma/kapama bayrağı (§3, §6-Aşama1'de "yazılabilir" denmişti →
+>   şema=migration olduğu için Aşama 2'ye alındı; PO merge sırasında onay verirse Aşama 2'de).
+> - Checkpoint cron **gerçek bildirim** (şu an LOG-ONLY): mail geri-alınamaz + sağlam tekrar-bildirme guard'ı
+>   (`checkpointNotifiedAt` gibi) şema alanı ister.
+> - FE `ContextualFeedbackHost`/`MeetingProvider` bağlama: kullanıcı-bazlı "vadesi gelen checkpoint" endpoint'i +
+>   poller yok (kullanıcıya görünen modal → şüphede bağlama). Aşama 2/3.
+> - feedback `periodic*` alanlarının doldurulması = değerlendirme formu (Aşama 3).
