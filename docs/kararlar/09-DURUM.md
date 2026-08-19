@@ -12,6 +12,10 @@
 > **YENİ AÇIK KOD PR (bu tur, #7 Aşama 1 — MERGE OLMADI):** backend **#48** + çatı **#100** (FE + pointer bump).
 > Detay: aşağıdaki "🔀 #7 AŞAMA 1" bölümü.
 >
+> **⚡ GÜNCELLEME (2026-08-19, merge turu — GÜNCEL SNAPSHOT):** #7 Aşama 1 PR'ları MERGED → **çatı main HEAD `ef2b995`**,
+> **backend main HEAD `b5f4b88`**, **submodule pointer `b5f4b88` (senkron)**, **açık kod PR 0/0** (git doğrulandı).
+> İki main CI yeşil. #7 Aşama 1 artık **CANLIDA** (autodeploy). Detay: aşağıdaki "🔀 #7 AŞAMA 1" bölümü (✅ MERGED notu).
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.
@@ -30,8 +34,11 @@
   > Eski "açık PR" katmanları (her turun tarihsel izi) → `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md` (C bölümü).
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
 
-## 🔀 #7 AŞAMA 1 — DEĞERLENDİRME/METRİK ÖLÜ UÇLARINI BAĞLA — PR'DA (MERGE OLMADI) (2026-08-19)
-> Backend **#48** + çatı **#100** (FE + submodule pointer backend feature commit `6b84e27`'e bump). **MERGE EDİLMEDİ** — PO inceleyecek.
+## ✅ #7 AŞAMA 1 — DEĞERLENDİRME/METRİK ÖLÜ UÇLARINI BAĞLA — MERGED, CANLIDA (2026-08-19)
+> **⚡ GÜNCELLEME (2026-08-19, merge turu):** ~~PR'DA (MERGE OLMADI)~~ → **MERGED, canlıda.** Backend **#48** → backend main `b5f4b88`;
+> çatı **#100** → çatı main `ef2b995`; merge sırasında pointer backend main HEAD `b5f4b88`'e bump edildi (ileri-sarım teyitli: `6b84e27` ANCESTOR `b5f4b88`); pointer senkron; iki main CI yeşil. Aşağıdaki bağlanan uçlar artık CANLIDA (autodeploy). MERGE EDİLDİ.
+>
+> Backend **#48** + çatı **#100** (FE + submodule pointer). Başlangıçta MERGE EDİLMEMİŞTİ (PO inceledi → merge onayı verdi).
 > Amaç: yarım kalmış "eşleşme-sonrası değerlendirme + metrik" özelliğinin **migration'sız** uçlarını bağlamak (sıfırdan yazım değil). Tasarım: `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md`.
 - **Bağlanan uçlar:**
   1. **Kalite puanı kalıcı yazım** — `computeMentorQualityMultiplier` sonucu artık `TenantMembership.qualityMultiplier`'a event-driven yazılıyor (`persistMentorQualityMultiplier`, feedback gelince). Alan ZATEN vardı; sadece sertifika yazıyordu.
