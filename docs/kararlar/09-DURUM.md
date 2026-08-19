@@ -39,7 +39,20 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
   > ⚠️ GÜNCELLEME (2026-08-15, devir turu): #72 de **MERGED** (çatı main HEAD `cafd68c`) → açık PR gerçekte **çatı 0 · backend 0** (git + `gh pr list` kanıtlı). Yukarıdaki "docs (#72) açık" ifadesi **eskimiştir.** Oturum kapanışı: `docs/devir/08-oturum-2026-08-15.md`.
   > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): sonraki turlarda 5 PR daha açılıp merge edildi (#76 menü · #40+#77 rozet · #78 envanter · #79 içerik). Merge sonrası **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ MASA TEMİZLİĞİ" bölümü).
   > ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): #80 (docs) + #41+#81 (İş 2+P1 backend) + #82 (İş 2/3 FE) MERGED, canlıda. **Açık:** yönetici-adı gösterimi (backend #42 + çatı #83, CI yeşil, merge PO'da) + bu docs PR. Kod PR: onlar dışında 0. (bkz. "✅ İŞ 2 + İŞ 3 P1" bölümü.)
+  > ⚠️ GÜNCELLEME (2026-08-17, #37 turu): **① grubu docs (#89+#90) MERGED** (bkz. "✅ ① GRUBU"). Yeni **açık PR: #37 login enumeration** — backend **#46** (`fix/login-enumeration-hardening`, base main → backend CI entegrasyon testleri) + çatı pointer **#91** (`backend` → `2ccabd2`) + bu docs PR. **Merge PO'da** (bkz. "🔐 #37 LOGIN ENUMERATION" bölümü). Kod PR: onlar dışında 0.
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
+
+## 🔐 #37 LOGIN ENUMERATION SERTLEŞTİRME — PR AÇIK, MERGE PO'DA (2026-08-17)
+> Backend PR **#46** + çatı pointer PR **#91** + bu docs PR. **MERGE EDİLMEDİ** (karar PO'nun).
+- **Sorun:** login akışında kimlik doğrulaması BAŞARISIZ olduğunda durum sızıyordu — (1) PENDING hesap yanlış/rastgele
+  şifreyle `403 HESAP_ONAY_BEKLENIYOR` (`authController.ts:257-262` eski); (2) OAuth hesap şifre denemeden
+  `401 OAUTH_HESAP` "sosyal giriş ile oluşturulmuştur" (`:267-272` eski). İkisi de e-postanın kayıtlı+durumunu şifresiz sızdırıyordu.
+- **Çözüm:** "önce kimlik doğrula → sonra duruma göre yönlendir" deseni. Yok/OAuth/şifresiz/yanlış-şifre → **hepsi aynı generic 401**
+  (ayırt edilemez). Durum (REJECTED/pasif/PENDING) yalnız doğru şifreden SONRA. Pasif hesap da artık şifre sonrası `HESAP_PASIF`
+  (önce generic 401'di). Meşru akış korundu (onaylı giriş, red ekranı İş 3 P2, onay-bekleme). **Şema DEĞİŞMEDİ (migration yok).**
+- **Test:** enumeration testleri eklendi (`auth.test.ts`) — yanlış-şifrede PENDING/OAuth/pasif sızmıyor + var-olmayan/PENDING/OAuth üçü aynı yanıt.
+- **Doğrulama:** lokal backend tsc (src+test) + eslint yeşil; entegrasyon/enumeration testleri CI'da (lokal `TEST_DATABASE_URL` guard'ı canlı DB'yi korur).
+- **Bilinen sınır:** timing (zamanlama) yan-kanalı kapsam dışı bırakıldı (üretim-öncesi, düşük risk).
 
 ## 🎨 #12 DISC ÇOKLU HARF — PR AÇIK, MERGE PO'DA (2026-08-17)
 > Backend PR **#47** + çatı (FE + pointer) PR **#93**. **MERGE EDİLMEDİ** (karar PO'nun). Ayrıca bu docs PR.
