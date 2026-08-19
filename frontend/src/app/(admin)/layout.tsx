@@ -14,6 +14,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
+import { TenantCorrectionBanner } from '@/components/molecules/TenantCorrectionBanner';
 import { cn } from '@/lib/utils';
 
 // Sol menü — KARAR 1: 4 mantıksal grup, sıklığa göre sıralı.
@@ -137,7 +138,11 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       </aside>
 
       {/* İçerik */}
-      <main className="flex-1 overflow-auto p-6">{children}</main>
+      <main className="flex-1 overflow-auto p-6">
+        {/* #37: başvuru için düzeltme istendiyse üstte bilgi bandı + tekrar gönderim */}
+        <TenantCorrectionBanner />
+        {children}
+      </main>
     </div>
   );
 }

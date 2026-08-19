@@ -60,6 +60,7 @@
    > ⚠️ GÜNCELLEME (2026-08-17): ✅ **ZATEN MEVCUT** (kod gerçeği — bu tur doğrulandı). `(admin)/layout.tsx:92` `<ThemeToggle />` render ediyor + `platform/dashboard/page.tsx`'te de var. Yeniden yapılmadı, teyit edildi.
 6. **Onay paneli bildirim maili** (S-M) — mail altyapısı hazır; kurum onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` bağlanacak (başvuran sessiz kalmasın).
    > ⚠️ GÜNCELLEME (2026-08-17): **KULLANICI onay/red maili zaten çalışıyor** (teyit): `approveUser`→onay maili, `rejectUser`→red maili (gerekçeli), `emailService.sendUserApprovalNotification`. Bulunan bug **düzeltildi (backend #44):** `requestCorrection` düzeltme notunu (`feedbackNote`) e-postaya iletmiyordu → `rejectionReason` geçirildi. **KALAN (bu madde asıl kapsamı, AÇIK):** kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` env bağlama — kullanıcı maili ile karıştırma.
+   > ⚠️ GÜNCELLEME (2026-08-19, #37 kurum düzeltme-iste turu — 🔀 PR'da): **kurum mail ALTYAPISI KURULDU** (`tenantNotifications.ts`, 3 Türkçe şablon: onay/red/düzeltme) + kurum başvurusuna **"düzeltme iste"** akışı (backend #50 + çatı PR; migration canlıda: `CORRECTION_REQUESTED` + `Tenant.correctionNote`). **AMA GÖNDERİM KAPALI** (`TENANT_NOTIFICATIONS_ENABLED=false`, log-only) → gerçek mail hâlâ gitmiyor. **KALAN:** PO `destek@` + prod SMTP env kurup bayrağı açacak (00-KARAR-TAKIP **37m**). Detay: `09-DURUM.md` "🔀 #37 KURUM DÜZELTME-İSTE".
 
 > (K2 OAuth consent + K5 sunucu konumu da S-boyu az-işle-kazanç; yasal oldukları için v1-A'da.)
 
