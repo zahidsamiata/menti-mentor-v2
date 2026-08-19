@@ -17,6 +17,8 @@ export interface AdminUser {
   sectorTags: string[];
   skills: string[];
   discType: 'D' | 'I' | 'S' | 'C' | null;
+  // #12: normalize DISC vektöründen türetilmiş 1–3 harflik gösterim (ör. "DI", "Di", "DIs"). Backend üretir.
+  discLetters?: string | null;
   rematchPriority: boolean;
   rematchCount: number;
   needsOrientation: boolean;
