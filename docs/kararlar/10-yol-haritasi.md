@@ -19,22 +19,35 @@
 
 ---
 
+# 🎯 AKTİF AÇIK İŞLER — HIZLI INDEX (yalnız yapılacaklar)
+
+> **Bu bölüm "aktif yol haritası"nın özüdür:** yalnız **açık/yapılacak** maddeleri gösterir. Detay + gerekçe için aşağıdaki
+> numaralı bloklara in (madde numaraları referans için sabittir — değişmez). **✅ Biten işlerin tam kaydı:**
+> `docs/kararlar/10-yol-tamamlananlar.md` (v1 tamamlananlar) + `09-DURUM.md` (şu an). **v2 backlog** aşağıda ayrı bölümde (madde 14-28).
+
+**🟢 v1 açık işler (canlı-öncesi, PO başlattıkça):**
+- **6** — Onay paneli bildirim maili · *KALAN:* kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` (kullanıcı maili zaten çalışıyor).
+- **7** — Havuz KART + "neden uyumlu" follow-up · *ERTELENDİ:* (A) mentör→menti aday kartı gerekçe/DISC mi, (B) eşleşme-takip panosu mu → PO netleştirecek (sıfırdan değil, kısmen mevcut).
+- **9** — Algoritma kalibrasyon ağırlık (0.60/0.40) gösterimi · *AÇIK* (kod-doğrulama negatif).
+- **13** — Soru cevap-tipi seçimi · *AÇIK* — migration (canlı DB) + kapsam belirsiz → PO netleştir, onaylı ayrı tur.
+- **30** — Sertifika bankası 5→20 seed · *AÇIK* — canlı DB yazımı → PO onayı zorunlu.
+- **31** — DISC-tipine-özel "mentiye yaklaşım" içeriği · *AÇIK* — en büyük içerik boşluğu, PO netleştir.
+- **33** — SJT belge-kod (4 vs 3) + seed↔canlı (32 vs 20) *KALAN* · *AÇIK* — canlı DB yazımı → PO.
+- **34** — Öğrenme yolculuğu tamamlanma görünürlüğü (STK admin) · *AÇIK* (kod-doğrulama negatif).
+- **35** — İki tip red: "düzeltme iste" vs "kalıcı reddet/ghost" · *AÇIK* — migration olası, PO.
+- **36** — Onaylanmış (aktif) kullanıcıyı sistemden çıkarma · *AÇIK* — önce keşif (kodda var mı?).
+
+**⚠️ v1/v2 sınırda + ❓ önce teyit:** aşağıdaki ilgili bölümlerde (K6 guard, sektör havuzu, SJT endpoint bağlama vb. — PO/keşif kararı).
+
+**🔵 v2 backlog (15 iş, dokunulmamış):** madde 14-28 — aşağıda "v2 — SONRA" bölümü (algoritma/DB-riskli/ileri-faz/retention).
+
+---
+
 # 🟢 v1 — CANLI ÖNCESİ (öncelikli, sırayla)
 
 ## v1-A · 🔴 GÜVENLİK & YASAL BLOCKER (canlı-öncesi ŞART)
 
-1. **✅ KARAR 5 — DISC güvenlik açığı düzeltmesi** — **v1 #1, canlı-öncesi ŞART → TAMAMLANDI, CANLIDA.** *(backend #37 + çatı #71 MERGED.)*
-   > ⚠️ GÜNCELLEME (2026-08-15, merge turu): **✅ tamamlandı, canlıda.** backend #37 (`0850eaa`) + çatı #71 (`4c48a8e`) `--merge`
-   > ile MERGED; submodule pointer senkron; iki repo main CI yeşil; regresyon testi CI Integration suite'te geçiyor. **v1 #1 kapandı.**
-   > ⚠️ GÜNCELLEME (2026-08-15): düzeltme kodlandı → **PR açık, merge bekliyor** (henüz merge YOK). Merkezi `discVisibility.ts`
-   > (`canViewerSeeDiscType`): `listUsers`+`getUser` menti→mentör `discType`/`discResultCard`'ı response'tan çıkarır; FE menti kartı
-   > DISC göstermez; regresyon testi eklendi. Gerçek kanıt CI'da (lokal entegrasyon TEST_DATABASE_URL guard'ıyla durur). Detay: `09-DURUM.md` "✅ GÜVENLİK".
-   - **Bulgu (bu oturum, salt-okuma denetimi):** Menti, mentörün DISC **tipini (harf) + arketipini** görüyor → KARAR 5 ihlali.
-     Kanıt: `backend/src/controllers/userController.ts:90` (`listUsers` select `discType`) + `:138-139` (`USER_PUBLIC_SELECT`
-     `discType`/`discResultCard`) + `frontend/src/app/(dashboard)/menti/page.tsx:262-266` (render). Ham vektör güvenli (`USER_FULL_SELECT` self/admin).
-   - **Çelişki:** kod `discType`'ı bilinçli public tasarlamış (yorum s.138) — KARAR 5 (2026-08-11) daha yeni PO kararı → **KARAR 5 kazanır**.
-   - **İş:** viewer-role + target-role farkındalıklı select (menti→mentör **gizle**; mentör→menti **göster**; admin hepsi). Tek yönlü kaldırma mentörün meşru görünümünü bozar.
-   - **⚠️ ÖN-KOŞUL:** havuz kart işi (v1-C, KARAR 2/7) **bu düzeltmeden SONRA** yapılır — yoksa açığı ekrana taşır.
+1. **✅ KARAR 5 — DISC güvenlik açığı düzeltmesi — v1 #1, canlı-öncesi ŞART → TAMAMLANDI, CANLIDA** *(backend #37 + çatı #71 MERGED, 2026-08-15).* Menti artık mentörün DISC tipini görmüyor (merkezi `discVisibility.ts`/`canViewerSeeDiscType`); regresyon testi CI'da. **Tam tarihsel gövde:** `10-yol-tamamlananlar.md` md.1 · **güncel anlatı:** `09-DURUM.md` "✅ GÜVENLİK". *(ÖN-KOŞUL notu tarihsel: havuz kart işi bundan SONRA yapıldı.)*
 2. **✅ K2 — OAuth `kvkkConsentAt`** (KVKK) — **MERGED, canlıda (#38+#73).** OAuth `handleNewUser` + self-serve kurucu admin `new Date()` set eder; test `oauth-kvkk-consent.test.ts`.
 3. **✅ K4 — Yaş 18+ doğrulama** (KVKK) — **MERGED, canlıda (#38+#73).** **PO kararı: ayrı kutu DEĞİL** → tek KVKK onayının metnine gömüldü ("...ve 18 yaşından büyük olduğumu beyan ederim"). DB'ye yaş yazılmaz (şema yok) — öz-beyan kapısı.
 4. **✅ K5 — Sunucu konumu beyanı** (KVKK) — **MERGED, canlıda (#73).** `kvkk/page.tsx` "8. Sunucu Konumu ve Yurt Dışı Aktarım" (İrlanda/AB, KVKK Md.9). Taslak-not disclaimer'ı kapsamı korur (hukukçu gözden geçirebilir).
