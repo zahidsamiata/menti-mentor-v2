@@ -51,6 +51,10 @@ export interface RankedMenti {
   skills: string[];
   fallbackLevel: 0 | 1 | 2 | 3;
   warnings: string[];
+  // #7(A): "neden uyumlu" gerekçesi — backend buildPublicItem üretir (jenerik, DISC harfi/tipi İÇERMEZ:
+  // "Ortak sektör ve ilgi alanları" / "İletişim tarzları uyumlu"). Yoksa "Genel profil uyumu" döner.
+  // ⚠️ KARAR 3/5: menti'nin DISC tipi mentöre AÇILMAZ — yalnız bu jenerik metin gösterilir.
+  compatibilityReason?: string;
 }
 
 export interface RankedMentisResponse {

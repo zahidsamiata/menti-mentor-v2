@@ -423,6 +423,12 @@ export default function MentorDashboardPage() {
                       <p className="text-xs text-muted-foreground">
                         Sektör: {c.sectorScore.toFixed(0)}% · DISC: {c.discScore.toFixed(0)}%
                       </p>
+                      {/* #7(A): "neden uyumlu" gerekçesi — jenerik metin (DISC tipi/harfi sızmaz, KARAR 3/5). */}
+                      {c.compatibilityReason && (
+                        <p className="mt-0.5 text-xs text-primary/80">
+                          {c.compatibilityReason}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

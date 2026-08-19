@@ -91,6 +91,7 @@ export default function MentorHavuzuPage() {
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Durum</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Sertifika</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kalite Puanı</th>
+                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Öğrenme Yolculuğu</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kayıt</th>
                 </tr>
               </thead>
@@ -181,6 +182,17 @@ export default function MentorHavuzuPage() {
                             <span className="font-medium tabular-nums">{five.toFixed(1)} / 5</span>
                           );
                         })()}
+                      </td>
+
+                      {/* Öğrenme Yolculuğu — #34: tamamlandıysa tarih (✓), yoksa "—". Retention göstergesi. */}
+                      <td className="px-4 py-3 text-xs whitespace-nowrap">
+                        {user.learningJourneyCompletedAt ? (
+                          <Badge variant="success" className="text-xs">
+                            ✓ {new Date(user.learningJourneyCompletedAt).toLocaleDateString('tr-TR')}
+                          </Badge>
+                        ) : (
+                          <span className="text-muted-foreground" title="Öğrenme yolculuğu henüz tamamlanmadı">—</span>
+                        )}
                       </td>
 
                       {/* Kayıt */}

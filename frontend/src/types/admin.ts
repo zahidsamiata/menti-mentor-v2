@@ -31,6 +31,9 @@ export interface AdminUser {
   // #7 Aşama 1: kişi kalite puanı (ham çarpan 0.8–1.2, nötr 1.0). YALNIZ yönetici görür (KVKK §5).
   // Mentörlerde anlamlı (feedback-türevi); üyelik yoksa null. FE 5 üzerinden puana çevirir.
   qualityMultiplier?: number | null;
+  // #34: Öğrenme Yolculuğu tamamlanma anı (rol-bazlı; TenantMembership). null = tamamlanmadı → FE "—".
+  // Retention göstergesi (Analytical, PII değil). Platform admin'de zaten görünür, STK yöneticisi de görür.
+  learningJourneyCompletedAt?: string | null;
   // Onay/red denetim izi (İş 2) + red gerekçesi (İş 3 P1) — yalnız admin görür. userId (ham gösterilmez).
   approvedBy?: string | null;
   approvedAt?: string | null;

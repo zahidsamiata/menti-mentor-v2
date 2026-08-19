@@ -87,6 +87,7 @@ export default function MentiHavuzuPage() {
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">DISC</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Sektörler</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Durum</th>
+                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Öğrenme Yolculuğu</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kayıt</th>
                 </tr>
               </thead>
@@ -156,6 +157,17 @@ export default function MentiHavuzuPage() {
                               </p>
                             )}
                           </>
+                        )}
+                      </td>
+
+                      {/* Öğrenme Yolculuğu — #34: tamamlandıysa tarih (✓), yoksa "—". Retention göstergesi. */}
+                      <td className="px-4 py-3 text-xs whitespace-nowrap">
+                        {user.learningJourneyCompletedAt ? (
+                          <Badge variant="success" className="text-xs">
+                            ✓ {new Date(user.learningJourneyCompletedAt).toLocaleDateString('tr-TR')}
+                          </Badge>
+                        ) : (
+                          <span className="text-muted-foreground" title="Öğrenme yolculuğu henüz tamamlanmadı">—</span>
                         )}
                       </td>
 
