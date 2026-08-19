@@ -21,11 +21,11 @@
 > **açık kod PR 0/0** (git doğrulandı). İki main CI yeşil. Backend #49 → `18cfc42`; çatı #102 → `0fd4942` (pointer backend main
 > HEAD'e bump edildi, ileri-sarım teyitli). Bağlanan uçlar artık **CANLIDA** (autodeploy). Detay: "✅ KÜÇÜK İŞLER PAKETİ" bölümü.
 >
-> **⚡ GÜNCELLEME (2026-08-19, #37 kurum düzeltme-iste turu — YENİ AÇIK PR + MIGRATION CANLIDA):** başlangıç: çatı `24ea0b0`,
-> backend `18cfc42`, pointer senkron. **YENİ AÇIK KOD PR (MERGE OLMADI):** backend **#50** + çatı **(bu tur açılıyor)**.
-> 🛑 **MIGRATION CANLIYA UYGULANDI (PO onaylı):** `TenantVerificationStatus += CORRECTION_REQUESTED` + `Tenant.correctionNote String?`
-> (additive/nullable, `IF NOT EXISTS`+`db execute`+`migrate resolve`; Tenant 3→3 değişmedi, verificationNote korundu).
-> Mail altyapısı kuruldu ama **GÖNDERİM KAPALI** (`TENANT_NOTIFICATIONS_ENABLED=false`). Detay: "🔀 #37 KURUM DÜZELTME-İSTE" bölümü.
+> **⚡ GÜNCELLEME (2026-08-19, #37 kurum düzeltme-iste — ✅ MERGED, CANLIDA — GÜNCEL SNAPSHOT):** #37 PR'ları MERGED →
+> **çatı main HEAD `2639e2e`**, **backend main HEAD `ba92dfa`**, **submodule pointer `ba92dfa` (senkron)**, **açık kod PR 0/0**
+> (git doğrulandı). İki main CI yeşil. Backend #50 → `ba92dfa`; çatı #104 → `2639e2e` (pointer bump, ileri-sarım teyitli).
+> 🛑 **MIGRATION CANLIDA:** `CORRECTION_REQUESTED` enum + `Tenant.correctionNote` (canlı DB'de VAR, teyitli; Tenant 3→3).
+> Mail altyapısı hazır ama **GÖNDERİM KAPALI** (`TENANT_NOTIFICATIONS_ENABLED=false`). Detay: "✅ #37 KURUM DÜZELTME-İSTE" bölümü.
 >
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
@@ -61,8 +61,11 @@
 - **Doğrulama:** backend PR #48 CI **yeşil** (entegrasyon+unit CI'da geçti); FE lokal tsc ✓ · vitest 38/38 ✓ · build ✓. Lokal backend entegrasyon testleri TEST_DATABASE_URL guard'ıyla durur (canlıya truncate yok) — asıl kanıt CI.
 - **Merge sırası (PO için):** backend #48 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı #100 merge.
 
-## 🔀 #37 KURUM DÜZELTME-İSTE — PR'DA (MERGE OLMADI) — MIGRATION CANLIDA (2026-08-19)
-> Backend **#50** + çatı **(bu tur açıldı)**. Kurum başvurusu için **onayla / reddet / DÜZELTME İSTE** üçlüsü. Reddetmek yerine revizyon talebi (kişi tarafı `requestCorrection` deseninin kurum karşılığı).
+## ✅ #37 KURUM DÜZELTME-İSTE — MERGED, CANLIDA (2026-08-19)
+> **⚡ GÜNCELLEME (2026-08-19, merge turu):** ~~PR'DA (MERGE OLMADI)~~ → **MERGED, canlıda.** Backend **#50** → backend main `ba92dfa`;
+> çatı **#104** → çatı main `2639e2e` (pointer backend main HEAD `ba92dfa`'ya bump, ileri-sarım teyitli: `decfc75` ANCESTOR `ba92dfa`); pointer senkron; iki main CI yeşil. Kod gerçeği main'de + canlı DB'de (enum+kolon) teyitli. Aşağıdaki akış CANLIDA (autodeploy). **Mail GÖNDERİM HÂLÂ KAPALI** (env açılmadı). MERGE EDİLDİ.
+>
+> Backend **#50** + çatı **#104**. Kurum başvurusu için **onayla / reddet / DÜZELTME İSTE** üçlüsü. Reddetmek yerine revizyon talebi (kişi tarafı `requestCorrection` deseninin kurum karşılığı).
 - **🛑 MIGRATION (PO onaylı, canlıya uygulandı):** `TenantVerificationStatus += CORRECTION_REQUESTED` + `Tenant.correctionNote String?`. Additive/nullable, `IF NOT EXISTS` SQL + `db execute` + `migrate resolve --applied` (db push YASAK). **Doğrulama:** Tenant 3→3 (değişmedi), durum dağılımı aynı, `verificationNote` (başvuru kanıtı) EZİLMEDİ — düzeltme notu AYRI `correctionNote`'a yazılır. Migration dosyası: `20260819000000_add_tenant_correction_request`.
 - **Backend akış:** platform admin `POST /api/platform/tenants/:id/request-correction` (→ CORRECTION_REQUESTED + not); kurum admini `POST /api/tenants/self-serve/resubmit` (→ PENDING_REVIEW, correctionNote KORUNUR, IDOR-safe); `getMe` additive `tenant` bloğu (correctionNote YALNIZ ADMIN'e).
 - **FE:** platform dashboard "Düzeltme İste" butonu + PII uyarılı not diyaloğu; STK admin layout `TenantCorrectionBanner` (durum + tekrar-gönderim formu, destekleyici dil).
