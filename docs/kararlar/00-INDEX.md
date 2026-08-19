@@ -1,5 +1,5 @@
 # MENTİMENTOR / SİVİLKAPASİTE — BELGE HARİTASI (INDEX)
-**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-16 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
+**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-19 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
 
 > Bu belgeler, birden fazla sohbetten toplanan kararların konu bazlı derlemesidir.
 > Claude Code / yeni Claude chat'i, ihtiyaç duyduğu konunun belgesini okur — hepsini değil.
@@ -51,6 +51,7 @@ docs/
 | `belge-temizlik-haritasi-2026-08-14.md` | 44 belgenin 6-kural taraması (etiket/INDEX/gruplama/bayat haritası) | 📸 DONDURULMUŞ (keşif) |
 | `00-karar-statu-haritasi-2026-08-14.md` | ~72 kararın 3-boyutlu (plan/kod/çelişki) renkli statü haritası; 🟨 az-işle-kazanç öne çıkarılmış | 📸 DONDURULMUŞ (statü haritası) |
 | `00-DURUM-PANOSU.md` | Kararların tek-bakışta renkli statü panosu (92 karar; 🟨 az-işle-kazanç öne çıkarılmış) | 🔄 YAŞAYAN (statü panosu) |
+| `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | #7 eşleşme-sonrası değerlendirme + metrik takip + otomatik pasifleştirme (dernek-ayarlı, varsayılan kapalı) + yeniden değerlendirme + periyodik hatırlatma vizyonu; VİZYON ↔ KOD GERÇEĞİ (dosya:satır) ayrı; 3 aşamalı plan | 🔄 YAŞAYAN (#7 inşasına başlarken) |
 
 > **Denetim kümesi (birlikte okunur):** `belge-aksiyon-denetimi-2026-08-11` (kararlar gerçekle kıyas) · `belge-denetimi-2026-08-10` (09/10 denetimi) · `unutulmus-niyet-envanteri-2026-08-10` (unutulan niyetler) · `belge-temizlik-haritasi-2026-08-14` (düzen taraması). Farklı kapsam/tarih — birleştirilmez, çapraz referanslıdır.
 
