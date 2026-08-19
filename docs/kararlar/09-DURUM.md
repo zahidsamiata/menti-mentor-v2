@@ -54,6 +54,22 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 - **Doğrulama:** lokal backend tsc (src+test) + eslint yeşil; entegrasyon/enumeration testleri CI'da (lokal `TEST_DATABASE_URL` guard'ı canlı DB'yi korur).
 - **Bilinen sınır:** timing (zamanlama) yan-kanalı kapsam dışı bırakıldı (üretim-öncesi, düşük risk).
 
+## 🎨 #12 DISC ÇOKLU HARF — PR AÇIK, MERGE PO'DA (2026-08-17)
+> Backend PR **#47** + çatı (FE + pointer) PR **#93**. **MERGE EDİLMEDİ** (karar PO'nun). Ayrıca bu docs PR.
+- **Ne:** DISC kimliği tek baskın harf yerine türetilmiş **1–3 harf** (ör. `D`, `DI`, `Di`, `DIs`) — KARAR 1 (#12=md.4).
+- **Onaylanan eşikler (PO, 2026-08-17):** orta çizgi (midline) **0.25** (normalize vektör, eşit pay); geçen tipler gösterilir,
+  birincil daima. BÜYÜK/küçük = **birincilin %75'i** (yakın→BÜYÜK, zayıfça geçen→küçük). Tek merkezi `DISC_LETTER_CONFIG`
+  (başlangıç değerleri; gerçek kullanıcı verisiyle kalibre edilecek — kullanıcı isteği).
+- **Migration YOK:** harf saklanan normalize vektörden türetilir (`discLetters.ts`). Şema değişmedi.
+- **Güvenlik (KARAR 5/PII):** yalnız türetilmiş harf gönderilir; ham vektör response'a KONMAZ (adminList'te vektör
+  select'e eklenir ama base map'te çıkarılır; `admin.test.ts` doğrular).
+- **Gösterim (bu tur):** yönetici havuz (menti/mentör havuzu + bekleme odası) + kendi profil kartı + menti dashboard
+  (paylaşılan `DiscBadge` atomu). **Kapsam DIŞI (belirgin):** peer kartı (menti→mentör KARAR 5'te gizli), platform üye
+  tablosu + DISC dağılım grafiği (agregat), eşleşme aday kartı (=#7 follow-up).
+- **Doğrulama:** lokal backend tsc(src+test) ✓ · eslint ✓ · frontend tsc ✓ · vitest 38/38 ✓ · build ✓; DISC saf mantık
+  `tsx` ile 8/8 ✓. Entegrasyon/unit DISC testleri → CI (lokal TEST_DATABASE_URL guard'ı canlı DB'yi korur).
+- **Sıradaki (Grup 2):** 2a ghost red (#35) — migration, AYRI tur.
+
 ## ✅ ① GRUBU — MASA TEMİZLİĞİ MERGED, CANLIDA (2026-08-17)
 > Çatı main `41f91b4` · backend main `e83ec9c` · submodule pointer `e83ec9c` (senkron) · açık PR **0/0** (git + `gh pr list` doğrulandı). Merge sırası: backend #44 → #45 → çatı pointer bump #88 → çatı FE #87. Her adımda iki repo main CI yeşil. **Migration/DB yazımı/seed çalıştırma SIFIR.**
 - **#32 — Admin soru düzenleme UI (çatı #87), canlıda:** kuruma özel soruya **Düzenle** butonu + inline form (`(admin)/admin/questions/page.tsx`). Backend PATCH `/api/questions/:id` (requireRole ADMIN + tenant-scoped IDOR: global soru `GLOBAL_SORU_KILITLI`, çapraz-tenant `YETKI_YETERSIZ`) **zaten hazırdı** → yalnız FE eksikti. Yalnız metin düzenlenir (backend `UpdateQuestionSchema` gereği; discDimension/type yapısal). CI Integration (Admin) yeşil.

@@ -9,11 +9,8 @@ import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { CoachingSuggestionsDialog } from '@/components/organisms/CoachingSuggestionsDialog';
+import { DiscBadge } from '@/components/atoms/DiscBadge';
 import type { AdminUser } from '@/types/admin';
-
-const DISC_COLORS: Record<string, string> = {
-  D: 'text-red-500', I: 'text-yellow-500', S: 'text-green-500', C: 'text-blue-500',
-};
 
 export default function WaitingRoomPage() {
   const api = useApiClient();
@@ -133,15 +130,9 @@ export default function WaitingRoomPage() {
                       </Badge>
                     </td>
 
-                    {/* DISC */}
+                    {/* DISC — #12 çoklu harf (ör. "Di"); birincil harfe göre renk. */}
                     <td className="px-4 py-3">
-                      {user.discType ? (
-                        <span className={`font-bold ${DISC_COLORS[user.discType]}`}>
-                          {user.discType}
-                        </span>
-                      ) : (
-                        <span className="text-muted-foreground">—</span>
-                      )}
+                      <DiscBadge discLetters={user.discLetters} discType={user.discType} />
                     </td>
 
                     {/* Sektörler */}
