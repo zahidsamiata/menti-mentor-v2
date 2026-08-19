@@ -5,7 +5,8 @@
 > Bu belge yalnızca **BUNDAN SONRA yapılacak açık işleri** öncelik sırasıyla tutar. Biten işler burada durmaz —
 > güncel durum `09-DURUM.md`'de; 2026-08-10 öncesi tam geçmiş `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`'de.
 >
-> **Son güncelleme:** 2026-08-17 (**① grubu masa temizliği MERGED, canlıda**: **#32 admin soru düzenleme UI ✅ (çatı #87)** · **#6 correction-maili fix ✅ (backend #44)** · **#33 ölü seed dosyası temizliği ✅ kısmi (backend #45)** · **#5 ThemeToggle ✅ zaten mevcut** (kod-doğrulandı). Çatı `41f91b4` · backend `e83ec9c` · açık PR 0/0. **#13 cevap-tipi = migration gerektiriyor → AÇIK** (brief "yapıldı" dedi, YANLIŞ). Önceki: 2026-08-15 (**5-PR masa temizliği merge'i, canlıda**: **#8 menü 4-grup ✅ (#76)** · **#11 sertifika rozeti ✅ kişi-geneli (#40+#77)** · **#10 durum rozeti ✅ zaten mevcuttu** (kod gerçeği düzeltmesi) · envanter/içerik raporları #78+#79.
+> **Son güncelleme:** 2026-08-19 (**#12 DISC çoklu harf ✅ MERGED, canlıda** (backend #47 + çatı #93 + docs #94) · **#37 giriş enumeration sertleştirme ✅ MERGED, canlıda** (backend #46 + çatı #91 + docs #92, madde 37 kapandı — PENDING dahil). Çatı `753c545` · backend `b6187c1` · açık kod PR 0/0. Detay: `09-DURUM.md`. Eski tarih katmanları: `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
+> Önceki: 2026-08-17 (**① grubu masa temizliği MERGED, canlıda**: **#32 admin soru düzenleme UI ✅ (çatı #87)** · **#6 correction-maili fix ✅ (backend #44)** · **#33 ölü seed dosyası temizliği ✅ kısmi (backend #45)** · **#5 ThemeToggle ✅ zaten mevcut** (kod-doğrulandı). Çatı `41f91b4` · backend `e83ec9c` · açık PR 0/0. **#13 cevap-tipi = migration gerektiriyor → AÇIK** (brief "yapıldı" dedi, YANLIŞ). Önceki: 2026-08-15 (**5-PR masa temizliği merge'i, canlıda**: **#8 menü 4-grup ✅ (#76)** · **#11 sertifika rozeti ✅ kişi-geneli (#40+#77)** · **#10 durum rozeti ✅ zaten mevcuttu** (kod gerçeği düzeltmesi) · envanter/içerik raporları #78+#79.
 > Çatı main `444c025` · backend `5eafbbd` · açık PR 0/0. **v1-C kalan ~6 iş** (#5,6,7-follow-up,9,12,13). Yeni tespitler v1-D (#29-34) eklendi: İş 2+3 migration ONAYLI, sertifika 5→20, DISC-yaklaşım boşluğu vb.
 > Önceki: **v1 #1 = KARAR 5 DISC güvenlik ✅** — backend #37 + çatı #71 MERGED).
 > **2026-08-16:** İş 2 + İş 3 (P1+P2+P3) tümü ✅ CANLIDA (#41-#43, #81-#85) — onay/red izi + gerekçe + yönetici-adı + reddedilen kullanıcı akışı. Yeni işler v1-E (#35-#37: iki tip red, aktif kullanıcı çıkarma, enumeration sertleştirme). Önceki: 2026-08-14 (**v1/v2
@@ -18,22 +19,35 @@
 
 ---
 
+# 🎯 AKTİF AÇIK İŞLER — HIZLI INDEX (yalnız yapılacaklar)
+
+> **Bu bölüm "aktif yol haritası"nın özüdür:** yalnız **açık/yapılacak** maddeleri gösterir. Detay + gerekçe için aşağıdaki
+> numaralı bloklara in (madde numaraları referans için sabittir — değişmez). **✅ Biten işlerin tam kaydı:**
+> `docs/kararlar/10-yol-tamamlananlar.md` (v1 tamamlananlar) + `09-DURUM.md` (şu an). **v2 backlog** aşağıda ayrı bölümde (madde 14-28).
+
+**🟢 v1 açık işler (canlı-öncesi, PO başlattıkça):**
+- **6** — Onay paneli bildirim maili · *KALAN:* kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` (kullanıcı maili zaten çalışıyor).
+- **7** — Havuz KART + "neden uyumlu" follow-up · *ERTELENDİ:* (A) mentör→menti aday kartı gerekçe/DISC mi, (B) eşleşme-takip panosu mu → PO netleştirecek (sıfırdan değil, kısmen mevcut).
+- **9** — Algoritma kalibrasyon ağırlık (0.60/0.40) gösterimi · *AÇIK* (kod-doğrulama negatif).
+- **13** — Soru cevap-tipi seçimi · *AÇIK* — migration (canlı DB) + kapsam belirsiz → PO netleştir, onaylı ayrı tur.
+- **30** — Sertifika bankası 5→20 seed · *AÇIK* — canlı DB yazımı → PO onayı zorunlu.
+- **31** — DISC-tipine-özel "mentiye yaklaşım" içeriği · *AÇIK* — en büyük içerik boşluğu, PO netleştir.
+- **33** — SJT belge-kod (4 vs 3) + seed↔canlı (32 vs 20) *KALAN* · *AÇIK* — canlı DB yazımı → PO.
+- **34** — Öğrenme yolculuğu tamamlanma görünürlüğü (STK admin) · *AÇIK* (kod-doğrulama negatif).
+- **35** — İki tip red: "düzeltme iste" vs "kalıcı reddet/ghost" · *AÇIK* — migration olası, PO.
+- **36** — Onaylanmış (aktif) kullanıcıyı sistemden çıkarma · *AÇIK* — önce keşif (kodda var mı?).
+
+**⚠️ v1/v2 sınırda + ❓ önce teyit:** aşağıdaki ilgili bölümlerde (K6 guard, sektör havuzu, SJT endpoint bağlama vb. — PO/keşif kararı).
+
+**🔵 v2 backlog (15 iş, dokunulmamış):** madde 14-28 — aşağıda "v2 — SONRA" bölümü (algoritma/DB-riskli/ileri-faz/retention).
+
+---
+
 # 🟢 v1 — CANLI ÖNCESİ (öncelikli, sırayla)
 
 ## v1-A · 🔴 GÜVENLİK & YASAL BLOCKER (canlı-öncesi ŞART)
 
-1. **✅ KARAR 5 — DISC güvenlik açığı düzeltmesi** — **v1 #1, canlı-öncesi ŞART → TAMAMLANDI, CANLIDA.** *(backend #37 + çatı #71 MERGED.)*
-   > ⚠️ GÜNCELLEME (2026-08-15, merge turu): **✅ tamamlandı, canlıda.** backend #37 (`0850eaa`) + çatı #71 (`4c48a8e`) `--merge`
-   > ile MERGED; submodule pointer senkron; iki repo main CI yeşil; regresyon testi CI Integration suite'te geçiyor. **v1 #1 kapandı.**
-   > ⚠️ GÜNCELLEME (2026-08-15): düzeltme kodlandı → **PR açık, merge bekliyor** (henüz merge YOK). Merkezi `discVisibility.ts`
-   > (`canViewerSeeDiscType`): `listUsers`+`getUser` menti→mentör `discType`/`discResultCard`'ı response'tan çıkarır; FE menti kartı
-   > DISC göstermez; regresyon testi eklendi. Gerçek kanıt CI'da (lokal entegrasyon TEST_DATABASE_URL guard'ıyla durur). Detay: `09-DURUM.md` "✅ GÜVENLİK".
-   - **Bulgu (bu oturum, salt-okuma denetimi):** Menti, mentörün DISC **tipini (harf) + arketipini** görüyor → KARAR 5 ihlali.
-     Kanıt: `backend/src/controllers/userController.ts:90` (`listUsers` select `discType`) + `:138-139` (`USER_PUBLIC_SELECT`
-     `discType`/`discResultCard`) + `frontend/src/app/(dashboard)/menti/page.tsx:262-266` (render). Ham vektör güvenli (`USER_FULL_SELECT` self/admin).
-   - **Çelişki:** kod `discType`'ı bilinçli public tasarlamış (yorum s.138) — KARAR 5 (2026-08-11) daha yeni PO kararı → **KARAR 5 kazanır**.
-   - **İş:** viewer-role + target-role farkındalıklı select (menti→mentör **gizle**; mentör→menti **göster**; admin hepsi). Tek yönlü kaldırma mentörün meşru görünümünü bozar.
-   - **⚠️ ÖN-KOŞUL:** havuz kart işi (v1-C, KARAR 2/7) **bu düzeltmeden SONRA** yapılır — yoksa açığı ekrana taşır.
+1. **✅ KARAR 5 — DISC güvenlik açığı düzeltmesi — v1 #1, canlı-öncesi ŞART → TAMAMLANDI, CANLIDA** *(backend #37 + çatı #71 MERGED, 2026-08-15).* Menti artık mentörün DISC tipini görmüyor (merkezi `discVisibility.ts`/`canViewerSeeDiscType`); regresyon testi CI'da. **Tam tarihsel gövde:** `10-yol-tamamlananlar.md` md.1 · **güncel anlatı:** `09-DURUM.md` "✅ GÜVENLİK". *(ÖN-KOŞUL notu tarihsel: havuz kart işi bundan SONRA yapıldı.)*
 2. **✅ K2 — OAuth `kvkkConsentAt`** (KVKK) — **MERGED, canlıda (#38+#73).** OAuth `handleNewUser` + self-serve kurucu admin `new Date()` set eder; test `oauth-kvkk-consent.test.ts`.
 3. **✅ K4 — Yaş 18+ doğrulama** (KVKK) — **MERGED, canlıda (#38+#73).** **PO kararı: ayrı kutu DEĞİL** → tek KVKK onayının metnine gömüldü ("...ve 18 yaşından büyük olduğumu beyan ederim"). DB'ye yaş yazılmaz (şema yok) — öz-beyan kapısı.
 4. **✅ K5 — Sunucu konumu beyanı** (KVKK) — **MERGED, canlıda (#73).** `kvkk/page.tsx` "8. Sunucu Konumu ve Yurt Dışı Aktarım" (İrlanda/AB, KVKK Md.9). Taslak-not disclaimer'ı kapsamı korur (hukukçu gözden geçirebilir).
@@ -69,8 +83,8 @@
     > ⚠️ GÜNCELLEME (2026-08-15): ✅ **ZATEN MEVCUTTU** (kod gerçeği — ⏳ yanlıştı). Mentör+menti havuz tablosunda "Durum" sütunu `APPROVAL_META` ile Onaylı/Bekliyor/Reddedildi gösteriyor (`mentor-havuzu/page.tsx`, `menti-havuzu/page.tsx`); admin-only. Yeniden yapılmadı, teyit edildi.
 11. **Sertifika rozeti (KARAR 4)** — "Sertifikalı ✓", herkes görür.
     > ⚠️ GÜNCELLEME (2026-08-15): ✅ **TAMAMLANDI, CANLIDA (backend #40 + çatı #77).** **KİŞİ-GENELİ** — kişi herhangi bir kurumda sertifikalıysa mentör havuzunda "✓ Sertifikalı"; `TenantMembership.isCertified` `some()` ile türetilir (`UserProfile.isCertified` bakımsız → kullanılmadı; migration gerekmedi).
-12. **DISC baskın+ikincil HARF "DI" (KARAR 11 · =md.4)** — havuzda tek harf; ikincil harf türetme/gösterim yok. Türetilmiş **harf** (yüzde değil) PII-güvenli; KARAR 5 düzeltmesiyle uyumlu uygulanmalı.
-    > ⚠️ GÜNCELLEME (2026-08-17, #12 turu): **KODLANDI — PR açık, merge PO'da (backend #47 + çatı #93).** Türetilmiş 1–3 harf (ör. "D","DI","Di","DIs"). **Eşikler PO onaylı:** orta çizgi **0.25** (normalize vektör, eşit pay — `discVectorService.ts:130-143`) + BÜYÜK/küçük = **birincilin %75'i**. Tek merkezi `DISC_LETTER_CONFIG` (başlangıç değerleri; gerçek veriyle kalibre edilecek). **Migration YOK** — harf saklanan vektörden türetilir (`discLetters.ts`: `computeDiscLetters`/`discLettersFromVector`). **Güvenlik:** yalnız harf gönderilir, ham vektör response'a KONMAZ (KARAR 5/PII; `admin.test.ts` doğrular). **Gösterim (bu tur):** yönetici havuz (menti/mentör/bekleme) + kendi profil + menti dashboard (paylaşılan `DiscBadge`). **Kapsam DIŞI (belirgin):** peer kartı (menti→mentör KARAR 5'te gizli), platform üye tablosu + DISC dağılım grafiği (agregat), eşleşme aday kartı (=#7). **Not:** normalize modelde (sum=1, midline 0.25) dört harf aynı anda oluşamaz → pratikte 1–3 harf.
+12. **✅ DISC baskın+ikincil HARF "DI" (KARAR 11 · =md.4) — MERGED, CANLIDA (2026-08-19).**
+    > ⚠️ GÜNCELLEME (2026-08-19): **✅ MERGED, canlıda** — backend #47 (`4c63d0e`) + çatı #93 (`61b6eb2`) + docs #94 (`42e35bf`). Türetilmiş 1–3 harf (ör. "D","DI","Di","DIs"). **Eşikler PO onaylı:** orta çizgi **0.25** (normalize vektör, eşit pay — `discVectorService.ts:130-143`) + BÜYÜK/küçük = **birincilin %75'i**. Tek merkezi `DISC_LETTER_CONFIG` (başlangıç değerleri; gerçek veriyle kalibre edilecek). **Migration YOK** — harf saklanan vektörden türetilir (`discLetters.ts`). **Güvenlik:** yalnız harf gönderilir, ham vektör response'a KONMAZ (KARAR 5/PII; `admin.test.ts` doğrular). **Gösterim:** yönetici havuz (menti/mentör/bekleme) + kendi profil + menti dashboard (paylaşılan `DiscBadge`). **Kapsam DIŞI (belirgin):** peer kartı (menti→mentör KARAR 5'te gizli), platform üye tablosu + DISC dağılım grafiği (agregat), eşleşme aday kartı (=#7).
 13. **Soru cevap-tipi seçimi (md.10)** — soru formunda şıklı/açık-uçlu seçimi. *(⚠️ kapsam belirsiz — aşağıda teyit.)*
     > ⚠️ GÜNCELLEME (2026-08-17): **AÇIK (yapılmadı) — brief "yapıldı" dedi, YANLIŞ.** Önceki turda koddan kanıtlandı: `Question` modelinde cevap-tipi alanı YOK (`schema.prisma`) → yeni alan = **migration** = canlı DB yazımı → 🛑 kırmızı kural. "Küçük FE" değil, **full-stack M** (schema + form + test rendering). Kapsam hâlâ belirsiz (hangi tipler/validation/skoring) → **PO netleştirmeli**, migration onaylı ayrı tur.
 
@@ -82,25 +96,21 @@
 30. **⚠️ Sertifika bankası canlıda eksik (5 vs 20)** — kodda 20 senaryo (`seed-certification.ts`), canlıda yalnız 5 soru (salt-okuma sayımı). Zengin banka seed edilmemiş → `seedCertification()` kontrollü çalıştırma. **Canlı DB yazımı → PO onayı ZORUNLU** (tehlikeli tam `seed.ts` değil; bu fonksiyon idempotent/silmez ama canlıda çalışır).
 31. **DISC-tipine-özel "mentiye yaklaşım" içeriği YOK (en büyük içerik boşluğu)** — hiçbir testte mentinin DISC tipine göre uyarlanan yaklaşım içeriği yok. 3 seçenek (eksikler raporu): (1) statik yaklaşım kılavuzu (M, önerilen) · (2) SJT'yi menti-DISC koşullu genişletme (L, migration) · (3) sertifikaya tip-özel varyant (L, önerilmez). Kısmen v2 #20 (KARAR 9) ile ilişkili — PO netleştirir.
 32. **Admin soru düzenleme UI (S)** — ~~backend PATCH hazır (`questionController.ts`), FE'de düzenle butonu yok~~ → salt-frontend, hızlı kazanç.
-    > ⚠️ GÜNCELLEME (2026-08-17): ✅ **TAMAMLANDI, CANLIDA (çatı #87).** Kuruma özel soruya Düzenle butonu + inline form; backend PATCH `/api/questions/:id` (ADMIN + tenant-scoped IDOR) zaten hazırdı. Yalnız metin düzenlenir. CI Integration (Admin) yeşil. *(Bu madde v1-D + v1-E'de iki kez listelenmişti — kopya; ikisi de kapandı.)*
+    > ⚠️ GÜNCELLEME (2026-08-17): ✅ **TAMAMLANDI, CANLIDA (çatı #87).** Kuruma özel soruya Düzenle butonu + inline form; backend PATCH `/api/questions/:id` (ADMIN + tenant-scoped IDOR) zaten hazırdı. Yalnız metin düzenlenir. CI Integration (Admin) yeşil. *(v1-E'deki kopyası 2026-08-19'da arşive alındı: `docs/arsiv/yol-haritasi-kopya-kayitlar-2026-08-19.md`; bu v1-D kaydı asıl.)*
 33. **Çift DISC seed temizliği + SJT belge-kod çelişkisi (S)** — `seed.ts` (32 soru) ile `seed-questions.ts` (20, canlıda olan) çelişiyor → tek kaynağa indir. Ayrıca `03-psikometri` "4 pedagojik SJT" der, kodda 3 var → SJT genişlet ya da belgeyi düzelt.
-    > ⚠️ GÜNCELLEME (2026-08-17): ✅ **KISMİ (backend #45).** Ölü/çelişen `prisma/seed-questions.ts` (hiç import edilmeyen standalone, 20 global DISC) **silindi** — aktif `seed.ts` (32) canonical kaldı. **DB'ye dokunulmadı, seed çalıştırılmadı.** **KALAN (PO kararı, canlı DB yazımı):** (a) **seed↔canlı**: canlıda 20 DISC var (eski seed izi), `seed.ts` 32 üretir → re-seed mi trim mi? (b) **SJT belge-kod**: kod **3** (doğrulandı), `03-psikometri:47` "4" der → belge kod gerçeğine hizalandı (bu tur), 4'e içerik genişletme PO kararı. *(Madde v1-D + v1-E'de iki kez — kopya.)*
+    > ⚠️ GÜNCELLEME (2026-08-17): ✅ **KISMİ (backend #45).** Ölü/çelişen `prisma/seed-questions.ts` (hiç import edilmeyen standalone, 20 global DISC) **silindi** — aktif `seed.ts` (32) canonical kaldı. **DB'ye dokunulmadı, seed çalıştırılmadı.** **KALAN (PO kararı, canlı DB yazımı):** (a) **seed↔canlı**: canlıda 20 DISC var (eski seed izi), `seed.ts` 32 üretir → re-seed mi trim mi? (b) **SJT belge-kod**: kod **3** (doğrulandı), `03-psikometri:47` "4" der → belge kod gerçeğine hizalandı (bu tur), 4'e içerik genişletme PO kararı. *(v1-E'deki kopyası 2026-08-19'da arşive alındı: `docs/arsiv/yol-haritasi-kopya-kayitlar-2026-08-19.md`; bu v1-D kaydı asıl.)*
 34. **Öğrenme yolculuğu tamamlanma görünürlüğü (S)** — yönetici kimin tamamladığını göremiyor (`learningJourneyCompletedAt` admin select'te yok); retention için faydalı.
-    > ⚠️ GÜNCELLEME (2026-08-17): brief "yapıldı" dedi ama **kod-doğrulama NEGATİF** — `learningJourneyCompletedAt` STK `adminController` select'inde YOK (yalnız `platformTenantController` = platform süper-admin drill-down'da var). STK yönetici hâlâ göremiyor → **AÇIK** (kod gerçeği esas). *(Madde v1-D + v1-E'de iki kez — kopya.)*
+    > ⚠️ GÜNCELLEME (2026-08-17): brief "yapıldı" dedi ama **kod-doğrulama NEGATİF** — `learningJourneyCompletedAt` STK `adminController` select'inde YOK (yalnız `platformTenantController` = platform süper-admin drill-down'da var). STK yönetici hâlâ göremiyor → **AÇIK** (kod gerçeği esas). *(v1-E'deki kopyası 2026-08-19'da arşive alındı: `docs/arsiv/yol-haritasi-kopya-kayitlar-2026-08-19.md`; bu v1-D kaydı asıl.)*
 
 ## v1-E · ★ YÖNETİCİ KULLANICI YÖNETİMİ + GÜVENLİK (2026-08-16 tespitleri — PO ileride)
 > İş 3 P2/P3 turundan çıkan yeni işler. Şimdi kodlanMADI; kayda geçti.
 35. **İki tip red: "düzeltme iste" vs "kalıcı reddet/ghost" (M-L, migration olası)** — Şu an tek tip red (kibar e-posta + tekrar başvuru). İSTENEN: yönetici reddederken seçsin: (a) **Düzeltme iste** → mevcut akış (e-posta + kullanıcı gerekçe görür + tekrar başvurur); (b) **Kalıcı reddet/ghost** → kullanıcıya HİÇ bildirim gitmez (sessiz), tekrar başvuramaz, sistemde görünmez. Gerekçe: kuruma uygun olmayan kişiye "tekrar başvurabilirsiniz" demek yanlış. Muhtemelen backend'e red-tipi alanı (migration, canlı DB → PO onayı) + 2 buton + e-posta ayrımı.
 36. **Onaylanmış (aktif) kullanıcıyı sistemden çıkarma (⚠️ önce KEŞİF)** — yönetici zaten onaylanmış menti/mentörü sonradan çıkarabilmeli (red değil; kabul edilmişi pasifleştirme/atma). **Kodda ZATEN VAR MI belirsiz** → ayrı turda önce git'ten doğrula (isActive=false/demote var mı), eksikse yap.
-37. **Giriş enumeration sertleştirme (PENDING dahil) — güvenlik** — mevcut login PENDING durumunu **şifre-öncesi** sızdırıyor (`authController.ts:254`). İleride tüm giriş güvenliğiyle birlikte ele alınacak (durum bilgisi yalnız şifre sonrası). *(İş 3 P2 turunda REJECTED zaten şifre-sonrasına taşındı; PENDING kaldı.)*
-30. **⚠️ Sertifika bankası canlıda eksik (5 vs 20)** — kodda 20 senaryo (`seed-certification.ts`), canlıda yalnız 5 soru (salt-okuma sayımı). Zengin banka seed edilmemiş → `seedCertification()` kontrollü çalıştırma. **Canlı DB yazımı → PO onayı ZORUNLU** (tehlikeli tam `seed.ts` değil; bu fonksiyon idempotent/silmez ama canlıda çalışır).
-31. **DISC-tipine-özel "mentiye yaklaşım" içeriği YOK (en büyük içerik boşluğu)** — hiçbir testte mentinin DISC tipine göre uyarlanan yaklaşım içeriği yok. 3 seçenek (eksikler raporu): (1) statik yaklaşım kılavuzu (M, önerilen) · (2) SJT'yi menti-DISC koşullu genişletme (L, migration) · (3) sertifikaya tip-özel varyant (L, önerilmez). Kısmen v2 #20 (KARAR 9) ile ilişkili — PO netleştirir.
-32. **Admin soru düzenleme UI (S)** — ~~backend PATCH hazır (`questionController.ts`), FE'de düzenle butonu yok~~ → salt-frontend, hızlı kazanç.
-    > ⚠️ GÜNCELLEME (2026-08-17): ✅ **TAMAMLANDI, CANLIDA (çatı #87).** Kuruma özel soruya Düzenle butonu + inline form; backend PATCH `/api/questions/:id` (ADMIN + tenant-scoped IDOR) zaten hazırdı. Yalnız metin düzenlenir. CI Integration (Admin) yeşil. *(Bu madde v1-D + v1-E'de iki kez listelenmişti — kopya; ikisi de kapandı.)*
-33. **Çift DISC seed temizliği + SJT belge-kod çelişkisi (S)** — `seed.ts` (32 soru) ile `seed-questions.ts` (20, canlıda olan) çelişiyor → tek kaynağa indir. Ayrıca `03-psikometri` "4 pedagojik SJT" der, kodda 3 var → SJT genişlet ya da belgeyi düzelt.
-    > ⚠️ GÜNCELLEME (2026-08-17): ✅ **KISMİ (backend #45).** Ölü/çelişen `prisma/seed-questions.ts` (hiç import edilmeyen standalone, 20 global DISC) **silindi** — aktif `seed.ts` (32) canonical kaldı. **DB'ye dokunulmadı, seed çalıştırılmadı.** **KALAN (PO kararı, canlı DB yazımı):** (a) **seed↔canlı**: canlıda 20 DISC var (eski seed izi), `seed.ts` 32 üretir → re-seed mi trim mi? (b) **SJT belge-kod**: kod **3** (doğrulandı), `03-psikometri:47` "4" der → belge kod gerçeğine hizalandı (bu tur), 4'e içerik genişletme PO kararı. *(Madde v1-D + v1-E'de iki kez — kopya.)*
-34. **Öğrenme yolculuğu tamamlanma görünürlüğü (S)** — yönetici kimin tamamladığını göremiyor (`learningJourneyCompletedAt` admin select'te yok); retention için faydalı.
-    > ⚠️ GÜNCELLEME (2026-08-17): brief "yapıldı" dedi ama **kod-doğrulama NEGATİF** — `learningJourneyCompletedAt` STK `adminController` select'inde YOK (yalnız `platformTenantController` = platform süper-admin drill-down'da var). STK yönetici hâlâ göremiyor → **AÇIK** (kod gerçeği esas). *(Madde v1-D + v1-E'de iki kez — kopya.)*
+37. **✅ Giriş enumeration sertleştirme (PENDING dahil) — güvenlik — MERGED, CANLIDA (2026-08-19).**
+    > ⚠️ GÜNCELLEME (2026-08-19): **✅ MERGED, canlıda** — backend #46 (`b6187c1`) + çatı #91 (`af33339`) + docs #92 (`1cd2c56`). "Önce kimlik doğrula → sonra duruma göre yönlendir" deseni: yok/OAuth/şifresiz/yanlış-şifre → hepsi aynı generic 401; durum (REJECTED/pasif/PENDING) yalnız doğru şifreden SONRA. PENDING şifre-öncesi sızıntısı KAPANDI. Enumeration testleri (`auth.test.ts`) CI'da. **Şema değişmedi (migration yok).** Bilinen sınır: timing yan-kanalı kapsam dışı (üretim-öncesi, düşük risk).
+> ⚠️ GÜNCELLEME (2026-08-19, tekrar denetimi): Bu blokta ayrıca **madde 30-34 ikinci kez** (v1-D ile birebir aynı metinle)
+> listelenmişti — **gerçek kopya** (aynı iş + aynı bağlam + aynı statü, kelime-kelime doğrulandı). Kopya kayıtlar arşive
+> alındı: `docs/arsiv/yol-haritasi-kopya-kayitlar-2026-08-19.md`. **Asıl/canonical kayıtlar yukarıda v1-D bloğunda** (madde 30-34).
 
 ---
 

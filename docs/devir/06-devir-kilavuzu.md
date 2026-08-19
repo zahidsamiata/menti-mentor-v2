@@ -1,5 +1,7 @@
 # 06 — DEVİR KILAVUZU (yeni sohbet: ilk ne yap)
 
+**📸 DONDURULMUŞ** — oturum devir kılavuzu (prosedür; kalıcı referans).
+
 > **Amaç:** Bağlam devri sonrası yeni sohbetin **hatasız kaldığı yerden** devam etmesi. Bu klasördeki
 > 6 belge senin hafızan — ama **PR numaraları/SHA'lar devir anına aittir, git'ten doğrula** (bağlam
 > dolduğu için hafızaya güvenme; bu projenin "SHA tahmin etme, doğrula" kuralı).

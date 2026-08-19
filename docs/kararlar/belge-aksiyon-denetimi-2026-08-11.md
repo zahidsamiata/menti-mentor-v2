@@ -1,5 +1,7 @@
 # Belge-Aksiyon Denetimi — "Kararlar aksiyona geçti mi?" (2026-08-11)
 
+**📸 DONDURULMUŞ (2026-08-11)** — denetim fotoğrafı (kararlar aksiyona geçti mi?).
+
 > **Amaç:** Aylardır süren projede docs/ altında biriken belgelerdeki ALINAN KARARLAR/FİKİRLER gerçekten
 > koda/ürüne geçti mi, yoksa yazılıp unutuldu mu? Belge üretmek ≠ iş yapmak. Bu denetim her belgeyi açtı,
 > somut kararları çıkardı ve GERÇEKLE (kod + git + güncel 10-yol-haritasi) kıyasladı.

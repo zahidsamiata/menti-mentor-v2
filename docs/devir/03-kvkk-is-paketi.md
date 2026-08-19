@@ -1,5 +1,7 @@
 # 03 — KVKK İŞ PAKETİ (canlı öncesi kritik — yol haritasında B, öncelik yüksek)
 
+**📸 DONDURULMUŞ** — oturum devir notu (KVKK iş paketi).
+
 > **Amaç:** Yeni sohbetin sıradaki en kritik iş paketini kanıtla görmesi. Bu paket **canlı öncesi
 > yasal blocker** içerir. Kaynak: `10-yol-haritasi.md` (B), `unutulmus-niyet-envanteri-2026-08-10.md`
 > (K1-K6), `04-guvenlik-ve-kvkk.md`, `belge-denetimi-2026-08-10.md` (SONUÇ md.1).

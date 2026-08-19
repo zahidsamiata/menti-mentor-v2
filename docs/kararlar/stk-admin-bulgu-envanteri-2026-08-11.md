@@ -1,5 +1,7 @@
 # STK Admin Paneli — 13 Bulgu Envanteri (2026-08-11)
 
+**📸 DONDURULMUŞ (2026-08-11)** — STK admin keşif/bulgu envanteri.
+
 > **İLERLEME: 13/13 bulgu tamamlandı.** Salt-okuma keşif; kod/DB değiştirilmedi, DB'ye bağlanılmadı.
 > Kaynak: ürün sahibi ekran gözlemleri + 3 paralel salt-okuma kod keşfi (backend `afc2769`, çatı `da6a138`).
 > Amaç: her bulgu için "backend hazır mı / ön yüz eksik mi" + iş büyüklüğü. Nihai öncelik ürün sahibinde.

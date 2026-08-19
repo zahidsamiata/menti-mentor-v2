@@ -12,7 +12,8 @@
 - **Dürüst pushback**: yanlış/riskli görüneni söyle; testi/CI'ı yeşil GÖSTERME — gerçek durumu ver.
 
 ## 📁 Proje Hafızası — nereye bakılır
-- Güncel durum + tam resim: PROJECT_STATUS.md
+- **Güncel durum (canonical, ŞU AN): docs/kararlar/09-DURUM.md** — her oturum başında oku.
+- Genel tanıtım (dondurulmuş onboarding): PROJECT_STATUS.md — güncel durum İÇİN DEĞİL (bkz. 09-DURUM).
 - Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
 - Geçmiş raporlar: docs/raporlar/
 - Yeni bir işe başlarken: önce docs/kararlar/09-DURUM.md oku (nerede kaldık).
@@ -42,6 +43,17 @@
 - Backend değişince aynı tur içinde pointer güncellenir ve çatı push edilir.
 - Backend push ile pointer güncellemesi arasında ASLA ara commit/push olmaz.
 - Sıra: backend commit → backend push → çatı repo `git add backend` → çatı commit → çatı push.
+
+### Merge sonrası pointer bump — DANS ÖNLEME (her merge turunda tekrarlıyordu)
+> Kök neden: backend PR merge edilince backend `main` HEAD ilerler (merge commit); çatı feature PR'ı ise açıldığı
+> andaki **feature commit** pointer'ını taşır (merge-öncesi SHA). Bu fark her turda elle keşfediliyordu.
+- Backend PR **MERGE EDİLDİKTEN sonra** çatı pointer'ı feature commit'e DEĞİL, **backend `main` HEAD'e (merge commit)** bump edilir.
+  Komut: `git submodule update --remote backend` (`.gitmodules`'ta `branch = main` tanımlı — main HEAD'i otomatik çeker).
+- Sıra: (1) backend PR'ları merge et → (2) TEK çatı turunda `git submodule update --remote backend` + `git add backend` + commit
+  → (3) çatı PR'ı pointer'ı bump → (4) tek CI bekle → (5) merge.
+- Paralel çatı PR'ı varsa: bump'ı TEK noktada (en son açık PR'da) yap — her PR'da ayrı bump CI'ı gereksiz tekrar bekletir.
+- Pointer "CONFLICTING" ama **descendant** görünüyorsa: git auto-resolve eder, zararsız — panik yok, doğrula:
+  `git merge-base --is-ancestor <eski-pointer> <yeni-pointer>` (0 dönerse güvenli, ileri sarım).
 
 ## API/Şema Değişikliği
 - Endpoint veya Prisma şeması değişince "bunu kim kullanıyor?" taraması yapılır: testler, frontend, diğer servisler.
@@ -117,6 +129,17 @@
      "belge güncellemesi gerekmedi: [neden]".
 - Bu adım atlanırsa **tur EKSİK sayılır** — kapanış raporunda belge-senkron durumu her zaman belirtilir.
 - Belge hijyeni geçerli: eskiyi SİLME → `⚠️ GÜNCELLEME (tarih): …` notuyla ekle veya `docs/arsiv/`'e taşı (bkz. "Belge Düzeltme Deseni").
+
+### Docs çakışması önleme — SERİLEŞTİR (09-DURUM / 10-yol-haritasi)
+> Kök neden: birden çok iş açıkken hepsi 09-DURUM/10-yol'un aynı ortak başlık bölgesine ("Son güncelleme",
+> "⚡ ŞU AN / TEK BAKIŞTA", "Açık PR") yazınca merge çakışıyordu (#92/#94 böyle çakıştı, manuel çözüldü).
+- `09-DURUM.md` ve `10-yol-haritasi.md` **PAYLAŞILAN DURUM dosyalarıdır** → "Koşullu Paralellik" gereği bu iki dosyaya
+  yazım **SIRALIDIR**. Aynı anda iki iş bu dosyalara YAZMAZ (migration/merge/pointer gibi = sıralı).
+- İş PR'ları kodu taşır; 09/10 güncellemesi **en sona, TEK docs turunda** toplanır (veya işler sıralıysa sırayla).
+- Ortak başlık bölgesine dokunurken mevcut satırı değiştirmek yerine mümkünse **tarihli alt-bölüme append** et
+  (Belge Düzeltme Deseni). Şişen tarih/SHA katmanları düzenli olarak `docs/arsiv/`'e taşınır (bkz. 09-DURUM geçmiş-katmanlar arşivi).
+- (Opsiyonel güvenlik ağı) `.gitattributes`'a `docs/kararlar/09-DURUM.md merge=union` eklenebilir — ANCAK union
+  çelişkili satırları da birleştirir (iki dal farklı "Açık PR: X" yazarsa ikisi de kalır) → yalnız saf-append bölge için güvenli, tek başına önerilmez.
 
 ## Git Fetch Önce — lokal main geride kalabilir
 - Main durumu (ahead/behind, merge oldu mu) kontrol edilecekse ÖNCE `git fetch origin`.

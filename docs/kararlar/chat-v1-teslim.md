@@ -1,5 +1,7 @@
 # Chat v1 — Teslim Dökümanı (menti↔mentör talep mesajlaşma)
 
+**📸 DONDURULMUŞ** — chat v1 teslim kaydı (v1 tamamlandı, canlıda).
+
 **Tarih:** 2026-08-06 · **Durum:** PR hazır, **iki repo CI YEŞİL** ✅, MERGE YOK — inceleme/revizyon kararı ürün sahibinde.
 **PR'lar:** backend `menti-mentor#33` · çatı `menti-mentor-v2#40` (base `docs/merge-turu-devir`).
 **Branch:** iki repoda `feat/chat-messaging`.

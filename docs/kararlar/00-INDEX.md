@@ -8,20 +8,31 @@
 > **Belge düzeni kuralları:** `belge-duzeni-rehberi.md` (canonical — 6 kural: canonical/tür/yaşayan-dondurulmuş/adlandırma/INDEX/işaretleme).
 > Etiketler: **🔄 YAŞAYAN** (güncel tutulur) · **📸 DONDURULMUŞ** (o günün fotoğrafı, güncellenmez).
 
+## ▶ BURADAN BAŞLA — yeni gelen okuma yolu (5 adım, sırayla)
+Yeni katılan biri (ajan dahil) bu 5 belgeyi bu sırayla okursa 15 dakikada tam resmi görür:
+1. **`CLAUDE.md`** (repo kökü) — nasıl çalışıyoruz? (mod/onay, güvenlik, DB uyarıları, submodule/merge kuralları)
+2. **`docs/kararlar/00-INDEX.md`** (bu belge) — ne nerede? (belge haritası)
+3. **`docs/kararlar/09-DURUM.md`** — bugün ne durumdayız? (ŞU AN ne bitti/ne bekliyor · canonical güncel durum)
+4. **`docs/kararlar/10-yol-haritasi.md`** — ne yapılacak? (aktif açık işler + v2 backlog · biten işler: `10-yol-tamamlananlar.md`)
+5. **`docs/kararlar/00-DURUM-PANOSU.md`** — kararlar nerede? (tek-bakışta renkli statü panosu)
+
+Derin gerekçe gerekince: `01–11` numaralı kararlar/ belgeleri + ilgili `raporlar/` keşif fotoğrafı.
+
 ## Marka/İsim (netleşti 2026-08-02)
 - **Sivilkapasite** = ana marka (canlı: sivilkapasite.org).
 - **MentiMentor** = alt-ürün / mentörlük eşleştirme modülü (ilk yayına alınan çekirdek).
 - **UniClub** = ESKİ/çalışma adı, artık geçersiz. Daha geniş vizyonun eski adıydı.
 
-## 📁 Klasör yapısı (2026-08-02 düzenlendi)
+## 📁 Klasör yapısı (2026-08-02 düzenlendi · 2026-08-19 güncellendi)
 Tüm dokümanlar `docs/` altında toplandı; proje kökü yalnızca gerçek proje dosyalarını tutar
-(`CLAUDE.md`, `PROJECT_STATUS.md`, `package.json`, `docker-compose.yml`, `.gitignore`, `.gitmodules`).
+(`CLAUDE.md`, `PROJECT_STATUS.md` [📸 deprecated — güncel durum 09-DURUM], `package.json`, `docker-compose.yml`, `.gitignore`, `.gitmodules`).
 
 ```
 docs/
-├── kararlar/   → konu bazlı karar belgeleri (bu klasör; 00-INDEX + 01–10)
-├── raporlar/   → keşif/teşhis raporları (tarihli)
-└── arsiv/      → eski/geçersiz belgeler (silinmedi, saklandı)
+├── kararlar/   → konu bazlı karar/durum belgeleri (00-INDEX + 01–11 + 10-yol-tamamlananlar + denetim/pano set)
+├── raporlar/   → keşif/teşhis raporları (📸 tarihli, dondurulmuş) + raporlar/icerik/ (test içerik arşivi)
+├── devir/      → oturum devir notları (📸 dondurulmuş; 01–06 set + 07/08 oturum)
+└── arsiv/      → eskimiş/örtüşen/kopya belgeler (silinmedi, tarihsel iz için saklandı)
 ```
 
 ## Belgeler — `docs/kararlar/`
@@ -36,7 +47,8 @@ docs/
 | `07-calisma-tarzi.md` | Prompt felsefesi, DevSecOps şablonu, kurallar | Her prompt öncesi |
 | `08-acik-sorular.md` | Karara bağlanmamışlar (yaş, veri sorumlusu vb.) | Karar gerektiğinde |
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
-| `10-yol-haritasi.md` | Sıradaki işler yol haritası (İŞ 0–8, sıra + bağımlılık) | Sıradaki iş kararı |
+| `10-yol-haritasi.md` | Aktif iş kuyruğu: üstte açık-işler hızlı-index · v1 (numaralı) · v2 backlog (14-28) | Sıradaki iş kararı |
+| `10-yol-tamamlananlar.md` | Biten v1 işlerinin kaydı (özet + PR/tarih; detay 09-DURUM) — 🔄 refakat belge | "ne bitti" bakışı |
 | `11-tasarim-kararlari-yasam-dongusu-ve-disc.md` | Yaşam döngüsü + DISC gösterim kararları (KARAR 1 DISC çoklu harf/#12 · KARAR 2 ghost red/2a · KARAR 3 kullanıcı çıkarma/2b · KARAR 4 FE tam Türkçe) | #12 / 2a / 2b işine başlarken |
 
 ## Yeni belgeler — 2026-08-11 oturumu (`docs/kararlar/`)
@@ -122,6 +134,9 @@ docs/
 | `SOHBET-KARAR-OZETI-devir.md` | Eski devir/özet belgesi — güncel karar 01–10'da |
 | `strateji-ve-guvenlik-denetimi.md` | Eski strateji/güvenlik denetimi — güncel güvenlik 04'te |
 | `09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md` | 09-DURUM + 10-yol-haritası'nın 2026-08-10 öncesi tam hâli (tarihsel) |
+| `09-DURUM-gecmis-katmanlar-2026-08-19.md` | 09-DURUM başlığından taşınan istiflenmiş tarih/SHA/PR katmanları (2026-08-19 sadeleştirmesi) |
+| `09-DURUM-tamamlanan-isler-arsiv-2026-08-19.md` | 09-DURUM'dan taşınan eski kapanmış oturum kayıtları (2026-08-11 + 2026-08-14) |
+| `yol-haritasi-kopya-kayitlar-2026-08-19.md` | 10-yol'da iki kez listelenen madde 30-34 kopyalarının taşındığı yer (asıl v1-D'de) |
 
 ## ⚠️ En kritik iki gerçek (her zaman hatırla)
 1. **Canlı ve lokal AYNI Neon DB'sini paylaşıyor** (`ep-fancy-tooth-ab4u5xhr`). Lokalde DB'ye yazmak = canlıyı etkilemek. Detay: `02-mimari-ve-altyapi.md`.
