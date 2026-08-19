@@ -1,20 +1,16 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-17 (**① grubu masa temizliği MERGED, canlıda**:
-#32 admin soru düzenleme UI (çatı #87) · #6 correction-maili fix (backend #44) · #33 ölü seed temizliği (backend #45) → çatı
-main `41f91b4` · backend `e83ec9c` · pointer senkron · açık PR **0/0**; detay: "✅ ① GRUBU" bölümü). Önceki: 2026-08-15 (**5-PR masa temizliği merge'i**: menü 4-grup #76,
-sertifika rozeti kişi-geneli #40+#77, envanter+içerik raporları #78+#79 → hepsi CANLIDA; çatı main `444c025` · backend `5eafbbd` ·
-açık PR 0/0; **v1 #8 + #11 tamamlandı, #10 zaten mevcuttu** — bkz. "✅ MASA TEMİZLİĞİ"). Önceki: KARAR 5 DISC güvenlik açığı düzeltildi ve
-CANLIYA merge edildi: backend #37 + çatı #71 MERGED, submodule pointer senkron, iki repo main CI yeşil → **v1 #1
-tamamlandı**.
-Önceki: 2026-08-14 (oturum kapanışı: bu oturumun 5 belge PR'ı
-[#65 belge temizliği · #66 devir · #67 karar-statü haritası · #68 durum panosu · #69 v1/v2 yol haritası] MERGED →
-**açık PR: 0, masa temiz**; IDOR çelişkisi kod keşfiyle çözüldü — kapanış özeti: `docs/devir/07-oturum-2026-08-14.md`).
-Önceki: 2026-08-11 (oturum belgeleri merge oldu → "açık PR" bloğu gerçek merge durumuna çekildi).
-Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
-**Sıradaki işler + öncelik:** `docs/kararlar/10-yol-haritasi.md`. **2026-08-10 öncesi tam geçmiş:**
-`docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`. **Belge denetimi (neden temizlendi):**
-`docs/kararlar/belge-denetimi-2026-08-10.md`.
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-19
+
+> **⚡ ŞU AN (git ile doğrulandı):** Çatı main HEAD `753c545` (#95) · backend main HEAD / submodule pointer `b6187c1`
+> (senkron) · **açık kod PR: 0/0, masa temiz.** Bu sabah **#12 DISC çoklu harf** (backend #47 + çatı #93 + docs #94) ve
+> **#37 login enumeration sertleştirme** (backend #46 + çatı #91 + docs #92) MERGED → **canlıda.** Açık docs PR: keşif
+> raporları (#96 tam-envanter · #97 belge-mimarisi) — merge PO'da, kod değil.
+>
+> Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
+> `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
+> **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.
+> **Belge denetimi (neden temizlendi):** `belge-denetimi-2026-08-10.md`.
 
 ---
 
@@ -22,28 +18,15 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 - **Canlı:** sivilkapasite.org ayakta (Dokploy). **Mail çalışıyor** (generic SMTP relay — Resend/Brevo;
   Gmail App Password kaldırıldı, `emailService.ts`). Forgot/reset-password akışı tam.
 - **DB:** Canlı = lokal aynı Neon (`ep-fancy-tooth-ab4u5xhr`). DISC soruları (20) + öğrenme aşamaları (13) yüklü.
-- **Backend main HEAD:** `afc2769` · çatı main HEAD `e817a2d` (#69) · submodule pointer = `afc2769` (senkron, doğrulandı).
-  > ⚠️ GÜNCELLEME (2026-08-15): KARAR 5 merge sonrası → **backend main HEAD `0850eaa`** (#37) · **çatı main HEAD `4c48a8e`** (#71)
-  > · **submodule pointer = `0850eaa` (backend main HEAD ile TAM SENKRON, `git submodule status` + `ls-tree` ile doğrulandı)**.
-  > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): 4 kod PR merge sonrası → **backend main HEAD `379658a`** (#38+#39) · **çatı main HEAD `c3e4626`** (#73+#74) · **submodule pointer = `379658a` (backend main HEAD ile TAM SENKRON, `ls-tree` == `rev-parse` doğrulandı)**.
-  > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): masa temizliği merge'i sonrası → **çatı main HEAD `444c025`** (#77) · **backend main HEAD `5eafbbd`** (#40) · **submodule pointer = `5eafbbd` (backend main HEAD ile TAM SENKRON, `git submodule status` doğrulandı)**. Merge sırası: #78→#79→#76→#40→#77 (#77 pointer'ı #40 merge commit'ine bump edildi). İki repo her adımda main CI yeşil.
-  > ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): onay/red izi + gerekçe merge sonrası → **çatı main HEAD `b66e07c`** (#82) · **backend main HEAD `ed84806`** (#41) · **submodule pointer = `ed84806` (senkron)**. Merge sırası: #41→#81 (pointer bump)→#82. **Migration canlıya uygulandı** (User'a 5 nullable kolon).
-  > ⚠️ GÜNCELLEME (2026-08-16, yönetici-adı + İş 3 P2/P3): #42+#83 (yönetici-adı) → #84 (docs) → #43+#85 (İş 3 P2/P3) MERGED. Son: **çatı main HEAD `513ba84`** · **backend main HEAD `a9fc0bf`** · **submodule pointer = `a9fc0bf` (senkron)**. Açık PR 0/0.
-  > ⚠️ GÜNCELLEME (2026-08-17, ① grubu masa temizliği): admin soru düzenleme UI + correction-maili fix + ölü seed temizliği MERGED. Merge sırası: backend #44→#45 → çatı pointer bump #88 → çatı FE #87. Son: **çatı main HEAD `41f91b4`** (#88) · **backend main HEAD `e83ec9c`** (#45) · **submodule pointer = `e83ec9c` (backend main HEAD ile TAM SENKRON, `git submodule status` doğrulandı)**. Açık PR **0/0**. İki repo her adımda main CI yeşil. **Migration/DB/seed çalıştırma YOK.**
-- **Açık PR:** çatı **0** · backend **0** — **masa temiz** (2026-08-14: bu oturumun 5 belge PR'ı #65–#69 sırayla MERGED).
-  > ⚠️ GÜNCELLEME (2026-08-14): bu satır #65–#69 açıkken "çatı #65 (merge PO'da)" diyordu; 5 PR merge olunca gerçeğe (açık PR 0) çekildi (Belge Düzeltme Deseni / Kural 6).
-  > ⚠️ GÜNCELLEME (2026-08-15): artık **açık PR: backend #37 + çatı #71** — KARAR 5 DISC güvenlik düzeltmesi, **merge PO'da** (bkz. "🟡 GÜVENLİK" bölümü).
-  > ⚠️ GÜNCELLEME (2026-08-15, aynı gün geç): #37 + #71 **MERGED, canlıda** → **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ GÜVENLİK" bölümü).
-  > ⚠️ GÜNCELLEME (2026-08-15, v1 turu): yeni v1 işleri açıldı → **açık PR: bu docs (#72) · KVKK backend #38 + çatı #73 · havuz-kart backend #39 + çatı #74** — hepsi **merge PO'da** (bkz. "🚧 BU OTURUM — v1 İŞLERİ" bölümü). İki repo tüm CI yeşil.
-  > ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): **4 kod PR sırayla MERGED, canlıda** (#38→#73→#39→#74, `--merge`). **Açık PR yalnız bu docs (#72)** — kod PR: çatı 0 · backend 0. #74'te submodule pointer çakışması backend main HEAD'e bump ile çözüldü. İki repo main CI yeşil.
-  > ⚠️ GÜNCELLEME (2026-08-15, devir turu): #72 de **MERGED** (çatı main HEAD `cafd68c`) → açık PR gerçekte **çatı 0 · backend 0** (git + `gh pr list` kanıtlı). Yukarıdaki "docs (#72) açık" ifadesi **eskimiştir.** Oturum kapanışı: `docs/devir/08-oturum-2026-08-15.md`.
-  > ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): sonraki turlarda 5 PR daha açılıp merge edildi (#76 menü · #40+#77 rozet · #78 envanter · #79 içerik). Merge sonrası **açık PR yeniden çatı 0 · backend 0, masa temiz** (bkz. "✅ MASA TEMİZLİĞİ" bölümü).
-  > ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): #80 (docs) + #41+#81 (İş 2+P1 backend) + #82 (İş 2/3 FE) MERGED, canlıda. **Açık:** yönetici-adı gösterimi (backend #42 + çatı #83, CI yeşil, merge PO'da) + bu docs PR. Kod PR: onlar dışında 0. (bkz. "✅ İŞ 2 + İŞ 3 P1" bölümü.)
-  > ⚠️ GÜNCELLEME (2026-08-17, #37 turu): **① grubu docs (#89+#90) MERGED** (bkz. "✅ ① GRUBU"). Yeni **açık PR: #37 login enumeration** — backend **#46** (`fix/login-enumeration-hardening`, base main → backend CI entegrasyon testleri) + çatı pointer **#91** (`backend` → `2ccabd2`) + bu docs PR. **Merge PO'da** (bkz. "🔐 #37 LOGIN ENUMERATION" bölümü). Kod PR: onlar dışında 0.
+- **Backend main HEAD:** `b6187c1` (#46 login enumeration merge) · **çatı main HEAD** `753c545` (#95) · **submodule pointer = `b6187c1`**
+  (backend main HEAD ile TAM SENKRON, `git submodule status` + `ls-tree` doğrulandı). **Migration/DB/seed çalıştırma bu turda YOK.**
+  > Eski SHA senkron katmanları (her merge turunun tarihsel izi) → `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md` (B bölümü).
+- **Açık PR:** kod **çatı 0 · backend 0 — masa temiz** (git + `gh pr list` doğrulandı). Açık **docs PR: #96 (tam-envanter keşfi) · #97 (belge-mimarisi keşfi)** — merge PO'da, kod değil.
+  > Eski "açık PR" katmanları (her turun tarihsel izi) → `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md` (C bölümü).
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
 
-## 🔐 #37 LOGIN ENUMERATION SERTLEŞTİRME — PR AÇIK, MERGE PO'DA (2026-08-17)
-> Backend PR **#46** + çatı pointer PR **#91** + bu docs PR. **MERGE EDİLMEDİ** (karar PO'nun).
+## ✅ #37 LOGIN ENUMERATION SERTLEŞTİRME — MERGED, CANLIDA (2026-08-19)
+> Backend **#46** (`b6187c1`) + çatı pointer **#91** (`af33339`) + docs **#92** (`1cd2c56`) MERGED → canlıda (git doğrulandı). İki repo main CI yeşil.
 - **Sorun:** login akışında kimlik doğrulaması BAŞARISIZ olduğunda durum sızıyordu — (1) PENDING hesap yanlış/rastgele
   şifreyle `403 HESAP_ONAY_BEKLENIYOR` (`authController.ts:257-262` eski); (2) OAuth hesap şifre denemeden
   `401 OAUTH_HESAP` "sosyal giriş ile oluşturulmuştur" (`:267-272` eski). İkisi de e-postanın kayıtlı+durumunu şifresiz sızdırıyordu.
@@ -54,8 +37,8 @@ Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle.
 - **Doğrulama:** lokal backend tsc (src+test) + eslint yeşil; entegrasyon/enumeration testleri CI'da (lokal `TEST_DATABASE_URL` guard'ı canlı DB'yi korur).
 - **Bilinen sınır:** timing (zamanlama) yan-kanalı kapsam dışı bırakıldı (üretim-öncesi, düşük risk).
 
-## 🎨 #12 DISC ÇOKLU HARF — PR AÇIK, MERGE PO'DA (2026-08-17)
-> Backend PR **#47** + çatı (FE + pointer) PR **#93**. **MERGE EDİLMEDİ** (karar PO'nun). Ayrıca bu docs PR.
+## ✅ #12 DISC ÇOKLU HARF — MERGED, CANLIDA (2026-08-19)
+> Backend **#47** (`4c63d0e`) + çatı (FE + pointer) **#93** (`61b6eb2`) + docs **#94** (`42e35bf`) MERGED → canlıda (git doğrulandı). İki repo main CI yeşil.
 - **Ne:** DISC kimliği tek baskın harf yerine türetilmiş **1–3 harf** (ör. `D`, `DI`, `Di`, `DIs`) — KARAR 1 (#12=md.4).
 - **Onaylanan eşikler (PO, 2026-08-17):** orta çizgi (midline) **0.25** (normalize vektör, eşit pay); geçen tipler gösterilir,
   birincil daima. BÜYÜK/küçük = **birincilin %75'i** (yakın→BÜYÜK, zayıfça geçen→küçük). Tek merkezi `DISC_LETTER_CONFIG`
