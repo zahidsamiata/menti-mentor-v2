@@ -11,7 +11,12 @@ export interface SlugCheckResponse {
   slug: string;
 }
 
-export type TenantVerificationStatus = 'AUTO_APPROVED' | 'PENDING_REVIEW' | 'APPROVED' | 'REJECTED';
+export type TenantVerificationStatus =
+  | 'AUTO_APPROVED'
+  | 'PENDING_REVIEW'
+  | 'APPROVED'
+  | 'REJECTED'
+  | 'CORRECTION_REQUESTED'; // #37: platform admin düzeltme istedi
 
 export interface SelfServeRegisterResponse {
   message: string;
@@ -91,6 +96,21 @@ export function updateOnboarding(
     body: data,
     token,
   });
+}
+
+/**
+ * POST /api/tenants/self-serve/resubmit — #37: düzeltme istenen kurum bilgilerini
+ * güncelleyip başvuruyu tekrar incelemeye gönderir (CORRECTION_REQUESTED → PENDING_REVIEW).
+ * IDOR-safe: backend token'daki tenantId'yi kullanır (param yok).
+ */
+export function resubmitTenantApplication(
+  token: string,
+  data: { institutionRole?: string; verificationNote: string },
+): Promise<ApiResult<{ message: string; verificationStatus: TenantVerificationStatus }>> {
+  return apiClient<{ message: string; verificationStatus: TenantVerificationStatus }>(
+    '/api/tenants/self-serve/resubmit',
+    { method: 'POST', body: data, token },
+  );
 }
 
 /** POST /api/tenants/:id/invitations — davet linki oluşturur */

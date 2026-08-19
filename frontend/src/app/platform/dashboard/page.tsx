@@ -9,6 +9,7 @@ import {
   listAllTenants,
   approveTenant,
   rejectTenant,
+  requestTenantCorrection,
   freezeTenant,
   activateTenant,
   listSuspicionReports,
@@ -46,6 +47,10 @@ export default function PlatformDashboard() {
   const [loading, setLoading]     = useState(true);
   const [error, setError]         = useState<string | null>(null);
   const [actionMsg, setActionMsg] = useState<string | null>(null);
+  // #37: düzeltme-iste diyaloğu — hangi kurum + not metni
+  const [correctionFor, setCorrectionFor] = useState<{ id: string; name: string } | null>(null);
+  const [correctionNote, setCorrectionNote] = useState('');
+  const [correctionSaving, setCorrectionSaving] = useState(false);
 
   const loadData = useCallback(async (currentTab: Tab) => {
     setLoading(true); setError(null);
@@ -102,6 +107,25 @@ export default function PlatformDashboard() {
     await rejectTenant(id, note);
     notify('Kurum reddedildi.');
     void loadData(tab);
+  }
+
+  // #37: düzeltme iste — reddetmek yerine kuruma revizyon notu gönder
+  async function submitCorrection() {
+    if (!correctionFor) return;
+    const note = correctionNote.trim();
+    if (note.length < 10) return; // buton zaten disabled; ekstra güvenlik
+    setCorrectionSaving(true);
+    try {
+      await requestTenantCorrection(correctionFor.id, note);
+      setCorrectionFor(null);
+      setCorrectionNote('');
+      notify('Düzeltme talebi gönderildi.');
+      void loadData(tab);
+    } catch (e) {
+      notify(e instanceof Error ? e.message : 'Düzeltme talebi gönderilemedi.');
+    } finally {
+      setCorrectionSaving(false);
+    }
   }
 
   async function handleFreeze(id: string) {
@@ -284,6 +308,12 @@ export default function PlatformDashboard() {
                       Onayla
                     </button>
                     <button
+                      onClick={() => { setCorrectionFor({ id: t.id, name: t.name }); setCorrectionNote(''); }}
+                      className="rounded-lg bg-amber-600 hover:bg-amber-500 px-3 py-1.5 text-sm font-medium text-white transition-colors"
+                    >
+                      Düzeltme İste
+                    </button>
+                    <button
                       onClick={() => handleReject(t.id)}
                       className="rounded-lg bg-red-800 hover:bg-red-700 px-3 py-1.5 text-sm font-medium text-white transition-colors"
                     >
@@ -293,6 +323,53 @@ export default function PlatformDashboard() {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* #37: Düzeltme İste diyaloğu — kuruma revizyon notu (red DEĞİL). PII uyarılı. */}
+        {correctionFor && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+            onClick={() => !correctionSaving && setCorrectionFor(null)}
+          >
+            <div
+              className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-lg font-semibold">Düzeltme Talebi</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                <strong>{correctionFor.name}</strong> kurumundan hangi bilgileri güncellemesini istiyorsunuz?
+                Başvuru reddedilmez; kurum notu görüp bilgilerini düzeltip tekrar gönderebilir.
+              </p>
+              <textarea
+                value={correctionNote}
+                onChange={(e) => setCorrectionNote(e.target.value)}
+                rows={4}
+                maxLength={1000}
+                autoFocus
+                placeholder="Örn: Lütfen kurumsal e-posta adresi veya resmi bir belge/bağlantı ekleyin."
+                className="mt-3 w-full rounded-lg border border-border bg-background p-3 text-sm outline-none focus:ring-2 focus:ring-primary/40"
+              />
+              <p className="mt-1 text-xs text-muted-foreground">
+                ⚠️ Bu not kuruma iletilir. Kişisel veri (kimlik no, telefon vb.) yazmayın. En az 10 karakter.
+              </p>
+              <div className="mt-4 flex justify-end gap-2">
+                <button
+                  onClick={() => setCorrectionFor(null)}
+                  disabled={correctionSaving}
+                  className="rounded-lg border border-border px-3 py-1.5 text-sm hover:bg-muted transition-colors"
+                >
+                  Vazgeç
+                </button>
+                <button
+                  onClick={submitCorrection}
+                  disabled={correctionSaving || correctionNote.trim().length < 10}
+                  className="rounded-lg bg-amber-600 hover:bg-amber-500 px-3 py-1.5 text-sm font-medium text-white transition-colors disabled:opacity-50"
+                >
+                  {correctionSaving ? 'Gönderiliyor…' : 'Düzeltme İste'}
+                </button>
+              </div>
+            </div>
           </div>
         )}
 

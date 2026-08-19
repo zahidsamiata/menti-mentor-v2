@@ -57,6 +57,14 @@ export async function rejectTenant(id: string, note?: string) {
   });
 }
 
+// #37: Reddetmek yerine "düzeltme iste" — kurum bilgilerini revize edip tekrar gönderir.
+export async function requestTenantCorrection(id: string, note: string) {
+  return platformFetch<{ ok: boolean }>(`/api/platform/tenants/${id}/request-correction`, {
+    method: 'POST',
+    body: JSON.stringify({ note }),
+  });
+}
+
 export async function freezeTenant(id: string) {
   return platformFetch<{ ok: boolean }>(`/api/platform/tenants/${id}/freeze`, { method: 'POST' });
 }
