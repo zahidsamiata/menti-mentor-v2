@@ -27,6 +27,10 @@ export const algorithmTunerApi = {
   getPending: (api: BoundClient): Promise<ApiResult<{ pending: PendingAdjustment | null }>> =>
     api('/api/admin/algorithm-tuner/pending'),
 
+  // #9: kurumun MEVCUT eşleştirme ağırlıkları (salt-okuma gösterim; ayarlama yok).
+  getWeights: (api: BoundClient): Promise<ApiResult<{ weights: AlgorithmWeights }>> =>
+    api('/api/admin/algorithm-tuner/weights'),
+
   approve: (api: BoundClient): Promise<ApiResult<{ message: string; applied: PendingAdjustment }>> =>
     api('/api/admin/algorithm-tuner/approve', { method: 'POST' }),
 

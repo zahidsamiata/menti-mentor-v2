@@ -26,6 +26,13 @@ export default function AlgorithmTunerPage() {
     [api],
   );
 
+  // #9: kurumun MEVCUT eşleştirme ağırlıkları — salt-okuma gösterim (ayarlama yok).
+  const { data: weightsData } = useQuery(
+    () => algorithmTunerApi.getWeights(api),
+    [api],
+  );
+  const weights = weightsData?.weights ?? null;
+
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
   const [confirmAction, setConfirmAction] = useState<'approve' | 'reject' | null>(null);
@@ -66,6 +73,42 @@ export default function AlgorithmTunerPage() {
 
       {actionError && <AlertMessage type="error" message={actionError} />}
       {error && <AlertMessage type="error" message={error} />}
+
+      {/* #9: Mevcut Eşleştirme Ağırlıkları — salt-okuma gösterim (ayarlanamaz). Yönetici sistemin
+          nasıl eşleştirdiğini görsün diye. Kalibrasyon önerisi bu oranları ±%5 değiştirebilir. */}
+      {weights && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Mevcut Eşleştirme Ağırlıkları</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-border p-4 text-center">
+                <p className="text-xs text-muted-foreground">Sektör Uyumu</p>
+                <p className="mt-1 text-3xl font-bold text-primary tabular-nums">
+                  %{Math.round(weights.sectorWeight * 100)}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">Ortak sektör ve ilgi alanları</p>
+              </div>
+              <div className="rounded-xl border border-border p-4 text-center">
+                <p className="text-xs text-muted-foreground">Karakter / DISC Uyumu</p>
+                <p className="mt-1 text-3xl font-bold text-primary tabular-nums">
+                  %{Math.round(weights.discWeight * 100)}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">İletişim tarzı ve kişilik uyumu</p>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Sistem, bir mentör-menti eşleşmesinin uyum skorunu bu oranlarla hesaplar: skorun
+              <strong className="text-foreground"> %{Math.round(weights.sectorWeight * 100)}</strong>&apos;i
+              sektör/ilgi alanı örtüşmesinden,
+              <strong className="text-foreground"> %{Math.round(weights.discWeight * 100)}</strong>&apos;i
+              DISC karakter uyumundan gelir. Yüksek toplam skor, daha uyumlu bir eşleşme demektir.
+              Bu oranlar aşağıdaki kalibrasyon önerileriyle küçük adımlarla (±%5) güncellenebilir.
+            </p>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Bildirim Sıklığı */}
       <Card>

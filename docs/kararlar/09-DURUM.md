@@ -16,6 +16,11 @@
 > **backend main HEAD `b5f4b88`**, **submodule pointer `b5f4b88` (senkron)**, **açık kod PR 0/0** (git doğrulandı).
 > İki main CI yeşil. #7 Aşama 1 artık **CANLIDA** (autodeploy). Detay: aşağıdaki "🔀 #7 AŞAMA 1" bölümü (✅ MERGED notu).
 >
+> **⚡ GÜNCELLEME (2026-08-19, küçük işler paketi turu — YENİ AÇIK PR):** başlangıç snapshot: çatı main `9c1e1cd`,
+> backend main `b5f4b88`, pointer senkron. **YENİ AÇIK KOD PR (MERGE OLMADI):** backend **#49** + çatı **(bu tur açılıyor)**
+> — #34 (öğrenme yolculuğu STK görünürlüğü) + #7(A) (aday kartı gerekçe FE) + #9-kısmi (ağırlık salt-okuma gösterim).
+> Migration/şema/seed SIFIR. Detay: aşağıdaki "🔀 KÜÇÜK İŞLER PAKETİ" bölümü.
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.
@@ -49,6 +54,16 @@
 - **Atlananlar (bilinçli):** otomatik pasifleştirme + tenant eşik alanı (şema=migration → Aşama 2); checkpoint cron gerçek bildirim (mail geri-alınamaz + dedup guard'ı şema ister → Aşama 2); `ContextualFeedbackHost` FE bağlama (kullanıcı-bazlı checkpoint endpoint'i + poller yok → Aşama 2/3); menti havuzu kalite kolonu (mentör metriği, menti'de yanıltıcı).
 - **Doğrulama:** backend PR #48 CI **yeşil** (entegrasyon+unit CI'da geçti); FE lokal tsc ✓ · vitest 38/38 ✓ · build ✓. Lokal backend entegrasyon testleri TEST_DATABASE_URL guard'ıyla durur (canlıya truncate yok) — asıl kanıt CI.
 - **Merge sırası (PO için):** backend #48 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı #100 merge.
+
+## 🔀 KÜÇÜK İŞLER PAKETİ — #34 + #7(A) + #9-kısmi — PR'DA (MERGE OLMADI) (2026-08-19)
+> Backend **#49** + çatı **(bu tur açıldı)**. Üç açık maddeyi tek turda kapattı; hepsi **migration'sız**, düşük riskli, farklı dosyalar. Sema değişmedi, DB'ye yazılmadı, seed çalıştırılmadı.
+- **#34 — Öğrenme yolculuğu tamamlanma görünürlüğü (STK yönetici):** `adminListUsers` select'ine `learningJourneyCompletedAt` eklendi (mevcut tenant-scoped `tenantMembership` batch sorgusundan — qualityMultiplier ile aynı, N+1 yok). Platform admin'de ZATEN vardı; artık STK yöneticisi de menti/mentör havuzunda "Öğrenme Yolculuğu" kolonunda görür (tamamlandıysa tarih rozeti, yoksa "—"). KVKK: Analytical, PII değil. Test eklendi (alan döner + tamamlamayan null).
+- **#7(A) — Aday menti kartı "neden uyumlu" gerekçesi:** backend `compatibilityReason`'ı ZATEN üretiyordu (`buildPublicItem`), FE render etmiyordu. Mentör dashboard aday kartında jenerik gerekçe render edildi; `RankedMenti` FE tipine alan eklendi. **⚠️ DISC harfi/tipi EKLENMEDİ** (KARAR 3/5 uzlaştırması PO'da — jenerik metin sızdırmaz).
+- **#9-kısmi — Eşleştirme ağırlığı GÖSTERİMİ (ayarlama YOK):** kalibrasyon sayfası ağırlıkları yalnız bekleyen öneri varken gösteriyordu; artık "Mevcut Eşleştirme Ağırlıkları" kartı her zaman %60/%40 + açıklama gösterir. Yeni salt-okuma endpoint `GET /api/admin/algorithm-tuner/weights` (`getAlgorithmWeights` kaynağı). **Ayarlanabilirlik YAPILMADI** (input/slider/kaydet yok) — tenant-bazlı şema alanı + canlı eşleştirme değişikliği gerektirir → PO onaylı migration turu (bkz. 00-KARAR-TAKIP yeni madde a).
+- **⚠️ Bulgu (çözülmedi, raporlandı):** canlı eşleştirme yolu (`scoring.ts:96`) ağırlığı **hardcoded 0.6/0.4** kullanıyor; kalibrasyonun sakladığı `getAlgorithmWeights` değerini OKUMUYOR → kalibrasyon şu an efektif olarak dekoratif. Canlı eşleştirmeye dokunulmadı (kural). PO kararı + ayrı tur.
+- **Doğrulama:** backend tsc/tsc-test/lint ✓ (0 hata) · FE tsc ✓ · vitest 38/38 ✓ · build ✓. Backend entegrasyon testleri lokalde TEST_DATABASE_URL guard'ıyla durur — gerçek kanıt CI'da.
+- **Merge sırası (PO için):** backend #49 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı PR merge.
+- **FAZ 4 keşif (kurum başvuru "düzeltme iste"):** salt-okuma yapıldı, kod yazılmadı → bulgular 00-KARAR-TAKIP yeni madde (b)'de.
 
 ## ✅ #37 LOGIN ENUMERATION SERTLEŞTİRME — MERGED, CANLIDA (2026-08-19)
 > Backend **#46** (`b6187c1`) + çatı pointer **#91** (`af33339`) + docs **#92** (`1cd2c56`) MERGED → canlıda (git doğrulandı). İki repo main CI yeşil.
