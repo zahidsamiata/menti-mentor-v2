@@ -18,6 +18,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { MatchStatus } from '@/types/admin';
+import { RISK_META } from '@/lib/adminMetrics';
 import { cn } from '@/lib/utils';
 
 // null = "Tümü" (durum filtresi yok)
@@ -116,6 +117,7 @@ export default function EslesmelerPage() {
                 <th className="px-4 py-3 text-right font-medium text-muted-foreground">Sektör</th>
                 <th className="px-4 py-3 text-right font-medium text-muted-foreground">Karakter</th>
                 <th className="px-4 py-3 text-right font-medium text-muted-foreground">Görüşme</th>
+                <th className="px-4 py-3 text-left font-medium text-muted-foreground">Risk</th>
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Durum</th>
               </tr>
             </thead>
@@ -159,6 +161,24 @@ export default function EslesmelerPage() {
                     {/* Görüşme */}
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       {match.meetingCount}
+                    </td>
+
+                    {/* Risk sinyali — #7 Aşama 1: ilişki-sağlığı (son görüşme check-in'lerinden).
+                        YALNIZ yönetici görür (KVKK §5). Veri yoksa "Veri yok" nötr rozet. */}
+                    <td className="px-4 py-3">
+                      {(() => {
+                        const risk = RISK_META[match.riskSignal ?? 'INSUFFICIENT_DATA'];
+                        const reasons = match.riskReasons ?? [];
+                        return (
+                          <Badge
+                            variant={risk.variant}
+                            className="text-xs"
+                            title={reasons.length > 0 ? reasons.join(' · ') : undefined}
+                          >
+                            {risk.label}
+                          </Badge>
+                        );
+                      })()}
                     </td>
 
                     {/* Durum */}

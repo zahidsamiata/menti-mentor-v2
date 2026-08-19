@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { DiscBadge } from '@/components/atoms/DiscBadge';
+import { qualityToFive } from '@/lib/adminMetrics';
 import type { ApprovalStatus } from '@/types/auth';
 
 const APPROVAL_META: Record<ApprovalStatus, { label: string; variant: 'success' | 'warning' | 'destructive' }> = {
@@ -89,6 +90,7 @@ export default function MentorHavuzuPage() {
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Sektörler</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Durum</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Sertifika</th>
+                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kalite Puanı</th>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kayıt</th>
                 </tr>
               </thead>
@@ -166,6 +168,19 @@ export default function MentorHavuzuPage() {
                         ) : (
                           <span className="text-muted-foreground">—</span>
                         )}
+                      </td>
+
+                      {/* Kalite Puanı — #7 Aşama 1: feedback-türevi (5 üzerinden). YALNIZ yönetici (KVKK §5).
+                          Veri/üyelik yoksa "—". Ham çarpan gösterilmez; qualityToFive ile çevrilir. */}
+                      <td className="px-4 py-3 text-xs whitespace-nowrap">
+                        {(() => {
+                          const five = qualityToFive(user.qualityMultiplier);
+                          return five === null ? (
+                            <span className="text-muted-foreground" title="Henüz yeterli değerlendirme yok">—</span>
+                          ) : (
+                            <span className="font-medium tabular-nums">{five.toFixed(1)} / 5</span>
+                          );
+                        })()}
                       </td>
 
                       {/* Kayıt */}

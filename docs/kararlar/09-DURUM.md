@@ -7,6 +7,11 @@
 > **#37 login enumeration sertleştirme** (backend #46 + çatı #91 + docs #92) MERGED → **canlıda.** Açık docs PR: keşif
 > raporları (#96 tam-envanter · #97 belge-mimarisi) — merge PO'da, kod değil.
 >
+> **⚡ GÜNCELLEME (2026-08-19, sonraki tur):** Yukarıdaki snapshot bayat. Bu sabahki docs PR'ları (#96/#97) +
+> #99 karar-takip MERGED → çatı main HEAD **`9a580a5`**, backend main HEAD/pointer **`b6187c1`** (senkron).
+> **YENİ AÇIK KOD PR (bu tur, #7 Aşama 1 — MERGE OLMADI):** backend **#48** + çatı **#100** (FE + pointer bump).
+> Detay: aşağıdaki "🔀 #7 AŞAMA 1" bölümü.
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.
@@ -24,6 +29,19 @@
 - **Açık PR:** kod **çatı 0 · backend 0 — masa temiz** (git + `gh pr list` doğrulandı). Açık **docs PR: #96 (tam-envanter keşfi) · #97 (belge-mimarisi keşfi)** — merge PO'da, kod değil.
   > Eski "açık PR" katmanları (her turun tarihsel izi) → `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md` (C bölümü).
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
+
+## 🔀 #7 AŞAMA 1 — DEĞERLENDİRME/METRİK ÖLÜ UÇLARINI BAĞLA — PR'DA (MERGE OLMADI) (2026-08-19)
+> Backend **#48** + çatı **#100** (FE + submodule pointer backend feature commit `6b84e27`'e bump). **MERGE EDİLMEDİ** — PO inceleyecek.
+> Amaç: yarım kalmış "eşleşme-sonrası değerlendirme + metrik" özelliğinin **migration'sız** uçlarını bağlamak (sıfırdan yazım değil). Tasarım: `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md`.
+- **Bağlanan uçlar:**
+  1. **Kalite puanı kalıcı yazım** — `computeMentorQualityMultiplier` sonucu artık `TenantMembership.qualityMultiplier`'a event-driven yazılıyor (`persistMentorQualityMultiplier`, feedback gelince). Alan ZATEN vardı; sadece sertifika yazıyordu.
+  2. **Yönetici görünürlüğü** — mentör havuzunda "Kalite Puanı" kolonu (5 üzerinden); eşleşmeler sayfasında "Risk" rozeti (İyi/Dikkat/Riskli). Backend: `adminListUsers` kalite + `adminListMatches` risk sinyali (batch).
+  3. **Periyodik checkpoint cron** — ölü `findMatchesDueForCheckpoint` günlük cron'a bağlandı (`runCheckpointFeedbackReminderCron`), **LOG-ONLY**.
+- **KVKK:** kalite puanı + risk sinyali YALNIZ yönetici endpoint'lerinde; kişi kendi puanını/sinyalini GÖRMEZ. Test: menti/mentör `/api/admin/*` → 403; tenant izolasyonu doğrulandı.
+- **Migration/şema/seed: SIFIR.** Canlı eşleştirme sıralaması değişmez (`matching.ts` bu alanı okumaz).
+- **Atlananlar (bilinçli):** otomatik pasifleştirme + tenant eşik alanı (şema=migration → Aşama 2); checkpoint cron gerçek bildirim (mail geri-alınamaz + dedup guard'ı şema ister → Aşama 2); `ContextualFeedbackHost` FE bağlama (kullanıcı-bazlı checkpoint endpoint'i + poller yok → Aşama 2/3); menti havuzu kalite kolonu (mentör metriği, menti'de yanıltıcı).
+- **Doğrulama:** backend PR #48 CI **yeşil** (entegrasyon+unit CI'da geçti); FE lokal tsc ✓ · vitest 38/38 ✓ · build ✓. Lokal backend entegrasyon testleri TEST_DATABASE_URL guard'ıyla durur (canlıya truncate yok) — asıl kanıt CI.
+- **Merge sırası (PO için):** backend #48 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı #100 merge.
 
 ## ✅ #37 LOGIN ENUMERATION SERTLEŞTİRME — MERGED, CANLIDA (2026-08-19)
 > Backend **#46** (`b6187c1`) + çatı pointer **#91** (`af33339`) + docs **#92** (`1cd2c56`) MERGED → canlıda (git doğrulandı). İki repo main CI yeşil.
