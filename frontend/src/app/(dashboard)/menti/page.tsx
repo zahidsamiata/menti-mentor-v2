@@ -202,7 +202,8 @@ export default function MentiDashboardPage() {
         <DashboardMetricCard label="Gönderilen Talepler" value={sentIds.size} color="brand" />
         <DashboardMetricCard label="Onaylanan Eşleşmeler" value={0} color="success" />
         <DashboardMetricCard label="Tamamlanan Toplantılar" value={0} color="neutral" />
-        <DashboardMetricCard label="DISC Profili" value={user?.discType ?? '—'} color="warning" />
+        {/* #12: DISC çoklu harf (ör. "Di") — yoksa tek harfe düşer. */}
+        <DashboardMetricCard label="DISC Profili" value={user?.discLetters || user?.discType || '—'} color="warning" />
       </div>
 
       {/* Önerilen Mentorlar */}

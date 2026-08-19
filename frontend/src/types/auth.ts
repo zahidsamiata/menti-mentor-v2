@@ -15,6 +15,8 @@ export interface AuthUser {
   approvalStatus: ApprovalStatus;
   authProvider: AuthProvider;
   discType: 'D' | 'I' | 'S' | 'C' | null;
+  // #12: normalize DISC vektöründen türetilmiş 1–3 harflik gösterim (ör. "DI", "Di"). Backend üretir.
+  discLetters?: string | null;
   needsOrientation: boolean;
 }
 
@@ -22,7 +24,7 @@ export interface AuthUser {
 export interface LoginResponse {
   accessToken: string;
   expiresIn: number;
-  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'needsOrientation'>;
+  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'discLetters' | 'needsOrientation'>;
   tenant: {
     id: string;
     name: string;

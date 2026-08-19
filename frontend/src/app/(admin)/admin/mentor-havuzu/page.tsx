@@ -18,12 +18,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
+import { DiscBadge } from '@/components/atoms/DiscBadge';
 import type { ApprovalStatus } from '@/types/auth';
-
-// DISC arketipi için tema-uyumlu renkler (waiting-room ile aynı palet).
-const DISC_COLORS: Record<string, string> = {
-  D: 'text-red-500', I: 'text-yellow-500', S: 'text-green-500', C: 'text-blue-500',
-};
 
 const APPROVAL_META: Record<ApprovalStatus, { label: string; variant: 'success' | 'warning' | 'destructive' }> = {
   APPROVED: { label: 'Onaylı', variant: 'success' },
@@ -117,15 +113,9 @@ export default function MentorHavuzuPage() {
                         {user.email}
                       </td>
 
-                      {/* DISC */}
+                      {/* DISC — #12 çoklu harf (ör. "Di"); birincil harfe göre renk. */}
                       <td className="px-4 py-3">
-                        {user.discType ? (
-                          <span className={`font-bold ${DISC_COLORS[user.discType]}`}>
-                            {user.discType}
-                          </span>
-                        ) : (
-                          <span className="text-muted-foreground">—</span>
-                        )}
+                        <DiscBadge discLetters={user.discLetters} discType={user.discType} />
                       </td>
 
                       {/* Sektörler */}
