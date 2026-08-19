@@ -21,6 +21,12 @@
 > **açık kod PR 0/0** (git doğrulandı). İki main CI yeşil. Backend #49 → `18cfc42`; çatı #102 → `0fd4942` (pointer backend main
 > HEAD'e bump edildi, ileri-sarım teyitli). Bağlanan uçlar artık **CANLIDA** (autodeploy). Detay: "✅ KÜÇÜK İŞLER PAKETİ" bölümü.
 >
+> **⚡ GÜNCELLEME (2026-08-19, #37 kurum düzeltme-iste turu — YENİ AÇIK PR + MIGRATION CANLIDA):** başlangıç: çatı `24ea0b0`,
+> backend `18cfc42`, pointer senkron. **YENİ AÇIK KOD PR (MERGE OLMADI):** backend **#50** + çatı **(bu tur açılıyor)**.
+> 🛑 **MIGRATION CANLIYA UYGULANDI (PO onaylı):** `TenantVerificationStatus += CORRECTION_REQUESTED` + `Tenant.correctionNote String?`
+> (additive/nullable, `IF NOT EXISTS`+`db execute`+`migrate resolve`; Tenant 3→3 değişmedi, verificationNote korundu).
+> Mail altyapısı kuruldu ama **GÖNDERİM KAPALI** (`TENANT_NOTIFICATIONS_ENABLED=false`). Detay: "🔀 #37 KURUM DÜZELTME-İSTE" bölümü.
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.
@@ -54,6 +60,17 @@
 - **Atlananlar (bilinçli):** otomatik pasifleştirme + tenant eşik alanı (şema=migration → Aşama 2); checkpoint cron gerçek bildirim (mail geri-alınamaz + dedup guard'ı şema ister → Aşama 2); `ContextualFeedbackHost` FE bağlama (kullanıcı-bazlı checkpoint endpoint'i + poller yok → Aşama 2/3); menti havuzu kalite kolonu (mentör metriği, menti'de yanıltıcı).
 - **Doğrulama:** backend PR #48 CI **yeşil** (entegrasyon+unit CI'da geçti); FE lokal tsc ✓ · vitest 38/38 ✓ · build ✓. Lokal backend entegrasyon testleri TEST_DATABASE_URL guard'ıyla durur (canlıya truncate yok) — asıl kanıt CI.
 - **Merge sırası (PO için):** backend #48 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı #100 merge.
+
+## 🔀 #37 KURUM DÜZELTME-İSTE — PR'DA (MERGE OLMADI) — MIGRATION CANLIDA (2026-08-19)
+> Backend **#50** + çatı **(bu tur açıldı)**. Kurum başvurusu için **onayla / reddet / DÜZELTME İSTE** üçlüsü. Reddetmek yerine revizyon talebi (kişi tarafı `requestCorrection` deseninin kurum karşılığı).
+- **🛑 MIGRATION (PO onaylı, canlıya uygulandı):** `TenantVerificationStatus += CORRECTION_REQUESTED` + `Tenant.correctionNote String?`. Additive/nullable, `IF NOT EXISTS` SQL + `db execute` + `migrate resolve --applied` (db push YASAK). **Doğrulama:** Tenant 3→3 (değişmedi), durum dağılımı aynı, `verificationNote` (başvuru kanıtı) EZİLMEDİ — düzeltme notu AYRI `correctionNote`'a yazılır. Migration dosyası: `20260819000000_add_tenant_correction_request`.
+- **Backend akış:** platform admin `POST /api/platform/tenants/:id/request-correction` (→ CORRECTION_REQUESTED + not); kurum admini `POST /api/tenants/self-serve/resubmit` (→ PENDING_REVIEW, correctionNote KORUNUR, IDOR-safe); `getMe` additive `tenant` bloğu (correctionNote YALNIZ ADMIN'e).
+- **FE:** platform dashboard "Düzeltme İste" butonu + PII uyarılı not diyaloğu; STK admin layout `TenantCorrectionBanner` (durum + tekrar-gönderim formu, destekleyici dil).
+- **📧 Mail altyapısı — GÖNDERİM KAPALI (kritik):** `tenantNotifications.ts` 3 Türkçe şablon (onay/red/düzeltme). Gönderim `TENANT_NOTIFICATIONS_ENABLED` env arkasında, **VARSAYILAN false** → gerçek mail GİTMEZ, log-only. **Bu turda açılmadı, canlıya test maili bile atılmadı.** Açma: PO `destek@` + prod SMTP env kurup bayrağı `true` yapacak (madde 37m).
+- **Testler:** yetki (platform admin), IDOR (kurum yalnız kendini), durum geçişleri, geçmiş korunuyor, correctionNote görünürlük (ADMIN vs MENTI). Lokalde entegrasyon TEST_DATABASE_URL guard'ıyla durur → kanıt CI.
+- **Doğrulama:** backend tsc/tsc-test/lint ✓ · FE tsc ✓ · vitest 38/38 ✓ · build ✓.
+- **Bulgu:** iki paralel kurum-doğrulama yolu (`/api/platform/*` FE-kullanımı ↔ `/api/super-admin/verify` testler). Pre-existing duplikasyon, birleştirilmedi.
+- **Merge sırası (PO için):** backend #50 merge → çatı pointer bump → çatı PR merge.
 
 ## ✅ KÜÇÜK İŞLER PAKETİ — #34 + #7(A) + #9-gösterim — MERGED, CANLIDA (2026-08-19)
 > **⚡ GÜNCELLEME (2026-08-19, merge turu):** ~~PR'DA (MERGE OLMADI)~~ → **MERGED, canlıda.** Backend **#49** → backend main `18cfc42`;
