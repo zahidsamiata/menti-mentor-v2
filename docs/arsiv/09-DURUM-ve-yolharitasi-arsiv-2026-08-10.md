@@ -1,4 +1,5 @@
 # ARŞİV — 09-DURUM.md + 10-yol-haritasi.md (2026-08-10 öncesi tam kopya)
+**📸 DONDURULMUŞ (2026-08-10)** — tarihsel arşiv, güncellenmez.
 
 > ⚠️ Bu dosya, `09-DURUM.md` ve `10-yol-haritasi.md`'nin 2026-08-10 belge-temizliği ÖNCESİ tam
 > hâlidir. Katman katman büyümüş, eskimiş/çözülmüş/çelişkili bloklar içerir — **GÜNCEL DEĞİLDİR**,

@@ -1,4 +1,5 @@
 # Sosyal Girişim Stratejisi, Onboarding Akışları, Panel Tasarımları ve Güvenlik Denetimi
+**📸 DONDURULMUŞ (~2026-08-02)** — eski strateji/güvenlik denetimi; arşiv, güncellenmez. Güncel güvenlik: `docs/kararlar/04-guvenlik-ve-kvkk.md`.
 
 > **NOT (Claude Code için):** Bu proje uzun süre gelir elde etmeyen bir sosyal girişim
 > olarak kalacak. Aşağıdaki dokümanda geçen **FİYATLANDIRMA ve MONETİZASYON** kısımlarını

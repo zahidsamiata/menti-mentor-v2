@@ -2,6 +2,9 @@
 **🔄 YAŞAYAN** (canonical: açık sorular / karar kuyruğu) · bkz. dondurulmuş keşif `unutulmus-niyet-envanteri-2026-08-10.md` (konu çakışması: KVKK / fotoğraf / eşleşme tetikleyicisi)
 **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler
 
+> **⚠️ GÜNCELLEME (2026-08-23):** Bazı maddeler karara bağlandı — canonical açık-karar takibi artık `00-KARAR-TAKIP.md`.
+> Çözülenler: **K2 OAuth consent · K4 18+ · K5 sunucu konumu → CANLIDA** (2026-08-15). Hâlâ açık (bu belgede): yaş politikası detayı, veri sorumlusu kimliği (K3 ile birleşik, canlı öncesi en son). Bu belge ↔ `unutulmus-niyet-envanteri-2026-08-10` konu çakışması var.
+
 > Bunlar HENÜZ karara bağlanmamış konular. Karar verildikçe ilgili belgeye taşınır + buradan silinir.
 
 ## 🔴 HUKUKİ / KVKK (canlı-öncesi kritik)

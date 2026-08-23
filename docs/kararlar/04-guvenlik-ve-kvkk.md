@@ -2,6 +2,9 @@
 **🔄 YAŞAYAN** (canonical: güvenlik ve KVKK)
 **Son güncelleme:** 2026-08-02 · Kaynak: strateji/güvenlik chat'i, repo-inceleme chat'i, mail/panel chat'i, bugünkü teşhis
 
+> **⚠️ GÜNCELLEME (2026-08-23):** Bazı satırlar eskidi — güncel gerçek `09-DURUM.md` + `00-KARAR-TAKIP.md`'de.
+> Bilinen düzeltmeler: **IDOR "2 açık" DEĞİL — kod korumalı** (`/mentors/:mentorId/candidates` + `/requests/:id` tenant izolasyonu + sahiplik, düzeltme `161ae00`; bkz. `devir/07-oturum-gunlugu.md` 2026-08-14). **K2/K4/K5 KVKK maddeleri CANLIDA** (2026-08-15). Kalan KVKK: K3 (eski-kayıt consent, canlı öncesi) + K6 (admin server guard → v2) → `00-KARAR-TAKIP.md`.
+
 > UYARI: Bazı güvenlik maddeleri "kod görülmeden" yazılmış hipotezlerdi (strateji chat'i).
 > Bugünkü teşhis (docs/teshis-raporu-2026-08-02.md) bazılarını gerçek kodda doğruladı.
 > Her maddenin "doğrulandı mı" durumuna dikkat.

@@ -132,6 +132,12 @@
   boş-durum ekranları · hata/yükleniyor durumları · **mail akışları uçtan uca testi** (37m açılınca) · mobil kullanılabilirlik
   (çok-kolonlu yönetici tabloları) · yedekleme/geri dönüş · **foto volume kalıcılığı** (Dokploy) · sunucu güvenliği.
 
+**🔴/🟡 2026-08-23 hijyen + PO-manuel maddeleri (belge-düzeni turundan çıktı):**
+- **🔴 Çerez izni / Consent Mode v2 bandı** — canlı-öncesi ZORUNLU. PR **#110** (analytics GTM/GA4/Clarity, **merge-kilitli**) buna bağlı; K3/çerez metinleriyle birleşik. Bant olmadan üçüncü-taraf veri aktarımı = KVKK ihlali (yurt-dışı aktarım beyanıyla çelişir).
+- **🔴 Repolar PUBLIC** (çatı `menti-mentor-v2` + backend `menti-mentor`) — PO-manuel: GitHub'dan private yap (kanıt: `gh repo view --json visibility`).
+- **🟡 Depo hijyeni:** 20 merge-olmamış uzak dal (13'ü 25+ gün eski) + 3 atıl worktree (`cati-bump`, `cati-compose`, `cati-lj`) — gözden geçir/temizle (PO onayı).
+- **🔵 Belge düzeni — alt-klasör + isimlendirme tasarımı HAZIR** (öneri; plan dosyasında): `kararlar/` sıcak-kök + `konu/`+`denetim/`; `raporlar/` `persona/panel/denetim/kesif/icerik/`. Uygulama ayrı BYPASS turu (git mv + ~120-150 referans + INDEX en son). Taşıyıcı 5 ad (09-DURUM/10-yol/00-KARAR-TAKIP/00-INDEX/CLAUDE.md) KALIR.
+
 ---
 
 ## C. 💀 ÖLÜ KOD & YARIM BAĞLANTILAR (niyeti anla → bağla; SİLME kararı PO'da)
