@@ -1,6 +1,6 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-19
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-23
 
 > **⚡ ŞU AN (git ile doğrulandı):** Çatı main HEAD `753c545` (#95) · backend main HEAD / submodule pointer `b6187c1`
 > (senkron) · **açık kod PR: 0/0, masa temiz.** Bu sabah **#12 DISC çoklu harf** (backend #47 + çatı #93 + docs #94) ve
@@ -26,6 +26,19 @@
 > (git doğrulandı). İki main CI yeşil. Backend #50 → `ba92dfa`; çatı #104 → `2639e2e` (pointer bump, ileri-sarım teyitli).
 > 🛑 **MIGRATION CANLIDA:** `CORRECTION_REQUESTED` enum + `Tenant.correctionNote` (canlı DB'de VAR, teyitli; Tenant 3→3).
 > Mail altyapısı hazır ama **GÖNDERİM KAPALI** (`TENANT_NOTIFICATIONS_ENABLED=false`). Detay: "✅ #37 KURUM DÜZELTME-İSTE" bölümü.
+>
+> **⚡ GÜNCELLEME (2026-08-23, strateji-denetimi + PO oturumu — GÜNCEL SNAPSHOT):** İki docs PR bu turda işlendi.
+> (1) **Strateji↔gerçek denetimi** (`strateji-gercek-denetimi-2026-08-20.md`, salt-okuma): 6 strateji/persona belgesi kodla
+> madde-madde karşılaştırıldı — **85 madde, %66 tam var.** PR **#106 → MERGED** (çatı main HEAD **`c747de1`**; backend main/pointer
+> **`ba92dfa` değişmedi, senkron**; kod değişikliği YOK, yalnız yeni rapor). İki main CI yeşil.
+> **Ana bulgu:** admin tasarım-kartları (6 panel + oyunlaştırma) baştan sona uygulanmış; kalan kopukluk 3 eksende —
+> (a) mail/bildirim (37m, en yüksek kaldıraç · 🟠 küme), (b) menti retention inceliği (bekleme anı/ret-yumuşatma/kutlama),
+> (c) yönetici kanıt katmanı (rapor export + ivme/oran metrikleri). Öz-doğrulama 2 alt-ajan false-negatif'ini düzeltti
+> (mentör DISC aha-kartı + paylaşım aslında VAR).
+> (2) **Karar-takip senkronu** (bu docs PR): PO'nun bu oturumdaki kararları `00-KARAR-TAKIP.md`'ye işlendi — 9a (tüm yöneticiler +
+> değişiklik izi), 9b (düzeltilecek), K6 (v2), K3 (en son), sektör/etiket (talep-onay), 2a ghost-red (**30 gün uyku modu**),
+> #7 otomatik pasifleştirme (varsayılan kapalı), #13 (ertelendi), #31 (felsefe-keşfi sonrası), **#38 yeni DISC/karakter derinleşme
+> kurgusu**, Y1–Y7 denetim işleri + 2 keşif turu (içerik-felsefe, belge-düzeni). Detay: `00-KARAR-TAKIP.md` Bölüm B.4 + satır-içi notlar.
 >
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
