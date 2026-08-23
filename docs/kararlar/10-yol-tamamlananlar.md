@@ -1,6 +1,6 @@
 # Yol Haritası — Tamamlanan v1 İşleri (kayıt)
 
-**🔄 YAŞAYAN** (canonical: biten v1 işlerinin kaydı) · Son güncelleme: 2026-08-19
+**🔄 YAŞAYAN** (canonical: biten v1 işlerinin kaydı) · Son güncelleme: 2026-08-22
 
 > **Amaç:** `10-yol-haritasi.md` (aktif iş kuyruğu) yalnız **açık/yapılacak** işi göstersin diye, **biten v1 işleri** burada
 > toplanır. Bu belge DURUM-PANOSU deseniyle çalışır: **özet + PR/tarih kaydı**; her işin tam anlatısı `09-DURUM.md`'nin
@@ -27,9 +27,11 @@
 | 12 | DISC baskın+ikincil harf "DI" (KARAR 11) | ✅ backend #47 + çatı #93 + docs #94 | 2026-08-19 |
 | 29 | İş 2 + İş 3 (P1+P2+P3) — onay/red izi + gerekçe + yönetici-adı + reddedilen akışı | ✅ #41-#43, #81-#85 | 2026-08-16 |
 | 32 | Admin soru düzenleme UI | ✅ çatı #87 | 2026-08-17 |
+| 34 | Öğrenme yolculuğu tamamlanma görünürlüğü (STK admin havuz kolonu) | ✅ backend #49 + çatı #102 | 2026-08-19 |
 | 37 | Giriş enumeration sertleştirme (PENDING dahil) | ✅ backend #46 + çatı #91 + docs #92 | 2026-08-19 |
 
 > **Kısmi/kalanı açık olanlar aktif roadmap'te kalır:** md.6 (kullanıcı maili ✅ / kurum maili AÇIK) ·
+> md.7 (menti→mentör kart + (A) gerekçe + Aşama 1 ✅ / Aşama 2-3 AÇIK) · md.9 (ağırlık gösterimi ✅ / 9a-9b AÇIK) ·
 > md.33 (ölü seed ✅ / seed↔canlı + SJT AÇIK). Bunlar `10-yol-haritasi.md`'de açık işler index'inde.
 
 ---
