@@ -118,7 +118,19 @@
 
 **📁 Sonraki tur notları (bu oturumda PO tanımladı — uygulama YOK):**
 - **İÇERİK & SORU FELSEFESİ KEŞFİ:** tüm soruların (DISC / sertifika / SJT / öğrenme-yolculuğu / kurum-özel) **içeriği + hangi felsefeyle üretildikleri + nasıl puanlandıkları** çıkarılacak. **#38, #31, #13, #30 bu keşfe bağlı** — keşiften önce kodlanmayacak.
-- **BELGE DÜZENİ KEŞFİ:** kalan envanter/teşhis raporları için klasör ayrımı (strateji/ ↔ envanter/) + isim düzeltmeleri + arşivleme + referans haritası (denetim raporu Bölüm E ile aynı; `admin-panelleri-tasarim` güçlü arşiv adayı).
+- **BELGE YENİDEN YAPILANDIRMA TURU (~68 belge):** PO mevcut belge düzeninden **memnun değil.** Kapsam: klasör ayrımı
+  (strateji/ ↔ envanter/), isim düzeltmeleri (karışan çiftler), arşivleme, tüm belge setinin referans haritası + sadeleştirme
+  (denetim raporu Bölüm E ile aynı; `admin-panelleri-tasarim` güçlü arşiv adayı). Ayrı büyük tur.
+
+**🔵 CANLI ÖNCESİ DENETİM LİSTESİ (yeni madde — zaman: TÜM geliştirme bitince, ayrı tur):**
+> PO bir kontrol listesi tarif etti. ⚠️ Liste klasik **pazarlama sitesi** için yazılmış; bu ürün **giriş yapılan bir UYGULAMA** —
+> bazı maddeler (portfolyo, harita, müşteri yorumları, ekip fotoğrafları) UYMAYABİLİR; SEO maddeleri yalnız **public/landing** için.
+- **Public/landing (SEO):** 404 sayfası · hero CTA · iç linkleme · teşekkür sayfası · breadcrumb · SSS · site hızı · sticky CTA ·
+  robots.txt · benzersiz `<title>` · meta description · OG/Twitter kartları · görsel alt etiketleri · JSON-LD schema · Search Console.
+- **Yasal (zorunlu):** KVKK / gizlilik / çerez metinleri (K3 ile birleşir; sayfalar kodda MEVCUT, metin taslak).
+- **Uygulamaya özel EK maddeler:** uygulama-içi (giriş sonrası) sayfaların arama motoruna **KAPALI** olduğu teyidi (KVKK) ·
+  boş-durum ekranları · hata/yükleniyor durumları · **mail akışları uçtan uca testi** (37m açılınca) · mobil kullanılabilirlik
+  (çok-kolonlu yönetici tabloları) · yedekleme/geri dönüş · **foto volume kalıcılığı** (Dokploy) · sunucu güvenliği.
 
 ---
 

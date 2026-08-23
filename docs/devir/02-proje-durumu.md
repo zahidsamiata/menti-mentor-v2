@@ -8,8 +8,15 @@
 > **İş yapmadan önce `gh pr list --state open` + `git log` ile git'ten DOĞRULA** (bkz. 06-devir-kilavuzu).
 >
 > **⚠️ GÜNCELLEME (2026-08-14):** Git durumu ilerledi — çatı main `0aaeac7` (#64), açık PR **#65** (belge temizliği,
-> salt-docs). En güncel oturum özeti + tam bekleyen liste: **`docs/devir/07-oturum-2026-08-14.md`**.
+> salt-docs). En güncel oturum özeti + tam bekleyen liste: **`docs/devir/07-oturum-gunlugu.md`** (oturum günlüğü).
 > Aşağıdaki "devir anı" (2026-08-11) SHA/PR değerleri o güne aittir.
+>
+> **⚠️ GÜNCELLEME (2026-08-20):** Bu belge (2026-08-11 fotoğrafı) çok gerisinde kaldı. **Canonical güncel durum:
+> `docs/kararlar/09-DURUM.md`**; "arkada ne kaldı": `00-KARAR-TAKIP.md`; oturum tarihçesi: `07-oturum-gunlugu.md`.
+> Kısaca bu tarihe kadar **canlıya ek olarak çıkanlar:** #7 Aşama 1 (kalıcı kalite puanı + risk sinyali + checkpoint cron) ·
+> #34 öğrenme-yolculuğu görünürlüğü · #7A mentör→menti kart gerekçesi · #9 ağırlık gösterimi (ayar yok) ·
+> #37 kurum "düzeltme iste" (**migration canlıda**, mail KAPALI). **Güncel git (yazım anı):** çatı main `888ceb8`,
+> backend/pointer `ba92dfa` (senkron), açık PR 0. 4-rol metodolojisi: menti tarafı da büyük ölçüde canlıda (denetim raporu 2026-08-20).
 
 ---
 

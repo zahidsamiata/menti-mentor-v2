@@ -8,7 +8,13 @@
 >
 > **⚠️ GÜNCELLEME (2026-08-14):** Bu liste 2026-08-11 fotoğrafıdır. Güncellenmiş TAM bekleyen liste (PR #65 merge,
 > 6 arşiv teyidi, karar-statü taraması, durum panosu, v1/v2 önceliklendirme dahil):
-> **`docs/devir/07-oturum-2026-08-14.md`** (C bölümü).
+> **`docs/devir/07-oturum-gunlugu.md`** (oturum günlüğü).
+>
+> **⚠️ GÜNCELLEME (2026-08-20) — CANONICAL DEĞİŞTİ:** Bekleyen kararlar + açık iş + ölü kod için **tek canonical kaynak
+> artık `docs/kararlar/00-KARAR-TAKIP.md`** (kanıtlı, kod-doğrulamalı, her oturum güncellenir). Bu belge tarihsel
+> özettir — çelişkide 00-KARAR-TAKIP kazanır. **PO manuel işleri (aşağıdaki B bölümü) hâlâ geçerli** ve 00-KARAR-TAKIP'te
+> de izlenir: destek@ + prod SMTP env (37m) · Dokploy foto volume (canlı öncesi ŞART) · repoları private · KVKK/çerez
+> metinleri (K3, canlı öncesi en son). Bekleyen migration sırası: **9a+9b → 2a ghost red (30 gün uyku modu) → #7 Aşama 2** (bkz. `07-oturum-gunlugu.md` SIRADAKİ İŞ SIRASI).
 
 ---
 

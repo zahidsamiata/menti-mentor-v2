@@ -5,6 +5,17 @@
 > **Amaç:** Bu proje aylardır tek bir çalışma disipliniyle yürüyor. Yeni sohbet, bu disiplini
 > ilk turdan uygulasın diye burada topladık. Kaynak: `CLAUDE.md` (kök) + `docs/kararlar/07-calisma-tarzi.md`.
 > **Kişi adı yok** — kullanıcıdan "ürün sahihi" / "PO" diye söz edilir.
+>
+> **⚠️ GÜNCELLEME (2026-08-20) — PO çalışma tarzı ekleri (kalıcı):**
+> - **Uzun, otonom turlar tercih edilir** — PC açık bırakılır; iş verilince tek turda kapsamlı ilerlenir, gereksiz durulmaz
+>   (karar gerekeni "PO kararı gerekli: …" diye NOT et, devam et). Parça-parça "şunu yap-dur" değil.
+> - **Kod/belge SİLME yerine "niyeti anla, kaldığın yerden devam et"** — ölü/yarım kod için varsayılan "sil" DEĞİL;
+>   önce neden yazıldığını + neye bağlanacağını bul (çoğu yarım özelliğin parçası). Gerçek terk adayı "❓ PO kararı" işaretlenir.
+> - **Belgelerde silme yok** — eskiyi `docs/arsiv/`'e taşı + `⚠️ GÜNCELLEME (tarih)` notu düş (tarihsel iz korunur).
+> - **Modlar iki tanedir:** 🔵 PLANLA / 🟢 BYPASS (aşağıdaki §2'de "MANUEL-ONAY" ayrı bir mod gibi yazılmış; pratikte
+>   geri-alınamaz adımda **BYPASS içinde DUR-onay** uygulanır, ayrı etiket kullanılmaz).
+> - **Karar-Takip Disiplini (yeni):** her oturum **başında** `00-KARAR-TAKIP.md` okunur + açık maddeler PO'ya hatırlatılır;
+>   her BYPASS turu **sonunda** güncellenir. Detay: `CLAUDE.md`.
 
 ---
 
