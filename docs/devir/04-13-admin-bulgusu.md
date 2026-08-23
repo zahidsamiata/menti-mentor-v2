@@ -9,6 +9,13 @@
 > **⚠️ DÜRÜSTLÜK:** Gerçek kod keşfi (S/M/L) **henüz yapılmadı** — bu, sıradaki işin ilk adımı.
 > Aşağıdaki backend-hazırlık notları yalnızca yol haritasındaki ipuçlarına dayanır; kesin S/M/L ve
 > "backend hazır mı" **keşifle doğrulanacak**. "keşif" işaretli maddeler açıkça doğrulama bekliyor.
+>
+> **⚠️ GÜNCELLEME (2026-08-20) — 13 bulgunun BÜYÜK KISMI uygulandı (kod gerçeği):** Strateji-denetimi raporu
+> (`strateji-gercek-denetimi-2026-08-20.md` Bölüm B.5) 6 admin panelinin canlıda olduğunu kanıtladı. Bu bulgulardan
+> canlıda görünenler: #1 şifre göster/gizle · #6 algoritma kalibrasyon (gösterim; ayar=9a) · #7 yöneticiler sayfası
+> (`admin/managers`) · #9 CORE/DEEPENING Türkçeleştirme · #12 etiket yönetimi · ayrıca DISC "DI" çoklu harf (#12/KARAR 1).
+> **Açık kalanlar takip:** #8/#10/#13 soru cevap-tipi (→ karar-takip #13, ertelendi) · etiket havuzu talep-onay akışı ·
+> #2/#3/#5 tasarım kararları. **Bu belge büyük ölçüde tamamlandı → arşiv adayı** (taşımayı PO kararı verir). Güncel: `00-KARAR-TAKIP.md`.
 
 ---
 

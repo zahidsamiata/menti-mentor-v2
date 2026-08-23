@@ -6,6 +6,12 @@
 > yasal blocker** içerir. Kaynak: `10-yol-haritasi.md` (B), `unutulmus-niyet-envanteri-2026-08-10.md`
 > (K1-K6), `04-guvenlik-ve-kvkk.md`, `belge-denetimi-2026-08-10.md` (SONUÇ md.1).
 > **İlk adım daima KEŞİF (PLANLA)** — form/şema körlemesine değiştirilmez; her madde önce doğrulanır.
+>
+> **⚠️ GÜNCELLEME (2026-08-20) — kısmen tamamlandı (kod gerçeği):** **K2** (OAuth `kvkkConsentAt`) · **K4** (18+ doğrulama)
+> · **K5** (sunucu konumu beyanı) → **CANLIDA** (backend #38 + çatı #73, 2026-08-15; bkz. `07-oturum-gunlugu.md`).
+> **Hâlâ açık:** **K1** yasal metinler taslak (hukukçu) · **K3** eski-kayıt consent (PO kararı — canlı öncesi EN SONA,
+> hangi izinlerin isteneceği netleşince) · **K6** admin server guard (**v2'ye ertelendi** — API zaten backend-korumalı).
+> Güncel takip: `00-KARAR-TAKIP.md` (K1/K3/K6). Bu belge kısmen geçerli — **tam kapanınca arşiv adayı** (taşımayı PO kararı verir).
 
 ---
 

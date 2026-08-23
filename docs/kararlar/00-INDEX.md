@@ -1,5 +1,5 @@
 # MENTİMENTOR / SİVİLKAPASİTE — BELGE HARİTASI (INDEX)
-**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-19 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
+**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-20 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
 
 > Bu belgeler, birden fazla sohbetten toplanan kararların konu bazlı derlemesidir.
 > Claude Code / yeni Claude chat'i, ihtiyaç duyduğu konunun belgesini okur — hepsini değil.
@@ -32,7 +32,7 @@ Tüm dokümanlar `docs/` altında toplandı; proje kökü yalnızca gerçek proj
 docs/
 ├── kararlar/   → konu bazlı karar/durum belgeleri (00-INDEX + 01–11 + 10-yol-tamamlananlar + denetim/pano set)
 ├── raporlar/   → keşif/teşhis raporları (📸 tarihli, dondurulmuş) + raporlar/icerik/ (test içerik arşivi)
-├── devir/      → oturum devir notları (📸 dondurulmuş; 01–06 set + 07/08 oturum)
+├── devir/      → oturum devir notları (01–06 set 📸 + 07-oturum-gunlugu 🔄 yaşayan; eski 08 → arsiv/)
 └── arsiv/      → eskimiş/örtüşen/kopya belgeler (silinmedi, tarihsel iz için saklandı)
 ```
 
@@ -69,15 +69,17 @@ docs/
 
 > **Denetim kümesi (birlikte okunur):** `belge-aksiyon-denetimi-2026-08-11` (kararlar gerçekle kıyas) · `belge-denetimi-2026-08-10` (09/10 denetimi) · `unutulmus-niyet-envanteri-2026-08-10` (unutulan niyetler) · `belge-temizlik-haritasi-2026-08-14` (düzen taraması). Farklı kapsam/tarih — birleştirilmez, çapraz referanslıdır.
 
-## Devir belgeleri — `docs/devir/` (2026-08-11 seti + 2026-08-14 güncelleme)
+## Devir belgeleri — `docs/devir/` (2026-08-11 seti + yaşayan oturum günlüğü)
+> **⚠️ YENİ DÜZEN (2026-08-20):** Artık her oturum için ayrı dosya AÇILMAZ. Tüm oturum kapanışları tek yaşayan günlüğe
+> (`07-oturum-gunlugu.md`) tarih başlıklı bölümler halinde eklenir. Eski `07`+`08` orada birleşti; `08` arsiv/'e taşındı (silinmedi).
+
 | Klasör | İçerik | Tür |
 |---|---|---|
-| `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu) | 📸 DONDURULMUŞ (2026-08-11) |
-| `docs/devir/07-oturum-2026-08-14.md` | 2026-08-14 oturum kapanışı: git durumu + yapılanlar + TAM bekleyen liste (yeni oturum önce bunu + 09-DURUM okur) | 📸 DONDURULMUŞ (2026-08-14) |
-| `docs/devir/08-oturum-2026-08-15.md` | 2026-08-15 oturum kapanışı: KARAR 5 + KVKK + havuz-kart merge sonrası git durumu + v1 kesin tablo (13 iş: 4✅/9⏳) + kalan 9 iş + boy | 📸 DONDURULMUŞ (2026-08-15) |
+| `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu). 2026-08-20'de tarihli GÜNCELLEME notlarıyla tazelendi | 📸 DONDURULMUŞ (2026-08-11) + ⚠️ güncelleme notları |
+| `docs/devir/07-oturum-gunlugu.md` | **Yaşayan oturum günlüğü** — 2026-08-14 · 2026-08-15 · 2026-08-20 oturum kapanışları + SIRADAKİ İŞ SIRASI + çalışma tarzı. Yeni oturumlar buraya eklenir | 🔄 YAŞAYAN |
 
 > **Canonical eşleşmesi (Kural 1 — devir belgeleri özet/kopyadır, güncel bilgi kararlar/'da):**
-> `01`→`07-calisma-tarzi` · `02`→`09-DURUM` · `03`→`04-guvenlik-ve-kvkk` · `04`→`10-yol-haritasi` (A) + `stk-admin-bulgu-envanteri` · `05`→`09-DURUM` + `10-yol-haritasi` (C/E) · `06`→kendisi (devir prosedürü).
+> `01`→`07-calisma-tarzi` · `02`→`09-DURUM` · `03`→`04-guvenlik-ve-kvkk` · `04`→`10-yol-haritasi` (A) + `stk-admin-bulgu-envanteri` · `05`→**`00-KARAR-TAKIP`** + `09-DURUM` · `06`→kendisi (devir prosedürü) · `07-oturum-gunlugu`→`09-DURUM` + `00-KARAR-TAKIP` (özet).
 
 ## Raporlar — `docs/raporlar/` (📸 DONDURULMUŞ — keşif fotoğrafları)
 > Bir-kerelik keşif/analiz çıktıları; güncellenmez. Güncel durum daima `09-DURUM.md`'de.
@@ -139,6 +141,7 @@ docs/
 | `09-DURUM-gecmis-katmanlar-2026-08-19.md` | 09-DURUM başlığından taşınan istiflenmiş tarih/SHA/PR katmanları (2026-08-19 sadeleştirmesi) |
 | `09-DURUM-tamamlanan-isler-arsiv-2026-08-19.md` | 09-DURUM'dan taşınan eski kapanmış oturum kayıtları (2026-08-11 + 2026-08-14) |
 | `yol-haritasi-kopya-kayitlar-2026-08-19.md` | 10-yol'da iki kez listelenen madde 30-34 kopyalarının taşındığı yer (asıl v1-D'de) |
+| `08-oturum-2026-08-15.md` | Eski devir oturum belgesi; içeriği `devir/07-oturum-gunlugu.md`'ye taşındı (2026-08-20 birleşimi). Tarihsel iz için saklandı |
 
 ## ⚠️ En kritik iki gerçek (her zaman hatırla)
 1. **Canlı ve lokal AYNI Neon DB'sini paylaşıyor** (`ep-fancy-tooth-ab4u5xhr`). Lokalde DB'ye yazmak = canlıyı etkilemek. Detay: `02-mimari-ve-altyapi.md`.

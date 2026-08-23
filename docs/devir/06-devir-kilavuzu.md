@@ -7,9 +7,14 @@
 > dolduğu için hafızaya güvenme; bu projenin "SHA tahmin etme, doğrula" kuralı).
 >
 > **⚠️ GÜNCELLEME (2026-08-14):** Bu kılavuz + 01–06 seti 2026-08-11 fotoğrafıdır. **Önce
-> `docs/devir/07-oturum-2026-08-14.md`'yi oku** (en güncel durum + tam bekleyen liste). Güncel git değerleri:
+> `docs/devir/07-oturum-gunlugu.md`'yi oku** (en güncel durum + tam bekleyen liste). Güncel git değerleri:
 > çatı main `0aaeac7` (#64), backend `afc2769` (senkron), açık PR **#65** (belge temizliği). Aşağıdaki
 > "devir anındaki değerler (çatı `da6a138`)" 2026-08-11'e aittir — git'ten doğrula.
+>
+> **⚠️ GÜNCELLEME (2026-08-20) — YENİ DEVİR DÜZENİ:** Artık **her oturum için AYRI dosya AÇILMAZ.** Tüm oturum
+> kapanışları tek yaşayan günlüğe eklenir: **`docs/devir/07-oturum-gunlugu.md`** (eski `07`+`08` orada birleşti; `08`
+> arşive taşındı). Yeni sohbetin ilk okuması: **`01-felsefe` → `07-oturum-gunlugu` (en alttaki en güncel bölüm) →
+> `09-DURUM.md` → `00-KARAR-TAKIP.md`**, sonra git'ten doğrula. Sıradaki işler: `10-yol-haritasi.md` + `00-KARAR-TAKIP.md` B.4.
 
 ---
 
