@@ -16,6 +16,7 @@ import './globals.css';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { AuthTenantBridge } from '@/providers/AuthTenantBridge';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { Analytics, GtmNoScript } from '@/components/analytics/Analytics';
 
 /**
  * FOUC önleme: React hidrasyonundan ÖNCE `<html>` üzerine tema class'ını senkron uygula.
@@ -32,6 +33,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: { template: '%s — Mentorluk Platformu', default: 'Mentorluk Platformu' },
   description: 'Mentor-menti eşleştirme platformu',
+  verification: { google: 'UW3gmZgvwKpStxVx40lJzmnuCYAO63vU4GWqYqkeTRw' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -39,8 +41,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="tr" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <Analytics />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <GtmNoScript />
         <ThemeProvider>
           <AuthProvider>
             <AuthTenantBridge>
