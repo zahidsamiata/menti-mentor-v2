@@ -2,6 +2,8 @@
 **🔄 YAŞAYAN** (canonical: mimari ve altyapı)
 **Son güncelleme:** 2026-08-02 · Kaynak: PRD/repo-inceleme chat'i, mail/panel chat'i, bugünkü oturum
 
+> **⚠️ GÜNCELLEME (2026-08-23):** DB uyarıları (canlı=lokal aynı Neon, tehlikeli seed) GÜNCEL ve geçerlidir. Ancak bazı eski satırlar (sürüm/hosting/VPS-tartışması) güncel gerçeği yansıtmayabilir — canlı altyapı **Dokploy + Neon** ile çalışıyor, **mail Resend/SMTP** (Gmail değil). Canlı durum: `09-DURUM.md`.
+
 ## 🔴🔴 EN KRİTİK GERÇEK — CANLI = LOKAL AYNI DB
 - **Canlı ve lokal AYNI Neon veritabanını paylaşıyor:** `ep-fancy-tooth-ab4u5xhr-pooler.eu-west-2.aws.neon.tech`
 - Dokploy canlı backend DATABASE_URL = lokal backend DATABASE_URL = **birebir aynı** (NODE_ENV=production). Ekran görüntüleriyle 2026-08-02'de KESİNLEŞTİ.

@@ -144,7 +144,7 @@ Kategori: **KALSIN** / **ETİKET EKLE** (Kural 3) / **⚠️ NOT EKLE** (Kural 6
 | belge-temizlik-haritasi | 145 | 📸 ✓ | KALSIN | Önceki düzen taraması (tarihsel) |
 | chat-v1-teslim | 70 | ✗ | ETİKET (📸) + ⚠️ NOT | v1 tamamlandı; cross-tenant snapshot eskimiş olabilir |
 | degerlendirme-metrik-sistemi-tasarim | 212 | (teyit) | KALSIN | Yeni (#95, 2026-08-19); tasarım |
-| dokploy-foto-volume-talimati | 71 | ✗ | ETİKET + TAŞI | Operasyon talimatı; `kararlar/` yanlış klasör → `raporlar/` veya `devir/` (PO) |
+| dokploy-foto-volume-talimati | 71 | ✗ | ETİKET (⚠️ TAŞIMA İPTAL) | Operasyon talimatı. **⚠️ GÜNCELLEME (2026-08-23): PO kararı — `kararlar/`'da KALIYOR** (aktif operasyon talimatı/blocker, donmuş rapor değil); "raporlar/'a taşı" önerisi geçersiz, çelişki kapandı. |
 | stk-admin-bulgu-envanteri | 61 | 📸 ✓ | KALSIN | Keşif (§5.3-5) |
 | tasarim-kararlari-admin | 133 | ✗ | ETİKET EKLE (🔄) | Karar arşivi (§5.3-5) |
 | unutulmus-niyet-envanteri | 120 | ✗ | ETİKET (📸) + çapraz-ref | Denetim kümesi 3; 08 ile link |
