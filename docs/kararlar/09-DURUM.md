@@ -40,6 +40,13 @@
 > #7 otomatik pasifleştirme (varsayılan kapalı), #13 (ertelendi), #31 (felsefe-keşfi sonrası), **#38 yeni DISC/karakter derinleşme
 > kurgusu**, Y1–Y7 denetim işleri + 2 keşif turu (içerik-felsefe, belge-düzeni). Detay: `00-KARAR-TAKIP.md` Bölüm B.4 + satır-içi notlar.
 >
+> **⚡ GÜNCELLEME (2026-08-23, belge-düzeni reorg — salt-docs, KOD YOK):** `docs/kararlar/` ve `docs/raporlar/` şişince
+> **alt-klasörlere** ayrıldı (git mv, içerik değişmedi): kararlar → `konu/` + `oz-denetim/`; raporlar → `kesif/` + `kod-denetimi/`
+> + `panel/` + `persona/` + `icerik/`. Canonical taşıyıcılar (00-INDEX · 09-DURUM · 00-KARAR-TAKIP · 10-yol-haritasi ·
+> 10-yol-tamamlananlar) `kararlar/` kökünde KALDI. 38 tam-yol referansı yeni konumlara güncellendi; 00-INDEX yeni ağaca göre
+> yeniden yazıldı; `belge-duzeni-rehberi` Kural 2 alt-klasör genişletmesiyle tazelendi. **Kırık-link taraması: 0** (bayat 2 devir
+> işaretçisi de düzeltildi). docs/ dosya sayısı 68 (kayıp yok). PR (docs) — **merge PO'da.** Kod/DB dokunulmadı, #110 ellenmedi.
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.

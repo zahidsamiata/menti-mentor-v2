@@ -34,6 +34,17 @@
 > Bu turda birçok ❓ karara bağlandı (9b→düzeltilecek, K6→v2, K3→en son, sektör/etiket→talep-onay, 2a→30 gün uyku modu,
 > #13→ertelendi); satır-içi **⚠️ GÜNCELLEME (2026-08-23)** notlarına bakınız.
 
+> **⚡ GÜNCELLEME (2026-08-23) — belge-düzeni reorg (salt-docs, KOD YOK):** `docs/kararlar/` + `docs/raporlar/` alt-klasörlere
+> ayrıldı (git mv, içerik değişmedi); canonical taşıyıcılar kökte kaldı; 38 tam-yol referansı güncellendi; 00-INDEX yeniden
+> yazıldı; kırık-link 0; docs/ 68 dosya (kayıp yok). Bu turda **2 yeni 🟡 altyapı-hijyen maddesi** eklendi (Bölüm E — repo/altyapı).
+>
+> ### E. 🟡 Repo / altyapı hijyeni (PO kararı bekleyen — kod dışı)
+> - **🟡 OneDrive senkron riski:** Repo `OneDrive/Masaüstü/Geliştirme` altında — OneDrive'ın `.git` dosyalarını senkronlaması
+>   kilitleme/bozulma riski + disk doluluğu getiriyor (bu turda disk %98'e dayandı, bir önceki tur `sed` geçici-dosyası patlamıştı).
+>   **Aday:** repoyu OneDrive dışına taşımak (ör. `C:\dev\`). **PO kararı.**
+> - **🟡 Dağınık backend kopyaları + atıl worktree'ler:** `C:\Users\...\backend-mail`, `backend-testfix`, `backend-cfgfix` (~1 GB) +
+>   3 atıl git worktree duruyor. Her birinde **commit edilmemiş iş var mı** kontrol edilip temizlenecek (**ayrı tur**, PO onayı).
+
 ---
 
 ## B. 🔴 AÇIK İŞLER TABLOSU
