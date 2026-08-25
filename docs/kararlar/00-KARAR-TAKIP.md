@@ -15,6 +15,8 @@
 
 ## A. ⚡ TEK BAKIŞTA (şu an)
 
+> **Çıkış önceliği (hangi iş çıkıştan önce/sonra):** `00-CIKIS-PLANI.md` — açık işler K0-K5'e sınıflandı; gerçek çıkış-bloker sadece 5 K0 + 1 K1.
+
 | Kategori | Sayı | Tek cümle |
 |---|:---:|---|
 | 🔴/🟡/🔵 **v1 açık iş** | **6** | ⚡ #37 kurum "düzeltme iste" → **✅ CANLIDA** (backend #50 + çatı #104 merged, migration canlıda). Kalan: cevap-tipi(#13), kurum-maili(#6), 2a/2b/#7-B tasarım-hazır, içerik/seed/PO + **9a** ağırlık-ayar (migration bekliyor) + **37m** kurum-mail-açma (PO-manuel env) |

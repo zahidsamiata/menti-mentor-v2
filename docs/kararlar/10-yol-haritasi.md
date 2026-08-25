@@ -2,6 +2,8 @@
 
 **🔄 YAŞAYAN** (canonical: iş kuyruğu)
 
+> **Çıkış önceliği için bkz. `00-CIKIS-PLANI.md`** — bu belge tüm açık işleri **numara sırasıyla** tutar; çıkış-öncesi/sonrası sınıflandırması (K0-K5) çıkış planındadır.
+
 > Bu belge yalnızca **BUNDAN SONRA yapılacak açık işleri** öncelik sırasıyla tutar. Biten işler burada durmaz —
 > güncel durum `09-DURUM.md`'de; 2026-08-10 öncesi tam geçmiş `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`'de.
 >

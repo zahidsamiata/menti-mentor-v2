@@ -62,6 +62,12 @@
 > (madde 38=güvenlik canonical; DISC işi numarasız "DISC-DERİNLEŞME kurgusu"). (4) **KURAL 7** (taşıyıcı belge iş bölümü) rehbere eklendi.
 > (5) `durum-panosu-2026-08-14` 🔄→📸 adayı (Bölüm E). Gerçek statü çelişkisi: 0. Tümü #112'de (merge PO'da).
 >
+> **⚡ GÜNCELLEME (2026-08-23, canlı çıkış planı — salt-docs):** Dağınık ~58 açık iş **tek çıkış planına** sınıflandı → yeni canonical
+> `00-CIKIS-PLANI.md` (K0-K5 + tur planı). **KATI test:** ~40 "v1" maddenin çoğu çıkışı ENGELLEMİYOR → **gerçek çıkış-bloker: 5 K0**
+> (madde 38/68 PII sızıntısı · 39 KVKK silme · repo private · KVKK metinleri) **+ 1 K1** (foto volume) + 2 şüpheli (T7 opt-in, maxMeetings — TEYİT GEREK).
+> **İndirilenler (K0/K1→K2):** çerez izni #67 (analytics'siz çıkışta gerekmez), 9b (henüz görünür yalan değil), K3 (~0 kullanıcı), T3, KVKK FE.
+> **KURAL 8** (bulgu yaşam döngüsü) rehbere + CLAUDE.md'ye eklendi. Tur sırası: PO manuel (repo private+foto+metin) → güvenlik 38+68 (paralel) → G2 migration (tek başına). Kod OKUNDU, değiştirilmedi.
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.

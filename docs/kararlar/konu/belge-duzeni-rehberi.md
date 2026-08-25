@@ -74,6 +74,7 @@
 | `00-KARAR-TAKIP.md` | "NE KALDI" tek-bakış: açık iş + yarım iş + **ölü/bağlanmamış kod** (niyet→neye bağlanacak) + uygulanmamış karar; her kalem **kod-kanıtlı** (dosya:satır) | öncelik sıralaması (→10-yol) · "ne oldu" anlatısı/SHA (→09-DURUM) · biten iş kaydı (→tamamlananlar). *(Açık işleri 10-yol ile aynı madde-no ile REFERANSLAR, statüyü kopyalamaz.)* |
 | `10-yol-tamamlananlar.md` | Biten v1 işlerinin **kompakt kaydı**: madde no + tek satır + PR no + tarih | tam anlatı/kod-detay (→09-DURUM) · açık/kısmi işler (→10-yol; kısmi burada DURMAZ) · ölü kod (→KARAR-TAKIP) |
 | `00-INDEX.md` | Belge **haritası**: hangi bilgi hangi belgede, canonical mı/arşiv mi, 🔄 mı 📸 mı, okuma yolu | iş statüsü/durum içeriği (→09/10/KARAR-TAKIP) · karar gövdeleri (→konu/). *(Yalnız işaret eder, içerik tutmaz.)* |
+| `00-CIKIS-PLANI.md` | Çıkış **önceliği sınıflandırması** (K0-K5 + tur planı): "hangi iş çıkıştan önce/sonra" bakışı | iş statüsü (→KARAR-TAKIP/09) · kuyruk detayı (→10-yol) · kanıt (→KARAR-TAKIP). *(Maddelere referans verir, statü/detay tutmaz.)* |
 
 - **Yazımdan önce sor:** (1) "ne oldu" mu (→09), "ne kalacak" mı (→10/KARAR-TAKIP), "nerede" mi (→INDEX)? (2) Aynı statüyü ikinci yaşayan belgeye mi yazıyorum → DUR, biri referans versin. (3) Statü kaynağı hep KOD.
 

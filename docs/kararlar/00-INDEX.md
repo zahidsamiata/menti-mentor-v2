@@ -60,6 +60,7 @@ docs/
 ## Belgeler — `docs/kararlar/` (kök · canonical taşıyıcılar 🔄)
 | Belge | İçerik | Ne zaman okunur |
 |---|---|---|
+| `00-CIKIS-PLANI.md` | **Canlı çıkış önceliği** (K0-K5 sınıflandırma + tur planı); "kullanıcı almaya başlamak için ne gerekli" | Çıkış planlaması / öncelik kararı |
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
 | `00-KARAR-TAKIP.md` | **NE KALDI:** açık iş + yarım + ölü kod + uygulanmamış karar tek bakışta (🔄 canonical takip; kanıtlı, kod-doğrulamalı) | **Her oturum başında** (arkada ne kaldı) |
 | `10-yol-haritasi.md` | Aktif iş kuyruğu: üstte açık-işler hızlı-index · v1 (numaralı) · v2 backlog (14-28) | Sıradaki iş kararı |
