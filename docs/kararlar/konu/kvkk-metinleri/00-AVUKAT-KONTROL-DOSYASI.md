@@ -49,6 +49,7 @@ Veri sorumlusu kimliği (ad/unvan) · adres · MERSİS/vergi no (varsa) · KEP a
 - Rıza metni sürümlenmiyor (madde 82).
 - OAuth'ta açık rıza UI'da alınmıyor; KVKK+18 birleşik kutu (madde 83).
 - `hardDelete` FK kısıtı — KVKK tam silme fiilen çalışmıyor (madde 39).
+- **Anonimleştirme kısmi (takma-adlaştırma):** sosyal/avatar/kişilik alanları temizlenir (2026-08-25 iyileştirildi) ama mesaj içeriği + fiziksel foto dosyası + kayıt-anahtarı bağı kalır → tam anonimleştirme iş maddesi (madde 93). Saklama-imha metni bu gerçeği beyan eder, "tam geri-döndürülemez" vaadi vermez.
 - 18+ yalnız beyan, doğrulama yok.
 - VERBİS durumu belirsiz.
 - Analitik (#110) merge-kilitli — çerez izni olmadan açılmayacak.

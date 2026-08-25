@@ -5,6 +5,11 @@
 
 > **İmha yöntemi (avukat onaylı):** silme yerine **anonimleştirme** — kişinin kim olduğu anlaşılamayacak düzeyde olmak şartıyla — yeterlidir. Aşağıda esas alınmıştır.
 > ⚠️ **Süreler UYDURULMAMIŞTIR.** "Kod gerçeği" = şu an sistemin fiilen yaptığı; "önerilen" = hukukçu/PO onayına sunulan taslak.
+>
+> 🔴 **DÜRÜST DURUM (kod teyidi 2026-08-25):** Mevcut anonimleştirme kimlik/iletişim/profil/sosyal-medya/kişilik alanlarını temizler
+> **ama HENÜZ TAM anonimleştirme değil, kısmi (takma-adlaştırma) düzeyindedir:** kayıt anahtarı (kullanıcı kimliği) değişmediği ve mesaj
+> içerikleri ile yüklenen fotoğraf dosyası silinmediği için, bağlı kayıtlar üzerinden yeniden-tanımlanma riski **teorik olarak sürer.**
+> Tam anonimleştirme bir **iş maddesidir** (madde 93). Bu metin, "geri döndürülemez tam anonimleştirme" **vaadi VERMEZ** — mevcut gerçeği beyan eder.
 
 | Veri kategorisi | Tablo | Kod gerçeği (şu an) | Otomatik imha? | [PO/HUKUKÇU ONAYI] önerilen süre + gerekçe |
 |---|---|---|---|---|
@@ -16,11 +21,13 @@
 | Oturum/şifre jetonu | `RefreshToken`, `PasswordResetToken` | `expiresAt`'e kadar; süre-bazlı otomatik purge yok | ⚠️ kısmi | Süresi dolanların düzenli temizliği (iş maddesi) |
 | Taslak kurum başvurusu | `Tenant`+`User` (taslak) | 96 saat taslak kalırsa silinir | ✅ VAR | mevcut |
 
-## Mevcut imha yetenekleri (kod)
-- **Anonimleştirme (`anonymizeUser`):** kimlik/profil alanlarını temizler, test yanıtlarını siler. **Ancak mesaj içeriği ve bazı geri bildirim serbest metinleri şu an anonimleştirilmiyor** (iş maddesi).
+## Mevcut imha yetenekleri (kod — 2026-08-25 teyidi)
+- **Anonimleştirme (`anonymizeUser`) TEMİZLER:** ad, e-posta (anonim değere çevrilir), biyografi/uzmanlık, CV (gönüllülük/proje/eğitim), **sosyal medya bağlantıları (LinkedIn/Instagram), avatar bağlantısı**, kişilik verileri (DISC/mizaç/enneagram/"aha" kartı), test yanıtları, kurum-profil kişilik alanları.
+- **⚠️ Anonimleştirme ŞU AN TEMİZLEMEZ (madde 93 — açık uyum boşluğu):** (a) **mesaj içerikleri** (`Message.content`) · (b) **yüklenen fotoğrafın fiziksel dosyası** (yalnız bağlantı temizlenir, dosya diskte kalır) · (c) **görüşme not/telefon alanları** · (d) **kayıt anahtarı (kullanıcı kimliği) değişmez** → bağlı tablolar üzerinden teorik yeniden-tanımlanma. Bu nedenle mevcut düzey **takma-adlaştırma**dır; tam anonimleştirme iş maddesidir.
 - **Kalıcı silme (`hardDeleteUser`):** bir kısım tabloyu siler; **ancak Meeting/Feedback/Message gibi kayıtlar teknik kısıt (FK) nedeniyle şu an silinemiyor → işlem gerçek veride başarısız olabilir** (madde 39 — düzeltilecek).
 
 ## Bilinen boşluklar (dürüst — iş maddeleri)
+- **Tam anonimleştirme eksik (takma-adlaştırma düzeyi)** → mesaj içeriği + fiziksel foto dosyası + kayıt-anahtarı bağı temizlenmiyor → `00-KARAR-TAKIP` **madde 93**.
 - **Genel otomatik imha/periyodik anonimleştirme süreci YOK** (yalnız SystemLog) → `00-KARAR-TAKIP` madde 81.
 - **hardDelete FK kısıtı** (madde 39) — KVKK silme hakkının fiilen çalışması için düzeltme gerekli.
 - **"Ghost/30 gün uyku modu"** (madde 35) yalnız tasarım; kodda yok — saklama süresi olarak henüz geçerli değil.
