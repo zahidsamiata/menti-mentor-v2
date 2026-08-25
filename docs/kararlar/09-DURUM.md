@@ -62,6 +62,15 @@
 > (madde 38=güvenlik canonical; DISC işi numarasız "DISC-DERİNLEŞME kurgusu"). (4) **KURAL 7** (taşıyıcı belge iş bölümü) rehbere eklendi.
 > (5) `durum-panosu-2026-08-14` 🔄→📸 adayı (Bölüm E). Gerçek statü çelişkisi: 0. Tümü #112'de (merge PO'da).
 >
+> **⚡ GÜNCELLEME (2026-08-25, KVKK güvenlik turu — KOD + docs):** İlk KOD turu (docs değil).
+> **(A) K0 güvenlik düzeltmeleri → backend PR #51 (MERGE OLMADI):** madde 38 `updateUser`/temperament password+PII sızıntısı
+> (db.ts global omit `{user:{password:true}}` + explicit select + test) · madde 68 `SuspicionReport` reporter PII maskeleme
+> (maskName/maskContact + test). tsc/tsc-test/eslint temiz; DB testleri CI'da (guard). **Çatı submodule pointer'ı DEĞİŞMEDİ** (backend merge olmadı).
+> **(B) FAZ B teyitleri (salt-okuma):** T7 opt-in eşleşmeyi bloklamıyor (K2) · `maxMeetingsPerWeek` enforce EDİLMİYOR (madde 79) · 9b indirmesi doğru.
+> **(C) KVKK veri aktarım envanteri** (kod-kanıtlı, 2 ajan) → `../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`;
+> 8 hukukçu sorusu + [PO DOLDURACAK] alanlar. **Yeni maddeler 79-87** (00-KARAR-TAKIP F.5). **KALAN (bu tur YAPILMADI):** FAZ D KVKK belge paketi
+> (8 belge — envanter hazır, ayrı tur) · FAZ E FE entegrasyonu (merge-kilitli PR). Bağlam sınırı nedeniyle dürüstçe bırakıldı.
+>
 > **⚡ GÜNCELLEME (2026-08-23, canlı çıkış planı — salt-docs):** Dağınık ~58 açık iş **tek çıkış planına** sınıflandı → yeni canonical
 > `00-CIKIS-PLANI.md` (K0-K5 + tur planı). **KATI test:** ~40 "v1" maddenin çoğu çıkışı ENGELLEMİYOR → **gerçek çıkış-bloker: 5 K0**
 > (madde 38/68 PII sızıntısı · 39 KVKK silme · repo private · KVKK metinleri) **+ 1 K1** (foto volume) + 2 şüpheli (T7 opt-in, maxMeetings — TEYİT GEREK).

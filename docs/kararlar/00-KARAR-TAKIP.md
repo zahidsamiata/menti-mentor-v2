@@ -261,9 +261,26 @@
 
 | Kod | İş | Kanıt (bu tur elle doğrulandı) | Migr | Not |
 |---|---|---|:---:|---|
-| G1 | `updateUser` (+2 kardeş uç) yanıtı `select`siz tüm User objesini döner → **password hash + PII sızıntısı** | `userController.ts:272→277` (ayrıca 355→381, 418→424) | Hayır | =10-yol madde 38, KARAR-TAKIP'te yoktu; explicit `select`/global `omit` |
-| G2 | `hardDeleteUser` Meeting/Feedback FK non-null → **transaction rollback = KVKK kalıcı silme çalışmıyor** | `gdprService.ts:172-174` (kod-yorumu itiraf) + `schema.prisma` Meeting FK RESTRICT | Olası (SetNull) | =10-yol madde 39; PO kararı |
-| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | YENİ → **10-yol madde 68**; `maskEmail` deseni burada yok |
+| G1 | `updateUser` (+2 kardeş uç) yanıtı `select`siz tüm User objesini döner → **password hash + PII sızıntısı** | `userController.ts:272→277` (ayrıca 355→381, 418→424) | Hayır | =10-yol madde 38 · **🔀 DÜZELTİLDİ backend PR #51 (MERGE OLMADI):** db.ts global omit + explicit select + test |
+| G2 | `hardDeleteUser` Meeting/Feedback FK non-null → **transaction rollback = KVKK kalıcı silme çalışmıyor** | `gdprService.ts:172-174` (kod-yorumu itiraf) + `schema.prisma` Meeting FK RESTRICT | Olası (SetNull) | =10-yol madde 39; **AÇIK** (migration+PO: sil mi anonimleştir mi — envanter C-5 kanıt) |
+| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | =10-yol madde 68 · **🔀 DÜZELTİLDİ backend PR #51 (MERGE OLMADI):** maskName/maskContact + explicit select + test |
+
+### F.5 — 🔍 2026-08-25 güvenlik+KVKK turundan yeni maddeler (numara burada doğar, 79'dan)
+> Kaynak: FAZ A/B/C (backend PR #51 + salt-okuma teyitler + `kvkk-veri-aktarim-envanteri-2026-08-25.md`). KURAL 8: numara YALNIZ burada.
+
+| No | İş | Tür | Kanıt | Öncelik |
+|:---:|---|---|---|---|
+| **79** | `maxMeetingsPerWeek` görüşme oluşturmada **enforce EDİLMİYOR** (ayar CRUD'da var, `bookMeeting`/`createMeeting`'te sayım/red yok) → menti limitsiz görüşme açar | yapılmamış-iş (sessiz yanlış) | `meetingController.ts:337-450` (limit kontrolü yok); ayar `adminSettingsController.ts:67` | 🟡 K1/K2 (PO) |
+| **80** | `getPlatformLogs` (`systemLog.findMany`) `select`siz + `listUserReports` reporter/target `fullName` maskesiz → ek PII maskeleme | güvenlik/PII | `platformController.ts:165,175,380-389` (AJAN-G3 bulgusu) | 🟡 (madde 68 kardeşi) |
+| **81** | KVKK **otomatik imha süreci** yok (yalnız SystemLog 90g); mesaj içeriği/FeedbackLog **süresiz**; hardDelete'te bile Message kalır | yapılmamış-iş (KVKK) | envanter C-5; `gdprService.ts:253` (yorum "3 yıl" uygulanmamış) | 🟡 (saklama politikası bağımlı) |
+| **82** | Rıza metni **sürümü tutulmuyor** (`consentVersion` yok, yalnız `kvkkConsentAt` zaman damgası) → ispat açığı | yapılmamış-iş (KVKK ispat) | envanter C-6; grep `consentVersion` sonuç yok | 🟡 |
+| **83** | **OAuth'ta açık rıza UI'da alınmıyor** (`oauthService.ts:112` implicit set; ekranda kutu yok) + KVKK/18+ **tek kutuda birleşik** + aydınlatma≠açık rıza ayrımı yok | yapılmamış-iş/[HUKUKÇU] | envanter C-6; `_RegisterContent.tsx:414` | 🟡 (hukukçu kararına bağlı) |
+| **84** | Başvuru/`destek@` e-postası config'te **tanımsız** + FE hak-kullanım ekranı yok → Md.11 hak kullanım kanalı operasyonel eksik | yapılmamış-iş (KVKK) | envanter C-8; `config.ts:31,70-74` · **madde 40 (KVKK FE) ile bağla** | 🟡 |
+| **85** | Aydınlatma metni **eksik kategoriler** (mesaj içeriği, sosyal linkler, OCEAN/SJT, lastLoginAt, phone sayılmıyor); OAuth aktarımı Md.5 listesinde yok | belge-kod çelişki (KVKK) | envanter C-7 (#3,#4) → KVKK paketi düzeltecek | 🟡 |
+| **86** | `mentorVisibilityEnabled` **ölü/bağlanmamış PLG alanı** (default true, setter yok, hiçbir eşleşme sorgusunda filtre değil) — yarım özellik mi bilinçli mi | ölü-kod/karar | FAZ B (T7); `schema.prisma:283`, `userController.ts:177` | 🔵❓ PO |
+| **87** | Onaylanan kalibrasyon önerisi (`saveAlgorithmWeights`) scoring'de **okunmuyor** → ölü yazma yolu (9b'nin latent izi) | ölü-kod (düşük) | FAZ B (9b); `scoring.ts:96` weights argümanı almaz | 🔵 düşük |
+
+> **VERBİS teyidi + veri sorumlusu kimliği** = PO manuel (kod dışı); envanter [PO DOLDURACAK] alanlarında. **madde 39 (G2)** = KVKK silme migration'ı, F.1'de açık.
 
 ### F.2 — 🟡/🔵/❓ Yeni iş / karar / çelişki (takipte yoktu, kod-teyitli)
 > **Yol-haritası numaraları (2026-08-23 verildi):** T1=**69** · T2=**70** · T3=**71** · T4=**72** · T5=**73** · T6=**74** · T7=**75** · T8=**76** · T9=**77** · T10=**78** (10-yol `v1-H`). G1=madde 38, G2=madde 39 (mevcut), G3=68.

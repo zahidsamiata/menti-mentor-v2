@@ -115,9 +115,24 @@
 
 ---
 
+# 📅 OTURUM 2026-08-25 (KVKK güvenlik turu — ilk KOD turu)
+
+**MOD:** 🟢 BYPASS. İlk kez KOD değişti (önceki turlar salt-docs'tu). **Hiçbir PR merge edilmedi.**
+
+**Yapılan:**
+- **FAZ A — K0 güvenlik (backend PR #51, MERGE OLMADI):** madde 38 `updateUser`/temperament password+PII sızıntısı düzeltildi (`db.ts` PrismaClient **global omit** `{user:{password:true}}` + explicit select + regresyon testi) · madde 68 `SuspicionReport` reporter PII maskeleme (`maskName`/`maskContact` + test). backend branch `fix/kvkk-pii-guvenlik-38-68`; tsc/eslint temiz; DB testleri CI'da. **Çatı submodule pointer'ı DEĞİŞMEDİ** (backend merge olmadı → dans yok).
+- **FAZ B — teyitler (salt-okuma):** T7 opt-in eşleşmeyi bloklamıyor (K2, alan ölü→madde 86) · `maxMeetingsPerWeek` **enforce EDİLMİYOR** (madde 79) · 9b indirmesi doğru (görünür yalan yok).
+- **FAZ C — KVKK veri aktarım envanteri** (kod-kanıtlı, 2 ajan): `raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`. 8 hukukçu sorusu + [PO DOLDURACAK]. Yeni maddeler **79-87** (00-KARAR-TAKIP F.5).
+
+**⚠️ KALAN (bu tur YAPILMADI — bağlam sınırı, dürüstçe):** FAZ D KVKK belge paketi (8 belge — **envanter hazır, ayrı tur temiz üretir**) · FAZ E FE entegrasyonu (🛑 merge-kilitli PR). Avukat mevcut metinleri "yetersiz" bulmuştu → paket sıfırdan, envantere dayalı yazılacak.
+
+**⭐ Kritik açıklar (envanterden):** OAuth'ta açık rıza UI'da alınmıyor · KVKK+18 birleşik kutu · rıza sürümü tutulmuyor · aydınlatma eksik kategoriler · hak-kullanım kanalı operasyonel eksik (madde 84) · otomatik imha yok (madde 81) · madde 39 hardDelete FK patlıyor. **Repolar hâlâ PUBLIC → G1/G3 kodu okunabilir; PRIVATE öncelik.**
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
-0. **🔴 CANLI-ÖNCESİ (kod turu):** (a) **repoları PRIVATE yap** (PO-manuel) · (b) **güvenlik turu G1/G2/G3** — `updateUser` PII (madde 38), `hardDeleteUser` FK/KVKK (madde 39), `SuspicionReport` PII (madde 68). Repo public olduğu için öncelikli.
+0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).
 1. **9a + 9b (birlikte):** kalibrasyon düzeltme (motor kaydedilen ağırlığı OKUSUN) + ağırlık ayarlanabilirliği (tüm yöneticiler, %60/%40 varsayılan, değişiklik izi). Migration.
 2. **2a ghost red — 30 GÜN UYKU MODU:** veriler hemen silinmez; 30 gün kurum geri alırsa döner, almazsa tamamen silinir. Zamanlanmış iş (cron) + migration.
 3. **#7 Aşama 2:** otomatik pasifleştirme (dernek eşiği girer, varsayılan KAPALI) + feedback şema alanları. Migration.

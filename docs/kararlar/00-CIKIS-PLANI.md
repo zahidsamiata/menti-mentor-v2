@@ -1,6 +1,10 @@
 # 00 — CANLI ÇIKIŞ PLANI (kullanıcı almaya başlamak için NE gerekli)
 
-**🔄 YAŞAYAN** (canonical: çıkış önceliği sınıflandırması) · **Oluşturuldu:** 2026-08-23
+**🔄 YAŞAYAN** (canonical: çıkış önceliği sınıflandırması) · **Oluşturuldu:** 2026-08-23 · **Güncelleme:** 2026-08-25 (FAZ A/B/C)
+
+> **⚡ GÜNCELLEME (2026-08-25):** **K0 güvenlik ilerledi** — madde 38 (G1) + 68 (G3) **düzeltildi → backend PR #51 (MERGE OLMADI).**
+> Kalan K0: madde 39 (G2, migration+PO) · repo private · KVKK metinleri (envanter HAZIR: `../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`).
+> **K1-şüpheli çözüldü (FAZ B kod-teyidi):** T7 opt-in → **K2 değil bloker** (varsayılan görünür); `maxMeetingsPerWeek` → **enforce EDİLMİYOR** (madde 79, 🟡 K1/K2). 9b indirmesi **doğru** (görünür yalan yok).
 
 > **Bu belge NE:** Ürün canlı ayakta, gerçek kullanıcı ~sıfır. Amaç **kullanıcı almaya başlamak.** Açık iş 4 belgeye dağılmıştı;
 > bu belge onları **tek çıkış planına** sınıflandırır (K0-K5) ve yürütülebilir turlara böler. **Mevcut belgelerin YERİNE geçmez** —
@@ -45,8 +49,8 @@
 ### K1-ŞÜPHELİ (⚠️ TEYİT GEREK — doğrulanırsa K1, değilse K2; şüphede erteledik)
 | kod | iş | neden şüpheli — ne teyit edilecek | kaynak |
 |---|---|---|---|
-| **madde 75** (T7) | Mentör görünürlük opt-in FE ekranı bağlı değil | Backend opt-in'i **enforce ediyorsa** ve FE'de (onboarding dahil) opt-in yolu **gerçekten yoksa** → mentörler görünmez → eşleşme akışı kırılır (K1). Onboarding'de opt-in adımı varsa K2. → **kod-teyidi gerekir** (K5-soru 3) | KT F.2-T7 |
-| **maxMeetingsPerWeek** | Görüşme oluşturmada enforce ediliyor mu | Ayar yazılıyor + test var ama **enforce doğrulanmadı**; edilmiyorsa menti limitsiz görüşme açar = sessizce yanlış (K1) | KT C.2; `adminSettingsController.ts:62` |
+| ~~madde 75 (T7)~~ | ~~Mentör opt-in FE~~ | ✅ **ÇÖZÜLDÜ (FAZ B): K1 DEĞİL → K2.** `mentorVisibilityEnabled @default(true)` (varsayılan görünür) + alan hiçbir eşleşme sorgusunda okunmuyor → opt-in eşleşmeyi bloklamıyor. (Yan: alan ölü → madde 86.) | `matching.ts:357-373` |
+| ~~maxMeetings~~ | Görüşme limiti enforce | ⚠️ **ÇÖZÜLDÜ (FAZ B): enforce EDİLMİYOR** → `bookMeeting`'te haftalık sayım yok, menti limitsiz açar (sessiz yanlış). **Madde 79** olarak takibe alındı (🟡 K1/K2 — PO önceliklendirir; yasal/veri değil → çıkışı sert bloklamaz). | `meetingController.ts:337-450` |
 
 ---
 
@@ -78,8 +82,8 @@
 ## K5 — ❓ KEŞİF / KARAR (PO'nun cevaplaması gereken sorular)
 1. **Çıkışta Google Analytics/izleme olsun mu?** EVET → çerez-izni bandı (madde 67) + analytics (madde 56) **K0'a yükselir** (çıkıştan önce, KVKK). HAYIR → ikisi de çıkış-sonrası (K2), banner yasal olarak gerekmez (functional/auth cookie'ler rıza istemez). *(#110 zaten merge-kilitli — bu karar onu çözer.)*
 2. **KVKK kalıcı silme (G2/madde 39): SİL mi ANONİMLEŞTİR mi?** Kullanıcı verisi tamamen silinsin (FK zinciri) mi, istatistik için anonimleştirilsin (userId→null, SetNull) mi? Migration tasarımı + Tur-3 buna bağlı.
-3. **Mentör opt-in (T7/madde 75):** Eşleşme akışı mentör opt-in'i ZORUNLU kılıyor mu + FE'de (onboarding dahil) opt-in yolu gerçekten yok mu? *(Tur-2 kod-teyidi cevaplayacak — K1 mi K2 mi.)*
-4. **Görüşme limiti (maxMeetingsPerWeek):** enforce ediliyor mu? Edilmiyorsa menti limitsiz görüşme açar → K1.
+3. ~~Mentör opt-in (T7):~~ ✅ **CEVAPLANDI (FAZ B):** opt-in eşleşmeyi bloklamıyor (varsayılan görünür); alan ölü → K2/madde 86.
+4. ~~Görüşme limiti:~~ ✅ **CEVAPLANDI (FAZ B):** `maxMeetingsPerWeek` enforce EDİLMİYOR → madde 79 (🟡). PO: K1 mi K2 mi önceliklendir.
 5. **Kulüp modülü (madde 41) + feedback-logs (madde 42):** canlıya girecek özellik mi, yarım-terk mi? (backend tam, FE 0 çağrı)
 6. **İçerik & Soru Felsefesi keşfi + DISC-DERİNLEŞME kurgusu (#31/#13/#30):** ne zaman? (çıkış-sonrası büyük içerik turu — kod öncesi keşif şart)
 7. **Sertifika baraj "0 puan" (T4/madde 72):** tüm sorularda mı, yalnız `isRedLine`'da mı?
