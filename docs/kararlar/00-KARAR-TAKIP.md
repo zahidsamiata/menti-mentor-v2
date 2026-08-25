@@ -30,7 +30,7 @@
 > **⚡ GÜNCELLEME (2026-08-23) — strateji-denetimi + PO oturumu:** 6 strateji belgesi kodla karşılaştırıldı
 > (`strateji-gercek-denetimi-2026-08-20.md`, 85 madde: %66 tam var). **Ana bulgu:** admin tasarım-kartları baştan sona
 > uygulanmış; kalan kopukluk 3 eksende — mail/bildirim (37m, en yüksek kaldıraç), menti retention inceliği (bekleme/ret/kutlama),
-> yönetici kanıt katmanı (export/oran/trend). **Yeni açık iş:** Y1–Y7 + **#38 yeni DISC/karakter kurgusu** (bkz. **Bölüm B.4**).
+> yönetici kanıt katmanı (export/oran/trend). **Yeni açık iş:** Y1–Y7 + **DISC-DERİNLEŞME kurgusu** (numarasız — bkz. **Bölüm B.4**).
 > Bu turda birçok ❓ karara bağlandı (9b→düzeltilecek, K6→v2, K3→en son, sektör/etiket→talep-onay, 2a→30 gün uyku modu,
 > #13→ertelendi); satır-içi **⚠️ GÜNCELLEME (2026-08-23)** notlarına bakınız.
 
@@ -124,10 +124,10 @@
 
 | No | İş | Durum | Tanım | Not |
 |---|---|:---:|---|---|
-| **#38** (PO "yeni kurgu / #33" dedi — ⚠️ mevcut #33=SJT ile KARIŞTIRMA) | Tek-seferlik DISC yerine **kademeli karakter derinleşmesi** | 🔵 ❓ tasarım | Önce bir **ANA KARAKTER** belirlensin; kişi sistemi kullandıkça (oyun gibi, soru cevapladıkça) karakter **DERİNLEŞSİN ve kesinleşsin**; sonra kişinin karakterine göre **karşı tarafa NASIL YAKLAŞACAĞI** anlatılsın. PO: *"kişiyi tespit ettik, karşındakini de tespit ettik, bildirdik — ama nasıl aksiyon alması gerektiğini de söylemek lazım."* | **#31 ile birleşik** düşünülecek. PO ayrıca **TÜM soruları görmek** istiyor, sonra beğendiklerini/beğenmediklerini ayıracak. Mevcut altyapı zaten adaptif (`adaptiveTestEngine`, DEEPENING) — kurgu buna oturabilir |
+| **DISC-DERİNLEŞME kurgusu** (numarasız · PO "yeni kurgu" dedi — ⚠️ eski "#38" etiketi madde-38 güvenlikle çakıştığı için ADA çevrildi; #33=SJT ile de KARIŞTIRMA) | Tek-seferlik DISC yerine **kademeli karakter derinleşmesi** | 🔵 ❓ tasarım | Önce bir **ANA KARAKTER** belirlensin; kişi sistemi kullandıkça (oyun gibi, soru cevapladıkça) karakter **DERİNLEŞSİN ve kesinleşsin**; sonra kişinin karakterine göre **karşı tarafa NASIL YAKLAŞACAĞI** anlatılsın. PO: *"kişiyi tespit ettik, karşındakini de tespit ettik, bildirdik — ama nasıl aksiyon alması gerektiğini de söylemek lazım."* | **#31 ile birleşik** düşünülecek. PO ayrıca **TÜM soruları görmek** istiyor, sonra beğendiklerini/beğenmediklerini ayıracak. Mevcut altyapı zaten adaptif (`adaptiveTestEngine`, DEEPENING) — kurgu buna oturabilir |
 
 **📁 Sonraki tur notları (bu oturumda PO tanımladı — uygulama YOK):**
-- **İÇERİK & SORU FELSEFESİ KEŞFİ:** tüm soruların (DISC / sertifika / SJT / öğrenme-yolculuğu / kurum-özel) **içeriği + hangi felsefeyle üretildikleri + nasıl puanlandıkları** çıkarılacak. **#38, #31, #13, #30 bu keşfe bağlı** — keşiften önce kodlanmayacak.
+- **İÇERİK & SORU FELSEFESİ KEŞFİ:** tüm soruların (DISC / sertifika / SJT / öğrenme-yolculuğu / kurum-özel) **içeriği + hangi felsefeyle üretildikleri + nasıl puanlandıkları** çıkarılacak. **DISC-DERİNLEŞME kurgusu, #31, #13, #30 bu keşfe bağlı** — keşiften önce kodlanmayacak.
 - **BELGE YENİDEN YAPILANDIRMA TURU (~68 belge):** PO mevcut belge düzeninden **memnun değil.** Kapsam: klasör ayrımı
   (strateji/ ↔ envanter/), isim düzeltmeleri (karışan çiftler), arşivleme, tüm belge setinin referans haritası + sadeleştirme
   (denetim raporu Bölüm E ile aynı; `admin-panelleri-tasarim` güçlü arşiv adayı). Ayrı büyük tur.
@@ -240,6 +240,11 @@
   **Aday:** repoyu OneDrive dışına taşımak (ör. `C:\dev\`). **PO kararı.**
 - **🟡 Dağınık backend kopyaları + atıl worktree'ler:** `C:\Users\...\backend-mail`, `backend-testfix`, `backend-cfgfix` (~1 GB) +
   3 atıl git worktree duruyor. Her birinde **commit edilmemiş iş var mı** kontrol edilip temizlenecek (**ayrı tur**, PO onayı).
+- **🟡 Etiket-gerçek çelişkisi — 3 yaşayan belge (KURAL 3/4 ihlali, AJAN-E 2026-08-23):** (a) `oz-denetim/durum-panosu-2026-08-14.md`
+  🔄 etiketli ama git'e göre **11 gün donmuş** + madde 38-78/#12/#37/#7'den habersiz + adı zaten tarihli → **📸'ye düşürülmeli** (en net vaka;
+  canonical statü zaten `00-KARAR-TAKIP`'e taşındı). (b) `konu/tasarim-kararlari-admin-2026-08-11.md` + (c) `konu/degerlendirme-metrik-...-2026-08-19.md`:
+  tarihli ad + 🔄 etiket (Kural-4 ad↔etiket tutarsızlığı) → yaşayan kalacaksa **ad tarihsizleştirilmeli**. **PO kararı** (ad değişimi
+  referans+INDEX günceller; bu tur TAŞINMADI, salt öneri). ✅ Gerçek statü çelişkisi taraması: **0** (taşıyıcılar senkron, kodla teyitli).
 
 ---
 
@@ -256,9 +261,11 @@
 |---|---|---|:---:|---|
 | G1 | `updateUser` (+2 kardeş uç) yanıtı `select`siz tüm User objesini döner → **password hash + PII sızıntısı** | `userController.ts:272→277` (ayrıca 355→381, 418→424) | Hayır | =10-yol madde 38, KARAR-TAKIP'te yoktu; explicit `select`/global `omit` |
 | G2 | `hardDeleteUser` Meeting/Feedback FK non-null → **transaction rollback = KVKK kalıcı silme çalışmıyor** | `gdprService.ts:172-174` (kod-yorumu itiraf) + `schema.prisma` Meeting FK RESTRICT | Olası (SetNull) | =10-yol madde 39; PO kararı |
-| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | YENİ; `maskEmail` deseni burada yok |
+| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | YENİ → **10-yol madde 68**; `maskEmail` deseni burada yok |
 
 ### F.2 — 🟡/🔵/❓ Yeni iş / karar / çelişki (takipte yoktu, kod-teyitli)
+> **Yol-haritası numaraları (2026-08-23 verildi):** T1=**69** · T2=**70** · T3=**71** · T4=**72** · T5=**73** · T6=**74** · T7=**75** · T8=**76** · T9=**77** · T10=**78** (10-yol `v1-H`). G1=madde 38, G2=madde 39 (mevcut), G3=68.
+
 | Kod | İş | Tür | Kanıt | Boy | Migr |
 |---|---|---|---|:---:|:---:|
 | T1 | Zod VALIDATION yanıtında `message` yok → kullanıcı hep generic "Hata" görür | yapılmamış-iş | `questionController.ts:83,138,250,297` + `questions/page.tsx:52` | S | Hayır |
@@ -279,7 +286,8 @@
 ### F.4 — ❓ Sonraki turda kod-teyidi bekleyen (bu tur okunmadı)
 N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup) · DISC light WCAG · onay/red maili başvurana gidiyor mu · KARAR 6 davet→oto-onay tetiği · `maxMeetingsPerWeek` enforce · profile-completeness uçtan uca bağı. (uydurma yok — TEYİT GEREK)
 
-> **⚠️ Numara notu:** Yeni yol-haritası numarası verirken **68'den başla**. #38 çakışması var (10-yol madde 38=güvenlik `updateUser` · B.4 #38=DISC-kurgu).
+> **⚠️ Numara notu (✅ 2026-08-23 çözüldü):** F maddeleri numaralandı (G3+T1-T10 → **68-78**, `v1-H`). **#38 çakışması çözüldü:**
+> **madde 38 = güvenlik `updateUser`** (sayı dizisinde KALIR, canonical) · B.4'teki DISC işi artık numarasız **"DISC-DERİNLEŞME kurgusu"** adıyla anılır (sayı dizisinden çıkarıldı). Sonraki yeni iş: **79'dan** başla.
 
 ---
 

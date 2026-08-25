@@ -1,6 +1,6 @@
 # Belge Düzeni Rehberi
 
-**🔄 YAŞAYAN** (düzen kuralları geliştikçe güncellenir) · Son güncelleme: 2026-08-23 (Kural 2 alt-klasör genişletmesi)
+**🔄 YAŞAYAN** (düzen kuralları geliştikçe güncellenir) · Son güncelleme: 2026-08-23 (Kural 2 alt-klasör + Kural 7 taşıyıcı iş bölümü)
 
 > **Amaç:** `docs/` bir daha dağılmasın; "neyin nerede olduğu, hangi bilginin güncel olduğu" her zaman net bulunsun.
 > Bu, tek seferlik temizlik değil **kalıcı düzen**dir. Belge oluşturan/düzenleyen (ajan dahil) bu 6 kurala uyar.
@@ -61,6 +61,22 @@
 - **Uygulama:** mevcut `CLAUDE.md` "Belge Düzeltme Deseni" ile aynı; yaşayan belgede blok bayatladıysa üstüne
   bu notu ekle, gerçeğiyle güncelle (bkz. bu turda `09-DURUM` "açık PR" bloğu düzeltmesi).
 
+## KURAL 7 — Taşıyıcı belgelerin iş bölümü (sınır kuralı) *(eklendi 2026-08-23)*
+- **Neden:** İki 🔄 yaşayan belge aynı konuyu paralel takip ederse zamanla ayrı düşer ve çelişir (bugün G1/G2 güvenlik
+  bulgusu yol-haritasında vardı ama karar-takipte yoktu — sınır yazılı olmadığı için). Her bilgi türünün **TEK canonical'ı** olur.
+- **Uygulama:** aşağıdaki tablo. Aynı statü iki yaşayan belgeye **yazılmaz** — biri REFERANS verir (madde no / link), statüyü tek yer tutar.
+  Çelişince **KOD kazanır**, tek-canonical düzeltilir, diğerleri referansı korur.
+
+| Belge | ⬅ BURAYA GİRER (canonical) | ⛔ GİRMEZ (nereye ait) |
+|---|---|---|
+| `09-DURUM.md` | "ŞU AN ne oldu" anlatısı: son merge/PR, SHA/pointer snapshot, biten işin kod-anlatısı (dosya:satır, migration teyidi), bilinen sınırlar | açık iş kuyruğu/öncelik (→10-yol) · tek-bakış açık-iş/ölü-kod tablosu (→KARAR-TAKIP) · belge haritası (→INDEX) · biten iş özet-satırı (→tamamlananlar) |
+| `10-yol-haritasi.md` | YALNIZ açık/yapılacak işlerin **öncelik sıralı kuyruğu** (v1/v2, madde no sabit, sıradaki somut adım — tek satır) | biten işin tam anlatısı (→09-DURUM) · biten iş özet-kaydı (→tamamlananlar) · ölü-kod niyet analizi (→KARAR-TAKIP) · SHA/snapshot (→09-DURUM) |
+| `00-KARAR-TAKIP.md` | "NE KALDI" tek-bakış: açık iş + yarım iş + **ölü/bağlanmamış kod** (niyet→neye bağlanacak) + uygulanmamış karar; her kalem **kod-kanıtlı** (dosya:satır) | öncelik sıralaması (→10-yol) · "ne oldu" anlatısı/SHA (→09-DURUM) · biten iş kaydı (→tamamlananlar). *(Açık işleri 10-yol ile aynı madde-no ile REFERANSLAR, statüyü kopyalamaz.)* |
+| `10-yol-tamamlananlar.md` | Biten v1 işlerinin **kompakt kaydı**: madde no + tek satır + PR no + tarih | tam anlatı/kod-detay (→09-DURUM) · açık/kısmi işler (→10-yol; kısmi burada DURMAZ) · ölü kod (→KARAR-TAKIP) |
+| `00-INDEX.md` | Belge **haritası**: hangi bilgi hangi belgede, canonical mı/arşiv mi, 🔄 mı 📸 mı, okuma yolu | iş statüsü/durum içeriği (→09/10/KARAR-TAKIP) · karar gövdeleri (→konu/). *(Yalnız işaret eder, içerik tutmaz.)* |
+
+- **Yazımdan önce sor:** (1) "ne oldu" mu (→09), "ne kalacak" mı (→10/KARAR-TAKIP), "nerede" mi (→INDEX)? (2) Aynı statüyü ikinci yaşayan belgeye mi yazıyorum → DUR, biri referans versin. (3) Statü kaynağı hep KOD.
+
 ---
 
 ## Özet (tek bakış)
@@ -72,5 +88,6 @@
 | 4 | Adlandırma | Dondurulmuş=tarihli · yaşayan=tarihsiz/numaralı |
 | 5 | INDEX = harita | Yeni belge → 00-INDEX güncelle |
 | 6 | Eksik-işaretleme | Silme; ⚠️ GÜNCELLEME (tarih) notu ekle |
+| 7 | Taşıyıcı belge iş bölümü | 5 taşıyıcının sınırı: statü tek yerde, diğerleri referans; çelişkide KOD kazanır |
 
 > **Canonical:** Bu rehber, belge düzeninin tek yetkili kaynağıdır. `CLAUDE.md` buraya işaret eder.

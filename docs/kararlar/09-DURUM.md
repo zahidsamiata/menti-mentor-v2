@@ -37,8 +37,8 @@
 > (mentör DISC aha-kartı + paylaşım aslında VAR).
 > (2) **Karar-takip senkronu** (bu docs PR): PO'nun bu oturumdaki kararları `00-KARAR-TAKIP.md`'ye işlendi — 9a (tüm yöneticiler +
 > değişiklik izi), 9b (düzeltilecek), K6 (v2), K3 (en son), sektör/etiket (talep-onay), 2a ghost-red (**30 gün uyku modu**),
-> #7 otomatik pasifleştirme (varsayılan kapalı), #13 (ertelendi), #31 (felsefe-keşfi sonrası), **#38 yeni DISC/karakter derinleşme
-> kurgusu**, Y1–Y7 denetim işleri + 2 keşif turu (içerik-felsefe, belge-düzeni). Detay: `00-KARAR-TAKIP.md` Bölüm B.4 + satır-içi notlar.
+> #7 otomatik pasifleştirme (varsayılan kapalı), #13 (ertelendi), #31 (felsefe-keşfi sonrası), **DISC-DERİNLEŞME kurgusu**
+> (numarasız — eski "#38" etiketi madde-38 güvenlikle çakıştığı için 2026-08-23'te ada çevrildi), Y1–Y7 denetim işleri + 2 keşif turu (içerik-felsefe, belge-düzeni). Detay: `00-KARAR-TAKIP.md` Bölüm B.4 + satır-içi notlar.
 >
 > **⚡ GÜNCELLEME (2026-08-23, belge-düzeni reorg — salt-docs, KOD YOK):** `docs/kararlar/` ve `docs/raporlar/` şişince
 > **alt-klasörlere** ayrıldı (git mv, içerik değişmedi): kararlar → `konu/` + `oz-denetim/`; raporlar → `kesif/` + `kod-denetimi/`
