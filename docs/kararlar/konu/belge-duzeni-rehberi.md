@@ -1,6 +1,6 @@
 # Belge Düzeni Rehberi
 
-**🔄 YAŞAYAN** (düzen kuralları geliştikçe güncellenir) · Son güncelleme: 2026-08-23 (Kural 2 alt-klasör + Kural 7 taşıyıcı iş bölümü)
+**🔄 YAŞAYAN** (düzen kuralları geliştikçe güncellenir) · Son güncelleme: 2026-08-23 (Kural 2 alt-klasör + Kural 7 taşıyıcı iş bölümü + Kural 8 bulgu yaşam döngüsü)
 
 > **Amaç:** `docs/` bir daha dağılmasın; "neyin nerede olduğu, hangi bilginin güncel olduğu" her zaman net bulunsun.
 > Bu, tek seferlik temizlik değil **kalıcı düzen**dir. Belge oluşturan/düzenleyen (ajan dahil) bu 6 kurala uyar.
@@ -77,6 +77,17 @@
 
 - **Yazımdan önce sor:** (1) "ne oldu" mu (→09), "ne kalacak" mı (→10/KARAR-TAKIP), "nerede" mi (→INDEX)? (2) Aynı statüyü ikinci yaşayan belgeye mi yazıyorum → DUR, biri referans versin. (3) Statü kaynağı hep KOD.
 
+## KURAL 8 — Bulgu yaşam döngüsü (bulgu nasıl akar) *(eklendi 2026-08-23)*
+- **Neden:** KURAL 7 "hangi bilgi nerede DURUR" der; KURAL 8 "bir bulgu keşiften çıkışa nasıl AKAR" der. Bu akış olmadan bulgular
+  rapordan doğrudan yol haritasına sızıp mükerrer numara/kayıp madde üretir (bu turlarda yaşandı). **Tek giriş kapısı = KARAR-TAKIP.**
+- **Akış (her bulgu bu sırayı izler):**
+  1. **Keşif turu → tarihli 📸 rapor** (`raporlar/` altına). Ham kanıt (dosya:satır), güncellenmez. **Rapor AKSİYON KAYNAĞI OLARAK BIRAKILMAZ.**
+  2. **AYNI TURDA → her aksiyon `00-KARAR-TAKIP`'e girer.** TEK GİRİŞ KAPISI. **Numarasını BURADA alır** (tek numara dizisi; başka hiçbir yerde numara verilmez). Rapordan doğrudan yol haritasına giden bulgu OLMAZ.
+  3. **Öncelik verilince → `10-yol-haritasi`'na TEK SATIR** (numara + tek cümle + öncelik + "detay: KARAR-TAKIP"). Detay kopyalanmaz.
+  4. **İş bitince → önce KOD doğrulanır, sonra dört yer:** KARAR-TAKIP ✅ · yol haritası stub · `10-yol-tamamlananlar` kaydı · `09-DURUM` anlatısı.
+  5. **Oturum bitince → `07-oturum-gunlugu`'na bölüm.**
+- **Uygulama:** numara yalnız KARAR-TAKIP'te doğar → çakışma olmaz (bkz. #38 çakışması, 2026-08-23'te ada çevrilerek çözüldü).
+
 ---
 
 ## Özet (tek bakış)
@@ -89,5 +100,6 @@
 | 5 | INDEX = harita | Yeni belge → 00-INDEX güncelle |
 | 6 | Eksik-işaretleme | Silme; ⚠️ GÜNCELLEME (tarih) notu ekle |
 | 7 | Taşıyıcı belge iş bölümü | 5 taşıyıcının sınırı: statü tek yerde, diğerleri referans; çelişkide KOD kazanır |
+| 8 | Bulgu yaşam döngüsü | rapor(📸)→KARAR-TAKIP(numara burada doğar)→yol-haritası(tek satır)→biten:4 yer→günlük |
 
 > **Canonical:** Bu rehber, belge düzeninin tek yetkili kaynağıdır. `CLAUDE.md` buraya işaret eder.
