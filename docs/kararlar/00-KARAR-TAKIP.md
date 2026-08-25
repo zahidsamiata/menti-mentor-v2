@@ -240,7 +240,7 @@
 | T2 | adaptive-test backend `progress` döndürmüyor (FE guard'la kapatılmış) — kalıcı kontrat | yapılmamış-iş | `adaptiveTestEngine.ts` (grep progress → yok) | M | Hayır |
 | T3 | `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu | açık-soru/güvenlik | `platformController.ts:348-356` | S | Olası |
 | T4 | Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da kodlanmış; "tüm sorularda mı" kararı yok | verilmemiş-karar | `certification.service.ts:67` | S | Hayır |
-| T5 | `seed-certification.ts` runner'a bağlı değil → 20-senaryo bankasını canlıya **güvenli** taşıma yöntemi yok | yapılmamış-iş | `package.json` (tek seed = `prisma/seed.ts`) | M | Evet |
+| T5 | `seed-certification.ts` runner'a bağlı değil → 20-senaryo bankasını canlıya **güvenli** taşıma yöntemi yok (**madde #30'u BLOKLAR**) | yapılmamış-iş | `package.json` (tek seed = `prisma/seed.ts`) | M | Evet |
 | T6 | `superAdminRoutes` mount edilmiş ama FE'de 0 kullanım → paralel/ölü platform-admin API'si | ölü-kod/karar | `server.ts:12,105` + FE "super-admin" → yok | S | Hayır |
 | T7 | Mentör **görünürlük opt-in** FE ekranı bağlı değil (backend `setVisibilityOptIn` var) | yapılmamış-iş | backend var; FE çağrısı → yok | M | Hayır |
 | T8 | Sıfırdan manuel eşleştirme: envanter "eksik" ↔ strateji "elle eşleştirme YASAK" → **çelişki, PO** | çelişki/karar | `stk-panel-envanteri:71,148` ↔ `stk-strateji:67` | M | Hayır |

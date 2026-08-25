@@ -92,7 +92,7 @@
 
 - **PROD = DEV DB (kritik)** · `altyapı/DB` · Dokploy canlı backend DATABASE_URL = lokal ana Neon (ep-fancy-tooth-ab4u5xhr, NODE_ENV=production) BİREBİR AYNI. Yani lokalde ana Neon'a yazmak = canlıyı etkilemek. Test branch = ep-polished-darkness (farklı, izole).
 - **NODE_ENV=production'da reset guard tetiklenmez** · `altyapı/DB`·`güvenlik/KVKK` · Prod DB güvende; ama NODE_ENV yanlışsa reset guard DB silebilir → deploy öncesi teyit edildi (prod'da NODE_ENV=production doğrulandı).
-- **Tehlikeli seed uyarısı** · `altyapı/DB` · `seed.ts` / `npm run seed` / `prisma db seed` VERİ SİLER — asla çalıştırılmamalı. Güvenli olanlar: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs.
+- **Tehlikeli seed uyarısı** · `altyapı/DB` · `seed.ts` / `npm run seed` / `prisma db seed` VERİ SİLER — asla çalıştırılmamalı. Güvenli olanlar: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs. ⚠️ GÜNCELLEME (2026-08-23): `seed-questions.ts` SİLİNDİ (backend `5745e0f`) — güncel güvenli liste `02-mimari-ve-altyapi.md`'de.
 - **Neon migration kuralı** · `altyapı/DB` · IF NOT EXISTS + db execute + migrate resolve. `db push`/`migrate dev` YASAK.
 - **Submodule/merge koreografisi** · `altyapı/DB` · Önce backend PR → çatı pointer bump → çatı PR. Autodeploy AÇIK (main push→otomatik deploy), env değişikliği otomatik yansımaz (manuel redeploy şart).
 - **SHA tahmin etme dersi** · `çalışma-tarzı` · Asistan bir kez yanlış SHA (4460f22) verdi, Claude Code git'ten doğrulayıp yakaladı (doğrusu b313601), prod çökmesini önledi → "tahmin etme, doğrula" kuralı kanıtlandı.

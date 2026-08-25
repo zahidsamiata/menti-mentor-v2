@@ -13,6 +13,8 @@
 ## 🔴 TEHLİKELİ SEED UYARISI
 - `seed.ts` / `npm run seed` / `prisma db seed` → global soruları + test kullanıcılarını **SİLER**, 200 kullanıcı oluşturur. **ASLA çalıştırma.**
 - **Güvenli** olanlar (sadece upsert, silme yok): `seed-questions.ts`, `seed-learning-journey.ts`, `seed-test-tenant.mjs`.
+  > ⚠️ GÜNCELLEME (2026-08-23): `seed-questions.ts` **SİLİNDİ** (backend `5745e0f`). Kod-kanıtlı gerçek güvenli liste
+  > (yalnız `upsert`): `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs`. Tehlikeli = `prisma/seed.ts` (satır 300-307 toplu `deleteMany`).
 
 ## NEON MIGRATION KURALI
 - `IF NOT EXISTS` + `db execute` + `migrate resolve` kullan.

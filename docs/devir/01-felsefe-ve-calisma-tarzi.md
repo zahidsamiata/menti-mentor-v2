@@ -52,6 +52,8 @@
    canlıyı anında etkilemek. Seed/migration/backfill/DB işleminde **önce onay al**.
 2. **Tehlikeli seed VERİ SİLER** — `seed.ts` / `npm run seed` / `prisma db seed` ASLA çalıştırma.
    Güvenli olanlar: `seed-questions.ts`, `seed-learning-journey.ts`, `seed-test-tenant.mjs`.
+   > ⚠️ GÜNCELLEME (2026-08-23): `seed-questions.ts` **SİLİNDİ** (backend `5745e0f`). Gerçek güvenli (kod-kanıtlı, yalnız upsert):
+   > `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs`. Tehlikeli = `prisma/seed.ts` (toplu deleteMany).
 3. **main'e merge = canlıya deploy** (autodeploy açık) → **merge kararı ürün sahibinde**. PR aç, merge etme.
 
 ## 6) Tarz kuralları
