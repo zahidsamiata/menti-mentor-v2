@@ -68,8 +68,14 @@
 > (maskName/maskContact + test). tsc/tsc-test/eslint temiz; DB testleri CI'da (guard). **Çatı submodule pointer'ı DEĞİŞMEDİ** (backend merge olmadı).
 > **(B) FAZ B teyitleri (salt-okuma):** T7 opt-in eşleşmeyi bloklamıyor (K2) · `maxMeetingsPerWeek` enforce EDİLMİYOR (madde 79) · 9b indirmesi doğru.
 > **(C) KVKK veri aktarım envanteri** (kod-kanıtlı, 2 ajan) → `../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`;
-> 8 hukukçu sorusu + [PO DOLDURACAK] alanlar. **Yeni maddeler 79-87** (00-KARAR-TAKIP F.5). **KALAN (bu tur YAPILMADI):** FAZ D KVKK belge paketi
-> (8 belge — envanter hazır, ayrı tur) · FAZ E FE entegrasyonu (merge-kilitli PR). Bağlam sınırı nedeniyle dürüstçe bırakıldı.
+> 8 hukukçu sorusu + [PO DOLDURACAK] alanlar. **Yeni maddeler 79-87** (00-KARAR-TAKIP F.5).
+>
+> **⚡ GÜNCELLEME (2026-08-25, KVKK belge paketi turu — KOD + docs):** (A) **madde 80** (`getPlatformLogs` select + `listUserReports`
+> maskeleme) düzeltildi → **backend PR #51'e eklendi** (test, tsc/eslint temiz). Yeni bulgular madde **88** (getPlatformStats recentLogs) +
+> **89** (listPendingTenants admin PII). (B) **FAZ D KVKK belge paketi YAZILDI** → `konu/kvkk-metinleri/` **9 belge TASLAK** (envantere
+> dayalı, jenerik değil; platform=işleyen/kurum=sorumlu avukat modeli). 8 hukukçu sorusu + [PO DOLDURACAK] + 🔴 sunucu-ülke çelişkisi
+> (ülke adı yazılmadı). Yeni maddeler **90** (veri işleyen sözleşmesi entegrasyonu, migration) · **91** (kulüp-tenant aktif edilmez) ·
+> **92** (sunucu ülke teyidi). **KALAN:** FAZ E FE entegrasyonu (merge-kilitli PR — hukukçu onayına kadar zaten merge olmaz; ayrı tur).
 >
 > **⚡ GÜNCELLEME (2026-08-23, canlı çıkış planı — salt-docs):** Dağınık ~58 açık iş **tek çıkış planına** sınıflandı → yeni canonical
 > `00-CIKIS-PLANI.md` (K0-K5 + tur planı). **KATI test:** ~40 "v1" maddenin çoğu çıkışı ENGELLEMİYOR → **gerçek çıkış-bloker: 5 K0**

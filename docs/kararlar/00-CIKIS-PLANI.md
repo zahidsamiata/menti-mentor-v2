@@ -39,7 +39,7 @@
 | **madde 68** (G3) | `listSuspicionReports` `select`siz → **şikayet edenin PII'si maskesiz** | PII sızıntısı EVET: şüphe raporu edenin kimlik/iletişim'i maskesiz döner (`maskEmail` deseni atlanmış) | `platformController.ts:353`; KT F.1 | S | Hayır | **Tur-1** |
 | **madde 39** (G2) | `hardDeleteUser` FK-RESTRICT → **KVKK Md.7 silme çalışmıyor** | Yasa ihlali EVET: kullanıcı silme talebi karşılanamaz (transaction rollback; kod-yorumu itiraf ediyor) | `gdprService.ts:171-174`; KT F.1 | M | **Olası (SetNull)** | **Tur-3** |
 | **repolar PRIVATE** | Çatı + backend repo PUBLIC → private yap | Güvenlik EVET: G1/G3 açık konumları + tüm kaynak dışarıdan okunur | KT E; 10-yol:229 | — | Hayır | **Tur-0 (PO)** |
-| **KVKK metinleri** | Aydınlatma/gizlilik/çerez metni **taslak → gerçek/hukuki** | Yasa EVET: gerçek PII (DISC/kişisel) taslak metinle toplamak KVKK ihlali (sayfalar kodda var, metin taslak) | KT:140; 10-yol:64 | — | Hayır | **Tur-0 (PO)** |
+| **KVKK metinleri** | Aydınlatma/gizlilik/çerez metni **taslak → gerçek/hukuki** | Yasa EVET: gerçek PII taslak metinle toplamak KVKK ihlali. **✅ TASLAK PAKET HAZIR** (`konu/kvkk-metinleri/`, 9 belge, envantere dayalı) → **kalan: hukukçu onayı + [PO DOLDURACAK] alanları + FE entegrasyonu (merge-kilitli)** | KT:140; envanter | — | madde 90 (migration) | **Tur-0 (PO+hukukçu)** |
 
 ## K1 — 🟠 ÇIKIŞ ÖNCESİ ŞART (ürün çalışmaz / kullanıcı kaybı)
 | kod | iş | gerekçe | kaynak | boy | migration | tur |

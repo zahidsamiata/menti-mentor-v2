@@ -130,6 +130,20 @@
 
 ---
 
+# 📅 OTURUM 2026-08-25b (KVKK belge paketi)
+
+**MOD:** 🟢 BYPASS (kod + belge). **Hiçbir PR merge edilmedi.**
+
+- **FAZ 0 — madde 80 (backend PR #51'e ek):** `getPlatformLogs` explicit select (meta çıkarıldı) + `listUserReports` fullName maskeleme + test. tsc/eslint temiz. Yeni bulgular: madde 88 (getPlatformStats recentLogs meta) · madde 89 (listPendingTenants admin PII).
+- **FAZ D — KVKK belge paketi (çatı #112):** `docs/kararlar/konu/kvkk-metinleri/` **9 TASLAK belge** (00-AVUKAT-KONTROL kapak + aydınlatma[iki sürüm]/açık-rıza/gizlilik/çerez/saklama-imha/başvuru/kullanım-koşulları/veri-işleyen-sözleşmesi). Envantere dayalı, jenerik değil.
+- **Avukat modeli (belgelerin temeli):** platform=veri işleyen · kurum=veri sorumlusu · üniversite kulüpleri→sorumlu üniversite (kulüp-tenant aktif edilmez, madde 91) · anonimleştirme yeterli · sunucu yurtdışı kalıyor.
+- **🔴 Sunucu ülke çelişkisi:** belge "eu-west-2/İrlanda" tutarsız (eu-west-2=Londra) → metinlerde ülke YAZILMADI, [PO DOLDURACAK] + kapak uyarısı (madde 92).
+- **8 hukukçu sorusu** (DISC Md.6? · VERBİS? · yurtdışı SS-3? vb.) kapak dosyasında; **[PO DOLDURACAK]** alanları listeli.
+
+**⚠️ KALAN:** FAZ E FE entegrasyonu (metinleri /kvkk /gizlilik /terms + yeni çerez/başvuru sayfalarına yerleştir, merge-kilitli PR). Hukukçu onayına kadar zaten merge olmayacağı için ayrı tura bırakıldı. **Ön koşul:** hukukçu onayı + [PO DOLDURACAK] (özellikle başvuru `destek@` + sunucu ülke).
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
 0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).

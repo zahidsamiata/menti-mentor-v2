@@ -83,6 +83,7 @@ docs/
 | `tasarim-kararlari-admin-2026-08-11.md` | STK admin tasarım kararları (12 karar; menü, kart, DISC mahremiyet, etiket havuzu) | 🔄 YAŞAYAN (kararlar eklenebilir) |
 | `chat-v1-teslim.md` | Chat v1 teslim: mimari/güvenlik ayrıntı + bilinen sınırlar | 📸 DONDURULMUŞ (chat işi) |
 | `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | #7 eşleşme-sonrası değerlendirme + metrik takip + otomatik pasifleştirme + yeniden değerlendirme + periyodik hatırlatma vizyonu; VİZYON ↔ KOD GERÇEĞİ ayrı; 3 aşamalı plan | 🔄 YAŞAYAN (#7 inşasına başlarken) |
+| `kvkk-metinleri/` (klasör) | ⚠️ **TASLAK** KVKK belge paketi (9 belge: aydınlatma/açık-rıza/gizlilik/çerez/saklama/başvuru/kullanım-koşulları/veri-işleyen-sözleşmesi + `00-AVUKAT-KONTROL-DOSYASI` kapak) — envantere dayalı, hukukçu onayı bekliyor | ⚠️ TASLAK (hukukçu onayı öncesi) |
 
 ## Öz-denetim — `docs/kararlar/oz-denetim/` (belgelerin/kararların iç denetimi)
 > "Kararlarımız gerçekle uyumlu mu, belge düzeni sağlıklı mı?" fotoğrafları. Farklı kapsam/tarih — birleştirilmez, çapraz referanslıdır.

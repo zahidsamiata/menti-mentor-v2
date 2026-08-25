@@ -271,7 +271,12 @@
 | No | İş | Tür | Kanıt | Öncelik |
 |:---:|---|---|---|---|
 | **79** | `maxMeetingsPerWeek` görüşme oluşturmada **enforce EDİLMİYOR** (ayar CRUD'da var, `bookMeeting`/`createMeeting`'te sayım/red yok) → menti limitsiz görüşme açar | yapılmamış-iş (sessiz yanlış) | `meetingController.ts:337-450` (limit kontrolü yok); ayar `adminSettingsController.ts:67` | 🟡 K1/K2 (PO) |
-| **80** | `getPlatformLogs` (`systemLog.findMany`) `select`siz + `listUserReports` reporter/target `fullName` maskesiz → ek PII maskeleme | güvenlik/PII | `platformController.ts:165,175,380-389` (AJAN-G3 bulgusu) | 🟡 (madde 68 kardeşi) |
+| **80** | `getPlatformLogs` `select`siz + `listUserReports` fullName maskesiz | güvenlik/PII | `platformController.ts:175,411` | ✅ **DÜZELTİLDİ backend PR #51** (explicit select + maskName + test) |
+| **88** | `getPlatformStats` → `recentLogs` (`systemLog.findMany take:10`) `select`siz → ham `meta` (PII) döner | güvenlik/PII | `platformController.ts:95` (FAZ 0 bulgusu) | 🟡 (madde 80 kardeşi) |
+| **89** | `listPendingTenants` admin `fullName`+`email` maskesiz döner — onay akışı için gerekli mi? | güvenlik/❓ | `platformController.ts:185` | 🔵❓ PO/ürün kararı |
+| **90** | **Veri İşleyen Sözleşmesi kayıt akışına entegrasyon** — Tenant yasal kimlik alanları (unvan/adres/VERBİS) | yapılmamış-iş (KVKK) | Belge 8; şema alanı yok → **migration** | 🟡 (hukukçu onayı sonrası) |
+| **91** | **Kulüp-tipi tenant AKTİF EDİLMEZ** — üniversite kulübünün veri sorumlusu üniversitedir, imza yetkisi yok (avukat) | karar/kısıt (KVKK) | Belge 8; kulüp modülü (madde 41) | 🔴 (canlı-öncesi kısıt) |
+| **92** | **Sunucu ülkesi teyidi** — belge "eu-west-2/İrlanda" çelişkili (eu-west-2=Londra/UK, eu-west-1=İrlanda); yasal metin ülke beyanı için PO sağlayıcı panelinden teyit | PO-manuel (KVKK) | envanter C-1; kapak dosyası 🔴 | 🔴 (yasal beyan riski) |
 | **81** | KVKK **otomatik imha süreci** yok (yalnız SystemLog 90g); mesaj içeriği/FeedbackLog **süresiz**; hardDelete'te bile Message kalır | yapılmamış-iş (KVKK) | envanter C-5; `gdprService.ts:253` (yorum "3 yıl" uygulanmamış) | 🟡 (saklama politikası bağımlı) |
 | **82** | Rıza metni **sürümü tutulmuyor** (`consentVersion` yok, yalnız `kvkkConsentAt` zaman damgası) → ispat açığı | yapılmamış-iş (KVKK ispat) | envanter C-6; grep `consentVersion` sonuç yok | 🟡 |
 | **83** | **OAuth'ta açık rıza UI'da alınmıyor** (`oauthService.ts:112` implicit set; ekranda kutu yok) + KVKK/18+ **tek kutuda birleşik** + aydınlatma≠açık rıza ayrımı yok | yapılmamış-iş/[HUKUKÇU] | envanter C-6; `_RegisterContent.tsx:414` | 🟡 (hukukçu kararına bağlı) |
