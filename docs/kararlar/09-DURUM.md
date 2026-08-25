@@ -47,6 +47,14 @@
 > yeniden yazıldı; `belge-duzeni-rehberi` Kural 2 alt-klasör genişletmesiyle tazelendi. **Kırık-link taraması: 0** (bayat 2 devir
 > işaretçisi de düzeltildi). docs/ dosya sayısı 68 (kayıp yok). PR (docs) — **merge PO'da.** Kod/DB dokunulmadı, #110 ellenmedi.
 >
+> **⚡ GÜNCELLEME (2026-08-23, tam-belge taraması — salt-okuma keşif, KOD YOK):** Reorg turunda belgeler yüzeysel tarandığından
+> içlerindeki kararlar sistematik çıkarılmamıştı. Bu turda **42 içerik belgesi TAM okundu + kod gerçeğiyle çapraz kontrol**
+> (7 paralel salt-okuma ajanı) → **13 gerçek yeni kayıp madde** → `00-KARAR-TAKIP.md` **Bölüm F**. Bunların **3'ü 🔴 GÜVENLİK
+> canlı-öncesi**: G1 `updateUser` password/PII sızıntısı (`userController.ts:272-277`), G2 `hardDeleteUser` FK-RESTRICT →
+> KVKK kalıcı silme çalışmıyor (`gdprService.ts:172-174`), G3 `SuspicionReport` reporter PII maskesiz (`platformController.ts:353`).
+> ⚠️ Repolar PUBLIC → önce PRIVATE + düzelt. Yeni rapor: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
+> MADDE 67 (çerez izni) 10-yol'da VAR (eklenmedi). Kod OKUNDU, değiştirilmedi; DB'ye dokunulmadı.
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.
