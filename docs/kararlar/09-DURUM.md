@@ -83,6 +83,12 @@
 > `konu/kvkk-metinleri/KVKK-BELGE-PAKETI-2026-08-25.docx` (kapak+içindekiler+9 belge+sayfa-no+tablolar+işaret-vurgu; emoji temiz, Türkçe tam;
 > üretici `scripts/kvkk-docx-gen.py`, md=canonical). (C) **PO kararı: FE site-entegrasyonu İPTAL** — avukata Word ile gidilecek; `/kvkk /gizlilik /terms` sayfalarına DOKUNULMADI.
 >
+> **⚡ GÜNCELLEME (2026-08-25d, migration'sız 5 iş — KOD, backend PR #51, MERGE OLMADI):** 4 paralel ajan + 1 CI-fix, hepsi **CI YEŞİL** (357 test):
+> **88** getPlatformStats meta çıkarıldı · **89** listPendingTenants admin PII maskelendi (karar: maskele, domain korunur) · **79** haftalık görüşme
+> limiti enforce (menti başına · **sabit 7-günlük UTC kova** — ilk CI'da ileri-only pencere hatası teşhis+düzeltildi · iptal/tamamlanan hariç) ·
+> **69** validation `message` (FE değişikliği YOK — FE zaten okuyor) · **70** adaptive-test `progress` (migration yok; FE guard ayrı tur).
+> Yeni bulgu **madde 94** (listPendingTenants VIEW audit izi, düşük). **Kalan:** madde 70 FE guard kaldırma (ayrı çatı PR) · PR #51 merge PO'da.
+>
 > **⚡ GÜNCELLEME (2026-08-23, canlı çıkış planı — salt-docs):** Dağınık ~58 açık iş **tek çıkış planına** sınıflandı → yeni canonical
 > `00-CIKIS-PLANI.md` (K0-K5 + tur planı). **KATI test:** ~40 "v1" maddenin çoğu çıkışı ENGELLEMİYOR → **gerçek çıkış-bloker: 5 K0**
 > (madde 38/68 PII sızıntısı · 39 KVKK silme · repo private · KVKK metinleri) **+ 1 K1** (foto volume) + 2 şüpheli (T7 opt-in, maxMeetings — TEYİT GEREK).

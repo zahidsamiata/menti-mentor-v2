@@ -168,8 +168,8 @@
 ## v1-H · 2026-08-23 tam-belge + niyet taramasından (madde 68-78)
 > Yalnız kuyruk satırı — kanıt/kod-teyidi/boy/migration **`00-KARAR-TAKIP.md` Bölüm F**'te (tekrar edilmez). Numara sabit (68'den).
 68. **🔴 `SuspicionReport` listesi reporter PII'sini maskesiz döner** (`platformController.ts:353`, select yok) · *AÇIK, güvenlik* · detay: Bölüm F.1 (G3).
-69. **🟡 Zod VALIDATION yanıtında `message` yok → kullanıcı hep generic "Hata" görür** (`questionController.ts`) · *AÇIK, UX/i18n* · detay: Bölüm F.2 (T1).
-70. **🟡 adaptive-test backend `progress` döndürmüyor** (FE guard'la kapatılmış, kalıcı kontrat) · *AÇIK* · detay: Bölüm F.2 (T2).
+69. **🔀 Zod VALIDATION mesajı** — **backend PR #51 (MERGE OLMADI, canlı değil)** (`firstValidationMessage`; FE otomatik gösterir). Detay: KARAR-TAKIP F.2.
+70. **🔀 adaptive-test `progress`** — **backend PR #51 (MERGE OLMADI)** (migration yok; FE guard kaldırma ayrı FE turu). Detay: KARAR-TAKIP F.2.
 71. **🟡 `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu** · *AÇIK, güvenlik/izolasyon* · detay: Bölüm F.2 (T3).
 72. **🔵❓ Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da** — "tüm sorularda mı" kararı yok · detay: Bölüm F.2 (T4).
 73. **🟡 Güvenli sertifika seed runner ekle** (`seed-certification.ts` runner'a bağlı değil — **madde #30'u bloklar**) · *AÇIK* · detay: Bölüm F.2 (T5).

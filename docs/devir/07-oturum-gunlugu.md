@@ -157,6 +157,20 @@
 
 ---
 
+# 📅 OTURUM 2026-08-25d (migration'sız 5 iş — KVKK paketi beklerken)
+
+**MOD:** 🟢 BYPASS (kod). **Hiçbir PR merge edilmedi.** Backend PR #51'e 5 commit, **CI YEŞİL** (357 test).
+
+- **madde 88** — `getPlatformStats` recentLogs meta çıkarıldı (madde 80 deseni).
+- **madde 89** — `listPendingTenants` admin fullName+email maskelendi. **Karar:** maskele (onay/red akışı e-postayı tüketmiyor, bildirim maili adresi yeniden çeker; `maskEmail` domain'i korur → admin doğrulayabilir). Bulgu → **madde 94** (VIEW audit izi yok, düşük).
+- **madde 79** — haftalık görüşme limiti enforce edildi. **Semantik:** menti başına · **sabit 7-günlük UTC kova** · tanımsızsa limit yok · 409 · CANCELLED/COMPLETED hariç. ⚠️ İlk CI fail: ileri-only pencere önceki görüşmeyi kaçırıyordu → teşhis + kova'ya çevrildi.
+- **madde 69** — Zod validation `message` (`firstValidationMessage`). **FE değişikliği GEREKMEZ** (client.ts + questions/page.tsx zaten `message` okuyor).
+- **madde 70** — adaptive-test `progress` (`computeProgress`, migration yok). FE guard `DailyQuestionWidget.tsx:39` kaldırma = **ayrı çatı FE turu**.
+
+**Kalan:** (a) madde 70 FE guard kaldırma (küçük çatı PR) · (b) PR #51 merge (PO) · (c) 9a+9b migration turu (tek başına) · (d) KVKK avukat cevabı.
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
 0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).

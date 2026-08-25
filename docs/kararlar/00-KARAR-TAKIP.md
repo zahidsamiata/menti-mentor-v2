@@ -270,10 +270,11 @@
 
 | No | İş | Tür | Kanıt | Öncelik |
 |:---:|---|---|---|---|
-| **79** | `maxMeetingsPerWeek` görüşme oluşturmada **enforce EDİLMİYOR** (ayar CRUD'da var, `bookMeeting`/`createMeeting`'te sayım/red yok) → menti limitsiz görüşme açar | yapılmamış-iş (sessiz yanlış) | `meetingController.ts:337-450` (limit kontrolü yok); ayar `adminSettingsController.ts:67` | 🟡 K1/K2 (PO) |
+| **79** | `maxMeetingsPerWeek` enforce EDİLMİYORDU → menti limitsiz görüşme açar | yapılmamış-iş (sessiz yanlış) | `meetingController.ts` | ✅ **DÜZELTİLDİ backend PR #51** (menti başına · sabit 7-günlük UTC kova · tanımsızsa limit yok · 409 · iptal/tamamlanan hariç; test) |
 | **80** | `getPlatformLogs` `select`siz + `listUserReports` fullName maskesiz | güvenlik/PII | `platformController.ts:175,411` | ✅ **DÜZELTİLDİ backend PR #51** (explicit select + maskName + test) |
-| **88** | `getPlatformStats` → `recentLogs` (`systemLog.findMany take:10`) `select`siz → ham `meta` (PII) döner | güvenlik/PII | `platformController.ts:95` (FAZ 0 bulgusu) | 🟡 (madde 80 kardeşi) |
-| **89** | `listPendingTenants` admin `fullName`+`email` maskesiz döner — onay akışı için gerekli mi? | güvenlik/❓ | `platformController.ts:185` | 🔵❓ PO/ürün kararı |
+| **88** | `getPlatformStats` → `recentLogs` `select`siz → ham `meta` (PII) | güvenlik/PII | `platformController.ts:98` | ✅ **DÜZELTİLDİ backend PR #51** (explicit select, meta çıkarıldı; test) |
+| **89** | `listPendingTenants` admin `fullName`+`email` maskesiz | güvenlik/karar | `platformController.ts` | ✅ **DÜZELTİLDİ backend PR #51** — KARAR: maskele (onay akışı e-posta tüketmiyor, mail adresi yeniden çeker; `maskEmail` domain'i korur). Test |
+| **94** | `listPendingTenants` **VIEW audit izi yok** (`listUserReports`/`getAnomalies` aksine) → tutarlılık için eklenebilir | güvenlik/tutarlılık (düşük) | `platformController.ts` (AJAN-1 bulgusu, madde 89 turu) | 🔵 düşük (PII artık maskeli) |
 | **90** | **Veri İşleyen Sözleşmesi kayıt akışına entegrasyon** — Tenant yasal kimlik alanları (unvan/adres/VERBİS) | yapılmamış-iş (KVKK) | Belge 8; şema alanı yok → **migration** | 🟡 (hukukçu onayı sonrası) |
 | **91** | **Kulüp-tipi tenant AKTİF EDİLMEZ** — üniversite kulübünün veri sorumlusu üniversitedir, imza yetkisi yok (avukat) | karar/kısıt (KVKK) | Belge 8; kulüp modülü (madde 41) | 🔴 (canlı-öncesi kısıt) |
 | **92** | **Sunucu ülkesi teyidi** — belge "eu-west-2/İrlanda" çelişkili (eu-west-2=Londra/UK, eu-west-1=İrlanda); yasal metin ülke beyanı için PO sağlayıcı panelinden teyit | PO-manuel (KVKK) | envanter C-1; kapak dosyası 🔴 | 🔴 (yasal beyan riski) |
@@ -293,8 +294,8 @@
 
 | Kod | İş | Tür | Kanıt | Boy | Migr |
 |---|---|---|---|:---:|:---:|
-| T1 | Zod VALIDATION yanıtında `message` yok → kullanıcı hep generic "Hata" görür | yapılmamış-iş | `questionController.ts:83,138,250,297` + `questions/page.tsx:52` | S | Hayır |
-| T2 | adaptive-test backend `progress` döndürmüyor (FE guard'la kapatılmış) — kalıcı kontrat | yapılmamış-iş | `adaptiveTestEngine.ts` (grep progress → yok) | M | Hayır |
+| T1 (madde 69) | Zod VALIDATION yanıtında `message` yok → generic "Hata" | ✅ **PR #51** | `questionController.ts` (`firstValidationMessage`; FE zaten `message` okuyor → FE değişikliği YOK) | S | Hayır |
+| T2 (madde 70) | adaptive-test backend `progress` döndürmüyor | ✅ **PR #51** | `adaptiveTestEngine.ts` (`computeProgress`, migration yok; FE guard `DailyQuestionWidget.tsx:39` = ayrı FE turu) | M | Hayır |
 | T3 | `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu | açık-soru/güvenlik | `platformController.ts:348-356` | S | Olası |
 | T4 | Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da kodlanmış; "tüm sorularda mı" kararı yok | verilmemiş-karar | `certification.service.ts:67` | S | Hayır |
 | T5 | `seed-certification.ts` runner'a bağlı değil → 20-senaryo bankasını canlıya **güvenli** taşıma yöntemi yok (**madde #30'u BLOKLAR**) | yapılmamış-iş | `package.json` (tek seed = `prisma/seed.ts`) | M | Evet |
