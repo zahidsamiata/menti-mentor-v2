@@ -83,7 +83,7 @@
     > ⚠️ GÜNCELLEME (2026-08-17): **AÇIK (yapılmadı) — brief "yapıldı" dedi, YANLIŞ.** Önceki turda koddan kanıtlandı: `Question` modelinde cevap-tipi alanı YOK (`schema.prisma`) → yeni alan = **migration** = canlı DB yazımı → 🛑 kırmızı kural. "Küçük FE" değil, **full-stack M** (schema + form + test rendering). Kapsam hâlâ belirsiz (hangi tipler/validation/skoring) → **PO netleştirmeli**, migration onaylı ayrı tur.
 
 ## v1-D · ★ 2026-08-15 KEŞİF TESPİTLERİ (yeni — PO önceliklendirir)
-> Kaynak: `docs/raporlar/degerlendirme-test-soru-envanteri-2026-08-15.md` + `icerik/` + `eksikler-derinlestirilmis-2026-08-15.md`.
+> Kaynak: `docs/raporlar/kod-denetimi/degerlendirme-test-soru-envanteri-2026-08-15.md` + `icerik/` + `eksikler-derinlestirilmis-2026-08-15.md`.
 29. **✅ İş 2 + İş 3 (P1+P2+P3) — TAMAMEN CANLIDA (#41-#43, #81-#85, 2026-08-16).** Onay/red izi + red gerekçesi + yönetici-adı + reddedilen kullanıcı akışı (enumeration-safe gerekçe görüntüleme + `reapply`). Kayıt: `10-yol-tamamlananlar.md` md.29.
 30. **⚠️ Sertifika bankası canlıda eksik (5 vs 20)** — kodda 20 senaryo (`seed-certification.ts`), canlıda yalnız 5 soru (salt-okuma sayımı). Zengin banka seed edilmemiş → `seedCertification()` kontrollü çalıştırma. **Canlı DB yazımı → PO onayı ZORUNLU** (tehlikeli tam `seed.ts` değil; bu fonksiyon idempotent/silmez ama canlıda çalışır).
 31. **DISC-tipine-özel "mentiye yaklaşım" içeriği YOK (en büyük içerik boşluğu)** — hiçbir testte mentinin DISC tipine göre uyarlanan yaklaşım içeriği yok. 3 seçenek (eksikler raporu): (1) statik yaklaşım kılavuzu (M, önerilen) · (2) SJT'yi menti-DISC koşullu genişletme (L, migration) · (3) sertifikaya tip-özel varyant (L, önerilmez). Kısmen v2 #20 (KARAR 9) ile ilişkili — PO netleştirir.

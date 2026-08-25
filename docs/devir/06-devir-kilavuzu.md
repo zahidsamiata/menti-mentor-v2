@@ -67,12 +67,12 @@
 ## Kaynak belgeler (devir belgeleri bunlardan sentezlendi — daha derin kanıt için)
 - `docs/kararlar/09-DURUM.md` — canonical "şu an".
 - `docs/kararlar/10-yol-haritasi.md` — canonical "sıradaki işler".
-- `docs/kararlar/04-guvenlik-ve-kvkk.md` — güvenlik/KVKK ayrıntı.
-- `docs/kararlar/unutulmus-niyet-envanteri-2026-08-10.md` — dosya:satır kanıtlı niyet listesi.
-- `docs/kararlar/belge-denetimi-2026-08-10.md` — 09/10'un gerçekle kıyas denetimi.
-- `docs/kararlar/chat-v1-teslim.md` — chat mimarisi/güvenlik ayrıntı.
+- `docs/kararlar/konu/04-guvenlik-ve-kvkk.md` — güvenlik/KVKK ayrıntı.
+- `docs/kararlar/oz-denetim/unutulmus-niyet-envanteri-2026-08-10.md` — dosya:satır kanıtlı niyet listesi.
+- `docs/kararlar/oz-denetim/belge-denetimi-2026-08-10.md` — 09/10'un gerçekle kıyas denetimi.
+- `docs/kararlar/konu/chat-v1-teslim.md` — chat mimarisi/güvenlik ayrıntı.
 - `docs/kararlar/dokploy-foto-volume-talimati.md` — foto volume manuel adımlar.
-- `docs/kararlar/07-calisma-tarzi.md` + kök `CLAUDE.md` — çalışma disiplini canonical.
+- `docs/kararlar/konu/07-calisma-tarzi.md` + kök `CLAUDE.md` — çalışma disiplini canonical.
 - `docs/arsiv/` — tarihsel geçmiş (eski İŞ 0-8 planı, strateji denetimi).
 
 > **Altın kural:** Bu devir belgeleri **rehber**; çelişki görürsen **09-DURUM + git gerçeği** kazanır.

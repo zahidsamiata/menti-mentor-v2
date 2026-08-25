@@ -24,7 +24,7 @@ iddiaları iki-belge kanıtıyla doğrulandı; CLAUDE.md ve git-config (`.gitmod
 **Git durumu (bu tur, doğrulandı):** Çatı `origin/main` = `753c545` (#95 merge). Açık PR: yalnız **#96**
 (tam-envanter raporu, docs — bu turda dokunulmadı). Backend submodule pointer `b6187c1`, senkron.
 
-> **Not — #96 kapsam dışı:** `docs/raporlar/tam-envanter-gercek-durum-2026-08-19.md` henüz main'de değil
+> **Not — #96 kapsam dışı:** `docs/raporlar/kod-denetimi/tam-envanter-gercek-durum-2026-08-19.md` henüz main'de değil
 > (PR #96, açık). Bu rapor main'in mevcut durumunu ele alır; tam-envanter belgesi merge olunca
 > "denetim kümesi"ne (bkz. §2.2) dahil edilmeli.
 
@@ -34,7 +34,7 @@ iddiaları iki-belge kanıtıyla doğrulandı; CLAUDE.md ve git-config (`.gitmod
 
 ## 5.1 Proje başıboş değil — mevcut düzen sistemi var
 
-`docs/kararlar/belge-duzeni-rehberi.md` (59 satır, 🔄 canonical) **6 düzen kuralı** tanımlıyor:
+`docs/kararlar/konu/belge-duzeni-rehberi.md` (59 satır, 🔄 canonical) **6 düzen kuralı** tanımlıyor:
 
 | # | Kural | Özet |
 |---|-------|------|
@@ -245,7 +245,7 @@ giriş yolu** (00-INDEX'in başına "▶ Buradan başla" olarak konabilir):
 2. **`docs/kararlar/00-INDEX.md`** — belge haritası. *Ne nerede?*
 3. **`docs/kararlar/09-DURUM.md`** — şu an neredeyiz, ne bitti/bekliyor. *Bugün ne durumdayız?*
 4. **`docs/kararlar/10-yol-haritasi.md`** — sıradaki işler. *Ne yapılacak?*
-5. **`docs/kararlar/00-DURUM-PANOSU.md`** — karar statüsü tek bakışta. *Kararlar nerede?*
+5. **`docs/kararlar/oz-denetim/durum-panosu-2026-08-14.md`** — karar statüsü tek bakışta. *Kararlar nerede?*
 
 Derin gerekçe gerekince: `01-11` kararlar/ + ilgili `raporlar/` fotoğrafı.
 

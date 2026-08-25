@@ -47,7 +47,7 @@ Yönetici, test **sonuçlarının** bir kısmını görür ama **bireysel ham ce
 
 **Sertifika bağı:** `isCertified` yalnız **sertifika sınavıyla** set ediliyor (`certification.service.ts:234`); **SJT ile bağlı değil** (ayrı modeller).
 
-**Belge-kod çelişkisi:** `docs/kararlar/03-psikometri-ve-algoritma.md:44-49` "Mini Akademi = 4 pedagojik SJT" diyor; kodda **3 SJT sorusu** + ayrı sertifika var. Belge niyeti tam kodlanmamış (kod gerçeği esas).
+**Belge-kod çelişkisi:** `docs/kararlar/konu/03-psikometri-ve-algoritma.md:44-49` "Mini Akademi = 4 pedagojik SJT" diyor; kodda **3 SJT sorusu** + ayrı sertifika var. Belge niyeti tam kodlanmamış (kod gerçeği esas).
 
 ---
 

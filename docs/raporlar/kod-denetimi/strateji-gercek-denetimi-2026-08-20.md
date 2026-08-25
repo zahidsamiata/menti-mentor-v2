@@ -62,7 +62,7 @@
 ## BÖLÜM B — ROL ROL DERİN TABLO
 
 ### B.1 — MENTİ
-> Kaynak: `docs/raporlar/menti-persona-ve-sevdirme-2026-08-02.md`
+> Kaynak: `docs/raporlar/persona/menti-persona-ve-sevdirme-2026-08-02.md`
 > Belge stratejik/persona odaklı; "vaat" = tarif edilen somut deneyim/özellik. 14 madde çıkarıldı.
 
 | # | Belgedeki madde (vaat) | Durum | Kodda karşılığı (kanıt) | Not / fark | Öneri |
@@ -85,7 +85,7 @@
 **B.1 dağılımı:** ✅ 8 · 🟠 1 · 🟡 1 · 🔴 2 · ⚠️ 1 · 🔄 0 · ⛔ 0 (toplam 13 madde satırı; madde 7 mekanizma-tam).
 
 ### B.2 — MENTÖR
-> Kaynak: `docs/raporlar/mentor-persona-ve-sevdirme-2026-08-02.md` · 14 madde.
+> Kaynak: `docs/raporlar/persona/mentor-persona-ve-sevdirme-2026-08-02.md` · 14 madde.
 
 | # | Belgedeki madde (vaat) | Durum | Kodda karşılığı (kanıt) | Not / fark | Öneri |
 |---|---|---|---|---|---|
@@ -175,7 +175,7 @@
 **B.3 dağılımı:** ✅ 16 · 🟠 0 · 🟡 6 · 🔴 3 · ⚠️ 1 · 🔄 0 · ⛔ 0 · ❓ 1 (27 madde). *En çarpıcı: metrik altyapısı (retentionMetrics + drill-down + nudge) güçlü; ama görüşme/ivme trendleri, tamamlama/uyum ORANLARI ve rapor EXPORT eksik — Persona B/C (kurul/sponsor kanıtı) için S3 zayıf.*
 
 ### B.4 — PLATFORM ADMİN (sistem sahibi, `/platform`)
-> Kaynak: `docs/raporlar/platform-admin-strateji-2026-08-02.md`. 20 madde. Belgede 2026-08-05 backend-doğrulama notu var; burada özellikle **frontend** yeniden doğrulandı.
+> Kaynak: `docs/raporlar/panel/platform-admin-strateji-2026-08-02.md`. 20 madde. Belgede 2026-08-05 backend-doğrulama notu var; burada özellikle **frontend** yeniden doğrulandı.
 
 **A — Büyüme nabzı**
 
@@ -230,7 +230,7 @@
 **B.4 dağılımı:** ✅ 13 · 🟠 0 · 🟡 3 · 🔴 4 · ⚠️ 0 · 🔄 0 · ⛔ 0 (20 madde). *Platform admin belgesi en olgun bölüm: güvenlik/gözlem (audit, health, abuse) tam. Eksikler büyüme metrikleri (ivme, aktif/pasif oran) + platform ayarlar UI + 3. seviye kullanıcı drill.*
 
 ### B.5 — ADMİN PANEL TASARIM KARTLARI
-> Kaynak: `docs/raporlar/admin-panelleri-tasarim-2026-08-02.md`. Belge 6 panel (A1-A4, A7, A8) + oyunlaştırma + ortak UI/güvenlik ÖNERDİ (kod yazılmamıştı). Soru: bunlar kodlandı mı?
+> Kaynak: `docs/raporlar/kesif/admin-panelleri-tasarim-2026-08-02.md`. Belge 6 panel (A1-A4, A7, A8) + oyunlaştırma + ortak UI/güvenlik ÖNERDİ (kod yazılmamıştı). Soru: bunlar kodlandı mı?
 > **Genel sonuç: 6 panelin TAMAMI + oyunlaştırma KODLANMIŞ.** Tasarım kartlarının vaatleri büyük ölçüde karşılanmış — bu belge artık ~büyük ölçüde uygulanmış (arşiv adayı, bkz. Bölüm E).
 
 | # | Tasarım kartı (vaat) | Durum | Kodda karşılığı (kanıt) | Not / fark | Öneri |

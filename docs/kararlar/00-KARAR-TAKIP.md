@@ -93,7 +93,7 @@
 
 ### B.4 — 🆕 2026-08-23 turu: strateji-denetimi + PO oturum kararları
 
-> **Kaynak 1:** `docs/raporlar/strateji-gercek-denetimi-2026-08-20.md` (6 strateji belgesi ↔ kod, 85 madde) Bölüm D.
+> **Kaynak 1:** `docs/raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` (6 strateji belgesi ↔ kod, 85 madde) Bölüm D.
 > **Kaynak 2:** bu oturumda ürün sahibinin sözlü verdiği kararlar (aşağıdaki yeni tasarım + erteleme/keşif kararları).
 > Yukarıdaki B.1/B.2 satırlarına işlenen PO kararları için ilgili satırdaki **⚠️ GÜNCELLEME (2026-08-23)** notlarına bakınız
 > (9a, 9b, K6, K3, sektör/etiket, #35/2a, #13, #31, 37m). Aşağıdakiler **yeni** kalemler.

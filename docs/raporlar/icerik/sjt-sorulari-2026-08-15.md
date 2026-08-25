@@ -7,7 +7,7 @@
 ## Kaynak & tutarlılık
 - **Kod kaynağı:** `seed.ts:530-573` — **3 soru** (1 mentör CORE, 1 menti CORE, 1 menti FOLLOWUP), her biri 4 seçenek.
 - **Canlı DB (salt-okuma):** 3 soru + 12 seçenek → kod ile birebir tutuyor. ✅
-- **⚠️ Belge-kod çelişkisi:** `docs/kararlar/03-psikometri-ve-algoritma.md:44-49` "Mini Akademi = 4 pedagojik SJT" der; kodda **3 SJT** var (ve bunlar Mini Akademi değil, OCEAN kalibrasyonu). Niyet tam kodlanmamış.
+- **⚠️ Belge-kod çelişkisi:** `docs/kararlar/konu/03-psikometri-ve-algoritma.md:44-49` "Mini Akademi = 4 pedagojik SJT" der; kodda **3 SJT** var (ve bunlar Mini Akademi değil, OCEAN kalibrasyonu). Niyet tam kodlanmamış.
 - **Amaç:** SJT, DISC→OCEAN türetiminden sonra **kararsız OCEAN boyutlarını** (özellikle O ve N) kalibre eder. **Puansız**; her seçenek OCEAN boyutlarına ağırlık (`weights`) verir + arketip sinyali (`signalsArchetype`).
 - **DISC-tipine-özel "mentiye yaklaşım" içeriği:** ❌ YOK — sorular kullanıcının KENDİ eğilimini ölçer; seçenekler arketip sinyali taşır ama "menti D-tipiyse şöyle yaklaş" gibi koşullu içerik yok.
 

@@ -3,7 +3,7 @@
 **📸 DONDURULMUŞ (2026-08-14)** — o günün keşif fotoğrafı, güncellenmez.
 **Toplam belge:** 44 · **İLERLEME:** 44/44 tarandı (kararlar 19 · raporlar 16 · arsiv 3 · devir 6).
 
-> **Amaç:** `docs/kararlar/belge-duzeni-rehberi.md` (6 kural) ışığında tüm belgeleri sınıflandırmak.
+> **Amaç:** `docs/kararlar/konu/belge-duzeni-rehberi.md` (6 kural) ışığında tüm belgeleri sınıflandırmak.
 > **Bu harita SADECE keşiftir** — hiçbir belge taşınmadı/silinmedi/birleştirilmedi. Her öneri **PO kararı gerektirir**;
 > uygulama AYRI bir turda yapılacak. Emin olunamayan sınıflandırmalarda "TEYİT GEREK" yazılıp iki kanıt yan yana konmuştur.
 >

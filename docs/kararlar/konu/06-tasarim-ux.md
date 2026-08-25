@@ -37,11 +37,11 @@ Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-e
   - Müsaitlik takvimi → müsait saate tıkla → **niyet mektubu yaz** akışı.
 - **Çift yönlü havuz:** mentör menti havuzunu, menti mentör havuzunu görür — **aynı kart mantığı**.
 - **Fotoğraf:** herkesten istenecek. Şimdilik **opsiyonel**, ileride zorunlu (bkz. 08 açık soru). Altyapı hazır (bugün tamamlandı).
-- **Referanslar:** docs/raporlar/kart-havuz-backend-envanteri-2026-08-02.md + docs/raporlar/mentor-karti-rakip-analizi-2026-08-02.md (rakip analizi + kart kararları).
+- **Referanslar:** docs/raporlar/kesif/kart-havuz-backend-envanteri-2026-08-02.md + docs/raporlar/kesif/mentor-karti-rakip-analizi-2026-08-02.md (rakip analizi + kart kararları).
 - **Deneyim referansı (persona):** kart + akış tasarımı iki tarafın deneyimini farklı etkiler —
   menti tarafında **"bekleme anı" riski** (talep sonrası onay beklerken kaybolma), mentör
   tarafında **"sevdirme"** (arz kıt; mentörü tutmak öncelik). Kararlar:
-  docs/raporlar/menti-persona-ve-sevdirme-2026-08-02.md · docs/raporlar/mentor-persona-ve-sevdirme-2026-08-02.md.
+  docs/raporlar/persona/menti-persona-ve-sevdirme-2026-08-02.md · docs/raporlar/persona/mentor-persona-ve-sevdirme-2026-08-02.md.
 
 ## MESAJLAŞMA (karar: ŞİMDİLİK YOK)
 - **Serbest / LinkedIn-tarzı DM YOK.** Sadece **niyet mektubu akışı** (talep + mesaj).

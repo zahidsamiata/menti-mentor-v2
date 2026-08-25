@@ -29,8 +29,8 @@
 - **Belge temizliği — PR #65 (o an açık):** 44 belge 6 düzen kuralına göre tarandı (harita: `belge-temizlik-haritasi-2026-08-14.md`). FAZ 1: 28 belgeye tür etiketi (🔄/📸) + INDEX. FAZ 2: 7 bayat bilgi kanıtla işaretlendi (IDOR ✅; AdminAuditLog→SystemLog; hayalet-mod PR #31; Next.js 15.5.20; timezone `6a30f21`). Salt-docs.
 
 ## B) Kararlar (canonical'a işaret — kopyalanmadı)
-- **STK admin tasarım kararları:** `docs/kararlar/tasarim-kararlari-admin-2026-08-11.md` (10+ karar). Tek kaynak burasıdır.
-- **Belge düzeni kuralları:** `docs/kararlar/belge-duzeni-rehberi.md` (6 kural, canonical).
+- **STK admin tasarım kararları:** `docs/kararlar/konu/tasarim-kararlari-admin-2026-08-11.md` (10+ karar). Tek kaynak burasıdır.
+- **Belge düzeni kuralları:** `docs/kararlar/konu/belge-duzeni-rehberi.md` (6 kural, canonical).
 
 ## C) O oturumdaki bekleyenler (sonradan çoğu kapandı — güncel için 00-KARAR-TAKIP)
 1. PR #65 merge (belge temizliği). 2. 6 arşiv teyidi (`hayalet-backend`, `kapasite-analizi`, `katilim-modeli`, `mentor-karti-rakip-analizi`, `tema-durum`, `devir/`). 3. Karar-statü taraması (sonradan `00-karar-statu-haritasi-2026-08-14` + `00-DURUM-PANOSU` ile yapıldı). 4. Durum panosu. 5. Yol haritası v1/v2 önceliklendirme. 6. İnşa kuyruğu (B6 kalibrasyon · B8b cevap-tipi · havuz kartı · sektör/etiket havuzu · KVKK). 7. PO manuel: foto volume/Dokploy (canlı öncesi ŞART) · chat canlı test · repoları private.
