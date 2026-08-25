@@ -37,8 +37,63 @@
 > (mentör DISC aha-kartı + paylaşım aslında VAR).
 > (2) **Karar-takip senkronu** (bu docs PR): PO'nun bu oturumdaki kararları `00-KARAR-TAKIP.md`'ye işlendi — 9a (tüm yöneticiler +
 > değişiklik izi), 9b (düzeltilecek), K6 (v2), K3 (en son), sektör/etiket (talep-onay), 2a ghost-red (**30 gün uyku modu**),
-> #7 otomatik pasifleştirme (varsayılan kapalı), #13 (ertelendi), #31 (felsefe-keşfi sonrası), **#38 yeni DISC/karakter derinleşme
-> kurgusu**, Y1–Y7 denetim işleri + 2 keşif turu (içerik-felsefe, belge-düzeni). Detay: `00-KARAR-TAKIP.md` Bölüm B.4 + satır-içi notlar.
+> #7 otomatik pasifleştirme (varsayılan kapalı), #13 (ertelendi), #31 (felsefe-keşfi sonrası), **DISC-DERİNLEŞME kurgusu**
+> (numarasız — eski "#38" etiketi madde-38 güvenlikle çakıştığı için 2026-08-23'te ada çevrildi), Y1–Y7 denetim işleri + 2 keşif turu (içerik-felsefe, belge-düzeni). Detay: `00-KARAR-TAKIP.md` Bölüm B.4 + satır-içi notlar.
+>
+> **⚡ GÜNCELLEME (2026-08-23, belge-düzeni reorg — salt-docs, KOD YOK):** `docs/kararlar/` ve `docs/raporlar/` şişince
+> **alt-klasörlere** ayrıldı (git mv, içerik değişmedi): kararlar → `konu/` + `oz-denetim/`; raporlar → `kesif/` + `kod-denetimi/`
+> + `panel/` + `persona/` + `icerik/`. Canonical taşıyıcılar (00-INDEX · 09-DURUM · 00-KARAR-TAKIP · 10-yol-haritasi ·
+> 10-yol-tamamlananlar) `kararlar/` kökünde KALDI. 38 tam-yol referansı yeni konumlara güncellendi; 00-INDEX yeni ağaca göre
+> yeniden yazıldı; `belge-duzeni-rehberi` Kural 2 alt-klasör genişletmesiyle tazelendi. **Kırık-link taraması: 0** (bayat 2 devir
+> işaretçisi de düzeltildi). docs/ dosya sayısı 68 (kayıp yok). PR (docs) — **merge PO'da.** Kod/DB dokunulmadı, #110 ellenmedi.
+>
+> **⚡ GÜNCELLEME (2026-08-23, tam-belge taraması — salt-okuma keşif, KOD YOK):** Reorg turunda belgeler yüzeysel tarandığından
+> içlerindeki kararlar sistematik çıkarılmamıştı. Bu turda **42 içerik belgesi TAM okundu + kod gerçeğiyle çapraz kontrol**
+> (7 paralel salt-okuma ajanı) → **13 gerçek yeni kayıp madde** → `00-KARAR-TAKIP.md` **Bölüm F**. Bunların **3'ü 🔴 GÜVENLİK
+> canlı-öncesi**: G1 `updateUser` password/PII sızıntısı (`userController.ts:272-277`), G2 `hardDeleteUser` FK-RESTRICT →
+> KVKK kalıcı silme çalışmıyor (`gdprService.ts:172-174`), G3 `SuspicionReport` reporter PII maskesiz (`platformController.ts:353`).
+> ⚠️ Repolar PUBLIC → önce PRIVATE + düzelt. Yeni rapor: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
+> MADDE 67 (çerez izni) 10-yol'da VAR (eklenmedi). Kod OKUNDU, değiştirilmedi; DB'ye dokunulmadı.
+>
+> **⚡ GÜNCELLEME (2026-08-23, niyet envanteri + numaralandırma — salt-docs):** (1) **Kırmızı kural düzeltmesi:** "güvenli seed" listesi
+> silinen `seed-questions.ts`'i sayıyordu → gerçek liste `seed-certification`+`seed-learning-journey`+`seed-test-tenant.mjs` (CLAUDE.md+4 belge).
+> (2) **Niyet envanteri (5 ajan):** yarım-iş/bağlanmamış-kod kod-arkeolojisi → `00-KARAR-TAKIP` **C.2** + rapor `yarim-is-niyet-envanteri-2026-08-23.md`;
+> "~14 FE'siz özellik" → **9 doğrulandı.** (3) **Numaralandırma:** Bölüm F → yol haritası **madde 68-78** (`v1-H`); **#38 çakışması çözüldü**
+> (madde 38=güvenlik canonical; DISC işi numarasız "DISC-DERİNLEŞME kurgusu"). (4) **KURAL 7** (taşıyıcı belge iş bölümü) rehbere eklendi.
+> (5) `durum-panosu-2026-08-14` 🔄→📸 adayı (Bölüm E). Gerçek statü çelişkisi: 0. Tümü #112'de (merge PO'da).
+>
+> **⚡ GÜNCELLEME (2026-08-25, KVKK güvenlik turu — KOD + docs):** İlk KOD turu (docs değil).
+> **(A) K0 güvenlik düzeltmeleri → backend PR #51 (MERGE OLMADI):** madde 38 `updateUser`/temperament password+PII sızıntısı
+> (db.ts global omit `{user:{password:true}}` + explicit select + test) · madde 68 `SuspicionReport` reporter PII maskeleme
+> (maskName/maskContact + test). tsc/tsc-test/eslint temiz; DB testleri CI'da (guard). **Çatı submodule pointer'ı DEĞİŞMEDİ** (backend merge olmadı).
+> **(B) FAZ B teyitleri (salt-okuma):** T7 opt-in eşleşmeyi bloklamıyor (K2) · `maxMeetingsPerWeek` enforce EDİLMİYOR (madde 79) · 9b indirmesi doğru.
+> **(C) KVKK veri aktarım envanteri** (kod-kanıtlı, 2 ajan) → `../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`;
+> 8 hukukçu sorusu + [PO DOLDURACAK] alanlar. **Yeni maddeler 79-87** (00-KARAR-TAKIP F.5).
+>
+> **⚡ GÜNCELLEME (2026-08-25, KVKK belge paketi turu — KOD + docs):** (A) **madde 80** (`getPlatformLogs` select + `listUserReports`
+> maskeleme) düzeltildi → **backend PR #51'e eklendi** (test, tsc/eslint temiz). Yeni bulgular madde **88** (getPlatformStats recentLogs) +
+> **89** (listPendingTenants admin PII). (B) **FAZ D KVKK belge paketi YAZILDI** → `konu/kvkk-metinleri/` **9 belge TASLAK** (envantere
+> dayalı, jenerik değil; platform=işleyen/kurum=sorumlu avukat modeli). 8 hukukçu sorusu + [PO DOLDURACAK] + 🔴 sunucu-ülke çelişkisi
+> (ülke adı yazılmadı). Yeni maddeler **90** (veri işleyen sözleşmesi entegrasyonu, migration) · **91** (kulüp-tenant aktif edilmez) ·
+> **92** (sunucu ülke teyidi). **KALAN:** FAZ E FE entegrasyonu (merge-kilitli PR — hukukçu onayına kadar zaten merge olmaz; ayrı tur).
+>
+> **⚡ GÜNCELLEME (2026-08-25c, KVKK Word + anonimleştirme teyidi — KOD + docs):** (A) **Anonimleştirme kod teyidi:** `anonymizeUser` kısmi
+> (takma-adlaştırma) çıktı → sosyal/avatar/enneagram/discResultCard **eklendi (backend PR #51)**; kalan (mesaj/foto-dosyası/userId-bağı) = **madde 93**.
+> Saklama-imha metni "tam geri-döndürülemez" vaadini kaldırıp gerçeği beyan ediyor. (B) **Profesyonel Word paketi** üretildi:
+> `konu/kvkk-metinleri/KVKK-BELGE-PAKETI-2026-08-25.docx` (kapak+içindekiler+9 belge+sayfa-no+tablolar+işaret-vurgu; emoji temiz, Türkçe tam;
+> üretici `scripts/kvkk-docx-gen.py`, md=canonical). (C) **PO kararı: FE site-entegrasyonu İPTAL** — avukata Word ile gidilecek; `/kvkk /gizlilik /terms` sayfalarına DOKUNULMADI.
+>
+> **⚡ GÜNCELLEME (2026-08-25d, migration'sız 5 iş — KOD, backend PR #51, MERGE OLMADI):** 4 paralel ajan + 1 CI-fix, hepsi **CI YEŞİL** (357 test):
+> **88** getPlatformStats meta çıkarıldı · **89** listPendingTenants admin PII maskelendi (karar: maskele, domain korunur) · **79** haftalık görüşme
+> limiti enforce (menti başına · **sabit 7-günlük UTC kova** — ilk CI'da ileri-only pencere hatası teşhis+düzeltildi · iptal/tamamlanan hariç) ·
+> **69** validation `message` (FE değişikliği YOK — FE zaten okuyor) · **70** adaptive-test `progress` (migration yok; FE guard ayrı tur).
+> Yeni bulgu **madde 94** (listPendingTenants VIEW audit izi, düşük). **Kalan:** madde 70 FE guard kaldırma (ayrı çatı PR) · PR #51 merge PO'da.
+>
+> **⚡ GÜNCELLEME (2026-08-23, canlı çıkış planı — salt-docs):** Dağınık ~58 açık iş **tek çıkış planına** sınıflandı → yeni canonical
+> `00-CIKIS-PLANI.md` (K0-K5 + tur planı). **KATI test:** ~40 "v1" maddenin çoğu çıkışı ENGELLEMİYOR → **gerçek çıkış-bloker: 5 K0**
+> (madde 38/68 PII sızıntısı · 39 KVKK silme · repo private · KVKK metinleri) **+ 1 K1** (foto volume) + 2 şüpheli (T7 opt-in, maxMeetings — TEYİT GEREK).
+> **İndirilenler (K0/K1→K2):** çerez izni #67 (analytics'siz çıkışta gerekmez), 9b (henüz görünür yalan değil), K3 (~0 kullanıcı), T3, KVKK FE.
+> **KURAL 8** (bulgu yaşam döngüsü) rehbere + CLAUDE.md'ye eklendi. Tur sırası: PO manuel (repo private+foto+metin) → güvenlik 38+68 (paralel) → G2 migration (tek başına). Kod OKUNDU, değiştirilmedi.
 >
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
@@ -161,7 +216,7 @@
 - **v1 #8 — admin sol menü 4-grup (çatı #76):** ✅ TAMAMLANDI, canlıda. Gruplar: Günlük İşler · İnsanlar · Program & İçerik · Ayarlar & Kurulum (KARAR 1). Salt-frontend (`(admin)/layout.tsx`).
 - **v1 #11 — sertifika rozeti (backend #40 + çatı #77):** ✅ TAMAMLANDI, canlıda. **KİŞİ-GENELİ:** kişi HERHANGİ bir kurumda sertifikalıysa mentör havuzunda "✓ Sertifikalı" görünür — `TenantMembership.isCertified` üzerinden `some()` ile türetilir. `UserProfile.isCertified` **bakımsız** (hiç yazılmıyor) olduğu için kullanılmadı (kod kanıtıyla; migration gerekmedi).
 - **v1 #10 — durum rozeti:** ✅ **ZATEN MEVCUTTU** (kod gerçeği — yol haritasında ⏳ görünüyordu ama yanlıştı). Mentör + menti havuz tablosunda "Durum" sütunu `APPROVAL_META` ile Onaylı/Bekliyor/Reddedildi gösteriyor (`mentor-havuzu/page.tsx`, `menti-havuzu/page.tsx`); admin-only. Yeniden yapılmadı, teyit edildi.
-- **Raporlar (çatı #78 + #79):** değerlendirme/test/soru envanteri (`docs/raporlar/degerlendirme-test-soru-envanteri-2026-08-15.md`) + içerik dökümü (`docs/raporlar/icerik/`) + derinleştirilmiş eksik analizi (`docs/raporlar/eksikler-derinlestirilmis-2026-08-15.md`). Canlı DB salt-okuma sayımıyla seed↔canlı tutarlılığı doğrulandı.
+- **Raporlar (çatı #78 + #79):** değerlendirme/test/soru envanteri (`docs/raporlar/kod-denetimi/degerlendirme-test-soru-envanteri-2026-08-15.md`) + içerik dökümü (`docs/raporlar/icerik/`) + derinleştirilmiş eksik analizi (`docs/raporlar/kod-denetimi/eksikler-derinlestirilmis-2026-08-15.md`). Canlı DB salt-okuma sayımıyla seed↔canlı tutarlılığı doğrulandı.
   - ⚠️ **Kritik tespit:** sertifika bankası kodda 20 senaryo ama **canlıda yalnız 5 soru** (seed edilmemiş). Ayrıca STK-custom canlıda 1 (envanterin "0"ı düzeltildi). Detay: eksikler raporu.
 
 ## ✅ BU OTURUM — v1 İŞLERİ MERGED, CANLIDA (2026-08-15)

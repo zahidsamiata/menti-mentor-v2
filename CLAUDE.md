@@ -72,6 +72,10 @@
 - Lokalde DB'ye yazmak = canlıyı anında etkilemek. Seed/migration/DB işleminde onay al.
 - Tehlikeli seed.ts / npm run seed / prisma db seed VERİ SİLER — asla çalıştırma.
   Güvenli: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs.
+  > ⚠️ GÜNCELLEME (2026-08-23): `seed-questions.ts` **SİLİNDİ** (backend `5745e0f`, "ölü/çelişen seed-questions.ts kaldır")
+  > — artık güvenli listede DEĞİL. Kod-kanıtlı **gerçek güvenli** liste (yalnız `upsert`, `deleteMany` YOK):
+  > `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs`.
+  > **Tehlikeli = `prisma/seed.ts`** (`npm run seed` = `tsx prisma/seed.ts`) — satır 300-307'de toplu `deleteMany()` (userResponse/feedback/meeting/matchRequest… siler). ASLA çalıştırma.
 
 ## Ortam / Veritabanı — PROD ≠ DEV ≠ TEST
 - **Lokal geliştirme**: `backend/.env` → ana Neon (`ep-fancy-tooth-ab4u5xhr`, eu-west-2/İrlanda). Bu CANLI veri;
@@ -167,10 +171,18 @@
 - Böylece kararın neden değiştiği ve tarihsel iz korunur.
 
 ## Belge Düzeni — her belge işinde uy
-- Belge oluştururken/düzenlerken `docs/kararlar/belge-duzeni-rehberi.md`'deki **6 düzen kuralına** uyulur:
-  (1) tek gerçek kaynağı/canonical, (2) tür=klasör (kararlar/raporlar/arsiv), (3) yaşayan 🔄 / dondurulmuş 📸 üst-etiketi,
-  (4) adlandırma (dondurulmuş=tarihli, yaşayan=tarihsiz), (5) yeni belge → `00-INDEX.md` güncelle, (6) eksik-işaretleme (⚠️ GÜNCELLEME, silme yok).
+- Belge oluştururken/düzenlerken `docs/kararlar/konu/belge-duzeni-rehberi.md`'deki **8 düzen kuralına** uyulur:
+  (1) tek gerçek kaynağı/canonical, (2) tür=klasör + alt-klasör (kararlar/raporlar/arsiv), (3) yaşayan 🔄 / dondurulmuş 📸 üst-etiketi,
+  (4) adlandırma (dondurulmuş=tarihli, yaşayan=tarihsiz), (5) yeni belge → `00-INDEX.md` güncelle, (6) eksik-işaretleme (⚠️ GÜNCELLEME, silme yok),
+  (7) taşıyıcı belge iş bölümü (statü tek yerde, diğerleri referans), (8) bulgu yaşam döngüsü (aşağıda).
 - Bu kurallar "Belge Eş-Zamanlılığı" + "Belge Düzeltme Deseni" ile tutarlıdır; çelişki yok. Rehber = canonical.
+
+### KURAL 8 — Bulgu yaşam döngüsü (keşif turu tur-sonu kontrol listesi)
+- (1) Keşif → **tarihli 📸 rapor** (`raporlar/`); ham kanıt, aksiyon kaynağı olarak bırakılmaz.
+- (2) **Her aksiyon `00-KARAR-TAKIP`'e girer — numarasını YALNIZ orada alır** (tek numara dizisi; rapordan doğrudan yol haritasına madde geçmez).
+- (3) Öncelik verilince → `10-yol-haritasi`'na **tek satır** (numara + öncelik + "detay: KARAR-TAKIP"); detay kopyalanmaz.
+- (4) İş bitince → **önce KOD doğrula**, sonra 4 yer: KARAR-TAKIP ✅ · yol-haritası stub · `10-yol-tamamlananlar` · `09-DURUM`.
+- (5) Oturum bitince → `devir/07-oturum-gunlugu`'na bölüm.
 
 <!-- /çalışma-kuralları -->
 

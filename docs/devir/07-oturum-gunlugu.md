@@ -29,8 +29,8 @@
 - **Belge temizliği — PR #65 (o an açık):** 44 belge 6 düzen kuralına göre tarandı (harita: `belge-temizlik-haritasi-2026-08-14.md`). FAZ 1: 28 belgeye tür etiketi (🔄/📸) + INDEX. FAZ 2: 7 bayat bilgi kanıtla işaretlendi (IDOR ✅; AdminAuditLog→SystemLog; hayalet-mod PR #31; Next.js 15.5.20; timezone `6a30f21`). Salt-docs.
 
 ## B) Kararlar (canonical'a işaret — kopyalanmadı)
-- **STK admin tasarım kararları:** `docs/kararlar/tasarim-kararlari-admin-2026-08-11.md` (10+ karar). Tek kaynak burasıdır.
-- **Belge düzeni kuralları:** `docs/kararlar/belge-duzeni-rehberi.md` (6 kural, canonical).
+- **STK admin tasarım kararları:** `docs/kararlar/konu/tasarim-kararlari-admin-2026-08-11.md` (10+ karar). Tek kaynak burasıdır.
+- **Belge düzeni kuralları:** `docs/kararlar/konu/belge-duzeni-rehberi.md` (6 kural, canonical).
 
 ## C) O oturumdaki bekleyenler (sonradan çoğu kapandı — güncel için 00-KARAR-TAKIP)
 1. PR #65 merge (belge temizliği). 2. 6 arşiv teyidi (`hayalet-backend`, `kapasite-analizi`, `katilim-modeli`, `mentor-karti-rakip-analizi`, `tema-durum`, `devir/`). 3. Karar-statü taraması (sonradan `00-karar-statu-haritasi-2026-08-14` + `00-DURUM-PANOSU` ile yapıldı). 4. Durum panosu. 5. Yol haritası v1/v2 önceliklendirme. 6. İnşa kuyruğu (B6 kalibrasyon · B8b cevap-tipi · havuz kartı · sektör/etiket havuzu · KVKK). 7. PO manuel: foto volume/Dokploy (canlı öncesi ŞART) · chat canlı test · repoları private.
@@ -95,13 +95,90 @@
 
 ---
 
+# 📅 OTURUM 2026-08-23 (belge reorg + tam tarama + niyet envanteri)
+
+**MOD:** 🟢 BYPASS (salt-docs; kod OKUNDU, değiştirilmedi). **Hiçbir PR merge edilmedi** (merge PO'da).
+
+**Merge edilenler (2026-08-23, PO onayıyla):** #106 (strateji↔gerçek denetimi) · #107 (Y1-Y7 + PO kararları) · #108 (oturum günlüğü birleştir + devir) · #109 (kapsamlı denetim + yol haritası 38-66) · #111 (belge hijyen, taşımasız).
+
+**🛑 AÇIK & MERGE-KİLİTLİ — #110 (analytics/GA4):** **MERGE ETME.** Çerez-izni bandı (madde 67) YOK → merge edilirse autodeploy ile **rıza-öncesi izleme = KVKK ihlali (canlıda)**. Yeni oturum bunu bilmezse yanlışlıkla merge edebilir → **#110, madde 67 (Consent Mode v2) canlıya girmeden ASLA merge edilmez.**
+
+**Bu oturumda yapılan (3 alt-tur, hepsi #112'ye):**
+- **Belge düzeni reorg:** `kararlar/` + `raporlar/` alt-klasörlere ayrıldı (git mv); 38 tam-yol referansı + 00-INDEX yeniden yazıldı; `belge-duzeni-rehberi` KURAL 2 alt-klasör + **KURAL 7 (taşıyıcı belge iş bölümü)** eklendi; kırık-link 0. **Canonical taşıyıcı 5 ad taşınmadı.**
+- **Tam-belge taraması (7 ajan, 42 belge):** → `00-KARAR-TAKIP` **Bölüm F**, 13 kayıp madde → yol haritası **madde 68-78** (`v1-H`). **3'ü 🔴 GÜVENLİK canlı-öncesi:** G1 `updateUser` PII/password sızıntısı (madde 38) · G2 `hardDeleteUser` FK→KVKK silme çalışmıyor (madde 39) · G3 `SuspicionReport` reporter PII maskesiz (madde 68). ⚠️ **Repolar PUBLIC → dışarıdan okunabilir.**
+- **Niyet envanteri (5 ajan):** → `00-KARAR-TAKIP` **C.2** + rapor `yarim-is-niyet-envanteri-2026-08-23.md`. "~14 FE'siz özellik" iddiası → **kod-teyidiyle 9 doğrulandı** (KVKK üçlüsü, mentor opt-in, kulüp, feedback-logs, tenant şikayet, sosyal profil…).
+- **Numaralandırma:** **#38 çakışması çözüldü** (madde 38=güvenlik canonical; DISC işi → numarasız "DISC-DERİNLEŞME kurgusu"). **madde 67 (çerez izni) ZATEN VARDI** — eklenmedi.
+- **Kırmızı kural düzeltmesi:** "güvenli seed" listesi silinen `seed-questions.ts`'i sayıyordu → gerçek güvenli liste (`seed-certification` + `seed-learning-journey` + `seed-test-tenant.mjs`; tehlikeli=`seed.ts`). CLAUDE.md + 4 belge tarihli notla düzeltildi.
+- **Etiket-çelişki (AJAN-E):** `durum-panosu-2026-08-14` 🔄 ama 11 gün donmuş → 📸 adayı (Bölüm E). Gerçek statü çelişkisi: **0** (taşıyıcılar senkron).
+
+**Altyapı uyarısı:** Bir önceki tur disk %98'e dayandı (`sed` geçici-dosyası patladı); repo OneDrive altında (`.git` senkron riski). Bu tur OneDrive alan boşalttı (%87). → Bölüm E: repoyu OneDrive dışına taşıma adayı (PO).
+
+---
+
+# 📅 OTURUM 2026-08-25 (KVKK güvenlik turu — ilk KOD turu)
+
+**MOD:** 🟢 BYPASS. İlk kez KOD değişti (önceki turlar salt-docs'tu). **Hiçbir PR merge edilmedi.**
+
+**Yapılan:**
+- **FAZ A — K0 güvenlik (backend PR #51, MERGE OLMADI):** madde 38 `updateUser`/temperament password+PII sızıntısı düzeltildi (`db.ts` PrismaClient **global omit** `{user:{password:true}}` + explicit select + regresyon testi) · madde 68 `SuspicionReport` reporter PII maskeleme (`maskName`/`maskContact` + test). backend branch `fix/kvkk-pii-guvenlik-38-68`; tsc/eslint temiz; DB testleri CI'da. **Çatı submodule pointer'ı DEĞİŞMEDİ** (backend merge olmadı → dans yok).
+- **FAZ B — teyitler (salt-okuma):** T7 opt-in eşleşmeyi bloklamıyor (K2, alan ölü→madde 86) · `maxMeetingsPerWeek` **enforce EDİLMİYOR** (madde 79) · 9b indirmesi doğru (görünür yalan yok).
+- **FAZ C — KVKK veri aktarım envanteri** (kod-kanıtlı, 2 ajan): `raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`. 8 hukukçu sorusu + [PO DOLDURACAK]. Yeni maddeler **79-87** (00-KARAR-TAKIP F.5).
+
+**⚠️ KALAN (bu tur YAPILMADI — bağlam sınırı, dürüstçe):** FAZ D KVKK belge paketi (8 belge — **envanter hazır, ayrı tur temiz üretir**) · FAZ E FE entegrasyonu (🛑 merge-kilitli PR). Avukat mevcut metinleri "yetersiz" bulmuştu → paket sıfırdan, envantere dayalı yazılacak.
+
+**⭐ Kritik açıklar (envanterden):** OAuth'ta açık rıza UI'da alınmıyor · KVKK+18 birleşik kutu · rıza sürümü tutulmuyor · aydınlatma eksik kategoriler · hak-kullanım kanalı operasyonel eksik (madde 84) · otomatik imha yok (madde 81) · madde 39 hardDelete FK patlıyor. **Repolar hâlâ PUBLIC → G1/G3 kodu okunabilir; PRIVATE öncelik.**
+
+---
+
+# 📅 OTURUM 2026-08-25b (KVKK belge paketi)
+
+**MOD:** 🟢 BYPASS (kod + belge). **Hiçbir PR merge edilmedi.**
+
+- **FAZ 0 — madde 80 (backend PR #51'e ek):** `getPlatformLogs` explicit select (meta çıkarıldı) + `listUserReports` fullName maskeleme + test. tsc/eslint temiz. Yeni bulgular: madde 88 (getPlatformStats recentLogs meta) · madde 89 (listPendingTenants admin PII).
+- **FAZ D — KVKK belge paketi (çatı #112):** `docs/kararlar/konu/kvkk-metinleri/` **9 TASLAK belge** (00-AVUKAT-KONTROL kapak + aydınlatma[iki sürüm]/açık-rıza/gizlilik/çerez/saklama-imha/başvuru/kullanım-koşulları/veri-işleyen-sözleşmesi). Envantere dayalı, jenerik değil.
+- **Avukat modeli (belgelerin temeli):** platform=veri işleyen · kurum=veri sorumlusu · üniversite kulüpleri→sorumlu üniversite (kulüp-tenant aktif edilmez, madde 91) · anonimleştirme yeterli · sunucu yurtdışı kalıyor.
+- **🔴 Sunucu ülke çelişkisi:** belge "eu-west-2/İrlanda" tutarsız (eu-west-2=Londra) → metinlerde ülke YAZILMADI, [PO DOLDURACAK] + kapak uyarısı (madde 92).
+- **8 hukukçu sorusu** (DISC Md.6? · VERBİS? · yurtdışı SS-3? vb.) kapak dosyasında; **[PO DOLDURACAK]** alanları listeli.
+
+**⚠️ KALAN:** FAZ E FE entegrasyonu (metinleri /kvkk /gizlilik /terms + yeni çerez/başvuru sayfalarına yerleştir, merge-kilitli PR). Hukukçu onayına kadar zaten merge olmayacağı için ayrı tura bırakıldı. **Ön koşul:** hukukçu onayı + [PO DOLDURACAK] (özellikle başvuru `destek@` + sunucu ülke).
+
+---
+
+# 📅 OTURUM 2026-08-25c (KVKK Word paketi + anonimleştirme teyidi)
+
+**MOD:** 🟢 BYPASS (kod + belge). **Hiçbir PR merge edilmedi.**
+
+- **FAZ 1 — Anonimleştirme teyidi (backend PR #51'e ek):** `anonymizeUser` kod teyidi → **kısmi (takma-adlaştırma).** Eksik User PII (sosyal linkler/avatar/enneagram/discResultCard) **eklendi + test**. **Kalan (madde 93):** mesaj içeriği · fiziksel foto dosyası · `Meeting` alanları · **userId (PK) değişmiyor** → çapraz-tablo yeniden-tanımlanma. `05-saklama-imha` + kapak, "tam geri-döndürülemez" vaadini **kaldırıp gerçeği beyan ediyor.**
+- **FAZ 2 — Profesyonel Word (çatı #112):** `konu/kvkk-metinleri/KVKK-BELGE-PAKETI-2026-08-25.docx` — kapak + "nasıl incelensin" + otomatik içindekiler + 9 belge (her biri yeni sayfa) + altbilgi sayfa-no + kenarlıklı tablolar + [HUKUKÇU]=sarı/[DOLDURACAK]=gri vurgu. **Doğrulandı:** Türkçe tam, kalan emoji 0, 4 tablo, 197KB. Üretici `scripts/kvkk-docx-gen.py` (python-docx); md=canonical, docx=türev (README).
+- **⭐ PO kararı:** **FE site-entegrasyonu İPTAL** — metinler siteye çıkarılmayacak, avukata Word ile gidilecek. Sayfalara gömme hukukçu onayı sonrasına. `/kvkk /gizlilik /terms` **dokunulmadı.**
+- Yeni bulgu iş maddesi: **madde 93** (tam anonimleştirme).
+
+**⚠️ Avukat sonrası:** revizyon → md'ye işle → `python scripts/kvkk-docx-gen.py` → yeni Word. Ön koşul: [PO DOLDURACAK] (başvuru `destek@` + sunucu ülke) + hukukçu onayı.
+
+---
+
+# 📅 OTURUM 2026-08-25d (migration'sız 5 iş — KVKK paketi beklerken)
+
+**MOD:** 🟢 BYPASS (kod). **Hiçbir PR merge edilmedi.** Backend PR #51'e 5 commit, **CI YEŞİL** (357 test).
+
+- **madde 88** — `getPlatformStats` recentLogs meta çıkarıldı (madde 80 deseni).
+- **madde 89** — `listPendingTenants` admin fullName+email maskelendi. **Karar:** maskele (onay/red akışı e-postayı tüketmiyor, bildirim maili adresi yeniden çeker; `maskEmail` domain'i korur → admin doğrulayabilir). Bulgu → **madde 94** (VIEW audit izi yok, düşük).
+- **madde 79** — haftalık görüşme limiti enforce edildi. **Semantik:** menti başına · **sabit 7-günlük UTC kova** · tanımsızsa limit yok · 409 · CANCELLED/COMPLETED hariç. ⚠️ İlk CI fail: ileri-only pencere önceki görüşmeyi kaçırıyordu → teşhis + kova'ya çevrildi.
+- **madde 69** — Zod validation `message` (`firstValidationMessage`). **FE değişikliği GEREKMEZ** (client.ts + questions/page.tsx zaten `message` okuyor).
+- **madde 70** — adaptive-test `progress` (`computeProgress`, migration yok). FE guard `DailyQuestionWidget.tsx:39` kaldırma = **ayrı çatı FE turu**.
+
+**Kalan:** (a) madde 70 FE guard kaldırma (küçük çatı PR) · (b) PR #51 merge (PO) · (c) 9a+9b migration turu (tek başına) · (d) KVKK avukat cevabı.
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
+0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).
 1. **9a + 9b (birlikte):** kalibrasyon düzeltme (motor kaydedilen ağırlığı OKUSUN) + ağırlık ayarlanabilirliği (tüm yöneticiler, %60/%40 varsayılan, değişiklik izi). Migration.
 2. **2a ghost red — 30 GÜN UYKU MODU:** veriler hemen silinmez; 30 gün kurum geri alırsa döner, almazsa tamamen silinir. Zamanlanmış iş (cron) + migration.
 3. **#7 Aşama 2:** otomatik pasifleştirme (dernek eşiği girer, varsayılan KAPALI) + feedback şema alanları. Migration.
 
-**Keşif bekleyenler (kod öncesi):** #36 kullanıcı çıkarma (önce git keşfi) · etiket havuzu (talep-onay; önce kod keşfi) · **İçerik & Soru Felsefesi Keşfi** (#38/#31/#13/#30 buna bağlı) · **belge yeniden yapılandırma** (~68 belge, PO memnun değil).
+**Keşif bekleyenler (kod öncesi):** #36 kullanıcı çıkarma (önce git keşfi) · etiket havuzu (talep-onay; önce kod keşfi) · **İçerik & Soru Felsefesi Keşfi** (DISC-DERİNLEŞME kurgusu/#31/#13/#30 buna bağlı) · **belge yeniden yapılandırma** (~68 belge — 2026-08-23 reorg ile kısmen yapıldı).
 
 **PO manuel (kod değil):** 37m kurum maili (destek@ + env) · Dokploy foto volume · repoları private · KVKK/çerez metinleri (canlı öncesi, en son).
 

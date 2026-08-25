@@ -15,6 +15,8 @@
 
 ## A. ⚡ TEK BAKIŞTA (şu an)
 
+> **Çıkış önceliği (hangi iş çıkıştan önce/sonra):** `00-CIKIS-PLANI.md` — açık işler K0-K5'e sınıflandı; gerçek çıkış-bloker sadece 5 K0 + 1 K1.
+
 | Kategori | Sayı | Tek cümle |
 |---|:---:|---|
 | 🔴/🟡/🔵 **v1 açık iş** | **6** | ⚡ #37 kurum "düzeltme iste" → **✅ CANLIDA** (backend #50 + çatı #104 merged, migration canlıda). Kalan: cevap-tipi(#13), kurum-maili(#6), 2a/2b/#7-B tasarım-hazır, içerik/seed/PO + **9a** ağırlık-ayar (migration bekliyor) + **37m** kurum-mail-açma (PO-manuel env) |
@@ -30,9 +32,19 @@
 > **⚡ GÜNCELLEME (2026-08-23) — strateji-denetimi + PO oturumu:** 6 strateji belgesi kodla karşılaştırıldı
 > (`strateji-gercek-denetimi-2026-08-20.md`, 85 madde: %66 tam var). **Ana bulgu:** admin tasarım-kartları baştan sona
 > uygulanmış; kalan kopukluk 3 eksende — mail/bildirim (37m, en yüksek kaldıraç), menti retention inceliği (bekleme/ret/kutlama),
-> yönetici kanıt katmanı (export/oran/trend). **Yeni açık iş:** Y1–Y7 + **#38 yeni DISC/karakter kurgusu** (bkz. **Bölüm B.4**).
+> yönetici kanıt katmanı (export/oran/trend). **Yeni açık iş:** Y1–Y7 + **DISC-DERİNLEŞME kurgusu** (numarasız — bkz. **Bölüm B.4**).
 > Bu turda birçok ❓ karara bağlandı (9b→düzeltilecek, K6→v2, K3→en son, sektör/etiket→talep-onay, 2a→30 gün uyku modu,
 > #13→ertelendi); satır-içi **⚠️ GÜNCELLEME (2026-08-23)** notlarına bakınız.
+
+> **⚡ GÜNCELLEME (2026-08-23) — belge-düzeni reorg (salt-docs, KOD YOK):** `docs/kararlar/` + `docs/raporlar/` alt-klasörlere
+> ayrıldı (git mv, içerik değişmedi); canonical taşıyıcılar kökte kaldı; 38 tam-yol referansı güncellendi; 00-INDEX yeniden
+> yazıldı; kırık-link 0; docs/ 68 dosya (kayıp yok). Bu turda **2 yeni 🟡 altyapı-hijyen maddesi** eklendi → **Bölüm E** (repo/altyapı hijyeni).
+
+> **⚡ GÜNCELLEME (2026-08-23) — tam-belge taraması (42 belge, 7 paralel salt-okuma ajanı):** Reorg turunda belgeler yüzeysel
+> tarandığından içlerindeki kararlar sistematik çıkarılmamıştı. Bu tur 42 içerik belgesi TAM okunup kod gerçeğiyle çapraz
+> kontrol edildi → **13 gerçek yeni kayıp madde** çıktı (3'ü 🔴 GÜVENLİK canlı-öncesi) → **Bölüm F**. Ayrıca ~25 "belge açık
+> diyor kod yapmış" bayat-not adayı + `icerik/` belgelerinin kökten bayat öncülü (`seed-questions.ts` yok) tespit edildi.
+> **MADDE 67 (çerez izni) VAR** (10-yol:146) — eklenmedi. Tam döküm: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
 
 ---
 
@@ -93,7 +105,7 @@
 
 ### B.4 — 🆕 2026-08-23 turu: strateji-denetimi + PO oturum kararları
 
-> **Kaynak 1:** `docs/raporlar/strateji-gercek-denetimi-2026-08-20.md` (6 strateji belgesi ↔ kod, 85 madde) Bölüm D.
+> **Kaynak 1:** `docs/raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` (6 strateji belgesi ↔ kod, 85 madde) Bölüm D.
 > **Kaynak 2:** bu oturumda ürün sahibinin sözlü verdiği kararlar (aşağıdaki yeni tasarım + erteleme/keşif kararları).
 > Yukarıdaki B.1/B.2 satırlarına işlenen PO kararları için ilgili satırdaki **⚠️ GÜNCELLEME (2026-08-23)** notlarına bakınız
 > (9a, 9b, K6, K3, sektör/etiket, #35/2a, #13, #31, 37m). Aşağıdakiler **yeni** kalemler.
@@ -114,10 +126,10 @@
 
 | No | İş | Durum | Tanım | Not |
 |---|---|:---:|---|---|
-| **#38** (PO "yeni kurgu / #33" dedi — ⚠️ mevcut #33=SJT ile KARIŞTIRMA) | Tek-seferlik DISC yerine **kademeli karakter derinleşmesi** | 🔵 ❓ tasarım | Önce bir **ANA KARAKTER** belirlensin; kişi sistemi kullandıkça (oyun gibi, soru cevapladıkça) karakter **DERİNLEŞSİN ve kesinleşsin**; sonra kişinin karakterine göre **karşı tarafa NASIL YAKLAŞACAĞI** anlatılsın. PO: *"kişiyi tespit ettik, karşındakini de tespit ettik, bildirdik — ama nasıl aksiyon alması gerektiğini de söylemek lazım."* | **#31 ile birleşik** düşünülecek. PO ayrıca **TÜM soruları görmek** istiyor, sonra beğendiklerini/beğenmediklerini ayıracak. Mevcut altyapı zaten adaptif (`adaptiveTestEngine`, DEEPENING) — kurgu buna oturabilir |
+| **DISC-DERİNLEŞME kurgusu** (numarasız · PO "yeni kurgu" dedi — ⚠️ eski "#38" etiketi madde-38 güvenlikle çakıştığı için ADA çevrildi; #33=SJT ile de KARIŞTIRMA) | Tek-seferlik DISC yerine **kademeli karakter derinleşmesi** | 🔵 ❓ tasarım | Önce bir **ANA KARAKTER** belirlensin; kişi sistemi kullandıkça (oyun gibi, soru cevapladıkça) karakter **DERİNLEŞSİN ve kesinleşsin**; sonra kişinin karakterine göre **karşı tarafa NASIL YAKLAŞACAĞI** anlatılsın. PO: *"kişiyi tespit ettik, karşındakini de tespit ettik, bildirdik — ama nasıl aksiyon alması gerektiğini de söylemek lazım."* | **#31 ile birleşik** düşünülecek. PO ayrıca **TÜM soruları görmek** istiyor, sonra beğendiklerini/beğenmediklerini ayıracak. Mevcut altyapı zaten adaptif (`adaptiveTestEngine`, DEEPENING) — kurgu buna oturabilir |
 
 **📁 Sonraki tur notları (bu oturumda PO tanımladı — uygulama YOK):**
-- **İÇERİK & SORU FELSEFESİ KEŞFİ:** tüm soruların (DISC / sertifika / SJT / öğrenme-yolculuğu / kurum-özel) **içeriği + hangi felsefeyle üretildikleri + nasıl puanlandıkları** çıkarılacak. **#38, #31, #13, #30 bu keşfe bağlı** — keşiften önce kodlanmayacak.
+- **İÇERİK & SORU FELSEFESİ KEŞFİ:** tüm soruların (DISC / sertifika / SJT / öğrenme-yolculuğu / kurum-özel) **içeriği + hangi felsefeyle üretildikleri + nasıl puanlandıkları** çıkarılacak. **DISC-DERİNLEŞME kurgusu, #31, #13, #30 bu keşfe bağlı** — keşiften önce kodlanmayacak.
 - **BELGE YENİDEN YAPILANDIRMA TURU (~68 belge):** PO mevcut belge düzeninden **memnun değil.** Kapsam: klasör ayrımı
   (strateji/ ↔ envanter/), isim düzeltmeleri (karışan çiftler), arşivleme, tüm belge setinin referans haritası + sadeleştirme
   (denetim raporu Bölüm E ile aynı; `admin-panelleri-tasarim` güçlü arşiv adayı). Ayrı büyük tur.
@@ -181,6 +193,31 @@
 | **U2** `matchingInterface.ts` (strategy pattern) | 0 import; yorum "USER akışı / planlı JOB_LISTING" | Gelecek iş-ilanı eşleştirmesi şablonu | **⏸️ bilinçli** gelecek-şablon. Dokunma |
 | **maxMeetingsPerWeek** | `schema.prisma:167` + admin CRUD `adminSettingsController.ts:62-113` + test `hardening.test.ts:293` | Menti haftalık maks. görüşme sınırı — **admin ayarlanabilir + test var (ÖLÜ DEĞİL)** | **❓ TEYİT GEREK:** ayar yazılıyor ama görüşme oluşturmada **enforce ediliyor mu** doğrulanmadı → ayrı bakılmalı |
 
+### C.2 — 2026-08-23 tam niyet envanteri (5 paralel ajan · kod-teyitli)
+> Yukarıdaki C kümesine EK — 5 ajanın çıkardığı, C'de olmayan yarım-iş/bağlanmamış-kod kalemleri, **niyetiyle**.
+> Niyet kaynağı çoğunda **2026-07-07 "sprint 8-11" mega-commit'i** (backend-first inşa) — o yüzden çok endpoint FE'siz kaldı.
+> Tam döküm + FE-çağrı kanıtları: `../raporlar/kod-denetimi/yarim-is-niyet-envanteri-2026-08-23.md`. Sayı: **BAĞLA ~11 · BEKLET ~15 · ❓ PO ~12**.
+
+| Kalem (dosya:satır) | Niyet (neden yazıldı) | Neye bağlanacak → biter | Öneri |
+|---|---|---|---|
+| **SJT psikometri akışı:** `POST /scoring/compute-profile` + `/rank-mentors` (`sjtScoringRoutes.ts:20,26`) + `SjtQuestion/SjtOption` tabloları (`schema.prisma:889,906`, 0 query) | SJT tabanlı profil+mentör sıralama alternatif yolu (cert paketleri, `1e11e73`) | SJT test akışı FE ekranı → canlı eşleşmeye alternatif | ❓ PO: SJT canlıya girecek mi (girmezse BEKLET) |
+| **`taxonomy.service.ts` + `IndustryNode`** (`sector-scorer.service.ts:2`'den çağrılıyor) | Taksonomi ağacı yakınlığı → isabetli sektör skoru | U1 sector-scorer canlıya bağlanınca → İŞ 7 | BEKLET (U1/İŞ 7'ye bağlı) |
+| **Kulüp modülü:** `/clubs` 7 uç (`clubRoutes.ts:20-44`) + `Club/ClubMembership` tabloları | Kulüp/topluluk özelliği (sprint 8-11 backend-first) | FE tümü + pilot kulüp kararı (`08-acik-sorular`) | ❓ PO KARARI (canlıya girecek mi, yarım-terk mi) |
+| **Feedback-logs modülü:** `/feedback-logs` + `/combination-scores` (`feedbackLogRoutes.ts`) | ML geri-bildirim döngüsü / kombinasyon skor analizi | ML analiz paneli veya iç araç | ❓ PO KARARI (ürün-yüzü mü iç araç mı) |
+| **Tenant-admin şikayet inceleme:** `GET/PATCH /admin/reports` (`reportController.ts`) | Kurum-içi şikayet döngüsünün admin tarafı (`7cfc8d5`); oluşturma canlı, inceleme yarım | Tenant-admin şikayet paneli → döngü kapanır | BAĞLA |
+| **Admin manuel eşleştirme aksiyonları:** `/users/:id/rematch` (`adminRoutes.ts:55`) + `/visibility-optin/:id/confirm` (double-opt-in, `:68`) | Admin yeniden-eşleştirme + görünürlük onayı | Admin eşleşmeler ekranı butonu | BAĞLA (mentor opt-in T7 ile birlikte) |
+| **Profil-güç zinciri:** `profile-completeness.service.ts:28` + `ProfileStrengthCard.tsx` (ikisi de bağlanmamış) | Profil tamamlanma % kartı | Endpoint + dashboard mount (uçtan uca) | BEKLET (profil-güç özelliği) |
+| **`TenantSwitcher.tsx`** (mount yok) + backend `/my-tenants` endpoint YOK | Çok-kurum kullanıcı için kurum değiştirme UI | Nav'a mount + backend membership endpoint | BEKLET (çok-kurum UI) |
+| **`MeetingScheduler.tsx`** (231 satır, mount yok) | Mentor müsaitlik+rezervasyon UI (canonical `mentor/availability` akışı ayrı) | — (canonical akış zaten var) | ❓ PO KARARI (canonical varken kopya = bilinçli terk mi) |
+| **`PATCH /users/me/social`** (`onboardingController.ts:461`) | Sosyal profil (linkedin/instagram) düzenleme | Profil düzenleme ekranı | ❓ PO / düşük-riskli BAĞLA (**niyet belgede yok**) |
+| **Mükerrer/eski uçlar:** `/api/system-logs` (platform `/logs` varken) · `/api/super-admin/*` (T6, `/platform/*` varken) · `POST/PATCH /tenants` (platform elle kurum) | Eski/paralel platform-admin API'leri | — | ❓ PO KARARI (konsolide mi) |
+| **Endpoint okuma-tarafı boşlukları:** `GET /requests` + `/:id` · `GET /meetings/:id/check-ins` · `/meetings/active` (poller) · `reminders/send` · `orientation-lock` · `questions/respond` (bulk) | Yazma-tarafı bağlı, okuma/liste/tetik tarafı FE'siz | İlgili panel/akış | BEKLET / ❓ PO (uca göre) |
+| **`iceBreaker.ts`** (0 import, "decommissioned") | LLM ice-breaker (kaldırılmış) | — | ❓ PO KARARI (bilinçli terk; silme PO'da) |
+
+> **⚠️ Not:** KVKK FE üçlüsü (export/anonymize/hard-delete) = **madde 40** (zaten takipte); mentör görünürlük opt-in FE = **Bölüm F T7**;
+> admin sayfaları client-side guard (`(admin)/layout.tsx:6` "Sprint 15" TODO) = **K6** (server-side guard, B.2) — hepsi mevcut, burada tekrar sayılmadı.
+> **"~14 FE'siz özellik" iddiası → kod-teyidiyle 9 doğrulandı** (AJAN-D); gerisi yanlış-pozitif (pair-signal FE-stub var, profile-completeness iki uçta bağsız, super-admin ikame).
+
 ---
 
 ## D. ✅ TAMAMLANANLAR (kısa referans — "bunu yaptım mı?")
@@ -196,7 +233,91 @@
 
 ---
 
-## E. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
+## E. 🟡 Repo / altyapı hijyeni (PO kararı bekleyen — kod dışı)
+
+> Kod dışı, repo/geliştirme-ortamı hijyeni. Kayıp gitmesin diye burada; çözümü ayrı tur + PO kararı.
+
+- **🟡 OneDrive senkron riski:** Repo `OneDrive/Masaüstü/Geliştirme` altında — OneDrive'ın `.git` dosyalarını senkronlaması
+  kilitleme/bozulma riski + disk doluluğu getiriyor (2026-08-23 turunda disk %98'e dayandı, bir önceki tur `sed` geçici-dosyası patlamıştı).
+  **Aday:** repoyu OneDrive dışına taşımak (ör. `C:\dev\`). **PO kararı.**
+- **🟡 Dağınık backend kopyaları + atıl worktree'ler:** `C:\Users\...\backend-mail`, `backend-testfix`, `backend-cfgfix` (~1 GB) +
+  3 atıl git worktree duruyor. Her birinde **commit edilmemiş iş var mı** kontrol edilip temizlenecek (**ayrı tur**, PO onayı).
+- **🟡 Etiket-gerçek çelişkisi — 3 yaşayan belge (KURAL 3/4 ihlali, AJAN-E 2026-08-23):** (a) `oz-denetim/durum-panosu-2026-08-14.md`
+  🔄 etiketli ama git'e göre **11 gün donmuş** + madde 38-78/#12/#37/#7'den habersiz + adı zaten tarihli → **📸'ye düşürülmeli** (en net vaka;
+  canonical statü zaten `00-KARAR-TAKIP`'e taşındı). (b) `konu/tasarim-kararlari-admin-2026-08-11.md` + (c) `konu/degerlendirme-metrik-...-2026-08-19.md`:
+  tarihli ad + 🔄 etiket (Kural-4 ad↔etiket tutarsızlığı) → yaşayan kalacaksa **ad tarihsizleştirilmeli**. **PO kararı** (ad değişimi
+  referans+INDEX günceller; bu tur TAŞINMADI, salt öneri). ✅ Gerçek statü çelişkisi taraması: **0** (taşıyıcılar senkron, kodla teyitli).
+
+---
+
+## F. 🔍 2026-08-23 tam-belge taramasından çıkan kayıp maddeler
+
+> 42 içerik belgesi (raporlar + kararlar/konu + oz-denetim) TAM okundu, kod gerçeğiyle çapraz kontrol edildi (7 paralel
+> salt-okuma ajanı). Zaten takip edilenler (madde 1-67, B.4, ölü kod C) elendi; **arada yapılmış** olanlar bayat-not adayı
+> olarak ayrıldı. Kalan **gerçek yeni kayıp maddeler** burada. Tam döküm + bayat liste: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
+
+### F.1 — 🔴 GÜVENLİK · CANLI ÖNCESİ (repolar PUBLIC → önce PRIVATE, sonra düzelt)
+> ⚠️ Bu üç açık, repo PUBLIC olduğu için dışarıdan okunabilir koddadır. **Öncelik: repoları PRIVATE yap + düzelt.**
+
+| Kod | İş | Kanıt (bu tur elle doğrulandı) | Migr | Not |
+|---|---|---|:---:|---|
+| G1 | `updateUser` (+2 kardeş uç) yanıtı `select`siz tüm User objesini döner → **password hash + PII sızıntısı** | `userController.ts:272→277` (ayrıca 355→381, 418→424) | Hayır | =10-yol madde 38 · **🔀 DÜZELTİLDİ backend PR #51 (MERGE OLMADI):** db.ts global omit + explicit select + test |
+| G2 | `hardDeleteUser` Meeting/Feedback FK non-null → **transaction rollback = KVKK kalıcı silme çalışmıyor** | `gdprService.ts:172-174` (kod-yorumu itiraf) + `schema.prisma` Meeting FK RESTRICT | Olası (SetNull) | =10-yol madde 39; **AÇIK** (migration+PO: sil mi anonimleştir mi — envanter C-5 kanıt) |
+| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | =10-yol madde 68 · **🔀 DÜZELTİLDİ backend PR #51 (MERGE OLMADI):** maskName/maskContact + explicit select + test |
+
+### F.5 — 🔍 2026-08-25 güvenlik+KVKK turundan yeni maddeler (numara burada doğar, 79'dan)
+> Kaynak: FAZ A/B/C (backend PR #51 + salt-okuma teyitler + `kvkk-veri-aktarim-envanteri-2026-08-25.md`). KURAL 8: numara YALNIZ burada.
+
+| No | İş | Tür | Kanıt | Öncelik |
+|:---:|---|---|---|---|
+| **79** | `maxMeetingsPerWeek` enforce EDİLMİYORDU → menti limitsiz görüşme açar | yapılmamış-iş (sessiz yanlış) | `meetingController.ts` | ✅ **DÜZELTİLDİ backend PR #51** (menti başına · sabit 7-günlük UTC kova · tanımsızsa limit yok · 409 · iptal/tamamlanan hariç; test) |
+| **80** | `getPlatformLogs` `select`siz + `listUserReports` fullName maskesiz | güvenlik/PII | `platformController.ts:175,411` | ✅ **DÜZELTİLDİ backend PR #51** (explicit select + maskName + test) |
+| **88** | `getPlatformStats` → `recentLogs` `select`siz → ham `meta` (PII) | güvenlik/PII | `platformController.ts:98` | ✅ **DÜZELTİLDİ backend PR #51** (explicit select, meta çıkarıldı; test) |
+| **89** | `listPendingTenants` admin `fullName`+`email` maskesiz | güvenlik/karar | `platformController.ts` | ✅ **DÜZELTİLDİ backend PR #51** — KARAR: maskele (onay akışı e-posta tüketmiyor, mail adresi yeniden çeker; `maskEmail` domain'i korur). Test |
+| **94** | `listPendingTenants` **VIEW audit izi yok** (`listUserReports`/`getAnomalies` aksine) → tutarlılık için eklenebilir | güvenlik/tutarlılık (düşük) | `platformController.ts` (AJAN-1 bulgusu, madde 89 turu) | 🔵 düşük (PII artık maskeli) |
+| **90** | **Veri İşleyen Sözleşmesi kayıt akışına entegrasyon** — Tenant yasal kimlik alanları (unvan/adres/VERBİS) | yapılmamış-iş (KVKK) | Belge 8; şema alanı yok → **migration** | 🟡 (hukukçu onayı sonrası) |
+| **91** | **Kulüp-tipi tenant AKTİF EDİLMEZ** — üniversite kulübünün veri sorumlusu üniversitedir, imza yetkisi yok (avukat) | karar/kısıt (KVKK) | Belge 8; kulüp modülü (madde 41) | 🔴 (canlı-öncesi kısıt) |
+| **92** | **Sunucu ülkesi teyidi** — belge "eu-west-2/İrlanda" çelişkili (eu-west-2=Londra/UK, eu-west-1=İrlanda); yasal metin ülke beyanı için PO sağlayıcı panelinden teyit | PO-manuel (KVKK) | envanter C-1; kapak dosyası 🔴 | 🔴 (yasal beyan riski) |
+| **93** | **Tam anonimleştirme** — `anonymizeUser` kısmi (takma-adlaştırma). **🔀 Kısmen düzeltildi (backend PR #51):** sosyal/avatar/enneagram/discResultCard eklendi. **KALAN:** mesaj içeriği · fiziksel foto dosyası (disk) · `Meeting.phoneNumber/notes` · kayıt-anahtarı (userId PK) bağı → çapraz-tablo yeniden-tanımlanma riski | yapılmamış-iş (KVKK, mimari) | `gdprService.ts:64-96`; saklama-imha metni gerçeğe göre düzeltildi | 🟡 (madde 39 ile akraba) |
+| **81** | KVKK **otomatik imha süreci** yok (yalnız SystemLog 90g); mesaj içeriği/FeedbackLog **süresiz**; hardDelete'te bile Message kalır | yapılmamış-iş (KVKK) | envanter C-5; `gdprService.ts:253` (yorum "3 yıl" uygulanmamış) | 🟡 (saklama politikası bağımlı) |
+| **82** | Rıza metni **sürümü tutulmuyor** (`consentVersion` yok, yalnız `kvkkConsentAt` zaman damgası) → ispat açığı | yapılmamış-iş (KVKK ispat) | envanter C-6; grep `consentVersion` sonuç yok | 🟡 |
+| **83** | **OAuth'ta açık rıza UI'da alınmıyor** (`oauthService.ts:112` implicit set; ekranda kutu yok) + KVKK/18+ **tek kutuda birleşik** + aydınlatma≠açık rıza ayrımı yok | yapılmamış-iş/[HUKUKÇU] | envanter C-6; `_RegisterContent.tsx:414` | 🟡 (hukukçu kararına bağlı) |
+| **84** | Başvuru/`destek@` e-postası config'te **tanımsız** + FE hak-kullanım ekranı yok → Md.11 hak kullanım kanalı operasyonel eksik | yapılmamış-iş (KVKK) | envanter C-8; `config.ts:31,70-74` · **madde 40 (KVKK FE) ile bağla** | 🟡 |
+| **85** | Aydınlatma metni **eksik kategoriler** (mesaj içeriği, sosyal linkler, OCEAN/SJT, lastLoginAt, phone sayılmıyor); OAuth aktarımı Md.5 listesinde yok | belge-kod çelişki (KVKK) | envanter C-7 (#3,#4) → KVKK paketi düzeltecek | 🟡 |
+| **86** | `mentorVisibilityEnabled` **ölü/bağlanmamış PLG alanı** (default true, setter yok, hiçbir eşleşme sorgusunda filtre değil) — yarım özellik mi bilinçli mi | ölü-kod/karar | FAZ B (T7); `schema.prisma:283`, `userController.ts:177` | 🔵❓ PO |
+| **87** | Onaylanan kalibrasyon önerisi (`saveAlgorithmWeights`) scoring'de **okunmuyor** → ölü yazma yolu (9b'nin latent izi) | ölü-kod (düşük) | FAZ B (9b); `scoring.ts:96` weights argümanı almaz | 🔵 düşük |
+
+> **VERBİS teyidi + veri sorumlusu kimliği** = PO manuel (kod dışı); envanter [PO DOLDURACAK] alanlarında. **madde 39 (G2)** = KVKK silme migration'ı, F.1'de açık.
+
+### F.2 — 🟡/🔵/❓ Yeni iş / karar / çelişki (takipte yoktu, kod-teyitli)
+> **Yol-haritası numaraları (2026-08-23 verildi):** T1=**69** · T2=**70** · T3=**71** · T4=**72** · T5=**73** · T6=**74** · T7=**75** · T8=**76** · T9=**77** · T10=**78** (10-yol `v1-H`). G1=madde 38, G2=madde 39 (mevcut), G3=68.
+
+| Kod | İş | Tür | Kanıt | Boy | Migr |
+|---|---|---|---|:---:|:---:|
+| T1 (madde 69) | Zod VALIDATION yanıtında `message` yok → generic "Hata" | ✅ **PR #51** | `questionController.ts` (`firstValidationMessage`; FE zaten `message` okuyor → FE değişikliği YOK) | S | Hayır |
+| T2 (madde 70) | adaptive-test backend `progress` döndürmüyor | ✅ **PR #51** | `adaptiveTestEngine.ts` (`computeProgress`, migration yok; FE guard `DailyQuestionWidget.tsx:39` = ayrı FE turu) | M | Hayır |
+| T3 | `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu | açık-soru/güvenlik | `platformController.ts:348-356` | S | Olası |
+| T4 | Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da kodlanmış; "tüm sorularda mı" kararı yok | verilmemiş-karar | `certification.service.ts:67` | S | Hayır |
+| T5 | `seed-certification.ts` runner'a bağlı değil → 20-senaryo bankasını canlıya **güvenli** taşıma yöntemi yok (**madde #30'u BLOKLAR**) | yapılmamış-iş | `package.json` (tek seed = `prisma/seed.ts`) | M | Evet |
+| T6 | `superAdminRoutes` mount edilmiş ama FE'de 0 kullanım → paralel/ölü platform-admin API'si | ölü-kod/karar | `server.ts:12,105` + FE "super-admin" → yok | S | Hayır |
+| T7 | Mentör **görünürlük opt-in** FE ekranı bağlı değil (backend `setVisibilityOptIn` var) | yapılmamış-iş | backend var; FE çağrısı → yok | M | Hayır |
+| T8 | Sıfırdan manuel eşleştirme: envanter "eksik" ↔ strateji "elle eşleştirme YASAK" → **çelişki, PO** | çelişki/karar | `stk-panel-envanteri:71,148` ↔ `stk-strateji:67` | M | Hayır |
+| T9 | Platform tek-kullanıcı profil drill-down endpoint'i yok (üye listesi var, kişiye inilmiyor) | yapılmamış-iş | `platform.ts` (üye var, `/users/:userId` yok) | M | Hayır |
+| T10 | Mentör emeği görünür kılma (takdir/rozet/"yılın mentörü") — persona-kaynaklı, hiç yok | yapılmamış-iş | `mentor-persona:83-86`; kodda rozet → yok | M | Olası |
+
+### F.3 — 📄 Bayat belge notu (ayrı hijyen turu)
+- `raporlar/icerik/` 6 belgesi + `disc-sorulari` **var olmayan `seed-questions.ts`'e dayanıyor** (silindi #45); gerçek kaynak `seed.ts`=32 soru → bu belgelere ⚠️ GÜNCELLEME notu gerek.
+- ~25 "belge açık diyor, kod yapmış" bayat-not adayı (kesif/panel/konu belgeleri) → tam liste tarama raporunda Bölüm 3. Kaynak belgelere ⚠️ notu düşülecek (silme yok).
+
+### F.4 — ❓ Sonraki turda kod-teyidi bekleyen (bu tur okunmadı)
+N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup) · DISC light WCAG · onay/red maili başvurana gidiyor mu · KARAR 6 davet→oto-onay tetiği · `maxMeetingsPerWeek` enforce · profile-completeness uçtan uca bağı. (uydurma yok — TEYİT GEREK)
+
+> **⚠️ Numara notu (✅ 2026-08-23 çözüldü):** F maddeleri numaralandı (G3+T1-T10 → **68-78**, `v1-H`). **#38 çakışması çözüldü:**
+> **madde 38 = güvenlik `updateUser`** (sayı dizisinde KALIR, canonical) · B.4'teki DISC işi artık numarasız **"DISC-DERİNLEŞME kurgusu"** adıyla anılır (sayı dizisinden çıkarıldı). Sonraki yeni iş: **79'dan** başla.
+
+---
+
+## G. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
 
 1. **Her oturum başında** bu belge OKUNUR; ajan ürün sahibine açık maddeleri (🔴/🟡/🔵/❓) proaktif hatırlatır.
    Ürün sahibi "arkada ne kaldı" diye sormak zorunda kalmamalı — ajan söyler. *(Kural: `CLAUDE.md` "Karar-Takip Disiplini".)*

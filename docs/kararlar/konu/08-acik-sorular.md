@@ -51,7 +51,7 @@
 - **Otomatik-nudge (KVKK/rıza):** Pasif üyelere OTOMATİK toplu re-engagement maili gönderilsin mi? Elle nudge yapıldı; otomatik = istenmeden mail (rıza/opt-out tasarımı gerekir) → bilinçli ERTELENDİ. Karar + tasarım ürün sahibinde. ❓
 - **Pasif/ölü eşiği:** pasif=30g, ölü-eşleşme=14g default kondu — bu eşikler doğru mu, tenant başına ayarlanabilir mi (query'de var, UI'de yok)? ❓
 - **(İdeal) Gerçek kullanıcılarla görüşme — ÜÇ TARAF:** yönetici + mentör + menti. Üçü için de gerçek görüşme, persona taslaklarını (üç sevdirme belgesi) doğrular. Şu an hepsi "eğitimli taslak". ⚪
-- Referanslar (3 persona seti): docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md · mentor-persona-ve-sevdirme-2026-08-02.md · menti-persona-ve-sevdirme-2026-08-02.md.
+- Referanslar (3 persona seti): docs/raporlar/persona/yonetici-persona-ve-metrikler-2026-08-02.md · mentor-persona-ve-sevdirme-2026-08-02.md · menti-persona-ve-sevdirme-2026-08-02.md.
 
 ## KARAR VERİLDİKÇE
 Bir soru karara bağlanınca: ilgili konu belgesine (01-07) taşı, buradan sil, 09-DURUM.md'yi güncelle.

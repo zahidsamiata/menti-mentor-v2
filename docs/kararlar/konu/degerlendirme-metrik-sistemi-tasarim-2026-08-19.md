@@ -13,7 +13,7 @@
 > dosya:satır kanıtlı) AYRI başlıklardır — karıştırılmamalı.
 >
 > **İlgili belgeler:** iş kuyruğu `10-yol-haritasi.md` (#7 follow-up + 2b/#36 kullanıcı çıkarma) · yönetici metrik
-> stratejisi `docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md` · feedback tasarımı
+> stratejisi `docs/raporlar/persona/yonetici-persona-ve-metrikler-2026-08-02.md` · feedback tasarımı
 > `05-ozellikler-ve-paneller.md` · güvenlik/KVKK `04-guvenlik-ve-kvkk.md` (KARAR 5 = DISC görünürlük). Kişi adı yok.
 
 ---

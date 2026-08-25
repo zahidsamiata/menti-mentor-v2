@@ -2,6 +2,8 @@
 
 **🔄 YAŞAYAN** (canonical: iş kuyruğu)
 
+> **Çıkış önceliği için bkz. `00-CIKIS-PLANI.md`** — bu belge tüm açık işleri **numara sırasıyla** tutar; çıkış-öncesi/sonrası sınıflandırması (K0-K5) çıkış planındadır.
+
 > Bu belge yalnızca **BUNDAN SONRA yapılacak açık işleri** öncelik sırasıyla tutar. Biten işler burada durmaz —
 > güncel durum `09-DURUM.md`'de; 2026-08-10 öncesi tam geçmiş `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`'de.
 >
@@ -83,9 +85,10 @@
     > ⚠️ GÜNCELLEME (2026-08-17): **AÇIK (yapılmadı) — brief "yapıldı" dedi, YANLIŞ.** Önceki turda koddan kanıtlandı: `Question` modelinde cevap-tipi alanı YOK (`schema.prisma`) → yeni alan = **migration** = canlı DB yazımı → 🛑 kırmızı kural. "Küçük FE" değil, **full-stack M** (schema + form + test rendering). Kapsam hâlâ belirsiz (hangi tipler/validation/skoring) → **PO netleştirmeli**, migration onaylı ayrı tur.
 
 ## v1-D · ★ 2026-08-15 KEŞİF TESPİTLERİ (yeni — PO önceliklendirir)
-> Kaynak: `docs/raporlar/degerlendirme-test-soru-envanteri-2026-08-15.md` + `icerik/` + `eksikler-derinlestirilmis-2026-08-15.md`.
+> Kaynak: `docs/raporlar/kod-denetimi/degerlendirme-test-soru-envanteri-2026-08-15.md` + `icerik/` + `eksikler-derinlestirilmis-2026-08-15.md`.
 29. **✅ İş 2 + İş 3 (P1+P2+P3) — TAMAMEN CANLIDA (#41-#43, #81-#85, 2026-08-16).** Onay/red izi + red gerekçesi + yönetici-adı + reddedilen kullanıcı akışı (enumeration-safe gerekçe görüntüleme + `reapply`). Kayıt: `10-yol-tamamlananlar.md` md.29.
 30. **⚠️ Sertifika bankası canlıda eksik (5 vs 20)** — kodda 20 senaryo (`seed-certification.ts`), canlıda yalnız 5 soru (salt-okuma sayımı). Zengin banka seed edilmemiş → `seedCertification()` kontrollü çalıştırma. **Canlı DB yazımı → PO onayı ZORUNLU** (tehlikeli tam `seed.ts` değil; bu fonksiyon idempotent/silmez ama canlıda çalışır).
+    > ⚠️ GÜNCELLEME (2026-08-23) — **BLOKE (T5):** `seed-certification.ts` **hiçbir runner/npm-script'e bağlı değil** (tek seed komutu = tehlikeli `prisma/seed.ts`). Dosya kod-kanıtlı GÜVENLİ (yalnız `upsert`) ama **güvenli çalıştırma yolu yok.** Önce idempotent, yalnız certification tablosuna yazan **güvenli runner** eklenmeli (ör. `npm run seed:certification`), SONRA PO onaylı DB turu. Detay: `00-KARAR-TAKIP.md` Bölüm F (T5).
 31. **DISC-tipine-özel "mentiye yaklaşım" içeriği YOK (en büyük içerik boşluğu)** — hiçbir testte mentinin DISC tipine göre uyarlanan yaklaşım içeriği yok. 3 seçenek (eksikler raporu): (1) statik yaklaşım kılavuzu (M, önerilen) · (2) SJT'yi menti-DISC koşullu genişletme (L, migration) · (3) sertifikaya tip-özel varyant (L, önerilmez). Kısmen v2 #20 (KARAR 9) ile ilişkili — PO netleştirir.
 32. **✅ Admin soru düzenleme UI (S) — TAMAMLANDI, CANLIDA (çatı #87, 2026-08-17).** Kuruma özel soruya Düzenle butonu + inline form (backend PATCH zaten hazırdı, tenant-scoped IDOR). Kayıt: `10-yol-tamamlananlar.md` md.32.
 33. **Çift DISC seed + SJT belge-kod çelişkisi (S)** · *KISMİ.* **✅ Biten (backend #45):** ölü/çelişen `prisma/seed-questions.ts` silindi, `seed.ts` (32) canonical. **🟡 KALAN (AÇIK, PO + canlı DB yazımı):** (a) seed↔canlı = canlıda 20 DISC, `seed.ts` 32 üretir → re-seed mi trim mi? (b) SJT belge-kod = kod 3, belge 4 diyordu → belge hizalandı; 4'e içerik genişletme PO kararı.
@@ -107,8 +110,8 @@
 > Kod PR açılmadı (analiz turu). Not: bazıları aşağıdaki v2/"❓ teyit" maddeleriyle örtüşür — çapraz-referans verildi.
 
 ## v1-F-A · 🔴 GÜVENLİK & KVKK (canlı-öncesi değerlendir)
-38. **🔴 `updateUser` yanıtı `password` hash + tüm PII sızdırıyor (YÜKSEK)** — `userController.ts:272-277` `.update` explicit `select` YOK → bcrypt hash + `discVector`/email/CV döner. Aynı dosyada `createUser`/`updateMyProfile` select kullanıyor; bu handler atlanmış. **Etki:** `PATCH /api/users/:id` (ADMIN) başka üyeyi güncellerken hash+PII yanıta düşer (CLAUDE.md "password ASLA dönmesin" ihlali). **Fix (düşük risk, hızlı):** explicit `select` + kalıcı olarak global `omit:{user:{password:true}}`. *(ana-agent koddan doğruladı.)*
-39. **🔴 `hardDeleteUser` FK-RESTRICT nedeniyle patlar → KVKK Md.7 silme çalışmıyor (YÜKSEK)** — `gdprService.ts:145-178` transaction yalnız 6 tabloyu siliyor; `Meeting`/`Feedback`/`Conversation`/`Message`/`UserReport`/`MentorshipAgreement` FK'leri RESTRICT → gerçek veride `tx.user.delete()` rollback. **Kodun kendi yorumu (171-174) bunu itiraf ediyor.** **Fix:** silme öncesi zinciri tamamla VEYA istatistik-korunacaklarda userId nullable + `onDelete:SetNull`. Sil vs anonimleştir = PO kararı, migration → PO onaylı. (v2 #16 tenant-hard-delete ile akraba, ayrı.)
+38. **🔴 `updateUser` yanıtı `password` hash + tüm PII sızdırıyor (YÜKSEK)** — `userController.ts:272-277` `.update` explicit `select` YOK → bcrypt hash + `discVector`/email/CV döner. Aynı dosyada `createUser`/`updateMyProfile` select kullanıyor; bu handler atlanmış. **Etki:** `PATCH /api/users/:id` (ADMIN) başka üyeyi güncellerken hash+PII yanıta düşer (CLAUDE.md "password ASLA dönmesin" ihlali). **Fix (düşük risk, hızlı):** explicit `select` + kalıcı olarak global `omit:{user:{password:true}}`. *(ana-agent koddan doğruladı.)* → kanıt+kod-teyidi: `00-KARAR-TAKIP.md` Bölüm F.1 (G1).
+39. **🔴 `hardDeleteUser` FK-RESTRICT nedeniyle patlar → KVKK Md.7 silme çalışmıyor (YÜKSEK)** — `gdprService.ts:145-178` transaction yalnız 6 tabloyu siliyor; `Meeting`/`Feedback`/`Conversation`/`Message`/`UserReport`/`MentorshipAgreement` FK'leri RESTRICT → gerçek veride `tx.user.delete()` rollback. **Kodun kendi yorumu (171-174) bunu itiraf ediyor.** **Fix:** silme öncesi zinciri tamamla VEYA istatistik-korunacaklarda userId nullable + `onDelete:SetNull`. Sil vs anonimleştir = PO kararı, migration → PO onaylı. (v2 #16 tenant-hard-delete ile akraba, ayrı.) → kanıt+kod-teyidi: `00-KARAR-TAKIP.md` Bölüm F.1 (G2).
 40. **KVKK FE üçlüsü yok** (dışa aktarma `GET /users/:id/export` [Md.20] · anonimleştirme · kalıcı silme) — backend hazır, FE'de 0 çağrı (doğrulandı). #39 çözülünce birlikte bağlanmalı. PO kararı.
 
 ## v1-F-B · 🟡 BACKEND VAR / FRONTEND YOK — bağlanmamış modüller (PO: özellik mi ölü mü?)
@@ -161,6 +164,20 @@
 63. **Semantik HTML kurgusu (frontend geneli)** — kısmen (landing `main`/`footer` var). Yapılacak: tüm public + dashboard sayfalarında landmark (`header/nav/main/footer`), başlık hiyerarşisi, liste/section semantiği gözden geçir.
 64. **WCAG denetimi — HEM dashboard HEM frontend** — analiz **#50** başlangıç bulgularını verdi (ReportUserButton modal, admin/questions label, DailyQuestionWidget radiogroup). Yapılacak: kapsamlı **WCAG 2.1 AA** denetimi (kontrast, klavye, ARIA, focus, form) + düzeltme; axe/Lighthouse ölçümü.
 65. **Tema (sistem rengine göre + sağ-üst toggle)** — ✅ **BÜYÜK ÖLÇÜDE MEVCUT** (kod-doğrulandı): `ThemeProvider` + `layout.tsx:24` FOUC-önleyen init script `prefers-color-scheme`'e göre light/dark + `ThemeToggle` (=md.5). Yapılacak: public/landing'de toggle'ın sağ-üstte olduğunu teyit + parlatma (yeni iş değil).
+
+## v1-H · 2026-08-23 tam-belge + niyet taramasından (madde 68-78)
+> Yalnız kuyruk satırı — kanıt/kod-teyidi/boy/migration **`00-KARAR-TAKIP.md` Bölüm F**'te (tekrar edilmez). Numara sabit (68'den).
+68. **🔴 `SuspicionReport` listesi reporter PII'sini maskesiz döner** (`platformController.ts:353`, select yok) · *AÇIK, güvenlik* · detay: Bölüm F.1 (G3).
+69. **🔀 Zod VALIDATION mesajı** — **backend PR #51 (MERGE OLMADI, canlı değil)** (`firstValidationMessage`; FE otomatik gösterir). Detay: KARAR-TAKIP F.2.
+70. **🔀 adaptive-test `progress`** — **backend PR #51 (MERGE OLMADI)** (migration yok; FE guard kaldırma ayrı FE turu). Detay: KARAR-TAKIP F.2.
+71. **🟡 `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu** · *AÇIK, güvenlik/izolasyon* · detay: Bölüm F.2 (T3).
+72. **🔵❓ Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da** — "tüm sorularda mı" kararı yok · detay: Bölüm F.2 (T4).
+73. **🟡 Güvenli sertifika seed runner ekle** (`seed-certification.ts` runner'a bağlı değil — **madde #30'u bloklar**) · *AÇIK* · detay: Bölüm F.2 (T5).
+74. **❓ Mükerrer/eski platform API konsolidasyonu** (`super-admin/*` + `system-logs` — `platform/*`/`platform/logs` ikamesi) · detay: Bölüm F.2 (T6).
+75. **🟡 Mentör görünürlük opt-in FE ekranı** (backend `setVisibilityOptIn` + test var, FE bağlı değil) · *AÇIK* · detay: Bölüm F.2 (T7).
+76. **❓ Sıfırdan manuel eşleştirme çelişkisi** (envanter "eksik" ↔ strateji "elle eşleştirme YASAK") — PO kararı · detay: Bölüm F.2 (T8).
+77. **🟡 Platform tek-kullanıcı profil drill-down endpoint'i yok** (üye listesi var, kişiye inilmiyor) · detay: Bölüm F.2 (T9).
+78. **🟡 Mentör emeği görünür kılma** (takdir/rozet/"yılın mentörü" — persona-kaynaklı, hiç yok) · detay: Bölüm F.2 (T10).
 
 ---
 

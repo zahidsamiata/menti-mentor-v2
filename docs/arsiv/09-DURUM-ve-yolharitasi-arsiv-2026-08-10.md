@@ -3,7 +3,7 @@
 
 > ⚠️ Bu dosya, `09-DURUM.md` ve `10-yol-haritasi.md`'nin 2026-08-10 belge-temizliği ÖNCESİ tam
 > hâlidir. Katman katman büyümüş, eskimiş/çözülmüş/çelişkili bloklar içerir — **GÜNCEL DEĞİLDİR**,
-> yalnızca tarihsel kayıt için tutulur. Neyin neden değiştiği: `docs/kararlar/belge-denetimi-2026-08-10.md`.
+> yalnızca tarihsel kayıt için tutulur. Neyin neden değiştiği: `docs/kararlar/oz-denetim/belge-denetimi-2026-08-10.md`.
 > **Güncel durum:** `docs/kararlar/09-DURUM.md` · **Güncel yol haritası:** `docs/kararlar/10-yol-haritasi.md`.
 
 ---
@@ -24,7 +24,7 @@
 >   `userRoutes` 3 rota (backend **#35** + çatı pointer **#50**). 0 frontend/0 test/0 iç çağrı; opt-in gate
 >   eşleşme akışından zaten kaldırılmıştı (`requestController.ts:17`). **`VisibilityOptIn` ŞEMA kolonu HÂLÂ
 >   DURUYOR** (DROP ayrı, PO-onaylı migration turu).
-> - **UNUTULMUŞ-NİYET ENVANTERİ:** `docs/kararlar/unutulmus-niyet-envanteri-2026-08-10.md` (**#54 MERGED**).
+> - **UNUTULMUŞ-NİYET ENVANTERİ:** `docs/kararlar/oz-denetim/unutulmus-niyet-envanteri-2026-08-10.md` (**#54 MERGED**).
 >   4 kaynaktan (belge/kod/yarım-özellik/strateji) kanıtlı; kritik K1–K7 (KVKK yasal + OAuth consent + güvenlik).
 > - **Pointer:** backend main HEAD **`afc2769`** = çatı main submodule pointer (doğrulandı, senkron).
 > - **Bu turda DB'ye/şemaya DOKUNULMADI.** Kalan: aşağıdaki ⏳ bekleyen (ürün sahibi manuel testleri).
@@ -77,7 +77,7 @@ Tam inşa bitti (backend + okundu-bazlı e-posta + frontend inbox/thread + çan/
 - **Kapsam:** menti zorunlu ilk mesajla açar (hemen açık) · katılımcı-bazlı yetki (yabancı 404, admin aynı-tenant okur) · okundu-bazlı mail (okunmamış yokken ilk mesajda) · polling (gerçek zamanlı yok).
 - **İKİ REPO CI YEŞİL** ✅ (backend #33 `ci` pass; çatı #40 Backend-TS+Lint ✅ + Frontend-TS+Build ✅ + Integration Tests ✅). Entegrasyon testleri CI'da postgres'e karşı geçti.
 - **Bir hata bulundu+giderildi:** çatı frontend job'ı vitest de koşuyor; `MessagesBell` nav'a eklenince `ux-fixes.test.tsx` (api'yi `() => ({})` mock'luyor) patladı → child'ı null'a mock'layarak düzeltildi (38 test geçti). Ders: yerel doğrulamaya **frontend vitest** de eklenmeli (sadece build+tsc yetmez).
-- **Detay + bilinen sınırlar:** `docs/kararlar/chat-v1-teslim.md` (ürün sahibi buradan inceler).
+- **Detay + bilinen sınırlar:** `docs/kararlar/konu/chat-v1-teslim.md` (ürün sahibi buradan inceler).
 - **Bilinen sınırlar (PO kararı):** eski `MatchRequest.requestMessage` backfill YOK (kapsam) · `VisibilityOptIn.requestMessage` ölü alan **KOD tarafı temizlendi**, şema kolonu DROP'u ertelendi (bkz. aşağı) · `Meeting.requestMessage` ayrı akış, dokunulmadı.
 - **🧹 `VisibilityOptIn.requestMessage` ölü kod temizliği — KOD YAPILDI, ŞEMA ERTELENDİ (PR açık, MERGE YOK):** Frontend hiç kullanmıyordu (chat v1 bu niyet-mesajı akışının yerini aldı; grep: 0 referans). Kod tarafı ölü referanslar kaldırıldı (`mentiRequestController.ts` — validation alanı + upsert create/update yazımları + pending-list select). **PR:** backend `menti-mentor#34` (branch `chore/remove-visibilityoptin-deadcode`, base main). tsc+eslint temiz, backend CI ✅. **⚠️ ÖLÜ ŞEMA — SONRA SİLİNECEK:** `prisma/schema.prisma` `VisibilityOptIn.requestMessage` **kolonu duruyor** (DROP = migration → "DB şeması değişmez" kuralı gereği bu turda YAPILMADI). Kolon artık hiçbir kod tarafından yazılmıyor/okunmuyor — **gelecekte DB'ye dokunan bir işle birlikte, PO-onaylı bir DROP migration'ıyla temizlenecek**.
 - **Sonraki:** PO PR'ları (#33/#40/backend#34) inceleyip revize/merge kararı verecek. MERGE YAPILMADI.
@@ -196,7 +196,7 @@ Belge nötrleme YAPILDI (PR hazır: çatı `menti-mentor-v2#42`, branch `chore/d
 - `/admin/kpi`'ye `ProgramHealthSection`: özet sayıya tıkla → o gruptaki kişiler. Pasif üye + ölü eşleşme satırlarında "Hatırlat" (nudge) butonu (durum + 429 gösterimi), "+N daha" truncation.
 
 **5. Katılım modeli — SADECE KEŞİF/NOT (çatı `e5c738a`, kod yazılmadı):**
-- Not: docs/raporlar/katilim-modeli-mevcut-durum-notu-2026-08-02.md. Mevcut: ✅ ön-tanımlı davet mesajı (InvitationTemplate) + ✅ imzalı-token davet linki + ✅ admin elle üye ekleme. ❌ "Hayalet mod" (kişi katılmadan pasif hesap + sonra aktive) YOK, ❌ toplu davet YOK → ayrı tur.
+- Not: docs/raporlar/kesif/katilim-modeli-mevcut-durum-notu-2026-08-02.md. Mevcut: ✅ ön-tanımlı davet mesajı (InvitationTemplate) + ✅ imzalı-token davet linki + ✅ admin elle üye ekleme. ❌ "Hayalet mod" (kişi katılmadan pasif hesap + sonra aktive) YOK, ❌ toplu davet YOK → ayrı tur.
 
 ## ✅ SON YAPILANLAR (2026-08-02 — GEÇ OTURUM: güvenlik + foto + kararlar)
 > Hepsi commit'li, **HİÇBİRİ merge edilmedi** (branch'ler: çatı `feat/light-theme`, backend `feat/platform-panel-deep`).
@@ -472,9 +472,9 @@ Mentör paneli yarım özelliklerinin ikisi de inşa edildi ve **canlıya alınd
    - ✅ **DURUM (2026-08-02): STK-yönetici dilimi BÜYÜK ÖLÇÜDE YAPILDI** — `lastLoginAt` temeli (`1895ca5`) + kaynayan-üye metrikleri (`e0edb4f`) + elle nudge (`465ae47`) + KPI drill-down (`b39b8bd`). Bkz. 09-DURUM retention bloğu.
    - 🟡 **KALAN (davranışsal + genişletme):** otomatik-nudge (KVKK/rıza — bkz. 08); mentör/menti "sevdirme" deneyimi (persona belgeleri); onboarding "aha"; görüşme sayıları/onboarding-% metrikleri; menti/mentör tarafı retention panelleri (şimdiki panel yönetici içindi).
    - **Referanslar — 3 persona belgesi (bu turun temeli):** menti/mentör/yönetici sevdirme belgeleri retention turunun temelidir; keşif + metrik + panel bunlardan türer:
-     - docs/raporlar/menti-persona-ve-sevdirme-2026-08-02.md (talep tarafı — tutmak zor, kırılgan; bekleme anı riski)
-     - docs/raporlar/mentor-persona-ve-sevdirme-2026-08-02.md (arz tarafı — en kıt kaynak; mentörü tutmak mentiden önce gelir)
-     - docs/raporlar/yonetici-persona-ve-metrikler-2026-08-02.md (3 yönetici personası + 3 temel soru + metrik taslağı)
+     - docs/raporlar/persona/menti-persona-ve-sevdirme-2026-08-02.md (talep tarafı — tutmak zor, kırılgan; bekleme anı riski)
+     - docs/raporlar/persona/mentor-persona-ve-sevdirme-2026-08-02.md (arz tarafı — en kıt kaynak; mentörü tutmak mentiden önce gelir)
+     - docs/raporlar/persona/yonetici-persona-ve-metrikler-2026-08-02.md (3 yönetici personası + 3 temel soru + metrik taslağı)
 5. **PLATFORM ADMIN — ✅ TAMAM (strateji+kıyas+aksiyon).** Aksiyon turu bitti: KVKK audit izi + UserReport şikayet + basit otomatik tespit + sistem sağlığı paneli (bkz. 09-DURUM). 4-rol metodolojisinde sırada **mentör → menti** var.
    - 🟡 **Küçük yol notları (canlı-sonrası, acil değil):**
      - (a) `reviewedBy='platform-admin'` **sabit metin** — tek platform admin olduğu için şimdilik yeterli; çoklu platform admin gelirse gerçek kimlik yazılmalı.
