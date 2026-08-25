@@ -25,7 +25,7 @@
   submodule pointer senkron, iki repo main CI yeşil → v1 #1 tamamlandı.
 - **Önceki: 2026-08-14** — oturum kapanışı: bu oturumun 5 belge PR'ı [#65 belge temizliği · #66 devir ·
   #67 karar-statü haritası · #68 durum panosu · #69 v1/v2 yol haritası] MERGED → açık PR: 0, masa temiz;
-  IDOR çelişkisi kod keşfiyle çözüldü — kapanış özeti: `docs/devir/07-oturum-2026-08-14.md`.
+  IDOR çelişkisi kod keşfiyle çözüldü — kapanış özeti: `docs/devir/07-oturum-gunlugu.md` (2026-08-14 bölümü; eski ayrı dosya 07-oturum-2026-08-14 buraya birleşti).
 - **Önceki: 2026-08-11** — oturum belgeleri merge oldu → "açık PR" bloğu gerçek merge durumuna çekildi.
 
 ---
@@ -64,7 +64,7 @@
 - ⚠️ GÜNCELLEME (2026-08-15, v1 merge turu): 4 kod PR sırayla MERGED, canlıda (#38→#73→#39→#74). Açık PR yalnız bu docs (#72).
   #74'te submodule pointer çakışması backend main HEAD'e bump ile çözüldü.
 - ⚠️ GÜNCELLEME (2026-08-15, devir turu): #72 de MERGED (çatı `cafd68c`) → açık PR gerçekte çatı 0 · backend 0.
-  Oturum kapanışı: `docs/devir/08-oturum-2026-08-15.md`.
+  Oturum kapanışı: `docs/arsiv/08-oturum-2026-08-15.md` (eski devir/08 arsiv/'e taşındı).
 - ⚠️ GÜNCELLEME (2026-08-15, 5-PR merge turu): 5 PR daha açılıp merge edildi (#76 menü · #40+#77 rozet · #78 envanter · #79 içerik).
   Merge sonrası açık PR yeniden çatı 0 · backend 0, masa temiz.
 - ⚠️ GÜNCELLEME (2026-08-16, İş 2+3 turu): #80 (docs) + #41+#81 (İş 2+P1 backend) + #82 (İş 2/3 FE) MERGED, canlıda.
