@@ -191,6 +191,31 @@
 | **U2** `matchingInterface.ts` (strategy pattern) | 0 import; yorum "USER akışı / planlı JOB_LISTING" | Gelecek iş-ilanı eşleştirmesi şablonu | **⏸️ bilinçli** gelecek-şablon. Dokunma |
 | **maxMeetingsPerWeek** | `schema.prisma:167` + admin CRUD `adminSettingsController.ts:62-113` + test `hardening.test.ts:293` | Menti haftalık maks. görüşme sınırı — **admin ayarlanabilir + test var (ÖLÜ DEĞİL)** | **❓ TEYİT GEREK:** ayar yazılıyor ama görüşme oluşturmada **enforce ediliyor mu** doğrulanmadı → ayrı bakılmalı |
 
+### C.2 — 2026-08-23 tam niyet envanteri (5 paralel ajan · kod-teyitli)
+> Yukarıdaki C kümesine EK — 5 ajanın çıkardığı, C'de olmayan yarım-iş/bağlanmamış-kod kalemleri, **niyetiyle**.
+> Niyet kaynağı çoğunda **2026-07-07 "sprint 8-11" mega-commit'i** (backend-first inşa) — o yüzden çok endpoint FE'siz kaldı.
+> Tam döküm + FE-çağrı kanıtları: `../raporlar/kod-denetimi/yarim-is-niyet-envanteri-2026-08-23.md`. Sayı: **BAĞLA ~11 · BEKLET ~15 · ❓ PO ~12**.
+
+| Kalem (dosya:satır) | Niyet (neden yazıldı) | Neye bağlanacak → biter | Öneri |
+|---|---|---|---|
+| **SJT psikometri akışı:** `POST /scoring/compute-profile` + `/rank-mentors` (`sjtScoringRoutes.ts:20,26`) + `SjtQuestion/SjtOption` tabloları (`schema.prisma:889,906`, 0 query) | SJT tabanlı profil+mentör sıralama alternatif yolu (cert paketleri, `1e11e73`) | SJT test akışı FE ekranı → canlı eşleşmeye alternatif | ❓ PO: SJT canlıya girecek mi (girmezse BEKLET) |
+| **`taxonomy.service.ts` + `IndustryNode`** (`sector-scorer.service.ts:2`'den çağrılıyor) | Taksonomi ağacı yakınlığı → isabetli sektör skoru | U1 sector-scorer canlıya bağlanınca → İŞ 7 | BEKLET (U1/İŞ 7'ye bağlı) |
+| **Kulüp modülü:** `/clubs` 7 uç (`clubRoutes.ts:20-44`) + `Club/ClubMembership` tabloları | Kulüp/topluluk özelliği (sprint 8-11 backend-first) | FE tümü + pilot kulüp kararı (`08-acik-sorular`) | ❓ PO KARARI (canlıya girecek mi, yarım-terk mi) |
+| **Feedback-logs modülü:** `/feedback-logs` + `/combination-scores` (`feedbackLogRoutes.ts`) | ML geri-bildirim döngüsü / kombinasyon skor analizi | ML analiz paneli veya iç araç | ❓ PO KARARI (ürün-yüzü mü iç araç mı) |
+| **Tenant-admin şikayet inceleme:** `GET/PATCH /admin/reports` (`reportController.ts`) | Kurum-içi şikayet döngüsünün admin tarafı (`7cfc8d5`); oluşturma canlı, inceleme yarım | Tenant-admin şikayet paneli → döngü kapanır | BAĞLA |
+| **Admin manuel eşleştirme aksiyonları:** `/users/:id/rematch` (`adminRoutes.ts:55`) + `/visibility-optin/:id/confirm` (double-opt-in, `:68`) | Admin yeniden-eşleştirme + görünürlük onayı | Admin eşleşmeler ekranı butonu | BAĞLA (mentor opt-in T7 ile birlikte) |
+| **Profil-güç zinciri:** `profile-completeness.service.ts:28` + `ProfileStrengthCard.tsx` (ikisi de bağlanmamış) | Profil tamamlanma % kartı | Endpoint + dashboard mount (uçtan uca) | BEKLET (profil-güç özelliği) |
+| **`TenantSwitcher.tsx`** (mount yok) + backend `/my-tenants` endpoint YOK | Çok-kurum kullanıcı için kurum değiştirme UI | Nav'a mount + backend membership endpoint | BEKLET (çok-kurum UI) |
+| **`MeetingScheduler.tsx`** (231 satır, mount yok) | Mentor müsaitlik+rezervasyon UI (canonical `mentor/availability` akışı ayrı) | — (canonical akış zaten var) | ❓ PO KARARI (canonical varken kopya = bilinçli terk mi) |
+| **`PATCH /users/me/social`** (`onboardingController.ts:461`) | Sosyal profil (linkedin/instagram) düzenleme | Profil düzenleme ekranı | ❓ PO / düşük-riskli BAĞLA (**niyet belgede yok**) |
+| **Mükerrer/eski uçlar:** `/api/system-logs` (platform `/logs` varken) · `/api/super-admin/*` (T6, `/platform/*` varken) · `POST/PATCH /tenants` (platform elle kurum) | Eski/paralel platform-admin API'leri | — | ❓ PO KARARI (konsolide mi) |
+| **Endpoint okuma-tarafı boşlukları:** `GET /requests` + `/:id` · `GET /meetings/:id/check-ins` · `/meetings/active` (poller) · `reminders/send` · `orientation-lock` · `questions/respond` (bulk) | Yazma-tarafı bağlı, okuma/liste/tetik tarafı FE'siz | İlgili panel/akış | BEKLET / ❓ PO (uca göre) |
+| **`iceBreaker.ts`** (0 import, "decommissioned") | LLM ice-breaker (kaldırılmış) | — | ❓ PO KARARI (bilinçli terk; silme PO'da) |
+
+> **⚠️ Not:** KVKK FE üçlüsü (export/anonymize/hard-delete) = **madde 40** (zaten takipte); mentör görünürlük opt-in FE = **Bölüm F T7**;
+> admin sayfaları client-side guard (`(admin)/layout.tsx:6` "Sprint 15" TODO) = **K6** (server-side guard, B.2) — hepsi mevcut, burada tekrar sayılmadı.
+> **"~14 FE'siz özellik" iddiası → kod-teyidiyle 9 doğrulandı** (AJAN-D); gerisi yanlış-pozitif (pair-signal FE-stub var, profile-completeness iki uçta bağsız, super-admin ikame).
+
 ---
 
 ## D. ✅ TAMAMLANANLAR (kısa referans — "bunu yaptım mı?")
