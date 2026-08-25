@@ -115,6 +115,7 @@ docs/
 ### `raporlar/kod-denetimi/` — kod/ürün ↔ gerçek denetimi
 | Belge | İçerik |
 |---|---|
+| `tam-belge-taramasi-2026-08-23.md` | 42 içerik belgesi tam okuma + kod çapraz-kontrol (7 paralel ajan); 13 yeni kayıp madde + 3 güvenlik → 00-KARAR-TAKIP Bölüm F |
 | `proje-analizi-kapsamli-denetim-2026-08-22.md` | Kapsamlı proje denetimi (madde 38-66 kaynağı) |
 | `strateji-gercek-denetimi-2026-08-20.md` | 6 strateji belgesi ↔ kod, 85 madde |
 | `tam-envanter-gercek-durum-2026-08-19.md` | Tam envanter — belge niyeti ↔ kod gerçeği |

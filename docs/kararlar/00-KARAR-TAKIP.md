@@ -38,6 +38,12 @@
 > ayrıldı (git mv, içerik değişmedi); canonical taşıyıcılar kökte kaldı; 38 tam-yol referansı güncellendi; 00-INDEX yeniden
 > yazıldı; kırık-link 0; docs/ 68 dosya (kayıp yok). Bu turda **2 yeni 🟡 altyapı-hijyen maddesi** eklendi → **Bölüm E** (repo/altyapı hijyeni).
 
+> **⚡ GÜNCELLEME (2026-08-23) — tam-belge taraması (42 belge, 7 paralel salt-okuma ajanı):** Reorg turunda belgeler yüzeysel
+> tarandığından içlerindeki kararlar sistematik çıkarılmamıştı. Bu tur 42 içerik belgesi TAM okunup kod gerçeğiyle çapraz
+> kontrol edildi → **13 gerçek yeni kayıp madde** çıktı (3'ü 🔴 GÜVENLİK canlı-öncesi) → **Bölüm F**. Ayrıca ~25 "belge açık
+> diyor kod yapmış" bayat-not adayı + `icerik/` belgelerinin kökten bayat öncülü (`seed-questions.ts` yok) tespit edildi.
+> **MADDE 67 (çerez izni) VAR** (10-yol:146) — eklenmedi. Tam döküm: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
+
 ---
 
 ## B. 🔴 AÇIK İŞLER TABLOSU
@@ -209,6 +215,46 @@
   **Aday:** repoyu OneDrive dışına taşımak (ör. `C:\dev\`). **PO kararı.**
 - **🟡 Dağınık backend kopyaları + atıl worktree'ler:** `C:\Users\...\backend-mail`, `backend-testfix`, `backend-cfgfix` (~1 GB) +
   3 atıl git worktree duruyor. Her birinde **commit edilmemiş iş var mı** kontrol edilip temizlenecek (**ayrı tur**, PO onayı).
+
+---
+
+## F. 🔍 2026-08-23 tam-belge taramasından çıkan kayıp maddeler
+
+> 42 içerik belgesi (raporlar + kararlar/konu + oz-denetim) TAM okundu, kod gerçeğiyle çapraz kontrol edildi (7 paralel
+> salt-okuma ajanı). Zaten takip edilenler (madde 1-67, B.4, ölü kod C) elendi; **arada yapılmış** olanlar bayat-not adayı
+> olarak ayrıldı. Kalan **gerçek yeni kayıp maddeler** burada. Tam döküm + bayat liste: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
+
+### F.1 — 🔴 GÜVENLİK · CANLI ÖNCESİ (repolar PUBLIC → önce PRIVATE, sonra düzelt)
+> ⚠️ Bu üç açık, repo PUBLIC olduğu için dışarıdan okunabilir koddadır. **Öncelik: repoları PRIVATE yap + düzelt.**
+
+| Kod | İş | Kanıt (bu tur elle doğrulandı) | Migr | Not |
+|---|---|---|:---:|---|
+| G1 | `updateUser` (+2 kardeş uç) yanıtı `select`siz tüm User objesini döner → **password hash + PII sızıntısı** | `userController.ts:272→277` (ayrıca 355→381, 418→424) | Hayır | =10-yol madde 38, KARAR-TAKIP'te yoktu; explicit `select`/global `omit` |
+| G2 | `hardDeleteUser` Meeting/Feedback FK non-null → **transaction rollback = KVKK kalıcı silme çalışmıyor** | `gdprService.ts:172-174` (kod-yorumu itiraf) + `schema.prisma` Meeting FK RESTRICT | Olası (SetNull) | =10-yol madde 39; PO kararı |
+| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | YENİ; `maskEmail` deseni burada yok |
+
+### F.2 — 🟡/🔵/❓ Yeni iş / karar / çelişki (takipte yoktu, kod-teyitli)
+| Kod | İş | Tür | Kanıt | Boy | Migr |
+|---|---|---|---|:---:|:---:|
+| T1 | Zod VALIDATION yanıtında `message` yok → kullanıcı hep generic "Hata" görür | yapılmamış-iş | `questionController.ts:83,138,250,297` + `questions/page.tsx:52` | S | Hayır |
+| T2 | adaptive-test backend `progress` döndürmüyor (FE guard'la kapatılmış) — kalıcı kontrat | yapılmamış-iş | `adaptiveTestEngine.ts` (grep progress → yok) | M | Hayır |
+| T3 | `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu | açık-soru/güvenlik | `platformController.ts:348-356` | S | Olası |
+| T4 | Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da kodlanmış; "tüm sorularda mı" kararı yok | verilmemiş-karar | `certification.service.ts:67` | S | Hayır |
+| T5 | `seed-certification.ts` runner'a bağlı değil → 20-senaryo bankasını canlıya **güvenli** taşıma yöntemi yok | yapılmamış-iş | `package.json` (tek seed = `prisma/seed.ts`) | M | Evet |
+| T6 | `superAdminRoutes` mount edilmiş ama FE'de 0 kullanım → paralel/ölü platform-admin API'si | ölü-kod/karar | `server.ts:12,105` + FE "super-admin" → yok | S | Hayır |
+| T7 | Mentör **görünürlük opt-in** FE ekranı bağlı değil (backend `setVisibilityOptIn` var) | yapılmamış-iş | backend var; FE çağrısı → yok | M | Hayır |
+| T8 | Sıfırdan manuel eşleştirme: envanter "eksik" ↔ strateji "elle eşleştirme YASAK" → **çelişki, PO** | çelişki/karar | `stk-panel-envanteri:71,148` ↔ `stk-strateji:67` | M | Hayır |
+| T9 | Platform tek-kullanıcı profil drill-down endpoint'i yok (üye listesi var, kişiye inilmiyor) | yapılmamış-iş | `platform.ts` (üye var, `/users/:userId` yok) | M | Hayır |
+| T10 | Mentör emeği görünür kılma (takdir/rozet/"yılın mentörü") — persona-kaynaklı, hiç yok | yapılmamış-iş | `mentor-persona:83-86`; kodda rozet → yok | M | Olası |
+
+### F.3 — 📄 Bayat belge notu (ayrı hijyen turu)
+- `raporlar/icerik/` 6 belgesi + `disc-sorulari` **var olmayan `seed-questions.ts`'e dayanıyor** (silindi #45); gerçek kaynak `seed.ts`=32 soru → bu belgelere ⚠️ GÜNCELLEME notu gerek.
+- ~25 "belge açık diyor, kod yapmış" bayat-not adayı (kesif/panel/konu belgeleri) → tam liste tarama raporunda Bölüm 3. Kaynak belgelere ⚠️ notu düşülecek (silme yok).
+
+### F.4 — ❓ Sonraki turda kod-teyidi bekleyen (bu tur okunmadı)
+N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup) · DISC light WCAG · onay/red maili başvurana gidiyor mu · KARAR 6 davet→oto-onay tetiği · `maxMeetingsPerWeek` enforce · profile-completeness uçtan uca bağı. (uydurma yok — TEYİT GEREK)
+
+> **⚠️ Numara notu:** Yeni yol-haritası numarası verirken **68'den başla**. #38 çakışması var (10-yol madde 38=güvenlik `updateUser` · B.4 #38=DISC-kurgu).
 
 ---
 
