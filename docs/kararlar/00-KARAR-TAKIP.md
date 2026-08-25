@@ -36,14 +36,7 @@
 
 > **⚡ GÜNCELLEME (2026-08-23) — belge-düzeni reorg (salt-docs, KOD YOK):** `docs/kararlar/` + `docs/raporlar/` alt-klasörlere
 > ayrıldı (git mv, içerik değişmedi); canonical taşıyıcılar kökte kaldı; 38 tam-yol referansı güncellendi; 00-INDEX yeniden
-> yazıldı; kırık-link 0; docs/ 68 dosya (kayıp yok). Bu turda **2 yeni 🟡 altyapı-hijyen maddesi** eklendi (Bölüm E — repo/altyapı).
->
-> ### E. 🟡 Repo / altyapı hijyeni (PO kararı bekleyen — kod dışı)
-> - **🟡 OneDrive senkron riski:** Repo `OneDrive/Masaüstü/Geliştirme` altında — OneDrive'ın `.git` dosyalarını senkronlaması
->   kilitleme/bozulma riski + disk doluluğu getiriyor (bu turda disk %98'e dayandı, bir önceki tur `sed` geçici-dosyası patlamıştı).
->   **Aday:** repoyu OneDrive dışına taşımak (ör. `C:\dev\`). **PO kararı.**
-> - **🟡 Dağınık backend kopyaları + atıl worktree'ler:** `C:\Users\...\backend-mail`, `backend-testfix`, `backend-cfgfix` (~1 GB) +
->   3 atıl git worktree duruyor. Her birinde **commit edilmemiş iş var mı** kontrol edilip temizlenecek (**ayrı tur**, PO onayı).
+> yazıldı; kırık-link 0; docs/ 68 dosya (kayıp yok). Bu turda **2 yeni 🟡 altyapı-hijyen maddesi** eklendi → **Bölüm E** (repo/altyapı hijyeni).
 
 ---
 
@@ -207,7 +200,19 @@
 
 ---
 
-## E. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
+## E. 🟡 Repo / altyapı hijyeni (PO kararı bekleyen — kod dışı)
+
+> Kod dışı, repo/geliştirme-ortamı hijyeni. Kayıp gitmesin diye burada; çözümü ayrı tur + PO kararı.
+
+- **🟡 OneDrive senkron riski:** Repo `OneDrive/Masaüstü/Geliştirme` altında — OneDrive'ın `.git` dosyalarını senkronlaması
+  kilitleme/bozulma riski + disk doluluğu getiriyor (2026-08-23 turunda disk %98'e dayandı, bir önceki tur `sed` geçici-dosyası patlamıştı).
+  **Aday:** repoyu OneDrive dışına taşımak (ör. `C:\dev\`). **PO kararı.**
+- **🟡 Dağınık backend kopyaları + atıl worktree'ler:** `C:\Users\...\backend-mail`, `backend-testfix`, `backend-cfgfix` (~1 GB) +
+  3 atıl git worktree duruyor. Her birinde **commit edilmemiş iş var mı** kontrol edilip temizlenecek (**ayrı tur**, PO onayı).
+
+---
+
+## G. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
 
 1. **Her oturum başında** bu belge OKUNUR; ajan ürün sahibine açık maddeleri (🔴/🟡/🔵/❓) proaktif hatırlatır.
    Ürün sahibi "arkada ne kaldı" diye sormak zorunda kalmamalı — ajan söyler. *(Kural: `CLAUDE.md` "Karar-Takip Disiplini".)*

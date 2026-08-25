@@ -63,7 +63,7 @@ docs/
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
 | `00-KARAR-TAKIP.md` | **NE KALDI:** açık iş + yarım + ölü kod + uygulanmamış karar tek bakışta (🔄 canonical takip; kanıtlı, kod-doğrulamalı) | **Her oturum başında** (arkada ne kaldı) |
 | `10-yol-haritasi.md` | Aktif iş kuyruğu: üstte açık-işler hızlı-index · v1 (numaralı) · v2 backlog (14-28) | Sıradaki iş kararı |
-| `10-yol-tamamlananlar.md` | Biten v1 işlerinin kaydı (özet + PR/tarih; detay 09-DURUM) — 🔄 refakat belge | "ne bitti" bakışı |
+| `10-yol-tamamlananlar.md` | Biten v1 işlerinin kaydı (özet + PR/tarih; detay 09-DURUM) — 🔄 `10-yol-haritasi`'nın **refakat belgesi**. Alt-klasöre indirilmedi: ayrılırsa "ne kaldı ↔ ne bitti" ikilisi kopar, aynı kök seviyede durması gerek (referans sayısı düşük — 3 — ama canonical bağ güçlü). | "ne bitti" bakışı |
 | `dokploy-foto-volume-talimati.md` | Dokploy foto volume kurulum talimatı | 📸 Deploy/foto volume işi |
 
 ## Belgeler — `docs/kararlar/konu/` (konu bazlı karar belgeleri)
