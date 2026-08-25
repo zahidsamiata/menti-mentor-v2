@@ -171,6 +171,20 @@
 
 ---
 
+# 📅 OTURUM 2026-08-25e (PR #51/#112 merge + pointer bump + senkron)
+
+**MOD:** 🟢 BYPASS. **PO backend #51 + çatı #112'yi merge etti, repoları PRIVATE yaptı.**
+
+- **PR #51 CANLIDA:** backend main HEAD **`b4b6d66`** (madde 38/68/80/88/89/93/79/69/70 — güvenlik+KVKK+UX, backend autodeploy).
+- **PR #112 CANLIDA:** çatı main HEAD **`9bb02b7`** (reorg + KVKK belge paketi + tüm docs).
+- **Çatı submodule pointer bump:** #51 merge sonrası pointer geride kaldı (`ba92dfa`) → **PR #113** açıldı (`ba92dfa`→`b4b6d66`, **ileri-sarım kanıtlı**, yalnız pointer, merge PO'da). backend submodule main'e alındı, `.docx` commit'e girmedi.
+- **Belge senkronu (KURAL 8):** 00-KARAR-TAKIP F.1/F.2/F.5 (9 madde) → ✅ CANLIDA · Bölüm E repolar → ✅ PRIVATE · 10-yol 38/69/70 stub · 10-yol-tamamlananlar 8 kayıt · 09-DURUM yeni snapshot.
+- **Repolar PRIVATE** (PO-manuel) → F.1 güvenlik açıkları hem düzeltildi hem repo gizlendi.
+
+**Kalan:** (a) #113 pointer merge (PO) · (b) madde 39 KVKK hardDelete (migration turu) · (c) madde 70 FE guard (ayrı çatı PR) · (d) 9a/9b kalibrasyon (migration'sız, temiz main'den) · (e) madde 93 tam-anonim.
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
 0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).

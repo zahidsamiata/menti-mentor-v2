@@ -1,8 +1,12 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-23
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-25
 
-> **⚡ ŞU AN (git ile doğrulandı):** Çatı main HEAD `753c545` (#95) · backend main HEAD / submodule pointer `b6187c1`
+> **⚡ ŞU AN — GÜNCEL SNAPSHOT (2026-08-25, git+API doğrulandı):** Çatı main HEAD **`9bb02b7`** (#112 merged) · backend main HEAD **`b4b6d66`**
+> (#51 merged) · **çatı submodule pointer:** bump PR **#113** açık (`ba92dfa`→`b4b6d66`, ileri-sarım — merge PO'da). **Açık PR:** çatı #113 (pointer) + #110 (analytics, 🛑 merge-kilitli). **Repolar PRIVATE** (PO yaptı).
+> **#51 CANLIDA (backend autodeploy):** madde 38 `updateUser` PII sızıntısı · 68/80/88/89 platform PII maskeleme · 79 görüşme limiti · 69 validation mesajı · 70 adaptive progress · 93 anonimleştirme (kısmi). **KALAN:** madde 39 (KVKK hardDelete FK, migration) · madde 70 FE guard (ayrı çatı PR) · 9a/9b kalibrasyon (migration'sız, #51 sonrası temiz main'den) · madde 93 tam-anonim (mimari).
+>
+> **⚡ ŞU AN (git ile doğrulandı, 2026-08-23):** Çatı main HEAD `753c545` (#95) · backend main HEAD / submodule pointer `b6187c1`
 > (senkron) · **açık kod PR: 0/0, masa temiz.** Bu sabah **#12 DISC çoklu harf** (backend #47 + çatı #93 + docs #94) ve
 > **#37 login enumeration sertleştirme** (backend #46 + çatı #91 + docs #92) MERGED → **canlıda.** Açık docs PR: keşif
 > raporları (#96 tam-envanter · #97 belge-mimarisi) — merge PO'da, kod değil.

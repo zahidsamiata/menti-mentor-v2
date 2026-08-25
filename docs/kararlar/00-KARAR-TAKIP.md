@@ -146,7 +146,7 @@
 
 **🔴/🟡 2026-08-23 hijyen + PO-manuel maddeleri (belge-düzeni turundan çıktı):**
 - **🔴 Çerez izni / Consent Mode v2 bandı** — canlı-öncesi ZORUNLU. PR **#110** (analytics GTM/GA4/Clarity, **merge-kilitli**) buna bağlı; K3/çerez metinleriyle birleşik. Bant olmadan üçüncü-taraf veri aktarımı = KVKK ihlali (yurt-dışı aktarım beyanıyla çelişir).
-- **🔴 Repolar PUBLIC** (çatı `menti-mentor-v2` + backend `menti-mentor`) — PO-manuel: GitHub'dan private yap (kanıt: `gh repo view --json visibility`).
+- **✅ Repolar PRIVATE yapıldı** (2026-08-25, PO-manuel) — çatı `menti-mentor-v2` + backend `menti-mentor` artık private. (Eskiden public'ti; G1/G3 açıkları da #51 ile canlıda düzeltildi.)
 - **🟡 Depo hijyeni:** 20 merge-olmamış uzak dal (13'ü 25+ gün eski) + 3 atıl worktree (`cati-bump`, `cati-compose`, `cati-lj`) — gözden geçir/temizle (PO onayı).
 - **🔵 Belge düzeni — alt-klasör + isimlendirme tasarımı HAZIR** (öneri; plan dosyasında): `kararlar/` sıcak-kök + `konu/`+`denetim/`; `raporlar/` `persona/panel/denetim/kesif/icerik/`. Uygulama ayrı BYPASS turu (git mv + ~120-150 referans + INDEX en son). Taşıyıcı 5 ad (09-DURUM/10-yol/00-KARAR-TAKIP/00-INDEX/CLAUDE.md) KALIR.
 
@@ -256,29 +256,29 @@
 > salt-okuma ajanı). Zaten takip edilenler (madde 1-67, B.4, ölü kod C) elendi; **arada yapılmış** olanlar bayat-not adayı
 > olarak ayrıldı. Kalan **gerçek yeni kayıp maddeler** burada. Tam döküm + bayat liste: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
 
-### F.1 — 🔴 GÜVENLİK · CANLI ÖNCESİ (repolar PUBLIC → önce PRIVATE, sonra düzelt)
-> ⚠️ Bu üç açık, repo PUBLIC olduğu için dışarıdan okunabilir koddadır. **Öncelik: repoları PRIVATE yap + düzelt.**
+### F.1 — 🔴 GÜVENLİK · CANLI ÖNCESİ (✅ #51 MERGED — düzeltmeler canlıda; repolar PO tarafından PRIVATE yapıldı)
+> ✅ Üç açık da **#51 ile CANLIDA düzeltildi** (b4b6d66); repolar PO tarafından **PRIVATE yapıldı.** (Tarihsel: bu açıklar public repoda görünürdü.)
 
 | Kod | İş | Kanıt (bu tur elle doğrulandı) | Migr | Not |
 |---|---|---|:---:|---|
-| G1 | `updateUser` (+2 kardeş uç) yanıtı `select`siz tüm User objesini döner → **password hash + PII sızıntısı** | `userController.ts:272→277` (ayrıca 355→381, 418→424) | Hayır | =10-yol madde 38 · **🔀 DÜZELTİLDİ backend PR #51 (MERGE OLMADI):** db.ts global omit + explicit select + test |
+| G1 | `updateUser` (+2 kardeş uç) yanıtı `select`siz tüm User objesini döner → **password hash + PII sızıntısı** | `userController.ts:272→277` (ayrıca 355→381, 418→424) | Hayır | =10-yol madde 38 · **✅ CANLIDA (#51 MERGED → backend main `b4b6d66`):** db.ts global omit + explicit select + test |
 | G2 | `hardDeleteUser` Meeting/Feedback FK non-null → **transaction rollback = KVKK kalıcı silme çalışmıyor** | `gdprService.ts:172-174` (kod-yorumu itiraf) + `schema.prisma` Meeting FK RESTRICT | Olası (SetNull) | =10-yol madde 39; **AÇIK** (migration+PO: sil mi anonimleştir mi — envanter C-5 kanıt) |
-| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | =10-yol madde 68 · **🔀 DÜZELTİLDİ backend PR #51 (MERGE OLMADI):** maskName/maskContact + explicit select + test |
+| G3 | `listSuspicionReports` `select`siz → **şüphe raporu edenin PII'si maskesiz** platform admin'e döner | `platformController.ts:353` | Hayır | =10-yol madde 68 · **✅ CANLIDA (#51 MERGED → backend main `b4b6d66`):** maskName/maskContact + explicit select + test |
 
 ### F.5 — 🔍 2026-08-25 güvenlik+KVKK turundan yeni maddeler (numara burada doğar, 79'dan)
 > Kaynak: FAZ A/B/C (backend PR #51 + salt-okuma teyitler + `kvkk-veri-aktarim-envanteri-2026-08-25.md`). KURAL 8: numara YALNIZ burada.
 
 | No | İş | Tür | Kanıt | Öncelik |
 |:---:|---|---|---|---|
-| **79** | `maxMeetingsPerWeek` enforce EDİLMİYORDU → menti limitsiz görüşme açar | yapılmamış-iş (sessiz yanlış) | `meetingController.ts` | ✅ **DÜZELTİLDİ backend PR #51** (menti başına · sabit 7-günlük UTC kova · tanımsızsa limit yok · 409 · iptal/tamamlanan hariç; test) |
-| **80** | `getPlatformLogs` `select`siz + `listUserReports` fullName maskesiz | güvenlik/PII | `platformController.ts:175,411` | ✅ **DÜZELTİLDİ backend PR #51** (explicit select + maskName + test) |
-| **88** | `getPlatformStats` → `recentLogs` `select`siz → ham `meta` (PII) | güvenlik/PII | `platformController.ts:98` | ✅ **DÜZELTİLDİ backend PR #51** (explicit select, meta çıkarıldı; test) |
-| **89** | `listPendingTenants` admin `fullName`+`email` maskesiz | güvenlik/karar | `platformController.ts` | ✅ **DÜZELTİLDİ backend PR #51** — KARAR: maskele (onay akışı e-posta tüketmiyor, mail adresi yeniden çeker; `maskEmail` domain'i korur). Test |
+| **79** | `maxMeetingsPerWeek` enforce EDİLMİYORDU → menti limitsiz görüşme açar | yapılmamış-iş (sessiz yanlış) | `meetingController.ts` | ✅ **CANLIDA (#51 MERGED, backend main `b4b6d66`)** (menti başına · sabit 7-günlük UTC kova · tanımsızsa limit yok · 409 · iptal/tamamlanan hariç; test) |
+| **80** | `getPlatformLogs` `select`siz + `listUserReports` fullName maskesiz | güvenlik/PII | `platformController.ts:175,411` | ✅ **CANLIDA (#51 MERGED, backend main `b4b6d66`)** (explicit select + maskName + test) |
+| **88** | `getPlatformStats` → `recentLogs` `select`siz → ham `meta` (PII) | güvenlik/PII | `platformController.ts:98` | ✅ **CANLIDA (#51 MERGED, backend main `b4b6d66`)** (explicit select, meta çıkarıldı; test) |
+| **89** | `listPendingTenants` admin `fullName`+`email` maskesiz | güvenlik/karar | `platformController.ts` | ✅ **CANLIDA (#51 MERGED, backend main `b4b6d66`)** — KARAR: maskele (onay akışı e-posta tüketmiyor, mail adresi yeniden çeker; `maskEmail` domain'i korur). Test |
 | **94** | `listPendingTenants` **VIEW audit izi yok** (`listUserReports`/`getAnomalies` aksine) → tutarlılık için eklenebilir | güvenlik/tutarlılık (düşük) | `platformController.ts` (AJAN-1 bulgusu, madde 89 turu) | 🔵 düşük (PII artık maskeli) |
 | **90** | **Veri İşleyen Sözleşmesi kayıt akışına entegrasyon** — Tenant yasal kimlik alanları (unvan/adres/VERBİS) | yapılmamış-iş (KVKK) | Belge 8; şema alanı yok → **migration** | 🟡 (hukukçu onayı sonrası) |
 | **91** | **Kulüp-tipi tenant AKTİF EDİLMEZ** — üniversite kulübünün veri sorumlusu üniversitedir, imza yetkisi yok (avukat) | karar/kısıt (KVKK) | Belge 8; kulüp modülü (madde 41) | 🔴 (canlı-öncesi kısıt) |
 | **92** | **Sunucu ülkesi teyidi** — belge "eu-west-2/İrlanda" çelişkili (eu-west-2=Londra/UK, eu-west-1=İrlanda); yasal metin ülke beyanı için PO sağlayıcı panelinden teyit | PO-manuel (KVKK) | envanter C-1; kapak dosyası 🔴 | 🔴 (yasal beyan riski) |
-| **93** | **Tam anonimleştirme** — `anonymizeUser` kısmi (takma-adlaştırma). **🔀 Kısmen düzeltildi (backend PR #51):** sosyal/avatar/enneagram/discResultCard eklendi. **KALAN:** mesaj içeriği · fiziksel foto dosyası (disk) · `Meeting.phoneNumber/notes` · kayıt-anahtarı (userId PK) bağı → çapraz-tablo yeniden-tanımlanma riski | yapılmamış-iş (KVKK, mimari) | `gdprService.ts:64-96`; saklama-imha metni gerçeğe göre düzeltildi | 🟡 (madde 39 ile akraba) |
+| **93** | **Tam anonimleştirme** — `anonymizeUser` kısmi (takma-adlaştırma). **✅ Kısmen CANLIDA (#51 MERGED):** sosyal/avatar/enneagram/discResultCard eklendi. **KALAN:** mesaj içeriği · fiziksel foto dosyası (disk) · `Meeting.phoneNumber/notes` · kayıt-anahtarı (userId PK) bağı → çapraz-tablo yeniden-tanımlanma riski | yapılmamış-iş (KVKK, mimari) | `gdprService.ts:64-96`; saklama-imha metni gerçeğe göre düzeltildi | 🟡 (madde 39 ile akraba) |
 | **81** | KVKK **otomatik imha süreci** yok (yalnız SystemLog 90g); mesaj içeriği/FeedbackLog **süresiz**; hardDelete'te bile Message kalır | yapılmamış-iş (KVKK) | envanter C-5; `gdprService.ts:253` (yorum "3 yıl" uygulanmamış) | 🟡 (saklama politikası bağımlı) |
 | **82** | Rıza metni **sürümü tutulmuyor** (`consentVersion` yok, yalnız `kvkkConsentAt` zaman damgası) → ispat açığı | yapılmamış-iş (KVKK ispat) | envanter C-6; grep `consentVersion` sonuç yok | 🟡 |
 | **83** | **OAuth'ta açık rıza UI'da alınmıyor** (`oauthService.ts:112` implicit set; ekranda kutu yok) + KVKK/18+ **tek kutuda birleşik** + aydınlatma≠açık rıza ayrımı yok | yapılmamış-iş/[HUKUKÇU] | envanter C-6; `_RegisterContent.tsx:414` | 🟡 (hukukçu kararına bağlı) |
@@ -294,8 +294,8 @@
 
 | Kod | İş | Tür | Kanıt | Boy | Migr |
 |---|---|---|---|:---:|:---:|
-| T1 (madde 69) | Zod VALIDATION yanıtında `message` yok → generic "Hata" | ✅ **PR #51** | `questionController.ts` (`firstValidationMessage`; FE zaten `message` okuyor → FE değişikliği YOK) | S | Hayır |
-| T2 (madde 70) | adaptive-test backend `progress` döndürmüyor | ✅ **PR #51** | `adaptiveTestEngine.ts` (`computeProgress`, migration yok; FE guard `DailyQuestionWidget.tsx:39` = ayrı FE turu) | M | Hayır |
+| T1 (madde 69) | Zod VALIDATION yanıtında `message` yok → generic "Hata" | ✅ **CANLIDA (#51, `b4b6d66`)** | `questionController.ts` (`firstValidationMessage`; FE zaten `message` okuyor → FE değişikliği YOK) | S | Hayır |
+| T2 (madde 70) | adaptive-test backend `progress` döndürmüyor | ✅ **CANLIDA (#51, `b4b6d66`)** | `adaptiveTestEngine.ts` (`computeProgress`, migration yok; FE guard `DailyQuestionWidget.tsx:39` = ayrı FE turu) | M | Hayır |
 | T3 | `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu | açık-soru/güvenlik | `platformController.ts:348-356` | S | Olası |
 | T4 | Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da kodlanmış; "tüm sorularda mı" kararı yok | verilmemiş-karar | `certification.service.ts:67` | S | Hayır |
 | T5 | `seed-certification.ts` runner'a bağlı değil → 20-senaryo bankasını canlıya **güvenli** taşıma yöntemi yok (**madde #30'u BLOKLAR**) | yapılmamış-iş | `package.json` (tek seed = `prisma/seed.ts`) | M | Evet |

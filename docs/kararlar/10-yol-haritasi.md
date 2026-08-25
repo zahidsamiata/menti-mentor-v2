@@ -30,7 +30,7 @@
 > `docs/kararlar/10-yol-tamamlananlar.md` (v1 tamamlananlar) + `09-DURUM.md` (şu an). **v2 backlog** aşağıda ayrı bölümde (madde 14-28).
 
 **🔴 v1-A güvenlik/yasal BLOCKER (analiz 2026-08-22 — canlı-öncesi):**
-- **38** — `updateUser` yanıtı **password hash + tüm PII** sızdırıyor (select yok) · *AÇIK, YÜKSEK* — düşük risk/hızlı fix (explicit select / global omit).
+- **38** — `updateUser` password+PII sızıntısı · **✅ CANLIDA (#51 MERGED → backend main `b4b6d66`)** — db.ts global omit + explicit select + test.
 - **39** — `hardDeleteUser` FK-RESTRICT nedeniyle gerçek veride patlar → **KVKK Md.7 silme çalışmıyor** · *AÇIK, YÜKSEK* — migration olası (SetNull), PO onaylı.
 - **40** — KVKK FE üçlüsü (dışa aktarma/anonimleştirme/kalıcı silme) yok — backend hazır · *AÇIK* (Md.20 görünürlük boşluğu, #39 ile).
 - **67** — 🍪 Çerez-izni bandı (KVKK cookie consent) · *AÇIK, ÖNCELİKLİ* — analytics'in (#56) yasal ön-koşulu; rıza-öncesi izleme durmalı (Consent Mode v2). (Not: #56 GTM/GA4 yapısı EN SON kontrol edilecek.)
@@ -110,7 +110,7 @@
 > Kod PR açılmadı (analiz turu). Not: bazıları aşağıdaki v2/"❓ teyit" maddeleriyle örtüşür — çapraz-referans verildi.
 
 ## v1-F-A · 🔴 GÜVENLİK & KVKK (canlı-öncesi değerlendir)
-38. **🔴 `updateUser` yanıtı `password` hash + tüm PII sızdırıyor (YÜKSEK)** — `userController.ts:272-277` `.update` explicit `select` YOK → bcrypt hash + `discVector`/email/CV döner. Aynı dosyada `createUser`/`updateMyProfile` select kullanıyor; bu handler atlanmış. **Etki:** `PATCH /api/users/:id` (ADMIN) başka üyeyi güncellerken hash+PII yanıta düşer (CLAUDE.md "password ASLA dönmesin" ihlali). **Fix (düşük risk, hızlı):** explicit `select` + kalıcı olarak global `omit:{user:{password:true}}`. *(ana-agent koddan doğruladı.)* → kanıt+kod-teyidi: `00-KARAR-TAKIP.md` Bölüm F.1 (G1).
+38. **🔴 `updateUser` yanıtı `password` hash + tüm PII sızdırıyor (YÜKSEK)** — `userController.ts:272-277` `.update` explicit `select` YOK → bcrypt hash + `discVector`/email/CV döner. Aynı dosyada `createUser`/`updateMyProfile` select kullanıyor; bu handler atlanmış. **Etki:** `PATCH /api/users/:id` (ADMIN) başka üyeyi güncellerken hash+PII yanıta düşer (CLAUDE.md "password ASLA dönmesin" ihlali). **Fix (düşük risk, hızlı):** explicit `select` + kalıcı olarak global `omit:{user:{password:true}}`. *(ana-agent koddan doğruladı.)* → kanıt+kod-teyidi: `00-KARAR-TAKIP.md` Bölüm F.1 (G1). · **✅ CANLIDA (#51 MERGED, `b4b6d66`).**
 39. **🔴 `hardDeleteUser` FK-RESTRICT nedeniyle patlar → KVKK Md.7 silme çalışmıyor (YÜKSEK)** — `gdprService.ts:145-178` transaction yalnız 6 tabloyu siliyor; `Meeting`/`Feedback`/`Conversation`/`Message`/`UserReport`/`MentorshipAgreement` FK'leri RESTRICT → gerçek veride `tx.user.delete()` rollback. **Kodun kendi yorumu (171-174) bunu itiraf ediyor.** **Fix:** silme öncesi zinciri tamamla VEYA istatistik-korunacaklarda userId nullable + `onDelete:SetNull`. Sil vs anonimleştir = PO kararı, migration → PO onaylı. (v2 #16 tenant-hard-delete ile akraba, ayrı.) → kanıt+kod-teyidi: `00-KARAR-TAKIP.md` Bölüm F.1 (G2).
 40. **KVKK FE üçlüsü yok** (dışa aktarma `GET /users/:id/export` [Md.20] · anonimleştirme · kalıcı silme) — backend hazır, FE'de 0 çağrı (doğrulandı). #39 çözülünce birlikte bağlanmalı. PO kararı.
 
@@ -168,8 +168,8 @@
 ## v1-H · 2026-08-23 tam-belge + niyet taramasından (madde 68-78)
 > Yalnız kuyruk satırı — kanıt/kod-teyidi/boy/migration **`00-KARAR-TAKIP.md` Bölüm F**'te (tekrar edilmez). Numara sabit (68'den).
 68. **🔴 `SuspicionReport` listesi reporter PII'sini maskesiz döner** (`platformController.ts:353`, select yok) · *AÇIK, güvenlik* · detay: Bölüm F.1 (G3).
-69. **🔀 Zod VALIDATION mesajı** — **backend PR #51 (MERGE OLMADI, canlı değil)** (`firstValidationMessage`; FE otomatik gösterir). Detay: KARAR-TAKIP F.2.
-70. **🔀 adaptive-test `progress`** — **backend PR #51 (MERGE OLMADI)** (migration yok; FE guard kaldırma ayrı FE turu). Detay: KARAR-TAKIP F.2.
+69. **✅ Zod VALIDATION mesajı** — **CANLIDA (#51 MERGED → backend main `b4b6d66`)** (`firstValidationMessage`; FE otomatik gösterir). Detay: KARAR-TAKIP F.2 + `10-yol-tamamlananlar`.
+70. **✅ adaptive-test `progress`** — **CANLIDA (#51 MERGED)** (migration yok; FE guard kaldırma = ayrı FE turu, kalan). Detay: KARAR-TAKIP F.2 + `10-yol-tamamlananlar`.
 71. **🟡 `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu** · *AÇIK, güvenlik/izolasyon* · detay: Bölüm F.2 (T3).
 72. **🔵❓ Sertifika baraj "0 puan" kuralı yalnız `isRedLine`'da** — "tüm sorularda mı" kararı yok · detay: Bölüm F.2 (T4).
 73. **🟡 Güvenli sertifika seed runner ekle** (`seed-certification.ts` runner'a bağlı değil — **madde #30'u bloklar**) · *AÇIK* · detay: Bölüm F.2 (T5).

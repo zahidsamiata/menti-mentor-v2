@@ -29,6 +29,17 @@
 | 32 | Admin soru düzenleme UI | ✅ çatı #87 | 2026-08-17 |
 | 34 | Öğrenme yolculuğu tamamlanma görünürlüğü (STK admin havuz kolonu) | ✅ backend #49 + çatı #102 | 2026-08-19 |
 | 37 | Giriş enumeration sertleştirme (PENDING dahil) | ✅ backend #46 + çatı #91 + docs #92 | 2026-08-19 |
+| 38 | `updateUser`/temperament password+PII sızıntısı (db.ts global omit + explicit select) | ✅ backend #51 | 2026-08-25 |
+| 68 | `SuspicionReport` reporter PII maskeleme (maskName/maskContact) | ✅ backend #51 | 2026-08-25 |
+| 80 | `getPlatformLogs` select + `listUserReports` fullName maske | ✅ backend #51 | 2026-08-25 |
+| 88 | `getPlatformStats` recentLogs meta çıkarıldı | ✅ backend #51 | 2026-08-25 |
+| 89 | `listPendingTenants` admin fullName+email maske | ✅ backend #51 | 2026-08-25 |
+| 79 | Haftalık görüşme limiti enforce (sabit 7-günlük UTC kova) | ✅ backend #51 | 2026-08-25 |
+| 69 | Zod validation yanıtında anlamlı `message` (FE otomatik gösterir) | ✅ backend #51 | 2026-08-25 |
+| 70 | adaptive-test `progress` (FE guard kaldırma = ayrı tur, kalan) | ✅ backend #51 | 2026-08-25 |
+
+> ⚠️ Kısmen: **madde 93** (anonimleştirme sosyal/avatar/kişilik alanları eklendi ✅ / mesaj+foto-dosyası+userId-bağı AÇIK) — `00-KARAR-TAKIP` F.5.
+> **Umbrella pointer:** backend #51 merge → çatı submodule pointer bump PR #113 (b4b6d66).
 
 > **Kısmi/kalanı açık olanlar aktif roadmap'te kalır:** md.6 (kullanıcı maili ✅ / kurum maili AÇIK) ·
 > md.7 (menti→mentör kart + (A) gerekçe + Aşama 1 ✅ / Aşama 2-3 AÇIK) · md.9 (ağırlık gösterimi ✅ / 9a-9b AÇIK) ·
