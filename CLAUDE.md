@@ -167,7 +167,7 @@
 - Böylece kararın neden değiştiği ve tarihsel iz korunur.
 
 ## Belge Düzeni — her belge işinde uy
-- Belge oluştururken/düzenlerken `docs/kararlar/belge-duzeni-rehberi.md`'deki **6 düzen kuralına** uyulur:
+- Belge oluştururken/düzenlerken `docs/kararlar/konu/belge-duzeni-rehberi.md`'deki **6 düzen kuralına** uyulur:
   (1) tek gerçek kaynağı/canonical, (2) tür=klasör (kararlar/raporlar/arsiv), (3) yaşayan 🔄 / dondurulmuş 📸 üst-etiketi,
   (4) adlandırma (dondurulmuş=tarihli, yaşayan=tarihsiz), (5) yeni belge → `00-INDEX.md` güncelle, (6) eksik-işaretleme (⚠️ GÜNCELLEME, silme yok).
 - Bu kurallar "Belge Eş-Zamanlılığı" + "Belge Düzeltme Deseni" ile tutarlıdır; çelişki yok. Rehber = canonical.
