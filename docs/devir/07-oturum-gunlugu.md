@@ -144,6 +144,19 @@
 
 ---
 
+# 📅 OTURUM 2026-08-25c (KVKK Word paketi + anonimleştirme teyidi)
+
+**MOD:** 🟢 BYPASS (kod + belge). **Hiçbir PR merge edilmedi.**
+
+- **FAZ 1 — Anonimleştirme teyidi (backend PR #51'e ek):** `anonymizeUser` kod teyidi → **kısmi (takma-adlaştırma).** Eksik User PII (sosyal linkler/avatar/enneagram/discResultCard) **eklendi + test**. **Kalan (madde 93):** mesaj içeriği · fiziksel foto dosyası · `Meeting` alanları · **userId (PK) değişmiyor** → çapraz-tablo yeniden-tanımlanma. `05-saklama-imha` + kapak, "tam geri-döndürülemez" vaadini **kaldırıp gerçeği beyan ediyor.**
+- **FAZ 2 — Profesyonel Word (çatı #112):** `konu/kvkk-metinleri/KVKK-BELGE-PAKETI-2026-08-25.docx` — kapak + "nasıl incelensin" + otomatik içindekiler + 9 belge (her biri yeni sayfa) + altbilgi sayfa-no + kenarlıklı tablolar + [HUKUKÇU]=sarı/[DOLDURACAK]=gri vurgu. **Doğrulandı:** Türkçe tam, kalan emoji 0, 4 tablo, 197KB. Üretici `scripts/kvkk-docx-gen.py` (python-docx); md=canonical, docx=türev (README).
+- **⭐ PO kararı:** **FE site-entegrasyonu İPTAL** — metinler siteye çıkarılmayacak, avukata Word ile gidilecek. Sayfalara gömme hukukçu onayı sonrasına. `/kvkk /gizlilik /terms` **dokunulmadı.**
+- Yeni bulgu iş maddesi: **madde 93** (tam anonimleştirme).
+
+**⚠️ Avukat sonrası:** revizyon → md'ye işle → `python scripts/kvkk-docx-gen.py` → yeni Word. Ön koşul: [PO DOLDURACAK] (başvuru `destek@` + sunucu ülke) + hukukçu onayı.
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
 0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).

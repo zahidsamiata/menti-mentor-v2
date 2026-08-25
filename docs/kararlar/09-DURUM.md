@@ -77,6 +77,12 @@
 > (ülke adı yazılmadı). Yeni maddeler **90** (veri işleyen sözleşmesi entegrasyonu, migration) · **91** (kulüp-tenant aktif edilmez) ·
 > **92** (sunucu ülke teyidi). **KALAN:** FAZ E FE entegrasyonu (merge-kilitli PR — hukukçu onayına kadar zaten merge olmaz; ayrı tur).
 >
+> **⚡ GÜNCELLEME (2026-08-25c, KVKK Word + anonimleştirme teyidi — KOD + docs):** (A) **Anonimleştirme kod teyidi:** `anonymizeUser` kısmi
+> (takma-adlaştırma) çıktı → sosyal/avatar/enneagram/discResultCard **eklendi (backend PR #51)**; kalan (mesaj/foto-dosyası/userId-bağı) = **madde 93**.
+> Saklama-imha metni "tam geri-döndürülemez" vaadini kaldırıp gerçeği beyan ediyor. (B) **Profesyonel Word paketi** üretildi:
+> `konu/kvkk-metinleri/KVKK-BELGE-PAKETI-2026-08-25.docx` (kapak+içindekiler+9 belge+sayfa-no+tablolar+işaret-vurgu; emoji temiz, Türkçe tam;
+> üretici `scripts/kvkk-docx-gen.py`, md=canonical). (C) **PO kararı: FE site-entegrasyonu İPTAL** — avukata Word ile gidilecek; `/kvkk /gizlilik /terms` sayfalarına DOKUNULMADI.
+>
 > **⚡ GÜNCELLEME (2026-08-23, canlı çıkış planı — salt-docs):** Dağınık ~58 açık iş **tek çıkış planına** sınıflandı → yeni canonical
 > `00-CIKIS-PLANI.md` (K0-K5 + tur planı). **KATI test:** ~40 "v1" maddenin çoğu çıkışı ENGELLEMİYOR → **gerçek çıkış-bloker: 5 K0**
 > (madde 38/68 PII sızıntısı · 39 KVKK silme · repo private · KVKK metinleri) **+ 1 K1** (foto volume) + 2 şüpheli (T7 opt-in, maxMeetings — TEYİT GEREK).
