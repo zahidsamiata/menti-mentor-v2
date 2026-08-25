@@ -95,13 +95,34 @@
 
 ---
 
+# 📅 OTURUM 2026-08-23 (belge reorg + tam tarama + niyet envanteri)
+
+**MOD:** 🟢 BYPASS (salt-docs; kod OKUNDU, değiştirilmedi). **Hiçbir PR merge edilmedi** (merge PO'da).
+
+**Merge edilenler (2026-08-23, PO onayıyla):** #106 (strateji↔gerçek denetimi) · #107 (Y1-Y7 + PO kararları) · #108 (oturum günlüğü birleştir + devir) · #109 (kapsamlı denetim + yol haritası 38-66) · #111 (belge hijyen, taşımasız).
+
+**🛑 AÇIK & MERGE-KİLİTLİ — #110 (analytics/GA4):** **MERGE ETME.** Çerez-izni bandı (madde 67) YOK → merge edilirse autodeploy ile **rıza-öncesi izleme = KVKK ihlali (canlıda)**. Yeni oturum bunu bilmezse yanlışlıkla merge edebilir → **#110, madde 67 (Consent Mode v2) canlıya girmeden ASLA merge edilmez.**
+
+**Bu oturumda yapılan (3 alt-tur, hepsi #112'ye):**
+- **Belge düzeni reorg:** `kararlar/` + `raporlar/` alt-klasörlere ayrıldı (git mv); 38 tam-yol referansı + 00-INDEX yeniden yazıldı; `belge-duzeni-rehberi` KURAL 2 alt-klasör + **KURAL 7 (taşıyıcı belge iş bölümü)** eklendi; kırık-link 0. **Canonical taşıyıcı 5 ad taşınmadı.**
+- **Tam-belge taraması (7 ajan, 42 belge):** → `00-KARAR-TAKIP` **Bölüm F**, 13 kayıp madde → yol haritası **madde 68-78** (`v1-H`). **3'ü 🔴 GÜVENLİK canlı-öncesi:** G1 `updateUser` PII/password sızıntısı (madde 38) · G2 `hardDeleteUser` FK→KVKK silme çalışmıyor (madde 39) · G3 `SuspicionReport` reporter PII maskesiz (madde 68). ⚠️ **Repolar PUBLIC → dışarıdan okunabilir.**
+- **Niyet envanteri (5 ajan):** → `00-KARAR-TAKIP` **C.2** + rapor `yarim-is-niyet-envanteri-2026-08-23.md`. "~14 FE'siz özellik" iddiası → **kod-teyidiyle 9 doğrulandı** (KVKK üçlüsü, mentor opt-in, kulüp, feedback-logs, tenant şikayet, sosyal profil…).
+- **Numaralandırma:** **#38 çakışması çözüldü** (madde 38=güvenlik canonical; DISC işi → numarasız "DISC-DERİNLEŞME kurgusu"). **madde 67 (çerez izni) ZATEN VARDI** — eklenmedi.
+- **Kırmızı kural düzeltmesi:** "güvenli seed" listesi silinen `seed-questions.ts`'i sayıyordu → gerçek güvenli liste (`seed-certification` + `seed-learning-journey` + `seed-test-tenant.mjs`; tehlikeli=`seed.ts`). CLAUDE.md + 4 belge tarihli notla düzeltildi.
+- **Etiket-çelişki (AJAN-E):** `durum-panosu-2026-08-14` 🔄 ama 11 gün donmuş → 📸 adayı (Bölüm E). Gerçek statü çelişkisi: **0** (taşıyıcılar senkron).
+
+**Altyapı uyarısı:** Bir önceki tur disk %98'e dayandı (`sed` geçici-dosyası patladı); repo OneDrive altında (`.git` senkron riski). Bu tur OneDrive alan boşalttı (%87). → Bölüm E: repoyu OneDrive dışına taşıma adayı (PO).
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
+0. **🔴 CANLI-ÖNCESİ (kod turu):** (a) **repoları PRIVATE yap** (PO-manuel) · (b) **güvenlik turu G1/G2/G3** — `updateUser` PII (madde 38), `hardDeleteUser` FK/KVKK (madde 39), `SuspicionReport` PII (madde 68). Repo public olduğu için öncelikli.
 1. **9a + 9b (birlikte):** kalibrasyon düzeltme (motor kaydedilen ağırlığı OKUSUN) + ağırlık ayarlanabilirliği (tüm yöneticiler, %60/%40 varsayılan, değişiklik izi). Migration.
 2. **2a ghost red — 30 GÜN UYKU MODU:** veriler hemen silinmez; 30 gün kurum geri alırsa döner, almazsa tamamen silinir. Zamanlanmış iş (cron) + migration.
 3. **#7 Aşama 2:** otomatik pasifleştirme (dernek eşiği girer, varsayılan KAPALI) + feedback şema alanları. Migration.
 
-**Keşif bekleyenler (kod öncesi):** #36 kullanıcı çıkarma (önce git keşfi) · etiket havuzu (talep-onay; önce kod keşfi) · **İçerik & Soru Felsefesi Keşfi** (#38/#31/#13/#30 buna bağlı) · **belge yeniden yapılandırma** (~68 belge, PO memnun değil).
+**Keşif bekleyenler (kod öncesi):** #36 kullanıcı çıkarma (önce git keşfi) · etiket havuzu (talep-onay; önce kod keşfi) · **İçerik & Soru Felsefesi Keşfi** (DISC-DERİNLEŞME kurgusu/#31/#13/#30 buna bağlı) · **belge yeniden yapılandırma** (~68 belge — 2026-08-23 reorg ile kısmen yapıldı).
 
 **PO manuel (kod değil):** 37m kurum maili (destek@ + env) · Dokploy foto volume · repoları private · KVKK/çerez metinleri (canlı öncesi, en son).
 

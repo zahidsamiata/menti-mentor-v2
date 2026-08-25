@@ -55,6 +55,13 @@
 > ⚠️ Repolar PUBLIC → önce PRIVATE + düzelt. Yeni rapor: `../raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`.
 > MADDE 67 (çerez izni) 10-yol'da VAR (eklenmedi). Kod OKUNDU, değiştirilmedi; DB'ye dokunulmadı.
 >
+> **⚡ GÜNCELLEME (2026-08-23, niyet envanteri + numaralandırma — salt-docs):** (1) **Kırmızı kural düzeltmesi:** "güvenli seed" listesi
+> silinen `seed-questions.ts`'i sayıyordu → gerçek liste `seed-certification`+`seed-learning-journey`+`seed-test-tenant.mjs` (CLAUDE.md+4 belge).
+> (2) **Niyet envanteri (5 ajan):** yarım-iş/bağlanmamış-kod kod-arkeolojisi → `00-KARAR-TAKIP` **C.2** + rapor `yarim-is-niyet-envanteri-2026-08-23.md`;
+> "~14 FE'siz özellik" → **9 doğrulandı.** (3) **Numaralandırma:** Bölüm F → yol haritası **madde 68-78** (`v1-H`); **#38 çakışması çözüldü**
+> (madde 38=güvenlik canonical; DISC işi numarasız "DISC-DERİNLEŞME kurgusu"). (4) **KURAL 7** (taşıyıcı belge iş bölümü) rehbere eklendi.
+> (5) `durum-panosu-2026-08-14` 🔄→📸 adayı (Bölüm E). Gerçek statü çelişkisi: 0. Tümü #112'de (merge PO'da).
+>
 > Bu belge SIK güncellenir — her oturum başında oku, sonunda güncelle. **Sıradaki işler + öncelik:**
 > `10-yol-haritasi.md`. **Tarih/SHA katmanı geçmişi (bu belgeden taşındı):** `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md`.
 > **2026-08-10 öncesi tam geçmiş:** `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md`.
