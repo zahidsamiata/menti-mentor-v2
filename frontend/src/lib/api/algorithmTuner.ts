@@ -27,9 +27,20 @@ export const algorithmTunerApi = {
   getPending: (api: BoundClient): Promise<ApiResult<{ pending: PendingAdjustment | null }>> =>
     api('/api/admin/algorithm-tuner/pending'),
 
-  // #9: kurumun MEVCUT eşleştirme ağırlıkları (salt-okuma gösterim; ayarlama yok).
+  // #9: kurumun MEVCUT eşleştirme ağırlıkları (salt-okuma gösterim).
   getWeights: (api: BoundClient): Promise<ApiResult<{ weights: AlgorithmWeights }>> =>
     api('/api/admin/algorithm-tuner/weights'),
+
+  // 9a: kurum yöneticisi sektör ağırlığını MANUEL ayarlar. discWeight backend'de
+  // 1 - sectorWeight olarak türetilir; yalnız sectorWeight gönderilir (0.05 katı, 0.40-0.70).
+  setWeights: (
+    api: BoundClient,
+    sectorWeight: number,
+  ): Promise<ApiResult<{ message: string; weights: AlgorithmWeights; pendingCleared: boolean }>> =>
+    api('/api/admin/algorithm-tuner/weights', {
+      method: 'PUT',
+      body: { sectorWeight },
+    }),
 
   approve: (api: BoundClient): Promise<ApiResult<{ message: string; applied: PendingAdjustment }>> =>
     api('/api/admin/algorithm-tuner/approve', { method: 'POST' }),
