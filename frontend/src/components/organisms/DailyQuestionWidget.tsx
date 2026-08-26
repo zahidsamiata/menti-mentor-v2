@@ -32,11 +32,9 @@ export function DailyQuestionWidget({ userId }: Props) {
   if (!data || data.done) return null; // Tüm sorular bitti
 
   const { question, progress } = data;
-  // Soru VEYA ilerleme (progress) verisi yoksa widget sessizce gizlenir → sayfa çökmez.
-  // NEDEN: mevcut backend adaptif-test yanıtı `progress` DÖNDÜRMÜYOR (backend↔frontend kontrat
-  // farkı); bu koruma olmadan aşağıdaki progress.isComplete okuması /mentor ve /menti'yi komple
-  // çökertiyordu. Bu, hemen üstteki !question korumasının kardeşi (aynı savunmacı desen).
-  if (!question || !progress) return null;
+  // Soru yoksa widget gizlenir. (madde 70: backend adaptif-test yanıtı artık `progress` döndürüyor
+  // — CANLIDA, backend #51/b4b6d66 — bu yüzden eski `!progress` savunma koruması kaldırıldı.)
+  if (!question) return null;
   // Test tamamlandıysa widget gizle — zorunlu değil zaten, isteyenler devam edebilir
   if (progress.isComplete) return null;
 
