@@ -129,7 +129,9 @@ docs/
 ### `raporlar/icerik/` — test/değerlendirme içerik arşivi
 | Belge | İçerik |
 |---|---|
-| `00-icerik-index.md` + `disc-sorulari` · `sjt-sorulari` · `sertifika-senaryolari` · `ogrenme-yolculugu` · `stk-custom-sorular` (hepsi 2026-08-15) | Her testin TAM soru/cevap içeriği + seed↔canlı tutarlılık (#79) |
+| **`tam-soru-dokumu-2026-08-26.md`** (+ `bolumler/01-05`) ⭐ GÜNCEL | **Kod-kanıtlı TAM döküm** (DISC 32 · SJT 3 · sertifika 20 · öğrenme 13) + puanlama/felsefe analizi + #31 kanıt + sayı çelişkileri + CORE-eşiği + ⏳ canlı-teyit kuyruğu |
+| **`sorular-po-inceleme-2026-08-26.md`** + **`eslesme-uyum-po-inceleme-2026-08-26.md`** ⭐ PO | Ürün sahibi işaretleme dosyaları: 68 soru + eşleştirme uyum tablosu (sade, jargonsuz, `[ ] PO notu`) |
+| `00-icerik-index.md` + `disc-sorulari` · `sjt-sorulari` · `sertifika-senaryolari` · `ogrenme-yolculugu` · `stk-custom-sorular` (hepsi 2026-08-15) ⚠️ BAYAT | Eski döküm — silinmiş `seed-questions.ts`'e dayanır (⚠️ GÜNCELLEME notlu). Güncel için üstteki 2026-08-26 dökümü |
 
 ### `raporlar/kesif/` — keşif/teşhis fotoğrafları (2026-08-02 + 2026-08-19)
 | Belge | İçerik |

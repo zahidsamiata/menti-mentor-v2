@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: canlı DB salt-okuma sayımı + `frontend/src/app/(admin)/admin/questions/page.tsx`.
 
+> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kurum-özel soru altyapısı dökümü (Question/STK_CUSTOM, DISC kilidi, #13 cevap-tipi): [`bolumler/04-ogrenme-kurumozel.md`](bolumler/04-ogrenme-kurumozel.md) GÖREV B + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md).
+
 ## Bulgu — önceki "0" düzeltildi
 - **Kod/seed:** STK_CUSTOM soru seed'de tanımlı **değil** (0). Envanter raporu (PR #78) bu yüzden "0 tanımlı" demişti.
 - **⚠️ Canlı DB (salt-okuma count):** `category='STK_CUSTOM'` → **1 soru** var; `tenantId != null` → 1 (tenant-scoped). → **Canlıda 0 değil, 1 STK-custom soru mevcut.** Biri admin panelinden (`/admin/questions` "+ Yeni Soru") eklemiş. Önceki "0" iddiası **düzeltildi** (kod esas alınmıştı; canlı gerçeği farklı).

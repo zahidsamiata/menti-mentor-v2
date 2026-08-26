@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed-learning-journey.ts` + canlı DB salt-okuma sayımı.
 
+> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/04-ogrenme-kurumozel.md`](bolumler/04-ogrenme-kurumozel.md) + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md). Kod = **13 aşama** (puan yok, timestamp).
+
 > Oyunlaştırılmış keşif akışının **tüm aşamaları + seçenekler + geri bildirimler** tam metin.
 
 ## Kaynak & tutarlılık

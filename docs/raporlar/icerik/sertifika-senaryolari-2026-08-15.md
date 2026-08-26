@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed-certification.ts` + canlı DB salt-okuma sayımı.
 
+> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/03-sertifika.md`](bolumler/03-sertifika.md) + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md). Kod = **20 senaryo** (4 red-line konu); canlı sayısı ⏳ TEYİT GEREK.
+
 > Mentör sertifika sınavının **tüm senaryoları + şıkları + puan/açıklama** tam metin. Kullanıcı yanıtı/PII yok.
 
 ## Kaynak & ⚠️ KRİTİK tutarsızlık

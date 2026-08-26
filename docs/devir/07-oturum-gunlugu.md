@@ -256,6 +256,25 @@
 - **Kalan iş:** madde 97 (FE hesap-kapatma) · H-9 (hukukçu) · küçük borç **98/99/100** (kalibrasyon audit void · SystemLog 90g purge izi · meta.tenantId indekssiz).
 
 ---
+---
+
+# 📅 OTURUM 2026-08-26 (İÇERİK KEŞFİ — tam soru dökümü, 🟢 BYPASS yalnız-belge)
+
+**Salt-belge tur** — kod OKUNDU, değiştirilmedi; DB'ye komut YOK; seed çalıştırılmadı. Çatı main `27542ef`'ten branch `docs/icerik-kesfi-2026-08-26`.
+
+## Yapılanlar
+- **FAZ-1 (5 ajan → bölüm dosyaları):** her ajan kendi ham dökümünü `raporlar/icerik/bolumler/01-05`'e yazdı (bağlam koruması). Kod gerçeği: **DISC 32** (20 CORE+12 DEEPENING; "20"=silinmiş `seed-questions.ts`) · **SJT 3** (OCEAN ölçer, DISC değil) · **sertifika 20** (4 red-line) · **öğrenme 13** (puansız).
+- **FAZ-2 (analiz):** `tam-soru-dokumu-2026-08-26.md` (referans+analiz, tam metin kopyalanmadı) + iki PO dosyası: `sorular-po-inceleme` (68 soru) + `eslesme-uyum-po-inceleme` (16 kombinasyon + tiebreak + 60/40). ⭐ Bulgular: **#31 NEGATİF** (yok, sıfırdan) · **felsefe BELGELENMEMİŞ** (matris/tiebreak/60-40 sezgisel) · **CORE-eşiği tutarsızlığı** (engine 5 = canlı yol) · **üç ayrık sistem** (SJT/OCEAN canlı eşleştirmede okunmuyor).
+- **FAZ-3:** 6 bayat belge ⚠️ GÜNCELLEME notu + 00-INDEX/00-KARAR-TAKIP senkron. **Yeni madde 101** (SJT/OCEAN okunmuyor) · **102** (CORE-eşiği) · **103** (psikometrik gerekçe belgesiz). madde 13/30/31/33/73 + DISC-DERİNLEŞME'ye keşif notu.
+- **Küçük düzeltme:** 09-DURUM satır 5+9 (bayat "pointer bump PR AÇIK" → #118 MERGED, senkron).
+
+## Açık PR / kalan
+- Bu tur PR açılır (docs/icerik-kesfi) → **MERGE ETME.** #110 kilitli ELLENMEDİ.
+- **PO kararı bekleyen:** 68 soru + uyum tablosu işaretleme · #31/DISC-DERİNLEŞME yönü · SJT/OCEAN bağlanacak mı (101) · #30 seed önceliği · #13 gerek mi.
+- **⏳ CANLI TEYİT KUYRUĞU** (döküm sonunda): canlı DISC/sertifika/SJT/öğrenme sayıları — sonraki altyapı-kontrol turunda tek seferde.
+- **Not:** stash@{0} = yalnız `.docx` (KVKK Word), DROP EDİLMEDİ — PO kararına bırakıldı.
+
+---
 
 ## 🧭 Her oturum için çalışma tarzı hatırlatması
 - **Ürün sahibi kod yazmaz;** strateji-Claude promptları yazar, PO Claude Code'a kopyalar.
