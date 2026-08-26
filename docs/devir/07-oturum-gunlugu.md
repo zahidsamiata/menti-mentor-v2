@@ -201,6 +201,20 @@
 
 ---
 
+# 📅 OTURUM 2026-08-26b (#52/#114 merge senkron + pointer bump + depo hijyeni)
+
+**MOD:** 🟢 BYPASS. PO #52 (`838d128`) + #114 (`6e6e798`) merge etti. **Hiçbir PR merge edilmedi (bu ajan).**
+
+- **9a/9b/madde 70/87 → ✅ CANLIDA** (backend #52 + çatı #114). Motor kaydedilen ağırlığı okur (madde 87 çözüldü) + tenant manuel ayar + progress guard.
+- **⭐ DURAK-A sonucu (PO, Neon prod salt-okuma):** `tenantVocabulary`'de özel ağırlık kayıtlı tenant = **0** → 9b hiçbir sıralamayı değiştirmedi (tümü %60/%40). Belgeye kanıt olarak işlendi.
+- **Pointer bump PR `chore/pointer-bump-52`:** çatı submodule `b4b6d66`→`838d128` (ileri-sarım kanıtlı, yalnız pointer). MERGE EDİLMEDİ.
+- **Yeni madde 95:** kalibrasyon 'son değişiklik' satırında **AKTÖR (kim)** gösterilmiyor (getWeights actorUserId dönmüyor) → 9a PO kararının yarısı eksik, küçük FE/BE işi.
+- **🧹 Depo hijyeni:** 6 atıl worktree (3 backend-kopyası ~1GB + 3 çatı) kaldırıldı (hepsi commit-edilmemiş-iş YOK doğrulandı); merge olmuş **yerel 91 + uzak 93** dal silindi; unmerged dallar + #110 korundu. Disk 16→17G.
+
+**Kalan:** pointer-bump-52 merge (PO) · madde 95 (aktör izi) · madde 39 KVKK hardDelete (migration) · madde 93 tam-anonim.
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
 0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).
