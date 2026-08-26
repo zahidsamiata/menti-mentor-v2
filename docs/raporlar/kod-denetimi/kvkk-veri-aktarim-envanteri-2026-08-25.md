@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ (2026-08-25)** — o günün fotoğrafı, güncellenmez. Kanıtlar backend submodule kodu (`ba92dfa`) + frontend'e dayanır.
 
+> ⚠️ **GÜNCELLEME (2026-08-26):** **Sunucu ülkesi PO teyitli — Londra / Birleşik Krallık** (AWS Europe (London), `eu-west-2`). Eski **"İrlanda" varsayımı HATALIYDI** (`eu-west-2`=Londra/BK, İrlanda=`eu-west-1`). ⚠️ Birleşik Krallık **AB üyesi DEĞİL** → yurt dışı aktarım değerlendirmesini etkiler. Bu düzeltme yasal metinlere işlendi; `00-KARAR-TAKIP` madde 92 ✅ ÇÖZÜLDÜ. (Rapor 📸 dondurulmuş; aşağıdaki C-1 satırları o günün çelişki fotoğrafıdır — bu not güncel gerçeği verir.)
+
 > **Amaç:** KVKK belge paketinin (aydınlatma/açık rıza/gizlilik/çerez/saklama/başvuru) **kod gerçeğine dayanması** için "hangi veri → hangi
 > servis → hangi ülke → ne kadar saklanıyor" envanteri. Jenerik şablon değil. Bu rapor bir sonraki turda hukuki paketin TEK kaynağıdır.
 > Yöntem: 2 paralel salt-okuma ajanı. DB'ye komut yok; env DEĞERLERİ yazılmadı (yalnız tanımlı/tanımsız). "sanırım" yok — her satır dosya:satır.

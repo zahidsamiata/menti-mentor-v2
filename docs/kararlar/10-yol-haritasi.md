@@ -39,6 +39,8 @@
 - **6** — Onay paneli bildirim maili · *KALAN:* kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` (kullanıcı maili zaten çalışıyor).
 - **7** — Havuz KART follow-up · *KALAN:* (A) gerekçe ✅ MERGED + Aşama 1 ✅; **Aşama 2/3 açık** (otomatik pasifleştirme=migration, yeniden değerlendirme, ContextualFeedbackHost) → PO onaylı migration turu.
 - **9** — Algoritma kalibrasyon · **9a** ayar + **9b** motor-okuma → **✅ CANLIDA (backend #52 `838d128` + çatı #114 `6e6e798`; migration YOK).** DURAK-A: özel ağırlıklı tenant 0.
+- **95** — Kalibrasyon "son değişiklik" aktör izi (9a'nın "kim" yarısı) → 🔀 **PR'da (MERGE OLMADI):** backend **#53** + çatı **#116** (migration YOK). Detay: `00-KARAR-TAKIP` madde 95.
+- **93+39 (96)** — Tam anonimleştirme + hardDelete düzeltme → 🛑 **DURAK-1 PO onayı bekliyor** (keşif tamam; öneri (c)+(2) migration'sız; hukukçu H-9). Detay: `00-KARAR-TAKIP` madde 96.
 - **13** — Soru cevap-tipi seçimi · *AÇIK* — migration (canlı DB) + kapsam belirsiz → PO netleştir, onaylı ayrı tur.
 - **30** — Sertifika bankası 5→20 seed · *AÇIK* — canlı DB yazımı → PO onayı zorunlu.
 - **31** — DISC-tipine-özel "mentiye yaklaşım" içeriği · *AÇIK* — en büyük içerik boşluğu, PO netleştir.

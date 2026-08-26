@@ -13,7 +13,7 @@
 
 ## ⚠️ Bilinen kısıt (dürüst — kod gerçeği)
 - Platformda kullanıcının verisini **kendi kendine indirebileceği/silebileceği bir ekran şu an YOKTUR** (madde 40/84). Bu ekran hazırlanana kadar talepler **e-posta ile** karşılanır.
-- Silme talebinde, teknik kısıt (madde 39) nedeniyle bazı kayıtlar şu an yalnız **anonimleştirilebilir**; tam silme düzeltmesi bir iş maddesidir.
+- **Silme/kapatma talebi anonimleştirmeyle karşılanır** (avukat onaylı yöntem — silme yerine anonimleştirme): kimliğinizle ilişkilendirilebilir veriler (ad, iletişim, kişilik, **serbest metin/mesaj içeriği**, yüklenen fotoğraf) geri döndürülemez şekilde temizlenir, oturumunuz kapatılır. Ortak kayıtlarda (görüşme/mesaj) kimliğiniz kaldırılır; içerik anonimleştirilir. *(Teknik ayrıntı: `00-KARAR-TAKIP` madde 39/93; anonimleştirme düzeyi hukukçu değerlendirmesinde — kapak H-9.)*
 - **Başvuru e-posta adresi kodda tanımlı olana kadar bu belge yayınlanamaz** → PO'nun `destek@` adresini kurup bağlaması ön koşuldur.
 
 ## BAŞVURU FORMU (şablon)

@@ -6,7 +6,7 @@
 Bu politika, platformu kullanırken kişisel verilerinizin nasıl işlendiğini **sade dille** açıklar. Hukuki dayanak ve resmi bildirim için Aydınlatma Metni ve Açık Rıza Metni esastır.
 
 ## Kim veri sorumlusu?
-- **Hesabınız, girişiniz ve platform güvenliği** için: platform işletmecisi ([PO DOLDURACAK]).
+- **Hesabınız, girişiniz ve platform güvenliği** için: platform işletmecisi (**Zahid Sami Ata** — gerçek kişi/sosyal sorumluluk projesi).
 - **Üyesi olduğunuz kurumun programı kapsamındaki verileriniz** için: **kurumunuzun kendisi** (dernek/kulüp). Platform bu verileri kurum adına, kurumun talimatıyla işler (veri işleyen).
 
 ## Ne topluyoruz? (kod gerçeği)

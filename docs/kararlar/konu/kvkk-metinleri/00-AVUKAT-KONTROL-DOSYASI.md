@@ -19,37 +19,41 @@ Platform, derneklerin/üniversite kulüplerinin **mentor–menti eşleştirme pr
 | Kullanım/log | Güvenlik, iz sürme |
 
 ## 3. Veri nerede duruyor, nereye gidiyor (envanter özeti)
-- **Barındırma:** bulut veritabanı (**yurt dışı**) + uygulama sunucusu.
+- **Barındırma:** bulut veritabanı — **Londra / Birleşik Krallık** (AWS Europe (London), bölge kodu `eu-west-2`; PO teyitli 2026-08-26) + uygulama sunucusu (Dokploy — ülke ayrıca teyit edilecek).
 - **Üçüncü taraf:** SMTP e-posta · Google/LinkedIn ile giriş (opsiyonel). **Analitik/reklam YOK** (aktif değil).
 
-### 🔴 SUNUCU ÜLKESİ ÇELİŞKİSİ (öncelikli — yasal metinde ülke beyanı kritik)
-- Proje belgeleri veritabanı bölgesini **"eu-west-2 / İrlanda"** yazıyor. **Bu içsel olarak ÇELİŞKİLİDİR:** `eu-west-2` bölge kodu **Londra (Birleşik Krallık)**'a, İrlanda ise **eu-west-1**'e karşılık gelir. Bir arşiv notu "eu-west-1/Ireland" diyor.
-- **UK vs İrlanda ayrımı KVKK yurt dışı aktarımı için önemlidir** (İrlanda = AB; UK = AB dışı, ayrı yeterlilik değerlendirmesi).
-- **→ Yasal metinlerde ülke adı YAZILMADI**, `[PO DOLDURACAK: sağlayıcı panelinden teyitli sunucu ülkesi]` bırakıldı. **PO, bulut sağlayıcı konsolundan gerçek bölgeyi teyit etmeli.** Uygulama sunucusu (Dokploy) konumu da kodda yok — teyit edilmeli.
+### ✅ SUNUCU ÜLKESİ — ÇÖZÜLDÜ (2026-08-26, PO teyitli)
+- **Veritabanı sunucusu Londra / Birleşik Krallık'tadır** (AWS Europe (London), bölge kodu `eu-west-2`). PO bulut sağlayıcı konsolundan teyit etti (2026-08-26).
+- ⚠️ **GÜNCELLEME (2026-08-26):** eski belgelerdeki **"eu-west-2 / İrlanda"** beyanı **HATALIYDI** — `eu-west-2` = Londra (BK), İrlanda ise `eu-west-1`. Doğru bölge Londra/BK olarak kesinleşti; yasal metinlere bu işlendi.
+- **⚠️ Hukukçu için kritik:** **Birleşik Krallık AB ÜYESİ DEĞİLDİR** → İrlanda'dan (AB) farklı olarak ayrı bir yeterlilik/yurt dışı aktarım değerlendirmesi gerekir (bkz. Bölüm 4, Soru 3). Uygulama sunucusu (Dokploy) konumu ayrıca teyit edilecek.
 
 ## 4. ⭐ HUKUKÇUYA SORULAR (tüm [HUKUKÇU KARARI] işaretleri + 3 açık soru)
 **Belgelere gömülü kararlar:**
 1. **DISC/psikometrik profil KVKK Md.6 özel nitelikli veri mi?** (Sayılırsa: ayrı açık rıza + ek güvenlik tedbiri + aktarım kısıtı.) — *Belge 1, 2.*
 2. **VERBİS kaydı gerekli mi?** İşletmeci gerçek kişi, çalışan yok, bilanço yok. — *Belge 1.*
-3. **Yurt dışı aktarım (Md.9, 2024):** sistematik aktarım için açık rıza yeterli mi, standart sözleşme + Kurul bildirimi mi? Ve **SS-3 açık sorusu:** Kurul'un "Veri İşleyenden Veri İşleyene" standart sözleşmesini bulut/e-posta sağlayıcısı imzalamazsa, mevcut GDPR DPA'sı bir mekanizmaya karşılık gelir mi; gelmezse kalan risk? — *Belge 2, 8.*
+3. **Yurt dışı aktarım (Md.9, 2024):** sistematik aktarım için açık rıza yeterli mi, standart sözleşme + Kurul bildirimi mi? Ve **SS-3 açık sorusu:** Kurul'un "Veri İşleyenden Veri İşleyene" standart sözleşmesini bulut/e-posta sağlayıcısı imzalamazsa, mevcut GDPR DPA'sı bir mekanizmaya karşılık gelir mi; gelmezse kalan risk? — *Belge 2, 8.* **⚠️ Not (2026-08-26, PO teyitli): sunucu Birleşik Krallık'tadır (AB üyesi DEĞİL) — değerlendirmeyi buna göre yapmanızı rica ederiz.**
 4. **Hukuki sebep eşlemesi:** hangi işleme amacı Md.5 hangi sebebine dayanır (sözleşmenin ifası / meşru menfaat / açık rıza)? — *Belge 1.*
 5. **18+ yaş:** yalnız beyan (self-serve'de o da yok) yeterli mi, doğrulama gerekli mi? — *Belge 3, 7.*
 6. **Çerezler:** zorunlu oturum çerezleri rıza gerektirmez teyidi + ileride analitik çerezleri hangi rıza mekanizması? — *Belge 4.*
 7. **Saklama süreleri:** önerilen süreler (Belge 5 [öneri] alanları) uygun mu; süresiz mesaj/feedback saklama riski? — *Belge 5.*
 8. **Rıza kutusu ayrımı + sürümleme:** KVKK+18 birleşik kutu ve OAuth'ta rıza kutusunun UI'da alınmaması + rıza sürümünün tutulmaması — düzeltme şart mı, önerilen ayrık tasarım uygun mu? — *Belge 2.*
+9. **⭐ H-9 — Anonimleştirme düzeyi yeterli mi?** Hesap kapanışında/anonimleştirmede **tüm serbest metin ve kimlik/iletişim/kişilik alanları temizleniyor**, yüklenen fotoğraf dosyası siliniyor, oturum/jetonlar iptal ediliyor. **Ancak kayıt anahtarı `userId` — rastgele bir kimlik (cuid), kişisel bilgi içermez — bağlı kayıtlarda (görüşme/mesaj) kalıyor** (karşı tarafın geçmişi bozulmasın diye). **Bu düzey KVKK imha yükümlülüğünü karşılar mı, yoksa `userId` bağının da koparılması (ilişki NULL'lama) mı gerekir?** Ön düşüncemiz: içerik tümüyle temizlendiğinden pratik yeniden-tanımlama güçtür; ancak bunu avukat teyit etmeli. — *Belge 5.*
 
 > Her soru için **bizim ön düşüncemiz belgelerde** işaretli (dayatma değil — avukat karar verir).
 
-## 5. [PO DOLDURACAK] alanları (tam liste)
-Veri sorumlusu kimliği (ad/unvan) · adres · MERSİS/vergi no (varsa) · KEP adresi · **başvuru `destek@` e-postası (kodda tanımsız — kurulacak)** · bulut sağlayıcı teyitli ülke · uygulama sunucusu ülkesi · VERBİS kayıt durumu · önceki hukukçu geri bildiriminin kapsamı · yürürlük tarihi.
+## 5. [PO DOLDURACAK] alanları (kalan)
+> ✅ **Kapandı (2026-08-26, PO teyitli):** veri sorumlusu **kimliği/adı** (gerçek kişi — bkz. aşağıdaki not) · **bulut sağlayıcı ülkesi** (Londra/BK).
+> **Kalan:** veri sorumlusu **adresi · MERSİS/vergi no (varsa) · KEP adresi** · **başvuru `destek@` e-postası (kodda tanımsız — kurulacak)** · uygulama sunucusu (Dokploy) ülkesi · VERBİS kayıt durumu · önceki hukukçu geri bildiriminin kapsamı · yürürlük tarihi.
+>
+> ℹ️ **Veri sorumlusu kimliği:** şu an **gerçek kişi** (işletmeci, sosyal sorumluluk projesi — şirket değil). **Şirketleşene kadar** gerçek kişi kimliği geçerlidir; şirket kurulunca **şirket unvanı/bilgileriyle** güncellenecektir (PO kararı, 2026-08-26).
 
 ## 6. Bilinen uyum boşlukları (DÜRÜST — gizlenmedi)
 - FE hak-kullanım ekranı YOK; başvuru e-postası tanımsız (madde 40/84).
 - Genel otomatik imha YOK; mesaj/feedback süresiz (madde 81).
 - Rıza metni sürümlenmiyor (madde 82).
 - OAuth'ta açık rıza UI'da alınmıyor; KVKK+18 birleşik kutu (madde 83).
-- `hardDelete` FK kısıtı — KVKK tam silme fiilen çalışmıyor (madde 39).
-- **Anonimleştirme kısmi (takma-adlaştırma):** sosyal/avatar/kişilik alanları temizlenir (2026-08-25 iyileştirildi) ama mesaj içeriği + fiziksel foto dosyası + kayıt-anahtarı bağı kalır → tam anonimleştirme iş maddesi (madde 93). Saklama-imha metni bu gerçeği beyan eder, "tam geri-döndürülemez" vaadi vermez.
+- **`hardDelete` (madde 39) → anonimleştirmeye yönlendirildi** (PO kararı, PR bekliyor): FK kısıtı nedeniyle gerçek silme çalışmıyordu; artık "silme" talebi anonimleştirir + oturum iptal eder, kullanıcıya "silindi" DENMEZ (dürüst mesaj).
+- **Anonimleştirme genişletildi (madde 93, PR bekliyor):** kimlik/iletişim/kişilik + **serbest metin (mesaj içeriği, görüşme not/telefon, geri-bildirim/talep/şikayet)** + **fiziksel foto dosyası** + **oturum/jetonlar** temizlenir. **Sınır:** `userId` (rastgele cuid, kişisel bilgi içermez) bağlı kayıtlarda kalır → **H-9 (Bölüm 4)** hukukçuya soruldu. Saklama-imha metni bu gerçeği beyan eder; "tam geri-döndürülemez" vaadi **vermez.**
 - 18+ yalnız beyan, doğrulama yok.
 - VERBİS durumu belirsiz.
 - Analitik (#110) merge-kilitli — çerez izni olmadan açılmayacak.
