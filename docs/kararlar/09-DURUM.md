@@ -2,6 +2,12 @@
 
 **🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-26
 
+> **⚡ ŞU AN — SNAPSHOT (2026-08-26, KVKK+madde 95+anonim keşif turu — git doğrulandı):** Çatı main HEAD **`f9c1a34`** (#52 pointer-bump merged) · backend main HEAD/pointer **`838d128`** (senkron). **Bu tur 3 iş + keşif:**
+> · **FAZ 0 — KVKK (madde 92 ✅):** sunucu ülkesi **Londra/Birleşik Krallık** (AWS `eu-west-2`, AB üyesi DEĞİL; eski "İrlanda" hatalıydı) + veri sorumlusu kimliği (gerçek kişi — şirketleşene kadar; PO kararı) yasal metinlere işlendi; Word yeniden üretildi. Docs PR (bu turda açılıyor).
+> · **FAZ 1 — madde 95 (🔀 PR'da, MERGE OLMADI):** kalibrasyon "son değişiklik" aktör izi. Backend **#53** (`getLastWeightChange` — actorName yalnız AD, tenant-izolasyonlu, migration YOK) + çatı **#116** (FE satırı). CI bekliyor.
+> · **FAZ 2-A — TAM ANONİMLEŞTİRME KEŞFİ (madde 93+39) → 🛑 DURAK-1 PO onayı bekliyor:** 3 salt-okuma ajan. Öneri **(c)+(2), MIGRATION YOK**: bağlı-tablo serbest metni temizle + avatar diski sil + hardDelete'i anonymize'e yönlendir. ⚠️ (c) userId **desenini** bırakır → "anonim mi pseudonim mi" hukukçuya (H-9); (c) ile yasal metinde "tam geri-döndürülemez" vaadi VERİLMEZ. Detay: `00-KARAR-TAKIP` **madde 96**. **Kod YAZILMADI.**
+> · **Açık PR (bu tur):** çatı #116 (FE) + backend #53 + docs (KVKK) + önceki #110 (analytics kilitli). **MERGE EDİLMEDİ** — merge PO'da.
+>
 > **⚡ ŞU AN — GÜNCEL SNAPSHOT (2026-08-25, git+API doğrulandı):** Çatı main HEAD **`9bb02b7`** (#112 merged) · backend main HEAD **`b4b6d66`**
 > (#51 merged) · **çatı submodule pointer:** bump PR **#113** açık (`ba92dfa`→`b4b6d66`, ileri-sarım — merge PO'da). **Açık PR:** çatı #113 (pointer) + #110 (analytics, 🛑 merge-kilitli). **Repolar PRIVATE** (PO yaptı).
 > **#51 CANLIDA (backend autodeploy):** madde 38 `updateUser` PII sızıntısı · 68/80/88/89 platform PII maskeleme · 79 görüşme limiti · 69 validation mesajı · 70 adaptive progress · 93 anonimleştirme (kısmi). **KALAN:** madde 39 (KVKK hardDelete FK, migration) · madde 70 FE guard (ayrı çatı PR) · 9a/9b kalibrasyon (migration'sız, #51 sonrası temiz main'den) · madde 93 tam-anonim (mimari).

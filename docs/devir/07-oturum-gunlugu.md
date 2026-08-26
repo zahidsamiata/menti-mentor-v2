@@ -227,6 +227,31 @@
 **PO manuel (kod değil):** 37m kurum maili (destek@ + env) · Dokploy foto volume · repoları private · KVKK/çerez metinleri (canlı öncesi, en son).
 
 ---
+---
+
+# 📅 OTURUM 2026-08-26 (KVKK + madde 95 + tam-anonimleştirme keşfi)
+
+**📸 O oturumun kapanış fotoğrafı** — güncel için git + 09-DURUM.
+
+## 🔎 Git-doğrulanmış durum (2026-08-26, tur başı)
+- **Çatı main HEAD:** `f9c1a34` (#52 pointer-bump merged) · **backend main HEAD/pointer:** `838d128` (senkron). Masa temiz.
+
+## A) Yapılanlar (kanıtlı)
+- **FAZ 0 — KVKK paketi (madde 92 ✅ ÇÖZÜLDÜ):** sunucu ülkesi **Londra/Birleşik Krallık** (AWS `eu-west-2`; eski "İrlanda" HATALIYDI, BK = AB üyesi DEĞİL) + veri sorumlusu kimliği (gerçek kişi — PO: şirketleşene kadar ad, sonra şirket) yasal metinlere (01/02/03/07/08 + 00-AVUKAT) işlendi; envanter raporuna ⚠️ GÜNCELLEME notu; Word yeniden üretildi (emoji temiz, Türkçe). Docs branch commit `ca29506`. **Hukuki İÇERİK değişmedi — yalnız placeholder + ülke.**
+- **FAZ 1 — madde 95 (🔀 PR'da, MERGE OLMADI):** kalibrasyon "son değişiklik" aktör izi. Backend **#53** (`getLastWeightChange`: actorName yalnız AD/e-posta değil, tenant-izolasyonlu, `WEIGHT_CHANGE_AUDIT_MESSAGE` tek-kaynak, migration YOK; test: aktör+eski→yeni+e-posta sızmıyor+okuma-izolasyonu) + çatı **#116** (FE satır). Lokal: backend tsc/eslint + FE tsc/lint/build yeşil; entegrasyon testi CI'da.
+- **FAZ 2-A — TAM ANONİMLEŞTİRME KEŞFİ (madde 93+39):** 3 salt-okuma ajan. Bulgular `00-KARAR-TAKIP` madde 96'da. **→ 🛑 DURAK-1: PO onayı bekliyor, KOD YAZILMADI.**
+
+## B) 🛑 Bekleyen — DURAK-1 (PO kararı)
+- Anonimleştirme derinliği: **(c)** migration'sız içerik-temizleme (userId deseni kalır, H-9 hukukçu) vs **(a)** SetNull migration (gerçek anonim, riskli/pahalı) vs (b) sil.
+- Mesaj karşı-taraf görünümü: (iii) placeholder+iskelet [öneri] / (i) sohbeti sil / (ii) olduğu gibi.
+- madde 39 hardDelete: (2) anonymize'e yönlendir [öneri] / (1) FK migration / (3) devre dışı.
+- ⚠️ (c) seçilirse yasal metinde "tam geri-döndürülemez" **vaadi verilemez** (dürüst beyan kalır).
+
+## C) Açık PR (MERGE EDİLMEDİ — merge PO'da)
+- Backend **#53** (madde 95) · çatı **#116** (madde 95 FE) · docs (KVKK, madde 92) · önceki **#110** (analytics, 🛑 kilitli).
+- **Pointer bump:** madde 95 backend #53 MERGE olduktan sonra (dans-önleme) — bu tur bump YOK.
+
+---
 
 ## 🧭 Her oturum için çalışma tarzı hatırlatması
 - **Ürün sahibi kod yazmaz;** strateji-Claude promptları yazar, PO Claude Code'a kopyalar.
