@@ -185,6 +185,22 @@
 
 ---
 
+# 📅 OTURUM 2026-08-26 (9a/9b kalibrasyon — migration YOK)
+
+**MOD:** 🟢 BYPASS. #51 merge sonrası temiz main'den. **Hiçbir PR merge edilmedi.**
+
+- **9b (backend PR #52):** canlı motor kaydedilen tenant ağırlığını okur (`scoring.ts` opsiyonel ağırlık, default 0.6/0.4=eski davranış; `matching.ts` N+1 yok; regresyon testi) → **madde 87 (ölü yazma) çözülür.**
+- **9a (backend #52 + çatı #114):** tenant manuel ağırlık ayarı `PUT /algorithm-tuner/weights` (0.05 katı · %40-70 · discWeight=1-sector · tenant-izolasyon · tüm adminler · SystemLog.meta audit · manuel ayar pending'i temizler).
+- **⭐ MIGRATION GEREKMEDİ** (ağırlık `tenantVocabulary` Json'da, keşif doğruladı) — DURAK-1 raporu bunu göstermişti; DURAK-2 devreye girmedi.
+- **FE (çatı #114):** kalibrasyon +/− %5 UI (DISC otomatik, son-değişiklik satırı, backend hata mesajı) + **madde 70** progress guard kaldırma.
+- **CI:** backend #52 ✅ yeşil. Çatı #114 koşuyor. **PR'lar MERGE EDİLMEDİ.**
+
+**⚠️ DURAK-A (PO, #52 merge öncesi):** `tenantVocabulary`'de `algorithmWeights` KAYITLI tenant sayısını salt-okuma kontrol et — 0 ise 9b tamamen risksiz; >0 ise o kurumların sıralaması aktive olur (kayıt yoksa DEFAULT=mevcut, regresyon garantili). Yalnız sayı+ağırlık, PII yok.
+
+**Kalan:** #52+#114 merge (PO) · madde 39 KVKK hardDelete (migration turu) · madde 93 tam-anonim.
+
+---
+
 ## ⏭️ SIRADAKİ İŞ SIRASI (bu günlüğün en güncel yönlendirmesi)
 > **Migration'lar ASLA paralel değil — SIRALI** (canlı = lokal aynı Neon DB; her migration PO onayı + staging ister).
 0. **🔴 CANLI-ÖNCESİ:** (a) **repoları PRIVATE yap** (PO-manuel) · (b) güvenlik: madde 38+68 **✅ backend PR #51 (merge PO'da)**; **madde 39 (G2)** kaldı (migration+PO). · (c) **KVKK belge paketi (FAZ D)** — envanter hazır (`kvkk-veri-aktarim-envanteri-2026-08-25`), ayrı tur: 8 belge + FE (merge-kilitli) + 8 hukukçu sorusu. · (d) **madde 79** görüşme limiti enforce (küçük).
