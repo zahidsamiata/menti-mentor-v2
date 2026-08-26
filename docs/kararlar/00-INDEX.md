@@ -162,6 +162,17 @@ docs/
 | `platform-admin-strateji-2026-08-02.md` | Platform admin paneli ideal hâli |
 | `stk-yonetici-strateji-2026-08-02.md` | STK yönetici paneli ideal hâli |
 
+## Belge bilançosu — `docs/raporlar/bilanco/` (📸 4-tur sayım, 2026-08-26)
+> Tüm docs 4 turda baştan-sona okundu; her karar/iş/niyet çıkarılıp kod gerçeğiyle çaprazlandı ve tekilleştirildi (196 benzersiz kalem).
+
+| Belge | İçerik |
+|---|---|
+| `belge-bilancosu-2026-08-26.md` | ⭐ NİHAİ RAPOR: toplam sayım + kayıp kalemler (numara adayı) + hayalet-tamamlanmışlar + çelişkiler + tutulmamış sözler + KURAL 8 sağlık notu + PO soruları |
+| `karar-defteri-2026-08-26.md` | ⭐ Benzersiz (tekilleştirilmiş) 196 kalem, kaynak-belgeye göre gruplu, dosya:satır kanıtlı |
+| `bilanco-po-ozet-2026-08-26.md` | ⭐ Ürün sahibi özeti (sade Türkçe, `[ ] PO notu` satırlı — arkada ne kaldı) |
+| `tekrar-onleme-2026-08-26.md` | Kök-neden teşhisi + KURAL 9-12 önerisi (PO onayına; yürürlükte DEĞİL) |
+| `bolumler/T1..T4-*.md` (16 dosya) | Ham tur-tur bölüm defterleri (tarihsel iz) |
+
 ## Arşiv — `docs/arsiv/`
 | Belge | Neden arşivde |
 |---|---|

@@ -276,6 +276,18 @@
 
 ---
 
+## OTURUM 2026-08-26 (akşam) — BELGE BİLANÇOSU (4-tur salt-belge sayım)
+- **Mod:** 🟢 BYPASS (yalnız-belge; kod/DB/PR-merge YOK). Branch: `docs/belge-bilancosu-2026-08-26`.
+- **Ne yapıldı:** Tüm `docs/` (canonical + kararlar/ + raporlar/ + devir/ + arsiv/) + kök & backend `CLAUDE.md` **4 turda baştan-sona okundu** (71 belge, 10.473 satır; 11 ham içerik + 11 kvkk-metni kural gereği sayılmadı). Her karar/iş/niyet çıkarıldı, kod gerçeğiyle çaprazlandı, **tekilleştirildi**.
+  - Tur-1: canonical + kararlar/ (27 belge) · Tur-2: raporlar/ (28 belge, 486 kalem) · Tur-3: devir/ + CLAUDE.md (9 belge) + TUR-1 denkleştirme · Tur-4: arsiv/ (7 belge) + tekilleştirme + nihai çıktılar.
+- **Sonuç:** HAM 1381 kalem → **196 benzersiz** (1185 tekrar birleşti). Açık: ⬜66+🟡22+❓32=**120**. **~21 numara adayı** (104'ten, PO onayına — numara DOĞURULMADI), **15 tutulmamış söz**, **~29 unutulmuş erken niyet**, **6 çelişki** (5 kod-hakemli), **~20 hayalet-tamamlanmış**.
+- **Öne çıkan:** `enneagramWing` kod-hakem = yarım-bağlı yaz-echo-alanı · ThemeToggle TUR-1 yanlış-✅ düzeltildi (platform layout'ta yok) · `backend/CLAUDE.md` 6 bayat onboarding iddiası · `00-CIKIS-PLANI` en bayat canonical · Y1-Y7 retention 08-20'den beri gerekçesiz açık.
+- **Çıktılar:** `docs/raporlar/bilanco/` → nihai rapor + karar defteri + PO özet + tekrar-önleme (KURAL 9-12 öneri, yürürlükte DEĞİL) + 16 bölüm defteri.
+- **Belge-senkron:** 00-INDEX + 00-KARAR-TAKIP + 09-DURUM + bu günlük ⚠️ notla güncellendi (numara doğurulmadı; bulgular PO onayıyla 00-KARAR-TAKIP'te numaralanacak — KURAL 8).
+- **Sınır:** DB'ye HİÇ sorgu yok (canlı sayı teyitleri ⏳ kuyrukta); kod OKUNDU, değiştirilmedi; PR açıldı, MERGE EDİLMEDİ.
+
+---
+
 ## 🧭 Her oturum için çalışma tarzı hatırlatması
 - **Ürün sahibi kod yazmaz;** strateji-Claude promptları yazar, PO Claude Code'a kopyalar.
 - **Modlar:** 🔵 PLANLA (salt-okuma) / 🟢 BYPASS (kod/belge yazar, PR açar — **MERGE ETMEZ**). Merge kararı hep PO'da.

@@ -17,6 +17,8 @@
 
 > **Çıkış önceliği (hangi iş çıkıştan önce/sonra):** `00-CIKIS-PLANI.md` — açık işler K0-K5'e sınıflandı; gerçek çıkış-bloker sadece 5 K0 + 1 K1.
 
+> **⚠️ GÜNCELLEME (2026-08-26) — BELGE BİLANÇOSU (4-tur sayım) yapıldı:** Tüm docs (71 belge, 10.473 satır) + kök & backend `CLAUDE.md` baştan-sona okundu, kod gerçeğiyle çaprazlandı, tekilleştirildi → **196 benzersiz karar/iş/niyet** (açık: ⬜66+🟡22+❓32=**120**). **~21 numara adayı** (104'ten başlar — PO onayına; **numara DOĞURULMADI**), **15 tutulmamış söz**, **~29 unutulmuş erken niyet**, **6 çelişki** (5 kod-hakemli), **~20 hayalet-tamamlanmış** (belge "açık" der, kod yapılmış). En bayat canonical = `00-CIKIS-PLANI` (madde 39 + K5-soru 2 + repo-private 2026-08-26 kararlarından habersiz). Tam döküm: `../raporlar/bilanco/belge-bilancosu-2026-08-26.md` + `karar-defteri-2026-08-26.md`. PO özeti: `bilanco-po-ozet-2026-08-26.md`. Tekrar-önleme (KURAL 9-12 öneri, yürürlükte DEĞİL): `tekrar-onleme-2026-08-26.md`. **Belge salt-okuma sayım turu — numara/kod/DB değişmedi.**
+
 | Kategori | Sayı | Tek cümle |
 |---|:---:|---|
 | 🔴/🟡/🔵 **v1 açık iş** | **6** | ⚡ #37 kurum "düzeltme iste" → **✅ CANLIDA** (backend #50 + çatı #104 merged, migration canlıda). Kalan: cevap-tipi(#13), kurum-maili(#6), 2a/2b/#7-B tasarım-hazır, içerik/seed/PO + **9a** ağırlık-ayar (migration bekliyor) + **37m** kurum-mail-açma (PO-manuel env) |
