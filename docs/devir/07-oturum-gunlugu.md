@@ -239,17 +239,17 @@
 ## A) Yapılanlar (kanıtlı)
 - **FAZ 0 — KVKK paketi (madde 92 ✅ ÇÖZÜLDÜ):** sunucu ülkesi **Londra/Birleşik Krallık** (AWS `eu-west-2`; eski "İrlanda" HATALIYDI, BK = AB üyesi DEĞİL) + veri sorumlusu kimliği (gerçek kişi — PO: şirketleşene kadar ad, sonra şirket) yasal metinlere (01/02/03/07/08 + 00-AVUKAT) işlendi; envanter raporuna ⚠️ GÜNCELLEME notu; Word yeniden üretildi (emoji temiz, Türkçe). Docs branch commit `ca29506`. **Hukuki İÇERİK değişmedi — yalnız placeholder + ülke.**
 - **FAZ 1 — madde 95 (🔀 PR'da, MERGE OLMADI):** kalibrasyon "son değişiklik" aktör izi. Backend **#53** (`getLastWeightChange`: actorName yalnız AD/e-posta değil, tenant-izolasyonlu, `WEIGHT_CHANGE_AUDIT_MESSAGE` tek-kaynak, migration YOK; test: aktör+eski→yeni+e-posta sızmıyor+okuma-izolasyonu) + çatı **#116** (FE satır). Lokal: backend tsc/eslint + FE tsc/lint/build yeşil; entegrasyon testi CI'da.
-- **FAZ 2-A — TAM ANONİMLEŞTİRME KEŞFİ (madde 93+39):** 3 salt-okuma ajan. Bulgular `00-KARAR-TAKIP` madde 96'da. **→ 🛑 DURAK-1: PO onayı bekliyor, KOD YAZILMADI.**
+- **FAZ 2-A — TAM ANONİMLEŞTİRME KEŞFİ (madde 93+39):** 3 salt-okuma ajan → `00-KARAR-TAKIP` madde 96. **🛑 DURAK-1'de PO 1·1·1 = (c)+(iii)+(2) seçti** (+ EK ŞART: "silindi" deme, token iptali, dürüst yasal metin).
+- **FAZ 2-B — UYGULANDI (🔀 PR'da, MERGE OLMADI):** backend **#54** (MIGRATION YOK): `anonymizeUser` bağlı serbest-metin (mesaj `[silindi]` iki-taraflı, görüşme/telefon/feedback/talep/şikayet/sözleşme) + fiziksel avatar dosyası + oturum/token iptali (membership pasif + token sil → eski token 403); `hardDelete`→anonymize ("silindi" DENMEZ, ACCOUNT_CLOSED_MESSAGE). Test: iki-taraflı mesaj, yeniden-tanımlama izi yok, token 403, satır silinmez. KVKK metinleri (05/06/00-AVUKAT H-9) + Word güncellendi. **Dürüst sınır:** userId (cuid) kalır → "tam geri-döndürülemez" vaadi YOK, H-9.
 
-## B) 🛑 Bekleyen — DURAK-1 (PO kararı)
-- Anonimleştirme derinliği: **(c)** migration'sız içerik-temizleme (userId deseni kalır, H-9 hukukçu) vs **(a)** SetNull migration (gerçek anonim, riskli/pahalı) vs (b) sil.
-- Mesaj karşı-taraf görünümü: (iii) placeholder+iskelet [öneri] / (i) sohbeti sil / (ii) olduğu gibi.
-- madde 39 hardDelete: (2) anonymize'e yönlendir [öneri] / (1) FK migration / (3) devre dışı.
-- ⚠️ (c) seçilirse yasal metinde "tam geri-döndürülemez" **vaadi verilemez** (dürüst beyan kalır).
+## B) ✅ DURAK-1 ÇÖZÜLDÜ (PO kararı 2026-08-26)
+- **1·1·1 = (c) migration'sız içerik-temizleme + (iii) mesaj placeholder + (2) hardDelete→anonymize.** EK: token/oturum iptali + dürüst kapanış mesajı.
+- **Migration YAZILMADI** (c yolu gerektirmedi) → DURAK-2 tetiklenmedi.
 
 ## C) Açık PR (MERGE EDİLMEDİ — merge PO'da)
-- Backend **#53** (madde 95) · çatı **#116** (madde 95 FE) · docs (KVKK, madde 92) · önceki **#110** (analytics, 🛑 kilitli).
-- **Pointer bump:** madde 95 backend #53 MERGE olduktan sonra (dans-önleme) — bu tur bump YOK.
+- Backend **#53** (madde 95) + **#54** (anonim madde 93/39) · çatı **#116** (madde 95 FE) + **#117** (KVKK docs) · önceki **#110** (analytics, 🛑 kilitli).
+- **Pointer bump:** backend #53/#54 MERGE olduktan sonra (dans-önleme) — bu tur bump YOK.
+- **Açık iş:** madde 97 (FE hesap-kapatma/anonimleştirme akışı yok) · H-9 (hukukçu: userId cuid bağı yeterli mi).
 
 ---
 

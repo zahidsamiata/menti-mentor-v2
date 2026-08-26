@@ -37,6 +37,7 @@ Platform, derneklerin/üniversite kulüplerinin **mentor–menti eşleştirme pr
 6. **Çerezler:** zorunlu oturum çerezleri rıza gerektirmez teyidi + ileride analitik çerezleri hangi rıza mekanizması? — *Belge 4.*
 7. **Saklama süreleri:** önerilen süreler (Belge 5 [öneri] alanları) uygun mu; süresiz mesaj/feedback saklama riski? — *Belge 5.*
 8. **Rıza kutusu ayrımı + sürümleme:** KVKK+18 birleşik kutu ve OAuth'ta rıza kutusunun UI'da alınmaması + rıza sürümünün tutulmaması — düzeltme şart mı, önerilen ayrık tasarım uygun mu? — *Belge 2.*
+9. **⭐ H-9 — Anonimleştirme düzeyi yeterli mi?** Hesap kapanışında/anonimleştirmede **tüm serbest metin ve kimlik/iletişim/kişilik alanları temizleniyor**, yüklenen fotoğraf dosyası siliniyor, oturum/jetonlar iptal ediliyor. **Ancak kayıt anahtarı `userId` — rastgele bir kimlik (cuid), kişisel bilgi içermez — bağlı kayıtlarda (görüşme/mesaj) kalıyor** (karşı tarafın geçmişi bozulmasın diye). **Bu düzey KVKK imha yükümlülüğünü karşılar mı, yoksa `userId` bağının da koparılması (ilişki NULL'lama) mı gerekir?** Ön düşüncemiz: içerik tümüyle temizlendiğinden pratik yeniden-tanımlama güçtür; ancak bunu avukat teyit etmeli. — *Belge 5.*
 
 > Her soru için **bizim ön düşüncemiz belgelerde** işaretli (dayatma değil — avukat karar verir).
 
@@ -51,8 +52,8 @@ Platform, derneklerin/üniversite kulüplerinin **mentor–menti eşleştirme pr
 - Genel otomatik imha YOK; mesaj/feedback süresiz (madde 81).
 - Rıza metni sürümlenmiyor (madde 82).
 - OAuth'ta açık rıza UI'da alınmıyor; KVKK+18 birleşik kutu (madde 83).
-- `hardDelete` FK kısıtı — KVKK tam silme fiilen çalışmıyor (madde 39).
-- **Anonimleştirme kısmi (takma-adlaştırma):** sosyal/avatar/kişilik alanları temizlenir (2026-08-25 iyileştirildi) ama mesaj içeriği + fiziksel foto dosyası + kayıt-anahtarı bağı kalır → tam anonimleştirme iş maddesi (madde 93). Saklama-imha metni bu gerçeği beyan eder, "tam geri-döndürülemez" vaadi vermez.
+- **`hardDelete` (madde 39) → anonimleştirmeye yönlendirildi** (PO kararı, PR bekliyor): FK kısıtı nedeniyle gerçek silme çalışmıyordu; artık "silme" talebi anonimleştirir + oturum iptal eder, kullanıcıya "silindi" DENMEZ (dürüst mesaj).
+- **Anonimleştirme genişletildi (madde 93, PR bekliyor):** kimlik/iletişim/kişilik + **serbest metin (mesaj içeriği, görüşme not/telefon, geri-bildirim/talep/şikayet)** + **fiziksel foto dosyası** + **oturum/jetonlar** temizlenir. **Sınır:** `userId` (rastgele cuid, kişisel bilgi içermez) bağlı kayıtlarda kalır → **H-9 (Bölüm 4)** hukukçuya soruldu. Saklama-imha metni bu gerçeği beyan eder; "tam geri-döndürülemez" vaadi **vermez.**
 - 18+ yalnız beyan, doğrulama yok.
 - VERBİS durumu belirsiz.
 - Analitik (#110) merge-kilitli — çerez izni olmadan açılmayacak.
