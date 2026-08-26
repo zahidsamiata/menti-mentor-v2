@@ -26,8 +26,8 @@ export default function AlgorithmTunerPage() {
     [api],
   );
 
-  // #9: kurumun MEVCUT eşleştirme ağırlıkları — salt-okuma gösterim (ayarlama yok).
-  const { data: weightsData } = useQuery(
+  // #9/9a: kurumun MEVCUT eşleştirme ağırlıkları — gösterim + manuel ayar.
+  const { data: weightsData, refetch: refetchWeights } = useQuery(
     () => algorithmTunerApi.getWeights(api),
     [api],
   );
@@ -40,7 +40,41 @@ export default function AlgorithmTunerPage() {
   const [freqSaved, setFreqSaved] = useState(false);
   const [freqSaving, setFreqSaving] = useState(false);
 
+  // 9a: manuel ağırlık ayarı — sektör %40-70, %5'er adım; DISC = 100 - sektör (otomatik).
+  const SECTOR_MIN = 40, SECTOR_MAX = 70, STEP = 5;
+  const [draftSectorPct, setDraftSectorPct] = useState<number | null>(null);
+  const [weightSaving, setWeightSaving] = useState(false);
+  const [weightError, setWeightError] = useState<string | null>(null);
+  const [weightSaved, setWeightSaved] = useState(false);
+
   const pending = data?.pending ?? null;
+
+  const currentSectorPct = weights ? Math.round(weights.sectorWeight * 100) : SECTOR_MIN;
+  const sectorPct = draftSectorPct ?? currentSectorPct;
+  const discPct = 100 - sectorPct;
+  const weightsDirty = sectorPct !== currentSectorPct;
+
+  function adjustSector(delta: number) {
+    const next = Math.min(SECTOR_MAX, Math.max(SECTOR_MIN, sectorPct + delta));
+    setDraftSectorPct(next);
+    setWeightSaved(false);
+    setWeightError(null);
+  }
+
+  async function saveWeights() {
+    setWeightSaving(true);
+    setWeightError(null);
+    setWeightSaved(false);
+    const result = await algorithmTunerApi.setWeights(api, sectorPct / 100);
+    setWeightSaving(false);
+    if (result.ok) {
+      setDraftSectorPct(null);
+      setWeightSaved(true);
+      refetchWeights();
+    } else {
+      setWeightError(result.error.message ?? 'Ağırlık güncellenemedi.');
+    }
+  }
 
   async function handleAction(action: 'approve' | 'reject') {
     setActionLoading(true);
@@ -104,8 +138,54 @@ export default function AlgorithmTunerPage() {
               sektör/ilgi alanı örtüşmesinden,
               <strong className="text-foreground"> %{Math.round(weights.discWeight * 100)}</strong>&apos;i
               DISC karakter uyumundan gelir. Yüksek toplam skor, daha uyumlu bir eşleşme demektir.
-              Bu oranlar aşağıdaki kalibrasyon önerileriyle küçük adımlarla (±%5) güncellenebilir.
+              Bu oranları aşağıdan %5&apos;er adımla elle ayarlayabilirsiniz.
             </p>
+
+            {/* 9a: Manuel ağırlık ayarı — sektör %40-70, %5'er adım; DISC otomatik (toplam %100) */}
+            <div className="rounded-xl border border-border bg-muted/30 p-4 space-y-3">
+              <p className="text-sm font-medium">Ağırlıkları elle ayarla</p>
+              <div className="flex items-center justify-center gap-4">
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground mb-1">Sektör</p>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline" size="sm"
+                      onClick={() => adjustSector(-STEP)}
+                      disabled={weightSaving || sectorPct <= SECTOR_MIN}
+                      aria-label="Sektör ağırlığını azalt"
+                    >−</Button>
+                    <span className="w-16 text-2xl font-bold tabular-nums text-primary">%{sectorPct}</span>
+                    <Button
+                      variant="outline" size="sm"
+                      onClick={() => adjustSector(STEP)}
+                      disabled={weightSaving || sectorPct >= SECTOR_MAX}
+                      aria-label="Sektör ağırlığını artır"
+                    >+</Button>
+                  </div>
+                </div>
+                <span className="text-muted-foreground">/</span>
+                <div className="text-center">
+                  <p className="text-xs text-muted-foreground mb-1">DISC (otomatik)</p>
+                  <span className="w-16 inline-block text-2xl font-bold tabular-nums text-muted-foreground">%{discPct}</span>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground text-center">
+                Sektör %{SECTOR_MIN}–%{SECTOR_MAX} arası, %5&apos;er adım. DISC otomatik tamamlanır (toplam %100).
+              </p>
+              {weightError && <AlertMessage type="error" message={weightError} />}
+              {weightSaved && !weightsDirty && <AlertMessage type="success" message="Ağırlıklar güncellendi." />}
+              <div className="flex justify-center">
+                <Button onClick={saveWeights} disabled={!weightsDirty || weightSaving}>
+                  {weightSaving ? 'Kaydediliyor…' : 'Kaydet'}
+                </Button>
+              </div>
+              {weights?.lastAdjustedAt && (
+                <p className="text-xs text-muted-foreground text-center">
+                  Son değişiklik: {new Date(weights.lastAdjustedAt).toLocaleString('tr-TR')}
+                  {weights.reason ? ` — ${weights.reason}` : ''}
+                </p>
+              )}
+            </div>
           </CardContent>
         </Card>
       )}
