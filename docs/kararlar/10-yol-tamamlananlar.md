@@ -40,6 +40,9 @@
 | 9b | Motor kaydedilen tenant ağırlığını okur (scoring opsiyonel ağırlık, N+1 yok; madde 87 çözüldü) | ✅ backend #52 | 2026-08-26 |
 | 9a | Tenant manuel ağırlık ayarı (PUT weights + FE +/− %5 UI; migration YOK) | ✅ backend #52 + çatı #114 | 2026-08-26 |
 | 70-FE | DailyQuestionWidget progress guard kaldırıldı (backend progress canlıda) | ✅ çatı #114 | 2026-08-26 |
+| 92 | KVKK sunucu ülkesi Londra/BK (AB üyesi değil) + veri sorumlusu kimliği | ✅ çatı #117 (docs) | 2026-08-26 |
+| 95 | Kalibrasyon "son değişiklik" aktör izi (actorName yalnız AD; tenant-izolasyon; migration YOK) | ✅ backend #53 + çatı #116 | 2026-08-26 |
+| 93+39 | Tam anonimleştirme (serbest metin+foto dosyası+token) + hardDelete→anonymize; PO (c)+(iii)+(2), migration YOK; sınır: userId cuid kalır (H-9) | ✅ backend #54 + çatı #117 (metin) | 2026-08-26 |
 
 > ⚠️ Kısmen: **madde 93** (anonimleştirme sosyal/avatar/kişilik alanları eklendi ✅ / mesaj+foto-dosyası+userId-bağı AÇIK) — `00-KARAR-TAKIP` F.5.
 > **Umbrella pointer:** #51→#113 (b4b6d66); #52→pointer bump PR chore/pointer-bump-52 (b4b6d66→838d128).
