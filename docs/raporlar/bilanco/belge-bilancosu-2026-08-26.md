@@ -64,7 +64,7 @@ Güvenlik/KVKK **46** · Altyapı/PO-manuel **42** · Ölü-kod **26** · STK-ad
 ## 3. ⭐ KAYIP KALEMLER (NUMARASIZ) — numara adayı sıralı liste
 
 > Bugünkü takip belgelerinde (00-KARAR-TAKIP/10-yol) NUMARASI OLMAYAN ama gerçek açık iş olan kalemler.
-> **Numara DOĞURULMADI** (KURAL 8) — PO onaylarsa `00-KARAR-TAKIP`'te **104'ten** başlayarak numaralanır. Sıralı aday:
+> **⚠️ GÜNCELLEME (2026-08-26): PO onayladı → numaralandı.** Aşağıdaki liste `00-KARAR-TAKIP` **Bölüm F.6**'da **104-124** olarak verildi; hepsi durum **⬜ AÇIK (PO önceliklendirmedi)** (öncelik yok, 10-yol'a eklenmedi, numara = izlenebilirlik). Kaynak + NİYET + NEREDE DURDU F.6'ya taşındı. Aşağısı tarihsel adaydır:
 
 | aday | kalem | durum | kaynak |
 |:---:|---|:---:|---|

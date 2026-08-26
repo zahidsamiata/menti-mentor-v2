@@ -130,10 +130,12 @@ Belgeler "eksik/yok" diyordu ama kodda tamamlanmış (koda bakıp doğruladık):
 
 ---
 
-## 7. NUMARA ADAYLARI (onaylarsan 104'ten başlar)
+## 7. NUMARA ADAYLARI → ✅ NUMARALANDI (104-124)
 
-Bugüne dek numara almamış ama takip edilmesi gereken işler için hazır liste (detay: nihai raporun §3). Örnekler: bekleme-bildirim izni, "Bildir" geri-bildirim akışı, onboarding şablon-seçimi, menti/mentör sevdirme, freemium altyapısı, sunucu sertleştirme, `backend/CLAUDE.md` düzeltmesi, PROJECT_STATUS arşivleme.
-`[ ] PO notu: (hepsine numara ver / bir kısmına / gerek yok) `
+**⚠️ GÜNCELLEME (2026-08-26):** Bu işler artık `00-KARAR-TAKIP` Bölüm F.6'da **104-124** numaralarıyla takipte. Numara yalnızca "izlenebilirlik" içindir — **hiçbirine öncelik verilmedi** (hepsi "⬜ AÇIK — PO önceliklendirmedi"). Örnekler: bekleme-bildirim izni, "Bildir" geri-bildirim akışı, onboarding şablon-seçimi, menti/mentör sevdirme, freemium altyapısı, sunucu sertleştirme, `backend/CLAUDE.md` düzeltmesi, PROJECT_STATUS arşivleme.
+
+> Sıralamak istediğinde: hangi numaraları önce yapmak istediğini söyle — o zaman `10-yol-haritasi`'na öncelik sırasıyla girerler.
+`[ ] PO notu: (öncelik vermek istediğin numaralar) `
 
 ---
 
