@@ -246,10 +246,14 @@
 - **1·1·1 = (c) migration'sız içerik-temizleme + (iii) mesaj placeholder + (2) hardDelete→anonymize.** EK: token/oturum iptali + dürüst kapanış mesajı.
 - **Migration YAZILMADI** (c yolu gerektirmedi) → DURAK-2 tetiklenmedi.
 
-## C) Açık PR (MERGE EDİLMEDİ — merge PO'da)
-- Backend **#53** (madde 95) + **#54** (anonim madde 93/39) · çatı **#116** (madde 95 FE) + **#117** (KVKK docs) · önceki **#110** (analytics, 🛑 kilitli).
-- **Pointer bump:** backend #53/#54 MERGE olduktan sonra (dans-önleme) — bu tur bump YOK.
-- **Açık iş:** madde 97 (FE hesap-kapatma/anonimleştirme akışı yok) · H-9 (hukukçu: userId cuid bağı yeterli mi).
+## C) MERGE TURU (PO yetkisiyle, aynı gün ilerledi)
+- **Merge sırası kanıtlandı:** dört PR **bağımsız** (stacked değil) — backend #53⊥#54 (`#53 not ancestor of #54`, sıfır dosya çakışması), çatı #116/#117 docs/FE ayrı. Backend önce (pointer için).
+- **MERGED (`--merge`, geçmiş korundu):** çatı **#116** (PO daha önce, `9b09dc3`) · backend **#53** (`2caa7bb`) · backend **#54** (`b433554`) · çatı **#117** (`71bac0c`). Her merge sonrası ilgili main CI **yeşil** teyit edildi.
+- **✅ CANLIDA (autodeploy):** madde 95 + 92 + **93/39 tam anonimleştirme.** ⚠️ Anonimleştirme davranışı değişti (bkz. 09-DURUM).
+- **Pointer bump:** `chore/pointer-bump-53-54` (`838d128`→`b433554`, ileri-sarım) + belge senkronu → **PR AÇILDI, MERGE EDİLMEDİ** (merge PO'da).
+- **Silinen dallar:** backend feat/kalibrasyon-aktor-izi + feat/tam-anonimlestirme (yerel+uzak); çatı docs/kvkk-sunucu-veri-sorumlusu + feat/kalibrasyon-aktor-izi-fe + chore/pointer-bump-52 (yerel; uzak merge'de silindi).
+- **Açık PR (şu an):** pointer bump PR + **#110** (kilitli). Diğer hepsi MERGED.
+- **Kalan iş:** madde 97 (FE hesap-kapatma) · H-9 (hukukçu) · küçük borç **98/99/100** (kalibrasyon audit void · SystemLog 90g purge izi · meta.tenantId indekssiz).
 
 ---
 
