@@ -10,6 +10,17 @@ export interface AlgorithmWeights {
   reason: string;
 }
 
+// 95: son manuel değişikliğin izi — kim (ad) / ne zaman / eski→yeni.
+// actorName yalnız AD'dır (e-posta değil); aktör silinmiş/tenant-dışıysa null.
+export interface WeightChangeInfo {
+  actorName: string | null;
+  at: string;
+  previousSectorWeight: number;
+  previousDiscWeight: number;
+  newSectorWeight: number;
+  newDiscWeight: number;
+}
+
 export interface PendingAdjustment {
   tenantId: string;
   previousWeights: AlgorithmWeights;
@@ -28,7 +39,10 @@ export const algorithmTunerApi = {
     api('/api/admin/algorithm-tuner/pending'),
 
   // #9: kurumun MEVCUT eşleştirme ağırlıkları (salt-okuma gösterim).
-  getWeights: (api: BoundClient): Promise<ApiResult<{ weights: AlgorithmWeights }>> =>
+  // 95: lastChange = son manuel değişikliğin izi (kim/ne zaman/eski→yeni); yoksa null.
+  getWeights: (
+    api: BoundClient,
+  ): Promise<ApiResult<{ weights: AlgorithmWeights; lastChange: WeightChangeInfo | null }>> =>
     api('/api/admin/algorithm-tuner/weights'),
 
   // 9a: kurum yöneticisi sektör ağırlığını MANUEL ayarlar. discWeight backend'de

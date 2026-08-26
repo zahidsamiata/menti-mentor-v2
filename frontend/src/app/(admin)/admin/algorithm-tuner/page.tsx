@@ -32,6 +32,8 @@ export default function AlgorithmTunerPage() {
     [api],
   );
   const weights = weightsData?.weights ?? null;
+  // 95: son manuel değişikliğin izi (kim/ne zaman/eski→yeni). Yoksa null.
+  const lastChange = weightsData?.lastChange ?? null;
 
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
@@ -179,12 +181,23 @@ export default function AlgorithmTunerPage() {
                   {weightSaving ? 'Kaydediliyor…' : 'Kaydet'}
                 </Button>
               </div>
-              {weights?.lastAdjustedAt && (
+              {/* 95: "Son değişiklik: kim · ne zaman · eski→yeni". Manuel ayar izi (lastChange)
+                  varsa aktör adı + eski→yeni gösterilir; e-posta gösterilmez (PII). ML-onay yolu
+                  audit aktörü tutmaz → gerekçeli tarih gösterilir. Varsayılan (hiç değişmemiş)
+                  ağırlıkta yanıltıcı satır gösterilmez. */}
+              {lastChange ? (
+                <p className="text-xs text-muted-foreground text-center">
+                  Son değişiklik:{lastChange.actorName ? ` ${lastChange.actorName} ·` : ''}{' '}
+                  {new Date(lastChange.at).toLocaleString('tr-TR')} · Sektör %
+                  {Math.round(lastChange.previousSectorWeight * 100)} → %
+                  {Math.round(lastChange.newSectorWeight * 100)}
+                </p>
+              ) : weights?.reason && weights.reason !== 'Varsayılan ağırlıklar' ? (
                 <p className="text-xs text-muted-foreground text-center">
                   Son değişiklik: {new Date(weights.lastAdjustedAt).toLocaleString('tr-TR')}
-                  {weights.reason ? ` — ${weights.reason}` : ''}
+                  {` — ${weights.reason}`}
                 </p>
-              )}
+              ) : null}
             </div>
           </CardContent>
         </Card>
