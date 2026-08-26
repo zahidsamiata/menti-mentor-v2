@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — değerlendirme/test/soru sistemlerinin TAM içerik dökümü. Üst envanter: `../degerlendirme-test-soru-envanteri-2026-08-15.md` (PR #78). Eksik analizi: `../eksikler-derinlestirilmis-2026-08-15.md`.
 
+> ⚠️ **GÜNCELLEME (2026-08-26):** Bu belge (ve altındaki 5 döküm) **BAYAT** — silinmiş `seed-questions.ts`'e (backend `5745e0f`) dayanıyor ve "20 DISC sorusu" diyor. **Güncel, kod-kanıtlı döküm:** [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md) (+ `bolumler/`). Kod gerçeği: **DISC = 32** (`seed.ts`; `seed-questions.ts` silindi, tek kaynak artık `seed.ts`), SJT = 3, sertifika = 20, öğrenme = 13. Aşağıdaki **canlı sayılar 2026-08-15 fotoğrafıdır** — güncel canlı sayılar `tam-soru-dokumu` "⏳ CANLI TEYİT KUYRUĞU"nda (bu tur DB'ye sorulmadı).
+
 > Amaç: her testin tüm soru/cevaplarını tam metin arşivlemek + seed (kod) ↔ canlı DB tutarlılığını kanıtlamak.
 > Kaynak: seed dosyaları + **canlı DB salt-okuma sayımı** (yalnız `.count()`, sıfır yazma).
 
