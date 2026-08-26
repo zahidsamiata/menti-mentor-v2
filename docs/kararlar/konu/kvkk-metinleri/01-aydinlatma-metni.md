@@ -8,8 +8,8 @@
 ## SÜRÜM 1A — Platformun KENDİ veri sorumlusu olduğu işlemler
 *(Hesap açma / kimlik doğrulama, platform güvenliği, global içerik — bu işlemlerde platform veri sorumlusudur.)*
 
-**Veri sorumlusu:** [PO DOLDURACAK: veri sorumlusunun tam kimliği — gerçek kişi ad/soyad veya varsa unvan; adres; KEP/e-posta; VERBİS kayıt no varsa]
-*(Not: PO şirket değil, gerçek kişi/sosyal sorumluluk projesi — [HUKUKÇU KARARI 2: VERBİS kaydı gerekli mi?])*
+**Veri sorumlusu:** **Zahid Sami Ata** (gerçek kişi/işletmeci — sosyal sorumluluk projesi) · adres: [PO DOLDURACAK] · KEP/e-posta: [PO DOLDURACAK] · VERBİS kayıt no: [PO DOLDURACAK, varsa].
+*(Not: PO şirket değil, gerçek kişi/sosyal sorumluluk projesi — [HUKUKÇU KARARI 2: VERBİS kaydı gerekli mi?]. **Şirketleşene kadar** gerçek kişi kimliği geçerlidir; şirket kurulunca şirket unvanı/bilgileriyle güncellenecektir — PO kararı 2026-08-26.)*
 
 **İşlenen kişisel veri kategorileri (kod gerçeği — envanter C-4):**
 - **Kimlik:** ad-soyad, e-posta (`User.fullName/email`).
@@ -23,7 +23,7 @@
 **Hukuki sebep:** [HUKUKÇU KARARI 3: hangi amaç hangi Md.5 sebebine dayanır — sözleşmenin ifası (Md.5/2-c) · meşru menfaat (Md.5/2-f) · açık rıza (Md.5/1) ayrımı]. Psikometrik veri işlemesi büyük olasılıkla **açık rızaya** dayanır (bkz. Açık Rıza Metni).
 
 **Aktarılan taraflar (envanter C-1/C-2):**
-- **Barındırma (yurt dışı):** Veritabanı bulut sağlayıcısında barındırılır — **[PO DOLDURACAK: sağlayıcı panelinden teyitli sunucu ülkesi]** *(🔴 belgelerde çelişki var — kapak dosyasına bkz.; yanlış ülke beyanı yasal risk)*.
+- **Barındırma (yurt dışı):** Veritabanı bulut sağlayıcısında **Londra / Birleşik Krallık**'ta barındırılır (AWS Europe (London), bölge kodu `eu-west-2`; PO teyitli 2026-08-26). *(⚠️ Birleşik Krallık AB üyesi değildir — yurt dışı aktarım değerlendirmesi buna göre yapılır; bkz. Açık Rıza Metni ve kapak dosyası.)*
 - **Kimlik doğrulama (isteğe bağlı):** Google / LinkedIn ile giriş seçildiğinde bu sağlayıcılarla asgari kimlik verisi (e-posta, ad) alışverişi (yurt dışı).
 - **E-posta:** bildirim/şifre-sıfırlama e-postaları için SMTP sağlayıcısı (alıcı e-posta + ad).
 - **Not:** Reklam/analitik üçüncü taraflara aktarım **YOKTUR** (analitik altyapı şu an aktif değildir).
@@ -40,7 +40,7 @@
 *(Kurumun kendi üyelerine sunacağı aydınlatma metni şablonu. Bu işlemlerde VERİ SORUMLUSU KURUMDUR; platform yalnız veri işleyendir.)*
 
 **Veri sorumlusu:** **[Kurum Unvanı]** — [Kurum adresi] · [Kurum KEP/e-posta] · [Kurum VERBİS kayıt no, varsa].
-> Platform (`[PO DOLDURACAK: platform işletmecisi]`) bu verileri **veri işleyen** sıfatıyla, yalnızca kurumun talimatı doğrultusunda işler (bkz. Veri İşleyen Sözleşmesi — Belge 8).
+> Platform (işletmeci: **Zahid Sami Ata** — gerçek kişi/sosyal sorumluluk projesi) bu verileri **veri işleyen** sıfatıyla, yalnızca kurumun talimatı doğrultusunda işler (bkz. Veri İşleyen Sözleşmesi — Belge 8).
 
 **İşlenen veri kategorileri:** Sürüm 1A'daki kategorilerin aynısı (kimlik, profil, ⭐psikometrik, davranışsal) — kurum üyeleri için.
 

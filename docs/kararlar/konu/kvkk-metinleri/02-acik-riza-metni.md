@@ -25,7 +25,7 @@
 > **[HUKUKÇU KARARI 4]:** KVKK Md.9 (2024 değişikliği sonrası) kapsamında **sistematik** yurt dışı aktarım için açık rıza yeterli mi, yoksa
 > **standart sözleşme (SS) + Kurul'a bildirim** mi gerekir? Ayrıca **[AÇIK SORU — 2. avukat görüşmesi]:** Kurul'un "Veri İşleyenden Veri İşleyene"
 > (SS-3) standart sözleşmesini bulut/e-posta sağlayıcısı imzalamazsa, sağlayıcının mevcut GDPR DPA'sı bir aktarım mekanizmasına karşılık gelir mi;
-> gelmezse kalan risk nedir? **Sunucu ülkesi [PO DOLDURACAK] — belge çelişkisi var (kapak dosyası).**
+> gelmezse kalan risk nedir? **Sunucu ülkesi: Londra / Birleşik Krallık** (AWS `eu-west-2`; PO teyitli 2026-08-26). ⚠️ **Birleşik Krallık AB üyesi DEĞİLDİR** — yurt dışı aktarım/yeterlilik değerlendirmesi buna göre yapılır.
 
 ---
 

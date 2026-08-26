@@ -3,7 +3,7 @@
 > **Avukat kararı gereği ZORUNLU belge:** platform = veri işleyen, kurum = veri sorumlusu.
 
 # Veri İşleyen (Veri İşleme) Sözleşmesi — ŞABLON
-### Taraflar: [Kurum Unvanı] ("Veri Sorumlusu") ↔ [Platform İşletmecisi] ("Veri İşleyen")
+### Taraflar: [Kurum Unvanı] ("Veri Sorumlusu") ↔ **Zahid Sami Ata** (gerçek kişi/işletmeci — Platform İşletmecisi) ("Veri İşleyen")
 
 ## 1. Tarafların rolleri
 - **Veri Sorumlusu:** işleme amaç ve vasıtalarını belirleyen **Kurum** (dernek/kulüp). Üyelerinin kişisel verilerinden hukuken sorumludur (idari/mali sorumluluk kurumun tüzel kişiliğinde; [HUKUKÇU: cezai sorumluluk yönetim organında]).
@@ -25,7 +25,7 @@
 Veri İşleyen, aşağıdaki alt işleyenleri kullanır; Veri Sorumlusu bunları onaylar. Yeni alt işleyen eklenmeden önce bilgilendirme yapılır.
 | Alt işleyen | Hizmet | Aktarılan veri | Konum |
 |---|---|---|---|
-| Bulut veritabanı sağlayıcısı | Verilerin barındırılması | Tüm kişisel veri | **[PO DOLDURACAK: sağlayıcı panelinden teyitli ülke]** 🔴 (belge çelişkisi — kapak) |
+| Bulut veritabanı sağlayıcısı | Verilerin barındırılması | Tüm kişisel veri | **Londra / Birleşik Krallık** (AWS `eu-west-2`; PO teyitli 2026-08-26 — ⚠️ AB üyesi DEĞİL) |
 | E-posta (SMTP) sağlayıcısı | Bildirim/şifre e-postaları | Alıcı e-posta + ad + içerik başlığı | [PO DOLDURACAK: sağlayıcı + ülke] |
 | Google (OAuth) | Sosyal medya ile giriş (opsiyonel) | E-posta, ad (asgari) | Yurt dışı |
 | LinkedIn (OAuth) | Sosyal medya ile giriş (opsiyonel) | E-posta, ad (asgari) | Yurt dışı |

@@ -4,7 +4,7 @@
 # Kullanım Koşulları
 
 ## 1. Taraflar ve tanım
-Bu koşullar, platform işletmecisi ([PO DOLDURACAK]) ile platformu kullanan kişi ("Kullanıcı") arasındaki ilişkiyi düzenler. Platform, kurumların (dernek/kulüp) mentor–menti eşleştirme programlarını yürütmelerine olanak tanıyan bir yazılım hizmetidir.
+Bu koşullar, platform işletmecisi (**Zahid Sami Ata** — gerçek kişi/sosyal sorumluluk projesi) ile platformu kullanan kişi ("Kullanıcı") arasındaki ilişkiyi düzenler. Platform, kurumların (dernek/kulüp) mentor–menti eşleştirme programlarını yürütmelerine olanak tanıyan bir yazılım hizmetidir.
 
 ## 2. Hizmetin tanımı (kod gerçeği)
 - Kullanıcılar kayıt olur, profil ve kişilik (DISC/mizaç) değerlendirmesi doldurur; sistem uygunluk skoruna göre mentor/menti önerir.
@@ -36,4 +36,4 @@ Kullanıcı tarafından girilen içerik kullanıcıya aittir; platform hizmeti s
 ## 8. Değişiklikler ve uygulanacak hukuk
 Koşullar güncellenebilir; önemli değişiklikler bildirilir. Uyuşmazlıklarda [HUKUKÇU KARARI: yetkili mahkeme/uygulanacak hukuk — gerçek kişi işletmeci + tüketici mevzuatı bağlamında].
 
-> **[PO DOLDURACAK]:** işletmeci kimliği/iletişimi · yürürlük tarihi · varsa ücretlendirme (şu an ücretsiz).
+> **İşletmeci kimliği:** **Zahid Sami Ata** (gerçek kişi/sosyal sorumluluk projesi). **[PO DOLDURACAK]:** işletmeci iletişim (adres/e-posta) · yürürlük tarihi · varsa ücretlendirme (şu an ücretsiz).

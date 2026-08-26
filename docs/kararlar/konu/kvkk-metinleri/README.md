@@ -20,4 +20,4 @@
 `00-AVUKAT-KONTROL-DOSYASI` (kapak) · `01-aydinlatma` (platform + kurum şablonu) · `02-acik-riza` · `03-gizlilik` · `04-cerez` · `05-saklama-imha` · `06-basvuru-formu` · `07-kullanim-kosullari` · `08-veri-isleyen-sozlesmesi-sablonu`.
 
 ## Durum
-⚠️ **TASLAK** — hukukçu onayı bekliyor. Ön koşullar: hukukçu onayı + `[PO DOLDURACAK]` alanları (özellikle başvuru `destek@` e-postası + teyitli sunucu ülkesi). Kaynak: `../../../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`.
+⚠️ **TASLAK** — hukukçu onayı bekliyor. Ön koşullar: hukukçu onayı + kalan `[PO DOLDURACAK]` alanları (özellikle başvuru `destek@` e-postası; veri sorumlusu adres/KEP/VERBİS). ✅ **Kapandı (2026-08-26, PO teyitli):** veri sorumlusu kimliği (gerçek kişi) + sunucu ülkesi (**Londra / Birleşik Krallık**, AWS `eu-west-2` — AB üyesi DEĞİL). Kaynak: `../../../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`.
