@@ -1,6 +1,6 @@
 # Yol Haritası — Tamamlanan v1 İşleri (kayıt)
 
-**🔄 YAŞAYAN** (canonical: biten v1 işlerinin kaydı) · Son güncelleme: 2026-08-22
+**🔄 YAŞAYAN** (canonical: biten v1 işlerinin kaydı) · Son güncelleme: 2026-08-26
 
 > **Amaç:** `10-yol-haritasi.md` (aktif iş kuyruğu) yalnız **açık/yapılacak** işi göstersin diye, **biten v1 işleri** burada
 > toplanır. Bu belge DURUM-PANOSU deseniyle çalışır: **özet + PR/tarih kaydı**; her işin tam anlatısı `09-DURUM.md`'nin
@@ -37,12 +37,15 @@
 | 79 | Haftalık görüşme limiti enforce (sabit 7-günlük UTC kova) | ✅ backend #51 | 2026-08-25 |
 | 69 | Zod validation yanıtında anlamlı `message` (FE otomatik gösterir) | ✅ backend #51 | 2026-08-25 |
 | 70 | adaptive-test `progress` (FE guard kaldırma = ayrı tur, kalan) | ✅ backend #51 | 2026-08-25 |
+| 9b | Motor kaydedilen tenant ağırlığını okur (scoring opsiyonel ağırlık, N+1 yok; madde 87 çözüldü) | ✅ backend #52 | 2026-08-26 |
+| 9a | Tenant manuel ağırlık ayarı (PUT weights + FE +/− %5 UI; migration YOK) | ✅ backend #52 + çatı #114 | 2026-08-26 |
+| 70-FE | DailyQuestionWidget progress guard kaldırıldı (backend progress canlıda) | ✅ çatı #114 | 2026-08-26 |
 
 > ⚠️ Kısmen: **madde 93** (anonimleştirme sosyal/avatar/kişilik alanları eklendi ✅ / mesaj+foto-dosyası+userId-bağı AÇIK) — `00-KARAR-TAKIP` F.5.
-> **Umbrella pointer:** backend #51 merge → çatı submodule pointer bump PR #113 (b4b6d66).
+> **Umbrella pointer:** #51→#113 (b4b6d66); #52→pointer bump PR chore/pointer-bump-52 (b4b6d66→838d128).
 
 > **Kısmi/kalanı açık olanlar aktif roadmap'te kalır:** md.6 (kullanıcı maili ✅ / kurum maili AÇIK) ·
-> md.7 (menti→mentör kart + (A) gerekçe + Aşama 1 ✅ / Aşama 2-3 AÇIK) · md.9 (ağırlık gösterimi ✅ / 9a-9b AÇIK) ·
+> md.7 (menti→mentör kart + (A) gerekçe + Aşama 1 ✅ / Aşama 2-3 AÇIK) · md.9 (ağırlık gösterimi + 9a/9b ✅ CANLIDA) ·
 > md.33 (ölü seed ✅ / seed↔canlı + SJT AÇIK). Bunlar `10-yol-haritasi.md`'de açık işler index'inde.
 
 ---
