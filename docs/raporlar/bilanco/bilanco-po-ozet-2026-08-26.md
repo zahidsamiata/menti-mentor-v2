@@ -3,7 +3,7 @@
 **2026-08-26** · Sade özet (teknik detay için: `belge-bilancosu-2026-08-26.md` + `karar-defteri-2026-08-26.md`)
 
 > Tüm proje belgeleri (71 belge, 10.473 satır) baştan sona okundu. İçlerindeki her karar, iş ve fikir çıkarıldı,
-> koda bakılarak "yapıldı mı" doğrulandı, tekrarlar birleştirildi. Sonuç: **196 benzersiz kalem.**
+> koda bakılarak "yapıldı mı" doğrulandı, tekrarlar birleştirildi. Sonuç: **≈259 benzersiz kalem** (⚠️ 2026-08-27 düzeltme: bu özette geçen eski "196" YANLIŞTI — gerçek tekil ≈259; bkz. `kararlar/00-KATLAMA-IZI-2026-08-27.md`).
 > Bu özet, "arkada ne kaldı, ne için başlanmıştı, nerede durdu" sorusunun kısa cevabıdır.
 
 ---

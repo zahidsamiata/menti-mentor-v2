@@ -163,12 +163,13 @@ docs/
 | `stk-yonetici-strateji-2026-08-02.md` | STK yönetici paneli ideal hâli |
 
 ## Belge bilançosu — `docs/raporlar/bilanco/` (📸 4-tur sayım, 2026-08-26)
-> Tüm docs 4 turda baştan-sona okundu; her karar/iş/niyet çıkarılıp kod gerçeğiyle çaprazlandı ve tekilleştirildi (196 benzersiz kalem).
+> Tüm docs 4 turda baştan-sona okundu; her karar/iş/niyet çıkarılıp kod gerçeğiyle çaprazlandı ve tekilleştirildi (**≈259 benzersiz kalem** — ⚠️ 2026-08-27 düzeltme: eski "196" yanlıştı, bkz. `../raporlar/bilanco/kararlar/00-KATLAMA-IZI-2026-08-27.md`).
 
 | Belge | İçerik |
 |---|---|
 | `belge-bilancosu-2026-08-26.md` | ⭐ NİHAİ RAPOR: toplam sayım + kayıp kalemler (numara adayı) + hayalet-tamamlanmışlar + çelişkiler + tutulmamış sözler + KURAL 8 sağlık notu + PO soruları |
-| `karar-defteri-2026-08-26.md` | ⭐ Benzersiz (tekilleştirilmiş) 196 kalem, kaynak-belgeye göre gruplu, dosya:satır kanıtlı |
+| `karar-defteri-2026-08-26.md` | ⭐ Benzersiz (tekilleştirilmiş) kalemler, kaynak-belgeye göre gruplu, dosya:satır kanıtlı (⚠️ başlık "196" yazar; gerçek tekil ≈259 — `kararlar/00-KATLAMA-IZI-2026-08-27.md`) |
+| `kararlar/00-SAYIM-2026-08-27.md` + `00-KATLAMA-IZI-2026-08-27.md` | KONU-bazlı sayım + ikiz katlama izi (259 tekil); Tur-5b karar dosyalarının tabanı |
 | `bilanco-po-ozet-2026-08-26.md` | ⭐ Ürün sahibi özeti (sade Türkçe, `[ ] PO notu` satırlı — arkada ne kaldı) |
 | `tekrar-onleme-2026-08-26.md` | Kök-neden teşhisi + KURAL 9-12 önerisi (PO onayına; yürürlükte DEĞİL) |
 | `bolumler/T1..T4-*.md` (16 dosya) | Ham tur-tur bölüm defterleri (tarihsel iz) |
