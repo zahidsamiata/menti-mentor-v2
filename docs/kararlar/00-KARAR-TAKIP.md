@@ -69,6 +69,7 @@
 | S12 | DISC-tipine-özel "mentiye yaklaşım" içeriği yazılacak (sıfırdan) | (çeşitli) | ⬜ içerik felsefesi keşfine bağlandı | 31 |
 | S13 | DISC-DERİNLEŞME kurgusu tasarlanıp kodlanacak | 2026-08-23 | 🔵 içerik-felsefe keşfine bağlı, kodlanmadı | (A1, numarasız) |
 | S14 | Belge yeniden-yapılandırma (~68 belge) tamamlanacak | 2026-08-23 | 🟡 kısmen (bu bilanço onun parçası), tamamı değil | 123 (A5) |
+| S16 | Eşleştirme/değerlendirme sistemi TASARIM TEZİ yazılacak (DISC→Big Five, Likert→senaryo; keşif tespit turuydu) | 2026-08-27 | ⬜ keşif bitti (`kesif/eslestirme-motoru-kesfi-2026-08-27.md`); tasarım bundan sonra | 125-130 + G2 kartları |
 
 > **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
 > boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
@@ -389,6 +390,25 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > **Not (dürüstlük):** Yukarıda "gerçek tür" sütunu, kalemin bilanço defterindeki olgusal iş-durumunu korur (🟡 yarım / ❓ teyit-karar /
 > belge-hijyen). PO talimatı gereği **statü sütunu hepsi için ⬜ AÇIK (PO önceliklendirmedi)** — bu bir öncelik değil, "PO henüz sıraya
 > koymadı" demektir. `118` canlı DB yazımı içerir (seed) → yapılırsa PO onayı ZORUNLU. Sonraki yeni iş numarası: **125'ten** başla.
+
+### F.7 — 🆕 2026-08-27 EŞLEŞTİRME MOTORU KEŞFİ numara adayları → NUMARALANDI (125-130)
+
+> **Kaynak:** `../raporlar/kesif/eslestirme-motoru-kesfi-2026-08-27.md` §9 KALEM LİSTESİ (tasarım-tezi öncesi son keşif).
+> KURAL 8: numara YALNIZ burada doğar. **PO talimatı (2026-08-27):** hepsi **⬜ AÇIK (PO önceliklendirmedi)** — öncelik/sıra YOK, `10-yol`'a EKLENMEDİ.
+> Keşifteki kalemlerin çoğu zaten G2 karar dosyasında/madde 101-103'te kart → onlar için YENİ numara açılmadı (raporda "G2-XX'de var" referanslı). Aşağıdakiler **yeni** (G2'de yok).
+
+| No | İş (tek cümle) | durum | gerçek tür | kaynak | NİYET | NEREDE DURDU |
+|:---:|---|:---:|:---:|---|---|---|
+| 125 | `triggersOn` ölü alan — SJT adaptif tetikleme (boyut belirsizse o boyutun FOLLOWUP'ını aç) okuyan kod YOK | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | keşif §6.1 | Boyut-belirsizliğini kapatan derinleşme mekanizması (havuzu adaptif büyüt) | Veri modelinde tanımlı (`schema.prisma:896`, `seed.ts`) ama hiçbir servis okumuyor (grep `triggersOn` src boş); okuyucu katman yazılmadı. madde 101 akrabası, ayrı mekanizma |
+| 126 | `answeredFollowup` tablosu şemada YOK ama `profile-completeness.service.ts:44-50` onu sorguluyor (try/catch gizliyor) | ⬜ AÇIK (PO önceliklendirmedi) | ❓ | keşif §6.6 | SJT-followup tamamlanma takibi | Tablo hiç oluşturulmadı; kod try/catch ile fallback'e düşüyor → followup takibi yarım. Ölü-tablo mu, migration mı = ❓ |
+| 127 | PendingTag **kullanıcı-öneri (producer)** akışı FE'de bağlı değil → onay kuyruğu kod-yoluyla dolmuyor | ⬜ AÇIK (PO önceliklendirmedi) | 🟡 | keşif §4 | Kullanıcı yeni etiket önersin, admin onaylasın/birleştirsin (talep-onay havuzu) | Admin tarafı TAM bağlı (`admin/tags/page.tsx`); `tags/suggest` FE'de çağrı YOK (grep boş). approve yalnız öneren kişiye yazıyor; `Tenant.globalTags` planlı, şemada yok. KARAR 12/sektör-etiket-havuzu akrabası |
+| 128 | Eş-anlamlı/normalize etiket otomasyonu YOK (yazılım↔software ayrı etiket, skorda eşleşmez) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | keşif §4 | Etiket kesişim skorunun eş-anlamlıları yakalaması (isabet artışı) | grep synonym/alias/stem boş; tek birleştirme = admin manuel `array_replace` merge. `toLowerCase()` locale-duyarsız (Türkçe İ/ı). Hiç otomasyon yazılmadı |
+| 129 | `konu/03-psikometri-ve-algoritma.md:41` "sector-scorer stub, nötr 50 dönüyor ⏳" satırı BAYAT (kod 5-bileşen TAM) | ⬜ AÇIK (PO önceliklendirmedi) | 🗑️ (belge-hijyen) | keşif §5c/§7.3 | — (bayat belge notu, ⚠️ GÜNCELLEME gerek, silme yok) | `sector-scorer.service.ts` tam yazılmış ("return 50" grep boş); belge hâlâ "stub" diyor → belge güncellenmedi |
+| 130 | IndustryNode taksonomi ağacı seed durumu ❓ — ağaç boşsa 5-bileşen A (taksonomi %30) hep 0 döner | ⬜ AÇIK (PO önceliklendirmedi) | ❓ (DB-teyit) | keşif §8 | Sektör kodları hiyerarşik ağaçta yakınlık ölçsün (LCA çatı-eşleşme) | `taxonomy.service` çalışır ama ağaç/`industryCode` atamaları seed'li mi DB'ye sorulmadı (kural). Boşsa sector-scorer bağlansa bile A bileşeni etkisiz |
+
+> **Not:** Keşifte G2/101/102/103'te ZATEN kart olanlar (canlı basit-sektör-skoru, %60/40 gerekçe, matris/anti-match/tiebreak gerekçe,
+> SJT/OCEAN okunmuyor, CORE-eşiği, qualityMultiplier-görünürlük, varsayılana-düşen-oran, sektör-5-bileşen-ağırlık-onayı) için YENİ numara AÇILMADI.
+> Sonraki yeni iş numarası: **131'den** başla.
 
 ---
 
