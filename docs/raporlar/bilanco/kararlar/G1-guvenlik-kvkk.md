@@ -38,7 +38,7 @@ Etkisi: 18 yaş altı biri sisteme girebilir; yaş kanıtı yok, KVKK/velayet a�
 Kaynak: karar-defteri (md.3-alt / K4) · Numara: md.3-alt
 ⚠️ bilanço yanılmış DEĞİL: `birthDate`/`birthYear` hem backend/src hem frontend/src hem schema.prisma'da geniş arandı → hiç yok (⬜ doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -51,7 +51,7 @@ Etkisi: Eğer harf sızıyorsa menti mentörün kişilik tipini görür — asim
 İş boyu: S
 Kaynak: karar-defteri (md.1-alt) · Numara: md.1-alt
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -64,7 +64,7 @@ Etkisi: PII maskeli olsa da bakış izi olmadığı için kötüye kullanım ger
 İş boyu: S
 Kaynak: karar-defteri (md.94) · Numara: md.94
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -78,7 +78,7 @@ Etkisi: İhbarların kurum bazında filtrelenmesi/izolasyonu güvenilmez; yanlı
 Kaynak: karar-defteri (md.71 / T3) · Numara: md.71
 ⚠️ bilanço doğrulandı: `schema.prisma:1168-1180` `SuspicionReport` modelinde `tenantName` var, `tenantId` YOK (geniş teyit edildi).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -92,8 +92,8 @@ Etkisi: Yasal hak (verimi indir/sil) fiilen kullanılamıyor; KVKK uyum açığ�
 Kaynak: karar-defteri (md.40/97) · Numara: md.40/97
 ⚠️ bilanço doğrulandı: backend `userRoutes.ts:170-184` (anonymize/hard-delete/export) VAR; frontend/src'te `anonymize`/`hard-delete`/`export` çağrısı geniş arandı → 0 eşleşme (FE gerçekten yok).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
 ---
 
 **[G1-06] KVKK otomatik veri imhası yok (mesaj/geri-bildirim süresiz kalıyor)**
@@ -105,7 +105,7 @@ Etkisi: PII (mesaj içeriği vb.) süresiz birikir; gereğinden uzun saklama KVK
 İş boyu: M
 Kaynak: karar-defteri (md.81) · Numara: md.81
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -119,8 +119,8 @@ Etkisi: Denetimde "kişi neye rıza gösterdi" ispatlanamaz; metin güncellenirs
 Kaynak: karar-defteri (md.82) · Numara: md.82
 ⚠️ bilanço doğrulandı: `consentVersion`/`policyVersion` hem backend hem frontend hem schema.prisma'da geniş arandı → yalnız belgelerde geçiyor, kodda YOK.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
 ---
 
 **[G1-08] OAuth açık rıza UI'da alınmıyor + KVKK ve 18+ tek kutuda**
@@ -132,7 +132,7 @@ Etkisi: Rıza "açık ve ayrık" olma şartını karşılamayabilir → KVKK ge�
 İş boyu: M
 Kaynak: karar-defteri (md.83) · Numara: md.83
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -147,8 +147,8 @@ Kaynak: karar-defteri (md.84) · Numara: md.84
 ⚠️ bilanço doğrulandı: `config.ts:31` `PLATFORM_ADMIN_EMAIL ?? 'admin@platform.local'` yer-tutucu; kodda gerçek `destek@` tanımı yok (teyit).
 ⚠️ ilişkili: [G5] Kurum onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` (aynı env'e bağlı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
 ---
 
 **[G1-10] Aydınlatma metninde eksik veri kategorileri**
@@ -160,8 +160,8 @@ Etkisi: Aydınlatma eksik → KVKK Md.10 ihlali riski.
 İş boyu: S
 Kaynak: karar-defteri (md.85) · Numara: md.85
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — G1-13 (kulüp-tipi kurum aktif) ile TEK MADDE: aktif-etme + aydınlatma metnine AÇIK BEYAN birlikte yapılır; biri unutulursa hukuki açık kalır.
 ---
 
 **[G1-11] DISC için ayrı açık rıza (hassas veri)**
@@ -174,7 +174,7 @@ Etkisi: DISC hassas veri sayılırsa ayrı rıza olmadan işlenmesi KVKK açığ
 Kaynak: karar-defteri (md.25(v2)/83) · Numara: md.25(v2)/83
 ⚠️ ilişkili: [G1-08] OAuth/tek-kutu rıza (aynı rıza tasarımı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -187,7 +187,7 @@ Etkisi: Sözleşme altyapısı yoksa kurumlarla veri işleme ilişkisi belgesiz 
 İş boyu: M
 Kaynak: karar-defteri (md.90) · Numara: md.90
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -200,8 +200,8 @@ Etkisi: Kulüp-tipi kurum yanlışlıkla aktif edilirse hukuki risk doğar.
 İş boyu: S
 Kaynak: karar-defteri (md.91) · Numara: md.91
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ. Kulüp-tipi kurum AKTİF EDİLSİN. ŞART: kulüp başkanının imza yetkisi olmadığı için hukuki koruma aydınlatma metnindeki AÇIK BEYANDIR (avukat görüşü). İki iş birbirine bağlı — biri yapılıp diğeri unutulursa açık kalır. G1-10 ile TEK MADDE olarak izlenir.
 ---
 
 **[G1-14] Kalibrasyon denetim yazımı "ateşle-unut" (iz kaybolabilir)**
@@ -213,7 +213,7 @@ Etkisi: Denetim kaydı sessizce düşerse "kim değiştirdi" bilgisi kaybolur (h
 İş boyu: S
 Kaynak: karar-defteri (md.98) · Numara: md.98
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -227,7 +227,7 @@ Etkisi: 3 aydan eski değişikliklerin "kim/ne zaman" izi kaybolur; geriye dön�
 Kaynak: karar-defteri (md.99) · Numara: md.99
 ⚠️ ilişkili: [G1-14] kalibrasyon audit yazımı (aynı iz).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -240,7 +240,7 @@ Etkisi: Eski kullanıcıların rıza durumu belirsiz; denetimde "rızası var m�
 İş boyu: M
 Kaynak: karar-defteri (K3) · Numara: K3
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -254,7 +254,7 @@ Etkisi: Yetkisiz kullanıcı yönetici sayfasının kabuğunu görebilir (veri g
 Kaynak: karar-defteri (K6/md.66) · Numara: K6/md.66
 ⚠️ bilanço doğrulandı: `frontend/src/middleware.ts` glob ile arandı → dosya YOK.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -268,7 +268,7 @@ Etkisi: Bir yer yanlış kaynaktan okursa kullanıcının kurumdaki rolü/sertif
 Kaynak: karar-defteri (K7) · Numara: K7
 ⚠️ ilişkili: [G1-19] qualityMultiplier okuma kaynağı · [G10] UserProfile.qualityMultiplier ikiz-alan DROP (D3).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -283,7 +283,7 @@ Kaynak: karar-defteri (K7 akrabası) · Numara: (K7 akrabası)
 ⚠️ bilanço büyük ölçüde doğrulandı (kısmi kod-teyit): canlı okuma kaynakları Membership → `adminController.ts:324`, `sjtScoringController.ts:112`, `certification.service.ts` hep `TenantMembership.qualityMultiplier` okuyor; `UserProfile.qualityMultiplier` okuyan CANLI kod bulunamadı (ikiz alan atıl görünüyor).
 ⚠️ ilişkili: [G10] UserProfile.qualityMultiplier ikiz-alan DROP (D3) — aynı ikiz alanın silinme kararı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -297,7 +297,7 @@ Etkisi: Gelecekte yazılacak filtresiz bir `findUnique` fark edilmeden tenant s�
 Kaynak: karar-defteri (md.26(v2)) · Numara: md.26(v2)
 ⚠️ ilişkili: birincil RLS oto-enjeksiyon zaten yapılmış (kart-yok listesi, güvenlik-denetimi 3.1) — bu onun lint güvenlik ağı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -310,7 +310,7 @@ Etkisi: Başlıksız istek varsayılan kuruma düşerse yanlış tenant bağlam�
 İş boyu: S
 Kaynak: karar-defteri (güvenlik-denetimi 3.1 nüans) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -323,7 +323,7 @@ Etkisi: Küçük kurumda agregat metrik tek kişiyi dolaylı teşhis edebilir (K
 İş boyu: M
 Kaynak: karar-defteri (güvenlik-denetimi 3.2) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -337,7 +337,7 @@ Etkisi: Kötü niyetli logo URL'i ile XSS/izleme riski (düşük-orta).
 Kaynak: karar-defteri (NUMARASIZ, logoUrl XSS) · Numara: NUMARASIZ
 ⚠️ bilanço KISMEN düzeltildi: (1) frontend `branding/page.tsx:50 isSafeLogoUrl` VAR ama YALNIZ istemci-tarafı, sadece `protocol === 'https:'` kontrol ediyor (host/MIME allowlist değil; kullanıcı API'yi doğrudan çağırıp atlayabilir). (2) Backend logoUrl doğrulaması hâlâ çıplak `z.string().url()` (`selfServeController.ts:367`, `tenantController.ts:11,82`) — host/MIME allowlist YOK. (3) CSP `img-src 'self'` başlığı VAR ama yalnız `/uploads` statik rotasına uygulanıyor (`server.ts:74`), tenant `logoUrl` bu rotadan servis edilmiyor → logoUrl'i CSP KAPSAMIYOR. Sonuç: bilanço iddiası ("z.string().url() yetersiz + CSP eksik") özünde DOĞRU; yalnız "hiç guard yok" değil (istemci https-guard var). ❓ korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -350,7 +350,7 @@ Etkisi: Kısa ömürlü token URL'de görünse de log/Referer'a sızabilir (dü�
 İş boyu: S
 Kaynak: karar-defteri (NUMARASIZ, OAuth accessToken) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -363,7 +363,7 @@ Etkisi: Teorik tenant-kapsam boşluğu; okuma-only olduğu için pratik risk dü
 İş boyu: S
 Kaynak: karar-defteri (NUMARASIZ, createMeeting) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -377,7 +377,7 @@ Etkisi: Public ihbar formu spam/otomatik kötüye kullanıma açık (düşük-or
 Kaynak: karar-defteri (NUMARASIZ, suspicion-report) · Numara: NUMARASIZ
 ⚠️ ilişkili: [G1-04] SuspicionReport tenantId (aynı model).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -390,7 +390,7 @@ Etkisi: Rotasyon yapılmazsa uzun ömürlü anahtar riski (düşük — anahtar 
 İş boyu: S
 Kaynak: karar-defteri (NUMARASIZ, prod admin-key) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -403,8 +403,8 @@ Etkisi: Sertleştirme yapılmadan canlıya çıkış → sunucu ele geçirme/ver
 İş boyu: L
 Kaynak: karar-defteri (04:54-57 / A6 canlı-öncesi) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
 ---
 
 **[G1-29] Kurum (tenant) kalıcı silme yok — yalnız dondurma (KVKK Md.7)**
@@ -416,7 +416,7 @@ Etkisi: Kurum "unutulma hakkını" kullanamaz; kurum verisi süresiz kalır (KVK
 İş boyu: M
 Kaynak: karar-defteri (md.16(v2)/F3) · Numara: md.16(v2)/F3
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -430,8 +430,8 @@ Etkisi: Çerez izni olmadan analitik açılırsa KVKK/e-Privacy ihlali; analitik
 Kaynak: karar-defteri (md.67) · Numara: md.67
 ⚠️ ilişkili: [G7] GTM+GA4+Clarity analitik entegrasyonu (bu bandın tükettiği ön-koşul).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Çıkışta analytics OLMAYACAK (PO kararı). #110 kilitli kalır, çerez bandı onunla gelir.
 ---
 
 ## Bu grupta zaten yapılmışlar (kart yok)

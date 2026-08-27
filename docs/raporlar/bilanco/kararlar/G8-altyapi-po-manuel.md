@@ -29,8 +29,8 @@ Etkisi: Şu haliyle canlıya çıkılırsa her deploy'da kullanıcı fotoğrafla
 Kaynak: karar-defteri (A22 foto-volume) · Numara: A22
 (teyit) `docker-compose.yml`'de yalnız postgres için volume var; `uploads`/`/app/uploads` volume tanımı YOK — bilanço iddiası DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — kalıcı disk yoksa her deploy kullanıcı fotoğraflarını siler.
 ---
 **[G8-02] Ortam değişkeni teyidi (`UPLOAD_DIR` + backend/API adresleri)**
 Ne: Sunucuda fotoğraf klasörü yolu (`UPLOAD_DIR=/app/uploads`) ve backend/API adres ayarlarının (`BACKEND_URL` / `NEXT_PUBLIC_API_URL`) doğru tanımlı olduğunun teyidi. G8-01 volume işiyle birlikte gider.
@@ -42,7 +42,7 @@ Etkisi: Yanlış/eksik ortam değişkeni → fotoğraf yolu veya API çağrılar
 Kaynak: karar-defteri (NUMARASIZ) · Numara: NUMARASIZ
 (teyit bağlamı) kod ayarı `config.upload.dir` üzerinden okunuyor; asıl teyit canlı ortam değişkenlerinde (PO).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-03] Sohbet (chat) özelliğinin canlıda uçtan uca testi**
@@ -54,7 +54,7 @@ Etkisi: Doğrulanmazsa canlıda mesajlaşma pürüzleri kullanıcıda ilk elden 
 İş boyu: PO-manuel (canlı gözlem)
 Kaynak: karar-defteri (A22) · Numara: A22
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-04] Mentör paneli metriklerini canlıda gözle görme**
@@ -66,7 +66,7 @@ Etkisi: Metrik yanlış görünürse mentör deneyimi ve güven zedelenir.
 İş boyu: PO-manuel (canlı gözlem)
 Kaynak: karar-defteri (A22) · Numara: A22
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-05] Kullanılmayan yedek ortam dosyasını sil (`.env.backup-anaDB`)**
@@ -79,7 +79,7 @@ Etkisi: Eski veritabanı bağlantı bilgisi diskte kalmaya devam eder (hijyen/g�
 Kaynak: karar-defteri (NUMARASIZ, depo:25) · Numara: NUMARASIZ
 (teyit) `backend/.env.backup-anaDB` dosyası HÂLÂ VAR (`ls` mevcut) — bilanço iddiası DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-06] Ortam temizliği (birleşmiş worktree/branch/geçici script sil)**
@@ -91,7 +91,7 @@ Etkisi: Dağınık dal/worktree birikimi kafa karışıklığı ve disk israfı 
 İş boyu: S (PO-manuel + git)
 Kaynak: karar-defteri (md.28 v2) · Numara: md.28(v2)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-07] Ayrı test/önizleme ortamı (staging)**
@@ -104,7 +104,7 @@ Etkisi: Staging olmadan riskli değişiklikler doğrudan canlıda denenir; birç
 Kaynak: karar-defteri (md.27 v2) · Numara: md.27(v2)
 (teyit) `*staging*` adlı hiçbir dosya YOK (grep sonucu boş) — bilanço iddiası DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-08] İzole test veritabanı (`TEST_DATABASE_URL` + Neon test dalı)**
@@ -129,7 +129,7 @@ Etkisi: Yoğun trafikte bağlantı tükenmesi veya mail gecikmesi riski (düşü
 İş boyu: PO-manuel + geliştirme (staging gerekli)
 Kaynak: karar-defteri (NUMARASIZ, 02:48-49) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-10] Eşleştirme önbelleği yok + sabit `take:500` (canlı sonrası)**
@@ -141,7 +141,7 @@ Etkisi: Büyük kurumlarda eşleştirme yavaşlar; 500 üstü kayıtta eksik hes
 İş boyu: M (geliştirme, canlı-sonrası)
 Kaynak: karar-defteri (NUMARASIZ, kapasite :26-31) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-11] Hız sınırlayıcı (rate limiter) tek sunucu hafızasında — çok sunucuda Redis gerekir**
@@ -154,7 +154,7 @@ Etkisi: Çok sunuculu kuruluma geçilirse hız sınırı etkisiz kalır (kötüy
 Kaynak: karar-defteri (md.02:50 / E2) · Numara: md.02:50 / E2
 (teyit) `rateLimiter.ts` sayaçları `new Map` ile hafızada tutuyor ("in-memory sliding window") ve `generalRateLimiter` tenant-anahtarlı — bilanço iddiası DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-12] Zamanlanmış görevlerin (cron) çok sunucuda çift çalışma riski**
@@ -166,7 +166,7 @@ Etkisi: Çok sunuculu kurulumda çift mail/çift işlem riski.
 İş boyu: M (geliştirme)
 Kaynak: karar-defteri (NUMARASIZ, kapasite :38) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-13] Sekmeler arası geçişte yavaşlık (istemci önbelleği)**
@@ -178,7 +178,7 @@ Etkisi: Sürerse gündelik panel kullanımı hantal hissettirir.
 İş boyu: S (teyit + gerekirse fix)
 Kaynak: karar-defteri (E17 / B10) · Numara: E17 / B10
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G8-14] Sol-alt kullanıcı kartı / açılır menü**
@@ -190,7 +190,7 @@ Etkisi: Küçük UX bileşeni; eksikse gezinme/oturum menüsü tutarsız olur.
 İş boyu: S (teyit + gerekirse ekleme)
 Kaynak: karar-defteri (B12) · Numara: B12
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 

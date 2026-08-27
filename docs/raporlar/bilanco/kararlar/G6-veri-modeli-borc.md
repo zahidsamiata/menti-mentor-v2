@@ -30,7 +30,7 @@ Kaynak: karar-defteri GRUP 8 (md.48)
 Numara: md.48
 ⚠️ Kod-teyit: `conversationController.ts:236-261` `listConversations` içinde `Promise.all(convos.map(async c => { message.count(...); message.findFirst(...) }))` — N+1 DOĞRULANDI (konuşma başına 2 ek sorgu, pagination yok).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -53,7 +53,7 @@ Numara: md.49
 - `MentorshipAgreement.meetingFrequency/communicationChannel String` (:1193-1194) — string (AMA `status AgreementStatus` :1206 = ZATEN enum, o alan hariç).
 - Çift-rol: `User.role UserRole` (:234, enum) + ayrı `TenantMembership.role` (:1054 modeli) — İKİSİ DE mevcut, çift-rol DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -70,7 +70,7 @@ Kaynak: karar-defteri GRUP 8 (md.49-akraba)
 Numara: md.49-akraba
 ⚠️ Kod-teyit: schema.prisma'da `onDelete` çoğu ilişkide YOK (grep `onDelete`=19 tanım; ~40 model + çok-FK'ya göre çoğu tanımsız → RESTRICT default). `InvitationTemplate.tenant ... onDelete: Cascade` (:1237) gibi az sayıda açık tanım var; çoğu (User/Meeting/VisibilityOptIn FK'ları) tanımsız DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -87,7 +87,7 @@ Kaynak: karar-defteri GRUP 8 (NUMARASIZ)
 Numara: NUMARASIZ
 ⚠️ Kod-teyit: `schema.prisma:235 email String @unique` (global, tenant-scope DEĞİL) DOĞRULANDI. Multi-tenant çakışma riski gerçek; ancak bu "tek kişi = tek hesap" bilinçli tasarım da olabilir → ❓ (mimari niyet belgelenmemiş).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -104,7 +104,7 @@ Kaynak: karar-defteri GRUP 8 (md.47/C17)
 Numara: md.47/C17
 ⚠️ Not: G9-02 (`registerMessages.ts` belge iddiası) bu kalemin belge-tarafıdır; ikisi ilişkili — merkezileştirme yapılırsa CLAUDE.md iddiası da gerçeğe kavuşur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -121,7 +121,7 @@ Kaynak: karar-defteri GRUP 8 (md.47)
 Numara: md.47
 ⚠️ Kod-teyit: `.safeParse(` grep = **89 kopya / 30 dosya** (bilanço "~85" tutarlı, hatta biraz fazla). Cookie helper: `authController.ts:59-70` `setRefreshCookie/clearRefreshCookie/getRefreshTokenFromCookie` tanımlı + `selfServeController.ts` `setRefreshCookie`/`REFRESH_COOKIE_NAME` = 4 ref (duplike DOĞRULANDI).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -138,7 +138,7 @@ Kaynak: karar-defteri GRUP 8 (md.46)
 Numara: md.46
 ⚠️ Kod-teyit: `frontend/package.json:14-20` = 7 @radix-ui paketi. `frontend/src` grep: yalnız `label.tsx` (react-label) + `button.tsx` (react-slot) import ediyor = 2 kullanılan → **5 kullanılmayan (avatar/dialog/dropdown-menu/separator/toast) DOĞRULANDI**.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
