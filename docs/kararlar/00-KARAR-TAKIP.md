@@ -50,6 +50,31 @@
 
 ---
 
+## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
+
+> **Neden burada:** Oturumlarda "sonraki turda/ileride yapılacak" diye verilen sözler sonraki oturumlarca devralınmıyordu
+> (bilanço teşhisi: 15 sözün 11'i düştü). KURAL 11: söz verildiği AN buraya tek satır kopyalanır; **her oturum başında bu bölüm
+> okunur, PO'ya açık sözler hatırlatılır; söz yerine gelince ✅ + kaldırılır.** Kaynak: `../raporlar/bilanco/` (T3-A + nihai §7).
+> Bu bölüm = "verilen ama tutulmamış söz" görünürlüğü; B/F tabloları = "iş/karar" görünürlüğü (çelişmez, tamamlar).
+
+| # | Söz (ne yapılacaktı) | hangi oturum | bugünkü durum | ilgili madde |
+|:---:|---|---|---|---|
+| S15 | Kurum onay/ret maili gönderimi açılacak (env bağla) | 2026-08-20 | ⬜ hâlâ kapalı (`TENANT_NOTIFICATIONS_ENABLED=false`) — PO-manuel env | 37m |
+| S2 | Denetim işleri (Y1-Y7) kodlanacak | 2026-08-20 | ⬜ hiçbiri başlanmadı; "neden bırakıldı" gerekçesiz | Y1-Y7 |
+| S10 | Canlı DB soru sayıları teyit edilecek (DISC 32/SJT 3/sertifika 20 ↔ canlı) | 2026-08-15 / 08-26 | ⬜ hiç yapılmadı (DB'ye sorulmadı — kural) | 30 · 33 · 118 |
+| S6/S7 | KVKK FE entegrasyonu + avukat-final tamamlanacak | 2026-08-25 | ⬜ hukukçu onayı (H-9) + [PO DOLDURACAK] bekliyor | 97 · 90 · 84 |
+| S3/S9 | Kurum-düzeltme 3 sorusu + içerik 5 kararı PO'dan alınacak | 2026-08-23 | ⬜ PO karar kuyruğunda birikti | K5 soruları (00-CIKIS-PLANI) |
+| S1 | 6 arşiv teyidi yapılacak | 2026-08-14 | ⬜ sonraki oturumlarda hiç anılmadı, izi kayboldu (sebep yok) | — (belge-hijyen) |
+| S11 | Soru cevap-tipi (şıklı/açık-uçlu) yapılacak | (çeşitli) | ⬜ migration + kapsam belirsiz → PO netleştir; defalarca ertelendi | 13 |
+| S12 | DISC-tipine-özel "mentiye yaklaşım" içeriği yazılacak (sıfırdan) | (çeşitli) | ⬜ içerik felsefesi keşfine bağlandı | 31 |
+| S13 | DISC-DERİNLEŞME kurgusu tasarlanıp kodlanacak | 2026-08-23 | 🔵 içerik-felsefe keşfine bağlı, kodlanmadı | (A1, numarasız) |
+| S14 | Belge yeniden-yapılandırma (~68 belge) tamamlanacak | 2026-08-23 | 🟡 kısmen (bu bilanço onun parçası), tamamı değil | 123 (A5) |
+
+> **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
+> boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
+
+---
+
 ## B. 🔴 AÇIK İŞLER TABLOSU
 
 > Durum: 🔴 hiç başlanmadı · 🟡 yarım/kısmi · 🔵 tasarım hazır kod bekliyor · ❓ karar/keşif bekliyor · ⏸️ bilinçli ertelendi.
@@ -359,7 +384,7 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 | 121 | `backend/.env.backup-anaDB` sil (env geçişi bitince) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T2-B(depo:25) | Env geçişi bitince yedek dosyayı temizle | Dosya HÂLÂ VAR (`ls` teyit) |
 | 122 | `PROJECT_STATUS.md` DEPRECATED → arşivle + 09-DURUM'a yönlendir | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ (belge-hijyen) | T2-B(:207) | Bayat onboarding belgesi güncel durumla karışmasın | 9 Ağu'dan eski; CLAUDE.md hâlâ işaret ediyor |
 | 123 | INDEX eksik (raporlar/arsiv büyük ölçüde INDEX'te yok) + ~29 belgede üst-etiket eksik | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ (belge-hijyen) | T2-B(:210)/T1-B3 | Belge haritası tam olsun (Kural 5) + 🔄/📸 üst-etiket | belge-mimarisi :210-215; A5 reorg kapsamı |
-| 124 | `backend/CLAUDE.md` bayat onboarding düzeltmesi (5-model↔38, iceBreaker/matchReason yok, LLM içsel çelişki) | ⬜ AÇIK (PO önceliklendirmedi) | 🗑️→düzelt (belge-hijyen) | T3-C(B1-B6) | Ajanlar her oturum okuyor; yanlış zihinsel model riski | ⚠️ GÜNCELLEME/düzeltme gerek (silme yok); env-notu "İrlanda"→Londra dahil |
+| 124 | `backend/CLAUDE.md` bayat onboarding düzeltmesi (5-model↔38, iceBreaker/matchReason yok, LLM içsel çelişki) | ✅ YAPILDI (2026-08-27) | belge-hijyen (grep-kanıtlı) | T3-C(B1-B6) | Ajanlar her oturum okuyor; yanlış zihinsel model riski | ✅ **backend PR #55** (backend/CLAUDE.md: 38 model, silinmiş dosyalar çıkarıldı, LLM tek ifade, llmRateLimiter kaldırıldı, etiket 50→80) + çatı PR (kök CLAUDE.md env-notu "İrlanda"→Londra). Tüm düzeltmeler grep-kanıtlı |
 
 > **Not (dürüstlük):** Yukarıda "gerçek tür" sütunu, kalemin bilanço defterindeki olgusal iş-durumunu korur (🟡 yarım / ❓ teyit-karar /
 > belge-hijyen). PO talimatı gereği **statü sütunu hepsi için ⬜ AÇIK (PO önceliklendirmedi)** — bu bir öncelik değil, "PO henüz sıraya

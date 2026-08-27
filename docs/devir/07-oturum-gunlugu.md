@@ -288,6 +288,18 @@
 
 ---
 
+## OTURUM 2026-08-27 — CLAUDE.md düzeltmesi (madde 124) + KURAL 9-12 yürürlüğe
+- **Mod:** 🟢 BYPASS (yalnız-belge; kod/DB YOK). Branch: `docs/claude-md-duzeltme-2026-08-26` (backend + çatı).
+- **GÖREV A (madde 124):** İki `CLAUDE.md`'deki bayat kod-gerçeği iddiaları **grep-kanıtlı** düzeltildi.
+  - `backend/CLAUDE.md` (backend PR **#55**): "5 model"→**38** (`^model`=38); silinmiş `iceBreaker.ts`/`matchReason.ts` çıkarıldı+not; "LLM only ice-breaker"↔"removed" içsel çelişkisi tek ifadeye indirildi (LLM removed; yalnız `config` env + `llmRetry.ts` 0-import iskele); `llmRateLimiter` "var"→kaldırıldı (grep boş); UserProfile etiket **50→80** (`sanitizeTags` maxLen); `matching.ts` satırına `rankMentorsForMenti` eklendi.
+  - kök `CLAUDE.md` (çatı PR): eu-west-2 "İrlanda"→**Londra/Birleşik Krallık** (AB değil; madde 92).
+  - **DOĞRU çıkıp değişmeyenler:** `registerMessages.ts` (frontend — bilanço backend'e bakıp yanılmış), `assertTestDatabase.ts` (tests/helpers), Express 5, `iceBreaker` şema alanı (servis silindi, alan durur), tenantSharing/canCrossTenantMatch/SECTOR_TAG(50)/purgeExpiredData(Pazar=weekly). **TEYİT GEREK kalan: 0.**
+- **GÖREV B (KURAL 9-12 yürürlüğe):** kök `CLAUDE.md`'ye KURAL 8 ardına eklendi — K9 rapor kalem-listesiyle biter (numara-adayı sütunu zorunlu) · K10 ✅ kanıtsız basılmaz (kısmi=🟡; 6 durum) · **K11 söz açılışta okunur** (00-KARAR-TAKIP'e "⭐ SONRAKİ-TUR SÖZLERİ" bölümü — YENİ dosya değil; 10 açık söz taşındı) · K12 tazelik denetimi (revize: birincil=yapısal-kod-değişiminde CLAUDE.md doğrula + karar-yayılım taraması; 30-gün ikincil/script).
+- **Belge-senkron:** 00-KARAR-TAKIP (madde 124 ✅ + SÖZLER bölümü + K9-12 CLAUDE.md'de) · 09-DURUM · tekrar-onleme Bölüm 5 (✅ yürürlükte) · bu günlük. Kırık-link 0.
+- **Sınır/submodule:** backend PR #55 + çatı PR açık, **HİÇBİRİ MERGE EDİLMEDİ** (PO). Çatı pointer backend #55 feature-commit'e bump; backend merge sonrası main HEAD'e re-bump gerekir (DANS ÖNLEME).
+
+---
+
 ## 🧭 Her oturum için çalışma tarzı hatırlatması
 - **Ürün sahibi kod yazmaz;** strateji-Claude promptları yazar, PO Claude Code'a kopyalar.
 - **Modlar:** 🔵 PLANLA (salt-okuma) / 🟢 BYPASS (kod/belge yazar, PR açar — **MERGE ETMEZ**). Merge kararı hep PO'da.
