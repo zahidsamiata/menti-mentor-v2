@@ -1,6 +1,9 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-26
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-08-27
+
+> **⚡ ŞU AN — CLAUDE.md DÜZELTME + KURAL 9-12 (2026-08-27, yalnız-belge):** Branch `docs/claude-md-duzeltme-2026-08-26`, iki PR açık (MERGE ETME): **backend #55** (`backend/CLAUDE.md` 6 bayat kod-gerçeği iddiası grep-kanıtlı düzeltildi: 5-model→38, silinmiş iceBreaker/matchReason çıkarıldı, LLM içsel çelişki tek ifade, llmRateLimiter kaldırıldı, etiket 50→80) + **çatı** (kök `CLAUDE.md`: eu-west-2 "İrlanda"→Londra/BK; **KURAL 9-12 yürürlüğe alındı** — KURAL 8 ardına; `00-KARAR-TAKIP` **madde 124 ✅** + **"⭐ SONRAKİ-TUR SÖZLERİ" bölümü açıldı**, 10 açık söz taşındı). `registerMessages.ts` (frontend) + `assertTestDatabase.ts` (tests/helpers) DOĞRU çıktı. Kod/DB DEĞİŞMEDİ; çatı submodule pointer backend #55 feature-commit'e bump (merge sonrası main HEAD'e re-bump). Detay: `../raporlar/bilanco/tekrar-onleme-2026-08-26.md`.
+>
 
 > **⚡ ŞU AN — BELGE BİLANÇOSU SNAPSHOT (2026-08-26, salt-belge 4-tur sayım):** Çatı main `d79cb93` (senkron; #119 merged) · backend main/pointer `b433554`. **Yeni belgeler (branch `docs/belge-bilancosu-2026-08-26`, PR açılıyor — MERGE ETME):** `docs/raporlar/bilanco/` altında nihai rapor + karar defteri + PO özet + tekrar-önleme + 16 bölüm defteri. **Sonuç:** tüm docs (71 belge, 10.473 satır) + `CLAUDE.md` okundu → **196 benzersiz kalem** (açık ⬜66+🟡22+❓32=**120**); 21 numara adayı → **NUMARALANDI (104-124, PO talimatı, `00-KARAR-TAKIP` F.6)**, hepsi ⬜ AÇIK (PO önceliklendirmedi), 10-yol'a eklenmedi; 15 tutulmamış söz; ~29 unutulmuş erken niyet; 6 çelişki (5 kod-hakemli); ~20 hayalet-tamamlanmış. `enneagramWing` kod-hakem: yarım-bağlı yaz-echo-alanı. KURAL 9-12 önerisi (yürürlükte DEĞİL). Kod/DB DEĞİŞMEDİ. Detay: `../raporlar/bilanco/belge-bilancosu-2026-08-26.md`.
 >

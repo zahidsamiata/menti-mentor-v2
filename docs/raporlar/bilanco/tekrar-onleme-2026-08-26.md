@@ -278,7 +278,12 @@ düşük-maliyet/yüksek-fayda.
 
 ## BÖLÜM 5 — PO ONAY SATIRLARI
 
-**TASLAK KURAL 9 — Rapor kalem-listesiyle biter (numara-adayı-mı sütunu zorunlu)**
+> **⚠️ GÜNCELLEME (2026-08-27): PO ONAYLADI → KURAL 9-12 YÜRÜRLÜKTE.** Dördü de kök `CLAUDE.md`'ye KURAL 8'in ardına
+> eklendi (KURAL 12 **revize**: birincil ayak = yapısal-kod-değişiminde CLAUDE.md doğrula + karar-değişince belge-tara;
+> "30 gün" ikincil/otomatik-script). KURAL 11 gereği `00-KARAR-TAKIP`'te **"⭐ SONRAKİ-TUR SÖZLERİ"** bölümü açıldı ve
+> 10 açık söz taşındı. Aşağıdaki `[ ]` satırları tarihsel iz olarak kalır (artık karar verilmiştir).
+
+**TASLAK KURAL 9 — Rapor kalem-listesiyle biter (numara-adayı-mı sütunu zorunlu)** — ✅ YÜRÜRLÜKTE (2026-08-27)
 `[ ] PO notu: ` (kabul / değişsin / gereksiz)
 
 **TASLAK KURAL 10 — ✅ kanıtsız basılmaz (dosya:satır VEYA "KOD DIŞI"; kısmi=🟡) — pratikte uygulanıyor, resmileştir**
