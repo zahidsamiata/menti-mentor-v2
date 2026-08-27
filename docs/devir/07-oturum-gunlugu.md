@@ -300,6 +300,17 @@
 
 ---
 
+## OTURUM 2026-08-27 (öğleden sonra) — PO KARARLARI İŞLENDİ (184 kart)
+- **Mod:** 🟢 BYPASS (yalnız-belge). Branch: `docs/po-kararlari-2026-08-27`. PR açık, MERGE ETME.
+- **Ne yapıldı:** PO'nun strateji oturumunda 184 karar kartına verdiği kararlar `G*.md` dosyalarına deterministik script'le işlendi (kutu `[x]` + PO notu; kart metni değişmedi).
+  - **176 karar:** ✅ işleme al 87 (9 çıkış-blokeri: G8-01, G1-05/07/09/10/13/28, G5-01/02) · ⏸️ şimdilik alma 85 · 🗑️ geçersiz 2 (G4-03, G9-01) · ❓ keşif 2 (G4-09/10) · **8 kart boş** (PO listesinde yoktu: G3-08/11, G4-01/11/12/24, G8-08, G9-05).
+  - **24 PO notu** aynen işlendi (analytics-çıkışta-yok, kulüp-aktif, manuel-eşleştirme-yok, anket→migration vb.).
+- **Sync:** madde 13 ⏸️→✅ (G3-13 canlandı); T8/76 🗑️ çözüldü (Ç5 kapandı); SÖZLER S17-S20 eklendi; 09-DURUM + bu günlük not.
+- **Bağlı kararlar:** G1-13↔G1-10 (kulüp-aktif + açık-beyan), G3-04→G3-13 (anket→migration), G2-07+G2-08+G10-21 (sektör+OCEAN bağlama), G8-01↔G10-25 (foto zinciri).
+- **Sınır:** öncelik SIRALAMA YAPILMADI (KURAL 8: 10-yol'a yalnız öncelik verilince). Kod/DB/kart-metni değişmedi. G4-10 çift-atama keşif'e çözüldü (raporda not).
+
+---
+
 ## 🧭 Her oturum için çalışma tarzı hatırlatması
 - **Ürün sahibi kod yazmaz;** strateji-Claude promptları yazar, PO Claude Code'a kopyalar.
 - **Modlar:** 🔵 PLANLA (salt-okuma) / 🟢 BYPASS (kod/belge yazar, PR açar — **MERGE ETMEZ**). Merge kararı hep PO'da.
