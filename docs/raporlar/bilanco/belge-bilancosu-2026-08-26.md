@@ -7,6 +7,8 @@
 > **Detay defter:** `karar-defteri-2026-08-26.md` (196 benzersiz kalem, dosya:satır kanıtlı). **PO için kısa özet:**
 > `bilanco-po-ozet-2026-08-26.md`. **Tekrar-önleme teşhisi:** `tekrar-onleme-2026-08-26.md`.
 > **Ham bölüm defterleri:** `bolumler/T1..T4-*.md` (16 dosya, tarihsel iz).
+>
+> **⚠️ GÜNCELLEME (2026-08-27) — "196" SAYISI DÜZELTİLDİ:** Bu raporun her yerinde geçen **"196 benzersiz kalem"** sayısı YANLIŞ çıktı. TUR-5a/5a-EK: karar defterinde **270 durum-taşıyan veri satırı** var; gerçek ikiz yalnız **11** → tekil **≈259**. "196" FAZ-2'nin HAM 1381→196 aritmetiğiydi ve yazılan satırlarla mutabakatlanmamıştı (defterin kendi grup-toplamı zaten 266 diyordu). **Aşağıdaki 196'lar 2026-08-26 tarihli tarihsel snapshot olarak KORUNDU (silme yok); güncel gerçek = ≈259.** Kaynak: `kararlar/00-KATLAMA-IZI-2026-08-27.md`.
 
 ---
 
