@@ -78,7 +78,7 @@
   > **Tehlikeli = `prisma/seed.ts`** (`npm run seed` = `tsx prisma/seed.ts`) — satır 300-307'de toplu `deleteMany()` (userResponse/feedback/meeting/matchRequest… siler). ASLA çalıştırma.
 
 ## Ortam / Veritabanı — PROD ≠ DEV ≠ TEST
-- **Lokal geliştirme**: `backend/.env` → ana Neon (`ep-fancy-tooth-ab4u5xhr`, eu-west-2/İrlanda). Bu CANLI veri;
+- **Lokal geliştirme**: `backend/.env` → ana Neon (`ep-fancy-tooth-ab4u5xhr`, eu-west-2 = **Londra/Birleşik Krallık**, AB üyesi DEĞİL — madde 92, PO teyitli 2026-08-26). Bu CANLI veri;
   lokalde ona bağlıyken DB'ye YAZMA (salt-okuma sorgu, PII maskeli).
 - **Test**: `TEST_DATABASE_URL` (izole DB) beklenir. Yoksa guard (`assertTestDatabase.ts`) devreye girer — canlı
   Neon'a TRUNCATE atılmaz, suite durur.
@@ -183,6 +183,30 @@
 - (3) Öncelik verilince → `10-yol-haritasi`'na **tek satır** (numara + öncelik + "detay: KARAR-TAKIP"); detay kopyalanmaz.
 - (4) İş bitince → **önce KOD doğrula**, sonra 4 yer: KARAR-TAKIP ✅ · yol-haritası stub · `10-yol-tamamlananlar` · `09-DURUM`.
 - (5) Oturum bitince → `devir/07-oturum-gunlugu`'na bölüm.
+
+> **⚠️ GÜNCELLEME (2026-08-27): KURAL 9-12 yürürlüğe girdi** — 4-turluk belge bilançosunun kök-neden teşhisinden çıktı
+> (`docs/raporlar/bilanco/tekrar-onleme-2026-08-26.md`, PO onaylı). Amaç: ~175 kalemin numarasız izsizleşmesi + 15 sözün
+> 11'inin devralınmaması + bayat "yapıldı" iddiaları bir daha yaşanmasın. KURAL 8'i tamamlarlar, çelişmezler.
+
+### KURAL 9 — Her rapor KALEM LİSTESİ'yle biter
+- Keşif/denetim/analiz raporu üreten HER tur, raporu **"KALEM LİSTESİ"** bölümüyle bitirir. Listede satır almayan bulgu, **bulgu SAYILMAZ** (rapor gövdesine gömülü kalıp kaybolmaz).
+- Her satır 3 alan taşır: **kalem** (tek cümle) · **önerilen durum** (aşağıdaki 6'dan biri) · **numara-adayı-mı** (evet/hayır — bu sütun ZORUNLU; yoksa yine numarasız liste doğar).
+- Bu liste, bulguların `00-KARAR-TAKIP`'e girişinin (KURAL 8 adım 2) kaynağıdır — rapordan doğrudan aktarılır.
+
+### KURAL 10 — ✅ kanıtsız basılmaz
+- "YAPILDI" (✅) yazabilmek için **kod kanıtı (dosya:satır) VEYA açık "KOD DIŞI" etiketi ZORUNLU.** Belge beyanı tek başına YETMEZ.
+- **Kısmi iş ✅ değildir → 🟡 YARIM** (ne var / ne yok, ikisi de kanıtlı). Belge ↔ kod çelişirse KOD kazanır.
+- **Durum kodları 6 tanedir (başkası YASAK):** ✅ YAPILDI · 🟡 YARIM · 🔀 PR'DA · ⬜ AÇIK · ❓ TEYİT GEREK · 🗑️ GEÇERSİZ ADAYI.
+
+### KURAL 11 — Söz açılışta okunur (EN KRİTİK — disiplin sona değil BAŞA)
+- `00-KARAR-TAKIP.md`'de **"⭐ SONRAKİ-TUR SÖZLERİ"** bölümü tutulur (YENİ DOSYA AÇMA — ikinci kaynak = çelişki riski).
+- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no).
+- **Her oturum BAŞINDA bu bölüm OKUNUR** ve ürün sahibine açık sözler hatırlatılır. Söz yerine getirilince ✅ + kaldırılır. *(Teşhis: 15 sözün 11'i devralınmadığı için düştü; disiplin oturum sonundan başına taşındı.)*
+
+### KURAL 12 — Tazelik denetimi (3 ayak; 30-gün ikincil)
+- **Birincil (yapısal-tetik):** Yapısal kod değişiminde (model ekle/sil, dosya kaldır, ortam/env değişimi) ilgili **`CLAUDE.md` dosyaları DOĞRULANIR** — model sayısı, dosya adları, ortam bilgisi grep'le kontrol edilir. *(backend/CLAUDE.md "5 model / iceBreaker.ts" bu yüzden aylarca bayat kaldı.)*
+- **İkincil (karar-yayılımı):** Bir karar değişince **"bunu başka nerede yazmışız"** belge taraması yapılır *(bilançoda 9 çelişki bu yüzden doğdu — ör. sunucu ülkesi 5 belgede).*
+- **Üçüncül (süre):** 🔄 YAŞAYAN belge 30 günü aşarsa "bayat" işaretlenir — bu ayak **ELLE değil, ileride script ile** (elle yapılırsa unutulur; maliyet>fayda). Şimdilik birincil+ikincil elle yürür.
 
 <!-- /çalışma-kuralları -->
 
