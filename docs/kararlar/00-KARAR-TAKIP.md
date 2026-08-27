@@ -17,6 +17,8 @@
 
 > **Çıkış önceliği (hangi iş çıkıştan önce/sonra):** `00-CIKIS-PLANI.md` — açık işler K0-K5'e sınıflandı; gerçek çıkış-bloker sadece 5 K0 + 1 K1.
 
+> **⚠️ GÜNCELLEME (2026-08-26) — BELGE BİLANÇOSU (4-tur sayım) yapıldı:** Tüm docs (71 belge, 10.473 satır) + kök & backend `CLAUDE.md` baştan-sona okundu, kod gerçeğiyle çaprazlandı, tekilleştirildi → **196 benzersiz karar/iş/niyet** (açık: ⬜66+🟡22+❓32=**120**). **21 numara adayı → NUMARALANDI (104-124, PO talimatıyla, bkz. Bölüm F.6)** — hepsi durum **⬜ AÇIK (PO önceliklendirmedi)**; öncelik atanmadı, 10-yol'a eklenmedi. **15 tutulmamış söz**, **~29 unutulmuş erken niyet**, **6 çelişki** (5 kod-hakemli), **~20 hayalet-tamamlanmış** (belge "açık" der, kod yapılmış). En bayat canonical = `00-CIKIS-PLANI` (madde 39 + K5-soru 2 + repo-private 2026-08-26 kararlarından habersiz). Tam döküm: `../raporlar/bilanco/belge-bilancosu-2026-08-26.md` + `karar-defteri-2026-08-26.md`. PO özeti: `bilanco-po-ozet-2026-08-26.md`. Tekrar-önleme (KURAL 9-12 öneri, yürürlükte DEĞİL): `tekrar-onleme-2026-08-26.md`. **Sayım turu kod/DB değiştirmedi; numaralar yalnız bu belgede (F.6) doğdu.**
+
 | Kategori | Sayı | Tek cümle |
 |---|:---:|---|
 | 🔴/🟡/🔵 **v1 açık iş** | **6** | ⚡ #37 kurum "düzeltme iste" → **✅ CANLIDA** (backend #50 + çatı #104 merged, migration canlıda). Kalan: cevap-tipi(#13), kurum-maili(#6), 2a/2b/#7-B tasarım-hazır, içerik/seed/PO + **9a** ağırlık-ayar (migration bekliyor) + **37m** kurum-mail-açma (PO-manuel env) |
@@ -323,6 +325,45 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 
 > **⚠️ Numara notu (✅ 2026-08-23 çözüldü):** F maddeleri numaralandı (G3+T1-T10 → **68-78**, `v1-H`). **#38 çakışması çözüldü:**
 > **madde 38 = güvenlik `updateUser`** (sayı dizisinde KALIR, canonical) · B.4'teki DISC işi artık numarasız **"DISC-DERİNLEŞME kurgusu"** adıyla anılır (sayı dizisinden çıkarıldı). Sonraki yeni iş: **79'dan** başla.
+
+---
+
+### F.6 — 🆕 2026-08-26 BELGE BİLANÇOSU numara adayları → NUMARALANDI (104-124)
+
+> **Kaynak:** 4-turluk belge bilançosu (`../raporlar/bilanco/belge-bilancosu-2026-08-26.md` §3 + `karar-defteri-2026-08-26.md`).
+> Bilançoda numarasız yakalanan gerçek açık işler burada numaralandı (KURAL 8: numara YALNIZ burada doğar). **Numara = İZLENEBİLİRLİK, öncelik DEĞİL.**
+> **PO talimatı (2026-08-26):** Hepsinin durumu **⬜ AÇIK (PO önceliklendirmedi)** — hiçbirine öncelik/aciliyet atanmadı, sıraya sokulmadı.
+> Numara sırası = bilançoda kataloglanma sırası (öncelik değil). `madde-104` ≠ PR `#104` (ayrı ad-uzayı). Öncelik verilene dek
+> **`10-yol-haritasi.md`'ye EKLENMEZ** (KURAL 8 adım 3: roadmap satırı yalnız öncelik verilince). "gerçek tür" = kalemin bilanço defterindeki
+> olgusal iş-durumu (açık/yarım/teyit/belge-fix); PO-önceliklendirmesi bundan bağımsızdır.
+
+| No | İş (tek cümle) | durum | gerçek tür | kaynak (bilanço) | NİYET | NEREDE DURDU |
+|:---:|---|:---:|:---:|---|---|---|
+| 104 | Bekleme salonu bildirim izni (`Notification.requestPermission`) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T2-C(A7)/T3-B(C-3)/T4-A2 | Bekleme retention — menti bekleme salonunda sessizce kaybolmasın, bildirimle geri çağır ("en kritik UX") | grep 0 dosya (`frontend/src`'te `requestPermission` yok); kodlanmamış |
+| 105 | Kullanıcı→ürün geri bildirim mekanizması (her sayfa "Bildir"→mail) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T1-B2(05:55)/T2-B(E24)/T4-A1(E21) | Kullanıcı ürün hakkında geri bildirim verebilsin | `SuspicionReport` DB'ye yazar ama MAİL GÖNDERMİYOR; genel "Bildir" akışı yok |
+| 106 | Onboarding şablon-seçim ekranı ("Mezun/Gönüllü/Kulüp") | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | "Terk-oranını en-çok-düşüren ekran" (kayıtta rol/şablon seçimi) | grep: şablon-seçim ekranı yok |
+| 107 | Menti/mentör tarafı retention "sevdirme"/onboarding-aha deneyimi | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A1(E36)/T2-D(persona) | Persona-temelli sevdirme; kullanıcı ürüne bağlansın | Yalnız STK-yönetici dilimi yapıldı; menti/mentör sevdirme izi yok |
+| 108 | Mentör karar ekranında menti CHAT ilk mesajı görünsün | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A1(E29) | Mentör görüşme kararı verirken menti'nin ilk mesajını görsün ("KALICI İŞ") | Ön-koşul (chat) ✅ ama Conversation↔Meeting FK yok; ekran inşa edilmedi |
+| 109 | Menti P1 DISC "özgüven aşısı" sunumu | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T2-D(menti:80) | Menti-yönü özel "değerlisin" sunumu | Menti-yönü özel sunum yapılmadı; DURUŞ SEBEBİ YOK |
+| 110 | "Görüşme tamamladım 🎉" paylaşım kartı (DISC-kartından ayrı) | ⬜ AÇIK (PO önceliklendirmedi) | 🟡 | T4-A2 | Görüşme sonrası paylaşılabilir kutlama kartı | DISC-sonuç paylaşım kartı VAR; görüşme-paylaşım kartı grep yok |
+| 111 | "Varsayılana düşen profil oranı" izleme metriği | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | Psikometrik kör-nokta: kaç profil varsayılan/nötr'e düşüyor (madde 103 akrabası) | grep boş; metrik yok |
+| 112 | Profil-düzenleme keşfi (kayıt-sonrası bilgi/foto güncelleme yeteneği var mı) | ⬜ AÇIK (PO önceliklendirmedi) | ❓ | T4-A1(E34) | Kullanıcı kayıttan sonra bilgisini/fotoğrafını güncelleyebilmeli | PLANLA keşfi hiç yapılmamış (gerçek tür ❓: önce kod-keşif) |
+| 113 | `PATCH /users/me/social` bağlanmamış endpoint | ⬜ AÇIK (PO önceliklendirmedi) | ❓ | T2-C | **NİYET HİÇBİR BELGEDE YOK** (NİYET BELGELENMEMİŞ) | `onboardingController.ts:461` bağlanmamış; bilinçli terk mi bağlanacak mı = PO |
+| 114 | `SjtQuestion`/`SjtOption` tabloları 0 prisma query | ⬜ AÇIK (PO önceliklendirmedi) | ❓ | T2-C(1.A) | SJT tabanlı profil (alternatif psikometri yolu) | `schema.prisma:889,906` 0 query; ölü-tablo mu SJT-genişletme mi = PO (DURUŞ SEBEBİ YOK) |
+| 115 | Kurumlar-arası "sosyal kanıt" duvarı + paylaşılabilir kurum "Etki kartı" | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | B2B2C viral büyüme (kurumlar birbirini görsün, etki kartı paylaşılsın) | grep: kamuya-açık kurum-duvarı/etki-kartı FE yok |
+| 116 | Mentör/menti-kaynaklı "ters çekim" bottom-up büyüme kanalı | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | Kullanıcı-kaynaklı büyüme kanalı (multi-tenant altyapı hazır) | Kanala çevrilmedi |
+| 117 | Premium "kilitli görünür" + `Tenant.plan/limits` freemium altyapısı | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T1-B2(01:18)/T2-C/T4-A2 | Freemium iş modeli (bazı özellikler premium'da açılsın) | Şema alanı var; uygulama-mantığı yok |
+| 118 | Global içerik seed'i ana Neon'a uygula (DISC/LearningJourney "boş" görünüyor) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T2-B(:10/:86)/T4-A2/T4-A1(A8) | Canlıda içerik dolsun (seed eksik görünüyor) | ⚠️ **CANLI DB YAZIMI → PO onayı ZORUNLU** (canlı=lokal aynı Neon); canlı sayı ⏳ DB-teyit |
+| 119 | k-anonimlik (super-admin küçük-grup metrik yuvarlama) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | KVKK-agregat borcu: küçük grupta yeniden-tanımlanma riski | grep boş; iz zayıf |
+| 120 | Sunucu/altyapı sertleştirme (Dokploy HTTP/firewall/SSH/SSL/yedek) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ (KOD DIŞI) | T1-B2/T3-B/T4-A1(E15)/T4-A2 | Canlı-öncesi altyapı güvenliği | Hiç ele alınmadı; kod-dışı altyapı, önceden aksiyon-numarası yoktu |
+| 121 | `backend/.env.backup-anaDB` sil (env geçişi bitince) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T2-B(depo:25) | Env geçişi bitince yedek dosyayı temizle | Dosya HÂLÂ VAR (`ls` teyit) |
+| 122 | `PROJECT_STATUS.md` DEPRECATED → arşivle + 09-DURUM'a yönlendir | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ (belge-hijyen) | T2-B(:207) | Bayat onboarding belgesi güncel durumla karışmasın | 9 Ağu'dan eski; CLAUDE.md hâlâ işaret ediyor |
+| 123 | INDEX eksik (raporlar/arsiv büyük ölçüde INDEX'te yok) + ~29 belgede üst-etiket eksik | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ (belge-hijyen) | T2-B(:210)/T1-B3 | Belge haritası tam olsun (Kural 5) + 🔄/📸 üst-etiket | belge-mimarisi :210-215; A5 reorg kapsamı |
+| 124 | `backend/CLAUDE.md` bayat onboarding düzeltmesi (5-model↔38, iceBreaker/matchReason yok, LLM içsel çelişki) | ⬜ AÇIK (PO önceliklendirmedi) | 🗑️→düzelt (belge-hijyen) | T3-C(B1-B6) | Ajanlar her oturum okuyor; yanlış zihinsel model riski | ⚠️ GÜNCELLEME/düzeltme gerek (silme yok); env-notu "İrlanda"→Londra dahil |
+
+> **Not (dürüstlük):** Yukarıda "gerçek tür" sütunu, kalemin bilanço defterindeki olgusal iş-durumunu korur (🟡 yarım / ❓ teyit-karar /
+> belge-hijyen). PO talimatı gereği **statü sütunu hepsi için ⬜ AÇIK (PO önceliklendirmedi)** — bu bir öncelik değil, "PO henüz sıraya
+> koymadı" demektir. `118` canlı DB yazımı içerir (seed) → yapılırsa PO onayı ZORUNLU. Sonraki yeni iş numarası: **125'ten** başla.
 
 ---
 
