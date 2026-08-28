@@ -1,6 +1,6 @@
 # 06 — TASARIM VE UX
 **🔄 YAŞAYAN** (canonical: tasarım ve UX)
-**Son güncelleme:** 2026-08-02 (geç oturum: kart tasarımı + foto + tema/landing güncellemesi) · Kaynak: mail/panel chat'i, bugünkü oturum
+**Son güncelleme:** 2026-08-28 (Faz 1b: G7-12 H1 uygulandı + G7-13 yön canonical'landı) · önceki: 2026-08-02 (kart tasarımı + foto + tema/landing) · Kaynak: mail/panel chat'i
 
 ## TEMA (dark/light)
 - **Toggle var:** İsteyen light'a geçebilir. Altyapı kuruldu (PR #32: .dark class, ThemeProvider, localStorage, FOUC önleme, ThemeToggle butonu). 🟢✅
@@ -9,7 +9,8 @@
   - Gerekçe (tema-durum-ve-landing-maliyeti raporu): landing'i seçilebilir yapmak ~256 hardcoded nokta / ~10-13 saat / **orta risk**. Şu an öncelik değil.
   - Şimdilik landing DARK kalır (app tarafı — dashboard/formlar — zaten toggle'lı).
 - **Metodoloji sayfası da koyu kalır** (landing ailesi).
-- **Yumuşak lacivert yön:** Landing koyu kalsın ama siyaha yakın değil, yumuşak lacivert. Gerekçe: DISC renk kodları koyu zeminde iyi durmalı ama aşırı koyuluk göz yorar. 🟢 ⏳ (uygulanmadı)
+- **Yumuşak lacivert yön (G7-13 canonical):** Landing koyu kalsın ama siyaha yakın değil, **yumuşak lacivert**. Gerekçe: kart renk kodları koyu zeminde iyi durmalı ama aşırı koyuluk göz yorar (gerekçe model-bağımsız; renk-tonu Big Five arketip kartlarında da geçerli). 🟢 ⏳ (uygulanmadı)
+  - ✅ **GÜNCELLEME (2026-08-28, G7-13, Faz 1b):** Bu, karar-takip **[G7-13]** "yumuşak lacivert açılış teması yönelişi" kaydının canonical'ıdır (kart: `raporlar/bilanco/kararlar/G7-arayuz.md`). YÖN belgeye işlendi; **kod DEĞİŞTİRİLMEDİ.** Uygulama, landing renk paleti işi **[G7-11]** ile birlikte (~256 hardcoded nokta, canlı-sonrasına ertelendi) yapılır — tek başına renk noktası dokunmak G7-11'i yarım bölmek olur.
 - **M² logo dokunulmayacak** (beğenildi). 🟢
 
 ## TEMA — KALAN İŞLER (⏳)
@@ -19,7 +20,9 @@
 - **🔴 KARAR BEKLİYOR:** DISC renk TON kararı kullanıcının gözünden verilecek — light'ta henüz onaylanmadı (dashboard'lar çöktüğü için görülemedi, sonra seed geldi ama tema light test edilmedi).
 
 ## LANDING
-- **Slogan değişikliği** (mail/panel chat'i): Eski "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin" ZAYIF → yeni H1 "Mentörlük programınızı doğru eşleşmelerle, zahmetsizce yönetin." + alt "DISC davranış modeline göre mentör ve mentileri eşleştirin, tüm süreci tek panelden takip edin." 🟢 ⏳ (karar verildi, uygulanmadı)
+- **Slogan değişikliği** (mail/panel chat'i): Eski "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin" ZAYIF → yeni slogan.
+  - ~~[ESKİ · 2026-08-28] yeni H1 "Mentörlük programınızı doğru eşleşmelerle, zahmetsizce yönetin." + alt "DISC davranış modeline göre mentör ve mentileri eşleştirin, tüm süreci tek panelden takip edin." 🟢 ⏳ (karar verildi, uygulanmadı)~~
+  - ✅ **GÜNCELLEME (2026-08-28, G7-12, Faz 1b PR):** H1 **UYGULANDI** → `HeroSection.tsx` H1 artık **"Mentörlük programınızı zahmetsizce yönetin"** (PO'nun son/kısa metni; "doğru eşleşmelerle" ibaresi çıkarıldı). **Alt metin (subtitle) PO'ca KESİNLEŞMEDİ → DOKUNULMADI** (mevcut "DISC davranış modeline dayalı…" alt metni kod'da duruyor; kesinleşince ayrı iş). Kanıt: `HeroSection.tsx:38-45`.
   - Slogan yöneticiye (karar verici), alt metin herkese (mentör/menti de landing'e gelir). "yüzlerce ilişki" → "tüm süreç".
 - **Landing UX paketi (kodlanmadı ⏳):** tooltip metnin üstüne biniyor + hover köprüsü yok + kaynak linkleri tıklanamıyor; "i" ikonu keşfedilemez (koyu zeminde soluk); düşük kontrast gri metinler (WCAG); SIFIR-etikette sıfır-olmayan skor çelişkisi (AlgorithmBento — mantık hatası, öncelikli); mobil test.
 
