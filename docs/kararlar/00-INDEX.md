@@ -83,6 +83,7 @@ docs/
 | `tasarim-kararlari-admin-2026-08-11.md` | STK admin tasarım kararları (12 karar; menü, kart, DISC mahremiyet, etiket havuzu) | 🔄 YAŞAYAN (kararlar eklenebilir) |
 | `chat-v1-teslim.md` | Chat v1 teslim: mimari/güvenlik ayrıntı + bilinen sınırlar | 📸 DONDURULMUŞ (chat işi) |
 | `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | #7 eşleşme-sonrası değerlendirme + metrik takip + otomatik pasifleştirme + yeniden değerlendirme + periyodik hatırlatma vizyonu; VİZYON ↔ KOD GERÇEĞİ ayrı; 3 aşamalı plan | 🔄 YAŞAYAN (#7 inşasına başlarken) |
+| `degerlendirme-sistemi-tasarim-2026-08-27.md` | Değerlendirme + eşleştirme sistemi tasarım belgesi (16 bölüm, iki tur): DISC→Big Five model kararı, metafor arketipler, Likert→senaryo ölçme + çekirdek 12 senaryo, derinleşme, sertifika, eşleştirme algoritması (%45/30/25), üç soru veri boşluğu, süreç/göç/kalibrasyon; Bölüm 16 KALEM LİSTESİ | 🔄 YAŞAYAN (kalemler 00-KARAR-TAKIP'e girecek) |
 | `kvkk-metinleri/` (klasör) | ⚠️ **TASLAK** KVKK belge paketi (9 md belge + kapak) — envantere dayalı. **Avukata sunum:** `KVKK-BELGE-PAKETI-2026-08-25.docx` (profesyonel tek dosya; md=canonical, docx=türev — `README.md` + üretici `scripts/kvkk-docx-gen.py`) | ⚠️ TASLAK (hukukçu onayı öncesi) |
 
 ## Öz-denetim — `docs/kararlar/oz-denetim/` (belgelerin/kararların iç denetimi)

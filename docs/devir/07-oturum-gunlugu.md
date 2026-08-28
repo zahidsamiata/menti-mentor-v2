@@ -300,6 +300,18 @@
 
 ---
 
+## OTURUM 2026-08-28 — Değerlendirme/eşleştirme sistemi TASARIM BELGESİ (iki tur)
+- **Mod:** 🟢 BYPASS (yalnız-belge; kod/DB/seed/migration YOK). Branch: `docs/tasarim-belgesi-2026-08-27` (temiz main'den). **PR #125 açık — MERGE EDİLMEDİ.**
+- **Çıktı:** yeni belge `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md` (🔄 YAŞAYAN, **16 bölüm**, ~730 satır). İki turda yazıldı: **Tur A** (Bölüm 1-8: neden/model/arketip/ölçme + **çekirdek 12 senaryo tam metin**/derinleşme/sertifika/öğrenme ayrımı) + **Tur B** (Bölüm 9-16: eşleştirme algoritması/veri boşluğu/süreç/göç/kalibrasyon/açık kararlar/dürüstlük/KALEM LİSTESİ).
+- **Ana kararlar (belgeye kaydedildi, YORUM KATILMADI):** DISC→**Big Five** motor + metafor arketip görünen yüz · Likert→**senaryo+şık** ölçme · algoritma ağırlıkları **%45 hedef-değer / %30 alan / %25 kişilik** (eski %50 karakter araştırmayla düştü — Dyrenforth 2010) · kişilik içi dağılım + **2 veto** (yalnız zarar) · sektör asimetri düzeltmesi (payda=etiket birleşimi) · **üç soru** (S1/S2/S3) deep-level similarity boşluğu (Eby 2013) · görünürlük+k-anonimlik · manuel eşleştirme YOK (algoritma seçenek sunar).
+- **KURAL 9 KALEM LİSTESİ:** Bölüm 16'da **24 kalem** (durum + numara-adayı sütunlu). Bunlar `00-KARAR-TAKIP`'e girişte numara alacak.
+- **8 açık nokta** (Bölüm 14, numaralı `[ ] PO notu`): İz Açan adı · karma format · 12-senaryo inceliği · sınırsız yeniden-derinleşme (G3-03) · özet alanı yönergesi · göç planı · k-anonimlik eşiği · profil envanteri (S21).
+- **Tur A düzeltmesi (Tur B'de):** belge başındaki keşif rapor yolları YANLIŞTI (`kararlar/konu/kesif...`) → `docs/raporlar/kesif...` + `.../icerik...` düzeltildi. Kırık-link 0.
+- **Belge-senkron:** 00-INDEX (yeni belge satırı) · 00-KARAR-TAKIP (**S16 ✅** + yeni **S21** + madde 101/102/103 & 125-130'a ⚠️ GÜNCELLEME referansı) · 09-DURUM (⚡ ŞU AN bloğu) · G2/G3 kartlarına yalnız belge-içi referans (kartlar DEĞİŞTİRİLMEDİ) · bu günlük.
+- **Sınır:** #110, `kvkk-metinleri/`, karar dosyaları (G*.md) ELLENMEDİ · numara doğurulmadı · kişi adı yok. **MERGE EDİLMEDİ** (PO).
+
+---
+
 ## 🧭 Her oturum için çalışma tarzı hatırlatması
 - **Ürün sahibi kod yazmaz;** strateji-Claude promptları yazar, PO Claude Code'a kopyalar.
 - **Modlar:** 🔵 PLANLA (salt-okuma) / 🟢 BYPASS (kod/belge yazar, PR açar — **MERGE ETMEZ**). Merge kararı hep PO'da.
