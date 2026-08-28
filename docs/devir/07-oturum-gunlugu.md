@@ -336,6 +336,17 @@
 
 ---
 
+## OTURUM 2026-08-28c — Öncelik düzeltmeleri (PO teyidi, PR #126 üstüne)
+- **Mod:** 🟢 BYPASS (yalnız-belge). Branch: `docs/oncelik-siralama-2026-08-28` (mevcut). **Yeni PR açılmadı — #126'ya commit.** MERGE EDİLMEDİ.
+- **Bağlam:** Önceki turda ajan 2 nokta için PO teyidi istemişti; PO karar verdi, bu tur işledi.
+- **Düzeltme 1 — G9-05 notu:** Yanlış karta yazılmış sertifika/anket notu → "09-DURUM eski çelişki blokları arşive taşınacak (belge-hijyeni)" ile değiştirildi. Sertifika/anket notu **G3-04 + G3-13'e ait** — o kartlarda ilgili not ZATEN VAR (G3-04: tasarım-tezine-bağlı; G3-13: STK şıklı+anket→answerType migration) → DOKUNULMADI (talimat gereği).
+- **Düzeltme 2 — 11 sıralanmamış kalem PO kararı:** **G2-01..05 → 🗑️ GEÇERSİZ** (DISC matrisi Big Five'a bırakıldı, tasarım B9; kutu işleme-al→geçersiz + PO notu AYNEN) → sıralamadan çıkarıldı. **G1-01→Faz 2** (KVKK), **G3-05→Faz 6**, **G4-39→Faz 7** taşındı (taşıma notu eklendi). **G2-11/G8-13/G8-14 → Faz 8'de kaldı.**
+- **Revize dağılım (kod-kutusu grep-doğrulandı): 184 = 87 işleme-al / 87 şimdilik / 8 geçersiz / 2 keşif** (beklenenle birebir tuttu).
+- **Senkron:** 5 G kartı (G2×5 geçersiz, G9-05 not, G1-01/G3-05/G4-39 taşıma) · 00-ONCELIK-SIRASI (fazlar + header + Faz 8 notu) · 10-yol KOD İŞ SIRASI · 00-PO-KARARLARI GÜNCELLEME 2 · 09-DURUM ⚡ blok · bu günlük. Kırık-link 0.
+- **Sınır:** DB/seed/kod DEĞİŞMEDİ · #110 ELLENMEDİ · numara doğurulmadı · kişi adı yok. **MERGE EDİLMEDİ** (PO).
+
+---
+
 ## 🧭 Her oturum için çalışma tarzı hatırlatması
 - **Ürün sahibi kod yazmaz;** strateji-Claude promptları yazar, PO Claude Code'a kopyalar.
 - **Modlar:** 🔵 PLANLA (salt-okuma) / 🟢 BYPASS (kod/belge yazar, PR açar — **MERGE ETMEZ**). Merge kararı hep PO'da.
