@@ -30,10 +30,9 @@
 - **🟠 MANUEL-ONAY:** geri-alınamaz işler (merge, prod deploy, prod DB yazımı, force-push, external
   servise gönderim) → önce **DUR**, onay bekle.
 
-## 3) Model yönlendirme (mod satırının yanında öner)
-- **Sonnet** → basit iş (belge, keşif/okuma, küçük fix).
-- **Opus** → karmaşık/riskli iş (migration, güvenlik, çok-dosyalı refactor, üretim merge).
-- Emin değilsen **Opus** + kısa gerekçe.
+## 3) Model yönlendirme
+> ⚠️ GÜNCELLEME (2026-08-28, G9-15): Model isimleri ve "basit iş→hafif model" ilkesi bu bölümden çıkarıldı — seçim belgede sabitlenmez.
+- Model seçimi her turun promptunda belirtilir; belgede sabitlenmez.
 
 ## 4) Prompt standardı — 8 UNSUR (her kapsamlı prompt 8/8 tam olmalı)
 1. **BÜYÜK RESİM** — nereye gidiyoruz, bu adım ne tamamlıyor, sonrası ne.

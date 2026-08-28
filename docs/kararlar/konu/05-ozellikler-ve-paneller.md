@@ -24,7 +24,7 @@ Backend büyük ölçüde hazırdı, eksik olan UI'dı. Hepsi tenant-izole + KVK
 - **Availability** (haftalık şablon: weekday+HH:mm) + **Meeting** (format ONLINE/IN_PERSON/PHONE, startsAt/endsAt UTC, status).
 - **Bağlamsal feedback:** Görüşme endsAt'ı geçince sağ altta MeetingFeedbackCard (2 saatlik pencere; feedbackPrompted çift-tetiklemeyi önler).
 - **Kademeli feedback:** Emoji (rapportScore) → Çip (P1-P5) → Açık uç; slider (progressScore); dipte "farklı birini dene" (earlyExit, suçlamasız).
-- Bağlam: MeetingContext/MeetingProvider, meetingController. UYARI: timezone bug'ı tespit edildi (UTC vs Europe/Istanbul), düzeltilmedi. ⏳
+- Bağlam: MeetingContext/MeetingProvider, meetingController. ~~[ESKİ · düzeltildi 2026-08-14] UYARI: timezone bug'ı tespit edildi (UTC vs Europe/Istanbul), düzeltilmedi. ⏳~~ (bkz. alttaki ✅ GÜNCELLEME)
   - **✅ GÜNCELLEME (2026-08-14): DÜZELTİLDİ** — commit `6a30f21` (bookMeeting UTC/Istanbul tutarsızlığı giderildi). Yukarıdaki "düzeltilmedi ⏳" ifadesi BAYAT.
 
 ## ÖĞRENME YOLCULUĞU / OYUNLAŞTIRMA

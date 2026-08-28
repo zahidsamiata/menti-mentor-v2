@@ -102,7 +102,7 @@ AMA **basit arayüz** (günlük bakışta sade, sakin; karmaşa yok).
 ## 7. AKSİYON DURUMU (bu strateji ne kadar hayata geçti?)
 
 Platform admin aksiyon turu yapıldı:
-- ✅ **KVKK audit log** (AdminAuditLog tablosu — migration, onaylı) — Bölüm 4.
+- ✅ **KVKK audit log** (~~[ESKİ · düzeltildi 2026-08-14] AdminAuditLog tablosu — migration, onaylı~~ → **gerçek: `SystemLog` modeline AUDIT kategorisiyle yazılır**, ayrı tablo/migration YOK — grep 2026-08-28 teyitli) — Bölüm 4.
   - **⚠️ GÜNCELLEME (2026-08-14):** Kodda `AdminAuditLog` tablosu YOK; denetim kaydı mevcut `SystemLog` modeline AUDIT kategorisiyle yazılıyor (`platformAudit.ts`). "AdminAuditLog tablosu/migration" ifadesi YANLIŞ — loglama çalışıyor ama tablo adı hatalı. Detay: aşağıda "⚠️ YANLIŞ / EKSİK" bölümü.
 - ✅ **Kötüye kullanım** (kullanıcı şikayeti/report + basit otomatik tespit) — Bölüm 2C.
 - ✅ **Sistem sağlığı paneli** (özet + son hatalar) — Bölüm 2B.

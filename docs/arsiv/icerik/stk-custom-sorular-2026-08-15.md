@@ -2,7 +2,9 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: canlı DB salt-okuma sayımı + `frontend/src/app/(admin)/admin/questions/page.tsx`.
 
-> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kurum-özel soru altyapısı dökümü (Question/STK_CUSTOM, DISC kilidi, #13 cevap-tipi): [`bolumler/04-ogrenme-kurumozel.md`](bolumler/04-ogrenme-kurumozel.md) GÖREV B + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md).
+> 🗄️ **ARŞİV (2026-08-28, G9-08/16):** BAYAT döküm — `docs/raporlar/icerik/`'ten `docs/arsiv/icerik/`'e taşındı. Güncel kod-kanıtlı kaynak: [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md).
+
+> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kurum-özel soru altyapısı dökümü (Question/STK_CUSTOM, DISC kilidi, #13 cevap-tipi): [`bolumler/04-ogrenme-kurumozel.md`](../../raporlar/icerik/bolumler/04-ogrenme-kurumozel.md) GÖREV B + [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md).
 
 ## Bulgu — önceki "0" düzeltildi
 - **Kod/seed:** STK_CUSTOM soru seed'de tanımlı **değil** (0). Envanter raporu (PR #78) bu yüzden "0 tanımlı" demişti.

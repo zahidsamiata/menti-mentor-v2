@@ -1,5 +1,7 @@
 # PROJECT_STATUS.md
 
+> 🗄️ **ARŞİV (2026-08-28, G9-09):** Kök dizinden `docs/arsiv/`'e taşındı. Güncel durum: **`../kararlar/09-DURUM.md`** · belge haritası: **`../kararlar/00-INDEX.md`**.
+
 > **📸 DONDURULMUŞ / DEPRECATED (2026-08-19)** — Bu belge artık **güncel durum için canonical DEĞİLDİR.**
 > "Şu an neredeyiz" (güncel SHA/PR/iş durumu) için tek gerçek kaynağı: **`docs/kararlar/09-DURUM.md`**.
 > Belge haritası: **`docs/kararlar/00-INDEX.md`**. Aşağıdaki içerik projenin **genel tanıtımı** (vizyon, mimari özet,

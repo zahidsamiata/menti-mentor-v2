@@ -1,5 +1,7 @@
 # PO KARARLARI — İŞLENDİ (Tur-5c)
 
+**📸 DONDURULMUŞ (2026-08-27)** — Tur-5c PO karar özeti (üst-etiket eklendi: G9-10, 2026-08-28).
+
 **2026-08-27** · Bilanço 184 karar kartının PO tarafından bağlanan kararları belgeye işlendi. Bu belge kararların ÖZETİDİR; detay her `G*.md` kartında `[x]` + PO notu olarak işaretli.
 
 > **Bu tur yorum/karar/iş YAPMADI** — yalnız PO'nun strateji oturumundaki kararlarını kutulara işledi. Sıralama (öncelik) YAPILMADI (ayrı tur).

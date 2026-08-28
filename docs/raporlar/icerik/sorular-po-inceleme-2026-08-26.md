@@ -1,4 +1,5 @@
 # Soru İnceleme — Ürün Sahibi İçin (2026-08-26)
+**📸 DONDURULMUŞ (2026-08-26)** — PO işaretleme dosyası (üst-etiket eklendi: G9-10, 2026-08-28).
 **🟢 BYPASS (yalnız-belge)** — Tüm değerlendirme soruları sade biçimde. Her sorunun altındaki `[ ] PO notu:` satırına beğendiğinizi/beğenmediğinizi/değişmesini yazın. Teknik detay yok; tam teknik döküm ayrı rapordadır.
 
 ---

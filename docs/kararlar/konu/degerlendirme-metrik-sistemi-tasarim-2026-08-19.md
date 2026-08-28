@@ -108,8 +108,8 @@ yolu çizer.
   eşleşme sıralamasında kullanılıp atılıyor (`scoring.ts` + `matching.ts`). `TenantMembership.qualityMultiplier`'a
   yalnız **sertifikada** yazılıyor (`certification.service.ts:240`, `STARTING_MULTIPLIER`) → yöneticinin
   görebileceği **kalıcı kişi puanı yok**.
-- 🔴 **`maxMeetingsPerWeek` uygulanmıyor:** yalnız ayar CRUD'unda (`adminSettingsController.ts`), hiçbir görüşme
-  akışında kontrol edilmiyor.
+- ~~[ESKİ · düzeltildi — madde 79] 🔴 **`maxMeetingsPerWeek` uygulanmıyor:** yalnız ayar CRUD'unda (`adminSettingsController.ts`), hiçbir görüşme akışında kontrol edilmiyor.~~
+  ⚠️ GÜNCELLEME (2026-08-28): ENFORCE EDİLDİ — haftalık görüşme limiti **7-gün UTC kova** ile uygulanıyor (madde 79, T1-A). Bu gövde satırı bayattı; `dm:220-223` güncellemesi Aşama-1'i işlemiş ama bu satırı atlamıştı.
 - 🔴 **`getPairSignal` FE'de çağrılmıyor:** API sarmalayıcı `frontend/.../lib/api/meetings.ts` tanımlı, hiçbir
   bileşen kullanmıyor → yöneticinin ilişki-sağlığı sinyalini gördüğü ekran yok.
 

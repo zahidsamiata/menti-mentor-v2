@@ -2,7 +2,9 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed-learning-journey.ts` + canlı DB salt-okuma sayımı.
 
-> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/04-ogrenme-kurumozel.md`](bolumler/04-ogrenme-kurumozel.md) + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md). Kod = **13 aşama** (puan yok, timestamp).
+> 🗄️ **ARŞİV (2026-08-28, G9-08/16):** BAYAT döküm — `docs/raporlar/icerik/`'ten `docs/arsiv/icerik/`'e taşındı. Güncel kod-kanıtlı kaynak: [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md) (öğrenme=13).
+
+> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/04-ogrenme-kurumozel.md`](../../raporlar/icerik/bolumler/04-ogrenme-kurumozel.md) + [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md). Kod = **13 aşama** (puan yok, timestamp).
 
 > Oyunlaştırılmış keşif akışının **tüm aşamaları + seçenekler + geri bildirimler** tam metin.
 

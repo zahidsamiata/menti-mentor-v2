@@ -13,7 +13,7 @@
 
 ## 📁 Proje Hafızası — nereye bakılır
 - **Güncel durum (canonical, ŞU AN): docs/kararlar/09-DURUM.md** — her oturum başında oku.
-- Genel tanıtım (dondurulmuş onboarding): PROJECT_STATUS.md — güncel durum İÇİN DEĞİL (bkz. 09-DURUM).
+- Genel tanıtım (dondurulmuş onboarding): docs/arsiv/PROJECT_STATUS.md — güncel durum İÇİN DEĞİL (bkz. 09-DURUM). ⚠️ GÜNCELLEME (2026-08-28, G9-09): kökten `docs/arsiv/`'e taşındı; güncel durum canonical = `docs/kararlar/09-DURUM.md`.
 - Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
 - Geçmiş raporlar: docs/raporlar/
 - Yeni bir işe başlarken: önce docs/kararlar/09-DURUM.md oku (nerede kaldık).
@@ -109,11 +109,10 @@
 - Hiçbir kod/yorum/commit/PR/belgeye kişi adı YAZMA. Nötr terim kullan ("ürün sahibi" / "PO").
 - Mevcut belgelerdeki isimler ayrı bir temizlik işinde giderilir; yeni içeriğe isim eklenmez.
 
-## Model Yönlendirme — mod başında öner
-- Her prompt başında MOD ile birlikte önerilen modeli belirt.
-- **Sonnet** → basit iş (belge, keşif/okuma, küçük fix). **Opus** → karmaşık/riskli iş (migration,
-  güvenlik, çok-dosyalı refactor, üretim merge).
-- Emin değilsen Opus seç + kısa gerekçe yaz.
+## Model Yönlendirme
+> ⚠️ GÜNCELLEME (2026-08-28, G9-15): Model isimleri (sürüm/sınıf) ve "basit iş→hafif model" ilkesi bu bölümden
+> ÇIKARILDI — model seçimi her turun promptunda belirtildiği için belgede sabitlenmesi yalnız eskiyen bilgi üretiyordu.
+- Model seçimi her turun promptunda belirtilir; belgede sabitlenmez.
 
 ## Hata Felsefesi — panik yok
 - Ters giderse sırayla: (1) önce sorunu ARAŞTIR + KANITLA (teşhis + kanıt), (2) sonra çözüm + risk
@@ -169,6 +168,13 @@
 ## Belge Düzeltme Deseni — tarihsel iz korunur
 - Eski/yanlış çıkan bir kararı SİLME; üstüne `⚠️ GÜNCELLEME (tarih): …` notu ekle.
 - Böylece kararın neden değiştiği ve tarihsel iz korunur.
+- **⭐ KALICI KURAL — bayat gövde satırı üstü-çizili damgalanır (2026-08-28, G9-03):** Bir ⚠️ GÜNCELLEME notu
+  eklerken ESKİ yanlış cümleyi normal yazıyla BIRAKMA — okuyan onu hâlâ geçerli sanır. Cümleyi SİLME ama üstünü çiz
+  + `[ESKİ]` damgası ver. Desen (bu 2 satır birlikte):
+  > `~~[ESKİ · {düzeltme tarihi}] {yanlış cümle}~~`
+  > `⚠️ GÜNCELLEME ({bugün}): {doğrusu} — kanıt: {kaynak}`
+  Böylece hem tarihsel iz korunur (cümle silinmez) hem de bayat satır görsel olarak "artık geçerli değil" der.
+  (Zaten bir ⚠️/✅ GÜNCELLEME notu varsa yalnız eski cümleyi üstü-çizili damgalamak yeterli; notu tekrar yazma.)
 
 ## Belge Düzeni — her belge işinde uy
 - Belge oluştururken/düzenlerken `docs/kararlar/konu/belge-duzeni-rehberi.md`'deki **8 düzen kuralına** uyulur:
@@ -253,8 +259,9 @@
   403. Yeni `:id`/`:userId` endpoint'inde inline yazma, route'a bunu ekle.
 - **Login/public brute-force**: IP-bazlı `loginRateLimiter` / `platformAuthRateLimiter` (`rateLimiter.ts`)
   pattern'ini uyarla; `generalRateLimiter` tenant-key'lidir, public endpoint'te zayıftır.
-- **Kullanıcıya görünen mesajlar**: dağınık inline string yerine merkezi modül (`registerMessages.ts` / kod-bazlı
-  resolver). Enumeration-safe tut (hesap varlığını sızdırma).
+- **Kullanıcıya görünen mesajlar**: dağınık inline string yerine merkezi/kod-bazlı mesaj resolver'ı (PLANLANAN desen —
+  `registerMessages.ts` örnek addır, dosya HENÜZ kodda YOK: grep boş; gerçek merkezileştirme ayrı iş). Enumeration-safe
+  tut (hesap varlığını sızdırma).
 
 ### Şüphedeysen
 - Güvenlik açısından emin değilsen DUR ve kullanıcıya sor. Tahmin yürütme.

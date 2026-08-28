@@ -1,5 +1,7 @@
 # BİLANÇO KARAR DOSYALARI — OKUMA REHBERİ & MUTABAKAT (Tur-5b)
 
+**📸 DONDURULMUŞ (2026-08-27)** — Tur-5b bilanço karar dosyalarının okuma dizini (üst-etiket eklendi: G9-10, 2026-08-28).
+
 **2026-08-27** · PO'nun tek tek işaretleyeceği karar kartlarının ana dizini. Her grup ayrı dosya; her kalem bir kart + `[ ]` kutucukları.
 
 > **Nasıl kullanılır:** Her kartta 4 kutu var — `[ ] işleme al` · `[ ] şimdilik alma` · `[ ] geçersiz` · `[ ] anlamadım / açıkla` — birini işaretle, gerekirse `[ ] PO notu:` satırına yaz. Sıralamak (öncelik) senin işin; kartlar öncelik sırasında DEĞİL.
