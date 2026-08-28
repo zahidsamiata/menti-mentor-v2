@@ -16,12 +16,12 @@ import { GameSection }    from './_sections/GameSection';
 import { AdminCockpit }   from './_sections/AdminCockpit';
 
 export const metadata: Metadata = {
-  title: 'MentiMentor — İnsan Kimyasıyla Akıllı Mentörlük',
+  title: 'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
   description:
     'Dernekler, vakıflar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
     'kapalı devre mentörlük platformu. Kurulum 10 dakika, sonsuza kadar ücretsiz.',
   openGraph: {
-    title:       'MentiMentor — İnsan Kimyasıyla Akıllı Mentörlük',
+    title:       'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
     description: 'DISC mizaç tabanlı mentörlük platformu. Ücretsiz, kurulumu 10 dakika.',
     type:        'website',
     locale:      'tr_TR',
