@@ -5,6 +5,10 @@
 > PO'nun "işleme al" kalemlerini kod iş sırasına soktuğu tek-canonical sıralama.
 > Bu belge **kaydeder**; karar/detay `G*.md` kartlarındadır (buradan yalnız referans verilir).
 > Kaynak kararlar: `docs/raporlar/bilanco/kararlar/00-PO-KARARLARI-2026-08-27.md` + `G*.md` kartları.
+>
+> ⚠️ **GÜNCELLEME (2026-08-28, PO teyidi):** Dağılım revize — **184 = 87 işleme-al · 87 şimdilik · 8 geçersiz · 2 keşif.**
+> G2-01..05 (DISC matrisi PO-onay noktaları) 🗑️ GEÇERSİZ oldu (Big Five'a geçildi) → sıralamadan çıkarıldı.
+> G1-01→Faz 2, G3-05→Faz 6, G4-39→Faz 7 taşındı. Faz 8'de G2-11/G8-13/G8-14 kaldı (bkz. Faz 8 notu).
 
 ## Sıralama Mantığı
 
@@ -48,7 +52,8 @@ G7-12 slogan · G7-13 tema yönü
 G1-05 KVKK hak ekranı · G1-07 rıza sürümü
 ⚠️ **MIGRATION TEK BAŞINA** — avukattan metin gelmeden yapılmalı, sonra eski
 rızalar belirsizleşir ·
-G1-06 otomatik imha · G1-08 OAuth rıza ayrımı
+G1-06 otomatik imha · G1-08 OAuth rıza ayrımı ·
+**G1-01 yaş (18+) form-input + DB alanı** *(PO 2026-08-28: Faz 8→Faz 2; KVKK zinciri, yaş verisi hukukçu paketine bağlı)*
 
 ### FAZ 3 — GÜVENLİK İNCELİKLERİ
 ⭐ **G1-17 + G7-04 BİRLİKTE** (aynı dosya: frontend `middleware.ts` — admin guard
@@ -81,27 +86,25 @@ G1-14 + G1-15 denetim izi
 G3-08 sertifika 5→20 (⚠️ canlı DB, PO onayı) · G3-13 answerType ⚠️ **MIGRATION**
 (STK anket kararı) · G3-19 etiket havuzu · sertifika hatalı-konu hedefleme (B7) ·
 öğrenme↔sertifika yüzey ayrımı (B8) · menti personası çeşitlendirme (B8) ·
-G3-16 + G3-18 canlı içerik teyidi
+G3-16 + G3-18 canlı içerik teyidi ·
+**G3-05 sertifika soru ekleme yetkisi + gerekçe belgesi** *(PO 2026-08-28: Faz 8→Faz 6)*
 
 ### FAZ 7 — KULLANICI DENEYİMİ
 G4-22 + G4-23 bekleme anı · G4-24 menti özgüven sunumu · G4-25 ret yumuşatma ·
 G4-30 yönetici export · G4-31 kırmızı uyarı · G5-04 bildirim izni ·
-G5-07 push stub · **G7-01 + G7-02 + G7-09 erişilebilirlik (TEK PAKET)**
+G5-07 push stub · **G7-01 + G7-02 + G7-09 erişilebilirlik (TEK PAKET)** ·
+**G4-39 "görüşme tamamladım 🎉" paylaşım kartı** *(PO 2026-08-28: Faz 8→Faz 7)*
 
 ### FAZ 8 — KALANLAR
 G4-02/04/05/08/14/17 panel · G6-01 N+1 · G6-05 metin merkezileştirme ·
 G7-03 SEO · G10-22/23 · G5-05 geri bildirim akışı
 **KEŞİFLER (araya sıkışır):** G4-09 + G4-10 super-admin · G10-25 profil düzenleme
 
-> ⚠️ **FAZ 8 — sıralamada tek tek anılmayan "işleme al" kalemleri (DURAK gereği buraya eklendi):**
-> Aşağıdaki 11 kart karar kutusunda `[x] işleme al` işaretli ama PO'nun verdiği faz
-> listesinde adı geçmiyordu → kaybolmasın diye Faz 8'e alındı. **Yerleştirme PO teyidine açık.**
-> - G1-01 yaş (18+) form-input + DB alanı *(⚠️ KVKK-akraba; PO Faz 2/4'e çekmek isteyebilir)*
-> - G2-01 DISC uyum matrisi PO onayı · G2-02 hard-gate toksik blok onayı · G2-03 tiebreak D>I>S>C onayı · G2-04 psikometrik gerekçe belgeleme · G2-05 %60/40 varsayılan onayı *(⚠️ 5'i de DISC psikometri PO-onay noktası; Big Five tasarımıyla örtüşme PO kararı)*
-> - G2-11 KARAR 6 otomatik onay tetiği (davetli=onaylı)
-> - G3-05 sertifika soru ekleme yetkisi + gerekçe belgesi
-> - G4-39 "görüşme tamamladım 🎉" paylaşım kartı
-> - G8-13 sekme geçiş yavaşlığı (istemci önbelleği) · G8-14 sol-alt kullanıcı kartı/menü
+> ⚠️ **FAZ 8 — sıralamada tek tek anılmayan "işleme al" kalemleri (DURAK gereği eklendi → PO 2026-08-28 karara bağladı):**
+> Önceki turda 11 kart PO faz listesinde yoktu → Faz 8'e alınmıştı. PO teyidi sonrası son durum:
+> - **G2-01..05 → 🗑️ GEÇERSİZ** (DISC matrisi/anti-match/tiebreak/%60-40; Big Five'a geçildi, onaylanacak taraf kalmadı — bkz. G2 kartları + tasarım B9). Geçersiz → **sıralamadan ÇIKARILDI.**
+> - **G1-01 → Faz 2'ye taşındı** (KVKK zinciri) · **G3-05 → Faz 6'ya** · **G4-39 → Faz 7'ye.**
+> - **Faz 8'de kalan (PO onaylı):** G2-11 KARAR 6 otomatik onay tetiği (davetli=onaylı) · G8-13 sekme geçiş yavaşlığı (istemci önbelleği) · G8-14 sol-alt kullanıcı kartı/menü.
 
 ---
 

@@ -28,6 +28,19 @@
 >
 > Sıralama: `00-ONCELIK-SIRASI-2026-08-28.md` (S17 kapandı). §7'deki 8 kart artık karara bağlı (o bölüm tarihsel iz olarak korunur).
 
+> ⚠️ **GÜNCELLEME 2 (2026-08-28, öncelik-düzeltme turu — PO teyidi): revize dağılım (kod-kutusu doğrulandı):**
+>
+> | Karar | (bir önceki) | **Son** | Değişim |
+> |---|:---:|:---:|---|
+> | ✅ İşleme al | 92 | **87** | −5 (G2-01..05 geçersiz'e çevrildi) |
+> | ⏸️ Şimdilik alma | 87 | **87** | — |
+> | 🗑️ Geçersiz | 3 | **8** | +5 (G2-01, G2-02, G2-03, G2-04, G2-05 — DISC matrisi Big Five'a bırakıldı) |
+> | ❓ Önce keşif | 2 | **2** | — |
+> | ⬜ Boş | 0 | **0** | — |
+> | **TOPLAM** | 184 | **184** | — |
+>
+> Ayrıca G9-05 notu düzeltildi (yanlış karta yazılmış sertifika/anket notu → belge-hijyeni notuyla değiştirildi); G1-01→Faz 2, G3-05→Faz 6, G4-39→Faz 7 taşındı. Detay: `00-ONCELIK-SIRASI-2026-08-28.md`.
+
 ## 2. 🔴 ÇIKIŞ BLOKERLERİ (9 — çıkış öncesi ZORUNLU)
 - **G8-01** — Foto kalıcı disk (Dokploy volume); yoksa her deploy fotoğrafları siler.
 - **G1-05** — KVKK kullanıcı-yüzü üçlüsü (veri indir/anonimleştir/sil) arayüzü yok.
