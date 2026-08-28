@@ -76,7 +76,8 @@
 
 **FAZ 2 — Çıkış blokeri kod tarafı:** 🟡 KISMEN (2026-08-28, PR #57 backend + #131 çatı)
 - ✅ **G1-01** kayıt kutusu metni (18+ açık; tek kutu, migration YOK — gerçek yaş alanı G1-10'a) · ✅ **G1-06** FeedbackLog 3-yıl imhası (Message → G1-10 TODO) · ✅ **G1-07 TASARIM** consent modeli planı çıkarıldı (`konu/consent-modeli-plani-2026-08-28.md`, 📸) — **migration ÇALIŞTIRILMADI, ayrı onaylı tur.**
-- ⬜ **G1-07 UYGULAMA** (Consent modeli + migration + backfill, ⚠️ MIGRATION TEK BAŞINA, PO onayı) · ⬜ **G1-08** OAuth rıza gösterimi + tipli yazım (G1-07'ye bağlı) · ⬜ **G1-05** self-servis KVKK hak ekranı (ayrı tur, yeni endpoint + güvenlik listesi).
+- 🟡 **G1-07 Tur A ✅ (2026-08-28, backend PR #58 + çatı PR #132):** Consent modeli KODLANDI + CI'da prova edildi (şema+servis+dual-write+backfill+test). **Migration CANLIYA UYGULANMADI.** ⬜ **Tur B (S23, PO onayı):** migration + backfill canlıya (⚠️ MIGRATION TEK BAŞINA).
+- ⬜ **G1-08** OAuth rıza gösterimi + tipli yazım (G1-07'ye bağlı — servis hazır) · ⬜ **G1-05** self-servis KVKK hak ekranı (ayrı tur, yeni endpoint + güvenlik listesi).
 
 **FAZ 3 — Güvenlik incelikleri:**
 - ⭐ G1-17+G7-04 BİRLİKTE (aynı `middleware.ts`) · G1-04 SuspicionReport tenantId · G1-23 logoUrl guard · G1-26 CAPTCHA/IP limit · G1-02 DISC harf teyidi · G1-19 qualityMultiplier okuma teyidi · G1-14+G1-15 denetim izi.

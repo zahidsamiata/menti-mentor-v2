@@ -124,6 +124,7 @@ Kaynak: karar-defteri (md.82) · Numara: md.82
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
+🟡 **YARIM (Tur A) — GÜNCELLEME (2026-08-28, backend PR #58 + çatı PR #132):** **KOD YAZILDI + CI'da prova edildi; canlıya migration UYGULANMADI (Tur B, PO onaylı).** Yapıldı: tipli+sürümlü `Consent` tablosu (şema + Neon-safe additive migration, ÇALIŞTIRILMADI) · `consentService` (record/getActive/getAll/revoke/hasValid + `CONSENT_VERSION='v1.0'`) · dual-write (normal+self-serve+OAuth, `kvkkConsentAt` korundu) · backfill (yalnız ACIK_RIZA, dry-run default, ÇALIŞTIRILMADI) · testler (entegrasyon+birim). Detay: `konu/consent-modeli-plani-2026-08-28.md`. **⬜ Kalan (Tur B):** PO onayıyla migration + backfill canlıya (⚠️ migration TEK BAŞINA) · `CONSENT_VERSION` avukat metniyle sabitlenmesi (G1-10).
 ---
 
 **[G1-08] OAuth açık rıza UI'da alınmıyor + KVKK ve 18+ tek kutuda**
