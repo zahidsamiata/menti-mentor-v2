@@ -74,8 +74,9 @@
 - 🟡 **Faz 1b (kod temizliği — 2026-08-28, backend PR #56 + çatı PR #129, MERGE BEKLİYOR):** **✅ G10-01** llmRetry silindi (MeetingScheduler yarım-özellik → korundu) · **✅ G6-07** 5 radix çıkarıldı (build yeşil) · **✅ G7-12** H1 slogan · **✅ G7-13** tema yönü belgeye (kod yok, G7-11 ile uygulanır) · **🟡 G8-06** 12 yerel dal silindi (uzak dallar → PO onayı). *(G3-15 yazım → Faz 6'ya taşındı, PO 2026-08-28.)*
 - ⏸️ G9-11/G9-12 (büyük belge reorg) + G9-07 (OneDrive taşıma, PO-manuel) = ŞİMDİLİK ALINMADI.
 
-**FAZ 2 — Çıkış blokeri kod tarafı:**
-- G1-05 KVKK hak ekranı · G1-07 rıza sürümü ⚠️ MIGRATION TEK BAŞINA · G1-06 otomatik imha · G1-08 OAuth rıza ayrımı · **G1-01 yaş 18+ form+DB** (PO 2026-08-28: Faz 8→Faz 2, KVKK zinciri).
+**FAZ 2 — Çıkış blokeri kod tarafı:** 🟡 KISMEN (2026-08-28, PR #57 backend + #131 çatı)
+- ✅ **G1-01** kayıt kutusu metni (18+ açık; tek kutu, migration YOK — gerçek yaş alanı G1-10'a) · ✅ **G1-06** FeedbackLog 3-yıl imhası (Message → G1-10 TODO) · ✅ **G1-07 TASARIM** consent modeli planı çıkarıldı (`konu/consent-modeli-plani-2026-08-28.md`, 📸) — **migration ÇALIŞTIRILMADI, ayrı onaylı tur.**
+- ⬜ **G1-07 UYGULAMA** (Consent modeli + migration + backfill, ⚠️ MIGRATION TEK BAŞINA, PO onayı) · ⬜ **G1-08** OAuth rıza gösterimi + tipli yazım (G1-07'ye bağlı) · ⬜ **G1-05** self-servis KVKK hak ekranı (ayrı tur, yeni endpoint + güvenlik listesi).
 
 **FAZ 3 — Güvenlik incelikleri:**
 - ⭐ G1-17+G7-04 BİRLİKTE (aynı `middleware.ts`) · G1-04 SuspicionReport tenantId · G1-23 logoUrl guard · G1-26 CAPTCHA/IP limit · G1-02 DISC harf teyidi · G1-19 qualityMultiplier okuma teyidi · G1-14+G1-15 denetim izi.

@@ -40,6 +40,7 @@ Kaynak: karar-defteri (md.3-alt / K4) · Numara: md.3-alt
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [x] PO notu: Faz 2'ye çekildi — KVKK zinciri (G1-05/06/07/08 ile birlikte). Yaş verisi hukukçu paketine bağlı.
+✅ **YAPILDI (metin) — GÜNCELLEME (2026-08-28, Faz 2, çatı PR #131):** PO kararı **tek kutu, migration YOK** (gerçek yaş alanı EKLENMEDİ). Kayıt kutusu metni 18+'yı AÇIKÇA öne çıkaracak şekilde güncellendi (`_RegisterContent.tsx:410-416` + STK `Step4Account.tsx:199-208` — STK'da 18+ hiç yoktu, eklendi). Onaysız ilerleme engeli korundu. **18+ = beyan (rıza değil); consent tablosuna girmez** (bkz. `konu/consent-modeli-plani-2026-08-28.md`). ⚠️ **AÇIK (G1-10):** platform ileride 18-altını kabul ederse gerçek yaş + veli onayı ZORUNLU olur → avukat sorusu, G1-10 paketine.
 ---
 
 **[G1-02] Menti→mentör DISC harfini gizleyen rol-ayrışması kanıtlanamadı**
@@ -105,6 +106,8 @@ Etkisi: PII (mesaj içeriği vb.) süresiz birikir; gereğinden uzun saklama KVK
 İş boyu: M
 Kaynak: karar-defteri (md.81) · Numara: md.81
 
+🟡 **YARIM — GÜNCELLEME (2026-08-28, Faz 2, backend PR #57):** **FeedbackLog 3-yıl imhası EKLENDİ** (`gdprService.ts purgeExpiredData()`, `createdAt+cutoff`, **şema değişikliği YOK**; haftalık cron zaten çalışıyor). Saklama süreleri sabit const'a alındı. **Message imhası BİLİNÇLİ YAZILMADI** → `TODO(G1-10)`: saklama süresi avukat aydınlatma metniyle belirlenecek (kodda keyfi süre metin↔kod çelişmesi yaratır). Message parçası **G1-10'a bağlı açık kalır.**
+
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
@@ -162,6 +165,7 @@ Kaynak: karar-defteri (md.85) · Numara: md.85
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [x] PO notu: 🔴 ÇIKIŞ BLOKERİ — G1-13 (kulüp-tipi kurum aktif) ile TEK MADDE: aktif-etme + aydınlatma metnine AÇIK BEYAN birlikte yapılır; biri unutulursa hukuki açık kalır.
+⚠️ **EKLENDİ (2026-08-28, Faz 2): G1-10 paketine bağlanan 3 açık uç** — (1) **Message saklama süresi** (G1-06'da bilinçli yazılmadı, `gdprService.ts` TODO); (2) **18-altı kabul + veli onayı** (G1-01: 18-altı alınırsa gerçek yaş + veli onayı zorunlu); (3) **açık rıza geri-çekme nihai davranışı** + **CONSENT_VERSION** metin sürümü (`konu/consent-modeli-plani-2026-08-28.md`). Üçü de avukat aydınlatma metnine bağlı.
 ---
 
 **[G1-11] DISC için ayrı açık rıza (hassas veri)**

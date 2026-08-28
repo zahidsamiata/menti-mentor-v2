@@ -432,4 +432,30 @@
 **Sınır:** DB/seed/migration/kod DEĞİŞMEDİ · #110 ELLENMEDİ · öksüz commit'lere dokunulmadı · numara doğurulmadı. **MERGE EDİLMEDİ** (PO).
 
 ---
+
+## 2026-08-28 — FAZ 2 GÜVENLİ KALEMLER + CONSENT MODELİ PLANI
+
+**Mod:** BYPASS (KOD) · **Branch:** backend `feat/faz2-g1-06-feedbacklog-purge` (**PR #57**) + çatı `feat/faz2-kvkk-safe-2026-08-28` (#130 üstünde; **PR #131**) · MERGE ETME.
+
+**Bağlam:** Faz 2 ön keşfi (salt-okuma) migration gerektirenleri ayırdı; PO scope kararlarıyla bu tur **yalnız migration'sız güvenli kalemler** + consent tasarım belgesi yapıldı. G1-07 uygulama / G1-08 / G1-05 ayrı turlara.
+
+**Yapıldı:**
+- **G1-06** (backend PR #57): FeedbackLog 3-yıl otomatik imha `purgeExpiredData`'ya eklendi (createdAt+cutoff, **şema YOK**); saklama süreleri sabit const. **Message imhası bilinçli YAZILMADI** → `TODO(G1-10)` (süre avukat metniyle; keyfi süre metin↔kod çelişir). backend/CLAUDE.md retention güncellendi.
+- **G1-01** (çatı): kayıt (`_RegisterContent.tsx`) + STK (`Step4Account.tsx`) kutusu metni 18+'yı AÇIKÇA öne çıkarır (STK'da 18+ hiç yoktu, eklendi). **Tek kutu, migration YOK.** 18+ = beyan, consent tablosuna girmez.
+- **page.tsx metadata** (çatı): eski "İnsan Kimyasıyla Akıllı Mentörlük" → yeni marka (title+OG). DISC referansları dokunulmadı (kod hâlâ DISC, ayrı iş).
+- **G1-07 TASARIM belgesi** (📸): `konu/consent-modeli-plani-2026-08-28.md` — tipli+sürümlü `Consent` tablosu, enum başlangıç (AYDINLATMA/ACIK_RIZA), backfill (⭐ **yalnız ACIK_RIZA** — AYDINLATMA geçmişe yazılmaz; olmamış onay kaydı eksikten kötü), geri-çekme (⭐ **pasifleştir + işleme dur + ayrıca "tümüyle sil" sun; otomatik anonimleştirme YOK**), adım-adım migration + rollback. **schema.prisma DOKUNULMADI, migration ÜRETİLMEDİ.**
+
+**İki PO teyit cevabı belgeye işlendi:** (1) backfill AYDINLATMA yazılmaz; (2) açık rıza çekilince otomatik anonimleştirme yok → pasifleştirme. Nihai teyit avukatta (G1-10).
+
+**Pointer:** backend #57 yeni commit `4d5aea0` → çatı pointer `303da85 → 4d5aea0` (ileri sarım). Faz 2 çatı dalı #130'un üstünde → doğru pointer + S22'yi taşır (hangi sırada merge edilse güvenli).
+
+**Doğrulama:** backend tsc ✓ eslint ✓ · frontend tsc ✓ vitest 38/38 ✓ build ✓. Entegrasyon CI'da.
+
+**Senkron:** kartlar (G1-01 ✅metin/G1-06 🟡/G1-10 3 açık uç) · 00-INDEX (consent belgesi) · 10-yol (Faz 2 🟡) · 09-DURUM ⚡ blok · bu günlük. Kırık link: 0.
+
+**Bekleyen (ayrı turlar):** G1-07 uygulama (⚠️ migration, PO onayı) · G1-08 OAuth rıza · G1-05 self-servis FE.
+
+**Sınır:** migration/DB/seed YOK · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kişi adı yok. **MERGE EDİLMEDİ** (PO).
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*
