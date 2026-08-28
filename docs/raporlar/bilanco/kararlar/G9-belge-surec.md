@@ -94,8 +94,8 @@ Etkisi: Orta (canonical durum dosyası kafa karıştırıyor)
 Kaynak: karar-defteri GRUP 7 (T1-B3 belge-denetimi :59)
 Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu:
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Faz 1. 09-DURUM'daki eski çelişki blokları arşive taşınacak (belge-hijyeni). Not: önceki PO notu yanlışlıkla sertifika/anket konusunu anlatıyordu — düzeltildi.
 ---
 
 ---

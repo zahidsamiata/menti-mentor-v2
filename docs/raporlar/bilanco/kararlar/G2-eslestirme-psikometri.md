@@ -47,8 +47,8 @@ Etkisi: Onaysız matris üretimde eşleştirme kararlarını belirliyor; PO göz
 Kaynak: karar-defteri GRUP 2 (md.103) · Numara: md.103
 KOD-TEYİT: `scoring.ts:44-45 DISC_COMPATIBILITY` — `D:{D:60,I:75,S:30,C:85}` belgeyle BİREBİR doğrulandı; `:74` matrixScore kullanımı. Korunur.
 
-[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🗑️ GEÇERSİZ (PO 2026-08-28): Bu onay noktaları DISC matrisine aitti (16 kombinasyon, anti-match, tiebreak D>I>S>C, %60/40). DISC bırakıldı, Big Five'a geçildi — tasarım belgesi B9 yeni kuralları tanımlıyor (%45/30/25 + kişilik içi dağılım + 2 veto). Eski matrisin onaylanacak bir tarafı kalmadı. Bkz. konu/degerlendirme-sistemi-tasarim-2026-08-27.md B9.
 ---
 **[G2-02] Hard-gate toksik blok onayı (kod ✅, onay boş)**
 Ne: D-mentör + S-menti gibi toksik çiftleri tamamen eleyen hard-gate (ANTI_MATCH/BLOCKED_PAIRS) kodda çalışıyor; yönetici eşiği ≠ hard-gate ayrımı da var. Onay kutusu boş.
@@ -60,8 +60,8 @@ Etkisi: Onaysız bir "sabit güvenlik bloğu" davranışı üretimde; PO hangi �
 Kaynak: karar-defteri GRUP 2 (md.103/03:23) · Numara: md.103 / 03:23
 KOD-TEYİT: `scoring.ts:20-26 ANTI_MATCH_RULES=[{mentorDisc:'D',mentiDisc:'S'}]` + `isAntiMatch()`; `scoring.config.ts:33 BLOCKED_PAIRS`; `scoring.service.ts:36,46 isHardBlocked/hard-gate`. Doğrulandı, korunur.
 
-[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🗑️ GEÇERSİZ (PO 2026-08-28): Bu onay noktaları DISC matrisine aitti (16 kombinasyon, anti-match, tiebreak D>I>S>C, %60/40). DISC bırakıldı, Big Five'a geçildi — tasarım belgesi B9 yeni kuralları tanımlıyor (%45/30/25 + kişilik içi dağılım + 2 veto). Eski matrisin onaylanacak bir tarafı kalmadı. Bkz. konu/degerlendirme-sistemi-tasarim-2026-08-27.md B9.
 ---
 **[G2-03] Tiebreak sırası D>I>S>C PO onayı**
 Ne: Skor eşitliğinde adayları D>I>S>C sırasıyla önceleyen tiebreak kuralı PO onayına sunuldu; kutu boş.
@@ -72,8 +72,8 @@ Etkisi: Onaysız bir öncelik varsayımı sıralamayı belirliyor; D-baskın ada
 İş boyu: S
 Kaynak: karar-defteri GRUP 2 (madde 103 akraba) · Numara: (madde 103 akraba)
 
-[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🗑️ GEÇERSİZ (PO 2026-08-28): Bu onay noktaları DISC matrisine aitti (16 kombinasyon, anti-match, tiebreak D>I>S>C, %60/40). DISC bırakıldı, Big Five'a geçildi — tasarım belgesi B9 yeni kuralları tanımlıyor (%45/30/25 + kişilik içi dağılım + 2 veto). Eski matrisin onaylanacak bir tarafı kalmadı. Bkz. konu/degerlendirme-sistemi-tasarim-2026-08-27.md B9.
 ---
 **[G2-04] Psikometrik gerekçe BELGELENMEMİŞ (matris/ağırlık/eşik ampirik kaynaksız)**
 Ne: Matris değerleri, %60/40 ağırlık ve eşikler ampirik kaynak olmadan seçilmiş; kodda "kalibre edilecek" itirafı var. Bilimsel/psikometrik gerekçe yok.
@@ -85,8 +85,8 @@ Etkisi: Ürünün çekirdek vaadi (isabetli eşleştirme) dayanaksız varsayıml
 Kaynak: karar-defteri GRUP 2 (md.103) · Numara: md.103
 KOD-TEYİT: `discLetters.ts:23` "⚠️ BAŞLANGIÇ DEĞERLERİ — gerçek kullanıcı verisi biriktikçe ileride kalibre edilecek" itirafı grep'le doğrulandı; `scoring.ts:44-45` sabit matris. Korunur.
 
-[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🗑️ GEÇERSİZ (PO 2026-08-28): Bu onay noktaları DISC matrisine aitti (16 kombinasyon, anti-match, tiebreak D>I>S>C, %60/40). DISC bırakıldı, Big Five'a geçildi — tasarım belgesi B9 yeni kuralları tanımlıyor (%45/30/25 + kişilik içi dağılım + 2 veto). Eski matrisin onaylanacak bir tarafı kalmadı. Bkz. konu/degerlendirme-sistemi-tasarim-2026-08-27.md B9.
 ---
 **[G2-05] %60/%40 VARSAYILAN oranın PO onayı**
 Ne: Sektör %60 / Mizaç %40 VARSAYILAN oranı PO onayına sunuldu; `eslesme-uyum` belgesinde kutu boş.
@@ -98,8 +98,8 @@ Etkisi: Onaysız ağırlık dengesi tüm eşleştirmeleri belirliyor; "neden sek
 Kaynak: karar-defteri GRUP 2 (md.9 alt) · Numara: (md.9 alt)
 KOD-TEYİT: `scoring.ts:89 DEFAULT_SECTOR_WEIGHT=0.6`, `:106` fallback; `05-felsefe-motoru.md:184` "NEDEN 60/40? gerekçe YOK" gözlemi. Korunur.
 
-[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🗑️ GEÇERSİZ (PO 2026-08-28): Bu onay noktaları DISC matrisine aitti (16 kombinasyon, anti-match, tiebreak D>I>S>C, %60/40). DISC bırakıldı, Big Five'a geçildi — tasarım belgesi B9 yeni kuralları tanımlıyor (%45/30/25 + kişilik içi dağılım + 2 veto). Eski matrisin onaylanacak bir tarafı kalmadı. Bkz. konu/degerlendirme-sistemi-tasarim-2026-08-27.md B9.
 ---
 **[G2-06] "Varsayılana düşen profil oranı" izleme metriği**
 Ne: Profili eksik olup varsayılan/nötr skora düşen kullanıcıların oranını izleyen bir metrik yok. Psikometrik kör-nokta.

@@ -94,7 +94,7 @@ Etkisi: İşlevsel tamam; belge zayıflığı sonraki geliştiriciyi/PO'yu belir
 Kaynak: karar-defteri GRUP 3 (md.13-akraba/B13) · Numara: md.13-akraba / B13
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: Faz 6'ya taşındı (içerik fazı) — sertifika içerik zinciriyle birlikte.
 ---
 **[G3-06] DISC canlı soru sayısı teyidi (kod 32 ↔ canlı ~20)**
 Ne: Kod 32 DISC sorusu üretir; canlı ortamda ~20 görünüyor olabilir (seed eksik/kısmi şüphesi). Canlı sayı DB'ye sorulmadı.
@@ -131,8 +131,8 @@ Etkisi: Sınav havuzu eksikse kullanıcılar dar/yinelenen senaryo görür; sert
 Kaynak: karar-defteri GRUP 6 (md.30) · Numara: md.30
 KOD-TEYİT: `seed-certification.ts` idempotent upsert (yalnız 2 upsert grep-eşleşmesi; salt-yazma, deleteMany yok — güvenli). Canlı ~5 → ❓ DB.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Faz 6. Güvenli seed runner (G3-09) bunu kilitliyor — önce o. ⚠️ Canlı DB yazımı, PO onayı ZORUNLU.
 ---
 **[G3-09] Güvenli sertifika seed runner yok (md.30'u bloklar)**
 Ne: `seed-certification.ts` mevcut ve güvenli (upsert) ama `package.json`'da onu çalıştıran bir script referansı YOK — yani seed'i güvenle koşturacak resmi bir yol yok.
@@ -170,8 +170,8 @@ Etkisi: Onaysız psikometrik varsayımlar üretimde; eşleştirme kalitesi bilim
 Kaynak: karar-defteri GRUP 6 (md.103 çıktısı) · Numara: (md.103 çıktısı)
 KOD-TEYİT: `scoring.ts:45 D:{D:60,I:75,S:30,C:85}` matris + `:20 ANTI_MATCH_RULES` (D-mentör/S-menti) + `:89 DEFAULT_SECTOR_WEIGHT=0.6` belgeyle BİREBİR; `discLetters.ts:23` "gerçek kullanıcı verisi biriktikçe kalibre edilecek" itirafı doğrulandı. ⚠️ ilişkili: [G2-06] aynı 5 onay noktası psikometri tarafından da işaretlenir (aynı karar, iki gruptan görünür).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Eski DISC kurgusundan kalma. Yeni tasarımda SJT havuzu 30-40 senaryoya çıkıyor (boyut-belirsizliği temelli); '3→4' sorusu anlamını yitirdi. Bkz. tasarım belgesi B6.
 ---
 **[G3-12] İçerik & Soru Felsefesi Keşfi (tüm soruların içerik+felsefe+puanlama)**
 Ne: Tüm soruların içeriğini, arkasındaki felsefeyi ve puanlama mantığını çıkaran keşif. Kısmen 2026-08-26'da yapıldı, tam değil.

@@ -58,6 +58,46 @@
 
 ---
 
+# 🗺️ KOD İŞ SIRASI — PO ÖNCELİK (2026-08-28)
+
+> **Bu bölüm S17 sözünün çıktısıdır** (KURAL 8 adım 3: öncelik verildi → roadmap satırı).
+> Her kalem TEK SATIR + kart referansı; **detay kopyalanmaz** → canonical:
+> `../raporlar/bilanco/kararlar/00-ONCELIK-SIRASI-2026-08-28.md` (sıra) + `G*.md` kartları (karar).
+> ⚠️ Mevcut madde numaraları korunur; burada YENİ numara açılmaz.
+> ⚠️ SIRA, TAAHHÜT DEĞİL: Faz 1-2 (+Faz 0 PO-manuel) bitince kullanıcı alınabilir; Faz 7-8'in bir kısmı hiç yapılmayabilir.
+
+**🟣 FAZ 0 — PO-PARK** (kod sırasından çıkarıldı, İPTAL EDİLMEDİ — env/ayar bekliyor):
+- G8-01+G8-02 foto volume+env · G5-01+G5-02 kurum maili · G1-09 destek@ · G1-10+G1-13 aydınlatma+kulüp beyanı (avukatta) · G1-28 sunucu sertleştirme · G8-03+G8-04 canlı testler · G8-05 yedek env sil · G8-08 izole test DB.
+
+**FAZ 1 — Ucuz temizlik** (paralel güvenli, migration yok):
+- G9 grubu 12 kalem (belge düzeni) · G9-05 gerekçe · G10-01 ölü kod · G6-07 kullanılmayan paket · G8-06 dal temizliği · G3-15 yazım · G7-12 slogan · G7-13 tema yönü.
+
+**FAZ 2 — Çıkış blokeri kod tarafı:**
+- G1-05 KVKK hak ekranı · G1-07 rıza sürümü ⚠️ MIGRATION TEK BAŞINA · G1-06 otomatik imha · G1-08 OAuth rıza ayrımı · **G1-01 yaş 18+ form+DB** (PO 2026-08-28: Faz 8→Faz 2, KVKK zinciri).
+
+**FAZ 3 — Güvenlik incelikleri:**
+- ⭐ G1-17+G7-04 BİRLİKTE (aynı `middleware.ts`) · G1-04 SuspicionReport tenantId · G1-23 logoUrl guard · G1-26 CAPTCHA/IP limit · G1-02 DISC harf teyidi · G1-19 qualityMultiplier okuma teyidi · G1-14+G1-15 denetim izi.
+
+**FAZ 4 — Veri temeli** (⚠️ algoritmadan ÖNCE):
+- S21 profil envanteri (KEŞİF; tasarım B10.6) · Üç soru S1/S2/S3 + görünürlük ⚠️ MIGRATION TEK BAŞINA (B10.2/10.3) · G1-29+G6-03 tenant silme+onDelete ⚠️ MIGRATION TEK BAŞINA · G1-16 rıza backfill (⭐ şimdi ucuz).
+
+**FAZ 5 — Algoritma** (ana iş; tasarım B9):
+- G2-09 sektör asimetri (B9.4) · G2-10 kalite çarpanı çift-uygulama (B9.5) · G2-07+G2-08+G10-21 sektör+OCEAN (TEK İŞ) · 12 senaryo+arketipler ⚠️ MIGRATION (B3/B5) · yeni skor+2 veto (B9.1/9.2/9.3) · madde 125 derinleşme/triggersOn (B6) · G4-01 havuz kartı (B10.3) · göç planı (B12, ⚠️ AÇIK).
+
+**FAZ 6 — İçerik:**
+- ⭐ G3-09 seed runner ÖNCE (G3-08'i kilitler) · G3-08 sertifika 5→20 (⚠️ canlı DB, PO onayı) · G3-13 answerType ⚠️ MIGRATION · G3-19 etiket havuzu · sertifika hatalı-konu hedefleme (B7) · öğrenme↔sertifika yüzey ayrımı (B8) · menti personası çeşitlendirme (B8) · G3-16+G3-18 canlı içerik teyidi · **G3-05 sertifika soru ekleme yetkisi** (PO 2026-08-28: Faz 8→Faz 6).
+
+**FAZ 7 — Kullanıcı deneyimi:**
+- G4-22+G4-23 bekleme anı · G4-24 menti özgüven sunumu · G4-25 ret yumuşatma · G4-30 yönetici export · G4-31 kırmızı uyarı · G5-04 bildirim izni · G5-07 push stub · G7-01+G7-02+G7-09 erişilebilirlik (TEK PAKET) · **G4-39 "görüşme tamamladım" kartı** (PO 2026-08-28: Faz 8→Faz 7).
+
+**FAZ 8 — Kalanlar:**
+- G4-02/04/05/08/14/17 panel · G6-01 N+1 · G6-05 metin merkezileştirme · G7-03 SEO · G10-22/23 · G5-05 geri bildirim akışı · **keşifler:** G4-09+G4-10 super-admin · G10-25 profil düzenleme.
+- ⚠️ **DURAK kalemleri PO'ca karara bağlandı (2026-08-28):** G2-01..05 → 🗑️ GEÇERSİZ (DISC→Big Five, sıralamadan çıkarıldı) · G1-01→Faz 2 · G3-05→Faz 6 · G4-39→Faz 7. **Faz 8'de kalan:** G2-11 KARAR 6 oto-onay tetiği · G8-13 sekme yavaşlığı · G8-14 sol-alt kullanıcı menüsü. (Detay: `../raporlar/bilanco/kararlar/00-ONCELIK-SIRASI-2026-08-28.md`.)
+
+**Bağlı işler:** G1-13↔G1-10 · G3-04→G3-13 · G1-17↔G7-04 · G2-07+G2-08+G10-21 · G8-01↔G10-25 · G3-09→G3-08 · G5-01+G5-02+G1-09. (Detay: `00-ONCELIK-SIRASI-2026-08-28.md`.)
+
+---
+
 # 🟢 v1 — CANLI ÖNCESİ (öncelikli, sırayla)
 
 ## v1-A · 🔴 GÜVENLİK & YASAL BLOCKER (canlı-öncesi ŞART)

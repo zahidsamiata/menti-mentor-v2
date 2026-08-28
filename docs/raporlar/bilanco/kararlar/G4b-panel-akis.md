@@ -64,8 +64,8 @@ Etkisi: İlk deneyimi olumlu bağlar (aha anı).
 İş boyu: S
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Faz 7. Arketip kartıyla aynı ekranda — ayrı iş değil.
 ---
 **[G4-25] Reddi yumuşat + küçük başarı kutlaması**
 Ne: Mentör "hayır" dediğinde mentiyi kırmadan yumuşatmak ("dolu, işte 3 alternatif") + küçük başarılarda kutlama (konfeti sadece DISC-aha'da var).
@@ -272,7 +272,7 @@ Etkisi: Kullanıcı başarısını dışarı taşır (viral + motivasyon).
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: Faz 7'ye taşındı (kullanıcı deneyimi fazı).
 ---
 
 ## Bu grupta zaten yapılmışlar (✅ — kart YOK)

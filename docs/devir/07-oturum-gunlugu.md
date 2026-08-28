@@ -301,7 +301,7 @@
 ---
 
 ## OTURUM 2026-08-27 (öğleden sonra) — PO KARARLARI İŞLENDİ (184 kart)
-- **Mod:** 🟢 BYPASS (yalnız-belge). Branch: `docs/po-kararlari-2026-08-27`. PR açık, MERGE ETME.
+- **Mod:** 🟢 BYPASS (yalnız-belge). Branch: `docs/po-kararlari-2026-08-27`. ~~PR açık, MERGE ETME~~ → ⚠️ GÜNCELLEME (2026-08-28): **PR #124 MERGED (`90bb7d4`).**
 - **Ne yapıldı:** PO'nun strateji oturumunda 184 karar kartına verdiği kararlar `G*.md` dosyalarına deterministik script'le işlendi (kutu `[x]` + PO notu; kart metni değişmedi).
   - **176 karar:** ✅ işleme al 87 (9 çıkış-blokeri: G8-01, G1-05/07/09/10/13/28, G5-01/02) · ⏸️ şimdilik alma 85 · 🗑️ geçersiz 2 (G4-03, G9-01) · ❓ keşif 2 (G4-09/10) · **8 kart boş** (PO listesinde yoktu: G3-08/11, G4-01/11/12/24, G8-08, G9-05).
   - **24 PO notu** aynen işlendi (analytics-çıkışta-yok, kulüp-aktif, manuel-eşleştirme-yok, anket→migration vb.).
@@ -312,7 +312,7 @@
 ---
 
 ## OTURUM 2026-08-28 — Değerlendirme/eşleştirme sistemi TASARIM BELGESİ (iki tur)
-- **Mod:** 🟢 BYPASS (yalnız-belge; kod/DB/seed/migration YOK). Branch: `docs/tasarim-belgesi-2026-08-27` (temiz main'den). **PR #125 açık — MERGE EDİLMEDİ.**
+- **Mod:** 🟢 BYPASS (yalnız-belge; kod/DB/seed/migration YOK). Branch: `docs/tasarim-belgesi-2026-08-27` (temiz main'den). ~~PR #125 açık — MERGE EDİLMEDİ~~ → ⚠️ GÜNCELLEME (2026-08-28): **PR #125 MERGED (`b212507`).**
 - **Çıktı:** yeni belge `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md` (🔄 YAŞAYAN, **16 bölüm**, ~730 satır). İki turda yazıldı: **Tur A** (Bölüm 1-8: neden/model/arketip/ölçme + **çekirdek 12 senaryo tam metin**/derinleşme/sertifika/öğrenme ayrımı) + **Tur B** (Bölüm 9-16: eşleştirme algoritması/veri boşluğu/süreç/göç/kalibrasyon/açık kararlar/dürüstlük/KALEM LİSTESİ).
 - **Ana kararlar (belgeye kaydedildi, YORUM KATILMADI):** DISC→**Big Five** motor + metafor arketip görünen yüz · Likert→**senaryo+şık** ölçme · algoritma ağırlıkları **%45 hedef-değer / %30 alan / %25 kişilik** (eski %50 karakter araştırmayla düştü — Dyrenforth 2010) · kişilik içi dağılım + **2 veto** (yalnız zarar) · sektör asimetri düzeltmesi (payda=etiket birleşimi) · **üç soru** (S1/S2/S3) deep-level similarity boşluğu (Eby 2013) · görünürlük+k-anonimlik · manuel eşleştirme YOK (algoritma seçenek sunar).
 - **KURAL 9 KALEM LİSTESİ:** Bölüm 16'da **24 kalem** (durum + numara-adayı sütunlu). Bunlar `00-KARAR-TAKIP`'e girişte numara alacak.
@@ -320,6 +320,30 @@
 - **Tur A düzeltmesi (Tur B'de):** belge başındaki keşif rapor yolları YANLIŞTI (`kararlar/konu/kesif...`) → `docs/raporlar/kesif...` + `.../icerik...` düzeltildi. Kırık-link 0.
 - **Belge-senkron:** 00-INDEX (yeni belge satırı) · 00-KARAR-TAKIP (**S16 ✅** + yeni **S21** + madde 101/102/103 & 125-130'a ⚠️ GÜNCELLEME referansı) · 09-DURUM (⚡ ŞU AN bloğu) · G2/G3 kartlarına yalnız belge-içi referans (kartlar DEĞİŞTİRİLMEDİ) · bu günlük.
 - **Sınır:** #110, `kvkk-metinleri/`, karar dosyaları (G*.md) ELLENMEDİ · numara doğurulmadı · kişi adı yok. **MERGE EDİLMEDİ** (PO).
+
+---
+
+## OTURUM 2026-08-28b — 8 boş kart + öncelik sıralaması (S17 kapanışı) + çakışma-öncesi merge
+- **Mod:** 🟢 BYPASS (yalnız-belge). Branch: `docs/oncelik-siralama-2026-08-28` (temiz main `90bb7d4`'ten). **PR açık — MERGE EDİLMEDİ.**
+- **Ön koşul (git-doğrulandı):** #125 MERGED (`b212507`) + #124 MERGED (`90bb7d4`) → iş main'in üstünde yürüdü. *(Ara adım: bu turdan önce #124 çakışması çözüldü — `d789902` merge commit, iki turun içeriği kayıpsız birleşti.)*
+- **GÖREV A — 8 boş kart bağlandı** (kutu `[x]` + PO notu AYNEN): G3-08 işleme-al · G3-11 geçersiz · G4-01 işleme-al · G4-11 şimdilik · G4-12 şimdilik · G4-24 işleme-al · G8-08 işleme-al · G9-05 işleme-al · +G4-10 PO-teyit (keşif kararı doğru, G4-09 ile keşif turu).
+- **Yeni dağılım (TAM SAYI, kod-kutusu grep-doğrulandı): 184 = 92 işleme-al / 87 şimdilik / 3 geçersiz / 2 keşif / 0 boş.**
+- **GÖREV B — öncelik belgesi:** `../raporlar/bilanco/kararlar/00-ONCELIK-SIRASI-2026-08-28.md` (🔄; 8 faz + 🟣 PO-park + bağlı işler tablosu; 3 sıralama ilkesi + dürüstlük notu).
+- **GÖREV C — 10-yol:** yeni "🗺️ KOD İŞ SIRASI" üst-bölümü (her kalem tek satır + kart ref; detay öncelik belgesine referans; yeni numara açılmadı).
+- **DURAK uygulandı:** 11 işleme-al kart PO'nun faz listesinde tek tek anılmamıştı (G1-01, G2-01..05, G2-11, G3-05, G4-39, G8-13, G8-14) → Faz 8'e eklendi + raporlandı (PO teyidine açık). Böylece 92 işleme-al'ın tamamı sıralamada.
+- **GÖREV D — senkron:** S17 ✅ · 00-PO-KARARLARI ⚠️ GÜNCELLEME (yeni dağılım) · 00-INDEX 2 satır · 09-DURUM ⚡ blok + 2 bayat "PR açık" satırı tazelendi (#124/#125 MERGED, SHA git-doğrulandı) · bu günlük. Kırık-link 0.
+- **Sınır:** DB/seed/migration/kod DEĞİŞMEDİ · #110 ELLENMEDİ · numara doğurulmadı · kişi adı yok. **MERGE EDİLMEDİ** (PO).
+
+---
+
+## OTURUM 2026-08-28c — Öncelik düzeltmeleri (PO teyidi, PR #126 üstüne)
+- **Mod:** 🟢 BYPASS (yalnız-belge). Branch: `docs/oncelik-siralama-2026-08-28` (mevcut). **Yeni PR açılmadı — #126'ya commit.** MERGE EDİLMEDİ.
+- **Bağlam:** Önceki turda ajan 2 nokta için PO teyidi istemişti; PO karar verdi, bu tur işledi.
+- **Düzeltme 1 — G9-05 notu:** Yanlış karta yazılmış sertifika/anket notu → "09-DURUM eski çelişki blokları arşive taşınacak (belge-hijyeni)" ile değiştirildi. Sertifika/anket notu **G3-04 + G3-13'e ait** — o kartlarda ilgili not ZATEN VAR (G3-04: tasarım-tezine-bağlı; G3-13: STK şıklı+anket→answerType migration) → DOKUNULMADI (talimat gereği).
+- **Düzeltme 2 — 11 sıralanmamış kalem PO kararı:** **G2-01..05 → 🗑️ GEÇERSİZ** (DISC matrisi Big Five'a bırakıldı, tasarım B9; kutu işleme-al→geçersiz + PO notu AYNEN) → sıralamadan çıkarıldı. **G1-01→Faz 2** (KVKK), **G3-05→Faz 6**, **G4-39→Faz 7** taşındı (taşıma notu eklendi). **G2-11/G8-13/G8-14 → Faz 8'de kaldı.**
+- **Revize dağılım (kod-kutusu grep-doğrulandı): 184 = 87 işleme-al / 87 şimdilik / 8 geçersiz / 2 keşif** (beklenenle birebir tuttu).
+- **Senkron:** 5 G kartı (G2×5 geçersiz, G9-05 not, G1-01/G3-05/G4-39 taşıma) · 00-ONCELIK-SIRASI (fazlar + header + Faz 8 notu) · 10-yol KOD İŞ SIRASI · 00-PO-KARARLARI GÜNCELLEME 2 · 09-DURUM ⚡ blok · bu günlük. Kırık-link 0.
+- **Sınır:** DB/seed/kod DEĞİŞMEDİ · #110 ELLENMEDİ · numara doğurulmadı · kişi adı yok. **MERGE EDİLMEDİ** (PO).
 
 ---
 
