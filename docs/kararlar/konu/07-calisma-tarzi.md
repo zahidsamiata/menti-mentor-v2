@@ -37,7 +37,8 @@
 - Geçerli olmayan katmanı "bu iş için yüzey yok" diye BİLİNÇLİ ele, atlama.
 
 ## MODEL / ARAÇ
-- Claude Code'da standart model (Sonnet 4.6 Default) yeterli; ücretli 1M context modu gerekmez.
+- ~~[ESKİ · düzeltildi 2026-08-28] Claude Code'da standart model (Sonnet 4.6 Default) yeterli; ücretli 1M context modu gerekmez.~~
+  ⚠️ GÜNCELLEME (2026-08-28, G9-15): Model/context seçimi belgede sabitlenmez — her turun promptunda belirtilir. (Bu, CLAUDE.md ↔ 07 "model tercihi" yumuşak çelişkisini de kapatır: BÇ5/E12.)
 - Doküman terminale prompt içine yapıştırılmaz — `.md` dosyası olarak projeye konup referansla verilir (token tasarrufu + kodla birlikte inceleme).
 - Context dolunca (`100% context used`) → `/clear` ile temiz oturum + docs/ belgelerini okut.
 

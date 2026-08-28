@@ -31,7 +31,7 @@
 ## 🔴 BUGÜNKÜ TEŞHİSTE BULUNAN 2 YENİ IDOR (canlı öncesi kritik)
 - `/mentors/:mentorId/candidates` — başka mentörün aday listesi görülebiliyor.
 - `/requests/:id` — başka kullanıcının match request'i görülebiliyor.
-- Durum: ⏳ DÜZELTİLMEDİ. Küçük fix ama canlı-kritik.
+- ~~[ESKİ · düzeltildi 2026-08-14] Durum: ⏳ DÜZELTİLMEDİ. Küçük fix ama canlı-kritik.~~ (bkz. alttaki ✅ GÜNCELLEME — IDOR açığı YOK, korumalı)
 - **✅ GÜNCELLEME (2026-08-14):** Kod incelemesi (salt-okuma keşif) bu 2 endpoint'in **tenant izolasyonu + sahiplik kontrolü ile KORUMALI** olduğunu KANITLADI — **IDOR açığı YOK**. İlgili endpoint'ler (mentör aday listesi, talep detayı) çift katmanlı korumalı: tenant filtresi + sahiplik/ADMIN kontrolü, null-auth 401 ile reddedilir. Düzeltme commit `161ae00`. Kanıt: `matchingController.ts:45-52`, `requestController.ts:116-121`. Yukarıdaki "⏳ DÜZELTİLMEDİ" satırı BAYAT.
 
 ## 🟡 P1 — ÖNEMLİ AMA ÇIKIŞI DURDURMAZ

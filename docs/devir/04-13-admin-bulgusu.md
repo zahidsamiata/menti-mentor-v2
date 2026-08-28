@@ -62,7 +62,7 @@
 ---
 
 ## Nasıl başlanmalı
-1. **MOD: PLANLA (keşif).** Model: Sonnet yeterli (çoğu UI/keşif), enum/DB riskli maddede Opus.
+1. **MOD: PLANLA (keşif).** Model: turda belirtilir (G9-15).
 2. Admin panel frontend'i + ilgili backend controller'ları oku; her madde için "backend hazır mı /
    S-M-L" tablosunu **gerçek kodla** doldur.
 3. Sonra ürün sahibi öncelik versin (ucuz kazanımlar önce mi, yoksa belirli bir sayfa mı).

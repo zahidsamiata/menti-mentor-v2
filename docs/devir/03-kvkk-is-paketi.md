@@ -46,7 +46,7 @@ KVKK/yasal K1–K5'i açık işlerin **1. sırasına** koydu.
 ---
 
 ## Nasıl başlanmalı (ilk tur planı)
-1. **MOD: PLANLA (keşif).** Model: Opus (güvenlik/KVKK).
+1. **MOD: PLANLA (keşif).** Model: turda belirtilir (G9-15).
 2. Her madde için salt-okuma keşif: kod gerçekten ne yapıyor, hangi dosya, ne kadar iş.
    - **K2 (OAuth consent)** en somut **kod** işi — `backend/src/services/oauth*` yolunu aç, `kvkkConsentAt`
      set edilen register yolunu örnek al, OAuth kullanıcı-yaratmaya aynısını ekle. Ama **önce** OAuth
