@@ -151,3 +151,183 @@ maddesi. Ters madde oranı abartılmayacak (yapay faktör riski — literatür
 uyarısı).
 
 ---
+
+## Bölüm 5 — Çekirdek: 12 Senaryo ⭐
+
+İlk oturum: 12 senaryo, ~5-6 dk, sonunda arketip kartı.
+Herkes AYNI 12 soruyu görür (karşılaştırma için ŞART).
+Aynı senaryolar hem mentöre hem mentiye sorulur.
+
+> ⚠️ Parantez içindeki boyut notu **İÇ NOTTUR, kullanıcıya GÖSTERİLMEZ.**
+> Belgede kalır.
+
+### [1]
+
+Bir arkadaşın seni tanımadığın bir kalabalığa davet etti. Kapıdan girdin,
+kimseyi tanımıyorsun.
+**İçinden ne geçer?**
+
+- **A —** Etraftaki gruplara bakıp en rahat görüneni seçer, yanına giderim.
+- **B —** Bir köşede durup ortamı çözerim, sonra karar veririm.
+- **C —** Beni davet edeni bulur, onun üzerinden tanışırım.
+- **D —** Kimseyi tanımıyor olmak hoşuma gider, sıfırdan başlarım.
+
+*(A dışadönüklük · B temkin · C uyumluluk · D açıklık)*
+
+### [2]
+
+Bir işi bitirmene iki gün var. Bugün başlarsan rahat yetişir, ama canın
+hiç istemiyor.
+**Ne yaparsın?**
+
+- **A —** Az da olsa başlarım, ivme önemli.
+- **B —** Yarın toparlarım, baskı altında daha iyi çalışıyorum.
+- **C —** Küçük parçalara bölüp ilkini bugün bitiririm.
+- **D —** Önce ortamı hazırlarım, sonra oturur bakarım.
+
+*(A+C sorumluluk · B düşük sorumluluk · D erteleme eğilimi)*
+
+### [3]
+
+Bir konuda emin olduğun bir şey söyledin. Karşındaki kibarca "ben öyle
+düşünmüyorum" dedi.
+**İlk tepkin ne olur?**
+
+- **A —** Neden öyle düşündüğünü sorarım, merak ederim.
+- **B —** Kendi gerekçemi daha net anlatırım.
+- **C —** Belki haklıdır diye bir an duraklarım.
+- **D —** Konuyu uzatmam, herkes farklı düşünebilir.
+
+*(A açıklık · B düşük uyumluluk · C hassasiyet · D çatışmadan kaçınma)*
+
+### [4]
+
+Planladığın bir gün, sabah gelen bir haberle tamamen değişti.
+**Ne hissedersin?**
+
+- **A —** Sinirlenirim, günü yeniden kurmak zorunda kalmak yorar.
+- **B —** Umursamam, plan zaten değişebilir.
+- **C —** Hemen yeni bir plan yaparım, boşlukta kalmak istemem.
+- **D —** Belki daha iyi bir gün olur diye merak ederim.
+
+*(A hassasiyet · B düşük sorumluluk · C sorumluluk · D açıklık)*
+
+### [5]
+
+Yakın bir arkadaşın, senin de katıldığın bir işte bariz bir hata yaptı.
+Kimse fark etmedi.
+**Ne yaparsın?**
+
+- **A —** Baş başayken söylerim, bilmesi onun hakkı.
+- **B —** Sessizce düzeltirim, konuyu açmam.
+- **C —** Moralini bozmam, kendi fark etsin.
+- **D —** Grup içinde konuşurum, herkesi ilgilendiriyor.
+
+*(A dürüstlük+sıcaklık · B uyumluluk · C çatışmadan kaçınma · D düşük uyumluluk)*
+
+### [6]
+
+Uzun süredir merak ettiğin bir konuda ücretsiz bir etkinlik var ama
+tanıdığın kimse gitmiyor.
+**Ne yaparsın?**
+
+- **A —** Tek başıma giderim, konu yeterli sebep.
+- **B —** Birini ikna etmeye çalışırım.
+- **C —** Kaydolurum ama gün gelince kararsız kalırım.
+- **D —** Vazgeçerim, yalnız gitmek keyif vermiyor.
+
+*(A açıklık · B dışadönüklük · C kararsızlık · D düşük açıklık)*
+
+### [7]
+
+Bir grup işinde birinin üzerine düşeni yapmadığını fark ettin. İş sana
+kalıyor.
+**Ne yaparsın?**
+
+- **A —** Doğrudan konuşurum, böyle sürmesin.
+- **B —** Ben yaparım, tartışmaya değmez.
+- **C —** Herkesin önünde durumu ortaya koyarım.
+- **D —** Bir süre bekler, kendi toparlar mı diye bakarım.
+
+*(A açıklık+kararlılık · B uyumluluk · C düşük uyumluluk · D temkin)*
+
+### [8]
+
+Yeni bir şey öğrenmeye başladın ve ilk denemede hiç iyi gitmedi.
+**Ne düşünürsün?**
+
+- **A —** Normal, ilk deneme böyledir.
+- **B —** Yönteme bakarım, yanlış yerden başlamış olabilirim.
+- **C —** Bu benim işim değil galiba diye geçer içimden.
+- **D —** Daha çok çalışırım, olana kadar bırakmam.
+
+*(A duygusal denge · B analitiklik · C hassasiyet · D sorumluluk)*
+
+### [9]
+
+Bir şeyi anlatırken karşındakinin dikkatinin dağıldığını fark ettin.
+**Ne yaparsın?**
+
+- **A —** Kısa keserim, ilgisini zorlamam.
+- **B —** Daha ilgi çekici anlatmaya çalışırım.
+- **C —** Sorarım: "sıkıcı mı geldi?"
+- **D —** Devam ederim, bitirmem gerekiyor.
+
+*(A uyumluluk · B dışadönüklük · C açıklık+sıcaklık · D sorumluluk)*
+
+### [10]
+
+Uzun süredir hayalini kurduğun bir fırsat çıktı ama hazır hissetmiyorsun.
+**Ne yaparsın?**
+
+- **A —** Atlarım, hazır hissetmeyi beklersem hiç olmaz.
+- **B —** Eksiklerimi listeler, hızlıca kapatmaya çalışırım.
+- **C —** Bu seferi pas geçerim, bir dahakine daha hazır olurum.
+- **D —** Güvendiğim birine sorarım, ne diyeceğini merak ederim.
+
+*(A açıklık+cesaret · B sorumluluk · C hassasiyet · D uyumluluk)*
+
+### [11]
+
+Bir yerde beklemek zorundasın, ne kadar süreceği belli değil.
+**Ne yaparsın?**
+
+- **A —** Telefonu açar, vakti değerlendiririm.
+- **B —** Ne kadar süreceğini öğrenmeye çalışırım.
+- **C —** Rahatsız olurum, belirsiz bekleme yorar.
+- **D —** Etrafı izlerim, beklemek beni germez.
+
+*(A pratiklik · B kontrol ihtiyacı · C hassasiyet · D duygusal denge)*
+
+### [12]
+
+Bir konuda seni öven bir geri bildirim aldın ama bir de "şurası eksikti"
+dendi.
+**Aklında hangisi kalır?**
+
+- **A —** Eksik olan kısım, orayı düşünürüm.
+- **B —** Övgü, iyi hissettirir.
+- **C —** İkisi de, dengeli bir geri bildirimdi.
+- **D —** Eksiği kimin söylediği, ona göre değerlendiririm.
+
+*(A hassasiyet · B duygusal denge · C dengeli algı · D temkin)*
+
+### Denge Tablosu
+
+| Boyut | Senaryo sayısı |
+|---|---|
+| sorumluluk | 5 |
+| açıklık | 5 |
+| uyumluluk | 5 |
+| hassasiyet/denge | 6 |
+| dışadönüklük | 3 |
+
+Dışadönüklük bilinçli olarak zayıf — en kolay ölçülen ve en çok "kendini
+iyi gösterme" davetiye çıkaran boyut. Derinleşme havuzunda tamamlanır.
+
+> ⚠️ **AÇIK / DÜRÜST SINIR:** 12 senaryo × 2 sinyal = 24 sinyal, boyut
+> başına ~5. Psikometrik olarak İNCE. Bilinçli takas: çok soru = doğru
+> ölçüm ama kişi yarıda bırakır → hiç ölçüm olmaz. Az soru = kaba ölçüm
+> ama kişi bitirir. Telafi: ikinci katman (Bölüm 6).
+
+---
