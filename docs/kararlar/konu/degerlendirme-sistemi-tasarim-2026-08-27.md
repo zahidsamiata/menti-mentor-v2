@@ -331,3 +331,93 @@ iyi gösterme" davetiye çıkaran boyut. Derinleşme havuzunda tamamlanır.
 > ama kişi bitirir. Telafi: ikinci katman (Bölüm 6).
 
 ---
+
+## Bölüm 6 — Derinleşme Katmanı
+
+Her girişte isteğe bağlı 1-2 senaryo, oyun gibi.
+Havuz 30-40'tan başlar, 100+'e büyür.
+
+**BÜYÜME MANTIĞI:** "çok soru" değil "**BOYUT KAPATMA**".
+5 boyut × 2 rol (mentör/menti) × 3-4 senaryo = 30-40 başlangıç.
+
+**SEÇİM KURALI:** profil TİPİNE göre değil, profil BELİRSİZLİĞİNE göre.
+Sistem kimin hangi boyutunun bulanık olduğunu bilir, o boyuta ait senaryo
+gelir. Netleşince başka boyuta geçer. Rastgele soru GELMEZ.
+
+Kaç senaryo sonra profil oturur: kabaca 20-25 sinyal daha, yani 10-12
+derinleşme senaryosu. Haftalara yayılır.
+
+> ⚠️ **MEVCUT PEKİŞTİRME SORUNU (kod gerçeği, keşif §6):** DEEPENING bugün
+> BASKIN boyuttan geliyor → ilk 5 cevap kilitleniyor, karakter netleşmiyor
+> PEKİŞİYOR. Bu, PO'nun "kullandıkça netleşsin" fikrinin TERSİ. Yeni
+> tasarım: EN BELİRSİZ boyuttan sorulacak VE profili AŞAĞI çekebilecek.
+
+> ⚠️ `triggersOn` alanı kodda VAR ama okuyan kod YOK (madde 125) —
+> canlandırılacak.
+
+> ⚠️ **AÇIK:** sınırsız yeniden-derinleşme davranışı — her tur profili
+> değiştiriyor, sınır yok (G3-03). Karara bağlanmadı.
+
+---
+
+## Bölüm 7 — Sertifika
+
+**FELSEFE (PO kararı):** Sertifika bir ELEME SINAVI DEĞİL, öğretimin SON
+TEKRARIDIR. EZBER SORUN DEĞİL — kişi doğru davranışı öğrenmişse ürün işini
+yapmıştır.
+
+### Kurallar
+
+- Havuzdan 8 senaryo çekilir.
+- 4 kritik konudan (geri bildirim · sınır · gizlilik · kriz) BİRER TANE
+  GARANTİLİ — kritik konu şansa bırakılmaz.
+- Kalan 4'ü diğer 6 konudan rastgele.
+- Günde 2 deneme, 3.'ye bekleme süresi (PO kararı).
+- ⭐ **HATALI-KONU HEDEFLEME:** yanlış yapılan konu, tekrar denemede DİĞER
+  VARYANTIYLA gelir — bugün YOK, eklenecek.
+- Cevaplar gösterilir (ezber felsefesi gereği).
+
+### Mevcut Kod Durumu
+
+- 10 konu × 2 varyant = 20 senaryo VAR.
+- Cooldown VAR.
+- Hatalı-konu hedefleme YOK ← eklenecek.
+- Hedef: varyantlar 3-4'e çıkacak.
+
+> ⚠️ Güvenli seed runner YOK (madde 73) → madde 30 bloke.
+
+---
+
+## Bölüm 8 — Öğrenme Yolculuğu ↔ Sertifika Ayrımı
+
+- **Öğrenme = ANTRENMAN SAHASI** (puansız, anında geri bildirim, hata ucuz).
+- **Sertifika = EHLİYET SINAVI** (puanlı, eşikli, geri bildirim sonda).
+
+> ⚠️ **MEVCUT SORUN:** 7 mentör aşamasının 6'sı sertifika senaryolarıyla
+> neredeyse AYNI durumu anlatıyor: kriz · gece mesajları · kırılgan menti ·
+> gönüllü tükenmişliği · sınav dönemi · cevabı buldurma. Yolculuğu bitiren
+> sertifikayı EZBERDEN geçiyor.
+
+**ÇÖZÜM:** sıfırdan yazım DEĞİL — AYNI PRENSİP, FARKLI YÜZEY.
+Örnek: öğrenme sınır koymayı "gece mesajları"yla öğretsin; sertifika aynı
+prensibi "arkadaşlık talebi"yle sınasın (bu varyant zaten VAR). Varyant
+yeniden dağıtımı yeter.
+
+**İSİMLER:** unisex (Deniz gibi). Anlatılan kişi hep aynı ad, karşı taraf
+isimsiz ("mentörün" / "mentin").
+
+> ⚠️ STK'nın ismi özelleştirmesi: altyapı YOK — isimler metin içine gömülü
+> sabit string, şablon değişkeni yok. İleri madde adayı.
+
+> ⚠️ Mevcut menti personası TEK TİP (hep kırılgan, gergin, tükenmiş).
+> Gerçekte menti bazen fazla iddialıdır, bazen mesafelidir. Tek tip menti,
+> tek tip mentör yetiştirir. Çeşitlendirilecek.
+
+---
+
+## Bölüm 9-16 — Tur B'de eklenecek
+
+> Bu belge iki turda yazıldı. Aşağıdaki bölümler bir sonraki turda
+> (Tur B) bu branch'e eklenecek: algoritma, veri boşluğu, süreç, göç,
+> kalibrasyon, açık kararlar, senkron.
+
