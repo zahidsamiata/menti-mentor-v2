@@ -71,7 +71,7 @@
 
 **FAZ 1 — Ucuz temizlik** (paralel güvenli, migration yok):
 - ✅ **Faz 1a (2026-08-28, PR — MERGE BEKLİYOR):** G9 belge-düzeni 12 kalem (G9-02/03/04/05/06/08/09/10/13/14/15/16) + G9-05 gerekçe TAMAM. Detay: G9 kartları ✅.
-- ⬜ **Faz 1b (kod temizliği — AYRI TUR):** G10-01 ölü kod · G6-07 kullanılmayan paket · G8-06 dal temizliği · G7-12 slogan · G7-13 tema yönü. *(G3-15 yazım → Faz 6'ya taşındı, PO 2026-08-28: sorular baştan yazılacak.)*
+- 🟡 **Faz 1b (kod temizliği — 2026-08-28, backend PR #56 + çatı PR #129, MERGE BEKLİYOR):** **✅ G10-01** llmRetry silindi (MeetingScheduler yarım-özellik → korundu) · **✅ G6-07** 5 radix çıkarıldı (build yeşil) · **✅ G7-12** H1 slogan · **✅ G7-13** tema yönü belgeye (kod yok, G7-11 ile uygulanır) · **🟡 G8-06** 12 yerel dal silindi (uzak dallar → PO onayı). *(G3-15 yazım → Faz 6'ya taşındı, PO 2026-08-28.)*
 - ⏸️ G9-11/G9-12 (büyük belge reorg) + G9-07 (OneDrive taşıma, PO-manuel) = ŞİMDİLİK ALINMADI.
 
 **FAZ 2 — Çıkış blokeri kod tarafı:**
@@ -165,9 +165,9 @@
 > **Not:** mentör görünürlük opt-in FE'si zaten "❓ teyit" bölümünde madde 7a olarak kayıtlı (analiz de FE'de 0 çağrı buldu — teyit güçlendi). super-admin router / scoring endpoint'leri de aynı bölümde (aşağı bkz.).
 
 ## v1-F-C · 🧹 ÖLÜ KOD + TEMİZ KOD + a11y (düşük-orta, çoğu PO onayı ister)
-44. **Kesin-ölü kod (yüksek güven, PO onayıyla sil):** `services/llmRetry.ts` (0 importer, tüketicisi silinmiş) · `context/TenantContext.tsx` (0 import, canonical = `providers/TenantProvider.tsx`) · `organisms/MeetingScheduler.tsx` (0 import; `mentor/availability` mantığı inline kopyalamış). *(ana-agent 0-import doğruladı.)*
+44. **Kesin-ölü kod (yüksek güven, PO onayıyla sil):** ~~`services/llmRetry.ts` (0 importer, tüketicisi silinmiş) · `context/TenantContext.tsx` (0 import, canonical = `providers/TenantProvider.tsx`) · `organisms/MeetingScheduler.tsx` (0 import; `mentor/availability` mantığı inline kopyalamış). *(ana-agent 0-import doğruladı.)*~~ ✅ **GÜNCELLEME (2026-08-28, Faz 1b):** `llmRetry.ts` **SİLİNDİ** (backend PR #56). `TenantContext-ikiz` **geçersiz** (tek tanım var). `MeetingScheduler.tsx` **SİLİNMEDİ → yarım özellik** (backend `/availability` endpoint'i var, bağlanmayı bekliyor → madde 45'e ait; detay G10-01 kartı).
 45. **Yarım-özellik ölü kod (silme, niyeti yok eder → araştır/bağla):** `TenantSwitcher.tsx` (çok-kurum UI, nav'a konmamış) · `ProfileStrengthCard.tsx` + `profile-completeness.service.ts` (uçtan uca bağlanmamış) · `sector-scorer.service.ts` (=v2 #14) · `matchingInterface.ts` (JOB_LISTING iskeleti, planlı) · ContextualFeedback kümesi (=#7 Aşama 3).
-46. **Kullanılmayan 5 `@radix-ui/*` paketi** (avatar/dialog/dropdown-menu/separator/toast) — FE'de 0 import; bundle/audit temizliği. Kaldırınca `npm run build` yeşil kalmalı (DOĞRULANMALI).
+46. **Kullanılmayan 5 `@radix-ui/*` paketi** (avatar/dialog/dropdown-menu/separator/toast) — FE'de 0 import; bundle/audit temizliği. ✅ **YAPILDI (2026-08-28, Faz 1b, çatı PR #129):** çıkarıldı; `npm run build` **YEŞİL** teyitli (41 transitif paket kalktı).
 47. **Temiz-kod borcu:** Zod doğrulama-hata bloğu ~85 yerde birebir kopya → `validate()` middleware · refresh-token/cookie güvenlik yardımcıları `authController` ↔ `selfServeController` duplike (güvenlik-hassas) → paylaşılan modül · 100+ satırlık handler'lar (login/getKpiDashboard) service'e bölünmeli.
 48. **DB performans:** konuşma listesi N+1 (2N+1 sorgu, `conversationController.ts:236`) · pagination'sız liste endpoint'leri (`requestController`/`feedbackLogController`/`clubController`) → `take` ekle.
 49. **DB bütünlük:** string-tabanlı enum adayları (`UserReport.reason/status`, `Tenant.plan/...`, `MeetingCheckIn.*`, `InvitationTemplate.role`) → zamanla enum · çift rol kaynağı `User.role` vs `TenantMembership.role` (CLAUDE.md canonical = membership) legacy/terk netleştir (00-KARAR-TAKIP çift-kaynak adayı).

@@ -75,6 +75,7 @@
 | S19 | Sunucu/altyapı sertleştirme TARAMASI (HTTPS/firewall/SSH/SSL/yedek) — çıkış blokeri | 2026-08-27 | 🔴 çıkış öncesi ZORUNLU | G1-28 |
 | S20 | Fotoğraf kayıt-sonrası DÜZENLEME keşfi (kullanıcı foto/bilgi güncelleyebiliyor mu) | 2026-08-27 | ⬜ önce keşif sonra iş | G10-25 |
 | S21 | Profil/hedef verisi envanter keşfi yapılacak — mentör/menti profilinde bugün hangi alanların TOPLANDIĞI kod-kanıtlı çıkarılacak; **üç soru (S1/S2/S3) bundan önce kesinleşmez** | 2026-08-28 | ⬜ tasarım belgesi Bölüm 10.6 ön koşul olarak işaretledi; keşif henüz yapılmadı | tasarım belgesi B10 + KALEM 13 |
+| S22 | **Backend PR #56 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda | 2026-08-28 | ⬜ Faz 1b stacked pointer (backend feature commit `0cb237c`) → merge sonrası bump gerekli | G10-01 / çatı PR #129 / backend PR #56 |
 
 > **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
 > boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
@@ -220,7 +221,7 @@
 
 | Kalem | Yer (kanıt 🟩) | Ne / Niyet | Durum → öneri (silme değil) |
 |---|---|---|---|
-| **D2** `llmRetry.ts` / `fetchWithRetry` | `llmRetry.ts:34` (0 import) | LLM retry sarmalayıcı; dosya yorumu "matchReason.ts kullanır" der ama **`matchReason.ts` YOK** (LLM eşleşme-gerekçesi kaldırılmış) | **❓ bilinçli terk mi?** LLM-gerekçe geri gelecek mi = PO kararı. Silme değil, karar bekliyor |
+| **D2** `llmRetry.ts` / `fetchWithRetry` | ~~`llmRetry.ts:34` (0 import)~~ SİLİNDİ | LLM retry sarmalayıcı; tüketici `matchReason.ts` yok (LLM kaldırılmış) | ✅ **YAPILDI (2026-08-28, Faz 1b, backend PR #56)** — G10-01; 0 import kod-teyitli, silindi (PO işleme-al kararı) |
 | **D3** `UserProfile.qualityMultiplier` | `schema.prisma:970` (ikiz); canlı akış `TenantMembership.qualityMultiplier:1065` kullanıyor (certification/sjtScoring/matching/scoring) | Mentör kalite katsayısı; **UserProfile ikizi atıl** (tüm okuma/yazma TenantMembership'te) | **❓ PO:** DROP migration mi (canlı DB) yoksa ileride kullanılacak mı? Silme değil |
 | **U1** `sector-scorer.service.ts` | `:67,99` (dış çağrı 0, coverage FNDA:0) | 5-bileşen sektör-uyum skoru; canlı basit Jaccard etiket-kesişimi kullanıyor | **⏸️ bilinçli bekliyor** = v2 #14 (staging şart). Bağlanmayı bekliyor |
 | **U2** `matchingInterface.ts` (strategy pattern) | 0 import; yorum "USER akışı / planlı JOB_LISTING" | Gelecek iş-ilanı eşleştirmesi şablonu | **⏸️ bilinçli** gelecek-şablon. Dokunma |
@@ -241,7 +242,7 @@
 | **Admin manuel eşleştirme aksiyonları:** `/users/:id/rematch` (`adminRoutes.ts:55`) + `/visibility-optin/:id/confirm` (double-opt-in, `:68`) | Admin yeniden-eşleştirme + görünürlük onayı | Admin eşleşmeler ekranı butonu | BAĞLA (mentor opt-in T7 ile birlikte) |
 | **Profil-güç zinciri:** `profile-completeness.service.ts:28` + `ProfileStrengthCard.tsx` (ikisi de bağlanmamış) | Profil tamamlanma % kartı | Endpoint + dashboard mount (uçtan uca) | BEKLET (profil-güç özelliği) |
 | **`TenantSwitcher.tsx`** (mount yok) + backend `/my-tenants` endpoint YOK | Çok-kurum kullanıcı için kurum değiştirme UI | Nav'a mount + backend membership endpoint | BEKLET (çok-kurum UI) |
-| **`MeetingScheduler.tsx`** (231 satır, mount yok) | Mentor müsaitlik+rezervasyon UI (canonical `mentor/availability` akışı ayrı) | — (canonical akış zaten var) | ❓ PO KARARI (canonical varken kopya = bilinçli terk mi) |
+| **`MeetingScheduler.tsx`** (231 satır, mount yok) | Mentor müsaitlik+rezervasyon UI; backend `/availability` endpoint'i (`meetingRoutes.ts:34`) VAR, bileşen enum+callback ile ona bağlanmak için yazılmış | Bir sayfaya mount + endpoint'e bağla | ❓ PO KARARI — ⚠️ GÜNCELLEME (2026-08-28, Faz 1b): G10-01'de gözden geçirildi, **SİLİNMEDİ** (yarım özellik, ölü değil); bağla/PO kararı bekliyor (G10-20'de izli) |
 | **`PATCH /users/me/social`** (`onboardingController.ts:461`) | Sosyal profil (linkedin/instagram) düzenleme | Profil düzenleme ekranı | ❓ PO / düşük-riskli BAĞLA (**niyet belgede yok**) |
 | **Mükerrer/eski uçlar:** `/api/system-logs` (platform `/logs` varken) · `/api/super-admin/*` (T6, `/platform/*` varken) · `POST/PATCH /tenants` (platform elle kurum) | Eski/paralel platform-admin API'leri | — | ❓ PO KARARI (konsolide mi) |
 | **Endpoint okuma-tarafı boşlukları:** `GET /requests` + `/:id` · `GET /meetings/:id/check-ins` · `/meetings/active` (poller) · `reminders/send` · `orientation-lock` · `questions/respond` (bulk) | Yazma-tarafı bağlı, okuma/liste/tetik tarafı FE'siz | İlgili panel/akış | BEKLET / ❓ PO (uca göre) |

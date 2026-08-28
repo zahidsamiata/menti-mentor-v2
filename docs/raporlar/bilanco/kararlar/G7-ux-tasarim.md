@@ -167,6 +167,8 @@ Etkisi: Sayfa hâlâ eski sloganı gösteriyor; istenen mesaj yansımıyor.
 Kaynak: karar-defteri (F4 / md.22) · Numara: F4 / md.22
 (teyit) `HeroSection.tsx` H1 hâlâ eski: "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin." — yeni slogan YOK; bilanço "karar var kod yok" DOĞRULANDI.
 
+✅ **YAPILDI (2026-08-28, Faz 1b, çatı PR #129):** `HeroSection.tsx:38-45` H1 → **"Mentörlük programınızı zahmetsizce yönetin"** (gradient tasarım korundu). **Alt metin PO'ca kesinleşmedi → DOKUNULMADI** (mevcut "DISC…" alt metni kod'da duruyor; kesinleşince ayrı iş). ⚠️ NOT: `page.tsx` metadata title'ında eski "İnsan Kimyasıyla" ibaresi duruyor (SEO başlığı, ayrı karar — PO teyidi bekliyor).
+
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
@@ -178,6 +180,8 @@ Bugünkü durum: ⬜
 Etkisi: Görsel yön kararsız; G7-11 (tema) ve G7-10 (UX) ile birlikte ele alınabilir.
 İş boyu: S
 Kaynak: karar-defteri (E4 / md.65) · Numara: E4 / md.65
+
+✅ **YAPILDI — belge yönü (2026-08-28, Faz 1b, çatı PR #129):** Yön **canonical'landı** → `konu/06-tasarim-ux.md` (TEMA + LANDING). **KOD DEĞİŞTİRİLMEDİ** (bu bir yön kararı). Uygulama landing renk paleti işi **[G7-11]** ile birlikte (~256 hardcoded nokta, canlı-sonrası) yapılır — tek başına renk noktası dokunmak G7-11'i yarım böler. "Unutulmuş" durumu kapandı (artık canonical'da izli).
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 

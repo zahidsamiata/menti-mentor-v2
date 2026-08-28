@@ -57,6 +57,11 @@ Kaynak: SAYIM (c)/G10 · Numara: md.44
 ⚠️ kod-teyidi: `llmRetry.ts` = 84 satır, **0 import** teyitli (yalnız kendi içinde `fetchWithRetry` tanımı). `MeetingScheduler.tsx` = **231 satır** teyitli, 0 import (bkz. [G10-22]). **"TenantContext-ikiz" ÇÜRÜK-ADAYI:** kodda `TenantContext` tipinin **yalnız TEK tanımı** var (`types.ts`) — "ikiz" ikinci tanım bulunamadı (ya zaten temizlendi ya da middleware-içi inline `req.tenant` tipiydi). llmRetry+MeetingScheduler ölü doğrulandı; ikiz-tip iddiası artık geçersiz.
 ⚠️ ilişkili: [G10-08] (llmRetry ayrı kart), [G10-22] (MeetingScheduler bundle)
 
+🟡 **YARIM — GÜNCELLEME (2026-08-28, Faz 1b, backend PR #56 + çatı PR #129):** Demetin 3 parçasından yalnız 1'i temizlendi:
+- **(a) llmRetry.ts → ✅ SİLİNDİ** (backend PR #56; 0 import kod-teyitli, tüketici `matchReason.ts` silinmiş).
+- **(c) MeetingScheduler.tsx → ⬜ SİLİNMEDİ (yarım özellik, satır 57'deki "ölü" nitelemesi düzeltildi):** backend `/availability` endpoint'i (`meetingRoutes.ts:34`) GERÇEKTEN var; bileşen backend enum'larıyla birebir eşleşiyor + `onSaveAvailability`/`onBook` callback'leri bağlanmak için tasarlanmış → **ölü değil, bağlanmayı bekleyen özellik.** Silme değil (bağla/PO kararı; zaten [G10-20] "şimdilik alma"da izleniyor).
+- **(b) TenantContext-ikiz → 🗑️ GEÇERSİZ** (tek tanım var, ikiz iddiası çürük — kartın kendi kod-teyidi).
+
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
