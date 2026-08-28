@@ -595,3 +595,130 @@ hem ALGILANAN BENZERLİĞİ besler. Yeni veri gerektirmiyor — aynı üç sorud
 
 ---
 
+## Bölüm 11 — Süreç Tasarımı
+
+**KARAR (PO):** Manuel eşleştirme YOK. Algoritma SEÇENEK SUNAR, mentör ve
+menti KENDİ TERCİHLERİYLE görüşme kurar. (T8/76 çelişkisi bu kararla
+kapandı.)
+
+> ⭐ **ARAŞTIRMA BU KARARI DESTEKLİYOR:** eşleştirme sürecine katılım ve
+> gönüllülük algısı ilişki kalitesini artırıyor (Allen/Ragins çizgisi;
+> Allen, Eby, Lentz 2006). Saf otomatik atama dezavantajlı.
+
+**COLD START:** havuz azken algoritma zorlanmaz, eşik altı öneri
+gösterilmez.
+
+**AKIŞ:**
+
+- **Mentör:** kayıt → çekirdek (12 senaryo) → arketip kartı → öğrenme
+  yolculuğu → sertifika → eşleşme
+- **Menti:** kayıt → çekirdek → arketip kartı → eşleşme
+
+**SÜRE BÜTÇESİ:** ilk oturum ~5-6 dk · üç soru ~40 sn · sonraki paketler
+2-3 dk · mentör toplam ~13-15 dk (bugün ~30-38 dk)
+
+---
+
+## Bölüm 12 — Göç Planı
+
+> ⚠️ **AÇIK — karar verilmedi.** Seçenekler:
+
+- **(a)** Sıfırdan yeniden test — en temiz, kullanıcıya yük.
+- **(b)** Mevcut DISC'ten Big Five türet — adaptör kodda VAR
+  (`disc-to-ocean.adapter.ts`), yük yok, doğruluk düşük.
+- **(c)** Karma.
+
+Kullanıcı ~sıfır olduğu için ŞU AN UCUZ; canlıya çıktıktan sonra pahalı.
+
+---
+
+## Bölüm 13 — Kalibrasyon
+
+> ⚠️ **DÜRÜST SINIR:** 50-100 eşleşmeyle ağırlıklar ÖĞRENİLEMEZ (5 boyutlu
+> vektör için yüzlerce gözlem gerekir). Ağırlıklar literatürden SABİTLENİR,
+> sadece YÖN KONTROLÜ yapılır: yüksek skorlu eşleşmeler daha uzun mu
+> sürüyor?
+
+**ANA METRİK:** ilişki süresi (match length). Youth mentörlük
+literatüründe erken kopuş yaygın ve zararlı (Grossman & Rhodes 2002,
+*American Journal of Community Psychology* 30(2):199-219).
+
+**DİĞER:** görüşme sıklığı · memnuniyet · erken terk oranı · hedef
+gerçekleşme.
+
+**KALİBRASYON EŞİĞİ:** kişilik boyutlarının hiçbiri match length veya
+ilişki kalitesiyle r>.10 göstermiyorsa, kişilik ağırlığı düşürülüp
+hedef/değer ağırlığı artırılır.
+
+---
+
+## Bölüm 14 — Açık Kararlar
+
+Belge boyunca `⚠️ AÇIK` işaretli her nokta burada NUMARALI toplanır, her
+birinde `[ ] PO notu:`. Bilinen açıklar (Tur A + Tur B):
+
+1. "İz Açan" arketip adı kesinleşmedi — `[ ] PO notu:`
+2. Karma ölçüm formatı (ipsatif sorunu) tasarlanmadı — `[ ] PO notu:`
+3. 12 senaryonun psikometrik inceliği — kabul edilen takas — `[ ] PO notu:`
+4. Sınırsız yeniden-derinleşme sınırı (G3-03) — `[ ] PO notu:`
+5. Özet alanı yönergesi — `[ ] PO notu:`
+6. Göç planı (a/b/c) — `[ ] PO notu:`
+7. K-anonimlik eşiği (kaç kişiden az olunca gizlensin) — `[ ] PO notu:`
+8. Profil envanteri yapılmadan üç soru kesinleşmez (S21) — `[ ] PO notu:`
+
+---
+
+## Bölüm 15 — Dürüstlük Sınırları
+
+- Eşikler (45-75 bandı, 20 puanlık farklar, %45/30/25 ağırlıkları) MESLEKİ
+  MUHAKEMEDİR, ampirik değil. Eskisinden farkı: gerekçesi YAZILI ve yanlış
+  çıkarsa neyin düzeltileceği belli.
+- Dyadic literatürün çoğu romantik çift/arkadaşlıktan; mentörlüğe
+  genellemede dikkat. Ama mentörlüğe özgü meta-analiz (Eby 2013) aynı
+  yönde.
+- "Aşırı uyumluluk → geri bildirim zorluğu" doğrudan mentörlük kanıtı
+  ZAYIF, yakınsak kanıtla sınırlı.
+- Türkçe uyarlama geçerliği kendi örneklemimizde ayrıca doğrulanmalı.
+- "Bilimsel olarak doğrulanmış test" DENMEZ.
+
+---
+
+## Bölüm 16 — Kalem Listesi (KURAL 9)
+
+Bu belgeden çıkan her kalem: **kalem · durum · numara-adayı-mı**
+
+| # | Kalem | Önerilen durum | Numara adayı mı |
+|---|---|---|---|
+| 1 | Katman ağırlıkları revizyonu (%45/30/25) — canlı formüle bağla | ⬜ AÇIK | evet |
+| 2 | Kişilik içi dağılım kuralları (9.2) uygulanacak | ⬜ AÇIK | evet |
+| 3 | Duygusal denge "tamamlayıcılık" kuralı çürütüldü → iki tarafta yüksek | ⬜ AÇIK | evet |
+| 4 | İki veto (V1/V2) + kademeli gevşeme uygula | ⬜ AÇIK | evet |
+| 5 | Eski "D mentör + S menti" vetosu kaldır | ⬜ AÇIK | evet |
+| 6 | Sektör asimetri düzeltmesi (payda = etiket birleşimi) | ⬜ AÇIK | evet |
+| 7 | Çatılı eşleşme — IndustryNode/LCA mantığını bağla | ⬜ AÇIK | evet |
+| 8 | Kalite çarpanı çift-uygulama hatasını düzelt | ⬜ AÇIK | evet |
+| 9 | Üç soru (S1/S2/S3 menti+mentör) veri toplama ekle | ⬜ AÇIK | evet |
+| 10 | Görünürlük kuralları (10.3) uygula | ⬜ AÇIK | evet |
+| 11 | K-anonimlik eşiği (G1-22) belirle | ❓ TEYİT GEREK | evet |
+| 12 | Eşleşme kartı metni (10.5) — algılanan benzerlik cümlesi | ⬜ AÇIK | evet |
+| 13 | Profil/hedef verisi envanter keşfi (S21) — üç soru ön koşulu | ⬜ AÇIK | evet |
+| 14 | Manuel eşleştirme yok kararı (T8/76 kapandı) | ✅ YAPILDI (KOD DIŞI — karar) | hayır |
+| 15 | Göç planı (a/b/c) seç | ❓ TEYİT GEREK | evet |
+| 16 | Kalibrasyon yön-kontrolü metrikleri kur (match length ana) | ⬜ AÇIK | evet |
+| 17 | "İz Açan" arketip adı onayı | ❓ TEYİT GEREK | evet |
+| 18 | Karma ölçüm formatı (ipsatif) tasarımı | ⬜ AÇIK | evet |
+| 19 | Sınırsız yeniden-derinleşme sınırı (G3-03) | ❓ TEYİT GEREK | evet |
+| 20 | Özet alanı yönergesi | ❓ TEYİT GEREK | evet |
+| 21 | Derinleşme EN BELİRSİZ boyuttan sorsun + profili aşağı çekebilsin | ⬜ AÇIK | evet |
+| 22 | Sertifika hatalı-konu hedefleme ekle | ⬜ AÇIK | evet |
+| 23 | Öğrenme ↔ sertifika varyant yeniden dağıtımı | ⬜ AÇIK | evet |
+| 24 | Menti personası çeşitlendirme (tek tip → çok tip) | ⬜ AÇIK | evet |
+
+> Durum kodları KURAL 10 gereği 6 tanedir: ✅ YAPILDI · 🟡 YARIM · 🔀 PR'DA
+> · ⬜ AÇIK · ❓ TEYİT GEREK · 🗑️ GEÇERSİZ ADAYI. Bu belge tasarım kaydıdır;
+> kalemler `00-KARAR-TAKIP`'e girişlerinde numara alır (KURAL 8 adım 2).
+
+---
+
+*Belge sonu — Tur B tamamlandı (Bölüm 9-16).*
+
