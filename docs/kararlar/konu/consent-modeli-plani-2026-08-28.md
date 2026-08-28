@@ -4,7 +4,9 @@
 
 > **Kapsam (PO, 2026-08-28):** Bu belge YALNIZ **şema tasarımı + migration PLANI**dır (tasarım turu).
 >
-> ✅ **GÜNCELLEME (2026-08-28, Tur A tamamlandı — backend PR #58):** Bu tasarım **KODLANDI + CI'da prova edildi** (şema + `consentService` + dual-write + backfill + testler). **Migration/backfill CANLIYA UYGULANMADI** (Tur B, PO onaylı ayrı adım). **Sapmalar:** (1) backfill `.mjs` yerine **`.ts`** (tsx-run, saf mantık `src/services/consentBackfill.ts`, tsc-temiz); (2) planlanan tasarıma sadık kalındı — keşifte bir ajanın önerdiği `role`-scoped consent **REDDEDİLDİ** (bu belge canonical). Kritik guard `platformTenantController.ts:203` dual-write ile çalışmaya devam eder (G1-08'de consentService'e geçer).
+> ✅ **GÜNCELLEME (2026-08-28, Tur A tamamlandı — backend PR #58):** Bu tasarım **KODLANDI + CI'da prova edildi** (şema + `consentService` + dual-write + backfill + testler). **Sapmalar:** (1) backfill `.mjs` yerine **`.ts`** (tsx-run, saf mantık `src/services/consentBackfill.ts`, tsc-temiz); (2) planlanan tasarıma sadık kalındı — keşifte bir ajanın önerdiği `role`-scoped consent **REDDEDİLDİ** (bu belge canonical). Kritik guard `platformTenantController.ts:203` dual-write ile çalışmaya devam eder (G1-08'de consentService'e geçer).
+>
+> ✅ **GÜNCELLEME (2026-08-28, Tur B1 — migration CANLIDA uygulandı, PR #133):** `20260828000000_add_consent` CANLI Neon'a `db execute` + `migrate resolve --applied` ile uygulandı; `migrate status` = "up to date". **Doğrulama:** Consent tablosu (9 sütun) + `ConsentType`/`ConsentSource` enum + 3 index + 2 FK oluştu; **ön-sayımlar değişmedi** (mevcut veriye dokunulmadı); Consent boş (0 satır). Backfill **DRY-RUN**: 5 satır yazılacak (5 user + 0 tenant). ⬜ **Kalan Tur B2 (ayrı PO onayı):** backfill `--apply`.
 
 ---
 

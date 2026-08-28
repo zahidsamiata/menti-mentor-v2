@@ -487,4 +487,28 @@
 **Sınır:** canlı DB'ye HİÇBİR yazım · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kişi adı yok. **MERGE EDİLMEDİ** (PO).
 
 ---
+
+## 2026-08-28 — S23 / TUR B1: CONSENT MIGRATION CANLIDA (İLK CANLI DB İŞLEMİ)
+
+**Mod:** BYPASS (CANLI DB + belge) · **Branch:** `docs/s23-b1-2026-08-28` (belge senkron; **PR #133**) · MERGE ETME. **Kod DEĞİŞMEDİ, backend commit YOK** — yalnız Tur A'da yazılan migration canlıya uygulandı.
+
+**Bağlam:** Tur A'da Consent modeli yazıldı + CI test-DB'sinde prova yeşildi. Bu tur (B1) aynı migration **canlı Neon'a** uygulandı; backfill yalnız **dry-run**. Gerçek yazım (`--apply`) = B2, ayrı PO onayı.
+
+**Ön kontroller (geçti):** #132 MERGED · backend main `f5ffff2` (migration dosyası) · **DB host secret'sız doğrulandı = canlı `ep-fancy-tooth-ab4u5xhr`** · `migrate status` = yalnız `20260828000000_add_consent` bekliyor (fazlası yok) · Consent tablosu YOK (regclass NULL). **Ön-sayımlar (SELECT):** User 6 · Tenant 2 · User.kvkkConsentAt-dolu 5 · Tenant.kvkkConsentAt-dolu 0.
+
+**Uygulama:** `prisma db execute --file .../20260828000000_add_consent/migration.sql` → "Script executed successfully" · `prisma migrate resolve --applied 20260828000000_add_consent` → marked applied · `migrate status` → "up to date".
+
+**Uygulama sonrası doğrulama (SELECT):** Consent tablosu (9 sütun: id/userId?/tenantId?/type/version/grantedAt/revokedAt?/source/createdAt) + `ConsentType`/`ConsentSource` enum + 3 index (pkey+2) + 2 FK. ⭐ **Ön-sayımlar DEĞİŞMEDİ** (6/2/5/0 — veriye dokunulmadı). Consent = 0 satır.
+
+**Backfill DRY-RUN:** 5 satır yazılacak (5 user + 0 tenant). ⭐ **Tutarlı:** 5 = User.kvkkConsentAt-dolu; 0 = Tenant.kvkkConsentAt-dolu. **`--apply` ÇALIŞTIRILMADI.**
+
+**Çalıştırılan komutlar (tam):** `prisma migrate status` (×2) · geçici salt-okuma SELECT script (silindi) · `prisma db execute --file` · `prisma migrate resolve --applied` · `tsx scripts/backfill-consent.ts` (dry-run). **Yasak komut çalıştırılmadı** (migrate dev/deploy/reset, db push, seed, DROP/TRUNCATE, backfill --apply = sıfır).
+
+**Senkron:** G1-07 kartı 🟡 B1 · consent-modeli-plani ✅ B1 GÜNCELLEME · 00-KARAR-TAKIP S23 kısmi · 09-DURUM ⚡ · bu günlük. Kırık link 0.
+
+**Söz (KURAL 11):** ⭐ **S23-B2** — backfill `--apply` (5 ACIK_RIZA canlı yazım), **ayrı PO onayı**.
+
+**Sınır:** yıkıcı komut YOK · veri değişmedi (ön-sayım teyitli) · backfill --apply YOK · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kod değişmedi. **MERGE EDİLMEDİ** (PO).
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*

@@ -124,6 +124,7 @@ Kaynak: karar-defteri (md.82) · Numara: md.82
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
+🟡 **YARIM (Tur B1 — migration CANLIDA) — GÜNCELLEME (2026-08-28, PR #133):** **Consent migration CANLI Neon'a UYGULANDI** (`db execute` + `migrate resolve --applied`; `migrate status` = up to date). Doğrulama: tablo+9 sütun+2 enum+3 index+2 FK oluştu · **ön-sayımlar DEĞİŞMEDİ** (User 6/Tenant 2/kvkkConsentAt-dolu 5/0 — veri dokunulmadı) · Consent satır = 0 (boş). **Backfill DRY-RUN: 5 satır yazılacak** (5 user, 0 tenant — kvkkConsentAt sayısıyla tutarlı). ⬜ **Kalan Tur B2 (S23, ayrı PO onayı):** backfill `--apply` (gerçek 5 satır yazımı). ⏬ *(Tur A geçmişi ↓)*
 🟡 **YARIM (Tur A) — GÜNCELLEME (2026-08-28, backend PR #58 + çatı PR #132):** **KOD YAZILDI + CI'da prova edildi; canlıya migration UYGULANMADI (Tur B, PO onaylı).** Yapıldı: tipli+sürümlü `Consent` tablosu (şema + Neon-safe additive migration, ÇALIŞTIRILMADI) · `consentService` (record/getActive/getAll/revoke/hasValid + `CONSENT_VERSION='v1.0'`) · dual-write (normal+self-serve+OAuth, `kvkkConsentAt` korundu) · backfill (yalnız ACIK_RIZA, dry-run default, ÇALIŞTIRILMADI) · testler (entegrasyon+birim). Detay: `konu/consent-modeli-plani-2026-08-28.md`. **⬜ Kalan (Tur B):** PO onayıyla migration + backfill canlıya (⚠️ migration TEK BAŞINA) · `CONSENT_VERSION` avukat metniyle sabitlenmesi (G1-10).
 ---
 
