@@ -35,8 +35,8 @@ Etkisi: Havuz kullanımı ve gizlilik sözleşmesi bu karta bağlı.
 İş boyu: M
 Kaynak: karar-defteri GRUP-3 · Numara: md.31-akraba/KARAR 2
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Faz 5. Yeni görünürlük kurallarıyla birleşiyor: karşılıklı tercihler kartta GÖRÜNÜR, ihtiyaç beyanı GÖRÜNMEZ; mentör eşleşme kurulduktan SONRA mentinin ne aradığını görür. Bkz. tasarım belgesi B10.3.
 ---
 **[G4-02] "Neden uyumlu" Katman 1 (menti tarafı metin)**
 Ne: Bir eşleşmenin neden uyumlu olduğunu anlatan zengin ama ham-DISC ifşa etmeyen metin. Mentör→menti yönünde FE'de render ediliyor; menti→mentör yönünde Katman-1 metin alanı FE'de yok.
@@ -152,7 +152,7 @@ Etkisi: Bağlanmamış ama korunan yüzey — karar netleşmeli.
 Kaynak: karar-defteri GRUP-4 · Numara: md.86/A20
 
 [ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[x] PO notu: ❓ ÖNCE KEŞİF: eski super-admin kapısında yeni /platform kapısında OLMAYAN bir yetenek var mı? Varsa taşınır, sonra kapatılır. Keşif olmadan silme YOK. (⚠️ PO'nun ⏸️-listesinde de görünüyordu; keşif kararı esas alındı.)
+[x] PO notu: ❓ ÖNCE KEŞİF: eski super-admin kapısında yeni /platform kapısında OLMAYAN bir yetenek var mı? Varsa taşınır, sonra kapatılır. Keşif olmadan silme YOK. (⚠️ PO'nun ⏸️-listesinde de görünüyordu; keşif kararı esas alındı.) · ⚠️ GÜNCELLEME (2026-08-28): PO teyit etti — keşif kararı DOĞRU (çift-atama çözümü onaylandı); G4-09 ile birlikte keşif turu.
 ---
 **[G4-11] Otomatik anomali/kötüye-kullanım tespiti (v2 derinleştirme)**
 Ne: `abuseDetection.service.ts` v1 basit haliyle var; v2 derinleştirme ve alarm-banner yarım.
@@ -164,8 +164,8 @@ Etkisi: Basit anomaliler yakalanıyor, derin/görsel alarm eksik.
 Kaynak: karar-defteri GRUP-4 · Numara: NUMARASIZ
 ⚠️ bilanço yanılmış değil: kod-teyit → `abuseDetection.service.ts` VAR (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Kullanıcı ~sıfırken kötüye kullanım da yok. v1 basit hali yeterli.
 ---
 **[G4-12] Platform büyüme trendi + platform-geneli aktiflik**
 Ne: Platform istatistikleri anlık sayı gösteriyor ama tarih-filtresi/zaman-serisi yok; büyüme ivmesi ve platform-geneli lastLoginAt aktiflik oranı yok.
@@ -177,8 +177,8 @@ Etkisi: Platform büyüyor mu duruyor mu tek bakışta görülmez.
 Kaynak: karar-defteri GRUP-4 · Numara: Y7
 ⚠️ bilanço yanılmış değil: kod-teyit → `getPlatformStats` platformController'da VAR, tarih-filtresi yok (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Ölçülecek büyüme henüz yok; anlık sayı yeterli.
 ---
 **[G4-13] Platform seviyesi ayarlar UI yok (config env-sabit)**
 Ne: Platform-seviyesi ayarlar env değişkenlerinde sabit; bunları düzenleyecek bir UI yok.

@@ -117,8 +117,8 @@ Etkisi: Kalıcı izole DB kurulmazsa lokal test yeşili aldatıcı olur (asıl k
 Kaynak: karar-defteri (md.İŞ2) · Numara: md.İŞ2
 (teyit) `backend/.env.test` VAR + `backend/tests/helpers/assertTestDatabase.ts` guard VAR — "guard var, izole branch PO adımı" DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Faz 0-park (PO manuel). Kalıcı izole test DB kurulmadan lokal test yeşili ALDATICI — asıl kanıt CI'da.
 ---
 **[G8-09] Veritabanı bağlantı havuzu + mail görevlerinin sıralı çalışması (canlı sonrası)**
 Ne: Veritabanı bağlantı sayısı sınırlanmamış (`connection_limit` yok) ve mail gönderim görevi sırayla (seri) bekliyor. Yoğunlukta bu darboğaz olabilir; canlı sonrası yük testinde ele alınacak.
