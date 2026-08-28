@@ -109,6 +109,7 @@ docs/
 |---|---|---|
 | `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu). 2026-08-20'de tarihli GÜNCELLEME notlarıyla tazelendi | 📸 DONDURULMUŞ (2026-08-11) + ⚠️ güncelleme notları |
 | `docs/devir/07-oturum-gunlugu.md` | **Yaşayan oturum günlüğü** — 2026-08-14 · 2026-08-15 · 2026-08-20 oturum kapanışları + SIRADAKİ İŞ SIRASI + çalışma tarzı. Yeni oturumlar buraya eklenir | 🔄 YAŞAYAN |
+| `docs/devir/08-oturum-tezi-2026-08-28.md` | **Oturum tezi** — 2026-08-28 oturumunun *muhakemesi*: büyük dönüşlerin neden'leri (DISC→Big Five, %50→%25, senaryo, manuel-eşleştirme), yanlış çıkan varsayımlar (dürüstlük kaydı), PO gerekçeleri, 7 yöntem dersi. Kararların canonical'ı DEĞİL — niyet kaydı | 📸 DONDURULMUŞ (2026-08-28) |
 
 > **Canonical eşleşmesi (Kural 1 — devir belgeleri özet/kopyadır, güncel bilgi kararlar/'da):**
 > `01`→`konu/07-calisma-tarzi` · `02`→`09-DURUM` · `03`→`konu/04-guvenlik-ve-kvkk` · `04`→`10-yol-haritasi` (A) + `oz-denetim/stk-admin-bulgu-envanteri` · `05`→**`00-KARAR-TAKIP`** + `09-DURUM` · `06`→kendisi (devir prosedürü) · `07-oturum-gunlugu`→`09-DURUM` + `00-KARAR-TAKIP` (özet).

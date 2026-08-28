@@ -376,4 +376,20 @@
 **Söz:** yeni söz verilmedi; S14 (belge reorg) kısmi ilerledi (tam reorg G9-11/12'de).
 
 ---
+
+## 2026-08-28 — OTURUM TEZİ (muhakeme kaydı) · yalnız-belge, kod YOK
+
+**Mod:** BYPASS · **Branch:** `docs/oturum-tezi-2026-08-28` (temiz main `71ec51c`'ten; **#127 MERGED**) · **PR:** açık, MERGE ETME.
+
+**Ne yapıldı:** Bu oturumun *muhakemesi* ayrı bir 📸 dondurulmuş belgeye kaydedildi → **`08-oturum-tezi-2026-08-28.md`** (8 bölüm). Amaç: belgelerde KARARLAR vardı ama NASIL VARDIĞIMIZ yoktu (bilanço teşhisi: "NİYET BELGELENMEMİŞ"). Tez, büyük dönüşlerin neden'lerini (D1 DISC bırakıldı · D2 görünen-yüz≠motor · D3 Likert→senaryo · D4 %50→%25 · D5 sertifika=öğretim · D6 manuel-eşleştirme yok), yanlış çıkan varsayımları (Y1-Y5 dürüstlük kaydı), PO gerekçelerini ve 7 yöntem dersini (M1-M7) kaydeder. **Yeni karar/yorum ÜRETİLMEDİ** — canonical kararlar `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` + kartlarda.
+
+**G3-15 taşıması (PO kararı işlendi):** yazım hataları Faz 1b/1 → **Faz 6**'ya taşındı — PO gerekçesi: "yeni içerik yazılırken zaten doğru yazılacak; silinecek metni düzeltmenin anlamı yok." G3-15 kartına PO notu + 00-ONCELIK-SIRASI (Faz 1'den çıkar, Faz 6'ya ekle) + 10-yol (Faz 1b'den çıkar, Faz 6'ya ekle) güncellendi.
+
+**Senkron:** 00-INDEX (tez satırı) · bu günlük · 09-DURUM tur notu · G3-15 kartı+öncelik+10-yol. Kırık-link 0.
+
+**Sınır:** DB/seed/kod DEĞİŞMEDİ · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · numara doğurulmadı · kişi adı yok · içerik değiştirilmedi/kaynak uydurulmadı. **MERGE EDİLMEDİ** (PO).
+
+**Söz:** yeni söz verilmedi.
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*
