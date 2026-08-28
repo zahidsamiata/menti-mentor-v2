@@ -2,7 +2,9 @@
 
 **📸 DONDURULMUŞ (2026-08-28)** — Bu belge **G1-07 (rıza sürümü) + G1-08 (OAuth/tipli rıza) uygulama turunun KAYNAĞIDIR.** Tasarım kararı burada; uygulama ayrı, PO-onaylı migration turunda yapılır. Güncel durum için `09-DURUM.md`, açık iş için `00-KARAR-TAKIP.md`.
 
-> **Kapsam (PO, 2026-08-28):** Bu tur YALNIZ **şema tasarımı + migration PLANI**. Migration ÜRETİLMEDİ/ÇALIŞTIRILMADI (canlı = lokal aynı Neon → kırmızı kural, ayrı PO onayı). `schema.prisma`'ya DOKUNULMADI.
+> **Kapsam (PO, 2026-08-28):** Bu belge YALNIZ **şema tasarımı + migration PLANI**dır (tasarım turu).
+>
+> ✅ **GÜNCELLEME (2026-08-28, Tur A tamamlandı — backend PR #58):** Bu tasarım **KODLANDI + CI'da prova edildi** (şema + `consentService` + dual-write + backfill + testler). **Migration/backfill CANLIYA UYGULANMADI** (Tur B, PO onaylı ayrı adım). **Sapmalar:** (1) backfill `.mjs` yerine **`.ts`** (tsx-run, saf mantık `src/services/consentBackfill.ts`, tsc-temiz); (2) planlanan tasarıma sadık kalındı — keşifte bir ajanın önerdiği `role`-scoped consent **REDDEDİLDİ** (bu belge canonical). Kritik guard `platformTenantController.ts:203` dual-write ile çalışmaya devam eder (G1-08'de consentService'e geçer).
 
 ---
 

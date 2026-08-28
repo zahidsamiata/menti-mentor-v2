@@ -458,4 +458,33 @@
 **Sınır:** migration/DB/seed YOK · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kişi adı yok. **MERGE EDİLMEDİ** (PO).
 
 ---
+
+## 2026-08-28 — G1-07 CONSENT MODELİ TUR A (migration'lı kalem; ÇALIŞTIRMA YOK)
+
+**Mod:** BYPASS (KOD) · **Branch:** backend + çatı `feat/g1-07-consent-modeli-2026-08-28` (backend **PR #58** + çatı **PR #132**, temiz main `b687aa9`'dan) · MERGE ETME.
+
+**Bağlam:** Faz 2'nin migration'lı kalemi. Tasarım kaynağı `konu/consent-modeli-plani-2026-08-28.md` (Tur A: kod + CI provası; canlıya uygulama Tur B, PO onaylı).
+
+**FAZ 0 keşif (4 paralel ajan, dosya:satır):** 3 rıza-yazma yolu (authController:176 · selfServe:284/303 · oauthService:112) + sürprizler (joinViaInvitation user yaratmaz, userController.createUser kvkkConsentAt yazmaz). Kritik OKUMA guard `platformTenantController:203` (`kvkkConsentAt != null`) → dual-write'la korundu. Özne: User doğrudan tenantId + TenantMembership; anonymize kvkkConsentAt'a dokunmuyor. `Consent` **TENANT_SCOPED değil** (birey rızası global). Test: CI ephemeral Postgres + `migrate deploy` (globalSetup) → yeni migration OTOMATİK uygulanır (CI provası). Çelişki YOK (ajan-3 role-scoped önerisi reddedildi — plan canonical).
+
+**Yapıldı (kod + CI provası; CANLIYA UYGULANMADI):**
+- **Şema + migration:** `Consent` (userId?/tenantId?/type/version/grantedAt/revokedAt/source) + `ConsentType`(AYDINLATMA/ACIK_RIZA) + `ConsentSource`. `20260828000000_add_consent/migration.sql` — **additive** (IF NOT EXISTS + DO $$ enum/FK guard), **yıkıcı komut YOK** (migrate diff ile üretilip Neon-safe'e uyarlandı). `kvkkConsentAt` SİLİNMEDİ.
+- **consentService:** record/recordSignup/getActive/getAll/revoke/hasValid + `CONSENT_VERSION='v1.0'`. Sınır durumları: çift/boş özne→hata, yok-iken revoke→no-op, revoke yeni satır açmaz, sürüm kontrolü. Opsiyonel `tx`.
+- **Dual-write (transaction kararı: KVKK rızasız kayıt olmamalı):** normal+OAuth `user.create`+consent AYNI transaction'a sarıldı; self-serve mevcut tx'e tenant+user rızası eklendi. OAuth yalnız ilk kayıt (mevcut kullanıcıda yazılmaz).
+- **Backfill:** saf `src/services/consentBackfill.ts` (planBackfill) + `scripts/backfill-consent.ts` (tsx). YALNIZ ACIK_RIZA (AYDINLATMA yazılmaz — PO). dry-run default, `--apply`+5sn. **HİÇBİR MODDA ÇALIŞTIRILMADI.**
+- **Testler:** consentService (11 entegrasyon) · dual-write (4 entegrasyon: 3 yol + OAuth-mevcut-yeni-riza-yok) · backfill (5 birim, DB'siz).
+
+**HİÇBİR DB KOMUTU çalıştırılmadı.** Çalıştırılan prisma: `format`, `validate`, `generate`, `migrate diff` (hepsi salt-okuma/DB'siz).
+
+**Doğrulama:** tsc src ✓ · tsc test ✓ · eslint ✓ · prisma validate ✓. Entegrasyon+birim testler **CI'da** (lokal TEST_DATABASE_URL yok → guard). Pointer `a01993a → 82615de`.
+
+**Sapma:** backfill `.mjs` yerine **`.ts`** (prompt .ts istemişti; tsx mevcut, saf mantık src'de, tsc-temiz). Plana sadık (role-scoped reddedildi).
+
+**Söz (KURAL 11):** ⭐ **S23 — G1-07 Tur B:** migration + backfill CANLIYA, **PO onayı ZORUNLU** (⚠️ migration TEK BAŞINA; `CONSENT_VERSION` avukat metniyle/G1-10 sabitlenmeli).
+
+**Senkron:** G1-07 kartı 🟡 Tur A · consent-modeli-plani ✅ GÜNCELLEME · 00-KARAR-TAKIP S23 · 10-yol Faz 2 · 09-DURUM · bu günlük. Kırık link: 0.
+
+**Sınır:** canlı DB'ye HİÇBİR yazım · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kişi adı yok. **MERGE EDİLMEDİ** (PO).
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*
