@@ -25,8 +25,8 @@ Etkisi: Sıra netleşmezse sonraki modül yatırımları (kurumsal-hafıza/spons
 İş boyu: PO-manuel (iş/strateji kararı)
 Kaynak: karar-defteri (NUMARASIZ, "vizyon sırası") · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Modül sırası geçerli ama ilerleyen yıllar.
 ---
 
 **[G11-02] Gelir / sürdürülebilirlik modeli + pilot-kulüp + gerçek-kullanıcı görüşmeleri**
@@ -38,8 +38,8 @@ Etkisi: Sürdürülebilirlik modeli olmadan ürünün uzun-ömür finansmanı ve
 İş boyu: PO-manuel (iş/strateji kararı)
 Kaynak: karar-defteri (NUMARASIZ, "PO/iş kararı") · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Sistem belli bir hacme gelince minimum ücret. Uzun süre yok.
 ---
 
 ## Bu grupta zaten yapılmışlar (kart yok)

@@ -29,7 +29,7 @@ Kaynak: karar-defteri GRUP 7 (T3-C/B7)
 Numara: NUMARASIZ
 ⚠️ bilanço yanılmış: "❓ kodda karşılıksız/silinmiş adayı" → GERÇEK: backend/CLAUDE.md:92 zaten "llmRateLimiter removed (grep -r llmRateLimiter src boş)" olarak düzeltilmiş; grep teyidi kodda gerçekten yok. Artık ❓ değil, çözülmüş.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -46,7 +46,7 @@ Kaynak: karar-defteri GRUP 7 (T3-C/B8)
 Numara: NUMARASIZ
 ⚠️ bilanço yanılmış: "kodda karşılıksız" → TEYİT EDİLDİ (grep `registerMessages` kodda boş); ancak CLAUDE.md metni zaten "/ kod-bazlı resolver" alternatifini yazdığı için katı çelişki değil — belge-hijyen kalemi olarak açık.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -62,7 +62,7 @@ Etkisi: Orta (sonraki okuyucu bayat gövdeyi gerçek sanabilir)
 Kaynak: karar-defteri GRUP 7 (T1-B2 BH1-5)
 Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -78,7 +78,7 @@ Etkisi: Düşük (yalnız belge; SystemLog gerçeği başka yerde doğru)
 Kaynak: karar-defteri GRUP 7 (T2-D :60)
 Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -111,7 +111,7 @@ Kaynak: karar-defteri GRUP 7 (A11)
 Numara: A11
 ⚠️ Kod-teyit: `durum-panosu-2026-08-14.md:3` "🔄 YAŞAYAN · Son güncelleme: 2026-08-14" DOĞRULANDI (dosya mevcut, etiket bayat).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -127,7 +127,7 @@ Etkisi: Orta-Yüksek (git bozulma riski, canlı-öncesi güvenlik ağı)
 Kaynak: karar-defteri GRUP 7 (A10)
 Numara: A10
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -144,7 +144,7 @@ Kaynak: karar-defteri GRUP 7 (T2-C :64)
 Numara: NUMARASIZ
 ⚠️ Kod-teyit: `docs/raporlar/icerik/` altında 6 belge (00-index + bolumler/01-05) MEVCUT DOĞRULANDI; DISC kod-gerçeği 32 (backend seed) — bilanço "20 DISC bayat" iddiası tutarlı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -161,7 +161,7 @@ Kaynak: karar-defteri GRUP 7 (T2-B :207)
 Numara: NUMARASIZ
 ⚠️ Kod-teyit: `PROJECT_STATUS.md` kökte MEVCUT DOĞRULANDI; CLAUDE.md "Genel tanıtım (dondurulmuş onboarding): PROJECT_STATUS.md" satırı bunu işaret ediyor.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -178,7 +178,7 @@ Kaynak: karar-defteri GRUP 7 (T2-B :210)
 Numara: NUMARASIZ
 ⚠️ Kod-teyit: `docs/kararlar/00-INDEX.md` MEVCUT; `docs/raporlar/` altında INDEX'te anılmayan çok sayıda belge var (bilanço/icerik/kesif klasörleri).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -194,7 +194,7 @@ Etkisi: Orta (belge-düzeni tamlığı)
 Kaynak: karar-defteri GRUP 7 (A5)
 Numara: A5
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -210,7 +210,7 @@ Etkisi: Orta-Yüksek (uzun-ömür sürdürülebilirlik; ama canlı-akışı kili
 Kaynak: karar-defteri GRUP 7 (A5)
 Numara: A5
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -227,7 +227,7 @@ Kaynak: karar-defteri GRUP 7 (T2-B belge-mimarisi :156)
 Numara: NUMARASIZ
 ⚠️ Kod-teyit: `docs/raporlar/kesif/admin-panelleri-tasarim-2026-08-02.md` MEVCUT DOĞRULANDI; 6 panel (Kpi/Members/Meetings/DiscSummary + drill-down) kod-tarafında uygulanmış (bkz. G4 ✅ platform paneli kalemleri).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -243,7 +243,7 @@ Etkisi: Orta (gizlilik/nötrlük; belge-hijyen)
 Kaynak: karar-defteri GRUP 7 (T3-C)
 Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -259,7 +259,7 @@ Etkisi: Düşük (yalnız belge tutarlılığı)
 Kaynak: karar-defteri GRUP 7 (BÇ5/E12)
 Numara: BÇ5/E12
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 
@@ -276,7 +276,7 @@ Kaynak: karar-defteri GRUP 7 (T2-E "SAYILMADI" notu)
 Numara: NUMARASIZ
 ⚠️ Not: Bu kalem G9-08 ile aynı belge-kümesine bakar ama farklı karar-eksenidir (G9-08 = "bayat olduğunu tespit"; G9-16 = "arşiv mi düzelt mi seçimi"). İkisi tek işte kapatılabilir.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---
 

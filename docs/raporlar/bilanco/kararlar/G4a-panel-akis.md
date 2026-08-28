@@ -48,7 +48,7 @@ Etkisi: Menti eşleşmesine güveni artırır.
 Kaynak: karar-defteri GRUP-3 · Numara: KARAR 7
 ⚠️ ilişkili: [G4-21] (Katman-2 zengin gerekçe, ertelenmiş)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-03] Manuel eşleştirme (sıfırdan çift oluşturma)**
@@ -61,8 +61,8 @@ Etkisi: Yönetici kontrolü ↔ algoritma bütünlüğü dengesi.
 Kaynak: karar-defteri GRUP-3 · Numara: md.76 (T8)/Ç5
 ⚠️ bilanço yanılmış değil: kod-teyit → manuel-pair/createPair endpoint 0 dosya, "algoritmik-only" doğru.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Manuel eşleştirme YOK. Algoritma seçenek sunar, mentör ve menti kendi tercihleriyle görüşme kurar. Strateji belgesi geçerli, envanter 'eksik' kaydı YANLIŞ.
 ---
 **[G4-04] Yöneticilik-verme akışı yeniden kurgu + "tüm onaylı liste"**
 Ne: Bir üyeye admin yetkisi verme akışı. Şu an `promote-admin` (max 3) var; ama "tüm onaylı üyeleri listeleyip seç" ekranı eksik ve akışın yeniden kurgulanması sözü verilmiş.
@@ -74,7 +74,7 @@ Etkisi: Çoklu-yönetici yönetimi kolaylaşır.
 Kaynak: karar-defteri GRUP-3 · Numara: md.A9
 ⚠️ bilanço yanılmış değil: kod-teyit → `admin/managers/page.tsx` promote VAR (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-05] adminSettings zayıf/izole desen**
@@ -86,7 +86,7 @@ Etkisi: Tutarsız izolasyon deseni ileride sızıntı riski taşıyabilir.
 İş boyu: S
 Kaynak: karar-defteri GRUP-3 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-06] KARAR 1 "çok yakın=BÜYÜK harf" sayısal eşik kalibrasyonu**
@@ -98,7 +98,7 @@ Etkisi: Yanlış eşik = yanıltıcı ikincil-harf gösterimi.
 İş boyu: S
 Kaynak: karar-defteri GRUP-3 · Numara: (md.12 alt)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-07] Sektör kolonu havuzda "—" (veri boş)**
@@ -110,7 +110,7 @@ Etkisi: Sektör bazlı tarama şimdilik boş.
 İş boyu: S
 Kaynak: karar-defteri GRUP-3 · Numara: B3/md.21(v2)/KARAR 10
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -127,7 +127,7 @@ Etkisi: Platform admini sorunlu kişiye tek-tık inemez.
 Kaynak: karar-defteri GRUP-4 · Numara: md.77 (T9)
 ⚠️ bilanço yanılmış değil: kod-teyit → `/tenants/:id/users/:userId` route 0 dosya (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-09] Mükerrer platform API konsolidasyonu**
@@ -140,7 +140,7 @@ Etkisi: Ölü/mükerrer API yüzeyi bakım borcu ve karışıklık.
 Kaynak: karar-defteri GRUP-4 · Numara: md.74 (T6)/A1
 
 [ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: ❓ ÖNCE KEŞİF: eski super-admin kapısında yeni /platform kapısında OLMAYAN bir yetenek var mı? Varsa taşınır, sonra kapatılır. Keşif olmadan silme YOK.
 ---
 **[G4-10] setVisibilityOptIn Taraf-1 (super-admin) sil/bağla/ertele**
 Ne: super-admin tarafındaki `setVisibilityOptIn` yeteneği kasıtlı korunmuş, davranışsal testli. Silinecek mi, bağlanacak mı, ertelenecek mi kararı bekliyor.
@@ -152,7 +152,7 @@ Etkisi: Bağlanmamış ama korunan yüzey — karar netleşmeli.
 Kaynak: karar-defteri GRUP-4 · Numara: md.86/A20
 
 [ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: ❓ ÖNCE KEŞİF: eski super-admin kapısında yeni /platform kapısında OLMAYAN bir yetenek var mı? Varsa taşınır, sonra kapatılır. Keşif olmadan silme YOK. (⚠️ PO'nun ⏸️-listesinde de görünüyordu; keşif kararı esas alındı.)
 ---
 **[G4-11] Otomatik anomali/kötüye-kullanım tespiti (v2 derinleştirme)**
 Ne: `abuseDetection.service.ts` v1 basit haliyle var; v2 derinleştirme ve alarm-banner yarım.
@@ -189,7 +189,7 @@ Etkisi: Ayar değişikliği kod/deploy gerektirir.
 İş boyu: M
 Kaynak: karar-defteri GRUP-4 · Numara: Y7
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-14] Sistem sağlığı mail-göstergesi (gerçek probe değil)**
@@ -201,7 +201,7 @@ Etkisi: "Sağlıklı" göstergesi yanıltıcı olabilir (config var ≠ mail ça
 İş boyu: S
 Kaynak: karar-defteri GRUP-4 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-15] `reviewedBy='platform-admin'` sabit metin → gerçek kimlik**
@@ -213,7 +213,7 @@ Etkisi: Denetim izinde gerçek aktör kaybı (çoklu-admin senaryosu).
 İş boyu: S
 Kaynak: karar-defteri GRUP-4 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-16] user-reports listesi 200-tavan, sayfalama yok**
@@ -225,7 +225,7 @@ Etkisi: 200'den fazla rapor olunca eskiler görünmez.
 İş boyu: S
 Kaynak: karar-defteri GRUP-4 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-17] `PLATFORM_ADMIN_EMAIL` `.env.example`'da yok**
@@ -237,7 +237,7 @@ Etkisi: Prod'da yanlış/boş admin mail adresi riski.
 İş boyu: S
 Kaynak: karar-defteri GRUP-4 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -253,8 +253,8 @@ Etkisi: Fotoğrafsız profiller havuz deneyimini zayıflatır.
 İş boyu: S
 Kaynak: karar-defteri GRUP-3 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Fotoğraf şimdilik OPSİYONEL. Yükleme ve kartta gösterim zaten çalışıyor. Zorunluluk kararı sonraya.
 ---
 **[G4-19] Premium "kilitli görünür" + `Tenant.plan/limits` (freemium)**
 Ne: Freemium modeli için `Tenant.plan` şema alanı var (FREE/PRO/ENTERPRISE) ama plan-bazlı kısıtlama/kilitleme uygulama mantığı yok.
@@ -266,7 +266,7 @@ Etkisi: İş modeli/gelir kararına bağlı; şu an kilitlenen bir şey yok.
 Kaynak: karar-defteri GRUP-9 (v2-backlog) · Numara: E13/E24
 ⚠️ bilanço yanılmış değil: kod-teyit → `schema.prisma:162 plan @default("FREE")` VAR, limit-mantığı yok (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -282,7 +282,7 @@ Etkisi: Toplu davet olmadan üye eklemek tek tek.
 İş boyu: L
 Kaynak: karar-defteri GRUP-9 (v2-backlog) · Numara: md.17/F6
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-21] "Neden uyumlu" Katman-2 (zengin gerekçe)**
@@ -295,7 +295,7 @@ Etkisi: Şimdilik Katman-1 metniyle yetiniliyor.
 Kaynak: karar-defteri GRUP-9 (v2-backlog) · Numara: md.19/KARAR 8
 ⚠️ ilişkili: [G4-02] (Katman-1 menti tarafı FE eksik)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 

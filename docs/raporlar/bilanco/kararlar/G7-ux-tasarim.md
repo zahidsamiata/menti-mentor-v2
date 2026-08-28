@@ -30,7 +30,7 @@ Etkisi: Görme engelli/klavye kullanıcısı bazı akışları tamamlayamayabili
 Kaynak: karar-defteri (md.50) · Numara: md.50
 (teyit) `DailyQuestionWidget.tsx`'te seçenek grubu için `radiogroup`/`aria` yok; `ReportUserButton.tsx` penceresi etiketsiz — bilanço iddiası DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-02] DISC renklerinin açık temada okunabilirliği (WCAG kontrast)**
@@ -42,7 +42,7 @@ Etkisi: Az gören kullanıcı DISC etiketini okuyamayabilir; kurumsal erişilebi
 İş boyu: S
 Kaynak: karar-defteri (md.64/D22/D23) · Numara: md.64 / D22 / D23
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-03] Arama motoru teknik paketi (favicon / paylaşım kartı / site haritası / robots / dil)**
@@ -55,7 +55,7 @@ Etkisi: Eksik parçalar (site haritası/robots dosyası/mutlak-URL tabanı) SEO 
 Kaynak: karar-defteri (md.51-55) · Numara: md.51-55
 ⚠️ bilanço yanılmış: {favicon/OG/robots/lang topluca YOK} → {gerçek: `favicon.ico` VAR · ana sayfada `openGraph`+`twitter`+`robots` meta VAR · `<html lang="tr">` VAR}. **Gerçekten eksik olanlar:** `metadataBase` (mutlak URL tabanı) YOK · `sitemap.ts`/`sitemap.xml` YOK · `robots.ts`/`robots.txt` dosyası YOK (yalnız sayfa-içi robots meta var) · `opengraph-image` görseli YOK · dil `tr` (istenen `tr-TR` değil).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-04] `www` adresini çıplak alan adına yönlendirme (301) — KRİTİK**
@@ -68,7 +68,7 @@ Etkisi: SEO otoritesi iki adrese bölünür; aynı dosya eksikliği admin sunucu
 Kaynak: karar-defteri (md.66) · Numara: md.66
 (teyit) `frontend/src/middleware.ts` ve `frontend/middleware.ts` YOK (`ls` sonucu) — bilanço iddiası DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-05] Ziyaretçi ölçümü (GTM + GA4 + Clarity + Search Console) — kısmi**
@@ -81,8 +81,8 @@ Etkisi: Ölçüm olmadan canlıda kullanıcı davranışı görünmez; çerez iz
 Kaynak: karar-defteri (md.56) · Numara: md.56
 ⚠️ bilanço yanılmış: {kod var, merge/deploy yok} → {gerçek: GTM/GA4/gtag/Clarity/dataLayer izi frontend kaynağında YOK — grep boş; kod henüz eklenmemiş, yalnız #110'da bekliyor}.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Çıkışta analytics OLMAYACAK (PO kararı). #110 kilitli kalır, çerez bandı onunla gelir.
 ---
 **[G7-06] Çıkışta Google Analytics kullanılsın mı? (PO kararı)**
 Ne: Google Analytics'in canlıya alınıp alınmayacağı iş kararı. "Evet" derse çerez bandı (G7-11) ve analitik paketi (G7-05) öncelik olarak yükselir; #110 buna bağlı.
@@ -93,8 +93,8 @@ Etkisi: Karar diğer iki kalemin (çerez bandı + analitik) önceliğini belirle
 İş boyu: PO-manuel (iş kararı)
 Kaynak: karar-defteri (A19) · Numara: A19
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Çıkışta analytics OLMAYACAK (PO kararı). #110 kilitli kalır, çerez bandı onunla gelir.
 ---
 **[G7-07] GTM + GA4 en son kontrol (canlı deploy sonrasına ertelendi)**
 Ne: Etiket yöneticisi ve GA4'ün gerçekten çalıştığının canlı deploy'dan sonra doğrulanması. PO tarafından bilinçli olarak en sona ertelendi.
@@ -105,7 +105,7 @@ Etkisi: Erteleme sürerse, canlıda ölçümün doğruluğu deploy anına kadar 
 İş boyu: PO-manuel (canlı sonrası kontrol)
 Kaynak: karar-defteri (A12) · Numara: A12
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-08] Kurumsal sayfalar + footer/nav/yukarı-çık/WhatsApp/yapısal-veri**
@@ -117,7 +117,7 @@ Etkisi: Kurumsal güven ve SEO zenginliği eksik kalır.
 İş boyu: M
 Kaynak: karar-defteri (md.57-63) · Numara: md.57-63
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-09] WCAG 2.1 AA erişilebilirlik denetimi (bütünsel)**
@@ -129,7 +129,7 @@ Etkisi: Bütünsel denetim yapılmazsa dağınık erişilebilirlik açıkları g
 İş boyu: M
 Kaynak: karar-defteri (md.64) · Numara: md.64
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-10] Açılış sayfası UX paketi (ipuçları, tıklanabilirlik, tutarsızlıklar, mobil)**
@@ -142,7 +142,7 @@ Etkisi: İlk izlenim ve dönüşüm (kayıt) oranı olumsuz etkilenir.
 Kaynak: karar-defteri (md.22 v2) · Numara: md.22(v2)
 (teyit) `AlgorithmBento.tsx` mevcut — mantık-hatası iddiasının bağlamı doğrulandı (bileşen var).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-11] Açılış sayfası koyu/açık tema seçimi (canlı sonrasına ertelendi)**
@@ -154,7 +154,7 @@ Etkisi: Ertelenirse açılış sayfası tek temada kalır (uygulama-içi tema to
 İş boyu: M
 Kaynak: karar-defteri (md.22 v2) · Numara: md.22(v2)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-12] Açılış sayfası ana başlık (slogan) değişikliği**
@@ -167,7 +167,7 @@ Etkisi: Sayfa hâlâ eski sloganı gösteriyor; istenen mesaj yansımıyor.
 Kaynak: karar-defteri (F4 / md.22) · Numara: F4 / md.22
 (teyit) `HeroSection.tsx` H1 hâlâ eski: "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin." — yeni slogan YOK; bilanço "karar var kod yok" DOĞRULANDI.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-13] Yumuşak lacivert açılış teması yönelişi (UNUTULMUŞ)**
@@ -179,7 +179,7 @@ Etkisi: Görsel yön kararsız; G7-11 (tema) ve G7-10 (UX) ile birlikte ele alı
 İş boyu: S
 Kaynak: karar-defteri (E4 / md.65) · Numara: E4 / md.65
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G7-14] Mesaj/konuşma listesinde sanallaştırma yok (kozmetik, düşük)**
@@ -191,7 +191,7 @@ Etkisi: Çok uzun listelerde hafif yavaşlık; düşük etki.
 İş boyu: S
 Kaynak: karar-defteri (NUMARASIZ, kapasite :37) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 

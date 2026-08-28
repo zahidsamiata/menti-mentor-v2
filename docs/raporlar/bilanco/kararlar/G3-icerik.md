@@ -43,8 +43,8 @@ Etkisi: Eşleştirme doğru olsa bile mentör "şimdi ne yapacağım" sorusuna �
 Kaynak: karar-defteri GRUP 6 (md.31/A1) · Numara: md.31 / A1
 KOD-TEYİT: `coachingSuggestions.ts` YALNIZ `adminController.ts` tarafından import ediliyor (yöneticiye) — mentöre-menti yaklaşım içeriği kodda YOK. Doğrulandı, korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: ⏸️ değil — TASARIM TEZİNE BAĞLI. Model değişimi (DISC→Big Five) bunu yeniden tanımlıyor; tez bitince sıraya girecek.
 ---
 **[G3-02] DISC-DERİNLEŞME kurgusu (kademeli karakter netleşmesi + karşıya-yaklaşım)**
 Ne: Kullanıcının DISC profilinin zamanla, ek sorularla derinleşip netleşmesi + karşıdakine yaklaşım katmanı. Adaptif motor ve DEEPENING soruları var (~%50-60 zemin) ama aksiyon/UX/sınır kısmı eksik.
@@ -56,7 +56,7 @@ Etkisi: Yarı-kurulu güçlü bir retention özelliği atıl; bitirilirse menti 
 İş boyu: L
 Kaynak: karar-defteri GRUP 6 (A1) · Numara: A1
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-03] "Sınırsız-yeniden-derinleşme davranışı" kararı**
@@ -68,7 +68,7 @@ Etkisi: Kararsız bırakılırsa profil her derinleşmede oynar, eşleştirme tu
 İş boyu: S
 Kaynak: karar-defteri GRUP 6 (A3) · Numara: A3
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-04] STK-custom sorunun değer üretip üretmediği (canlı 1 kullanım)**
@@ -81,8 +81,8 @@ Etkisi: Kullanılmayan özellik bakım yükü; kaldırılırsa yüzey sadeleşir
 Kaynak: karar-defteri GRUP 3 (B8a/E6) · Numara: B8a / E6
 KOD-TEYİT: STK_CUSTOM ayrımı `questionController.ts`/`questionService.ts`'te mevcut (doğru çalışıyor); canlı kullanım sayısı DB → ❓ kalır.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: STK-özel sorular KALIYOR ve GENİŞLETİLİYOR — kurumlar şıklı soru ve anket yapabilmeli. ⚠️ G3-13'ü (answerType/migration) canlandırır.
 ---
 **[G3-05] Sertifika soru ekleme yetkisi + gerekçe belgesi**
 Ne: Sertifika sorularını yalnız platform/yönetici ekleyebilir (kurum ekleyemez) — bilinçli kısıt. Kod-kısıt VAR ama "neden kurum ekleyemez" gerekçe belgesi zayıf.
@@ -93,7 +93,7 @@ Etkisi: İşlevsel tamam; belge zayıflığı sonraki geliştiriciyi/PO'yu belir
 İş boyu: S
 Kaynak: karar-defteri GRUP 3 (md.13-akraba/B13) · Numara: md.13-akraba / B13
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-06] DISC canlı soru sayısı teyidi (kod 32 ↔ canlı ~20)**
@@ -106,7 +106,7 @@ Etkisi: Canlı 20 ise seed eksik demek; kullanıcı eksik test alıyor olabilir.
 Kaynak: karar-defteri GRUP 6 (Ç3-canlı) · Numara: Ç3-canlı
 KOD-TEYİT: `seed.ts` 34 tip-girişi grep'le doğrulandı (kod 32 üretir); canlı sayı DB → ❓.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-07] SJT içerik 3→4 genişletme mi belge-düzelt mi**
@@ -118,7 +118,7 @@ Etkisi: 4'e çıkarma içerik+puanlama işi; 3'te bırakma yalnız belge hijyeni
 İş boyu: S
 Kaynak: karar-defteri GRUP 6 (md.33-akraba) · Numara: md.33-akraba
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-08] Sertifika senaryo seed↔canlı tutarsızlığı (kod 20 ↔ canlı ~5)**
@@ -144,7 +144,7 @@ Etkisi: Güvenli runner olmadan seed çalıştırma riski (yanlış script = ver
 Kaynak: karar-defteri GRUP 6 (md.73/T5) · Numara: md.73 / T5
 KOD-TEYİT: `backend/package.json`'da `seed-certification` referansı grep'le ARANDI, BULUNAMADI. Doğrulandı, korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-10] PO TÜM soruları görüp beğendiğini ayıracak (68-soru inceleme belgesi HAZIR, boş)**
@@ -157,8 +157,8 @@ Etkisi: Onaysız içerik canlıda; kalite/tutarlılık PO gözünden geçmemiş.
 Kaynak: karar-defteri GRUP 6 (A2/A4) · Numara: A2 / A4
 KOD-TEYİT: `sorular-po-inceleme-2026-08-26.md` içinde ~68 boş "PO notu" kutusu (grep: 69 eşleşme) doğrulandı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: ⏸️ değil — TASARIM TEZİNE BAĞLI. Model değişimi (DISC→Big Five) bunu yeniden tanımlıyor; tez bitince sıraya girecek.
 ---
 **[G3-11] 17 eşleştirme PO-onay noktası (16 komb.+anti-match+tiebreak+%60-40+genel)**
 Ne: Eşleştirme uyum matrisinin PO-onay noktaları (16 DISC kombinasyonu + anti-match + tiebreak + %60/40 ağırlık + genel) tümüyle boş işaretli. İçerik/psikometri onayı.
@@ -182,7 +182,7 @@ Etkisi: Eksik keşif → içerik kararları yarım bilgiyle alınır.
 İş boyu: M
 Kaynak: karar-defteri GRUP 6 (A4) · Numara: A4
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-13] Kurum-özel soru cevap-tipi (answerType şema alanı yok, migration)**
@@ -195,8 +195,8 @@ Etkisi: Kurumlar yalnız Likert soru sorabiliyor; açık-uçlu/şıklı esnekli�
 Kaynak: karar-defteri GRUP 6 (md.13/B8b) · Numara: md.13 / B8b
 KOD-TEYİT: `answerType` backend/schema/seed'te grep'le ARANDI — YALNIZ belgelerde geçiyor, KOD'da YOK. Likert-sabit doğrulandı, korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: PO kararıyla canlandı (⏸️→✅) — STK şıklı soru + anket isteği answerType şema alanını zorunlu kılıyor (migration).
 ---
 **[G3-14] İçerik felsefesi gözlemleri (reverse-kod yok, sosyal-beğenilirlik, tek-persona, outcome tutarsız)**
 Ne: İçerik-kalite gözlemleri — ters-kodlu madde yok, sosyal-beğenilirlik yanlılığı, tek-persona varsayımı, outcome tutarsızlığı. KOD DIŞI içerik kalitesi meselesi.
@@ -207,7 +207,7 @@ Etkisi: Ölçüm yanlılığı → DISC sonuçları sistematik sapabilir.
 İş boyu: M
 Kaynak: karar-defteri GRUP 6 (NUMARASIZ) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-15] Soru metni yazım hataları**
@@ -219,7 +219,7 @@ Etkisi: Kullanıcı güvenini zedeleyen görünür yazım hataları.
 İş boyu: S
 Kaynak: karar-defteri GRUP 6 (NUMARASIZ) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-16] Global içerik seed'i ana Neon'a uygula (DISC+LearningJourney "boş" görünüyor)**
@@ -231,7 +231,7 @@ Etkisi: İçerik canlıda eksikse kullanıcı boş test/yolculuk görür.
 İş boyu: M
 Kaynak: karar-defteri GRUP 6 (NUMARASIZ/Y6) · Numara: NUMARASIZ / Y6
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-17] Öğrenme yolculuğu kalan uçları (DISC ton + STK düzenleme + içerik onayı + uçtan uca test)**
@@ -243,7 +243,7 @@ Etkisi: Yarım-cilalı özellik; kenar durumlar canlıda sürpriz çıkarabilir.
 İş boyu: M
 Kaynak: karar-defteri GRUP 6 (A15) · Numara: A15
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-18] 6 canlı-teyit kuyruğu (DISC/sertifika/SJT/LearningStage/kurum-özel canlı sayı + FE-progress haritası)**
@@ -255,7 +255,7 @@ Etkisi: Kod↔canlı farkları görünmeden içerik kararları eksik bilgiyle al
 İş boyu: S (DB-teyit turu)
 Kaynak: karar-defteri GRUP 6 (NUMARASIZ/Y6) · Numara: NUMARASIZ / Y6
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G3-19] Sertifika/etiket havuzu admin-yönetilir tablo + etiket ekleme akışı**
@@ -268,7 +268,7 @@ Etkisi: Etiket/sertifika havuzu elle-kod-bağımlı; kurumlar kendi kelime dağa
 Kaynak: karar-defteri GRUP 3 (KARAR 12/A9 + md.C20) · Numara: KARAR 12/A9 (+ md.C20)
 > Not: SAYIM'da bu iki satır (KARAR 12/A9 ve md.C20) ayrı listeleniyor; tek karar-yüzeyi olduğu için burada tek kartta birleştirildi — numara doğurulmadı, ikisi de kaynak olarak anıldı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 

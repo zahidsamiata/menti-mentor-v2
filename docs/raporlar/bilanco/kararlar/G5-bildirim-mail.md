@@ -27,8 +27,8 @@ Kaynak: karar-defteri md.37m · Numara: NUMARASIZ (defterde 🔴 PO-manuel env)
 ⚠️ ilişkili: [G1] `destek@` config'te tanımsız (md.84) — bu mailin gönderen adresi de `destek@`; ikisi aynı env kurulumuna bağlı.
 ⚠️ ilişkili: [G5-02] kurum onay/ret maili — aynı bayrağın arkasında.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
 ---
 
 **[G5-02] Kurum onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL`**
@@ -41,8 +41,8 @@ Etkisi: Prod'da `PLATFORM_ADMIN_EMAIL` varsayılan kalırsa platform giriş/ikin
 Kaynak: karar-defteri md.6/84 · Numara: NUMARASIZ (defterde 🟡)
 ⚠️ ilişkili: [G5-01] gönderim bayrağı · [G1] `destek@` tanımsız (md.84)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.
 ---
 
 **[G5-03] Otomatik nudge (sistem-tetikli dürtme)**
@@ -55,7 +55,7 @@ Etkisi: Otomatik olmayınca pasif üye takibi yöneticinin elle çabasına bağl
 Kaynak: karar-defteri md.24(v2) · Numara: NUMARASIZ (defterde 🔵)
 ⚠️ ilişkili: [G4] elle nudge/hatırlatma (✅ mevcut, bu otomatik versiyonu)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -69,7 +69,7 @@ Etkisi: Bekleyen menti, mentör uygun olduğunda proaktif haber alamaz — geri 
 Kaynak: karar-defteri (NUMARASIZ, "grep 0 dosya — KOD-TEYİT") · Numara: NUMARASIZ
 (Not: bu kalem SAYIM'da G4'ten G5'e taşındı — G5'te kart aldı.)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -82,7 +82,7 @@ Etkisi: Kullanıcı sorununu/önerisini iletemez; ürün ekibi sinyal alamaz. Su
 İş boyu: M
 Kaynak: karar-defteri E24 (teshis) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -96,7 +96,7 @@ Etkisi: Ritim tanımlanmazsa mentöre ya çok az (kaçırır) ya çok çok (buna
 Kaynak: karar-defteri (NUMARASIZ, "push stub · bilinçli ileride") · Numara: NUMARASIZ
 ⚠️ ilişkili: [G4] mentör bildirim ritmi / mentör retention (aynı temanın panel tarafı) · [G5-07] gerçek push (taşıyıcı stub olduğu için ritim henüz uygulanamıyor)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -110,7 +110,7 @@ Etkisi: `sent:true` dönmesi "gönderildi" yanılsaması yaratabilir — gerçek
 Kaynak: karar-defteri md.23 · Numara: NUMARASIZ
 ⚠️ ilişkili: [G4] mentör bildirim ritmi · [G5-06] mentör bildirim ritmi (ritim bu taşıyıcıya bağlı) · [G5-04] bekleme salonu bildirim izni
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 

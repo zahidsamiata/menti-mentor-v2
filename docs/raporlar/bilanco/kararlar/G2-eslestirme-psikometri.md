@@ -47,7 +47,7 @@ Etkisi: Onaysız matris üretimde eşleştirme kararlarını belirliyor; PO göz
 Kaynak: karar-defteri GRUP 2 (md.103) · Numara: md.103
 KOD-TEYİT: `scoring.ts:44-45 DISC_COMPATIBILITY` — `D:{D:60,I:75,S:30,C:85}` belgeyle BİREBİR doğrulandı; `:74` matrixScore kullanımı. Korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-02] Hard-gate toksik blok onayı (kod ✅, onay boş)**
@@ -60,7 +60,7 @@ Etkisi: Onaysız bir "sabit güvenlik bloğu" davranışı üretimde; PO hangi �
 Kaynak: karar-defteri GRUP 2 (md.103/03:23) · Numara: md.103 / 03:23
 KOD-TEYİT: `scoring.ts:20-26 ANTI_MATCH_RULES=[{mentorDisc:'D',mentiDisc:'S'}]` + `isAntiMatch()`; `scoring.config.ts:33 BLOCKED_PAIRS`; `scoring.service.ts:36,46 isHardBlocked/hard-gate`. Doğrulandı, korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-03] Tiebreak sırası D>I>S>C PO onayı**
@@ -72,7 +72,7 @@ Etkisi: Onaysız bir öncelik varsayımı sıralamayı belirliyor; D-baskın ada
 İş boyu: S
 Kaynak: karar-defteri GRUP 2 (madde 103 akraba) · Numara: (madde 103 akraba)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-04] Psikometrik gerekçe BELGELENMEMİŞ (matris/ağırlık/eşik ampirik kaynaksız)**
@@ -85,7 +85,7 @@ Etkisi: Ürünün çekirdek vaadi (isabetli eşleştirme) dayanaksız varsayıml
 Kaynak: karar-defteri GRUP 2 (md.103) · Numara: md.103
 KOD-TEYİT: `discLetters.ts:23` "⚠️ BAŞLANGIÇ DEĞERLERİ — gerçek kullanıcı verisi biriktikçe ileride kalibre edilecek" itirafı grep'le doğrulandı; `scoring.ts:44-45` sabit matris. Korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-05] %60/%40 VARSAYILAN oranın PO onayı**
@@ -98,7 +98,7 @@ Etkisi: Onaysız ağırlık dengesi tüm eşleştirmeleri belirliyor; "neden sek
 Kaynak: karar-defteri GRUP 2 (md.9 alt) · Numara: (md.9 alt)
 KOD-TEYİT: `scoring.ts:89 DEFAULT_SECTOR_WEIGHT=0.6`, `:106` fallback; `05-felsefe-motoru.md:184` "NEDEN 60/40? gerekçe YOK" gözlemi. Korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-06] "Varsayılana düşen profil oranı" izleme metriği**
@@ -110,7 +110,7 @@ Etkisi: Sistemin "aslında ne kadarını ölçemediği" görünmez; kalite kör�
 İş boyu: S
 Kaynak: karar-defteri GRUP 2 (NUMARASIZ) · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-07] madde 101 — SJT/OCEAN katmanı canlı eşleştirmede OKUNMUYOR**
@@ -124,7 +124,7 @@ Kaynak: karar-defteri GRUP 2 (md.101) · Numara: md.101
 KOD-TEYİT: İki ayrı fonksiyon doğrulandı — `matching.ts:351 rankMentorsForMenti` (async, DISC+sektör, `matching.ts` kendi sectorScore'unu hesaplar) ↔ `scoring.service.ts:165 rankMentorsForMenti` (sectorScoreResolver + certData, OCEAN'lı, ayrı tüketici: `sjtScoringController.ts`/`sector-scorer.service.ts`). `matching.ts` sector-scorer'ı import ETMEZ. Doğrulandı, korunur.
 ⚠️ ilişkili: [G2-08] (sector-scorer atıl) ve md.15 (eşleştirmeyi birleştir 🔵) aynı kök soruna bağlı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-08] madde 14 — Sektör skoru 5-bileşen servisi UYUYOR (sector-scorer.service.ts)**
@@ -138,7 +138,7 @@ Kaynak: karar-defteri GRUP 2 (md.14/İŞ7/U1) · Numara: md.14 (İŞ7) / U1
 KOD-TEYİT: `sector-scorer.service.ts` VAR ve `scoring.service.ts`'ten import eder; `matching.ts` sector-scorer'ı import ETMEZ (grep boş); `matching.ts:315,423` kendi `sectorScore`'unu hesaplar. Doğrulandı, korunur.
 ⚠️ ilişkili: [G10] `taxonomy.service`/`IndustryNode` LCA seed'li ama skorlamada kullanılmıyor (sector-scorer'a bağlı) — SAYIM G10'da ayrı kalem; aynı atıl-sektör-skorlama zincirinin parçası.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-09] madde 102 — CORE-eşiği tutarsızlığı (sabit 5 ↔ dinamik coreCount)**
@@ -151,7 +151,7 @@ Etkisi: İki farklı ilerleme mantığı; FE'de tutarsız ilerleme göstergesi r
 Kaynak: karar-defteri GRUP 2 (md.102) · Numara: md.102
 KOD-TEYİT: `adaptiveTestEngine.ts:22 MIN_CORE_RESPONSES=5` (`:129,:135,:194` kullanır — canlı `getNextQuestion` yolu) ↔ `questionService.ts:117 coreThreshold=coreCount` (`:162-173` dinamik, `adaptiveTestController` ÇAĞIRMAZ, ayrı zincir). İki modül birbirini çağırmaz. Doğrulandı, korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-10] Eşleşme hesaplama tetikleyicisi (event-driven mi sayfa-açılınca mı)**
@@ -163,7 +163,7 @@ Etkisi: Tetik belirsizliği → eşleşmeler bayat kalabilir veya gereksiz yenid
 İş boyu: M
 Kaynak: karar-defteri GRUP 2 (A14/F5) · Numara: A14 / F5
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G2-11] KARAR 6 otomatik onay (davetle gelen ONAYLI, dışardan Bekliyor) — tetik kodda yok**
@@ -176,7 +176,7 @@ Etkisi: Davetli kullanıcılar da "Bekliyor"da kalıyor olabilir → onboarding 
 Kaynak: karar-defteri GRUP 2 (KARAR 6/A14) · Numara: KARAR 6 / A14
 KOD-TEYİT: `selfServeController.ts:245` AUTO_APPROVED yalnız tenant-tier'a bağlı; davet-kaynaklı otomatik-onay tetiği yok (grep). Doğrulandı, korunur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 

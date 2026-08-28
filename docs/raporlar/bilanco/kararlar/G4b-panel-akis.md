@@ -38,7 +38,7 @@ Etkisi: En kırılgan an; kötü yönetilirse erken terk.
 Kaynak: karar-defteri GRUP-5 · Numara: Y1
 ⚠️ ilişkili: [G4-23] (umut sinyali — aynı bekleme ekranının parçası, ayrı karar)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-23] Umut sinyali / sosyal-kanıt ("12 kişi bekliyor, mentörler geliyor")**
@@ -52,7 +52,7 @@ Kaynak: karar-defteri GRUP-5 · Numara: Y1
 ⚠️ bilanço yanılmış değil: kod-teyit → `menti/page.tsx`'te "bekliyor/sosyal-kanıt" 0 eşleşme (doğrulandı).
 ⚠️ ilişkili: [G4-22] (bekleme anı deneyimi — kapsayıcı, ayrı karar)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-24] Menti P1 DISC "özgüven aşısı" sunumu ("değerlisin")**
@@ -76,7 +76,7 @@ Etkisi: Ret anındaki terk riskini azaltır.
 İş boyu: M
 Kaynak: karar-defteri GRUP-5 · Numara: Y2
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -95,7 +95,7 @@ Etkisi: Mentör bağlılığı ve gönüllü sürdürülebilirliği.
 Kaynak: karar-defteri GRUP-5 · Numara: md.78 (T10)/Y5-akraba
 ⚠️ ilişkili: [G4-28] (mentör kendi-etkim yuvası — md.78'in içe-bakan yüzü, ayrı karar)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-27] Mentör kapasite sınırı (kaç menti)**
@@ -108,7 +108,7 @@ Etkisi: Aşırı yüklenmiş mentör = kalite düşüşü ve tükenmişlik.
 Kaynak: karar-defteri GRUP-5 · Numara: Y5
 ⚠️ bilanço yanılmış değil: kod-teyit → `schema.prisma`'da mentör-bazlı kapasite alanı yok, yalnız `Tenant.maxMeetingsPerWeek` (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-28] Mentör "kendi etkim" yuvası (etki istatistiği + takdir)**
@@ -122,7 +122,7 @@ Kaynak: karar-defteri GRUP-5 · Numara: md.78
 ⚠️ bilanço yanılmış değil: kod-teyit → `mentorMetricsController.ts` VAR (doğrulandı).
 ⚠️ ilişkili: [G4-26] (mentör emeği rozet-çeşit — md.78'in dışa-bakan yüzü, ayrı karar)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-29] Mentör sektör filtresi (kendi alanından menti)**
@@ -135,7 +135,7 @@ Etkisi: Sektör-uyumlu eşleşme kolaylığı.
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 ⚠️ bilanço yanılmış değil: kod-teyit → `mentorFilterController.ts` VAR (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -152,7 +152,7 @@ Etkisi: Sponsor/kurum ikna sürecinin ana aracı.
 Kaynak: karar-defteri GRUP-5 · Numara: Y3
 ⚠️ bilanço yanılmış değil: kod-teyit → PDF/CSV/xlsx export 0 dosya (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-31] Proaktif kırmızı uyarı (harekete geçir)**
@@ -165,7 +165,7 @@ Etkisi: Bekleyen mentiler zamanında görülüp müdahale edilir.
 Kaynak: karar-defteri GRUP-5 · Numara: Y4
 ⚠️ bilanço yanılmış değil: kod-teyit → `pairSignal.service.ts` VAR (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-32] STK aktif-üye oran / görüşme-ivme / haftalık-trend (zaman serisi)**
@@ -178,7 +178,7 @@ Etkisi: Program büyüyor mu duruyor mu görünür.
 Kaynak: karar-defteri GRUP-5 · Numara: Y3/Y7
 ⚠️ bilanço yanılmış değil: kod-teyit → `retentionMetrics.service.ts` VAR (doğrulandı).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-33] Çift-aha modeli / yönetici-önizleme-demo**
@@ -191,7 +191,7 @@ Etkisi: Yönetici onboarding'inde erken ikna kaldıracı.
 Kaynak: karar-defteri GRUP-5 · Numara: A13
 ⚠️ ilişkili: [G4-34] (iki-aha modeli — wizard tarafı)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-34] STK "iki-aha modeli" (önizleme aha + gerçek aha)**
@@ -204,7 +204,7 @@ Etkisi: Onboarding ikna gücü.
 Kaynak: karar-defteri GRUP-5 · Numara: A13
 ⚠️ ilişkili: [G4-33] (yönetici-önizleme-demo — önizleme aha tarafı)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -223,7 +223,7 @@ Etkisi: İlk deneyim yönlendirmesi = en yüksek retention etkili ekran.
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 ⚠️ bilanço yanılmış (nüans/kısmi): eski="grep: şablon-seçim ekranı yok" → kod gerçeği: **STK-org onboarding'inde `Step2Template.tsx` VAR** ve tam MEZUN/KULUP/GONULLU şablonlarını sunuyor. ANCAK bu, kurumun program-şablonu seçimidir; bilançodaki kalem **member/menti-persona** yönlendirmesidir — o yön hâlâ yok. Yani absans kısmen çürüdü (bitişik org-şablonu mevcut), member-persona ekranı ⬜ olarak durur.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-36] Menti/mentör tarafı retention "sevdirme" deneyimi (persona-temelli)**
@@ -235,7 +235,7 @@ Etkisi: Menti/mentör tarafı retention'ın ana boşluğu.
 İş boyu: L
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-37] Kurumlar-arası "sosyal kanıt" duvarı + paylaşılabilir "Etki kartı"**
@@ -247,7 +247,7 @@ Etkisi: Organik/viral kurum kazanımı.
 İş boyu: L
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-38] Mentör/menti-kaynaklı "ters çekim" bottom-up büyüme kanalı**
@@ -259,7 +259,7 @@ Etkisi: İkinci organik büyüme kanalı.
 İş boyu: L
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 **[G4-39] "Görüşme tamamladım 🎉" paylaşım kartı**
@@ -271,7 +271,7 @@ Etkisi: Kullanıcı başarısını dışarı taşır (viral + motivasyon).
 İş boyu: S
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 

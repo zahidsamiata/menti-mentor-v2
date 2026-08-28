@@ -57,7 +57,7 @@ Kaynak: SAYIM (c)/G10 · Numara: md.44
 ⚠️ kod-teyidi: `llmRetry.ts` = 84 satır, **0 import** teyitli (yalnız kendi içinde `fetchWithRetry` tanımı). `MeetingScheduler.tsx` = **231 satır** teyitli, 0 import (bkz. [G10-22]). **"TenantContext-ikiz" ÇÜRÜK-ADAYI:** kodda `TenantContext` tipinin **yalnız TEK tanımı** var (`types.ts`) — "ikiz" ikinci tanım bulunamadı (ya zaten temizlendi ya da middleware-içi inline `req.tenant` tipiydi). llmRetry+MeetingScheduler ölü doğrulandı; ikiz-tip iddiası artık geçersiz.
 ⚠️ ilişkili: [G10-08] (llmRetry ayrı kart), [G10-22] (MeetingScheduler bundle)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -72,7 +72,7 @@ Kaynak: SAYIM (c)/G10 · Numara: md.18/A21
 ⚠️ kod-teyidi: `requestMessage` KOD'da hâlâ referanslı ama yazan yer YOK — `gdprService.ts` yalnız **anonimleştirmede** null'lar (`visibilityOptIn.requestMessage`), aktif YAZIM yok. Atıl-kolon iddiası teyitli.
 ⚠️ ilişkili: [G10-09] (aynı desen: yaz-yok/DROP-adayı ikiz kolon)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -87,7 +87,7 @@ Kaynak: SAYIM (c)/G10 · Numara: U2/md.44
 ⚠️ kod-teyidi: `matchingInterface.ts` = 100 satır, backend/src'te **0 import** teyitli (dosya var, tüketici yok). "Uyuyan/kasıtlı-ileride" doğru.
 ⚠️ ilişkili: [G10-22] (aynı dosya md.45 5-dosya bundle'ında da geçiyor — KATLAMA yok, bu kart U2 Job-Board niyetine, [G10-22] genel "yarım-özellik sil-niyeti-yok-eder" bundle'ına odaklı)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -101,7 +101,7 @@ Etkisi: Kullanıcıya görünmez (log-only); niyet var, aksiyon yarım.
 Kaynak: SAYIM (c)/G10 · Numara: D1
 ⚠️ kod-teyidi: `cronScheduler.ts:359` `findMatchesDueForCheckpoint` çağrısı VAR; :340 yorumu "ölü fonksiyonu cron'a bağlar" + LOG-ONLY teyitli. Fonksiyon `feedback.service.ts:71`. Yarım-bağlı doğru.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -115,7 +115,7 @@ Etkisi: Kullanıcıya görünmez; şemada boş kolonlar + yarım geri-bildirim m
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ kod-teyidi: `feedbackController.ts:131-150` bu alanları açıkça **destructure ile DIŞLIYOR** (`engagementScore: _e`, `goalClarityScore: _gc`, `periodic*`) + yorum "Mentor→Menti alanları … yazılmıyor". Yaz-yok teyitli.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -129,7 +129,7 @@ Etkisi: Kullanıcıya görünmez (mount yok); yarım FE özelliği.
 Kaynak: SAYIM (c)/G10 · Numara: F5/F6
 ⚠️ kod-teyidi: `ContextualFeedbackHost.tsx` (default export) + `MeetingContext.tsx` (`MeetingProvider`/`useMeeting`) tanımlı; her ikisi de **kendi dosyaları dışında 0 import** teyitli. Bağlanmamış doğru.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -144,7 +144,7 @@ Kaynak: SAYIM (c)/G10 · Numara: D2/md.44
 ⚠️ kod-teyidi: `llmRetry.ts:34` `fetchWithRetry` tanımı; backend/src'te **0 import** teyitli. `matchReason.ts` de yok (silinmiş). Atıl doğru.
 ⚠️ ilişkili: [G10-01] (aynı dosya md.44 toplu-sil bundle'ında)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -159,7 +159,7 @@ Kaynak: SAYIM (c)/G10 · Numara: D3
 ⚠️ kod-teyidi: `qualityMultiplier` tüm canlı okumaları **`TenantMembership`'ten** yapıyor teyitli (matching.ts, scoring.service.ts, adminController.ts, sjtScoringController.ts, certification.service.ts — hepsi membership). `UserProfile.qualityMultiplier` (schema.prisma:970) için kod-okuma bulunamadı → ikiz-atıl doğru.
 ⚠️ ilişkili: **[G1] qualityMultiplier okuma-kaynağı (K7)** — G1'de "eski-kod eski yerden okuyor olabilir" ❓'sı bu ikiz kolonun tehlikesi; bu kart DROP'a, G1 kartı okuma-kaynağı doğrulamasına odaklı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -173,7 +173,7 @@ Etkisi: Ölü değil; SJT puanlama akışı canlı.
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ **bilanço yanılmış:** "SjtQuestion/SjtOption 0 prisma query (ölü-tablo)" → **GERÇEK: `sjt-scorer.ts` `prisma.sjtQuestion.findMany` çağırıyor; `sjt-scorer` → `sjtScoringController.ts` (import) → `sjtScoringRoutes.ts` → `server.ts` `/api/scoring` mount.** Yani tablolar canlı route'tan sorgulanıyor. ("Madde 124'te registerMessages/assertTestDatabase böyle çürümüştü" uyarısı bu grupta da gerçekleşti.)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -187,7 +187,7 @@ Etkisi: Kullanıcıya görünmez (FE çağırmıyorsa); bağlanmamış endpoint 
 Kaynak: SAYIM (c)/G10 · Numara: md.45/A20
 ⚠️ kod-teyidi: Route **MOUNT VAR** — `onboardingRoutes.ts:41` `PATCH /users/me/social` + `requireAuth()` + `updateSocialProfile` handler (`onboardingController.ts:455`). Yani "bağlanmamış" = backend'e değil, **FE'ye bağlanmamış** (FE'de `me/social` çağrısı bulunamadı). Backend endpoint canlı ve auth'lu.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -201,7 +201,7 @@ Etkisi: Kullanıcıya görünmez; iki-yol-aynı-iş = bakım-yükü, hangisi can
 Kaynak: SAYIM (c)/G10 · Numara: A20
 ⚠️ kod-teyidi: Route VAR — `userRoutes.ts:117-119` `PATCH /users/:id/self-profile` (yorum: "kendi kaydını güncelleyebilir, ADMIN veya sahibi"). Mükerrerlik `me/profile` ile karşılaştırmalı keşif gerektirir (bu kart onu tetikler).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -216,8 +216,8 @@ Kaynak: SAYIM (c)/G10 · Numara: md.41
 ⚠️ kod-teyidi: `clubController.ts` + `clubRoutes.ts` VAR, `server.ts`'te mount + **testli** (`clubs-idor.test.ts`, `security.test.ts`). FE'de (`frontend/src`) `clubs`/`clubController` kullanımı = **0** teyitli. FE'siz doğru; backend canlı+testli (silme = testleri de siler, PO kararı).
 ⚠️ ilişkili: **[G1] md.91 Kulüp-tipi tenant aktif-edilmez (avukat kısıtı)** — bu modülün neden dondurulduğunu açıklayabilir.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Kulüp modeli AKTİF — kulüpler STK ile aynı yetkilere sahip, fark yok. ⚠️ G1-13'e bağlı (kulüp-tipi kurum aktif etme + açık beyan).
 ---
 
 **[G10-13] `/feedback-logs` + `/combination-scores` FE'siz (ML / geri-bildirim paneli)**
@@ -231,7 +231,7 @@ Kaynak: SAYIM (c)/G10 · Numara: md.42
 ⚠️ kod-teyidi: `feedbackLogController.ts` + `feedbackLogRoutes.ts` VAR, `server.ts`'te mount teyitli. FE'de yalnız `types/admin.ts`'te **tip tanımı** var (canlı çağrı DEĞİL) → FE-panel yok doğru.
 ⚠️ ilişkili: [G10-16] (`rewardPenalty.ts` bu feedbackLog akışına bağlı — o AKTİF, panel FE'si değil)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -245,7 +245,7 @@ Etkisi: Kullanıcıya görünmez (admin tetikleyemiyor); yarım özellik.
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ kod-teyidi: `adminController.ts:450` rematch stub referansı; FE'de `/rematch` yalnız `types/admin.ts` + bir testte geçiyor, canlı admin aksiyonu **yok** teyitli.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -259,7 +259,7 @@ Etkisi: Kullanıcıya görünmez; kullanılmayan endpoint (belgelenmiş "ileride
 Kaynak: SAYIM (c)/G10 · Numara: md.70-akraba
 ⚠️ kod-teyidi: `questionController.ts:335` `submitResponses` (toplu) + yorum ":11 ileride kullanım". FE **tek-soru** `/api/questions/:id/respond` çağırıyor (`discTest.ts:32`), toplu `/questions/respond` çağrısı FE'de **yok** teyitli.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -273,7 +273,7 @@ Etkisi: Ölü değil; geri-bildirim → kalite-katsayısı akışı canlı.
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ **bilanço yanılmış (kendi şüphesini doğruladı):** `applyFeedbackSignal` (rewardPenalty.ts) **iki controller'da import ediliyor** — `feedbackLogController.ts:5` + `meetingCheckInController.ts:5`. Import izi VAR; ölü değil.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -287,7 +287,7 @@ Etkisi: Kullanıcıya görünür (FE kartı); çelişki kaydı düzeltilir.
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ **bilanço nüansı çözüldü:** `discResultCard` YAZILIYOR (`onboardingController.ts:402-429`), FE'de OKUNUYOR (`lib/api/profile.ts:10`, `types/onboarding.ts:19`), `userController.ts:152` select'te (KARAR 5 rol-maskesiyle). "Hayalet okuma-yok" iddiası yanlıştı; kart-havuz "okunuyor" doğruydu.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -301,7 +301,7 @@ Etkisi: Kullanıcıya görünmez (echo edilse de gösterilmiyor); yarım-bağlı
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ (md.86/101 akrabası)
 ⚠️ kod-teyidi (VERDİKT: yarım-bağlı, gerçek çelişki DEĞİL): `temperamentAnalysis.ts:64-79` hesaplar+döner; `temperamentController.ts:60,66` echo eder; `User.enneagramWing` (schema:254) yazılır; `gdprService.ts` anonimleştirir. FE'de grep **BOŞ**, `matching.ts`'te **kullanılmaz** teyitli. Yani: temperament endpoint echo eder ama eşleştirme/FE tüketmez — "hiçbir yerde okunmuyor" fazla-kesin, doğru nüans "aktif tüketici yok".
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -316,7 +316,7 @@ Kaynak: SAYIM (c)/G10 · Numara: md.86
 ⚠️ kod-teyidi: `schema.prisma:283` `mentorVisibilityEnabled Boolean @default(true)`; `userController.ts:177` select'te echo edilir; `matching.ts:357-373` (00-CIKIS-PLANI kaydı) hiçbir eşleşme sorgusunda filtre DEĞİL; setter bulunamadı → ölü/echo-only doğru.
 ⚠️ ilişkili: [G10-18] (aynı desen: yaz/echo var, tüketici/mantık yok)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -331,7 +331,7 @@ Kaynak: SAYIM (c)/G10 · Numara: md.45
 ⚠️ kod-teyidi: `MeetingScheduler.tsx` (231 satır), `TenantSwitcher.tsx`, `ProfileStrengthCard.tsx` FE'de **kendi dosyaları dışında 0 import** teyitli; `matchingInterface.ts` backend'de 0 import teyitli (bkz. [G10-03]). Bağlanmamış doğru. (Silme = niyet-yok-eder, PO kararı.)
 ⚠️ ilişkili: [G10-01] (MeetingScheduler md.44 toplu-sil bundle'ında da) · [G10-03] (matchingInterface U2 Job-Board niyetiyle ayrı kart — KATLAMA yok: bu kart 5-dosya bakım-yükü demetine, [G10-03] iş-ilanı ürün-niyetine odaklı)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -346,7 +346,7 @@ Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ kod-teyidi: `taxonomy.service.ts` VAR, `onboardingController.ts` + `sector-scorer.service.ts` import ediyor. Ama `matching.ts`'te `taxonomy`/`IndustryNode` **kullanımı YOK** teyitli → canlı skorlama yolunda değil. "sector-scorer bağlı ama matching çağırmıyor" doğru.
 ⚠️ ilişkili: **[G2] sector-scorer (md.14/İŞ7/U1)** — sektör skoru servisi UYUYOR (`sector-scorer.service.ts` TAM, `matching.ts` çağırmıyor); taxonomy o servisin alt-katmanı. Bu kart taxonomy/IndustryNode'a, G2 kartı sector-scorer'ın matching'e bağlanmasına odaklı.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -360,7 +360,7 @@ Etkisi: Kullanıcıya görünmez; yanıltıcı/bayat yorum (yeni geliştirici "S
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ kod-teyidi: `LoginForm.tsx:7` "AuthProvider'dan TenantProvider'a köprülenecek (Sprint 14'te tam entegrasyon)" yorumu **mevcut** teyitli. Köprünün kurulup kurulmadığı ayrı keşif ister (yorum-temizliği önce onu gerektirir).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -374,7 +374,7 @@ Etkisi: Yok (dosya zaten yok); yalnız çelişkili kayıt düzeltilir.
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ **kod-teyidi ile çözüldü:** `backend/src`'te `mentiRequestController` dosyası **YOK** (glob boş) ve hiçbir import yok teyitli. "SİLİNDİ" doğru; "VAR" iddiası bayat (zaman farkı). Menti-talep işlevi `requestController.ts`'te.
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -388,7 +388,7 @@ Etkisi: Kullanıcıya görünür özellik (henüz yok); mentör karar bağlamı 
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ kod-teyidi: Karar-defteri "ön-koşul (chat) ✅, iş inşa edilmedi, Conversation↔Meeting FK yok" der; bu bir gelecek-iş fikri (ölü kod değil, yapılmamış iş). Ayrıntılı FK-teyidi bu kartın kapsamı dışında (iş henüz yok).
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
 
@@ -403,8 +403,8 @@ Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 ⚠️ kod-teyidi (ipuçları — tam keşif ayrı iş): profil-güncelleme uçları KISMEN var ([G10-10] `PATCH /users/me/social`, [G10-11] `/users/:id/self-profile`, ayrıca `me/profile`, F1 foto-upload avatarUrl). Yani altyapı kısmen mevcut ama "kullanıcı gerçekten kendi profilini/fotoğrafını düzenleyebiliyor mu" uçtan-uca keşfi yapılmalı.
 ⚠️ ilişkili: [G10-10], [G10-11] (bu keşif onların mükerrer/canonical durumunu da netleştirir) · [G4] F1 foto-upload (avatarUrl havuzda)
 
-[ ] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
+[x] PO notu: Kullanıcı kayıt sonrası fotoğrafını/bilgisini değiştirebiliyor mu — önce keşif, sonra iş.
 ---
 
 ## KAPANIŞ — özet
