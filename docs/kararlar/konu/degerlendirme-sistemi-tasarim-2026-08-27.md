@@ -2,13 +2,13 @@
 
 > 🔄 **YAŞAYAN BELGE**
 >
-> **Bu belge iki turda yazıldı. Bölüm 9-16 Tur B'de eklenecek.**
+> **Bu belge iki turda yazıldı: Bölüm 1-8 (Tur A) + Bölüm 9-16 (Tur B).**
 >
 > Bu belge, strateji oturumunda verilen ve akademik araştırmayla
 > doğrulanan değerlendirme + eşleştirme sistemi kararlarını tek yerde
 > toplar. Kaynak keşif raporları:
-> - `docs/kararlar/konu/kesif/eslestirme-motoru-kesfi-2026-08-27.md`
-> - `docs/kararlar/konu/icerik/tam-soru-dokumu-2026-08-26.md`
+> - `docs/raporlar/kesif/eslestirme-motoru-kesfi-2026-08-27.md`
+> - `docs/raporlar/icerik/tam-soru-dokumu-2026-08-26.md`
 >
 > **Kapsam notu:** Bu belge kararları KAYDEDER. Tasarımı yorumlamaz,
 > öneri getirmez. Eksik/karara bağlanmamış noktalar `⚠️ AÇIK` ile
