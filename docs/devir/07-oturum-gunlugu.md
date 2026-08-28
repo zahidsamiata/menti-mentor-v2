@@ -392,4 +392,27 @@
 **Söz:** yeni söz verilmedi.
 
 ---
+
+## 2026-08-28 — FAZ 1b: KOD TEMİZLİĞİ (ilk çok-repo KOD turu, submodule dansı)
+
+**Mod:** BYPASS (KOD) · **Branch:** backend `feat/faz1b-llmretry-sil-2026-08-28` (**PR #56**) + çatı `feat/faz1b-kod-temizligi-2026-08-28` (temiz main `e5fcf66`'ten, #128 MERGED; **PR #129**) · MERGE ETME.
+
+**Ne yapıldı (5 kalem, migration YOK):**
+- **G10-01 (en dikkatli):** `llmRetry.ts` **SİLİNDİ** (backend; 0 import kod-teyitli, tüketici `matchReason.ts` LLM kaldırılırken silinmiş). `backend/CLAUDE.md` 3 bayat llmRetry referansı güncellendi (KURAL 12). ⭐ **`MeetingScheduler.tsx` SİLİNMEDİ** — grep 0 döndü AMA yorumlar backend sözleşmesine işaret ediyor + `/availability` endpoint'i (`meetingRoutes.ts:34`) GERÇEKTEN var + `onSave/onBook` callback'leri → **yarım özellik, ölü değil.** Proje kuralı ("niyet izi varsa silme") uygulandı; 10-yol madde 44'teki "kesin-ölü" nitelemesi düzeltildi.
+- **G6-07:** 5 kullanılmayan @radix-ui paketi (avatar/dialog/dropdown-menu/separator/toast) çıkarıldı; `npm install` 41 transitif paket kaldırdı; **build YEŞİL** (dolaylı bağımlılık kırılmadı — zorunlu teyit yapıldı).
+- **G7-12:** `HeroSection.tsx` H1 → "Mentörlük programınızı zahmetsizce yönetin" (gradient korundu). **Alt metin PO'ca kesinleşmedi → DOKUNULMADI.**
+- **G7-13:** yumuşak lacivert tema **yönü** `06-tasarim-ux`'e canonical'landı. **KOD DEĞİŞMEDİ** (uygulama G7-11 ~256 nokta ile, canlı-sonrası).
+- **G8-06:** 12 merged yerel dal `-d` (güvenli) silindi; `main`+güncel dal+#110 dalı+unmerged dallar korundu; worktree temiz. **Uzak dallar SİLİNMEDİ** (remote mutation → PO onayı).
+
+**Doğrulama:** DB-güvenli verify (1-4) YEŞİL — backend tsc/tsc-test/eslint(0 err, 3 mevcut uyarı) · frontend tsc/vitest **38/38**/build. Adım 5 (entegrasyon) lokalde TEST_DATABASE_URL yok → guard; **asıl kanıt CI** (kural). Pointer stacked (backend feature commit `0cb237c`).
+
+**Kapsam dışı not:** `page.tsx` metadata title'ında eski "İnsan Kimyasıyla" ibaresi (SEO başlığı ≠ H1, ayrı karar → PO).
+
+**Senkron:** kartlar (G10-01🟡·G6-07✅·G7-12✅·G7-13✅·G8-06🟡) · 00-KARAR-TAKIP (D2 llmRetry✅ + MeetingScheduler notu) · 10-yol (madde 44/46 + Faz 1b🟡) · 09-DURUM ⚡ blok · bu günlük. Kırık link: 0.
+
+**Söz (KURAL 11):** ⭐ **S22** — backend PR #56 merge olunca çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda (CLAUDE.md merge-sonrası bump — stacked pointer'ı çözer).
+
+**Sınır:** DB/seed/migration YOK · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kişi adı yok. **MERGE EDİLMEDİ** (PO).
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*

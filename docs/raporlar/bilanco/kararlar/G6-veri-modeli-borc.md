@@ -138,6 +138,8 @@ Kaynak: karar-defteri GRUP 8 (md.46)
 Numara: md.46
 ⚠️ Kod-teyit: `frontend/package.json:14-20` = 7 @radix-ui paketi. `frontend/src` grep: yalnız `label.tsx` (react-label) + `button.tsx` (react-slot) import ediyor = 2 kullanılan → **5 kullanılmayan (avatar/dialog/dropdown-menu/separator/toast) DOĞRULANDI**.
 
+✅ **YAPILDI (2026-08-28, Faz 1b, çatı PR #129):** 5 paket `package.json`'dan çıkarıldı; `npm install` 41 paket kaldırdı (transitif dahil). **Build YEŞİL** (dolaylı bağımlılık kırılmadı — `npm run build` teyitli). label+slot kaldı.
+
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu:
 ---

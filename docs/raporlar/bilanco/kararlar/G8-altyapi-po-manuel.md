@@ -91,6 +91,8 @@ Etkisi: Dağınık dal/worktree birikimi kafa karışıklığı ve disk israfı 
 İş boyu: S (PO-manuel + git)
 Kaynak: karar-defteri (md.28 v2) · Numara: md.28(v2)
 
+🟡 **YARIM — GÜNCELLEME (2026-08-28, Faz 1b, çatı PR #129):** **12 merged yerel dal `-d` (güvenli) ile silindi** (chore/pointer-bump-53-54 + docs/{belge-bilancosu,belge-duzeni-reorg,claude-md-duzeltme,eslestirme-kesfi,faz1a-belge-duzeni,icerik-kesfi,karar-dosyalari-sayim,oncelik-siralama,oturum-tezi,po-kararlari,tasarim-belgesi}). **Korundu:** `main`, güncel çalışma dalı, `#110` dalı (`feat/analytics-seo-2026-08-22`), unmerged dallar (ci/github-actions, docs/merge-turu-devir, feat/{chat-messaging,claude-md-update,platform-panel-deep,register-error-ux,security-audit-2-fixes}). Worktree temizliği gereksiz (yalnız ana dizin). **⬜ Kalan: uzak merged dallar SİLİNMEDİ** — remote mutation (dışa-dönük) → PO onayına bırakıldı (adaylar: origin/chore/pointer-bump-52 · origin/docs/* merged · origin/feat/kalibrasyon-aktor-izi-fe).
+
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
