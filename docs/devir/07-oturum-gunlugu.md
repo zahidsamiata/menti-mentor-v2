@@ -355,4 +355,25 @@
 - **Kişi adı yok** ("ürün sahibi"). Kullanıcıya görünen metin Türkçe; kod iç mekaniği İngilizce.
 
 ---
+
+## 2026-08-28 — FAZ 1a: BELGE DÜZENİ (G9 grubu) · yalnız-belge, kod YOK
+
+**Mod:** BYPASS · **Branch:** `docs/faz1a-belge-duzeni-2026-08-28` (temiz main `7192606`'dan; #126 MERGED) · **PR:** açık, MERGE ETME.
+
+**Ne yapıldı (G9 belge-düzeni 12 kalem, kod/DB/migration SIFIR):**
+- **G9-03** — 5 bayat gövde satırı (BH1-5: SJT-4/sunucu/maxMeetings/timezone/IDOR) üstü-çizili `[ESKİ]` damgası + ⚠️ GÜNCELLEME deseniyle düzeltildi (konu/03,04,05,08 + dm). Desen kök `CLAUDE.md` "Belge Düzeltme Deseni"ne **⭐ KALICI KURAL** olarak eklendi.
+- **G9-04** — KANITLANDI: `AdminAuditLog` modeli YOK (`schema.prisma` yalnız `SystemLog`:640); platform-strateji gövdesi düzeltildi.
+- **G9-02** — registerMessages.ts "PLANLANAN desen, kodda yok" olarak dürüstleştirildi. **G9-15** — model yönlendirmesi 5 belgeden çıkarıldı (isim + ilke), tek satıra indirildi; BÇ5/E12 çelişkisi kapandı.
+- **G9-06** — durum-panosu üst-etiket 🔄→📸. **G9-05** — ⚠️ **DÜRÜST SAPMA:** eski çelişki blokları 09-DURUM'da ZATEN kapanmıştı (T1-B3:90); canonical dosyadan güncel içerik sökmek yerine **uzlaştırma ⚠️ notu** eklendi.
+- **G9-08/16 + 09 + 13** — 8 belge arşive taşındı (git mv): `arsiv/icerik/` 6 bayat döküm + `arsiv/PROJECT_STATUS.md` + `arsiv/admin-panelleri-tasarim`. Her birine 🗄️ arşiv notu + güncel kaynağa yönlendirme; kıran linkler güncellendi.
+- **G9-10** — INDEX tamamlandı (G1-G11 + OKUMA-REHBERI + eslestirme-motoru-kesfi + arsiv/icerik) + taşınanlar Arşiv bölümüne + 4 non-kvkk belgeye üst-etiket.
+- **G9-14** — kişi adı: belge gövdesinde **0 nötrleştirme** (tek gerçek ad "…Ata" yalnız `kvkk-metinleri/`'nde = yasal gereklilik → **DOKUNULMADI**; GitHub handle `zahidsamiata` = git metadata, dokunulmadı).
+
+**Doğrulama:** kırık markdown-link **0** (python taraması, 130 .md). 12 G9 kartı ✅ (kutu değişmedi, başlık altı ✅ YAPILDI). 00-KARAR-TAKIP 122/123 ✅. 10-yol Faz 1a ✅.
+
+**Kapsam DIŞI (bilinçli):** kod temizliği G10-01/G6-07/G8-06/G3-15/G7-12/G7-13 = **Faz 1b (ayrı tur)**. G9-11/G9-12 (büyük reorg) + G9-07 (OneDrive taşıma, PO-manuel) = şimdilik alınmadı.
+
+**Söz:** yeni söz verilmedi; S14 (belge reorg) kısmi ilerledi (tam reorg G9-11/12'de).
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*

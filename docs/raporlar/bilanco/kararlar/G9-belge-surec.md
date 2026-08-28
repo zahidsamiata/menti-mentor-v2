@@ -35,6 +35,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-02] CLAUDE.md `registerMessages.ts` merkezi mesaj dosyası kodda karşılıksız**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — kök `CLAUDE.md:256` "PLANLANAN desen, dosya kodda YOK" olarak düzeltildi (gerçek merkezileştirme G6-05'te). Kutu değişmedi.
 
 Ne: Kök CLAUDE.md (satır 256) "merkezi modül `registerMessages.ts`" diyor; kodda bu adla dosya yok.
 Neden başlanmıştı: NİYET var — dağınık inline hata-mesajı yerine merkezi/enumeration-safe mesaj modülü önerisi.
@@ -52,6 +53,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-03] Belge-içi bayat gövde satırları (03:47 SJT-4, 08:13 sunucu-?, dm:111 maxMeetings, 05:27 timezone, 04:34 IDOR)**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — 5 bayat satır (BH1-5) üstü-çizili `[ESKİ]` damgası + ⚠️ GÜNCELLEME deseniyle düzeltildi (konu/03,04,05,08 + dm). Desen kök `CLAUDE.md` "Belge Düzeltme Deseni"ne ⭐ KALICI KURAL olarak eklendi. Kutu değişmedi.
 
 Ne: Çeşitli karar belgelerinde ⚠️ GÜNCELLEME notu eklenmiş ama ESKİ (bayat) gövde satırı silinmemiş/kalmış (BH1-BH5): SJT "4 soru", sunucu-konumu belirsiz, maxMeetings uygulanmıyor, timezone, IDOR eski ifadeler.
 Neden başlanmıştı: NİYET var — belge-hijyen ilkesi (KURAL 6: sil değil, ⚠️ notla düzelt) uygulanmış ama gövde temizliği yarım.
@@ -68,6 +70,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-04] platform-strateji belgesi "AdminAuditLog tablosu" gövde bayat**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — KANITLANDI: `schema.prisma`'da `AdminAuditLog` modeli YOK (yalnız `SystemLog`, satır 640; grep). `platform-admin-strateji-2026-08-02.md:105` gövdesi üstü-çizili `[ESKİ]` + gerçek (`SystemLog`) ile düzeltildi. Kutu değişmedi.
 
 Ne: platform-strateji belgesinde (:106) "AdminAuditLog tablosu" anılıyor; gerçekte audit `SystemLog`'a yazılıyor. Belge-içi ⚠️ notu var ama gövde bayat.
 Neden başlanmıştı: NİYET var — belge-hijyen (⚠️ not eklenmiş).
@@ -84,6 +87,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-05] 09-DURUM belge-içi çelişki blokları (chat 3-durum / VisibilityOptIn 2-durum / 4-rol / platform-tema)**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — ⚠️ SAPMA (dürüst pushback): eski SERT çelişkili bloklar 09-DURUM'da ZATEN güncellenmişti (T1-B3 :90 = "✅ aradan kapandı"); arşive taşınacak bayat blok kalmamıştı. Canonical durum dosyasından güncel içerik sökmek yerine tek-gerçeği sabitleyen **uzlaştırma ⚠️ notu** eklendi (chat/VisibilityOptIn/4-rol/tema). Kutu değişmedi.
 
 Ne: 09-DURUM.md içinde eski çelişkili durum blokları silinmemiş (chat için 3 farklı durum, VisibilityOptIn 2 durum, 4-rol, platform-tema).
 Neden başlanmıştı: NİYET var — durum-canonical tek yer olmalı; eski katmanlar arşive taşınmalı.
@@ -100,6 +104,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-06] durum-panosu-2026-08-14 🔄 ama 13+ gün donmuş → 📸'ye düşür + tarihli adları tarihsizleştir**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — üst-etiket 🔄 YAŞAYAN → 📸 DONDURULMUŞ; içerik değişmedi. ⚠️ "tarihli-ad tarihsizleştir" kısmı bu turun kapsamı DIŞINDA (ad-değişimi = referans-kırma riski; büyük reorg G9-11/12'de). Kutu değişmedi.
 
 Ne: `docs/kararlar/oz-denetim/durum-panosu-2026-08-14.md` üst-etiketi "🔄 YAŞAYAN, son güncelleme 2026-08-14" ama 2026-08-27 itibarıyla ~13 gün güncellenmemiş. "Yaşayan" iddiası artık yanlış.
 Neden başlanmıştı: NİYET var — kararları tek-bakışta gösteren yaşayan pano.
@@ -133,6 +138,7 @@ Numara: A10
 
 ---
 **[G9-08] `docs/raporlar/icerik/` 6 belge kökten bayat (silinmiş seed-questions.ts'e dayanır, "20 DISC")**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — 6 bayat döküm `docs/arsiv/icerik/`'e taşındı (git mv) + her birine 🗄️ arşiv notu + güncel kaynağa (tam-soru-dokumu) yönlendirme. bolumler/ + tam-soru-dokumu + 2 PO inceleme YERİNDE. Kıran linkler güncellendi (eksikler-derinlestirilmis, T2-E, INDEX). Kutu değişmedi.
 
 Ne: İçerik keşif belgeleri (`icerik/bolumler/01-disc..05` + dated dosyalar) silinmiş `seed-questions.ts`'e ve "20 DISC sorusu" bayatına dayanıyor; kod gerçeği 32 DISC.
 Neden başlanmıştı: NİYET var — içerik keşfi/döküm (aksiyon kaynağı).
@@ -150,6 +156,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-09] PROJECT_STATUS.md DEPRECATED → arşivle + 09-DURUM'a yönlendir**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — kök `PROJECT_STATUS.md` → `docs/arsiv/` (git mv) + 🗄️ arşiv notu. Kök `CLAUDE.md:16` işaretçisi `docs/arsiv/PROJECT_STATUS.md` + 09-DURUM canonical'a çevrildi. INDEX güncellendi. Kutu değişmedi.
 
 Ne: `PROJECT_STATUS.md` (kökte) 9 Ağustos'tan eski/dondurulmuş onboarding; CLAUDE.md hâlâ ona işaret ediyor ama canonical durum 09-DURUM.
 Neden başlanmıştı: NİYET var — canonical durum tek yer (09-DURUM); eski dosya arşive.
@@ -167,6 +174,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-10] INDEX eksik (raporlar/arsiv büyük ölçüde 00-INDEX'te yok, KURAL 5) + üst-etiket eksik ~29 belge**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — INDEX'e eksikler eklendi: `bilanco/kararlar/` G1-G11 + OKUMA-REHBERI, `kesif/eslestirme-motoru-kesfi`, `arsiv/icerik/` 6 döküm; taşınan 8 belge Arşiv bölümüne alındı; durum-panosu satırı 📸'ye düzeltildi. Üst-etiket 4 non-kvkk belgeye eklendi (OKUMA-REHBERI, PO-KARARLARI, 2 PO-inceleme). ⚠️ kvkk-metinleri/ (10 belge) DOKUNULMADI (G9-14 mutlak kural). Kutu değişmedi.
 
 Ne: `00-INDEX.md` yeni raporlar/arşiv belgelerinin çoğunu içermiyor (KURAL 5 ihlali); ~29 belgede yaşayan/dondurulmuş üst-etiketi (KURAL 3) eksik.
 Neden başlanmıştı: NİYET var — belge-düzeni 8 kuralı (INDEX güncel + üst-etiket zorunlu).
@@ -216,6 +224,7 @@ Numara: A5
 
 ---
 **[G9-13] `admin-panelleri-tasarim-2026-08-02` GÜÇLÜ ARŞİV ADAYI (6 panel uygulandı)**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — `kesif/admin-panelleri-tasarim-2026-08-02.md` → `docs/arsiv/` (git mv) + 🗄️ "6 panel canlıda uygulandı" arşiv notu. INDEX kesif/arşiv bölümleri güncellendi. Kutu değişmedi.
 
 Ne: `docs/raporlar/kesif/admin-panelleri-tasarim-2026-08-02.md` tasarım belgesi; anlattığı 6 panel zaten uygulandı → arşiv adayı.
 Neden başlanmıştı: NİYET var — tasarım/keşif belgesi (aksiyon kaynağı, artık tamamlandı).
@@ -233,6 +242,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-14] Kişi-adı yasağı: mevcut belgelerdeki isimler AYRI temizlik işinde**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — KANITA DAYALI 0 nötrleştirme: tek gerçek kişi adı ("Zahid Sami Ata") YALNIZ `kvkk-metinleri/`'nde (6×, yasal gereklilik → DOKUNULMADI, G9-14 mutlak istisna). GitHub handle `zahidsamiata` (3 belge) = URL/git teknik metadata → dokunulmadı. Belge gövdesinde başka kişi adı bulunmadı. Kutu değişmedi.
 
 Ne: CLAUDE.md kalıcı kuralı (satır ~kişi-adı yasağı) yeni içeriğe isim eklemeyi yasaklar; mevcut belgelerdeki isimler ayrı bir temizlik turunda giderilecek — o tur henüz yapılmadı.
 Neden başlanmıştı: NİYET var — kişi-adı yasağı (kalıcı kural); geriye-dönük temizlik ertelendi.
@@ -249,6 +259,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-15] Model tercihi 07 "Sonnet yeterli" ↔ CLAUDE.md Sonnet/Opus ayrımı (yumuşak çelişki)**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — Model yönlendirmesi (isimler + "basit iş→hafif model" ilkesi) 5 yerden çıkarıldı (kök `CLAUDE.md` · devir/01 · konu/07 · devir/03 · devir/04-13), yerine tek satır "seçim turun promptunda belirtilir". BÇ5/E12 yumuşak çelişkisi de kapandı. ⚠️ GÜNCELLEME notları düşüldü. Bilanço analiz belgeleri (çelişkiyi kaydeden) yerinde bırakıldı. Kutu değişmedi.
 
 Ne: `07` oturum belgesi "Sonnet yeterli" derken CLAUDE.md "Model Yönlendirme" bölümü Sonnet(basit)/Opus(karmaşık) ayrımı yapar — yumuşak çelişki.
 Neden başlanmıştı: NİYET var — model-yönlendirme kuralı netleştirilmeli.
@@ -265,6 +276,7 @@ Numara: BÇ5/E12
 
 ---
 **[G9-16] `icerik/` 6 belgenin "kökten bayat" statüsü — 🗑️ mi ⬜-düzelt mi karar noktası**
+> ✅ YAPILDI (2026-08-28, Faz 1a) — G9-08 ile birlikte kapatıldı: KARAR = **arşive taşı** (silme değil), her belgeye 🗄️ arşiv notu + güncel kaynağa yönlendirme. Kutu değişmedi.
 
 Ne: G9-08'in ikiz karar-noktası: `icerik/` 6 belge silinsin/arşive mi (🗑️) yoksa ⚠️ GÜNCELLEME notuyla yerinde düzeltilsin mi (⬜) — bilanço bu ikisini "🗑️/⬜" olarak işaretledi, PO seçmeli.
 Neden başlanmıştı: NİYET var — içerik döküm belgeleri; kararı belirsiz kaldı.

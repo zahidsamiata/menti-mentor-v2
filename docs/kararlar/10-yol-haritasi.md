@@ -70,7 +70,9 @@
 - G8-01+G8-02 foto volume+env · G5-01+G5-02 kurum maili · G1-09 destek@ · G1-10+G1-13 aydınlatma+kulüp beyanı (avukatta) · G1-28 sunucu sertleştirme · G8-03+G8-04 canlı testler · G8-05 yedek env sil · G8-08 izole test DB.
 
 **FAZ 1 — Ucuz temizlik** (paralel güvenli, migration yok):
-- G9 grubu 12 kalem (belge düzeni) · G9-05 gerekçe · G10-01 ölü kod · G6-07 kullanılmayan paket · G8-06 dal temizliği · G3-15 yazım · G7-12 slogan · G7-13 tema yönü.
+- ✅ **Faz 1a (2026-08-28, PR — MERGE BEKLİYOR):** G9 belge-düzeni 12 kalem (G9-02/03/04/05/06/08/09/10/13/14/15/16) + G9-05 gerekçe TAMAM. Detay: G9 kartları ✅.
+- ⬜ **Faz 1b (kod temizliği — AYRI TUR):** G10-01 ölü kod · G6-07 kullanılmayan paket · G8-06 dal temizliği · G3-15 yazım · G7-12 slogan · G7-13 tema yönü.
+- ⏸️ G9-11/G9-12 (büyük belge reorg) + G9-07 (OneDrive taşıma, PO-manuel) = ŞİMDİLİK ALINMADI.
 
 **FAZ 2 — Çıkış blokeri kod tarafı:**
 - G1-05 KVKK hak ekranı · G1-07 rıza sürümü ⚠️ MIGRATION TEK BAŞINA · G1-06 otomatik imha · G1-08 OAuth rıza ayrımı · **G1-01 yaş 18+ form+DB** (PO 2026-08-28: Faz 8→Faz 2, KVKK zinciri).
