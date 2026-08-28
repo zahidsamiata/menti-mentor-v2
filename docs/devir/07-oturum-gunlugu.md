@@ -415,4 +415,21 @@
 **Sınır:** DB/seed/migration YOK · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kişi adı yok. **MERGE EDİLMEDİ** (PO).
 
 ---
+
+## 2026-08-28 — FAZ 1b SARKMA DÜZELTMESİ (pointer re-bump + S22 + süreç dersi)
+
+**Mod:** BYPASS (yalnız-belge + pointer) · **Branch:** `chore/faz1b-pointer-s22-2026-08-28` (temiz main `e0e2ffa`'dan) · **PR açık, MERGE ETME.**
+
+**Kök neden:** #56 (backend) ve #129 (çatı) merge edildi ama **sıra bozuldu** — çatı #129, pointer re-bump'tan ÖNCE merge edildi (13:51 < 13:59). Sonuç: çatı main pointer'ı `0cb237c` (backend feature commit) gösterdi. **Ağaç doğruydu** (llmRetry main'de yok, `0cb237c` backend main'in atası, ağaç `303da85` ile özdeş) — yalnız pointer adı sarktı. S22 ✅ işareti öksüz feature branch'te kalmıştı.
+
+**Ne yapıldı:**
+- **Pointer düzeltmesi:** çatı pointer `0cb237c` → **`303da85`** (backend main HEAD). Ön-teyit: `0cb237c` backend main'in atası (`branch --contains` + `is-ancestor` ✓). Yalnız pointer değişti (`git show --stat` = backend 1 satır).
+- **S22 ✅:** 00-KARAR-TAKIP sözler tablosunda ✅ + sarkma notu.
+- **Süreç dersi (KURAL 12):** kök `CLAUDE.md` submodule bölümüne "merge SIRASI" uyarısı eklendi (mevcut kural silinmedi, netleştirildi).
+
+**Senkron:** 09-DURUM Faz 1b bloğu ⚠️ GÜNCELLEME (#56+#129 MERGED, sarkma düzeltildi) · bu günlük · CLAUDE.md · 00-KARAR-TAKIP. Kırık link: 0.
+
+**Sınır:** DB/seed/migration/kod DEĞİŞMEDİ · #110 ELLENMEDİ · öksüz commit'lere dokunulmadı · numara doğurulmadı. **MERGE EDİLMEDİ** (PO).
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*

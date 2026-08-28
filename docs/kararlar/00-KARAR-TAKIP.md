@@ -75,7 +75,7 @@
 | S19 | Sunucu/altyapı sertleştirme TARAMASI (HTTPS/firewall/SSH/SSL/yedek) — çıkış blokeri | 2026-08-27 | 🔴 çıkış öncesi ZORUNLU | G1-28 |
 | S20 | Fotoğraf kayıt-sonrası DÜZENLEME keşfi (kullanıcı foto/bilgi güncelleyebiliyor mu) | 2026-08-27 | ⬜ önce keşif sonra iş | G10-25 |
 | S21 | Profil/hedef verisi envanter keşfi yapılacak — mentör/menti profilinde bugün hangi alanların TOPLANDIĞI kod-kanıtlı çıkarılacak; **üç soru (S1/S2/S3) bundan önce kesinleşmez** | 2026-08-28 | ⬜ tasarım belgesi Bölüm 10.6 ön koşul olarak işaretledi; keşif henüz yapılmadı | tasarım belgesi B10 + KALEM 13 |
-| S22 | **Backend PR #56 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda | 2026-08-28 | ⬜ Faz 1b stacked pointer (backend feature commit `0cb237c`) → merge sonrası bump gerekli | G10-01 / çatı PR #129 / backend PR #56 |
+| S22 | **Backend PR #56 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda | 2026-08-28 | ✅ **YAPILDI (2026-08-28)** — backend #56 merged (`303da85`); pointer re-bump `chore/faz1b-pointer-s22` turunda tamamlandı. ⚠️ Not: #129 pointer düzeltmesinden ÖNCE merge edildiği için ara bir sarkma oluştu (main pointer `0cb237c` feature commit'i gösterdi — ağaç doğruydu), bu turda kapatıldı. | G10-01 / çatı PR #129 / backend PR #56 |
 
 > **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
 > boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
