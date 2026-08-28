@@ -6,7 +6,9 @@
 >
 > ✅ **GÜNCELLEME (2026-08-28, Tur A tamamlandı — backend PR #58):** Bu tasarım **KODLANDI + CI'da prova edildi** (şema + `consentService` + dual-write + backfill + testler). **Sapmalar:** (1) backfill `.mjs` yerine **`.ts`** (tsx-run, saf mantık `src/services/consentBackfill.ts`, tsc-temiz); (2) planlanan tasarıma sadık kalındı — keşifte bir ajanın önerdiği `role`-scoped consent **REDDEDİLDİ** (bu belge canonical). Kritik guard `platformTenantController.ts:203` dual-write ile çalışmaya devam eder (G1-08'de consentService'e geçer).
 >
-> ✅ **GÜNCELLEME (2026-08-28, Tur B1 — migration CANLIDA uygulandı, PR #133):** `20260828000000_add_consent` CANLI Neon'a `db execute` + `migrate resolve --applied` ile uygulandı; `migrate status` = "up to date". **Doğrulama:** Consent tablosu (9 sütun) + `ConsentType`/`ConsentSource` enum + 3 index + 2 FK oluştu; **ön-sayımlar değişmedi** (mevcut veriye dokunulmadı); Consent boş (0 satır). Backfill **DRY-RUN**: 5 satır yazılacak (5 user + 0 tenant). ⬜ **Kalan Tur B2 (ayrı PO onayı):** backfill `--apply`.
+> ✅ **GÜNCELLEME (2026-08-28, Tur B1 — migration CANLIDA uygulandı, PR #133):** `20260828000000_add_consent` CANLI Neon'a `db execute` + `migrate resolve --applied` ile uygulandı; `migrate status` = "up to date". **Doğrulama:** Consent tablosu (9 sütun) + `ConsentType`/`ConsentSource` enum + 3 index + 2 FK oluştu; **ön-sayımlar değişmedi** (mevcut veriye dokunulmadı); Consent boş (0 satır). Backfill **DRY-RUN**: 5 satır yazılacak (5 user + 0 tenant).
+>
+> ✅ **GÜNCELLEME (2026-08-28, Tur B2 — backfill CANLIYA yazıldı, PR #134):** `backfill-consent.ts --apply` → **5 ACIK_RIZA satırı** yazıldı (5 user + 0 tenant). **Doğrulama:** Consent=5, yalnız ACIK_RIZA (**AYDINLATMA yazılmadı**), source=BACKFILL + version=v1.0-legacy, hepsi aktif (revokedAt null), **grantedAt==kvkkConsentAt 5/5**. Ön-sayımlar değişmedi (6/2/5/0). **İdempotens teyitli** (ikinci dry-run=0). **Consent modeli canlıda TAM DEVREDE.** Kalan: `CONSENT_VERSION` avukat metniyle (G1-10) · G1-08 · G1-05.
 
 ---
 

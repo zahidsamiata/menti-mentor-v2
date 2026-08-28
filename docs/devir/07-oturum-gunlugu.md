@@ -511,4 +511,28 @@
 **Sınır:** yıkıcı komut YOK · veri değişmedi (ön-sayım teyitli) · backfill --apply YOK · #110 ELLENMEDİ · kvkk-metinleri DOKUNULMADI · kod değişmedi. **MERGE EDİLMEDİ** (PO).
 
 ---
+
+## 2026-08-28 — S23 / TUR B2: CONSENT BACKFILL --apply (CANLI YAZIM)
+
+**Mod:** BYPASS (CANLI DB + belge) · **Branch:** `docs/s23-b2-2026-08-28` (belge; **PR #134**) · MERGE ETME. **Kod DEĞİŞMEDİ, backend commit YOK.**
+
+**Bağlam:** B1'de Consent tablosu canlıya uygulandı (boş). Bu tur (B2, PO onaylı) eski 5 kullanıcının rızası Consent'e taşındı.
+
+**Ön sayım (--apply öncesi):** Consent 0 · User 6 · Tenant 2 · User.kvkkConsentAt-dolu 5 · Tenant.kvkkConsentAt-dolu 0 (hepsi beklenen). Son dry-run: 5 satır (teyit).
+
+**Uygulama:** `npx tsx scripts/backfill-consent.ts --apply` (5sn güvenlik beklemesi) → **"yazılan ACIK_RIZA satırı: 5 (user 5 + tenant 0)", "kalan eksik: 0"**.
+
+**Sonrası doğrulama (SELECT):** Consent=**5** · type: **yalnız ACIK_RIZA** (AYDINLATMA YOK) · source=BACKFILL + version=v1.0-legacy · hepsi aktif (revokedAt null) · **grantedAt==kvkkConsentAt 5/5** · ⭐ **User/Tenant/kvkkConsentAt DEĞİŞMEDİ** (6/2/5/0). **İdempotens:** ikinci dry-run = **0 satır** (çift yazmaz).
+
+**Çalıştırılan komutlar:** geçici salt-okuma SELECT script (silindi) · `tsx backfill-consent.ts` (dry-run ×2) · `tsx backfill-consent.ts --apply`. **Yasak komut çalıştırılmadı** (migrate dev/deploy/reset, db push, seed, DROP/TRUNCATE/UPDATE/DELETE = sıfır).
+
+**Sonuç:** **G1-07 CANLIDA TAM DEVREDE** (Tur A kod + B1 migration + B2 backfill). S23 ✅ TAM.
+
+**Senkron:** G1-07 kartı ✅ · consent-modeli-plani ✅ B2 · 00-KARAR-TAKIP S23 ✅ TAM · 09-DURUM ⚡ · bu günlük. Kırık link 0.
+
+**Kalan (ayrı işler, bu karta bağlı değil):** `CONSENT_VERSION` avukat metniyle (G1-10) · G1-08 OAuth rıza UI + tipli kutu · G1-05 self-servis KVKK hak ekranı.
+
+**Sınır:** yalnız 5 satır INSERT (idempotent) · yıkıcı/UPDATE komut YOK · mevcut veri değişmedi (teyitli) · #110 ELLENMEDİ · kod değişmedi. **MERGE EDİLMEDİ** (PO).
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*
