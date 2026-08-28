@@ -408,11 +408,11 @@ export default function RegisterContent() {
                 disabled={loading}
               />
               <span className="text-xs text-muted-foreground leading-relaxed">
+                <strong className="text-foreground">18 yaşından büyük olduğumu beyan ederim</strong> ve{' '}
                 <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
-                  Kişisel Verilerin Korunması Kanunu (KVKK)
+                  KVKK Aydınlatma Metni
                 </a>
-                {' '}kapsamında verilerimin işlenmesine açık rıza veriyor ve 18 yaşından büyük
-                olduğumu beyan ediyorum. (Zorunlu)
+                {'’'}ni okuyup kişisel verilerimin işlenmesine açık rıza veriyorum. (Zorunlu)
               </span>
             </label>
             {errors.kvkk && (
