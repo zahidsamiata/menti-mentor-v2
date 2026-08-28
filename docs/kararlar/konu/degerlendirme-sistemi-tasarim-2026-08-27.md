@@ -10,6 +10,10 @@
 > - `docs/raporlar/kesif/eslestirme-motoru-kesfi-2026-08-27.md`
 > - `docs/raporlar/icerik/tam-soru-dokumu-2026-08-26.md`
 >
+> İlgili karar kartları (bilanço, DEĞİŞTİRİLMEDİ — yalnız referans):
+> - `docs/raporlar/bilanco/kararlar/G2-eslestirme-psikometri.md` (eşleştirme/psikometri)
+> - `docs/raporlar/bilanco/kararlar/G3-icerik.md` (içerik/derinleşme; G3-03 sınırsız yeniden-derinleşme)
+>
 > **Kapsam notu:** Bu belge kararları KAYDEDER. Tasarımı yorumlamaz,
 > öneri getirmez. Eksik/karara bağlanmamış noktalar `⚠️ AÇIK` ile
 > işaretlidir — bu turda doldurulmamıştır.
