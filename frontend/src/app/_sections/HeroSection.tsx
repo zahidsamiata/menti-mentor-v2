@@ -36,12 +36,11 @@ export function HeroSection() {
 
         {/* Ana başlık */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] text-balance">
-          Ağınızı Sadece{' '}
+          Mentörlük programınızı{' '}
           <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-300 bg-clip-text text-transparent">
-            Takvimle Değil,
-          </span>
-          <br />
-          İnsan Kimyasıyla Yönetin.
+            zahmetsizce
+          </span>{' '}
+          yönetin
         </h1>
 
         {/* Alt başlık */}
