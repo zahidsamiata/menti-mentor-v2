@@ -415,9 +415,183 @@ isimsiz ("mentörün" / "mentin").
 
 ---
 
-## Bölüm 9-16 — Tur B'de eklenecek
+## Bölüm 9 — Eşleştirme Algoritması ⭐ ANA BÖLÜM
 
-> Bu belge iki turda yazıldı. Aşağıdaki bölümler bir sonraki turda
-> (Tur B) bu branch'e eklenecek: algoritma, veri boşluğu, süreç, göç,
-> kalibrasyon, açık kararlar, senkron.
+### 9.1 Katman Ağırlıkları (araştırma sonrası revize)
+
+| Katman | Ağırlık | İçerik |
+|---|---|---|
+| Hedef & değer uyumu | %45 | menti ne arıyor ↔ mentör ne verebiliyor · ortak öncelik · yaklaşım hizası |
+| Alan/uzmanlık | %30 | sektör · beceri · çatılı etiket |
+| Kişilik | %25 | 9.2'deki beş kural |
+| Zorunlu kısıtlar | filtre | dil · uygunluk · kapasite — skor DEĞİL, ELEME |
+| Kalite çarpanı | ×0.8-1.2 | sertifika + geçmiş, BİR KEZ uygulanır |
+
+> ⚠️ **ÖNCEKİ TASARIM YANLIŞTI:** karakter %50 idi → %25. Gerekçe:
+> Dyrenforth, Kashy, Donnellan & Lucas (2010, *Journal of Personality and
+> Social Psychology* 99(4):690-702; üç ülke, N>20.000) kişilik
+> BENZERLİĞİNİN, actor ve partner etkileri kontrol edildiğinde ilişki
+> tatminini yordamada tutarlı katkısı olmadığını buldu.
+
+> ⚠️ ESKİ %60/40 oranın gerekçesi hiçbir belgede YOKTU (madde 103,
+> dört-belge çapraz teyit).
+
+### 9.2 Kişilik İçi Dağılım (%25'in içi)
+
+| Boyut | Pay | Kural | Dayanak |
+|---|---|---|---|
+| Uyumluluk | %8 | Mentörde 45-75 bandı ideal | partner ana etkisi + aşırı uyumluluk sınır koymayı zorlaştırıyor (Cavell ve ark. 2020; Younginer & Elledge 2021) |
+| Duygusal denge | %7 | İKİ TARAFTA DA YÜKSEK | totality modeli (2024): çiftteki nörotisizm toplamı düştükçe tatmin artıyor |
+| Sorumluluk | %6 | İki tarafta yüksek + benzerlik küçük bonus | ana etki güçlü, benzerlik zayıf |
+| Açıklık | %3 | MENTÖRDE YÜKSEK + aşırı fark cezası | mentörlüğe özgü en tutarlı bulgu (Bozionelos 2004) |
+| Dışadönüklük | %1 | Hafif fark iyi | en zayıf boyut (Malouff ve ark. 2010, r≈.06) |
+
+> ⚠️ **İKİ KURAL ARAŞTIRMA TARAFINDAN ÇÜRÜTÜLDÜ:**
+> 1. "Duygusal dengede TAMAMLAYICILIK" YANLIŞTI → iki tarafta da yüksek
+>    olmalı. Complementarity lehine ampirik destek bulunamadı.
+> 2. "Sorumlulukta BENZERLİK" kısmen yanlış → asıl kanıt ana etkide.
+
+### 9.3 Vetolar (2 — yalnız ZARAR riski)
+
+- **V1:** Mentör uyumluluk <30 VE menti duygusal denge <35 → kırıcı mentör
+  + kırılgan menti.
+- **V2:** Mentör duygusal denge <30 VE menti <30 → iki fırtına, mentör
+  taşıyamaz.
+
+**GEVŞEME:** havuzda başka aday yoksa UYARIYLA gösterilir, tamamen
+gizlenmez (kodda kademeli fallback zaten var).
+
+> ⚠️ Eski "D mentör + S menti" vetosu KALDIRILDI — dayanaksızdı.
+
+### 9.4 Sektör Asimetri Düzeltmesi
+
+**BUGÜN:** payda = MENTİNİN etiket sayısı → profilini iyi dolduran menti
+CEZALANDIRILIYOR (2 etiketli kolayca %100, 10 etiketli aynı mentörle %20).
+
+**DÜZELTME:** payda = İKİ TARAFIN ETİKET BİRLEŞİMİ.
+
+**EK:** çatılı eşleşme — aynı etiket tam puan, aynı çatı altında
+(yazılım↔teknoloji) kısmi puan. IndustryNode/LCA mantığı kodda YAZILI ama
+bağlı DEĞİL.
+
+### 9.5 Kalite Çarpanı
+
+Bugün İKİ KEZ uygulanıyor (bonus kısmında tekrar) — olası hata,
+düzeltilecek. Terim değil ÇARPAN kalacak.
+
+### 9.6 Tek Satır Formül (yeni)
+
+```
+skor = [ hedef×0.45 + alan×0.30 + kişilik×0.25 ] × kaliteÇarpanı
+```
+
+(veto varsa skor ezilir; zorunlu kısıtlar önce filtreler)
+
+---
+
+## Bölüm 10 — Veri Boşluğu ve Üç Soru ⭐
+
+### 10.1 Bulgu
+
+Eşleştirmede en güçlü sinyal "deep-level similarity" — tutum, değer,
+inanç, hedef benzerliği.
+Kaynak: Eby ve ark. (2013, *Psychological Bulletin* 139(2):441-476; 173
+örneklem, N=40.737): ρ=.38-.59. Demografik benzerlik ANLAMSIZ (ρ=.00-.09).
+
+Olumsuz mentörlük deneyimlerinin merkezinde de aynı şey: Eby ve ark.
+(2000) — protégélerin en kötü deneyimlerinde ortak tema "dyad içi
+uyumsuzluk" (değer/tutum farkı).
+
+> ⚠️ **BİZİM SORUNUMUZ:** Bu veriyi TOPLAMIYORUZ. Sistemde sektör etiketi
+> var; "menti ne arıyor", "mentör ne verebiliyor", "öncelikleri örtüşüyor
+> mu" YOK. En güçlü sinyali ölçmüyoruz.
+
+### 10.2 Üç Soru (PO kararı — tasarlandı)
+
+Tasarım ilkesi: testi 30 dk'dan 6 dk'ya indirdik; araya 10 dk'lık form
+koyarsak kazandığımızı geri veririz. Yeni veri toplanacak ama YÜK
+EKLENMEYECEK. ~40 saniye. Hepsi SEÇMELİ — serbest metin DEĞİL (algoritma
+okuyamaz + KVKK'da özel nitelikli veri riski).
+
+**MENTİ'YE:**
+
+- **S1.** "Şu an en çok neye ihtiyacın var?" (en fazla 2 seç)
+  - Ne yapacağıma karar veremiyorum
+  - Belirli bir beceride takıldım
+  - Kendime güvenmiyorum
+  - Doğru insanları tanımıyorum
+  - Sadece konuşacak biri lazım
+- **S2.** "Nasıl bir destek istersin?" (1 seç)
+  - Bana yol göstersin
+  - Birlikte düşünelim
+  - Sadece dinlesin, ben çözerim
+
+**MENTÖR'E:**
+
+- **S1.** "En çok neyde faydalı olabilirsin?" (en fazla 2 seç)
+  - Yön bulmada · Belirli becerilerde · Özgüven kazanmada · Ağ kurmada · Dinlemede
+- **S2.** "Nasıl bir mentörsün?" (1 seç)
+  - Yol gösteririm · Birlikte düşünürüz · Dinlerim, çözümü o bulur
+
+**İKİSİNE ORTAK:**
+
+- **S3.** "Bu süreçte senin için en önemlisi ne?" (1 seç)
+  - Somut sonuç almak · Öğrenmek · Anlaşılmak · Yeni bakış açısı
+
+**NEDEN BU ÜÇÜ:**
+
+- **S1** → ihtiyaç-yeterlilik eşleşmesi ("ağ kurmak istiyorum" ↔ "ağ
+  kurmada faydalı olurum"). Bugün hiç bilinmiyor.
+- **S2** → yaklaşım hizası. Yönlendirilmek isteyen menti + "kendi bulsun"
+  diyen mentör KÖTÜ çift, bugün görünmüyor.
+- **S3** → değer yakınlığı.
+
+### 10.3 Görünürlük Kuralları (PO kararı)
+
+| Kim | Ne görür |
+|---|---|
+| Karşı taraf, SEÇİM ekranında | Karşılıklı tercihler (S2 yaklaşım hizası, S3 ortak öncelik). İhtiyaç beyanı (S1) GÖRÜNMEZ |
+| Mentör, EŞLEŞME KURULDUKTAN SONRA | Mentinin S1 cevabını görür — ilk görüşme boşa gitmesin |
+| Dernek yöneticisi | YALNIZ TOPLU ("üyelerin %40'ı ağ kurmada destek arıyor"). Kişiye İNMEZ |
+| Platform yöneticisi | Aynı kural — toplu |
+
+**GEREKÇE:** kişi "kurum yöneticim bunu okuyacak" kaygısı taşımadan dürüst
+cevap verir; ölçüm temiz kalır. Seçim ekranında kapalı olması oyunlanmayı
+engeller — menti mentörün cevabını görürse kendini ona göre ayarlar.
+
+> ⚠️ **K-ANONİMLİK:** toplu görünüm, kişi sayısı azken kişiyi ELE VERİR.
+> Üç üyeli dernekte "%33 özgüven desteği arıyor" bir kişiyi işaret eder.
+> Eşik gerekir (ör. 5 kişiden az olduğunda dağılım gösterilmez). Açık
+> kalem: G1-22.
+
+### 10.4 Serbest Özet Alanı
+
+Kalıyor ama İŞİ FARKLI: algoritma için değil, İNSAN KARARI için. Araştırma
+bulgusu: ilişki kalitesini besleyen şey GERÇEK benzerlikten çok ALGILANAN
+benzerlik. Yani: seçmeli sorular SKORU üretir, özet alanı SEÇİMİ
+kolaylaştırır.
+
+> ⚠️ **AÇIK:** özet alanı yönergesi (ne yazılmalı) kesinleşmedi.
+
+### 10.5 Bedava Kazanç — Eşleşme Kartı Metni
+
+Üç soru cevaplandığında kartta şu yazılabilir:
+
+> "İkiniz de birlikte düşünmeyi tercih ediyorsunuz. Sen ağ kurmada destek
+> arıyorsun, o bu konuda deneyimli."
+
+Bugünkü kart sadece yüzde gösteriyor. Bu cümle hem seçimi kolaylaştırır
+hem ALGILANAN BENZERLİĞİ besler. Yeni veri gerektirmiyor — aynı üç sorudan
+çıkıyor.
+
+> ⚠️ **AYRIM:** karşılıklı tercihler kartta GÖRÜNÜR, ihtiyaç beyanı
+> GÖRÜNMEZ (10.3 kuralı).
+
+### 10.6 Ön Koşul
+
+> ⚠️ Profilde bugün ne olduğu BİLİNMİYOR → önce envanter keşfi (S21). Ajan
+> birkaç kez "yok" sanılan şeyin var olduğunu buldu; tasarımı keşiften önce
+> kesinleştirme.
+
+---
 
