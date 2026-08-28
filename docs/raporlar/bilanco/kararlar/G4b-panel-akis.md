@@ -272,7 +272,7 @@ Etkisi: Kullanıcı başarısını dışarı taşır (viral + motivasyon).
 Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: Faz 7'ye taşındı (kullanıcı deneyimi fazı).
 ---
 
 ## Bu grupta zaten yapılmışlar (✅ — kart YOK)

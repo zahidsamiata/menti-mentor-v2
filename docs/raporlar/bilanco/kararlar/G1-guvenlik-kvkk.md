@@ -39,7 +39,7 @@ Kaynak: karar-defteri (md.3-alt / K4) · Numara: md.3-alt
 ⚠️ bilanço yanılmış DEĞİL: `birthDate`/`birthYear` hem backend/src hem frontend/src hem schema.prisma'da geniş arandı → hiç yok (⬜ doğrulandı).
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: Faz 2'ye çekildi — KVKK zinciri (G1-05/06/07/08 ile birlikte). Yaş verisi hukukçu paketine bağlı.
 ---
 
 **[G1-02] Menti→mentör DISC harfini gizleyen rol-ayrışması kanıtlanamadı**

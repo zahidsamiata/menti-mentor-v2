@@ -94,7 +94,7 @@ Etkisi: İşlevsel tamam; belge zayıflığı sonraki geliştiriciyi/PO'yu belir
 Kaynak: karar-defteri GRUP 3 (md.13-akraba/B13) · Numara: md.13-akraba / B13
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: Faz 6'ya taşındı (içerik fazı) — sertifika içerik zinciriyle birlikte.
 ---
 **[G3-06] DISC canlı soru sayısı teyidi (kod 32 ↔ canlı ~20)**
 Ne: Kod 32 DISC sorusu üretir; canlı ortamda ~20 görünüyor olabilir (seed eksik/kısmi şüphesi). Canlı sayı DB'ye sorulmadı.

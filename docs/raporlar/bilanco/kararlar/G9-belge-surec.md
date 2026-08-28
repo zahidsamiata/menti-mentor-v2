@@ -95,7 +95,7 @@ Kaynak: karar-defteri GRUP 7 (T1-B3 belge-denetimi :59)
 Numara: NUMARASIZ
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[x] PO notu: Faz 1. Tek paragraf gerekçe. ⚠️ STK anket kararıyla ÇELİŞMEZ: kurum ANKET yapabilir (G3-04), SERTİFİKA soruları kilitli kalır — ikisi ayrı sistem.
+[x] PO notu: Faz 1. 09-DURUM'daki eski çelişki blokları arşive taşınacak (belge-hijyeni). Not: önceki PO notu yanlışlıkla sertifika/anket konusunu anlatıyordu — düzeltildi.
 ---
 
 ---
