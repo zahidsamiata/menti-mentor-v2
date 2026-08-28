@@ -20,7 +20,7 @@
 
 ### SAYILMADI (yalnız var olduğu NOT edildi — kalem çıkarılmadı)
 - `icerik/bolumler/01-disc.md · 02-sjt.md · 03-sertifika.md · 04-ogrenme-kurumozel.md · 05-felsefe-motoru.md` — **SAYILMADI: ham içerik** (ana belgeler bunları referans veriyor; soru metni, karar kalemi değil).
-- `icerik/00-icerik-index.md · disc-sorulari-2026-08-15.md · sjt-sorulari-2026-08-15.md · sertifika-senaryolari-2026-08-15.md · ogrenme-yolculugu-2026-08-15.md · stk-custom-sorular-2026-08-15.md` — **SAYILMADI: ham içerik + BAYAT** (silinmiş `seed-questions.ts`'e dayanır, "20 DISC" der; tam-soru-dokumu bunları açıkça bayat ilan ediyor, §1 kaynak notu).
+- `icerik/00-icerik-index.md · disc-sorulari-2026-08-15.md · sjt-sorulari-2026-08-15.md · sertifika-senaryolari-2026-08-15.md · ogrenme-yolculugu-2026-08-15.md · stk-custom-sorular-2026-08-15.md` — **SAYILMADI: ham içerik + BAYAT** (silinmiş `seed-questions.ts`'e dayanır, "20 DISC" der; tam-soru-dokumu bunları açıkça bayat ilan ediyor, §1 kaynak notu). *(⚠️ GÜNCELLEME 2026-08-28, G9-08/16: bu 6 belge `docs/arsiv/icerik/`'e taşındı.)*
 - Bu SAYILMADI belgelerinde gömülü YENİ karar/PO-notu görülmedi (ana 3 belge onları zaten kapsıyor).
 
 ---

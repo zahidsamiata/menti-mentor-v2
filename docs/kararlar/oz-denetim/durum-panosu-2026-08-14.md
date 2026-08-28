@@ -1,6 +1,7 @@
 # 🎛️ DURUM PANOSU — Kararlar Tek Bakışta
 
-**🔄 YAŞAYAN** (canonical: karar statü görünürlüğü) · **Son güncelleme:** 2026-08-14
+**📸 DONDURULMUŞ** (2026-08-14 anlık görüntüsü) · **Son güncelleme:** 2026-08-14
+> ⚠️ GÜNCELLEME (2026-08-28, G9-06): Üst-etiket 🔄 YAŞAYAN → 📸 DONDURULMUŞ'a çevrildi — pano 2026-08-14'ten beri güncellenmedi (~14 gün), "yaşayan" iddiası bayattı (KURAL 12 tazelik). Güncel karar durumu için `docs/kararlar/00-KARAR-TAKIP.md` canonical'dır. İçerik değiştirilmedi; yalnız etiket dürüstleştirildi.
 
 > **Kaynak:** `00-karar-statu-haritasi-2026-08-14.md` (📸 dondurulmuş ham harita). **Bu pano onun görsel özetidir**
 > — yeni bilgi/keşif ÜRETMEZ, sadece tarayabilir tek-bakışa çevirir. **Kod ilerledikçe bu pano güncellenir** (🔄).

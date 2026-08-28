@@ -2,7 +2,9 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed-questions.ts` + canlı DB salt-okuma sayımı.
 
-> ⚠️ **GÜNCELLEME (2026-08-26):** **BAYAT** — kaynağı **silinmiş** `seed-questions.ts` (backend `5745e0f`); "20 DISC" der. Kod gerçeği artık **32 soru** (`seed.ts`, 20 CORE + 12 DEEPENING). Güncel döküm: [`bolumler/01-disc.md`](bolumler/01-disc.md) + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md).
+> 🗄️ **ARŞİV (2026-08-28, G9-08/16):** BAYAT döküm (silinmiş `seed-questions.ts`, "20 DISC") — `docs/raporlar/icerik/`'ten `docs/arsiv/icerik/`'e taşındı. Güncel kod-kanıtlı kaynak: [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md) (DISC=32).
+
+> ⚠️ **GÜNCELLEME (2026-08-26):** **BAYAT** — kaynağı **silinmiş** `seed-questions.ts` (backend `5745e0f`); "20 DISC" der. Kod gerçeği artık **32 soru** (`seed.ts`, 20 CORE + 12 DEEPENING). Güncel döküm: [`bolumler/01-disc.md`](../../raporlar/icerik/bolumler/01-disc.md) + [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md).
 
 > Bu belge DISC mizaç testinin **tüm sorularını tam metin** içerir. Kullanıcı yanıtı/PII **yoktur** — yalnız soru şablonları.
 

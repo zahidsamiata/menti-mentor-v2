@@ -1,5 +1,7 @@
 # MentiMentor — Admin Panelleri Keşif + Tasarım Raporu
-**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `09-DURUM.md`
+**📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `../kararlar/09-DURUM.md`
+
+> 🗄️ **ARŞİV (2026-08-28, G9-13):** `docs/raporlar/kesif/`'ten `docs/arsiv/`'e taşındı — anlattığı **6 admin paneli (Kpi/Members/Meetings/DiscSummary + drill-down) canlıda uygulandı** (kod-teyitli, G4a ✅). Tasarım niyeti gerçekleştiği için aktif keşif klasöründen çıkarıldı.
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma keşif (7 paralel ajan) · **Amaç:** 6 admin panelini KODLAMADAN önce tasarımı netleştirmek
 **Kaynak:** `docs/teshis-raporu-2026-08-02.md` Grup A. Her karar mevcut koda dayalı (dosya:satır).
 

@@ -1,5 +1,7 @@
 # MENTİMENTOR / SİVİLKAPASİTE — BELGE HARİTASI (INDEX)
-**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-23 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
+**🔄 YAŞAYAN** (canonical: belge haritası) · **Son güncelleme:** 2026-08-28 · **Amaç:** Projenin kalıcı hafızası. Hangi bilgi hangi belgede.
+
+> ⚠️ GÜNCELLEME (2026-08-28, G9-10): Eksik belgeler eklendi (`bilanco/kararlar/` G1-G11 karar kartları + OKUMA-REHBERI, `kesif/eslestirme-motoru-kesfi`, `arsiv/icerik/` 6 bayat döküm). Arşive taşınan 8 belge (PROJECT_STATUS · admin-panelleri-tasarim · icerik/ 6 döküm) Arşiv bölümüne alındı.
 
 > ⚠️ GÜNCELLEME (2026-08-23): `docs/kararlar/` ve `docs/raporlar/` alt-klasörlere ayrıldı (git mv, içerik değişmedi).
 > Bu INDEX yeni ağaca göre yeniden düzenlendi. Canonical taşıyıcılar (00-INDEX · 09-DURUM · 00-KARAR-TAKIP ·
@@ -30,7 +32,7 @@ Derin gerekçe gerekince: `konu/01–11` numaralı karar belgeleri + ilgili `rap
 
 ## 📁 Klasör yapısı (2026-08-02 · 2026-08-19 · 2026-08-23 alt-klasörlendi)
 Tüm dokümanlar `docs/` altında toplandı; proje kökü yalnızca gerçek proje dosyalarını tutar
-(`CLAUDE.md`, `PROJECT_STATUS.md` [📸 deprecated — güncel durum 09-DURUM], `package.json`, `docker-compose.yml`, `.gitignore`, `.gitmodules`).
+(`CLAUDE.md`, `package.json`, `docker-compose.yml`, `.gitignore`, `.gitmodules`). *(`PROJECT_STATUS.md` [📸 deprecated] 2026-08-28'de `docs/arsiv/`'e taşındı — G9-09.)*
 
 Her alt klasör için **"buraya ne girer"** (tek satır):
 
@@ -91,7 +93,7 @@ docs/
 
 | Belge | İçerik | Tür |
 |---|---|---|
-| `durum-panosu-2026-08-14.md` | Kararların tek-bakışta renkli statü panosu (92 karar; 🟨 az-işle-kazanç öne çıkarılmış) | 🔄 YAŞAYAN (statü panosu) |
+| `durum-panosu-2026-08-14.md` | Kararların tek-bakışta renkli statü panosu (92 karar; 🟨 az-işle-kazanç öne çıkarılmış) | 📸 DONDURULMUŞ (2026-08-14 anlık; G9-06 ile 🔄→📸, güncel takip: `00-KARAR-TAKIP`) |
 | `karar-statu-haritasi-2026-08-14.md` | ~72 kararın 3-boyutlu (plan/kod/çelişki) renkli statü haritası | 📸 DONDURULMUŞ (statü haritası) |
 | `belge-aksiyon-denetimi-2026-08-11.md` | 34 belgedeki kararlar gerçekle kıyas (YAPILDI/UNUTULDU/…) | 📸 DONDURULMUŞ (denetim) |
 | `belge-denetimi-2026-08-10.md` | 09/10'un gerçekle kıyas denetimi | 📸 DONDURULMUŞ (denetim) |
@@ -132,13 +134,14 @@ docs/
 |---|---|
 | **`tam-soru-dokumu-2026-08-26.md`** (+ `bolumler/01-05`) ⭐ GÜNCEL | **Kod-kanıtlı TAM döküm** (DISC 32 · SJT 3 · sertifika 20 · öğrenme 13) + puanlama/felsefe analizi + #31 kanıt + sayı çelişkileri + CORE-eşiği + ⏳ canlı-teyit kuyruğu |
 | **`sorular-po-inceleme-2026-08-26.md`** + **`eslesme-uyum-po-inceleme-2026-08-26.md`** ⭐ PO | Ürün sahibi işaretleme dosyaları: 68 soru + eşleştirme uyum tablosu (sade, jargonsuz, `[ ] PO notu`) |
-| `00-icerik-index.md` + `disc-sorulari` · `sjt-sorulari` · `sertifika-senaryolari` · `ogrenme-yolculugu` · `stk-custom-sorular` (hepsi 2026-08-15) ⚠️ BAYAT | Eski döküm — silinmiş `seed-questions.ts`'e dayanır (⚠️ GÜNCELLEME notlu). Güncel için üstteki 2026-08-26 dökümü |
+| *(6 bayat döküm — 2026-08-15)* ⚠️ **2026-08-28'de `docs/arsiv/icerik/`'e taşındı (G9-08/16)** | `00-icerik-index` + `disc-sorulari` · `sjt-sorulari` · `sertifika-senaryolari` · `ogrenme-yolculugu` · `stk-custom-sorular`. Silinmiş `seed-questions.ts`'e dayanır. Güncel: üstteki 2026-08-26 dökümü. Bkz. Arşiv bölümü. |
 
 ### `raporlar/kesif/` — keşif/teşhis fotoğrafları (2026-08-02 + 2026-08-19)
 | Belge | İçerik |
 |---|---|
 | `teshis-raporu-2026-08-02.md` | Niyet vs mevcut-kod envanteri, merge runbook, KVKK, güvenlik |
-| `admin-panelleri-tasarim-2026-08-02.md` | 6 admin panelinin keşif + tasarım kartları |
+| *(`admin-panelleri-tasarim-2026-08-02.md`)* ⚠️ **2026-08-28'de `docs/arsiv/`'e taşındı (G9-13)** | 6 admin paneli keşif+tasarım — anlattığı paneller canlıda uygulandı. Bkz. Arşiv bölümü |
+| `eslestirme-motoru-kesfi-2026-08-27.md` | Eşleştirme motoru keşfi (katman ağırlıkları/veto/sektör asimetri) — `degerlendirme-sistemi-tasarim-2026-08-27` tasarımının kaynağı |
 | `depo-denetimi-2026-08-02.md` | Repo hijyeni (boş/artık/yanlış-yerleşim/isimlendirme) |
 | `hayalet-backend-2026-08-02.md` | Yarım bağlı / ölü / kırık kod envanteri |
 | `kart-havuz-backend-envanteri-2026-08-02.md` | Kart/havuz/uyum/niyet-mektubu/foto backend envanteri |
@@ -176,10 +179,15 @@ docs/
 | `bolumler/T1..T4-*.md` (16 dosya) | Ham tur-tur bölüm defterleri (tarihsel iz) |
 | `kararlar/00-PO-KARARLARI-2026-08-27.md` | 184 kartın PO karar özeti (dağılım TAM SAYI; 8 boş kart 2026-08-28 bağlandı → 92/87/3/2) |
 | `kararlar/00-ONCELIK-SIRASI-2026-08-28.md` | 🔄 İşleme-al kalemlerinin kod iş sırası (8 faz + 🟣 PO-park + bağlı işler); S17 çıktısı, 10-yol "KOD İŞ SIRASI" ile eşli |
+| `kararlar/00-OKUMA-REHBERI-2026-08-27.md` | 📸 Tur-5b karar dosyaları okuma dizini + mutabakat (her G-dosyasına giriş) |
+| `kararlar/G1..G11-*.md` (12 karar dosyası) | 📸 PO'nun tek tek işaretlediği karar kartları, konu grubu bazlı: G1 güvenlik-kvkk · G2 eşleştirme-psikometri · G3 içerik · G4a/G4b panel-akış · G5 bildirim-mail · G6 veri-modeli-borç · G7 ux-tasarım · G8 altyapı-po-manuel · **G9 belge-süreç** (bu turun kaynağı) · G10 ölü-kod-terk · G11 ürün-stratejisi |
 
 ## Arşiv — `docs/arsiv/`
 | Belge | Neden arşivde |
 |---|---|
+| `PROJECT_STATUS.md` | 📸 Deprecated onboarding (9 Ağu'dan eski); kökten taşındı 2026-08-28 (G9-09). Güncel durum: `09-DURUM.md` |
+| `admin-panelleri-tasarim-2026-08-02.md` | 📸 6 admin paneli tasarımı — anlattığı paneller canlıda uygulandı; `kesif/`'ten taşındı 2026-08-28 (G9-13) |
+| `icerik/` (6 belge: `00-icerik-index` + `disc-sorulari` · `sjt-sorulari` · `sertifika-senaryolari` · `ogrenme-yolculugu` · `stk-custom-sorular`, 2026-08-15) | 📸 BAYAT içerik dökümü (silinmiş `seed-questions.ts`, "20 DISC"); `raporlar/icerik/`'ten taşındı 2026-08-28 (G9-08/16). Güncel: `raporlar/icerik/tam-soru-dokumu-2026-08-26.md` |
 | `SOHBET-KARAR-OZETI-devir.md` | Eski devir/özet belgesi — güncel karar konu/01–10'da |
 | `strateji-ve-guvenlik-denetimi.md` | Eski strateji/güvenlik denetimi — güncel güvenlik konu/04'te |
 | `09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md` | 09-DURUM + 10-yol-haritası'nın 2026-08-10 öncesi tam hâli (tarihsel) |

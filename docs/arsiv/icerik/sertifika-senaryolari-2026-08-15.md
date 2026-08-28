@@ -2,7 +2,9 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed-certification.ts` + canlı DB salt-okuma sayımı.
 
-> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/03-sertifika.md`](bolumler/03-sertifika.md) + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md). Kod = **20 senaryo** (4 red-line konu); canlı sayısı ⏳ TEYİT GEREK.
+> 🗄️ **ARŞİV (2026-08-28, G9-08/16):** BAYAT döküm — `docs/raporlar/icerik/`'ten `docs/arsiv/icerik/`'e taşındı. Güncel kod-kanıtlı kaynak: [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md) (sertifika=20).
+
+> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/03-sertifika.md`](../../raporlar/icerik/bolumler/03-sertifika.md) + [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md). Kod = **20 senaryo** (4 red-line konu); canlı sayısı ⏳ TEYİT GEREK.
 
 > Mentör sertifika sınavının **tüm senaryoları + şıkları + puan/açıklama** tam metin. Kullanıcı yanıtı/PII yok.
 

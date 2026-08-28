@@ -1,4 +1,5 @@
 # Eşleştirme Uyum Tablosu — Ürün Sahibi İncelemesi (2026-08-26)
+**📸 DONDURULMUŞ (2026-08-26)** — PO işaretleme dosyası (üst-etiket eklendi: G9-10, 2026-08-28).
 **🟢 BYPASS (yalnız-belge)** — Sistem iki kişiyi eşleştirirken karakter (DISC) uyumunu nasıl hesaplıyor? Aşağıdaki kararlar KOD İÇİNDE sabit yazılı. Katılıp katılmadığınızı işaretleyin.
 
 ---

@@ -2,7 +2,9 @@
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed.ts:530-573` + canlı DB salt-okuma sayımı.
 
-> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/02-sjt.md`](bolumler/02-sjt.md) + [`tam-soru-dokumu-2026-08-26.md`](tam-soru-dokumu-2026-08-26.md). Kod = **3 senaryo** (OCEAN ölçer, DISC değil).
+> 🗄️ **ARŞİV (2026-08-28, G9-08/16):** BAYAT döküm — `docs/raporlar/icerik/`'ten `docs/arsiv/icerik/`'e taşındı. Güncel kod-kanıtlı kaynak: [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md) (SJT=3).
+
+> ⚠️ **GÜNCELLEME (2026-08-26):** Güncel kod-kanıtlı döküm: [`bolumler/02-sjt.md`](../../raporlar/icerik/bolumler/02-sjt.md) + [`tam-soru-dokumu-2026-08-26.md`](../../raporlar/icerik/tam-soru-dokumu-2026-08-26.md). Kod = **3 senaryo** (OCEAN ölçer, DISC değil).
 
 > SJT (Situational Judgment Test) senaryo sorularının **tam metni + seçenekler + OCEAN ağırlıkları**. Kullanıcı yanıtı yok.
 
