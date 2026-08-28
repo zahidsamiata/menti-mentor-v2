@@ -54,6 +54,10 @@
 - Paralel çatı PR'ı varsa: bump'ı TEK noktada (en son açık PR'da) yap — her PR'da ayrı bump CI'ı gereksiz tekrar bekletir.
 - Pointer "CONFLICTING" ama **descendant** görünüyorsa: git auto-resolve eder, zararsız — panik yok, doğrula:
   `git merge-base --is-ancestor <eski-pointer> <yeni-pointer>` (0 dönerse güvenli, ileri sarım).
+- ⚠️ **Merge SIRASI (2026-08-28'de yaşandı, bkz. Faz 1b):** backend PR merge → **çatı pointer re-bump → çatı PR merge.**
+  Çatı PR'ı pointer düzeltilmeden merge edilirse main, backend **feature-commit'ini** gösterir (ağaç DOĞRU kalır — kod sağlam —
+  ama pointer **sarkar**). Düzeltme: temiz main'den ayrı `chore(pointer)` PR'ı ile `main` HEAD'e re-bump. Sarkma zararsızdır
+  (feature-commit backend main'in atası) ama temiz değildir → tek turda kapat.
 
 ## API/Şema Değişikliği
 - Endpoint veya Prisma şeması değişince "bunu kim kullanıyor?" taraması yapılır: testler, frontend, diğer servisler.

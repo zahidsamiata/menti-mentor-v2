@@ -197,14 +197,14 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
               className="mt-0.5 h-4 w-4 rounded border-input accent-primary cursor-pointer"
             />
             <span className="text-xs text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors">
+              <strong className="text-foreground">18 yaşından büyük olduğumu beyan ederim</strong> ve{' '}
               <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
-                Kişisel Verilerin Korunması Kanunu (KVKK)
-              </a>{' '}
-              kapsamında kişisel verilerimin işlenmesine açık rızam ile{' '}
+                KVKK Aydınlatma Metni
+              </a>{'’'}ni okuyup kişisel verilerimin işlenmesine açık rıza vererek{' '}
               <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
                 Kullanım Koşullarını
               </a>{' '}
-              okudum, kabul ediyorum.
+              kabul ediyorum.
             </span>
           </label>
           {errors['kvkk'] && (
