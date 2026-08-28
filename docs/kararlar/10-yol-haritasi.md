@@ -92,6 +92,7 @@
 
 **FAZ 8 — Kalanlar:**
 - G4-02/04/05/08/14/17 panel · G6-01 N+1 · G6-05 metin merkezileştirme · G7-03 SEO · G10-22/23 · G5-05 geri bildirim akışı · **keşifler:** G4-09+G4-10 super-admin · G10-25 profil düzenleme.
+- ⚠️ **Sıralamada tek tek anılmayan işleme-al kalemleri (DURAK gereği eklendi, PO teyidine açık):** G1-01 yaş 18+ (KVKK-akraba) · G2-01/02/03/04/05 DISC psikometri PO-onay noktaları (Big Five örtüşmesi PO kararı) · G2-11 KARAR 6 oto-onay tetiği · G3-05 sertifika soru ekleme yetkisi · G4-39 "görüşme tamamladım" kartı · G8-13 sekme yavaşlığı · G8-14 sol-alt kullanıcı menüsü. (Detay: `00-ONCELIK-SIRASI-2026-08-28.md`.)
 
 **Bağlı işler:** G1-13↔G1-10 · G3-04→G3-13 · G1-17↔G7-04 · G2-07+G2-08+G10-21 · G8-01↔G10-25 · G3-09→G3-08 · G5-01+G5-02+G1-09. (Detay: `00-ONCELIK-SIRASI-2026-08-28.md`.)
 

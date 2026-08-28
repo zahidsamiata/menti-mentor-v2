@@ -70,7 +70,7 @@
 | S13 | DISC-DERİNLEŞME kurgusu tasarlanıp kodlanacak | 2026-08-23 | 🔵 içerik-felsefe keşfine bağlı, kodlanmadı | (A1, numarasız) |
 | S14 | Belge yeniden-yapılandırma (~68 belge) tamamlanacak | 2026-08-23 | 🟡 kısmen (bu bilanço onun parçası), tamamı değil | 123 (A5) |
 | S16 | Eşleştirme/değerlendirme sistemi TASARIM TEZİ yazılacak (DISC→Big Five, Likert→senaryo; keşif tespit turuydu) | 2026-08-27 | ✅ YAPILDI (2026-08-28, iki tur) — tasarım belgesi yazıldı: `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` (Bölüm 1-16). Kalemler Bölüm 16 KALEM LİSTESİ'nde. | 125-130 + G2 kartları |
-| S17 | İşleme-al kalemleri ÖNCELİK SIRASINA sokulacak (87 işleme-al + 2 keşif → 10-yol'a) | 2026-08-27 | ⬜ PO kararları işlendi (`bilanco/kararlar/00-PO-KARARLARI-2026-08-27.md`); sıralama ayrı tur | 00-PO-KARARLARI |
+| S17 | İşleme-al kalemleri ÖNCELİK SIRASINA sokulacak (87 işleme-al + 2 keşif → 10-yol'a) | 2026-08-27 | ✅ YAPILDI (2026-08-28) — 8 boş kart da bağlandı (dağılım 92 işleme-al/87 şimdilik/3 geçersiz/2 keşif); sıra: `bilanco/kararlar/00-ONCELIK-SIRASI-2026-08-28.md` + 10-yol "KOD İŞ SIRASI" bölümü | 00-ONCELIK-SIRASI + 10-yol |
 | S18 | Super-admin kapısı KEŞFİ (yeni /platform'da olmayan yetenek var mı → taşı, sonra kapat) | 2026-08-27 | ⬜ keşif olmadan silme YOK | G4-09/G4-10 |
 | S19 | Sunucu/altyapı sertleştirme TARAMASI (HTTPS/firewall/SSH/SSL/yedek) — çıkış blokeri | 2026-08-27 | 🔴 çıkış öncesi ZORUNLU | G1-28 |
 | S20 | Fotoğraf kayıt-sonrası DÜZENLEME keşfi (kullanıcı foto/bilgi güncelleyebiliyor mu) | 2026-08-27 | ⬜ önce keşif sonra iş | G10-25 |

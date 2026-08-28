@@ -15,6 +15,19 @@
 | ⬜ Boş (PO listesinde YOK) | **8** | aşağıda §7 — kararsız kaldı, raporlandı |
 | **TOPLAM** | **184** | 176 karar + 8 boş |
 
+> ⚠️ **GÜNCELLEME (2026-08-28): 8 boş kart PO'ca bağlandı → yeni dağılım (TAM SAYI, kod-kutusu doğrulandı):**
+>
+> | Karar | Eski | **Yeni** | Değişim |
+> |---|:---:|:---:|---|
+> | ✅ İşleme al | 87 | **92** | +5 (G3-08, G4-01, G4-24, G8-08, G9-05) |
+> | ⏸️ Şimdilik alma | 85 | **87** | +2 (G4-11, G4-12) |
+> | 🗑️ Geçersiz | 2 | **3** | +1 (G3-11) |
+> | ❓ Önce keşif | 2 | **2** | (G4-10 PO-teyit edildi; kutu aynı) |
+> | ⬜ Boş | 8 | **0** | hepsi bağlandı |
+> | **TOPLAM** | 184 | **184** | — |
+>
+> Sıralama: `00-ONCELIK-SIRASI-2026-08-28.md` (S17 kapandı). §7'deki 8 kart artık karara bağlı (o bölüm tarihsel iz olarak korunur).
+
 ## 2. 🔴 ÇIKIŞ BLOKERLERİ (9 — çıkış öncesi ZORUNLU)
 - **G8-01** — Foto kalıcı disk (Dokploy volume); yoksa her deploy fotoğrafları siler.
 - **G1-05** — KVKK kullanıcı-yüzü üçlüsü (veri indir/anonimleştir/sil) arayüzü yok.

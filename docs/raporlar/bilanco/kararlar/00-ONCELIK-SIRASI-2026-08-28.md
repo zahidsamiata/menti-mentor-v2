@@ -93,6 +93,16 @@ G4-02/04/05/08/14/17 panel · G6-01 N+1 · G6-05 metin merkezileştirme ·
 G7-03 SEO · G10-22/23 · G5-05 geri bildirim akışı
 **KEŞİFLER (araya sıkışır):** G4-09 + G4-10 super-admin · G10-25 profil düzenleme
 
+> ⚠️ **FAZ 8 — sıralamada tek tek anılmayan "işleme al" kalemleri (DURAK gereği buraya eklendi):**
+> Aşağıdaki 11 kart karar kutusunda `[x] işleme al` işaretli ama PO'nun verdiği faz
+> listesinde adı geçmiyordu → kaybolmasın diye Faz 8'e alındı. **Yerleştirme PO teyidine açık.**
+> - G1-01 yaş (18+) form-input + DB alanı *(⚠️ KVKK-akraba; PO Faz 2/4'e çekmek isteyebilir)*
+> - G2-01 DISC uyum matrisi PO onayı · G2-02 hard-gate toksik blok onayı · G2-03 tiebreak D>I>S>C onayı · G2-04 psikometrik gerekçe belgeleme · G2-05 %60/40 varsayılan onayı *(⚠️ 5'i de DISC psikometri PO-onay noktası; Big Five tasarımıyla örtüşme PO kararı)*
+> - G2-11 KARAR 6 otomatik onay tetiği (davetli=onaylı)
+> - G3-05 sertifika soru ekleme yetkisi + gerekçe belgesi
+> - G4-39 "görüşme tamamladım 🎉" paylaşım kartı
+> - G8-13 sekme geçiş yavaşlığı (istemci önbelleği) · G8-14 sol-alt kullanıcı kartı/menü
+
 ---
 
 ## BAĞLI İŞLER TABLOSU

@@ -174,6 +174,8 @@ docs/
 | `bilanco-po-ozet-2026-08-26.md` | ⭐ Ürün sahibi özeti (sade Türkçe, `[ ] PO notu` satırlı — arkada ne kaldı) |
 | `tekrar-onleme-2026-08-26.md` | Kök-neden teşhisi + KURAL 9-12 önerisi (PO onayına; yürürlükte DEĞİL) |
 | `bolumler/T1..T4-*.md` (16 dosya) | Ham tur-tur bölüm defterleri (tarihsel iz) |
+| `kararlar/00-PO-KARARLARI-2026-08-27.md` | 184 kartın PO karar özeti (dağılım TAM SAYI; 8 boş kart 2026-08-28 bağlandı → 92/87/3/2) |
+| `kararlar/00-ONCELIK-SIRASI-2026-08-28.md` | 🔄 İşleme-al kalemlerinin kod iş sırası (8 faz + 🟣 PO-park + bağlı işler); S17 çıktısı, 10-yol "KOD İŞ SIRASI" ile eşli |
 
 ## Arşiv — `docs/arsiv/`
 | Belge | Neden arşivde |
