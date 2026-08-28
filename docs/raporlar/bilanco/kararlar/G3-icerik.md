@@ -220,7 +220,7 @@ Etkisi: Kullanıcı güvenini zedeleyen görünür yazım hataları.
 Kaynak: karar-defteri GRUP 6 (NUMARASIZ) · Numara: NUMARASIZ
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
-[ ] PO notu: 
+[x] PO notu: *(PO 2026-08-28: Faz 1→Faz 6)* — yeni içerik yazılırken sorular zaten baştan yazılacak; silinecek metni düzeltmenin anlamı yok. Yazım hataları Faz 6 içerik turunda doğru yazılarak kapanır.
 ---
 **[G3-16] Global içerik seed'i ana Neon'a uygula (DISC+LearningJourney "boş" görünüyor)**
 Ne: Canlı (=lokal ana Neon) ortamda DISC + LearningJourney içeriği "boş" görünüyor = seed eksik. PO-onaylı güvenli seed uygulanmalı.

@@ -71,7 +71,7 @@
 
 **FAZ 1 — Ucuz temizlik** (paralel güvenli, migration yok):
 - ✅ **Faz 1a (2026-08-28, PR — MERGE BEKLİYOR):** G9 belge-düzeni 12 kalem (G9-02/03/04/05/06/08/09/10/13/14/15/16) + G9-05 gerekçe TAMAM. Detay: G9 kartları ✅.
-- ⬜ **Faz 1b (kod temizliği — AYRI TUR):** G10-01 ölü kod · G6-07 kullanılmayan paket · G8-06 dal temizliği · G3-15 yazım · G7-12 slogan · G7-13 tema yönü.
+- ⬜ **Faz 1b (kod temizliği — AYRI TUR):** G10-01 ölü kod · G6-07 kullanılmayan paket · G8-06 dal temizliği · G7-12 slogan · G7-13 tema yönü. *(G3-15 yazım → Faz 6'ya taşındı, PO 2026-08-28: sorular baştan yazılacak.)*
 - ⏸️ G9-11/G9-12 (büyük belge reorg) + G9-07 (OneDrive taşıma, PO-manuel) = ŞİMDİLİK ALINMADI.
 
 **FAZ 2 — Çıkış blokeri kod tarafı:**
@@ -87,7 +87,7 @@
 - G2-09 sektör asimetri (B9.4) · G2-10 kalite çarpanı çift-uygulama (B9.5) · G2-07+G2-08+G10-21 sektör+OCEAN (TEK İŞ) · 12 senaryo+arketipler ⚠️ MIGRATION (B3/B5) · yeni skor+2 veto (B9.1/9.2/9.3) · madde 125 derinleşme/triggersOn (B6) · G4-01 havuz kartı (B10.3) · göç planı (B12, ⚠️ AÇIK).
 
 **FAZ 6 — İçerik:**
-- ⭐ G3-09 seed runner ÖNCE (G3-08'i kilitler) · G3-08 sertifika 5→20 (⚠️ canlı DB, PO onayı) · G3-13 answerType ⚠️ MIGRATION · G3-19 etiket havuzu · sertifika hatalı-konu hedefleme (B7) · öğrenme↔sertifika yüzey ayrımı (B8) · menti personası çeşitlendirme (B8) · G3-16+G3-18 canlı içerik teyidi · **G3-05 sertifika soru ekleme yetkisi** (PO 2026-08-28: Faz 8→Faz 6).
+- ⭐ G3-09 seed runner ÖNCE (G3-08'i kilitler) · G3-08 sertifika 5→20 (⚠️ canlı DB, PO onayı) · G3-13 answerType ⚠️ MIGRATION · G3-19 etiket havuzu · sertifika hatalı-konu hedefleme (B7) · öğrenme↔sertifika yüzey ayrımı (B8) · menti personası çeşitlendirme (B8) · G3-16+G3-18 canlı içerik teyidi · **G3-05 sertifika soru ekleme yetkisi** (PO 2026-08-28: Faz 8→Faz 6) · **G3-15 soru yazım hataları** (PO 2026-08-28: Faz 1→Faz 6, sorular baştan yazılacak).
 
 **FAZ 7 — Kullanıcı deneyimi:**
 - G4-22+G4-23 bekleme anı · G4-24 menti özgüven sunumu · G4-25 ret yumuşatma · G4-30 yönetici export · G4-31 kırmızı uyarı · G5-04 bildirim izni · G5-07 push stub · G7-01+G7-02+G7-09 erişilebilirlik (TEK PAKET) · **G4-39 "görüşme tamamladım" kartı** (PO 2026-08-28: Faz 8→Faz 7).

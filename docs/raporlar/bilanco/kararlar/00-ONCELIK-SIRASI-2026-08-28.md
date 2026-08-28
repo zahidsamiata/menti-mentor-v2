@@ -8,7 +8,7 @@
 >
 > ⚠️ **GÜNCELLEME (2026-08-28, PO teyidi):** Dağılım revize — **184 = 87 işleme-al · 87 şimdilik · 8 geçersiz · 2 keşif.**
 > G2-01..05 (DISC matrisi PO-onay noktaları) 🗑️ GEÇERSİZ oldu (Big Five'a geçildi) → sıralamadan çıkarıldı.
-> G1-01→Faz 2, G3-05→Faz 6, G4-39→Faz 7 taşındı. Faz 8'de G2-11/G8-13/G8-14 kaldı (bkz. Faz 8 notu).
+> G1-01→Faz 2, G3-05→Faz 6, G4-39→Faz 7, G3-15→Faz 6 (2026-08-28) taşındı. Faz 8'de G2-11/G8-13/G8-14 kaldı (bkz. Faz 8 notu).
 
 ## Sıralama Mantığı
 
@@ -45,8 +45,9 @@
 
 ### FAZ 1 — UCUZ TEMİZLİK (paralel güvenli, migration yok)
 G9 grubu 12 kalem (belge düzeni) · G9-05 gerekçe · G10-01 ölü kod sil ·
-G6-07 kullanılmayan paketler · G8-06 dal temizliği · G3-15 yazım hataları ·
+G6-07 kullanılmayan paketler · G8-06 dal temizliği ·
 G7-12 slogan · G7-13 tema yönü
+> ⚠️ **G3-15 yazım hataları → Faz 6'ya taşındı** *(PO 2026-08-28)* — sorular Faz 6 içerik turunda baştan yazılacağı için burada düzeltme gereksiz.
 
 ### FAZ 2 — ÇIKIŞ BLOKERİ KOD TARAFI
 G1-05 KVKK hak ekranı · G1-07 rıza sürümü
@@ -87,7 +88,8 @@ G3-08 sertifika 5→20 (⚠️ canlı DB, PO onayı) · G3-13 answerType ⚠️ 
 (STK anket kararı) · G3-19 etiket havuzu · sertifika hatalı-konu hedefleme (B7) ·
 öğrenme↔sertifika yüzey ayrımı (B8) · menti personası çeşitlendirme (B8) ·
 G3-16 + G3-18 canlı içerik teyidi ·
-**G3-05 sertifika soru ekleme yetkisi + gerekçe belgesi** *(PO 2026-08-28: Faz 8→Faz 6)*
+**G3-05 sertifika soru ekleme yetkisi + gerekçe belgesi** *(PO 2026-08-28: Faz 8→Faz 6)* ·
+**G3-15 soru metni yazım hataları** *(PO 2026-08-28: Faz 1→Faz 6 — sorular zaten baştan yazılacak)*
 
 ### FAZ 7 — KULLANICI DENEYİMİ
 G4-22 + G4-23 bekleme anı · G4-24 menti özgüven sunumu · G4-25 ret yumuşatma ·
@@ -103,7 +105,7 @@ G7-03 SEO · G10-22/23 · G5-05 geri bildirim akışı
 > ⚠️ **FAZ 8 — sıralamada tek tek anılmayan "işleme al" kalemleri (DURAK gereği eklendi → PO 2026-08-28 karara bağladı):**
 > Önceki turda 11 kart PO faz listesinde yoktu → Faz 8'e alınmıştı. PO teyidi sonrası son durum:
 > - **G2-01..05 → 🗑️ GEÇERSİZ** (DISC matrisi/anti-match/tiebreak/%60-40; Big Five'a geçildi, onaylanacak taraf kalmadı — bkz. G2 kartları + tasarım B9). Geçersiz → **sıralamadan ÇIKARILDI.**
-> - **G1-01 → Faz 2'ye taşındı** (KVKK zinciri) · **G3-05 → Faz 6'ya** · **G4-39 → Faz 7'ye.**
+> - **G1-01 → Faz 2'ye taşındı** (KVKK zinciri) · **G3-05 → Faz 6'ya** · **G4-39 → Faz 7'ye** · **G3-15 → Faz 6'ya** (2026-08-28: sorular baştan yazılacak, düzeltme gereksiz).
 > - **Faz 8'de kalan (PO onaylı):** G2-11 KARAR 6 otomatik onay tetiği (davetli=onaylı) · G8-13 sekme geçiş yavaşlığı (istemci önbelleği) · G8-14 sol-alt kullanıcı kartı/menü.
 
 ---
