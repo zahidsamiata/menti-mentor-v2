@@ -19,57 +19,68 @@
 
 ## §A — Alan tablosu
 
-> **SAYIM:** **30 S21-anlamlı SATIR / ~40 benzersiz ALAN** — fark: bazı satırlar alan-GRUBU (`education`/`pastProjects`/`volunteerHistory` = 3 alan tek satır · UserProfile cert-6 tek satır · `discD/I/S/C` tek satır · schools/companies/communities 3 alan tek satır).
+> **SAYIM:** **30 S21-anlamlı SATIR / 40 benzersiz ALAN** — fark: bazı satırlar alan-GRUBU (`education`/`pastProjects`/`volunteerHistory` = 3 alan tek satır · UserProfile cert-6 tek satır · `discD/I/S/C` = 4 alan tek satır · schools/companies/communities 3 alan tek satır · MentorFilter 3 alan · iceBreaker/requestMessage 2 alan · ocean 5 alan). 30 satırdaki toplam alan: 40.
 >
-> **⭐ KANIT DÜZEYİ sütunu (en kritik):** `✅ ELLE` = bu keşifte dosya:satır grep/read ile doğrulandı · `⚠️ AJAN` = alt-ajan iddiası, elle teyit EDİLMEDİ · `❓ TEYİT` = belirsiz. **Sebep:** bu turda alt-ajan **5 alanı yanlışlıkla "ölü" ilan etti** (aşağıda), hepsi yazılıyordu → aynı ajanın kontrol edilmemiş satırları aynı riski taşır. **Doğrulanmamış satır doğrulanmış GİBİ okunmamalı.**
+> **⭐ KANIT DÜZEYİ — DAĞILIM (kesin, "~" yok):**
+> - **ÖNCE (2026-08-29 keşif turu):** ✅ ELLE **8** · ⚠️ AJAN **21** · ❓ **1** = **30**. *(Not: önceki kapanış raporunun "9✅/~18⚠️/1❓" ifadesi HATALIYDI; gerçek başlangıç 8/21/1=30.)*
+> - **SONRA (2026-08-29 DOĞRULAMA turu, bu belge):** ✅ DOĞRULANDI **30** · ⚠️ **0** · ❓ **0** = **30**. Tüm ⚠️ satırlar grep ile (kendim, alt-ajansız) teyit edildi; 1 ❓ çözüldü (mentorVisibilityEnabled).
+> - **Statü düzeltmeleri (2):** `interactionStyle` CANLI→**YARIM** (bonus fiilen tetiklenmiyor) · `mentorVisibilityEnabled` ❓→**yazılmıyor** (0 write). Hiçbir alanın "toplanıyor/okunuyor" VARLIK iddiası tümden yanlış çıkmadı (yazmalar/okumalar gerçek).
 >
-> **Durum:** CANLI = yazılıyor + (eşleştirmede/kararda) okunuyor · YARIM = yazılıyor, okunmuyor · ÖLÜ = yazılmıyor · KISMİ = kısmen bağlı.
+> **Durum:** CANLI = yazılıyor + (eşleştirmede/kararda) okunuyor · YARIM = yazılıyor, okunmuyor (veya etkisiz) · ÖLÜ = yazılmıyor · KISMİ = kısmen bağlı.
 
 ### User
 | # | alan | tip | toplanıyor | okunuyor | durum | KANIT DÜZEYİ |
 |---|---|---|---|---|---|---|
-|1| sectorTags | String[] | onboarding/userController | matching.ts:162 (%60) | CANLI | ⚠️ AJAN |
-|2| discType | DiscType? | onboarding disc submit | matching.ts:163,270 (%40 matris) | CANLI | ⚠️ AJAN (matris okuma ✅ ELLE matching.ts:270) |
-|3| discVector | Json? | discVectorService | matching.ts:236,286 | CANLI | ⚠️ AJAN |
-|4| timeCommitment | enum? | onboarding | matching.ts:174 (gate) | CANLI (gate) | ⚠️ AJAN |
-|5| interactionStyle | enum? (2: Görev/Sohbet, **MENTÖR**) | onboarding ProfileStep.tsx:271 | matching.ts:288 (+10 bonus) | CANLI | ✅ ELLE (bonus matching.ts:288; FE ProfileStep.tsx:271) |
-|6| expectationCategories | enum[6] (**MENTİ** beklenti) | onboarding ProfileStep.tsx:215 | matching.ts:278 (gate/örtüşme) | CANLI (gate) | ✅ ELLE (matching.ts:278; FE ProfileStep.tsx:215) |
-|7| skills | String[] | onboarding/profil | DTO çıktı (skor DEĞİL) | YARIM | ⚠️ AJAN |
-|8| bioSummary | String? (1000) | profil page:246 | insan kararı | CANLI (insan) | ⚠️ AJAN |
-|9| expertiseDetails | String? (1000, mentör) | profil page:272 | insan kararı | CANLI (insan) | ⚠️ AJAN |
-|10| targetAudience | String? (500, mentör) | profil page:290 | insan kararı | CANLI (insan) | ⚠️ AJAN |
-|11| education / pastProjects / volunteerHistory | Json? (2000) | profil | insan kararı | CANLI (insan) | ⚠️ AJAN |
-|12| selfProfile | Json? | patchSelfProfile/onboarding | esnek depo | CANLI | ⚠️ AJAN |
-|13| temperamentJson | Json? | temperament testi | discVector türevi | YARIM | ⚠️ AJAN |
-|14| enneagramWing | String? | temperamentController:60 | **okunmuyor** | YARIM (yaz-only) | ⚠️ AJAN |
-|15| discResultCard | Json? | onboarding | kullanıcıya "aha" kartı | CANLI | ⚠️ AJAN |
-|16| rematchPriority | Boolean | adminController:544 (rematch) | adminController:85,253 | CANLI | ✅ ELLE (adminController.ts:544 — ajan "ölü" dedi YANLIŞ) |
-|17| rematchCount | Int | adminController:545 (increment) | admin panel | CANLI | ✅ ELLE (adminController.ts:545 — ajan "ölü" dedi YANLIŞ) |
-|18| mentorVisibilityEnabled | Boolean | userController.ts:177 (select mi data mı belirsiz) | havuz görünürlüğü | ❓ TEYİT GEREK | ❓ TEYİT (userController.ts:177) |
+|1| sectorTags | String[] | userController:446 (create) | matching.ts:297-298 (%60, `computeSectorScore`) | CANLI | ✅ DOĞR (yazma+okuma) |
+|2| discType | DiscType? | onboardingController:413 (disc submit) | matching.ts:270,299-300 (%40 matris + excludeDiscTypes) | CANLI | ✅ DOĞR |
+|3| discVector | Json? | discVectorService:147 | matching.ts:286 (kesirli confidence blend) | CANLI | ✅ DOĞR |
+|4| timeCommitment | enum? | userController:449 / onboarding | matching.ts:274-275 (GATE, iki taraf `areTimeCommitmentsCompatible`) | CANLI (gate) | ✅ DOĞR |
+|5| interactionStyle | enum? (2: Görev/Sohbet, **MENTÖR**) | FE ProfileStep.tsx:104 (**YALNIZ `role==='MENTOR'`**) · backend userController:450 | matching.ts:288-292 (+10 bonus, `c.interactionStyle===opts.mentorInteractionStyle`) | ⭐ **YARIM** (okunuyor ama menti tarafı hiç toplanmadığı için `c.interactionStyle` null → bonus **FİİLEN TETİKLENMEZ**) | ✅ DOĞR — ⚠️ **KARAR 2'yi GÜÇLENDİRİR** (hizalama gerçekten ölçülemiyor; kod da fiilen ölü) |
+|6| expectationCategories | enum[6] (**MENTİ** beklenti) | FE ProfileStep.tsx:215 · onboarding | matching.ts:278-280 (**GATE/eleme** `if (!hasCommon) continue` — SKOR bileşeni DEĞİL) | CANLI (gate) | ✅ DOĞR — ⚠️ **KARAR 1 notu:** GATE ≠ ağırlık; `mentiNeeds` skor bileşeni olursa "çift-ağırlık" değil "gate + weight" (farklı mekanizma) |
+|7| skills | String[] | userController:455 / onboarding | DTO çıktı (matching.ts'te skor DEĞİL) | YARIM | ✅ DOĞR |
+|8| bioSummary | String? (1000) | userController:456 | insan kararı (skor değil) | CANLI (insan) | ✅ DOĞR |
+|9| expertiseDetails | String? (1000, mentör) | userController:457 | insan kararı | CANLI (insan) | ✅ DOĞR |
+|10| targetAudience | String? (500, mentör) | userController:458 | insan kararı | CANLI (insan) | ✅ DOĞR |
+|11| education / pastProjects / volunteerHistory | Json? (2000) | userController (schema:338-340 + create data) | insan kararı | CANLI (insan) | ✅ DOĞR |
+|12| selfProfile | Json? | userController:427 (patchSelfProfile) | esnek depo | CANLI | ✅ DOĞR |
+|13| temperamentJson | Json? | temperamentController:59 | discVector türevi | YARIM | ✅ DOĞR |
+|14| enneagramWing | String? | temperamentController:60 | **okunmuyor** (grep) | YARIM (yaz-only) | ✅ DOĞR |
+|15| discResultCard | Json? | onboardingController:415 | kullanıcıya "aha" kartı | CANLI | ✅ DOĞR |
+|16| rematchPriority | Boolean | adminController:544 (rematch) | adminController:85,253 | CANLI | ✅ DOĞR (ajan "ölü" dedi YANLIŞ) |
+|17| rematchCount | Int | adminController:545 (increment) | admin panel | CANLI | ✅ DOĞR (ajan "ölü" dedi YANLIŞ) |
+|18| mentorVisibilityEnabled | Boolean | ⭐ **YAZILMIYOR** — kodda tek occurrence userController:177 ve o bir **SELECT** (as-const blok :179); 0 write | okunuyor (getUser select) | ÖLÜ-yazma (default `true`'da kalır, hiç değişmez) | ✅ DOĞR (❓ çözüldü: select, data değil) |
 
 ### UserProfile
 | # | alan | tip | toplanıyor | okunuyor | durum | KANIT DÜZEYİ |
 |---|---|---|---|---|---|---|
-|19| discD/I/S/C | Float | discVectorService.ts:154-155 | scoring.service (discToOcean girdisi) | CANLI | ✅ ELLE (discVectorService.ts:154-155 — ajan "ÖLÜ" dedi YANLIŞ) |
-|20| oceanO/C/E/A/N | Float? | scoring.service:106-110 | ⭐ matching.ts'te **OKUNMUYOR** (grep 0) | **YARIM (madde 101)** | ✅ ELLE (matching.ts ocean grep=0) |
-|21| archetype | String? | scoring.service:111 | yalnız /rank-mentors (FE çağırmaz) | YARIM | ✅ ELLE (matching.ts grep=0) |
-|22| industryCode | String? | onboarding:342 | sektör skoru (çatılı, kısmi bağlı) | KISMİ | ⚠️ AJAN |
-|23| yearsExp | Int? | onboarding:347 | — | YARIM | ⚠️ AJAN |
-|24| skillTags | String[] | onboarding:340 | /rank-mentors yolu | KISMİ | ⚠️ AJAN |
-|25| goalTags | String[] (**MENTİ hedef**) | onboarding:341 | /rank-mentors yolu | KISMİ | ⚠️ AJAN |
-|26| schools/companies/communities | String[] | onboarding:348-350 | sector-scorer bağlam bonusu | KISMİ | ⚠️ AJAN |
-|27| UserProfile cert-6 (isCertified/certScore…) | — | **yazılmıyor** (CLAUDE.md: TenantMembership'te) | — | ÖLÜ (belgeli ikiz) | ⚠️ AJAN (CLAUDE.md destekli) |
+|19| discD/I/S/C | Float | discVectorService.ts:154-155 | scoring.service (discToOcean girdisi) | CANLI | ✅ DOĞR (discVectorService.ts:154-155 — ajan "ÖLÜ" dedi YANLIŞ) |
+|20| oceanO/C/E/A/N | Float? | scoring.service:106-110 | ⭐ matching.ts'te **OKUNMUYOR** (grep 0) | **YARIM (madde 101)** | ✅ DOĞR (matching.ts ocean grep=0) |
+|21| archetype | String? | scoring.service:111 | yalnız /rank-mentors (FE çağırmaz) | YARIM | ✅ DOĞR (matching.ts grep=0) |
+|22| industryCode | String? | onboardingController:346 | sektör skoru (çatılı, kısmi bağlı) | KISMİ | ✅ DOĞR |
+|23| yearsExp | Int? | onboardingController:347 | — | YARIM | ✅ DOĞR |
+|24| skillTags | String[] | onboardingController:344 | /rank-mentors yolu (canlı matching değil) | KISMİ | ✅ DOĞR |
+|25| goalTags | String[] (**MENTİ hedef**) | onboardingController:345 | /rank-mentors yolu (canlı matching değil) | KISMİ | ✅ DOĞR |
+|26| schools/companies/communities | String[] | onboardingController:348-350 | sector-scorer bağlam bonusu | KISMİ | ✅ DOĞR |
+|27| UserProfile cert-6 (isCertified/certScore…) | — | **yazılmıyor** (CLAUDE.md: TenantMembership'te) | — | ÖLÜ (belgeli ikiz) | ✅ DOĞR (backend/CLAUDE.md "UserProfile cert UNUSED" — kod-yazma yok) |
 
 ### MentorFilter / VisibilityOptIn / UserResponse
 | # | alan | tip | toplanıyor | okunuyor | durum | KANIT DÜZEYİ |
 |---|---|---|---|---|---|---|
-|28| MentorFilter (minCompatibilityScore/blockedDiscTypes/filterEnabled) | — | mentorFilterController:56 | matching filtresi | CANLI | ⚠️ AJAN |
-|29| VisibilityOptIn.iceBreaker / requestMessage | String? | **yazılmıyor** (LLM kaldırıldı; menti MatchRequest'e yazar) | — | ÖLÜ | ✅ ELLE (matchingController.ts:123 yorum) |
-|30| UserResponse.value | Int (1-5) | adaptiveTestController:89 | discVector hesabı | CANLI | ⚠️ AJAN |
+|28| MentorFilter (minCompatibilityScore/blockedDiscTypes/filterEnabled) | — | mentorFilterController:56-60 (upsert) | matching filtresi | CANLI | ✅ DOĞR |
+|29| VisibilityOptIn.iceBreaker / requestMessage | String? | **yazılmıyor** (LLM kaldırıldı; menti MatchRequest'e yazar) | — | ÖLÜ | ✅ DOĞR (matchingController.ts:123 yorum) |
+|30| UserResponse.value | Int (1-5) | adaptiveTestController:91-92 (upsert) | discVector hesabı | CANLI | ✅ DOĞR |
 
-**Re-count (KURAL/iki-adım):** başta 30 satır dedim → 30 satır yazıldı → ✅ UYUŞUYOR.
+**Re-count (KURAL/iki-adım):** 30 satır → 30 satır → ✅ UYUŞUYOR. Kanıt-düzeyi: 30/30 ✅ DOĞRULANDI (0 ⚠️, 0 ❓).
 
-**⚠️ AJANIN 5 YANLIŞ "ÖLÜ" İDDİASI (elle çürütüldü, kayda):** `discD/I/S/C` (discVectorService.ts:154-155) · `Meeting.requestMessage` (bookMeeting `meetingController.ts:520`) · `rematchPriority` + `rematchCount` (adminController.ts:544-545) · `mentorVisibilityEnabled` (userController.ts:177, ❓). Hepsi YAZILIYOR. M3 dersi: dar arama = yanlış "yok".
+**⚠️ AJANIN 5 YANLIŞ "ÖLÜ" İDDİASI (elle çürütüldü, kayda):** `discD/I/S/C` (discVectorService.ts:154-155) · `Meeting.requestMessage` (bookMeeting `meetingController.ts:520`) · `rematchPriority` + `rematchCount` (adminController.ts:544-545) · `mentorVisibilityEnabled` (userController.ts:177 — SELECT). Hepsi yazılıyor/okunuyor (ÖLÜ değil). M3 dersi: dar arama = yanlış "yok".
+
+### ⭐ DOĞRULAMA TURU (2026-08-29) — KARAR-ETKİLEYEN BULGULAR (grep'ler elle, alt-ajansız)
+Üç öncelikli satır (PO kararları bunlara dayanıyor) teyit edildi:
+- **(a) interactionStyle +10 bonus — GERÇEK ama FİİLEN ÖLÜ.** `matching.ts:288-292`: bonus koşulu `c.interactionStyle === opts.mentorInteractionStyle` (iki tarafı karşılaştırır, +10). AMA `c` = menti adayı ve menti tarafı **hiç toplanmıyor** (bkz. b) → `c.interactionStyle` null → bonus **hiçbir zaman tetiklenmez.**
+- **(b) interactionStyle YALNIZ MENTÖR'de toplanıyor — DOĞRULANDI.** FE `ProfileStep.tsx:104`: `...(role === 'MENTOR' && interactionStyle && {...})` → menti bu soruyu YANITLAMIYOR. → **KARAR 2'nin gerekçesi ("yalnız mentörde, hizalama ölçülemiyor") KANITLI DOĞRU** ve hatta kod fiilen ölü.
+- **(c) expectationCategories GATE, skor DEĞİL — DOĞRULANDI.** `matching.ts:278-280`: ortak beklenti yoksa aday elenir (`continue`); skora ağırlık KATMAZ. → **KARAR 1 rafine olmalı:** çift-ağırlık riski aslında "gate + skor" (iki farklı mekanizma); `mentiNeeds` skor bileşeni olacaksa expectationCategories gate'i ayrı katmandır.
+
+> **⚠️ PO KARARLARI DEĞİŞTİRİLMEDİ** (bu bir doğrulama turu). Yukarıdaki bulgular KARAR 1/2'yi ETKİLER; migration/skor turunda dikkate alınmalı — kararlar olduğu gibi geçerli.
 
 ---
 
