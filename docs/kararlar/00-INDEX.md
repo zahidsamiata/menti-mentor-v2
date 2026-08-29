@@ -144,6 +144,7 @@ docs/
 | `teshis-raporu-2026-08-02.md` | Niyet vs mevcut-kod envanteri, merge runbook, KVKK, güvenlik |
 | *(`admin-panelleri-tasarim-2026-08-02.md`)* ⚠️ **2026-08-28'de `docs/arsiv/`'e taşındı (G9-13)** | 6 admin paneli keşif+tasarım — anlattığı paneller canlıda uygulandı. Bkz. Arşiv bölümü |
 | `eslestirme-motoru-kesfi-2026-08-27.md` | Eşleştirme motoru keşfi (katman ağırlıkları/veto/sektör asimetri) — `degerlendirme-sistemi-tasarim-2026-08-27` tasarımının kaynağı |
+| `yetki-haritasi-2026-08-29.md` | ⭐ **187 endpoint yetki denetimi (FAZ 3b-1)** — RLS ne YAPAR/ne YAPMAZ (otomatik vs elle), 6 tenant-içi açık (Y1-Y6→madde 131-136), G1-23🗑️/G1-04 yeniden değerlendirme. **Yeni endpoint yazan OKUSUN.** |
 | `depo-denetimi-2026-08-02.md` | Repo hijyeni (boş/artık/yanlış-yerleşim/isimlendirme) |
 | `hayalet-backend-2026-08-02.md` | Yarım bağlı / ölü / kırık kod envanteri |
 | `kart-havuz-backend-envanteri-2026-08-02.md` | Kart/havuz/uyum/niyet-mektubu/foto backend envanteri |
