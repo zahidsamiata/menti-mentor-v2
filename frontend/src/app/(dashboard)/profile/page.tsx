@@ -8,6 +8,7 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { Button } from '@/components/ui/button';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
+import { DataPrivacySection } from '@/components/organisms/DataPrivacySection';
 import { cn } from '@/lib/utils';
 import type { UserProfileData, AvatarUploadResponse } from '@/lib/api/profile';
 
@@ -437,6 +438,9 @@ export default function ProfilePage() {
       >
         {saving ? 'Kaydediliyor…' : 'Kaydet'}
       </Button>
+
+      {/* ── KVKK: Verilerim ve Gizlilik (G1-05) ───────────────────────── */}
+      <DataPrivacySection />
     </div>
   );
 }
