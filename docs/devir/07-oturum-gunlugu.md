@@ -662,3 +662,9 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 
 ## E) Kalan (Faz 3 sonrası)
 - **Madde 137:** meeting approve/reject/status + super-admin verifyTenant için actor-log (küçük batch). Sonraki: Faz 4 (veri temeli) / Faz 5 (algoritma — G1-19 bonus×qm tasarım nüansı orada ele alınabilir).
+
+## F) Ek — belge düzeltmesi (2026-08-29, ayrı docs PR)
+- Faz 3c G1-19 teyidi tasarım belgesindeki bayat iddiayı çürüttü. G9-03 deseniyle (üstü-çizili + ⚠️ GÜNCELLEME) düzeltildi:
+  `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` §9.5 + satır 35 (aynı iddia, KURAL 12 taraması) ·
+  `raporlar/kesif/eslestirme-motoru-kesfi-2026-08-27.md` formül-altı ⚠️ not (formül zaten doğruydu; "iki kez YAŞIYOR" = depolama duality, çift-çarpım DEĞİL — ayrım netleştirildi).
+- Faz 5'e kalan gerçek soru: bonus'un çarpana tabi olması TASARIM tercihi mi (karar verilecek nüans, "hata" değil). Branch `docs/tasarim-duzeltme-2026-08-29`.

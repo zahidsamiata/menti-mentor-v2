@@ -18,6 +18,13 @@ gösterilen% = min(100,  [ sektörSkoru × sektörAğırlık + karakterSkoru × 
                           + etkileşimBonusu × kaliteÇarpanı )
 ```
 
+> ⚠️ NOT (2026-08-29, Faz 3c kod-teyidi): Yukarıdaki formül DOĞRU — `qm` her bileşene (base ve bonus)
+> **tam bir kez** uygulanır = `(base + bonus) × qm`, `qm²` YOK. Tasarım belgesi §9.5'teki "iki kez uygulanıyor
+> (olası hata)" iddiası bu turda **ÇÜRÜTÜLDÜ** (`scoring.ts:109` + `matching.ts:307`, PR #138). Aşağıdaki (§sorunlar)
+> "kalite çarpanı iki kez YAŞIYOR" notu FARKLI bir gerçektir: çarpanın **kalıcı** (yönetici görünürlüğü) ↔ **canlı-hesap**
+> (sıralama) olarak iki YERDE tutulması (çift-çarpım DEĞİL) — o gözlem geçerlidir. Faz 5'e kalan: bonus'un çarpana tabi
+> olması tasarım tercihi mi (karar verilecek nüans, hata değil).
+
 | Terim | Kaynak (dosya:satır) | Nasıl |
 |---|---|---|
 | **sektörSkoru** | `scoring.ts:31-41` (`computeSectorScore`) | `(ortak_etiket / MENTİ_etiket_sayısı) × 100` — **asimetrik**, Jaccard-birleşim DEĞİL; payda menti etiket seti. Menti etiketi yoksa → **0** |
