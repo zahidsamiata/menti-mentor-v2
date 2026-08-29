@@ -50,6 +50,12 @@
 
 ---
 
+> **⚡ GÜNCELLEME (2026-08-29) — FAZ 3a middleware turu (G7-04 ✅ + G1-17 yeniden tanım):** Çatı PR (frontend-only, backend DOKUNULMADI).
+> **G7-04 ✅ CANLI ADAY:** `frontend/src/middleware.ts` — `www.sivilkapasite.org → sivilkapasite.org` 301, yol+query korunur, apex/localhost döngü koruması (5 test).
+> **⭐ G1-17 YENİDEN TANIMLANDI (kart):** *"Frontend middleware ile ÇÖZÜLEMEZ — cross-origin cookie: frontend `sivilkapasite.org`, backend `api.sivilkapasite.org`, parent domain paylaşımı yok → middleware auth cookie'sini/rolü OKUYAMAZ (access token zaten yalnız bellekte). JS-yazılabilir `mm_role` çerezi REDDEDİLDİ (devtools'tan atlanır → sahte güven, korumasızdan tehlikeli). Gerçek koruma BACKEND yetki kontrolüdür. Kalem **Faz 3b**'ye taşındı: admin/platform endpoint yetki denetimi (G1-23 ailesi). Middleware çözümü ancak backend cookie'ye parent domain verilirse mümkün — ayrı mimari karar."*
+> **EK (bu tur):** (1) `platform/layout.tsx` istemci guard'ı YOKTU → eklendi (oturum `/health` ile doğrulanır, 401/403 → `/platform/login`; login sayfası muaf, döngü yok). KABA kapı — asıl kapı backend `requirePlatformAdmin`. (2) `(admin)/layout.tsx` "middleware Sprint 15'te" yorumu gerçekle değiştirildi. (3) `lib/api/platform.ts` fırlatılan hataya `.status` iliştirildi (401/403 güvenilir ayrım).
+> **🆕 KEŞİF-BULGU (kalem adayı — DK1):** `platform/dashboard/page.tsx:82` 401 tespiti `e.message.includes('401')` ile yapıyor ama `platformFetch` Türkçe mesaj fırlatıyor (kod içermez) → **401'de login'e yönlendirmiyor, hata metni gösteriyor** (latent bug). Yeni layout guard'ı kullanıcı-etkisini maskeliyor ama sayfa-içi kontrol hâlâ hatalı → `.status` ile düzeltilmeli (küçük iş).
+
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 
 > **Neden burada:** Oturumlarda "sonraki turda/ileride yapılacak" diye verilen sözler sonraki oturumlarca devralınmıyordu

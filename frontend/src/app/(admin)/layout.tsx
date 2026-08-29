@@ -2,8 +2,13 @@
 
 /**
  * Admin grup layout — sidebar navigasyon + içerik alanı.
- * Yalnızca ADMIN rolündeki kullanıcılar bu layout'u görmeli;
- * middleware koruması Sprint 15'te eklenir (şimdilik client-side kontrol).
+ *
+ * Yalnızca ADMIN rolündeki kullanıcılar bu layout'u görmeli. Aşağıdaki useEffect KABA bir
+ * istemci kapısıdır — ⚠️ frontend middleware ile ÇÖZÜLEMEZ: auth cookie'leri backend
+ * origin'inde (`api.sivilkapasite.org`); frontend origin'i (`sivilkapasite.org`) bunları almaz
+ * (parent domain paylaşımı yok) → middleware token/rol OKUYAMAZ. ASIL koruma BACKEND yetki
+ * denetimidir (`requireRole`). G1-17 → Faz 3b (endpoint yetki denetimi). Bkz. `src/middleware.ts`
+ * + `docs/kararlar/00-KARAR-TAKIP.md` (G1-17).
  */
 
 import Link from 'next/link';
