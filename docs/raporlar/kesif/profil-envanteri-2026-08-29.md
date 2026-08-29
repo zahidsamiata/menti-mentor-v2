@@ -23,8 +23,7 @@
 >
 > **⭐ KANIT DÜZEYİ — DAĞILIM (kesin, "~" yok):**
 > - **ÖNCE (2026-08-29 keşif turu):** ✅ ELLE **8** · ⚠️ AJAN **21** · ❓ **1** = **30**. *(Not: önceki kapanış raporunun "9✅/~18⚠️/1❓" ifadesi HATALIYDI; gerçek başlangıç 8/21/1=30.)*
-> - **SONRA (2026-08-29 DOĞRULAMA turu, bu belge):** ✅ DOĞRULANDI **30** · ⚠️ **0** · ❓ **0** = **30**. Tüm ⚠️ satırlar grep ile (kendim, alt-ajansız) teyit edildi; 1 ❓ çözüldü (mentorVisibilityEnabled).
-> - **Statü düzeltmeleri (2):** `interactionStyle` CANLI→**YARIM** (bonus fiilen tetiklenmiyor) · `mentorVisibilityEnabled` ❓→**yazılmıyor** (0 write). Hiçbir alanın "toplanıyor/okunuyor" VARLIK iddiası tümden yanlış çıkmadı (yazmalar/okumalar gerçek).
+> - **SONRA (2026-08-29 DOĞRULAMA turu, bu belge):** 30 satır grep ile (kendim, alt-ajansız) teyit edildi → **2 satır DÜZELTİLDİ** (önceki tablo YANLIŞTI) · **0 satır kanıtsız kaldı.** Düzeltilenler: `interactionStyle` CANLI→**YARIM** (bonus fiilen tetiklenmiyor) · `mentorVisibilityEnabled` ❓→**yazılmıyor** (0 write, sadece SELECT). Bu iki düzeltme birer çürütmedir (statü hatası).
 >
 > **Durum:** CANLI = yazılıyor + (eşleştirmede/kararda) okunuyor · YARIM = yazılıyor, okunmuyor (veya etkisiz) · ÖLÜ = yazılmıyor · KISMİ = kısmen bağlı.
 
@@ -115,13 +114,13 @@ Yeni alanlar **User** modeline, hepsi **additive + nullable/[]** (mevcut kayıt 
 - `mentorStrengths` **enum[]** (yeni `MentorStrength`, 5 değer) — S1 mentör
 - `supportApproach` **enum?** (yeni `SupportApproach`, 3 değer: yol-gösterme/birlikte-düşünme/dinleme) — S2, **⭐ HER İKİ ROLDE** (menti "isterim", mentör "sunarım") (PO KARAR 2)
 - `priorityValue` **enum?** (yeni `PriorityValue`, 4 değer) — S3, her iki rolde
-- **`interactionStyle`: ŞEMADA KALIR, dokunulmaz.** Yeni `supportApproach`'tan TÜRETİLİR (geçici köprü — bkz. tasarım 2.2 / PO KARAR 2). Eşleme kayıplı (3→2): birlikte-düşünme & dinleme eski sütunda ayırt edilemez (bilinçli).
+- **`interactionStyle`: şemada KALIR, DONDURULUR, TÜRETME YOK, migration'da HİÇ ELLENMEZ.** (KÖPRÜ İPTAL — PO 2026-08-29; kanıt: bonus fiilen ölü, bkz. tasarım §10.2 revize KARAR 2.) Faz 5'te motor `supportApproach` okumaya başlayınca sütun emekliye ayrılır.
 - ⚠️ **TASLAK — bu turda UYGULANMAZ.** Uygulama ⚠️ TEK BAŞINA + PO onaylı ayrı tur. Türetme yazma-anında mı okuma-anında mı → uygulama turunda karar (yazma-anında matching.ts'e dokunmaz, düşük risk).
 
 ---
 
 ## §F — PO'ya sorular / karar noktaları
-1. ✅ **KARARA BAĞLANDI (2026-08-29):** expectationCategories + S1 yan yana (KARAR 1) · supportApproach yeni + her iki rol, interactionStyle türetilir (KARAR 2).
+1. ✅ **KARARA BAĞLANDI (2026-08-29):** expectationCategories + S1 yan yana (KARAR 1) · supportApproach yeni + her iki rol, **interactionStyle DONDURULUR (köprü İPTAL, türetme YOK)** (KARAR 2 revize).
 2. **S3 `priorityValue` 4-değer** onayı (strateji oturumu).
 3. **⭐ Tasarım↔kod uçurumu (OCEAN):** Faz 5 karar noktası — kişilik %25'i canlı motora nasıl bağlanacak.
 4. **K-anonimlik eşiği (G1-22):** ne zaman, hangi eşik (öneri ≥5).
