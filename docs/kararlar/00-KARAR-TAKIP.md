@@ -86,9 +86,24 @@
 > - **⚠️ NUMARA VERİLMEDİ (PO numaralandıracak) — 4 yeni bulgu/borç:**
 >   1. ⭐ **TASARIM↔KOD UÇURUMU:** OCEAN/archetype/goalTags/skillTags yazılıyor, canlı `matching.ts`'te okunmuyor (madde 101). Faz 5.
 >   2. **K-ANONİMLİK YOK** (`platformTenantController.ts:269` n=1 dağılım döner) — G1-22 ailesi.
->   3. **Çift-ağırlık riski:** Faz 5 skoru expectationCategories + mentiNeeds sinyalini TEK KEZ ağırlıklandırmalı.
->   4. **interactionStyle köprü borcu:** supportApproach'tan türetim GEÇİCİ; Faz 5'te sütun emekliye ayrılabilir.
+>   3. **Çift-ağırlık riski** → ⚠️ DÜZELTİLDİ (2026-08-29 aşağı blok): expectationCategories GATE'tir, çift-ağırlık değil; gerçek soru gate+skor çifte-ceza (Faz 5).
+>   4. **interactionStyle köprü borcu** → ⚠️ İPTAL (2026-08-29 aşağı blok): köprü kurulmadı, "donmuş sütun emeklilik borcu"na dönüştü.
 > - ⚠️ Alt-ajan 5 alanı yanlış "ölü" dedi (discD/I/S/C·Meeting.requestMessage·rematchPriority/Count·mentorVisibilityEnabled) — hepsi yazılıyor, elle çürütüldü (M3). Kod/DB/migration DEĞİŞMEDİ.
+
+> **⚡ GÜNCELLEME (2026-08-29) — KARAR 2 REVİZYONU + KURAL 13 (yalnız-belge, çatı PR):**
+> - **✅ KARAR 2 REVİZE (PO):** interactionStyle KÖPRÜ İPTAL → DONDURULUR (türetme YOK). Kanıt: +10 bonus (`matching.ts:288-292`) fiilen ölü (menti tarafı `ProfileStep.tsx:104` `role==='MENTOR'` ile hiç toplanmıyor). supportApproach yeni+her-iki-rol geçerli. Tasarım §10.2 damgalandı.
+> - **✅ KARAR 1 notu düzeltildi:** expectationCategories GATE (skor değil); çift-ağırlık çerçevesi yanlıştı.
+> - **✅ EKRAN KARARI:** üç soru kayıt sonuna, arketip sonrası; S2 NÖTR metin.
+> - **✅ KURAL 13** kök CLAUDE.md'ye eklendi (negatif iddia geniş arama + kapsam beyanı).
+> - **⚠️ NUMARA VERİLMEDİ (PO numaralandıracak) — güncel numarasız kalem listesi (yeni + devreden):**
+>   1. **kvkkConsentAt çift-yazma borcu** (tetik: Consent tam devrede — tek kalan köprü).
+>   2. **interactionStyle emeklilik borcu** (donmuş sütun; tetik: Faz 5 motor supportApproach okuyunca. Köprü İPTAL → kaldırma daha kolay).
+>   3. **mentorVisibilityEnabled kablosuz** (hiç yazılmıyor, default true; havuzdan gizlenme fiilen yok — `userController.ts:177` sadece SELECT).
+>   4. **matching.ts:288 ölü bonus** (iki tarafı karşılaştırıyor, bir taraf hiç dolmuyor; Faz 5'te bağlanır ya da silinir).
+>   5. **üç soru cevapsız-kalma riski** (kayıt sonunda çıkan kişiye sonradan sorma yolu yok).
+>   6. **gate+skor çifte-ceza sorusu** (Faz 5: ortak-beklentisiz aday hem eleniyor hem düşük skor mu alıyor).
+>   + **DEVREDEN:** tasarım↔kod uçurumu (OCEAN, madde 101) · k-anonimlik yok (G1-22).
+> - Ayraç geri alındı (konvansiyon). Kod/DB/migration DEĞİŞMEDİ. **MERGE EDİLMEDİ.**
 
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 

@@ -218,6 +218,15 @@
 - **İkincil (karar-yayılımı):** Bir karar değişince **"bunu başka nerede yazmışız"** belge taraması yapılır *(bilançoda 9 çelişki bu yüzden doğdu — ör. sunucu ülkesi 5 belgede).*
 - **Üçüncül (süre):** 🔄 YAŞAYAN belge 30 günü aşarsa "bayat" işaretlenir — bu ayak **ELLE değil, ileride script ile** (elle yapılırsa unutulur; maliyet>fayda). Şimdilik birincil+ikincil elle yürür.
 
+### KURAL 13 — NEGATİF İDDİA GENİŞ ARAMAYLA KANITLANIR
+- "Bu alan/dosya/kod/özellik YOK" demek için arama **backend + frontend + test + seed + belgeleri** kapsamalı ve **büyük-küçük harf duyarsız** olmalı. Dar arama sonucu "yok" YAZILAMAZ.
+- **Pozitif bulgu (var) tek kanıtla yeterlidir; negatif bulgu (yok) KAPSAM BEYANI ister:** "N terim · M dizin tarandı, 0 sonuç".
+- ⭐ Bu kural **HERKES için geçerlidir** — ajan, alt-ajan, PO ve strateji katmanı dahil. Kural, üç kez aynı hatanın tekrarlanmasından doğdu.
+- **GEREKÇE (üç vaka):**
+  - Bilanço turu: "ölü" sanılan ~11 kalem kod-teyitle çürüdü.
+  - S21 turu: alt-ajan 5 alanı yanlışlıkla "ölü" ilan etti (`discD/I/S/C` · `Meeting.requestMessage` · `rematchPriority` · `rematchCount` · `mentorVisibilityEnabled`) — hepsi yazılıyordu.
+  - Doğrulama turu: strateji katmanı "çift ayraç hatası var" dedi — meğer dosyanın 9 oturum sınırında kullanılan KONVANSİYONMUŞ; tek örneğe bakıp genelleme yapılmıştı.
+
 <!-- /çalışma-kuralları -->
 
 <!-- güvenlik-kuralları -->
