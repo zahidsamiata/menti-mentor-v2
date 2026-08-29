@@ -32,7 +32,7 @@ Keşif bulguları (kaynak: `kesif/eslestirme-motoru-kesfi-2026-08-27.md` +
   (PO fikrinin TERSİ).
 - Sektör skoru asimetrik: payda mentinin etiket sayısı → profilini iyi
   dolduran menti cezalandırılıyor.
-- Kalite çarpanı iki kez uygulanıyor (olası hata).
+- ~~[ESKİ · 2026-08-27] Kalite çarpanı iki kez uygulanıyor (olası hata).~~ ⚠️ GÜNCELLEME (2026-08-29): ÇÜRÜTÜLDÜ — çift-çarpım YOK (her bileşen bir kez: `scoring.ts:109` + `matching.ts:307`). Detay: §9.5. Kaynak: Faz 3c, PR #138.
 
 ---
 
@@ -480,8 +480,13 @@ bağlı DEĞİL.
 
 ### 9.5 Kalite Çarpanı
 
-Bugün İKİ KEZ uygulanıyor (bonus kısmında tekrar) — olası hata,
-düzeltilecek. Terim değil ÇARPAN kalacak.
+~~[ESKİ · 2026-08-27] Bugün İKİ KEZ uygulanıyor (bonus kısmında tekrar) — olası hata, düzeltilecek.~~
+⚠️ GÜNCELLEME (2026-08-29): **ÇÜRÜTÜLDÜ.** Kod teyidi: `scoring.ts:109` `base × qm` (bir kez) +
+`matching.ts:307` `bonus × qm` (AYRI bileşen, bir kez) = `(base + bonus) × qm`. Skorda `qm²` YOK;
+her bileşen tam bir kez çarpılır → çift-çarpım HATASI yok. Kaynak: Faz 3c kod-teyidi, PR #138.
+**Terim değil ÇARPAN kalacak** (bu karar geçerli).
+⭐ **Faz 5'e kalan GERÇEK soru (hata değil, karar verilecek nüans):** bonus'un çarpana tabi olması
+(`(base+bonus)×qm`) bilinçli TASARIM tercihi mi, yoksa istenmeyen yan etki mi? Faz 5 algoritma turunda karara bağlanacak.
 
 ### 9.6 Tek Satır Formül (yeni)
 
