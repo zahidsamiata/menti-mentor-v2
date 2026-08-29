@@ -564,15 +564,30 @@ S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla
 **KARAR 1 · `expectationCategories` ↔ S1-menti → YAN YANA DURUR.**
 - Farklı eksenler: `expectationCategories` KONU (Kariyer/Teknik/İş-Staj/Girişimcilik/Kişisel/Sektör), S1 İHTİYAÇ TİPİ (karar veremiyorum / beceride takıldım / güvenmiyorum / tanımıyorum / konuşacak biri). Bir menti "Kariyer konusunda karar veremiyorum" der — ikisi birden.
 - `expectationCategories` DEĞİŞMEZ (canlı gate, `matching.ts:278`). `mentiNeeds` YENİ alan olarak eklenir.
-- ⚠️ **KAYDA:** çift-ağırlık riski — ikisi de "menti ne istiyor" sinyali. Faz 5 skor fonksiyonu bu sinyali TEK KEZ ağırlıklandırmalı, iki katman toplamamalı. (Kalite çarpanı çift-uygulama şüphesinin aynısı, bu sefer önceden not edildi.)
+- ⚠️ **KAYDA (düzeltildi 2026-08-29):** ~~çift-ağırlık riski — ikisi de "menti ne istiyor" sinyali, TEK KEZ ağırlıklandırılmalı.~~ Doğrulama turu (`matching.ts:278-280`) gösterdi ki `expectationCategories` bir **GATE**'tir (ortak beklenti yoksa aday `continue` ile ELENİR, skora ağırlık KATMAZ); `mentiNeeds` ise skor bileşeni olacak. → **İkisi FARKLI MEKANİZMA (gate vs ağırlık), üst üste ağırlık binmiyor** — "çift-ağırlık" çerçevesi yanlıştı. KARAR 1 aynen geçerli.
+  - ⚠️ Faz 5 için kalan GERÇEK soru (açık kalem, PO numaralandıracak): gate (eleme) ile skor aynı sinyali iki kez cezalandırıyor mu — yani ortak-beklentisi-olmayan aday hem eleniyor hem düşük skor alıyor mu?
 
-**KARAR 2 · `interactionStyle` ↔ S2 → YENİ ALAN, ESKİSİ TÜRETİLİR.**
+**KARAR 2 · `interactionStyle` ↔ S2 → YENİ ALAN, ESKİSİ DONDURULUR.** *(REVİZE — PO, 2026-08-29)*
 - Yeni alan: `supportApproach`, 3 değer (yol gösterme / birlikte düşünme / dinleme).
 - ⭐ **HER İKİ ROLDE sorulur:** menti "nasıl destek isterim", mentör "nasıl mentörüm". Gerekçe (PO): eşleştirmenin değeri İKİ TARAFIN KARŞILAŞTIRILMASINDA; mevcut `interactionStyle` yalnız mentörde olduğu için hizalama ölçülemiyor.
-- Mentöre ARTIK ESKİ SORU SORULMAZ (formda yerini yeni soru alır). Eski sütun `interactionStyle` ŞEMADA KALIR ve yeni alandan TÜRETİLİR: yol gösterme → Görev · birlikte düşünme → Sohbet · dinleme → Sohbet.
-- ⚠️ EŞLEME KAYIPLI: 3 değer 2'ye sıkışıyor; "birlikte düşünme" ile "dinleme" eski sütunda ayırt EDİLEMEZ (bilinçli kabul).
-- ⚠️⚠️ **BU GEÇİCİ BİR KÖPRÜDÜR, KALICI TASARIM DEĞİLDİR.** Tek amacı: canlı skordaki +10 bonus (`matching.ts:288`) kırılmasın. `interactionStyle` ve o bonus FAZ 5'te yeni skor fonksiyonuyla YENİDEN ELE ALINACAK; o zaman sütun emekliye ayrılabilir. "Tasarım böyle" diye okunmasın.
-- Açık uygulama ayrıntısı (migration turunda kesinleşir, şimdi karar YOK): türetme YAZMA anında mı (kaydederken iki alan da dolar → `matching.ts` hiç dokunulmaz, düşük risk) yoksa OKUMA anında mı? Seçenek olarak yazılsın, karar uygulama turunda.
+
+> ~~[ESKİ · 2026-08-29] Mentöre ARTIK ESKİ SORU SORULMAZ; eski sütun `interactionStyle` ŞEMADA KALIR ve yeni alandan TÜRETİLİR (yol gösterme→Görev · birlikte düşünme→Sohbet · dinleme→Sohbet). Eşleme kayıplı (3→2). ⚠️ GEÇİCİ KÖPRÜ: tek amacı canlı +10 bonus (`matching.ts:288`) kırılmasın.~~
+>
+> ⚠️ GÜNCELLEME (2026-08-29, doğrulama turu — PR #141): **KÖPRÜ İPTAL.** Türetme YAPILMAYACAK. Neden:
+
+- **KANIT — bonus zaten FİİLEN ÖLÜ:** `matching.ts:288-292` bonusu iki tarafı karşılaştırıyor (`c.interactionStyle === opts.mentorInteractionStyle`) AMA menti tarafı hiç toplanmıyor (`ProfileStep.tsx:104` → `role === 'MENTOR'` koşulu) → `c.interactionStyle` **hep null** → bonus **HİÇ TETİKLENMİYOR.** Köprü "canlı bonus kırılmasın" diye kurulmuştu; bonus zaten kırık.
+- **Köprü canlıyı KORUMAZ, DEĞİŞTİRİR:** türetme yapılsaydı menti tarafı dolar, bonus **CANLANIRDI** → canlı sıralama davranışı değişirdi. **Bir veri turunda canlı skor davranışı değiştirilmez.**
+- **YENİ KARAR:** `interactionStyle` **DONDURULUR** — mentöre eski soru SORULMAZ, sütun şemada KALIR, **TÜRETME YOK**, hiçbir yere yazılmaz. Faz 5'te motor `supportApproach` okumaya başlayınca sütun emekliye ayrılır.
+- ⭐ **KAZANÇ:** köprü borcu **hiç doğmadı** (kaldırma borcu bir eksik). Donmuş sütun borcu, köprü borcundan daha kolay kaldırılır.
+- **İŞ 0 bulgusu (dondurma güvenli mi):** `interactionStyle` `matching.ts` DIŞINDA **fonksiyonel olarak okunmuyor** — yalnız 2 pasif SELECT (`userController.ts:175` getUser DTO · `onboardingController.ts:330` onboarding yanıtı) + FE DTO tipi (`lib/api/profile.ts:33`; profil sayfası **render etmiyor**). Dondurulunca SELECT'ler null döner, hiçbir mantık/gösterim tüketmediği için **fonksiyonel etki YOK.** *(Pasif SELECT'lerin sonradan temizlenmesi açık kalem — PO numaralandıracak.)*
+
+#### ✅ EKRAN KARARI — üç soru nereye konur (PO, 2026-08-29)
+
+- Üç soru **KAYIT AKIŞININ SONUNA, arketip kartından HEMEN SONRA** konur.
+- **Gerekçe (PO):** kişi "sen bir Limansın" görmüş, ilgisi taze, 40 saniye daha verir; formun ortasına konursa sürtünme olur.
+- **Süre etkisi:** ilk oturum ~6 dk → ~7 dk.
+- ⚠️ **ŞART (PO): S2 metni NÖTR yazılacak.** Sebep: kişiye az önce arketip etiketi verildi; "nasıl destek isterim" sorusu kişiliğe en yakın soru olduğu için kişi etikete uygun cevap verme eğilimine girebilir (Liman denen kişi "dinlesin" der, çünkü Liman öyle olmalı gibi gelir) → ölçüm bozulur. Metin arketipten bağımsız, davranışsal yazılacak. → İçerik oturumunun işi, ajan yazmaz.
+- ⚠️ **AÇIK KALEM (PO numaralandıracak):** kayıt akışının sonunda sekmeyi kapatan kişi üç soruya CEVAPSIZ kalır. Migration additive olduğu için sistem çalışır (nötr) ama o kişiye SONRADAN SORMA YOLU YOK. Profil sayfasından tamamlama akışı gerekiyor mu — karar verilmedi.
 
 ### 10.3 Görünürlük Kuralları (PO kararı)
 
