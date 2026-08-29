@@ -56,6 +56,21 @@
 > **EK (bu tur):** (1) `platform/layout.tsx` istemci guard'ı YOKTU → eklendi (oturum `/health` ile doğrulanır, 401/403 → `/platform/login`; login sayfası muaf, döngü yok). KABA kapı — asıl kapı backend `requirePlatformAdmin`. (2) `(admin)/layout.tsx` "middleware Sprint 15'te" yorumu gerçekle değiştirildi. (3) `lib/api/platform.ts` fırlatılan hataya `.status` iliştirildi (401/403 güvenilir ayrım).
 > **🆕 KEŞİF-BULGU (kalem adayı — DK1):** `platform/dashboard/page.tsx:82` 401 tespiti `e.message.includes('401')` ile yapıyor ama `platformFetch` Türkçe mesaj fırlatıyor (kod içermez) → **401'de login'e yönlendirmiyor, hata metni gösteriyor** (latent bug). Yeni layout guard'ı kullanıcı-etkisini maskeliyor ama sayfa-içi kontrol hâlâ hatalı → `.status` ile düzeltilmeli (küçük iş).
 
+> **⚡ GÜNCELLEME (2026-08-29) — FAZ 3b: YETKİ HARİTASI (3b-1 denetim) + 6 AÇIK KAPATILDI (3b-2):** backend PR #60 + çatı PR (pointer + belge).
+> **Denetim (3b-1, salt-okuma):** 23 route dosyası · **187 endpoint** tarandı (3 paralel Explore ajanı + elle doğrulama). Kalıcı referans belge: **`docs/raporlar/kesif/yetki-haritasi-2026-08-29.md`** (📸, "neyin otomatik / neyin elle" — yeni endpoint yazan okusun). **Dağılım: 🟢~167 · 🔵~14 · 🟡6 · 🔴0 · ❓0.** ⭐ **Cross-tenant izolasyon SAĞLAM (0 açık)** — merkezi RLS (`db.ts:60-64`) READ+scoped-model'i otomatik kesiyor; bulunan 6 açık **tenant-İÇİ peer maruziyeti** (RLS `findUnique`+yazma+scope-dışı modele DOKUNMAZ → elle sahiplik gerekir, atlanmıştı).
+> **⭐ G1-17 → ✅ (gerçek çözüm bu tur):** Admin/platform backend uçları denetlendi — hepsi `requireRole('ADMIN')`/`requirePlatformAdmin` + tenant-scoped (🟢). Frontend middleware ile çözülemeyen kısmın ASIL koruması backend'de zaten var + eksik peer-katmanı kapatıldı. Kanıt: yetki haritası §B/§E + PR #60.
+> **⭐ G1-23 → 🗑️ GEÇERSİZ (kanıtlı):** logoUrl 3 yazma yolunun üçünde de admin+kendi-tenant guard'ı VAR (`selfServeController.ts:~388`, `tenantController` `requirePlatformAdmin`). "Guard yok" iddiası eskimiş.
+> **⭐ G1-04 → yeniden tanım:** SuspicionReport tenantId taşımıyor (`schema.prisma:1172-1184`) AMA public-create + platform-only-read → tenant-izolasyon açığı DEĞİL (tasarım). Spam sertleştirme isteğe bağlı ayrı UX işi.
+> **6 YENİ BULGU — NUMARALANDI (131-136), 3b-2'de ✅ KAPATILDI (PR #60, IDOR testli):**
+> - **131 (Y1)** `GET /requests` peer talep+PII sızıntısı → non-admin `OR[requester/target=self]` ✅ `requestController.ts`
+> - **132 (Y2)** `GET /meetings` peer görüşme meta sızıntısı → non-admin `OR[mentor/menti=self]` ✅ `meetingController.ts`
+> - **133 (Y3)** `GET /mentors/:mentorId/filter` peer filtre okuma → `requireSelfOrAdmin` ✅ `userRoutes.ts`
+> - **134 (Y4)** `PUT /mentors/:mentorId/filter` peer filtre YAZMA (sabotaj) → `requireSelfOrAdmin` ✅ `userRoutes.ts`
+> - **135 (Y5)** `POST /scoring/compute-profile` peer profil/rol ezme → self/admin guard + role token'dan ✅ `sjtScoringController.ts`
+> - **136 (Y6)** `POST /questions` tenant admin global soru → daima tenant'a sınırlı ✅ `questionController.ts`
+> Her fix ayrı commit + IDOR regresyon testi (5 test dosyası). Kırılan akış yok (FE kontrolü: §PR60). ⚠️ Entegrasyon testleri lokalde guard'la durur → kanıt CI. **MERGE EDİLMEDİ.**
+> **DK1 (önceki tur):** dashboard 401 latent bug — hâlâ açık (küçük iş, `.status` ile düzeltilebilir; Y* dışı).
+
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 
 > **Neden burada:** Oturumlarda "sonraki turda/ileride yapılacak" diye verilen sözler sonraki oturumlarca devralınmıyordu

@@ -592,3 +592,44 @@
 
 ## E) Yeni bulgu (kalem adayı)
 - **DK1:** `platform/dashboard/page.tsx:82` 401 tespiti mesaj-tabanlı (`.includes('401')`) → `platformFetch` Türkçe mesaj fırlatıyor, kod yok → 401'de login'e YÖNLENDİRMİYOR (latent bug). Yeni layout guard'ı kullanıcı-etkisini maskeliyor; sayfa-içi kontrol `.status` ile düzeltilmeli (küçük iş).
+
+---
+---
+
+# 📅 OTURUM 2026-08-29 (3) — FAZ 3b: YETKİ HARİTASI + 6 AÇIK KAPATILDI
+
+**📸 Kapanış fotoğrafı** — SHA/PR o güne aittir; güncel için git + 09-DURUM.
+
+## 🔎 Git-doğrulanmış durum
+- **Açık PR:** backend **#60** (6 fix, IDOR testli) + çatı **FAZ 3b PR** (pointer `f74149b→8bfdbd8` + belge). **MERGE EDİLMEDİ.**
+- Branch (iki repo): `feat/faz3b2-yetki-kapatma-2026-08-29`.
+
+## A) 3b-1 — Denetim (PLANLA, salt-okuma)
+- 23 route · **187 endpoint** tarandı (3 paralel Explore ajanı + **elle doğrulama** — her 🔴/🟡 iddiası kaynaktan teyit; 5 ajan-yanılgısı düzeltildi).
+- Kalıcı referans: **`docs/raporlar/kesif/yetki-haritasi-2026-08-29.md`** (📸) — ⭐ "neyin OTOMATİK (RLS: READ+scoped-model) / neyin ELLE (findUnique+yazma+scope-dışı model)". 00-INDEX'e eklendi.
+- **Dağılım:** 🟢~167 · 🔵~14 · 🟡6 · 🔴**0** · ❓0. **Cross-tenant izolasyon SAĞLAM** — 0 açık.
+- **Bilinen 2 bulgu:** G1-23 🗑️ geçersiz (logoUrl guard VAR) · G1-04 yeniden tanım (SuspicionReport public-create/platform-read → tenant açığı değil).
+
+## B) 3b-2 — 6 açık kapatıldı (BYPASS, her biri ayrı commit + IDOR testi)
+| # | Fix | Önce → Sonra |
+|---|---|---|
+| 131/Y1 | `GET /requests` | tüm tenant talepleri+PII → non-admin `OR[requester/target=self]` |
+| 132/Y2 | `GET /meetings` | tüm tenant görüşme meta → non-admin `OR[mentor/menti=self]` |
+| 133/Y3 | `GET /mentors/:id/filter` | peer okuma → `requireSelfOrAdmin('mentorId')` |
+| 134/Y4 | `PUT /mentors/:id/filter` | peer YAZMA (sabotaj) → `requireSelfOrAdmin('mentorId')` |
+| 135/Y5 | `POST /scoring/compute-profile` | peer profil/rol ezme → self/admin + role token'dan |
+| 136/Y6 | `POST /questions` | tenant admin global soru → daima tenant'a sınırlı |
+- 5 IDOR test dosyası (peer A → peer B = 403/filtre). Y3+Y4 aynı dosya → tek commit.
+- **G1-17 → ✅** (admin/platform backend uçları denetimde hepsi guard'lı; asıl koruma backend'de + eksik peer-katmanı kapatıldı).
+
+## C) Kırılan akış? → YOK
+FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini geçiyor · questions `tenantScoped:true` gönderiyor · compute-profile FE'de çağrılmıyor. Admin akışları etkilenmiyor.
+
+## D) Doğrulama
+- backend tsc + tsc-test + eslint ✓. ⚠️ Entegrasyon (IDOR) testleri lokalde canlı-Neon guard'ıyla durur → **kanıt CI**. Migration/DB/seed YOK · #110 ELLENMEDİ.
+
+## E) Senkron
+- Frozen doc + 00-INDEX · 00-KARAR-TAKIP (⚡ + 131-136 ✅ + G1-17✅/G1-23🗑️/G1-04) · 10-yol Faz 3 (G1-17✅, Faz 3b✅) · 09-DURUM ⚡. Kırık link 0.
+
+## F) Kalan
+- **DK1** (dashboard 401 latent bug) hâlâ açık (küçük). Faz 3 diğer kalemler: G1-26/G1-02/G1-19/G1-14/G1-15.
