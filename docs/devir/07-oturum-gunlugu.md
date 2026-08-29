@@ -670,6 +670,7 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - Faz 5'e kalan gerçek soru: bonus'un çarpana tabi olması TASARIM tercihi mi (karar verilecek nüans, "hata" değil). Branch `docs/tasarim-duzeltme-2026-08-29`.
 
 ---
+---
 
 # 📅 OTURUM 2026-08-29 (5) — FAZ 4 BAŞLADI: S21 ENVANTER KAYDI + TASARIM DÜZELTMESİ + DEVİR
 
@@ -681,3 +682,18 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **✅ İki PO kararı işlendi (tasarım §10.2):** expectationCategories+S1 yan yana (çift-ağırlık notu) · supportApproach yeni her-iki-rol, interactionStyle türetilir (⚠️ geçici köprü). B10.1 bayat iddia G9-03 damgalandı; Bölüm 14 açık karar 8→7.
 - **Tez Bölüm 9-12 eklendi** (`devir/08-oturum-tezi-2026-08-28.md` — Faz 1-3 kronoloji · çürütülen 9 varsayım · Faz 3 güvenlik sonucu · yeni-sohbet 10 madde). Devir güncellemesi TAMAM.
 - **Numaralanmayan bulgular (PO verecek):** k-anonimlik · tasarım↔kod uçurumu · çift-ağırlık riski · interactionStyle köprü borcu.
+
+---
+---
+
+# 📅 OTURUM 2026-08-29 (6) — KARAR 2 REVİZYONU + KURAL 13
+
+**📸 Kapanış fotoğrafı** — yalnız-belge (kod/DB/migration YOK). Branch `docs/karar2-revizyon-2026-08-29` (temiz main'den; PR #141 merged, git-teyitli).
+
+- **⭐ Bulgu → KARAR:** interactionStyle +10 bonusu (`matching.ts:288-292`) FİİLEN ÖLÜ (menti tarafı `ProfileStep.tsx:104` `role==='MENTOR'` ile hiç toplanmıyor → `c.interactionStyle` null → tetiklenmez). KARAR 2 revize: **KÖPRÜ İPTAL** — interactionStyle DONDURULUR (türetme YOK), supportApproach yeni+her-iki-rol geçerli. Köprü canlıyı korumaz, DEĞİŞTİRİRDİ.
+- **İŞ 0:** interactionStyle matching.ts dışında fonksiyonel okunmuyor (2 pasif SELECT + FE DTO tipi) → dondurma güvenli.
+- **KARAR 1 notu düzeltildi:** expectationCategories GATE (skor değil); çift-ağırlık çerçevesi yanlıştı, farklı mekanizma.
+- **✅ Ekran kararı:** üç soru kayıt sonuna, arketip kartından sonra; S2 NÖTR metin (arketip biası). Açık kalem: cevapsız-kalan kişiye sonradan sorma yolu.
+- **KURAL 13** (kök CLAUDE.md): negatif iddia geniş arama + kapsam beyanı ister (3 tekrar hatası).
+- **Ayraç geri alındı:** `---\n---` konvansiyonuydu (9 boundary); önceki tur yanlış tekillemişti.
+- **Numarasız kalemler (PO verecek, güncel):** kvkkConsentAt çift-yazma · interactionStyle emeklilik (donmuş sütun, köprü İPTAL) · mentorVisibilityEnabled kablosuz · matching.ts:288 ölü bonus · üç-soru cevapsız-kalma riski · gate+skor çifte-ceza (Faz 5) + devreden: tasarım↔kod uçurumu · k-anonimlik · gate/skor.
