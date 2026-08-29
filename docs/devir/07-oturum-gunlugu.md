@@ -535,4 +535,31 @@
 **Sınır:** yalnız 5 satır INSERT (idempotent) · yıkıcı/UPDATE komut YOK · mevcut veri değişmedi (teyitli) · #110 ELLENMEDİ · kod değişmedi. **MERGE EDİLMEDİ** (PO).
 
 ---
+---
+
+# 📅 OTURUM 2026-08-29 — G1-05 KVKK SELF-SERVİS HAK EKRANI
+
+**📸 Kapanış fotoğrafı** — SHA/PR o güne aittir; güncel için git + 09-DURUM.
+
+## 🔎 Git-doğrulanmış durum
+- **Açık PR:** backend **#59** (self-servis uçlar + test) · çatı **#135** (FE + pointer + belge). İkisi de **main-base, CI YEŞİL** (backend run `33247813087` success; çatı run `33247905222` success). **MERGE EDİLMEDİ** (PO).
+- **Backend pointer:** `f5ffff2 → 9808811` (feature-commit; #59 merge sonrası main-HEAD'e re-bump → **söz S24**).
+
+## A) Yapılanlar (kanıtlı)
+- **Backend (migration YOK):** `GET /api/me/data-export` (userId TOKEN'dan → IDOR yapısal imkânsız; profil+rızalar+eşleşme+**mesaj SAYISI**, içerik yok) · `POST /api/me/delete-account` (e-posta teyidi → `hardDeleteUser` anonimleştirir; oturum düşer, refresh cookie temizlenir). Kanıt: `gdprController.ts` exportMyDataHandler/deleteMyAccountHandler · `userRoutes.ts` `/me/*`.
+- **Güvenlik:** son-admin guard `isSoleActiveTenantAdmin` (kurumun tek aktif ADMIN'i kapatamaz → 409) · `anonymizeUser` içinde **ACIK_RIZA `revokeConsent`** (satır silinmez, revokedAt dolar; AYDINLATMA geri çekilmez) · per-user rate limiter (export+delete) · export'ta mesaj İÇERİĞİ yok (karşı taraf PII).
+- **FE:** `DataPrivacySection.tsx` (profil altı) — "Verilerimi indir" (JSON blob) + "Hesabımı kapat" iki-adımlı onay (sade Türkçe uyarı → e-posta teyidi) + KVKK metni linki · `lib/api/kvkk.ts`.
+- **Test:** `tests/me-data-rights.test.ts` (IDOR-safe export, yanlış-teyit reddi, son-admin 409, ACIK_RIZA revoke, oturum düşüşü). **CI'da yeşil** (lokalde canlı-Neon guard'ı durdurdu — TEST_DATABASE_URL yok).
+
+## B) Doğrulama
+- backend tsc/tsc-test/eslint ✓ · frontend tsc/eslint/vitest 38-38/build ✓ · **iki repo CI success**.
+
+## C) Senkron
+- **madde 97 (FE hesap-kapatma boşluğu) → ✅** (kod-kanıtlı) · G1-05 10-yol Faz 2 ✅ · 09-DURUM ⚡ · **söz S24** (pointer re-bump) eklendi · bu günlük. Kırık link 0.
+
+## D) Kalan / dikkat
+- **Merge SIRASI (söz S24):** backend #59 merge → çatı pointer re-bump (`git submodule update --remote backend`) → çatı #135 merge. Şu an pointer feature-commit taşıyor (normal, sarkma değil).
+- **H-9** (userId-pseudonim "anonim mi") hukukçuda — bu iş kapsamı dışı. G1-08 OAuth rıza UI hâlâ açık.
+
+---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*
