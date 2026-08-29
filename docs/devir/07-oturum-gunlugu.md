@@ -668,3 +668,17 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
   `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` §9.5 + satır 35 (aynı iddia, KURAL 12 taraması) ·
   `raporlar/kesif/eslestirme-motoru-kesfi-2026-08-27.md` formül-altı ⚠️ not (formül zaten doğruydu; "iki kez YAŞIYOR" = depolama duality, çift-çarpım DEĞİL — ayrım netleştirildi).
 - Faz 5'e kalan gerçek soru: bonus'un çarpana tabi olması TASARIM tercihi mi (karar verilecek nüans, "hata" değil). Branch `docs/tasarim-duzeltme-2026-08-29`.
+
+---
+---
+
+# 📅 OTURUM 2026-08-29 (5) — FAZ 4 BAŞLADI: S21 ENVANTER KAYDI + TASARIM DÜZELTMESİ + DEVİR
+
+**📸 Kapanış fotoğrafı** — yalnız-belge tur (kod/DB/migration YOK). Branch `docs/s21-envanter-devir-2026-08-29`.
+
+- **S21 keşfi kalıcı belgeye yazıldı:** 📸 `raporlar/kesif/profil-envanteri-2026-08-29.md` (30 satır alan tablosu, **kanıt-düzeyi sütunlu** — ✅ELLE/⚠️AJAN/❓; alt-ajanın 5 yanlış "ölü" iddiası elle çürütüldü). **S21 ✅.**
+- **⭐ En büyük bulgu — TASARIM↔KOD UÇURUMU:** OCEAN/archetype/goalTags/skillTags yazılıyor, canlı `matching.ts`'te OKUNMUYOR (grep 0). Motor DISC matrisi. Tasarım Bölüm 9 %25-kişilik-Big-Five canlıda YOK → Faz 5. (madde 101)
+- **⭐ K-anonimlik YOK** (9 terim, 0). → G1-22.
+- **✅ İki PO kararı işlendi (tasarım §10.2):** expectationCategories+S1 yan yana (çift-ağırlık notu) · supportApproach yeni her-iki-rol, interactionStyle türetilir (⚠️ geçici köprü). B10.1 bayat iddia G9-03 damgalandı; Bölüm 14 açık karar 8→7.
+- **Tez Bölüm 9-12 eklendi** (`devir/08-oturum-tezi-2026-08-28.md` — Faz 1-3 kronoloji · çürütülen 9 varsayım · Faz 3 güvenlik sonucu · yeni-sohbet 10 madde). Devir güncellemesi TAMAM.
+- **Numaralanmayan bulgular (PO verecek):** k-anonimlik · tasarım↔kod uçurumu · çift-ağırlık riski · interactionStyle köprü borcu.

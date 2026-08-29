@@ -511,9 +511,11 @@ Olumsuz mentörlük deneyimlerinin merkezinde de aynı şey: Eby ve ark.
 (2000) — protégélerin en kötü deneyimlerinde ortak tema "dyad içi
 uyumsuzluk" (değer/tutum farkı).
 
-> ⚠️ **BİZİM SORUNUMUZ:** Bu veriyi TOPLAMIYORUZ. Sistemde sektör etiketi
-> var; "menti ne arıyor", "mentör ne verebiliyor", "öncelikleri örtüşüyor
-> mu" YOK. En güçlü sinyali ölçmüyoruz.
+> ~~[ESKİ · 2026-08-27] **BİZİM SORUNUMUZ:** Bu veriyi TOPLAMIYORUZ. Sistemde sektör etiketi var; "menti ne arıyor", "mentör ne verebiliyor", "öncelikleri örtüşüyor mu" YOK. En güçlü sinyali ölçmüyoruz.~~
+>
+> ⚠️ GÜNCELLEME (2026-08-29, S21 envanter): "Hiç toplamıyoruz" **KISMEN BAYAT.** Menti ihtiyacı **KONU düzeyinde toplanıyor** (`expectationCategories`, 6 kategori — `frontend/.../ProfileStep.tsx:215`, canlı gate `matching.ts:278`). TOPLANMAYAN: ihtiyaç-TİPİ (S1) + mentör fayda beyanı + öncelik/değer (S3). Doğrusu: "kısmen var, ekseni farklı". Kanıt: `raporlar/kesif/profil-envanteri-2026-08-29.md`.
+>
+> ⚠️ **CÜMLE SİLİNMEDİ (bilerek):** bu tespit üç sorunun GEREKÇESİYDİ; silinirse "neden bu soruları ekledik" izi kaybolur ve ileride biri "zaten expectationCategories var" deyip işi iptal edebilir. Üstü çizili bırakıldı.
 
 ### 10.2 Üç Soru (PO kararı — tasarlandı)
 
@@ -554,6 +556,23 @@ okuyamaz + KVKK'da özel nitelikli veri riski).
 - **S2** → yaklaşım hizası. Yönlendirilmek isteyen menti + "kendi bulsun"
   diyen mentör KÖTÜ çift, bugün görünmüyor.
 - **S3** → değer yakınlığı.
+
+#### ✅ İKİ ÇAKIŞMA — KARARA BAĞLANDI (PO, 2026-08-29)
+
+S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla iki kısmi çakışma buldu. PO ikisini de karara bağladı:
+
+**KARAR 1 · `expectationCategories` ↔ S1-menti → YAN YANA DURUR.**
+- Farklı eksenler: `expectationCategories` KONU (Kariyer/Teknik/İş-Staj/Girişimcilik/Kişisel/Sektör), S1 İHTİYAÇ TİPİ (karar veremiyorum / beceride takıldım / güvenmiyorum / tanımıyorum / konuşacak biri). Bir menti "Kariyer konusunda karar veremiyorum" der — ikisi birden.
+- `expectationCategories` DEĞİŞMEZ (canlı gate, `matching.ts:278`). `mentiNeeds` YENİ alan olarak eklenir.
+- ⚠️ **KAYDA:** çift-ağırlık riski — ikisi de "menti ne istiyor" sinyali. Faz 5 skor fonksiyonu bu sinyali TEK KEZ ağırlıklandırmalı, iki katman toplamamalı. (Kalite çarpanı çift-uygulama şüphesinin aynısı, bu sefer önceden not edildi.)
+
+**KARAR 2 · `interactionStyle` ↔ S2 → YENİ ALAN, ESKİSİ TÜRETİLİR.**
+- Yeni alan: `supportApproach`, 3 değer (yol gösterme / birlikte düşünme / dinleme).
+- ⭐ **HER İKİ ROLDE sorulur:** menti "nasıl destek isterim", mentör "nasıl mentörüm". Gerekçe (PO): eşleştirmenin değeri İKİ TARAFIN KARŞILAŞTIRILMASINDA; mevcut `interactionStyle` yalnız mentörde olduğu için hizalama ölçülemiyor.
+- Mentöre ARTIK ESKİ SORU SORULMAZ (formda yerini yeni soru alır). Eski sütun `interactionStyle` ŞEMADA KALIR ve yeni alandan TÜRETİLİR: yol gösterme → Görev · birlikte düşünme → Sohbet · dinleme → Sohbet.
+- ⚠️ EŞLEME KAYIPLI: 3 değer 2'ye sıkışıyor; "birlikte düşünme" ile "dinleme" eski sütunda ayırt EDİLEMEZ (bilinçli kabul).
+- ⚠️⚠️ **BU GEÇİCİ BİR KÖPRÜDÜR, KALICI TASARIM DEĞİLDİR.** Tek amacı: canlı skordaki +10 bonus (`matching.ts:288`) kırılmasın. `interactionStyle` ve o bonus FAZ 5'te yeni skor fonksiyonuyla YENİDEN ELE ALINACAK; o zaman sütun emekliye ayrılabilir. "Tasarım böyle" diye okunmasın.
+- Açık uygulama ayrıntısı (migration turunda kesinleşir, şimdi karar YOK): türetme YAZMA anında mı (kaydederken iki alan da dolar → `matching.ts` hiç dokunulmaz, düşük risk) yoksa OKUMA anında mı? Seçenek olarak yazılsın, karar uygulama turunda.
 
 ### 10.3 Görünürlük Kuralları (PO kararı)
 
@@ -664,7 +683,7 @@ hedef/değer ağırlığı artırılır.
 ## Bölüm 14 — Açık Kararlar
 
 Belge boyunca `⚠️ AÇIK` işaretli her nokta burada NUMARALI toplanır, her
-birinde `[ ] PO notu:`. Bilinen açıklar (Tur A + Tur B):
+birinde `[ ] PO notu:`. **Kalan açık karar: 7** (madde 8 → 2026-08-29'da kapandı).
 
 1. "İz Açan" arketip adı kesinleşmedi — `[ ] PO notu:`
 2. Karma ölçüm formatı (ipsatif sorunu) tasarlanmadı — `[ ] PO notu:`
@@ -672,8 +691,8 @@ birinde `[ ] PO notu:`. Bilinen açıklar (Tur A + Tur B):
 4. Sınırsız yeniden-derinleşme sınırı (G3-03) — `[ ] PO notu:`
 5. Özet alanı yönergesi — `[ ] PO notu:`
 6. Göç planı (a/b/c) — `[ ] PO notu:`
-7. K-anonimlik eşiği (kaç kişiden az olunca gizlensin) — `[ ] PO notu:`
-8. Profil envanteri yapılmadan üç soru kesinleşmez (S21) — `[ ] PO notu:`
+7. K-anonimlik eşiği (kaç kişiden az olunca gizlensin) — `[ ] PO notu:` (S21 teyit: kodda YOK, `platformTenantController.ts:269`)
+8. ✅ **KARARA BAĞLANDI (2026-08-29):** Profil envanteri (S21) yapıldı → `raporlar/kesif/profil-envanteri-2026-08-29.md`; iki çakışma karara bağlandı (§10.2 KARAR 1 expectationCategories yan yana · KARAR 2 supportApproach yeni + her iki rol, interactionStyle türetilir).
 
 ---
 

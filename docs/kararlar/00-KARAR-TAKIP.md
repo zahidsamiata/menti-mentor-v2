@@ -79,6 +79,17 @@
 > - **G1-14/15 (denetim izi) → 🟡 çoğu VAR, biri eklendi:** Kritik ops çoğu izli — SystemLog (anonimleştirme `gdprService.ts:200`, rol `adminController.ts:931/962`, anlaşma `agreementController.ts:125/171/197`), platformAudit (kurum onay/ret `platformController.ts:295/322/368`), **Consent tablosu** (rıza grant/revoke yapısal kayıt), blockPair (blockedBy/blockedAt gömülü). Tek gerçek untracked = **`updateTenantSettings`** → SystemLog AUDIT eklendi (actorId+tenantId+changedFields, **PII yok**; test PII-kontrollü). **Log'da PII YOK** (logger.ts meta id-bazlı). **Kalan minör (izli-ama-actor'suz, ayrı batch) = yeni madde 137:** meeting approve/reject/status (Meeting.status+updatedAt var) · super-admin verifyTenant (verificationStatus var).
 > Doğrulama: backend tsc+tsc-test+eslint ✓ · frontend tsc/eslint/vitest 49/49/build ✓ · entegrasyon → CI. **MERGE EDİLMEDİ.**
 
+> **⚡ GÜNCELLEME (2026-08-29) — FAZ 4 BAŞLADI: S21 ENVANTER + TASARIM DÜZELTMESİ + DEVİR (yalnız-belge, çatı PR):**
+> - **S21 → ✅** (yukarıda söz satırı işaretlendi) — 📸 `raporlar/kesif/profil-envanteri-2026-08-29.md`.
+> - **✅ İki PO kararı (tasarım §10.2):** expectationCategories+S1 yan yana (çift-ağırlık notu) · supportApproach yeni her-iki-rol + interactionStyle türetilir (⚠️ geçici köprü). Tasarım Bölüm 14 açık karar 8→7.
+> - **Tez Bölüm 9-12 eklendi** (devir güncellemesi tamam).
+> - **⚠️ NUMARA VERİLMEDİ (PO numaralandıracak) — 4 yeni bulgu/borç:**
+>   1. ⭐ **TASARIM↔KOD UÇURUMU:** OCEAN/archetype/goalTags/skillTags yazılıyor, canlı `matching.ts`'te okunmuyor (madde 101). Faz 5.
+>   2. **K-ANONİMLİK YOK** (`platformTenantController.ts:269` n=1 dağılım döner) — G1-22 ailesi.
+>   3. **Çift-ağırlık riski:** Faz 5 skoru expectationCategories + mentiNeeds sinyalini TEK KEZ ağırlıklandırmalı.
+>   4. **interactionStyle köprü borcu:** supportApproach'tan türetim GEÇİCİ; Faz 5'te sütun emekliye ayrılabilir.
+> - ⚠️ Alt-ajan 5 alanı yanlış "ölü" dedi (discD/I/S/C·Meeting.requestMessage·rematchPriority/Count·mentorVisibilityEnabled) — hepsi yazılıyor, elle çürütüldü (M3). Kod/DB/migration DEĞİŞMEDİ.
+
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 
 > **Neden burada:** Oturumlarda "sonraki turda/ileride yapılacak" diye verilen sözler sonraki oturumlarca devralınmıyordu
@@ -103,7 +114,7 @@
 | S18 | Super-admin kapısı KEŞFİ (yeni /platform'da olmayan yetenek var mı → taşı, sonra kapat) | 2026-08-27 | ⬜ keşif olmadan silme YOK | G4-09/G4-10 |
 | S19 | Sunucu/altyapı sertleştirme TARAMASI (HTTPS/firewall/SSH/SSL/yedek) — çıkış blokeri | 2026-08-27 | 🔴 çıkış öncesi ZORUNLU | G1-28 |
 | S20 | Fotoğraf kayıt-sonrası DÜZENLEME keşfi (kullanıcı foto/bilgi güncelleyebiliyor mu) | 2026-08-27 | ⬜ önce keşif sonra iş | G10-25 |
-| S21 | Profil/hedef verisi envanter keşfi yapılacak — mentör/menti profilinde bugün hangi alanların TOPLANDIĞI kod-kanıtlı çıkarılacak; **üç soru (S1/S2/S3) bundan önce kesinleşmez** | 2026-08-28 | ⬜ tasarım belgesi Bölüm 10.6 ön koşul olarak işaretledi; keşif henüz yapılmadı | tasarım belgesi B10 + KALEM 13 |
+| S21 | Profil/hedef verisi envanter keşfi yapılacak — mentör/menti profilinde bugün hangi alanların TOPLANDIĞI kod-kanıtlı çıkarılacak; **üç soru (S1/S2/S3) bundan önce kesinleşmez** | 2026-08-28 | ✅ **YAPILDI (2026-08-29)** — 📸 `raporlar/kesif/profil-envanteri-2026-08-29.md` (30 satır, kanıt-düzeyi sütunlu). Üç sorunun iki çakışması PO tarafından karara bağlandı (tasarım §10.2). ⭐ Uçurum bulgusu: OCEAN yazılıp canlı motorda okunmuyor (Faz 5). | tasarım belgesi B10 + KALEM 13 |
 | S22 | **Backend PR #56 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda | 2026-08-28 | ✅ **YAPILDI (2026-08-28)** — backend #56 merged (`303da85`); pointer re-bump `chore/faz1b-pointer-s22` turunda tamamlandı. ⚠️ Not: #129 pointer düzeltmesinden ÖNCE merge edildiği için ara bir sarkma oluştu (main pointer `0cb237c` feature commit'i gösterdi — ağaç doğruydu), bu turda kapatıldı. | G10-01 / çatı PR #129 / backend PR #56 |
 | S23 | **G1-07 Tur B** — Consent migration + backfill'i CANLIYA uygula. **PO onayı ZORUNLU** (canlı=lokal aynı Neon). ⚠️ MIGRATION TEK BAŞINA. `CONSENT_VERSION` avukat metniyle (G1-10) sabitlenmeli. | 2026-08-28 | ✅ **TAM (2026-08-28, B1 PR #133 + B2 PR #134):** B1 migration CANLIDA · **B2 backfill `--apply` → 5 ACIK_RIZA yazıldı** (yalnız ACIK_RIZA, grantedAt==kvkkConsentAt 5/5, idempotens teyitli, revokedAt null). Ön-sayımlar değişmedi (6/2/5/0). Consent modeli canlıda tam devrede. **Kalan (ayrı işler):** CONSENT_VERSION→G1-10 · G1-08 OAuth rıza UI · G1-05 self-servis FE. | G1-07 / backend PR #58 / G1-10 |
 | S24 | **Backend PR #59 (G1-05) merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda — çatı PR feature-commit pointer taşıyor (sarkma önlemi, S22 deseni). | 2026-08-29 | ✅ **YAPILDI (2026-08-29):** backend #59 merged (merge commit `f74149b`); pointer `9808811 → f74149b` re-bump (çatı `c2edaf5`, #135'e dahil). Teyit: `origin/main` `9808811`'i içeriyor (feature-commit main'in atası, ileri sarım — sarkma yok). | G1-05 / backend PR #59 / çatı PR #135 |
