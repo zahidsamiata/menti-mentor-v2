@@ -80,7 +80,8 @@
 - ⬜ **G1-08** OAuth rıza gösterimi + tipli yazım (G1-07'ye bağlı — servis hazır) · ✅ **G1-05** self-servis KVKK hak ekranı (2026-08-29, backend PR #59 + çatı PR) — `/api/me/data-export` + `/api/me/delete-account` (IDOR-safe, son-admin guard, ACIK_RIZA revoke) + FE `DataPrivacySection`; madde 97 kapandı. Detay: 00-KARAR-TAKIP madde 97.
 
 **FAZ 3 — Güvenlik incelikleri:**
-- ⭐ G1-17+G7-04 BİRLİKTE (aynı `middleware.ts`) · G1-04 SuspicionReport tenantId · G1-23 logoUrl guard · G1-26 CAPTCHA/IP limit · G1-02 DISC harf teyidi · G1-19 qualityMultiplier okuma teyidi · G1-14+G1-15 denetim izi.
+- ✅ **G7-04** www→apex 301 (2026-08-29, çatı PR — `frontend/src/middleware.ts`, yol+query korunur, apex/localhost döngü koruması). · 🔀 **G1-17 YENİDEN TANIMLANDI → Faz 3b'ye taşındı** (frontend middleware ile ÇÖZÜLEMEZ — cross-origin cookie; ayrıntı 00-KARAR-TAKIP G1-17). EK: `platform/layout.tsx` istemci guard boşluğu kapatıldı; `(admin)` guard yorumu gerçekle güncellendi. · G1-04 SuspicionReport tenantId · G1-23 logoUrl guard · G1-26 CAPTCHA/IP limit · G1-02 DISC harf teyidi · G1-19 qualityMultiplier okuma teyidi · G1-14+G1-15 denetim izi.
+- **FAZ 3b (YENİ) — admin/platform endpoint yetki denetimi (G1-17 gerçek çözümü + G1-23 ailesi):** admin/platform backend uçlarında `requireRole`/`requirePlatformAdmin` kapsamı denetlenir (asıl koruma katmanı). Middleware çözümü ancak backend cookie'ye parent domain verilirse mümkün — ayrı mimari karar.
 
 **FAZ 4 — Veri temeli** (⚠️ algoritmadan ÖNCE):
 - S21 profil envanteri (KEŞİF; tasarım B10.6) · Üç soru S1/S2/S3 + görünürlük ⚠️ MIGRATION TEK BAŞINA (B10.2/10.3) · G1-29+G6-03 tenant silme+onDelete ⚠️ MIGRATION TEK BAŞINA · G1-16 rıza backfill (⭐ şimdi ucuz).

@@ -563,3 +563,32 @@
 
 ---
 *Canonical güncel durum: `docs/kararlar/09-DURUM.md` · arkada ne kaldı: `docs/kararlar/00-KARAR-TAKIP.md` · sıradaki işler: `docs/kararlar/10-yol-haritasi.md`. Bu belge = oturum tarihsel kaydı (yaşayan; yeni oturumlar aşağı eklenir).*
+
+---
+---
+
+# 📅 OTURUM 2026-08-29 (2) — FAZ 3a MIDDLEWARE (G7-04 ✅ + G1-17 yeniden tanım)
+
+**📸 Kapanış fotoğrafı** — SHA/PR o güne aittir; güncel için git + 09-DURUM.
+
+## 🔎 Git-doğrulanmış durum
+- **Açık PR:** çatı **FAZ 3a middleware** (frontend-only). Backend DOKUNULMADI → pointer yok. **MERGE EDİLMEDİ.**
+- Branch: `feat/faz3a-middleware-2026-08-29` (temiz main'den; #135 merged idi).
+
+## A) Keşif → DURAK → PO kararı
+- **Kritik keşif:** frontend middleware auth cookie'sini/rolü OKUYAMAZ — cross-origin (frontend `sivilkapasite.org`, backend `api.sivilkapasite.org`, parent domain paylaşımı yok, SameSite=Strict); access token yalnız bellekte. Dev'de aynı `localhost` host'u paylaşıldığı için "çalışır görünür" → **prod'da sessizce çöker** (tuzak).
+- **DURAK → PO:** G1-17 için seçenek soruldu. **PO kararı: yalnız G7-04.** `mm_role` (JS-yazılabilir çerez) REDDEDİLDİ — devtools'tan atlanır, sahte güven verir (korumasızdan tehlikeli).
+
+## B) Yapılanlar (frontend-only, kanıtlı)
+- **G7-04 ✅:** `frontend/src/middleware.ts` — `www→apex` 301, yol+query korunur, apex/localhost döngü koruması, matcher `_next`/`api`/statik muaf. 5 test (`__tests__/middleware.test.ts`).
+- **G1-17 YENİDEN TANIMLANDI → Faz 3b:** middleware ile çözülemez (yukarıdaki neden). Gerçek koruma backend yetki denetimi (admin/platform endpoint audit, G1-23 ailesi). Middleware ancak backend cookie'ye parent domain verilirse — ayrı mimari karar.
+- **EK:** `platform/layout.tsx` istemci guard'ı YOKTU → eklendi (`/health` ile oturum doğrula; 401/403 → `/platform/login`; login muaf → döngü yok; **KABA kapı**, asıl kapı backend `requirePlatformAdmin`). `(admin)/layout.tsx` "middleware Sprint 15'te" yorumu gerçekle güncellendi. `lib/api/platform.ts` fırlatılan hataya `.status` iliştirildi.
+
+## C) Doğrulama
+- frontend tsc/eslint ✓ · vitest **43/43** (5 yeni) · `next build` ✓ (Middleware 34 kB). ⚠️ CANLI SİTE etkiler (www) — matcher dar, test edildi.
+
+## D) Senkron
+- G7-04 → 10-yol Faz 3 ✅ · G1-17 → Faz 3b (yeni bölüm) · 00-KARAR-TAKIP ⚡ GÜNCELLEME + G1-17 kart yeniden-tanım · 09-DURUM ⚡. Kırık link 0.
+
+## E) Yeni bulgu (kalem adayı)
+- **DK1:** `platform/dashboard/page.tsx:82` 401 tespiti mesaj-tabanlı (`.includes('401')`) → `platformFetch` Türkçe mesaj fırlatıyor, kod yok → 401'de login'e YÖNLENDİRMİYOR (latent bug). Yeni layout guard'ı kullanıcı-etkisini maskeliyor; sayfa-içi kontrol `.status` ile düzeltilmeli (küçük iş).
