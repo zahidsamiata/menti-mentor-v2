@@ -633,3 +633,32 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 
 ## F) Kalan
 - **DK1** (dashboard 401 latent bug) hâlâ açık (küçük). Faz 3 diğer kalemler: G1-26/G1-02/G1-19/G1-14/G1-15.
+
+---
+---
+
+# 📅 OTURUM 2026-08-29 (4) — FAZ 3c: GÜVENLİK KAPANIŞ (FAZ 3 KAPANDI)
+
+**📸 Kapanış fotoğrafı** — SHA/PR o güne aittir; güncel için git + 09-DURUM.
+
+## 🔎 Git-doğrulanmış durum
+- **Açık PR:** backend **#61** (G1-26 + G1-14/15) + çatı **FAZ 3c PR** (DK1 FE + pointer + belge). **MERGE EDİLMEDİ.**
+- Branch (iki repo): `feat/faz3c-guvenlik-kapanis-2026-08-29`.
+
+## A) 2 iş (yapıldı)
+- **DK1 → ✅:** platform `dashboard`+`tenants/[id]` 401/403'te login'e yönlendirmiyordu (`message.includes('401')` bozuk — backend Türkçe mesaj fırlatır). `isPlatformAuthError(e)` helper'ı `.status`'e bakar; 2 sayfada kullanıldı. 6 birim test.
+- **G1-26 → ✅:** `POST /self-serve/register` public + her çağrı Tenant+admin yaratıyor, sınırsızdı → `selfServeRegisterRateLimiter` 5/dk/IP. ⚠️ CAPTCHA EKLENMEDİ (PO/3.taraf). Test: 429. setup.ts eşik 1000 (meşru testler).
+
+## B) 3 TEYİT (3 paralel Explore ajanı + ELLE doğrulama — ajan hataları düzeltildi)
+- **⭐ G1-02 DISC sızıntısı → YOK.** `analyticsRoutes.ts:12` requireSelfOrAdmin (ajan "IDOR" dedi, route'u okumamış — yanlış); menti-facing DTO disc strip (`matchingController.ts:77-90`); counterpart select'leri disc'siz. Karşı tarafın kişilik tipi hiçbir peer yanıtında YOK.
+- **⭐ G1-19 kalite çarpanı çift → YOK.** `scoring.ts:109` base×qm + `matching.ts:307` bonus×qm = (base+bonus)×qm; her bileşen 1 kez, qm² yok. Ajan "double" dedi ama matematiği kendi çürüttü — koddan doğrulandı. Keşif iddiası yanlıştı. **DURAK tetiklenmedi.**
+- **G1-14/15 denetim izi → çoğu VAR.** Kritik ops izli: SystemLog (anonim/rol/anlaşma), platformAudit (kurum onay/ret), **Consent tablosu** (rıza yapısal kayıt), blockPair (blockedBy gömülü). Tek gerçek gap `updateTenantSettings` → AUDIT eklendi (actorId+tenantId+changedFields, PII yok). Log'da PII YOK (logger.ts id-bazlı). Kalan minör = **madde 137** (meeting/verifyTenant actor-log).
+
+## C) Doğrulama
+- backend tsc+tsc-test+eslint ✓ · frontend tsc/eslint/vitest **49/49**/build ✓. Entegrasyon → CI. Migration/DB/seed YOK · #110/kvkk-metinleri DOKUNULMADI.
+
+## D) Senkron — ⭐ FAZ 3 KAPANDI
+- 00-KARAR-TAKIP (⚡ + madde 137) · 10-yol **Faz 3 ✅ KAPANDI** · 09-DURUM ⚡. Kırık link 0.
+
+## E) Kalan (Faz 3 sonrası)
+- **Madde 137:** meeting approve/reject/status + super-admin verifyTenant için actor-log (küçük batch). Sonraki: Faz 4 (veri temeli) / Faz 5 (algoritma — G1-19 bonus×qm tasarım nüansı orada ele alınabilir).

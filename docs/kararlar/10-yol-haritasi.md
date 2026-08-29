@@ -79,9 +79,10 @@
 - 🟡 **G1-07 Tur A ✅ (2026-08-28, backend PR #58 + çatı PR #132):** Consent modeli KODLANDI + CI'da prova edildi (şema+servis+dual-write+backfill+test). **Migration CANLIYA UYGULANMADI.** ⬜ **Tur B (S23, PO onayı):** migration + backfill canlıya (⚠️ MIGRATION TEK BAŞINA).
 - ⬜ **G1-08** OAuth rıza gösterimi + tipli yazım (G1-07'ye bağlı — servis hazır) · ✅ **G1-05** self-servis KVKK hak ekranı (2026-08-29, backend PR #59 + çatı PR) — `/api/me/data-export` + `/api/me/delete-account` (IDOR-safe, son-admin guard, ACIK_RIZA revoke) + FE `DataPrivacySection`; madde 97 kapandı. Detay: 00-KARAR-TAKIP madde 97.
 
-**FAZ 3 — Güvenlik incelikleri:**
-- ✅ **G7-04** www→apex 301 (2026-08-29). · ✅ **G1-17** (2026-08-29, Faz 3b) — admin/platform backend uçları denetlendi, hepsi `requireRole`/`requirePlatformAdmin`+tenant-scoped (🟢); asıl koruma backend'de. · 🗑️ **G1-23** GEÇERSİZ (logoUrl guard VAR, kanıtlı). · 🔀 **G1-04** yeniden tanım (tenant açığı değil — public-create/platform-read). · Kalan: G1-26 CAPTCHA/IP limit · G1-02 DISC harf teyidi · G1-19 qualityMultiplier okuma teyidi · G1-14+G1-15 denetim izi.
-- ✅ **FAZ 3b — YETKİ HARİTASI + 6 açık (2026-08-29, backend PR #60):** 187 endpoint denetlendi (📸 `raporlar/kesif/yetki-haritasi-2026-08-29.md`); **cross-tenant izolasyon sağlam (0 açık)**; 6 tenant-içi peer açığı (madde **131-136** / Y1-Y6) IDOR testleriyle kapatıldı. Kalan: **DK1** dashboard 401 latent bug (küçük).
+**FAZ 3 — Güvenlik incelikleri: ✅ KAPANDI (2026-08-29, 3a+3b+3c).**
+- ✅ **G7-04** www→apex 301 · ✅ **G1-17** (3b) admin/platform backend uçları guard'lı · 🗑️ **G1-23** GEÇERSİZ (logoUrl guard VAR) · 🔀 **G1-04** yeniden tanım (tenant açığı değil).
+- ✅ **FAZ 3b — YETKİ HARİTASI + 6 açık (backend PR #60):** 187 endpoint denetlendi (📸 `raporlar/kesif/yetki-haritasi-2026-08-29.md`); **cross-tenant izolasyon sağlam (0 açık)**; 6 tenant-içi peer açığı (madde **131-136**/Y1-Y6) IDOR testleriyle kapatıldı.
+- ✅ **FAZ 3c — güvenlik kapanış (backend PR #61):** **DK1** platform 401→login ✅ · **G1-26** self-serve rate limit ✅ (CAPTCHA hariç) · **G1-02** DISC sızıntısı TEYİT (YOK) · **G1-19** kalite çarpanı çift TEYİT (YOK) · **G1-14/15** denetim izi (çoğu VAR, `updateTenantSettings` AUDIT eklendi). Kalan minör = **madde 137** (meeting/verifyTenant actor-log, ayrı batch).
 
 **FAZ 4 — Veri temeli** (⚠️ algoritmadan ÖNCE):
 - S21 profil envanteri (KEŞİF; tasarım B10.6) · Üç soru S1/S2/S3 + görünürlük ⚠️ MIGRATION TEK BAŞINA (B10.2/10.3) · G1-29+G6-03 tenant silme+onDelete ⚠️ MIGRATION TEK BAŞINA · G1-16 rıza backfill (⭐ şimdi ucuz).

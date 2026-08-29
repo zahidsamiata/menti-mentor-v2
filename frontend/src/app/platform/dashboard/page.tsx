@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import {
+  isPlatformAuthError,
   platformLogout,
   getPlatformStats,
   listPendingTenants,
@@ -79,7 +80,7 @@ export default function PlatformDashboard() {
         setLogs(r.items);
       }
     } catch (e) {
-      if (e instanceof Error && e.message.includes('401')) {
+      if (isPlatformAuthError(e)) {
         router.push('/platform/login');
       } else {
         setError(e instanceof Error ? e.message : 'Hata oluştu.');

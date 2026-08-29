@@ -71,6 +71,14 @@
 > Her fix ayrı commit + IDOR regresyon testi (5 test dosyası). Kırılan akış yok (FE kontrolü: §PR60). ⚠️ Entegrasyon testleri lokalde guard'la durur → kanıt CI. **MERGE EDİLMEDİ.**
 > **DK1 (önceki tur):** dashboard 401 latent bug — hâlâ açık (küçük iş, `.status` ile düzeltilebilir; Y* dışı).
 
+> **⚡ GÜNCELLEME (2026-08-29) — FAZ 3c: GÜVENLİK KAPANIŞ (Faz 3 KAPANDI):** backend PR #61 + çatı PR. 2 iş + 3 TEYİT.
+> - **DK1 → ✅:** platform `dashboard` + `tenants/[id]` sayfaları oturum hatasını `message.includes('401')` ile arıyordu (backend Türkçe mesaj fırlatır, kod yok) → 401'de login'e yönlendirmiyordu. `isPlatformAuthError(e)` helper'ı `.status`'e bakar; 2 sayfada kullanıldı (6 birim test). `frontend/src/lib/api/platform.ts`.
+> - **G1-26 → ✅:** `POST /self-serve/register` (public, her çağrı Tenant+admin yaratıyor) sınırsızdı → `selfServeRegisterRateLimiter` 5/dk/IP. ⚠️ CAPTCHA EKLENMEDİ (PO/3.taraf kararı). Test: 429. `rateLimiter.ts`.
+> - **G1-02 (DISC sızıntısı) → ✅ TEYİT: sızıntı YOK.** `analyticsRoutes.ts:12` requireSelfOrAdmin · menti-facing DTO disc strip (`matchingController.ts:77-90`) · counterpart select'leri disc'siz (`conversationController.ts:64`, `meetingController.ts` select). Kendi tipini görmek normal; karşı tarafınki hiçbir peer yanıtında YOK.
+> - **G1-19 (kalite çarpanı çift) → ✅ TEYİT: çift-çarpım YOK.** `scoring.ts:109` base×qm (bir kez) + `matching.ts:307` bonus×qm (AYRI bileşen, bir kez) = (base+bonus)×qm. qm² yok. Keşif "iki kez uygulanıyor" iddiası YANLIŞ (koddan çürütüldü). DURAK tetiklenmedi.
+> - **G1-14/15 (denetim izi) → 🟡 çoğu VAR, biri eklendi:** Kritik ops çoğu izli — SystemLog (anonimleştirme `gdprService.ts:200`, rol `adminController.ts:931/962`, anlaşma `agreementController.ts:125/171/197`), platformAudit (kurum onay/ret `platformController.ts:295/322/368`), **Consent tablosu** (rıza grant/revoke yapısal kayıt), blockPair (blockedBy/blockedAt gömülü). Tek gerçek untracked = **`updateTenantSettings`** → SystemLog AUDIT eklendi (actorId+tenantId+changedFields, **PII yok**; test PII-kontrollü). **Log'da PII YOK** (logger.ts meta id-bazlı). **Kalan minör (izli-ama-actor'suz, ayrı batch) = yeni madde 137:** meeting approve/reject/status (Meeting.status+updatedAt var) · super-admin verifyTenant (verificationStatus var).
+> Doğrulama: backend tsc+tsc-test+eslint ✓ · frontend tsc/eslint/vitest 49/49/build ✓ · entegrasyon → CI. **MERGE EDİLMEDİ.**
+
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 
 > **Neden burada:** Oturumlarda "sonraki turda/ileride yapılacak" diye verilen sözler sonraki oturumlarca devralınmıyordu

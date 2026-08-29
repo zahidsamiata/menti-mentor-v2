@@ -25,6 +25,18 @@ async function platformFetch<T>(path: string, options: RequestInit = {}): Promis
   return res.json() as Promise<T>;
 }
 
+/**
+ * platformFetch fırlattığı hata bir OTURUM hatası mı (401/403) — login'e yönlendirme kararı.
+ *
+ * DK1 (Faz 3c): eski sayfalar `e.message.includes('401')` bakıyordu ama backend Türkçe mesaj
+ * fırlatır (kod içermez) → 401'de login'e yönlendirmiyordu. Artık platformFetch hataya `.status`
+ * iliştiriyor (Faz 3a); doğru sinyal budur.
+ */
+export function isPlatformAuthError(e: unknown): boolean {
+  const status = (e as { status?: number } | null)?.status;
+  return status === 401 || status === 403;
+}
+
 export async function platformLogin(email: string, password: string): Promise<{ ok: boolean }> {
   return platformFetch<{ ok: boolean }>('/api/platform/auth', {
     method: 'POST',
