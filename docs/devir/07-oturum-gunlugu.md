@@ -670,7 +670,6 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - Faz 5'e kalan gerçek soru: bonus'un çarpana tabi olması TASARIM tercihi mi (karar verilecek nüans, "hata" değil). Branch `docs/tasarim-duzeltme-2026-08-29`.
 
 ---
----
 
 # 📅 OTURUM 2026-08-29 (5) — FAZ 4 BAŞLADI: S21 ENVANTER KAYDI + TASARIM DÜZELTMESİ + DEVİR
 
