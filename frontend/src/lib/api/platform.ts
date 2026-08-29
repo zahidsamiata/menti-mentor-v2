@@ -16,7 +16,11 @@ async function platformFetch<T>(path: string, options: RequestInit = {}): Promis
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({})) as Record<string, unknown>;
-    throw new Error((err['message'] as string) ?? `HTTP ${res.status}`);
+    // HTTP durum kodunu hataya iliştir — çağıran (ör. platform layout guard'ı) 401/403'ü
+    // mesaj metnine bakmadan güvenilir ayırt edebilsin (backend mesajları Türkçe, kod içermez).
+    const error = new Error((err['message'] as string) ?? `HTTP ${res.status}`);
+    (error as Error & { status?: number }).status = res.status;
+    throw error;
   }
   return res.json() as Promise<T>;
 }
