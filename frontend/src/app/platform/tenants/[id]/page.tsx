@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
+  isPlatformAuthError,
   getTenantOverview,
   listTenantMembers,
   listTenantMeetings,
@@ -65,7 +66,7 @@ export default function TenantDetailPage() {
 
   const handleError = useCallback(
     (e: unknown) => {
-      if (e instanceof Error && e.message.includes('401')) {
+      if (isPlatformAuthError(e)) {
         router.push('/platform/login');
       } else {
         setError(e instanceof Error ? e.message : 'Hata oluştu.');
