@@ -93,3 +93,36 @@ Tenant silme + `onDelete` migration'ı bu FK'leri ekleyecek/düzeltecek. Bulgula
 - `migrate diff` tam çıktısı pipe'sız alındı, tablo sayısı iki yöntemle (`grep -c` + göz) doğrulandı = 4.
 - Öksüz sayıları hem `NOT EXISTS` (negatif) hem `IN (...)` pozitif eşleşmeyle çapraz doğrulandı.
 - Bu keşif SALT-OKUMA: tek `ALTER/UPDATE/DELETE/CREATE` çalıştırılmadı; geçici sorgu scriptleri iş sonunda silindi.
+
+---
+
+## §H — ✅ ÇÖZÜM (2026-08-30, backend PR #63 · CANLI, PO onaylı)
+
+Drift'in kök çözümü uygulandı. **3 ayrı commit** (PO şartı — cron düzeltmesi migration'dan bağımsız doğrudur).
+
+### H.1 — 13 TEMMUZ ZİNCİRİ (kalıcı kayıt — kök neden)
+> Bir daha "gizem" olmasın diye kalıcı yazıldı (önceden yalnız terminaldeydi):
+1. `MentorshipAgreement` commit `7f1cb11` (2026-07-13) ile doğdu — "feat(İş 4): mentörlük anlaşması + testler".
+2. O migration tabloyu **PK + index ile yarattı, HİÇ FOREIGN KEY yaratmadı** → drift'in tam kökeni.
+3. Aynı partide 402 satırlık `feedback-loop.test.ts` (`MentorshipAgreement`'ı 6 kez yazar).
+4. Test-DB koruması `assertTestDatabase.ts` `8a2926b` (2026-07-29) — İş 4'ten **16 gün SONRA** geldi.
+5. → 07-13'te koruma YOKTU; test **canlı Neon'a** yazdı, FK olmadığı için sahte ebeveyn id'leri reddedilmedi. Satırlar **6 güne yayıldı** (07-13/20/25/26/27/29 = 38/7/14/35/49/7 = 150); son parti guard'ın geldiği 07-29'da, sonrası yok.
+6. `runAgreementRenewalCron` (günlük 10:00) sahte veriyi işledi (23 satır RENEWAL_PENDING'e döndü).
+
+### H.2 — KARAR 1 · ON DELETE = RESTRICT (5 FK'nin HEPSİ, PO)
+1. **Self-servis silme ANONİMLEŞTİRİYOR, satır silmiyor** (`gdprService.anonymizeUser`) → CASCADE hiç tetiklenmez, kodda UYUYAN TEHLİKELİ KURAL olurdu.
+2. `MentorshipAgreement` **ÇİFT TARAFLI** kayıt — CASCADE, bir tarafın silinmesiyle diğerinin geçmişini de siler (veri-indirmedeki "mesaj karşı tarafın da verisi" ilkesi).
+3. Mevcut `->Tenant` FK deseni zaten RESTRICT — tutarlılık.
+- ⭐ **KASITLI DAVRANIŞ (ileride hata sanılmasın):** anonimleştirme sonrası anlaşma kaydı **AYAKTA KALIR** ve anonim kullanıcıya işaret eder. Bu **kasıtlıdır** — karşı tarafın geçmişi korunur.
+
+### H.3 — KARAR 2 · Cron düzeltmesi (kullanılmış kurum silinmez)
+`runDraftTenantCleanup` silme adayına **anlaşma sayısı** eklendi: anlaşması olan taslak tenant TERK EDİLMİŞ değil **KULLANILMIŞ** → silinmez, SystemLog'a atlanır (PII yok). Regresyon testi (2 vaka). ADIM 0 kapısı bu çakışmayı yakaladı (fiziksel `user.deleteMany`+`tenant.delete` cron'u vardı); (D) doğrulaması: bugün çakışma 0 ama kod dışlamıyor → kök çözüm = kullanılmış kurumu hiç silmemek.
+
+### H.4 — KARAR 3 · Sınır gevşetmesi notu (PO)
+Bu tur "migration tek başına" sınırının **bilinçli gevşetilmesidir**: cron koşulu migration DEĞİL, uygulama kodu; ayrı commit'te bağımsız test edilebilir → sınırın koruduğu **teşhis edilebilirlik** zarar görmüyor.
+
+### H.5 — Uygulama sonuçları (DURAK B, canlı)
+- 150 öksüz **silindi** (yedek `MentorshipAgreement_yedek_20260830` = 150; silinen=150=yedek, **aynı 150 satır** kanıtlı; koşul tarihe değil öksüzlüğe dayandı).
+- FK **58 → 63** (5 yeni, hepsi `confdeltype='r'`=RESTRICT). `migrate diff`: 5 FK diff'ten düştü.
+- Gerçek satır (0) etkilenmedi · User 6 · Tenant 2 · diğer tablolar değişmedi.
+- **Kalan drift (ayrı kalem, DÜZELTİLMEDİ):** `updatedAt` default (4 tablo, 🟢 zararsız) + `LearningStage.tenantId` onDelete davranışı (🟡) + yedek tablo (`migrate diff`'te "şemada yok" görünür → **S26** ile düşürülecek).
