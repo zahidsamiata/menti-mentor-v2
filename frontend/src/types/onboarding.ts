@@ -53,6 +53,8 @@ export type ExpectationCategory =
   | 'SEKTOR_TANIMA';
 
 export type TimeCommitment = 'AYDA_1' | 'AYDA_2_3' | 'HAFTADA_1' | 'HAFTADA_2_PLUS';
+// InteractionStyle DONDURULMUŞ (§10.2 KARAR 2): onboarding'de artık sorulmuyor. Tip yalnızca
+// mevcut profil DTO'ları (lib/api/profile.ts) için korunur; ProfileData'dan çıkarıldı.
 export type InteractionStyle = 'GOREV_BAZLI' | 'SOHBET_BAZLI';
 
 /** POST /api/users/profile/complete body */
@@ -63,10 +65,23 @@ export interface ProfileData {
   // Rol-spesifik (opsiyonel)
   expectationCategories?: ExpectationCategory[];
   timeCommitment?:        TimeCommitment;
-  interactionStyle?:      InteractionStyle;
   // Opsiyonel veri toplama (UserProfile skorlama alanları — Aşama 1)
   goals?:                 string[];
   schools?:               string[];
   companies?:             string[];
   communities?:           string[];
+}
+
+// ─── Üç soru (S1/S2/S3, tasarım §10.2) — enum tipleri ────────────────────────
+export type MentiNeed      = 'KARAR_VEREMIYORUM' | 'BECERIDE_TAKILDIM' | 'GUVENMIYORUM' | 'INSANLARI_TANIMIYORUM' | 'KONUSACAK_BIRI';
+export type MentorStrength = 'YON_BULMA' | 'BECERI' | 'OZGUVEN' | 'AG_KURMA' | 'DINLEME';
+export type SupportApproach = 'YOL_GOSTERME' | 'BIRLIKTE_DUSUNME' | 'DINLEME';
+export type PriorityValue  = 'RESULT' | 'LEARNING' | 'UNDERSTOOD' | 'PERSPECTIVE';
+
+/** PATCH /api/users/me/matching-preferences body — dördü de opsiyonel (S1 boş bırakılabilir). */
+export interface MatchingPreferences {
+  mentiNeeds?:      MentiNeed[];       // S1 menti (en fazla 2)
+  mentorStrengths?: MentorStrength[];  // S1 mentör (en fazla 2)
+  supportApproach?: SupportApproach;   // S2 (her iki rol)
+  priorityValue?:   PriorityValue;     // S3 (her iki rol)
 }

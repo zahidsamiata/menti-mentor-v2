@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import type { ProfileData, ExpectationCategory, TimeCommitment, InteractionStyle } from '@/types/onboarding';
+import type { ProfileData, ExpectationCategory, TimeCommitment } from '@/types/onboarding';
 import type { UserRole } from '@/types/auth';
 
 // ─── Statik veriler ────────────────────────────────────────────────────────────
@@ -46,10 +46,9 @@ const TIME_COMMITMENT_OPTIONS: { value: TimeCommitment; label: string; sub: stri
   { value: 'HAFTADA_2_PLUS',  label: 'Haftada 2+ görüşme', sub: 'Yoğun program' },
 ];
 
-const INTERACTION_OPTIONS: { value: InteractionStyle; label: string; desc: string }[] = [
-  { value: 'GOREV_BAZLI',   label: 'Görev Bazlı',  desc: 'Belirli hedefler ve aksiyonlar üzerinden ilerlemek' },
-  { value: 'SOHBET_BAZLI',  label: 'Sohbet Bazlı', desc: 'Açık keşif ve fikir alışverişi yapmak' },
-];
+// NOT (2026-08-30): mentörün eski "Mentorluk Tarzı" (interactionStyle) sorusu KALDIRILDI.
+// interactionStyle DONDURULMUŞ (KARAR 2, §10.2) — yerini üç-soru ekranındaki supportApproach
+// aldı (her iki rol). Sütun şemada kalır; buradan artık yazılmaz.
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
@@ -69,7 +68,6 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
   // Rol-spesifik
   const [expectations,    setExpectations]    = useState<ExpectationCategory[]>([]);
   const [timeCommitment,  setTimeCommitment]  = useState<TimeCommitment | null>(null);
-  const [interactionStyle, setInteractionStyle] = useState<InteractionStyle | null>(null);
   // Opsiyonel bağlam verisi (virgülle ayrılmış serbest metin — boş bırakılabilir)
   const [schoolsRaw,     setSchoolsRaw]     = useState('');
   const [companiesRaw,   setCompaniesRaw]   = useState('');
@@ -101,7 +99,6 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
       experienceYears: expYears!,
       ...(role === 'MENTI' && expectations.length > 0 && { expectationCategories: expectations }),
       ...(role === 'MENTOR' && timeCommitment   && { timeCommitment  }),
-      ...(role === 'MENTOR' && interactionStyle && { interactionStyle }),
       // Menti'nin ilgi/becerileri aynı zamanda hedefleridir → goalTags
       ...(role === 'MENTI' && skills.length > 0 && { goals: skills }),
       // Opsiyonel bağlam verisi — yalnızca girilmişse gönder
@@ -235,59 +232,33 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
         </fieldset>
       )}
 
-      {/* ── Mentor: Zaman kotası + etkileşim tarzı ────────────────────── */}
+      {/* ── Mentor: Zaman kotası ──────────────────────────────────────── */}
+      {/* NOT: eski "Mentorluk Tarzı" (interactionStyle) sorusu kaldırıldı — bkz. üstteki not. */}
       {role === 'MENTOR' && (
-        <>
-          <fieldset>
-            <legend className="text-sm font-semibold text-foreground mb-3">
-              Zaman Kotası
-            </legend>
-            <div className="grid grid-cols-2 gap-2">
-              {TIME_COMMITMENT_OPTIONS.map(({ value, label, sub }) => (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => setTimeCommitment(value)}
-                  className={cn(
-                    'rounded-xl border p-3 text-left transition-all',
-                    timeCommitment === value
-                      ? 'bg-primary/10 border-primary text-foreground'
-                      : 'bg-card border-border hover:border-primary/40',
-                  )}
-                  aria-pressed={timeCommitment === value}
-                >
-                  <p className="text-sm font-bold">{label}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{sub}</p>
-                </button>
-              ))}
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend className="text-sm font-semibold text-foreground mb-3">
-              Mentorluk Tarzı
-            </legend>
-            <div className="grid grid-cols-2 gap-2">
-              {INTERACTION_OPTIONS.map(({ value, label, desc }) => (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => setInteractionStyle(value)}
-                  className={cn(
-                    'rounded-xl border p-3 text-left transition-all',
-                    interactionStyle === value
-                      ? 'bg-primary/10 border-primary text-foreground'
-                      : 'bg-card border-border hover:border-primary/40',
-                  )}
-                  aria-pressed={interactionStyle === value}
-                >
-                  <p className="text-sm font-bold">{label}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
-                </button>
-              ))}
-            </div>
-          </fieldset>
-        </>
+        <fieldset>
+          <legend className="text-sm font-semibold text-foreground mb-3">
+            Zaman Kotası
+          </legend>
+          <div className="grid grid-cols-2 gap-2">
+            {TIME_COMMITMENT_OPTIONS.map(({ value, label, sub }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setTimeCommitment(value)}
+                className={cn(
+                  'rounded-xl border p-3 text-left transition-all',
+                  timeCommitment === value
+                    ? 'bg-primary/10 border-primary text-foreground'
+                    : 'bg-card border-border hover:border-primary/40',
+                )}
+                aria-pressed={timeCommitment === value}
+              >
+                <p className="text-sm font-bold">{label}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{sub}</p>
+              </button>
+            ))}
+          </div>
+        </fieldset>
       )}
 
       {/* ── Opsiyonel bağlam (okul / şirket / topluluk) ───────────────── */}
