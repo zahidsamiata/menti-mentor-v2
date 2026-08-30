@@ -12,23 +12,27 @@
  */
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import {
   fetchDiscQuestions,
   submitProfile,
   submitDiscAnswers,
+  submitMatchingPreferences,
 } from '@/lib/api/onboarding';
 import { ProfileStep }  from './_steps/ProfileStep';
 import { DiscTestStep } from './_steps/DiscTestStep';
 import { ResultStep }   from './_steps/ResultStep';
-import type { DiscAnswer, DiscQuestion, DiscResultCard, ProfileData } from '@/types/onboarding';
+import { ThreeQuestionsStep } from './_steps/ThreeQuestionsStep';
+import type { DiscAnswer, DiscQuestion, DiscResultCard, ProfileData, MatchingPreferences } from '@/types/onboarding';
 import type { UserRole } from '@/types/auth';
 import { cn } from '@/lib/utils';
 
 // ─── Adım göstergesi ─────────────────────────────────────────────────────────
 
-const STEPS = ['Profil', 'Mizaç Testi', 'Sonuç'] as const;
-type StepIndex = 0 | 1 | 2;
+// 4. adım (Tercihler = üç soru) arketip kartından SONRA gelir (§10.2 ekran kararı).
+const STEPS = ['Profil', 'Mizaç Testi', 'Sonuç', 'Tercihler'] as const;
+type StepIndex = 0 | 1 | 2 | 3;
 
 interface StepIndicatorProps {
   current: StepIndex;
@@ -84,6 +88,7 @@ function LoadingShell() {
 // ─── _OnboardingContent ───────────────────────────────────────────────────────
 
 export default function OnboardingContent() {
+  const router = useRouter();
   const { user, accessToken, isLoading: authLoading } = useAuth();
   const userRole: UserRole | undefined = user?.role as UserRole | undefined;
 
@@ -142,6 +147,21 @@ export default function OnboardingContent() {
     }
   };
 
+  // ── Adım 4 tamamlandı: üç soruyu kaydet, dashboard'a geç ─────────────────
+  const handleThreeQuestionsComplete = async (data: MatchingPreferences) => {
+    setIsSubmitting(true);
+    setStepError(null);
+
+    const result = await submitMatchingPreferences(data, accessToken, user.tenantId);
+
+    setIsSubmitting(false);
+    if (result.ok) {
+      router.push('/dashboard');
+    } else {
+      setStepError(result.error.message ?? 'Tercihlerin kaydedilemedi. Tekrar deneyin.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col items-center py-10 px-4">
       <div className="w-full max-w-lg">
@@ -152,6 +172,7 @@ export default function OnboardingContent() {
             {step === 0 && 'Profilini Tamamla'}
             {step === 1 && 'Mizaç Testini Çöz'}
             {step === 2 && 'Sonucun Hazır! 🎉'}
+            {step === 3 && 'Son Birkaç Soru'}
           </h1>
           {step < 2 && (
             <p className="text-sm text-muted-foreground mt-1">
@@ -200,7 +221,16 @@ export default function OnboardingContent() {
         )}
 
         {step === 2 && resultCard && (
-          <ResultStep resultCard={resultCard} />
+          <ResultStep resultCard={resultCard} onContinue={() => setStep(3)} />
+        )}
+
+        {step === 3 && (
+          <ThreeQuestionsStep
+            role={userRole}
+            onComplete={handleThreeQuestionsComplete}
+            isSubmitting={isSubmitting}
+            error={stepError}
+          />
         )}
 
       </div>
