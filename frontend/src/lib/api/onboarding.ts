@@ -5,6 +5,7 @@ import type {
   DiscAnswer,
   SubmitDiscResponse,
   ProfileData,
+  MatchingPreferences,
 } from '@/types/onboarding';
 
 /** GET /api/users/disc/questions — 8 onboarding sorusunu çek */
@@ -38,6 +39,20 @@ export function submitDiscAnswers(
   return apiClient<SubmitDiscResponse>('/api/users/disc/submit', {
     method: 'POST',
     body:   { answers },
+    token,
+    tenantId,
+  });
+}
+
+/** PATCH /api/users/me/matching-preferences — üç soru (S1/S2/S3) cevaplarını kaydet */
+export function submitMatchingPreferences(
+  data:     MatchingPreferences,
+  token:    string,
+  tenantId: string,
+): Promise<ApiResult<unknown>> {
+  return apiClient('/api/users/me/matching-preferences', {
+    method: 'PATCH',
+    body:   data,
     token,
     tenantId,
   });

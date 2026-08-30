@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { ArrowRight, Zap, TrendingUp, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ConfettiBlast } from '@/components/atoms/ConfettiBlast';
@@ -54,9 +53,11 @@ function ShareButtons({ shareHeadline }: ShareButtonsProps) {
 
 interface ResultStepProps {
   resultCard: DiscResultCard;
+  /** Arketip kartından sonra üç-soru adımına geçiş (§10.2). */
+  onContinue: () => void;
 }
 
-export function ResultStep({ resultCard }: ResultStepProps) {
+export function ResultStep({ resultCard, onContinue }: ResultStepProps) {
   return (
     <>
       {/* Konfeti — sayfanın üzerinde yüzer */}
@@ -129,12 +130,10 @@ export function ResultStep({ resultCard }: ResultStepProps) {
         {/* ── Paylaşım Butonları ──────────────────────────────────────── */}
         <ShareButtons shareHeadline={resultCard.shareHeadline} />
 
-        {/* ── Devam Et ────────────────────────────────────────────────── */}
-        <Button asChild size="lg" className="w-full h-12 text-base rounded-xl gap-2">
-          <Link href="/dashboard">
-            Eşleşme Bekleme Salonuna Geç
-            <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
+        {/* ── Devam Et → üç soru adımı ────────────────────────────────── */}
+        <Button onClick={onContinue} size="lg" className="w-full h-12 text-base rounded-xl gap-2">
+          Devam Et — Son Birkaç Soru
+          <ArrowRight className="h-4 w-4" aria-hidden />
         </Button>
 
         <p className="text-center text-xs text-muted-foreground">
