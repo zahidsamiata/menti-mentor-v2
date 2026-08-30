@@ -697,3 +697,16 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **KURAL 13** (kök CLAUDE.md): negatif iddia geniş arama + kapsam beyanı ister (3 tekrar hatası).
 - **Ayraç geri alındı:** `---\n---` konvansiyonuydu (9 boundary); önceki tur yanlış tekillemişti.
 - **Numarasız kalemler (PO verecek, güncel):** kvkkConsentAt çift-yazma · interactionStyle emeklilik (donmuş sütun, köprü İPTAL) · mentorVisibilityEnabled kablosuz · matching.ts:288 ölü bonus · üç-soru cevapsız-kalma riski · gate+skor çifte-ceza (Faz 5) + devreden: tasarım↔kod uçurumu · k-anonimlik · gate/skor.
+
+---
+---
+
+# 📅 OTURUM 2026-08-30 (7) — ÜÇ SORU MIGRATION + S25 RE-BUMP + F.8 DRIFT KEŞFİ
+
+**📸 Kapanış fotoğrafı** — git-teyitli. FAZ 4'ün ana işi (üç soru veri toplama) canlıya çıktı + iki kapanış işi.
+
+- **⭐ ÜÇ SORU MIGRATION (CANLI DB, backend #62 `f5ec0a9` + çatı docs #143 `30db184`, MERGED):** `User` modeline dört additive alan — `mentiNeeds MentiNeed[]` · `mentorStrengths MentorStrength[]` · `supportApproach SupportApproach?` · `priorityValue PriorityValue?` (17 enum sabiti 5+5+3+4; PriorityValue İngilizce PO-kararı). Neon-safe (DO $$ + duplicate_object / ADD COLUMN IF NOT EXISTS), idempotent. DURAK A PO-onaylı (3 ek: PII aynı PR · gerçek drift-diff · ön/sonrası ölçüm). DURAK B: kayıt 6=6 · sütun 43→47 · interactionStyle DOKUNULMADI · enum 5/5/3/4. PII → Analytical (backend/CLAUDE.md). tsc/tsc-test/eslint ✓, iki CI yeşil. Form-turu notu §10.2'ye (enum sabiti ≠ metin). interactionStyle DONDURULMUŞ.
+- **✅ S25 POINTER RE-BUMP:** çatı submodule `082f380 → f5ec0a9` (backend #62 merge sonrası; ileri sarım teyitli). Sarkma kapatıldı, S22/S24 deseni.
+- **⭐🔴 F.8 DRIFT KEŞFİ (salt-okuma, DB'ye YAZILMADI):** 📸 `raporlar/kesif/sema-drift-2026-08-30.md`. `migrate diff` exit 2 = 4 tablo drift (üç-soru migration'ından DEĞİL, önceden var). 7 FK pg_constraint'ten okundu: **5 FK gerçekten YOK** (MentorshipAgreement ×3 + UserReport ×2), **1 davranış farkı** (LearningStage.tenantId RESTRICT vs şema SET NULL), InvitationTemplate FK tam. **⭐ MentorshipAgreement 150/150 satır ÖKSÜZ** (hiçbiri gerçek 2 tenant/6 user'a bağlı değil; 2026-07-13 tek batch, sentetik görünüm — köken teyit gerek). Ciddiyet 🔴1/🟡2/🟢. **Tenant silme BLOKÖRÜ:** FK'ler 150 öksüz dururken eklenemez → o migration'dan önce PO 150 satırı karara bağlamalı. Drift DÜZELTİLMEDİ (temizleme önerisi yazılmadı — PO kararı).
+- **Numarasız kalemler (PO verecek):** F.8 drift bulgusu (numaralandırma + ciddiyet + 150 öksüz akıbeti) · üç-soru form ekranı · devreden önceki kalemler.
+- **Sıradaki:** tenant silme + onDelete migration (F.8'in sonucu belirleyecek) · form turu · görünürlük+k-anonimlik (G1-22) · Faz 5.

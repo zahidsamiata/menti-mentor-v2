@@ -488,6 +488,14 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 | **Sonraki adım** | 🔵 **PLANLA turu** — her FK için canlı DB'de GERÇEKTEN var mı, salt-okuma teyit; ciddiyet sınıflandırması. ⚠️ **Düzeltme DEĞİL, önce keşif.** Kendi kendine düzeltme YAPILMADI (EK2 kuralı). |
 | **Durum** | ❓ **PO numaralandıracak** (numara YALNIZ burada doğar — KURAL 8). |
 
+> ✅ **GÜNCELLEME (2026-08-30, keşif TAMAMLANDI):** salt-okuma keşif yapıldı → 📸 **`../raporlar/kesif/sema-drift-2026-08-30.md`** (7 FK tek tek pg_constraint'ten okundu). **Üç ihtimalden çıkan sonuç:**
+> - **(a) FK gerçekten YOK — 5 FK:** `MentorshipAgreement`(tenantId/mentorId/mentiId) + `UserReport`(reporterUserId/targetUserId). Fiziksel DB'de kısıt yok.
+> - **(b) FK VAR ama ON DELETE farklı — 1 FK:** `LearningStage.tenantId` (canlı=RESTRICT, şema opsiyonel→SET NULL bekliyor).
+> - **(c) yalnız isim farkı:** yok. Ayrıca `InvitationTemplate.tenantId` FK'si TAM eşleşiyor (CASCADE), yalnız updatedAt default farkı.
+> - ⭐ **ÖKSÜZ KAYIT VAR — 🔴:** `MentorshipAgreement` **150/150 satır** üç FK'de de öksüz (tenant/mentor/menti hiçbiri gerçek 2 tenant / 6 user'a bağlı değil; createdAt 2026-07-13 tek batch, sentetik/test görünümü — köken TEYİT GEREK). `UserReport` 0 (boş), `LearningStage` 0 (13 null = meşru global çekirdek). **Temizleme önerisi YAZILMADI — PO kararı.**
+> - **updatedAt default (4 tablo):** 🟢 zararsız (`@updatedAt` uygulama katmanında yönetir).
+> - ⭐ **TENANT SİLME İÇİN BLOKÖR:** `MentorshipAgreement` FK'leri **150 öksüz dururken eklenemez** (hata verir) → tenant-silme migration'ından ÖNCE PO 150 satırın akıbetini karara bağlamalı. Detay/öneri: keşif belgesi §F. **Drift DÜZELTİLMEDİ (salt-okuma tur).** |
+
 ---
 
 ## G. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
