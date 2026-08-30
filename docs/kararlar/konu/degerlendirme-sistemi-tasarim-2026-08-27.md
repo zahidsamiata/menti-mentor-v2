@@ -589,6 +589,11 @@ S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla
 - ⚠️ **ŞART (PO): S2 metni NÖTR yazılacak.** Sebep: kişiye az önce arketip etiketi verildi; "nasıl destek isterim" sorusu kişiliğe en yakın soru olduğu için kişi etikete uygun cevap verme eğilimine girebilir (Liman denen kişi "dinlesin" der, çünkü Liman öyle olmalı gibi gelir) → ölçüm bozulur. Metin arketipten bağımsız, davranışsal yazılacak. → İçerik oturumunun işi, ajan yazmaz.
 - ⚠️ **AÇIK KALEM (PO numaralandıracak):** kayıt akışının sonunda sekmeyi kapatan kişi üç soruya CEVAPSIZ kalır. Migration additive olduğu için sistem çalışır (nötr) ama o kişiye SONRADAN SORMA YOLU YOK. Profil sayfasından tamamlama akışı gerekiyor mu — karar verilmedi.
 
+> ⚠️ **FORM TURU KALEMİ (PO, 2026-08-30):** enum SABİTLERİ kesinleşti (`RESULT`/`LEARNING`/`UNDERSTOOD`/`PERSPECTIVE`, `MentiNeed`/`MentorStrength`/`SupportApproach` değerleri) ama KULLANICI METNİ form turunda keskinleştirilecek. Özellikle S3'te "öğrenmek" (`LEARNING`) ile "yeni bakış açısı" (`PERSPECTIVE`) aynı eksende bulanıklaşıyor — metin ayrımı form turunun işi.
+> - ⭐ **Metin değişikliği MIGRATION GEREKTİRMEZ** (enum sabiti ≠ görünen metin) — bu ayrım kayda geçsin ki form turunda "migration lazım mı" tartışması çıkmasın.
+> - **S2 metni NÖTR yazılacak** şartı (yukarıdaki ⚠️ ŞART) form turu kalemidir.
+> - **`MentorStrength.DINLEME` ↔ `SupportApproach.DINLEME`** aynı sabit adını taşır (Postgres tip-kapsamlı, çakışma YOK) ama form metinleri AYRIŞMALI: mentör S1'de "dinlemede faydalı olurum" (bir güç), S2'de "dinlerim, çözümü o bulur" (bir yaklaşım) — ikisi farklı soru, kullanıcıya farklı okunmalı.
+
 ### 10.3 Görünürlük Kuralları (PO kararı)
 
 | Kim | Ne görür |

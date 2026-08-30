@@ -133,6 +133,7 @@
 | S22 | **Backend PR #56 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda | 2026-08-28 | ✅ **YAPILDI (2026-08-28)** — backend #56 merged (`303da85`); pointer re-bump `chore/faz1b-pointer-s22` turunda tamamlandı. ⚠️ Not: #129 pointer düzeltmesinden ÖNCE merge edildiği için ara bir sarkma oluştu (main pointer `0cb237c` feature commit'i gösterdi — ağaç doğruydu), bu turda kapatıldı. | G10-01 / çatı PR #129 / backend PR #56 |
 | S23 | **G1-07 Tur B** — Consent migration + backfill'i CANLIYA uygula. **PO onayı ZORUNLU** (canlı=lokal aynı Neon). ⚠️ MIGRATION TEK BAŞINA. `CONSENT_VERSION` avukat metniyle (G1-10) sabitlenmeli. | 2026-08-28 | ✅ **TAM (2026-08-28, B1 PR #133 + B2 PR #134):** B1 migration CANLIDA · **B2 backfill `--apply` → 5 ACIK_RIZA yazıldı** (yalnız ACIK_RIZA, grantedAt==kvkkConsentAt 5/5, idempotens teyitli, revokedAt null). Ön-sayımlar değişmedi (6/2/5/0). Consent modeli canlıda tam devrede. **Kalan (ayrı işler):** CONSENT_VERSION→G1-10 · G1-08 OAuth rıza UI · G1-05 self-servis FE. | G1-07 / backend PR #58 / G1-10 |
 | S24 | **Backend PR #59 (G1-05) merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda — çatı PR feature-commit pointer taşıyor (sarkma önlemi, S22 deseni). | 2026-08-29 | ✅ **YAPILDI (2026-08-29):** backend #59 merged (merge commit `f74149b`); pointer `9808811 → f74149b` re-bump (çatı `c2edaf5`, #135'e dahil). Teyit: `origin/main` `9808811`'i içeriyor (feature-commit main'in atası, ileri sarım — sarkma yok). | G1-05 / backend PR #59 / çatı PR #135 |
+| S25 | **Üç-soru migration backend PR #62 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda (S22/S24 deseni; bu turda re-bump YAPILMADI — backend merge edilmedi). | 2026-08-30 | ⬜ **BEKLİYOR** — backend **PR #62** (`feat/uc-soru-alanlari-2026-08-30`) henüz merge edilmedi; merge sonrası re-bump. | Faz 4 üç-soru / backend PR #62 |
 
 > **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
 > boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
@@ -472,6 +473,20 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > **Not:** Keşifte G2/101/102/103'te ZATEN kart olanlar (canlı basit-sektör-skoru, %60/40 gerekçe, matris/anti-match/tiebreak gerekçe,
 > SJT/OCEAN okunmuyor, CORE-eşiği, qualityMultiplier-görünürlük, varsayılana-düşen-oran, sektör-5-bileşen-ağırlık-onayı) için YENİ numara AÇILMADI.
 > Sonraki yeni iş numarası: **131'den** başla.
+
+### F.8 — 🆕 2026-08-30 ŞEMA DRIFT BULGUSU (üç-soru migration DURAK B'sinde ortaya çıktı — **PO numaralandıracak**)
+
+> ⚠️ **DRIFT BULGUSU (2026-08-30, üç-soru migration DURAK B'sinde ortaya çıktı — o migration'dan KAYNAKLANMIYOR).**
+> Üç-soru migration'ının dört alanı drift-siz (diff'te geçmiyor); drift, o migration'ın DOKUNMADIĞI başka tablolarda ve ÖNCEDEN var.
+
+| Alan | Bulgu |
+|---|---|
+| **Nasıl yakalandı** | `migrate status` "up to date" diyor AMA `migrate diff --exit-code` = **exit 2** (fiziksel DB ↔ schema.prisma farkı). Tam da EK2'nin (gerçek drift kontrolü) yakalamak için eklendiği durum. |
+| **Etkilenen 4 tablo** | `InvitationTemplate` · `LearningStage` · `MentorshipAgreement` · `UserReport` |
+| **İKİ TÜR FARK — ciddiyetleri AYRI** | **(a)** `updatedAt` default (`now()`→`none`): Prisma `@updatedAt` uygulama katmanında yönetir → **muhtemelen zararsız.** · **(b)** ⚠️ **EKSİK FK'ler:** `LearningStage.tenantId` · `MentorshipAgreement`(tenantId/mentorId/mentiId) · `UserReport`(reporterUserId/targetUserId) — şemada VAR, fiziksel DB'de YOK görünüyor → **referans bütünlüğü DB tarafından zorlanmıyor olabilir.** |
+| **⭐ NEDEN ÖNEMLİ** | Faz 4'ün ikinci migration'ı (**tenant silme + onDelete**) TAM BU TABLOLARA dokunacak. `onDelete` davranışı FK'lere dayanır; **FK yoksa `onDelete` de yok demektir.** → Drift araştırması, **tenant silme migration'ının ÖN KOŞULU.** |
+| **Sonraki adım** | 🔵 **PLANLA turu** — her FK için canlı DB'de GERÇEKTEN var mı, salt-okuma teyit; ciddiyet sınıflandırması. ⚠️ **Düzeltme DEĞİL, önce keşif.** Kendi kendine düzeltme YAPILMADI (EK2 kuralı). |
+| **Durum** | ❓ **PO numaralandıracak** (numara YALNIZ burada doğar — KURAL 8). |
 
 ---
 
