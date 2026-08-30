@@ -146,6 +146,7 @@ docs/
 | `eslestirme-motoru-kesfi-2026-08-27.md` | Eşleştirme motoru keşfi (katman ağırlıkları/veto/sektör asimetri) — `degerlendirme-sistemi-tasarim-2026-08-27` tasarımının kaynağı |
 | `yetki-haritasi-2026-08-29.md` | ⭐ **187 endpoint yetki denetimi (FAZ 3b-1)** — RLS ne YAPAR/ne YAPMAZ (otomatik vs elle), 6 tenant-içi açık (Y1-Y6→madde 131-136), G1-23🗑️/G1-04 yeniden değerlendirme. **Yeni endpoint yazan OKUSUN.** |
 | `profil-envanteri-2026-08-29.md` | ⭐ **S21 profil/hedef envanteri (FAZ 4)** — 30 satır alan tablosu (kanıt-düzeyi sütunlu) · ⭐ TASARIM↔KOD UÇURUMU (OCEAN yazılıp canlı motorda okunmuyor, madde 101) · K-anonimlik YOK · üç soru örtüşme + migration taslağı. **Üç soru migration'ından ÖNCE OKU.** |
+| `sema-drift-2026-08-30.md` | ⭐ **Şema drift keşfi (F.8)** — fiziksel DB ↔ schema.prisma 4 tablo drift · 🔴 `MentorshipAgreement` 3 FK yok + **150/150 öksüz kayıt** · 🟡 LearningStage onDelete farkı · UserReport FK yok (boş) · updatedAt default 🟢. **Tenant silme + onDelete migration'ının ÖN KOŞULU — o migrationdan ÖNCE OKU.** |
 | `depo-denetimi-2026-08-02.md` | Repo hijyeni (boş/artık/yanlış-yerleşim/isimlendirme) |
 | `hayalet-backend-2026-08-02.md` | Yarım bağlı / ölü / kırık kod envanteri |
 | `kart-havuz-backend-envanteri-2026-08-02.md` | Kart/havuz/uyum/niyet-mektubu/foto backend envanteri |
