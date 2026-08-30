@@ -136,6 +136,7 @@
 | S25 | **Üç-soru migration backend PR #62 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda (S22/S24 deseni). | 2026-08-30 | ✅ **YAPILDI (2026-08-30):** backend #62 merged (merge commit `f5ec0a9`); pointer `082f380 → f5ec0a9` re-bump (`chore/pointer-rebump-s25-2026-08-30`). İleri sarım teyitli (`082f380`, `f5ec0a9`'un atası). | Faz 4 üç-soru / backend PR #62 / çatı re-bump PR |
 | S26 | **Yedek tablo `MentorshipAgreement_yedek_20260830` DÜŞÜRÜLECEK** (`DROP TABLE`). ⭐ **Tetikleyici:** FORM TURU tamamlanıp gerçek anlaşma akışı regresyonsuz görüldükten SONRA. Geçici tablo kalıcı drift olmasın (kvkkConsentAt köprüsüyle aynı desen: geçici artefakt izlenmezse unutulur). `migrate diff`'te "şemada olmayan tablo" olarak görünüyor. | 2026-08-30 | ⬜ **BEKLİYOR** — 150 öksüz silme geri-alma güvencesi; form turu + regresyon sonrası DROP. | F.8 çözüm / backend PR #63 |
 | S27 | **Cron/öksüz/FK backend PR #63 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda (S22/S24/S25 deseni). | 2026-08-30 | ⬜ **BEKLİYOR** — backend **PR #63** henüz merge edilmedi; merge sonrası re-bump. | F.8 çözüm / backend PR #63 |
+| S28 | **Üç-soru ekranı backend PR #64 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (S22-S27 deseni). | 2026-08-30 | ⬜ **BEKLİYOR** — backend **PR #64** (`feat/uc-soru-ekrani-2026-08-30`) + çatı FE PR henüz merge edilmedi. | Form turu / backend PR #64 |
 
 > **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
 > boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
@@ -499,6 +500,14 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > - ⭐ **TENANT SİLME İÇİN BLOKÖR:** `MentorshipAgreement` FK'leri **150 öksüz dururken eklenemez** (hata verir) → tenant-silme migration'ından ÖNCE PO 150 satırın akıbetini karara bağlamalı. Detay/öneri: keşif belgesi §F. **Drift DÜZELTİLMEDİ (salt-okuma tur).** |
 >
 > ✅ **ÇÖZÜLDÜ (2026-08-30, backend PR #63 · CANLI, PO onaylı):** 5 eksik FK'nin 5'i de eklendi (hepsi **ON DELETE RESTRICT** — PO kararı) + 150 öksüz satır silindi (yedek alınarak) + cron düzeltildi (kullanılmış kurum silinmez). 3 ayrı commit. **DURAK B:** FK 58→63, silinen=150=yedek (aynı satırlar), gerçek satır 0 etkilenmedi. **13-Temmuz zinciri kalıcı kayıt** (keşif belgesi §H). ⭐ Köken netleşti: İş 4 (`7f1cb11`) migration FK'siz yarattı + test-DB guard 16 gün sonra geldi → test canlıya yazdı. **Kalan (ayrı kalem, DÜZELTİLMEDİ):** updatedAt default (4 tablo 🟢) · LearningStage onDelete (🟡) · yedek tablo düşürme (**S26**). Detay: `../raporlar/kesif/sema-drift-2026-08-30.md` §H.
+
+### F.9 — 🆕 2026-08-30 ÜÇ SORU: SONRADAN DOLDURMA BOŞLUĞU (form turu — **PO numaralandıracak**)
+
+> ⚠️ **AÇIK KALEM (PO numaralandıracak):** Üç soru ekranı (S1/S2/S3) kayıt akışına eklendi (backend PR #64 + çatı FE PR), ama zorunluluk boşluğu **TAM kapatılmıyor:**
+> - **Mevcut 6 kullanıcı** bu ekranı HİÇ görmeyecek (kayıt akışını zaten geçtiler) → dört alanları boş kalır.
+> - **S1'i boş geçen** (EK2: mentiNeeds/mentorStrengths opsiyonel) kullanıcı SONRADAN dolduramaz.
+> - Ekran atlanamaz ama S1 boş bırakılabilir; S2/S3 zorunlu (bu turda uygulandı).
+> - ⭐ **Gerçek çözüm = profil düzenleme akışı → `G10-25`** (fotoğraf/bilgi kayıt-sonrası düzenleme keşfi, **S20 sözü — hiç keşfedilmedi**). Bu kalem **G10-25'e BAĞLI** (profil-düzenleme gelince üç soru da oradan güncellenebilir olmalı).
 
 ---
 
