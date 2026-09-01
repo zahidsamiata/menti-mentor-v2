@@ -218,7 +218,9 @@ export default function RegisterContent() {
     // fullName: minimum sürtünme — email öneki, onboarding'de güncellenir
     const fullName = email.split('@')[0]?.replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, '') || 'Kullanıcı';
 
-    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true });
+    // Davet token'ını backend'e ilet → geçerliyse davetli APPROVED olur (davet = onay, PO 2026-09-01).
+    // Böylece aşağıdaki otomatik login() PENDING 403'üne takılmaz; kullanıcı /onboarding'e ulaşır.
+    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true, inviteToken: token ?? undefined });
 
     if (!regResult.ok) {
       setLoading(false);
