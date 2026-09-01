@@ -156,3 +156,125 @@ jobs:
           name: coverage-report
           path: 'backend/coverage'
           retention-days: 7
+
+  # ── E2E (gerçek tarayıcı): Playwright — kayıt→onboarding ──────────────────────
+  # ⚠️ EK2: backend VE next süreçleri EPHEMERAL Postgres'e bağlanır (Neon DEĞİL).
+  # Guard yalnız backend vitest'inde çalışır; tarayıcı süreçleri onu bypass eder →
+  # ek emniyet: e2e/global-setup.ts DATABASE_URL Neon ise suite'i başlatmadan durdurur.
+  e2e-browser:
+    name: E2E Browser (Playwright — kayıt→onboarding)
+    runs-on: ubuntu-latest
+    needs: [backend-check, frontend-check]
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: menti_mentor_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    # ⭐ EPHEMERAL Postgres (localhost) — Neon DEĞİL. backend+next+playwright hepsi bunu kullanır.
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/menti_mentor_test
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/menti_mentor_test
+      JWT_SECRET: test-secret-min-32-chars-for-ci-pipeline!!
+      PLATFORM_ADMIN_KEY: test-platform-key-ci
+      PORT: '3000'
+      BACKEND_URL: http://localhost:3000
+      FRONTEND_URL: http://localhost:3001
+      ALLOWED_ORIGINS: http://localhost:3001,http://127.0.0.1:3001
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+      E2E_API_URL: http://localhost:3000
+      E2E_BASE_URL: http://localhost:3001
+
+    steps:
+      - name: Repoyu ve submodule'ları çek
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Node.js ${{ env.NODE_VERSION }} kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # ── Backend hazırlık: derle + migrate + seed test kurumu ───────────────────
+      - name: Backend bağımlılık + Prisma
+        working-directory: 'backend'
+        run: |
+          npm ci
+          npx prisma generate
+
+      - name: Test DB migration
+        working-directory: 'backend'
+        run: npx prisma migrate deploy
+
+      - name: Test kurumu seed (admin@test.local — davet token'ı için)
+        working-directory: 'backend'
+        run: node scripts/seed-test-tenant.mjs --apply
+
+      - name: Backend derle + arka planda başlat (:3000, ephemeral DB)
+        working-directory: 'backend'
+        run: |
+          npm run build
+          nohup npm start > ../backend-e2e.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000/health >/dev/null; then echo "backend hazır"; break; fi
+            echo "backend bekleniyor ($i)"; sleep 2
+          done
+          curl -sf http://localhost:3000/health || (echo "BACKEND BAŞLAMADI"; cat ../backend-e2e.log; exit 1)
+
+      # ── Frontend hazırlık: kur + build + Playwright tarayıcı ──────────────────
+      - name: Frontend bağımlılık
+        working-directory: 'frontend'
+        run: npm ci
+
+      - name: Playwright chromium kur
+        working-directory: 'frontend'
+        run: npx playwright install --with-deps chromium
+
+      - name: Next build + arka planda başlat (:3001)
+        working-directory: 'frontend'
+        run: |
+          npm run build
+          nohup npm start -- -p 3001 > ../frontend-e2e.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3001 >/dev/null; then echo "next hazır"; break; fi
+            echo "next bekleniyor ($i)"; sleep 2
+          done
+          curl -sf http://localhost:3001 >/dev/null || (echo "NEXT BAŞLAMADI"; cat ../frontend-e2e.log; exit 1)
+
+      # ── ⭐ Playwright testi (kayıt→onboarding). login-PENDING kopukluğu KIRMIZI düşebilir (EK1). ──
+      - name: Playwright E2E
+        working-directory: 'frontend'
+        run: npm run test:e2e
+
+      - name: Playwright raporu + trace yükle
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: |
+            frontend/playwright-report
+            frontend/test-results
+          retention-days: 7
+
+      - name: Sunucu logları (hata ayıklama)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-server-logs
+          path: |
+            backend-e2e.log
+            frontend-e2e.log
+          retention-days: 7
