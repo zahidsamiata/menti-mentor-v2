@@ -534,6 +534,27 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > **Toplam: 12 numarasız kalem.** Bunlar B/F tablolarındaki *numaralı* işlerden ayrıdır — henüz numara ALMAMIŞ olanların
 > tek-bakış dizinidir. PO numaralandırınca ilgili satır bu dizinden düşer (KURAL 8 adım 2).
 
+### F.11 — 🆕 2026-09-01 E2E TAŞIMA TURUNDAN İKİ YENİ KALEM (**PO numaralandıracak**)
+
+> **(11) STACKED PR TUZAĞI** — 🟡 (süreç borcu, kod değil)
+> **Ne oldu (2026-08-31):** `#65` (e2e kayıt akışı) base'i `#64`'ün feature dalıydı (stacked). `#64` main'e merge
+> olduktan **14 sn sonra** `#65` artık main'de olan feature dalına merge oldu → GitHub'ın otomatik retarget'ı devreye
+> giremedi, `tests/e2e-registration-flow.test.ts` **main'e ULAŞMADI**. CI **yeşil döndü** ama test **hiç koşmadı**
+> (backend main testleri 434→442 arttı, bu artış **yalnız `#64`'ten**; e2e dosyası main `git ls-tree`'de yoktu).
+> **Düzeltme:** `#66` (base=**main**) e2e'yi cherry-pick'le taşıdı → CI log'unda `e2e-registration-flow` GEÇTİ,
+> Test Files 59→60, Tests 442→445 (+3 senaryo yeşil). Pointer S28 `#66` sonrası bump edildi.
+> **⭐ İKİ DERS:** (a) stacked PR'da **ALT-PR ÖNCE** merge edilir, ya da base main'e **retarget** edildikten SONRA;
+> (b) "CI yeşil" **YETMEZ** — test SAYISI önceki koşuyla karşılaştırılır ("0 passed" da yeşil döner). → **KURAL 14 ADAYI** (CLAUDE.md, PO onaylayacak).
+>
+> **(12) LOGIN-PENDING KAYIT AKIŞI** — ❓ (teyit/keşif bekliyor — PO tarayıcı kontrolü)
+> **Ne bulundu (e2e turunda):** `register` token döndürmüyor (`{message, user}`); `login` PENDING hesabı **403
+> blokluyor** (`authController.ts:69`); FE kayıttan sonra doğrudan `/onboarding`'e push ediyor
+> (`_RegisterContent.tsx:232`). E2E testi admin onayını `testPrisma` ile **SİMÜLE ederek** geçiyor → API katmanı
+> sağlam ama **gerçek kullanıcının o onayı nasıl aldığı KANITLANMADI.**
+> **⭐ İki ihtimal, ayırt edilmeli:** (a) kurum başvurusu → onay beklemesi **TASARIM** (sorun yok) · (b) mevcut kuruma
+> menti/mentör katılımı → onay beklemesi **KOPUKLUK** olur. → **PO tarayıcı kontrolü bekliyor** (S3/S9 kalemleriyle
+> aynı iş). Sonuca göre ya kapanır ya düzeltme turu.
+
 ---
 
 ## G. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
