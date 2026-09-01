@@ -509,6 +509,31 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > - Ekran atlanamaz ama S1 boş bırakılabilir; S2/S3 zorunlu (bu turda uygulandı).
 > - ⭐ **Gerçek çözüm = profil düzenleme akışı → `G10-25`** (fotoğraf/bilgi kayıt-sonrası düzenleme keşfi, **S20 sözü — hiç keşfedilmedi**). Bu kalem **G10-25'e BAĞLI** (profil-düzenleme gelince üç soru da oradan güncellenebilir olmalı).
 
+### F.10 — ⭐ NUMARASIZ KALEM ENVANTERİ (PO tek seferde numaralandıracak) 🆕 2026-09-01
+
+> **Neden bu bölüm:** Son turlarda "PO numaralandıracak" notuyla yazılan kalemler farklı bloklara dağıldı (bilanço
+> teşhisi: kayda geçen ama numara almayan şey sonraki oturumda kaybolur). Bu bölüm **DİZİN'dir** — kalemleri
+> KOPYALAMAZ, kaynaklarına LİNK verir (F.8/F.9/üstteki listeler yerinde kalır). Numara YALNIZ PO tarafından, tek
+> seferde verilir (KURAL 8). Ciddiyet: 🔴 kritik · 🟡 orta · 🟢 zararsız/kozmetik · ❓ teyit/keşif bekliyor.
+
+| # | Kalem | Nereden geldi (tur/tarih) | Ciddiyet | Kaynak / bağlı kart |
+|:---:|---|---|:---:|---|
+| 1 | Tasarım↔kod uçurumu (OCEAN/archetype/goalTags/skillTags yazılıyor, `matching.ts` okumuyor) | S21 envanteri 2026-08-29 | 🟡 | madde 101 · Faz 5 · üst blok §87 |
+| 2 | K-anonimlik yok (`platformTenantController.ts:269` n=1 dağılım) | S21 envanteri 2026-08-29 | 🟡 | G1-22 · üst blok §88 |
+| 3 | kvkkConsentAt çift-yazma köprüsü (Consent tam devrede, tek kalan köprü) | KARAR 2 revizyonu 2026-08-29 | 🟢 | üst blok §99 |
+| 4 | interactionStyle emeklilik borcu (donmuş sütun, türetme yok) | KARAR 2 revizyonu 2026-08-29 | 🟢 | Faz 5 · üst blok §100 |
+| 5 | mentorVisibilityEnabled kablosuz (hiç yazılmıyor, `userController.ts:177` sadece SELECT) | KARAR 2 revizyonu 2026-08-29 | 🟡 | üst blok §101 |
+| 6 | matching.ts:288 ölü bonus (bir taraf hiç dolmuyor) | KARAR 2 revizyonu 2026-08-29 | 🟢 | Faz 5 · üst blok §102 |
+| 7 | gate+skor çifte-ceza sorusu (ortak-beklentisiz aday hem elenip hem düşük skor mu) | KARAR 2 revizyonu 2026-08-29 | ❓ | Faz 5 · üst blok §104 |
+| 8 | Üç soru sonradan doldurma boşluğu (mevcut 6 kullanıcı + S1-boş sonradan dolduramaz) | Form turu 2026-08-30 | 🟡 | **F.9** → G10-25 / S20 |
+| 9 | updatedAt default drift (4 tablo, `@updatedAt` uygulama katmanında) | Şema drift 2026-08-30 | 🟢 | **F.8** §499/502 |
+| 10 | LearningStage.tenantId onDelete davranış farkı (canlı RESTRICT ↔ şema SET NULL) | Şema drift 2026-08-30 | 🟡 | **F.8** §496/502 |
+| 11 | Stacked PR tuzağı (alt-PR üst-PR main'e girmeden merge → main'e ulaşmaz; CI yeşil ≠ test koştu) | E2E taşıma turu 2026-09-01 | 🟡 | **F.11** (aşağı) · KURAL 14 adayı |
+| 12 | login-PENDING kayıt akışı (register token vermiyor, login PENDING'i 403 blokluyor) | E2E turu 2026-09-01 | ❓ | **F.11** (aşağı) · PO tarayıcı kontrolü |
+
+> **Toplam: 12 numarasız kalem.** Bunlar B/F tablolarındaki *numaralı* işlerden ayrıdır — henüz numara ALMAMIŞ olanların
+> tek-bakış dizinidir. PO numaralandırınca ilgili satır bu dizinden düşer (KURAL 8 adım 2).
+
 ---
 
 ## G. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
