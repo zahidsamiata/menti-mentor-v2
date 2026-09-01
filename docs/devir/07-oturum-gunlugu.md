@@ -711,3 +711,21 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **Numarasız kalemler (PO verecek):** F.8 drift bulgusu (numaralandırma + ciddiyet + 150 öksüz akıbeti) · üç-soru form ekranı · devreden önceki kalemler.
 - **⭐ F.8 ÇÖZÜLDÜ (CANLI, backend PR #63, PO onaylı):** Triyaj (İŞ 1-6) + (D) doğrulaması → kök çözüm 3 commit: (a) cron `runDraftTenantCleanup` anlaşmalı taslak tenant'ı silmez (+regresyon testi) · (b) 150 öksüz silindi (yedek `MentorshipAgreement_yedek_20260830`; silinen=150=yedek, aynı satırlar; koşul öksüzlüğe dayandı — satırlar **6 güne yayılıydı**, "tek batch 07-13" DÜZELTİLDİ) · (c) 5 FK ON DELETE RESTRICT (58→63). **⭐ 13-Temmuz zinciri kanıtlandı:** İş 4 `7f1cb11` FK'siz migration + test-DB guard `8a2926b` 16 gün sonra → test canlıya yazdı; `runAgreementRenewalCron` sahte veriyi işledi (23 RENEWAL_PENDING). **ADIM 0 kapısı** fiziksel silme cron'unu yakaladı → cron düzeltmesi RESTRICT'i güvenli kıldı. PO 3 karar: RESTRICT (3 gerekçe) · cron "anlaşması yok" şartı · sınır gevşetme notu. KASITLI: anonimleştirme sonrası anlaşma ayakta kalır. Kalan: updatedAt default 🟢 · LearningStage onDelete 🟡 · yedek düşürme S26 · pointer re-bump S27.
 - **Sıradaki:** FORM TURU (araya iş girmeden) · yarım iş kararları + KURAL 13 iki-dil eki + Y8 düzeltmesi · görünürlük+k-anonimlik (G1-22) · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-01 (8) — E2E MAIN'E TAŞIMA + S28 POINTER + BELGE SENKRON
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Faz 4 form turu kapandı; merge sonrası tespit + düzeltme + biriken belge borcu.
+
+- **⭐ TESPİT TURU (salt-okuma):** #64 (üç-soru ucu) · #65 (e2e, stacked) · #146 (çatı FE) merge durumu doğrulandı. **⭐🔴 KRİTİK BULGU:** #65 e2e testi main'e HİÇ ULAŞMADI — stacked (base=#64 dalı); #64 main'e girdikten 14 sn sonra #65 zaten-main'de-olan dala merge oldu → retarget giremedi. Backend main CI'da `e2e-registration-flow` geçmiyordu, test hiç koşmadı (434→442 artışı yalnız #64'ten). Pointer sarkması da vardı (çatı 2b93afd, backend 301eb20 — ileri sarım).
+- **⭐ E2E MAIN'E TAŞINDI (backend #66, base=main):** `db98024` (e2e commit) temiz main'e cherry-pick (`51bf9b0`), tsc/tsc-test/eslint ✓, PR #66. **CI KANITI (run `33495120027`, success):** log'da `tests/e2e-registration-flow.test.ts` GEÇTİ — 3 senaryo yeşil; Test Files 59→60, Tests 442→445 (+3). "CI yeşil" değil, dosya adı + sayı doğrulandı. PO #66'yı merge etti (`882ce97` = backend main HEAD).
+- **✅ S28 POINTER RE-BUMP:** çatı submodule `2b93afd → 882ce97` (ileri sarım teyitli), #66 sonrası bump → pointer e2e'yi de kapsıyor. Ayrı commit.
+- **✅ BELGE SENKRON:** 09-DURUM yeni "FAZ 4 KAPANDI" bloğu + bayat "MERGE EDİLMEDİ" G9-03 damgalandı (1 blok). S28 ✅, S26 ⬜ kaldı (tetik ikinci koşulu = PO tarayıcı kontrolü henüz görülmedi).
+- **✅ F.10 NUMARASIZ KALEM ENVANTERİ:** 12 kalem dizin (kopya değil, link) — dağılan "PO numaralandıracak" kalemleri tek yerde. İki adımlı doğrulama (M1): 12→12→12.
+- **✅ F.11 İKİ YENİ KALEM (PO numaralandıracak):** (11) stacked PR tuzağı · (12) login-PENDING kayıt akışı (register token vermiyor + login PENDING'i 403 blokluyor → PO tarayıcı kontrolü).
+- **✅ KURAL 13 İKİ-DİL EKİ + KURAL 14 ADAYI:** negatif iddia iki dilde (club↔kulüp vb.); "CI yeşil ≠ test koştu" (dosya adı + sayı + artış uyuşması) — 14 numarasız, PO onaylayacak.
+- **✅ Y8 DÜZELTMESİ:** /clubs C.2 sınıflaması ❓ PO KARARI → 🌱 CANLI NİYET (G9-03 damgalı). Kulüp AKTİF PO kararı (STK yetkileri, avukat paketi); yanlış "terk" sınıflaması dar aramadan doğdu. NOT: literal "❓ HİKÂYE YOK" metni yoktu (grep 0), düzeltme gerçek sınıflama metnine uygulandı.
+- **Kod/şema/DB DEĞİŞMEDİ** (yalnız pointer + belge). Backend'e commit yok (pointer hariç). Çatı PR açıldı, MERGE EDİLMEDİ.
+- **Sıradaki:** PO çatı PR merge → **🔍 PO TARAYICI KONTROLÜ** (mevcut kuruma menti kaydı: onboarding/profil/üç soru/S1-boş/mentör tarzı yok · login-PENDING gerçek mi) → S26 yedek DROP (temizse) → içerik oturumu (soru metinleri, yeni sohbet) → F.9/G10-25 · G1-22 · Faz 5 (OCEAN motora bağlama %45/%30/%25).
