@@ -226,6 +226,21 @@
   - Bilanço turu: "ölü" sanılan ~11 kalem kod-teyitle çürüdü.
   - S21 turu: alt-ajan 5 alanı yanlışlıkla "ölü" ilan etti (`discD/I/S/C` · `Meeting.requestMessage` · `rematchPriority` · `rematchCount` · `mentorVisibilityEnabled`) — hepsi yazılıyordu.
   - Doğrulama turu: strateji katmanı "çift ayraç hatası var" dedi — meğer dosyanın 9 oturum sınırında kullanılan KONVANSİYONMUŞ; tek örneğe bakıp genelleme yapılmıştı.
+- **⭐ İKİ DİL EKİ (PO, 2026-08-30):** Bu projede KOD İngilizce, BELGELER Türkçe. Negatif iddia araması **İKİ DİLDE** yapılır:
+  `club↔kulüp` · `tenant↔kurum` · `consent↔rıza` · `mentor↔mentör` · `meeting↔görüşme` · `agreement↔anlaşma` ·
+  `report↔rapor` · `delete↔silme`. **ARANAN TERİMLER listesi rapora YAZILIR** ki kapsam denetlenebilsin.
+  **GEREKÇE:** niyet arkeolojisi turunda `/clubs` uçları "hikâye yok" sanıldı çünkü yalnız `club` arandı — oysa kulüp
+  modeli AKTİF bir PO kararı (STK ile aynı yetkiler) ve avukat paketinde kulüp beyanı şartı var. Tek dilde arayan
+  yarısını kaçırır.
+
+### KURAL 14 ADAYI — CI YEŞİL ≠ TEST KOŞTU (PO onaylayacak)
+> ⚠️ Numara verme yetkisi PO'dadır; kural yazıldı ama **"ADAYI"** olarak — PO onaylayınca "ADAYI" düşer.
+- Bir testin koştuğu, CI'ın yeşil olmasıyla **KANITLANMAZ.** Kanıt üç şeydir:
+  (a) test dosyasının adı **CI log'unda GEÇMELİ** · (b) **TEST SAYISI** önceki koşuyla karşılaştırılmalı ·
+  (c) artış, eklenen testin sayısıyla **UYUŞMALI.**
+- "0 passed" da yeşil döner. **Stacked PR'da test main'e hiç ulaşmayabilir.**
+- **GEREKÇE:** 2026-08-31'de e2e testi main'e ulaşmadı (stacked merge sırası), CI yeşil döndü, iki tur boyunca fark
+  edilmedi; #66 ile taşınınca 442→445 kanıtlandı. (Detay: `docs/kararlar/00-KARAR-TAKIP.md` F.11.)
 
 <!-- /çalışma-kuralları -->
 

@@ -134,9 +134,9 @@
 | S23 | **G1-07 Tur B** — Consent migration + backfill'i CANLIYA uygula. **PO onayı ZORUNLU** (canlı=lokal aynı Neon). ⚠️ MIGRATION TEK BAŞINA. `CONSENT_VERSION` avukat metniyle (G1-10) sabitlenmeli. | 2026-08-28 | ✅ **TAM (2026-08-28, B1 PR #133 + B2 PR #134):** B1 migration CANLIDA · **B2 backfill `--apply` → 5 ACIK_RIZA yazıldı** (yalnız ACIK_RIZA, grantedAt==kvkkConsentAt 5/5, idempotens teyitli, revokedAt null). Ön-sayımlar değişmedi (6/2/5/0). Consent modeli canlıda tam devrede. **Kalan (ayrı işler):** CONSENT_VERSION→G1-10 · G1-08 OAuth rıza UI · G1-05 self-servis FE. | G1-07 / backend PR #58 / G1-10 |
 | S24 | **Backend PR #59 (G1-05) merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda — çatı PR feature-commit pointer taşıyor (sarkma önlemi, S22 deseni). | 2026-08-29 | ✅ **YAPILDI (2026-08-29):** backend #59 merged (merge commit `f74149b`); pointer `9808811 → f74149b` re-bump (çatı `c2edaf5`, #135'e dahil). Teyit: `origin/main` `9808811`'i içeriyor (feature-commit main'in atası, ileri sarım — sarkma yok). | G1-05 / backend PR #59 / çatı PR #135 |
 | S25 | **Üç-soru migration backend PR #62 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda (S22/S24 deseni). | 2026-08-30 | ✅ **YAPILDI (2026-08-30):** backend #62 merged (merge commit `f5ec0a9`); pointer `082f380 → f5ec0a9` re-bump (`chore/pointer-rebump-s25-2026-08-30`). İleri sarım teyitli (`082f380`, `f5ec0a9`'un atası). | Faz 4 üç-soru / backend PR #62 / çatı re-bump PR |
-| S26 | **Yedek tablo `MentorshipAgreement_yedek_20260830` DÜŞÜRÜLECEK** (`DROP TABLE`). ⭐ **Tetikleyici:** FORM TURU tamamlanıp gerçek anlaşma akışı regresyonsuz görüldükten SONRA. Geçici tablo kalıcı drift olmasın (kvkkConsentAt köprüsüyle aynı desen: geçici artefakt izlenmezse unutulur). `migrate diff`'te "şemada olmayan tablo" olarak görünüyor. | 2026-08-30 | ⬜ **BEKLİYOR** — 150 öksüz silme geri-alma güvencesi; form turu + regresyon sonrası DROP. | F.8 çözüm / backend PR #63 |
+| S26 | **Yedek tablo `MentorshipAgreement_yedek_20260830` DÜŞÜRÜLECEK** (`DROP TABLE`). ⭐ **Tetikleyici:** FORM TURU tamamlanıp gerçek anlaşma akışı regresyonsuz görüldükten SONRA. Geçici tablo kalıcı drift olmasın (kvkkConsentAt köprüsüyle aynı desen: geçici artefakt izlenmezse unutulur). `migrate diff`'te "şemada olmayan tablo" olarak görünüyor. | 2026-08-30 | ⬜ **BEKLİYOR** — 150 öksüz silme geri-alma güvencesi; form turu + regresyon sonrası DROP. ⚠️ NOT (2026-09-01): form turu MERGE EDİLDİ (#64/#66/#146) ama tetikleyicinin ikinci koşulu = **gerçek anlaşma akışı PO tarayıcı kontrolüyle regresyonsuz GÖRÜLMEDİ** → hâlâ ⬜. Tetik geldi SAYILMAZ. | F.8 çözüm / backend PR #63 |
 | S27 | **Cron/öksüz/FK backend PR #63 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda (S22/S24/S25 deseni). | 2026-08-30 | ✅ **YAPILDI (2026-08-30):** backend #63 merged (merge commit `2b93afd`) + çatı #144 merged (`02d555d`); pointer `f5ec0a9 → 2b93afd` re-bump (`chore/pointer-rebump-s27-2026-08-30`). İleri sarım teyitli (`f5ec0a9`, `2b93afd`'nin atası). | F.8 çözüm / backend PR #63 / çatı #144 |
-| S28 | **Üç-soru ekranı backend PR #64 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (S22-S27 deseni). | 2026-08-30 | ⬜ **BEKLİYOR** — backend **PR #64** (`feat/uc-soru-ekrani-2026-08-30`) + çatı FE PR henüz merge edilmedi. | Form turu / backend PR #64 |
+| S28 | **Üç-soru ekranı backend PR #64 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (S22-S27 deseni). | 2026-08-30 | ✅ **YAPILDI (2026-09-01):** backend #64 (`301eb20`) + #65 e2e (stacked ıska) + **#66 e2e main'e taşındı** (`882ce97`) + çatı FE #146 (`6d3aa84`) merged. Pointer `2b93afd → 882ce97` re-bump (`chore/s28-senkron-2026-09-01`). İleri sarım teyitli (`2b93afd`, `882ce97`'nin atası). ⚠️ Tek fark: pointer #64 merge sonrası değil, **#66 (e2e) merge sonrası** bump edildi — böylece pointer e2e testini de kapsıyor. | Form turu / backend PR #64 · #66 · çatı #146 |
 
 > **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
 > boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
@@ -297,7 +297,7 @@
 |---|---|---|---|
 | **SJT psikometri akışı:** `POST /scoring/compute-profile` + `/rank-mentors` (`sjtScoringRoutes.ts:20,26`) + `SjtQuestion/SjtOption` tabloları (`schema.prisma:889,906`, 0 query) | SJT tabanlı profil+mentör sıralama alternatif yolu (cert paketleri, `1e11e73`) | SJT test akışı FE ekranı → canlı eşleşmeye alternatif | ❓ PO: SJT canlıya girecek mi (girmezse BEKLET) |
 | **`taxonomy.service.ts` + `IndustryNode`** (`sector-scorer.service.ts:2`'den çağrılıyor) | Taksonomi ağacı yakınlığı → isabetli sektör skoru | U1 sector-scorer canlıya bağlanınca → İŞ 7 | BEKLET (U1/İŞ 7'ye bağlı) |
-| **Kulüp modülü:** `/clubs` 7 uç (`clubRoutes.ts:20-44`) + `Club/ClubMembership` tabloları | Kulüp/topluluk özelliği (sprint 8-11 backend-first) | FE tümü + pilot kulüp kararı (`08-acik-sorular`) | ❓ PO KARARI (canlıya girecek mi, yarım-terk mi) |
+| **Kulüp modülü:** `/clubs` 7 uç (`clubRoutes.ts:20-44`) + `Club/ClubMembership` tabloları | Kulüp/topluluk özelliği (sprint 8-11 backend-first) | FE tümü + pilot kulüp kararı (`08-acik-sorular`) | ~~[ESKİ · 2026-09-01] ❓ PO KARARI (canlıya girecek mi, yarım-terk mi)~~ ⚠️ GÜNCELLEME (2026-09-01, Y8 düzeltmesi): **🌱 CANLI NİYET** — kulüp modeli AKTİF bir PO kararıdır (STK ile aynı yetkiler); avukat paketinde kulüp beyanı ŞART olarak bağlı. `/clubs` backend uçları o kararın YARISIDIR — niyeti bilinmeyen kod DEĞİL, arayüzü yapılmamış özellik. Yanlış "belirsiz/terk" sınıflaması **dar aramadan** doğdu (yalnız `club` arandı, `kulüp` aranmadı) → KURAL 13 iki-dil eki bundan doğdu. |
 | **Feedback-logs modülü:** `/feedback-logs` + `/combination-scores` (`feedbackLogRoutes.ts`) | ML geri-bildirim döngüsü / kombinasyon skor analizi | ML analiz paneli veya iç araç | ❓ PO KARARI (ürün-yüzü mü iç araç mı) |
 | **Tenant-admin şikayet inceleme:** `GET/PATCH /admin/reports` (`reportController.ts`) | Kurum-içi şikayet döngüsünün admin tarafı (`7cfc8d5`); oluşturma canlı, inceleme yarım | Tenant-admin şikayet paneli → döngü kapanır | BAĞLA |
 | **Admin manuel eşleştirme aksiyonları:** `/users/:id/rematch` (`adminRoutes.ts:55`) + `/visibility-optin/:id/confirm` (double-opt-in, `:68`) | Admin yeniden-eşleştirme + görünürlük onayı | Admin eşleşmeler ekranı butonu | BAĞLA (mentor opt-in T7 ile birlikte) |
@@ -508,6 +508,52 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > - **S1'i boş geçen** (EK2: mentiNeeds/mentorStrengths opsiyonel) kullanıcı SONRADAN dolduramaz.
 > - Ekran atlanamaz ama S1 boş bırakılabilir; S2/S3 zorunlu (bu turda uygulandı).
 > - ⭐ **Gerçek çözüm = profil düzenleme akışı → `G10-25`** (fotoğraf/bilgi kayıt-sonrası düzenleme keşfi, **S20 sözü — hiç keşfedilmedi**). Bu kalem **G10-25'e BAĞLI** (profil-düzenleme gelince üç soru da oradan güncellenebilir olmalı).
+
+### F.10 — ⭐ NUMARASIZ KALEM ENVANTERİ (PO tek seferde numaralandıracak) 🆕 2026-09-01
+
+> **Neden bu bölüm:** Son turlarda "PO numaralandıracak" notuyla yazılan kalemler farklı bloklara dağıldı (bilanço
+> teşhisi: kayda geçen ama numara almayan şey sonraki oturumda kaybolur). Bu bölüm **DİZİN'dir** — kalemleri
+> KOPYALAMAZ, kaynaklarına LİNK verir (F.8/F.9/üstteki listeler yerinde kalır). Numara YALNIZ PO tarafından, tek
+> seferde verilir (KURAL 8). Ciddiyet: 🔴 kritik · 🟡 orta · 🟢 zararsız/kozmetik · ❓ teyit/keşif bekliyor.
+
+| # | Kalem | Nereden geldi (tur/tarih) | Ciddiyet | Kaynak / bağlı kart |
+|:---:|---|---|:---:|---|
+| 1 | Tasarım↔kod uçurumu (OCEAN/archetype/goalTags/skillTags yazılıyor, `matching.ts` okumuyor) | S21 envanteri 2026-08-29 | 🟡 | madde 101 · Faz 5 · üst blok §87 |
+| 2 | K-anonimlik yok (`platformTenantController.ts:269` n=1 dağılım) | S21 envanteri 2026-08-29 | 🟡 | G1-22 · üst blok §88 |
+| 3 | kvkkConsentAt çift-yazma köprüsü (Consent tam devrede, tek kalan köprü) | KARAR 2 revizyonu 2026-08-29 | 🟢 | üst blok §99 |
+| 4 | interactionStyle emeklilik borcu (donmuş sütun, türetme yok) | KARAR 2 revizyonu 2026-08-29 | 🟢 | Faz 5 · üst blok §100 |
+| 5 | mentorVisibilityEnabled kablosuz (hiç yazılmıyor, `userController.ts:177` sadece SELECT) | KARAR 2 revizyonu 2026-08-29 | 🟡 | üst blok §101 |
+| 6 | matching.ts:288 ölü bonus (bir taraf hiç dolmuyor) | KARAR 2 revizyonu 2026-08-29 | 🟢 | Faz 5 · üst blok §102 |
+| 7 | gate+skor çifte-ceza sorusu (ortak-beklentisiz aday hem elenip hem düşük skor mu) | KARAR 2 revizyonu 2026-08-29 | ❓ | Faz 5 · üst blok §104 |
+| 8 | Üç soru sonradan doldurma boşluğu (mevcut 6 kullanıcı + S1-boş sonradan dolduramaz) | Form turu 2026-08-30 | 🟡 | **F.9** → G10-25 / S20 |
+| 9 | updatedAt default drift (4 tablo, `@updatedAt` uygulama katmanında) | Şema drift 2026-08-30 | 🟢 | **F.8** §499/502 |
+| 10 | LearningStage.tenantId onDelete davranış farkı (canlı RESTRICT ↔ şema SET NULL) | Şema drift 2026-08-30 | 🟡 | **F.8** §496/502 |
+| 11 | Stacked PR tuzağı (alt-PR üst-PR main'e girmeden merge → main'e ulaşmaz; CI yeşil ≠ test koştu) | E2E taşıma turu 2026-09-01 | 🟡 | **F.11** (aşağı) · KURAL 14 adayı |
+| 12 | login-PENDING kayıt akışı (register token vermiyor, login PENDING'i 403 blokluyor) | E2E turu 2026-09-01 | ❓ | **F.11** (aşağı) · PO tarayıcı kontrolü |
+
+> **Toplam: 12 numarasız kalem.** Bunlar B/F tablolarındaki *numaralı* işlerden ayrıdır — henüz numara ALMAMIŞ olanların
+> tek-bakış dizinidir. PO numaralandırınca ilgili satır bu dizinden düşer (KURAL 8 adım 2).
+
+### F.11 — 🆕 2026-09-01 E2E TAŞIMA TURUNDAN İKİ YENİ KALEM (**PO numaralandıracak**)
+
+> **(11) STACKED PR TUZAĞI** — 🟡 (süreç borcu, kod değil)
+> **Ne oldu (2026-08-31):** `#65` (e2e kayıt akışı) base'i `#64`'ün feature dalıydı (stacked). `#64` main'e merge
+> olduktan **14 sn sonra** `#65` artık main'de olan feature dalına merge oldu → GitHub'ın otomatik retarget'ı devreye
+> giremedi, `tests/e2e-registration-flow.test.ts` **main'e ULAŞMADI**. CI **yeşil döndü** ama test **hiç koşmadı**
+> (backend main testleri 434→442 arttı, bu artış **yalnız `#64`'ten**; e2e dosyası main `git ls-tree`'de yoktu).
+> **Düzeltme:** `#66` (base=**main**) e2e'yi cherry-pick'le taşıdı → CI log'unda `e2e-registration-flow` GEÇTİ,
+> Test Files 59→60, Tests 442→445 (+3 senaryo yeşil). Pointer S28 `#66` sonrası bump edildi.
+> **⭐ İKİ DERS:** (a) stacked PR'da **ALT-PR ÖNCE** merge edilir, ya da base main'e **retarget** edildikten SONRA;
+> (b) "CI yeşil" **YETMEZ** — test SAYISI önceki koşuyla karşılaştırılır ("0 passed" da yeşil döner). → **KURAL 14 ADAYI** (CLAUDE.md, PO onaylayacak).
+>
+> **(12) LOGIN-PENDING KAYIT AKIŞI** — ❓ (teyit/keşif bekliyor — PO tarayıcı kontrolü)
+> **Ne bulundu (e2e turunda):** `register` token döndürmüyor (`{message, user}`); `login` PENDING hesabı **403
+> blokluyor** (`authController.ts:69`); FE kayıttan sonra doğrudan `/onboarding`'e push ediyor
+> (`_RegisterContent.tsx:232`). E2E testi admin onayını `testPrisma` ile **SİMÜLE ederek** geçiyor → API katmanı
+> sağlam ama **gerçek kullanıcının o onayı nasıl aldığı KANITLANMADI.**
+> **⭐ İki ihtimal, ayırt edilmeli:** (a) kurum başvurusu → onay beklemesi **TASARIM** (sorun yok) · (b) mevcut kuruma
+> menti/mentör katılımı → onay beklemesi **KOPUKLUK** olur. → **PO tarayıcı kontrolü bekliyor** (S3/S9 kalemleriyle
+> aynı iş). Sonuca göre ya kapanır ya düzeltme turu.
 
 ---
 
