@@ -1,6 +1,6 @@
 # 00 — KARAR & İŞ TAKİBİ (NE KALDI · NE YARIM · NE UNUTULDU)
 
-**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-09-02 (G9/G10 kart↔durum güncelleme + sahiplik)
+**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-09-02 (çapraz-ref düzeltmeleri: B2 G1-28 🔴 + DB yedeği acil teyit + C2)
 
 > **Bu belge NEDEN var:** "Hep önümdeki işe odaklanıyorum ama arkada yarım bıraktığım işleri, ölü kodları,
 > alıp da uygulamadığım kararları unutuyorum; canlıya çıkınca eksik keşfediyorum." Bu belge o sorunu çözer:
@@ -74,7 +74,8 @@
 
 > **⚡ GÜNCELLEME (2026-08-29) — FAZ 3c: GÜVENLİK KAPANIŞ (Faz 3 KAPANDI):** backend PR #61 + çatı PR. 2 iş + 3 TEYİT.
 > - **DK1 → ✅:** platform `dashboard` + `tenants/[id]` sayfaları oturum hatasını `message.includes('401')` ile arıyordu (backend Türkçe mesaj fırlatır, kod yok) → 401'de login'e yönlendirmiyordu. `isPlatformAuthError(e)` helper'ı `.status`'e bakar; 2 sayfada kullanıldı (6 birim test). `frontend/src/lib/api/platform.ts`.
-> - **G1-26 → ✅:** `POST /self-serve/register` (public, her çağrı Tenant+admin yaratıyor) sınırsızdı → `selfServeRegisterRateLimiter` 5/dk/IP. ⚠️ CAPTCHA EKLENMEDİ (PO/3.taraf kararı). Test: 429. `rateLimiter.ts`.
+> - ~~[ESKİ · 2026-08-29] **G1-26 → ✅:**~~ `POST /self-serve/register` (public, her çağrı Tenant+admin yaratıyor) sınırsızdı → `selfServeRegisterRateLimiter` 5/dk/IP. ⚠️ CAPTCHA EKLENMEDİ (PO/3.taraf kararı). Test: 429. `rateLimiter.ts`.
+>   - ⚠️ **GÜNCELLEME (2026-09-02, çapraz-ref B1 — ETİKET DÜZELTMESİ):** Bu ✅ **REGISTER uçunun** rate-limiti (Faz 3c) — **kart G1-26'nın konusu DEĞİL.** Kart **G1-26 = ŞÜPHE-BİLDİRİMİ formu** (`suspicionReportRateLimiter`, `suspicionRoutes.ts:9`) ve durumu **🟡 YARIM** (IP-limit ✅ · CAPTCHA/step-up ⬜). Kart kendisi "register limiter AYRI uç — Faz 3c" der. **KURAL 15: kart kazanır → G1-26 = 🟡, ✅ değil.** (Register limiti ayrı iş; onun ✅'sı doğru ama G1-26 etiketi yanlış.)
 > - **G1-02 (DISC sızıntısı) → ✅ TEYİT: sızıntı YOK.** `analyticsRoutes.ts:12` requireSelfOrAdmin · menti-facing DTO disc strip (`matchingController.ts:77-90`) · counterpart select'leri disc'siz (`conversationController.ts:64`, `meetingController.ts` select). Kendi tipini görmek normal; karşı tarafınki hiçbir peer yanıtında YOK.
 > - ~~[ESKİ · 2026-08-29] **G1-19 (kalite çarpanı çift) → ✅ TEYİT: çift-çarpım YOK.**~~ `scoring.ts:109` base×qm (bir kez) + `matching.ts:307` bonus×qm (AYRI bileşen, bir kez) = (base+bonus)×qm. qm² yok. Keşif "iki kez uygulanıyor" iddiası YANLIŞ (koddan çürütüldü). DURAK tetiklenmedi.
 >   - ⚠️ **GÜNCELLEME (2026-09-02, G1 çapraz doğrulama): NUMARA ETİKETİ YANLIŞ — bulgu doğru, "G1-19" yanlış.** **Kart G1-19 = qualityMultiplier OKUMA KAYNAĞI** (UserProfile↔Membership), çift-uygulama DEĞİL. Kanıtlı tarama: 11 G2 kartının (G2-01..11) hiçbiri çift-uygulamayı kapsamıyor → **G2 kartları KAPSAM DIŞI.** Ama bulgu EVSİZ değil: tasarım belgesi **`konu/degerlendirme-sistemi-tasarim-2026-08-27.md` §9.5 + KALEM LİSTESİ §16 madde 8** (⬜ AÇIK, numara-adayı=evet) zaten tutuyor. Gerçek kalan soru (Faz 5): `(base+bonus)×qm` bilinçli tasarım tercihi mi. **PO:** çift-uygulama kalemine numara verilecekse §16-madde-8 üzerinden verilir (bu tur numara VERİLMEDİ). Kaynak hiyerarşisi: **KURAL 15.**
@@ -118,6 +119,8 @@
 > **⚠️ 🗑️ TARAMASI SONUCU (2026-09-02, KURAL 16 birim beyanıyla):** **15 geçersiz-etiketli kalem** tarandı — birim: kart durum satırı + PO notu + karar-takip + alt maddeler (yalnız kart durumu sayılsaydı 6 çıkardı; önceki turun "6 kart" beyanı bu dar birimdi → **KURAL 16 bu vakadan doğdu**). **Sonuç: 14 MEŞRU TAM KAPATMA** (konu tümden geçersiz: DISC matrisi G2-01..05 ×5 · çürütülen iddia/dosya-yok ×4 [G10-376/G10-63/T8/md.129] · belge-hijyeni G9 ×5), **1 KISMİ KAPATMA** (G1-23 → ⬜ AÇIK'a döndü, XSS gerçek açık iş). ⭐ **Sistemik sorun YOK — G1-23 tekil hata** (boşluk bir kez açıldı → KURAL 15 yine de gerekli). **G1-23 dışında hiçbir 🗑️ durumu değiştirilmedi** (PO KARAR 4: başka kalem açılmaz).
 
 > **⚡ GÜNCELLEME (2026-09-02, 4) — G9/G10 KART↔DURUM GÜNCELLEME + SAHİPLİK (yalnız-belge, çatı PR — MERGE ETME):** G9 + G10 kart dosyaları KODDAN doğrulanıp güncellendi (📸 dondurulduktan sonra Faz 1a/1b'de iş yapıldı, kart durumları donuk kalmıştı). **🔴 HAYALET = 0.** **G9 (12 kart):** 11'i ✅ (Faz 1a satır-içi ✅ notları kanıt — registerMessages/AdminAuditLog/PROJECT_STATUS arşiv/model-yönlendirme vb.), **G9-06 🟡 KALIR** (📸 done, ad-tarihsizleştirme G9-11/12'de). **G10:** **G10-07 ⬜→✅** (llmRetry.ts SİLİNDİ #56, `find backend/src -iname "llmRetry*"` boş) · **G10-01 ⬜→🟡** (3 parçadan llmRetry silindi, TenantContext-ikiz çürük, MeetingScheduler açık kalır) · **G10-12 ❓→⬜ AÇIK** (PO: kulüp AKTİF ürün — STK yetkisi; iş=FE+G1-13; 🔵 değil ⬜ çünkü KURAL 10=6 kod). **⭐ İŞ 1 — SAHİPLİK:** `llmRetry.ts` iki karttaydı (G10-01+G10-07); SAHİP=**G10-07** seçildi (dedike+dar+dosya-özel kanıt), G10-01 referans verir. Bayat "[G10-08] llmRetry" çapraz-refi de düzeltildi (doğrusu G10-07). **İŞ 4:** G9+G10 dosyaları **📸→🔄 YAŞAYAN** + KURAL 15 notu (G1 deseni; G2-G8/G11 kendi turlarında). **İŞ 5 — DESEN:** "aynı konu birden çok kartta" **F.12**'ye kaydedildi (numara VERİLMEDİ; G1-23'ün TERS yönü — bitmiş iş açık göründü). Çapraz-referans taraması **AYRI TUR** (PO şartı, YAPILMADI). Kod/DB/şema DEĞİŞMEDİ. **MERGE EDİLMEDİ.**
+
+> **⚡ GÜNCELLEME (2026-09-02, 5) — ÇAPRAZ-REF DÜZELTMELERİ: B2 + C2 + DB YEDEĞİ + 3 durum farkı (yalnız-belge, çatı PR — MERGE ETME):** Çapraz-ref taraması (2026-09-02) bulgularının PO-onaylı düzeltmeleri. **⭐ B2 (en ciddi):** `G1-28` (sunucu/altyapı sertleştirme) durum **🔵→🔴 ÇIKIŞ BLOKERİ** — 🔵 dondurulurken yanlış konmuştu; kanıt `00-CIKIS-PLANI:74` (kanonik, blokeri listeliyor) + S19 🔴 + kart metni "canlı-öncesi ZORUNLU". **PAKET AYRIMI** karta eklendi (yedekleme/SSH/firewall 🔴 · SSL ❓-teyit; süre farkı büyük, ayrı izlenir). **⛔ İŞ 2 — DB YEDEĞİ ACİL TEYİT (F.13, numara VERİLMEDİ):** Neon point-in-time restore aktif mi/saklama süresi teyitsiz; bu oturumlarda geri-alınamaz canlı-DB işlemleri yapıldı (Consent backfill · 150 DELETE · 5 FK) → **teyit edilmeden YENİ CANLI DB İŞLEMİ YAPILMAZ.** **C2:** `G3-11 → [G2-06]` yanlış-numara → **[G2-01..05]** (kanıt: G2-04 PO notu onay noktalarını sayıyor); F.12'ye ikinci-vaka eki. **3 durum farkı:** B1 `G1-26` özet ✅→🟡 (özetteki ✅ register uçunun; kart=şüphe formu 🟡; kart kazanır) · B4 D2 llmRetry işaretçisi G10-01→**G10-07** (sahip) · **B3 YANLIŞ-ALARM** (F.10'daki 🟡 severity kolonu, status değil → G1-22 ⬜ ile çelişmiyor; düzeltme YAPILMADI, dürüst pushback). **Sahiplik adayları (5) SONRAYA** (tutarlı, aciliyet değil). Kod/DB/şema DEĞİŞMEDİ · #110 ellenmedi · numara verilmedi · **MERGE EDİLMEDİ.**
 
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 
@@ -298,7 +301,7 @@
 
 | Kalem | Yer (kanıt 🟩) | Ne / Niyet | Durum → öneri (silme değil) |
 |---|---|---|---|
-| **D2** `llmRetry.ts` / `fetchWithRetry` | ~~`llmRetry.ts:34` (0 import)~~ SİLİNDİ | LLM retry sarmalayıcı; tüketici `matchReason.ts` yok (LLM kaldırılmış) | ✅ **YAPILDI (2026-08-28, Faz 1b, backend PR #56)** — G10-01; 0 import kod-teyitli, silindi (PO işleme-al kararı) |
+| **D2** `llmRetry.ts` / `fetchWithRetry` | ~~`llmRetry.ts:34` (0 import)~~ SİLİNDİ | LLM retry sarmalayıcı; tüketici `matchReason.ts` yok (LLM kaldırılmış) | ✅ **YAPILDI (2026-08-28, Faz 1b, backend PR #56)** — ~~[ESKİ] G10-01~~ ⚠️ SAHİP=**G10-07** (2026-09-02 sahiplik kararı; G10-01 referans verir); 0 import kod-teyitli, silindi (PO işleme-al kararı) |
 | **D3** `UserProfile.qualityMultiplier` | `schema.prisma:970` (ikiz); canlı akış `TenantMembership.qualityMultiplier:1065` kullanıyor (certification/sjtScoring/matching/scoring) | Mentör kalite katsayısı; **UserProfile ikizi atıl** (tüm okuma/yazma TenantMembership'te) | **❓ PO:** DROP migration mi (canlı DB) yoksa ileride kullanılacak mı? Silme değil |
 | **U1** `sector-scorer.service.ts` | `:67,99` (dış çağrı 0, coverage FNDA:0) | 5-bileşen sektör-uyum skoru; canlı basit Jaccard etiket-kesişimi kullanıyor | **⏸️ bilinçli bekliyor** = v2 #14 (staging şart). Bağlanmayı bekliyor |
 | **U2** `matchingInterface.ts` (strategy pattern) | 0 import; yorum "USER akışı / planlı JOB_LISTING" | Gelecek iş-ilanı eşleştirmesi şablonu | **⏸️ bilinçli** gelecek-şablon. Dokunma |
@@ -606,6 +609,25 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > hijyeni · güvenlik teyitleri).
 > **Sonraki adım:** çapraz-referans taraması — **AYRI TUR** (bu turda YAPILMADI, PO şartı). Sahiplik deseni: bir konu =
 > bir sahip kart, diğerleri referans verir.
+>
+> **⚠️ İKİNCİ VAKA (2026-09-02, çapraz-ref taraması tamamlandı — C2):** `G3-11 → [G2-06]` **yanlış numara.** G3-11 "5 onay
+> noktası" için [G2-06]'ya (varsayılana-düşen-oran izleme metriği) atıf yapıyordu; doğrusu **[G2-01..05]** demeti (matris/anti-match/
+> tiebreak/%60-40/gerekçe). İlki (G10-01→[G10-08]) TESADÜFEN bulunmuştu; **bu ARANARAK bulundu.** Desen aynı: kardeş kart/atıf
+> güncellenmemiş. **Sistemik DEĞİL ama tekil de DEĞİL** — tarama işe yaradı (70 atıfın 67'si geçerli, kırık 0, tutarsız artefakt 0;
+> yalnız 2 yanlış-numara). Düzeltme: `G3-icerik.md` [G3-11] G9-03 damgasıyla. **Taramanın tam raporu:** çapraz-ref bulguları
+> (TÜR A 11 artefakt: 5 sahiplik-adayı 🟡 / 6 farklı-yön 🟢 / 0 tutarsız · TÜR B 4 kalem: bu tur B1/B2/B4 düzeltildi, B3 yanlış-alarm).
+
+---
+
+### F.13 — ⛔ ACİL TEYİT: VERİTABANI YEDEĞİ (2026-09-02, PO uyarısı) — **PO numaralandıracak**
+
+> **Soru:** Neon zaman-noktası geri yükleme (point-in-time restore) AKTİF Mİ, saklama süresi NE? **Hiç doğrulanmadı.**
+> **⚠️ NEDEN ACİL:** Bu oturumlarda canlı DB'de GERİ ALINAMAZ işlemler yapıldı — Consent migration + backfill (2026-08-28) ·
+> **150 satır DELETE** (2026-08-30) · 5 FK ekleme (2026-08-30). Silme öncesi `MentorshipAgreement_yedek_20260830` alındı (iyi)
+> ama o YALNIZ o 150 satırı korur. **Veritabanının KENDİ yedeği teyitsiz.**
+> ⭐ Yani o işlemler sandığımızdan riskliydi. Şimdi zarar yok, ama bu bilgi olmadan bir daha canlı DB işlemi yapılmamalı.
+> **⛔ KURAL: Bu teyit edilmeden YENİ CANLI DB İŞLEMİ YAPILMAZ.**
+> **Bağlı:** **[G1-28]** paketi (yedekleme = en sert 🔴 bloker). Durum: ⬜ AÇIK (PO manuel: Neon panelinden teyit).
 
 ---
 

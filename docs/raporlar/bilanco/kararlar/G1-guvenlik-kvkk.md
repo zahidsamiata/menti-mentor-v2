@@ -39,10 +39,11 @@
 | 🟡 YARIM | 4 | G1-06, G1-16, G1-21, G1-26 | +G1-06/16/26 (kısmen); G1-21 aynı |
 | ⬜ AÇIK | 13 | G1-08, G1-09, G1-10, G1-12, G1-13, G1-15, G1-18, G1-20, G1-22, G1-23, G1-27, G1-29, G1-30 | +G1-12 (🟡→⬜) +G1-23 (❓→⬜, PO kararı 2026-09-02: XSS gerçek açık iş) |
 | ❓ TEYİT GEREK | 4 | G1-03, G1-14, G1-24, G1-25 | G1-23 çıktı (⬜'ye) |
-| 🔵 bilinçli erteleme | 2 | G1-11, G1-28 | aynı |
+| 🔴 ÇIKIŞ BLOKERİ | 1 | G1-28 | ~~🔵~~→🔴 (2026-09-02, B2: çıkış blokeri; 🔵 dondurulurken yanlış konmuştu — kanıt: `00-CIKIS-PLANI:74`) |
+| 🔵 bilinçli erteleme | 1 | G1-11 | ~~G1-28 çıktı (🔴'ye)~~ |
 | ⚫ GEÇERSİZ/KAPSAM-DÜŞÜRÜLDÜ | 3 | G1-01 (kapsam düşürüldü), G1-04 (yeniden tanım), G1-17 (başka yerde çözüldü) | yeniden tanım/karar |
 
-**Toplam: 30** (2+2+4+13+4+2+3). 🔴 HAYALET = 0. *(2026-09-02 çakışma düzeltme turu: G1-23 ❓→⬜.)*
+**Toplam: 30** (2+2+4+13+4+1+3+**1**). 🔴 HAYALET = 0. *(2026-09-02 çakışma düzeltme turu: G1-23 ❓→⬜; çapraz-ref turu: G1-28 🔵→🔴.)*
 
 **Kod-teyidi:** bu turda **8 kod-iddiası** geniş (backend/src + frontend/src + schema) teyit edildi. **ÇÜRÜYEN: 0** tam çürüme; **1 kısmi düzeltme** (logoUrl XSS — CSP yalnız `/uploads`'a uygulanıyor, tenant logoUrl'e değil → G1-23'te not). **❓ kalan (teyit edilemeyen niyet/hukuk):** 7.
 
@@ -440,10 +441,18 @@ Kaynak: karar-defteri (NUMARASIZ, prod admin-key) · Numara: NUMARASIZ
 Ne: Sunucu ve altyapı sertleştirme (Dokploy HTTP güvenliği, güvenlik duvarı, SSH, SSL, yedekleme) hiç ele alınmamış. Kod dışı bir altyapı işi ama canlıya çıkış öncesi zorunlu.
 Neden başlanmıştı: NİYET: canlı ortam güvenliği (temel altyapı sertleştirme).
 Nerede durdu: Kod dışı; aksiyon-numarası yok, hiç başlanmamış.
-Bugünkü durum: ⬜ AÇIK (🔵 alt-tür — canlı-öncesi manuel)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ AÇIK (🔵 alt-tür — canlı-öncesi manuel)~~ → 🔴 ÇIKIŞ BLOKERİ (2026-09-02, PO kararı; kanıt ↓)
+⚠️ GÜNCELLEME (2026-09-02, çapraz-referans düzeltmesi B2): Durum **🔴 ÇIKIŞ BLOKERİ**. "🔵 bilinçli erteleme" alt-türü kart dondurulurken YANLIŞ konmuştu → karta bakan güvenlik işini "ertelenmiş" sanıyordu (G1-23'ün tersi ama aynı yanılgı: işi HAFİFE ALMA). **Kanıt (çoğunluk değil KANIT GÜCÜ):** `00-CIKIS-PLANI.md:74` (bu konunun KANONİK yeri) blokeri listeliyor — "sunucu/altyapı güvenliği HTTPS/firewall/SSH/SSL/yedek (yarım-tam gün) · yedekleme geri-dönüş denemesi" · `00-KARAR-TAKIP` S19 🔴 · kartın kendi metni "canlı-öncesi ZORUNLU" + PO notu "🔴 ÇIKIŞ BLOKERİ".
 Etkisi: Sertleştirme yapılmadan canlıya çıkış → sunucu ele geçirme/veri sızıntısı riski (yüksek, canlı-öncesi kritik).
 İş boyu: L
 Kaynak: karar-defteri (04:54-57 / A6 canlı-öncesi) · Numara: NUMARASIZ
+
+⚠️ **PAKET AYRIMI (2026-09-02, PO şartı) — G1-28 TEK İŞ DEĞİL, PAKET.** İçindekiler eşit ağırlıkta DEĞİL; uygulama turunda AYRI AYRI ele alınır:
+- **Yedekleme → 🔴 en sert bloker** (bkz. ilişkili "DB yedeği acil teyit" kalemi, `00-KARAR-TAKIP`).
+- **SSH sertleştirme → 🔴** (parola ile açıksa botlar zaten deniyor; gerçek kullanıcı verisiyle ihlal = KVKK bildirim yükümlülüğü).
+- **Güvenlik duvarı → 🔴** (hangi kapılar açık, kimse bakmadı).
+- **SSL → ❓ muhtemelen zaten var** (site https), TEYİT yeter.
+> ⚠️ Süre farkı büyük: SSL bir dakikalık teyit, yedekleme yarım günlük iş. Tek 🔴 altında toplanırsa yanlış planlanır → alt-kalemler ayrı izlenir. *(Kartın orijinal kapsam metni DEĞİŞMEDİ — bu EK nottur.)*
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [x] PO notu: 🔴 ÇIKIŞ BLOKERİ — çıkış öncesi tamamlanmalı.

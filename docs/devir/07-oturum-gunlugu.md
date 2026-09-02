@@ -849,3 +849,31 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## C) Sıradaki
 - PO: bu PR merge · F.12 desen kalemini numaralandır.
 - Sonra: 🔵 **çapraz-referans taraması** (ayrı tur, PO onaylı) → G2-G8/G11 kart↔kod doğrulama (Faz 5-8 sırası) → içerik oturumu · OAuth turu · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-02 (14) — ÇAPRAZ-REF DÜZELTMELERİ: B2 + C2 + DB YEDEĞİ + 3 DURUM FARKI
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Çapraz-ref taramasının (OTURUM 13 sonrası) PO-onaylı düzeltmeleri. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum
+- **#152 MERGE EDİLDİ** (PO) → `origin/main` HEAD `bebc33a` (Merge PR #152, 2026-09-02T13:13Z); G9/G10 kart güncellemeleri + F.12 artık main'de.
+- **Bu tur dalı:** `docs/capraz-ref-duzeltme-2026-09-02` (temiz `origin/main`'den `bebc33a`).
+
+## A) Yapılanlar
+- **⭐ İŞ 1 — B2: `G1-28` 🔵→🔴 ÇIKIŞ BLOKERİ:** kart durum satırı + G1 başlık tablosu 🔵→🔴 (G9-03 damgası). **Kanıt (çoğunluk değil KANIT GÜCÜ):** `00-CIKIS-PLANI:74` (kanonik, blokeri listeliyor: "sunucu/altyapı güvenliği HTTPS/firewall/SSH/SSL/yedek") + S19 🔴 + kart metni "canlı-öncesi ZORUNLU" + PO notu zaten "🔴 ÇIKIŞ BLOKERİ". 🔵 dondurulurken yanlış konmuştu (G1-23'ün tersi ama aynı yanılgı: işi hafife alma). **PAKET AYRIMI** EK not (kartın orijinal kapsamı DEĞİŞMEDİ): yedekleme/SSH/firewall 🔴 · SSL ❓-teyit; süre farkı büyük → ayrı izlenir.
+- **⛔ İŞ 2 — DB YEDEĞİ ACİL TEYİT:** `00-KARAR-TAKIP` **F.13** (numara VERİLMEDİ) + `09-DURUM` en üstte GÖRÜNÜR uyarı. Neon point-in-time restore aktif mi/saklama süresi teyitsiz; bu oturumlarda geri-alınamaz canlı-DB işlemleri yapıldı (Consent backfill · 150 DELETE · 5 FK) → **teyit edilmeden yeni canlı-DB işlemi YAPILMAZ.** Bağlı G1-28 (yedekleme=en sert bloker).
+- **İŞ 3 — C2: `G3-11 → [G2-06]` yanlış-numara:** doğrusu **[G2-01..05]** (5 onay noktası = matris/anti-match/tiebreak/%60-40/gerekçe). **Kanıt:** G2-04 PO notu bu onay noktalarını tek tek sayıyor; G2-06 = "varsayılana-düşen-oran izleme metriği" (tek metrik), 5 onay noktası DEĞİL. `G3-icerik.md` G9-03 damgasıyla düzeltildi + F.12 ikinci-vaka eki.
+- **İŞ 4 — 3 durum farkı:**
+  - **B1 `G1-26`:** özet ✅ ↔ kart 🟡. **Kart doğru (🟡).** KARAR-TAKIP satır 77'deki "G1-26 → ✅" aslında **REGISTER uçunun** rate-limitiydi (Faz 3c, ayrı uç); kart G1-26 = ŞÜPHE formu (IP-limit ✅ / CAPTCHA ⬜ = 🟡). Satır 77 G9-03 ile damgalandı (KURAL 15: kart kazanır).
+  - **B4 D2 llmRetry:** KARAR-TAKIP D2 işaretçisi G10-01 → **G10-07** (sahiplik kararı yansıtıldı).
+  - **⚠️ B3 YANLIŞ-ALARM (dürüst pushback):** taramada "G1-22 ⬜ ↔ özet 🟡 çelişkisi" denmişti; DOĞRULANDI ki F.10'daki 🟡 **"Ciddiyet" (severity) kolonu**, status değil (satır 533/535). G1-22 kartı ⬜ (başlanmadı) ile F.10 🟡 (orta ciddiyet) **farklı eksen — çelişki YOK.** Düzeltme YAPILMADI.
+- **İŞ 5 — senkron:** 00-KARAR-TAKIP tur notu (2026-09-02, 5) + F.13 + F.12 eki + Son güncelleme · 09-DURUM (2026-09-02-5 + acil uyarı) · bu bölüm.
+
+## B) Sınırlar / dürüstlük
+- Kod/DB/şema DEĞİŞMEDİ. **Sahiplik adaylarına (5 kalem) DOKUNULMADI** (tutarlı, sonraki tur). Kanıtsız düzeltme YOK. Gövde SİLİNMEDİ (G9-03 damgası). Kartın orijinal kapsam metni değişmedi (paket ayrımı EK not). Numara VERİLMEDİ. #110 ellenmedi. Alt-ajan yok. **B3 yanlış-alarm çıktı — düzeltilmedi (dürüst).** **MERGE EDİLMEDİ.**
+
+## C) Sıradaki
+- PO: bu PR merge · F.13 DB-yedeği + F.12 C2 kalemlerini numaralandır · **⛔ Neon yedek ayarını KONTROL ET (canlı DB işlemi öncesi şart).**
+- Sonra: 🟢 sahiplik uygulama turu (5 kalem: PLATFORM_ADMIN_EMAIL/destek@/MeetingScheduler/profil-uçları/qualityMultiplier — acil değil) → G2-G8/G11 kart↔kod → içerik oturumu · OAuth turu · S26 · Faz 5.
