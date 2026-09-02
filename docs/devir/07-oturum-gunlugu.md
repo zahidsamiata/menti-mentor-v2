@@ -774,3 +774,27 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## C) Sıradaki
 - PO: G1 kart PR merge + İŞ 0 iki çakışma kararı (birleştir/ayrı-numara) + 📸 etiket kararı.
 - Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp, ölü-kod/belge grupları) → G2-G8/G11 → içerik oturumu · OAuth turu (F.11 #13) · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-02 (11) — G1 ÇAKIŞMA DÜZELTMESİ + KAYNAK HİYERARŞİSİ (KURAL 15)
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Önceki turun iki numara çakışması PO kararıyla kapatıldı; bir "hayalet-tamamlanmış" desen kalıcı kurala bağlandı. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum
+- **Çatı main HEAD:** `06a23ae` (#149). #150 (G1 kart PR) **AÇIK, merge olmadı** → çakışma önlemek için **#150'nin dalına devam** (`docs/g1-kart-guncelleme-2026-09-02`), yeni dal açılmadı.
+
+## A) Yapılanlar (PO kararları uygulandı)
+- **İŞ 1 — G1-19 çift-uygulama nereye ait (KANIT):** 11 G2 kartı (G2-01..11) tek tek tarandı — **hiçbiri kapsamıyor** (KAPSAM DIŞI). Çift-uygulama evsiz DEĞİL: tasarım `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` **§9.5 + KALEM §16-md.8** (⬜ AÇIK, numara-adayı) tutuyor. → `00-KARAR-TAKIP` satır 79 yanlış "G1-19" etiketi G9-03'le damgalandı, gerçek evine yönlendirildi. **Numara VERİLMEDİ** (PO'da).
+- **İŞ 2 — G1-23 (⭐ 21. HAYALET):** KARAR-TAKIP "G1-23 → 🗑️ geçersiz" logoUrl **sahiplik/IDOR guard'ı** içindi (o tespit DOĞRU, korundu) ama **kart konusu XSS** (host/MIME + CSP) ve o KODDA AÇIK (`tenantController.ts:11,82` çıplak `z.string().url()`; CSP `server.ts:74` yalnız `/uploads`). **KISMİ KANITLA TAM KAPATMA** = hayalet. G1-23 kartı **❓→⬜ AÇIK**; KARAR-TAKIP satır 62 (tek yer) G9-03'le damgalandı + desen kaydı.
+- **İŞ 3 — 📸→🔄:** `G1-guvenlik-kvkk.md` YAŞAYAN oldu (gövde korunur; KURAL 12 kasıtlı geçerli). Diğer kart dosyaları (G2-G11) DOKUNULMADI — kendi turlarında.
+- **İŞ 4 — KURAL 15 ADAYI:** kök `CLAUDE.md`'ye kaynak hiyerarşisi (kart=ayrıntı+kanıt · KARAR-TAKIP=özet · **çelişkide KART kazanır** · kısmi kanıtla tam kapatma yasak). G1 kart başına kısa hali eklendi.
+- **İŞ 6 — TÜM 🗑️ TARAMASI (yalnız tespit):** geçersiz-etiketli kalemler tarandı (G2-01..05 · G9×5 · G10-376 · G10-63 · T8/md.76 · md.129 · G1-23). ⭐ **G1-23 TEK partial-closure hayaleti** (🔴); geri kalanların hepsi **🟢 TAM** (DISC→Big Five konu geçersiz · belge-hijyen · dosya-yok · iddia-çürük · çelişki-çözüldü). Başka hayalet YOK. **G1-23 dışında hiçbir durum değiştirilmedi.**
+
+## B) Sınırlar / dürüstlük
+- Numara VERİLMEDİ (KURAL 15 "ADAYI"; çift-uygulama numara-adayı §16-md.8'de). Gövde SİLİNMEDİ (G9-03 damgası). G2-G11 kartlarına DOKUNULMADI. #110 ellenmedi. Alt-ajan yok.
+
+## C) Sıradaki
+- PO: #150 (artık çakışma düzeltmesini de taşıyor) merge · çift-uygulama numara kararı · İŞ 6 sonucunu onay.
+- Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp + KURAL 15 notu + 📸→🔄) → G2-G8/G11 → içerik oturumu · OAuth turu · S26 · Faz 5.
