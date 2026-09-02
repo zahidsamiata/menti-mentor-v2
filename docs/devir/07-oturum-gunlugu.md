@@ -798,3 +798,28 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## C) Sıradaki
 - PO: #150 (artık çakışma düzeltmesini de taşıyor) merge · çift-uygulama numara kararı · İŞ 6 sonucunu onay.
 - Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp + KURAL 15 notu + 📸→🔄) → G2-G8/G11 → içerik oturumu · OAuth turu · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-02 (12) — KURAL ONAYLARI (14/15) + KURAL 16 ADAYI + S30
+
+**📸 Kapanış fotoğrafı** — git-teyitli. PO 5 kararı belgeye işlendi; iki kural onaylandı, bir kural eklendi. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum
+- **#150 MERGE EDİLDİ** (PO) → `origin/main` HEAD `096d9f1` (Merge PR #150); KURAL 15 + G1-23 ⬜ + 🔄 etiket artık main'de (doğrulandı: merge-base ata + `git show origin/main:CLAUDE.md` KURAL 15 var). #151 hiç var olmadı (geçen tur çakışma düzeltmesi #150'e stack'lenmişti).
+- **Bu tur dalı:** `docs/kural-onaylari-2026-09-02` (temiz `origin/main`'den `096d9f1`).
+
+## A) Yapılanlar (PO 5 kararı)
+- **İŞ 1 — KURAL 14 + 15 ONAYLANDI:** kök `CLAUDE.md`'de "ADAYI"/"PO onaylayacak" düştü → "✅ ONAYLANDI (PO, 2026-09-02)". Gövdeler DEĞİŞMEDİ. **KURAL 14 PO eki:** "CI yeşil" raporlanırken KAÇ TEST KOŞTUĞU da yazılır ("0 passed" da yeşil).
+- **İŞ 2 — KURAL 16 ADAYI:** sayılan birim tanımlanır — "N kalem" yetmez, hangi yerlerde (durum satırı/PO notu/alt madde/belge) sayıldı yazılır. Gerekçe: üç vaka (196↔259 · 30 satır↔40 alan · 6 kart↔15 geçersiz kalem). M1'de "X bekliyorum" derken birim de söylenir.
+- **İŞ 3 — S30 sözü:** Faz 5 promptunda tasarım `degerlendirme-sistemi-tasarim-2026-08-27.md` §16 KALEM LİSTESİ açıkça okunacak (md.8 kalite çarpanı çift-uygulama; PO: numara VERİLMEDİ, §16'da kalır). Numarasız kalem takipten düşmesin diye söz.
+- **İŞ 4 — teyitler:** G1-23 ⬜ AÇIK ✅ · G1 kart dosyası 🔄 YAŞAYAN ✅ · KURAL 15 kart-başı notu ✅ (hepsi #150'den main'de). **🗑️ tarama sonucu KARAR-TAKIP'e kaydedildi** (KURAL 16 birim beyanıyla): 15 geçersiz kalem = 14 meşru tam kapatma + 1 kısmi (G1-23); sistemik sorun YOK.
+- **İŞ 5 — senkron:** 09-DURUM + bu bölüm.
+
+## B) Sınırlar / dürüstlük
+- Çift-uygulamaya numara VERİLMEDİ (KARAR 1; §16-md.8). KURAL 16 "ADAYI" (numara PO'da). Başka kalem durumu DEĞİŞTİRİLMEDİ (KARAR 4). G2-G11 kartlarına DOKUNULMADI. #110 ellenmedi. Alt-ajan yok. Kural gövdeleri değişmedi (yalnız aday ibaresi + onay notu).
+
+## C) Sıradaki
+- PO: bu PR merge · KURAL 16'ya numara/onay · S30 Faz 5'te izlenecek.
+- Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp + KURAL 15/16 + 📸→🔄) → G2-G8/G11 → **içerik oturumu (YENİ SOHBET)** · OAuth turu · S26 · Faz 5.
