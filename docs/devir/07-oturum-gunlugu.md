@@ -743,3 +743,34 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **✅ LOGIN-PENDING ÇÖZÜLDÜ (backend PR #67 + çatı #148, GÜVENLİK İYİLEŞTİRMESİ):** register davet token'ı doğrular → davetli APPROVED, davetsiz PENDING. Yeni `services/invitationToken.ts`. FE token iletir. Register token dönmez. Testler: davetsiz/davet/sahte/uyuşmaz + OAuth-PENDING regresyonu. login 403/self-serve/reapply/OAuth DEĞİŞMEDİ. Şema/migration YOK.
 - **e2e beklentisi:** register→onboarding→ProfileStep (ulaşılamaz üç-soru assertion'ları çıkarıldı; deep adımlar kademeli akışa). ⚠️ E2E düzeltme pointer'a girene kadar (S29) KIRMIZI — beklenti zayıflatılmadı.
 - **Sıradaki:** PO iki PR merge (#67 + #148) → **S29 pointer bump** → e2e YEŞİLE döner → kalan akışlar Playwright'a kademeli (C/E/F/G/H) → OAuth davet token turu (F.11 #13) → içerik oturumu · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-02 (10) — G1 KART↔KOD ÇAPRAZ DOĞRULAMA + 11 KART GÜNCELLEME
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Sayım turu bulgusunun ("kartlar donduruldu, iş yapıldı, kart güncellenmedi") G1 grubunda kök-neden düzeltmesi. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum (2026-09-02)
+- **Çatı main HEAD:** `06a23ae` (Merge PR #149 — S29 pointer re-bump). Bu turda backend'e DOKUNULMADI → pointer değişmedi.
+- **Dal:** `docs/g1-kart-guncelleme-2026-09-02` (temiz `origin/main`'den). **PR açık — MERGE ETME.**
+
+## A) Yapılanlar (kanıtlı)
+- **PLANLA turu (önce):** G1 (30 kart) tek tek KODDAN doğrulandı, altı-alanlı bloklarla (kart↔kod). **🔴 HAYALET (✅ ama yapılmamış) = 0.** VERDİKT: 🔵 5 · 🟡 4 · ⚫ 2 · 🟢 19.
+- **BYPASS turu (bu):** 11 kart güncellendi (`bilanco/kararlar/G1-guvenlik-kvkk.md`; eski durum üstü-çizili `[ESKİ]` damgalı — G9-03 deseni; başlık özet-tablosu yenilendi):
+  - **Kanıtlı (4):** G1-02 ❓→✅TEYİT (`matchingController.ts:75-80` disc sızmaz) · G1-05 🟡→✅ (`me/data-export`+`delete-account`, #59) · G1-07 ⬜→✅ (`schema.prisma:1293` Consent + `CONSENT_VERSION` canlı) · G1-19 ❓→✅TEYİT (okumalar `TenantMembership`).
+  - **Kısmen (4, dürüst ayrım):** G1-06 ⬜→🟡 (FeedbackLog 3-yıl ✅, Message TODO/G1-10) · G1-16 ⬜→🟡 (`backfill-consent.ts` var+çalıştı, K3 açık) · G1-26 ⬜→🟡 (`suspicionRoutes.ts:9` IP-limit ✅, CAPTCHA açık) · **G1-12 🟡→⬜ TERS DÜZELTME** (kart "kısmen" demiş ama kod-kanıtsız; KURAL 13 iki-dilli 11 terim → 0 sonuç; KOD KAZANIR).
+  - **Yeniden tanım/kapsam (3):** G1-01 ⚫ kapsam-düşürüldü (PO tek-kutu; ⚠️ **yaş VERİSİ sistemde YOK**) · G1-04 ⚫ (public tasarım, izolasyon açığı değil) · G1-17 ⚫/✅ (`middleware.ts` VAR + admin-guard backend'de).
+- **⭐ İŞ 0 — İKİ NUMARA ÇAKIŞMASI (kaynak+kök incelendi, numara VERİLMEDİ, PO KARARINA):**
+  - **G1-19:** kart = qualityMultiplier **okuma-kaynağı** (köken SAYIM:92 "K7 akrabası") ↔ `00-KARAR-TAKIP` Faz 3c "G1-19 (kalite çarpanı **çift-uygulama**)" → **FARKLI KONU.**
+  - **G1-23:** kart = logoUrl **XSS** (köken SAYIM:103 NUMARASIZ; kodda **AÇIK**) ↔ Faz 3b "G1-23 → 🗑️ geçersiz" = logoUrl **sahiplik/IDOR guard'ı** → **FARKLI KONU** (XSS yanlışlıkla "çözülmüş" görünüyor).
+  - İkisi de birleştirilmedi/çözülmedi; kartlara `⚠️ ÇAKIŞMA` notu düşüldü.
+- **Senkron:** `00-KARAR-TAKIP` (tek blok) · `09-DURUM` (tur bloğu) · bu bölüm. **📸 etiket sorusu** (dondurulmuş ama güncelleniyor → hibrit) PO'ya bırakıldı (unilateral değiştirilmedi).
+
+## B) Sınırlar / dürüstlük
+- Commit disiplini 4 commit istiyordu; kanıtlı/kısmen/kapsam grupları TEK dosyada → interaktif hunk-staging (`git add -p`) bu ortamda kapalı → **2 commit** (kart + senkron). Şeffaf sapma.
+- Kod/DB/şema/seed DEĞİŞMEDİ · #110 ellenmedi · alt-ajan kullanılmadı · numara doğurulmadı · başka gruba (G2-G11) dokunulmadı.
+
+## C) Sıradaki
+- PO: G1 kart PR merge + İŞ 0 iki çakışma kararı (birleştir/ayrı-numara) + 📸 etiket kararı.
+- Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp, ölü-kod/belge grupları) → G2-G8/G11 → içerik oturumu · OAuth turu (F.11 #13) · S26 · Faz 5.

@@ -105,6 +105,8 @@
 >   + **DEVREDEN:** tasarım↔kod uçurumu (OCEAN, madde 101) · k-anonimlik yok (G1-22).
 > - Ayraç geri alındı (konvansiyon). Kod/DB/migration DEĞİŞMEDİ. **MERGE EDİLMEDİ.**
 
+> **⚡ GÜNCELLEME (2026-09-02) — G1 KART↔KOD ÇAPRAZ DOĞRULAMA (yalnız-belge, çatı PR — MERGE ETME):** 30 G1 kartı KODDAN doğrulandı (📸 kartlar 2026-08-27'de donduruldu, iş yapıldı ama durum güncellenmemişti). **🔴 HAYALET (✅ ama yapılmamış) = 0.** Kart dosyası güncellendi (`bilanco/kararlar/G1-guvenlik-kvkk.md`, eski durum üstü-çizili damgalı — G9-03). **Kanıtlı (4):** G1-02/G1-19 ❓→✅ TEYİT · G1-05 🟡→✅ · G1-07 ⬜→✅ (Consent modeli canlı). **Kısmen (4):** G1-06/G1-16/G1-26 ⬜→🟡 (bir parça yapıldı, bir parça karara-bağlı) · **G1-12 🟡→⬜ TERS DÜZELTME** (yasal-alan kod-kanıtsız, KURAL 13: 11 terim 0 sonuç). **Yeniden tanım (3):** G1-01 ⚫ kapsam-düşürüldü (⚠️ yaş VERİSİ sistemde YOK) · G1-04 ⚫ (public tasarım) · G1-17 ⚫/✅ (middleware.ts var + admin-guard backend'de). **⭐ İŞ 0 — İKİ NUMARA ÇAKIŞMASI (PO KARARINA, numara VERİLMEDİ):** (a) **G1-19** kartı=qualityMultiplier okuma-kaynağı ↔ bu Faz 3c bloğundaki "G1-19 (kalite çarpanı çift)"=çift-uygulama → **FARKLI KONU** (çift-uygulama G1-19'a ait değil). (b) **G1-23** kartı=logoUrl **XSS (kodda AÇIK)** ↔ Faz 3b'deki "G1-23 → 🗑️ geçersiz"=logoUrl **sahiplik/IDOR guard'ı** → **FARKLI KONU** (XSS yanlışlıkla "çözülmüş" görünüyor; gerçekte açık). İkisi de birleştirilmedi/çözülmedi → PO karar verecek. Kod/DB/şema DEĞİŞMEDİ. **MERGE EDİLMEDİ.**
+
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 
 > **Neden burada:** Oturumlarda "sonraki turda/ileride yapılacak" diye verilen sözler sonraki oturumlarca devralınmıyordu
