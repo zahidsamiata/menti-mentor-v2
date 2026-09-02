@@ -233,8 +233,9 @@
   modeli AKTİF bir PO kararı (STK ile aynı yetkiler) ve avukat paketinde kulüp beyanı şartı var. Tek dilde arayan
   yarısını kaçırır.
 
-### KURAL 14 ADAYI — CI YEŞİL ≠ TEST KOŞTU (PO onaylayacak)
-> ⚠️ Numara verme yetkisi PO'dadır; kural yazıldı ama **"ADAYI"** olarak — PO onaylayınca "ADAYI" düşer.
+### KURAL 14 — CI YEŞİL ≠ TEST KOŞTU
+> ✅ **ONAYLANDI (PO, 2026-09-02).** (Kanıtlı olaydan doğdu, zaten uygulanıyor.)
+> ⚠️ **EK (PO, 2026-09-02):** "CI yeşil" raporlanırken **KAÇ TEST KOŞTUĞU da YAZILIR.** "0 passed" da yeşil görünür — sayı olmadan yeşil bir şey kanıtlamaz.
 - Bir testin koştuğu, CI'ın yeşil olmasıyla **KANITLANMAZ.** Kanıt üç şeydir:
   (a) test dosyasının adı **CI log'unda GEÇMELİ** · (b) **TEST SAYISI** önceki koşuyla karşılaştırılmalı ·
   (c) artış, eklenen testin sayısıyla **UYUŞMALI.**
@@ -242,8 +243,8 @@
 - **GEREKÇE:** 2026-08-31'de e2e testi main'e ulaşmadı (stacked merge sırası), CI yeşil döndü, iki tur boyunca fark
   edilmedi; #66 ile taşınınca 442→445 kanıtlandı. (Detay: `docs/kararlar/00-KARAR-TAKIP.md` F.11.)
 
-### KURAL 15 ADAYI — KAYNAK HİYERARŞİSİ (PO onaylayacak)
-> ⚠️ Numara verme yetkisi PO'dadır; kural yazıldı ama **"ADAYI"** olarak — PO onaylayınca "ADAYI" düşer.
+### KURAL 15 — KAYNAK HİYERARŞİSİ
+> ✅ **ONAYLANDI (PO, 2026-09-02).** (Kanıtlı olaydan doğdu — G1-23 21. hayalet — zaten uygulanıyor.)
 - **G-kartları (`docs/raporlar/bilanco/kararlar/G*.md`) = AYRINTI + KANIT.** Kaynak doğrudur; her kalemin tam tanımı,
   gerekçesi ve kod kanıtı oradadır.
 - **`00-KARAR-TAKIP` = ÖZET + numara.** Turlar arası hızlı bakış; kalemin TAM tanımını taşımaz.
@@ -253,6 +254,19 @@
 - **GEREKÇE:** 2026-08-29'da `00-KARAR-TAKIP` "G1-23 → 🗑️ geçersiz (guard var)" yazdı. Guard tespiti DOĞRUYDU ama
   başka bir konuydu (sahiplik/IDOR); G1-23 kartının konusu XSS'ti ve o açıktı. Özet, ayrıntıyı yanlışlıkla kapattı
   → 21. "hayalet tamamlanmış". (Detay: `docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md` [G1-23].)
+
+### KURAL 16 ADAYI — SAYILAN BİRİM TANIMLANIR (PO onaylayacak)
+> ⚠️ Numara verme yetkisi PO'dadır; kural yazıldı ama **"ADAYI"** olarak — PO onaylayınca "ADAYI" düşer.
+- Bir sayı raporlanmadan ÖNCE **sayılan birim tanımlanır.**
+- "**N kalem**" demek YETMEZ — **hangi yerlerdeki** kalemler sayıldı açıkça yazılır: durum satırı · PO notu · alt madde ·
+  başka belge · hangi dosyalar tarandı.
+- Farklı birimler farklı sayı verir; ikisi de doğru olabilir. Yanlış olan, birimi söylemeden sayı vermektir.
+- **GEREKÇE — üç kez aynı desen, her seferinde birim belirsizdi:**
+  - Bilanço: "196 benzersiz kalem" → gerçek ≈259 (aritmetik toplam ≠ tekilleştirilmiş satır).
+  - S21 envanteri: "30 satır" → ~40 benzersiz alan (bazı satırlar alan-grubu).
+  - 🗑️ taraması: "6 geçersiz kart" → 15 geçersiz kalem (ilk sayım yalnız kart durum satırına baktı; PO notu,
+    karar-takip ve alt maddeler sayılmadı).
+- ⭐ Uygulama: iki adımlı doğrulamada (M1) "X bekliyorum" denirken **birim de söylenir.**
 
 <!-- /çalışma-kuralları -->
 
