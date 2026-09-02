@@ -9,6 +9,13 @@
 # Test çıktıları
 /coverage
 
+# Playwright (E2E) — rapor/trace/çalışma-zamanı artefaktları ve tarayıcı önbelleği
+/playwright-report/
+/test-results/
+/blob-report/
+/playwright/.cache/
+/e2e/.runtime.json
+
 # Next.js
 /.next/
 /out/

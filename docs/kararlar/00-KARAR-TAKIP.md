@@ -137,6 +137,7 @@
 | S26 | **Yedek tablo `MentorshipAgreement_yedek_20260830` DÜŞÜRÜLECEK** (`DROP TABLE`). ⭐ **Tetikleyici:** FORM TURU tamamlanıp gerçek anlaşma akışı regresyonsuz görüldükten SONRA. Geçici tablo kalıcı drift olmasın (kvkkConsentAt köprüsüyle aynı desen: geçici artefakt izlenmezse unutulur). `migrate diff`'te "şemada olmayan tablo" olarak görünüyor. | 2026-08-30 | ⬜ **BEKLİYOR** — 150 öksüz silme geri-alma güvencesi; form turu + regresyon sonrası DROP. ⚠️ NOT (2026-09-01): form turu MERGE EDİLDİ (#64/#66/#146) ama tetikleyicinin ikinci koşulu = **gerçek anlaşma akışı PO tarayıcı kontrolüyle regresyonsuz GÖRÜLMEDİ** → hâlâ ⬜. Tetik geldi SAYILMAZ. | F.8 çözüm / backend PR #63 |
 | S27 | **Cron/öksüz/FK backend PR #63 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (`git submodule update --remote backend`), tek çatı turunda (S22/S24/S25 deseni). | 2026-08-30 | ✅ **YAPILDI (2026-08-30):** backend #63 merged (merge commit `2b93afd`) + çatı #144 merged (`02d555d`); pointer `f5ec0a9 → 2b93afd` re-bump (`chore/pointer-rebump-s27-2026-08-30`). İleri sarım teyitli (`f5ec0a9`, `2b93afd`'nin atası). | F.8 çözüm / backend PR #63 / çatı #144 |
 | S28 | **Üç-soru ekranı backend PR #64 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (S22-S27 deseni). | 2026-08-30 | ✅ **YAPILDI (2026-09-01):** backend #64 (`301eb20`) + #65 e2e (stacked ıska) + **#66 e2e main'e taşındı** (`882ce97`) + çatı FE #146 (`6d3aa84`) merged. Pointer `2b93afd → 882ce97` re-bump (`chore/s28-senkron-2026-09-01`). İleri sarım teyitli (`2b93afd`, `882ce97`'nin atası). ⚠️ Tek fark: pointer #64 merge sonrası değil, **#66 (e2e) merge sonrası** bump edildi — böylece pointer e2e testini de kapsıyor. | Form turu / backend PR #64 · #66 · çatı #146 |
+| S29 | **Davet-APPROVED backend PR #67 merge olunca** çatı submodule pointer'ı backend `main` HEAD'e **re-bump** et (S22-S28 deseni). ⭐ Bu bump'tan SONRA çatı e2e (PR #148) YEŞİLE döner (davetli /onboarding'e ulaşır). | 2026-09-01 | ⬜ **BEKLİYOR** — backend **PR #67** (`fix/davet-approved-2026-09-01`) + çatı FE/e2e **PR #148** henüz merge edilmedi. | login-PENDING / backend PR #67 / çatı #148 |
 
 > **Not:** Yukarıdaki sözlerin çoğu B.1 / F tablolarındaki maddelerle AYNI işlerdir — burada "söz olarak da verilmişti, tutulmadı"
 > boyutuyla görünür. Yeni bir söz verildiğinde (yeni oturum) buraya EKLENİR; tutulunca ✅ işaretlenip kaldırılır (KURAL 11).
@@ -529,10 +530,12 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 | 9 | updatedAt default drift (4 tablo, `@updatedAt` uygulama katmanında) | Şema drift 2026-08-30 | 🟢 | **F.8** §499/502 |
 | 10 | LearningStage.tenantId onDelete davranış farkı (canlı RESTRICT ↔ şema SET NULL) | Şema drift 2026-08-30 | 🟡 | **F.8** §496/502 |
 | 11 | Stacked PR tuzağı (alt-PR üst-PR main'e girmeden merge → main'e ulaşmaz; CI yeşil ≠ test koştu) | E2E taşıma turu 2026-09-01 | 🟡 | **F.11** (aşağı) · KURAL 14 adayı |
-| 12 | login-PENDING kayıt akışı (register token vermiyor, login PENDING'i 403 blokluyor) | E2E turu 2026-09-01 | ❓ | **F.11** (aşağı) · PO tarayıcı kontrolü |
+| 12 | login-PENDING kayıt akışı (davetli /onboarding'e ulaşamıyor) | E2E turu 2026-09-01 | ✅ ÇÖZÜLDÜ (LOCAL, #67+FE) | **F.11** — davet=onay düzeltmesi |
+| 13 | OAuth davet token'ı taşımıyor (Google davetli de PENDING) | ADIM 0 kapısı 2026-09-01 | 🟡 latent (0 kullanıcı) | **F.11** — ayrı tur (5 katman) |
 
-> **Toplam: 12 numarasız kalem.** Bunlar B/F tablolarındaki *numaralı* işlerden ayrıdır — henüz numara ALMAMIŞ olanların
-> tek-bakış dizinidir. PO numaralandırınca ilgili satır bu dizinden düşer (KURAL 8 adım 2).
+> **Toplam: 13 numarasız kalem** (⚠️ GÜNCELLEME 2026-09-01: #12 login-PENDING ✅ ÇÖZÜLDÜ (LOCAL); #13 OAuth token
+> eklendi). Bunlar B/F tablolarındaki *numaralı* işlerden ayrıdır — henüz numara ALMAMIŞ olanların tek-bakış dizinidir.
+> PO numaralandırınca ilgili satır bu dizinden düşer (KURAL 8 adım 2).
 
 ### F.11 — 🆕 2026-09-01 E2E TAŞIMA TURUNDAN İKİ YENİ KALEM (**PO numaralandıracak**)
 
@@ -546,14 +549,27 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > **⭐ İKİ DERS:** (a) stacked PR'da **ALT-PR ÖNCE** merge edilir, ya da base main'e **retarget** edildikten SONRA;
 > (b) "CI yeşil" **YETMEZ** — test SAYISI önceki koşuyla karşılaştırılır ("0 passed" da yeşil döner). → **KURAL 14 ADAYI** (CLAUDE.md, PO onaylayacak).
 >
-> **(12) LOGIN-PENDING KAYIT AKIŞI** — ❓ (teyit/keşif bekliyor — PO tarayıcı kontrolü)
-> **Ne bulundu (e2e turunda):** `register` token döndürmüyor (`{message, user}`); `login` PENDING hesabı **403
-> blokluyor** (`authController.ts:69`); FE kayıttan sonra doğrudan `/onboarding`'e push ediyor
-> (`_RegisterContent.tsx:232`). E2E testi admin onayını `testPrisma` ile **SİMÜLE ederek** geçiyor → API katmanı
-> sağlam ama **gerçek kullanıcının o onayı nasıl aldığı KANITLANMADI.**
-> **⭐ İki ihtimal, ayırt edilmeli:** (a) kurum başvurusu → onay beklemesi **TASARIM** (sorun yok) · (b) mevcut kuruma
-> menti/mentör katılımı → onay beklemesi **KOPUKLUK** olur. → **PO tarayıcı kontrolü bekliyor** (S3/S9 kalemleriyle
-> aynı iş). Sonuca göre ya kapanır ya düzeltme turu.
+> **(12) LOGIN-PENDING KAYIT AKIŞI** — ✅ **ÇÖZÜLDÜ (2026-09-01, LOCAL; backend PR #67 + çatı FE)**
+> **Ne bulundu:** Playwright (PR #148) GERÇEK tarayıcıyla yakaladı — davetle kaydolan kullanıcı `/onboarding`'e
+> ULAŞAMIYOR, `/login`'e düşüyor. Zincir: register koşulsuz PENDING (`authController.ts:179`) → login PENDING'i
+> 403'lüyor (`:300`) → FE `login()` catch → `/login`. **⭐ ÇERÇEVE: Bu bir GÜVENLİK İYİLEŞTİRMESİDİR, salt hata
+> düzeltmesi değil** — backend davet token'ını HİÇ görmüyordu (yalnız `tenantSlug`) → API'ye doğrudan POST atan biri
+> davetsiz kaydolabiliyordu. Token doğrulaması o yolu da kapattı.
+> **Çözüm (PO kararı 2026-09-01, Seçenek b):** register opsiyonel `inviteToken` alır → `verifyInvitationToken`
+> (yeni `services/invitationToken.ts`) ile doğrular → geçerli+tenant+rol uyumlu ise **APPROVED**, aksi halde
+> **PENDING** (davetsiz = admin onayı korunur). Register token DÖNDÜRMEZ; FE şifreyle login eder. FE
+> `_RegisterContent` token'ı iletir. **3 GEREKÇE:** davet=onay (yönetici token'ı üretip kime verdiğini bilir) ·
+> ikinci onay mükerrer (bedeli gönüllü kaybı) · davet e-postayla gitmiyor → register token'ı doğrulamasız oturum olurdu.
+> **Testler:** davetsiz→PENDING (regresyon) · davet→APPROVED · sahte/uyuşmaz token→PENDING · OAuth→PENDING (regresyon).
+> **⛔ KAPSAM: yalnız LOCAL.** OAuth aşağıda (13) — ayrı tur. E2E düzeltme pointer'a girince (S29) yeşile döner.
+
+> **(13) OAUTH DAVET TOKEN'I TAŞIMIYOR** — 🟡 (latent, önceden var; **PO numaralandıracak**) 🆕 2026-09-01 (ADIM 0 kapısında bulundu)
+> OAuth zinciri **4 katmanın hiçbirinde** davet token'ı taşımıyor: FE `OAuthButtons.tsx:20` · `authController.ts:611-616`
+> `OAuthInitSchema` · `oauthStateService.ts:17` `createOAuthState` · `oauthService.ts:109` koşulsuz PENDING.
+> **Sonuç:** Google ile davetle gelen kullanıcı da PENDING'de takılıyor — (12) LOCAL kusuruyla **AYNI SINIF**, önceden var.
+> **Bugün 0 kullanıcıyı etkiliyor** (6/6 LOCAL, hepsi APPROVED) → latent. **⭐ (12) LOCAL düzeltmesi bunu YENİ BOZMADI**,
+> olduğu gibi bıraktı (regresyon testi kanıtlıyor). **Düzeltme 5 katmana dokunur** (state imzalı yapı, alan eklemek
+> dikkat ister) → **AYRI BYPASS turu** (PO 2026-09-01, Seçenek A ile ertelendi).
 
 ---
 

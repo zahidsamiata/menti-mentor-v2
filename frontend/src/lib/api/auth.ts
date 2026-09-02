@@ -15,6 +15,9 @@ export interface RegisterPayload {
   // KVKK Md.5 — backend z.literal(true) ile zorunlu. K4 (18+ beyanı) bu onayın
   // metnine gömülü (PO kararı: tek kutu) — ayrı alan yok.
   kvkkConsent: boolean;
+  // Davet token'ı (davet linkindeki ?token). Backend doğrular → geçerliyse davetli APPROVED
+  // olur ve login PENDING 403'üne takılmaz (PO kararı 2026-09-01, Seçenek A).
+  inviteToken?: string;
 }
 
 export interface RegisterResponse {

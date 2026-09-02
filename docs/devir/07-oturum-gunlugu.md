@@ -729,3 +729,17 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **✅ Y8 DÜZELTMESİ:** /clubs C.2 sınıflaması ❓ PO KARARI → 🌱 CANLI NİYET (G9-03 damgalı). Kulüp AKTİF PO kararı (STK yetkileri, avukat paketi); yanlış "terk" sınıflaması dar aramadan doğdu. NOT: literal "❓ HİKÂYE YOK" metni yoktu (grep 0), düzeltme gerçek sınıflama metnine uygulandı.
 - **Kod/şema/DB DEĞİŞMEDİ** (yalnız pointer + belge). Backend'e commit yok (pointer hariç). Çatı PR açıldı, MERGE EDİLMEDİ.
 - **Sıradaki:** PO çatı PR merge → **🔍 PO TARAYICI KONTROLÜ** (mevcut kuruma menti kaydı: onboarding/profil/üç soru/S1-boş/mentör tarzı yok · login-PENDING gerçek mi) → S26 yedek DROP (temizse) → içerik oturumu (soru metinleri, yeni sohbet) → F.9/G10-25 · G1-22 · Faz 5 (OCEAN motora bağlama %45/%30/%25).
+
+---
+---
+
+# 📅 OTURUM 2026-09-01 (9) — PLAYWRIGHT ALTYAPISI + LOGIN-PENDING KOPUKLUĞU ÇÖZÜLDÜ
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Gerçek-tarayıcı test katmanı kuruldu, ilk koşuşta gerçek kusur yakaladı, kök çözüm uygulandı.
+
+- **⭐ PLAYWRIGHT KURULDU (çatı PR #148, yalnız CI):** @playwright/test 1.62.1 · `e2e-browser` job (ephemeral Postgres, Neon DEĞİL) · `global-setup` Neon guard (tarayıcı-süreci bypass deliğini kapatır) · ayırt edici işaret `e2e-*/@e2e.test.local` · ilk akış kayıt→onboarding · KURAL 14 kanıtı. İlk koşu (CI `33504991568`): 2 senaryo KIRMIZI, `GERÇEK URL: /login` — **login-PENDING kopukluğu gerçek tarayıcıyla kanıtlandı** (altyapı değil, gerçek kusur).
+- **⭐ PENDING KEŞFİ (salt-okuma):** M1 6 yazma noktası; PENDING TEK anlam (admin onayı) — e-posta doğrulama YOK (grep 0); davet↔self-serve ayrı yol (self-serve APPROVED); 6 kullanıcı hepsi APPROVED (0 takılı, latent); davet e-postayla GİTMİYOR (admin elle paylaşır). PO Seçenek b.
+- **⛔ ADIM 0 KAPISI:** OAuth davet token'ını 4 katmanın hiçbiri taşımıyor → OAuth kapsam dışı bırakıldı (F.11 #13, ayrı tur). PO: Seçenek A (yalnız LOCAL).
+- **✅ LOGIN-PENDING ÇÖZÜLDÜ (backend PR #67 + çatı #148, GÜVENLİK İYİLEŞTİRMESİ):** register davet token'ı doğrular → davetli APPROVED, davetsiz PENDING. Yeni `services/invitationToken.ts`. FE token iletir. Register token dönmez. Testler: davetsiz/davet/sahte/uyuşmaz + OAuth-PENDING regresyonu. login 403/self-serve/reapply/OAuth DEĞİŞMEDİ. Şema/migration YOK.
+- **e2e beklentisi:** register→onboarding→ProfileStep (ulaşılamaz üç-soru assertion'ları çıkarıldı; deep adımlar kademeli akışa). ⚠️ E2E düzeltme pointer'a girene kadar (S29) KIRMIZI — beklenti zayıflatılmadı.
+- **Sıradaki:** PO iki PR merge (#67 + #148) → **S29 pointer bump** → e2e YEŞİLE döner → kalan akışlar Playwright'a kademeli (C/E/F/G/H) → OAuth davet token turu (F.11 #13) → içerik oturumu · S26 · Faz 5.
