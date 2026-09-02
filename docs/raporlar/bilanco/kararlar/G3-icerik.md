@@ -168,7 +168,8 @@ Bugünkü durum: ❓ (PO onayı)
 Etkisi: Onaysız psikometrik varsayımlar üretimde; eşleştirme kalitesi bilimsel dayanaksız.
 İş boyu: M (PO karar-işi)
 Kaynak: karar-defteri GRUP 6 (md.103 çıktısı) · Numara: (md.103 çıktısı)
-KOD-TEYİT: `scoring.ts:45 D:{D:60,I:75,S:30,C:85}` matris + `:20 ANTI_MATCH_RULES` (D-mentör/S-menti) + `:89 DEFAULT_SECTOR_WEIGHT=0.6` belgeyle BİREBİR; `discLetters.ts:23` "gerçek kullanıcı verisi biriktikçe kalibre edilecek" itirafı doğrulandı. ⚠️ ilişkili: [G2-06] aynı 5 onay noktası psikometri tarafından da işaretlenir (aynı karar, iki gruptan görünür).
+KOD-TEYİT: `scoring.ts:45 D:{D:60,I:75,S:30,C:85}` matris + `:20 ANTI_MATCH_RULES` (D-mentör/S-menti) + `:89 DEFAULT_SECTOR_WEIGHT=0.6` belgeyle BİREBİR; `discLetters.ts:23` "gerçek kullanıcı verisi biriktikçe kalibre edilecek" itirafı doğrulandı. ⚠️ ilişkili: ~~[ESKİ · 2026-08-27] [G2-06] aynı 5 onay noktası psikometri tarafından da işaretlenir (aynı karar, iki gruptan görünür).~~
+⚠️ GÜNCELLEME (2026-09-02, çapraz-ref düzeltmesi C2 — YANLIŞ NUMARA): Doğrusu **[G2-01..05]** demeti (5 onay noktası = matris `[G2-01]` + anti-match `[G2-02]` + tiebreak `[G2-03]` + %60/40 `[G2-05]` + gerekçe `[G2-04]`). **[G2-06] YANLIŞTI** — o "varsayılana düşen oran izleme metriği" (⬜, tek metrik), 5 onay noktası DEĞİL. Kanıt: `[G2-04]` PO notu bu onay noktalarını tek tek sayıyor ("16 kombinasyon, anti-match, tiebreak, %60/40"). *(Not: bu demet DISC-döneminden; DISC→Big Five geçişiyle PO'ca 🗑️ geçersiz sayıldı — ama referansın doğru hedefi yine G2-01..05.)*
 
 [ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
 [x] PO notu: Eski DISC kurgusundan kalma. Yeni tasarımda SJT havuzu 30-40 senaryoya çıkıyor (boyut-belirsizliği temelli); '3→4' sorusu anlamını yitirdi. Bkz. tasarım belgesi B6.
