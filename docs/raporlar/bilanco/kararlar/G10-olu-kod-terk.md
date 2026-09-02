@@ -1,6 +1,12 @@
 # BİLANÇO KARAR DOSYASI — G10: Ölü kod / yarım özellik / terk adayları
 
-**📸 DONDURULMUŞ** · 2026-08-27 · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c/G10) + `karar-defteri-2026-08-26.md` (GRUP 10)
+**🔄 YAŞAYAN** (gövde 2026-08-27 snapshot; durumlar güncelleniyor) · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c/G10) + `karar-defteri-2026-08-26.md` (GRUP 10)
+
+> ⚠️ **ETİKET DEĞİŞİMİ (PO kararı 2026-09-02): ~~📸 DONDURULMUŞ~~ → 🔄 YAŞAYAN.** Gerekçe: kart durumları artık güncelleniyor (G9/G10 çapraz doğrulama). ⭐ **GÖVDE KORUNUR** — özgün bulgular YENİDEN YAZILMAZ; değişiklik G9-03 deseniyle işlenir (`~~[ESKİ · tarih]~~` + ⚠️ GÜNCELLEME + kanıt). ⚠️ **KURAL 12 artık geçerli:** 30 günü aşarsa "bayat" sayılır — bu KASITLI (fazlar ilerledikçe karta dokunulmalı; dokunulmuyorsa zaten sorun var).
+
+> ⭐ **KAYNAK HİYERARŞİSİ (KURAL 15 — kök CLAUDE.md):** Bu G-kartları = **AYRINTI + KANIT** (her kalemin tam tanımı, gerekçesi, kod-kanıtı burada). `00-KARAR-TAKIP` = ÖZET + numara. **ÇELİŞKİDE KART KAZANIR** (kanıt burada). Özet belgede bir kalem kapatılmadan ÖNCE kartın konusuyla aynı olduğu doğrulanır — kısmi kanıtla tam kapatma yapılmaz.
+
+> ⚠️ **GÜNCELLEME (2026-09-02, G9/G10 ÇAPRAZ DOĞRULAMA — kart↔kod, salt-okuma doğrulama turu):** Kartlar 2026-08-27'de dondurulduktan sonra Faz 1b turunda iş yapıldı ama bazı kart durumları güncellenmemişti. Bu turda ilgili kartlar KODDAN doğrulandı (dosya:satır kanıtlı); durumlar kart-bazında ⚠️ notlarla güncellendi (**gövde metni SİLİNMEDİ — eski durum üstü-çizili `[ESKİ]` damgalı**, G9-03 deseni). Kod DEĞİŞMEDİ (yalnız-belge). **🔴 HAYALET (✅ ama yapılmamış) = 0.** Bu turda 3 kart güncellendi: **G10-01** (⬜→🟡), **G10-07** (⬜→✅, llmRetry SAHİBİ), **G10-12** (❓→⬜). Diğer 22 kart 2026-08-27 snapshot'ında bırakıldı — çapraz-referans taraması AYRI TURDA (PO şartı).
 
 > **Ne bu:** G10 grubundaki her kalem için PO'nun tek tek karar verebileceği **sade Türkçe karar kartı**. Salt-okuma + kod-teyidi; kod/DB/PR değiştirilmedi. Bu grup en çok "kod-iddiası" taşıyan grup — her "0 import / bağlanmamış / ölü tablo" iddiası GENİŞ grep ile koddan teyit edildi; çürüyenler ⚠️ ile işaretlendi.
 
@@ -15,6 +21,8 @@
 > ⚠️ **SAYIM (a) ana tablo ile küçük tutarsızlık (dürüst not):** (a) tablosunda G10 satırı ✅4/🟡4/⬜7/❓11 verir (toplam 26) ama 🔵 kolonu G10 için boş (·) bırakılmış. Oysa (c) listesinde **3 adet 🔵** kalem var (md.18 requestMessage-DROP, U2/md.44 matchingInterface, md.45 5-dosya-bundle). 26 + 3 🔵 = 29. Yani (c) listesi tam (29); (a) tablosu G10 için 🔵 sayımını atlamış. Bu dosya (c) listesini esas aldı — 29 kalem tam işlendi.
 
 ### Durum dağılımı (bu dosya, 29 kalem)
+
+~~[ESKİ · 2026-08-27 snapshot — değişen kartlar için aşağıdaki GÜNCELLEME tablosuna bak]~~
 | durum | adet | kart? |
 |---|:---:|---|
 | ✅ zaten yapılmış | 4 | HAYIR (aşağıda listelenir) |
@@ -23,6 +31,16 @@
 | ❓ teyit/karar | 11 | evet |
 | 🔵 bilinçli erteleme | 3 | evet |
 | **TOPLAM** | **29** | **25 kart** |
+
+⚠️ **GÜNCELLEME (2026-09-02, G9/G10 çapraz-doğrulama — yalnız değişen 3 kart; diğer 22 kart snapshot'ta):**
+
+| kart | eski | yeni | kanıt |
+|---|:---:|:---:|---|
+| **G10-07** | ⬜ | ✅ YAPILDI | `llmRetry.ts` SİLİNDİ (Faz 1b #56); `find backend/src -iname "llmRetry*"` = boş. ⭐ Bu kart = llmRetry konusunun **SAHİBİ** (dedike + dar kapsam). |
+| **G10-01** | ⬜ | 🟡 YARIM | (a) llmRetry ✅ silindi → **SAHİP [G10-07]**'ye referans · (b) TenantContext-ikiz 🗑️ çürük · (c) MeetingScheduler ⬜ KALIR (dosya var, `/availability` bekliyor) |
+| **G10-12** | ❓ | ⬜ AÇIK | PO: kulüp modeli AKTİF (STK ile aynı yetki) → artık ❓ değil; iş = FE bağla + G1-13 açık beyan. (🔵 kullanılmadı: KURAL 10 = 6 kod, 🔵 aralarında değil; PO aktif-ürün dedi → gerçek açık iş.) |
+
+> Diğer 22 kart bu turda DOKUNULMADI (durumları 2026-08-27 snapshot'ında). Aynı-konu-çok-kartta deseni (llmRetry) bulundu → **çapraz-referans taraması AYRI TUR** (PO şartı; bkz. `00-KARAR-TAKIP` desen kalemi).
 
 ### Kod-teyidi özeti
 - **16 kod-teyidi gereken kalem** GENİŞ grep ile teyit edildi (backend/src + frontend/src + tests; dosya-adı VE import/kullanım; harf-duyarsız).
@@ -50,15 +68,16 @@ Bunlar kod gerçeğiyle doğrulandı, karar gerektirmez — bilgi için listelen
 Ne: Üç ayrı ölü/atıl parçanın toplu temizliği önerisi: (a) `llmRetry.ts` (84 satır, 0 import), (b) "TenantContext ikiz tip", (c) 231 satırlık kullanılmayan MeetingScheduler bileşeni.
 Neden başlanmıştı: NİYET BELGELENMEMİŞ — LLM yolu kaldırılınca artık kod, gelecekteki entegrasyon için "belki lazım olur" diye bırakılmış scaffolding.
 Nerede durdu: Silme PO onayı bekliyor (temizlik kararı PO'nundur).
-Bugünkü durum: ⬜
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜~~ → 🟡 YARIM (2026-09-02: 3 parçadan 1'i temizlendi ↓)
 Etkisi: Kullanıcıya görünmez; bakım-yükü ve kafa-karışıklığı (yeni geliştirici "bu neden var?" der).
 İş boyu: S
 Kaynak: SAYIM (c)/G10 · Numara: md.44
 ⚠️ kod-teyidi: `llmRetry.ts` = 84 satır, **0 import** teyitli (yalnız kendi içinde `fetchWithRetry` tanımı). `MeetingScheduler.tsx` = **231 satır** teyitli, 0 import (bkz. [G10-22]). **"TenantContext-ikiz" ÇÜRÜK-ADAYI:** kodda `TenantContext` tipinin **yalnız TEK tanımı** var (`types.ts`) — "ikiz" ikinci tanım bulunamadı (ya zaten temizlendi ya da middleware-içi inline `req.tenant` tipiydi). llmRetry+MeetingScheduler ölü doğrulandı; ikiz-tip iddiası artık geçersiz.
-⚠️ ilişkili: [G10-08] (llmRetry ayrı kart), [G10-22] (MeetingScheduler bundle)
+⚠️ ilişkili: ~~[ESKİ · 2026-08-27] [G10-08] (llmRetry ayrı kart)~~, [G10-22] (MeetingScheduler bundle)
+⚠️ GÜNCELLEME (2026-09-02): llmRetry dedike kartı **[G10-07]**'dir (G10-08 = `qualityMultiplier` ikiz alan, ilgisiz — bayat çapraz-referans düzeltildi). ⭐ **SAHİPLİK (G9/G10 çapraz-doğrulama):** `llmRetry.ts` konusunun SAHİBİ **[G10-07]** (dedike + dar kapsam). Bu kartın (a) parçası artık oraya referans verir; bu kartın KENDİ kapsamı = (b) TenantContext-ikiz + (c) MeetingScheduler.
 
 🟡 **YARIM — GÜNCELLEME (2026-08-28, Faz 1b, backend PR #56 + çatı PR #129):** Demetin 3 parçasından yalnız 1'i temizlendi:
-- **(a) llmRetry.ts → ✅ SİLİNDİ** (backend PR #56; 0 import kod-teyitli, tüketici `matchReason.ts` silinmiş).
+- **(a) llmRetry.ts → ✅ SİLİNDİ** (backend PR #56; 0 import kod-teyitli, tüketici `matchReason.ts` silinmiş). ⚠️ SAHİP=**[G10-07]** — güncel durum orada izlenir; burada yalnız 3-parçalı demetin parçası olarak anılır.
 - **(c) MeetingScheduler.tsx → ⬜ SİLİNMEDİ (yarım özellik, satır 57'deki "ölü" nitelemesi düzeltildi):** backend `/availability` endpoint'i (`meetingRoutes.ts:34`) GERÇEKTEN var; bileşen backend enum'larıyla birebir eşleşiyor + `onSaveAvailability`/`onBook` callback'leri bağlanmak için tasarlanmış → **ölü değil, bağlanmayı bekleyen özellik.** Silme değil (bağla/PO kararı; zaten [G10-20] "şimdilik alma"da izleniyor).
 - **(b) TenantContext-ikiz → 🗑️ GEÇERSİZ** (tek tanım var, ikiz iddiası çürük — kartın kendi kod-teyidi).
 
@@ -139,15 +158,18 @@ Kaynak: SAYIM (c)/G10 · Numara: F5/F6
 ---
 
 **[G10-07] `llmRetry.ts` — LLM kaldırıldı, 0 import (atıl)**
+> ✅ YAPILDI (2026-09-02, G9/G10 çapraz doğrulama) — ⭐ Bu kart `llmRetry.ts` konusunun **SAHİBİDİR** (dedike + dar kapsam + dosya-özel kanıt → değişince tek yer güncellenir; [G10-01] bu konuda buraya referans verir). Dosya **SİLİNDİ** (Faz 1b, backend PR #56). Kanıt (2026-09-02 kod-teyidi): `find backend/src -iname "llmRetry*"` = **boş**; tüketici `matchReason.ts` de yok (`find … -iname "matchReason*"` boş; kalan tek `MatchReason` eşleşmesi `scoring.service.ts`'teki ilgisiz tip birliği). Kutu değişmedi.
+
 Ne: `fetchWithRetry` yardımcısı içeren dosya; LLM yolu silinince tüketicisi (`matchReason.ts`) de silindi → dosya artık 0 import.
 Neden başlanmıştı: OpenAI çağrılarında yeniden-deneme (retry) için yardımcı; LLM ice-breaker/match-reason yolu kaldırılınca öksüz kaldı.
-Nerede durdu: Silinmedi — "gelecekte LLM entegrasyonu dönerse lazım olur" diye bırakıldı (backend/CLAUDE.md bunu açıkça not eder).
-Bugünkü durum: ⬜
+Nerede durdu: ~~[ESKİ · 2026-08-27] Silinmedi — "gelecekte LLM entegrasyonu dönerse lazım olur" diye bırakıldı (backend/CLAUDE.md bunu açıkça not eder).~~
+⚠️ GÜNCELLEME (2026-09-02): Dosya SİLİNDİ (Faz 1b, backend PR #56) — bırakılmadı. Kanıt: `find backend/src -iname "llmRetry*"` boş; tüketici `matchReason.ts` de yok.
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜~~ → ✅ YAPILDI (silindi, kod-teyitli)
 Etkisi: Kullanıcıya görünmez; 84 satır ölü scaffolding.
 İş boyu: S
 Kaynak: SAYIM (c)/G10 · Numara: D2/md.44
-⚠️ kod-teyidi: `llmRetry.ts:34` `fetchWithRetry` tanımı; backend/src'te **0 import** teyitli. `matchReason.ts` de yok (silinmiş). Atıl doğru.
-⚠️ ilişkili: [G10-01] (aynı dosya md.44 toplu-sil bundle'ında)
+⚠️ kod-teyidi: ~~[ESKİ · 2026-08-27] `llmRetry.ts:34` `fetchWithRetry` tanımı; backend/src'te **0 import** teyitli.~~ ⚠️ GÜNCELLEME (2026-09-02): dosya artık YOK (silindi #56) — `matchReason.ts` de yok. Atıl değil, kaldırıldı.
+⚠️ ilişkili: [G10-01] (aynı dosya md.44 toplu-sil bundle'ında; llmRetry parçası bu SAHİP karta referans verir)
 
 [ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
@@ -214,7 +236,8 @@ Kaynak: SAYIM (c)/G10 · Numara: A20
 Ne: Kulüp (`/clubs`) modülünün 7 endpoint'i backend'de tam ve testli ama FE tarafında hiç kullanılmıyor.
 Neden başlanmıştı: Kulüp-tipi tenant (öğrenci kulübü / topluluk) desteği — ayrı bir tenant tipi olarak planlandı. (G1'de "Kulüp-tipi tenant AKTİF EDİLMEZ, avukat kısıtı" notu ilişkili.)
 Nerede durdu: Backend inşa edildi + testlendi; FE hiç bağlanmadı (kulüp tipi canlı-öncesi hukuki kısıtla dondurulmuş olabilir).
-Bugünkü durum: ❓ (PO: ürün mü / ertele mi)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ (PO: ürün mü / ertele mi)~~ → ⬜ AÇIK (2026-09-02: PO karar verdi ↓)
+⚠️ GÜNCELLEME (2026-09-02, G9/G10 çapraz-doğrulama): Artık ❓ DEĞİL. **PO notu [x] kulüp modelini AKTİF ilan etti** ("kulüpler STK ile aynı yetkilere sahip, fark yok") → ürün-kararı verildi. Kalan = **açık iş**: FE bağla + **G1-13** (kulüp-tipi kurum aktif etme + açık beyan). Durum kodu **⬜ AÇIK** seçildi; gerekçe: (1) KURAL 10 = 6 kod (✅🟡🔀⬜❓🗑️), **🔵 aralarında değil**; (2) PO "aktif ürün" dedi → süresiz erteleme değil, gerçek yapılmamış iş; (3) G1-13'e bağlı ve o da ⬜ AÇIK. *(Pozitif iddia — PO notu tek-kanıt yeter, KURAL 13.)*
 Etkisi: Kullanıcıya görünmez (FE yok); bakım-yükü + saldırı-yüzeyi (mount'lu endpoint'ler).
 İş boyu: M
 Kaynak: SAYIM (c)/G10 · Numara: md.41
