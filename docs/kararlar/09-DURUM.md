@@ -1,7 +1,9 @@
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
-**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-09-01
+**🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-09-02
 
+> **⚡ S29 POINTER RE-BUMP → E2E YEŞİLE DÖNDÜ (2026-09-02, yalnız çatı, PR #149 — MERGE ETME):** Backend #67 + çatı #148 merge edildi (backend main `1176a6d` · çatı main `3c26a5d`). Çatı submodule pointer `882ce97 → 1176a6d` re-bump (ileri sarım teyitli) → davet-APPROVED düzeltmesi pointer'a girdi. **⭐ KANIT (döngü kapandı): `e2e-browser` job CI run `33605765593` — `registration-onboarding.spec.ts` 2 passed** (SENARYO 1 menti + SENARYO 2 mentör "onboarding açılır", her biri ~2.1s). Playwright kopukluğu KIRMIZI ile yakalamıştı (#148 ilk koşu) → fix → pointer → **YEŞİL**: araç hem kusuru buldu hem düzeltmenin doğruluğunu otomatik doğruladı. Kod/DB DEĞİŞMEDİ. **S29 ✅.** **MERGE EDİLMEDİ.** **[önceki: login-PENDING çözüm ↓]**
+>
 > **⚡ LOGIN-PENDING KOPUKLUĞU ÇÖZÜLDÜ + PLAYWRIGHT ALTYAPISI (2026-09-01, backend PR #67 + çatı PR #148 — MERGE ETME):**
 > **⭐ Playwright (gerçek tarayıcı E2E) kuruldu ve İLK KOŞUŞUNDA gerçek bir kusur yakaladı:** davetle kaydolan kullanıcı
 > `/onboarding`'e ULAŞAMIYOR, `/login`'e düşüyor (register PENDING → login 403 → FE catch). Kanıt: CI run `33504991568`,
