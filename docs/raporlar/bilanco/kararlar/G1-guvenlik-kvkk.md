@@ -1,6 +1,10 @@
 # BİLANÇO KARAR DOSYASI — G1: Güvenlik / KVKK / hukuk
 
-**📸 DONDURULMUŞ (gövde 2026-08-27 snapshot)** · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c/G1) + `karar-defteri-2026-08-26.md` (GRUP 1)
+**🔄 YAŞAYAN** (gövde 2026-08-27 snapshot; durumlar güncelleniyor) · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c/G1) + `karar-defteri-2026-08-26.md` (GRUP 1)
+
+> ⚠️ **ETİKET DEĞİŞİMİ (PO kararı 2026-09-02): ~~📸 DONDURULMUŞ~~ → 🔄 YAŞAYAN.** Gerekçe: kart durumları artık güncelleniyor (G1 çapraz doğrulama). ⭐ **GÖVDE KORUNUR** — özgün bulgular YENİDEN YAZILMAZ; değişiklik G9-03 deseniyle işlenir (`~~[ESKİ · tarih]~~` + ⚠️ GÜNCELLEME + kanıt). ⚠️ **KURAL 12 artık geçerli:** 30 günü aşarsa "bayat" sayılır — bu KASITLI (fazlar ilerledikçe karta dokunulmalı; dokunulmuyorsa zaten sorun var).
+
+> ⭐ **KAYNAK HİYERARŞİSİ (KURAL 15 — kök CLAUDE.md):** Bu G-kartları = **AYRINTI + KANIT** (her kalemin tam tanımı, gerekçesi, kod-kanıtı burada). `00-KARAR-TAKIP` = ÖZET + numara. **ÇELİŞKİDE KART KAZANIR** (kanıt burada). Özet belgede bir kalem kapatılmadan ÖNCE kartın konusuyla aynı olduğu doğrulanır — kısmi kanıtla tam kapatma yapılmaz (bkz. G1-23 vakası).
 
 > **Ne bu:** G1 grubundaki her karar-gerektiren kalem için PO'nun tek tek işaretleyebileceği ayrı karar kartı. Salt-okuma + kod-teyit turu; kod değiştirilmedi, DB'ye dokunulmadı. Kartlardaki `[ ]` kutuları PO içindir.
 
@@ -33,12 +37,12 @@
 | ✅ YAPILDI | 2 | G1-05, G1-07 | ⬜/🟡 → ✅ (kanıtlı) |
 | ✅ TEYİT | 2 | G1-02, G1-19 | ❓ → ✅ TEYİT (kanıtlı) |
 | 🟡 YARIM | 4 | G1-06, G1-16, G1-21, G1-26 | +G1-06/16/26 (kısmen); G1-21 aynı |
-| ⬜ AÇIK | 12 | G1-08, G1-09, G1-10, G1-12, G1-13, G1-15, G1-18, G1-20, G1-22, G1-27, G1-29, G1-30 | +G1-12 (🟡→⬜ ters düzeltme, kod-kanıtsız) |
-| ❓ TEYİT GEREK | 5 | G1-03, G1-14, G1-23, G1-24, G1-25 | G1-23 açık kalır (XSS ≠ IDOR guard) |
+| ⬜ AÇIK | 13 | G1-08, G1-09, G1-10, G1-12, G1-13, G1-15, G1-18, G1-20, G1-22, G1-23, G1-27, G1-29, G1-30 | +G1-12 (🟡→⬜) +G1-23 (❓→⬜, PO kararı 2026-09-02: XSS gerçek açık iş) |
+| ❓ TEYİT GEREK | 4 | G1-03, G1-14, G1-24, G1-25 | G1-23 çıktı (⬜'ye) |
 | 🔵 bilinçli erteleme | 2 | G1-11, G1-28 | aynı |
 | ⚫ GEÇERSİZ/KAPSAM-DÜŞÜRÜLDÜ | 3 | G1-01 (kapsam düşürüldü), G1-04 (yeniden tanım), G1-17 (başka yerde çözüldü) | yeniden tanım/karar |
 
-**Toplam: 30** (2+2+4+12+5+2+3). 🔴 HAYALET = 0.
+**Toplam: 30** (2+2+4+13+4+2+3). 🔴 HAYALET = 0. *(2026-09-02 çakışma düzeltme turu: G1-23 ❓→⬜.)*
 
 **Kod-teyidi:** bu turda **8 kod-iddiası** geniş (backend/src + frontend/src + schema) teyit edildi. **ÇÜRÜYEN: 0** tam çürüme; **1 kısmi düzeltme** (logoUrl XSS — CSP yalnız `/uploads`'a uygulanıyor, tenant logoUrl'e değil → G1-23'te not). **❓ kalan (teyit edilemeyen niyet/hukuk):** 7.
 
@@ -316,7 +320,7 @@ Kaynak: karar-defteri (K7 akrabası) · Numara: (K7 akrabası)
 ⚠️ bilanço büyük ölçüde doğrulandı (kısmi kod-teyit): canlı okuma kaynakları Membership → `adminController.ts:324`, `sjtScoringController.ts:112`, `certification.service.ts` hep `TenantMembership.qualityMultiplier` okuyor; `UserProfile.qualityMultiplier` okuyan CANLI kod bulunamadı (ikiz alan atıl görünüyor).
 ⚠️ ilişkili: [G10] UserProfile.qualityMultiplier ikiz-alan DROP (D3) — aynı ikiz alanın silinme kararı.
 ✅ **TEYİT (2026-09-02, G1 çapraz-doğrulama — kod-kanıtlı): OKUMA KAYNAĞI DOĞRU.** Canlı okumalar `TenantMembership.qualityMultiplier`: `adminController.ts:324`, `sjtScoringController.ts:112`, `certification.service`. `UserProfile.qualityMultiplier` okuyan CANLI kod YOK (ikiz alan atıl → G10/D3 DROP adayı). Eski-yer okuma kalıntısı YOK. ❓ → **✅ TEYİT.**
-> ⚠️ **ÇAKIŞMA — NUMARA (İŞ 0, PO KARARINA · numara VERİLMEDİ, birleştirilmedi):** Bu **kart G1-19 = qualityMultiplier OKUMA KAYNAĞI** (UserProfile↔Membership; köken: SAYIM:92 "K7 akrabası"). Ancak `00-KARAR-TAKIP` Faz 3c bloğu **"G1-19 (kalite çarpanı çift)"** diye AYRI bir konuyu (qm² **çift-uygulama** teyidi, `scoring.ts:109`×`matching.ts:307`) aynı numarayla etiketlemiş. **FARKLI KONU** — okuma-kaynağı ≠ çift-uygulama. Çift-uygulama teyidi doğru bir bulgu ama G1-19 kartına AİT DEĞİL (doğal evi G2/tasarım B9.5 tarafı; G2 kapsamı → bu turda dokunulmadı). **PO:** KARAR-TAKIP'teki "G1-19 çift-uygulama" etiketi düzeltilsin mi / ayrı numara mı? (Bu tur numara doğurmadı.)
+> ⚠️ **ÇAKIŞMA ÇÖZÜLDÜ (2026-09-02, PO kararı; numara VERİLMEDİ):** Bu **kart G1-19 = qualityMultiplier OKUMA KAYNAĞI** (UserProfile↔Membership; köken: SAYIM:92 "K7 akrabası"). `00-KARAR-TAKIP` Faz 3c bloğu **"G1-19 (kalite çarpanı çift)"** diye AYRI bir konuyu (qm² **çift-uygulama**, `scoring.ts:109`×`matching.ts:307`) aynı numarayla etiketlemişti → **FARKLI KONU.** **Kanıtlı çözüm:** 11 G2 kartının (G2-01..11) hiçbiri çift-uygulamayı kapsamıyor (KAPSAM DIŞI) → çift-uygulama numara ALMADI ama **evsiz değil**: tasarım belgesi **§9.5 + KALEM LİSTESİ §16 madde 8** (⬜ AÇIK, numara-adayı) tutuyor. KARAR-TAKIP satır 79'daki yanlış etiket G9-03 deseniyle damgalandı. Bu kart (G1-19 = okuma kaynağı) **✅ TEYİT olarak kalır** — çakışma yalnız KARAR-TAKIP etiketiydi, kartın kendi tespiti etkilenmedi.
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
@@ -366,13 +370,13 @@ Kaynak: karar-defteri (güvenlik-denetimi 3.2) · Numara: NUMARASIZ
 Ne: Kurum logo adresi yalnızca "geçerli URL mü" diye kontrol ediliyor (`z.string().url()`); zararlı bir `data:svg` veya kötü host geçebilir. Host/MIME beyaz-listesi ve bu görsele uygulanan bir içerik güvenlik politikası (CSP) yok.
 Neden başlanmıştı: NİYET: yüklenen logo üzerinden XSS/kötü-içerik engellensin.
 Nerede durdu: DURUŞ SEBEBİ YOK; kısmi önlem var ama yetersiz.
-Bugünkü durum: ❓ TEYİT GEREK
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ TEYİT GEREK~~ → ⬜ AÇIK (2026-09-02, PO kararı; XSS gerçek açık iş — kanıt ↓)
 Etkisi: Kötü niyetli logo URL'i ile XSS/izleme riski (düşük-orta).
 İş boyu: S
 Kaynak: karar-defteri (NUMARASIZ, logoUrl XSS) · Numara: NUMARASIZ
 ⚠️ bilanço KISMEN düzeltildi: (1) frontend `branding/page.tsx:50 isSafeLogoUrl` VAR ama YALNIZ istemci-tarafı, sadece `protocol === 'https:'` kontrol ediyor (host/MIME allowlist değil; kullanıcı API'yi doğrudan çağırıp atlayabilir). (2) Backend logoUrl doğrulaması hâlâ çıplak `z.string().url()` (`selfServeController.ts:367`, `tenantController.ts:11,82`) — host/MIME allowlist YOK. (3) CSP `img-src 'self'` başlığı VAR ama yalnız `/uploads` statik rotasına uygulanıyor (`server.ts:74`), tenant `logoUrl` bu rotadan servis edilmiyor → logoUrl'i CSP KAPSAMIYOR. Sonuç: bilanço iddiası ("z.string().url() yetersiz + CSP eksik") özünde DOĞRU; yalnız "hiç guard yok" değil (istemci https-guard var). ❓ korunur.
-✅ **KOD-TEYİT (2026-09-02, G1 çapraz-doğrulama): XSS ENDİŞESİ HÂLÂ AÇIK.** Backend hâlâ çıplak `z.string().url()` (`tenantController.ts:11,82`, `selfServeController.ts:373`) — host/MIME allowlist YOK. CSP `img-src 'self'` (`server.ts:74`) yalnız o statik rotada; tenant `logoUrl` oradan servis EDİLMİYOR → CSP logoUrl'i KAPSAMIYOR. **❓ korunur (XSS düzeltilmedi).**
-> ⚠️ **ÇAKIŞMA — NUMARA (İŞ 0, PO KARARINA · numara VERİLMEDİ, çözülmedi):** Bu **kart G1-23 = logoUrl XSS** (host/MIME allowlist + CSP; köken: SAYIM:103 NUMARASIZ). Ancak `00-KARAR-TAKIP` Faz 3b bloğu **"G1-23 → 🗑️ GEÇERSİZ"** derken AYRI bir konuyu (logoUrl **sahiplik/IDOR guard'ı** — admin başka tenant'ın logosunu yazabilir mi) kastediyor. **FARKLI KONU** — XSS ≠ sahiplik-guard'ı. Sahiplik guard'ı gerçekten VAR (🗑️ o konu için doğru) AMA **XSS endişesi bununla KAPANMAZ** → KARAR-TAKIP'teki "G1-23 geçersiz" etiketi bu kartı yanlışlıkla "çözülmüş" GÖSTERİYOR. ⭐ Gerçek durum: XSS **AÇIK**. **PO:** KARAR-TAKIP'teki "G1-23 🗑️" düzeltilsin mi / XSS'e ayrı numara mı?
+✅ **KOD-TEYİT (2026-09-02, G1 çapraz-doğrulama): XSS ENDİŞESİ HÂLÂ AÇIK.** Backend hâlâ çıplak `z.string().url()` (`tenantController.ts:11,82`, `selfServeController.ts:373`) — host/MIME allowlist YOK. CSP `img-src 'self'` (`server.ts:74`) yalnız o statik rotada; tenant `logoUrl` oradan servis EDİLMİYOR → CSP logoUrl'i KAPSAMIYOR. **→ ⬜ AÇIK (XSS gerçek açık iş, düzeltilmedi).**
+> ⚠️ **ÇAKIŞMA ÇÖZÜLDÜ (PO kararı 2026-09-02; numara VERİLMEDİ — etiket düzeltildi):** Bu **kart G1-23 = logoUrl XSS** (host/MIME allowlist + CSP; köken: SAYIM:103 NUMARASIZ). `00-KARAR-TAKIP` Faz 3b bloğu **"G1-23 → 🗑️ GEÇERSİZ"** derken AYRI bir konuyu (logoUrl **sahiplik/IDOR guard'ı**) kastediyordu → **FARKLI KONU** (XSS ≠ sahiplik-guard). ⭐ **KISMİ KANITLA TAM KAPATMA** (21. hayalet-tamamlanmış): sahiplik guard'ı gerçekten VAR (o tespit DOĞRU, kaybolmaz) AMA **XSS bununla kapanmaz.** **PO KARARI:** G1-23 **⬜ AÇIK'a DÖNDÜ** (XSS takip taşıyıcısı kart); KARAR-TAKIP'teki 🗑️ etiketi G9-03 deseniyle damgalandı (satır 62). Kaynak hiyerarşisi: **KURAL 15** (kök CLAUDE.md — kart↔özet çelişkisinde KART kazanır).
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
