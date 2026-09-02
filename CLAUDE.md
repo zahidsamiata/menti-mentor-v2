@@ -242,6 +242,18 @@
 - **GEREKÇE:** 2026-08-31'de e2e testi main'e ulaşmadı (stacked merge sırası), CI yeşil döndü, iki tur boyunca fark
   edilmedi; #66 ile taşınınca 442→445 kanıtlandı. (Detay: `docs/kararlar/00-KARAR-TAKIP.md` F.11.)
 
+### KURAL 15 ADAYI — KAYNAK HİYERARŞİSİ (PO onaylayacak)
+> ⚠️ Numara verme yetkisi PO'dadır; kural yazıldı ama **"ADAYI"** olarak — PO onaylayınca "ADAYI" düşer.
+- **G-kartları (`docs/raporlar/bilanco/kararlar/G*.md`) = AYRINTI + KANIT.** Kaynak doğrudur; her kalemin tam tanımı,
+  gerekçesi ve kod kanıtı oradadır.
+- **`00-KARAR-TAKIP` = ÖZET + numara.** Turlar arası hızlı bakış; kalemin TAM tanımını taşımaz.
+- ⭐ **ÇELİŞKİDE KART KAZANIR** — kanıt orada.
+- ⚠️ Özet belgede bir kalemi kapatmadan ÖNCE kartın konusunun aynı olduğu DOĞRULANIR. Kısmi kanıtla tam
+  kapatma yapılmaz.
+- **GEREKÇE:** 2026-08-29'da `00-KARAR-TAKIP` "G1-23 → 🗑️ geçersiz (guard var)" yazdı. Guard tespiti DOĞRUYDU ama
+  başka bir konuydu (sahiplik/IDOR); G1-23 kartının konusu XSS'ti ve o açıktı. Özet, ayrıntıyı yanlışlıkla kapattı
+  → 21. "hayalet tamamlanmış". (Detay: `docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md` [G1-23].)
+
 <!-- /çalışma-kuralları -->
 
 <!-- güvenlik-kuralları -->
