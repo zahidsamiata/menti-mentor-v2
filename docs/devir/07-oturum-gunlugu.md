@@ -743,3 +743,58 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **✅ LOGIN-PENDING ÇÖZÜLDÜ (backend PR #67 + çatı #148, GÜVENLİK İYİLEŞTİRMESİ):** register davet token'ı doğrular → davetli APPROVED, davetsiz PENDING. Yeni `services/invitationToken.ts`. FE token iletir. Register token dönmez. Testler: davetsiz/davet/sahte/uyuşmaz + OAuth-PENDING regresyonu. login 403/self-serve/reapply/OAuth DEĞİŞMEDİ. Şema/migration YOK.
 - **e2e beklentisi:** register→onboarding→ProfileStep (ulaşılamaz üç-soru assertion'ları çıkarıldı; deep adımlar kademeli akışa). ⚠️ E2E düzeltme pointer'a girene kadar (S29) KIRMIZI — beklenti zayıflatılmadı.
 - **Sıradaki:** PO iki PR merge (#67 + #148) → **S29 pointer bump** → e2e YEŞİLE döner → kalan akışlar Playwright'a kademeli (C/E/F/G/H) → OAuth davet token turu (F.11 #13) → içerik oturumu · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-02 (10) — G1 KART↔KOD ÇAPRAZ DOĞRULAMA + 11 KART GÜNCELLEME
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Sayım turu bulgusunun ("kartlar donduruldu, iş yapıldı, kart güncellenmedi") G1 grubunda kök-neden düzeltmesi. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum (2026-09-02)
+- **Çatı main HEAD:** `06a23ae` (Merge PR #149 — S29 pointer re-bump). Bu turda backend'e DOKUNULMADI → pointer değişmedi.
+- **Dal:** `docs/g1-kart-guncelleme-2026-09-02` (temiz `origin/main`'den). **PR açık — MERGE ETME.**
+
+## A) Yapılanlar (kanıtlı)
+- **PLANLA turu (önce):** G1 (30 kart) tek tek KODDAN doğrulandı, altı-alanlı bloklarla (kart↔kod). **🔴 HAYALET (✅ ama yapılmamış) = 0.** VERDİKT: 🔵 5 · 🟡 4 · ⚫ 2 · 🟢 19.
+- **BYPASS turu (bu):** 11 kart güncellendi (`bilanco/kararlar/G1-guvenlik-kvkk.md`; eski durum üstü-çizili `[ESKİ]` damgalı — G9-03 deseni; başlık özet-tablosu yenilendi):
+  - **Kanıtlı (4):** G1-02 ❓→✅TEYİT (`matchingController.ts:75-80` disc sızmaz) · G1-05 🟡→✅ (`me/data-export`+`delete-account`, #59) · G1-07 ⬜→✅ (`schema.prisma:1293` Consent + `CONSENT_VERSION` canlı) · G1-19 ❓→✅TEYİT (okumalar `TenantMembership`).
+  - **Kısmen (4, dürüst ayrım):** G1-06 ⬜→🟡 (FeedbackLog 3-yıl ✅, Message TODO/G1-10) · G1-16 ⬜→🟡 (`backfill-consent.ts` var+çalıştı, K3 açık) · G1-26 ⬜→🟡 (`suspicionRoutes.ts:9` IP-limit ✅, CAPTCHA açık) · **G1-12 🟡→⬜ TERS DÜZELTME** (kart "kısmen" demiş ama kod-kanıtsız; KURAL 13 iki-dilli 11 terim → 0 sonuç; KOD KAZANIR).
+  - **Yeniden tanım/kapsam (3):** G1-01 ⚫ kapsam-düşürüldü (PO tek-kutu; ⚠️ **yaş VERİSİ sistemde YOK**) · G1-04 ⚫ (public tasarım, izolasyon açığı değil) · G1-17 ⚫/✅ (`middleware.ts` VAR + admin-guard backend'de).
+- **⭐ İŞ 0 — İKİ NUMARA ÇAKIŞMASI (kaynak+kök incelendi, numara VERİLMEDİ, PO KARARINA):**
+  - **G1-19:** kart = qualityMultiplier **okuma-kaynağı** (köken SAYIM:92 "K7 akrabası") ↔ `00-KARAR-TAKIP` Faz 3c "G1-19 (kalite çarpanı **çift-uygulama**)" → **FARKLI KONU.**
+  - **G1-23:** kart = logoUrl **XSS** (köken SAYIM:103 NUMARASIZ; kodda **AÇIK**) ↔ Faz 3b "G1-23 → 🗑️ geçersiz" = logoUrl **sahiplik/IDOR guard'ı** → **FARKLI KONU** (XSS yanlışlıkla "çözülmüş" görünüyor).
+  - İkisi de birleştirilmedi/çözülmedi; kartlara `⚠️ ÇAKIŞMA` notu düşüldü.
+- **Senkron:** `00-KARAR-TAKIP` (tek blok) · `09-DURUM` (tur bloğu) · bu bölüm. **📸 etiket sorusu** (dondurulmuş ama güncelleniyor → hibrit) PO'ya bırakıldı (unilateral değiştirilmedi).
+
+## B) Sınırlar / dürüstlük
+- Commit disiplini 4 commit istiyordu; kanıtlı/kısmen/kapsam grupları TEK dosyada → interaktif hunk-staging (`git add -p`) bu ortamda kapalı → **2 commit** (kart + senkron). Şeffaf sapma.
+- Kod/DB/şema/seed DEĞİŞMEDİ · #110 ellenmedi · alt-ajan kullanılmadı · numara doğurulmadı · başka gruba (G2-G11) dokunulmadı.
+
+## C) Sıradaki
+- PO: G1 kart PR merge + İŞ 0 iki çakışma kararı (birleştir/ayrı-numara) + 📸 etiket kararı.
+- Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp, ölü-kod/belge grupları) → G2-G8/G11 → içerik oturumu · OAuth turu (F.11 #13) · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-02 (11) — G1 ÇAKIŞMA DÜZELTMESİ + KAYNAK HİYERARŞİSİ (KURAL 15)
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Önceki turun iki numara çakışması PO kararıyla kapatıldı; bir "hayalet-tamamlanmış" desen kalıcı kurala bağlandı. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum
+- **Çatı main HEAD:** `06a23ae` (#149). #150 (G1 kart PR) **AÇIK, merge olmadı** → çakışma önlemek için **#150'nin dalına devam** (`docs/g1-kart-guncelleme-2026-09-02`), yeni dal açılmadı.
+
+## A) Yapılanlar (PO kararları uygulandı)
+- **İŞ 1 — G1-19 çift-uygulama nereye ait (KANIT):** 11 G2 kartı (G2-01..11) tek tek tarandı — **hiçbiri kapsamıyor** (KAPSAM DIŞI). Çift-uygulama evsiz DEĞİL: tasarım `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` **§9.5 + KALEM §16-md.8** (⬜ AÇIK, numara-adayı) tutuyor. → `00-KARAR-TAKIP` satır 79 yanlış "G1-19" etiketi G9-03'le damgalandı, gerçek evine yönlendirildi. **Numara VERİLMEDİ** (PO'da).
+- **İŞ 2 — G1-23 (⭐ 21. HAYALET):** KARAR-TAKIP "G1-23 → 🗑️ geçersiz" logoUrl **sahiplik/IDOR guard'ı** içindi (o tespit DOĞRU, korundu) ama **kart konusu XSS** (host/MIME + CSP) ve o KODDA AÇIK (`tenantController.ts:11,82` çıplak `z.string().url()`; CSP `server.ts:74` yalnız `/uploads`). **KISMİ KANITLA TAM KAPATMA** = hayalet. G1-23 kartı **❓→⬜ AÇIK**; KARAR-TAKIP satır 62 (tek yer) G9-03'le damgalandı + desen kaydı.
+- **İŞ 3 — 📸→🔄:** `G1-guvenlik-kvkk.md` YAŞAYAN oldu (gövde korunur; KURAL 12 kasıtlı geçerli). Diğer kart dosyaları (G2-G11) DOKUNULMADI — kendi turlarında.
+- **İŞ 4 — KURAL 15 ADAYI:** kök `CLAUDE.md`'ye kaynak hiyerarşisi (kart=ayrıntı+kanıt · KARAR-TAKIP=özet · **çelişkide KART kazanır** · kısmi kanıtla tam kapatma yasak). G1 kart başına kısa hali eklendi.
+- **İŞ 6 — TÜM 🗑️ TARAMASI (yalnız tespit):** geçersiz-etiketli kalemler tarandı (G2-01..05 · G9×5 · G10-376 · G10-63 · T8/md.76 · md.129 · G1-23). ⭐ **G1-23 TEK partial-closure hayaleti** (🔴); geri kalanların hepsi **🟢 TAM** (DISC→Big Five konu geçersiz · belge-hijyen · dosya-yok · iddia-çürük · çelişki-çözüldü). Başka hayalet YOK. **G1-23 dışında hiçbir durum değiştirilmedi.**
+
+## B) Sınırlar / dürüstlük
+- Numara VERİLMEDİ (KURAL 15 "ADAYI"; çift-uygulama numara-adayı §16-md.8'de). Gövde SİLİNMEDİ (G9-03 damgası). G2-G11 kartlarına DOKUNULMADI. #110 ellenmedi. Alt-ajan yok.
+
+## C) Sıradaki
+- PO: #150 (artık çakışma düzeltmesini de taşıyor) merge · çift-uygulama numara kararı · İŞ 6 sonucunu onay.
+- Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp + KURAL 15 notu + 📸→🔄) → G2-G8/G11 → içerik oturumu · OAuth turu · S26 · Faz 5.
