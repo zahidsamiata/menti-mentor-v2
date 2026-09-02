@@ -1,6 +1,6 @@
 # 00 — KARAR & İŞ TAKİBİ (NE KALDI · NE YARIM · NE UNUTULDU)
 
-**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-08-23
+**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-09-02 (G9/G10 kart↔durum güncelleme + sahiplik)
 
 > **Bu belge NEDEN var:** "Hep önümdeki işe odaklanıyorum ama arkada yarım bıraktığım işleri, ölü kodları,
 > alıp da uygulamadığım kararları unutuyorum; canlıya çıkınca eksik keşfediyorum." Bu belge o sorunu çözer:
@@ -116,6 +116,8 @@
 > **⚡ GÜNCELLEME (2026-09-02, 3) — KURAL ONAYLARI + KURAL 16 + S30 (yalnız-belge, çatı PR — MERGE ETME):** PO 5 kararı işlendi. **KURAL 14 (CI yeşil ≠ test koştu) + KURAL 15 (kaynak hiyerarşisi) → ✅ ONAYLANDI** ("ADAYI" düştü; KURAL 14'e PO eki: "CI yeşil" raporlanırken KAÇ TEST KOŞTUĞU yazılır). **KURAL 16 ADAYI** eklendi (sayılan birim tanımlanır — "N kalem" yetmez, hangi yerlerdeki kalemler sayıldı yazılır). **S30 sözü** (Faz 5 promptunda tasarım §16 KALEM LİSTESİ okunacak — md.8 çift-uygulama numarasız, §16'da kalır). **Çift-uygulamaya numara VERİLMEDİ** (PO kararı; §16-md.8'de). Kod/DB DEĞİŞMEDİ. **MERGE EDİLMEDİ.**
 >
 > **⚠️ 🗑️ TARAMASI SONUCU (2026-09-02, KURAL 16 birim beyanıyla):** **15 geçersiz-etiketli kalem** tarandı — birim: kart durum satırı + PO notu + karar-takip + alt maddeler (yalnız kart durumu sayılsaydı 6 çıkardı; önceki turun "6 kart" beyanı bu dar birimdi → **KURAL 16 bu vakadan doğdu**). **Sonuç: 14 MEŞRU TAM KAPATMA** (konu tümden geçersiz: DISC matrisi G2-01..05 ×5 · çürütülen iddia/dosya-yok ×4 [G10-376/G10-63/T8/md.129] · belge-hijyeni G9 ×5), **1 KISMİ KAPATMA** (G1-23 → ⬜ AÇIK'a döndü, XSS gerçek açık iş). ⭐ **Sistemik sorun YOK — G1-23 tekil hata** (boşluk bir kez açıldı → KURAL 15 yine de gerekli). **G1-23 dışında hiçbir 🗑️ durumu değiştirilmedi** (PO KARAR 4: başka kalem açılmaz).
+
+> **⚡ GÜNCELLEME (2026-09-02, 4) — G9/G10 KART↔DURUM GÜNCELLEME + SAHİPLİK (yalnız-belge, çatı PR — MERGE ETME):** G9 + G10 kart dosyaları KODDAN doğrulanıp güncellendi (📸 dondurulduktan sonra Faz 1a/1b'de iş yapıldı, kart durumları donuk kalmıştı). **🔴 HAYALET = 0.** **G9 (12 kart):** 11'i ✅ (Faz 1a satır-içi ✅ notları kanıt — registerMessages/AdminAuditLog/PROJECT_STATUS arşiv/model-yönlendirme vb.), **G9-06 🟡 KALIR** (📸 done, ad-tarihsizleştirme G9-11/12'de). **G10:** **G10-07 ⬜→✅** (llmRetry.ts SİLİNDİ #56, `find backend/src -iname "llmRetry*"` boş) · **G10-01 ⬜→🟡** (3 parçadan llmRetry silindi, TenantContext-ikiz çürük, MeetingScheduler açık kalır) · **G10-12 ❓→⬜ AÇIK** (PO: kulüp AKTİF ürün — STK yetkisi; iş=FE+G1-13; 🔵 değil ⬜ çünkü KURAL 10=6 kod). **⭐ İŞ 1 — SAHİPLİK:** `llmRetry.ts` iki karttaydı (G10-01+G10-07); SAHİP=**G10-07** seçildi (dedike+dar+dosya-özel kanıt), G10-01 referans verir. Bayat "[G10-08] llmRetry" çapraz-refi de düzeltildi (doğrusu G10-07). **İŞ 4:** G9+G10 dosyaları **📸→🔄 YAŞAYAN** + KURAL 15 notu (G1 deseni; G2-G8/G11 kendi turlarında). **İŞ 5 — DESEN:** "aynı konu birden çok kartta" **F.12**'ye kaydedildi (numara VERİLMEDİ; G1-23'ün TERS yönü — bitmiş iş açık göründü). Çapraz-referans taraması **AYRI TUR** (PO şartı, YAPILMADI). Kod/DB/şema DEĞİŞMEDİ. **MERGE EDİLMEDİ.**
 
 ## ⭐ SONRAKİ-TUR SÖZLERİ (KURAL 11 — HER OTURUM BAŞINDA OKU)
 
@@ -583,6 +585,27 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 > **Bugün 0 kullanıcıyı etkiliyor** (6/6 LOCAL, hepsi APPROVED) → latent. **⭐ (12) LOCAL düzeltmesi bunu YENİ BOZMADI**,
 > olduğu gibi bıraktı (regresyon testi kanıtlıyor). **Düzeltme 5 katmana dokunur** (state imzalı yapı, alan eklemek
 > dikkat ister) → **AYRI BYPASS turu** (PO 2026-09-01, Seçenek A ile ertelendi).
+
+---
+
+### F.12 — ⚠️ AYNI KONU BİRDEN ÇOK KARTTA (2026-09-02, G9/G10 doğrulamasında bulundu) — **PO numaralandıracak**
+
+> ⚠️ Bu bir **desen kaydıdır** — açık kalem, numara VERİLMEDİ (numara yetkisi PO'dadır).
+>
+> **Vaka:** `llmRetry.ts` iki kartta anlatılıyor — **G10-01** (3 parçalı toplu temizlik) ve **G10-07** (dedike kart).
+> Dosya Faz 1b'de SİLİNDİ (backend #56); G10-01 bunu biliyordu, G10-07 hâlâ "silinmedi/atıl" diyordu → **iş bitmiş
+> ama AÇIK görünüyordu.** Bu turda **sahiplik kararıyla** çözüldü: `llmRetry.ts` konusunun SAHİBİ = **G10-07** (dedike +
+> dar kapsam + dosya-özel kanıt → değişince tek yer güncellenir); G10-01'in llmRetry parçası artık **oraya referans**
+> verir, G10-01 kendi kapsamını (MeetingScheduler + TenantContext-ikiz) korur. (Bonus: G10-01'in "llmRetry ayrı kart =
+> [G10-08]" çapraz-referansı **bayattı** — doğrusu [G10-07]; düzeltildi.)
+> **⭐ G1-23'ten FARKI:** G1-23'te özet belge ayrıntıyı yanlış KAPATMIŞTI (bitmemiş iş bitmiş göründü). Burada kardeş
+> kart güncellenmedi (bitmiş iş açık göründü). Ters yön, aynı aile: **aynı konu iki yerde, biri güncel değil.**
+> **⚠️ "TEKİL" SONUCU BU DESEN İÇİN GEÇERSİZ:** G1-23 sonrası 15 kalem tarandı ama o tarama "kapatma gerekçesi tüm
+> konuyu kapsıyor mu" diye sordu. Bu FARKLI bir soru — "aynı konu kaç kartta duruyor". O soru HİÇ SORULMADI.
+> **⭐ KÖK SEBEP:** 184 kart konuya göre 10 gruba bölündü ama bazı konular birden çok gruba düşüyor (ölü kod · belge
+> hijyeni · güvenlik teyitleri).
+> **Sonraki adım:** çapraz-referans taraması — **AYRI TUR** (bu turda YAPILMADI, PO şartı). Sahiplik deseni: bir konu =
+> bir sahip kart, diğerleri referans verir.
 
 ---
 

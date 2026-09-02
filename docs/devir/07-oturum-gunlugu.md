@@ -823,3 +823,29 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## C) Sıradaki
 - PO: bu PR merge · KURAL 16'ya numara/onay · S30 Faz 5'te izlenecek.
 - Sonra: **G9/G10 çapraz doğrulama** (aynı kalıp + KURAL 15/16 + 📸→🔄) → G2-G8/G11 → **içerik oturumu (YENİ SOHBET)** · OAuth turu · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-02 (13) — G9/G10 KART↔DURUM GÜNCELLEME + SAHİPLİK
+
+**📸 Kapanış fotoğrafı** — git-teyitli. G9+G10 kart dosyaları koddan doğrulanıp güncellendi; llmRetry sahiplik kararı verildi; desen kaydı açıldı. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum
+- **#151 MERGE EDİLDİ** (PO) → `origin/main` HEAD `3eef270` (Merge PR #151, 2026-09-02T10:09Z); KURAL 14/15 ✅ + KURAL 16 ADAYI + S30 artık main'de (merge-base ata doğrulandı).
+- **Bu tur dalı:** `docs/g9-g10-kart-guncelleme-2026-09-02` (temiz `origin/main`'den `3eef270`).
+
+## A) Yapılanlar
+- **⭐ İŞ 1 — SAHİPLİK KARARI (llmRetry.ts):** dosya İKİ karttaydı — **G10-01** (3-parçalı toplu-sil demeti) + **G10-07** (dedike kart). SAHİP = **G10-07** seçildi (KANIT: dedike + dar kapsam + dosya-özel kod kanıtı → değişince tek yer güncellenir; talimattaki ölçüt). G10-07 ⬜→✅ (dosya SİLİNDİ #56; `find backend/src -iname "llmRetry*"`=boş, `matchReason.ts` de yok — 2026-09-02 kod-teyidi). G10-01 llmRetry parçası → G10-07'ye referans; kendi kapsamı (MeetingScheduler + TenantContext-ikiz) korundu. Bayat "[G10-08] llmRetry ayrı kart" çapraz-refi düzeltildi (doğrusu G10-07; G10-08=qualityMultiplier).
+- **İŞ 2 — G9 (12 kart):** her kartın "Bugünkü durum" satırı G9-03 deseniyle güncellendi (kart-başı ✅ Faz 1a notları kanıt). 11'i ✅ (G9-02/03/04/05/08/09/10/13/14/15/16), **G9-06 🟡 KALIR** (📸 done; ad-tarihsizleştirme referans-kırma riski → G9-11/12). G9 başlık ÖZET TABLOSU (16 kart) eklendi (G1'de asıl bayat olan oydu).
+- **İŞ 3 — G10:** G10-01 ⬜→🟡 (3 parçadan 1 silindi, ikiz çürük, MeetingScheduler açık) · **G10-12 ❓→⬜ AÇIK** (PO notu kulüp modeli AKTİF ürün — STK yetkisi; iş=FE+G1-13; 🔵 DEĞİL çünkü KURAL 10=6 kod + PO aktif-ürün dedi; KARAR-TAKIP:314 Y8 🌱 CANLI NİYET ile tutarlı). G10 başlık ÖZET TABLOSU (3 değişen kart) eklendi.
+- **İŞ 4 — 📸→🔄:** G9 + G10 dosyaları YAŞAYAN oldu (ETİKET DEĞİŞİMİ + GÖVDE KORUNUR + KURAL 12 kasıtlı) + KURAL 15 kaynak-hiyerarşisi notu (G1 deseni). **G2-G8/G11 DOKUNULMADI** — kendi turlarında.
+- **⭐ İŞ 5 — DESEN KAYDI:** `00-KARAR-TAKIP` **F.12** "aynı konu birden çok kartta" (numara VERİLMEDİ, PO'da). G1-23'ün TERS yönü: G1-23'te özet ayrıntıyı yanlış KAPATMIŞTI (bitmemiş iş bitmiş göründü); burada kardeş kart güncellenmedi (bitmiş iş açık göründü). "Tekil" sonucu bu desen için GEÇERSİZ (o soru hiç sorulmamıştı). Çapraz-referans taraması = AYRI TUR.
+- **İŞ 6 — senkron:** 00-KARAR-TAKIP tur notu (2026-09-02, 4) + Son güncelleme · 09-DURUM tur bloğu (2026-09-02-4) · bu bölüm.
+
+## B) Sınırlar / dürüstlük
+- Kod/DB/şema DEĞİŞMEDİ. Kanıtsız hiçbir durum değiştirilmedi. Gövde SİLİNMEDİ (G9-03 damgası). **Çapraz-referans taraması YAPILMADI** (PO şartı, ayrı tur). G1-G8/G11 kart dosyalarına DOKUNULMADI. Numara VERİLMEDİ. #110 ellenmedi. Alt-ajan yok. **MERGE EDİLMEDİ.**
+
+## C) Sıradaki
+- PO: bu PR merge · F.12 desen kalemini numaralandır.
+- Sonra: 🔵 **çapraz-referans taraması** (ayrı tur, PO onaylı) → G2-G8/G11 kart↔kod doğrulama (Faz 5-8 sırası) → içerik oturumu · OAuth turu · S26 · Faz 5.
