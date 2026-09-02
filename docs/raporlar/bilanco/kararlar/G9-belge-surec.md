@@ -1,12 +1,39 @@
 # BİLANÇO KARAR DOSYASI — G9: Belge düzeni / çalışma tarzı / süreç
 
-**📸 DONDURULMUŞ** · 2026-08-27 · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c) G9 başlığı + `karar-defteri-2026-08-26.md` GRUP 7 (belge-hijyen). Salt-okuma + kod-teyit; kod/DB/PR/commit YOK, mevcut belge değiştirilmedi.
+**🔄 YAŞAYAN** (gövde 2026-08-27 snapshot; durumlar güncelleniyor) · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c) G9 başlığı + `karar-defteri-2026-08-26.md` GRUP 7 (belge-hijyen).
+
+> ⚠️ **ETİKET DEĞİŞİMİ (PO kararı 2026-09-02): ~~📸 DONDURULMUŞ~~ → 🔄 YAŞAYAN.** Gerekçe: kart durumları artık güncelleniyor (G9/G10 çapraz doğrulama). ⭐ **GÖVDE KORUNUR** — özgün bulgular YENİDEN YAZILMAZ; değişiklik G9-03 deseniyle işlenir (`~~[ESKİ · tarih]~~` + ⚠️ GÜNCELLEME + kanıt). ⚠️ **KURAL 12 artık geçerli:** 30 günü aşarsa "bayat" sayılır — bu KASITLI.
+
+> ⭐ **KAYNAK HİYERARŞİSİ (KURAL 15 — kök CLAUDE.md):** Bu G-kartları = **AYRINTI + KANIT** (her kalemin tam tanımı, gerekçesi, kod-kanıtı burada). `00-KARAR-TAKIP` = ÖZET + numara. **ÇELİŞKİDE KART KAZANIR** (kanıt burada). Özet belgede bir kalem kapatılmadan ÖNCE kartın konusuyla aynı olduğu doğrulanır — kısmi kanıtla tam kapatma yapılmaz.
+
+> ⚠️ **GÜNCELLEME (2026-09-02, G9/G10 ÇAPRAZ DOĞRULAMA — kart↔durum, salt-okuma):** Bu kartların ÇOĞU Faz 1a'da (2026-08-28) işlendi ve her kartın başında satır-içi `✅ YAPILDI` notu zaten VARDI — ama kart gövdesindeki **"Bugünkü durum:" satırı ve başlık dağılımı DONUK** kaldı (okuyan hâlâ 🗑️/⬜/❓ sanıyordu). Bu turda o satırlar güncellendi (**gövde SİLİNMEDİ — eski durum üstü-çizili `[ESKİ]` damgalı**, G9-03 deseni). Kod DEĞİŞMEDİ (yalnız-belge). **🔴 HAYALET = 0** (her ✅ Faz 1a kanıtına dayanır). 12 kart güncellendi: 11'i ✅, G9-06 🟡 KALIR (📸 kısmı done, ad-tarihsizleştirme G9-11/12'de).
 
 ## Mutabakat (beyan ↔ yazılan)
 
 - **Tur-5a beyanı (görev metni): G9 = 26 kalem.** Ancak canonical kaynak `00-SAYIM (c)` G9 listesinde **27 satır** var (ana tablo da "G9 | 27" yazar). **Fark açıklaması:** görev metnindeki "26" bir sayım-yuvarlamasıdır; canonical (c) 27 satırdır — bu dosya **27 kalem** üzerinden üretildi (zorlama/eleme yok).
 - **27 kalem dağılımı (c'deki durum kodları):** ✅ 3 · 🟡 3 · ⬜ 5 · ❓ 3 · 🗑️ 12 · 📌 1.
 - **Yazılan kart sayısı: 16** (🟡 3 + ⬜ 5 + ❓ 3 + 🗑️ 5-canlı). **Kart YOK: 11** → ✅ 3 + 📌 1 = 4 kalıcı/yapılmış · 🗑️ 7 madde-124'te düzeltilmiş = "zaten yapılmışlar" bölümüne.
+
+⚠️ **GÜNCELLEME (2026-09-02, G9/G10 çapraz-doğrulama — 16 kartın DURUM tablosu; Faz 1a işleri artık kart-durumuna yansıdı):**
+
+| kart | eski | yeni | kanıt (Faz 1a, 2026-08-28 · satır-içi ✅ notu) |
+|---|:---:|:---:|---|
+| G9-01 | (zaten ✅/geçersiz) | ✅ | madde-124: `backend/CLAUDE.md:92` "llmRateLimiter removed" — dokunulmadı |
+| G9-02 | ❓ | ✅ | kök `CLAUDE.md` registerMessages "PLANLANAN desen, kodda YOK" olarak düzeltildi |
+| G9-03 | 🗑️ | ✅ | 5 bayat satır (BH1-5) `[ESKİ]` damgalandı; ⭐ desen kök `CLAUDE.md`'ye KALICI KURAL oldu |
+| G9-04 | 🗑️ | ✅ | `AdminAuditLog` → `SystemLog` (schema:640) düzeltildi |
+| G9-05 | 🗑️ | ✅ | 09-DURUM blokları zaten güncelmiş → uzlaştırma ⚠️ notu (dürüst sapma) |
+| G9-06 | 🟡 | 🟡 KALIR | 📸 dondurma DONE; ad-tarihsizleştirme G9-11/12'de → 🟡 sürüyor |
+| G9-08 | 🗑️ | ✅ | `icerik/` 6 döküm → `docs/arsiv/icerik/` (git mv) + yönlendirme |
+| G9-09 | ⬜ | ✅ | `PROJECT_STATUS.md` → `docs/arsiv/`; kökte yok, `CLAUDE.md:16` işaretçisi düzeltildi |
+| G9-10 | ⬜ | ✅ | INDEX eksikleri + 4 üst-etiket eklendi (kısmi: tam label G9-11/12'de) |
+| G9-13 | ⬜ | ✅ | `admin-panelleri-tasarim` → `docs/arsiv/` (6 panel canlıda) |
+| G9-14 | ⬜ | ✅ | tarama yapıldı, aksiyon gerekmedi (yalnız yasal isim korundu — G9-14 istisnası) |
+| G9-15 | ❓ | ✅ | model yönlendirme 5 yerden çıkarıldı (kök CLAUDE.md + 4 devir belgesi) |
+| G9-16 | 🗑️ | ✅ | karar = arşive taşı (G9-08 ile birlikte uygulandı) |
+
+> Değişmeyen kartlar (bu turda dokunulmadı): **G9-07** 🟡 (OneDrive taşıma, PO-manuel yerel adım) · **G9-11** 🟡 (taşıyıcı-ad reorg) · **G9-12** ⬜ (büyük reorg turu). Bunlar gerçek açık iş — snapshot'ta doğru.
+> **Özet:** 16 karttan 12'sinin durumu yenilendi (11 ✅ + G9-06 🟡 KALIR); 3'ü zaten açık iş (G9-07/11/12); G9-01 zaten kapalıydı.
   - Not: 🗑️ 12'nin **7'si** madde-124 turunda (2026-08-27, backend #55 + çatı) düzeltildi → kart YOK, "zaten yapılmışlar"a. **5'i** hâlâ açık geçersiz-adayı (belge-içi bayat gövde, içerik/ 6 belge vb.) → kart alır (PO onayı gerek).
 - **Kod-teyidi:** 8 kalem kod/dosya-gerçeğiyle teyit edildi, **0 çürüdü**, **0 ❓-çözülemez** (aşağıda kartlarda belirtildi).
 - **Durum dağılımı (bu dosya):** işleme-alınabilir açık = 16 · zaten-yapılmış/kalıcı = 11.
@@ -40,7 +67,7 @@ Numara: NUMARASIZ
 Ne: Kök CLAUDE.md (satır 256) "merkezi modül `registerMessages.ts`" diyor; kodda bu adla dosya yok.
 Neden başlanmıştı: NİYET var — dağınık inline hata-mesajı yerine merkezi/enumeration-safe mesaj modülü önerisi.
 Nerede durdu: CLAUDE.md satırı "`registerMessages.ts` / kod-bazlı resolver" der — yani "kod-bazlı resolver" alternatifi de anılıyor; dosya adı bir öneri/örnek olabilir, gerçek dosya yaratılmamış.
-Bugünkü durum: ❓ (belge bir dosya adı veriyor ama kod o adı taşımıyor — ya belge düzeltilmeli ya modül yaratılmalı)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ (belge bir dosya adı veriyor ama kod o adı taşımıyor — ya belge düzeltilmeli ya modül yaratılmalı)~~ → ✅ YAPILDI (Faz 1a: `CLAUDE.md` "PLANLANAN desen, kodda YOK" olarak düzeltildi; kart-başı notu kanıt)
 Etkisi: Düşük-Orta (belge yanıltıcı; gerçek merkezileştirme işi ayrı — bkz. G6 C17/temiz-kod)
 İş boyu: S (belge düzeltme) / M (gerçek modül)
 Kaynak: karar-defteri GRUP 7 (T3-C/B8)
@@ -58,7 +85,7 @@ Numara: NUMARASIZ
 Ne: Çeşitli karar belgelerinde ⚠️ GÜNCELLEME notu eklenmiş ama ESKİ (bayat) gövde satırı silinmemiş/kalmış (BH1-BH5): SJT "4 soru", sunucu-konumu belirsiz, maxMeetings uygulanmıyor, timezone, IDOR eski ifadeler.
 Neden başlanmıştı: NİYET var — belge-hijyen ilkesi (KURAL 6: sil değil, ⚠️ notla düzelt) uygulanmış ama gövde temizliği yarım.
 Nerede durdu: DURUŞ SEBEBİ YOK (kısmi hijyen; her belgeye tekil dokunuş gerekiyor).
-Bugünkü durum: 🗑️ (geçersiz-adayı: bayat gövde satırları; PO onayıyla ⚠️ notla düzelt/arşivle)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] 🗑️ (geçersiz-adayı: bayat gövde satırları; PO onayıyla ⚠️ notla düzelt/arşivle)~~ → ✅ YAPILDI (Faz 1a: 5 bayat satır BH1-5 `[ESKİ]` damgalandı; desen kök `CLAUDE.md`'ye KALICI KURAL oldu)
 Etkisi: Orta (sonraki okuyucu bayat gövdeyi gerçek sanabilir)
 İş boyu: M
 Kaynak: karar-defteri GRUP 7 (T1-B2 BH1-5)
@@ -75,7 +102,7 @@ Numara: NUMARASIZ
 Ne: platform-strateji belgesinde (:106) "AdminAuditLog tablosu" anılıyor; gerçekte audit `SystemLog`'a yazılıyor. Belge-içi ⚠️ notu var ama gövde bayat.
 Neden başlanmıştı: NİYET var — belge-hijyen (⚠️ not eklenmiş).
 Nerede durdu: DURUŞ SEBEBİ YOK (gövde düzeltme yarım).
-Bugünkü durum: 🗑️ (geçersiz-adayı gövde; PO onayıyla ⚠️ notla düzelt)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] 🗑️ (geçersiz-adayı gövde; PO onayıyla ⚠️ notla düzelt)~~ → ✅ YAPILDI (Faz 1a: `AdminAuditLog`→`SystemLog` düzeltildi; schema:640 grep-kanıtlı)
 Etkisi: Düşük (yalnız belge; SystemLog gerçeği başka yerde doğru)
 İş boyu: S
 Kaynak: karar-defteri GRUP 7 (T2-D :60)
@@ -92,7 +119,7 @@ Numara: NUMARASIZ
 Ne: 09-DURUM.md içinde eski çelişkili durum blokları silinmemiş (chat için 3 farklı durum, VisibilityOptIn 2 durum, 4-rol, platform-tema).
 Neden başlanmıştı: NİYET var — durum-canonical tek yer olmalı; eski katmanlar arşive taşınmalı.
 Nerede durdu: DURUŞ SEBEBİ YOK (arşive-taşıma PO kararı bekliyor).
-Bugünkü durum: 🗑️ (geçersiz-adayı bloklar; PO kararı: arşive taşı)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] 🗑️ (geçersiz-adayı bloklar; PO kararı: arşive taşı)~~ → ✅ YAPILDI (Faz 1a: bloklar 09-DURUM'da zaten güncelmiş → uzlaştırma ⚠️ notu; dürüst sapma kart-başında)
 Etkisi: Orta (canonical durum dosyası kafa karıştırıyor)
 İş boyu: M
 Kaynak: karar-defteri GRUP 7 (T1-B3 belge-denetimi :59)
@@ -109,7 +136,7 @@ Numara: NUMARASIZ
 Ne: `docs/kararlar/oz-denetim/durum-panosu-2026-08-14.md` üst-etiketi "🔄 YAŞAYAN, son güncelleme 2026-08-14" ama 2026-08-27 itibarıyla ~13 gün güncellenmemiş. "Yaşayan" iddiası artık yanlış.
 Neden başlanmıştı: NİYET var — kararları tek-bakışta gösteren yaşayan pano.
 Nerede durdu: Kod ilerledi ama pano güncellenmedi → yaşayan iddiası bayatladı; PO kararı bekliyor.
-Bugünkü durum: 🟡 (📸 dondurulmuşa düşür + 2 tarihli-ad tarihsizleştir)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] 🟡 (📸 dondurulmuşa düşür + 2 tarihli-ad tarihsizleştir)~~ → 🟡 KALIR (Faz 1a: 📸 dondurma DONE; ⚠️ ad-tarihsizleştirme = referans-kırma riski → **G9-11/12** büyük reorg turuna bırakıldı, hâlâ açık)
 Etkisi: Orta (belge-hijyen KURAL 3/4; yanlış "yaşayan" etiketi)
 İş boyu: S
 Kaynak: karar-defteri GRUP 7 (A11)
@@ -143,7 +170,7 @@ Numara: A10
 Ne: İçerik keşif belgeleri (`icerik/bolumler/01-disc..05` + dated dosyalar) silinmiş `seed-questions.ts`'e ve "20 DISC sorusu" bayatına dayanıyor; kod gerçeği 32 DISC.
 Neden başlanmıştı: NİYET var — içerik keşfi/döküm (aksiyon kaynağı).
 Nerede durdu: Kod (DISC 32) ilerledi, belgeler güncellenmedi; ⚠️ GÜNCELLEME notu gerek.
-Bugünkü durum: 🗑️/⬜ (kökten bayat; PO kararı: ⚠️ not + gerekirse arşiv)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] 🗑️/⬜ (kökten bayat; PO kararı: ⚠️ not + gerekirse arşiv)~~ → ✅ YAPILDI (Faz 1a: 6 döküm `docs/arsiv/icerik/`'e git mv + 🗄️ not + güncel kaynağa yönlendirme; G9-16 kararı = arşiv)
 Etkisi: Orta (içerik kararları bu belgelerden okunuyor, yanlış sayı)
 İş boyu: M
 Kaynak: karar-defteri GRUP 7 (T2-C :64)
@@ -161,7 +188,7 @@ Numara: NUMARASIZ
 Ne: `PROJECT_STATUS.md` (kökte) 9 Ağustos'tan eski/dondurulmuş onboarding; CLAUDE.md hâlâ ona işaret ediyor ama canonical durum 09-DURUM.
 Neden başlanmıştı: NİYET var — canonical durum tek yer (09-DURUM); eski dosya arşive.
 Nerede durdu: DURUŞ SEBEBİ YOK (arşive taşıma + yönlendirme yapılmadı).
-Bugünkü durum: ⬜ (arşivle + 09-DURUM'a yönlendirme notu)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ (arşivle + 09-DURUM'a yönlendirme notu)~~ → ✅ YAPILDI (Faz 1a: `PROJECT_STATUS.md` → `docs/arsiv/` git mv; kökte YOK, `CLAUDE.md:16` işaretçisi 09-DURUM canonical'a çevrildi)
 Etkisi: Düşük-Orta (onboarding okuyucusu bayat statü görebilir)
 İş boyu: S
 Kaynak: karar-defteri GRUP 7 (T2-B :207)
@@ -179,7 +206,7 @@ Numara: NUMARASIZ
 Ne: `00-INDEX.md` yeni raporlar/arşiv belgelerinin çoğunu içermiyor (KURAL 5 ihlali); ~29 belgede yaşayan/dondurulmuş üst-etiketi (KURAL 3) eksik.
 Neden başlanmıştı: NİYET var — belge-düzeni 8 kuralı (INDEX güncel + üst-etiket zorunlu).
 Nerede durdu: DURUŞ SEBEBİ YOK (kümülatif borç; her yeni belge INDEX'e eklenmeliydi, atlanmış).
-Bugünkü durum: ⬜ (INDEX doldur + eksik üst-etiketleri ekle) — A5 reorg kapsamıyla örtüşür
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ (INDEX doldur + eksik üst-etiketleri ekle) — A5 reorg kapsamıyla örtüşür~~ → ✅ YAPILDI (Faz 1a: INDEX eksikleri + 4 üst-etiket eklendi; kısmi — tam label reorg'u **G9-11/12**'de; kvkk-metinleri/ dokunulmadı, G9-14)
 Etkisi: Orta (belge bulunabilirliği; canonical INDEX güvenilmez)
 İş boyu: M
 Kaynak: karar-defteri GRUP 7 (T2-B :210)
@@ -229,7 +256,7 @@ Numara: A5
 Ne: `docs/raporlar/kesif/admin-panelleri-tasarim-2026-08-02.md` tasarım belgesi; anlattığı 6 panel zaten uygulandı → arşiv adayı.
 Neden başlanmıştı: NİYET var — tasarım/keşif belgesi (aksiyon kaynağı, artık tamamlandı).
 Nerede durdu: DURUŞ SEBEBİ YOK (arşive taşıma PO kararı bekliyor).
-Bugünkü durum: ⬜ (arşiv adayı; PO kararı)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ (arşiv adayı; PO kararı)~~ → ✅ YAPILDI (Faz 1a: `admin-panelleri-tasarim-2026-08-02.md` → `docs/arsiv/` git mv + 🗄️ "6 panel canlıda" notu; INDEX güncellendi)
 Etkisi: Düşük (belge-hijyen; tamamlanmış tasarım aktif klasörde)
 İş boyu: S
 Kaynak: karar-defteri GRUP 7 (T2-B belge-mimarisi :156)
@@ -247,7 +274,7 @@ Numara: NUMARASIZ
 Ne: CLAUDE.md kalıcı kuralı (satır ~kişi-adı yasağı) yeni içeriğe isim eklemeyi yasaklar; mevcut belgelerdeki isimler ayrı bir temizlik turunda giderilecek — o tur henüz yapılmadı.
 Neden başlanmıştı: NİYET var — kişi-adı yasağı (kalıcı kural); geriye-dönük temizlik ertelendi.
 Nerede durdu: DURUŞ SEBEBİ YOK (ayrı-tur bekliyor; yeni-içerik kuralı yürürlükte).
-Bugünkü durum: ⬜ (mevcut belgelerdeki isimleri tara + nötrleştir)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ (mevcut belgelerdeki isimleri tara + nötrleştir)~~ → ✅ YAPILDI (Faz 1a: tarama yapıldı, 0 nötrleştirme = aksiyon gerekmedi; tek yasal isim yalnız `kvkk-metinleri/`'nde → yasal gereklilik, korundu — G9-14 mutlak istisna; GitHub handle = teknik metadata)
 Etkisi: Orta (gizlilik/nötrlük; belge-hijyen)
 İş boyu: M
 Kaynak: karar-defteri GRUP 7 (T3-C)
@@ -264,7 +291,7 @@ Numara: NUMARASIZ
 Ne: `07` oturum belgesi "Sonnet yeterli" derken CLAUDE.md "Model Yönlendirme" bölümü Sonnet(basit)/Opus(karmaşık) ayrımı yapar — yumuşak çelişki.
 Neden başlanmıştı: NİYET var — model-yönlendirme kuralı netleştirilmeli.
 Nerede durdu: DURUŞ SEBEBİ YOK (düşük öncelik; belge-uyumu).
-Bugünkü durum: ❓ (belge-uyumu: hangisi canonical netleştir)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ (belge-uyumu: hangisi canonical netleştir)~~ → ✅ YAPILDI (Faz 1a: model yönlendirme isimleri+ilkesi 5 yerden çıkarıldı — kök `CLAUDE.md` + devir/01,03,04-13 + konu/07; yerine "seçim turun promptunda")
 Etkisi: Düşük (yalnız belge tutarlılığı)
 İş boyu: S
 Kaynak: karar-defteri GRUP 7 (BÇ5/E12)
@@ -281,7 +308,7 @@ Numara: BÇ5/E12
 Ne: G9-08'in ikiz karar-noktası: `icerik/` 6 belge silinsin/arşive mi (🗑️) yoksa ⚠️ GÜNCELLEME notuyla yerinde düzeltilsin mi (⬜) — bilanço bu ikisini "🗑️/⬜" olarak işaretledi, PO seçmeli.
 Neden başlanmıştı: NİYET var — içerik döküm belgeleri; kararı belirsiz kaldı.
 Nerede durdu: DURUŞ SEBEBİ YOK (belge yaşam-döngüsü kararı PO'da: arşiv vs düzelt).
-Bugünkü durum: 🗑️ (geçersiz-adayı; PO: sil/arşiv mi ⚠️-not mu)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] 🗑️ (geçersiz-adayı; PO: sil/arşiv mi ⚠️-not mu)~~ → ✅ YAPILDI (Faz 1a: karar = **arşive taşı** (silme değil); G9-08 ile birlikte uygulandı — 6 belge `docs/arsiv/icerik/` + 🗄️ not)
 Etkisi: Düşük-Orta (belge-hijyen tekrar; G9-08 ile bağlı)
 İş boyu: S (karar) / M (uygulama)
 Kaynak: karar-defteri GRUP 7 (T2-E "SAYILMADI" notu)
