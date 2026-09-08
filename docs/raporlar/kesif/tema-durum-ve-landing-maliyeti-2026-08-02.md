@@ -23,6 +23,7 @@
 **Sonuç:** Tema **global** çalışıyor (`.dark` + localStorage) — yani mentör/menti tarafında toggle'la light'a geçilince admin/platform da light görünür. Eksik olan yalnızca **admin/platform nav'ında buton** (D21). İşlev her yerde geçerli, tetik noktası dar.
 
 **PR/merge durumu:** Tema altyapısı **PR #32 (WIP, merge bekliyor)** kapsamında; mevcut çalışma branch'i `feat/light-theme`. Merge edilene kadar canlıda aktif değil — durum #32'ye bağlı.
+> ⚠️ BAYAT (2026-09-08): proje #171'e ulaştı; bu PR #32 referansı o günün fotoğrafıdır. *(📸 dondurulmuş belge — metin değişmedi, yalnız çapraz not.)*
 
 ---
 

@@ -26,6 +26,7 @@ kadar karşıladığı NOT edildi. **Kod yazılmadı.** Her bulgu dosya:satır k
 - Bu, "ön-tanımlı üye"ye en yakın mevcut mekanizma (yönetici bir kişiyi elle sisteme ekler).
 
 ### ❌ "Hayalet mod" YOK
+> ⚠️ AŞILDI (2026-09-08): `devir/05-bekleyen-kararlar-ve-manuel.md:17` "2a ghost red" planlı iş olarak duruyor. *(📸 dondurulmuş belge — metin değişmedi, yalnız çapraz not.)*
 - Kişi katılmadan önce sistemde **pasif/görünmez hesap olarak durup** eşleştirmeye/istatistiğe
   girmesi, sonra kişinin kendini "aktive" etmesi akışı YOK.
 - Şemada `isGhost` / `ghostMode` / placeholder-user gibi bir kavram yok. Davet = token;
