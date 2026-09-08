@@ -20,6 +20,7 @@
 | `faz6-ogrenme-ve-sertifika-2026-09-03.md` | 8 mentör öğrenme aşaması (24 şık) · 20 sertifika senaryosu (10 konu × 2 varyant, 80 şık) · havuz mantığı · 10 isim değişkeni | `docs/raporlar/icerik/` |
 | `menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md` | 5 menti aşaması (15 şık) · geri bildirim gösterim kuralı · eşleşme detay sayfası (3 bölüm, 16 kombinasyon — 1 yazıldı) · 3 bekleme + 2 ret metni | `docs/raporlar/icerik/` |
 | `kod-kalemleri-2026-09-03.md` | Üç belgeden doğan 23 kod kalemi envanteri + belge↔kod çelişki listesi + dürüstlük sınırları | `docs/raporlar/icerik/` |
+| `senaryo-bankasi-2026-09-03.md` | ⭐ Karakter ölçümü soru bankası — **39 senaryo (5 çekirdek + 34 havuz) / 117 şık**, Big Five (5 boyut), "en çok/en az ben" · 9 yazım kuralı · şık karıştırma (madde 143) · katman-2 %12→%25. ⚠️ KODA GEÇMEDİ (canlı = 8 hardcoded DISC) | `docs/raporlar/icerik/` |
 
 **Önceden bu klasörde olan (2026-08-26 içerik incelemeleri):**
 
@@ -34,16 +35,16 @@
 
 ## 2. ⬜ ATIF YAPILAN AMA HENÜZ KAYDEDİLMEMİŞ KARDEŞ BELGELER
 
-Yukarıdaki üç 2026-09-03 belgesi bu dört belgeye atıf yapıyor. **Hiçbiri depoda yok**
-(worktree + tüm branch + git geçmişi tarandı, 0 sonuç). Kayıtları geldiğinde bu tabloya taşınır ve
-üç belgedeki `⚠️ Bu belge henüz kaydedilmedi` işaretleri kaldırılır.
+Üç 2026-09-03 belgesi dört kardeş belgeye atıf yapıyordu. **`senaryo-bankasi-2026-09-03.md` ✅ 2026-09-04'te
+KAYDEDİLDİ** (yukarıdaki tabloya taşındı; atıflar "✅ bu klasörde" yapıldı). Kalan üçü hâlâ depoda yok
+(PO BULAMADI — muhtemelen hiç yazılmadılar). Kayıtları gelirse bu tablodan çıkarılır.
 
 | Belge | Beyan edilen kapsam | Durum |
 |---|---|---|
-| `senaryo-bankasi-2026-09-03.md` | 39 karakter senaryosu / 117 şık | ⬜ HENÜZ YAZILMADI |
-| `olcme-mimarisi-2026-09-03.md` | 11 maddelik ölçme mimarisi | ⬜ HENÜZ YAZILMADI |
-| `senaryo-denetim-protokolu.md` | Senaryo denetim protokolü v2 | ⬜ HENÜZ YAZILMADI |
-| `olcme-arastirmasi-2026-09-03.md` | Akademik ölçme araştırması özeti | ⬜ HENÜZ YAZILMADI |
+| ~~`senaryo-bankasi-2026-09-03.md` \| 39 karakter senaryosu / 117 şık \| ⬜ HENÜZ YAZILMADI~~ | 39 senaryo / 117 şık | ✅ **KAYDEDİLDİ (2026-09-04)** — bu klasörde |
+| `olcme-mimarisi-2026-09-03.md` | 11 maddelik ölçme mimarisi | ⬜ HENÜZ YAZILMADI (PO bulamadı) |
+| `senaryo-denetim-protokolu.md` | Senaryo denetim protokolü v2 | ⬜ HENÜZ YAZILMADI (PO bulamadı) |
+| `olcme-arastirmasi-2026-09-03.md` | Akademik ölçme araştırması özeti | ⬜ HENÜZ YAZILMADI (PO bulamadı) |
 
 > ⚠️ NOT — karışmasın: `backend/prisma/senaryo-bankasi-tam.md` ADI benzer ama FARKLI bir belgedir
 > (mentör **sertifika** senaryo bankası v2: 10 KONU × 2 varyant = 20 senaryo, yetkinlik-temelli 0-3
