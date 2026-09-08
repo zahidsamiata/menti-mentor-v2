@@ -4,9 +4,11 @@
 
 > 🔄 YAŞAYAN · Kaynak: üç 2026-09-03 içerik belgesi (`arketip-…` · `faz6-…` · `menti-…`, hepsi bu klasörde).
 >
-> **⚠️ BU BİR ÖNERİ LİSTESİDİR — NUMARA VERİLMEMİŞTİR.** Numara verme yetkisi PO'dadır; kalemler
-> `00-KARAR-TAKIP.md`'ye işlendiğinde numaralarını ORADA alır (KURAL 8 adım 2). Bu belge o girişin
-> kaynağıdır. Durum kodları yalnız 6: ✅ · 🟡 · 🔀 · ⬜ · ❓ · 🗑️.
+> ~~[ESKİ · 2026-09-03] **⚠️ BU BİR ÖNERİ LİSTESİDİR — NUMARA VERİLMEMİŞTİR.**~~
+> **✅ NUMARALANDI (2026-09-03, PO):** kalemler `00-KARAR-TAKIP.md` **B.1 madde 138-160**'a işlendi (KURAL 8 adım 2).
+> ⚠️ Aralık 131-153 değil **138-160** — PO onayıyla +7 kaydırıldı (131-137 doluydu). **F1+M2 tek maddede birleşti (146);
+> M5 kod kalemi değil → söz **S31**; buna karşılık 3B'deki iki yapısal kalem madde aldı (Madde 2→148, Madde 3→160) → net 23.**
+> Durum kodları yalnız 6: ✅ · 🟡 · 🔀 · ⬜ · ❓ · 🗑️.
 >
 > **Kapsam:** içeriğin KODA (seed/backend/FE) geçmesi için gereken 23 iş kalemi. İçeriğin kendisi
 > (kartlar/senaryolar/metinler) ÜRETİLDİ ve bu klasörde kayıtlı; bu liste onların koda bağlanması içindir.
@@ -16,49 +18,50 @@
 ## 3A. KOD KALEMLERİ — TEK LİSTE (23 kalem)
 
 Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ" bölümleri tek tek sayıldı,
-**23 DOĞRULANDI.** Hepsi ⬜ AÇIK (hiçbiri koda bağlanmadı — bu tur kod okumadı/yazmadı).
+**23 DOĞRULANDI.** ✅ **Numaralandı 2026-09-03 → B.1 madde 138-160** (hepsi 🔵 tasarım-hazır; her satırın karşısında aldığı numara).
 
 ### Arketip belgesinden (`arketip-ve-yaklasim-icerigi-2026-09-03.md` §10) — 6 kalem
 
-| # | Kalem (tek cümle) | Durum | Numara adayı mı |
-|---|---|---|---|
-| A1 | Arketip hesabı: en yüksek boyut + ikinci; fark < 10 puan ise "şimdilik" dili kullanılsın | ⬜ AÇIK | Evet |
-| A2 | İki/üç boyut yakınsa çoklu-arketip metni seçilsin | ⬜ AÇIK | Evet |
-| A3 | Kart iki katmanlı: arketip ekranı + "detayları gör" (beş boyut) | ⬜ AÇIK | Evet |
-| A4 | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | ⬜ AÇIK | Evet |
-| A5 | Yaklaşım metni (#31) eşleşme kurulduktan sonra iki tarafa gösterilsin | ⬜ AÇIK | Evet |
-| A6 | Kart derinleştikçe güncellensin (arketip değişebilir) | ⬜ AÇIK | Evet |
+| Etiket → B.1 no | Kalem (tek cümle) | Durum | Numaralandı |
+|---|---|:---:|:---:|
+| A1 → **138** | Arketip hesabı: en yüksek boyut + ikinci; fark < 10 puan ise "şimdilik" dili kullanılsın | 🔵 | ✅ |
+| A2 → **139** | İki/üç boyut yakınsa çoklu-arketip metni seçilsin | 🔵 | ✅ |
+| A3 → **140** | Kart iki katmanlı: arketip ekranı + "detayları gör" (beş boyut) | 🔵 | ✅ |
+| A4 → **141** | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | 🔵 | ✅ |
+| A5 → **151** | Yaklaşım metni (#31) eşleşme kurulduktan sonra iki tarafa gösterilsin (⚠️ M6/**152**'den BAĞIMSIZ — 8 metin hazır) | 🔵 | ✅ |
+| A6 → **142** | Kart derinleştikçe güncellensin (arketip değişebilir) | 🔵 | ✅ |
 
 ### Faz 6 belgesinden (`faz6-ogrenme-ve-sertifika-2026-09-03.md` §10) — 7 kalem
 
-| # | Kalem (tek cümle) | Durum | Numara adayı mı |
-|---|---|---|---|
-| F1 | İsim değişkeni altyapısı — metinler `{menti_denge}` biçiminde tutulsun, gösterimde çözülsün, tenant bazında özelleştirilebilir | ⬜ AÇIK | Evet |
-| F2 | Hatalı-konu hedefleme — yanlış yapılan konu tekrar denemede mutlaka gelsin, diğer varyantıyla | ⬜ AÇIK | Evet |
-| F3 | Kritik konu garantisi — her sınavda 4 kritik konudan birer soru | ⬜ AÇIK | Evet |
-| F4 | Deneme sınırı — günde 2, üçüncüsü için bekleme; bekleme süresince öğrenme yolculuğuna yönlendirme | ⬜ AÇIK | Evet |
-| F5 | Şık sırası karıştırma — sertifikada ve öğrenmede, her gösterimde (⚠️ bkz. Madde 1 — uygulanmamış PO kararı, kodda henüz yok) | ⬜ AÇIK | Evet |
-| F6 | Konu bazlı geri bildirim — sınav sonunda zayıf konu + ilgili öğrenme aşamasına yönlendirme | ⬜ AÇIK | Evet |
-| F7 | Kriz bildirimi — kendine zarar ifadesi geçtiğinde kurum yöneticisine otomatik bildirim (4B'nin canlı karşılığı) | ⬜ AÇIK | Evet |
+| Etiket → B.1 no | Kalem (tek cümle) | Durum | Numaralandı |
+|---|---|:---:|:---:|
+| F1 → **146** | İsim değişkeni altyapısı — metinler `{menti_denge}` biçiminde tutulsun, gösterimde çözülsün, tenant bazında özelleştirilebilir (**BİRLEŞİK F1+M2**) | 🔵 | ✅ |
+| F2 → **157** | Hatalı-konu hedefleme — yanlış yapılan konu tekrar denemede mutlaka gelsin, diğer varyantıyla | 🔵 | ✅ |
+| F3 → **149** | Kritik konu garantisi — her sınavda 4 kritik konudan birer soru | 🔵 | ✅ |
+| F4 → **158** | Deneme sınırı — günde 2, üçüncüsü için bekleme; bekleme süresince öğrenme yolculuğuna yönlendirme | 🔵 | ✅ |
+| F5 → **143** | Şık sırası karıştırma — sertifikada ve öğrenmede, her gösterimde (⚠️ = Madde 1 — uygulanmamış PO kararı, kodda henüz yok) | 🔵 | ✅ |
+| F6 → **150** | Konu bazlı geri bildirim — sınav sonunda zayıf konu + ilgili öğrenme aşamasına yönlendirme | 🔵 | ✅ |
+| F7 → **159** | Kriz bildirimi — kendine zarar ifadesi geçtiğinde kurum yöneticisine otomatik bildirim (4B'nin canlı karşılığı; ⚠️ hukuki teyit) | 🔵 | ✅ |
 
 ### Menti belgesinden (`menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md` §11) — 10 kalem
 
-| # | Kalem (tek cümle) | Durum | Numara adayı mı |
-|---|---|---|---|
-| M1 | Menti yolculuğu — 5 aşama, mentör yolculuğuyla aynı altyapı | ⬜ AÇIK | Evet |
-| M2 | Mentör isim değişkenleri — `{mentor_mimar}` vb., tenant bazında özelleştirilebilir | ⬜ AÇIK | Evet |
-| M3 | Geri bildirim gösterimi — yalnız seçilen şık; diğerleri kapalı/açılabilir; renk yok | ⬜ AÇIK | Evet |
-| M4 | ⭐ Öğrenme cevapları kişilik profiline İŞLENMESİN (Kalem A) | ⬜ AÇIK | Evet |
-| M5 | ⭐ `outcome` alanı teyidi — bugün nereye gidiyor, kodda kontrol (Kalem B) | ⬜ AÇIK | Evet |
-| M6 | Eşleşme detay sayfası — 3 bölüm, arketip kombinasyonuna göre metin seçimi | ⬜ AÇIK | Evet |
-| M7 | Örtüşme cümlesi üretimi — S1/S2/S3 verisinden şablon; ⚠️ S1 içeriği gösterilmez, yalnız örtüşme | ⬜ AÇIK | Evet |
-| M8 | Bekleme zamanlayıcısı — 3. gün hatırlatma, 7. gün otomatik kapanış + alternatif gösterimi | ⬜ AÇIK | Evet |
-| M9 | Ret akışı — sebep gizli, alternatif aynı ekranda | ⬜ AÇIK | Evet |
-| M10 | Görüşme sıklığı bilgisi — profilde ve bekleme metninde görünsün | ⬜ AÇIK | Evet |
+| Etiket → B.1 no | Kalem (tek cümle) | Durum | Numaralandı |
+|---|---|:---:|:---:|
+| M1 → **147** | Menti yolculuğu — 5 aşama, mentör yolculuğuyla aynı altyapı | 🔵 | ✅ |
+| M2 → **146** | Mentör isim değişkenleri — `{mentor_mimar}` vb., tenant bazında özelleştirilebilir (**BİRLEŞİK F1+M2**) | 🔵 | ✅ |
+| M3 → **144** | Geri bildirim gösterimi — yalnız seçilen şık; diğerleri kapalı/açılabilir; renk yok | 🔵 | ✅ |
+| M4 → **145** | ⭐ Öğrenme cevapları kişilik profiline İŞLENMESİN (Kalem A) | 🔵 | ✅ |
+| M5 → **S31** | ⭐ `outcome` alanı teyidi — bugün nereye gidiyor, kodda kontrol (Kalem B). **KOD KALEMİ DEĞİL → SÖZ S31** (keşif) | ⬜ | söz |
+| M6 → **152** | Eşleşme detay sayfası — 3 bölüm, arketip kombinasyonuna göre metin seçimi (⚠️ Bölüm 2: 15 kombinasyon yazılmadı; A5/**151** bağımsız) | 🔵 | ✅ |
+| M7 → **153** | Örtüşme cümlesi üretimi — S1/S2/S3 verisinden şablon; ⚠️ S1 içeriği gösterilmez, yalnız örtüşme | 🔵 | ✅ |
+| M8 → **154** | Bekleme zamanlayıcısı — 3. gün hatırlatma, 7. gün otomatik kapanış + alternatif gösterimi | 🔵 | ✅ |
+| M9 → **155** | Ret akışı — sebep gizli, alternatif aynı ekranda | 🔵 | ✅ |
+| M10 → **156** | Görüşme sıklığı bilgisi — profilde ve bekleme metninde görünsün | 🔵 | ✅ |
 
-> **Not (kalem-içi bağımlılık, bilgi amaçlı):** F1 ↔ M2 aynı "isim değişkeni altyapısı"nın iki
-> yarısıdır (menti-tipi isimleri vs. mentör-tipi isimleri); A5 (#31 gösterimi) ↔ M6 (eşleşme detay
-> §Bölüm 2) örtüşür. Birleştirme/numaralandırma PO kararıdır — bu turda BİRLEŞTİRİLMEDİ, 23 kalem ayrı kaldı.
+> **Not (PO kararı 2026-09-03):** **F1 + M2 BİRLEŞTİ → tek madde 146** (aynı isim-değişkeni altyapısının iki
+> yarısı — 14 değişken tek altyapıda). **A5 (151) ↔ M6 (152) BİRLEŞMEDİ** — PO gerekçesi: A5'in 8 metni HAZIR,
+> M6 15 yazılmamış kombinasyona bağlı; birleşirse hazır iş hazır olmayanın rehinesi olur → ayrı kaldı, karşılıklı
+> çapraz-ref (151 bağımsız ilerler / 152 içerik turu bekler). **M5 kod kalemi değil → söz S31.**
 
 ---
 
@@ -68,7 +71,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 > gereken bir çelişki değildir** — belge doğru, kod/canlı içerik henüz yeni tasarıma yetişmemiştir (PO
 > düzeltmesi, 2026-09-03). Her maddenin TÜRÜ satır başında belirtilmiştir. Hiçbiri bu turda uygulanmadı — yalnız kayıt.
 
-### 1 · UYGULANMAMIŞ PO KARARI — "Şık sırası her gösterimde rastgele (global kural)"; kod henüz yetişmedi
+### 1 · UYGULANMAMIŞ PO KARARI (→ B.1 madde **143**, = F5) — "Şık sırası her gösterimde rastgele (global kural)"; kod henüz yetişmedi
 
 - **PO kararı (belge):** `faz6-…-2026-09-03.md` §5 (satır 166) şık sırasının "her gösterimde rastgele
   (global kural)" olması gerektiğini söylüyor; §10 kod kalemi 5 de bunu "eklenecek" diye açıkça sıralıyor.
@@ -78,9 +81,9 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 - **Sonuç:** Bu bir belge↔kod çelişkisi değil, **UYGULANMAMIŞ PO KARARI** (= kod kalemi F5). Karar hazır,
   kod yazılmayı bekliyor. Şıkların içeriği "en doğru→zararlı" sırayla yazıldığı için karıştırma yapılmadan
   gösterim "doğru cevap kokusu" sızdırır (faz6 §6 / arketip §8 9-yazım-kuralı) → önceliği yüksek.
-- **Durum:** ⬜ AÇIK · Numara adayı: Evet (F5 ile aynı iş; öncelik yükseltilmeli).
+- **Durum:** ✅ Numaralandı → **B.1 madde 143** (F5 ile aynı iş; öncelik yüksek).
 
-### 2 · DEĞİŞTİRİLECEK İÇERİK — Öğrenme yolculuğu canlı (7+6) → yeni tasarım (8+5)
+### 2 · DEĞİŞTİRİLECEK İÇERİK (→ B.1 madde **148**) — Öğrenme yolculuğu canlı (7+6) → yeni tasarım (8+5)
 
 - **Yeni tasarım (belge):** mentör **8** öğrenme aşaması (faz6 §7) + menti **5** aşama (menti §3).
 - **Canlı içerik (değiştirilecek):** `backend/prisma/seed-learning-journey.ts:7` — "13 aşama: Mentör 7
@@ -89,9 +92,9 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 - **Sonuç:** PO kararı — **yeni tasarım canlıdakinin YERİNE GEÇER.** Uzlaştırma ya da geçiş planı GEREKMEZ;
   canlı içerik yeni tasarımla değiştirilecek (mentöre +1 aşama, mentiden −1 aşama; aşama içerikleri de yenilenir).
   Bu bir çelişki değil, planlı bir içerik değişimidir.
-- **Durum:** ⬜ AÇIK · Numara adayı: Evet.
+- **Durum:** ✅ Numaralandı → **B.1 madde 148**.
 
-### 3 · KARAR DEĞİŞİKLİĞİ (izi korunacak) — Eski "isimler unisex, karşı taraf isimsiz" kararı iptal edildi; eski kayıt damgalanmalı
+### 3 · KARAR DEĞİŞİKLİĞİ (izi korunacak · → B.1 madde **160**) — Eski "isimler unisex, karşı taraf isimsiz" kararı iptal edildi; eski kayıt damgalanmalı
 
 - **Yeni karar:** faz6 §4 (satır 126-134) "unisex ısrarından vazgeçildi" — gerekçe yazılı: temsil sorununu
   çözen şey unisex isim değil **persona çeşitliliği** (§3); ayrıca tam-unisex + Türk-İslam kesişimi dar.
@@ -100,7 +103,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
   "**İSİMLER:** unisex (Deniz gibi). Anlatılan kişi hep aynı ad, karşı taraf …".
 - **Yapılacak (bu turda YAPILMADI — belge turu, çözme yasak):** eski satır SİLİNMEZ; üstü çizilip `[ESKİ]`
   damgası + yeni belgeye (`faz6-…-2026-09-03.md §4`) yönlendirme düşülmeli (Belge Düzeltme Deseni, G9-03).
-- **Durum:** ⬜ AÇIK · Numara adayı: Evet (belge-hijyen aksiyonu).
+- **Durum:** ✅ Numaralandı → **B.1 madde 160** (belge-hijyen aksiyonu, kod değil).
 
 ---
 
@@ -131,12 +134,13 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 
 ## KALEM LİSTESİ (KURAL 9)
 
-| Kalem | Önerilen durum | Numara adayı mı |
+| Kalem | Durum | Numara |
 |---|---|---|
-| 23 kod kalemi (A1-A6 · F1-F7 · M1-M10) | ⬜ AÇIK | Evet (23 ayrı; F1↔M2, A5↔M6 birleştirme PO kararı) |
-| Madde 1 (UYGULANMAMIŞ PO KARARI) — şık sırası kodda henüz yok (= F5 önceliği) | ⬜ AÇIK | Evet |
-| Madde 2 (DEĞİŞTİRİLECEK İÇERİK) — öğrenme yolculuğu 7+6 → yeni tasarım 8+5 ile değiştirilecek | ⬜ AÇIK | Evet |
-| Madde 3 (KARAR DEĞİŞİKLİĞİ) — eski unisex kararına [ESKİ] damgası | ⬜ AÇIK | Evet |
+| 23 kod kalemi (A1-A6 · F1-F7 · M1-M10) | 🔵 | ✅ **B.1 138-160** (F1+M2 birleşti→146; M5→S31 söz; 3B Madde 2→148, Madde 3→160 madde aldı → net 23) |
+| Madde 1 (UYGULANMAMIŞ PO KARARI) — şık sırası kodda henüz yok (= F5) | 🔵 | ✅ **143** |
+| Madde 2 (DEĞİŞTİRİLECEK İÇERİK) — öğrenme yolculuğu 7+6 → 8+5 | 🔵 | ✅ **148** |
+| Madde 3 (KARAR DEĞİŞİKLİĞİ) — eski unisex kararına [ESKİ] damgası | 🔵 | ✅ **160** |
+| M5 `outcome` teyidi — kod kalemi DEĞİL, keşif | ⬜ | ✅ **söz S31** |
 | 4 kardeş belge eksik (senaryo-bankasi/olcme-mimarisi/senaryo-denetim/olcme-arastirmasi 2026-09-03) | ⬜ AÇIK | Hayır (belge kaydı, kod değil) |
 | Dürüstlük sınırları (12 madde) — pazarlama/koda geçerken korunacak | ⬜ AÇIK | Hayır (uyarı, kalem değil) |
 

@@ -907,3 +907,35 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## D) Sıradaki
 - PO: bu PR merge · 23 kod kalemine + 3 açık yapısal kaleme `00-KARAR-TAKIP`'te numara ver · 4 kardeş belgeyi (senaryo-bankasi/olcme-mimarisi/senaryo-denetim-protokolu/olcme-arastirmasi) kaydet.
 - Sonra: Madde 2 — canlı öğrenme-yolculuğu içeriğinin yeni tasarımla DEĞİŞTİRİLMESİ (7+6 → 8+5) · içeriğin koda (seed) geçişi — güvenli seed runner (madde 73) bloke · 🟢 sahiplik uygulama turu · G2-G8/G11 kart↔kod · OAuth · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-03 (16) — 23 İÇERİK KALEMİ NUMARALANDI → B.1 138-160 + S31 + ÖNCELİK
+
+**📸 Kapanış fotoğrafı** — git-teyitli. #154 (içerik kaydı) MERGED sonrası PO kararlarını uygulayan numaralandırma turu. **Yalnız-belge (kod/DB/şema/seed DEĞİŞMEDİ; migration YOK).**
+
+## 🔎 Git-doğrulanmış durum
+- **#154 MERGED** → `origin/main` HEAD `3ec503c` (içerik kaydı: 3 belge + indeks + kod-kalemleri main'de).
+- **Bu tur dalı:** `docs/numaralandirma-2026-09-03` (güncel `origin/main`'den `3ec503c`).
+
+## A) ⭐ FAZ 0 — DURAK TETİKLENDİ (numara aralığı düzeltildi)
+- Plan "131'den başla" diyordu; FAZ 0 doğrulaması **en yüksek maddeyi 137** buldu (**≠130**) → DURAK. Kanıt: 131-136 = IDOR Y1-Y6 (`10-yol:84`, PR #60) · 137 = meeting/verifyTenant audit batch (`00-KARAR-TAKIP:82`). 138+ boş.
+- PO'ya soruldu → **+7 kaydırma onaylandı (131-153 → 138-160).** 138-160 iki belgede grep'le boş teyit edildi (madde-atfı/tablo-hücre/aralık: örtüşen "aralıklar" hep kod satır-refi, madde değil). En yüksek söz = S30 → **S31** uygun.
+
+## B) Yapılanlar
+- **FAZ 1 (COMMIT 1 `b152071`):** 23 kalem `00-KARAR-TAKIP` **B.1 madde 138-160** olarak eklendi (hepsi 🔵 v1) + B.1 başlığına toplu-kayıt notu + Son güncelleme. **F1+M2 birleşti → 146**; **A5+M6 birleşmedi → 151↔152** (çapraz-ref); **M5 → söz** (kod kalemi değil). Sayım: 138-160 = tam 23, benzersiz (24. eşleşme `|130|` F.7'de eski madde).
+- **FAZ 2 (COMMIT 2 `80260e5`):** **S31 sözü** eklendi (outcome keşfi, ilgili madde **145**) · `10-yol` KOD İŞ SIRASI'na 138-160 **EN ÖN SIRA** (5 grup + 2 bloker: F.13 yedek + madde 73 seed runner; iç sıra PO onayı bekliyor) · kaynak `kod-kalemleri-2026-09-03.md` her etikete numara işlendi ("NUMARA VERİLMEMİŞTİR" → ✅ Numaralandı).
+- **FAZ 3 (COMMIT 3):** 09-DURUM tur notu (bu blok) + bu oturum bölümü + kırık link 0.
+
+## C) İç referans güncellemeleri (PO düzeltmesi)
+- S31 ilgili madde: 138 DEĞİL → **145** (öğrenme cevapları profile işlenmesin kalemi 138'den 145'e kaydı).
+- Öncelik grupları +7: 1) 138·139·140·141·143·144·145 · 2) 146·147·148·149·150 · 3) 151·153·154·155·156·152·142 · 4) 157·158·159 · 5) 160.
+- Çapraz-ref: "144↔145" DEĞİL → **151↔152** (yaklaşım metni ↔ eşleşme detay sayfası).
+
+## D) Sınırlar / dürüstlük
+- Kod/DB/şema/seed DEĞİŞMEDİ · migration YOK · DB'ye komut GİTMEDİ · seed ÇALIŞTIRILMADI · #110 ellenmedi · alt-ajan yok. **Numara VERİLDİ (PO onaylı, yetki PO'daydı).** İç öncelik sırası ÖNERİ (PO onayı bekliyor). **MERGE EDİLMEDİ.**
+
+## E) Sıradaki
+- PO: bu PR merge · iç öncelik sırasını onayla · ⛔ **iki bloker** (F.13 Neon yedeği + madde 73 seed runner) canlı-öncesi çöz.
+- Sonra: S31 keşfi (outcome alanı) · Gösterim çekirdeği (138-145, seed'siz ilerleyebilir) · içerik→kod turları · G2-G8/G11 kart↔kod · OAuth · S26 · Faz 5.

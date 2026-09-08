@@ -66,6 +66,15 @@
 > ⚠️ Mevcut madde numaraları korunur; burada YENİ numara açılmaz.
 > ⚠️ SIRA, TAAHHÜT DEĞİL: Faz 1-2 (+Faz 0 PO-manuel) bitince kullanıcı alınabilir; Faz 7-8'in bir kısmı hiç yapılmayabilir.
 
+**⭐⭐ EN ÖNCELİKLİ — 2026-09-03 İÇERİK KALEMLERİ (madde 138-160, B.1)** — PO kararı (2026-09-03): *"bu testler bizim için en önemli işler"* → **EN ÖN SIRA.** Detay TEK SATIR ilkesi: `00-KARAR-TAKIP` B.1 (madde 138-160) + `../raporlar/icerik/kod-kalemleri-2026-09-03.md`. ⚠️ Aşağıdaki iç sıra **ÖNERİDİR — PO onayı bekliyor.**
+- **0. ⛔ BLOKER (İKİSİ ÖNDE):** **F.13** Neon yedeği TEYİTSİZ (`09-DURUM` en üst acil uyarı: yedek doğrulanmadan migration/backfill/seed AÇILMAZ) → **madde 73** güvenli seed runner YOK. Seed'e bağlı kalemler (146·147·148·149·150 + 157·158·159) bu iki bloker açılmadan canlıya GİRMEZ; **madde 30** zaten bu yüzden bloke.
+- **1. Gösterim çekirdeği** (migration/seed'siz ilerleyebilir): 138 · 139 · 140 · 141 · 143 · 144 · 145
+- **2. İçerik taşıma** (seed'e bağlı → 0. bloker sonrası): 146 · 147 · 148 · 149 · 150
+- **3. Eşleşme deneyimi:** 151 · 153 · 154 · 155 · 156 · 152 · 142
+- **4. Sınav iyileştirme:** 157 · 158 · 159
+- **5. Belge işi** (bağımsız, her an): 160
+- ⚠️ **Çapraz-ref:** madde **151** (yaklaşım #31, 8 metin HAZIR) ile madde **152** (eşleşme detay, Bölüm 2'de 15 kombinasyon YAZILMADI) BİRLEŞMEDİ — 151 bağımsız ilerler, 152 içerik turu bekler.
+
 **🟣 FAZ 0 — PO-PARK** (kod sırasından çıkarıldı, İPTAL EDİLMEDİ — env/ayar bekliyor):
 - G8-01+G8-02 foto volume+env · G5-01+G5-02 kurum maili · G1-09 destek@ · G1-10+G1-13 aydınlatma+kulüp beyanı (avukatta) · G1-28 sunucu sertleştirme · G8-03+G8-04 canlı testler · G8-05 yedek env sil · G8-08 izole test DB.
 
