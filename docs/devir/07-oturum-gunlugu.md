@@ -886,7 +886,7 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 **📸 Kapanış fotoğrafı** — git-teyitli. 2026-09-03 içerik oturumlarının çıktısı depoya kalıcı alındı. **Yalnız-belge (kod/DB/şema/seed DEĞİŞMEDİ; migration YOK).**
 
 ## 🔎 Git-doğrulanmış durum
-- **Bu tur dalı:** `docs/icerik-kaydi-2026-09-03` (güncel `origin/main`'den `20a5f42` — lokal main 5 commit geride idi, ff-pull ile eşitlendi).
+- **Bu tur dalı:** `docs/icerik-kaydi-2026-09-03` (güncel `origin/main`'den `20a5f42` — lokal main 5 commit geride idi, ff-pull ile eşitlendi). **Çatı PR #154 (açık — MERGE EDİLMEDİ).**
 - **Ön koşul (ilk deneme):** PO dosyaları henüz koymamıştı → `docs/gelen/` yoktu, tur DURDU. PO 3 dosyayı koyunca tur baştan yürüdü.
 
 ## A) Yapılanlar
