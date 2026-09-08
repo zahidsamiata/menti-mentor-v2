@@ -209,6 +209,12 @@
 | 158 | Sertifika deneme sınırı — günde 2, üçüncüsü için bekleme; bekleme süresince öğrenme yolculuğuna yönlendirme | 🔵 | backend-mantık | Günlük deneme sayacı + bekleme + yolculuk yönlendirme | faz6 §5/§10-4 | ❓ (deneme sayacı/zaman alanı) | M |
 | 159 | Kriz bildirimi — kendine zarar ifadesi geçtiğinde kurum yöneticisine otomatik bildirim (4B senaryosunun canlı karşılığı). ⚠️ faz6 §12: kriz senaryoları HUKUKİ gözden geçirme istiyor | 🔵 | bildirim-akışı | Tetik + kurum-yöneticisi bildirim akışı; ⚠️ avukat teyidi ön-koşul. **⚠️ EK (2026-09-04, KEŞİF §I-6): kriz senaryolarının (4A/4B) "doğru cevap" İŞARETLEMESİ de hukuki teyide tabi** — senaryolar yazılır/işaretlenir ama "hukuki teyit bekliyor" KALEMİ burada izlenir; **canlıya çıkmadan ZORUNLU.** Detay: `../raporlar/kesif/faz5-onkosul-kesfi-2026-09-04.md` §I. · **⚠️ EK (2026-09-08, Oturum 1 KALEM 7 — ayrı numara DEĞİL, bu maddenin kapsamı):** ⭐ **REŞİT OLMAYAN MENTİ** — STK kitlesi ağırlıklı öğrenci; menti 18 yaş altındaysa veli/kurum bildirimi hukuken farklı zemine oturur (kriz şıkları YETİŞKİN varsayımıyla yazıldı). **G1-01 ÇELİŞKİSİ:** G1-01 "18+ beyanı yeterli, gerçek yaş verisi toplanmaz" der; 18 altı menti kabul edilecekse **gerçek yaş + veli onayı ZORUNLU** olur → G1-01 çöker. Avukat paketine **TEK SORU olarak:** kriz bildirimi + yaş verisi + veli onayı. Detay: `../raporlar/icerik/sertifika-oturum1-4-kritik-konu-2026-09-08.md` KALEM 7. | faz6 §10-7 | ❓ (bildirim akışı + hukuki) | L |
 | 160 | Eski "isimler unisex, karşı taraf isimsiz" kararına [ESKİ] damgası — `konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410`; faz6 §4 iptal etti (gerekçe yazılı). SİLİNMEZ, üstü çizilir + yeni belgeye yönlendirme (**BELGE işi, kod değil**) | 🔵 | belge-hijyen | Eski satırı [ESKİ] damgala + faz6 §4'e yönlendir | kod-kalemleri **Madde 3** | Hayır | S |
+| 161 | Canlıda hangi DISC yolu kullanılıyor — FE akışı keşfi + canlı doluluk sorgusu (❓ DB, PO onayı) | ⬜ AÇIK | KEŞİF | ⚠️ 162 ve 165'in kapsamı buna bağlı | `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E | Hayır | M |
+| 162 | Üç DISC yolunun birleştirilmesi — `UserProfile.discD..C`'yi hangi yol dolduracak + eksik yolları bağlama | ⬜ AÇIK | KOD+KARAR | ⚠️ S33'ün 7. kararı; Faz 5 (g)/(k) bunsuz tanımlanamaz | `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E | Hayır (alanlar mevcut) | L |
+| 163 | `CertificationOption`'a iç-not alanı — **MIGRATION** · KALEM 6 doğrulandı: `explanation` ve `outcome` ikisi de kullanıcıya gösteriliyor, gizli alan YOK (`schema.prisma:1149-1161`). Alan açılmazsa Oturum 1'in 🔒 iç notları seed'e GİREMEZ | ⬜ AÇIK | MIGRATION | ⚠️ **F.13'e (Neon yedeği) TAKILI** · Oturum 1'in 🔒 iç notlarını BLOKLAR | `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E | **Evet** | M |
+| 164 | `certification.test.ts:78` — `>= 2` kod turuyla birlikte güncellenmeli | ⬜ AÇIK | KOD | madde 72/T4 ayağı · sertifika içeriği bu varsayımla yazıldı | `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E | Hayır | S |
+| 165 | Ağırlık modeli 2→3 bileşen (8 kod noktası, **migration YOK**) | ⬜ AÇIK | KOD | Faz 5 (i) · ⚠️ migration YOK, F.13'e TAKILMIYOR | `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E | Hayır | M |
+| 166 | İki `rankMentorsForMenti` isim çakışması — Faz 5 kararı sonrası biri emekli/yeniden adlandırılmalı | ⬜ AÇIK | KOD | Faz 5 motor kararı sonrası anlamlı | `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E | Hayır | S |
 
 ### B.2 — Karar/keşif bekleyenler (kodlanamaz — önce PO/keşif)
 
@@ -665,14 +671,16 @@ Kaynak: `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E
 
 | # | Kalem | Tür |
 |---|---|---|
-| [aday] | Üç DISC yolunun birleştirilmesi — `UserProfile.discD..C`'yi hangi yol dolduracak + eksik yolları bağlama | KOD + KARAR |
-| [aday] | İki `rankMentorsForMenti` isim çakışması — Faz 5 kararı sonrası biri emekli/yeniden adlandırılmalı | KOD |
-| [aday] | Ağırlık modeli 2→3 bileşen (8 kod noktası, **migration YOK**) | KOD |
-| [aday] | `CertificationOption`'a iç-not alanı — **MIGRATION** · KALEM 6 doğrulandı: `explanation` ve `outcome` ikisi de kullanıcıya gösteriliyor, gizli alan YOK (`schema.prisma:1149-1161`). Alan açılmazsa Oturum 1'in 🔒 iç notları seed'e GİREMEZ | MIGRATION |
-| [aday] | `certification.test.ts:78` — `>= 2` kod turuyla birlikte güncellenmeli | KOD (madde 72 ayağı) |
-| [aday] | Canlıda hangi DISC yolu kullanılıyor — FE akışı keşfi + canlı doluluk sorgusu (❓ DB, PO onayı) | KEŞİF |
+| **162** | Üç DISC yolunun birleştirilmesi — `UserProfile.discD..C`'yi hangi yol dolduracak + eksik yolları bağlama | KOD + KARAR |
+| **166** | İki `rankMentorsForMenti` isim çakışması — Faz 5 kararı sonrası biri emekli/yeniden adlandırılmalı | KOD |
+| **165** | Ağırlık modeli 2→3 bileşen (8 kod noktası, **migration YOK**) | KOD |
+| **163** | `CertificationOption`'a iç-not alanı — **MIGRATION** · KALEM 6 doğrulandı: `explanation` ve `outcome` ikisi de kullanıcıya gösteriliyor, gizli alan YOK (`schema.prisma:1149-1161`). Alan açılmazsa Oturum 1'in 🔒 iç notları seed'e GİREMEZ | MIGRATION |
+| **164** | `certification.test.ts:78` — `>= 2` kod turuyla birlikte güncellenmeli | KOD (madde 72 ayağı) |
+| **161** | Canlıda hangi DISC yolu kullanılıyor — FE akışı keşfi + canlı doluluk sorgusu (❓ DB, PO onayı) | KEŞİF |
 
-⚠️ **NUMARA VERİLMEDİ** — PO doğuracak (KURAL 8: numara YALNIZ burada doğar). En büyük mevcut numara = **160** (138-160 içerik kalemleri); PO buradan devam ettirir.
+~~[ESKİ · 2026-09-08] ⚠️ **NUMARA VERİLMEDİ** — PO doğuracak (KURAL 8: numara YALNIZ burada doğar). En büyük mevcut numara = **160** (138-160 içerik kalemleri); PO buradan devam ettirir.~~ **✅ NUMARALAR VERİLDİ (2026-09-08, PO): 161-166.** Kalemler B.1 tablosuna taşındı (madde 161-166); bu blok tarihsel iz olarak kalır.
+
+> ⚠️ **ARTIK DOSYA ENVANTERİ (2026-09-08):** `docs/gelen/` altında **2 dosya** (git-takipsiz — `faz5-veri-akisi-PROMPT.txt.txt` 0 byte + `Yeni Metin Belgesi.txt` 28.599 byte, ikisi de prompt aktarımından kalan artık) · depo kökünde **0** adet `=` artığı. **Silme PO kararı; hiçbiri commit'e girmedi.**
 
 ---
 
