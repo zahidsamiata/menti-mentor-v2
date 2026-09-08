@@ -1,6 +1,6 @@
 # 00 — KARAR & İŞ TAKİBİ (NE KALDI · NE YARIM · NE UNUTULDU)
 
-**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-09-02 (çapraz-ref düzeltmeleri: B2 G1-28 🔴 + DB yedeği acil teyit + C2)
+**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-09-03 (23 içerik kalemi numaralandı → B.1 madde **138-160**; +7 kaydırma çünkü 131-137 doluydu)
 
 > **Bu belge NEDEN var:** "Hep önümdeki işe odaklanıyorum ama arkada yarım bıraktığım işleri, ölü kodları,
 > alıp da uygulamadığım kararları unutuyorum; canlıya çıkınca eksik keşfediyorum." Bu belge o sorunu çözer:
@@ -169,6 +169,8 @@
 
 ### B.1 — v1 açık işler (canlı-öncesi)
 
+> 🆕 **138-160 = 2026-09-03 İÇERİK KALEMLERİ (23 kalem)** — kaynak `../raporlar/icerik/kod-kalemleri-2026-09-03.md` (A1-A6 · F1-F7 · M1-M10). PO kararı (2026-09-03): hepsi **v1 (canlı-öncesi)**, **EN ÖN SIRA** ("bu testler bizim için en önemli işler" — öncelik `10-yol-haritasi`). ⚠️ **Numara aralığı PO onayıyla 131-153'ten +7 KAYDIRILDI → 138-160** çünkü 131-137 doluydu (131-136 = IDOR Y1-Y6 / PR #60 · 137 = meeting/verifyTenant audit batch); 138-160 iki belgede grep'le boş teyit edildi. **F1+M2 BİRLEŞTİ → madde 146** (aynı isim-değişkeni altyapısı). **A5+M6 BİRLEŞMEDİ → madde 151 ↔ 152** (A5'in 8 metni hazır, M6 15 kombinasyon yazılmadı; çapraz-ref). **M5 kod kalemi değil → S31 sözü** (keşif). **⛔ İKİ BLOKER ÖNDE:** madde 73 (güvenli seed runner yok) + F.13 (Neon yedeği teyitsiz) — seed'e bağlı kalemler (147/148/149 ve sınav kalemleri) bunlar açılmadan canlıya GİRMEZ.
+
 | No | İş | Durum | Tür | Ne gerekiyor (somut sıradaki adım) | Kanıt | Migration? | Boy |
 |---|---|:---:|---|---|---|:---:|:---:|
 | 6 | Onay/red maili — **kurum/destek** kısmı | 🟡 | yarım-kaldı | Kurum(tenant)-onay/ret maili + `destek@` + prod `PLATFORM_ADMIN_EMAIL` env bağla (kullanıcı maili ✅ çalışıyor) | `10-yol:md.6`; tam-envanter C3 | Hayır | S-M |
@@ -181,6 +183,29 @@
 | 34 | Öğrenme-yolculuğu tamamlanma görünürlüğü (STK admin) | ✅ CANLIDA | TAMAMLANDI | **✅ CANLIDA** (backend #49 → `18cfc42` + çatı #102 → `0fd4942`, merged): `adminListUsers`'a `learningJourneyCompletedAt` + havuz kolonu. Test var | 🟩 main `adminController.ts` alan döner (4×) + test; `menti/mentor-havuzu` kolonu (2×) | Hayır | S |
 | 35 | **(2a)** İki tip red: "düzeltme iste" vs "kalıcı/ghost sessiz red" (KARAR 2) | 🔵 | tasarım-hazır | Backend red-tipi alanı + 2 buton + e-posta ayrımı (ghost = sessiz, tekrar-başvuru yok) · **⚠️ GÜNCELLEME (2026-08-23): ghost red = 30 GÜN UYKU MODU.** Kişinin verileri (DISC/profil/mesaj) hemen SİLİNMEZ; 30 gün içinde kurum geri alırsa veriler geri gelir, almazsa **TAMAMEN silinir** (PO geri-alınamazlığı bilerek onayladı). **Zamanlanmış iş (cron) gerekir.** | `11-tasarim-kararlari` KARAR 2; `10-yol:md.35` | **Evet** | M-L |
 | 36 | **(2b)** Onaylanmış (aktif) kullanıcıyı sistemden çıkarma (KARAR 3) | 🔵 ❓ | tasarım-hazır + önce-keşif | **ÖNCE git'ten doğrula** (isActive=false/demote kodda var mı?), eksikse yap | `11-tasarim-kararlari` KARAR 3; `10-yol:md.36` | ❓ (keşif sonrası) | M |
+| 138 | Arketip hesabı — en yüksek boyut + ikinci; fark <10 puan ise "şimdilik" dili | 🔵 | hesap-mantığı | Baskın+ikincil boyut hesabı + eşik<10 "şimdilik" metin dalı (4 varyant madde 139) | arketip §3/§10-1 (`../raporlar/icerik/arketip-ve-yaklasim-icerigi-2026-09-03.md`) | Hayır | M |
+| 139 | İki/üç boyut yakınsa çoklu-arketip metni seçilsin (4 varyant YAZILI) | 🔵 | gösterim-mantığı | Yakınlık kuralına göre çoklu-arketip metin seçimi | arketip §6/§10-2 | Hayır | S |
+| 140 | Arketip kartı iki katmanlı — arketip ekranı + "detayları gör" (beş boyut) | 🔵 | FE-gösterim | İki katmanlı kart FE | arketip §4/§10-3 | Hayır | M |
+| 141 | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | 🔵 | FE-metin | Üç-soru ekranına tek cümle ekle | arketip §4/§10-4 | Hayır | S |
+| 142 | Kart derinleştikçe güncellensin (arketip değişebilir) | 🔵 | hesap-mantığı | 15→35 senaryoda kart yeniden hesap/gösterim | arketip §4/§10-6 | Hayır | M |
+| 143 | ⭐ Şık sırası her gösterimde KARIŞTIRILSIN — karakter testi + öğrenme + sertifika (**UYGULANMAMIŞ PO KARARI:** kod yetişmemiş) | 🔵 | gösterim-mantığı | Gösterimde şık sırası shuffle (kod-kanıtı: `shuffle\|Math.random`=0 · backend/src+frontend/src) | faz6 §5/§10-5 + kod-kalemleri **Madde 1** | Hayır | S |
+| 144 | Geri bildirim gösterimi — yalnız SEÇİLEN şık görünür; renk YOK; doğru/yanlış işareti YOK; diğerleri kapalı/açılabilir | 🔵 | FE-gösterim | Yolculuk geri-bildirim UI kuralı (mentör 8 + menti 5) | menti §4/§11-3 | Hayır | M |
+| 145 | ⭐ Öğrenme yolculuğu cevapları kişilik profiline İŞLENMESİN (yön verilen seçim saf sinyal değil) | 🔵 | veri-akışı | Yolculuk cevap yolu profile yazmasın; ⚠️ `outcome` akıbeti S31 keşfine bağlı | menti §5 Kalem A/§11-4 | ❓ (outcome alanı — S31) | S |
+| 146 | İsim değişkeni altyapısı (**BİRLEŞİK F1+M2**) — metinler `{menti_denge}` biçiminde tutulsun, gösterimde çözülsün, tenant bazında özelleştirilebilsin. **14 DEĞİŞKEN:** 4 menti (menti_denge=Nur·menti_rotaci=Emin·menti_izacan=Kerem·menti_kasif=Sena) + 4 mentör (mentor_mimar=Selim·mentor_ayna=Hatice·mentor_liman=Yakup·mentor_pusula=Ayşe) + 6 sertifika (sert_1=İhsan·sert_2=Elif·sert_3=Yusuf·sert_4=Zehra·sert_5=Salih·sert_6=Rabia) | 🔵 | altyapı | Değişken-çözümleme katmanı + tenant override deposu | faz6 §4/§10-1 + menti §2/§11-2 (BİRLEŞİK) | ❓ (tenant override alanı) | L |
+| 147 | Menti öğrenme yolculuğu — 5 aşama, mentör yolculuğuyla aynı altyapı, sınavsız | 🔵 | içerik-seed | LearningStage'e menti 5 aşama seed (⛔ md.73 seed runner + F.13 yedek bloke) | menti §3/§11-1 | Evet (seed) | M |
+| 148 | ⭐ Öğrenme yolculuğu içeriği YENİ TASARIMLA DEĞİŞTİRİLSİN — canlı Mentör 7+Menti 6 → yeni Mentör 8+Menti 5 (yeni tasarım canlının YERİNE geçer, geçiş planı gerekmez) | 🔵 | içerik-seed | Canlı seed içeriğini yeni 8+5 ile değiştir (⛔ md.73+F.13 bloke) | kod-kalemleri **Madde 2** + `seed-learning-journey.ts:7` | Evet (seed) | L |
+| 149 | Sertifika kritik konu garantisi — her sınavda 4 kritik konudan (geri bildirim·sınır·gizlilik·kriz) birer soru | 🔵 | sınav-mantığı | Sınav çekim algoritması: 4 garantili + 4 rastgele (havuz seed md.30/73'e bağlı) | faz6 §5/§10-3 | Hayır (mantık) | S |
+| 150 | Konu bazlı geri bildirim — sınav SONUNDA zayıf konu + ilgili öğrenme aşamasına yönlendirme | 🔵 | sınav-mantığı | Sınav-sonu konu skorlama + yolculuk yönlendirme | faz6 §10-6 | Hayır | M |
+| 151 | Yaklaşım metni (#31) eşleşme kurulduktan sonra İKİ TARAFA gösterilsin — 8 metin YAZILI ve HAZIR (4 mentöre + 4 mentiye). ⚠️ **Madde 152'den BAĞIMSIZ ilerleyebilir** (içerik hazır) | 🔵 | içerik-gösterim | Eşleşme sonrası #31 metin gösterimi (arketibe göre) | arketip §7/§10-5 | Hayır | M |
+| 152 | Eşleşme detay sayfası — 3 bölüm (neden bu eşleşme·birlikte nasıl çalışırsınız·ilk görüşmede ne konuşulur). ⚠️ **Bölüm 2 için 16 kombinasyondan 15'i YAZILMADI → içerik turu gerekiyor**; Bölüm 1 ve 3 hazır. **Madde 151 bağımsız ilerler** | 🔵 | FE+içerik | Bölüm1/3 FE + Bölüm2 15 kombinasyon içerik turu | menti §6/§11-6 | Hayır (FE) | L |
+| 153 | Örtüşme cümlesi üretimi — S1/S2/S3 verisinden şablon. ⚠️ GÖRÜNÜRLÜK: S1 içeriği (ihtiyaç beyanı) GÖSTERİLMEZ, yalnız örtüşme | 🔵 | şablon-mantığı | S1/S2/S3'ten örtüşme cümlesi üret; S1 gizli | menti §6 Bölüm1/§11-7 | Hayır | M |
+| 154 | Bekleme zamanlayıcısı — 3. gün hatırlatma, 7. gün otomatik kapanış + alternatif gösterimi (3 metin YAZILI) | 🔵 | backend-zamanlayıcı | Cron/timer: 3g hatırlatma + 7g kapanış + {n} mentör göster | menti §8/§11-8 | ❓ (bekleme durum/zaman alanı) | M |
+| 155 | Ret akışı — sebep GİZLİ, "üzgünüz" YOK, alternatif aynı ekranda (2 metin YAZILI: menti + mentör) | 🔵 | FE+mantık | Ret ekranı: sebep gizle + alternatif; mentöre ret-yardım metni | menti §9/§11-9 | Hayır | S |
+| 156 | Görüşme sıklığı bilgisi profilde ve bekleme metninde görünsün | 🔵 | gösterim | Dernek haftalık sıklık bilgisini profil+bekleme metnine bas | menti §7/§11-10 | Hayır | S |
+| 157 | Sertifika hatalı-konu hedefleme — yanlış yapılan konu tekrar denemede MUTLAKA gelsin, diğer varyantıyla | 🔵 | sınav-mantığı | Deneme sonucu konu-bazlı sakla + tekrar-çekimde zorla | faz6 §5/§10-2 | ❓ (deneme-konu sonucu alanı) | M |
+| 158 | Sertifika deneme sınırı — günde 2, üçüncüsü için bekleme; bekleme süresince öğrenme yolculuğuna yönlendirme | 🔵 | backend-mantık | Günlük deneme sayacı + bekleme + yolculuk yönlendirme | faz6 §5/§10-4 | ❓ (deneme sayacı/zaman alanı) | M |
+| 159 | Kriz bildirimi — kendine zarar ifadesi geçtiğinde kurum yöneticisine otomatik bildirim (4B senaryosunun canlı karşılığı). ⚠️ faz6 §12: kriz senaryoları HUKUKİ gözden geçirme istiyor | 🔵 | bildirim-akışı | Tetik + kurum-yöneticisi bildirim akışı; ⚠️ avukat teyidi ön-koşul | faz6 §10-7 | ❓ (bildirim akışı + hukuki) | L |
+| 160 | Eski "isimler unisex, karşı taraf isimsiz" kararına [ESKİ] damgası — `konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410`; faz6 §4 iptal etti (gerekçe yazılı). SİLİNMEZ, üstü çizilir + yeni belgeye yönlendirme (**BELGE işi, kod değil**) | 🔵 | belge-hijyen | Eski satırı [ESKİ] damgala + faz6 §4'e yönlendir | kod-kalemleri **Madde 3** | Hayır | S |
 
 ### B.2 — Karar/keşif bekleyenler (kodlanamaz — önce PO/keşif)
 
