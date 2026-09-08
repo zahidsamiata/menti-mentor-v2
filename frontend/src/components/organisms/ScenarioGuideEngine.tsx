@@ -13,11 +13,12 @@
  * Bu ayrım sayesinde cevap anahtarı (learning-journey'de) istemciye önden yüklenmez.
  */
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { shuffle } from '@/lib/shuffle';
 
 export type ScenarioOutcome = 'correct' | 'warn' | 'wrong';
 
@@ -58,6 +59,12 @@ export interface ScenarioGuideEngineProps {
   /** Tüm aşamalar görülünce çağrılır; başarıyı { ok } ile bildirir. */
   onComplete: () => Promise<{ ok: boolean }>;
   completion: ScenarioCompletion;
+  /**
+   * Şık sırasını her gösterimde karıştır (madde 143). Cevap kimliğe (key) bağlı,
+   * indeks değil → karıştırma cevabı bozmaz. Aynı oturumda geri dönülünce sıra
+   * değişebilir (kabul edilmiş davranış). Varsayılan: false (Görüşme Rehberi sabit kalsın).
+   */
+  shuffleChoices?: boolean;
 }
 
 const OUTCOME_STYLE: Record<ScenarioOutcome, { badge: string; icon: string }> = {
@@ -76,6 +83,7 @@ export function ScenarioGuideEngine({
   resolveChoice,
   onComplete,
   completion,
+  shuffleChoices = false,
 }: ScenarioGuideEngineProps) {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -88,6 +96,15 @@ export function ScenarioGuideEngine({
   const isLast = current === scenarios.length - 1;
   const done = current >= scenarios.length;
   const revealed = result !== null;
+
+  // Şık sırası: karıştırma açıksa aşama başına stabil — aynı aşamada sabit kalır,
+  // sonraki/önceki aşamaya geçince yeniden karışır. Bağımlılık scenario?.id (obje değil):
+  // üst bileşen her render'da yeni dizi üretse bile aşama içinde sıra zıplamaz.
+  const displayChoices = useMemo(
+    () => (!scenario ? [] : shuffleChoices ? shuffle(scenario.choices) : scenario.choices),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [scenario?.id, shuffleChoices],
+  );
 
   async function choose(key: string) {
     if (revealed || pending) return;
@@ -158,7 +175,7 @@ export function ScenarioGuideEngine({
             {scenario.question && <p className="text-sm font-medium mt-2">{scenario.question}</p>}
           </CardHeader>
           <CardContent className="space-y-3">
-            {scenario.choices.map((c) => {
+            {displayChoices.map((c) => {
               const isSelected = selected === c.key;
               const style = result ? OUTCOME_STYLE[result.outcome] : null;
               return (
