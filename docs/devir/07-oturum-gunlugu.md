@@ -1155,3 +1155,37 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## D) Sıradaki
 - **backend PR #69 merge → çatı pointer re-bump** (`5bd1656` → backend main HEAD); merge sonrası madde 73 → ✅.
 - madde 30 hâlâ madde 163 (migration) + 164 (eşik) + F.13 zincirini bekliyor (73 artık bloke etmiyor).
+
+---
+---
+
+# 📅 OTURUM 2026-09-08 (23) — GÜN KAPANIŞI: 11 KARAR + madde 73 ✅
+
+**📸 Kapanış fotoğrafı** — güncel için git + `09-DURUM.md` + `00-KARAR-TAKIP.md`.
+
+## 🔎 Git-doğrulanmış durum
+- **Çatı main HEAD (taban):** `6d4d871` (Merge PR #171). Dal: `docs/gun-kapanisi-2026-09-08`.
+- **Backend main HEAD:** `b1a007f` (Merge #69). Pointer re-bump `5bd1656 → b1a007f` (ileri sarım teyitli).
+- **#171 + #69 MERGED** (PO). Bu **günün son turu**.
+
+## A) Yapılanlar (4 commit)
+- **COMMIT 1:** madde 73 → ✅ CANLIDA (🔀 üzeri çizildi) · pointer re-bump (S36 ✅) · 09-DURUM F.13 banner aşıldı (eski uyarı üstü çizili) · madde 30 öncül düştü.
+- **COMMIT 2:** Y7 → 🗑️ BÖLÜNDÜ → **Y9·Y10·Y11** (Y8 dolu) · 9b → ✅ CANLIDA + S35 · madde 7-A → 10-yol md.7 (B→172) · S1 → ✅ TUTULDU.
+- **COMMIT 3:** 3 kural (YAPILDI≠DOĞRULANDI · TEKRAR KANIT DEĞİL · KURAL 11 üçüncü katman) · 2 çapraz not (donmuş belgeler) · madde 173.
+- **COMMIT 4:** senkron (09-DURUM tur notu · bu kayıt · Son güncelleme).
+
+## B) ⭐ FAZ 0 üç teyit
+- **T2:** pointer `5bd1656` geride kaldı → backend main `b1a007f`'e re-bump (ileri sarım: `5bd1656`, `b1a007f`'nin atası ✓).
+- **T3:** Y1-Y7 `00-KARAR-TAKIP` DIŞINDA yaygın (127 sonuç: 10-yol · 09-DURUM · bilanço/T1-A/T2-C) → ayrı kimlik → Y-serisi. Ama **Y8 DOLU** (kulüp, 2026-09-01) → prompt "Y8·Y9·Y10" **Y9·Y10·Y11'e düzeltildi** (boşluk kuralı).
+- **T4:** en büyük madde = 172, en büyük S = S34 (iki sayım, doğrulandı).
+
+## C) ⭐ GÜN ÖZETİ — 2026-09-08 (13 tur)
+Bir günde koşan turlar: **sertifika içeriği** (Oturum 1/2/3 = 88 şık / 22 senaryo / 3 belge, PR #164/#165 + Oturum 1) · **beş keşif** (faz5 ön koşul · faz5 veri akışı · içerik ön koşul · ölçek/tip · DB yedeği) · **bir envanter** (709 satır karar-takip) · **kod sözlüğü temizliği** (2 tur: durum kodları + DURUM↔ENGEL) · **ölçek+tip işleme** · **İLK KOD TURU madde 73** (seed muhafızı) · **gün kapanışı** (bu tur). **PR'lar:** #160-171 (çatı) + backend #68/#69. **Kararlar:** ~11 (bu tur) + gün boyunca onlarca. **Kod değişikliği:** yalnız 1 (`seed-certification.ts` +11, madde 73).
+
+## D) Sınırlar / dürüstlük
+- KOD/DB/şema DEĞİŞMEDİ · migration YOK · seed YOK · DB'ye komut GİTMEDİ · `docs/gelen/` ELLENMEDİ · alt-ajan yok. **MERGE EDİLMEDİ.**
+- ⭐ **DÜRÜST PUSHBACK:** prompt Y8·Y9·Y10 dedi, Y8 doluydu (kulüp) → Y9·Y10·Y11.
+
+## E) ⭐ YARIN İÇİN
+- **Zincir:** F.13 ✅ → **madde 163** (iç-not MIGRATION, yedek tablo zorunlu) → **madde 164** (eşik `>= 2` + test) → **madde 30** (22 senaryo/88 şık seed). madde 73 artık bloke ETMİYOR. İçerik hazır.
+- **Bekleyen PO kararları:** S35 (9b etki doğrulaması, ilk tenant) · S34 (onboarding UserResponse sorgusu) · madde 162/F.14 (ölçek eşik yeniden-hesap keşfi) · madde 173 (2026-08-02 raporları kod-durumu) · ölçek uyuşmazlığı [aday] (numara bekliyor).

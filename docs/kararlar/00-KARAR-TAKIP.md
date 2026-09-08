@@ -1,6 +1,6 @@
 # 00 — KARAR & İŞ TAKİBİ (NE KALDI · NE YARIM · NE UNUTULDU)
 
-**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-09-08 (kod sözlüğü DURUM↔ENGEL ayrımı + 7 çift-kod geri alma; madde 109→🗑️, 113/7/Y7 karar, 9b T2; yeni 170·171·172; ölçek kararı b+c; söz S34) · ~~2026-09-04 (143·144·145 KODLANDI 🔀; 141 ⬜ ertelendi=akış sırası; 138·139·140 ⛔ motor bekliyor; KURAL 12 kart↔soru sırası düzeltildi)~~
+**🔄 YAŞAYAN** (canonical: açık iş/karar takibi) · **Son güncelleme:** 2026-09-08 GÜN KAPANIŞI (madde 73 ✅ CANLIDA + pointer re-bump S36; Y7→🗑️ bölündü Y9·Y10·Y11; 9b→✅ + S35; S1→✅ TUTULDU; 3 kural + madde 173; F.13 banner aşıldı) · ~~2026-09-08 (kod sözlüğü DURUM↔ENGEL ayrımı + 7 çift-kod geri alma; madde 109→🗑️, 113/7/Y7 karar, 9b T2; yeni 170·171·172; ölçek kararı b+c; söz S34)~~ · ~~2026-09-04 (143·144·145 KODLANDI 🔀; 141 ⬜ ertelendi=akış sırası; 138·139·140 ⛔ motor bekliyor; KURAL 12 kart↔soru sırası düzeltildi)~~
 
 > **Bu belge NEDEN var:** "Hep önümdeki işe odaklanıyorum ama arkada yarım bıraktığım işleri, ölü kodları,
 > alıp da uygulamadığım kararları unutuyorum; canlıya çıkınca eksik keşfediyorum." Bu belge o sorunu çözer:
