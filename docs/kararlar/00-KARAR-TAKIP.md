@@ -680,6 +680,8 @@ Kaynak: `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E
 
 ~~[ESKİ · 2026-09-08] ⚠️ **NUMARA VERİLMEDİ** — PO doğuracak (KURAL 8: numara YALNIZ burada doğar). En büyük mevcut numara = **160** (138-160 içerik kalemleri); PO buradan devam ettirir.~~ **✅ NUMARALAR VERİLDİ (2026-09-08, PO): 161-166.** Kalemler B.1 tablosuna taşındı (madde 161-166); bu blok tarihsel iz olarak kalır.
 
+> ⚠️ **ARTIK DOSYA ENVANTERİ (2026-09-08):** `docs/gelen/` altında **2 dosya** (git-takipsiz — `faz5-veri-akisi-PROMPT.txt.txt` 0 byte + `Yeni Metin Belgesi.txt` 28.599 byte, ikisi de prompt aktarımından kalan artık) · depo kökünde **0** adet `=` artığı. **Silme PO kararı; hiçbiri commit'e girmedi.**
+
 ---
 
 ## G. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
