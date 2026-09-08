@@ -1125,3 +1125,33 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 
 ## D) Sıradaki (PO onayı bekleyen)
 - Y7 bölünmesi (3 iş) + madde 7-A'nın `10-yol-tamamlananlar`'a taşınması (AYRI TUR) · 9b kapatma (0-etki) PO teyidi · **S1 6 arşiv teyidi** (içerik artık biliniyor) · ölçek eşik yeniden-hesap keşfi (madde 162/F.14) · S34 DB sorgusu (gerçek kullanıcı gelince).
+
+---
+---
+
+# 📅 OTURUM 2026-09-08 (22) — İLK KOD TURU: madde 73 seed-certification MUHAFIZI
+
+**📸 Kapanış fotoğrafı** — güncel için git + `09-DURUM.md` + `00-KARAR-TAKIP.md`.
+
+## 🔎 Git-doğrulanmış durum
+- **Çatı main HEAD (taban):** `03fdc17` (Merge PR #170). Dal: `feat/madde73-seed-guard-2026-09-08` (backend + çatı aynı ad).
+- **Backend main HEAD:** `df40d03` (Merge #68); bu turda backend feature dalı `feat/madde73-seed-guard-2026-09-08` (commit `5bd1656`) açıldı + push edildi → **backend PR #69.**
+- **Bugünkü önceki turlar (günlüğe kaydedildi/edilmedi):** #168 (kod temizliği) · #169 (ölçek-tip) · #170 (kod sözlüğü, OTURUM 21) MERGED. Bu **bugünkü İLK KOD turu** (önceki 11 belge turu).
+
+## A) Yapılanlar (2 commit + submodule pointer)
+- **COMMIT 1 (backend `5bd1656`):** `seed-certification.ts` sonuna doğrudan-çalıştırma muhafızı (**+11 satır**), `seed-learning-journey.ts:534-543` deseni birebir. Fonksiyon gövdesi değişmedi. `deleteMany` YOK (teyitli). Uyarlama: `'seed-learning-journey'`→`'seed-certification'`, `seedLearningJourney`→`seedCertification`. Fonksiyon parametresizdi (`:259 Promise<void>`) → doğrudan çağrı güvenli, DUR gerekmedi.
+- **COMMIT 2 (çatı):** belge senkronu — madde 73 (T5) → 🔀 PR'DA (İş hücresine gömüldü; T5'te ayrı durum kolonu YOK, 5-kolon eski biçim) · madde 30 (öncüller) · 09-DURUM tur notu · bu kayıt.
+- **Submodule pointer:** çatı `df40d03 → 5bd1656` (backend feature commit). Merge-sonrası re-bump = ayrı iş (S22-S29 deseni; bu turda NUMARA VERİLMEDİ, prompt kısıtı).
+
+## B) Doğrulama (ÇALIŞTIRMADAN)
+- `tsc --noEmit`: **0 hata** · `eslint prisma/seed-certification.ts`: **0 sorun**.
+- **Mantık kanıtı (FAZ 2.4):** `seed.ts` import → `process.argv[1]`=`.../prisma/seed.ts` → `"seed.ts".includes('seed-certification')`=**false** → muhafız import'ta TETİKLENMEZ (seed.ts:507 mevcut çağrı değişmedi). Doğrudan çalıştırma → true → güvenli fonksiyon.
+- DB gerektiren testler (vitest) **atlandı** — TEST_DATABASE_URL yok, guard durdurur; asıl kanıt CI.
+
+## C) Sınırlar / dürüstlük
+- ⛔ **SEED ÇALIŞTIRILMADI · DB'ye komut GİTMEDİ (SELECT dahil) · `prisma/seed.ts` ELLENMEDİ · migration YOK · SJT'ye dokunulmadı** (Faz 5 kapsamı) · alt-ajan yok. **MERGE EDİLMEDİ.**
+- madde 73 → **🔀 PR'DA** (✅ değil — merge bekliyor; KURAL 10). Kapsam daraltması (2026-09-03): madde 73 yalnız sertifikayı bloke ediyordu, sertifika ayağı kodlandı.
+
+## D) Sıradaki
+- **backend PR #69 merge → çatı pointer re-bump** (`5bd1656` → backend main HEAD); merge sonrası madde 73 → ✅.
+- madde 30 hâlâ madde 163 (migration) + 164 (eşik) + F.13 zincirini bekliyor (73 artık bloke etmiyor).
