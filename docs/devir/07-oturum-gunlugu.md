@@ -1014,3 +1014,48 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## F) Sıradaki
 - PO: çatı PR + backend PR #68 merge → pointer main HEAD'e re-bump.
 - 141 = akış sırası + madde 140 (motor); 138/139/140 = Faz 5 motor. `docs/gelen/senaryo-bankasi-2026-09-03.md` AYRI belge kayıt turu bekliyor.
+
+---
+---
+
+# 📅 OTURUM 2026-09-04 (19) — FAZ 5 ÖN KOŞUL KEŞFİ + S32/S33 + pointer re-bump
+
+**📸 Kapanış fotoğrafı** — git-teyitli. #157 + backend #68 MERGED sonrası; Faz 5'in gerçek boyutunu ortaya çıkaran salt-okuma keşif. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ; migration YOK).**
+
+## 🔎 Git-doğrulanmış durum
+- **#157 MERGED** → çatı `origin/main` `a5e8226`. **backend #68 MERGED** → backend main `df40d03`. Çatı pointer `10bba42 → df40d03` re-bump (S32 ✅, ileri sarım teyitli, `c00787e`).
+- **Bu tur dalı:** `docs/faz5-onkosul-2026-09-04` (güncel `origin/main`'den `a5e8226`).
+- ⚠️ `docs/gelen/senaryo-bankasi-2026-09-03.md` hâlâ untracked — DOKUNULMADI, stage'lenmedi.
+
+## A) ⭐ EN DEĞERLİ BULGU — Big Five iskeleti ZATEN KODDA
+- `SjtQuestion` (`schema.prisma:932`) + `SjtOption` (`:949`, `weights` Json OCEAN) + `AnswerFormat.MOST_LEAST` (`:927`) + skorlayıcı `sjt-scorer.ts` (MOST +1.0 `:65/68` · LEAST −0.5 `:72` · 0-100 vektör `:80`). 39 senaryo bu modele uyar. Faz 5 = "uyuyan motoru uyandırmak".
+
+## B) ÜÇ BOŞLUK + İKİ KOPUKLUK
+- **B1 `SjtResponse` YOK** (schema+src grep 0) → migration; seans-ötesi izleme (Katman-2) imkânsız.
+- **B2 adaptif seçici TERS** (`adaptiveTestEngine.ts` 284 satır): 5 CORE dolunca BASKIN boyutu (`getDominantType` `:205`) derinleştirir (`:208`); tasarım EN BULANIK ister → yeni seçici.
+- **B3 güven rampası YOK**: `confidence` = tamamlanma oranı (`:231` totalResponses/maxPossible · `:282` history/20), boyut-belirsizliği değil → sıfırdan.
+- **Kopukluk 1:** `computeAndStoreProfile` (OCEAN yazımı `scoring.service.ts:103-115`, disc okuma `:92-96`) yalnız `POST /scoring/compute-profile` (`sjtScoringController.ts:72`) → FE HİÇ çağırmıyor.
+- **Kopukluk 2:** veri köprüsü yok — disc okur, onboarding discVector'a yazar → 50'ye eşitlenir. (`scoreSjtAnswers` zaten doğrudan OCEAN verir.)
+
+## C) CANLI MOTOR + geriye dönük
+- `matching.ts` = DISC: `discType`/`discVector` 18 satır (~12 nokta); `ocean|archetype|UserProfile` = **0**. İki ayrı yığın (canlı DISC ↔ uyku OCEAN `rankMentorsForMenti`, FE'siz).
+- Geriye dönük: `oceanO..N`/archetype nullable; guard `if(!menti?.archetype)`→404 (`sjtScoringController.ts:102`). OCEAN'a geçilirse arketipsiz menti sıralanamaz → PO kararı.
+
+## D) FAZ 5 = 11 İŞ + 6 KARAR
+- **11 iş (§F):** a 39 senaryo seed · b forRole rol-nötr (migration) · c SjtResponse (migration) · d güven rampası (migration+kod) · e bulanık-seçici (kod) · f 5+10 akış (kod) · g OCEAN'ı onboarding'e bağla (kod) · h matching OCEAN/uyku-motor (kod) · i ağırlık %45/30/25 (kod) · j seed runner (madde 73 ORTAK) · k geriye dönük (karar+DB). → ~3 migration + 1-2 seed + ~6 saf kod + 1 karar.
+- **6 karar (§G) → S33:** discToOcean emekli/köprü · hangi alan · matching vs uyku-motor · backfill/yeniden · forRole · ağırlık geçişi.
+
+## E) Yapılanlar
+- **COMMIT 1 `29b0f21`:** keşif raporu (§A-H + KALEM LİSTESİ).
+- **COMMIT 2 `bc23960`:** madde 101 (11 iş+6 karar) · 138 (motor eki) · 73/T5 (seed runner SJT ortak) · **S32 ✅** (pointer) + **S33 ⬜** (6 karar PO'ya).
+- **COMMIT 3 (bu):** 00-INDEKS + 09-DURUM + bu bölüm.
+
+## F) ⭐ KANIT TEYİDİ (KAPANIŞ md.4) — 0 çürütme
+- Kodda doğrulanan referanslar (5+): SjtQuestion `:932` · MOST_LEAST `:927` · forRole zorunlu `:937` · sjt-scorer MOST/LEAST `:65/72` · SjtResponse YOK (grep 0) · matching ocean=0 · computeAndStoreProfile yazım `:103-115` · guard `:102` · confidence `:231/:282`. **Tek sapma:** adaptiveTestEngine 284 satır (keşif "285"). Diğer hepsi tuttu.
+
+## G) Sınırlar / dürüstlük
+- Kod/DB/şema DEĞİŞMEDİ · migration YOK · seed YOK · DB'ye komut GİTMEDİ · YENİ NUMARA VERİLMEDİ · #110 ellenmedi · alt-ajan yok · `docs/gelen/` stage'lenmedi (tek tek `git add`). **MERGE EDİLMEDİ.**
+
+## H) Sıradaki
+- PO: Faz 5 promptu — S33'teki 6 karar noktası. Üç kardeş belge (olcme-mimarisi/senaryo-denetim/olcme-arastirmasi) yazılmadıysa ağırlık kalibrasyonu + denetim protokolü Faz 5'te tanımlanmalı.
+- `docs/gelen/senaryo-bankasi-2026-09-03.md` AYRI belge kayıt turu bekliyor.

@@ -58,3 +58,4 @@ Yukarıdaki üç 2026-09-03 belgesi bu dört belgeye atıf yapıyor. **Hiçbiri 
 - **Açık iş/karar/çelişki takibi:** `docs/kararlar/00-KARAR-TAKIP.md`
 - **Bu klasörün kod kalemleri:** `kod-kalemleri-2026-09-03.md` (aynı klasör)
 - **İçerik ön-koşul keşifleri (2026-09-03):** `../kesif/icerik-onkosul-kesifleri-2026-09-03.md` — sertifika bankası ikizi (PO harmanla → 11 konu×2=22) · `outcome` alanı (S31 cevabı) · 4 ayrı içerik sistemi · madde 73 gerçek kapsamı (yalnız sertifika). Etkilediği maddeler: 30 · 73 · 145 · 147 · 148.
+- **Faz 5 ön-koşul keşfi (2026-09-04):** `../kesif/faz5-onkosul-kesfi-2026-09-04.md` — OCEAN üretimi + 39 senaryonun koda girişi. ⭐ SJT altyapısı iskeleti ZATEN KODDA (SjtQuestion/SjtOption/sjt-scorer); 3 boşluk (SjtResponse yok · adaptif ters · güven rampası yok); Faz 5 = **11 iş + 6 karar**. Etkilediği maddeler: 101 · 138 · 139 · 140 · 73 + S33.
