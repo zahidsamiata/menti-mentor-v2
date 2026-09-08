@@ -975,3 +975,42 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## F) Sıradaki
 - PO: bu PR merge · 22 senaryo içerik turu (numara adayı) · sertifika 9-satırlık muhafız (madde 73, artık küçük iş) numaralandır/işle.
 - ⛔ F.13 (Neon yedeği) canlı DB öncesi ŞART. Gösterim çekirdeği (138-145) + 147/148 (artık yalnız F.13'e bağlı) kodlanabilir.
+
+---
+---
+
+# 📅 OTURUM 2026-09-04 (18) — GÖSTERİM KALEMLERİ 143·144·145 KODLANDI + 141 ERTELENDİ
+
+**📸 Kapanış fotoğrafı** — git-teyitli. İlk SOMUT KOD turu (içerik kalemlerinin kod ayağı). #156 (keşif) MERGED sonrası. **KOD turu (FE + küçük backend); migration YOK, seed YOK, şema DEĞİŞMEDİ.**
+
+## 🔎 Git-doğrulanmış durum
+- **#156 MERGED** → çatı `origin/main` `96fd3d5`. **Bu tur dalı:** `feat/gosterim-kalemleri-2026-09-04`.
+- Backend submodule: `feat/madde-145-koruma-2026-09-04` (`10bba42`), **backend PR #68** açık; çatı pointer feature-commit'e bump.
+- ⚠️ `docs/gelen/senaryo-bankasi-2026-09-03.md` çalışma ağacında belirdi (PO koydu) — PO kararıyla DOKUNULMADI, stage'lenmedi (ayrı belge turu).
+
+## A) ⭐ Gösterim çekirdeği İKİYE ayrıldı (keşif teyidi)
+- **(a) Engelsiz → KODLANDI:** 143 · 144 · 145.
+- **(b) ⛔ Motor bekliyor:** 138 · 139 · 140 — Big Five boyut skoru canlıda üretilmiyor (`scoring.service.ts:103-115` yalnız çağrılmayan `POST /scoring/compute-profile`'dan; veri köprüsü yok → discD/I/S/C okur, onboarding discVector'a yazar → 50'ye eşitlenir). Faz 5 / madde 101.
+- **(c) ⬜ 141 ERTELENDİ** (aşağıda).
+
+## B) Yapılanlar (dosya:satır)
+- **COMMIT 2 `21f22bd` (143):** `lib/shuffle.ts` (Fisher-Yates) · `ScenarioGuideEngine` opt-in `shuffleChoices` (aşama başına stabil, `scenario?.id`) · `learning-journey/page.tsx` açık · `mentor/certification/page.tsx` `displayOptions` (soru koduna göre). Cevap `key`'e bağlı → shuffle bozmaz.
+- **COMMIT 3 `ea5225f` (144):** `neutralFeedback` prop + `NeutralReveal` — yalnız seçilen+feedback, RENK/İŞARET YOK, "Diğer seçenekler…" işaretsiz açılır. Diğer şık gerekçesi yüklenmez (cevap anahtarı sızmasın) → yalnız etiket. Görüşme Rehberi + sertifika DEĞİŞMEDİ (varsayılan false). +2 test → motor 3→5.
+- **backend COMMIT `10bba42` (145):** `resolveChoice`'a madde-145 uyarı yorumu + regresyon testi (select sonrası `UserProfile` AYNI, ocean/archetype null). Davranış DEĞİŞMEDİ, kilitlendi. backend tsc/tsc-test/eslint 0.
+- **COMMIT 4 `0aa9314`:** çatı pointer bump (backend `10bba42`).
+- **COMMIT 5 (bu):** belge senkronu.
+
+## C) ⭐ 143/145 teyitleri (KANIT DİSİPLİNİ)
+- **143 — cevap KİMLİĞE bağlı, indekse DEĞİL:** öğrenme yolculuğu `resolveChoice(stageId, choiceKey)` (`page.tsx:56`); sertifika `firstAttempts{questionCode, optionKey}` (`page.tsx:103`). Shuffle yalnız gösterimi değiştirir → cevap bozulmaz. ✓
+- **145 — profil yazımı YOK (keşfin aksine değil, teyidi):** `resolveChoice` (`learningJourney.service.ts:170-198`) yalnız `findFirst`/`findUnique` okur; hiçbir `userProfile`/`user.update` yok. ✓
+
+## D) ⬜ 141 ERTELENDİ (dürüst pushback) + KURAL 12
+- Cümle "sonra karakter kartın hazır" der; mevcut kod TERSİ: Profil→Mizaç→Sonuç(kart)→Tercihler(3 soru) (`_OnboardingContent.tsx:223-234`) — kart üç sorudan ÖNCE, sonra kart YOK. → 141 = **AKIŞ SIRASI değişikliği** + madde 140 (motor bekliyor). ⬜ AÇIK (✅ İŞARETLENMEDİ). madde 140'a "akış sırası" kapsam eklendi; 2 PO önlemi (farklı görsel dil + kart gecikmesi) 141 kapsamına yazıldı.
+- **⭐ KURAL 12 çelişki:** "üç soru arketip SONRASI" (kart önce) 4 belgede vardı; 09-03 arketip §4 TERSİNE çevirdi (kart SONDA). **Canonical damgalandı:** `tasarim §10.2` (üstü-çizili + arketip §4 yönlendirmesi) + `00-KARAR-TAKIP:99`. 09-DURUM:45/55 tarihsel ⚡ snapshot → yeni tur notu + madde 141 canonical taşır (dated snapshot rewrite edilmedi).
+
+## E) Sınırlar / dürüstlük
+- migration YOK · seed ÇALIŞTIRILMADI · DB'ye komut GİTMEDİ · şema DEĞİŞMEDİ · **138/139/140 DEĞİŞMEDİ** · #110 ellenmedi · alt-ajan yok · `docs/gelen/` stage'lenmedi (tek tek `git add`). YENİ NUMARA VERİLMEDİ. **MERGE EDİLMEDİ.**
+
+## F) Sıradaki
+- PO: çatı PR + backend PR #68 merge → pointer main HEAD'e re-bump.
+- 141 = akış sırası + madde 140 (motor); 138/139/140 = Faz 5 motor. `docs/gelen/senaryo-bankasi-2026-09-03.md` AYRI belge kayıt turu bekliyor.
