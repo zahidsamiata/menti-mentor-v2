@@ -677,10 +677,13 @@ Kaynak: `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E
 | **163** | `CertificationOption`'a iç-not alanı — **MIGRATION** · KALEM 6 doğrulandı: `explanation` ve `outcome` ikisi de kullanıcıya gösteriliyor, gizli alan YOK (`schema.prisma:1149-1161`). Alan açılmazsa Oturum 1'in 🔒 iç notları seed'e GİREMEZ | MIGRATION |
 | **164** | `certification.test.ts:78` — `>= 2` kod turuyla birlikte güncellenmeli | KOD (madde 72 ayağı) |
 | **161** | Canlıda hangi DISC yolu kullanılıyor — FE akışı keşfi + canlı doluluk sorgusu (❓ DB, PO onayı) | KEŞİF |
+| [aday] | ⭐ **Öğrenme yolculuğuna GİZLİLİK ve BİTİRME aşamaları eklenecek — mentör yolculuğu 8 → 10 aşama.** PO kararı (2026-09-08). **Tasarım boşluğu:** bu iki konu sertifikada SINANIYOR ama öğrenme yolculuğunda karşılığı YOK (faz6 §2 eşleme tablosu gizliliği açıkça "(öğrenmede yok)" diye işaretliyor — `faz6-ogrenme-ve-sertifika-2026-09-03.md:64`; bitirme tabloda hiç geçmiyor). ⚠️ **Gizlilik RED-LINE** — kişi hiç öğretilmemiş bir konuda ilk denemede 2'nin altında kalırsa ELENİYOR; bu, "öğretimin son tekrarı" felsefesini (faz5 §I-2) bozar. **Felsefeye istisna KONMAYACAK** — boşluk kapatılacak (istisna konursa "hangi konular öğretiliyor" sorusu bulanıklaşır). ⚠️ Menti yolculuğunda (5 aşama) da gizlilik yok; menti tarafında sınanmadığı için acil DEĞİL, not düşülsün. Detay: `../raporlar/icerik/sertifika-oturum3-4-konu-2026-09-08.md` KALEM 19 | İÇERİK (yazım turu) |
 
 ~~[ESKİ · 2026-09-08] ⚠️ **NUMARA VERİLMEDİ** — PO doğuracak (KURAL 8: numara YALNIZ burada doğar). En büyük mevcut numara = **160** (138-160 içerik kalemleri); PO buradan devam ettirir.~~ **✅ NUMARALAR VERİLDİ (2026-09-08, PO): 161-166.** Kalemler B.1 tablosuna taşındı (madde 161-166); bu blok tarihsel iz olarak kalır.
 
 > ⚠️ **ARTIK DOSYA ENVANTERİ (2026-09-08):** `docs/gelen/` altında **2 dosya** (git-takipsiz — `faz5-veri-akisi-PROMPT.txt.txt` 0 byte + `Yeni Metin Belgesi.txt` 28.599 byte, ikisi de prompt aktarımından kalan artık) · depo kökünde **0** adet `=` artığı. **Silme PO kararı; hiçbiri commit'e girmedi.**
+
+> ⚠️ **YENİ ADAY (2026-09-08):** KALEM 19 — öğrenme yolculuğu 8→10 aşama. En büyük mevcut numara **166**; PO buradan devam ettirir (aday: **167**).
 
 ---
 
