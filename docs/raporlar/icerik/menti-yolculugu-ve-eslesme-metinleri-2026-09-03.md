@@ -13,10 +13,10 @@
 Önceki belgeler mentör tarafını kapsıyordu. Bu belge **menti tarafını** ve **eşleşme anını** tamamlıyor.
 
 **Kardeş belgeler:**
-- `senaryo-bankasi-2026-09-03.md` — 39 karakter senaryosu
-- `olcme-mimarisi-2026-09-03.md` — ölçme mimarisi
-- `arketip-ve-yaklasim-icerigi-2026-09-03.md` — 8 arketip kartı + #31 yaklaşım metinleri
-- `faz6-ogrenme-ve-sertifika-2026-09-03.md` — 8 mentör aşaması + 20 sertifika senaryosu
+- `senaryo-bankasi-2026-09-03.md` — 39 karakter senaryosu · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
+- `olcme-mimarisi-2026-09-03.md` — ölçme mimarisi · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
+- `arketip-ve-yaklasim-icerigi-2026-09-03.md` — 8 arketip kartı + #31 yaklaşım metinleri · ✅ bu klasörde
+- `faz6-ogrenme-ve-sertifika-2026-09-03.md` — 8 mentör aşaması + 20 sertifika senaryosu · ✅ bu klasörde
 
 ⚠️ Çelişki olursa daha yeni tarihli kazanır; kod ile çelişirse **kod kazanır** (KURAL 10).
 

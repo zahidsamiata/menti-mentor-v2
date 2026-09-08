@@ -13,10 +13,10 @@
 Faz 6, değerlendirme sisteminin **öğretim ve yetkinlik** ayağıdır. Karakter testi kişiyi ölçer; bu iki sistem mentörlüğü öğretir ve sınar.
 
 **Kardeş belgeler:**
-- `senaryo-bankasi-2026-09-03.md` — 39 karakter senaryosu
-- `olcme-mimarisi-2026-09-03.md` — ölçme mimarisi
-- `arketip-ve-yaklasim-icerigi-2026-09-03.md` — 8 arketip kartı + #31 yaklaşım metinleri
-- `senaryo-denetim-protokolu.md` — denetim protokolü v2
+- `senaryo-bankasi-2026-09-03.md` — 39 karakter senaryosu · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
+- `olcme-mimarisi-2026-09-03.md` — ölçme mimarisi · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
+- `arketip-ve-yaklasim-icerigi-2026-09-03.md` — 8 arketip kartı + #31 yaklaşım metinleri · ✅ bu klasörde
+- `senaryo-denetim-protokolu.md` — denetim protokolü v2 · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
 
 ⚠️ Çelişki olursa daha yeni tarihli kazanır; kod ile çelişirse **kod kazanır** (KURAL 10).
 

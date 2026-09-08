@@ -877,3 +877,33 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## C) Sıradaki
 - PO: bu PR merge · F.13 DB-yedeği + F.12 C2 kalemlerini numaralandır · **⛔ Neon yedek ayarını KONTROL ET (canlı DB işlemi öncesi şart).**
 - Sonra: 🟢 sahiplik uygulama turu (5 kalem: PLATFORM_ADMIN_EMAIL/destek@/MeetingScheduler/profil-uçları/qualityMultiplier — acil değil) → G2-G8/G11 kart↔kod → içerik oturumu · OAuth turu · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-03 (15) — İÇERİK KAYDI: 3 BELGE gelen→raporlar/icerik + İNDEKS + KOD-KALEMLERİ
+
+**📸 Kapanış fotoğrafı** — git-teyitli. 2026-09-03 içerik oturumlarının çıktısı depoya kalıcı alındı. **Yalnız-belge (kod/DB/şema/seed DEĞİŞMEDİ; migration YOK).**
+
+## 🔎 Git-doğrulanmış durum
+- **Bu tur dalı:** `docs/icerik-kaydi-2026-09-03` (güncel `origin/main`'den `20a5f42` — lokal main 5 commit geride idi, ff-pull ile eşitlendi).
+- **Ön koşul (ilk deneme):** PO dosyaları henüz koymamıştı → `docs/gelen/` yoktu, tur DURDU. PO 3 dosyayı koyunca tur baştan yürüdü.
+
+## A) Yapılanlar
+- **FAZ 0 — SAYIM (KURAL 16, iki kez, aralık-aralık, kod/metinle):** üç belge de tam okundu (arketip 471/471 · faz6 672/672 · menti 431/431). **Beyanla TAM UYUŞTU — 0 fark, 0 çürütme.** 8 arketip kartı · 4 "şimdilik" · 8 yaklaşım #31 · 8 öğrenme aşaması/24 şık · 20 sertifika (10 konu×2)/80 şık · 5 menti aşaması/15 şık · **14 isim değişkeni toplam** (4 mentör+4 menti+6 sertifika; hiçbir belge toplamı yazmıyordu — türetildi) · 16 kombinasyon (1 yazılı/15 ⬜) · 3 bekleme + 2 ret. **Kod kalemi 23** (arketip 6+faz6 7+menti 10).
+- **EK GÖREV — `backend/prisma/senaryo-bankasi-tam.md` ilk 40 satır:** "Mentör Sertifika Senaryo Bankası — Tam Sürüm (v2)", TAM TASLAK (PO onayı bekliyor). **Format:** Konu | Bağlam | Kritik mi | Varyant; her varyant senaryo + **4 seçenek**, seçenekler **0-3 puan** (3=en doğru…0=zararlı). **10 KONU · 20 Varyant · 4 kritik konu.** **Yetkinlik-temelli** (ör. "fostering independence") — **DISC=0 · Big Five/OCEAN=0** (grep). İçinde tarih yok. → 2026-09-03 kardeş belgesi `senaryo-bankasi-2026-09-03.md` (39 KARAKTER senaryosu) ile FARKLI belge. Yalnız OKUNDU.
+- **FAZ 1 (COMMIT 1):** 3 dosya `docs/gelen/`→`docs/raporlar/icerik/` TAŞINDI (kopya değil); `docs/gelen/` silindi. Her belgeye "Kayda geçirildi" başlığı — içerik değişmedi.
+- **FAZ 2 (COMMIT 2):** kırık atıflar işaretlendi (4 kardeş belgeye 9 atıf satırı "⬜ HENÜZ YAZILMADI"; var olan çapraz-refler "✅ bu klasörde"; kırık markdown-linki üretilmedi) · yeni `00-INDEKS.md` · 09-DURUM tur notu + Son güncelleme 2026-09-03 · bu oturum bölümü.
+- **FAZ 3 (COMMIT 3):** `kod-kalemleri-2026-09-03.md` — 23 kod kalemi tek listede + **3 belge↔kod çelişkisi** (⬜ AÇIK, kod-kanıtlı) + dürüstlük sınırları birleşik.
+
+## B) ⭐ 3 ÇELİŞKİ (kaydedildi, ÇÖZÜLMEDİ — kod kanıtlı)
+1. **Şık sırası:** faz6 §5 "her gösterimde rastgele (global kural)" ANIYOR ↔ `shuffle|Math.random` backend/src+frontend/src'te **0 eşleşme** → kural DEĞİL, YAPILACAK İŞ (§10 kod kalemi 5). KURAL 10: kod kazanır.
+2. **Öğrenme yolculuğu aşama sayısı:** canlı **Mentör 7 + Menti 6** (`seed-learning-journey.ts:7`, order 1-7/1-6) ↔ yeni tasarım **Mentör 8 + Menti 5**. GEÇİŞ PLANI hiçbir belgede yok.
+3. **İsim nötrlüğü:** eski "isimler unisex, karşı taraf isimsiz" (`konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410`) ↔ faz6 §4 İPTAL etti (gerekçe yazılı). Eski karara [ESKİ] damgası = AÇIK aksiyon (bu turda SİLİNMEDİ/çözülmedi).
+
+## C) Sınırlar / dürüstlük
+- Kod/DB/şema/seed DEĞİŞMEDİ · migration YOK · DB'ye komut (SELECT dahil) GİTMEDİ · seed ÇALIŞTIRILMADI · **00-KARAR-TAKIP ELLENMEDİ · numara VERİLMEDİ** · #110 ellenmedi · alt-ajan yok. 4 kardeş belge EKSİK (uydurulmadı). **MERGE EDİLMEDİ.**
+
+## D) Sıradaki
+- PO: bu PR merge · 23 kod kalemine + 3 çelişkiye `00-KARAR-TAKIP`'te numara ver · 4 kardeş belgeyi (senaryo-bankasi/olcme-mimarisi/senaryo-denetim-protokolu/olcme-arastirmasi) kaydet.
+- Sonra: çelişki #2 için öğrenme-yolculuğu GEÇİŞ PLANI (7+6 → 8+5) · içeriğin koda (seed) geçişi — güvenli seed runner (madde 73) bloke · 🟢 sahiplik uygulama turu · G2-G8/G11 kart↔kod · OAuth · S26 · Faz 5.

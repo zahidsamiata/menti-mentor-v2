@@ -13,10 +13,10 @@
 Bu belge, MentiMentor değerlendirme sisteminin **kullanıcıya görünen içeriğini** ve o içeriğin arkasındaki kararları kaydeder.
 
 Kardeş belgeler (ayrı kayıt turunda işlendi):
-- `senaryo-bankasi-2026-09-03.md` — 39 senaryo, 117 şık
-- `olcme-mimarisi-2026-09-03.md` — 11 maddelik ölçme mimarisi
-- `senaryo-denetim-protokolu.md` — denetim protokolü v2
-- `olcme-arastirmasi-2026-09-03.md` — akademik araştırma özeti
+- `senaryo-bankasi-2026-09-03.md` — 39 senaryo, 117 şık · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
+- `olcme-mimarisi-2026-09-03.md` — 11 maddelik ölçme mimarisi · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
+- `senaryo-denetim-protokolu.md` — denetim protokolü v2 · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
+- `olcme-arastirmasi-2026-09-03.md` — akademik araştırma özeti · ⬜ HENÜZ YAZILMADI — ⚠️ Bu belge henüz kaydedilmedi (2026-09-03)
 
 ⚠️ Bu belge onların üstüne inşa edilir. Çelişki olursa **daha yeni tarihli** olan kazanır; kod ile çelişirse **kod kazanır** (KURAL 10).
 
