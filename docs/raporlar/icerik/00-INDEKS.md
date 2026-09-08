@@ -23,6 +23,7 @@
 | `senaryo-bankasi-2026-09-03.md` | ⭐ Karakter ölçümü soru bankası — **39 senaryo (5 çekirdek + 34 havuz) / 117 şık**, Big Five (5 boyut), "en çok/en az ben" · 9 yazım kuralı · şık karıştırma (madde 143) · katman-2 %12→%25. ⚠️ KODA GEÇMEDİ (canlı = 8 hardcoded DISC) | `docs/raporlar/icerik/` |
 | `sertifika-oturum1-4-kritik-konu-2026-09-08.md` | Oturum 1: 4 kritik konu · 8 senaryo · 32 şık (0-3 puanlı) · 4 prensip cümlesi · 10 kalem adayı · elenen sahne gerekçeleri · isim dağılım tablosu | `docs/raporlar/icerik/` |
 | `sertifika-oturum2-3-konu-2026-09-08.md` | Oturum 2: 3 konu (kapasite · süreklilik · aktif dinleme) · 6 senaryo · 24 şık (0-3 puanlı) · 3 prensip cümlesi · KALEM 11-16 + 1/5/9 güncellemesi · 6 elenen sahne · 2 yeni sahne | `docs/raporlar/icerik/` |
+| `sertifika-oturum3-4-konu-2026-09-08.md` | ⭐ Oturum 3 · SERİ TAMAM: 4 konu (cevabı buldurmak · beklenti · farklılık · bitirme) · 8 senaryo · 32 şık (0-3 puanlı) · 4 prensip cümlesi · KALEM 17-19 + 1/5/13/15 güncellemesi · seri kapanış tablosu (11 konu / 22 senaryo / 88 şık) | `docs/raporlar/icerik/` |
 
 **Önceden bu klasörde olan (2026-08-26 içerik incelemeleri):**
 
