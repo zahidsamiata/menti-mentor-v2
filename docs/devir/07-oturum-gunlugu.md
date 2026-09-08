@@ -1059,3 +1059,11 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## H) Sıradaki
 - PO: Faz 5 promptu — S33'teki 6 karar noktası. Üç kardeş belge (olcme-mimarisi/senaryo-denetim/olcme-arastirmasi) yazılmadıysa ağırlık kalibrasyonu + denetim protokolü Faz 5'te tanımlanmalı.
 - `docs/gelen/senaryo-bankasi-2026-09-03.md` AYRI belge kayıt turu bekliyor.
+
+## I) ⭐ EK (aynı tur, #158'e eklendi) — §I SERTİFİKA KARARLARI (8 karar)
+2026-09-04 içerik oturumunun 8 sertifika kararı raporun §I'sine + maddelere işlendi.
+- **FAZ 0 kod teyidi (DUR gerekmedi — karar (c) ile tutarlı):**
+  - **T1:** geçme eşiği **KONU bazlı** — `certification.service.ts:12` (%80) + `:50` `ceil(n×0.8)` (8→7) + `:66-67` red-line`===3`/normal`≥2` + `:86` RED_LINE_FAILED. **PUAN bazlı DEĞİL** (24→19 değil).
+  - **T2:** `competencyScore Int` (`schema.prisma:1155`), seed'de değerler **{0,1,2,3}** her biri 20 kez → 0-3 + her senaryoda 3 ve 0 mevcut.
+- **8 karar:** (1) 0-3 puanlama korunuyor · (2) **madde 72 → seçenek (c)** (kod zaten uyguluyor) · (3) puanlama rehberi 3/2/1/0 (red-line'da 0 daha dar, "elemeyi delen kaçak" uyarısı) · (4) sahne seçim kriteri (ayrışma>STK>çakışmazlık) · (5) akademik kaynak DOĞRULANMADI (internet yok, not düşülür) · (6) kriz senaryoları hukuki teyit → madde 159 · (7) 3 oturumluk plan (O1 4 kritik/O2 2 birleşen+dinleme/O3 5 konu) · (8) 11 konu birleştirme (13→11, iki çift birleşti; sınav 8=4 kritik+7'den 4).
+- **Güncellenen:** madde 72/T4 (✅ karar c) · 30 (§I) · 159 (kriz hukuki) + 10-yol md.72/md.30 (KURAL 12 yayılım). YENİ NUMARA VERİLMEDİ. Kod DEĞİŞMEDİ. #158'e eklendi, MERGE EDİLMEDİ.
