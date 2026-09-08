@@ -583,7 +583,9 @@ S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla
 
 #### ✅ EKRAN KARARI — üç soru nereye konur (PO, 2026-08-29)
 
-- Üç soru **KAYIT AKIŞININ SONUNA, arketip kartından HEMEN SONRA** konur.
+> ⚠️ GÜNCELLEME (2026-09-04, KURAL 12 — kod turu): Bu 2026-08-29 kararı, **daha yeni** `../../raporlar/icerik/arketip-ve-yaklasim-icerigi-2026-09-03.md` §4 ile **TERSİNE ÇEVRİLDİ.** Yeni sıra: **15 senaryo → 3 SORU → arketip KARTI** (kart SONDA). Gerekçe: kart önce gelirse kişi arketibini görüp S2'ye ona uygun cevap verir (bias); sıra ters çevrilince bias kaynağı kökten kalkar (S2-nötr önlemine ek güvence). ⭐ **Kod bugün TERSİ çalışıyor** (kart üç sorudan önce: `frontend/.../_OnboardingContent.tsx:223-234`) → madde **141** = yalnız metin değil **AKIŞ SIRASI değişikliği** (madde 140'a bağlı, ⬜ AÇIK). Aşağıdaki eski metin tarihsel iz olarak bırakıldı:
+
+- ~~[ESKİ · 2026-09-04] Üç soru **KAYIT AKIŞININ SONUNA, arketip kartından HEMEN SONRA** konur.~~ → **DOĞRUSU (arketip §4): üç soru arketip kartından ÖNCE; kart en sonda.**
 - **Gerekçe (PO):** kişi "sen bir Limansın" görmüş, ilgisi taze, 40 saniye daha verir; formun ortasına konursa sürtünme olur.
 - **Süre etkisi:** ilk oturum ~6 dk → ~7 dk.
 - ⚠️ **ŞART (PO): S2 metni NÖTR yazılacak.** Sebep: kişiye az önce arketip etiketi verildi; "nasıl destek isterim" sorusu kişiliğe en yakın soru olduğu için kişi etikete uygun cevap verme eğilimine girebilir (Liman denen kişi "dinlesin" der, çünkü Liman öyle olmalı gibi gelir) → ölçüm bozulur. Metin arketipten bağımsız, davranışsal yazılacak. → İçerik oturumunun işi, ajan yazmaz.

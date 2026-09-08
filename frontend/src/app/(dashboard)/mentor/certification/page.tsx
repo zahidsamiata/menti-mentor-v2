@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
+import { shuffle } from '@/lib/shuffle';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
 import { Button } from '@/components/ui/button';
@@ -79,6 +80,16 @@ export default function MentorCertificationPage() {
   useEffect(() => {
     if (user?.role === 'MENTOR') void loadQuestions();
   }, [user?.role, loadQuestions]);
+
+  // madde 143 — şık sırası her soru gösteriminde karışır (soru koduna göre stabil;
+  // varyant/konu değişince yeniden karışır). Cevap `o.key` kimliğiyle kaydedildiğinden bozulmaz.
+  // Hook erken-return'den ÖNCE çağrılmalı (React hook kuralı).
+  const activeQuestion = topics[topicIdx]?.variants[variantIdx];
+  const displayOptions = useMemo(
+    () => (activeQuestion ? shuffle(activeQuestion.options) : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [activeQuestion?.code],
+  );
 
   if (!user || user.role !== 'MENTOR') return null;
 
@@ -259,7 +270,7 @@ export default function MentorCertificationPage() {
           <CardTitle className="text-base leading-snug mt-2">🎬 {currentQuestion.scenario}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          {currentQuestion.options.map((o) => {
+          {displayOptions.map((o) => {
             const isSelected = selectedKey === o.key;
             const style = reveal && reveal.outcome ? OUTCOME_STYLE[reveal.outcome] : null;
             return (

@@ -78,3 +78,33 @@ describe('ScenarioGuideEngine — keşif motoru (puan yok)', () => {
     await waitFor(() => expect(onComplete).toHaveBeenCalledTimes(1));
   });
 });
+
+describe('ScenarioGuideEngine — madde 143 (şık karıştırma) + 144 (nötr geri bildirim)', () => {
+  it('143: shuffleChoices açıkken şık sırası karışır (kimlik korunur)', () => {
+    // Fisher-Yates: 2 öğede random=0 → sırayı ters çevirir ([a,b] → [b,a]).
+    const spy = vi.spyOn(Math, 'random').mockReturnValue(0);
+    renderEngine({ shuffleChoices: true });
+    const choiceButtons = screen
+      .getAllByRole('button')
+      .filter((b) => /seçim/.test(b.textContent ?? ''));
+    expect(choiceButtons[0]).toHaveTextContent('Yanlış seçim'); // b öne geldi
+    spy.mockRestore();
+  });
+
+  it('144: nötr modda yalnız seçilen + feedback görünür; diğerleri kapalı, işaretsiz açılır', async () => {
+    renderEngine({ neutralFeedback: true });
+
+    fireEvent.click(screen.getByText('Yanlış seçim'));
+    await waitFor(() => expect(screen.getByText('Bu seçim zorlar.')).toBeInTheDocument());
+
+    // Doğru/yanlış işareti YOK (sınav ikonları görünmez)
+    expect(screen.queryByText('❌')).not.toBeInTheDocument();
+    expect(screen.queryByText('✅')).not.toBeInTheDocument();
+    // Diğer şık reveal sonrası KAPALI
+    expect(screen.queryByText('Doğru seçim')).not.toBeInTheDocument();
+
+    // "Diğer seçenekler…" ile açılır (işaretsiz)
+    fireEvent.click(screen.getByText('Diğer seçenekler ne anlama geliyordu?'));
+    expect(screen.getByText('Doğru seçim')).toBeInTheDocument();
+  });
+});

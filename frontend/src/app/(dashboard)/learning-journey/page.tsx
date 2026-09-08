@@ -71,6 +71,8 @@ export default function LearningJourneyPage() {
       scenarios={scenarios}
       resolveChoice={resolveChoice}
       onComplete={onComplete}
+      shuffleChoices  /* madde 143 — şık sırası her gösterimde karışır */
+      neutralFeedback /* madde 144 — renk/işaret yok; yalnız seçilen + feedback; diğerleri kapalı */
       completion={{
         emoji: '🌟',
         title: 'Yolculuğu tamamladın!',

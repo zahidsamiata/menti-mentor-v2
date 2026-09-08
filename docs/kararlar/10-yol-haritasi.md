@@ -68,8 +68,12 @@
 
 **⭐⭐ EN ÖNCELİKLİ — 2026-09-03 İÇERİK KALEMLERİ (madde 138-160, B.1)** — PO kararı (2026-09-03): *"bu testler bizim için en önemli işler"* → **EN ÖN SIRA.** Detay TEK SATIR ilkesi: `00-KARAR-TAKIP` B.1 (madde 138-160) + `../raporlar/icerik/kod-kalemleri-2026-09-03.md`. ⚠️ Aşağıdaki iç sıra **ÖNERİDİR — PO onayı bekliyor.**
 - **0. ⛔ BLOKER:** ~~[ESKİ · 2026-09-03] **F.13** Neon yedeği TEYİTSİZ → **madde 73** güvenli seed runner YOK. Seed'e bağlı kalemler (146·147·148·149·150 + 157·158·159) bu iki bloker açılmadan canlıya GİRMEZ; **madde 30** zaten bu yüzden bloke.~~ **⚠️ GÜNCELLEME (2026-09-03, KEŞİF):** **madde 73 YALNIZ sertifikayı (madde 30) bloke eder** — kod-teyitli (`seed-learning-journey.ts` doğrudan-çalıştırma muhafızlı `:534-543` → 147/148 kapsam DIŞI; `seed-certification.ts` muhafızsız → 30 bloke). madde 73 = **9 satırlık muhafız** işi. **Kalan gerçek bloker = F.13** (Neon yedeği teyitsiz — her canlı DB işleminde PO onayı ŞART; migration/backfill/seed açılmaz). Kanıt: `../raporlar/kesif/icerik-onkosul-kesifleri-2026-09-03.md` §D.
-- **1. Gösterim çekirdeği** (migration/seed'siz ilerleyebilir): 138 · 139 · 140 · 141 · 143 · 144 · 145
-- **2. İçerik taşıma** (seed'e bağlı → 0. bloker sonrası): 146 · 147 · 148 · 149 · 150
+- ~~[ESKİ · 2026-09-04] **1. Gösterim çekirdeği** (migration/seed'siz ilerleyebilir): 138 · 139 · 140 · 141 · 143 · 144 · 145~~
+- **⚠️ GÜNCELLEME (2026-09-04, kod turu): "Gösterim çekirdeği" İKİYE AYRILDI —**
+  - **(a) GERÇEKTEN ENGELSİZ → 🔀 KODLANDI (çatı PR + backend PR #68):** **143** (şık karıştırma) · **144** (nötr geri bildirim) · **145** (öğrenme cevabı profile yazmaz — koruma). Motor/seed/migration gerektirmedi.
+  - **(b) ⛔ MOTOR BEKLİYOR (engelsiz DEĞİL):** **138 · 139 · 140** — migration/seed blokeri yok AMA Big Five boyut skoru canlıda ÜRETİLMEDEN yapılamaz (`scoring.service.ts:103-115` yalnız çağrılmayan uçtan; veri köprüsü yok → Faz 5 / madde 101 ön koşulu).
+  - **(c) ⬜ 141 ERTELENDİ:** yalnız metin değil AKIŞ SIRASI değişikliği (kart bugün üç sorudan ÖNCE; arketip §4 SONRAYA alınmasını ister) + madde 140'a bağlı.
+- **2. İçerik taşıma** (seed'e bağlı → **yalnız F.13** bloker sonrası; md.73 sertifikaya özgü): 146 · 147 · 148 · 149 · 150
 - **3. Eşleşme deneyimi:** 151 · 153 · 154 · 155 · 156 · 152 · 142
 - **4. Sınav iyileştirme:** 157 · 158 · 159
 - **5. Belge işi** (bağımsız, her an): 160
