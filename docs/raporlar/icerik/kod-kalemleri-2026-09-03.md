@@ -1,6 +1,6 @@
 > 📁 Kayda geçirildi: 2026-09-03 · tur: docs/icerik-kaydi-2026-09-03
 
-# Kod Kalemleri Envanteri + Belge↔Kod Çelişki Listesi (2026-09-03 içerik belgeleri)
+# Kod Kalemleri Envanteri + Açık Yapısal Kalemler (2026-09-03 içerik belgeleri)
 
 > 🔄 YAŞAYAN · Kaynak: üç 2026-09-03 içerik belgesi (`arketip-…` · `faz6-…` · `menti-…`, hepsi bu klasörde).
 >
@@ -37,7 +37,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | F2 | Hatalı-konu hedefleme — yanlış yapılan konu tekrar denemede mutlaka gelsin, diğer varyantıyla | ⬜ AÇIK | Evet |
 | F3 | Kritik konu garantisi — her sınavda 4 kritik konudan birer soru | ⬜ AÇIK | Evet |
 | F4 | Deneme sınırı — günde 2, üçüncüsü için bekleme; bekleme süresince öğrenme yolculuğuna yönlendirme | ⬜ AÇIK | Evet |
-| F5 | Şık sırası karıştırma — sertifikada ve öğrenmede, her gösterimde (⚠️ bkz. Çelişki #1 — kodda YOK) | ⬜ AÇIK | Evet |
+| F5 | Şık sırası karıştırma — sertifikada ve öğrenmede, her gösterimde (⚠️ bkz. Madde 1 — uygulanmamış PO kararı, kodda henüz yok) | ⬜ AÇIK | Evet |
 | F6 | Konu bazlı geri bildirim — sınav sonunda zayıf konu + ilgili öğrenme aşamasına yönlendirme | ⬜ AÇIK | Evet |
 | F7 | Kriz bildirimi — kendine zarar ifadesi geçtiğinde kurum yöneticisine otomatik bildirim (4B'nin canlı karşılığı) | ⬜ AÇIK | Evet |
 
@@ -62,34 +62,36 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 
 ---
 
-## 3B. ⭐ BELGE ↔ KOD ÇELİŞKİ LİSTESİ (3 çelişki — ⬜ AÇIK, ÇÖZÜLMEDİ)
+## 3B. ⭐ AÇIK YAPISAL KALEMLER (3 kalem — ⬜ AÇIK)
 
-> Strateji katmanında tespit edilip bu turda KODLA doğrulandı. **KURAL 10: belge ↔ kod çelişirse KOD kazanır.**
-> Hiçbiri bu turda çözülmedi — yalnız kayıt.
+> Strateji katmanında tespit edilip bu turda KODLA doğrulandı. Bunlar belge ile kod arasında **çözülmesi
+> gereken bir çelişki değildir** — belge doğru, kod/canlı içerik henüz yeni tasarıma yetişmemiştir (PO
+> düzeltmesi, 2026-09-03). Her maddenin TÜRÜ satır başında belirtilmiştir. Hiçbiri bu turda uygulanmadı — yalnız kayıt.
 
-### Çelişki #1 — "Şık sırası her gösterimde rastgele (global kural)" · kodda YOK
+### 1 · UYGULANMAMIŞ PO KARARI — "Şık sırası her gösterimde rastgele (global kural)"; kod henüz yetişmedi
 
-- **Belge iddiası:** `faz6-…-2026-09-03.md` §5 (satır 166) şık sırasının "zaten her gösterimde rastgele
-  (global kural)" olduğunu **var olan bir kural gibi** anıyor. Aynı belge §10 kod kalemi 5 ise
-  "şık sırası karıştırma … eklenecek" diyor — kendi içinde de tutarsız.
-- **Kod gerçeği:** `shuffle|Math.random` araması **backend/src + frontend/src'te 0 eşleşme**
-  (2 dizin, 2 terim, harf-duyarsız — negatif iddia kapsam beyanı, KURAL 13). Şık sırası SABİT; shuffle yok.
-- **Sonuç:** Bu bir KURAL DEĞİL, **YAPILACAK İŞ** (= kod kalemi F5). Şıkların içeriği "en doğru→zararlı"
-  sırayla yazıldığı için karıştırma yapılmadan gösterim "doğru cevap kokusu" sızdırır (faz6 §6 / arketip §8
-  9-yazım-kuralı ile çelişir).
+- **PO kararı (belge):** `faz6-…-2026-09-03.md` §5 (satır 166) şık sırasının "her gösterimde rastgele
+  (global kural)" olması gerektiğini söylüyor; §10 kod kalemi 5 de bunu "eklenecek" diye açıkça sıralıyor.
+  Karar VERİLMİŞTİR; belge doğrudur.
+- **Kod gerçeği (henüz yetişmedi):** `shuffle|Math.random` araması **backend/src + frontend/src'te 0 eşleşme**
+  (2 dizin, 2 terim, harf-duyarsız — negatif iddia kapsam beyanı, KURAL 13). Şık sırası şu an SABİT; shuffle yok.
+- **Sonuç:** Bu bir belge↔kod çelişkisi değil, **UYGULANMAMIŞ PO KARARI** (= kod kalemi F5). Karar hazır,
+  kod yazılmayı bekliyor. Şıkların içeriği "en doğru→zararlı" sırayla yazıldığı için karıştırma yapılmadan
+  gösterim "doğru cevap kokusu" sızdırır (faz6 §6 / arketip §8 9-yazım-kuralı) → önceliği yüksek.
 - **Durum:** ⬜ AÇIK · Numara adayı: Evet (F5 ile aynı iş; öncelik yükseltilmeli).
 
-### Çelişki #2 — Canlı öğrenme yolculuğu (7+6) ↔ yeni tasarım (8+5); geçiş planı yok
+### 2 · DEĞİŞTİRİLECEK İÇERİK — Öğrenme yolculuğu canlı (7+6) → yeni tasarım (8+5)
 
-- **Belge iddiası:** yeni tasarım mentör **8** öğrenme aşaması (faz6 §7) + menti **5** aşama (menti §3).
-- **Kod gerçeği:** `backend/prisma/seed-learning-journey.ts:7` — "13 aşama: Mentör 7 (audience=MENTOR) +
-  Menti 6 (audience=MENTI)." `MENTOR_STAGES` order 1-7 (7 aşama) · `MENTI_STAGES` order 1-6 (6 aşama).
-  Yani canlı seed **7+6=13**, yeni tasarım **8+5=13** — toplam aynı ama dağılım ve içerik farklı.
-- **Sonuç:** İçerik koda geçerken mevcut 13 aşamalık seed'in **nasıl migrate edileceği** hiçbir belgede yok
-  (mentöre +1 aşama, mentiden −1 aşama; içerik de değişiyor). Geçiş planı gerekiyor.
+- **Yeni tasarım (belge):** mentör **8** öğrenme aşaması (faz6 §7) + menti **5** aşama (menti §3).
+- **Canlı içerik (değiştirilecek):** `backend/prisma/seed-learning-journey.ts:7` — "13 aşama: Mentör 7
+  (audience=MENTOR) + Menti 6 (audience=MENTI)." `MENTOR_STAGES` order 1-7 (7 aşama) · `MENTI_STAGES`
+  order 1-6 (6 aşama). Yani canlı seed **7+6=13**, yeni tasarım **8+5=13** — toplam aynı, dağılım ve içerik farklı.
+- **Sonuç:** PO kararı — **yeni tasarım canlıdakinin YERİNE GEÇER.** Uzlaştırma ya da geçiş planı GEREKMEZ;
+  canlı içerik yeni tasarımla değiştirilecek (mentöre +1 aşama, mentiden −1 aşama; aşama içerikleri de yenilenir).
+  Bu bir çelişki değil, planlı bir içerik değişimidir.
 - **Durum:** ⬜ AÇIK · Numara adayı: Evet.
 
-### Çelişki #3 — Eski "isimler unisex, karşı taraf isimsiz" kararı iptal edildi; eski kayıt damgalanmalı
+### 3 · KARAR DEĞİŞİKLİĞİ (izi korunacak) — Eski "isimler unisex, karşı taraf isimsiz" kararı iptal edildi; eski kayıt damgalanmalı
 
 - **Yeni karar:** faz6 §4 (satır 126-134) "unisex ısrarından vazgeçildi" — gerekçe yazılı: temsil sorununu
   çözen şey unisex isim değil **persona çeşitliliği** (§3); ayrıca tam-unisex + Türk-İslam kesişimi dar.
@@ -132,9 +134,9 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | Kalem | Önerilen durum | Numara adayı mı |
 |---|---|---|
 | 23 kod kalemi (A1-A6 · F1-F7 · M1-M10) | ⬜ AÇIK | Evet (23 ayrı; F1↔M2, A5↔M6 birleştirme PO kararı) |
-| Çelişki #1 — şık sırası kodda yok (= F5 önceliği) | ⬜ AÇIK | Evet |
-| Çelişki #2 — öğrenme yolculuğu 7+6→8+5 geçiş planı | ⬜ AÇIK | Evet |
-| Çelişki #3 — eski unisex kararına [ESKİ] damgası | ⬜ AÇIK | Evet |
+| Madde 1 (UYGULANMAMIŞ PO KARARI) — şık sırası kodda henüz yok (= F5 önceliği) | ⬜ AÇIK | Evet |
+| Madde 2 (DEĞİŞTİRİLECEK İÇERİK) — öğrenme yolculuğu 7+6 → yeni tasarım 8+5 ile değiştirilecek | ⬜ AÇIK | Evet |
+| Madde 3 (KARAR DEĞİŞİKLİĞİ) — eski unisex kararına [ESKİ] damgası | ⬜ AÇIK | Evet |
 | 4 kardeş belge eksik (senaryo-bankasi/olcme-mimarisi/senaryo-denetim/olcme-arastirmasi 2026-09-03) | ⬜ AÇIK | Hayır (belge kaydı, kod değil) |
 | Dürüstlük sınırları (12 madde) — pazarlama/koda geçerken korunacak | ⬜ AÇIK | Hayır (uyarı, kalem değil) |
 

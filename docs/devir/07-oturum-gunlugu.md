@@ -894,16 +894,16 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **EK GÖREV — `backend/prisma/senaryo-bankasi-tam.md` ilk 40 satır:** "Mentör Sertifika Senaryo Bankası — Tam Sürüm (v2)", TAM TASLAK (PO onayı bekliyor). **Format:** Konu | Bağlam | Kritik mi | Varyant; her varyant senaryo + **4 seçenek**, seçenekler **0-3 puan** (3=en doğru…0=zararlı). **10 KONU · 20 Varyant · 4 kritik konu.** **Yetkinlik-temelli** (ör. "fostering independence") — **DISC=0 · Big Five/OCEAN=0** (grep). İçinde tarih yok. → 2026-09-03 kardeş belgesi `senaryo-bankasi-2026-09-03.md` (39 KARAKTER senaryosu) ile FARKLI belge. Yalnız OKUNDU.
 - **FAZ 1 (COMMIT 1):** 3 dosya `docs/gelen/`→`docs/raporlar/icerik/` TAŞINDI (kopya değil); `docs/gelen/` silindi. Her belgeye "Kayda geçirildi" başlığı — içerik değişmedi.
 - **FAZ 2 (COMMIT 2):** kırık atıflar işaretlendi (4 kardeş belgeye 9 atıf satırı "⬜ HENÜZ YAZILMADI"; var olan çapraz-refler "✅ bu klasörde"; kırık markdown-linki üretilmedi) · yeni `00-INDEKS.md` · 09-DURUM tur notu + Son güncelleme 2026-09-03 · bu oturum bölümü.
-- **FAZ 3 (COMMIT 3):** `kod-kalemleri-2026-09-03.md` — 23 kod kalemi tek listede + **3 belge↔kod çelişkisi** (⬜ AÇIK, kod-kanıtlı) + dürüstlük sınırları birleşik.
+- **FAZ 3 (COMMIT 3):** `kod-kalemleri-2026-09-03.md` — 23 kod kalemi tek listede + **3 açık yapısal kalem** (⬜ AÇIK, kod-kanıtlı; PO düzeltmesiyle "çelişki" değil olarak yeniden başlıklandı) + dürüstlük sınırları birleşik.
 
-## B) ⭐ 3 ÇELİŞKİ (kaydedildi, ÇÖZÜLMEDİ — kod kanıtlı)
-1. **Şık sırası:** faz6 §5 "her gösterimde rastgele (global kural)" ANIYOR ↔ `shuffle|Math.random` backend/src+frontend/src'te **0 eşleşme** → kural DEĞİL, YAPILACAK İŞ (§10 kod kalemi 5). KURAL 10: kod kazanır.
-2. **Öğrenme yolculuğu aşama sayısı:** canlı **Mentör 7 + Menti 6** (`seed-learning-journey.ts:7`, order 1-7/1-6) ↔ yeni tasarım **Mentör 8 + Menti 5**. GEÇİŞ PLANI hiçbir belgede yok.
-3. **İsim nötrlüğü:** eski "isimler unisex, karşı taraf isimsiz" (`konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410`) ↔ faz6 §4 İPTAL etti (gerekçe yazılı). Eski karara [ESKİ] damgası = AÇIK aksiyon (bu turda SİLİNMEDİ/çözülmedi).
+## B) ⭐ 3 AÇIK YAPISAL KALEM (kaydedildi, ÇÖZÜLMEDİ — kod kanıtlı; çelişki DEĞİL, PO düzeltmesi)
+1. **UYGULANMAMIŞ PO KARARI — Şık sırası:** faz6 §5 "her gösterimde rastgele (global kural)" PO kararıdır (§10 kod kalemi 5) ↔ `shuffle|Math.random` backend/src+frontend/src'te **0 eşleşme** → belge doğru, kod henüz yetişmemiş (= YAPILACAK İŞ F5). Çelişki değil, uygulanmamış karar.
+2. **DEĞİŞTİRİLECEK İÇERİK — Öğrenme yolculuğu aşama sayısı:** canlı **Mentör 7 + Menti 6** (`seed-learning-journey.ts:7`, order 1-7/1-6) → yeni tasarım **Mentör 8 + Menti 5** ile DEĞİŞTİRİLECEK. PO kararı: yeni tasarım canlının YERİNE geçer; uzlaştırma/geçiş planı gerekmez.
+3. **KARAR DEĞİŞİKLİĞİ — İsim nötrlüğü:** eski "isimler unisex, karşı taraf isimsiz" (`konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410`) faz6 §4 ile İPTAL edildi (gerekçe yazılı). Eski karara [ESKİ] damgası = AÇIK aksiyon (bu turda SİLİNMEDİ/çözülmedi). Gerçek karar değişikliği; izi korunacak.
 
 ## C) Sınırlar / dürüstlük
 - Kod/DB/şema/seed DEĞİŞMEDİ · migration YOK · DB'ye komut (SELECT dahil) GİTMEDİ · seed ÇALIŞTIRILMADI · **00-KARAR-TAKIP ELLENMEDİ · numara VERİLMEDİ** · #110 ellenmedi · alt-ajan yok. 4 kardeş belge EKSİK (uydurulmadı). **MERGE EDİLMEDİ.**
 
 ## D) Sıradaki
-- PO: bu PR merge · 23 kod kalemine + 3 çelişkiye `00-KARAR-TAKIP`'te numara ver · 4 kardeş belgeyi (senaryo-bankasi/olcme-mimarisi/senaryo-denetim-protokolu/olcme-arastirmasi) kaydet.
-- Sonra: çelişki #2 için öğrenme-yolculuğu GEÇİŞ PLANI (7+6 → 8+5) · içeriğin koda (seed) geçişi — güvenli seed runner (madde 73) bloke · 🟢 sahiplik uygulama turu · G2-G8/G11 kart↔kod · OAuth · S26 · Faz 5.
+- PO: bu PR merge · 23 kod kalemine + 3 açık yapısal kaleme `00-KARAR-TAKIP`'te numara ver · 4 kardeş belgeyi (senaryo-bankasi/olcme-mimarisi/senaryo-denetim-protokolu/olcme-arastirmasi) kaydet.
+- Sonra: Madde 2 — canlı öğrenme-yolculuğu içeriğinin yeni tasarımla DEĞİŞTİRİLMESİ (7+6 → 8+5) · içeriğin koda (seed) geçişi — güvenli seed runner (madde 73) bloke · 🟢 sahiplik uygulama turu · G2-G8/G11 kart↔kod · OAuth · S26 · Faz 5.
