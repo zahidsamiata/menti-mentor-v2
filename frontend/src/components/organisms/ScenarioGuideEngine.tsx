@@ -65,6 +65,14 @@ export interface ScenarioGuideEngineProps {
    * değişebilir (kabul edilmiş davranış). Varsayılan: false (Görüşme Rehberi sabit kalsın).
    */
   shuffleChoices?: boolean;
+  /**
+   * Nötr geri bildirim (madde 144 — öğrenme yolculuğu): seçim sonrası YALNIZ seçilen
+   * şıkkın geri bildirimi görünür; RENK YOK, doğru/yanlış İŞARETİ YOK; diğer şıklar
+   * kapalı, "Diğer seçenekler…" ile açılır ve açıldığında da işaretlenmez. Gerekçe:
+   * kişi kalıbı öğrenmesin (beklenen tepkiyi değil kendi tepkisini seçsin). Varsayılan:
+   * false → Görüşme Rehberi eski renkli/işaretli davranışı korur. Sertifika bu motoru KULLANMAZ.
+   */
+  neutralFeedback?: boolean;
 }
 
 const OUTCOME_STYLE: Record<ScenarioOutcome, { badge: string; icon: string }> = {
@@ -84,6 +92,7 @@ export function ScenarioGuideEngine({
   onComplete,
   completion,
   shuffleChoices = false,
+  neutralFeedback = false,
 }: ScenarioGuideEngineProps) {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -91,6 +100,8 @@ export function ScenarioGuideEngine({
   const [pending, setPending] = useState(false);
   const [completing, setCompleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Nötr modda "Diğer seçenekler" aç/kapa (madde 144). Her aşamada sıfırlanır.
+  const [showOthers, setShowOthers] = useState(false);
 
   const scenario = scenarios[current];
   const isLast = current === scenarios.length - 1;
@@ -127,6 +138,7 @@ export function ScenarioGuideEngine({
     setSelected(null);
     setResult(null);
     setError(null);
+    setShowOthers(false);
     setCurrent((c) => c + 1);
   }
 
@@ -175,33 +187,44 @@ export function ScenarioGuideEngine({
             {scenario.question && <p className="text-sm font-medium mt-2">{scenario.question}</p>}
           </CardHeader>
           <CardContent className="space-y-3">
-            {displayChoices.map((c) => {
-              const isSelected = selected === c.key;
-              const style = result ? OUTCOME_STYLE[result.outcome] : null;
-              return (
-                <button
-                  key={c.key}
-                  onClick={() => void choose(c.key)}
-                  disabled={revealed || pending}
-                  className={`w-full text-left rounded-xl border p-3 text-sm transition-all ${
-                    revealed && isSelected && style
-                      ? `${style.badge} border`
-                      : revealed
-                        ? 'opacity-40 cursor-default border-border bg-muted'
-                        : pending
-                          ? 'opacity-60 cursor-wait border-border'
-                          : 'border-border hover:border-primary/50 hover:bg-primary/5 cursor-pointer'
-                  }`}
-                >
-                  <span className="font-semibold mr-2">{c.key.toUpperCase()})</span>
-                  {revealed && isSelected && style && <span className="mr-1">{style.icon}</span>}
-                  {c.label}
-                  {revealed && isSelected && result && (
-                    <p className="mt-2 text-xs opacity-90">{result.feedback}</p>
-                  )}
-                </button>
-              );
-            })}
+            {revealed && neutralFeedback ? (
+              // ── Nötr geri bildirim (madde 144): yalnız seçilen + feedback; renk/işaret YOK ──
+              <NeutralReveal
+                choices={displayChoices}
+                selectedKey={selected}
+                feedback={result?.feedback ?? ''}
+                showOthers={showOthers}
+                onToggleOthers={() => setShowOthers((v) => !v)}
+              />
+            ) : (
+              displayChoices.map((c) => {
+                const isSelected = selected === c.key;
+                const style = result ? OUTCOME_STYLE[result.outcome] : null;
+                return (
+                  <button
+                    key={c.key}
+                    onClick={() => void choose(c.key)}
+                    disabled={revealed || pending}
+                    className={`w-full text-left rounded-xl border p-3 text-sm transition-all ${
+                      revealed && isSelected && style
+                        ? `${style.badge} border`
+                        : revealed
+                          ? 'opacity-40 cursor-default border-border bg-muted'
+                          : pending
+                            ? 'opacity-60 cursor-wait border-border'
+                            : 'border-border hover:border-primary/50 hover:bg-primary/5 cursor-pointer'
+                    }`}
+                  >
+                    <span className="font-semibold mr-2">{c.key.toUpperCase()})</span>
+                    {revealed && isSelected && style && <span className="mr-1">{style.icon}</span>}
+                    {c.label}
+                    {revealed && isSelected && result && (
+                      <p className="mt-2 text-xs opacity-90">{result.feedback}</p>
+                    )}
+                  </button>
+                );
+              })
+            )}
 
             {error && !revealed && <AlertMessage type="error" message={error} />}
 
@@ -235,6 +258,66 @@ export function ScenarioGuideEngine({
             </Button>
           </CardContent>
         </Card>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Nötr geri bildirim gösterimi (madde 144). Seçilen şık + feedback görünür; RENK YOK,
+ * doğru/yanlış İŞARETİ YOK. Diğer şıklar kapalı; "Diğer seçenekler…" ile işaretsiz açılır.
+ * Diğer şıkların gerekçesi (feedback) istemciye yüklenmez (cevap anahtarı sızmasın) → yalnız etiket.
+ */
+function NeutralReveal({
+  choices,
+  selectedKey,
+  feedback,
+  showOthers,
+  onToggleOthers,
+}: {
+  choices: ScenarioChoice[];
+  selectedKey: string | null;
+  feedback: string;
+  showOthers: boolean;
+  onToggleOthers: () => void;
+}) {
+  const selected = choices.find((c) => c.key === selectedKey);
+  const others = choices.filter((c) => c.key !== selectedKey);
+
+  return (
+    <div className="space-y-3">
+      {selected && (
+        <div className="w-full text-left rounded-xl border border-primary/40 bg-primary/5 p-3 text-sm">
+          <span className="font-semibold mr-2">{selected.key.toUpperCase()})</span>
+          {selected.label}
+          {feedback && <p className="mt-2 text-xs opacity-90">{feedback}</p>}
+        </div>
+      )}
+
+      {others.length > 0 && (
+        <div>
+          <button
+            type="button"
+            onClick={onToggleOthers}
+            aria-expanded={showOthers}
+            className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+          >
+            {showOthers ? 'Diğer seçenekleri gizle' : 'Diğer seçenekler ne anlama geliyordu?'}
+          </button>
+          {showOthers && (
+            <ul className="mt-2 space-y-2">
+              {others.map((c) => (
+                <li
+                  key={c.key}
+                  className="rounded-xl border border-border bg-muted/40 p-3 text-sm text-muted-foreground"
+                >
+                  <span className="font-semibold mr-2">{c.key.toUpperCase()})</span>
+                  {c.label}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
     </div>
   );

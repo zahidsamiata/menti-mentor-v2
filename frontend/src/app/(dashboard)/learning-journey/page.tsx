@@ -72,6 +72,7 @@ export default function LearningJourneyPage() {
       resolveChoice={resolveChoice}
       onComplete={onComplete}
       shuffleChoices  /* madde 143 — şık sırası her gösterimde karışır */
+      neutralFeedback /* madde 144 — renk/işaret yok; yalnız seçilen + feedback; diğerleri kapalı */
       completion={{
         emoji: '🌟',
         title: 'Yolculuğu tamamladın!',
