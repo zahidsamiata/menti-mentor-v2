@@ -1189,3 +1189,42 @@ Bir günde koşan turlar: **sertifika içeriği** (Oturum 1/2/3 = 88 şık / 22 
 ## E) ⭐ YARIN İÇİN
 - **Zincir:** F.13 ✅ → **madde 163** (iç-not MIGRATION, yedek tablo zorunlu) → **madde 164** (eşik `>= 2` + test) → **madde 30** (22 senaryo/88 şık seed). madde 73 artık bloke ETMİYOR. İçerik hazır.
 - **Bekleyen PO kararları:** S35 (9b etki doğrulaması, ilk tenant) · S34 (onboarding UserResponse sorgusu) · madde 162/F.14 (ölçek eşik yeniden-hesap keşfi) · madde 173 (2026-08-02 raporları kod-durumu) · ölçek uyuşmazlığı [aday] (numara bekliyor).
+
+---
+---
+
+# 📅 OTURUM 2026-09-09 (24) — İLK MIGRATION TURU: madde 163 internalNote
+
+**📸 Kapanış fotoğrafı** — güncel için git + `09-DURUM.md` + `00-KARAR-TAKIP.md`.
+
+## 🔎 Git-doğrulanmış durum
+- **Çatı main HEAD (taban):** `f645e80` (Merge PR #172). Dal: `feat/madde163-internal-note-2026-09-09` (backend + çatı).
+- **Backend main HEAD:** `b1a007f` (Merge #69). Feature dalı `feat/madde163-internal-note-2026-09-09` (commit `d2de787`) → **backend PR #70.**
+- **Bugünkü ilk ŞEMA işi** (önceki 12 tur belge + saf kod + madde 73 seed-muhafızı).
+
+## A) Yapılanlar (2 commit + pointer)
+- **COMMIT 1 (backend `d2de787`):** `CertificationOption.internalNote String?` (`schema.prisma:1158`, inline `//` yorum + KALEM 6 atfı) + migration dosyası `20260909000000_add_internal_note/migration.sql` (Neon-güvenli `ADD COLUMN IF NOT EXISTS`). Fonksiyon/mevcut alan değişmedi.
+- **COMMIT 2 (çatı):** belge senkronu — madde 163 → 🔀 PR'DA · madde 30 (163 şema hazır + KALEM 6) · 09-DURUM · bu kayıt. Submodule pointer `b1a007f → d2de787`.
+
+## B) ⭐ FAZ 2 — üretilen SQL (DB-free)
+```sql
+ALTER TABLE "CertificationOption" ADD COLUMN IF NOT EXISTS "internalNote" TEXT;
+```
+Yöntem: `prisma migrate diff --from-schema-datamodel <git-HEAD-şema> --to-schema-datamodel schema.prisma --script` (iki dosya, **DB bağlantısı YOK**). Ham diff `ADD COLUMN "internalNote" TEXT` verdi; `IF NOT EXISTS` proje Neon konvansiyonu (CLAUDE.md + `add_uc_soru_alanlari`). Yasak ifade YOK.
+
+## C) ⭐ Sızma riski: YOK (kod-kanıtlı)
+- Tüm-alan çeken tek yer = grading (`certification.service.ts:152`) → ham option DÖNMEZ (computed `topicResults`).
+- FE-dönük: sınav (`:296` key,label) · sonuç (`:443` competencyScore,explanation,outcome) — explicit select, internalNote yok.
+- FE (`certification/page.tsx:275,295`) yalnız result DTO. `sjt-scorer.ts:50` = farklı model (SjtOption).
+
+## D) Doğrulama (DB'siz)
+- `prisma validate`: geçerli 🚀 · `generate`: OK · `tsc --noEmit`: 0 · `eslint`: 0 error (3 warning pre-existing).
+- DB testleri atlandı (TEST_DATABASE_URL yok) → asıl kanıt CI.
+
+## E) Sınırlar / dürüstlük
+- ⛔ **MIGRATION ÇALIŞTIRILMADI · DB'ye komut GİTMEDİ (SELECT dahil) · SEED ÇALIŞTIRILMADI · `prisma/seed.ts` ELLENMEDİ · seed-certification.ts DOKUNULMADI** · alt-ajan yok. **MERGE EDİLMEDİ.**
+- madde 163 → **🔀 PR'DA** (✅ değil; migration çalışmadı — "yapıldı ≠ doğrulandı").
+
+## F) ⭐ PO'YA SORU + YARIN İÇİN
+- **PO'ya soru:** migration çalıştırma turu için hazır mıyız? Ön koşul: PO SQL'i inceler + F.13 gereği yedek tablo planı. Çalıştırma turu = `db execute --file` + `migrate resolve` (canlı=lokal Neon, PO onayı ZORUNLU).
+- **Zincir:** F.13 ✅ → **163 (şema ✅ / migration ⬜)** → madde 164 (eşik `>=2` kod turu) → madde 30 (seed). İçerik hazır (88 şık).
