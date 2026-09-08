@@ -939,3 +939,39 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## E) Sıradaki
 - PO: bu PR merge · iç öncelik sırasını onayla · ⛔ **iki bloker** (F.13 Neon yedeği + madde 73 seed runner) canlı-öncesi çöz.
 - Sonra: S31 keşfi (outcome alanı) · Gösterim çekirdeği (138-145, seed'siz ilerleyebilir) · içerik→kod turları · G2-G8/G11 kart↔kod · OAuth · S26 · Faz 5.
+
+---
+---
+
+# 📅 OTURUM 2026-09-03 (17) — İKİ KEŞİF TURU BULGULARI BELGEYE + madde 73 KAPSAM DARALTMASI
+
+**📸 Kapanış fotoğrafı** — git-teyitli. #155 (numaralandırma) MERGED sonrası, 2026-09-03 iki salt-okuma keşif turunun bulgularını kalıcı kılan belge turu. **Yalnız-belge (kod/DB/şema/seed DEĞİŞMEDİ; migration YOK).**
+
+## 🔎 Git-doğrulanmış durum
+- **#155 MERGED** → `origin/main` HEAD `0ff0b9b` (23 kalem B.1 138-160 + S31 + öncelik main'de).
+- **Bu tur dalı:** `docs/kesif-bulgulari-2026-09-03` (güncel `origin/main`'den `0ff0b9b`).
+
+## A) ⭐ EN ÖNEMLİ BULGU — madde 73 kapsam daraltması (kod-teyitli, KURAL 10)
+- madde 73 sanılanın aksine **8 kalemi değil, YALNIZ SERTİFİKAYI (madde 30)** bloke ediyor.
+- **Asimetri kanıtı:** `seed-learning-journey.ts` doğrudan-çalıştırma **muhafızlı** (`:534-543`) → 147/148 kapsam DIŞI · `seed-certification.ts` **muhafızsız** (`:318`) → tek yol deleteMany'li `seed.ts` (`:300-318`, 15 deleteMany).
+- madde 73 = **9 satırlık muhafız** işi (öğrenme yolculuğu deseni sertifikaya kopyalanır). **Kalan gerçek bloker = F.13** (Neon yedeği; canlı DB'de PO onayı ŞART — ayrı ve geçerli).
+
+## B) Diğer üç bulgu (keşif raporu §A/§B/§C)
+- **§A — sertifika bankası ikizi:** canlı kaynak `seed-certification.ts` (= `senaryo-bankasi-tam.md` v2, elle gömülü). Faz 6'nın 20 senaryosu daha yeni ama koda girmemiş. 7 ortak + 3'er farklı konu; 4 kritik ikisinde de aynı. **PO HARMANLA → 11 konu×2=22 senaryo** (iki çift birleşti; sınav 8 = 4 kritik + 7'den 4). ⬜ 22 metin yazılmadı (içerik oturumu).
+- **§B — outcome / S31 CEVABI:** öğrenme yolculuğunda kullanıcı seçimi HİÇBİR YERE yazılmıyor (kalıcı tek şey `learningJourneyCompletedAt`). KAPSAM: `learningJourney.service.ts` 553/553 + controller 107/107, 7 terim/2 dil = 0. → **madde 145 = KESME değil KORUMA işi** (S31 ✅).
+- **§C — 4 ayrı içerik sistemi:** onboarding DISC 8 (hardcoded `onboardingController.ts:109-190`) · adaptif DISC 32 (`seed.ts:325`, ⚠️ deleteMany) · öğrenme 13 (`seed-learning-journey`, güvenli) · sertifika 20 (`seed-certification`, güvenli). **148 DISC'e DOKUNMAZ** → `seed-learning-journey.ts:7`.
+
+## C) ⚠️ Yeni incelik — kalem 148 pasifleştirme
+- `seed-learning-journey.ts` silinen aşamayı pasifleştirmiyor (`updateMany{isActive:false}` deseni yok). Menti 6→5'te salt re-seed eski `seed-ls-menti-6`'yı **aktif öksüz** bırakır. → **Pasifleştirme kalem 148 kapsamına eklendi.** Mentör 7→8 sorunsuz.
+
+## D) Yapılanlar
+- **FAZ 1 (COMMIT 1 `deff9fc`):** keşif raporu `raporlar/kesif/icerik-onkosul-kesifleri-2026-09-03.md` (4 bölüm + KALEM LİSTESİ).
+- **FAZ 2 (COMMIT 2 `3bdf0a6`):** madde 30·73·145·147·148 + S31 ✅ + 10-yol:70/md.30/md.73 + B.1 toplu-not güncellendi (eski ifadeler üstü-çizili + ⚠️ GÜNCELLEME; KURAL 12 yayılım).
+- **FAZ 3 (COMMIT 3):** 09-DURUM tur notu + bu bölüm + `icerik/00-INDEKS.md`'e keşif raporu + kırık link 0.
+
+## E) Sınırlar / dürüstlük
+- Kod/DB/şema/seed DEĞİŞMEDİ · migration YOK · DB'ye komut GİTMEDİ · seed ÇALIŞTIRILMADI · **YENİ NUMARA VERİLMEDİ** (mevcut maddeler güncellendi) · #110 ellenmedi · alt-ajan yok. Eski satırlar SİLİNMEDİ (üstü çizili). **MERGE EDİLMEDİ.**
+
+## F) Sıradaki
+- PO: bu PR merge · 22 senaryo içerik turu (numara adayı) · sertifika 9-satırlık muhafız (madde 73, artık küçük iş) numaralandır/işle.
+- ⛔ F.13 (Neon yedeği) canlı DB öncesi ŞART. Gösterim çekirdeği (138-145) + 147/148 (artık yalnız F.13'e bağlı) kodlanabilir.
