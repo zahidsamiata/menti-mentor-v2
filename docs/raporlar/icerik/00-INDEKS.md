@@ -20,6 +20,7 @@
 | `faz6-ogrenme-ve-sertifika-2026-09-03.md` | 8 mentör öğrenme aşaması (24 şık) · 20 sertifika senaryosu (10 konu × 2 varyant, 80 şık) · havuz mantığı · 10 isim değişkeni | `docs/raporlar/icerik/` |
 | `menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md` | 5 menti aşaması (15 şık) · geri bildirim gösterim kuralı · eşleşme detay sayfası (3 bölüm, 16 kombinasyon — 1 yazıldı) · 3 bekleme + 2 ret metni | `docs/raporlar/icerik/` |
 | `kod-kalemleri-2026-09-03.md` | Üç belgeden doğan 23 kod kalemi envanteri + belge↔kod çelişki listesi + dürüstlük sınırları | `docs/raporlar/icerik/` |
+| `sertifika-oturum1-4-kritik-konu-2026-09-08.md` | Oturum 1: 4 kritik konu · 8 senaryo · 32 şık (0-3 puanlı) · 4 prensip cümlesi · 10 kalem adayı · elenen sahne gerekçeleri · isim dağılım tablosu | `docs/raporlar/icerik/` |
 
 **Önceden bu klasörde olan (2026-08-26 içerik incelemeleri):**
 
