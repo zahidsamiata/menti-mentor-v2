@@ -1096,3 +1096,32 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 ## D) Sıradaki
 - Kalan 3 kardeş belge (olcme-mimarisi/senaryo-denetim/olcme-arastirmasi) PO bulamadı — muhtemelen yazılmadı.
 - İçerik yazımı (22 sertifika senaryosu) + Faz 5 motor + kritik-konu-eşiği kod turu bekliyor.
+
+---
+---
+
+# 📅 OTURUM 2026-09-08 (21) — KOD SÖZLÜĞÜ + 11 MADDE KARARI + ÖLÇEK KARARI
+
+**📸 Kapanış fotoğrafı** — güncel için git + `09-DURUM.md` + `00-KARAR-TAKIP.md`.
+
+## 🔎 Git-doğrulanmış durum
+- **Çatı main HEAD (taban):** `81205f6` (Merge PR #169 — ölçek/tip turu). Bu turun dalı: `docs/kod-sozlugu-kararlar-2026-09-08`.
+- **Bugünkü önceki belge turları (bu günlüğe ayrıca kaydedilmedi):** #168 (kod sözlüğü + durum-kodu temizliği, MERGED `d56b74a`) · #169 (ölçek+tip keşiflerinin maddelere işlenmesi, MERGED `81205f6`). Bu tur onların üstüne, güncel main'den açıldı.
+- Yalnız-belge; KOD/DB/şema DEĞİŞMEDİ; `10-yol-haritasi` ELLENMEDİ.
+
+## A) Yapılanlar (4 commit)
+- **FAZ 1 — kod sözlüğü:** DURUM↔ENGEL AYRIMI (PO): durum kodu (`✅🟡🔀⬜🔵🔴`) + engel işareti (`❓`/`⛔`); bir durum+bir engel GEÇERLİDİR. Önceki turun "8 çift-kod" notundan **7'si GEÇERLİ** yapıldı (33·36·86·101·103·sektör-havuzu·DISC-derinleşme), yalnız **Y7 (`🔴/🟡`) geçersiz** kaldı. + NUMARA BOŞLUĞU KURALI + KURAL 11 EK (söz içeriği).
+- **FAZ 2 — madde kararları:** 109 → 🗑️ GEÇERSİZ (arketip 138-140'a evrildi) · 113 → ⬜ kalır, madde 152 tetiğine bağlı · S1 → "içeriği bilinmiyor" damgası **(⚠️ bu iddia KURAL 13 pushback'iyle çürüdü — aşağı)** · 7 → BÖLÜNDÜ, (B) → yeni **172** · Y7 → bölünme önerisi (PO onayı bekliyor) · **9b → FAZ 0-T2 "Değilse" dalı, ✅ YAPILMADI**. Yeni madde **170** (JSON yazım koruması) · **171** (sessiz düşüş) · **172** (eşleşme-sonrası değerlendirme). F.14 `[aday]` ataları 170/171'e bağlandı (KURAL 8).
+- **FAZ 3 — ölçek kararı (b)+(c)** F.14 ölçek kalemine (matematik kanıtı + M1/m1 sessiz-yanlış uyarısı) + **DB sözü S34** (onboarding `UserResponse` sorgusu, gerçek kullanıcı gelince; SELECT bile PO onayı).
+- **FAZ 4 — senkron:** 09-DURUM tur notu + Son güncelleme 2026-09-08 + bu kayıt.
+
+## B) ⭐ DÜRÜST PUSHBACK (KURAL 13 — ajan bulgusu, PO metnine karşı)
+- Prompt (ve FAZ 2'de eklenen PO metni) **"S1'in 6 arşivi hiçbir belgede yok"** dedi. **YANLIŞ:** geniş arama 6 arşivi adlarıyla **4 belgede** buldu — `devir/07-oturum-gunlugu.md:36` (2026-08-14 bekleyenler #2) · `devir/05-bekleyen-kararlar-ve-manuel.md:10` · `00-INDEX.md` · `raporlar/kesif/belge-mimarisi-...-2026-08-19.md:160-165`; arşiv dosyaları da mevcut. Adlar: `hayalet-backend` · `kapasite-analizi` · `katilim-modeli` · `mentor-karti-rakip-analizi` · `tema-durum` · `devir/`.
+- PO metni SİLİNMEDİ ("aynen ekle" kuralı); yanına kanıtlı düzeltme notu eklendi (S1 + KURAL 11 EK). **Söz TUTULABİLİR** — PO 6 arşivi teyit/arşivle/🗑️ kararı verebilir. KURAL 11 EK'in doğru dersi: içerik **söz satırına** yazılmalı (S1'de detay günlüğe gömülüydü).
+
+## C) Sınırlar / dürüstlük
+- KOD/DB/şema/seed DEĞİŞMEDİ · DB'ye komut GİTMEDİ · `docs/gelen/` ELLENMEDİ · `10-yol-haritasi` ELLENMEDİ · alt-ajan yok · numara yalnız 170/171/172 + S34 (PO onaylı). **MERGE EDİLMEDİ.**
+- Kırık link: 0 (kontrol edildi).
+
+## D) Sıradaki (PO onayı bekleyen)
+- Y7 bölünmesi (3 iş) + madde 7-A'nın `10-yol-tamamlananlar`'a taşınması (AYRI TUR) · 9b kapatma (0-etki) PO teyidi · **S1 6 arşiv teyidi** (içerik artık biliniyor) · ölçek eşik yeniden-hesap keşfi (madde 162/F.14) · S34 DB sorgusu (gerçek kullanıcı gelince).
