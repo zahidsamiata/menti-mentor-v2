@@ -1068,3 +1068,31 @@ FE `GET /requests` kullanmıyor · meetings/mentor sayfaları KENDİ id'sini ge�
 - **8 karar:** (1) 0-3 puanlama korunuyor · (2) **madde 72 → seçenek (c)** (kod zaten uyguluyor) · (3) puanlama rehberi 3/2/1/0 (red-line'da 0 daha dar, "elemeyi delen kaçak" uyarısı) · (4) sahne seçim kriteri (ayrışma>STK>çakışmazlık) · (5) akademik kaynak DOĞRULANMADI (internet yok, not düşülür) · (6) kriz senaryoları hukuki teyit → madde 159 · (7) 3 oturumluk plan (O1 4 kritik/O2 2 birleşen+dinleme/O3 5 konu) · (8) 11 konu birleştirme (13→11, iki çift birleşti; sınav 8=4 kritik+7'den 4).
 - **Güncellenen:** madde 72/T4 (✅ karar c) · 30 (§I) · 159 (kriz hukuki) + 10-yol md.72/md.30 (KURAL 12 yayılım). YENİ NUMARA VERİLMEDİ. Kod DEĞİŞMEDİ. #158'e eklendi, MERGE EDİLMEDİ.
 - **⭐ EK-2 (aynı tur, #158'e): KRİTİK KONU EŞİĞİ kararı (§I-3).** PO: red-line eşiği `=== 3` → **`>= 2`** (kritik 4 konuda 3/2 GEÇER, 0/1 ELER; diğer 7'de eleme yok). FAZ 0 teyidi: kod bugün `certification.service.ts:67` `isRedLine ? competencyScore === 3 : >= 2` (aynen). **KOD DEĞİŞİKLİĞİ gerekir** (belge turu, uygulanmadı). Red-line'ın İKİ işlevi de korunur (garantili gelme md.149 + eleme kapısı md.72); PO'nun "TEK işlev" hatası düzeltildi. Güncellenen: 72/T4 · 30 · **149** + 10-yol md.72 + KALEM LİSTESİ yeni kod-turu adayı. Kod DEĞİŞMEDİ.
+
+---
+---
+
+# 📅 OTURUM 2026-09-04 (20) — SENARYO BANKASI KAYDEDİLDİ (39 senaryo / 117 şık)
+
+**📸 Kapanış fotoğrafı** — git-teyitli. Küçük belge kayıt turu; 2026-09-03 içerik kayıt turunun aynısı. **Yalnız-belge (kod/DB/şema DEĞİŞMEDİ).**
+
+## 🔎 Git-doğrulanmış durum
+- **#158 MERGED** → `origin/main` `7b2f8ec`. **Bu tur dalı:** `docs/senaryo-bankasi-kaydi-2026-09-04` (güncel main'den).
+- PO `docs/gelen/`'e `senaryo-bankasi-2026-09-03.md` koymuştu (4 eksik kardeş belgeden biri).
+
+## A) Yapılanlar
+- **COMMIT 1 `988d3c6`:** `senaryo-bankasi-2026-09-03.md` `gelen`→`raporlar/icerik` TAŞINDI (kopya değil); `docs/gelen/` silindi; "Kayda geçirildi" başlığı. İçerik değişmedi.
+- **COMMIT 2 (bu):** `00-INDEKS` (kaydedilenlere eklendi + eksik tablodan çıkarıldı) · üç içerik belgesinde (arketip/faz6/menti) bu belgeye atıf **⬜ HENÜZ YAZILMADI → ✅ bu klasörde** · 09-DURUM + bu bölüm.
+
+## B) ⭐ SAYIM (kendim, iki kez — KURAL 16)
+- **Senaryo = 39:** çekirdek `### [1..5]` = **5** · havuz `**[Xn]**` = **34** (UYUMLULUK 8 + DUYGUSAL DENGE 7 + SORUMLULUK 7 + AÇIKLIK 6 + DIŞADÖNÜKLÜK 6 = 34). ✓ (belge beyanı 5+34)
+- **Şık = 117:** grep ham **118** verdi → awk ile senaryo-başına sayınca yalnız **[D2]** 4 çıktı; okuyunca 4.'sü düzeltme notundaki reddedilmiş eski şık örneği (`"Erken yatarım…" → **sorumluluk yüksek**`), gerçek şık DEĞİL. Her senaryo tam 3 → **39×3 = 117.** ✓
+- Beyan (39/117) ile UYUŞTU — DUR gerekmedi. (Belge içinde "dört kez yanlış sayıldı" uyarısı vardı; doğrulandı.)
+
+## C) Sınırlar / dürüstlük
+- Kod/DB/şema DEĞİŞMEDİ · migration YOK · seed YOK · DB'ye komut GİTMEDİ · içerik tek harf değişmedi (yalnız başlık + konum) · alt-ajan yok. Kırık link: 0. **MERGE EDİLMEDİ.**
+- ⚠️ Bu banka KODA GEÇMEDİ — canlı onboarding hâlâ 8 hardcoded DISC (`onboardingController.ts:109-190`); koda geçiş ayrı tur (Faz 5 iş a).
+
+## D) Sıradaki
+- Kalan 3 kardeş belge (olcme-mimarisi/senaryo-denetim/olcme-arastirmasi) PO bulamadı — muhtemelen yazılmadı.
+- İçerik yazımı (22 sertifika senaryosu) + Faz 5 motor + kritik-konu-eşiği kod turu bekliyor.
