@@ -248,6 +248,24 @@
 > ⚠️ Gerekçe: **S1 ("6 arşiv teyidi")** 25 gün açık kaldı ve hangi 6 arşiv olduğu hiçbir belgede yok. **İçeriği bilinmeyen bir söz tutulamaz, kapatılamaz da.**
 > ⚠️ **DÜZELTME (2026-09-08, KURAL 13 — ajan, kanıtlı):** "hiçbir belgede yok" YANLIŞ çıktı — 6 arşiv `devir/07-oturum-gunlugu.md:36` + 3 belgede adlarıyla LİSTELİ (bkz. S1 satırı). Kural GEÇERLİ ama doğru ders: içerik **SÖZ SATIRINA** yazılmalı — detay başka belgeye gömülü kalırsa SÖZLER'e bakan bulamaz (S1'de olan buydu). "İçeriği bilinmeyen" değil, **"söz satırında yazılmayan"**.
 
+> ## ⭐ "YAPILDI" ≠ "DOĞRULANDI" (PO kuralı, 2026-09-08)
+> Bir madde `✅` işaretlenirken, **etkisinin gözlenip gözlenmediği ayrıca yazılır.** Gözlenmemişse `⚠️ ETKİSİ GÖZLENMEDİ` notu + **gözlem sözü** düşülür.
+> ⚠️ Gerekçe — üç vaka, aynı desen (yapılmış ama görülmemiş):
+> · **9b** — kod canlıda, 0 tenant kullandı, etkisi hiç görülmedi
+> · **S1** — söz verildi, içeriği başka belgedeydi, 25 gün "izi kayboldu" sanıldı
+> · **sertifika içeriği** — yazıldı ve kaydedildi, ama konuşmada "duruyor" sanıldı
+> ⭐ İlk uygulaması: madde 9b (S35 sözü).
+
+> ## ⭐ TEKRAR KANIT DEĞİLDİR (PO kuralı, 2026-09-08)
+> Konuşma içinde tekrarlanan bir durum ifadesi **kanıt değildir.** Tekrar, doğrulama yerine geçmez. Bir işin "duruyor" ya da "bitti" olduğu iddiası **belge/kod kanıtı** ister.
+> ⚠️ **Özellikle iki taraf da aynı şeyi söylüyorsa** — o durumda çapraz kontrol de çalışmaz.
+> ⚠️ Gerekçe: sertifika Oturum 2/3'ün "yazılmadı" sanılması. Cümle birkaç mesaj boyunca tekrarlandı ve tekrarlandıkça doğrulanmış gibi hissettirdi; kimse `00-INDEKS`'e ya da madde 30'a bakmadı. Oysa ikisi de o gün kaydedilmişti (PR #164, #165).
+
+> ## ⭐ KURAL 11 — ÜÇÜNCÜ KATMAN: KELİME SEÇİMİ (2026-09-08)
+> Söz satırındaki **kelime seçimi de içeriğin parçasıdır.**
+> ⚠️ Gerekçe: **S1** "6 arşiv teyidi" diye yazıldı; o tek kelime yüzünden herkes bunu bir **temizlik işi** sandı. Oysa dondurulmuş keşif raporlarının **geçerlilik kontrolüydü** ve hiçbiri silinmedi.
+> ⚠️ KURAL 11'in üç katmanı: (1) sözün **içeriği** yazılır · (2) içerik **söz satırında** durur, başka belgeye gömülmez · (3) **kelime seçimi** de içeriğin parçasıdır.
+
 ### B.1 — v1 açık işler (canlı-öncesi)
 
 > 🆕 **138-160 = 2026-09-03 İÇERİK KALEMLERİ (23 kalem)** — kaynak `../raporlar/icerik/kod-kalemleri-2026-09-03.md` (A1-A6 · F1-F7 · M1-M10). PO kararı (2026-09-03): hepsi **v1 (canlı-öncesi)**, **EN ÖN SIRA** ("bu testler bizim için en önemli işler" — öncelik `10-yol-haritasi`). ⚠️ **Numara aralığı PO onayıyla 131-153'ten +7 KAYDIRILDI → 138-160** çünkü 131-137 doluydu (131-136 = IDOR Y1-Y6 / PR #60 · 137 = meeting/verifyTenant audit batch); 138-160 iki belgede grep'le boş teyit edildi. **F1+M2 BİRLEŞTİ → madde 146** (aynı isim-değişkeni altyapısı). **A5+M6 BİRLEŞMEDİ → madde 151 ↔ 152** (A5'in 8 metni hazır, M6 15 kombinasyon yazılmadı; çapraz-ref). **M5 kod kalemi değil → S31 sözü** (keşif). ~~[ESKİ · 2026-09-03] **⛔ İKİ BLOKER ÖNDE:** madde 73 (güvenli seed runner yok) + F.13 (Neon yedeği teyitsiz) — seed'e bağlı kalemler (147/148/149 ve sınav kalemleri) bunlar açılmadan canlıya GİRMEZ.~~ **⚠️ GÜNCELLEME (2026-09-03, KEŞİF):** madde 73 YALNIZ sertifikayı (**madde 30**) bloke eder — 147/148 güvenli runner (muhafızlı) sayesinde kapsam DIŞI; kalan gerçek bloker **F.13** (canlı DB, PO onayı). Kanıt: `../raporlar/kesif/icerik-onkosul-kesifleri-2026-09-03.md` §D.
@@ -299,6 +317,7 @@
 | 170 | JSON yazım koruması — Prisma `Json?` sütunlarına yazarken tip `InputJsonValue` olduğu için uygulama tipi hiç uygulanmıyor; 13 JSON alanında yapısal boşluk. Gözlenen tek hata `discVector`'da | ⬜ AÇIK | KOD+KEŞİF | ⚠️ **KAPSAM BEYANI EKSİK:** "diğer alanlar okuma tarafında savunuluyor" iddiası keşif turunun GÖZLEMİDİR, sistematik tarama DEĞİL — 13 alanın **her** okuma noktası taranmadı. **Tek korumasız okuma yolu varsa bu kalemin "opsiyonel" gerekçesi çöker.** İş: (a) KAPSAM BEYANLI tarama, (b) sonra tip-checked sarmalayıcı kararı | `.prisma/client/index.d.ts` `InputJsonValue` · madde 162/169 | Hayır | M |
 | 171 | Sessiz düşüş taraması — üç bulgu aynı aileden ve **üçü de tesadüfen** bulundu: tümü-50 · ölçek uyuşmazlığı · `confidence` eksik | ⬜ AÇIK | KOD+KEŞİF | Üçünde de **hata yok, uyarı yok, log yok** — sistem sessizce daha kötü çalışıyor. ⚠️ Aranarak değil, yan ürün olarak bulundular; **aranmayanlar duruyor olabilir.** İş: `if (x) { doğru yol } else { kaba yol }` desenini tara, her düşüş noktasında log/uyarı var mı bak | keşif 2026-09-08 (madde 101/161/162) | Hayır | ❓ |
 | 172 | Eşleşme-sonrası değerlendirme (madde 7'nin B parçası) | 🔵 | tasarım-hazır | ⚠️ **madde 7'den ayrıldı (PO kararı 2026-09-08).** Değerlendirme/metrik sistemi — bkz. C bölümü #7 tasarımı | `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | Evet | L |
+| 173 | 2026-08-02 keşif raporlarının kod-durumu doğrulaması — beş dondurulmuş rapor (`hayalet-backend` · `kapasite-analizi` · `katilim-modeli` · `mentor-karti` · `tema-durum`) "bugün hâlâ geçerli mi" sorusuna cevap vermedi (S1 turu `backend/` okuyamadı, paralel kod turu vardı) | ⬜ AÇIK | KEŞİF | Sorular: ölü kod hâlâ ölü mü · kart kararları uygulandı mı · kapasite darboğazları düzeldi mi · landing maliyeti geçerli mi. **Düşük öncelik · salt-okuma.** ⚠️ **S1 ✅ TUTULDU ile birlikte açıldı** — ✅ damgası kapatma sinyali verir, kalan iş ayrı kalem olmasa sorulmaz | S1 · `raporlar/kesif/` 2026-08-02 (5 rapor) | Hayır | S |
 
 ### B.2 — Karar/keşif bekleyenler (kodlanamaz — önce PO/keşif)
 
