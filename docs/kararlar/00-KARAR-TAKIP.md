@@ -659,6 +659,23 @@ N+1 konuşma listesi · pagination'sız listeler · a11y (modal/label/radiogroup
 
 ---
 
+### F.14 — ⏳ NUMARA BEKLEYEN KALEMLER (2026-09-08, keşif #161'den)
+
+Kaynak: `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E
+
+| # | Kalem | Tür |
+|---|---|---|
+| [aday] | Üç DISC yolunun birleştirilmesi — `UserProfile.discD..C`'yi hangi yol dolduracak + eksik yolları bağlama | KOD + KARAR |
+| [aday] | İki `rankMentorsForMenti` isim çakışması — Faz 5 kararı sonrası biri emekli/yeniden adlandırılmalı | KOD |
+| [aday] | Ağırlık modeli 2→3 bileşen (8 kod noktası, **migration YOK**) | KOD |
+| [aday] | `CertificationOption`'a iç-not alanı — **MIGRATION** · KALEM 6 doğrulandı: `explanation` ve `outcome` ikisi de kullanıcıya gösteriliyor, gizli alan YOK (`schema.prisma:1149-1161`). Alan açılmazsa Oturum 1'in 🔒 iç notları seed'e GİREMEZ | MIGRATION |
+| [aday] | `certification.test.ts:78` — `>= 2` kod turuyla birlikte güncellenmeli | KOD (madde 72 ayağı) |
+| [aday] | Canlıda hangi DISC yolu kullanılıyor — FE akışı keşfi + canlı doluluk sorgusu (❓ DB, PO onayı) | KEŞİF |
+
+⚠️ **NUMARA VERİLMEDİ** — PO doğuracak (KURAL 8: numara YALNIZ burada doğar). En büyük mevcut numara = **160** (138-160 içerik kalemleri); PO buradan devam ettirir.
+
+---
+
 ## G. 📌 NASIL KULLANILIR (bu belgenin kendi kılavuzu)
 
 1. **Her oturum başında** bu belge OKUNUR; ajan ürün sahibine açık maddeleri (🔴/🟡/🔵/❓) proaktif hatırlatır.
