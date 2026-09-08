@@ -126,6 +126,76 @@ SIRALANAMAZ → backfill mi, yeniden çözme mi = **PO kararı.**
 
 ---
 
+## §I — SERTİFİKA KARARLARI (2026-09-04 içerik oturumu)
+
+> ⚠️ **FAZ 0 KOD TEYİTLERİ (2026-09-04, salt-okuma; DB'ye sorulmadı):**
+>
+> **T1 — geçme eşiği KONU bazlı (PUAN değil):** `certification.service.ts:12` "aktif konuların en az %80'inde
+> ilk-denemede geçmek". `requiredToPass(n) = Math.ceil(n × 0.8)` (`:50-51`) → **8 konu → ceil(6.4) = 7 konu**
+> (24 puandan 19 DEĞİL). Her konu geçişi: `isFirstAttemptPass` (`:66-67`) — **red-line `=== 3`**, normal `>= 2`.
+> Red-line AYRI SERT KAPI: `RED_LINE_FAILED` (`:86`) = bir açık red-line konu ilk-denemede 3 ile geçilemezse.
+> → Kod ZATEN seçenek (c)'yi uyguluyor (KONU eşiği %80 + red-line hard gate). ⚠️ İncelik: red-line'da
+> geçmek için ilk-deneme **3 şart** (yalnız "0 eler" değil — red-line 1 ve 2 de eler). Bu kod gerçeğidir (KURAL 10).
+>
+> **T2 — competencyScore aralığı 0-3 TEYİT:** `schema.prisma:1155` `competencyScore Int` (şema kısıtı yok);
+> `seed-certification.ts`'te değerler tam **{0, 1, 2, 3}** — her biri 20 kez (20 senaryo × 4 şık; her senaryoda
+> 0/1/2/3 dördü de VAR → §I-3'teki "3 ve 0 mutlaka" kuralı zaten sağlanıyor). `isFirstAttemptPass` 3/2 eşikleri de 0-3'ü doğrular.
+>
+> ✅ Bulgular karar (c) ile TUTARLI — beklenenden farklı değil, karar metni kendi kararımla değiştirilmedi.
+
+**1. PUANLAMA: 0-3 KORUNUYOR (PO kararı).** Harmanlamada Faz 6'nın puansız yapısı DEĞİL, `tam.md` v2'nin 0-3
+sistemi geçerli (kodda zaten 0-3, T2). Gerekçe: red-line mantığı 0-3 ile çalışır, ikili doğru/yanlışla çalışmaz;
+"yanlış ama makul" ↔ "zararlı" ayrımı korunur. Sonuç kullanıcıya PUAN olarak değil, KONU BAZLI geri bildirim
+olarak gösterilir (madde 150).
+
+**2. ⭐ MADDE 72 KARARA BAĞLANDI — seçenek (c).** Red-line konularda düşük puan DOĞRUDAN ELER (kod: red-line
+ilk-deneme `!== 3` → RED_LINE_FAILED) + diğer konularda TOPLAM EŞİĞİ belirler (KONU'nun %80'i, ceil). Gerekçe:
+(a) yetersiz (kritik olmayan konuda zararlı cevap veren geçebiliyor), (b) fazla katı (sertifika ehliyettir,
+mükemmellik sınavı değil; felsefe "öğretimin son tekrarı"). ⬜ ALT KARAR: toplam eşiği kalibrasyona muhtaç —
+ilk 20-30 sınav sonucuna bakılacak. ⚠️ İçerik oturumunu BLOKLAMAZ. (Kod bu kararı zaten uyguluyor — FAZ 0-T1.)
+
+**3. ⭐ PUANLAMA REHBERİ (88 şık için tutarlılık — PO):**
+- **3** = En doğru. Prensibi tam uyguluyor, zamanlaması doğru.
+- **2** = Doğru yönde ama eksik. Prensip anlaşılmış, uygulama kısmi (söylüyor ama yanlış zamanda).
+- **1** = Yanlış ama zararsız. Prensip kaçırılmış, kimseye zarar vermiyor (pasif kalma).
+- **0** = Zararlı. Karşı tarafa somut zarar riski (gizlilik ihlali, kriz anında yönlendirmeme).
+
+⚠️ Her senaryoda **3 ve 0 MUTLAKA** bulunsun. 1 ve 2 opsiyonel ama ikisi birden yoksa senaryo ikili seçime döner.
+
+⚠️ **RED-LINE KONULARDA 0 DAHA DAR TANIMLANIR.** Kritik 4 konuda (geri bildirim · sınır · gizlilik · kriz)
+red-line ilk-deneme 3 değilse elediği için, orada 0 = "zararlı olabilir" değil, **"zararlı"** — tartışmasız.
+Örnek tuzak: kriz anında *"hiçbir şey söylemem, gizlilik mutlaktır"* — Faz 6'da "makul görünen aşırılık" diye 1'e
+aday gösterilmişti, ama o bağlamda **0'dır**. Red-line konularda "1" şıkkı yazarken dikkat: eleme yapmayan ama
+gerçekte tehlikeli bir cevaba 1 vermek **elemeyi delen kaçak** yaratır (kod: yalnız 3 geçirir, ama 1/2 de RED_LINE_FAILED'ı tetiklemez → puanlama doğru olmalı).
+
+**4. SAHNE SEÇİM KRİTERİ (7 ortak konu, sıralı):**
+(1) dört şıkkı daha iyi ayrışan → ölçüm gücü · (2) STK bağlamına daha yakın → ürünün ayırt edici tarafı ·
+(3) öğrenme yolculuğuyla çakışmayan → yüzey ayrımı kuralı. (Eşitlikte `tam.md`'ninki — akademik kaynak avantajı.)
+
+**5. AKADEMİK KAYNAKLAR — DOĞRULANMADI (PO kararı).** `tam.md` v2 şıklarında CIMER/NCSU gibi atıflar var;
+ajanın internet erişimi YOK, doğrulayamaz. Kaynaklar metinde KORUNUR ama **"⚠️ kaynak doğrulanmadı"** notuyla
+işaretlenir. Doğrulama sonraya bırakıldı, içerik oturumunu bekletmiyor.
+
+**6. KRİZ SENARYOLARI — HUKUKİ TEYİT (numara adayı).** Kriz senaryolarının (4A/4B) "doğru cevap" işaretlemesi
+avukat onayı olmadan KESİNLEŞMEZ (faz6 §12). Senaryolar yazılır, işaretlenir, ama ⚠️ "hukuki teyit bekliyor"
+etiketiyle. **Canlıya çıkmadan önce teyit ZORUNLU.** ⚠️ Etiket takip edilmez, KALEM takip edilir → **madde 159
+kapsamına eklendi** (bkz. Faz 2 madde güncellemeleri).
+
+**7. ÜÇ OTURUMLUK BÖLÜNME (PO planı):**
+- **Oturum 1:** 4 kritik konu (8 senaryo, 32 şık) — hazır içerik, sahne seçimi + puanlama. ⚠️ madde 72 kararı ön koşuldu → verildi ✅
+- **Oturum 2:** 2 birleşen konu SIFIRDAN + aktif dinleme uyarlama (6 senaryo, 24 şık) — asıl yazım oturumu
+- **Oturum 3:** kalan 5 konu (10 senaryo, 40 şık) — sahne seçimi + puanlama
+
+**8. 11 KONU — BİRLEŞTİRME KAYDI:** 7 ortak + 3 geri (`tam.md`) + 3 yeni (faz6) = 13 olurdu → iki çift birleşti
+→ **11 konu × 2 varyant = 22 senaryo**:
+- gönüllü tükenmişliği (STK) + kendi sınırını bilmek → **"Kendi kapasiteni bilmek"** (A: STK gönüllü tükenmişliği · B: genel kapasite aşımı)
+- okul-gönüllülük dengesi (STK) + sürekliliği koruma → **"Sürekliliği koruma"** (A: menti sınav dönemi · B: genel devamsızlık)
+
+Sınav 8 soru: 4 kritik garantili + kalan 7'den 4 rastgele (çeşitlilik 6→7, tekrar riski azalır). (§A içerik keşfi
+§A ile tutarlı.)
+
+---
+
 ## KALEM LİSTESİ (KURAL 9)
 
 | Kalem | Önerilen durum | Numara adayı mı |
@@ -135,6 +205,11 @@ SIRALANAMAZ → backfill mi, yeniden çözme mi = **PO kararı.**
 | `SjtResponse` modeli (§B-1) | ⬜ AÇIK | Evet (= iş c) |
 | Adaptif seçici ters yön (§B-2) | ⬜ AÇIK | Evet (= iş e) |
 | Güven rampası %12→%25 (§B-3) | ⬜ AÇIK | Evet (= iş d) |
+| madde 72 geçme eşiği → seçenek (c) KARARA BAĞLANDI (§I-2; kod zaten uyguluyor) | ✅ KARAR | Hayır (mevcut madde 72) |
+| madde 72 toplam eşiği kalibrasyonu (ilk 20-30 sınav) (§I-2) | ⬜ AÇIK | Hayır (alt karar, içeriği bloklamaz) |
+| Sertifika 22 senaryo içeriği (0-3 puanlama + rehber, §I) | ⬜ AÇIK | Evet (= madde 30 içerik ayağı; 3 oturum) |
+| Kriz senaryoları HUKUKİ teyit (§I-6) | ⬜ AÇIK | Evet/Hayır (madde 159 kapsamına eklendi) |
+| Akademik kaynaklar doğrulanmadı (§I-5) | ❓ TEYİT GEREK | Hayır (sonraya, içeriği bloklamaz) |
 
 > **Sayılan birim (KURAL 16):** "11 iş" = §F tablosundaki a-k satırları (SEED/MIGRATION/SAF KOD/KARAR türlerine
 > ayrılmış). "6 karar" = §G maddeleri (PO onayı bekleyen). Bu belge YENİ NUMARA VERMEZ.
