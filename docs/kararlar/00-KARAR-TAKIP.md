@@ -170,6 +170,32 @@
 > Durum: 🔴 hiç başlanmadı · 🟡 yarım/kısmi · 🔵 tasarım hazır kod bekliyor · ❓ karar/keşif bekliyor · ⏸️ bilinçli ertelendi.
 > Numaralar `10-yol-haritasi.md` ile aynı (referans için sabit). Alternatif adlar parantezde.
 
+> ⚠️ **KOD SÖZLÜĞÜ GENİŞLETİLDİ (2026-09-08).** Envanter turu, kök `CLAUDE.md` KURAL 10'un tanımladığı 6 kodun
+> (✅ YAPILDI · 🟡 YARIM · 🔀 PR'DA · ⬜ AÇIK · ❓ TEYİT GEREK · 🗑️ GEÇERSİZ ADAYI) dışında bu belgede fiilen kullanılan
+> kodlar buldu. Yukarıdaki yerel legend `🔴`/`🔵`/`⏸️`'yi tanımlıyordu ama KURAL 10 listesinde yoklardı. Aşağıdakiler
+> ARTIK TANIMLIDIR; yenisi eklenmeden önce buraya yazılır.
+>
+> | Kod | Anlamı | Ne DEĞİL |
+> |---|---|---|
+> | `⏸️` | **v2'ye / bilinçli ERTELENDİ** — v1 kapsamı dışı, bilinçli karar. Yeniden değerlendirme v1 bittiğinde | "şimdilik durdu" DEĞİL; duran iş `⬜` kalır |
+> | `🔵` | **TASARIM-HAZIR** — ne yapılacağı belli, kodlanmayı bekliyor | başlanmış iş DEĞİL (o `🟡`) |
+> | `🔴` | **HİÇ BAŞLANMADI + kritik** — v1 için zorunlu, hiçbir adımı atılmamış | yalnız öncelik değil, durum |
+> | `⏭️` | ⚠️ **SONRAKİ AŞAMA'ya ertelendi** (C bölümü #7 değerlendirme özelliği Aşama 2/3) — `⏸️`'ye yakın ama "v2" değil, aynı özelliğin sonraki aşaması. Envanterin kaçırdığı kod (yalnız satır 320/326) | durum kodu olarak yaygın DEĞİL; tek özelliğe özgü |
+> | `🟢` | ⚠️ **YALNIZ F.10 CİDDİYET kolonunda** — durum kodu DEĞİL, "düşük ciddiyet/zararsız" demek. Durum kolonunda KULLANILMAZ |
+> | `⛔` | ⚠️ **ENGEL İŞARETİ** — durum kodu DEĞİL. Bir maddenin başka bir şey tarafından bloke edildiğini gösterir (ör. madde 138/139/140 `🔵 ⛔MOTOR` = tasarım-hazır ama motor bekliyor); durum kolonunda tek başına kullanılmaz |
+> | `🌱` | ⚠️ **CANLI NİYET** (C.2 kulüp kalemi) — durum kodu DEĞİL, niyet sınıfı |
+>
+> ⚠️ **ÇİFT KOD KURALI:** Bir hücrede iki durum kodu varsa (ör. `🔵❓` / `🔴 ❓` / `🔴/🟡`) bu **belirsizliktir,
+> standart değildir.** Doğrusu: tek durum kodu + açıklamada gerekçe. Mevcut çift-kodlu maddeler FAZ 2'de (bu tur)
+> işaretlendi; tek koda indirilmeleri madde sahibinin / PO'nun işidir.
+>
+> ⚠️ **`✅` YALNIZ "YAPILDI" DEMEKTİR.** "İşleme alındı", "karara bağlandı", "cevaplandı" için ✅ KULLANILMAZ —
+> bunlar hâlâ açık işlerdir.
+>
+> ⚠️ **Düzyazıda geçen ama durum kodu OLMAYAN işaretler:** `⚫` (G1 kart kapsam-düşürme, satır 111) · `🟠` (bildirim
+> kümesi kaldıracı, 231) · `🛑` (DURAK, 438) · `⏳` (TEYİT GEREK, düzyazı) · `🔒` (gizli alan). Bunlar durum kolonunda
+> kullanılmaz; anlatı içinde vurgu işaretleridir.
+
 ### B.1 — v1 açık işler (canlı-öncesi)
 
 > 🆕 **138-160 = 2026-09-03 İÇERİK KALEMLERİ (23 kalem)** — kaynak `../raporlar/icerik/kod-kalemleri-2026-09-03.md` (A1-A6 · F1-F7 · M1-M10). PO kararı (2026-09-03): hepsi **v1 (canlı-öncesi)**, **EN ÖN SIRA** ("bu testler bizim için en önemli işler" — öncelik `10-yol-haritasi`). ⚠️ **Numara aralığı PO onayıyla 131-153'ten +7 KAYDIRILDI → 138-160** çünkü 131-137 doluydu (131-136 = IDOR Y1-Y6 / PR #60 · 137 = meeting/verifyTenant audit batch); 138-160 iki belgede grep'le boş teyit edildi. **F1+M2 BİRLEŞTİ → madde 146** (aynı isim-değişkeni altyapısı). **A5+M6 BİRLEŞMEDİ → madde 151 ↔ 152** (A5'in 8 metni hazır, M6 15 kombinasyon yazılmadı; çapraz-ref). **M5 kod kalemi değil → S31 sözü** (keşif). ~~[ESKİ · 2026-09-03] **⛔ İKİ BLOKER ÖNDE:** madde 73 (güvenli seed runner yok) + F.13 (Neon yedeği teyitsiz) — seed'e bağlı kalemler (147/148/149 ve sınav kalemleri) bunlar açılmadan canlıya GİRMEZ.~~ **⚠️ GÜNCELLEME (2026-09-03, KEŞİF):** madde 73 YALNIZ sertifikayı (**madde 30**) bloke eder — 147/148 güvenli runner (muhafızlı) sayesinde kapsam DIŞI; kalan gerçek bloker **F.13** (canlı DB, PO onayı). Kanıt: `../raporlar/kesif/icerik-onkosul-kesifleri-2026-09-03.md` §D.
