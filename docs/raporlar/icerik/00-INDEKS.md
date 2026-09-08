@@ -57,3 +57,4 @@ Yukarıdaki üç 2026-09-03 belgesi bu dört belgeye atıf yapıyor. **Hiçbiri 
 - **Güncel proje durumu:** `docs/kararlar/09-DURUM.md`
 - **Açık iş/karar/çelişki takibi:** `docs/kararlar/00-KARAR-TAKIP.md`
 - **Bu klasörün kod kalemleri:** `kod-kalemleri-2026-09-03.md` (aynı klasör)
+- **İçerik ön-koşul keşifleri (2026-09-03):** `../kesif/icerik-onkosul-kesifleri-2026-09-03.md` — sertifika bankası ikizi (PO harmanla → 11 konu×2=22) · `outcome` alanı (S31 cevabı) · 4 ayrı içerik sistemi · madde 73 gerçek kapsamı (yalnız sertifika). Etkilediği maddeler: 30 · 73 · 145 · 147 · 148.
