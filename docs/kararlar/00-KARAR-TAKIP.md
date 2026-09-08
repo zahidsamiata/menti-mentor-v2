@@ -13,6 +13,30 @@
 
 ---
 
+## 📊 SAYIM KÜNYESİ (2026-09-08 envanter turu)
+
+> ⚠️ **"167 madde" YANLIŞ bir okumadır.** 167 en büyük madde NUMARASIDIR, madde SAYISI değil.
+>
+> | Ölçüt | Değer | Birim tanımı (KURAL 16) |
+> |---|---|---|
+> | Toplam satır | 709 (envanter) / **762** (bu tur sonrası) | dosyanın satır sayısı — bu KOD-TEMİZLİĞİ turu +53 satır not/künye ekledi |
+> | Benzersiz numaralı madde | **~121** | tabloda satır başı `\| NNN \|` hücresi taşıyan benzersiz madde (F.14 tekrarları + F.10 dizin hariç) |
+> | Numara aralığı | 6 – 167 | en küçük / en büyük |
+> | Alt-varyantlar | 3 | 9a · 9b · 37m |
+>
+> ⚠️ **NUMARA BOŞLUKLARI:** 6-167 arasında satır olarak görünmeyen numaralar var (8 · 10-12 · 29 · 32 · 40 · 41-67'nin
+> çoğu · 131-137). Envanter turu bunların **atlanmış değil, format farkı** olduğunu buldu: 1-67 arası çoğu D bölümünde
+> ✅ tamamlanmış; 38/39/68 F.1'de G1/G2/G3 kodlu; 69-78 F.2'de T1-T10 kodlu; 131-137 anlatı-madde. **Atlanmış/sahipsiz
+> numara: 0.** ⬜ PO teyidi: boşluklar bilinçli mi, yoksa numaralandırma gevşekliği mi — kısa bir not eklenmeli.
+>
+> ⚠️ **SAYIM YÖNTEMİ UYARISI (KURAL 16):** grep tek başına YETMEZ. Bu turun çapraz-kontrolü `^\| NNN \|` deseniyle **131
+> ham satır** buldu — ama bu, F.10'un dizin numaralarını (1-13, madde DEĞİL) ve F.14'ün B.1 ile tekrar eden 161-167
+> satırlarını da sayıyor; tekilleştirilince ≈121. Envanter turunda grep ayrıca (a) F.5'in kalın-yazı `\| **79** \|`
+> satırlarını başta KAÇIRDI, (b) 4-byte emojileri shell'de 0 saydı. **Her sayım iki yöntemle yapılmalı** ve emoji araması
+> ripgrep tabanlı araçla çalıştırılmalı.
+
+---
+
 ## A. ⚡ TEK BAKIŞTA (şu an)
 
 > **Çıkış önceliği (hangi iş çıkıştan önce/sonra):** `00-CIKIS-PLANI.md` — açık işler K0-K5'e sınıflandı; gerçek çıkış-bloker sadece 5 K0 + 1 K1.
