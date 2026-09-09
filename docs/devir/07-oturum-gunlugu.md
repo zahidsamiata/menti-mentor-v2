@@ -1228,3 +1228,38 @@ Yöntem: `prisma migrate diff --from-schema-datamodel <git-HEAD-şema> --to-sche
 ## F) ⭐ PO'YA SORU + YARIN İÇİN
 - **PO'ya soru:** migration çalıştırma turu için hazır mıyız? Ön koşul: PO SQL'i inceler + F.13 gereği yedek tablo planı. Çalıştırma turu = `db execute --file` + `migrate resolve` (canlı=lokal Neon, PO onayı ZORUNLU).
 - **Zincir:** F.13 ✅ → **163 (şema ✅ / migration ⬜)** → madde 164 (eşik `>=2` kod turu) → madde 30 (seed). İçerik hazır (88 şık).
+
+# 📅 OTURUM 2026-09-09 (25) — MIGRATION ÇALIŞTIRILDI: madde 163 internalNote CANLI Neon'a UYGULANDI (⚠️ CANLI DB YAZIMI, PO ONAYLI)
+
+**📸 Kapanış fotoğrafı** — güncel için git + komut çıktıları + `09-DURUM.md` + `00-KARAR-TAKIP.md`.
+
+## 🔎 Git-doğrulanmış ön koşullar (FAZ 0 — altı madde)
+- **0.1** Ağaç temiz (`docs/gelen/` hariç); `git fetch` sonrası çatı origin/main `d10f8e4`, backend origin/main `c3bc357` (PR #70 merge commit).
+- **0.2** ⭐ **PR #70 (backend) MERGED** (`c3bc357`, 07:13:13Z) · **PR #173 (çatı) MERGED** (`d10f8e4`, 07:13:27Z) — gh-kanıtlı.
+- **0.3** Migration `backend/prisma/migrations/20260909000000_add_internal_note/migration.sql` main'de; SQL satır 14 = §3(a)-2 ile **BİREBİR** (`ALTER TABLE "CertificationOption" ADD COLUMN IF NOT EXISTS "internalNote" TEXT;`).
+- **0.4** DB host (maskeli) = `ep-fancy-tooth-ab4u5xhr-pooler.eu-west-2.aws.neon.tech`, DB `neondb` = **canlı Neon** (Londra). Kullanıcı/şifre maskeli.
+- **0.5** `internalNote` migration ÖNCESİ YOK (`information_schema` → `[]`).
+- **0.6** ⭐ Önceki canlı migration turu (Consent `20260828000000`, OTURUM B1/B2) yöntemi bulundu: `db execute` SELECT basmaz → **geçici `$queryRaw` salt-okuma script (silinir)**; yazım `db execute --file`; işaretleme `migrate resolve --applied`. **Aynen kullanıldı.**
+
+## A) Çalıştırılan iki YAZMA komutu (yalnız bunlar)
+- **FAZ 1 — YEDEK:** `CREATE TABLE "CertificationOption_yedek_20260909" AS SELECT * FROM "CertificationOption";` (temp .sql, repo-dışı, `prisma db execute --file`) → "Script executed successfully". Doğrulama: **kaynak=20, yedek=20 EŞİT** (ikisi de ≠0).
+- **FAZ 2 — MIGRATION:** `prisma db execute --file .../20260909000000_add_internal_note/migration.sql` → "Script executed successfully" · `prisma migrate resolve --applied 20260909000000_add_internal_note` → "marked as applied".
+
+## B) ⭐ FAZ 3 — sonuç doğrulama (üçü de tuttu)
+- **3.1** Kolon GERÇEKTEN var: `internalNote` · `data_type=text` · `is_nullable=YES` (`information_schema.columns`).
+- **3.2** `CertificationOption` satır sayısı = **20** = migration öncesiyle AYNI (veri bozulmadı).
+- **3.3** `prisma migrate status` = "Database schema is up to date!" — drift yok, migration applied.
+- **3.4** `tsc --noEmit` = exit 0 (tip üretimi tutarlı).
+
+## C) Yöntem — SELECT sonucu nasıl görüldü
+- `db execute` SELECT çıktısı basmadığı için geçici `_verify_readonly.mjs` (`$queryRawUnsafe`, **yalnız SELECT-guard'lı**) backend'de oluşturuldu, tsx ile çalıştırıldı, **tur sonunda silindi** (OTURUM Consent B1/B2 deseni). Yedek .sql repo-dışı temp'te, o da silindi.
+
+## D) Sınırlar / dürüstlük
+- ⛔ **YALNIZ 1 CREATE TABLE + 1 ALTER TABLE çalıştı · başka DB YAZMA komutu GİTMEDİ · SEED ÇALIŞTIRILMADI · kod/şema/`.prisma`/`.ts` DEĞİŞMEDİ · migration DOSYASI değişmedi · geri alma (DROP COLUMN/restore) DENENMEDİ · `docs/gelen/` ELLENMEDİ · alt-ajan yok.** **MERGE EDİLMEDİ.**
+- **madde 163 → ✅ CANLIDA** (🔀 PR'DA'dan; "yapıldı = doğrulandı", üç kanıt yukarıda).
+- Çürütülen varsayım: **0** (komut deseni, SQL, satır sayısı, yöntem — hepsi beklendiği gibi).
+
+## E) ⭐ Söz + zincir + yarın
+- **⭐ YENİ SÖZ S37:** yedek tablo `CertificationOption_yedek_20260909` (`schema.prisma`'da YOK) regresyonsuz görülünce DROP (S26 deseni).
+- **Zincir:** F.13 ✅ → **163 ✅ CANLIDA** → madde 164 (eşik `>= 2` + test) → madde 30 (seed). İçerik hazır (88 şık); seed'i bekleten tek şey madde 164.
+- **Sıradaki iş:** madde 164 (saf kod + test, migration YOK, F.13/163'e bağlı değil).
