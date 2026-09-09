@@ -1263,3 +1263,41 @@ Yöntem: `prisma migrate diff --from-schema-datamodel <git-HEAD-şema> --to-sche
 - **⭐ YENİ SÖZ S37:** yedek tablo `CertificationOption_yedek_20260909` (`schema.prisma`'da YOK) regresyonsuz görülünce DROP (S26 deseni).
 - **Zincir:** F.13 ✅ → **163 ✅ CANLIDA** → madde 164 (eşik `>= 2` + test) → madde 30 (seed). İçerik hazır (88 şık); seed'i bekleten tek şey madde 164.
 - **Sıradaki iş:** madde 164 (saf kod + test, migration YOK, F.13/163'e bağlı değil).
+
+# 📅 OTURUM 2026-09-09 (26) — KOD: madde 164 kritik konu eşiği `=== 3` → `>= 2` (zincirin SON kod adımı)
+
+**📸 Kapanış fotoğrafı** — git + komut çıktıları + `09-DURUM.md` + `00-KARAR-TAKIP.md`.
+
+## 🔎 Git-doğrulanmış ön koşullar (FAZ 0)
+- Çatı main `6ae7d4b` · backend main `c3bc357` · PR #174 MERGED (madde 163 ✅ CANLIDA, `00-KARAR-TAKIP:311`).
+- Dallar: backend + çatı `feat/madde164-esik-2026-09-09`.
+
+## A) Kod (backend COMMIT 1 — `43d15dc`)
+- `isFirstAttemptPass` (`certification.service.ts:66-73`): gövde `isRedLine ? competencyScore === 3 : >= 2` → **`competencyScore >= 2`** + üstüne 6 satır PO-karar yorumu.
+- `isRedLine` param **imzada KALDI** (çağıranlar `:191`/`:457` + `RED_LINE_FAILED` `:206/:213` red-line bilgisini kullanıyor). ⚠️ eslint `no-unused-vars` **warn** (error değil; param bilinçli tutuldu, `_isRedLine`/silme YAPILMADI).
+
+## B) ⭐ SAPMA — prompt 1 kırık test öngördü, gerçekte 3 (KAPSAM: `backend/tests`)
+- `certification.test.ts` **birim** `:78` `isFirstAttemptPass(2,true)` `toBe(false)`→`toBe(true)`.
+- `certification.test.ts` **entegrasyon** (ESKİ semantik fixture'a gömülü, red-line'a score 2 verip "geçmez" bekliyordu): `red-line MUTLAK kapı` `:146` `'B'`(2)→`'D'`(0); `red-line ilk seçim 2→geçmez` → `…1→geçmez` `:191` `'B'`(2)→`'C'`(1); `revealOption` `:236` `'B'`(2)→`'C'`(1).
+- `certification-retry.test.ts` **etkilenmedi** (tüm sorular `isRedLine:false` `:25` — keşif ❓ çözüldü) · `learning-journey.test.ts` etkilenmedi (`:112` sızma kontrolü).
+- ⭐ PO onayı alındı (fixture düzelt, silme yok) → uygulandı.
+
+## C) Test (backend COMMIT 2 — `02129fe`)
+- Birim alt sınır eklendi: `isFirstAttemptPass(1,true)`/`(0,true)` → `toBe(false)`.
+- **YENİ entegrasyon testi:** `red-line ilk seçim 2 → o konu GEÇER` — madde 164'ün ASIL değişikliğinin entegrasyon kanıtı (madde 171 akrabası). `it` 22→**23**. Silme YOK; her fixture yanına gerekçe yorumu.
+
+## D) Doğrulama
+- `tsc --noEmit` (src) **0** · `tsc -p tsconfig.test.json` **0** · eslint src **0 error (1 warn: isRedLine)** · eslint test **0**.
+- ⚠️ `npm test` LOKALDE KOŞMADI — `TEST_DATABASE_URL` yok + `DATABASE_URL` canlı Neon → `assertSafeTestDatabase` güvenlik kilidi suite'i DURDURDU (canlı veri TRUNCATE korunur). Guard **BYPASS EDİLMEDİ.** Asıl kanıt CI (ephemeral Postgres).
+
+## E) Sınırlar / dürüstlük
+- ⛔ **DB'ye komut GİTMEDİ · SEED çalıştırılmadı · migration YOK · TEST SİLİNMEDİ · şema değişmedi · `docs/gelen/` ELLENMEDİ · alt-ajan yok.** **MERGE EDİLMEDİ.**
+- madde 164 → **🔀 PR'DA** (backend PR #71; merge olmadı — "yapıldı ≠ doğrulandı").
+- Çürütülen varsayım: prompt "yalnız :78 kırılır" dedi → gerçekte 3 test yeri (fixture'a gömülü semantik). Düzeltildi.
+
+## F) Belge senkronu (çatı COMMIT 3)
+- madde 164 → 🔀 PR'DA + TEST KAPSAMI notu (`00-KARAR-TAKIP:312`) · madde 72 karar(c) kodda (`10-yol:236`) · madde 30 SON öncül düştü (`:281`) · **söz S38** (bayat yorum :86) · Son güncelleme · 09-DURUM tur notu · bu kayıt. Pointer `d2de787 → 02129fe`. Kırık link 0.
+
+## G) ⭐ Sonraki + seed'in iki blokeri
+- Kod zinciri backend #71 + çatı PR merge olunca TAMAM.
+- Seed (madde 30) hâlâ **madde 159** (kriz senaryolarının hukuki teyidi) + **KALEM 8** (kriz geri bildiriminde somut destek kaynağı adı) bekliyor — **ikisi de PO işi, kod değil.**
