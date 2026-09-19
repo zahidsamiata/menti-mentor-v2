@@ -1,3 +1,164 @@
+<!-- otonom-calisma-modu · eklenme: 2026-09-19 · PO kararı -->
+# ⭐ OTONOM ÇALIŞMA MODU (2026-09-19'dan itibaren geçerli)
+
+> ⚠️ Bu bölüm, bu dosyadaki bazı eski kurallardan ÖNCE gelir. Çelişki halinde burası kazanır.
+> Hangi kuralları geçersiz kıldığı aşağıda tek tek yazılı — eski satırlar silinmedi, tarihsel iz korunuyor.
+
+## Nedir
+PO (Zahid) kod yazmaz ve her adımda onay veremez. İş artık sohbetten değil **dosyalardan** yürür.
+Ajan kuyruğu baştan sona işler, karar noktasında DURMAZ — soruyu dosyaya yazıp sonraki işe geçer.
+PO toplu karar verir, aynı prompt tekrar gönderilir, kaldığı yerden devam eder.
+
+## Üç dosya — çalışma buradan okunur
+| Dosya | Ne işe yarar | Kim yazar |
+|---|---|---|
+| `docs/otonom/00-KUYRUK.md` | Sıralı iş listesi, şerit dağılımı, kapılar | PO ekler · ajan yalnız Durum/Not günceller |
+| `docs/otonom/01-KARARLAR.md` | Ürün kararı kuyruğu | Ajan SORU ekler · **yalnız PO CEVAP yazar** |
+| `docs/otonom/02-ILERLEME.md` | Ne yapıldı, ne atlandı, ne bozuldu | Ajan yazar · PO okur |
+
+⛔ Bu üç dosya **git'te izlenir ve commit edilir.** Lokalde kalmaları kabul edilmez:
+bulut oturumları (claude.ai/code) yalnız repodaki dosyaları görür. Kuyruk ilerledikçe
+Durum güncellemeleri normal commit'lerle gider.
+
+Ana prompt: `docs/otonom/OTONOM-PROMPT.txt` — her turda aynen gönderilir, yeniden yazılmaz.
+
+## ✅ MERGE POLİTİKASI — "PR aç, MERGE ETME" kuralı KISMEN KALDIRILDI
+`CLAUDE.md:8`'deki **"PR aç, MERGE ETME"** kuralı ve `CLAUDE.md:35`'teki akış bu bölümle güncellenmiştir.
+Gerekçe: gerçek kullanıcı ~sıfır, her iş ayrı PR (tek tek revert edilebilir), `npm run verify` kapısı var.
+
+**🟢 işler: doğrulama listesi tam geçerse MERGE EDİLİR, PO beklenmez.**
+Merge öncesi kontrol listesi — bir madde bile eksikse merge YOK, PR bırakılır:
+- [ ] `npm run verify` yeşil (backend tsc + tsc-test + eslint + frontend tsc + vitest + build + entegrasyon)
+- [ ] ⚠️ `TEST_DATABASE_URL` yoksa entegrasyon testleri guard'la DURUR → **bunu "yeşil" sayma.**
+      Bu durumda asıl kanıt CI'dır; CI yeşil değilse merge YOK. (KURAL 14: CI YEŞİL ≠ TEST KOŞTU)
+- [ ] CI iki repoda da yeşil (çatı + backend; backend CI yalnız main-hedefli PR'da koşar)
+- [ ] Şema/migration değişikliği YOK
+- [ ] seed komutu çalıştırılmadı
+- [ ] auth / KVKK / matching dosyalarına dokunulmadı
+- [ ] Değişiklik yalnız o işin kapsamındaki dosyalarda
+
+Merge sonrası: **submodule pointer'ını backend main HEAD'e re-bump et** (bkz. "Merge sonrası pointer bump").
+Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>`
+
+**🟡 işler** (riskli/geniş): PR'da durur, merge edilmez.
+**🔴 işler**: ilgili KARAR cevaplanmadan dokunulmaz.
+
+⛔ **DEĞİŞMEYEN İKİ KURAL** — bunlar kaldırılmadı, aynen geçerli:
+1. **Migration/DB**: canlı = lokal AYNI Neon. Yalnız ilgili KARAR "evet" ise VE etkilenen tablo için
+   tarihli yedek tablo alındıktan sonra. Yedek adı + satır sayısı `02-ILERLEME.md`'ye yazılır.
+2. **seed**: `seed.ts` / `npm run seed` / `prisma db seed` ASLA.
+   Güvenli olanlar: `seed-questions`, `seed-learning-journey`, `seed-certification`, `seed-test-tenant`
+   — bunlar da yalnız KARAR evet + yedek sonrası.
+
+## ⭐ KARAR AYRIMI — neyi sorma, neyi sor
+**SEN KARAR VER, SORMA (teknik):** kütüphane · dosya/klasör yapısı · isimlendirme · state yönetimi ·
+test yöntemi · refaktör kapsamı · hata mesajı metni · renk paleti · hizalama · index/performans · çeviri
+
+**DUR VE SOR (ürün / geri dönülmez):** kullanıcı neyi görebilecek/yapabilecek · bir özellik var mı yok mu ·
+bir özelliğin SİLİNMESİ · hukuki veya KVKK sonucu olan metin · verinin ANLAMINI değiştiren migration ·
+yetki kimde (mentör mü menti mi) · canlı veriye geri dönülmez dokunuş · seed · kurumlara görünen metin
+
+Kararsızsan tek soru: **"bunu geri almak kolay mı?"** Kolaysa kendin yap. Zorsa sor.
+
+## ⛔ SİLME PROTOKOLÜ — SİLME SON ÇAREDİR
+PO kuralı (2026-09-10): *"Önemli olan biz neden öyle bir şey yapmışız, onu bildikten sonra doğru
+uygulayalım. O karar üzerine FARKLI bir karar aldıysak ve son karardan da EMİNSEK silebiliriz.
+Sildiğimiz kısımları arşiv belgesine yazarız ki geri almak istediğimizde ne alacağımızı bilelim."*
+
+Hiçbir kod · uç · alan · tablo · bileşen · dosya · test şu beş adım olmadan silinmez:
+1. **NİYET** — neden yazıldı? git log + commit + PR + `docs/` gerekçesi.
+   ⛔ "GEREKÇE BULUNAMADI" ise SİLİNMEZ, karantinaya bile alınmaz → PO'ya SOR.
+2. **İKAME KANITI** — bu işi bugün yapan başka yol var mı? Kapsam beyanıyla (KURAL 13).
+3. **YENİ KARAR** — sonradan farklı bir karar alınmış mı, belgede kanıtı ne?
+   ⛔ "Kullanılmıyor" tek başına gerekçe DEĞİLDİR.
+4. **ARŞİV** — `docs/arsiv/silinenler-YYYY-MM-DD.md`: tam yol · kodun TAM içeriği (kırpmadan) ·
+   neden yazılmıştı · neden çıkarılıyor · son commit hash · geri alma komutu.
+   ⛔ Arşiv satırı yazılmadan silme commit'i atılmaz.
+5. **ÖNCE KARANTİNA** — doğrudan silme YOK. Kod yerinde kalır, devre dışı bırakılır
+   (rota kapalı / `@deprecated` / export kaldırıldı). Bir tur sorunsuz geçerse, **PO'nun İKİNCİ onayıyla** silinir.
+   Karantina 🟡'dır, gerçek silme 🔴'dır.
+
+⚠️ İstisna YOK. "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz.
+
+## ⭐ YANLIŞ SORU TUZAĞI (2026-09-09'da üç kez yaşandı)
+Bir uç/bileşen çağrılmıyor diye **"özellik yok" DEME.** Önce sor: *bu işi yapan BAŞKA bir yol var mı?*
+Varsa bulgu "eksik özellik" değil **MÜKERRER KOD**'dur — işi bağlamak değil, protokole sokmaktır.
+
+**Gerçek vaka:** `/users/me/social` (`backend/src/routes/onboardingRoutes.ts:42`) öksüz sanıldı ve
+üç ayrı denetimde "profil düzenleme ekranı yok" diye raporlandı. Oysa sosyal profil düzenleme
+`frontend/src/app/(dashboard)/profile/page.tsx` üzerinden `/api/users/me/profile` ile ÇALIŞIYOR.
+Yanlış olan kod değil, sorulan soruydu.
+
+## Karar kartı biçimi — PO teknik bilmiyor
+Ürün kararına gelince `01-KARARLAR.md`'nin SONUNA ekle, işi ATLA, DURMA. Şablon:
+
+```
+### KARAR-N · <başlık>  [ÜRÜN KARARI]
+**Şu an ne var:** mevcut davranış, kullanıcı gözünden. Kanıt: dosya:satır
+**Sorun ne:** kullanıcı için ne eksik/yanlış (teknik terim kullanma, kullanırsan parantezle açıkla)
+**Neden sana soruyorum:** teknik değil ürün kararı olmasının sebebi
+**Seçenekler:** A/B/C — her biri için:
+  · Kullanıcı ne görür · Ne kazanırsın · Ne kaybedersin
+  · Süre S/M/L · Geri alınır mı · Migration var/yok
+**Karşılaştırma:** hangisi hangi durumda doğru (2-3 cümle, taraf tutmadan)
+**Benim önerim:** <harf> — çünkü <tek cümle>
+**Cevap vermezsen:** hangi işler etkilenir
+**CEVAP:**
+```
+⚠️ "Ne kaybedersin" ASLA boş kalmaz. Seçenekler gerçekten farklı sonuç vermeli.
+⚠️ Kendi önerine güvenmiyorsan yaz: *"bu senin ürün kararın, önerime güvenme."*
+
+## Paralellik — şerit sistemi
+**Okuma** (keşif/envanter/arkeoloji): sınırsız paralel alt-ajan.
+**Yazma**: en fazla 4 şerit. Her şeridin SAHİP OLDUĞU dosyalar `00-KUYRUK.md`'de yazılı.
+⛔ Bir şerit başka şeridin dosyasına DOKUNMAZ. Ortak dosya gerekiyorsa işler SIRALI yapılır.
+Şüphede: SIRALI. Bozuk kod, hızlı koddan pahalıdır.
+Dal adı: `otonom/K-xx-kisa-ad-YYYYMMDD` · her iş ayrı dal, ayrı PR (tek tek revert edilebilir).
+`02-ILERLEME.md`'ye yazarken tek seferde EKLE (append), başkasının satırını silme.
+
+## ⭐ MOD ETİKETİ — renk kodu ve yerleşim (2026-09-19)
+`CLAUDE.md:4-5`'teki "Mod bildir" kuralının görsel karşılığı:
+
+| İşaret | Mod | Anlam |
+|---|---|---|
+| 🟥 | **BYPASS** | Kod yazar, commit atar, PR açar, kapısı uygunsa merge eder |
+| 🟩 | **PLANLA** | Salt-okuma keşif. Hiçbir şey değişmez. |
+
+⛔ **KARE ≠ DAİRE.** 🟢 🟡 🔴 daireleri `00-KUYRUK.md`'de **kapı** anlamındadır
+(🟢 yap+merge · 🟡 yap+PR · 🔴 karar bekler). Mod etiketi asla daire kullanmaz;
+kapı etiketi asla kare kullanmaz. Bir promptun başında 🟥 görmek "dur" demek DEĞİLDİR.
+
+**Yerleşim:** mod etiketi kopyalanan promptun İÇİNDE değil, ÜSTÜNDE ve ALTINDA durur.
+Üstte işin adıyla, altta sonucuyla:
+- `🟩 PLANLA — randevu mimarisi keşfi` … `🟩 PLANLA — hiçbir şey değişmedi, değişmeyecek.`
+- `🟥 BYPASS — K-06 şık açıklamaları` … `🟥 BYPASS — K-06 yazıldı, PR açıldı, merge edildi.`
+
+## Belge senkronu — SONA, tek sefer
+`CLAUDE.md:126` "her turun sonunda belge senkronu" kuralı otonom turda şöyle uygulanır:
+her iş sonrası DEĞİL, **kuyruğun sonunda TEK PR** (K-20). Ajan `00-KARAR-TAKIP.md`'ye
+**numara VERMEZ**, "aday" etiketiyle yazar; eski satırları silmez, üstünü çizer.
+Gerekçe: son bir ayda belge muhasebesi tur bütçesinin büyük kısmını yedi; ürün büyümedi.
+
+## Bitti tanımı — tek ölçü
+Bir iş ancak şu üçü varsa ✅:
+1. **Kullanıcı görüyor** — ekranda bir şey değişti ya da bir hata kayboldu.
+   ⛔ "Backend hazır" · "bileşen yazıldı ama mount edilmedi" · "uç eklendi" → BİTMEDİ.
+2. Testler yeşil (yukarıdaki kontrol listesi)
+3. `02-ILERLEME.md`'ye yazıldı — dosyalar, PR, ve "kullanıcı artık şunu görüyor" cümlesi
+
+Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz:
+✅ "artık /disc-test açılıyor"   ❌ "loading state düzeltildi"
+
+## Bulut oturumu farkı (claude.ai/code)
+Bulut VM'de Neon DB ve Dokploy erişimi YOKTUR → migration ve seed işleri (🔴) bulutta YAPILAMAZ, atlanır.
+Bulut dal gönderir ve PR açar; **main'e merge etmez** → merge PO'nun GitHub'dan tek tıkıdır.
+Bulut izin modları: Auto / Accept edits / Plan (Bypass yok).
+Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş olmalı.
+
+<!-- /otonom-calisma-modu -->
+
+---
+
 <!-- çalışma-kuralları -->
 # Çalışma Kuralları (her oturumda geçerli)
 
