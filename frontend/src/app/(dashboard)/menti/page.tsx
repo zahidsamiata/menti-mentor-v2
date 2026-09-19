@@ -17,6 +17,8 @@ import { useQuery } from '@/hooks/useQuery';
 import { matchingApi } from '@/lib/api/matching';
 import { conversationsApi } from '@/lib/api/conversations';
 import { agreementsApi } from '@/lib/api/agreements';
+import { meetingsApi } from '@/lib/api/meetings';
+import { countCompletedMeetings, countApprovedMatchMentors } from '@/lib/mentiMetrics';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
@@ -60,6 +62,15 @@ export default function MentiDashboardPage() {
     [api],
     { enabled: !isApproved && !needsDiscTest },
   );
+
+  // K-09: metrik kartları gerçek toplantı verisinden (backend /api/meetings kendi
+  // toplantılarına kapsar). Yalnız onaylı menti için — aksi halde zaten toplantı yok (0 doğru).
+  const { data: meetingsData } = useQuery(
+    () => meetingsApi.list(api, {}),
+    [api],
+    { enabled: isApproved },
+  );
+  const meetings = meetingsData?.items ?? [];
 
   // Talep modalı state
   const [selectedMentor, setSelectedMentor] = useState<MentorMatch | null>(null);
@@ -200,8 +211,8 @@ export default function MentiDashboardPage() {
       {/* Metrikler — sadece onaylı kullanıcılar için gerçek veri */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <DashboardMetricCard label="Gönderilen Talepler" value={sentIds.size} color="brand" />
-        <DashboardMetricCard label="Onaylanan Eşleşmeler" value={0} color="success" />
-        <DashboardMetricCard label="Tamamlanan Toplantılar" value={0} color="neutral" />
+        <DashboardMetricCard label="Onaylanan Eşleşmeler" value={countApprovedMatchMentors(meetings)} color="success" />
+        <DashboardMetricCard label="Tamamlanan Toplantılar" value={countCompletedMeetings(meetings)} color="neutral" />
         {/* #12: DISC çoklu harf (ör. "Di") — yoksa tek harfe düşer. */}
         <DashboardMetricCard label="DISC Profili" value={user?.discLetters || user?.discType || '—'} color="warning" />
       </div>
