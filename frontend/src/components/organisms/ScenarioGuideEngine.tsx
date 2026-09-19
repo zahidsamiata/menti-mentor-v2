@@ -197,7 +197,7 @@ export function ScenarioGuideEngine({
                 onToggleOthers={() => setShowOthers((v) => !v)}
               />
             ) : (
-              displayChoices.map((c) => {
+              displayChoices.map((c, idx) => {
                 const isSelected = selected === c.key;
                 const style = result ? OUTCOME_STYLE[result.outcome] : null;
                 return (
@@ -215,7 +215,9 @@ export function ScenarioGuideEngine({
                             : 'border-border hover:border-primary/50 hover:bg-primary/5 cursor-pointer'
                     }`}
                   >
-                    <span className="font-semibold mr-2">{c.key.toUpperCase()})</span>
+                    {/* madde/K-07: görüntü harfi karıştırmadan SONRA sıraya göre atanır
+                        (üstten alta hep A→D). Cevap kimliği c.key ile korunur. */}
+                    <span className="font-semibold mr-2">{String.fromCharCode(65 + idx)})</span>
                     {revealed && isSelected && style && <span className="mr-1">{style.icon}</span>}
                     {c.label}
                     {revealed && isSelected && result && (
