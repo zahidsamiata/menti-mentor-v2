@@ -1,0 +1,211 @@
+🟢 OTONOM TUR — paralel şeritler · kendi kendini doğrular · otomatik canlıya alır
+Model: Fable 5 · izin sorma kapalı
+
+⚠️ BU PROMPT TEKRAR KULLANILIR. Her seferinde aynı metin gönderilir.
+   Kaldığın yeri sohbetten değil, docs/otonom/02-ILERLEME.md'den okursun.
+
+═══════════════════════════════════════════════
+0. AÇILIŞ — SIRAYLA OKU
+═══════════════════════════════════════════════
+1) docs/otonom/01-KARARLAR.md → hangi CEVAP dolu, hangisi boş
+2) docs/otonom/02-ILERLEME.md → yoksa oluştur; varsa nerede kalınmış
+3) docs/otonom/00-KUYRUK.md   → iş listesi + şerit dağılımı
+4) docs/kararlar/09-DURUM.md  → YALNIZ en üstteki tarihli bölüm
+   ⚠️ "TEK BAKIŞTA" başlıklı bölüm ESKİ KATMAN (2026-08-19) — OKUMA, güvenme.
+5) docs/raporlar/kesif/gercek-kullanici-testi-bulgulari-2026-09-09.md
+
+02-ILERLEME.md'nin başına yaz: tur no · başlangıç saati · aktif şeritler.
+
+═══════════════════════════════════════════════
+1. BÜYÜK RESİM
+═══════════════════════════════════════════════
+MentiMentor: DISC tabanlı çok kiracılı mentör-menti eşleştirme platformu. Canlı, gerçek kullanıcı ~sıfır.
+Sorun: aylardır tek tek prompt-rapor döngüsüyle ilerledi. Backend'de ~17 blok yazıldı, çoğu kullanıcıya hiç ulaşmadı.
+Bu tur o döngüyü bitiriyor. SEN baştan sona çalışırsın. PO yalnız ÜRÜN kararı verir, teknik karar SENİN.
+
+⭐ TEK ÖLÇÜ: Bir iş ancak KULLANICI ekranda bir şey görüyorsa ya da bir hata kayboluyorsa biter.
+"Backend hazır" · "bileşen yazıldı ama mount edilmedi" · "uç eklendi" → BİTMEDİ.
+
+═══════════════════════════════════════════════
+2. MERGE POLİTİKASI — PO KARARI (2026-09-10): OTOMATİK
+═══════════════════════════════════════════════
+🟢 işler: testler yeşilse **merge et, canlıya al.** PO onayı bekleme.
+Her merge'den önce KENDİ DOĞRULAMA LİSTESİ (hepsi ✅ olmadan merge YOK):
+  [ ] frontend testleri yeşil      [ ] backend testleri yeşil
+  [ ] typecheck/lint temiz         [ ] build hatasız
+  [ ] şema değişikliği YOK         [ ] seed komutu çalıştırılmadı
+  [ ] auth / KVKK / matching dosyasına dokunulmadı
+  [ ] değişiklik yalnız bu işin kapsamındaki dosyalarda
+Bir kutu bile boşsa → merge ETME, PR bırak, 02-ILERLEME'ye sebebi yaz, sonrakine geç.
+
+Merge sonrası: çatı submodule pointer'ını backend main HEAD'e re-bump et (sarkma bırakma).
+Merge sonrası 02-ILERLEME'ye ekle: "CANLIDA BAK: <kullanıcı ne görmeli>"
+
+🟡 = PR'da durur (riskli/geniş). 🔴 = ilgili KARAR cevaplanmadan DOKUNULMAZ.
+
+⛔ DEĞİŞMEYEN İKİ KURAL:
+1. DB/migration: canlı = lokal AYNI Neon (restore penceresi 6 saat). Migration YALNIZ ilgili KARAR
+   "evet" ise VE önce tarihli yedek tablo alındıysa. Yedek adı + satır sayısı 02-ILERLEME'ye yazılır.
+2. seed.ts / npm run seed / prisma db seed ASLA. Güvenli olanlar: seed-questions,
+   seed-learning-journey, seed-certification, seed-test-tenant — bunlar da ancak KARAR evet + yedek sonrası.
+
+═══════════════════════════════════════════════
+3. KARAR AYRIMI — SORMA vs SOR
+═══════════════════════════════════════════════
+SEN KARAR VER, SORMA (teknik):
+  kütüphane · dosya/klasör yapısı · isimlendirme · state yönetimi · test yöntemi ·
+  refaktör kapsamı · hata mesajı metni · renk paleti tutarlılığı · boşluk/hizalama ·
+  index/performans · çeviri · kod içi yorum
+
+⛔ SİLME ASLA TEKNİK KARAR DEĞİLDİR. Bir kodun çağrılmıyor olması, silinebileceği anlamına gelmez.
+   Neden yazıldığını bilmiyorsan, sildiğinde bilgiyi de silersin. Bkz. §3.5.
+
+DUR VE SOR (ürün / geri dönülmez):
+  kullanıcı neyi görebilecek/yapabilecek · bir özellik var mı yok mu · bir özelliğin SİLİNMESİ ·
+  hukuki veya KVKK sonucu olan metin · verinin ANLAMINI değiştiren migration ·
+  yetki kimde (mentör mü menti mi) · canlı veriye geri dönülmez dokunuş · seed atılması ·
+  para/politika · kurumlara görünen metin
+
+Kararsızsan tek soru: "bunu geri almak kolay mı?" Kolaysa KENDİN YAP. Zorsa SOR.
+
+═══════════════════════════════════════════════
+3.5 ⛔ SİLME PROTOKOLÜ — SİLME SON ÇAREDİR
+═══════════════════════════════════════════════
+PO kuralı (2026-09-10): "Önemli olan biz neden öyle bir şey yapmışız, onu bildikten sonra
+doğru uygulayalım. Ancak o karar üzerine FARKLI bir karar aldıysak ve son karardan da EMİNSEK
+silebiliriz. Sildiğimiz kısımları arşiv belgesine yazarız ki geri almak istediğimizde ne
+alacağımızı bilelim."
+
+Hiçbir kod, uç, alan, tablo ya da bileşen şu beş adım tamamlanmadan silinmez:
+
+ADIM 1 — NİYET (zorunlu)
+  Neden yazıldı? Kanıt: git log + commit mesajı + varsa PR açıklaması + docs/ içinde gerekçe.
+  ⛔ "GEREKÇE BULUNAMADI" çıkarsa SİLİNMEZ, karantinaya da alınmaz → PO'ya SOR.
+  Gerekçesi bilinmeyen kod, bilinmeyen bir ihtiyacın cevabı olabilir.
+
+ADIM 2 — İKAME KANITI (zorunlu)
+  Bu işi bugün yapan BAŞKA bir yol var mı? Kapsam beyanıyla kanıtla
+  (hangi dizin, hangi desen, harf duyarsız). İkame yoksa silme gündeme bile gelmez.
+
+ADIM 3 — YENİ KARAR VAR MI (zorunlu)
+  Bu konuda sonradan FARKLI bir karar alınmış mı? Belgede kanıtı var mı?
+  Yoksa → PO'ya SOR. "Kullanılmıyor" tek başına gerekçe DEĞİLDİR.
+
+ADIM 4 — ARŞİV BELGESİ (zorunlu, silmeden ÖNCE yazılır)
+  docs/arsiv/silinenler-YYYY-MM-DD.md — silinen her kalem için:
+    · Ne silindi (tam yol, satır aralığı)
+    · Kodun TAM İÇERİĞİ (kod bloğu olarak, kırpmadan)
+    · Neden yazılmıştı (ADIM 1 kanıtı)
+    · Neden siliniyor (ADIM 2 + ADIM 3 kanıtı)
+    · Silmeden önceki son commit hash'i
+    · GERİ ALMA: hangi komutla nasıl geri getirilir (git revert <hash> ya da dosya yolu + commit)
+  ⛔ Arşiv satırı yazılmadan silme commit'i atılmaz.
+
+ADIM 5 — ÖNCE KARANTİNA, SONRA SİLME (iki aşama)
+  Doğrudan silme YOK. Önce KARANTİNA: kod yerinde kalır, devre dışı bırakılır
+  (rota kapatılır / @deprecated işareti / export kaldırılır), arşiv belgesine yazılır.
+  Bir tur boyunca bir şey bozulmazsa, PO'nun İKİNCİ onayıyla gerçekten silinir.
+  ⛔ Karantina 🟡'dır (PR'da durur), silme 🔴'dır (PO kararı ister).
+
+Bu protokol şunların hepsi için geçerlidir: uç · alan · tablo · bileşen · servis · dosya · test.
+⚠️ İstisna YOK. "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz.
+
+═══════════════════════════════════════════════
+4. KARAR YAZMA BİÇİMİ — PO BUNA BAKIP KARAR VERECEK
+═══════════════════════════════════════════════
+Ürün kararına geldiğinde: 01-KARARLAR.md'nin SONUNA ekle, o işi ATLA, DURMA, SONRAKİNE GEÇ.
+PO teknik bilmiyor. Her kararı ŞU ŞABLONLA yaz — hiçbir satırı boş bırakma:
+
+### KARAR-N · <kısa başlık>  [ÜRÜN KARARI]
+**Şu an ne var:** mevcut davranış, kullanıcı gözünden. Kanıt: dosya:satır
+**Sorun ne:** kullanıcı için ne eksik/yanlış. Teknik terim kullanma; kullanırsan parantezle açıkla.
+**Neden sana soruyorum:** bunun teknik değil ürün kararı olmasının sebebi (tek cümle)
+**Seçenekler:**
+  A) <ad>
+     · Kullanıcı ne görür: …
+     · Ne kazanırsın: …
+     · Ne kaybedersin: …
+     · Süre: S/M/L · Geri alınır mı: evet/hayır/zor · Migration: var/yok
+  B) <ad>  (aynı beş satır)
+  C) <ad>  (aynı beş satır)
+**Karşılaştırma:** hangisi hangi durumda doğru — 2-3 cümle, dürüst, taraf tutmadan
+**Benim önerim:** <harf> — çünkü <tek cümle>
+**Cevap vermezsen:** bu iş atlanmış kalır; şunlar da etkilenir: K-xx
+**CEVAP:**
+
+⚠️ Seçenekler GERÇEKTEN farklı sonuç vermeli. Aynı şeyin iki tonu = kötü karar kartı.
+⚠️ "Ne kaybedersin" ASLA boş kalmaz. Her seçeneğin bedeli vardır.
+⚠️ Kendi önerine güvenmiyorsan yaz: "bu senin ürün kararın, önerime güvenme."
+
+═══════════════════════════════════════════════
+5. PARALELLİK — ŞERİT SİSTEMİ
+═══════════════════════════════════════════════
+OKUMA (keşif, arkeoloji, envanter): SINIRSIZ paralel alt-ajan. İstediğin kadar koş.
+YAZMA: en fazla 4 şerit, paralel. Her şeridin SAHİP OLDUĞU dosyalar vardır (00-KUYRUK'ta).
+
+⛔ ŞERİT KURALI: Bir şerit, başka şeridin sahip olduğu dosyaya DOKUNMAZ.
+   Bir iş başka şeridin dosyasını gerektiriyorsa → o iş sahibi şeride taşınır.
+   İki şerit aynı dosyaya ihtiyaç duyuyorsa → o iki iş SIRALI yapılır.
+   Şüphede: SIRALI. Bozuk kod, hızlı koddan pahalıdır.
+
+Her şerit kendi dalını kullanır, kendi PR'ını açar.
+Dal adı: otonom/K-xx-kisa-ad-YYYYMMDD
+02-ILERLEME.md'ye yazarken TEK SEFERDE ekle (append), başkasının satırını silme, çakışırsan yeniden dene.
+Git kilidi: iki şerit aynı anda commit atmasın; sıra bekle.
+
+═══════════════════════════════════════════════
+6. HER İŞ İÇİN DÖNGÜ
+═══════════════════════════════════════════════
+a) 00-KUYRUK'ta Durum → çalışılıyor
+b) Kapı: 🔴 ise KARAR cevaplı mı? Boşsa → ATLA, sonrakine geç
+c) Kök sebep: kodu oku, kanıt (dosya:satır) al. Belge ile kod çelişirse KOD KAZANIR.
+   ⚠️ YANLIŞ SORU TUZAĞI: bir uç çağrılmıyor diye "özellik yok" DEME.
+      Önce sor: bu işi yapan BAŞKA bir yol var mı? Varsa bulgu "eksik özellik" değil MÜKERRER KOD'dur.
+      (Gerçek vaka: /users/me/social öksüz sanıldı; iş /api/users/me/profile ile ÇALIŞIYOR.)
+d) Yaz. Küçük tut. Kapsam dışı dosyaya dokunma.
+e) Test: mevcutlar + yeni davranışa en az bir test.
+   ⛔ KIRIK TEST SİLİNMEZ, DÜZELTİLİR. (madde 164 dersi)
+f) Commit (Türkçe, iş no ile) → PR → §2 doğrulama listesi → merge ya da bırak
+g) 00-KUYRUK Durum güncelle + tek satır Not · 02-ILERLEME'ye kayıt
+h) Sonraki iş
+
+═══════════════════════════════════════════════
+7. HATA SENARYOLARI
+═══════════════════════════════════════════════
+· Test 2 denemede yeşil olmuyor → BAŞARISIZ işaretle, sebep Not'a, dalı BIRAK (silme), devam et
+· Bir iş 3 saati aşıyor → BAŞARISIZ "boyut yanlış", KARAR'a "bölünsün mü", devam et
+· Kök sebep koddan bulunmuyor (canlı log gerek) → yapılabileni yap (anlaşılır hata mesajı),
+  KARAR'a "canlıda şu loga bakılmalı" yaz
+· Merge conflict → çözme, BAŞARISIZ + Not, devam et
+· İki şerit aynı dosyayı istedi → ikincisi bekler, olmuyorsa BAŞARISIZ + Not
+· Beklenmedik uncommitted değişiklik → DOKUNMA, yaz, devam
+· Bağlam doluyor → önce 02-ILERLEME'yi güncelle, sonra dur
+· Yanlışlıkla DB/seed komutu çalıştırdın → HEMEN DUR, 02-ILERLEME'nin EN ÜSTÜNE büyük harfle yaz,
+  başka hiçbir şey yapma
+· Canlıda bir şeyin bozulduğunu fark ettin → ilgili PR'ı REVERT et, yaz, devam et
+
+═══════════════════════════════════════════════
+8. KANIT DİSİPLİNİ
+═══════════════════════════════════════════════
+· Her "düzeltildi": dosya:satır + test adı
+· "sanırım/muhtemelen" YASAK → "TEYİT GEREK" + ne gerekiyor
+· Negatif iddia kapsam beyanı ister: hangi dizin, hangi desen, harf duyarsız mı
+· Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz
+  ("artık /disc-test açılıyor" > "loading state düzeltildi")
+· .env değeri, gerçek kullanıcı verisi, gizli anahtar hiçbir yere yazılmaz
+
+═══════════════════════════════════════════════
+9. KAPANIŞ (kuyruk bitince ya da yalnız atlanmış/başarısız kalınca)
+═══════════════════════════════════════════════
+K-20 belge senkronu: TEK PR ile 09-DURUM (yeni bölüm EN ÜSTE, tarihli) ·
+00-KARAR-TAKIP (yalnız bu turda kapanan/açılan, NUMARA VERME, "aday" etiketi, eski satırı silme) ·
+docs/devir/07-oturum-gunlugu.md (bir kayıt).
+
+Sonra 02-ILERLEME.md'nin EN BAŞINA özet:
+  BİTTİ ve CANLIDA: n iş — her biri "kullanıcı artık şunu görüyor" cümlesiyle
+  KARAR BEKLİYOR: n — hangi KARAR numaraları
+  BAŞARISIZ: n — sebepleriyle
+  CANLIDA KONTROL EDİLECEKLER: kısa liste
+  PO'NUN KENDİ YAPMASI GEREKENLER: altyapı/hesap işleri
+
+PO'nun turdan sonra okuyacağı TEK dosya 02-ILERLEME, cevaplayacağı TEK dosya 01-KARARLAR.
