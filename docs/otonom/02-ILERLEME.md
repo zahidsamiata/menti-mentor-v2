@@ -48,6 +48,20 @@ Okuma keşifleri paralel alt-ajanla. Yazma işleri sırayla.
 
 ### İş kayıtları (append-only)
 
+**TUR 3 — 2026-09-19 · AŞAMA E (E-1 niyet arkeolojisi + E-2 triyaj) · salt-okuma keşif**
+- **E-1 ✅ BİTTİ** — Rapor: `docs/raporlar/kesif/hayalet-envanter-2026-09-19.md`. 4 paralel salt-okuma alt-ajan.
+  - Envanter (baştan çıkarıldı): **35 öksüz backend ucu** · **4 ölü şema alanı** (1'i WIP internalNote, 1'i verifiedBy) · **3 mount edilmeyen bileşen**.
+  - Eski "~56 uç / ~44 kalem" repoda kanıtlanamadı — gerçek 2026-08-02 raporu **6 uç** saymış; "~56" başka oturumun şişmiş sayısı.
+  - Yanlış-pozitif elendi: `platform/tenants/:id/meetings` aslında çağrılıyor. `IndustryNode.parentId` relation'la okunuyor (ölü değil).
+  - **GEREKÇE BULUNAMADI = 1** (yalnız `Tenant.verifiedBy` alanının kendi niyeti; kardeş alanlar belgeli).
+- **E-2 ✅ BİTTİ** — 4 kova: 🔧BAĞLA~7 · 🔒KARANTİNA ADAYI~13 (hepsi mevcut KARAR-11) · ⚙️OPERASYON~7 · ❓SOR (KARAR-9/10/12/15).
+  - **6 YENİ kümelenmiş karar kartı: KARAR-12..17** (01-KARARLAR sonuna). ≤10 sınırı korundu.
+  - Mükerrer uçlar (KARAR-11), kulüp+iş ilanları (KARAR-9), OCEAN/SJT+triggersOn/signalsArchetype (KARAR-10) → mevcut kartlara REFERANS, tekrar kart açılmadı.
+  - Kart açılmayan düşük-değer (sonraki tura): tags/suggest · /requests GET · verifiedBy audit yazımı (teknik).
+- **⛔ Kod/DB/şema/seed DEĞİŞMEDİ · frontend/ backend/ yalnız OKUNDU · hiçbir şey silinmedi/karantinaya alınmadı · 01-KARARLAR CEVAP satırlarına dokunulmadı (yalnız sona kart eklendi).**
+- **PO'YA:** 01-KARARLAR'da artık **17 karar** cevap bekliyor (KARAR-1..11 eski + KARAR-12..17 yeni). Hepsi tek oturumda cevaplanabilir.
+
+
 **K-01 · Submodule pointer re-bump · ✅ BİTTİ & CANLIDA (PR #176 merged)**
 - Çatı pointer `02129fe` (feature) → `1304790` (backend main HEAD, merge commit #71). Ata teyitli.
 - CI: 8/8 pass (backend/frontend/integration/e2e). Doğrulama listesi tam.
