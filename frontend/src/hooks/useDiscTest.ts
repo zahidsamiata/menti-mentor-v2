@@ -52,12 +52,15 @@ export interface UseDiscTestReturn {
   answer: (value: LikertValue) => Promise<void>;
   /** Yükleme/API hatası mesajı veya null */
   error: string | null;
+  /** Soruları yeniden yükle (yükleme hatası sonrası "Tekrar dene"). */
+  reload: () => void;
 }
 
 // ─── Başlangıç state'i ───────────────────────────────────────────────────────
 
 function buildInitialState(): DiscTestState {
   return {
+    loading: true,
     questions: [],
     meta: null,
     answers: {},
@@ -82,11 +85,18 @@ export function useDiscTest({ token, tenantId, onComplete }: UseDiscTestOptions)
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
 
+  // "Tekrar dene": bu sayaç artınca yükleme useEffect'i yeniden koşar.
+  const [reloadKey, setReloadKey] = useState(0);
+  const reload = useCallback(() => setReloadKey((k) => k + 1), []);
+
   // ── 1. Soruları + mevcut ilerlemeyi yükle ──────────────────────────────────
   useEffect(() => {
     let cancelled = false;
 
     async function load() {
+      setError(null);
+      setState((prev) => ({ ...prev, loading: true }));
+
       const [questionsResult, progressResult] = await Promise.all([
         discTestApi.getQuestions(token, tenantId),
         discTestApi.getProgress(token, tenantId),
@@ -95,7 +105,8 @@ export function useDiscTest({ token, tenantId, onComplete }: UseDiscTestOptions)
       if (cancelled) return;
 
       if (!questionsResult.ok) {
-        setError('Sorular yüklenemedi. Lütfen sayfayı yenileyin.');
+        setError('Sorular yüklenemedi. Lütfen tekrar deneyin.');
+        setState((prev) => ({ ...prev, loading: false }));
         return;
       }
 
@@ -122,6 +133,7 @@ export function useDiscTest({ token, tenantId, onComplete }: UseDiscTestOptions)
       );
 
       setState({
+        loading: false,
         questions,
         meta,
         answers: {},         // history'yi hafızada tutmaya gerek yok; backend güvende
@@ -134,7 +146,7 @@ export function useDiscTest({ token, tenantId, onComplete }: UseDiscTestOptions)
 
     void load();
     return () => { cancelled = true; };
-  }, [token, tenantId]); // token/tenantId değişirse (OAuth yenileme vb.) yeniden yükle
+  }, [token, tenantId, reloadKey]); // token/tenantId değişince ya da reload çağrılınca yeniden yükle
 
   // ── 2. Cevap gönder ────────────────────────────────────────────────────────
   const answer = useCallback(
@@ -195,7 +207,7 @@ export function useDiscTest({ token, tenantId, onComplete }: UseDiscTestOptions)
    */
   const progressPercent = calcProgressPercent(state);
 
-  return { state, currentQuestion, progressPercent, answer, error };
+  return { state, currentQuestion, progressPercent, answer, error, reload };
 }
 
 // ─── Yardımcı fonksiyonlar ────────────────────────────────────────────────────
