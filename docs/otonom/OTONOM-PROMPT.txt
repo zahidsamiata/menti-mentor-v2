@@ -1,4 +1,4 @@
-🟢 OTONOM TUR — paralel şeritler · kendi kendini doğrular · otomatik canlıya alır
+🟥 OTONOM TUR — paralel şeritler · kendi kendini doğrular · otomatik canlıya alır
 Model: Fable 5 · izin sorma kapalı
 
 ⚠️ BU PROMPT TEKRAR KULLANILIR. Her seferinde aynı metin gönderilir.
