@@ -55,7 +55,7 @@ function DiscTestContent({ token, tenantId, onComplete }: DiscTestContentProps) 
     setTimeout(onComplete, 2500);
   }, [onComplete]);
 
-  const { state, currentQuestion, progressPercent, answer, error } = useDiscTest({
+  const { state, currentQuestion, progressPercent, answer, error, reload } = useDiscTest({
     token,
     tenantId,
     onComplete: handleComplete,
@@ -82,8 +82,18 @@ function DiscTestContent({ token, tenantId, onComplete }: DiscTestContentProps) 
     );
   }
 
-  // Yükleniyor
-  if (state.questions.length === 0) return <DiscTestSkeleton />;
+  // Yükleniyor (yalnızca gerçek yükleme sürerken)
+  if (state.loading) return <DiscTestSkeleton />;
+
+  // K-02: yükleme hatası — eskiden sonsuz iskelet gösteriliyordu. Artık anlaşılır mesaj + tekrar dene.
+  if (error && state.questions.length === 0) {
+    return <DiscTestLoadError message={error} onRetry={reload} />;
+  }
+
+  // K-02: sorular yüklendi ama havuz boş — sonsuz iskelet yerine bilgilendirme.
+  if (state.questions.length === 0) {
+    return <DiscTestEmpty />;
+  }
 
   // Tüm sorular geçildi ama onComplete henüz çağrılmadı
   if (!currentQuestion) return null;
@@ -104,6 +114,52 @@ function DiscTestContent({ token, tenantId, onComplete }: DiscTestContentProps) 
         error={error}
         onAnswer={answer}
       />
+    </div>
+  );
+}
+
+// ─── Yükleme hatası (K-02) ────────────────────────────────────────────────────
+
+function DiscTestLoadError({ message, onRetry }: { message: string; onRetry: () => void }) {
+  return (
+    <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-4 text-center animate-fade-in px-4">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
+        <svg className="h-8 w-8 text-destructive" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+            d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold">Test yüklenemedi</h2>
+        <p className="text-sm text-muted-foreground mt-1 max-w-sm">{message}</p>
+      </div>
+      <button
+        onClick={onRetry}
+        className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+      >
+        Tekrar dene
+      </button>
+    </div>
+  );
+}
+
+// ─── Boş havuz (K-02) ─────────────────────────────────────────────────────────
+
+function DiscTestEmpty() {
+  return (
+    <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-3 text-center animate-fade-in px-4">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
+        <svg className="h-8 w-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold">Şu an aktif test sorusu yok</h2>
+        <p className="text-sm text-muted-foreground mt-1 max-w-sm">
+          Test soruları henüz hazırlanmamış olabilir. Lütfen kurum yöneticinizle iletişime geçin.
+        </p>
+      </div>
     </div>
   );
 }

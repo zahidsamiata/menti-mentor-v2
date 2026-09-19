@@ -90,6 +90,13 @@ export type TestPhase = 'CORE' | 'DEEPENING' | 'COMPLETE';
 
 /** Hook'un yönettiği istemci tarafı state */
 export interface DiscTestState {
+  /**
+   * İlk yükleme (soru + ilerleme) sürüyor mu? true iken iskelet gösterilir.
+   * K-02: eskiden yükleme durumu `questions.length === 0` ile çıkarsanıyordu —
+   * bu, "yükleniyor" / "yükleme hatası" / "havuz boş" üç durumunu birbirine karıştırıp
+   * hata/boş halinde sonsuz iskelet üretiyordu. Ayrı bayrak üçünü ayırır.
+   */
+  loading: boolean;
   questions: DiscQuestion[];
   /** Pool meta verisi yüklendikten sonra dolar */
   meta: QuestionPoolMeta | null;
