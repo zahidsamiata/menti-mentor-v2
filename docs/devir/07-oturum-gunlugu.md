@@ -1301,3 +1301,33 @@ Yöntem: `prisma migrate diff --from-schema-datamodel <git-HEAD-şema> --to-sche
 ## G) ⭐ Sonraki + seed'in iki blokeri
 - Kod zinciri backend #71 + çatı PR merge olunca TAMAM.
 - Seed (madde 30) hâlâ **madde 159** (kriz senaryolarının hukuki teyidi) + **KALEM 8** (kriz geri bildiriminde somut destek kaynağı adı) bekliyor — **ikisi de PO işi, kod değil.**
+
+---
+
+# OTURUM — 2026-09-19 · OTONOM TUR 1 (şerit sistemi ilk turu)
+
+## A) Bağlam
+- Yeni "otonom tur" promptu (docs/otonom: 00-KUYRUK iş listesi + 01-KARARLAR karar kuyruğu + 02-ILERLEME defter). Bu dosyalar **untracked** (PO yerel çalışma dosyaları).
+- KARAR-0 ✅ (PO 2026-09-10): migration'sız/karar'sız 🟢 işler otomatik merge + canlıya alınır. Tüm diğer KARARLAR (1..11) cevapsız → 🔴/🟡 işler kilitli.
+- Yürütme: TEK orkestratör, SIRALI (submodule + git kilidi riski → şüphede sıralı). Keşif paralel alt-ajanla.
+
+## B) Yapılan işler (kanıt)
+- **K-01 ✅ CANLIDA (PR #176):** çatı submodule pointer `02129fe`(feature) → `1304790`(backend main HEAD #71). `merge-base --is-ancestor` = 0 (ileri sarım). Sarkma giderildi. CI 8/8.
+- **K-07 ✅ CANLIDA (PR #177):** şık görünüm harfi karıştırmadan SONRA `String.fromCharCode(65+idx)`; cevap kimliği `o.key`/`c.key` korundu. `certification/page.tsx:290` + `ScenarioGuideEngine.tsx:218`. Test 5/5 (yeni: shuffle→ilk şık 'A)').
+- **K-09 ✅ CANLIDA (PR #178):** `menti/page.tsx:203-204` hardcoded `value={0}` iki kart `/api/meetings` verisine bağlandı (bind — kaldırma değil; SİLME PROTOKOLÜ'ne gerek kalmadı). Sayım saf helper `lib/mentiMetrics.ts` + test 3/3. Backend değişmedi (`meetingController:238` kendi toplantılarına kapsar).
+- **K-02 🔀 PR'DA (PR #179):** kök `disc-test/page.tsx:86` (loading==`questions.length===0` → hata/boş/yükleniyor karışık, getQuestions hatası sonsuz iskelet). `DiscTestState.loading` + `reload()` + üç ekran. Test 3/3 (useDiscTest.test.tsx).
+
+## C) Kanıt disiplini / dürüst pushback
+- Alt-ajan K-07 için "key'i ez" önerdi → **reddedildi**: `o.key` cevap kimliği (choose(o.key)), ezmek seçimi bozardı. Kimlik korunup görünüm harfi index'ten hesaplandı.
+- Alt-ajan K-06'yı "tasarım gereği (madde 144)" dedi + K-03/K-10 teşhisleri bulanıktı → bu turda YAZILMADI, kanıt netleşince ele alınacak.
+- CI raporlanırken kaç test koştuğu yazıldı (KURAL 14): K-07 5/5 · K-09 3/3 · K-02 3/3.
+
+## D) Belge senkronu
+- 09-DURUM tepesine ⚡ OTONOM TUR 1 bölümü (en üste, tarihli) + Son güncelleme.
+- 02-ILERLEME (untracked) TUR ÖZETİ + iş kayıtları · 00-KUYRUK Durum/Not (untracked).
+- 00-KARAR-TAKIP: aşağıdaki E bölümü (numara VERİLMEDİ, "aday" etiketi).
+- bu oturum kaydı.
+
+## E) Bekleyen (PO)
+- 01-KARARLAR KARAR-1..11 cevapsız → randevu mimarisi (K-15), sertifika seed (K-16), profil linki (K-17), öğrenme yolculuğu seed (K-18), mükerrer uç temizliği (K-13/E-serisi) kilitli.
+- Ajan sonraki tur: K-08 (sosyal doğrulama, FE+BE) · K-03/K-06/K-10/K-11/K-12 · E-1 niyet arkeolojisi.
