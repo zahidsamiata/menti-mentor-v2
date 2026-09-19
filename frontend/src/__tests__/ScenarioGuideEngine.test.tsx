@@ -88,6 +88,10 @@ describe('ScenarioGuideEngine — madde 143 (şık karıştırma) + 144 (nötr g
       .getAllByRole('button')
       .filter((b) => /seçim/.test(b.textContent ?? ''));
     expect(choiceButtons[0]).toHaveTextContent('Yanlış seçim'); // b öne geldi
+    // K-07: karıştırmadan SONRA görüntü harfi sıraya göre — üstteki şık her zaman "A)"
+    // (orijinal kimliği "b" olsa bile). Yapışık orijinal harf görünmez.
+    expect(choiceButtons[0]).toHaveTextContent('A)');
+    expect(choiceButtons[1]).toHaveTextContent('B)');
     spy.mockRestore();
   });
 

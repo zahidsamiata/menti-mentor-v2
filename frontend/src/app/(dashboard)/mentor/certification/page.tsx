@@ -270,7 +270,7 @@ export default function MentorCertificationPage() {
           <CardTitle className="text-base leading-snug mt-2">🎬 {currentQuestion.scenario}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          {displayOptions.map((o) => {
+          {displayOptions.map((o, idx) => {
             const isSelected = selectedKey === o.key;
             const style = reveal && reveal.outcome ? OUTCOME_STYLE[reveal.outcome] : null;
             return (
@@ -287,7 +287,9 @@ export default function MentorCertificationPage() {
                 }`}
                 aria-pressed={isSelected}
               >
-                <span className="font-semibold mr-2">{o.key})</span>
+                {/* K-07: görüntü harfi karıştırmadan SONRA sıraya göre (üstten alta A→D).
+                    Cevap kimliği o.key ile korunur (choose(o.key)). */}
+                <span className="font-semibold mr-2">{String.fromCharCode(65 + idx)})</span>
                 {reveal && isSelected && style && <span className="mr-1">{style.icon}</span>}
                 {o.label}
                 {reveal && isSelected && (
