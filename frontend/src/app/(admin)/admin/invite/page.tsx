@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
+import { useTenant } from '@/providers/TenantProvider';
 import { apiClient } from '@/lib/api/client';
 
 type Role   = 'MENTI' | 'MENTOR';
@@ -90,6 +91,10 @@ Bugün bulunduğunuz noktaya bakan, sizin bir zamanlar sorduğunuz soruları sor
 
 export default function InvitePage() {
   const { user, accessToken } = useAuth();
+  const { tenant } = useTenant();
+  // {KurumAdı} yer tutucusu için gerçek kurum adı. Eskiden yanlışlıkla admin'in
+  // fullName'ine bakıp boş dizeye çeviriyordu (U-03) → davet metninde kurum adı boştu.
+  const tenantName = tenant?.displayName ?? tenant?.name ?? 'Kurumunuz';
 
   const [role, setRole]               = useState<Role>('MENTI');
   const [format, setFormat]           = useState<Format>('EMAIL');
@@ -124,6 +129,7 @@ export default function InvitePage() {
   async function generateLink() {
     if (!user?.tenantId || !accessToken) return;
     setLoadingLink(true);
+    setMsg(null);
     const result = await apiClient<{ invitationLink: string }>(
       `/api/tenants/${user.tenantId}/invitations`,
       {
@@ -133,11 +139,18 @@ export default function InvitePage() {
       },
     );
     setLoadingLink(false);
-    if (result.ok) setInviteLink(result.data.invitationLink);
+    if (result.ok) {
+      setInviteLink(result.data.invitationLink);
+    } else {
+      // Eskiden hata sessizce yutuluyordu (403 dahil) → kullanıcı neden link
+      // gelmediğini anlayamıyordu (U-03).
+      setMsg(result.error.message ?? 'Davet linki oluşturulamadı. Lütfen tekrar deneyin.');
+    }
   }
 
   async function saveTemplate() {
     if (!user?.tenantId || !accessToken) return;
+    setMsg(null);
     const result = await apiClient(
       `/api/tenants/${user.tenantId}/invitation-templates`,
       {
@@ -146,7 +159,12 @@ export default function InvitePage() {
         body: { role, format, content },
       },
     );
-    if (result.ok) { setSaved(true); setTimeout(() => setSaved(false), 2000); }
+    if (result.ok) {
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } else {
+      setMsg(result.error.message ?? 'Şablon kaydedilemedi. Lütfen tekrar deneyin.');
+    }
   }
 
   function resetToDefault() {
@@ -157,7 +175,7 @@ export default function InvitePage() {
   async function copyText() {
     const suspicionLink = `${window.location.origin}/bildir`;
     const filled = content
-      .replace(/{KurumAdı}/g, user?.fullName ? '' : 'Kurumunuz')
+      .replace(/{KurumAdı}/g, tenantName)
       .replace(/{DavetEdenAd}/g, invitedByName || '{DavetEdenAd}')
       .replace(/{DavetEdenGörev}/g, invitedByTitle || '{DavetEdenGörev}')
       .replace(/{Link}/g, inviteLink || '{Link — önce oluştur}')
