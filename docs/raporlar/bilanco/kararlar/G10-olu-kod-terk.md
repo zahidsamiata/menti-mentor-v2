@@ -424,7 +424,8 @@ Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 Ne: Kullanıcının kayıttan sonra profil bilgilerini/fotoğrafını güncelleyebilme yeteneği var mı — bu PLANLA keşfi hiç yapılmamış.
 Neden başlanmıştı: NİYET — temel bir ürün yeteneği; ama sistemli keşif yapılmadı (endpoint'ler var mı, FE ekranı var mı belirsiz).
 Nerede durdu: Keşif hiç yapılmamış (🌱).
-Bugünkü durum: ❓ (keşif kararı)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ (keşif kararı)~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): ✅ YAPILDI (çalışıyor) — kullanıcı kayıt sonrası profil/fotoğraf düzenleyebiliyor. Kanıt: `frontend/src/app/(dashboard)/profile/page.tsx` + `frontend/src/lib/api/profile.ts` (`/api/users/me/profile`), foto `avatarUrl` altyapısı. Kaynak: TUR 2 denkleştirme, PR #184.
+⛔ **YANLIŞ SORU TUZAĞI — BEŞİNCİ TEKRAR (bir daha yaşanmasın):** `/users/me/social` ucu ([G10-10]) öksüz sanılıp "profil düzenleme yok" denildi — oysa iş `/api/users/me/profile` ile ÇALIŞIYOR (`profile/page.tsx`). Uç çağrılmıyor diye "özellik yok" DEME; önce **işi yapan başka yol var mı** sor. Bu desen daha önce 4 kez raporlandı (CLAUDE.md'de kayıtlı); bu 5.'sidir. Karta yazıldı ki 6. kez tekrarlanmasın.
 Etkisi: Belirsiz — eğer güncelleme yoksa kullanıcı takılır (yüksek UX etkisi); önce keşif gerekir.
 İş boyu: S (keşif) / ? (bulguya göre iş)
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ

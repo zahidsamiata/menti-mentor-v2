@@ -119,3 +119,43 @@ Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır k
   01-KARARLAR CEVAP satırlarına dokunulmadı (yalnız sona KARAR-18..21 eklendi) · mevcut K- işleri (K-03/05/06/08/10/11/12...) YAPILMADI.
 - **Değişen dosyalar:** `00-KUYRUK.md` (AŞAMA F + 4 K-satırı Not) · `01-KARARLAR.md` (KARAR-18..21) · `02-ILERLEME.md` (bu kayıt) ·
   `00-ONCELIK-SIRASI-2026-08-28.md` (devir notu, gövde silinmedi).
+
+---
+
+## TUR 3 — 2026-09-19 · BÖLÜM A: backend merge + submodule pointer bump
+**Mod:** 🟥 BYPASS (yalnız merge + pointer, ürün kodu YAZILMADI).
+
+- **Backend PR #72** (`otonom/G-platform-email-env-20260919`) — `PLATFORM_ADMIN_EMAIL` `.env.example`'a eklendi +
+  production'da varsayılan değerdeyse `console.warn` (throw DEĞİL) + unit test.
+- **A.1 doğrulama:** CI yeşil (ci pass 2m36s). **throw kontrolü: kod satırlarında throw YOK** — 3 `throw` sözcüğü de
+  yorum satırında (JSDoc + inline gerekçe). Production yolu `console.warn` (`config.ts`). Değişen dosyalar tam 3 izinli:
+  `.env.example` · `src/config.ts` · `tests/platformAdminEmail.unit.test.ts`. Fazlası YOK.
+- **A.2 merge:** squash merge, dal silindi. Backend main HEAD → `f229ffe`.
+- **A.3 pointer bump:** eski çatı pointer `1304790` → yeni `f229ffe`. Ata teyidi: `merge-base --is-ancestor 1304790 f229ffe` = 0 (ileri sarım GÜVENLİ).
+  Çatı PR **#185** (`otonom/J-pointer-bump-...`), CI 8/8 yeşil (backend+frontend+integration+e2e, iki koşu), merge edildi.
+- **A.4 teyit:** çatı pointer `f229ffe` == backend main HEAD `f229ffe` → **SARKMA YOK.** Düzeltme artık pointer üzerinden canlıya çıkabilir.
+- **⚠️ PO YAPACAK:** Dokploy ortam değişkenlerine `PLATFORM_ADMIN_EMAIL` eklenmeli (yoksa kod yalnız uyarı loglar, giriş e-postası varsayılanda kalır).
+
+---
+
+## TUR 3 — 2026-09-19 · BÖLÜM B: kayıt düzeltmeleri (belge-only)
+**Mod:** 🟥 BYPASS (yalnız belge; ürün kodu YAZILMADI). Dal: `otonom/I-kayit-duzeltmeleri-20260919`.
+
+- **B.1 — 5 bayat G-kartı kod-teyidiyle düzeltildi** (eski durum üstü çizili, tarihli DÜZELTME notu):
+  - G3-19 (G3-icerik.md) ⬜/❓ → ✅ `PendingTag` + `tagController` + adminRoutes:63-66.
+  - G2-11 (G2-eslestirme-psikometri.md) ❓ → ✅ `authController.ts:165-169` invite→APPROVED. Eski KOD-TEYİT yanlış dosyaya (`selfServeController`) bakmıştı → o da düzeltildi.
+  - G4-02 (G4a-panel-akis.md) ⬜ → ✅ `menti/page.tsx:290 compatibilityReason`.
+  - G4-04 (G4a-panel-akis.md) 🟡 → ✅ `managers/page.tsx:24,37,45`.
+  - G10-25 (G10-olu-kod-terk.md) ❓ → ✅ profil düzenleme çalışıyor + ⛔ **YANLIŞ SORU TUZAĞI 5. TEKRAR** uyarısı karta yazıldı (6. kez olmasın).
+- **B.2 — Sertifika sayısı: "22/88 bayat" DEĞİLMİŞ (düzeltmenin düzeltmesi).** Kod-teyit: **iki sayı da gerçek, farklı kaynak.**
+  - "22 senaryo / 88 şık" = YAZILI İÇERİK (`docs/raporlar/icerik/sertifika-oturum1/2/3-...-2026-09-08.md`, 3 belge, 11 konu×2). Doğru.
+  - Seed kodu `seed-certification.ts` = **20 senaryo / 80 şık** (eski sürüm; 20× CERT_T, 80 options, 10 topic). Finalize 22/88 içeriği seed'e **taşınMADI** → K-16 bugün seed atarsa 20/80 çıkar.
+  - Düzeltilen yerler: KARAR-3 (SAYI DÜZELTMESİ notu) + 00-KUYRUK K-16 satırı + AŞAMA F örtüşme notu (PR #184'teki "sayı bayat" ifadem düzeltildi). `10-yol-haritasi:152` + `00-KARAR-TAKIP:281` DOKUNULMADI (içeriği doğru anlatıyorlar). `docs/gelen/*` ⛔ ellenmedi (PO-yerel).
+- **B.3 — "En fazla 5/10 karar kartı" ÜST SINIRI KALDIRILDI** (PO). İki yer: CLAUDE.md ("Karar kartı sayısı — ÜST SINIR YOKTUR" + KÜMELE/SIRALA/İNDEKS) + 00-KUYRUK E-2 satırı ("≤10" üstü çizili + GÜNCELLEME).
+- **B.4 — 01-KARARLAR.md başına İÇİNDEKİLER eklendi** (22 satır, KARAR-0..21). "Kaç işi açar" = 🔴 bağlı K-/F-/E- satırı, kanıtlı, etkiye göre sıralı. En çok iş açan 3: **KARAR-11 (2: K-13/E-5)** · KARAR-10/1/2/3/4/5/6/7/19/20/21 (1'er). ⚠️ K-19 kapı etiketi "KARAR-8, KARAR-10" olası yazım hatası (içeriği KARAR-6/7) — indekste içeriğe göre eşlendi + not düşüldü, kart gövdesi taşınMADI.
+- **B.5 — PO KARAR MUTABAKATI** (`00-PO-KARARLARI-2026-08-27.md` okundu, kod-teyitli):
+  - 6 karta "⚠️ AĞUSTOS SİNYALİ" notu eklendi (A/B/C DEĞİL, yalnız yön): KARAR-9 (kulüp kurumu aktif/modül ⏸️) · KARAR-10 (bağlama yönü) · KARAR-11 (karantina yönü) · KARAR-19 (G1-15/16/29 işleme-al) · KARAR-20 (varsayım hatalı) · KARAR-21 (C dışlanmış).
+  - ⛔ Hiçbir CEVAP satırı DOLDURULMADI (yalnız işaret). Teyit: 21 boş CEVAP + KARAR-0 (eski PO cevabı) + KARAR-18 (isteğe bağlı hatırlatma).
+  - **Ağustosta ✅ işleme-al ama kuyrukta karşılığı OLMAYAN kalem: 0.** ⏸️ şimdilik-alma kalemleri G4-11/G4-12 (v2 anomali/büyüme) + G11-01/02 (uzun-vade strateji) kuyrukta iz taşımıyor — ama ⏸️ oldukları için bu normal (eksik iş değil, görünürlük boşluğu; kuyruğa EKLENMEDİ).
+- **⛔ DOKUNULMAYANLAR:** frontend/backend kaynak DEĞİŞMEDİ · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi · #110 ellenmedi · `panel-denetimi-mentor-menti-2026-09-19.md` ellenmedi · `docs/gelen/*` ellenmedi · CEVAP satırları dolmadı.
+- **Değişen dosyalar:** `01-KARARLAR.md` (indeks + KARAR-3 sayı notu + 6 ağustos notu) · `00-KUYRUK.md` (K-16/F-notu + E-2 sınır) · `CLAUDE.md` (kart sınırı) · `G3-icerik.md` · `G2-eslestirme-psikometri.md` · `G4a-panel-akis.md` · `G10-olu-kod-terk.md` · `02-ILERLEME.md` (bu kayıt).

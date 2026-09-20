@@ -10,6 +10,39 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 
 ---
 
+## 📑 İÇİNDEKİLER — kararlar etkiye göre sıralı (2026-09-19)
+> "Kaç işi açar" = o karara 🔴 ile bağlı `00-KUYRUK.md` K-/F-/E- satırı sayısı (kanıt: satır kimliği).
+> En çok iş açan üstte. Cevap verirsen o satır(lar) çalışılabilir hale gelir.
+> ⚠️ K-19'un kapı etiketi literalde "KARAR-8, KARAR-10" yazıyor ama İÇERİĞİ (menti mentör listesi + toplantı linki)
+> KARAR-6 + KARAR-7'ye karşılık geliyor — kapı etiketi olası yazım hatası; aşağıda içeriğe göre eşlendi (kart gövdeleri değişmedi).
+
+| # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
+|---|---|:---:|---|
+| KARAR-11 | Kullanılmayan/mükerrer kod ne olsun | **2** (K-13, E-5) | ⬜ boş · ⚠️ ağustos "keşif olmadan silme YOK" → karantina yönü |
+| KARAR-1 | Randevu format/süre kim belirler | 1 (K-15) | ⬜ boş |
+| KARAR-2 | Profile serbest bağlantı alanı | 1 (K-17) | ⬜ boş |
+| KARAR-3 | Sertifika "bildirim yükümlülüğü" hukuki metni | 1 (K-16) | ⬜ boş |
+| KARAR-4 | Kriz destek kaynağı metni | 1 (K-16) | ⬜ boş |
+| KARAR-5 | Öğrenme yolculuğu seed canlıya | 1 (K-18) | ⬜ boş |
+| KARAR-6 | Menti tüm mentörleri görsün mü | 1 (K-19 içerik) | ⬜ boş |
+| KARAR-7 | Online toplantı linkini kim girer | 1 (K-19 içerik) | ⬜ boş |
+| KARAR-10 | OCEAN/SJT psikometri motoru | 1 (F-11) | ⬜ boş · ⚠️ ağustos G2-07/08/G10-21 "canlı eşleştirmeye bağla" → bağlama yönü |
+| KARAR-19 | KVKK geri-dönülmez yetkiler kümesi | 1 (F-07) | ⬜ boş · ⚠️ ağustos G1-15/16/29 ✅ işleme-al |
+| KARAR-20 | Mentör menti talebini reddedebilsin mi | 1 (F-17) | ⬜ boş · ⚠️ ağustos G4-25 ✅ ama varsayım hatalı |
+| KARAR-21 | STK anket cevap tipi (answerType) | 1 (F-12) | ⬜ boş · ⚠️ ağustos G3-13 ✅ → C seçeneği dışlanmış |
+| KARAR-8 | Repoları private yap | 0 (PO aksiyonu) | ⬜ boş |
+| KARAR-9 | Kulüp modülü + İş İlanları | 0 (eklenmezse B) | ⬜ boş · ⚠️ ağustos G1-13 kulüp kurumu aktif / G10-12 modül ⏸️ |
+| KARAR-12 | Görüşme geri bildirim kayıt sistemi | 0 | ⬜ boş |
+| KARAR-13 | Yöneticiye manuel "işlet" butonları | 0 | ⬜ boş |
+| KARAR-14 | Yönetici bir kullanıcının verisini silsin mi | 0 | ⬜ boş |
+| KARAR-15 | Çok-kuruma üye kurumlar arası geçiş | 0 | ⬜ boş |
+| KARAR-16 | Yöneticiye eşleştirme kontrolleri | 0 | ⬜ boş |
+| KARAR-17 | Kurum yöneticisi davetsiz önizleme | 0 | ⬜ boş |
+| KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
+| KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
+
+---
+
 ### KARAR-0 · Merge politikası ✅ CEVAPLANDI
 **CEVAP (PO, 2026-09-10): OTOMATİK.** Ajan kendi doğrulama listesini geçen 🟢 işleri merge eder ve canlıya alır.
 Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler PR'da bekler.
@@ -65,6 +98,10 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 
 ### KARAR-3 · Sertifika senaryosunda "bildirim yükümlülüğü" metni  [ÜRÜN KARARI · HUKUKİ]
 **Şu an ne var:** Sertifika soru bankasında 22 senaryo / 88 şık yazılı ama canlıya hiç aktarılmadı. Ekranda "Senaryo Q_T1 / Seçenek A" gibi kod isimleri görünüyor (testte görüldü).
+> ⚠️ SAYI DÜZELTMESİ (2026-09-19, kod-teyitli — İKİ SAYI DA GERÇEK, biri diğerini geçersiz kılmaz):
+> **"22 senaryo / 88 şık" = YAZILI İÇERİK** — `docs/raporlar/icerik/sertifika-oturum1/2/3-...-2026-09-08.md` üç belgesinde (11 konu × 2 varyant). Bu doğru, kaynak-kanıtlı.
+> **AMA seed kodu `backend/prisma/seed-certification.ts` şu an 20 senaryo / 80 şık** (eski sürüm; kanıt: 20× `CERT_T`, 80 `options`, 10 tekil `topic`). **Finalize 22/88 içeriği henüz seed'e taşınMADI.**
+> ⛔ SONUÇ: K-16 bugün `seed-certification` çalıştırırsa **20/80 çıkar, 22/88 değil.** Seed öncesi bir "içerik→seed taşıma" adımı gerekir (KARAR-3/4 metni + madde 159 kriz hukuki teyidi + KALEM 8 destek kaynağı adı bloklarıyla birlikte). Bu, KARAR-3'ün hukuki-metin sorusunu değiştirmez; yalnız seed'in bugünkü kapsamını netleştirir.
 **Sorun ne:** Bankadaki bir senaryoda mentörün ciddi bir durumu öğrendiğinde ne yapacağı soruluyor ve doğru şıkta **yasal bildirim yükümlülüğü** ima ediliyor. Bu hukuki bir iddia, avukat onayı yok. Bu tek cümle yüzünden 88 şıkın tamamı üç haftadır canlıya çıkmıyor.
 **Neden sana soruyorum:** Hukuki sonucu olan bir metin. Ben avukat değilim, aşağıdaki hiçbir şey hukuki görüş değildir.
 **Seçenekler:**
@@ -164,6 +201,7 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 **Karşılaştırma:** Yakında bir kuruma demo/satış yapacaksan ve kulüp o konuşmanın parçasıysa A. Önce ürünün ana akışının kusursuz çalışmasını istiyorsan B. C ikisinin ortası ama iş ilanlarının kime yarayacağı belgelerde net değil.
 **Benim önerim:** B — üç bug hâlâ kullanıcıyı durduruyorken yeni modül açmak erken.
 **Cevap vermezsen:** Kuyruğa eklenmez, yani B uygulanmış olur.
+⚠️ AĞUSTOS SİNYALİ (2026-08-27, KISMİ — A/B/C DEĞİL): Kulüp-tipi kurum **çıkış blokeri olarak AKTİF edilecek** (`00-PO-KARARLARI-2026-08-27.md:52` G1-13) ama kulüp MODÜLÜ FE'si ⏸️ şimdilik-almada (`:79`/`:105` G10-12 — "aktif kararı verildi, iş sırasına alınmadı"). İş ilanları ağustosta hiç geçmiyor. Yani "kulüp kavramı aktif" ama "FE yap/ertele" (bu kartın A/B) hâlâ açık. PO teyit ederse CEVAP'a yazılabilir.
 **CEVAP:**
 
 ---
@@ -179,6 +217,7 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 **Karşılaştırma:** Ürünün iddiası "DISC tabanlı" olarak kalacaksa A doğru ve motor bir gün silinmeli. Daha derin bir psikometri ürünü hedefliyorsan C, ama o ayrı bir proje planı ister. B, karar vermeden hatayı kapatmak — ölü kodu canlı tutmanın maliyetli hali.
 **Benim önerim:** A — DISC çalışıyor, bu motor bugünün sorunu değil.
 **Cevap vermezsen:** Kuyruğa eklenmez, yani A uygulanmış olur.
+⚠️ AĞUSTOS SİNYALİ (2026-08-27, GERİLİM — A/B/C DEĞİL): Ağustos G2-07+G2-08+G10-21'i **"tek iş: sektör 5-bileşen + OCEAN katmanını canlı eşleştirmeye BAĞLA"** diye işleme aldı (`00-PO-KARARLARI-2026-08-27.md:108`); ayrıca G2-01..05 (DISC matrisi) 🗑️ geçersiz, "Big Five'a bırakıldı" (`:39`). Bu, bu kartın önerisi A (v2'ye ertele/dokunma) ile GERİLİMLİ — ağustos yönü bağlamaya (C) daha yakın. Ölçek hatası ayrı. PO teyit ederse CEVAP'a yazılabilir.
 **CEVAP:**
 
 ---
@@ -211,6 +250,7 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 ⚠️ Hangi seçeneği seçersen seç, ajan her kalem için önce **neden yazıldığını** araştıracak. Gerekçesi bulunamayan hiçbir kalem karantinaya bile alınmayacak, sana ayrı kart olarak gelecek.
 **Benim önerim:** A — senin koyduğun kuralın kod karşılığı bu; geri dönüş ağı var, arşiv var, ikinci onay sende.
 **Cevap vermezsen:** K-13 ve E-5 atlanır. E-4 (arşiv belgesi + karantina) yine de yapılır, yani hazırlık boşa gitmez.
+⚠️ AĞUSTOS SİNYALİ (2026-08-27, YÖN — A/B/C DEĞİL): Ağustos ilkesi **"Keşif olmadan silme YOK"** (`00-PO-KARARLARI-2026-08-27.md:87`, G4-09/G4-10 önce keşif); G10-02..21 ⏸️ "bilinçli terk veya v2" (`:79`). Bu, bu kartın önerisi A (karantina→bekle→sil) yönünü DESTEKLER. PO teyit ederse CEVAP'a yazılabilir.
 **CEVAP:**
 
 ---
@@ -357,6 +397,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Yakında kuruma satış/KVKK denetimi bekliyorsan A gerekli ama hukukçu ve migration şart. Riski minimize edip en somut açığı (iz kaybı) kapatmak istiyorsan B. KVKK paketini avukatla toptan çözeceksen C — bu projede hukuk zaten G1-10'da bekliyor.
 **Benim önerim:** C şimdi + B'yi kuyruk adayı — kalıcı kurum silme ve eski-rıza avukat metnine (G1-10) bağlı; denetim izi saklaması ise düşük riskli, ayrı yapılabilir. (Bu senin ürün+hukuk kararın, önerime güvenme.)
 **Cevap vermezsen:** F-02/F-07 ve G1-29/G1-16 açık kalır. Başka iş etkilenmez.
+⚠️ AĞUSTOS SİNYALİ (2026-08-27, KISMİ — A/B/C DEĞİL): Üç alt-kalem de ağustosta ✅ İŞLEME AL kovasında: G1-29 (kurum silme) · G1-16 (eski-rıza) · G1-15 (denetim izi) (`00-PO-KARARLARI-2026-08-27.md:58`). Yani "yapılacak" yönü var; ama HANGİ kapsam/sıra (bu kartın A/B/C'si) ağustosta belirlenmedi. G1-10 (aydınlatma metni, avukat) çıkış blokeri (`:51`) — bu kararlar ona bağlı. PO teyit ederse CEVAP'a yazılabilir.
 **CEVAP:**
 
 ---
@@ -372,6 +413,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Mentör tarafına güven ve özerklik vermek istiyorsan A. İnsanları "hayır" deme yükünden kurtarıp akışı otomatik tutmak istiyorsan B. Çekirdek akış hâlâ pürüzlüyse ve mentör şikayeti gelmediyse C.
 **Benim önerim:** A — mentörün kibarca hayır diyebilmesi gerçek bir ihtiyaç; yumuşatma menti tarafını korur. Ama bu senin ürün kararın.
 **Cevap vermezsen:** F-17 (G4-25) atlanır. Başka iş etkilenmez.
+⚠️ AĞUSTOS SİNYALİ (2026-08-27, VARSAYIM HATALI — A/B/C DEĞİL): Ağustos G4-25 "ret yumuşatma"yı ✅ işleme aldı (`00-PO-KARARLARI-2026-08-27.md:61`) AMA var olan bir ret akışını varsaydı; kod gerçeği: mentör→menti ret akışı HİÇ yok (`requestController.ts:17`). Bu yüzden ağustos "işleme al" kararı bu kartın ön-sorusunu (ret olsun mu?) yanıtlamıyor. PO teyit ederse CEVAP'a yazılabilir.
 **CEVAP:**
 
 ---
@@ -387,4 +429,5 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Kurum anketlerini satış hikâyenin parçası yapacaksan A yeterli ve dengeli (şıklı en sık istenen). Tam esneklik istiyorsan B ama açık-uçlu verinin nereye gideceğini (analiz/eşleştirme mi, sadece görüntüleme mi) önceden çözmen gerekir. Başka migration yapılmayacaksa C ile ertelenebilir.
 **Benim önerim:** A — şıklı soru en sık gerçek ihtiyaç; açık-uçlu, cevabın nereye akacağı netleşmeden eklenirse ölü veri olur. KARAR-1/2'ye de "evet" dersen aynı migration turunda yapılabilir.
 **Cevap vermezsen:** F-12 (G3-13) atlanır. Başka iş etkilenmez.
+⚠️ AĞUSTOS SİNYALİ (2026-08-27, C DIŞLANMIŞ — A/B/C DEĞİL): Ağustos G3-13'ü "⏸️→✅ canlandı" (`00-PO-KARARLARI-2026-08-27.md:60`) + bağlı-karar "G3-04→G3-13: STK şıklı-soru isteği `answerType` şema alanını zorunlu kılar" (`:106`). Yani ağustos answerType eklenmesini VE şıklı-soruyu istiyor → bu kartın C seçeneği (Likert kalsın) ağustosla ÇELİŞİR; yön A veya B. PO teyit ederse CEVAP'a yazılabilir.
 **CEVAP:**
