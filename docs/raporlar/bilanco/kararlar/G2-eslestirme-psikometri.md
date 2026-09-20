@@ -170,11 +170,11 @@ Kaynak: karar-defteri GRUP 2 (A14/F5) · Numara: A14 / F5
 Ne: Yönetici davetiyle gelen kullanıcı otomatik ONAYLI, dışarıdan gelen Bekliyor olmalı (KARAR 6). InvitationTemplate var ama otomatik-onay tetiği kodda YOK.
 Neden başlanmıştı: Davetli kullanıcıya sürtünmesiz giriş; güvenilir kaynaktan gelenler beklemesin.
 Nerede durdu: Davet altyapısı var; onay-durumunu davet kaynağına göre set eden tetik yazılmadı.
-Bugünkü durum: ❓ (keşif + PO)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ (keşif + PO)~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): ✅ YAPILDI — davetli=onaylı tetiği KODDA VAR. Kanıt: `authController.ts:165-169` — geçerli `inviteToken` → `approvalStatus='APPROVED'`, yoksa `PENDING` (PO kararı 2026-09-01, Seçenek A; `:199` persist). Kaynak: TUR 2 denkleştirme, PR #184.
 Etkisi: Davetli kullanıcılar da "Bekliyor"da kalıyor olabilir → onboarding sürtünmesi.
 İş boyu: M
 Kaynak: karar-defteri GRUP 2 (KARAR 6/A14) · Numara: KARAR 6 / A14
-KOD-TEYİT: `selfServeController.ts:245` AUTO_APPROVED yalnız tenant-tier'a bağlı; davet-kaynaklı otomatik-onay tetiği yok (grep). Doğrulandı, korunur.
+KOD-TEYİT: ~~[ESKİ · 2026-08-27] `selfServeController.ts:245` AUTO_APPROVED yalnız tenant-tier'a bağlı; davet-kaynaklı otomatik-onay tetiği yok (grep).~~ ⚠️ DÜZELTME (2026-09-19): eski KOD-TEYİT YANLIŞ DOSYAYA baktı — tetik `selfServeController`'da değil, **kayıt akışında** (`authController.ts:165-169`). Orada davet-kaynaklı otomatik-onay VAR. selfServe tenant-tier ayrı bir yol.
 
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 

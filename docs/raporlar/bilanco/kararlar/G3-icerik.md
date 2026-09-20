@@ -263,7 +263,7 @@ Kaynak: karar-defteri GRUP 6 (NUMARASIZ/Y6) · Numara: NUMARASIZ / Y6
 Ne: Sertifika/etiket havuzu için admin-yönetilir bir tablo yok (seed'de etiket var ama talep-onay akışı belirsiz). İkincil: etiket ekleme yönetici doğrudan mı yoksa öneri-onayı mı (md.C20).
 Neden başlanmıştı: Kurumların etiket/sertifika havuzunu yönetebilmesi (öneri→onay iş akışı).
 Nerede durdu: "Hazır sistem etiketleri" seed'de bulunamadı; yönetim tablosu/akışı tasarlanmadı.
-Bugünkü durum: ⬜ / ❓ (PO)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ / ❓ (PO)~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): ✅ YAPILDI — admin-yönetilir etiket tablosu + öneri→onay akışı KODDA VAR. Kanıt: `schema.prisma:866 model PendingTag` (+ `PendingTagStatus` enum) · `tagController.ts` (suggestTag/approve/merge/reject) · `adminRoutes.ts:63-66` (list/approve/merge/reject uçları wired). Kaynak: TUR 2 denkleştirme, PR #184. (Etiket ekleme yönetici öneri-onayı akışıyla çalışıyor.)
 Etkisi: Etiket/sertifika havuzu elle-kod-bağımlı; kurumlar kendi kelime dağarcığını yönetemiyor.
 İş boyu: M
 Kaynak: karar-defteri GRUP 3 (KARAR 12/A9 + md.C20) · Numara: KARAR 12/A9 (+ md.C20)

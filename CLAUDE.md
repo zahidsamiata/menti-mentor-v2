@@ -108,6 +108,14 @@ Yanlış olan kod değil, sorulan soruydu.
 ⚠️ "Ne kaybedersin" ASLA boş kalmaz. Seçenekler gerçekten farklı sonuç vermeli.
 ⚠️ Kendi önerine güvenmiyorsan yaz: *"bu senin ürün kararın, önerime güvenme."*
 
+### ⭐ Karar kartı sayısı — ÜST SINIR YOKTUR (PO kararı, 2026-09-19)
+> ⚠️ GÜNCELLEME (2026-09-19): Önceki turlarda uygulanan **"en fazla 5/10 yeni kart"** sınırı KALDIRILDI.
+> Gerekçe (PO): bastırılan karar, PO'nun göremediği tıkanma üretir. Eski "≤5/≤10" ifadeleri artık geçerli değil.
+- Karar kartı sayısında **ÜST SINIR YOKTUR.** Gerekli her karar için kart açılır. Ama kartlar şu üç şarta uyar:
+  1. **KÜMELE** — aynı ürün sorusunu paylaşan kalemler TEK kartta toplanır.
+  2. **SIRALA** — etkiye göre: kaç işi açıyor + kullanıcıya etkisi. Başlığa `(n işi açar)` etiketi konur.
+  3. **İNDEKS** — `01-KARARLAR.md`'nin BAŞINDA içindekiler tablosu tutulur.
+
 ## Paralellik — şerit sistemi
 **Okuma** (keşif/envanter/arkeoloji): sınırsız paralel alt-ajan.
 **Yazma**: en fazla 4 şerit. Her şeridin SAHİP OLDUĞU dosyalar `00-KUYRUK.md`'de yazılı.

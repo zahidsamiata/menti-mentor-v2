@@ -42,7 +42,7 @@ Kaynak: karar-defteri GRUP-3 · Numara: md.31-akraba/KARAR 2
 Ne: Bir eşleşmenin neden uyumlu olduğunu anlatan zengin ama ham-DISC ifşa etmeyen metin. Mentör→menti yönünde FE'de render ediliyor; menti→mentör yönünde Katman-1 metin alanı FE'de yok.
 Neden başlanmıştı: Eşleşmeye güven + şeffaflık, DISC'i açık etmeden.
 Nerede durdu: Bir yön (mentör→menti) bağlandı; menti tarafı FE eksik.
-Bugünkü durum: ⬜ (kısmen ✅)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ (kısmen ✅)~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): ✅ YAPILDI — menti tarafı FE de "neden uyumlu" metnini render ediyor. Kanıt: `frontend/src/app/(dashboard)/menti/page.tsx:290` `{mentor.compatibilityReason}`. Her iki yön (mentör→menti + menti→mentör) Katman-1 metnini gösteriyor. Kaynak: TUR 2 denkleştirme, PR #184.
 Etkisi: Menti eşleşmesine güveni artırır.
 İş boyu: S
 Kaynak: karar-defteri GRUP-3 · Numara: KARAR 7
@@ -68,7 +68,7 @@ Kaynak: karar-defteri GRUP-3 · Numara: md.76 (T8)/Ç5
 Ne: Bir üyeye admin yetkisi verme akışı. Şu an `promote-admin` (max 3) var; ama "tüm onaylı üyeleri listeleyip seç" ekranı eksik ve akışın yeniden kurgulanması sözü verilmiş.
 Neden başlanmıştı: Yönetici atamayı sınırlı/net yapmak (max 3 kuralı).
 Nerede durdu: Promote var; tam-liste ekranı ve yeniden-kurgu bekliyor (PO'ya sorulacaktı).
-Bugünkü durum: 🟡
+Bugünkü durum: ~~[ESKİ · 2026-08-27] 🟡~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): ✅ YAPILDI — yönetici atama paneli + "tüm onaylı liste" KODDA VAR. Kanıt: `frontend/src/app/(admin)/admin/managers/page.tsx:24` `listUsers({approvalStatus:'APPROVED'})` + `:37` demote + `:45` promote (max-3 kuralı UI'da). Kaynak: TUR 2 denkleştirme, PR #184.
 Etkisi: Çoklu-yönetici yönetimi kolaylaşır.
 İş boyu: S
 Kaynak: karar-defteri GRUP-3 · Numara: md.A9
