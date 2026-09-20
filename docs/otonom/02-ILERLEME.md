@@ -277,3 +277,23 @@ Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır k
   3. Menti panelinde **mentör sayısı** kartı doğru davranıyor mu (N<3 gizli)? (M — backend maskeleme)
 - **⛔ DOKUNULMAYANLAR:** yeni ürün kodu YAZILMADI · DB/migration/seed YOK · şema DEĞİŞMEDİ · #110 (MERGE ETME) ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi (üstü çizili + not).
 - **Değişen dosyalar (E+F, branch T):** `belge-duzeni-rehberi.md` · `raporlar/persona/00-INDEX.md` (yeni) · `raporlar/panel/00-INDEX.md` (yeni) · `arsiv/admin-panelleri-tasarim-2026-08-02.md` · `00-KARAR-TAKIP.md` (7 çift) · 5 G-kartı (G1/G2/G8/G10/G4b) · `00-KART-INDEKSI.md` (yeni) · `kararlar/00-INDEX.md` · `00-BELGE-HARITASI.md` · `00-KUYRUK.md` (F.1) · `02-ILERLEME.md`.
+
+---
+
+## TUR AB — 2026-09-20 (gece) · OTONOM: çoklu 🟢 iş — ARA KAYIT (devam ediyor)
+**Mod:** 🟥 BYPASS. Her iş ayrı dal + ayrı PR + merge (tek tek revert edilebilir). DURMAMA KURALI aktif.
+
+### CHECKPOINT 1 — 7 iş merge edildi (bu bir ara kayıttır, tur DEVAM EDİYOR)
+- **Bölüm A — OTONOM-PROMPT.txt (PR #208 merged):** DURMAMA KURALI (D.1-D.4) + ARA KAYIT bölümleri eklendi (bayattı).
+- **P-03 (PR #209 merged):** `DiscRecallCard` — menti panelinde DISC arketip "aha" kartı rapeli (`/api/users/:id` discResultCard, salt-okunur). Test 1.
+- **P-09 (PR #210 merged):** mentör onay kuyruğu kartı boşken kaybolmuyor + mesaj boş-durum metni role göre. Test 2.
+- **P-02 (PR #211 merged):** "Gönderilen Talepler" kalıcı — `/api/conversations`'tan türetilir (`countSentRequests` helper). Sayfa yenilenince 0'a düşmüyor. Test +4.
+- **V-10 (backend PR #78 merged):** `/users/:id/export` rate limit eklendi (bypass kapandı). Test 1 (integration).
+- **V-07 (backend PR #79 merged):** hatırlatma mail batch tavanı + toplantı-başına cooldown (SMTP burst koruması, şema değişmedi). Test 2 (integration).
+- **V-13 (backend PR #80 merged):** `/api/tags/suggest` requireTenant+requireAuth ile mount (fail-closed ölü uç çözüldü). Test 2 (integration).
+
+### ⚠️ BEKLEYEN
+- **U-14 (PR #212):** süresi dolmuş davette "yeni davet iste" + "giriş yap" düğmeleri. CI'da, merge bekliyor.
+- **BACKEND POINTER BUMP:** V-07/V-10/V-13 backend main'e merge edildi ama çatı pointer HENÜZ bump edilMEDİ →
+  bu 3 backend düzeltmesi CANLIDA DEĞİL. Turun SONUNDA tek bump yapılacak (eski `4528048` → yeni backend main HEAD).
+- **DB/migration/seed YOK · şema DEĞİŞMEDİ · server.ts rate-limit/trust-proxy (yasak bölge) DOKUNULMADI · KARAR CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
