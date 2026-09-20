@@ -316,3 +316,75 @@ Ajan: §4 şablonuna birebir uy. "Ne kaybedersin" satırını boş bırakma.
 **Benim önerim:** C şimdilik — çekirdek akış kusursuzlaşmadan demo önizleme erken; ama kuruma demo/satış gündeme gelince A'ya geç. (Bu senin büyüme kararın, önerime güvenme.)
 **Cevap vermezsen:** Önizleme ucu bağlanmaz. Başka iş etkilenmez.
 **CEVAP:**
+
+---
+## Bilanço devri kartları (AŞAMA F, 2026-09-19)
+
+> **📸 Kaynak:** `docs/raporlar/bilanco/kararlar/00-ONCELIK-SIRASI-2026-08-28.md` Faz 0-8, koda karşı doğrulandı.
+> Aşağıdaki kartlar, o sıradaki **PO-manuel** ve **ürün-kararı gerektiren** açık kalemlerdir. Kalan açık kalemler
+> `00-KUYRUK.md` AŞAMA F'ye (F-01..F-33) iş olarak girdi; bunlar ajanın yapamayacağı ya da senin karar vermen gereken kısımlar.
+
+---
+
+### KARAR-18 · PO-MANUEL İŞLER LİSTESİ  [PO AKSİYONU — ajan yapamaz]
+Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bulut VM'de hiç yapamaz. Her biri tek satır — yaptıkça `[x]` işaretle.
+
+- [ ] **G8-01 + G8-02** foto yükleme kalıcı volume + env (Dokploy). Kod hazır; sunucuda volume tanımı gerekiyor. Detay: `docs/kararlar/dokploy-foto-volume-talimati.md`. (↔ K-04)
+- [ ] **G5-01 + G5-02** kurum onay/red maili — kod HAZIR, `destek@` mail kutusu yok, bekliyor.
+- [ ] **G1-09** `destek@` mail adresi/kutusu kurulumu (yukarıdaki mail zincirini açar).
+- [ ] **G1-10 + G1-13** KVKK aydınlatma metni + kulüp beyanı — avukatta. (Kulüp aktifse beyan ŞART.) F-02/F-03/F-07 buna bağlı.
+- [ ] **G1-28** sunucu sertleştirme (HTTPS/firewall/SSH/yedek) — altyapı. Kod tarafı = K-14.
+- [ ] **G8-03 + G8-04** canlı akış gözle testleri — gerçek kullanıcıyla ekran doğrulaması.
+- [ ] **G8-05** yedek `.env` dosyasını sil (sızıntı yüzeyi).
+- [ ] **G8-08** izole test DB kur (`TEST_DATABASE_URL`) — entegrasyon testleri lokalde guard'la duruyor.
+- [ ] **G9-07** repoyu OneDrive dışına (`C:\dev\`) taşı — `.git` senkron/bozulma riski.
+- [ ] **G8-06** git dal/worktree + geçici script temizliği.
+- [ ] **KARAR-8** repoları private yap (ayrı kartta duruyor, hatırlatma).
+
+**CEVAP (isteğe bağlı — bu bir onay kartı değil, hatırlatma listesi):**
+
+---
+
+### KARAR-19 · KVKK geri-dönülmez yetkiler kümesi  [ÜRÜN KARARI · HUKUKİ · GERİ DÖNÜLMEZ]
+**Şu an ne var:** Üç KVKK kalemi teknik olarak yarım kaldı ve hepsi geri-dönülmez/hukuki sonuç taşıdığı için ajan kendi başına ilerletemiyor:
+(a) Kurum (tenant) **kalıcı silme** ucu yok — sadece "dondurma" var (`platformRoutes.ts:53` freeze; cron yalnız TASLAK kurum siler). (b) Rıza mekanizması **öncesi** kayıtlar için yeniden-rıza politikası belirsiz (teknik backfill ✅ yapıldı `backfill-consent.ts`, ama eski kayıt politikası açık — G1-16). (c) Denetim izi (kalibrasyon AUDIT) SystemLog'ta **90 günde siliniyor** (`gdprService.ts:341,366`) → iz-koruma ile KVKK imha süresi çelişiyor (G1-15).
+**Sorun ne:** Bir kurum "bizi tamamen silin" derse yapının buna cevabı yok; eski kayıtların rıza durumu belirsiz kalırsa hukuki açık; denetim izini hem tutup hem 90 günde silmek ikisini de zayıflatıyor.
+**Neden sana soruyorum:** Üçü de geri-dönülmez (kalıcı silme) ve/veya hukuki (rıza, saklama süresi). Ben avukat değilim; aşağıdakiler hukuki görüş değildir.
+**Seçenekler:**
+**A) Üçünü de şimdi netleştir** (kurum hard-delete ucu + eski-kayıt yeniden-rıza akışı + denetim izi ayrı saklama) · Kullanıcı: kurum tam silinebilir, eski kayıtlar yeniden rıza ister, denetim izi korunur · Kazanç: KVKK duruşu tam · Kaybedersin: en büyük iş, kalıcı silme riski, hukukçu onayı şart, migration · Süre: L · Geri alınır: kurum silme HAYIR · Migration: VAR
+**B) Yalnız denetim izi saklamasını çöz** (audit izini SystemLog 90g'den ayır, uzun sakla), kurum silme + eski-rıza ertele · Kullanıcı: değişiklik yok · Kazanç: en düşük riskli, iz kaybı önlenir · Kaybedersin: kurum silme + eski-rıza açık kalır · Süre: M · Geri alınır: evet · Migration: küçük
+**C) Şimdilik hiçbiri, hukukçu paketiyle birlikte** · Kullanıcı: değişiklik yok · Kazanç: emek çekirdeğe gider, tek hukuk turunda toplanır · Kaybedersin: üç açık da sürer · Süre: yok · Migration: yok
+**Karşılaştırma:** Yakında kuruma satış/KVKK denetimi bekliyorsan A gerekli ama hukukçu ve migration şart. Riski minimize edip en somut açığı (iz kaybı) kapatmak istiyorsan B. KVKK paketini avukatla toptan çözeceksen C — bu projede hukuk zaten G1-10'da bekliyor.
+**Benim önerim:** C şimdi + B'yi kuyruk adayı — kalıcı kurum silme ve eski-rıza avukat metnine (G1-10) bağlı; denetim izi saklaması ise düşük riskli, ayrı yapılabilir. (Bu senin ürün+hukuk kararın, önerime güvenme.)
+**Cevap vermezsen:** F-02/F-07 ve G1-29/G1-16 açık kalır. Başka iş etkilenmez.
+**CEVAP:**
+
+---
+
+### KARAR-20 · Mentör, menti talebini reddedebilsin mi?  [ÜRÜN KARARI]
+**Şu an ne var:** Menti bir mentöre doğrudan talep gönderiyor (`requestController.ts:17`); mentörün "hayır" deme akışı **hiç yok** (eski VisibilityOptIn onay adımı kaldırılmış). Öncelik sırasındaki "G4-25 ret yumuşatma" işi, var olmayan bir ret akışını yumuşatmaya çalışıyor.
+**Sorun ne:** Bir mentör uygun olmadığı bir talebi kibarca geri çeviremiyor — ya görmezden geliyor ya kabul etmek zorunda hissediyor. Menti de yanıtsız kalınca ne olduğunu anlamıyor.
+**Neden sana soruyorum:** "Mentör reddedebilir mi" ürünün karakterini belirliyor — eşleştirme motoruna güven mi, mentör özerkliği mi.
+**Seçenekler:**
+**A) Mentör reddedebilsin + otomatik yumuşatma** · Kullanıcı: mentör "şu an uygun değilim" der, menti nazik mesaj + alternatif mentör görür · Kazanç: mentör özerkliği, menti belirsizlikte kalmaz · Kaybedersin: popüler mentör çok ret verirse menti moralsiz olur; ret sebebi yönetimi gerekir · Süre: M · Geri alınır: evet · Migration: yok (durum alanı yeterli olabilir)
+**B) Ret yok, ama "yanıt süresi/otomatik yeniden-eşleştirme"** · Kullanıcı: mentör N gün yanıtlamazsa sistem başka mentöre yönlendirir · Kazanç: kimse "hayır" demek zorunda kalmaz, akış tıkanmaz · Kaybedersin: mentör açık kontrol sahibi olmaz; zamanlama mantığı gerekir · Süre: M · Geri alınır: evet · Migration: yok
+**C) Değişmesin, ret akışı açılmasın** · Kullanıcı: bugünkü gibi · Kazanç: sıfır iş, motor tam otomatik · Kaybedersin: mentör sıkışırsa çaresi yok, G4-25 kalıcı açık · Süre: yok · Migration: yok
+**Karşılaştırma:** Mentör tarafına güven ve özerklik vermek istiyorsan A. İnsanları "hayır" deme yükünden kurtarıp akışı otomatik tutmak istiyorsan B. Çekirdek akış hâlâ pürüzlüyse ve mentör şikayeti gelmediyse C.
+**Benim önerim:** A — mentörün kibarca hayır diyebilmesi gerçek bir ihtiyaç; yumuşatma menti tarafını korur. Ama bu senin ürün kararın.
+**Cevap vermezsen:** F-17 (G4-25) atlanır. Başka iş etkilenmez.
+**CEVAP:**
+
+---
+
+### KARAR-21 · STK anket sorusu cevap tipi: Likert-sabit mi, seçmeli mi?  [ÜRÜN KARARI · MIGRATION]
+**Şu an ne var:** Kurumların ekleyebildiği özel sorular yalnız **Likert** (1-5 katılıyorum/katılmıyorum) tipinde; şıklı (çoktan seçmeli) veya açık-uçlu cevap seçeneği yok. Kanıt: `Question` modelinde `answerType` alanı yok. (Not: `SjtQuestion.AnswerFormat` benzer isimli ama farklı bir kavram — sertifika şık düzeni.)
+**Sorun ne:** Bir kurum "en çok hangi konuda destek istersin?" gibi şıklı ya da "beklentin ne?" gibi açık bir soru soramıyor; her şeyi Likert'e sıkıştırmak zorunda.
+**Neden sana soruyorum:** "Kurumlar ne kadar esnek soru sorabilsin" bir ürün tercihi; ayrıca veritabanı alanı eklemek gerekiyor (geri dönüşü zor).
+**Seçenekler:**
+**A) İki tip ekle: Likert + çoktan seçmeli** · Kullanıcı: kurum soru eklerken tip seçer · Kazanç: en sık ihtiyaç (şıklı) karşılanır · Kaybedersin: açık-uçlu yine yok; migration + form değişikliği · Süre: M · Geri alınır: zor (veri modeli) · Migration: VAR
+**B) Üç tip: Likert + çoktan seçmeli + açık-uçlu** · Kullanıcı: tam esneklik · Kazanç: her soru tipi mümkün · Kaybedersin: açık-uçlu cevaplar analiz/eşleştirmeye giremez (serbest metin), raporlama karmaşıklaşır · Süre: L · Geri alınır: zor · Migration: VAR
+**C) Şimdilik Likert kalsın** · Kullanıcı: değişiklik yok · Kazanç: migration bütçesi başka işe · Kaybedersin: kurum esnekliği yok, G3-13 kalıcı açık · Süre: yok · Migration: yok
+**Karşılaştırma:** Kurum anketlerini satış hikâyenin parçası yapacaksan A yeterli ve dengeli (şıklı en sık istenen). Tam esneklik istiyorsan B ama açık-uçlu verinin nereye gideceğini (analiz/eşleştirme mi, sadece görüntüleme mi) önceden çözmen gerekir. Başka migration yapılmayacaksa C ile ertelenebilir.
+**Benim önerim:** A — şıklı soru en sık gerçek ihtiyaç; açık-uçlu, cevabın nereye akacağı netleşmeden eklenirse ölü veri olur. KARAR-1/2'ye de "evet" dersen aynı migration turunda yapılabilir.
+**Cevap vermezsen:** F-12 (G3-13) atlanır. Başka iş etkilenmez.
+**CEVAP:**
