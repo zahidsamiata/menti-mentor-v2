@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
@@ -28,6 +28,9 @@ const WEEKDAY_LABEL: Record<Weekday, string> = Object.fromEntries(
   WEEKDAYS.map(({ value, label }) => [value, label])
 ) as Record<Weekday, string>;
 
+/** Aynı aralığın iki kez listelenmemesi için tekilleştirme anahtarı. */
+const blockKey = (b: Block) => `${b.weekday}|${b.startTime}|${b.endTime}`;
+
 export default function AvailabilityPage() {
   const { user, isLoading } = useAuth();
   const api = useApiClient();
@@ -50,10 +53,30 @@ export default function AvailabilityPage() {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Sunucu verisi yerel listeye YALNIZ BİR KEZ aktarılır. Aksi halde GET cevabı
+  // (ilk yükleme geç dönerse ya da token yenilenince yeniden istek atılırsa)
+  // kullanıcının o sırada eklediği, henüz kaydedilmemiş aralıkları siler —
+  // mentörün ikinci gün ekleyememesinin sebebi buydu (K-03).
+  const hydratedRef = useRef(false);
+
   useEffect(() => {
-    if (data?.blocks) {
-      setBlocks(data.blocks as Block[]);
-    }
+    if (!data?.blocks || hydratedRef.current) return;
+    hydratedRef.current = true;
+
+    // Sunucu satırları Prisma alanlarını da taşır (id/tenantId/timezone…);
+    // forma yalnız bu üç alan girer, kaydederken de yalnız bu üçü geri gider.
+    const serverBlocks: Block[] = (data.blocks as Block[]).map((b) => ({
+      weekday:   b.weekday,
+      startTime: b.startTime,
+      endTime:   b.endTime,
+    }));
+    const serverKeys = new Set(serverBlocks.map(blockKey));
+
+    // Cevap beklenirken eklenmiş aralıklar korunur, mükerrerleri atılır.
+    setBlocks((prev) => [
+      ...serverBlocks,
+      ...prev.filter((b) => !serverKeys.has(blockKey(b))),
+    ]);
   }, [data]);
 
   function addBlock() {
