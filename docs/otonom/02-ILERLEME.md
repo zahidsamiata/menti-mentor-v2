@@ -4,6 +4,55 @@
 
 ---
 
+## TUR ÖZETİ — TUR AB (2026-09-20 gece) · 10 iş CANLIDA + prompt güncellemesi · TUR YARIM (kalan 🟢: 40)
+
+**Neden yarım:** K-20 (belge senkronu) YALNIZ hiç 🟢 iş kalmayınca yapılır (DURMAMA KURALI D.1). Kuyrukta hâlâ
+**40 tane 🟢 BEKLIYOR** iş var → K-20 YAPILMADI, tur yarım kapandı. Bağlam dolduğu için temiz kesim (D.4).
+Sonraki tur aynı promptla kaldığı yerden devam eder.
+
+### ✅ BİTTİ ve CANLIDA — 10 kuyruk işi (+ prompt + pointer bump) — hepsi ayrı PR, tek tek revert edilebilir
+**Frontend (çatı, canlı):**
+1. **P-02 (PR #211):** Menti "Gönderilen Talepler" sayfa yenilenince artık sıfırlanmıyor (kalıcı `/api/conversations`).
+2. **P-03 (PR #209):** Menti panelinde DISC arketip "aha" kartı rapeli — kayıttan sonra tekrar görülebiliyor.
+3. **P-07 (PR #214):** Görüşme değerlendirmesi sonrası kaçıncı görüşme olduğuna göre kişiye özel kutlama (jenerik değil).
+4. **P-09 (PR #210):** Yeni mentör boş panelde 'Toplantı Talepleri' kartını + doğru rol metnini görüyor.
+5. **P-14 (PR #216):** Mentör panelinde emeğini anlatan takdir cümlesi ('💚 …').
+6. **U-14 (PR #212):** Süresi dolmuş davette 'Yeni davet iste' + 'Giriş yap' düğmeleri.
+**Backend (submodule, pointer #215 ile CANLIDA):**
+7. **V-10 (PR #78):** `/users/:id/export` rate limit (KVKK export bypass'ı kapandı).
+8. **V-07 (PR #79):** Hatırlatma mailinde batch tavanı + toplantı-başına cooldown (SMTP spam koruması).
+9. **V-13 (PR #80):** `/api/tags/suggest` requireTenant+requireAuth ile mount (fail-closed ölü uç çözüldü).
+10. **F-06 (PR #81):** Kalibrasyon audit yazımı artık yutulmuyor (await + catch, G1-14).
+**Altyapı:** OTONOM-PROMPT.txt'ye DURMAMA KURALI + ARA KAYIT eklendi (#208) · backend pointer `4528048`→`19e7703` bump (#215).
+
+### KARAR BEKLİYOR — 0 yeni kart açıldı
+Bu tur yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değişmedi, CEVAP satırlarına dokunulmadı.
+
+### BAŞARISIZ — 0
+
+### CANLIDA KONTROL EDİLECEKLER (PO gözle bakacak)
+- Menti panelinde DISC arketip kartı tekrar görünüyor mu (P-03) + gönderilen talep sayısı yenilenince korunuyor mu (P-02)
+- Görüşme değerlendirmesi sonrası kilometre-taşı kutlaması (P-07)
+- Yeni mentör boş panelinde 'Toplantı Talepleri' kartı + takdir cümlesi (P-09/P-14)
+- Süresi dolmuş davette 'Yeni davet iste' düğmesi (U-14)
+- (Backend) `/api/tags/suggest` artık 201 dönüyor · hatırlatma maili tekrar tetiklenince spam atmıyor
+
+### KUYRUK SON DAĞILIMI
+- **BITTI (bu tur):** 10 · **kalan 🟢 BEKLIYOR: 40** (K-04/05/06/08/10/11/12 · F-01/10/13/14/15/16/19/20/21/22/25/26/27/28/29/31/32/33 · P-10/11/12/13 · U-04/05/10/16 · V-01/02/08/09/11/14 · E-3)
+- 🟡 ve 🔴 sabit (KARAR bekleyenlere dokunulmadı).
+- **Test:** Backend CI 67 test dosyası passed (yeni: reminder-batch-cooldown 2 + export-id-rate-limit 1 + tags-suggest-mount 2; F-06 audit testi deterministik) · Frontend 25 test dosyası passed (yeni: disc-recall-card·mentor-empty-panel·mentiMetrics+4·milestones 6·mentorAppreciation 4·join-expired). KURAL 14: test adları CI logunda doğrulandı.
+
+### BACKEND
+- pointer eski `4528048` → yeni `19e7703` (V-07/10/13/F-06). Ata teyidi ileri-sarım güvenli. Çatı pointer == backend main HEAD → **SARKMA YOK.**
+
+### PO'NUN KENDİ YAPMASI GEREKENLER
+`docs/otonom/03-PO-ELLE-ISLER.md` (değişmedi). En kritik 3: avatar kalıcı disk (K-04/Dokploy) · SMTP değerleri (V-01/U-15) · yedek+restore provası.
+
+### DOKUNULMAYANLAR
+⛔ DB/migration/seed YOK · şema DEĞİŞMEDİ · `server.ts` rate-limit/trust-proxy (yasak bölge) DOKUNULMADI · auth guard/KVKK-silme/matching motoru DEĞİŞMEDİ · KIRIK TEST YOK (yalnız test EKLENDİ) · `docs/gelen/` ELLENMEDİ · KARAR CEVAP satırı doldurulmadı · #110 ellenmedi · hiçbir şey silinmedi.
+
+---
+
 ## TUR ÖZETİ — TUR AA (2026-09-20) · OTONOM-PROMPT güncelleme + 5 uçtan-uca (U) + 1 temizlik CANLIDA
 
 **Neden bu tur:** OTONOM-PROMPT.txt 2026-09-19'dan bayattı (en kritik: ARA KAYIT kuralı yoktu → önceki gece 2 turun emeği push edilmeden kayboldu). Önce prompt güncellendi, sonra kuyruktaki uçtan-uca (U) yolculuğu tıkayan 🟢 FE düzeltmeleri işlendi. Her iş bittiğinde ANINDA commit+push+PR (ARA KAYIT).
@@ -297,3 +346,6 @@ Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır k
 - **BACKEND POINTER BUMP:** V-07/V-10/V-13 backend main'e merge edildi ama çatı pointer HENÜZ bump edilMEDİ →
   bu 3 backend düzeltmesi CANLIDA DEĞİL. Turun SONUNDA tek bump yapılacak (eski `4528048` → yeni backend main HEAD).
 - **DB/migration/seed YOK · şema DEĞİŞMEDİ · server.ts rate-limit/trust-proxy (yasak bölge) DOKUNULMADI · KARAR CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
+
+---
+TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · sıradaki: U-10 (4 ekran boş-durum) ya da V-01/V-02 (güvenlik). K-20 YAPILMADI (🟢 iş kaldı, DURMAMA D.1). Bağlam doldu → temiz kesim (D.4). Sonraki tur aynı promptla devam.
