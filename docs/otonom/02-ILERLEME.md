@@ -178,3 +178,39 @@ Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır k
 - **İŞ 6 — KARAR-22** (mentör reddederken ne olsun — ret deneyimi) açıldı, 4 alt-soru KÜMELENDİ (gerekçe/alternatif/bildirim/gösterim). İndekse eklendi (1 iş: P-05). ⚠️ KARAR-20 ile aynı tema tespit edildi (ret KODDA VAR — `mentor/page.tsx:257-274` MT11; eksik olan deneyim) → çapraz-referans + "kümelenmeli" notu iki karta da düşüldü. ⛔ CEVAP DOLDURULMADI.
 - **⛔ DOKUNULMAYANLAR:** frontend/backend kaynak DEĞİŞMEDİ · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi · mevcut K-/F-/E- işleri YAPILMADI · `docs/00-BELGE-HARITASI.md` + `docs/devir/` ellenmedi · CEVAP satırları dolmadı.
 - **Değişen dosyalar:** `00-KUYRUK.md` (AŞAMA P + K-16 önkoşul notu) · `01-KARARLAR.md` (KARAR-22 + indeks) · `strateji-gercek-denetimi-2026-08-20.md` (BY-1..4 KOD DOĞRULAMA NOTU) · `09-DURUM.md` (BY-6) · `02-ILERLEME.md` (bu kayıt).
+
+---
+
+## TUR 5 — 2026-09-19 · BÜYÜK TUR: 4 PR merge + pointer + yapısal düzeltmeler + bütünsel doğrulama
+**Mod:** 🟥 BYPASS (merge + belge + doğrulama; YENİ ÜRÜN KODU YAZILMADI). Dallar: A/B/D merge PR'ları · C=`otonom/S-pointer-bump-...` · E+F=`otonom/T-yapisal-ve-kuyruk-...`
+
+### A) Frontend PR'ları (çatı)
+- **#190 (N)** menti mentör adı — 3-nokta diff tam 3 dosya (`meetings/page.tsx`·`lib/api/meetings.ts`·test), CI 8/8 → **merged.**
+- **#191 (O)** müsaitlik çoklu aralık (K-03) — 3-nokta diff tam 2 dosya (`mentor/availability/page.tsx`·test), CI 8/8 → **merged.**
+
+### B) Backend PR + BY-5
+- **#73 (M)** mentor-count k-anonimlik backend'e taşındı — 3 dosya (`userController.ts`·`mask.ts`·test), CI pass → **merged.** Backend HEAD `f229ffe→4aff01e`.
+- **BY-5 (#74)** — `backend/CLAUDE.md:65` "requestMessage on VisibilityOptIn (Akış B) and MatchRequest" ifadesi kod-teyidiyle düzeltildi: KOD 09-DURUM'u doğruladı — **Akış B silinmiş** (VisibilityOptIn.requestMessage alanı `schema.prisma:407` durur, akış yok); canlı niyet mektubu YALNIZ `Meeting.requestMessage`; `MatchRequest.requestMessage` yalnız `POST /api/requests` (`requestController.ts:60`, FE caller yok), canlı yol `conversationController.ts:154` requestMessage'sız yaratır→NULL. Üstü çizili + DÜZELTME. CI pass → **merged.** Backend HEAD `4aff01e→61aae07`.
+
+### C) Submodule pointer bump (#192)
+- Eski `f229ffe` → yeni **`61aae07`** (backend main HEAD, #73+#74 dahil). Ata teyidi: `merge-base --is-ancestor f229ffe 61aae07`=0 (ileri sarım güvenli). CI 8/8 → **merged.**
+- **C.4 TEYİT:** çatı pointer `61aae07` == backend main HEAD `61aae07` → **SARKMA YOK.**
+
+### D) #188 belge haritası
+- **Satır doğrulaması:** main 07-oturum = 1333; dal 3 dosya toplamı = 139 (07-oturum kısaltılmış) + 715 (oturum-2026-08) + 527 (oturum-2026-09) = **1381 ≥ 1333** (satır kaybı YOK, +48 indeks). CI 8/8 → **merged.** (+ `00-BELGE-HARITASI.md` 565 satır bonus.)
+
+### E) Yapısal düzeltmeler (harita kaynak)
+- **E.1 EKSEN KURALI:** `belge-duzeni-rehberi.md`'ye **KURAL 2-B** eklendi (KONU+YÖNTEM çakışırsa → YÖNTEM klasörü + KONU'ya zorunlu çapraz atıf). Geriye dönük: `raporlar/persona/00-INDEX.md` + `raporlar/panel/00-INDEX.md` **oluşturuldu** (2 dosya); beş kıyas bölümü çapraz atıflandı (B.1 s.64 · B.2 s.87 · B.3 s.109 · B.4 s.177 · B.5 s.232); B.5 için `arsiv/admin-panelleri-tasarim-2026-08-02.md`'ye de atıf. **Toplam atıf: 8** (persona 4 + panel 4-satır).
+- **E.2 NUMARA ÇİFTLERİ:** haritanın 7 doğrulanmış çifti çift-yönlü bağlandı (119↔G1-22 · 120↔G1-28 · 111↔G2-06 · 121↔G8-05 · 113↔G10-10 · 114↔G10-09 · 116↔G4-38) — `00-KARAR-TAKIP` madde satırı + G-kartı başlığı (14 edit). **Atlanan çift: 0** (harita "7 doğrulanmış" dedi, hepsi kod-mevcut).
+- **E.3 KART İNDEKSİ:** `docs/kararlar/00-KART-INDEKSI.md` köprü belgesi oluşturuldu — **184/184 kart** (G1..G11, 12 G-dosyası tam tarama): konu·durum·madde·KUYRUK·canonical kaynak. "Durum TUTMAZ, yönlendirir." `kararlar/00-INDEX.md`'ye eklendi (KURAL 5). Eksik: 0 kart (kapsam tam); zayıf nokta = madde-no bazı yerlerde karar-defteri iç-numarası (belgede açıkça yazıldı) + G2 numara-ekseni çakışması (F-08 öncelik-doc no).
+- **E.4 HARİTA NOTU:** `00-BELGE-HARITASI.md` B.0 + P-1 + P-2 yanına tarihli "✅ ÇÖZÜLDÜ" notları.
+
+### F) Kuyruk + bütünsel doğrulama
+- **F.1** 3 iş BITTI'ye çekildi (numara kod-teyitli): **P-00**=k-anonimlik (M #73), **P-01**=menti mentör adı (N #190), **K-03**=müsaitlik çoklu aralık (O #191). Her birine PR + "CANLIDA BAK" notu.
+- **F.2 ⭐ BÜTÜNSEL DOĞRULAMA:** `npm run verify` çalıştı (exit 0). Backend tsc/tsc-test/eslint + frontend tsc/vitest/build adımları geçti; **backend entegrasyon testleri TEST_DATABASE_URL güvenlik kilidine takıldı** (lokalde beklenen — canlı Neon'a TRUNCATE atmaz) → **"yeşil" SAYILMADI** (KURAL 14). **Asıl kanıt CI:** 5 merge edilen PR'ın (#190·#191·#73/#74·#192·#188) HEPSİNDE `Integration Tests (Auth+Matching+Admin)` + `E2E Browser` + `Backend TS+Prisma+Lint` + `Frontend TS+Build` = **pass**. Frontend PR'ları (N/O) yeni test ekledi (meetings-opponent-name · mentor-availability-multi-block) → CI frontend suite'inde koştu, geçti. **KIRMIZI = 0 → REVERT YOK.**
+- **F.3 CANLI DOĞRULAMA (PO gözle bakacak):**
+  1. Menti "Görüşmelerim"de mentörün **adı** görünüyor mu? (N)
+  2. Mentör iki farklı gün müsaitlik ekleyip kaydedebiliyor mu? Test: **Pazartesi 09:00-17:00, sonra Cuma 11:00-17:00 → İKİSİ de kalmalı** (O)
+  3. Menti panelinde **mentör sayısı** kartı doğru davranıyor mu (N<3 gizli)? (M — backend maskeleme)
+- **⛔ DOKUNULMAYANLAR:** yeni ürün kodu YAZILMADI · DB/migration/seed YOK · şema DEĞİŞMEDİ · #110 (MERGE ETME) ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi (üstü çizili + not).
+- **Değişen dosyalar (E+F, branch T):** `belge-duzeni-rehberi.md` · `raporlar/persona/00-INDEX.md` (yeni) · `raporlar/panel/00-INDEX.md` (yeni) · `arsiv/admin-panelleri-tasarim-2026-08-02.md` · `00-KARAR-TAKIP.md` (7 çift) · 5 G-kartı (G1/G2/G8/G10/G4b) · `00-KART-INDEKSI.md` (yeni) · `kararlar/00-INDEX.md` · `00-BELGE-HARITASI.md` · `00-KUYRUK.md` (F.1) · `02-ILERLEME.md`.

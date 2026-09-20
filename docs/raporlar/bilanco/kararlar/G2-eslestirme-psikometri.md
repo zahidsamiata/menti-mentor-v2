@@ -101,7 +101,7 @@ KOD-TEYİT: `scoring.ts:89 DEFAULT_SECTOR_WEIGHT=0.6`, `:106` fallback; `05-fels
 [ ] işleme al   [ ] şimdilik alma   [x] geçersiz   [ ] anlamadım / açıkla
 [x] PO notu: 🗑️ GEÇERSİZ (PO 2026-08-28): Bu onay noktaları DISC matrisine aitti (16 kombinasyon, anti-match, tiebreak D>I>S>C, %60/40). DISC bırakıldı, Big Five'a geçildi — tasarım belgesi B9 yeni kuralları tanımlıyor (%45/30/25 + kişilik içi dağılım + 2 veto). Eski matrisin onaylanacak bir tarafı kalmadı. Bkz. konu/degerlendirme-sistemi-tasarim-2026-08-27.md B9.
 ---
-**[G2-06] "Varsayılana düşen profil oranı" izleme metriği**
+**[G2-06] "Varsayılana düşen profil oranı" izleme metriği** (= madde 111, bkz. kararlar/00-KARAR-TAKIP.md)
 Ne: Profili eksik olup varsayılan/nötr skora düşen kullanıcıların oranını izleyen bir metrik yok. Psikometrik kör-nokta.
 Neden başlanmıştı: Kaç kullanıcının aslında ölçülememiş (nötr 50'ye düşmüş) olduğunu görmek — eşleştirme kalitesinin sessiz göstergesi.
 Nerede durdu: Niyet belgelenmiş; kod izi yok (grep boş).

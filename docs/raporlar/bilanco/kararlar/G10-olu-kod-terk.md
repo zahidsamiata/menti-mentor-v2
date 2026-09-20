@@ -190,7 +190,7 @@ Kaynak: SAYIM (c)/G10 · Numara: D3
 [ ] PO notu: 
 ---
 
-**[G10-09] `SjtQuestion` / `SjtOption` tabloları — ⚠️ "ölü tablo" iddiası ÇÜRÜDÜ**
+**[G10-09] `SjtQuestion` / `SjtOption` tabloları — ⚠️ "ölü tablo" iddiası ÇÜRÜDÜ** (= madde 114, bkz. kararlar/00-KARAR-TAKIP.md)
 Ne: Bilanço "SjtQuestion/SjtOption tabloları 0 prisma query, ölü-tablo adayı" demişti. **Kod gerçeği: bu tablolar canlı bir route üzerinden sorgulanıyor.**
 Neden başlanmıştı: SJT (durumsal muhakeme testi) puanlama — senaryo soruları + seçenekleri tablodan okunuyor.
 Nerede durdu: DURUŞ YOK — özellik bağlı ve çalışıyor.
@@ -204,7 +204,7 @@ Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 [ ] PO notu: 
 ---
 
-**[G10-10] `PATCH /users/me/social` bağlanmamış — NİYET BELGEDE YOK**
+**[G10-10] `PATCH /users/me/social` bağlanmamış — NİYET BELGEDE YOK** (= madde 113, bkz. kararlar/00-KARAR-TAKIP.md)
 Ne: Sosyal profil güncelleme endpoint'i; niyeti belgelenmemiş, FE tarafında çağrılıp çağrılmadığı belirsizdi.
 Neden başlanmıştı: NİYET BELGELENMEMİŞ — muhtemelen kayıt-sonrası sosyal medya/link güncelleme için planlanmış.
 Nerede durdu: DURUŞ SEBEBİ YOK — endpoint yazıldı, FE bağlantısı belgelenmedi.

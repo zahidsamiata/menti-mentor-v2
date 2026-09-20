@@ -2,6 +2,7 @@
 **📸 DONDURULMUŞ (2026-08-02)** — o günün keşif fotoğrafı, güncellenmez; güncel durum: `../kararlar/09-DURUM.md`
 
 > 🗄️ **ARŞİV (2026-08-28, G9-13):** `docs/raporlar/kesif/`'ten `docs/arsiv/`'e taşındı — anlattığı **6 admin paneli (Kpi/Members/Meetings/DiscSummary + drill-down) canlıda uygulandı** (kod-teyitli, G4a ✅). Tasarım niyeti gerçekleştiği için aktif keşif klasöründen çıkarıldı.
+> ⛔ ÇAPRAZ ATIF (KURAL 2-B, 2026-09-19): bu tasarımın **kod denetimi** `../raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` **B.5 (satır 232+)** "ADMİN PANEL TASARIM KARTLARI"nda. `panel/00-INDEX.md`'den de atıf var.
 **Tarih:** 2026-08-02 · **Mod:** salt-okuma keşif (7 paralel ajan) · **Amaç:** 6 admin panelini KODLAMADAN önce tasarımı netleştirmek
 **Kaynak:** `docs/teshis-raporu-2026-08-02.md` Grup A. Her karar mevcut koda dayalı (dosya:satır).
 

@@ -69,7 +69,7 @@ Kaynak: karar-defteri (A22) · Numara: A22
 [x] işleme al   [ ] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
-**[G8-05] Kullanılmayan yedek ortam dosyasını sil (`.env.backup-anaDB`)**
+**[G8-05] Kullanılmayan yedek ortam dosyasını sil (`.env.backup-anaDB`)** (= madde 121, bkz. kararlar/00-KARAR-TAKIP.md)
 Ne: Ana veritabanına geçiş sırasında bırakılmış yedek ortam dosyası hâlâ duruyor. Geçiş bittiğine göre bu dosya silinmeli (sır/eski bağlantı barındırabilir).
 Neden başlanmıştı: Ortam geçişi sırasında güvenlik amaçlı yedek alınmıştı.
 Nerede durdu: Geçiş bitti ama dosya silinmedi (unutuldu).
