@@ -18,7 +18,7 @@ import { matchingApi } from '@/lib/api/matching';
 import { conversationsApi } from '@/lib/api/conversations';
 import { agreementsApi } from '@/lib/api/agreements';
 import { meetingsApi } from '@/lib/api/meetings';
-import { countCompletedMeetings, countApprovedMatchMentors } from '@/lib/mentiMetrics';
+import { countCompletedMeetings, countApprovedMatchMentors, countSentRequests } from '@/lib/mentiMetrics';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
@@ -73,6 +73,14 @@ export default function MentiDashboardPage() {
   );
   const meetings = meetingsData?.items ?? [];
 
+  // P-02: "Gönderilen Talepler" kalıcı kaynağı — menti başlattığı her konuşma bir taleptir.
+  // Eskiden yalnız oturum-içi `sentIds` sayılıyordu → sayfa yenilenince 0'a düşüyordu.
+  const { data: conversationsData } = useQuery(
+    () => conversationsApi.list(api),
+    [api],
+    { enabled: isApproved },
+  );
+
   // Talep modalı state
   const [selectedMentor, setSelectedMentor] = useState<MentorMatch | null>(null);
   const [message, setMessage] = useState('');
@@ -80,6 +88,12 @@ export default function MentiDashboardPage() {
   const [sendError, setSendError] = useState<string | null>(null);
   const [sentIds, setSentIds] = useState<Set<string>>(new Set());
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  // Kalıcı konuşmalar + oturum-içi yeni gönderilenler birleştirilir (mükerrer sayım yok).
+  const sentRequestCount = countSentRequests(
+    (conversationsData?.items ?? []).map((c) => c.counterpart?.id),
+    sentIds,
+  );
 
   useEffect(() => {
     const el = dialogRef.current;
@@ -214,7 +228,7 @@ export default function MentiDashboardPage() {
 
       {/* Metrikler — sadece onaylı kullanıcılar için gerçek veri */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <DashboardMetricCard label="Gönderilen Talepler" value={sentIds.size} color="brand" />
+        <DashboardMetricCard label="Gönderilen Talepler" value={sentRequestCount} color="brand" />
         <DashboardMetricCard label="Onaylanan Eşleşmeler" value={countApprovedMatchMentors(meetings)} color="success" />
         <DashboardMetricCard label="Tamamlanan Toplantılar" value={countCompletedMeetings(meetings)} color="neutral" />
         {/* #12: DISC çoklu harf (ör. "Di") — yoksa tek harfe düşer. */}
