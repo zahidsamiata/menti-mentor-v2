@@ -2051,3 +2051,51 @@ Hepsi için hızlı ortak teyit yolu: **`GET /health` → `env` alanı** (`serve
 2. `v2/CLAUDE.md` güvenlik bölümü: *"KASITLI public olan endpoint'ler: login, register, health, unsubscribe, invitation join, suspicion report. Bunun DIŞINDA public endpoint YOK."* → kod gerçeği: **11 public uç daha var** (+`/uploads` statik servisi). Bkz. kalem 19.
 3. `v2/CLAUDE.md:48` + `OTONOM-PROMPT.txt:48`: *"Yedek adı + satır sayısı `02-ILERLEME.md`'ye yazılır"* → fiilen uygulanmıyor (`grep` → 0); iki yedek de başka belgelere kaydedilmiş.
 4. `backend/CLAUDE.md` *"yalnız kullanılmayan `config.ts` OpenAI env iskelesi kaldı"* → **bu iddia koddan DOĞRULANDI** ✅ (`iceBreaker.ts`/`matchReason.ts`/`llmRetry.ts` gerçekten yok, `openai`/`@anthropic-ai` bağımlılığı yok, `config.llm` 0 tüketici). Bayat değil.
+
+---
+
+## 9. EK — ikinci okuma turu (aynı tur, ayrı commit)
+
+> **Ne bu:** Bu rapor yazıldıktan sonra aynı tur kapsamında bağımsız bir ikinci okuma yapıldı (backend `61aae07`, çatı `d4ff9a7`). Bulguların ezici çoğunluğu **birebir örtüştü** (`trust proxy`, `X-Tenant-Id` anahtarı, `NODE_ENV` tek-arıza-noktası, `LLM_PROVIDER` ölü, `unhandledRejection` yok, 190 uç sayımı). Aşağıda **yalnız örtüşmeyen iki kalem** var.
+> ⛔ **Yukarıdaki hiçbir satır silinmedi/değiştirilmedi.** Bu bölüm yalnız EKLER; §7 kalem listesine de yeni satır **eklenir**, mevcut satırlar olduğu gibi kalır (Belge Düzeltme Deseni).
+
+### 9.1 ⚠️ GÜNCELLEME — kalem 11 ve 12 NUMARASIZ DEĞİL: `madde 120` / `[G1-28]` olarak zaten izleniyor
+
+§7'de **kalem 11** ("6 saatten eski veri kaybına karşı sıfır koruma") ve **kalem 12** ("Düzenli/bütün-DB yedeği yok; restore provası hiç yapılmamış") *"numara adayı: **evet**"* olarak işaretlenmiş. **Bu iki kalem zaten numaralı ve zaten en sert önceliğe sahip:**
+
+| Kaynak | Kanıt |
+|---|---|
+| `docs/kararlar/00-KARAR-TAKIP.md:615` | **madde 120** — "Sunucu/altyapı sertleştirme (Dokploy HTTP/firewall/SSH/SSL/**yedek**) (= G1-28)" · ⬜ AÇIK (PO önceliklendirmedi) |
+| `docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md:440` | **[G1-28]** kartı — durum **🔴 ÇIKIŞ BLOKERİ** (2026-09-02 PO kararı) |
+| `G1-guvenlik-kvkk.md:451` | PAKET AYRIMI: "**Yedekleme → 🔴 en sert bloker**" |
+| `docs/kararlar/00-CIKIS-PLANI.md:74` | Kanonik çıkış listesi: "sunucu/altyapı güvenliği HTTPS/firewall/SSH/SSL/yedek (yarım-tam gün) · **yedekleme geri-dönüş denemesi (1-2 saat)**" — yani "restore provası" da zaten listede |
+| `00-KARAR-TAKIP.md:171` | **S19** 🔴 "çıkış öncesi ZORUNLU" |
+
+**Neden önemli (KURAL 8 adım 2 · KURAL 15):** bu iki kaleme yeni numara verilirse **aynı iş iki numarayla** izlenir ve 🔴 çıkış blokeri, yeni açılmış ⬜ bir kalem gibi görünerek **hafife alınır** — `[G1-28]`'in başına 2026-09-02'de tam olarak bu gelmişti (kart 🔵 "bilinçli erteleme" sanılıyordu, çapraz-ref turunda 🔴'ye çekildi). **Öneri: kalem 11-12 için numara adayı "evet" → "hayır, madde 120/G1-28'e bağla".**
+⚠️ Buna karşılık §7 **kalem 13** (yedek tabloların birikmesi, S26/S37) gerçekten ayrı bir kalemdir — madde 120 yedek **alma**yı, kalem 13 alınmış yedeklerin **ömrünü** konu alır. Karıştırılmamalı.
+⚠️ Ayrıca **hata izleme (kalem 6-8-22)** için ters yön geçerli: `00-KARAR-TAKIP.md` içinde `izleme · monitoring · uptime · alarm · uyarı sistemi · sentry` (6 terim, harf duyarsız) → **0 sahiplenen madde**. Bunlar gerçekten numarasız; "evet" işaretleri doğru.
+
+### 9.2 🔴 YENİ BULGU — oryantasyon kilidi CANLI randevu yolunda uygulanmıyor (raporda yok)
+
+`checkOrientationLock()` **tanımlı ve çalışır durumda**, ama yalnız kullanılmayan yolda bağlı:
+
+```
+$ grep -n "checkOrientationLock" backend/src/controllers/meetingController.ts
+140:async function checkOrientationLock(mentiId: string, res: Response): Promise<boolean> {
+162:  if (await checkOrientationLock(mentiId, res)) return;      ← createMeeting (:155)
+```
+
+- **Tek çağrı yeri `createMeeting`** (`meetingController.ts:155`, çağrı `:162`).
+- Frontend'in gerçekten kullandığı yol **`POST /api/meetings/book` → `bookMeeting`** (`meetingRoutes.ts:47`; `meetingController.ts:413`). Gövdesinde (`413-531`) `orientation` geçen **0 satır** var — format/tarih doğrulaması, match doğrulaması, müsaitlik, çakışma ve haftalık limit var; **oryantasyon kilidi yok**.
+- Frontend de durdurmuyor: `menti/page.tsx:139-150` yalnız **bilgilendirici banner** ("Görüşme Kilidi Aktif") basar; mentör kartları ve "Randevu Al" butonu (`:297-303`) `needsOrientation` durumunda **gizlenmez**; `frontend/src/app/(dashboard)/book-meeting/` altında `needsOrientation` → **0 eşleşme**.
+
+**Etki:** hazırlık puanı düşük bulunup kilitlenen bir menti, "Randevu Al"a basıp randevu alır; mentör hazırlıksız menti ile karşılaşır. Ürünün kendi kalite kapısı **hiçbir katmanda** durdurmuyor — §2.C'deki k-anonimlik/PENDING desenlerinin aynısı: *koruma yalnızca ekranda.*
+**Düzeltme (S):** `bookMeeting` içine `if (await checkOrientationLock(mentiId, res)) return;` — `meetingController.ts:418` civarı, `createMeeting`'deki satırın aynısı.
+**Ürün kararı gerekiyor mu — EVET (kart AÇILMADI, yalnız soru):** *"Oryantasyonu bitirmemiş menti randevu alabilmeli mi? Ekrandaki 'Görüşme Kilidi Aktif' yazısı bir uyarı mı, yoksa gerçek bir engel mi?"* Kod bugün **uyarı** gibi davranıyor, metin **engel** vaat ediyor.
+
+### 9.3 §7 KALEM LİSTESİ'NE EK SATIRLAR (KURAL 9 — mevcut 28 satır aynen duruyor)
+
+| # | Kalem | Bölüm | Önerilen durum | Numara adayı mı |
+|---|---|---|---|---|
+| 29 | **Oryantasyon kilidi canlı `bookMeeting` yolunda uygulanmıyor**; yalnız `createMeeting`'de bağlı, frontend de yalnız banner basıyor | C | ⬜ AÇIK | **evet** (ürün kararı önce: §9.2'deki soru) |
+| 30 | §7 **kalem 11-12 için numara VERİLMEMELİ** — `madde 120` / `[G1-28]` 🔴 çıkış blokeri olarak zaten izleniyor; yeni numara aynı işi ikiye böler ve blokeri hafifletir | B | 🗑️ GEÇERSİZ ADAYI (numara adaylığı geçersiz; kalemin kendisi geçerli) | **hayır** — mevcut numaraya bağlanır |
