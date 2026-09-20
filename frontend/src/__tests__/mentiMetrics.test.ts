@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { countCompletedMeetings, countApprovedMatchMentors } from '@/lib/mentiMetrics';
+import { countCompletedMeetings, countApprovedMatchMentors, countSentRequests } from '@/lib/mentiMetrics';
 import type { Meeting } from '@/lib/api/meetings';
 
 function mk(id: string, mentorUserId: string, status: Meeting['status']): Meeting {
@@ -43,5 +43,24 @@ describe('mentiMetrics — K-09 gerçek metrik türetme', () => {
       mk('e', 'm4', 'CANCELLED'), // sayılmaz
     ];
     expect(countApprovedMatchMentors(meetings)).toBe(2);
+  });
+
+  describe('P-02 — gönderilen talep kalıcı sayısı', () => {
+    it('yalnız kalıcı konuşmalar sayılır (sayfa yenilenince 0 olmaz)', () => {
+      expect(countSentRequests(['m1', 'm2'], new Set())).toBe(2);
+    });
+
+    it('kalıcı konuşma + oturum-içi yeni gönderilen birleşir, mükerrer sayılmaz', () => {
+      // m1 hem konuşmada hem oturum state'inde → tek sayılır; m3 yalnız oturumda.
+      expect(countSentRequests(['m1', 'm2'], new Set(['m1', 'm3']))).toBe(3);
+    });
+
+    it('null/undefined counterpart id atlanır', () => {
+      expect(countSentRequests(['m1', null, undefined, 'm1'], new Set())).toBe(1);
+    });
+
+    it('hiç talep yoksa 0', () => {
+      expect(countSentRequests([], new Set())).toBe(0);
+    });
   });
 });
