@@ -12,6 +12,7 @@
  */
 
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AlertCircle, Link2Off } from 'lucide-react';
 import { fetchInvitation } from '@/lib/api/invitation';
@@ -53,9 +54,26 @@ function ErrorView({ noToken, message }: ErrorViewProps) {
         </h1>
         <p className="text-sm text-muted-foreground leading-relaxed">{message}</p>
       </div>
+
+      {/* U-14: süresi dolmuş/geçersiz davette eyleme dönük düğme — eskiden yalnız düz metin vardı.
+          Davet yöneticiden gelir; kendi kendine yenileme ucu yok → yöneticiye/desteğe yönlendir. */}
       <p className="text-xs text-muted-foreground">
-        Yöneticinizden yeni bir davet linki isteyin.
+        Yöneticinizden yeni bir davet linki isteyin ya da destek ekibine yazın.
       </p>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+        <a
+          href="mailto:destek@mentimentor.io?subject=Yeni%20davet%20linki%20talebi"
+          className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+        >
+          Yeni davet iste
+        </a>
+        <Link
+          href="/login"
+          className="inline-flex items-center justify-center text-sm text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
+        >
+          Zaten hesabın var mı? Giriş yap
+        </Link>
+      </div>
     </div>
   );
 }
