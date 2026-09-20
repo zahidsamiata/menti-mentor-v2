@@ -34,6 +34,11 @@ export interface Meeting {
   endsAt: string;
   notes: string | null;
   requestMessage: string | null;
+  // Görüşme yeri — formata göre yalnız biri dolu (backend listMeetings tüm scalar
+  // alanları döndürür; U-02'ye kadar FE'de hiç render edilmiyordu).
+  locationUrl?: string | null;
+  locationText?: string | null;
+  phoneNumber?: string | null;
   menti?: MentiProfile;
   mentor?: MentorProfile;
   match?: MeetingMatch | null;

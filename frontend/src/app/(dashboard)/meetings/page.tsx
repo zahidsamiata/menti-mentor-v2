@@ -59,6 +59,35 @@ function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) 
       {/* Format */}
       <p className="text-xs text-muted-foreground">{FORMAT_LABELS[meeting.format] ?? meeting.format}</p>
 
+      {/* Görüşme yeri/bağlantısı — backend 3 alana yazıyordu ama hiçbir ekranda
+          gösterilmiyordu (U-02): online link, yüz yüze konum, telefon. */}
+      {meeting.format === 'ONLINE' && meeting.locationUrl && (
+        <p className="text-xs text-muted-foreground">
+          Bağlantı:{' '}
+          <a
+            href={meeting.locationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-primary underline underline-offset-2 hover:opacity-80 break-all"
+          >
+            Görüşmeye katıl →
+          </a>
+        </p>
+      )}
+      {meeting.format === 'IN_PERSON' && meeting.locationText && (
+        <p className="text-xs text-muted-foreground">
+          Konum: <span className="font-medium text-foreground break-words">{meeting.locationText}</span>
+        </p>
+      )}
+      {meeting.format === 'PHONE' && meeting.phoneNumber && (
+        <p className="text-xs text-muted-foreground">
+          Telefon:{' '}
+          <a href={`tel:${meeting.phoneNumber}`} className="font-medium text-foreground underline underline-offset-2">
+            {meeting.phoneNumber}
+          </a>
+        </p>
+      )}
+
       {/* Feedback uyarısı */}
       {needsFeedback && !isPast && (
         <Button asChild size="sm" variant="outline" className="w-full border-amber-400 text-amber-700 hover:bg-amber-50">
