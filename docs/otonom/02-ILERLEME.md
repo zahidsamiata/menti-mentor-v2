@@ -4,6 +4,41 @@
 
 ---
 
+## TUR ÖZETİ — TUR AA (2026-09-20) · OTONOM-PROMPT güncelleme + 5 uçtan-uca (U) + 1 temizlik CANLIDA
+
+**Neden bu tur:** OTONOM-PROMPT.txt 2026-09-19'dan bayattı (en kritik: ARA KAYIT kuralı yoktu → önceki gece 2 turun emeği push edilmeden kayboldu). Önce prompt güncellendi, sonra kuyruktaki uçtan-uca (U) yolculuğu tıkayan 🟢 FE düzeltmeleri işlendi. Her iş bittiğinde ANINDA commit+push+PR (ARA KAYIT).
+
+### BİTTİ ve CANLIDA — 6 iş merge edildi (hepsi FE; backend/şema/DB DEĞİŞMEDİ)
+1. **Bölüm A — OTONOM-PROMPT.txt (PR #200):** 7 madde eklendi (ARA KAYIT kuralı · kapı politikası gevşetmesi · 6 aşama · PO/ajan ayrımı · 3. mod REMOTE CONTROL · yasak bölge server.ts). *Belge — kullanıcıya görünmez ama sonraki turların davranışını düzeltir.*
+2. **U-02 (PR #201):** Menti/mentör "Görüşmelerim"de online görüşmenin **katılım linkini** görüp tıklıyor (yüz yüze→konum, telefon→numara). Eskiden backend gönderiyordu ama 0 yerde render ediliyordu.
+3. **U-07 (PR #202):** Onay bekleyen kullanıcı `/pending-approval`'da **kendi e-postasını** görüyor (eskiden boştu — token yoktu).
+4. **U-03 (PR #204):** Davet ekranında link/şablon **hatası artık görünüyor** (eskiden sessizdi, 403 dahil); kopyalanan davet metninde **kurum adı dolu** (eskiden boştu).
+5. **U-09 (PR #203):** Boş onay/bekleme panelinde yanıltıcı "🎉 Tüm kayıtlar işlendi" yerine **doğru metin + "Davet gönder" düğmesi**.
+6. **U-11 (PR #205):** Kurum onboarding son adımında davet süresi **30 gün** (koddaki gerçek; eskiden "90 gün" yazıyordu).
+7. **F-30 (PR #206):** `LoginForm` bayat "Sprint 14" yorumu temizlendi (yalnız yorum).
+
+### KARAR BEKLİYOR — 0 yeni kart açıldı
+Bu turda ürün kararı gerektiren işe girilmedi (yalnız kararsız, geri-alınır FE düzeltmeleri seçildi). Mevcut açık KARAR-1..28 değişmedi.
+
+### BAŞARISIZ — 0
+
+### CANLIDA KONTROL EDİLECEKLER
+- "Görüşmelerim"de online görüşmede katılım linki tıklanabilir mi (U-02)
+- Onay bekleyen ekranında e-posta dolu mu (U-07)
+- Davet metni kopyalanınca kurum adı dolu mu + hata görünüyor mu (U-03)
+- Yeni kurumda boş onay panelinde "Davet gönder" düğmesi var mı (U-09)
+
+### PO'NUN KENDİ YAPMASI GEREKENLER
+`docs/otonom/03-PO-ELLE-ISLER.md` (değişmedi). En kritik 3: avatar kalıcı disk (K-04) · SMTP değerleri (U-04/U-15/V-01) · yedek+restore provası (madde 120/G1-28).
+
+### KUYRUK SON DAĞILIMI
+6 iş 🟢'dan BITTI'ye · 🟡 sabit · 🔴 12 sabit. Test: FE suite 78/78 (11 yeni test bu tur), 6 PR'ın hepsinde CI 8/8. Backend işi YOK → submodule pointer değişmedi (`4528048`).
+
+### DOKUNULMAYANLAR
+⛔ DB'ye komut GİTMEDİ · migration YOK · seed YOK · şema DEĞİŞMEDİ · `server.ts` rate-limit/trust-proxy (yasak bölge) DOKUNULMADI · auth guard/KVKK/matching dosyası DEĞİŞMEDİ · KIRIK TEST YOK (yalnız 11 test EKLENDİ) · `docs/gelen/` ELLENMEDİ · KARAR CEVAP satırı doldurulmadı · ölü `config.invitationTokenExpiry` SİLİNMEDİ (protokol).
+
+---
+
 ## TUR ÖZETİ — TUR Z (2026-09-20) · W+X denetimleri kuyruğa + 3 güvenlik/sağlamlık düzeltmesi
 
 **Neden bu tur:** 2026-09-19'daki iki büyük denetim (X uçtan-uca kurum yolculuğu, W operasyonel hazırlık) rapor olarak duruyordu ama kuyruğa hiç işlenmemişti (öksüz bulgu). Bu tur işledi + birbirine dokunmayan 3 açığı kapattı.
