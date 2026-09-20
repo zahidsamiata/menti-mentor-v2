@@ -137,3 +137,29 @@
 ## E) Bekleyen (PO)
 - 01-KARARLAR KARAR-1..11 cevapsız → randevu mimarisi (K-15), sertifika seed (K-16), profil linki (K-17), öğrenme yolculuğu seed (K-18), mükerrer uç temizliği (K-13/E-serisi) kilitli.
 - Ajan sonraki tur: K-08 (sosyal doğrulama, FE+BE) · K-03/K-06/K-10/K-11/K-12 · E-1 niyet arkeolojisi.
+
+---
+
+# OTURUM — 2026-09-20 · OTONOM TUR Z (W+X denetimleri kuyruğa + 3 güvenlik/sağlamlık düzeltmesi)
+
+## A) Bağlam
+2026-09-19'da yapılıp main'e merge edilen iki büyük denetim (X `uctan-uca-kurum-yolculugu`, W `operasyonel-hazirlik`) öksüz kalmıştı (belge haritası "19 öksüz keşif bulgusu" deseni). Bu tur o deseni kırdı: bulguları kuyruğa işledi ve birbirine dokunmayan 3 açık kapattı.
+
+## B) Yapılanlar (bölüm bölüm, ara kayıtlı — her bölüm sonrası commit+push)
+- **Bölüm 1 (Z1):** X raporu → `00-KUYRUK` **AŞAMA U** (U-01..U-19). Çakışma: X §6#1 → K-05, §10#22 → P-06/P-16 (yeni satır açılmadı).
+- **Bölüm 2 (Z1):** W raporu → **AŞAMA V** (V-01..V-15, risk sırasıyla, yalnız AJAN kalemleri). PO-only → 03-PO. Çakışma: #1→K-04, #3→K-14 (yasak bölge), #4→U-04, #7→G1-28, #19→U-19.
+- **Bölüm 3 (Z1):** yeni `docs/otonom/03-PO-ELLE-ISLER.md` (Dokploy/SMTP/Neon/env, "nasıl anlaşılır" doğrulama sütunuyla; gerçek sır YOK) + CLAUDE.md okuma sırası.
+- **Bölüm 4 (backend #75):** `.env.example` 17 belgelenmemiş env eklendi + 3 ölü ayar (OPENAI_*/INVITATION_TOKEN_EXPIRY) işaretlendi. LLM_PROVIDER eklenmedi (ölü → KARAR-28).
+- **Bölüm 5 (backend #76):** 🔴 IDOR — `visibility-optin`'e `requireSelfOrAdmin('mentorId')`. Test 3 (CI 468). CANLIDA.
+- **Bölüm 6 (backend #77):** 🔴 `/health` DB canlılık kontrolü (`getHealthStatus()` SELECT 1 → DB down 503). Test 2 (CI 467). CANLIDA.
+- **Bölüm 7 (çatı #197):** 🔴 frontend error boundary (`error.tsx`/`global-error.tsx`/`not-found.tsx`). CI 8/8. CANLIDA.
+- **Bölüm 8:** KARAR-23..28 açıldı (01-KARARLAR + indeks); V-03/V-04/V-12 → BITTI; pointer `61aae07 → 4528048`; belge senkronu (bu kayıt).
+
+## C) Doğrulama / dokunulmayanlar
+- 3 backend PR CI yeşil, yeni test dosyaları CI log'unda görüldü (KURAL 14): `visibility-optin-idor.test.ts` 3, `health.test.ts` 2. Yerel entegrasyon TEST_DATABASE_URL guard'ıyla durdu (beklenen) → asıl kanıt CI.
+- ⛔ DB/migration/seed YOK · şema değişmedi · `server.ts` rate-limit/trust-proxy DOKUNULMADI (K-14/F-04 yasak bölge) · docs/gelen ELLENMEDİ · CEVAP satırı doldurulmadı · 🔴 sabit 12.
+
+## D) Sözler / açık kalan
+- **KARAR-23..28 cevapsız** → U-04 (kurum bildirimi), V-05/V-06 vb. ilgili kalemler bunlara bakar.
+- Ürün kararı gerektiren U/V kalemleri (U-01 COMPLETED, U-12 davet token, V-15 oryantasyon, §4.5 mentorVisibilityEnabled) not'larında "KARAR aday" ile işaretli — sonraki turda kart açılabilir.
+- U/V numaraları "aday" — PO onaylayınca `00-KARAR-TAKIP` numarası alır.
