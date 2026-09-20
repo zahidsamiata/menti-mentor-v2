@@ -11,6 +11,7 @@
  */
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
@@ -58,12 +59,18 @@ export default function ApprovalsPage() {
       {/* Hata */}
       {error && <AlertMessage type="error" message={error} />}
 
-      {/* Boş durum */}
+      {/* Boş durum — "tüm kayıtlar işlendi" yanıltıcıydı: hiç kayıt gelmemiş de
+          olabilir. Nötr metin + davet yönlendirmesi (U-09). */}
       {!isLoading && data?.items.length === 0 && (
         <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border py-16 text-center">
-          <p className="text-3xl">🎉</p>
-          <p className="mt-2 font-medium">Onay kuyruğu boş</p>
-          <p className="text-sm text-muted-foreground">Tüm kayıtlar işlendi.</p>
+          <p className="text-3xl">📭</p>
+          <p className="mt-2 font-medium">Şu an onay bekleyen kullanıcı yok</p>
+          <p className="text-sm text-muted-foreground">
+            Yeni üyeler davet ettikçe başvurular burada görünür.
+          </p>
+          <Button asChild className="mt-4">
+            <Link href="/admin/invite">Davet gönder →</Link>
+          </Button>
         </div>
       )}
 
