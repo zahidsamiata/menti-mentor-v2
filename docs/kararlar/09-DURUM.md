@@ -429,7 +429,7 @@
 > #65-#69) "şu an"a odaklanmak için arşive taşındı → `docs/arsiv/09-DURUM-tamamlanan-isler-arsiv-2026-08-19.md`.
 
 ## 4-rol metodolojisi (strateji→kıyas→aksiyon)
-STK yönetici ✅ · Platform admin ✅ · **Mentör ✅** (panel + chat canlıda) · **Menti ⬜** (sıradaki).
+STK yönetici ✅ · Platform admin ✅ · **Mentör ✅** (panel + chat canlıda) · ~~[ESKİ · 2026-09-19] **Menti ⬜** (sıradaki)~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): **Menti ✅** — K-09 menti panelini canlıya aldı (bkz. `09-DURUM.md:5` "4 iş CANLIDA"; `02-ILERLEME.md` TUR 1). Bu satır `:5` ile çelişiyordu (aynı belge). Kaynak: panel denetimi §5 BY-6 + §7 Ç-2, PR #186. G9-03 damgası uygulandı.
 
 ## ⏳ BEKLEYEN — ürün sahibi elinde (kod değil, kaybolmasın)
 - **Chat uçtan uca canlı test:** menti→mentör ilk mesaj · thread · çan rozeti · okundu.

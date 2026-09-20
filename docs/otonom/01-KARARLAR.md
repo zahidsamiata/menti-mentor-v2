@@ -19,6 +19,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
 |---|---|:---:|---|
 | KARAR-11 | Kullanılmayan/mükerrer kod ne olsun | **2** (K-13, E-5) | ⬜ boş · ⚠️ ağustos "keşif olmadan silme YOK" → karantina yönü |
+| KARAR-22 | Mentör reddederken ne olsun (ret deneyimi) | 1 (P-05) | ⬜ boş · ⚠️ KARAR-20 ile aynı tema (kümelenmeli); ret KODDA VAR, deneyimi eksik |
 | KARAR-1 | Randevu format/süre kim belirler | 1 (K-15) | ⬜ boş |
 | KARAR-2 | Profile serbest bağlantı alanı | 1 (K-17) | ⬜ boş |
 | KARAR-3 | Sertifika "bildirim yükümlülüğü" hukuki metni | 1 (K-16) | ⬜ boş |
@@ -28,7 +29,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-7 | Online toplantı linkini kim girer | 1 (K-19 içerik) | ⬜ boş |
 | KARAR-10 | OCEAN/SJT psikometri motoru | 1 (F-11) | ⬜ boş · ⚠️ ağustos G2-07/08/G10-21 "canlı eşleştirmeye bağla" → bağlama yönü |
 | KARAR-19 | KVKK geri-dönülmez yetkiler kümesi | 1 (F-07) | ⬜ boş · ⚠️ ağustos G1-15/16/29 ✅ işleme-al |
-| KARAR-20 | Mentör menti talebini reddedebilsin mi | 1 (F-17) | ⬜ boş · ⚠️ ağustos G4-25 ✅ ama varsayım hatalı |
+| KARAR-20 | Mentör menti talebini reddedebilsin mi | 1 (F-17) | ⬜ boş · ⚠️ ağustos G4-25 ✅ ama varsayım hatalı · **KARAR-22 ile kümelenmeli** |
 | KARAR-21 | STK anket cevap tipi (answerType) | 1 (F-12) | ⬜ boş · ⚠️ ağustos G3-13 ✅ → C seçeneği dışlanmış |
 | KARAR-8 | Repoları private yap | 0 (PO aksiyonu) | ⬜ boş |
 | KARAR-9 | Kulüp modülü + İş İlanları | 0 (eklenmezse B) | ⬜ boş · ⚠️ ağustos G1-13 kulüp kurumu aktif / G10-12 modül ⏸️ |
@@ -430,4 +431,24 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** A — şıklı soru en sık gerçek ihtiyaç; açık-uçlu, cevabın nereye akacağı netleşmeden eklenirse ölü veri olur. KARAR-1/2'ye de "evet" dersen aynı migration turunda yapılabilir.
 **Cevap vermezsen:** F-12 (G3-13) atlanır. Başka iş etkilenmez.
 ⚠️ AĞUSTOS SİNYALİ (2026-08-27, C DIŞLANMIŞ — A/B/C DEĞİL): Ağustos G3-13'ü "⏸️→✅ canlandı" (`00-PO-KARARLARI-2026-08-27.md:60`) + bağlı-karar "G3-04→G3-13: STK şıklı-soru isteği `answerType` şema alanını zorunlu kılar" (`:106`). Yani ağustos answerType eklenmesini VE şıklı-soruyu istiyor → bu kartın C seçeneği (Likert kalsın) ağustosla ÇELİŞİR; yön A veya B. PO teyit ederse CEVAP'a yazılabilir.
+**CEVAP:**
+
+---
+
+### KARAR-22 · Mentör bir mentiyi reddederken ne olsun? (ret deneyimi) (1 işi açar)  [ÜRÜN KARARI · ŞEMA]
+**Şu an ne var:** Mentör bir randevu talebini "Reddet" ile geri çevirebiliyor ama menti bunu **yalnız** "Görüşmelerim"e düşen kırmızı **"İptal Edildi"** rozetinden anlıyor. Bildirim yok, e-posta yok, gerekçe yok, alternatif mentör yok. Kanıt: `backend/src/controllers/meetingController.ts:563-585` (rejectMeeting yalnız `status:CANCELLED, notes:reason??null`, hiçbir `notify*` çağrısı yok — kardeş `approveMeeting` `:556` bildirim atıyor, asimetri koda gömülü); FE gerekçe hiç göndermiyor (`mentor/page.tsx:97`).
+**Sorun ne:** Menti personası bunu **en kritik risk** sayıyor: menti "hayır"ı "ben yetersizim" diye okur. Şu an ret çıplak gösteriliyor — personanın "reddi ASLA çıplak gösterme" prensibinin tam tersi. Ayrıca ret akışı olmadığı için "ret yumuşatma" (G4-25/F-17) da havada.
+**Neden sana soruyorum:** Ürün + hukuk-yakını + geri-dönülmez şema kararı (yeni alan). Kaç alt-soru var, hepsi tek karta kümelendi:
+  · (i) Ret **gerekçesi zorunlu mu**, opsiyonel mi, hiç sorulmasın mı?
+  · (ii) Menti **alternatif mentör** görecek mi (ör. "işte sana uygun 3 mentör daha")?
+  · (iii) Reddedilince menti'ye **bildirim/e-posta** gitsin mi?
+  · (iv) Ret sebebi menti'ye **gösterilsin mi**, yoksa yalnız yumuşatılmış jenerik mesaj mı?
+**Seçenekler:**
+**A) Tam yumuşatma** (opsiyonel gerekçe + jenerik nazik mesaj + otomatik 3 alternatif + bildirim) · Kullanıcı: menti "Bu sefer olmadı, işte sana uygun 3 mentör daha" + bildirim görür, ham gerekçeyi görmez · Ne kazanırsın: personanın en kritik riski kapanır, menti akışta kalır · Ne kaybedersin: en büyük iş — yeni şema alanı (`rejectionReason`), alternatif-öneri akışı, bildirim/e-posta entegrasyonu; alternatif motoru zayıfsa boş liste riski · Süre: L · Geri alınır: evet · Migration: VAR (`rejectionReason`)
+**B) Nazik mesaj + bildirim, alternatif YOK** (gerekçe menti'ye gösterilmez, jenerik teselli + bildirim) · Kullanıcı: menti "Mentör şu an yeni menti alamıyor" + bildirim görür · Ne kazanırsın: çıplak kırmızı rozet kalkar, orta iş; asimetri düzelir · Ne kaybedersin: menti yine "sonra ne yapayım" diye kalır (alternatif yok) · Süre: M · Geri alınır: evet · Migration: opsiyonel (jenerik metin alan gerektirmez)
+**C) Yalnız görsel yumuşatma** (kırmızı "İptal Edildi" → nötr "Bu görüşme gerçekleşmedi", başka değişiklik yok) · Kullanıcı: daha az sert rozet · Ne kazanırsın: en ucuz, tek FE değişikliği · Ne kaybedersin: bildirim/alternatif/gerekçe hiçbiri yok; kök sorun sürüyor · Süre: S · Migration: yok
+**Karşılaştırma:** Menti elde tutma (retention) yakın hedefinse ve alternatif motoruna güveniyorsan A doğru yatırım. Riski azaltıp en sert yarayı (çıplak kırmızı + sessizlik) kapatmak istiyorsan B dengeli. Sadece görsel sertliği almak ve kararı ertelemek istiyorsan C — ama kök sorun (menti ne yapacağını bilmiyor) sürer.
+**Benim önerim:** B — çıplak ret + sessizlik en akut yara; bildirim + nazik mesaj bunu orta eforla kapatır. Alternatif öneri (A) ayrı bir tur olarak sonra gelebilir (eşleştirme motoru olgunlaşınca). (Bu senin ürün kararın, önerime güvenme.)
+⚠️ KARAR-20 İLE İLİŞKİ (aynı tema, kümelenmeli): KARAR-20 "mentör reddedebilsin mi" soruyordu (F-17/G4-25 kaynaklı, "ret akışı hiç yok" varsayımıyla). Panel denetimi gösterdi ki **meeting-talebi reddi KODDA VAR** (`mentor/page.tsx:257-274` Onayla/Reddet, MT11 ✅) — eksik olan reddin DENEYİMİ. Yani KARAR-20'nin "olsun mu" sorusu meeting düzeyinde zaten "evet"; KARAR-22 (bu kart) "nasıl olsun"u soruyor. İkisi birlikte cevaplanabilir; KARAR-22 ayrıntılı/kanıtlı olanı.
+**Cevap vermezsen:** P-05 (ret deneyimi) ve F-17 (G4-25 ret yumuşatma) atlanır. Başka iş etkilenmez.
 **CEVAP:**

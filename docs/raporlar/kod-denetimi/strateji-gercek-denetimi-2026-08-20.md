@@ -374,3 +374,15 @@ JSON-LD schema · robots.txt · Search Console doğrulama · hero CTA · iç lin
 
 ---
 *Denetim raporu — üçlü persona + strateji setinin kod gerçeğiyle karşılaştırması.*
+
+---
+
+## KOD DOĞRULAMA NOTU (2026-09-19) — panel denetimi (PR #186) 4 iddiayı çürüttü
+> ⚠️ Bu 📸 belgenin GÖVDESİ değişmedi (tarihsel iz). Aşağıdaki düzeltmeler H turu panel denetiminin
+> (`docs/raporlar/kesif/panel-denetimi-mentor-menti-2026-09-19.md` §5) kod-teyitli bulgularıdır. Belge↔kod çelişince KOD kazanır.
+
+- **BY-1 (B.2/1 + B.2/4):** ~~"Mentör Toplantı Talepleri'nde uyum skoru görüyor · `:386-452` %uyum + gerekçe ✅ TAM VAR"~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): **Mentör hiçbir yerde %uyum görmüyor.** Onay kuyruğunda %rozeti hiç render edilmiyor (`mentor/page.tsx:214` `m.match` daima null — `Meeting.matchId` hiç yazılmıyor); aday listesinde çıplak sayı, % işareti yok (`:436`). Yüzde YALNIZ menti tarafında çalışıyor (`menti/page.tsx:283`). Kaynak: panel denetimi §5 BY-1, PR #186. → Kuyruk P-04.
+- **BY-2 (B.1/5):** ~~"Menti İlişkilerim yuvası ✅ TAM VAR · `meetings/page.tsx`"~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): Sayfa açılıyor ama **menti randevu kartında mentörünün adını göremiyor.** `meetings/page.tsx:31` `opponent = isMentor ? meeting.menti : null` → menti'de daima null, `'Mentor'` dalı ölü kod. Kaynak: §5 BY-2, PR #186. → Kuyruk P-01.
+- **BY-3 (B.2/8):** ~~"Sertifika tam: `mentor/certification/page.tsx:178-189` 'Sertifikalı Mentörsün'"~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): Akış doğru ama **takdir kalıcı değil** — o metin yalnız sınav-sonu ekranında; panel CTA `mentor/page.tsx:172-184` koşulsuz "Sertifikaya başla →". Sertifikalı mentör ertesi gün hâlâ "başla" görüyor; "benim sertifika durumum" ucu yok. Kaynak: §5 BY-3, PR #186. → Kuyruk P-12.
+- **BY-4 (B.1/1 notu):** ~~"Profil sayfasında da DISC özeti var: `profile/page.tsx:218-220`"~~ ⚠️ DÜZELTME (2026-09-19, kod-teyitli): Profilde yalnız **ikon+harf+arketip adı** (arketip yerel sabitten, `:29-34`). `superPower`/`strengths`/`growthArea` onboarding DIŞINDA hiçbir ekranda render edilmiyor; API dönüyor (`lib/api/profile.ts:10-20 discResultCard`) ama hiçbir bileşen okumuyor. Kaynak: §5 BY-4, PR #186. → Kuyruk P-03.
+- **BY-5** (`backend/CLAUDE.md` "Akış B + MatchRequest requestMessage") → backend submodule kaynağı olduğu için bu belge turunda DÜZELTİLMEDİ (DevSecOps: backend/ kaynak dosyaları değiştirilmez). Rapor §5 BY-5 + §7 Ç-1'de kanıtıyla duruyor; sıradaki backend turuna bırakıldı.
