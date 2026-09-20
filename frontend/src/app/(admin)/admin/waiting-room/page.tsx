@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Link from 'next/link';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
@@ -78,11 +79,14 @@ export default function WaitingRoomPage() {
       {/* Boş durum */}
       {!isLoading && !error && pendingCount === 0 && (
         <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border py-20 text-center">
-          <p className="text-4xl">✅</p>
+          <p className="text-4xl">📭</p>
           <p className="mt-3 font-medium">Bekleme odası boş</p>
           <p className="text-sm text-muted-foreground mt-1">
-            Onay bekleyen kullanıcı yok.
+            Onay bekleyen kullanıcı yok. Yeni üyeler davet ettikçe burada görünür.
           </p>
+          <Button asChild className="mt-4">
+            <Link href="/admin/invite">Davet gönder →</Link>
+          </Button>
         </div>
       )}
 
