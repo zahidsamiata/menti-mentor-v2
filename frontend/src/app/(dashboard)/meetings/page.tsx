@@ -28,7 +28,12 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'warning' | 'succe
 
 function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) {
   const isMentor  = meeting.mentorUserId === userId;
-  const opponent  = isMentor ? meeting.menti : null;
+  // Karşı taraf: mentör bakarken menti, menti bakarken mentör. Menti tarafı eskiden
+  // daima null'dı → menti KİMİNLE görüşeceğini göremiyordu (backend zaten mentor'ü
+  // include ediyor: listMeetings). Ad gelmezse satır boş kalmasın diye yedek metin.
+  const opponent  = isMentor ? meeting.menti : meeting.mentor;
+  const opponentLabel = isMentor ? 'Menti' : 'Mentör';
+  const opponentName  = opponent?.fullName?.trim() || `${opponentLabel} bilgisi yok`;
   const startDate = new Date(meeting.startsAt);
   const isPast    = startDate < new Date();
   const needsFeedback = meeting.status === 'COMPLETED' && meeting.awaitingMentorApproval === false;
@@ -47,11 +52,9 @@ function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) 
       </div>
 
       {/* Karşı taraf */}
-      {opponent?.fullName && (
-        <p className="text-xs text-muted-foreground">
-          {isMentor ? 'Menti' : 'Mentor'}: <span className="font-medium text-foreground">{opponent.fullName}</span>
-        </p>
-      )}
+      <p className="text-xs text-muted-foreground">
+        {opponentLabel}: <span className="font-medium text-foreground">{opponentName}</span>
+      </p>
 
       {/* Format */}
       <p className="text-xs text-muted-foreground">{FORMAT_LABELS[meeting.format] ?? meeting.format}</p>
