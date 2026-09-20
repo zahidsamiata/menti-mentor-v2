@@ -1,11 +1,17 @@
 'use client';
 
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Clock, Mail, LogOut } from 'lucide-react';
 
-export default function PendingApprovalPage() {
+function PendingApprovalContent() {
   const { user, logout } = useAuth();
+  const searchParams = useSearchParams();
+  // PENDING kullanıcıya JWT verilmediğinden user genelde null olur → e-postayı
+  // login formundan gelen query'den al (U-07). Token varsa (edge) user.email öncelikli.
+  const email = user?.email ?? searchParams.get('email') ?? undefined;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
@@ -39,9 +45,15 @@ export default function PendingApprovalPage() {
           <div className="flex items-start gap-3">
             <Mail className="h-4 w-4 text-primary shrink-0 mt-0.5" aria-hidden />
             <p className="text-sm text-muted-foreground">
-              Onay sonrasında{' '}
-              <span className="font-medium text-foreground">{user?.email}</span>{' '}
-              adresine bildirim gönderilecek.
+              {email ? (
+                <>
+                  Onay sonrasında{' '}
+                  <span className="font-medium text-foreground">{email}</span>{' '}
+                  adresine bildirim gönderilecek.
+                </>
+              ) : (
+                <>Onay sonrasında kayıtlı e-posta adresinize bildirim gönderilecek.</>
+              )}
             </p>
           </div>
           <p className="text-xs text-muted-foreground pl-7">
@@ -61,5 +73,14 @@ export default function PendingApprovalPage() {
 
       </div>
     </div>
+  );
+}
+
+// useSearchParams bir Suspense sınırı ister (Next 15) → sarmalanır.
+export default function PendingApprovalPage() {
+  return (
+    <Suspense fallback={null}>
+      <PendingApprovalContent />
+    </Suspense>
   );
 }
