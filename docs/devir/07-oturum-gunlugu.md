@@ -163,3 +163,27 @@
 - **KARAR-23..28 cevapsız** → U-04 (kurum bildirimi), V-05/V-06 vb. ilgili kalemler bunlara bakar.
 - Ürün kararı gerektiren U/V kalemleri (U-01 COMPLETED, U-12 davet token, V-15 oryantasyon, §4.5 mentorVisibilityEnabled) not'larında "KARAR aday" ile işaretli — sonraki turda kart açılabilir.
 - U/V numaraları "aday" — PO onaylayınca `00-KARAR-TAKIP` numarası alır.
+
+---
+
+# OTURUM — 2026-09-20 · OTONOM TUR AA (OTONOM-PROMPT güncelleme + 5 uçtan-uca FE düzeltmesi)
+
+## A) Bağlam
+OTONOM-PROMPT.txt 2026-09-19'dan bayattı; en kritik eksik ARA KAYIT kuralıydı (önceki gece 2 turun emeği push edilmeden kaybolmuştu). Bu tur önce prompt güncellendi (Bölüm A), sonra AŞAMA U (uçtan-uca yolculuk) tıkayan 🟢 FE düzeltmeleri işlendi (Bölüm B). Her iş bittiğinde ANINDA commit+push+PR.
+
+## B) Yapılanlar (hepsi merge/CANLIDA — tamamen FE)
+- **#200 (Bölüm A):** OTONOM-PROMPT.txt 7 madde — ARA KAYIT kuralı · kapı politikası gevşetmesi · 6 aşama K/F/P/E/U/V · PO/ajan ayrımı · 3. mod REMOTE CONTROL · yasak bölge server.ts.
+- **U-02 (#201):** `Meeting` tipine locationUrl/Text/phone + `MeetingCard` render → online katılım linki/konum/telefon görünüyor. Test 4.
+- **U-07 (#202):** login formu e-postayı `?email=` ile taşır; `/pending-approval` `user?.email ?? query` (Suspense). Test 3.
+- **U-03 (#204):** invite generateLink/saveTemplate hatası `setMsg` ile görünür; `{KurumAdı}` `useTenant()` gerçek ad. Test 2.
+- **U-09 (#203):** boş approvals/waiting-room → nötr metin + "Davet gönder" düğmesi. Test 1.
+- **U-11 (#205):** Step5Invite davet süresi metni 30 güne hizalandı (kod gerçeği). Test 1.
+- **F-30 (#206):** LoginForm bayat "Sprint 14" yorumu temizlendi.
+
+## C) Doğrulama / dokunulmayanlar
+- FE suite 78/78 (11 yeni test bu tur); 6 PR'ın hepsinde CI 8/8.
+- ⛔ TAMAMEN FE — backend/şema/DB/migration/seed DEĞİŞMEDİ · submodule pointer sabit `4528048` (backend işi yok) · `server.ts` yasak bölge/auth guard/KVKK/matching DOKUNULMADI · KIRIK TEST YOK (yalnız eklendi) · docs/gelen ELLENMEDİ · KARAR CEVAP doldurulmadı · ölü `config.invitationTokenExpiry` SİLİNMEDİ (protokol).
+
+## D) Sözler / açık kalan
+- Yeni KARAR açılmadı (🔴 sabit 12). Kuyrukta çok sayıda 🟢 FE işi kaldı (U-05/U-07 türevi, P-02/P-03/P-09, F-26/F-29 vb.) — sonraki tur.
+- 00-KUYRUK U-02/U-03/U-07/U-09/U-11/F-30 → BITTI (bu tur güncellendi).
