@@ -46,6 +46,12 @@ function getSmartRedirect(user: { role: string; approvalStatus: string; discType
   return '/dashboard';
 }
 
+// PENDING kullanıcının token'ı olmadığından e-postayı query ile taşırız (U-07).
+function withPendingEmail(email: string): string {
+  const trimmed = email.trim();
+  return trimmed ? `/pending-approval?email=${encodeURIComponent(trimmed)}` : '/pending-approval';
+}
+
 const INITIAL: LoginFormValues = { email: '', password: '' };
 
 export function LoginForm({ tenantSlug }: LoginFormProps) {
@@ -61,12 +67,15 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
   const onSubmit = async (values: LoginFormValues) => {
     try {
       const userData = await login(values);
-      router.push(getSmartRedirect(userData));
+      // PENDING kullanıcıya JWT verilmediğinden /pending-approval'da user=null olur;
+      // e-postayı query ile taşı ki kendi adresini görebilsin (U-07).
+      const target = getSmartRedirect(userData);
+      router.push(target === '/pending-approval' ? withPendingEmail(values.email) : target);
     } catch (err) {
       // PENDING: backend JWT vermeden 403 atar — biz yine de /pending-approval'a yönlendiririz.
       const e = err as Error & { code?: string; rejectionReason?: string | null; canReapply?: boolean };
       if (e.code === 'HESAP_ONAY_BEKLENIYOR') {
-        router.push('/pending-approval');
+        router.push(withPendingEmail(values.email));
         return;
       }
       // REDDEDİLDİ: gerekçe + tekrar-başvuru ekranı (giriş bilgileri formda duruyor → reapply için kullanılır).
