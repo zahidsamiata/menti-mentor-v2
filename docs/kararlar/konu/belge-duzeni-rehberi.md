@@ -37,6 +37,15 @@
 > **İki "denetim" ayrımı (adına bak, hangisi olduğu anlaşılsın):** `oz-denetim/` = **belge/karar** iç denetimi
 > (kendi kararlarımızın hijyeni) · `kod-denetimi/` = **kod/ürün** denetimi (belge ne diyor ↔ kod ne yapıyor).
 
+## KURAL 2-B — EKSEN ÇAKIŞMASI: konu mu, yöntem mi? *(eklendi 2026-09-19)*
+`raporlar/` alt klasörleri iki farklı eksende tanımlı: **KONU** ekseni (`panel/` · `persona/` · `icerik/`) ve
+**YÖNTEM** ekseni (`kod-denetimi/` · `kesif/` · `bilanco/`). Bir belge hem KONU hem YÖNTEM klasörüne aitse (ör. menti personasının kod denetimi):
+- Belge **YÖNTEM** klasörüne yazılır (mevcut uygulama korunur).
+- ⛔ ZORUNLU: ilgili **KONU** klasörüne bir satırlık **ÇAPRAZ ATIF** bırakılır. Konu klasöründe `00-INDEX.md` yoksa oluşturulur; varsa satır eklenir.
+  Biçim: `<konu> kod denetimi → ../<yöntem-klasörü>/<dosya>.md (tarih, satır aralığı)`
+
+Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `panel/` altında arandı, bulunamadı, **bir tur tamamen tekrar edildi** (bkz. `docs/00-BELGE-HARITASI.md` B.0).
+
 ## KURAL 3 — Yaşayan mı, dondurulmuş mu (üst etiket)
 - Her belgenin **en üstünde** net etiket olur: **🔄 YAŞAYAN** (sürekli güncellenir; ör. `09-DURUM`) veya
   **📸 DONDURULMUŞ (tarih)** (o günün fotoğrafı, güncellenmez; ör. keşif raporları).

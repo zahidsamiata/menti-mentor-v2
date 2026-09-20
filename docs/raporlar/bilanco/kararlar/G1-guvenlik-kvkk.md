@@ -354,7 +354,7 @@ Kaynak: karar-defteri (güvenlik-denetimi 3.1 nüans) · Numara: NUMARASIZ
 [ ] PO notu: 
 ---
 
-**[G1-22] k-anonimlik (süper-admin küçük grup metrik yuvarlama)**
+**[G1-22] k-anonimlik (süper-admin küçük grup metrik yuvarlama)** (= madde 119, bkz. kararlar/00-KARAR-TAKIP.md)
 Ne: Süper-admin agregat metrikleri görürken çok küçük gruplarda (ör. 1-2 kişi) sayı bir kişiyi teşhis edebilir. Küçük grupları yuvarlayarak gizleme (k-anonimlik) uygulanmıyor.
 Neden başlanmıştı: NİYET: agregat verinin bireyi ifşa etmemesi (KVKK-agregat borcu).
 Nerede durdu: Kod yok (grep boş); iz zayıf.
@@ -437,7 +437,7 @@ Kaynak: karar-defteri (NUMARASIZ, prod admin-key) · Numara: NUMARASIZ
 [ ] PO notu: 
 ---
 
-**[G1-28] Sunucu/altyapı sertleştirme hiç ele alınmadı (canlı-öncesi ZORUNLU)**
+**[G1-28] Sunucu/altyapı sertleştirme hiç ele alınmadı (canlı-öncesi ZORUNLU)** (= madde 120, bkz. kararlar/00-KARAR-TAKIP.md · kod tarafı = K-14)
 Ne: Sunucu ve altyapı sertleştirme (Dokploy HTTP güvenliği, güvenlik duvarı, SSH, SSL, yedekleme) hiç ele alınmamış. Kod dışı bir altyapı işi ama canlıya çıkış öncesi zorunlu.
 Neden başlanmıştı: NİYET: canlı ortam güvenliği (temel altyapı sertleştirme).
 Nerede durdu: Kod dışı; aksiyon-numarası yok, hiç başlanmamış.

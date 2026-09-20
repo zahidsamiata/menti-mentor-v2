@@ -65,6 +65,7 @@ docs/
 | `00-CIKIS-PLANI.md` | **Canlı çıkış önceliği** (K0-K5 sınıflandırma + tur planı); "kullanıcı almaya başlamak için ne gerekli" | Çıkış planlaması / öncelik kararı |
 | `09-DURUM.md` | ŞU AN ne bitti/ne bekliyor (sık güncellenir) | Oturum başında |
 | `00-KARAR-TAKIP.md` | **NE KALDI:** açık iş + yarım + ölü kod + uygulanmamış karar tek bakışta (🔄 canonical takip; kanıtlı, kod-doğrulamalı) | **Her oturum başında** (arkada ne kaldı) |
+| `00-KART-INDEKSI.md` | **184 bilanço kartı köprüsü** (2026-09-19): her kart → konu · durum · madde no · KUYRUK satırı · canonical durum kaynağı. Durum TUTMAZ, yönlendirir (harita P-2 çözümü). | Bir kartın güncel durumunu/yerini ararken |
 | `10-yol-haritasi.md` | Aktif iş kuyruğu: üstte açık-işler hızlı-index · v1 (numaralı) · v2 backlog (14-28) | Sıradaki iş kararı |
 | `10-yol-tamamlananlar.md` | Biten v1 işlerinin kaydı (özet + PR/tarih; detay 09-DURUM) — 🔄 `10-yol-haritasi`'nın **refakat belgesi**. Alt-klasöre indirilmedi: ayrılırsa "ne kaldı ↔ ne bitti" ikilisi kopar, aynı kök seviyede durması gerek (referans sayısı düşük — 3 — ama canonical bağ güçlü). | "ne bitti" bakışı |
 | `dokploy-foto-volume-talimati.md` | Dokploy foto volume kurulum talimatı | 📸 Deploy/foto volume işi |

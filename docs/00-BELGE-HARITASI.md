@@ -110,6 +110,7 @@ Bu harita o kuralı **çiğnemez, tamamlar.** İkisinin işi farklı — karış
 # BÖLÜM B — ÇAKIŞMA / MÜKERRER TESPİTİ
 
 ## ⭐ B.0 — KÖK NEDEN: "yanlış dosyalama" DEĞİL, **eksen çakışması**
+> ✅ **ÇÖZÜLDÜ (2026-09-19):** Eksen çakışması `belge-duzeni-rehberi.md` **KURAL 2-B** ile kurala bağlandı (KONU+YÖNTEM çakışırsa → YÖNTEM klasörü + KONU klasörüne zorunlu çapraz atıf). Geriye dönük: `raporlar/persona/00-INDEX.md` ve `raporlar/panel/00-INDEX.md` oluşturuldu; beş kıyas bölümü (B.1-B.5) satır aralıklarıyla çapraz atıflandı; B.5 için `arsiv/admin-panelleri-tasarim-2026-08-02.md`'ye de atıf. Kaynak: PR (otonom/T-yapisal-ve-kuyruk-20260919).
 
 Bugünkü kayıp: mentör/menti kıyası `kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` **B.1 (satır 64-85)** ve **B.2 (satır 87-107)**'de duruyordu; `raporlar/panel/` altında arandı, bulunamadı, tur tekrarlandı.
 
@@ -162,6 +163,8 @@ Bazı belgeler `backend/` submodule'ünde yaşıyor. `backend/prisma/senaryo-ban
 |---|---|---|---|
 | **P-1** | **Aynı kalem iki numarayla, çapraz-atıfsız** — 7 doğrulanmış çift: madde 119↔G1-22 · 120↔G1-28 · 111↔G2-06 · 121↔G8-05 · 113↔G10-10 · 114↔G10-09 · 116↔G4-38. **47 kart alanı `Numara: NUMARASIZ`** | `kararlar/00-KARAR-TAKIP.md` F.6/F.7 ↔ `bilanco/kararlar/G*.md` | Tek kimlik = **G-numarası** (`otonom/00-KUYRUK.md` zaten onu kullanıyor: 65 G-atıfı ↔ 3 madde-atıfı). Madde tablosuna `=G1-28` sütunu |
 | **P-2** | **Kart durumu 3 yerde tutuluyor, indeksi yok** — kart (184) ↔ `00-KARAR-TAKIP` (41/184 = %22) ↔ `otonom/00-KUYRUK` (65/184). Hiçbiri diğer ikisinin kapsamını bilmiyor | aynı üçlü | Kart = durum canonical'i (KURAL 15); diğer ikisi **yalnız pointer** |
+| | ✅ **ÇÖZÜLDÜ (2026-09-19):** `docs/kararlar/00-KART-INDEKSI.md` köprü belgesi oluşturuldu — **184/184 kart** tek tabloda: konu · durum · madde no · KUYRUK satırı · **canonical durum kaynağı** (kuyrukta varsa KUYRUK, yoksa G-kartı). Belge durum TUTMAZ, yönlendirir. Kaynak: PR (otonom/T-yapisal-ve-kuyruk-20260919). | | |
+| | ✅ **P-1 ÇÖZÜLDÜ (2026-09-19):** 7 doğrulanmış numara çifti (119↔G1-22 · 120↔G1-28 · 111↔G2-06 · 121↔G8-05 · 113↔G10-10 · 114↔G10-09 · 116↔G4-38) çift-yönlü çapraz atıfla bağlandı (`00-KARAR-TAKIP` madde satırı ↔ G-kartı başlığı). | | |
 | **P-3** | **"Özet" belge ayrıntıyı KOPYALIYOR** — `00-KARAR-TAKIP` 112 benzersiz kod atıfı taşıyor, G-kartlarının **78'inden fazla**. KURAL 15 ("özet + numara") + KURAL 1 ("kopyalama yok") fiilen ihlal | `00-KARAR-TAKIP.md:87` ↔ `G1-guvenlik-kvkk.md:378-380` | Özet satırı = numara + tek cümle + kart linki |
 | **P-4** | "Yönetici" konusu **4 parça, 3 klasör, 0 indeks** | `persona/yonetici-persona` + `panel/stk-yonetici-strateji` + `panel/stk-yonetici-panel-envanteri` + `kod-denetimi/strateji-gercek-denetimi:109-175` | `panel/` altına `00-yonetici-INDEX.md` |
 | **P-5** | `panel/` klasörü **yarım denetlenmiş**, bu hiçbir yerde yazmıyor — 2 strateji denetlendi (B.3/B.4), 2 envanter denetlenmedi | `panel/` 4 dosya ↔ `strateji-gercek-denetimi:337` (E.1 "sonraki tur") | panel/ içine denetim-durumu notu |

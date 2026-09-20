@@ -250,7 +250,7 @@ Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 [ ] işleme al   [x] şimdilik alma   [ ] geçersiz   [ ] anlamadım / açıkla
 [ ] PO notu: 
 ---
-**[G4-38] Mentör/menti-kaynaklı "ters çekim" bottom-up büyüme kanalı**
+**[G4-38] Mentör/menti-kaynaklı "ters çekim" bottom-up büyüme kanalı** (= madde 116, bkz. kararlar/00-KARAR-TAKIP.md)
 Ne: Bireysel mentör/mentilerin kendi kurumlarını sisteme çekmesi (bottom-up/ters çekim). Multi-tenant altyapı hazır ama bir büyüme kanalına çevrilmemiş.
 Neden başlanmıştı: Bottom-up büyüme (bireyler kurumları getirir).
 Nerede durdu: Altyapı hazır, kanala çevrilmedi.
