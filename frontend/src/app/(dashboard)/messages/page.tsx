@@ -53,7 +53,10 @@ export default function MessagesInboxPage() {
             <div className="py-8 text-center space-y-1">
               <p className="text-sm font-medium">Henüz mesajınız yok</p>
               <p className="text-xs text-muted-foreground">
-                Bir mentöre mesaj gönderdiğinizde konuşmalarınız burada görünür.
+                {/* P-09: boş durum metni role göre — mentör "mentöre mesaj gönder" görmemeli. */}
+                {user?.role === 'MENTOR'
+                  ? 'Bir menti sizinle iletişime geçtiğinde konuşmalarınız burada görünür.'
+                  : 'Bir mentöre mesaj gönderdiğinizde konuşmalarınız burada görünür.'}
               </p>
             </div>
           ) : (

@@ -199,14 +199,24 @@ export default function MentorDashboardPage() {
       </div>
 
       {/* ── Onay Kuyruğu ─────────────────────────────────────────────────────── */}
-      {(pendingMeetings?.items?.length ?? 0) > 0 && (
-        <Card className="border-amber-300 dark:border-amber-700">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-base">Toplantı Talepleri</CardTitle>
+      {/* P-09: kart artık boşken de görünür — yeni mentör "talep kartı kayboldu" yerine
+          ne beklemesi gerektiğini görür. */}
+      <Card className="border-amber-300 dark:border-amber-700">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-base">Toplantı Talepleri</CardTitle>
+          {(pendingMeetings?.items?.length ?? 0) > 0 && (
             <Badge variant="warning" className="text-xs">
               {pendingMeetings!.items.length} bekliyor
             </Badge>
-          </CardHeader>
+          )}
+        </CardHeader>
+        {(pendingMeetings?.items?.length ?? 0) === 0 ? (
+          <CardContent>
+            <p className="text-sm text-muted-foreground text-center py-6">
+              Henüz toplantı talebiniz yok. Bir menti sizinle görüşmek istediğinde talepleri burada onaylayıp yanıtlayabilirsiniz.
+            </p>
+          </CardContent>
+        ) : (
           <CardContent className="divide-y divide-border">
             {pendingMeetings!.items.map((m) => {
               const start = new Date(m.startsAt).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' });
@@ -277,8 +287,8 @@ export default function MentorDashboardPage() {
               );
             })}
           </CardContent>
-        </Card>
-      )}
+        )}
+      </Card>
 
       {/* ── Filtrelerim ─────────────────────────────────────────────────────── */}
       <Card>
