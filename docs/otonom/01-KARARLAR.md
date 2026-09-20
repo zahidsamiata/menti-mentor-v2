@@ -39,6 +39,12 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-15 | Çok-kuruma üye kurumlar arası geçiş | 0 | ⬜ boş |
 | KARAR-16 | Yöneticiye eşleştirme kontrolleri | 0 | ⬜ boş |
 | KARAR-17 | Kurum yöneticisi davetsiz önizleme | 0 | ⬜ boş |
+| KARAR-23 | Kurum bildirimleri açılsın mı (onay/ret/düzeltme maili) | 1 (U-04) | ⬜ boş · W §4.1 · HUKUKİ |
+| KARAR-24 | Hata iz kaydı (stack) panele açılsın mı | 0 (V-02 kısmı) | ⬜ boş · W §4.2 · KVKK |
+| KARAR-25 | Gerçek yedek nereye yazılsın | 0 (G1-28 🔴) | ⬜ boş · W §4.3 · KVKK |
+| KARAR-26 | İki yedek tablo (S26/S37) düşürülsün mü | 0 (DB) | ⬜ boş · W §4.4 · GERİ DÖNÜLMEZ |
+| KARAR-27 | Dış hata izleme servisi kurulsun mu | 0 | ⬜ boş · W §2.A · KVKK |
+| KARAR-28 | Ölü LLM/OpenAI env silinsin mi | 0 | ⬜ boş · Bölüm 4 · SİLME PROTOKOLÜ |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
 | KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
 
@@ -451,4 +457,94 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** B — çıplak ret + sessizlik en akut yara; bildirim + nazik mesaj bunu orta eforla kapatır. Alternatif öneri (A) ayrı bir tur olarak sonra gelebilir (eşleştirme motoru olgunlaşınca). (Bu senin ürün kararın, önerime güvenme.)
 ⚠️ KARAR-20 İLE İLİŞKİ (aynı tema, kümelenmeli): KARAR-20 "mentör reddedebilsin mi" soruyordu (F-17/G4-25 kaynaklı, "ret akışı hiç yok" varsayımıyla). Panel denetimi gösterdi ki **meeting-talebi reddi KODDA VAR** (`mentor/page.tsx:257-274` Onayla/Reddet, MT11 ✅) — eksik olan reddin DENEYİMİ. Yani KARAR-20'nin "olsun mu" sorusu meeting düzeyinde zaten "evet"; KARAR-22 (bu kart) "nasıl olsun"u soruyor. İkisi birlikte cevaplanabilir; KARAR-22 ayrıntılı/kanıtlı olanı.
 **Cevap vermezsen:** P-05 (ret deneyimi) ve F-17 (G4-25 ret yumuşatma) atlanır. Başka iş etkilenmez.
+**CEVAP:**
+
+---
+
+### KARAR-23 · Kurum başvuru bildirimleri (onay/ret/düzeltme e-postası) açılsın mı? (1 işi açar)  [ÜRÜN KARARI · HUKUKİ]
+**Şu an ne var:** Kurum başvuru bildirimi ana şalteri kapalı. Platform yöneticisi bir STK başvurusunu onaylayınca/reddedince/düzeltme isteyince panelde "başarılı" görüyor ama kuruma **hiçbir e-posta gitmiyor** (yalnız log). Oysa bekleme ekranı kuruma "e-posta ile bilgilendirileceksiniz" sözü veriyor. Kanıt: `config.ts:88` (`TENANT_NOTIFICATIONS_ENABLED` varsayılan false), `platformController.ts:298/325/371`, `tenantNotifications.ts:116-122`, `pending-review/page.tsx:28-29`.
+**Sorun ne:** Genel/edu e-postalı bir kurum belirsiz süre askıda kalıyor; "düzeltme istendi" durumunda ne düzelteceğini bilemediği için asla düzeltmiyor. İlk izlenim burada kayboluyor.
+**Neden sana soruyorum:** Teknik değil: ret ve düzeltme metinleri kuruma giden, **hukuki sonucu olabilecek** metinler ve içerikleri henüz gözden geçirilmedi.
+**Seçenekler:**
+**A) Aç + metinleri şimdi gözden geçir** · Kullanıcı: kurum onay/ret/düzeltme mailini alır · Ne kazanırsın: başvuru döngüsü kapanır · Ne kaybedersin: metin gözden geçirme eforu, yanlış ton hukuki risk · Süre M · Geri alınır (env) · Migration yok
+**B) Aç ama yalnız ONAY mailini gönder, ret/düzeltmeyi beklet** · Kullanıcı: onayda mail, rette yok · Ne kazanırsın: en riskli metinler beklerken onay akışı çalışır · Ne kaybedersin: ret/düzeltme hâlâ sessiz · Süre M · Geri alınır · Migration yok
+**C) Kapalı bırak, yalnız uygulama-içi durum göstergesi (U-04)** · Kullanıcı: mail yok ama panelde durumu görür · Ne kazanırsın: hukuki metin riski yok · Ne kaybedersin: kurum uygulamaya girmeden haber alamaz · Süre S · Geri alınır · Migration yok
+**Karşılaştırma:** İlk kurumları hızlı almak istiyorsan ve metinlere güveniyorsan A. Metinler henüz hazır değilse B (onay akışını aç, hukuki metinleri beklet). Hiç e-posta göndermeden yalnız uygulama-içi bilgilendirmeyle idare edeceksen C.
+**Benim önerim:** B — en riskli olan ret/düzeltme metinleri; onları beklerken onay maili en çok işi kapatır. (Bu senin ürün+hukuk kararın, önerime güvenme.)
+**Cevap vermezsen:** U-04 e-posta tarafı etkisiz kalır (03-PO env adımı yapılsa bile ton riski çözülmez); W risk #4 sürer.
+**CEVAP:**
+
+---
+
+### KARAR-24 · Hata "iz kaydı" (stack) platform paneline açılsın mı? (0 işi açar — V-02 kısmı)  [ÜRÜN KARARI · KVKK]
+**Şu an ne var:** Bir sunucu hatası olduğunda ayrıntısı (hangi satırda patladı) hiçbir ekranda görünmüyor; KVKK gerekçesiyle bilinçli olarak gizlenmiş (`platformController.ts:182-185`). Panelde birbirinin aynısı "Beklenmedik sunucu hatası" satırları görünüyor. Kanıt: W §A.4, §4.2.
+**Sorun ne:** Bir hata çıktığında hangi ekranın, hangi kurumun, hangi kullanıcının etkilendiği ayırt edilemiyor; teşhis için veritabanına elle sorgu atmak gerekiyor.
+**Neden sana soruyorum:** Hatanın ayrıntısını panele koymak, içinde kazara kişisel veri/iç detay taşıyabilir — KVKK dengesi ürün kararı.
+**Seçenekler:**
+**A) Ara yol: yalnız istek bağlamı (adres + kullanıcı no + kurum no; e-posta/ad ASLA)** · Kullanıcı (operatör): hangi uç/kurum patladığını görür · Ne kazanırsın: teşhis kolaylaşır, yeni kişisel-veri yüzeyi açılmaz · Ne kaybedersin: tam iz (stack) yok, derin teşhis hâlâ log/DB · Süre M · Geri alınır · Migration yok
+**B) Tam iz kaydını platform yöneticisine (filtreli) göster** · Ne kazanırsın: en hızlı teşhis · Ne kaybedersin: iz içinde kazara kişisel veri/iç detay sızma riski, KVKK yüzeyi büyür · Süre M · Geri alınır
+**C) Hiçbir şey açma; teşhis yalnız DB erişimiyle** · Ne kazanırsın: sıfır yeni yüzey · Ne kaybedersin: her teşhis elle SQL, yavaş ve operatöre bağımlı · Süre yok
+**Karşılaştırma:** Teşhisi hızlandırıp KVKK yüzeyini büyütmemek istiyorsan A yeter (E1'i kapatır). En derin teşhis şartsa ve filtreye güveniyorsan B. Hiç risk almak istemiyorsan C — ama teşhis yavaş kalır.
+**Benim önerim:** A — E1'i kapatır, yeni kişisel-veri yüzeyi açmaz.
+**Cevap vermezsen:** V-02'nin "iz kaydını panele aç" kısmı belirsiz kalır; 500 teşhisi elle SQL'e bağımlı sürer.
+**CEVAP:**
+
+---
+
+### KARAR-25 · Gerçek yedek nereye yazılsın? (0 işi açar — G1-28 🔴 blokerine bağlı)  [ÜRÜN KARARI · KVKK · ALTYAPI]
+**Şu an ne var:** Düzenli/bütün-veritabanı yedeği YOK; 6 saatten eski veri kaybına karşı sıfır koruma. Üstelik haftalık silme işi Pazar 03:00 UTC çalışıyor. Kanıt: W §B.1, `cronScheduler.ts:414`. = `madde 120 / [G1-28]` 🔴 çıkış blokeri.
+**Sorun ne:** Pazartesi mesaide fark edilen bir sorunda Neon'un 6 saatlik geri-alma penceresi çoktan kapanmış olur → veri kalıcı gider.
+**Neden sana soruyorum:** Üç seçenek farklı maliyet/hukuk profiline sahip; özellikle biri KVKK'da "üçüncü ülkeye veri aktarımı" sayılabilir (proje zaten bir aktarım envanteri tutuyor).
+**Seçenekler:**
+**A) Dokploy diskine (volume) yazan cron** · Ne kazanırsın: veri VPS içinde kalır, KVKK aktarımı yok · Ne kaybedersin: aynı sunucu tamamen giderse yedek de gider; cron+script eforu · Süre M · Migration yok
+**B) Neon ücretli plan (pencere 6 saat → 30 gün)** · Ne kazanırsın: kod işi yok, en az emek · Ne kaybedersin: aylık ücret; yine tek sağlayıcıya bağımlı · Süre S (hesap) · Migration yok
+**C) GitHub Actions yedek dosyası (artifact)** · Ne kazanırsın: repo altyapısında, kolay · Ne kaybedersin: ⚠️ KVKK'da **üçüncü ülkeye aktarım** sayılabilir (aktarım envanterine eklenmeli), ABD sunucu · Süre M · Migration yok
+**Karşılaştırma:** KVKK'da veriyi yurt içinde/VPS'te tutmak istiyorsan A. En az emekle pencereyi büyütmek istiyorsan B (ama tek sağlayıcı riski sürer). Repo araçlarını kullanmak kolayına gidiyorsa C — ama aktarım envanteri ve hukuki değerlendirme şart.
+**Benim önerim:** Bu senin ürün+hukuk kararın, önerime güvenme — yalnız KVKK açısından A veya B, C'den daha güvenli. İdeali: A/B + restore (geri yükleme) provası.
+**Cevap vermezsen:** 🔴 çıkış blokeri (G1-28) açık kalır; 03-PO A#2 (yedek + restore provası) yapılamaz.
+**CEVAP:**
+
+---
+
+### KARAR-26 · İki yedek tablo (S26/S37) düşürülsün mü? (0 işi açar — DB)  [ÜRÜN KARARI · DB · GERİ DÖNÜLMEZ]
+**Şu an ne var:** `MentorshipAgreement_yedek_20260830` (150 satır, 21 gündür) ve `CertificationOption_yedek_20260909` (20 satır, 11 gündür) canlı veritabanında duruyor; ikisi de güncel şemada yok. Kanıt: W §4.4, `00-KARAR-TAKIP.md:189`.
+**Sorun ne:** Şemada olmayan bu tablolar, bir `migrate`/`db push` sırasında "fazlalık" görülüp silinmek istenebilir — yani koruma amaçlı yedek, koruduğu veriyi kaybetme riski taşıyor. Tek savunma bir insan kuralı (`--accept-data-loss` yasağı).
+**Neden sana soruyorum:** DROP (tablo silme) geri dönülmez bir veri işlemidir; "artık gerek yok" (regresyon görülmedi) kararını yalnız sen verebilirsin.
+**Seçenekler:**
+**A) Şimdi DROP et (regresyon yok teyidiyle)** · Ne kazanırsın: drift + kazara-silme riski biter, şema temiz · Ne kaybedersin: yedek verisi kalıcı gider · Süre S · Migration/DB · **GERİ DÖNÜLMEZ**
+**B) Beklet (regresyon penceresi dolana kadar)** · Ne kazanırsın: veri elde kalır (gerekirse geri dönülür) · Ne kaybedersin: drift/DROP riski sürer, yedekler birikmeye devam eder · Süre yok
+**C) Kalıcı sakla — şemaya "arşiv tablo" olarak ekle** · Ne kazanırsın: hem korunur hem drift biter · Ne kaybedersin: şema kirlenir, migration eforu · Süre M · Migration
+**Karşılaştırma:** İlgili işlerin regresyonsuz çalıştığından eminsen A (temiz). Emin değilsen B (veri elde kalsın). Bu yedekleri kalıcı kanıt olarak tutmak istiyorsan C.
+**Benim önerim:** Bu senin veri kararın, önerime güvenme — regresyon teyitliyse A, değilse B. ⛔ Bulutta yapılamaz (canlı Neon gerekir), 03-PO C#10'da.
+**Cevap vermezsen:** Drift + migrate DROP riski sürer.
+**CEVAP:**
+
+---
+
+### KARAR-27 · Dış hata izleme servisi (ör. Sentry) kurulsun mu? (0 işi açar — izleme)  [ÜRÜN KARARI · KVKK · ALTYAPI]
+**Şu an ne var:** Dış hata izleme / performans servisi YOK. Bu tur frontend'e hata ekranı eklendi (V-12) ama hataları **merkezî toplayan** bir yer yok; backend hatası yalnız `SystemLog`'ta. Kanıt: W §2.A, §4#20.
+**Sorun ne:** Canlıda bir hatayı proaktif görmenin merkezî bir yolu yok; kullanıcı söylemeden çoğu hata fark edilmiyor.
+**Neden sana soruyorum:** Dış servis kişisel veri/iç detay taşıyabilir (KVKK üçüncü ülke) + aylık maliyet + entegrasyon eforu — ürün+hukuk kararı.
+**Seçenekler:**
+**A) Dış servis (Sentry vb.), kişisel-veri temizleme ile** · Ne kazanırsın: proaktif alarm + hata toplama · Ne kaybedersin: KVKK aktarım yüzeyi, aylık ücret, entegrasyon · Süre M/L · Geri alınır
+**B) Kendi sunucumuzda hata toplama (self-host)** · Ne kazanırsın: veri dışarı çıkmaz · Ne kaybedersin: kurulum + bakım yükü · Süre L
+**C) Kurma; iç `SystemLog` + `/health` + (KARAR-24 bağlamı) ile yetin** · Ne kazanırsın: yeni yüzey/maliyet yok · Ne kaybedersin: proaktif alarm yok, teşhis elle · Süre yok
+**Karşılaştırma:** Ölçek büyüyorsa ve proaktif alarm şartsa A (en yaygın) veya veri hassasiyeti yüksekse B. Erken aşamadaysan C + KARAR-24 kısa vadede yeterli olabilir.
+**Benim önerim:** Kısa vadede C + KARAR-24; kullanıcı sayısı artınca A/B. (Bu senin kararın.)
+**Cevap vermezsen:** Dış izleme gelmez; V-02 (iç izleme) ile yetinilir — kabul edilebilir bir ara durum.
+**CEVAP:**
+
+---
+
+### KARAR-28 · Ölü LLM/OpenAI ortam değişkenleri silinsin mi? (0 işi açar — SİLME PROTOKOLÜ)  [ÜRÜN KARARI · SİLME PROTOKOLÜ]
+**Şu an ne var:** `LLM_PROVIDER` / `OPENAI_API_KEY` / `OPENAI_MODEL` `config.ts`'te okunuyor ama **hiçbir yerde kullanılmıyor** (ice-breaker/LLM yolu koddan silinmiş). Bu tur `.env.example`'da OPENAI_* ölü işaretlendi, LLM_PROVIDER eklenmedi. Kanıt: `config.ts:65-67`, W §D.3.
+**Sorun ne:** Ölü değişkenler `.env.example`'da sır (API anahtarı) koymaya davet ediyor (yanıltıcı). Ama silme protokolü gereği "kullanılmıyor" tek başına silme gerekçesi değil.
+**Neden sana soruyorum:** `config.ts` alanlarının ve `.env.example` satırlarının SİLİNMESİ = kod silme → SİLME PROTOKOLÜ PO kararı gerektirir. Niyet: ileride LLM (ice-breaker) geri gelecek mi?
+**Seçenekler:**
+**A) Sil (config alanları + .env.example satırları; önce arşiv belgesine yaz)** · Ne kazanırsın: yanıltıcı ölü env gider, sır ifşa daveti biter · Ne kaybedersin: LLM geri gelirse küçük iskele yeniden yazılır · Süre S · Geri alınır (arşivden) · Migration yok
+**B) Bırak ama ölü-işaretli (bugünkü durum)** · Ne kazanırsın: iş yok, iskele durur · Ne kaybedersin: yanıltıcı satırlar kalır · Süre yok
+**C) Canlandır (LLM/ice-breaker yolunu geri getir)** · Ne kazanırsın: ice-breaker özelliği · Ne kaybedersin: büyük iş + LLM maliyeti + KVKK (prompt'a giden veri) · Süre L · Migration yok
+**Karşılaştırma:** LLM planın yoksa A (temiz, arşivli). Kararı ertelemek istiyorsan B (bugünkü ölü-işaret yeterince uyarıyor). Yakında ice-breaker düşünüyorsan C.
+**Benim önerim:** A — LLM yolu bilinçli kaldırılmış, ölü env yanıltıcı; arşivleyerek silmek temiz. (İleride LLM planın varsa B.)
+**Cevap vermezsen:** OPENAI_*/LLM_PROVIDER ölü-işaretli kalır — zararsız ama dağınık.
 **CEVAP:**

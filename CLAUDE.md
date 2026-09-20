@@ -185,6 +185,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - Genel tanıtım (dondurulmuş onboarding): docs/arsiv/PROJECT_STATUS.md — güncel durum İÇİN DEĞİL (bkz. 09-DURUM). ⚠️ GÜNCELLEME (2026-08-28, G9-09): kökten `docs/arsiv/`'e taşındı; güncel durum canonical = `docs/kararlar/09-DURUM.md`.
 - Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
 - Geçmiş raporlar: docs/raporlar/
+- **PO'nun elle yapacakları (kod dışı: Dokploy/SMTP/Neon/env): docs/otonom/03-PO-ELLE-ISLER.md** — ⚠️ GÜNCELLEME (2026-09-19): W+X denetimlerinden çıkan, kodla çözülemeyen işler burada; ajan bunları kuyruğa yazmaz, PO tek tek yapar.
 - Yeni bir işe başlarken: önce docs/kararlar/09-DURUM.md oku (nerede kaldık).
 
 ## Push Öncesi — ZORUNLU
