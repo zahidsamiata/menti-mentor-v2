@@ -257,3 +257,38 @@ Sonra 02-ILERLEME.md'nin EN BAŞINA özet:
   PO'NUN KENDİ YAPMASI GEREKENLER: altyapı/hesap işleri
 
 PO'nun turdan sonra okuyacağı TEK dosya 02-ILERLEME, cevaplayacağı TEK dosya 01-KARARLAR.
+
+═══════════════════════════════════════════════
+10. ⛔ DURMAMA KURALI (PO kararı 2026-09-20)
+═══════════════════════════════════════════════
+Önceki tur 49 tane 🟢 iş dururken K-20 yapıp kapandı. KABUL EDİLMEZ.
+
+D.1 KAPANIŞ KOŞULU — K-20 belge senkronunu YALNIZ şu durumda yap:
+    kuyrukta durumu BEKLIYOR olan ve kapısı 🟢 olan HİÇBİR iş kalmadıysa.
+    ⛔ Bir tane bile 🟢 BEKLIYON iş varsa K-20 YAPMA, TURU KAPATMA, sonrakine geç.
+    Her iş bitiminde kaç 🟢 kaldığını SAY ve 02-ILERLEME'ye yaz.
+
+D.2 KENDİ KAPSAMINI DARALTMA — "yalnız küçük/güvenli olanları seçeyim" YAPMA.
+    Zor görünen işi küçült ama ATLAMA. Gerçekten yapılamıyorsa BAŞARISIZ
+    işaretle, sebebini yaz, sonrakine geç.
+
+D.3 BAĞLAM YÖNETİMİ — uzun gitmenin asıl yolu:
+    · Keşif/okuma işlerini PARALEL ALT-AJANLA yap, ana bağlamı temiz tut
+    · Bir dosyanın yalnız gereken kısmını oku, tamamını değil
+    · İş bitince ayrıntıları bağlamda TUTMA — özeti 02-ILERLEME'ye yaz, devam et
+    · Bağlam %70'i geçince /compact KULLAN ve DEVAM ET
+      ⛔ Sıkıştırma sonrası 00-KUYRUK + 02-ILERLEME'yi TEKRAR OKU, kaldığın yerden sür
+
+D.4 BAĞLAM YİNE DE DOLARSA:
+    ⛔ K-20 YAPMA — K-20 "kuyruk bitti" sinyalidir, "kesildim" değil.
+    Yap: son commit+push → 02-ILERLEME'nin SONUNA tek satır:
+      "TUR YARIM KALDI — <son biten iş> · kalan 🟢: <sayı> · sıradaki: <iş no>"
+    → DUR. PO sabah aynı promptu gönderecek.
+
+═══════════════════════════════════════════════
+11. ⛔ ARA KAYIT (pazarlık dışı)
+═══════════════════════════════════════════════
+Her iş bitince ANINDA commit + push. Biriktirme, "sonra hepsini pushlarım" deme.
+Tur yarıda kalırsa push EDİLMEMİŞ iş KAYBOLUR.
+Gerekçe (2026-09-19): üç tur durdu; push eden kurtuldu, etmeyen ikisinin
+saatlerce süren emeği tamamen kayboldu.
