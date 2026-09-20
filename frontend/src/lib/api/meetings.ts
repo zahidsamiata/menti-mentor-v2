@@ -10,6 +10,12 @@ export interface MentiProfile {
   expectationCategories: string[];
 }
 
+/** Görüşme listesinde karşı taraf olarak gösterilen mentör (backend listMeetings include'u). */
+export interface MentorProfile {
+  id: string;
+  fullName: string;
+}
+
 export interface MeetingMatch {
   id: string;
   predictedScore: number;
@@ -29,6 +35,7 @@ export interface Meeting {
   notes: string | null;
   requestMessage: string | null;
   menti?: MentiProfile;
+  mentor?: MentorProfile;
   match?: MeetingMatch | null;
   awaitingMentorApproval?: boolean;
 }
