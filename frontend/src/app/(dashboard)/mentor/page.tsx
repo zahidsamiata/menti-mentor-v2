@@ -17,6 +17,7 @@ import { useQuery } from '@/hooks/useQuery';
 import { matchingApi, mentorFilterApi } from '@/lib/api/matching';
 import { meetingsApi } from '@/lib/api/meetings';
 import { mentorMetricsApi, type MentorDashboardMetrics } from '@/lib/api/mentorMetrics';
+import { mentorAppreciation } from '@/lib/mentorAppreciation';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
@@ -196,6 +197,13 @@ export default function MentorDashboardPage() {
             />
           );
         })}
+      </div>
+
+      {/* P-14: emeği anlatan takdir cümlesi — "kendi etkim" yalnız sayısaldı. */}
+      <div className="rounded-2xl border border-primary/20 bg-primary/5 px-5 py-3">
+        <p className="text-sm text-foreground/90">
+          💚 {mentorAppreciation(metrics ?? null)}
+        </p>
       </div>
 
       {/* ── Onay Kuyruğu ─────────────────────────────────────────────────────── */}
