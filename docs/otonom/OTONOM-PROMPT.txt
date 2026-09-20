@@ -11,8 +11,16 @@ Model: Fable 5 · izin sorma kapalı
 2) docs/otonom/02-ILERLEME.md → yoksa oluştur; varsa nerede kalınmış
 3) docs/otonom/00-KUYRUK.md   → iş listesi + şerit dağılımı
 4) docs/kararlar/09-DURUM.md  → YALNIZ en üstteki tarihli bölüm
-   ⚠️ "TEK BAKIŞTA" başlıklı bölüm ESKİ KATMAN (2026-08-19) — OKUMA, güvenme.
+   ⚠️ ters-kronolojik katmanlı; "TEK BAKIŞTA" başlıklı bölüm GÜNCEL DEĞİL — OKUMA, güvenme.
 5) docs/raporlar/kesif/gercek-kullanici-testi-bulgulari-2026-09-09.md
+6) docs/otonom/03-PO-ELLE-ISLER.md → ajanın YAPAMAYACAĞI işler; buradaki bir
+   kalemi kuyruğa ALMA, PO'ya bırak
+7) docs/00-BELGE-HARITASI.md → bir belge aramadan ÖNCE buraya bak
+8) docs/kararlar/00-KART-INDEKSI.md → bir kalemin durumu için
+
+⭐ KUYRUK AŞAMALARI (altı aşama, 00-KUYRUK'ta):
+  K (kullanıcı testi) · F (bilanço devri) · P (panel denetimi) ·
+  E (hayalet envanter) · U (uçtan uca yolculuk) · V (operasyonel hazırlık).
 
 02-ILERLEME.md'nin başına yaz: tur no · başlangıç saati · aktif şeritler.
 
@@ -41,7 +49,13 @@ Bir kutu bile boşsa → merge ETME, PR bırak, 02-ILERLEME'ye sebebi yaz, sonra
 Merge sonrası: çatı submodule pointer'ını backend main HEAD'e re-bump et (sarkma bırakma).
 Merge sonrası 02-ILERLEME'ye ekle: "CANLIDA BAK: <kullanıcı ne görmeli>"
 
-🟡 = PR'da durur (riskli/geniş). 🔴 = ilgili KARAR cevaplanmadan DOKUNULMAZ.
+⭐ KAPI POLİTİKASI (PO gevşetti, 2026-09-19):
+🟢 VARSAYILANDIR. Bir iş yalnız şu üç istisnadan birine giriyorsa 🟡 kalır:
+  1. migration/seed gerektiriyorsa
+  2. hassas dosyaya dokunuyorsa (auth/yetkilendirme · KVKK/rıza/veri imha ·
+     matching/eşleştirme/skorlama)
+  3. canlı veriye geri dönülmez dokunuyorsa
+🟡 = yap ama PR'da durur, merge etme. 🔴 = ilgili KARAR cevapsız → DOKUNMA, atla, sonrakine geç.
 
 ⛔ DEĞİŞMEYEN İKİ KURAL:
 1. DB/migration: canlı = lokal AYNI Neon (restore penceresi 6 saat). Migration YALNIZ ilgili KARAR
@@ -152,6 +166,40 @@ Her şerit kendi dalını kullanır, kendi PR'ını açar.
 Dal adı: otonom/K-xx-kisa-ad-YYYYMMDD
 02-ILERLEME.md'ye yazarken TEK SEFERDE ekle (append), başkasının satırını silme, çakışırsan yeniden dene.
 Git kilidi: iki şerit aynı anda commit atmasın; sıra bekle.
+
+═══════════════════════════════════════════════
+5.5 ⛔ ARA KAYIT — PAZARLIK DIŞI
+═══════════════════════════════════════════════
+Her iş bitince ANINDA commit + push. Biriktirme, "sonra hepsini pushlarım" deme.
+Tur yarıda kalırsa push EDİLMEMİŞ iş KAYBOLUR.
+Gerekçe (2026-09-19): üç tur token limitinde durdu; push eden kurtuldu,
+etmeyen ikisinin saatlerce süren emeği tamamen kayboldu.
+Bağlam/token azalmaya başladığında: son commit+push → 02-ILERLEME.md'ye
+"TUR YARIM KALDI — <hangi iş>" satırı → DUR. Yeni iş BAŞLATMA.
+
+═══════════════════════════════════════════════
+5.6 PO İŞİ / AJAN İŞİ AYRIMI
+═══════════════════════════════════════════════
+⛔ Bir iş Dokploy/sunucu/hesap ayarı gerektiriyorsa AJAN YAPAMAZ.
+Kuyrukta öyle bir satır görürsen: YAPMAYA ÇALIŞMA, Durum'u değiştirme,
+03-PO-ELLE-ISLER.md'de karşılığı var mı bak, yoksa oraya ekle, devam et.
+
+═══════════════════════════════════════════════
+5.7 ÇALIŞMA ORTAMI — ÜÇ MOD
+═══════════════════════════════════════════════
+· YEREL: yürütme yerelde; merge, DB erişimi, pointer bump YAPILABİLİR.
+· BULUT (claude.ai/code): yalnız repodaki dosyaları görür; dal+PR gönderir,
+  main'e MERGE ETMEZ; Neon/Dokploy YOK → migration/seed atlanır.
+· REMOTE CONTROL: yerel oturum + telefondan kontrol. Yürütme YERELDE kalır →
+  merge edebilir, DB'ye erişebilir, pointer bump yapabilir. Bulut bunları yapamaz.
+
+═══════════════════════════════════════════════
+5.8 ⛔ YASAK BÖLGE
+═══════════════════════════════════════════════
+server.ts'in rate limit / trust proxy kısmına DOKUNMA.
+K-14 ve F-04 aynı dosyada; yanlış trust proxy ayarı TÜM rate limit'i
+sessizce çökertir ve fark edilmesi zordur. Bu iş PO'nun başında olduğu
+ayrı bir tura aittir.
 
 ═══════════════════════════════════════════════
 6. HER İŞ İÇİN DÖNGÜ
