@@ -4,7 +4,7 @@
  * Organism: LoginForm
  *
  * AuthProvider.login ile bağlıdır. Başarılı girişte tenant bilgisi
- * AuthProvider'dan TenantProvider'a köprülenecek (Sprint 14'te tam entegrasyon).
+ * TenantProvider üzerinden okunur (useTenant).
  *
  * Hata hiyerarşisi:
  *  1. Zod validasyon hataları → alan bazlı (FormField altında)
