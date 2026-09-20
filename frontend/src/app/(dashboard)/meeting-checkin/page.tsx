@@ -5,7 +5,10 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
+import { useQuery } from '@/hooks/useQuery';
 import { meetingsApi } from '@/lib/api/meetings';
+import { countCompletedMeetings } from '@/lib/mentiMetrics';
+import { meetingMilestone, type MeetingMilestone } from '@/lib/milestones';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
@@ -32,7 +35,15 @@ function MeetingCheckInContent() {
 
   const meetingId = params.get('meetingId') ?? '';
 
+  // P-07: kilometre taşı için tamamlanan görüşme sayısı (bu görüşme henüz COMPLETED değil → +1).
+  const { data: meetingsData } = useQuery(
+    () => meetingsApi.list(api, {}),
+    [api],
+    { enabled: !!user },
+  );
+
   const [step, setStep] = useState<'quick' | 'deep' | 'done'>('quick');
+  const [milestone, setMilestone] = useState<MeetingMilestone | null>(null);
 
   // Zorunlu alanlar
   const [overallRating,  setOverallRating]  = useState<number | null>(null);
@@ -71,19 +82,24 @@ function MeetingCheckInContent() {
     const result = await meetingsApi.submitCheckIn(api, meetingId, payload);
     setSubmitting(false);
     if (result.ok) {
+      // Bu görüşme dahil sayı = önceki tamamlananlar + 1 (bu görüşme henüz COMPLETED değil).
+      const completedIncludingThis = countCompletedMeetings(meetingsData?.items ?? []) + 1;
+      setMilestone(meetingMilestone(completedIncludingThis));
       setStep('done');
-      setTimeout(() => router.push(isMentor ? '/mentor' : '/menti'), 2000);
+      setTimeout(() => router.push(isMentor ? '/mentor' : '/menti'), 2500);
     } else {
       setError(result.error?.message ?? 'Gönderilemedi.');
     }
   }
 
   if (step === 'done') {
+    const m = milestone ?? meetingMilestone(0);
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <p className="text-5xl">🎉</p>
-        <h2 className="text-xl font-semibold">Teşekkürler!</h2>
-        <p className="text-sm text-muted-foreground">Görüşüz kaydedildi, panele yönlendiriliyorsunuz.</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4 text-center px-4 animate-fade-in">
+        <p className="text-6xl">{m.emoji}</p>
+        <h2 className="text-xl font-semibold">{m.title}</h2>
+        <p className="text-sm text-muted-foreground">{m.subtitle}</p>
+        <p className="text-xs text-muted-foreground">Panele yönlendiriliyorsunuz…</p>
       </div>
     );
   }
