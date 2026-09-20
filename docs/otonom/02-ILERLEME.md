@@ -4,6 +4,34 @@
 
 ---
 
+## TUR ÖZETİ — TUR Z (2026-09-20) · W+X denetimleri kuyruğa + 3 güvenlik/sağlamlık düzeltmesi
+
+**Neden bu tur:** 2026-09-19'daki iki büyük denetim (X uçtan-uca kurum yolculuğu, W operasyonel hazırlık) rapor olarak duruyordu ama kuyruğa hiç işlenmemişti (öksüz bulgu). Bu tur işledi + birbirine dokunmayan 3 açığı kapattı.
+
+### ⭐ CANLIDA BAK (PO gözle/operatör bakacak) — 3 düzeltme canlıya alındı
+1. **Güvenlik (IDOR):** Bir mentör, başka bir mentörün ID'sini kullanarak onun adına "görünürlük opt-in" kaydı **artık yazamıyor** — 403 alıyor (kendi adına veya ADMIN yazabilir). *(backend PR #76)*
+2. **Sağlamlık (/health):** Veritabanı çökerse `/health` artık **503** dönüyor (eskiden "her şey yolunda" diyordu). Docker konteyneri gerçekten "unhealthy" görünür. *(backend PR #77)*
+3. **Beyaz ekran gitti:** Bir sayfa çökerse kullanıcı beyaz ekran yerine **"Bir şeyler ters gitti" + Tekrar dene / Ana sayfaya dön** görüyor; bilinmeyen adres → **404 ekranı**. Hata ayrıntısı kullanıcıya gösterilmiyor (güvenlik). *(çatı PR #197)*
+
+### Belgeye işlenenler (kod değil, kuyruk/karar)
+- **`00-KUYRUK` AŞAMA U** (X raporu, U-01..U-19) + **AŞAMA V** (W raporu, V-01..V-15). Numaralar "aday" — PO onaylayınca kesinleşir.
+- **`.env.example`** 17 belgelenmemiş ortam değişkeni eklendi + 3 ölü ayar işaretlendi *(backend PR #75)*.
+- Yeni **`docs/otonom/03-PO-ELLE-ISLER.md`** — senin elle yapman gereken kod-dışı işler (Dokploy avatar diski, SMTP, yedek, NODE_ENV, kurum bildirimi env…), her biri "nasıl anladığın" doğrulama adımıyla.
+- **`01-KARARLAR` KARAR-23..28** açıldı — 6 yeni ürün/hukuk kararı seni bekliyor (kurum bildirimleri · hata izi panele · yedek nereye · yedek tablo silme · dış hata izleme · ölü LLM env). **Cevap bekliyor.**
+
+### ⛔ SENİN ELLE YAPMAN GEREKENLER (özet — ayrıntı 03-PO-ELLE-ISLER.md)
+En acil: **avatar için kalıcı disk (Dokploy)** · **düzenli yedek + geri-yükleme provası** (🔴 çıkış blokeri) · **NODE_ENV=production teyidi** · **SMTP doldur** · **TENANT_NOTIFICATIONS_ENABLED=true**.
+
+### Doğrulama
+- 3 kod PR'ı CI yeşil; yeni testler CI log'unda doğrulandı (KURAL 14): IDOR 3 test (→468), /health 2 test (→467), frontend 8/8.
+- `npm run verify`: tsc/eslint/frontend(69 test)+build ✓; backend entegrasyon TEST_DATABASE_URL guard'ıyla durdu (lokalde beklenen) → asıl kanıt CI.
+- Submodule pointer `61aae07 → 4528048` (backend main HEAD, ata teyitli). Çatı pointer == backend main HEAD ✅.
+
+### ⛔ DOKUNULMAYANLAR
+Yeni ürün kodu (3 düzeltme dışında) YAZILMADI · DB/migration/seed YOK · şema DEĞİŞMEDİ · `server.ts` rate-limit/trust-proxy'ye DOKUNULMADI (K-14/F-04 yasak bölge) · 🔴 sayısı **12** sabit · hiçbir CEVAP satırı doldurulmadı · #110 (MERGE ETME) ellenmedi · hiçbir şey silinmedi (ölü ayarlar yalnız işaretlendi).
+
+---
+
 ## TUR ÖZETİ — TUR 1 (2026-09-19)
 
 **BİTTİ ve CANLIDA (3 iş):**
