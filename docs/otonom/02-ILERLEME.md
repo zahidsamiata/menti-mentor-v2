@@ -159,3 +159,22 @@ Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır k
   - **Ağustosta ✅ işleme-al ama kuyrukta karşılığı OLMAYAN kalem: 0.** ⏸️ şimdilik-alma kalemleri G4-11/G4-12 (v2 anomali/büyüme) + G11-01/02 (uzun-vade strateji) kuyrukta iz taşımıyor — ama ⏸️ oldukları için bu normal (eksik iş değil, görünürlük boşluğu; kuyruğa EKLENMEDİ).
 - **⛔ DOKUNULMAYANLAR:** frontend/backend kaynak DEĞİŞMEDİ · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi · #110 ellenmedi · `panel-denetimi-mentor-menti-2026-09-19.md` ellenmedi · `docs/gelen/*` ellenmedi · CEVAP satırları dolmadı.
 - **Değişen dosyalar:** `01-KARARLAR.md` (indeks + KARAR-3 sayı notu + 6 ağustos notu) · `00-KUYRUK.md` (K-16/F-notu + E-2 sınır) · `CLAUDE.md` (kart sınırı) · `G3-icerik.md` · `G2-eslestirme-psikometri.md` · `G4a-panel-akis.md` · `G10-olu-kod-terk.md` · `02-ILERLEME.md` (bu kayıt).
+
+---
+
+## TUR 4 — 2026-09-19 · Panel denetimi bulguları kuyruğa (AŞAMA P) · belge-only
+**Mod:** 🟥 BYPASS (yalnız merge + belge; ürün kodu YAZILMADI). Dal: `otonom/L-panel-bulgulari-kuyruga-20260919`.
+
+- **İŞ 1 — H dalı merge:** PR **#186** (`panel-denetimi-mentor-menti-2026-09-19.md` tek dosya). 3-noktalı (merge-base) diff = yalnız 1 dosya eklendi (başka değişiklik yok). CI 8/8 yeşil → squash merge, dal silindi.
+- **İŞ 2 — AŞAMA P:** Rapor §2/§3'teki **14 açık kalem (11 🟡 + 3 ⬜)** + §6 beşlisi + güvenlik + seed önkoşulu kuyruğa alındı → **P-00..P-16 + P-99 = 18 satır.** Sıra: en az emek→en çok değer (rapor ölçütü). §6 beşlisi P-01..P-05.
+  Kapsam denetimi: 14 açık kalemin hepsi eşlendi (M3→P-06·M5→P-05·M6→P-07·M8→P-08·M9→P-01·M13→P-02·MT1→P-04·MT2→P-09·MT5→P-10·MT6→P-11·MT7→P-12·MT9→P-13·MT10→P-14·MT13→P-15). Alınmayan: ✅ VAR (11) + ❓ M11 (ölçülemez his) — İŞ2 gereği doğru.
+- **İŞ 3 — GÜVENLİK:** **P-00** (k-anonimlik eşiği yalnız FE — `userController.ts:125-135` maskeleme yok; CLAUDE.md "frontend guard yeterli değil" ihlali, 🟡 PR'da dursun) + **P-16** (sayım `User.role` üzerinden, kural `TenantMembership.role` — çok kurumluda şişer, TEYİT GEREK). ⛔ Kendim DÜZELTMEDİM.
+- **İŞ 4 — Belge yanlışları (BY-1..BY-6): 5/6 düzeltildi, 1 atlandı (gerekçeli).**
+  - **BY-1/2/3/4** → hepsi `docs/raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` (📸 DONDURULMUŞ) → gövde değişmedi, sona **"KOD DOĞRULAMA NOTU (2026-09-19)"** bölümü eklendi (platform-admin deseni), her biri üstü-çizili eski iddia + DÜZELTME + kanıt + kuyruk eşlemesi (P-04/P-01/P-12/P-03).
+  - **BY-6** → `docs/kararlar/09-DURUM.md:432` "Menti ⬜" → G9-03 deseniyle üstü çizili + "Menti ✅" düzeltmesi (`:5` ile çelişiyordu).
+  - **BY-5 ATLANDI** → `backend/CLAUDE.md` submodule kaynağı; ⛔ DevSecOps "backend/ kaynak dosyalarını değiştirme". Rapor §5 BY-5 + §7 Ç-1'de kanıtıyla duruyor → sıradaki backend turuna bırakıldı.
+  - ⛔ `docs/00-BELGE-HARITASI.md` + `docs/devir/` ELLENMEDİ (başka tur alanı).
+- **İŞ 5 — Sertifika seed önkoşulu:** **P-99** (içerik→seed taşıma, K-16 önkoşulu, 🟡) + K-16 Not'una "ÖNKOŞUL: P-99" eklendi.
+- **İŞ 6 — KARAR-22** (mentör reddederken ne olsun — ret deneyimi) açıldı, 4 alt-soru KÜMELENDİ (gerekçe/alternatif/bildirim/gösterim). İndekse eklendi (1 iş: P-05). ⚠️ KARAR-20 ile aynı tema tespit edildi (ret KODDA VAR — `mentor/page.tsx:257-274` MT11; eksik olan deneyim) → çapraz-referans + "kümelenmeli" notu iki karta da düşüldü. ⛔ CEVAP DOLDURULMADI.
+- **⛔ DOKUNULMAYANLAR:** frontend/backend kaynak DEĞİŞMEDİ · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi · mevcut K-/F-/E- işleri YAPILMADI · `docs/00-BELGE-HARITASI.md` + `docs/devir/` ellenmedi · CEVAP satırları dolmadı.
+- **Değişen dosyalar:** `00-KUYRUK.md` (AŞAMA P + K-16 önkoşul notu) · `01-KARARLAR.md` (KARAR-22 + indeks) · `strateji-gercek-denetimi-2026-08-20.md` (BY-1..4 KOD DOĞRULAMA NOTU) · `09-DURUM.md` (BY-6) · `02-ILERLEME.md` (bu kayıt).
