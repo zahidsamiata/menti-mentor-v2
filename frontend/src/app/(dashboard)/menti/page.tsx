@@ -21,6 +21,7 @@ import { meetingsApi } from '@/lib/api/meetings';
 import { countCompletedMeetings, countApprovedMatchMentors } from '@/lib/mentiMetrics';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
+import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
 import type { MentorMatch } from '@/types/matching';
 
@@ -200,6 +201,9 @@ export default function MentiDashboardPage() {
           )}
         </div>
       )}
+
+      {/* P-03: DISC arketip rapeli — kayıt sonrası "aha" kartını panelde tekrar gösterir */}
+      {user?.id && !needsDiscTest && <DiscRecallCard userId={user.id} />}
 
       {/* Profil güvenilirliği + günün sorusu */}
       {user?.id && <DiscConfidenceWidget userId={user.id} />}
