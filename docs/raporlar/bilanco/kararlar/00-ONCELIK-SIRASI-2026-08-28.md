@@ -1,5 +1,15 @@
 # 00 — ÖNCELİK SIRASI (kod iş sırası) — 2026-08-28
 
+> ⚠️ **DEVREDİLDİ (2026-09-19):** Bu sıradaki açık kalemler **bugünün koduna karşı** doğrulandı (salt-okuma, 8 paralel
+> alt-ajan, Faz 0-8) ve `docs/otonom/00-KUYRUK.md` **AŞAMA F**'ye (F-01..F-33) taşındı. Takip artık ORADA — bu belge
+> tarihsel kaynak olarak korunur, satır silinmedi. PO-manuel kalemler `01-KARARLAR.md` **KARAR-18**'de; ürün kararı
+> gerektirenler **KARAR-19/20/21**'de.
+> **Doğrulama sonuçları (birim = öncelik sırasında adı geçen kalem, ~71 satır; kaynağın "87 işleme al" sayısı tek tek
+> G-kartını sayar, G9 grubu tek başına 16 kart):** ✅ 20 · 🟡 14 · ⬜ 31 · 🗑️ 2 · ⚫ geçersiz/bilinçli-devredildi 3 · ❓ 1.
+> ⭐ **"Yapılmamış sanılıp YAPILMIŞ" (kart bayat, kod ilerlemiş):** G3-19 (etiket havuzu — `PendingTag`+tagController VAR),
+> G2-11 (davetli=onaylı tetiği `authController.ts:165`), G4-02 (compatibilityReason FE), G4-04 (managers paneli),
+> G10-25 (profil düzenleme çalışıyor). **"Yapıldı sanılıp yapılmamış" = 0.** Detay: `docs/otonom/02-ILERLEME.md` (TUR 2).
+
 > 🔄 **YAŞAYAN BELGE**
 >
 > PO'nun "işleme al" kalemlerini kod iş sırasına soktuğu tek-canonical sıralama.

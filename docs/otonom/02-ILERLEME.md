@@ -85,3 +85,37 @@ Okuma keşifleri paralel alt-ajanla. Yazma işleri sırayla.
 - Düzeltme: `DiscTestState.loading` bayrağı + `reload()`; sayfa üç durumu ayırır (iskelet / 'Test yüklenemedi'+Tekrar dene / 'Aktif test sorusu yok'). Test-içi hata hâlâ kartta inline.
 - Test: useDiscTest.test.tsx 3/3. Lokal tsc+eslint temiz.
 - CANLIDA BAK (merge sonrası): /disc-test hata/boş durumda anlaşılır mesaj + Tekrar dene.
+
+---
+
+## TUR 2 — 2026-09-19 · BİLANÇO DENKLEŞTİRME (AŞAMA F) · salt-okuma denetim + yalnız belge yazımı
+**Mod:** 🟩 PLANLA (kod/DB/şema DEĞİŞMEDİ) → SONDA yalnız belge yazımı. 8 paralel salt-okuma alt-ajan (Faz 1-8).
+
+**Ne yapıldı:** `00-ONCELIK-SIRASI-2026-08-28.md` (2026-08-28'de yazılmış, 21 gün işlenmemiş "87 işleme al" sırası)
+Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır kanıtı). Açık kalemler `00-KUYRUK.md` AŞAMA F'ye devredildi.
+
+- **ADIM 0 (tekrarı önle):** `T3-D-tur1-denklestirme.md` okundu — o belge FARKLI bir işti (TUR-1 sayım-tahminlerini
+  denkleştirdi: ~103/~140 → kesin sayı, 🟡 kodu ekleme, ThemeToggle düzeltmesi). "87 işleme al" kalemlerini koda karşı
+  doğrulama YAPILMAMIŞTI → bu tur o boşluğu doldurdu, tekrar yok.
+- **Taranan:** ~71 öncelik-sırası kalemi (birim: sırada adı geçen satır; G9-grubu tek satır=12 belge kalemi temsil eder).
+  Kaynağın "87" sayısı tek tek G-kartını sayar (G9 tek başına 16 kart) → fark birim tanımından, çelişki değil.
+- **Dört durum dağılımı:** ✅ 20 · 🟡 14 · ⬜ 31 · 🗑️ 2 (G2-10 çift-çarpım çürütüldü #138, G10-23 dosya silinmiş) ·
+  ⚫ geçersiz/bilinçli-devredildi 3 (G1-01 yaş→metin beyanı · G1-17 backend'de çözüldü · G1-04 public form, izolasyon açığı değil) · ❓ 1 (G3-16/18 canlı içerik = DB teyit turu).
+- **⭐ "Yapıldı sanılıp yapılmamış" = 0.** Tersine, **"yapılmamış sanılıp YAPILMIŞ" (kart bayat, kod ilerlemiş) = 5:**
+  - **G3-19** etiket havuzu — kart ⬜ der; `schema.prisma:843-880 PendingTag` + `tagController` (suggest/approve/merge/reject) + admin route'ları VAR.
+  - **G2-11** davetli=onaylı tetiği — kart "kodda yok" der; `authController.ts:165-169` inviteToken→APPROVED tetiği VAR (PO 2026-09-01 Seçenek A).
+  - **G4-02** menti-yönü "neden uyumlu" — kart eksik der; `menti/page.tsx:288-291 compatibilityReason` render ediliyor.
+  - **G4-04** yönetici atama + onaylı liste — kart 🟡 der; `(admin)/admin/managers/page.tsx` tam panel.
+  - **G10-25** profil düzenleme — kart ❓ der; `(dashboard)/profile` + `lib/api/profile.ts` çalışıyor (YANLIŞ SORU TUZAĞI'nın klasik örneği).
+- **Örtüşme (yeni satır AÇILMADI, mevcut K- satırına Not eklendi):** K-13 = G10-01(c)/G4-09/G4-10/G10-23 · K-14 = G1-28/F-04/F-05 ·
+  K-16 = G3-08/G3-09 · K-04 = G8-01/G8-02. (⚠️ K-16'da sayı bayatı yakalandı: KARAR-3 metni "22/88" der, kod 20/80.)
+- **AŞAMA F'ye eklenen:** **33 satır** (F-01..F-33). Faz dağılımı: Faz1=1 · Faz2=2 · Faz3=4 · Faz4=0(→KARAR-19) ·
+  Faz5=4 · Faz6=3 · Faz7=8 · Faz8=11. Faz sırası korundu (Faz1 üstte, Faz8 altta).
+- **Açılan yeni KARAR kartı: 4** — KARAR-18 (PO-manuel işler listesi, 11 kalem) · KARAR-19 (KVKK geri-dönülmez küme: kurum silme + eski-rıza + iz saklama) ·
+  KARAR-20 (mentör reddi akışı var mı) · KARAR-21 (STK anket cevap tipi). ≤5 sınırı korundu.
+- **Faz 5 tespiti:** algoritma çekirdeğinin çoğu (OCEAN/sektör motoru bağlama, yeni %45/30/25 skor + 2 veto, B12 göç)
+  **KARAR-10'a kilitli** ve o karar cevapsız → F-11 tek satırda kümelendi. Motorlar YAZILI ama `matching.ts` çağırmıyor.
+- **⛔ DOKUNULMAYANLAR:** frontend/ backend/ yalnız OKUNDU · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi/karantinaya alınmadı ·
+  01-KARARLAR CEVAP satırlarına dokunulmadı (yalnız sona KARAR-18..21 eklendi) · mevcut K- işleri (K-03/05/06/08/10/11/12...) YAPILMADI.
+- **Değişen dosyalar:** `00-KUYRUK.md` (AŞAMA F + 4 K-satırı Not) · `01-KARARLAR.md` (KARAR-18..21) · `02-ILERLEME.md` (bu kayıt) ·
+  `00-ONCELIK-SIRASI-2026-08-28.md` (devir notu, gövde silinmedi).
