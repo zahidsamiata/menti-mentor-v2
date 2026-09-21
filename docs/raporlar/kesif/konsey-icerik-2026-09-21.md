@@ -170,3 +170,152 @@ değişir:** `ceil(aktif konu × 0.8)` → 10 konuda 8, 11 konuda **9** → sert
 Belge ve seed **aynı 4 red-line konuyu** taşıyor: `yapici-geri-bildirim` · `sinir-koyma` · `gizlilik-guven` ·
 `kriz-yonetimi` (seed `:62,128,216,238`; belge O1 başlığı ve `:383`). Önceki turun "seed'de tam 4 red-line konu var"
 iddiası **doğrulandı**.
+
+---
+
+## 4 · C — İÇERİK DOĞRULUĞU
+
+### 4.1 C.1 — Metin kullanıcıya ne VAAT ediyor?
+
+**Birim:** "kullanıcıya görünen, ürün/test/sertifika/eşleşme hakkında iddia taşıyan metin bloğu."
+**136 blok tarandı** (landing 31 · metodoloji 14 · arketip kartları 32 · mizaç testi 11 · onboarding 24 ·
+öğrenme çerçevesi 6 · sertifika sonucu 9 · eşleşme gerekçesi 5) → **9'u riskli**.
+
+⚠️ Bilimsel geçerlilik bu konseyin konusu değil (psikometri ayrı konsey); yalnız metnin **vaadi** değerlendirildi.
+
+| # | Nerede | Alıntı | Risk | Önerilen yön (metin yazılmadı) |
+|---|---|---|---|---|
+| C1-1 | `onboardingController.ts:67` (ve `:77,87,97`) | *"Sen bir Öncüsün! Cesur, sonuç odaklı…"* | 8 soruluk testin sonucunu **değişmez kimlik etiketi** gibi sunuyor | Koşullu/zamansal dil ("şu an … eğilimi") |
+| C1-2 | `ResultStep.tsx:39-43` | *"Sen bir {archetype}sın!"* (en büyük tipografi + konfeti) | Aynı etiketleme, kutlama efektiyle pekiştiriliyor | Başlıkta kimlik değil gözlem dili |
+| C1-3 | `ResultStep.tsx:71` | *"En İyi Eş"* | Üstünlük iddiası; eğilim kesinmiş gibi | Göreli dil |
+| C1-4 | `ResultStep.tsx:98-100` | *"…en uygun … kişiyle eşleştirileceksin."* | **Kesin gelecek vaadi** — oysa havuz boşsa ürün "uygun mentor bulunamadı" diyor | Koşullu kip |
+| C1-5 | `menti/page.tsx:311-312` | *"%{matchScore} uyum"* | Skor **nesnel ölçü** gibi, açıklamasız (arkasında sektör 0.6 + DISC 0.4) | Bant (yüksek/orta) veya "nasıl hesaplandı" bağlantısı |
+| C1-6 | `matchingController.ts:15,88` | `compatibilityReason … \|\| 'Genel profil uyumu'` | "Neden uyumlu:" başlığı altında **içeriksiz gerekçe** basılıyor | Gerekçe üretilemiyorsa satırı hiç göstermemek |
+| C1-7 **HUKUKİ** | `mentor/certification/page.tsx:193,195` (+ `admin/mentor-havuzu:168`, `TenantSwitcher:132`) | *"Tebrikler — Sertifikalı Mentörsün!"* + `SERTİFİKALI` rozeti | **Akreditasyon izlenimi**; kapsam/çekince cümlesi yok. Kapsam beyanı: `frontend/src/app/**`, `akredit\|mesleki yeterlilik\|diploma\|unvan\|yasal` TR+EN harf duyarsız → **0 çekince** | Rozetin yanında kapsam çerçevesi — **PO/avukat** |
+| C1-8 **HUKUKİ** | `HeroSection.tsx:34,51` | *"Sonsuza kadar ücretsiz"* (2 kez) | **Süresiz ticari taahhüt**; kullanım koşullarında karşılığı yok | Koşullu dil ya da koşullarda karşılık — **PO/avukat** |
+| C1-9 | `GameSection.tsx:69,86` | *"Test bittiğinde kazanacağın arketip"* | Testi **ödül oyunu** gibi çerçeveliyor; ürün içi *"bu sorular seni bir kalıba sokmak için değil"* tonuyla çelişiyor | Keşif dili |
+
+**⭐ Desen (asıl bulgu):** iddia disiplini **landing/metodoloji ve öğrenme yolculuğunda güçlü** — metodoloji sayfası
+*"Kesin bir başarı garantisi değil"*, *"kanıtlanmış bir kesinlik değil"*, EngineSection *"DISC … kişilik tanısı aracı
+değildir"*, DiscNoPressureNote *"burada doğru-yanlış yok"* diyor. Ama bu disiplin **onboarding sonuç kartında,
+eşleşme kartında ve sertifika rozetinde YOK** — yani kullanıcının ürüne ilk girdiği ve **paylaş düğmesiyle dışarı
+taşıdığı** ekranlarda (`onboardingController.ts:68` `shareHeadline`). Risk, çekincenin olmadığı yerde yoğunlaşmış.
+
+### 4.2 C.2 — HUKUKİ HASSAS İÇERİK
+
+#### KARAR-3'ün kanıtı (kart bunu istiyordu — kartın kendisi senaryoyu adlandırmıyor)
+
+**Konu: 🔴 KRİTİK KONU 4 — KRİZ, Varyant B "Endişe veren ifade"** (ikincil: Varyant A "Menti kayboldu").
+
+| Ne | Dosya:satır | Birebir metin |
+|---|---|---|
+| Şık (3 puan) | `sertifika-oturum1-4-kritik-konu-2026-09-08.md:218-219` | *"Sözünü kesmeden dinlerim, ciddiye aldığımı söylerim; profesyonel destek almasını öneririm **ve kurum yöneticisine bildiririm**."* |
+| Asıl hukuki iddia (gerekçe) | aynı `:220-222` | *"**Bildirim gizlilik ihlali değil sorumluluktur** — ve bunu {sert_1}'e açıkça söylemek…"* |
+| Konunun prensip cümlesi | aynı `:187-188` | *"Mentör dinler ama tek başına taşımaz; risk sinyalinde yönlendirir **ve kuruma bildirir**."* |
+| Önceki belgedeki mutlaklık | `faz6-ogrenme-ve-sertifika-2026-09-03.md:466` | *"Bu, mentörün **hiçbir koşulda tek başına taşımaması gereken** tek durumdur."* |
+| Belgenin kendi uyarısı | `sertifika-oturum1-...:183-185` | *"⚠️⚠️ HUKUKİ TEYİT BEKLİYOR — HER İKİ VARYANT."* |
+
+⭐ **KARAR-3 için kritik bağlam (kartta yok):** bu bildirim yükümlülüğü metni **kodda YOK**.
+`seed-certification.ts:236-259` (kriz soruları) şıklarının hiçbirinde kuruma/yöneticiye/aileye bildirim geçmiyor —
+yalnız "uzmana/profesyonel desteğe yönlendiririm" var. Kapsam: o dosyada `bildir|yasal|kolluk|polis|savcı|kuruma|amir`
+harf duyarsız → tek isabet "geri **bildirim**" (feedback). ⇒ **KARAR-3 canlıdaki bir metni değil, P-99 ile
+taşınacak bir metni blokluyor.** Bu, kararın aciliyetini düşürür ama gerekliliğini değiştirmez.
+
+#### KARAR-4'ün kanıtı
+
+Boşluk **yer tutucu olarak bile yok** — metin doğrudan soyut yazılmış:
+`seed-certification.ts:241` *"…bir uzmana/profesyonel desteğe nazikçe yönlendiririm"* · `:251` *"…doğru profesyonel
+desteğe (uzman/kurum)…"* · `seed-learning-journey.ts:196` *"…(okul psikoloğu/uzman) yönlendirirsin"*.
+Kapsam: beş dosyada `___ · TODO · TBD · placeholder · doldur · eklenecek · belirlenecek · 182 · 112 · destek hatt`
+harf duyarsız → kriz metinlerinde **0 eşleşme**. Ürün içindeki **tek somut kaynak adı** "okul psikoloğu"
+(`seed-learning-journey.ts:196`) — yalnız okul bağlamı, yetişkin menti/STK için karşılığı yok.
+Belge bunu "ÇIKIŞ BLOKERİ" diye kayda geçmiş (`sertifika-oturum1-...:356-359`).
+
+#### YENİ hukuki bulgular (KARAR-3/4 dışında) — **13 kalem**
+
+⛔ Metin yazılmadı, düzeltme önerilmedi. Hepsi **PO/avukat kararı**.
+
+| # | Bulgu | Alan | Dosya:satır | Neden riskli |
+|---|---|---|---|---|
+| H-01 | Üç hukuki sayfa da kendi metninde *"Bu metin **taslak** niteliğindedir"* diyor | Sözleşme | `kvkk/page.tsx:109` · `gizlilik/page.tsx:85` · `terms/page.tsx:73` | Kayıt akışı bu metinlere **zorunlu açık rıza** aldırıyor → rıza, kendini geçersiz ilan eden metne veriliyor |
+| H-02 | *"Bilgileriniz KVKK uyumlu, kapalı devre ve **güvendedir**"* | KVKK | `InvitationCard.tsx:142` | Koşulsuz uyum + güvenlik garantisi, H-01 ile birlikte çelişik |
+| H-03 | Footer *"KVKK uyumlu"* damgası | KVKK | `app/page.tsx:65` | Aynı sayfadaki metinler taslakken koşulsuz uyum beyanı |
+| H-04 | Footer'daki hukuki bağlantılar **link değil `<span>`** | Sözleşme erişimi | `app/page.tsx:67-71` | Sayfalar var ama footer'dan tıklanamıyor → "sunuldu" savunması zayıflar |
+| H-05 | Aydınlatma metni işlenen veri kategorilerini eksik sayıyor | KVKK Md.10 | `kvkk/page.tsx:31-38` | `Message`, `FeedbackLog` ve sertifika yanıtları metinde yok |
+| H-06 | Saklama süreleri metin↔kod uyuşmuyor; mesaj süresi belirsiz | KVKK saklama-imha | `kvkk/page.tsx:69-74` ↔ `gdprService.ts:341-342,378-380` | Kodda `TODO(G1-10): Message saklama süresi avukat metniyle belirlenecek` |
+| H-07 | *"Geri bildirim … **kimliğin paylaşılmaz**"* | KVKK | `MeetingFeedbackCard.tsx:173` ↔ `feedbackLogController.ts:134-135,147-148` | Admin geri bildirim kayıtlarını **ad-soyadla** listeliyor (`fullName` select) — ifade kapsam belirtmiyor |
+| H-08 | 18+ beyanı ayrı kutu değil, KVKK rızasına **gömülü** | Yaş/rıza | `_RegisterContent.tsx:162,413-417` · `Step4Account.tsx:199-207` | Tek kutu iki ayrı hukuki işlemi birleştiriyor; rıza geri alınırsa yaş beyanının akıbeti belirsiz |
+| H-09 | Yaş verisi saklanmıyor, 18+ için ayrı rıza tipi yok | Yaş/ispat yükü | `consentService.ts:59` (`AYDINLATMA`,`ACIK_RIZA`) | Beyanın **ispatı yok** — G1-01 çelişkisinin kod tarafı |
+| H-10 | Koşullar mutlak 18+ diyor, kriz içeriği 18 altını tartışıyor | Yaş/sözleşme | `terms/page.tsx:30` ↔ `sertifika-oturum1-...:350-354` | Ürün kararı ile sözleşme çelişiyor |
+| H-11 | Yurt dışı aktarım tek genel rızaya bağlanmış | KVKK Md.9 | `kvkk/page.tsx:100-105` | Aktarım için ayrı rıza tipi kodda yok (bkz. H-09) |
+| H-12 | Giriş hatası hesap varlığını sızdırıyor | Güvenlik/KVKK | `_LoginContent.tsx:14` *"Bu e-posta başka bir yöntemle kayıtlı."* | Projenin kendi enumeration-safe kuralıyla (`registerMessages.ts:8-11`) doğrudan çelişiyor |
+| H-13 | `/bildir` üye olmayandan iletişim verisi topluyor, aydınlatma bağlantısı görülmedi | KVKK | `bildir/page.tsx:41-42` | ❓ TEYİT GEREK (sayfanın tamamı okunmadı) |
+
+✅ **Olumlu ve kayda değer:** hesap kapatma akışı **dürüst** — "silinir" demiyor, anonimleştirmeyi anlatıyor
+(`DataPrivacySection.tsx:199-206`) ve kod aynı şeyi söylüyor (`gdprService.ts:45-47`: *"'Silindi' DEMEZ"*).
+Bu, H-01…H-11'in nasıl düzeltilebileceğinin ürün içindeki **hazır örneğidir**.
+
+### 4.3 C.3 — KRİZ/RİSK: sistem mentöre ne söylüyor?
+
+**Birim:** kriz/risk konusunu işleyen ayrı içerik nesnesi. **11 nesne** (sertifika 2 · öğrenme yolculuğu 1 · belge 8) ·
+**canlı tetiklenen akış: 0.**
+
+- **Yönlendirme yönü DOĞRU:** içerik "kendin çöz" demiyor (`seed-certification.ts:244` *"Zararlı: krizdeki birini
+  görmezden gelmek"*), "profesyonele yönlendir" diyor ve rol sınırını çiziyor (*"mentör … terapist değildir"*).
+- **Ama YETERSİZ:** somut kaynak yok (KARAR-4) ve **"kuruma bildir" adımı canlı içerikte hiç yok** — belgede
+  planlanmış (`sertifika-oturum1-...:18`), kodda karşılığı yok. İçerik ↔ belge farkı.
+- **Canlı kriz akışı yok — kapsam beyanıyla doğrulandı:** 4 dizin (FE `src`, BE `src`, `src/routes`, `schema.prisma`) ×
+  **22 terim iki dilli** (`kriz↔crisis` · `intihar↔suicide` · `kendine zarar↔self-harm` · `acil↔emergency` · `şiddet` ·
+  `istismar` · `taciz` · `psikolog` · `ruh sağlığı↔mental health` · `112/183/182` · `escalat` · `safeguard` · `alert`…)
+  → şemada **0**, rotalarda **0**, BE'de 5 isabetin **5'i alakasız** (algoritma fallback, meslek unvanı listesi),
+  FE'de 5 isabetin **5'i alakasız** (SVG path, psikolog adı, pazarlama cümlesi, sınav konu etiketi).
+- **EK BULGULAR (önceki turda yok):**
+  - **Menti tarafında kriz içeriği HİÇ yok** — `menti/orientation-guide/page.tsx:17-63` dört senaryo içeriyor,
+    hiçbiri kriz/kötü muamele/sınır ihlali değil. Menti, kendisi ya da mentörü kaynaklı bir sorunda ne yapacağını
+    hiçbir ekranda öğrenmiyor.
+  - **Menti "sadece konuşacak biri lazım" diyebiliyor** (`threeQuestionsText.ts:30`) ama bu seçim yalnız eşleştirme
+    sinyali; hiçbir destek çerçevesine bağlanmıyor.
+  - **Tek "bildir" kanalı kriz için değil** — `/bildir` kapsamı sahte kurum kaydı/yetkisiz davet (`bildir/page.tsx:55`);
+    ilişki-içi risk/istismar bildirimi için kanal yok.
+  - **Kriz konusunda elenen mentöre sebebi söylenmiyor** (aşağıda, C-?? satırı).
+
+---
+
+## 5 · D — İÇERİK BELGELERİ
+
+**Birim:** tek `.md` dosyası. Klasörde **12 üst düzey + 5 `bolumler/` = 17 belge**, ayrıca kod deposunda ilişkili 1
+belge (`prisma/senaryo-bankasi-tam.md`).
+
+### D.1 — Mükerrerlik: önceki iddia **kısmen** doğrulandı
+
+✅ **Üç sertifika oturum belgesi gerçekten farklı parçalar:** O1 = KONU 1-4, O2 = KONU 5-7, O3 = KONU 8-11;
+tekrar eden konu/varyant **yok**, numaralandırma ardışık.
+✅ `senaryo-bankasi-tam.md` (sertifika, 10×2) ↔ `senaryo-bankasi-2026-09-03.md` (Big Five karakter, 39/117)
+**mükerrer değil**; indeks bu ayrımı `:52-55`'te doğru anlatıyor.
+
+⛔ **AMA aynı denetim diğer belgelere uygulandığında ÇELİŞKİ çıkıyor — bu YENİ bulgu:**
+Aynı sahne **üç farklı metinle** üç yerde duruyor. Örnek, Gizlilik Varyant A:
+`faz6-...md:418-427` (puansız, `✅ İkinci` biçimi) ↔ `sertifika-oturum1-...:134-153` (0-3 puanlı, yeniden yazılmış) ↔
+**kodda bambaşka bir sahne** (`seed-certification.ts:216-217`, kaynağı `senaryo-bankasi-tam.md:279-281`).
+Aynı örüntü kriz, sınır ve geri bildirim konularında da geçerli. Oturum belgeleri kaynak atfı yapıyor
+(`sertifika-oturum1-...:135` *"Kaynak: faz6 3A sahnesi"*) **ama hangi sürümün canlıya gideceği hiçbir belgede yazmıyor**
+ve faz6 hâlâ "📸 DONDURULMUŞ" etiketli. ⇒ P-99 taşıma turu bu üçlüden hangisini alacağını bilmiyor.
+
+### D.2 — İndeks güncelliği
+
+- **Klasörde olup indekste olmayan (üst düzey): YOK** — 11 belgenin 11'i listeli.
+- **Kısmi eksik:** `bolumler/` altındaki **5 belge tek tek listelenmiyor**, indeks yalnız klasörü anıyor (`:35`).
+- **İndekste olup klasörde olmayan: 3** — ama bunlar `⬜ HENÜZ YAZILMADI` diye dürüstçe işaretli, hata değil.
+- **Bayat yol:** `00-INDEKS.md:52` (ve `bolumler/*.md` başlıkları) `backend/prisma/...` yolunu kullanıyor;
+  bu çalışma alanında `menti-mentor-v2/backend` **boş** (submodule), gerçek yol `menti-mentor/prisma/...`.
+- **İndekste eksik bağlam:** 2026-09-08 serisinin faz6'yı **aştığı** hiç yazmıyor; `:20` hâlâ faz6'yı
+  "20 sertifika senaryosu" diye sunuyor.
+
+### D.3 — Durum etiketleri
+
+- **Zayıf etiket (3 belge):** üç sertifika oturum belgesi `> 📸 Üretim: 2026-09-08 …` diyor — 📸 var ama
+  **"DONDURULMUŞ"/"YAŞAYAN" sözcüğü yok**, klasörün kalıbına uymuyor.
+- **Etiketi doğru, içeriği aşılmış (1):** `faz6-...:6` `📸 DONDURULMUŞ` — ama sahneleri yeniden yazılmış;
+  belge "hangi sürüm geçerli" sorusunu cevaplamıyor.
+- **Etiket↔kod çelişkisi (1):** `prisma/senaryo-bankasi-tam.md:3` kendini *"TAM TASLAK — kullanıcı onayı bekliyor"*
+  sayıyor, oysa içeriği **zaten canlı seed'in kaynağı** (`seed-certification.ts:7`).
