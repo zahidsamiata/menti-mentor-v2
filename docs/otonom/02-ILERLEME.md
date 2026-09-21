@@ -4,6 +4,144 @@
 
 ---
 
+## ⭐⭐ TUR BE — 9 KARAR CEVAPLANDI, 8 İŞİN KİLİDİ AÇILDI (2026-09-21) · YALNIZ BELGE
+
+> **Mod:** 🟥 BYPASS — bulut. **Kod DEĞİŞMEDİ · DB/migration/seed YOK · hiçbir şey SİLİNMEDİ.**
+> Dal: `otonom/BE-karar-kaydi-20260921` (BC'nin üstüne açıldı). Kaynak: **PO, 2026-09-21 strateji katmanı karar oturumu.**
+> **Neden bu tur var:** 9 karar ve birkaç plan **yalnız sohbette** duruyordu — dosyaya yazılmasaydı kaybolacaktı.
+
+### ⭐⭐ PO İÇİN — MERGE SIRASI
+
+**Zincir: BB → BC → BE. YALNIZ BU PR'I (BE) MERGE ET** — BB ve BC içerikleri de onunla gelir.
+
+**Sonra şu PR'ları KAPAT** (içerikleri bu PR'ın içinde):
+`AZ` · `BA` · `BB` · `BC` · `CA` · `CB` · `CC` · `CD`
+
+**Ayrıca merge et:** **`F-19`** (çatı, kod) · **`BD`** (backend, güvenlik — **onaylandı**).
+⚠️ **`BD` merge'ünden SONRA ÇATI POINTER BUMP gerekir** (terminal işi; bulut yapamaz):
+`git submodule update --remote backend` → `git add backend` → commit → çatı PR.
+
+### 1 · Doldurulan CEVAP: **9**
+
+| Karar | Cevap | Şart / ek |
+|---|:---:|---|
+| KARAR-11 | **A** | karantina → bir tur bekle → sonra sil |
+| KARAR-32 | **A** | — |
+| KARAR-20 | **A** | — |
+| KARAR-7 | **A** | — |
+| KARAR-1 | **A** | ⛔ **MIGRATION** (`AvailabilityBlock`: `format` + `durationMin`) → önce tarihli yedek tablo, sonra PO'nun **AÇIK onayı**. Ajan tek başına migration **ÇALIŞTIRMAZ** |
+| KARAR-22 | **B** | ⚠️ bildirim iki kanal: uygulama içi (çan) **çalışır**, **e-posta SMTP ayarlanana kadar GİTMEZ** (`03-PO-ELLE-ISLER` B#4) |
+| KARAR-29 | **A** | ⭐ PO teyidi: yolculuk senaryoları sertifika sınavında **ÇIKMIYOR** → şık açıklaması **cevap anahtarı sızdırmaz** |
+| KARAR-6 | **A** | + **alt uyum eşiği** (ek 1) · uyum oranı **zaten var** (ek 2) |
+| KARAR-10 | **C** | ⭐ **AŞAMALI** — 3 aşama, feature flag zorunlu |
+
+`01-KARARLAR.md` başındaki **İÇİNDEKİLER** tablosunda bu 9 satırın *"Cevap durumu"* kolonu
+**`✅ CEVAPLANDI (2026-09-21): <harf>`** yapıldı.
+
+### 2 · Kilidi açılan kuyruk satırı: **8** (eski kapı üstü çizili bırakıldı)
+
+| Satır | Eski kapı | Yeni kapı | Neden |
+|---|---|:---:|---|
+| `I-15` | 🔴 KARAR-10 | **🟡** | matching/skorlama (istisna 2) — KARAR-10 aşama 3 |
+| `I-16` | 🔴 KARAR-22 | **🟡** | `MatchRequest`'te **durum alanı yok** → MIGRATION |
+| `K-06` | 🔴 KARAR-29 | **🟢** | üç istisnanın hiçbiri yok; PO teyidi kilidi kaldırdı. Durum `ATLANDI(karar)` → **`BEKLIYOR`** |
+| `K-15` | 🔴 KARAR-1 | **🟡** | MIGRATION + yedek + PO onayı |
+| `K-19` | 🔴 KARAR-8, KARAR-10 | **🟢** | ⚠️ **etiket yazım hatası doğrulandı** — içeriği **KARAR-6 + KARAR-7** |
+| `F-11` | 🔴 KARAR-10 | **🟡** | matching; üç aşamanın şemsiyesi |
+| `F-17` | 🔴 KARAR-20 | **🟡** | ret akışı için şema alanı → MIGRATION |
+| `P-05` | 🔴 KARAR-22 | **🟡** | `rejectionReason` şemada yok → MIGRATION |
+
+⛔ **KİLİDİ AÇILMAYAN: `E-5` — kasıtlı.** KARAR-11 cevaplandı ama bu satırın kapısı **İKİ şartlıydı**
+(*"KARAR-11 **+ karantina turu geçmiş**"*) ve ikinci şart sağlanmadı. Ayrıca `CLAUDE.md` § SİLME PROTOKOLÜ
+adım 5 açık: *"karantina 🟡'dır, **gerçek silme 🔴'dır**"* ve silme **PO'nun İKİNCİ onayını** ister.
+⇒ **🔴 KALIR.** Açılan kısım **`K-13`**'tedir (karantina ayağı, zaten 🟡) — Not'una işlendi.
+
+### 3 · KARAR-10 için eklenen aşama satırları: **3** (+ KARAR-6 için **1**)
+
+| Satır | Kapı | Ne |
+|---|:---:|---|
+| `PS-A1` | 🟡 | **Aşama 1 — düzelt + test.** Ölçek hatası (DISC `0-1` ↔ formül `0-100`), iki `DiscVector` tipi birleştirilir, bugün **SIFIR** olan birim testleri yazılır. **Kullanıcı etkilenmez.** |
+| `PS-A2` | 🟡 | **Aşama 2 — backfill.** ⛔ **CANLI VERİ:** önce tarihli yedek tablo, sonra PO'nun açık onayı. Şema migration'ı yok ama **verinin ANLAMI değişiyor.** ⛔ Bulut **yapamaz** |
+| `PS-A3` | 🟡 | **Aşama 3 — eşleştirmeye bağla, AÇMA/KAPAMA ANAHTARIYLA.** Eski/yeni sıralama karşılaştırması PO'ya gösterilir; tek tuşla geri dönülür |
+| `PS-A4` | 🟡 | **KARAR-6 ek(1)** — menti tarafı alt uyum eşiği |
+
+⚠️ **KARAR-10'un kendi uyarıları satırlara yazıldı:** ölçüm mekanizması **YOK** (`Match` yazılmıyor) → *"daha iyi"*
+bir süre **PO'nun gözüyle** değerlendirilir; `Match` yazımı açılırsa **KVKK sırası bağlayıcıdır** (önce silme yolu
+`GV-08`, sonra `U-18`); motor bağlanınca **menti ekranındaki YÜZDELER DEĞİŞİR** (KARAR-6 bağlantısı).
+
+### ⭐ PO'nun sorduğu kontrolün cevabı (KARAR-6 ek 1) — kod-teyitli
+
+**`minMatchScore` menti ekranında KULLANILMIYOR — ve bugün KULLANILAMAZ.**
+
+| Kanıt | Bulgu |
+|---|---|
+| `matchingController.ts:23,63` · `matching.ts:62` · FE `lib/api/matching.ts:34-37` | Parametre **yalnız mentör→menti** yönünde var (`getRankedMentis`) |
+| `matching.ts:351-354` | **Menti→mentör** yönü `rankMentorsForMenti` **imzasında eşik YOK** (yalnız `{mentiId, mentiTenantId, limit}`) |
+| `matching.ts:88-91` | `tenant.minMatchScoreThreshold` okuması **yalnız mentör yönünde** — menti yönü onu **hiç okumuyor** |
+| `matchingController.ts:107-111` · FE `matching.ts:23-24` | Controller yalnız `limit` geçiriyor; FE yalnız `?limit=100` çağırıyor |
+
+⇒ İş *"var olan parametreyi geçir"* **değil**, `rankMentorsForMenti`'ye eşik **eklemek** → bu yüzden kapı **🟢 değil 🟡**.
+
+**Eşik DEĞERİ (ajanın teknik kararı + gerekçesi):** sabit sayı yazılmaz; **kurumun kendi
+`Tenant.minMatchScoreThreshold`** değeri taban alınır (`schema.prisma:201`, `@default(50)`, panelden 20-90).
+Gerekçe: (1) `CLAUDE.md` *"sihirli sayı YOK"*; (2) mentör yönü **zaten bunu yapıyor** (`matching.ts:116`) → iki yön
+**simetrik** olur; (3) değer **kurumun elinde** kalır. ⛔ **Boş liste tuzağı:** mentör yönündeki level-3 kaçış kapısı
+menti yönünde de kurulmazsa küçük kurumda menti **hiç mentör göremez** → `PS-10` ile SIRALI.
+
+**KARAR-6 ek(2) — uyum oranı görünsün:** ✅ **ZATEN VAR** (`menti/page.tsx:311-318`) → satır açılmadı.
+
+### 4 · GV-01 / GV-02 — güvenlik onay notu **EKLENDİ** ✅
+
+İkisinin de Not'una strateji katmanı onayı işlendi (backend dalı
+`otonom/BD-guvenlik-kimlik-sahteciligi-20260921`): kimlik yalnız oturumdan (`req.auth`) · rol
+`TenantMembership`'ten · taraf karşılaştırması ilişki üzerinden · yazma ucu okuma ucunun desenini birebir alıyor ·
+taraf kontrolü **hiçbir yazmadan ÖNCE** · **EK AÇIK kapatıldı** (alan bölümlemesi: mentör kendi kalite puanını,
+menti kendine kilit basamaz) · **11 test**.
+**Durum: `BEKLIYOR` → `PR-ACIK`.** ⚠️ Merge sonrası **ÇATI POINTER BUMP** gerekir.
+
+⭐ **Yan düzeltme (YN-07'nin bir ayağı kapandı):** kuyruğun *"Durum kodları"* satırı **6 kod** sayıyordu ve
+`PR-ACIK`'i içermiyordu — ama kuyruk gövdesinde `PR-ACIK` **zaten kullanılıyordu** (F-19). Canonical
+`OTONOM-PROMPT.txt:81-82` **7 kod** sayıyor; kuyruk ona hizalandı (eski satır üstü çizili). Ayrıca
+`belge-duzeni-rehberi` § KURAL 10'daki `✅·🟡·🔀·⬜·❓·🗑️` alfabesinin **AYRI** olduğu (kart kodları, kuyruk
+durumu değil) açıkça yazıldı.
+
+### 5 · `07-calisma-tarzi.md`'ye eklenen bölümler: **2**
+
+- **`## Konsey denetimleri (2026-09-21)`** — yedi konsey ve **tek sorusu** · sıklık tablosu ·
+  ⭐ KURAL *"Konsey BELGE ÜRETMEZ, KUYRUĞU BESLER"* (salt-okuma · raporu 📸 · tek işi hazır kuyruk satırı +
+  numarasız kart · ⛔ paralel konseyler ortak dosyaya yazmaz, bulguları **tek uygulama turu** işler) ·
+  ilk çalışma kaydı (2026-09-21, dört konsey + diğer üçünün o haftaki karşılıkları).
+- **`## Karar oturumu biçimi — PO tercihi (2026-09-21)`** — her karar için: bugün ne oluyor · neden sorun ·
+  kullanıcı ne yaşar · ne kazanılır / **ne kaybedilir** · hangi kararla bağlantılı. ⛔ Kısa *"(öneri)"* **yetmez**.
+
+⛔ **`CLAUDE.md`'ye EKLENMEDİ** — dosya **34.742 karakter**, 35.000 hedefinin altında; büyütülmedi (doğrulandı).
+⛔ **Yeni planlama belgesi AÇILMADI** (kural). Künye tazelendi (KURAL 12 birincil ayak).
+
+### 6 · `03-PO-ELLE-ISLER.md`'ye eklenen bölüm: **1**
+
+**`## Ajan sunucusu (opsiyonel) — PC kapalıyken terminal çalışsın`** — öncelik **DÜŞÜK**,
+⛔ **canlıya çıkış blokeri DEĞİL.** Mevcut VPS'te ayrı kullanıcı ile Claude Code.
+⛔ **Pazarlık dışı:** `sudo` YOK · **`docker` grubuna EKLENMEZ** (docker grubu = fiilen root) · yalnız ev dizini.
+⛔ `DATABASE_URL` **kalıcı yazılmaz** — migration turunda tek seferlik.
+Gözden geçirme koşulu: CPU düzenli **%40**'ı aşarsa ayrı sunucuya taşınır.
+⚠️ Ubuntu 22.04'te yükleyici zaman aşımı bildirilmiş; 24.04 sorunsuz.
+
+### 7 · ⛔ BU TURUN YAPMADIKLARI (bilinçli)
+
+- ⛔ **Kod / DB / migration / seed: sıfır temas.**
+- ⛔ **Yalnız yukarıdaki 9 CEVAP dolduruldu** — başka hiçbir `CEVAP:` satırına dokunulmadı, hiçbir cevap uydurulmadı.
+- ⛔ **Hiçbir şey silinmedi** — eski kapılar ve eski künye `~~[ESKİ]~~` damgasıyla yerinde.
+- ⛔ **Yeni planlama belgesi açılmadı.**
+- ⛔ **Merge edilmedi** — bulut merge edemez.
+- ⛔ `E-5` **bilerek açılmadı** (yukarıda gerekçeli).
+
+### 8 · CANLIDA BAK
+
+**Yok — bu tur yalnız belge.** Ama kilit açıldı: **8 iş** artık çalışılabilir durumda ve bunlardan
+**`K-06` ile `K-19` 🟢** — yani doğrulama listesi geçerse **merge edilebilir**, PO beklemez.
+
+---
+
 ## ⭐⭐ TUR BC — DÖRT KONSEY UYGULANDI + YEDİ DAL BİRLEŞTİRİLDİ (2026-09-21) · YALNIZ BELGE
 
 > **Mod:** 🟥 BYPASS — bulut. **Kod DEĞİŞMEDİ · DB/migration/seed YOK · hiçbir şey SİLİNMEDİ · `CEVAP:` satırları BOŞ.**
