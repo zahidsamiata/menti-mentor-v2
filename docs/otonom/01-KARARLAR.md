@@ -57,6 +57,26 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-33** | **Kurumdan üye çıkarma + red tipi** | **2** (Y-14/md.36, md.35) | ⬜ boş · ⭐ BB turu · backend hazır, düğme yok |
 | **KARAR-37** | **madde 103 — kart mı özet mi kazanır** | 1 (md.103) | ⬜ boş · ⭐ BB turu · G1-23 vakasının tekrarı riski |
 
+> ⭐ **DÖRT KONSEY KARARLARI (2026-09-21) — KARAR-38…52.** Etkiye göre sıralı; "kaç işi açar" = 🔴 ile bağlı kuyruk satırı sayısı.
+
+| # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
+|---|---|:---:|---|
+| **KARAR-45** | **Arketip adları: hangi metin hangi koda bağlanacak** | **4** (IC-14, I-01, I-15, IC-03'ün `M1`/`m1` ayağı) | ⬜ boş · ⭐ içerik konseyi · ⚠️ "Kâşif" üç ayrı anlamda · KARAR-10'dan AYRI |
+| **KARAR-47** | **Hukuki metin paketi — avukata tek seferde ne sorulacak** | **5 kalem** (KARAR-38·3·4 + F-02 + F-03/GV-18) | ⬜ boş · ⭐ içerik konseyi · ⛔ AVUKAT · tek görüşme |
+| **KARAR-44** | **Algoritma kendi sonuçlarından öğrensin mi + hangi memnuniyet "gerçek"** | **2-3** (PS-05, F-08, KARAR-12) | ⬜ boş · ⭐ psikometri konseyi |
+| **KARAR-42** | **DISC testi tekrar edilebilsin mi** (3 düğme vaat ediyor, hiçbiri çalışmıyor) | **2** (PS-10 döngüsü, PS-03'ün faydası) + yeni satır | ⬜ boş · ⭐ psikometri konseyi · VERİ |
+| **KARAR-46** | **Sertifika içeriğinin hangi sürümü canlıya gidecek** | **2** (P-99 → K-16) | ⬜ boş · ⭐ içerik konseyi · SEED · ⚠️ 88 şıkın TAMAMI + 15 senaryo eler |
+| **KARAR-48** | **Test sonucu ve eşleşme skoru kullanıcıya nasıl anlatılsın** | **1** (3 ekran · C1-1…C1-6) | ⬜ boş · ⭐ içerik konseyi |
+| **KARAR-38** | **Sunucu ülkesi + KVKK aydınlatma metni** | **1** (GV-09) | ⬜ boş · ⭐ güvenlik konseyi · ⛔ AVUKAT ön koşulu (03-PO #19/#20) · KARAR-47 paketinde |
+| **KARAR-39** | **Anonimleştirme kapsamı: arketip kopyası + başkasının yorumu** | **1** (GV-08 yorum ayağı) | ⬜ boş · ⭐ güvenlik konseyi · arketip ayağı karardan BAĞIMSIZ |
+| **KARAR-40** | **Eski `POST /api/meetings` ucu: düzelt mi karantina mı** | **1** (GV-06 kalıcı çözümü) | ⬜ boş · ⭐ güvenlik konseyi · ⚠️ acil yama karardan BAĞIMSIZ · K-13/E-4 kümesi |
+| **KARAR-41** | **Mentörün bir kontenjanı olsun mu** | **1** (P-15) | ⬜ boş · ⭐ psikometri konseyi · B seçeneği MIGRATION |
+| **KARAR-43** | **Menti, mentörün eleyeceği eşleşmeyi görmeye devam etmeli mi** | **1** (cevap sonrası yeni satır) | ⬜ boş · ⭐ psikometri konseyi |
+| **KARAR-49** | **`devir/01` ve `devir/06`: dondurulmuş mu, kalıcı referans mı** | **2** (6 bayat "merge etme" satırı) | ⬜ boş · ⭐ yönetişim konseyi · BELGE POLİTİKASI |
+| **KARAR-51** | **4 "yaşayan ama ölü" belge dondurulsun mu** | **2** (YN-06 + 🔄 sayımı) | ⬜ boş · ⭐ yönetişim konseyi |
+| **KARAR-50** | **Kuralların "geçersizleşme koşulu" zorunlu olsun mu** | **4** (YN-04, YN-05 + 2 takip) | ⬜ boş · ⭐ yönetişim konseyi · ⚠️ "KURAL 17" diye bir kural HİÇ YAZILMADI |
+| **KARAR-52** | **Taşınan KURAL 8 mükerreri: hangi gövde kalsın** | **1** (YN-02) | ⬜ boş · ⭐ yönetişim konseyi · ⚠️ BU TURDA DOĞDU (CLAUDE.md bölmesi) |
+
 ---
 
 ### KARAR-0 · Merge politikası ✅ CEVAPLANDI
@@ -235,6 +255,39 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 **Benim önerim:** A — DISC çalışıyor, bu motor bugünün sorunu değil.
 **Cevap vermezsen:** Kuyruğa eklenmez, yani A uygulanmış olur.
 ⚠️ AĞUSTOS SİNYALİ (2026-08-27, GERİLİM — A/B/C DEĞİL): Ağustos G2-07+G2-08+G10-21'i **"tek iş: sektör 5-bileşen + OCEAN katmanını canlı eşleştirmeye BAĞLA"** diye işleme aldı (`00-PO-KARARLARI-2026-08-27.md:108`); ayrıca G2-01..05 (DISC matrisi) 🗑️ geçersiz, "Big Five'a bırakıldı" (`:39`). Bu, bu kartın önerisi A (v2'ye ertele/dokunma) ile GERİLİMLİ — ağustos yönü bağlamaya (C) daha yakın. Ölçek hatası ayrı. PO teyit ederse CEVAP'a yazılabilir.
+
+⚠️ EK (2026-09-21, psikometri konseyi): Bu kart YENİDEN AÇILMADI — aşağıdakiler mevcut A/B/C seçeneklerinin FİYATIDIR, yeni seçenek değildir.
+
+**① PO'nun asıl sorusunun cevabı — rahatlatıcı:** Motor ölü AMA hiçbir kullanıcı yanlış sonuç GÖRMEDİ (kanıt: CA §B.2).
+Ekrandaki "Sen bir Öncü'sün" kartı DISC harfinden üretiliyor (`onboardingController.ts:464-466` → `DiscRecallCard.tsx:57`) ve OCEAN'a hiç uğramıyor; iki veri farklı tablolarda (`User.discResultCard` ↔ `UserProfile.ocean*`) ve aralarında kod yolu yok. Kapsam beyanı: BE `src/ tests/ scripts/ prisma/` + FE `src/ e2e/`, 20+ terim harf duyarsız (`archetype · arketip · ocean · bigfive · openness · neuroticism · discToOcean · deriveArchetype · compute-profile · rank-mentors` …) → FE'deki 16 dosyadaki tüm eşleşmeler satır bazında incelendi, hepsi DISC harfi kaynaklı ya da ölü yol.
+⚠️ İki "sızıntı yüzeyi" açık ama bugün kullanıcıya ulaşmıyor: (1) `POST /api/scoring/compute-profile` canlı bir uç (`server.ts:132`) ve yanıtında `archetype` + `ocean` dönüyor (`sjtScoringController.ts:74-86`) — FE çağırmıyor, uç açık; (2) `/admin/eslesmeler` sayfası arketip sütunlarını çiziyor (`eslesmeler/page.tsx:134,142`) — tablo boş olduğu için görünmüyor.
+
+**② ÜÇ SEÇENEĞİN MALİYETİ (eşit ayrıntıda, tavsiye YOK — harfler yukarıdaki A/B/C ile aynı):**
+
+Üç seçenekte de geçerli ortak gerçekler:
+· `UserProfile.ocean*` + `archetype` DB'ye KALICI yazılıyor (`scoring.service.ts:103-115`), runtime hesap değil. Şema `schema.prisma:992-999`.
+· `discToOcean` ve `deriveArchetype` için SIFIR birim testi var (kapsam: `tests/`, 8 terim harf duyarsız → 0 eşleşme). Hata tam bu yüzden sessiz kaldı.
+· Canlı DB'de kaç `UserProfile` satırında `archetype != null` olduğu ❓ TEYİT GEREK — ölçülmeli, varsayılmamalı (PO işi; bulut DB'ye bakamaz).
+
+| | A · ERTELE / DOKUNMA | B · YALNIZ ÖLÇEĞİ ONAR | C · ONAR + BAĞLA |
+|---|---|---|---|
+| Kullanıcı ne görür | Değişiklik yok | **Değişiklik yok** (yol zaten ölü) | Daha zengin profil + arketip kartı; eşleştirme gerekçesi değişir |
+| Kaç dosya | 0 | **1 satır bloğu** (`scoring.service.ts:92-97`) *veya* formülü 0–1'e göre yaz (`adapter.ts:15-16`) | Yukarıdakiler + `matching.ts` bağlama + `scoring.config.ts:31` eşik kalibrasyonu + sektör 5-bileşen bağlama |
+| Hangi test | — | **Yeni** birim testi yazılmalı (bugün 0) | Yeni birim + entegrasyon + sıralama regresyon testleri |
+| Hangi davranış değişir | Hiçbiri | Hiçbiri — motor "açılmaya hazır" olur | **Canlı sıralama değişir** → mevcut eşleşmeler kayar |
+| Migration | Yok | **Şema migration'ı YOK** (kolon tipleri aynı) ama veri ANLAMI değişir → `backfill/recompute` script'i gerekir | B'nin aynısı + eşik kalibrasyonu veri gerektirir |
+| Geri alınır mı | — | Evet (kod geri alınır, backfill yeniden koşar) | Zor — sıralama değişimi kullanıcı deneyimine yansır |
+| Süre | Yok | **S–M** | **XL** |
+| **Ne kaybedersin** | Ölü kod durmaya devam eder, her denetimde yeniden gündeme gelir; `archetype` yazılmış satırlar (varsa) çöp kalır | Kullanıcıya **hâlâ sıfır değer**; ölü kodu bakımlı tutma maliyeti sürer; eşik kalibrasyonu yine yapılmamış olur | Çok büyük iş; DISC zaten çalışıyor, ölçülebilir fayda **belirsiz** — üstelik faydayı ölçecek mekanizma da yok (`Match` hiç yazılmıyor) |
+| Regresyon riski | Sıfır | **Düşük** — hiçbir ekran bağlı değil, hiçbir test kırılmaz | Yüksek |
+
+**③ İki uyarı (hangi harf seçilirse seçilsin):**
+⛔ **I-13 düzeltilmeden bağlama (C), rastgeleden BETERDİR:** `COMPATIBILITY_MATRIX['M1_m1'] = 60` (`scoring.config.ts:38-44`) ⇒ `getCharacterScore` (`scoring.service.ts:39-42`) her çift için sabit 60 döner, karakter skoru HİÇ ayırt etmez. Ayrıca `BLOCKED_PAIRS = {M4:['m3'], M1:['m4']}` (`:33`) ⇒ toksik-çift vetosu hiç tetiklenmez, `isHardBlocked` daima `false`.
+⛔ **Ölçek yalnız çağrı noktasında düzeltilirse** iki tip + üç ölçek yorumu belirsizliği kalır ve hata yeniden doğabilir ⇒ **I-13 ile I-14 birlikte** yapılmalı (kuyruk bunu zaten söylüyor).
+⛔ **KVKK SIRASI:** C seçeneği `createMatchIfEligible`'ı (`scoring.service.ts:137`) canlandırır ve o fonksiyon `Match.mentorArchetype`/`mentiArchetype`'ı yazar. ⛔ BİRLİKTE YAPILMALI — önce silme yolu düzeltilir, SONRA Match yazımı açılır. Ters sıra = KVKK ihlali.
+
+**Kaynak:** `docs/raporlar/kesif/konsey-psikometri-2026-09-21.md` §3 (B.1-B.4) · §5 D.1. Kartın "AĞUSTOS SİNYALİ" gerilimi (ağustos yönü C'ye yakın, kart önerisi A) bu ekle ÇÖZÜLMEZ — yalnız fiyatı konur.
+
 **CEVAP:**
 
 ---
@@ -702,4 +755,388 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** A hızlı ama G1-23 dersini görmezden gelir; B bir kalem maliyetine kaybı önler; C hiçbir şey çözmez.
 **Benim önerim:** **B** — çünkü aynı hata bu projede bir kez ölçülmüş ve kural hâline getirilmiş (KURAL 15'in gerekçesi).
 **Cevap vermezsen:** madde 103 belirsiz kalır, her denetim turunda yeniden gündeme gelir.
+**CEVAP:**
+
+---
+
+## ⭐ DÖRT KONSEY KARARLARI (2026-09-21) — KARAR-38…52
+
+> Bu 15 kart dört konsey raporundan geldi. Numaralar **KARAR-37**'den devam ediyor (doğrulandı).
+> Kümeleme: 38-40 güvenlik/KVKK · 41-44 psikometri/eşleştirme · 45-48 içerik/metin · 49-52 belge yönetişimi.
+> ⛔ `CEVAP:` satırları **boş** — yalnız PO doldurur.
+
+---
+
+### KARAR-38 · Kurum sunucusunun ülkesi ve aydınlatma metninin düzeltilmesi  [HUKUK + ÜRÜN] (1 işi açar)
+> ⭐ **Kaynak:** güvenlik konseyi (`docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** bu kartın avukat sorusu **KARAR-47** (hukuki metin paketi) içinde tek seferde sorulur — ayrı bir hukuk görüşmesi açma.
+**Şu an ne var:** KVKK aydınlatma sayfası (`app/kvkk/page.tsx:92-107`) *"İrlanda (Avrupa Birliği) bölgesinde … GDPR standartlarına tabidir"* diyor. Proje belgesi ise PO teyidiyle veritabanı bölgesinin **Londra / Birleşik Krallık** olduğunu yazıyor (`CLAUDE.md:255`, madde 92, 2026-08-26) — **BK, AB üyesi değil.** Metin ayrıca "yönetilen PostgreSQL hizmeti" diyor, PROD ise kendi konteynerinde Postgres çalıştırıyor (`docker-compose.yml:16-24`). Aktarım bölümü (`:60-64`) Google/LinkedIn OAuth ve e-posta sağlayıcısını **hiç saymıyor**; işlenen veri listesinde (`:31-39`) 8 kategori eksik (mesaj içeriği, telefon, sosyal linkler, avatar, OCEAN/arketip, şikâyet kayıtları, IP adresi `platformAudit.ts:32`, `lastLoginAt`).
+**Sorun ne:** Kuruma ve kullanıcıya **yanlış ülke ve yanlış hukuki rejim** beyan ediliyor. Bir denetimde ilk bakılacak belge budur; yanlış beyan, eksik beyandan daha ağır sonuç doğurur.
+**Neden sana soruyorum:** Metin hukuki sonuç doğuruyor ve ajan doğru cevabı koddan çıkaramaz — **uygulama sunucusunun ülkesi kodda hiç yok** (yalnız veritabanı bölgesi belgede).
+**Seçenekler:**
+· **A — Metni gerçeğe uydur (Londra/BK + tüm alıcılar).** Kullanıcı ne görür: doğru ülke, doğru rejim ve tam alıcı listesi. Ne kazanırsın: beyan gerçeğe uyar, denetimde savunulabilir. **NE KAYBEDERSİN:** BK'ye aktarım **yurt dışı aktarım** sayılırsa KVKK Md.9 gereği ek açık rıza/taahhütname gerekebilir → **yeni bir rıza akışı** ve mevcut kullanıcılardan yeniden onay demek. Süre **M** · geri alınır ✅ · migration **yok**.
+· **B — Sunucuyu AB/Türkiye'ye taşı, metni koru.** Kullanıcı ne görür: hiçbir değişiklik. Ne kazanırsın: en temiz hukuki konum, ek rıza yükü yok. **NE KAYBEDERSİN:** taşıma **geri dönülmez bir altyapı işi** — kesinti riski, yeniden yapılandırma, maliyet; üstelik taşıma maliyeti bu turda **ölçülmedi**. Süre **L** · geri alınması **zor ⛔** · migration **yok** (veri taşınır).
+· **C — Önce avukata sor, sonra karar ver.** Kullanıcı ne görür: bir süre daha bugünkü (yanlış) metni. Ne kazanırsın: yanlış yöne para/zaman harcanmaz. **NE KAYBEDERSİN:** metin **yanlış hâliyle canlıda kalmaya devam eder**; her geçen gün yanlış beyanla kullanıcı alınır. Süre **S** (soru) + bekleme · geri alınır ✅ · migration **yok**.
+**Karşılaştırma:** A hızlı ve dürüst ama yeni bir rıza yükü getirebilir. B en temiz ama en pahalı ve maliyeti bugün bilinmiyor. C tek başına çözüm değil; A veya B'nin ön adımıdır.
+**Benim önerim:** **C → sonra A.** Çünkü "BK'ye aktarım ek rıza ister mi" sorusunun cevabı A'nın maliyetini tamamen değiştiriyor ve bunu ajan bilemez. Ama C'de **beklerken metin düzeltilmeli** — en azından "İrlanda/AB" ifadesinin kaldırılıp "sunucu konumu teyit ediliyor" denmesi, yanlış beyandan iyidir.
+**Cevap vermezsen:** GV-09 kilitli kalır; aydınlatma metni yanlış ülke beyanıyla canlıda durur. Avukat paketine bağlı **F-02** (mesaj saklama süresi), **F-03** (OAuth rıza metni) ve **GV-18** (rıza sürümü, `CONSENT_VERSION` yer tutucu) da **birlikte kilitli kalır**.
+**CEVAP:**
+
+---
+
+### KARAR-39 · Anonimleştirme kapsamı: psikometrik kopyalar ve başkasının yazdığı yorumlar  [ÜRÜN + KVKK] (1 işi açar)
+> ⭐ **Kaynak:** güvenlik konseyi (`docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** Hesap kapatınca `UserProfile.archetype`, OCEAN ve DISC değerleri **özenle siliniyor** (`gdprService.ts:112-119`) — ama **aynı arketip `Match` tablosunda düz metin duruyor** (`schema.prisma:1035-1036`, **NOT NULL**) ve `Match.mentorId → UserProfile.id → userId` zinciriyle hâlâ kişiye bağlanabiliyor. Ayrıca `MatchFeedback.comment` (başkasının o kişi hakkında yazdığı 1000 karakterlik yorum) hiç ellenmiyor; `fromUserId`'de **FK bile yok** (`:1170`) → şema düzeyinde hiçbir cascade yakalayamaz. Kullanıcıya verilen metin ise *"kimliğinizle ilişkilendirilebilir verileriniz geri döndürülemez şekilde anonimleştirildi"* diyor (`:50`).
+**Sorun ne:** Verilen taahhüt **psikometrik veri için gerçekleşmiyor**. Ayrıca `Match` satırını boşaltmak kurumun geçmiş eşleştirme istatistiklerini de etkiler — bu bir denge sorusu.
+**Neden sana soruyorum:** "Kişi gitti; ama onun hakkında **başkasının yazdığı** yorum ve onunla kurulmuş eşleşmenin istatistiği kalsın mı?" — bu bir KVKK yorumu değil, **ürün ve etik** kararıdır.
+**Seçenekler:**
+· **A — Arketipi boşalt, yorumu da boşalt.** Kullanıcı ne görür: verilen taahhüt aynen gerçekleşir. Ne kazanırsın: en temiz konum; taahhüt metni doğru olur. **NE KAYBEDERSİN:** `Match.mentorArchetype` **NOT NULL** → ya migration ile nullable yapılır ya `'[kaldırıldı]'` yazılır; kurumun geçmiş eşleştirme kalitesi analizi bozulur. Süre **M** · geri alınır ✅ · **migration olası**.
+· **B — Arketipi boşalt, yorumu bırak (yazarın verisi say).** Kullanıcı ne görür: profili gider, hakkında yazılanlar kalır. Ne kazanırsın: yazarın ifade kaydı korunur; **projede bu desen zaten var** (`gdprService.ts:168-171`, `MentorshipAgreement`'ta yalnız menti tarafı boşaltılıyor). **NE KAYBEDERSİN:** kişi hakkında 1000 karakterlik yorum sistemde kalır — "unutulma hakkı" tam karşılanmaz, kişi itiraz ederse savunması zor. Süre **S** · geri alınır ✅ · migration **yok**.
+· **C — İkisini de bırak, taahhüt metnini düzelt.** Kullanıcı ne görür: "anonimleştirildi" yerine "bir kısmı kalır" diyen dürüst ama küçültülmüş bir vaat. Ne kazanırsın: sıfır kod işi. **NE KAYBEDERSİN:** ürünün **en hassas vaadinden geri adım**; KVKK açısından da en zayıf konum. Süre **S** · geri alınır ✅ · migration **yok**.
+**Karşılaştırma:** A taahhüde birebir uyar ama istatistik maliyeti ve migration getirir. B mevcut proje desenine uygun ve ucuz, ama yorum konusunda savunması zayıf. C dürüst ama vaadi küçültür.
+**Benim önerim:** **B + taahhüt metninin netleştirilmesi** — arketip (kişinin **kendi** psikometrik verisi) A'daki gibi temizlenmeli; yorum ise projenin zaten benimsediği "yazarın verisi" desenine bırakılmalı; ama `gdprService.ts:50`'deki metin bu ayrımı **açıkça** söylemeli.
+**Cevap vermezsen:** GV-08'in **yorum ayağı** kilitli kalır (arketip + 4 alan ayağı karardan bağımsız yapılabilir); anonimleştirme 6 tabloyu atlamaya devam eder ve kullanıcıya verilen taahhüt yanlış kalır.
+**CEVAP:**
+
+---
+
+### KARAR-40 · Eski `POST /api/meetings` ucu: düzeltilsin mi, karantinaya mı alınsın  [ÜRÜN/TEKNİK] (1 işi açar)
+> ⭐ **Kaynak:** güvenlik konseyi (`docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** İki görüşme yaratma yolu var. Canlı arayüz `POST /api/meetings/book` kullanıyor (kimliği **token'dan** alıyor, güvenli — `meetingController.ts:515`). Eski `POST /api/meetings` ise kimliği **gövdeden** alıyor ve sahiplik kontrolü yok (`:155-211`, GV-06) — ama oryantasyon kilidini **uygulayan tek yol** da bu (`:162`).
+**Sorun ne:** Açık uç canlıda mount'lu ve her mentiye yetkili. Bunu düzeltmek mi kapatmak mı gerektiği bir mükerrer-kod kararı.
+**Neden sana soruyorum:** Uç kapatmak **geri dönülmez** ve projenin SİLME PROTOKOLÜ'ne tabi (`K-13`, `E-4`); protokol senin ikinci onayını şart koşuyor.
+**Seçenekler:**
+· **A — Sahiplik kapısı ekle, uç kalsın.** Kullanıcı ne görür: kimse başkası adına randevu açamaz; başka hiçbir şey değişmez. Ne kazanırsın: **bugün güvenli**, hiçbir şey kaybolmaz, protokol gerekmez. **NE KAYBEDERSİN:** mükerrer kod kalır; iki yol arasındaki davranış farkı (oryantasyon kilidi yalnız eski yolda) sürer ve gelecekte yine karışır. Süre **S** · geri alınır ✅ · migration **yok**.
+· **B — Karantinaya al (rota kapalı), oryantasyon kilidini `book`'a taşı.** Kullanıcı ne görür: tek bir randevu yolu; kilit artık gerçekten çalışıyor. Ne kazanırsın: mükerrerlik biter, kilit **doğru yolda** uygulanır (V-15'i de çözer). **NE KAYBEDERSİN:** iki iş birden; `K-13` protokolü gereği **niyet + ikame kanıtı + arşiv belgesi** yazılmalı; bir tur bekler ve bu arada açık uç açık kalır. Süre **M** · geri alınır ✅ (karantina 🟡) · migration **yok**.
+· **C — Şimdilik dokunma, `K-13`/`E-4` turunu bekle.** Kullanıcı ne görür: hiçbir değişiklik. Ne kazanırsın: hiçbir şey. **NE KAYBEDERSİN:** ⛔ **açık uç canlıda açık kalır** — GV-06 bir çıkış blokeri; kabul edilemez. Süre **0** · geri alınır ✅ · migration **yok**.
+**Karşılaştırma:** A açığı bugün kapatır ama teknik borcu bırakır. B doğru son hâldir ama yavaştır. C açığı açık bırakır.
+**Benim önerim:** **A şimdi, B sonra** — sahiplik kapısı bugün eklensin (GV-06 kapansın), karantina kararı `K-13`/`E-4` turunda SİLME PROTOKOLÜ ile verilsin. Güvenlik düzeltmesi temizlik kararını **beklememeli**.
+**Cevap vermezsen:** GV-06'nın **acil yaması yine de yapılabilir** (A yolu karardan bağımsızdır), ama mükerrerlik ve oryantasyon kilidinin yanlış yolda durması sürer; V-15 ve K-13 ile birlikte belirsiz kalır.
+**CEVAP:**
+
+---
+
+### KARAR-41 · Mentörün bir kontenjanı olsun mu? (1 işi açar — P-15)  [ÜRÜN KARARI · ŞEMA]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** Kapasite/kontenjan kavramı **kodda hiç yok** (kapsam: BE `src/` · `prisma/` · `tests/`; terimler `maxMentees · capacity · maxMenti · kontenjan · kapasite · activeMentiLimit · mentiLimit`, harf duyarsız + iki dilli → ilgili **0 eşleşme**; dönen 4 satır SMTP adresi, seed soru metni ve e-posta testi). Eşleştirmenin hiçbir elemesi aktif menti sayısına bakmıyor (`matching.ts:267,270,274,278,283`).
+**Sorun ne:** 20 aktif mentisi olan mentör ile hiç mentisi olmayan mentör **aynı havuzda, aynı skorla** yarışıyor. Sektörü uyan popüler bir mentör herkese önerilmeye devam ediyor; yeni katılan mentöre hiç talep gitmiyor. Mentör personasının kendi endişesi tam olarak bu: *"sürekli meşgul edilmek istemem — mentörlük ara ara bir iştir"* ve *"herkesle eşleşmek istemem, seçicilik korunmalı"* (`persona/mentor-persona-...:60-62`).
+**Neden sana soruyorum:** Kontenjan koymak *"kim kiminle eşleşebilir"i* değiştirir — bir mentör, uyumlu olduğu hâlde bir mentiye artık görünmez. Bu bir ürün vaadidir, teknik ayar değil.
+**Seçenekler:**
+**A) Kontenjan yok (bugünkü durum)** · Kullanıcı ne görür: değişiklik yok · Ne kazanırsın: iş yok; menti her zaman en uyumlu mentörü görür · **Ne kaybedersin:** popüler mentör bunalır ve platformu bırakabilir; yeni mentör hiç talep almaz, o da bırakır; P-15 satırı sonsuza kadar kilitli kalır · Süre **yok** · Geri alınır **—(değişiklik yok)** · Migration **yok**
+**B) Mentör kendi kontenjanını belirlesin** (profilinde "aynı anda en fazla N menti") · Kullanıcı ne görür: mentör bir sayı seçer, dolunca havuzdan düşer · Ne kazanırsın: seçicilik mentörün elinde, persona endişesi doğrudan karşılanır · **Ne kaybedersin:** **yeni alan = migration**; menti "dün gördüğüm mentör kayboldu" diyebilir ve sebebini kimse açıklayamaz; kontenjanların dolu olduğu bir kurumda menti **hiç mentör göremeyebilir** · Süre **M** · Geri alınır **evet** (alan kalır, filtre kapatılır) · Migration **VAR**
+**C) Kontenjan yok ama skorda yumuşak yük dengesi** (aktif menti sayısı arttıkça skor bir miktar düşer) · Kullanıcı ne görür: yoğun mentör listede aşağı iner ama **kaybolmaz** · Ne kazanırsın: migration yok (sayım canlı hesaplanır); kimse havuz dışında kalmaz · **Ne kaybedersin:** mentörün kendi tercihi **sorulmamış** olur, persona endişesi tam karşılanmaz; "%uyum" artık saf uyum olmaktan çıkar, sayının anlamı bulanır ve kullanıcıya açıklanamaz · Süre **M** · Geri alınır **evet** · Migration **yok**
+**Karşılaştırma:** Sorun bugün "mentör bunalıyor" mu, yoksa "yeni mentör talep alamıyor" mu — cevaba göre değişir. Birincisiyse B (tercih mentörde), ikincisiyse C (dağıtım düzelir, kimse kaybolmaz). A yalnız mentör sayısı mentiden fazlaysa güvenlidir.
+**Benim önerim:** **C** — çünkü migration gerektirmiyor ve iki sorunun da acı tarafını azaltıyor; B sonradan üzerine eklenebilir. *(Bu senin ürün kararın; mentörlerin "beni koru" demesi senin için asıl mesele ise B doğrudur — önerime güvenme.)*
+**Cevap vermezsen:** **P-15 satırı kilitli kalır** (bugün "kartsız gizli 🔴" durumunda); dağıtım dengesizliği sessizce sürer ve kimse şikâyet etmediği için fark edilmez.
+**CEVAP:**
+
+---
+
+### KARAR-42 · DISC testi tekrar edilebilsin mi? (3 düğme bunu vaat ediyor, hiçbiri çalışmıyor)  [ÜRÜN KARARI · VERİ]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+⚠️ **Kaç işi açar:** bugün kuyrukta **doğrudan karşılığı olan satır YOK** — cevap gelince PO'nun **yeni satır açması gerekir**; ayrıca **PS-10**'daki çıkışsız döngünün diğer ucunu kapatır ve **PS-03**'ün (Likert `discType`) kullanıcı faydasını görünür kılar.
+**Şu an ne var:** Arayüzde üç ayrı düğme *"DISC Testini Güncelle"* / *"DISC Profilini Güncelle"* diyor (`mentor/page.tsx:163` · `menti/page.tsx:284` · `profile/page.tsx:225,234`). Üçü de `/disc-test`'e götürüyor. Ama soru havuzunun **tamamını** cevaplamış bir kullanıcı oraya girince **tek soru bile göremiyor**: sistem *"DISC Profiliniz Hazır!"* yazıp **2,5 saniye sonra panoya geri atıyor** (`questionService.ts:174` → `useDiscTest.ts:223,195-199` → `disc-test/page.tsx:53-56`). Cevapları sıfırlayan hiçbir yol yok (kapsam: BE `src/` tamamı, `userResponse.delete|reset.*test|retake` harf duyarsız → tek isabet `gdprService.ts:108`, o da hesap silme).
+⚠️ **Sınır — abartma:** bu yalnız **havuzun tamamını** cevaplamış kullanıcıyı etkiler; onboarding'i bitirip Likert havuzuna hiç girmemiş kullanıcı testi normal görür. Etkilenen kitlenin büyüklüğü **TEYİT GEREK (canlı DB)**.
+**Sorun ne:** Kullanıcıya bir söz veriliyor ve sessizce tutulmuyor. Kişi kendini değişmiş hissedip profilini güncellemek istiyor, düğmeye basıyor, hiçbir şey olmuyor. Üstelik "uygun mentor bulunamadı" ekranı da onu **aynı çalışmayan sayfaya** yönlendiriyor (`menti/page.tsx:276-287`) → **çıkışsız döngü**.
+**Neden sana soruyorum:** Testin tekrar edilebilmesi teknik değil ürün/veri kararı. Tekrar test **eski cevapların üzerine yazar** (`@@unique([userId, questionId])` + `upsert`, `questionService.ts:198-208`) — geçmiş tutulmuyor (kapsam: `schema.prisma` tamamı, `ResponseHistory|ResponseVersion|Audit.*Response` → yok). "Kişinin eski profili silinsin mi, saklansın mı" verinin anlamını belirler.
+**Seçenekler:**
+**A) Düğmeleri dürüst yap** — tekrar testi açma, düğmeyi *"DISC profilimi gör"*e çevir · Kullanıcı ne görür: vaat edilmeyen şeyi beklemiyor · Ne kazanırsın: yalan biter, iş küçük · **Ne kaybedersin:** kişi profilini **hiç** güncelleyemez; zamanla profil bayatlar ve eşleştirme eskiyen veriyle çalışır; PS-03'ün (Likert `discType`) düzeltmesi kullanıcıya hiç yansımaz · Süre **S** · Geri alınır **evet** · Migration **yok**
+**B) Tekrar testi aç, eski cevapların üzerine yaz** · Kullanıcı ne görür: testi baştan alabiliyor · Ne kazanırsın: vaat tutulur, profil tazelenir, çıkışsız döngü kapanır · **Ne kaybedersin:** **eski profil geri getirilemez**; "kişi zamanla nasıl değişti" sorusu sonsuza kadar cevapsız kalır; kötü niyetli kullanıcı skorunu deneme-yanılmayla optimize edebilir · Süre **M** · Geri alınır **hayır (veri kaybı)** · Migration **yok**
+**C) Tekrar testi aç + eski cevabı sürümle** (geçmiş tablosu) · Kullanıcı ne görür: B ile aynı · Ne kazanırsın: profil değişimi izlenebilir, ileride "gelişim grafiği" mümkün · **Ne kaybedersin:** **yeni tablo = migration**; canlı DB'ye dokunuş ve yedek zorunluluğu; iş belirgin büyür; KVKK saklama süresi sorusu da açılır · Süre **L** · Geri alınır **kısmen** · Migration **VAR**
+**Karşılaştırma:** Canlıda çok az kullanıcı varsa B'nin veri kaybı küçüktür ve vaadi hemen tutar. Ürün ileride "kendi gelişimini gör" iddiası taşıyacaksa C'yi **sonradan** eklemek geriye dönük veriyi kurtaramaz — o veri zaten kaybolmuş olur. A en ucuz ve en dürüst olan; ama profil tazeleme ihtiyacını tamamen erteler.
+**Benim önerim:** **B** — çünkü vaat zaten verilmiş durumda ve tutulmaması kullanıcıya bugün zarar veriyor; sürümleme ayrı ve sonradan verilebilecek bir karardır. *(Bu senin ürün kararın; "geçmişi saklamak" sana önemli geliyorsa önerime güvenme, C doğrudur.)*
+**Cevap vermezsen:** Üç düğme yalan söylemeye devam eder; "uygun mentor yok" ekranındaki çıkışsız döngü (PS-10) kapanmaz.
+**CEVAP:**
+
+---
+
+### KARAR-43 · İki yön neden farklı? Menti, mentörün eleyeceği bir eşleşmeyi görmeye devam etmeli mi? (1 işi açar — cevap sonrası yeni satır)  [ÜRÜN KARARI]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** Eşleştirme iki yönde **asimetrik** çalışıyor (`matching.ts:265-323` ↔ `:406-427`). Mentör→menti yönünde altı mekanizma var: kalite çarpanı (`:300`), toksik-çift vetosu D×S (`:283`), zaman uyumu filtresi (`:274-276`), beklenti kesişimi (`:278-281`), 4 kademeli fallback (`:200-227`), iletişim tarzı bonusu +10 (`:288-294`). **Menti→mentör yönünde bunların HİÇBİRİ yok.**
+**Sorun ne:** Aynı çift, iki taraftan bakınca **farklı yüzde** görüyor. Mentörün *"bana uygun değil"* diye eleyeceği bir menti, kendi panelinde o mentörü yüksek uyumla görüp talep gönderiyor — ve reddediliyor. Menti için bu, sistemin ona **yanlış umut** vermesidir.
+**Neden sana soruyorum:** "Menti neyi görebilmeli" doğrudan ürün kararıdır. Filtreleri menti yönüne de uygulamak menti havuzunu **daraltır** — az mentörlü kurumda menti ekranı boşalabilir.
+**Seçenekler:**
+**A) Bugünkü gibi kalsın (menti her şeyi görür)** · Kullanıcı ne görür: değişiklik yok · Ne kazanırsın: menti ekranı hiç boşalmaz, umut sinyali korunur; iş yok · **Ne kaybedersin:** yanlış umut ve boşa giden talepler sürer; "neden mentörde %74, bende %88 yazıyor?" sorusunun cevabı hiç olmaz; her ret bir hayal kırıklığı üretir (P-05'in yükünü artırır) · Süre **yok** · Geri alınır **— (değişiklik yok)** · Migration **yok**
+**B) Filtreler iki yöne de uygulansın (simetrik)** · Kullanıcı ne görür: menti yalnız gerçekten uyumlu mentörleri görür · Ne kazanırsın: yüzdeler tutarlı, boşa talep azalır · **Ne kaybedersin:** **menti ekranı boşalabilir** — özellikle küçük kurumda; "hiç mentör yok" hissi menti personasının en büyük kayıp riski (`menti-persona-...:65,73`); boşalan ekranın sebebini de açıklayamayız (PS-10 ile çakışır) · Süre **M** · Geri alınır **evet** · Migration **yok**
+**C) Simetrik filtre + menti yönünde fallback** (eleme uygulanır, liste boşalırsa mentör yönündeki 4 kademenin aynısı gevşetir) · Kullanıcı ne görür: uyumlu liste görür; liste boşalırsa "uyum düşük" rozetiyle yine bir şey görür · Ne kazanırsın: B'nin tutarlılığı + A'nın boşalmama güvencesi · **Ne kaybedersin:** en büyük iş; iki yönün kodu ortaklaştırılmalı (bugün ayrı yazılmış) ⇒ **canlı sıralama regresyon riski** ve bu riski yakalayacak test bugün yok (PS-07/PS-08 önce yapılmalı) · Süre **L** · Geri alınır **evet** · Migration **yok**
+**Karşılaştırma:** Kurumlarda mentör sayısı mentiden azsa B tehlikelidir — menti boş ekran görür ve gider. C bu riski kapatır ama en pahalısıdır. A yalnız "yanlış umut"un maliyetini kabul ediyorsan doğrudur.
+**Benim önerim:** **C** — çünkü fallback mekanizması zaten yazılı (`matching.ts:200-227`), diğer yöne taşınması sıfırdan tasarım değil. *(Bu senin ürün kararın.)*
+**Cevap vermezsen:** Asimetri sürer; iki taraftaki yüzde tutarsızlığı açıklanamaz ve mentörün eleyeceği mentiler talep göndermeye devam eder.
+**CEVAP:**
+
+---
+
+### KARAR-44 · Algoritma kendi sonuçlarından öğrensin mi — ve hangi memnuniyet verisi "gerçek" sayılsın? (2-3 işi açar)  [ÜRÜN + VERİ KARARI]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+⚠️ **KÜMELEME UYARISI (PO'ya):** Bu kartın kapsamı **mevcut KARAR-12** (*"Görüşme geri bildirim kayıt sistemi ne olsun?"*, `01-KARARLAR.md:282`) ile **büyük ölçüde örtüşüyor** — KARAR-12 açıkça `feedbackLogRoutes.ts` + `FeedbackLog` modeli + **`rewardPenalty.ts` skorlama mantığını** kapsıyor. `CLAUDE.md` **"KÜMELE"** kuralı gereği PO iki seçenekten birini tercih etmeli: **(i)** bu kart açılmaz, metni **KARAR-12'ye `⚠️ EK` olarak** eklenir; **(ii)** ayrı kart açılır ve KARAR-12 *"bu kartla birlikte cevaplanır"* diye işaretlenir. **Ajan karar vermedi.**
+**Şu an ne var:** Öğrenme döngüsü **yazılmış ama kapalı**; iki ayrı kopma:
+ 1. Görüşme sonrası check-in'lerden *"D mentör + S menti bu kurumda kötü gidiyor"* sinyali hesaplanıp `MatchCombinationScore` tablosuna **yazılıyor** (`rewardPenalty.ts:58-62`, 16 DISC kombinasyonu) — ama eşleştirme motoru bu tabloyu **hiç okumuyor** (kapsam K5: `rewardPenalty · getCombinationScores · matchCombinationScore · applyFeedbackSignal` × BE+FE → sıralama yolunda **0 okuma**). Kodun kendi yorumu gelecek zamanla yazılmış: *"…bonus/ceza **uygulayabilir**"* (`:66-68`).
+ 2. Haftalık otomatik ağırlık ayarı (Pazar 02:00 UTC, `cronScheduler.ts:71`) `FeedbackLog`'un NPS'ini okuyor (`algorithmTuner.ts:144-161`) — ama **hiçbir ekran o tabloya yazmıyor** (FE'de `POST /api/feedback-logs` → **0**). Gerçek memnuniyet **başka tabloya** gidiyor: `Feedback.periodicNpsScore` (`periodic-survey/page.tsx:54-58`, `schema.prisma:648`). İki alan arasında senkron yok ⇒ cron her hafta koşup *"yeterli veri yok"* deyip dönüyor (`algorithmTuner.ts:286,290-292`), yöneticinin **"Başarı oranı"** kartı da bu yüzden daima boş (`adminController.ts:91-96` → `admin/kpi/page.tsx:70` `—`).
+**Sorun ne:** Ürün *"gerçek kullanıcı verisi biriktikçe kalibre edilecek"* diye **yazılı bir söz** veriyor (`eslesme-uyum-po-inceleme-2026-08-26.md:91`). Bugün o söz **yapısal olarak tutulamaz**: veri toplanıyor, bir yere yazılıyor, ama okuyan yok. Kurum *"eşleştirmeniz işe yarıyor mu"* diye sorduğunda sistem cevap veremiyor.
+**Neden sana soruyorum:** İki ayrı ürün sorusu var, ikisi de teknik değil: (a) algoritma kendi kendine değişsin mi, yoksa her değişiklik insan onayından mı geçsin; (b) hangi memnuniyet ölçümü **resmî** sayılsın. (b) verinin anlamını belirler ve geri dönüşü zordur.
+**Seçenekler:**
+**A) Döngü kapalı kalsın; yalnız dürüstlük düzeltilsin** (KPI kartı yanıltıcı `—` yerine "veri yok" desin = PS-05) · Kullanıcı ne görür: yönetici kartın neden boş olduğunu okur · Ne kazanırsın: en ucuz; yanlış izlenim biter · **Ne kaybedersin:** algoritma **hiç öğrenmez**, ağırlıklar sonsuza kadar sezgisel kalır; toplanan check-in verisi çöpe gider; kalibrasyon sözü belgede kalırsa her denetimde yeniden bulunur (çıkarılması gerekir) · Süre **S** · Geri alınır **evet** · Migration **yok**
+**B) Tek canonical NPS seç + otomatik ayarı çalışır hâle getir** (`Feedback.periodicNpsScore`'u tuner'a bağla) · Kullanıcı ne görür: yönetici gerçek başarı oranını görür; ağırlıklar veriye göre **önerilir** (uygulama yine admin onayıyla, `algorithmTuner.ts:373`) · Ne kazanırsın: verilen söz tutulur, ağırlık sezgiden çıkar, insan onayı korunur · **Ne kaybedersin:** iki alandan biri **terk edilir** → `FeedbackLog.npsScore` ölü alan olur ve SİLME PROTOKOLÜ gerektirir; eşiğe (≥10 yanıt) ulaşana kadar kart yine boş görünür; iki alanın geçmiş verisi **birleştirilemez** · Süre **M** · Geri alınır **evet** · Migration **yok** (mevcut alanlar kullanılır)
+**C) B + kombinasyon skorunu da sıralamaya bağla** (tam öğrenme döngüsü) · Kullanıcı ne görür: eşleştirme zamanla o kuruma özel iyileşir · Ne kazanırsın: yatırılmış emeğin tamamı karşılığını verir; ürünün asıl iddiası gerçekleşir · **Ne kaybedersin:** **sıralama kendiliğinden değişmeye başlar** — aynı menti dün gördüğü mentörü bugün göremeyebilir ve sebebini kimse açıklayamaz; az veriyle erken öğrenme **yanlış** öğrenmedir (birkaç kötü check-in koca bir DISC kombinasyonunu cezalandırır); hata ayıklaması zor ve bugün bunu yakalayacak test yok (PS-07/PS-08 ön koşul) · Süre **L** · Geri alınır **kısmen** (bayrakla kapatılır, öğrenilmiş katsayılar kalır) · Migration **yok**
+**Karşılaştırma:** Canlıda kullanıcı sayısı düşükken C tehlikelidir. B, sözü tutar ve insan onayını korur. A yalnız "şimdilik ölçmeyeceğiz" demeye hazırsan doğrudur — ama o zaman kalibrasyon sözünün belgeden **çıkarılması** gerekir.
+**Benim önerim:** **B** — çünkü sözü tutuyor, insan onayını koruyor ve az veriyle yanlış öğrenme riskini almıyor. *(Bu senin ürün kararın.)*
+**Cevap vermezsen:** Cron her hafta boşa koşar, KPI kartı sessizce boş kalır, toplanan check-in verisi hiçbir işe yaramaz; **KARAR-12 de fiilen cevapsız kalır.**
+**CEVAP:**
+
+---
+
+### KARAR-45 · Arketip adları: hangi metin hangi koda bağlanacak? (4 işi açar) [ÜRÜN KARARI]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** **KARAR-10** (OCEAN motoru) ile karıştırma — o *motor açılsın mı*, bu *hangi ad hangi koda bağlansın*. Motor açılmasa bile ad↔kod kararı **IC-14 · I-01 · I-15**'i açar.
+
+**Şu an ne var:** Kullanıcı bugün mizaç testini bitirince "Sen bir **Öncü**sün!" gibi bir kart görüyor
+(4 ad: Öncü · Ateşleyici · Yapı Taşı · Kâşif). Kanıt: `onboardingController.ts:53-104`, ekran `ResultStep.tsx:39-43`.
+Ayrıca yazılmış ama hiç gösterilmeyen **8 yeni arketip kartı** var (Mimar · Ayna · Liman · Pusula / Rotacı · Kâşif ·
+Denge Arayan · İz Açan) — `arketip-ve-yaklasim-icerigi-2026-09-03.md:153-261`.
+
+**Sorun ne:** Üç ayrı yerde "**Kâşif**" var ve üçü farklı kişiyi anlatıyor: canlıdaki DISC kartında bir mizaç tipi
+(`onboardingController.ts:94`), eski karar belgesinde bir **mentör** tipi (`03-psikometri-ve-algoritma.md:14`),
+yeni içerikte bir **menti** tipi (`arketip-...md:53`). Üstelik yeni 8 adın hiçbirinin, sistemin içindeki kod
+değerine (M1…m4 gibi teknik etiketler) karşılığı **hiçbir belgede yazılı değil**. Buna karar verilmeden yeni
+kartlar bağlanamaz; bağlanırsa kullanıcı aynı adı iki ekranda iki farklı anlamda görür. Ayrıca yeni adlardan
+**"İz Açan" senin onayını almamış** (belge `:263` bunu kendisi not etmiş).
+
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında okuduğu **kimlik etiketi**. Teknik değil; hangi adın
+kalacağı, hangisinin emekli olacağı ürün kararı ve geri dönmesi zor (kullanıcı ekran görüntüsü paylaşıyor —
+`onboardingController.ts:68` `shareHeadline`).
+
+**Seçenekler:**
+**A) Yeni 8 ad kazanır, canlıdaki 4 DISC adı emekli olur** · Kullanıcı: yeni kartları görür, eski adlar kaybolur ·
+Kazanç: tek sistem, çakışma biter · Kayıp: bugün test çözmüş kullanıcıların bildiği ad değişir; "Kâşif" anlam
+değiştirir (mizaç tipi → menti arketipi) · Süre: M · Geri alınır: evet (metin) · Migration: yok
+**B) İkisi yan yana yaşar — farklı şeyler oldukları açıkça yazılır** · Kullanıcı: hem mizaç kartını hem arketip
+kartını görür · Kazanç: hiçbir içerik çöpe gitmez · Kayıp: iki kavramı ayırt etmek kullanıcıya iş yükü;
+"Kâşif" çakışması **sürer** (ad değişmezse kafa karışıklığı kalıcı) · Süre: M · Geri alınır: evet · Migration: yok
+**C) Yeni 8 ad kazanır ama çakışan adlar yeniden adlandırılır** ("Kâşif" ve onaysız "İz Açan" değişir) ·
+Kullanıcı: çakışmasız tek sistem · Kazanç: hem çakışma hem onay sorunu biter · Kayıp: 2 ad yeniden yazılır,
+8 kartın ilgili cümleleri elden geçer (belgeye göre "İz Açan" 6 yerde geçiyor) · Süre: M+ · Geri alınır: evet
+
+**Karşılaştırma:** Eski 4 adın kullanıcı zihninde yer ettiğini düşünüyorsan B; tek ve temiz bir sistem istiyorsan
+A; A'yı istiyorsun ama "Kâşif"in iki anlamı seni rahatsız ediyorsa C. A ve C arasındaki tek fark iki adın yeniden
+yazılması.
+**Benim önerim:** C — çakışma kalıcı kafa karışıklığı üretir ve "İz Açan" zaten onayını bekliyor; ikisini tek
+turda kapatmak ucuz.
+**Cevap vermezsen:** I-01 (yaklaşım metinleri), I-15 (arketip kartı), C-?? (ham `M1` kodları) ve madde 139'un
+menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
+**CEVAP:**
+
+---
+
+### KARAR-46 · Sertifika içeriğinin hangi sürümü canlıya gidecek? (P-99'u açar) [ÜRÜN KARARI · SEED]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** **KARAR-3** (kriz senaryosunun hukuki metni) ile aynı seed'i bekliyor ama farklı soru — o *tek cümlenin hukuku*, bu *hangi sürüm*. İkisi de cevaplanmadan **P-99 → K-16** zinciri açılmaz. ⚠️ Kapsam: yeni sürüm 88 şıkın TAMAMINI taşır ve seed'deki 20 senaryonun 15'ini eler (bkz. `00-KUYRUK` P-99 sayı düzeltmesi).
+
+**Şu an ne var:** Aynı sertifika sahnesi **üç farklı metinle** üç yerde duruyor: 2026-09-03 tarihli faz6 belgesi ·
+2026-09-08 tarihli oturum belgeleri · **kodda bambaşka bir üçüncü sahne** (`seed-certification.ts:216-217`).
+Hangisinin canlıya gideceği hiçbir belgede yazmıyor; faz6 hâlâ "dondurulmuş" etiketli.
+
+**Sorun ne:** Kuyruk (P-99) işi "22 senaryoyu seed'e taşı" diye tarif ediyor; gerçekte **22'nin 17'sinin seed'de
+karşılığı yok, seed'deki 20'nin 15'i belgelerde gerekçeli elenmiş** ve ortak olan 5 senaryonun **5'i de yeniden
+yazılmış** — birinde puanlamanın anlamı ters dönmüş. Ayrıca taşımadan önce üç teknik soru cevapsız: konu
+kodlarının değişmesi kurumların "kapattığım konu" kaydını öksüz bırakır, geçme eşiği 10 konuda 8 iken 11 konuda
+**9'a çıkar** (sertifika zorlaşır), ve belgelerdeki 17 "iç not" konu düzeyinde yazılmış ama alan **şık**
+düzeyinde (`schema.prisma:1158`).
+
+**Neden sana soruyorum:** Hangi içeriğin mentörlere sınav olarak çıkacağı ve sertifikanın **zorlaşması** ürün
+kararı; ayrıca canlı veriye yazma (seed) senin iki değişmez kuralından biri.
+
+**Seçenekler:**
+**A) 2026-09-08 serisi kazanır — tam taşıma** · Kullanıcı: 11 konu / 22 senaryo ile sınava girer, sertifika
+zorlaşır (8→9 konu) · Kazanç: en olgun içerik canlıya çıkar, elenen 15 sahnenin gerekçesi zaten yazılı ·
+Kayıp: 88 şıkkın tamamı yeniden yazılacak (efor L), konu kodları değişince eski kayıtlar öksüz kalır ·
+Süre: L · Geri alınır: evet (yedek + pasifleştirme) · Migration: yok (iç not şık düzeyinde kalırsa)
+**B) Önce yalnız 4 kritik (red-line) konu taşınır, gerisi sonra** · Kullanıcı: kriz/sınır/gizlilik/geri bildirim
+konularında yeni metni görür, kalan 7 konu eski metinde kalır · Kazanç: en riskli içerik önce düzelir, efor M ·
+Kayıp: bir süre **karışık sürüm** yayında olur (bazı konular yeni, bazıları eski); geçme eşiği iki kez değişir ·
+Süre: M · Geri alınır: evet · Migration: yok
+**C) Hiç taşıma — bugünkü 20/80 kalır** · Kullanıcı: bugünkü sınavı görmeye devam eder · Kazanç: sıfır risk,
+sıfır iş · Kayıp: üç haftadır yazılı duran içerik rafta kalır; **puanlama anlamı ters olan senaryo canlıda
+kalmaya devam eder** · Süre: — · Geri alınır: —
+
+**Karşılaştırma:** Sertifikanın zorlaşmasını şimdi göze alabiliyorsan A tek turda biter. Kriz içeriğinin doğru
+olması acilse ama toplu değişimi istemiyorsan B; ama karışık sürüm yönetmek gerekir. C'nin tek savunması zaman.
+**Benim önerim:** A — ama **KARAR-3 ve KARAR-4 cevaplanmadan başlanamaz** (kriz senaryolarının 8 şıkkı onlara
+bağlı) ve iş ikiye bölünmeli: "içerik taşıma PR'ı" ve "seed çalıştırma turu".
+**Cevap vermezsen:** P-99 ve K-16 açık kalır; sertifika ekranı bugünkü hâliyle kalır.
+**CEVAP:**
+
+---
+
+### KARAR-47 · Hukuki metin paketi — avukata tek seferde ne sorulacak? (5 kalem) [HUKUKİ · PO+AVUKAT]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** **KARAR-38** (sunucu ülkesi/aydınlatma metni) · **KARAR-3/KARAR-4** (sertifika kriz metni) · **F-02** (mesaj saklama süresi) · **F-03**/**GV-18** (rıza sürümü) hepsi aynı avukat paketine bağlı — **tek görüşmede** sorulmalı.
+
+**Şu an ne var:** Ürünün üç hukuki sayfası (KVKK aydınlatma · gizlilik · kullanım koşulları) **kendi içinde
+"bu metin taslaktır" diyor** (`kvkk/page.tsx:109` · `gizlilik/page.tsx:85` · `terms/page.tsx:73`), ama kayıt
+ekranı kullanıcıya bu metinler için **zorunlu açık rıza** aldırıyor (`_RegisterContent.tsx:398-418`).
+
+**Sorun ne:** Beş ayrı yerde, kodun gerçekten yaptığından **daha fazlasını vaat eden** ya da eksik kalan metin var:
+① davet kartı *"Bilgileriniz KVKK uyumlu … ve güvendedir"* (`InvitationCard.tsx:142`) ve footer *"KVKK uyumlu"*
+damgası (`page.tsx:65`) — metinler taslakken koşulsuz uyum beyanı · ② geri bildirim ekranı *"kimliğin
+paylaşılmaz"* diyor (`MeetingFeedbackCard.tsx:173`) ama yönetici geri bildirimleri **ad-soyadla** listeliyor
+(`feedbackLogController.ts:134-135`) · ③ "Sertifikalı Mentör" rozeti hiçbir yerde "bu mesleki bir yeterlilik
+değildir" demiyor (kapsam: `frontend/src/app/**`, 6 terim TR+EN → **0 çekince**) · ④ landing *"Sonsuza kadar
+ücretsiz"* diyor (`HeroSection.tsx:34,51`), koşullarda karşılığı yok · ⑤ 18 yaş beyanı ayrı kutu değil, KVKK
+rızasının metnine gömülü (`_RegisterContent.tsx:162`) ve **yaş verisi hiç saklanmıyor** → beyanın ispatı yok
+(`consentService.ts:59`).
+
+**Neden sana soruyorum:** Hepsi hukuki sonucu olan metin. Ben avukat değilim; aşağıdaki hiçbir şey hukuki görüş
+değildir ve **metin önerisi yazılmadı**.
+
+**Seçenekler:**
+**A) Beşini tek pakette avukata sor, cevap gelene kadar dokunma** · Kullanıcı: bugünkü metinleri görmeye devam
+eder · Kazanç: tek seferde doğru metin, dağınık düzeltme olmaz · Kayıp: süresiz bekleme; "güvendedir" ve
+"kimliğin paylaşılmaz" gibi **kodla çelişen** cümleler yayında kalır · Süre: ? · Geri alınır: —
+**B) Kodla ÇELİŞENLERİ hemen düzelt (② ve ①), geri kalanı avukata bırak** · Kullanıcı: doğru kapsamı okur ·
+Kazanç: yanlış beyan bugün kalkar, hukuki yorum gerektirenler beklemede kalır · Kayıp: iki kez metin turu olur ·
+Süre: S + bekleme · Geri alınır: evet
+**C) Beşini de şimdi yumuşat, avukat gelince rafine et** · Kullanıcı: daha temkinli metinler görür ·
+Kazanç: risk bugün düşer · Kayıp: pazarlama gücü azalır ("sonsuza kadar ücretsiz" ve "KVKK uyumlu" satış
+cümleleri); avukat gelince üçüncü kez yazılır · Süre: M · Geri alınır: evet
+
+**Karşılaştırma:** ② ve ① kodun yaptığıyla doğrudan çelişiyor — bunlar hukuki yorum değil **olgu düzeltmesi**,
+avukat beklemeye gerek yok. ③④⑤ gerçekten hukuki yorum istiyor. B bu ayrımı yapan tek seçenek.
+**Benim önerim:** B — ama bu senin ürün/hukuk kararın, önerime güvenme.
+**Cevap vermezsen:** 13 hukuki bulgunun hiçbiri hareket etmez; ②'deki çelişki (kimlik paylaşılmaz ↔ yönetici
+ad-soyad görüyor) yayında kalır.
+**CEVAP:**
+
+---
+
+### KARAR-48 · Test sonucu ve eşleşme skoru kullanıcıya nasıl anlatılsın? (3 ekran) [ÜRÜN KARARI]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** Mizaç testi bitince ekran *"Sen bir Öncüsün!"* diyor, konfeti atıyor, *"En İyi Eş: S + C"*
+yazıyor ve *"…en uygun … kişiyle **eşleştirileceksin**"* diye söz veriyor (`ResultStep.tsx:39-43,71,98-100`).
+Eşleşme kartında *"%87 uyum"* gibi bir sayı var (`menti/page.tsx:311`), gerekçe üretilemezse yerine
+*"Genel profil uyumu"* basılıyor (`matchingController.ts:15`).
+
+**Sorun ne:** Ürünün kendi metodoloji sayfası *"kesin bir başarı garantisi değil"*, *"DISC kişilik tanısı
+değildir"* diyor — ama kullanıcının **gerçekten okuduğu** ekranlar (sonuç kartı, eşleşme kartı) bu temkinli dili
+taşımıyor: kimlik etiketi ("Sen bir X'sin"), üstünlük ("En İyi Eş"), kesin vaat ("eşleştirileceksin") ve
+açıklamasız bir yüzde. Üstelik sonuç kartında **paylaş düğmesi** var, yani bu dil ürünün dışına taşınıyor.
+Ayrıca havuz boşsa aynı kullanıcı birkaç ekran sonra *"uygun mentor bulunamadı"* görüyor — vaat tutulmuyor.
+
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında ne öğrendiği ve üründen ne beklediği; ölçü değil **vaat**
+meselesi. Teknik değil.
+
+**Seçenekler:**
+**A) Koşullu dile geç** ("şu an şu eğilimi gösteriyorsun", "genelde iyi anlaşılan", "eşleştirmeye çalışacağız",
+yüzde yerine bant) · Kullanıcı: daha dürüst, daha az kesin bir kart görür · Kazanç: metodoloji sayfasıyla tutarlı
+olur, vaat tutulmadığında hayal kırıklığı azalır · Kayıp: "aha anı" zayıflar, paylaşılabilirlik düşer ·
+Süre: S · Migration: yok
+**B) Bugünkü dil kalsın, yanına küçük bir çekince satırı eklensin** · Kullanıcı: aynı heyecanı yaşar, altında bir
+açıklama görür · Kazanç: etki korunur, dürüstlük eklenir · Kayıp: çekinceyi kimse okumaz; çelişki görünür kalır ·
+Süre: S · Migration: yok
+**C) Hiçbir şey değişmesin** · Kullanıcı: bugünkü kartı görür · Kazanç: sıfır iş, en güçlü ilk izlenim ·
+Kayıp: ürün iki dille konuşur (metodoloji temkinli, kart iddialı); yüzde açıklanmadığı için "neden bu mentör"
+sorusu cevapsız kalır · Süre: — · Geri alınır: —
+
+**Karşılaştırma:** İlk izlenimin çarpıcılığı büyüme için kritikse B; ürünün tek sesle konuşması senin için
+önemliyse A. C yalnızca bu çelişkiyi bilinçli kabul ediyorsan savunulabilir.
+**Benim önerim:** A — yüzde ve "eşleştirileceksin" ürünün **tutamadığı** iki vaat; kalan kısım zaten güçlü.
+**Cevap vermezsen:** C1-1…C1-6 (6 metin) olduğu gibi kalır; eşleşme kartındaki boş gerekçe de sürer.
+**CEVAP:**
+
+---
+
+### KARAR-49 · `devir/01` ve `devir/06`: "dondurulmuş" mu, "kalıcı referans" mı?  [BELGE POLİTİKASI] (2 işi açar)
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** İki devir belgesi künyesinde **tek cümle içinde** hem 📸 DONDURULMUŞ hem *"kalıcı referans"* yazıyor (`devir/01-felsefe-ve-calisma-tarzi.md:3` · `devir/06-devir-kilavuzu.md:3`). Üstelik `01`'in başlığı **"yeni sohbet önce bunu oku"**. İçlerinde bugün geçersiz olan **6 "PR aç, merge etme" satırı** var (`01`'de 2 · `06`'da 2 · `03`'te 1 · `04`'te 1). Kanıt: `docs/00-BELGE-HARITASI.md:61`. İkinci kat çelişki: `00-BELGE-HARITASI.md:38` bu iki dosyayı **🔄** etiketliyor, dosyalar kendini **📸** diyor.
+
+**Sorun ne:** Yeni bir oturum "önce bunu oku" diyen belgeyi açıp **artık geçerli olmayan merge kuralını** öğreniyor. Doğrusu kapıya bağlı (🟢 merge et · 🟡 PR'da bekle · 🔴 dokunma). Sonuç: ajan 🟢 işleri merge etmiyor, otonom kuyruk tıkanıyor. BB turu 9 yeri düzeltti, bu 6'sına "dondurulmuş belgeye dokunulmaz" gerekçesiyle dokunmadı — **iki turdur açık**.
+
+**Neden sana soruyorum:** Dondurulmuş belgeye dokunmak "tarihsel iz" ilkesini deler; dokunmamak yanlış kuralı yürürlükte bırakır. İkisi de belge politikası kararı, teknik değil.
+
+**Seçenekler:**
+· **A — Künyeden "kalıcı referans" ibaresini kaldır, yönlendirme ekle.** Kullanıcı ne görür: `01`/`06` açınca *"bu 2026-08-11 fotoğrafıdır; güncel kural `CLAUDE.md § MERGE POLİTİKASI`"*. Ne kazanırsın: tarihsel iz **tam korunur**, yanlış kural etkisizleşir. **Ne kaybedersin:** belge hâlâ "önce bunu oku" diyor — yeni gelen yine oradan başlar, 6 bayat satırı yine okur. Süre **S** · geri alınır ✅ · migration yok.
+· **B — 6 bayat satırı `~~[ESKİ]~~` + ⚠️ GÜNCELLEME ile damgala** (BB'nin diğer 9'da yaptığının aynısı). Kullanıcı ne görür: satırı görür ama üstü çizilidir, altında doğrusu yazar. Ne kazanırsın: **tutarlılık** — aynı kural her yerde aynı biçimde düzeltilmiş olur. **Ne kaybedersin:** dondurulmuş belge düzenlenmiş olur (ilke esner, emsal doğar); 4 dosyaya dokunulur; ileride "hangi 📸 belgeye dokunulabilir" sorusu belirsizleşir. Süre **S** · geri alınır ✅ · migration yok.
+· **C — `devir/01-06` setini arşive taşı, yerine tek "yeni gelen" sayfası.** Kullanıcı ne görür: tek güncel başlangıç sayfası. Ne kazanırsın: kök sorun biter, "önce bunu oku" tek ve doğru yere işaret eder. **Ne kaybedersin: en pahalısı** — 6 belge taşınır, onlara giden atıflar kırılır, devir hikâyesi dağılır; SİLME PROTOKOLÜ'nün 5 adımı işletilmeli. Süre **M** · geri alınır ⚠️ (git mv + atıflar elle) · migration yok.
+
+**Karşılaştırma:** A en ucuz ve ilkeye en sadık olanı ama "önce bunu oku" tuzağını bırakıyor. B tutarlılığı sağlıyor ve BB'nin zaten kurduğu deseni tamamlıyor; ilkeden sapması küçük çünkü damga **silme değil ekleme**. C sorunu kökten çözüyor ama bu turun kapasitesinin üstünde ve atıf ağını riske atıyor.
+
+**Benim önerim:** **B** — çünkü BB zaten 9 yeri bu desenle düzeltti; 6'sını dışarıda bırakmak kuralın kendisini yarım uygulamak oluyor, ve damga hiçbir tarihsel izi silmiyor.
+
+**Cevap vermezsen:** Belge işleri ilerler ama **yeni her oturum yanlış merge kuralını okumaya devam eder**; otonom kuyruk 🟢 işlerde tıkanmayı sürdürür.
+
+**CEVAP:**
+
+---
+
+### KARAR-50 · Kuralların "geçersizleşme koşulu" zorunlu olsun mu?  [BELGE/METODOLOJİ] (4 işi açar)
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** 74 kuraldan **6'sının** (%8,1) geçersizleşme koşulu yazılı; **68'inin yok**. 6'sının hiçbiri ölçülebilir tetik taşımıyor (*"X olunca"* diyor, X'i kimin ne zaman kontrol edeceği yazılı değil) — bu yüzden **hiçbiri kendiliğinden tetiklenmemiş**. Sonuç: koşulu fiilen sağlanmış 4 kural hâlâ yürürlükte görünüyor, biri **yanlış kanıta dayanan bir güvenlik kuralı** (`CLAUDE.md:442`, 24 gündür yanlış).
+⚠️ Brief *"KURAL 17 var ama yarım uygulanmış"* diyordu — **öyle bir kural hiç yazılmadı** (13 terim · BB + 11 dal · 0 dosya; bu turda `docs/` + `CLAUDE.md` yeniden tarandı → yalnız raporun kendi 4 "yok" beyanı çıktı).
+
+**Sorun ne:** Kurallar yalnız **birikiyor**, hiç düşmüyor. Her ders yeni kural oluyor, hiçbiri emekliye ayrılmıyor. CLAUDE.md bugün bölmeyle 34.742'ye indi ama **payı yalnız 258 karakter** — bir sonraki ders sınırı yeniden aşar.
+
+**Neden sana soruyorum:** Bu konseyin özel kuralı *"CLAUDE.md'yi BÜYÜTECEK hiçbir öneri kabul edilmez"* diyor. Böyle bir kural eklemek CLAUDE.md'yi büyütür. **Ben bu yüzden önermiyorum ve kuralı YAZMADIM** — ama sorunun kendisi gerçek ve kararı senin.
+
+**Seçenekler:**
+· **A — Kural EKLEME. Bunun yerine 4 bayat kuralı tek seferde düzelt** (YN-04, YN-05 + 2 takip kalemi). Kullanıcı/ajan ne görür: yanlış kanıta dayanan güvenlik kuralı düzelir. Ne kazanırsın: CLAUDE.md **büyümez**, bugünkü zarar biter, 258 karakterlik pay korunur. **Ne kaybedersin: mekanizma kurulmaz** — 3 ay sonra aynı yerde olursunuz, bayat kurallar yeniden birikir. Süre **S** · geri alınır ✅ · migration yok.
+· **B — Kural ekle ama yer aç: YN-14 birleştirmeleriyle BİRLİKTE uygula.** Ne kazanırsın: mekanizma kurulur **ve** dosya yine de küçülür (birleştirme ≈4.494 kazandırıyor, kural ~400 maliyet). **Ne kaybedersin:** kural sayısı artar, her yeni kural yazımı zahmetlenir; ve konseyin "büyütme" yasağını ancak bir paketle birlikte delmiş olursun — emsal doğar. Süre **M** · geri alınır ✅ · migration yok.
+· **C — Kural yerine ALIŞKANLIK: KURAL 12'nin 3. ayağını (tazelik denetimi) script'e bağla.** Ne kazanırsın: **sıfır karakter maliyeti** — denetim otomatikleşir, CLAUDE.md hiç büyümez. **Ne kaybedersin:** script yazılana kadar hiçbir şey değişmez; `CLAUDE.md` bunu *"ileride script ile"* diyeli beri **hiç yapılmadı** (`scripts/` altında tazelik script'i yok, yalnız `kvkk-docx-gen.py` + `verify.sh`) — aynı akıbet olabilir. Süre **M** · geri alınır ✅ · migration yok.
+
+**Karşılaştırma:** A bugünü kurtarır, yarını kurtarmaz. B kalıcı çözüm ama kural sayısını artırır ve yasakla ancak paket hâlinde bağdaşır. C en zarif olanı (maliyet sıfır) ama aynı söz bir kez verilip tutulmadı; script gerçekten yazılacaksa en iyisi, yazılmayacaksa en kötüsü.
+
+**Benim önerim:** **A şimdi, C sonra** — B'yi önermiyorum çünkü konseyin yasağını ancak bir paketle birlikte deler; A'nın kazancı kesin ve bugün alınabilir, C ayrı bir iş olarak kuyruğa girebilir.
+
+**Cevap vermezsen:** 4 bayat kural yürürlükte kalır — en ciddisi `CLAUDE.md:442`'deki **yanlış kanıtlı güvenlik kuralı**; ve kural birikmesi aynı hızla sürer, 258 karakterlik pay kısa sürede tükenir.
+
+**CEVAP:**
+
+---
+
+### KARAR-51 · 4 "yaşayan ama ölü" belge dondurulsun mu?  [BELGE POLİTİKASI] (2 işi açar)
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** 26 aktif 🔄 YAŞAYAN belgeden **2'si kesin ölü**, **2'si ölü adayı**. İkisi kendi içinde *"işi X devraldı"* yazıyor ama künyesi hâlâ 🔄 diyor: `kararlar/konu/08-acik-sorular.md:5` (→ `00-KARAR-TAKIP.md`) · `raporlar/icerik/kod-kalemleri-2026-09-03.md:8` (→ `00-KUYRUK.md` AŞAMA I). Adaylar: `kararlar/10-yol-tamamlananlar.md` · `raporlar/bilanco/kararlar/G9-belge-surec.md`.
+
+**Sorun ne:** 🔄 damgası "buraya bak, güncel" demek. Okuyan ölü belgeyi güncel sanıp yanlış yere yazıyor ya da bayat bilgiyi doğru sanıyor.
+
+**Neden sana soruyorum:** Bir belgeyi dondurmak *"bu artık canonical değil"* demektir — KURAL 7 gereği canonical kararı PO'nundur. Ayrıca `10-yol-tamamlananlar` için **atıf zinciri** var: `10-yol-haritasi.md:7` hâlâ oraya yönlendiriyor.
+
+**Seçenekler:**
+· **A — Yalnız 2 kesin ölüyü dondur.** Kullanıcı ne görür: bu ikisi *"📸 dondurulmuş, güncel için X"* diyor. Ne kazanırsın: kanıtı kendi içinde olan iki vaka kapanır, risk sıfır, hazır metinler mevcut. **Ne kaybedersin:** 2 ölü aday belirsiz kalır; `00-BELGE-HARITASI`'nın 🔄 sayımı yine tam doğru olmaz. Süre **S** · geri alınır ✅ · migration yok.
+· **B — Dördünü birden dondur.** Ne kazanırsın: 🔄 kümesi tamamen dürüst olur, sayım bir kerede düzelir. **Ne kaybedersin:** `10-yol-tamamlananlar` dondurulursa `10-yol-haritasi.md:7`'deki yönlendirme **kırık atıf** olur — önce o düzeltilmeli; `G9` için KURAL 12 eşiği henüz dolmadı (**2026-10-02**), erken dondurmak kendi kuralını delmek olur. Süre **M** · geri alınır ✅ · migration yok.
+· **C — Hiçbirini dondurma, yalnız "son güncelleme" tarihi ekle.** Ne kazanırsın: hiçbir canonical değişmez, sıfır risk. **Ne kaybedersin: asıl sorun çözülmez** — okuyan yine 🔄 görüp güncel sanar; tarih eklemek "bu belge ölü" demez. Süre **S** · geri alınır ✅ · migration yok.
+
+**Karşılaştırma:** A risksiz ve kanıtı belgelerin kendisinde. B daha eksiksiz ama iki ön koşul istiyor (atıf düzeltme + eşik bekleme). C sorunu görünür kılar ama çözmez.
+
+**Benim önerim:** **A** — iki kesin vaka bugün kapansın; `10-yol-tamamlananlar` ancak `10-yol-haritasi.md:7` düzeltildikten sonra, `G9` ise 2026-10-02'de kendi kuralıyla dondurulsun.
+
+**Cevap vermezsen:** 4 belge 🔄 görünmeye devam eder; `00-BELGE-HARITASI`'nın 🔄 sayımı da yanlış kalır.
+
+**CEVAP:**
+
+---
+
+### KARAR-52 · Taşınan KURAL 8 mükerreri: hangi gövde kalsın?  [BELGE/METODOLOJİ] — ⭐ BU TURDA DOĞDU
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+> ⚠️ **BU TURDA DOĞDU:** mükerrer, bu PR'daki CLAUDE.md bölmesiyle iki dosyadan tek dosyaya taşındı (YN-02).
+
+**Şu an ne var:** Bölme sonrası `belge-duzeni-rehberi.md`'de **KURAL 8 iki kez** var: `:99-109` (rehberin kendi gövdesi, 2026-08-23) ve `:143-152` (CLAUDE.md'den 2026-09-21'de taşınan kopya). Rapor `:337` (B.4-1) bu taşımanın mükerreri **çözeceğini** söylüyordu; fiilen mükerrer **iki dosyadan tek dosyaya taşındı**, ortadan kalkmadı.
+
+**Sorun ne:** Rehberin kendi KURAL 1'i *"tek gerçek kaynağı"* diyor — şimdi kendi dosyasının içinde iki gerçek kaynağı var. Okuyan hangisine uyacağını bilemez; ikisi birebir aynı da değil (rehber hâli 1.300 karakter, taşınan hâli 974).
+
+**Neden sana soruyorum:** Bir kural gövdesini elemek `CLAUDE.md § SİLME PROTOKOLÜ`'ne ve rapor `:333`'teki *"hiçbir kural gövdesi silinmiyor"* taahhüdüne dokunuyor. Hangi gövdenin canonical olduğu belge politikası kararıdır.
+
+**Seçenekler:**
+· **A — Rehberin kendi gövdesi (`:99-109`) kalsın; taşınan kopya `## GEÇMİŞ`e insin.** Kullanıcı/ajan ne görür: tek KURAL 8, en uzun ve en eski gövde. Ne kazanırsın: canonical zinciri bozulmaz, hiçbir satır silinmez. **Ne kaybedersin:** CLAUDE.md'nin son hâli (974 karakter) daha güncel olabilir — bu turda içerik farkı **karşılaştırılmadı** (❓ TEYİT GEREK); yanlış gövdeyi seçme riski var. Süre **S** · geri alınır ✅.
+· **B — İki gövdeyi BİRLEŞTİR, farkları tek metinde topla.** Ne kazanırsın: hiçbir bilgi kaybı yok, tek gerçek kaynağı gerçekten tek olur. **Ne kaybedersin:** elle karşılaştırma gerektirir (iki gövde satır satır okunmalı); birleştirme sırasında sessiz bir kayıp riski — bu yüzden ⛔ `kalan + taşınan = önceki` denetimi zorunlu olur. Süre **M** · geri alınır ✅.
+· **C — İkisi de kalsın, taşınan kopyaya *"bkz. yukarıdaki KURAL 8"* notu düşülsün.** Ne kazanırsın: sıfır risk, sıfır karar. **Ne kaybedersin:** dosya **8.103 karakterlik** taşımanın üstüne ~974 karakter gereksiz taşımaya devam eder; ve "mükerrer bırakma" bu projede üç kez sorun doğurdu. Süre **S** · geri alınır ✅.
+
+**Karşılaştırma:** A hızlı ama hangi gövdenin daha güncel olduğu doğrulanmadan seçim yapıyor. B tek doğru çözüm ama emek istiyor ve denetim şart. C hiçbir şeyi çözmez, yalnız görünür kılar.
+
+**Benim önerim:** **B** — iki gövde de kural metni, ikisi de kısa; birleştirme yarım saatlik iş ve `CLAUDE.md § SİLME PROTOKOLÜ`'ne hiç girmiyor (silme değil birleştirme). A'yı ancak gövdeler birebir aynı çıkarsa öneririm.
+
+**Cevap vermezsen:** YN-02 kuyrukta bekler; `belge-duzeni-rehberi.md` kendi KURAL 1'ini ihlal etmeye devam eder ve "kuralları oku" diyen ajan aynı kuralı iki farklı uzunlukta okur.
+
 **CEVAP:**
