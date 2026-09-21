@@ -353,6 +353,25 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
   > `⚠️ GÜNCELLEME ({bugün}): {doğrusu} — kanıt: {kaynak}`
   Böylece hem tarihsel iz korunur (cümle silinmez) hem de bayat satır görsel olarak "artık geçerli değil" der.
   (Zaten bir ⚠️/✅ GÜNCELLEME notu varsa yalnız eski cümleyi üstü-çizili damgalamak yeterli; notu tekrar yazma.)
+### ⭐ KALICI KURAL — tarihsel iz satırın İÇİNDE tutulmaz (2026-09-21)
+**İlke:** Tarihsel iz **korunur** ama **satırın içinde birikmez.** Satırda yalnız **güncel durum** + bir `geçmiş: bkz. <yer>` atfı durur. Üstü çizili eski zincir, belgenin sonundaki **`## GEÇMİŞ`** bölümüne ya da arşive taşınır. ⛔ **Hiçbir şey silinmez — yer değiştirir.**
+**Neden:** "eskiyi silme, üstünü çiz" kuralı satırın İÇİNDE uygulandığı için satır her güncellemede büyüyor, hiç küçülmüyor. Ölçüm (2026-09-21): `docs/` altında 1.000 karakteri aşan **74 satır**; en uzunu `00-KARAR-TAKIP.md` madde 101 satırı = **6.460 karakter** (4 kuşak düzeltme, geçerli bilgi ~200 karakter). Tablo hücresinde bu, okunamaz demektir. Dağılım: `09-DURUM.md` 38 · `00-KARAR-TAKIP.md` 30 → **%92'si iki dosyada.**
+**Uygulama:**
+1. **1.000 karakter** tavandır; düzeltme eklerken aşılıyorsa **önce** taşıma yapılır.
+2. Satırda yalnız son geçerli hâl kalır, sonuna `· geçmiş: bkz. GEÇMİŞ §<anahtar>` eklenir.
+3. Üstü-çizili zincir **tek karakter değiştirilmeden** `## GEÇMİŞ` altına `### §<anahtar>` başlığıyla yapıştırılır; tarihler ve `~~biçim~~` korunur.
+4. `<anahtar>` = kalıcı numara (md.101, S35, G1-23…) — atıf ağının omurgası, asla değişmez (`10-yol-tamamlananlar.md:10-13`).
+5. `09-DURUM.md` gibi ters-kronolojik belgelerde taşıma yeri `docs/arsiv/09-DURUM-gecmis-katmanlar-<tarih>.md`.
+6. ⛔ **Taşıma denetimi ZORUNLU:** `kalan + taşınan = önceki toplam` (satır VEYA karakter) kapanış raporunda **sayıyla** gösterilir; tutmuyorsa **taşıma geri alınır.**
+
+**"Belge Düzeltme Deseni" ile ÇELİŞMEZ — onu tamamlar:** Düzeltme Deseni **"ne yazılır"**ı söyler (eski cümle silinmez, `~~[ESKİ]~~` + `⚠️ GÜNCELLEME`); bu kural **"nerede durur"**u söyler. İz silinmez, biçimi bozulmaz; yalnız satırdan bölüme iner ve satırda ona giden bir atıf kalır. `belge-duzeni-rehberi` KURAL 6 (silme yok) ve KURAL 7 (statü tek yerde) ile de çelişmez.
+
+### ⭐ KALICI KURAL — AKTİF İŞ KAYNAĞI TEKTİR (2026-09-21)
+**Kural:** Aktif iş kaynağı **tektir: `docs/otonom/00-KUYRUK.md`.** Yeni planlama/öncelik belgesi **AÇILMAZ.** Yeni bir iş kaynağı bulunursa (eski yol haritası, bilanço listesi, denetim raporu) kalemleri **kuyruğa devredilir** ve kaynak **📸 DONDURULUR** — taşınmaz, silinmez, yeniden adlandırılmaz.
+**Tek istisna:** kod değiştirilerek çözülemeyen işler → `docs/otonom/03-PO-ELLE-ISLER.md`.
+**Gerekçe (2026-09-21):** altı ayrı planlama belgesi birikmişti (`10-yol-haritasi` · `00-CIKIS-PLANI` · `00-ONCELIK-SIRASI` · `00-KARAR-TAKIP` · `00-KART-INDEKSI` · `00-KUYRUK`) ve otonom motor yalnız kuyruğu okuduğu için **PO'nun "en öncelikli" dediği içerik bloğu (madde 138-160) 21 gün hiçbir tura girmedi.** Kaynak: `docs/raporlar/kesif/devir-analizi-2026-09-21.md` §0.2.
+**Uygulama:** Bir belge iş kaynağı olmaktan çıkarılırken başına (a) 📸 damgası, (b) *"devir kanıtı: hangi kalemler kuyruğun hangi aşamasına gitti"*, (c) *"takip artık nerede"* tablosu yazılır. `00-KARAR-TAKIP` istisnadır: **emekli edilmez, rolü daralır** (karar/söz/ölü-kod geçmişi orada kalır, iş takibi kuyruğa geçer).
+
 
 ## Belge Düzeni — her belge işinde uy
 - Belge oluştururken/düzenlerken `docs/kararlar/konu/belge-duzeni-rehberi.md`'deki **8 düzen kuralına** uyulur:

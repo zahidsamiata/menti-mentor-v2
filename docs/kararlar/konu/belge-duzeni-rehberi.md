@@ -42,6 +42,15 @@
 **YÖNTEM** ekseni (`kod-denetimi/` · `kesif/` · `bilanco/`). Bir belge hem KONU hem YÖNTEM klasörüne aitse (ör. menti personasının kod denetimi):
 - Belge **YÖNTEM** klasörüne yazılır (mevcut uygulama korunur).
 - ⛔ ZORUNLU: ilgili **KONU** klasörüne bir satırlık **ÇAPRAZ ATIF** bırakılır. Konu klasöründe `00-INDEX.md` yoksa oluşturulur; varsa satır eklenir.
+- ⛔ **İNDEKS ADI TEKTİR: `00-INDEX.md`** *(netleştirme 2026-09-21)*. Türkçe `00-INDEKS.md` **yeni açılmaz.**
+  **Yeni indeks açmadan ÖNCE** `ls <klasör>/00-IND*` çalıştır: **adı ne olursa olsun** bir indeks varsa
+  **satır eklenir, yeni dosya AÇILMAZ.** (Gerekçe: yukarıdaki *"yoksa oluşturulur"* ifadesi, Türkçe adlı
+  indeksi göremeyip aynı klasörde **ikinci indeks** açma riski taşıyordu.)
+  ⚠️ **Mevcut `docs/raporlar/icerik/00-INDEKS.md` YENİDEN ADLANDIRILMADI** — 2026-09-21 ölçümü:
+  **11 atıf / 4 dosya**, markdown link biçiminde **0**, kod/script atfı **0**. Atıfların bir kısmı
+  tarihsel kayıtta (oturum günlüğü, 09-DURUM) olduğu için adlandırma değişikliği tarihsel iz bozar;
+  kural genişletmesi aynı riski tek satırda kapatıyor. İki ad **kalıcı değil, geçicidir**: o klasör
+  bir sonraki düzenlemede `00-INDEX.md`'ye taşınırsa atıflar aynı turda güncellenir.
   Biçim: `<konu> kod denetimi → ../<yöntem-klasörü>/<dosya>.md (tarih, satır aralığı)`
 
 Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `panel/` altında arandı, bulunamadı, **bir tur tamamen tekrar edildi** (bkz. `docs/00-BELGE-HARITASI.md` B.0).
