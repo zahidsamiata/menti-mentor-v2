@@ -4,7 +4,7 @@
 
 ---
 
-## TUR ÖZETİ — TUR AC (2026-09-21) · 4 iş (3 CANLIDA + 1 CI'da) · TUR YARIM (kalan 🟢: ~36)
+## TUR ÖZETİ — TUR AC (2026-09-21) · 4 iş CANLIDA · TUR YARIM (kalan 🟢: ~36)
 
 **Neden yarım:** Kuyrukta hâlâ çok 🟢 var → K-20 (belge senkronu) yapılmadı (DURMAMA: K-20 yalnız hiç 🟢 kalmayınca). Bağlam yönetimi için temiz kesim.
 
@@ -12,7 +12,7 @@
 1. **F-20 (PR #218):** Bekleyen menti bekleme odasında **'🔔 Bildirimlere izin ver'** düğmesi görüyor; izin verince/reddedince durum metni. `NotificationOptInButton` (SSR/desteksiz tarayıcıda hiçbir şey render etmez). =G5-04.
 2. **F-29 (PR #219):** SEO paketi — `app/sitemap.ts` + `app/robots.ts` + `metadataBase`; `lang` tr→tr-TR. Tek kaynak `getSiteUrl()` (env `NEXT_PUBLIC_SITE_URL`, dev fallback). =G7-03.
 3. **K-12 (PR #220):** Profil › 'Verilerim'e **'Görüntüle'** — `/api/me/data-export` ham JSON yerine okunur Türkçe bölümler (kimlik/profil · etkinlik sayıları · rıza geçmişi). Yeni uç YOK; mesaj içeriği/karşı taraf PII'si özete girmez.
-4. **U-10 (PR #221, CI'da/merge):** Boş-durumlar — admin/questions DISC+kuruma-özel kartları boşken kaybolmuyor/yönlendirici metin; book-meeting müsaitlik boşken kart gizlenmiyor. Kapsam denetimi: mentör toplantı talepleri P-09'da zaten çözülmüş, admin/certification pratikte boş olmuyor → dokunulmadı.
+4. **U-10 (PR #221):** Boş-durumlar — admin/questions DISC+kuruma-özel kartları boşken kaybolmuyor/yönlendirici metin; book-meeting müsaitlik boşken kart gizlenmiyor. Kapsam denetimi: mentör toplantı talepleri P-09'da zaten çözülmüş, admin/certification pratikte boş olmuyor → dokunulmadı.
 
 ### KARAR BEKLİYOR — 0 yeni kart
 Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değişmedi, CEVAP satırlarına dokunulmadı.
