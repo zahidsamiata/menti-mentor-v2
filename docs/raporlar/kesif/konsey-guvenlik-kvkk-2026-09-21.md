@@ -251,3 +251,56 @@ Başarısız **her** platform-admin giriş denemesinde **ham e-posta + IP** `Sys
 ✅ **Frontend TEMİZ:** *kapsam* `frontend/src` özyinelemeli, `__tests__` hariç → **toplam 3 `console.*`** (`TenantSwitcher.tsx:69`, `error.tsx:28`, `global-error.tsx:22`), hiçbiri kullanıcı alanı basmıyor.
 
 ---
+
+## 2.A — YETKİ MATRİSİ
+
+**190 uç** tarandı (188 uç / 23 rota dosyası + `GET /health` `server.ts:60` + `POST /api/tags/suggest` `server.ts:139`). **Orkestratör bağımsız sayımı aynı sonucu verdi.**
+
+### A.0 Mimari ön bilgi — matrisin doğru okunması için zorunlu
+1. `requireTenant` (`middleware/tenant.ts:20`) dört iş birden yapar: tenant doğrulama · JWT çözme · **cross-tenant token reddi** (`:66-77`) · **aktif `TenantMembership`** kontrolü (`:82-97`).
+2. `db.ts:54-71` Prisma extension: `TENANT_SCOPED` (14 model, `db.ts:19-39`) + okuma op'u ise **`where.tenantId` otomatik enjekte edilir**. `findUnique` **kasıtlı kapsam dışı** (`db.ts:41-43`).
+⭐ **Bu yüzden "controller'da `tenantId` yok" ≠ "tenant sızıntısı var".** Her satır iki katmana göre değerlendirildi — **yanlış soru tuzağına düşülmedi**.
+
+### A.1 Public uçlar — **17 uç, "kazara public" 0**
+Kasıtlı-public listesi 6 kalem; listede olmayan 11 ucun **hepsi** ya kimliğini token/parola ile kanıtlıyor (`refresh`, `logout`, `reset-password`, `reapply` — `authController.ts:409` **bcrypt ile parola doğruluyor**) ya rate-limit + **yazılı gerekçeyle** açık (`check-slug` `:22`, `self-serve/register` `:24`, `platform/auth` `:33`).
+🟡 **Tek yapısal not (DÜŞÜK):** `GET /api/auth/:provider` (`authRoutes.ts:55`) bir **catch-all GET**'tir. `/api/auth/me` (`:42`) ondan ÖNCE tanımlı olduğu için bugün sorun yok; ama `/api/auth` altına **55'ten sonra** eklenecek her yeni GET ucu sessizce `oauthRedirect`'e düşer. Kod yorumu bu riski belgelemiyor.
+= **`V-09`** (BITTI) ile örtüşüyor; o satır "11 belgelenmemiş public uç" demişti — bu tur **hepsinin gerekçeli olduğunu** doğruladı, yeni satır gerekmiyor.
+
+### A.2 🔴 IDOR — **5 YENİ doğrudan bulgu + 2 komşu**
+`requireSelfOrAdmin` 7 yerde, **17 uçta controller-içi inline sahiplik kontrolü** doğrulandı (bunlar geçerli korumadır). Parametreli 76 ucun tamamı gözden geçirildi.
+
+| # | uç | şiddet | kanıt | saldırgan ne elde eder |
+|---|---|---|---|---|
+| **G-1** | `POST /api/meetings/:meetingId/feedback` | 🔴 **KRİTİK** | `meetingRoutes.ts:86` `requireRole('ADMIN','MENTOR','MENTI')` = *her kullanıcı*. `feedbackController.ts:30-104` — **orkestratör teyidi: `req.auth` 0 kez geçiyor**. Uç, meeting'i çekerken `mentorUserId`/`mentiUserId`'yi **`:38`'de zaten seçiyor** ama karşılaştırmıyor | (1) Başkasının görüşmesine **sahte değerlendirme** · (2) `guidanceScore/trustScore` → `persistMentorQualityMultiplier` `:83` → **hedef mentörün kalıcı kalite katsayısı düşer**, eşleştirmede geriye gider · (3) `preparednessScore<=2` → `:92-96` **hedef mentiye oryantasyon kilidi** = hizmet engelleme · (4) `hasFeedback=true` `:69-72` → **gerçek taraflar bir daha yazamaz** (409) |
+| **G-2** | `POST /api/scoring/feedback` | 🔴 **KRİTİK** | **Orkestratör teyidi:** `FeedbackSchema:39-40` **`fromUserId` VE `role` gövdeden**; `feedbackHandler:255` `{...parsed.data, tenantId}` — `req.auth` hiç kullanılmıyor; `feedback.service.ts:26-32` yalnız match'in tenant'ını doğruluyor | (1) `upsert` (`:34`) → **gerçek geri bildirimi EZER** · (2) kayda **sahte rol** yazılır · (3) ⭐ `earlyExit:true` → `feedback.service.ts:61-65` `prisma.match.updateMany({status:'EARLY_EXIT'})` → **üçüncü bir kullanıcı başkasının mentörlük eşleşmesini SONLANDIRIR** |
+| **G-3** | `GET /api/meetings/:meetingId/check-ins` | 🟠 YÜKSEK | `meetingRoutes.ts:119` yalnız `requireAuth()`; `meetingCheckInController.ts:100-108` `req.auth` **hiç okunmuyor**. Karşı örnek: aynı dosyanın `submitCheckIn`'i `:56-61` taraf kontrolü **yapıyor** | Kurumdaki herkes başkasının check-in'lerini okur: `overallRating`, `continueIntent`, `menteePreparedness`, **`nextTopicNote` (500 krk)**, **`concernTag`** (ör. `MOT_DUSUK`), **`openNote` (1000 krk)** — ilişkinin **en mahrem serbest-metin verisi** |
+| **G-4** | `POST /api/meetings` | 🟠 YÜKSEK | `meetingRoutes.ts:67` `requireRole('ADMIN','MENTI')`; `createMeeting` `:155-211` — `mentorId`/`mentiId` **gövdeden**, `req.auth.userId` karşılaştırması **yok**. İkizi `bookMeeting` `:515` token'dan alıyor → `createMeeting` **eski/güvensiz ikiz** | Menti, başka mentinin id'siyle görüşme yaratır → (1) kurbanın **haftalık kotası** doldurulur (`:119,184`) → kurban gerçek görüşme alamaz · (2) mentöre **kurbanın adına talep e-postası** gider (`:199-203`) |
+| **G-5** | `POST /api/feedback-logs` | 🟠 YÜKSEK | `feedbackLogRoutes.ts:17`; `feedbackLogController.ts:45-99` — `mentorId`/`mentiId` gövdeden, `req.auth` **hiç geçmiyor**. ⭐ **Asimetri:** aynı dosyada **okuma** korunuyor (`:122-123` `role==='MENTOR' ? userId : mentorId`), **yazma** korunmuyor | Mentör A, B adına 1 yıldız yazar → (1) kayıt **B'nin adına** görünür (`:134`) · (2) `applyFeedbackSignal` `:84-90` → **kurumun ML DISC kombinasyon skorları zehirlenir**, gelecekteki tüm eşleştirmeler etkilenir · (3) `@@unique` nedeniyle **gerçek mentör o çift için bir daha yazamaz** |
+| **G-6** | `GET /api/users/:id` | 🟡 ORTA | `listUsers` iki kapı kuruyor (çağıran APPROVED değilse 403 `:46-57`; sonuçlar `approvalStatus:'APPROVED'` `:74`, gerekçe `:69-73` *"onaylanmamış üye GÖRÜNMEZ"*). `getUser` `:187-215` **ikisini de yapmıyor** | PENDING kullanıcı `listUsers`'ın 403 kapısını **teker teker atlar**; herkes onaylanmamış/reddedilmiş üyelerin `USER_PUBLIC_SELECT` profilini okur. *(Ham DISC/e-posta sızmıyor — `fullAccess` kapısı `:189,193` doğru çalışıyor)* |
+| **G-7** | `POST /api/scoring/rank-mentors` | 🟡 ORTA | `sjtScoringController.ts:90-142` — `mentiId` gövdeden, sahiplik yok. Karşı örnek: `computeProfileHandler:61-65` aynı dosyada sahiplik **zorluyor** | Başkasının **kişiselleştirilmiş mentör sıralaması + uyum skorları**. *Sömürü zorluğu:* parametre `User.id` değil **`UserProfile.id`** ve istemciye rutin dönmüyor → pratikte tahmin zor |
+
+⭐ **Ortak desen:** yedisinin **altısında** aynı dosyada veya aynı ailede **doğru desen zaten var** (okuma korunuyor/yazma korunmuyor, ikiz uç korunuyor/eski uç korunmuyor). Bu bir bilgi eksikliği değil, **tutarlılık denetimi eksikliği**.
+
+### A.3 ✅ TENANT SIZINTISI: **YOK**
+Üç katmanlı savunma, her katman kodla teyit: (1) **token↔header çelişkisi reddi** `tenant.ts:66-77` → 403 + log · (2) **aktif üyelik kapısı** `:82-97` · (3) **RLS enjeksiyonu** `db.ts:60-65`.
+26 model `tenantId` taşıyor, `TENANT_SCOPED` listesinde 14 var; kalan 12'nin **hepsi** ya açık `where:{tenantId}` kullanıyor (`MeetingCheckIn`, `MentorshipAgreement` 5/5, `UserReport`, `InvitationTemplate`) ya **kasıtlı global** ve gerekçesi kodda yazılı (`Conversation` — sınır tenant değil **KATILIMCI**, shared-pool'da taraflar farklı kurumda olabilir, `db.ts:34-38`; `Question`/`LearningStage` `tenantId:null` = global, **mutasyonları kilitli** `questionController.ts:125-133,168-176,208-216`; `SystemLog` platform-global).
+`requireTenant`'ı atlayan **7 ucun 7'sinde de** elle `payload.tenantId !== :id → 403` mevcut (`selfServeController.ts:388,503,598,741,755`; `adminSettingsController.ts:82,141`) — **eksik yok**.
+
+### A.4 Rol yükseltme — doğrudan yükseltme YOK, **2 kural ihlali**
+✅ `requireRole` fail-closed (`authorize.ts:42-60`); gövdeden rol yükseltme kapalı (`.strict()` whitelist `userController.ts:336-350`; `sjtScoringController.ts:65` non-admin için rolü token'dan zorluyor).
+
+| # | ihlal | kanıt | sonucu |
+|---|---|---|---|
+| **G-8** 🟡 | **Rol `TenantMembership.role`'den değil JWT'den okunuyor** — CLAUDE.md kuralı (`:236`) ihlali | `tenant.ts:82-85` membership'i çekiyor ama **`select:{isActive:true}` — rol seçilmiyor**; `:102` `role: payload.role`. `requireRole`/`requireSelfOrAdmin` + 20+ controller kontrolü buna dayanıyor | **Rol düşürme ≤1 saat gecikir:** `demoteFromAdmin` (`adminController.ts:951-978`) iki tabloyu da günceller ama **token'ı iptal etmez** → yetkisi alınan yönetici ≤1 saat `/api/admin/*`'ta ADMIN kalır. ⭐ **Doğru desen kodda VAR** (`meetingController.ts:334-340`, `matching.ts:154-156` `TenantMembership.role` okuyor) — yetki middleware'inde uygulanmamış. Ayrıca admin **sayımları** `prisma.user.count({role:'ADMIN'})` ile (`:909,929,960`) — `ensureMembershipSafe` **non-fatal** olduğu için senkron sessizce bozulursa `MAX_ADMINS` ve "son admin" koruması yanlış sayıya dayanır |
+| **G-9** 🟡 | **`selfServe`/`adminSettings` üyelik kapısını atlıyor** | `extractAdminPayload` (`selfServeController.ts:61-71`, `adminSettingsController.ts:11-21`) yalnız `verifyToken` + `role==='ADMIN'`; `TenantMembership.isActive` kapısı **yok** | Üyeliği pasife alınmış (ör. anonimleştirme akışı üyeliği pasifler) bir yönetici, elindeki JWT ile `PATCH /:id/settings` ve `POST /:id/block-pair` çağırıp **kurumun görüşme limitini/minimum eşleşme skorunu değiştirebilir, üye çiftlerini engelleyebilir**. Ayrıca `aud` claim'i kontrol edilmiyor (kıyas: `platformAuth.ts:27` **kontrol ediyor**) |
+
+### A.5 Frontend-only guard — **12 kural incelendi, 10'u server-side VAR, 2'si YOK**
+✅ VAR: admin alanı · sertifika · mentör paneli · öğrenme yolculuğu · **k-anonimlik** (bu hafta kapatıldı) · PENDING login yönlendirmesi · anlaşma (sahiplikle) · sertifika rozeti · menti'ye DISC gizleme (asıl kapatma **backend'de**, `discVisibility.ts`).
+✅ `frontend/src/middleware.ts:11-20` rol guard'ının **bilinçli yokluğu** gerekçeli (auth cookie'leri backend origin'inde; *"JS-yazılabilir rol cookie'si sahte güven verir"*) → **bulgu değil**.
+
+| # | frontend kuralı | backend | durum |
+|---|---|---|---|
+| **G-10** 🟡 | `menti/page.tsx:55-58` mentör listesi yalnız `isApproved` iken sorgulanıyor | `matching.ts:355-366` çağıranı yalnız `isActive` + MENTI üyeliğiyle doğruluyor; **`approvalStatus` okunmuyor** (hedefler `:385` filtreli) | **YOK** — PENDING menti `/api/users`'tan 403 yerken bu uçtan kurumun **tüm onaylı mentörlerinin** ad/avatar/sektör/uyum yüzdesini alır. ⭐ **Bu haftaki k-anonimlik açığıyla birebir aynı sınıf.** = **`U-08`, ek bulgu:** U-08 doğru teşhis koymuş; bu tur **etkiyi** (hangi alanlar sızıyor) ve **karşı örneği** (`userController.ts:69-73` aynı kuralı doğru uyguluyor) ekliyor |
+| **G-11** 🟡 | `menti/page.tsx:45,155` oryantasyon kilidi ekranı | `checkOrientationLock` **yalnız 2 yerde**: tanım `:140`, tek çağrı `:162` (`createMeeting`). Canlı yol `bookMeeting` `:413-532`'de **çağrı yok** | **YOK** = **`V-15`** (kuyrukta zaten var, BEKLIYOR). Ek bulgu: kilidi basan yer `feedbackController.ts:92-96` — yani **G-1 ile zincirleniyor**: saldırgan G-1 ile kilidi basar, kurban G-11 ile atlayabilir; ikisi de düzeltilmeli |
+
+---
