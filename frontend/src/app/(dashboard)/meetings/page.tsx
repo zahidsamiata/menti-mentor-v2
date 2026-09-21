@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { ShareButtons } from '@/components/molecules/ShareButtons';
 import type { Meeting } from '@/lib/api/meetings';
 
 const FORMAT_LABELS: Record<string, string> = {
@@ -95,6 +96,16 @@ function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) 
             Değerlendirme Yap →
           </Link>
         </Button>
+      )}
+
+      {/* F-22: tamamlanan görüşme için paylaşılabilir kutlama (DISC sonuç kartından ayrı). */}
+      {meeting.status === 'COMPLETED' && (
+        <div className="pt-2 mt-1 border-t border-border space-y-2">
+          <p className="text-xs font-medium text-foreground">
+            🎉 Bir görüşmeni daha tamamladın! İstersen bu adımı paylaş:
+          </p>
+          <ShareButtons shareHeadline="Bir mentörlük görüşmemi daha tamamladım 🎉 #MentiMentor ile gelişmeye devam!" />
+        </div>
       )}
     </div>
   );
