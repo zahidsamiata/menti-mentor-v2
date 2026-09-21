@@ -41,6 +41,8 @@ const METRIC_DEFS: {
   { label: 'Bekleyen Talepler',      color: 'warning', value: (m) => m.pendingRequests },
   { label: 'Ortalama NPS',           color: 'success', value: (m) => m.avgNps },
   { label: 'Tamamlanan Toplantılar', color: 'neutral', value: (m) => m.completedMeetings },
+  // P-11: emek "kaç saat" görünür — tamamlanan görüşmelerin toplam süresi (backend'den saat).
+  { label: 'Mentörlük Saati',        color: 'success', value: (m) => m.totalMentoringHours ?? null },
 ];
 
 export default function MentorDashboardPage() {
@@ -170,17 +172,32 @@ export default function MentorDashboardPage() {
       <LearningJourneyCard />
 
       {/* ── Sertifika akademisi (yolculuktan sonra) ──────────────────────────── */}
+      {/* P-12: sertifikalı mentör artık kalıcı rozet görür (eskiden koşulsuz "Sertifikaya başla"). */}
       <Card className="border-primary/30 bg-primary/5">
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4">
-          <div>
-            <p className="text-sm font-semibold flex items-center gap-2">🎓 Mentör Sertifikası</p>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              Öğrenme yolculuğunu tamamladıysan hazırsın: gerçek senaryolarla öğren, ilk-deneme oranın %80&apos;i geçince sertifikalı ol.
-            </p>
-          </div>
-          <Button asChild size="sm">
-            <Link href="/mentor/certification">Sertifikaya başla →</Link>
-          </Button>
+          {metrics?.isCertified ? (
+            <>
+              <div>
+                <p className="text-sm font-semibold flex items-center gap-2">🎓 Mentör Sertifikası</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Tebrikler, sertifikalı mentörsün. Rozetin profilinde görünür; dilersen senaryoları tekrar gözden geçirebilirsin.
+                </p>
+              </div>
+              <Badge variant="success" className="shrink-0">✅ Sertifikalı</Badge>
+            </>
+          ) : (
+            <>
+              <div>
+                <p className="text-sm font-semibold flex items-center gap-2">🎓 Mentör Sertifikası</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Öğrenme yolculuğunu tamamladıysan hazırsın: gerçek senaryolarla öğren, ilk-deneme oranın %80&apos;i geçince sertifikalı ol.
+                </p>
+              </div>
+              <Button asChild size="sm">
+                <Link href="/mentor/certification">Sertifikaya başla →</Link>
+              </Button>
+            </>
+          )}
         </CardContent>
       </Card>
 
@@ -205,6 +222,26 @@ export default function MentorDashboardPage() {
           💚 {mentorAppreciation(metrics ?? null)}
         </p>
       </div>
+
+      {/* ── P-13: Aktif Mentilerim listesi — "Aktif Mentilerim" sayacı artık isimlerle açılır. ── */}
+      {(metrics?.activeMentees?.length ?? 0) > 0 && (
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-base">Mentilerim</CardTitle>
+            <Badge variant="secondary" className="text-xs">{metrics!.activeMentees!.length}</Badge>
+          </CardHeader>
+          <CardContent>
+            <ul className="divide-y divide-border">
+              {metrics!.activeMentees!.map((menti) => (
+                <li key={menti.id} className="flex items-center gap-3 py-2.5">
+                  <UserAvatar name={menti.fullName} size={32} />
+                  <span className="text-sm font-medium truncate">{menti.fullName}</span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
 
       {/* ── Onay Kuyruğu ─────────────────────────────────────────────────────── */}
       {/* P-09: kart artık boşken de görünür — yeni mentör "talep kartı kayboldu" yerine
