@@ -3,51 +3,9 @@
 import { ArrowRight, Zap, TrendingUp, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ConfettiBlast } from '@/components/atoms/ConfettiBlast';
+import { ShareButtons } from '@/components/molecules/ShareButtons';
 import { cn } from '@/lib/utils';
 import type { DiscResultCard } from '@/types/onboarding';
-
-// ─── Paylaşım butonları ───────────────────────────────────────────────────────
-
-interface ShareButtonsProps {
-  shareHeadline: string;
-}
-
-function ShareButtons({ shareHeadline }: ShareButtonsProps) {
-  const encodedText = encodeURIComponent(shareHeadline);
-  const whatsappUrl = `https://wa.me/?text=${encodedText}`;
-  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://menti-mentor.io')}&title=${encodedText}`;
-
-  return (
-    <div className="flex flex-col sm:flex-row gap-3">
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn(
-          'flex flex-1 items-center justify-center gap-2 rounded-xl border border-border',
-          'bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20',
-          'px-4 py-3 text-sm font-semibold transition-colors',
-        )}
-      >
-        <span className="text-base" aria-hidden>💬</span>
-        WhatsApp&apos;ta Paylaş
-      </a>
-      <a
-        href={linkedinUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn(
-          'flex flex-1 items-center justify-center gap-2 rounded-xl border border-border',
-          'bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2]/20',
-          'px-4 py-3 text-sm font-semibold transition-colors',
-        )}
-      >
-        <span className="text-base" aria-hidden>💼</span>
-        LinkedIn&apos;de Paylaş
-      </a>
-    </div>
-  );
-}
 
 // ─── ResultStep ───────────────────────────────────────────────────────────────
 
