@@ -473,6 +473,13 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - IDOR: kullanıcı başkasının kaynağına ID tahmin ederek erişebilir mi?
   (kendi kaydı mı diye kontrol et — sadece "giriş yapmış" yetmez)
 - Zod ile girdi doğrulama var mı?
+- ⭐ **KOMŞU UÇ KARŞILAŞTIRMASI** *(2026-09-21, güvenlik konseyi — yeni kural değil, bu listeye tek madde)*:
+  Yeni ya da değişen her uç için: **kimlik OTURUMDAN mı alınıyor** (istek gövdesinden DEĞİL) ·
+  sahiplik kontrolü · tenant izolasyonu · onay kapısı — **aynı ailedeki KOMŞU UÇ ile karşılaştır.**
+  Komşuda olan koruma burada yoksa, **bu bir bulgudur.**
+  *(Gerekçe: 11 güvenlik bulgusunun 9'unda doğru koruma aynı dosyada ya da aynı ailede ZATEN VARDI,
+  yalnız bir yolda uygulanmamıştı — okuma korunuyor/yazma korunmuyor, ikiz uç korunuyor/eski uç
+  korunmuyor. Kanıt: `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md` §0.)*
 - KASITLI public olan endpoint'ler (⚠️ GÜNCELLEME 2026-09-21, V-09 — kod-teyitli tam liste;
   eski liste 10 ucu atlıyordu → denetimlerde yanlış "fazlalık" alarmı doğuruyordu):
   **auth:** `POST /api/auth/register` · `/login` · `/refresh` · `/logout` · `/forgot-password` ·

@@ -287,6 +287,10 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
   harf duyarsiz mi · iki dilli mi (mentor↔mentör · tenant↔kurum · meeting↔görüşme ·
   invite↔davet)
 · Sayi verirken BIRIMI tanimla
+· ⭐ KOMSU UC KARSILASTIRMASI (2026-09-21, guvenlik konseyi): yeni ya da degisen her uc icin:
+  kimlik OTURUMDAN mi aliniyor (istek govdesinden DEGIL) · sahiplik kontrolu · tenant izolasyonu ·
+  onay kapisi — ayni ailedeki KOMSU UC ile karsilastir. Komsuda olan koruma burada yoksa,
+  bu bir bulgudur. (11 guvenlik bulgusunun 9'unda dogru koruma ayni dosyada ZATEN VARDI.)
 · Test: kac kostu / kaci gecti ("CI yesil" demek yetmez)
 · Raporda YAPTIGINI degil KULLANICININ GORECEGINI yaz:
   ✅ "artik /disc-test aciliyor"   ❌ "loading state duzeltildi"
