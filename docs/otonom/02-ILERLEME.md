@@ -4,6 +4,75 @@
 
 ---
 
+## ⭐ TUR BB — DEVİR ANALİZİNİN BELGE KISMI UYGULANDI (2026-09-21) · YALNIZ BELGE
+
+> **Mod:** 🟥 BYPASS — yalnız belge. **Kod DEĞİŞMEDİ · DB/migration/seed YOK · kuyruk işi YAPILMADI · hiçbir şey SİLİNMEDİ.** Kaynak: `docs/raporlar/kesif/devir-analizi-2026-09-21.md` (dal `otonom/AZ-devir-analizi-20260921`, henüz merge edilmedi). Dal: `otonom/BB-devir-uygulama-20260921`.
+> ⚠️ **Rapor bir FOTOĞRAFTI** — her kalem güncel main'e karşı yeniden doğrulandı; **11 iddiası düzeltildi, 1 satır hiç açılmadı.**
+
+### AŞAMA I — PO'nun "EN ÖN SIRA" içerik bloğu (rapor §0.2)
+- **Birim (KURAL 16):** "kalem" = `00-KARAR-TAKIP` B.1'de kendi numarası olan madde = **138…160 → 23 madde**.
+- **Kuyruğa yeni giren: 18 satır** (I-01…I-18). **3'ü zaten CANLIDA** (143·144·145 — kod+test kanıtlı, satır AÇILMADI) · **2'si mevcut K-18 kapsamında** (147·148).
+- **Hazır yazılı içerikli 6 kalem** işaretlendi — iş *"sıfırdan yaz"* değil *"hazır metni bağla"*: madde 151 (8/8) · 154 (3/3) · 155 (2/2) · 138 (8/8) · 139 (4/4) · 147 (5/5), hepsi `docs/raporlar/icerik/` altında dosya:satır ile.
+- **Kapılar:** 8 🟢 · 7 🟡 · 3 🔴.
+- ⛔ **I-13 — OCEAN motoru ARİTMETİKLE ölü doğrulandı:** `UserProfile.discD..C` **0-1** yazılıyor, `discToOcean` **0-100** bekliyor → çıktı **[49,75 – 50,30]**, eşikler **60/55/45** ⇒ **8 arketipin 6'sı erişilemez**, herkes fallback M1/m1 alıyor; hata/uyarı/log yok. **138·139·140 bu düzeltmeden ÖNCE kodlanırsa boşa gider.**
+- ⚠️ **Raporun 5 iddiası çürüdü** (terim taraması yapmış, davranış taraması yapmamış): 149·150·155·157·158 → ⬜ değil **🟡 YARIM**; düzeltilmiş hâliyle yazıldı.
+
+### AŞAMA Y — yol haritası + karar takibi devri (rapor §3)
+- **18 satır** (Y-01…Y-18). **⛔ 1 satır AÇILMADI:** madde 71 (`SuspicionReport.tenantId`) — kart **G1-04 ⚫ GEÇERSİZ** (*"public-create + platform-only-read → tasarım kararı"*), **KURAL 15: kart kazanır**.
+- **Birleştirilen:** madde 56+67 tek satır (Y-12); madde 67 tek başına açılmamalı — main'de üçüncü-taraf çerez **sıfır**, gizlilik sayfası bunu beyan ediyor ⇒ bugün çerez bandı yasal olarak gereksiz. **Sıra bağımlılığı 67→56** yazıldı. **PR #110 AÇIK** (GitHub teyidi).
+- ⚠️ **Raporun 6 iddiası düzeltildi:** md.94 (1 uç değil **4 uç**) · md.100 (sorguyu yapan kod eklendi) · md.53 (`robots:` 0 değil; + `'use client'` kısıtı) · md.52 (OG **var**, eksik olan görsel) · md.61 (WhatsApp 2. kullanım) · md.126 (catch **ölü kod**, etki daha büyük).
+
+### KARAR KARTLARI — 8 yeni (KARAR-30…37)
+En yüksek numara doğrulandı (**KARAR-0…29**) → yeniler **30**'dan. İçindekiler tablosuna etkiye göre sıralı 8 satır. ⛔ **CEVAP satırları BOŞ.**
+En çok iş açan: **KARAR-35** (canlı DB salt-okuma, 5+) · **KARAR-36** (yarım 3 teknik kalem, 4) · **KARAR-34** (kulüp, 3).
+
+### BAYAT MERGE KURALI (rapor §0.3/§6)
+- **Düzeltilen: 9 yer** (üstü çizili + tarihli GÜNCELLEME, silme yok): `CLAUDE.md:26` (atıf hedefleri kaymıştı) · `CLAUDE.md:178` · `09-DURUM.md:450` · `10-yol-haritasi.md:308,309` · `konu/07-calisma-tarzi.md:10,19` · `konu/11-…-disc.md:148` · `00-BELGE-HARITASI.md:61`.
+- **YÜRÜRLÜKTE KALAN: 6** — hepsi `docs/devir/01,03,04,06`'da ve hepsi **📸 DONDURULMUŞ** → talimat gereği **dokunulmadı**. ⚠️ **Sıfır değil**; `devir/01` ve `devir/06` kendini *"kalıcı referans"* ilan ettiği için **PO kararı gerekir**.
+- **Rapora iki düzeltme:** rapor "14 satır" dedi, listesinde **15** vardı (tarama da 15 buldu) · **`CLAUDE.md:163` bayat DEĞİL** (bulut gerçekten merge edemiyor) → değiştirilmedi.
+
+### 09-DURUM ARŞİVLEME (rapor §12) — satır denetimli
+| | satır |
+|---|---:|
+| kaynak önce | **463** |
+| taşınan (18-236) | **219** |
+| kaynak sonra | **246** (244 + 2 pointer) |
+| **DENETİM** | 244 + 219 = **463** ✅ |
+Arşiv: `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-09-21.md` (236 satır). **İstisna:** satır 11-16 (yedek tablo zorunluluğu) taşınmadı — katman değil, yürürlükteki operasyonel emir.
+**Yan kazanç:** 09-DURUM'da 1.000+ karakter satır **38 → 3**.
+
+### SATIR İÇİ GEÇMİŞ ŞİŞMESİ (rapor §14) — yeni kural + ilk uygulama
+`CLAUDE.md`'ye **"tarihsel iz satırın İÇİNDE tutulmaz"** kuralı (1.000 karakter tavanı + zorunlu taşıma denetimi). İlk uygulama:
+| anahtar | önce | sonra | taşınan |
+|---|---:|---:|---:|
+| md.101 | 5.937 | **1.353** | 4.622 |
+| md.30 | 5.156 | **3.266** | 1.926 |
+| T5 | 3.377 | **2.453** | 957 |
+Taşınan metin `## GEÇMİŞ` altında `§md.101`/`§md.30`/`§T5` başlıklarıyla **aynen** duruyor.
+⚠️ **DÜRÜST NOT:** üçü de 1.000 tavanının **altına inmedi**; kalan şişmenin büyük kısmı **güncel metin** ve hangi kuşağın geçerli olduğu **editöryal karar** — otomatik kesme anlamı bozardı, ayrı tura bırakıldı. Ayrıca `docs/` genelinde 1.000+ satır sayısı **74 → 78 çıktı**, çünkü taşınan uzun satırlar arşivde **aynen** duruyor; kazanç motorun her tur okuduğu dosyada.
+
+### KUYRUK HİJYENİ (rapor §7)
+**5 yanlış kapı** — en kritiği **F-31 🟢→🟡** (⚠️ *tehlikeli yön*: ürün geri-bildirimi için uygun depo yok → yeni model = migration; 🟢 kalsaydı ajan şema değiştirip merge edebilirdi). Ayrıca K-13 🔴→🟡 · F-09 🔴→🟡 (numarasız KARAR = sonsuz kilit) · F-07 🟡→🔴 KARAR-19 · P-16 🟡→🟢.
+**2 bayat durum kodda doğrulandı:** F-10 → **BITTI** (`menti/page.tsx:288,311,317`) · P-06 → **YARIM**.
+**4 mükerrer** işaretlendi (silinmedi) · **5 kartsız gizli 🔴** damgalandı (U-19 → **KARAR-32** ile kapsandı).
+**14 ajan çıkış blokeri** `⛔ ÇIKIŞ BLOKERİ (T…)` ile işaretlendi; kapı bölümüne anlamı + T1/T2/T3 testi eklendi.
+
+### ⚠️ CANLI VERİTABANI ÇELİŞKİSİ — ÇÖZÜLMEDİ, İŞARETLENDİ
+`CLAUDE.md` kendi içinde çelişiyor: *"canlı ve lokal **AYNI Neon**"* ↔ *"**PROD**: docker-compose Postgres, **Neon değil**"*. Kırmızı kural 1, yedek stratejisi ve "6 saat geri-yükleme" hesabı buna dayanıyor.
+⛔ **Hangisi doğru KARAR VERİLMEDİ** — yalnız PO Dokploy'daki `DATABASE_URL`'e bakarak bilebilir. **Her iki satırın yanına** aynı not + `03-PO-ELLE-ISLER.md`'ye **ADIM 0** olarak en üste. O zamana kadar **EN KÖTÜ DURUM: migration/seed öncesi yedek ZORUNLU.**
+
+### DİĞER
+- **`03-PO-ELLE-ISLER.md`:** en üste *"⛔ CANLIYA ÇIKIŞ İÇİN ŞART"* (PO'nun 10 işi + T-testi + efor) + BA kılavuzuna atıf · **D grubu (14-18)** canlı gözlem testleri · `/health` zenginleştirmesi kod-teyidiyle güncellendi (tek istekte `db·smtp·cron·env`) · *"kartlar açıldı (KARAR-23+)"* **yanlış beyanı** düzeltildi (kartlar yoktu) · V-14 PO listesinden çıkarıldı (ajan işi).
+- **Emeklilik:** `10-yol-haritasi` 📸 · `00-CIKIS-PLANI` 📸 (*"fikri ölmedi, taşındı"* + KATI TEST yerinde) · `00-KART-INDEKSI` 📸 snapshot · `00-ONCELIK-SIRASI` çelişkisi kapatıldı · `00-KUYRUK` **🔄 YAŞAYAN** damgası (*"TEK aktif iş kaynağı"*) · `00-KARAR-TAKIP` **emekli EDİLMEDİ**, rolü daraldı. ⛔ Hiçbir belge taşınmadı/silinmedi/yeniden adlandırılmadı.
+- **`OTONOM-PROMPT.txt`:** sıra yeniden (0 çıkış blokeri → 1 AŞAMA I → 2 U,P → 3 V → 4 K,F,E,Y) · **🟢 bitince 🟡'lere geç** kuralı (PR aç, merge etme, Durum `PR-ACIK`, PR no zorunlu; migration'lı 🟡 PR başlığına ⛔ uyarısı) · kapanış koşulu genişletildi · `PR-ACIK` durum kodu · **`git stash push -u` → `-u` kaldırıldı** · açılışta **yarım kalmış push edilmiş dal** kontrolü.
+- **`.gitignore`:** `docs/gelen/` eklendi. · **`belge-duzeni-rehberi` KURAL 2-B** genişletildi (indeks adı tek; `00-INDEKS.md` **yeniden adlandırılmadı** — 11 atıf/4 dosya, bir kısmı tarihsel).
+- **F-19:** BEKLIYOR → **PR-ACIK** (dal `ac7a3f4`, 2026-09-21 08:56; **PR #231 açık**). ⛔ BITTI yazılmadı: merge olmadan canlıda değil.
+
+### ⭐ PO İÇİN MERGE SIRASI
+**1)** AZ raporu (#232) → **2)** BA kılavuzu (#233) → **3)** bu PR → **4)** F-19 (#231).
+⛔ **BU PR MERGE EDİLMEDEN TERMİNAL BAŞLATILMAMALI** — `OTONOM-PROMPT.txt`'in yeni sırası ve AŞAMA I bu PR'da.
+
+
 ## TUR DEVAM (checkpoint 2) — TUR AD (2026-09-21) · /goal sürüyor
 CANLIDA (bu checkpoint'e kadar toplam): P-11/12/13 · U-04/05/16 · V-01/02/08/11/14 · F-15/16/22/25/26 · **K-04 · K-11 · F-27 · V-09 · F-13** · (K-06→KARAR-29).
 Pointer en son **b5415bd** (K-04+F-27). Açık PR YOK (hepsi merge).
