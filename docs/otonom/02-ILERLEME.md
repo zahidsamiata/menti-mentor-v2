@@ -4,13 +4,42 @@
 
 ---
 
-## TUR BAŞLADI — TUR AD (2026-09-21) · kalan 🟢 ~28
-İlk adım: OTONOM-PROMPT PO güncellemesi commit+push (2d84138, main). Sonra kuyruğun 🟢 BEKLIYOR işleri (öncelik: U/P → V → K/F/E).
+## TUR ÖZETİ — TUR AD (2026-09-21) · 6 iş CANLIDA · TUR YARIM (kalan 🟢 ~22)
 
-**BİTTİ ve CANLIDA (bu tura kadar):** P-11 · P-12 · P-13 · U-16 — hepsi merge + pointer bump (19e7703→1ad47f5, SARKMA YOK) ile CANLIDA.
-- **P-11/12/13 (PR #82 BE + #222 FE):** mentör panelinde artık **Mentörlük Saati** kartı · sertifikalıysa **'✅ Sertifikalı' rozeti** (koşulsuz CTA yerine) · **'Mentilerim' listesi** (aktif menti adları). Backend `dashboard-metrics` ucu 3 alanla genişledi (salt-okuma, IDOR korumalı).
-- **U-16 (PR #83 BE):** `emailService.send()` boolean döner → feedback hatırlatma yanıtı **gerçek teslim** sayısını verir ('gönderildi' yalanı bitti); cron `reminderEmailSentAt`'i yalnız teslimde yazar (tek-atımlık hatırlatma yanmaz).
-- Test: backend `mentor-metrics.unit.test.ts` 9 + `emailService.test.ts` 4→6; FE `mentor-panel-data.test.tsx` 5 (FE suite 111→116). KURAL 14: test adları+sayıları CI logunda doğrulandı (68 backend test dosyası).
+**Neden yarım:** Kuyrukta hâlâ 🟢 BEKLIYOR iş var → K-20 (belge senkronu) yapılmadı (DURMAMA: K-20 yalnız hiç 🟢 kalmayınca). Bağlam yönetimi için temiz kesim. Her iş ANINDA commit+push+merge edildi (ARA KAYIT).
+
+### ✅ BİTTİ ve CANLIDA — 6 iş (hepsi merge + gerekirse pointer bump ile CANLIDA)
+1. **P-11 (PR #82 BE + #222 FE):** Mentör panelinde artık **'Mentörlük Saati'** kartı — tamamlanan görüşmelerin toplam süresi (saat). Emek "kaç görüşme" değil "kaç saat" de görünür.
+2. **P-12 (PR #82 BE + #222 FE):** Sertifikalı mentör panelde **'✅ Sertifikalı' rozeti** görür (eskiden koşulsuz 'Sertifikaya başla →').
+3. **P-13 (PR #82 BE + #222 FE):** Mentör panelde **'Mentilerim' listesi** — aktif menti adları (sayacın arkasını açar). `dashboard-metrics` ucu 3 alanla genişledi (salt-okuma, IDOR korumalı, yeni tablo/kolon yok).
+4. **U-16 (PR #83 BE):** `emailService.send()` boolean döner → feedback hatırlatma yanıtı **gerçek teslim** sayısını verir ('gönderildi' yalanı bitti); cron `reminderEmailSentAt`'i **yalnız teslimde** yazar (SMTP yokken tek-atımlık hatırlatma yanmaz).
+5. **U-04 (PR #224 FE):** Kurum yöneticisi `pending-review` ekranında **gerçek onay/ret durumunu** görür (`/api/auth/me` → verificationStatus): onaylandı→olumlu+giriş · reddedildi→dürüst+gerekçe · düzeltme→not · bekliyor→'inceleniyor'.
+6. **U-05 (ZATEN YAPILMIŞ, kod-teyit §5c):** Platform admin dashboard'da bekleyen kurum başvurusu **kırmızı sekme rozeti + kartı** zaten var (`platform/dashboard/page.tsx:160,239`). Agent-parça bitmiş; e-posta bildirimi PO adımı.
+
+### KARAR BEKLİYOR — 0 yeni kart
+Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değişmedi, CEVAP satırlarına dokunulmadı.
+
+### BAŞARISIZ — 0
+
+### CANLIDA KONTROL EDİLECEKLER (PO gözle bakacak)
+- Mentör panelinde 'Mentörlük Saati' kartı + 'Mentilerim' listesi (P-11/P-13)
+- Sertifikalı mentör panelinde 'Sertifikaya başla' yerine '✅ Sertifikalı' rozeti (P-12)
+- Hatırlatma gönderim yanıtı gerçek sayı; SMTP yokken hatırlatma yanmıyor (U-16)
+- Kurum bekleme ekranı (`/onboarding/stk/pending-review`) gerçek durumu gösteriyor (U-04)
+
+### PO'NUN KENDİ YAPMASI GEREKENLER
+`docs/otonom/03-PO-ELLE-ISLER.md`. Bu turdaki işlerin tam etkisi için: **SMTP değerleri** (U-16 gönderim / U-04·U-05 e-posta bildirimi) + **TENANT_NOTIFICATIONS_ENABLED** kararı (§4.1).
+
+### KUYRUK SON DAĞILIMI
+- BITTI (bu tur): 6 · **kalan 🟢 BEKLIYOR ~22** (K-04/05/06/08/10/11 · F-01/10/13/14/15/16/19/21/22/25/26/27/28/31/32/33 · P-10 · V-01/02/08/09/11/14 · E-3). 🟡/🔴 sabit (KARAR bekleyenlere dokunulmadı).
+- **Test:** Backend `mentor-metrics.unit.test.ts` 9 (yeni) + `emailService.test.ts` 4→6; FE suite 111→121 (`mentor-panel-data` 5 + `pending-review-status` 5). KURAL 14: test adları+sayıları CI logunda doğrulandı (68 backend test dosyası; #82/#83 CI yeşil).
+
+### BACKEND
+- pointer eski `19e7703` → yeni `1ad47f5` (P-11/12/13 #82 + U-16 #83). Ata teyidi ileri-sarım güvenli. Çatı pointer == backend main HEAD → **SARKMA YOK** (PR #223).
+
+### DOKUNULMAYANLAR / STASH
+⛔ DB/migration/seed YOK · şema DEĞİŞMEDİ · `server.ts` yasak bölge DOKUNULMADI · auth guard/KVKK-silme/matching motoru DEĞİŞMEDİ · KIRIK TEST YOK (yalnız test EKLENDİ) · `docs/gelen/` ELLENMEDİ · KARAR CEVAP satırı doldurulmadı · #110 ELLENMEDİ · hiçbir şey silinmedi.
+STASH: `stash@{0}: stray-docx-preserve` — ÖNCEKİ oturumdan, bu turda oluşturulmadı, DOKUNULMADI.
 
 ---
 
