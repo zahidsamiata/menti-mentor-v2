@@ -45,6 +45,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-26 | İki yedek tablo (S26/S37) düşürülsün mü | 0 (DB) | ⬜ boş · W §4.4 · GERİ DÖNÜLMEZ |
 | KARAR-27 | Dış hata izleme servisi kurulsun mu | 0 | ⬜ boş · W §2.A · KVKK |
 | KARAR-28 | Ölü LLM/OpenAI env silinsin mi | 0 | ⬜ boş · Bölüm 4 · SİLME PROTOKOLÜ |
+| KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ⬜ boş · pedagoji · cevap-anahtarı sızması |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
 | KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
 
@@ -547,4 +548,19 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** LLM planın yoksa A (temiz, arşivli). Kararı ertelemek istiyorsan B (bugünkü ölü-işaret yeterince uyarıyor). Yakında ice-breaker düşünüyorsan C.
 **Benim önerim:** A — LLM yolu bilinçli kaldırılmış, ölü env yanıltıcı; arşivleyerek silmek temiz. (İleride LLM planın varsa B.)
 **Cevap vermezsen:** OPENAI_*/LLM_PROVIDER ölü-işaretli kalır — zararsız ama dağınık.
+**CEVAP:**
+
+---
+
+### KARAR-29 · Öğrenme yolculuğunda diğer şıkların açıklaması gösterilsin mi? (1 işi açar — K-06)  [ÜRÜN KARARI]
+**Şu an ne var:** Öğrenme yolculuğu senaryosunda kullanıcı bir şık seçince YALNIZ seçtiği şıkkın açıklaması görünüyor; diğer 3 şıkkın açıklaması gösterilmiyor. Kanıt: `ScenarioGuideEngine.tsx:271` — açıklamalar API'de **bilinçli** olarak istemciye yüklenmiyor ("cevap anahtarı sızmasın").
+**Sorun ne:** Kullanıcı "neden diğerleri daha zayıf/yanlış" ı öğrenemiyor — öğrenme değeri eksik kalıyor. Ama bunun bir sebebi var: tüm açıklamalar baştan gelirse kullanıcı cevabı seçmeden "doğru olan hangisi" ipucunu alır (cevap anahtarı sızar).
+**Neden sana soruyorum:** Bu pedagojik bir tasarım kararı: öğrenme değeri (hepsini göster) ↔ cevap-anahtarı sızması (gösterme). Ayrıca "seçtikten SONRA hepsini göster" seçeneği backend değişikliği + akış kararı gerektirir. Teknik değil, ürün/pedagoji kararı.
+**Seçenekler:**
+**A) Seçtikten SONRA 4 şıkkın da açıklamasını göster** · Kullanıcı ne görür: cevapladıktan sonra tüm şıkların açıklaması (neden bu güçlü, diğerleri neden zayıf) · Ne kazanırsın: en yüksek öğrenme değeri, cevap-anahtarı sızmaz (cevap sonrası) · Ne kaybedersin: backend açıklamaları cevap-sonrası göndermeli (küçük backend işi) · Süre M · Geri alınır · Migration yok
+**B) Bugünkü gibi bırak (yalnız seçilenin açıklaması)** · Kullanıcı ne görür: yalnız kendi seçtiği şıkkın açıklaması · Ne kazanırsın: iş yok, sızma riski sıfır · Ne kaybedersin: karşılaştırmalı öğrenme yok · Süre yok
+**C) Baştan hepsini göster (seçimden önce)** · Kullanıcı ne görür: tüm açıklamalar seçim öncesi · Ne kazanırsın: en basit uygulama · Ne kaybedersin: ⛔ cevap anahtarı sızar — senaryo bir "test" ise değeri düşer · Süre S · Geri alınır
+**Karşılaştırma:** Senaryolar bir ÖĞRENME aracıysa ve puanlama önemli değilse A en iyisi (cevap-sonrası, sızma yok). Senaryolar bir DEĞERLENDİRME/test ise B güvenli. C sızma nedeniyle önerilmez.
+**Benim önerim:** A — cevap-sonrası tüm açıklamalar öğrenme değerini artırır, sızma riski yok. Ama senaryolar puanlanıyor/sertifikaya sayılıyorsa B kalsın.
+**Cevap vermezsen:** K-06 uygulanmaz; bugünkü davranış (yalnız seçilen açıklama) korunur — kabul edilebilir ara durum.
 **CEVAP:**
