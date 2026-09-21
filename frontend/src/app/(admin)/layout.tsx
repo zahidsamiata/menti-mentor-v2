@@ -33,6 +33,7 @@ const NAV_GROUPS = [
       { href: '/admin/invite',       label: 'Davet',         icon: '📨' },
       { href: '/admin/waiting-room', label: 'Bekleme Odası', icon: '⏳' },
       { href: '/admin/eslesmeler',   label: 'Eşleşmeler',    icon: '🔗' },
+      { href: '/admin/reports',      label: 'Şikayetler',    icon: '⚠️' },
     ],
   },
   {
