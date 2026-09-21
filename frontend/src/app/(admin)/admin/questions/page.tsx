@@ -188,6 +188,11 @@ export default function QuestionsPage() {
               </div>
             </CardHeader>
             <CardContent className="divide-y divide-border">
+              {globalQuestions.length === 0 && (
+                <p className="text-sm text-muted-foreground text-center py-6">
+                  Henüz sistem DISC sorusu yüklenmemiş.
+                </p>
+              )}
               {globalQuestions.map((q) => (
                 <div key={q.id} className="flex items-start justify-between gap-3 py-3">
                   <div className="flex-1 min-w-0">
@@ -206,14 +211,18 @@ export default function QuestionsPage() {
             </CardContent>
           </Card>
 
-          {/* Kuruma Özel Sorular */}
-          {tenantQuestions.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Kuruma Özel Sorular</CardTitle>
-              </CardHeader>
-              <CardContent className="divide-y divide-border">
-                {tenantQuestions.map((q) => (
+          {/* Kuruma Özel Sorular — boşken kart kaybolmasın (U-10) */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Kuruma Özel Sorular</CardTitle>
+            </CardHeader>
+            <CardContent className="divide-y divide-border">
+              {tenantQuestions.length === 0 && (
+                <p className="text-sm text-muted-foreground text-center py-6">
+                  Henüz kuruma özel soru eklemediniz. Yukarıdaki formdan kurumunuza özgü sorular ekleyebilirsiniz.
+                </p>
+              )}
+              {tenantQuestions.map((q) => (
                   <div key={q.id} className="flex items-start justify-between gap-3 py-3">
                     {editingId === q.id ? (
                       <div className="flex-1 min-w-0 space-y-2">
@@ -273,7 +282,6 @@ export default function QuestionsPage() {
                 ))}
               </CardContent>
             </Card>
-          )}
         </>
       )}
 

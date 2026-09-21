@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import BookMeetingPage from '@/app/(dashboard)/book-meeting/page';
 
 vi.mock('next/navigation', () => ({
@@ -40,5 +40,11 @@ describe('BookMeeting — availability null-safety regression', () => {
       fireEvent.change(dateInput, { target: { value: '2027-01-04' } }); // Monday
       fireEvent.change(timeInput, { target: { value: '14:00' } });
     }).not.toThrow();
+  });
+
+  it('U-10: mentörün açık müsaitliği yokken kart yerine yönlendirici boş-durum gösterir', () => {
+    availabilityMock.data = { blocks: [] };
+    render(<BookMeetingPage />);
+    expect(screen.getByText(/henüz açık müsaitlik saati belirtmemiş/i)).toBeInTheDocument();
   });
 });

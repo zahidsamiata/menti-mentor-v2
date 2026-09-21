@@ -103,7 +103,7 @@ function BookMeetingContent() {
         <p className="text-sm text-muted-foreground">Mentörünüzle görüşme için uygun bir zaman seçin.</p>
       </div>
 
-      {(availability?.blocks?.length ?? 0) > 0 && (
+      {(availability?.blocks?.length ?? 0) > 0 ? (
         <Card>
           <CardHeader><CardTitle className="text-sm">Mentörün Müsait Saatleri</CardTitle></CardHeader>
           <CardContent>
@@ -112,6 +112,16 @@ function BookMeetingContent() {
                 <span key={i} className="rounded-lg bg-muted px-3 py-1 text-xs">{blk.weekday} {blk.startTime}–{blk.endTime}</span>
               ))}
             </div>
+          </CardContent>
+        </Card>
+      ) : (
+        // U-10: mentörün açık müsaitlik bloğu yokken kart kaybolmasın; menti neden olduğunu bilsin.
+        <Card>
+          <CardHeader><CardTitle className="text-sm">Mentörün Müsait Saatleri</CardTitle></CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground text-center py-4">
+              Bu mentör henüz açık müsaitlik saati belirtmemiş. Aşağıdan yine de bir zaman önerip talep gönderebilirsiniz; mentör uygunluğa göre yanıtlayacaktır.
+            </p>
           </CardContent>
         </Card>
       )}
