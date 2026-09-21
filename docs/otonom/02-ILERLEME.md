@@ -4,8 +4,13 @@
 
 ---
 
-## TUR BAŞLADI — TUR AD (2026-09-21) · başlangıç · kalan 🟢 ~32
-İlk adım: OTONOM-PROMPT PO güncellemesi commit+push (2d84138, main). Şimdi kuyruğun 🟢 BEKLIYOR işleri işleniyor (öncelik: U/P → V → K/F/E).
+## TUR BAŞLADI — TUR AD (2026-09-21) · kalan 🟢 ~28
+İlk adım: OTONOM-PROMPT PO güncellemesi commit+push (2d84138, main). Sonra kuyruğun 🟢 BEKLIYOR işleri (öncelik: U/P → V → K/F/E).
+
+**BİTTİ ve CANLIDA (bu tura kadar):** P-11 · P-12 · P-13 · U-16 — hepsi merge + pointer bump (19e7703→1ad47f5, SARKMA YOK) ile CANLIDA.
+- **P-11/12/13 (PR #82 BE + #222 FE):** mentör panelinde artık **Mentörlük Saati** kartı · sertifikalıysa **'✅ Sertifikalı' rozeti** (koşulsuz CTA yerine) · **'Mentilerim' listesi** (aktif menti adları). Backend `dashboard-metrics` ucu 3 alanla genişledi (salt-okuma, IDOR korumalı).
+- **U-16 (PR #83 BE):** `emailService.send()` boolean döner → feedback hatırlatma yanıtı **gerçek teslim** sayısını verir ('gönderildi' yalanı bitti); cron `reminderEmailSentAt`'i yalnız teslimde yazar (tek-atımlık hatırlatma yanmaz).
+- Test: backend `mentor-metrics.unit.test.ts` 9 + `emailService.test.ts` 4→6; FE `mentor-panel-data.test.tsx` 5 (FE suite 111→116). KURAL 14: test adları+sayıları CI logunda doğrulandı (68 backend test dosyası).
 
 ---
 
