@@ -247,3 +247,105 @@ Bu, BB'nin kendi beyanıyla **birebir tutuyor** (`00-BELGE-HARITASI.md:61`: *"Ka
 
 ➡️ **Risk (BB'nin kendi tanımı):** *"Yeni gelen bu yerlerden birini okuyup merge etmemeyi kural sanar → otonom kuyruk tıkanır."* Çelişki bilinen, kayıtlı, **iki turdur çözülmemiş** → PO kararı (kart aşağıda).
 
+---
+
+# B — KURAL SİCİLİ
+
+> ⚠️ **Birim notu:** bu bölümün kaynak analizi CLAUDE.md'yi "50.477 karakter" diye ölçmüş — o sayı **bayttır** (gerçek: 46.817 karakter). Blok bazlı ölçümler karaktere yakın çıktı (ör. RTK 5.051 ≈ 5.048), bu yüzden aşağıdaki kazanç rakamları **±%7 yaklaşıktır**; sıralama güvenilir, mutlak değerler değil.
+
+## B.1 — Kural envanteri
+**Birim: "kural" = `##`/`###` başlıklı davranış kuralı bloğu.** (Künye/başlık blokları ve RTK araç kılavuzu sayıma girmez.)
+
+**Toplam 74 kural** = `CLAUDE.md` **65** + `belge-duzeni-rehberi.md` **9** (1 · 2 · **2-B** · 3 · 4 · 5 · 6 · 7 · 8).
+
+### ⭐ En kritik yapısal bulgu: numara dizileri ÇAKIŞIYOR
+İki dosya **iki bağımsız numara dizisi** kullanıyor ve **1, 2, 8 numaraları iki farklı kurala** verilmiş:
+
+| Numara | `belge-duzeni-rehberi.md` | `CLAUDE.md` | Durum |
+|---|---|---|---|
+| **KURAL 1** | Tek gerçek kaynağı (`:11-16`) | Oturum başında KARAR-TAKIP oku (`:329`) | ❌ ÇAKIŞMA |
+| **KURAL 2** | Belge türü = klasör (`:17-39`) | Tur sonunda KARAR-TAKIP güncelle (`:332`) | ❌ ÇAKIŞMA |
+| **KURAL 8** | Bulgu yaşam döngüsü (`:99-109`, 1.300) | Bulgu yaşam döngüsü (`:383-393`, 1.053) | 🔁 **TAM MÜKERRER** — aynı kural, aynı numara, iki gövde |
+| KURAL 9-16 | *(yok)* | `:394-463` | 🧩 Seri yalnız CLAUDE.md'de |
+| **KURAL 2-B** | Eksen çakışması (`:40-57`, 1.822) | *(adı bile geçmiyor)* | 🧩 CLAUDE.md 2-B'yi hiç anmıyor |
+
+**Canonical net ve çelişkisiz:** `rehber:124` *"Bu rehber, belge düzeninin tek yetkili kaynağıdır"* + `CLAUDE.md:381` *"Rehber = canonical."*
+➡️ Ama CLAUDE.md, KURAL 8'i **tam metin kopyalayarak** rehberin **KURAL 1'ini ("kopyalama, işaret et") ihlal ediyor.**
+
+### ⚠️ İki sayım hatası (KURAL 16'nın kendi rehberinde ihlali)
+- Kaç düzen kuralı var? `rehber:6` **"6 kural"** · `CLAUDE.md:377` **"8 düzen kuralı"** · **gerçek: 9**. Üç farklı sayı, aynı şeyi sayıyor.
+- `rehber:3` künyesi *"Son güncelleme: 2026-08-23"* diyor ama içinde `:40` *"(eklendi 2026-09-19)"* ve `:45` *"(netleştirme 2026-09-21)"* var → künye **29 gün bayat** (KURAL 12 birincil ayak ihlali).
+
+## B.2 — ⭐ GEÇERSİZLEŞME KOŞULU — brief'in öncülü düzeltildi
+
+**KURAL 17 YOKTUR.** (§0 ② — 13 terim · BB + 11 dal · 0 dosya.) Dolayısıyla soru "uygulaması neden yarım kaldı" değil, **"hiç başlamadı"**.
+
+Yine de asıl soru cevaplanabilir — her kural için koşul yazılı mı:
+
+| Durum | Kural | % |
+|---|---:|---:|
+| ✅ Koşulu YAZILI | **6** | 8,1 |
+| ❌ Koşulu yazılı değil | **68** | 91,9 |
+| ↳ bunlardan "asla geçersizleşmez" diye **bilinçli** beyan taşıyan | 4 | — |
+| ↳ hiçbir şey söylemeyen | 64 | — |
+| **TOPLAM** | **74** | 100 |
+
+**Koşulu yazılı 6 kural:** KURAL 16 ADAYI (`:452` *"PO onaylayınca ADAYI düşer"*) · CANLI=LOKAL DB (`:248`) · Ortam/Veritabanı (`:265`, aynı cümle) · KURAL 12 3. ayak (`:412` *"şimdilik elle"*) · Güvenlik/mesaj resolver (`:518-520`) · rehber 2-B indeks adı (`:52-53` *"geçicidir"*).
+
+⚠️ **6'sının hiçbiri ölçülebilir tetik taşımıyor** — hepsi *"X olunca"* biçiminde, X'i kimin ne zaman kontrol edeceği yazılı değil. Pratikte hiçbiri kendiliğinden tetiklenmiyor; B.3 bunu doğruluyor.
+
+## B.3 — ⭐ KOŞULU SAĞLANMIŞ / BAYAT KURALLAR (4) — kaldırma PO kararı
+
+### 🔴 B.3-1 · Güvenlik kuralı YANLIŞ KANITA dayanıyor *(orkestratör doğruladı)*
+`CLAUDE.md:519` aynen: *"`registerMessages.ts` örnek addır, **dosya HENÜZ kodda YOK: grep boş**"*
+**Kod gerçeği:** `git ls-tree -r $BB | grep registerMessage` → **`frontend/src/lib/registerMessages.ts` VAR.**
+➡️ Bir **güvenlik** kuralı, artık doğru olmayan bir gerekçeye yaslanıyor. İddia en az 2026-08-28'den beri yanlış (**24 gün**) — üstelik bu tam olarak KURAL 13'ün kendi gerekçe listesindeki vaka tipi: *kural yazıldı, kendi kaynağı düzeltilmedi*.
+
+### 🔴 B.3-2 · Canonical rehber, DONDURULMUŞ belgeyi canonical gösteriyor *(orkestratör doğruladı)*
+`belge-duzeni-rehberi.md:13` aynen: *"Canonical'lar: … **iş kuyruğu → `10-yol-haritasi.md`**"*
+**Gerçek:** `10-yol-haritasi.md:4` → **`📸 DONDURULMUŞ (2026-09-21)` — "bu belge artık güncellenmez"**. Aynısı `00-CIKIS-PLANI.md:4`.
+Ve `CLAUDE.md:370` → *"Aktif iş kaynağı **tektir: `docs/otonom/00-KUYRUK.md`**"*.
+➡️ **Belge düzeninin canonical'ı, kendi canonical örneğini yanlış gösteriyor.** Rehberi okuyan ajan ölü belgeye yönlendirilir. KURAL 7 tablosundaki `10-yol` ve `00-CIKIS-PLANI` satırları da aynı durumda.
+
+### 🟡 B.3-3 · "PR aç, MERGE ETME" — koşul sağlandı, artık satır içi tortu kaldı
+Koşul 2026-09-19'da sağlandı, düzeltme 2026-09-21'de yapıldı (`:178-179`). Kalan artık: bölüm **başlığı** hâlâ `:25` *"…KISMEN KALDIRILDI"* ve `:26-27`'de yanlış çıkmış bir **atıf zinciri** satır içinde duruyor.
+➡️ Bu tam olarak `CLAUDE.md:356-368`'in ("tarihsel iz satırın İÇİNDE tutulmaz") yasakladığı desen — **kural kendi dosyasında uygulanmamış.**
+
+### 🔴 B.3-4 · Kişi Adı Yasağı kendi dosyasında ihlal ediliyor
+`CLAUDE.md:287` *"Hiçbir kod/yorum/commit/PR/belgeye kişi adı YAZMA."*
+**İhlal, kural metninden 279 satır ÖNCE:** `CLAUDE.md:8`'de PO'nun kişi adı parantez içinde geçiyor. Aynı desen `docs/otonom/00-KUYRUK.md:2` ve toplam **13 dosyada 15 geçiş**.
+`:288` *"Mevcut belgelerdeki isimler ayrı bir temizlik işinde giderilir"* → koşul **SAĞLANMADI**, iş hiç açılmadı.
+⚠️ **Repo PUBLIC** — bu rapor gereği ada yer vermiyor; temizlik işi ad listesi üretmeden yapılabilir (`grep` PO'nun elinde).
+ℹ️ KVKK metinlerindeki 4 geçiş **yasal zorunluluk**, ayrı tutulmalı (G9-14'te "DOKUNULMADI" kararı var).
+
+### ⬜ Koşul henüz SAĞLANMADI (4 — takipte kalsın)
+| Kural | Koşul | Bugünkü durum |
+|---|---|---|
+| KURAL 16 ADAYI | PO onaylayınca "ADAYI" düşer | **19 gündür** açık; KURAL 14/15 onaylandı, 16 atlandı |
+| KURAL 12 · 3. ayak | "ileride script ile" | `scripts/` altında tazelik script'i **yok** (yalnız `kvkk-docx-gen.py`, `verify.sh`) |
+| CANLI=LOKAL ↔ Ortam-DB çelişkisi | PO `DATABASE_URL`'i teyit edecek | `03-PO-ELLE-ISLER.md` "ADIM 0" hâlâ açık (= AÇ-1) |
+| rehber 2-B indeks adı | klasör `00-INDEX.md`'ye taşınırsa | `raporlar/icerik/00-INDEKS.md` hâlâ duruyor |
+
+**+ İçi boşalmış 1 kural:** `Model Yönlendirme` (`:290-294`, 346 krk) — gövdesi 2026-08-28'de çıkarılmış; geriye tek cümle + onun **iki katı** uzunlukta GÜNCELLEME notu kalmış. Kural artık **hiçbir davranış talep etmiyor**.
+
+## B.4 — BİRLEŞTİRME ÖNERİLERİ (yeni kural YOK)
+
+⚠️ Konsey kuralına uyuldu: **0 yeni kural.** Yalnız BİRLEŞTİR / SADELEŞTİR / TAŞI. **Hiçbir kural gövdesi silinmiyor.**
+
+| # | Birleştirme | Kaynak | Kazanç |
+|---|---|---|---:|
+| **B.4-1** | **KURAL 8 mükerreri** → CLAUDE.md'deki kopya rehbere, yerine atıf | `CLAUDE.md:383-393` ≡ `rehber:99-109` | **933** |
+| B.4-2 | Belge Düzeltme Deseni + rehber KURAL 6 → tek kural (gövde rehbere) | `:346-355` + `rehber:75-81` | 422 |
+| **B.4-3** | **DB/ortam dörtlüsü** → tek "VERİTABANI" kuralı. İçinde **birebir aynı ~530 krk ÇELİŞKİ paragrafı İKİ KEZ** var (`:248`, `:265`) | `:243-273` (3.440) | **~1.340** |
+| B.4-4 | `TEST_DATABASE_URL` guard uyarısı **üç yerde** → tek yer + 2 atıf | `:33-34`+`:199-200`+`:260-261` | 279 |
+| B.4-5 | İki paralellik kuralı → tek kural (ikisi de "şüphede SIRALI" diyor) | `:120-127` + `:277-285` | ~481 |
+| **B.4-6** | **Üç belge-senkron yükümlülüğü** → tek "TUR BİTİŞ KONTROL LİSTESİ" | `:145-150`+`:300-313`+`:332-335` | **~1.089** |
+| B.4-7 | Submodule ikilisi → tek kural | `:214-218` + `:219-233` | ~439 |
+| **B.4-8** | **Kanıt disiplini üçlüsü** (KURAL 10+13+16) → tek kural; 6 gerekçe vakası `## GEÇMİŞ`e | `:399-403`+`:414-428`+`:451-463` | **~1.400** |
+| B.4-9 | Kapı + Bitti tanımı → `00-KUYRUK.md`'ye taşı (CLAUDE.md:370 zaten "tek kaynak orası" diyor) | `:30,44,45` + `:151-160` | ~610 |
+| B.4-10 | `Model Yönlendirme` → tek cümleye indir, not `## GEÇMİŞ`e | `:290-294` | ~256 |
+| | **TOPLAM** | | **≈ 7.249** |
+
+➡️ Kural sayısı **74 → 65** (9 birleşme), **hiçbir kural kaldırılmadan.**
+➡️ B.4 (≈7.249) **+ A.3 Kademe 1** (13.208) birbirini büyük ölçüde kapsıyor (B.4-1/2/8 ile KURAL 9-16 taşıması aynı bloklara dokunuyor) — **toplamları TOPLANMAZ.** A.3'ün taşıma planı uygulanırsa B.4-3/4/5/6/7/9/10 (≈4.494) **ek** kazanç sağlar → CLAUDE.md ≈ **24.200 karakter**.
+
