@@ -4,6 +4,11 @@
 
 ---
 
+## TUR BAŞLADI — TUR AD (2026-09-21) · başlangıç · kalan 🟢 ~32
+İlk adım: OTONOM-PROMPT PO güncellemesi commit+push (2d84138, main). Şimdi kuyruğun 🟢 BEKLIYOR işleri işleniyor (öncelik: U/P → V → K/F/E).
+
+---
+
 ## TUR ÖZETİ — TUR AC (2026-09-21) · 4 iş CANLIDA · TUR YARIM (kalan 🟢: ~36)
 
 **Neden yarım:** Kuyrukta hâlâ çok 🟢 var → K-20 (belge senkronu) yapılmadı (DURMAMA: K-20 yalnız hiç 🟢 kalmayınca). Bağlam yönetimi için temiz kesim.
