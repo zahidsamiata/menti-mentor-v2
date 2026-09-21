@@ -23,6 +23,7 @@ import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget'
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
+import { NotificationOptInButton } from '@/components/organisms/NotificationOptInButton';
 import type { MentorMatch } from '@/types/matching';
 
 export default function MentiDashboardPage() {
@@ -213,6 +214,8 @@ export default function MentiDashboardPage() {
               DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentor listesine erişebilirsiniz.
             </p>
           )}
+          {/* F-20: onay/eşleşme olunca haberdar olmak için tarayıcı bildirim izni istemi */}
+          <NotificationOptInButton />
         </div>
       )}
 
