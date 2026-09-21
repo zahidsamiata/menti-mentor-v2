@@ -304,3 +304,92 @@ Salt gözlem (**çalıştırılmadı**). `prisma/seed.ts:299-319` tek `$transact
 - `User.discVector` **silinmiyor** ⇒ çalıştırılırsa **vektör kalır, dayandığı cevaplar gider** — sessiz tutarsız durum.
 
 Soru yazan tek dosya `prisma/seed.ts` (`:325-337`, 32 soru). `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs` `Question`'a **yazmıyor** (kapsam: `prisma/` + `scripts/`, desen `prisma.question|question.create` harf duyarsız → eşleşme yok). ⇒ `CLAUDE.md`'nin *"tehlikeli = `prisma/seed.ts`"* uyarısı **kod-teyitli doğru**.
+
+---
+
+## 5. BULGULAR — D · EŞLEŞTİRME KALİTESİ ÖLÇÜLÜYOR MU?
+
+### D.1 ⭐ ANA BULGU — `Match` tablosu hiç yazılmıyor, üç yüzey birden ölü
+
+`prisma.match.create` backend'in tamamında **tek yerde**: `scoring.service.ts:137`, `createMatchIfEligible` içinde — ve o fonksiyonun **sıfır çağıranı** var (kapsam K1). Ham SQL insert de yok (`$executeRaw|$queryRaw` taraması: `platformController.ts:143` · `tagController.ts:193` · `health.ts:33` — hiçbiri `Match`'e dokunmuyor).
+
+**Bunun öldürdüğü üç yüzey:**
+
+| # | Yüzey | Kod VAR mı | Kullanıcı ne görüyor |
+|:--:|---|:--:|---|
+| 1 | Mentörün onay kuyruğunda `%uyum` rozeti | ✅ `mentor/page.tsx:292` | `m.match` null ⇒ **hiç çizilmiyor** |
+| 2 | Yöneticinin `/admin/eslesmeler` tablosu (arketip + skor sütunları) | ✅ `eslesmeler/page.tsx:134,142` | **"Henüz eşleşme yok"** (`:100`) — kalıcı |
+| 3 | Çift risk sinyali (GREEN/YELLOW/RED) | ✅ `pairSignal.service.ts:37`, **testli** (`degerlendirme-metrik-asama1.test.ts:301-336`, 5 test) | Tek üreticisi `adminController.ts:433`, tek tüketicisi `eslesmeler/page.tsx:170` — **ikisi de aynı boş tabloya bağlı** ⇒ ulaşılamaz |
+
+⚠️ **Dürüst nüans:** risk sinyalinin *hesabı* doğru, testli ve `MeetingCheckIn` verisi **gerçekten** FE'den yazılıyor (`meeting-checkin/page.tsx:49-73`). Kopan yer hesap değil, **gösterim**: sinyali ekrana taşıyan tek yol `Match` satırları üzerinden dönüyor. Yani *"çalışıyor ama görünmüyor"* — silinecek ölü kod değil, **bağlanacak yarım özellik** (silme protokolü gereği bu ayrım önemli).
+
+### D.2 KOPMA NOKTALARI — öğrenme döngüsü nerede kesiliyor
+
+**KOPMA 1 — kombinasyon skoru tek yönlü.** Check-in → `rewardPenalty.ts:58-62` `matchCombinationScore.upsert` (16 DISC kombinasyonu, ±ödül/ceza `:5-8`) **çalışıyor**. Okuyan taraf `getCombinationScores` (`:69`) yalnız bir admin ucundan çağrılıyor (`feedbackLogRoutes.ts:22-27`), **eşleştirme motorundan değil** (K5). Kodun kendi yorumu bunu itiraf ediyor (`:66-68`: *"…dinamik bonus/ceza **uygulayabilir**"* — gelecek zaman). ⇒ *"D mentör + S menti bu kurumda kötü gidiyor"* sinyali birikiyor, **bir sonraki eşleştirmenin skorunu asla değiştirmiyor.** Test kapsamı: `grep -rn "rewardPenalty" tests/` → **0**. Üstelik bu ucu çağıran FE ekranı da yok (`combination-scores` → FE'de 0 isabet) ⇒ **veri var, görünürlük yok, etki yok.**
+
+**KOPMA 2 — otomatik kalibrasyon boş tabloyu okuyor. 🔴 EN SESSİZ HATA.**
+- `algorithmTuner.ts:144-161` `getNpsStats` → `prisma.feedbackLog.findMany(...)`; `:290` `if (!phase3Nps.avgNps || phase3Nps.sampleSize < 10) return result;`
+- `FeedbackLog`'a tek yazan: `feedbackLogController.ts:69`, route `POST /api/feedback-logs`. **Hiçbir frontend bu ucu çağırmıyor** (kapsam: FE `src/` tamamı, `feedback-logs|feedbackLog` → yalnız KVKK özet **okuması**, POST **0**).
+- Gerçek NPS **başka tabloya** gidiyor: `periodic-survey/page.tsx:54-58` → `Feedback.periodicNpsScore` (`schema.prisma:648`). `FeedbackLog.npsScore` (`:519`) ile arasında **senkronizasyon yok.**
+- ⇒ Haftalık cron (`cronScheduler.ts:71`, Pazar 02:00 UTC) **her hafta koşuyor** ve her seferinde guard'a takılıp *"Yeterli NPS verisi yok — ağırlıklar değişmedi"* (`algorithmTuner.ts:286,290-292`) dönüyor. Admin onay akışı (`:327-328`, `applyPendingAdjustment` `:373`) **hiç tetiklenmiyor.**
+- ⇒ **Ağırlık ayarı veri-güdümlü değil, tamamen insan sezgisine bağlı** — geriye yalnız manuel `PUT /admin/algorithm-tuner/weights` kalıyor.
+- ⇒ Yöneticinin **"Başarı oranı" KPI kartı** da aynı boş tablodan besleniyor (`adminController.ts:91-96`) ⇒ daima `null`; FE bunu hata olarak değil **`—`** olarak gösteriyor (`admin/kpi/page.tsx:70`). **Sessiz.**
+
+**KOPMA 3 — üç soru toplanıyor, hiç okunmuyor.** `mentiNeeds` · `mentorStrengths` · `supportApproach` · `priorityValue`: tek yazan `onboardingController.ts`; `matching.ts` · `scoring.ts` · `scoring.service.ts` · `sector-scorer.service.ts` içinde **0 eşleşme**.
+
+**KOPMA 4 — gölge OCEAN motoru** (§3) + `TenantMembership.qualityMultiplier` kalıcı alanını canlı eşleştirme **okumuyor** (`scoring.ts:163-166` kendi yorumuyla).
+
+### D.3 ⭐ "Eşleştirmeleriniz işe yarıyor mu?" — bugün hangi veriyle cevap verilir
+
+**Cevaplanabilir (gerçek veri + admin ucu + ekran):**
+
+| Soru | Uç | Ekran | Kaynak |
+|---|---|---|---|
+| Mentörlerin kalite puanı | `TenantMembership.qualityMultiplier` | `admin/mentor-havuzu` | `Feedback.guidanceScore/resourceSharingScore/trustScore` — **gerçek** |
+| Arz-talep / kimse kaynıyor mu | `GET /api/admin/health-metrics` (`adminController.ts:143`) | — | mentörsüz menti, ölü eşleşme, pasif üye — **gerçek** |
+| Hacim sayıları | `GET /api/admin/kpi` (`adminController.ts:40`) | `admin/kpi/page.tsx:34` | `VisibilityOptIn` sayımları — **gerçek** |
+
+**Cevaplanamayan:**
+- *"Başarı oranımız ne?"* → `successRate` daima `null` (KOPMA 2), ekranda `—`.
+- *"Hangi çiftler riskli?"* → hesap var, testli, veri var — **ama gösterim `Match` tablosuna bağlı** ⇒ ekran boş (D.1).
+- ⭐ *"Yüksek skor verdiğimiz eşleşmeler gerçekten daha iyi gitti mi?"* → **hiçbir yerde hesaplanmıyor.** `predictedScore` yalnız `scoring.service.ts:138`'de **yazılıyor** (o da hiç çağrılmayan fonksiyonda); sonraki `MeetingCheckIn.overallRating` / `Feedback` puanlarıyla karşılaştıran **sorgu, servis veya uç yok** (kapsam: `predictedScore` BE `src/` tamamı → tek isabet, yazım).
+
+> **NET CEVAP (D.3):** Sistem *"mentörlerin kalite katsayısı şu"* ve *"arz-talep dengesi şu"* diyebilir. Ama **"eşleştirme algoritmamız işe yarıyor mu"** sorusuna **cevap veremez** — algoritmanın tahminiyle gerçek sonucu karşılaştıran hiçbir mekanizma yok, ve ölçüm için yazılmış olanlar (`Match`, `FeedbackLog`, `MatchCombinationScore`) ya hiç yazılmıyor ya hiç okunmuyor.
+
+### D.4 ⭐ TEST — "hesaplanıyor" mu, "anlamlı" mı?
+
+14 ilgili test dosyası, **141 test** (`it(`/`test(` sayımı).
+
+**KOVA A — "patlamıyor / yetki doğru / tesisat çalışıyor": ~131 test.**
+Örnek: `matching.test.ts` 16 testin **15'i** hiçbir skor beklentisi içermiyor (401, PENDING dışlama, tenant izolasyonu, fallback'in boş dönmemesi).
+
+**KOVA B — "skor ANLAMLI, doğru taraf öne çıkıyor": 2 yer, ikisi de kısıtlı.**
+1. `scoring.unit.test.ts:35-41` + `:104-118` — ayırt edicilik ve monotonluk (*"farklı ağırlık → farklı skor"*, *"sektör ağırlığı artınca total artar"*). **Gerçek ama saf-fonksiyon düzeyinde**, sıralama düzeyinde değil.
+2. `feedback-loop.test.ts:95-128` — `expect(badItems[0].totalScore).toBeLessThan(goodItems[0].totalScore)`. **Sistemin tek gerçek uçtan-uca anlamlılık iddiası.**
+
+**⚠️ İki testin de kanıt değeri zayıflatılmış — ikisi de KOŞULLU:**
+- `feedback-loop.test.ts:123` assert'i `if (goodItems.length > 0 && badItems.length > 0)` içinde ⇒ **liste boşsa assert hiç çalışmaz, test yeşil geçer.**
+- `matching.test.ts:176-184` — `?minMatchScore=95` isteniyor, assert `toBeGreaterThanOrEqual(90)` (**eşikle uyumsuz**) ve `body.items.forEach(...)` ⇒ **boş listede boşuna geçer.**
+
+⇒ **"İki aday arasında beklenen sıralamayı" açıkça assert eden tek bir test yok.** Kapsam: `grep -rn "items\[0\]" tests/matching.test.ts tests/mentor-matches.test.ts` → tek isabet `matching.test.ts:244` (uyarı rozeti).
+⇒ `matching.test.ts:45-47` yalnız *"liste azalan sırada mı"* diyor — **hangi mentinin önde olması gerektiğini test etmiyor.** Eşitlik davranışını (A.3) hiç test etmiyor.
+
+**⛔ `scoring.test-cases.ts` — en iyi kanıt CI dışında.**
+Bu dosya aslında **kova B'ye en yakın malzeme**: sektör skoru (`:49-64`), DISC matris + vektör harmanı elle hesaplanmış beklentilerle (`:69-89`, *conf=0.5 → 67.5*), toplam formül (`:95-119`), anti-match (`:124-130`). Ama vitest değil — `console.log` + `process.exit(1)` betiği.
+- Tek çağıran: `package.json:17` `"test:scoring": "tsx src/services/scoring.test-cases.ts"`
+- **`npm test` çalıştırmıyor:** `vitest.config.ts:30` `include: ['tests/**/*.test.ts']` — dosya `src/` altında ve adı `.test-cases.ts`; üstelik `:33` `exclude`'da.
+- Kaynak kodda **0 import**.
+⇒ **Formül regresyonunun en iyi koruması, elle çağrılmadıkça hiç çalışmıyor.** (KURAL 14'ün tam örneği: CI yeşil ≠ test koştu.)
+
+**OCEAN için test: SIFIR.** `tests/` altında `disc-to-ocean|scoring.service|sector-scorer|sjt-scorer|rewardPenalty|matchingInterface` → **0 eşleşme**. `ocean|OCEAN` → tek isabet `learning-journey.test.ts:133` `expect(after?.oceanO).toBeNull()` — OCEAN'ın **yazılmadığını** doğrulayan negatif test. ⇒ **100× ölçek hatasının aylarca sessiz kalmasının doğrudan sebebi.**
+
+### D.5 Kalan kenar durum — kapasite
+
+**KAPASİTE KAVRAMI KODDA YOK.** Kapsam: BE `src/` · `prisma/` · `tests/`, terimler `maxMentees · capacity · maxMenti · kontenjan · kapasite · activeMentiLimit · mentiLimit` (harf duyarsız, iki dilli) → **ilgili 0 eşleşme** (dönen 4 satır: SMTP adresi, seed soru metni, e-posta testi).
+`scoreAndFilter`'ın tüm `continue` koşulları (`matching.ts:267,270,274,278,283`) içinde **aktif menti sayısı hiç sorgulanmıyor.**
+⇒ **20 aktif mentisi olan mentör ile 0 mentisi olan mentör aynı havuzda, aynı skorla yarışıyor.** Yük dengeleme yok. Mentör personasının *"sürekli meşgul edilmek istemem, seçicilik korunmalı"* endişesinin (`mentor-persona-...:60-62`) kodda hiçbir karşılığı yok.
+
+### D.6 Kenar durum — "hiç mentör yok" ile "eşleşen mentör yok" ayrımı
+
+API ikisini de `{ items: [] }` + HTTP 200 olarak döndürüyor (`matching.ts:382,406`; `matchingController.ts:114`) ⇒ FE ikisini tek metinde birleştirmek zorunda: `menti/page.tsx:276-287` *"Şu an uygun mentor bulunamadı — Programınıza henüz mentor katılmamış ya da profilinizle eşleşen mentor yok. DISC profilinizin güncel olduğundan emin olun."* + `/disc-test` bağlantısı.
+⚠️ **İki sonuç:** (1) kurumda gerçekten mentör yokken kullanıcı **kendi profilini suçluyor**; (2) gönderildiği `/disc-test` sayfası, havuzu tamamlamışsa onu 2,5 sn sonra geri atıyor (C.3) ⇒ **çıkışsız döngü.**
