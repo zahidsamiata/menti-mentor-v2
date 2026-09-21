@@ -29,7 +29,14 @@ export interface DiscRecallCardData {
 
 // ─── Salt-okunur görünüm (saf, test edilebilir) ──────────────────────────────
 
-export function DiscRecallCardView({ card }: { card: DiscRecallCardData }) {
+export function DiscRecallCardView({
+  card,
+  role,
+}: {
+  card: DiscRecallCardData;
+  /** F-16: menti için özgüven veren ek ton; diğer rollerde gösterilmez. */
+  role?: 'MENTI' | 'MENTOR' | 'ADMIN';
+}) {
   return (
     <div
       className={cn(
@@ -86,6 +93,13 @@ export function DiscRecallCardView({ card }: { card: DiscRecallCardData }) {
         </p>
         <p className="text-xs text-muted-foreground">{card.growthArea}</p>
       </div>
+
+      {/* F-16: menti-özel özgüven tonu — güçlü yanlarını sahiplenmesini teşvik eder. */}
+      {role === 'MENTI' && (
+        <p className="mt-4 rounded-xl bg-primary/10 p-3 text-xs font-medium text-primary text-balance">
+          💪 Bu güçlü yanlar senin. Doğru mentörle daha da parlayacaklar — kendine güven, yolun açık.
+        </p>
+      )}
     </div>
   );
 }
@@ -96,7 +110,7 @@ interface ProfileWithCard {
   discResultCard: DiscRecallCardData | null;
 }
 
-export function DiscRecallCard({ userId }: { userId: string }) {
+export function DiscRecallCard({ userId, role }: { userId: string; role?: 'MENTI' | 'MENTOR' | 'ADMIN' }) {
   const api = useApiClient();
 
   const { data } = useQuery<ProfileWithCard>(
@@ -107,5 +121,5 @@ export function DiscRecallCard({ userId }: { userId: string }) {
 
   if (!data?.discResultCard) return null;
 
-  return <DiscRecallCardView card={data.discResultCard} />;
+  return <DiscRecallCardView card={data.discResultCard} role={role} />;
 }

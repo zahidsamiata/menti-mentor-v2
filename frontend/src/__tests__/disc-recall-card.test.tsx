@@ -33,4 +33,15 @@ describe('DiscRecallCardView (P-03)', () => {
     expect(screen.getByText('S + C')).toBeInTheDocument();
     expect(screen.getByText('I')).toBeInTheDocument();
   });
+
+  // F-16: menti rolünde özgüven tonu görünür, diğer rollerde görünmez.
+  it('MENTI rolünde özgüven cümlesi gösterir', () => {
+    render(<DiscRecallCardView card={card} role="MENTI" />);
+    expect(screen.getByText(/Bu güçlü yanlar senin/)).toBeInTheDocument();
+  });
+
+  it('rol verilmeyince özgüven cümlesi gösterilmez', () => {
+    render(<DiscRecallCardView card={card} />);
+    expect(screen.queryByText(/Bu güçlü yanlar senin/)).not.toBeInTheDocument();
+  });
 });

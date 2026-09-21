@@ -214,13 +214,20 @@ export default function MentiDashboardPage() {
               DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentor listesine erişebilirsiniz.
             </p>
           )}
+          {/* F-15: umut/anlam sinyali — bekleme "boş" hissettirmesin (sayı uydurmadan). */}
+          <p className="text-xs text-amber-700 dark:text-amber-400">
+            💛 Sen yalnız değilsin — onay çoğunlukla kısa sürede gelir. Beklerken aşağıdaki{' '}
+            <strong className="font-semibold">öğrenme yolculuğunu</strong> keşfedebilir,{' '}
+            <strong className="font-semibold">DISC profilini</strong> gözden geçirerek hazırlanabilirsin.
+          </p>
           {/* F-20: onay/eşleşme olunca haberdar olmak için tarayıcı bildirim izni istemi */}
           <NotificationOptInButton />
         </div>
       )}
 
-      {/* P-03: DISC arketip rapeli — kayıt sonrası "aha" kartını panelde tekrar gösterir */}
-      {user?.id && !needsDiscTest && <DiscRecallCard userId={user.id} />}
+      {/* P-03: DISC arketip rapeli — kayıt sonrası "aha" kartını panelde tekrar gösterir.
+          F-16: menti rolüyle özgüven tonu eklenir. */}
+      {user?.id && !needsDiscTest && <DiscRecallCard userId={user.id} role="MENTI" />}
 
       {/* Profil güvenilirliği + günün sorusu */}
       {user?.id && <DiscConfidenceWidget userId={user.id} />}
