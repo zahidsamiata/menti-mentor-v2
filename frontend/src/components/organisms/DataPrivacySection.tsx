@@ -17,6 +17,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { fetchMyDataExport, deleteMyAccount } from '@/lib/api/kvkk';
+import { summarizeDataExport, type DataSummarySection } from '@/lib/kvkkSummary';
 
 type DeleteStep = 'closed' | 'warning' | 'confirm';
 
@@ -26,6 +27,11 @@ export function DataPrivacySection() {
 
   const [downloading, setDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
+
+  // K-12: ham JSON yerine okunur özet
+  const [viewing, setViewing] = useState(false);
+  const [summary, setSummary] = useState<DataSummarySection[] | null>(null);
+  const [summaryError, setSummaryError] = useState<string | null>(null);
 
   const [step, setStep] = useState<DeleteStep>('closed');
   const [confirmEmail, setConfirmEmail] = useState('');
@@ -57,6 +63,22 @@ export function DataPrivacySection() {
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+  };
+
+  // ── Verilerimi görüntüle (okunur özet) ──────────────────────────────────────
+  const handleView = async () => {
+    // Zaten yüklüyse yalnız aç/kapat.
+    if (summary) { setViewing((v) => !v); return; }
+    setViewing(true);
+    setSummaryError(null);
+
+    const result = await fetchMyDataExport(accessToken, user.tenantId);
+    if (!result.ok) {
+      setSummaryError(result.error.message ?? 'Veriler getirilemedi. Lütfen tekrar deneyin.');
+      setViewing(false);
+      return;
+    }
+    setSummary(summarizeDataExport(result.data));
   };
 
   // ── Hesabımı kapat ──────────────────────────────────────────────────────────
@@ -98,20 +120,50 @@ export function DataPrivacySection() {
         </p>
       </div>
 
-      {/* ── Veri indirme ─────────────────────────────────────────────── */}
+      {/* ── Verilerimi görüntüle / indir ─────────────────────────────── */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-sm font-medium text-foreground">Verilerimi indir</p>
+          <p className="text-sm font-medium text-foreground">Verilerim</p>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Profiliniz, rızalarınız ve etkinlik özetiniz JSON dosyası olarak iner.
+            Profiliniz, rızalarınız ve etkinlik özetinizi ekranda görüntüleyin veya JSON dosyası olarak indirin.
           </p>
         </div>
-        <Button variant="outline" onClick={handleDownload} disabled={downloading}>
-          {downloading ? 'Hazırlanıyor…' : 'İndir'}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={handleView}>
+            {viewing && summary ? 'Gizle' : 'Görüntüle'}
+          </Button>
+          <Button variant="outline" onClick={handleDownload} disabled={downloading}>
+            {downloading ? 'Hazırlanıyor…' : 'İndir'}
+          </Button>
+        </div>
       </div>
       {downloadError && (
         <p className="text-xs text-destructive" role="alert">{downloadError}</p>
+      )}
+      {summaryError && (
+        <p className="text-xs text-destructive" role="alert">{summaryError}</p>
+      )}
+
+      {/* ── Okunur özet (K-12) ───────────────────────────────────────── */}
+      {viewing && summary && (
+        <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-4">
+          {summary.map((section) => (
+            <div key={section.title}>
+              <h3 className="text-sm font-semibold text-foreground mb-1.5">{section.title}</h3>
+              <dl className="space-y-1">
+                {section.rows.map((row, i) => (
+                  <div key={`${section.title}-${i}`} className="flex flex-wrap justify-between gap-x-3 text-xs">
+                    <dt className="text-muted-foreground">{row.label}</dt>
+                    <dd className="text-foreground text-right break-words">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+          <p className="text-[11px] text-muted-foreground border-t border-border pt-2">
+            Bu özet size gösterilir; mesaj içerikleri ve karşı tarafın kişisel verileri paylaşılmaz.
+          </p>
+        </div>
       )}
 
       {/* ── Hesap kapatma (tehlikeli alan) ───────────────────────────── */}
