@@ -7,10 +7,14 @@ import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard'
 import { ProgramHealthSection } from '@/components/organisms/ProgramHealthSection';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { computeAdminAlerts } from '@/lib/adminAlerts';
 
 export default function KpiPage() {
   const api = useApiClient();
   const { data, isLoading, error } = useQuery(() => adminApi.getKpi(api), []);
+
+  // F-19: yöneticiyi harekete geçiren proaktif kırmızı uyarılar (eşik aşımı).
+  const alerts = computeAdminAlerts(data);
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -20,6 +24,20 @@ export default function KpiPage() {
       </div>
 
       {error && <AlertMessage type="error" message={error} />}
+
+      {/* F-19: eşik aşımında kırmızı proaktif uyarı bandı */}
+      {alerts.length > 0 && (
+        <div className="rounded-2xl border-2 border-destructive/50 bg-destructive/5 p-4 space-y-2">
+          <p className="flex items-center gap-2 text-sm font-semibold text-destructive">
+            ⚠️ Dikkat gerektiren durumlar
+          </p>
+          <ul className="space-y-1">
+            {alerts.map((a) => (
+              <li key={a.key} className="text-sm text-destructive/90">• {a.message}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {isLoading && (
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
