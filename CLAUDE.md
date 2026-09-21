@@ -23,7 +23,8 @@ Durum güncellemeleri normal commit'lerle gider.
 Ana prompt: `docs/otonom/OTONOM-PROMPT.txt` — her turda aynen gönderilir, yeniden yazılmaz.
 
 ## ✅ MERGE POLİTİKASI — "PR aç, MERGE ETME" kuralı KISMEN KALDIRILDI
-`CLAUDE.md:8`'deki **"PR aç, MERGE ETME"** kuralı ve `CLAUDE.md:35`'teki akış bu bölümle güncellenmiştir.
+~~[ESKİ · 2026-09-19] `CLAUDE.md:8`'deki **"PR aç, MERGE ETME"** kuralı ve `CLAUDE.md:35`'teki akış bu bölümle güncellenmiştir.~~
+⚠️ **GÜNCELLEME (2026-09-21): atıf hedefleri kaymıştı —** bu bölümün güncellediği gerçek satırlar **`CLAUDE.md:178`** ("PR aç, MERGE ETME", bu turda üstü çizildi) ve **`CLAUDE.md:207`** ("PR açılır → CI yeşil → merge") akışıdır. Bugün `:8` = "PO kod yazmaz…", `:35` = "Şema/migration değişikliği YOK" — başka içerik. (Satır numaraları 2026-09-21 itibarıyladır.)
 Gerekçe: gerçek kullanıcı ~sıfır, her iş ayrı PR (tek tek revert edilebilir), `npm run verify` kapısı var.
 
 **🟢 işler: doğrulama listesi tam geçerse MERGE EDİLİR, PO beklenmez.**
@@ -174,7 +175,8 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **Mod bildir**: her turda mod net olsun — PLAN (salt-okuma) / BYPASS (uygula) / MANUEL-ONAY (öner→onay→uygula).
 - **Geri-alınamaz adımda DUR**: merge, prod deploy, prod DB yazımı (backfill/migration), force-push, external
   servise gönderim → önce DUR, onay bekle.
-- **PR aç, MERGE ETME**: merge kararı kullanıcınındır. Push + PR yeterli.
+- ~~[ESKİ · 2026-09-10 öncesi] **PR aç, MERGE ETME**: merge kararı kullanıcınındır. Push + PR yeterli.~~
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `CLAUDE.md:25-45` (MERGE POLİTİKASI) · `docs/otonom/00-KUYRUK.md:6-16` · `docs/otonom/OTONOM-PROMPT.txt:151-152`. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (`CLAUDE.md:163`) — orada "PR aç, merge etme" **aynen geçerlidir**.
 - **Uçtan uca yürüt**: iş verilince tek turda kapsamlı ilerle; karar gerekeni "kullanıcı kararı gerekli: …" diye
   NOT et, gereksiz durma.
 - **SHA/commit/branch tahmin etme**: durumu git'ten DOĞRULA, hafızadan varsayma.

@@ -305,8 +305,10 @@
 ---
 
 ## 📌 HER İŞTE SABİT KURALLAR
-- Mod bildir: keşif→PLANLA (salt-okuma) · kod+"merge etme"→BYPASS. Merge gerekince "BYPASS + şu PR'a merge yetkisi (PO onaylı)".
-- Güvenlik ağı: uzun otonom işlerde "PR aç, MERGE ETME" → ürün sahibi en sonda inceler.
+- ~~[ESKİ · 2026-09-10 öncesi] Mod bildir: keşif→PLANLA (salt-okuma) · kod+"merge etme"→BYPASS. Merge gerekince "BYPASS + şu PR'a merge yetkisi (PO onaylı)".~~
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** mod bildirimi aynen geçerli (🟩 PLANLA / 🟥 BYPASS); ama merge için **ayrı PO yetkisi istenmez**: 🟢 işlerde ajan doğrulama listesi tamsa merge eder. 🟡/🔴 PR'da bekler. — kanıt: `CLAUDE.md:25-45`.
+- ~~[ESKİ · 2026-09-10 öncesi] Güvenlik ağı: uzun otonom işlerde "PR aç, MERGE ETME" → ürün sahibi en sonda inceler.~~
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `CLAUDE.md:25-45` · `docs/otonom/00-KUYRUK.md:6-16`.
 - Submodule sırası: backend PR → çatı pointer → çatı PR (ara commit yok).
 - Neon migration: `IF NOT EXISTS` + `db execute` + `migrate resolve`; `db push` YASAK. Canlı=lokal aynı DB → onay al.
 - Test güvenliği: `TEST_DATABASE_URL` yoksa testler gerçek Neon'a truncate atmaz (guard).
