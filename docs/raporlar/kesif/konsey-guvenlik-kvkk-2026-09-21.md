@@ -153,3 +153,101 @@ Kapsam: `\$queryRaw|\$executeRaw|\$queryRawUnsafe|\$executeRawUnsafe` → backen
 `.strict()` 9 şemada (~85 şemadan). ⚠️ **Yanlış soru tuzağına düşülmedi:** `.strict()` yokluğu tek başına açık **değildir** — zod varsayılanı bilinmeyen anahtarları **kırpar**, ve controller'lar Prisma'ya `parsed.data`'nın **destructure edilmiş alanlarını** veriyor (`meetingController.ts:510-523` — `data:{}` elle kuruluyor, spread yok). Mass assignment için gereken `...parsed.data` spread deseni **aranmalı**; incelenen controller'larda yok. 85 şemanın tamamı izlenmedi → **TEYİT GEREK**.
 
 ---
+
+## 2.B — KVKK
+
+**Şema büyüklüğü:** `grep -c '^model ' prisma/schema.prisma` = **39 model** (`backend/CLAUDE.md` "38 models" diyor → 1 model drift, **belge bayat**).
+
+### B.1 Kişisel veri envanteri — **sınıflandırma yalnız 2 modeli kapsıyor**
+`backend/CLAUDE.md` PII↔Analitik tablosu **yalnız `User` + `UserProfile`** düzeyinde. Kullanıcıya bağlı 39 modelin çoğu **hiç sınıflandırılmamış**. Sınıflandırılmamış ama kişisel veri taşıyan **en az 20 model/alan grubu**, içinde:
+- **3 psikometrik kopya:** `Match.mentorArchetype`/`mentiArchetype` (`schema.prisma:1035-1036`) · `User.discResultCard`(325) · `User.enneagramWing`(287) — ⚠️ kodun kendisi bunları hassas sayıyor (`gdprService.ts:98-99`), sınıflandırma tablosu saymıyor
+- **8 serbest-metin alanı:** `MatchFeedback.comment`(1174) · `UserReport.description`(1194)/`reviewNote`(1196) · `SuspicionReport.reporterName/contact/description/reviewNote`(1215-1221) · `PendingTag.value`(869) · `MeetingCheckIn.openNote`(606)/`nextTopicNote`(603) · `Feedback.keyLearnings`(640)/`specificComments`(641) · `MentorshipAgreement.mentiGoal`(1242)
+- **İletişim/tanımlayıcı:** `Meeting.phoneNumber`(562) · `User.avatarUrl/linkedinUrl/instagramUrl`(336-338) · `User.password`(269) · `User.rejectionReason`(313)
+
+**Sonucu:** CLAUDE.md kuralı 1 (*"yeni alan önce sınıflandırılır"*) sınıflandırılmamış alanlar için **hiç işlemiyor** → bir sonraki geliştirici `Match.mentiArchetype`'ı veya `MatchFeedback.comment`'i bir KPI/export ucuna ekleyebilir ve kural onu **durdurmaz**.
+
+### B.2 ⭐ SİLME HAKKI — "silme" diye bir şey yok, **anonimleştirme var**
+`hardDeleteUser` (`gdprService.ts:233-247`) **fiziksel silme yapmaz** — tek satırı `anonymizeUser(...)` (`:234`), dönüş `anonymizedInstead: true` (`:245`). Gerekçe kodda yazılı (`:225-231`): ~13 Restrict-FK tablosu transaction'ı rollback ediyordu. **Bu bir eksiklik değil, bilinçli ve belgeli karar**; kullanıcıya dönen metin de "silindi" demiyor (`:49-51`). Ama **"silme hakkı" fiilen "anonimleştirme hakkı"dır.**
+✅ FE ekranı **VAR** — eski raporlardaki "FE yok" iddiası **bayat** (`DataPrivacySection.tsx`, `profile/page.tsx:443`).
+
+#### 🔴 UNUTULAN: **7 kazara model + 4 alan** (orkestratör teyitli)
+`grep "tx\.match\.|matchFeedback|pendingTag|availabilityBlock|clubMembership|mentorFilter" gdprService.ts` → **0 eşleşme** (yalnız `tx.matchRequest` `:154`).
+
+| model | ne kalıyor | neden yakalanmıyor |
+|---|---|---|
+| ⭐ **`Match`** | **`mentorArchetype`/`mentiArchetype`** — `String`, **NOT NULL** (`schema.prisma:1035-1036`) + 3 skor | `gdprService.ts:112-119` `UserProfile.archetype`'ı **özenle `null`'luyor**, ama **aynı arketip `Match`'te düz metin duruyor** ve `Match.mentorId → UserProfile.id → UserProfile.userId` zinciriyle **hâlâ kişiye bağlanabiliyor** |
+| ⭐ **`MatchFeedback`** | `comment` ≤1000 **serbest metin** + `fromUserId` | `fromUserId`'de **FK bile yok, düz String** (`:1170`) → şema düzeyinde **hiçbir cascade** yakalayamaz |
+| `PendingTag` | `value` = kullanıcının yazdığı ham metin | dokunulmuyor |
+| `MentorFilter` | `blockedDiscTypes` (kişilik tercihi) | dokunulmuyor |
+| `ClubMembership` | kulüp üyelik kaydı | dokunulmuyor |
+| `AvailabilityBlock` | haftalık müsaitlik takvimi **`isActive=true` kalır** | dokunulmuyor |
+| `SystemLog` | `meta` içinde `userId` + **ham e-posta** (B.7) | FK yok; tek çıkış 90 günlük cron |
+
+**+1 kasıtlı:** `Conversation` iskeleti (kodda gerekçeli, `gdprService.ts:132`).
+**+4 alan-düzeyi boşluk:** `Meeting.locationUrl` (`:139-142` diğer 4 alanı null'luyor, bunu atlıyor) · `UserReport.reviewNote` (`:163-166` yalnız `description`) · `User.password` (bcrypt hash kalıyor) · `User.rejectionReason`.
+
+⭐ **En ağır sonuç:** `gdprService.ts:50`'deki kullanıcıya verilen taahhüt — *"kimliğinizle ilişkilendirilebilir verileriniz geri döndürülemez şekilde anonimleştirildi"* — **psikometrik profil için yanlış**.
+
+#### Yedek tablolar — yapısal körlük
+`anonymizeUser`'ın **tamamı Prisma delegate'leriyle** yazılmış; `$executeRaw` **yok** (`gdprService.ts:81-178`). Prisma bir delegate'i yalnız `schema.prisma`'da tanımlı modele bağlar → `MentorshipAgreement_yedek_20260830` (şemada **YOK**) anonimleştirmeden **yapısal olarak görünmez**.
+**Dürüst değerlendirme:** o tablonun 150 satırı script başlığına göre **öksüz test-fixture** (`cleanup-orphan-agreements-2026-08-30.sql:4-9`) → bugünkü pratik maruziyet **düşük**. ⚠️ **Ama yapısal risk gerçek ve tekrar edecek:** F.13 kuralı her migration öncesi yedek tablo almayı **zorunlu** kılıyor → PII taşıyan bir tabloya (`User`, `Message`, `Feedback`) migration atıldığı an, anonimleştirmenin **hiçbir zaman göremeyeceği** ham kopya doğar. Gerçek içerik **TEYİT GEREK** (canlı DB'ye dokunulmadı).
+
+### B.3 DIŞA AKTARIM — **16 tablo + ≈22 `User` alanı eksik**
+`exportUserData` (`gdprService.ts:284-333`) **6 kaynak** döner: `User` (kısmi select `:288-293`), `UserResponse`, `FeedbackLog`, `MatchRequest`, `Consent`, `Message` → **yalnız `count`** (`:314`).
+**Mesaj içeriği şüphesi DOĞRULANDI:** `prisma.message.count(...)` — içerik değil sayı; tip tanımı da bunu yazıyor (`:280-281`), FE tipine kadar taşınmış (`kvkk.ts:20-22`). Gerekçe: *"karşı tarafın PII'si"*. **Karşı argüman:** kişinin **kendi yazdığı** mesaj (`senderUserId = kendisi`) karşı tarafın verisi değildir; KVKK Md.11/GDPR Md.20 için gerekçe zayıf.
+**Eksik 16 tablo** — en ağırı ⭐ **`UserProfile`**: sistemin **en hassas türetilmiş psikometrik verisi** (OCEAN, arketip, DISC türevi) **hiç verilmiyor**. Ayrıca `Match`, `MatchFeedback`, `Meeting`, `MeetingCheckIn`, `Feedback`, `Conversation`, `VisibilityOptIn`, `MentorshipAgreement`, `UserReport`, `TenantMembership`, `ClubMembership`, `AvailabilityBlock`, `MentorFilter`, `PendingTag`, `Message`(içerik).
+⚠️ **Yanlış soru tuzağından kaçınma:** K-12 iyileştirmesi ham JSON'u okunur özete çevirdi — ama özet **backend'in verdiğinden fazlasını üretemez**. Eksiklik **backend kaynaklı, FE'de değil.**
+
+### B.4 Saklama süreleri + cron
+| veri | süre | uygulanıyor mu |
+|---|---|---|
+| `SystemLog` | 90 gün (`gdprService.ts:341`) | ✅ `:366-368` |
+| `FeedbackLog` | 3 yıl (`:342`) | ✅ `:371-373` — ⚠️ eski raporlardaki *"uygulanmamış"* iddiası **BAYAT** |
+| `Message` | **süre yok** | ❌ bilinçli TODO(G1-10) — avukat metni beklendiği için keyfi süre yazılmamış. = **`F-02`** |
+
+**`CRON_ENABLED` kodda doğrulandı:** `cronScheduler.ts:29-31` `process.env.CRON_ENABLED !== 'false'` → **unset = AÇIK**; `'FALSE'`/`'0'`/`'no'` da **AÇIK**; yalnız tam `'false'` kapatır.
+**`'false'` olursa 8 işin 8'i durur.** KVKK sonuçları: SystemLog 90g imhası durur (→ içindeki **ham e-posta süresiz birikir**, B.7) · FeedbackLog 3y imhası durur · terk edilmiş taslak kurumların `User` kayıtları (ad+e-posta) 96 saat kuralıyla silinmez.
+⭐ **Kaçış kapısı (yanlış soru tuzağından kaçınma):** `POST /api/admin/cron/run-purge` (`adminRoutes.ts:81`) **bayrağa BAKMAZ** → admin elle tetikleyebilir. **Ama `runDraftTenantCleanup` için böyle bir uç YOK** → 3. madde tamamen durur. `/health` bayrağı gösteriyor (`health.ts:44`) → **sessiz kayıp değil, görünür**. = **`V-11`** (BITTI).
+
+### B.5 Rıza kaydı — ✅ **versiyonlanıyor**, ama **hiç okunmuyor**
+`Consent` (`schema.prisma:1294-1312`): `userId`/`tenantId` XOR (`consentService.ts:46-53`), `type` (`AYDINLATMA`|`ACIK_RIZA`), **`version`**, `grantedAt`, `revokedAt`, `source`. Yeni rıza **yeni satır**, geri çekme satır silmez (`:97-99,130-146`). Kayıt akışı **atomik** (kullanıcı `create` ile aynı transaction — `authController.ts:189-211`).
+
+🔴 **İki boşluk:**
+1. **`hasValidConsent(subject, type, requiredVersion)` doğru yazılmış (`consentService.ts:152-162`) ama üretim kodunda HİÇBİR ÇAĞIRANI YOK.** *Kapsam:* `grep -rn "hasValidConsent\|getActiveConsent\|getAllConsents" src tests` → `src/` içinde **0** (yalnız tanım), tek tüketici `tests/consentService.test.ts`. `exportUserData` bile `getAllConsents` yerine ham `prisma.consent.findMany` kullanıyor (`gdprService.ts:308-312`).
+   **Sonucu:** metin `v2.0`'a çıkarsa `v1.0` rızalı kullanıcılar **hiçbir yeniden-onay kapısıyla karşılaşmaz**. Rıza **yazılıyor ama hiç okunmuyor**.
+2. `CONSENT_VERSION = 'v1.0'` bir **yer tutucu** — kodda yazılı: `TODO(G1-10): avukat metni gelince sürüm sabitlenecek` (`:25-28`) → DB'deki `'v1.0'` **yayınlanmış bir metin sürümüne karşılık gelmiyor**.
+
+**OAuth'ta rıza: İMPLICIT.** Backend rızayı **varsayarak** yazıyor (`oauthService.ts:108-120`), yorum bunu itiraf ediyor (`:112-114`). Frontend'de OAuth düğmeleri **hiçbir onay kutusu/KVKK bağlantısı taşımıyor** — *kapsam:* `OAuthButtons.tsx` içinde `kvkk|rıza|consent|onay` → **0 eşleşme**. Kıyas: klasik kayıtta **zorunlu kutu var** (`_RegisterContent.tsx:398-421` + `z.literal(true)`). = **`F-03`**.
+⚠️ **Ek bulgu:** tek kutu **KVKK açık rıza + 18+ beyanını BİRLEŞTİRİYOR** (`_RegisterContent.tsx:413-417`) ve `AYDINLATMA` ile `ACIK_RIZA` **aynı tek kutudan** iki satır yazılıyor (`consentService.ts:57-70`) → **aydınlatmayı ve açık rızayı ayrı ayrı reddetme imkânı yok**. Kod bunu "ayrı kutular G1-08 işi" diye not ediyor (`:58`).
+
+### B.6 Yurtdışı aktarım — envanter ✅, **kullanıcıya gösterilen metin ❌**
+*Kapsam:* `grep -rn "https://" src` (localhost/example hariç) → **0**; `grep -rn "fetch(" src` → **yalnız 4**, hepsi OAuth. **Envanter kodla örtüşüyor, yeni dış servis eklenmemiş** ✅ (PostgreSQL · SMTP · Google OAuth · LinkedIn OAuth; analitik "AKTİF DEĞİL" beyanı hâlâ doğru; LLM ve CDN yok).
+
+🔴 **`app/kvkk/page.tsx:92-107` KODLA ÇELİŞİYOR — iki kat:**
+1. Metin *"İrlanda (Avrupa Birliği) bölgesinde … yönetilen PostgreSQL"* + *"(GDPR) standartlarına tabidir"* diyor. **Gerçek:** `eu-west-2` = **Londra / Birleşik Krallık, AB üyesi DEĞİL** (`menti-mentor-v2/CLAUDE.md:255`, madde 92, **PO teyitli 2026-08-26**). → **yanlış ülke ve yanlış hukuki rejim beyanı**.
+2. *"yönetilen PostgreSQL hizmeti"* diyor; **PROD kendi konteynerinde Postgres 16** (`docker-compose.yml:16-24,44`; `CLAUDE.md:261`). Uygulama sunucusunun ülkesi kodda **hiç yok** → **TEYİT GEREK (PO)**.
+3. `kvkk/page.tsx:60-64` "Aktarım" bölümü **Google/LinkedIn OAuth ve SMTP sağlayıcısını hiç saymıyor** — oysa bu servislere kişisel veri gidiyor.
+4. `kvkk/page.tsx:31-39` "İşlenen Kişisel Veriler" 5 kalem; kodda işlenen ama listede **olmayan**: mesaj içeriği · telefon · sosyal linkler · avatar · OCEAN/arketip · şikâyet kayıtları · **IP adresi** (`platformAudit.ts:32`) · `lastLoginAt`.
+
+⭐ **PR #110 gerekçesi: EVET hâlâ GEÇERLİ — ama risk GERÇEKLEŞMİŞ DEĞİL, POTANSİYEL.**
+`state: open`, `merged: false`, son hareket **2026-08-23** (29 gün). *Kapsam:* `frontend/src` özyinelemeli, **harf duyarsız**, `GTM-|gtag\(|clarity|next/script` → **0 eşleşme**; genişletilmiş desen (`googletagmanager|hotjar|posthog|mixpanel|plausible|matomo|segment\.|fbq\(`) → yalnız **kendi backend'inin** analytics ucunu çağıran iç kodlar. `components/analytics/` dizini main'de **yok**.
+→ Bugün **tek bir izinsiz aktarım gerçekleşmiyor**; ama PR'ın ön koşulları (çerez bandı + Consent Mode v2 + metin güncellemesi) **karşılanmadı** → merge edildiği an autodeploy ile risk gerçekleşir. = **`Y-12`** (kuyrukta zaten var).
+✅ `app/gizlilik/page.tsx:60-65` çerez beyanı (*"Analitik veya pazarlama çerezi bulunmamaktadır"*) **kodla TUTARLI**. ⚠️ Aynı sayfanın **2 satırı bayat:** `:76-81` *"veri silme talepleriniz için kurum yöneticiniz aracılığıyla"* — artık **self-servis var**; `:13` *"Son güncelleme: Temmuz 2026"*. Gizlilik metninde **yurt dışı aktarım bölümü hiç yok** (yalnız `/kvkk`'da).
+
+### B.7 🔴 LOGLARDA KİŞİSEL VERİ — **VAR**
+**Kural (`backend/CLAUDE.md` #5):** *"Log `userId` ve `tenantId` only — never `email`, `fullName`, `discVector`."*
+
+🔴 **İHLAL (orkestratör teyitli):** `platformController.ts:42-45`
+```ts
+void logger.warn('AUTH', 'Platform login başarısız', { email: email ?? '(boş)', ip: req.ip ?? 'unknown' });
+```
+Başarısız **her** platform-admin giriş denemesinde **ham e-posta + IP** `SystemLog.meta`'ya **kalıcı** yazılıyor. Yanlış kutuya e-posta yazan **herhangi birinin** adresi de düşer.
+⚠️ **Yapısal sebep:** `logger.ts:23-28` `meta`'yı **hiç süzmüyor** — `meta: meta ? (meta as object) : undefined`, allow-list/sanitizasyon **yok** → `meta`'ya ne konursa kalıcı DB'ye gider.
+⭐ **Zincir:** bu satırlar `anonymizeUser` tarafından **temizlenmiyor** (B.2 — `SystemLog` UNUTULAN) → tek çıkış 90 günlük cron → **`CRON_ENABLED='false'` ise o da çalışmaz** (B.4) → **hesabını kapatmış kişinin e-postası sistemde süresiz kalabilir.**
+
+**Sınırda (3):** `questionController.ts:318-323` `discVector.confidence` + `userId` (ham vektör değil — kuralın **lafzına** uyuluyor, **ruhuna** aykırı, karar PO/hukukçuda) · `errorHandler.ts:19-27` `err.message`/`err.stack` kontrol edilemez içerik taşır (somut sızıntı **bulunamadı** → **TEYİT GEREK**) · `requestLogger.ts:22` `originalUrl` **query dâhil** → OAuth `?code=`/`?state=` ve `?token=` (kalıcı `unsubscribeToken`) **konsola** düşüyor (DB'ye değil).
+
+✅ **TEMİZ çıkanlar (kanıtlı):** `platformAudit.ts:31-36` (yalnız `actorId`/`action`/`ip`; dosya başında açık yasak `:12-14`) · `notificationService.ts:43-47` (`title` loglanıyor, **`body` loglanmıyor**) · `emailService.ts:76,80` (**alıcı adresi loglanmıyor**, kural yorumda `:70-71`) · `cronScheduler.ts:254-255` (adresler mail fonksiyonuna gidiyor, log'a değil) · `adminController.ts:666,774` **yanlış pozitif** (logger değil, mail çağrısı — ayıklandı).
+✅ **Frontend TEMİZ:** *kapsam* `frontend/src` özyinelemeli, `__tests__` hariç → **toplam 3 `console.*`** (`TenantSwitcher.tsx:69`, `error.tsx:28`, `global-error.tsx:22`), hiçbiri kullanıcı alanı basmıyor.
+
+---
