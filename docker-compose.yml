@@ -56,6 +56,9 @@ services:
       SMTP_PASS: ${SMTP_PASS:-}
       SMTP_FROM: ${SMTP_FROM:-}
       FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3001}
+      # V-08: BACKEND_URL backend'e AÇIKÇA geçirilir; yoksa config.ts backendBaseUrl=FRONTEND_URL'e
+      # düşer → avatar public URL'leri + KVKK zorunlu unsubscribe linki yanlış domaine gider (404).
+      BACKEND_URL: ${BACKEND_URL:-http://localhost:3000}
       FRONTEND_OAUTH_CALLBACK_URL: ${FRONTEND_URL:-http://localhost:3001}/oauth/callback
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
