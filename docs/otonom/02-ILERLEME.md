@@ -4,6 +4,39 @@
 
 ---
 
+## TUR ÖZETİ — TUR AC (2026-09-21) · 4 iş (3 CANLIDA + 1 CI'da) · TUR YARIM (kalan 🟢: ~36)
+
+**Neden yarım:** Kuyrukta hâlâ çok 🟢 var → K-20 (belge senkronu) yapılmadı (DURMAMA: K-20 yalnız hiç 🟢 kalmayınca). Bağlam yönetimi için temiz kesim.
+
+### ✅ BİTTİ ve CANLIDA — 3 iş merge (+ 1 PR CI'da) — hepsi FE, ayrı PR, tek tek revert edilebilir
+1. **F-20 (PR #218):** Bekleyen menti bekleme odasında **'🔔 Bildirimlere izin ver'** düğmesi görüyor; izin verince/reddedince durum metni. `NotificationOptInButton` (SSR/desteksiz tarayıcıda hiçbir şey render etmez). =G5-04.
+2. **F-29 (PR #219):** SEO paketi — `app/sitemap.ts` + `app/robots.ts` + `metadataBase`; `lang` tr→tr-TR. Tek kaynak `getSiteUrl()` (env `NEXT_PUBLIC_SITE_URL`, dev fallback). =G7-03.
+3. **K-12 (PR #220):** Profil › 'Verilerim'e **'Görüntüle'** — `/api/me/data-export` ham JSON yerine okunur Türkçe bölümler (kimlik/profil · etkinlik sayıları · rıza geçmişi). Yeni uç YOK; mesaj içeriği/karşı taraf PII'si özete girmez.
+4. **U-10 (PR #221, CI'da/merge):** Boş-durumlar — admin/questions DISC+kuruma-özel kartları boşken kaybolmuyor/yönlendirici metin; book-meeting müsaitlik boşken kart gizlenmiyor. Kapsam denetimi: mentör toplantı talepleri P-09'da zaten çözülmüş, admin/certification pratikte boş olmuyor → dokunulmadı.
+
+### KARAR BEKLİYOR — 0 yeni kart
+Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değişmedi, CEVAP satırlarına dokunulmadı.
+**K-06 (öğrenme yolculuğu diğer şık açıklaması) ATLANDI:** açıklamalar API'de **bilinçli** istemciye yüklenmiyor ("cevap anahtarı sızmasın", `ScenarioGuideEngine.tsx:271`) + backend/repo-arası değişiklik → deliberate design, silme/değiştirme protokolü gereği bu turda dokunulmadı. Sonraki tur ürün kararı olarak değerlendirilmeli.
+
+### BAŞARISIZ — 0
+
+### CANLIDA KONTROL EDİLECEKLER (PO)
+- Bekleyen menti panelinde '🔔 Bildirimlere izin ver' düğmesi (F-20)
+- Profil › Verilerim › 'Görüntüle' → okunur veri özeti (K-12)
+- Randevu ekranında müsaitliği olmayan mentörde yönlendirici kart (U-10)
+- (SEO teknik — kullanıcı görmez) /sitemap.xml ve /robots.txt yanıt veriyor mu (F-29)
+
+### PO'NUN KENDİ YAPMASI GEREKENLER
+`docs/otonom/03-PO-ELLE-ISLER.md` (değişmedi). F-29 canlıda tam etki için **`NEXT_PUBLIC_SITE_URL`** prod domaine set edilmeli (yoksa sitemap dev fallback URL üretir).
+
+### KUYRUK / TEST / DOKUNULMAYANLAR
+- Backend işi YOK → **submodule pointer DEĞİŞMEDİ.** Şema/migration/seed YOK.
+- Yeni FE testleri: notification-optin 4 · site-url 3 · kvkk-summary 5 · book-meeting boş-müsaitlik 1. Her PR'da çatı CI 8/8 (build+tsc+lint+vitest+integration+e2e).
+- ⛔ DOKUNULMAYAN: auth/KVKK-silme/matching/şema/migration/seed · `server.ts` yasak bölge · `docs/gelen/` · KARAR CEVAP satırları · #110 · hiçbir şey silinmedi.
+- ⚠️ **Working-tree'de ajanın DOKUNMADIĞI değişiklik:** `docs/otonom/OTONOM-PROMPT.txt` unstaged (M) — önceden var, benim commit'lerime dahil edilmedi (§7 gereği dokunulmadı).
+
+---
+
 ## TUR ÖZETİ — TUR AB (2026-09-20 gece) · 10 iş CANLIDA + prompt güncellemesi · TUR YARIM (kalan 🟢: 40)
 
 **Neden yarım:** K-20 (belge senkronu) YALNIZ hiç 🟢 iş kalmayınca yapılır (DURMAMA KURALI D.1). Kuyrukta hâlâ
