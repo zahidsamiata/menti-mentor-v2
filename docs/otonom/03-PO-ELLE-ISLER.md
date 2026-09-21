@@ -131,3 +131,51 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 - `book-meeting` saat dilimi kayması İstanbul'da 409 üretiyor mu (X §8#5, gerçek deneme).
 - PENDING (OAuth) menti `mentor-matches`'ten veri alıyor mu (X §8#6 / U-08, gerçek hesap).
 - ~~[ESKİ · 2026-09-19] `.dockerignore` ↔ `migrate deploy` çelişkisi kurtarmada şema oluşturuyor mu (W §7#28 / V-14, `docker build`).~~ ⚠️ **GÜNCELLEME (2026-09-21): BU SATIR PO İŞİ DEĞİL** — `docker build` lokal/CI'da koşar, Dokploy veya Neon erişimi gerektirmez ⇒ **ajan işi**, `00-KUYRUK.md`'de **V-14** Not'una taşındı. Buradan çıkarıldı.
+
+---
+
+## Ajan sunucusu (opsiyonel) — PC kapalıyken terminal çalışsın
+
+> **ÖNCELİK: DÜŞÜK.** ⛔ Bu **canlıya çıkış blokeri DEĞİLDİR.** Bölüm A/B/C/D'deki hiçbir işi beklemez ve
+> hiçbirini açmaz; yalnızca tur kapasitesini artırır. A ve B bitmeden buna başlanmaz.
+
+**Neden:** Bulut oturumu (claude.ai/code) **merge edemez** ve **DB'ye erişemez** — migration, backfill ve seed
+işleri (KARAR-1, KARAR-10 aşama 2, K-15, K-16, K-18, PS-A2) bulutta **yapılamaz**. Bugün bu işler yalnız ev
+PC'sinin terminalinde koşuyor; PC kapanınca tur da duruyor. Mevcut VPS'te (**KVM 2 · 2 çekirdek · 8 GB**;
+ölçülen kullanım **CPU %2, bellek %23**) **ayrı bir kullanıcı** altında Claude Code çalıştırılabilir.
+
+### ⛔ PAZARLIK DIŞI — güvenlik sınırları
+
+- Kullanıcı **`sudo` ALMAZ**.
+- Kullanıcı **`docker` grubuna EKLENMEZ.** ⚠️ `docker` grubu **fiilen root demektir** — eklenirse Dokploy,
+  tüm konteynerler ve canlı web sitesi ajana açılır.
+- Erişim **yalnız kendi ev dizini** ile sınırlıdır.
+
+### Adımlar
+
+1. **Ayrı kullanıcı** aç (root ile), `sudo`suz ve `docker` grubuna eklenmeden.
+2. **Claude Code** kur — resmi kurulum sayfasındaki **yerel yükleyici** tek komutu (Node gerekmez).
+3. **`git` + `tmux`** kur (root ile, sistem paketi).
+4. Repoyu klonla: `git clone --recurse-submodules` ⚠️ `--recurse-submodules` şart — `backend/` bir
+   submodule'dür, onsuz boş gelir.
+5. **Giriş yap**, sonra `/config` → **Remote Control** aç.
+6. **`tmux` içinde başlat.** Ayrılmak için `Ctrl+B`, sonra `D`; geri dönmek için `tmux attach`.
+   *(tmux olmadan SSH oturumu kapanınca tur ölür.)*
+
+### Çalıştırma sınırları
+
+- **Bellek tavanı + `nice`** ile çalıştır — derleme sırasında **canlı web sitesi etkilenmesin**.
+- ⛔ **`DATABASE_URL` o kullanıcının ortamına KALICI YAZILMAZ.** Migration turunda **tek seferlik** verilir,
+  iş bitince kaldırılır. *(Kalıcı yazılırsa: `sudo`suz bir kullanıcının ev dizininde canlı DB anahtarı durur.)*
+- **Gözden geçirme koşulu:** VPS'te **CPU düzenli olarak %40'ı aşarsa** ajan **ayrı bir sunucuya taşınır.**
+
+### ⚠️ Bilinen tuzak
+
+**Ubuntu 22.04**'te yükleyici için **zaman aşımı** bildirilmiş; **24.04 sorunsuz.**
+
+### Nasıl anlaşılır (doğrulama)
+
+`tmux attach` ile oturuma dönülüyor ✅ · ajan `git pull` + `npm run verify` koşabiliyor ✅ ·
+`groups <kullanıcı>` çıktısında **`docker` YOK** ve `sudo -l` **izin vermiyor** ✅ ·
+canlı site yük altında yavaşlamıyor ✅.
+
