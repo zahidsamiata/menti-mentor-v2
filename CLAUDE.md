@@ -450,8 +450,17 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - IDOR: kullanıcı başkasının kaynağına ID tahmin ederek erişebilir mi?
   (kendi kaydı mı diye kontrol et — sadece "giriş yapmış" yetmez)
 - Zod ile girdi doğrulama var mı?
-- KASITLI public olan endpoint'ler: login, register, health, unsubscribe,
-  invitation join, suspicion report. Bunun DIŞINDA public endpoint YOK.
+- KASITLI public olan endpoint'ler (⚠️ GÜNCELLEME 2026-09-21, V-09 — kod-teyitli tam liste;
+  eski liste 10 ucu atlıyordu → denetimlerde yanlış "fazlalık" alarmı doğuruyordu):
+  **auth:** `POST /api/auth/register` · `/login` · `/refresh` · `/logout` · `/forgot-password` ·
+  `/reset-password` · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
+  **platform:** `POST /api/platform/auth` · `/logout` ·
+  **onboarding/kurum:** `GET /api/invitations/:token/join` · `GET /api/tenants/self-serve/check-slug` ·
+  `POST /api/tenants/self-serve/register` · `GET /api/tenants/unsubscribe` ·
+  **diğer:** `POST /api/suspicion-reports` · `GET /health` · `GET /uploads/**` (statik, CSP-sandbox).
+  Hepsi rate-limitli. **Bunun DIŞINDA public endpoint YOK** — yeni public uç eklenirse buraya eklenir.
+  (Kanıt: `authRoutes.ts:21-56` · `platformRoutes.ts:34-35` · `invitationRoutes.ts:13` ·
+  `selfServeRoutes.ts:23-38` · `suspicionRoutes.ts:9` · `server.ts:60,71`.)
 
 ### Veri döndürürken
 - Explicit `select` kullan — `password` ASLA dönmesin.
