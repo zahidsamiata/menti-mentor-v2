@@ -10,7 +10,7 @@
 > G2-11 (davetli=onaylı tetiği `authController.ts:165`), G4-02 (compatibilityReason FE), G4-04 (managers paneli),
 > G10-25 (profil düzenleme çalışıyor). **"Yapıldı sanılıp yapılmamış" = 0.** Detay: `docs/otonom/02-ILERLEME.md` (TUR 2).
 
-> 🔄 **YAŞAYAN BELGE**
+> ~~[ESKİ · 2026-09-21] 🔄 **YAŞAYAN BELGE**~~ **📸 DONDURULMUŞ (2026-09-21).** ⚠️ Bu satır `:3`'teki "DEVREDİLDİ" damgasıyla **çelişiyordu**; devir zaten 2026-09-19'da yapıldı (açık kalemler → `docs/otonom/00-KUYRUK.md` **AŞAMA F**). Belge artık güncellenmez; açık iş için kuyruğa bakın. ⛔ Satır silinmedi, taşınmadı — kardeş belgeler bu dosyaya atıf veriyor.
 >
 > PO'nun "işleme al" kalemlerini kod iş sırasına soktuğu tek-canonical sıralama.
 > Bu belge **kaydeder**; karar/detay `G*.md` kartlarındadır (buradan yalnız referans verilir).

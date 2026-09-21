@@ -1,5 +1,9 @@
 # 00-KUYRUK — Otonom İş Kuyruğu (v2)
 Güncelleme: 2026-09-10 · Sahip: PO (Zahid)
+
+**🔄 YAŞAYAN** (canonical: **TEK aktif iş kaynağı** — otonom motorun okuduğu tek iş listesi)
+> ⭐ **Bu belge projenin TEK iş kuyruğudur (2026-09-21).** `10-yol-haritasi.md` ve `00-CIKIS-PLANI.md` 📸 donduruldu; `00-ONCELIK-SIRASI-2026-08-28.md`'nin açık kalemleri **AŞAMA F**, PO'nun "EN ÖN SIRA" içerik bloğu **AŞAMA I**, yol-haritası/karar-takibi devri **AŞAMA Y** olarak buraya alındı.
+> ⛔ **Yeni iş başka hiçbir belgeye açılmaz.** Tek istisna kod-dışı işler: `docs/otonom/03-PO-ELLE-ISLER.md`.
 Ajan bu dosyayı OKUR, yalnız `Durum` ve `Not` kolonlarını günceller. İş EKLEMEZ.
 
 ## Kapılar
