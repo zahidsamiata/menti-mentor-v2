@@ -553,6 +553,32 @@ Bölme **başlıktan başlığa** yapıldı; hiçbir oturumun ortasından kesilm
 
 ---
 
+---
+
+## ⭐ EK (2026-09-21, BC turu) — `raporlar/kesif/` altına GİREN ALTI YENİ RAPOR
+
+> Bu altı belge 2026-09-21'de yedi ayrı dalda üretildi ve **BC birleşik PR'ında tek dala toplandı**.
+> Hepsi **📸 DONDURULMUŞ** — bulguları `00-KUYRUK.md` / `01-KARARLAR.md`'ye işlendikten sonra güncellenmezler.
+> ⚠️ Bu harita (2026-09-20 fotoğrafı) yazıldığında bu altı belge **yoktu**; §C'nin "17 belge / 2613 satır" sayımı
+> bugün **17 → 23 belge**'dir. Eski sayıya dokunulmadı (KURAL 6), burada düzeltildi.
+
+| Belge | Ne | Satır | Tür | Bulguları nereye işlendi |
+|---|---|---:|---|---|
+| `devir-analizi-2026-09-21.md` | Yol haritası + karar takibi + 09-DURUM + kuyruk hijyeni devir analizi | 603 | 📸 | `00-KUYRUK` AŞAMA Y · `03-PO-ELLE-ISLER` §"ÇIKIŞ İÇİN ŞART" |
+| `po-cikis-kilavuzu-2026-09-21.md` | PO'nun canlıya çıkış kılavuzu (elle yapılacaklar + doğrulama yolları) | 745 | 📸 | `03-PO-ELLE-ISLER.md` A/B/C/D bölümleri |
+| `konsey-psikometri-2026-09-21.md` | Psikometri/eşleştirme konseyi — OCEAN motoru, DISC vektörü, sıralama, test örtüsü | 591 | 📸 | `00-KUYRUK` **AŞAMA PS** (11 satır) · **KARAR-41…44** · KARAR-10 eki · PO #22/#23 |
+| `konsey-guvenlik-kvkk-2026-09-21.md` | Güvenlik + KVKK konseyi — IDOR, kimlik sahteciliği, anonimleştirme, rıza, aydınlatma metni | 452 | 📸 | `00-KUYRUK` ⛔⛔ EN ÜST (GV-01/02) + **AŞAMA GV** (23 satır) · **KARAR-38…40** · PO #19/#20/#21 |
+| `konsey-icerik-2026-09-21.md` | İçerik konseyi — hazır içerik denetimi, terim tutarlılığı, hata/boş-durum metinleri, sertifika sürümü | 737 | 📸 | `00-KUYRUK` **AŞAMA IC** (14 satır) + AŞAMA I notları · **KARAR-45…48** · PO #24 |
+| `konsey-yonetisim-2026-09-21.md` | Yönetişim konseyi — klasör yapısı, belge güncelliği, kural yönetimi, CLAUDE.md boyutu | 640 | 📸 | `00-KUYRUK` **AŞAMA YN** (15 satır) · **KARAR-49…52** · PO #25/#26 · ⭐ CLAUDE.md bölme (uygulandı) |
+
+⚠️ **Atıf uyarısı:** `konsey-yonetisim-2026-09-21.md`'deki tüm `CLAUDE.md:<satır>` atıfları **bölme öncesi**
+dosyaya (47.456 karakter · 712 satır) aittir. Yeni adresler belgenin kendi başındaki ⚠️ GÜNCELLEME notunda,
+**bölüm adıyla** yazılı.
+
+⚠️ **KURAL 5 borcunun BİR KISMI bu turda kapandı:** bu PR'la açılan
+`docs/kararlar/konu/rtk-komut-rehberi.md` **`kararlar/00-INDEX.md`'e işlendi.** Bu haritanın kendisinin
+INDEX'e işlenmesi ve INDEX'in 13 eksik belgesi **HÂLÂ AÇIK** (`00-KUYRUK` **YN-03**).
+
 ## 📌 BU TURUN YAPMADIKLARI (bilinçli)
 
 - ⛔ Hiçbir belge **silinmedi, birleştirilmedi, taşınmadı** (§D'deki bölme hariç — o da kayıpsız).

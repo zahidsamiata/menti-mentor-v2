@@ -4,6 +4,121 @@
 
 ---
 
+## ⭐⭐ TUR BC — DÖRT KONSEY UYGULANDI + YEDİ DAL BİRLEŞTİRİLDİ (2026-09-21) · YALNIZ BELGE
+
+> **Mod:** 🟥 BYPASS — bulut. **Kod DEĞİŞMEDİ · DB/migration/seed YOK · hiçbir şey SİLİNMEDİ · `CEVAP:` satırları BOŞ.**
+> Dal: `otonom/BC-birlesik-uygulama-20260921` (BB'nin üstüne açıldı).
+
+### ⭐⭐ PO İÇİN — TEK CÜMLE
+
+**Bu PR'ı merge et. Sonra şu PR'ları KAPAT (içerikleri bu PR'ın içinde):**
+**`AZ` · `BA` · `BB` · `CA` · `CB` · `CC` · `CD`.**
+Ayrıca **`F19`** (kod) ve **`BD`** (güvenlik kodu) **ayrı** merge edilir — onlar bu PR'da değil.
+⇒ Sekiz merge yerine **iki merge** yapıyorsun.
+
+### 1 · Birleştirilen dallar (7) ve getirilen dosyalar
+
+| Dal | Getirilen dosya | Satır |
+|---|---|---:|
+| `AZ-devir-analizi` | `docs/raporlar/kesif/devir-analizi-2026-09-21.md` | 603 |
+| `BA-po-cikis-kilavuzu` | `docs/raporlar/kesif/po-cikis-kilavuzu-2026-09-21.md` | 745 |
+| `BB-devir-uygulama` | **taban dal** (AŞAMA I + Y, KARAR-30…37, arşivleme) | — |
+| `CA-konsey-psikometri` | `docs/raporlar/kesif/konsey-psikometri-2026-09-21.md` | 591 |
+| `CB-konsey-guvenlik` | `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md` | 452 |
+| `CC-konsey-icerik` | `docs/raporlar/kesif/konsey-icerik-2026-09-21.md` | 737 |
+| `CD-konsey-yonetisim` | `docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md` | 640 |
+
+### 2 · Her konseyden kuyruğa giren satır sayısı
+
+| Konsey | Yeni kuyruk satırı | Mevcut satıra NOT | Açılan kart | PO kalemi |
+|---|---:|---:|---|---|
+| 🔐 **GV** güvenlik/KVKK | **25** (GV-01…GV-25) | 17 | KARAR-38·39·40 | #19 · #20 · #21 + #10 notu |
+| 🧠 **PS** psikometri | **11** (PS-01…PS-11) | 12 | KARAR-41·42·43·44 + KARAR-10 eki | #22 · #23 |
+| ✍️ **IC** içerik | **14** (IC-01…IC-14) | 2 (+ §2.2'deki 6 düzeltme) | KARAR-45·46·47·48 | #24 |
+| 🗂️ **YN** yönetişim | **15** (YN-01…YN-15) | 2 | KARAR-49·50·51·52 | #25 · #26 |
+| **TOPLAM** | **65** | **33** | **15 kart** (KARAR-38…52) | **8 kalem** (#19-26) |
+
+⭐ **GV-01 ve GV-02 kuyruğun EN ÜSTÜNDE** — AŞAMA I'dan da önce, yeni `## ⛔⛔ EN ÜST — KİMLİK SAHTECİLİĞİ`
+bloğunda. İkisi de **kimlik istek gövdesinden alınıyor** → bir kullanıcı başkası adına hareket edebiliyor.
+⛔ Bu turda **kodlanmadı**; ayrı bulut turu (`otonom/BD-...`) düzeltme PR'ini hazırlıyor.
+
+⭐ **MATCH ↔ KVKK ÇAPRAZ ATFI** — iki konseyi birlikte okuyunca çıkan bulgu, beş satıra işlendi
+(`U-18` · `PS-04` · `F-11` · `I-15` · `GV-08`):
+*"⛔ BİRLİKTE YAPILMALI — önce silme yolu düzeltilir, SONRA `Match` yazımı açılır. Ters sıra = KVKK ihlali."*
+Bugün `Match` tablosu **boş** olduğu için sızıntı **gerçek veride YOK**; `Match` yazımı açıldığı **AN** gerçekleşir.
+
+### 3 · Düzeltilen yanlış bilgiler (§2.1-2.4)
+
+| # | Ne yanlıştı | Doğrusu | Nereye işlendi |
+|---|---|---|---|
+| **2.1** | Sertifika farkı *"2 senaryo + 8 şık"* | `tam.md`'nin 20 sahnesinden **15'i gerekçeli ELENDİ**; kalan 5'in **5'i de yeniden yazıldı** (birinde **puan anlamı TERS DÖNDÜ**). Taşınacak: **88 şıkın TAMAMI**. Efor **S değil L** | 5 yer: `00-KUYRUK` K-16(:139)·K-16 dipnotu(:209)·P-99(:247) · `01-KARARLAR` KARAR-3 · `02-ILERLEME` B.2 |
+| **2.2** | 6 kalem *"içerik hazır"* | **2'si hazır değil, 1'i yer tutucuyla dolu:** md.139 = **4/8 YARIM** (menti sürümü hiç yazılmamış) · I-17/md.167 = seed'e koyacak içerik **hiç yazılmamış** · md.147 = her aşamada `{mentor_*}`, kodda **0 karşılık** → bugün seed edilirse ekranda ham `{mentor_mimar}` görünür | 6 satır: `I-01` · `I-10` · `I-15` · `I-16` · `I-17` · `K-18` |
+| **2.3** | *"KURAL 17"e atıf veren belgeler var"* | ⛔ **UYGULANACAK BİR ŞEY YOK (no-op, kanıtlı).** Kapsam: tüm `docs/` + `CLAUDE.md`, `*.md`+`*.txt`, harf duyarsız → **4 isabet, DÖRDÜ DE** yönetişim raporunun kendi içinde ve zaten *"böyle bir kural YOK"* diyor. Hayalet yalnız brief'te yaşıyor | — (düzeltilecek bayat atıf yok) |
+| **2.4** | *"Belgelerde CLAUDE.md boyutu BAYT cinsinden geçiyor"* | ⛔ **UYGULANACAK BİR ŞEY YOK (no-op, kanıtlı).** `45.154`/`50.477` → **3 isabet, ÜÇÜ DE** yönetişim raporunun içinde ve rapor zaten *"o sayı BAYTTIR, gerçeği 46.817 karakter"* diyor. Hiçbir yaşayan belgeye sızmamış | — |
+
+### 4 · ⭐ CLAUDE.md BÖLME — karakter denetimi
+
+> ⚠️ **`wc -m` bu ortamda BAYT sayıyor** (locale `POSIX`, `LANG` boş) → tüm sayılar `python3 len(str)` iledir.
+
+| | Karakter | Bayt | Satır |
+|---|---:|---:|---:|
+| **ÖNCE** (`a795828`) | **47.456** | 51.168 | 711 |
+| **SONRA** | **34.742** | 37.668 | 494 |
+| **Hedef** | **< 35.000** | — | — |
+| **Pay** | **258** ✅ TUTUYOR | — | — |
+
+| Taşınan blok | Karakter | Nereye |
+|---|---:|---|
+| KURAL 8-16 gövdeleri | **8.101** | `docs/kararlar/konu/belge-duzeni-rehberi.md` (10.987 → **19.612**) |
+| RTK komut kataloğu | **5.019** | `docs/kararlar/konu/rtk-komut-rehberi.md` (**YENİ**, 5.450) |
+
+✅ **Taşınan metin her iki hedefte de AYNEN bulundu** (tam-blok karşılaştırma, `0` kayıp satır).
+✅ **Hiçbir şey silinmedi.** RTK atfı özgün `<!-- rtk-instructions v2 -->` işaretçilerinin **İÇİNDE** bırakıldı
+(araç sözleşmesi bozulmasın) ve *"⛔ AKTİF, kullanmaya devam et"* notu hem `CLAUDE.md`'de hem rehberde yazılı.
+⛔ Planın **3. ve 4. blokları UYGULANMADI** (brifing gereği — önce bu ikisinin sonucu görülsün).
+
+**Atıf sayısı:** repo genelinde `CLAUDE.md:<satır>` biçiminde **211 atıf**. Taşınan bloklara işaret eden: **11**.
+**Güncellenen: 1** (`00-KUYRUK` V-09 — `:453` hem zaten bayattı hem bölmede kırıldı → **bölüm adına** çevrildi).
+**10'u 📸 DONDURULMUŞ belgelerde** (9'u `konsey-yonetisim`, 1'i `T3-C` 2026-08-26) → tek tek değiştirilmedi;
+`konsey-yonetisim`'in başına **atıf haritası notu** eklendi (Belge Düzeltme Deseni — rapor kendi künyesinde
+*"işlendikten sonra güncellenmez"* diyor, 9 kanıt atfını değiştirmek fotoğrafı tahrif ederdi).
+
+⚠️ **YENİ BORÇ (bu turda doğdu, açık):** taşıma sonrası `belge-duzeni-rehberi.md`'de **KURAL 8 iki kez** var
+(`:99` kendi gövdesi + `:143` taşınan kopya) → **YN-02** + **KARAR-52**. Ayrıca pay **258 karakter ≈ 3 satır**;
+bir sonraki ders eklendiğinde sınır aşılır → **Kademe 2** (YN-01) artık opsiyonel değil.
+
+### 5 · §4 — tutarlılık maddesi (yeni kural DEĞİL)
+
+Güvenlik konseyinin asıl bulgusu: **11 bulgunun 9'unda doğru koruma aynı dosyada ya da aynı ailede ZATEN VARDI**,
+yalnız bir yolda uygulanmamıştı (okuma korunuyor/yazma korunmuyor · ikiz uç korunuyor/eski uç korunmuyor).
+Yönetişim konseyi *"yeni kural ekleme"* dediği için bu **mevcut kanıt disiplinine TEK MADDE** olarak eklendi:
+`CLAUDE.md` § "Her yeni endpoint için ZORUNLU kontrol" + `OTONOM-PROMPT.txt` § "KANIT DİSİPLİNİ" →
+**KOMŞU UÇ KARŞILAŞTIRMASI.**
+
+### 6 · Belge haritası (§5.1)
+
+Altı yeni rapor `docs/00-BELGE-HARITASI.md`'ye **📸 DONDURULMUŞ** olarak işlendi (§C'nin "17 belge" sayımı
+bugün **23**). Ayrıca **KURAL 5 borcunun bir kısmı kapandı:** yeni açılan `rtk-komut-rehberi.md`
+`docs/kararlar/00-INDEX.md`'e kaydedildi. Haritanın kendisinin INDEX'e işlenmesi **hâlâ açık** (YN-03).
+
+### 7 · ⛔ BU TURUN YAPMADIKLARI (bilinçli)
+
+- ⛔ **Kod / DB / migration / seed: sıfır temas.** `backend/` ve `frontend/` altına dokunulmadı.
+- ⛔ **Hiçbir şey silinmedi** — tüm düzeltmeler `~~[ESKİ]~~` + `⚠️ GÜNCELLEME` deseniyle.
+- ⛔ **`CEVAP:` satırları boş** (15/15 doğrulandı) — karar PO'nundur.
+- ⛔ **Merge edilmedi** — bulut merge edemez.
+- ⛔ CLAUDE.md bölme planının **3. ve 4. blokları** yapılmadı.
+- ⛔ 📸 DONDURULMUŞ raporların gövdesine dokunulmadı (yalnız `konsey-yonetisim` başına atıf haritası notu).
+- ⚠️ **GV-24 ve GV-25 RAPOR BOŞLUĞUDUR** — güvenlik raporunun §2.A.2'si 7 IDOR bulgusu sayıyor ama §3'e
+  yalnız 5'i alınmış. KURAL 9 gereği satır açıldı, `⚠️` ile işaretlendi → **PO onaylamazsa düşer, kayıt kalır.**
+
+### 8 · CANLIDA BAK
+
+**Yok — bu tur yalnız belge.** Kullanıcının göreceği hiçbir şey değişmedi. Bu turun çıktısı: **65 kuyruk satırı +
+15 karar kartı + 8 PO kalemi**, ve kuyruğun en üstünde artık **iki kimlik sahteciliği açığı** duruyor.
+
+---
+
 ## ⭐ TUR BB — DEVİR ANALİZİNİN BELGE KISMI UYGULANDI (2026-09-21) · YALNIZ BELGE
 
 > **Mod:** 🟥 BYPASS — yalnız belge. **Kod DEĞİŞMEDİ · DB/migration/seed YOK · kuyruk işi YAPILMADI · hiçbir şey SİLİNMEDİ.** Kaynak: `docs/raporlar/kesif/devir-analizi-2026-09-21.md` (dal `otonom/AZ-devir-analizi-20260921`, henüz merge edilmedi). Dal: `otonom/BB-devir-uygulama-20260921`.
