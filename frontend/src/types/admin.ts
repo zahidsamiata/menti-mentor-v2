@@ -171,3 +171,27 @@ export const CORRECTION_NOTE_PRESETS = [
   'Profil fotoğrafı eksik. Sisteme yükleyiniz.',
   'Biyografi bölümünüz yetersiz. En az 50 kelime ile kendinizi tanıtınız.',
 ] as const;
+
+// ── K-11: Kurum-içi kullanıcı şikayetleri (UserReport, tenant-scope) ──────────
+export type ReportReason = 'SPAM' | 'HARASSMENT' | 'INAPPROPRIATE' | 'NO_SHOW' | 'OTHER';
+export type ReportStatus = 'OPEN' | 'REVIEWED' | 'DISMISSED';
+
+export interface TenantReport {
+  id: string;
+  reason: ReportReason;
+  description: string | null;
+  status: ReportStatus;
+  reviewNote: string | null;
+  createdAt: string;
+  reporter: { id: string; fullName: string } | null;
+  target: { id: string; fullName: string } | null;
+}
+
+export interface TenantReportsResponse {
+  items: TenantReport[];
+  total: number;
+}
+
+export interface ReviewReportResponse {
+  ok: boolean;
+}

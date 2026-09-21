@@ -20,6 +20,9 @@ import type {
   HealthMetricsData,
   NudgeKind,
   NudgeResponse,
+  TenantReportsResponse,
+  ReviewReportResponse,
+  ReportStatus,
 } from '@/types/admin';
 import type { RequestOptions } from './client';
 
@@ -29,6 +32,19 @@ export const adminApi = {
   // ── KPI ───────────────────────────────────────────────────────────────────
   getKpi: (api: BoundClient): Promise<ApiResult<KpiData>> =>
     api<KpiData>('/api/admin/kpi'),
+
+  // ── K-11: Kurum-içi şikayetler (UserReport) ────────────────────────────────
+  listReports: (api: BoundClient, params: { status?: ReportStatus } = {}): Promise<ApiResult<TenantReportsResponse>> => {
+    const qs = params.status ? `?status=${params.status}` : '';
+    return api<TenantReportsResponse>(`/api/admin/reports${qs}`);
+  },
+  reviewReport: (
+    api: BoundClient,
+    reportId: string,
+    status: 'REVIEWED' | 'DISMISSED',
+    note?: string,
+  ): Promise<ApiResult<ReviewReportResponse>> =>
+    api<ReviewReportResponse>(`/api/admin/reports/${reportId}`, { method: 'PATCH', body: { status, note } }),
 
   // ── Program Sağlığı / Retention (drill-down + dürtme) ──────────────────────
   getHealthMetrics: (api: BoundClient): Promise<ApiResult<HealthMetricsData>> =>
