@@ -18,18 +18,18 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 
 | # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
 |---|---|:---:|---|
-| KARAR-11 | Kullanılmayan/mükerrer kod ne olsun | **2** (K-13, E-5) | ⬜ boş · ⚠️ ağustos "keşif olmadan silme YOK" → karantina yönü |
-| KARAR-22 | Mentör reddederken ne olsun (ret deneyimi) | 1 (P-05) | ⬜ boş · ⚠️ KARAR-20 ile aynı tema (kümelenmeli); ret KODDA VAR, deneyimi eksik |
-| KARAR-1 | Randevu format/süre kim belirler | 1 (K-15) | ⬜ boş |
+| KARAR-11 | Kullanılmayan/mükerrer kod ne olsun | **2** (K-13, E-5) | ✅ **CEVAPLANDI (2026-09-21): A** |
+| KARAR-22 | Mentör reddederken ne olsun (ret deneyimi) | 1 (P-05) | ✅ **CEVAPLANDI (2026-09-21): B** · ⚠️ e-posta ayağı SMTP bekler |
+| KARAR-1 | Randevu format/süre kim belirler | 1 (K-15) | ✅ **CEVAPLANDI (2026-09-21): A** · ⛔ migration + yedek + PO onayı |
 | KARAR-2 | Profile serbest bağlantı alanı | 1 (K-17) | ⬜ boş |
 | KARAR-3 | Sertifika "bildirim yükümlülüğü" hukuki metni | 1 (K-16) | ⬜ boş |
 | KARAR-4 | Kriz destek kaynağı metni | 1 (K-16) | ⬜ boş |
 | KARAR-5 | Öğrenme yolculuğu seed canlıya | 1 (K-18) | ⬜ boş |
-| KARAR-6 | Menti tüm mentörleri görsün mü | 1 (K-19 içerik) | ⬜ boş |
-| KARAR-7 | Online toplantı linkini kim girer | 1 (K-19 içerik) | ⬜ boş |
-| KARAR-10 | OCEAN/SJT psikometri motoru | 1 (F-11) | ⬜ boş · ⚠️ ağustos G2-07/08/G10-21 "canlı eşleştirmeye bağla" → bağlama yönü |
+| KARAR-6 | Menti tüm mentörleri görsün mü | 1 (K-19 içerik) | ✅ **CEVAPLANDI (2026-09-21): A** · + alt uyum eşiği |
+| KARAR-7 | Online toplantı linkini kim girer | 1 (K-19 içerik) | ✅ **CEVAPLANDI (2026-09-21): A** |
+| KARAR-10 | OCEAN/SJT psikometri motoru | 1 (F-11) | ✅ **CEVAPLANDI (2026-09-21): C** · ⭐ AŞAMALI (3 aşama, feature flag) |
 | KARAR-19 | KVKK geri-dönülmez yetkiler kümesi | 1 (F-07) | ⬜ boş · ⚠️ ağustos G1-15/16/29 ✅ işleme-al |
-| KARAR-20 | Mentör menti talebini reddedebilsin mi | 1 (F-17) | ⬜ boş · ⚠️ ağustos G4-25 ✅ ama varsayım hatalı · **KARAR-22 ile kümelenmeli** |
+| KARAR-20 | Mentör menti talebini reddedebilsin mi | 1 (F-17) | ✅ **CEVAPLANDI (2026-09-21): A** |
 | KARAR-21 | STK anket cevap tipi (answerType) | 1 (F-12) | ⬜ boş · ⚠️ ağustos G3-13 ✅ → C seçeneği dışlanmış |
 | KARAR-8 | Repoları private yap | 0 (PO aksiyonu) | ⬜ boş |
 | KARAR-9 | Kulüp modülü + İş İlanları | 0 (eklenmezse B) | ⬜ boş · ⚠️ ağustos G1-13 kulüp kurumu aktif / G10-12 modül ⏸️ |
@@ -45,7 +45,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-26 | İki yedek tablo (S26/S37) düşürülsün mü | 0 (DB) | ⬜ boş · W §4.4 · GERİ DÖNÜLMEZ |
 | KARAR-27 | Dış hata izleme servisi kurulsun mu | 0 | ⬜ boş · W §2.A · KVKK |
 | KARAR-28 | Ölü LLM/OpenAI env silinsin mi | 0 | ⬜ boş · Bölüm 4 · SİLME PROTOKOLÜ |
-| KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ⬜ boş · pedagoji · cevap-anahtarı sızması |
+| KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ✅ **CEVAPLANDI (2026-09-21): A** |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
 | KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
 | **KARAR-35** | **Canlı DB'ye salt-okuma izni** | **5+** (md.30·33·118, S10, Y6) | ⬜ boş · ⭐ BB turu · en çok iş açan yeni kart |
@@ -53,7 +53,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-34** | **Kulüp tipi kurum + kurumlar arası görünürlük** | **3** (md.91·115·116) | ⬜ boş · ⭐ BB turu · avukat notu var |
 | **KARAR-30** | **Senaryo isimleri: seed'den önce mi sonra mı** | **2** (I-09, K-16/K-18 sırası) | ⬜ boş · ⭐ BB turu · ⚠️ yanlış sıra = içerik iki kez canlıya yazılır |
 | **KARAR-31** | **Kriz bildirimi (kendine zarar) + yaş sınırı** | **2** (I-18, G1-01) | ⬜ boş · ⭐ BB turu · ⛔ AVUKAT ön koşulu, öneri YOK |
-| **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ⬜ boş · ⭐ BB turu · backend hazır, ekran yok |
+| **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ✅ **CEVAPLANDI (2026-09-21): A** |
 | **KARAR-33** | **Kurumdan üye çıkarma + red tipi** | **2** (Y-14/md.36, md.35) | ⬜ boş · ⭐ BB turu · backend hazır, düğme yok |
 | **KARAR-37** | **madde 103 — kart mı özet mi kazanır** | 1 (md.103) | ⬜ boş · ⭐ BB turu · G1-23 vakasının tekrarı riski |
 
@@ -113,7 +113,8 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 **Karşılaştırma:** Mentörlerin zamanını koruyacağına ve platformun mentör tarafına güven vereceğine inanıyorsan A doğru — ama mentörleri slot açmaya alıştırmak gerekir. Menti tarafının akışkanlığı önceliğinse ve mentör şikayeti henüz gelmediyse B yeterli. C, karar vermeyi erteler ve bu projede erteleme zaten pahalıya mal olmuş.
 **Benim önerim:** A — testte "en öncelikli mimari hata" diye işaretlenen şey bu, default değerlerle (ONLINE / 60dk) mevcut kayıtlar bozulmaz, yedek tablo alınacak.
 **Cevap vermezsen:** K-15 atlanır. K-05 (B'nin kendisi) yine de yapılır, yani boşa geçmez.
-**CEVAP:**
+**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
+> ⛔ **Migration gerektirir** (`AvailabilityBlock`'a `format` + `durationMin`): uygulanırken **ÖNCE tarihli yedek tablo, SONRA PO'nun AÇIK onayı.** Ajan tek başına migration **ÇALIŞTIRMAZ**.
 
 ---
 
@@ -193,7 +194,10 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 **Karşılaştırma:** Ürünün satış argümanı "biz doğru eşi buluyoruz" ise A ya da B. Kurumlar "çalışanımız istediğini seçsin" diyorsa C. B ortada durur ama iki tarafı da tam memnun etmeyebilir.
 **Benim önerim:** A — ama bu tamamen senin ürün kararın, benim önerime güvenme; DISC motoru ürünün merkezinde olduğu için böyle diyorum.
 **Cevap vermezsen:** K-19'un bu parçası atlanır.
-**CEVAP:**
+**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
+> ⭐ **PO ek isteği (iki madde):**
+> **(1) Menti kendisine UYGUN OLMAYAN mentörü görmesin** → **alt uyum eşiği** uygulansın. API'de `minMatchScore` parametresi var; **menti ekranında kullanılıyor mu kontrol edilsin.** Eşik **DEĞERİ teknik karardır** — ajan makul bir varsayılan belirler ve gerekçesini yazar.
+> **(2) Uyum oranı görünsün** → ✅ **ZATEN VAR:** `frontend/src/app/(dashboard)/menti/page.tsx:311-318` (yüzde + *"Neden uyumlu:"* gerekçesi; DISC tipi **bilinçli gizli**).
 
 ---
 
@@ -208,7 +212,7 @@ Değişmeyen iki istisna: migration ve seed hâlâ PO onayı ister. 🟡 işler 
 **Karşılaştırma:** Kısa vadede A ve B arasında fark küçük; asıl fark kimin unutma riskini taşıdığı. C doğru hedef ama şimdi değil.
 **Benim önerim:** A — mentör zaten slot ve şartları belirleyen taraf olacak.
 **Cevap vermezsen:** K-19'un bu parçası atlanır.
-**CEVAP:**
+**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
 
 ---
 
@@ -288,7 +292,18 @@ Ekrandaki "Sen bir Öncü'sün" kartı DISC harfinden üretiliyor (`onboardingCo
 
 **Kaynak:** `docs/raporlar/kesif/konsey-psikometri-2026-09-21.md` §3 (B.1-B.4) · §5 D.1. Kartın "AĞUSTOS SİNYALİ" gerilimi (ağustos yönü C'ye yakın, kart önerisi A) bu ekle ÇÖZÜLMEZ — yalnız fiyatı konur.
 
-**CEVAP:**
+**CEVAP:** C  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
+> ⭐ **PO kararı — AŞAMALI uygulanır. Üç aşama ayrı ayrı yapılır, her biri ayrı kapı taşır:**
+>
+> **1 · DÜZELT + TEST.** Ölçek hatası (DISC `0-1` ↔ formül `0-100`) giderilir, **iki farklı `DiscVector` tipi birleştirilir**, bugün **SIFIR** olan birim testleri yazılır. ⇒ **Kullanıcı etkilenmez.**
+>
+> **2 · YENİDEN HESAPLAMA (backfill).** DB'deki yanlış `archetype`/`ocean*` değerleri yeniden hesaplanır. ⛔ **CANLI VERİ** — önce **tarihli yedek tablo**, sonra **PO'nun AÇIK onayı.**
+>
+> **3 · EŞLEŞTİRMEYE BAĞLAMA — AÇMA/KAPAMA ANAHTARIYLA (feature flag).** Yeni motor eskisinin **yanında** çalışır; önce **eski/yeni sıralama karşılaştırması PO'ya gösterilir**; PO onaylarsa açılır, **tek tuşla eskiye dönülür.**
+>
+> ⚠️ **Uyarı — ölçüm mekanizması YOK:** eşleşme kalitesini ölçen mekanizma bugün yok (`Match` tablosuna yazılmıyor — psikometri konseyi ①). Yeni sıralamanın *"daha iyi"* olduğu bir süre **PO'nun gözüyle** değerlendirilir. `Match` yazımı düzelince (⛔ **KVKK silme yoluyla birlikte, doğru sırayla** — bkz. `GV-08` ↔ `U-18` çapraz atfı) ölçüm mümkün olur.
+>
+> ⚠️ **KARAR-6 bağlantısı:** menti ekranındaki uyum yüzdesi **bugün DISC motorunun skorudur**. Motor bağlanınca **YÜZDELER DEĞİŞİR** — anahtar (feature flag) bu yüzden şart.
 
 ---
 
@@ -321,7 +336,7 @@ Ekrandaki "Sen bir Öncü'sün" kartı DISC harfinden üretiliyor (`onboardingCo
 **Benim önerim:** A — senin koyduğun kuralın kod karşılığı bu; geri dönüş ağı var, arşiv var, ikinci onay sende.
 **Cevap vermezsen:** K-13 ve E-5 atlanır. E-4 (arşiv belgesi + karantina) yine de yapılır, yani hazırlık boşa gitmez.
 ⚠️ AĞUSTOS SİNYALİ (2026-08-27, YÖN — A/B/C DEĞİL): Ağustos ilkesi **"Keşif olmadan silme YOK"** (`00-PO-KARARLARI-2026-08-27.md:87`, G4-09/G4-10 önce keşif); G10-02..21 ⏸️ "bilinçli terk veya v2" (`:79`). Bu, bu kartın önerisi A (karantina→bekle→sil) yönünü DESTEKLER. PO teyit ederse CEVAP'a yazılabilir.
-**CEVAP:**
+**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
 
 ---
 ## Ajanın ekleyeceği yeni kararlar buradan itibaren (KARAR-12, 13, …)
@@ -484,7 +499,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** A — mentörün kibarca hayır diyebilmesi gerçek bir ihtiyaç; yumuşatma menti tarafını korur. Ama bu senin ürün kararın.
 **Cevap vermezsen:** F-17 (G4-25) atlanır. Başka iş etkilenmez.
 ⚠️ AĞUSTOS SİNYALİ (2026-08-27, VARSAYIM HATALI — A/B/C DEĞİL): Ağustos G4-25 "ret yumuşatma"yı ✅ işleme aldı (`00-PO-KARARLARI-2026-08-27.md:61`) AMA var olan bir ret akışını varsaydı; kod gerçeği: mentör→menti ret akışı HİÇ yok (`requestController.ts:17`). Bu yüzden ağustos "işleme al" kararı bu kartın ön-sorusunu (ret olsun mu?) yanıtlamıyor. PO teyit ederse CEVAP'a yazılabilir.
-**CEVAP:**
+**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
 
 ---
 
@@ -520,7 +535,8 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** B — çıplak ret + sessizlik en akut yara; bildirim + nazik mesaj bunu orta eforla kapatır. Alternatif öneri (A) ayrı bir tur olarak sonra gelebilir (eşleştirme motoru olgunlaşınca). (Bu senin ürün kararın, önerime güvenme.)
 ⚠️ KARAR-20 İLE İLİŞKİ (aynı tema, kümelenmeli): KARAR-20 "mentör reddedebilsin mi" soruyordu (F-17/G4-25 kaynaklı, "ret akışı hiç yok" varsayımıyla). Panel denetimi gösterdi ki **meeting-talebi reddi KODDA VAR** (`mentor/page.tsx:257-274` Onayla/Reddet, MT11 ✅) — eksik olan reddin DENEYİMİ. Yani KARAR-20'nin "olsun mu" sorusu meeting düzeyinde zaten "evet"; KARAR-22 (bu kart) "nasıl olsun"u soruyor. İkisi birlikte cevaplanabilir; KARAR-22 ayrıntılı/kanıtlı olanı.
 **Cevap vermezsen:** P-05 (ret deneyimi) ve F-17 (G4-25 ret yumuşatma) atlanır. Başka iş etkilenmez.
-**CEVAP:**
+**CEVAP:** B  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
+> ⚠️ **Not:** "bildirim" iki kanaldan gider — **uygulama içi (çan) çalışır**, **e-posta bildirimi SMTP ayarlanana kadar GİTMEZ** (`docs/otonom/03-PO-ELLE-ISLER.md` B#4).
 
 ---
 
@@ -625,7 +641,8 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Senaryolar bir ÖĞRENME aracıysa ve puanlama önemli değilse A en iyisi (cevap-sonrası, sızma yok). Senaryolar bir DEĞERLENDİRME/test ise B güvenli. C sızma nedeniyle önerilmez.
 **Benim önerim:** A — cevap-sonrası tüm açıklamalar öğrenme değerini artırır, sızma riski yok. Ama senaryolar puanlanıyor/sertifikaya sayılıyorsa B kalsın.
 **Cevap vermezsen:** K-06 uygulanmaz; bugünkü davranış (yalnız seçilen açıklama) korunur — kabul edilebilir ara durum.
-**CEVAP:**
+**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
+> ⭐ **PO teyidi:** öğrenme yolculuğu senaryoları sertifika sınavında **ÇIKMIYOR** → cevap sonrası 4 şıkkın açıklamasını göstermek **cevap anahtarı sızdırmaz**.
 
 ---
 
@@ -679,7 +696,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** **A** — çünkü backend ve güvenlik guard'ı zaten hazır; iş yalnız ekran, ve "sessiz mentör" sorununu görünür hâle getirir.
 ⚠️ **Not:** Hangi seçenek seçilirse seçilsin, `mentorVisibilityEnabled` alanının **bağlanacağı mı silineceği mi** aynı cevapta netleşir (silme = ayrı tur + ikinci onay, SİLME PROTOKOLÜ).
 **Cevap vermezsen:** **Y-15** kuyrukta bekler; şemadaki uyuyan alan belirsiz kalır.
-**CEVAP:**
+**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
 
 ---
 
