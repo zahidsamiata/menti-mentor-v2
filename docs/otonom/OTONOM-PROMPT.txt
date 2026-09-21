@@ -15,13 +15,24 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
       sonra devam et. ⛔ Bu dosyayi STASH'E ALMA.
     · Baska dosyalar da degismisse → onceki turun yarim isidir.
       ⛔ SILME, gormezden gelme, yeni isin commit'ine KATMA.
-      `git stash push -u -m "yarim-<tarih-saat>"` ile kenara al,
+      `git stash push -m "yarim-<tarih-saat>"` ile kenara al,
+      ⛔ `-u` KULLANMA (2026-09-21 duzeltmesi): -u izlenmeyen dosyalari da supurur;
+         PO'nun kisisel klasorleri (ornek: docs/gelen/) stash'e gidebilir.
+         Izlenmeyen dosyalar HICBIR KOSULDA stash'lenmez.
       02-ILERLEME.md'ye "YARIM IS STASH'E ALINDI: <dosyalar>" yaz, devam et.
 
 0.2 DAL
     · otonom/... dalindaysan ve o dalin isi BITTIYSE → `git checkout main && git pull`
     · Isi YARIM kaldiysa → o dalda devam et, YENI dal acma.
     Hangisi oldugunu 02-ILERLEME.md'den anla.
+    · ⭐ YARIM KALMIS PUSH EDILMIS DAL KONTROLU (2026-09-21 eklendi):
+      `git branch -r` ile otonom/... dallarina bak. Push edilmis ama MERGE EDILMEMIS
+      bir dal varsa (ornek: otonom/F19-admin-proaktif-uyari-20260921 — PC kapandigi
+      icin yarim kalmisti):
+        - CI YESILSE  → PR ac (yoksa) ve merge et, kuyrukta Durum → BITTI,
+                        02-ILERLEME'ye "CANLIDA BAK: <kullanici ne goruyor>" yaz
+        - CI YESIL DEGILSE → Durum → BASARISIZ, sebebini yaz, sonraki ise gec
+      ⛔ Dali GORMEZDEN GELME: emegin kaybolmasinin bilinen sebebi budur.
 
 0.3 NEREDE KALMISIM
     02-ILERLEME.md'nin SONUNU oku. "TUR YARIM KALDI" satiri varsa oradan devam et.
@@ -57,11 +68,20 @@ kayboluyorsa BITER. "Backend hazir" · "bilesen yazildi ama mount edilmedi" ·
 ═══════════════════════════════════════════════════════════════
 2 — ⛔ DURMAMA KURALI
 ═══════════════════════════════════════════════════════════════
-2.1 KAPANIS KOSULU
-    Turu (Bolum 13'teki belge senkronunu) YALNIZ su durumda kapat:
-    kuyrukta durumu BEKLIYOR ve kapisi 🟢 olan HICBIR is kalmadiysa.
+2.1 KAPANIS KOSULU  (⚠️ 2026-09-21'de GENISLETILDI — eskiden yalniz 🟢 sayiliyordu)
+    Turu (Bolum 13'teki belge senkronunu) YALNIZ su IKI sart birden saglanirsa kapat:
+      (a) kuyrukta durumu BEKLIYOR ve kapisi 🟢 olan HICBIR is kalmadi, VE
+      (b) her 🟡 isin ya PR'i ACIK (Durum "PR-ACIK", Not'ta PR no) ya da
+          neden yapilamadigi yazili (BASARISIZ + sebep).
     ⛔ Bir tane bile 🟢 BEKLIYOR is varsa TURU KAPATMA, sonraki ise gec.
-    Her is bitiminde kalan 🟢 sayisini say ve 02-ILERLEME'ye yaz.
+    ⛔ 🟢 bitti ama 🟡'ler hic islenmediyse TURU KAPATMA — Bolum 4 adim 5'e gec.
+    Her is bitiminde kalan 🟢 ve PR'siz 🟡 sayisini say ve 02-ILERLEME'ye yaz.
+
+2.1b DURUM KODLARI  (baskasi YASAK)
+    BEKLIYOR · CALISILIYOR · PR-ACIK · BITTI · ATLANDI(karar) · BASARISIZ · IPTAL(PO)
+    ⭐ PR-ACIK (2026-09-21): is YAPILDI, PR ACILDI, ama MERGE EDILMEDI.
+       Cogunlukla 🟡 isler icin. ⛔ Merge olmadan BITTI YAZILMAZ — canlida degil.
+       Not sutununa PR numarasi ZORUNLU.
 
 2.2 KAPSAMINI DARALTMA
     "Yalniz kucuk/guvenli olanlari secayim" YAPMA. Kuyruk sirasiyla git.
@@ -102,15 +122,32 @@ etmeyen ikisinin saatlerce suren emegi tamamen kayboldu.
 ═══════════════════════════════════════════════════════════════
 4 — SIRA
 ═══════════════════════════════════════════════════════════════
-00-KUYRUK.md'deki durumu BEKLIYOR olan 🟢 isleri su oncelikle isle:
- 1. Kullanicinin EKRANDA gorecegi duzeltmeler — once uctan uca yolculugu
-    tikayanlar (U ve P asamalari)
- 2. Guvenlik / saglamlik (V asamasi)
- 3. Kalanlar (K, F, E asamalari)
+00-KUYRUK.md'deki durumu BEKLIYOR olan isleri su oncelikle isle:
+
+ 0. ⛔ CIKIS BLOKERI isaretli AJAN isleri (Not sutununda "⛔ CIKIS BLOKERI (T1/T2/T3)")
+    — bunlar canliya cikisi tek tek engelliyor, hepsinden once gelir.
+ 1. ⭐ ASAMA I — ICERIK (PO "EN ON SIRA", 2026-09-03)
+    PO karari: "bu testler bizim icin en onemli isler". 21 gun kuyruga girmemisti.
+ 2. Kullanicinin EKRANDA gorecegi duzeltmeler — uctan uca yolculugu tikayanlar
+    (U ve P asamalari)
+ 3. Guvenlik / saglamlik (V asamasi)
+ 4. Kalanlar (K, F, E, Y asamalari)
 Ayni oncelik icinde: en az emekle en cok kullanici degeri once.
 
-Kuyruk asamalari: K (kullanici testi) · F (bilanco devri) · P (panel denetimi) ·
-E (hayalet envanter) · U (uctan uca yolculuk) · V (operasyonel hazirlik).
+ 5. ⭐ 🟢'LER BITINCE 🟡'LERE GEC (2026-09-21 kurali — onceden 🟡'ler hic islenmiyordu):
+    Sirada BEKLIYOR durumunda 🟢 kalmadiysa 🟡 islere basla:
+      · YAP, PR AC, ⛔ MERGE ETME
+      · Durum → "PR-ACIK", Not'a PR numarasini YAZ
+      · PR aciklamasinin BASINA: "KULLANICI ARTIK SUNU GORUYOR: <tek cumle>"
+      · PR aciklamasinda ayrica: 🟡 olmasinin sebebi hangi istisna
+        (migration/seed · auth-KVKK-matching · geri donulmez)
+    ⛔ MIGRATION iceren 🟡 PR'in BASLIGINA sunu ekle:
+       "⛔ MIGRATION — merge edilirse CANLI DB'ye uygulanir"
+    Gerekce: PO merge ederken neyin canli DB'ye dokunacagini basliktan gormeli.
+
+Kuyruk asamalari: I (icerik — PO en on sira) · K (kullanici testi) · F (bilanco devri) ·
+P (panel denetimi) · E (hayalet envanter) · U (uctan uca yolculuk) ·
+V (operasyonel hazirlik) · Y (yol haritasi + karar takibi devri).
 Yeni asama gorursen onu da isle.
 
 ═══════════════════════════════════════════════════════════════
