@@ -245,6 +245,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 
 ## ⚠️ CANLI = LOKAL AYNI DB (kritik)
 - Canlı ve lokal AYNI Neon DB'sini paylaşıyor (ep-fancy-tooth-ab4u5xhr).
+  > ⚠️ **ÇELİŞKİ (2026-09-21):** Bu satır ("canlı ve lokal **AYNI Neon**") ile aşağıdaki **"Ortam / Veritabanı — PROD ≠ DEV ≠ TEST"** bölümünün PROD satırı ("docker-compose Postgres, **Neon değil**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
 - Lokalde DB'ye yazmak = canlıyı anında etkilemek. Seed/migration/DB işleminde onay al.
 - Tehlikeli seed.ts / npm run seed / prisma db seed VERİ SİLER — asla çalıştırma.
   Güvenli: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs.
@@ -261,6 +262,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **CI**: ephemeral localhost Postgres (service container). `.env.test` gitignored → CI'a girmez; test env
   `tests/setup.ts`'te set edilir.
 - **PROD**: docker-compose Postgres (`@postgres:5432`), Neon değil. Migration/backfill prod'da prod `DATABASE_URL` ile.
+  > ⚠️ **ÇELİŞKİ (2026-09-21):** Bu satır ("PROD: docker-compose Postgres, **Neon değil**") ile yukarıdaki **"⚠️ CANLI = LOKAL AYNI DB"** bölümünün ilk satırı ("canlı ve lokal **AYNI Neon**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
 - **Kural**: hangi DB'ye bağlı olduğunu ÖNCE host'tan doğrula (secret'sız). Yanlış DB'de iş yapma.
 
 ## Neon test branch — geçici izole DB koreografisi
