@@ -1,294 +1,280 @@
-🟥 OTONOM TUR — paralel şeritler · kendi kendini doğrular · otomatik canlıya alır
-Model: Fable 5 · izin sorma kapalı
+MOD: 🟥 BYPASS — OTONOM TUR · kuyrugu sonuna kadar isle · kendi istegiyle DURMA
 
-⚠️ BU PROMPT TEKRAR KULLANILIR. Her seferinde aynı metin gönderilir.
-   Kaldığın yeri sohbetten değil, docs/otonom/02-ILERLEME.md'den okursun.
+Bu metin her turda AYNEN gonderilir. Kaldigin yeri sohbetten degil DOSYALARDAN okursun.
+PO bilgisayar basinda degil. Soru sorma, onay bekleme, "devam edeyim mi" deme.
 
-═══════════════════════════════════════════════
-0. AÇILIŞ — SIRAYLA OKU
-═══════════════════════════════════════════════
-1) docs/otonom/01-KARARLAR.md → hangi CEVAP dolu, hangisi boş
-2) docs/otonom/02-ILERLEME.md → yoksa oluştur; varsa nerede kalınmış
-3) docs/otonom/00-KUYRUK.md   → iş listesi + şerit dağılımı
-4) docs/kararlar/09-DURUM.md  → YALNIZ en üstteki tarihli bölüm
-   ⚠️ ters-kronolojik katmanlı; "TEK BAKIŞTA" başlıklı bölüm GÜNCEL DEĞİL — OKUMA, güvenme.
-5) docs/raporlar/kesif/gercek-kullanici-testi-bulgulari-2026-09-09.md
-6) docs/otonom/03-PO-ELLE-ISLER.md → ajanın YAPAMAYACAĞI işler; buradaki bir
-   kalemi kuyruğa ALMA, PO'ya bırak
-7) docs/00-BELGE-HARITASI.md → bir belge aramadan ÖNCE buraya bak
-8) docs/kararlar/00-KART-INDEKSI.md → bir kalemin durumu için
+═══════════════════════════════════════════════════════════════
+0 — ACILIS: NEREDE KALDIM?  (her seyden once, her seferinde)
+═══════════════════════════════════════════════════════════════
+Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
 
-⭐ KUYRUK AŞAMALARI (altı aşama, 00-KUYRUK'ta):
-  K (kullanıcı testi) · F (bilanço devri) · P (panel denetimi) ·
-  E (hayalet envanter) · U (uçtan uca yolculuk) · V (operasyonel hazırlık).
+0.1 CALISMA AGACI — `git status --short`
+    · Bossa → devam.
+    · YALNIZ docs/otonom/OTONOM-PROMPT.txt degismisse → bu PO'nun prompt guncellemesidir.
+      Onu commit + push + merge et (mesaj: "docs(otonom): OTONOM-PROMPT PO guncellemesi"),
+      sonra devam et. ⛔ Bu dosyayi STASH'E ALMA.
+    · Baska dosyalar da degismisse → onceki turun yarim isidir.
+      ⛔ SILME, gormezden gelme, yeni isin commit'ine KATMA.
+      `git stash push -u -m "yarim-<tarih-saat>"` ile kenara al,
+      02-ILERLEME.md'ye "YARIM IS STASH'E ALINDI: <dosyalar>" yaz, devam et.
 
-02-ILERLEME.md'nin başına yaz: tur no · başlangıç saati · aktif şeritler.
+0.2 DAL
+    · otonom/... dalindaysan ve o dalin isi BITTIYSE → `git checkout main && git pull`
+    · Isi YARIM kaldiysa → o dalda devam et, YENI dal acma.
+    Hangisi oldugunu 02-ILERLEME.md'den anla.
 
-═══════════════════════════════════════════════
-1. BÜYÜK RESİM
-═══════════════════════════════════════════════
-MentiMentor: DISC tabanlı çok kiracılı mentör-menti eşleştirme platformu. Canlı, gerçek kullanıcı ~sıfır.
-Sorun: aylardır tek tek prompt-rapor döngüsüyle ilerledi. Backend'de ~17 blok yazıldı, çoğu kullanıcıya hiç ulaşmadı.
-Bu tur o döngüyü bitiriyor. SEN baştan sona çalışırsın. PO yalnız ÜRÜN kararı verir, teknik karar SENİN.
+0.3 NEREDE KALMISIM
+    02-ILERLEME.md'nin SONUNU oku. "TUR YARIM KALDI" satiri varsa oradan devam et.
+    Yoksa 00-KUYRUK.md'de Durum'u CALISILIYOR olan is var mi bak — varsa once onu bitir.
+    ⚠️ CALISILIYOR kalmis bir isi yeniden yapmadan ONCE kodda kontrol et:
+       bitmis ama Durum guncellenmemis olabilir.
 
-⭐ TEK ÖLÇÜ: Bir iş ancak KULLANICI ekranda bir şey görüyorsa ya da bir hata kayboluyorsa biter.
-"Backend hazır" · "bileşen yazıldı ama mount edilmedi" · "uç eklendi" → BİTMEDİ.
+0.4 OKU  (yalniz gerekeni — butun dosyayi degil)
+    · docs/otonom/01-KARARLAR.md  → hangi CEVAP dolu
+    · docs/otonom/00-KUYRUK.md    → is listesi, kapilar, durum
+    · docs/otonom/02-ILERLEME.md  → son kayitlar
+    · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler (bunlara dokunma)
+    · docs/kararlar/09-DURUM.md → ⚠️ ters-kronolojik katmanli, yeni icerik BASA eklenir.
+      "TEK BAKISTA" baslikli bolum adina ragmen GUNCEL DEGIL. Yalniz EN USTTEKI tarihli bolumu oku.
+    · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
+    · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
 
-═══════════════════════════════════════════════
-2. MERGE POLİTİKASI — PO KARARI (2026-09-10): OTOMATİK
-═══════════════════════════════════════════════
-🟢 işler: testler yeşilse **merge et, canlıya al.** PO onayı bekleme.
-Her merge'den önce KENDİ DOĞRULAMA LİSTESİ (hepsi ✅ olmadan merge YOK):
-  [ ] frontend testleri yeşil      [ ] backend testleri yeşil
-  [ ] typecheck/lint temiz         [ ] build hatasız
-  [ ] şema değişikliği YOK         [ ] seed komutu çalıştırılmadı
-  [ ] auth / KVKK / matching dosyasına dokunulmadı
-  [ ] değişiklik yalnız bu işin kapsamındaki dosyalarda
-Bir kutu bile boşsa → merge ETME, PR bırak, 02-ILERLEME'ye sebebi yaz, sonrakine geç.
+02-ILERLEME.md'ye tur baslangic satiri yaz: tur adi · baslangic saati · kalan 🟢 is sayisi.
 
-Merge sonrası: çatı submodule pointer'ını backend main HEAD'e re-bump et (sarkma bırakma).
-Merge sonrası 02-ILERLEME'ye ekle: "CANLIDA BAK: <kullanıcı ne görmeli>"
+═══════════════════════════════════════════════════════════════
+1 — BUYUK RESIM
+═══════════════════════════════════════════════════════════════
+MentiMentor: DISC tabanli, cok kiracili mentor-menti eslestirme platformu.
+Canli ama gercek kullanici ~sifir.
 
-⭐ KAPI POLİTİKASI (PO gevşetti, 2026-09-19):
-🟢 VARSAYILANDIR. Bir iş yalnız şu üç istisnadan birine giriyorsa 🟡 kalır:
-  1. migration/seed gerektiriyorsa
-  2. hassas dosyaya dokunuyorsa (auth/yetkilendirme · KVKK/rıza/veri imha ·
-     matching/eşleştirme/skorlama)
-  3. canlı veriye geri dönülmez dokunuyorsa
-🟡 = yap ama PR'da durur, merge etme. 🔴 = ilgili KARAR cevapsız → DOKUNMA, atla, sonrakine geç.
+Is artik sohbetten degil dosyalardan yurur. SEN kuyrugu bastan sona islersin,
+PO yalniz URUN KARARI verir. Teknik kararlar SENIN.
 
-⛔ DEĞİŞMEYEN İKİ KURAL:
-1. DB/migration: canlı = lokal AYNI Neon (restore penceresi 6 saat). Migration YALNIZ ilgili KARAR
-   "evet" ise VE önce tarihli yedek tablo alındıysa. Yedek adı + satır sayısı 02-ILERLEME'ye yazılır.
-2. seed.ts / npm run seed / prisma db seed ASLA. Güvenli olanlar: seed-questions,
-   seed-learning-journey, seed-certification, seed-test-tenant — bunlar da ancak KARAR evet + yedek sonrası.
+⭐ TEK OLCU: Bir is ancak KULLANICI ekranda bir sey goruyorsa ya da bir hata
+kayboluyorsa BITER. "Backend hazir" · "bilesen yazildi ama mount edilmedi" ·
+"uc eklendi" → BITMEDI.
 
-═══════════════════════════════════════════════
-3. KARAR AYRIMI — SORMA vs SOR
-═══════════════════════════════════════════════
-SEN KARAR VER, SORMA (teknik):
-  kütüphane · dosya/klasör yapısı · isimlendirme · state yönetimi · test yöntemi ·
-  refaktör kapsamı · hata mesajı metni · renk paleti tutarlılığı · boşluk/hizalama ·
-  index/performans · çeviri · kod içi yorum
+═══════════════════════════════════════════════════════════════
+2 — ⛔ DURMAMA KURALI
+═══════════════════════════════════════════════════════════════
+2.1 KAPANIS KOSULU
+    Turu (Bolum 13'teki belge senkronunu) YALNIZ su durumda kapat:
+    kuyrukta durumu BEKLIYOR ve kapisi 🟢 olan HICBIR is kalmadiysa.
+    ⛔ Bir tane bile 🟢 BEKLIYOR is varsa TURU KAPATMA, sonraki ise gec.
+    Her is bitiminde kalan 🟢 sayisini say ve 02-ILERLEME'ye yaz.
 
-⛔ SİLME ASLA TEKNİK KARAR DEĞİLDİR. Bir kodun çağrılmıyor olması, silinebileceği anlamına gelmez.
-   Neden yazıldığını bilmiyorsan, sildiğinde bilgiyi de silersin. Bkz. §3.5.
+2.2 KAPSAMINI DARALTMA
+    "Yalniz kucuk/guvenli olanlari secayim" YAPMA. Kuyruk sirasiyla git.
+    Backend islerine de gir. Zor gorunen isi kucult ama ATLAMA.
+    Gercekten yapilamiyorsa BASARISIZ isaretle, sebebini yaz, sonrakine gec.
 
-DUR VE SOR (ürün / geri dönülmez):
-  kullanıcı neyi görebilecek/yapabilecek · bir özellik var mı yok mu · bir özelliğin SİLİNMESİ ·
-  hukuki veya KVKK sonucu olan metin · verinin ANLAMINI değiştiren migration ·
-  yetki kimde (mentör mü menti mi) · canlı veriye geri dönülmez dokunuş · seed atılması ·
-  para/politika · kurumlara görünen metin
+2.3 BAGLAM DOLUNCA DURMA
+    Claude Code baglam siniri yaklasinca OTOMATIK sikistirma yapar; oturum bitmez.
+    · Baglam dolmaya yaklastiginda DURMA. Otomatik sikistirmaya birak.
+    · ⛔ /compact calistirmaya CALISMA — o yalniz kullanici komutudur, sen tetikleyemezsin.
+    · Sikistirma olduktan sonra: 00-KUYRUK.md + 02-ILERLEME.md'nin sonunu TEKRAR OKU,
+      en son BITTI olan isi gor, SIRADAKI isten devam et.
+    · Hicbir sey kaybolmaz: is durumu git'te ve dosyalarda. Hafizana ihtiyacin yok.
 
-Kararsızsan tek soru: "bunu geri almak kolay mı?" Kolaysa KENDİN YAP. Zorsa SOR.
+2.4 BAGLAMI VERIMLI KULLAN (uzun gitmenin yolu)
+    · Kesif/okuma islerini PARALEL ALT-AJANLA yap; ana baglami temiz tut.
+    · Bir dosyanin yalniz gereken kismini oku.
+    · Is bitince ayrintilari baglamda tutma — ozeti 02-ILERLEME'ye yaz, devam et.
+    · CI beklerken bos durma: siradaki isin kok sebep analizine basla.
+      (Istisna: turun son PR'i — orada beklemek dogru.)
 
-═══════════════════════════════════════════════
-3.5 ⛔ SİLME PROTOKOLÜ — SİLME SON ÇAREDİR
-═══════════════════════════════════════════════
-PO kuralı (2026-09-10): "Önemli olan biz neden öyle bir şey yapmışız, onu bildikten sonra
-doğru uygulayalım. Ancak o karar üzerine FARKLI bir karar aldıysak ve son karardan da EMİNSEK
-silebiliriz. Sildiğimiz kısımları arşiv belgesine yazarız ki geri almak istediğimizde ne
-alacağımızı bilelim."
+2.5 NE ZAMAN DURULUR
+    "TUR YARIM KALDI" yazip durmak YALNIZ gercek bir hatada:
+    npm run verify kirmizi ve revert edilemiyor · DB/seed komutu yanlislikla calisti ·
+    merge conflict cozulemiyor · kota tukendi (bunu sen secmezsin, olur).
+    ⛔ Baglam dolmasi bir hata DEGILDIR.
+    Durman gerekirse: son commit+push → 02-ILERLEME.md'nin SONUNA tek satir:
+      "TUR YARIM KALDI — <son biten is> · kalan 🟢: <sayi> · siradaki: <is no> · sebep: <...>"
 
-Hiçbir kod, uç, alan, tablo ya da bileşen şu beş adım tamamlanmadan silinmez:
+═══════════════════════════════════════════════════════════════
+3 — ⛔ ARA KAYIT  (pazarlik disi)
+═══════════════════════════════════════════════════════════════
+Her is bitince ANINDA commit + push. Biriktirme, "sonra hepsini pushlarim" deme.
+Tur yarida kalirsa push EDILMEMIS is KAYBOLUR.
+Gerekce (2026-09-19): uc tur token limitinde durdu; push eden kurtuldu,
+etmeyen ikisinin saatlerce suren emegi tamamen kayboldu.
 
-ADIM 1 — NİYET (zorunlu)
-  Neden yazıldı? Kanıt: git log + commit mesajı + varsa PR açıklaması + docs/ içinde gerekçe.
-  ⛔ "GEREKÇE BULUNAMADI" çıkarsa SİLİNMEZ, karantinaya da alınmaz → PO'ya SOR.
-  Gerekçesi bilinmeyen kod, bilinmeyen bir ihtiyacın cevabı olabilir.
+═══════════════════════════════════════════════════════════════
+4 — SIRA
+═══════════════════════════════════════════════════════════════
+00-KUYRUK.md'deki durumu BEKLIYOR olan 🟢 isleri su oncelikle isle:
+ 1. Kullanicinin EKRANDA gorecegi duzeltmeler — once uctan uca yolculugu
+    tikayanlar (U ve P asamalari)
+ 2. Guvenlik / saglamlik (V asamasi)
+ 3. Kalanlar (K, F, E asamalari)
+Ayni oncelik icinde: en az emekle en cok kullanici degeri once.
 
-ADIM 2 — İKAME KANITI (zorunlu)
-  Bu işi bugün yapan BAŞKA bir yol var mı? Kapsam beyanıyla kanıtla
-  (hangi dizin, hangi desen, harf duyarsız). İkame yoksa silme gündeme bile gelmez.
+Kuyruk asamalari: K (kullanici testi) · F (bilanco devri) · P (panel denetimi) ·
+E (hayalet envanter) · U (uctan uca yolculuk) · V (operasyonel hazirlik).
+Yeni asama gorursen onu da isle.
 
-ADIM 3 — YENİ KARAR VAR MI (zorunlu)
-  Bu konuda sonradan FARKLI bir karar alınmış mı? Belgede kanıtı var mı?
-  Yoksa → PO'ya SOR. "Kullanılmıyor" tek başına gerekçe DEĞİLDİR.
+═══════════════════════════════════════════════════════════════
+5 — HER IS ICIN DONGU
+═══════════════════════════════════════════════════════════════
+a) Durum → CALISILIYOR
+b) KAPI: 🔴 ise ilgili KARAR cevapli mi? Bossa → ATLA, sonrakine gec
+c) ZATEN YAPILMIS MI: kodda kontrol et. Yapilmissa Durum BITTI, Not'a kanit
+   (dosya:satir), YENIDEN YAPMA
+d) KOK SEBEP: kodu oku, kanit al (dosya:satir). Belge ↔ kod celisirse KOD KAZANIR.
+   ⚠️ YANLIS SORU TUZAGI: bir uc cagrilmiyor diye "ozellik yok" DEME.
+      Once sor: bu isi yapan BASKA bir yol var mi?
+      Vaka: /users/me/social oksuz sanildi, is /api/users/me/profile ile CALISIYOR —
+      bes ayri denetimde yanlis raporlandi. Yanlis olan kod degil, sorulan soruydu.
+e) YAZ: kucuk tut, kapsam disi dosyaya dokunma
+f) TEST: mevcutlar + yeni davranisa en az bir test
+   ⛔ KIRIK TEST SILINMEZ, DUZELTILIR (madde 164 dersi)
+g) Commit (Turkce, is no ile) → PR → Bolum 6 dogrulama listesi → kapiya gore merge
+h) ⛔ ARA KAYIT: push et, sonraki ise gecmeden
+i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>")
+j) Kalan 🟢 sayisini 02-ILERLEME'ye yaz, sonraki ise gec
 
-ADIM 4 — ARŞİV BELGESİ (zorunlu, silmeden ÖNCE yazılır)
-  docs/arsiv/silinenler-YYYY-MM-DD.md — silinen her kalem için:
-    · Ne silindi (tam yol, satır aralığı)
-    · Kodun TAM İÇERİĞİ (kod bloğu olarak, kırpmadan)
-    · Neden yazılmıştı (ADIM 1 kanıtı)
-    · Neden siliniyor (ADIM 2 + ADIM 3 kanıtı)
-    · Silmeden önceki son commit hash'i
-    · GERİ ALMA: hangi komutla nasıl geri getirilir (git revert <hash> ya da dosya yolu + commit)
-  ⛔ Arşiv satırı yazılmadan silme commit'i atılmaz.
+═══════════════════════════════════════════════════════════════
+6 — DOGRULAMA LISTESI  (merge oncesi — hepsi ✅ olmadan merge YOK)
+═══════════════════════════════════════════════════════════════
+ [ ] npm run verify yesil
+ [ ] ⚠️ TEST_DATABASE_URL yoksa entegrasyon testleri guard'la DURUR →
+     bunu "yesil" SAYMA; o durumda CI asil kanittir
+ [ ] CI iki repoda da yesil (backend CI yalniz main-hedefli PR'da kosar)
+ [ ] sema degisikligi YOK · seed calistirilmadi
+ [ ] auth / KVKK / matching dosyalarina dokunulmadi (dokunulduysa kapi 🟡'dir)
+ [ ] degisiklik yalniz o isin kapsamindaki dosyalarda
+Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
 
-ADIM 5 — ÖNCE KARANTİNA, SONRA SİLME (iki aşama)
-  Doğrudan silme YOK. Önce KARANTİNA: kod yerinde kalır, devre dışı bırakılır
-  (rota kapatılır / @deprecated işareti / export kaldırılır), arşiv belgesine yazılır.
-  Bir tur boyunca bir şey bozulmazsa, PO'nun İKİNCİ onayıyla gerçekten silinir.
-  ⛔ Karantina 🟡'dır (PR'da durur), silme 🔴'dır (PO kararı ister).
+═══════════════════════════════════════════════════════════════
+7 — KAPI POLITIKASI
+═══════════════════════════════════════════════════════════════
+🟢 VARSAYILANDIR → yap, dogrulama listesi tamsa MERGE ET, canliya al.
+🟡 yalniz su uc istisnada → yap, PR ac, MERGE ETME:
+   1. migration / seed gerektiriyorsa
+   2. hassas dosyaya dokunuyorsa: auth/yetkilendirme (guard, middleware, token,
+      session) · KVKK/riza/aydinlatma/veri imha-disa aktarma · matching/eslestirme/skorlama
+   3. canli veriye geri donulmez dokunuyorsa
+🔴 ilgili KARAR cevapsiz → DOKUNMA, atla, sonrakine gec.
 
-Bu protokol şunların hepsi için geçerlidir: uç · alan · tablo · bileşen · servis · dosya · test.
-⚠️ İstisna YOK. "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz.
+═══════════════════════════════════════════════════════════════
+8 — BACKEND ISLERI VE SUBMODULE POINTER
+═══════════════════════════════════════════════════════════════
+Backend (menti-mentor) bir SUBMODULE'dur.
+· Backend PR'lari backend reposunda acilir ve merge edilir.
+· Turun SONUNDA (ya da durman gerekirse durmadan once) TEK submodule pointer bump yap —
+  her isten sonra ayri ayri degil.
+· Ata kontrolu: `git merge-base --is-ancestor <eski> <yeni>` basarisizsa BUMP YAPMA, bildir.
+· ⛔ Bump olmadan backend duzeltmesi CANLIYA CIKMAZ.
+· Teyit: cati pointer == backend main HEAD. Sonucu 02-ILERLEME'ye yaz.
 
-═══════════════════════════════════════════════
-4. KARAR YAZMA BİÇİMİ — PO BUNA BAKIP KARAR VERECEK
-═══════════════════════════════════════════════
-Ürün kararına geldiğinde: 01-KARARLAR.md'nin SONUNA ekle, o işi ATLA, DURMA, SONRAKİNE GEÇ.
-PO teknik bilmiyor. Her kararı ŞU ŞABLONLA yaz — hiçbir satırı boş bırakma:
+═══════════════════════════════════════════════════════════════
+9 — KARAR NOKTASI
+═══════════════════════════════════════════════════════════════
+Teknik kararlari SEN ver, sorma: kutuphane · dosya yapisi · isimlendirme · state
+yonetimi · test yontemi · refaktor kapsami · hata mesaji metni · renk paleti ·
+hizalama · index/performans · ceviri.
 
-### KARAR-N · <kısa başlık>  [ÜRÜN KARARI]
-**Şu an ne var:** mevcut davranış, kullanıcı gözünden. Kanıt: dosya:satır
-**Sorun ne:** kullanıcı için ne eksik/yanlış. Teknik terim kullanma; kullanırsan parantezle açıkla.
-**Neden sana soruyorum:** bunun teknik değil ürün kararı olmasının sebebi (tek cümle)
-**Seçenekler:**
-  A) <ad>
-     · Kullanıcı ne görür: …
-     · Ne kazanırsın: …
-     · Ne kaybedersin: …
-     · Süre: S/M/L · Geri alınır mı: evet/hayır/zor · Migration: var/yok
-  B) <ad>  (aynı beş satır)
-  C) <ad>  (aynı beş satır)
-**Karşılaştırma:** hangisi hangi durumda doğru — 2-3 cümle, dürüst, taraf tutmadan
-**Benim önerim:** <harf> — çünkü <tek cümle>
-**Cevap vermezsen:** bu iş atlanmış kalır; şunlar da etkilenir: K-xx
-**CEVAP:**
+DUR ve kart ac (urun karari / geri donulmez): kullanici neyi gorecek/yapabilecek ·
+bir ozellik var mi yok mu · bir ozelligin silinmesi · hukuki/KVKK sonucu olan metin ·
+verinin anlamini degistiren migration · yetki kimde · canli veriye geri donulmez
+dokunus · seed · kurumlara gorunen metin.
+Kararsizsan tek soru: "bunu geri almak kolay mi?" Kolaysa kendin yap, zorsa kart ac.
 
-⚠️ Seçenekler GERÇEKTEN farklı sonuç vermeli. Aynı şeyin iki tonu = kötü karar kartı.
-⚠️ "Ne kaybedersin" ASLA boş kalmaz. Her seçeneğin bedeli vardır.
-⚠️ Kendi önerine güvenmiyorsan yaz: "bu senin ürün kararın, önerime güvenme."
+Kart: 01-KARARLAR.md'nin SONUNA ekle (mevcut en yuksek numaradan devam, numarayi
+DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir ekle.
 
-═══════════════════════════════════════════════
-5. PARALELLİK — ŞERİT SİSTEMİ
-═══════════════════════════════════════════════
-OKUMA (keşif, arkeoloji, envanter): SINIRSIZ paralel alt-ajan. İstediğin kadar koş.
-YAZMA: en fazla 4 şerit, paralel. Her şeridin SAHİP OLDUĞU dosyalar vardır (00-KUYRUK'ta).
+  ### KARAR-N · <baslik> (n isi acar)  [URUN KARARI]
+  **Su an ne var:** kullanici gozunden, kanit dosya:satir
+  **Sorun ne:** teknik terim kullanma; kullanirsan parantezle acikla
+  **Neden sana soruyorum:** teknik degil urun karari olmasinin sebebi
+  **Secenekler:** A/B/C — her biri icin:
+    · Kullanici ne gorur · Ne kazanirsin · Ne kaybedersin
+    · Sure S/M/L · Geri alinir mi · Migration var/yok
+  **Karsilastirma:** hangisi hangi durumda dogru, 2-3 cumle, taraf tutmadan
+  **Benim onerim:** <harf> — cunku <tek cumle>
+  **Cevap vermezsen:** hangi isler etkilenir
+  **CEVAP:**
 
-⛔ ŞERİT KURALI: Bir şerit, başka şeridin sahip olduğu dosyaya DOKUNMAZ.
-   Bir iş başka şeridin dosyasını gerektiriyorsa → o iş sahibi şeride taşınır.
-   İki şerit aynı dosyaya ihtiyaç duyuyorsa → o iki iş SIRALI yapılır.
-   Şüphede: SIRALI. Bozuk kod, hızlı koddan pahalıdır.
+⚠️ "Ne kaybedersin" ASLA bos kalmaz. Secenekler GERCEKTEN farkli sonuc vermeli.
+⚠️ Ust sinir yok ama KUMELE: ayni urun sorusunu paylasan kalemler tek kartta.
+⛔ CEVAP satirini DOLDURMA — yalniz PO yazar.
 
-Her şerit kendi dalını kullanır, kendi PR'ını açar.
-Dal adı: otonom/K-xx-kisa-ad-YYYYMMDD
-02-ILERLEME.md'ye yazarken TEK SEFERDE ekle (append), başkasının satırını silme, çakışırsan yeniden dene.
-Git kilidi: iki şerit aynı anda commit atmasın; sıra bekle.
+═══════════════════════════════════════════════════════════════
+10 — DEVSECOPS  (degismez kurallar)
+═══════════════════════════════════════════════════════════════
+⛔ MIGRATION/DB: canli = lokal AYNI Neon, restore penceresi 6 SAAT.
+   Yalniz ilgili KARAR "evet" ise VE etkilenen tablo icin tarihli yedek tablo alindiysa.
+   Yedek adi + satir sayisi 02-ILERLEME'ye yazilir.
+⛔ SEED: seed.ts / npm run seed / prisma db seed ASLA.
+   Guvenli olanlar (seed-questions · seed-learning-journey · seed-certification ·
+   seed-test-tenant) da ancak KARAR evet + yedek sonrasi.
+⛔ SILME SON CAREDIR. Sirasiyla: NIYET (neden yazildi — git log/commit/PR/docs; gerekce
+   bulunamazsa SILINMEZ, PO'ya sor) → IKAME KANITI (bu isi yapan baska yol var mi,
+   kapsam beyaniyla) → YENI KARAR (sonradan farkli karar alinmis mi) → ARSIV
+   (docs/arsiv/silinenler-YYYY-MM-DD.md: tam yol, kodun TAM icerigi, neden yazilmisti,
+   neden cikariliyor, son commit hash, geri alma komutu) → KARANTINA (kod yerinde,
+   devre disi) → PO'nun IKINCI onayiyla silme.
+   "Kullanilmiyor" · "zaten olu" · "mukerrer" tek basina gerekce DEGILDIR.
+⛔ YASAK BOLGE: server.ts'in rate limit / trust proxy kismi. Yanlis ayar tum limiti
+   sessizce cokertir ve fark edilmesi zordur. PO'nun basinda oldugu ayri tura aittir.
+⛔ PO ISLERI: Dokploy / sunucu / hesap / DNS / SMTP / kalici disk ayari AJAN YAPAMAZ.
+   Kuyrukta oyle bir satir gorursen Durum'u degistirme; 03-PO-ELLE-ISLER.md'de
+   karsiligi var mi bak, yoksa ekle, devam et.
+⛔ #110 "MERGE ETME" isaretli PR'a DOKUNMA.
+⛔ .env degeri, gercek kullanici verisi, gizli anahtar HICBIR yere yazilmaz. Repo PUBLIC.
+⛔ Kisi adi kullanma (CLAUDE.md — Kisi Adi Yasagi).
 
-═══════════════════════════════════════════════
-5.5 ⛔ ARA KAYIT — PAZARLIK DIŞI
-═══════════════════════════════════════════════
-Her iş bitince ANINDA commit + push. Biriktirme, "sonra hepsini pushlarım" deme.
-Tur yarıda kalırsa push EDİLMEMİŞ iş KAYBOLUR.
-Gerekçe (2026-09-19): üç tur token limitinde durdu; push eden kurtuldu,
-etmeyen ikisinin saatlerce süren emeği tamamen kayboldu.
-Bağlam/token azalmaya başladığında: son commit+push → 02-ILERLEME.md'ye
-"TUR YARIM KALDI — <hangi iş>" satırı → DUR. Yeni iş BAŞLATMA.
+═══════════════════════════════════════════════════════════════
+11 — HATA SENARYOLARI
+═══════════════════════════════════════════════════════════════
+· Test 2 denemede yesil olmuyor → BASARISIZ, sebep Not'a, dali BIRAK (silme), devam
+· Bir is 90 dakikayi asiyor → commit+push, BASARISIZ "boyut yanlis",
+  KARAR'a "bolunsun mu" karti, devam
+· Kok sebep koddan bulunmuyor (canli log gerek) → yapilabileni yap (anlasilir hata
+  mesaji), KARAR'a "canlida su loga bakilmali" yaz, devam
+· Merge conflict → cozme, BASARISIZ + Not, devam
+· Iki is ayni dosyaya dokunuyor → sirali yap, paralel yapma
+· npm run verify kirmizi → sebep olan PR'i REVERT et, 02-ILERLEME'nin EN USTUNE
+  buyuk harfle yaz, DUR (2.5)
+· Canlida bir seyin bozuldugunu fark ettin → ilgili PR'i REVERT et, yaz, devam
+· Calisma agacinda beklenmedik degisiklik → 0.1 kurali (stash), devam
+· Yanlislikla DB/seed komutu calistirdin → HEMEN DUR, 02-ILERLEME'nin EN USTUNE
+  buyuk harfle yaz, baska hicbir sey yapma
 
-═══════════════════════════════════════════════
-5.6 PO İŞİ / AJAN İŞİ AYRIMI
-═══════════════════════════════════════════════
-⛔ Bir iş Dokploy/sunucu/hesap ayarı gerektiriyorsa AJAN YAPAMAZ.
-Kuyrukta öyle bir satır görürsen: YAPMAYA ÇALIŞMA, Durum'u değiştirme,
-03-PO-ELLE-ISLER.md'de karşılığı var mı bak, yoksa oraya ekle, devam et.
+═══════════════════════════════════════════════════════════════
+12 — KANIT DISIPLINI
+═══════════════════════════════════════════════════════════════
+· Her "duzeltildi": dosya:satir + test adi
+· "sanirim / muhtemelen / buyuk ihtimalle" YASAK → "TEYIT GEREK" + ne gerekiyor
+· Negatif iddia ("yok", "cagrilmiyor") KAPSAM BEYANI ister: hangi dizin · hangi desen ·
+  harf duyarsiz mi · iki dilli mi (mentor↔mentör · tenant↔kurum · meeting↔görüşme ·
+  invite↔davet)
+· Sayi verirken BIRIMI tanimla
+· Test: kac kostu / kaci gecti ("CI yesil" demek yetmez)
+· Raporda YAPTIGINI degil KULLANICININ GORECEGINI yaz:
+  ✅ "artik /disc-test aciliyor"   ❌ "loading state duzeltildi"
 
-═══════════════════════════════════════════════
-5.7 ÇALIŞMA ORTAMI — ÜÇ MOD
-═══════════════════════════════════════════════
-· YEREL: yürütme yerelde; merge, DB erişimi, pointer bump YAPILABİLİR.
-· BULUT (claude.ai/code): yalnız repodaki dosyaları görür; dal+PR gönderir,
-  main'e MERGE ETMEZ; Neon/Dokploy YOK → migration/seed atlanır.
-· REMOTE CONTROL: yerel oturum + telefondan kontrol. Yürütme YERELDE kalır →
-  merge edebilir, DB'ye erişebilir, pointer bump yapabilir. Bulut bunları yapamaz.
+═══════════════════════════════════════════════════════════════
+13 — KAPANIS  (YALNIZ 2.1 kosulu saglanirsa)
+═══════════════════════════════════════════════════════════════
+13.1 Backend isi yapildiysa: Bolum 8'e gore TEK pointer bump + teyit.
 
-═══════════════════════════════════════════════
-5.8 ⛔ YASAK BÖLGE
-═══════════════════════════════════════════════
-server.ts'in rate limit / trust proxy kısmına DOKUNMA.
-K-14 ve F-04 aynı dosyada; yanlış trust proxy ayarı TÜM rate limit'i
-sessizce çökertir ve fark edilmesi zordur. Bu iş PO'nun başında olduğu
-ayrı bir tura aittir.
+13.2 Belge senkronu — TEK PR, EN SON:
+     Bir is merge edilmeden belgeye "CANLIDA" YAZILMAZ.
+     Kontrol: `gh pr list --state open --author @me` bu turun islerinden bos olmali.
+     · 09-DURUM.md: EN USTE yeni tarihli bolum (eskiyi silme)
+     · 00-KARAR-TAKIP.md: yalniz bu turda degisenler · NUMARA VERME · "aday" etiketi ·
+       eski satiri silme, ustunu ciz
+     · docs/devir/ oturum gunlugu: bir kayit
 
-═══════════════════════════════════════════════
-6. HER İŞ İÇİN DÖNGÜ
-═══════════════════════════════════════════════
-a) 00-KUYRUK'ta Durum → çalışılıyor
-b) Kapı: 🔴 ise KARAR cevaplı mı? Boşsa → ATLA, sonrakine geç
-c) Kök sebep: kodu oku, kanıt (dosya:satır) al. Belge ile kod çelişirse KOD KAZANIR.
-   ⚠️ YANLIŞ SORU TUZAĞI: bir uç çağrılmıyor diye "özellik yok" DEME.
-      Önce sor: bu işi yapan BAŞKA bir yol var mı? Varsa bulgu "eksik özellik" değil MÜKERRER KOD'dur.
-      (Gerçek vaka: /users/me/social öksüz sanıldı; iş /api/users/me/profile ile ÇALIŞIYOR.)
-d) Yaz. Küçük tut. Kapsam dışı dosyaya dokunma.
-e) Test: mevcutlar + yeni davranışa en az bir test.
-   ⛔ KIRIK TEST SİLİNMEZ, DÜZELTİLİR. (madde 164 dersi)
-f) Commit (Türkçe, iş no ile) → PR → §2 doğrulama listesi → merge ya da bırak
-g) 00-KUYRUK Durum güncelle + tek satır Not · 02-ILERLEME'ye kayıt
-h) Sonraki iş
+13.3 02-ILERLEME.md'nin EN BASINA tur ozeti:
+     BITTI ve CANLIDA: n is — her biri "kullanici artik sunu goruyor" cumlesiyle
+     KARAR BEKLIYOR: n — hangi KARAR numaralari
+     BASARISIZ: n — sebepleriyle
+     CANLIDA KONTROL EDILECEKLER: kisa liste
+     PO'NUN KENDI YAPMASI GEREKENLER: 03-PO-ELLE-ISLER.md atfi + en kritik 3'u
+     KUYRUK SON DAGILIMI: 🟢 / 🟡 / 🔴
+     BACKEND: pointer eski → yeni + esitlik teyidi
+     STASH: `git stash list` bossa "yok", doluysa icerigi
 
-═══════════════════════════════════════════════
-7. HATA SENARYOLARI
-═══════════════════════════════════════════════
-· Test 2 denemede yeşil olmuyor → BAŞARISIZ işaretle, sebep Not'a, dalı BIRAK (silme), devam et
-· Bir iş 3 saati aşıyor → BAŞARISIZ "boyut yanlış", KARAR'a "bölünsün mü", devam et
-· Kök sebep koddan bulunmuyor (canlı log gerek) → yapılabileni yap (anlaşılır hata mesajı),
-  KARAR'a "canlıda şu loga bakılmalı" yaz
-· Merge conflict → çözme, BAŞARISIZ + Not, devam et
-· İki şerit aynı dosyayı istedi → ikincisi bekler, olmuyorsa BAŞARISIZ + Not
-· Beklenmedik uncommitted değişiklik → DOKUNMA, yaz, devam
-· Bağlam doluyor → önce 02-ILERLEME'yi güncelle, sonra dur
-· Yanlışlıkla DB/seed komutu çalıştırdın → HEMEN DUR, 02-ILERLEME'nin EN ÜSTÜNE büyük harfle yaz,
-  başka hiçbir şey yapma
-· Canlıda bir şeyin bozulduğunu fark ettin → ilgili PR'ı REVERT et, yaz, devam et
-
-═══════════════════════════════════════════════
-8. KANIT DİSİPLİNİ
-═══════════════════════════════════════════════
-· Her "düzeltildi": dosya:satır + test adı
-· "sanırım/muhtemelen" YASAK → "TEYİT GEREK" + ne gerekiyor
-· Negatif iddia kapsam beyanı ister: hangi dizin, hangi desen, harf duyarsız mı
-· Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz
-  ("artık /disc-test açılıyor" > "loading state düzeltildi")
-· .env değeri, gerçek kullanıcı verisi, gizli anahtar hiçbir yere yazılmaz
-
-═══════════════════════════════════════════════
-9. KAPANIŞ (kuyruk bitince ya da yalnız atlanmış/başarısız kalınca)
-═══════════════════════════════════════════════
-K-20 belge senkronu: TEK PR ile 09-DURUM (yeni bölüm EN ÜSTE, tarihli) ·
-00-KARAR-TAKIP (yalnız bu turda kapanan/açılan, NUMARA VERME, "aday" etiketi, eski satırı silme) ·
-docs/devir/07-oturum-gunlugu.md (bir kayıt).
-
-Sonra 02-ILERLEME.md'nin EN BAŞINA özet:
-  BİTTİ ve CANLIDA: n iş — her biri "kullanıcı artık şunu görüyor" cümlesiyle
-  KARAR BEKLİYOR: n — hangi KARAR numaraları
-  BAŞARISIZ: n — sebepleriyle
-  CANLIDA KONTROL EDİLECEKLER: kısa liste
-  PO'NUN KENDİ YAPMASI GEREKENLER: altyapı/hesap işleri
-
-PO'nun turdan sonra okuyacağı TEK dosya 02-ILERLEME, cevaplayacağı TEK dosya 01-KARARLAR.
-
-═══════════════════════════════════════════════
-10. ⛔ DURMAMA KURALI (PO kararı 2026-09-20)
-═══════════════════════════════════════════════
-Önceki tur 49 tane 🟢 iş dururken K-20 yapıp kapandı. KABUL EDİLMEZ.
-
-D.1 KAPANIŞ KOŞULU — K-20 belge senkronunu YALNIZ şu durumda yap:
-    kuyrukta durumu BEKLIYOR olan ve kapısı 🟢 olan HİÇBİR iş kalmadıysa.
-    ⛔ Bir tane bile 🟢 BEKLIYON iş varsa K-20 YAPMA, TURU KAPATMA, sonrakine geç.
-    Her iş bitiminde kaç 🟢 kaldığını SAY ve 02-ILERLEME'ye yaz.
-
-D.2 KENDİ KAPSAMINI DARALTMA — "yalnız küçük/güvenli olanları seçeyim" YAPMA.
-    Zor görünen işi küçült ama ATLAMA. Gerçekten yapılamıyorsa BAŞARISIZ
-    işaretle, sebebini yaz, sonrakine geç.
-
-D.3 BAĞLAM YÖNETİMİ — uzun gitmenin asıl yolu:
-    · Keşif/okuma işlerini PARALEL ALT-AJANLA yap, ana bağlamı temiz tut
-    · Bir dosyanın yalnız gereken kısmını oku, tamamını değil
-    · İş bitince ayrıntıları bağlamda TUTMA — özeti 02-ILERLEME'ye yaz, devam et
-    · Bağlam %70'i geçince /compact KULLAN ve DEVAM ET
-      ⛔ Sıkıştırma sonrası 00-KUYRUK + 02-ILERLEME'yi TEKRAR OKU, kaldığın yerden sür
-
-D.4 BAĞLAM YİNE DE DOLARSA:
-    ⛔ K-20 YAPMA — K-20 "kuyruk bitti" sinyalidir, "kesildim" değil.
-    Yap: son commit+push → 02-ILERLEME'nin SONUNA tek satır:
-      "TUR YARIM KALDI — <son biten iş> · kalan 🟢: <sayı> · sıradaki: <iş no>"
-    → DUR. PO sabah aynı promptu gönderecek.
-
-═══════════════════════════════════════════════
-11. ⛔ ARA KAYIT (pazarlık dışı)
-═══════════════════════════════════════════════
-Her iş bitince ANINDA commit + push. Biriktirme, "sonra hepsini pushlarım" deme.
-Tur yarıda kalırsa push EDİLMEMİŞ iş KAYBOLUR.
-Gerekçe (2026-09-19): üç tur durdu; push eden kurtuldu, etmeyen ikisinin
-saatlerce süren emeği tamamen kayboldu.
+PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-KARARLAR.
