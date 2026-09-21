@@ -6,6 +6,18 @@
 **Analiz tabanı:** `origin/otonom/BB-devir-uygulama-20260921` (main bayat — BB merge BEKLİYOR).
 **Kuyruk öneki:** `Y-??` · **Dal:** `otonom/CD-konsey-yonetisim-20260921`
 
+> ⚠️ **GÜNCELLEME (2026-09-21, BC turu — atıf haritası):** Bu rapordaki **tüm `CLAUDE.md:<satır>` atıfları
+> BÖLME ÖNCESİ dosyaya aittir** (47.456 karakter · 712 satır). §B.4-1'in önerdiği taşıma **aynı gün uygulandı**
+> (bu rapor 📸 dondurulmuş olduğu için satırları tek tek değiştirilmedi — Belge Düzeltme Deseni). Yeni adresler
+> **bölüm adıyla**:
+> · **KURAL 8-16 gövdeleri** (eski `:376-462`; bu raporda `:377` · `:381` · `:383` · `:383-393` · `:402` · `:412`)
+>   → `docs/kararlar/konu/belge-duzeni-rehberi.md` § "⭐ KURAL 8-16 — `CLAUDE.md`'den taşındı (2026-09-21)".
+>   `CLAUDE.md`'de yerinde **tek satır atıf** kaldı: § "Belge düzeni — KURAL 1-16".
+> · **RTK komut kataloğu** (eski `:575-710`) → `docs/kararlar/konu/rtk-komut-rehberi.md`.
+>   `CLAUDE.md`'de yerinde atıf: § "RTK — token-tasarruflu komutlar" (⛔ kural AKTİF, yalnız gövdesi taşındı).
+> Bölme sonrası `CLAUDE.md` = **34.742 karakter**. Bu iki blok dışındaki satır numaraları da kaydı
+> (376'dan sonrası), o atıflar bu turda KASITLI olarak ellenmedi.
+
 ---
 
 ## 0. ⭐ ÖNCE OKU — en kritik 3 bulgu
