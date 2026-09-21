@@ -16,6 +16,7 @@ import './globals.css';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { AuthTenantBridge } from '@/providers/AuthTenantBridge';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { getSiteUrl } from '@/lib/siteUrl';
 
 /**
  * FOUC önleme: React hidrasyonundan ÖNCE `<html>` üzerine tema class'ını senkron uygula.
@@ -30,13 +31,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  // F-29: metadataBase → OG/canonical gibi göreli URL'ler mutlak URL'e çözülür.
+  metadataBase: new URL(getSiteUrl()),
   title: { template: '%s — Mentorluk Platformu', default: 'Mentorluk Platformu' },
   description: 'Mentor-menti eşleştirme platformu',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr" suppressHydrationWarning>
+    <html lang="tr-TR" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
