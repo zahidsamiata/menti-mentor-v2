@@ -51,7 +51,15 @@ Gerekçe (Tur 1'de yaşandı): 32 dakikanın kayda değer kısmı CI beklemekle 
 İstisna: turun SON PR'ı (K-20) — orada beklemek doğru, yapılacak başka iş yok.
 
 ## Durum kodları
-BEKLIYOR · CALISILIYOR · BITTI · ATLANDI(karar) · BASARISIZ · IPTAL(PO)
+~~[ESKİ · 2026-09-21] BEKLIYOR · CALISILIYOR · BITTI · ATLANDI(karar) · BASARISIZ · IPTAL(PO)~~
+⚠️ **GÜNCELLEME (2026-09-21, BE turu): `PR-ACIK` EKLENDİ — 7 kod.**
+**BEKLIYOR · CALISILIYOR · PR-ACIK · BITTI · ATLANDI(karar) · BASARISIZ · IPTAL(PO)**
+⭐ **`PR-ACIK`** = iş YAPILDI, PR AÇILDI, ama **MERGE EDİLMEDİ**.
+Kanıt: `docs/otonom/OTONOM-PROMPT.txt:81-82` (canonical, en yeni) — motorun her tur okuduğu dosya zaten
+7 kod sayıyordu; kuyruk 6 sayıyor ama gövdesinde `PR-ACIK`'ı **kullanıyordu** (F-19, GV-01/02).
+Bu, **YN-07**'nin tam vakasıydı; hizalama o satırın bir ayağını kapatır. ⚠️ `belge-duzeni-rehberi.md` § KURAL 10'daki
+`✅·🟡·🔀·⬜·❓·🗑️` **AYRI bir alfabedir** (karar-takip **kart kodları**) — bu liste **kuyruk satırı durumları** içindir;
+ikisi karıştırılmaz (YN-07'nin ikinci ayağı).
 
 ---
 
@@ -74,13 +82,17 @@ BEKLIYOR · CALISILIYOR · BITTI · ATLANDI(karar) · BASARISIZ · IPTAL(PO)
 > ⭐ **AŞAMA I dâhil her işten ÖNCE.** Güvenlik konseyinin iki numaralı bulgusu: kimlik istek **gövdesinden**
 > alındığı için bir kullanıcı **başkasının adına** hareket edebiliyor. İkisi de canlıda, ikisi de sömürüsü basit.
 > Kaynak: `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md` §0①/②.
-> ⚠️ **Bu iki satır bu turda KODLANMIYOR** — ayrı bir bulut turu (`otonom/BD-...`) düzeltme PR'ini hazırlıyor.
-> Bu kuyruk satırları işin **görünür kalması** içindir; o PR merge edilince `BITTI`'ya çekilir.
+> ~~[ESKİ · 2026-09-21] **Bu iki satır bu turda KODLANMIYOR** — ayrı bir bulut turu (`otonom/BD-...`) düzeltme PR'ini hazırlıyor.~~
+> ✅ **GÜNCELLEME (2026-09-21, BE turu): DÜZELTME PR'İ HAZIR VE ONAYLANDI.**
+> Backend dalı `otonom/BD-guvenlik-kimlik-sahteciligi-20260921` · **strateji katmanı inceledi ve onayladı** ·
+> ikisinin de Durumu **`PR-ACIK`** · **PO merge edecek.**
+> ⚠️ **Merge sonrası ÇATI POINTER BUMP gerekir** (`git submodule update --remote backend` → `git add backend` →
+> commit → çatı PR) — `CLAUDE.md` § "Merge sonrası pointer bump". Bulut bunu yapamaz, terminal turu gerekir.
 
 | # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
 |---|---|---|---|---|---|---|
-| GV-01 | Ş0 | **⛔ Puanlama geri bildiriminde kimlik istemciden alınıyor — bir kullanıcı tanımadığı iki kişinin mentörlük ilişkisini sonlandırabiliyor.** Aynı uç gerçek geri bildirimin üzerine yazıyor ve kayda sahte rol basıyor. | 🟡 | Kullanıcı artık başkasının eşleşmesine geri bildirim yazamıyor ve başkasının mentörlüğünü bitiremiyor; kimlik ve rol yalnız oturumdan alınıyor | BEKLIYOR | ⛔ ÇIKIŞ BLOKERİ · 🔴 KİMLİK SAHTECİLİĞİ · ayrı bulut turu (otonom/BD-...) düzeltme PR'i hazırlıyor — o PR merge edilince BITTI · 🟡 auth+matching. **G-2 · güvenlik konseyi §0①/§3.1.** Kanıt (orkestratör teyitli): `sjtScoringController.ts:39-40` (`fromUserId`+`role` gövdeden) · `:255` `{...parsed.data, tenantId}` · `feedback.service.ts:26-32` yalnız tenant · **`:61-65` `match.updateMany({status:'EARLY_EXIT'})`**. Karşı örnek aynı dosyada `:230-231`. Şiddet: 🔴 KRİTİK |
-| GV-02 | Ş0 | **⛔ Görüşme değerlendirmesine sahiplik kapısı yok — herkes başkasının görüşmesine puan yazabiliyor.** Hedef mentörün kalıcı kalite katsayısı düşürülebiliyor, hedef mentiye oryantasyon kilidi bastırılabiliyor, gerçek taraflar bir daha yazamıyor. | 🟡 | Kullanıcı artık yalnız kendi katıldığı görüşmeyi değerlendirebiliyor; başkasının görüşmesine yazma denemesi reddediliyor | BEKLIYOR | ⛔ ÇIKIŞ BLOKERİ · 🔴 KİMLİK SAHTECİLİĞİ · ayrı bulut turu (otonom/BD-...) düzeltme PR'i hazırlıyor — o PR merge edilince BITTI · 🟡 auth. **G-1 · güvenlik konseyi §0②/§3.1.** Kanıt: `meetingRoutes.ts:86` her role açık; `feedbackController.ts:30-104` içinde `req.auth` **0 kez**; uç `mentorUserId`/`mentiUserId`'yi `:38`'de **zaten seçiyor**. Karşı örnek aynı dosyada `:122-128`. Etki: `:83` kalite katsayısı · `:92-96` oryantasyon kilidi · `:69-72` 409 kilidi. ⚠️ `tests/` altında sahiplik testi **YOK** → düzeltmeyle birlikte test. ⚠️ **V-15 ile zincirli** (kilidi basan yer burası) |
+| GV-01 | Ş0 | **⛔ Puanlama geri bildiriminde kimlik istemciden alınıyor — bir kullanıcı tanımadığı iki kişinin mentörlük ilişkisini sonlandırabiliyor.** Aynı uç gerçek geri bildirimin üzerine yazıyor ve kayda sahte rol basıyor. | 🟡 | Kullanıcı artık başkasının eşleşmesine geri bildirim yazamıyor ve başkasının mentörlüğünü bitiremiyor; kimlik ve rol yalnız oturumdan alınıyor | PR-ACIK | ⛔ ÇIKIŞ BLOKERİ · 🔴 KİMLİK SAHTECİLİĞİ · ayrı bulut turu (otonom/BD-...) düzeltme PR'i hazırlıyor — o PR merge edilince BITTI · 🟡 auth+matching. **G-2 · güvenlik konseyi §0①/§3.1.** Kanıt (orkestratör teyitli): `sjtScoringController.ts:39-40` (`fromUserId`+`role` gövdeden) · `:255` `{...parsed.data, tenantId}` · `feedback.service.ts:26-32` yalnız tenant · **`:61-65` `match.updateMany({status:'EARLY_EXIT'})`**. Karşı örnek aynı dosyada `:230-231`. Şiddet: 🔴 KRİTİK ✅ **STRATEJİ KATMANI İNCELEDİ VE ONAYLADI (2026-09-21)** — backend dal `otonom/BD-guvenlik-kimlik-sahteciligi-20260921`. Kimlik yalnız oturumdan (`req.auth`) · rol `TenantMembership`'ten · `Match` alanları profil-id tuttuğu için taraf karşılaştırması **ilişki üzerinden** (doğru) · görüşme **yazma** ucu **okuma** ucunun desenini birebir alıyor · taraf kontrolü **hiçbir yazmadan ÖNCE** · **EK AÇIK kapatıldı:** taraf olmak yetmiyor, **alan bölümlemesi** (mentör kendi kalite puanını, menti kendine kilit basamaz) · **11 test**. Durum: **PR-ACIK** → PO merge edecek → ⚠️ **merge sonrası ÇATI POINTER BUMP gerekir.** |
+| GV-02 | Ş0 | **⛔ Görüşme değerlendirmesine sahiplik kapısı yok — herkes başkasının görüşmesine puan yazabiliyor.** Hedef mentörün kalıcı kalite katsayısı düşürülebiliyor, hedef mentiye oryantasyon kilidi bastırılabiliyor, gerçek taraflar bir daha yazamıyor. | 🟡 | Kullanıcı artık yalnız kendi katıldığı görüşmeyi değerlendirebiliyor; başkasının görüşmesine yazma denemesi reddediliyor | PR-ACIK | ⛔ ÇIKIŞ BLOKERİ · 🔴 KİMLİK SAHTECİLİĞİ · ayrı bulut turu (otonom/BD-...) düzeltme PR'i hazırlıyor — o PR merge edilince BITTI · 🟡 auth. **G-1 · güvenlik konseyi §0②/§3.1.** Kanıt: `meetingRoutes.ts:86` her role açık; `feedbackController.ts:30-104` içinde `req.auth` **0 kez**; uç `mentorUserId`/`mentiUserId`'yi `:38`'de **zaten seçiyor**. Karşı örnek aynı dosyada `:122-128`. Etki: `:83` kalite katsayısı · `:92-96` oryantasyon kilidi · `:69-72` 409 kilidi. ⚠️ `tests/` altında sahiplik testi **YOK** → düzeltmeyle birlikte test. ⚠️ **V-15 ile zincirli** (kilidi basan yer burası) ✅ **STRATEJİ KATMANI İNCELEDİ VE ONAYLADI (2026-09-21)** — backend dal `otonom/BD-guvenlik-kimlik-sahteciligi-20260921`. Kimlik yalnız oturumdan (`req.auth`) · rol `TenantMembership`'ten · `Match` alanları profil-id tuttuğu için taraf karşılaştırması **ilişki üzerinden** (doğru) · görüşme **yazma** ucu **okuma** ucunun desenini birebir alıyor · taraf kontrolü **hiçbir yazmadan ÖNCE** · **EK AÇIK kapatıldı:** taraf olmak yetmiyor, **alan bölümlemesi** (mentör kendi kalite puanını, menti kendine kilit basamaz) · **11 test**. Durum: **PR-ACIK** → PO merge edecek → ⚠️ **merge sonrası ÇATI POINTER BUMP gerekir.** |
 
 ---
 
