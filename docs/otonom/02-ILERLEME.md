@@ -4,6 +4,14 @@
 
 ---
 
+## TUR DEVAM — TUR AD (2026-09-21) · /goal: tüm 🟢 BEKLIYOR bitirilecek
+İkinci dalga CANLIDA (merge + pointer bump 1ad47f5→81523fa): **V-01, V-02, V-08, V-11, V-14, F-25, F-22, F-15, F-16** + **F-26/U-05 zaten yapılmış (§5c)**.
+- Ops (PR #84+#227): /health'e smtp+cron · 500 log meta+process handler · .dockerignore fix · platform mail gerçek probe.
+- FE: görüşme paylaşım kartı (#226) · menti bekleme umut sinyali + DISC özgüven tonu (#228) · docker BACKEND_URL (#225).
+Kalan 🟢 sürüyor (K-04/05/06/08/10/11 · F-01/10/13/14/19/21/27/28/31/32/33 · P-10 · V-09 · E-3).
+
+---
+
 ## TUR ÖZETİ — TUR AD (2026-09-21) · 6 iş CANLIDA · TUR YARIM (kalan 🟢 ~22)
 
 **Neden yarım:** Kuyrukta hâlâ 🟢 BEKLIYOR iş var → K-20 (belge senkronu) yapılmadı (DURMAMA: K-20 yalnız hiç 🟢 kalmayınca). Bağlam yönetimi için temiz kesim. Her iş ANINDA commit+push+merge edildi (ARA KAYIT).
