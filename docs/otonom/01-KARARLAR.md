@@ -48,6 +48,14 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ⬜ boş · pedagoji · cevap-anahtarı sızması |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
 | KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
+| **KARAR-35** | **Canlı DB'ye salt-okuma izni** | **5+** (md.30·33·118, S10, Y6) | ⬜ boş · ⭐ BB turu · en çok iş açan yeni kart |
+| **KARAR-36** | **Yarım 3 teknik kalem** (`answeredFollowup` · ikiz alan · 2 yedek tablo) | **4** (Y-18, D3, S26, S37) | ⬜ boş · ⭐ BB turu · ⚠️ `migrate dev` yedek tabloyu silebilir |
+| **KARAR-34** | **Kulüp tipi kurum + kurumlar arası görünürlük** | **3** (md.91·115·116) | ⬜ boş · ⭐ BB turu · avukat notu var |
+| **KARAR-30** | **Senaryo isimleri: seed'den önce mi sonra mı** | **2** (I-09, K-16/K-18 sırası) | ⬜ boş · ⭐ BB turu · ⚠️ yanlış sıra = içerik iki kez canlıya yazılır |
+| **KARAR-31** | **Kriz bildirimi (kendine zarar) + yaş sınırı** | **2** (I-18, G1-01) | ⬜ boş · ⭐ BB turu · ⛔ AVUKAT ön koşulu, öneri YOK |
+| **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ⬜ boş · ⭐ BB turu · backend hazır, ekran yok |
+| **KARAR-33** | **Kurumdan üye çıkarma + red tipi** | **2** (Y-14/md.36, md.35) | ⬜ boş · ⭐ BB turu · backend hazır, düğme yok |
+| **KARAR-37** | **madde 103 — kart mı özet mi kazanır** | 1 (md.103) | ⬜ boş · ⭐ BB turu · G1-23 vakasının tekrarı riski |
 
 ---
 
@@ -563,4 +571,134 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Senaryolar bir ÖĞRENME aracıysa ve puanlama önemli değilse A en iyisi (cevap-sonrası, sızma yok). Senaryolar bir DEĞERLENDİRME/test ise B güvenli. C sızma nedeniyle önerilmez.
 **Benim önerim:** A — cevap-sonrası tüm açıklamalar öğrenme değerini artırır, sızma riski yok. Ama senaryolar puanlanıyor/sertifikaya sayılıyorsa B kalsın.
 **Cevap vermezsen:** K-06 uygulanmaz; bugünkü davranış (yalnız seçilen açıklama) korunur — kabul edilebilir ara durum.
+**CEVAP:**
+
+---
+
+# ⭐ BB TURU KARTLARI (2026-09-21) — devir analizi §4 + kuyruk §7.4
+
+> **Kaynak:** `docs/raporlar/kesif/devir-analizi-2026-09-21.md` §4. Numaralar bu turda verildi (önceki en yüksek: **KARAR-29**).
+> ⛔ **CEVAP satırları BOŞ** — yalnız PO doldurur.
+
+---
+
+### KARAR-30 · Senaryo isimleri: seed'den ÖNCE mi SONRA mı değişken yapılsın  [ÜRÜN + SIRA KARARI] (2 işi açar)
+**Şu an ne var:** Senaryo metinlerindeki kişi isimleri koda gömülü. Kurum kendi bağlamına uygun isim kullanamıyor. Kanıt: 9 terim (`menti_denge`·`mentor_mimar`·`sert_1` …) iki repo tamamında harf duyarsız → **kodda 0 dosya** (7 isabetin hepsi belge). İçerik hazır: `docs/raporlar/icerik/menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md:56` (14 değişken).
+**Sorun ne:** Bu iş **tek başına** bir sıra sorusu doğuruyor: sertifika (K-16) ve öğrenme yolculuğu (K-18) içerikleri **canlı veritabanına yazılacak**. İsim değişkeni altyapısı bu yazımdan ÖNCE yapılırsa isimler baştan değişken olarak girer; SONRA yapılırsa **aynı içeriği ikinci kez yazmak** gerekir.
+**Neden sana soruyorum:** Canlı veritabanına içerik yazımı geri dönülmez bir işlem ve onayın şart; sıranın yanlış seçilmesi aynı işi iki kez yaptırır.
+**Seçenekler:**
+· **A — Önce isim altyapısı, sonra içerik yazımı.** Kullanıcı ne görür: bir süre daha bugünkü "Seçenek A" metinleri. Ne kazanırsın: içerik canlıya **bir kez** yazılır, kurum ilk günden kendi isimlerini kullanır. Ne kaybedersin: sertifika/yolculuk içeriği **gecikir** (isim altyapısı önce bitmeli). Süre **M** · geri alınır ✅ · migration **olası** (kurum-bazlı isim alanı).
+· **B — Önce içerik yazımı, isimler sonra.** Kullanıcı ne görür: gerçek senaryolar **hemen** canlıda. Ne kazanırsın: en hızlı görünür değer. Ne kaybedersin: isim altyapısı gelince **aynı içerik ikinci kez yazılır** — canlı veritabanına ikinci geri-dönülmez işlem + ikinci onay turu. Süre **S sonra M** · geri alınır ⚠️ zor · migration **olası**.
+· **C — İsimler sabit kalsın, değişken altyapısı hiç yapılmasın.** Kullanıcı ne görür: bugünkü hâli, kalıcı. Ne kazanırsın: sıfır iş. Ne kaybedersin: **kurum kendi bağlamını kuramaz**; senaryolar her kurumda aynı kurgu isimlerle okunur, sahiplik hissi düşer. Süre **0** · geri alınır ✅.
+**Karşılaştırma:** Sertifika/yolculuk içeriğini yakında canlıya almak istiyorsan B hızlıdır ama ikinci yazım maliyetini kabul etmiş olursun. İçerik birkaç hafta bekleyebiliyorsa A toplamda daha ucuz. C yalnız "isim özelleştirme bizim için önemli değil" diyorsan doğrudur.
+**Benim önerim:** **A** — çünkü canlı veritabanına içerik yazımı bu projede onay + yedek gerektiren ağır bir işlem; onu iki kez yapmaktansa bir kez doğru yapmak daha ucuz.
+**Cevap vermezsen:** **I-09** kuyrukta bekler; ayrıca **K-16** ve **K-18** seed işleri "hangi sıra" sorusu cevapsız olduğu için güvenle başlatılamaz.
+**CEVAP:**
+
+---
+
+### KARAR-31 · Kriz bildirimi (kendine zarar) + yaş sınırı  [ÜRÜN + HUKUK] (2 işi açar)
+**Şu an ne var:** Sertifika sınavında mentöre *"menti kendine zarar ifadesi kullanırsa ne yaparsın"* diye **soruluyor** (red-line konu `kriz-yonetimi`) ama canlıda böyle bir akış **yok**. Kanıt: 7 terim, İKİ DİLLİ, harf duyarsız (`kriz`·`crisis`·`selfharm`·`self-harm`·`kendine zarar`·`acil durum`·`emergency`) → **2 satır, 0'ı akış** (biri iş unvanı listesi, biri sınav konu etiketi).
+**Sorun ne:** Mentör eğitimde öğrendiği refleksi uygulayacak bir yer bulamıyor; kriz anında sistem sessiz. Sertifika bir davranışı öğretiyor, ürün karşılığını sunmuyor.
+**Neden sana soruyorum:** Bir kişinin en kırılgan anında kimin haberdar olacağı hukuki ve etik bir karardır; yanlış kurgu zarar verir.
+**Seçenekler:**
+· **A — Bildirim yok, yalnız yardım hattı metni.** Kullanıcı ne görür: kriz ifadesinde ekranda destek hattı bilgisi. Ne kazanırsın: hukuki risk en düşük, mahremiyet tam. Ne kaybedersin: **kurum hiçbir zaman haberdar olmaz**; mentör yalnız kalır. Süre **S** · geri alınır ✅ · migration yok.
+· **B — Sessiz bildirim (menti bilmez).** Kullanıcı ne görür: menti hiçbir şey görmez; kurum yöneticisine bildirim düşer. Ne kazanırsın: müdahale mümkün. Ne kaybedersin: **menti izlendiğini bilmiyor** — güven ihlali ve KVKK açık rıza sorunu. Süre **M** · geri alınır ⚠️ (gönderilen bildirim geri alınamaz) · migration **var**.
+· **C — Şeffaf bildirim (menti görür).** Kullanıcı ne görür: *"bu mesaj kurum yöneticisiyle paylaşıldı"* bilgisi. Ne kazanırsın: dürüst ve KVKK-uyumlu. Ne kaybedersin: menti **bir daha o konuyu açmaz** — özellik kendi amacını zayıflatır. Süre **M** · geri alınır ⚠️ · migration **var**.
+**Karşılaştırma:** Üçü de avukat onayı ister. A en güvenli ama en az koruyucu; C etik olarak en savunulabilir ama işlevi zayıflatır; B en riskli çünkü kişi bilmeden izlenir.
+**Benim önerim:** Yok — **bu senin ürün kararın, önerime güvenme.** Avukat görüşü alınmadan hiçbiri seçilmemeli.
+⚠️ **BAĞLI SORU (aynı kart, avukata TEK soru olarak gitmeli):** Bu akış 18 yaş altı menti varsayıyorsa **`G1-01` çöker** — bugün *"18+ beyanı yeterli"* deniyor; gerçek yaş ve veli onayı gerekir.
+**Cevap vermezsen:** **I-18** kuyrukta bekler; sertifika bir davranışı öğretip karşılığını sunmamaya devam eder.
+**CEVAP:**
+
+---
+
+### KARAR-32 · Mentör kendini havuzdan çekebilsin mi  [ÜRÜN KARARI] (2 işi açar)
+**Şu an ne var:** Backend **tam ve güvenli**: `POST /mentors/:mentorId/visibility-optin` + rol kontrolü + sahiplik guard'ı (`userRoutes.ts:91-96`, V-03 IDOR düzeltmesi). Ama **hiçbir ekran bunu çağırmıyor** — frontend taraması (2 terim, harf duyarsız) → **0 sonuç**. Ayrıca şemada uyuyan bir alan var: `UserProfile.mentorVisibilityEnabled` (`schema.prisma:323`, varsayılan `true`) — **hiçbir akış okumuyor/yazmıyor**, eşleştirme filtrelerinde de kullanılmıyor.
+**Sorun ne:** Mentör yoğun bir dönemde ya da izne çıkarken kendini menti havuzundan geçici olarak çekemiyor. Yapabileceği tek şey hiç yanıt vermemek — bu da mentiyi süresiz bekletiyor.
+**Neden sana soruyorum:** "Mentör kendi görünürlüğünü kontrol edebilir mi" bir yetki sorusudur; ayrıca uyuyan alanın **silinmesi mi bağlanması mı** gerektiği silme protokolüne göre PO kararıdır.
+**Seçenekler:**
+· **A — Mentör kendi görünürlüğünü açıp kapatabilsin.** Kullanıcı ne görür: profilinde "Yeni menti kabul ediyorum" anahtarı. Ne kazanırsın: mentör tükenmeden kendini koruyabilir; menti boş yere beklemez. Ne kaybedersin: havuz **anlık küçülebilir**; menti "mentör yok" ekranıyla daha sık karşılaşır. Süre **S** (backend hazır) · geri alınır ✅ · migration yok.
+· **B — Yalnız kurum yöneticisi kapatabilsin.** Kullanıcı ne görür: mentörde anahtar yok; yönetici panelinden yönetilir. Ne kazanırsın: havuz kontrolü kurumda kalır. Ne kaybedersin: mentör kendi yükünü **yönetemez**, yöneticiye yazmak zorunda — sürtünme. Süre **S** · geri alınır ✅ · migration yok.
+· **C — Hiç açılmasın; uyuyan alan silme protokolüne girsin.** Kullanıcı ne görür: değişiklik yok. Ne kazanırsın: sıfır iş; şema sadeleşir. Ne kaybedersin: mentörün tek çıkışı **sessiz kalmak** olur; ayrıca backend'de çalışan bir uç kalıcı olarak öksüz kalır. Süre **0** (silme ayrı tur) · geri alınır ✅.
+**Karşılaştırma:** Mentör sayısı azken A havuzu daralttığı için riskli görünebilir; ama "sessiz mentör" zaten fiilen havuz dışındadır ve mentiyi bekleterek zarar verir. B, kurumun program sahipliği güçlüyse doğrudur. C yalnız "mentör her zaman açık olmalı" diyorsan tutarlıdır.
+**Benim önerim:** **A** — çünkü backend ve güvenlik guard'ı zaten hazır; iş yalnız ekran, ve "sessiz mentör" sorununu görünür hâle getirir.
+⚠️ **Not:** Hangi seçenek seçilirse seçilsin, `mentorVisibilityEnabled` alanının **bağlanacağı mı silineceği mi** aynı cevapta netleşir (silme = ayrı tur + ikinci onay, SİLME PROTOKOLÜ).
+**Cevap vermezsen:** **Y-15** kuyrukta bekler; şemadaki uyuyan alan belirsiz kalır.
+**CEVAP:**
+
+---
+
+### KARAR-33 · Kurumdan üye çıkarma ve red tipi  [ÜRÜN KARARI] (2 işi açar)
+**Şu an ne var:** Yönetici yalnız *bekleyen* başvuruyu reddedebiliyor. Backend aslında onaylı üyeye de uygulanabiliyor (`adminController.ts:740-781`; tek engel `:755` zaten reddedilmiş kayıt) ama **ekranda düğme yok** — onaylı üye listeleri red bilgisini yalnız OKUYOR. Ayrıca çıkarılan kişiye giden mail *"dilerseniz tekrar başvurabilirsiniz"* diyor (`emailService.ts:174`) — onaylı üye çıkarılırken **yanlış metin**.
+**Sorun ne:** Kuruma uygun olmadığı anlaşılan bir üye sistemde kalıyor. Ayrıca red tek tip: kötü niyetli kişiye de, eksik form dolduran iyi niyetli kişiye de aynı kibar mesaj gidiyor.
+**Neden sana soruyorum:** Birinin kurumdan çıkarılması ve "bir daha başvuramaz" denmesi kişinin hakkını etkiler; KVKK ve etik sonucu var.
+**Seçenekler:**
+· **A — Çıkarma yok, yalnız "düzeltme iste".** Kullanıcı ne görür: bugünkü gibi. Ne kazanırsın: sıfır risk, sıfır iş. Ne kaybedersin: **kuruma zarar veren üye sistemde kalır**; yönetici elle uğraşır. Süre **S** · geri alınır ✅.
+· **B — Üyelik pasifleştirilir, veri kalır.** Kullanıcı ne görür: çıkarılan kişi giriş yapamaz; geçmiş görüşmeleri kurumda kalır. Ne kazanırsın: geri alınabilir, istatistik bozulmaz. Ne kaybedersin: kişinin verisi kurumda **kalmaya devam eder** — KVKK açısından gerekçe yazılmalı. Süre **S** (backend hazır) · geri alınır ✅.
+· **C — Üyelik + veri anonimleştirilir.** Kullanıcı ne görür: kişi ve izleri kurumdan silinir. Ne kazanırsın: KVKK açısından en temiz. Ne kaybedersin: **geri dönüşü YOK**; mentörün geçmiş görüşme sayısı da düşer, **emeği kaybolur**. Süre **M** · geri alınamaz ⛔.
+**Karşılaştırma:** Kurum küçük ve güven esaslıysa B yeter (çıkar, ama izi tut). Taciz/kötüye kullanım vakası bekleniyorsa C gerekir ama emek-kaybı yan etkisi konuşulmalı. A yalnız "şimdilik" cevabıdır.
+**Benim önerim:** **B** — çünkü geri alınabilir, mentör emeğini korur ve backend zaten bunu yapıyor; C'yi gerektiren vaka çıkınca ayrı karar verilir.
+**Cevap vermezsen:** **Y-14** (madde 36) kuyrukta bekler; yönetici onaylı üyeyi çıkaramamaya devam eder ve yanlış e-posta metni yerinde kalır.
+**CEVAP:**
+
+---
+
+### KARAR-34 · Kulüp tipi kurum ve kurumlar-arası görünürlük  [ÜRÜN + HUKUK] (3 işi açar)
+**Şu an ne var:** Kulüp modülü backend'de canlı (`clubRoutes.ts`) ama avukat notu *"veri sorumlusu üniversitedir, kulübün imza yetkisi yok"* diyor (madde 91). Ayrı olarak kurumlar birbirinin verisine tamamen kapalı.
+**Sorun ne:** Bir üniversite kulübü kendi başına kayıt olursa sözleşmeyi imzalayacak tüzel kişi yok. Ayrıca hiçbir kurum diğerinin başarısını göremediği için "biz de yapalım" etkisi doğmuyor.
+**Neden sana soruyorum:** Kimin kaydolabileceği ve kimin ne göreceği — hukuki sorumluluk ve büyüme stratejisi.
+**Seçenekler:**
+· **A — Kulüp kaydı kapalı, kurum verisi tamamen kapalı.** Ne kazanırsın: sıfır hukuki risk. Ne kaybedersin: **kulüpler hiç giremez** (hedef kitlenin bir bölümü) + organik büyüme kanalı yok. Süre **S** · geri alınır ✅.
+· **B — Kulüp ancak üniversite onayıyla; kurum isterse anonim/toplu veri paylaşır.** Ne kazanırsın: hukuk korunur, büyüme kanalı açılır; k-anonimlik altyapısı **zaten kodda** (`mask.ts:70`). Ne kaybedersin: onay akışı **ek iş**. Süre **M** · geri alınır ✅ · migration **olası**.
+· **C — Kulüp açık kalsın (beyanla), kurumlar arası açık görünürlük.** Ne kazanırsın: en hızlı büyüme. Ne kaybedersin: **avukat riski kurumda** + küçük kurumda toplu veri bile kişiyi ifşa edebilir. Süre **M** · geri alınması zor ⛔ (paylaşılan veri geri alınamaz).
+**Karşılaştırma:** B, hukuk ile büyümeyi ayıran tek seçenek ama en pahalısı. C, gerçek kullanıcı ~sıfırken cazip görünür; kurum sayısı artınca geri alınamaz.
+**Benim önerim:** **B** — çünkü avukat notu zaten C'yi riskli ilan etmiş ve k-anonimlik altyapısı kodda hazır.
+**Cevap vermezsen:** madde 91 · 115 · 116 kuyruğa giremez; kulüp modülü canlı ama hukuken savunmasız kalır.
+**CEVAP:**
+
+---
+
+### KARAR-35 · Canlı veritabanına salt-okuma izni  [OPERASYON KARARI] (5+ işi açar)
+**Şu an ne var:** madde 30 · 33 · 118, söz S10 ve Y6 — hepsi *"canlı veritabanında kaç kayıt var"* sorusuna bağlı ve bu soru **hiç sorulmamış**. Proje kuralı canlı veritabanına `SELECT` için bile onay istiyor.
+**Sorun ne:** Beş iş, tek bir sayım yapılamadığı için aylardır kilitli.
+**Neden sana soruyorum:** Canlı ve yerel aynı veritabanını paylaşıyor (⚠️ bu varsayım da bu turda **çelişkili** çıktı — bkz. `03-PO-ELLE-ISLER.md` ADIM 0); dokunma izni sende.
+**Seçenekler:**
+· **A — Salt-okuma `SELECT count(*)` izni ver.** Ne kazanırsın: beş iş **aynı anda** açılır; kişisel veri okunmaz, yalnız sayı döner. Ne kaybedersin: yanlış yazılmış bir sorgu teorik olarak yük bindirir (pratikte `count(*)` zararsız). Süre **S** · geri alınır ✅.
+· **B — Sen kendi panelinden say, sayıyı belgeye yaz.** Ne kazanırsın: ajan veritabanına hiç dokunmaz. Ne kaybedersin: **iş sende**; her teyit turunda tekrar gerekir. Süre **S (senin için)** · geri alınır ✅.
+· **C — Ertele.** Ne kaybedersin: madde 30/33/118 + S10 + Y6 **kilitli kalır**; sertifika ve öğrenme içeriği ilerlemez. Süre **0** · geri alınır ✅.
+**Karşılaştırma:** A ile B aynı sonucu verir; fark işin kimde olduğudur. C hiçbir şey çözmez, yalnız erteler.
+**Benim önerim:** **A** — `count(*)` kişisel veri döndürmez ve beş kalemi tek hamlede açar.
+⚠️ **Ön koşul:** Hangi veritabanının canlı olduğu (`03-PO-ELLE-ISLER.md` ADIM 0) netleşmeden sayım anlamsızdır.
+**Cevap vermezsen:** Beş kalem teyitsiz kapalı kalır.
+**CEVAP:**
+
+---
+
+### KARAR-36 · Yarım kalmış üç teknik kalem: `answeredFollowup` · `qualityMultiplier` ikizi · iki yedek tablo  [VERİ KARARI] (4 işi açar)
+**Şu an ne var:** (a) Kod var olmayan bir tabloyu sorguluyor — `profile-completeness.service.ts:43-50`; ⚠️ **bu turda daha kötüsü bulundu:** `(prisma as any).answeredFollowup?.count(...)` optional chaining yüzünden **hata fırlatmadan `undefined` dönüyor** → sonuç **her zaman 0** ve `catch` bloğu **ölü kod**, yedek hesaplama hiç çalışmıyor → profil tamamlanma yüzdesi **sistematik düşük**. (b) `UserProfile.qualityMultiplier` kullanılmıyor; canlı akış `TenantMembership` üzerinden yürüyor. (c) İki yedek tablo (`MentorshipAgreement_yedek_20260830` 150 satır · `CertificationOption_yedek_20260909` 20 satır) şemada **yok** → `migrate dev`/`db push` onları fazlalık görüp silebilir.
+**Sorun ne:** Üçü de "yarım bırakılmış"; hiçbiri hata vermiyor, bu yüzden kimse fark etmiyor. Ama üçü de bir gün sessizce veri kaybettirebilir.
+**Neden sana soruyorum:** Üçü de **silme** kararına dokunuyor; SİLME PROTOKOLÜ senin ikinci onayını şart koşuyor.
+**Seçenekler (her kalem için aynı üçlü):**
+· **A — Tamamla/kalıcılaştır.** (a) tabloyu aç · (b) ikizi doğru bağla · (c) yedek tabloları şemaya ekle. Ne kazanırsın: hiçbir şey kaybolmaz; (c) için `migrate dev`'in kazara silmesi **imkânsızlaşır**. Ne kaybedersin: **migration** + kalıcı bakım yükü. Süre **M** · geri alınır ✅ · migration **var**.
+· **B — Karantinaya al** (`@deprecated`, rota kapalı), bir tur sonra ikinci onayla sil. Ne kazanırsın: protokole uygun, geri dönülebilir. Ne kaybedersin: iki tur sürer. Süre **M** · geri alınır ✅.
+· **C — Şimdi sil (DROP).** Ne kazanırsın: en temiz. Ne kaybedersin: **geri dönüşü yok**; yedek tablolar silinirse 6 saatlik geri-yükleme penceresi dışındaki **tek koruma gider**. Süre **S** · geri alınamaz ⛔ · migration **var**.
+**Karşılaştırma:** (c) yedek tablolar için özellikle dikkat — onlar **koruma amaçlı** duruyor; erken silmek koruma kaybıdır. (a) ve (b) normal ölü-kod protokolüne girer.
+**Benim önerim:** (a)+(b) için **B** (karantina), (c) için **A** (şemaya ekle) — çünkü yedek tabloyu şemaya eklemek kazara silinmesini önler ve silme kararını aceleye getirmez.
+**Cevap vermezsen:** **Y-18** (madde 126), D3, **S26** ve **S37** açık kalır; bir `migrate dev` turunda yedek tablolar **uyarısız kaybolabilir**.
+**CEVAP:**
+
+---
+
+### KARAR-37 · `00-KARAR-TAKIP` madde 103 — kart mı özet mi kazanır  [BELGE/METODOLOJİ]
+**Şu an ne var:** `G2-01..05` kartları madde 103 için **🗑️ geçersiz** diyor; madde 103 satırı hâlâ **🔵❓** duruyor.
+**Sorun ne:** Aynı kalem iki yerde iki farklı durumda. KURAL 15 *"çelişkide KART kazanır"* diyor — ama kartın konusu *"DISC matrisi onayı"*, madde 103'ünki *"psikometrik gerekçenin belgelenmemesi"*; **aynı şey olmayabilir.**
+**Neden sana soruyorum:** Bu tam olarak **G1-23 vakasının tekrarı** — orada da özet belge, farklı konulu bir kanıta dayanarak bir kalemi yanlışlıkla kapatmıştı ("21. hayalet tamamlanmış") ve bu, KURAL 15'in doğma sebebi oldu.
+**Seçenekler:**
+· **A — Kart kazanır, madde 103 🗑️.** Ne kazanırsın: tek hamlede kapanır. Ne kaybedersin: **gerçekten ayrı bir konuysa sessizce kaybolur** (G1-23 tekrarı). Süre **S** · geri alınır ✅.
+· **B — Ayrı konu; madde 103 ⬜ AÇIK kalır, gerekirse yeni kart açılır.** Ne kazanırsın: kayıp yok. Ne kaybedersin: bir kalem daha açık listede. Süre **S** · geri alınır ✅.
+· **C — ❓ TEYİT GEREK bırak.** Ne kaybedersin: belirsizlik sürer, her turda yeniden tartışılır. Süre **0** · geri alınır ✅.
+**Karşılaştırma:** A hızlı ama G1-23 dersini görmezden gelir; B bir kalem maliyetine kaybı önler; C hiçbir şey çözmez.
+**Benim önerim:** **B** — çünkü aynı hata bu projede bir kez ölçülmüş ve kural hâline getirilmiş (KURAL 15'in gerekçesi).
+**Cevap vermezsen:** madde 103 belirsiz kalır, her denetim turunda yeniden gündeme gelir.
 **CEVAP:**
