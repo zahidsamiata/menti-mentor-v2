@@ -319,3 +319,419 @@ ve faz6 hâlâ "📸 DONDURULMUŞ" etiketli. ⇒ P-99 taşıma turu bu üçlüde
   belge "hangi sürüm geçerli" sorusunu cevaplamıyor.
 - **Etiket↔kod çelişkisi (1):** `prisma/senaryo-bankasi-tam.md:3` kendini *"TAM TASLAK — kullanıcı onayı bekliyor"*
   sayıyor, oysa içeriği **zaten canlı seed'in kaynağı** (`seed-certification.ts:7`).
+
+---
+
+## 6 · B — TUTARLILIK
+
+> Bölüm sırası: raporda A → C → D → B izlendi (A ve C ara kayıtlarla güvenceye alındı). İçerik aynı.
+
+### 6.1 B.1 — ⭐ İNGİLİZCE / HAM-ENUM KALINTI
+
+**Birim: "render noktası"** = kullanıcıya metin üreten tek `dosya:satır`. **23 render noktası** (1E hariç).
+
+**① 2026-09-09 kullanıcı testinin kaynağı doğrulandı** — `mentor/page.tsx:27-30`:
+`'D — Dominant'` · `'I — Influential'` · `'S — Steady'` · `'C — Conscientious'`, render `:403` `.map` → `:412`.
+Mentör panelindeki "Engellenecek DISC Profilleri" filtresinde **4 İngilizce etiket** ekranda.
+Ayrıca `DiscRecallCard.tsx:80` ve `ResultStep.tsx:69` "Dominant" basıyor.
+
+⚠️ **Asıl bulgu tek hata değil, beş ayrı sözlük:** aynı 4 DISC boyutu için kod tabanında **5 sözlük var ve hiçbiri
+diğeriyle uyuşmuyor** — `DiscBadge.tsx:13-16` ve `profile/page.tsx:30-33` (Öncü/Ateşleyici/Yapı Taşı/Kâşif) ·
+`types/discTest.ts:134-140` (Kararlılık/Etki/Denge/Titizlik) · `mentor/page.tsx:27-30` (İngilizce) ·
+BE `analyticsEngine.ts:67-70` (karma). Tek kaynağa indirilmeden düzeltme kalıcı olmaz.
+
+**② Ham enum ekrana basılıyor — 12 render noktası** (LABELS sözlüğünden geçmiyor):
+
+| Ekranda görünen ham değer | Nerede | Ağırlık |
+|---|---|---|
+| `MENTOR` / `MENTI` rol rozeti | `admin/waiting-room/page.tsx:133` · `PendingUserCard.tsx:78` | Yüksek (kurum yöneticisi görür) |
+| `APPROVED`/`MERGED`/`REJECTED` | `admin/tags/page.tsx:111` | Yüksek |
+| **`M1`…`M4` / `m1`…`m4` ham arketip kodu** | `admin/eslesmeler/page.tsx:134,142` (`{match.mentorArchetype}`) | Yüksek — **hiçbir sözlük yok**, yönetici çıplak kod görüyor |
+| `ONLINE`/`IN_PERSON`/`PHONE` | `MeetingsTable.tsx:66` | Orta |
+| `NOT_STARTED`…`COOLDOWN` | `MembersTable.tsx:92` | Orta — ⚠️ **sözlük VAR ama kullanılmıyor**: `sertifika-sonuclari/page.tsx:37-41` aynı enum'u tam Türkçe çeviriyor |
+| `INFO`/`WARN`/`ERROR`/`AUDIT` | `platform/dashboard/page.tsx:263,264,566` | Düşük (teknik ekran) |
+| İngilizce başlık **"Journey"** | `MembersTable.tsx:72` | Orta |
+
+**③ Ham enum harfi prozada — 6 nokta:** *"En İyi Eş: **S + C**"* (`ResultStep.tsx:71`, `DiscRecallCard.tsx:86`),
+*"…en uygun **S veya C** profilli kişiyle…"* (`ResultStep.tsx:99`), ham `discLetters` (`menti/page.tsx:245`) vb.
+Kaynak `onboardingController.ts:70,78,86,94` `compatibleWith: ['S','C']` — aynı dosyada Türkçe arketip adları
+zaten var, eşlenmemiş.
+
+**④ E-postada ham rol enum — 2 nokta:** `emailService.ts:110` *"…adlı yeni bir **MENTOR** kaydı sisteme girdi."* ·
+`:165` *"Ad Soyad (**MENTI**) DISC karakter analizini tamamladı."* FE'de `TenantSwitcher.tsx:32-33` sözlüğü var,
+BE'de eşdeğeri yok.
+
+**⑤ Sistemik — Zod İngilizce varsayılanları kullanıcıya sızıyor (~75 kısıt / 14 controller).**
+Projede global Türkçe `errorMap` **yok** (kapsam: BE `src`, `errorMap|setErrorMap|zod-i18n` → 0 sonuç).
+`client.ts:26-34` backend'in `fieldErrors`'ından ilk mesajı `error.message`'a taşıyıp ekrana basıyor — dosyanın kendi
+yorumu *"(zaten Türkçe)"* diyor, **bu varsayım yanlış**: mesajsız kısıtlarda Zod *"String must contain at most 1000
+character(s)"* üretir (ör. `userController.ts:332,342`, `agreementController.ts:30`). **Tek mimari düzeltme
+(global errorMap) ~75 kısıtı birden kapatır.**
+
+✅ **Temiz çıkanlar (kapsam beyanlı):** OCEAN boyut adları ekranda **0** · gün adları tam Türkçe sözlükle ·
+`MeetingFormat`/`MeetingStatus`/sertifika konu slug'ları/sertifika durumu için **5 tam kapsayan sözlük** ·
+onboarding tercih enum'ları tamamı Türkçe · 12 e-posta şablonunun gövdesi Türkçe (istisna ④).
+⚠️ 3 İngilizce metin **ölü yolda** (FE v2'nin çağırmadığı uçlar: `analyticsEngine.ts:67`,
+`temperamentController.ts:18,22`) → bulgu sayılmadı, **❓ TEYİT GEREK** (başka istemci çağırıyorsa gerçek bulgu).
+
+### 6.2 B.2 — TERİM SÖZLÜĞÜ
+
+**Birim: "kavram"** (9 incelendi) ve **"varyant"** (kullanıcıya görünen farklı sözcük).
+**6 kavramın birden fazla görünür varyantı var · 2'si CİDDİ · 3'ü kozmetik-orta · 3'ü yanlış alarm.**
+
+| Kavram | Varyantlar (görünür) | Baskın | Değerlendirme |
+|---|---|---|---|
+| **mentör rolü** | `mentör` ~130 / `mentor` ~40 | mentör (~%77) | 🔴 **CİDDİ** — aşağıda |
+| **görüşme olayı** | `görüşme` 110 / `toplantı` 17 / `randevu` 9 / `buluşma` 5 | görüşme (%76) | 🔴 **CİDDİ** — aşağıda |
+| kurum | `kurum` 112 / `dernek` 10 / `vakıf` 3 / `STK` 6 | kurum | 🟡 Pazarlamada "dernek/vakıf" bilinçli hedef dili; tek karışık yer `admin/learning-journey/page.tsx:357` |
+| uyum skoru adı | `Uyum Skoru` / `Eşleşme Skoru` / `Puan` | Uyum Skoru | 🟡 `admin/eslesmeler:116` "Puan" + `:118` "Karakter" — yönetici hangisinin uyum skoru olduğunu ayırt edemez |
+| mizaç | `mizaç` 18 / `kişilik` 4 / `karakter` 25 / `DISC` 100+ | mizaç (onboarding) | 🟡 ⚠️ `admin/algorithm-tuner:134` *"kişilik uyumu"* diyor; ürün `EngineSection:80` ve `metodoloji:125`'te *"DISC … kişilik tanısı değildir"* diyor → **kendi feragatiyle çelişiyor** |
+| menti · onay · davet | `mentee`/`çağrı` yalnız kod kimliği, kullanıcıya görünen **0**; `doğrulama`/`kabul` ayrı kavramlar | — | 🟢 Yanlış alarm — tutarlı |
+
+**🔴 Aynı ekranda iki yazım — 5 ekranda doğrulandı:**
+mentör paneli (*"Mentor Paneli"* `:156` ⟷ *"Mentörlük Saati"* `:45` ⟷ *"Mentör Sertifikası"* `:181`) ·
+menti paneli (*"Mentörlük Anlaşmanız"* `:173` ⟷ *"Önerilen Mentorlar"* `:251`) · görüşmelerim (`:36` ⟷ `:198`) ·
+anlaşma detayı (`:90,98`) · **en ciddisi davet şablonu** — `admin/invite/page.tsx:57` **tek cümlede**:
+*"sizi **mentörlük** programına **mentor** olarak davet etti"* → bu metin yöneticinin **kopyalayıp kurum dışına
+gönderdiği** şablon.
+
+**🔴 Randevu ↔ toplantı ↔ görüşme:** aynı `Meeting` kaydı menti ekranında *"Randevu Al / Randevu Talebi"*,
+mentör ekranında *"Toplantı Talepleri"*, e-postada *"Yeni Toplantı Talebi"*, menüde *"Görüşmelerim"* —
+`meetings/page.tsx:154` tek cümlede ikisi birden (*"Tüm randevularınız ve geçmiş görüşmeleriniz"*).
+Destek talebi üretme riski yüksek.
+
+### 6.3 B.3 — ⭐ KİŞİ ADI YASAĞI → **İHLAL YOK**
+
+**Kapsam:** 4 kök dizin (FE `src` · BE `src` · `prisma` [migrations + 3 seed + senaryo bankası] · `scripts`) ×
+**2 desen** (~75 Türkçe+İngilizce ad tohumu, harf duyarsız, kelime sınırlı + `'Ad Soyad'` tırnaklı kalıp).
+**Ham 41 isabet → alt-dize gürültüsü elendikten sonra 12 gerçek ad geçişi → 12'sinin 12'si kurgusal/temsilî (%100).**
+
+- Landing demo personaları (`AdminCockpit.tsx:92-93`, `AlgorithmBento.tsx:107,120`) — `Ad X.` anonim formunda
+- `buildMockPersonas()` (`selfServeController.ts:166`) — fonksiyon adı zaten "Mock"
+- Öğrenme yolculuğu senaryo kişileri (`learningJourney.service.ts:65-77`)
+- Form placeholder'ları ("Ad Soyad")
+- Seed/script: `TechHub Mentoring Yöneticisi`, `TEST Mentör Bir` — tamamen sentetik; `senaryo-bankasi-tam.md`
+  363 satırda **0 özel ad**
+
+**⚠️ PO'nun bakması gereken bitişik konu (kişi adı DEĞİL):** `ProfileStep.tsx:296` form placeholder'ı
+**iki gerçek üçüncü-taraf kurum adını** örnek veriyor — marka/izin açısından PO teyit etmeli.
+
+⚠️ **Not:** sertifika belgelerindeki `{sert_1}`…`{sert_6}` değişkenleri bir **isim dağılım tablosuna** bağlı
+(`sertifika-oturum1-...:278-302`, 6 temsilî ad × 22 senaryo). Bunlar kurgusal — ama **renderer'ı yok**
+(kapsam: iki repo `src`+`prisma`, `sert_` harf duyarlı ve duyarsız → **0 sonuç**) → P-99 taşımasında karar gerekir.
+
+### 6.4 B.4 — HATA ve BOŞ-DURUM MESAJLARI
+
+**Birim:** 5 ayrı sayım birimi (FE hata-state literali 41 · `AlertMessage` 10 · FE boş-durum JSX 33 ·
+BE `message:` 184 benzersiz · merkezî sözlük 18) → **≈286 mesaj metni tarandı** (çakışmalı toplam).
+
+| Bulgu | Kanıt | Değerlendirme |
+|---|---|---|
+| **Suçlayıcı ton — 5 metin** | `types/admin.ts:167-173` — *"Uzmanlık etiketleriniz **çok geneldir**. Daha spesifik **belirtiniz**."* · *"Biyografi bölümünüz **yetersiz**…"* | Yargılayıcı + emir kipi. Render yolu doğrulandı: `CorrectionNoteDialog.tsx:55` → `adminController.ts:683-726` → **e-posta ile kullanıcıya** |
+| **Ürünün geri kalanı temiz** | `TenantCorrectionBanner.tsx:10` bilinçli ton kuralı yazılı; `certification/page.tsx:151` *"Şimdilik bir mola verelim… acele yok."* | ≈286 metinde "yanlış yaptınız/geçersizsiniz" kalıbı **0** |
+| **⭐ YANLIŞ SEBEP — kullanıcıya hatalı bilgi** | BE 4 `failReason` döndürüyor (`certification.service.ts:150,179,216`: `COOLDOWN_ACTIVE`·`NO_ACTIVE_TOPICS`·`RED_LINE_FAILED`·`BELOW_THRESHOLD`) ↔ FE tipi yalnız `'BELOW_THRESHOLD'` tanıyor (`types/certification.ts:64`) ve ekran `failReason`'ı **hiç okumuyor** (kapsam: `frontend/src` tüm `.tsx` → tek isabet bir test dosyası) | **Kriz konusundan elenen mentör, %80 üstü puan almış olsa bile *"Sertifika için en az %80 gerekli"* görüyor** (`mentor/certification/page.tsx:205-209`) |
+| **Düzeltme notu ekranda yok** | `adminController.ts:703-706` notu `rejectionReason`'a yazıyor; PENDING 403 yanıtı bunu **döndürmüyor** (`authController.ts:323-327`), `/pending-approval` göstermiyor | Kullanıcı uygulama içinde neyi düzelteceğini öğrenemiyor — yalnız e-posta (mail kapalıysa hiç) |
+| **20 içeriksiz jenerik fallback** | `useMutation.ts:45` *"İşlem başarısız."* (tüm mutation'ların ortak fallback'i) + 19 nokta; **5'inde BE hatası tamamen yutuluyor** (`bildir/page.tsx:31`, `admin/certification/page.tsx:64` `res.error` okunmuyor) | "Bir hata oluştu" birebir kalıbı 5 noktada |
+| **İç detay sızması — 500 yolu TEMİZ** | `errorHandler.ts:24` yalnız *"Beklenmedik bir sunucu hatası oluştu."* | ✅ stack/DB/dosya yolu gitmiyor |
+| **Teknik alan adı sızıyor** | `authController.ts:607` *"tenantSlug zorunlu"* | İngilizce kod tanımlayıcısı kullanıcıya |
+| **Tutarsızlık** | *"bulunamadı"* ↔ *"yok"* (4 ekran) · *"Henüz mesajınız yok"* ↔ *"Henüz mesaj yok"* · `menti/page.tsx:278,280` **tek blokta ikisi birden** | Kozmetik ama yaygın |
+| ✅ **İyi örnekler** | `messages/page.tsx:57-61` role göre dallanan boş-durum · `disc-test/page.tsx:158-161` sebep + eylem birlikte | Doğru desen ürün içinde mevcut |
+
+---
+
+## 7 · ⭐ HAZIR KUYRUK SATIRLARI
+
+⚠️ Numara VERİLMEDİ (`C-??`). Kapı: varsayılan 🟢 · migration/seed · auth/KVKK/matching · geri dönülmez → 🟡 ·
+ürün/hukuk kararı → 🔴 + kart. **"Bitti demek" kullanıcı gözünden yazıldı.**
+
+| # | Şerit | İş | Kapı | Bitti demek | Durum | Not (kanıt) |
+|---|---|---|---|---|---|---|
+| C-?? | Ş0 | **Mentör panelindeki 4 İngilizce DISC etiketi Türkçeleşsin.** 2026-09-09 kullanıcı testi bulgusunun doğrudan kaynağı. | 🟢 | Mentör, filtre ekranında İngilizce yerine Türkçe DISC adı görüyor | BEKLIYOR | `mentor/page.tsx:27-30`, render `:403,412`. ⚠️ Kalıcı çözüm için **5 DISC sözlüğü tek kaynağa** indirilmeli (`DiscBadge:13-16` · `profile:30-33` · `types/discTest:134-140` · `mentor/page:27-30` · BE `analyticsEngine:67-70`) — aksi halde 6. sözlük doğar. Efor S |
+| C-?? | Ş0 | **Davet şablonunda tek cümlede iki yazım.** Yöneticinin kopyalayıp kurum DIŞINA gönderdiği metin. | 🟢 | Davet metninde tek ve tutarlı "mentör" yazımı | BEKLIYOR | `admin/invite/page.tsx:57` (ve `:79`) *"sizi mentörlük programına **mentor** olarak davet etti"* — birebir teyitli. 4 ekranda daha aynı-ekran çakışması var (`mentor/page:45,156,181` · `menti/page:173,251` · `meetings/page:36,198` · `agreement/[id]:90,98`). Efor S |
+| C-?? | Ş0 | **12 ham-enum render noktası mevcut sözlüklerden geçsin** (rol · etiket durumu · format · sertifika durumu · log seviyesi · "Journey" başlığı). | 🟢 | Yönetici/platform ekranlarında `MENTOR`, `IN_PERSON`, `COOLDOWN` gibi ham değer yerine Türkçe karşılık | BEKLIYOR | Liste §6.1②. ⚠️ `MembersTable:92` için sözlük **zaten var** (`sertifika-sonuclari:37-41`), yalnız kullanılmıyor. Efor S-M |
+| C-?? | Ş0 | **Sertifika sonuç ekranı yanlış sebep gösteriyor.** FE tipi BE'nin 4 sebebinden yalnız 1'ini tanıyor. | 🟢 | Kriz/kritik konudan elenen mentör gerçek sebebi görüyor (uydurma "%80" mesajı değil) | BEKLIYOR | BE `certification.service.ts:150,179,216` ↔ FE `types/certification.ts:64` ↔ ekran `mentor/certification/page.tsx:205-209`. **I-03 ile aynı ekran → SIRALI.** Efor S |
+| C-?? | Ş0 | **Backend'e global Zod Türkçe `errorMap`.** ~75 mesajsız kısıt bugün İngilizce varsayılan basıyor. | 🟢 | Form hatalarında *"String must contain at most 1000 character(s)"* yerine Türkçe mesaj | BEKLIYOR | Kapsam: BE `src`, `errorMap\|setErrorMap\|zod-i18n` → **0 sonuç**. FE sızma yolu `client.ts:26-34` (yorumu *"zaten Türkçe"* diyor — yanlış varsayım). Tek hamle ~75 kısıtı kapatır. Efor M |
+| C-?? | Ş0 | **Giriş hatası hesap varlığını sızdırıyor.** | 🟡 auth | Kayıtlı/kayıtsız e-posta için aynı yanıt | BEKLIYOR | `_LoginContent.tsx:14` *"Bu e-posta başka bir yöntemle kayıtlı."* ↔ projenin kendi kuralı `registerMessages.ts:8-11`. 🟡: auth dosyası. Efor S |
+| C-?? | Ş0 | **20 jenerik fallback'in 5'inde backend hatası tamamen yutuluyor.** | 🟢 | Kullanıcı "İşlem başarısız" yerine gerçek sebebi görüyor | BEKLIYOR | `bildir/page.tsx:31` · `admin/certification/page.tsx:64` (`res.error` okunmuyor) · `useMutation.ts:45` ortak fallback. Tam liste §6.4. Efor S |
+| C-?? | Ş0 | **PENDING kullanıcıya düzeltme notu uygulama içinde gösterilsin.** | 🟡 auth | Onay bekleyen kullanıcı neyi düzelteceğini ekranda okuyor | BEKLIYOR | Not yazılıyor (`adminController.ts:703-706`) ama PENDING 403 yanıtı döndürmüyor (`authController.ts:323-327`), `/pending-approval` göstermiyor. Mail kapalıyken tek kanal kapanıyor. Efor S |
+| C-?? | Ş0 | **Düzeltme şablonlarının suçlayıcı tonu.** 5 metin emir kipinde, e-postayla kullanıcıya gidiyor. | 🟢 | Kullanıcı azarlanmadan ne yapacağını okuyor | BEKLIYOR | `types/admin.ts:167-173`. Ürünün kendi ton kuralı zaten yazılı (`TenantCorrectionBanner.tsx:10`). Efor S |
+| C-?? | Ş1 | **madde 139'un eksik yarısı: 4 menti "şimdilik" varyantı yazılsın.** | 🟢 | (ön koşul işi — kullanıcı etkisi I-15 ile görünür) | BEKLIYOR | ⚠️ **I-15'in ön koşulu, kuyrukta ayrı satırı yok.** Belge `arketip-...md:269` menti sürümü için talimat bırakmış, metin yok → I-15 bugün yapılsa **menti tarafı boş kalır**. Efor S (yazım) |
+| C-?? | Ş0 | **Terim birleştirme: randevu ↔ toplantı ↔ görüşme.** | 🟢 | Menti "randevu" gönderip mentör "toplantı" alması bitiyor; tek terim | BEKLIYOR | 4 FE ekranı + 3 e-posta şablonu (`book-meeting:102,209` · `mentor/page:251,261` · `emailService:74,170` · `meetings/page:154` tek cümlede ikisi). Terim seçimi teknik karar (CLAUDE.md "isimlendirme → sen karar ver"). Efor M |
+| C-?? | Ş0 | **İçerik belgeleri hijyeni:** `bolumler/` 5 belge indekse, 3 zayıf etiket (📸 var "DONDURULMUŞ" yok), bayat `backend/` yolları, faz6'nın aşıldığı notu. | 🟢 | (belge işi — kullanıcı etkisi yok, sonraki turlar doğru belgeyi okur) | BEKLIYOR | `00-INDEKS.md:35,52` · 3 oturum belgesi `:3` · `bolumler/*.md:2,7`. Silme yok, `⚠️ GÜNCELLEME` deseni. Efor S |
+| C-?? | Ş1 | **Menti tarafında kriz/kötü-muamele içeriği ve bildirim kanalı yok.** | 🔴 KARAR-31 | Menti, kendisi ya da mentörü kaynaklı bir sorunda ne yapacağını ekranda okuyor | BEKLIYOR | `menti/orientation-guide/page.tsx:17-63` 4 senaryo, hiçbiri kriz değil; `/bildir` kapsamı yalnız sahte kurum kaydı (`bildir/page.tsx:55`). **I-18/KARAR-31'in menti ayağı** — kuyrukta yok. Efor M |
+| C-?? | Ş0 | **`M1`/`m1` ham arketip kodları yöneticiye çıplak görünüyor.** | 🔴 KARAR-?? (ad↔kod) | Yönetici eşleşme tablosunda kod yerine arketip adı görüyor | BEKLIYOR | `admin/eslesmeler/page.tsx:134,142`. Sözlük yazılabilmesi için **hangi ad hangi koda** kararı şart (§0③). Efor S (karar sonrası) |
+
+---
+
+## 8 · ⭐ HAZIR KARAR KARTLARI
+
+> Numara VERİLMEDİ. Aynı ürün sorusunu paylaşan kalemler **tek kartta kümelendi** (CLAUDE.md kart kuralı).
+> Mevcut KARAR-3/4/5/29/30/31 ile **örtüşmez** — onlara ek bağlam §4.2 ve §2.2'de.
+
+### KARAR-?? · Arketip adları: hangi metin hangi koda bağlanacak? (4 işi açar) [ÜRÜN KARARI]
+
+**Şu an ne var:** Kullanıcı bugün mizaç testini bitirince "Sen bir **Öncü**sün!" gibi bir kart görüyor
+(4 ad: Öncü · Ateşleyici · Yapı Taşı · Kâşif). Kanıt: `onboardingController.ts:53-104`, ekran `ResultStep.tsx:39-43`.
+Ayrıca yazılmış ama hiç gösterilmeyen **8 yeni arketip kartı** var (Mimar · Ayna · Liman · Pusula / Rotacı · Kâşif ·
+Denge Arayan · İz Açan) — `arketip-ve-yaklasim-icerigi-2026-09-03.md:153-261`.
+
+**Sorun ne:** Üç ayrı yerde "**Kâşif**" var ve üçü farklı kişiyi anlatıyor: canlıdaki DISC kartında bir mizaç tipi
+(`onboardingController.ts:94`), eski karar belgesinde bir **mentör** tipi (`03-psikometri-ve-algoritma.md:14`),
+yeni içerikte bir **menti** tipi (`arketip-...md:53`). Üstelik yeni 8 adın hiçbirinin, sistemin içindeki kod
+değerine (M1…m4 gibi teknik etiketler) karşılığı **hiçbir belgede yazılı değil**. Buna karar verilmeden yeni
+kartlar bağlanamaz; bağlanırsa kullanıcı aynı adı iki ekranda iki farklı anlamda görür. Ayrıca yeni adlardan
+**"İz Açan" senin onayını almamış** (belge `:263` bunu kendisi not etmiş).
+
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında okuduğu **kimlik etiketi**. Teknik değil; hangi adın
+kalacağı, hangisinin emekli olacağı ürün kararı ve geri dönmesi zor (kullanıcı ekran görüntüsü paylaşıyor —
+`onboardingController.ts:68` `shareHeadline`).
+
+**Seçenekler:**
+**A) Yeni 8 ad kazanır, canlıdaki 4 DISC adı emekli olur** · Kullanıcı: yeni kartları görür, eski adlar kaybolur ·
+Kazanç: tek sistem, çakışma biter · Kayıp: bugün test çözmüş kullanıcıların bildiği ad değişir; "Kâşif" anlam
+değiştirir (mizaç tipi → menti arketipi) · Süre: M · Geri alınır: evet (metin) · Migration: yok
+**B) İkisi yan yana yaşar — farklı şeyler oldukları açıkça yazılır** · Kullanıcı: hem mizaç kartını hem arketip
+kartını görür · Kazanç: hiçbir içerik çöpe gitmez · Kayıp: iki kavramı ayırt etmek kullanıcıya iş yükü;
+"Kâşif" çakışması **sürer** (ad değişmezse kafa karışıklığı kalıcı) · Süre: M · Geri alınır: evet · Migration: yok
+**C) Yeni 8 ad kazanır ama çakışan adlar yeniden adlandırılır** ("Kâşif" ve onaysız "İz Açan" değişir) ·
+Kullanıcı: çakışmasız tek sistem · Kazanç: hem çakışma hem onay sorunu biter · Kayıp: 2 ad yeniden yazılır,
+8 kartın ilgili cümleleri elden geçer (belgeye göre "İz Açan" 6 yerde geçiyor) · Süre: M+ · Geri alınır: evet
+
+**Karşılaştırma:** Eski 4 adın kullanıcı zihninde yer ettiğini düşünüyorsan B; tek ve temiz bir sistem istiyorsan
+A; A'yı istiyorsun ama "Kâşif"in iki anlamı seni rahatsız ediyorsa C. A ve C arasındaki tek fark iki adın yeniden
+yazılması.
+**Benim önerim:** C — çakışma kalıcı kafa karışıklığı üretir ve "İz Açan" zaten onayını bekliyor; ikisini tek
+turda kapatmak ucuz.
+**Cevap vermezsen:** I-01 (yaklaşım metinleri), I-15 (arketip kartı), C-?? (ham `M1` kodları) ve madde 139'un
+menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
+**CEVAP:**
+
+---
+
+### KARAR-?? · Sertifika içeriğinin hangi sürümü canlıya gidecek? (P-99'u açar) [ÜRÜN KARARI · SEED]
+
+**Şu an ne var:** Aynı sertifika sahnesi **üç farklı metinle** üç yerde duruyor: 2026-09-03 tarihli faz6 belgesi ·
+2026-09-08 tarihli oturum belgeleri · **kodda bambaşka bir üçüncü sahne** (`seed-certification.ts:216-217`).
+Hangisinin canlıya gideceği hiçbir belgede yazmıyor; faz6 hâlâ "dondurulmuş" etiketli.
+
+**Sorun ne:** Kuyruk (P-99) işi "22 senaryoyu seed'e taşı" diye tarif ediyor; gerçekte **22'nin 17'sinin seed'de
+karşılığı yok, seed'deki 20'nin 15'i belgelerde gerekçeli elenmiş** ve ortak olan 5 senaryonun **5'i de yeniden
+yazılmış** — birinde puanlamanın anlamı ters dönmüş. Ayrıca taşımadan önce üç teknik soru cevapsız: konu
+kodlarının değişmesi kurumların "kapattığım konu" kaydını öksüz bırakır, geçme eşiği 10 konuda 8 iken 11 konuda
+**9'a çıkar** (sertifika zorlaşır), ve belgelerdeki 17 "iç not" konu düzeyinde yazılmış ama alan **şık**
+düzeyinde (`schema.prisma:1158`).
+
+**Neden sana soruyorum:** Hangi içeriğin mentörlere sınav olarak çıkacağı ve sertifikanın **zorlaşması** ürün
+kararı; ayrıca canlı veriye yazma (seed) senin iki değişmez kuralından biri.
+
+**Seçenekler:**
+**A) 2026-09-08 serisi kazanır — tam taşıma** · Kullanıcı: 11 konu / 22 senaryo ile sınava girer, sertifika
+zorlaşır (8→9 konu) · Kazanç: en olgun içerik canlıya çıkar, elenen 15 sahnenin gerekçesi zaten yazılı ·
+Kayıp: 88 şıkkın tamamı yeniden yazılacak (efor L), konu kodları değişince eski kayıtlar öksüz kalır ·
+Süre: L · Geri alınır: evet (yedek + pasifleştirme) · Migration: yok (iç not şık düzeyinde kalırsa)
+**B) Önce yalnız 4 kritik (red-line) konu taşınır, gerisi sonra** · Kullanıcı: kriz/sınır/gizlilik/geri bildirim
+konularında yeni metni görür, kalan 7 konu eski metinde kalır · Kazanç: en riskli içerik önce düzelir, efor M ·
+Kayıp: bir süre **karışık sürüm** yayında olur (bazı konular yeni, bazıları eski); geçme eşiği iki kez değişir ·
+Süre: M · Geri alınır: evet · Migration: yok
+**C) Hiç taşıma — bugünkü 20/80 kalır** · Kullanıcı: bugünkü sınavı görmeye devam eder · Kazanç: sıfır risk,
+sıfır iş · Kayıp: üç haftadır yazılı duran içerik rafta kalır; **puanlama anlamı ters olan senaryo canlıda
+kalmaya devam eder** · Süre: — · Geri alınır: —
+
+**Karşılaştırma:** Sertifikanın zorlaşmasını şimdi göze alabiliyorsan A tek turda biter. Kriz içeriğinin doğru
+olması acilse ama toplu değişimi istemiyorsan B; ama karışık sürüm yönetmek gerekir. C'nin tek savunması zaman.
+**Benim önerim:** A — ama **KARAR-3 ve KARAR-4 cevaplanmadan başlanamaz** (kriz senaryolarının 8 şıkkı onlara
+bağlı) ve iş ikiye bölünmeli: "içerik taşıma PR'ı" ve "seed çalıştırma turu".
+**Cevap vermezsen:** P-99 ve K-16 açık kalır; sertifika ekranı bugünkü hâliyle kalır.
+**CEVAP:**
+
+---
+
+### KARAR-?? · Hukuki metin paketi — avukata tek seferde ne sorulacak? (5 kalem) [HUKUKİ · PO+AVUKAT]
+
+**Şu an ne var:** Ürünün üç hukuki sayfası (KVKK aydınlatma · gizlilik · kullanım koşulları) **kendi içinde
+"bu metin taslaktır" diyor** (`kvkk/page.tsx:109` · `gizlilik/page.tsx:85` · `terms/page.tsx:73`), ama kayıt
+ekranı kullanıcıya bu metinler için **zorunlu açık rıza** aldırıyor (`_RegisterContent.tsx:398-418`).
+
+**Sorun ne:** Beş ayrı yerde, kodun gerçekten yaptığından **daha fazlasını vaat eden** ya da eksik kalan metin var:
+① davet kartı *"Bilgileriniz KVKK uyumlu … ve güvendedir"* (`InvitationCard.tsx:142`) ve footer *"KVKK uyumlu"*
+damgası (`page.tsx:65`) — metinler taslakken koşulsuz uyum beyanı · ② geri bildirim ekranı *"kimliğin
+paylaşılmaz"* diyor (`MeetingFeedbackCard.tsx:173`) ama yönetici geri bildirimleri **ad-soyadla** listeliyor
+(`feedbackLogController.ts:134-135`) · ③ "Sertifikalı Mentör" rozeti hiçbir yerde "bu mesleki bir yeterlilik
+değildir" demiyor (kapsam: `frontend/src/app/**`, 6 terim TR+EN → **0 çekince**) · ④ landing *"Sonsuza kadar
+ücretsiz"* diyor (`HeroSection.tsx:34,51`), koşullarda karşılığı yok · ⑤ 18 yaş beyanı ayrı kutu değil, KVKK
+rızasının metnine gömülü (`_RegisterContent.tsx:162`) ve **yaş verisi hiç saklanmıyor** → beyanın ispatı yok
+(`consentService.ts:59`).
+
+**Neden sana soruyorum:** Hepsi hukuki sonucu olan metin. Ben avukat değilim; aşağıdaki hiçbir şey hukuki görüş
+değildir ve **metin önerisi yazılmadı**.
+
+**Seçenekler:**
+**A) Beşini tek pakette avukata sor, cevap gelene kadar dokunma** · Kullanıcı: bugünkü metinleri görmeye devam
+eder · Kazanç: tek seferde doğru metin, dağınık düzeltme olmaz · Kayıp: süresiz bekleme; "güvendedir" ve
+"kimliğin paylaşılmaz" gibi **kodla çelişen** cümleler yayında kalır · Süre: ? · Geri alınır: —
+**B) Kodla ÇELİŞENLERİ hemen düzelt (② ve ①), geri kalanı avukata bırak** · Kullanıcı: doğru kapsamı okur ·
+Kazanç: yanlış beyan bugün kalkar, hukuki yorum gerektirenler beklemede kalır · Kayıp: iki kez metin turu olur ·
+Süre: S + bekleme · Geri alınır: evet
+**C) Beşini de şimdi yumuşat, avukat gelince rafine et** · Kullanıcı: daha temkinli metinler görür ·
+Kazanç: risk bugün düşer · Kayıp: pazarlama gücü azalır ("sonsuza kadar ücretsiz" ve "KVKK uyumlu" satış
+cümleleri); avukat gelince üçüncü kez yazılır · Süre: M · Geri alınır: evet
+
+**Karşılaştırma:** ② ve ① kodun yaptığıyla doğrudan çelişiyor — bunlar hukuki yorum değil **olgu düzeltmesi**,
+avukat beklemeye gerek yok. ③④⑤ gerçekten hukuki yorum istiyor. B bu ayrımı yapan tek seçenek.
+**Benim önerim:** B — ama bu senin ürün/hukuk kararın, önerime güvenme.
+**Cevap vermezsen:** 13 hukuki bulgunun hiçbiri hareket etmez; ②'deki çelişki (kimlik paylaşılmaz ↔ yönetici
+ad-soyad görüyor) yayında kalır.
+**CEVAP:**
+
+---
+
+### KARAR-?? · Test sonucu ve eşleşme skoru kullanıcıya nasıl anlatılsın? (3 ekran) [ÜRÜN KARARI]
+
+**Şu an ne var:** Mizaç testi bitince ekran *"Sen bir Öncüsün!"* diyor, konfeti atıyor, *"En İyi Eş: S + C"*
+yazıyor ve *"…en uygun … kişiyle **eşleştirileceksin**"* diye söz veriyor (`ResultStep.tsx:39-43,71,98-100`).
+Eşleşme kartında *"%87 uyum"* gibi bir sayı var (`menti/page.tsx:311`), gerekçe üretilemezse yerine
+*"Genel profil uyumu"* basılıyor (`matchingController.ts:15`).
+
+**Sorun ne:** Ürünün kendi metodoloji sayfası *"kesin bir başarı garantisi değil"*, *"DISC kişilik tanısı
+değildir"* diyor — ama kullanıcının **gerçekten okuduğu** ekranlar (sonuç kartı, eşleşme kartı) bu temkinli dili
+taşımıyor: kimlik etiketi ("Sen bir X'sin"), üstünlük ("En İyi Eş"), kesin vaat ("eşleştirileceksin") ve
+açıklamasız bir yüzde. Üstelik sonuç kartında **paylaş düğmesi** var, yani bu dil ürünün dışına taşınıyor.
+Ayrıca havuz boşsa aynı kullanıcı birkaç ekran sonra *"uygun mentor bulunamadı"* görüyor — vaat tutulmuyor.
+
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında ne öğrendiği ve üründen ne beklediği; ölçü değil **vaat**
+meselesi. Teknik değil.
+
+**Seçenekler:**
+**A) Koşullu dile geç** ("şu an şu eğilimi gösteriyorsun", "genelde iyi anlaşılan", "eşleştirmeye çalışacağız",
+yüzde yerine bant) · Kullanıcı: daha dürüst, daha az kesin bir kart görür · Kazanç: metodoloji sayfasıyla tutarlı
+olur, vaat tutulmadığında hayal kırıklığı azalır · Kayıp: "aha anı" zayıflar, paylaşılabilirlik düşer ·
+Süre: S · Migration: yok
+**B) Bugünkü dil kalsın, yanına küçük bir çekince satırı eklensin** · Kullanıcı: aynı heyecanı yaşar, altında bir
+açıklama görür · Kazanç: etki korunur, dürüstlük eklenir · Kayıp: çekinceyi kimse okumaz; çelişki görünür kalır ·
+Süre: S · Migration: yok
+**C) Hiçbir şey değişmesin** · Kullanıcı: bugünkü kartı görür · Kazanç: sıfır iş, en güçlü ilk izlenim ·
+Kayıp: ürün iki dille konuşur (metodoloji temkinli, kart iddialı); yüzde açıklanmadığı için "neden bu mentör"
+sorusu cevapsız kalır · Süre: — · Geri alınır: —
+
+**Karşılaştırma:** İlk izlenimin çarpıcılığı büyüme için kritikse B; ürünün tek sesle konuşması senin için
+önemliyse A. C yalnızca bu çelişkiyi bilinçli kabul ediyorsan savunulabilir.
+**Benim önerim:** A — yüzde ve "eşleştirileceksin" ürünün **tutamadığı** iki vaat; kalan kısım zaten güçlü.
+**Cevap vermezsen:** C1-1…C1-6 (6 metin) olduğu gibi kalır; eşleşme kartındaki boş gerekçe de sürer.
+**CEVAP:**
+
+---
+
+## 9 · BELGE ↔ KOD ÇELİŞKİLERİ (işaretlendi, çözülmedi — KOD KAZANIR)
+
+| # | Belge ne diyor | Kod ne diyor | Kanıt |
+|---|---|---|---|
+| 9.1 | `CLAUDE.md` *"registerMessages.ts … dosya HENÜZ kodda YOK: grep boş"* | Dosya **VAR** ve 3 dosyadan kullanılıyor | `frontend/src/lib/registerMessages.ts` · BE'de `REGISTER_MESSAGES` (`authController.ts:125`) |
+| 9.2 | *(bu turun kendi sayım düzeltmesi)* İlk hızlı sayımım `audience` grep'iyle **8+7** aşama verdi | Gerçek **7+6** — fazlalık iki sorgu `where` bloğundan (`:526,529`) | Birim "veri nesnesi" diye tanımlandı (§1). Alt-ajanın 7+6 sayımı doğruydu |
+| 9.3 | Sertifika belgeleri *"kod hâlâ `=== 3` istiyor, `>= 2` kod turu BEKLİYOR"* | Kod turu **YAPILMIŞ**: `return competencyScore >= 2` | `sertifika-oturum1-...:6,403-406` ↔ `certification.service.ts:72` → belge bayat |
+| 9.4 | `senaryo-bankasi-tam.md:12` *"red-line: SADECE 3 geçer"* | Kod red-line ayrımı yapmıyor (`isRedLine` parametresi gövdede okunmuyor) | `certification.service.ts:72-73` → belge iki kuşak geride |
+| 9.5 | Belgeler kriz doğru cevabında **kuruma bildirim** şart koşuyor | Koddaki kriz şıklarında bildirim **yok** | `sertifika-oturum1-...:187,218` ↔ `seed-certification.ts:238-259` |
+| 9.6 | `senaryo-bankasi-tam.md:3` *"TAM TASLAK — kullanıcı onayı bekliyor"* | İçeriği zaten canlı seed'in kaynağı | `seed-certification.ts:7` |
+| 9.7 | `00-INDEKS.md:52` ve `bolumler/*.md` `backend/prisma/...` yolunu kullanıyor | Bu çalışma alanında `menti-mentor-v2/backend` **boş** (submodule); gerçek yol `menti-mentor/prisma/...` | Yol bayat, içerik doğru |
+| 9.8 | `client.ts:22` yorumu Zod mesajları için *"(zaten Türkçe)"* | ~75 mesajsız kısıt İngilizce varsayılan üretiyor | `client.ts:26-34` + BE `errorMap` → 0 sonuç |
+| 9.9 | `EngineSection:80` / `metodoloji:125` *"DISC kişilik tanısı değildir"* | `admin/algorithm-tuner:134` aynı şeye *"kişilik uyumu"* diyor | Ürün kendi feragatiyle çelişiyor |
+
+---
+
+## 10 · PO'NUN ELLE YAPACAKLARI
+
+> Bu tur `03-PO-ELLE-ISLER.md`'ye **yazmadı** (salt-okuma). Aşağıdakiler oraya aday satırlardır.
+
+1. **KARAR-3 ve KARAR-4'ü cevapla** — ikisi birlikte sertifika seed'ini (K-16 + P-99) kilitliyor. Bu turun eklediği
+   bağlam: bildirim metni **kodda yok**, yalnız belgede → karar canlıdaki bir metni değil, taşınacak metni etkiliyor.
+2. **KARAR-4 için somut kaynak adı** — belge bunu "ÇIKIŞ BLOKERİ" ilan etmiş ve *"kapanmış bir hat adı kriz anında
+   işe yaramaz bilgidir"* diye uyarmış; adın **güncelliğini PO doğrulamalı** (ajan doğrulayamaz).
+3. **Avukat paketine tek soru olarak gitsin:** kriz bildirim yükümlülüğü + 18 yaş/veli onayı + yaş verisi saklama
+   (§4.2 H-08…H-11). Belge bunların **tek soru** olduğunu zaten söylüyor (`sertifika-oturum1-...:350-354`).
+4. **`ProfileStep.tsx:296`** — form placeholder'ında **iki gerçek üçüncü-taraf kurum adı** örnek veriliyor;
+   marka/izin açısından teyit gerekiyor (kişi adı yasağı kapsamında değil).
+5. **Canlı DB teyitleri:** `Question`/`CertificationQuestion`/`LearningStage` gerçekten dolu mu; `internalNote`
+   kaç kayıtta dolu; öğrenme yolculuğunun kriz aşaması canlıda var mı. (Bu tur DB'ye bakmadı.)
+
+---
+
+## 11 · ✅ ZATEN İYİ (boş bırakılmaz)
+
+1. **Kişi adı yasağına tam uyum** — 4 dizin × ~75 ad tohumu taraması sonrası **0 gerçek kişi adı**; demo
+   personaları bile `Ad X.` anonim formunda.
+2. **Hesap kapatma metni dürüst** — "silinir" demiyor, anonimleştirmeyi anlatıyor (`DataPrivacySection.tsx:199-206`)
+   ve kod aynı şeyi söylüyor (`gdprService.ts:45-47`). H-01…H-11'in nasıl düzeltileceğinin **ürün içi örneği**.
+3. **Metodoloji sayfası örnek bir dürüstlük metni** — *"kanıtlanmış bir kesinlik değil"*, kaynak etiketlerinde
+   *"akademik kanıt değil"* (`metodoloji/page.tsx:126,147,194,238`).
+4. **Ton kuralı yazılı ve çoğunlukla uygulanıyor** — `TenantCorrectionBanner.tsx:10` destekleyici dil kuralı;
+   ≈286 mesajda "yanlış yaptınız" kalıbı **0**.
+5. **500 yolu temiz** — stack/DB/dosya yolu kullanıcıya hiç gitmiyor (`errorHandler.ts:24`).
+6. **`seed-learning-journey.ts` güvenli yazılmış** — yalnız `upsert`, `deleteMany` 0, doğrudan-çalıştırma muhafızı;
+   13 aşamanın 42 şıkkında 0 TODO/boş alan.
+7. **`seed-certification.ts` silmiyor, pasifleştiriyor** — `:307-310` `isActive:false`, yorumu da *"silme yok,
+   veri korunur"* diyor.
+8. **Üç sertifika oturum belgesi gerçekten farklı parçalar** — 11 konu ardışık, tekrar yok (önceki iddia doğrulandı).
+9. **İndeks `senaryo-bankasi` ikilisini doğru ayırmış** (`00-INDEKS.md:52-55`) ve yazılmamış 3 belgeyi
+   `⬜ HENÜZ YAZILMADI` diye **dürüstçe** işaretlemiş.
+10. **madde 151 ve 138 metinleri gerçekten ekrana hazır** — 8/8 tam, yer tutucusuz, ton tutarlı; iş "yaz" değil "bağla".
+11. **5 enum sözlüğü tam kapsıyor** (format · görüşme durumu · sertifika durumu · konu slug'ı · gün adları) —
+    ham enum sızıntısı bu 5 alanda **yok**.
+12. **DISC feragati ürünün en görünür yerinde var** (`EngineSection.tsx:80`) — eksik olan, aynı cümlenin
+    testi çözen kullanıcıya tekrarlanması.
+
+---
+
+## 12 · TARANAMAYANLAR
+
+1. **Canlı DB'ye bakılmadı** (salt-okuma tur, PO onayı yok) → `internalNote` dolu kayıt sayısı, seed'lerin
+   çalıştırılıp çalıştırılmadığı, `COMPLETED` görüşme var mı — hepsi **❓ TEYİT GEREK**.
+2. **88 şık karakter düzeyinde karşılaştırılmadı** — soy bağı olan 5 senaryoda örnekleme yapıldı; kalan 17'de
+   karşılaştırılacak seed metni zaten yok.
+3. **`faz6-ogrenme-ve-sertifika-2026-09-03.md` tam okunmadı** (15 sahnenin kaynağı) — oturum belgelerinin
+   kaynak etiketleri esas alındı.
+4. **3 İngilizce metnin ölü yolda olduğu iddiası** FE v2'nin uç listesine dayanıyor; **başka bir istemci varsa**
+   (FE v1) gerçek bulgu olur → ❓ TEYİT GEREK.
+5. **Psikometrik geçerlilik tartışılmadı** — bilinçli: psikometri konseyinin konusu. Bu tur yalnız metnin **vaadine**
+   baktı.
+6. **`/bildir` sayfasının tamamı okunmadı** (ilk ~60 satır) → aydınlatma bağlantısı iddiası ❓ TEYİT GEREK.
+
+---
+
+## 13 · KALEM LİSTESİ (KURAL 9)
+
+**Birim:** bu turda çıkan benzersiz bulgu satırı. **Toplam 30 kalem.** Numara VERİLMEDİ, kuyruğa iş EKLENMEDİ.
+
+| # | Kalem | Durum | Numara adayı mı |
+|---|---|---|---|
+| 1 | Sertifika farkı 2 senaryo değil **17**; seed'in 15 senaryosu elenmiş, ortak 5'in 5'i değişmiş | 🟡 YARIM | **evet** (P-99 Not'u düzeltilir) |
+| 2 | Soy bağlı senaryolardan birinde **puan anlamı ters dönmüş** (Gizlilik B) | ⬜ AÇIK | evet |
+| 3 | `internalNote` alanı şık düzeyinde, 17 iç not konu/varyant düzeyinde → yerleşim kararı yok | ⬜ AÇIK | evet |
+| 4 | Seed şık **silmiyor** → şık anahtarı değişirse soru 4'ten fazla şıkla görünür | ⬜ AÇIK | evet |
+| 5 | Konu slug'ı değişirse `certWrongTopics`/`disabledCertTopics` öksüz kalır; geçme eşiği 8→9 | ⬜ AÇIK | evet |
+| 6 | madde 139 gerçekte **4/8** — menti varyantları yazılmamış | 🟡 YARIM | **evet** |
+| 7 | madde 147'nin 5 aşamasında `{mentor_*}` yer tutucusu, kodda 0 karşılık | 🟡 YARIM | evet |
+| 8 | madde 147 seed'de **zaten 6 farklı menti aşaması var** → üzerine yazma kararı | ⬜ AÇIK | evet |
+| 9 | I-17 kuyrukta "seed işi" ama içerik **hiç yazılmamış** → önce yazım turu | 🟡 YARIM | **evet** (I-17 Not'u düzeltilir) |
+| 10 | Arketip ad↔kod eşlemesi hiçbir yerde yazılı değil; "Kâşif" 3 anlamda; "İz Açan" onaysız | ⬜ AÇIK | **evet** (kart) |
+| 11 | İçerik belgesindeki ağırlıklar (%45/%30/%25) kodla (0.6/0.4) çelişiyor | ❓ TEYİT GEREK | evet |
+| 12 | `VisibilityOptIn` durum alanı zaten var → I-10/I-16'nın "şema engeli" yumuşayabilir | ❓ TEYİT GEREK | evet |
+| 13 | Öğrenme yolculuğu: belge 8 mentör aşaması, seed 7 → 1 aşama ayrışmış | ❓ TEYİT GEREK | evet |
+| 14 | Mentör panelinde 4 İngilizce DISC etiketi (2026-09-09 testinin kaynağı) | ⬜ AÇIK | **evet** |
+| 15 | Aynı 4 DISC boyutu için **5 uyuşmayan sözlük** | ⬜ AÇIK | evet |
+| 16 | 12 ham-enum render noktası (rol · durum · format · log · "Journey") | ⬜ AÇIK | evet |
+| 17 | `M1`/`m1` ham arketip kodu yöneticiye çıplak görünüyor, sözlük yok | ⬜ AÇIK | evet |
+| 18 | E-postada ham `MENTOR`/`MENTI` rol enum'u (2 şablon) | ⬜ AÇIK | evet |
+| 19 | ~75 mesajsız Zod kısıtı → İngilizce varsayılan kullanıcıya sızıyor | ⬜ AÇIK | **evet** |
+| 20 | Davet şablonunda **tek cümlede** "mentörlük … mentor"; 4 ekranda daha aynı-ekran çakışması | ⬜ AÇIK | **evet** |
+| 21 | randevu ↔ toplantı ↔ görüşme: aynı olay 4 farklı adla | ⬜ AÇIK | evet |
+| 22 | Sertifika sonucu `RED_LINE_FAILED`'i okumuyor → **kullanıcıya yanlış sebep** | ⬜ AÇIK | **evet** |
+| 23 | PENDING düzeltme notu uygulama içinde hiç gösterilmiyor | ⬜ AÇIK | evet |
+| 24 | 5 düzeltme şablonu suçlayıcı/emir kipinde | ⬜ AÇIK | evet |
+| 25 | 20 jenerik fallback; 5'inde BE hatası tamamen yutuluyor | ⬜ AÇIK | evet |
+| 26 | Enumeration sızıntısı (`PROVIDER_CATISMASI`) — projenin kendi kuralıyla çelişiyor | ⬜ AÇIK · HUKUKİ | evet |
+| 27 | Onboarding sonuç kartı + eşleşme skoru: kesin kimlik/vaat dili (6 metin) | ⬜ AÇIK | **evet** (kart) |
+| 28 | 13 yeni hukuki bulgu (taslak sayfalar + zorunlu rıza · "kimliğin paylaşılmaz" ↔ admin ad-soyad · sertifika çekincesi · "sonsuza kadar ücretsiz" · 18+ beyanı/yaş verisi …) | ⬜ AÇIK · HUKUKİ | **evet** (kart) |
+| 29 | Menti tarafında kriz/kötü-muamele içeriği ve bildirim kanalı yok | ⬜ AÇIK | evet |
+| 30 | Belge hijyeni: `bolumler/` 5 belge indekste yok · 3 zayıf etiket · bayat `backend/` yolları · faz6'nın aşıldığı yazmıyor | ⬜ AÇIK | evet |
+
+**Belge senkronu:** bu tur 🟩 PLANLA (salt-okuma) — **belge güncellemesi gerekmedi: hiçbir kod/durum değişmedi.**
+Bulgular `00-KUYRUK.md` ve `01-KARARLAR.md`'ye işlendiğinde bu belge güncellenmez (📸 dondurulmuş).
