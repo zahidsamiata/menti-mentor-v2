@@ -4,6 +4,14 @@
 
 ---
 
+## TUR DEVAM (checkpoint 2) — TUR AD (2026-09-21) · /goal sürüyor
+CANLIDA (bu checkpoint'e kadar toplam): P-11/12/13 · U-04/05/16 · V-01/02/08/11/14 · F-15/16/22/25/26 · **K-04 · K-11 · F-27 · V-09 · F-13** · (K-06→KARAR-29).
+Pointer en son **b5415bd** (K-04+F-27). Açık PR YOK (hepsi merge).
+**KALAN 🟢 BEKLIYOR:** K-05 · K-08 · K-10 · F-01 · F-10 · F-14 · F-19 · F-21 · F-28 · F-31 · F-32 · F-33 · P-10 · E-3.
+Not: K-05/K-08/P-10 = BE+FE (pointer bump gerekir) · F-01 = büyük belge reorg · E-3 = hayalet BAĞLA kovası (E-1/E-2 raporlarına bağlı).
+
+---
+
 ## TUR DEVAM — TUR AD (2026-09-21) · /goal: tüm 🟢 BEKLIYOR bitirilecek
 İkinci dalga CANLIDA (merge + pointer bump 1ad47f5→81523fa): **V-01, V-02, V-08, V-11, V-14, F-25, F-22, F-15, F-16** + **F-26/U-05 zaten yapılmış (§5c)**.
 - Ops (PR #84+#227): /health'e smtp+cron · 500 log meta+process handler · .dockerignore fix · platform mail gerçek probe.
