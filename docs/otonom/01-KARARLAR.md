@@ -737,6 +737,11 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** B, hukuk ile büyümeyi ayıran tek seçenek ama en pahalısı. C, gerçek kullanıcı ~sıfırken cazip görünür; kurum sayısı artınca geri alınamaz.
 **Benim önerim:** **B** — çünkü avukat notu zaten C'yi riskli ilan etmiş ve k-anonimlik altyapısı kodda hazır.
 **Cevap vermezsen:** madde 91 · 115 · 116 kuyruğa giremez; kulüp modülü canlı ama hukuken savunmasız kalır.
+⚠️ **PO SORUSU (2026-09-21):** Günümüzde mentorluk çoğu zaman resmi kurumda değil, topluluklarda (meslek toplulukları, mezun ağları vb.) oluyor — platform bunlara göre esnek olmalı mı? Bu kartla birlikte ele alınacak. Üç boyut:
+ (1) **KAYIT:** topluluklar çoğunlukla genel e-postayla gelir → her biri PO'nun elle onay kuyruğuna düşer; başka doğrulama yolu gerekir.
+ (2) ⭐ **KVKK ROLÜ:** tüzel kişiliği olmayan toplulukta veri sorumlusu büyük olasılıkla **PLATFORMUN KENDİSİ** olur — KVKK yükü artar. AVUKAT PAKETİNE.
+ (3) **SATIŞ:** topluluk sözleşme imzalamayabilir — fiyatlama/sorumluluk farklı.
+ Kodda: kulüp modülü backend'i yazılı (7 uç, 2 tablo), ekranı yok (KARAR-9 ertelendi).
 **CEVAP:**
 
 ---
