@@ -4,6 +4,48 @@
 
 ---
 
+## ⭐⭐ TUR BG (TERMINAL) — BULUT İŞLERİ MERGE + POINTER + 4 KARAR KAYDI (2026-09-22)
+
+> **Mod:** 🟥 BYPASS — terminal. **Kod DEĞİŞMEDİ** (yalnız merge + docs + submodule pointer) · **DB/migration/seed YOK** · **hiçbir şey SİLİNMEDİ** · #110'a DOKUNULMADI.
+> Dallar: `otonom/BF-merge-karar-kaydi-20260922` (docs+pointer, **merged #241**) · `otonom/BG-terminal-kapanis-20260922` (bu kapanış notu).
+
+### 1 · Merge edilen PR'lar (hepsi CI yeşil)
+| PR | Repo | Ne | CI | Kapsam teyidi |
+|---|---|---|---|---|
+| **#240** BE | çatı | 9 karar kaydı + konsey düzeni (docs) | 8/8 pass | docs-only (frontend/backend 0 değişiklik, 3-nokta diff teyitli) |
+| **#231** F-19 | çatı | Yönetici proaktif eşik-alarmı (FE) | 8/8 pass | frontend-only: `(admin)/admin/kpi/page.tsx` · `lib/adminAlerts.ts` · test |
+| **#87** BD | backend | Kimlik sahteciliği düzeltmesi (GV-01/02) | pass | tam 5 dosya (sjtScoringController · feedback.service · feedbackController + 2 test) — fazlası YOK |
+| **#241** BF | çatı | pointer bump + 4 karar + avukat paketi | 8/8 pass | docs + submodule pointer, kod 0 |
+
+### 2 · Kapatılan 8 PR (içeriği BE ile main'e girdi)
+`AZ #232` · `BA #233` · `CA #235` · `CB #237` · `CC #238` · `CD #236` → **kapatıldı** (yorumla).
+`BB #234` · `BC #239` → GitHub **"already merged"** olarak kapattı (commit'leri BE üzerinden main'e ulaştı — daha temiz sonuç).
+⛔ **Kanıt disiplini:** 8 PR'ın da dosyaları kapatmadan ÖNCE main'de doğrulandı (her biri için `git cat-file -e origin/main:<dosya>` → hepsi PRESENT).
+
+### 3 · Pointer bump
+- Eski: `b5415bd116aa9ffc7ed3dc30dc0146852072b058`
+- Yeni: `b0b3dcbe57061eb95e5bdb0fe5fd3885f0558c6a` (backend main HEAD, BD #87 merge commit)
+- Ata kontrolü: `merge-base --is-ancestor eski yeni` → **YES** (ileri sarım güvenli).
+- **Eşitlik teyidi:** çatı main pointer == backend main HEAD → **✅ EŞİT**.
+
+### 4 · Yazılan 4 CEVAP (PO, 2026-09-21, strateji katmanı) + kilidi açılan satırlar
+- **KARAR-23** → ÖZEL: onay+düzeltme maili gönderilir, **ret maili YOK** (kırıcı olabilir).
+- **KARAR-24** → B: hata iz kaydı panele, **PII temizlenmiş** (denetim izi KALDIRILMAZ).
+- **KARAR-27** → A: Sentry + kişisel veri temizleme + KVKK metni şartı.
+- **KARAR-33** → B: dondur, sebep seç, 30 gün sonra psikometri sil, mentör emeği/sayısı korunur.
+- İndeks 4 kart **✅ CEVAPLANDI**. **Kilidi açılan/eklenen kuyruk satırı: 4** → `DK-01` (Sentry) · `DK-02` (düzeltme e-postası metni) · `DK-03` (panel hata ayrıntısı) + **Y-14** kapsam genişledi (KARAR-33 akışı absorbe edildi).
+- **KARAR-34**'e PO topluluk-mentorluğu **SORUSU** eklendi (CEVAP'a dokunulmadı).
+
+### 5 · Avukat paketi
+- `03-PO-ELLE-ISLER.md` → yeni **"⚖️ AVUKAT PAKETİ"** bölümü, **8 madde** (A1-A8): KARAR-3/4/31/27/33/24/34/23. E-bölümü KARAR-47 maddeleriyle mükerrer denetimi yapıldı; `kvkk-metinleri/` paketine atıf verildi.
+
+### 6 · Kuyruk İŞLENMEDİ (bilinçli)
+⛔ OTONOM-PROMPT okunmadı, kuyruk işlerine başlanmadı — PO'nun zamanı/bağlantısı kısıtlı. Bir sonraki oturum `/goal` + OTONOM-PROMPT ile kaldığı yerden işler.
+
+**Belge senkronu:** 09-DURUM/10-yol güncellemesi gerekmedi — bu tur ürün özelliği eklemedi (yalnız merge + karar kaydı); durum anlatısı BE turunda zaten güncellendi.
+
+---
+
 ## ⭐⭐ TUR BE — 9 KARAR CEVAPLANDI, 8 İŞİN KİLİDİ AÇILDI (2026-09-21) · YALNIZ BELGE
 
 > **Mod:** 🟥 BYPASS — bulut. **Kod DEĞİŞMEDİ · DB/migration/seed YOK · hiçbir şey SİLİNMEDİ.**
