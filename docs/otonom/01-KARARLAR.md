@@ -39,11 +39,11 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-15 | Çok-kuruma üye kurumlar arası geçiş | 0 | ⬜ boş |
 | KARAR-16 | Yöneticiye eşleştirme kontrolleri | 0 | ⬜ boş |
 | KARAR-17 | Kurum yöneticisi davetsiz önizleme | 0 | ⬜ boş |
-| KARAR-23 | Kurum bildirimleri açılsın mı (onay/ret/düzeltme maili) | 1 (U-04) | ⬜ boş · W §4.1 · HUKUKİ |
-| KARAR-24 | Hata iz kaydı (stack) panele açılsın mı | 0 (V-02 kısmı) | ⬜ boş · W §4.2 · KVKK |
+| KARAR-23 | Kurum bildirimleri açılsın mı (onay/ret/düzeltme maili) | 1 (U-04) | ✅ **CEVAPLANDI (2026-09-21): ÖZEL — onay+düzeltme maili, ret maili YOK** |
+| KARAR-24 | Hata iz kaydı (stack) panele açılsın mı | 0 (V-02 kısmı) | ✅ **CEVAPLANDI (2026-09-21): B — PII temizlenmiş** |
 | KARAR-25 | Gerçek yedek nereye yazılsın | 0 (G1-28 🔴) | ⬜ boş · W §4.3 · KVKK |
 | KARAR-26 | İki yedek tablo (S26/S37) düşürülsün mü | 0 (DB) | ⬜ boş · W §4.4 · GERİ DÖNÜLMEZ |
-| KARAR-27 | Dış hata izleme servisi kurulsun mu | 0 | ⬜ boş · W §2.A · KVKK |
+| KARAR-27 | Dış hata izleme servisi kurulsun mu | 0 | ✅ **CEVAPLANDI (2026-09-21): A — Sentry, PII temizleme + KVKK metni** |
 | KARAR-28 | Ölü LLM/OpenAI env silinsin mi | 0 | ⬜ boş · Bölüm 4 · SİLME PROTOKOLÜ |
 | KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ✅ **CEVAPLANDI (2026-09-21): A** |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
@@ -54,7 +54,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-30** | **Senaryo isimleri: seed'den önce mi sonra mı** | **2** (I-09, K-16/K-18 sırası) | ⬜ boş · ⭐ BB turu · ⚠️ yanlış sıra = içerik iki kez canlıya yazılır |
 | **KARAR-31** | **Kriz bildirimi (kendine zarar) + yaş sınırı** | **2** (I-18, G1-01) | ⬜ boş · ⭐ BB turu · ⛔ AVUKAT ön koşulu, öneri YOK |
 | **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ✅ **CEVAPLANDI (2026-09-21): A** |
-| **KARAR-33** | **Kurumdan üye çıkarma + red tipi** | **2** (Y-14/md.36, md.35) | ⬜ boş · ⭐ BB turu · backend hazır, düğme yok |
+| **KARAR-33** | **Kurumdan üye çıkarma + red tipi** | **2** (Y-14/md.36, md.35) | ✅ **CEVAPLANDI (2026-09-21): B — dondur, sebep seç, 30 gün sonra psikometri sil** |
 | **KARAR-37** | **madde 103 — kart mı özet mi kazanır** | 1 (md.103) | ⬜ boş · ⭐ BB turu · G1-23 vakasının tekrarı riski |
 
 > ⭐ **DÖRT KONSEY KARARLARI (2026-09-21) — KARAR-38…52.** Etkiye göre sıralı; "kaç işi açar" = 🔴 ile bağlı kuyruk satırı sayısı.
@@ -551,7 +551,9 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** İlk kurumları hızlı almak istiyorsan ve metinlere güveniyorsan A. Metinler henüz hazır değilse B (onay akışını aç, hukuki metinleri beklet). Hiç e-posta göndermeden yalnız uygulama-içi bilgilendirmeyle idare edeceksen C.
 **Benim önerim:** B — en riskli olan ret/düzeltme metinleri; onları beklerken onay maili en çok işi kapatır. (Bu senin ürün+hukuk kararın, önerime güvenme.)
 **Cevap vermezsen:** U-04 e-posta tarafı etkisiz kalır (03-PO env adımı yapılsa bile ton riski çözülmez); W risk #4 sürer.
-**CEVAP:**
+**CEVAP:** **ÖZEL (PO, 2026-09-21, strateji katmanı karar oturumu):** onay → ✅ e-posta gönderilir · düzeltme → ✅ e-posta gönderilir · **ret → ❌ e-posta YOK.** Reddedilen kurum yalnız uygulama içi durumu görür (U-04). **Gerekçe (PO):** *"ret maili kırıcı olabilir."*
+⚠️ **Düzeltme e-postası da kuruma giden bir metindir:** ajan metni HAZIRLAR, ancak bildirim AÇILMADAN ÖNCE PO'nun onayına sunulur → `03-PO-ELLE-ISLER.md`'ye onay işi olarak eklendi.
+⚠️ E-posta gönderimi **SMTP'ye** (çıkış kılavuzu B4) ve **`TENANT_NOTIFICATIONS_ENABLED`'a** (B5) bağlıdır.
 
 ---
 
@@ -566,7 +568,8 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Teşhisi hızlandırıp KVKK yüzeyini büyütmemek istiyorsan A yeter (E1'i kapatır). En derin teşhis şartsa ve filtreye güveniyorsan B. Hiç risk almak istemiyorsan C — ama teşhis yavaş kalır.
 **Benim önerim:** A — E1'i kapatır, yeni kişisel-veri yüzeyi açmaz.
 **Cevap vermezsen:** V-02'nin "iz kaydını panele aç" kısmı belirsiz kalır; 500 teşhisi elle SQL'e bağımlı sürer.
-**CEVAP:**
+**CEVAP:** **B (PO, 2026-09-21, strateji katmanı karar oturumu):** Hata ayrıntısı (tam iz kaydı) platform paneline **KİŞİSEL VERİ TEMİZLENMİŞ** olarak açılır. **PO gerekçesi:** *"amaç sorunu doğru çözebilmek."*
+⚠️ **KAPSAM DIŞI:** platform yöneticisinin KURUM VERİSİNE erişimindeki **erişim kaydı (denetim izi) KALDIRILMAZ.** Erişim engellenmiyor, yalnız kaydediliyor. *"Tüm sistemi kayıtsız gezme"* ayrı bir HUKUKİ karardır → avukat paketi (bkz. `03-PO-ELLE-ISLER.md` madde 6).
 
 ---
 
@@ -611,7 +614,9 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Ölçek büyüyorsa ve proaktif alarm şartsa A (en yaygın) veya veri hassasiyeti yüksekse B. Erken aşamadaysan C + KARAR-24 kısa vadede yeterli olabilir.
 **Benim önerim:** Kısa vadede C + KARAR-24; kullanıcı sayısı artınca A/B. (Bu senin kararın.)
 **Cevap vermezsen:** Dış izleme gelmez; V-02 (iç izleme) ile yetinilir — kabul edilebilir bir ara durum.
-**CEVAP:**
+**CEVAP:** **A (PO, 2026-09-21, strateji katmanı karar oturumu):** Sentry (ya da eşdeğeri) kurulur, **KİŞİSEL VERİ TEMİZLEME ayarıyla.**
+⚠️ **PO şartı:** Sentry'nin kullanımı, kullanıcıların onayladığı KVKK belgelerinde (**aydınlatma metni + yurtdışı aktarım envanteri**) YER ALMALI.
+**Doğan işler:** AJAN → entegrasyon + veri temizleme (kuyruğa yeni satır) · PO → hesap açma + anahtarı Dokploy'a girme (`03-PO-ELLE-ISLER.md`) · AVUKAT → aydınlatma metnine yurtdışı aktarım maddesi (avukat paketi).
 
 ---
 
@@ -711,7 +716,13 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Karşılaştırma:** Kurum küçük ve güven esaslıysa B yeter (çıkar, ama izi tut). Taciz/kötüye kullanım vakası bekleniyorsa C gerekir ama emek-kaybı yan etkisi konuşulmalı. A yalnız "şimdilik" cevabıdır.
 **Benim önerim:** **B** — çünkü geri alınabilir, mentör emeğini korur ve backend zaten bunu yapıyor; C'yi gerektiren vaka çıkınca ayrı karar verilir.
 **Cevap vermezsen:** **Y-14** (madde 36) kuyrukta bekler; yönetici onaylı üyeyi çıkaramamaya devam eder ve yanlış e-posta metni yerinde kalır.
-**CEVAP:**
+**CEVAP:** **B + PO detayları (PO, 2026-09-21, strateji katmanı karar oturumu):**
+· **Üyelik DONDURULUR, geçmiş kalır.** Yönetici çıkarırken **SEBEP seçer** (kötüye kullanım / diğer); kişiye giden mesajın **TONU sebebe göre değişir.**
+· **YÖNETİCİ çıkardıysa:** 30 gün içinde geri ALINMAZSA kişinin **KARAKTER ANALİZİ** (DISC, arketip, psikometrik profil) **SİLİNİR.**
+· **KİŞİ KENDİSİ çıktı ise:** 30 gün (KVKK silme talebine cevap üst sınırı; kısaltılabilir). ⚠️ Mevcut hesap silme akışıyla (`/me/delete-account`) UYUMLU hale getir; **KVKK silme hakkını ZAYIFLATMA.**
+· **Mentörün görüşme SAYISI DÜŞMEZ** — emeği korunur.
+· **Mentörün görüştüğü kişiler listesinde eski üyenin ADI görünür ama SOLUK / yarı saydam,** "sistemde değil" olduğu anlaşılır. ⚠️ Adın kalması **AVUKAT onayına** bağlı (veri minimizasyonu). Onaylanmazsa **"Eski üye"** yazılır, sayı ve tarih kalır.
+· Bu kural **güvenlik konseyi ③'ü** (`Match.mentorArchetype` silinmiyor) de çözer: psikometrik veri silinir, toplam sayılar korunur.
 
 ---
 
