@@ -127,6 +127,30 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 ⚠️ **GÜNCELLEME (2026-09-21): YANLIŞ BEYAN DÜZELTİLDİ.** Yukarıdaki cümle *"kartlar bu turda açıldı (KARAR-23+)"* diyordu; **açılmamışlar.** Kod-teyidi: `01-KARARLAR.md`'de kart numaraları **KARAR-0…29 (30 kart)**, en yüksek **29**; `grep "mentorVisibilityEnabled"` → **0 sonuç**, "oryantasyon kilidi" → tek isabet ve o da **başka bir kartın gövdesinde**, kendi kartı yok. ⇒ PO listeye bakıp arayacak, bulamayacaktı.
 **Doğrusu:** bu belgedeki işlerin bağlı olduğu kararlardan **bir kısmının kartı hâlâ YOK.** Bu turda (BB) açılan yeni kartlar `01-KARARLAR.md` sonunda **KARAR-30'dan** başlar; içindekiler tablosuna da eklendi. Kartı olmayan konular yeni kartlarda kümelenmiştir — hangi işin hangi karta bağlı olduğu ilgili satırın Not sütununda yazılıdır.
 
+## ⚖️ AVUKAT PAKETİ — tek görüşmede sorulacaklar (2026-09-22, terminal turu)
+
+> Bu paket, ürün/hukuk kararlarından çıkan ve **tek bir avukat görüşmesinde** toplanabilecek soruları bir araya
+> getirir. Amaç: PO'nun avukata her seferinde ayrı gitmesini önlemek. Mevcut KVKK metin paketi
+> `docs/kararlar/konu/kvkk-metinleri/` altındadır (00-AVUKAT-KONTROL-DOSYASI · 01-aydinlatma-metni ·
+> 02-acik-riza-metni · 05-saklama-imha-politikasi …) — aşağıdaki maddeler bu metinlere işlenecek cevaplar üretir.
+> ⛔ Bu belgede güvenlik kuralı geçerli: hiçbir gerçek değer/sır yazılmaz.
+> ⚠️ **Mükerrer notu:** E-bölümü #16 (mesaj saklama süresi) · #17 (OAuth rıza metni) · #20 (yurtdışı aktarım) ·
+> #21 (uygulama sunucusu ülkesi) zaten **KARAR-47** hukuki metin paketinde. Aşağıdaki 8 madde onları **tekrarlamaz**,
+> yeni kararlardan doğanları ekler.
+
+| # | Soru (avukata) | Neden önemli | Hangi karar/iş bekliyor |
+|---|---|---|---|
+| A1 | **KARAR-3** — Sertifika senaryosunda "yasal bildirim yükümlülüğü" ima eden şık hukuken doğru/güvenli mi? Yükümlülük gerçekten var mı, varsa metin nasıl olmalı? | Kullanıcıya "bildirmek zorundasın" ima eden bir metin yanlışsa hukuki sorumluluk doğurur; doğruysa eksik bırakmak risk. | `01-KARARLAR.md` **KARAR-3** cevabı buna bağlı |
+| A2 | **KARAR-4** — Kriz geri bildiriminde yönlendirilecek "somut destek kaynağı" metni ne olmalı (hangi hat/kurum, hangi ibare)? | Kendine zarar sinyalinde yanlış/eksik yönlendirme hem etik hem hukuki risk; kaynak resmi ve güncel olmalı. | **KARAR-4** cevabı + kriz akışı metni |
+| A3 | **KARAR-31** — Kriz bildirimi (kendine zarar) + **yaş sınırı**: reşit olmayan kullanıcı verisi/veli rızası nasıl ele alınmalı, bildirim eşiği ne? | Yaş + kriz birleşimi KVKK'da özel nitelikli veri + çocuk verisi; yanlış kurgu ağır sonuç. | **KARAR-31** cevabı (öneri YOK, avukat ön koşulu) |
+| A4 | **KARAR-27** — Sentry (dış hata izleme) kullanımının **aydınlatma metnine ve yurtdışı aktarım envanterine** eklenmesi: hangi ibare, hangi ülke/alıcı beyanı? | Sentry PII taşıyabilir → yurtdışı aktarım; metinde yer almazsa entegrasyon KVKK'ya aykırı olur. | **DK-01** (Sentry entegrasyonu) CANLI olamadan önce şart |
+| A5 | **KARAR-33** — Kurumdan çıkarılan üyenin **adının** mentör geçmişinde (soluk/yarı saydam) kalması veri minimizasyonuna uygun mu, yoksa "Eski üye" mi yazılmalı? | Ad kişisel veri; işlevsel gerekçe (mentör emeği) yeterli mi, yoksa maskeleme mi gerekir — avukat kararı. | **Y-14** / KARAR-33 akışının ad-gösterim ayağı |
+| A6 | **KARAR-24 bağlamı** — Platform yöneticisinin **kurum verisine erişimi**: bugün erişim VAR ve KAYITLI (denetim izi). PO "kayıtsız tam erişim" istiyor — bu hukuken mümkün mü, hangi koşulla? | "Tüm sistemi kayıtsız gezme" denetim izini kaldırır; KVKK hesap verebilirlik ilkesiyle çatışabilir. | **DK-03** kapsam dışı bırakılan denetim-izi kararı |
+| A7 | **KARAR-34 bağlamı** — Tüzel kişiliği olmayan **topluluklarda** (meslek toplulukları, mezun ağları) veri sorumlusu kim olur? Platform mu, topluluk mu? | Veri sorumlusu platform çıkarsa KVKK yükü tümüyle platformda; sözleşme/sorumluluk kurgusu buna göre değişir. | **KARAR-34** (kulüp/topluluk) + PO topluluk sorusu |
+| A8 | **KARAR-23** — Kuruma giden **"düzeltme" e-postasının metni** hukuken güvenli mi (ret maili gönderilmiyor, yalnız onay + düzeltme)? | Kuruma giden, hukuki sonucu olabilecek metin; ton ve içerik gözden geçirilmeli. | **DK-02** (düzeltme e-postası) PO onayından önce |
+
+---
+
 ## ❓ Kod tarafı TEYİT GEREK (ajan bulutta yapamadı, canlı/gerçek hesap ister)
 - `book-meeting` saat dilimi kayması İstanbul'da 409 üretiyor mu (X §8#5, gerçek deneme).
 - PENDING (OAuth) menti `mentor-matches`'ten veri alıyor mu (X §8#6 / U-08, gerçek hesap).
