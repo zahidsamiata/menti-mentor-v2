@@ -58,7 +58,7 @@ Bu harita o kuralı **çiğnemez, tamamlar.** İkisinin işi farklı — karış
 | **Ç-2** | k-anonimlik: **⬜** ↔ **🟡** — *aynı belgenin içinde* | `kararlar/00-KARAR-TAKIP.md:614` (madde 119, ⬜) ↔ `:686` (F-tablo, 🟡, "G1-22") ↔ `G1-guvenlik-kvkk.md:357-364` (⬜, `Numara: NUMARASIZ`) | Bir kalem, iki numara, üç kayıt. İkisi birbirini tanımıyor |
 | **Ç-3** | Bilanço toplamı **196 ↔ 259 ↔ 260** | `bilanco/bilanco-po-ozet-2026-08-26.md:22` ("196") · `bilanco/karar-defteri-2026-08-26.md:437` ("196") ↔ `bilanco/kararlar/00-KATLAMA-IZI-2026-08-27.md` ("259") ↔ `00-SAYIM-2026-08-27.md` ("260") | Düzeltme paragrafa yazılmış, **tablo hücreleri 196'da kalmış** |
 | **Ç-0** ⭐ | **CANONICAL'IN KALBİ BAYAT.** `09-DURUM.md` başlığı **2026-09-19** diyor; ama `:241` **"⚡ TEK BAKIŞTA (şu an — hepsi doğrulanmış)"** bölümü **2026-08-19** fotoğrafı (32 gün): backend HEAD `b6187c1` · çatı `753c545` · "açık docs PR #96, #97" · "DISC soruları (**20**)" — oysa aynı dosyanın `:119` satırı "DISC **32**" diyor | `kararlar/09-DURUM.md:3` ↔ `:241-249` ↔ `:119` | ⚠️ **En yüksek kazançlı tek düzeltme.** "şu an" diye etiketlenmiş bölüm şu an DEĞİL; canonical'ın en çok okunan yeri yanlış. G9-03 üstü-çizili damgası uygulanmamış |
-| **Ç-0b** | `09-DURUM.md:447` **"🔴 KIRMIZI KURALLAR (kalıcı)"** altında *"PR aç, merge etme"* — `CLAUDE.md` tepe bölümü (2026-09-19) ise *"🟢 işler MERGE EDİLİR, PO beklenmez"* diyor. Aynı kural `devir/01:29,56` · `03:55` · `04:69` · `06:44,46`'da da geçersiz hâliyle duruyor (**6 yer**) | `09-DURUM.md:447` + 5 devir belgesi ↔ `CLAUDE.md` | Yeni gelen bu 6 yerden birini okuyup merge etmemeyi kural sanar → otonom kuyruk tıkanır. **KURAL 12 "karar-yayılımı" ayağının tam vakası** |
+| **Ç-0b** | ~~[ESKİ · 2026-09-20] `09-DURUM.md:447` **"🔴 KIRMIZI KURALLAR (kalıcı)"** altında *"PR aç, merge etme"* … (**6 yer**)~~ ⚠️ **GÜNCELLEME (2026-09-21, BB turu — teşhis DOĞRUYDU, iki ayrıntısı yanlıştı):** (a) hedef satır `09-DURUM.md:447` **değil `:450`** (`:447` = "🔴 KIRMIZI KURALLAR" başlığı, `:448-449` başka kurallar); (b) "6 yer" **eksik sayım** — geniş tarama (`docs/` + `CLAUDE.md`, harf duyarsız, 2 desen) **15 yürürlükte-görünen satır** buldu. **DURUM: 9'u bu turda düzeltildi** (`CLAUDE.md:26,178` · `09-DURUM.md:450` · `10-yol-haritasi.md:308,309` · `konu/07-calisma-tarzi.md:10,19` · `konu/11-…-disc.md:148` · bu satır). **Kalan 6'sı `docs/devir/01,03,04,06`'da ve hepsi 📸 DONDURULMUŞ** → tur talimatı gereği dokunulmadı; donmuş belge tarihsel kayıttır, ama `01` ve `06` kendini *"kalıcı referans"* ilan ettiği için **PO kararı gerekir** (bkz. `docs/raporlar/kesif/devir-analizi-2026-09-21.md` §6.1). | `09-DURUM.md:450` + 5 devir belgesi ↔ `CLAUDE.md:25-45` | Yeni gelen bu yerlerden birini okuyup merge etmemeyi kural sanar → otonom kuyruk tıkanır. **KURAL 12 "karar-yayılımı" ayağının tam vakası** |
 | **Ç-0c** | `00-INDEX.md` (harita!) **13 belgeyi + `otonom/` klasörünün tamamını bilmiyor.** `grep -ci otonom 00-INDEX.md` → **0**. Son commit 2026-08-30 (21 gün); 2026-09-03 sonrası üretilen 13 belge hiç eklenmemiş (~900 satır indekssiz) | `kararlar/00-INDEX.md` | **KURAL 5 ihlali.** Dünkü `hayalet-envanter-2026-09-19.md` haritada yok. Ayrıca `:24` "BURADAN BAŞLA" 6. adımı yeni geleni, kendi `:97`'de "bayat" dediği `durum-panosu`'na yolluyor |
 | **Ç-0d** | `09-DURUM.md:456,458` **iki ölü dosya referansı**: `00-karar-statu-haritasi-2026-08-14.md` · `00-DURUM-PANOSU.md` — ikisi de **yok** (doğrulandı). Gerçek yollar `oz-denetim/` altında, `00-` öneki olmadan | `kararlar/09-DURUM.md:456,458` | 2026-08-23 alt-klasörlemesinde atıflar güncellenmemiş |
 | **Ç-4** | Manuel eşleştirme: "eksik" ↔ "YASAK" | `raporlar/panel/stk-yonetici-panel-envanteri:71,148` ↔ `stk-yonetici-strateji:67` — çelişkiyi 3. klasörden `kod-denetimi/tam-belge-taramasi-2026-08-23.md:38` yakalamış | panel/ içinde bu çelişkiyi gösteren not YOK |
@@ -552,6 +552,32 @@ Bugünkü 17'nin **8'i o defterden SONRA yazıldı** ve hiç bilanço görmedi:
 Bölme **başlıktan başlığa** yapıldı; hiçbir oturumun ortasından kesilmedi. Başlıklar üç farklı biçimde geçiyordu (`# 📅 OTURUM`, `## OTURUM`, `## <tarih>`) ve üçü de tarandı; oturum olmayan iki `##` başlığı (`⏭️ SIRADAKİ İŞ SIRASI`, `🧭 çalışma tarzı hatırlatması`) içinde bulunduğu oturumla birlikte taşındı.
 
 ---
+
+---
+
+## ⭐ EK (2026-09-21, BC turu) — `raporlar/kesif/` altına GİREN ALTI YENİ RAPOR
+
+> Bu altı belge 2026-09-21'de yedi ayrı dalda üretildi ve **BC birleşik PR'ında tek dala toplandı**.
+> Hepsi **📸 DONDURULMUŞ** — bulguları `00-KUYRUK.md` / `01-KARARLAR.md`'ye işlendikten sonra güncellenmezler.
+> ⚠️ Bu harita (2026-09-20 fotoğrafı) yazıldığında bu altı belge **yoktu**; §C'nin "17 belge / 2613 satır" sayımı
+> bugün **17 → 23 belge**'dir. Eski sayıya dokunulmadı (KURAL 6), burada düzeltildi.
+
+| Belge | Ne | Satır | Tür | Bulguları nereye işlendi |
+|---|---|---:|---|---|
+| `devir-analizi-2026-09-21.md` | Yol haritası + karar takibi + 09-DURUM + kuyruk hijyeni devir analizi | 603 | 📸 | `00-KUYRUK` AŞAMA Y · `03-PO-ELLE-ISLER` §"ÇIKIŞ İÇİN ŞART" |
+| `po-cikis-kilavuzu-2026-09-21.md` | PO'nun canlıya çıkış kılavuzu (elle yapılacaklar + doğrulama yolları) | 745 | 📸 | `03-PO-ELLE-ISLER.md` A/B/C/D bölümleri |
+| `konsey-psikometri-2026-09-21.md` | Psikometri/eşleştirme konseyi — OCEAN motoru, DISC vektörü, sıralama, test örtüsü | 591 | 📸 | `00-KUYRUK` **AŞAMA PS** (11 satır) · **KARAR-41…44** · KARAR-10 eki · PO #22/#23 |
+| `konsey-guvenlik-kvkk-2026-09-21.md` | Güvenlik + KVKK konseyi — IDOR, kimlik sahteciliği, anonimleştirme, rıza, aydınlatma metni | 452 | 📸 | `00-KUYRUK` ⛔⛔ EN ÜST (GV-01/02) + **AŞAMA GV** (23 satır) · **KARAR-38…40** · PO #19/#20/#21 |
+| `konsey-icerik-2026-09-21.md` | İçerik konseyi — hazır içerik denetimi, terim tutarlılığı, hata/boş-durum metinleri, sertifika sürümü | 737 | 📸 | `00-KUYRUK` **AŞAMA IC** (14 satır) + AŞAMA I notları · **KARAR-45…48** · PO #24 |
+| `konsey-yonetisim-2026-09-21.md` | Yönetişim konseyi — klasör yapısı, belge güncelliği, kural yönetimi, CLAUDE.md boyutu | 640 | 📸 | `00-KUYRUK` **AŞAMA YN** (15 satır) · **KARAR-49…52** · PO #25/#26 · ⭐ CLAUDE.md bölme (uygulandı) |
+
+⚠️ **Atıf uyarısı:** `konsey-yonetisim-2026-09-21.md`'deki tüm `CLAUDE.md:<satır>` atıfları **bölme öncesi**
+dosyaya (47.456 karakter · 712 satır) aittir. Yeni adresler belgenin kendi başındaki ⚠️ GÜNCELLEME notunda,
+**bölüm adıyla** yazılı.
+
+⚠️ **KURAL 5 borcunun BİR KISMI bu turda kapandı:** bu PR'la açılan
+`docs/kararlar/konu/rtk-komut-rehberi.md` **`kararlar/00-INDEX.md`'e işlendi.** Bu haritanın kendisinin
+INDEX'e işlenmesi ve INDEX'in 13 eksik belgesi **HÂLÂ AÇIK** (`00-KUYRUK` **YN-03**).
 
 ## 📌 BU TURUN YAPMADIKLARI (bilinçli)
 

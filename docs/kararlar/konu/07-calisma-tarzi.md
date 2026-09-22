@@ -1,13 +1,15 @@
 # 07 — ÇALIŞMA TARZI VE PROMPT FELSEFESİ
 **🔄 YAŞAYAN** (canonical: çalışma tarzı ve prompt felsefesi)
-**Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler (ortak), bugünkü oturum
+~~[ESKİ · 2026-09-21] **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler (ortak), bugünkü oturum~~
+⚠️ **GÜNCELLEME (2026-09-21):** **Son güncelleme: 2026-09-21** — eklenen bölümler: *"Konsey denetimleri"* · *"Karar oturumu biçimi — PO tercihi"*.
 
 > Bu, her Claude Code promptunun ve her çalışma turunun uyması gereken çerçeve.
 > Kullanıcı (ürün sahibi) teknik detaya çok hakim değil — kararları sade dille açıkla, öner, gerekçelendir.
 
 ## PROMPT STANDARDI (8 UNSUR — her kapsamlı prompt)
 1. **BÜYÜK RESİM** — nereye gidiyoruz, bu adım ne tamamlıyor, sonrası ne. Parçayı değil bütünü göster.
-2. **MOD (en başta)** — PLAN (salt-okuma) / BYPASS (kod yaz, PR aç, MERGE ETME) / MANUEL ONAY (geri-alınamaz işler).
+2. ~~[ESKİ · 2026-09-10 öncesi] **MOD (en başta)** — PLAN (salt-okuma) / BYPASS (kod yaz, PR aç, MERGE ETME) / MANUEL ONAY (geri-alınamaz işler).~~
+   ⚠️ **GÜNCELLEME (2026-09-21):** MOD bildirimi aynen geçerli; BYPASS'ın tanımı değişti — **kod yaz, PR aç, kapısı 🟢 ve doğrulama listesi tamsa MERGE ET** (🟡/🔴 PR'da bekler). — kanıt: `CLAUDE.md:25-45`.
 3. **DEVSECOPS** — kod anında, katmanlı (aşağıda şablon). Sonradan yamanmaz. Tenant izolasyonu KRİTİK.
 4. **PARALELLİK** — bağımsız/farklı dosya → paralel alt-ajan (tek oturum, ayrı terminal AÇMA). Ortak dosya/bağımlı/merge/migration → sıralı. Şüphede sıralı.
 5. **DURAK NOKTALARI** — geri-alınamaz işlerde (merge/deploy/silme/DB-yazımı) DUR, onay bekle.
@@ -16,7 +18,8 @@
 8. **KAPANIŞ + YOL HARİTASI** — ne oldu, sıradaki adım, güncel durum.
 
 ## GENEL İLKELER
-- **"PR aç, MERGE ETME"** güvenlik ağı — ürün sahibi en sonda inceler.
+- ~~[ESKİ · 2026-09-10 öncesi] **"PR aç, MERGE ETME"** güvenlik ağı — ürün sahibi en sonda inceler.~~
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** Bulut oturumu hiçbir kapıda merge edemez. — kanıt: `CLAUDE.md:25-45` · `docs/otonom/00-KUYRUK.md:6-16`.
 - **Ürün kararı ürün sahibinde.** Claude analiz+seçenek sunar, dürüst pushback yapar, körü körüne onaylamaz.
 - **Aşırı mühendislik/erken optimizasyon YOK.** Gerçek ihtiyaç olmadan özellik yok. Sinyal gelince yap.
 - **Kapsamlı/uçtan uca tek prompt** — parça parça "şunu yap dur" değil.
@@ -56,3 +59,75 @@
 - **SHA tahmin etme:** Asistan yanlış SHA verdi, Claude Code git'ten doğrulayıp yakaladı, prod çökmesini önledi. → "tahmin etme, doğrula."
 - **Önce teşhis, kod değilse uğraşma:** Platform panel bug'ı kod değil JWT_SECRET değişimiydi; re-login çözdü. Kullanıcının "önce teşhis" yaklaşımı doğru çıktı.
 - **Teşhis hipotezini doğrula:** B10 yavaşlık teşhisi ("stable ref") kod okununca çürüdü; kör düzeltme yapılmadı.
+
+---
+
+## Konsey denetimleri (2026-09-21)
+
+> ⚠️ Bu bölüm **yeni bir KURAL değildir** — çalışma tarzı kaydıdır. `CLAUDE.md`'ye **EKLENMEDİ**
+> (dosya 34.742 karakter, 35.000 hedefinin hemen altında; büyütmemek bilinçli).
+
+**Konsey nedir:** Ürünün bir yüzünü tek bir soruyla denetleyen **salt-okuma bulut turu**. Her konseyin
+**tek bir sorusu** vardır ve rapor o soruya cevap verir.
+
+### Yedi konsey ve sorusu
+
+| Konsey | Sorusu |
+|---|---|
+| 🚀 **Canlıya Çıkış** | Bugün gerçek bir kurum alabilir miyiz? |
+| 🔐 **Güvenlik ve KVKK** | Kullanıcı erişmemesi gereken veriye ulaşabilir mi? |
+| ⚙️ **Operasyon** | Bir şey bozulunca haberimiz olur mu, veri geri döner mi? |
+| 🧠 **Psikometri ve Eşleştirme** | Eşleştirme gerçekten İYİ mi? |
+| 📚 **İçerik** | Yazılan içerik kullanıcıya ulaşıyor mu, doğru mu? |
+| 👥 **Kullanıcı Deneyimi** | Menti, mentör, yönetici takılmadan ilerleyebiliyor mu? |
+| 🗂️ **Yönetişim** | Kararlarımız, kurallarımız, belgelerimiz hâlâ doğru mu? |
+
+### Sıklık
+
+| Konsey | Ne zaman |
+|---|---|
+| 🚀 Canlıya Çıkış | **Her turda** — kuyruktaki `⛔ ÇIKIŞ BLOKERİ` filtresi olarak |
+| 🔐 Güvenlik · ⚙️ Operasyon · 🗂️ Yönetişim | **Haftada bir** |
+| 👥 UX · 📚 İçerik | **Büyük değişiklikten sonra** |
+| 🧠 Psikometri | **Eşleştirme her değiştiğinde** |
+
+### ⭐ KURAL — Konsey BELGE ÜRETMEZ, KUYRUĞU BESLER
+
+- Konsey **salt-okuma bulut turu** olarak çalışır.
+- Raporu **📸 DONDURULMUŞ**'tur — bulguları işlendikten sonra güncellenmez.
+- **Tek işi:** hazır **kuyruk satırı** + **numarasız karar kartı** üretmektir.
+- ⛔ **Paralel konseyler ortak dosyaya YAZMAZ.** Bulguları **tek bir uygulama turu** işler.
+  *(Gerekçe: dört konsey aynı anda `00-KUYRUK.md`'ye yazsaydı dördü de çakışırdı —
+  `CLAUDE.md` § Koşullu Paralellik: paylaşılan durum dosyalarına yazım SIRALIDIR.)*
+- ⛔ Konsey **numara VERMEZ** — kuyruk satırı öneki ve karar kartı numarası uygulama turunda verilir.
+
+### İlk çalışma — 2026-09-21
+
+**O gün koşan dört konsey:** 🧠 Psikometri · 🔐 Güvenlik ve KVKK · 📚 İçerik · 🗂️ Yönetişim.
+Raporlar: `docs/raporlar/kesif/konsey-*-2026-09-21.md` (dört dosya, hepsi 📸).
+Bulguları **tek uygulama turunda** (BC) işlendi: **65 kuyruk satırı + 33 not + 15 karar kartı + 8 PO kalemi.**
+
+**Diğer üçü o hafta zaten çalışmıştı:**
+🚀 Canlıya Çıkış → `raporlar/kesif/devir-analizi-2026-09-21.md` §11 ·
+⚙️ Operasyon → `raporlar/kesif/operasyonel-hazirlik-2026-09-19.md` ·
+👥 UX → panel ve uçtan-uca denetimleri (kuyrukta **AŞAMA P** ve **AŞAMA U**).
+
+---
+
+## Karar oturumu biçimi — PO tercihi (2026-09-21)
+
+Karar oturumlarında (strateji katmanı ↔ PO) **her karar için** şunlar verilir:
+
+- **bugün ne oluyor**
+- **neden sorun**
+- her seçenekte **KULLANICI ne yaşar**
+- **ne kazanılır / NE KAYBEDİLİR**
+- **başka hangi kararla bağlantılı**
+
+⛔ Kısa **"(öneri)"** etiketi **YETMEZ** — PO doğru karar verebilmek için **bağlamı ister**.
+*(PO, 2026-09-21)*
+
+> ⚠️ Bu, `CLAUDE.md` § "Karar kartı biçimi"ndeki şablonla **çelişmez, onu pekiştirir**: kart zaten
+> *"Ne kaybedersin ASLA boş kalmaz"* diyor. Buradaki ek, **sohbet ortamındaki** karar sunumunun da
+> aynı ayrıntıyı taşıması gerektiğidir.
+

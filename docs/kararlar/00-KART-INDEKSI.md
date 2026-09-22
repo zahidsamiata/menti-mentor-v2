@@ -1,5 +1,8 @@
 # 00-KART-İNDEKSİ — 184 bilanço kartı köprü belgesi
 
+**📸 DONDURULMUŞ (snapshot, 2026-09-21)** — köprü/yönlendirme belgesi; **durum tutmaz, güncellenmez.**
+> **Neden:** belge zaten kendisi *"DURUM TUTMAZ, YÖNLENDİRİR"* diyor. Ölçüm: oluşturulduğu 2026-09-19'dan beri **içerik güncellemesi 0** (son 14 günde 1 commit = oluşturma). 184 satırlık elle senkron maliyeti faydayı aşıyor. Güncel durum için satırdaki "canonical kaynak" bağlantısına gidin; açık iş için `docs/otonom/00-KUYRUK.md`.
+
 > **Bu belge DURUM TUTMAZ, YÖNLENDİRİR.** Bir kalemin güncel durumu için "canonical kaynak" kolonundaki dosyaya bak.
 > Burada durum değiştirilmez. (Oluşturuldu: 2026-09-19, harita P-2 çözümü — `docs/00-BELGE-HARITASI.md`.)
 

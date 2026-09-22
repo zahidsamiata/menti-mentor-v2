@@ -1,6 +1,12 @@
 # MentiMentor — Yol Haritası (SIRADAKİ İŞLER) · v1/v2 öncelikli
 
-**🔄 YAŞAYAN** (canonical: iş kuyruğu)
+~~[ESKİ · 2026-09-21] **🔄 YAŞAYAN** (canonical: iş kuyruğu)~~
+**📸 DONDURULMUŞ (2026-09-21)** — bu belge artık güncellenmez.
+> **Neden (ölçüm, `origin/main` üzerinde):** (1) Fiilen durdu — son commit **2026-09-09**, son 14 günde **7 commit ve hepsi 09-08/09'da**; gövde künyesi hâlâ "Son güncelleme: 2026-08-22" diyordu. (2) **Otonom motor bu belgeyi HİÇ okumuyor** — `docs/otonom/OTONOM-PROMPT.txt` okuma listesinde adı geçmiyor.
+> **Devir kanıtı:** Faz 1-8 → `docs/otonom/00-KUYRUK.md` **AŞAMA F (F-01…F-33)**; PO'nun "EN ÖN SIRA" içerik bloğu (madde 138-160) → **AŞAMA I (I-01…I-18)**; kalan açık kalemler → **AŞAMA Y**. Kaynak: `docs/raporlar/kesif/devir-analizi-2026-09-21.md` §2-3.
+> **Takip artık nerede:** açık iş → `docs/otonom/00-KUYRUK.md` · çıkış önceliği → aynı dosyada `⛔ ÇIKIŞ BLOKERİ` satırları · PO'nun elle işleri → `docs/otonom/03-PO-ELLE-ISLER.md` · karar/söz geçmişi → `00-KARAR-TAKIP.md` · biten v1 → `10-yol-tamamlananlar.md` · şu an ne oldu → `09-DURUM.md`.
+> ⛔ **BELGE TAŞINMAZ, SATIR SİLİNMEZ.** Maddeler (madde 30, 73, 163…) kardeş belgelerde **numarayla** anılıyor; taşımak atıf ağını kırar (gerekçe: `10-yol-tamamlananlar.md:10-13`). Bundan sonra buraya **yeni madde yazılmaz**; yeni iş doğrudan `00-KUYRUK.md`'ye açılır.
+> ℹ️ Bu turda (BB) yalnız **bayat merge kuralı** satırları üstü-çizili damgalandı — içerik devri değil, hijyen.
 
 > **Çıkış önceliği için bkz. `00-CIKIS-PLANI.md`** — bu belge tüm açık işleri **numara sırasıyla** tutar; çıkış-öncesi/sonrası sınıflandırması (K0-K5) çıkış planındadır.
 
@@ -305,8 +311,10 @@
 ---
 
 ## 📌 HER İŞTE SABİT KURALLAR
-- Mod bildir: keşif→PLANLA (salt-okuma) · kod+"merge etme"→BYPASS. Merge gerekince "BYPASS + şu PR'a merge yetkisi (PO onaylı)".
-- Güvenlik ağı: uzun otonom işlerde "PR aç, MERGE ETME" → ürün sahibi en sonda inceler.
+- ~~[ESKİ · 2026-09-10 öncesi] Mod bildir: keşif→PLANLA (salt-okuma) · kod+"merge etme"→BYPASS. Merge gerekince "BYPASS + şu PR'a merge yetkisi (PO onaylı)".~~
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** mod bildirimi aynen geçerli (🟩 PLANLA / 🟥 BYPASS); ama merge için **ayrı PO yetkisi istenmez**: 🟢 işlerde ajan doğrulama listesi tamsa merge eder. 🟡/🔴 PR'da bekler. — kanıt: `CLAUDE.md:25-45`.
+- ~~[ESKİ · 2026-09-10 öncesi] Güvenlik ağı: uzun otonom işlerde "PR aç, MERGE ETME" → ürün sahibi en sonda inceler.~~
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `CLAUDE.md:25-45` · `docs/otonom/00-KUYRUK.md:6-16`.
 - Submodule sırası: backend PR → çatı pointer → çatı PR (ara commit yok).
 - Neon migration: `IF NOT EXISTS` + `db execute` + `migrate resolve`; `db push` YASAK. Canlı=lokal aynı DB → onay al.
 - Test güvenliği: `TEST_DATABASE_URL` yoksa testler gerçek Neon'a truncate atmaz (guard).

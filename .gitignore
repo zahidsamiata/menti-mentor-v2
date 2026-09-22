@@ -52,3 +52,6 @@ prisma/migrations/dev.db
 # Claude Code ve RTK yerel yapılandırma
 .claude/
 .rtk/
+
+# PO'nun gelen kutusu — izlenmez; açılış kontrolünü (git status) kirletmesin.
+docs/gelen/

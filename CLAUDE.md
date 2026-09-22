@@ -23,7 +23,8 @@ Durum güncellemeleri normal commit'lerle gider.
 Ana prompt: `docs/otonom/OTONOM-PROMPT.txt` — her turda aynen gönderilir, yeniden yazılmaz.
 
 ## ✅ MERGE POLİTİKASI — "PR aç, MERGE ETME" kuralı KISMEN KALDIRILDI
-`CLAUDE.md:8`'deki **"PR aç, MERGE ETME"** kuralı ve `CLAUDE.md:35`'teki akış bu bölümle güncellenmiştir.
+~~[ESKİ · 2026-09-19] `CLAUDE.md:8`'deki **"PR aç, MERGE ETME"** kuralı ve `CLAUDE.md:35`'teki akış bu bölümle güncellenmiştir.~~
+⚠️ **GÜNCELLEME (2026-09-21): atıf hedefleri kaymıştı —** bu bölümün güncellediği gerçek satırlar **`CLAUDE.md:178`** ("PR aç, MERGE ETME", bu turda üstü çizildi) ve **`CLAUDE.md:207`** ("PR açılır → CI yeşil → merge") akışıdır. Bugün `:8` = "PO kod yazmaz…", `:35` = "Şema/migration değişikliği YOK" — başka içerik. (Satır numaraları 2026-09-21 itibarıyladır.)
 Gerekçe: gerçek kullanıcı ~sıfır, her iş ayrı PR (tek tek revert edilebilir), `npm run verify` kapısı var.
 
 **🟢 işler: doğrulama listesi tam geçerse MERGE EDİLİR, PO beklenmez.**
@@ -174,7 +175,8 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **Mod bildir**: her turda mod net olsun — PLAN (salt-okuma) / BYPASS (uygula) / MANUEL-ONAY (öner→onay→uygula).
 - **Geri-alınamaz adımda DUR**: merge, prod deploy, prod DB yazımı (backfill/migration), force-push, external
   servise gönderim → önce DUR, onay bekle.
-- **PR aç, MERGE ETME**: merge kararı kullanıcınındır. Push + PR yeterli.
+- ~~[ESKİ · 2026-09-10 öncesi] **PR aç, MERGE ETME**: merge kararı kullanıcınındır. Push + PR yeterli.~~
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `CLAUDE.md:25-45` (MERGE POLİTİKASI) · `docs/otonom/00-KUYRUK.md:6-16` · `docs/otonom/OTONOM-PROMPT.txt:151-152`. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (`CLAUDE.md:163`) — orada "PR aç, merge etme" **aynen geçerlidir**.
 - **Uçtan uca yürüt**: iş verilince tek turda kapsamlı ilerle; karar gerekeni "kullanıcı kararı gerekli: …" diye
   NOT et, gereksiz durma.
 - **SHA/commit/branch tahmin etme**: durumu git'ten DOĞRULA, hafızadan varsayma.
@@ -243,6 +245,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 
 ## ⚠️ CANLI = LOKAL AYNI DB (kritik)
 - Canlı ve lokal AYNI Neon DB'sini paylaşıyor (ep-fancy-tooth-ab4u5xhr).
+  > ⚠️ **ÇELİŞKİ (2026-09-21):** Bu satır ("canlı ve lokal **AYNI Neon**") ile aşağıdaki **"Ortam / Veritabanı — PROD ≠ DEV ≠ TEST"** bölümünün PROD satırı ("docker-compose Postgres, **Neon değil**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
 - Lokalde DB'ye yazmak = canlıyı anında etkilemek. Seed/migration/DB işleminde onay al.
 - Tehlikeli seed.ts / npm run seed / prisma db seed VERİ SİLER — asla çalıştırma.
   Güvenli: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs.
@@ -259,6 +262,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **CI**: ephemeral localhost Postgres (service container). `.env.test` gitignored → CI'a girmez; test env
   `tests/setup.ts`'te set edilir.
 - **PROD**: docker-compose Postgres (`@postgres:5432`), Neon değil. Migration/backfill prod'da prod `DATABASE_URL` ile.
+  > ⚠️ **ÇELİŞKİ (2026-09-21):** Bu satır ("PROD: docker-compose Postgres, **Neon değil**") ile yukarıdaki **"⚠️ CANLI = LOKAL AYNI DB"** bölümünün ilk satırı ("canlı ve lokal **AYNI Neon**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
 - **Kural**: hangi DB'ye bağlı olduğunu ÖNCE host'tan doğrula (secret'sız). Yanlış DB'de iş yapma.
 
 ## Neon test branch — geçici izole DB koreografisi
@@ -349,94 +353,29 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
   > `⚠️ GÜNCELLEME ({bugün}): {doğrusu} — kanıt: {kaynak}`
   Böylece hem tarihsel iz korunur (cümle silinmez) hem de bayat satır görsel olarak "artık geçerli değil" der.
   (Zaten bir ⚠️/✅ GÜNCELLEME notu varsa yalnız eski cümleyi üstü-çizili damgalamak yeterli; notu tekrar yazma.)
+### ⭐ KALICI KURAL — tarihsel iz satırın İÇİNDE tutulmaz (2026-09-21)
+**İlke:** Tarihsel iz **korunur** ama **satırın içinde birikmez.** Satırda yalnız **güncel durum** + bir `geçmiş: bkz. <yer>` atfı durur. Üstü çizili eski zincir, belgenin sonundaki **`## GEÇMİŞ`** bölümüne ya da arşive taşınır. ⛔ **Hiçbir şey silinmez — yer değiştirir.**
+**Neden:** "eskiyi silme, üstünü çiz" kuralı satırın İÇİNDE uygulandığı için satır her güncellemede büyüyor, hiç küçülmüyor. Ölçüm (2026-09-21): `docs/` altında 1.000 karakteri aşan **74 satır**; en uzunu `00-KARAR-TAKIP.md` madde 101 satırı = **6.460 karakter** (4 kuşak düzeltme, geçerli bilgi ~200 karakter). Tablo hücresinde bu, okunamaz demektir. Dağılım: `09-DURUM.md` 38 · `00-KARAR-TAKIP.md` 30 → **%92'si iki dosyada.**
+**Uygulama:**
+1. **1.000 karakter** tavandır; düzeltme eklerken aşılıyorsa **önce** taşıma yapılır.
+2. Satırda yalnız son geçerli hâl kalır, sonuna `· geçmiş: bkz. GEÇMİŞ §<anahtar>` eklenir.
+3. Üstü-çizili zincir **tek karakter değiştirilmeden** `## GEÇMİŞ` altına `### §<anahtar>` başlığıyla yapıştırılır; tarihler ve `~~biçim~~` korunur.
+4. `<anahtar>` = kalıcı numara (md.101, S35, G1-23…) — atıf ağının omurgası, asla değişmez (`10-yol-tamamlananlar.md:10-13`).
+5. `09-DURUM.md` gibi ters-kronolojik belgelerde taşıma yeri `docs/arsiv/09-DURUM-gecmis-katmanlar-<tarih>.md`.
+6. ⛔ **Taşıma denetimi ZORUNLU:** `kalan + taşınan = önceki toplam` (satır VEYA karakter) kapanış raporunda **sayıyla** gösterilir; tutmuyorsa **taşıma geri alınır.**
 
-## Belge Düzeni — her belge işinde uy
-- Belge oluştururken/düzenlerken `docs/kararlar/konu/belge-duzeni-rehberi.md`'deki **8 düzen kuralına** uyulur:
-  (1) tek gerçek kaynağı/canonical, (2) tür=klasör + alt-klasör (kararlar/raporlar/arsiv), (3) yaşayan 🔄 / dondurulmuş 📸 üst-etiketi,
-  (4) adlandırma (dondurulmuş=tarihli, yaşayan=tarihsiz), (5) yeni belge → `00-INDEX.md` güncelle, (6) eksik-işaretleme (⚠️ GÜNCELLEME, silme yok),
-  (7) taşıyıcı belge iş bölümü (statü tek yerde, diğerleri referans), (8) bulgu yaşam döngüsü (aşağıda).
-- Bu kurallar "Belge Eş-Zamanlılığı" + "Belge Düzeltme Deseni" ile tutarlıdır; çelişki yok. Rehber = canonical.
+**"Belge Düzeltme Deseni" ile ÇELİŞMEZ — onu tamamlar:** Düzeltme Deseni **"ne yazılır"**ı söyler (eski cümle silinmez, `~~[ESKİ]~~` + `⚠️ GÜNCELLEME`); bu kural **"nerede durur"**u söyler. İz silinmez, biçimi bozulmaz; yalnız satırdan bölüme iner ve satırda ona giden bir atıf kalır. `belge-duzeni-rehberi` KURAL 6 (silme yok) ve KURAL 7 (statü tek yerde) ile de çelişmez.
 
-### KURAL 8 — Bulgu yaşam döngüsü (keşif turu tur-sonu kontrol listesi)
-- (1) Keşif → **tarihli 📸 rapor** (`raporlar/`); ham kanıt, aksiyon kaynağı olarak bırakılmaz.
-- (2) **Her aksiyon `00-KARAR-TAKIP`'e girer — numarasını YALNIZ orada alır** (tek numara dizisi; rapordan doğrudan yol haritasına madde geçmez).
-- (3) Öncelik verilince → `10-yol-haritasi`'na **tek satır** (numara + öncelik + "detay: KARAR-TAKIP"); detay kopyalanmaz.
-- (4) İş bitince → **önce KOD doğrula**, sonra 4 yer: KARAR-TAKIP ✅ · yol-haritası stub · `10-yol-tamamlananlar` · `09-DURUM`.
-- (5) Oturum bitince → `devir/07-oturum-gunlugu`'na bölüm.
+### ⭐ KALICI KURAL — AKTİF İŞ KAYNAĞI TEKTİR (2026-09-21)
+**Kural:** Aktif iş kaynağı **tektir: `docs/otonom/00-KUYRUK.md`.** Yeni planlama/öncelik belgesi **AÇILMAZ.** Yeni bir iş kaynağı bulunursa (eski yol haritası, bilanço listesi, denetim raporu) kalemleri **kuyruğa devredilir** ve kaynak **📸 DONDURULUR** — taşınmaz, silinmez, yeniden adlandırılmaz.
+**Tek istisna:** kod değiştirilerek çözülemeyen işler → `docs/otonom/03-PO-ELLE-ISLER.md`.
+**Gerekçe (2026-09-21):** altı ayrı planlama belgesi birikmişti (`10-yol-haritasi` · `00-CIKIS-PLANI` · `00-ONCELIK-SIRASI` · `00-KARAR-TAKIP` · `00-KART-INDEKSI` · `00-KUYRUK`) ve otonom motor yalnız kuyruğu okuduğu için **PO'nun "en öncelikli" dediği içerik bloğu (madde 138-160) 21 gün hiçbir tura girmedi.** Kaynak: `docs/raporlar/kesif/devir-analizi-2026-09-21.md` §0.2.
+**Uygulama:** Bir belge iş kaynağı olmaktan çıkarılırken başına (a) 📸 damgası, (b) *"devir kanıtı: hangi kalemler kuyruğun hangi aşamasına gitti"*, (c) *"takip artık nerede"* tablosu yazılır. `00-KARAR-TAKIP` istisnadır: **emekli edilmez, rolü daralır** (karar/söz/ölü-kod geçmişi orada kalır, iş takibi kuyruğa geçer).
 
-> **⚠️ GÜNCELLEME (2026-08-27): KURAL 9-12 yürürlüğe girdi** — 4-turluk belge bilançosunun kök-neden teşhisinden çıktı
-> (`docs/raporlar/bilanco/tekrar-onleme-2026-08-26.md`, PO onaylı). Amaç: ~175 kalemin numarasız izsizleşmesi + 15 sözün
-> 11'inin devralınmaması + bayat "yapıldı" iddiaları bir daha yaşanmasın. KURAL 8'i tamamlarlar, çelişmezler.
 
-### KURAL 9 — Her rapor KALEM LİSTESİ'yle biter
-- Keşif/denetim/analiz raporu üreten HER tur, raporu **"KALEM LİSTESİ"** bölümüyle bitirir. Listede satır almayan bulgu, **bulgu SAYILMAZ** (rapor gövdesine gömülü kalıp kaybolmaz).
-- Her satır 3 alan taşır: **kalem** (tek cümle) · **önerilen durum** (aşağıdaki 6'dan biri) · **numara-adayı-mı** (evet/hayır — bu sütun ZORUNLU; yoksa yine numarasız liste doğar).
-- Bu liste, bulguların `00-KARAR-TAKIP`'e girişinin (KURAL 8 adım 2) kaynağıdır — rapordan doğrudan aktarılır.
-
-### KURAL 10 — ✅ kanıtsız basılmaz
-- "YAPILDI" (✅) yazabilmek için **kod kanıtı (dosya:satır) VEYA açık "KOD DIŞI" etiketi ZORUNLU.** Belge beyanı tek başına YETMEZ.
-- **Kısmi iş ✅ değildir → 🟡 YARIM** (ne var / ne yok, ikisi de kanıtlı). Belge ↔ kod çelişirse KOD kazanır.
-- **Durum kodları 6 tanedir (başkası YASAK):** ✅ YAPILDI · 🟡 YARIM · 🔀 PR'DA · ⬜ AÇIK · ❓ TEYİT GEREK · 🗑️ GEÇERSİZ ADAYI.
-
-### KURAL 11 — Söz açılışta okunur (EN KRİTİK — disiplin sona değil BAŞA)
-- `00-KARAR-TAKIP.md`'de **"⭐ SONRAKİ-TUR SÖZLERİ"** bölümü tutulur (YENİ DOSYA AÇMA — ikinci kaynak = çelişki riski).
-- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no).
-- **Her oturum BAŞINDA bu bölüm OKUNUR** ve ürün sahibine açık sözler hatırlatılır. Söz yerine getirilince ✅ + kaldırılır. *(Teşhis: 15 sözün 11'i devralınmadığı için düştü; disiplin oturum sonundan başına taşındı.)*
-
-### KURAL 12 — Tazelik denetimi (3 ayak; 30-gün ikincil)
-- **Birincil (yapısal-tetik):** Yapısal kod değişiminde (model ekle/sil, dosya kaldır, ortam/env değişimi) ilgili **`CLAUDE.md` dosyaları DOĞRULANIR** — model sayısı, dosya adları, ortam bilgisi grep'le kontrol edilir. *(backend/CLAUDE.md "5 model / iceBreaker.ts" bu yüzden aylarca bayat kaldı.)*
-- **İkincil (karar-yayılımı):** Bir karar değişince **"bunu başka nerede yazmışız"** belge taraması yapılır *(bilançoda 9 çelişki bu yüzden doğdu — ör. sunucu ülkesi 5 belgede).*
-- **Üçüncül (süre):** 🔄 YAŞAYAN belge 30 günü aşarsa "bayat" işaretlenir — bu ayak **ELLE değil, ileride script ile** (elle yapılırsa unutulur; maliyet>fayda). Şimdilik birincil+ikincil elle yürür.
-
-### KURAL 13 — NEGATİF İDDİA GENİŞ ARAMAYLA KANITLANIR
-- "Bu alan/dosya/kod/özellik YOK" demek için arama **backend + frontend + test + seed + belgeleri** kapsamalı ve **büyük-küçük harf duyarsız** olmalı. Dar arama sonucu "yok" YAZILAMAZ.
-- **Pozitif bulgu (var) tek kanıtla yeterlidir; negatif bulgu (yok) KAPSAM BEYANI ister:** "N terim · M dizin tarandı, 0 sonuç".
-- ⭐ Bu kural **HERKES için geçerlidir** — ajan, alt-ajan, PO ve strateji katmanı dahil. Kural, üç kez aynı hatanın tekrarlanmasından doğdu.
-- **GEREKÇE (üç vaka):**
-  - Bilanço turu: "ölü" sanılan ~11 kalem kod-teyitle çürüdü.
-  - S21 turu: alt-ajan 5 alanı yanlışlıkla "ölü" ilan etti (`discD/I/S/C` · `Meeting.requestMessage` · `rematchPriority` · `rematchCount` · `mentorVisibilityEnabled`) — hepsi yazılıyordu.
-  - Doğrulama turu: strateji katmanı "çift ayraç hatası var" dedi — meğer dosyanın 9 oturum sınırında kullanılan KONVANSİYONMUŞ; tek örneğe bakıp genelleme yapılmıştı.
-- **⭐ İKİ DİL EKİ (PO, 2026-08-30):** Bu projede KOD İngilizce, BELGELER Türkçe. Negatif iddia araması **İKİ DİLDE** yapılır:
-  `club↔kulüp` · `tenant↔kurum` · `consent↔rıza` · `mentor↔mentör` · `meeting↔görüşme` · `agreement↔anlaşma` ·
-  `report↔rapor` · `delete↔silme`. **ARANAN TERİMLER listesi rapora YAZILIR** ki kapsam denetlenebilsin.
-  **GEREKÇE:** niyet arkeolojisi turunda `/clubs` uçları "hikâye yok" sanıldı çünkü yalnız `club` arandı — oysa kulüp
-  modeli AKTİF bir PO kararı (STK ile aynı yetkiler) ve avukat paketinde kulüp beyanı şartı var. Tek dilde arayan
-  yarısını kaçırır.
-
-### KURAL 14 — CI YEŞİL ≠ TEST KOŞTU
-> ✅ **ONAYLANDI (PO, 2026-09-02).** (Kanıtlı olaydan doğdu, zaten uygulanıyor.)
-> ⚠️ **EK (PO, 2026-09-02):** "CI yeşil" raporlanırken **KAÇ TEST KOŞTUĞU da YAZILIR.** "0 passed" da yeşil görünür — sayı olmadan yeşil bir şey kanıtlamaz.
-- Bir testin koştuğu, CI'ın yeşil olmasıyla **KANITLANMAZ.** Kanıt üç şeydir:
-  (a) test dosyasının adı **CI log'unda GEÇMELİ** · (b) **TEST SAYISI** önceki koşuyla karşılaştırılmalı ·
-  (c) artış, eklenen testin sayısıyla **UYUŞMALI.**
-- "0 passed" da yeşil döner. **Stacked PR'da test main'e hiç ulaşmayabilir.**
-- **GEREKÇE:** 2026-08-31'de e2e testi main'e ulaşmadı (stacked merge sırası), CI yeşil döndü, iki tur boyunca fark
-  edilmedi; #66 ile taşınınca 442→445 kanıtlandı. (Detay: `docs/kararlar/00-KARAR-TAKIP.md` F.11.)
-
-### KURAL 15 — KAYNAK HİYERARŞİSİ
-> ✅ **ONAYLANDI (PO, 2026-09-02).** (Kanıtlı olaydan doğdu — G1-23 21. hayalet — zaten uygulanıyor.)
-- **G-kartları (`docs/raporlar/bilanco/kararlar/G*.md`) = AYRINTI + KANIT.** Kaynak doğrudur; her kalemin tam tanımı,
-  gerekçesi ve kod kanıtı oradadır.
-- **`00-KARAR-TAKIP` = ÖZET + numara.** Turlar arası hızlı bakış; kalemin TAM tanımını taşımaz.
-- ⭐ **ÇELİŞKİDE KART KAZANIR** — kanıt orada.
-- ⚠️ Özet belgede bir kalemi kapatmadan ÖNCE kartın konusunun aynı olduğu DOĞRULANIR. Kısmi kanıtla tam
-  kapatma yapılmaz.
-- **GEREKÇE:** 2026-08-29'da `00-KARAR-TAKIP` "G1-23 → 🗑️ geçersiz (guard var)" yazdı. Guard tespiti DOĞRUYDU ama
-  başka bir konuydu (sahiplik/IDOR); G1-23 kartının konusu XSS'ti ve o açıktı. Özet, ayrıntıyı yanlışlıkla kapattı
-  → 21. "hayalet tamamlanmış". (Detay: `docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md` [G1-23].)
-
-### KURAL 16 ADAYI — SAYILAN BİRİM TANIMLANIR (PO onaylayacak)
-> ⚠️ Numara verme yetkisi PO'dadır; kural yazıldı ama **"ADAYI"** olarak — PO onaylayınca "ADAYI" düşer.
-- Bir sayı raporlanmadan ÖNCE **sayılan birim tanımlanır.**
-- "**N kalem**" demek YETMEZ — **hangi yerlerdeki** kalemler sayıldı açıkça yazılır: durum satırı · PO notu · alt madde ·
-  başka belge · hangi dosyalar tarandı.
-- Farklı birimler farklı sayı verir; ikisi de doğru olabilir. Yanlış olan, birimi söylemeden sayı vermektir.
-- **GEREKÇE — üç kez aynı desen, her seferinde birim belirsizdi:**
-  - Bilanço: "196 benzersiz kalem" → gerçek ≈259 (aritmetik toplam ≠ tekilleştirilmiş satır).
-  - S21 envanteri: "30 satır" → ~40 benzersiz alan (bazı satırlar alan-grubu).
-  - 🗑️ taraması: "6 geçersiz kart" → 15 geçersiz kalem (ilk sayım yalnız kart durum satırına baktı; PO notu,
-    karar-takip ve alt maddeler sayılmadı).
-- ⭐ Uygulama: iki adımlı doğrulamada (M1) "X bekliyorum" denirken **birim de söylenir.**
+## Belge düzeni — KURAL 1-16
+Tek canonical: `docs/kararlar/konu/belge-duzeni-rehberi.md` (KURAL 1-16, tam gövde).
+Belge oluşturur/düzenlerken oraya bak; kuralların tamamı orada.
 
 <!-- /çalışma-kuralları -->
 
@@ -450,6 +389,13 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - IDOR: kullanıcı başkasının kaynağına ID tahmin ederek erişebilir mi?
   (kendi kaydı mı diye kontrol et — sadece "giriş yapmış" yetmez)
 - Zod ile girdi doğrulama var mı?
+- ⭐ **KOMŞU UÇ KARŞILAŞTIRMASI** *(2026-09-21, güvenlik konseyi — yeni kural değil, bu listeye tek madde)*:
+  Yeni ya da değişen her uç için: **kimlik OTURUMDAN mı alınıyor** (istek gövdesinden DEĞİL) ·
+  sahiplik kontrolü · tenant izolasyonu · onay kapısı — **aynı ailedeki KOMŞU UÇ ile karşılaştır.**
+  Komşuda olan koruma burada yoksa, **bu bir bulgudur.**
+  *(Gerekçe: 11 güvenlik bulgusunun 9'unda doğru koruma aynı dosyada ya da aynı ailede ZATEN VARDI,
+  yalnız bir yolda uygulanmamıştı — okuma korunuyor/yazma korunmuyor, ikiz uç korunuyor/eski uç
+  korunmuyor. Kanıt: `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md` §0.)*
 - KASITLI public olan endpoint'ler (⚠️ GÜNCELLEME 2026-09-21, V-09 — kod-teyitli tam liste;
   eski liste 10 ucu atlıyordu → denetimlerde yanlış "fazlalık" alarmı doğuruyordu):
   **auth:** `POST /api/auth/register` · `/login` · `/refresh` · `/logout` · `/forgot-password` ·
@@ -542,140 +488,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 <!-- /temiz-kod -->
 
 <!-- rtk-instructions v2 -->
-# RTK (Rust Token Killer) - Token-Optimized Commands
-
-## Golden Rule
-
-**Always prefix commands with `rtk`**. If RTK has a dedicated filter, it uses it. If not, it passes through unchanged. This means RTK is always safe to use.
-
-**Important**: Even in command chains with `&&`, use `rtk`:
-```bash
-# ❌ Wrong
-git add . && git commit -m "msg" && git push
-
-# ✅ Correct
-rtk git add . && rtk git commit -m "msg" && rtk git push
-```
-
-## RTK Commands by Workflow
-
-### Build & Compile (80-90% savings)
-```bash
-rtk cargo build         # Cargo build output
-rtk cargo check         # Cargo check output
-rtk cargo clippy        # Clippy warnings grouped by file (80%)
-rtk tsc                 # TypeScript errors grouped by file/code (83%)
-rtk lint                # ESLint/Biome violations grouped (84%)
-rtk prettier --check    # Files needing format only (70%)
-rtk next build          # Next.js build with route metrics (87%)
-```
-
-### Test (60-99% savings)
-```bash
-rtk cargo test          # Cargo test failures only (90%)
-rtk go test             # Go test failures only (90%)
-rtk jest                # Jest failures only (99.5%)
-rtk vitest              # Vitest failures only (99.5%)
-rtk playwright test     # Playwright failures only (94%)
-rtk pytest              # Python test failures only (90%)
-rtk rake test           # Ruby test failures only (90%)
-rtk rspec               # RSpec test failures only (60%)
-rtk test <cmd>          # Generic test wrapper - failures only
-```
-
-### Git (59-80% savings)
-```bash
-rtk git status          # Compact status
-rtk git log             # Compact log (works with all git flags)
-rtk git diff            # Compact diff (80%)
-rtk git show            # Compact show (80%)
-rtk git add             # Ultra-compact confirmations (59%)
-rtk git commit          # Ultra-compact confirmations (59%)
-rtk git push            # Ultra-compact confirmations
-rtk git pull            # Ultra-compact confirmations
-rtk git branch          # Compact branch list
-rtk git fetch           # Compact fetch
-rtk git stash           # Compact stash
-rtk git worktree        # Compact worktree
-```
-
-Note: Git passthrough works for ALL subcommands, even those not explicitly listed.
-
-### GitHub (26-87% savings)
-```bash
-rtk gh pr view <num>    # Compact PR view (87%)
-rtk gh pr checks        # Compact PR checks (79%)
-rtk gh run list         # Compact workflow runs (82%)
-rtk gh issue list       # Compact issue list (80%)
-rtk gh api              # Compact API responses (26%)
-```
-
-### JavaScript/TypeScript Tooling (70-90% savings)
-```bash
-rtk pnpm list           # Compact dependency tree (70%)
-rtk pnpm outdated       # Compact outdated packages (80%)
-rtk pnpm install        # Compact install output (90%)
-rtk npm run <script>    # Compact npm script output
-rtk npx <cmd>           # Compact npx command output
-rtk prisma              # Prisma without ASCII art (88%)
-```
-
-### Files & Search (60-75% savings)
-```bash
-rtk ls <path>           # Tree format, compact (65%)
-rtk read <file>         # Code reading with filtering (60%)
-rtk grep <pattern>      # Search grouped by file (75%). Format flags (-c, -l, -L, -o, -Z) run raw.
-rtk find <pattern>      # Find grouped by directory (70%)
-```
-
-### Analysis & Debug (70-90% savings)
-```bash
-rtk err <cmd>           # Filter errors only from any command
-rtk log <file>          # Deduplicated logs with counts
-rtk json <file>         # JSON structure without values
-rtk deps                # Dependency overview
-rtk env                 # Environment variables compact
-rtk summary <cmd>       # Smart summary of command output
-rtk diff                # Ultra-compact diffs
-```
-
-### Infrastructure (85% savings)
-```bash
-rtk docker ps           # Compact container list
-rtk docker images       # Compact image list
-rtk docker logs <c>     # Deduplicated logs
-rtk kubectl get         # Compact resource list
-rtk kubectl logs        # Deduplicated pod logs
-```
-
-### Network (65-70% savings)
-```bash
-rtk curl <url>          # Compact HTTP responses (70%)
-rtk wget <url>          # Compact download output (65%)
-```
-
-### Meta Commands
-```bash
-rtk gain                # View token savings statistics
-rtk gain --history      # View command history with savings
-rtk discover            # Analyze Claude Code sessions for missed RTK usage
-rtk proxy <cmd>         # Run command without filtering (for debugging)
-rtk init                # Add RTK instructions to CLAUDE.md
-rtk init --global       # Add RTK to ~/.claude/CLAUDE.md
-```
-
-## Token Savings Overview
-
-| Category | Commands | Typical Savings |
-|----------|----------|-----------------|
-| Tests | vitest, playwright, cargo test | 90-99% |
-| Build | next, tsc, lint, prettier | 70-87% |
-| Git | status, log, diff, add, commit | 59-80% |
-| GitHub | gh pr, gh run, gh issue | 26-87% |
-| Package Managers | pnpm, npm, npx | 70-90% |
-| Files | ls, read, grep, find | 60-75% |
-| Infrastructure | docker, kubectl | 85% |
-| Network | curl, wget | 65-70% |
-
-Overall average: **60-90% token reduction** on common development operations.
+## RTK — token-tasarruflu komutlar
+Komutları `rtk` ile önekle (`rtk git`, `rtk tsc`, `rtk vitest`, `rtk grep`…). ⛔ **AKTİF, kullanmaya devam et.**
+Tam komut listesi ve tasarruf oranları: `docs/kararlar/konu/rtk-komut-rehberi.md`.
 <!-- /rtk-instructions -->

@@ -1,6 +1,11 @@
 # 00 — CANLI ÇIKIŞ PLANI (kullanıcı almaya başlamak için NE gerekli)
 
-**🔄 YAŞAYAN** (canonical: çıkış önceliği sınıflandırması) · **Oluşturuldu:** 2026-08-23 · **Güncelleme:** 2026-08-25 (FAZ A/B/C)
+~~[ESKİ · 2026-09-21] **🔄 YAŞAYAN** (canonical: çıkış önceliği sınıflandırması) · **Oluşturuldu:** 2026-08-23~~
+**📸 DONDURULMUŞ (2026-09-21)** — bu belge artık güncellenmez. **Oluşturuldu:** 2026-08-23.
+> **Neden (ölçüm, `origin/main`):** son commit **2026-08-29** (kök içe-aktarma), son 14 günde **0 commit** → en az 23 gündür dokunulmamış.
+> ⭐ **BU BELGENİN FİKRİ ÖLMEDİ — TAŞINDI.** K0 → `00-KUYRUK.md`'de **⛔ ÇIKIŞ BLOKERİ** satırları · K1 → aynı işaret · K2/K3 → işaretsiz kuyruk satırları · K4 → `docs/otonom/03-PO-ELLE-ISLER.md` (D grubu, canlı gözlem) · K5 → `docs/otonom/01-KARARLAR.md`.
+> ⭐ **KATI TEST YERİNDE KALIR** ve yeni işler için ölçüt olarak okunur: *"varsayılan = ERTELE; bloker olduğunu KANITLA"* — T1 yasa/sızıntı/geri-alınamaz kayıp · T2 ana akış kırılır · T3 sessiz yanlış. Çıkış blokeri listesi bu testle üretildi (`devir-analizi-2026-09-21.md` §11).
+> ⛔ **SATIR SİLİNMEZ, BELGE TAŞINMAZ** — K0-K5 numaraları kardeş belgelerde anılıyor.
 
 > **⚡ GÜNCELLEME (2026-08-25):** **K0 güvenlik ilerledi** — madde 38 (G1) + 68 (G3) **düzeltildi → backend PR #51 (MERGE OLMADI).**
 > Kalan K0: madde 39 (G2, migration+PO) · repo private · KVKK metinleri (envanter HAZIR: `../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`).

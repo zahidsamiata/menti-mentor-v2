@@ -82,7 +82,8 @@ docs/
 | `07-calisma-tarzi.md` | Prompt felsefesi, DevSecOps şablonu, kurallar | Her prompt öncesi |
 | `08-acik-sorular.md` | Karara bağlanmamışlar (yaş, veri sorumlusu vb.) | Karar gerektiğinde |
 | `11-tasarim-kararlari-yasam-dongusu-ve-disc.md` | Yaşam döngüsü + DISC gösterim kararları (KARAR 1 DISC çoklu harf/#12 · KARAR 2 ghost red/2a · KARAR 3 kullanıcı çıkarma/2b · KARAR 4 FE tam Türkçe) | #12 / 2a / 2b işine başlarken |
-| `belge-duzeni-rehberi.md` | Belge düzeni 6 kuralı (canonical) | 🔄 YAŞAYAN · her belge işinde |
+| `belge-duzeni-rehberi.md` | ~~[ESKİ · 2026-09-21] Belge düzeni 6 kuralı (canonical)~~ ⚠️ **GÜNCELLEME (2026-09-21):** dosya artık **KURAL 1-16'nın tam gövdesini** taşıyor — KURAL 8-16 bu tarihte `CLAUDE.md`'den buraya taşındı (§ "⭐ KURAL 8-16 — `CLAUDE.md`'den taşındı"). `CLAUDE.md`'de yalnız tek satırlık atıf kaldı. | 🔄 YAŞAYAN · her belge işinde |
+| `rtk-komut-rehberi.md` | ⭐ **YENİ (2026-09-21):** RTK (token-tasarruflu komut sarmalayıcısı) tam komut kataloğu + tasarruf oranları. `CLAUDE.md`'den taşındı; ⛔ **kural AKTİF** — ajan komutları `rtk` ile öneklemeye devam eder, yalnız gövdesi buraya alındı | 🔄 YAŞAYAN · komut çalıştırmadan önce |
 | `tasarim-kararlari-admin-2026-08-11.md` | STK admin tasarım kararları (12 karar; menü, kart, DISC mahremiyet, etiket havuzu) | 🔄 YAŞAYAN (kararlar eklenebilir) |
 | `chat-v1-teslim.md` | Chat v1 teslim: mimari/güvenlik ayrıntı + bilinen sınırlar | 📸 DONDURULMUŞ (chat işi) |
 | `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | #7 eşleşme-sonrası değerlendirme + metrik takip + otomatik pasifleştirme + yeniden değerlendirme + periyodik hatırlatma vizyonu; VİZYON ↔ KOD GERÇEĞİ ayrı; 3 aşamalı plan | 🔄 YAŞAYAN (#7 inşasına başlarken) |

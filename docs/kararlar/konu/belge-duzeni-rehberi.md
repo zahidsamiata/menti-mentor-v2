@@ -42,6 +42,15 @@
 **YÖNTEM** ekseni (`kod-denetimi/` · `kesif/` · `bilanco/`). Bir belge hem KONU hem YÖNTEM klasörüne aitse (ör. menti personasının kod denetimi):
 - Belge **YÖNTEM** klasörüne yazılır (mevcut uygulama korunur).
 - ⛔ ZORUNLU: ilgili **KONU** klasörüne bir satırlık **ÇAPRAZ ATIF** bırakılır. Konu klasöründe `00-INDEX.md` yoksa oluşturulur; varsa satır eklenir.
+- ⛔ **İNDEKS ADI TEKTİR: `00-INDEX.md`** *(netleştirme 2026-09-21)*. Türkçe `00-INDEKS.md` **yeni açılmaz.**
+  **Yeni indeks açmadan ÖNCE** `ls <klasör>/00-IND*` çalıştır: **adı ne olursa olsun** bir indeks varsa
+  **satır eklenir, yeni dosya AÇILMAZ.** (Gerekçe: yukarıdaki *"yoksa oluşturulur"* ifadesi, Türkçe adlı
+  indeksi göremeyip aynı klasörde **ikinci indeks** açma riski taşıyordu.)
+  ⚠️ **Mevcut `docs/raporlar/icerik/00-INDEKS.md` YENİDEN ADLANDIRILMADI** — 2026-09-21 ölçümü:
+  **11 atıf / 4 dosya**, markdown link biçiminde **0**, kod/script atfı **0**. Atıfların bir kısmı
+  tarihsel kayıtta (oturum günlüğü, 09-DURUM) olduğu için adlandırma değişikliği tarihsel iz bozar;
+  kural genişletmesi aynı riski tek satırda kapatıyor. İki ad **kalıcı değil, geçicidir**: o klasör
+  bir sonraki düzenlemede `00-INDEX.md`'ye taşınırsa atıflar aynı turda güncellenir.
   Biçim: `<konu> kod denetimi → ../<yöntem-klasörü>/<dosya>.md (tarih, satır aralığı)`
 
 Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `panel/` altında arandı, bulunamadı, **bir tur tamamen tekrar edildi** (bkz. `docs/00-BELGE-HARITASI.md` B.0).
@@ -113,3 +122,101 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
 | 8 | Bulgu yaşam döngüsü | rapor(📸)→KARAR-TAKIP(numara burada doğar)→yol-haritası(tek satır)→biten:4 yer→günlük |
 
 > **Canonical:** Bu rehber, belge düzeninin tek yetkili kaynağıdır. `CLAUDE.md` buraya işaret eder.
+
+---
+
+# ⭐ KURAL 8-16 — `CLAUDE.md`'den taşındı (2026-09-21)
+
+> **Ne zaman / neden:** 2026-09-21, yönetişim konseyi CLAUDE.md bölme planı KADEME 1.
+> `CLAUDE.md` 40.000 karakter uyarı sınırını aşıyordu; bu blok **aynen** buraya taşındı.
+> ⛔ **Hiçbir satır silinmedi, tek karakter değişmedi.** KURAL 1-8 zaten bu belgedeydi → seri artık **tek dosyada**.
+> (Bu, `CLAUDE.md`'de KURAL 8'in hem özet hem gövde olarak iki yerde durması sorununu da kapatır.)
+> `CLAUDE.md` → "Belge düzeni — KURAL 1-16" satırı buraya işaret eder.
+
+## Belge Düzeni — her belge işinde uy
+- Belge oluştururken/düzenlerken `docs/kararlar/konu/belge-duzeni-rehberi.md`'deki **8 düzen kuralına** uyulur:
+  (1) tek gerçek kaynağı/canonical, (2) tür=klasör + alt-klasör (kararlar/raporlar/arsiv), (3) yaşayan 🔄 / dondurulmuş 📸 üst-etiketi,
+  (4) adlandırma (dondurulmuş=tarihli, yaşayan=tarihsiz), (5) yeni belge → `00-INDEX.md` güncelle, (6) eksik-işaretleme (⚠️ GÜNCELLEME, silme yok),
+  (7) taşıyıcı belge iş bölümü (statü tek yerde, diğerleri referans), (8) bulgu yaşam döngüsü (aşağıda).
+- Bu kurallar "Belge Eş-Zamanlılığı" + "Belge Düzeltme Deseni" ile tutarlıdır; çelişki yok. Rehber = canonical.
+
+### KURAL 8 — Bulgu yaşam döngüsü (keşif turu tur-sonu kontrol listesi)
+- (1) Keşif → **tarihli 📸 rapor** (`raporlar/`); ham kanıt, aksiyon kaynağı olarak bırakılmaz.
+- (2) **Her aksiyon `00-KARAR-TAKIP`'e girer — numarasını YALNIZ orada alır** (tek numara dizisi; rapordan doğrudan yol haritasına madde geçmez).
+- (3) Öncelik verilince → `10-yol-haritasi`'na **tek satır** (numara + öncelik + "detay: KARAR-TAKIP"); detay kopyalanmaz.
+- (4) İş bitince → **önce KOD doğrula**, sonra 4 yer: KARAR-TAKIP ✅ · yol-haritası stub · `10-yol-tamamlananlar` · `09-DURUM`.
+- (5) Oturum bitince → `devir/07-oturum-gunlugu`'na bölüm.
+
+> **⚠️ GÜNCELLEME (2026-08-27): KURAL 9-12 yürürlüğe girdi** — 4-turluk belge bilançosunun kök-neden teşhisinden çıktı
+> (`docs/raporlar/bilanco/tekrar-onleme-2026-08-26.md`, PO onaylı). Amaç: ~175 kalemin numarasız izsizleşmesi + 15 sözün
+> 11'inin devralınmaması + bayat "yapıldı" iddiaları bir daha yaşanmasın. KURAL 8'i tamamlarlar, çelişmezler.
+
+### KURAL 9 — Her rapor KALEM LİSTESİ'yle biter
+- Keşif/denetim/analiz raporu üreten HER tur, raporu **"KALEM LİSTESİ"** bölümüyle bitirir. Listede satır almayan bulgu, **bulgu SAYILMAZ** (rapor gövdesine gömülü kalıp kaybolmaz).
+- Her satır 3 alan taşır: **kalem** (tek cümle) · **önerilen durum** (aşağıdaki 6'dan biri) · **numara-adayı-mı** (evet/hayır — bu sütun ZORUNLU; yoksa yine numarasız liste doğar).
+- Bu liste, bulguların `00-KARAR-TAKIP`'e girişinin (KURAL 8 adım 2) kaynağıdır — rapordan doğrudan aktarılır.
+
+### KURAL 10 — ✅ kanıtsız basılmaz
+- "YAPILDI" (✅) yazabilmek için **kod kanıtı (dosya:satır) VEYA açık "KOD DIŞI" etiketi ZORUNLU.** Belge beyanı tek başına YETMEZ.
+- **Kısmi iş ✅ değildir → 🟡 YARIM** (ne var / ne yok, ikisi de kanıtlı). Belge ↔ kod çelişirse KOD kazanır.
+- **Durum kodları 6 tanedir (başkası YASAK):** ✅ YAPILDI · 🟡 YARIM · 🔀 PR'DA · ⬜ AÇIK · ❓ TEYİT GEREK · 🗑️ GEÇERSİZ ADAYI.
+
+### KURAL 11 — Söz açılışta okunur (EN KRİTİK — disiplin sona değil BAŞA)
+- `00-KARAR-TAKIP.md`'de **"⭐ SONRAKİ-TUR SÖZLERİ"** bölümü tutulur (YENİ DOSYA AÇMA — ikinci kaynak = çelişki riski).
+- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no).
+- **Her oturum BAŞINDA bu bölüm OKUNUR** ve ürün sahibine açık sözler hatırlatılır. Söz yerine getirilince ✅ + kaldırılır. *(Teşhis: 15 sözün 11'i devralınmadığı için düştü; disiplin oturum sonundan başına taşındı.)*
+
+### KURAL 12 — Tazelik denetimi (3 ayak; 30-gün ikincil)
+- **Birincil (yapısal-tetik):** Yapısal kod değişiminde (model ekle/sil, dosya kaldır, ortam/env değişimi) ilgili **`CLAUDE.md` dosyaları DOĞRULANIR** — model sayısı, dosya adları, ortam bilgisi grep'le kontrol edilir. *(backend/CLAUDE.md "5 model / iceBreaker.ts" bu yüzden aylarca bayat kaldı.)*
+- **İkincil (karar-yayılımı):** Bir karar değişince **"bunu başka nerede yazmışız"** belge taraması yapılır *(bilançoda 9 çelişki bu yüzden doğdu — ör. sunucu ülkesi 5 belgede).*
+- **Üçüncül (süre):** 🔄 YAŞAYAN belge 30 günü aşarsa "bayat" işaretlenir — bu ayak **ELLE değil, ileride script ile** (elle yapılırsa unutulur; maliyet>fayda). Şimdilik birincil+ikincil elle yürür.
+
+### KURAL 13 — NEGATİF İDDİA GENİŞ ARAMAYLA KANITLANIR
+- "Bu alan/dosya/kod/özellik YOK" demek için arama **backend + frontend + test + seed + belgeleri** kapsamalı ve **büyük-küçük harf duyarsız** olmalı. Dar arama sonucu "yok" YAZILAMAZ.
+- **Pozitif bulgu (var) tek kanıtla yeterlidir; negatif bulgu (yok) KAPSAM BEYANI ister:** "N terim · M dizin tarandı, 0 sonuç".
+- ⭐ Bu kural **HERKES için geçerlidir** — ajan, alt-ajan, PO ve strateji katmanı dahil. Kural, üç kez aynı hatanın tekrarlanmasından doğdu.
+- **GEREKÇE (üç vaka):**
+  - Bilanço turu: "ölü" sanılan ~11 kalem kod-teyitle çürüdü.
+  - S21 turu: alt-ajan 5 alanı yanlışlıkla "ölü" ilan etti (`discD/I/S/C` · `Meeting.requestMessage` · `rematchPriority` · `rematchCount` · `mentorVisibilityEnabled`) — hepsi yazılıyordu.
+  - Doğrulama turu: strateji katmanı "çift ayraç hatası var" dedi — meğer dosyanın 9 oturum sınırında kullanılan KONVANSİYONMUŞ; tek örneğe bakıp genelleme yapılmıştı.
+- **⭐ İKİ DİL EKİ (PO, 2026-08-30):** Bu projede KOD İngilizce, BELGELER Türkçe. Negatif iddia araması **İKİ DİLDE** yapılır:
+  `club↔kulüp` · `tenant↔kurum` · `consent↔rıza` · `mentor↔mentör` · `meeting↔görüşme` · `agreement↔anlaşma` ·
+  `report↔rapor` · `delete↔silme`. **ARANAN TERİMLER listesi rapora YAZILIR** ki kapsam denetlenebilsin.
+  **GEREKÇE:** niyet arkeolojisi turunda `/clubs` uçları "hikâye yok" sanıldı çünkü yalnız `club` arandı — oysa kulüp
+  modeli AKTİF bir PO kararı (STK ile aynı yetkiler) ve avukat paketinde kulüp beyanı şartı var. Tek dilde arayan
+  yarısını kaçırır.
+
+### KURAL 14 — CI YEŞİL ≠ TEST KOŞTU
+> ✅ **ONAYLANDI (PO, 2026-09-02).** (Kanıtlı olaydan doğdu, zaten uygulanıyor.)
+> ⚠️ **EK (PO, 2026-09-02):** "CI yeşil" raporlanırken **KAÇ TEST KOŞTUĞU da YAZILIR.** "0 passed" da yeşil görünür — sayı olmadan yeşil bir şey kanıtlamaz.
+- Bir testin koştuğu, CI'ın yeşil olmasıyla **KANITLANMAZ.** Kanıt üç şeydir:
+  (a) test dosyasının adı **CI log'unda GEÇMELİ** · (b) **TEST SAYISI** önceki koşuyla karşılaştırılmalı ·
+  (c) artış, eklenen testin sayısıyla **UYUŞMALI.**
+- "0 passed" da yeşil döner. **Stacked PR'da test main'e hiç ulaşmayabilir.**
+- **GEREKÇE:** 2026-08-31'de e2e testi main'e ulaşmadı (stacked merge sırası), CI yeşil döndü, iki tur boyunca fark
+  edilmedi; #66 ile taşınınca 442→445 kanıtlandı. (Detay: `docs/kararlar/00-KARAR-TAKIP.md` F.11.)
+
+### KURAL 15 — KAYNAK HİYERARŞİSİ
+> ✅ **ONAYLANDI (PO, 2026-09-02).** (Kanıtlı olaydan doğdu — G1-23 21. hayalet — zaten uygulanıyor.)
+- **G-kartları (`docs/raporlar/bilanco/kararlar/G*.md`) = AYRINTI + KANIT.** Kaynak doğrudur; her kalemin tam tanımı,
+  gerekçesi ve kod kanıtı oradadır.
+- **`00-KARAR-TAKIP` = ÖZET + numara.** Turlar arası hızlı bakış; kalemin TAM tanımını taşımaz.
+- ⭐ **ÇELİŞKİDE KART KAZANIR** — kanıt orada.
+- ⚠️ Özet belgede bir kalemi kapatmadan ÖNCE kartın konusunun aynı olduğu DOĞRULANIR. Kısmi kanıtla tam
+  kapatma yapılmaz.
+- **GEREKÇE:** 2026-08-29'da `00-KARAR-TAKIP` "G1-23 → 🗑️ geçersiz (guard var)" yazdı. Guard tespiti DOĞRUYDU ama
+  başka bir konuydu (sahiplik/IDOR); G1-23 kartının konusu XSS'ti ve o açıktı. Özet, ayrıntıyı yanlışlıkla kapattı
+  → 21. "hayalet tamamlanmış". (Detay: `docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md` [G1-23].)
+
+### KURAL 16 ADAYI — SAYILAN BİRİM TANIMLANIR (PO onaylayacak)
+> ⚠️ Numara verme yetkisi PO'dadır; kural yazıldı ama **"ADAYI"** olarak — PO onaylayınca "ADAYI" düşer.
+- Bir sayı raporlanmadan ÖNCE **sayılan birim tanımlanır.**
+- "**N kalem**" demek YETMEZ — **hangi yerlerdeki** kalemler sayıldı açıkça yazılır: durum satırı · PO notu · alt madde ·
+  başka belge · hangi dosyalar tarandı.
+- Farklı birimler farklı sayı verir; ikisi de doğru olabilir. Yanlış olan, birimi söylemeden sayı vermektir.
+- **GEREKÇE — üç kez aynı desen, her seferinde birim belirsizdi:**
+  - Bilanço: "196 benzersiz kalem" → gerçek ≈259 (aritmetik toplam ≠ tekilleştirilmiş satır).
+  - S21 envanteri: "30 satır" → ~40 benzersiz alan (bazı satırlar alan-grubu).
+  - 🗑️ taraması: "6 geçersiz kart" → 15 geçersiz kalem (ilk sayım yalnız kart durum satırına baktı; PO notu,
+    karar-takip ve alt maddeler sayılmadı).
+- ⭐ Uygulama: iki adımlı doğrulamada (M1) "X bekliyorum" denirken **birim de söylenir.**
