@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-21 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # 09-DURUM — Geçmiş Katmanlar Arşivi (2026-09-21)
 
 **📸 DONDURULMUŞ (2026-09-21)** — `docs/kararlar/09-DURUM.md`'nin başındaki **tarih/SHA katman bölgesi** burada korunuyor.

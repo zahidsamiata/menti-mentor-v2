@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-28 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # 00 — ÖNCELİK SIRASI (kod iş sırası) — 2026-08-28
 
 📸 DONDURULMUŞ — 2026-09-19'da DEVREDİLDİ. Açık kalemler docs/otonom/00-KUYRUK.md AŞAMA F (F-01..F-33) olarak taşındı. Bu belge artık iş kaynağı DEĞİLDİR. (CS raporu §5, 2026-09-23 — belgedeki mevcut ':3 DEVREDİLDİ' ve ':13 DONDURULMUŞ' damgaları bu tek damgaya indirgenmeli; gövde korunur.)

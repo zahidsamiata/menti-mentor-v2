@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-29 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-29 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # PROFİL / HEDEF VERİSİ ENVANTERİ (S21)
 
 **📸 DONDURULMUŞ** · 2026-08-29 · salt-okuma keşif (kod/DB değişmedi) · Kaynak: `prisma/schema.prisma` + `backend/src` + `frontend/src` (3 paralel Explore ajanı + elle doğrulama)

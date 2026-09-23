@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-26 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-26 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # BELGE BİLANÇOSU — ÜRÜN SAHİBİ ÖZETİ
 
 📸 DONDURULMUŞ — 2026-08-26 PO özet fotoğrafı. [ ] PO notu alanları o güne aittir. Güncel durum: docs/otonom/00-KUYRUK.md. (CS raporu §5, 2026-09-23)

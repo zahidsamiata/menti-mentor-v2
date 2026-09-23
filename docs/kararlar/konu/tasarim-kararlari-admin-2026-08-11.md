@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # STK Admin Paneli — Tasarım Kararları (2026-08-11)
 **🔄 YAŞAYAN** (kararlar eklenebilir) · ilişkili keşif: `stk-admin-bulgu-envanteri-2026-08-11.md`
 > ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-07): dosya ADI tarihli (`-2026-08-11` = 📸/dondurulmuş işareti, KURAL 4) ↔ bu ETİKET **🔄 YAŞAYAN**. İki işaret birbirini yalanlıyor. Düzeltme (ad tarihsizleştir VEYA etiket değiştir) = AN-44 kuyruk işi; karar PO'nun.

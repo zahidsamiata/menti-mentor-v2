@@ -1,3 +1,6 @@
+> 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🔥 · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: her tur (ajan Durum/Not günceller; PO iş ekler)
+
 # 00-KUYRUK — Otonom İş Kuyruğu (v2)
 Güncelleme: 2026-09-10 · Sahip: PO (Zahid)
 

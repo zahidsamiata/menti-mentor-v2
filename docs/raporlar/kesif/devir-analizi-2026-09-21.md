@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-21 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-21 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # DEVİR ANALİZİ — yol haritası · karar takibi · 09-DURUM · kuyruk hijyeni · belge sağlığı
 **📸 DONDURULMUŞ** — bu turun kod+belge fotoğrafı, güncellenmez; güncel durum: `docs/kararlar/09-DURUM.md`
 **Tur:** AZ · **Dal:** `otonom/AZ-devir-analizi-20260921` · **Tarih:** 2026-09-21

@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-19 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-19 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # MENTÖR + MENTİ PANEL DENETİMİ — İSTENEN vs KODDA OLAN
 **📸 DONDURULMUŞ** — bu turun kod fotoğrafı, güncellenmez; güncel durum: `docs/kararlar/09-DURUM.md`
 **Tur:** H · **Dal:** `otonom/H-panel-denetimi-20260919` · **Denetim tarihi:** 2026-09-20

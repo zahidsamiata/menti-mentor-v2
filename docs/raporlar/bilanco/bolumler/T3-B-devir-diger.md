@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-26 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-26 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # BELGE BİLANÇOSU — TUR 3 / GRUP B (`docs/devir/` — 6 belge, 07 hariç)
 
 **📸 DONDURULMUŞ** (bilanço bölümü — 2026-08-26) · Tur 3/GRUP-B · Salt-okuma defter. Kod SALT-OKUNDU (spot-teyit), DEĞİŞTİRİLMEDİ · DB'ye DOKUNULMADI · PR/commit/belge-silme YOK.

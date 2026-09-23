@@ -1,6 +1,6 @@
 # 00-SIRADAKI — yalnız 🟢 BEKLIYOR işler
 
-> ⚙️ **TÜRETİLMİŞ** — kaynak: `docs/otonom/00-KUYRUK.md` · üretim: 2026-09-23 18:54 UTC · üretici: `scripts/otonom-turet.mjs`
+> ⚙️ **TÜRETİLMİŞ** — kaynak: `docs/otonom/00-KUYRUK.md` · üretim: 2026-09-23 18:57 UTC · üretici: `scripts/otonom-turet.mjs`
 > ⛔ **BURAYA ELLE YAZMA.** Kaynak olarak kullanma, atıf verme. Çelişki halinde **00-KUYRUK.md KAZANIR.**
 > Üretim tarihi 1 günden eskiyse bu dosyaya güvenme → kaynaktan hedefli oku (`OTONOM-PROMPT.txt` § 0.4).
 > 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt · Okuma
@@ -14,6 +14,9 @@
 `grep -n '^| <iş-no> |' docs/otonom/00-KUYRUK.md`
 
 <!-- ↓ 00-KUYRUK.md baş kısmı (tanımlar), aynen -->
+> 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🔥 · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: her tur (ajan Durum/Not günceller; PO iş ekler)
+
 # 00-KUYRUK — Otonom İş Kuyruğu (v2)
 Güncelleme: 2026-09-10 · Sahip: PO (Zahid)
 

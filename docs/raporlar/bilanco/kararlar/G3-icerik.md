@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-27 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # BİLANÇO KARAR DOSYASI — G3: İçerik (sorular, sertifika, öğrenme yolculuğu)
 
 **📸 DONDURULMUŞ** · 2026-08-27 (Tur-5b) · Kaynak: `docs/raporlar/bilanco/kararlar/00-SAYIM-2026-08-27.md` (G3 listesi) + `karar-defteri-2026-08-26.md` (GRUP 6 İçerik s.187-209 + GRUP 3 sertifika/etiket kalemleri)

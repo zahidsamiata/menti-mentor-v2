@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-15 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Değerlendirme/Test Sistemi — Derinleştirilmiş Eksik Analizi (2026-08-15)
 
 **📸 DONDURULMUŞ (2026-08-15)** — envanter raporunun (PR #78, 7. bölüm) derinleştirilmiş hâli. İçerik dökümü: [`../../arsiv/icerik/00-icerik-index.md`](../../arsiv/icerik/00-icerik-index.md) (⚠️ BAYAT, 2026-08-28 arşive taşındı — güncel: `../icerik/tam-soru-dokumu-2026-08-26.md`).

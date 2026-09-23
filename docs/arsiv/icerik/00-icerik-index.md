@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-15 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-15 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # İçerik Dökümü — INDEX (2026-08-15)
 
 **📸 DONDURULMUŞ (2026-08-15)** — değerlendirme/test/soru sistemlerinin TAM içerik dökümü. Üst envanter: `../../raporlar/kod-denetimi/degerlendirme-test-soru-envanteri-2026-08-15.md` (PR #78). Eksik analizi: `../../raporlar/kod-denetimi/eksikler-derinlestirilmis-2026-08-15.md`.

@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-20 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-20 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # STRATEJİ ↔ GERÇEK DENETİMİ (DERİN)
 **📸 DONDURULMUŞ (2026-08-20)** — bu tarihteki kod gerçeğinin belge vaatlerine karşı fotoğrafı; güncellenmez.
 **Amaç:** 6 strateji/persona belgesinde yazan HER maddenin bugün kodda ne durumda olduğunu — özellikle

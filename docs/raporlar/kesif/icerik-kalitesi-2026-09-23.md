@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # İÇERİK KALİTESİ KONSEYİ — Bölüm A–D, F, G
 
 > **📸 DONDURULMUŞ — 2026-09-23.** Plan değildir; bulguları kuyruğa işlendikten sonra güncellenmez.

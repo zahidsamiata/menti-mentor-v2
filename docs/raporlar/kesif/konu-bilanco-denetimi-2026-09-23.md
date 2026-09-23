@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 📸 DONDURULMUŞ — 2026-09-23 fotoğrafı. Plan değildir; bulgular `00-KUYRUK.md`'ye işlendikten sonra güncellenmez.
 
 # Kanonik Karar Belgeleri (`konu/`) + Bilanço Öksüz Denetimi

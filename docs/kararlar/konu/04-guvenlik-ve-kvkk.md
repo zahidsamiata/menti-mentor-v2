@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 04 — GÜVENLİK VE KVKK
 **🔄 YAŞAYAN** (canonical: güvenlik ve KVKK)
 **Son güncelleme:** 2026-08-02 · Kaynak: strateji/güvenlik chat'i, repo-inceleme chat'i, mail/panel chat'i, bugünkü teşhis

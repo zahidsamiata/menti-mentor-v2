@@ -1,3 +1,7 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: docs/ altına belge eklenince, taşınınca ya da dondurulunca
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-23 öncesi (belgenin kendi tarihleri) durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # 📍 BELGE HARİTASI — docs/ tam envanteri
 
 **🔄 YAŞAYAN** · **Son güncelleme:** 2026-09-20 (K turu — belge mimarisi)

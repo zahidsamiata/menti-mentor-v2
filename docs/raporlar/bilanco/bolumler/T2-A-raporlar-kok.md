@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-26 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # BELGE BİLANÇOSU — TUR 2 / GRUP A (raporlar/ kök)
 
 **📸 DONDURULMUŞ** (bilanço bölümü — 2026-08-26) · Tur 2/4 · Referans: `T1-A-canonical.md`

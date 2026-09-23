@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 11 — Tasarım Kararları: Kullanıcı Yaşam Döngüsü & DISC Gösterimi
 
 **🔄 YAŞAYAN** (canonical: yaşam döngüsü + DISC gösterim kararları · kararlar eklenebilir) · **Son güncelleme:** 2026-08-16

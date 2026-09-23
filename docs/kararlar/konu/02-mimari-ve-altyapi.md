@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 02 — MİMARİ VE ALTYAPI
 **🔄 YAŞAYAN** (canonical: mimari ve altyapı)
 **Son güncelleme:** 2026-08-02 · Kaynak: PRD/repo-inceleme chat'i, mail/panel chat'i, bugünkü oturum

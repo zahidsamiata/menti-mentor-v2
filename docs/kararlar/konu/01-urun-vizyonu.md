@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 01 — ÜRÜN VİZYONU
 **🔄 YAŞAYAN** (canonical: ürün vizyonu)
 **Son güncelleme:** 2026-08-02 · Kaynak: PRD/isim chat'i, strateji chat'i, psikometri chat'i, mail/panel chat'i

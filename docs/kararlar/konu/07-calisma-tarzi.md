@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 07 — ÇALIŞMA TARZI VE PROMPT FELSEFESİ
 **🔄 YAŞAYAN** (canonical: çalışma tarzı ve prompt felsefesi)
 ~~[ESKİ · 2026-09-21] **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler (ortak), bugünkü oturum~~

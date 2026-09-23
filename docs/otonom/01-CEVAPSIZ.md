@@ -1,6 +1,6 @@
 # 01-CEVAPSIZ — CEVAP satırı boş kararlar
 
-> ⚙️ **TÜRETİLMİŞ** — kaynak: `docs/otonom/01-KARARLAR.md` · üretim: 2026-09-23 18:54 UTC · üretici: `scripts/otonom-turet.mjs`
+> ⚙️ **TÜRETİLMİŞ** — kaynak: `docs/otonom/01-KARARLAR.md` · üretim: 2026-09-23 18:57 UTC · üretici: `scripts/otonom-turet.mjs`
 > ⛔ **BURAYA ELLE YAZMA.** Kaynak olarak kullanma, atıf verme. Çelişki halinde **01-KARARLAR.md KAZANIR.**
 > Üretim tarihi 1 günden eskiyse bu dosyaya güvenme → kaynaktan hedefli oku (`OTONOM-PROMPT.txt` § 0.4).
 > 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt · Okuma

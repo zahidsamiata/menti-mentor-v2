@@ -1,3 +1,7 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: bir karar/söz geçmişi değişince (tur sonu belge senkronu)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-23 öncesi (belgenin kendi tarihleri) durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # 00 — KARAR & İŞ TAKİBİ (NE KALDI · NE YARIM · NE UNUTULDU)
 
 > ⚠️ **ROL NOTU (2026-09-23):** Bu belge artık **KARAR VE SÖZ GEÇMİŞİDİR.** Aktif iş takibi `docs/otonom/00-KUYRUK.md`'dedir. Buradaki durum işaretleri tarihsel olabilir; güncel durum için kuyruğa bak (köprü: `docs/kararlar/00-KART-INDEKSI.md`). *(Ayrıntılı rol daraltma tablosu için aşağıya bakın — 2026-09-21.)*

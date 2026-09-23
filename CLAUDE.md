@@ -1,3 +1,6 @@
+> 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt · Okuma
+> TÜR: 🔥 · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: kalıcı bir kural eklenince/değişince
+
 <!-- otonom-calisma-modu · eklenme: 2026-09-19 · PO kararı -->
 # ⭐ OTONOM ÇALIŞMA MODU (2026-09-19'dan itibaren geçerli)
 
