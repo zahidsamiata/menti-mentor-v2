@@ -8,22 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { certificationApi } from '@/lib/api/certification';
 import type { CertTopicsResponse } from '@/types/certification';
-
-// Konu slug → okunabilir başlık (senaryo bankası konuları).
-const TOPIC_LABELS: Record<string, string> = {
-  'cevabi-verme-buldur':          'Cevabı verme, buldur',
-  'yapici-geri-bildirim':         'Yapıcı geri bildirim',
-  'beklentileri-hizalama':        'Beklentileri hizalama',
-  'aktif-dinleme':                'Aktif dinleme & yargılamama',
-  'sinir-koyma':                  'Sınır koyma & rol netliği',
-  'gonullu-tukenmisligi':         'Gönüllü tükenmişliği & motivasyon',
-  'okul-gonulluluk-dengesi':      'Okul/iş ile gönüllülük dengesi',
-  'kulturel-farkliliklara-saygi': 'Kültürel/bireysel farklılıklara saygı',
-  'gizlilik-guven':               'Gizlilik & güven',
-  'kriz-yonetimi':                'Kriz & hassas durum yönetimi',
-};
-
-const label = (topic: string) => TOPIC_LABELS[topic] ?? topic;
+import { topicLabel as label } from '@/lib/certificationTopics';
 
 export default function AdminCertificationPage() {
   const { user } = useAuth();
