@@ -58,7 +58,11 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
     · docs/otonom/01-KARARLAR.md → YALNIZ bastaki INDEKS tablosu (hangi CEVAP dolu).
       Bir kartin govdesi ancak o kart gerektiginde acilir:
         grep -n -A 25 '^### KARAR-<n> ' docs/otonom/01-KARARLAR.md
-    · docs/otonom/02-ILERLEME.md → YALNIZ son ~120 satir (tail -n 120).
+    · docs/otonom/02-ILERLEME.md → YALNIZ ~120 satir: tur ozetleri EN BASA yazilir (13.3) →
+      ilk ~100 satir; "TUR YARIM KALDI" satiri SONA yazilir (2.5) → son ~20 satir.
+      Eski turlar docs/otonom/arsiv/02-ILERLEME-<YYYY-MM>.md'de (rutin turda OKUNMAZ).
+      Dosya 40.000 karakteri asarsa: son UC tur kaydi kalir, oncekiler arsive (rehber § KURAL 21,
+      satir denetimi ZORUNLU: ana + arsiv toplami AZALAMAZ).
     · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler; yalniz bir is PO'ya
       dokunuyorsa ilgili satiri grep ile ac.
     · docs/kararlar/09-DURUM.md → ⚠️ ters-kronolojik katmanli, yeni icerik BASA eklenir.
