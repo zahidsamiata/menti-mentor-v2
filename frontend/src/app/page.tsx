@@ -7,6 +7,7 @@
  */
 
 import type { Metadata } from 'next';
+import Link               from 'next/link';
 import { Navbar }         from './_sections/Navbar';
 import { HeroSection }    from './_sections/HeroSection';
 import { PainSection }    from './_sections/PainSection';
@@ -64,11 +65,14 @@ export default function LandingPage() {
             <p className="text-xs text-slate-600 text-center">
               © {new Date().getFullYear()} MentiMentor · KVKK uyumlu · Türkiye&apos;de geliştirildi 🇹🇷
             </p>
-            <div className="flex items-center gap-4 text-xs text-slate-600">
-              <span>Gizlilik Politikası</span>
-              <span>·</span>
-              <span>Kullanım Koşulları</span>
-            </div>
+            {/* Y-06: yasal linkler artık tıklanabilir (önceden ölü <span>'di). */}
+            <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-400" aria-label="Yasal bağlantılar">
+              <Link href="/gizlilik" className="hover:text-white underline-offset-4 hover:underline">Gizlilik Politikası</Link>
+              <span aria-hidden>·</span>
+              <Link href="/kvkk" className="hover:text-white underline-offset-4 hover:underline">KVKK</Link>
+              <span aria-hidden>·</span>
+              <Link href="/terms" className="hover:text-white underline-offset-4 hover:underline">Kullanım Koşulları</Link>
+            </nav>
           </div>
         </footer>
       </main>
