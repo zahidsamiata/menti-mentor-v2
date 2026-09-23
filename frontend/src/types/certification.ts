@@ -61,7 +61,9 @@ export interface CertResult {
   passedTopics: number;
   passed: boolean;
   status: string;
-  failReason: 'BELOW_THRESHOLD' | null;
+  // Backend `CertFailReason` ile birebir (certification.service.ts:90-94): eşik altı,
+  // kritik (red-line) konu elemesi, açık konu yok, ya da bekleme süresi aktif.
+  failReason: 'BELOW_THRESHOLD' | 'RED_LINE_FAILED' | 'NO_ACTIVE_TOPICS' | 'COOLDOWN_ACTIVE' | null;
   attempts: number;
   topicResults: CertTopicResult[];
 }
