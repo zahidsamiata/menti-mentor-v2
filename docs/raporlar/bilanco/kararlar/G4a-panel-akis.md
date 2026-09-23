@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 · Kaynak: `00-SAYIM-2026-08-27.md` (c/G4) + `karar-defteri-2026-08-26.md` (GRUP 3/4)
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 > **Ne bu:** G4 grubu (Panel & akış) ikiye bölündü. **Bu dosya = G4a** (STK-admin paneli + Platform paneli + panel mekaniği). Retention/persona/sevdirme + mentör-menti akış kartları **G4b-panel-akis.md**'de. Her kalem tek karar kartı; PO tek tek işaretler. Salt-okuma + kod-teyit yapıldı; kod/DB/PR değiştirilmedi.
 
 ---
@@ -324,3 +326,12 @@ Kaynak: karar-defteri GRUP-9 (v2-backlog) · Numara: md.19/KARAR 8
 - ✅ Haftalık görüşme limiti enforce (menti başına, 7-gün UTC kova, 409) [md.79]
 
 *(19 ✅ kalem.)*
+
+---
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+
+> CS bilanço denetimi §1f: "kartta açık ama bugün canlıda" kalemler. 📸 gövde/işaret INLINE değiştirilmedi (kart dondurulmuş); güncel kod-durumu burada listelenir. Güncel iş kaynağı: `docs/otonom/00-KUYRUK.md`.
+
+- **G4-01 ✅ CANLIDA 2026-09-23** (kart gövdesi ⬜) — Havuz KART görünümü FE bitti. Kanıt: PR/F-10, `frontend/src/app/(dashboard)/menti/page.tsx:288`.
+- **G4-14 ✅ CANLIDA 2026-09-23** (kart gövdesi 🟡) — Sistem sağlığı mail göstergesi gerçek probe'a bağlandı. Kanıt: backend PR #84.

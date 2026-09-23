@@ -1,5 +1,7 @@
 # BELGE BİLANÇOSU — ÜRÜN SAHİBİ ÖZETİ
 
+📸 DONDURULMUŞ — 2026-08-26 PO özet fotoğrafı. [ ] PO notu alanları o güne aittir. Güncel durum: docs/otonom/00-KUYRUK.md. (CS raporu §5, 2026-09-23)
+
 **2026-08-26** · Sade özet (teknik detay için: `belge-bilancosu-2026-08-26.md` + `karar-defteri-2026-08-26.md`)
 
 > Tüm proje belgeleri (71 belge, 10.473 satır) baştan sona okundu. İçlerindeki her karar, iş ve fikir çıkarıldı,
@@ -147,3 +149,7 @@ Bu karışıklık neden oldu? **İki yapısal boşluk:**
 
 Çözüm önerisi (4 kural, detay `tekrar-onleme-2026-08-26.md`): raporlar kalem listesiyle bitsin · "yapıldı" kod kanıtı olmadan yazılmasın · sözler tek yere yazılıp oturum BAŞINDA okunsun · yaşayan belgeler eskiyince "bayat" işaretlensin. **Hiçbiri henüz uygulanmadı — senin onayını bekliyor.**
 `[ ] PO notu: (kuralları onaylıyorum / şunlar değişsin / gerek yok) `
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+
+⚠️ Ç-17 (CS raporu): bu belgedeki '196' toplamı bayat; güncel sayım 259 (00-KATLAMA-IZI) / 260 (00-SAYIM). Bu belge 2026-08-26/27 fotoğrafıdır; sayı canlı durumu yansıtmaz. Kanıt: 00-KATLAMA-IZI-2026-08-27.md · 00-SAYIM-2026-08-27.md.

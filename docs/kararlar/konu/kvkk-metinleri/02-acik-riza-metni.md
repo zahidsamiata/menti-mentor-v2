@@ -34,7 +34,8 @@ Aşağıdakiler **şu anki kodda böyle**; hukukçu onayıyla düzeltilecek. Bu 
 1. **KVKK onayı + 18+ beyanı TEK kutuda birleşik** (`_RegisterContent.tsx:414`) — açık rıza "özgür/ayrık" ilkesiyle çelişebilir.
 2. **OAuth (Google/LinkedIn) girişinde açık rıza kutusu UI'da GÖSTERİLMİYOR** — kod "OAuth başlatmak = rıza" varsayıyor (`oauthService.ts:112` implicit `kvkkConsentAt`).
 3. **Self-serve kurum başvurusunda 18+ ibaresi bile yok.**
-4. **Rıza metninin SÜRÜMÜ tutulmuyor** (yalnız zaman damgası) → hangi metne rıza verildiği ispatlanamıyor.
+4. ~~**Rıza metninin SÜRÜMÜ tutulmuyor** (yalnız zaman damgası) → hangi metne rıza verildiği ispatlanamıyor.~~
+   ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında rıza sürümleme UYGULANMIŞ — `consentService.ts:28` `CONSENT_VERSION='v1.0'` + dual-write + testler VAR (G1-07 uygulandı). Metin tarafı "sürüm tutulmuyor" diyor; kod tarafı sürümlüyor → iki taraf çelişik, metin bayat. Kanıt: `consentService.ts:28`. Karar PO'nun.
 
 ### Önerilen ayrık tasarım (yalnız TASLAK öneri — KOD BU TURDA YAZILMADI)
 - Kayıt/giriş ekranında **ayrı kutular:** (a) Aydınlatma metnini okudum · (b) 18 yaşımı doldurdum · (c) Genel açık rıza · (d) Psikometrik veri açık rızası · (e) Yurt dışı aktarım açık rızası. Her biri **bağımsız**, hizmet için zorunlu olmayanlar işaretsiz bırakılabilir.

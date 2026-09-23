@@ -244,7 +244,7 @@ Kaynak: karar-defteri (md.91) · Numara: md.91
 Ne: Ağırlık kalibrasyonunda "son değişikliği kim yaptı" denetim kaydı yazımı `void` (fire-and-forget) çağrılıyor; yazım başarısız olursa kimse fark etmez ve iz kaybolur.
 Neden başlanmıştı: NİYET: kalibrasyon değişikliğinin denetlenebilir iz bırakması.
 Nerede durdu: Yazım hataya dayanıklı değil; denetim önerisi açık.
-Bugünkü durum: ❓ TEYİT GEREK
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ TEYİT GEREK~~ → ✅ CANLIDA 2026-09-23, kanıt: backend PR #81 merged (`void`→`await`+`.catch`; denetim yazımı artık hataya dayanıklı, sessizce düşmez).
 Etkisi: Denetim kaydı sessizce düşerse "kim değiştirdi" bilgisi kaybolur (hesap verebilirlik açığı).
 İş boyu: S
 Kaynak: karar-defteri (md.98) · Numara: md.98
@@ -358,7 +358,7 @@ Kaynak: karar-defteri (güvenlik-denetimi 3.1 nüans) · Numara: NUMARASIZ
 Ne: Süper-admin agregat metrikleri görürken çok küçük gruplarda (ör. 1-2 kişi) sayı bir kişiyi teşhis edebilir. Küçük grupları yuvarlayarak gizleme (k-anonimlik) uygulanmıyor.
 Neden başlanmıştı: NİYET: agregat verinin bireyi ifşa etmemesi (KVKK-agregat borcu).
 Nerede durdu: Kod yok (grep boş); iz zayıf.
-Bugünkü durum: ⬜ AÇIK
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ AÇIK~~ → ✅ CANLIDA 2026-09-23, kanıt: `backend/src/services/mask.ts:52` `applyKAnonymity` (küçük grup yuvarlama/gizleme uygulanıyor).
 Etkisi: Küçük kurumda agregat metrik tek kişiyi dolaylı teşhis edebilir (KVKK dolaylı-tanımlama riski).
 İş boyu: M
 Kaynak: karar-defteri (güvenlik-denetimi 3.2) · Numara: NUMARASIZ
@@ -413,7 +413,7 @@ Kaynak: karar-defteri (NUMARASIZ, createMeeting) · Numara: NUMARASIZ
 Ne: Herkese açık şüphe/ihbar formunda IP bazlı hız sınırı veya CAPTCHA (spam/kötüye kullanım koruması) yok; ayrıca hassas işlemde ek şifre-doğrulama (step-up) yok.
 Neden başlanmıştı: NİYET: public formun kötüye kullanımını engellemek.
 Nerede durdu: DURUŞ SEBEBİ YOK (düşük öncelik).
-Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ AÇIK~~ → 🟡 YARIM (2026-09-02; IP-limit ✅, CAPTCHA/step-up açık ↓)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ⬜ AÇIK~~ → 🟡 YARIM (2026-09-02; IP-limit ✅, CAPTCHA/step-up açık ↓) · IP-limit ayağı ✅ CANLIDA 2026-09-23, kanıt: `suspicionRoutes.ts:9` rate-limit (CAPTCHA/step-up ayağı HÂLÂ AÇIK — kart 🟡 kalır).
 Etkisi: Public ihbar formu spam/otomatik kötüye kullanıma açık (düşük-orta).
 İş boyu: S
 Kaynak: karar-defteri (NUMARASIZ, suspicion-report) · Numara: NUMARASIZ

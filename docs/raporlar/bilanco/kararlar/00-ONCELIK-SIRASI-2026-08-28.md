@@ -1,5 +1,7 @@
 # 00 — ÖNCELİK SIRASI (kod iş sırası) — 2026-08-28
 
+📸 DONDURULMUŞ — 2026-09-19'da DEVREDİLDİ. Açık kalemler docs/otonom/00-KUYRUK.md AŞAMA F (F-01..F-33) olarak taşındı. Bu belge artık iş kaynağı DEĞİLDİR. (CS raporu §5, 2026-09-23 — belgedeki mevcut ':3 DEVREDİLDİ' ve ':13 DONDURULMUŞ' damgaları bu tek damgaya indirgenmeli; gövde korunur.)
+
 > ⚠️ **DEVREDİLDİ (2026-09-19):** Bu sıradaki açık kalemler **bugünün koduna karşı** doğrulandı (salt-okuma, 8 paralel
 > alt-ajan, Faz 0-8) ve `docs/otonom/00-KUYRUK.md` **AŞAMA F**'ye (F-01..F-33) taşındı. Takip artık ORADA — bu belge
 > tarihsel kaynak olarak korunur, satır silinmedi. PO-manuel kalemler `01-KARARLAR.md` **KARAR-18**'de; ürün kararı

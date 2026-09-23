@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 (Tur-5b) · Kaynak: `docs/raporlar/bilanco/kararlar/00-SAYIM-2026-08-27.md` (c/G8) + `docs/raporlar/bilanco/karar-defteri-2026-08-26.md` (GRUP 8)
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 > **Ne bu:** G8 grubundaki her kalem için PO'nun tek tek karar verebileceği sade kartlar. Bu grubun çoğu **PO-manuel** iş (deploy ayarı, canlı gözlem, ortam temizliği). Kod/dosya iddiaları geniş grep + `ls` ile teyit edildi (yalnız okundu; kod değişmedi).
 
 ---

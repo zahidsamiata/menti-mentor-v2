@@ -5,6 +5,7 @@
 
 ## 1. Taraflar ve tanım
 Bu koşullar, platform işletmecisi (**Zahid Sami Ata** — gerçek kişi/sosyal sorumluluk projesi) ile platformu kullanan kişi ("Kullanıcı") arasındaki ilişkiyi düzenler. Platform, kurumların (dernek/kulüp) mentor–menti eşleştirme programlarını yürütmelerine olanak tanıyan bir yazılım hizmetidir.
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): "Kişi Adı Yasağı" (kök CLAUDE.md) ile yasal metnin isim zorunluluğu çelişiyor — karar PO/hukuk (bkz. 01-KARARLAR.md KARAR-75). İsim yasal zorunluluk olabileceğinden değiştirilmedi; belgedeki sonraki geçişler için de geçerlidir.
 
 ## 2. Hizmetin tanımı (kod gerçeği)
 - Kullanıcılar kayıt olur, profil ve kişilik (DISC/mizaç) değerlendirmesi doldurur; sistem uygunluk skoruna göre mentor/menti önerir.
@@ -31,7 +32,8 @@ Kullanıcı tarafından girilen içerik kullanıcıya aittir; platform hizmeti s
 ## 7. Hesap kapatma ve fesih
 - Kullanıcı hesabını kapatmak isteyebilir (bkz. Gizlilik Politikası + Başvuru Usulü — silme/anonimleştirme).
 - İşletmeci, kötüye kullanım hâlinde hesabı askıya alabilir/sonlandırabilir.
-- **Dürüst not:** hesap tam silme akışı şu an teknik kısıt (madde 39) nedeniyle sınırlıdır; düzeltilecektir.
+- ~~**Dürüst not:** hesap tam silme akışı şu an teknik kısıt (madde 39) nedeniyle sınırlıdır; düzeltilecektir.~~
+  ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında hardDelete→anonymize BİRLEŞTİRİLMİŞ (merged) — `gdprService.ts:233` `hardDeleteUser`→`anonymizeUser`; hesap kapatma anonimleştirmeyle karşılanıyor, "düzeltilecek" değil uygulanmış. Metin "sınırlıdır/düzeltilecektir" diyor; kod tarafında akış yerinde → iki taraf çelişik, metin bayat. Kanıt: `gdprService.ts:233`. Karar PO'nun.
 
 ## 8. Değişiklikler ve uygulanacak hukuk
 Koşullar güncellenebilir; önemli değişiklikler bildirilir. Uyuşmazlıklarda [HUKUKÇU KARARI: yetkili mahkeme/uygulanacak hukuk — gerçek kişi işletmeci + tüketici mevzuatı bağlamında].

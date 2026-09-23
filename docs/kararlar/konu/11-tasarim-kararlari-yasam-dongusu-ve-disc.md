@@ -19,8 +19,9 @@
 
 ## KARAR 1 — DISC ikincil/çoklu harf gösterimi (iş: #12 · =md.4)
 
-**Ne:** Kişinin DISC kimliği tek harf değil, **orta çizgiyi (midline) geçen tiplerden oluşan 1–4 harflik** bir gösterimdir
+**Ne:** Kişinin DISC kimliği tek harf değil, **orta çizgiyi (midline) geçen tiplerden oluşan ~~1–4 harflik~~ 1–3 harflik** bir gösterimdir
 (ör. `D`, `DI`, `Di`, `DIs`). Havuzda/profil rozetinde bu gösterim kullanılır.
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): belge "1–4 harf" tasarlıyor; kod `backend/src/services/discLetters.ts:5,15` **1–3 harf** üretiyor (matematiksel gerekçeli). İki taraf da yazılı: tasarım 1–4, kod 1–3. Hangisi canonical — karar PO'nun. Kanıt: `discLetters.ts:5,15`.
 
 **Neden:** DISC literatüründe kişi genelde tek "saf" tip değildir; baskın tipe eşlik eden ikincil eğilimler davranışı anlamlı
 biçimde değiştirir. Tek harf bilgi kaybettirir; zorla ikincil harf atamak ise yanlış profil üretir. Orta çizgi kuralı bu
@@ -33,7 +34,7 @@ dengeyi kurar.
 4. **BÜYÜK/küçük harf ayrımı (yakınlık):**
    - Birincile **çok yakın** (benzer güçte) olan harfler **BÜYÜK** yazılır.
    - Birincilden **belirgin daha zayıf** ama yine orta çizgiyi geçen harfler **küçük** yazılır.
-   - Örnekler: `DI` (iki güçlü tip) · `Di` (baskın D + destekleyici i) · `DIs` (iki güçlü + zayıfça geçen s). Sonuç 1–4 harf arası değişir.
+   - Örnekler: `DI` (iki güçlü tip) · `Di` (baskın D + destekleyici i) · `DIs` (iki güçlü + zayıfça geçen s). Sonuç ~~1–4~~ 1–3 harf arası değişir. ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): kod 1–3 üretir (`discLetters.ts:5,15`) — bkz. yukarıdaki KARAR 1 notu.
 
 **⚠️ Açık nokta (#12 turunda netleşecek — bu belgede SAYI verilmez):**
 - "Çok yakın = BÜYÜK" için **kesin sayısal eşik** (ör. ikincil, birincilin %X'i mi) sistemin kendi DISC puanlama

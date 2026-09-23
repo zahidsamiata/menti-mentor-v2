@@ -70,3 +70,8 @@ Yeni mesaj oluşturulmadan ÖNCE, alıcının o konuşmadaki okunmamış sayıs�
 ## Migration / DB
 - Uygulanan: `20260806000000_add_chat_conversation_message` (Conversation, Message + indeks + FK). Additive, veri kaybı yok. `IF NOT EXISTS` + idempotent FK.
 - Bu inşa turunda **yeni migration yok**, şema değişmedi.
+
+---
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+⚠️ ÇELİŞKİ (CS raporu / Ç-06): Bu belge 📸 DONDURULMUŞ; gövdesi değiştirilmedi. Belge-içi çelişki tespit edildi — `:3` "v1 tamamlandı, **canlıda**" ↔ `:5` "PR hazır, **MERGE YOK** — inceleme/revizyon kararı ürün sahibinde". CS kod-teyidi: chat **CANLIDA** (`conversationController.ts` + `/messages` FE + migration uygulanmış). Dolayısıyla `:5`'teki "MERGE YOK, karar PO'da" satırı **bayat** (`~~[ESKİ]~~` damgası bekliyor — AN-42 kuyruk işi). Hüküm yok; düzeltme/karar PO'nun. Kanıt: `conversationController.ts` · `frontend .../messages` · migration `20260806000000`.

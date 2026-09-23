@@ -101,6 +101,15 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-70** | **Gerçek kullanıcı görüşmesi: ne zaman, kaç kişi** | **1** (görüşme kılavuzu · PP:334,337) | ⬜ boş · ⭐ analiz turu · SÜREÇ · öneri A (3-5, erken) |
 | **KARAR-71** | **Kırılgan kullanıcıda tutundurma etiğinin sınırı** | **1+** (PP:237 C3 · prompt) | ⬜ boş · ⭐ analiz turu · ETİK/UZMAN, öneri YOK |
 
+> ⭐ **CS BİLANÇO DENETİMİ KARARLARI (2026-09-23) — KARAR-72…75.** Kaynak: `docs/raporlar/kesif/konu-bilanco-denetimi-2026-09-23.md` §7 (CS'nin A/B/C/D harfleri 72-75'e dönüştürüldü). Üçü tasarım belgesinde tam yazılı ama 7 haftadır öksüz kalan kalemler.
+
+| # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
+|---|---|:---:|---|
+| **KARAR-72** | **Ghost / "kalıcı red" özelliği olacak mı** | **1** (AN-33) | ⬜ boş · ⭐ CS bilanço · ÜRÜN+HUKUK · öneri B (koru) |
+| **KARAR-73** | **Değerlendirme AŞAMA 2/3 otomatik pasifleştirme** | **1** (AN-34) | ⬜ boş · ⭐ CS bilanço · öneri C→B (veri birikince) |
+| **KARAR-74** | **Kurum (tenant) kalıcı silme hakkı** (G1-29) | **1** (AN-37) | ⬜ boş · ⭐ CS bilanço · KVKK/GERİ DÖNÜLMEZ · öneri A (yedek+çift-onay) |
+| **KARAR-75** | **KVKK yasal metinlerinde kişi adı: yasak mı istisna mı** | **0** (AN-41/YN-13 etkiler) | ⬜ boş · ⭐ CS bilanço · HUKUK/POLİTİKA · öneri B (kurum/unvan) |
+
 ---
 
 ### KARAR-0 · Merge politikası ✅ CEVAPLANDI
@@ -1549,6 +1558,63 @@ Mentörün **DÖRT HÂLİ** var; her hâlde menti farklı şey yapar:
 **Karşılaştırma:** Net ve muhafazakâr bir etik zemin öncelikse A; esneklik + koruma dengesi isteniyorsa B (ama uzman bağımlılığı); acil değilse C ama koruma açığı büyür. Üçü de bir ruh sağlığı uzmanının çizeceği çizgiye göre yeniden değerlendirilmeli.
 **Benim önerim:** öneri YOK — bu bir ruh sağlığı uzmanı görüşüne bağlı etik karar; ajan bu çizgiyi çizmeye yetkin değil. Öneri: bir uzmandan "kırılgan genç kitlede kabul edilebilir tutundurma teknikleri" görüşü al, sonra A/B'den birini seç.
 **Cevap vermezsen:** yeni tutundurma özellikleri (streak, hatırlatma vb.) etik sınır tanımsızken eklenmeye devam eder; kırılgan kullanıcıda manipülasyon riski denetimsiz büyür.
+**CEVAP:**
+
+---
+
+### KARAR-72 · Ghost / "kalıcı red" özelliği olacak mı? (1 iş açar: AN-33) [ÜRÜN + HUKUK KARARI]
+> ⭐ Kaynak: CS bilanço denetimi (`docs/raporlar/kesif/konu-bilanco-denetimi-2026-09-23.md` §7 KARAR-A). CS'nin "A/B/C/D" harf kimlikleri bu turda 72-75 numaralarına dönüştürüldü.
+**Şu an ne var:** Yönetici bir başvuruyu reddedince kullanıcı "düzeltme" mesajıyla bilgilendiriliyor ve yeniden başvurabiliyor (`adminController.ts:740 rejectUser`). "Sessiz/kalıcı" red yok. Kanıt: `konu/11-tasarim-kararlari-yasam-dongusu-ve-disc.md:53-81` tam tasarım var ama kodda 0.
+**Sorun ne:** Kötü niyetli/uygunsuz bir kullanıcıyı sessizce (ona bildirmeden) ve kalıcı olarak (yeniden başvuramayacak şekilde) eleme yolu yok. Tasarım yazılmış ama hiçbir iş kuyruğuna girmemiş — 7 haftadır unutulmuş.
+**Neden sana soruyorum:** Bir kişinin platformdan sessizce ve kalıcı elenmesi geri dönülmez bir kullanıcı-deneyimi ve olası KVKK/itiraz sonucu doğurur — teknik değil ürün+hukuk kararı.
+**Seçenekler:**
+- **A) Yapılsın (tasarımdaki gibi):** · Kullanıcı: uygunsuz kişi sessizce elenir, tekrar giremez · Kazanç: topluluk güvenliği · Kayıp: yanlış-red edilen kişi neden reddedildiğini bilemez, itiraz edemez (KVKK şeffaflık gerilimi) · Süre M · Geri alınır (kayıt tutulursa) · Migration VAR (`rejectionType` alanı)
+- **B) Yalnız "düzeltme redi" kalsın (bugünkü):** · Kullanıcı: her red şeffaf, yeniden başvurabilir · Kazanç: şeffaflık, KVKK güvenli · Kayıp: kötü niyetli kullanıcı tekrar tekrar başvurabilir · Süre 0 · Migration YOK
+- **C) Ghost yerine "süreli engelleme":** · Kullanıcı: X gün başvuramaz, sonra açılır · Kazanç: orta yol · Kayıp: ek tasarım · Süre M · Migration VAR
+**Karşılaştırma:** A topluluk güvenliğini maksimize eder ama KVKK şeffaflığıyla gerilimli; B en güvenli/en zayıf koruma; C dengeli ama en çok iş. Gerçek kötüye-kullanım hacmi ~sıfırsa B yeterli olabilir.
+**Benim önerim:** B (koru), gerçek kötüye-kullanım görülene kadar — çünkü ghost-red'in KVKK maliyeti, bugünkü ~sıfır kullanıcıda somut faydasından büyük. *(Bu senin ürün kararın; önerime güvenme — güvenlik ekibi farklı düşünebilir.)*
+**Cevap vermezsen:** `11-...disc` KARAR 2 tasarımı belgede asılı kalır, tekrar tekrar "öksüz" raporlanır (AN-33 kilitli).
+**CEVAP:**
+
+### KARAR-73 · Değerlendirme AŞAMA 2/3 (otomatik pasifleştirme) yapılacak mı? (1 iş açar: AN-34) [ÜRÜN KARARI]
+> ⭐ Kaynak: CS bilanço denetimi §7 KARAR-B.
+**Şu an ne var:** Eşleşme sonrası karşılıklı değerlendirme AŞAMA 1 canlıda (kalite puanı `TenantMembership.qualityMultiplier`'a yazılıyor, yönetici havuzda görüyor). AŞAMA 2 (eşik-altı mentörün otomatik pasifleşmesi) ve AŞAMA 3 (yeniden-değerlendirme + onay döngüsü) yalnız tasarımda. Kanıt: `konu/degerlendirme-metrik-sistemi-tasarim-2026-08-19.md:175-188`.
+**Sorun ne:** Düşük puanlı bir mentör kendiliğinden pasifleşmiyor; yönetici elle müdahale etmezse zayıf eşleşmeler sürer.
+**Neden sana soruyorum:** Bir mentörün otomatik (insan onayı olmadan) pasifleştirilmesi, mentörün göreceği/hissedeceği geri-dönülebilir ama hassas bir sonuç — eşiği ve otomasyon derecesini ürün sahibi belirler.
+**Seçenekler:**
+- **A) Tam otomatik pasifleştirme (eşik 3.1/5):** · Mentör: eşik altına düşünce eşleşme almaz · Kazanç: kalite kendini korur · Kayıp: tek kötü dönem mentörü haksız cezalandırır; 3.1 eşiği dayanaksız (belge itiraf ediyor) · Süre L · Migration VAR (`blocked`/`restrictedUntil`)
+- **B) Yönetici-önerili (otomatik uyarı, elle onay):** · Mentör: yönetici karar verir · Kazanç: insan denetimi · Kayıp: yönetici iş yükü · Süre M · Migration VAR
+- **C) Şimdilik yapılmasın:** · Kazanç: 0 iş, gerçek veri ~sıfır · Kayıp: kalite döngüsü yarım kalır · Süre 0
+**Karşılaştırma:** Gerçek değerlendirme verisi ~sıfırken A'nın eşiği kalibre edilemez; B insan denetimiyle güvenli ama iş yükü; C en düşük risk. Veri birikene kadar C→B doğal yol.
+**Benim önerim:** C şimdilik, veri birikince B — çünkü 3.1 eşiği bugün ampirik olarak savunulamaz. *(Ürün kararın.)*
+**Cevap vermezsen:** AŞAMA 2/3 tasarımı öksüz kalır; kalite döngüsü "yarım özellik" olarak asılı durur (AN-34 kilitli).
+**CEVAP:**
+
+### KARAR-74 · Kurum (tenant) kalıcı silme hakkı (G1-29) — (1 iş açar: AN-37) [ÜRÜN + KVKK KARARI]
+> ⭐ Kaynak: CS bilanço denetimi §7 KARAR-C.
+**Şu an ne var:** Platform admin bir kurumu yalnız "dondurabiliyor" (`platformRoutes.ts:53 /freeze`); kalıcı silme (DELETE) yok (grep: `hardDeleteTenant` yok).
+**Sorun ne:** Bir kurum platformdan tümüyle silinmek isterse (KVKK "unutulma hakkı" kurumsal karşılığı) bunu yapacak yol yok; veriler süresiz dondurulmuş kalır.
+**Neden sana soruyorum:** Kurumun tüm verisinin (üyeler, eşleşmeler, geçmiş) geri-dönülmez silinmesi hem KVKK yükümlülüğü hem geri-alınamaz bir işlem — ürün+hukuk kararı.
+**Seçenekler:**
+- **A) Kalıcı silme eklensin (anonimleştirme+silme):** · Kazanç: KVKK uyumu, gerçek "unutulma" · Kayıp: yanlış silme felaketi; yedek/onay katmanı şart · Süre M · Migration VAR · Geri alınamaz
+- **B) Yalnız freeze kalsın + elle DB silme:** · Kazanç: 0 iş · Kayıp: KVKK talebinde manuel/riskli operasyon; iz bırakmaz · Süre 0
+- **C) Freeze + zamanlı otomatik imha (X ay sonra):** · Kazanç: dondur→sil köprüsü · Kayıp: en çok iş, süre kararı gerekir · Süre L · Migration VAR
+**Karşılaştırma:** A KVKK'yı tam karşılar ama en riskli işlem; B hukuki talepte açık verir; C otomatik ama süre eşiği yeni bir karar doğurur.
+**Benim önerim:** A — ama çift-onay + tarihli yedek tablo zorunluluğuyla (CLAUDE.md silme protokolü). *(Ürün+hukuk kararın.)*
+**Cevap vermezsen:** G1-29 öksüz kalır; ilk kurum silme talebinde hazırlıksız yakalanılır (AN-37 kilitli).
+**CEVAP:**
+
+### KARAR-75 · KVKK yasal metinlerinde kişi adı — yasak mı istisna mı? (Ç-16 · AN-41/YN-13 ile bağlı) [HUKUK + POLİTİKA KARARI]
+> ⭐ Kaynak: CS bilanço denetimi §7 KARAR-D.
+**Şu an ne var:** Kök `CLAUDE.md` "hiçbir belgeye kişi adı yazma" diyor; ama KVKK yasal metinleri (aydınlatma, gizlilik, kullanım koşulları, veri-işleyen sözleşmesi) veri sorumlusunu **açık kişi/kurum adıyla** yazıyor (`kvkk-metinleri/01:11,43`, `03:9`, `07:7,39`, `08:6`).
+**Sorun ne:** İki kural birbirini yalanlıyor — biri isim yasaklıyor, diğeri (yasal geçerlilik için) isim zorunlu kılıyor olabilir.
+**Neden sana soruyorum:** Yasal metnin geçerliliği için veri sorumlusunun adının yazılması gerekip gerekmediği hukuk kararı; "kişi adı yasağı"nın bu metinlere istisna olup olmadığı politika kararı.
+**Seçenekler:**
+- **A) KVKK metinleri yasağa İSTİSNA (isim kalır):** · Kazanç: yasal geçerlilik · Kayıp: yasak kuralı delinir, sınır bulanıklaşır · Süre 0 · Geri alınır
+- **B) İsimler kurum/unvana çevrilsin ("Veri Sorumlusu: [Kurum]"):** · Kazanç: yasak korunur · Kayıp: avukat "yeterli mi" teyidi gerekir · Süre S · Geri alınır
+**Karşılaştırma:** A pratik ama kuralı zayıflatır; B tutarlı ama hukuk teyidi ister. İkisi de ucuz.
+**Benim önerim:** B (kurum/unvan) + avukat teyidi — çünkü kişisel ad zaten gereksiz, kurum adı yeterli. *(Hukuk kararın.)*
+**Cevap vermezsen:** KVKK paketi hem yasağı ihlal etmeye devam eder hem her denetimde tekrar işaretlenir (AN-41 + YN-13 etkilenir).
 **CEVAP:**
 
 ---

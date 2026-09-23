@@ -1,5 +1,6 @@
 # STK Admin Paneli — Tasarım Kararları (2026-08-11)
 **🔄 YAŞAYAN** (kararlar eklenebilir) · ilişkili keşif: `stk-admin-bulgu-envanteri-2026-08-11.md`
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-07): dosya ADI tarihli (`-2026-08-11` = 📸/dondurulmuş işareti, KURAL 4) ↔ bu ETİKET **🔄 YAŞAYAN**. İki işaret birbirini yalanlıyor. Düzeltme (ad tarihsizleştir VEYA etiket değiştir) = AN-44 kuyruk işi; karar PO'nun.
 
 > **Amaç:** STK admin panelinin tasarım/ürün kararlarını kalıcı olarak arşivlemek. Bu kararlar **bu oturumda
 > ürün sahibi tarafından verildi** ve şimdiye dek yalnızca sohbette duruyordu (projenin kronik sorunu: değerli
