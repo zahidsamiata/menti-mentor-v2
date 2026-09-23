@@ -5,6 +5,7 @@
   "description": "Menti-Mentor SaaS monorepo — backend (submodule) + frontend",
   "scripts": {
     "verify": "bash scripts/verify.sh",
+    "otonom:turet": "node scripts/otonom-turet.mjs",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev",
     "lint:backend": "npm --prefix backend run lint",

@@ -40,17 +40,36 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
     ⚠️ CALISILIYOR kalmis bir isi yeniden yapmadan ONCE kodda kontrol et:
        bitmis ama Durum guncellenmemis olabilir.
 
-0.4 OKU  (yalniz gerekeni — butun dosyayi degil)
-    · docs/otonom/01-KARARLAR.md  → hangi CEVAP dolu
-    · docs/otonom/00-KUYRUK.md    → is listesi, kapilar, durum
-    · docs/otonom/02-ILERLEME.md  → son kayitlar
-    · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler (bunlara dokunma)
+0.4 OKU — ⛔ BU DOSYALARI TAM OKUMA, HEDEFLI OKU  (2026-09-23, DA turu)
+    Gerekce: her tur ~400.000 karakter okunuyordu; arsivleme dosyalari kucultmedi
+    (ayni turda yeni is eklendi). Hedefli okuma dosya boyutunu ONEMSIZ kilar.
+    · docs/otonom/00-SIRADAKI.md (TURETILMIS) → VARSA ve uretim tarihi 1 gunden yeni ise
+      turun ana girdisi BUDUR; 00-KUYRUK'u ACMA.
+      Bir ise BASLARKEN yalniz o isin tam satirini kaynaktan oku:
+        grep -n '^| <is-no> |' docs/otonom/00-KUYRUK.md
+    · 00-SIRADAKI yoksa ya da bayatsa → 00-KUYRUK'tan hedefli oku:
+        (a) bas kisim ~95 satir (Kapilar · CIKIS BLOKERI tanimi · Bitti tanimi · K-20 zamanlamasi ·
+            Durum kodlari · Serit dagilimi · 🟡 Aile haritasi): sed -n '1,95p'
+        (b) YALNIZ durumu BEKLIYOR ve kapisi 🟢 olan satirlar (grep ile), ya da
+            once uret: node scripts/otonom-turet.mjs
+        (c) 🟡 aile turu yapiliyorsa yalniz o ailenin satirlari: grep -n 'aile: Y-x'
+      ⛔ BITTI · 🔴 · uzerinde calisilmayan 🟡 satirlarini OKUMA.
+    · docs/otonom/01-CEVAPSIZ.md (TURETILMIS) → hangi kart cevapsiz, hangi isi kilitliyor.
+    · docs/otonom/01-KARARLAR.md → YALNIZ bastaki INDEKS tablosu (hangi CEVAP dolu).
+      Bir kartin govdesi ancak o kart gerektiginde acilir:
+        grep -n -A 25 '^### KARAR-<n> ' docs/otonom/01-KARARLAR.md
+    · docs/otonom/02-ILERLEME.md → YALNIZ son ~120 satir (tail -n 120).
+    · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler; yalniz bir is PO'ya
+      dokunuyorsa ilgili satiri grep ile ac.
     · docs/kararlar/09-DURUM.md → ⚠️ ters-kronolojik katmanli, yeni icerik BASA eklenir.
       "TEK BAKISTA" baslikli bolum adina ragmen GUNCEL DEGIL. Yalniz EN USTTEKI tarihli bolumu oku.
     · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
     · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
-    · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
-      gerekirse ac. Rutin turda ana dosyalar (00-KUYRUK · 01-KARARLAR) yeter.
+    · docs/kararlar/00-KARAR-TAKIP.md → RUTIN TURDA OKUNMAZ (rolu: karar ve soz GECMISI).
+    · docs/otonom/arsiv/ · docs/arsiv/ → RUTIN TURDA OKUNMAZ; yalniz bir kalemin gecmisini
+      aramak gerekirse grep ile.
+    · 🧊 DONMUS belgeler (📸 raporlar, bilanco/) rutin turda OKUNMAZ.
+    Siniflandirma ve boyut tavanlari: docs/kararlar/konu/belge-duzeni-rehberi.md § KURAL 17-23.
 
 02-ILERLEME.md'ye tur baslangic satiri yaz: tur adi · baslangic saati · kalan 🟢 is sayisi.
 
@@ -333,5 +352,20 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
      KUYRUK SON DAGILIMI: 🟢 / 🟡 / 🔴
      BACKEND: pointer eski → yeni + esitlik teyidi
      STASH: `git stash list` bossa "yok", doluysa icerigi
+
+13.4 TURETILMIS DOSYALARI YENIDEN URET (her turun SONUNDA, 2026-09-23 DA turu):
+     node scripts/otonom-turet.mjs   (= npm run otonom:turet)
+     → docs/otonom/00-SIRADAKI.md + docs/otonom/01-CEVAPSIZ.md uzerine yazilir, commit'e girer.
+     ⛔ Bu iki dosyaya ELLE yazilmaz, kaynak olarak kullanilmaz, atif verilmez.
+
+13.5 BELGE OLCUMU — kapanis raporuna (02-ILERLEME tur ozeti) ZORUNLU iki satir:
+     (a) 🔥 SICAK dosyalarin karakter sayisi:
+         LC_ALL=C.UTF-8 wc -m CLAUDE.md docs/otonom/*.md docs/otonom/OTONOM-PROMPT.txt
+         40.000'i asan varsa ACIKCA isaretlenir; bir sonraki tur ONCE arsivleme yapar
+         (belge-duzeni-rehberi § KURAL 18).
+     (b) 🔥 SICAK dosyalarda 1.000 karakteri asan satir sayisi:
+         LC_ALL=C.UTF-8 awk 'length>1000' <dosya> | wc -l   (dosya basina)
+         Bu turda YENI olusan varsa o turda duzeltilir (gecmis → belgenin ## GECMIS bolumune;
+         CLAUDE.md § "tarihsel iz satirin ICINDE tutulmaz"). ⛔ Not kolonu KISALTILMAZ.
 
 PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-KARARLAR.
