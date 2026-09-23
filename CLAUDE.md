@@ -376,6 +376,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 ## Belge düzeni — KURAL 1-16
 Tek canonical: `docs/kararlar/konu/belge-duzeni-rehberi.md` (KURAL 1-16, tam gövde).
 Belge oluşturur/düzenlerken oraya bak; kuralların tamamı orada.
+Belge boyut sınırları ve sınıflandırma (🔥/🌡️/🧊, KURAL 18-25) → `docs/kararlar/konu/belge-duzeni-rehberi.md`
 
 <!-- /çalışma-kuralları -->
 

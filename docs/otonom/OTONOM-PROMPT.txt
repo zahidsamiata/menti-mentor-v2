@@ -69,7 +69,7 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
     · docs/otonom/arsiv/ · docs/arsiv/ → RUTIN TURDA OKUNMAZ; yalniz bir kalemin gecmisini
       aramak gerekirse grep ile.
     · 🧊 DONMUS belgeler (📸 raporlar, bilanco/) rutin turda OKUNMAZ.
-    Siniflandirma ve boyut tavanlari: docs/kararlar/konu/belge-duzeni-rehberi.md § KURAL 17-23.
+    Siniflandirma ve boyut tavanlari: docs/kararlar/konu/belge-duzeni-rehberi.md § KURAL 18-25.
 
 02-ILERLEME.md'ye tur baslangic satiri yaz: tur adi · baslangic saati · kalan 🟢 is sayisi.
 
@@ -362,7 +362,7 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
      (a) 🔥 SICAK dosyalarin karakter sayisi:
          LC_ALL=C.UTF-8 wc -m CLAUDE.md docs/otonom/*.md docs/otonom/OTONOM-PROMPT.txt
          40.000'i asan varsa ACIKCA isaretlenir; bir sonraki tur ONCE arsivleme yapar
-         (belge-duzeni-rehberi § KURAL 18).
+         (belge-duzeni-rehberi § KURAL 18 + 21).
      (b) 🔥 SICAK dosyalarda 1.000 karakteri asan satir sayisi:
          LC_ALL=C.UTF-8 awk 'length>1000' <dosya> | wc -l   (dosya basina)
          Bu turda YENI olusan varsa o turda duzeltilir (gecmis → belgenin ## GECMIS bolumune;
