@@ -146,8 +146,43 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | A4 | **KARAR-27** — Sentry (dış hata izleme) kullanımının **aydınlatma metnine ve yurtdışı aktarım envanterine** eklenmesi: hangi ibare, hangi ülke/alıcı beyanı? | Sentry PII taşıyabilir → yurtdışı aktarım; metinde yer almazsa entegrasyon KVKK'ya aykırı olur. | **DK-01** (Sentry entegrasyonu) CANLI olamadan önce şart |
 | A5 | **KARAR-33** — Kurumdan çıkarılan üyenin **adının** mentör geçmişinde (soluk/yarı saydam) kalması veri minimizasyonuna uygun mu, yoksa "Eski üye" mi yazılmalı? | Ad kişisel veri; işlevsel gerekçe (mentör emeği) yeterli mi, yoksa maskeleme mi gerekir — avukat kararı. | **Y-14** / KARAR-33 akışının ad-gösterim ayağı |
 | A6 | **KARAR-24 bağlamı** — Platform yöneticisinin **kurum verisine erişimi**: bugün erişim VAR ve KAYITLI (denetim izi). PO "kayıtsız tam erişim" istiyor — bu hukuken mümkün mü, hangi koşulla? | "Tüm sistemi kayıtsız gezme" denetim izini kaldırır; KVKK hesap verebilirlik ilkesiyle çatışabilir. | **DK-03** kapsam dışı bırakılan denetim-izi kararı |
-| A7 | **KARAR-34 bağlamı** — Tüzel kişiliği olmayan **topluluklarda** (meslek toplulukları, mezun ağları) veri sorumlusu kim olur? Platform mu, topluluk mu? | Veri sorumlusu platform çıkarsa KVKK yükü tümüyle platformda; sözleşme/sorumluluk kurgusu buna göre değişir. | **KARAR-34** (kulüp/topluluk) + PO topluluk sorusu |
+| A7 | **KARAR-34 — SOMUT TASARIM (2026-09-23 cevaplandı):** Topluluk lideri modeli seçildi — lider veri sorumlusu, platform veri işleyen. **Bu kurgu tüzel kişiliği olmayan toplulukta (meslek topluluğu, mezun ağı) hukuken geçerli mi?** Lider gerçek kişi olarak veri sorumlusu sorumluluğunu üstlenebilir mi; üstlenmezse/yoksa platform mu veri sorumlusu olur? | Veri sorumlusu platform çıkarsa KVKK yükü tümüyle platformda; lider çıkarsa sözleşme lidere imzalatılır. Tasarım artık somut → avukat bu iki senaryoyu netleştirmeli. | **KARAR-34** cevaplandı (Bölüm 3); kayıt ekranı metni A9/A10 ile birlikte AVUKAT bekliyor |
 | A8 | **KARAR-23** — Kuruma giden **"düzeltme" e-postasının metni** hukuken güvenli mi (ret maili gönderilmiyor, yalnız onay + düzeltme)? | Kuruma giden, hukuki sonucu olabilecek metin; ton ve içerik gözden geçirilmeli. | **DK-02** (düzeltme e-postası) PO onayından önce |
+| A9 | **YENİ (KARAR-34) — Platformun anonim toplu veriyi KENDİ eşleştirme algoritmasını iyileştirmek için kullanması:** kayıt ekranına **zorunlu madde** olarak eklendi ("anonim verilerin eşleştirmeyi iyileştirmede kullanılması"). Bu, platformun **kendi amacı** için işleme → platform bu noktada **tek başına veri sorumlusu** olabilir. Zorunlu onay maddesi bunun için **yeterli hukuki dayanak mı**, yoksa ayrı açık rıza mı gerekir? | Platform kendi ticari/ürün amacı için özel-nitelikli psikometrik veriyi (anonimleştirilmiş de olsa) işliyorsa aydınlatma + hukuki sebep ayrı kurgulanmalı; "zorunlu kutu" tek başına yetmeyebilir. | **KARAR-34** kayıt ekranı zorunlu maddeleri (Bölüm 3) · `mask.ts applyKAnonymity` |
+| A10 | **YENİ — Kriz / kendine zarar bildirimi (KARAR-31 EK):** Menti kriz ifadesi kullandığında platformun **bildirim yükümlülüğü** var mı? **Reşit olmayan** kullanıcıda ne değişir? **Gizlilik ↔ güvenlik** dengesi (mentiye mahrem notu ile can güvenliği çatışması) nasıl kurulmalı? Platformun **sorumluluğu** nerede başlar/biter (mentör terapist değil)? | Kriz sinyalinde yanlış/eksik ya da fazla müdahale hem etik hem ağır hukuki risk; pasif yönlendirme (112/183) ile aktif tespit+eskalasyon arasındaki hukuki fark netleşmeli. ⚠️ **RUH SAĞLIĞI UZMANI görüşüyle birlikte** (Bölüm 6.5b) ele alınmalı. | **KARAR-31** + **KARAR-4** (destek kaynağı metni) · A2/A3 ile aynı görüşmede |
+
+---
+
+## 🔬 UZMAN PAKETİ — tek danışmada sorulacaklar (2026-09-23, analiz turu)
+
+> Avukat paketi gibi; amaç PO'nun uzmana **tek seferde** gitmesi. **İKİ ayrı uzmanlık** var — karıştırma.
+
+### (a) PSİKOMETRİ / ÖLÇME uzmanı
+> Kaynak: `00-ANALIZ-TURU-OZETI-2026-09-23.md` §6 · `icerik-kalitesi-2026-09-23.md` §G. **E ile yönlendirme:** G-1/G-2/G-4 tamamen uzman (E araştırmasında yok); G-3/G-5/G-6 **önce E araştırması dönsün, çıktısı uzmana girdi olsun (sıralı).**
+- **G-1** Türkçe ölçme değişmezliği (measurement invariance) protokolü — ölçek Türkçede aynı şeyi mi ölçüyor.
+- **G-2** Eşleştirme kalitesi ölçüt değişkeni — NPS / yıldız / ilişki süresi / hedef ilerlemesi / görüşme sayısı arasında "eşleşme işe yaradı" için hangisi birincil ve bizim ölçeğimizde güvenilir? (KARAR-44 ile bağlı)
+- **G-3** SJT ampirik anahtar geçiş eşiği — senaryo bankası kaç yanıtta "ampirik" sayılır.
+- **G-4** Sertifika 88 şıkkın 1↔2 puan çizgisi — iki bağımsız okuyucuda ne kadar örtüşüyor (karar tutarlılığı). (KARAR-46 · P-99 ile bağlı)
+- **G-5** DISC↔Big Five ağırlık matrisi (5×4) hücre-hücre denetimi — `scoring.config.ts:23-29` `DISC_TO_OCEAN_WEIGHTS` savunulabilir mi? (KARAR-10 · KARAR-63 ile bağlı) ⚠️ önce E B-1 dönsün.
+- **G-6** "En az" ters katsayı onayı — MOST_LEAST puanlamada ters yön doğru mu.
+
+### (b) ⭐ RUH SAĞLIĞI uzmanı (YENİ, 2026-09-23)
+> Kaynak: `persona-panel-gelisimi-2026-09-23.md` (C3/R7) · KARAR-31 EK · KARAR-71 · prompt. Kırılgan/kaygılı genç kitle hedeflenmesinin klinik boyutu — psikometri uzmanı DEĞİL, klinik/ruh sağlığı uzmanı gerekir.
+- **RS-1 · Kriz protokolü:** menti kriz/kendine zarar ifadesi kullanınca sistem ne yapmalı? Pasif yönlendirme (112/183) mi, aktif tespit + eskalasyon mu? Mentöre ne söylenmeli (mentör terapist değil)? ⚠️ **AVUKAT A10 ile birlikte.**
+- **RS-2 · Kırılgan kullanıcıda tutundurma etiğinin sınırı (KARAR-71):** hangi tutundurma tekniği (streak, suçlulu hatırlatma, yapay kıtlık, ayrılmayı zorlaştırma) kırılgan genç kitlede zararlı? Bugün canlıda olan (umut sinyali F-15/F-16, kutlama P-07, takdir P-14, bildirim izni F-20) kabul edilebilir mi? Nerede tutundurma biter, baskı/manipülasyon başlar?
+- **RS-3 · Mentöre verilecek rehberlik:** mentör bir kriz/kırılganlık sinyali gördüğünde ne yapmalı, ne YAPMAMALI? Üzerinden ne kadar yük alınmalı (mentör tükenmesini önleme)?
+
+---
+
+## 📥 ANALİZ TURU PO İŞLERİ (2026-09-23)
+
+> Analiz turundan çıkan, kodla çözülemeyen PO işleri. Kaynak: `00-ANALIZ-TURU-OZETI-2026-09-23.md` §5 · `gelen-kutusu-envanteri-2026-09-23.md` · KARAR-70.
+
+| # | İş | Neden gerekli | Nerede yapılır | Nasıl anlaşılır |
+|---|---|---|---|---|
+| 27 | ⭐ **GERÇEK KULLANICI GÖRÜŞMESİ yürüt** — 7 persona/panel/strateji belgesinin 7'si de "gerçek mentilerle doğrulanmalı" şartını koştu; **7 haftadır yapılmadı**; 10 davranışsal varsayım YALNIZ bununla sınanabilir. Kılavuzu ajan hazırlıyor (kuyruk **AN-32**, KARAR-70). ⚠️ 2026-09-09 testi PO'nun KENDİ hesaplarıyla gezinti (dogfooding) testiydi — **gerçek kullanıcı görüşmesi DEĞİL.** | Ürünün en büyük belirsizliği davranışsal ("menti gerçekten kırılgan mı, mentör gerçekten seçici mi") → koda karşı test edilemez, yalnız gerçek insanla. persona-v2 (KARAR-68 B) bunsuz üretilemez. | PO — AN-32 kılavuzuyla, gerçek menti/mentör/yönetici ile | Tek-sayfa kılavuzdaki soru seti gerçek kişilerle soruldu ✅; bulgular `02-ILERLEME.md`/09-DURUM'a. **Tetikleyici + öncelik = KARAR-70 cevabı** (öneri A: 3-5 kişi, erken). |
+| 28 | **`docs/gelen/` temizliği** — 13 dosya var, **hepsi güvenle silinebilir** (özleri izlenen belge/kodda kayıtlı; kanıt: `gelen-kutusu-envanteri-2026-09-23.md`). Klasör `.gitignore`'da → ajanlar göremez. | Kişisel prompt taslakları birikiyor; içlerinde kayıtlanmamış karar/içerik OLSAYDI kaybolurdu (bu turda tarandı, yoktu). | PO — dosyaları sil (ya da arşivle) | Klasör boş ya da yalnız aktif taslak içeriyor ✅. ⭐ **KURAL önerisi:** *"karar ya da içerik taşıyan hiçbir metin `docs/gelen/`'de BIRAKILMAZ; ilgili `docs/` klasörüne taşınır"* — çünkü `.gitignore` → bulut ajanları göremez. |
+| 29 | **Analiz turu salt-okuma DB sayımları** (bulutta DB yok) — (a) canlıda **eski 20 DISC sorusu** kaç ve hangi metin (TO §6-1) · (b) **STK-custom soru** canlı sayısı (OB-13) · (c) **sertifika canlı senaryo** sayısı (IK §C `03-sertifika:21`). Ayrıca **deploy topolojisi:** Dokploy tek-instance mi çok-instance mi (OB-08 cron-duplication kararını belirler) · Neon `connection_limit` (OB-06). | Bu sayılar bilinmeden AN-04 (banka taşıma), AN-13 (ölü triyaj) ve cron kararı büyüklüğü kestirilemez; ajan bulutta canlı Neon'a bakamaz. ⚠️ **KARAR-35 (salt-okuma izni) ve #11/#22 ile aynı oturumda.** | Neon konsolu (salt-okuma `SELECT`) + Dokploy paneli (yalnız topoloji bilgisi) | Beş sayı/bilgi `02-ILERLEME.md`'ye yazıldı ✅. ⛔ değer/secret yazma, yalnız sayım. |
 
 ---
 
