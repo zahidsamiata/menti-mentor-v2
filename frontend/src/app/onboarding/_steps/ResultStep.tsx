@@ -88,9 +88,9 @@ export function ResultStep({ resultCard, onContinue }: ResultStepProps) {
         {/* ── Paylaşım Butonları ──────────────────────────────────────── */}
         <ShareButtons shareHeadline={resultCard.shareHeadline} />
 
-        {/* ── Devam Et → üç soru adımı ────────────────────────────────── */}
+        {/* ── Devam Et → panele geç (kart akışın SON adımı, ödül anı) ──── */}
         <Button onClick={onContinue} size="lg" className="w-full h-12 text-base rounded-xl gap-2">
-          Devam Et — Son Birkaç Soru
+          Panele Git
           <ArrowRight className="h-4 w-4" aria-hidden />
         </Button>
 
