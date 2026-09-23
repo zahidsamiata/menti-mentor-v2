@@ -407,8 +407,8 @@ yapmıştır.
 prensibi "arkadaşlık talebi"yle sınasın (bu varyant zaten VAR). Varyant
 yeniden dağıtımı yeter.
 
-**İSİMLER:** unisex (Deniz gibi). Anlatılan kişi hep aynı ad, karşı taraf
-isimsiz ("mentörün" / "mentin").
+~~[ESKİ · 2026-09-23] **İSİMLER:** unisex (Deniz gibi). Anlatılan kişi hep aynı ad, karşı taraf isimsiz ("mentörün" / "mentin").~~
+> ⚠️ GÜNCELLEME (2026-09-23, I-06): **Bu karar İPTAL EDİLDİ — unisex ısrarından vazgeçildi.** Yeni ilke: Türk-İslam kültürüne uygun, **cinsiyet dağılımı dengeli** isimler (sertifikada 3E/3K, öğrenmede 2E/2K); temsil sorununu isim nötrlüğü değil **persona çeşitliliği** çözer. Kanıt: `docs/raporlar/icerik/faz6-ogrenme-ve-sertifika-2026-09-03.md` §4 (`:126-142`, özellikle `:128` "unisex ısrarından vazgeçildi" · `:136` yeni ilke).
 
 > ⚠️ STK'nın ismi özelleştirmesi: altyapı YOK — isimler metin içine gömülü
 > sabit string, şablon değişkeni yok. İleri madde adayı.
