@@ -9,30 +9,35 @@
 > **Mod:** 🟥 BYPASS — terminal. Otonom tur, DURMAMA KURALI aktif. Hedef: kuyrukta 🟢 BEKLIYOR bırakmamak (çok-oturumluk; bu tur ilk parti).
 > **DB/migration/seed YOK · şema DEĞİŞMEDİ · #110'a DOKUNULMADI · hiçbir şey SİLİNMEDİ · KARAR CEVAP satırı doldurulmadı · yasak bölge (server.ts rate-limit/trust-proxy) DOKUNULMADI.**
 
-### BITTI ve CANLIDA (6 iş — kullanıcı ne görüyor)
+### BITTI ve CANLIDA (7 iş — kullanıcı ne görüyor) — HEPSİ MERGE EDİLDİ
 | İş | PR | Kullanıcı artık şunu görüyor |
 |---|---|---|
-| **I-06** (belge) | çatı #243 ✅merged | Tasarım belgesini okuyan, iptal edilmiş "unisex isim" kararını geçerli sanmıyor ([ESKİ] damgalı, faz6 §4'e yönlendirildi) |
-| **I-03 + IC-04** (sertifika sonuç) | çatı #244 ✅merged | Sınavı geçemeyen mentör zayıf konuların ADINI (kritik=🔴) görüyor + Öğrenme Yolculuğu linki; kritik konudan elenen artık yanıltıcı "%80 gerekli" görmüyor |
-| **Y-01** (CORS trim) ⛔T2 | backend #88 ✅merged + pointer #248 | `ALLOWED_ORIGINS` boşluklu env değeriyle bile site açılıyor (origin sessizce düşmüyor) |
-| **Y-06** (Footer) ⛔T1 | çatı #247 ✅merged | Gizlilik/KVKK/Kullanım Koşulları sayfalarının altından ve ana sayfa footer'ından yasal metinlere tıklayıp gidiyor (önceden ölü `<span>`) |
+| **I-06** (belge) | çatı #243 ✅ | Tasarım belgesini okuyan, iptal edilmiş "unisex isim" kararını geçerli sanmıyor ([ESKİ] damgalı, faz6 §4'e yönlendirildi) |
+| **I-02** (onboarding sıra) | çatı #246 ✅ | Yeni kayıtta önce üç soruyu cevaplıyor, arketip kartını (ödül) EN SONDA görüyor. ⚠️ Test mock'u OOM'a yol açıyordu → `vi.hoisted` ile düzeltildi |
+| **I-03 + IC-04** (sertifika sonuç) | çatı #244 ✅ | Sınavı geçemeyen mentör zayıf konuların ADINI (kritik=🔴) görüyor + Öğrenme Yolculuğu linki; kritik konudan elenen artık yanıltıcı "%80 gerekli" görmüyor |
+| **Y-01** (CORS trim) ⛔T2 | backend #88 + pointer #248 ✅ | `ALLOWED_ORIGINS` boşluklu env değeriyle bile site açılıyor (origin sessizce düşmüyor) |
+| **Y-06** (Footer) ⛔T1 | çatı #247 ✅ | Gizlilik/KVKK/Kullanım Koşulları sayfalarının altından ve ana sayfa footer'ından yasal metinlere tıklayıp gidiyor (önceden ölü `<span>`) |
+| **P-10** (mentör e-posta) ⛔T2+T3 | backend #89 + pointer #253 ✅ | Menti booking yaptığında mentöre e-posta bildirimi gidiyor (çan bildirimine ek). ⚠️ Ulaşması SMTP'ye bağlı (PO-elle B#4) |
 
-### PR-ACIK (merge bekliyor — CI runner kuyruğu)
-- **I-02** (onboarding sıra) — çatı **PR #246**. Karakter kartı artık üç sorudan SONRA (ödül anı en sonda). Backend+Integration CI ✅ pass; Frontend TS+Build job CI runner kuyruğunda (pending). CI yeşilse merge edilecek. Diff incelendi + frontend tsc temiz; #247 E2E (kayıt→onboarding) aynı altyapıda geçti.
+### KARAR AÇILDI (yapılamadı — PO cevabı bekliyor)
+- **KARAR-53** (#251) — **K-05** çıkış blokeri incelemesinde GERÇEK BUG bulundu: müsaitlik girmemiş mentör HİÇ randevu talebi alamıyor (FE "yine de öner" ↔ backend 409 reddi). Çözüm yönü ürün kararı (menti blok dışına çıkabilir mi). K-05 → 🔴 KARAR-53. Öneri: B (esnek, mentör karar verir).
 
-### Pointer bump
-- Eski: `b0b3dcbe57061eb95e5bdb0fe5fd3885f0558c6a` → Yeni: `dd7c48c8aeb0a0e50b61302d01e513502c57af41` (backend main HEAD, Y-01 #88 dahil). Ata: fast-forward güvenli. **Eşitlik teyidi: çatı main pointer == backend main HEAD == `dd7c48c8` → ✅ EŞİT.**
+### Pointer bump (bu turda 2 backend PR → 2 bump)
+- #248: `b0b3dcb→dd7c48c8` (Y-01) · #253: `dd7c48c8→4686ba4c` (P-10). Her ikisi fast-forward.
+- **SON eşitlik teyidi: çatı main pointer == backend main HEAD == `4686ba4c` → ✅ EŞİT.**
 
 ### KUYRUK SON DAĞILIMI (bu partiden sonra)
-- 🟢 BEKLIYOR: ~57 · 🟡 BEKLIYOR: ~81 · 🔴 BEKLIYOR: 12 → **hedef HENÜZ sağlanmadı, çok-oturumluk iş.**
-- **Sıradaki öncelik (sonraki tur):** çıkış blokeri 🟢 **K-05** (menti booking slot) · **P-10** (mentör bildirim/e-posta) → sonra AŞAMA I **I-04/I-05/I-07** (sertifika çekim/sıklık/tekrar).
+- 🟢 BEKLIYOR: **55** · 🟡 BEKLIYOR: **75** · 🔴 BEKLIYOR: **19** → **hedef HENÜZ sağlanmadı, çok-oturumluk iş.**
+- **Sıradaki öncelik (sonraki tur):** çıkış blokeri 🟢 kalmadı (K-05 → 🔴 KARAR-53). AŞAMA I **I-04** (sertifika 4-garantili çekim, backend) · **I-05** (görüşme sıklığı — ⚠️ bekleme aşamasında veri yok, ürün belirsizliği) · **I-07** (yanlış konu tekrar, backend). Sonra U/P kalanları, sonra Y/GV/PS/IC/YN büyük kümeleri (dosya-kanıtlı, çoğu bağımsız FE/BE).
 
 ### CANLIDA KONTROL EDİLECEKLER (PO gözle)
 1. Sertifika sınavını geçemeyen mentör: zayıf konu ADLARI + "Öğrenme Yolculuğu'na git" düğmesi görünüyor mu?
 2. Public sayfaların (gizlilik/kvkk/terms) altında yasal linkli footer var mı, tıklanıyor mu?
-3. Yeni kayıt onboarding: üç soru → SONRA arketip kartı sırası (I-02 merge olunca).
+3. Yeni kayıt onboarding: üç soru → SONRA arketip kartı sırası.
+4. (SMTP kuruluysa) menti randevu talep edince mentöre e-posta gidiyor mu?
 
-### STASH: yok · BACKEND: pointer eşit (yukarıda) · SİLME: yok
+### PO CEVABI GEREKEN: **KARAR-53** (K-05 booking çelişkisi) — `01-KARARLAR.md`
+### STASH: yok · BACKEND: pointer eşit `4686ba4c` (yukarıda) · SİLME: yok
 
 ---
 
