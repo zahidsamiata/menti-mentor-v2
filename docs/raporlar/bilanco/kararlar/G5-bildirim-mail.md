@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 (Tur-5b) · Kaynak: `docs/raporlar/bilanco/kararlar/00-SAYIM-2026-08-27.md` (G5) + `docs/raporlar/bilanco/karar-defteri-2026-08-26.md`
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 > **Ne bu:** G5 grubundaki her kalem için PO'nun tek tek karar verebileceği kart. Salt-okuma + kod-teyit yapıldı (kod/DB/PR/commit değiştirilmedi). Her kartta işaret kutuları var — PO işaretler.
 
 ---
@@ -119,3 +121,11 @@ Kaynak: karar-defteri md.23 · Numara: NUMARASIZ
 - (Yok.) G5'te ✅ YAPILDI durumunda kalem bulunmuyor. En yakın "çalışıyor" olan iki mekanizma tam kart olarak ele alındı:
   - **Kullanıcı-tarafı mailler** (görüşme daveti/onay, şifre sıfırlama, admin yeni-kayıt, nudge, hatırlatma) `emailService.ts`'te gerçek gönderimle **çalışıyor** — ama bu, [G5-02]'nin "kurum kısmı açık" 🟡 durumunun bir parçası olduğu için ayrı ✅ kartı açılmadı.
   - **Elle nudge** (yönetici bir üyeyi elle dürtme) **çalışıyor** — ama bu G4'te kayıtlı; G5'teki ilgili kalem [G5-03] onun *otomatik* versiyonu (🔵 ertelenmiş).
+
+---
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+
+> CS bilanço denetimi §1f: "kartta açık ama bugün canlıda" kalemler. 📸 gövde/işaret INLINE değiştirilmedi (kart dondurulmuş); güncel kod-durumu burada listelenir. Güncel iş kaynağı: `docs/otonom/00-KUYRUK.md`.
+
+- **G5-04 ✅ CANLIDA 2026-09-23** (kart gövdesi ⬜) — Bekleme salonu bildirim izni istemi (`Notification.requestPermission`) eklendi. Kanıt: PR #218.

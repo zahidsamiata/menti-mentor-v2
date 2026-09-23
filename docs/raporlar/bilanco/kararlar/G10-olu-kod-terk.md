@@ -337,7 +337,7 @@ Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ (md.86/101 akrabası)
 Ne: `User.mentorVisibilityEnabled` (default true) alanı var ama setter'ı yok ve hiçbir eşleşme sorgusunda filtre olarak okunmuyor → ölü PLG (product-led-growth) alanı.
 Neden başlanmıştı: Freemium/PLG mimarisi (madde 75/T7 mentör opt-in) — mentörün görünürlüğünü aç/kapa özelliği; default görünür yapıldı ama filtreleme bağlanmadı.
 Nerede durdu: FAZ B'de "K1 değil K2" kararıyla default-true bırakıldı; alan hiçbir eşleşme sorgusunda okunmuyor → opt-in eşleşmeyi bloklamıyor (yan etki: alan ölü).
-Bugünkü durum: ❓ (PO: bilinçli mi yarım mı)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ (PO: bilinçli mi yarım mı)~~ → ✅ KARAR verildi (KARAR-32 "A" cevabı alındı 2026-09-21; artık ❓ değil — PO ürün-kararı verdi, uygulama iş kalemi olarak takip edilir). Kanıt: `docs/otonom/01-KARARLAR.md` KARAR-32.
 Etkisi: Kullanıcıya görünmez; ölü PLG alanı (gösterge var, mantık yok).
 İş boyu: S
 Kaynak: SAYIM (c)/G10 · Numara: md.86
@@ -382,7 +382,7 @@ Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ
 Ne: `LoginForm.tsx` başındaki yorum "AuthProvider'dan TenantProvider'a köprülenecek (Sprint 14'te tam entegrasyon)" — bayat/tamamlanmış-olabilir bir sprint-referansı.
 Neden başlanmıştı: Geçmiş bir sprint planlaması; auth→tenant context köprüsü için not.
 Nerede durdu: DURUŞ SEBEBİ YOK — yorum kaldı, gerçek durum (köprü kuruldu mu) belirsiz.
-Bugünkü durum: ❓ (bayat-yorum temizliği)
+Bugünkü durum: ~~[ESKİ · 2026-08-27] ❓ (bayat-yorum temizliği)~~ → ✅ CANLIDA 2026-09-23, kanıt: PR #206 merged (LoginForm bayat "Sprint 14 TenantProvider köprüsü" yorumu temizlendi/çözüldü).
 Etkisi: Kullanıcıya görünmez; yanıltıcı/bayat yorum (yeni geliştirici "Sprint 14 ne?" der).
 İş boyu: S
 Kaynak: SAYIM (c)/G10 · Numara: NUMARASIZ

@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 (Tur-5b) · Kaynak: `docs/raporlar/bilanco/kararlar/00-SAYIM-2026-08-27.md` (G11 — yeni açılan grup) + `docs/raporlar/bilanco/karar-defteri-2026-08-26.md`
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 > **Ne bu:** G11, teknik hiçbir gruba oturmayan ürün-stratejisi/iş-kararı kalemleri için Tur-5a'da açılan yeni grup. Bu kalemler kod değil; PO/iş kararıdır. Kart alanlar için işaret kutuları var — PO işaretler.
 
 ---

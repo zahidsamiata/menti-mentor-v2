@@ -101,6 +101,7 @@ yolu çizer.
   nudge (`ProgramHealthSection.tsx`).
 
 ### 4.2 ÖLÜ / BAĞLANMAMIŞ (yazılmış ama uçları bağlanmamış — doğrulandı)
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-04): bu bölümün "kalite puanı DB'ye yazılmıyor / checkpoint ölü" gövde iddiası **aynı belgenin §8'i tarafından çürütülmüş** — §8 "AŞAMA 1 MERGED: `persistMentorQualityMultiplier` canlıda, kalite puanı `TenantMembership.qualityMultiplier`'a event-driven yazılıyor" der (bkz. §8 / satır ~219). §8 daha yeni; §4.2'nin ölü-kalemleri damgasız kalmış (Belge Düzeltme Deseni ihlali). Hangi bölüm geçerli — okuma sırası: §8 kazanır; karar/temizleme PO'nun. (Not: checkpoint tetikleyicinin kendisi hâlâ ölü olabilir — AŞAMA 2/3 = KARAR-73/AN-34.)
 - 🔴 **Periyodik checkpoint tetikleyici ÖLÜ:** `findMatchesDueForCheckpoint` (`feedback.service.ts:71`) tüm
   backend'de **tek geçiş = yalnız tanım** (grep: 1 occurrence). Hiçbir cron/route çağırmıyor → DAY_3/14/30
   otomatik değerlendirme istenmiyor.

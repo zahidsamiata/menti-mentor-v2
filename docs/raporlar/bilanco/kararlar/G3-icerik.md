@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 (Tur-5b) · Kaynak: `docs/raporlar/bilanco/kararlar/00-SAYIM-2026-08-27.md` (G3 listesi) + `karar-defteri-2026-08-26.md` (GRUP 6 İçerik s.187-209 + GRUP 3 sertifika/etiket kalemleri)
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 > **Ne bu:** G3 grubundaki her karar-gerektiren kalem için PO'nun tek tek işaretleyeceği karar kartı. Salt-okuma + kod-teyit; kod/DB/PR/commit YOK, mevcut belge değiştirilmedi. SEVİYE-1 psikometri/içerik kalemleri geniş grep ile kod-teyitli.
 
 ---
@@ -285,3 +287,12 @@ Kaynak: karar-defteri GRUP 3 (KARAR 12/A9 + md.C20) · Numara: KARAR 12/A9 (+ md
   - Kart dağılımı: G3-01..G3-19 = 19 kart.
   - Not: G3-02 (🔵) ve son 🔵 (Katman-3) SAYIM'da ayrı iki 🔵 satırı; biri kart aldı (zemin kod var, aksiyon PO'da), diğeri bilgi notu (erteleme zaten kesin). [G3-19] iki SAYIM satırını (KARAR12/A9 + md.C20) tek karta katladı → kart sayısı 19, kalem sayısı korundu (numara doğurulmadı).
 - **Kod-teyidi:** 6 kod-iddialı kalem doğrulandı (coachingSuggestions-admin, seed-cert runner yok, answerType yok, DISC matris/anti-match/ağırlık, seed 34-tip, STK_CUSTOM ayrımı) — **0 çürüdü**. DB-sorulamayan: 3 kalem (G3-04 canlı-1, G3-06 canlı-DISC, G3-08 canlı-cert + G3-18 toplu) ❓ TEYİT GEREK (DB) kaldı.
+
+---
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+
+> CS bilanço denetimi §1f: "kartta açık ama bugün canlıda" kalemler. 📸 gövde/işaret INLINE değiştirilmedi (kart dondurulmuş); güncel kod-durumu burada listelenir. Güncel iş kaynağı: `docs/otonom/00-KUYRUK.md`.
+
+- **G3-05 ✅ CANLIDA 2026-09-23** (kart gövdesi ✅ kod / ❓ gerekçe belgesi) — Sertifika soru-ekleme gerekçe belgesi yazıldı (❓ ayak kapandı). Kanıt: F-13 BITTI.
+- **G3-19 — atlandı: zaten ✅** — kart gövdesinde 2026-09-19 INLINE düzeltmesiyle ✅ YAPILDI işaretli (`PendingTag`+tagController kodda VAR, PR #184); tekrar işaretlenmedi.

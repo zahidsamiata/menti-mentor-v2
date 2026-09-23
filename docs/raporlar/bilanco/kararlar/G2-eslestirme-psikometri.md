@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 (Tur-5b) · Kaynak: `docs/raporlar/bilanco/kararlar/00-SAYIM-2026-08-27.md` (G2 listesi) + `karar-defteri-2026-08-26.md` (GRUP 2 Eşleştirme/Psikometri s.76-99)
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 > **Ne bu:** G2 grubundaki her karar-gerektiren kalem için PO'nun tek tek işaretleyeceği karar kartı. Salt-okuma + kod-teyit; kod/DB/PR/commit YOK, mevcut belge değiştirilmedi. SEVİYE-1 psikometri kalemleri (matris, ağırlık, m101 SJT/OCEAN, m102 CORE-eşiği, sektör-scorer) geniş grep ile kod-teyitli.
 
 ---

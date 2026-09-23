@@ -9,6 +9,7 @@
 *(Hesap açma / kimlik doğrulama, platform güvenliği, global içerik — bu işlemlerde platform veri sorumlusudur.)*
 
 **Veri sorumlusu:** **Zahid Sami Ata** (gerçek kişi/işletmeci — sosyal sorumluluk projesi) · adres: [PO DOLDURACAK] · KEP/e-posta: [PO DOLDURACAK] · VERBİS kayıt no: [PO DOLDURACAK, varsa].
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): "Kişi Adı Yasağı" (kök CLAUDE.md) ile yasal metnin isim zorunluluğu çelişiyor — karar PO/hukuk (bkz. 01-KARARLAR.md KARAR-75). İsim yasal zorunluluk olabileceğinden değiştirilmedi; bu belgede sonraki geçişler için de aynı not geçerlidir.
 *(Not: PO şirket değil, gerçek kişi/sosyal sorumluluk projesi — [HUKUKÇU KARARI 2: VERBİS kaydı gerekli mi?]. **Şirketleşene kadar** gerçek kişi kimliği geçerlidir; şirket kurulunca şirket unvanı/bilgileriyle güncellenecektir — PO kararı 2026-08-26.)*
 
 **İşlenen kişisel veri kategorileri (kod gerçeği — envanter C-4):**

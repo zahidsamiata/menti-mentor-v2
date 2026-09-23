@@ -3,7 +3,7 @@
 **🔄 YAŞAYAN** (düzen kuralları geliştikçe güncellenir) · Son güncelleme: 2026-08-23 (Kural 2 alt-klasör + Kural 7 taşıyıcı iş bölümü + Kural 8 bulgu yaşam döngüsü)
 
 > **Amaç:** `docs/` bir daha dağılmasın; "neyin nerede olduğu, hangi bilginin güncel olduğu" her zaman net bulunsun.
-> Bu, tek seferlik temizlik değil **kalıcı düzen**dir. Belge oluşturan/düzenleyen (ajan dahil) bu 6 kurala uyar.
+> Bu, tek seferlik temizlik değil **kalıcı düzen**dir. Belge oluşturan/düzenleyen (ajan dahil) ~~bu 6 kurala~~ bu kurallara uyar. ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): "6 kural" bayat — dosyada artık KURAL 1-16 (bölme sonrası 18 blok, YN-02) var. Kanıt: aynı dosyadaki KURAL başlıkları. Düzeltme = YN-02 / AN-44 kuyruk işi.
 > Mevcut `CLAUDE.md` kuralları "Belge Eş-Zamanlılığı" ve "Belge Düzeltme Deseni" ile tutarlıdır.
 
 ---

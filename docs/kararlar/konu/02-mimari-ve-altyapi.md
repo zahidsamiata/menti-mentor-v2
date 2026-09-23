@@ -7,6 +7,7 @@
 ## 🔴🔴 EN KRİTİK GERÇEK — CANLI = LOKAL AYNI DB
 - **Canlı ve lokal AYNI Neon veritabanını paylaşıyor:** `ep-fancy-tooth-ab4u5xhr-pooler.eu-west-2.aws.neon.tech`
 - Dokploy canlı backend DATABASE_URL = lokal backend DATABASE_URL = **birebir aynı** (NODE_ENV=production). Ekran görüntüleriyle 2026-08-02'de KESİNLEŞTİ.
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-11): kök `CLAUDE.md § Ortam/Veritabanı` "PROD: docker-compose Postgres (`@postgres:5432`), **Neon değil**" diyor — bu satırla çelişir. ÇÖZÜLMEMİŞ; PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek (`docs/otonom/03-PO-ELLE-ISLER.md`). O zamana kadar EN KÖTÜ DURUM varsayılır: migration/seed öncesi yedek ZORUNLU. İki taraf da yazılı; hüküm yok, karar/teyit PO'nun.
 - **SONUÇ:** Lokalde DB'ye yazılan HER ŞEY canlıyı da anında etkiler. Seed/migration/DB işlemlerinde MUTLAKA hatırla, onay al.
 - Test branch (izole, farklı): `ep-polished-darkness` — ama 31 Tem 2026'da auto-delete oldu. Artık yok.
 
@@ -23,7 +24,7 @@
 
 ## STACK
 - **Monorepo:** Çatı repo (frontend) + backend ayrı repoda **git submodule**. Repo: zahidsamiata/menti-mentor-v2.
-- **Backend:** TypeScript + Express 5 + Prisma ORM. ~18.000 satır, 117 dosya, 144 endpoint, 31 migration, 60+ model.
+- **Backend:** TypeScript + Express 5 + Prisma ORM. ~18.000 satır, 117 dosya, 144 endpoint, 31 migration, ~~60+ model~~ 38 model. ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-10): "60+ model" bayat; `grep -c '^model ' backend/prisma/schema.prisma` = 38 (`backend/CLAUDE.md:54` kod-teyitli). Kod yeni; belge bayat. Karar/güncelleme PO'nun. Kanıt: `backend/prisma/schema.prisma` · `backend/CLAUDE.md:54`.
 - **Frontend:** Next.js **15.5.20** (dikkat: bazı eski belgelerde 14.2.35 yazıyor — çelişki, güncel olan 15.5.20; **✅ 2026-08-14 `frontend/package.json` ile doğrulandı**), React 18, Tailwind, Radix UI. ~14.600 satır, 37 sayfa, 30 bileşen.
 - **DB:** PostgreSQL — **Neon (serverless)**. VPS'te DEĞİL.
 - **Test:** Vitest + Supertest, 169 test bloğu.

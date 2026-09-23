@@ -16,7 +16,7 @@ STK / vakıf / üniversite kulüpleri / dernekler. Karar verici = **yönetici** 
 - Kulüplerden/kurumlardan başlangıçta ücret alınmaz. Ölçeklenip vazgeçilmez olunca premium/kapasite-bazlı ücretlendirme.
 - **Çekirdek** (eşleştirme, üye sayısı, görüşme) sonsuza dek ücretsiz kalır.
 - **Premium** (white-label, derin analitik, ROI raporu, entegrasyonlar) baştan "kilitli görünür" tutulur.
-- **Teknik prensip:** Tenant seviyesinde plan/limit altyapısı (`Tenant.plan`, `Tenant.limits`, bugün herkes `FREE_UNLIMITED`) bugünden kodlanmalı — ileride limit getirmek kod değil konfig değişikliği olsun. ⏳ (uygulanmadı)
+- **Teknik prensip:** Tenant seviyesinde plan/limit altyapısı (`Tenant.plan`, `Tenant.limits`, bugün herkes `FREE_UNLIMITED`) bugünden kodlanmalı — ileride limit getirmek kod değil konfig değişikliği olsun. ~~⏳ (uygulanmadı)~~ ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): uygulanmış — `backend/prisma/schema.prisma:194-195` `plan`+`limits` alanları VAR, 5 controller kullanıyor. Kod yeni; belge bayat. Karar/güncelleme PO'nun. Kanıt: `schema.prisma:194-195`.
 - **Gerekçe:** "Bugün ücretsiz olanı yarın geri almak" zor; premium baştan görünür-kilitli olmalı. Veri sonradan değerli olsun diye altyapı bugünden.
 
 ## MODÜL EKLEME SIRASI (vizyon)

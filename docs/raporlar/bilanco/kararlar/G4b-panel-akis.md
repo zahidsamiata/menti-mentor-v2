@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 · Kaynak: `00-SAYIM-2026-08-27.md` (c/G4) + `karar-defteri-2026-08-26.md` (GRUP 5)
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 > **Ne bu:** G4 (Panel & akış) ikiye bölündü. **Bu dosya = G4b** (retention / persona / sevdirme deneyimi + mentör-menti akışı: bekleme anı, ret yumuşatma, mentör takdiri, büyüme kanalları, paylaşım kartları). STK-admin + Platform paneli kartları **G4a-panel-akis.md**'de. Her kalem tek karar kartı; PO tek tek işaretler. Salt-okuma + kod-teyit; kod/DB/PR değiştirilmedi.
 
 ---
@@ -280,3 +282,15 @@ Kaynak: karar-defteri GRUP-5 · Numara: NUMARASIZ
 - ✅ DISC sonuç paylaşım kartı (LinkedIn/WhatsApp, tüm rollere, rol-gate yok) — `ResultStep.tsx` [NUMARASIZ]
 
 *(1 ✅ kalem.)*
+
+---
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+
+> CS bilanço denetimi §1f: "kartta açık ama bugün canlıda" kalemler. 📸 gövde/işaret INLINE değiştirilmedi (kart dondurulmuş); güncel kod-durumu burada listelenir. Güncel iş kaynağı: `docs/otonom/00-KUYRUK.md`.
+
+- **G4-22 ✅ CANLIDA 2026-09-23** (kart gövdesi ⬜) — Menti "bekleme anı" deneyimi. Kanıt: PR #228.
+- **G4-23 ✅ CANLIDA 2026-09-23** (kart gövdesi ⬜) — Umut sinyali / sosyal-kanıt (bekleme anı ile aynı ekran). Kanıt: PR #228.
+- **G4-24 ✅ CANLIDA 2026-09-23** (kart gövdesi ⬜) — Menti özgüven aşısı sunumu. Kanıt: PR #228.
+- **G4-31 ✅ CANLIDA 2026-09-23** (kart gövdesi 🟡) — Proaktif kırmızı uyarı (harekete geçir). Kanıt: PR #231.
+- **G4-39 ✅ CANLIDA 2026-09-23** (kart gövdesi 🟡) — "Görüşme tamamladım 🎉" paylaşım kartı. Kanıt: PR #226.

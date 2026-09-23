@@ -38,7 +38,7 @@
 ## SEKTÖR SKORU (%60'ın içi) 🟢 reçete / ⏳ kod bekliyor
 - 5 alt-metrik: Ana Sektör %30, Beceri Kesişimi %25, Hedef-Uzmanlık Hizalaması %25, Kıdem Delta %15, Ortak Bağlam %5.
 - Taksonomi: hiyerarşik ağaç (IndustryNode) + en yakın ortak ata (LCA, embedding değil); beceriler asimetrik kapsama (payda=menti); kıdem çan eğrisi (3-8 yıl ideal).
-- **DURUM:** Reçete onaylandı ama kod YAZILMADI — şu an stub (nötr 50 dönüyor). ⏳
+- **DURUM:** ~~Reçete onaylandı ama kod YAZILMADI — şu an stub (nötr 50 dönüyor). ⏳~~ ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): kod gerçeği farklı — `backend/src/services/sector-scorer.service.ts:7` ağırlık formülü (`W={A:0.30,B:0.25,C:0.25,D:0.15,E:0.05}`) + `:67 resolveSectorScore` **TAM yazılmış** (stub değil). ANCAK `matching.ts` bu servisi **0 kez import ediyor** (grep-teyitli) → yazılmış-ama-bağlanmamış/atıl. İki taraf da doğru: skorlayıcı var, motora bağlı değil. Karar/bağlama PO'nun (KARAR-10 aşamalı). Kanıt: `sector-scorer.service.ts:7,67` · `matching.ts` (0 import).
 - Uyuyan `sector-scorer.service.ts` ile bağlantılı (bugünkü teşhiste görüldü).
 
 ## MENTÖRLÜK YETKİNLİĞİ & SERTİFİKASYON 🟢✅

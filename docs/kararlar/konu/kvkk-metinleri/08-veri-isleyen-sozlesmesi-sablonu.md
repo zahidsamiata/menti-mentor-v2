@@ -4,6 +4,7 @@
 
 # Veri İşleyen (Veri İşleme) Sözleşmesi — ŞABLON
 ### Taraflar: [Kurum Unvanı] ("Veri Sorumlusu") ↔ **Zahid Sami Ata** (gerçek kişi/işletmeci — Platform İşletmecisi) ("Veri İşleyen")
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): "Kişi Adı Yasağı" (kök CLAUDE.md) ile yasal metnin isim zorunluluğu çelişiyor — karar PO/hukuk (bkz. 01-KARARLAR.md KARAR-75). İsim yasal zorunluluk olabileceğinden değiştirilmedi; belgedeki sonraki geçişler için de geçerlidir.
 
 ## 1. Tarafların rolleri
 - **Veri Sorumlusu:** işleme amaç ve vasıtalarını belirleyen **Kurum** (dernek/kulüp). Üyelerinin kişisel verilerinden hukuken sorumludur (idari/mali sorumluluk kurumun tüzel kişiliğinde; [HUKUKÇU: cezai sorumluluk yönetim organında]).

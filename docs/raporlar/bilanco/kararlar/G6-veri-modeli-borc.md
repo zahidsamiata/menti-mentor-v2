@@ -2,6 +2,8 @@
 
 **📸 DONDURULMUŞ** · 2026-08-27 · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c) G6 başlığı + `karar-defteri-2026-08-26.md` GRUP 8 içindeki veri-modeli kalemleri. Salt-okuma + kod-teyit; kod/DB/PR/commit YOK, mevcut belge değiştirilmedi.
 
+> ⚠️ DURUM NOTU (CS raporu §5, 2026-09-23): Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki ⬜/❓ işaretleri 2026-08-26/27 fotoğrafıdır; kod o günden ilerledi (bazı açık görünen kalemler bugün canlıda — bkz. aşağıdaki KOD DOGRULAMA NOTU). Güncel durum: docs/otonom/00-KUYRUK.md — köprü: docs/kararlar/00-KART-INDEKSI.md.
+
 ## Mutabakat (beyan ↔ yazılan)
 
 - **Tur-5a beyanı: G6 = 7 kalem.** Canonical `00-SAYIM (c)` G6 listesi de **7 satır** (ana tablo "G6 | 7 | ✅0 🟡0 ⬜6 ❓1"). **BEYAN TUTTU (7=7).**
@@ -151,3 +153,11 @@ Numara: md.46
 **Yok.** G6'nın 7 kaleminin tamamı açık (⬜ 6 + ❓ 1); bu grupta ✅ tamamlanmış, 📌 kalıcı-kural veya madde-124'te düzeltilmiş kalem YOK. Beyan (7) ile kart sayısı (7) birebir tuttu.
 
 > **Not (requestMessage DROP — G6 değil, G10):** Görev metni "requestMessage DROP" kalemini G6 kod-teyidi kapsamında andı; ancak `VisibilityOptIn.requestMessage` DROP kalemi 00-SAYIM'da **G10 (ölü kod), md.18/A21, 🔵 bilinçli-erteleme** olarak sınıflanmıştır (bu dosyanın kapsamı DEĞİL). Kod-teyit tamlığı için: `schema.prisma:364 requestMessage String?` HÂLÂ MEVCUT (DROP yapılmamış; menti-driven akışta yazılıyor — canlı, ölü-kolon değil şu an) — G10 kartında değerlendirilir.
+
+---
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+
+> CS bilanço denetimi §1f: "kartta açık ama bugün canlıda" kalemler. 📸 gövde/işaret INLINE değiştirilmedi (kart dondurulmuş); güncel kod-durumu burada listelenir. Güncel iş kaynağı: `docs/otonom/00-KUYRUK.md`.
+
+- **G6-01 ✅ CANLIDA 2026-09-23** (kart gövdesi ⬜) — N+1 konuşma listesi + sayfalama çözüldü. Kanıt: backend PR #86.

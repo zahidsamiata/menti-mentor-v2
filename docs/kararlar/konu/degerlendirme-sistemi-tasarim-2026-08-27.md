@@ -584,6 +584,7 @@ S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla
 #### ✅ EKRAN KARARI — üç soru nereye konur (PO, 2026-08-29)
 
 > ⚠️ GÜNCELLEME (2026-09-04, KURAL 12 — kod turu): Bu 2026-08-29 kararı, **daha yeni** `../../raporlar/icerik/arketip-ve-yaklasim-icerigi-2026-09-03.md` §4 ile **TERSİNE ÇEVRİLDİ.** Yeni sıra: **15 senaryo → 3 SORU → arketip KARTI** (kart SONDA). Gerekçe: kart önce gelirse kişi arketibini görüp S2'ye ona uygun cevap verir (bias); sıra ters çevrilince bias kaynağı kökten kalkar (S2-nötr önlemine ek güvence). ⭐ **Kod bugün TERSİ çalışıyor** (kart üç sorudan önce: `frontend/.../_OnboardingContent.tsx:223-234`) → madde **141** = yalnız metin değil **AKIŞ SIRASI değişikliği** (madde 140'a bağlı, ⬜ AÇIK). Aşağıdaki eski metin tarihsel iz olarak bırakıldı:
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-03): İKİ KAYNAK KOD DURUMU HAKKINDA UYUŞMUYOR — bu 2026-09-04 notu "Kod bugün TERSİ çalışıyor (kart üç sorudan ÖNCE, `_OnboardingContent.tsx:223-234`)" diyor; CS raporu (2026-09-23) ise "kod step sırası DÜZELTİLMİŞ (üç soru önce, kart sonda)" diyor. Hangisi güncel — koda karşı yeniden doğrulama gerekir; hüküm YOK, doğrulama/karar PO'nun. Doğruysa (kod düzeltilmiş) bu §10.2 notu bayattır ve `~~[ESKİ]~~` damgası bekler.
 
 - ~~[ESKİ · 2026-09-04] Üç soru **KAYIT AKIŞININ SONUNA, arketip kartından HEMEN SONRA** konur.~~ → **DOĞRUSU (arketip §4): üç soru arketip kartından ÖNCE; kart en sonda.**
 - **Gerekçe (PO):** kişi "sen bir Limansın" görmüş, ilgisi taze, 40 saniye daha verir; formun ortasına konursa sürtünme olur.

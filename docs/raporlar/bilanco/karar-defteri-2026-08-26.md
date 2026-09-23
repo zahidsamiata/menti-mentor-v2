@@ -473,3 +473,7 @@ Ek KOD-hakemli nüanslar (çelişki sayılmadı, verdikt verildi):
   Y1-Y7 retention (08-20'den beri açık, "neden ele alınmadı" gerekçesiz).
 - **DB'ye dokunulmadı · kod değiştirilmedi · PR açılmadı · commit yapılmadı · mevcut belge silinmedi/taşınmadı ·
   numara doğurulmadı · kişi adı yazılmadı.** Yalnız TEK dosya yazıldı: `docs/raporlar/bilanco/karar-defteri-2026-08-26.md`.
+
+## KOD DOGRULAMA NOTU (2026-09-23)
+
+⚠️ Ç-17 (CS raporu): bu belgedeki '196' toplamı bayat; güncel sayım 259 (00-KATLAMA-IZI) / 260 (00-SAYIM). Bu belge 2026-08-26/27 fotoğrafıdır; sayı canlı durumu yansıtmaz. Kanıt: 00-KATLAMA-IZI-2026-08-27.md · 00-SAYIM-2026-08-27.md.
