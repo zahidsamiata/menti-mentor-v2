@@ -7,6 +7,17 @@
 
 ---
 
+## ⭐ TUR KAYIT — DA: BELGE SİSTEMİ KALICI ÇÖZÜMLERİ (2026-09-23, bulut) · YALNIZ BELGE · PR açık, MERGE EDİLMEDİ
+- **Dal:** `otonom/DA-belge-sistemi-20260923` · kod/DB/seed: sıfır temas · kuyruk işi yapılmadı · CEVAP satırlarına dokunulmadı.
+- **G.1 hedefli okuma:** `OTONOM-PROMPT.txt` § 0.4 yeniden yazıldı (00-SIRADAKI ana girdi · 01-KARARLAR yalnız indeks · 02-ILERLEME ~120 satır · KARAR-TAKIP/arşiv rutin turda okunmaz); § 13.4 türetme + § 13.5 ölçüm eklendi.
+- **G.2 türetilmiş dosyalar:** `scripts/otonom-turet.mjs` (`npm run otonom:turet`) → `00-SIRADAKI.md` (81 🟢 BEKLIYOR · 28.685 kar) + `01-CEVAPSIZ.md` (57 cevapsız kart · 8.580 kar).
+- **G.3-G.9 kurallar:** `belge-duzeni-rehberi.md` KURAL 18-25 (17 bilerek boş — KARAR-50) · `CLAUDE.md` tek satır atıf.
+- **G.4:** 02-ILERLEME 940 satır / 84.995 kar → ana 104 + arşiv 836 taşınan (`arsiv/02-ILERLEME-2026-09.md`) · birleşim orijinalle birebir.
+- **G.3/G.5 etiket:** 144 dosya (🔥 5 + 🌡️ 20 + 🧊 119) · "durum tutmaz" notu 66 belgeye (G1/G9/G10 kartları dahil — önceki turda eksik kalmıştı).
+- **G.6:** 22 keşif raporuna İŞLENME kutusu → 21 ✅ · 1 ⬜ (`konsey-icerik-kalitesi-E-arastirma-brifleri-2026-09-23` → **AÇIK İŞ**).
+- ⚠️ **TAVAN AŞIMI — PO'YA BİLDİRİM (KURAL 18):** `00-KUYRUK` 173.671 · `01-KARARLAR` 158.745 karakter (🔥 tavan 40.000) · `00-KARAR-TAKIP` 182.843 (🌡️ tavan 120.000). **Arşivleme yetmiyor:** kuyruktaki 206 satırın 206'sı BEKLIYOR, 58 kartın 57'si cevapsız — taşınacak kapanmış kayıt yok. Yapısal bölünme **PO kararıdır**; o zamana kadar hedefli okuma (§ 0.4) bu dosyaların rutin maliyetini düşürür.
+- **1.000+ karakter satır (🔥):** `00-KUYRUK` 49 · `03-PO-ELLE-ISLER` 3 · diğerleri 0 — bu turda YENİ oluşan yok (önce/sonra aynı).
+
 ## ⭐ TUR KAYIT — BİRLEŞİK TUR: MERGE → ARŞİVLEME → 🟡 ÇÖZÜMÜ → KARARLAR → YENİ İŞLER (2026-09-23)
 
 > **Mod:** 🟥 BYPASS — düzenleme/kayıt turu (kuyruk İŞİ YAPILMADI). Doğrudan `main`'e çalışıldı (prompt tasarımı: checkout main → merge → düzenle).

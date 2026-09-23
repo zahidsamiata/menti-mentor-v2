@@ -1,6 +1,6 @@
 # 00-SIRADAKI — yalnız 🟢 BEKLIYOR işler
 
-> ⚙️ **TÜRETİLMİŞ** — kaynak: `docs/otonom/00-KUYRUK.md` · üretim: 2026-09-23 18:57 UTC · üretici: `scripts/otonom-turet.mjs`
+> ⚙️ **TÜRETİLMİŞ** — kaynak: `docs/otonom/00-KUYRUK.md` · üretim: 2026-09-23 18:59 UTC · üretici: `scripts/otonom-turet.mjs`
 > ⛔ **BURAYA ELLE YAZMA.** Kaynak olarak kullanma, atıf verme. Çelişki halinde **00-KUYRUK.md KAZANIR.**
 > Üretim tarihi 1 günden eskiyse bu dosyaya güvenme → kaynaktan hedefli oku (`OTONOM-PROMPT.txt` § 0.4).
 > 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt · Okuma
