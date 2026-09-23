@@ -47,4 +47,10 @@ describe('BookMeeting — availability null-safety regression', () => {
     render(<BookMeetingPage />);
     expect(screen.getByText(/henüz açık müsaitlik saati belirtmemiş/i)).toBeInTheDocument();
   });
+
+  it('I-05: talep ekranında haftalık görüşme sıklığı notu görünür; değer yokken ekran bozulmaz', () => {
+    availabilityMock.data = { blocks: [] }; // sıklık alanı yok → genel metin
+    render(<BookMeetingPage />);
+    expect(screen.getByTestId('weekly-meeting-limit')).toHaveTextContent(/kurumun belirlediği sıklığa bağlıdır/);
+  });
 });

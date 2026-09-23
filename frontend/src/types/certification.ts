@@ -16,6 +16,8 @@ export interface CertQuestion {
 
 export interface CertQuestionsResponse {
   questions: CertQuestion[];
+  /** Önceki denemede geçilemeyen konular (bu sınavda başta ve diğer varyantıyla gelir). */
+  retryTopics?: string[];
 }
 
 export type CertOutcome = 'correct' | 'acceptable' | 'wrong';
