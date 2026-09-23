@@ -336,6 +336,6 @@ Belge tetikleyici olmadan yine bayatlar (bugünkü sorun tam bu). Önerilen teti
 6. **Belge mimarisi önerisi:** **Tetikleyicili B (o zamana kadar C)** — belgelerin kendi şartı (gerçek kullanıcı testi) yerine gelmeden kör güncelleme yeni tahmin üretir, sürekli dondurmak öğrenmeyi kaybeder.
 7. **Güncelleme tetikleyicisi:** İlk gerçek kullanıcı testi (T1) → persona-v2 halefi; ilk 10 canlı görüşme (T2) → davranışsal varsayımları sınama.
 8. **Prompt eleştirisi:** **8 madde.**
-9. **PR no:** _(aşağıda push sonrası eklenecek)_
+9. **PR no:** #258 (açık bırakıldı, merge edilmedi).
 
 **🟩 PLANLA/SALT-OKUMA — hiçbir mevcut dosya değişmedi; yalnız bu tek yeni dosya yazıldı.**
