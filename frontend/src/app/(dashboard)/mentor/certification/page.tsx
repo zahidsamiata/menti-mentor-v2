@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { certificationApi } from '@/lib/api/certification';
+import { topicLabel } from '@/lib/certificationTopics';
 import type { CertQuestion, CertReveal, CertResult, CertOutcome } from '@/types/certification';
 
 // Renk semantiği: yeşil=doğru, sarı=kabul edilebilir, kırmızı=yanlış (renk körlüğü için ikon da).
@@ -205,15 +206,41 @@ export default function MentorCertificationPage() {
               <h2 className="text-xl font-bold">Neredeyse oldu — tekrar deneyebilirsin</h2>
               <p className="text-sm text-muted-foreground">
                 İlk-deneme oranın <strong>%{result.certScore}</strong>{' '}
-                ({result.passedTopics}/{result.totalTopics} konu). Sertifika için en az %80 gerekli.
+                ({result.passedTopics}/{result.totalTopics} konu).{' '}
+                {/* IC-04: eleme sebebine göre doğru mesaj — kritik konu elemesinde
+                    "%80 gerekli" YANLIŞ (puan yeterli olsa da elenmiş olabilir). */}
+                {result.failReason === 'RED_LINE_FAILED'
+                  ? 'Puanın yeterli olsa bile, kritik bir konuyu ilk denemede geçemedin — kritik konuların hepsi ilk denemede geçilmeli.'
+                  : 'Sertifika için en az %80 gerekli.'}
                 <br />Ceza veya bekleme yok — hemen yeniden başlayabilirsin.
               </p>
               {failed.length > 0 && (
-                <p className="text-xs text-muted-foreground">
-                  Pekiştirilecek konu sayısı: {failed.length}
-                </p>
+                <div className="text-left rounded-xl border border-amber-200 dark:border-amber-800/50 bg-white/60 dark:bg-amber-950/10 p-4 space-y-2">
+                  <p className="text-xs font-semibold text-amber-800 dark:text-amber-300">
+                    Pekiştirilecek konular:
+                  </p>
+                  <ul className="space-y-1">
+                    {failed.map((t) => (
+                      <li key={t.topic} className="text-xs text-muted-foreground flex items-center gap-1.5">
+                        {t.isRedLine && <span aria-label="Kritik konu" title="Kritik konu">🔴</span>}
+                        <span>{topicLabel(t.topic)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-xs text-muted-foreground pt-1">
+                    Bu konuları Öğrenme Yolculuğu&apos;nda baskısız senaryolarla pekiştirip
+                    tekrar deneyebilirsin.
+                  </p>
+                </div>
               )}
-              <Button onClick={restart}>Yeniden başla</Button>
+              <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                <Button onClick={restart}>Yeniden başla</Button>
+                {failed.length > 0 && (
+                  <Button asChild variant="outline">
+                    <Link href="/learning-journey">Öğrenme Yolculuğu&apos;na git →</Link>
+                  </Button>
+                )}
+              </div>
             </CardContent>
           </Card>
         )}

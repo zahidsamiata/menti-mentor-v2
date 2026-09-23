@@ -48,6 +48,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ✅ **CEVAPLANDI (2026-09-21): A** |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
 | KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
+| **KARAR-53** | **Menti müsait olmayan saati önerebilsin mi** (booking ↔ müsaitlik çelişkisi) | **1** (K-05) ⛔ çıkış blokeri | ⬜ boş · ⭐ FE↔BE çelişkisi = GERÇEK BUG |
 | **KARAR-35** | **Canlı DB'ye salt-okuma izni** | **5+** (md.30·33·118, S10, Y6) | ⬜ boş · ⭐ BB turu · en çok iş açan yeni kart |
 | **KARAR-36** | **Yarım 3 teknik kalem** (`answeredFollowup` · ikiz alan · 2 yedek tablo) | **4** (Y-18, D3, S26, S37) | ⬜ boş · ⭐ BB turu · ⚠️ `migrate dev` yedek tabloyu silebilir |
 | **KARAR-34** | **Kulüp tipi kurum + kurumlar arası görünürlük** | **3** (md.91·115·116) | ⬜ boş · ⭐ BB turu · avukat notu var |
@@ -1171,5 +1172,31 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Benim önerim:** **B** — iki gövde de kural metni, ikisi de kısa; birleştirme yarım saatlik iş ve `CLAUDE.md § SİLME PROTOKOLÜ`'ne hiç girmiyor (silme değil birleştirme). A'yı ancak gövdeler birebir aynı çıkarsa öneririm.
 
 **Cevap vermezsen:** YN-02 kuyrukta bekler; `belge-duzeni-rehberi.md` kendi KURAL 1'ini ihlal etmeye devam eder ve "kuralları oku" diyen ajan aynı kuralı iki farklı uzunlukta okur.
+
+**CEVAP:**
+
+---
+
+### KARAR-53 · Menti, mentörün müsait olmadığı saati önerebilir mi? (booking ↔ müsaitlik çelişkisi)  [ÜRÜN KARARI]
+**Şu an ne var:** Menti randevu isterken bir tarih/saat seçiyor. İki ekran birbiriyle çelişiyor:
+- Mentörün **hiç müsaitlik bloğu yoksa**, ekran *"Aşağıdan yine de bir zaman önerip talep gönderebilirsiniz; mentör uygunluğa göre yanıtlayacaktır"* diyor (`book-meeting/page.tsx:117-127`, U-10 kararı) — AMA backend her talebi **409 ile reddediyor** çünkü `fitsAvailability` blok yokken daima `false` (`meetingController.ts:465-483`). ⇒ Müsaitlik girmemiş mentöre **HİÇBİR randevu talebi ulaşamıyor** (ana akış kırık).
+- Mentörün **blokları varsa** ama menti blok DIŞI saat seçerse, ekran mavi bilgiyle *"Yine de talep gönderebilirsiniz"* diyor (`:131-133`) — backend yine **409 reddediyor**.
+
+Yani FE "gönder" diyor, backend "olmaz" diyor. Kanıt: 409 mesajı Türkçe ve anlaşılır (`meetingController.ts:483`), sorun mesaj değil **davranış çelişkisi**.
+
+**Sorun ne:** Menti mentöre randevu öneremiyor ya da önerdiğini sanıp reddediliyor. Özellikle müsaitlik girmemiş mentör hiç talep alamıyor.
+
+**Neden sana soruyorum:** "Menti mentörün beyan ettiği saatlerin DIŞINA çıkabilir mi" bir ürün/politika kararı — mentörün zamanını korumak (katı) ile esnek talep (mentör karar verir) arasında seçim. Geri dönüşü kolay değil çünkü iki ekranın ve backend'in davranışını hizalıyor.
+
+**Seçenekler:**
+· **A — KATI: menti yalnız mentörün müsait bloğundan seçebilir.** FE blok dışı saati SEÇTİRMEZ (buton kapalı), blok yoksa "bu mentör şu an randevu almıyor" der. Backend 409 güvenlik ağı kalır. Kullanıcı ne görür: sadece geçerli saatler. Ne kazanırsın: mentör zamanı korunur, çelişki biter. **Ne kaybedersin:** müsaitlik girmemiş mentör hiç randevu ALAMAZ (mentörlerin çoğu blok girmemişse akış tıkanır); U-10'un "yine de öner" vaadi SİLİNİR. Süre **M** · geri alınır ✅ · migration yok.
+· **B — ESNEK: menti her saati önerebilir, mentör onaylar/reddeder.** Backend `fitsAvailability` HARD-REJECT'i kaldırılır (blok dışı = uyarı, red değil); talep PENDING gider, mentör karar verir. Kullanıcı ne görür: istediği saati önerir, "mentör onayına gönderildi". Ne kazanırsın: U-10 vaadi gerçekleşir, müsaitlik girmemiş mentör de talep alır. **Ne kaybedersin:** mentör alakasız saat talepleriyle dolabilir; müsaitlik bloğu "öneri" seviyesine iner. Süre **M** · geri alınır ✅ · migration yok · ⚠️ auth/matching değil ama randevu akışı → 🟡.
+· **C — HİBRİT: blok VARSA katı (yalnız blok içi), blok YOKSA esnek (her saat önerilebilir).** Kullanıcı ne görür: müsaitlik girmiş mentörde sadece geçerli saatler; girmemişte serbest öneri. Ne kazanırsın: ikisinin iyi yanı; hiçbir mentör "randevu alamaz" durumuna düşmez. **Ne kaybedersin:** iki ayrı davranış = daha karmaşık FE + backend; menti neden bazen serbest bazen kısıtlı olduğunu anlamayabilir. Süre **L** · geri alınır ✅ · migration yok.
+
+**Karşılaştırma:** A mentör zamanını en çok korur ama müsaitlik-girmemiş mentörü tamamen kapatır (bugün mentörlerin durumu bilinmiyor → riskli). B en az sürtünme ve U-10 ile tutarlı ama mentör gelen kutusu kirlenebilir. C kullanıcı deneyimini en iyi dengeler ama en pahalısı ve iki-kafalı.
+
+**Benim önerim:** **B** — çünkü U-10 zaten "mentör karar verir" yönünde sevk edilmiş; backend'i ona hizalamak çelişkiyi kökten bitirir ve hiçbir mentörü randevuya kapatmaz. (Bu senin ürün kararın; katı zaman koruması istiyorsan A/C.)
+
+**Cevap vermezsen:** K-05 (çıkış blokeri) yapılamaz; müsaitlik girmemiş mentörler sessizce hiç randevu talebi alamamaya devam eder (ana akış kırık, kimse fark etmez = T3).
 
 **CEVAP:**
