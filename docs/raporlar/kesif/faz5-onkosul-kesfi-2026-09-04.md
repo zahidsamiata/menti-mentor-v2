@@ -1,6 +1,7 @@
 > 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
 > TÜR: 🧊 · SON DOĞRULAMA: 2026-09-04 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
 > ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-04 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+> İŞLENME: ✅ işlendi (2026-09-04, o günün iş kaynağına: `00-KARAR-TAKIP` madde 101 + S33) · aktif kuyruğa devir: 2026-09-19 AŞAMA F (F-09/F-11) · kalan öksüzler: `oksuz-bulgu-sayimi-2026-09-23` §3.5 · kutu: 2026-09-23 DA turu (belge-duzeni-rehberi § KURAL 23)
 
 📸 DONDURULMUŞ · 2026-09-04 · salt-okuma keşif · kod DEĞİŞMEDİ
 
