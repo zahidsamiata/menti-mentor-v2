@@ -94,11 +94,11 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-63** | **Arketip eşiği 45/55/60 belgelensin mi kaldırılsın mı** | **1** (MUT §4 · `scoring.config.ts:31`) | ⬜ boş · ⭐ analiz turu · öneri A (P3) |
 | **KARAR-64** | **"Mizaç" mı "karakter" mi "kişilik" mi** | **1** (MUT §4-5 · `onboardingController.ts:492`) | ⬜ boş · ⭐ analiz turu · öneri C (kişilik) |
 | **KARAR-65** | **"D mentör + S menti" yasağı menti tarafında da mı** | **2** (TO §8.2 · `matching.ts:200-216`) | ⬜ boş · ⭐ analiz turu · öneri B; KARAR-61 ile birlikte |
-| **KARAR-66** | **"Akıllı eşleştirme" iddiası — ölç mü geri çek mi** | **2** (PP:248 C2) | ⬜ boş · ⭐ analiz turu · öneri A uzun vade / B ilk kuruma kadar |
+| **KARAR-66** | **"Akıllı eşleştirme" iddiası — ölç mü geri çek mi** | **2** (PP:248 C2) | ✅ **CEVAPLANDI (2026-09-23): B — iddia geri çekilir, "YÖNLENDİRME"** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` |
 | **KARAR-67** | **Yönetici drill-down serbest-metin nota inmeli mi** | **1** (PP:271 C1 · KVKK) | ⬜ boş · ⭐ analiz turu · öneri A (aggregate) |
 | **KARAR-68** | **Persona/panel belgeleri nasıl gelişmeli A/B/C** | **2** (PP §7 E · §5.1) | ⬜ boş · ⭐ analiz turu · BELGE POLİTİKASI · öneri tetikleyicili B |
-| **KARAR-69** | **"ÇIKIŞ" tanımı ne** | **0** (tüm çıkış-blokeri etiketlerini geçerli kılar) | ⬜ boş · ⭐ analiz turu · METODOLOJİ · öneri B tanım + C ön koşul |
-| **KARAR-70** | **Gerçek kullanıcı görüşmesi: ne zaman, kaç kişi** | **1** (görüşme kılavuzu · PP:334,337) | ⬜ boş · ⭐ analiz turu · SÜREÇ · öneri A (3-5, erken) |
+| **KARAR-69** | **"ÇIKIŞ" tanımı ne** | **0** (tüm çıkış-blokeri etiketlerini geçerli kılar) | ✅ **CEVAPLANDI (2026-09-23): A+B — ilk kurum + KVKK tabanı; ölçek hukuku ertelenir** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` |
+| **KARAR-70** | **Gerçek kullanıcı görüşmesi: ne zaman, kaç kişi** | **1** (görüşme kılavuzu · PP:334,337) | ✅ **CEVAPLANDI (2026-09-23): C sonra B + sistem-içi otomatik soru** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` |
 | **KARAR-71** | **Kırılgan kullanıcıda tutundurma etiğinin sınırı** | **1+** (PP:237 C3 · prompt) | ⬜ boş · ⭐ analiz turu · ETİK/UZMAN, öneri YOK |
 
 > ⭐ **CS BİLANÇO DENETİMİ KARARLARI (2026-09-23) — KARAR-72…75.** Kaynak: `docs/raporlar/kesif/konu-bilanco-denetimi-2026-09-23.md` §7 (CS'nin A/B/C/D harfleri 72-75'e dönüştürüldü). Üçü tasarım belgesinde tam yazılı ama 7 haftadır öksüz kalan kalemler.
@@ -1074,21 +1074,6 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 
 ---
 
-### KARAR-66 · "Akıllı eşleştirme" iddiası — ölçelim mi, geri mi çekelim?  (2 işi açar)  [ÜRÜN KARARI]
-**Şu an ne var:** Belge "eşleşme kalitesi = bizim farkımız" diyor (`yonetici:86`); kod ise: `Match` tablosu boş, `predictedScore` yazılmıyor/okunmuyor, DISC ağırlıkları sezgisel. Kanıt: `persona-panel-gelisimi-2026-09-23.md:248` (C2).
-**Sorun ne:** PO'nun kurula/sponsora tek satış argümanı, kendi sistemi tarafından bile ispatlanamıyor. Bu ölçülebilir bir iddia — tondan (KARAR-48 sevdirme dili) farklı, gerçek bir kanıt boşluğu.
-**Neden sana soruyorum:** "Neyi vaat ediyoruz + nasıl kanıtlayacağız" ürün/pazarlama kararı.
-**Seçenekler:**
-· **A — `Match`'i yaz + kaliteyi ölç** (`createMatchIfEligible` çağrılsın, predicted↔gerçek karşılaştırması). Ne kazanırsın: gerçek kanıt. **Ne kaybedersin:** matching koduna dokunma (🔴), efor L; migration olası. Süre L · geri alınır ✅ · migration olası
-· **B — İddiayı geri çek** — "kalite metriği" yerine "eşleştirme yardımcısı" konumlandır. Ne kazanırsın: dürüst, hızlı. **Ne kaybedersin:** satış argümanı zayıflar. Süre S · geri alınır ✅ · migration yok
-· **C — Bekle** — ilk gerçek görüşmeler birikene kadar iddiayı ne öne çıkar ne çek. Ne kazanırsın: erteleme, iş yok. **Ne kaybedersin:** belirsizlik sürer. Süre — · geri alınır ✅ · migration yok
-**Karşılaştırma:** A gerçek çözüm ama en pahalı ve matching-riskli; B dürüst ama pazarlamayı küçültür; C erteleme.
-**Benim önerim:** A (uzun vade) ama ilk kurum canlıya girmeden B dili kullanılsın. *(Ürün kararın.)*
-**Cevap vermezsen:** Y-A4, U-A1, R3/R4/R6 riski açık kalır.
-**CEVAP:**
-
----
-
 ### KARAR-67 · Yönetici drill-down'ı kişinin serbest-metin endişe notuna inmeli mi?  (1 işi açar)  [ÜRÜN KARARI · KVKK]
 **Şu an ne var:** Drill-down kişiye iniyor (`yonetici:80`); check-in notları (1000 karakter + endişe etiketi) sahiplik kontrolsüz okunuyor (G-3, `konsey-guvenlik-kvkk`). Kanıt: `persona-panel-gelisimi-2026-09-23.md:271-272` (C1).
 **Sorun ne:** Yöneticinin "kim kaynıyor" görme hakkı ile mentinin özel notunun mahremiyeti çarpışıyor.
@@ -1115,38 +1100,6 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** Sürekli güncel zemin öncelik ama bütçe kabulse A; öğrenmeyi kalıcı kaybetmek istemiyorsan ve gerçek kullanıcı testini bekleyebiliyorsan B; minimum bakım öncelikse C ama bayatlama sürer.
 **Benim önerim:** Tetikleyicili B (o zamana kadar C) — belgelerin kendi koştuğu şart (gerçek kullanıcı testi) yerine gelmeden A/B yeni tahmin üretir; C öğrenmeyi kalıcı kaybeder; doğru hamle güncellemeyi ilk kullanıcı testine bağlamak (§5.1).
 **Cevap vermezsen:** U-A6 açık kalır, belgeler tekrar bayatlar.
-**CEVAP:**
-
----
-
-### KARAR-69 · "ÇIKIŞ" tanımı ne?  (0 doğrudan iş — ama TÜM çıkış-blokeri etiketlerini geçerli/geçersiz kılar)  [ÜRÜN KARARI · METODOLOJİ]
-**Şu an ne var:** Analiz turu (`00-ANALIZ-TURU-OZETI-2026-09-23.md`) her bulguda "bu çıkış blokeri mi?" diye sordu ve bulguları buna göre önceliklendirdi; ama "çıkış" (canlıya çıkış / lansman) hiçbir yerde tanımlı değil. Tanım olmadan "çıkış blokeri" etiketi öznel.
-**Sorun ne:** Tüm önceliklendirme "çıkış blokeri mi?" sorusuna dayanıyor; ama herkes "çıkış"tan farklı şey anlıyorsa blokeri listesi güvenilir değil. Bir bulgu "MVP için blokeri değil ama ilk kurum için blokeri" olabilir — hangisi geçerli, tanıma bağlı.
-**Neden sana soruyorum:** "Ürünün hazır sayılacağı an" tanımı bir ürün/metodoloji kararı; teknik değil ve tüm kuyruk önceliğini belirler.
-**Seçenekler:**
-· **A — ÇIKIŞ = çalışan MVP** (temel akış uçtan uca çalışıyor, gerçek kullanıcı yok). Ne kazanırsın: en erken çıkış, hızlı öğrenme. **Ne kaybedersin:** KVKK/kriz/kalite boşlukları çıkıştan sonra keşfedilir; itibar riski. Süre — (tanım) · geri alınır ✅ · migration yok
-· **B — ÇIKIŞ = ilk gerçek kurum canlıda** (bir STK gerçek mentileriyle kullanıyor). Ne kazanırsın: gerçek doğrulama, gerçek geri bildirim. **Ne kaybedersin:** kurum bulma + hazırlık gecikmesi; blokeri listesi genişler. Süre — · geri alınır ✅ · migration yok
-· **C — ÇIKIŞ = KVKK/yasal zorunluluklar tamam** (aydınlatma, silme, kriz kanalı, avukat onayı). Ne kazanırsın: hukuki güvenli zemin. **Ne kaybedersin:** en geç çıkış; ürün özellikleri beklerken hukuk işi öne geçer. Süre — · geri alınır ✅ · migration yok
-· **D — ÇIKIŞ = ilk 10 gerçek canlı görüşme tamamlandı.** Ne kazanırsın: "işe yarıyor" kanıtı somut. **Ne kaybedersin:** en geç ve en dar tanım; buraya varmak için önce A/B'nin de geçilmesi gerekir. Süre — · geri alınır ✅ · migration yok
-**Karşılaştırma:** Bunlar aslında aşamalar (A→B→C birbirini kapsar) ama "blokeri" etiketi hangi aşamaya bakacağımızı bilmek ister. Erken öğrenme öncelikse A; gerçek doğrulama öncelikse B; hukuki güvenlik ilk sırada ise C tabanı zorunlu; kanıt öncelikse D.
-**Benim önerim:** B'yi çıkış tanımı, C'yi çıkış ÖN KOŞULU say — çünkü ürün ancak gerçek bir kurumda anlam kazanır ama KVKK/kriz boşlukları (KARAR-67, KARAR-31 EK) hiçbir çıkışta ertelenemez. Bu tanımla "çıkış blokeri" = "ilk kurum + KVKK tabanı için gereken".
-**Cevap vermezsen:** analiz turunun ve kuyruğun tüm "çıkış blokeri" öncelik etiketleri öznel kalır; hangi işin gerçekten acil olduğu belirsizleşir.
-**CEVAP:**
-
----
-
-### KARAR-70 · Gerçek kullanıcı görüşmesi: ne zaman, kaç kişi, hangi roller?  (1 işi açar — görüşme kılavuzu)  [ÜRÜN KARARI · SÜREÇ]
-> ⚠️ Not: 2026-09-09'da yapılan test, PO'nun KENDİ hesaplarıyla yaptığı bir gezinti (dogfooding) testiydi — GERÇEK kullanıcı görüşmesi DEĞİL. Tek somut çıktısı mentör panelindeki İngilizce DISC etiketiydi (`persona-panel-gelisimi-2026-09-23.md:318`). Gerçek kullanıcı testi HÂLÂ yapılmadı.
-**Şu an ne var:** 7 persona/panel/strateji belgesinin 7'si de "gerçek mentilerle doğrulanmalı" şartını koşmuş; 7 haftadır yapılmadı. Bugün ⬜ (test edilmemiş) durumdaki 10 davranışsal varsayım YALNIZCA gerçek kullanıcı görüşmesiyle sınanabilir (`persona-panel-gelisimi-2026-09-23.md:334,337`).
-**Sorun ne:** Ürünün en büyük belirsizliği "menti gerçekten kırılgan mı, mentör gerçekten seçici mi" gibi davranışsal varsayımlar; bunlar koda karşı test edilemez, yalnız gerçek insanla sınanır. Görüşme yapılmadan persona-v2 (KARAR-68 B yolu) üretilemez ve tasarım zemini tahmin olarak kalır.
-**Neden sana soruyorum:** Görüşmenin ölçeği (kaç kişi), zamanlaması (çıkıştan önce mi sonra mı) ve kapsamı (hangi roller) bir süreç + ürün kararı; kılavuzu ajan hazırlayacak (kuyruk işi) ama ölçek/zamanlama PO kararı.
-**Seçenekler:**
-· **A — Küçük ve erken: 3-5 kişi (menti + mentör + yönetici karışık), çıkıştan ÖNCE.** Ne kazanırsın: en büyük belirsizlik erken çözülür; persona-v2 için girdi gelir. **Ne kaybedersin:** az kişi = zayıf sinyal; ürün henüz ham olduğu için bazı sorular sorulamaz. Süre S · geri alınır ✅ · migration yok
-· **B — Rol başına derin: her rolden 3'er kişi (9-12 görüşme), yapılandırılmış kılavuzla.** Ne kazanırsın: her rolün varsayımları ayrı ayrı sınanır, güçlü sinyal. **Ne kaybedersin:** organizasyon yükü büyük; katılımcı bulmak gecikir. Süre M · geri alınır ✅ · migration yok
-· **C — İlk kurum canlıya girdikten sonra, gerçek kullanımdan: ilk 10 görüşmenin taraflarıyla.** Ne kazanırsın: gerçek davranış verisiyle beslenir, en gerçekçi. **Ne kaybedersin:** en geç; çıkış öncesi belirsizlik çözülmez; kurum canlıya girene kadar beklenir. Süre L · geri alınır ✅ · migration yok
-**Karşılaştırma:** Belirsizliği çıkıştan önce azaltmak öncelikse A (hızlı) ya da B (derin ama yavaş); gerçek kullanım verisini beklemeye razıysan C. A ve B ürünün ham hâlini test eder, C canlı hâlini.
-**Benim önerim:** A — belgelerin kendi şartı (3-5 görüşme) bu; küçük ve erken bir tur, persona-v2'yi (KARAR-68) tetikler ve 10 ⬜ varsayımdan en kritiklerini erken sınar. Kılavuzu ajan hazırlar, görüşmeyi PO yürütür (`03-PO-ELLE-ISLER.md`).
-**Cevap vermezsen:** persona-panel raporunun tüm ⬜ varsayımları (10 adet) test edilmeden kalır; KARAR-68 B yolu (persona-v2) tetiklenemez.
 **CEVAP:**
 
 ---
