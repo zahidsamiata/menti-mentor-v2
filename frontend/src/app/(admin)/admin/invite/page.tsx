@@ -54,7 +54,7 @@ Kısaca: senden önce aynı yollardan geçmiş, deneyimli isimlerle tanışma ve
 
 Merhaba,
 
-{DavetEdenAd} ({DavetEdenGörev}, {KurumAdı}) sizi mentörlük programına mentor olarak davet etti.
+{DavetEdenAd} ({DavetEdenGörev}, {KurumAdı}) sizi mentörlük programına mentör olarak davet etti.
 
 **Neden siz?**
 Bugün bulunduğunuz noktaya bakan ve sizin bir zamanlar sorduğunuz soruları soran gençler var. Yıllar içinde biriktirdiğiniz deneyim — hangi hataları yaptığınız, neyi keşke daha erken bilseydiniz — onlar için hâlâ bilinmeyen şeyler.
@@ -71,12 +71,12 @@ Kimse sizden uzman olmanızı beklemiyor. Kendi yolunuzu anlatmanız, karşıla�
 **Kiminle eşleşeceksiniz?**
 Kısa bir mizaç değerlendirmesi yapıyoruz — böylece daha rahat iletişim kurabileceğiniz, anlattıklarınızın gerçekten karşılık bulacağı kişilerle eşleşme imkânı doğuyor. Kimi kabul edeceğinize siz karar veriyorsunuz.
 
-[Mentor Olarak Katıl] {Link}
+[Mentör Olarak Katıl] {Link}
 
 Bu daveti tanımıyor musunuz? Bildir: {ŞüpheLinki}`,
     WHATSAPP: `Merhaba 👋
 
-{DavetEdenAd}, sizi *{KurumAdı} mentörlük programına* mentor olarak davet etti.
+{DavetEdenAd}, sizi *{KurumAdı} mentörlük programına* mentör olarak davet etti.
 
 Bugün bulunduğunuz noktaya bakan, sizin bir zamanlar sorduğunuz soruları soran gençler var. Biriktirdiklerinizi aktarmak için bir imkân.
 
