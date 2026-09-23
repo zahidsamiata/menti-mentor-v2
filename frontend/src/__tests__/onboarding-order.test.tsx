@@ -9,17 +9,22 @@ import OnboardingContent from '@/app/onboarding/_OnboardingContent';
  */
 
 const push = vi.fn();
-vi.mock('next/navigation', () => ({ useRouter: () => ({ push }) }));
-vi.mock('@/providers/AuthProvider', () => ({
-  useAuth: () => ({
+// STABİL referanslar (vi.hoisted) — useAuth her render'da AYNI objeyi döndürmeli.
+// Aksi halde OnboardingContent'teki useEffect([accessToken, user]) her render'da
+// yeniden tetiklenir → sonsuz fetch/setState döngüsü → OOM (CI heap taşması).
+const { authValue } = vi.hoisted(() => ({
+  authValue: {
     user: { role: 'MENTI', id: 'u1', tenantId: 't1' },
     accessToken: 'tok',
     isLoading: false,
-  }),
+  },
 }));
+vi.mock('next/navigation', () => ({ useRouter: () => ({ push }) }));
+vi.mock('@/providers/AuthProvider', () => ({ useAuth: () => authValue }));
 
 vi.mock('@/lib/api/onboarding', () => ({
-  fetchDiscQuestions: vi.fn(async () => ({ ok: true, data: { questions: [] } })),
+  // Boş-olmayan dizi: step 1'de spinner yerine DiscTestStep render edilsin (içerik önemsiz, stub'lu).
+  fetchDiscQuestions: vi.fn(async () => ({ ok: true, data: { questions: [{ id: 'q1' }] } })),
   submitProfile: vi.fn(async () => ({ ok: true, data: {} })),
   submitDiscAnswers: vi.fn(async () => ({ ok: true, data: { resultCard: { archetype: 'Kâşif' } } })),
   submitMatchingPreferences: vi.fn(async () => ({ ok: true, data: {} })),
