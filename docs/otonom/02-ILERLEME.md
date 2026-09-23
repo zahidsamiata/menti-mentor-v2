@@ -9,7 +9,7 @@
 > **Mod:** 🟥 BYPASS — terminal. Otonom tur, DURMAMA KURALI aktif. Hedef: kuyrukta 🟢 BEKLIYOR bırakmamak (çok-oturumluk; bu tur ilk parti).
 > **DB/migration/seed YOK · şema DEĞİŞMEDİ · #110'a DOKUNULMADI · hiçbir şey SİLİNMEDİ · KARAR CEVAP satırı doldurulmadı · yasak bölge (server.ts rate-limit/trust-proxy) DOKUNULMADI.**
 
-### BITTI ve CANLIDA (7 iş — kullanıcı ne görüyor) — HEPSİ MERGE EDİLDİ
+### BITTI ve CANLIDA (8 iş — kullanıcı ne görüyor) — HEPSİ MERGE EDİLDİ
 | İş | PR | Kullanıcı artık şunu görüyor |
 |---|---|---|
 | **I-06** (belge) | çatı #243 ✅ | Tasarım belgesini okuyan, iptal edilmiş "unisex isim" kararını geçerli sanmıyor ([ESKİ] damgalı, faz6 §4'e yönlendirildi) |
@@ -18,6 +18,7 @@
 | **Y-01** (CORS trim) ⛔T2 | backend #88 + pointer #248 ✅ | `ALLOWED_ORIGINS` boşluklu env değeriyle bile site açılıyor (origin sessizce düşmüyor) |
 | **Y-06** (Footer) ⛔T1 | çatı #247 ✅ | Gizlilik/KVKK/Kullanım Koşulları sayfalarının altından ve ana sayfa footer'ından yasal metinlere tıklayıp gidiyor (önceden ölü `<span>`) |
 | **P-10** (mentör e-posta) ⛔T2+T3 | backend #89 + pointer #253 ✅ | Menti booking yaptığında mentöre e-posta bildirimi gidiyor (çan bildirimine ek). ⚠️ Ulaşması SMTP'ye bağlı (PO-elle B#4) |
+| **IC-02** (davet yazımı) | çatı #255 ✅ | Yönetici davet metnini (e-posta/WhatsApp) kopyaladığında tutarlı "mentör olarak davet etti" görüyor (önceden aynı cümlede "mentörlük … mentor" tutarsızdı) |
 
 ### KARAR AÇILDI (yapılamadı — PO cevabı bekliyor)
 - **KARAR-53** (#251) — **K-05** çıkış blokeri incelemesinde GERÇEK BUG bulundu: müsaitlik girmemiş mentör HİÇ randevu talebi alamıyor (FE "yine de öner" ↔ backend 409 reddi). Çözüm yönü ürün kararı (menti blok dışına çıkabilir mi). K-05 → 🔴 KARAR-53. Öneri: B (esnek, mentör karar verir).
@@ -27,7 +28,7 @@
 - **SON eşitlik teyidi: çatı main pointer == backend main HEAD == `4686ba4c` → ✅ EŞİT.**
 
 ### KUYRUK SON DAĞILIMI (bu partiden sonra)
-- 🟢 BEKLIYOR: **55** · 🟡 BEKLIYOR: **75** · 🔴 BEKLIYOR: **19** → **hedef HENÜZ sağlanmadı, çok-oturumluk iş.**
+- 🟢 BEKLIYOR: **54** · 🟡 BEKLIYOR: **75** · 🔴 BEKLIYOR: **19** → **hedef HENÜZ sağlanmadı, çok-oturumluk iş.** (Tur başında 🟢=~60 idi; 6 🟢 + K-05→🔴 kapatıldı.)
 - **Sıradaki öncelik (sonraki tur):** çıkış blokeri 🟢 kalmadı (K-05 → 🔴 KARAR-53). AŞAMA I **I-04** (sertifika 4-garantili çekim, backend) · **I-05** (görüşme sıklığı — ⚠️ bekleme aşamasında veri yok, ürün belirsizliği) · **I-07** (yanlış konu tekrar, backend). Sonra U/P kalanları, sonra Y/GV/PS/IC/YN büyük kümeleri (dosya-kanıtlı, çoğu bağımsız FE/BE).
 
 ### CANLIDA KONTROL EDİLECEKLER (PO gözle)
