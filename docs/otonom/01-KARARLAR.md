@@ -48,13 +48,13 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ✅ **CEVAPLANDI (2026-09-21): A** |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
 | KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
-| **KARAR-53** | **Menti müsait olmayan saati önerebilsin mi** (booking ↔ müsaitlik çelişkisi) | **1** (K-05) ⛔ çıkış blokeri | ⬜ boş · ⭐ FE↔BE çelişkisi = GERÇEK BUG |
+| **KARAR-53** | **Menti müsait olmayan saati önerebilsin mi** (booking ↔ müsaitlik çelişkisi) | **1** (K-05) ⛔ çıkış blokeri | ✅ **CEVAPLANDI (2026-09-23): ÖZEL — mentörün 4 hâli** (blok=kat+takvim · koşul=esnek · meşgul=soluk/mesaj · boş=dürt+eskalasyon); KARAR-1 ile TEK migration |
 | **KARAR-35** | **Canlı DB'ye salt-okuma izni** | **5+** (md.30·33·118, S10, Y6) | ⬜ boş · ⭐ BB turu · en çok iş açan yeni kart |
 | **KARAR-36** | **Yarım 3 teknik kalem** (`answeredFollowup` · ikiz alan · 2 yedek tablo) | **4** (Y-18, D3, S26, S37) | ⬜ boş · ⭐ BB turu · ⚠️ `migrate dev` yedek tabloyu silebilir |
-| **KARAR-34** | **Kulüp tipi kurum + kurumlar arası görünürlük** | **3** (md.91·115·116) | ⬜ boş · ⭐ BB turu · avukat notu var |
+| **KARAR-34** | **Kulüp tipi kurum + kurumlar arası görünürlük** | **3** (md.91·115·116) | ✅ **CEVAPLANDI (2026-09-23): ÖZEL — topluluk lideri modeli** (lider onaylanır, üyeler değil; lider=veri sorumlusu) + kayıt ekranı zorunlu/isteğe-bağlı + SORU2→B anonim toplu; ⛔ AVUKAT |
 | **KARAR-30** | **Senaryo isimleri: seed'den önce mi sonra mı** | **2** (I-09, K-16/K-18 sırası) | ⬜ boş · ⭐ BB turu · ⚠️ yanlış sıra = içerik iki kez canlıya yazılır |
 | **KARAR-31** | **Kriz bildirimi (kendine zarar) + yaş sınırı** | **2** (I-18, G1-01) | ⬜ boş · ⭐ BB turu · ⛔ AVUKAT ön koşulu, öneri YOK |
-| **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ✅ **CEVAPLANDI (2026-09-21): A** |
+| **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ✅ **CEVAPLANDI (2026-09-23 REVİZYON): havuzdan ÇIKMAZ — soluk görünür, yalnız mesaj, randevu almaz** (KARAR-53 ③); ~~2026-09-21: A~~ |
 | **KARAR-33** | **Kurumdan üye çıkarma + red tipi** | **2** (Y-14/md.36, md.35) | ✅ **CEVAPLANDI (2026-09-21): B — dondur, sebep seç, 30 gün sonra psikometri sil** |
 | **KARAR-37** | **madde 103 — kart mı özet mi kazanır** | 1 (md.103) | ⬜ boş · ⭐ BB turu · G1-23 vakasının tekrarı riski |
 
@@ -702,7 +702,8 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** **A** — çünkü backend ve güvenlik guard'ı zaten hazır; iş yalnız ekran, ve "sessiz mentör" sorununu görünür hâle getirir.
 ⚠️ **Not:** Hangi seçenek seçilirse seçilsin, `mentorVisibilityEnabled` alanının **bağlanacağı mı silineceği mi** aynı cevapta netleşir (silme = ayrı tur + ikinci onay, SİLME PROTOKOLÜ).
 **Cevap vermezsen:** **Y-15** kuyrukta bekler; şemadaki uyuyan alan belirsiz kalır.
-**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
+**CEVAP:** ~~A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*~~
+⚠️ **REVİZYON (PO, 2026-09-23, strateji katmanı karar oturumu):** Mentör havuzdan **ÇIKARILMAZ.** Listede kalır ama **SOLUK / şeffaf** görünür; meşgul olduğu bir bakışta anlaşılır. O hâldeyken **YALNIZ MESAJ** alır, **randevu talebi ALMAZ** (KARAR-53 ③ ile aynı davranış). **Gerekçe:** menti mentörün VAR olduğunu görsün, yalnız şu an müsait olmadığını anlasın — tamamen gizlemek (eski A'nın "kapat" etkisi) mentörü yok sayardı. `mentorVisibilityEnabled` alanı **BAĞLANIR** (silinmez): `true`=normal, `false`=soluk/mesaj-only hâli (KARAR-53 ③).
 
 ---
 
@@ -743,7 +744,21 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
  (2) ⭐ **KVKK ROLÜ:** tüzel kişiliği olmayan toplulukta veri sorumlusu büyük olasılıkla **PLATFORMUN KENDİSİ** olur — KVKK yükü artar. AVUKAT PAKETİNE.
  (3) **SATIŞ:** topluluk sözleşme imzalamayabilir — fiyatlama/sorumluluk farklı.
  Kodda: kulüp modülü backend'i yazılı (7 uç, 2 tablo), ekranı yok (KARAR-9 ertelendi).
-**CEVAP:**
+**CEVAP:** **ÖZEL MODEL (PO, 2026-09-23, strateji katmanı karar oturumu).**
+
+**SORU 1 · TOPLULUK LİDERİ MODELİ:** Lider bir **TALEP** oluşturur → PO **yalnız LİDERİ** onaylar (üyeler PO onayına **DÜŞMEZ**) → lider kendi ekosistemini açar, üyelerini **KENDİSİ davet eder** (topluluk = yöneticisi bir kişi olan kurum, mevcut kurum akışıyla aynı iskelet).
+  **KVKK:** VERİ SORUMLUSU = **topluluk lideri**, platform = **VERİ İŞLEYEN.** *(⚠️ Bu, KARAR-34 kartındaki PO SORUSU (2) ile ilişkili ama ayrışıyor: lider tüzel/gerçek kişi olarak sorumluluğu üstlenirse platform işleyen kalır; lider yoksa/üstlenmezse veri sorumlusu platform olur — bu ikinci hâl AVUKAT PAKETİNE, bkz. Bölüm 6.4.)*
+  **KAYIT EKRANI** — PO kuralı *"alternatifi olmayanı seçenek gibi sunma"*:
+    **ZORUNLU** (her biri AYRI işaretlenir; biri eksikse GİRİŞ YOK):
+      · DISC ile eşleştirme · verinin yurt dışında saklanması (bilgilendirme + kabul) · veri işleme koşulları · anonim verilerin eşleştirmeyi iyileştirmede kullanılması
+    **İSTEĞE BAĞLI** (hayır demek girişi ENGELLEMEZ):
+      · diğer kurum/topluluklarla anonim toplu veri paylaşımı · derin psikometri (OCEAN)
+  **AYNI EKRAN KURUM YÖNETİCİLERİ için de uygulanır** (tek akış).
+  ⛔ **AVUKAT ONAYINA BAĞLI** — metin avukat onayı olmadan yayınlanmaz.
+
+**SORU 2 → B:** İzin verilirse **yalnız ANONİM TOPLU** veri paylaşılır; k-anonimlik altyapısı **hazır** (`backend/src/services/mask.ts` · `applyKAnonymity`). Kurumlar-arası **açık/kişi-düzeyi** görünürlük YOK.
+
+⚠️ Not: kartın gövdesindeki eski öneri (B) bu özel modelle **detaylandırıldı**; çelişki yok — "kulüp ancak üniversite onayıyla" yerine **"topluluk ancak lider onayıyla"** genelleştirildi (üniversite kulübü bu modelin özel hâli).
 
 ---
 
@@ -1199,4 +1214,19 @@ Yani FE "gönder" diyor, backend "olmaz" diyor. Kanıt: 409 mesajı Türkçe ve 
 
 **Cevap vermezsen:** K-05 (çıkış blokeri) yapılamaz; müsaitlik girmemiş mentörler sessizce hiç randevu talebi alamamaya devam eder (ana akış kırık, kimse fark etmez = T3).
 
-**CEVAP:**
+**CEVAP:** **ÖZEL TASARIM — A/B/C'nin hiçbiri değil (PO, 2026-09-23, strateji katmanı karar oturumu).**
+Mentörün **DÖRT HÂLİ** var; her hâlde menti farklı şey yapar:
+
+**① MÜSAİTLİK BLOĞU GİRMİŞ → KATI.** Menti **takvimden yalnız seçili saatlerden** randevu alır; blok dışı saat **SEÇİLEMEZ**.
+  ⭐ **TAKVİM GÖRÜNÜMÜ:** menti mentörün müsait saatlerini takvimde **SEÇİLİ ALANLAR** olarak görür (bugünkü boş tarih-saat kutusu yerine hangi saatlerin açık olduğu GÖRÜNÜR). Backend `fitsAvailability` hard-reject **KALIR** (güvenlik ağı).
+
+**② BLOK YOK ama KOŞUL GİRMİŞ → ESNEK.** Mentör en azından bir **ZAMAN ARALIĞI** (ör. "hafta içi akşamları") + **GÖRÜŞME TÜRÜ** (online / yüz yüze) yazar; menti kendi zamanını **bu koşullara göre önerir**, TALEP OLUŞUR. Backend `fitsAvailability` bu hâlde koşula göre çalışır (blok yoksa daima-red DEĞİL).
+
+**③ MEŞGUL ("tatil modu") → listede SOLUK/şeffaf görünür; YALNIZ MESAJ; randevu YOK.** (KARAR-32 revizyonuyla aynı davranış.) Backend `fitsAvailability` hard-reject KALIR.
+
+**④ NE BLOK NE KOŞUL → yalnız mesaj + sistem mentörü DÜRTER.** Belli süre sonra hatırlatma, daha sonra **kurum yöneticisine** bildirim.
+  ⏱️ **Makul varsayılan süreler (ajan belirledi, PO değiştirebilir):** menti talebinden **3 gün** sonra mentöre 1. hatırlatma → **7 gün** sonra 2. hatırlatma → **10 gün** sonra kurum yöneticisine eskalasyon bildirimi. **Gerekçe:** 3 gün = bir iş-günü tamponu bırakır ama mentiyi süresiz bekletmez; 7 gün = bir hafta hiç dönüş yoksa ısrar; 10 gün = iki iş-haftasına yakın sessizlik yöneticinin devreye girmesi için makul eşik. (Bu sayılar müsaitlik-hatırlatma işinin Not'una da yazılacak — bkz. Bölüm 5.)
+
+**ZAMAN ÖNERİSİ MESAJI:** normal mesaj kanalından gider ama **YAPILANDIRILMIŞ** — menti NEDEN görüşmek istediğini anlatır + bir ZAMAN talep eder; mentör bunu sıradan mesajdan ayırt edebilir (② ve ④'te kullanılır).
+
+⚠️ **KARAR-1** (mentör slot açar; format + süre slota) ile **AYNI VERİ AİLESİ** → **TEK migration'da birleşir, ayrı migration AÇMA.** Mentör koşul alanları (zaman aralığı + görüşme türü) da bu birleşik migration'a girer.
