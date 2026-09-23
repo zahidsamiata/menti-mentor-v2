@@ -49,6 +49,8 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
       "TEK BAKISTA" baslikli bolum adina ragmen GUNCEL DEGIL. Yalniz EN USTTEKI tarihli bolumu oku.
     · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
     · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
+    · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
+      gerekirse ac. Rutin turda ana dosyalar (00-KUYRUK · 01-KARARLAR) yeter.
 
 02-ILERLEME.md'ye tur baslangic satiri yaz: tur adi · baslangic saati · kalan 🟢 is sayisi.
 
