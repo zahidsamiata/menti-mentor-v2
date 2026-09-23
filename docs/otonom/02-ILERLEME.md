@@ -4,6 +4,43 @@
 
 ---
 
+## ⭐ TUR KAYIT — BİRLEŞİK TUR: MERGE → ARŞİVLEME → 🟡 ÇÖZÜMÜ → KARARLAR → YENİ İŞLER (2026-09-23)
+
+> **Mod:** 🟥 BYPASS — düzenleme/kayıt turu (kuyruk İŞİ YAPILMADI). Doğrudan `main`'e çalışıldı (prompt tasarımı: checkout main → merge → düzenle).
+> **Kod DEĞİŞMEDİ · DB/migration/seed YOK · #110'a DOKUNULMADI · yasak bölge (server.ts) DOKUNULMADI · hiçbir şey SİLİNMEDİ** (tek istisna A.3 gelen kutusu — o da diskte yoktu).
+> ⚠️ Bu tur main'e commit+push edildi (PR yok, prompt bu turu main-tabanlı tasarladı). PO sonra `/goal` + OTONOM-PROMPT gönderecek.
+
+**A — MERGE VE TEMİZLİK:**
+- **A.1** `otonom/kayit-analiz-turu-20260923` (4 CS commit'i, PR #261'den SONRA eklenenler) **normal merge** (squash DEĞİL) ile main'e alındı. ✅ **ZORUNLU KONTROL GEÇTİ:** `docs/raporlar/kesif/konu-bilanco-denetimi-2026-09-23.md` main'de VAR (35.107 bayt). CS raporu main'de: **EVET.**
+- **A.2** Eski dallar KAPATILDI (içerik main'de doğrulandı): `W-operasyonel-hazirlik` (report 2101 satır ✓) · `X-uctan-uca-kurum-yolculugu` (316 satır ✓). İkisi de remote'tan silindi.
+- **A.3** `docs/gelen/` bu çalışma kopyasında **YOK** (diskte mevcut değil, .gitignore'da izlenmiyor) → silinecek dosya yok; kişisel veri nedeniyle kalan YOK; `.gitignore` "docs/gelen/" satırı korundu.
+
+**B — ⭐ ARŞİVLEME (bağlam kök nedeni):**
+- **00-KUYRUK.md:** ÖNCE 566 satır / 205.104 krk → SONRA ana **511 satır / 164.354 krk** (%20 küçüldü) + arşiv 127 satır / 43.946 krk. **DENETİM ✓:** ana+arşiv = 638 satır / 208.300 krk ≥ önceki (566 / 205.104). **66 BITTI satır** taşındı; her aşamaya "n iş BITTI → arşiv" özeti.
+- **01-KARARLAR.md:** ÖNCE 1620 satır / 212.317 krk → SONRA ana **1224 satır / 162.693 krk** (%23 küçüldü) + arşiv 402 satır / 51.000 krk. **DENETİM ✓:** ana+arşiv = 1626 / 213.693 ≥ önceki (1620 / 212.317). **16 cevaplanmış kart** taşındı (D'de +3 daha = 19); indeks satırları ana dosyada + "📦 arşiv" pointer.
+- Arşiv başlıklarına "📸 ARŞİV, yeni kayıt eklenmez" notu; OTONOM-PROMPT'a "arşivi okuma" satırı.
+
+**C — 🟡 KAPI ÇÖZÜMÜ (PO onaylı):**
+- **C.1 yeniden ayıkla:** 104 🟡 → **2 🟢** (YN-09, YN-14 — salt belge hijyeni, üç istisnaya girmiyor) → **102 🟡 kaldı.** 🔴 değişmedi (konservatif; belirsizde 🟡 bırakıldı).
+- **C.2 aileye topla:** 7 aile + belirsiz — **Y-A 16 · Y-B 21 · Y-C 22 · Y-D 3 · Y-E 7 · Y-F 5 · Y-G 20 · Y-? 8 = 102.** Her satır Not'una "aile: Y-x"; "🟡 AİLE HARİTASI" bloğu eklendi. Ailesiz (Y-?) 8: K-14 · F-04 · GV-03 · P-15 · U-01 · AN-06 · AN-18 · AN-19.
+- **C.3 OTONOM-PROMPT iki ek:** (a) KANIT ZORUNLULUĞU → doğrulama listesine · (b) AİLE PR AKIŞI → sıraya.
+
+**D — PO'NUN VERDİĞİ 3 KARAR (strateji katmanı karar oturumu):**
+- **KARAR-69 (ÇIKIŞ tanımı) → A+B:** ÇIKIŞ = uçtan uca çalışır + ilk gerçek dernek; blokeri = "ilk kurum + KVKK tabanı". (a) ölçek hukuku ERTELENİR · (b) ilk-kullanıcı KVKK KALIR · (c) kriz = güvenlik/ayrı karar. **Çıkış blokeri gözden geçirme: 3 aday etiket KESİNLEŞTİ** (AN-03 · AN-30 · PS-02); confirmed T1/T2/T3'ler KALDI (hiçbiri saf (a)-kovası değil, kuyruktan çıkan blokeri YOK). Tanım bölümüne KARAR-69 notu eklendi.
+- **KARAR-70 → C sonra B + sistem-içi otomatik soru** (AN-32 + AN-52).
+- **KARAR-66 → B:** "akıllı eşleştirme" iddiası geri çekilir → "YÖNLENDİRME". AN-20 kapısı **🔴→🟡.**
+- Üç kart indekste ✅ + arşive taşındı (main 1225→1178, arşiv 403→450; toplam 1628=1628 ✓).
+
+**E — YENİ KUYRUK İŞLERİ:** **8 satır eklendi** (AN-47..54, hepsi kanıt+neden, mükerrer değil): kalite görünümü keşfi/içerik/birleştirme (AN-47/48/49) · eşleştirme→yönlendirme metin+belge (AN-50/51) · otomatik geri bildirim soruları (AN-52) · G-kart durum doğrulaması ~134 kalem (AN-53) · gerekçesiz alan taraması (AN-54). **Açılan kart: KARAR-76** (`Tenant.verifiedBy` — silme protokolü boşluğu; AN-08 buna bağlandı).
+
+**KUYRUK SON DAĞILIMI (206 aktif iş satırı; BITTI'ler arşivde):** 🟢 **82** · 🟡 **104** · 🔴 **18** · ❓ **2**. (🔴 19→18: yalnız AN-20/D.4 değişimi; başka 🔴 değişimi yok. E.5a KARAR-76 kart olarak açıldı, kuyruk 🔴 gate'i eklemedi.)
+
+**Kanıt disiplini:** her iddia dosya:satır · "sanırım" kullanılmadı · mükerrer açmadan önce ARANDI (KN-14→YN-02, kalan uzun satırlar→YN-09, E işleri PS-04/F-31/AN-08 ile çapraz) · hiçbir şey silinmedi (üstü çizili + not) · arşiv taşımalarında satır VE karakter denetimi yapıldı ve TUTTU · A.1 squash-yapılmadı (CS raporu korundu).
+
+**Commit'ler (6):** A (merge) · B (arşivleme) · C (🟡 aile) · D (3 karar) · E (yeni işler) · F (bu kapanış).
+
+---
+
 ## ⭐ TUR KAYIT — CS BİLANÇO DENETİMİ RAPORU İŞLENDİ + 00-KARAR-TAKIP İKİ EKSİK (2026-09-23)
 
 > **Mod:** 🟥 BYPASS — KISA/KAYIT turu (yalnız kayıt; kuyruk işi YAPILMADI). Dal: `otonom/kayit-analiz-turu-20260923`.
