@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SiteFooter } from '@/components/molecules/SiteFooter';
 
 export const metadata: Metadata = {
   title: 'KVKK Aydınlatma Metni — MentiMentor',
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
 
 export default function KvkkPage() {
   return (
+    <>
     <main className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-3xl mx-auto space-y-8">
         <header className="space-y-2">
@@ -113,5 +115,7 @@ export default function KvkkPage() {
         </section>
       </div>
     </main>
+    <SiteFooter />
+    </>
   );
 }
