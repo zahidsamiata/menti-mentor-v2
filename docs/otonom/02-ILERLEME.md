@@ -4,6 +4,36 @@
 
 ---
 
+## ⭐ TUR KAYIT — ANALİZ TURU BULGULARI DOSYAYA İŞLENDİ (2026-09-23)
+
+> **Mod:** 🟥 BYPASS — KAYIT turu (yalnız kayıt, kuyruk işi YAPILMADI). Dal: `otonom/kayit-analiz-turu-20260923`.
+> **Kod DEĞİŞMEDİ · DB/migration/seed YOK · hiçbir şey SİLİNMEDİ · #110'a DOKUNULMADI · yasak bölge (server.ts) DOKUNULMADI.**
+> ⚠️ Bu tur PR açar, **merge PO'nun tek tıkı** — sonra PO `/goal` + OTONOM-PROMPT gönderecek.
+
+**Bölüm 0 — Temizlik:** 2 takılı arka plan bash (PID 16152 + 17724, ~4 saat, i02test sonsuz döngüsü) SONLANDIRILDI; bekledikleri `/tmp/i02test.txt` hiç yazılmamıştı (I-02 vi.hoisted ile çözülmüş, nöbetçi unutulmuş). Başka shell'e dokunulmadı. Çalışma ağacı temizdi.
+
+**Bölüm 1 — Gelen kutusu (`docs/gelen/`, .gitignore'da):** 13 dosya tarandı → **13'ü de güvenle silinebilir** (özleri izlenen belge/kodda ZATEN kayıtlı: `internalNote` canlı `schema.prisma:1158`, içerik `docs/raporlar/icerik/sertifika-oturum*` altında arşivli, kararlar `00-KARAR-TAKIP` md.1'de). **Kayıtlanmamış hiçbir şey ÇIKMADI. PII YOK.** Silme PO işi (03-PO #28). Envanter: `docs/raporlar/kesif/gelen-kutusu-envanteri-2026-09-23.md`.
+
+**Bölüm 2 — Merge:** `CR-persona-panel-gelisimi` → **PR #258 merge** (CI yeşil, tek dosya 341 satır). `CQ-analiz-ozeti` **zaten merge edilmişti** (PR #260, `00-ANALIZ-TURU-OZETI` main'de). Açık PR yalnız #110 (dokunulmadı).
+
+**Bölüm 3 — 3 PO kararı yazıldı** (`01-KARARLAR.md`):
+- **KARAR-53** (booking↔müsaitlik) → ÖZEL, mentörün 4 hâli (blok=katı+takvim · koşul=esnek · meşgul=soluk/mesaj · boş=dürt+eskalasyon 3/7/10 gün); KARAR-1 ile TEK migration.
+- **KARAR-32** → REVİZYON (eski "A" üstü çizildi): havuzdan ÇIKMAZ, soluk görünür, yalnız mesaj, `mentorVisibilityEnabled` bağlanır.
+- **KARAR-34** → ÖZEL, topluluk lideri modeli (lider onaylanır/veri sorumlusu) + kayıt ekranı zorunlu/isteğe-bağlı + SORU2→B anonim toplu.
+- Kilidi açılan kuyruk satırı: **K-05** (gate 🔴→🟡) · Y-15 · U-19 notları güncellendi.
+
+**Bölüm 4 — 18 yeni karar kartı** (KARAR-54..71, CEVAP boş) + **4 mevcut karta EK bilgi** (KARAR-31 kriz kanalı · 45 dördüncü ad seti · 46 STK konu kaybı · 48 damgalayan/sevdirme dili). İndekse "ANALİZ TURU KARARLARI" alt-tablosu eklendi. Mükerrer açılmadı.
+
+**Bölüm 5 — AŞAMA AN: 32 iş satırı** (AN-01..AN-32) kuyruğa eklendi, her satır kanıtlı (dosya:satır + kaynak + neden). A11 note-only kurala uyuldu (yeni satır açılmadı). Kapı dağılımı (AN): **🟢=11 · 🟡=14 · 🔴=6 · ❓=1**. ÇIKIŞ BLOKERİ etiketleri "KARAR-69 (çıkış tanımı) bekliyor" notuyla aday.
+
+**Bölüm 6 — PO işleri + paketler** (`03-PO-ELLE-ISLER.md`): Avukat A7 güncellendi (topluluk veri sorumlusu somut) + A9/A10 YENİ (anonim toplu veri · kriz bildirimi). **UZMAN PAKETİ YENİ:** (a) psikometri G-1..G-6, (b) ruh sağlığı RS-1..RS-3. PO işleri #27 (gerçek kullanıcı görüşmesi) · #28 (gelen/ temizliği) · #29 (salt-okuma DB sayımları + deploy topolojisi).
+
+**Kuyruk son dağılımı (246 satır, mevcut/en-sağ kapıya göre):** 🟢=129 · 🟡=100 · 🔴=16 · ❓=1 · BEKLIYOR=184. (🟢'lerin bir kısmı BITTI/CANLIDA satırlar.)
+
+**PR:** `otonom/kayit-analiz-turu-20260923` (7 commit). ⛔ Kuyruk işi YAPILMADI — PO merge edip `/goal` gönderecek.
+
+---
+
 ## ⭐⭐ TUR I+Y (TERMINAL) — AŞAMA I + ÇIKIŞ BLOKERİ 🟢 İŞLER (2026-09-23)
 
 > **Mod:** 🟥 BYPASS — terminal. Otonom tur, DURMAMA KURALI aktif. Hedef: kuyrukta 🟢 BEKLIYOR bırakmamak (çok-oturumluk; bu tur ilk parti).

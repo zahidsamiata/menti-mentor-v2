@@ -48,13 +48,13 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | KARAR-29 | Öğrenme yolculuğu diğer şık açıklamaları gösterilsin mi | 1 (K-06) | ✅ **CEVAPLANDI (2026-09-21): A** |
 | KARAR-0 | Merge politikası | — | ✅ CEVAPLANDI |
 | KARAR-18 | PO-manuel işler listesi (onay değil) | — | — (hatırlatma) |
-| **KARAR-53** | **Menti müsait olmayan saati önerebilsin mi** (booking ↔ müsaitlik çelişkisi) | **1** (K-05) ⛔ çıkış blokeri | ⬜ boş · ⭐ FE↔BE çelişkisi = GERÇEK BUG |
+| **KARAR-53** | **Menti müsait olmayan saati önerebilsin mi** (booking ↔ müsaitlik çelişkisi) | **1** (K-05) ⛔ çıkış blokeri | ✅ **CEVAPLANDI (2026-09-23): ÖZEL — mentörün 4 hâli** (blok=kat+takvim · koşul=esnek · meşgul=soluk/mesaj · boş=dürt+eskalasyon); KARAR-1 ile TEK migration |
 | **KARAR-35** | **Canlı DB'ye salt-okuma izni** | **5+** (md.30·33·118, S10, Y6) | ⬜ boş · ⭐ BB turu · en çok iş açan yeni kart |
 | **KARAR-36** | **Yarım 3 teknik kalem** (`answeredFollowup` · ikiz alan · 2 yedek tablo) | **4** (Y-18, D3, S26, S37) | ⬜ boş · ⭐ BB turu · ⚠️ `migrate dev` yedek tabloyu silebilir |
-| **KARAR-34** | **Kulüp tipi kurum + kurumlar arası görünürlük** | **3** (md.91·115·116) | ⬜ boş · ⭐ BB turu · avukat notu var |
+| **KARAR-34** | **Kulüp tipi kurum + kurumlar arası görünürlük** | **3** (md.91·115·116) | ✅ **CEVAPLANDI (2026-09-23): ÖZEL — topluluk lideri modeli** (lider onaylanır, üyeler değil; lider=veri sorumlusu) + kayıt ekranı zorunlu/isteğe-bağlı + SORU2→B anonim toplu; ⛔ AVUKAT |
 | **KARAR-30** | **Senaryo isimleri: seed'den önce mi sonra mı** | **2** (I-09, K-16/K-18 sırası) | ⬜ boş · ⭐ BB turu · ⚠️ yanlış sıra = içerik iki kez canlıya yazılır |
 | **KARAR-31** | **Kriz bildirimi (kendine zarar) + yaş sınırı** | **2** (I-18, G1-01) | ⬜ boş · ⭐ BB turu · ⛔ AVUKAT ön koşulu, öneri YOK |
-| **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ✅ **CEVAPLANDI (2026-09-21): A** |
+| **KARAR-32** | **Mentör kendini havuzdan çekebilsin mi** | **2** (Y-15, `mentorVisibilityEnabled`) | ✅ **CEVAPLANDI (2026-09-23 REVİZYON): havuzdan ÇIKMAZ — soluk görünür, yalnız mesaj, randevu almaz** (KARAR-53 ③); ~~2026-09-21: A~~ |
 | **KARAR-33** | **Kurumdan üye çıkarma + red tipi** | **2** (Y-14/md.36, md.35) | ✅ **CEVAPLANDI (2026-09-21): B — dondur, sebep seç, 30 gün sonra psikometri sil** |
 | **KARAR-37** | **madde 103 — kart mı özet mi kazanır** | 1 (md.103) | ⬜ boş · ⭐ BB turu · G1-23 vakasının tekrarı riski |
 
@@ -77,6 +77,29 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-51** | **4 "yaşayan ama ölü" belge dondurulsun mu** | **2** (YN-06 + 🔄 sayımı) | ⬜ boş · ⭐ yönetişim konseyi |
 | **KARAR-50** | **Kuralların "geçersizleşme koşulu" zorunlu olsun mu** | **4** (YN-04, YN-05 + 2 takip) | ⬜ boş · ⭐ yönetişim konseyi · ⚠️ "KURAL 17" diye bir kural HİÇ YAZILMADI |
 | **KARAR-52** | **Taşınan KURAL 8 mükerreri: hangi gövde kalsın** | **1** (YN-02) | ⬜ boş · ⭐ yönetişim konseyi · ⚠️ BU TURDA DOĞDU (CLAUDE.md bölmesi) |
+
+> ⭐ **ANALİZ TURU KARARLARI (2026-09-23) — KARAR-54…71.** Kaynak: `00-ANALIZ-TURU-OZETI` · `icerik-tam-okuma` · `icerik-mutabakati` · `icerik-kalitesi` · `persona-panel-gelisimi` (hepsi `docs/raporlar/kesif/`). "Kaç işi açar" = rapor tahmini.
+
+| # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
+|---|---|:---:|---|
+| **KARAR-54** | **Mentör/menti kart havuzu 5 tasarım kararı** | **5+** (OB-01..05 · `mentor-karti-rakip-analizi:87-91`) | ⬜ boş · ⭐ analiz turu · en yüksek öncelik; 5 alt-soru, öneri YOK |
+| **KARAR-55** | **Sertifikada geri bildirim ne zaman gösterilsin** | **2** (TO §8.2 · TAS:369-371) | ⬜ boş · ⭐ analiz turu · öneri B (sonda) |
+| **KARAR-56** | **Menti aynı hafta birden fazla mentöre talep** | **3** (`meetingController.ts:79-84`) | ⬜ boş · ⭐ analiz turu · öneri B (yalnız onaylananlar) |
+| **KARAR-57** | **Kullanıcının mizaç sonucunu hangi test belirlesin** | **4** (TO §0-2) | ⬜ boş · ⭐ analiz turu · öneri A (32 soru esas) |
+| **KARAR-58** | **Eski DISC ↔ yeni Big Five geçiş dönemi** | **2+** (IK:223 · TO Y-23) | ⬜ boş · ⭐ analiz turu · MIGRATION/GERİ DÖNÜLMEZ, öneri YOK; yedek zorunlu |
+| **KARAR-59** | **Kurgu/persona kişi adları yasağa dahil mi** | **2** (IK:229 · PP:165,247) | ⬜ boş · ⭐ analiz turu · KURAL/KVKK, öneri YOK |
+| **KARAR-60** | **Kullanıcı kişilik boyut yüzdesini görür mü** | **1** (TO Z-15,Y-19) | ⬜ boş · ⭐ analiz turu · öneri A (yüzde gizli) |
+| **KARAR-61** | **Yeni formül arketip motoruyla aynı anda mı açılsın** | **2** (MUT §4 · `scoring.ts:89-90`) | ⬜ boş · ⭐ analiz turu · öneri B (iki adım) |
+| **KARAR-62** | **İlk ölçüm: herkes aynı mı, adaptif mi** | **2** (MUT §4 · TAS:159-163) | ⬜ boş · ⭐ analiz turu · öneri C; cross-ref KARAR-57 |
+| **KARAR-63** | **Arketip eşiği 45/55/60 belgelensin mi kaldırılsın mı** | **1** (MUT §4 · `scoring.config.ts:31`) | ⬜ boş · ⭐ analiz turu · öneri A (P3) |
+| **KARAR-64** | **"Mizaç" mı "karakter" mi "kişilik" mi** | **1** (MUT §4-5 · `onboardingController.ts:492`) | ⬜ boş · ⭐ analiz turu · öneri C (kişilik) |
+| **KARAR-65** | **"D mentör + S menti" yasağı menti tarafında da mı** | **2** (TO §8.2 · `matching.ts:200-216`) | ⬜ boş · ⭐ analiz turu · öneri B; KARAR-61 ile birlikte |
+| **KARAR-66** | **"Akıllı eşleştirme" iddiası — ölç mü geri çek mi** | **2** (PP:248 C2) | ⬜ boş · ⭐ analiz turu · öneri A uzun vade / B ilk kuruma kadar |
+| **KARAR-67** | **Yönetici drill-down serbest-metin nota inmeli mi** | **1** (PP:271 C1 · KVKK) | ⬜ boş · ⭐ analiz turu · öneri A (aggregate) |
+| **KARAR-68** | **Persona/panel belgeleri nasıl gelişmeli A/B/C** | **2** (PP §7 E · §5.1) | ⬜ boş · ⭐ analiz turu · BELGE POLİTİKASI · öneri tetikleyicili B |
+| **KARAR-69** | **"ÇIKIŞ" tanımı ne** | **0** (tüm çıkış-blokeri etiketlerini geçerli kılar) | ⬜ boş · ⭐ analiz turu · METODOLOJİ · öneri B tanım + C ön koşul |
+| **KARAR-70** | **Gerçek kullanıcı görüşmesi: ne zaman, kaç kişi** | **1** (görüşme kılavuzu · PP:334,337) | ⬜ boş · ⭐ analiz turu · SÜREÇ · öneri A (3-5, erken) |
+| **KARAR-71** | **Kırılgan kullanıcıda tutundurma etiğinin sınırı** | **1+** (PP:237 C3 · prompt) | ⬜ boş · ⭐ analiz turu · ETİK/UZMAN, öneri YOK |
 
 ---
 
@@ -686,6 +709,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** Yok — **bu senin ürün kararın, önerime güvenme.** Avukat görüşü alınmadan hiçbiri seçilmemeli.
 ⚠️ **BAĞLI SORU (aynı kart, avukata TEK soru olarak gitmeli):** Bu akış 18 yaş altı menti varsayıyorsa **`G1-01` çöker** — bugün *"18+ beyanı yeterli"* deniyor; gerçek yaş ve veli onayı gerekir.
 **Cevap vermezsen:** **I-18** kuyrukta bekler; sertifika bir davranışı öğretip karşılığını sunmamaya devam eder.
+**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — persona R7 / kriz-kendine zarar KANALI):** Menti bir kriz/kendine zarar ifadesi kullandığında sistem BUGÜN hiçbir şey yapmıyor: hiçbir kanal yok, 22 terimlik iki-dilli tarama → 0 sonuç; kriz sertifika senaryolarında (`CERT_T10_A/B`) sınanıyor ama uygulamada karşılığı yok; mentör terapist değil (`persona-panel-gelisimi-2026-09-23.md:259-269` · `konsey-icerik:267-271`). Kırılgan genç kitle hedeflenirken en savunmasız kullanıcı korumasız. ⚠️ Bu EK KARAR-31 kapsamına bir **kanal seçeneği** olarak girer AMA gerçek çözüm **ARAŞTIRMA + RUH SAĞLIĞI UZMANI + AVUKAT** görüşü gerektirir (pasif 112/183 yönlendirmesi mi, aktif tespit+eskalasyon mu — KVKK/yetki karmaşası ağır). Uzman = Bölüm 6.5(b), avukat = Bölüm 6.4.
 **CEVAP:**
 
 ---
@@ -702,7 +726,8 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** **A** — çünkü backend ve güvenlik guard'ı zaten hazır; iş yalnız ekran, ve "sessiz mentör" sorununu görünür hâle getirir.
 ⚠️ **Not:** Hangi seçenek seçilirse seçilsin, `mentorVisibilityEnabled` alanının **bağlanacağı mı silineceği mi** aynı cevapta netleşir (silme = ayrı tur + ikinci onay, SİLME PROTOKOLÜ).
 **Cevap vermezsen:** **Y-15** kuyrukta bekler; şemadaki uyuyan alan belirsiz kalır.
-**CEVAP:** A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*
+**CEVAP:** ~~A  *(PO, 2026-09-21, strateji katmanı karar oturumu)*~~
+⚠️ **REVİZYON (PO, 2026-09-23, strateji katmanı karar oturumu):** Mentör havuzdan **ÇIKARILMAZ.** Listede kalır ama **SOLUK / şeffaf** görünür; meşgul olduğu bir bakışta anlaşılır. O hâldeyken **YALNIZ MESAJ** alır, **randevu talebi ALMAZ** (KARAR-53 ③ ile aynı davranış). **Gerekçe:** menti mentörün VAR olduğunu görsün, yalnız şu an müsait olmadığını anlasın — tamamen gizlemek (eski A'nın "kapat" etkisi) mentörü yok sayardı. `mentorVisibilityEnabled` alanı **BAĞLANIR** (silinmez): `true`=normal, `false`=soluk/mesaj-only hâli (KARAR-53 ③).
 
 ---
 
@@ -743,7 +768,21 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
  (2) ⭐ **KVKK ROLÜ:** tüzel kişiliği olmayan toplulukta veri sorumlusu büyük olasılıkla **PLATFORMUN KENDİSİ** olur — KVKK yükü artar. AVUKAT PAKETİNE.
  (3) **SATIŞ:** topluluk sözleşme imzalamayabilir — fiyatlama/sorumluluk farklı.
  Kodda: kulüp modülü backend'i yazılı (7 uç, 2 tablo), ekranı yok (KARAR-9 ertelendi).
-**CEVAP:**
+**CEVAP:** **ÖZEL MODEL (PO, 2026-09-23, strateji katmanı karar oturumu).**
+
+**SORU 1 · TOPLULUK LİDERİ MODELİ:** Lider bir **TALEP** oluşturur → PO **yalnız LİDERİ** onaylar (üyeler PO onayına **DÜŞMEZ**) → lider kendi ekosistemini açar, üyelerini **KENDİSİ davet eder** (topluluk = yöneticisi bir kişi olan kurum, mevcut kurum akışıyla aynı iskelet).
+  **KVKK:** VERİ SORUMLUSU = **topluluk lideri**, platform = **VERİ İŞLEYEN.** *(⚠️ Bu, KARAR-34 kartındaki PO SORUSU (2) ile ilişkili ama ayrışıyor: lider tüzel/gerçek kişi olarak sorumluluğu üstlenirse platform işleyen kalır; lider yoksa/üstlenmezse veri sorumlusu platform olur — bu ikinci hâl AVUKAT PAKETİNE, bkz. Bölüm 6.4.)*
+  **KAYIT EKRANI** — PO kuralı *"alternatifi olmayanı seçenek gibi sunma"*:
+    **ZORUNLU** (her biri AYRI işaretlenir; biri eksikse GİRİŞ YOK):
+      · DISC ile eşleştirme · verinin yurt dışında saklanması (bilgilendirme + kabul) · veri işleme koşulları · anonim verilerin eşleştirmeyi iyileştirmede kullanılması
+    **İSTEĞE BAĞLI** (hayır demek girişi ENGELLEMEZ):
+      · diğer kurum/topluluklarla anonim toplu veri paylaşımı · derin psikometri (OCEAN)
+  **AYNI EKRAN KURUM YÖNETİCİLERİ için de uygulanır** (tek akış).
+  ⛔ **AVUKAT ONAYINA BAĞLI** — metin avukat onayı olmadan yayınlanmaz.
+
+**SORU 2 → B:** İzin verilirse **yalnız ANONİM TOPLU** veri paylaşılır; k-anonimlik altyapısı **hazır** (`backend/src/services/mask.ts` · `applyKAnonymity`). Kurumlar-arası **açık/kişi-düzeyi** görünürlük YOK.
+
+⚠️ Not: kartın gövdesindeki eski öneri (B) bu özel modelle **detaylandırıldı**; çelişki yok — "kulüp ancak üniversite onayıyla" yerine **"topluluk ancak lider onayıyla"** genelleştirildi (üniversite kulübü bu modelin özel hâli).
 
 ---
 
@@ -957,6 +996,7 @@ yazılması.
 turda kapatmak ucuz.
 **Cevap vermezsen:** I-01 (yaklaşım metinleri), I-15 (arketip kartı), C-?? (ham `M1` kodları) ve madde 139'un
 menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
+**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — dördüncü ad seti + PSI damgasızlığı):** Kodda **DÖRDÜNCÜ** bir arketip ad seti var: kurum kayıt önizlemesi "Lider · İlham Veren · Denge Kurucusu · Analist" gösteriyor ve kurum yöneticisi kayıt sırasında bunu görüyor (`selfServeController.ts:77-82`). Hangi seçenek seçilirse seçilsin bu set de hizalanmalı. Yeni 8 ad "sessiz" değil — TAS 2026-08-28'de PO kararıyla seçildi; kartın "eski karar belgesi" dediği PSI ise HİÇ damgalanmamış. 8 yeni adın M1…m4 kodlarına eşlemesi yok ama TAS her ada bir Big Five profili yazmış (`TAS:71-107,84-103`), eşleme buradan türetilebilir. Kanıt: `icerik-mutabakati-2026-09-23.md:250` · `devir/08-oturum-tezi-2026-08-28.md:32`.
 **CEVAP:**
 
 ---
@@ -997,6 +1037,7 @@ olması acilse ama toplu değişimi istemiyorsan B; ama karışık sürüm yöne
 **Benim önerim:** A — ama **KARAR-3 ve KARAR-4 cevaplanmadan başlanamaz** (kriz senaryolarının 8 şıkkı onlara
 bağlı) ve iş ikiye bölünmeli: "içerik taşıma PR'ı" ve "seed çalıştırma turu".
 **Cevap vermezsen:** P-99 ve K-16 açık kalır; sertifika ekranı bugünkü hâliyle kalır.
+**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — A seçilirse STK-özel konu kaybı + ad tutarsızlığı):** A seçilirse seed'deki iki STK-özel sertifika konusu (`gonullu-tukenmisligi`, `okul-gonulluluk-dengesi`) canlıdan kalkar; "harmanla" kararının "3 konu geri gelir" gerekçesi okul-gönüllülük için gerçekleşmedi, "mentinin hayat önceliklerine saygı" yetkinliği açıkta kalır. Konu adları üç kaynakta farklı; A seçilirse sonuç ekranındaki (I-03) konu adları da değişir. Seed'de "mentorluk/mentörlük" karışık; A seçilirse kendiliğinden düzelir. Kanıt: `O2:243-247,289-291` · `O3:442-445,498-502` · `seed-certification.ts:87,141` · `icerik-mutabakati-2026-09-23.md:251`.
 **CEVAP:**
 
 ---
@@ -1075,6 +1116,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 önemliyse A. C yalnızca bu çelişkiyi bilinçli kabul ediyorsan savunulabilir.
 **Benim önerim:** A — yüzde ve "eşleştirileceksin" ürünün **tutamadığı** iki vaat; kalan kısım zaten güçlü.
 **Cevap vermezsen:** C1-1…C1-6 (6 metin) olduğu gibi kalır; eşleşme kartındaki boş gerekçe de sürer.
+**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — K-F damgalayan dil + persona C3 sevdirme dili):** Canlı arketip kartı kimlik dili + tutulamayan vaat kullanıyor: "Sen bir Öncüsün!" (`ResultStep.tsx:38` · `DiscRecallCard.tsx:56` · `onboardingController.ts:67`) ve "En İyi Eş" / "…eşleştirileceksin" (`ResultStep.tsx:71,97-100`) — belge ilkesi (`arketip-…:149` "eğilim, kimlik değil") ve ürünün kendi davet metniyle (`admin/invite/page.tsx:22`) çelişiyor. Persona konseyi ayrıca "sevdirme dili ne kadar kesin/iddialı olmalı" (§7 C3, `persona-panel-gelisimi-2026-09-23.md:235-237`) sorusunu soruyor: metodoloji "kişilik tanısı değildir" derken ekran kesin kimlik veriyor. **En somut, araştırma-beklemez düzeltme:** "En İyi Eş" + "eşleştirileceksin" tutulamayan gelecek vaadinin kaldırılması.
 **CEVAP:**
 
 ---
@@ -1199,4 +1241,314 @@ Yani FE "gönder" diyor, backend "olmaz" diyor. Kanıt: 409 mesajı Türkçe ve 
 
 **Cevap vermezsen:** K-05 (çıkış blokeri) yapılamaz; müsaitlik girmemiş mentörler sessizce hiç randevu talebi alamamaya devam eder (ana akış kırık, kimse fark etmez = T3).
 
+**CEVAP:** **ÖZEL TASARIM — A/B/C'nin hiçbiri değil (PO, 2026-09-23, strateji katmanı karar oturumu).**
+Mentörün **DÖRT HÂLİ** var; her hâlde menti farklı şey yapar:
+
+**① MÜSAİTLİK BLOĞU GİRMİŞ → KATI.** Menti **takvimden yalnız seçili saatlerden** randevu alır; blok dışı saat **SEÇİLEMEZ**.
+  ⭐ **TAKVİM GÖRÜNÜMÜ:** menti mentörün müsait saatlerini takvimde **SEÇİLİ ALANLAR** olarak görür (bugünkü boş tarih-saat kutusu yerine hangi saatlerin açık olduğu GÖRÜNÜR). Backend `fitsAvailability` hard-reject **KALIR** (güvenlik ağı).
+
+**② BLOK YOK ama KOŞUL GİRMİŞ → ESNEK.** Mentör en azından bir **ZAMAN ARALIĞI** (ör. "hafta içi akşamları") + **GÖRÜŞME TÜRÜ** (online / yüz yüze) yazar; menti kendi zamanını **bu koşullara göre önerir**, TALEP OLUŞUR. Backend `fitsAvailability` bu hâlde koşula göre çalışır (blok yoksa daima-red DEĞİL).
+
+**③ MEŞGUL ("tatil modu") → listede SOLUK/şeffaf görünür; YALNIZ MESAJ; randevu YOK.** (KARAR-32 revizyonuyla aynı davranış.) Backend `fitsAvailability` hard-reject KALIR.
+
+**④ NE BLOK NE KOŞUL → yalnız mesaj + sistem mentörü DÜRTER.** Belli süre sonra hatırlatma, daha sonra **kurum yöneticisine** bildirim.
+  ⏱️ **Makul varsayılan süreler (ajan belirledi, PO değiştirebilir):** menti talebinden **3 gün** sonra mentöre 1. hatırlatma → **7 gün** sonra 2. hatırlatma → **10 gün** sonra kurum yöneticisine eskalasyon bildirimi. **Gerekçe:** 3 gün = bir iş-günü tamponu bırakır ama mentiyi süresiz bekletmez; 7 gün = bir hafta hiç dönüş yoksa ısrar; 10 gün = iki iş-haftasına yakın sessizlik yöneticinin devreye girmesi için makul eşik. (Bu sayılar müsaitlik-hatırlatma işinin Not'una da yazılacak — bkz. Bölüm 5.)
+
+**ZAMAN ÖNERİSİ MESAJI:** normal mesaj kanalından gider ama **YAPILANDIRILMIŞ** — menti NEDEN görüşmek istediğini anlatır + bir ZAMAN talep eder; mentör bunu sıradan mesajdan ayırt edebilir (② ve ④'te kullanılır).
+
+⚠️ **KARAR-1** (mentör slot açar; format + süre slota) ile **AYNI VERİ AİLESİ** → **TEK migration'da birleşir, ayrı migration AÇMA.** Mentör koşul alanları (zaman aralığı + görüşme türü) da bu birleşik migration'a girer.
+
+---
+
+### KARAR-54 · Mentör/menti kart havuzu 5 tasarım kararı  (5+ işi açar)  [ÜRÜN KARARI · TASARIM · EN YÜKSEK ÖNCELİK]
+**Şu an ne var:** Backend rozet/sektör etiketi/uyum% alanlarını üretiyor ama kart havuzu ekranı henüz açılmadı; bu beş tasarım kararı verilmeden frontend bağlanamaz. Kanıt: `mentor-karti-rakip-analizi:87-91` · OB-01..05 (`00-ANALIZ-TURU-OZETI-2026-09-23.md:86`).
+**Sorun ne:** Kullanıcı mentör/menti ararken bir kart havuzu görecek; bu havuzun beş temel biçim kararı (mizaç nasıl gösterilsin, sektör etiketi kaç tane, sayfa başına kaç kart, arama/filtre bu turda mı, menti kartı mentör kartıyla aynı mı) verilmeden ekran çizilemez. Beşi de kullanıcının ne göreceğini belirler, teknik değildir.
+**Neden sana soruyorum:** Beş kalem de "kullanıcı ne görür / neyi yapabilir" kararı; kütüphane/kod değil, ürün biçimi.
+**Seçenekler:** (bu kart KÜMELE — beş alt-soruyu tek tek A/B ile sun)
+
+**54.1 — Mizaç kartta nasıl gösterilsin?**
+· **A — Arketip adı + rozet** (ör. "Öncü" + renkli rozet). Ne kazanırsın: sıcak, oyunsu, tek bakışta. **Ne kaybedersin:** ham boyut bilgisi gizlenir; "damgalayan dil" riski (bkz. KARAR-48). Süre S · geri alınır ✅ · migration yok
+· **B — Kısa ipucu cümlesi** ("iletişimde doğrudan"). Ne kazanırsın: temkinli, etiketlemez. **Ne kaybedersin:** daha sönük, kart kalabalıklaşır. Süre S · geri alınır ✅ · migration yok
+
+**54.2 — Sektör etiketi kaç tane + "+N" katlaması?**
+· **A — En fazla 2 etiket + "+N"** (ör. "Yazılım, Eğitim +3"). Ne kazanırsın: kart temiz. **Ne kaybedersin:** kullanıcı tüm sektörleri kartta göremez, tıklaması gerekir. Süre S · geri alınır ✅ · migration yok
+· **B — En fazla 3 etiket + "+N"**. Ne kazanırsın: daha çok bağlam. **Ne kaybedersin:** dar ekranda kart taşar. Süre S · geri alınır ✅ · migration yok
+
+**54.3 — Sayfa başına kaç kart?**
+· **A — 9 kart (3×3 grid) + sayfalama**. Ne kazanırsın: hızlı yüklenir, net. **Ne kaybedersin:** çok mentör varken çok sayfa gezilir. Süre S · geri alınır ✅ · migration yok
+· **B — 12+ kart, sonsuz kaydırma**. Ne kazanırsın: akıcı gezinme. **Ne kaybedersin:** performans yükü (backend `take:500` + cache, A8), konum kaybı. Süre M · geri alınır ✅ · migration yok
+
+**54.4 — Arama/filtre bu turda mı?**
+· **A — Bu tur yalnız liste, arama/filtre sonraki tur**. Ne kazanırsın: havuz hızlı canlıya çıkar. **Ne kaybedersin:** çok mentörde kullanıcı istediğini bulmakta zorlanır. Süre S · geri alınır ✅ · migration yok
+· **B — Sektör + uyum% filtresi bu tur**. Ne kazanırsın: kullanıcı ilk günden filtreler. **Ne kaybedersin:** havuz işi büyür, gecikir. Süre M · geri alınır ✅ · migration yok
+
+**54.5 — Menti kartı mentör kartıyla aynı mı?**
+· **A — Aynı şablon** (aynı alanlar, aynı düzen). Ne kazanırsın: tek bileşen, bakımı kolay. **Ne kaybedersin:** menti ile mentörün gösterilmesi gereken bilgi farklı olabilir (menti aranan konu, mentör uzmanlık). Süre S · geri alınır ✅ · migration yok
+· **B — İki ayrı şablon**. Ne kazanırsın: her role uygun alan. **Ne kaybedersin:** iki bileşen bakımı, tutarsızlık riski. Süre M · geri alınır ✅ · migration yok
+
+**Karşılaştırma:** Beş kalemin ortak mantığı "hızlı canlıya çıkar + sade" (A tarafı) ile "zengin + esnek" (B tarafı) arasında. Havuzu bir an önce kullanıcının önüne koymak öncelikse çoğunlukla A; ilk izlenimde zenginlik öncelikse B.
+**Benim önerim:** öneri YOK — bu beş alt-soru tamamen ürün/tasarım tercihi; her biri geri alınır ve düşük riskli, PO'nun görsel önceliğine bağlı.
+**Cevap vermezsen:** kart havuzu ekranı (OB-01..05) frontend'e hiç bağlanamaz; backend'in ürettiği rozet/sektör/uyum% kullanıcıya görünmez kalır.
 **CEVAP:**
+
+---
+
+### KARAR-55 · Sertifikada geri bildirim ne zaman gösterilsin?  (2 işi açar)  [ÜRÜN KARARI · SERTİFİKA]
+**Şu an ne var:** Mentör sertifika sınavında her şıkkı seçtiği anda o şıkkın açıklamasını görüyor (neden doğru/yanlış). Kanıt: `certification.service.ts:444-465` · `mentor/certification/page.tsx:102-129`. Sınav sonunda ayrıca "pekiştirilecek konular" listesi çıkıyor (`:187-219`).
+**Sorun ne:** Tasarım belgeleri tam tersini istiyor: "geri bildirim sınav SONUNDA, konu bazlı" (`faz6:360,650` · `menti-yolculugu:204-214`). Anında açıklama, sınavı bir öğrenme turuna çevirir; aynı oturumda B varyantı da geldiği için ikinci soruyu açıklamayı okuyarak geçmek kolaylaşır.
+**Neden sana soruyorum:** Mentörün sınavda ne gördüğü bir ürün kararı; sınavın "ehliyet mi, son tekrar mı" olduğu sorusuna bağlı (`TAS:369-371` "eleme sınavı değil, son tekrar").
+**Seçenekler:**
+· **A — Anında açıklama kalsın (bugünkü hal).** Kullanıcı ne görür: her seçimden sonra neden doğru/yanlış olduğunu. Ne kazanırsın: öğretici, iş yok. **Ne kaybedersin:** sınav ölçmekten çok öğretir; B varyantı "kopya" ile geçilebilir. Süre S · geri alınır ✅ · migration yok
+· **B — Açıklamalar sınav sonunda, konu bazlı (belgelerdeki tasarım).** Kullanıcı ne görür: sınav boyunca yalnız soruları; sonunda konu konu açıklama. Ne kazanırsın: ölçüm temiz. **Ne kaybedersin:** anında öğrenme anı kaybolur; FE sonuç ekranı yeniden yazılır. Süre M · geri alınır ✅ · migration yok
+· **C — Anında yalnız "doğru/yanlış", açıklama sonda.** Kullanıcı ne görür: renk/işaret anında, gerekçe sonda. Ne kazanırsın: ara yol. **Ne kaybedersin:** iki gösterim modu = daha karmaşık kod ve metin. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** Sertifika "son tekrar" ise A savunulabilir; "yetkinlik kanıtı" ise B doğru. C ikisinin arası ama iki mod bakımı getirir.
+**Benim önerim:** B — belgelerdeki üç ayrı karar da bu yönde ve 88 şıklık yeni içerik "sonda, konu bazlı" varsayımıyla yazıldı. Bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** 88 şık taşıma turu (KARAR-46) gösterim biçimini belirsiz bırakarak ilerler; IC-04 aynı ekranda.
+**CEVAP:**
+
+---
+
+### KARAR-56 · Menti aynı hafta birden fazla mentöre görüşme talebi gönderebilsin mi?  (3 işi açar)  [ÜRÜN KARARI]
+**Şu an ne var:** Haftalık görüşme sınırına (varsayılan 2) onay BEKLEYEN talepler de sayılıyor. Menti o hafta 2 talep gönderdiyse 3.'yü gönderemez, sistem hata (409) döner. Kanıt: `meetingController.ts:79-84,184-187`.
+**Sorun ne:** Menti yolculuğu tasarımı "menti istediği kadar başvurur; kim dönerse onunla başlar, sıklık dolduysa diğeri sonraki haftaya kalır" diyor ve bekleme metni "birden fazla başvuru normaldir" yazıyor (`menti-yolculugu:304-310,324-326`). Bugünkü kodla bu metin yanlış olur.
+**Neden sana soruyorum:** Kullanıcının ne yapabileceği (kaç talep) bir ürün kararı; mentörlerin gelen kutusu da etkilenir.
+**Seçenekler:**
+· **A — Bugünkü hal: bekleyen talepler sınıra sayılır.** Kullanıcı ne görür: 2 bekleyen talepten sonra yeni talep gönderemez. Ne kazanırsın: mentör gelen kutusu şişmez. **Ne kaybedersin:** yanıt vermeyen mentör menti'yi bir hafta kilitler; tasarım metni değişmeli. Süre S · geri alınır ✅ · migration yok
+· **B — Yalnız onaylanan görüşmeler sayılır, talep serbest.** Kullanıcı ne görür: istediği kadar talep gönderir; onaylar sınıra ulaşınca kalanlar sonraki haftaya. Ne kazanırsın: tasarımla uyumlu, bekleme ölü zamanı yok. **Ne kaybedersin:** mentörler reddedilecek/eskiyecek talep görür; 3/7 gün zamanlayıcısı (md.154) daha kritik olur. Süre M · geri alınır ✅ · migration yok
+· **C — Bekleyen talep için ayrı, daha yüksek sınır (örn. 3).** Ne kazanırsın: ara yol. **Ne kaybedersin:** iki sayaç = kullanıcıya anlatması zor. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** Mentör tarafı az ve yavaşsa A korur; menti kaybı önemliyse B. C ancak ölçüm verisi varsa anlamlı.
+**Benim önerim:** B — bekleme/ret akışının (md.154/155) tüm metinleri bu varsayımla yazıldı. Bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** I-10 (bekleme zamanlayıcısı), I-16 (ret), I-05 (sıklık gösterimi) metinleri kodla çelişik kalır.
+**CEVAP:**
+
+---
+
+### KARAR-57 · Kullanıcının mizaç sonucunu hangi test belirlesin?  (4 işi açar)  [ÜRÜN KARARI · TEKNİK]
+**Şu an ne var:** Aynı mizaç sonucuna üç ayrı yol yazıyor: (1) kayıt sırasındaki 8 soruluk test (`onboardingController.ts:109-190`), (2) `/disc-test` sayfasındaki 32 soruluk test (`questionService` + `discVectorService`), (3) panodaki "günün sorusu" kutusu (`adaptiveTestEngine`). Üçü farklı formülle hesaplıyor (boş boyut 0.25 ↔ 0.5, güven hesabı farklı, derinleşme soruları farklı açılıyor) ve en son hangisi çalıştıysa sonuç o oluyor. Kanıt: `icerik-tam-okuma-2026-09-23.md` §0-2.
+**Sorun ne:** Kullanıcı panodaki bir soruyu cevaplayınca mizaç tipi (ve eşleşme puanı) başka formülle yeniden hesaplanıp değişebilir. Kullanıcı bunun nedenini göremez.
+**Neden sana soruyorum:** Hangi ölçümün "gerçek" sayıldığı, kullanıcının gördüğü kartı ve eşleşmelerini belirler; yeni senaryo motoru (TAS) gelene kadar hangisinin yaşayacağı ürün kararıdır.
+**Seçenekler:**
+· **A — Tek yol: 32 soruluk test esas, diğer ikisi yalnız ona veri besler (ortak hesap).** Ne kazanırsın: tek formül, tutarlı sonuç. **Ne kaybedersin:** kayıttaki 8 soru ayrı ağırlıkla sayılmaz. Süre M · geri alınır ✅ · migration yok
+· **B — Kayıttaki 8 soru esas, 32 soruluk test ve pano yalnız "güveni artırır".** Ne kazanırsın: herkes aynı başlangıç noktasına sahip. **Ne kaybedersin:** 32 soruluk test anlamını yitirir. Süre M · geri alınır ✅ · migration yok
+· **C — Bugünkü hal sürer, yeni senaryo motoruna kadar dokunulmaz.** Ne kazanırsın: iş yok. **Ne kaybedersin:** sonuç sessizce değişmeye devam eder. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Senaryo motoru yakında gelecekse C geçici olarak kabul edilebilir; uzun sürecekse A.
+**Benim önerim:** A — md.162'nin "ortak buildDiscVector" önerisiyle aynı yön.
+**Cevap vermezsen:** md.162, md.168, md.169, PS-02 bağlanamaz.
+**CEVAP:**
+
+---
+
+### KARAR-58 · Eski DISC ölçümü ↔ yeni Big Five senaryo bankası geçiş dönemi  (2+ işi açar)  [ÜRÜN KARARI · MIGRATION · GERİ DÖNÜLMEZ]
+**Şu an ne var:** Canlıda 8 hardcoded DISC sorusu (`onboardingController.ts:109-190`) + seed'de 32 Likert DISC (`seed.ts:30-184`). Big Five 39 senaryo/117 şık bankası yazılı ama koda hiç geçmemiş; motor da ölü (I-13). Kanıt: `icerik-kalitesi-2026-09-23.md:223`.
+**Sorun ne:** İki ölçüm sistemi çelişiyor (belge "ölçek yok, 3 şık, MOST_LEAST" ↔ kod "1-5 Likert / 4 şık"); banka canlıya çıkarsa eski DISC cevaplı kullanıcıların profili, iki ölçümün bir arada yürüyüp yürümeyeceği, eski `discVector`/`discType` alanlarının akıbeti belirsiz. Kuyrukta bu geçişi kapsayan satır yok (I-13 yalnız ölçek hatası, I-15 yalnız motor bağlama).
+**Neden sana soruyorum:** Kullanıcının ölçüldüğü temel araç değişiyor (DISC→Big Five); geçmiş veri anlamı + göç yolu geri dönülmez, migration içerir.
+**Seçenekler:**
+· **A — Kesme geçiş: banka açılınca herkes yeni ölçümden geçer, eski DISC verisi arşivlenir.** Kullanıcı ne görür: yeni senaryo testi, eski mizaç sonucu sıfırlanır. Ne kazanırsın: tek tutarlı sistem, temiz başlangıç. **Ne kaybedersin:** eski cevaplayanlar yeniden test olur; eski `discVector` verisinin anlamı kaybolur; GERİ DÖNÜLMEZ migration. Süre L · geri alınır ⛔ · migration VAR
+· **B — Paralel geçiş: eski DISC sonucu korunur, yeni banka yalnız yeni kullanıcılarda + isteyende çalışır.** Kullanıcı ne görür: eskiler eski sonucunu, yeniler yeni ölçümü. Ne kazanırsın: kimse veri kaybetmez, kademeli. **Ne kaybedersin:** iki ölçüm sistemi bir süre birlikte yaşar (bakım + tutarsızlık); eşleşme iki farklı temelden hesaplanır. Süre L · geri alınır ✅ (yeni sistem kapatılabilir) · migration VAR (ek alan)
+· **C — Banka bu tur canlıya çıkmaz, karar ertelenir.** Ne kazanırsın: risk yok, iş yok. **Ne kaybedersin:** 39 senaryo/117 şık ölü kalır; tasarım kararı beklemede. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Temiz tek sisteme hızlı geçiş öncelikse ve eski veri kaybı kabul edilebilirse A; hiçbir kullanıcının verisini kaybetmemek öncelikse B; banka henüz olgun değilse C. ⚠️ A ve B canlı veriye geri dönülmez dokunur — migration/seed öncesi yedek ZORUNLU (CLAUDE.md).
+**Benim önerim:** öneri YOK — bu geçmiş veri anlamını değiştiren geri dönülmez bir migration kararı; yalnız PO verir. En azından hangi eski alanın (discVector/discType) korunacağı ayrıca netleşmeli.
+**Cevap vermezsen:** senaryo bankasının koda girişi (I-13, I-15) hangi geçiş yolunu kuracağını bilemez; banka ölü kalır.
+**CEVAP:**
+
+---
+
+### KARAR-59 · Kurgu/persona kişi adları "Kişi Adı Yasağı"na dahil mi?  (2 işi açar)  [ÜRÜN KARARI · KURAL/KVKK]
+**Şu an ne var:** İki ayrı yerde koda/belgeye gömülü kurgu kişi adları var:
+1. **Seed/kod senaryoları:** öğrenme yolculuğu senaryolarında "Zeynep"/"Deniz" gibi adlar koda gömülü (`seed-learning-journey.ts`). Belge isim-değişkeni öngörüyor, kod uygulamamış. Kanıt: `icerik-kalitesi-2026-09-23.md:229-230` (A.4).
+2. **Persona belgeleri:** persona/panel tasarım belgelerinde kurgu kişi adları kullanılmış. Kanıt: `persona-panel-gelisimi-2026-09-23.md:165,247` (A.4).
+**Sorun ne:** CLAUDE.md "Kişi Adı Yasağı" kuralı gerçek kişi adlarını yasaklıyor; ama kurgu/persona adlarının (bir senaryodaki hayali "Zeynep", bir persona belgesindeki temsili kişi) bu yasağa girip girmediği tanımsız. Persona mı, ihlal mi belirsiz.
+**Neden sana soruyorum:** Kurgu adın "kabul edilebilir tasarım öğesi" mi "kural ihlali" mi olduğu bir politika kararı; kullanıcıya görünen içerikte (senaryolar) ve iç belgede (persona) farklı sonuç verebilir.
+**Seçenekler:**
+· **A — Kurgu/persona adları yasağın DIŞINDA (kabul edilebilir kurgu).** Ne kazanırsın: senaryolar ve personalar sıcak, okunur kalır; iş yok. **Ne kaybedersin:** yasağın sınırı bulanıklaşır; ileride gerçek ad kurgu sanılabilir. Süre S · geri alınır ✅ · migration yok
+· **B — Kurgu adlar da nötrleştirilir** (senaryolarda "bir menti", "M." gibi; personalarda "R1/menti"). Ne kazanırsın: tek net kural, ihlal riski sıfır. **Ne kaybedersin:** senaryolar/personalar soğur, okunması zorlaşır; iki yerde metin işi. Süre M · geri alınır ✅ · migration yok
+· **C — Ayrı ayrı: senaryolarda (kullanıcı görür) kalsın, persona belgelerinde (iç) nötrleştirilsin.** Ne kazanırsın: kullanıcı deneyimi sıcak, iç belge kurala uyumlu. **Ne kaybedersin:** iki farklı politika = anlatması ve denetlemesi zor. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** Yasak yalnız gerçek kişiyi korumak içinse A yeterli; kuralın mutlak netliği öncelikse B; kullanıcı sıcaklığı ile iç disiplin ayrı ele alınacaksa C.
+**Benim önerim:** öneri YOK — bu bir kural yorumu + KVKK sınırı kararı; yasağın amacını yalnız PO tanımlayabilir.
+**Cevap vermezsen:** öğrenme yolculuğu senaryolarının (A.4) ad-değişkeni işi ve persona belgelerinin gelişimi (KARAR-68) hangi ad politikasıyla ilerleyeceğini bilemez.
+**CEVAP:**
+
+---
+
+### KARAR-60 · Kullanıcı kişilik boyut yüzdesini görür mü?  (1 işi açar)  [ÜRÜN KARARI]
+**Şu an ne var:** Belgeler çelişiyor: TAS "kullanıcı yüzdeyi görmez" diyor (`TAS:44`), ARK "görebilir" diyor (kaynaksız, `ARK:46`), API ise ham OCEAN boyut değerlerini döndürüyor. Kanıt: `icerik-tam-okuma-2026-09-23.md` Z-15, Y-19.
+**Sorun ne:** Kullanıcının kendi kişilik kartında ham yüzde (ör. "Dışadönüklük %72") görüp görmeyeceği kararsız; API ham veriyi döndürdüğü için frontend'de sızma riski de var. Kullanıcı bir ekranda yüzde görürken diğerinde yalnız arketip görebilir.
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında ne kadar ham veri gördüğü bir ürün + ton kararı; "yüzde soğuk/klinik" hissi tasarımın arketip metaforu seçme gerekçesiyle (`devir/08-oturum-tezi-2026-08-28.md:32`) ilgili.
+**Seçenekler:**
+· **A — Yüzde gösterilmez, yalnız arketip/ipucu (TAS).** Kullanıcı ne görür: "Öncü" gibi bir arketip, sayı yok. Ne kazanırsın: sıcak, damgalamayan, "eğilim" diliyle tutarlı. **Ne kaybedersin:** meraklı kullanıcı ham sonucu göremez; API ham veriyi döndürmeye devam ederse şeffaflık dengesizliği kalır. Süre S · geri alınır ✅ · migration yok
+· **B — Yüzde gösterilir (ARK).** Kullanıcı ne görür: her boyut için sayı. Ne kazanırsın: şeffaf, meraklıyı tatmin eder. **Ne kaybedersin:** klinik/soğuk his; dayanağı zayıf skorun kesin sayı gibi sunulması (KARAR-66 ile çelişir); kırılganda yanlış özdeğer riski. Süre S · geri alınır ✅ · migration yok
+**Karşılaştırma:** Ürünün temkinli metodoloji diliyle tek ses A; şeffaflık ve merak öndeyse B ama sayıyı "kesin ölçüm" gibi göstermenin etik riskini taşır.
+**Benim önerim:** A — KARAR-48/KARAR-64'ün temkinli "eğilim" diliyle en tutarlısı; API ham veri sızmasının da ayrıca kapatılması gerekir.
+**Cevap vermezsen:** kişilik kartı işi hangi veriyi göstereceğini bilemez; API ham OCEAN döndürmeye devam eder.
+**CEVAP:**
+
+---
+
+### KARAR-61 · Eşleşme puanının yeni formülü arketip motoruyla AYNI ANDA mı açılsın?  (2 işi açar)  [ÜRÜN KARARI]
+**Şu an ne var:** Kullanıcının eşleşme kartında gördüğü yüzde bugün iki parçadan hesaplanıyor: alan/sektör benzerliği %60 + DISC mizaç uyumu %40 (`scoring.ts:89-90`). Eşleşmeyi tamamen engelleyen tek kural "D tipi mentör + S tipi menti" ve havuz daralınca gevşiyor (`matching.ts:210`). Ağustos tasarım kararı (`TAS:428,494`) bunu üç parçaya çeviriyor: hedef/değer uyumu %45 + alan %30 + kişilik %25; engelleme de iki kişilik-tabanlı kurala (V1/V2, `TAS:460-462`) dönüşüyor. Yeni formül kodda yok.
+**Sorun ne:** KARAR-10'a "C, aşamalı" cevabı verildi: kişilik motoru üç adımda açılacak, son adımda eski↔yeni sıralama karşılaştırmalı gösterilecek. Ama formül değişikliğinin o adıma dahil olup olmadığı yazılı değil; kuyruk ikisini aynı satırda (F-11) sayıyor. İkisi aynı anda açılırsa farkın ne kadarının motordan, ne kadarının yeni ağırlıklardan geldiği ayrılamaz. Ayrıca %45'lik "hedef/değer" parçası kayıttaki üç sorunun cevabına dayanıyor; eski kullanıcılarda bu doluluk ölçülmedi.
+**Neden sana soruyorum:** Kullanıcının gördüğü uyum yüzdesi değişir ve bazı çiftlerin sırası yer değiştirir; bu kaç kez ve hangi sırayla olsun kararı ürün kararıdır.
+**Seçenekler:**
+· **A — Tek seferde: motor + yeni formül + yeni engelleme kuralları birlikte açılır.** Kullanıcı ne görür: yüzdeler bir kez değişir. Ne kazanırsın: tasarım kararı tek turda canlıya çıkar; iş bir kez yapılır. **Ne kaybedersin:** karşılaştırmada farkın kaynağı ayrılamaz; sorun çıkarsa hangi parça bozdu bulunamaz; üç soruyu boş bırakan kullanıcıda ağırlığın %45'i boş veriyle hesaplanır. Süre L · geri alınır ✅ (açma/kapama) · migration yok (TEYİT GEREK)
+· **B — İki adım: önce motor bugünkü 60/40 içinde açılır, yeni formül sonraki adımda gelir.** Kullanıcı ne görür: yüzdeler iki kez değişir. Ne kazanırsın: her adımda tek değişken, karşılaştırma anlamlı kalır; üç sorunun doluluğu arada ölçülür. **Ne kaybedersin:** iş iki kez test edilir; eski formül bir süre daha canlıda kalır; kullanıcı yüzdenin iki kez oynadığını fark edebilir. Süre M+M · geri alınır ✅ · migration yok
+· **C — Yeni formül rafa kalkar, 60/40 kalıcı olur.** Kullanıcı ne görür: bugünkü yüzdeler (motor açılınca yalnız kişilik kısmı değişir). Ne kazanırsın: en az iş, en az risk. **Ne kaybedersin:** "ne arıyorsun ↔ ne verebilirim" uyumu puana hiç girmez; üç soru toplanır ama kullanılmaz; Ağustos kararı yeniden açılır. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Hızlı tek seferlik geçiş istiyorsan ve sorun çıkarsa hepsini birden kapatmayı göze alıyorsan A. KARAR-10'daki "önce/sonra karşılaştırması" gerçekten anlamlı olsun istiyorsan B. Tasarım kararından vazgeçtiysen C.
+**Benim önerim:** B — KARAR-10'a verdiğin "aşamalı ve karşılaştırmalı" cevabın ruhu, her aşamada tek şeyin değişmesi.
+**Cevap vermezsen:** PS-A3 (bağlama) hangi formülle açılacağını bilemez; F-11'in formül ayağı belirsiz kalır.
+**CEVAP:**
+
+---
+
+### KARAR-62 · İlk ölçüm: herkes aynı senaryoları mı çözsün, sistem kişiye göre mi seçsin?  (2 işi açar)  [ÜRÜN KARARI · ÖLÇME YÖNTEMİ]
+> Cross-ref: KARAR-57 "hangi test kanonik" kararıdır; bu kart "aynı mı, adaptif mi" ayrı ölçme yöntemi kararıdır.
+**Şu an ne var:** Kodda senaryo bankası henüz yok. Kullanıcı bugün 8 soruluk DISC testi çözüyor (`onboardingController.ts:109-190`). Yazılı iki plan birbirini tutmuyor: Tasarım belgesi "ilk oturum 12 senaryo, herkes aynı 12'yi görür, karşılaştırma için şart" (`TAS:159-163`); senaryo bankası "5 sabit + 10 kişiye göre seçilen = 15 senaryo" (`BANKA:14,45`, "PO onaylı").
+**Sorun ne:** Daha yeni belge daha eskisindeki "şart" kelimesini gerekçe yazmadan aşmış. 15 senaryolu planda kişiler arası doğrudan karşılaştırma yalnız 5 ortak senaryoda mümkün. "Kişiye göre seçme" motoru kodda hiç yok (`triggersOn` alanı var, kullanımı 0).
+**Neden sana soruyorum:** Ölçme yöntemi değişiyor: kullanıcının kaç soru çözeceği ve iki kişinin aynı ölçüyle ölçülüp ölçülmediği. Teknik değil.
+**Seçenekler:**
+· **A — 5 sabit + 10 kişiye göre seçilen (senaryo bankası planı).** Kullanıcı ne görür: 15 senaryo (~5 dk), belirsiz kaldığı tarafa odaklanan sorular. Ne kazanırsın: en çok bilgi, en az "şimdilik" etiketi. **Ne kaybedersin:** kişiler arası karşılaştırma 5 senaryoya düşer; seçim motoru yazılmadan başlanamaz (ek iş M-L); tasarımdaki "şart" geri alınır. Süre L · geri alınır ✅ · migration muhtemelen VAR (TEYİT GEREK)
+· **B — 12 sabit senaryo, herkese aynı (tasarım belgesi planı).** Kullanıcı ne görür: 12 senaryo (~4 dk). Ne kazanırsın: en basit, herkese adil, karşılaştırılabilir; seçim motoru gerekmez. **Ne kaybedersin:** 39'luk bankada "12'lik çekirdek" yok, yeniden seçilmesi gerekir; belirsiz boyuta odaklanma olmaz; daha az sinyal (`TAS:332` bunu "dürüst sınır" demiş). Süre M · geri alınır ✅ · migration aynı
+· **C — Geçiş planı: şimdilik 15 SABİT senaryo (5 çekirdek + havuzdan seçilmiş sabit 10), kişiye göre seçim sonra.** Kullanıcı ne görür: 15 senaryo, herkes aynı. Ne kazanırsın: seçim motorunu beklemeden 15 sinyal + karşılaştırılabilirlik; A'ya sonra geçilir. **Ne kaybedersin:** sabit 10'u birinin seçmesi gerekir (içerik işi); "en bulanık boyuta odaklanma" ertelenir; iki geçiş olur. Süre M · geri alınır ✅ · migration aynı
+**Karşılaştırma:** Ölçümün kişiye özel keskinliği önemliyse ve seçim motorunun işine hazırsan A. Kurum yöneticisinin iki kişiyi aynı ölçüyle kıyaslaması önemliyse B. Hemen başlamak ama A'yı kapatmamak istiyorsan C.
+**Benim önerim:** C — seçim motoru bugün yok, C bugün uygulanabilir ve A'ya açık kalır. ⚠️ Bu bir ölçme yöntemi kararı; önerime güvenme, kendi önceliğine göre seç.
+**Cevap vermezsen:** senaryo bankasının koda girişi (Faz 5 "a"+"f": 39 senaryo seed + 5+10 akış) hangi akışı kuracağını bilemez.
+**CEVAP:**
+
+---
+
+### KARAR-63 · Arketip atama eşiği: 45/55/60 bandı belgelensin mi, kaldırılsın mı?  (1 işi açar)  [ÜRÜN KARARI · PUANLAMA]
+**Şu an ne var:** Arketip atayan kod bir kişilik boyutunun 45/55/60 eşiklerini aşıp aşmadığına bakıyor (`scoring.config.ts:31`). Hiçbir eşik aşılmazsa kişiye otomatik "M1" (mentörde Mimar) / "m1" (mentide Rotacı) veriliyor (`disc-to-ocean.adapter.ts:35,42`). Bu eşikler hiçbir belgede yazılı değil. İçerik belgesindeki kural (P3) farklı: herkes arketip alır, en yüksek boyut + ikinci gösterilir, fark 10 puandan azsa "şimdilik" dili (`ARK:83-106`). Eski karar belgesinde üçüncü kural: 40-60 arası "kararsız", ek soru açılır (`PSI:36`).
+**Sorun ne:** Bugünkü kod P3 kararını ihlal ediyor — eşiği aşamayan herkes Mimar/Rotacı oluyor, kendi baskın tarafını değil varsayılanı görüyor. Beş boyuttan dört arketipe geçiş yazılı değil (`ARK:96,440`). PS-A1 (ölçek düzeltme) tam bu dosyaya dokunacak; karar verilmezse "düzeltme" belgesiz eşikleri kalıcılaştırır.
+**Neden sana soruyorum:** Kişinin kendisi hakkında okuyacağı etiketi hangi puanın belirleyeceği, puanlama/eşik kararıdır.
+**Seçenekler:**
+· **A — İçerik belgesi kuralı (P3): en yüksek boyut kazanır, 10 puan altı fark "şimdilik" dili alır; 45/55/60 kaldırılır.** Kullanıcı ne görür: herkes kendi baskın tarafının arketipini, belirsizse "şimdilik" diliyle. Ne kazanırsın: P3 kararınla birebir; "herkese Mimar" hatası biter. **Ne kaybedersin:** zayıf öne çıkış bile arketip verir (belirsizlik dille yönetilir); 10 puan "muhakeme", ampirik değil (`ARK:98`). Süre M · geri alınır ✅ · migration yok
+· **B — Koddaki mutlak eşikler (45/55/60) kalır, belgeye yazılır; "şimdilik" dili yalnız metin katmanında.** Kullanıcı ne görür: yalnız gerçekten yüksek çıkan boyut arketip verir; diğerleri varsayılan/"henüz belirlenmedi". Ne kazanırsın: güçlü etiket yalnız güçlü sinyale. **Ne kaybedersin:** P3'te reddettiğin "arketip verme" yoluna dönülür; varsayılanın ne olacağı yeni bir soru olur. Süre S · geri alınır ✅ · migration yok
+· **C — Katmanlı: A kuralı arketip verir, 40-60 bandı yalnız "hangi boyut için ek senaryo" tetiği olur, 45/55/60 kaldırılır.** Kullanıcı ne görür: A ile aynı + belirsiz tarafına derinleşme soruları. Ne kazanırsın: üç kuralın her birinin tek görevi olur, çelişki biter. **Ne kaybedersin:** derinleşme motoru yazılmadan 40-60 ayağı çalışmaz (KARAR-62'ye bağlı); en karmaşık seçenek. Süre M+ · geri alınır ✅ · migration yok
+**Karşılaştırma:** P3 kararın hâlâ geçerliyse A ya da C. Güçlü etiketi yalnız güçlü sinyale vermek istiyorsan B, ama bu P3'ü geri almak demek. A ile C'nin tek farkı, 40-60 bandının derinleşme için kullanılıp kullanılmaması.
+**Benim önerim:** A — P3 zaten senin kararın; C'nin fazlası derinleşme motoru gelince eklenebilir.
+**Cevap vermezsen:** PS-A1 ölçeği düzeltir ama eşikleri olduğu gibi bırakır (sessiz kalıcılaşma); I-15 arketip kartı hangi kuralla dolacağını bilmez.
+**CEVAP:**
+
+---
+
+### KARAR-64 · Kullanıcıya görünen ad: "mizaç" mı, "karakter" mi, "kişilik" mi?  (1 işi açar)  [ÜRÜN KARARI · KULLANICI METNİ]
+**Şu an ne var:** Aynı şey üç adla anılıyor. Canlı ekranda "Mizaç profilin hazır!" (`onboardingController.ts:492`); yeni içerik belgeleri "karakter kartın" (`ARK:124`) ve "karakter ölçümü" (`BANKA:13`); aynı belgeler ağırlıktan söz ederken "kişilik" (`ARK:57-60`, `BANKA:48`). Terim sayımları: kullanıcı yüzeyi "mizaç" (15), admin/hukuki "karakter" (8), belgeler karışık (`icerik-mutabakati-2026-09-23.md` §5).
+**Sorun ne:** Kullanıcı aynı testi farklı ekranlarda farklı adla görecek. Hiçbir belge terim seçimini gerekçelendirmemiş.
+**Neden sana soruyorum:** Kullanıcıya görünen ürün adı; üç kelimenin Türkçede farklı çağrışımları var.
+**Seçenekler:**
+· **A — "Mizaç".** Kullanıcı ne görür: bugünkü ad. Ne kazanırsın: tanıdık, canlıda değişiklik yok. **Ne kaybedersin:** "doğuştan, değişmez" çağrışımı; KARAR-48'in "değişmez kimlik etiketi" eleştirisiyle ve Big Five "eğilim" diliyle çatışır. Süre S · geri alınır ✅ · migration yok
+· **B — "Karakter".** Kullanıcı ne görür: "karakter kartın". Ne kazanırsın: sıcak ve oyunsu, yeni içerik belgeleriyle uyumlu. **Ne kaybedersin:** Türkçede ahlaki yargı çağrıştırır ("iyi/kötü karakter"); paylaşılan kartta yanlış okunabilir. Süre S · geri alınır ✅ · migration yok
+· **C — "Kişilik".** Kullanıcı ne görür: "kişilik kartın". Ne kazanırsın: motorun bilimsel adıyla (Big Five) birebir, en dürüst ad. **Ne kaybedersin:** daha klinik ve soğuk; tasarım arketip metaforunu tam da "yüzde soğuk" diye seçmişti (`devir/08-oturum-tezi-2026-08-28.md:32`). Süre S · geri alınır ✅ · migration yok
+**Karşılaştırma:** Canlıda hiçbir şey değişmesin istiyorsan A. Sıcaklık ve oyun hissi öndeyse B. Metodoloji sayfasıyla tek sesle konuşmak öndeyse C.
+**Benim önerim:** C — ürünün temkinli metodoloji diliyle (KARAR-48) en tutarlısı. ⚠️ Bu tamamen bir ton kararı; önerime güvenme.
+**Cevap vermezsen:** yeni içerik (I-15 kartı, BANKA metinleri) koda "karakter" diye, canlı ekran "mizaç" diye girer; kullanıcı iki ad görür.
+**CEVAP:**
+
+---
+
+### KARAR-65 · "D mentör + S menti" yasağı menti tarafında da geçerli olsun mu?  (2 işi açar)  [ÜRÜN KARARI]
+> ⚠️ KARAR-61 (formül) ile BİRLİKTE cevaplanmalı — yeni formül gelirse bu kural zaten kişilik-tabanlı V1/V2 kurallarına dönüşüyor.
+**Şu an ne var:** Mentörün menti listesinde bu çift eleniyor (aday yoksa gevşiyor) — `matching.ts:200-216,283`. Menti'nin mentör listesinde ise hiç uygulanmıyor — `matching.ts:351-431`. Aynı çift bir yönde yasak, diğerinde serbest.
+**Sorun ne:** Belgeler "hiç eşleştirilmez" diyor (`eslesme-uyum:60`); tasarım belgesi bu kuralı tamamen kaldırıyor (`TAS:468`). Kod ikisinin arasında, yöne göre farklı davranıyor.
+**Neden sana soruyorum:** Kimin kimi görebileceği ürün kararı; ayrıca bu kural KARAR-61 (formül) ile birlikte kalkabilir.
+**Seçenekler:**
+· **A — Kural iki yönde de uygulanır.** Ne kazanırsın: tutarlı. **Ne kaybedersin:** menti listesi daralır. Süre S · geri alınır ✅ · migration yok
+· **B — Kural iki yönde de kaldırılır (TAS kararı).** Ne kazanırsın: tasarımla uyumlu. **Ne kaybedersin:** dayanağı zayıf da olsa bir koruma kalkar. Süre S · geri alınır ✅ · migration yok
+· **C — Bugünkü hal, yeni formüle kadar.** Ne kazanırsın: iş yok. **Ne kaybedersin:** tutarsızlık sürer. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Yeni formül yakınsa C; değilse A ya da B'den biri.
+**Benim önerim:** B — `TAS:468` gerekçeyle kaldırdı; ama KARAR-61 ile birlikte cevaplanmalı.
+**Cevap vermezsen:** md.165 ve TAS kalem 5 bağlanamaz.
+**CEVAP:**
+
+---
+
+### KARAR-66 · "Akıllı eşleştirme" iddiası — ölçelim mi, geri mi çekelim?  (2 işi açar)  [ÜRÜN KARARI]
+**Şu an ne var:** Belge "eşleşme kalitesi = bizim farkımız" diyor (`yonetici:86`); kod ise: `Match` tablosu boş, `predictedScore` yazılmıyor/okunmuyor, DISC ağırlıkları sezgisel. Kanıt: `persona-panel-gelisimi-2026-09-23.md:248` (C2).
+**Sorun ne:** PO'nun kurula/sponsora tek satış argümanı, kendi sistemi tarafından bile ispatlanamıyor. Bu ölçülebilir bir iddia — tondan (KARAR-48 sevdirme dili) farklı, gerçek bir kanıt boşluğu.
+**Neden sana soruyorum:** "Neyi vaat ediyoruz + nasıl kanıtlayacağız" ürün/pazarlama kararı.
+**Seçenekler:**
+· **A — `Match`'i yaz + kaliteyi ölç** (`createMatchIfEligible` çağrılsın, predicted↔gerçek karşılaştırması). Ne kazanırsın: gerçek kanıt. **Ne kaybedersin:** matching koduna dokunma (🔴), efor L; migration olası. Süre L · geri alınır ✅ · migration olası
+· **B — İddiayı geri çek** — "kalite metriği" yerine "eşleştirme yardımcısı" konumlandır. Ne kazanırsın: dürüst, hızlı. **Ne kaybedersin:** satış argümanı zayıflar. Süre S · geri alınır ✅ · migration yok
+· **C — Bekle** — ilk gerçek görüşmeler birikene kadar iddiayı ne öne çıkar ne çek. Ne kazanırsın: erteleme, iş yok. **Ne kaybedersin:** belirsizlik sürer. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** A gerçek çözüm ama en pahalı ve matching-riskli; B dürüst ama pazarlamayı küçültür; C erteleme.
+**Benim önerim:** A (uzun vade) ama ilk kurum canlıya girmeden B dili kullanılsın. *(Ürün kararın.)*
+**Cevap vermezsen:** Y-A4, U-A1, R3/R4/R6 riski açık kalır.
+**CEVAP:**
+
+---
+
+### KARAR-67 · Yönetici drill-down'ı kişinin serbest-metin endişe notuna inmeli mi?  (1 işi açar)  [ÜRÜN KARARI · KVKK]
+**Şu an ne var:** Drill-down kişiye iniyor (`yonetici:80`); check-in notları (1000 karakter + endişe etiketi) sahiplik kontrolsüz okunuyor (G-3, `konsey-guvenlik-kvkk`). Kanıt: `persona-panel-gelisimi-2026-09-23.md:271-272` (C1).
+**Sorun ne:** Yöneticinin "kim kaynıyor" görme hakkı ile mentinin özel notunun mahremiyeti çarpışıyor.
+**Neden sana soruyorum:** Yetki + KVKK + kullanıcı güveni kararı.
+**Seçenekler:**
+· **A — Yönetici yalnız AGGREGATE + durum görür, serbest-metin notu göremez.** Ne kazanırsın: mahremiyet. **Ne kaybedersin:** yönetici bağlamı azalır. Süre M · geri alınır ✅ · migration yok
+· **B — Görür ama LOGLU + kullanıcı bilgilendirilir.** Ne kazanırsın: aksiyon gücü. **Ne kaybedersin:** kırılgan not maruz kalır. Süre M · geri alınır ✅ (🔴 KVKK) · migration yok
+· **C — Notlar zaten yalnız taraflar arası — yöneticiye hiç açılmaz.** Ne kazanırsın: en güvenli. **Ne kaybedersin:** yönetici müdahale edemez. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** A dengeli; B güçlü ama riskli; C en korumacı ama aksiyonu keser.
+**Benim önerim:** A. *(Ürün+KVKK kararın.)*
+**Cevap vermezsen:** PL-A2, C1 çatışması + G-3 (kontrolsüz not okuma) açık kalır.
+**CEVAP:**
+
+---
+
+### KARAR-68 · Persona/panel belgeleri nasıl gelişmeli: A/B/C?  (2 işi açar)  [BELGE POLİTİKASI]
+**Şu an ne var:** 7 persona/panel belgesi 📸 dondurulmuş, 7 hafta güncellenmedi, kimse "varsayım tuttu mu" bakmadı. Kanıt: `persona-panel-gelisimi-2026-09-23.md:284` (§7 E) + §5.1 (`:171-177`).
+**Sorun ne:** Tasarım zemini bayat; ama kör güncelleme tur bütçesini yer (projede yaşanmış sorun).
+**Neden sana soruyorum:** Belgelerin nasıl yaşayacağı bir belge-yönetimi + ürün kararı; "aktif iş kaynağı tektir" kuralıyla ilişkisi var.
+**Seçenekler:**
+· **A — Dondurmayı kaldır, YAŞAYAN yap.** Ne kazanırsın: her zaman güncel tasarım zemini. **Ne kaybedersin:** tur bütçesinin büyük kısmı belge muhasebesine gider; "eğitimli taslak" niteliği kaybolur; ⚠️ zayıf — sürekli güncellenen ikinci bir gerçek kaynağı doğar. Süre L (sürekli) · geri alınır ✅ · migration yok
+· **B — HALEF yaşayan belge (persona-v2), eskiyi "yerini X aldı" ile yönlendir.** Ne kazanırsın: gerçek kullanıcı verisiyle beslenmiş yeni zemin; tarihsel iz korunur. **Ne kaybedersin:** halefi üretecek girdi (gerçek kullanıcı testi) YOKKEN üretilirse yine tahmin olur. Süre M (tetikleyicide) · geri alınır ✅ · migration yok
+· **C — Dondurulmuş kalsın; güncel bilgi tek yerde (KUYRUK/09-DURUM), personalar tarihsel zemin.** Ne kazanırsın: minimum bakım, tek gerçek kaynağı korunur. **Ne kaybedersin:** personaların "varsayım tuttu mu" bilgisi hiçbir yere işlenmez → tekrar bayatlar (bugünkü sorun sürer). Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Sürekli güncel zemin öncelik ama bütçe kabulse A; öğrenmeyi kalıcı kaybetmek istemiyorsan ve gerçek kullanıcı testini bekleyebiliyorsan B; minimum bakım öncelikse C ama bayatlama sürer.
+**Benim önerim:** Tetikleyicili B (o zamana kadar C) — belgelerin kendi koştuğu şart (gerçek kullanıcı testi) yerine gelmeden A/B yeni tahmin üretir; C öğrenmeyi kalıcı kaybeder; doğru hamle güncellemeyi ilk kullanıcı testine bağlamak (§5.1).
+**Cevap vermezsen:** U-A6 açık kalır, belgeler tekrar bayatlar.
+**CEVAP:**
+
+---
+
+### KARAR-69 · "ÇIKIŞ" tanımı ne?  (0 doğrudan iş — ama TÜM çıkış-blokeri etiketlerini geçerli/geçersiz kılar)  [ÜRÜN KARARI · METODOLOJİ]
+**Şu an ne var:** Analiz turu (`00-ANALIZ-TURU-OZETI-2026-09-23.md`) her bulguda "bu çıkış blokeri mi?" diye sordu ve bulguları buna göre önceliklendirdi; ama "çıkış" (canlıya çıkış / lansman) hiçbir yerde tanımlı değil. Tanım olmadan "çıkış blokeri" etiketi öznel.
+**Sorun ne:** Tüm önceliklendirme "çıkış blokeri mi?" sorusuna dayanıyor; ama herkes "çıkış"tan farklı şey anlıyorsa blokeri listesi güvenilir değil. Bir bulgu "MVP için blokeri değil ama ilk kurum için blokeri" olabilir — hangisi geçerli, tanıma bağlı.
+**Neden sana soruyorum:** "Ürünün hazır sayılacağı an" tanımı bir ürün/metodoloji kararı; teknik değil ve tüm kuyruk önceliğini belirler.
+**Seçenekler:**
+· **A — ÇIKIŞ = çalışan MVP** (temel akış uçtan uca çalışıyor, gerçek kullanıcı yok). Ne kazanırsın: en erken çıkış, hızlı öğrenme. **Ne kaybedersin:** KVKK/kriz/kalite boşlukları çıkıştan sonra keşfedilir; itibar riski. Süre — (tanım) · geri alınır ✅ · migration yok
+· **B — ÇIKIŞ = ilk gerçek kurum canlıda** (bir STK gerçek mentileriyle kullanıyor). Ne kazanırsın: gerçek doğrulama, gerçek geri bildirim. **Ne kaybedersin:** kurum bulma + hazırlık gecikmesi; blokeri listesi genişler. Süre — · geri alınır ✅ · migration yok
+· **C — ÇIKIŞ = KVKK/yasal zorunluluklar tamam** (aydınlatma, silme, kriz kanalı, avukat onayı). Ne kazanırsın: hukuki güvenli zemin. **Ne kaybedersin:** en geç çıkış; ürün özellikleri beklerken hukuk işi öne geçer. Süre — · geri alınır ✅ · migration yok
+· **D — ÇIKIŞ = ilk 10 gerçek canlı görüşme tamamlandı.** Ne kazanırsın: "işe yarıyor" kanıtı somut. **Ne kaybedersin:** en geç ve en dar tanım; buraya varmak için önce A/B'nin de geçilmesi gerekir. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Bunlar aslında aşamalar (A→B→C birbirini kapsar) ama "blokeri" etiketi hangi aşamaya bakacağımızı bilmek ister. Erken öğrenme öncelikse A; gerçek doğrulama öncelikse B; hukuki güvenlik ilk sırada ise C tabanı zorunlu; kanıt öncelikse D.
+**Benim önerim:** B'yi çıkış tanımı, C'yi çıkış ÖN KOŞULU say — çünkü ürün ancak gerçek bir kurumda anlam kazanır ama KVKK/kriz boşlukları (KARAR-67, KARAR-31 EK) hiçbir çıkışta ertelenemez. Bu tanımla "çıkış blokeri" = "ilk kurum + KVKK tabanı için gereken".
+**Cevap vermezsen:** analiz turunun ve kuyruğun tüm "çıkış blokeri" öncelik etiketleri öznel kalır; hangi işin gerçekten acil olduğu belirsizleşir.
+**CEVAP:**
+
+---
+
+### KARAR-70 · Gerçek kullanıcı görüşmesi: ne zaman, kaç kişi, hangi roller?  (1 işi açar — görüşme kılavuzu)  [ÜRÜN KARARI · SÜREÇ]
+> ⚠️ Not: 2026-09-09'da yapılan test, PO'nun KENDİ hesaplarıyla yaptığı bir gezinti (dogfooding) testiydi — GERÇEK kullanıcı görüşmesi DEĞİL. Tek somut çıktısı mentör panelindeki İngilizce DISC etiketiydi (`persona-panel-gelisimi-2026-09-23.md:318`). Gerçek kullanıcı testi HÂLÂ yapılmadı.
+**Şu an ne var:** 7 persona/panel/strateji belgesinin 7'si de "gerçek mentilerle doğrulanmalı" şartını koşmuş; 7 haftadır yapılmadı. Bugün ⬜ (test edilmemiş) durumdaki 10 davranışsal varsayım YALNIZCA gerçek kullanıcı görüşmesiyle sınanabilir (`persona-panel-gelisimi-2026-09-23.md:334,337`).
+**Sorun ne:** Ürünün en büyük belirsizliği "menti gerçekten kırılgan mı, mentör gerçekten seçici mi" gibi davranışsal varsayımlar; bunlar koda karşı test edilemez, yalnız gerçek insanla sınanır. Görüşme yapılmadan persona-v2 (KARAR-68 B yolu) üretilemez ve tasarım zemini tahmin olarak kalır.
+**Neden sana soruyorum:** Görüşmenin ölçeği (kaç kişi), zamanlaması (çıkıştan önce mi sonra mı) ve kapsamı (hangi roller) bir süreç + ürün kararı; kılavuzu ajan hazırlayacak (kuyruk işi) ama ölçek/zamanlama PO kararı.
+**Seçenekler:**
+· **A — Küçük ve erken: 3-5 kişi (menti + mentör + yönetici karışık), çıkıştan ÖNCE.** Ne kazanırsın: en büyük belirsizlik erken çözülür; persona-v2 için girdi gelir. **Ne kaybedersin:** az kişi = zayıf sinyal; ürün henüz ham olduğu için bazı sorular sorulamaz. Süre S · geri alınır ✅ · migration yok
+· **B — Rol başına derin: her rolden 3'er kişi (9-12 görüşme), yapılandırılmış kılavuzla.** Ne kazanırsın: her rolün varsayımları ayrı ayrı sınanır, güçlü sinyal. **Ne kaybedersin:** organizasyon yükü büyük; katılımcı bulmak gecikir. Süre M · geri alınır ✅ · migration yok
+· **C — İlk kurum canlıya girdikten sonra, gerçek kullanımdan: ilk 10 görüşmenin taraflarıyla.** Ne kazanırsın: gerçek davranış verisiyle beslenir, en gerçekçi. **Ne kaybedersin:** en geç; çıkış öncesi belirsizlik çözülmez; kurum canlıya girene kadar beklenir. Süre L · geri alınır ✅ · migration yok
+**Karşılaştırma:** Belirsizliği çıkıştan önce azaltmak öncelikse A (hızlı) ya da B (derin ama yavaş); gerçek kullanım verisini beklemeye razıysan C. A ve B ürünün ham hâlini test eder, C canlı hâlini.
+**Benim önerim:** A — belgelerin kendi şartı (3-5 görüşme) bu; küçük ve erken bir tur, persona-v2'yi (KARAR-68) tetikler ve 10 ⬜ varsayımdan en kritiklerini erken sınar. Kılavuzu ajan hazırlar, görüşmeyi PO yürütür (`03-PO-ELLE-ISLER.md`).
+**Cevap vermezsen:** persona-panel raporunun tüm ⬜ varsayımları (10 adet) test edilmeden kalır; KARAR-68 B yolu (persona-v2) tetiklenemez.
+**CEVAP:**
+
+---
+
+### KARAR-71 · Kırılgan kullanıcıda tutundurma etiğinin sınırı nerede?  (1+ işi açar)  [ÜRÜN KARARI · ETİK · UZMAN GÖRÜŞÜNE BAĞLI]
+**Şu an ne var:** Persona tasarımı kullanıcıyı bilinçle "kırılgan/kaygılı genç" seçip elde tutmayı optimize ediyor (`persona-panel-gelisimi-2026-09-23.md:237` C3). Bugün canlıda tutundurma öğeleri var: umut sinyali (F-15/F-16), kutlama/konfeti (P-07), takdir (P-14), bildirim izni (F-20). Riskli aile (henüz yok ama sıradaki adım olabilir): suçlulu hatırlatma · seri/streak · yapay kıtlık · ayrılmayı zorlaştırma.
+**Sorun ne:** Kırılgan bir kitlede "kullanıcıyı elde tut" hedefi bir yerde etik sınırı geçip baskı/manipülasyona dönüşür. Nerede tutundurma biter, baskı başlar? Bu çizgi tanımsız; tanımsız kalırsa her yeni "tutundurma" özelliği (streak, hatırlatma) fark edilmeden riskli tarafa kayabilir.
+**Neden sana soruyorum:** Bu bir etik + ürün kararı ve ⚠️ RUH SAĞLIĞI UZMANI görüşü gerektirir — özellikle kırılgan/kaygılı genç kitlede hangi tutundurma tekniğinin zararlı olduğu klinik bilgi ister.
+**Seçenekler:** (⚠️ seçenekler uzman görüşüne bağlı — kesin öneri verilmez)
+· **A — Yalnız pozitif/gönüllü tutundurma** (kutlama, takdir, umut sinyali; suçluluk/streak/kıtlık YOK). Ne kazanırsın: etik zemin net, kırılgan kitlede güvenli. **Ne kaybedersin:** bazı kanıtlanmış tutundurma teknikleri (streak) masada kalır; retention metriği daha düşük olabilir. Süre — (ilke) · geri alınır ✅ · migration yok
+· **B — Uzman onaylı bir "izin verilen teknikler" listesi** — her tutundurma özelliği canlıya çıkmadan uzman süzgecinden geçer. Ne kazanırsın: her özellik ayrı değerlendirilir, esnek ama korumalı. **Ne kaybedersin:** her özellik için uzman turu = yavaşlık ve dış bağımlılık. Süre M (sürekli) · geri alınır ✅ · migration yok
+· **C — Şimdilik mevcut öğeler kalsın, sınır kararı uzman görüşü gelene kadar ertelensin.** Ne kazanırsın: iş yok, mevcut öğeler zaten görece hafif. **Ne kaybedersin:** yeni tutundurma özellikleri sınırsız eklenebilir; risk sessizce büyür. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Net ve muhafazakâr bir etik zemin öncelikse A; esneklik + koruma dengesi isteniyorsa B (ama uzman bağımlılığı); acil değilse C ama koruma açığı büyür. Üçü de bir ruh sağlığı uzmanının çizeceği çizgiye göre yeniden değerlendirilmeli.
+**Benim önerim:** öneri YOK — bu bir ruh sağlığı uzmanı görüşüne bağlı etik karar; ajan bu çizgiyi çizmeye yetkin değil. Öneri: bir uzmandan "kırılgan genç kitlede kabul edilebilir tutundurma teknikleri" görüşü al, sonra A/B'den birini seç.
+**Cevap vermezsen:** yeni tutundurma özellikleri (streak, hatırlatma vb.) etik sınır tanımsızken eklenmeye devam eder; kırılgan kullanıcıda manipülasyon riski denetimsiz büyür.
+**CEVAP:**
+
+---
