@@ -147,6 +147,13 @@ Ayni oncelik icinde: en az emekle en cok kullanici degeri once.
        "⛔ MIGRATION — merge edilirse CANLI DB'ye uygulanir"
     Gerekce: PO merge ederken neyin canli DB'ye dokunacagini basliktan gormeli.
 
+ 6. ⭐ AILE PR AKISI (2026-09-23, PO onayli kapi cozumu — bkz. 00-KUYRUK "🟡 AILE HARITASI"):
+    🟢'ler bitince 🟡 AILELERI sirayla islenir: bir ailenin tum isleri TEK dalda,
+    TEK PR'da. PR aciklamasinda her is icin (a) ne degisti (b) hangi test riski
+    kapatiyor (c) kullanici ne goruyor yazilir. Durum → PR-ACIK.
+    ⛔ Aile PR'i MERGE EDILMEZ.
+    ⛔ Y-G (migration/seed) GRUPLANMAZ: her biri ayri PR, yedek + PO onayi sart.
+
 Kuyruk asamalari: I (icerik — PO en on sira) · K (kullanici testi) · F (bilanco devri) ·
 P (panel denetimi) · E (hayalet envanter) · U (uctan uca yolculuk) ·
 V (operasyonel hazirlik) · Y (yol haritasi + karar takibi devri).
@@ -182,6 +189,13 @@ j) Kalan 🟢 sayisini 02-ILERLEME'ye yaz, sonraki ise gec
  [ ] sema degisikligi YOK · seed calistirilmadi
  [ ] auth / KVKK / matching dosyalarina dokunulmadi (dokunulduysa kapi 🟡'dir)
  [ ] degisiklik yalniz o isin kapsamindaki dosyalarda
+ [ ] ⭐ KANIT ZORUNLULUGU (🟡 isler, 2026-09-23): 🟡 bir isin PR'i, riski KAPATTIGINI
+     ISPATLAYAN en az bir test icermeli:
+       yetki isi → yetkisiz cagiran 403 alir VE kaynak DEGISMEZ ·
+       KVKK silme → veri gercekten gitti (ilgili tablolar kontrol edilir) ·
+       tenant izolasyonu → baska kurumun verisi gorunmuyor ·
+       bildirim → gonderim basarisiz olunca cagiran BUNU GORUYOR.
+     Test yoksa PR "KANIT EKSIK" etiketiyle acilir, merge onerilmez.
 Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
 
 ═══════════════════════════════════════════════════════════════
