@@ -30,8 +30,10 @@ import { cn } from '@/lib/utils';
 
 // ─── Adım göstergesi ─────────────────────────────────────────────────────────
 
-// 4. adım (Tercihler = üç soru) arketip kartından SONRA gelir (§10.2 ekran kararı).
-const STEPS = ['Profil', 'Mizaç Testi', 'Sonuç', 'Tercihler'] as const;
+// Akış sırası (madde 141 · arketip §4, 2026-09-04'te tersine çevrildi):
+// üç soru (Tercihler) arketip kartından ÖNCE gelir, kart EN SONDA — böylece
+// kişi ödül anını (kartı) ancak formu bitirince görür ve S2 bias riski kapalı kalır.
+const STEPS = ['Profil', 'Mizaç Testi', 'Tercihler', 'Sonuç'] as const;
 type StepIndex = 0 | 1 | 2 | 3;
 
 interface StepIndicatorProps {
@@ -131,7 +133,9 @@ export default function OnboardingContent() {
     }
   };
 
-  // ── Adım 2 tamamlandı: DISC gönder, sonuç kartını al ─────────────────────
+  // ── Adım 2 tamamlandı: DISC gönder, kartı hazırla, ÜÇ SORU adımına geç ───
+  // Kart hesaplanır ama HENÜZ gösterilmez — önce üç soru (adım 3 = Tercihler),
+  // ödül anı (kart) en sonda (adım 4 = Sonuç). Bkz. STEPS yorumu.
   const handleDiscComplete = async (answers: DiscAnswer[]) => {
     setIsSubmitting(true);
     setStepError(null);
@@ -147,7 +151,7 @@ export default function OnboardingContent() {
     }
   };
 
-  // ── Adım 4 tamamlandı: üç soruyu kaydet, dashboard'a geç ─────────────────
+  // ── Adım 3 tamamlandı: üç soruyu kaydet, ÖDÜL adımına (kart) geç ─────────
   const handleThreeQuestionsComplete = async (data: MatchingPreferences) => {
     setIsSubmitting(true);
     setStepError(null);
@@ -156,7 +160,7 @@ export default function OnboardingContent() {
 
     setIsSubmitting(false);
     if (result.ok) {
-      router.push('/dashboard');
+      setStep(3);
     } else {
       setStepError(result.error.message ?? 'Tercihlerin kaydedilemedi. Tekrar deneyin.');
     }
@@ -171,13 +175,15 @@ export default function OnboardingContent() {
           <h1 className="text-xl font-bold text-foreground">
             {step === 0 && 'Profilini Tamamla'}
             {step === 1 && 'Mizaç Testini Çöz'}
-            {step === 2 && 'Sonucun Hazır! 🎉'}
-            {step === 3 && 'Son Birkaç Soru'}
+            {step === 2 && 'Son Birkaç Soru'}
+            {step === 3 && 'Sonucun Hazır! 🎉'}
           </h1>
-          {step < 2 && (
+          {step < 3 && (
             <p className="text-sm text-muted-foreground mt-1">
               {step === 0 && 'Seni doğru eşleştirebilmemiz için birkaç bilgi alalım.'}
               {step === 1 && 'Senaryo sorularına sezgisel olarak cevap ver — yanlış cevap yoktur.'}
+              {/* Araya tek cümle (arketip §4): kişi ne kadar kaldığını bilir, bekleme dayanılır olur. */}
+              {step === 2 && 'Son üç soru. Sonra karakter kartın hazır.'}
             </p>
           )}
         </div>
@@ -220,17 +226,17 @@ export default function OnboardingContent() {
           )
         )}
 
-        {step === 2 && resultCard && (
-          <ResultStep resultCard={resultCard} onContinue={() => setStep(3)} />
-        )}
-
-        {step === 3 && (
+        {step === 2 && (
           <ThreeQuestionsStep
             role={userRole}
             onComplete={handleThreeQuestionsComplete}
             isSubmitting={isSubmitting}
             error={stepError}
           />
+        )}
+
+        {step === 3 && resultCard && (
+          <ResultStep resultCard={resultCard} onContinue={() => router.push('/dashboard')} />
         )}
 
       </div>
