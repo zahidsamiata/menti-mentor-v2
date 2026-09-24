@@ -33,9 +33,9 @@ Bu harita o kuralı **çiğnemez, tamamlar.** İkisinin işi farklı — karış
 | "Hangi belge nerede, hangisi yetkili?" | `kararlar/00-INDEX.md` | 🔄 canonical |
 | "Belge nasıl yazılır/nereye konur?" | `kararlar/konu/belge-duzeni-rehberi.md` | 🔄 canonical (8 kural) |
 | "Nasıl çalışıyoruz, hangi kurallar?" | kök `CLAUDE.md` (KURAL 1-16) | 🔄 canonical |
-| "Bu oturumda ne oldu?" (son 3) | `devir/07-oturum-gunlugu.md` | 🔄 |
+| ~~[ESKİ · 2026-09-24] "Bu oturumda ne oldu?" (son 3) \| `devir/07-oturum-gunlugu.md` \| 🔄~~ ⚠️ GÜNCELLEME (2026-09-24): "Son turda ne oldu?" | `otonom/02-ILERLEME.md` (07 günlüğü 2026-09-20'de durdu → 📸 tarihsel) | 🔄 |
 | "Daha eski oturumlarda ne oldu?" | `devir/gunluk/oturum-2026-08.md` · `oturum-2026-09.md` | 📸 |
-| "Projeye yeni geldim, nereden başlarım?" | `devir/01-felsefe-ve-calisma-tarzi.md` → `06-devir-kilavuzu.md` | 🔄 |
+| "Projeye yeni geldim, nereden başlarım?" | ⚠️ GÜNCELLEME (2026-09-24): **`devir/06-devir-kilavuzu.md` — TEK giriş belgesi** (ilk 10 satırda okuma sırası). ~~[ESKİ] `devir/01-felsefe-ve-calisma-tarzi.md` → `06-devir-kilavuzu.md`~~ | 🔄 |
 | "Mentör/menti paneli ne olmalıydı?" | `raporlar/persona/{mentor,menti}-persona-*.md` | 📸 |
 | "…peki kodda ne var?" ⭐ | `raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` **B.1/B.2** | 📸 |
 | "Admin panelleri ne olmalıydı / kodda ne var?" | `raporlar/panel/` (4 belge, strateji+envanter çiftleri) | 📸 |
@@ -342,6 +342,12 @@ Bugünkü 17'nin **8'i o defterden SONRA yazıldı** ve hiç bilanço görmedi:
 | `unutulmus-niyet-envanteri-2026-08-10.md` | 122 | Unutulmuş Niyet Envanteri (2026-08-10) | 📸 | 2026-08-10 (41g) |
 
 ### `docs/devir/` — 8 dosya / 785 satır
+
+> ⚠️ **GÜNCELLEME (2026-09-24, DC turu — devir klasörü düzeni):** Aşağıdaki tablo 2026-09-20 fotoğrafıdır. Bugün:
+> **tek yaşayan giriş belgesi = `06-devir-kilavuzu.md`** (🔄, yeniden yazıldı; eski gövde `docs/arsiv/06-devir-kilavuzu-eski-2026-08-11.md`) ·
+> `01-felsefe-ve-calisma-tarzi.md` 🔄 kısmen (bayat satırlar üstü çizili) · **gerisi 📸 dondurulmuş** (02 · 03 · 04 · 05 · 08;
+> `07` + `gunluk/` günlük olarak tarihsel — güncel durum `otonom/02-ILERLEME.md`). Klasör indeksi: `devir/00-INDEX.md`.
+> Karar tablosu ve kanıt: `raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md`. Klasör 2026-09-24'te **11 dosya** (gunluk/ ve 00-INDEX dahil).
 
 | dosya | satır | konu | tür | tazelik |
 |---|---:|---|---|---|
