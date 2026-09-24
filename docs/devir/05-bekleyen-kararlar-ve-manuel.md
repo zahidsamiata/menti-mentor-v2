@@ -1,5 +1,10 @@
 # 05 — BEKLEYEN KARARLAR VE ÜRÜN SAHİBİ MANUEL İŞLERİ
 
+> 📸 **DONDURULMUŞ — 2026-08-11 (ekleri 08-14, 08-20) fotoğrafı.** *(not eklendi: 2026-09-24, DC turu)*
+> Bu belge o günün durumunu anlatır; **BUGÜNÜ ANLATMAZ.**
+> Güncel karşılığı: `docs/otonom/01-CEVAPSIZ.md` (cevap bekleyen kararlar — ⚠️ TEYİT GEREK: DA dalı merge olunca gelir; o zamana kadar `docs/otonom/01-KARARLAR.md`) + `docs/otonom/03-PO-ELLE-ISLER.md` (PO'nun elle işleri).
+> Tarihsel kayıt olarak korunur; güncellenmez. Giriş belgesi: `docs/devir/06-devir-kilavuzu.md`.
+
 **📸 DONDURULMUŞ** — oturum devir notu (bekleyen kararlar / manuel işler).
 
 > **Amaç:** Kod dışı bekleyenler tek yerde: ürün sahibi kararı bekleyen teknik kararlar + ürün sahibinin
