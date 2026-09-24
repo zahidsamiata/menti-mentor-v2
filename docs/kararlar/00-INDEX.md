@@ -55,7 +55,7 @@ docs/
 │   ├── panel/                → platform ↔ tenant admin panel envanteri + strateji (kardeş çiftler)
 │   ├── persona/              → menti/mentör/yönetici persona + sevdirme/metrik belgeleri
 │   └── icerik/               → test/değerlendirme içerik arşivi (DISC/SJT/sertifika/öğrenme yolculuğu soru dökümü)
-├── devir/                    → oturum devir notları (01–06 set 📸 + 07-oturum-gunlugu 🔄 yaşayan)
+├── devir/                    → oturum devir notları (01–06 set 📸 + 07-oturum-gunlugu 🔄 yaşayan)  ⚠️ 2026-09-24: tek giriş = 06-devir-kilavuzu 🔄 · 07 📓 günlük (durdu) · bkz. devir/00-INDEX.md
 └── arsiv/                    → eskimiş/örtüşen/kopya belgeler (silinmedi, tarihsel iz için saklandı)
 ```
 
@@ -106,12 +106,12 @@ docs/
 
 ## Devir belgeleri — `docs/devir/` (2026-08-11 seti + yaşayan oturum günlüğü)
 > **⚠️ YENİ DÜZEN (2026-08-20):** Artık her oturum için ayrı dosya AÇILMAZ. Tüm oturum kapanışları tek yaşayan günlüğe
-> (`07-oturum-gunlugu.md`) tarih başlıklı bölümler halinde eklenir. Eski `07`+`08` orada birleşti; `08` arsiv/'e taşındı (silinmedi).
+> (`07-oturum-gunlugu.md`) tarih başlıklı bölümler halinde eklenir. Eski `07`+`08` orada birleşti; `08` arsiv/'e taşındı (silinmedi). ⚠️ (2026-09-24, DC turu): 📸 `07` günlük olarak donduruldu (son kayıt 2026-09-20); güncel tur kaydı: `docs/otonom/02-ILERLEME.md`.
 
 | Klasör | İçerik | Tür |
 |---|---|---|
 | `docs/devir/01–06` | Kontrol katmanı devir seti (felsefe · proje durumu · KVKK · 13-bulgu · bekleyen kararlar · devir kılavuzu). 2026-08-20'de tarihli GÜNCELLEME notlarıyla tazelendi | 📸 DONDURULMUŞ (2026-08-11) + ⚠️ güncelleme notları |
-| `docs/devir/07-oturum-gunlugu.md` | **Yaşayan oturum günlüğü** — 2026-08-14 · 2026-08-15 · 2026-08-20 oturum kapanışları + SIRADAKİ İŞ SIRASI + çalışma tarzı. Yeni oturumlar buraya eklenir | 🔄 YAŞAYAN |
+| `docs/devir/07-oturum-gunlugu.md` | **Yaşayan oturum günlüğü** — 2026-08-14 · 2026-08-15 · 2026-08-20 oturum kapanışları + SIRADAKİ İŞ SIRASI + çalışma tarzı. Yeni oturumlar buraya eklenir. ⚠️ (2026-09-24, DC turu): 📸 dondurulmuş (günlük, son kayıt 2026-09-20); güncel: `docs/otonom/02-ILERLEME.md` | 🔄 YAŞAYAN |
 | `docs/devir/08-oturum-tezi-2026-08-28.md` | **Oturum tezi** — 2026-08-28 oturumunun *muhakemesi*: büyük dönüşlerin neden'leri (DISC→Big Five, %50→%25, senaryo, manuel-eşleştirme), yanlış çıkan varsayımlar (dürüstlük kaydı), PO gerekçeleri, 7 yöntem dersi. Kararların canonical'ı DEĞİL — niyet kaydı | 📸 DONDURULMUŞ (2026-08-28) |
 
 > **Canonical eşleşmesi (Kural 1 — devir belgeleri özet/kopyadır, güncel bilgi kararlar/'da):**

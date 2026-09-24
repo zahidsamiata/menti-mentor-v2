@@ -104,7 +104,7 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
   2. **AYNI TURDA → her aksiyon `00-KARAR-TAKIP`'e girer.** TEK GİRİŞ KAPISI. **Numarasını BURADA alır** (tek numara dizisi; başka hiçbir yerde numara verilmez). Rapordan doğrudan yol haritasına giden bulgu OLMAZ.
   3. **Öncelik verilince → `10-yol-haritasi`'na TEK SATIR** (numara + tek cümle + öncelik + "detay: KARAR-TAKIP"). Detay kopyalanmaz.
   4. **İş bitince → önce KOD doğrulanır, sonra dört yer:** KARAR-TAKIP ✅ · yol haritası stub · `10-yol-tamamlananlar` kaydı · `09-DURUM` anlatısı.
-  5. **Oturum bitince → `07-oturum-gunlugu`'na bölüm.**
+  5. **Oturum bitince → `07-oturum-gunlugu`'na bölüm.** ⚠️ (2026-09-24, DC turu): 📸 `07` günlük olarak donduruldu (son kayıt 2026-09-20); tur kaydının fiilî yeri `docs/otonom/02-ILERLEME.md`. Kural↔uygulama çelişkisi PO kararına bırakıldı — bkz. `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md` §"Bulunan kural çelişkisi".
 - **Uygulama:** numara yalnız KARAR-TAKIP'te doğar → çakışma olmaz (bkz. #38 çakışması, 2026-08-23'te ada çevrilerek çözüldü).
 
 ---
@@ -145,7 +145,7 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
 - (2) **Her aksiyon `00-KARAR-TAKIP`'e girer — numarasını YALNIZ orada alır** (tek numara dizisi; rapordan doğrudan yol haritasına madde geçmez).
 - (3) Öncelik verilince → `10-yol-haritasi`'na **tek satır** (numara + öncelik + "detay: KARAR-TAKIP"); detay kopyalanmaz.
 - (4) İş bitince → **önce KOD doğrula**, sonra 4 yer: KARAR-TAKIP ✅ · yol-haritası stub · `10-yol-tamamlananlar` · `09-DURUM`.
-- (5) Oturum bitince → `devir/07-oturum-gunlugu`'na bölüm.
+- (5) Oturum bitince → `devir/07-oturum-gunlugu`'na bölüm. ⚠️ (2026-09-24, DC turu): 📸 `07` günlük olarak donduruldu (son kayıt 2026-09-20); tur kaydının fiilî yeri `docs/otonom/02-ILERLEME.md`. Kural↔uygulama çelişkisi PO kararına bırakıldı — bkz. `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md` §"Bulunan kural çelişkisi".
 
 > **⚠️ GÜNCELLEME (2026-08-27): KURAL 9-12 yürürlüğe girdi** — 4-turluk belge bilançosunun kök-neden teşhisinden çıktı
 > (`docs/raporlar/bilanco/tekrar-onleme-2026-08-26.md`, PO onaylı). Amaç: ~175 kalemin numarasız izsizleşmesi + 15 sözün
@@ -163,7 +163,7 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
 
 ### KURAL 11 — Söz açılışta okunur (EN KRİTİK — disiplin sona değil BAŞA)
 - `00-KARAR-TAKIP.md`'de **"⭐ SONRAKİ-TUR SÖZLERİ"** bölümü tutulur (YENİ DOSYA AÇMA — ikinci kaynak = çelişki riski).
-- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no).
+- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no). ⚠️ (2026-09-24, DC turu): 📸 `07` günlük olarak donduruldu (son kayıt 2026-09-20); tur kaydının fiilî yeri `docs/otonom/02-ILERLEME.md`. Kural↔uygulama çelişkisi PO kararına bırakıldı — bkz. `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md` §"Bulunan kural çelişkisi".
 - **Her oturum BAŞINDA bu bölüm OKUNUR** ve ürün sahibine açık sözler hatırlatılır. Söz yerine getirilince ✅ + kaldırılır. *(Teşhis: 15 sözün 11'i devralınmadığı için düştü; disiplin oturum sonundan başına taşındı.)*
 
 ### KURAL 12 — Tazelik denetimi (3 ayak; 30-gün ikincil)
