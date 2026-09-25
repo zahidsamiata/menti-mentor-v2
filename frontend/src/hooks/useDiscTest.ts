@@ -27,6 +27,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { discTestApi } from '@/lib/api/discTest';
+import { apiErrorMessage } from '@/lib/apiErrorMessage';
 import type {
   DiscQuestion,
   DiscTestState,
@@ -105,7 +106,7 @@ export function useDiscTest({ token, tenantId, onComplete }: UseDiscTestOptions)
       if (cancelled) return;
 
       if (!questionsResult.ok) {
-        setError('Sorular yüklenemedi. Lütfen tekrar deneyin.');
+        setError(apiErrorMessage(questionsResult.error, 'Sorular yüklenemedi. Lütfen tekrar deneyin.'));
         setState((prev) => ({ ...prev, loading: false }));
         return;
       }
@@ -160,7 +161,7 @@ export function useDiscTest({ token, tenantId, onComplete }: UseDiscTestOptions)
       const result = await discTestApi.respond(current.id, value, token, tenantId);
 
       if (!result.ok) {
-        setError('Cevap kaydedilemedi. Lütfen tekrar deneyin.');
+        setError(apiErrorMessage(result.error, 'Cevap kaydedilemedi. Lütfen tekrar deneyin.'));
         setState((prev) => ({ ...prev, isSubmitting: false }));
         return;
       }

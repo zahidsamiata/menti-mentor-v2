@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { certificationApi } from '@/lib/api/certification';
 import { topicLabel } from '@/lib/certificationTopics';
+import { apiErrorMessage } from '@/lib/apiErrorMessage';
 import type { CertQuestion, CertReveal, CertResult, CertOutcome } from '@/types/certification';
 
 // Renk semantiği: yeşil=doğru, sarı=kabul edilebilir, kırmızı=yanlış (renk körlüğü için ikon da).
@@ -87,7 +88,7 @@ export default function MentorCertificationPage() {
       setTopics(groupByTopic(res.data.questions));
       setRetryTopics(new Set(res.data.retryTopics ?? []));
     } else {
-      setLoadError('Senaryolar yüklenemedi. Lütfen tekrar deneyin.');
+      setLoadError(apiErrorMessage(res.error, 'Senaryolar yüklenemedi. Lütfen tekrar deneyin.'));
     }
   }, [api]);
 
@@ -119,7 +120,7 @@ export default function MentorCertificationPage() {
     setRevealing(false);
     if (!res.ok) {
       setSelectedKey(null);
-      setLoadError('Açıklama alınamadı. Lütfen tekrar deneyin.');
+      setLoadError(apiErrorMessage(res.error, 'Açıklama alınamadı. Lütfen tekrar deneyin.'));
       return;
     }
     setReveal(res.data);
@@ -167,7 +168,7 @@ export default function MentorCertificationPage() {
     } else if (res.error.error === 'NO_ACTIVE_TOPICS') {
       setSubmitError('Şu an açık sertifika konusu yok. Lütfen kurum yöneticinle iletişime geç.');
     } else {
-      setSubmitError('Değerlendirme gönderilemedi. Lütfen tekrar deneyin.');
+      setSubmitError(apiErrorMessage(res.error, 'Değerlendirme gönderilemedi. Lütfen tekrar deneyin.'));
     }
   }
 

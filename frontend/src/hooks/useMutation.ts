@@ -13,6 +13,7 @@
 
 import { useCallback, useState } from 'react';
 import type { ApiResult } from '@/types/api';
+import { apiErrorMessage } from '@/lib/apiErrorMessage';
 
 interface UseMutationOptions<TData, TVariables> {
   onSuccess?: (data: TData, variables: TVariables) => void;
@@ -42,7 +43,7 @@ export function useMutation<TData, TVariables>(
       if (result.ok) {
         options.onSuccess?.(result.data, variables);
       } else {
-        const msg = result.error.message ?? 'İşlem başarısız.';
+        const msg = apiErrorMessage(result.error, 'İşlem tamamlanamadı. Lütfen tekrar deneyin.');
         setError(msg);
         options.onError?.(msg, variables);
       }

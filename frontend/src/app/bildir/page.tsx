@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { submitSuspicionReport } from '@/lib/api/platform';
+import { apiErrorMessage } from '@/lib/apiErrorMessage';
 
 export default function BildirPage() {
   const [form, setForm] = useState({
@@ -28,7 +29,7 @@ export default function BildirPage() {
     if (result.ok) {
       setSubmitted(true);
     } else {
-      setError('Bildirim gönderilemedi. Lütfen tekrar deneyin.');
+      setError(apiErrorMessage(result.error, 'Bildirim gönderilemedi. Lütfen tekrar deneyin.'));
     }
   }
 
