@@ -15,6 +15,7 @@ const OAUTH_ERROR_MESSAGES: Record<string, string> = {
   GECERSIZ_STATE:       'Oturum süresi doldu. Lütfen tekrar deneyin.',
   PROVIDER_HATASI:      'Sosyal giriş sağlayıcısında hata oluştu.',
   TENANT_BULUNAMADI:    'Kuruluş bulunamadı. Bağlantıyı kontrol edin.',
+  TENANT_ONAY_BEKLENIYOR: 'Kurumunuz henüz inceleme aşamasında. Onaylandıktan sonra kayıt olabilirsiniz.',
   SUNUCU_HATASI:        'Bir hata oluştu. Lütfen tekrar deneyin.',
 };
 
