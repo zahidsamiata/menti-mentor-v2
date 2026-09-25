@@ -18,6 +18,11 @@ export type TenantVerificationStatus =
   | 'REJECTED'
   | 'CORRECTION_REQUESTED'; // #37: platform admin düzeltme istedi
 
+/**
+ * GV-12: kayıtlı bir e-postayla yapılan başvuruda backend hesap varlığını sızdırmamak için
+ * yeni kayıtla AYNI durum kodu + mesajı döner ama kurum oluşturmaz ve oturum açmaz →
+ * `tenant`/`user` null gelir, `accessToken`/`expiresIn` hiç gelmez.
+ */
 export interface SelfServeRegisterResponse {
   message: string;
   tenant: {
@@ -27,15 +32,15 @@ export interface SelfServeRegisterResponse {
     onboardingStep: string;
     programTemplate: string;
     verificationStatus: TenantVerificationStatus;
-  };
+  } | null;
   user: {
     id: string;
     email: string;
     fullName: string;
     role: string;
-  };
-  accessToken: string;
-  expiresIn: number;
+  } | null;
+  accessToken?: string;
+  expiresIn?: number;
 }
 
 export interface OnboardingUpdateResponse {
