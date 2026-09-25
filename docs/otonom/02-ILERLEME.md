@@ -4,6 +4,25 @@
 
 ---
 
+## ⭐ TUR KAYIT — KOD İNCELEMESİ RAPORU KALICILAŞTI + KUYRUĞA İŞLENDİ (2026-09-25)
+
+> **Mod:** 🟥 BYPASS — yalnız belge yazımı (PO talimatı). Kaynak tarama: 2026-09-24, 6 paralel salt-okuma ajanı (çatı `99189a8` · backend `4686ba4`).
+> **Kod DEĞİŞMEDİ · schema/package.json/Dockerfile DEĞİŞMEDİ · DB/migration/seed YOK · hiçbir şey SİLİNMEDİ · hiçbir CEVAP satırı doldurulmadı.** Doğrudan `main`'e commit+push (PO talimatı).
+> ⛔ Public repo: güvenlik (B) maddeleri ve C1 için rapor ve kuyrukta yalnız ad/ciddiyet/kuyruk kodu/dosya adı yazıldı; ayrıntı iş kapanınca rapora eklenir.
+
+- **Rapor:** `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` — A1-A9 · B1-B11 · C1-C5 · D1-D11. Strateji katmanı doğrulaması işlendi (A1-A3, B1-B6, C1, C5 → [D]); bu turda ayrıca **A5 ve A8 koda karşı doğrulandı → [D]** (A8'in A5'e bağlı olduğu bulundu: anket görüşme-başına-tek kayda yazıyor).
+- **00-KUYRUK.md — yeni EN ÜST blok "KR":** **22 satır** eklendi → 🟢 **8** (KR-06 · 09 · 10 · 12 · 13 · 15 · 17 · 18) · 🟡 **11** (KR-01 · 02 · 03 · 04 · 07 · 14 · 16 · 19 · 20 · 21 · 22) · 🔴 **3** (KR-05→KARAR-79 · KR-08→KARAR-77 · KR-11→KARAR-78). Aile haritasına **Y-KR** satırı (aileye toplanmadı, her biri ayrı PR).
+- **Öncelik (PO):** KR-01 (seed koruması) → KR-02 + KR-03 (birlikte test) → B bloğu (GV-04 · GV-06 · GV-05 · KR-04 · KR-05 🔴 · K-14) → kalanlar. Aynı dosyaya dokunan işlere "SIRALI" notu düşüldü (raporun §3'ü).
+- **Mükerrer çıkan → yeni satır AÇILMADI, mevcut satırın Not'una rapor atfı eklendi (12 satır):** B1→GV-04 · B2→GV-06 · B3→GV-05 · B6→K-14 · B7→GV-03 · B10→GV-10 · B11→GV-15 · D1→PS-04 + U-18 · D11→K-13 + E-3.
+- **❓ Belirsiz → satır AÇILMADI:** B8 (OAuth onay kapısı) ↔ U-08 · B9 (kurum dondurma/ret erişime yansımıyor) ↔ GV-10 · D8 (09-DURUM / 00-KARAR-TAKIP bayat) ↔ yinelenen K-20 belge senkronu. İlk ikisi ilgili satırın Not'unda ❓ ile işaretli.
+- **Kuyruk dışı:** D9 canlı DB teyidi → `03-PO-ELLE-ISLER.md` ADIM 0 (mevcut) · D10 merge sırası: backend #90 önce, çatı #264 sonra (operasyonel, PR numaraları teyit gerek).
+- **Arşiv kontrolü:** `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md` tarandı; hiçbir bulgu BİTTİ bir satırla örtüşmedi.
+- **01-KARARLAR.md — 3 kart açıldı:** **KARAR-77** (görüşmeye iki taraf da değerlendirme · migration · öneri A) · **KARAR-78** (dönemlik anket bağla/karantina/beklet · silme protokolü · öneri B) · **KARAR-79** (zamanlanmış iş tetikleme yetkisi · öneri A · **KARAR-13 ile birlikte cevaplanmalı**). İçindekilere eklendi.
+- **Kuyruk son dağılım (aktif, bu turdan sonra):** önceki 🟢 82 · 🟡 104 · 🔴 18 · ❓ 2 + KR (🟢 8 · 🟡 11 · 🔴 3).
+- **Sıradaki adım:** PO KARAR-77/78/79'u (ve KARAR-13'ü) cevaplar; normal OTONOM-PROMPT turu **KR-01**'den başlar.
+
+---
+
 ## ⭐ TUR KAYIT — BİRLEŞİK TUR: MERGE → ARŞİVLEME → 🟡 ÇÖZÜMÜ → KARARLAR → YENİ İŞLER (2026-09-23)
 
 > **Mod:** 🟥 BYPASS — düzenleme/kayıt turu (kuyruk İŞİ YAPILMADI). Doğrudan `main`'e çalışıldı (prompt tasarımı: checkout main → merge → düzenle).
