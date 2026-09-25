@@ -122,6 +122,12 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-78** | **Dönemlik anket: bağla / karantina / beklet** | **1** (KR-11) | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) |
 | **KARAR-79** | **Zamanlanmış iş tetikleme yetkisi kimde** | **1** (KR-05) | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı |
 | **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **84** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ⬜ boş · ⭐ çelişki taraması 2026-09-25 · tek cevap: "Hepsinde öneriyi kabul ediyorum" ya da madde madde |
+| **KARAR-81** | **⛔ ACİL — taslak kurumlar silinebilir; kurulum ne zaman tamam** | **2** (mevcut taslaklar · kayıt anında tamamlandı) | ⬜ boş · ⭐ F-04 incelemesi 2026-09-25 · CANLI VERİ · öneri A |
+| **KARAR-82** | **Davet bağlantısı modeli** | **1** (U-12) | ⬜ boş · çıkış blokeri · öneri B (iptal edilebilir toplu link) |
+| **KARAR-83** | **Rolü kim, nasıl değiştirir** | **1** (U-13) | ⬜ boş · çıkış blokeri · YETKİ · öneri B (yalnız düşürme hatası) |
+| **KARAR-84** | **E-posta yokken şifre sıfırlama** | **1** (U-15) | ⬜ boş · çıkış blokeri · YETKİ · öneri B (platform yöneticisi) |
+| **KARAR-85** | **Yeni ortamda DISC soru havuzu** | **1** (U-17) | ⬜ boş · çıkış blokeri · SEED · öneri A (silmeyen betik) |
+| **KARAR-86** | **Platform üye listesinde kişilik tipi** | **0** (yeni iş) | ⬜ boş · KVKK · öneri A (gösterilmesin) |
 
 ---
 
@@ -1381,6 +1387,85 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 - **Öneri: A**.
 
 **Cevap vermezsen:** yukarıdaki satırlar 🔴 KARAR-80 kilidinde kalır; tur bunları atlar. En çok iş kilitleyen: M9 (8 satır), M15 (16 satır), M1 (4), M16 (8).
+**CEVAP:**
+
+---
+
+### KARAR-81 · ⛔ ACİL — Taslakta kalmış kurumlar ve "kurulum ne zaman tamamlanmış sayılır" (2 iş açar) [ÜRÜN KARARI · CANLI VERİ]
+> ⭐ Kaynak: F-04 incelemesi (menti-mentor#102 yorum 5827846263 · menti-mentor-v2#272 yorum 5827975996), kodla doğrulandı 2026-09-25.
+**Şu an ne var:** Yeni kurum kendi kendine kayıt olduğunda "taslak" adımıyla açılıyor (`backend/src/controllers/selfServeController.ts:282`). Kurulumu "tamamlandı" yapan tek yer sihirbazın hesap adımıydı ve yalnız logo girilince ya da renk değiştirilince çalışıyordu; platform onayı bekleyen kurumlarda hiç çalışmıyordu. Her gün çalışan taslak temizliği, 96 saatten eski ve anlaşması olmayan taslak kurumları **kullanıcılarıyla birlikte siliyor** (`backend/src/services/cronScheduler.ts:181-212`); 72. saatte de hatırlatma e-postası atıyor (`:102-125`).
+**Bu turda yapılan (ileriye dönük):** menti-mentor-v2 #272 — kayıt başarılıysa kurulum her durumda "tamamlandı" işaretleniyor (onay bekleyenler dahil). Yeni kurumlar artık silinmez.
+**Sorun ne:** #272'den ÖNCE kaydolmuş ve hâlâ taslakta duran gerçek kurumlar varsa, temizlik onları bir sonraki çalışmada silebilir. Bunu düzeltmek canlı veriye yazmak demek (ajan kendi başına yapamaz). Ayrıca #272 sonrası küçük bir boşluk kalıyor: "tamamlandı" işareti ağ/oturum hatasıyla yazılamazsa kurum yine taslakta kalır.
+**Neden sana soruyorum:** Canlı veriye geri dönülmez dokunuş (hangi kurumların silinmeyeceği) ve "taslak temizliği" özelliğinin anlamı ürün kararı.
+**Seçenekler:**
+- **A) Mevcut taslakları "tamamlandı" yap + kurumu kayıtta doğrudan "tamamlandı" aç** · Kullanıcı ne görür: hiçbir kurum kendiliğinden silinmez; yarım kalan kayıtlar da kalıcı olur · Kazanç: veri kaybı riski tamamen kapanır, boşluk da kapanır · **Ne kaybedersin:** yarım bırakılmış (ciddi olmayan) kayıtlar birikir; taslak temizliği fiilen emekliye ayrılır · Süre S · Geri alınır: evet (adım alanı geri yazılabilir) · Migration: yok (veri güncellemesi var — önce tarihli yedek tablo alınır)
+- **B) Yalnız mevcut taslakları "tamamlandı" yap, temizlik kalsın** · Kullanıcı ne görür: bugünkü kurumlar korunur, yeni akışta #272'nin işareti yeter · Kazanç: temizlik özelliği yaşamaya devam eder · **Ne kaybedersin:** işaretin yazılamadığı nadir durumda kurum yine silinebilir · Süre S · Geri alınır: evet · Migration: yok (veri güncellemesi — önce yedek)
+- **C) Temizliği durdur (zamanlanmış işi kapat), kararı sonra ver** · Kullanıcı ne görür: hiçbir kurum silinmez · Kazanç: en hızlı güvence, veri yazımı yok · **Ne kaybedersin:** KVKK veri minimizasyonu gerekçesiyle kurulan temizlik çalışmaz; yarım kayıtlar birikir · Süre S · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** A riski kökünden kapatır ama temizlik özelliğini fiilen bitirir; B özelliği korur ama nadir bir boşluk bırakır; C hemen güvence verir ve kararı erteler. Gerçek kullanıcı ~sıfırken A en sade yol.
+**Benim önerim:** A — bugünkü tek kalıcı zarar yolu gerçek kurumun silinmesi; yarım kayıt birikmesi geri alınabilir, silinen kurum geri gelmez. *(Canlı veri kararı: senin.)*
+**Cevap vermezsen:** mevcut taslak kurumlar (varsa) temizlik riski altında kalır. **PO'ya acil:** `03-PO-ELLE-ISLER.md` en üstündeki "taslak kurum" maddesine bak.
+**CEVAP:**
+
+### KARAR-82 · Davet bağlantısı modeli (1 iş açar: U-12) [ÜRÜN + GÜVENLİK KARARI]
+**Şu an ne var:** Kurum yöneticisinin ürettiği davet bağlantısı 30 gün geçerli, belirli bir e-postaya bağlı değil, birden çok kez kullanılabiliyor ve iptal edilemiyor (`backend/src/controllers/selfServeController.ts:571` — `expiresIn: '30d'`, veritabanı kaydı yok).
+**Sorun ne:** Bağlantı yanlış kişinin eline geçerse (yanlış gruba iletilirse) 30 gün boyunca herkes kurumun üyesi olarak kayıt olabilir; yönetici bunu durduramaz. Davetli kişi artık doğrudan onaylı açıldığı için (form ve OAuth) etkisi büyüdü.
+**Neden sana soruyorum:** Kurumların davet deneyimini (toplu link mi, kişiye özel mi) ve güvenlik/kolaylık dengesini belirler.
+**Seçenekler:**
+- **A) Süreyi kısalt (7 gün), gerisi aynı** · Kullanıcı: yönetici haftalık yeni link üretir · Kazanç: en ucuz, migration yok · **Ne kaybedersin:** sızan link yine 7 gün kullanılabilir, iptal yok · Süre S · Geri alınır: evet · Migration: yok
+- **B) İptal edilebilir toplu link (veritabanı kaydı + "linki iptal et" düğmesi)** · Kullanıcı: yönetici sızan linki tek tıkla kapatır · Kazanç: kontrol yöneticide · **Ne kaybedersin:** yeni tablo + ekran işi · Süre M · Geri alınır: evet · Migration: VAR
+- **C) Kişiye özel, e-postaya bağlı, tek kullanımlık davet** · Kullanıcı: her davetli kendi linkini e-postayla alır · Kazanç: en güvenli · **Ne kaybedersin:** toplu WhatsApp paylaşımı biter, SMTP'ye bağımlı, en çok iş · Süre L · Geri alınır: zor · Migration: VAR
+**Karşılaştırma:** A hızlı ama sınırlı; B toplu paylaşımı koruyup kontrol verir; C en güvenli ama derneklerin toplu davet alışkanlığını bozar.
+**Benim önerim:** B — derneklerin toplu paylaşım alışkanlığını korurken sızıntıda yöneticiye kapatma imkânı verir.
+**Cevap vermezsen:** U-12 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+
+### KARAR-83 · Kullanıcının rolünü kim, nasıl değiştirir? (1 iş açar: U-13) [YETKİ KARARI]
+**Şu an ne var:** MENTOR↔MENTI rol değiştiren bir yol yok; yanlış rolle kayıt olan düzeltilemiyor. Yöneticilikten düşürme her zaman "MENTOR" yazıyor (`backend/src/controllers/adminController.ts:972`) — kişi aslında mentiyse rolü bozuluyor.
+**Neden sana soruyorum:** "Yetki kimde" kararı ve rol değişince kişinin eşleşme/görüşme geçmişinin ne olacağı ürün sorusu.
+**Seçenekler:**
+- **A) Kurum yöneticisi rolü değiştirebilir; düşürmede hedef rolü seçer** · Kullanıcı: yönetici panelinde "rolü değiştir" · Kazanç: yanlış kayıt düzelir, düşürme bozulmaz · **Ne kaybedersin:** yöneticinin elinde güçlü bir araç; eski eşleşmeler yeni role uymayabilir · Süre M · Geri alınır: evet · Migration: yok
+- **B) Yalnız düşürme hatası düzeltilsin (hedef rolü yönetici seçer); rol değiştirme yok** · Kazanç: en küçük iş, bozulma biter · **Ne kaybedersin:** yanlış rolle kayıt yine düzeltilemez (kişi yeniden kayıt olur) · Süre S · Geri alınır: evet · Migration: yok
+- **C) Rol değişikliği yalnız platform yöneticisinde** · Kazanç: kontrol merkezde · **Ne kaybedersin:** her talep sana gelir · Süre M · Migration: yok
+**Karşılaştırma:** A kurumlara özerklik verir; B yalnız hatayı giderir; C denetimi artırır ama iş yükünü sana taşır.
+**Benim önerim:** B şimdi, A ihtiyaç doğunca — düşürmedeki sessiz bozulma bugünkü tek gerçek hata.
+**Cevap vermezsen:** U-13 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+
+### KARAR-84 · E-posta çalışmazsa şifresini unutan nasıl girer? (1 iş açar: U-15) [YETKİ + ÜRÜN KARARI]
+**Şu an ne var:** Şifre sıfırlama yalnız e-postayla (`backend/src/controllers/authController.ts:548-575`). E-posta gönderimi başarısız olsa da kullanıcı "gönderildi" benzeri genel mesaj görüyor (hesap var mı bilgisini sızdırmamak için bilinçli); yöneticinin sıfırlama yolu yok.
+**Neden sana soruyorum:** Başkasının şifresini sıfırlama yetkisi kimde olacak — yetki kararı.
+**Seçenekler:**
+- **A) Kurum yöneticisi, üyesi için tek kullanımlık sıfırlama bağlantısı üretir (e-postasız, elden iletir)** · Kazanç: e-posta kapalıyken de çözüm · **Ne kaybedersin:** yönetici başkasının hesabına geçici erişim üretebilir (kötüye kullanım riski, iz kaydı şart) · Süre M · Migration: yok
+- **B) Yalnız platform yöneticisi üretir** · Kazanç: yetki dar · **Ne kaybedersin:** her talep sana gelir · Süre M · Migration: yok
+- **C) Şimdilik yalnız e-posta; gönderim hatası yöneticiye/izlemeye düşsün** · Kazanç: yetki değişmez · **Ne kaybedersin:** e-posta kapalıyken kullanıcı yine giremez · Süre S · Migration: yok
+**Karşılaştırma:** A kurum içinde hızlı çözüm; B daha güvenli ama merkezi yük; C en az risk, en az çözüm. E-postanın canlıda çalıştığı teyit edilirse (03-PO SMTP maddesi) C yeterli olabilir.
+**Benim önerim:** B — başkasının hesabına erişim üretmek hassas; ilk kurumlarda talep sayısı düşük. *(Yetki kararı senin.)*
+**Cevap vermezsen:** U-15 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+
+### KARAR-85 · Yeni ortamda DISC soru havuzu nasıl dolacak? (1 iş açar: U-17) [SEED KARARI]
+**Şu an ne var:** Temiz bir veritabanında DISC soru havuzu boş kalıyor; dolduran tek yol veri silen `prisma/seed.ts` (bu turda KR-01 ile kilitlendi, yerel olmayan veritabanında artık çalışmaz). Yöneticinin soru ekleme ekranı DISC sorusu eklemeyi engelliyor.
+**Neden sana soruyorum:** Seed ve canlı veriye yazım kuralı gereği her seed işi senin onayını ister.
+**Seçenekler:**
+- **A) Ayrı, yalnız ekleyen/güncelleyen (silmeyen) bir "DISC soru havuzu" betiği** · Kazanç: yeni ortam güvenle kurulur; mevcut canlı veriye dokunmaz · **Ne kaybedersin:** yeni betik + bakım; çalıştırılması yine senin onayına bağlı · Süre S · Migration: yok
+- **B) Soruları migration içine göm** · Kazanç: kurulumda kendiliğinden gelir · **Ne kaybedersin:** migration = canlı DB değişikliği (her ortamda çalışır), içerik değişince yeni migration · Süre M · Migration: VAR
+- **C) Şimdilik yalnız kurulum belgesi (elle yöntem)** · Kazanç: sıfır kod · **Ne kaybedersin:** yeni ortam kurulumu kırılgan kalır · Süre S · Migration: yok
+**Karşılaştırma:** A en güvenli ve tekrarlanabilir; B otomatik ama her değişiklikte canlıya dokunur; C erteleme.
+**Benim önerim:** A — silmeyen betik mevcut güvenli seed desenleriyle (`seed-certification`, `seed-learning-journey`) aynı.
+**Cevap vermezsen:** U-17 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+
+### KARAR-86 · Platform üye listesinde kişilik tipi görünsün mü? (0 iş — yeni iş açar) [KVKK KARARI]
+> ⭐ Kaynak: V-05 incelemesi (menti-mentor#100 yorum 5827763970).
+**Şu an ne var:** Platform yöneticisinin kurum detayındaki üye listesi her satırda ad ile birlikte DISC tipini gösteriyor (`backend/src/controllers/platformTenantController.ts:185,200`). V-05 ile toplu grafikte küçük gruplar gizlendi, ama aynı bilgi üye listesinde kişi bazında duruyor.
+**Neden sana soruyorum:** Psikometrik veri (KVKK) kimin, hangi düzeyde göreceği ürün/KVKK kararı.
+**Seçenekler:**
+- **A) Üye listesinde DISC gösterilmesin (yalnız toplu grafik)** · Kazanç: platform düzeyinde kişi bazında psikometri görünmez · **Ne kaybedersin:** destek verirken kişinin tipine bakılamaz · Süre S · Migration: yok
+- **B) Kalsın (platform yöneticisi destek için görmeli)** · Kazanç: sıfır iş · **Ne kaybedersin:** V-05'in platform tarafındaki kazancı sembolik kalır · Süre 0
+- **C) Kalsın ama her görüntüleme iz kaydına düşsün** · Kazanç: hesap verebilirlik · **Ne kaybedersin:** iz kaydı işi · Süre S · Migration: yok
+**Karşılaştırma:** A veri minimizasyonuna en uygun; B pratik; C ara yol.
+**Benim önerim:** A — platform yöneticisinin kişi bazında kişilik tipine ihtiyacı olan somut bir destek senaryosu kodda yok. *(KVKK kararı senin.)*
+**Cevap vermezsen:** mevcut durum sürer.
 **CEVAP:**
 
 ---

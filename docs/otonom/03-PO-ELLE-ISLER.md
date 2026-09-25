@@ -3,6 +3,9 @@
 
 # 03 — PO'NUN ELLE YAPACAKLARI (kod değiştirilerek çözülemeyen işler)
 
+> ⛔⛔ **ACİL (2026-09-25) — canlıda "taslak" kurum var mı?** Yeni kurum kaydı, sihirbazda logo girilmediyse / renk değiştirilmediyse / platform onayı bekliyorsa "taslak" adımında kalıyordu; her gün çalışan temizlik 96 saati geçen, anlaşması olmayan taslak kurumları **kullanıcılarıyla birlikte siliyor** (`backend/src/services/cronScheduler.ts:181-212`). İleriye dönük düzeltme: menti-mentor-v2 #272. **Senin bakman gereken:** Neon/prod veritabanında `SELECT id, slug, "createdAt", "onboardingStep", "verificationStatus" FROM "Tenant" WHERE "onboardingStep" IN ('TEMPLATE','LOGO','PREVIEW') AND "isActive" = true;` (salt okuma). Satır varsa **KARAR-81**'i cevapla; ajan tarihli yedek alıp düzeltir. Acil güvence istersen Dokploy'da geçici `CRON_ENABLED=false` (tüm zamanlanmış işleri durdurur — KVKK imhası dahil; bkz. V-11).
+
+
 🔄 YAŞAYAN · Oluşturma: 2026-09-19 · Kaynak: W (`operasyonel-hazirlik-2026-09-19.md`) + X (`uctan-uca-kurum-yolculugu-2026-09-19.md`) denetimleri.
 
 > **Bu belge neden var:** Denetimlerde çıkan risklerin bir kısmı **kodla çözülemez** — Dokploy paneli, hesap
