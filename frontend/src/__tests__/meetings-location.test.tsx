@@ -64,6 +64,18 @@ describe('Görüşmelerim — görüşme yeri/bağlantısı', () => {
     expect(link).toHaveAttribute('href', 'https://meet.example.com/abc');
   });
 
+  it('GV-03 negatif: http(s) olmayan bağlantı tıklanabilir çizilmez', () => {
+    queryMock.data = {
+      items: [meetingFixture({ format: 'ONLINE', locationUrl: 'javascript:alert(1)' })],
+      total: 1,
+    };
+
+    render(<MeetingsPage />);
+
+    expect(screen.queryByRole('link', { name: /Görüşmeye katıl/ })).toBeNull();
+    expect(screen.getByText(/geçersiz bağlantı/)).toBeInTheDocument();
+  });
+
   it('IN_PERSON görüşmede konum metni görünür', () => {
     queryMock.data = {
       items: [meetingFixture({ format: 'IN_PERSON', locationText: 'Kadıköy Ofis, Kat 3', locationUrl: undefined })],
