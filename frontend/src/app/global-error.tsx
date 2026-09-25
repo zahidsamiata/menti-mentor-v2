@@ -10,6 +10,7 @@
  */
 
 import { useEffect } from 'react';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function GlobalError({
   error,
@@ -59,7 +60,7 @@ export default function GlobalError({
                 color: '#fff',
               }}
             >
-              Tekrar dene
+              {UI_TEXT.actions.retry}
             </button>
             {/* global-error kök layout çöktüğünde çalışır; next/link router context'i
                 güvenilmez olabilir → tam sayfa gezinme için düz <a> kasıtlı. */}

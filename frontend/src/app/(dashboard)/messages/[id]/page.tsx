@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { conversationsApi } from '@/lib/api/conversations';
+import { UI_TEXT } from '@/lib/uiText';
 
 const MESSAGE_MAX = 2000;
 
@@ -87,7 +88,7 @@ export default function ConversationThreadPage() {
       {/* Mesajlar */}
       <div className="flex-1 space-y-3 overflow-y-auto py-4">
         {loading ? (
-          <p className="py-6 text-center text-sm text-muted-foreground">Yükleniyor…</p>
+          <p className="py-6 text-center text-sm text-muted-foreground">{UI_TEXT.status.loading}</p>
         ) : error ? (
           <p className="py-6 text-center text-sm text-destructive">{error}</p>
         ) : !data || data.messages.length === 0 ? (
@@ -135,7 +136,7 @@ export default function ConversationThreadPage() {
             }}
           />
           <Button onClick={handleSend} disabled={sending || text.trim().length === 0}>
-            {sending ? 'Gönderiliyor…' : 'Gönder'}
+            {sending ? UI_TEXT.status.sending : UI_TEXT.actions.send}
           </Button>
         </div>
       </div>

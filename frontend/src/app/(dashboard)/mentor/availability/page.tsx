@@ -9,6 +9,7 @@ import { meetingsApi } from '@/lib/api/meetings';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { UI_TEXT } from '@/lib/uiText';
 
 const WEEKDAYS = [
   { value: 'MON', label: 'Pazartesi' },
@@ -204,7 +205,7 @@ export default function AvailabilityPage() {
                   <button
                     onClick={() => removeBlock(i)}
                     className="text-xs text-muted-foreground hover:text-destructive transition-colors"
-                    aria-label="Sil"
+                    aria-label={UI_TEXT.actions.delete}
                   >
                     ✕
                   </button>
@@ -216,7 +217,7 @@ export default function AvailabilityPage() {
       </Card>
 
       <Button onClick={save} disabled={saving || !canSave} className="w-full">
-        {saving ? 'Kaydediliyor…' : 'Müsaitliği Kaydet'}
+        {saving ? UI_TEXT.status.saving : 'Müsaitliği Kaydet'}
       </Button>
     </div>
   );

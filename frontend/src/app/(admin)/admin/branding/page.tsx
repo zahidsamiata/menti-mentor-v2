@@ -29,6 +29,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { updateOnboarding } from '@/lib/api/selfServe';
+import { UI_TEXT } from '@/lib/uiText';
 
 // ─── Sabitler ────────────────────────────────────────────────────────────────
 
@@ -203,7 +204,7 @@ export default function BrandingPage() {
 
           <div className="flex justify-end">
             <Button type="button" onClick={handleSave} disabled={!canSave}>
-              {saving ? 'Kaydediliyor…' : 'Kaydet'}
+              {saving ? UI_TEXT.status.saving : UI_TEXT.actions.save}
             </Button>
           </div>
 

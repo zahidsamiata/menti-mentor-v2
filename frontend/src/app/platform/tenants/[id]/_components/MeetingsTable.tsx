@@ -1,5 +1,6 @@
 import type { TenantMeeting } from '@/lib/api/platform';
 import { meetingFormatLabel } from '@/lib/enumLabels';
+import { UI_TEXT } from '@/lib/uiText';
 
 const STATUS_LABEL: Record<string, string> = {
   PENDING: 'Beklemede',
@@ -35,7 +36,7 @@ export function MeetingsTable({
   meetings: TenantMeeting[];
   loading: boolean;
 }) {
-  if (loading) return <p className="text-muted-foreground text-sm">Yükleniyor…</p>;
+  if (loading) return <p className="text-muted-foreground text-sm">{UI_TEXT.status.loading}</p>;
   if (meetings.length === 0) return <p className="text-muted-foreground text-sm">Görüşme bulunamadı.</p>;
 
   return (
