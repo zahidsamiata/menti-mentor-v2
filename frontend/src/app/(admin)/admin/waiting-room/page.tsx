@@ -20,6 +20,7 @@ export default function WaitingRoomPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => adminApi.listPendingUsers(api),
     [api],
+    { cacheKey: 'admin:pending-users' },
   );
 
   const [actionError, setActionError] = useState<string | null>(null);

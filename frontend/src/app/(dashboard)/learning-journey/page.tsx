@@ -25,7 +25,7 @@ export default function LearningJourneyPage() {
   const { data, isLoading, error } = useQuery(
     () => learningJourneyApi.getStages(api),
     [api],
-    { enabled: isPlayer },
+    { enabled: isPlayer, cacheKey: 'learning-journey:stages' },
   );
 
   if (!user || !isPlayer) return null;

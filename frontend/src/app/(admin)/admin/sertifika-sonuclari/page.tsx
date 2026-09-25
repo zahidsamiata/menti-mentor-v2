@@ -41,6 +41,7 @@ export default function CertResultsPage() {
   const { data, isLoading, error } = useQuery(
     () => adminApi.listCertResults(api, { status: status ?? undefined, page }),
     [status, page],
+    { cacheKey: `admin:cert-results:${status ?? 'ALL'}:${page}` },
   );
 
   const handleTabChange = (newStatus: CertificationStatus | null) => {

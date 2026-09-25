@@ -32,7 +32,7 @@ export default function MessagesInboxPage() {
   const { data, isLoading: loading } = useQuery(
     () => conversationsApi.list(api),
     [api],
-    { enabled: !!user },
+    { enabled: !!user, cacheKey: 'conversations:list' },
   );
 
   return (

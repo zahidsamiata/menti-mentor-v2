@@ -16,7 +16,7 @@ export default function ManagersPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => adminApi.listAdmins(api),
     [],
-    { enabled: true },
+    { enabled: true, cacheKey: 'admin:admins' },
   );
 
   // Atama listesi yalnızca panel açılınca çekilir (onaylı kullanıcılar).

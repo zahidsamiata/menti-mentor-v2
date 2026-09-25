@@ -24,12 +24,14 @@ export default function AlgorithmTunerPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => algorithmTunerApi.getPending(api),
     [api],
+    { cacheKey: 'admin:algorithm-tuner:pending' },
   );
 
   // #9/9a: kurumun MEVCUT eşleştirme ağırlıkları — gösterim + manuel ayar.
   const { data: weightsData, refetch: refetchWeights } = useQuery(
     () => algorithmTunerApi.getWeights(api),
     [api],
+    { cacheKey: 'admin:algorithm-tuner:weights' },
   );
   const weights = weightsData?.weights ?? null;
   // 95: son manuel değişikliğin izi (kim/ne zaman/eski→yeni). Yoksa null.
