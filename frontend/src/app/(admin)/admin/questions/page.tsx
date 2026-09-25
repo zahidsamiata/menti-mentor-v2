@@ -11,7 +11,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 
 const DISC_COLORS: Record<string, string> = {
-  D: 'text-red-500', I: 'text-yellow-500', S: 'text-green-500', C: 'text-blue-500', GENERAL: 'text-gray-400',
+  D: 'text-red-600 dark:text-red-400', I: 'text-yellow-600 dark:text-yellow-400', S: 'text-green-600 dark:text-green-400', C: 'text-blue-600 dark:text-blue-400', GENERAL: 'text-gray-400',
 };
 
 // Soru tipi enum'u (CORE/DEEPENING) DB değeridir — DEĞİŞMEZ. Yalnızca görünen etiket Türkçe.

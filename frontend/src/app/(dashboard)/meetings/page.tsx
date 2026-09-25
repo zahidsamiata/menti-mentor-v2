@@ -91,7 +91,7 @@ function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) 
 
       {/* Feedback uyarısı */}
       {needsFeedback && !isPast && (
-        <Button asChild size="sm" variant="outline" className="w-full border-amber-400 text-amber-700 hover:bg-amber-50">
+        <Button asChild size="sm" variant="outline" className="w-full border-amber-400 text-amber-700 hover:bg-amber-50 dark:border-amber-800 dark:text-amber-300 dark:hover:bg-amber-950/30">
           <Link href={`/meeting-checkin?meetingId=${meeting.id}`}>
             Değerlendirme Yap →
           </Link>

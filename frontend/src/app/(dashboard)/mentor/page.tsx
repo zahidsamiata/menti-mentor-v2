@@ -25,10 +25,10 @@ import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
 import type { DiscType, MentorFilter } from '@/types/matching';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
-  { value: 'D', label: 'D — Dominant',       color: 'text-red-500' },
-  { value: 'I', label: 'I — Influential',    color: 'text-yellow-500' },
-  { value: 'S', label: 'S — Steady',         color: 'text-green-500' },
-  { value: 'C', label: 'C — Conscientious',  color: 'text-blue-500' },
+  { value: 'D', label: 'D — Dominant',       color: 'text-red-600 dark:text-red-400' },
+  { value: 'I', label: 'I — Influential',    color: 'text-yellow-600 dark:text-yellow-400' },
+  { value: 'S', label: 'S — Steady',         color: 'text-green-600 dark:text-green-400' },
+  { value: 'C', label: 'C — Conscientious',  color: 'text-blue-600 dark:text-blue-400' },
 ];
 
 // Metrik kartı tanımları — değer, dashboard-metrics endpoint'inden doldurulur.

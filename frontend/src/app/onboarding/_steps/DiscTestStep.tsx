@@ -47,18 +47,20 @@ interface OptionCardProps {
   onClick:     () => void;
 }
 
+// K-10: şık metni `text-foreground` — koyu modda açık renktir; sabit `bg-*-50` zemin onu okunmaz
+// yapıyordu. Koyu modda zemin yarı saydam ton (`dark:*-500/15`) olur, metin tema rengiyle okunur kalır.
 const OPTION_COLORS: Record<string, string> = {
-  A: 'hover:border-violet-400 hover:bg-violet-50 data-[selected=true]:border-violet-500 data-[selected=true]:bg-violet-50',
-  B: 'hover:border-blue-400   hover:bg-blue-50   data-[selected=true]:border-blue-500   data-[selected=true]:bg-blue-50',
-  C: 'hover:border-emerald-400 hover:bg-emerald-50 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-50',
-  D: 'hover:border-amber-400  hover:bg-amber-50  data-[selected=true]:border-amber-500  data-[selected=true]:bg-amber-50',
+  A: 'hover:border-violet-400 hover:bg-violet-50 data-[selected=true]:border-violet-500 data-[selected=true]:bg-violet-50 dark:hover:bg-violet-500/15 dark:data-[selected=true]:bg-violet-500/15',
+  B: 'hover:border-blue-400 hover:bg-blue-50 data-[selected=true]:border-blue-500 data-[selected=true]:bg-blue-50 dark:hover:bg-blue-500/15 dark:data-[selected=true]:bg-blue-500/15',
+  C: 'hover:border-emerald-400 hover:bg-emerald-50 data-[selected=true]:border-emerald-500 data-[selected=true]:bg-emerald-50 dark:hover:bg-emerald-500/15 dark:data-[selected=true]:bg-emerald-500/15',
+  D: 'hover:border-amber-400 hover:bg-amber-50 data-[selected=true]:border-amber-500 data-[selected=true]:bg-amber-50 dark:hover:bg-amber-500/15 dark:data-[selected=true]:bg-amber-500/15',
 };
 
 const LETTER_COLORS: Record<string, string> = {
-  A: 'bg-violet-100  text-violet-700',
-  B: 'bg-blue-100    text-blue-700',
-  C: 'bg-emerald-100 text-emerald-700',
-  D: 'bg-amber-100   text-amber-700',
+  A: 'bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300',
+  B: 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
+  C: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300',
+  D: 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
 };
 
 function OptionCard({ letter, text, isSelected, isDisabled, onClick }: OptionCardProps) {

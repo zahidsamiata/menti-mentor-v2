@@ -51,8 +51,8 @@ export default function PendingReviewPage() {
   if (status === 'APPROVED' || status === 'AUTO_APPROVED') {
     return (
       <Shell
-        icon={<CheckCircle2 className="h-8 w-8 text-emerald-600" />}
-        iconBg="bg-emerald-100"
+        icon={<CheckCircle2 className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />}
+        iconBg="bg-emerald-100 dark:bg-emerald-950/30"
         title="Başvurunuz Onaylandı 🎉"
         desc="Kurumunuz onaylandı. Artık giriş yapıp programınızı yönetmeye başlayabilirsiniz."
       >
@@ -70,8 +70,8 @@ export default function PendingReviewPage() {
   if (status === 'CORRECTION_REQUESTED') {
     return (
       <Shell
-        icon={<AlertTriangle className="h-8 w-8 text-amber-600" />}
-        iconBg="bg-amber-100"
+        icon={<AlertTriangle className="h-8 w-8 text-amber-600 dark:text-amber-400" />}
+        iconBg="bg-amber-100 dark:bg-amber-950/30"
         title="Bilgi Güncellemesi İsteniyor"
         desc="Başvurunuz reddedilmedi. Platform ekibimiz bazı bilgileri güncellemenizi rica ediyor. Giriş yaptıktan sonra panelinizdeki bandan bilgileri güncelleyip tekrar gönderebilirsiniz."
       >
@@ -94,8 +94,8 @@ export default function PendingReviewPage() {
   if (status === 'REJECTED') {
     return (
       <Shell
-        icon={<XCircle className="h-8 w-8 text-red-600" />}
-        iconBg="bg-red-100"
+        icon={<XCircle className="h-8 w-8 text-red-600 dark:text-red-400" />}
+        iconBg="bg-red-100 dark:bg-red-950/30"
         title="Başvurunuz Onaylanmadı"
         desc="Başvurunuz şu an onaylanmadı. Sorularınız veya yeniden başvuru için destek ekibimizle iletişime geçebilirsiniz."
       >
@@ -117,8 +117,8 @@ export default function PendingReviewPage() {
   // Varsayılan: PENDING_REVIEW · oturum yok · yüklenirken → "inceleniyor" (eski davranış).
   return (
     <Shell
-      icon={<Clock className="h-8 w-8 text-amber-600" />}
-      iconBg="bg-amber-100"
+      icon={<Clock className="h-8 w-8 text-amber-600 dark:text-amber-400" />}
+      iconBg="bg-amber-100 dark:bg-amber-950/30"
       title="Başvurunuz İnceleniyor"
       desc="Kurum kaydınız alındı. Platform ekibimiz başvurunuzu en kısa sürede inceleyecektir. Bu sayfayı yenileyerek güncel durumu görebilirsiniz."
     >
