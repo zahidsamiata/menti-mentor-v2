@@ -1,4 +1,5 @@
 import type { TenantMember, TenantMemberRole } from '@/lib/api/platform';
+import { certStatusBadge } from '@/lib/enumLabels';
 
 type RoleFilter = TenantMemberRole | 'ALL';
 
@@ -69,7 +70,7 @@ export function MembersTable({
                 <th className="px-4 py-3 text-left">E-posta (maskeli)</th>
                 <th className="px-4 py-3 text-left">DISC</th>
                 <th className="px-4 py-3 text-left">Sertifika</th>
-                <th className="px-4 py-3 text-left">Journey</th>
+                <th className="px-4 py-3 text-left">Öğrenme Yolculuğu</th>
                 <th className="px-4 py-3 text-left">Katılım</th>
                 <th className="px-4 py-3 text-left">Aktif</th>
               </tr>
@@ -86,10 +87,8 @@ export function MembersTable({
                   <td className="px-4 py-3 text-muted-foreground font-mono text-xs">{m.emailMasked}</td>
                   <td className="px-4 py-3 text-foreground">{m.discType ?? '—'}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${
-                      m.isCertified ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-muted text-muted-foreground'
-                    }`}>
-                      {m.certificationStatus}
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${certStatusBadge(m.certificationStatus).className}`}>
+                      {certStatusBadge(m.certificationStatus).label}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs whitespace-nowrap">

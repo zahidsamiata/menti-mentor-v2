@@ -1,4 +1,5 @@
 import type { TenantMeeting } from '@/lib/api/platform';
+import { meetingFormatLabel } from '@/lib/enumLabels';
 
 const STATUS_LABEL: Record<string, string> = {
   PENDING: 'Beklemede',
@@ -63,7 +64,7 @@ export function MeetingsTable({
                   {STATUS_LABEL[m.status] ?? m.status}
                 </span>
               </td>
-              <td className="px-4 py-3 text-muted-foreground">{m.format}</td>
+              <td className="px-4 py-3 text-muted-foreground">{meetingFormatLabel(m.format)}</td>
               <td className="px-4 py-3">
                 <span className={`text-xs px-2 py-0.5 rounded-full ${
                   m.hasFeedback ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-muted text-muted-foreground'

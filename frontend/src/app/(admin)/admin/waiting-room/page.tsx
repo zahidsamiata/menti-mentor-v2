@@ -12,6 +12,7 @@ import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { CoachingSuggestionsDialog } from '@/components/organisms/CoachingSuggestionsDialog';
 import { DiscBadge } from '@/components/atoms/DiscBadge';
 import type { AdminUser } from '@/types/admin';
+import { roleLabel } from '@/lib/enumLabels';
 
 export default function WaitingRoomPage() {
   const api = useApiClient();
@@ -130,7 +131,7 @@ export default function WaitingRoomPage() {
                     {/* Rol */}
                     <td className="px-4 py-3">
                       <Badge variant={user.role === 'MENTOR' ? 'brand' : 'secondary'} className="text-xs">
-                        {user.role}
+                        {roleLabel(user.role)}
                       </Badge>
                     </td>
 

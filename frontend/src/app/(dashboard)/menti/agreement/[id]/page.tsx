@@ -9,9 +9,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { MEETING_FORMAT_LABELS } from '@/lib/enumLabels';
 
 const FREQ_LABEL: Record<string, string> = { WEEKLY: 'Haftada bir', BIWEEKLY: 'İki haftada bir', MONTHLY: 'Ayda bir' };
-const CHANNEL_LABEL: Record<string, string> = { ONLINE: 'Online', IN_PERSON: 'Yüz yüze', PHONE: 'Telefon' };
+const CHANNEL_LABEL = MEETING_FORMAT_LABELS;
 const STATUS_LABEL: Record<string, string> = {
   DRAFT: 'Taslak', ACTIVE: 'Aktif', RENEWAL_PENDING: 'Yenileme Bekleniyor', RENEWED: 'Yenilendi', ENDED: 'Tamamlandı',
 };

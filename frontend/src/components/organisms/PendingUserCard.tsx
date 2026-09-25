@@ -25,6 +25,7 @@ import { useMutation } from '@/hooks/useMutation';
 import { useApiClient } from '@/hooks/useApiClient';
 import { adminApi } from '@/lib/api/admin';
 import type { AdminUser } from '@/types/admin';
+import { roleLabel } from '@/lib/enumLabels';
 
 interface PendingUserCardProps {
   user: AdminUser;
@@ -75,7 +76,7 @@ export function PendingUserCard({ user, onActionComplete }: PendingUserCardProps
               </div>
             </div>
             <Badge variant={user.role === 'MENTOR' ? 'brand' : 'secondary'} className="shrink-0">
-              {user.role}
+              {roleLabel(user.role)}
             </Badge>
           </div>
 
