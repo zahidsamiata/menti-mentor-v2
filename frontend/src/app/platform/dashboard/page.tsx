@@ -104,10 +104,17 @@ export default function PlatformDashboard() {
   }
 
   async function handleReject(id: string) {
-    const note = window.prompt('Ret nedeni (opsiyonel):') ?? undefined;
-    await rejectTenant(id, note);
-    notify('Kurum reddedildi.');
-    void loadData(tab);
+    const note = window.prompt('Ret nedeni (opsiyonel):');
+    // KR-09: "İptal" → prompt null döner; eskiden `?? undefined` ile ret yine gidiyordu.
+    // İptal = vazgeç: istek yok, bildirim yok. Boş metinle "Tamam" ise gerekçesiz ret (opsiyonel).
+    if (note === null) return;
+    try {
+      await rejectTenant(id, note);
+      notify('Kurum reddedildi.');
+      void loadData(tab);
+    } catch (e) {
+      notify(e instanceof Error ? e.message : 'Kurum reddedilemedi.');
+    }
   }
 
   // #37: düzeltme iste — reddetmek yerine kuruma revizyon notu gönder
