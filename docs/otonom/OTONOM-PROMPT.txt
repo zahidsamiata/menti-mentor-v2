@@ -71,10 +71,12 @@ kayboluyorsa BITER. "Backend hazir" · "bilesen yazildi ama mount edilmedi" ·
 2 — ⛔ DURMAMA KURALI
 ═══════════════════════════════════════════════════════════════
 2.1 KAPANIS KOSULU  (⚠️ 2026-09-21'de GENISLETILDI — eskiden yalniz 🟢 sayiliyordu)
-    Turu (Bolum 13'teki belge senkronunu) YALNIZ su IKI sart birden saglanirsa kapat:
+    ~~[ESKİ · 2026-09-25] Turu (Bolum 13'teki belge senkronunu) YALNIZ su IKI sart birden saglanirsa kapat:
       (a) kuyrukta durumu BEKLIYOR ve kapisi 🟢 olan HICBIR is kalmadi, VE
       (b) her 🟡 isin ya PR'i ACIK (Durum "PR-ACIK", Not'ta PR no) ya da
-          neden yapilamadigi yazili (BASARISIZ + sebep).
+          neden yapilamadigi yazili (BASARISIZ + sebep).~~
+    ⚠️ GÜNCELLEME 2026-09-25 (PO): Turu YALNIZ su sart saglanirsa kapat:
+      BEKLIYOR durumunda 🟢 ya da 🟡 is kalmadi; kalanlar yalniz 🔴 veya sebebi yazili BASARISIZ.
     ⛔ Bir tane bile 🟢 BEKLIYOR is varsa TURU KAPATMA, sonraki ise gec.
     ⛔ 🟢 bitti ama 🟡'ler hic islenmediyse TURU KAPATMA — Bolum 4 adim 5'e gec.
     Her is bitiminde kalan 🟢 ve PR'siz 🟡 sayisini say ve 02-ILERLEME'ye yaz.
@@ -128,7 +130,9 @@ etmeyen ikisinin saatlerce suren emegi tamamen kayboldu.
 
  -1. ⭐ PO ÖNCELİK BLOĞU (00-KUYRUK.md'de '⭐ ÖNCELİK (PO)' satırı): bu satırda sayılan işler,
      KAPISINDAN BAĞIMSIZ olarak her şeyden önce ve yazılı sırayla işlenir. 🟢 olanlar merge edilir.
-     🟡 olanlar yapılır, PR açılır, MERGE EDİLMEZ (PR-ACIK). 🔴 olanlar KARAR boşsa atlanır.
+     ~~[ESKİ · 2026-09-25] 🟡 olanlar yapılır, PR açılır, MERGE EDİLMEZ (PR-ACIK).~~
+     ⚠️ GÜNCELLEME 2026-09-25 (PO): 🟡: bağımsız inceleme yorumu + şartlar tamamsa MERGE (bkz. Bölüm 7b).
+     🔴 olanlar KARAR boşsa atlanır.
      Madde 5'teki '🟢'ler bitmeden 🟡'ye geçme' kuralı bu blok için GEÇERSİZDİR. Bu 🟡 işler
      aile PR'ına KATILMAZ: her biri ayrı PR olur (güvenlik yamaları tek tek incelenebilsin ve
      geri alınabilsin).  (PO güncellemesi, 2026-09-25)
@@ -144,8 +148,11 @@ Ayni oncelik icinde: en az emekle en cok kullanici degeri once.
 
  5. ⭐ 🟢'LER BITINCE 🟡'LERE GEC (2026-09-21 kurali — onceden 🟡'ler hic islenmiyordu):
     Sirada BEKLIYOR durumunda 🟢 kalmadiysa 🟡 islere basla:
-      · YAP, PR AC, ⛔ MERGE ETME
-      · Durum → "PR-ACIK", Not'a PR numarasini YAZ
+      · ~~[ESKİ · 2026-09-25] YAP, PR AC, ⛔ MERGE ETME~~
+        ⚠️ GÜNCELLEME 2026-09-25 (PO): YAP, PR AC, Bölüm 7b şartları tamamsa MERGE ET
+        (migration/seed/canlı veri/silme → merge YOK, karar kartı)
+      · ~~[ESKİ · 2026-09-25] Durum → "PR-ACIK", Not'a PR numarasini YAZ~~
+        ⚠️ GÜNCELLEME 2026-09-25 (PO): Merge edildiyse BITTI + kanıt; şart eksikse PR-ACIK + eksik şart
       · PR aciklamasinin BASINA: "KULLANICI ARTIK SUNU GORUYOR: <tek cumle>"
       · PR aciklamasinda ayrica: 🟡 olmasinin sebebi hangi istisna
         (migration/seed · auth-KVKK-matching · geri donulmez)
@@ -159,6 +166,9 @@ Ayni oncelik icinde: en az emekle en cok kullanici degeri once.
     kapatiyor (c) kullanici ne goruyor yazilir. Durum → PR-ACIK.
     ⛔ Aile PR'i MERGE EDILMEZ.
     ⛔ Y-G (migration/seed) GRUPLANMAZ: her biri ayri PR, yedek + PO onayi sart.
+    ~~[ESKİ · 2026-09-25] Madde 6'nın tamamı (aile PR akışı).~~
+    ⚠️ GÜNCELLEME 2026-09-25 (PO): AİLE PR AKIŞI KALDIRILDI — iş başına ayrı dal, ayrı PR
+    (tek tek incelenebilsin ve geri alınabilsin). 00-KUYRUK "AİLE HARİTASI" yalnız sıra bilgisidir.
 
 Kuyruk asamalari: I (icerik — PO en on sira) · K (kullanici testi) · F (bilanco devri) ·
 P (panel denetimi) · E (hayalet envanter) · U (uctan uca yolculuk) ·
@@ -208,20 +218,45 @@ Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
 7 — KAPI POLITIKASI
 ═══════════════════════════════════════════════════════════════
 🟢 VARSAYILANDIR → yap, dogrulama listesi tamsa MERGE ET, canliya al.
-🟡 yalniz su uc istisnada → yap, PR ac, MERGE ETME:
+~~[ESKİ · 2026-09-25] 🟡 yalniz su uc istisnada → yap, PR ac, MERGE ETME:~~
+⚠️ GÜNCELLEME 2026-09-25 (PO): 🟡 yalniz su uc istisnada → yap, PR ac, Bölüm 7b şartları tamamsa MERGE ET
+(1. madde — migration/seed — ve 3. madde — canlı veri — MERGE EDİLMEZ, karar kartına döner):
    1. migration / seed gerektiriyorsa
    2. hassas dosyaya dokunuyorsa: auth/yetkilendirme (guard, middleware, token,
       session) · KVKK/riza/aydinlatma/veri imha-disa aktarma · matching/eslestirme/skorlama
    3. canli veriye geri donulmez dokunuyorsa
 🔴 ilgili KARAR cevapsiz → DOKUNMA, atla, sonrakine gec.
 
+─── 7b — 🟡 MERGE ŞARTLARI (GÜNCELLEME 2026-09-25, PO) ───
+🟡 bir iş ancak DÖRDÜ birden tamamsa merge edilir; biri eksikse PR-ACIK + eksik şart yazılır:
+ (a) 🟢 kontrol listesi tam (Bölüm 5 kutuları) — "auth/KVKK/matching dosyalarına dokunulmadı"
+     maddesi HARİÇ.
+ (b) İşi YAZMAYAN bir inceleme alt-ajanının PR'a yazdığı "Bağımsız inceleme kaydı" yorumu,
+     "SONUÇ: ONAY" ile biten. İnceleme şunlara bakar: kapsam · güvenlik listesi (CLAUDE.md
+     § Güvenlik Kuralları) · KOMŞU UÇ karşılaştırması · tenant filtresi · explicit select ·
+     davranış değişikliği. "SORUN VAR" → düzelt, YENİDEN inceleme.
+ (c) auth / yetki / KVKK / tenant izolasyonu işlerinde NEGATİF test (yetkisiz → 403/404,
+     başka kurum görünmez vb.) — CI log'unda gerçekten koştuğu doğrulanır.
+ (d) İki repoda CI yeşil (çatı + backend).
+⛔ Şunlar MERGE EDİLMEZ, KARAR KARTINA döner:
+   · migration (Dockerfile açılışta `migrate deploy` çalıştırır → merge = canlı DB değişikliği)
+   · seed (her türü)
+   · canlı veriye yazan / silen işler
+   · silme protokolü (karantina dahil)
+   Kart sade dille yazılır; PO evet/hayır der; "evet" gelirse tarihli yedeği AJAN alır.
+⛔ AİLE PR AKIŞI YOK: iş başına ayrı PR.
+Merge sonrası: SIRALI pointer bump (Bölüm 8) + 02-ILERLEME'ye "CANLIDA BAK: <kullanıcı ne görüyor>".
+
 ═══════════════════════════════════════════════════════════════
 8 — BACKEND ISLERI VE SUBMODULE POINTER
 ═══════════════════════════════════════════════════════════════
 Backend (menti-mentor) bir SUBMODULE'dur.
 · Backend PR'lari backend reposunda acilir ve merge edilir.
-· Turun SONUNDA (ya da durman gerekirse durmadan once) TEK submodule pointer bump yap —
-  her isten sonra ayri ayri degil.
+· ~~[ESKİ · 2026-09-25] Turun SONUNDA (ya da durman gerekirse durmadan once) TEK submodule pointer bump yap —
+  her isten sonra ayri ayri degil.~~
+  ⚠️ GÜNCELLEME 2026-09-25 (PO): Backend merge'lerinden sonra SIRALI pointer bump: birikmiş backend merge'leri
+  tek çatı PR'ında main HEAD'e taşınır (açık bir çatı PR'ı varsa bump oraya eklenir), inceleme
+  + CI + merge; ardından 02-ILERLEME'ye "CANLIDA BAK". Backend merge'i canlıya ancak bump ile çıkar.
 · Ata kontrolu: `git merge-base --is-ancestor <eski> <yeni>` basarisizsa BUMP YAPMA, bildir.
 · ⛔ Bump olmadan backend duzeltmesi CANLIYA CIKMAZ.
 · Teyit: cati pointer == backend main HEAD. Sonucu 02-ILERLEME'ye yaz.
