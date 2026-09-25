@@ -4,6 +4,21 @@
 
 ---
 
+## ⭐ TUR — B/C/D (2026-09-25) · ARA KAYIT (tur sürüyor)
+
+> Başlangıç 2026-09-25 ~05:30 · 🟥 BYPASS · merge = bağımsız inceleme yorumu + CI (PO talimatı). Bu makinede node yoktu → `~/.local/opt/node` (v22) kuruldu; backend vitest yerelde KOŞMAZ (globalSetup migration+truncate) → backend test kanıtı CI.
+> ⚠️ **A bölümü (kural yazımı) YAPILAMADI:** CLAUDE.md'deki merge kuralını genişletirken otomatik mod denetleyicisi CLAUDE.md okumasını gerekçesiz reddetti ("server-side classifier judged this action dangerous"). Düzenleme geri alındı (commit edilmedi). Kurallar bu tur PO mesajındaki talimat olarak uygulanıyor; metin kapanışta PO'ya verilecek.
+- **B1** backend #90 → inceleme yorumu (menti-mentor#90 5827355399, ONAY) → merge `ff5f9f9`.
+- **B2** çatı #264 → pointer `8a94800`→`ff5f9f9` → CI 8/8 → inceleme (5827374570, ONAY) → merge `0ae4a5a`. I-04 + I-07 BITTI; I-05 kısmen (bekleme odası afişi kaldı).
+- **B3** çatı #265 → çakışma yok → inceleme (5827387188, ONAY) → merge `3905617`.
+- **B4** #263 → karşılaştırma: main'de karşılığı olan birim YOK. Belge birimleri güncel main üzerine yeniden uygulandı → **#266** (144 docs dosyası, yalnız ekleme) → inceleme (5827445408, ONAY) → merge `89d3f18`. #263 yorumla KAPATILDI, dal silinmedi. Taşınmayan: OTONOM-PROMPT §0.4 (öncelik bloğunu görünmez yapar) · §13.4/13.5 · `scripts/otonom-turet.mjs` + package.json · 00-SIRADAKI/01-CEVAPSIZ · CLAUDE.md damgası · 02-ILERLEME arşivlemesi.
+- **C** çelişki taraması (3 paralel ajan, 83 bulgu) → **KARAR-80** (22 madde) · **84 satır 🔴 KARAR-80/Mx** (eski kapı Not'ta) · BITTI: AN-15, AN-18 (kodda), I-04, I-07 · kısmi notlar: AN-17, YN-01, YN-07, K-05 (teyit gerek) · GV-04 kilitlenmedi (M22, en dar görünürlük).
+- **D · KR-01 BITTI** — backend #91 (inceleme 5827410073 + düzeltme yorumu) → merge `df30e69` → pointer #267 (inceleme 5827504593) → merge `8e3da14`. **CANLIDA BAK:** (iç güvenlik) seed komutu yerel olmayan veritabanında hiçbir veriye dokunmadan "SEED KİLİDİ" ile duruyor.
+- **D · KR-02+KR-03** — backend #92 (inceleme 5827510810, ONAY) → merge `9bc6545`; çatı **#268** (frontend + pointer) açık, CI + inceleme bekliyor.
+- **D · GV-04** backend #93 (inceleme 5827538797, ONAY), CI bekliyor · **GV-06** backend #94 açık.
+
+---
+
 ## ⭐ TUR KAYIT — BÖLÜM A: KARAR-77 + SİSTEM DÜZELTMELERİ (2026-09-25)
 
 > **Mod:** 🟥 BYPASS — yalnız `docs/` + `CLAUDE.md` (PO talimatı), doğrudan `main`. Kod/DB/migration/seed YOK.
