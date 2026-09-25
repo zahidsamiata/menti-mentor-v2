@@ -15,6 +15,10 @@ COPY . .
 # Build-time env değişkenleri (ARG → ENV → Next.js NEXT_PUBLIC_ prefix ile gömülür)
 ARG NEXT_PUBLIC_API_URL=http://localhost:3000
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+# Y-09: kanonik site kökü (og:image, sitemap, robots, metadataBase). Boş bırakılırsa
+# getSiteUrl() (src/lib/siteUrl.ts) localhost fallback'ine düşer — prod'da set edilmeli.
+ARG NEXT_PUBLIC_SITE_URL=
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 
 RUN npm run build
 
