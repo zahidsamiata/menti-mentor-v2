@@ -16,6 +16,13 @@
 - **D · KR-01 BITTI** — backend #91 (inceleme 5827410073 + düzeltme yorumu) → merge `df30e69` → pointer #267 (inceleme 5827504593) → merge `8e3da14`. **CANLIDA BAK:** (iç güvenlik) seed komutu yerel olmayan veritabanında hiçbir veriye dokunmadan "SEED KİLİDİ" ile duruyor.
 - **D · KR-02+KR-03** — backend #92 (inceleme 5827510810, ONAY) → merge `9bc6545`; çatı **#268** (frontend + pointer) açık, CI + inceleme bekliyor.
 - **D · GV-04** backend #93 (inceleme 5827538797, ONAY), CI bekliyor · **GV-06** backend #94 açık.
+- **D · ARA KAYIT 2 (2026-09-25 ~07:30):**
+  - **BITTI + CANLIDA:** KR-02 + KR-03 (#92 + #268) · GV-04 · GV-06 · GV-05 · KR-04 · K-14-anahtar (#93-#97 + pointer #269) · U-06 · V-06 · U-08 · V-05 (#98-#101 + çatı #273) · KR-10 (#271) · KR-12 (#270) · PS-11 (#274).
+  - **Merge edildi, pointer bekliyor:** F-04 backend #102 (+ çatı #272 merge edildi).
+  - **⛔ ACİL BULGU:** logo koymayan / renk değiştirmeyen / platform onayı bekleyen yeni kurumlar "taslak" adımında kalıyor, 96 saatlik temizlik onları kullanıcılarıyla birlikte siliyordu. İleriye dönük: #272. Mevcut taslaklar: **KARAR-81** + `03-PO-ELLE-ISLER.md` en üst madde (salt-okuma sorgu).
+  - **Karar kartları:** KARAR-81 (acil) · KARAR-82 U-12 · KARAR-83 U-13 · KARAR-84 U-15 · KARAR-85 U-17 · KARAR-86 platform DISC görünürlüğü.
+  - **Açık PR:** backend #103 KR-06 (inceleme ONAY, CI bekliyor) · çatı #275 KR-09 (ONAY, CI bekliyor). Şeritlerde: I-05 · AN-01 · PS-05 · AN-17.
+  - **Denetleyici retleri bu turda:** 1 — A bölümünde CLAUDE.md okuması ("server-side classifier judged this action dangerous", gerekçe verilmedi); A kural yazımı yapılmadı, düzenleme geri alındı.
 
 ---
 
