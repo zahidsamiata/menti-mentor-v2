@@ -1,5 +1,13 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
+import { buildSecurityHeaders, resolveImageDomains } from './src/lib/securityHeaders.mjs';
+
+/**
+ * Faz fonksiyonu: `next dev`'de CSP'ye `'unsafe-eval'` eklenir (React Refresh ister);
+ * build/canlı politikada YOKTUR. Ayrıntı: `src/lib/securityHeaders.mjs`.
+ * @param {string} phase
+ * @returns {import('next').NextConfig}
+ */
+const nextConfig = (phase) => ({
   /**
    * Standalone output: minimal server bundle, node_modules kopyalanmaz (~70% küçültme).
    */
@@ -17,24 +25,34 @@ const nextConfig = {
      */
     remotePatterns: buildImagePatterns(),
   },
-};
+
+  /**
+   * F-04 (G1-23) — İçerik Güvenlik Politikası, şimdilik YALNIZ RAPOR modunda
+   * (`Content-Security-Policy-Report-Only`): hiçbir şeyi engellemez, ihlali konsola yazar.
+   * Değerler build anında sabitlenir (NEXT_PUBLIC_API_URL / TENANT_IMAGE_DOMAINS build argümanı).
+   */
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: buildSecurityHeaders({
+          apiUrl: process.env.NEXT_PUBLIC_API_URL,
+          imageDomains: resolveImageDomains(process.env.TENANT_IMAGE_DOMAINS),
+          isDev: phase === PHASE_DEVELOPMENT_SERVER,
+        }),
+      },
+    ];
+  },
+});
 
 /**
  * İzin verilen görsel domain'lerini ortam değişkeninden veya varsayılan listeden üretir.
  * TENANT_IMAGE_DOMAINS="cdn.example.com,assets.platform.io" formatında tanımlanır.
  */
 function buildImagePatterns() {
-  const defaultDomains = [
-    'avatars.githubusercontent.com',   // GitHub OAuth avatar'ları
-    'lh3.googleusercontent.com',       // Google OAuth avatar'ları
-    'media.licdn.com',                 // LinkedIn OAuth avatar'ları
-  ];
-
-  const envDomains = process.env.TENANT_IMAGE_DOMAINS
-    ? process.env.TENANT_IMAGE_DOMAINS.split(',').map((d) => d.trim()).filter(Boolean)
-    : [];
-
-  const patterns = [...new Set([...defaultDomains, ...envDomains])].map((hostname) => ({
+  // Varsayılan OAuth avatar hostları (GitHub/Google/LinkedIn) + TENANT_IMAGE_DOMAINS —
+  // liste `src/lib/securityHeaders.mjs`'te; CSP img-src ile AYNI kaynaktan beslenir.
+  const patterns = resolveImageDomains(process.env.TENANT_IMAGE_DOMAINS).map((hostname) => ({
     protocol: /** @type {'https'} */ ('https'),
     hostname,
   }));
