@@ -8,10 +8,11 @@
  * S1 boşken ilerleme engellenmez. Metinler lib/threeQuestionsText.ts (TASLAK).
  */
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 import { MENTI_S1, MENTOR_S1, MENTI_S2, MENTOR_S2, S3 } from '@/lib/threeQuestionsText';
 import type {
   MatchingPreferences,
@@ -40,6 +41,8 @@ export function ThreeQuestionsStep({ role, onComplete, isSubmitting, error }: Th
   const [priorityValue,   setPriorityValue]   = useState<PriorityValue | null>(null);
 
   const atLimit = s1Sel.length >= s1.max;
+  const s2LegendId = useId();
+  const s3LegendId = useId();
 
   const toggleS1 = (value: string) =>
     setS1Sel((prev) => {
@@ -100,16 +103,26 @@ export function ThreeQuestionsStep({ role, onComplete, isSubmitting, error }: Th
 
       {/* ── S2 — yaklaşım (zorunlu, tek seçim) ───────────────────────────── */}
       <fieldset>
-        <legend className="text-sm font-semibold text-foreground mb-3">
+        <legend id={s2LegendId} className="text-sm font-semibold text-foreground mb-3">
           {s2.prompt} <span className="text-destructive">*</span>
         </legend>
-        <div className="grid gap-2">
-          {s2.options.map(({ value, label }) => (
+        {/* F-21: tek seçim → radiogroup (ok tuşlarıyla gezilir ve seçilir). S1 çoklu seçim olduğu
+            için aria-pressed'li düğme olarak kalır. */}
+        <div
+          role="radiogroup"
+          aria-labelledby={s2LegendId}
+          aria-required="true"
+          onKeyDown={(e) => handleRadioGroupKeyDown(e)}
+          className="grid gap-2"
+        >
+          {s2.options.map(({ value, label }, index) => (
             <button
               key={value}
               type="button"
+              role="radio"
+              aria-checked={supportApproach === value}
+              tabIndex={rovingTabIndex(index, s2.options.findIndex((o) => o.value === supportApproach))}
               onClick={() => setSupportApproach(value)}
-              aria-pressed={supportApproach === value}
               className={cn(
                 'rounded-xl border p-3 text-left text-sm transition-all',
                 supportApproach === value
@@ -125,16 +138,24 @@ export function ThreeQuestionsStep({ role, onComplete, isSubmitting, error }: Th
 
       {/* ── S3 — öncelik/değer (zorunlu, tek seçim) ──────────────────────── */}
       <fieldset>
-        <legend className="text-sm font-semibold text-foreground mb-3">
+        <legend id={s3LegendId} className="text-sm font-semibold text-foreground mb-3">
           {S3.prompt} <span className="text-destructive">*</span>
         </legend>
-        <div className="grid grid-cols-2 gap-2">
-          {S3.options.map(({ value, label }) => (
+        <div
+          role="radiogroup"
+          aria-labelledby={s3LegendId}
+          aria-required="true"
+          onKeyDown={(e) => handleRadioGroupKeyDown(e)}
+          className="grid grid-cols-2 gap-2"
+        >
+          {S3.options.map(({ value, label }, index) => (
             <button
               key={value}
               type="button"
+              role="radio"
+              aria-checked={priorityValue === value}
+              tabIndex={rovingTabIndex(index, S3.options.findIndex((o) => o.value === priorityValue))}
               onClick={() => setPriorityValue(value)}
-              aria-pressed={priorityValue === value}
               className={cn(
                 'rounded-xl border p-3 text-center text-sm transition-all',
                 priorityValue === value

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useId, useEffect, useRef, useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { adminApi } from '@/lib/api/admin';
 import { Button } from '@/components/ui/button';
@@ -40,6 +40,7 @@ const SEVERITY_BADGE: Record<string, 'destructive' | 'warning' | 'secondary'> = 
 export function CoachingSuggestionsDialog({ userId, userName, open, onClose }: Props) {
   const api = useApiClient();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogTitleId = useId();
   const [data, setData] = useState<SuggestionsResponse | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -60,12 +61,13 @@ export function CoachingSuggestionsDialog({ userId, userName, open, onClose }: P
   return (
     <dialog
       ref={dialogRef}
+      aria-labelledby={dialogTitleId}
       className="rounded-2xl border border-border bg-card p-6 shadow-xl w-full max-w-lg backdrop:bg-black/50"
       onCancel={onClose}
     >
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold">{userName} — Aksiyon Önerileri</h2>
-        <Button variant="outline" size="sm" onClick={onClose}>✕</Button>
+        <h2 id={dialogTitleId} className="text-lg font-semibold">{userName} — Aksiyon Önerileri</h2>
+        <Button variant="outline" size="sm" onClick={onClose} aria-label="Kapat"><span aria-hidden>✕</span></Button>
       </div>
 
       {loading ? (

@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { questionsApi } from '@/lib/api/questions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 
 interface Props {
   userId: string;
@@ -14,6 +15,7 @@ interface Props {
 
 export function DailyQuestionWidget({ userId }: Props) {
   const api = useApiClient();
+  const questionId = useId();
 
   const { data, isLoading, refetch } = useQuery(
     () => questionsApi.getNextAdaptive(api, userId),
@@ -75,11 +77,21 @@ export function DailyQuestionWidget({ userId }: Props) {
           </div>
         ) : (
           <>
-            <p className="text-sm font-medium leading-relaxed">{question.text}</p>
-            <div className="flex flex-col gap-1.5">
-              {LIKERT.map(({ value, label }) => (
+            <p id={questionId} className="text-sm font-medium leading-relaxed">{question.text}</p>
+            {/* F-21: tek seçim → radiogroup; seçim gönderilmediği için ok tuşu seçimi de değiştirir. */}
+            <div
+              role="radiogroup"
+              aria-labelledby={questionId}
+              onKeyDown={(e) => handleRadioGroupKeyDown(e)}
+              className="flex flex-col gap-1.5"
+            >
+              {LIKERT.map(({ value, label }, index) => (
                 <button
                   key={value}
+                  type="button"
+                  role="radio"
+                  aria-checked={selected === value}
+                  tabIndex={rovingTabIndex(index, selected === null ? -1 : selected - 1)}
                   onClick={() => setSelected(value)}
                   className={`rounded-lg border px-3 py-2 text-xs text-left transition-colors ${
                     selected === value

@@ -523,7 +523,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 ### KARAR-38 · Kurum sunucusunun ülkesi ve aydınlatma metninin düzeltilmesi  [HUKUK + ÜRÜN] (1 işi açar)
 > ⭐ **Kaynak:** güvenlik konseyi (`docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`), 2026-09-21.
 > ⚠️ **ÇAPRAZ:** bu kartın avukat sorusu **KARAR-47** (hukuki metin paketi) içinde tek seferde sorulur — ayrı bir hukuk görüşmesi açma.
-**Şu an ne var:** KVKK aydınlatma sayfası (`app/kvkk/page.tsx:92-107`) *"İrlanda (Avrupa Birliği) bölgesinde … GDPR standartlarına tabidir"* diyor. Proje belgesi ise PO teyidiyle veritabanı bölgesinin **Londra / Birleşik Krallık** olduğunu yazıyor (`CLAUDE.md:255`, madde 92, 2026-08-26) — **BK, AB üyesi değil.** Metin ayrıca "yönetilen PostgreSQL hizmeti" diyor, PROD ise kendi konteynerinde Postgres çalıştırıyor (`docker-compose.yml:16-24`). Aktarım bölümü (`:60-64`) Google/LinkedIn OAuth ve e-posta sağlayıcısını **hiç saymıyor**; işlenen veri listesinde (`:31-39`) 8 kategori eksik (mesaj içeriği, telefon, sosyal linkler, avatar, OCEAN/arketip, şikâyet kayıtları, IP adresi `platformAudit.ts:32`, `lastLoginAt`).
+**Şu an ne var:** KVKK aydınlatma sayfası (`app/kvkk/page.tsx:92-107`) *"İrlanda (Avrupa Birliği) bölgesinde … GDPR standartlarına tabidir"* diyor. Proje belgesi ise PO teyidiyle veritabanı bölgesinin **Londra / Birleşik Krallık** olduğunu yazıyor (`CLAUDE.md § Ortam / Veritabanı`, madde 92, 2026-08-26) — **BK, AB üyesi değil.** Metin ayrıca "yönetilen PostgreSQL hizmeti" diyor, PROD ise kendi konteynerinde Postgres çalıştırıyor (`docker-compose.yml:16-24`). Aktarım bölümü (`:60-64`) Google/LinkedIn OAuth ve e-posta sağlayıcısını **hiç saymıyor**; işlenen veri listesinde (`:31-39`) 8 kategori eksik (mesaj içeriği, telefon, sosyal linkler, avatar, OCEAN/arketip, şikâyet kayıtları, IP adresi `platformAudit.ts:32`, `lastLoginAt`).
 **Sorun ne:** Kuruma ve kullanıcıya **yanlış ülke ve yanlış hukuki rejim** beyan ediliyor. Bir denetimde ilk bakılacak belge budur; yanlış beyan, eksik beyandan daha ağır sonuç doğurur.
 **Neden sana soruyorum:** Metin hukuki sonuç doğuruyor ve ajan doğru cevabı koddan çıkaramaz — **uygulama sunucusunun ülkesi kodda hiç yok** (yalnız veritabanı bölgesi belgede).
 **Seçenekler:**
@@ -828,7 +828,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 ### KARAR-50 · Kuralların "geçersizleşme koşulu" zorunlu olsun mu?  [BELGE/METODOLOJİ] (4 işi açar)
 > ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
 
-**Şu an ne var:** 74 kuraldan **6'sının** (%8,1) geçersizleşme koşulu yazılı; **68'inin yok**. 6'sının hiçbiri ölçülebilir tetik taşımıyor (*"X olunca"* diyor, X'i kimin ne zaman kontrol edeceği yazılı değil) — bu yüzden **hiçbiri kendiliğinden tetiklenmemiş**. Sonuç: koşulu fiilen sağlanmış 4 kural hâlâ yürürlükte görünüyor, biri **yanlış kanıta dayanan bir güvenlik kuralı** (`CLAUDE.md:442`, 24 gündür yanlış).
+**Şu an ne var:** 74 kuraldan **6'sının** (%8,1) geçersizleşme koşulu yazılı; **68'inin yok**. 6'sının hiçbiri ölçülebilir tetik taşımıyor (*"X olunca"* diyor, X'i kimin ne zaman kontrol edeceği yazılı değil) — bu yüzden **hiçbiri kendiliğinden tetiklenmemiş**. Sonuç: koşulu fiilen sağlanmış 4 kural hâlâ yürürlükte görünüyor, biri **yanlış kanıta dayanan bir güvenlik kuralı** (`CLAUDE.md § Güvenlik Kuralları › Yeniden kullanılacak kalıplar`, 24 gündür yanlış).
 ⚠️ Brief *"KURAL 17 var ama yarım uygulanmış"* diyordu — **öyle bir kural hiç yazılmadı** (13 terim · BB + 11 dal · 0 dosya; bu turda `docs/` + `CLAUDE.md` yeniden tarandı → yalnız raporun kendi 4 "yok" beyanı çıktı).
 
 **Sorun ne:** Kurallar yalnız **birikiyor**, hiç düşmüyor. Her ders yeni kural oluyor, hiçbiri emekliye ayrılmıyor. CLAUDE.md bugün bölmeyle 34.742'ye indi ama **payı yalnız 258 karakter** — bir sonraki ders sınırı yeniden aşar.
@@ -844,7 +844,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 
 **Benim önerim:** **A şimdi, C sonra** — B'yi önermiyorum çünkü konseyin yasağını ancak bir paketle birlikte deler; A'nın kazancı kesin ve bugün alınabilir, C ayrı bir iş olarak kuyruğa girebilir.
 
-**Cevap vermezsen:** 4 bayat kural yürürlükte kalır — en ciddisi `CLAUDE.md:442`'deki **yanlış kanıtlı güvenlik kuralı**; ve kural birikmesi aynı hızla sürer, 258 karakterlik pay kısa sürede tükenir.
+**Cevap vermezsen:** 4 bayat kural yürürlükte kalır — en ciddisi `CLAUDE.md § Güvenlik Kuralları › Yeniden kullanılacak kalıplar`'deki **yanlış kanıtlı güvenlik kuralı**; ve kural birikmesi aynı hızla sürer, 258 karakterlik pay kısa sürede tükenir.
 
 **CEVAP:**
 

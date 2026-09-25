@@ -6,7 +6,10 @@
  * Erişilebilirlik:
  *  - Radiogroup + radiobutton rolü
  *  - Her seçenek aria-label içerir ("Hiç katılmıyorum" vb.)
- *  - Klavye gezintisi native radio ile ücretsiz gelir
+ *  - ~~[ESKİ · 2026-09-25] Klavye gezintisi native radio ile ücretsiz gelir~~
+ *    ⚠️ GÜNCELLEME (2026-09-25, F-21): düğmeler native radio DEĞİL; ok tuşu gezintisi ve gezici
+ *    tabIndex `handleRadioGroupKeyDown` ile eklendi. Seçim hemen ilerlettiği için ok tuşu yalnız
+ *    odağı taşır, seçim Boşluk/Enter ile yapılır.
  *
  * Görsel:
  *  - Seçili: brand rengi (--primary) arka plan
@@ -16,6 +19,7 @@
 
 import { LIKERT_LABELS, type LikertValue } from '@/types/discTest';
 import { cn } from '@/lib/utils';
+import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 
 interface LikertScaleProps {
   value: LikertValue | null;
@@ -32,9 +36,10 @@ export function LikertScale({ value, onChange, disabled = false }: LikertScalePr
       <div
         role="radiogroup"
         aria-label="Katılım düzeyi seçin"
+        onKeyDown={(e) => handleRadioGroupKeyDown(e, { selectOnMove: false })}
         className="flex items-center justify-between gap-2"
       >
-        {KEYS.map((k) => {
+        {KEYS.map((k, index) => {
           const selected = value === k;
           return (
             <button
@@ -42,6 +47,7 @@ export function LikertScale({ value, onChange, disabled = false }: LikertScalePr
               type="button"
               role="radio"
               aria-checked={selected}
+              tabIndex={rovingTabIndex(index, value === null ? -1 : KEYS.indexOf(value))}
               aria-label={LIKERT_LABELS[k].ariaLabel}
               disabled={disabled}
               onClick={() => onChange(k)}
