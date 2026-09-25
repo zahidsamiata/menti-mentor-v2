@@ -112,3 +112,54 @@ describe('ScenarioGuideEngine — madde 143 (şık karıştırma) + 144 (nötr g
     expect(screen.getByText('Doğru seçim')).toBeInTheDocument();
   });
 });
+
+describe('ScenarioGuideEngine — K-06 (diğer şıkların açıklaması, seçimden SONRA)', () => {
+  it('seçimden ÖNCE hiçbir açıklama görünmez ve istenmez (cevap anahtarı sızmaz)', () => {
+    const { resolveChoice } = renderEngine({ neutralFeedback: true });
+    expect(screen.queryByText('Aferin, iyi seçim.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Bu seçim zorlar.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Diğer seçenekler ne anlama geliyordu?')).not.toBeInTheDocument();
+    expect(resolveChoice).not.toHaveBeenCalled();
+  });
+
+  it('seçimden sonra, "Diğer seçenekler" açılmadan diğer açıklama görünmez ve istenmez', async () => {
+    const { resolveChoice } = renderEngine({ neutralFeedback: true });
+    fireEvent.click(screen.getByText('Yanlış seçim'));
+    await waitFor(() => expect(screen.getByText('Bu seçim zorlar.')).toBeInTheDocument());
+    expect(screen.queryByText('Aferin, iyi seçim.')).not.toBeInTheDocument();
+    expect(resolveChoice).toHaveBeenCalledTimes(1);
+    expect(resolveChoice).toHaveBeenCalledWith('s1', 'b');
+  });
+
+  it('seçimden sonra "Diğer seçenekler" açılınca diğer şıkkın açıklaması görünür; işaret/renk yok', async () => {
+    const { resolveChoice } = renderEngine({ neutralFeedback: true });
+    fireEvent.click(screen.getByText('Yanlış seçim'));
+    await waitFor(() => expect(screen.getByText('Bu seçim zorlar.')).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText('Diğer seçenekler ne anlama geliyordu?'));
+    await waitFor(() => expect(screen.getByText('Aferin, iyi seçim.')).toBeInTheDocument());
+    expect(resolveChoice).toHaveBeenCalledWith('s1', 'a');
+    // Nötr kural (madde 144) korunur: doğru/yanlış işareti yok
+    expect(screen.queryByText('✅')).not.toBeInTheDocument();
+    expect(screen.queryByText('❌')).not.toBeInTheDocument();
+
+    // Kapatıp yeniden açınca tekrar istenmez
+    fireEvent.click(screen.getByText('Diğer seçenekleri gizle'));
+    fireEvent.click(screen.getByText('Diğer seçenekler ne anlama geliyordu?'));
+    expect(screen.getByText('Aferin, iyi seçim.')).toBeInTheDocument();
+    expect(resolveChoice).toHaveBeenCalledTimes(2);
+  });
+
+  it('sonraki aşamaya geçince önceki aşamanın açıklamaları taşınmaz', async () => {
+    renderEngine({ neutralFeedback: true });
+    fireEvent.click(screen.getByText('Yanlış seçim'));
+    await waitFor(() => expect(screen.getByText('Bu seçim zorlar.')).toBeInTheDocument());
+    fireEvent.click(screen.getByText('Diğer seçenekler ne anlama geliyordu?'));
+    await waitFor(() => expect(screen.getByText('Aferin, iyi seçim.')).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText('Sonraki →'));
+    await waitFor(() => expect(screen.getByText(/İkinci durum burada/)).toBeInTheDocument());
+    expect(screen.queryByText('Aferin, iyi seçim.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Bu seçim zorlar.')).not.toBeInTheDocument();
+  });
+});
