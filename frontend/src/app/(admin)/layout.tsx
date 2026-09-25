@@ -14,11 +14,11 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, type ReactNode } from 'react';
-import { LogOut } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { TenantLogo } from '@/components/atoms/TenantLogo';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
+import { UserCard } from '@/components/molecules/UserCard';
 import { TenantCorrectionBanner } from '@/components/molecules/TenantCorrectionBanner';
 import { cn } from '@/lib/utils';
 
@@ -126,21 +126,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           ))}
         </nav>
 
-        {/* Alt bilgi + çıkış */}
-        <div className="p-3 border-t border-border space-y-2">
-          <div>
-            <p className="text-xs text-muted-foreground truncate">{user.fullName}</p>
-            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
-          </div>
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <LogOut className="h-4 w-4" aria-hidden />
-            Çıkış Yap
-          </button>
-        </div>
+        {/* Alt bilgi + çıkış — ortak kart (F-33: menti/mentör panelinde de kullanılıyor) */}
+        <UserCard
+          className="p-3 border-t border-border space-y-2"
+          fullName={user.fullName}
+          email={user.email}
+          onLogout={handleLogout}
+        />
       </aside>
 
       {/* İçerik */}
