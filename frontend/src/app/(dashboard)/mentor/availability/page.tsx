@@ -41,7 +41,7 @@ export default function AvailabilityPage() {
     if (!isLoading && user && user.role !== 'MENTOR') router.replace('/dashboard');
   }, [user, isLoading, router]);
 
-  const { data, isLoading: fetchingBlocks } = useQuery(
+  const { data, isLoading: fetchingBlocks, error: loadError, refetch } = useQuery(
     () => meetingsApi.getAvailability(api, user?.id ?? ''),
     [api, user?.id],
     { enabled: Boolean(user?.id) },
@@ -58,6 +58,11 @@ export default function AvailabilityPage() {
   // kullanıcının o sırada eklediği, henüz kaydedilmemiş aralıkları siler —
   // mentörün ikinci gün ekleyememesinin sebebi buydu (K-03).
   const hydratedRef = useRef(false);
+
+  // Kaydet, sunucudaki listeyi TAMAMEN değiştirir (önce tüm aralıklar pasifleşir).
+  // Liste yüklenemediyse ya da hâlâ yükleniyorsa ekrandaki liste eksik/boş olabilir;
+  // bu hâlde kaydetmek mentörün kayıtlı aralıklarını siler (KR-10) → kaydet kilitli.
+  const canSave = !fetchingBlocks && !loadError;
 
   useEffect(() => {
     if (!data?.blocks || hydratedRef.current) return;
@@ -95,6 +100,7 @@ export default function AvailabilityPage() {
   }
 
   async function save() {
+    if (!canSave) return;
     setSaving(true);
     setError(null);
     const result = await meetingsApi.saveAvailability(api, { blocks });
@@ -171,7 +177,15 @@ export default function AvailabilityPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {fetchingBlocks ? (
+          {loadError && !fetchingBlocks ? (
+            <div className="space-y-3 py-4 text-center">
+              <p className="text-sm text-destructive">
+                Kayıtlı müsaitlik saatleriniz yüklenemedi. Mevcut aralıklarınızın silinmemesi için
+                liste yüklenene kadar kaydetme kapalı.
+              </p>
+              <Button onClick={refetch} variant="outline" size="sm">Tekrar yükle</Button>
+            </div>
+          ) : fetchingBlocks ? (
             <div className="space-y-2">
               {[1, 2].map((i) => <div key={i} className="h-10 animate-pulse rounded-lg bg-muted" />)}
             </div>
@@ -201,7 +215,7 @@ export default function AvailabilityPage() {
         </CardContent>
       </Card>
 
-      <Button onClick={save} disabled={saving} className="w-full">
+      <Button onClick={save} disabled={saving || !canSave} className="w-full">
         {saving ? 'Kaydediliyor…' : 'Müsaitliği Kaydet'}
       </Button>
     </div>
