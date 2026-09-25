@@ -3,7 +3,7 @@
  *
  * Arama motorları ana sayfayı bir kurum + web sitesi olarak tanısın diye `Organization`
  * ve `WebSite` şeması üretir. Değerler YALNIZ kodda zaten var olan bilgiden gelir
- * (marka adı, ana sayfa açıklaması, `getSiteUrl()`, `/favicon.ico`). Adres, telefon,
+ * (marka adı, ana sayfa açıklaması, `getSiteUrl()`, `/icon` — Y-09 marka rozeti). Adres, telefon,
  * e-posta, sosyal hesap gibi iletişim alanları BİLİNÇLİ olarak yok — iletişim bilgisi
  * ürün kararına bağlı (KARAR-88); karar verilmeden uydurulmaz.
  *
@@ -31,7 +31,7 @@ export function buildHomeJsonLd(siteUrl: string): JsonLdObject {
         '@id': organizationId,
         name: BRAND_NAME,
         url: siteUrl,
-        logo: `${siteUrl}/favicon.ico`,
+        logo: `${siteUrl}/icon`,
         description: HOME_DESCRIPTION,
       },
       {

@@ -38,7 +38,7 @@ describe('JSON-LD (Y-10)', () => {
     expect(site).toBeDefined();
     expect(org.name).toBe('MentiMentor');
     expect(org.url).toBe(SITE);
-    expect(org.logo).toBe(`${SITE}/favicon.ico`);
+    expect(org.logo).toBe(`${SITE}/icon`);
     expect(org.description).toBe(HOME_DESCRIPTION);
     expect(site.name).toBe('MentiMentor');
     expect(site.url).toBe(SITE);

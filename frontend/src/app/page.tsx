@@ -22,18 +22,10 @@ import { buildHomeJsonLd, HOME_DESCRIPTION } from '@/lib/structuredData';
 export const metadata: Metadata = {
   title: 'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
   description: HOME_DESCRIPTION,
-  openGraph: {
-    title:       'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
-    description: 'DISC mizaç tabanlı mentörlük platformu. Ücretsiz, kurulumu 10 dakika.',
-    type:        'website',
-    locale:      'tr_TR',
-    siteName:    'MentiMentor',
-  },
-  twitter: {
-    card:        'summary_large_image',
-    title:       'MentiMentor — Akıllı Mentörlük',
-    description: 'DISC mizaç tabanlı mentörlük platformu. Dernekler ve vakıflar için.',
-  },
+  // Y-09: openGraph/twitter (type/locale/siteName/card) kök `layout.tsx`'te. og:title /
+  // og:description ve twitter karşılıkları Next tarafından yukarıdaki title/description'dan
+  // otomatik doldurulur. Burada `openGraph` tanımlama: kök nesneyi sığ olarak değiştirir ve
+  // `opengraph-image` görseli düşer (resolve-metadata mergeStaticMetadata yalnız kök segmentte).
   robots: {
     index:  true,
     follow: true,

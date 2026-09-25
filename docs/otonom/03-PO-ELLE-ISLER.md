@@ -12,6 +12,8 @@
 > ayarı, SMTP hesabı, Neon planı, canlı ortam değişkeni gibi işler. Bunlar kuyruğa (`00-KUYRUK.md`) YAZILMAZ;
 > yoksa ajan yapamayacağı işi her turda atlar ve kuyruk kirlenir. Buraya risk sırasıyla yazılır, PO tek tek yapar.
 
+> 🟠 **YENİ (2026-09-25) — Dokploy: frontend build argümanı `NEXT_PUBLIC_SITE_URL`.** Sitenin paylaşım görseli (Y-09), sitemap ve arama motoru adresleri bu değişkenden kuruluyor ve değer **build sırasında** koda gömülüyor. Dokploy'da frontend uygulamasının **build argümanlarına** `NEXT_PUBLIC_SITE_URL` = sitenin herkese açık adresi (https ile, sonda `/` olmadan) eklenmeli. Eklenmezse link paylaşıldığında görsel çıkmaz (adres `localhost` olur). **Doğrulama:** yeniden deploy sonrası ana sayfanın kaynağında `og:image` satırı canlı alan adıyla başlamalı. (Kod tarafı: çatı #297 Dockerfile ARG.)
+
 ## ⛔ GÜVENLİK — bu belgeye ASLA gerçek değer yazılmaz
 Repo **PUBLIC**. Şifre · API anahtarı · token · SMTP parolası · JWT secret **buraya YAZILMAZ.**
 Yalnız "hangi değişken · nereye · neden · nasıl doğrularım" yazılır. Değerler PO'da/Dokploy'da kalır.
