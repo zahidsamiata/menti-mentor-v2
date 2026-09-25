@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-19 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-19 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # 📸 DONDURULMUŞ — Tam Gerçek Durum Envanteri (Belge vs Kod)
 
 > **Tarih:** 2026-08-19 · **Tür:** Keşif fotoğrafı (dondurulmuş, `belge-duzeni-rehberi.md`) · **Mod:** SALT-OKUMA tespit turu

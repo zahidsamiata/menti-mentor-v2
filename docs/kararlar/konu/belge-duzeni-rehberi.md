@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # Belge Düzeni Rehberi
 
 **🔄 YAŞAYAN** (düzen kuralları geliştikçe güncellenir) · Son güncelleme: 2026-08-23 (Kural 2 alt-klasör + Kural 7 taşıyıcı iş bölümü + Kural 8 bulgu yaşam döngüsü)
@@ -220,3 +223,106 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
   - 🗑️ taraması: "6 geçersiz kart" → 15 geçersiz kalem (ilk sayım yalnız kart durum satırına baktı; PO notu,
     karar-takip ve alt maddeler sayılmadı).
 - ⭐ Uygulama: iki adımlı doğrulamada (M1) "X bekliyorum" denirken **birim de söylenir.**
+
+---
+
+# ⭐ KURAL 18-25 — BELGE SİSTEMİ KALICI ÇÖZÜMLERİ (2026-09-23, DA turu · PO talimatı)
+
+> ⚠️ GÜNCELLEME (2026-09-25, DA2): Bu blok PR #263'ten güncel `main` üzerine yeniden uygulandı. Aynı PR'daki türetme betiği (`scripts/otonom-turet.mjs`), `00-SIRADAKI.md` / `01-CEVAPSIZ.md` ve `OTONOM-PROMPT.txt` § 13.4/13.5 değişiklikleri bu PR'a ALINMADI — bunlara yapılan atıflar (türetme betiği henüz birleşmedi — TEYİT GEREK) notuyla işaretlidir. Rakamlar (2026-09-23 itibarıyla) ölçümdür.
+
+> **Neden bu blok var:** 2026-09-23'te dokuz ayrı belge sorunu yaşandı; her biri tek seferlik temizlikle "çözüldü"
+> ama hiçbiri TEKRARI engellemiyordu. Aynı gün arşivleme yapıldı ama dosyalar KÜÇÜLMEDİ
+> (`00-KUYRUK` 163.869 → 173.431 · `02-ILERLEME` 80.586 → 84.995 karakter (2026-09-23 itibarıyla)) — aynı turda 8 yeni iş + 1 kart +
+> 105 aile etiketi (2026-09-23 itibarıyla) eklendi, arşivleme kazancı silindi. ⇒ **Arşivleme tek başına yetmez; asıl çözüm HEDEFLİ OKUMA**
+> (`OTONOM-PROMPT.txt` § 0.4): dosya boyutunu önemsiz kılar.
+> ⚠️ **KURAL 17 numarası BİLEREK KULLANILMADI** — "geçersizleşme koşulu" tartışmasına bağlı, `01-KARARLAR.md`
+> KARAR-50 (cevapsız). Karışıklık olmasın diye bu blok 18'den başlar.
+> Bu kurallar KURAL 1-16'yı **tamamlar**, hiçbirini kaldırmaz. `CLAUDE.md`'de yalnız tek satırlık atıf durur.
+
+## KURAL 18 — Sınıflandırma: 🔥 SICAK · 🌡️ ILIK · 🧊 DONMUŞ
+Her belge okunma sıklığına göre üç sınıftan birindedir; sınıf belgenin **ilk satırlarında** tek satırla yazılır:
+`> 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt § 0.4`
+
+| Sınıf | Ne demek | Üyeler (2026-09-23) | Tavan |
+|---|---|---|---:|
+| 🔥 **SICAK** | her otonom turda okunur | `00-KUYRUK` · `01-KARARLAR` · `02-ILERLEME` · `03-PO-ELLE-ISLER` · `OTONOM-PROMPT.txt` · `CLAUDE.md` · `00-SIRADAKI` · `01-CEVAPSIZ` (türetme betiği henüz birleşmedi — TEYİT GEREK) | **40.000** karakter (2026-09-23 itibarıyla) |
+| 🌡️ **ILIK** | gerektiğinde okunur | `00-KARAR-TAKIP` · `00-BELGE-HARITASI` · `00-KART-INDEKSI` · `09-DURUM` · `docs/kararlar/konu/` belgeleri | **120.000** karakter (2026-09-23 itibarıyla) |
+| 🧊 **DONMUŞ** | rutin turda okunmaz | `docs/otonom/arsiv/` · `docs/arsiv/` · `docs/raporlar/` altındaki 📸 raporlar · `bilanco/` | yok |
+
+- Ölçü birimi: **karakter** (`LC_ALL=C.UTF-8 wc -m`), bayt değil (Türkçe harfler 2 bayt).
+- 🔥 SICAK bir dosya **40.000'i aşarsa o turda ÖNCE arşivleme yapılır (KURAL 21), SONRA iş.** Arşivleme yetmiyorsa
+  PO'ya bildirilir; **yapısal bölünme PO KARARIDIR** (ajan kendiliğinden bölmez).
+- 🌡️ ILIK için tavan 120.000; aşılırsa aynı sıra. 🧊 DONMUŞ için tavan YOK (bir kez okunur, rutin maliyet üretmez).
+- ⚠️ `CLAUDE.md` 2026-09-23'te 34.742 karakter (2026-09-23 itibarıyla) — 40.000'e yaklaşmasın diye buraya yalnız **tek satır atıf** girer.
+- **Ölçüm her tur:** kapanış raporunda 🔥 SICAK dosyaların karakter sayısı + 1.000 karakteri aşan satır sayısı yazılır
+  (`OTONOM-PROMPT.txt` § 13.5 — bu bölüm henüz `main`'de YOK, PO kararı bekliyor — TEYİT GEREK). Böylece şişme **üç hafta sonra değil, o turda** görünür.
+- **Satır tavanı (1.000 karakter)** zaten var (`CLAUDE.md` § "tarihsel iz satırın İÇİNDE tutulmaz"); bu kural ona
+  yalnız **ölçüm** ekler. Yeni oluşan 1.000+ satır o turda düzeltilir (geçmiş → belgenin `## GEÇMİŞ` bölümü).
+  ⛔ **Not kolonu KISALTILMAZ** — kanıt disiplini korunur; hedefli okuma o satırları zaten yüklemiyor.
+
+## KURAL 19 — Türetilmiş dosyalar (bölme DEĞİL, üretme)
+- **Kapı değişken bir özelliktir** (🟡→🟢, 🔴→🟢). Kuyruğu kapıya göre dosyalara BÖLMEK her kapı değişiminde satır
+  taşımayı → kayıp / çift kayıt / çakışma riskini getirir. Bunun yerine özet dosyalar kaynaktan **ÜRETİLİR**:
+  - `docs/otonom/00-SIRADAKI.md` (türetme betiği henüz birleşmedi — TEYİT GEREK) ← `00-KUYRUK.md` baş kısmı (tanımlar) + YALNIZ 🟢 BEKLIYOR satırları
+    (İş · Bitti demek; **Not kolonu alınmaz** → işe başlarken tam satır `grep -n '^| <iş-no> |'` ile kaynaktan okunur)
+    ⭐ **İSTİSNA (2026-09-25):** `00-KUYRUK.md`'deki **'⭐ ÖNCELİK (PO)'** satırı ve adı geçen işler **kapıdan bağımsız**, her turda **kaynaktan** okunur (`OTONOM-PROMPT.txt` madde -1). 00-SIRADAKI yalnız 🟢 satır taşıdığı için bu satırı atlayamaz; türetme betiği birleşirken öncelik satırını SIRADAKI'ye alacak şekilde uyarlanmalıdır.
+  - `docs/otonom/01-CEVAPSIZ.md` (türetme betiği henüz birleşmedi — TEYİT GEREK) ← `01-KARARLAR.md`'de CEVAP satırı BOŞ kartlar (kart no · başlık · kaç işi açar ·
+    kuyrukta kilitlediği 🔴 işler)
+- Üretici: `scripts/otonom-turet.mjs` (`npm run otonom:turet`) (türetme betiği henüz birleşmedi — TEYİT GEREK). **Her turun SONUNDA** yeniden üretilir, üzerine yazılır.
+- ⛔ Türetilmiş dosyaya **ELLE yazılmaz**, kaynak olarak **kullanılmaz**, **atıf verilmez.** Başında
+  `⚙️ TÜRETİLMİŞ — kaynak: … · üretim: <tarih saat>` uyarısı durur. **Çelişkide kaynak KAZANIR.**
+- Bayatsa zararsızdır — sonraki turda yeniden üretilir. Ajan üretim tarihine bakar; **1 günden eskiyse** kaynaktan
+  hedefli okur.
+
+## KURAL 20 — Bilinçli olarak YAPILMAYANLAR (tekrar önerilmesin diye yazılı)
+- ⛔ Dosyayı **kapıya göre bölme** (🟢/🟡/🔴 ayrı dosya) → kapı değişkendir; bunun yerine KURAL 19 türetme.
+- ⛔ **Not kolonunu kısaltma** → kanıt disiplini bozulur; hedefli okuma zaten çözüyor.
+- ⛔ **DONDURULMUŞ raporları küçültme** → bir kez okunur, rutin maliyet üretmez.
+- ⛔ **Yeni planlama belgesi açma** → aktif iş kaynağı TEKTİR (`00-KUYRUK`; `CLAUDE.md` § AKTİF İŞ KAYNAĞI TEKTİR).
+- ⛔ **Yapısal bölme (indeks + detay)** → atıfları kırar; yalnız KURAL 18/19/21 yetmezse, **PO KARARIYLA** yapılır.
+
+## KURAL 21 — Ekleme-yalnızca günlükler: otomatik arşivleme eşiği
+- Ekleme-yalnızca dosyalar (ilerleme günlüğü · oturum günlüğü) **40.000 karakteri aşınca EN ESKİ kayıtlar aya göre
+  arşive taşınır. Son ÜÇ kayıt ana dosyada kalır.**
+- `02-ILERLEME.md` için (⚠️ 2026-09-25 itibarıyla bu arşivleme `main`'de henüz YAPILMADI — tur sonunda güncel main üzerinde baştan yapılacak): son üç tur ana dosyada; öncekiler `docs/otonom/arsiv/02-ILERLEME-<YYYY-MM>.md`'ye.
+  Ana dosyanın başında `Önceki turlar: <arşiv yolu>` satırı durur.
+- ⛔ **SATIR DOĞRULAMASI her taşımada ZORUNLU:** `(ana + arşiv)` toplamı taşımadan önceki toplamdan **AZALAMAZ**
+  (yalnız başlık/atıf satırı kadar artabilir). Azalırsa **GERİ AL, DUR, bildir.** Sayılar kapanış raporuna yazılır.
+- Taşıma **kelimesi kelimesine** yapılır: metin değiştirilmez, özetlenmez, sıra korunur.
+
+## KURAL 22 — Geçerlilik başlığı + DURUM TEK YERDE
+- **Her belgenin başında şu üçlük bulunur:**
+  `TÜR: 🔥/🌡️/🧊 · SON DOĞRULAMA: <tarih> · TAZELEME TETİKLEYİCİSİ: <olay>`
+  Tetikleyici örnekleri: *"her gerçek kullanıcı testinden sonra"* · *"ilk kurum canlıya girince"* ·
+  *"ilgili kod değişince"* · *"KALICI — tazeleme gerekmez"*.
+  ⛔ **Tetikleyici BOŞ BIRAKILAMAZ.** Kalıcıysa AÇIKÇA yazılır. (KURAL 3'ün 🔄/📸 etiketini tamamlar: 🔄 YAŞAYAN
+  damgası tek başına "ne zaman bakılmalı" demiyordu → "yaşayan ama aylardır ölü" belgeler buradan doğdu.)
+- ⭐ **DURUM TEK YERDE:** bir kalemin **DURUMU yalnız `docs/otonom/00-KUYRUK.md`'de** tutulur. Başka belgeler kalemin
+  **TANIMINI** tutar, **DURUMUNU TUTMAZ.** Durum işareti taşıyan her belgenin başına:
+  > ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler <tarih> durumudur.
+  > Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+  (KURAL 7 "statü tek yerde"nin otonom sisteme uyarlanmış hâli; KURAL 15 kaynak hiyerarşisini değiştirmez —
+  G-kartı **tanımda** kazanır, kuyruk **durumda** kazanır.)
+
+## KURAL 23 — Rapor → kuyruk zorunluluğu (öksüz bulgu önleme)
+- Bulgu üreten her rapor, sonunda **HAZIR KUYRUK SATIRLARI** ve **HAZIR KARAR KARTLARI** bölümleri içermek
+  **ZORUNDADIR.** Rapor tek başına bir aksiyon DEĞİLDİR. (KURAL 9 "kalem listesi"nin otonom biçimi.)
+- Rapor başında **İŞLENME KUTUSU** bulunur:
+  `İŞLENME: ⬜ bulgular henüz kuyruğa işlenmedi` ya da `İŞLENME: ✅ işlendi (<tarih>, tur: <ad>)`
+- ⬜ kalan rapor bir sonraki tur için **AÇIK İŞ** sayılır.
+- ✅ yalnız kuyrukta/kartta kanıtı (iş no · KARAR no · 03-PO satırı) gösterilebiliyorsa basılır (KURAL 10).
+- 📸 dondurulmuş bir rapora kutu eklemek KURAL 6'yı ihlal etmez: gövde değişmez, yalnız başa **işlenme durumu** girer.
+
+## KURAL 24 — Görünmez bölge (`.gitignore`'daki klasörler)
+- `.gitignore`'daki klasörler ajanlar tarafından **GÖRÜLEMEZ** (temiz klonlarda — bulut oturumu dahil — yoktur).
+- ⛔ Karar · içerik · iş taşıyan hiçbir metin bu klasörlerde **BIRAKILMAZ.** PO'nun geçici notları için kullanılabilir
+  (örnek: `docs/gelen/`); kalıcı değer taşıyan her şey ilgili `docs/` klasörüne taşınır. **Her ay boşaltılır.**
+- (İlgili: `OTONOM-PROMPT.txt` § 0.1 — izlenmeyen dosyalar hiçbir koşulda stash'lenmez.)
+
+## KURAL 25 — Üç sonuçlu doğrulama (iki değil)
+- Bir kalemin durumu **KODDA** doğrulanırken üç sonuçtan biri yazılır:
+  **✅ DOĞRULANDI** (kanıt: `dosya:satır`) · **⬜ AÇIK** · **❓ DOĞRULANAMADI** (sebep)
+- ⛔ ❓ olanı ✅ ya da ⬜ diye **VARSAYMA** — belirsizliğin kendisi kayıt altına alınır.
+- ⛔ Sayı **TAHMİN EDİLMEZ** ("≥20 kalem" gibi) — sayılır ya da "sayılmadı" yazılır (KURAL 16 ADAYI ile birlikte).
+- ⛔ Negatif iddia ("yok", "hiçbir yerde") **KAPSAM BEYANI** ister: dizin · desen · harf duyarsız mı ·
+  iki dilli mi (mentor↔mentör · tenant↔kurum · meeting↔görüşme · invite↔davet) — KURAL 13'ün kısa hâli.

@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-08 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Sertifika İçeriği — Oturum 3: 4 Konu (2026-09-08) · SERİ TAMAM
 
 > 📸 Üretim: 2026-09-08 PO+strateji oturumu. Kayıt: bu tur.

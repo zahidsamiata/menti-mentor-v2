@@ -1,3 +1,5 @@
+> İŞLENME: ✅ işlendi (2026-09-23, tur: ANALİZ TURU BULGULARI DOSYAYA İŞLENDİ) → `03-PO-ELLE-ISLER` (`docs/gelen/` silme = PO işi) · kutu: 2026-09-23 DA turu (belge-duzeni-rehberi § KURAL 23)
+
 # `docs/gelen/` Envanteri — Ne Silinebilir, Ne Kurtarıldı (2026-09-23)
 
 > **Amaç:** `docs/gelen/` klasörü `.gitignore`'da → temiz klonlarda YOK → hiçbir bulut ajanı okumadı.

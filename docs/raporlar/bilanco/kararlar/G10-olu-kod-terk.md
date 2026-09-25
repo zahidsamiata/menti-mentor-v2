@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-27 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-27 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # BİLANÇO KARAR DOSYASI — G10: Ölü kod / yarım özellik / terk adayları
 
 **🔄 YAŞAYAN** (gövde 2026-08-27 snapshot; durumlar güncelleniyor) · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c/G10) + `karar-defteri-2026-08-26.md` (GRUP 10)

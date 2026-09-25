@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-10 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # ARŞİV — 09-DURUM.md + 10-yol-haritasi.md (2026-08-10 öncesi tam kopya)
 **📸 DONDURULMUŞ (2026-08-10)** — tarihsel arşiv, güncellenmez.
 

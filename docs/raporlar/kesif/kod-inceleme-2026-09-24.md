@@ -1,3 +1,8 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-24 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-24 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+> İŞLENME: ✅ işlendi (2026-09-25, tur: KR kalıcı hâle getirme) → `00-KUYRUK` EN ÜST — KOD İNCELEMESİ (KR) bloğu · KARAR-77/78/79 · kutu: 2026-09-25 DA2 turu (belge-duzeni-rehberi § KURAL 23)
+
 # Kod İncelemesi — 2026-09-24 (6 paralel salt-okuma ajanı)
 
 **📸 RAPOR** · tarama 2026-09-24 · kalıcı hâle getirme 2026-09-25 · Sahip: PO

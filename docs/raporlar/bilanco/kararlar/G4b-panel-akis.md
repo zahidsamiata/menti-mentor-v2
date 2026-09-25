@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-27 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # BİLANÇO KARAR DOSYASI — G4b: Retention / persona / sevdirme + mentör-menti akış
 
 **📸 DONDURULMUŞ** · 2026-08-27 · Kaynak: `00-SAYIM-2026-08-27.md` (c/G4) + `karar-defteri-2026-08-26.md` (GRUP 5)

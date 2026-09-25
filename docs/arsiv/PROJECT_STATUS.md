@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-28 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # PROJECT_STATUS.md
 
 > 🗄️ **ARŞİV (2026-08-28, G9-09):** Kök dizinden `docs/arsiv/`'e taşındı. Güncel durum: **`../kararlar/09-DURUM.md`** · belge haritası: **`../kararlar/00-INDEX.md`**.

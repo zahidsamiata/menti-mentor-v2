@@ -1,3 +1,8 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-23 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+> İŞLENME: ⬜ bulgular henüz kuyruğa işlenmedi (2026-09-23 DA turu tespiti: `00-KUYRUK` · `01-KARARLAR` · `03-PO-ELLE-ISLER` · `02-ILERLEME` + arşivlerinde dosya adı ve "arastirma-brif" deseni 0 isabet) → bir sonraki tur için AÇIK İŞ · kutu: 2026-09-23 DA turu (belge-duzeni-rehberi § KURAL 23)
+
 # KONSEY 5 · İÇERİK KALİTESİ — BÖLÜM E: HAZIR ARAŞTIRMA BRİFLERİ
 
 > **Tarih:** 2026-09-23 · **Mod:** 🟩 PLANLA niteliğinde (ürün kodu değişmedi; yalnız bu rapor yazıldı)

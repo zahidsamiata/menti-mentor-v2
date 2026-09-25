@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 📸 ARŞİV — 2026-09-23. Buradaki kayıtlar TAMAMLANMIŞ/CEVAPLANMIŞ'tır.
 Aktif iş ve cevapsız kararlar ana dosyadadır (`docs/otonom/01-KARARLAR.md`). Buraya YENİ kayıt EKLENMEZ.
 

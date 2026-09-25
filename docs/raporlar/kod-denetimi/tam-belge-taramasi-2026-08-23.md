@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Tam-Belge Taraması — 40+ Belgeden Kayıp Madde Çıkarımı (2026-08-23)
 
 **📸 DONDURULMUŞ (2026-08-23)** — o günün fotoğrafı, güncellenmez. Kanıtlar o anki kod gerçeğine (backend submodule pointer `ba92dfa`, çatı `docs/belge-duzeni-reorg-2026-08-23`) dayanır.

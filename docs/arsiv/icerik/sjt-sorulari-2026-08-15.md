@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-15 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # İçerik Dökümü — SJT Soruları (2026-08-15)
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed.ts:530-573` + canlı DB salt-okuma sayımı.

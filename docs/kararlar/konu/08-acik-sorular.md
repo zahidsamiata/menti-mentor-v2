@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 08 — AÇIK SORULAR VE KARARA BAĞLANMAYANLAR
 **🔄 YAŞAYAN** (canonical: açık sorular / karar kuyruğu) · bkz. dondurulmuş keşif `unutulmus-niyet-envanteri-2026-08-10.md` (konu çakışması: KVKK / fotoğraf / eşleşme tetikleyicisi)
 > ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-09): bu etiket "🔄 YAŞAYAN (canonical: açık sorular)" ↔ aşağıdaki `:5` GÜNCELLEME "canonical açık-karar takibi artık `00-KARAR-TAKIP.md`" = **çift-kaynak** ("AKTİF İŞ KAYNAĞI TEKTİR" kuralıyla çelişir, YN-06). Tek-kaynağa indirme = AN-44 kuyruk işi; karar PO'nun.

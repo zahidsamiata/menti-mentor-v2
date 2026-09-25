@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # Tasarım: Eşleşme Sonrası Değerlendirme + Metrik Takip + Otomatik Pasifleştirme (iş #7)
 
 **🔄 YAŞAYAN** (canonical: #7 eşleşme-sonrası sistem vizyonu + aşamalı plan) · **Oluşturma:** 2026-08-19

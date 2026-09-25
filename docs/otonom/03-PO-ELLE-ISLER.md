@@ -1,3 +1,6 @@
+> 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🔥 · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: PO bir işi yapınca ya da yeni kod-dışı iş çıkınca
+
 # 03 — PO'NUN ELLE YAPACAKLARI (kod değiştirilerek çözülemeyen işler)
 
 🔄 YAŞAYAN · Oluşturma: 2026-09-19 · Kaynak: W (`operasyonel-hazirlik-2026-09-19.md`) + X (`uctan-uca-kurum-yolculugu-2026-09-19.md`) denetimleri.

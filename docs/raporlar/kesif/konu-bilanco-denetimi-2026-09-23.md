@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> İŞLENME: ✅ işlendi (2026-09-23, tur: CS BİLANÇO DENETİMİ RAPORU İŞLENDİ) → KARAR-72…75 · `00-KUYRUK` AŞAMA AN · kutu: 2026-09-23 DA turu (belge-duzeni-rehberi § KURAL 23)
+
 📸 DONDURULMUŞ — 2026-09-23 fotoğrafı. Plan değildir; bulgular `00-KUYRUK.md`'ye işlendikten sonra güncellenmez.
 
 # Kanonik Karar Belgeleri (`konu/`) + Bilanço Öksüz Denetimi

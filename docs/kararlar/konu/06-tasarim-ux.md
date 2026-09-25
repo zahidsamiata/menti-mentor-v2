@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 06 — TASARIM VE UX
 **🔄 YAŞAYAN** (canonical: tasarım ve UX)
 **Son güncelleme:** 2026-08-28 (Faz 1b: G7-12 H1 uygulandı + G7-13 yön canonical'landı) · önceki: 2026-08-02 (kart tasarımı + foto + tema/landing) · Kaynak: mail/panel chat'i

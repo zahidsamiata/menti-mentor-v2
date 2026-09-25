@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-19 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Yol Haritası — Kopya Kayıtlar Arşivi
 
 **📸 DONDURULMUŞ (2026-08-19)** — `10-yol-haritasi.md`'de **iki kez** listelenmiş madde kopyalarının taşındığı yer.

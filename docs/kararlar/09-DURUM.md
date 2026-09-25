@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: her tur kapanışı (OTONOM-PROMPT § 13.2)
+
 # 09 — GÜNCEL DURUM (ŞU AN NEREDEYİZ)
 
 **🔄 YAŞAYAN** (canonical: güncel durum) · **Son güncelleme:** 2026-09-20 (OTONOM TUR AA — OTONOM-PROMPT güncelleme #200 + 5 uçtan-uca FE düzeltmesi CANLIDA: U-02 toplantı linki #201 · U-07 bekleyen e-posta #202 · U-03 davet hata/kurum adı #204 · U-09 boş panel davet #203 · U-11 davet süresi #205 + F-30 yorum #206; backend/şema/DB DEĞİŞMEDİ, pointer sabit 4528048)

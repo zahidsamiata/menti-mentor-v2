@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-26 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # İçerik Dökümü — Öğrenme Yolculuğu + Kurum-Özel Soru Altyapısı (2026-08-26)
 **🟢 BYPASS (yalnız-belge) · 📸 DONDURULMUŞ (2026-08-26)** — kaynak: `seed-learning-journey.ts` + `schema.prisma` + `questionController.ts`. PII yoktur.
 

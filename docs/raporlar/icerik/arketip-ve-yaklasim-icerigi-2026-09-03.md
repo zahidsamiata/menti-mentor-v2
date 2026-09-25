@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-03 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 > 📁 Kayda geçirildi: 2026-09-03 · tur: docs/icerik-kaydi-2026-09-03
 
 # Arketip Kartları, Yaklaşım İçeriği ve Ölçme Kararları

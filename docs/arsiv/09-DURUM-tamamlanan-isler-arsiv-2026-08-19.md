@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-19 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # 09-DURUM — Tamamlanan İşler Arşivi (eski oturum kayıtları)
 
 **📸 DONDURULMUŞ (2026-08-19)** — `09-DURUM.md`'nin "yalnız ŞU AN"a odaklanması için, en eski **tamamlanmış oturum

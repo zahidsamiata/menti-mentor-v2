@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # Consent (Rıza) Modeli — Şema Tasarımı + Migration Planı
 
 **📸 DONDURULMUŞ (2026-08-28)** — Bu belge **G1-07 (rıza sürümü) + G1-08 (OAuth/tipli rıza) uygulama turunun KAYNAĞIDIR.** Tasarım kararı burada; uygulama ayrı, PO-onaylı migration turunda yapılır. Güncel durum için `09-DURUM.md`, açık iş için `00-KARAR-TAKIP.md`.
