@@ -15,9 +15,9 @@ import type { CertQuestion, CertReveal, CertResult, CertOutcome } from '@/types/
 
 // Renk semantiği: yeşil=doğru, sarı=kabul edilebilir, kırmızı=yanlış (renk körlüğü için ikon da).
 const OUTCOME_STYLE: Record<CertOutcome, { badge: string; icon: string; label: string }> = {
-  correct:    { badge: 'bg-green-100 text-green-800 border-green-300', icon: '✅', label: 'En doğru' },
-  acceptable: { badge: 'bg-amber-100 text-amber-800 border-amber-300', icon: '⚠️', label: 'Kabul edilebilir' },
-  wrong:      { badge: 'bg-red-100 text-red-800 border-red-300',       icon: '❌', label: 'Zararlı / zayıf' },
+  correct:    { badge: 'bg-green-100 text-green-800 border-green-300 dark:bg-green-950/30 dark:text-green-300 dark:border-green-800', icon: '✅', label: 'En doğru' },
+  acceptable: { badge: 'bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800', icon: '⚠️', label: 'Kabul edilebilir' },
+  wrong:      { badge: 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800',       icon: '❌', label: 'Zararlı / zayıf' },
 };
 
 // AN-01: sınav-seviyesi bekleme kuralı — backend `CERT_CONFIG`
@@ -300,17 +300,17 @@ export default function MentorCertificationPage() {
               Konu {topicIdx + 1} / {topics.length}
             </Badge>
             {currentQuestion.isRedLine && (
-              <Badge className="bg-red-100 text-red-800 border border-red-300 text-xs">
+              <Badge className="bg-red-100 text-red-800 border border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800 text-xs">
                 Kritik konu
               </Badge>
             )}
             {!isLearningRetry && retryTopics.has(currentTopic.topic) && (
-              <Badge className="bg-amber-100 text-amber-800 border border-amber-300 text-xs">
+              <Badge className="bg-amber-100 text-amber-800 border border-amber-300 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800 text-xs">
                 Geçen sefer zorlandığın konu — bu kez farklı bir durum
               </Badge>
             )}
             {isLearningRetry && (
-              <Badge className="bg-blue-100 text-blue-800 border border-blue-300 text-xs">
+              <Badge className="bg-blue-100 text-blue-800 border border-blue-300 dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800 text-xs">
                 Pekiştirme — farklı bir durum
               </Badge>
             )}

@@ -29,10 +29,10 @@ const SKILL_CHIPS = [
 ];
 
 const DISC_META = {
-  D: { archetype: 'Öncü',      icon: '🦅', color: 'text-red-500'    },
-  I: { archetype: 'Ateşleyici', icon: '🔥', color: 'text-yellow-500' },
-  S: { archetype: 'Yapı Taşı', icon: '🌿', color: 'text-green-500'  },
-  C: { archetype: 'Kâşif',     icon: '🧭', color: 'text-blue-500'   },
+  D: { archetype: 'Öncü',      icon: '🦅', color: 'text-red-600 dark:text-red-400'    },
+  I: { archetype: 'Ateşleyici', icon: '🔥', color: 'text-yellow-600 dark:text-yellow-400' },
+  S: { archetype: 'Yapı Taşı', icon: '🌿', color: 'text-green-600 dark:text-green-400'  },
+  C: { archetype: 'Kâşif',     icon: '🧭', color: 'text-blue-600 dark:text-blue-400'   },
 } as const;
 
 // ─── Yardımcı: Json? alanı string'e çevir ─────────────────────────────────────
