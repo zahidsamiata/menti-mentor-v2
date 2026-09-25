@@ -23,6 +23,7 @@ import * as ogImage from '@/app/opengraph-image';
 import * as twitterImage from '@/app/twitter-image';
 import { metadata as rootMetadata } from '@/app/layout';
 import { metadata as homeMetadata } from '@/app/page';
+import { metadata as metodolojiMetadata } from '@/app/metodoloji/page';
 
 describe('Y-09 görsel metinleri — varsayılan OG fontu', () => {
   it('isOgSafeText desteklenmeyen Türkçe harfleri yakalar', () => {
@@ -75,6 +76,21 @@ describe('Y-09 kök layout paylaşım meta\'sı', () => {
   it('kök meta görseli elle vermez (dosya konvansiyonu görselini ezmesin)', () => {
     expect(rootMetadata.openGraph).not.toHaveProperty('images');
     expect(rootMetadata.twitter).not.toHaveProperty('images');
+  });
+
+  it('kök OG/Twitter sabit başlık/açıklama taşımaz (alt sayfalara sızmasın)', () => {
+    // Next og/twitter title+description yalnız BOŞSA sayfanın kendi title/description'ını kopyalar.
+    for (const block of [rootMetadata.openGraph, rootMetadata.twitter]) {
+      expect(block).not.toHaveProperty('title');
+      expect(block).not.toHaveProperty('description');
+    }
+  });
+
+  it('alt sayfa (metodoloji) ana sayfa başlığını taşımaz, kendi başlığıyla paylaşılır', () => {
+    expect(metodolojiMetadata.title).toBeTruthy();
+    expect(metodolojiMetadata.title).not.toBe(homeMetadata.title);
+    // OG'yi kendisi tanımlamıyor → kökteki (başlıksız) OG + kendi title/description kullanılır.
+    expect(metodolojiMetadata.openGraph).toBeUndefined();
   });
 
   it('ana sayfa kendi başlık/açıklamasını korur, OG\'yi yeniden tanımlamaz', () => {

@@ -36,19 +36,20 @@ export const metadata: Metadata = {
   title: { template: '%s — Mentorluk Platformu', default: 'Mentorluk Platformu' },
   description: 'Mentor-menti eşleştirme platformu',
   // Y-09: paylaşım (OG/Twitter) meta'sı site geneli — önceden yalnız ana sayfadaydı.
+  // ⚠️ Burada BİLİNÇLİ olarak title/description YOK: Next, og/twitter title+description
+  // BOŞSA her sayfanın kendi title/description'ını kopyalar (resolve-metadata
+  // inheritFromMetadata). Burada sabit başlık verilirse /metodoloji, /kvkk, /login… hepsi
+  // ana sayfa başlığıyla paylaşılır.
   // Görseller `app/opengraph-image.tsx` + `app/twitter-image.tsx` dosya konvansiyonundan
-  // otomatik eklenir (burada `images` verilmez; verilirse dosya görselini ezer).
+  // otomatik eklenir (burada `images` verilmez; verilirse dosya görselini ezer). Alt sayfa
+  // `openGraph` tanımlarsa bu nesne sığ olarak DEĞİŞTİRİLİR ve kök görsel düşer.
   openGraph: {
-    title:       'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
-    description: 'DISC mizaç tabanlı mentörlük platformu. Ücretsiz, kurulumu 10 dakika.',
-    type:        'website',
-    locale:      'tr_TR',
-    siteName:    'MentiMentor',
+    type:     'website',
+    locale:   'tr_TR',
+    siteName: 'MentiMentor',
   },
   twitter: {
-    card:        'summary_large_image',
-    title:       'MentiMentor — Akıllı Mentörlük',
-    description: 'DISC mizaç tabanlı mentörlük platformu. Dernekler ve vakıflar için.',
+    card: 'summary_large_image',
   },
 };
 

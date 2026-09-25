@@ -84,6 +84,8 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_API_URL: ${BACKEND_URL:-http://localhost:3000}
+        # Y-09: kanonik site kökü (og:image/sitemap). Boşsa getSiteUrl() localhost fallback'i.
+        NEXT_PUBLIC_SITE_URL: ${FRONTEND_URL:-}
     restart: unless-stopped
     depends_on:
       backend:

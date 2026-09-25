@@ -21,8 +21,10 @@ export const metadata: Metadata = {
   description:
     'Dernekler, vakıflar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
     'kapalı devre mentörlük platformu. Kurulum 10 dakika, sonsuza kadar ücretsiz.',
-  // Y-09: openGraph/twitter kök `layout.tsx`'e taşındı (aynı metinler) — burada yeniden
-  // tanımlanırsa kök görseli (`opengraph-image`) sığ birleştirmede düşebilir.
+  // Y-09: openGraph/twitter (type/locale/siteName/card) kök `layout.tsx`'te. og:title /
+  // og:description ve twitter karşılıkları Next tarafından yukarıdaki title/description'dan
+  // otomatik doldurulur. Burada `openGraph` tanımlama: kök nesneyi sığ olarak değiştirir ve
+  // `opengraph-image` görseli düşer (resolve-metadata mergeStaticMetadata yalnız kök segmentte).
   robots: {
     index:  true,
     follow: true,
