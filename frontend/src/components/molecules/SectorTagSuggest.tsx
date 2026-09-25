@@ -11,8 +11,10 @@ import { cn } from '@/lib/utils';
  *
  * Kullanıcı mevcut sektör etiketlerini görür; havuzda olmayan bir alanı önerebilir.
  * Öneri doğrudan profile YAZILMAZ — `POST /api/tags/suggest` ile kurumun onay kuyruğuna
- * düşer, yönetici `/admin/tags` ekranında onaylarsa etiket öneren kişinin listesine eklenir.
- * Geri bildirim bu yüzden "eklendi" değil "yönetici onayına gönderildi" der.
+ * düşer; yönetici `/admin/tags` ekranında onaylayabilir, mevcut bir etiketle birleştirebilir
+ * ya da reddedebilir. Birleştirmede ve aynı etiketin ikinci kez önerilmesinde etiket önerenin
+ * profiline eklenmez — bu yüzden metin "profilinize eklenecek" sözü VERMEZ; yalnız
+ * "yönetici incelemesine gönderildi" der.
  */
 
 type Feedback = { kind: 'success' | 'info' | 'error'; text: string } | null;
@@ -28,7 +30,7 @@ export function suggestionResultText(data: SuggestTagResponse): { kind: 'success
   if (data.tag) {
     return {
       kind: 'success',
-      text: `"${data.tag.value}" önerisi yönetici onayına gönderildi. Onaylanırsa sektör etiketlerinize eklenecek.`,
+      text: `"${data.tag.value}" önerisi yönetici incelemesine gönderildi. Yönetici onaylarsa etiket listesine eklenir.`,
     };
   }
   if (data.status === 'PENDING') {
@@ -97,7 +99,7 @@ export function SectorTagSuggest({ currentTags }: { currentTags: string[] }) {
 
       <form onSubmit={handleSubmit} className="space-y-2" noValidate>
         <label htmlFor="sector-tag-suggest-input" className="text-xs text-muted-foreground block">
-          Alanınız listede yok mu? Yeni bir etiket önerin — yönetici onayladıktan sonra profilinize eklenir.
+          Alanınız listede yok mu? Yeni bir etiket önerin — öneriniz yönetici incelemesine gider.
         </label>
         <div className="flex gap-2">
           <input

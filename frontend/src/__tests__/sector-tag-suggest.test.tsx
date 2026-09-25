@@ -11,6 +11,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SectorTagSuggest } from '@/components/molecules/SectorTagSuggest';
+import { apiClient } from '@/lib/api/client';
 import ProfilePage from '@/app/(dashboard)/profile/page';
 
 const apiMock = vi.fn();
@@ -72,9 +73,12 @@ describe('Y-16: sektör etiketi önerme', () => {
       method: 'POST',
       body: { value: 'Oyun Tasarımı' },
     });
-    expect(await screen.findByRole('status')).toHaveTextContent(
-      '"oyun tasarımı" önerisi yönetici onayına gönderildi. Onaylanırsa sektör etiketlerinize eklenecek.',
+    const status = await screen.findByRole('status');
+    expect(status).toHaveTextContent(
+      '"oyun tasarımı" önerisi yönetici incelemesine gönderildi. Yönetici onaylarsa etiket listesine eklenir.',
     );
+    // Yönetici birleştirebilir / aynı etiket ikinci kez önerilmiş olabilir → profile eklenme sözü verilmez.
+    expect(screen.getByTestId('sector-tag-suggest')).not.toHaveTextContent(/profilinize|etiketlerinize eklen/);
     expect(screen.getByLabelText(/Alanınız listede yok mu/)).toHaveValue('');
   });
 
@@ -117,5 +121,30 @@ describe('Y-16: sektör etiketi önerme', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Sunucuya ulaşılamıyor.');
     // Giriş korunur — kullanıcı tekrar deneyebilir.
     expect(screen.getByLabelText(/Alanınız listede yok mu/)).toHaveValue('fintek');
+  });
+
+  it('backend 400 (doğrulama) yanıtı gerçek istemciden geçip alan mesajıyla gösterilir', async () => {
+    // Backend SuggestTagSchema hatasında `message` göndermez, yalnız `details` (flatten) döner;
+    // istemci ilk alan mesajını kullanıcıya taşımalı — hata sessiz yutulmamalı.
+    const fetchMock = vi.fn(async () => new Response(
+      JSON.stringify({
+        error: 'VALIDATION',
+        details: { formErrors: [], fieldErrors: { value: ['Etiket geçersiz karakter içeriyor'] } },
+      }),
+      { status: 400, headers: { 'Content-Type': 'application/json' } },
+    ));
+    vi.stubGlobal('fetch', fetchMock);
+    apiMock.mockImplementation((path: string, opts: Parameters<typeof apiClient>[1]) => apiClient(path, opts));
+    try {
+      render(<SectorTagSuggest currentTags={[]} />);
+      await suggest('fintek');
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+      expect(url).toMatch(/\/api\/tags\/suggest$/);
+      expect(JSON.parse(init.body as string)).toEqual({ value: 'fintek' });
+      expect(await screen.findByRole('alert')).toHaveTextContent('Etiket geçersiz karakter içeriyor');
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });
