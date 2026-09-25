@@ -27,7 +27,7 @@ const NAV_BY_ROLE: Record<string, { href: string; label: string; icon: string }[
   ],
 };
 
-// Sol-alt kullanıcı kartında gösterilen rol adı (yalnız bu panelin rolleri).
+// Kullanıcı kartında gösterilen rol adı (yalnız bu panelin rolleri).
 const ROLE_LABEL: Record<string, string> = {
   MENTI:  'Menti',
   MENTOR: 'Mentör',
@@ -48,56 +48,75 @@ export function DashboardNav() {
   }
 
   return (
-    <>
-      <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
-        <nav className="flex items-center gap-1 px-4 h-12 overflow-x-auto">
-          {items.map(({ href, label, icon }) => {
-            const active = pathname === href || (href !== '/menti' && href !== '/mentor' && pathname.startsWith(href));
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  'flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm transition-colors shrink-0',
-                  active
-                    ? 'bg-primary text-primary-foreground font-medium'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-                )}
-              >
-                <span className="text-base leading-none">{icon}</span>
-                <span>{label}</span>
-              </Link>
-            );
-          })}
-          <div className="ml-auto flex shrink-0 items-center gap-2 pl-2">
-            <span className="hidden sm:inline max-w-[140px] truncate text-xs text-muted-foreground">
-              {user.fullName}
-            </span>
-            <MessagesBell />
-            <ThemeToggle />
-            <button
-              type="button"
-              onClick={handleLogout}
-              aria-label="Çıkış Yap"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
+      <nav className="flex items-center gap-1 px-4 h-12 overflow-x-auto">
+        {items.map(({ href, label, icon }) => {
+          const active = pathname === href || (href !== '/menti' && href !== '/mentor' && pathname.startsWith(href));
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={cn(
+                'flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm transition-colors shrink-0',
+                active
+                  ? 'bg-primary text-primary-foreground font-medium'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+              )}
             >
-              <LogOut className="h-3.5 w-3.5" aria-hidden />
-              <span className="hidden sm:inline">Çıkış Yap</span>
-            </button>
-          </div>
-        </nav>
-      </header>
-      {/* F-33 (G8-14): admin panelindeki sol-alt kullanıcı kartının aynısı. Header'ın DIŞINDA —
-          header'daki backdrop-blur, `fixed` konumlu çocukları header'a hapseder. Geniş ekranda
-          sabit sol-alt köşede; dar ekranda üst bardaki ad + çıkış yeterli olduğu için gizli. */}
+              <span className="text-base leading-none">{icon}</span>
+              <span>{label}</span>
+            </Link>
+          );
+        })}
+        <div className="ml-auto flex shrink-0 items-center gap-2 pl-2">
+          <span className="hidden sm:inline max-w-[140px] truncate text-xs text-muted-foreground">
+            {user.fullName}
+          </span>
+          <MessagesBell />
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={handleLogout}
+            aria-label="Çıkış Yap"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <LogOut className="h-3.5 w-3.5" aria-hidden />
+            <span className="hidden sm:inline">Çıkış Yap</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+  );
+}
+
+/**
+ * F-33 (G8-14): admin sidebar'ındaki sol-alt kullanıcı kartının menti/mentör karşılığı.
+ * Neden `fixed` DEĞİL: sabit kart içeriği örtüyordu (ör. /messages/[id] yazma kutusu). Bunun yerine
+ * layout'ta içeriğin solunda kendi sütununda (akış içinde) durur; kart o sütunun dibinde `sticky` ile
+ * görünür kalır → hiçbir ekranda içeriği örtmez ve dikey yükseklik eklemez (tam yükseklik ekranlarda
+ * fazladan kaydırma olmaz). Dar ekranda gizli: üst bardaki ad + çıkış yeterli.
+ */
+export function DashboardUserCard() {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  if (!user || !ROLE_LABEL[user.role]) return null;
+
+  async function handleLogout() {
+    await logout();
+    router.replace('/login');
+  }
+
+  return (
+    <aside className="hidden md:flex w-56 shrink-0 flex-col justify-end pl-4 pb-6">
       <UserCard
         ariaLabel="Kullanıcı kartı"
-        className="hidden md:block fixed bottom-4 left-4 z-30 w-56 rounded-lg border border-border bg-card p-3 space-y-2 shadow-sm"
+        className="sticky bottom-6 rounded-lg border border-border bg-card p-3 space-y-2 shadow-sm"
         fullName={user.fullName}
         email={user.email}
         roleLabel={ROLE_LABEL[user.role]}
         onLogout={handleLogout}
       />
-    </>
+    </aside>
   );
 }

@@ -1,12 +1,15 @@
 import type { ReactNode } from 'react';
-import { DashboardNav } from '@/components/organisms/DashboardNav';
+import { DashboardNav, DashboardUserCard } from '@/components/organisms/DashboardNav';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
       <DashboardNav />
-      {/* md:pb-40 — sol-alt sabit kullanıcı kartı (F-33) sayfa sonundaki içeriği örtmesin */}
-      <main className="p-6 md:pb-40">{children}</main>
+      {/* F-33: kullanıcı kartı içeriğin solunda kendi sütununda (akış içinde) — içeriği örtmez */}
+      <div className="md:flex">
+        <DashboardUserCard />
+        <main className="min-w-0 flex-1 p-6">{children}</main>
+      </div>
     </div>
   );
 }
