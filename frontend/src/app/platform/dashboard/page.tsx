@@ -148,18 +148,29 @@ export default function PlatformDashboard() {
     void loadData(tab);
   }
 
+  // KR-09 ile aynı hata: "İptal" (prompt null) işlemi yine yapıyordu. İptal = vazgeç.
   async function handleReviewReport(id: string) {
-    const note = window.prompt('İnceleme notu (opsiyonel):') ?? undefined;
-    await reviewReport(id, note);
-    notify('Bildirim incelendi olarak işaretlendi.');
-    void loadData(tab);
+    const note = window.prompt('İnceleme notu (opsiyonel):');
+    if (note === null) return;
+    try {
+      await reviewReport(id, note);
+      notify('Bildirim incelendi olarak işaretlendi.');
+      void loadData(tab);
+    } catch (e) {
+      notify(e instanceof Error ? e.message : 'Bildirim işaretlenemedi.');
+    }
   }
 
   async function handleReviewUserReport(id: string, status: 'REVIEWED' | 'DISMISSED') {
-    const note = window.prompt('İnceleme notu (opsiyonel):') ?? undefined;
-    await reviewUserReport(id, status, note);
-    notify(status === 'DISMISSED' ? 'Şikayet reddedildi.' : 'Şikayet incelendi.');
-    void loadData(tab);
+    const note = window.prompt('İnceleme notu (opsiyonel):');
+    if (note === null) return;
+    try {
+      await reviewUserReport(id, status, note);
+      notify(status === 'DISMISSED' ? 'Şikayet reddedildi.' : 'Şikayet incelendi.');
+      void loadData(tab);
+    } catch (e) {
+      notify(e instanceof Error ? e.message : 'Şikayet güncellenemedi.');
+    }
   }
 
   const tabs: { key: Tab; label: string; badge?: number }[] = [
