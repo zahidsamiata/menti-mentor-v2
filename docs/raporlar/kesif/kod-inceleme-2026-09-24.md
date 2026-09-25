@@ -56,8 +56,8 @@
 - **Dokunacağı dosya:** `backend/src/services/algorithmTuner.ts` (+ test) · **Migration:** yok
 - **Not:** I-13 / PS-A1 **başka** bir ölçek hatasıdır (OCEAN), bu değil.
 
-### A5 · Bir görüşmeye yalnız bir taraf değerlendirme yazabiliyor · **Yüksek** · [D şema · teyit gerek controller] · kuyruk **KR-08** · 🔴 **KARAR-77**
-- **Kanıt:** `backend/prisma/schema.prisma:623` (`Feedback.meetingId @unique`) · `backend/src/controllers/feedbackController.ts:63,118` [teyit gerek].
+### A5 · Bir görüşmeye yalnız bir taraf değerlendirme yazabiliyor · **Yüksek** · [D] · kuyruk **KR-08** · 🔴 **KARAR-77**
+- **Kanıt:** `backend/prisma/schema.prisma:623` (`Feedback.meetingId @unique`) · `backend/src/controllers/feedbackController.ts:63-64` (`hasFeedback` ise 409 `ZATEN_MEVCUT`) · `:118` (ilk kayıtta `hasFeedback: true`). Controller 2026-09-25'te doğrulandı.
 - **Kullanıcı gözünden:** önce yazan taraf diğerini engelliyor; ikinci taraf "zaten var" hatası alıyor.
 - **Düzeltme:** tekillik (görüşme + yazar) olsun — verinin anlamını değiştirir → ürün kararı.
 - **Dokunacağı dosyalar:** `backend/prisma/schema.prisma` · `backend/src/controllers/feedbackController.ts` · **Migration:** VAR
@@ -75,8 +75,9 @@
 - **Düzeltme:** yükleme hatasında kaydet düğmesi kilitlensin, hata gösterilsin.
 - **Dokunacağı dosya:** aynı sayfa · **Migration:** yok
 
-### A8 · Dönemlik anket gönderilemiyor ve sayfaya bağlantı yok · **Orta** · [teyit gerek] · kuyruk **KR-11** · 🔴 **KARAR-78**
-- **Kanıt:** `frontend/src/app/(dashboard)/periodic-survey/page.tsx:54-65` — gövdedeki alanlar backend şemasında yok; sayfaya hiçbir yerden bağlantı yok.
+### A8 · Dönemlik anket gönderilemiyor ve sayfaya bağlantı yok · **Orta** · [D] · kuyruk **KR-11** · 🔴 **KARAR-78**
+- **Kanıt (2026-09-25 doğrulandı):** `frontend/src/app/(dashboard)/periodic-survey/page.tsx:54-65` `periodic*` alanlarını `POST /api/meetings/:id/feedback`'e gönderiyor; `backend/src/controllers/feedbackController.ts:9-28` şeması bu alanları tanımıyor ve "en az bir puan" şartı koyuyor → istek her durumda reddediliyor. `frontend/src` içinde sayfaya bağlantı yok (grep boş). Alanlar şemada var (`backend/prisma/schema.prisma` `Feedback.periodic*`, "ayda bir tetiklenir" yorumu) ama tetikleyen kod yok.
+- **A5 ile bağ:** anket, görüşme başına TEK olan aynı `Feedback` kaydına yazmaya çalışıyor → A5'in tekillik kuralı bu özelliği de kilitler.
 - **Kullanıcı gözünden:** özellik fiilen yok; sayfaya kimse ulaşamıyor, ulaşsa da gönderemiyor.
 - **Düzeltme:** özelliğin kalıp kalmayacağı ürün kararı (silme seçeneği silme protokolüne tabi).
 - **Dokunacağı dosyalar:** aynı sayfa (+ `backend/src/controllers/feedbackController.ts` şeması) · **Migration:** karara bağlı
