@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import { cn } from '@/lib/utils';
+import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 import { DiscNoPressureNote } from '@/components/molecules/DiscNoPressureNote';
 import type { DiscAnswer, DiscQuestion } from '@/types/onboarding';
 
@@ -44,6 +45,7 @@ interface OptionCardProps {
   text:        string;
   isSelected:  boolean;
   isDisabled:  boolean;
+  tabIndex:    0 | -1;
   onClick:     () => void;
 }
 
@@ -63,10 +65,13 @@ const LETTER_COLORS: Record<string, string> = {
   D: 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
 };
 
-function OptionCard({ letter, text, isSelected, isDisabled, onClick }: OptionCardProps) {
+function OptionCard({ letter, text, isSelected, isDisabled, tabIndex, onClick }: OptionCardProps) {
   return (
     <button
       type="button"
+      role="radio"
+      aria-checked={isSelected}
+      tabIndex={tabIndex}
       onClick={onClick}
       disabled={isDisabled}
       data-selected={isSelected}
@@ -79,7 +84,6 @@ function OptionCard({ letter, text, isSelected, isDisabled, onClick }: OptionCar
         OPTION_COLORS[letter] ?? 'hover:border-primary/50 hover:bg-primary/5',
         isSelected && 'shadow-md',
       )}
-      aria-pressed={isSelected}
     >
       {/* Harf rozeti */}
       <span className={cn(
@@ -112,6 +116,7 @@ export function DiscTestStep({
   const [answers,      setAnswers]          = useState<DiscAnswer[]>([]);
   const [visible,      setVisible]          = useState(true);
   const [selectedOpt,  setSelectedOpt]      = useState<string | null>(null);
+  const questionTextId = useId();
 
   const total   = questions.length;
   const current = questions[currentIndex];
@@ -147,6 +152,8 @@ export function DiscTestStep({
 
   if (!current) return null;
 
+  const optionEntries = Object.entries(current.options);
+
   return (
     <div className="space-y-0">
       {/* İlerleme başlığı — sabit */}
@@ -162,20 +169,27 @@ export function DiscTestStep({
       >
         {/* Senaryo metni */}
         <div className="rounded-2xl border border-border bg-card p-6 mb-5 shadow-sm">
-          <p className="text-base sm:text-lg font-medium text-foreground leading-relaxed">
+          <p id={questionTextId} className="text-base sm:text-lg font-medium text-foreground leading-relaxed">
             {current.text}
           </p>
         </div>
 
-        {/* Seçenekler */}
-        <div className="space-y-3">
-          {Object.entries(current.options).map(([letter, text]) => (
+        {/* Seçenekler — F-21: radiogroup. Seçim hemen sonraki soruya geçtiği için ok tuşu yalnız
+            odağı taşır; seçim Boşluk/Enter (ya da tıklama) ile yapılır. */}
+        <div
+          role="radiogroup"
+          aria-labelledby={questionTextId}
+          onKeyDown={(e) => handleRadioGroupKeyDown(e, { selectOnMove: false })}
+          className="space-y-3"
+        >
+          {optionEntries.map(([letter, text], index) => (
             <OptionCard
               key={letter}
               letter={letter}
               text={text}
               isSelected={selectedOpt === letter}
               isDisabled={!!selectedOpt || isSubmitting}
+              tabIndex={rovingTabIndex(index, optionEntries.findIndex(([l]) => l === selectedOpt))}
               onClick={() => handleOption(letter)}
             />
           ))}

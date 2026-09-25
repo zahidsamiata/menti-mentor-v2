@@ -5,7 +5,7 @@
  * Admin, bekleyen etiketi var olan bir etikete eşler.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useId, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -20,6 +20,7 @@ interface MergeTagDialogProps {
 
 export function MergeTagDialog({ open, tagValue, isLoading = false, onConfirm, onCancel }: MergeTagDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogTitleId = useId();
   const [target, setTarget] = useState('');
 
   useEffect(() => {
@@ -31,10 +32,11 @@ export function MergeTagDialog({ open, tagValue, isLoading = false, onConfirm, o
   return (
     <dialog
       ref={dialogRef}
+      aria-labelledby={dialogTitleId}
       className="rounded-2xl border border-border bg-card p-6 shadow-xl w-full max-w-sm backdrop:bg-black/50"
       onCancel={onCancel}
     >
-      <h2 className="text-lg font-semibold">Etiket Birleştir</h2>
+      <h2 id={dialogTitleId} className="text-lg font-semibold">Etiket Birleştir</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         <strong>&quot;{tagValue}&quot;</strong> etiketi hangi mevcut etikete eşlensin?
       </p>

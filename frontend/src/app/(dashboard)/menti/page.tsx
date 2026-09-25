@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useId, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
@@ -100,6 +100,7 @@ export default function MentiDashboardPage() {
   const [sendError, setSendError] = useState<string | null>(null);
   const [sentIds, setSentIds] = useState<Set<string>>(new Set());
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogTitleId = useId();
 
   // Kalıcı konuşmalar + oturum-içi yeni gönderilenler birleştirilir (mükerrer sayım yok).
   const sentRequestCount = countSentRequests(
@@ -362,12 +363,13 @@ export default function MentiDashboardPage() {
       {/* Talep Gönder Modalı */}
       <dialog
         ref={dialogRef}
+        aria-labelledby={dialogTitleId}
         className="rounded-2xl border border-border bg-card p-6 shadow-xl w-full max-w-md backdrop:bg-black/50"
         onCancel={closeModal}
       >
         {selectedMentor && (
           <>
-            <h2 className="text-lg font-semibold">
+            <h2 id={dialogTitleId} className="text-lg font-semibold">
               {selectedMentor.mentorName} · Mesaj Gönder
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -388,7 +390,7 @@ export default function MentiDashboardPage() {
             </p>
 
             {sendError && (
-              <p className="mt-2 text-xs text-destructive">{sendError}</p>
+              <p className="mt-2 text-xs text-destructive" role="alert">{sendError}</p>
             )}
 
             <div className="mt-4 flex justify-end gap-2">

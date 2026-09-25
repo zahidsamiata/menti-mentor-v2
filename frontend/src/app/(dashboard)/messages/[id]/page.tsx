@@ -118,7 +118,7 @@ export default function ConversationThreadPage() {
 
       {/* Gönderme kutusu */}
       <div className="border-t border-border pt-3">
-        {sendError && <p className="mb-2 text-xs text-destructive">{sendError}</p>}
+        {sendError && <p className="mb-2 text-xs text-destructive" role="alert">{sendError}</p>}
         <div className="flex items-end gap-2">
           <textarea
             className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"

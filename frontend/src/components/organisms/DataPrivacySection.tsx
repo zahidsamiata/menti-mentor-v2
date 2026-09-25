@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useModalDialog } from '@/hooks/useModalDialog';
 import { fetchMyDataExport, deleteMyAccount } from '@/lib/api/kvkk';
 import { summarizeDataExport, type DataSummarySection } from '@/lib/kvkkSummary';
 
@@ -37,6 +38,19 @@ export function DataPrivacySection() {
   const [confirmEmail, setConfirmEmail] = useState('');
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  // ── Hesabımı kapat ──────────────────────────────────────────────────────────
+  const resetDeleteFlow = () => {
+    setStep('closed');
+    setConfirmEmail('');
+    setDeleteError(null);
+  };
+
+  // F-21: onay penceresi — odak içeri, Esc ile kapanır (silme sürerken kapanmaz), kapanınca
+  // odak "Hesabımı kapat" düğmesine döner.
+  const deleteDialogRef = useModalDialog<HTMLDivElement>(step !== 'closed', () => {
+    if (!deleting) resetDeleteFlow();
+  });
 
   if (!user || !accessToken) return null;
 
@@ -79,13 +93,6 @@ export function DataPrivacySection() {
       return;
     }
     setSummary(summarizeDataExport(result.data));
-  };
-
-  // ── Hesabımı kapat ──────────────────────────────────────────────────────────
-  const resetDeleteFlow = () => {
-    setStep('closed');
-    setConfirmEmail('');
-    setDeleteError(null);
   };
 
   const handleDelete = async () => {
@@ -185,6 +192,8 @@ export function DataPrivacySection() {
       {step !== 'closed' && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          ref={deleteDialogRef}
+          tabIndex={-1}
           role="dialog"
           aria-modal="true"
           aria-labelledby="delete-account-title"
@@ -227,9 +236,12 @@ export function DataPrivacySection() {
                   placeholder="e-posta adresiniz"
                   autoComplete="off"
                   aria-label="E-posta teyidi"
+                  aria-invalid={deleteError ? true : undefined}
+                  aria-describedby={deleteError ? 'delete-account-error' : undefined}
+                  autoFocus
                 />
                 {deleteError && (
-                  <p className="text-xs text-destructive" role="alert">{deleteError}</p>
+                  <p id="delete-account-error" className="text-xs text-destructive" role="alert">{deleteError}</p>
                 )}
                 <div className="flex justify-end gap-2 pt-1">
                   <Button variant="outline" onClick={resetDeleteFlow} disabled={deleting}>

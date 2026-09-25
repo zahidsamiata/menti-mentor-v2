@@ -410,6 +410,8 @@ export default function MentorDashboardPage() {
                     return (
                       <button
                         key={value}
+                        type="button"
+                        aria-pressed={blocked}
                         disabled={!filter.filterEnabled}
                         onClick={() => toggleDiscBlock(value)}
                         className={`rounded-xl border px-3 py-2 text-xs font-medium transition-colors disabled:opacity-40 ${
@@ -419,7 +421,7 @@ export default function MentorDashboardPage() {
                         }`}
                       >
                         <span className={blocked ? '' : color}>{label}</span>
-                        {blocked && <span className="ml-1 text-destructive">✕</span>}
+                        {blocked && <span className="ml-1 text-destructive" aria-hidden>✕</span>}
                       </button>
                     );
                   })}

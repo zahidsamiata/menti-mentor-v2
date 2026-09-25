@@ -13,8 +13,8 @@ describe('ThreeQuestionsStep', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Ne yapacağıma karar veremiyorum' }));
     fireEvent.click(screen.getByRole('button', { name: 'Kendime güvenmiyorum' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Birlikte düşünelim' }));       // S2
-    fireEvent.click(screen.getByRole('button', { name: 'Öğrenmek' }));                  // S3
+    fireEvent.click(screen.getByRole('radio', { name: 'Birlikte düşünelim' }));       // S2
+    fireEvent.click(screen.getByRole('radio', { name: 'Öğrenmek' }));                  // S3
     fireEvent.click(screen.getByRole('button', { name: /Tamamla ve Eşleşmeye Geç/ }));
 
     expect(onComplete).toHaveBeenCalledTimes(1);
@@ -30,8 +30,8 @@ describe('ThreeQuestionsStep', () => {
     render(<ThreeQuestionsStep role="MENTOR" onComplete={onComplete} isSubmitting={false} error={null} />);
 
     fireEvent.click(screen.getByRole('button', { name: 'Ağ kurmada' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Yol gösteririm' }));            // mentör S2
-    fireEvent.click(screen.getByRole('button', { name: 'Somut sonuç almak' }));         // S3
+    fireEvent.click(screen.getByRole('radio', { name: 'Yol gösteririm' }));            // mentör S2
+    fireEvent.click(screen.getByRole('radio', { name: 'Somut sonuç almak' }));         // S3
     fireEvent.click(screen.getByRole('button', { name: /Tamamla ve Eşleşmeye Geç/ }));
 
     const p = onComplete.mock.calls[0]![0] as MatchingPreferences;
@@ -51,8 +51,8 @@ describe('ThreeQuestionsStep', () => {
     expect(third).toBeDisabled();
     fireEvent.click(third);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Birlikte düşünelim' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Öğrenmek' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Birlikte düşünelim' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Öğrenmek' }));
     fireEvent.click(screen.getByRole('button', { name: /Tamamla ve Eşleşmeye Geç/ }));
 
     const p = onComplete.mock.calls[0]![0] as MatchingPreferences;
@@ -63,8 +63,8 @@ describe('ThreeQuestionsStep', () => {
     const onComplete = vi.fn();
     render(<ThreeQuestionsStep role="MENTI" onComplete={onComplete} isSubmitting={false} error={null} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Sadece dinlesin, ben çözerim' })); // S2
-    fireEvent.click(screen.getByRole('button', { name: 'Anlaşılmak' }));                     // S3
+    fireEvent.click(screen.getByRole('radio', { name: 'Sadece dinlesin, ben çözerim' })); // S2
+    fireEvent.click(screen.getByRole('radio', { name: 'Anlaşılmak' }));                     // S3
     fireEvent.click(screen.getByRole('button', { name: /Tamamla ve Eşleşmeye Geç/ }));
 
     const p = onComplete.mock.calls[0]![0] as MatchingPreferences;
@@ -78,7 +78,7 @@ describe('ThreeQuestionsStep', () => {
     render(<ThreeQuestionsStep role="MENTI" onComplete={onComplete} isSubmitting={false} error={null} />);
 
     // yalnız S2 seçili, S3 yok → buton disabled
-    fireEvent.click(screen.getByRole('button', { name: 'Birlikte düşünelim' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Birlikte düşünelim' }));
     fireEvent.click(screen.getByRole('button', { name: /Tamamla ve Eşleşmeye Geç/ }));
     expect(onComplete).not.toHaveBeenCalled();
   });
