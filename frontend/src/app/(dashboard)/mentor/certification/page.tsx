@@ -37,9 +37,9 @@ function groupByTopic(questions: CertQuestion[]): Topic[] {
     }
     map.get(key)!.variants.push(q);
   }
-  for (const t of map.values()) {
-    t.variants.sort((a, b) => (a.variant ?? '').localeCompare(b.variant ?? ''));
-  }
+  // Varyant sırası SUNUCUNUN sırasıdır — yeniden sıralanmaz. Tekrar sınavda sunucu
+  // yanlış yapılan konunun diğer varyantını (farklı sahne) başa koyar; ilk gösterilen
+  // varyant puanlanır (madde 157). Sıralama burada yapılırsa hep A gelir.
   return order.map((k) => map.get(k)!);
 }
 
@@ -48,6 +48,8 @@ export default function MentorCertificationPage() {
   const api = useApiClient();
 
   const [topics, setTopics]     = useState<Topic[]>([]);
+  // Önceki denemede geçilemeyen konular (sunucu `retryTopics`) — yalnız bilgilendirme işareti.
+  const [retryTopics, setRetryTopics] = useState<Set<string>>(new Set());
   const [loading, setLoading]   = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
 
@@ -73,6 +75,7 @@ export default function MentorCertificationPage() {
     setLoading(false);
     if (res.ok) {
       setTopics(groupByTopic(res.data.questions));
+      setRetryTopics(new Set(res.data.retryTopics ?? []));
     } else {
       setLoadError('Senaryolar yüklenemedi. Lütfen tekrar deneyin.');
     }
@@ -286,6 +289,11 @@ export default function MentorCertificationPage() {
             {currentQuestion.isRedLine && (
               <Badge className="bg-red-100 text-red-800 border border-red-300 text-xs">
                 Kritik konu
+              </Badge>
+            )}
+            {!isLearningRetry && retryTopics.has(currentTopic.topic) && (
+              <Badge className="bg-amber-100 text-amber-800 border border-amber-300 text-xs">
+                Geçen sefer zorlandığın konu — bu kez farklı bir durum
               </Badge>
             )}
             {isLearningRetry && (

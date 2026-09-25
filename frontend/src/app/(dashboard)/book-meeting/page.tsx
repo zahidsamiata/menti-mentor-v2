@@ -10,6 +10,7 @@ import { meetingsApi } from '@/lib/api/meetings';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
 
 const FORMATS = [
   { value: 'ONLINE'    as const, label: 'Online (video)' },
@@ -93,6 +94,7 @@ function BookMeetingContent() {
       <p className="text-4xl">📅</p>
       <h2 className="text-xl font-semibold">Randevu Talebiniz Gönderildi</h2>
       <p className="text-sm text-muted-foreground text-center">Mentör onayladığında bildirim alacaksınız.</p>
+      <WeeklyMeetingLimitNote className="max-w-md text-center" />
     </div>
   );
 
@@ -102,6 +104,8 @@ function BookMeetingContent() {
         <h1 className="text-2xl font-bold">Randevu Talebi</h1>
         <p className="text-sm text-muted-foreground">Mentörünüzle görüşme için uygun bir zaman seçin.</p>
       </div>
+
+      <WeeklyMeetingLimitNote />
 
       {(availability?.blocks?.length ?? 0) > 0 ? (
         <Card>

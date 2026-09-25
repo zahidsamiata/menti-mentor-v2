@@ -11,6 +11,7 @@ import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { DataPrivacySection } from '@/components/organisms/DataPrivacySection';
 import { cn } from '@/lib/utils';
 import type { UserProfileData, AvatarUploadResponse } from '@/lib/api/profile';
+import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
 
 // İstemci ön-kontrolü — asıl doğrulama backend'de (magic-byte). Backend limitiyle eşlenir.
 const AVATAR_ACCEPT = 'image/jpeg,image/png,image/webp';
@@ -236,6 +237,9 @@ export default function ProfilePage() {
           </Link>
         </div>
       )}
+
+      {/* ── MENTI: kurumun haftalık görüşme sıklığı (madde 156) ─────────── */}
+      {user.role === 'MENTI' && <WeeklyMeetingLimitNote />}
 
       {/* ── Hakkımda ──────────────────────────────────────────────────── */}
       <fieldset>

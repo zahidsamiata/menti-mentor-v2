@@ -89,6 +89,11 @@ export interface SaveAvailabilityPayload {
   blocks: { weekday: string; startTime: string; endTime: string }[];
 }
 
+/** GET /api/meetings/weekly-limit — kurumun haftalık görüşme sıklığı (madde 156). null = ayar yok. */
+export interface WeeklyLimitResponse {
+  maxMeetingsPerWeek: number | null;
+}
+
 export const meetingsApi = {
   list: (
     api: BoundClient,
@@ -101,6 +106,9 @@ export const meetingsApi = {
     const q = qs.toString();
     return api<MeetingsListResponse>(`/api/meetings${q ? `?${q}` : ''}`);
   },
+
+  getWeeklyLimit: (api: BoundClient): Promise<ApiResult<WeeklyLimitResponse>> =>
+    api<WeeklyLimitResponse>('/api/meetings/weekly-limit'),
 
   getAvailability: (api: BoundClient, mentorUserId: string): Promise<ApiResult<AvailabilityResponse>> =>
     api<AvailabilityResponse>(`/api/meetings/availability?mentorUserId=${mentorUserId}`),
