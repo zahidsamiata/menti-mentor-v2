@@ -9,6 +9,7 @@ import { useQuery } from '@/hooks/useQuery';
 import { Button } from '@/components/ui/button';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { DataPrivacySection } from '@/components/organisms/DataPrivacySection';
+import { DiscRecallCardView } from '@/components/organisms/DiscRecallCard';
 import { cn } from '@/lib/utils';
 import type { UserProfileData, AvatarUploadResponse } from '@/lib/api/profile';
 import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
@@ -236,6 +237,16 @@ export default function ProfilePage() {
             Testi Başlat →
           </Link>
         </div>
+      )}
+
+      {/* ── AN-17: DISC arketip kartı (süper güç + güçlü yanlar) ───────────
+          Profil yanıtı (`/api/users/:id`, kişinin KENDİ kaydı) zaten discResultCard taşıyor;
+          ikinci istek atmamak için sarmalayıcı yerine saf görünüm kullanılır. Kart yoksa çizilmez. */}
+      {profile?.discResultCard && (
+        <DiscRecallCardView
+          card={profile.discResultCard}
+          role={user.role === 'MENTI' ? 'MENTI' : undefined}
+        />
       )}
 
       {/* ── MENTI: kurumun haftalık görüşme sıklığı (madde 156) ─────────── */}
