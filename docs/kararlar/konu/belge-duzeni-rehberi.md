@@ -46,8 +46,13 @@
 - Belge **YÖNTEM** klasörüne yazılır (mevcut uygulama korunur).
 - ⛔ ZORUNLU: ilgili **KONU** klasörüne bir satırlık **ÇAPRAZ ATIF** bırakılır. Konu klasöründe `00-INDEX.md` yoksa oluşturulur; varsa satır eklenir.
 - ⛔ **İNDEKS ADI TEKTİR: `00-INDEX.md`** *(netleştirme 2026-09-21)*. Türkçe `00-INDEKS.md` **yeni açılmaz.**
-  **Yeni indeks açmadan ÖNCE** `ls <klasör>/00-IND*` çalıştır: **adı ne olursa olsun** bir indeks varsa
-  **satır eklenir, yeni dosya AÇILMAZ.** (Gerekçe: yukarıdaki *"yoksa oluşturulur"* ifadesi, Türkçe adlı
+  ~~[ESKİ · 2026-09-25] **Yeni indeks açmadan ÖNCE** `ls <klasör>/00-IND*` çalıştır: **adı ne olursa olsun** bir indeks varsa
+  **satır eklenir, yeni dosya AÇILMAZ.**~~
+  ⚠️ GÜNCELLEME (2026-09-25, YN-12): `00-IND*` deseni `00-icerik-index.md` ve `00-KART-INDEKSI.md` adlarını
+  yakalamıyordu. **Yeni indeks açmadan ÖNCE** şunu çalıştır:
+  `ls <klasör> | grep -iE '^00-.*ind(ex|eks)'` — dört mevcut kalıbın hepsini (`00-INDEX` · `00-INDEKS` ·
+  `00-icerik-index` · `00-KART-INDEKSI`) yakalar. Bir indeks varsa **satır eklenir, yeni dosya AÇILMAZ.**
+  (Arşivdeki `docs/arsiv/icerik/00-icerik-index.md` yeniden adlandırılmaz — arşiv/📸 KURAL 6.) (Gerekçe: yukarıdaki *"yoksa oluşturulur"* ifadesi, Türkçe adlı
   indeksi göremeyip aynı klasörde **ikinci indeks** açma riski taşıyordu.)
   ⚠️ **Mevcut `docs/raporlar/icerik/00-INDEKS.md` YENİDEN ADLANDIRILMADI** — 2026-09-21 ölçümü:
   **11 atıf / 4 dosya**, markdown link biçiminde **0**, kod/script atfı **0**. Atıfların bir kısmı
