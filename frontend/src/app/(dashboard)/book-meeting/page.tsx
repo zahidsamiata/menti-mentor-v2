@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
+import { fitsAvailability, weekdayLabelTr, type AvailabilityBlockLike } from '@/lib/meetingAvailability';
 
 const FORMATS = [
   { value: 'ONLINE'    as const, label: 'Online (video)' },
@@ -54,19 +55,11 @@ function BookMeetingContent() {
   const selectedStart = date && time ? new Date(`${date}T${time}:00`) : null;
   const selectedEnd   = selectedStart ? addMinutes(selectedStart, duration) : null;
 
-  const isFitAvailability = (() => {
-    if (!selectedStart || !selectedEnd || !availability?.blocks?.length) return true;
-    const dayNames = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-    const weekday  = dayNames[selectedStart.getUTCDay()];
-    const startMin = selectedStart.getUTCHours() * 60 + selectedStart.getUTCMinutes();
-    const endMin   = selectedEnd.getUTCHours()   * 60 + selectedEnd.getUTCMinutes();
-    return (availability.blocks as Array<{weekday:string;startTime:string;endTime:string}>).some((blk) => {
-      if (blk.weekday !== weekday) return false;
-      const [sh, sm] = (blk.startTime ?? '0:0').split(':').map(Number);
-      const [eh, em] = (blk.endTime ?? '0:0').split(':').map(Number);
-      return startMin >= ((sh ?? 0) * 60 + (sm ?? 0)) && endMin <= ((eh ?? 0) * 60 + (em ?? 0));
-    });
-  })();
+  // KR-12: kontrol, backend ile aynı kuralla blok saat diliminde (vars. Europe/Istanbul) yapılır.
+  const isFitAvailability =
+    !selectedStart || !selectedEnd || !availability?.blocks?.length
+      ? true
+      : fitsAvailability(selectedStart, selectedEnd, availability.blocks as AvailabilityBlockLike[]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -113,7 +106,7 @@ function BookMeetingContent() {
           <CardContent>
             <div className="flex flex-wrap gap-2">
               {((availability?.blocks ?? []) as Array<{weekday:string;startTime:string;endTime:string}>).map((blk, i) => (
-                <span key={i} className="rounded-lg bg-muted px-3 py-1 text-xs">{blk.weekday} {blk.startTime}–{blk.endTime}</span>
+                <span key={i} className="rounded-lg bg-muted px-3 py-1 text-xs">{weekdayLabelTr(blk.weekday)} {blk.startTime}–{blk.endTime}</span>
               ))}
             </div>
           </CardContent>
