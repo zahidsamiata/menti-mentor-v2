@@ -112,9 +112,14 @@ export async function getPlatformHealth() {
 }
 
 // ─── Kullanıcı şikayetleri + otomatik tespit ─────────────────────────────────
-export async function listUserReports(status?: string) {
-  const q = status ? `?status=${status}` : '';
-  return platformFetch<{ items: UserReport[]; total: number }>(`/api/platform/user-reports${q}`);
+// AN-39: sayfalı — `limit`/`offset` verilmezse backend varsayılanı (ilk 50) döner; `total` filtreye uyan tüm kayıt sayısıdır.
+export async function listUserReports(status?: string, page: { limit?: number; offset?: number } = {}) {
+  const params = new URLSearchParams();
+  if (status) params.set('status', status);
+  if (page.limit !== undefined) params.set('limit', String(page.limit));
+  if (page.offset !== undefined) params.set('offset', String(page.offset));
+  const q = params.toString() ? `?${params.toString()}` : '';
+  return platformFetch<{ items: UserReport[]; total: number; limit?: number; offset?: number }>(`/api/platform/user-reports${q}`);
 }
 
 export async function reviewUserReport(id: string, status: 'REVIEWED' | 'DISMISSED', note?: string) {
