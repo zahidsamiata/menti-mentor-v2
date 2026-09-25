@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { isHttpUrl } from '@/lib/safeUrl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
@@ -65,14 +66,19 @@ function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) 
       {meeting.format === 'ONLINE' && meeting.locationUrl && (
         <p className="text-xs text-muted-foreground">
           Bağlantı:{' '}
-          <a
-            href={meeting.locationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-primary underline underline-offset-2 hover:opacity-80 break-all"
-          >
-            Görüşmeye katıl →
-          </a>
+          {isHttpUrl(meeting.locationUrl) ? (
+            <a
+              href={meeting.locationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary underline underline-offset-2 hover:opacity-80 break-all"
+            >
+              Görüşmeye katıl →
+            </a>
+          ) : (
+            // GV-03: http(s) olmayan adres tıklanabilir çizilmez.
+            <span className="font-medium text-foreground">geçersiz bağlantı — karşı tarafla iletişime geçin</span>
+          )}
         </p>
       )}
       {meeting.format === 'IN_PERSON' && meeting.locationText && (
