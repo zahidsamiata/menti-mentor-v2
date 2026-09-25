@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { isSafeLogoUrl } from '@/lib/logoUrl';
 import {
   ChevronsUpDown,
   Check,
@@ -192,7 +193,8 @@ function TenantAvatar({ name, logoUrl, small = false }: TenantAvatarProps) {
     .join('')
     .toUpperCase();
 
-  if (logoUrl) {
+  // F-04: yalnız https logo çizilir (backend ile aynı kural); aksi hâlde baş harf rozeti.
+  if (logoUrl && isSafeLogoUrl(logoUrl)) {
     return (
       <img
         src={logoUrl}

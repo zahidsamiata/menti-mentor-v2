@@ -21,6 +21,7 @@
  */
 
 import { useState } from 'react';
+import { isSafeLogoUrl } from '@/lib/logoUrl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -43,18 +44,6 @@ const PRESET_COLORS = [
 const HEX_COLOR = /^#[0-9a-fA-F]{6}$/;
 const DEFAULT_COLOR = '#6366f1';
 
-/**
- * logoUrl güvenli mi? Boş kabul edilir (logo istemeyebilir).
- * Sadece https:// şemasına izin verilir — parse edilebilir olması da şart.
- */
-function isSafeLogoUrl(url: string): boolean {
-  if (url.trim() === '') return true;
-  try {
-    return new URL(url).protocol === 'https:';
-  } catch {
-    return false;
-  }
-}
 
 // ─── Sayfa ───────────────────────────────────────────────────────────────────
 
