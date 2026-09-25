@@ -230,4 +230,12 @@ Arşivde bu bulguların hiçbiriyle örtüşen BİTTİ satırı çıkmadı.
 ---
 
 ## Kapanış ekleri
-> Her B maddesi ve C1 kapandığında ayrıntısı buraya `kapandı: <commit>` notuyla eklenir. Şu an boş.
+> Her B maddesi ve C1 kapandığında ayrıntısı buraya `kapandı: <commit>` notuyla eklenir.
+
+- **C1 · kapandı: backend #91 (`df30e69`) + çatı #267** — `backend/prisma/seed.ts` artık `main()`'in ilk satırında `backend/src/seedGuard.ts` `assertSeedAllowed` çağırıyor; yalnız yerel host + açık onay değişkeni + production dışı üçü birden sağlanırsa toplu temizlik çalışıyor. `package.json` `prisma.seed` üzerinden (migrate reset / db seed) tetiklenme de aynı kilide takılıyor. Test: `backend/tests/seedGuard.unit.test.ts`.
+- **B1 · kapandı: backend #93 (`d7fd9eb`) + çatı #269** — `backend/src/controllers/meetingCheckInController.ts` `getCheckIns`: taraf yalnız kendi kaydını, kurum yöneticisi tümünü görüyor; taraf olmayan 403, başka kurum 404. Test: `backend/tests/checkin-visibility.test.ts`.
+- **B2 · kapandı: backend #94 (`48c5b97`) + çatı #269** — `backend/src/controllers/meetingController.ts` `createMeeting`: MENTI çağıranda menti kimliği oturumdakiyle aynı olmak zorunda (aksi 403). Test: `backend/tests/create-meeting-identity.test.ts`.
+- **B3 · kapandı: backend #95 (`2d4c824`) + çatı #269** — `backend/src/controllers/feedbackLogController.ts` `createFeedbackLog`: MENTOR yalnız kendi adına ve kurum içinde görüşme kaydı olan menti için yazıyor; ret durumunda kayıt ve kombinasyon skoru değişmiyor. Test: `backend/tests/feedbacklog-identity.test.ts`.
+- **B4 · kapandı: backend #96 (`e5e1167`) + çatı #269** — `backend/src/controllers/adaptiveTestController.ts` `previewAdaptiveResult`: hedef kullanıcı `id + tenantId + isActive` ile doğrulanıyor (komşu uçlarla aynı). Test: `backend/tests/adaptive-preview-scope.test.ts`.
+- **B6 · kapandı (yalnız anahtar ayağı): backend #97 (`43bffa3`) + çatı #269** — `backend/src/middleware/rateLimiter.ts` `generalRateLimitKey`: kova artık istemci başlığından değil, doğrulanmış erişim anahtarındaki kullanıcıdan ya da IP'den. `server.ts` `trust proxy` ayarı yapılmadı (PO turu; değer gerçek vekil sayısı olmalı). Test: `backend/tests/general-rate-limit-key.unit.test.ts`.
+
