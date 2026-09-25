@@ -123,11 +123,12 @@ export const LIKERT_LABELS: Record<LikertValue, { label: string; ariaLabel: stri
 
 /** DISC boyut rozet renk haritası — Tailwind sınıfları */
 export const DISC_DIMENSION_COLORS: Record<DiscDimension, string> = {
-  D: 'bg-red-100 text-red-800',
-  I: 'bg-yellow-100 text-yellow-800',
-  S: 'bg-green-100 text-green-800',
-  C: 'bg-blue-100 text-blue-800',
-  GENERAL: 'bg-gray-100 text-gray-700',
+  D: 'bg-red-100 text-red-800 dark:bg-red-500/15 dark:text-red-300',
+  I: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/15 dark:text-yellow-300',
+  S: 'bg-green-100 text-green-800 dark:bg-green-500/15 dark:text-green-300',
+  C: 'bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300',
+  // GENERAL nötr gridir → sabit gri yerine tema token'ı (koyu modda kendiliğinden uyar).
+  GENERAL: 'bg-muted text-muted-foreground',
 };
 
 /** DISC boyutu kullanıcıya gösterilecek Türkçe etiketler */

@@ -11,14 +11,17 @@
  *   - Öğrenme Yolculuğu (mentör/menti)          → resolveChoice API'den outcome+feedback.
  *
  * Bu ayrım sayesinde cevap anahtarı (learning-journey'de) istemciye önden yüklenmez.
+ * K-06: seçim YAPILDIKTAN SONRA diğer şıkların açıklaması da (yine resolveChoice ile)
+ * istenerek gösterilir — seçimden önce hiçbir açıklama istemciye gelmez.
  */
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { shuffle } from '@/lib/shuffle';
+import { apiErrorMessage } from '@/lib/apiErrorMessage';
 
 export type ScenarioOutcome = 'correct' | 'warn' | 'wrong';
 
@@ -57,7 +60,7 @@ export interface ScenarioGuideEngineProps {
     choiceKey: string,
   ) => Promise<{ outcome: ScenarioOutcome; feedback: string }>;
   /** Tüm aşamalar görülünce çağrılır; başarıyı { ok } ile bildirir. */
-  onComplete: () => Promise<{ ok: boolean }>;
+  onComplete: () => Promise<{ ok: boolean; error?: { message?: string } }>;
   completion: ScenarioCompletion;
   /**
    * Şık sırasını her gösterimde karıştır (madde 143). Cevap kimliğe (key) bağlı,
@@ -69,7 +72,10 @@ export interface ScenarioGuideEngineProps {
    * Nötr geri bildirim (madde 144 — öğrenme yolculuğu): seçim sonrası YALNIZ seçilen
    * şıkkın geri bildirimi görünür; RENK YOK, doğru/yanlış İŞARETİ YOK; diğer şıklar
    * kapalı, "Diğer seçenekler…" ile açılır ve açıldığında da işaretlenmez. Gerekçe:
-   * kişi kalıbı öğrenmesin (beklenen tepkiyi değil kendi tepkisini seçsin). Varsayılan:
+   * kişi kalıbı öğrenmesin (beklenen tepkiyi değil kendi tepkisini seçsin).
+   * K-06: "Diğer seçenekler…" açılınca diğer şıkların açıklaması da görünür (yalnız metin;
+   * outcome kullanılmaz → renk/işaret yine YOK). Açıklamalar ancak seçimden SONRA, açılış
+   * anında resolveChoice ile istenir. Varsayılan:
    * false → Görüşme Rehberi eski renkli/işaretli davranışı korur. Sertifika bu motoru KULLANMAZ.
    */
   neutralFeedback?: boolean;
@@ -102,11 +108,20 @@ export function ScenarioGuideEngine({
   const [error, setError] = useState<string | null>(null);
   // Nötr modda "Diğer seçenekler" aç/kapa (madde 144). Her aşamada sıfırlanır.
   const [showOthers, setShowOthers] = useState(false);
+  // K-06: diğer şıkların açıklamaları (key → feedback). Yalnız seçimden sonra, "Diğer
+  // seçenekler" ilk açıldığında istenir. othersFor = hangi aşama için yüklendiği.
+  const [othersFeedback, setOthersFeedback] = useState<Record<string, string>>({});
+  const [othersFor, setOthersFor] = useState<string | null>(null);
+  const [othersLoading, setOthersLoading] = useState(false);
+  const [othersFailed, setOthersFailed] = useState(false);
+  // Geç gelen yanıt başka aşamaya yazılmasın diye güncel aşama kimliği.
+  const activeScenarioId = useRef<string | null>(null);
 
   const scenario = scenarios[current];
   const isLast = current === scenarios.length - 1;
   const done = current >= scenarios.length;
   const revealed = result !== null;
+  activeScenarioId.current = scenario?.id ?? null;
 
   // Şık sırası: karıştırma açıksa aşama başına stabil — aynı aşamada sabit kalır,
   // sonraki/önceki aşamaya geçince yeniden karışır. Bağımlılık scenario?.id (obje değil):
@@ -134,11 +149,45 @@ export function ScenarioGuideEngine({
     }
   }
 
+  async function loadOthersFeedback() {
+    // Seçimden önce ASLA istenmez (cevap anahtarı önden yüklenmesin).
+    if (!scenario || !revealed || !selected) return;
+    // Başarıyla yüklendiyse tekrar isteme; kısmi hata varsa yeniden açılışta tekrar dener.
+    if (othersLoading || (othersFor === scenario.id && !othersFailed)) return;
+    const stageId = scenario.id;
+    const keys = displayChoices.filter((c) => c.key !== selected).map((c) => c.key);
+    setOthersLoading(true);
+    setOthersFailed(false);
+    const settled = await Promise.allSettled(keys.map((k) => resolveChoice(stageId, k)));
+    if (activeScenarioId.current !== stageId) return; // kullanıcı aşamayı geçti
+    const map: Record<string, string> = {};
+    let failed = false;
+    settled.forEach((r, i) => {
+      const key = keys[i];
+      if (r.status === 'fulfilled' && key) map[key] = r.value.feedback;
+      else failed = true;
+    });
+    setOthersFeedback(map);
+    setOthersFor(stageId);
+    setOthersFailed(failed);
+    setOthersLoading(false);
+  }
+
+  function toggleOthers() {
+    const opening = !showOthers;
+    setShowOthers(opening);
+    if (opening) void loadOthersFeedback();
+  }
+
   function next() {
     setSelected(null);
     setResult(null);
     setError(null);
     setShowOthers(false);
+    setOthersFeedback({});
+    setOthersFor(null);
+    setOthersLoading(false);
+    setOthersFailed(false);
     setCurrent((c) => c + 1);
   }
 
@@ -147,7 +196,7 @@ export function ScenarioGuideEngine({
     setError(null);
     try {
       const res = await onComplete();
-      if (!res.ok) setError(COMPLETE_ERROR);
+      if (!res.ok) setError(apiErrorMessage(res.error, COMPLETE_ERROR));
     } catch {
       setError(COMPLETE_ERROR);
     } finally {
@@ -188,13 +237,17 @@ export function ScenarioGuideEngine({
           </CardHeader>
           <CardContent className="space-y-3">
             {revealed && neutralFeedback ? (
-              // ── Nötr geri bildirim (madde 144): yalnız seçilen + feedback; renk/işaret YOK ──
+              // ── Nötr geri bildirim (madde 144): seçilen + feedback; renk/işaret YOK ──
+              // K-06: diğer şıklar açılınca onların açıklaması da görünür.
               <NeutralReveal
                 choices={displayChoices}
                 selectedKey={selected}
                 feedback={result?.feedback ?? ''}
                 showOthers={showOthers}
-                onToggleOthers={() => setShowOthers((v) => !v)}
+                onToggleOthers={toggleOthers}
+                othersFeedback={othersFor === scenario.id ? othersFeedback : {}}
+                othersLoading={othersLoading}
+                othersFailed={othersFailed}
               />
             ) : (
               displayChoices.map((c, idx) => {
@@ -268,7 +321,9 @@ export function ScenarioGuideEngine({
 /**
  * Nötr geri bildirim gösterimi (madde 144). Seçilen şık + feedback görünür; RENK YOK,
  * doğru/yanlış İŞARETİ YOK. Diğer şıklar kapalı; "Diğer seçenekler…" ile işaretsiz açılır.
- * Diğer şıkların gerekçesi (feedback) istemciye yüklenmez (cevap anahtarı sızmasın) → yalnız etiket.
+ * K-06 (KARAR-29 → A): açılınca diğer şıkların açıklaması da görünür. Açıklamalar yalnız
+ * seçimden SONRA istenir; outcome hiç gösterilmez (işaret/renk yok kuralı korunur).
+ * Harfler üstteki listeyle aynı: görüntü sırasına göre A→D (K-07), orijinal key değil.
  */
 function NeutralReveal({
   choices,
@@ -276,13 +331,20 @@ function NeutralReveal({
   feedback,
   showOthers,
   onToggleOthers,
+  othersFeedback,
+  othersLoading,
+  othersFailed,
 }: {
   choices: ScenarioChoice[];
   selectedKey: string | null;
   feedback: string;
   showOthers: boolean;
   onToggleOthers: () => void;
+  othersFeedback: Record<string, string>;
+  othersLoading: boolean;
+  othersFailed: boolean;
 }) {
+  const letterOf = (key: string) => String.fromCharCode(65 + choices.findIndex((c) => c.key === key));
   const selected = choices.find((c) => c.key === selectedKey);
   const others = choices.filter((c) => c.key !== selectedKey);
 
@@ -290,7 +352,7 @@ function NeutralReveal({
     <div className="space-y-3">
       {selected && (
         <div className="w-full text-left rounded-xl border border-primary/40 bg-primary/5 p-3 text-sm">
-          <span className="font-semibold mr-2">{selected.key.toUpperCase()})</span>
+          <span className="font-semibold mr-2">{letterOf(selected.key)})</span>
           {selected.label}
           {feedback && <p className="mt-2 text-xs opacity-90">{feedback}</p>}
         </div>
@@ -313,11 +375,22 @@ function NeutralReveal({
                   key={c.key}
                   className="rounded-xl border border-border bg-muted/40 p-3 text-sm text-muted-foreground"
                 >
-                  <span className="font-semibold mr-2">{c.key.toUpperCase()})</span>
+                  <span className="font-semibold mr-2">{letterOf(c.key)})</span>
                   {c.label}
+                  {othersFeedback[c.key] && (
+                    <p className="mt-2 text-xs opacity-90">{othersFeedback[c.key]}</p>
+                  )}
                 </li>
               ))}
             </ul>
+          )}
+          {showOthers && othersLoading && (
+            <p className="mt-2 text-xs text-muted-foreground">Açıklamalar yükleniyor…</p>
+          )}
+          {showOthers && !othersLoading && othersFailed && (
+            <p className="mt-2 text-xs text-muted-foreground">
+              Bazı açıklamalar yüklenemedi. Seçenekleri kapatıp yeniden açabilirsin.
+            </p>
           )}
         </div>
       )}

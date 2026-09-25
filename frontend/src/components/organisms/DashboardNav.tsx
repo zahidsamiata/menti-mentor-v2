@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
+import { UserCard } from '@/components/molecules/UserCard';
 import { MessagesBell } from '@/components/organisms/MessagesBell';
 import { cn } from '@/lib/utils';
 
@@ -24,6 +25,12 @@ const NAV_BY_ROLE: Record<string, { href: string; label: string; icon: string }[
     { href: '/meetings',             label: 'Görüşmelerim', icon: '📅' },
     { href: '/profile',              label: 'Profil',       icon: '👤' },
   ],
+};
+
+// Kullanıcı kartında gösterilen rol adı (yalnız bu panelin rolleri).
+const ROLE_LABEL: Record<string, string> = {
+  MENTI:  'Menti',
+  MENTOR: 'Mentör',
 };
 
 export function DashboardNav() {
@@ -79,5 +86,37 @@ export function DashboardNav() {
         </div>
       </nav>
     </header>
+  );
+}
+
+/**
+ * F-33 (G8-14): admin sidebar'ındaki sol-alt kullanıcı kartının menti/mentör karşılığı.
+ * Neden `fixed` DEĞİL: sabit kart içeriği örtüyordu (ör. /messages/[id] yazma kutusu). Bunun yerine
+ * layout'ta içeriğin solunda kendi sütununda (akış içinde) durur; kart o sütunun dibinde `sticky` ile
+ * görünür kalır → hiçbir ekranda içeriği örtmez ve dikey yükseklik eklemez (tam yükseklik ekranlarda
+ * fazladan kaydırma olmaz). Dar ekranda gizli: üst bardaki ad + çıkış yeterli.
+ */
+export function DashboardUserCard() {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  if (!user || !ROLE_LABEL[user.role]) return null;
+
+  async function handleLogout() {
+    await logout();
+    router.replace('/login');
+  }
+
+  return (
+    <aside className="hidden md:flex w-56 shrink-0 flex-col justify-end pl-4 pb-6">
+      <UserCard
+        ariaLabel="Kullanıcı kartı"
+        className="sticky bottom-6 rounded-lg border border-border bg-card p-3 space-y-2 shadow-sm"
+        fullName={user.fullName}
+        email={user.email}
+        roleLabel={ROLE_LABEL[user.role]}
+        onLogout={handleLogout}
+      />
+    </aside>
   );
 }

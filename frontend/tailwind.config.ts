@@ -15,6 +15,8 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    // K-10: sınıf haritaları (ör. DISC_DIMENSION_COLORS) types/ altında da tutuluyor; taranmazsa CSS'e girmez.
+    './src/types/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
