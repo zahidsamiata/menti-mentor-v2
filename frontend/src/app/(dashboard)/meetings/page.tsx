@@ -14,10 +14,9 @@ import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ShareButtons } from '@/components/molecules/ShareButtons';
 import type { Meeting } from '@/lib/api/meetings';
+import { MEETING_FORMAT_LABELS } from '@/lib/enumLabels';
 
-const FORMAT_LABELS: Record<string, string> = {
-  ONLINE: 'Online', IN_PERSON: 'Yüz yüze', PHONE: 'Telefon',
-};
+const FORMAT_LABELS = MEETING_FORMAT_LABELS;
 
 const STATUS_LABELS: Record<string, { label: string; variant: 'warning' | 'success' | 'secondary' | 'destructive' }> = {
   PENDING:    { label: 'Onay Bekleniyor', variant: 'warning' },

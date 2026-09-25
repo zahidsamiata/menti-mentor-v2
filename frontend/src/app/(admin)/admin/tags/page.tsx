@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { PendingTagStatus } from '@/types/admin';
 import { cn } from '@/lib/utils';
+import { tagStatusLabel } from '@/lib/enumLabels';
 
 const STATUS_TABS: { label: string; value: PendingTagStatus }[] = [
   { label: 'Bekleyen',       value: 'PENDING' },
@@ -108,7 +109,7 @@ export default function TagsPage() {
                 <Badge
                   variant={tag.status === 'APPROVED' ? 'success' : tag.status === 'MERGED' ? 'secondary' : 'outline'}
                 >
-                  {tag.status}
+                  {tagStatusLabel(tag.status)}
                 </Badge>
               </div>
             )

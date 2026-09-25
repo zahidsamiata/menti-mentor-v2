@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { CertificationStatus } from '@/types/admin';
 import { cn } from '@/lib/utils';
+import { CERT_STATUS_BADGE } from '@/lib/enumLabels';
 
 // Filtre sekmeleri: value null ise "Tümü" (filtresiz)
 const STATUS_TABS: { label: string; value: CertificationStatus | null }[] = [
@@ -29,17 +30,8 @@ const STATUS_TABS: { label: string; value: CertificationStatus | null }[] = [
   { label: 'Başlamamış', value: 'NOT_STARTED' },
 ];
 
-// Rozet eşlemesi — tema uyumlu, dark modda çiftli renkler
-const STATUS_BADGE: Record<
-  CertificationStatus,
-  { label: string; className: string }
-> = {
-  CERTIFIED:   { label: 'Sertifikalı',  className: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300' },
-  FAILED:      { label: 'Başarısız',    className: 'bg-red-100 text-red-800 dark:bg-red-500/15 dark:text-red-300' },
-  COOLDOWN:    { label: 'Bekleme',      className: 'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300' },
-  NOT_STARTED: { label: 'Başlamamış',   className: 'bg-muted text-muted-foreground' },
-  IN_PROGRESS: { label: 'Devam ediyor', className: 'bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300' },
-};
+// Rozet eşlemesi ortak sözlükten gelir (platform üye tablosu da aynısını kullanır).
+const STATUS_BADGE = CERT_STATUS_BADGE;
 
 export default function CertResultsPage() {
   const api = useApiClient();
