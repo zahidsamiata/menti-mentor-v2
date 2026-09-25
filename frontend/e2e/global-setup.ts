@@ -1,10 +1,11 @@
 import { request, type FullConfig } from '@playwright/test';
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { assertLocalE2eDatabase } from './dbGuard';
 
 /**
  * Playwright global-setup:
- *  (1) ⚠️ EMNİYET (EK2): Hedef DB Neon/RDS/Supabase İSE suite'i BAŞLATMADAN durdur.
+ *  (1) ⚠️ EMNİYET (EK2 · KR-15): Hedef DB açıkça verilmiş YEREL adres DEĞİLSE suite'i BAŞLATMADAN durdur.
  *      Guard yalnız backend vitest globalSetup'ında çalışır; tarayıcı süreçleri onu BYPASS eder.
  *      Bu, o deliği kapatan tek kontroldür.
  *  (2) Seed edilmiş test kurumuna (admin@test.local) admin login → MENTI + MENTOR davet
@@ -15,8 +16,6 @@ import { join } from 'node:path';
  * Çıktı: e2e/.runtime.json (spec bunu okur). Gitignore'da.
  */
 
-// Backend assertTestDatabase.ts ile AYNI desen — canlı/yönetilen DB host'ları.
-const LIVE_DB_HOST_PATTERN = /neon\.tech|\.rds\.amazonaws\.com|supabase\.co|\.render\.com/i;
 
 const API_URL = process.env.E2E_API_URL ?? 'http://localhost:3000';
 const ADMIN_EMAIL = 'admin@test.local';
@@ -24,18 +23,8 @@ const ADMIN_PASSWORD = 'TestPanel!2026'; // seed-test-tenant.mjs sabiti
 const TENANT_ID = 'test-tenant-panel';   // seed-test-tenant.mjs sabiti
 
 export default async function globalSetup(_config: FullConfig): Promise<void> {
-  // ── (1) Neon emniyeti ────────────────────────────────────────────────────────
-  const dbUrl = process.env.DATABASE_URL ?? '';
-  if (LIVE_DB_HOST_PATTERN.test(dbUrl)) {
-    throw new Error(
-      'GÜVENLİK KİLİDİ (e2e global-setup): DATABASE_URL canlı bir DB\'ye (Neon/RDS/Supabase) ' +
-        'işaret ediyor. Tarayıcı testi GERÇEK kayıt/kurum yazar → suite BAŞLATILMADI. ' +
-        'Yalnız izole/ephemeral DB ile koşun (CI job).',
-    );
-  }
-  if (!dbUrl) {
-    console.warn('[e2e] UYARI: DATABASE_URL boş — Neon kontrolü host görmedi; CI job env\'ini doğrulayın.');
-  }
+  // ── (1) Veritabanı emniyeti (KR-15: fail-closed — yalnız açık, YEREL adres) ─────
+  assertLocalE2eDatabase(process.env.DATABASE_URL);
 
   // ── run-id (EK3: ayırt edici işaret) ─────────────────────────────────────────
   // Date.now yerine env'den run kimliği; yoksa sabit-artan bir damga.
