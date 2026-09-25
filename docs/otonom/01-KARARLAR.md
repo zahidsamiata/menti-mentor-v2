@@ -234,6 +234,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 ---
 
 ### KARAR-13 · Yöneticiye manuel "işlet" butonları verilsin mi?  [ÜRÜN KARARI]
+> ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
 **Şu an ne var:** Sistemde arka planda otomatik çalışan bakım işleri var: eşleştirme ayarını yeniden hesaplama, eski/çöp veriyi temizleme, görüşme sonrası geri bildirim hatırlatması gönderme, ve bir mentinin "oryantasyon kilidini" kaldırma. Bunların hepsi backend'de uç olarak da yazılı ama hiçbir ekranda butonu yok. Kanıt: `adminRoutes.ts:80-81` (tuning/purge), `meetingRoutes.ts:132` (hatırlatıcı), `meetingRoutes.ts:137` (kilit kaldır). Frontend'de 0 çağrı.
 **Sorun ne:** Bu işler otomatiğe bağlı (zamanlanmış). Ama bir yönetici "şimdi çalıştır" demek isteyebilir — ör. yeni mentörler eklendi, eşleştirmeyi hemen yenilemek istiyor; ya da bir menti yanlışlıkla kilitlendi, elle açmak istiyor. Şu an bunu yapamıyor, otomatik işin sırasını beklemek zorunda.
 **Neden sana soruyorum:** "Yöneticiye ne kadar kontrol verelim" bir ürün tercihi — fazla buton paneli karmaşıklaştırır, az buton yöneticiyi çaresiz bırakır.
@@ -1217,6 +1218,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **CEVAP:** A — Her taraf görüşme başına kendi değerlendirme kaydını yazar (görüşme + yazan başına bir kayıt). GÖRÜNÜRLÜK DEĞİŞMEZ: karşı taraf diğerinin cevabını hiçbir zaman görmez; kurum yöneticisi hepsini görür; yazan kendi cevabını görebilir (feedbackController.ts'teki mevcut 'KARAR 1' kuralı aynen korunur). Gerekçe (PO): anketi taraflar platform/kurum için dolduruyor; mentör gördüğü eksiği görüşmede zaten aktarıyor, dürüstlük için karşı taraf görmemeli. (PO, 2026-09-25)
 
 ### KARAR-78 · Dönemlik anket özelliği kalsın mı, bağlansın mı, kaldırılsın mı? (1 iş açar: KR-11) [ÜRÜN KARARI · SİLME PROTOKOLÜ]
+> ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
 > ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A8 [D].
 **Şu an ne var:** `/periodic-survey` adında bir anket sayfası yazılı: kariyer netliği, güven (1-10), özgüven değişimi, tavsiye puanı (0-10) ve açık not soruyor. Veritabanında bu cevapların alanları hazır ve yanında *"ayda bir tetiklenir"* notu var. Ama: hiçbir ekrandan bu sayfaya bağlantı yok, ayda bir tetikleyen bir iş yok, sayfa gönderse de sunucu bu alanları tanımadığı için her gönderim reddediliyor. Kanıt: `frontend/src/app/(dashboard)/periodic-survey/page.tsx:54-65` · `backend/src/controllers/feedbackController.ts:9-28` · `backend/prisma/schema.prisma:643-648` · bağlantı araması `frontend/src` içinde boş.
 **Sorun ne:** Kullanıcı bu anketi hiç görmüyor; özellik fiilen yok. "Mentörlük ilişkisi bir ayda ne kattı" verisi hiç toplanmıyor. Ölü sayfa her denetimde yeniden bulgu olarak çıkıyor.
@@ -1231,6 +1233,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **CEVAP:**
 
 ### KARAR-79 · Zamanlanmış bakım işlerini elle tetikleme yetkisi kimde olsun? (1 iş açar: KR-05) [YETKİ KARARI · GÜVENLİK]
+> ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
 > ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` B5 [D]. ⛔ Public repo: güvenlik ayrıntısı bu kartta yazılmaz; ayrıntı iş kapanınca rapora eklenir.
 **Şu an ne var:** Eşleştirme ağırlık ayarı ve KVKK veri temizliği her hafta otomatik çalışıyor. Bunları elle tetikleyen uçlar da var, ancak bu uçların **yetki kapsamı hatalı**. Dosyalar: `backend/src/routes/adminRoutes.ts` · `backend/src/controllers/adminController.ts`.
 **Sorun ne:** Hangi rolün bu işleri, hangi kapsamda (tüm platform mı, yalnız kendi kurumu mu) tetikleyebileceği belirlenmeden düzeltme yapılamıyor. O sürece kadar yetki kapsamı hatası açık kalıyor.
