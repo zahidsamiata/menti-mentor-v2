@@ -122,7 +122,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-78** | **Dönemlik anket: bağla / karantina / beklet** | **1** (KR-11) | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) |
 | **KARAR-79** | **Zamanlanmış iş tetikleme yetkisi kimde** | **1** (KR-05) | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı |
 | **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **84** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ⬜ boş · ⭐ çelişki taraması 2026-09-25 · tek cevap: "Hepsinde öneriyi kabul ediyorum" ya da madde madde |
-| **KARAR-81** | **⛔ ACİL — taslak kurumlar silinebilir; kurulum ne zaman tamam** | **2** (mevcut taslaklar · kayıt anında tamamlandı) | ⬜ boş · ⭐ F-04 incelemesi 2026-09-25 · CANLI VERİ · öneri A |
+| **KARAR-81** | **Taslak kurumlar · kurulum ne zaman tamam** | **2** (mevcut taslaklar · kayıt anında tamamlandı) | ✅ CEVAPLANDI 2026-09-25: ÖZEL — temizlik sürer, mevcut taslaklar test verisi (dokunulmaz); işaret kayıtla aynı transaction'da → KR-23 |
 | **KARAR-82** | **Davet bağlantısı modeli** | **1** (U-12) | ⬜ boş · çıkış blokeri · öneri B (iptal edilebilir toplu link) |
 | **KARAR-83** | **Rolü kim, nasıl değiştirir** | **1** (U-13) | ⬜ boş · çıkış blokeri · YETKİ · öneri B (yalnız düşürme hatası) |
 | **KARAR-84** | **E-posta yokken şifre sıfırlama** | **1** (U-15) | ⬜ boş · çıkış blokeri · YETKİ · öneri B (platform yöneticisi) |
@@ -1410,7 +1410,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** A riski kökünden kapatır ama temizlik özelliğini fiilen bitirir; B özelliği korur ama nadir bir boşluk bırakır; C hemen güvence verir ve kararı erteler. Gerçek kullanıcı ~sıfırken A en sade yol.
 **Benim önerim:** A — bugünkü tek kalıcı zarar yolu gerçek kurumun silinmesi; yarım kayıt birikmesi geri alınabilir, silinen kurum geri gelmez. *(Canlı veri kararı: senin.)*
 **Cevap vermezsen:** mevcut taslak kurumlar (varsa) temizlik riski altında kalır. **PO'ya acil:** `03-PO-ELLE-ISLER.md` en üstündeki "taslak kurum" maddesine bak.
-**CEVAP:**
+**CEVAP:** ÖZEL — Temizlik ÇALIŞMAYA DEVAM EDER. Canlıda gerçek kurum yok, mevcut taslaklar TEST verisidir; silinmeleri sorun değil → mevcut taslaklara DOKUNULMAZ, canlı veriye yazma YOK, yedek gerekmez. Ajan test kurumlarını/verisini kendiliğinden YENİDEN KURMAZ; bir test kurumu gerekirse karar kartı açılır (seed kuralı). İleriye dönük boşluk (strateji katmanı kararı, teknik): 'kurulum tamamlandı' işareti, kurum kaydıyla AYNI transaction'da yazılsın — kayıt başarılıysa işaret de kesin yazılmış olsun. (PO, 2026-09-25)
 
 ### KARAR-82 · Davet bağlantısı modeli (1 iş açar: U-12) [ÜRÜN + GÜVENLİK KARARI]
 **Şu an ne var:** Kurum yöneticisinin ürettiği davet bağlantısı 30 gün geçerli, belirli bir e-postaya bağlı değil, birden çok kez kullanılabiliyor ve iptal edilemiyor (`backend/src/controllers/selfServeController.ts:571` — `expiresIn: '30d'`, veritabanı kaydı yok).
