@@ -237,7 +237,7 @@ STK yönetici ✅ · Platform admin ✅ · **Mentör ✅** (panel + chat canlıd
 ## 🔴 KIRMIZI KURALLAR (kalıcı)
 - Canlı = lokal aynı Neon → DB işleminde (seed/migration/backfill) **önce onay al**. Tehlikeli seed asla.
 - ~~[ESKİ · 2026-09-10 öncesi] main'e merge = canlıya deploy (autodeploy açık) → **merge kararı ürün sahibinde**. PR aç, merge etme.~~
-  ⚠️ **GÜNCELLEME (2026-09-21):** main'e merge = canlıya deploy **DEĞİŞMEDİ**; değişen merge **yetkisi**: **🟢 işlerde ajanda** (doğrulama listesi tamsa), **🟡/🔴'de PO'da**. Migration/seed yasağı ve DB onayı **aynen geçerli** (üstteki kural). Bulut oturumu hiçbir kapıda merge edemez. — kanıt: `CLAUDE.md:25-45` · `docs/otonom/00-KUYRUK.md:6-16`.
+  ⚠️ **GÜNCELLEME (2026-09-21):** main'e merge = canlıya deploy **DEĞİŞMEDİ**; değişen merge **yetkisi**: **🟢 işlerde ajanda** (doğrulama listesi tamsa), **🟡/🔴'de PO'da**. Migration/seed yasağı ve DB onayı **aynen geçerli** (üstteki kural). Bulut oturumu hiçbir kapıda merge edemez. — kanıt: `CLAUDE.md § MERGE POLİTİKASI` · `docs/otonom/00-KUYRUK.md:6-16`.
 - Submodule sırası: backend push → çatı `git add backend` → çatı commit → çatı push (ara commit yok).
 - Ürün kararı ürün sahibinde; dürüst pushback yap; testi/CI'ı yeşil gösterme, gerçeği ver.
 

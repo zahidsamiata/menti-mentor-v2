@@ -15,7 +15,7 @@
 - **Yaş politikası:** 18+ mı, gençler de mi (veli izni)? Kullanıcı "öyle bir gündemim yok, hukuki sorun olmayacak şekilde her şey olabilir" dedi = NET KARAR YOK. ÇELİŞKİ: Mevcut Kullanım Koşulları "18+" diyor ama ürün genç menti hedefliyor. ❓
 - **Veri sorumlusu kimliği:** Şahıs / şirket / dernek? Kullanıcı "bilmiyorum, anlamadım" dedi. ❓
 - **Sunucu konumu beyanı:** ~~[ESKİ · düzeltildi 2026-08-26] Resend=Ireland (netleşti). Neon=? Hostinger=? — yurt dışı aktarım beyanı için gerekli. ❓~~
-  ⚠️ GÜNCELLEME (2026-08-28): ÇÖZÜLDÜ — Neon ana DB **eu-west-2 = Londra/Birleşik Krallık** (madde 92, PO teyitli 2026-08-26). Kanıt: kök `CLAUDE.md:81`, T1-A madde 92.
+  ⚠️ GÜNCELLEME (2026-08-28): ÇÖZÜLDÜ — Neon ana DB **eu-west-2 = Londra/Birleşik Krallık** (madde 92, PO teyitli 2026-08-26). Kanıt: kök `CLAUDE.md § Ortam / Veritabanı — PROD ≠ DEV ≠ TEST`, T1-A madde 92.
 - **Yasal metin incelemesi:** /kvkk, /terms, /gizlilik taslak var; üretim öncesi hukukçu şart (DISC = hassas veriye yakın). ⏳
 
 ## 🟡 ÜRÜN / VİZYON

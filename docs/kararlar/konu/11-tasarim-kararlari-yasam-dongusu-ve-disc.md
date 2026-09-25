@@ -149,4 +149,4 @@ yok; bu belge onu FE standardı olarak sabitler. İleride `06-tasarim-ux.md`'ye 
 | KARAR 4 — FE tam Türkçe | kalıcı standart | Yok | Yürürlükte (tüm yeni FE işleri) |
 
 > **Kırmızı kurallar hatırlatma:** canlı = lokal aynı Neon → KARAR 2/3 migration'ları **önce DUR + PO onayı**; `db push`
-> yasak (`IF NOT EXISTS` + `db execute` + `migrate resolve`); ~~[ESKİ · 2026-09-10 öncesi] merge kararı ürün sahibinde.~~ ⚠️ **GÜNCELLEME (2026-09-21):** merge yetkisi kapıya bağlı — 🟢 ajanda, 🟡/🔴 PO'da (`CLAUDE.md:25-45`). Migration yasağı **aynen geçerli**.
+> yasak (`IF NOT EXISTS` + `db execute` + `migrate resolve`); ~~[ESKİ · 2026-09-10 öncesi] merge kararı ürün sahibinde.~~ ⚠️ **GÜNCELLEME (2026-09-21):** merge yetkisi kapıya bağlı — 🟢 ajanda, 🟡/🔴 PO'da (`CLAUDE.md § MERGE POLİTİKASI`). Migration yasağı **aynen geçerli**.

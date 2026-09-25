@@ -12,7 +12,7 @@
 ## PROMPT STANDARDI (8 UNSUR — her kapsamlı prompt)
 1. **BÜYÜK RESİM** — nereye gidiyoruz, bu adım ne tamamlıyor, sonrası ne. Parçayı değil bütünü göster.
 2. ~~[ESKİ · 2026-09-10 öncesi] **MOD (en başta)** — PLAN (salt-okuma) / BYPASS (kod yaz, PR aç, MERGE ETME) / MANUEL ONAY (geri-alınamaz işler).~~
-   ⚠️ **GÜNCELLEME (2026-09-21):** MOD bildirimi aynen geçerli; BYPASS'ın tanımı değişti — **kod yaz, PR aç, kapısı 🟢 ve doğrulama listesi tamsa MERGE ET** (🟡/🔴 PR'da bekler). — kanıt: `CLAUDE.md:25-45`.
+   ⚠️ **GÜNCELLEME (2026-09-21):** MOD bildirimi aynen geçerli; BYPASS'ın tanımı değişti — **kod yaz, PR aç, kapısı 🟢 ve doğrulama listesi tamsa MERGE ET** (🟡/🔴 PR'da bekler). — kanıt: `CLAUDE.md § MERGE POLİTİKASI`.
 3. **DEVSECOPS** — kod anında, katmanlı (aşağıda şablon). Sonradan yamanmaz. Tenant izolasyonu KRİTİK.
 4. **PARALELLİK** — bağımsız/farklı dosya → paralel alt-ajan (tek oturum, ayrı terminal AÇMA). Ortak dosya/bağımlı/merge/migration → sıralı. Şüphede sıralı.
 5. **DURAK NOKTALARI** — geri-alınamaz işlerde (merge/deploy/silme/DB-yazımı) DUR, onay bekle.
@@ -22,7 +22,7 @@
 
 ## GENEL İLKELER
 - ~~[ESKİ · 2026-09-10 öncesi] **"PR aç, MERGE ETME"** güvenlik ağı — ürün sahibi en sonda inceler.~~
-  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** Bulut oturumu hiçbir kapıda merge edemez. — kanıt: `CLAUDE.md:25-45` · `docs/otonom/00-KUYRUK.md:6-16`.
+  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** Bulut oturumu hiçbir kapıda merge edemez. — kanıt: `CLAUDE.md § MERGE POLİTİKASI` · `docs/otonom/00-KUYRUK.md:6-16`.
 - **Ürün kararı ürün sahibinde.** Claude analiz+seçenek sunar, dürüst pushback yapar, körü körüne onaylamaz.
 - **Aşırı mühendislik/erken optimizasyon YOK.** Gerçek ihtiyaç olmadan özellik yok. Sinyal gelince yap.
 - **Kapsamlı/uçtan uca tek prompt** — parça parça "şunu yap dur" değil.
