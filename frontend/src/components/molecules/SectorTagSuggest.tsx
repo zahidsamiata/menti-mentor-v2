@@ -11,10 +11,10 @@ import { cn } from '@/lib/utils';
  *
  * Kullanıcı mevcut sektör etiketlerini görür; havuzda olmayan bir alanı önerebilir.
  * Öneri doğrudan profile YAZILMAZ — `POST /api/tags/suggest` ile kurumun onay kuyruğuna
- * düşer; yönetici `/admin/tags` ekranında onaylayabilir, mevcut bir etiketle birleştirebilir
- * ya da reddedebilir. Birleştirmede ve aynı etiketin ikinci kez önerilmesinde etiket önerenin
- * profiline eklenmez — bu yüzden metin "profilinize eklenecek" sözü VERMEZ; yalnız
- * "yönetici incelemesine gönderildi" der.
+ * düşer. Yönetici `/admin/tags` ekranında (backend tagController approve/merge/reject):
+ *  - ONAYLARSA etiket YALNIZ önerenin sectorTags listesine eklenir (ortak bir "etiket listesi" yok);
+ *  - başka etiketle BİRLEŞTİRİRSE ya da REDDEDERSE önerene eklenmez.
+ * Başarı metni bu üç sonucu olduğu gibi söyler; koşulsuz "eklenecek" sözü vermez.
  */
 
 type Feedback = { kind: 'success' | 'info' | 'error'; text: string } | null;
@@ -30,7 +30,7 @@ export function suggestionResultText(data: SuggestTagResponse): { kind: 'success
   if (data.tag) {
     return {
       kind: 'success',
-      text: `"${data.tag.value}" önerisi yönetici incelemesine gönderildi. Yönetici onaylarsa etiket listesine eklenir.`,
+      text: `"${data.tag.value}" önerisi yönetici incelemesine gönderildi. Yönetici onaylarsa profilinize eklenir; başka bir etiketle birleştirilir ya da reddedilirse eklenmez.`,
     };
   }
   if (data.status === 'PENDING') {

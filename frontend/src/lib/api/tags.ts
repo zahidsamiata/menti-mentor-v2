@@ -7,8 +7,8 @@ type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 't
  * Kullanıcı sektör etiketi önerisi (madde 127, Y-16).
  * Backend: `POST /api/tags/suggest` (server.ts — requireTenant + requireAuth + generalRateLimiter),
  * controller `tagController.ts` suggestTag. Öneri kurumun PendingTag kuyruğuna düşer; yönetici
- * `/admin/tags` ekranında onaylar, birleştirir ya da reddeder (sonuç önerenin profiline her
- * zaman yansımaz — kullanıcı metni bu yüzden söz vermez).
+ * `/admin/tags` ekranında onaylarsa etiket YALNIZ önerenin sectorTags listesine eklenir;
+ * birleştirir ya da reddederse önerene eklenmez.
  */
 
 /** Backend SuggestTagSchema ile eşlenmiş sınırlar (2-50 karakter, harf/rakam/boşluk/tire). */

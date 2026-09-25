@@ -75,10 +75,10 @@ describe('Y-16: sektör etiketi önerme', () => {
     });
     const status = await screen.findByRole('status');
     expect(status).toHaveTextContent(
-      '"oyun tasarımı" önerisi yönetici incelemesine gönderildi. Yönetici onaylarsa etiket listesine eklenir.',
+      '"oyun tasarımı" önerisi yönetici incelemesine gönderildi. Yönetici onaylarsa profilinize eklenir; başka bir etiketle birleştirilir ya da reddedilirse eklenmez.',
     );
-    // Yönetici birleştirebilir / aynı etiket ikinci kez önerilmiş olabilir → profile eklenme sözü verilmez.
-    expect(screen.getByTestId('sector-tag-suggest')).not.toHaveTextContent(/profilinize|etiketlerinize eklen/);
+    // Backend'de ortak bir "etiket listesi" yok: onayda yalnız önerenin profiline eklenir.
+    expect(screen.getByTestId('sector-tag-suggest')).not.toHaveTextContent(/etiket listesine/);
     expect(screen.getByLabelText(/Alanınız listede yok mu/)).toHaveValue('');
   });
 
