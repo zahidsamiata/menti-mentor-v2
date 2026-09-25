@@ -4,6 +4,17 @@
 
 ---
 
+## ⭐ TUR KAYIT — BÖLÜM A: KARAR-77 + SİSTEM DÜZELTMELERİ (2026-09-25)
+
+> **Mod:** 🟥 BYPASS — yalnız `docs/` + `CLAUDE.md` (PO talimatı), doğrudan `main`. Kod/DB/migration/seed YOK.
+- **A1** KARAR-77 → **CEVAP: A** (PO metni aynen; görünürlük değişmez, "KARAR 1" kuralı korunur). İndeks ✅. Kart KR-08 bitene kadar ana dosyada.
+- **A2** KR-08 kapısı 🔴→🟡 + Not (görünürlük testi · önce AN-47 · "yazan kim" örneği). KR-11 Not'u (hâlâ KARAR-78'e bağlı). KARAR-78 / 79 / 13 kartlarının başına "⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması." — CEVAP satırlarına dokunulmadı.
+- **A3** ⭐ OTONOM-PROMPT Bölüm 4'e **madde -1 (PO ÖNCELİK BLOĞU)** eklendi: öncelik satırındaki işler kapıdan bağımsız, yazılı sırayla; 🟡'ler ayrı PR, aile PR'ına katılmaz. Sistem hatası: öncelik bloğu hep 🟡 olduğu için madde 5 yüzünden hiç işlenmiyordu.
+- **A4** `CLAUDE.md` § "Branch Akışı": eski satır `~~[ESKİ]~~`, yerine "YALNIZ docs/ altı doğrudan main; kod/schema/script/CI/Dockerfile/package HER ZAMAN dal + PR" (GÜNCELLEME 2026-09-25 PO). Kural bulundu (`CLAUDE.md:205-206`).
+- **Sıradaki:** BÖLÜM B — OTONOM-PROMPT tam tur, ilk iş öncelik bloğu (KR-01 → KR-02+KR-03 → GV-04 → GV-06 → GV-05 → KR-04 → K-14).
+
+---
+
 ## ⭐ TUR KAYIT — KOD İNCELEMESİ RAPORU KALICILAŞTI + KUYRUĞA İŞLENDİ (2026-09-25)
 
 > **Mod:** 🟥 BYPASS — yalnız belge yazımı (PO talimatı). Kaynak tarama: 2026-09-24, 6 paralel salt-okuma ajanı (çatı `99189a8` · backend `4686ba4`).
