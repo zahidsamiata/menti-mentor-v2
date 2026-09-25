@@ -9,6 +9,18 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { computeAdminAlerts } from '@/lib/adminAlerts';
 
+/**
+ * PS-05: Backend'in k-anonimlik eşiği (`backend/src/services/mask.ts` K_ANONYMITY_THRESHOLD, V-05).
+ * Bir dönemde bu sayıdan az yanıt varsa ortalama gizlenir (null) ve yanıt sayısı 0'a indirgenir —
+ * küçük kurumda tek kişinin puanı ortalamadan okunmasın diye. Ekran bu yüzden "0 yanıt" ile
+ * "1-2 yanıt"ı ayırt edemez; ikisini de aynı dürüst cümleyle anlatır (sessiz "—" yerine).
+ */
+const MIN_RESPONSES_FOR_AVERAGE = 3;
+const NOT_ENOUGH_RESPONSES_TEXT = `Yeterli yanıt yok (gizlilik için en az ${MIN_RESPONSES_FOR_AVERAGE} yanıt gerekiyor)`;
+const SUCCESS_RATE_EMPTY_TEXT =
+  `3. ay başarı oranı henüz hesaplanamıyor: yeterli 3. ay değerlendirmesi yok. ` +
+  `Kişilerin puanı tek tek okunamasın diye en az ${MIN_RESPONSES_FOR_AVERAGE} yanıt gerekiyor.`;
+
 export default function KpiPage() {
   const api = useApiClient();
   const { data, isLoading, error } = useQuery(() => adminApi.getKpi(api), []);
@@ -72,7 +84,7 @@ export default function KpiPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  NPS Ortalaması
+                  NPS Ortalaması (NPS: 0-10 arası «tavsiye eder misin» puanı)
                   {data.stats.feedback.successRate !== null && (
                     <span className="ml-2 text-sm font-normal text-muted-foreground">
                       (3. ay başarı: {data.stats.feedback.successRate})
@@ -81,13 +93,22 @@ export default function KpiPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
+                {data.stats.feedback.successRate === null && (
+                  <p className="text-sm text-muted-foreground" data-testid="kpi-success-rate-empty">
+                    {SUCCESS_RATE_EMPTY_TEXT}
+                  </p>
+                )}
                 {Object.entries(data.stats.feedback.avgNpsByPhase).map(([phase, v]) => (
-                  <div key={phase} className="flex justify-between text-sm">
+                  <div key={phase} className="flex justify-between gap-2 text-sm">
                     <span className="text-muted-foreground">{phase.replace('phase', '')}. Ay</span>
-                    <span className="font-semibold">
-                      {(v as { avgNps: number | null }).avgNps ?? '—'}
-                      <span className="text-xs text-muted-foreground ml-1">({(v as { sampleSize: number }).sampleSize} kayıt)</span>
-                    </span>
+                    {v.avgNps !== null ? (
+                      <span className="font-semibold">
+                        {v.avgNps}
+                        <span className="text-xs text-muted-foreground ml-1">({v.sampleSize} kayıt)</span>
+                      </span>
+                    ) : (
+                      <span className="text-xs text-muted-foreground text-right">{NOT_ENOUGH_RESPONSES_TEXT}</span>
+                    )}
                   </div>
                 ))}
               </CardContent>
