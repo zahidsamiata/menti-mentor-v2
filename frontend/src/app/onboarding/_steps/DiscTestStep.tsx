@@ -113,7 +113,8 @@ export function DiscTestStep({
 
   const total   = questions.length;
   const current = questions[currentIndex];
-  const percent = Math.round((currentIndex / total) * 100);
+  // 0'a bölme koruması (PS-11): boş listede NaN yerine 0.
+  const percent = total > 0 ? Math.round((currentIndex / total) * 100) : 0;
 
   // Soru değiştiğinde fade-in tetikle
   useEffect(() => { setVisible(true); setSelectedOpt(null); }, [currentIndex]);
