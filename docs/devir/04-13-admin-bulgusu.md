@@ -1,5 +1,11 @@
 # 04 — STK ADMİN PANELİ: 13 BULGU (yol haritası A — öncelik yüksek)
 
+> 📸 **DONDURULMUŞ — 2026-08-11 (eki 08-20) fotoğrafı.** *(not eklendi: 2026-09-24, DC turu)*
+> Bu belge o günün durumunu anlatır; **BUGÜNÜ ANLATMAZ.**
+> Güncel karşılığı: `docs/otonom/00-KUYRUK.md` → **F-12** (bulgu #8/#10/#13 cevap tipi, 🔴 KARAR-21) · **AN-35** (STK admin paneli kararlarını statüle) · etiket havuzu G3-19 notu (Faz6 satırı) · karar geçmişi `docs/kararlar/00-KARAR-TAKIP.md` md.13.
+> Tarihsel kayıt olarak korunur; güncellenmez. Giriş belgesi: `docs/devir/06-devir-kilavuzu.md`.
+> Bulgu #2/#3/#5 (menü · havuz layout · sektör kolonu tasarım kararları) için kuyrukta satır bulunamadı — TEYİT GEREK.
+
 **📸 DONDURULMUŞ** — oturum devir notu (admin bulguları).
 
 > **Amaç:** Ürün sahibinin STK admin panelini test edip çıkardığı 13 bulguyu tek yerde tutmak.

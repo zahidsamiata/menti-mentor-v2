@@ -1,6 +1,7 @@
 # 01 — FELSEFE VE ÇALIŞMA TARZI (yeni sohbet önce bunu oku)
 
-**📸 DONDURULMUŞ** — oturum devir notu (felsefe / çalışma tarzı; kalıcı referans).
+~~[ESKİ · 2026-09-24] **📸 DONDURULMUŞ** — oturum devir notu (felsefe / çalışma tarzı; kalıcı referans).~~
+⚠️ GÜNCELLEME (2026-09-24): **🔄 YAŞAYAN (kısmen)** — çalışma tarzı referansı; `06-devir-kilavuzu.md` "Rol dağılımı" buraya atıf verir. Bayat satırlar aşağıda üstü çizili; kurallarda çelişkide **`CLAUDE.md` kazanır**. Satır ayrımı kanıtı: `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md` §"01: satır ayrımı".
 
 > **Amaç:** Bu proje aylardır tek bir çalışma disipliniyle yürüyor. Yeni sohbet, bu disiplini
 > ilk turdan uygulasın diye burada topladık. Kaynak: `CLAUDE.md` (kök) + `docs/kararlar/konu/07-calisma-tarzi.md`.
@@ -12,7 +13,8 @@
 > - **Kod/belge SİLME yerine "niyeti anla, kaldığın yerden devam et"** — ölü/yarım kod için varsayılan "sil" DEĞİL;
 >   önce neden yazıldığını + neye bağlanacağını bul (çoğu yarım özelliğin parçası). Gerçek terk adayı "❓ PO kararı" işaretlenir.
 > - **Belgelerde silme yok** — eskiyi `docs/arsiv/`'e taşı + `⚠️ GÜNCELLEME (tarih)` notu düş (tarihsel iz korunur).
-> - **Modlar iki tanedir:** 🔵 PLANLA / 🟢 BYPASS (aşağıdaki §2'de "MANUEL-ONAY" ayrı bir mod gibi yazılmış; pratikte
+> - ~~[ESKİ · 2026-09-24] **Modlar iki tanedir:** 🔵 PLANLA / 🟢 BYPASS (aşağıdaki §2'de "MANUEL-ONAY" ayrı bir mod gibi yazılmış; pratikte~~
+>   ⚠️ GÜNCELLEME (2026-09-24): mod etiketleri artık **🟩 PLANLA / 🟥 BYPASS**; daireler (🟢🟡🔴) kapı anlamındadır — `CLAUDE.md` "MOD ETİKETİ".
 >   geri-alınamaz adımda **BYPASS içinde DUR-onay** uygulanır, ayrı etiket kullanılmaz).
 > - **Karar-Takip Disiplini (yeni):** her oturum **başında** `00-KARAR-TAKIP.md` okunur + açık maddeler PO'ya hatırlatılır;
 >   her BYPASS turu **sonunda** güncellenir. Detay: `CLAUDE.md`.
@@ -25,8 +27,10 @@
   körü körüne onaylamaz. "Haklısınız" deyip yanlışa gitme.
 
 ## 2) İki mod (her turun başında MOD bildir)
-- **🔵 PLANLA (salt-okuma):** keşif, okuma, analiz. Commit yok, kod yok, DB yok, merge yok.
-- **🟢 BYPASS (uygula):** kod yaz / belge yaz → **PR aç, MERGE ETME**. Merge kararı ürün sahibinde.
+- ~~[ESKİ · 2026-09-24] **🔵 PLANLA (salt-okuma):** keşif, okuma, analiz. Commit yok, kod yok, DB yok, merge yok.~~
+  ⚠️ GÜNCELLEME (2026-09-24): mod adı **🟩 PLANLA** — `CLAUDE.md` "MOD ETİKETİ".
+- ~~[ESKİ · 2026-09-24] **🟢 BYPASS (uygula):** kod yaz / belge yaz → **PR aç, MERGE ETME**. Merge kararı ürün sahibinde.~~
+  ⚠️ GÜNCELLEME (2026-09-24): **🟥 BYPASS**; merge kapıya bağlı: 🟢 doğrulama tamsa merge · 🟡 PR aç merge etme · 🔴 karar bekle. Bulut hiçbir kapıda merge edemez — `CLAUDE.md` "MERGE POLİTİKASI".
 - **🟠 MANUEL-ONAY:** geri-alınamaz işler (merge, prod deploy, prod DB yazımı, force-push, external
   servise gönderim) → önce **DUR**, onay bekle.
 
@@ -47,13 +51,15 @@
 > Mod + önerilen model satırı promptun **en üstünde** olur.
 
 ## 5) Üç kırmızı kural (kalıcı — asla ihlal etme)
-1. **Canlı = lokal AYNI Neon DB** (`ep-fancy-tooth-ab4u5xhr`, eu-west-2/İrlanda). Lokalde DB'ye yazmak =
+1. ~~[ESKİ · 2026-09-24] **Canlı = lokal AYNI Neon DB** (`ep-fancy-tooth-ab4u5xhr`, eu-west-2/İrlanda). Lokalde DB'ye yazmak =~~
    canlıyı anında etkilemek. Seed/migration/backfill/DB işleminde **önce onay al**.
+   ⚠️ GÜNCELLEME (2026-09-24): eu-west-2 = **Londra/Birleşik Krallık** (madde 92); canlı DB'nin Neon mu docker Postgres mi olduğu tartışmalı → en kötü durumu varsay, yedek zorunlu — `CLAUDE.md` "Ortam / Veritabanı" + "ÇELİŞKİ (2026-09-21)".
 2. **Tehlikeli seed VERİ SİLER** — `seed.ts` / `npm run seed` / `prisma db seed` ASLA çalıştırma.
    Güvenli olanlar: `seed-questions.ts`, `seed-learning-journey.ts`, `seed-test-tenant.mjs`.
    > ⚠️ GÜNCELLEME (2026-08-23): `seed-questions.ts` **SİLİNDİ** (backend `5745e0f`). Gerçek güvenli (kod-kanıtlı, yalnız upsert):
    > `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs`. Tehlikeli = `prisma/seed.ts` (toplu deleteMany).
-3. **main'e merge = canlıya deploy** (autodeploy açık) → **merge kararı ürün sahibinde**. PR aç, merge etme.
+3. ~~[ESKİ · 2026-09-24] **main'e merge = canlıya deploy** (autodeploy açık) → **merge kararı ürün sahibinde**. PR aç, merge etme.~~
+   ⚠️ GÜNCELLEME (2026-09-24): merge kapı politikasına bağlı (🟢/🟡/🔴) — `CLAUDE.md` "MERGE POLİTİKASI"; "PR aç, merge etme" yalnız 🟡 kapıda ve bulut oturumunda geçerli.
 
 ## 6) Tarz kuralları
 - **Kanıt iste, "sanırım" yasak** — durumu git'ten/koddan/log'dan DOĞRULA, hafızadan varsayma.
@@ -86,10 +92,12 @@
   "önce teşhis" doğru çıktı.)
 
 ## 10) Belge eş-zamanlılığı (belge hijyeni — kalıcı kural)
-- Her iş tamamlanınca aynı tur/commit içinde `docs/kararlar/09-DURUM.md` güncellenir.
+- ~~[ESKİ · 2026-09-24] Her iş tamamlanınca aynı tur/commit içinde `docs/kararlar/09-DURUM.md` güncellenir.~~
+  ⚠️ GÜNCELLEME (2026-09-24): otonom turda belge senkronu **kuyruğun sonunda tek sefer** yapılır; aktif iş kaynağı `00-KUYRUK.md` — `CLAUDE.md` "Belge senkronu — SONA, tek sefer" + "AKTİF İŞ KAYNAĞI TEKTİR".
 - **Belge düzeltme deseni:** eski/yanlış kararı SİLME; üstüne `⚠️ GÜNCELLEME (tarih): …` ekle veya
   `docs/arsiv/` altına taşı — tarihsel iz korunur.
 - `git fetch origin` ÖNCE: main durumu (ahead/behind, merge oldu mu) kontrol edilecekse önce fetch;
   lokal main geride kalabilir.
 
-> Bu belgeyi okuduktan sonra **02-proje-durumu** ile devam et; iş seçimi için **06-devir-kilavuzu**'na bak.
+> ~~[ESKİ · 2026-09-24] Bu belgeyi okuduktan sonra **02-proje-durumu** ile devam et; iş seçimi için **06-devir-kilavuzu**'na bak.~~
+> ⚠️ GÜNCELLEME (2026-09-24): giriş belgesi `06-devir-kilavuzu.md`; `02-proje-durumu` 📸 donduruldu (güncel: `docs/kararlar/09-DURUM.md` + `docs/otonom/02-ILERLEME.md`).

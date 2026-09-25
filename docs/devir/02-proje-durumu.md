@@ -1,5 +1,10 @@
 # 02 — PROJE DURUMU (şu an nerede, kanıtlı)
 
+> 📸 **DONDURULMUŞ — 2026-08-11 (ekleri 08-14, 08-20) fotoğrafı.** *(not eklendi: 2026-09-24, DC turu)*
+> Bu belge o günün durumunu anlatır; **BUGÜNÜ ANLATMAZ.**
+> Güncel karşılığı: `docs/kararlar/09-DURUM.md` (canlıda ne var) + `docs/otonom/02-ILERLEME.md` (son durum) + `docs/otonom/00-SIRADAKI.md` (sıradaki işler — ⚠️ TEYİT GEREK: `otonom/DA-belge-sistemi-20260923` merge olunca gelir; o zamana kadar `docs/otonom/00-KUYRUK.md`).
+> Tarihsel kayıt olarak korunur; güncellenmez. Giriş belgesi: `docs/devir/06-devir-kilavuzu.md`.
+
 **📸 DONDURULMUŞ** — oturum devir notu (o günkü proje durumu). Güncel durum için: `docs/kararlar/09-DURUM.md`.
 
 > **Amaç:** Yeni sohbet, projenin canlı/tamamlanmış durumunu tek yerden kanıtla görsün.

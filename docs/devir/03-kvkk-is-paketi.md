@@ -1,5 +1,11 @@
 # 03 — KVKK İŞ PAKETİ (canlı öncesi kritik — yol haritasında B, öncelik yüksek)
 
+> 📸 **DONDURULMUŞ — 2026-08-11 (eki 08-20) fotoğrafı.** *(not eklendi: 2026-09-24, DC turu)*
+> Bu belge o günün durumunu anlatır; **BUGÜNÜ ANLATMAZ.**
+> Güncel karşılığı: `docs/otonom/03-PO-ELLE-ISLER.md` §"⚖️ AVUKAT PAKETİ" + `docs/otonom/01-KARARLAR.md` KARAR-47 (hukuki paket).
+> Tarihsel kayıt olarak korunur; güncellenmez. Giriş belgesi: `docs/devir/06-devir-kilavuzu.md`.
+> K2/K4/K5 canlıda (bu belgenin 08-20 notu); açık kalan yasal metin + eski-kayıt rızası avukat paketinde.
+
 **📸 DONDURULMUŞ** — oturum devir notu (KVKK iş paketi).
 
 > **Amaç:** Yeni sohbetin sıradaki en kritik iş paketini kanıtla görmesi. Bu paket **canlı öncesi

@@ -1,5 +1,7 @@
 # 07 — OTURUM GÜNLÜĞÜ (yaşayan devir kaydı)
 
+> 📓 **GÜNLÜK — tarihsel kayıt.** *(not eklendi: 2026-09-24, DC turu)* Güncel durum için **`docs/otonom/02-ILERLEME.md`**'ye bakın. Son kayıt 2026-09-20 (TUR AA); sonraki turlar yalnız 02-ILERLEME'de. Aşağıdaki 🔄 "her yeni oturum buraya" satırı o tarihten beri fiilen uygulanmıyor.
+
 **🔄 YAŞAYAN** — oturum kapanış kayıtları burada birikir. **Her yeni oturum buraya YENİ BÖLÜM olarak eklenir; ayrı dosya AÇILMAZ.**
 
 > **Amaç:** Oturum-oturum "ne oldu, şu an neredeyiz, ne bekliyor" tarihsel kaydı — git+docs ile DOĞRULANMIŞ.
