@@ -20,6 +20,16 @@ const OUTCOME_STYLE: Record<CertOutcome, { badge: string; icon: string; label: s
   wrong:      { badge: 'bg-red-100 text-red-800 border-red-300',       icon: '❌', label: 'Zararlı / zayıf' },
 };
 
+// AN-01: sınav-seviyesi bekleme kuralı — backend `CERT_CONFIG`
+// (backend/src/services/certification.service.ts:31,33 ve :226-231) ile birebir aynı tutulmalı:
+// her `attemptsBeforeCooldown` başarısız denemede bir `cooldownHours` saatlik bekleme başlar.
+const CERT_RETRY_RULE = { attemptsBeforeCooldown: 2, cooldownHours: 24 } as const;
+
+/** Bu başarısız sonuç bekleme süresini başlattı mı? (backend `cooldownTriggered` ile aynı hesap) */
+function failedResultStartsCooldown(attempts: number): boolean {
+  return attempts > 0 && attempts % CERT_RETRY_RULE.attemptsBeforeCooldown === 0;
+}
+
 interface Topic {
   topic: string;
   isRedLine: boolean;
@@ -215,7 +225,10 @@ export default function MentorCertificationPage() {
                 {result.failReason === 'RED_LINE_FAILED'
                   ? 'Puanın yeterli olsa bile, kritik bir konuyu ilk denemede geçemedin — kritik konuların hepsi ilk denemede geçilmeli.'
                   : 'Sertifika için en az %80 gerekli.'}
-                <br />Ceza veya bekleme yok — hemen yeniden başlayabilirsin.
+                <br />
+                {failedResultStartsCooldown(result.attempts)
+                  ? `Şimdi ${CERT_RETRY_RULE.cooldownHours} saatlik bir mola başlıyor; mola bitince yeniden deneyebilirsin. Bu arada konuları Öğrenme Yolculuğu'nda pekiştirebilirsin.`
+                  : `Hemen yeniden başlayabilirsin. Bilgin olsun: her ${CERT_RETRY_RULE.attemptsBeforeCooldown} başarısız denemeden sonra ${CERT_RETRY_RULE.cooldownHours} saatlik bir mola verilir.`}
               </p>
               {failed.length > 0 && (
                 <div className="text-left rounded-xl border border-amber-200 dark:border-amber-800/50 bg-white/60 dark:bg-amber-950/10 p-4 space-y-2">
