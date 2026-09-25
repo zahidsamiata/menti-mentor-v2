@@ -9,6 +9,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { certificationApi } from '@/lib/api/certification';
 import type { CertTopicsResponse } from '@/types/certification';
 import { topicLabel as label } from '@/lib/certificationTopics';
+import { apiErrorMessage } from '@/lib/apiErrorMessage';
 
 export default function AdminCertificationPage() {
   const { user } = useAuth();
@@ -25,7 +26,7 @@ export default function AdminCertificationPage() {
     const res = await certificationApi.listTopics(api);
     setLoading(false);
     if (res.ok) setData(res.data);
-    else setError('Konular yüklenemedi.');
+    else setError(apiErrorMessage(res.error, 'Konular yüklenemedi.'));
   }, [api]);
 
   useEffect(() => {
@@ -44,9 +45,9 @@ export default function AdminCertificationPage() {
     } else if (res.error.error === 'RED_LINE_LOCKED') {
       setError('Kritik (red-line) konular kapatılamaz.');
     } else if (res.error.error === 'MIN_TOPICS') {
-      setError(res.error.message ?? 'En az minimum sayıda konu açık kalmalı.');
+      setError(apiErrorMessage(res.error, 'En az minimum sayıda konu açık kalmalı.'));
     } else {
-      setError('Güncelleme başarısız oldu.');
+      setError(apiErrorMessage(res.error, 'Konu güncellenemedi. Lütfen tekrar deneyin.'));
     }
   }
 

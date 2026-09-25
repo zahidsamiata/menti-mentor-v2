@@ -21,6 +21,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { shuffle } from '@/lib/shuffle';
+import { apiErrorMessage } from '@/lib/apiErrorMessage';
 
 export type ScenarioOutcome = 'correct' | 'warn' | 'wrong';
 
@@ -59,7 +60,7 @@ export interface ScenarioGuideEngineProps {
     choiceKey: string,
   ) => Promise<{ outcome: ScenarioOutcome; feedback: string }>;
   /** Tüm aşamalar görülünce çağrılır; başarıyı { ok } ile bildirir. */
-  onComplete: () => Promise<{ ok: boolean }>;
+  onComplete: () => Promise<{ ok: boolean; error?: { message?: string } }>;
   completion: ScenarioCompletion;
   /**
    * Şık sırasını her gösterimde karıştır (madde 143). Cevap kimliğe (key) bağlı,
@@ -195,7 +196,7 @@ export function ScenarioGuideEngine({
     setError(null);
     try {
       const res = await onComplete();
-      if (!res.ok) setError(COMPLETE_ERROR);
+      if (!res.ok) setError(apiErrorMessage(res.error, COMPLETE_ERROR));
     } catch {
       setError(COMPLETE_ERROR);
     } finally {
