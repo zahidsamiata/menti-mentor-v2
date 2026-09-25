@@ -18,6 +18,8 @@ export interface Question {
 export interface QuestionsResponse {
   items: Question[];
   total: number;
+  /** Yalnız ADMIN yanıtında: kurumun (ve global) STK_CUSTOM soruları — DISC havuzuna (items) katılmaz (E-3c). */
+  stkQuestions?: Question[];
   meta: {
     coreCount: number;
     deepeningCount: number;
