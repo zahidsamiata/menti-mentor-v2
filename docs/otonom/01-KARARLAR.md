@@ -115,7 +115,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 
 | # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
 |---|---|:---:|---|
-| **KARAR-77** | **Görüşmeye iki taraf da değerlendirme yazsın mı** | **2** (KR-08 · KR-11 dolaylı) | ⬜ boş · ⭐ kod incelemesi · MIGRATION · öneri A |
+| **KARAR-77** | **Görüşmeye iki taraf da değerlendirme yazsın mı** | **2** (KR-08 · KR-11 dolaylı) | ✅ **CEVAPLANDI (2026-09-25): A** — her taraf kendi kaydı, görünürlük değişmez · kart KR-08 bitene kadar ana dosyada |
 | **KARAR-78** | **Dönemlik anket: bağla / karantina / beklet** | **1** (KR-11) | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) |
 | **KARAR-79** | **Zamanlanmış iş tetikleme yetkisi kimde** | **1** (KR-05) | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı |
 
@@ -1214,7 +1214,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** İki yönlü değerlendirme kalite döngüsünün girdisiyse A en temiz yol ama migration ister. B migration'sız hızlı yol, ama ortak metin alanı ve "kim yazdı" belirsizliği bırakır. C yalnız kullanıcının hatayı anlamasını sağlar, veri kaybını çözmez. Dört ayrı geri bildirim modeli envanteri (AN-47) A'nın tasarımını besler; önce o yapılabilir.
 **Benim önerim:** A — iki taraflı değerlendirme ürünün kalite ölçümünün temeli; B'nin ortak metin alanları iki kişinin verisini karıştırır.
 **Cevap vermezsen:** KR-08 kilitli kalır; her görüşmede bir tarafın değerlendirmesi kaybolmaya devam eder; KR-11 (dönemlik anket) bağlansa bile aynı kilide takılır.
-**CEVAP:**
+**CEVAP:** A — Her taraf görüşme başına kendi değerlendirme kaydını yazar (görüşme + yazan başına bir kayıt). GÖRÜNÜRLÜK DEĞİŞMEZ: karşı taraf diğerinin cevabını hiçbir zaman görmez; kurum yöneticisi hepsini görür; yazan kendi cevabını görebilir (feedbackController.ts'teki mevcut 'KARAR 1' kuralı aynen korunur). Gerekçe (PO): anketi taraflar platform/kurum için dolduruyor; mentör gördüğü eksiği görüşmede zaten aktarıyor, dürüstlük için karşı taraf görmemeli. (PO, 2026-09-25)
 
 ### KARAR-78 · Dönemlik anket özelliği kalsın mı, bağlansın mı, kaldırılsın mı? (1 iş açar: KR-11) [ÜRÜN KARARI · SİLME PROTOKOLÜ]
 > ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A8 [D].
