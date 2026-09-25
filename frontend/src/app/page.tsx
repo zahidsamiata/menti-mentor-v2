@@ -15,12 +15,13 @@ import { EngineSection }  from './_sections/EngineSection';
 import { AlgorithmBento } from './_sections/AlgorithmBento';
 import { GameSection }    from './_sections/GameSection';
 import { AdminCockpit }   from './_sections/AdminCockpit';
+import { JsonLd }         from '@/components/atoms/JsonLd';
+import { getSiteUrl }     from '@/lib/siteUrl';
+import { buildHomeJsonLd, HOME_DESCRIPTION } from '@/lib/structuredData';
 
 export const metadata: Metadata = {
   title: 'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
-  description:
-    'Dernekler, vakıflar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
-    'kapalı devre mentörlük platformu. Kurulum 10 dakika, sonsuza kadar ücretsiz.',
+  description: HOME_DESCRIPTION,
   // Y-09: openGraph/twitter (type/locale/siteName/card) kök `layout.tsx`'te. og:title /
   // og:description ve twitter karşılıkları Next tarafından yukarıdaki title/description'dan
   // otomatik doldurulur. Burada `openGraph` tanımlama: kök nesneyi sığ olarak değiştirir ve
@@ -34,6 +35,8 @@ export const metadata: Metadata = {
 export default function LandingPage() {
   return (
     <>
+      {/* Y-10: arama motorları için Organization + WebSite yapısal verisi. */}
+      <JsonLd data={buildHomeJsonLd(getSiteUrl())} />
       <Navbar />
       <main>
         <HeroSection />
