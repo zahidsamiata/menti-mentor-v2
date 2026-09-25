@@ -111,6 +111,14 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-75** | **KVKK yasal metinlerinde kişi adı: yasak mı istisna mı** | **0** (AN-41/YN-13 etkiler) | ⬜ boş · ⭐ CS bilanço · HUKUK/POLİTİKA · öneri B (kurum/unvan) |
 | **KARAR-76** | **`Tenant.verifiedBy` alanı ne olsun** (silme protokolü boşluğu) | **1** (AN-08 · AN-54) | ⬜ boş · ⭐ silme protokolü · VERİ · öneri B (karantina) |
 
+> ⭐ **KOD İNCELEMESİ KARARLARI (2026-09-24 taraması · 2026-09-25 açıldı) — KARAR-77…79.** Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md`. Kilitledikleri işler `00-KUYRUK.md` → EN ÜST — KR bloğunda.
+
+| # | Konu (5-6 kelime) | Kaç işi açar | Cevap durumu |
+|---|---|:---:|---|
+| **KARAR-77** | **Görüşmeye iki taraf da değerlendirme yazsın mı** | **2** (KR-08 · KR-11 dolaylı) | ⬜ boş · ⭐ kod incelemesi · MIGRATION · öneri A |
+| **KARAR-78** | **Dönemlik anket: bağla / karantina / beklet** | **1** (KR-11) | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) |
+| **KARAR-79** | **Zamanlanmış iş tetikleme yetkisi kimde** | **1** (KR-05) | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı |
+
 ---
 
 ### KARAR-2 · Profile serbest bağlantı alanı  [ÜRÜN KARARI · MIGRATION]
@@ -1190,6 +1198,50 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 ⚠️ C seçilirse kırmızı kural: yedek tablo + PO açık onayı şart (CLAUDE.md silme protokolü).
 **Benim önerim:** B — silme protokolünün kendi önerdiği ara adım; ama AN-08 (audit yazımı) yakında yapılacaksa A daha ucuz. *(Veri kararın.)*
 **Cevap vermezsen:** alan belirsiz kalır, her envanter turunda yeniden "öksüz" diye işaretlenir; AN-08 de kilitli kalır.
+**CEVAP:**
+
+---
+
+### KARAR-77 · Bir görüşmeye iki taraf da değerlendirme yazabilsin mi? (2 iş açar: KR-08 · KR-11 dolaylı) [ÜRÜN KARARI · MIGRATION]
+> ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A5 [D].
+**Şu an ne var:** Görüşme tamamlanınca menti mentörü (yönlendirme · kaynak paylaşımı · güven), mentör de mentiyi (hazırlık · proaktiflik) puanlıyor. İki tarafın puanı **aynı kayda** yazılıyor ve bir görüşme için **yalnız bir kayıt** olabiliyor. İlk gönderen kaydı açıyor, görüşme "değerlendirildi" diye işaretleniyor; ikinci taraf *"Bu toplantı için geri bildirim zaten gönderildi"* hatası alıyor. Kanıt: `backend/prisma/schema.prisma:623` (görüşme başına tek kayıt) · `backend/src/controllers/feedbackController.ts:63-64` (ikinci gönderimde ret) · `:118` (ilk kayıtta işaret).
+**Sorun ne:** Her görüşmede değerlendirmenin yarısı kayboluyor. Menti önce yazarsa mentörün mentiye verdiği puan hiç kaydedilmiyor (hazırlık puanına bağlı kilit hiç çalışmıyor); mentör önce yazarsa mentinin mentöre puanı kayboluyor (mentörün kalite puanı beslenmiyor). Dönemlik anket (KARAR-78) de aynı kayda yazmaya çalıştığı için o da kilitli.
+**Neden sana soruyorum:** Çözüm veritabanı değişikliği (migration) ister ve verinin anlamını değiştirir: "bir görüşme = bir değerlendirme" yerine "bir görüşme = her taraftan bir değerlendirme" olur; mevcut kayıtların nasıl yorumlanacağı da değişir.
+**Seçenekler:**
+- **A) Her taraf kendi kaydını yazsın** (görüşme + yazan kişi başına bir kayıt) · Kullanıcı ne görür: iki taraf da formu gönderebiliyor, hata yok · Ne kazanırsın: iki yönlü veri tam; kalite puanı ve hazırlık kilidi her görüşmede beslenir; kimin ne yazdığı net · **Ne kaybedersin:** migration + tarihli yedek gerekir; mevcut kayıtlar "yazan kim" bilgisiyle yeniden yorumlanır (hangi alanlar doluysa yazan ondan çıkarılır); okuma ekranları iki kayda göre güncellenir · Süre M · Geri alınır: zor (iki kayda bölünen veri kolay birleşmez) · Migration: VAR
+- **B) Tek kayıt kalsın, ikinci taraf aynı kaydın kendi alanlarını doldursun** · Kullanıcı ne görür: iki taraf da gönderebiliyor · Ne kazanırsın: tablo yapısı aynı kalır, hızlı · **Ne kaybedersin:** "değerlendirildi" işaretinin anlamı bulanıklaşır (biri mi yazdı, ikisi mi?); ortak metin alanlarını (öğrenilenler · yorum) iki taraf paylaşır, biri diğerinin yazdığını ezebilir; aynı anda gönderimde üzerine yazma riski · Süre S-M · Geri alınır: evet · Migration: yok (metin alanları taraf başına ayrılacaksa VAR)
+- **C) Bugünkü gibi kalsın, yalnız ekran açıklasın** · Kullanıcı ne görür: ikinci taraf "karşı taraf bu görüşmeyi zaten değerlendirdi" mesajını görür, puan veremez · Ne kazanırsın: sıfır risk, sıfır migration · **Ne kaybedersin:** verinin yarısı kaybolmaya devam eder; kalite puanı ve kilit kimin önce yazdığına göre rastgele beslenir; dönemlik anket kilitli kalır · Süre S · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** İki yönlü değerlendirme kalite döngüsünün girdisiyse A en temiz yol ama migration ister. B migration'sız hızlı yol, ama ortak metin alanı ve "kim yazdı" belirsizliği bırakır. C yalnız kullanıcının hatayı anlamasını sağlar, veri kaybını çözmez. Dört ayrı geri bildirim modeli envanteri (AN-47) A'nın tasarımını besler; önce o yapılabilir.
+**Benim önerim:** A — iki taraflı değerlendirme ürünün kalite ölçümünün temeli; B'nin ortak metin alanları iki kişinin verisini karıştırır.
+**Cevap vermezsen:** KR-08 kilitli kalır; her görüşmede bir tarafın değerlendirmesi kaybolmaya devam eder; KR-11 (dönemlik anket) bağlansa bile aynı kilide takılır.
+**CEVAP:**
+
+### KARAR-78 · Dönemlik anket özelliği kalsın mı, bağlansın mı, kaldırılsın mı? (1 iş açar: KR-11) [ÜRÜN KARARI · SİLME PROTOKOLÜ]
+> ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A8 [D].
+**Şu an ne var:** `/periodic-survey` adında bir anket sayfası yazılı: kariyer netliği, güven (1-10), özgüven değişimi, tavsiye puanı (0-10) ve açık not soruyor. Veritabanında bu cevapların alanları hazır ve yanında *"ayda bir tetiklenir"* notu var. Ama: hiçbir ekrandan bu sayfaya bağlantı yok, ayda bir tetikleyen bir iş yok, sayfa gönderse de sunucu bu alanları tanımadığı için her gönderim reddediliyor. Kanıt: `frontend/src/app/(dashboard)/periodic-survey/page.tsx:54-65` · `backend/src/controllers/feedbackController.ts:9-28` · `backend/prisma/schema.prisma:643-648` · bağlantı araması `frontend/src` içinde boş.
+**Sorun ne:** Kullanıcı bu anketi hiç görmüyor; özellik fiilen yok. "Mentörlük ilişkisi bir ayda ne kattı" verisi hiç toplanmıyor. Ölü sayfa her denetimde yeniden bulgu olarak çıkıyor.
+**Neden sana soruyorum:** Bir özelliğin var olup olmayacağı ve kaldırılması ürün kararıdır (CLAUDE.md "DUR VE SOR"). Kaldırma seçeneği silme protokolüne tabidir: önce niyet (şemadaki "ayda bir" notu), sonra yeni karar, arşiv, karantina; gerçek silme ancak ikinci onayla.
+**Seçenekler:**
+- **A) Bağla: ayda bir eşleşmiş çifte kısa anket** · Kullanıcı ne görür: ayda bir panelde isteğe bağlı anket kartı · Ne kazanırsın: dönemlik derin veri (kariyer · özgüven · tavsiye puanı); eşleştirme ayarı ve kalite görünümü (AN-49) için gerçek girdi · **Ne kaybedersin:** kullanıcıya üçüncü form (görüşme sonrası check-in + görüşme değerlendirmesi + anket); kırılgan kullanıcıda soru yükü (KARAR-71 tutundurma etiği sınırı); zamanlanmış iş + test işi; KARAR-77 cevabına bağlı (aynı kayda yazıyor) · Süre M · Geri alınır: evet · Migration: KARAR-77'ye göre (ayrı tablo istenirse VAR)
+- **B) Kaldır — önce karantina** (sayfa kapatılır, kod yerinde `@deprecated` kalır, arşiv kaydı yazılır; bir tur sorunsuz geçerse senin ikinci onayınla silinir; veritabanı alanları yerinde kalır) · Kullanıcı ne görür: hiçbir değişiklik (zaten görmüyor) · Ne kazanırsın: ölü kod belirsizliği biter, niyet arşivde korunur; soruların içeriği AN-52 (ürün içi isteğe bağlı sorular, KARAR-70) tasarımına aktarılabilir · **Ne kaybedersin:** dönemlik veri bu yoldan toplanmaz; ileride istenirse yeniden bağlama işi · Süre S · Geri alınır: evet (karantina) · Migration: yok
+- **C) Olduğu gibi kalsın, karar ertelensin** · Kullanıcı ne görür: değişiklik yok · Ne kazanırsın: sıfır iş · **Ne kaybedersin:** ölü sayfa ve boş alanlar durur; her denetimde yeniden bulgu olur; veri toplanmaz · Süre 0 · Geri alınır: — · Migration: yok
+**Karşılaştırma:** A bu veriyi ayrı bir formla toplamaya değer buluyorsan doğru, ama kullanıcıyı üçüncü kez sorgular ve KARAR-77'ye bağlı. B, KARAR-70'te zaten kararlaştırılan ürün içi isteğe bağlı sorular (AN-52) aynı ihtiyacı karşılayacaksa en tutarlı yol. C yalnız kararı erteler.
+**Benim önerim:** B — AN-52 aynı "ilişki ne kattı" sorusunu tek ve isteğe bağlı bir yoldan sormak için zaten kararlaştırıldı; ayrı bir üçüncü form yükü artırır. *(Bu senin ürün kararın; veri toplamayı öne alıyorsan A.)*
+**Cevap vermezsen:** KR-11 kilitli; sayfa ölü kalır, her denetimde yeniden bulgu olur.
+**CEVAP:**
+
+### KARAR-79 · Zamanlanmış bakım işlerini elle tetikleme yetkisi kimde olsun? (1 iş açar: KR-05) [YETKİ KARARI · GÜVENLİK]
+> ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` B5 [D]. ⛔ Public repo: güvenlik ayrıntısı bu kartta yazılmaz; ayrıntı iş kapanınca rapora eklenir.
+**Şu an ne var:** Eşleştirme ağırlık ayarı ve KVKK veri temizliği her hafta otomatik çalışıyor. Bunları elle tetikleyen uçlar da var, ancak bu uçların **yetki kapsamı hatalı**. Dosyalar: `backend/src/routes/adminRoutes.ts` · `backend/src/controllers/adminController.ts`.
+**Sorun ne:** Hangi rolün bu işleri, hangi kapsamda (tüm platform mı, yalnız kendi kurumu mu) tetikleyebileceği belirlenmeden düzeltme yapılamıyor. O sürece kadar yetki kapsamı hatası açık kalıyor.
+**Neden sana soruyorum:** "Yetki kimde" CLAUDE.md'ye göre ürün kararıdır. Ayrıca KARAR-13 (yöneticiye manuel "işlet" düğmesi) ile doğrudan bağlı: bu kartın cevabı KARAR-13'ün ağırlık ayarı ve temizlik düğmeleri için anlamlı seçenekleri belirler. İkisinin birlikte cevaplanması önerilir.
+**Seçenekler:**
+- **A) Yalnız platform yöneticisi** · Kullanıcı ne görür: kurum yöneticisi bu işlemleri tetikleyemez; gerektiğinde platform yöneticisi çalıştırır · Ne kazanırsın: en dar yetki, açık en hızlı kapanır, küçük iş · **Ne kaybedersin:** kurum yöneticisi "eşleştirmeyi şimdi yenile" diyemez, sana başvurur; KARAR-13'ün bu iki düğmesi kurum panelinde anlamsızlaşır · Süre S · Geri alınır: evet · Migration: yok
+- **B) Kurum yöneticisi, yalnız kendi kurumu kapsamında** · Kullanıcı ne görür: kurum yöneticisi kendi kurumu için ağırlık ayarını ve temizliği tetikleyebilir · Ne kazanırsın: yönetici bağımsız; KARAR-13 düğmeleri anlamlı kalır · **Ne kaybedersin:** iki işin de kurum kapsamında çalışacak şekilde yeniden düzenlenmesi gerekir; daha çok iş ve test; kapsam hatalı kurulursa veri kaybı riski (temizlik işi veri siler) · Süre M · Geri alınır: evet · Migration: yok
+- **C) Karma: ağırlık ayarı kurum yöneticisinde (kendi kurumu), veri temizliği yalnız platform yöneticisinde** · Kullanıcı ne görür: kurum yöneticisi yalnız eşleştirmeyi yenileyebilir · Ne kazanırsın: sık ve güvenli iş yöneticide, veri silen iş platformda (KARAR-13'teki "güvenli olan düğme, yıkıcı olan elden uzak" önerisiyle uyumlu) · **Ne kaybedersin:** iki farklı yetki modeli, daha çok test; ağırlık ayarının kurum kapsamına indirilmesi yine gerekir · Süre M · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** A açığı en hızlı ve en güvenli kapatır ama yöneticiye esneklik vermez. B yöneticiye tam kontrol verir, en çok işi ve en yüksek yanlış kurulum riskini taşır. C, KARAR-13 önerisiyle tutarlı orta yol.
+**Benim önerim:** A — açık en dar yetkiyle hemen kapanır; kurum yöneticisine ihtiyaç çıkarsa sonradan C'ye genişletmek geri alınabilir bir adımdır.
+**Cevap vermezsen:** KR-05 kilitli kalır ve yetki kapsamı hatası açık kalır; aynı dosyaya dokunan KR-20 sırası da etkilenir.
 **CEVAP:**
 
 ---
