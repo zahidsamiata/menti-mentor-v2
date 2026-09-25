@@ -64,3 +64,10 @@ Kulüp ailesi (7 + `/users/:userId/clubs`) · iş ilanı ailesi (4) · feedback-
 
 ## Kuyruğa not
 Kuyrukta kendi satırı olmayan BAĞLA kalemleri: bağlamsal geri bildirim kartı · anlaşma taslağı · çift sinyali · soru geri açma · check-in geçmişi · değerlendirme okuma. Kuyruk satırı olmayan MÜKERRER'ler: temperament-test, compute-profile/rank-mentors, `POST /api/users`, requests ailesi.
+
+## ⚠️ GÜNCELLEME (2026-09-25, uygulama sırasında doğrulama)
+- ~~[ESKİ · 2026-09-25] BAĞLA: GET /api/meetings/pair-signal — çift sinyali rozeti · S · 🟢~~
+  ⚠️ **GÜNCELLEME:** çift sinyali ZATEN ekranda — `frontend/src/app/(admin)/admin/eslesmeler/page.tsx:163-181` "Risk" sütunu (İyi/Dikkat/Riskli/Veri yok, `lib/adminMetrics.ts:22-27`); veri yönetici çift listesinden (`backend/src/controllers/adminController.ts:390-437`, aynı `pairSignal.service.ts`, "#7 Aşama 1"). ⇒ `GET /api/meetings/pair-signal` **MÜKERRER** (yanlış soru tuzağı). Silinmez; K-13/E-4 silme protokolü adayı. Sayılar: BAĞLA 9 · MÜKERRER 22.
+- ~~[ESKİ · 2026-09-25] "Yönetici soruyu gizleyebiliyor (`questions/page.tsx:49`) ama geri açamıyor"~~
+  ⚠️ **GÜNCELLEME:** "Gizle" düğmesi 1dfc63f (2026-07-13) ile bilinçli kaldırılmış (DISC soruları gizlenemez; gizlenebilen tek tür global STK_CUSTOM, Y6 sonrası API'den oluşturulamıyor). Geri açma ekranı (E-3b, #127/#308) yalnız eski/API ile oluşmuş gizleme kayıtları için anlamlı.
+- ⭐ **Yeni bulgular (E-3b sırasında):** (1) `GET /api/questions` `tenantId` döndürmüyor → admin/questions sayfasında DISC soruları "Kuruma Özel Sorular" altında Düzenle/Sil düğmeleriyle görünüyor (backend 403 veriyor, veri güvende, ekran yanlış); (2) kurumun eklediği STK_CUSTOM sorular `listQuestions` yanıtına hiç eklenmiyor (`stkQuestions` hesaplanıyor ama dönmüyor) → yöneticinin eklediği soru listede görünmüyor. Kuyrukta: E-3c.
