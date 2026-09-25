@@ -22,6 +22,8 @@ import {
   type ReactNode,
 } from 'react';
 import { apiClient, refreshCallbackRef } from '@/lib/api/client';
+import { toTenantBranding } from '@/lib/sessionTenant';
+import type { TenantBranding } from '@/types/tenant';
 import type {
   AuthContextValue,
   AuthUser,
@@ -44,10 +46,18 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [tenant, setTenant] = useState<TenantBranding | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const refreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // KR-02/KR-03: refresh yanıtı kullanıcıyı ve kendi kurum markasını da taşır; F5 sonrası
+  // oturum ve marka buradan geri gelir. Eski backend alan döndürmezse mevcut değer korunur.
+  const applySession = useCallback((data: RefreshResponse) => {
+    if (data.user) setUser((prev) => ({ ...(prev ?? {}), ...data.user } as AuthUser));
+    if (data.tenant !== undefined) setTenant(toTenantBranding(data.tenant));
+  }, []);
 
   // ── Token yenileme ──────────────────────────────────────────────────────
 
@@ -65,6 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (result.ok) {
         setAccessToken(result.data.accessToken);
+        applySession(result.data);
         scheduleTokenRefresh(result.data.expiresIn);
       } else {
         clearSession();
@@ -74,6 +85,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const clearSession = useCallback(() => {
     setUser(null);
+    setTenant(null);
     setAccessToken(null);
     if (refreshTimerRef.current) clearTimeout(refreshTimerRef.current);
     refreshCallbackRef.current = null;
@@ -89,9 +101,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!result.ok) { clearSession(); return null; }
 
     setAccessToken(result.data.accessToken);
+    applySession(result.data);
     scheduleTokenRefresh(result.data.expiresIn);
     return result.data.accessToken;
-  }, [clearSession, scheduleTokenRefresh]);
+  }, [applySession, clearSession, scheduleTokenRefresh]);
 
   // ── Interceptor için global ref'i güncelle ──────────────────────────────
   useEffect(() => {
@@ -110,6 +123,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (result.ok) {
         setAccessToken(result.data.accessToken);
+        applySession(result.data);
         scheduleTokenRefresh(result.data.expiresIn);
       }
       // Cookie yoksa veya süresi dolmuşsa → misafir oturumu (isLoading=false)
@@ -119,7 +133,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => {
       if (refreshTimerRef.current) clearTimeout(refreshTimerRef.current);
     };
-  }, [scheduleTokenRefresh]);
+  }, [applySession, scheduleTokenRefresh]);
 
   // ── Giriş ───────────────────────────────────────────────────────────────
 
@@ -145,6 +159,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     setAccessToken(newToken);
     setUser(userData as AuthUser);
+    setTenant(toTenantBranding(result.data.tenant));
     scheduleTokenRefresh(expiresIn);
     return userData;
   }, [scheduleTokenRefresh]);
@@ -157,11 +172,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setAccessToken(newAccessToken);
       scheduleTokenRefresh(expiresIn);
 
-      const meResult = await apiClient<AuthUser>('/api/auth/me', {
-        token: newAccessToken,
-      });
+      const meResult = await apiClient<AuthUser & { tenant?: Parameters<typeof toTenantBranding>[0] }>(
+        '/api/auth/me',
+        { token: newAccessToken },
+      );
       if (meResult.ok) {
-        setUser(meResult.data);
+        const { tenant: meTenant, ...meUser } = meResult.data;
+        setUser(meUser as AuthUser);
+        setTenant(toTenantBranding(meTenant));
       }
     },
     [scheduleTokenRefresh],
@@ -182,6 +200,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        tenant,
         accessToken,
         isAuthenticated: !!user && !!accessToken,
         isLoading,

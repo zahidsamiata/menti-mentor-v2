@@ -2,6 +2,8 @@
  * Kimlik doğrulama tipleri — backend authController.ts yanıtlarıyla eşleşir.
  */
 
+import type { TenantBranding } from './tenant';
+
 export type UserRole = 'ADMIN' | 'MENTOR' | 'MENTI';
 export type ApprovalStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
 export type AuthProvider = 'LOCAL' | 'GOOGLE' | 'LINKEDIN';
@@ -34,15 +36,26 @@ export interface LoginResponse {
   } | null;
 }
 
-/** POST /api/auth/refresh yanıtı — refreshToken artık HttpOnly cookie'de */
+/** login / refresh yanıtındaki kurum markası (oturumdaki kullanıcının KENDİ kurumu). */
+export type SessionTenant = NonNullable<LoginResponse['tenant']>;
+
+/**
+ * POST /api/auth/refresh yanıtı — refreshToken artık HttpOnly cookie'de.
+ * KR-02/KR-03: backend kullanıcıyı ve kendi kurum markasını da döndürür (sayfa yenilemede
+ * oturum ve marka geri gelsin diye). Eski backend ile uyum için alanlar isteğe bağlı.
+ */
 export interface RefreshResponse {
   accessToken: string;
   expiresIn: number;
+  user?: LoginResponse['user'];
+  tenant?: SessionTenant | null;
 }
 
 /** AuthProvider'ın React context'e sağladığı değerler. */
 export interface AuthContextValue {
   user: AuthUser | null;
+  /** Oturumdaki kullanıcının kendi kurum markası (login / refresh / me yanıtından). */
+  tenant: TenantBranding | null;
   accessToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;

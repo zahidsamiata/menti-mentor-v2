@@ -12,36 +12,21 @@
  * Root layout'ta AuthProvider > AuthTenantBridge > {children} şeklinde kullanılır.
  */
 
-import { type ReactNode, useState, useEffect } from 'react';
+import { type ReactNode } from 'react';
 import { TenantProvider } from './TenantProvider';
 import { useAuth } from './AuthProvider';
-import { apiClient } from '@/lib/api/client';
-import type { TenantBranding } from '@/types/tenant';
 
-type TenantInfoResponse = TenantBranding;
-
+/*
+ * ⚠️ GÜNCELLEME 2026-09-25 (KR-03): marka artık AuthProvider'ın oturum yanıtlarından
+ * (login / refresh / me — hepsi oturumdaki kullanıcının KENDİ kurumu) gelir. Eskiden burada
+ * `GET /api/tenants/:id` çağrılıyordu; o uç yalnız platform yöneticisine açık olduğu için
+ * normal kullanıcıda her seferinde reddediliyor ve marka hiç yüklenmiyordu.
+ */
 export function AuthTenantBridge({ children }: { children: ReactNode }) {
-  const { user, accessToken, isLoading: authLoading } = useAuth();
-  const [tenant, setTenant] = useState<TenantBranding | null>(null);
-  const [tenantLoading, setTenantLoading] = useState(false);
-
-  useEffect(() => {
-    if (!user || !accessToken) {
-      setTenant(null);
-      return;
-    }
-
-    setTenantLoading(true);
-    apiClient<TenantInfoResponse>(`/api/tenants/${user.tenantId}`, {
-      token: accessToken,
-      tenantId: user.tenantId,
-    }).then((result) => {
-      if (result.ok) setTenant(result.data);
-    }).finally(() => setTenantLoading(false));
-  }, [user?.tenantId, accessToken]); // eslint-disable-line react-hooks/exhaustive-deps
+  const { tenant, isLoading } = useAuth();
 
   return (
-    <TenantProvider tenant={tenant} isLoading={authLoading || tenantLoading}>
+    <TenantProvider tenant={tenant} isLoading={isLoading}>
       {children}
     </TenantProvider>
   );
