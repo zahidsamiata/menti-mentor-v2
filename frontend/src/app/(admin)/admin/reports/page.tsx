@@ -8,7 +8,7 @@
  * veya "Reddet" ile durumunu değiştirir (opsiyonel not). Tenant-scope (backend'de).
  */
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
@@ -37,6 +37,18 @@ const STATUS_FILTERS: { key: ReportStatus | 'ALL'; label: string }[] = [
   { key: 'DISMISSED', label: 'Reddedildi' },
   { key: 'ALL', label: 'Tümü' },
 ];
+
+/** Sayfaları birleştirir; sayfa sınırında kayma olursa aynı kaydı iki kez göstermez. */
+function mergeUnique(first: TenantReport[], rest: TenantReport[]): TenantReport[] {
+  const seen = new Set(first.map((r) => r.id));
+  const merged = [...first];
+  for (const r of rest) {
+    if (seen.has(r.id)) continue;
+    seen.add(r.id);
+    merged.push(r);
+  }
+  return merged;
+}
 
 function ReportCard({ report, onDone }: { report: TenantReport; onDone: () => void }) {
   const api = useApiClient();
@@ -118,11 +130,61 @@ export default function AdminReportsPage() {
   const api = useApiClient();
   const [filter, setFilter] = useState<ReportStatus | 'ALL'>('OPEN');
 
+  const statusParam = filter === 'ALL' ? {} : { status: filter };
+
+  // İlk sayfa useQuery ile gelir; "Daha fazla göster" ile eklenen sayfalar ayrı tutulur.
   const { data, isLoading, error, refetch } = useQuery(
-    () => adminApi.listReports(api, filter === 'ALL' ? {} : { status: filter }),
+    () => adminApi.listReports(api, statusParam),
     [filter],
     { enabled: true },
   );
+
+  // AN-39: sayfalama durumu. `pageGen`, filtre değişimi/yenileme sonrası geç gelen eski sayfa
+  // yanıtının yeni listeye eklenmesini engeller.
+  const [moreItems, setMoreItems] = useState<TenantReport[]>([]);
+  const [moreTotal, setMoreTotal] = useState<number | null>(null);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [moreError, setMoreError] = useState<string | null>(null);
+  const pageGen = useRef(0);
+
+  function resetPaging() {
+    pageGen.current += 1;
+    setMoreItems([]);
+    setMoreTotal(null);
+    setMoreError(null);
+    setLoadingMore(false);
+  }
+
+  function changeFilter(next: ReportStatus | 'ALL') {
+    if (next === filter) return;
+    resetPaging();
+    setFilter(next);
+  }
+
+  // Bir şikayet incelenince liste ilk sayfadan yeniden yüklenir.
+  function reload() {
+    resetPaging();
+    refetch();
+  }
+
+  const items = data ? mergeUnique(data.items, moreItems) : [];
+  const total = moreTotal ?? data?.total ?? 0;
+  const hasMore = !isLoading && items.length < total;
+
+  async function loadMore() {
+    const gen = pageGen.current;
+    setLoadingMore(true);
+    setMoreError(null);
+    const res = await adminApi.listReports(api, { ...statusParam, offset: items.length });
+    if (gen !== pageGen.current) return;
+    setLoadingMore(false);
+    if (res.ok) {
+      setMoreItems((prev) => [...prev, ...res.data.items]);
+      setMoreTotal(res.data.total);
+    } else {
+      setMoreError('Daha fazla şikayet yüklenemedi. Lütfen tekrar deneyin.');
+    }
+  }
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -134,7 +196,7 @@ export default function AdminReportsPage() {
           </p>
         </div>
         {data && (
-          <Badge variant="warning" className="text-sm px-3 py-1">{data.total}</Badge>
+          <Badge variant="warning" className="text-sm px-3 py-1">{total}</Badge>
         )}
       </div>
 
@@ -143,7 +205,7 @@ export default function AdminReportsPage() {
         {STATUS_FILTERS.map((f) => (
           <button
             key={f.key}
-            onClick={() => setFilter(f.key)}
+            onClick={() => changeFilter(f.key)}
             className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               filter === f.key ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/70'
             }`}
@@ -161,7 +223,7 @@ export default function AdminReportsPage() {
 
       {error && <AlertMessage type="error" message={error} />}
 
-      {!isLoading && data?.items.length === 0 && (
+      {!isLoading && data && items.length === 0 && (
         <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border py-16 text-center">
           <p className="text-3xl">✅</p>
           <p className="mt-2 font-medium">Bu görünümde şikayet yok</p>
@@ -171,9 +233,19 @@ export default function AdminReportsPage() {
         </div>
       )}
 
-      {data && data.items.length > 0 && (
+      {items.length > 0 && (
         <div className="space-y-3">
-          {data.items.map((r) => <ReportCard key={r.id} report={r} onDone={refetch} />)}
+          {items.map((r) => <ReportCard key={r.id} report={r} onDone={reload} />)}
+        </div>
+      )}
+
+      {moreError && <AlertMessage type="error" message={moreError} />}
+
+      {hasMore && (
+        <div className="flex justify-center">
+          <Button variant="outline" size="sm" disabled={loadingMore} onClick={() => void loadMore()}>
+            {loadingMore ? 'Yükleniyor…' : 'Daha fazla göster'}
+          </Button>
         </div>
       )}
     </div>

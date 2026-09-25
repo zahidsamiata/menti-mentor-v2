@@ -193,7 +193,10 @@ export interface TenantReport {
 
 export interface TenantReportsResponse {
   items: TenantReport[];
+  /** Filtreye uyan TÜM kayıtların sayısı (dönen sayfanın uzunluğu değil). */
   total: number;
+  limit?: number;
+  offset?: number;
 }
 
 export interface ReviewReportResponse {

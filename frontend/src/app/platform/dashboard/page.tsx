@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   isPlatformAuthError,
@@ -43,6 +43,12 @@ export default function PlatformDashboard() {
   const [reports, setReports]     = useState<SuspicionReport[]>([]);
   const [logs, setLogs]           = useState<SystemLog[]>([]);
   const [userReports, setUserReports] = useState<UserReport[]>([]);
+  // AN-39: kullanıcı şikayetleri sayfalı gelir. `userReportsTotal` filtreye uyan tüm kayıt sayısıdır;
+  // `userReportsGen`, liste yeniden yüklendikten sonra geç gelen eski sayfanın eklenmesini engeller.
+  const [userReportsTotal, setUserReportsTotal] = useState<number | null>(null);
+  const [loadingMoreUserReports, setLoadingMoreUserReports] = useState(false);
+  const [userReportsMoreError, setUserReportsMoreError] = useState<string | null>(null);
+  const userReportsGen = useRef(0);
   const [anomalies, setAnomalies] = useState<AnomalyFlag[]>([]);
   const [logCategory, setLogCategory] = useState<string>(''); // '' = tümü, 'AUDIT' = denetim izi, 'ERROR' = hatalar
   const [loading, setLoading]     = useState(true);
@@ -70,8 +76,12 @@ export default function PlatformDashboard() {
         const r = await listSuspicionReports();
         setReports(r.items);
       } else if (currentTab === 'abuse') {
+        userReportsGen.current += 1;
+        setLoadingMoreUserReports(false);
+        setUserReportsMoreError(null);
         const [rep, anom] = await Promise.all([listUserReports(), getAnomalies()]);
         setUserReports(rep.items);
+        setUserReportsTotal(typeof rep.total === 'number' ? rep.total : null);
         setAnomalies(anom.items);
       } else if (currentTab === 'logs') {
         // AUDIT bir kategori, ERROR bir seviyedir → doğru parametreye eşle.
@@ -158,6 +168,30 @@ export default function PlatformDashboard() {
       void loadData(tab);
     } catch (e) {
       notify(e instanceof Error ? e.message : 'Bildirim işaretlenemedi.');
+    }
+  }
+
+  async function loadMoreUserReports() {
+    const gen = userReportsGen.current;
+    setLoadingMoreUserReports(true);
+    setUserReportsMoreError(null);
+    try {
+      const r = await listUserReports(undefined, { offset: userReports.length });
+      if (gen !== userReportsGen.current) return;
+      setUserReports((prev) => {
+        const seen = new Set(prev.map((x) => x.id));
+        return [...prev, ...r.items.filter((x) => !seen.has(x.id))];
+      });
+      if (typeof r.total === 'number') setUserReportsTotal(r.total);
+    } catch (e) {
+      if (gen !== userReportsGen.current) return;
+      if (isPlatformAuthError(e)) {
+        router.push('/platform/login');
+        return;
+      }
+      setUserReportsMoreError('Daha fazla şikayet yüklenemedi. Lütfen tekrar deneyin.');
+    } finally {
+      if (gen === userReportsGen.current) setLoadingMoreUserReports(false);
     }
   }
 
@@ -535,6 +569,20 @@ export default function PlatformDashboard() {
                   </div>
                 ))}
               </div>
+              {userReportsMoreError && (
+                <p role="alert" className="mt-3 text-sm text-destructive">{userReportsMoreError}</p>
+              )}
+              {userReportsTotal !== null && userReports.length < userReportsTotal && (
+                <div className="mt-3 flex justify-center">
+                  <button
+                    onClick={() => void loadMoreUserReports()}
+                    disabled={loadingMoreUserReports}
+                    className="rounded-lg bg-muted hover:bg-muted/80 px-4 py-2 text-sm font-medium text-foreground transition-colors disabled:opacity-60"
+                  >
+                    {loadingMoreUserReports ? 'Yükleniyor…' : 'Daha fazla göster'}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

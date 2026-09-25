@@ -34,8 +34,16 @@ export const adminApi = {
     api<KpiData>('/api/admin/kpi'),
 
   // ── K-11: Kurum-içi şikayetler (UserReport) ────────────────────────────────
-  listReports: (api: BoundClient, params: { status?: ReportStatus } = {}): Promise<ApiResult<TenantReportsResponse>> => {
-    const qs = params.status ? `?status=${params.status}` : '';
+  // AN-39: sayfalı — `limit`/`offset` verilmezse backend varsayılanı (ilk 50) döner; `total` filtreye uyan tüm kayıt sayısıdır.
+  listReports: (
+    api: BoundClient,
+    params: { status?: ReportStatus; limit?: number; offset?: number } = {},
+  ): Promise<ApiResult<TenantReportsResponse>> => {
+    const q = new URLSearchParams();
+    if (params.status) q.set('status', params.status);
+    if (params.limit !== undefined) q.set('limit', String(params.limit));
+    if (params.offset !== undefined) q.set('offset', String(params.offset));
+    const qs = q.toString() ? `?${q.toString()}` : '';
     return api<TenantReportsResponse>(`/api/admin/reports${qs}`);
   },
   reviewReport: (
