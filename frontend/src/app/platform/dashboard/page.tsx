@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, useId } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   isPlatformAuthError,
@@ -31,6 +31,7 @@ import {
 } from '@/lib/api/platform';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { logLevelLabel, logBadgeLabel } from '@/lib/enumLabels';
+import { useModalDialog } from '@/hooks/useModalDialog';
 
 type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'abuse' | 'logs';
 
@@ -59,6 +60,12 @@ export default function PlatformDashboard() {
   const [correctionFor, setCorrectionFor] = useState<{ id: string; name: string } | null>(null);
   const [correctionNote, setCorrectionNote] = useState('');
   const [correctionSaving, setCorrectionSaving] = useState(false);
+  // F-21: düzeltme penceresi — odak içeri (ilk alan: not kutusu), Esc kapatır (gönderim sürerken
+  // kapanmaz), kapanınca odak "Düzeltme İste" düğmesine döner.
+  const correctionDialogRef = useModalDialog<HTMLDivElement>(correctionFor !== null, () => {
+    if (!correctionSaving) setCorrectionFor(null);
+  });
+  const correctionTitleId = useId();
 
   const loadData = useCallback(async (currentTab: Tab) => {
     setLoading(true); setError(null);
@@ -387,10 +394,15 @@ export default function PlatformDashboard() {
             onClick={() => !correctionSaving && setCorrectionFor(null)}
           >
             <div
-              className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-xl"
+              ref={correctionDialogRef}
+              tabIndex={-1}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={correctionTitleId}
+              className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-xl focus:outline-none"
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-lg font-semibold">Düzeltme Talebi</h2>
+              <h2 id={correctionTitleId} className="text-lg font-semibold">Düzeltme Talebi</h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 <strong>{correctionFor.name}</strong> kurumundan hangi bilgileri güncellemesini istiyorsunuz?
                 Başvuru reddedilmez; kurum notu görüp bilgilerini düzeltip tekrar gönderebilir.
@@ -400,7 +412,7 @@ export default function PlatformDashboard() {
                 onChange={(e) => setCorrectionNote(e.target.value)}
                 rows={4}
                 maxLength={1000}
-                autoFocus
+                aria-label="Düzeltme notu"
                 placeholder="Örn: Lütfen kurumsal e-posta adresi veya resmi bir belge/bağlantı ekleyin."
                 className="mt-3 w-full rounded-lg border border-border bg-background p-3 text-sm outline-none focus:ring-2 focus:ring-primary/40"
               />

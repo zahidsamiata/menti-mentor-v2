@@ -66,10 +66,12 @@ export default function MeetingFeedbackCard({
     <div className="relative w-full max-w-sm rounded-2xl border border-border bg-card p-5 shadow-lg">
       {onDismiss && (
         <button
+          type="button"
           onClick={onDismiss}
+          aria-label="Kapat"
           className="absolute right-4 top-4 text-muted-foreground transition hover:text-foreground"
         >
-          <X className="h-4 w-4" />
+          <X className="h-4 w-4" aria-hidden />
         </button>
       )}
 
@@ -121,6 +123,7 @@ export default function MeetingFeedbackCard({
             <span className="text-xs text-muted-foreground">Hiç</span>
             <input
               type="range"
+              aria-label="Bu görüşme seni hedefine yaklaştırdı mı? (1 = hiç, 5 = çok)"
               min={1}
               max={5}
               value={progress}
@@ -188,7 +191,9 @@ function ChipButton({
 }) {
   return (
     <button
+      type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
         active
           ? chip.positive

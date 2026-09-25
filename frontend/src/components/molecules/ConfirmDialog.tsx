@@ -5,7 +5,7 @@
  * Radix Dialog yerine native <dialog> kullanılır; dış bağımlılık eklenmez.
  */
 
-import { useEffect, useRef } from 'react';
+import { useId, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 
 interface ConfirmDialogProps {
@@ -27,6 +27,7 @@ export function ConfirmDialog({
   onConfirm, onCancel,
 }: ConfirmDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogTitleId = useId();
 
   useEffect(() => {
     const el = dialogRef.current;
@@ -37,10 +38,11 @@ export function ConfirmDialog({
   return (
     <dialog
       ref={dialogRef}
+      aria-labelledby={dialogTitleId}
       className="rounded-2xl border border-border bg-card p-6 shadow-xl w-full max-w-sm backdrop:bg-black/50"
       onCancel={onCancel}
     >
-      <h2 className="text-lg font-semibold">{title}</h2>
+      <h2 id={dialogTitleId} className="text-lg font-semibold">{title}</h2>
       <p className="mt-2 text-sm text-muted-foreground">{description}</p>
       <div className="mt-6 flex justify-end gap-2">
         <Button variant="outline" onClick={onCancel} disabled={isLoading}>

@@ -8,7 +8,7 @@
  * bilgi yazılmaması uyarısı verilir. Yıkıcı işlem → net onay.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useId, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
@@ -26,6 +26,7 @@ export function RejectReasonDialog({
   open, userName, isLoading = false, onConfirm, onCancel,
 }: RejectReasonDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogTitleId = useId();
   const [reason, setReason] = useState('');
 
   useEffect(() => {
@@ -38,10 +39,11 @@ export function RejectReasonDialog({
   return (
     <dialog
       ref={dialogRef}
+      aria-labelledby={dialogTitleId}
       className="rounded-2xl border border-border bg-card p-6 shadow-xl w-full max-w-md backdrop:bg-black/50"
       onCancel={onCancel}
     >
-      <h2 className="text-lg font-semibold">Kullanıcıyı Reddet</h2>
+      <h2 id={dialogTitleId} className="text-lg font-semibold">Kullanıcıyı Reddet</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         <strong>{userName}</strong> reddedilecek ve eşleşme havuzuna alınmayacak.
       </p>

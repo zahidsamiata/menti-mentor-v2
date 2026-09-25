@@ -7,12 +7,13 @@
  * veya özel not yazar. Önceden tanımlı şablonlar hızlı seçim sağlar.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useId, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { CORRECTION_NOTE_PRESETS } from '@/types/admin';
 import { cn } from '@/lib/utils';
+import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 
 interface CorrectionNoteDialogProps {
   open: boolean;
@@ -26,6 +27,8 @@ export function CorrectionNoteDialog({
   open, userName, isLoading = false, onConfirm, onCancel,
 }: CorrectionNoteDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogTitleId = useId();
+  const presetsLabelId = useId();
   const [selected, setSelected] = useState<string | null>(null);
   const [custom, setCustom] = useState('');
 
@@ -41,21 +44,33 @@ export function CorrectionNoteDialog({
   return (
     <dialog
       ref={dialogRef}
+      aria-labelledby={dialogTitleId}
       className="rounded-2xl border border-border bg-card p-6 shadow-xl w-full max-w-md backdrop:bg-black/50"
       onCancel={onCancel}
     >
-      <h2 className="text-lg font-semibold">Düzeltme Talebi</h2>
+      <h2 id={dialogTitleId} className="text-lg font-semibold">Düzeltme Talebi</h2>
       <p className="mt-1 text-sm text-muted-foreground">
         <strong>{userName}</strong> için düzeltme notu seçin veya yazın.
       </p>
 
       {/* Hızlı seçim şablonları */}
       <div className="mt-4 space-y-2">
-        <Label className="text-xs text-muted-foreground uppercase tracking-wide">Hazır Şablonlar</Label>
-        {CORRECTION_NOTE_PRESETS.map((preset) => (
+        <Label id={presetsLabelId} className="text-xs text-muted-foreground uppercase tracking-wide">Hazır Şablonlar</Label>
+        {/* F-21: tek seçim → radiogroup. Kapsayıcı da space-y-2 taşır; dış aralık (etiket ↔ ilk
+            şablon) ve iç aralık (şablonlar arası) öncekiyle aynı kalır. */}
+        <div
+          role="radiogroup"
+          aria-labelledby={presetsLabelId}
+          onKeyDown={(e) => handleRadioGroupKeyDown(e)}
+          className="space-y-2"
+        >
+        {CORRECTION_NOTE_PRESETS.map((preset, index) => (
           <button
             key={preset}
             type="button"
+            role="radio"
+            aria-checked={selected === preset && !custom}
+            tabIndex={rovingTabIndex(index, custom ? -1 : CORRECTION_NOTE_PRESETS.findIndex((p) => p === selected))}
             onClick={() => { setSelected(preset); setCustom(''); }}
             className={cn(
               'w-full rounded-lg border p-3 text-left text-sm transition-all',
@@ -67,6 +82,7 @@ export function CorrectionNoteDialog({
             {preset}
           </button>
         ))}
+        </div>
       </div>
 
       {/* Özel not */}

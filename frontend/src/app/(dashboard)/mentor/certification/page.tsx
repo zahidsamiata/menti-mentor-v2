@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useId } from 'react';
 import Link from 'next/link';
 import { shuffle } from '@/lib/shuffle';
 import { useAuth } from '@/providers/AuthProvider';
@@ -12,6 +12,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { certificationApi } from '@/lib/api/certification';
 import { topicLabel } from '@/lib/certificationTopics';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
+import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 import type { CertQuestion, CertReveal, CertResult, CertOutcome } from '@/types/certification';
 
 // Renk semantiği: yeşil=doğru, sarı=kabul edilebilir, kırmızı=yanlış (renk körlüğü için ikon da).
@@ -78,6 +79,7 @@ export default function MentorCertificationPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   // 2 denemeden sonra bekleme (cooldown) — bu sırada öğrenme yolculuğuna davet ederiz.
   const [cooldownActive, setCooldownActive] = useState(false);
+  const scenarioTitleId = useId();
 
   const loadQuestions = useCallback(async () => {
     setLoading(true);
@@ -316,15 +318,27 @@ export default function MentorCertificationPage() {
               </Badge>
             )}
           </div>
-          <CardTitle className="text-base leading-snug mt-2">🎬 {currentQuestion.scenario}</CardTitle>
+          <CardTitle id={scenarioTitleId} className="text-base leading-snug mt-2">🎬 {currentQuestion.scenario}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
+          {/* F-21: şıklar radiogroup. Seçim cevabı hemen açtığı için ok tuşu yalnız odağı taşır;
+              seçim Boşluk/Enter (ya da tıklama) ile yapılır. */}
+          <div
+            role="radiogroup"
+            aria-labelledby={scenarioTitleId}
+            onKeyDown={(e) => handleRadioGroupKeyDown(e, { selectOnMove: false })}
+            className="space-y-3"
+          >
           {displayOptions.map((o, idx) => {
             const isSelected = selectedKey === o.key;
             const style = reveal && reveal.outcome ? OUTCOME_STYLE[reveal.outcome] : null;
             return (
               <button
                 key={o.key}
+                type="button"
+                role="radio"
+                aria-checked={isSelected}
+                tabIndex={rovingTabIndex(idx, displayOptions.findIndex((d) => d.key === selectedKey))}
                 onClick={() => choose(o.key)}
                 disabled={Boolean(reveal) || revealing}
                 className={`w-full text-left rounded-xl border p-3 text-sm transition-all ${
@@ -334,7 +348,6 @@ export default function MentorCertificationPage() {
                     ? 'opacity-40 cursor-default border-border bg-muted'
                     : 'border-border hover:border-primary/50 hover:bg-primary/5 cursor-pointer'
                 }`}
-                aria-pressed={isSelected}
               >
                 {/* K-07: görüntü harfi karıştırmadan SONRA sıraya göre (üstten alta A→D).
                     Cevap kimliği o.key ile korunur (choose(o.key)). */}
@@ -349,6 +362,7 @@ export default function MentorCertificationPage() {
               </button>
             );
           })}
+          </div>
 
           {reveal && (
             <div className="pt-2 flex items-center justify-between">

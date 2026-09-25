@@ -5,8 +5,9 @@
  * POST /api/users/:id/report — neden + opsiyonel açıklama. Asıl doğrulama/spam engeli backend'de.
  */
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
+import { useModalDialog } from '@/hooks/useModalDialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -43,6 +44,11 @@ export function ReportUserButton({ targetUserId, targetName }: { targetUserId: s
     setReason('SPAM');
   };
 
+  // F-21: odak pencereye taşınır, Esc kapatır, kapanınca odak "Şikayet et" düğmesine döner.
+  const dialogRef = useModalDialog<HTMLDivElement>(open, close);
+  const titleId = useId();
+  const reasonLabelId = useId();
+
   return (
     <>
       <button
@@ -56,12 +62,17 @@ export function ReportUserButton({ targetUserId, targetName }: { targetUserId: s
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={close}>
           <div
-            className="w-full max-w-md rounded-2xl border border-border bg-card p-6 space-y-4"
+            ref={dialogRef}
+            tabIndex={-1}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            className="w-full max-w-md rounded-2xl border border-border bg-card p-6 space-y-4 focus:outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
-              <h3 className="text-lg font-semibold text-foreground">Şikayet: {targetName}</h3>
-              <p className="text-xs text-muted-foreground mt-0.5">Şikayetiniz yöneticiye iletilir. Kötüye kullanım ciddi değerlendirilir.</p>
+              <h3 id={titleId} className="text-lg font-semibold text-foreground">Şikayet: {targetName}</h3>
+              <p id={reasonLabelId} className="text-xs text-muted-foreground mt-0.5">Şikayetiniz yöneticiye iletilir. Kötüye kullanım ciddi değerlendirilir.</p>
             </div>
 
             {state === 'sent' ? (
@@ -71,7 +82,7 @@ export function ReportUserButton({ targetUserId, targetName }: { targetUserId: s
               </div>
             ) : (
               <>
-                <div className="space-y-1.5">
+                <div role="radiogroup" aria-label="Şikayet nedeni" className="space-y-1.5">
                   {REASONS.map((r) => (
                     <label key={r.key} className={cn(
                       'flex items-center gap-2 rounded-lg border px-3 py-2 text-sm cursor-pointer transition-colors',
@@ -84,6 +95,7 @@ export function ReportUserButton({ targetUserId, targetName }: { targetUserId: s
                 </div>
 
                 <textarea
+                  aria-label="Ek açıklama (opsiyonel)"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   maxLength={1000}

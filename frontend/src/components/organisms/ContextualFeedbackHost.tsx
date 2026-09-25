@@ -2,6 +2,7 @@
 
 import { useMeeting } from '@/context/MeetingContext';
 import MeetingFeedbackCard from '@/components/organisms/MeetingFeedbackCard';
+import { useModalDialog } from '@/hooks/useModalDialog';
 
 const TENANT_KEY = 'X-Tenant-Id';
 
@@ -21,6 +22,8 @@ const TENANT_KEY = 'X-Tenant-Id';
  */
 export default function ContextualFeedbackHost() {
   const { pendingFeedback, dismissFeedback } = useMeeting();
+  // F-21: odak kartın içine taşınır, Esc "şimdi değil" (dismiss) gibi davranır, kapanınca odak döner.
+  const dialogRef = useModalDialog<HTMLDivElement>(Boolean(pendingFeedback), dismissFeedback);
 
   if (!pendingFeedback) return null;
 
@@ -35,8 +38,11 @@ export default function ContextualFeedbackHost() {
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
+      aria-label="Görüşme geri bildirimi"
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 backdrop-blur-sm sm:items-center"
     >
       <MeetingFeedbackCard
