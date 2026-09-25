@@ -126,6 +126,12 @@ etmeyen ikisinin saatlerce suren emegi tamamen kayboldu.
 ═══════════════════════════════════════════════════════════════
 00-KUYRUK.md'deki durumu BEKLIYOR olan isleri su oncelikle isle:
 
+ -1. ⭐ PO ÖNCELİK BLOĞU (00-KUYRUK.md'de '⭐ ÖNCELİK (PO)' satırı): bu satırda sayılan işler,
+     KAPISINDAN BAĞIMSIZ olarak her şeyden önce ve yazılı sırayla işlenir. 🟢 olanlar merge edilir.
+     🟡 olanlar yapılır, PR açılır, MERGE EDİLMEZ (PR-ACIK). 🔴 olanlar KARAR boşsa atlanır.
+     Madde 5'teki '🟢'ler bitmeden 🟡'ye geçme' kuralı bu blok için GEÇERSİZDİR. Bu 🟡 işler
+     aile PR'ına KATILMAZ: her biri ayrı PR olur (güvenlik yamaları tek tek incelenebilsin ve
+     geri alınabilsin).  (PO güncellemesi, 2026-09-25)
  0. ⛔ CIKIS BLOKERI isaretli AJAN isleri (Not sutununda "⛔ CIKIS BLOKERI (T1/T2/T3)")
     — bunlar canliya cikisi tek tek engelliyor, hepsinden once gelir.
  1. ⭐ ASAMA I — ICERIK (PO "EN ON SIRA", 2026-09-03)
