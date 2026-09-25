@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-26 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Tam Soru Dökümü + Puanlama/Felsefe Analizi (2026-08-26)
 
 **🟢 BYPASS (yalnız-belge) · 📸 DONDURULMUŞ (2026-08-26)** — kaynak: backend seed dosyaları + servis kodu (kod gerçeği). Kullanıcı yanıtı/PII **yoktur**.

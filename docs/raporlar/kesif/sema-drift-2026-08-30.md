@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-30 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-30 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+
 # ŞEMA DRIFT KEŞFİ — Fiziksel DB ↔ schema.prisma (F.8)
 
 **📸 DONDURULMUŞ** · 2026-08-30 · salt-okuma keşif (DB'ye YAZILMADI, şema DEĞİŞMEDİ, migration YOK) · Kaynak: canlı Neon (`ep-fancy-tooth-ab4u5xhr`) `pg_catalog` + `information_schema` + `prisma migrate diff`

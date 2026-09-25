@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-15 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # İçerik Dökümü — Öğrenme Yolculuğu (2026-08-15)
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: `backend/prisma/seed-learning-journey.ts` + canlı DB salt-okuma sayımı.

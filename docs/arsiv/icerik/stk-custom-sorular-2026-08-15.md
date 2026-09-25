@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-15 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # İçerik Dökümü — STK Custom Sorular (2026-08-15)
 
 **📸 DONDURULMUŞ (2026-08-15)** — kaynak: canlı DB salt-okuma sayımı + `frontend/src/app/(admin)/admin/questions/page.tsx`.

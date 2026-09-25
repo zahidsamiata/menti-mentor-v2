@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Yarım-İş & Niyet Envanteri — Kod Arkeolojisi (2026-08-23)
 
 **📸 DONDURULMUŞ (2026-08-23)** — o günün fotoğrafı, güncellenmez. Kanıtlar backend submodule pointer `ba92dfa` koduna dayanır.

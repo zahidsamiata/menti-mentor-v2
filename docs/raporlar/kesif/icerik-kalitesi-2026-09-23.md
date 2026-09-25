@@ -1,3 +1,7 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+> İŞLENME: ✅ işlendi (2026-09-23, tur: ANALİZ TURU BULGULARI DOSYAYA İŞLENDİ) → `00-KUYRUK` AŞAMA AN · KARAR-58/59 ("IK" atıfları) · `03-PO-ELLE-ISLER` · kutu: 2026-09-23 DA turu (belge-duzeni-rehberi § KURAL 23)
+
 # İÇERİK KALİTESİ KONSEYİ — Bölüm A–D, F, G
 
 > **📸 DONDURULMUŞ — 2026-09-23.** Plan değildir; bulguları kuyruğa işlendikten sonra güncellenmez.

@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-02 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Sosyal Girişim Stratejisi, Onboarding Akışları, Panel Tasarımları ve Güvenlik Denetimi
 **📸 DONDURULMUŞ (~2026-08-02)** — eski strateji/güvenlik denetimi; arşiv, güncellenmez. Güncel güvenlik: `docs/kararlar/konu/04-guvenlik-ve-kvkk.md`.
 

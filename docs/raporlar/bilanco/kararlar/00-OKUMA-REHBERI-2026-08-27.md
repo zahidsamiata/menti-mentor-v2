@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-27 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # BİLANÇO KARAR DOSYALARI — OKUMA REHBERİ & MUTABAKAT (Tur-5b)
 
 **📸 DONDURULMUŞ (2026-08-27)** — Tur-5b bilanço karar dosyalarının okuma dizini (üst-etiket eklendi: G9-10, 2026-08-28).

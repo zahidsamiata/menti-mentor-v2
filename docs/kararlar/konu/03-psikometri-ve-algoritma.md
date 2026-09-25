@@ -1,3 +1,6 @@
+> 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: ilgili kod ya da karar değişince
+
 # 03 — PSİKOMETRİ VE EŞLEŞTİRME ALGORİTMASI
 **🔄 YAŞAYAN** (canonical: psikometri ve eşleştirme algoritması)
 **Son güncelleme:** 2026-08-02 · Kaynak: psikometri/algoritma chat'i (ana), repo-inceleme chat'i

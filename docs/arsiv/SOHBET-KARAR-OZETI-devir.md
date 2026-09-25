@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-02 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # MENTİMENTOR — SOHBET KARAR & DURUM ÖZETİ (devir/hafıza belgesi)
 **📸 DONDURULMUŞ** (arşiv — eski devir/özet; tarih ~2026-08-02, kesin değil; güncel karar 01–10'da)
 

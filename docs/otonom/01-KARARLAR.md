@@ -1,3 +1,6 @@
+> 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt § 0.4
+> TÜR: 🔥 · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: PO bir CEVAP yazınca ya da yeni kart açılınca
+
 # 01-KARARLAR — Ürün Karar Kuyruğu (v2)
 
 **Nasıl cevaplarsın:** Her kartın en altındaki `**CEVAP:**` satırına harf yaz. Örnek: `**CEVAP:** A`

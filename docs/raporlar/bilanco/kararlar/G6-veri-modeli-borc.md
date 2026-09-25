@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-27 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # BİLANÇO KARAR DOSYASI — G6: Veri modeli / migration / teknik borç
 
 **📸 DONDURULMUŞ** · 2026-08-27 · Tur-5b · Kaynak: `00-SAYIM-2026-08-27.md` (c) G6 başlığı + `karar-defteri-2026-08-26.md` GRUP 8 içindeki veri-modeli kalemleri. Salt-okuma + kod-teyit; kod/DB/PR/commit YOK, mevcut belge değiştirilmedi.

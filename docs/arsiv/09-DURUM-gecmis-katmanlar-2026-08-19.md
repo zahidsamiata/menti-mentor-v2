@@ -1,3 +1,6 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-08-19 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # 09-DURUM — Geçmiş Katmanlar Arşivi
 
 **📸 DONDURULMUŞ (2026-08-19)** — bu belge `09-DURUM.md`'nin başlığında istiflenen tarihsel katmanları
