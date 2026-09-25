@@ -35,6 +35,21 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: { template: '%s — Mentorluk Platformu', default: 'Mentorluk Platformu' },
   description: 'Mentor-menti eşleştirme platformu',
+  // Y-09: paylaşım (OG/Twitter) meta'sı site geneli — önceden yalnız ana sayfadaydı.
+  // Görseller `app/opengraph-image.tsx` + `app/twitter-image.tsx` dosya konvansiyonundan
+  // otomatik eklenir (burada `images` verilmez; verilirse dosya görselini ezer).
+  openGraph: {
+    title:       'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
+    description: 'DISC mizaç tabanlı mentörlük platformu. Ücretsiz, kurulumu 10 dakika.',
+    type:        'website',
+    locale:      'tr_TR',
+    siteName:    'MentiMentor',
+  },
+  twitter: {
+    card:        'summary_large_image',
+    title:       'MentiMentor — Akıllı Mentörlük',
+    description: 'DISC mizaç tabanlı mentörlük platformu. Dernekler ve vakıflar için.',
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

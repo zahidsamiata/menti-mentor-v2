@@ -21,18 +21,8 @@ export const metadata: Metadata = {
   description:
     'Dernekler, vakıflar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
     'kapalı devre mentörlük platformu. Kurulum 10 dakika, sonsuza kadar ücretsiz.',
-  openGraph: {
-    title:       'MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin',
-    description: 'DISC mizaç tabanlı mentörlük platformu. Ücretsiz, kurulumu 10 dakika.',
-    type:        'website',
-    locale:      'tr_TR',
-    siteName:    'MentiMentor',
-  },
-  twitter: {
-    card:        'summary_large_image',
-    title:       'MentiMentor — Akıllı Mentörlük',
-    description: 'DISC mizaç tabanlı mentörlük platformu. Dernekler ve vakıflar için.',
-  },
+  // Y-09: openGraph/twitter kök `layout.tsx`'e taşındı (aynı metinler) — burada yeniden
+  // tanımlanırsa kök görseli (`opengraph-image`) sığ birleştirmede düşebilir.
   robots: {
     index:  true,
     follow: true,
