@@ -1,5 +1,9 @@
 import type { ReactNode } from 'react';
 import { DashboardNav, DashboardUserCard } from '@/components/organisms/DashboardNav';
+import { PRIVATE_AREA_METADATA } from '@/lib/privateAreaMetadata';
+
+// Y-08: oturum alanı arama motoru dizinine girmez.
+export const metadata = PRIVATE_AREA_METADATA;
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (

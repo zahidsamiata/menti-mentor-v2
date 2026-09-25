@@ -14,10 +14,13 @@
 import { Suspense } from 'react';
 import { type Metadata } from 'next';
 import OnboardingContent from './_OnboardingContent';
+import { PRIVATE_AREA_METADATA } from '@/lib/privateAreaMetadata';
 
 export const metadata: Metadata = {
   title:       'Profilini Tamamla',
   description: 'Seni en iyi eşleşmeye kavuşturacak profil adımları.',
+  // Y-08: oturum sonrası profil sihirbazı arama motoru dizinine girmez.
+  ...PRIVATE_AREA_METADATA,
 };
 
 function OnboardingShell() {
