@@ -24,6 +24,7 @@ import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidge
 import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
 import { NotificationOptInButton } from '@/components/organisms/NotificationOptInButton';
+import { weeklyLimitText, WEEKLY_LIMIT_FALLBACK } from '@/components/molecules/WeeklyMeetingLimitNote';
 import type { MentorMatch } from '@/types/matching';
 
 export default function MentiDashboardPage() {
@@ -64,6 +65,16 @@ export default function MentiDashboardPage() {
     [api],
     { enabled: !isApproved && !needsDiscTest },
   );
+
+  // I-05 (madde 156): bekleme odasında da kurumun haftalık görüşme sıklığı görünsün.
+  // Yalnız gerçek kurum ayarı varsa gösterilir — veri yok/hata ise afişe genel metin eklenmez.
+  const { data: weeklyLimitData } = useQuery(
+    () => meetingsApi.getWeeklyLimit(api),
+    [api],
+    { enabled: !isApproved && !needsDiscTest },
+  );
+  const waitingWeeklyLimitText = weeklyLimitText(weeklyLimitData?.maxMeetingsPerWeek);
+  const showWaitingWeeklyLimit = waitingWeeklyLimitText !== WEEKLY_LIMIT_FALLBACK;
 
   // K-09: metrik kartları gerçek toplantı verisinden (backend /api/meetings kendi
   // toplantılarına kapsar). Yalnız onaylı menti için — aksi halde zaten toplantı yok (0 doğru).
@@ -220,6 +231,11 @@ export default function MentiDashboardPage() {
             <strong className="font-semibold">öğrenme yolculuğunu</strong> keşfedebilir,{' '}
             <strong className="font-semibold">DISC profilini</strong> gözden geçirerek hazırlanabilirsin.
           </p>
+          {showWaitingWeeklyLimit && (
+            <p data-testid="waiting-weekly-meeting-limit" className="text-xs text-amber-700 dark:text-amber-400">
+              🗓️ {waitingWeeklyLimitText}
+            </p>
+          )}
           {/* F-20: onay/eşleşme olunca haberdar olmak için tarayıcı bildirim izni istemi */}
           <NotificationOptInButton />
         </div>
