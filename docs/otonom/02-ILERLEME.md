@@ -1000,3 +1000,12 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - **AN-38 → 🔴 KARAR-87**: platform yöneticisi tek ortak hesap; "gerçek ad" yeni hesap modeli ister.
 - Canlı `/health` (merge sonrası): 200 · db up · smtp verified · cron enabled.
 - Açık: backend #112 (AN-39, frontend eşiyle birlikte merge edilecek) · #113 (AN-11) · #114 (IC-05) · çatı #286 (Y-16) · #287 (K-10) — inceleme/CI sürüyor.
+
+### ARA KAYIT 4 · 2026-09-25 — "açık PR" ve "pointer bekliyor" kalemleri kapanışı
+- `:21` "F-04 backend #102 pointer bekliyor" → **KAPANDI:** çatı pointer #276 (`970b141`) ile canlıda.
+- `:24` "backend #103 KR-06 · çatı #275 KR-09 CI bekliyor" → **KAPANDI:** #103 MERGED (`970b141`, pointer #276 ile canlıda) · #275 MERGED (`208499b`).
+- `:1002` "backend #112/#113/#114 · çatı #286/#287 açık" → **KAPANDI:** hepsi MERGED; backend olanlar pointer #290 (`a958faf`) ile canlıda.
+- Bugün açık kalan: çatı **#303** (Y-10 + backend #123 Y-03 pointer'ı — inceleme sürüyor) · backend **#110** (🛑 bilerek açık: "MERGE ETME — çerez izni yok, KVKK riski"; dokunulmadı).
+- Pointer: çatı main `backend` = `187e4d3` (backend main `e17a4c3`; fark yalnız #123 → #303 ile kapanacak).
+- KARAR-81 cevabı kaydedildi (PO): temizlik sürer, taslaklar test verisi; ileriye dönük boşluk → **KR-23** (🟡, yeni satır).
+- Merge kuralları `docs/otonom/OTONOM-PROMPT.txt`'ye yazıldı (Bölüm 2.1, 4/-1, 4/5, 4/6, 7, **7b**, 8) — denetleyici reddi YOK.
