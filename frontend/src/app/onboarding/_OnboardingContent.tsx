@@ -100,6 +100,9 @@ export default function OnboardingContent() {
   const [isSubmitting,   setIsSubmitting]   = useState(false);
   const [stepError,      setStepError]      = useState<string | null>(null);
   const [questionsError, setQuestionsError] = useState<string | null>(null);
+  // "Yükleniyor" ile "boş liste" ayrımı (PS-11): başlangıç `[]` iki durumda da aynı
+  // görünüyordu → boş gelen listede gösterge sonsuza kadar dönüyordu.
+  const [questionsLoaded, setQuestionsLoaded] = useState(false);
 
   // ── Soru çekimi — mount'ta ────────────────────────────────────────────────
   useEffect(() => {
@@ -112,6 +115,7 @@ export default function OnboardingContent() {
       } else {
         setQuestionsError(result.error.message ?? 'Sorular yüklenemedi. Sayfayı yenileyin.');
       }
+      setQuestionsLoaded(true);
     })();
   }, [accessToken, user]);
 
@@ -212,8 +216,23 @@ export default function OnboardingContent() {
                 Yenile
               </button>
             </div>
+          ) : questions.length === 0 && questionsLoaded ? (
+            // Boş havuz — emsal: /disc-test `DiscTestEmpty`. Akışı değiştirmemek için
+            // adım atlatılmaz; yalnız yeniden deneme sunulur.
+            <div className="text-center py-12 space-y-3" role="status">
+              <p className="text-base font-semibold text-foreground">Şu an gösterilecek soru yok</p>
+              <p className="text-sm text-muted-foreground max-w-sm mx-auto">
+                Mizaç testi soruları henüz hazır değil. Biraz sonra yeniden deneyebilir ya da kurum yöneticinle iletişime geçebilirsin.
+              </p>
+              <button
+                className="text-sm text-primary underline"
+                onClick={() => window.location.reload()}
+              >
+                Yeniden dene
+              </button>
+            </div>
           ) : questions.length === 0 ? (
-            <div className="flex justify-center py-12">
+            <div className="flex justify-center py-12" aria-label="Sorular yükleniyor">
               <div className="h-10 w-10 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
             </div>
           ) : (
