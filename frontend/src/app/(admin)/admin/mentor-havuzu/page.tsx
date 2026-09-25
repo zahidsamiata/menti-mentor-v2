@@ -35,6 +35,7 @@ export default function MentorHavuzuPage() {
   const { data, isLoading, error } = useQuery(
     () => adminApi.listUsers(api, { role: 'MENTOR', page }),
     [page],
+    { cacheKey: `admin:users:MENTOR:${page}` },
   );
 
   return (

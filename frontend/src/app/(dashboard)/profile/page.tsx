@@ -84,7 +84,7 @@ export default function ProfilePage() {
   const { data: profile, isLoading: profileLoading } = useQuery<UserProfileData>(
     fetcher,
     [user?.id],
-    { enabled: !!user?.id },
+    { enabled: !!user?.id, cacheKey: 'users:me:profile' },
   );
 
   // Form alanlarını mevcut veriyle doldur

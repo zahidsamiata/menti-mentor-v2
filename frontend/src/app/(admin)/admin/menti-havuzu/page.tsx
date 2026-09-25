@@ -33,6 +33,7 @@ export default function MentiHavuzuPage() {
   const { data, isLoading, error } = useQuery(
     () => adminApi.listUsers(api, { role: 'MENTI', page }),
     [page],
+    { cacheKey: `admin:users:MENTI:${page}` },
   );
 
   return (

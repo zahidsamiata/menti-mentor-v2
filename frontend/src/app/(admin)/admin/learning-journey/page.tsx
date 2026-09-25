@@ -50,6 +50,7 @@ export default function AdminLearningJourneyPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => learningJourneyApi.adminList(api, audience),
     [api, audience],
+    { cacheKey: `admin:learning-journey:${audience}` },
   );
 
   const stages = data?.items ?? [];

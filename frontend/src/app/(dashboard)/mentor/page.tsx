@@ -64,21 +64,21 @@ export default function MentorDashboardPage() {
   const { data: candidatesData, isLoading: candidatesLoading } = useQuery(
     () => matchingApi.getRankedMentis(api, user?.id ?? ''),
     [api, user?.id],
-    { enabled: Boolean(user?.id) },
+    { enabled: Boolean(user?.id), cacheKey: `matching:ranked-mentis:${user?.id}` },
   );
 
   // ── Onay bekleyen toplantı talepleri ────────────────────────────────────────
   const { data: pendingMeetings, refetch: refetchPending } = useQuery(
     () => meetingsApi.list(api, { status: 'PENDING' }),
     [api],
-    { enabled: Boolean(user?.id) },
+    { enabled: Boolean(user?.id), cacheKey: 'meetings:list:PENDING' },
   );
 
   // ── Panel özet metrikleri ───────────────────────────────────────────────────
   const { data: metrics } = useQuery(
     () => mentorMetricsApi.get(api, user?.id ?? ''),
     [api, user?.id],
-    { enabled: Boolean(user?.id) },
+    { enabled: Boolean(user?.id), cacheKey: `mentor-metrics:${user?.id}` },
   );
 
   // ── Yaklaşan (onaylı) toplantılar ───────────────────────────────────────────
@@ -87,7 +87,7 @@ export default function MentorDashboardPage() {
   const { data: scheduledMeetings } = useQuery(
     () => meetingsApi.list(api, { status: 'SCHEDULED' }),
     [api],
-    { enabled: Boolean(user?.id) },
+    { enabled: Boolean(user?.id), cacheKey: 'meetings:list:SCHEDULED' },
   );
   const upcomingMeetings = (scheduledMeetings?.items ?? [])
     .filter((m) => new Date(m.startsAt).getTime() >= Date.now())

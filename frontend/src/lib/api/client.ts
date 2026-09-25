@@ -12,6 +12,7 @@
  */
 
 import type { ApiError, ApiResult } from '@/types/api';
+import { invalidateQueries } from '@/lib/queryCache';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
@@ -60,11 +61,22 @@ export async function apiClient<T>(
   if (!result.ok && result.status === 401 && withRefresh && refreshCallbackRef.current) {
     const newToken = await refreshCallbackRef.current();
     if (newToken) {
-      return executeRequest<T>(path, method, body, newToken, tenantId, extra);
+      const retried = await executeRequest<T>(path, method, body, newToken, tenantId, extra);
+      invalidateAfterWrite(path, method, retried.ok);
+      return retried;
     }
   }
 
+  invalidateAfterWrite(path, method, result.ok);
   return result;
+}
+
+/**
+ * F-32: veri değiştiren başarılı istekten sonra sekme önbelleği bayatlar → tamamen geçersiz kıl.
+ * `/api/auth/*` (yenileme/giriş/çıkış) hariç: bunlar veriyi değiştirmez, önbelleği oturum kapsamı yönetir.
+ */
+function invalidateAfterWrite(path: string, method: string, ok: boolean): void {
+  if (ok && method !== 'GET' && !path.startsWith('/api/auth/')) invalidateQueries();
 }
 
 async function executeRequest<T>(
