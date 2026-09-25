@@ -105,7 +105,7 @@
 | B4 | Psikometrik ön izleme ucunda kurum kapsamı hatalı | Kritik | [D] | KR-04 | ayrıntı kapanışta eklenecek |
 | B5 | Zamanlanmış iş tetikleme uçlarında yetki kapsamı hatalı | Yüksek | [D] | KR-05 · 🔴 KARAR-79 | ayrıntı kapanışta eklenecek |
 | B6 | Genel istek sınırlamasında anahtar seçimi hatalı | Yüksek | [D] | K-14 | ayrıntı kapanışta eklenecek |
-| B7 | Görüşme bağlantısı alanında girdi doğrulaması eksik | Yüksek | [teyit gerek] | GV-03 | ayrıntı kapanışta eklenecek |
+| B7 | Görüşme bağlantısı alanında girdi doğrulaması eksik | Yüksek | [teyit gerek] | GV-03 | ✅ kapandı — bkz. Kapanış ekleri |
 | B8 | OAuth yolunda onay kapısı eksik | Yüksek | [teyit gerek] | ❓ U-08 ile ilişkisi belirsiz (satır açılmadı) | ayrıntı kapanışta eklenecek |
 | B9 | Kurum dondurma/ret durumu erişime yansımıyor | Yüksek | [teyit gerek] | ❓ GV-10 kapsamında olabilir (satır açılmadı) | ayrıntı kapanışta eklenecek |
 | B10 | Kurum-içi rol kaynağı hatalı | Yüksek | [teyit gerek] | GV-10 | ayrıntı kapanışta eklenecek |
@@ -238,4 +238,4 @@ Arşivde bu bulguların hiçbiriyle örtüşen BİTTİ satırı çıkmadı.
 - **B3 · kapandı: backend #95 (`2d4c824`) + çatı #269** — `backend/src/controllers/feedbackLogController.ts` `createFeedbackLog`: MENTOR yalnız kendi adına ve kurum içinde görüşme kaydı olan menti için yazıyor; ret durumunda kayıt ve kombinasyon skoru değişmiyor. Test: `backend/tests/feedbacklog-identity.test.ts`.
 - **B4 · kapandı: backend #96 (`e5e1167`) + çatı #269** — `backend/src/controllers/adaptiveTestController.ts` `previewAdaptiveResult`: hedef kullanıcı `id + tenantId + isActive` ile doğrulanıyor (komşu uçlarla aynı). Test: `backend/tests/adaptive-preview-scope.test.ts`.
 - **B6 · kapandı (yalnız anahtar ayağı): backend #97 (`43bffa3`) + çatı #269** — `backend/src/middleware/rateLimiter.ts` `generalRateLimitKey`: kova artık istemci başlığından değil, doğrulanmış erişim anahtarındaki kullanıcıdan ya da IP'den. `server.ts` `trust proxy` ayarı yapılmadı (PO turu; değer gerçek vekil sayısı olmalı). Test: `backend/tests/general-rate-limit-key.unit.test.ts`.
-
+- **B7 · kapandı: backend #107 (`c6f22dd`) + çatı #284 (frontend) + çatı #289 (pointer `d61f31f`)** — `backend/src/services/safeUrl.ts` `isHttpUrl`: randevu oluşturmada görüşme bağlantısı yalnız http(s) adres kabul ediliyor; `frontend/src/lib/safeUrl.ts` + `frontend/src/app/(dashboard)/meetings/page.tsx`: eski kayıtlarda da bağlantı yalnız güvenli adres ise tıklanabilir. Test: `backend/tests/meeting-location-url.test.ts` · `frontend/src/__tests__/meetings-location.test.tsx`.

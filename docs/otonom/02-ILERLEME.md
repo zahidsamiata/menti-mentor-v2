@@ -990,3 +990,13 @@ Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır k
 
 ---
 TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · sıradaki: U-10 (4 ekran boş-durum) ya da V-01/V-02 (güvenlik). K-20 YAPILMADI (🟢 iş kaldı, DURMAMA D.1). Bağlam doldu → temiz kesim (D.4). Sonraki tur aynı promptla devam.
+
+### ARA KAYIT 3 · 2026-09-25 — canlıya çıkanlar (pointer #289 + çatı #285/#288)
+- **GV-03** (backend #107 + çatı #284) — CANLIDA BAK: görüşme kartında bağlantı yalnız http(s) adres ise tıklanabilir.
+- **KR-17** (backend #108) — CANLIDA BAK: mentör aynı saatteki ikinci randevuyu onaylayamıyor, çakışma uyarısı görüyor.
+- **GV-21 / GV-22 / GV-23** (backend #111 / #109 / #110) — sertleştirme; CANLIDA BAK: hesabını kapatan kullanıcının oturumu tarayıcıda da kapanıyor (GV-23); diğer ikisinde ekranda değişiklik yok.
+- **K-06** (çatı #288) — CANLIDA BAK: öğrenme yolculuğunda seçimden sonra diğer şıkların açıklamaları okunuyor.
+- **F-33** (çatı #285; ilk inceleme SORUN VAR → düzeltildi → ONAY) — CANLIDA BAK: menti/mentör panelinde solda kullanıcı kartı (ad, rol, e-posta, Çıkış Yap).
+- **AN-38 → 🔴 KARAR-87**: platform yöneticisi tek ortak hesap; "gerçek ad" yeni hesap modeli ister.
+- Canlı `/health` (merge sonrası): 200 · db up · smtp verified · cron enabled.
+- Açık: backend #112 (AN-39, frontend eşiyle birlikte merge edilecek) · #113 (AN-11) · #114 (IC-05) · çatı #286 (Y-16) · #287 (K-10) — inceleme/CI sürüyor.
