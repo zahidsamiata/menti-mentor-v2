@@ -130,6 +130,10 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-86** | **Platform üye listesinde kişilik tipi** | **0** (yeni iş) | ⬜ boş · KVKK · öneri A (gösterilmesin) |
 | **KARAR-87** | **Birden çok platform yöneticisi olacak mı?** | **1** (AN-38) | ⬜ boş · yetki · öneri A (tek hesap kalsın) |
 | **KARAR-88** | **Hakkımızda / İletişim + yüzen WhatsApp** | **2** (Y-07, Y-11) | ⬜ boş · kurumlara görünen metin · öneri A (iki sayfa + e-posta) |
+| **KARAR-89** | **Görüşme değerlendirmesinin tek kutusu** | **3** (KR-08, AN-49, KR-11) | ⬜ boş · MIGRATION · ⚠️ KARAR-77 ile çelişki · öneri B |
+| **KARAR-90** | **Görüşme sonrası yeni sorular (AN-48)** | **1** | ⬜ boş · öneri A şimdi + B paket |
+| **KARAR-91** | **Görüşme değerlendirmeleri saklama süresi** | **1** | ⬜ boş · KVKK/hukuki · öneri C şimdi |
+| **KARAR-92** | **Oryantasyon kilidi tetiklensin mi** | **1** | ⬜ boş · öneri B (2 ardışık) |
 
 ---
 
@@ -1501,6 +1505,64 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Benim önerim:** A — bugün gerçek kullanıcı az; anlık kanal açmak cevap yükü doğurur, e-posta yeterli. *(Bu senin ürün kararın, önerime güvenme.)*
 **Senden gereken (A veya B seçersen):** (1) Hakkımızda için 3-5 cümle: kim, neden, kimin için. (2) Resmi iletişim e-postası: `destek@mentimentor.io` mı, başka bir adres mi? (3) B seçersen WhatsApp numarası.
 **Cevap vermezsen:** Y-07 ve Y-11'in WhatsApp kısmı bekler. "Yukarı çık" düğmesi teknik bir iş, ondan bağımsız yapılır.
+**CEVAP:**
+
+---
+
+### KARAR-89 · Görüşme değerlendirmesinin TEK kutusu hangisi olsun? (3 iş açar: KR-08, AN-49, KR-11) [ÜRÜN KARARI · MIGRATION]
+> ⭐ Kaynak: AN-47 envanteri `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md` (çatı #301; 8 iddia koda karşı doğrulandı, inceleme 5829476679). **KARAR-77 (A) cevabıyla ÇELİŞKİ tespiti — KR-08 bu kart cevaplanana kadar 🔴.**
+**Şu an ne var:** Görüşme sonrası değerlendirme için dört ayrı kayıt kutusu var. Ekrandan gerçekten dolan TEK kutu `MeetingCheckIn` (görüşme sonrası kısa değerlendirme sayfası `/meeting-checkin`, `frontend/src/app/…/meeting-checkin/page.tsx:82`); bu kutu KARAR-77'nin istediği "her taraf kendi kaydını yazar" düzenini zaten uyguluyor. `Feedback` kutusu (puanlar, NPS) ekrandan dolmuyor: `/periodic-survey` her gönderimde reddediliyor (`backend/src/controllers/feedbackController.ts:9-28`). Ama eşleştirmedeki mentör kalite katsayısı `Feedback`'ten okunuyor, bu yüzden herkes nötr 1.0.
+**Sorun ne:** KR-08, KARAR-77=A'yı `Feedback` kutusunu "taraf başına" bölerek uygulamayı öngörüyor (migration). Bu yapılırsa aynı işi yapan İKİNCİ bir "taraf başına değerlendirme" kutusu doğar; kullanıcı iki ayrı form görür ya da biri yine boş kalır.
+**Neden sana soruyorum:** Hangi verinin ürünün tek doğru kaynağı olacağı ve migration (veritabanı yapısı değişikliği) ürün kararı.
+**Seçenekler:**
+- **A) `Feedback`'i böl (KR-08 olduğu gibi)** · Kullanıcı ne görür: yeni/düzeltilmiş periyodik anket formu, check-in formu da kalır · Kazanç: KR-08 planı değişmez · **Ne kaybedersin:** iki ayrı değerlendirme kutusu ve iki form; kullanıcıya çift soru; hangisi "doğru" belirsiz · Süre M · Migration VAR · Geri alınması zor
+- **B) Puanları `MeetingCheckIn`'e taşı, tek kutu o olsun** · Kullanıcı ne görür: görüşme sonrası tek form (bugünkü check-in), puan/NPS soruları oraya eklenir · Kazanç: bugün gerçekten dolan kutu esas alınır; kalite katsayısı ve KPI gerçek veriyle dolar · **Ne kaybedersin:** `Feedback`'i okuyan yerler (kalite katsayısı, oryantasyon kilidi, KPI) yeniden bağlanır; `Feedback` ve `MatchFeedback` silme protokolüne girer (hemen silinmez) · Süre M · Migration VAR (yeni alanlar) · Geri alınır (eski kutular yerinde kalır)
+- **C) Şimdilik migration yok; okuyan yerleri `MeetingCheckIn`'deki MEVCUT alanlara bağla** · Kazanç: migrationsız, hızlı · **Ne kaybedersin:** NPS gibi check-in'de olmayan ölçüler boş kalır; KR-08 askıda
+**Karşılaştırma:** A mevcut planı korur ama çift kutu üretir. B tek doğru kaynak kurar ama okuyan yerlerin yeniden bağlanmasını ister. C hızlıdır ama eksik kalır.
+**Benim önerim:** B — bugün gerçekten dolan tek kutu bu; KARAR-77'nin istediğini zaten yapıyor. *(Migration kararı senin; önerime güvenme.)*
+**Cevap vermezsen:** KR-08, AN-49 ve KR-11 bekler. Kalite katsayısı ve yönetici NPS kartı boş kalmaya devam eder.
+**CEVAP:**
+
+### KARAR-90 · Görüşme sonrası sorulara hangi yeni sorular eklensin? (AN-48 önerileri; 1 iş açar) [ÜRÜN KARARI]
+> ⭐ Kaynak: `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md` §AN-48 (11 öneri: Ö1-Ö11).
+**Şu an ne var:** Görüşme sonrası soruların çoğu memnuniyet ölçüyor ("beğendin mi" türü). "Hedefinize ne kadar yaklaştınız?" puanı kaydediliyor ama hiçbir ekranda okunmuyor. "Geçen sefer konuştuğun adımı attın mı / sonraki adımın ne" gibi davranış sorusu hiç yok.
+**Sorun ne:** Memnuniyet sorusu zayıf sinyaldir; programın işe yarayıp yaramadığını göstermez.
+**Neden sana soruyorum:** Kullanıcıya sorulacak soru metni ve sayısı ürün kararı; bir kısmı yeni alan (migration) ister.
+**Seçenekler:**
+- **A) Yalnız migrationsız öneriler (Ö3, Ö4, Ö6, Ö7, Ö9, Ö11)** · Kazanç: hemen yapılabilir · **Ne kaybedersin:** en güçlü davranış soruları (Ö1, Ö2, Ö5, Ö8) dışarıda kalır · Süre S · Migration yok
+- **B) Hepsi — migration'lı olanlar KARAR-89 migration'ıyla aynı pakette** · Kazanç: tek seferde tam set · **Ne kaybedersin:** KARAR-89'a bağlanır; form uzar (tamamlama oranı düşebilir) · Süre M · Migration VAR
+- **C) Şimdilik değişiklik yok; önce kullanıcı görüşmeleri (AN-32 kılavuzu)** · Kazanç: sorular gerçek kullanıcıyla sınanır · **Ne kaybedersin:** zayıf sinyal sürer
+**Karşılaştırma:** A hızlı ama eksik. B tam ama KARAR-89'a bağlı. C daha fazla öğrenir ama bekletir.
+**Benim önerim:** A şimdi, gerisi B ile KARAR-89 paketinde. *(Soru metni senin kararın.)*
+**Cevap vermezsen:** AN-48 önerileri uygulanmaz.
+**CEVAP:**
+
+### KARAR-91 · Görüşme değerlendirmeleri ne kadar saklansın? (1 iş açar) [HUKUKİ · KVKK]
+> ⭐ Kaynak: `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md` (inceleme doğruladı: saklama süresi sonu imhası `MeetingCheckIn`'i kapsamıyor; KVKK veri dışa aktarımı da içermiyor — `backend/src/services/gdprService.ts:283-306`).
+**Şu an ne var:** Tek gerçek değerlendirme kutusu `MeetingCheckIn` için silme süresi yok. Kullanıcının "verilerimi indir" çıktısında bu değerlendirmeler yok ("0 kayıt" görünüyor). Diğer kutularda süre var (ör. `FeedbackLog` 3 yıl).
+**Sorun ne:** Kişi hakkında yazılmış değerlendirmeler süresiz tutuluyor ve kişi bunları dışa aktarımda göremiyor. Bu, KVKK'daki saklama ve erişim hakkıyla uyumsuz.
+**Neden sana soruyorum:** Saklama süresi hukuki bir karar.
+**Seçenekler:**
+- **A) 3 yıl (FeedbackLog ile aynı) + dışa aktarıma ekle** · Kazanç: tutarlı politika · **Ne kaybedersin:** 3 yıldan eski değerlendirmeler otomatik silinir · Süre S · Migration yok
+- **B) Program bitişinden sonra 1 yıl + dışa aktarım** · Kazanç: veri minimizasyonu · **Ne kaybedersin:** uzun dönem analiz verisi kaybolur · Süre S · Migration yok
+- **C) Yalnız dışa aktarıma ekle, süreyi sonra belirle** · Kazanç: erişim hakkı hemen sağlanır · **Ne kaybedersin:** süresiz saklama sürer
+**Karşılaştırma:** A basit ve tutarlı. B daha az veri tutar. C erişim açığını hemen kapatır ama saklama açığını bırakır.
+**Benim önerim:** C şimdi (dışa aktarım teknik bir düzeltme, 🟡), süre için hukuk görüşüyle A ya da B. *(Hukuki karar senin, önerime güvenme.)*
+**Cevap vermezsen:** değerlendirmeler süresiz saklanır; dışa aktarım eksik kalır.
+**CEVAP:**
+
+### KARAR-92 · Mentör "menti hazırlıksızdı" derse oryantasyon kilidi devreye girsin mi? (1 iş açar) [ÜRÜN KARARI]
+> ⭐ Kaynak: `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md`.
+**Şu an ne var:** Menti için bir "oryantasyon kilidi" var (hazırlıksız menti önce oryantasyonu tamamlasın diye). Ama kilit, hiç dolmayan `Feedback` kutusuna bağlı olduğu için hiçbir zaman tetiklenmiyor. Mentör check-in'de "menti hazırlıklı mıydı" sorusunu cevaplıyor ama bu cevap hiçbir yerde okunmuyor.
+**Sorun ne:** Kilit ya bağlanmalı ya da bilinçli olarak kapalı tutulmalı. Bugün "var gibi görünüp çalışmıyor."
+**Neden sana soruyorum:** Kilit açılırsa menti bir sonraki görüşmeden önce engellenir; bu, kullanıcıyı doğrudan etkileyen bir yetki kararı.
+**Seçenekler:**
+- **A) Evet, mentörün "hazırlıksızdı" cevabı kilidi tetiklesin** · Kullanıcı ne görür: menti bir sonraki randevudan önce oryantasyonu tamamlamaya yönlendirilir · Kazanç: kalite · **Ne kaybedersin:** tek bir olumsuz cevap mentiyi engeller (haksız olabilir) · Süre S · Migration yok
+- **B) Evet ama ancak 2 ardışık "hazırlıksız" cevapta** · Kazanç: haksız kilit riski azalır · **Ne kaybedersin:** ilk sorunda müdahale gecikir · Süre S
+- **C) Hayır, kilit kapalı kalsın; bilgi yalnız yöneticiye gitsin** · Kazanç: menti engellenmez · **Ne kaybedersin:** kilidin amacı gerçekleşmez
+**Karşılaştırma:** A katı, B dengeli, C yumuşak.
+**Benim önerim:** B — tek cevapla kilit haksız olabilir. *(Bu senin ürün kararın, önerime güvenme.)*
+**Cevap vermezsen:** kilit çalışmamaya devam eder.
 **CEVAP:**
 
 ---
