@@ -13,6 +13,7 @@ import { DiscRecallCardView } from '@/components/organisms/DiscRecallCard';
 import { cn } from '@/lib/utils';
 import type { UserProfileData, AvatarUploadResponse } from '@/lib/api/profile';
 import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
+import { SectorTagSuggest } from '@/components/molecules/SectorTagSuggest';
 
 // İstemci ön-kontrolü — asıl doğrulama backend'de (magic-byte). Backend limitiyle eşlenir.
 const AVATAR_ACCEPT = 'image/jpeg,image/png,image/webp';
@@ -347,6 +348,10 @@ export default function ProfilePage() {
           })}
         </div>
       </fieldset>
+
+      {/* ── Sektör etiketleri + öneri (madde 127, Y-16) ──────────────────
+          Öneri profili doğrudan değiştirmez; yönetici onay kuyruğuna gider (Kaydet'ten bağımsız). */}
+      <SectorTagSuggest currentTags={profile?.sectorTags ?? []} />
 
       {/* ── Eğitim ────────────────────────────────────────────────────── */}
       <fieldset>
