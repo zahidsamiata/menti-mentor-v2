@@ -21,6 +21,7 @@ import { mentorAppreciation } from '@/lib/mentorAppreciation';
 import { DailyQuestionWidget } from '@/components/organisms/DailyQuestionWidget';
 import { DiscConfidenceWidget } from '@/components/organisms/DiscConfidenceWidget';
 import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard';
+import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
 import type { DiscType, MentorFilter } from '@/types/matching';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
@@ -163,6 +164,10 @@ export default function MentorDashboardPage() {
           <Link href="/disc-test">DISC Testini Güncelle</Link>
         </Button>
       </div>
+
+      {/* AN-17: DISC arketip rapeli — menti panelindeki kartın (P-03) aynısı; yalnız kişinin
+          KENDİ kaydı okunur. Kart verisi yoksa (DISC tamamlanmadıysa) bileşen hiçbir şey çizmez. */}
+      {user?.id && <DiscRecallCard userId={user.id} role="MENTOR" />}
 
       {/* Profil güvenilirliği + günün sorusu */}
       {user?.id && <DiscConfidenceWidget userId={user.id} />}
