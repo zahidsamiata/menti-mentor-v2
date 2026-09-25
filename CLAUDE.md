@@ -202,8 +202,9 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
   → gerçek CI ancak main-base olunca çıkar. Çatı (umbrella) CI her branch'te koşar ve backend suite'ini submodule
   pointer'ı üzerinden çalıştırır.
 
-## Branch Akışı — DOĞRUDAN main'E PUSH YOK
-- Her iş feature branch'te yapılır: `git checkout -b feat/xxx`
+## Branch Akışı — DOĞRUDAN main'E PUSH YOK (istisna: yalnız docs/)
+- ~~[ESKİ · 2026-09-25] Her iş feature branch'te yapılır: `git checkout -b feat/xxx`~~
+  ⚠️ **GÜNCELLEME 2026-09-25 (PO):** YALNIZ `docs/` altını değiştiren commit'ler doğrudan main'e push edilebilir. Kod, schema, script, CI, Dockerfile ve package dosyaları HER ZAMAN dal + PR ile gider (`git checkout -b feat/xxx`).
 - PR açılır → CI iki repoda da yeşil → merge.
 - Main hep yeşil kalır, "Run failed" maili gitmez.
 
