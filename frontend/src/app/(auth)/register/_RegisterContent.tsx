@@ -309,6 +309,7 @@ export default function RegisterContent() {
               <OAuthButtons
                 tenantSlug={invitation.slug}
                 role={invitation.role}
+                inviteToken={token ?? undefined}
                 disabled={loading}
               />
 

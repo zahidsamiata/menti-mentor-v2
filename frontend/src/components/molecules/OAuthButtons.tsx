@@ -11,13 +11,16 @@ interface OAuthButtonsProps {
   tenantSlug: string;
   role?: 'MENTOR' | 'MENTI';
   disabled?: boolean;
+  /** U-06: davet linkindeki token — backend OAuth dönüşünde davetliyi onaylı açar. */
+  inviteToken?: string;
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
-export function OAuthButtons({ tenantSlug, role = 'MENTI', disabled = false }: OAuthButtonsProps) {
+export function OAuthButtons({ tenantSlug, role = 'MENTI', disabled = false, inviteToken }: OAuthButtonsProps) {
   const buildUrl = (provider: 'google' | 'linkedin') =>
-    `${API_URL}/api/auth/${provider}?tenantSlug=${encodeURIComponent(tenantSlug)}&role=${role}`;
+    `${API_URL}/api/auth/${provider}?tenantSlug=${encodeURIComponent(tenantSlug)}&role=${role}` +
+    (inviteToken ? `&inviteToken=${encodeURIComponent(inviteToken)}` : '');
 
   return (
     <div className="space-y-2">
