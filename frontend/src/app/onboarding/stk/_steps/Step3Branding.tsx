@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import type { WizardData } from '../_StkOnboardingContent';
+import { isSafeLogoUrl, LOGO_URL_ERROR } from '@/lib/logoUrl';
 
 interface Props {
   data: WizardData;
@@ -20,6 +21,8 @@ const PRESET_COLORS = [
 ] as const;
 
 export function Step3Branding({ data, onUpdate, onNext }: Props) {
+  // F-04: backend yalnız https logo kabul eder; burada engellenmezse kayıt adımı sessizce yarım kalırdı.
+  const logoUrlValid = isSafeLogoUrl(data.logoUrl);
   return (
     <div className="space-y-5">
       <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-5">
@@ -32,6 +35,7 @@ export function Step3Branding({ data, onUpdate, onNext }: Props) {
           placeholder="https://..."
           value={data.logoUrl}
           onChange={(e) => onUpdate({ logoUrl: e.target.value })}
+          error={logoUrlValid ? undefined : LOGO_URL_ERROR}
         />
 
         {/* Ana renk */}
@@ -72,7 +76,7 @@ export function Step3Branding({ data, onUpdate, onNext }: Props) {
         <div className="rounded-xl border border-border p-4 bg-background space-y-3">
           <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Canlı Önizleme</p>
           <div className="flex items-center gap-3">
-            {data.logoUrl ? (
+            {data.logoUrl && logoUrlValid ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={data.logoUrl}
@@ -103,7 +107,7 @@ export function Step3Branding({ data, onUpdate, onNext }: Props) {
 
       <p className="text-xs text-muted-foreground text-center">Opsiyonel — sonra da ekleyebilirsin.</p>
 
-      <Button type="button" className="w-full" onClick={onNext}>
+      <Button type="button" className="w-full" onClick={onNext} disabled={!logoUrlValid}>
         Devam Et
       </Button>
     </div>

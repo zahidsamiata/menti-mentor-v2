@@ -96,17 +96,25 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
     const { tenant, accessToken } = regResult.data;
     // refreshToken HttpOnly cookie'de — localStorage'a yazmıyoruz
 
+    // Kayıt başarılıysa kurulum HER durumda "tamamlandı" işaretlenir. Eskiden yalnız logo ya da
+    // özel renk seçilince işaretleniyordu; diğer kurumlar (ve incelemeye düşenler) taslak adımda
+    // kalıyor, taslak temizliği (96 saat) onları kullanıcılarıyla birlikte silebiliyordu.
+    const doneResult = await updateOnboarding(tenant.id, accessToken, {
+      onboardingStep: 'DONE',
+      ...(data.logoUrl      && { logoUrl: data.logoUrl }),
+      ...(data.primaryColor && { primaryColor: data.primaryColor }),
+    });
+    if (!doneResult.ok) {
+      // Hesap oluştu; kullanıcı ilerler ama sorunu görür (sessiz yutma yok).
+      setServerError(
+        `Kurumunuz oluşturuldu ancak kurulum adımı kaydedilemedi: ${doneResult.error.message ?? 'bilinmeyen hata'}. ` +
+          'Lütfen yönetici panelinden marka ayarlarını kontrol edin.',
+      );
+    }
+
     if (tenant.verificationStatus === 'PENDING_REVIEW') {
       router.push('/onboarding/stk/pending-review');
       return;
-    }
-
-    if (data.logoUrl || data.primaryColor !== '#6366f1') {
-      await updateOnboarding(tenant.id, accessToken, {
-        onboardingStep: 'DONE',
-        ...(data.logoUrl      && { logoUrl: data.logoUrl }),
-        ...(data.primaryColor && { primaryColor: data.primaryColor }),
-      });
     }
 
     onUpdate({ tenantId: tenant.id, adminToken: accessToken });

@@ -66,7 +66,7 @@ import RegisterContent          from '@/app/(auth)/register/_RegisterContent';
 import DashboardPage            from '@/app/(dashboard)/dashboard/page';
 import MentorDashboardPage      from '@/app/(dashboard)/mentor/page';
 import MentiDashboardPage       from '@/app/(dashboard)/menti/page';
-import { selfServeRegister }    from '@/lib/api/selfServe';
+import { selfServeRegister, updateOnboarding } from '@/lib/api/selfServe';
 import { authApi }              from '@/lib/api/auth';
 import type { WizardData }      from '@/app/onboarding/stk/_StkOnboardingContent';
 
@@ -121,6 +121,8 @@ describe('KVKK Onay Zorunluluğu — STK Onboarding (Step4Account)', () => {
       ok: true,
       data: { tenant: { id: 't1' }, accessToken: 'tok', refreshToken: 'ref' },
     } as never);
+    // Kayıt sonrası kurulum her durumda "tamamlandı" işaretlenir (taslak temizliği riski).
+    vi.mocked(updateOnboarding).mockResolvedValue({ ok: true, data: {} } as never);
 
     render(
       <Step4Account
