@@ -163,13 +163,17 @@ export type NudgeKind = 'PASSIVE' | 'DEAD_MATCH' | 'GENERIC';
 export interface NudgeResponse { ok: boolean; targetUserId: string; sentAt: string }
 
 // ─── Düzeltme notu için önceden tanımlı mesajlar ─────────────────────────────
-
+// Bu metinler kullanıcıya e-postayla gider (backend requestCorrection → rejectionReason).
+// Ton kuralı (TenantCorrectionBanner ile aynı): yardımcı, yargılamayan; "yanlış/yetersiz yaptınız"
+// yerine ne yapılabileceğini ve neden işe yarayacağını nazikçe söyler. Sayı ve sıra sabittir
+// (5 şablon; her biri backend sınırı 10-500 karakter içinde).
+// Koruma testi: src/__tests__/correctionNotePresets.test.ts
 export const CORRECTION_NOTE_PRESETS = [
-  'Mezuniyet yılı eksik veya hatalı. Lütfen güncelleyin.',
-  'Kurum bilgisi doğrulanamadı. LinkedIn profilinizi ekleyin.',
-  'Uzmanlık etiketleriniz çok geneldir. Daha spesifik belirtiniz.',
-  'Profil fotoğrafı eksik. Sisteme yükleyiniz.',
-  'Biyografi bölümünüz yetersiz. En az 50 kelime ile kendinizi tanıtınız.',
+  'Mezuniyet yılınızı profilinizde doğrulayamadık. Profilinizden kontrol edip güncelleyebilirsiniz.',
+  'Kurum bilginizi doğrulayabilmemiz için LinkedIn profilinizi eklemeniz bize çok yardımcı olur.',
+  'Uzmanlık etiketlerinize birkaç daha ayrıntılı alan eklerseniz, size en uygun eşleşmeyi bulmamız kolaylaşır.',
+  'Profilinizde henüz bir fotoğraf göremedik. Bir fotoğraf eklediğinizde profiliniz tamamlanmış olacak.',
+  'Biyografinizi biraz genişletmenizi rica ederiz; en az 50 kelimelik bir tanıtım, eşleşeceğiniz kişilerin sizi tanımasına yardımcı olur.',
 ] as const;
 
 // ── K-11: Kurum-içi kullanıcı şikayetleri (UserReport, tenant-scope) ──────────
