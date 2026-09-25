@@ -17,6 +17,7 @@ import { AuthProvider } from '@/providers/AuthProvider';
 import { AuthTenantBridge } from '@/providers/AuthTenantBridge';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { getSiteUrl } from '@/lib/siteUrl';
+import { ScrollToTopButton } from '@/components/atoms/ScrollToTopButton';
 
 /**
  * FOUC önleme: React hidrasyonundan ÖNCE `<html>` üzerine tema class'ını senkron uygula.
@@ -50,6 +51,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               {children}
             </AuthTenantBridge>
           </AuthProvider>
+          {/* Y-11: uzun sayfalarda sağ-altta "Sayfanın başına dön" — tüm rotalarda tek yerden. */}
+          <ScrollToTopButton />
         </ThemeProvider>
       </body>
     </html>
