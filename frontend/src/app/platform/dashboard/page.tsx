@@ -30,6 +30,7 @@ import {
   type AnomalyFlag,
 } from '@/lib/api/platform';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
+import { logLevelLabel, logBadgeLabel } from '@/lib/enumLabels';
 
 type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'abuse' | 'logs';
 
@@ -312,7 +313,7 @@ export default function PlatformDashboard() {
                       log.level === 'ERROR' ? 'bg-red-900/60 text-destructive' :
                       log.level === 'WARN'  ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
                       'bg-muted text-muted-foreground'
-                    }`}>{log.level}</span>
+                    }`}>{logLevelLabel(log.level)}</span>
                     <span className="text-muted-foreground text-xs">{log.category}</span>
                     <span className="text-foreground flex-1 truncate">{log.message}</span>
                     <span className="text-muted-foreground text-xs whitespace-nowrap">
@@ -629,7 +630,7 @@ export default function PlatformDashboard() {
                       log.level === 'WARN'  ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
                       log.category === 'AUDIT' ? 'bg-blue-900/60 text-blue-600 dark:text-blue-400' :
                       'bg-muted text-muted-foreground'
-                    }`}>{log.category === 'AUDIT' ? 'AUDIT' : log.level}</span>
+                    }`}>{logBadgeLabel(log)}</span>
                     <div className="flex-1 min-w-0">
                       <span className="text-foreground truncate block">{log.message}</span>
                       {log.category === 'AUDIT' && target != null && (

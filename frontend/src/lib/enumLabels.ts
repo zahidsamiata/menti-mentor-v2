@@ -62,3 +62,15 @@ export function certStatusBadge(status: string | null | undefined): { label: str
   const known = status ? CERT_STATUS_BADGE[status as CertificationStatus] : undefined;
   return known ?? { label: status || '—', className: CERT_STATUS_FALLBACK_CLASS };
 }
+
+/** Sistem log seviyesi (platform paneli). AUDIT kategorisi ayrıca "Denetim" gösterilir. */
+export const LOG_LEVEL_LABELS: Record<string, string> = {
+  INFO: 'Bilgi',
+  WARN: 'Uyarı',
+  ERROR: 'Hata',
+};
+
+export const logLevelLabel = (level: string | null | undefined): string => labelFrom(LOG_LEVEL_LABELS, level);
+
+export const logBadgeLabel = (log: { level: string; category: string }): string =>
+  log.category === 'AUDIT' ? 'Denetim' : logLevelLabel(log.level);
