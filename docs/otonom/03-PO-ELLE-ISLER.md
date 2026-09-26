@@ -142,6 +142,7 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | DK-03 | teyit gerek — satırda PO eli gerektiren adım yazılı değil; yalnız kapsam dışı "kayıtsız tam erişim" sorusu avukatta | Avukat cevabı A6'ya yazılır | A6 |
 | AN-36 | Kurumun yasal kimlik bilgilerini (adres · KEP · MERSİS) sağla; veri işleyen sözleşme metnini avukata onaylat | Bilgiler panelde görünür; sözleşme metni avukat onaylı | — |
 | AN-30 (🔵, KARAR-96 EVET'inden sonra) | Dokploy'da backend'e `GRANULAR_CONSENT_ENABLED='true'`, frontend'e `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED='true'` gir — ⚠️ SIRA: **önce (ya da aynı anda) backend**, sonra frontend; yalnız frontend açık kalırsa formdaki seçimler sessizce kaybolur (7b 2. tur gözlemi) (frontend değişkeni derleme anında okunur → yeniden dağıtım gerekir); önce rıza metinlerinin avukat onayını al | Kayıt ekranında tek KVKK kutusu yerine 4 zorunlu + 2 isteğe bağlı kutu görünür | KARAR-96 |
+| YN-13 (kişi adı) | Backend reposundaki `.claude/settings.local.json` dosyası (yerel izin ayarları) kişisel bilgisayar klasör yolu içeriyor ve public repoda. Dosyayı repodan çıkarmak ya da yolları genelleştirmek (izin ayarı olduğu için ajan dokunmaz) | `git -C backend grep -n -i "users\\\\" -- .claude` boş döner | — |
 | AN-41 | Kod-senkron güncellenen KVKK metin paketini avukata götür, onaylat | Avukat onayı tarihiyle `02-ILERLEME`'ye yazılır | avukat paketi |
 
 ## Karar bekleyenler (kart `01-KARARLAR.md`'de — PO cevap yazacak)
