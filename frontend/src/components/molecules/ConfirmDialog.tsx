@@ -17,6 +17,8 @@ interface ConfirmDialogProps {
   cancelLabel?: string;
   variant?: 'danger' | 'default';
   isLoading?: boolean;
+  /** İşlem başarısızsa pencerenin İÇİNDE gösterilir (modal açıkken arkadaki sayfa görünmez). */
+  error?: string | null;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -24,7 +26,7 @@ interface ConfirmDialogProps {
 export function ConfirmDialog({
   open, title, description,
   confirmLabel = UI_TEXT.actions.confirm, cancelLabel = UI_TEXT.actions.cancel,
-  variant = 'default', isLoading = false,
+  variant = 'default', isLoading = false, error = null,
   onConfirm, onCancel,
 }: ConfirmDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -44,7 +46,10 @@ export function ConfirmDialog({
       onCancel={onCancel}
     >
       <h2 id={dialogTitleId} className="text-lg font-semibold">{title}</h2>
-      <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+      <p className="mt-2 whitespace-pre-line text-sm text-muted-foreground">{description}</p>
+      {error && (
+        <p className="mt-3 text-sm text-destructive" role="alert">{error}</p>
+      )}
       <div className="mt-6 flex justify-end gap-2">
         <Button variant="outline" onClick={onCancel} disabled={isLoading}>
           {cancelLabel}
