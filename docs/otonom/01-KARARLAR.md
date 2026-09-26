@@ -121,7 +121,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-77** | **Görüşmeye iki taraf da değerlendirme yazsın mı** | **2** (KR-08 · KR-11 dolaylı) | ✅ **CEVAPLANDI (2026-09-25): A** — her taraf kendi kaydı, görünürlük değişmez · kart KR-08 bitene kadar ana dosyada |
 | **KARAR-78** | **Dönemlik anket: bağla / karantina / beklet** | **1** (KR-11) | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) |
 | **KARAR-79** | **Zamanlanmış iş tetikleme yetkisi kimde** | **1** (KR-05) | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı |
-| **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **84** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ⬜ boş · ⭐ çelişki taraması 2026-09-25 · tek cevap: "Hepsinde öneriyi kabul ediyorum" ya da madde madde |
+| **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **85** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ✅ **CEVAPLANDI (2026-09-26): M1-M22 hepsi A** — 85 satır işlendi (kilit açıldı/katlandı/açık karara bağlandı); 2 yeni kart açtı: KARAR-94 (GV-17), KARAR-95 (kriz kanalı) |
 | **KARAR-81** | **Taslak kurumlar · kurulum ne zaman tamam** | **2** (mevcut taslaklar · kayıt anında tamamlandı) | ✅ CEVAPLANDI 2026-09-25: ÖZEL — temizlik sürer, mevcut taslaklar test verisi (dokunulmaz); işaret kayıtla aynı transaction'da → KR-23 |
 | **KARAR-82** | **Davet bağlantısı modeli** | **1** (U-12) | ⬜ boş · çıkış blokeri · öneri B (iptal edilebilir toplu link) |
 | **KARAR-83** | **Rolü kim, nasıl değiştirir** | **1** (U-13) | ⬜ boş · çıkış blokeri · YETKİ · öneri B (yalnız düşürme hatası) |
@@ -135,6 +135,8 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-91** | **Görüşme değerlendirmeleri saklama süresi** | **1** | ⬜ boş · KVKK/hukuki · öneri C şimdi |
 | **KARAR-92** | **Oryantasyon kilidi tetiklensin mi** | **1** | ⬜ boş · öneri B (2 ardışık) |
 | **KARAR-93** | **Üyeyi kurumdan çıkarma — 30 gün sonra kişilik verisi silme onayı** | **1** (Y-14) | ⬜ boş · CANLI VERİ SİLME · evet/hayır · öneri B şimdi |
+| **KARAR-94** | **Dışa aktarım hakkı (GV-17) çıkış blokeri olsun mu** | **1** (GV-17) | ⬜ boş · ⭐ KARAR-80/M18'den doğdu (2026-09-26) · öneri A (blokeri olsun) |
+| **KARAR-95** | **Kriz kanalı — güvenlik sorusu olarak yeniden** | **2** (I-18, IC-13) | ⬜ boş · ⭐ KARAR-80/M20'den doğdu (2026-09-26), KARAR-69 (c) gereği · öneri A |
 
 ---
 
@@ -1394,7 +1396,9 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 - **Öneri: A**.
 
 **Cevap vermezsen:** yukarıdaki satırlar 🔴 KARAR-80 kilidinde kalır; tur bunları atlar. En çok iş kilitleyen: M9 (8 satır), M15 (16 satır), M1 (4), M16 (8).
-**CEVAP:**
+**CEVAP:** Hepsinde öneriyi kabul ediyorum (M1-M22 hepsi A). Ürün etkisi olan maddeler strateji katmanıyla konuşuldu: M1 ret = nazik mesaj, alternatif mentör yok (KARAR-22 B) · M3 menti mentör listesini görmeye devam eder + uyum eşiği · M4 online linki mentör onaylarken girer (KARAR-7) · M11 saati geçen görüşme otomatik tamamlandı, mentör "gerçekleşmedi" diye düzeltebilir. (PO, 2026-09-26)
+
+> ✅ **İŞLENDİ (2026-09-26):** `00-KUYRUK.md`'deki 85 satırın tamamı bu cevaba göre güncellendi — "katlanır" denenler ana satıra `→ <ana satır>` notuyla bağlandı (silinmedi), başka açık karara bağlananlar `🔴 KARAR-<no>` oldu, kalanlar eski kapısına (genelde 🟢/🟡) döndü. M18'den **KARAR-94** (GV-17 dışa aktarım hakkı), M20'den **KARAR-95** (kriz kanalı) doğdu. Kapı öncesi/sonrası dağılımı ve kilitli kalan satır sayısı: `docs/otonom/02-ILERLEME.md` bu turun TUR ÖZETİ'nde.
 
 ---
 
@@ -1580,6 +1584,37 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** A kararının tamamı; B hızlı ve güvenli ama saklama açığı bırakır; C bekletir.
 **Benim önerim:** B şimdi, silme adımı A olarak ayrı PR'da (sen "evet" dersen). *(Canlı veri silme senin kararın.)*
 **Cevap vermezsen:** Y-14 bekler.
+**CEVAP:**
+
+---
+
+### KARAR-94 · Dışa aktarım hakkı (GV-17) çıkış blokeri olsun mu (1 iş açar: GV-17) [ÜRÜN KARARI · KVKK]
+> ⭐ Kaynak: KARAR-80/M18 işlenirken (2026-09-26) doğdu. GV-08/GV-09/GV-18 zaten ⛔ ÇIKIŞ BLOKERİ (T1) — KARAR-69 (b)'nin "silme hakkı" ve "aydınlatma" maddelerine giriyorlar. GV-17 aynı kovada (KVKK) ama "dışa aktarım/taşınabilirlik hakkı" ayrı bir madde; KARAR-69 (b) bunu açıkça saymamıştı, o yüzden ajan kendiliğinden blokere eklemedi.
+**Şu an ne var:** Kullanıcı "verilerimi indir" dediğinde (`gdprService.ts:284-333`) yalnız 6 kaynak dışa aktarılıyor; kendi psikometrik profili (OCEAN/arketip/DISC türevleri, ≈22 `User` alanı + 16 tablo) ve kendi yazdığı mesajların içeriği YOK.
+**Sorun ne:** KVKK'nın "veri taşınabilirliği" hakkı — kullanıcı kendi verisinin tam kopyasını isteyebilmeli. Bugün istediği kopya eksik; bunu bir denetim ya da kullanıcı şikayeti ortaya çıkarırsa ilk kurumla karşılaşılan ilk KVKK talebi eksik yanıtlanmış olur.
+**Neden sana soruyorum:** Bunu "çıkış blokeri" (canlıya çıkmadan önce şart) sayıp saymayacağın hukuki risk toleransına bağlı bir ürün kararı; ajan bunu kendi başına "elbette blokeri" diyip iş sırasını değiştiremez.
+**Seçenekler:**
+- **A) Evet, çıkış blokeri (T1)** · Kullanıcı ne görür: "verilerimi indir" artık eksiksiz · Kazanç: ilk kurum canlıya çıkmadan KVKK taşınabilirlik açığı kapanır · **Ne kaybedersin:** çıkış listesi bir iş daha uzar (efor M — 16 tablo + mesaj içerikleri) · Süre M · Geri alınır: evet · Migration: yok
+- **B) Hayır, normal öncelikte (🟡) kalsın** · Kazanç: çıkış listesi uzamaz · **Ne kaybedersin:** ilk kurum canlıdayken eksik dışa aktarım açığı sürer; bir KVKK talebi gelirse elle tamamlanması gerekir
+**Karşılaştırma:** İlk gerçek kurum + gerçek kullanıcı verisi varken bir KVKK "verilerimi ver" talebi gelme ihtimali düşük ama sıfır değil; A bu riski baştan kapatır, B riski PO'nun elle takip etmesine bırakır.
+**Benim önerim:** A — GV-08/09/18 zaten aynı kovada bloker; dışa aktarımı ayrı bırakmak KVKK paketini yarım gösterir.
+**Cevap vermezsen:** GV-17 🔴 KARAR-94 kilidinde kalır, 🟡 öncelikte de işlenmez.
+**CEVAP:**
+
+---
+
+### KARAR-95 · Kriz kanalı — güvenlik sorusu olarak yeniden sorulsun (2 iş açar: I-18, IC-13) [ÜRÜN KARARI · GÜVENLİK]
+> ⭐ Kaynak: KARAR-80/M20'den doğdu (2026-09-26). KARAR-69 (c) zaten "kriz kanalı hukuk değil GÜVENLİK, ayrı karar olarak yeniden sorulacak" demişti; I-18/IC-13 hâlâ eski çerçevede ("hukuki ön koşul + KARAR-31 + avukat") duruyordu, ayrı kart hiç açılmamıştı — bu kart o boşluğu kapatıyor.
+**Şu an ne var:** Bir kullanıcı test/mesaj sırasında kendine zarar verme ya da acil durum ifadesi yazarsa **kimse haberdar olmuyor**. Sertifika sınavında "kriz senaryosu" SORULUYOR ama canlıda gerçek bir kriz karşısında hiçbir akış çalışmıyor — sistem bunu bir konu başlığı gibi test ediyor, gerçekte hiçbir şey yapmıyor.
+**Sorun ne:** Bu bir metin eksikliği değil, güvenlik/can güvenliği boşluğu. Kim haberdar edilecek (kurum yöneticisi mi, harici bir kriz hattı mı, ikisi mi), ne kadar hızlı, ve sistemin bunu "algıladığını" nasıl anladığı (anahtar kelime mi, işaretli bir soru mu) — bunlar ürün + güvenlik kararı, ajan kendi başına "en güvenli" yorumla bir bildirim akışı kuramaz (madde 19/M19 ilkesiyle aynı gerekçe).
+**Neden sana soruyorum:** Yanlış kurulmuş bir kriz akışı (ör. kimseye ulaşmayan bir bildirim, ya da yanlış kişiye giden hassas bir uyarı) hukuki ve etik olarak boş akıştan daha kötü olabilir; bu yüzden "nasıl" sorusu senin.
+**Seçenekler:**
+- **A) Kurum yöneticisine anlık bildirim + panelde "Kriz" etiketli görünürlük** · Kullanıcı ne görür: kriz ifadesi yazan kişi fark etmez (arka planda haberdar edilme olur), kurum yöneticisi panelinde acil bir uyarı görür · Kazanç: mevcut altyapıyla (bildirim sistemi zaten var) hızlı kurulur, dış servise bağımlılık yok · **Ne kaybedersin:** kurum yöneticisi 7/24 müsait olmayabilir, gerçek bir acil durumda gecikme riski · Süre M · Geri alınır: evet
+- **B) Harici bir kriz hattı/kaynağına yönlendiren statik ekran** (ör. "144" ya da ilgili kurumun kendi kriz hattı bilgisi) · Kullanıcı ne görür: kendine zarar ifadesi sonrası ekranda doğrudan yardım hattı bilgisi · Kazanç: gecikme yok, uzman kaynağa yönlendirir, ajan sorumluluğu daha net · **Ne kaybedersin:** kurum yöneticisi haberdar olmaz, takip kimsenin elinde değil
+- **C) İkisi birden** (yöneticiye bildirim + kullanıcıya yardım hattı ekranı) · Kazanç: hem anlık yönlendirme hem kurum içi takip · **Ne kaybedersin:** en çok iş; iki ayrı akış test edilmeli
+**Karşılaştırma:** A kurum içi sorumluluk zincirini kullanır ama yönetici gecikebilir; B en hızlı yardıma yönlendirir ama kurum kör kalır; C ikisini birleştirir, en güvenli ama en yavaş teslim.
+**Benim önerim:** C — can güvenliği konusunda "ya biri ya diğeri" riskli; ikisi de ucuz eklenir (bildirim altyapısı zaten var, statik ekran S efor).
+**Cevap vermezsen:** I-18/IC-13 🔴 KARAR-95 kilidinde kalır.
 **CEVAP:**
 
 ---

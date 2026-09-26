@@ -2,7 +2,41 @@
 
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
 
-## TUR ÖZETİ (2026-09-26, ikinci tur — teşhis doğrulandı + bekleyen merge'ler)
+## TUR ÖZETİ (2026-09-26, üçüncü tur — KARAR-80 işlendi)
+
+**KARAR-80 CEVABI İŞLENDİ.** PO cevabı: "M1-M22 hepsi A" (+ 4 ürün-etkili maddenin somut uygulaması: M1 nazik ret/alternatif yok · M3 menti listesi kalır+eşik · M4 link mentörde · M11 otomatik tamamlanma+mentör düzeltmesi). `01-KARARLAR.md` CEVAP satırı + indeks güncellendi.
+
+**Kapı dağılımı (yalnız Durum=BEKLIYOR satırlar, `00-KUYRUK.md`):**
+| | ÖNCE | SONRA |
+|---|---|---|
+| 🟢 | 0 | 15 |
+| 🟡 | 40 | 62 |
+| 🔴 | 112 | 51 |
+| **BEKLIYOR toplam** | **152** | **128** |
+| "KARAR-80/Mx" kapılı satır | 85 | 0 |
+
+(BEKLIYOR toplamının 152→128 düşmesi normal: 24 satır "katlanır" oldu — artık Durum'da `→ <ana satır>`, kendi başına BEKLIYOR sayılmıyor, iş kaybolmadı.)
+
+**85 satırın hepsi işlendi** (`00-KUYRUK.md`), + 1 yeni satır (**GV-09b**, GV-09'dan ayrılan olgu düzeltmesi). Sonuç dağılımı:
+- **Katlandı** (→ ana satıra, iş kaybolmadı): F-17→P-05 · I-16→U-18 · I-10→AN-26 · AN-25→K-15 · AN-24→K-05 · P-04→AN-20 · PS-04→AN-20 · P-06→AN-21 · Y-15→AN-28 · I-13→PS-A1 · I-14→PS-A1 · I-15→PS-A3 · AN-19→U-01 · F-31→AN-52 · AN-22→F-18 · K-13→E-4 · AN-13→E-4 · AN-40→E-4 · YN-03→F-01 · AN-14→AN-53 · AN-23→AN-53 · AN-42→AN-53 · AN-46→AN-53 · AN-16→IC-01 · F-03→AN-30 (25 satır).
+- **Açık başka karara bağlandı** (🔴 KARAR-<no>, hepsi CEVAPSIZ): AN-20→K-48 · PS-A2→K-58 · F-11→K-61 · F-09→K-57 · YN-02→K-52 · YN-04→K-50 · YN-05→K-50 · YN-06→K-51 · P-15→K-41 · P-99→K-46 · Y-18→K-36 · V-15→K-40 · I-09→K-30 · F-08→K-44 · AN-37→K-74 · KR-20→K-72 · I-01→K-64 · I-11→K-64 · GV-09(daralmış)→K-38 · GV-17→**K-94 (yeni)** · I-18→**K-95 (yeni)** · IC-13→**K-95 (yeni)** (22 satır).
+- **Eski kapısına döndü / bağımsız ilerliyor** (çoğu 🟢 ya da 🟡): P-05 · U-18 · AN-26 · K-19 (🟢, M3+M4 birleşik) · PS-A4 · AN-21 (🔴 KARAR-56, zaten öyleydi) · U-19 · AN-28 (M3+M7) · PS-02 · PS-A1 · PS-A3 · K-15 · K-05 · U-01 · AN-52 · F-18 · E-4 · AN-54 · F-01 · AN-44 (kısmi katlanma notuyla) · IC-12 (kısmi katlanma notuyla) · AN-53 · Y-02 · YN-11 · AN-43 · IC-10 · IC-11 · IC-01 · AN-05 (daralmış) · AN-10 (daralmış) · AN-30 · AN-29 (🔴 KARAR-34 CEVAPLANDI → 🟡) · GV-08 (+⛔ ÇIKIŞ BLOKERİ T1) · GV-18 (+⛔ ÇIKIŞ BLOKERİ T1) · AN-41 · Y-17 (🟢, sıra notu) · DK-02 (avukat ön koşulu kalktı, 🟡) (38 satır).
+- **Yeni satır:** GV-09b (🟡 + ⛔ ÇIKIŞ BLOKERİ T1, GV-09'dan ayrılan ülke-adı olgu düzeltmesi, KARAR-38 beklemez).
+
+**Yeni karar kartları (2):** **KARAR-94** (GV-17 dışa aktarım hakkı çıkış blokeri olsun mu — 1 iş açar) · **KARAR-95** (kriz kanalı güvenlik sorusu — 2 iş açar: I-18, IC-13). İkisi de `01-KARARLAR.md`'nin sonuna Bölüm 7b biçiminde eklendi.
+
+**Kalan 🔴 sayısı: 51.** En çok satır kilitleyen ilk 5 açık karar (bu turdan sonra):
+1. **KARAR-50** (kuralların geçersizleşme koşulu) — 2 satır (YN-04, YN-05)
+2. **KARAR-64** ("mizaç/karakter/kişilik" adı) — 2 satır (I-01, I-11) — dolaylı: AN-50, AN-10'un bir alt-parçası da buna bağlı ama bu ikisi 🟢/kendi gate'inde bağımsız ilerliyor
+3. **KARAR-57** (hangi test mizacı belirlesin) — 2 satır (PS-03, F-09)
+4. **KARAR-38** (sunucu ülkesi/hukuki rejim) — 1 satır (GV-09, daralmış) — zaten ⛔ AVUKAT ön koşullu, KARAR-47 paketinde
+5. **KARAR-95** (yeni, kriz kanalı) — 2 satır (I-18, IC-13)
+(Diğer 42 satır 17 ayrı açık karara tek tek dağılmış — KARAR-41/46/36/40/30/44/74/72/48/58/61/56/52/51/94 vb., çoğu 1 satır.)
+
+**⛔ Bir belirsizlik notu:** M9/M16 zincirinde AN-50 (KARAR-64'e bağlı, KARAR-80 kapsamı DIŞI ama I-01/I-11'i dolaylı kilitliyor) gibi çapraz bağımlılıklar var; hepsi Not'a yazıldı, hiçbiri "belirsiz" diye 🔴 bırakılmadı (M1'deki F-17→P-05 hedefi F-17'nin kendi Not'undaki açık ifadeyle netti, tahmin yürütülmedi).
+
+**Doğrulama:** 85 satırlık toplu düzenleme bir Python betiğiyle yapıldı (satır numarası + eski gate metni eşleştirmesi); betik sonrası tam denetimde 1 hata bulundu (AN-21'in eski gate'i yanlış okunmuş, Not'taki "eski kapı" referansına çarpmıştı) — elle düzeltildi, ikinci denetim temiz. Tüm "→ hedef" satırlarının hedef ID'si dosyada gerçekten var mı diye ayrıca kontrol edildi (18 farklı hedef, hepsi ✅).
+
 
 **MERGE İLERLEMESİ (canlı — bu tur içinde güncelleniyor):**
 1. ✅ **backend #138 (GV-10)** — `~/menti/backend` içinden `gh pr merge` **SORUNSUZ** geçti (`0fee83c`). İnceleme ONAY (https://github.com/zahidsamiata/menti-mentor/pull/138#issuecomment-5845304960), CI yeşil (4m32s). **CANLIDA BAK:** çıkış yapan/rolü düşürülen/reddedilen kullanıcının erişimi artık anında kesiliyor (token süresi dolmasını beklemiyor). `/health` kontrolü YAPILAMADI — bu oturumda canlı backend alan adı/URL'i belgelerde yok, tahmin edilmedi.
