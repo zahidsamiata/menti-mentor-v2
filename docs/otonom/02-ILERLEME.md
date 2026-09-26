@@ -1200,3 +1200,5 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
   - **KR-14 BITTI** — CANLIDA BAK: (iç) testler canlı DB'nin hiçbir adresine karşı koşamıyor.
 - 2026-09-26 17:59 UTC · **KR-22 PR-ACIK** — çatı **#330** (verify.sh ↔ CI hizalama; önceki oturumun yarım yaması kurtarıldı). VPS koşusu: 6/6 yeşil, entegrasyon + E2E ATLANDI, çıkış 2.
 - 2026-09-26 17:59 UTC · AN-30 düzeltmesi alt ajana verildi (izole worktree `.worktrees/an30`, merge YOK).
+- 2026-09-26 18:01 UTC · **Doc-senkron taraması (`git merge-base --is-ancestor`, backend + çatı otonom dalları):** 6 satır kodda zaten main'de ve canlı pointer'da ama kuyrukta BEKLIYOR kalmıştı → BITTI: **GV-10** (#138) · **GV-11** (#132) · **GV-12** (backend #131 + çatı #312) · **GV-13** (#137) · **PS-01** (#136) · **PS-06** (#134). Notlardaki "PO elle push/merge etmeli" ifadeleri bayattı (işlem yapılmış). Yeniden yapılmadı.
+- 2026-09-26 18:01 UTC · **I-12 ATLANDI(karar)** — kartı yeniden hesaplamak KARAR-57'yi (hangi test esas) fiilen cevaplamak olur.
