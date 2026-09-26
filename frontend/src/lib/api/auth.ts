@@ -25,6 +25,13 @@ export interface RegisterResponse {
   user: { id: string; email: string; fullName: string; role: string; approvalStatus: string };
 }
 
+export interface ChangePasswordResponse {
+  message: string;
+  /** false: isteği yapan oturumun çerezi bulunamadı, tüm oturumlar kapatıldı. */
+  currentSessionKept: boolean;
+  revokedSessions: number;
+}
+
 export const authApi = {
   login: (email: string, password: string) =>
     apiClient<LoginResponse>('/api/auth/login', {
@@ -71,5 +78,20 @@ export const authApi = {
     apiClient<{ message: string }>('/api/auth/reset-password', {
       method: 'POST',
       body: { token, password },
+    }),
+
+  // GV-19: oturum içi şifre değiştirme. Kimlik token'dan alınır; istemci kullanıcı id'si göndermez.
+  // Başarıda backend diğer cihazlardaki oturumları kapatır, bu oturumu korur.
+  changePassword: (
+    currentPassword: string,
+    newPassword: string,
+    accessToken: string,
+    tenantId: string,
+  ) =>
+    apiClient<ChangePasswordResponse>('/api/auth/change-password', {
+      method: 'POST',
+      body: { currentPassword, newPassword },
+      token: accessToken,
+      tenantId,
     }),
 };
