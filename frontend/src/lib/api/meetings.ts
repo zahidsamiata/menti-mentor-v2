@@ -125,6 +125,11 @@ export const meetingsApi = {
   rejectMeeting: (api: BoundClient, meetingId: string, reason?: string): Promise<ApiResult<{ meeting: Meeting }>> =>
     api<{ meeting: Meeting }>(`/api/meetings/${meetingId}/reject`, { method: 'POST', body: { reason } }),
 
+  // U-01: mentör, otomatik-tamamlanmış (COMPLETED) bir görüşmeyi "gerçekleşmedi" diyerek
+  // düzeltir → CANCELLED (meetingController.ts markMeetingNotHappened).
+  markNotHappened: (api: BoundClient, meetingId: string, reason?: string): Promise<ApiResult<{ meeting: Meeting }>> =>
+    api<{ meeting: Meeting }>(`/api/meetings/${meetingId}/mark-not-happened`, { method: 'POST', body: { reason } }),
+
   submitCheckIn: (api: BoundClient, meetingId: string, data: CheckIn): Promise<ApiResult<CheckIn>> =>
     api<CheckIn>(`/api/meetings/${meetingId}/check-in`, { method: 'POST', body: data }),
 

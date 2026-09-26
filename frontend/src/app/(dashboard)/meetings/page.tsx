@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { isHttpUrl } from '@/lib/safeUrl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ShareButtons } from '@/components/molecules/ShareButtons';
+import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import type { Meeting } from '@/lib/api/meetings';
 import { MEETING_FORMAT_LABELS } from '@/lib/enumLabels';
 
@@ -27,7 +28,14 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'warning' | 'succe
   APPROVED:   { label: 'Onaylandı',       variant: 'success' },
 };
 
-function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) {
+function MeetingCard({
+  meeting, userId, onMarkNotHappened,
+}: {
+  meeting: Meeting;
+  userId: string;
+  // U-01: mentöre COMPLETED görüşmeyi "gerçekleşmedi" diyerek düzeltme imkânı.
+  onMarkNotHappened: (meetingId: string) => void;
+}) {
   const isMentor  = meeting.mentorUserId === userId;
   // Karşı taraf: mentör bakarken menti, menti bakarken mentör. Menti tarafı eskiden
   // daima null'dı → menti KİMİNLE görüşeceğini göremiyordu (backend zaten mentor'ü
@@ -112,6 +120,19 @@ function MeetingCard({ meeting, userId }: { meeting: Meeting; userId: string }) 
           <ShareButtons shareHeadline="Bir mentörlük görüşmemi daha tamamladım 🎉 #MentiMentor ile gelişmeye devam!" />
         </div>
       )}
+
+      {/* U-01: toplantı, bitiş saati geçince kimse tıklamadan otomatik "Tamamlandı" olur.
+          Bu otomasyon yanılabilir (ör. toplantı hiç olmadı) — yalnız mentör düzeltebilir. */}
+      {meeting.status === 'COMPLETED' && isMentor && (
+        <Button
+          size="sm"
+          variant="outline"
+          className="w-full text-muted-foreground"
+          onClick={() => onMarkNotHappened(meeting.id)}
+        >
+          Gerçekleşmedi olarak işaretle
+        </Button>
+      )}
     </div>
   );
 }
@@ -131,11 +152,30 @@ export default function MeetingsPage() {
     ? { mentiId: user.id }
     : {};
 
-  const { data, isLoading: meetingsLoading, error } = useQuery(
+  const { data, isLoading: meetingsLoading, error, refetch } = useQuery(
     () => meetingsApi.list(api, listParams),
     [api, user?.id],
     { enabled: Boolean(user?.id), cacheKey: `meetings:list:${JSON.stringify(listParams)}` },
   );
+
+  // U-01: mentör "gerçekleşmedi" düzeltmesi — onay diyaloğu + istek durumu.
+  const [notHappenedTarget, setNotHappenedTarget] = useState<string | null>(null);
+  const [notHappenedLoading, setNotHappenedLoading] = useState(false);
+  const [notHappenedError, setNotHappenedError] = useState<string | null>(null);
+
+  async function confirmMarkNotHappened() {
+    if (!notHappenedTarget) return;
+    setNotHappenedLoading(true);
+    setNotHappenedError(null);
+    const result = await meetingsApi.markNotHappened(api, notHappenedTarget);
+    setNotHappenedLoading(false);
+    setNotHappenedTarget(null);
+    if (!result.ok) {
+      setNotHappenedError(result.error.message ?? 'İşlem başarısız oldu.');
+      return;
+    }
+    refetch();
+  }
 
   if (!user && !isLoading) return null;
 
@@ -206,7 +246,7 @@ export default function MeetingsPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              {upcoming.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} />)}
+              {upcoming.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} />)}
             </div>
           )}
         </CardContent>
@@ -220,11 +260,24 @@ export default function MeetingsPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {past.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} />)}
+              {past.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} />)}
             </div>
           </CardContent>
         </Card>
       )}
+
+      {notHappenedError && <AlertMessage type="error" message={notHappenedError} />}
+
+      <ConfirmDialog
+        open={notHappenedTarget !== null}
+        title="Görüşme gerçekleşmedi mi?"
+        description="Bu görüşme otomatik olarak tamamlandı işaretlendi. Aslında gerçekleşmediyse iptal edilmiş sayılacak; değerlendirme/check-in artık istenmeyecek."
+        confirmLabel="Evet, gerçekleşmedi"
+        variant="danger"
+        isLoading={notHappenedLoading}
+        onConfirm={confirmMarkNotHappened}
+        onCancel={() => setNotHappenedTarget(null)}
+      />
     </div>
   );
 }
