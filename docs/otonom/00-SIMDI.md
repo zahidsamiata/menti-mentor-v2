@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 17:25 UTC · çatı main HEAD `bed9de8` · backend main HEAD `cde7bb8`
+**Son güncelleme:** 2026-09-26 17:55 UTC · çatı main HEAD `5ca205a` · backend main HEAD `cde7bb8`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** YENİ OTURUM (VPS) açılışı tamam → GÖREV 0: kapı düzeni 4 renge geçiş (dal `otonom/KAPI-4-renk-20260926`, tek PR, belge işi). Tek şerit.
+**Şu an yapılan:** GÖREV 0 — kapı düzeni 4 renk: çatı PR **#328** açık (5 commit), bağımsız inceleme sürüyor, CI bekleniyor. Tek şerit (GÖREV 0 bitmeden başka işe geçilmez).
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -18,6 +18,7 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
+| çatı #328 | GÖREV 0 — kapı düzeni 4 renk (belge) | bekleniyor | sürüyor | yeni açıldı |
 | backend #148 + çatı #326 | U-18 (mesaj talebi kabul/ret kapısı) | yeşil, mergeable | henüz yapılmadı | ⛔ MIGRATION dosyası (`Conversation.rejectedAt`) — ajan asla merge etmez, PO kararı gerekir |
 | backend #143 | PS-A1 (OCEAN ölçek düzeltmesi) | yeşil, mergeable | ONAY (bağımsız) | **PO'nun elle merge etmesi gerekiyor** — izin sınıflandırıcısı reddi |
 | backend #145 | GV-08 (anonimleştirme eksik alanlar) | yeşil, mergeable | ONAY (bağımsız) | **PO'nun elle merge etmesi gerekiyor** — aynı sınıflandırıcı reddi |
