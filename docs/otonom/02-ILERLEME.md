@@ -1204,3 +1204,4 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 18:01 UTC · **I-12 ATLANDI(karar)** — kartı yeniden hesaplamak KARAR-57'yi (hangi test esas) fiilen cevaplamak olur.
 - 2026-09-26 18:08 UTC · **KR-22 BITTI** — çatı #330 merge (`dd614a3`). CANLIDA BAK: (iç) verify her adımı ayrı raporluyor, atlanan adım yeşil sayılmıyor. Canlı ok:true · db:up.
 - 2026-09-26 18:08 UTC · **IC-01 PR-ACIK** — çatı #331 (mentör filtresi, admin soru formu, sonuç kartı, hatırlatma kartı: "Dominant/Influential…" → "D — Kararlılık…"). 68/68 ilgili test, tsc temiz.
+- 2026-09-26 18:12 UTC · **IC-08 PR-ACIK** — backend #151 + çatı #332 (onay bekleyen kullanıcı yöneticinin düzeltme notunu bekleme ekranında görür; not yalnız doğru şifreden sonra döner, URL'ye konmaz). Testler: FE 17/17 (4 dosya), BE +3 (1 negatif) CI'da. 7b incelemesi başlatıldı.

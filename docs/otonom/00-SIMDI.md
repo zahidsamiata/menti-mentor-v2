@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 18:08 UTC · çatı main HEAD `dd614a3` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 18:12 UTC · çatı main HEAD `b737af9` · backend main HEAD `d87b227`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** Şerit 1 (alt ajan): AN-30 düzeltmeleri (merge YOK, 🔵). Şerit 2: IC-01 çatı #331 CI bekliyor → sonra U-18 düzeltmesi, PS-10, IC-08, GV-19 …
+**Şu an yapılan:** Şerit 1 (alt ajan): AN-30 düzeltmeleri (merge YOK). Şerit 2: IC-01 #331 CI · IC-08 backend #151 + çatı #332 (7b incelemesi sürüyor). Sıradaki: U-18 düzeltmesi, PS-10, GV-19.
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -22,6 +22,7 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) · 🟢 | koşuyor | gerekmiyor | CI bekleniyor → merge |
+| backend #151 + çatı #332 | IC-08 (onay bekleyene düzeltme notu) · 🟢+7b (auth) | koşuyor | sürüyor | CI + 7b ONAY → backend merge → pointer re-bump → çatı merge |
 | backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeşil (eski taban) | **SORUN VAR** (7b, 2026-09-26): iki PR da main ile ÇAKIŞIYOR (KR-19 blok kontrolü korunarak rebase gerekir; çatı pointer `1660da4` backend main'in devamı değil) + menti panelden tekrar yazınca ham hata metni · bildirim servisi yalnız log · reddetme hatası onay penceresinin arkasında | düzeltme sırada; PO EVET'i de bekler |
 | backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (eski taban) | **SORUN VAR** (7b): main ile ÇAKIŞIYOR (GV-18 #147 sonrası) · anahtar açılmadan önce: granüler formda 18+ beyanı + Aydınlatma Metni bağlantısı yok, hesap silmede 6 yeni rıza geri çekilmiyor · küçükler PR yorumunda | düzeltme sırada; PO EVET'i + yedek bekler |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
