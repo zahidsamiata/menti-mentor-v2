@@ -28,6 +28,7 @@ import { NotificationOptInButton } from '@/components/organisms/NotificationOptI
 import { weeklyLimitText, WEEKLY_LIMIT_FALLBACK } from '@/components/molecules/WeeklyMeetingLimitNote';
 import type { MentorMatch } from '@/types/matching';
 import { UI_TEXT } from '@/lib/uiText';
+import { conversationStartErrorMessage } from '@/lib/conversationRejected';
 
 export default function MentiDashboardPage() {
   const { user, isLoading } = useAuth();
@@ -143,7 +144,7 @@ export default function MentiDashboardPage() {
       closeModal();
       router.push(`/messages/${result.data.conversation.id}`);
     } else {
-      setSendError(result.error.message ?? 'Mesaj gönderilemedi.');
+      setSendError(conversationStartErrorMessage(result.error));
     }
   }
 

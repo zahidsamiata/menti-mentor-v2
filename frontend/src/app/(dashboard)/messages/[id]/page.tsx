@@ -12,6 +12,7 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { conversationsApi } from '@/lib/api/conversations';
 import { UI_TEXT } from '@/lib/uiText';
+import { REJECTED_MENTI_TEXT } from '@/lib/conversationRejected';
 
 const MESSAGE_MAX = 2000;
 
@@ -19,8 +20,6 @@ const MESSAGE_MAX = 2000;
 // yazsa dahi burada yer almaz. Alternatif mentör önerisi de BİLİNÇLİ olarak yok (B: "alternatif YOK").
 const REJECT_CONFIRM_TEXT =
   'Reddetmek normaldir. Kapasiten yoksa ya da uygun hissetmiyorsan, kabul edip yarım bırakmaktan iyidir.\n\nSebebini yazman gerekmez.';
-const REJECTED_MENTI_TEXT =
-  'Bu eşleşme gerçekleşmedi.\n\nMentörler genelde kapasite ya da uygunluk nedeniyle dönüş yapamıyor — çoğu zaman aynı anda birkaç mentiyle çalışıyorlar.\n\nBu senin profilinle ilgili değil.';
 const REJECTED_MENTOR_TEXT = 'Bu konuşmayı reddettiniz. Artık mesaj gönderemezsiniz.';
 
 function formatTime(iso: string): string {
@@ -190,11 +189,9 @@ export default function ConversationThreadPage() {
         variant="danger"
         isLoading={rejecting}
         onConfirm={handleReject}
+        error={rejectError}
         onCancel={() => { setRejectDialogOpen(false); setRejectError(null); }}
       />
-      {rejectError && (
-        <p className="mt-2 text-xs text-destructive" role="alert">{rejectError}</p>
-      )}
     </div>
   );
 }

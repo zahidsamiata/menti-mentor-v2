@@ -13,6 +13,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
 import { fitsAvailability, weekdayLabelTr, type AvailabilityBlockLike } from '@/lib/meetingAvailability';
 import { conversationsApi } from '@/lib/api/conversations';
+import { conversationStartErrorMessage } from '@/lib/conversationRejected';
 
 const FORMATS = [
   { value: 'ONLINE'    as const, label: 'Online (video)' },
@@ -71,7 +72,7 @@ function BookMeetingContent() {
     if (result.ok) {
       router.push(`/messages/${result.data.conversation.id}`);
     } else {
-      setConvoError(result.error.message ?? 'Mesaj gönderilemedi.');
+      setConvoError(conversationStartErrorMessage(result.error));
     }
   }
 
