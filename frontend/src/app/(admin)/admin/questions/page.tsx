@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
+import { discDimensionLabel } from '@/types/discTest';
 
 const DISC_COLORS: Record<string, string> = {
   D: 'text-red-600 dark:text-red-400', I: 'text-yellow-600 dark:text-yellow-400', S: 'text-green-600 dark:text-green-400', C: 'text-blue-600 dark:text-blue-400', GENERAL: 'text-gray-400',
@@ -168,10 +169,9 @@ export default function QuestionsPage() {
                 onChange={(e) => setNewDimension(e.target.value)}
               >
                 <option value="GENERAL">Genel (bilgi amaçlı)</option>
-                <option value="D">D — Dominant</option>
-                <option value="I">I — Influential</option>
-                <option value="S">S — Steady</option>
-                <option value="C">C — Conscientious</option>
+                {(['D', 'I', 'S', 'C'] as const).map((dimension) => (
+                  <option key={dimension} value={dimension}>{discDimensionLabel(dimension)}</option>
+                ))}
               </select>
               <select
                 className="rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
