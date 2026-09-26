@@ -8,6 +8,7 @@
 - **F-04 → BITTI** (kod zaten yapılmıştı, yalnız kayıt güncellendi — bkz. yukarı).
 - **GV-09b → çatı #315 açıldı** (`otonom/GV-09b-kvkk-ulke-duzeltmesi-20260926`, ben yazdım, test yeşil, tsc temiz) — **bağımsız inceleme BEKLİYOR** (agent slotu doluyken sıraya alındı).
 - **PS-02, U-01, K-05 → 3 paralel alt-ajana verildi** (limit: en fazla 3), her biri kendi `~/menti/.worktrees/<ad>` altında çalışıyor, PR açacak ama MERGE ETMEYECEK (bağımsız inceleme ayrı adım). AN-30 bu turda başlatılmadı (slot yok), sıradaki round'da alınacak.
+- **PS-02 BITTI (kod tarafı):** backend **#139** açıldı (`otonom/PS-02-onboarding-confidence-20260926`, worktree `~/menti/.worktrees/ps02`). `onboardingController.ts`: `DiscResult.confidence` eklendi, `calculateDiscResult` artık `confidence = min(1, answered/pool)` hesaplıyor (8 soruluk sabit havuz), `submitDiscTest` vektörü `confidence` ile birlikte yazıyor. Yeni test `tests/onboarding-disc-confidence.unit.test.ts` (DB gerektirmiyor) hem eski hatayı hem düzeltmeyi doğrudan sınıyor. Kapsam korundu: `discType`/test seçimi (KARAR-57) dokunulmadı; `matching.ts`'in `as DiscVector` cast'i validasyonsuz kaldı, PR'da takip notu olarak işaretlendi. tsc+eslint temiz; entegrasyon testi TEST_DATABASE_URL yok diye yerelde koşmadı (CI kanıt). **Bağımsız inceleme başlatıldı** (3. slot).
 
 
 **Bölüm 2 küçük takipler:**
