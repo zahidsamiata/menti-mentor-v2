@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 17:42 UTC · çatı main HEAD `e0c3deb` · backend main HEAD `cde7bb8`
+**Son güncelleme:** 2026-09-26 17:46 UTC · çatı main HEAD `23e8a96` · backend main HEAD `cde7bb8`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** GÖREV 0 BİTTİ (#328 merge). GÖREV 1 (a): PS-A1 backend #143 + GV-08 backend #145 — dallar main'le güncelleniyor, CI yeniden koşuyor, sonra merge + pointer bump + canlı kontrol.
+**Şu an yapılan:** Şerit 1: PS-A1 #143 + GV-08 #145 main'le güncellendi, CI koşuyor → merge + pointer bump. Şerit 2: KR-14 backend #150 CI bekliyor. AN-30 7b incelemesi sürüyor (alt ajan, salt okuma).
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -19,11 +19,12 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| backend #148 + çatı #326 | U-18 (mesaj talebi kabul/ret kapısı) | yeşil, mergeable | henüz yapılmadı | ⛔ MIGRATION dosyası (`Conversation.rejectedAt`) — ajan asla merge etmez, PO kararı gerekir |
-| backend #143 | PS-A1 (OCEAN ölçek düzeltmesi) | yeşil, mergeable | ONAY (bağımsız) | **PO'nun elle merge etmesi gerekiyor** — izin sınıflandırıcısı reddi |
-| backend #145 | GV-08 (anonimleştirme eksik alanlar) | yeşil, mergeable | ONAY (bağımsız) | **PO'nun elle merge etmesi gerekiyor** — aynı sınıflandırıcı reddi |
-| backend #142 · çatı #320 | AN-30 (granüler rıza — klasik kayıt + OAuth) | yeşil | yapılmadı | ⛔ MIGRATION dosyası — ajan asla merge etmez, PO kararı gerekir |
-| çatı #110 | ⛔ MERGE ETME işaretli (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
+| backend #143 | PS-A1 (OCEAN ölçek düzeltmesi) · 🟡 sütunda (liste dışı), PO talimatıyla 🟢 işleniyor | main'le güncellendi, koşuyor | ONAY | CI bekleniyor → merge |
+| backend #145 | GV-08 (anonimleştirme eksik alanlar) · 🟢 | main'le güncellendi, koşuyor | ONAY | CI bekleniyor → merge |
+| backend #150 | KR-14 (test DB kilidi aynı DB'nin farklı adresini tanır) · 🟢 | koşuyor | gerekmiyor (hassas dosya değil) | CI bekleniyor → merge |
+| backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeşil (eski taban) | **SORUN VAR** (7b, 2026-09-26): iki PR da main ile ÇAKIŞIYOR (KR-19 blok kontrolü korunarak rebase gerekir; çatı pointer `1660da4` backend main'in devamı değil) + menti panelden tekrar yazınca ham hata metni · bildirim servisi yalnız log · reddetme hatası onay penceresinin arkasında | düzeltme sırada; PO EVET'i de bekler |
+| backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil | 7b sürüyor | PO EVET'i + yedek bekler |
+| çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **⭐ YENİ KAPI DAĞILIMI (2026-09-26, #328 sonrası — açık 122 satır; BITTI ve "→" katlanmış hariç, ~~…~~ yok sayıldı):**
 | Kapı | Anlam | Önce | Sonra | Beklenen |
