@@ -1635,7 +1635,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 ---
 
 ### KARAR-97 · 🔵 EVET/HAYIR — U-18: mentör mesaj talebini nazikçe reddedebilsin mi? (1 iş açar: U-18) [🔵 CANLI DB DEĞİŞİKLİĞİ]
-**Kullanıcı ne görür:** Mentör, mesaj kutusunda bir menti talebine "Reddet" diyebilir; menti nazik bir kapanış mesajı görür, o konuşmaya iki taraf da artık yazamaz. Kanıt: backend PR `menti-mentor#148` (`POST /api/conversations/:id/reject`), çatı PR `menti-mentor-v2#326`.
+**Kullanıcı ne görür:** Mentör, mesaj kutusunda bir menti talebine "Reddet" diyebilir; menti nazik bir kapanış mesajı görür, o konuşmaya iki taraf da artık yazamaz. ⚠️ Sınır (2026-09-26, 7b bulgusu): menti reddi ancak konuşmayı açınca (ya da o mentöre tekrar yazmayı deneyince nazik bir metinle) öğrenir — mesaj listesinde ret işareti ve anlık bildirim YOK (bildirim servisi henüz yalnız kayıt tutuyor, bkz. AN-09). Kanıt: backend PR `menti-mentor#148` (`POST /api/conversations/:id/reject`), çatı PR `menti-mentor-v2#326`.
 **Ne değişir:** Veritabanında konuşma tablosuna 1 yeni boş alan EKLENİR (`Conversation.rejectedAt`, "ne zaman reddedildi"). Mevcut konuşmalar değişmez, hiçbir veri silinmez. Dosya: `prisma/migrations/20260926120000_add_conversation_rejected_at/migration.sql` (`ADD COLUMN IF NOT EXISTS`, yalnız ekleme).
 **Geri alınır mı:** Evet — kod revert edilir; boş alan kalabilir ya da ayrı bir adımla kaldırılabilir.
 **Yedeği alınacak tablo:** `Conversation` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye yazılır). Not: merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).

@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 18:12 UTC · çatı main HEAD `b737af9` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 18:16 UTC · çatı main HEAD `9f0d095` · backend main HEAD `d87b227`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** Şerit 1 (alt ajan): AN-30 düzeltmeleri (merge YOK). Şerit 2: IC-01 #331 CI · IC-08 backend #151 + çatı #332 (7b incelemesi sürüyor). Sıradaki: U-18 düzeltmesi, PS-10, GV-19.
+**Şu an yapılan:** 🔵 AN-30 ve U-18 düzeltme turları push edildi → 2. tur 7b incelemeleri sürüyor (alt ajanlar, salt okuma). IC-01 #331 · IC-08 #151/#332 CI/inceleme bekliyor. Sıradaki: PS-10, GV-19, E-3 kalanları.
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -23,8 +23,8 @@
 |---|---|---|---|---|
 | çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) · 🟢 | koşuyor | gerekmiyor | CI bekleniyor → merge |
 | backend #151 + çatı #332 | IC-08 (onay bekleyene düzeltme notu) · 🟢+7b (auth) | koşuyor | sürüyor | CI + 7b ONAY → backend merge → pointer re-bump → çatı merge |
-| backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeşil (eski taban) | **SORUN VAR** (7b, 2026-09-26): iki PR da main ile ÇAKIŞIYOR (KR-19 blok kontrolü korunarak rebase gerekir; çatı pointer `1660da4` backend main'in devamı değil) + menti panelden tekrar yazınca ham hata metni · bildirim servisi yalnız log · reddetme hatası onay penceresinin arkasında | düzeltme sırada; PO EVET'i de bekler |
-| backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (eski taban) | **SORUN VAR** (7b): main ile ÇAKIŞIYOR (GV-18 #147 sonrası) · anahtar açılmadan önce: granüler formda 18+ beyanı + Aydınlatma Metni bağlantısı yok, hesap silmede 6 yeni rıza geri çekilmiyor · küçükler PR yorumunda | düzeltme sırada; PO EVET'i + yedek bekler |
+| backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeniden koşuyor | 1. tur SORUN VAR → düzeltildi (main merge `12f2fb4`/`1137b64`, nazik metin, hata pencere içinde) → **2. tur sürüyor** | PO EVET'i (KARAR-97) + yedek bekler |
+| backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (backend 882 test · çatı 8/8) | 1. tur SORUN VAR → düzeltildi (`df8db92`/`43490fc`: main merge, 18+ + Aydınlatma bağlantısı, tüm rızalar geri çekiliyor, bayrak kapalıyken eski davranış, çift tıklama 409) → **2. tur sürüyor** | PO EVET'i (KARAR-96) + yedek bekler |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **⭐ YENİ KAPI DAĞILIMI (2026-09-26, #328 sonrası — açık 122 satır; BITTI ve "→" katlanmış hariç, ~~…~~ yok sayıldı):**
