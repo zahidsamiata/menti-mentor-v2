@@ -26,6 +26,7 @@ import { buildTenantThemeVars } from '@/lib/branding';
 import { useAuth }    from '@/providers/AuthProvider';
 import { cn }         from '@/lib/utils';
 import { REGISTER_MESSAGES, resolveRegisterError } from '@/lib/registerMessages';
+import { PASSWORD_RULE_HINT, passwordRuleError } from '@/lib/validation';
 import type { InvitationData } from '@/types/invitation';
 
 // ─── İlerleme Göstergesi ──────────────────────────────────────────────────────
@@ -164,9 +165,9 @@ export default function RegisterContent() {
   const [submitErr, setSubmitErr] = useState<string | null>(null);
   const [loading,   setLoading]   = useState(false);
 
-  // ── Şifre gücü göstergesi (uzunluk tabanlı) ──────────────────────────────────
+  // ── Şifre gücü göstergesi (uzunluk tabanlı; kurala uymayan şifre her zaman "Zayıf") ──
   const pwStrength = password.length === 0 ? 0
-    : password.length < 8  ? 1
+    : passwordRuleError(password) ? 1
     : password.length < 12 ? 2
     : password.length < 16 ? 3
     : 4;
@@ -186,8 +187,10 @@ export default function RegisterContent() {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       e.email = 'Geçerli bir e-posta adresi girin.';
     }
-    if (!password || password.length < 8) {
-      e.password = 'Şifre en az 8 karakter olmalıdır.';
+    // GV-19: backend passwordPolicy ile aynı kural (8-128, harf + rakam).
+    const pwError = passwordRuleError(password);
+    if (pwError) {
+      e.password = pwError;
     }
     if (password !== confirm) {
       e.confirm = 'Şifreler eşleşmiyor.';
@@ -355,6 +358,8 @@ export default function RegisterContent() {
             autoComplete="new-password"
           />
 
+          <p className="-mt-2 text-xs text-muted-foreground">{PASSWORD_RULE_HINT}</p>
+
           {/* Şifre gücü göstergesi */}
           {password.length > 0 && (
             <div className="space-y-1 -mt-2">
@@ -373,7 +378,7 @@ export default function RegisterContent() {
               </div>
               <p className="text-[10px] text-muted-foreground">
                 Güç: <strong>{PW_LABELS[pwStrength]}</strong>
-                {pwStrength < 2 && ' — en az 8 karakter kullanın'}
+                {pwStrength < 2 && ' — en az 8 karakter, harf ve rakam kullanın'}
               </p>
             </div>
           )}

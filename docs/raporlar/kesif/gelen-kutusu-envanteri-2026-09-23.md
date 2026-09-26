@@ -1,3 +1,5 @@
+> 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
+> TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi; etiket 2026-09-26 YN-11 ile eklendi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
 > İŞLENME: ✅ işlendi (2026-09-23, tur: ANALİZ TURU BULGULARI DOSYAYA İŞLENDİ) → `03-PO-ELLE-ISLER` (`docs/gelen/` silme = PO işi) · kutu: 2026-09-23 DA turu (belge-duzeni-rehberi § KURAL 23)
 
 # `docs/gelen/` Envanteri — Ne Silinebilir, Ne Kurtarıldı (2026-09-23)

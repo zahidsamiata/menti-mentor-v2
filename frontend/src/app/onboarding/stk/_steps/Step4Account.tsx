@@ -9,6 +9,7 @@ import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { selfServeRegister, updateOnboarding } from '@/lib/api/selfServe';
 import { REGISTER_MESSAGES } from '@/lib/registerMessages';
+import { PASSWORD_RULE_HINT, passwordRuleError } from '@/lib/validation';
 import { cn } from '@/lib/utils';
 import type { WizardData } from '../_StkOnboardingContent';
 
@@ -39,7 +40,9 @@ function validate(data: WizardData, tier: DomainTier, institutionRole: string, v
   const errs: Record<string, string> = {};
   if (!data.fullName.trim()) errs['fullName'] = 'Ad soyad zorunludur.';
   if (!data.email.includes('@')) errs['email'] = 'Geçerli bir e-posta adresi girin.';
-  if (data.password.length < 8)  errs['password'] = 'Şifre en az 8 karakter olmalı.';
+  // GV-19: backend passwordPolicy ile aynı kural (8-128, harf + rakam).
+  const passwordError = passwordRuleError(data.password);
+  if (passwordError) errs['password'] = passwordError;
   if (!data.kvkkConsent) errs['kvkk'] = 'Devam etmek için onay vermeniz gerekiyor.';
   if (tier !== 'INSTITUTION') {
     if (!institutionRole.trim()) errs['institutionRole'] = 'Kurumunuzdaki görevinizi belirtin.';
@@ -235,7 +238,7 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
           name="password"
           type="password"
           autoComplete="new-password"
-          placeholder="En az 8 karakter"
+          placeholder={PASSWORD_RULE_HINT}
           value={data.password}
           onChange={(e) => { onUpdate({ password: e.target.value }); setErrors((p) => ({ ...p, password: '' })); }}
           error={errors['password']}

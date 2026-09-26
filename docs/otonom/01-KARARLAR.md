@@ -139,6 +139,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-95** | **Kriz kanalı — güvenlik sorusu olarak yeniden** | **2** (I-18, IC-13) | ⬜ boş · ⭐ KARAR-80/M20'den doğdu (2026-09-26), KARAR-69 (c) gereği · öneri A |
 | **KARAR-96** | **🔵 EVET/HAYIR — AN-30 ayrı ayrı rıza kutuları (veritabanına 6 yeni rıza türü)** | **1** (AN-30) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #142 + çatı #320 |
 | **KARAR-97** | **🔵 EVET/HAYIR — U-18 mentör mesaj talebini reddedebilsin (veritabanına 1 yeni alan)** | **1** (U-18) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #148 + çatı #326 |
+| **KARAR-98** | **🔵 EVET/HAYIR — AN-26 yanıtsız mentöre hatırlatma + yöneticiye bildirim (veritabanına 3 yeni alan)** | **1** (AN-26) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #157 + çatı #337 |
 
 ---
 
@@ -1643,6 +1644,20 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
 **HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; mentör talebi reddedemez (bugünkü gibi).
 **Cevap vermezsen:** U-18 PR-ACIK kalır; AN-20 (uyum rozeti dili) sırası U-18'e bağlı (KARAR-80/M5).
+**CEVAP:**
+
+---
+
+### KARAR-98 · 🔵 EVET/HAYIR — AN-26: yanıt vermeyen mentöre hatırlatma, uzun sessizlikte kurum yöneticisine bildirim canlıya çıksın mı? (1 iş açar: AN-26) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** Bir menti mentöre mesaj talebi gönderdikten sonra mentör hiç yanıt vermezse: **3. gün** mentöre nazik bir hatırlatma e-postası, **7. gün** ikinci hatırlatma, **10. gün** kurumun yöneticilerine "şu mentör 10 gündür yanıt vermedi" e-postası gider (senin KARAR-53 ④ cevabındaki süreler). Menti tarafında değişiklik yok (alternatif mentör önerilmez — KARAR-22 B). E-postalarda menti adı ya da mesaj içeriği yok. Canlıya çıktığı gün 14 günden eski konuşmalar için e-posta gönderilmez (toplu e-posta yağmuru olmasın diye). Kanıt: backend PR `menti-mentor#157` (`cronScheduler.ts` `runMentorResponseReminderCron`, her gün 12:00 UTC), çatı PR `menti-mentor-v2#337` (yalnız pointer).
+**Ne değişir:** Veritabanında konuşma tablosuna 3 boş alan EKLENİR ("1. hatırlatma ne zaman gitti", "2. hatırlatma ne zaman gitti", "yöneticiye ne zaman bildirildi") — aynı e-postanın iki kez gitmemesi için. Mevcut kayıtlar değişmez, hiçbir veri silinmez. Dosya: `prisma/migrations/20260926100000_add_conversation_reminder_guards/migration.sql` (`ADD COLUMN IF NOT EXISTS`, yalnız ekleme).
+**Geri alınır mı:** Evet — kod revert edilince e-postalar durur; boş alanlar kalabilir ya da ayrı bir adımla kaldırılabilir.
+**Yedeği alınacak tablo:** `Conversation` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye). Not: U-18 (KARAR-97) de aynı tabloya alan ekliyor — ikisine birden EVET gelirse tek yedek yeterli olabilir. Merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
+**Durum:** kod hazır · CI yeşil (backend 923 test; yeni 13 test, negatif: başka kurumun ve pasif üyeliğin yöneticisine gitmez) · bağımsız 7b incelemesi: sürüyor (sonucu bu satıra eklenecek; ONAY yoksa EVET gelse de merge yok). ⚠️ **7b 1. tur: SORUN VAR** (2026-09-26, yorum 5848943894): düzeltme sürüyor — main ile birleştirme, KARAR-53 ④ kapsamı (yalnız müsaitlik bloğu olmayan mentörler), pasif menti/üyelik kontrolü.
+**Alt soru (paylaşımlı havuz) — ayrıca cevapla:** mentör ile menti FARKLI kurumlardaysa 10. gün bildirimi kimin yöneticisine gitsin? **A)** mentinin kurumunun yöneticisine (menti o kurumun üyesi; ama mentör üzerinde yetkisi yok) · **B)** mentörün kendi kurumunun yöneticisine (mentör üzerinde yetkili; ama mentiyi tanımıyor) · **C)** ikisine birden. Cevap gelene kadar kod bu durumda **bildirimi göndermez** (hatırlatmalar mentöre yine gider). Benim önerim: **B** — yanıt vermeyen mentörle konuşabilecek kişi onun kendi yöneticisi. Bu senin ürün kararın, önerime güvenme.
+**EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye; yanıtsız talepler bugünkü gibi sessiz kalır.
+**Cevap vermezsen:** AN-26 PR-ACIK kalır.
 **CEVAP:**
 
 ---

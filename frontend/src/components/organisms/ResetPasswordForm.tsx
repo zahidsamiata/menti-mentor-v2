@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { PasswordField } from '@/components/molecules/PasswordField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { useFormState } from '@/hooks/useFormState';
-import { resetPasswordSchema, type ResetPasswordFormValues } from '@/lib/validation';
+import { PASSWORD_RULE_HINT, resetPasswordSchema, type ResetPasswordFormValues } from '@/lib/validation';
 import { authApi } from '@/lib/api/auth';
 
 const INITIAL: ResetPasswordFormValues = { password: '', confirmPassword: '' };
@@ -45,6 +45,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
         value={form.values.password}
         onChange={form.handleChange}
         error={form.errors.password}
+        hint={PASSWORD_RULE_HINT}
         disabled={form.isSubmitting}
       />
 
