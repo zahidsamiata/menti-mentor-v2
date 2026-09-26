@@ -1166,3 +1166,11 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - Canlı kontrol her merge sonrası temiz (`/health` ok:true/db:up, site 200).
 - **DB/migration/seed uygulanmadı · #110 ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
 - **Limitin en çok gittiği yer:** bu turda git worktree bozulmasının teşhisi (~15 dakika) ve GitHub mergeable false-negative'inin araştırılması — ikisi de gerçek engellerdi, kaçınılmazdı.
+
+### ARA KAYIT 9 · 2026-09-26 — U-18 uygulandı (PR açık, migration nedeniyle merge edilmedi)
+- **U-18 (mesaj talebi kabul/ret kapısı) uygulandı**, izole worktree'de (`.worktrees/u18` + `.worktrees/u18/backend`, K4.1): backend `menti-mentor#148` + çatı `menti-mentor-v2#326`, ikisi de CI yeşil, `mergeable: MERGEABLE`. **MERGE EDİLMEDİ** — migration içeriyor, policy gereği PO'nun açık "evet"i + yedek gerekir.
+- Uygulama: `Conversation.rejectedAt DateTime?` (nullable, additive, migration dosyası elle yazıldı/çalıştırılmadı) · `POST /api/conversations/:id/reject` (yalnız mentör, 404 varlık-ifşasız, idempotent) · `sendMessage` VE `startConversation` reddedilmiş konuşmada 409 (agent'ın kendi kararıyla `startConversation`'a da eklendi — yeniden-başlatma bypass'ını kapatmak için) · KARAR-22 B uygulandı (nazik ret, I-16'nın "alternatif mentör" cümleleri BİLEREK ÇIKARILDI).
+- Testler: backend +7, çatı +6 (394/394 tüm suite yeşil), tsc/eslint/build temiz.
+- Kuyruk güncellendi: U-18 satırı `BEKLIYOR` → `PR-ACIK`, tam kanıt Not'a eklendi.
+- **DB/migration/seed uygulanmadı · #110 ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
+- CANLIDA BAK: henüz yok (PR açık, merge PO'yu bekliyor) — merge + backend pointer bump sonrası "Reddet" butonu mentör mesaj thread'inde görünecek.
