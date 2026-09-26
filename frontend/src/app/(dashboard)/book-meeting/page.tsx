@@ -125,8 +125,12 @@ function BookMeetingContent() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && <AlertMessage type="error" message={error} />}
+        {/* K-05: bu uyarı yalnızca mentörün BELİRLİ bloğu varken (KATI/①) ve seçilen saat o bloğa
+            uymadığında görünür (isFitAvailability, blok yokken her zaman true döner) — backend bu
+            durumda talebi 409 ile KESİN reddeder (meetingController.ts ~505). "Yine de talep
+            gönderebilirsiniz" ifadesi esnek görünüp yanıltıyordu; KATI mentörde seçenek yok. */}
         {selectedStart && !isFitAvailability && (
-          <AlertMessage type="info" message="Seçtiğiniz saat mentörün müsaitlik bloğu dışında. Yine de talep gönderebilirsiniz." />
+          <AlertMessage type="error" message="Seçtiğiniz saat mentörün müsaitlik bloğu dışında. Bu mentör yalnızca müsait gösterdiği saatlerden seçebilirsiniz — talebiniz aksi halde reddedilir." />
         )}
 
         <div className="space-y-2">
