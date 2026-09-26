@@ -203,7 +203,7 @@ export default function InvitePage() {
               role === r ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:bg-accent'
             }`}
           >
-            {r === 'MENTI' ? 'Menti Daveti' : 'Mentor Daveti'}
+            {r === 'MENTI' ? 'Menti Daveti' : 'Mentör Daveti'}
           </button>
         ))}
         {(['EMAIL', 'WHATSAPP'] as Format[]).map((f) => (

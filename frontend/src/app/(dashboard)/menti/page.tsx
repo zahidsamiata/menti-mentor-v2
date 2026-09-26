@@ -201,7 +201,7 @@ export default function MentiDashboardPage() {
           <div>
             <h3 className="font-semibold text-sm">DISC Profilinizi Tamamlayın</h3>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Profil tamamlandığında size uygun mentorlar gösterilmeye başlar.
+              Profil tamamlandığında size uygun mentörler gösterilmeye başlar.
             </p>
           </div>
           <Button asChild size="sm">
@@ -220,12 +220,12 @@ export default function MentiDashboardPage() {
             // Küçük havuz koruması: eşik altında (<3) sayı gösterme — kimliği daraltabilir
             <p className="text-xs text-amber-700 dark:text-amber-400">
               Profiliniz analiz edildi.{' '}
-              <strong className="font-semibold">{mentorCountData.count} onaylı mentor</strong>{' '}
+              <strong className="font-semibold">{mentorCountData.count} onaylı mentör</strong>{' '}
               bu programda yer alıyor — yönetici onayı sonrası eşleşme başlayacak.
             </p>
           ) : (
             <p className="text-xs text-amber-700 dark:text-amber-400">
-              DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentor listesine erişebilirsiniz.
+              DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentör listesine erişebilirsiniz.
             </p>
           )}
           {/* F-15: umut/anlam sinyali — bekleme "boş" hissettirmesin (sayı uydurmadan). */}
@@ -267,13 +267,13 @@ export default function MentiDashboardPage() {
       {/* Önerilen Mentorlar */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Önerilen Mentorlar</CardTitle>
+          <CardTitle className="text-base">Önerilen Mentörler</CardTitle>
         </CardHeader>
         <CardContent>
           {needsDiscTest ? (
             <div className="text-center py-8 space-y-3">
               <p className="text-sm text-muted-foreground">
-                DISC profilinizi tamamladıktan sonra size uygun mentorlar burada görünecek.
+                DISC profilinizi tamamladıktan sonra size uygun mentörler burada görünecek.
               </p>
               <Button asChild size="sm">
                 <Link href="/disc-test">DISC Testini Başlat →</Link>
@@ -283,7 +283,7 @@ export default function MentiDashboardPage() {
             <div className="text-center py-8 space-y-2">
               <p className="text-sm font-medium">Yönetici onayı bekleniyor</p>
               <p className="text-xs text-muted-foreground">
-                Profiliniz inceleniyor. Onay sonrasında mentor listesine erişip görüşme talep edebilirsiniz.
+                Profiliniz inceleniyor. Onay sonrasında mentör listesine erişip görüşme talep edebilirsiniz.
               </p>
             </div>
           ) : mentorsLoading ? (
@@ -296,9 +296,9 @@ export default function MentiDashboardPage() {
             <div className="text-center py-8 space-y-2">
               {/* PS-10: menti tarafında DISC'e bağlı eleme YOK (matching.ts rankMentorsForMenti) — liste yalnız
                   programda onaylı ve erişilebilir mentor yoksa boş kalır. Profili suçlama, teste gönderme. */}
-              <p className="text-sm font-medium">Programınızda şu an görüşülebilecek mentor yok</p>
+              <p className="text-sm font-medium">Programınızda şu an görüşülebilecek mentör yok</p>
               <p className="text-xs text-muted-foreground">
-                Bu, profilinizle ilgili değil. Programınıza mentorlar katıldıkça burada görünecekler.
+                Bu, profilinizle ilgili değil. Programınıza mentörler katıldıkça burada görünecekler.
               </p>
             </div>
           ) : (
