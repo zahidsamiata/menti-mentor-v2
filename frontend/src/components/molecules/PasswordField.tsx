@@ -18,9 +18,11 @@ interface PasswordFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputEle
   error?: string;
   /** Alanın sağ üstünde gösterilen ek bağlantı (örn. "Şifremi unuttum") */
   rightLabel?: React.ReactNode;
+  /** Alanın altında gösterilen yardım metni (örn. şifre kuralı). Hata varken gizlenir. */
+  hint?: string;
 }
 
-export function PasswordField({ label, error, rightLabel, className, id: externalId, ...inputProps }: PasswordFieldProps) {
+export function PasswordField({ label, error, rightLabel, hint, className, id: externalId, ...inputProps }: PasswordFieldProps) {
   const internalId = useId();
   const id = externalId ?? internalId;
   const [visible, setVisible] = useState(false);
@@ -36,7 +38,7 @@ export function PasswordField({ label, error, rightLabel, className, id: externa
           id={id}
           type={visible ? 'text' : 'password'}
           aria-invalid={!!error}
-          aria-describedby={error ? `${id}-error` : undefined}
+          aria-describedby={error ? `${id}-error` : hint ? `${id}-hint` : undefined}
           className={cn('pr-10', error && 'border-destructive focus-visible:ring-destructive', className)}
           {...inputProps}
         />
@@ -50,11 +52,15 @@ export function PasswordField({ label, error, rightLabel, className, id: externa
           {visible ? <EyeOff className="h-4 w-4" aria-hidden /> : <Eye className="h-4 w-4" aria-hidden />}
         </button>
       </div>
-      {error && (
+      {error ? (
         <p id={`${id}-error`} role="alert" className="text-xs text-destructive">
           {error}
         </p>
-      )}
+      ) : hint ? (
+        <p id={`${id}-hint`} className="text-xs text-muted-foreground">
+          {hint}
+        </p>
+      ) : null}
     </div>
   );
 }
