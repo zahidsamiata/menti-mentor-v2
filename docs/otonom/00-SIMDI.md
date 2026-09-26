@@ -1,7 +1,7 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 16:35 UTC · çatı main HEAD `57f2736`→(pointer #327 sonrası ilerledi, `git log` ile teyit edilecek) · backend main HEAD `cde7bb8`
+**Son güncelleme:** 2026-09-26 16:38 UTC · çatı main HEAD `6a0a33a` · backend main HEAD `cde7bb8`
 
 **Durum:** ÇALIŞIYOR
 
