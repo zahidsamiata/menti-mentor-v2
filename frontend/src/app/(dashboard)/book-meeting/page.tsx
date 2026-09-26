@@ -259,7 +259,10 @@ function BookMeetingContent() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={submitting || !date || !time || !msgValid}>
+            {/* K-05: "Menti müsait olmayan saati SEÇEMİYOR" — uyarı göstermek yetmiyordu, buton
+                blok-dışı seçimde de tıklanabilir kalıyordu (backend zaten 409 ile reddediyordu,
+                ama menti "gönder"e tıklayabiliyordu). Artık KATI mentörde blok dışı seçim gönderilemez. */}
+            <Button type="submit" className="w-full" disabled={submitting || !date || !time || !msgValid || !isFitAvailability}>
               {submitting ? 'Gönderiliyor…' : 'Randevu Talebini Gönder'}
             </Button>
             <p className="text-xs text-muted-foreground text-center">Talebiniz mentöre iletilecek, onaylaması gerekiyor.</p>

@@ -84,6 +84,37 @@ describe('BookMeeting — availability null-safety regression', () => {
     expect(screen.queryByText(/yine de talep gönderebilirsiniz/i)).not.toBeInTheDocument();
   });
 
+  // K-05: uyarı göstermek yetmiyordu — geçerli bir niyet mesajı yazılsa bile buton blok-dışı
+  // seçimde tıklanabilir kalıyordu (backend zaten 409 ile reddediyordu, ama "gönder" denenebiliyordu).
+  it('K-05: geçerli niyet mesajı yazılsa bile blok dışı saatte "Randevu Talebini Gönder" devre dışı', () => {
+    availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+    render(<BookMeetingPage />);
+    const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
+    const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
+    fireEvent.change(dateInput, { target: { value: '2027-01-04' } }); // Monday
+    fireEvent.change(timeInput, { target: { value: '10:00' } }); // blok dışı (14:00-16:00 değil)
+    const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+    fireEvent.change(textarea, { target: { value: 'B'.repeat(60) } }); // msgValid = true
+
+    const submitButton = screen.getByRole('button', { name: /randevu talebini gönder/i });
+    expect(submitButton).toBeDisabled();
+  });
+
+  it('K-05: blok İÇİ saat + geçerli mesajla "Randevu Talebini Gönder" aktif', () => {
+    availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+    render(<BookMeetingPage />);
+    const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
+    const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
+    fireEvent.change(dateInput, { target: { value: '2027-01-04' } }); // Monday
+    // Blok varsayılan 'Europe/Istanbul' (UTC+3); test ortamı UTC → 11:30 UTC = 14:30 İstanbul (blok içi).
+    fireEvent.change(timeInput, { target: { value: '11:30' } });
+    const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+    fireEvent.change(textarea, { target: { value: 'B'.repeat(60) } });
+
+    const submitButton = screen.getByRole('button', { name: /randevu talebini gönder/i });
+    expect(submitButton).not.toBeDisabled();
+  });
+
   // K-20 (KARAR-53 ④, 2026-09-26): mentörün hiç bloğu yoksa randevu formu hiç render edilmez —
   // eski "yine de talep gönderebilirsiniz" yanıltıcı yönlendirmesi kaldırıldı, ne KATI-mentör
   // kesin-ret uyarısı ne de randevu formu görünür; yalnız mesaj yolu vardır.
