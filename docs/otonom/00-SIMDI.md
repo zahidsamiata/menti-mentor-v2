@@ -1,7 +1,7 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 19:56 UTC · çatı main HEAD `8e38161` · backend main HEAD `14877f7` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 20:13 UTC · çatı main HEAD `470bed0` · backend main HEAD `14877f7` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
@@ -27,6 +27,8 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (941 test) | ✅ ONAY (2. tur) | PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
+| backend #165 + çatı #344 | Y1-B9 dondurulmuş/reddedilmiş kurum erişemez · 🟢+7b (auth; K5-Y1, kuyrukta satırsız) | yeşil (955 test) | ek düzeltme: KVKK veri hakları uçları askıdan muaf tutuluyor → sonra 7b | 7b ONAY → merge → re-bump |
+| backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı · 🟢+7b (auth) | yeşil | **SORUN VAR (ürün):** Bekleme Odası kimseye açılmaz | **KARAR-101** (A: olduğu gibi · B: bekleme odası açık, iç uçlar kapalı) |
 | backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim · kuyrukta 🔵 (içerik migration'sız) | yeşil | ✅ ONAY | kapı yeniden değerlendirilmeli; 🟢'ye çekilirse #162 → re-bump → #340 |
 | backend #160 | AN-02 seed metin yazımı · 🔵 KARAR-99 | koşuyor | gerekmiyor (yalnız metin) | PO EVET + `Question`/`SjtQuestion` yedeği + 2 satır UPDATE |
 | backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
@@ -43,7 +45,7 @@
 - ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` (backend, IC-08) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` #151 CI yeşil + 7b ONAY (yorum 5848715616); çatı #332 buna bağlı. Ardışık ret: 1 (sonraki merge'ler başarılı → sayaç sıfırlandı).
 - 🔵 DB erişimi: AN-30 (KARAR-96) ve U-18 (KARAR-97) için PO "EVET" verirse tarihli yedek gerekir → bu VPS'te DATABASE_URL yok: "tek seferlik DB erişimi gerekiyor: AN-30 #142/#320 · U-18 #148/#326".
 
-**PO'ya sorular:** KARAR-96 (AN-30) · KARAR-97 (U-18) · KARAR-98 (AN-26 + alt soru) · KARAR-99 (AN-02 metin) — 🔵 EVET/HAYIR · KARAR-100 (`SJT_ENRICHED` gerekçesiz değer; KARAR-76 ile aynı tür).
+**PO'ya sorular:** ⭐ **KARAR-101** (güvenlik açığı B8 nasıl kapansın — Bekleme Odası kalsın mı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100 (gerekçesiz değer).
 
 **Strateji katmanına not:**
 - (K5-Y1) `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md`: B8 + B9 güvenlik açıkları kuyrukta satırsızdı → ajan K5-Y1 gereği "Y1-B8" / "Y1-B9" kod adlarıyla PR açıyor (kuyruğa satır EKLENMEDİ; satır açmak sizde). D8 (09-DURUM bayat) tur kapanışındaki belge senkronunda ele alınacak.
