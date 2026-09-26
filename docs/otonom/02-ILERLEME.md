@@ -1216,3 +1216,4 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 18:25 UTC · **IC-08 7b ONAY** (iki PR). ⛔ `gh pr merge 151` sınıflandırıcı reddi ("Merge Without Review") → PR-ACIK, 00-SIMDI Engeller'e aynen yazıldı (ardışık ret: 1). #332'ye 7b önerisi eklendi (`41ed345`, 9/9 test).
 - 2026-09-26 18:26 UTC · **PS-10 BITTI** — çatı #333 merge (`86ed188`). CANLIDA BAK: boş mentör listesinde menti profili suçlanmıyor, DISC testine yönlendirme yok. Canlı ok:true · db:up · site 200.
 - 2026-09-26 18:28 UTC · **YN-13 BITTI (kısmen)** — çatı #334 (`49c8cbb`); PO kısmı 03-PO-ELLE-ISLER'de. **PS-09** backend #153 merge (`9723c50`), pointer bump KR-21 ile. **KR-21 PR-ACIK** — backend #154.
+- 2026-09-26 18:33 UTC · **KR-21** backend #154 merge (`3f76c7b`) · çatı pointer PR **#336** (PS-09 + KR-21). **F-23 BITTI (doc-senkron)** — GV-11 #132 ile ortak `authenticateTenantAdmin` + `membershipAccess` deseni zaten canlıda; satırdaki kanıt bayattı.
