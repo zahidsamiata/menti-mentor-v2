@@ -18,6 +18,17 @@ export interface RegisterPayload {
   // Davet token'ı (davet linkindeki ?token). Backend doğrular → geçerliyse davetli APPROVED
   // olur ve login PENDING 403'üne takılmaz (PO kararı 2026-09-01, Seçenek A).
   inviteToken?: string;
+  // AN-30 / KARAR-34 — granüler rıza ekranı FLAG'lı (NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED,
+  // varsayılan kapalı; bkz. _RegisterContent.tsx). Flag kapalıyken bu alan HİÇ gönderilmez →
+  // backend eski tek-kutu (`kvkkConsent`) davranışını aynen uygular.
+  granularConsent?: {
+    discMatching: true;
+    foreignStorage: true;
+    dataProcessing: true;
+    anonymizedImprovement: true;
+    crossTenantSharing?: boolean;
+    oceanProfiling?: boolean;
+  };
 }
 
 export interface RegisterResponse {
