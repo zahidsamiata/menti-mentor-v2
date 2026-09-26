@@ -141,6 +141,7 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | DK-02 | Dokploy'da SMTP ayarlarını gir ve `TENANT_NOTIFICATIONS_ENABLED='true'` yap | Platform panelinde bir kuruma "düzeltme iste" denince kurum e-postası gelir | B5 · #5 · A8 |
 | DK-03 | teyit gerek — satırda PO eli gerektiren adım yazılı değil; yalnız kapsam dışı "kayıtsız tam erişim" sorusu avukatta | Avukat cevabı A6'ya yazılır | A6 |
 | AN-36 | Kurumun yasal kimlik bilgilerini (adres · KEP · MERSİS) sağla; veri işleyen sözleşme metnini avukata onaylat | Bilgiler panelde görünür; sözleşme metni avukat onaylı | — |
+| AN-30 (🔵, KARAR-96 EVET'inden sonra) | Dokploy'da backend'e `GRANULAR_CONSENT_ENABLED='true'`, frontend'e `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED='true'` gir (frontend değişkeni derleme anında okunur → yeniden dağıtım gerekir); önce rıza metinlerinin avukat onayını al | Kayıt ekranında tek KVKK kutusu yerine 4 zorunlu + 2 isteğe bağlı kutu görünür | KARAR-96 |
 | AN-41 | Kod-senkron güncellenen KVKK metin paketini avukata götür, onaylat | Avukat onayı tarihiyle `02-ILERLEME`'ye yazılır | avukat paketi |
 
 ## Karar bekleyenler (kart `01-KARARLAR.md`'de — PO cevap yazacak)
