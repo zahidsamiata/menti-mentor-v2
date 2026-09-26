@@ -1,15 +1,21 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import BookMeetingPage from '@/app/(dashboard)/book-meeting/page';
 
+const pushMock = vi.fn();
 vi.mock('next/navigation', () => ({
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn() }),
   useSearchParams: () => ({ get: (k: string) => (k === 'mentorId' ? 'mentor-1' : null) }),
 }));
 vi.mock('@/providers/AuthProvider', () => ({
   useAuth: () => ({ user: { id: 'user-1', role: 'MENTI' } }),
 }));
 vi.mock('@/hooks/useApiClient', () => ({ useApiClient: () => ({}) }));
+
+const startConversationMock = vi.fn();
+vi.mock('@/lib/api/conversations', () => ({
+  conversationsApi: { start: (...args: unknown[]) => startConversationMock(...args) },
+}));
 
 // Mutable availability mock — set startTime/endTime to null to reproduce the crash
 const availabilityMock = { data: undefined as unknown };
@@ -19,6 +25,11 @@ vi.mock('@/hooks/useQuery', () => ({
 }));
 
 describe('BookMeeting — availability null-safety regression', () => {
+  beforeEach(() => {
+    pushMock.mockClear();
+    startConversationMock.mockReset();
+  });
+
   it('startTime/endTime null bloklar varken ilk render çökmez', () => {
     availabilityMock.data = {
       blocks: [{ weekday: 'MON', startTime: null, endTime: null }],
@@ -42,10 +53,14 @@ describe('BookMeeting — availability null-safety regression', () => {
     }).not.toThrow();
   });
 
-  it('U-10: mentörün açık müsaitliği yokken kart yerine yönlendirici boş-durum gösterir', () => {
+  // K-20 (KARAR-53 ④, 2026-09-26): mentör hiç bloğu yoksa backend HER randevu talebini kesin
+  // reddeder — bu yüzden randevu formu artık gösterilmiyor, mesaj yolu sunuluyor.
+  it('K-20: mentörün açık müsaitliği yokken randevu formu yerine mesaj yolu gösterir', () => {
     availabilityMock.data = { blocks: [] };
     render(<BookMeetingPage />);
-    expect(screen.getByText(/henüz açık müsaitlik saati belirtmemiş/i)).toBeInTheDocument();
+    expect(screen.getByText(/henüz müsait saat belirtmemiş/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /mesaj gönder/i })).toBeInTheDocument();
+    expect(document.querySelector('input[type="date"]')).not.toBeInTheDocument();
   });
 
   it('I-05: talep ekranında haftalık görüşme sıklığı notu görünür; değer yokken ekran bozulmaz', () => {
@@ -69,18 +84,47 @@ describe('BookMeeting — availability null-safety regression', () => {
     expect(screen.queryByText(/yine de talep gönderebilirsiniz/i)).not.toBeInTheDocument();
   });
 
-  // K-05: mentörün hiç bloğu yoksa (④, message-only) backend'in katı zaman-eşleşmesi devreye
-  // girmez; ekran hâlâ "yine de talep gönderebilirsiniz" yönlendirmesini gösterebilir — bu ifade
-  // yalnızca KATI/① mentörde yanıltıcıdır, blok-yokken doğrudur.
-  it('K-05: bloksuz (message-only) mentörde "yine de talep gönderebilirsiniz" yönlendirmesi kalır', () => {
+  // K-20 (KARAR-53 ④, 2026-09-26): mentörün hiç bloğu yoksa randevu formu hiç render edilmez —
+  // eski "yine de talep gönderebilirsiniz" yanıltıcı yönlendirmesi kaldırıldı, ne KATI-mentör
+  // kesin-ret uyarısı ne de randevu formu görünür; yalnız mesaj yolu vardır.
+  it('K-20: bloksuz mentörde ne randevu formu ne eski yanıltıcı metin görünür, yalnız mesaj yolu vardır', () => {
     availabilityMock.data = { blocks: [] };
     render(<BookMeetingPage />);
-    const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
-    const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
-    fireEvent.change(dateInput, { target: { value: '2027-01-04' } });
-    fireEvent.change(timeInput, { target: { value: '10:00' } });
 
-    expect(screen.getByText(/yine de bir zaman önerip talep gönderebilirsiniz/i)).toBeInTheDocument();
+    expect(screen.queryByText(/yine de bir zaman önerip talep gönderebilirsiniz/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/yalnızca müsait gösterdiği saatlerden seçebilirsiniz/i)).not.toBeInTheDocument();
+    expect(document.querySelector('input[type="date"]')).not.toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/kendinizi tanıtın/i)).toBeInTheDocument();
+  });
+
+  it('K-20: mesaj gönderilince conversationsApi.start çağrılır ve konuşmaya yönlendirilir', async () => {
+    availabilityMock.data = { blocks: [] };
+    startConversationMock.mockResolvedValueOnce({
+      ok: true,
+      data: { conversation: { id: 'convo-9' }, message: { id: 'm1', senderUserId: 'user-1', content: 'x', createdAt: '2026-01-01' } },
+    });
+    render(<BookMeetingPage />);
+
+    const textarea = screen.getByPlaceholderText(/kendinizi tanıtın/i);
+    fireEvent.change(textarea, { target: { value: 'Merhaba, sizinle görüşmek isterim.' } });
+    fireEvent.click(screen.getByRole('button', { name: /mesaj gönder/i }));
+
+    await waitFor(() => expect(startConversationMock).toHaveBeenCalledWith(
+      {},
+      { mentorUserId: 'mentor-1', message: 'Merhaba, sizinle görüşmek isterim.' },
+    ));
+    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/messages/convo-9'));
+  });
+
+  it('K-20: mesaj gönderimi başarısız olursa hata görünür, sessizce yutulmaz', async () => {
+    availabilityMock.data = { blocks: [] };
+    startConversationMock.mockResolvedValueOnce({ ok: false, error: { message: 'Sunucu hatası.' } });
+    render(<BookMeetingPage />);
+
+    fireEvent.change(screen.getByPlaceholderText(/kendinizi tanıtın/i), { target: { value: 'Merhaba.' } });
+    fireEvent.click(screen.getByRole('button', { name: /mesaj gönder/i }));
+
+    await waitFor(() => expect(screen.getByText('Sunucu hatası.')).toBeInTheDocument());
+    expect(pushMock).not.toHaveBeenCalled();
   });
 });
