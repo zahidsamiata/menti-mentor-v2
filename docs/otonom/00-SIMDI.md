@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 23:28 UTC · çatı main HEAD `8f3a2c5` · backend main HEAD `ec2bd97` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 23:50 UTC · çatı main HEAD `75979b3` · backend main HEAD `4db73a1` (= canlı pointer)
 
-**Durum:** ÇALIŞIYOR — önceki tur kapandı (TUR ÖZETİ: `02-ILERLEME.md` başı), yeni tur başladı (VPS · en fazla 2 şerit).
+**Durum:** DURDU (K1-a'ya en yakın) — kuyrukta hemen yapılabilir 🟢 yok; kalanlar karar/PO eli/büyük özellik bekliyor. Gerekçe ve liste: `02-ILERLEME.md` başındaki 2. tur TUR ÖZETİ.
 
-**Şu an yapılan:** Y3b canlıda. Alt ajan: AN-07 (eşleştirmede take:500 skorlamadan önce kesiyor — K5-Y2 bulgusu).
+**Şu an yapılan:** yok — PO cevapları (özellikle ⭐ KARAR-101) gelince devam. Bir sonraki turda: K5-Y4 · F-01 · cevaplanan 🔵 kartlarının yedek+merge'ü.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #171 + çatı #353 | AN-07 (aday kesmesi skordan sonra) | ok:true, db:up, site 200 |
 | backend #170 + çatı #352 | Y3b (başka kurumun KVKK/metrik isteği → 404) | ok:true, db:up, site 200 |
 | backend #169 + çatı #351 | K5-Y3 (10 uca 41 negatif test — açık yok) | ok:true, db:up, site 200 |
 | çatı #350 | K-05b (saat yalnız müsait aralıklardan) | ok:true, db:up, site 200 |

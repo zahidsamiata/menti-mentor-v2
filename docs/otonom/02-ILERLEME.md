@@ -2,6 +2,26 @@
 
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
 
+## TUR ÖZETİ (2026-09-26, VPS oturumu — 2. tur, 2026-09-26 23:50 UTC)
+
+**Kuyruk son dağılımı:** 90 satır: 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51 (1. tur sonu: 90 satır — 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51).
+
+**BITTI ve CANLIDA (kullanıcı artık şunu görüyor):**
+- KR-19b — yönetici engellediği çiftte mesaj gönderme ve eşleşme isteği de reddediliyor (#348).
+- F-28b — 21 ekranda durum metinleri tek sözlükten (#349) · AN-10b — öğrenme kartında "mentörlüğün" (#347).
+- K-05b — menti görüşme saatini yalnız mentörün müsait aralıklarından seçiyor (#350).
+- K5-Y3 — 10 riskli uca 41 negatif test; açık yok (#351) · Y3b — başka kurumun KVKK/metrik isteği 404 (#352).
+- AN-07 — kalabalık havuzda en iyi aday kaybolmuyor, liste daha hızlı (#353).
+- Denetimler: K5-Y2 (64 BITTI satırı yeniden denetlendi — 4'ü yeniden açılıp 3'ü kapatıldı, GV-12 → KARAR-102) · K5-Y3 tarama (179 uç, 134'ünde izolasyon testi yok — rapor).
+
+**KARAR BEKLIYOR (bu turda açılan):** KARAR-102 (kayıt sonrası e-posta doğrulaması — GV-12 kalanı). Önceki turdan: ⭐ KARAR-101 · KARAR-96/97/98/99/100.
+
+**DURDU — gerekçe:** Kuyrukta hemen yapılabilir 🟢 kalmadı: kalanlar karar bekliyor (E-3 kalemleri, AN-12, AN-49, IC-10/AN-05 adları), PO eli/dış hizmet gerektiriyor (F-05 CAPTCHA sağlayıcısı, Y-12 çerez/analitik), büyük özellik ya da sıra bağımlı (AN-29, AN-31, F-24, Y-17 → PS-A3). K5'ten Y1-Y3 yapıldı; Y4 (karar kartı kanıt tazeleme) ve F-01 (büyük belge reorg) düşük değerli belge işi olarak bir sonraki tura bırakıldı — K1-(a)'ya en yakın durum.
+
+**BACKEND:** pointer `eb48287` → **`4db73a1`** (= backend main HEAD ✅). **STASH:** yok. **Açık worktree'ler:** yalnız önceki oturumlardan kalan `/tmp` ve `.claude/worktrees` kopyaları (silinmedi — PO onayıyla temizlenir).
+
+---
+
 ## TUR ÖZETİ (2026-09-26, VPS oturumu — GÖREV 0 kapı 4 renk + GÖREV 1 uzun çalışma, 2026-09-26 21:32 UTC)
 
 **Kapı dağılımı (açık satır, BITTI ve "→" hariç):** önce (GÖREV 0 öncesi) 122 satır — 🟢 19 · 🟡 51 · 🔴 49 (+2 karışık) · 🔵 0 → GÖREV 0 sonrası 🟢 51 · 🔵 11 · 🟡 9 · 🔴 51 → **tur sonu 90 satır: 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51.**
@@ -1293,3 +1313,4 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 22:48 UTC · **K5-Y3 taraması** — 179 uç, 134'ünde kurum izolasyonu/IDOR negatif testi yok (`docs/raporlar/kesif/negatif-test-boslugu-2026-09-26.md`); clubRoutes/jobListingRoutes test uygulamasına bağlı değil. En riskli 10 uç için test yazımı alt ajanda (yalnız test; açık bulunursa `it.fails` + rapor).
 - 2026-09-26 23:08 UTC · **K5-Y3** — backend #169 + çatı #351 (`731b76a`): 10 riskli uca 41 negatif test (kimliksiz · yanlış rol · başka kurum · aynı kurumda başkası); **açık bulunmadı**. İki yanlış durum kodu (veri sızıntısı yok) → Y3b alt ajanda. Canlı ok:true · db:up · site 200.
 - 2026-09-26 23:28 UTC · **Y3b BITTI** — 7b ONAY · backend #170 (`ec2bd97`) + çatı #352 (`8f3a2c5`). CANLIDA BAK: başka kurumun yöneticisi bir kullanıcının verisini dışa aktarma/silmeye çalışırsa 404 (önce 500); mentör metriklerinde 404 (önce 200 sıfır). Canlı ok:true · db:up · site 200. Not: metrik kurum kontrolü `User.tenantId`'e dayanıyor (çoklu üyelik gelirse değişmeli).
+- 2026-09-26 23:50 UTC · **AN-07 BITTI** — backend #171 + çatı #353 (\`75979b3\`). Canlı ok:true · db:up · site 200. **2. tur kapandı** (TUR ÖZETİ başta).
