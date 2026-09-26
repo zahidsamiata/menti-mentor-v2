@@ -24,7 +24,9 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'warning' | 'succe
   SCHEDULED:  { label: 'Onaylandı',       variant: 'success' },
   IN_PROGRESS:{ label: 'Devam Ediyor',    variant: 'brand' as 'success' },
   COMPLETED:  { label: 'Tamamlandı',      variant: 'secondary' },
-  CANCELLED:  { label: 'İptal Edildi',    variant: 'destructive' },
+  // P-05 / KARAR-22 (B): kırmızı "İptal Edildi" menti'ye reddi çıplak gösteriyordu. Veride
+  // "mentör reddetti" ile diğer iptaller ayırt edilemediği için (ikisi de CANCELLED) nötr, suçlamayan etiket.
+  CANCELLED:  { label: 'Gerçekleşmedi',   variant: 'secondary' },
   APPROVED:   { label: 'Onaylandı',       variant: 'success' },
 };
 
@@ -64,6 +66,14 @@ function MeetingCard({
       <p className="text-xs text-muted-foreground">
         {opponentLabel}: <span className="font-medium text-foreground">{opponentName}</span>
       </p>
+
+      {/* P-05 / KARAR-22 (B): gerçekleşmeyen görüşmede menti'ye nazik, jenerik açıklama.
+          Mentörün gerekçesi gösterilmez (backend menti'ye `notes` döndürmez); alternatif mentör önerilmez. */}
+      {meeting.status === 'CANCELLED' && !isMentor && (
+        <p className="text-xs text-muted-foreground">
+          Bu görüşme gerçekleşmedi. Bu durum seninle ya da profilinle ilgili bir değerlendirme değil.
+        </p>
+      )}
 
       {/* Format */}
       <p className="text-xs text-muted-foreground">{FORMAT_LABELS[meeting.format] ?? meeting.format}</p>
