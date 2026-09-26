@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 19:38 UTC · çatı main HEAD `33a0b03` · backend main HEAD `02ac78c` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 19:40 UTC · çatı main HEAD `26ca28d` · backend main HEAD `02ac78c` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
-**Şu an yapılan:** Şerit 1 (alt ajan): F-18 KPI CSV dışa aktarımı. P-05 (backend #162 + çatı #340) 7b incelemesi sürüyor — kapı 🔵 olduğu için merge yok. KR-16 canlıda.
+**Şu an yapılan:** 7b incelemeleri sürüyor: F-18 (backend #163 + çatı #342) · P-05 (#162 + #340). Kod şeridi boş.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -26,6 +26,7 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (941 test) | ✅ ONAY (2. tur) | PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
+| backend #163 + çatı #342 | F-18 KPI CSV dışa aktarımı · 🟢+7b (KVKK) | yeşil | sürüyor | 7b ONAY → merge → pointer re-bump |
 | backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim · kuyrukta 🔵 (içerik migration'sız) | yeşil | sürüyor | kapı yeniden değerlendirilmeli (strateji) |
 | backend #160 | AN-02 seed metin yazımı · 🔵 KARAR-99 | koşuyor | gerekmiyor (yalnız metin) | PO EVET + `Question`/`SjtQuestion` yedeği + 2 satır UPDATE |
 | backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
