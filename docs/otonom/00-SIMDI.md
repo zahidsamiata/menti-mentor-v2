@@ -1,7 +1,7 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 20:13 UTC · çatı main HEAD `3773e27` · backend main HEAD `14877f7` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 20:13 UTC · çatı main HEAD `470bed0` · backend main HEAD `14877f7` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
@@ -27,6 +27,7 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (941 test) | ✅ ONAY (2. tur) | PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
+| backend #165 + çatı #344 | Y1-B9 dondurulmuş/reddedilmiş kurum erişemez · 🟢+7b (auth; K5-Y1, kuyrukta satırsız) | yeşil (955 test) | ek düzeltme: KVKK veri hakları uçları askıdan muaf tutuluyor → sonra 7b | 7b ONAY → merge → re-bump |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı · 🟢+7b (auth) | yeşil | **SORUN VAR (ürün):** Bekleme Odası kimseye açılmaz | **KARAR-101** (A: olduğu gibi · B: bekleme odası açık, iç uçlar kapalı) |
 | backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim · kuyrukta 🔵 (içerik migration'sız) | yeşil | ✅ ONAY | kapı yeniden değerlendirilmeli; 🟢'ye çekilirse #162 → re-bump → #340 |
 | backend #160 | AN-02 seed metin yazımı · 🔵 KARAR-99 | koşuyor | gerekmiyor (yalnız metin) | PO EVET + `Question`/`SjtQuestion` yedeği + 2 satır UPDATE |
