@@ -93,7 +93,7 @@ export default function KvkkPage() {
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">8. Sunucu Konumu ve Yurt Dışı Aktarım</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Kişisel verileriniz, İrlanda (Avrupa Birliği) bölgesinde bulunan veri merkezlerinde
+              Kişisel verileriniz, Londra (Birleşik Krallık) bölgesinde bulunan veri merkezlerinde
               barındırılan yönetilen PostgreSQL veritabanı hizmeti üzerinde saklanır. Uygulama
               sunucuları da aynı hizmet sağlayıcı altyapısı üzerinde çalışır. Bu nedenle
               verileriniz, KVKK Madde 9 kapsamında Türkiye dışında (yurt dışında) işlenmekte ve
