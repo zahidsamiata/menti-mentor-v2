@@ -4,6 +4,11 @@
 
 ## TUR ÖZETİ (2026-09-26, üçüncü tur — KARAR-80 işlendi)
 
+**Bölüm 2 küçük takipler:**
+- **CSP report-only başlığı (#314):** tekrar kontrol edildi (yalnız GET, ~1 saat sonra) — **artık GÖRÜNÜYOR:** `content-security-policy-report-only: default-src 'self'; script-src 'self' 'unsafe-inline'; ...` sağlıklı bir politika. Önceki "görünmüyor" bulgusu **önbellek/dağıtım gecikmesiydi**, yapılandırma sorunu DEĞİL — düzeltme işi açılmadı.
+- **`/health` `version` alanı:** kuyruğa **V-16** (🟢) olarak eklendi — Dockerfile build sırasında git SHA'sını `version`/`commit` alanına taşıma önerisiyle. Sırası geldiğinde işlenecek, bu turda YAPILMADI (yalnız kuyruğa eklendi, PO talimatı buydu).
+
+
 **KARAR-80 CEVABI İŞLENDİ.** PO cevabı: "M1-M22 hepsi A" (+ 4 ürün-etkili maddenin somut uygulaması: M1 nazik ret/alternatif yok · M3 menti listesi kalır+eşik · M4 link mentörde · M11 otomatik tamamlanma+mentör düzeltmesi). `01-KARARLAR.md` CEVAP satırı + indeks güncellendi.
 
 **Kapı dağılımı (yalnız Durum=BEKLIYOR satırlar, `00-KUYRUK.md`):**
