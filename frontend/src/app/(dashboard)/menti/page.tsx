@@ -12,6 +12,7 @@ import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard'
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { matchingApi } from '@/lib/api/matching';
@@ -310,13 +311,25 @@ export default function MentiDashboardPage() {
               {mentorsData.items.map((mentor) => (
                 <div
                   key={mentor.mentorId}
-                  className="rounded-xl border border-border bg-card p-4 flex flex-col gap-3"
+                  // AN-28 · KARAR-80/M7: meşgul/eksik-profil/görünürlük-kapalı mentör kartı
+                  // SOLUK gösterilir ama HİÇBİR ZAMAN listeden kaldırılmaz.
+                  className={cn(
+                    'rounded-xl border border-border bg-card p-4 flex flex-col gap-3',
+                    mentor.isFaded && 'opacity-60',
+                  )}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       <UserAvatar src={mentor.mentorAvatarUrl} name={mentor.mentorName} size={40} />
                       <div className="min-w-0">
-                        <p className="text-sm font-medium truncate">{mentor.mentorName}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-medium truncate">{mentor.mentorName}</p>
+                          {/* Soluklaşmanın nedenini renge/opaklığa bağlı bırakmamak için ayrı bir
+                              metinsel işaret — erişilebilirlik: yalnız renk/opaklıkla anlam taşınmaz. */}
+                          {mentor.isFaded && (
+                            <Badge variant="outline" className="text-[10px] shrink-0">Sınırlı</Badge>
+                          )}
+                        </div>
                         <p className="text-xs text-muted-foreground truncate">
                           {mentor.sectorTags.length > 0
                             ? mentor.sectorTags.slice(0, 3).join(', ')
@@ -337,9 +350,14 @@ export default function MentiDashboardPage() {
                   </p>
 
                   <div className="flex flex-wrap gap-2">
+                    {/* AN-28 · KARAR-32 revizyonu: randevu alınamayan mentörde "Randevu Al" devre
+                        dışı gösterilir (kaldırılmaz) — buton hep aynı yerde, kartlar arası düzen
+                        sabit kalır ve menti "bu özellik neden yok" diye şaşırmaz (en az şaşırtma). */}
                     <Button
                       size="sm"
                       variant="outline"
+                      disabled={!mentor.isBookable}
+                      title={mentor.isBookable ? undefined : 'Bu mentör şu an randevu için uygun değil'}
                       onClick={() => router.push(`/book-meeting?mentorId=${mentor.mentorId}`)}
                     >
                       Randevu Al
@@ -354,6 +372,11 @@ export default function MentiDashboardPage() {
                     </Button>
                     <ReportUserButton targetUserId={mentor.mentorId} targetName={mentor.mentorName} />
                   </div>
+                  {!mentor.isBookable && (
+                    <p className="text-[11px] text-muted-foreground">
+                      Bu mentör şu an randevu için uygun değil — mesaj gönderebilirsiniz.
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

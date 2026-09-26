@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { UI_TEXT } from '@/lib/uiText';
+import type { UserProfileData } from '@/lib/api/profile';
 
 const WEEKDAYS = [
   { value: 'MON', label: 'Pazartesi' },
@@ -48,11 +49,26 @@ export default function AvailabilityPage() {
     { enabled: Boolean(user?.id) },
   );
 
+  // AN-28: mevcut görünürlük tercihini kendi profil kaydından oku (USER_FULL_SELECT self için
+  // mentorVisibilityEnabled döner). Müsaitlik bloklarından AYRI bir kayıt/uç — burada yalnız
+  // OKUNUR, kaydetme kendi düğmesiyle (saveVisibility) yapılır.
+  const { data: profileData } = useQuery(
+    () => api<UserProfileData>(`/api/users/${user?.id ?? ''}`),
+    [api, user?.id],
+    { enabled: Boolean(user?.id) },
+  );
+
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [newBlock, setNewBlock] = useState<Block>({ weekday: 'MON', startTime: '09:00', endTime: '17:00' });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [visibilityEnabled, setVisibilityEnabled] = useState(true);
+  const [visibilitySaving, setVisibilitySaving] = useState(false);
+  const [visibilitySaved, setVisibilitySaved] = useState(false);
+  const [visibilityError, setVisibilityError] = useState<string | null>(null);
+  const visibilityHydratedRef = useRef(false);
 
   // Sunucu verisi yerel listeye YALNIZ BİR KEZ aktarılır. Aksi halde GET cevabı
   // (ilk yükleme geç dönerse ya da token yenilenince yeniden istek atılırsa)
@@ -85,6 +101,14 @@ export default function AvailabilityPage() {
     ]);
   }, [data]);
 
+  // Görünürlük tercihi yalnız BİR KEZ sunucudan hidratlanır (blocks ile aynı gerekçe, K-03) —
+  // aksi halde henüz kaydedilmemiş bir değişiklik, arka planda tekrar çeken bir GET tarafından silinir.
+  useEffect(() => {
+    if (profileData?.mentorVisibilityEnabled === undefined || visibilityHydratedRef.current) return;
+    visibilityHydratedRef.current = true;
+    setVisibilityEnabled(profileData.mentorVisibilityEnabled);
+  }, [profileData]);
+
   function addBlock() {
     if (newBlock.startTime >= newBlock.endTime) {
       setError('Başlangıç saati bitiş saatinden önce olmalı.');
@@ -113,6 +137,26 @@ export default function AvailabilityPage() {
     }
   }
 
+  // AN-28: görünürlük tercihi PATCH /users/me/profile üzerinden kaydedilir (müsaitlik
+  // bloklarından ayrı uç — bkz. userController.updateMyProfile).
+  async function saveVisibility(next: boolean) {
+    setVisibilityEnabled(next);
+    setVisibilitySaving(true);
+    setVisibilityError(null);
+    setVisibilitySaved(false);
+    const result = await api<UserProfileData>('/api/users/me/profile', {
+      method: 'PATCH',
+      body: { mentorVisibilityEnabled: next },
+    });
+    setVisibilitySaving(false);
+    if (result.ok) {
+      setVisibilitySaved(true);
+    } else {
+      setVisibilityEnabled(!next); // başarısız → görünen durumu eskiye al
+      setVisibilityError(result.error.message ?? 'Görünürlük tercihi kaydedilemedi.');
+    }
+  }
+
   if (isLoading || !user) return null;
 
   return (
@@ -126,6 +170,45 @@ export default function AvailabilityPage() {
 
       {error && <AlertMessage type="error" message={error} />}
       {saved && <AlertMessage type="success" message="Müsaitlik saatleriniz kaydedildi." />}
+
+      {/* AN-28 · KARAR-32 revizyonu: mentör kendi görünürlüğünü kapatabilir — kapatınca
+          menti havuzundan ÇIKMAZ, kartı soluk görünür ve yalnız mesaj alabilir, randevu alamaz. */}
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Menti Havuzunda Görünürlük</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Kapatırsanız yeni mentiler sizi listede soluk görür ve yalnızca mesaj gönderebilir;
+            randevu talebi alamazsınız. Devam eden eşleşmeleriniz etkilenmez.
+          </p>
+          {visibilityError && <AlertMessage type="error" message={visibilityError} />}
+          {visibilitySaved && <AlertMessage type="success" message="Görünürlük tercihiniz kaydedildi." />}
+          <button
+            type="button"
+            role="switch"
+            aria-checked={visibilityEnabled}
+            disabled={visibilitySaving}
+            onClick={() => saveVisibility(!visibilityEnabled)}
+            className={`flex items-center gap-3 rounded-xl border px-3 py-2 text-sm font-medium transition-colors disabled:opacity-40 ${
+              visibilityEnabled
+                ? 'border-primary/40 bg-primary/5 text-foreground'
+                : 'border-border bg-muted text-muted-foreground'
+            }`}
+          >
+            <span
+              className={`inline-block h-5 w-9 rounded-full transition-colors ${
+                visibilityEnabled ? 'bg-primary' : 'bg-border'
+              }`}
+            >
+              <span
+                className={`block h-4 w-4 translate-y-0.5 rounded-full bg-white transition-transform ${
+                  visibilityEnabled ? 'translate-x-4' : 'translate-x-0.5'
+                }`}
+              />
+            </span>
+            {visibilityEnabled ? 'Yeni mentilere görünürüm' : 'Yeni mentilere kapalıyım'}
+          </button>
+        </CardContent>
+      </Card>
 
       {/* Yeni blok ekle */}
       <Card>

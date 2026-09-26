@@ -32,6 +32,11 @@ export interface MentorMatch {
   skills: string[];
   matchScore: number;          // 0-100 uyum yüzdesi
   compatibilityReason: string; // jenerik ("Ortak sektör…" / "İletişim tarzları uyumlu")
+  // AN-28 · KARAR-80/M7 + KARAR-32 revizyonu: mentör GERÇEKTEN randevu alınabilir mi?
+  // isFaded=true → kart soluk gösterilir (meşgul VEYA profili eksik VEYA görünürlük kapalı),
+  // kart ASLA gizlenmez. isBookable=false → "Randevu Al" gösterilmez, yalnız "Mesaj" kalır.
+  isFaded: boolean;
+  isBookable: boolean;
 }
 
 export interface MentorMatchesResponse {

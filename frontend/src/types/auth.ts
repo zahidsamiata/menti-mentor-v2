@@ -20,13 +20,16 @@ export interface AuthUser {
   // #12: normalize DISC vektöründen türetilmiş 1–3 harflik gösterim (ör. "DI", "Di"). Backend üretir.
   discLetters?: string | null;
   needsOrientation: boolean;
+  // GV-18: rıza metni sürümü güncellenip aktif rıza eskide kalırsa true (bugün hep false —
+  // CONSENT_VERSION yer tutucu, avukat metni gelene kadar hiçbir aktif kullanıcı tetiklemez).
+  needsReconsent: boolean;
 }
 
 /** POST /api/auth/login yanıtı — refreshToken artık HttpOnly cookie'de */
 export interface LoginResponse {
   accessToken: string;
   expiresIn: number;
-  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'discLetters' | 'needsOrientation'>;
+  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'discLetters' | 'needsOrientation' | 'needsReconsent'>;
   tenant: {
     id: string;
     name: string;

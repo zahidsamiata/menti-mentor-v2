@@ -15,6 +15,8 @@
 
 > 🟠 **YENİ (2026-09-25) — Dokploy: frontend build argümanı `NEXT_PUBLIC_SITE_URL`.** Sitenin paylaşım görseli (Y-09), sitemap ve arama motoru adresleri bu değişkenden kuruluyor ve değer **build sırasında** koda gömülüyor. Dokploy'da frontend uygulamasının **build argümanlarına** `NEXT_PUBLIC_SITE_URL` = sitenin herkese açık adresi (https ile, sonda `/` olmadan) eklenmeli. Eklenmezse link paylaşıldığında görsel çıkmaz (adres `localhost` olur). **Doğrulama:** yeniden deploy sonrası ana sayfanın kaynağında `og:image` satırı canlı alan adıyla başlamalı. (Kod tarafı: çatı #297 Dockerfile ARG.)
 
+> 🟢 **YENİ (2026-09-26, V-16) — Dokploy: backend build argümanı `GIT_SHA` (isteğe bağlı, düşük risk).** `/health` yanıtına canlıda hangi backend commit'inin koştuğunu gösteren `commit` alanı eklendi. Dokploy'da backend build'i için `GIT_SHA` host ortam değişkeni deploy edilen commit'in kısa SHA'sı ile set edilmeli (Dokploy'un "pre-build command" ya da "build args" ayarına `export GIT_SHA=$(git rev-parse --short HEAD)` ya da Dokploy'un kendi sağladığı commit-SHA değişkeni eşlenebilir — panelde hangisi varsa). **Ayarlanmazsa** `/health.commit` sabit `"unknown"` döner — YANLIŞ bir değer değil, yalnız bilgisiz; acil değil. **Doğrulama:** deploy sonrası `curl https://api.sivilkapasite.org/health` → `commit` alanı gerçek kısa SHA'yı göstermeli. (Kod tarafı: backend Dockerfile `ARG GIT_SHA` + çatı `docker-compose.yml` `build.args`.)
+
 ## ⛔ GÜVENLİK — bu belgeye ASLA gerçek değer yazılmaz
 Repo **PUBLIC**. Şifre · API anahtarı · token · SMTP parolası · JWT secret **buraya YAZILMAZ.**
 Yalnız "hangi değişken · nereye · neden · nasıl doğrularım" yazılır. Değerler PO'da/Dokploy'da kalır.
@@ -128,6 +130,19 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | 24 | **`ProfileStep.tsx:296` — form placeholder'ındaki iki gerçek üçüncü-taraf kurum adını teyit et** | Kayıt formunun örnek metninde **iki gerçek kurum adı** geçiyor. Kişi adı yasağı kapsamında **değil**, ama marka/izin açısından PO teyidi gerekir; ajan marka izni konusunda karar veremez. Kaynak: içerik konseyi §10#4 | PO — tek cümle onay ya da "değiştirilsin" talimatı | Ya "kalsın" yazılı ✅ ya da yerine konacak jenerik örnek yazılı ✅ → içerik işi 🟢 olur |
 | 25 | **`AZ` ve `BB` dallarının merge SIRASI** — `AZ` **önce** ya da BB ile **birlikte** | Merge yetkisi PO'da; yanlış sıra BB'nin kanıt atıflarını boşa düşürür. `belge-duzeni-rehberi.md:49` + `CLAUDE.md` 4 yerden `docs/raporlar/kesif/devir-analizi-2026-09-21.md`'ye atıf veriyor; dosya **yalnız `origin/otonom/AZ-devir-analizi-20260921`'de** vardı. ✅ **BU PR bunu çözüyor** — AZ·BA·BB·CA·CB·CC·CD yedisi tek dalda birleştirildi, dosya artık bu PR'da. Satır **kayıt olarak** duruyor: bu PR merge edilirse iş biter. Kaynak: yönetişim konseyi §7#2 | GitHub — merge sırası | Bu PR merge edildiyse ✅ (yedi dal ayrıca merge EDİLMEZ, kapatılır) |
 | 26 | **KURAL 16 ADAYI'na onay ver — 19 gündür bekliyor** | KURAL 14 ve 15 onaylandı, **16 atlandı**. Kuralın kendi metni *"PO onaylayınca ADAYI düşer"* diyor — yani onayı **yalnız PO** verebilir. Kural: *"bir sayı raporlanmadan önce sayılan birim tanımlanır"*; üç kez aynı desen yaşandı (196↔259 · 30↔40 · 6↔15). Kural artık `docs/kararlar/konu/belge-duzeni-rehberi.md` § KURAL 16'da (bu PR'da CLAUDE.md'den taşındı). Kaynak: yönetişim konseyi §7#3 | PO — tek kelime (onay / ret) | Başlıktaki `ADAYI` etiketi kaldırıldı ✅ ya da kural `🗑️ GEÇERSİZ` işaretlendi ✅ |
+
+## 🟡 KAPI SATIRLARININ PO KISMI (2026-09-26, 4 renk kapı düzeni)
+> 🟡 artık "yalnız PO'nun eliyle yapılabilen iş" demektir (`OTONOM-PROMPT.txt` Bölüm 7). Satırın kod kısmını ajan 🟢 kurallarıyla yapar; aşağıdaki kısım PO'ya kalır. Satır, PO kısmı bitene kadar kuyrukta açık kalır.
+
+| Kuyruk satırı | Ne yapılacak (PO) | Nasıl doğrulanır | Bu belgedeki ayrıntı |
+|---|---|---|---|
+| F-02 | Avukattan kullanıcı mesajlarının KVKK saklama süresini belirlet | Süre `01-KARARLAR`/avukat notunda yazılı; ajan silme işini bu süreyle kodlar | #16 |
+| DK-01 | Sentry hesabı aç, anahtarı Dokploy ortam değişkenine gir; Sentry'nin aydınlatma metni + yurt dışı aktarım envanterine eklenmesini avukata onaylat | Canlıda bilinçli bir hata sonrası Sentry panelinde olay görünür, içinde e-posta/ad yok | A4 |
+| DK-02 | Dokploy'da SMTP ayarlarını gir ve `TENANT_NOTIFICATIONS_ENABLED='true'` yap | Platform panelinde bir kuruma "düzeltme iste" denince kurum e-postası gelir | B5 · #5 · A8 |
+| DK-03 | teyit gerek — satırda PO eli gerektiren adım yazılı değil; yalnız kapsam dışı "kayıtsız tam erişim" sorusu avukatta | Avukat cevabı A6'ya yazılır | A6 |
+| AN-36 | Kurumun yasal kimlik bilgilerini (adres · KEP · MERSİS) sağla; veri işleyen sözleşme metnini avukata onaylat | Bilgiler panelde görünür; sözleşme metni avukat onaylı | — |
+| AN-30 (🔵, KARAR-96 EVET'inden sonra) | Dokploy'da backend'e `GRANULAR_CONSENT_ENABLED='true'`, frontend'e `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED='true'` gir (frontend değişkeni derleme anında okunur → yeniden dağıtım gerekir); önce rıza metinlerinin avukat onayını al | Kayıt ekranında tek KVKK kutusu yerine 4 zorunlu + 2 isteğe bağlı kutu görünür | KARAR-96 |
+| AN-41 | Kod-senkron güncellenen KVKK metin paketini avukata götür, onaylat | Avukat onayı tarihiyle `02-ILERLEME`'ye yazılır | avukat paketi |
 
 ## Karar bekleyenler (kart `01-KARARLAR.md`'de — PO cevap yazacak)
 

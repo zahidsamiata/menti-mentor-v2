@@ -79,7 +79,7 @@ export interface BookMeetingPayload {
   format: 'ONLINE' | 'IN_PERSON' | 'PHONE';
   startsAt: string;
   endsAt: string;
-  locationUrl?: string;
+  // KARAR-7 (A): online toplantı linkini menti değil mentör, onayda girer — bkz. approveMeeting.
   locationText?: string;
   phoneNumber?: string;
   requestMessage: string;
@@ -119,8 +119,9 @@ export const meetingsApi = {
   bookMeeting: (api: BoundClient, payload: BookMeetingPayload): Promise<ApiResult<{ meeting: Meeting; awaitingMentorApproval: boolean }>> =>
     api(`/api/meetings/book`, { method: 'POST', body: payload }),
 
-  approveMeeting: (api: BoundClient, meetingId: string): Promise<ApiResult<{ meeting: Meeting }>> =>
-    api<{ meeting: Meeting }>(`/api/meetings/${meetingId}/approve`, { method: 'POST' }),
+  // KARAR-7 (A): ONLINE görüşmede locationUrl zorunlu — backend link olmadan onayı 400'ler.
+  approveMeeting: (api: BoundClient, meetingId: string, locationUrl?: string): Promise<ApiResult<{ meeting: Meeting }>> =>
+    api<{ meeting: Meeting }>(`/api/meetings/${meetingId}/approve`, { method: 'POST', body: { locationUrl } }),
 
   rejectMeeting: (api: BoundClient, meetingId: string, reason?: string): Promise<ApiResult<{ meeting: Meeting }>> =>
     api<{ meeting: Meeting }>(`/api/meetings/${meetingId}/reject`, { method: 'POST', body: { reason } }),

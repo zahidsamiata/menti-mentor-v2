@@ -94,12 +94,21 @@ export default function MentorDashboardPage() {
     .sort((a, b) => new Date(a.startsAt).getTime() - new Date(b.startsAt).getTime());
 
   const [meetingActionId, setMeetingActionId] = useState<string | null>(null);
+  // KARAR-7 (A): ONLINE görüşmede mentör onaydan önce toplantı linkini burada girer.
+  const [approveLinks, setApproveLinks] = useState<Record<string, string>>({});
+  const [approveErrors, setApproveErrors] = useState<Record<string, string>>({});
 
-  async function handleMeetingAction(meetingId: string, action: 'approve' | 'reject') {
+  async function handleMeetingAction(meetingId: string, action: 'approve' | 'reject', locationUrl?: string) {
     setMeetingActionId(meetingId);
-    if (action === 'approve') { await meetingsApi.approveMeeting(api, meetingId); }
-    else { await meetingsApi.rejectMeeting(api, meetingId); }
+    setApproveErrors((prev) => ({ ...prev, [meetingId]: '' }));
+    const result = action === 'approve'
+      ? await meetingsApi.approveMeeting(api, meetingId, locationUrl)
+      : await meetingsApi.rejectMeeting(api, meetingId);
     setMeetingActionId(null);
+    if (!result.ok) {
+      setApproveErrors((prev) => ({ ...prev, [meetingId]: result.error.message ?? 'İşlem başarısız oldu.' }));
+      return;
+    }
     refetchPending();
   }
 
@@ -314,25 +323,40 @@ export default function MentorDashboardPage() {
                       )}
                       <p className="text-xs text-muted-foreground">{start} · {m.format}</p>
                     </div>
-                    <div className="flex gap-2 shrink-0">
-                      <Button
-                        size="sm"
-                        disabled={isActing}
-                        onClick={() => handleMeetingAction(m.id, 'approve')}
-                      >
-                        {isActing ? '…' : 'Onayla'}
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="text-destructive border-destructive/40"
-                        disabled={isActing}
-                        onClick={() => handleMeetingAction(m.id, 'reject')}
-                      >
-                        Reddet
-                      </Button>
+                    <div className="flex flex-col items-end gap-2 shrink-0">
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          disabled={isActing || (m.format === 'ONLINE' && !(approveLinks[m.id] ?? '').trim())}
+                          onClick={() => handleMeetingAction(m.id, 'approve', approveLinks[m.id]?.trim() || undefined)}
+                        >
+                          {isActing ? '…' : 'Onayla'}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="text-destructive border-destructive/40"
+                          disabled={isActing}
+                          onClick={() => handleMeetingAction(m.id, 'reject')}
+                        >
+                          Reddet
+                        </Button>
+                      </div>
+                      {/* KARAR-7 (A): ONLINE görüşme linksiz onaylanamaz — mentör burada girer. */}
+                      {m.format === 'ONLINE' && (
+                        <input
+                          type="text"
+                          value={approveLinks[m.id] ?? ''}
+                          onChange={(e) => setApproveLinks((prev) => ({ ...prev, [m.id]: e.target.value }))}
+                          placeholder="Toplantı linki (https://...)"
+                          className="w-48 rounded-lg border border-border bg-background px-2 py-1 text-xs"
+                        />
+                      )}
                     </div>
                   </div>
+                  {approveErrors[m.id] && (
+                    <p className="text-xs text-destructive text-right">{approveErrors[m.id]}</p>
+                  )}
                 </div>
               );
             })}
