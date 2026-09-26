@@ -32,6 +32,9 @@ export interface UserProfileData {
   timeCommitment: string | null;
   interactionStyle: string | null;
   approvalStatus: string;
+  // AN-28: yalnız MENTOR rolünde anlamlı — menti havuzunda görünür kalmak isteyip istemediği.
+  // GET /api/users/:id (self) ve PATCH /api/users/me/profile ikisi de bu alanı döner.
+  mentorVisibilityEnabled?: boolean;
 }
 
 /** POST /api/users/me/avatar yanıtı — yeni profil fotoğrafı URL'i. */
@@ -50,6 +53,7 @@ export interface ProfileUpdatePayload {
   sectorTags?: string[];
   linkedinUrl?: string | null;
   instagramUrl?: string | null;
+  mentorVisibilityEnabled?: boolean;
 }
 
 export function fetchUserProfile(
