@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 21:40 UTC · çatı main HEAD `25685b6` · backend main HEAD `eb48287` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 21:42 UTC · çatı main HEAD `c333c71` · backend main HEAD `eb48287` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — önceki tur kapandı (TUR ÖZETİ: `02-ILERLEME.md` başı), yeni tur başladı (VPS · en fazla 2 şerit).
 
-**Şu an yapılan:** Yeni tur · K5-Y2: son BITTI işlerin "Bitti demek" ölçütü koda karşı yeniden denetleniyor (salt-okuma alt ajan). Kuyrukta hemen yapılabilir 🟢 yok (kalan 20 🟢 karar/PO/büyük özellik/sıra bağımlı).
+**Şu an yapılan:** K5-Y2 bitti (64 satır: 46 tutuyor · 17 tutmuyor · 1 ❓). 4 satır BEKLIYOR'a döndü (KR-19 · GV-12 · K-05 · F-28). Alt ajan: KR-19b (engellenmiş çift mesaj/istek gönderemez). Ben: AN-10b PR.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
