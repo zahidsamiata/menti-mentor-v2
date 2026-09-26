@@ -15,6 +15,8 @@
 
 > 🟠 **YENİ (2026-09-25) — Dokploy: frontend build argümanı `NEXT_PUBLIC_SITE_URL`.** Sitenin paylaşım görseli (Y-09), sitemap ve arama motoru adresleri bu değişkenden kuruluyor ve değer **build sırasında** koda gömülüyor. Dokploy'da frontend uygulamasının **build argümanlarına** `NEXT_PUBLIC_SITE_URL` = sitenin herkese açık adresi (https ile, sonda `/` olmadan) eklenmeli. Eklenmezse link paylaşıldığında görsel çıkmaz (adres `localhost` olur). **Doğrulama:** yeniden deploy sonrası ana sayfanın kaynağında `og:image` satırı canlı alan adıyla başlamalı. (Kod tarafı: çatı #297 Dockerfile ARG.)
 
+> 🟢 **YENİ (2026-09-26, V-16) — Dokploy: backend build argümanı `GIT_SHA` (isteğe bağlı, düşük risk).** `/health` yanıtına canlıda hangi backend commit'inin koştuğunu gösteren `commit` alanı eklendi. Dokploy'da backend build'i için `GIT_SHA` host ortam değişkeni deploy edilen commit'in kısa SHA'sı ile set edilmeli (Dokploy'un "pre-build command" ya da "build args" ayarına `export GIT_SHA=$(git rev-parse --short HEAD)` ya da Dokploy'un kendi sağladığı commit-SHA değişkeni eşlenebilir — panelde hangisi varsa). **Ayarlanmazsa** `/health.commit` sabit `"unknown"` döner — YANLIŞ bir değer değil, yalnız bilgisiz; acil değil. **Doğrulama:** deploy sonrası `curl https://api.sivilkapasite.org/health` → `commit` alanı gerçek kısa SHA'yı göstermeli. (Kod tarafı: backend Dockerfile `ARG GIT_SHA` + çatı `docker-compose.yml` `build.args`.)
+
 ## ⛔ GÜVENLİK — bu belgeye ASLA gerçek değer yazılmaz
 Repo **PUBLIC**. Şifre · API anahtarı · token · SMTP parolası · JWT secret **buraya YAZILMAZ.**
 Yalnız "hangi değişken · nereye · neden · nasıl doğrularım" yazılır. Değerler PO'da/Dokploy'da kalır.
