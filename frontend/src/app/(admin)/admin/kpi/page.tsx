@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
@@ -8,6 +9,7 @@ import { ProgramHealthSection } from '@/components/organisms/ProgramHealthSectio
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { computeAdminAlerts } from '@/lib/adminAlerts';
+import { Button } from '@/components/ui/button';
 
 /**
  * PS-05: Backend'in k-anonimlik eşiği (`backend/src/services/mask.ts` K_ANONYMITY_THRESHOLD, V-05).
@@ -17,6 +19,20 @@ import { computeAdminAlerts } from '@/lib/adminAlerts';
  */
 const MIN_RESPONSES_FOR_AVERAGE = 3;
 const NOT_ENOUGH_RESPONSES_TEXT = `Yeterli yanıt yok (gizlilik için en az ${MIN_RESPONSES_FOR_AVERAGE} yanıt gerekiyor)`;
+const CSV_DOWNLOAD_ERROR_TEXT = 'Rapor indirilemedi. Lütfen biraz sonra tekrar deneyin.';
+
+/** Tarayıcıda dosya indirmeyi tetikler (sunucuya ikinci istek yok). */
+function saveBlob(blob: Blob, filename: string): void {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
 const SUCCESS_RATE_EMPTY_TEXT =
   `3. ay başarı oranı henüz hesaplanamıyor: yeterli 3. ay değerlendirmesi yok. ` +
   `Kişilerin puanı tek tek okunamasın diye en az ${MIN_RESPONSES_FOR_AVERAGE} yanıt gerekiyor.`;
@@ -28,14 +44,38 @@ export default function KpiPage() {
   // F-19: yöneticiyi harekete geçiren proaktif kırmızı uyarılar (eşik aşımı).
   const alerts = computeAdminAlerts(data);
 
+  // F-18: toplu KPI raporunu CSV olarak indir (kişi düzeyinde veri yok; k-anonim hücreler "gizli").
+  const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const handleDownloadCsv = async () => {
+    setDownloading(true);
+    setDownloadError(null);
+    const result = await adminApi.downloadKpiCsv(api);
+    setDownloading(false);
+    if (!result.ok) {
+      setDownloadError(result.error.message ?? CSV_DOWNLOAD_ERROR_TEXT);
+      return;
+    }
+    saveBlob(result.data.blob, result.data.filename ?? `kpi-raporu-${new Date().toISOString().slice(0, 10)}.csv`);
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
-      <div>
-        <h1 className="text-2xl font-bold">KPI Paneli</h1>
-        <p className="text-sm text-muted-foreground">Tenant bazlı istatistikler (aggregate — PII içermez).</p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold">KPI Paneli</h1>
+          <p className="text-sm text-muted-foreground">Tenant bazlı istatistikler (aggregate — PII içermez).</p>
+        </div>
+        <div className="flex flex-col items-end gap-1">
+          <Button variant="outline" onClick={handleDownloadCsv} disabled={downloading} data-testid="kpi-csv-download">
+            {downloading ? 'Hazırlanıyor…' : 'CSV olarak indir'}
+          </Button>
+          <p className="text-xs text-muted-foreground">Yalnız toplu sayılar; kişi bilgisi içermez.</p>
+        </div>
       </div>
 
       {error && <AlertMessage type="error" message={error} />}
+      {downloadError && <AlertMessage type="error" message={downloadError} />}
 
       {/* F-19: eşik aşımında kırmızı proaktif uyarı bandı */}
       {alerts.length > 0 && (
