@@ -1,7 +1,7 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 19:40 UTC · çatı main HEAD `26ca28d` · backend main HEAD `02ac78c` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 19:41 UTC · çatı main HEAD `fa75609` · backend main HEAD `02ac78c` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
@@ -27,7 +27,7 @@
 |---|---|---|---|---|
 | backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (941 test) | ✅ ONAY (2. tur) | PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
 | backend #163 + çatı #342 | F-18 KPI CSV dışa aktarımı · 🟢+7b (KVKK) | yeşil | sürüyor | 7b ONAY → merge → pointer re-bump |
-| backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim · kuyrukta 🔵 (içerik migration'sız) | yeşil | sürüyor | kapı yeniden değerlendirilmeli (strateji) |
+| backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim · kuyrukta 🔵 (içerik migration'sız) | yeşil | ✅ ONAY | kapı yeniden değerlendirilmeli; 🟢'ye çekilirse #162 → re-bump → #340 |
 | backend #160 | AN-02 seed metin yazımı · 🔵 KARAR-99 | koşuyor | gerekmiyor (yalnız metin) | PO EVET + `Question`/`SjtQuestion` yedeği + 2 satır UPDATE |
 | backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
 | backend #148 + çatı #326 | U-18 · 🔵 KARAR-97 | yeşil | ✅ ONAY (2. tur) | PO EVET + `Conversation` yedeği (DB erişimi gerekir) |
@@ -46,6 +46,7 @@
 **PO'ya sorular:** KARAR-96 (AN-30) · KARAR-97 (U-18) · KARAR-98 (AN-26 + alt soru) · KARAR-99 (AN-02 metin) — 🔵 EVET/HAYIR · KARAR-100 (`SJT_ENRICHED` gerekçesiz değer; KARAR-76 ile aynı tür).
 
 **Strateji katmanına not:**
+- (P-05) Kuyrukta 🔵 ama uygulama migration/seed/canlı veri İÇERMİYOR (KARAR-22 B: jenerik metin). 7b ONAY'lı ve CI yeşil — kapı 🟢'ye çekilirse ajan merge eder.
 - (AN-53) `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md` §Öne çıkan bulgular: kuyrukta karşılığı OLMAYAN ~30 ⬜ kalem (ör. G1-09 KVKK başvuru adresi, G1-10 aydınlatma kategorileri, G1-18 `User.role` sayımları, G7-02 açık tema kontrastı, G10-12 `/clubs`) ve "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23, F-27/G6-01, G6-03, G7-13, F-21/G7-09). Ajan iş eklemez → satır açma kararı sizde.
 - (Y-02 7b) `GET /api/system-logs` iz bırakmıyor ve `meta`'yı tam döndürüyor — kuyrukta satırı yok.
 - AN-30 7b: OAuth pending token ile access token aynı sırrı kullanıyor (`typ` yok, sömürülemez) — kuyrukta satırı yok; AN-30 merge edildiği turda CLAUDE.md public uç listesine `POST /api/auth/oauth/complete-registration` eklenmeli.
