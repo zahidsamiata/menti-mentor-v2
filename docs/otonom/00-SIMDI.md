@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 18:18 UTC · çatı main HEAD `87f1c6f` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 18:20 UTC · çatı main HEAD `8383ede` · backend main HEAD `d87b227`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** IC-01 #331 son CI işi · IC-08 #151/#332 7b incelemesi · U-18 2. tur 7b · PS-10 #333 CI. Sıradaki: GV-19, E-3 kalanları, F-24.
+**Şu an yapılan:** Şerit 1 (alt ajan): GV-19 (oturum içi şifre değiştirme + şifre kuralı). Şerit 2: IC-08 7b · U-18 2. tur 7b · PS-10 #333 CI. Sıradaki: E-3 kalanları, F-24, F-23.
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) | ok:true, db:up, site 200 |
 | çatı #330 | KR-22 (verify.sh ↔ CI) | ok:true, db:up |
 | backend #143 · #145 · #150 + çatı #329 | PS-A1 · GV-08 · KR-14 (pointer `cde7bb8`→`d87b227`) | ok:true, db:up, smtp:verified, cron:enabled, site 200 (uptime 26 sn — yeni dağıtım) |
 | çatı #328 | GÖREV 0 — kapı düzeni 4 renk (belge) | ok:true, db:up, smtp:verified, cron:enabled, site 200 |
@@ -21,7 +22,6 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) · 🟢 | 7/8 geçti, 1 koşuyor | gerekmiyor | CI bekleniyor → merge |
 | çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) · 🟢 | koşuyor | gerekmiyor (yalnız metin) | CI bekleniyor → merge |
 | backend #151 + çatı #332 | IC-08 (onay bekleyene düzeltme notu) · 🟢+7b (auth) | koşuyor | sürüyor | CI + 7b ONAY → backend merge → pointer re-bump → çatı merge |
 | backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeniden koşuyor | 1. tur SORUN VAR → düzeltildi (main merge `12f2fb4`/`1137b64`, nazik metin, hata pencere içinde) → **2. tur sürüyor** | PO EVET'i (KARAR-97) + yedek bekler |
