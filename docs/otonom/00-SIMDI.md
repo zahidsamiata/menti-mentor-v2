@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 18:35 UTC · çatı main HEAD `c5c821e` · backend main HEAD `3f76c7b`
+**Son güncelleme:** 2026-09-26 18:40 UTC · çatı main HEAD `aeea646` · backend main HEAD `613f03b`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** Şerit 1 (alt ajan): GV-19. Şerit 2: pointer #336 (PS-09 + KR-21) CI → merge → canlı kontrol. Sonra: AN-07, E-3 kalanları.
+**Şu an yapılan:** 7b incelemeleri sürüyor: GV-19 (backend #152 + çatı #335) · Y-02 (backend #156). Bekleyen pointer bump: AN-09 #155 (+GV-19/Y-02 onaylanırsa birlikte). Şerit 1 boş → sıradaki iş seçiliyor.
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #153 · #154 + çatı #336 | PS-09 · KR-21 (pointer → `3f76c7b`) | ok:true, db:up, site 200 |
 | çatı #334 | YN-13 (kişi adı) | belge işi |
 | backend #153 | PS-09 (skorlama vakaları CI'da) | pointer bump bekliyor (yalnız test) |
 | çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) | ok:true, db:up, site 200 |
@@ -26,10 +27,11 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #155 | AN-09 (şüphe bildiriminde platforma e-posta, kişisel veri yok) · 🟢 | koşuyor | gerekmiyor | CI → merge → pointer |
-| çatı #336 | pointer → `3f76c7b` (PS-09 #153 · KR-21 #154 merge edildi) | koşuyor | gerekmiyor | CI → merge → canlı kontrol |
 | backend #151 + çatı #332 | IC-08 (onay bekleyene düzeltme notu) · 🟢+7b (auth) | yeşil | ✅ ONAY (5848715616 / 5848715830) | ⛔ #151 merge sınıflandırıcı reddi (Engeller) → #332 pointer re-bump bekliyor |
 | backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeşil | ✅ **2. tur ONAY** (5848708006 / 5848708123) | **PO EVET'i (KARAR-97)** + `Conversation` yedeği bekler (bu ortamda DB yok) |
 | backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (backend 882 test · çatı 8/8) | ✅ **2. tur ONAY** (yorum 5848666630 / 5848666801) | **PO EVET'i (KARAR-96)** + `Consent` tablosu yedeği bekler (bu ortamda DB yok → EVET gelirse "tek seferlik DB erişimi" gerekecek) |
+| backend #152 + çatı #335 | GV-19 (şifre değiştirme + şifre kuralı) · 🟢+7b (auth) | yeşil (887 test · 8/8) | sürüyor | 7b ONAY → backend merge → pointer re-bump → çatı merge |
+| backend #156 | Y-02 (platform okuma denetim izi + mükerrer uçta maskeleme) · 🟢+7b (KVKK) | koşuyor | sürüyor | CI + 7b ONAY → merge → pointer |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **⭐ YENİ KAPI DAĞILIMI (2026-09-26, #328 sonrası — açık 122 satır; BITTI ve "→" katlanmış hariç, ~~…~~ yok sayıldı):**

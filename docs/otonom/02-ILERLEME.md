@@ -1218,3 +1218,7 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 18:28 UTC · **YN-13 BITTI (kısmen)** — çatı #334 (`49c8cbb`); PO kısmı 03-PO-ELLE-ISLER'de. **PS-09** backend #153 merge (`9723c50`), pointer bump KR-21 ile. **KR-21 PR-ACIK** — backend #154.
 - 2026-09-26 18:33 UTC · **KR-21** backend #154 merge (`3f76c7b`) · çatı pointer PR **#336** (PS-09 + KR-21). **F-23 BITTI (doc-senkron)** — GV-11 #132 ile ortak `authenticateTenantAdmin` + `membershipAccess` deseni zaten canlıda; satırdaki kanıt bayattı.
 - 2026-09-26 18:35 UTC · **AN-09 PR-ACIK** — backend #155 (şüphe bildirimi → platform yöneticisine yalnız kayıt no'lu e-posta). AN-07 ertelendi (satırın kendi "düşük öncelik" notu). AN-06: kod ayağı migration gerektirebilir (pooler'da oturum kilidi güvenilmez) + PO teyidi → not düşüldü.
+- 2026-09-26 18:40 UTC · **CANLIDA:** çatı pointer **#336** (`aeea646`, backend `d87b227`→`3f76c7b`): **KR-21 BITTI** (rapor sıklığı gerçekten okunuyor) · **PS-09 BITTI** (formül vakaları CI'da). Canlı ok:true · db:up · site 200.
+- 2026-09-26 18:40 UTC · **AN-09** backend #155 merge (`613f03b`) — sonraki pointer bump'ında canlıya çıkacak.
+- 2026-09-26 18:40 UTC · **GV-19 PR-ACIK** (alt ajan, izole worktree): backend #152 + çatı #335 — oturum içi şifre değiştirme + tek kaynak şifre kuralı; CI yeşil (backend 887 test; çatı 8/8). 7b başlatıldı.
+- 2026-09-26 18:40 UTC · **Y-02 PR-ACIK** — backend #156 (4 platform okuma ucunda denetim izi + komşu mükerrer super-admin ucunda PII maskeleme). 7b başlatıldı.
