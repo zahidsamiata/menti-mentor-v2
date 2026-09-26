@@ -131,7 +131,10 @@ etmeyen ikisinin saatlerce suren emegi tamamen kayboldu.
  -1. ⭐ PO ÖNCELİK BLOĞU (00-KUYRUK.md'de '⭐ ÖNCELİK (PO)' satırı): bu satırda sayılan işler,
      KAPISINDAN BAĞIMSIZ olarak her şeyden önce ve yazılı sırayla işlenir. 🟢 olanlar merge edilir.
      ~~[ESKİ · 2026-09-25] 🟡 olanlar yapılır, PR açılır, MERGE EDİLMEZ (PR-ACIK).~~
-     ⚠️ GÜNCELLEME 2026-09-25 (PO): 🟡: bağımsız inceleme yorumu + şartlar tamamsa MERGE (bkz. Bölüm 7b).
+     ~~[ESKİ · 2026-09-26] ⚠️ GÜNCELLEME 2026-09-25 (PO): 🟡: bağımsız inceleme yorumu + şartlar tamamsa MERGE (bkz. Bölüm 7b).~~
+     ⚠️ GÜNCELLEME 2026-09-26 (PO): 4 renk — 🔵 olanlar yapılır, PR + 7b incelemesi ONAY + EVET/HAYIR
+     kartı; merge EDİLMEZ (PO "EVET"i + tarihli yedek bekler). 🟡 olanların kod kısmı 🟢 kurallarıyla
+     yapılır, PO'ya kalan kısmı 03-PO-ELLE-ISLER.md'ye yazılır (bkz. Bölüm 7).
      🔴 olanlar KARAR boşsa atlanır.
      Madde 5'teki '🟢'ler bitmeden 🟡'ye geçme' kuralı bu blok için GEÇERSİZDİR. Bu 🟡 işler
      aile PR'ına KATILMAZ: her biri ayrı PR olur (güvenlik yamaları tek tek incelenebilsin ve
@@ -225,6 +228,7 @@ Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
 ═══════════════════════════════════════════════════════════════
 7 — KAPI POLITIKASI
 ═══════════════════════════════════════════════════════════════
+~~[ESKİ · 2026-09-26] (Bölüm 7'nin 3 renkli metni — aşağıdaki blok bütünüyle)
 🟢 VARSAYILANDIR → yap, dogrulama listesi tamsa MERGE ET, canliya al.
 ~~[ESKİ · 2026-09-25] 🟡 yalniz su uc istisnada → yap, PR ac, MERGE ETME:~~
 ⚠️ GÜNCELLEME 2026-09-25 (PO): 🟡 yalniz su uc istisnada → yap, PR ac, Bölüm 7b şartları tamamsa MERGE ET
@@ -234,7 +238,34 @@ Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
       session) · KVKK/riza/aydinlatma/veri imha-disa aktarma · matching/eslestirme/skorlama
    3. canli veriye geri donulmez dokunuyorsa
 🔴 ilgili KARAR cevapsiz → DOKUNMA, atla, sonrakine gec.
+~~
+⚠️ GÜNCELLEME 2026-09-26 (PO): 4 renk — kapı tanımları (00-KUYRUK "## Kapılar" ile birebir):
+🟢 AJAN YAPAR + MERGE EDER. Varsayılan. Bölüm 6 doğrulama listesi tamsa merge et, canlıya al.
+   Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa Bölüm 7b'nin (b) bağımsız
+   inceleme "SONUÇ: ONAY" ve (c) negatif test şartları KENDİLİĞİNDEN eklenir; ayrı renk yok.
+   Merge sonrası canlı kontrol kuralı (7b sonu) aynen geçerli.
+🔵 AJAN HAZIRLAR, PO'NUN TEK "EVET"İYLE CANLIYA ÇIKAR. Migration · seed (her türü) · canlı veriye
+   yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → 01-KARARLAR.md'ye sade Türkçe
+   EVET/HAYIR kartı (kullanıcı ne görür · ne değişir · geri alınır mı · yedeği alınacak tablo)
+   → Durum PR-ACIK. "EVET" gelince: tarihli yedek alınır → merge → canlı kontrol.
+   Yedek DB erişimi ister; erişim yoksa (VPS) merge ETME, 00-SIMDI'ye
+   "EVET var, yedek için tek seferlik DB erişimi gerekiyor: <PR>" yaz.
+   "HAYIR" → PR kapatılır, gerekçe 02-ILERLEME'ye.
+🟡 YALNIZ PO'NUN ELİYLE YAPILABİLEN İŞ. Sunucu/Dokploy ayarı · hesap açma/anahtar girme ·
+   GitHub ayarı · avukat · kuruma görünen/hukuki metnin onayı. Satırın kod kısmı varsa ajan onu
+   🟢 kurallarıyla yapar; PO'ya kalan kısmı 03-PO-ELLE-ISLER.md'ye "ne yapılacak + nasıl
+   doğrulanır" biçiminde yazar. Satır PO kısmı bitene kadar açık kalır.
+🔴 YÖN KARARI BEKLER — ilgili KARAR cevapsız → DOKUNMA, atla, sonrakine geç. (Değişmedi.)
+Karantina 🔵 olur; gerçek silme (silme protokolünün son adımı) 🔴 kalır.
+⛔ PO'DAN ASLA "GitHub'dan merge et" İSTENMEZ. `gh pr merge` ya da git komutu izin
+   sınıflandırıcısına takılırsa: reddi AYNEN 00-SIMDI "Engeller"e yaz, PR-ACIK bırak, başka
+   işe geç. Strateji katmanı çözer.
+⚠️ Bu dosyanın başka yerlerindeki 🟡 atıfları (2.1 · Bölüm 4 madde 5 · Bölüm 6 "dokunulduysa
+   kapı 🟡'dir") 2026-09-26 öncesi anlamdadır ("yap + PR, hassas iş"). Çelişkide BU bölüm
+   kazanır: hassas dosya → 🟢 + 7b (b)(c); migration/seed/canlı veri/karantina → 🔵.
 
+─── 7b — MERGE ŞARTLARI (GÜNCELLEME 2026-09-26, PO: 4 renk) ───
+~~[ESKİ · 2026-09-26] (7b'nin 🟡 merge şartları metni — aşağıdaki blok bütünüyle)
 ─── 7b — 🟡 MERGE ŞARTLARI (GÜNCELLEME 2026-09-25, PO) ───
 🟡 bir iş ancak DÖRDÜ birden tamamsa merge edilir; biri eksikse PR-ACIK + eksik şart yazılır:
  (a) 🟢 kontrol listesi tam (Bölüm 5 kutuları) — "auth/KVKK/matching dosyalarına dokunulmadı"
@@ -252,6 +283,25 @@ Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
    · canlı veriye yazan / silen işler
    · silme protokolü (karantina dahil)
    Kart sade dille yazılır; PO evet/hayır der; "evet" gelirse tarihli yedeği AJAN alır.
+⛔ AİLE PR AKIŞI YOK: iş başına ayrı PR.
+~~
+⚠️ GÜNCELLEME 2026-09-26 (PO): 4 renk.
+🟢 bir iş şu şartlarla merge edilir; biri eksikse PR-ACIK + eksik şart yazılır:
+ (a) Bölüm 6 kutuları tam — "auth/KVKK/matching dosyalarına dokunulmadı" maddesi HARİÇ
+     (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar).
+ (b) HASSAS DOSYA (auth/yetki · KVKK/rıza · matching/skorlama) değişiyorsa: işi YAZMAYAN bir
+     inceleme alt-ajanının PR'a yazdığı "Bağımsız inceleme kaydı" yorumu, "SONUÇ: ONAY" ile
+     biten. İnceleme şunlara bakar: kapsam · güvenlik listesi (CLAUDE.md § Güvenlik Kuralları) ·
+     KOMŞU UÇ karşılaştırması · tenant filtresi · explicit select · davranış değişikliği.
+     "SORUN VAR" → düzelt, YENİDEN inceleme.
+ (c) HASSAS DOSYA değişiyorsa: auth / yetki / KVKK / tenant izolasyonu işlerinde NEGATİF test
+     (yetkisiz → 403/404, başka kurum görünmez vb.) — CI log'unda gerçekten koştuğu doğrulanır.
+ (d) İki repoda CI yeşil (çatı + backend).
+🔵 bir iş: (a)(b)(d) tamamlanır (+ gerekiyorsa (c)) → EVET/HAYIR kartı → PR-ACIK. Merge YALNIZ
+   PO "EVET"i + tarihli yedek sonrası (Bölüm 7 🔵 akışı). Kapsam: migration (Dockerfile açılışta
+   `migrate deploy` çalıştırır → merge = canlı DB değişikliği) · seed (her türü) · canlı veriye
+   yazan/silen işler · karantina.
+🔴: gerçek silme (silme protokolünün son adımı) — PO'nun İKİNCİ onayı.
 ⛔ AİLE PR AKIŞI YOK: iş başına ayrı PR.
 Merge sonrası: SIRALI pointer bump (Bölüm 8) + 02-ILERLEME'ye "CANLIDA BAK: <kullanıcı ne görüyor>".
 ⚠️ GÜNCELLEME 2026-09-26 (PO): Merge sonrası canlı adres kontrolü de EKLENDİ — dağıtım için kısa bir
@@ -482,6 +532,20 @@ Y5 · 09-DURUM.md basina guncel tarihli bolum (yalniz ekleme).
 ── K6 · LIMIT FARKINDALIGI ──
 Tekrarlanan pahali adimi fark edersen daha ucuz yolu sec. TUR OZETI'nde "limitin
 en cok gittigi yer" tek cumleyle yazilsin.
+
+── K8 · VPS ORTAMI (GÜNCELLEME 2026-09-26, PO) ──
+Oturum PO'nun VPS'inde (ayrı kullanıcı, sudo/docker YOK, yalnız ~/menti) çalışıyorsa kalıcı kurallar:
+K8.1 Canlı site AYNI makinede (2 çekirdek · 8 GB). Ağır komutlar (npm ci/install, build, tsc,
+     test) `nice -n 10` ile çalışır; aynı anda EN FAZLA 1 ağır komut. Yazma şeridi en fazla 2
+     (K3'teki "3 şerit" VPS'te 2 okunur).
+K8.2 Playwright/E2E ve Docker imaj testleri LOKALDE KOŞULMAZ — CI sonucu kanıttır.
+K8.3 DATABASE_URL bu ortamda YOKTUR ve KURULMAZ; .env'e, kabuk dosyalarına, ayarlara yazılmaz.
+     DB gerektiren her adımda dur: 00-SIMDI "Engeller"e "tek seferlik DB erişimi gerekiyor: <iş>"
+     yaz, başka işe geç. (🔵 işlerde yedek de DB ister → Bölüm 7 🔵 akışı.)
+K8.4 Her iş taze worktree'de (`~/menti/.worktrees/<is>`), origin/main'den açılır; ana
+     ~/menti/backend checkout'undan iş başlatılmaz. İş bitince worktree kaldırılır (disk).
+K8.5 Bellek/disk yetersiz ya da komut öldürüldü (OOM) → aynı komutu tekrarlama; worktree
+     temizle, tek şeride düş, 00-SIMDI'ye yaz.
 
 ── K7 · BASLAT MESAJI ──
 PO her oturumda sunu gonderir: "OTONOM-PROMPT.txt'yi oku ve uzun calisma
