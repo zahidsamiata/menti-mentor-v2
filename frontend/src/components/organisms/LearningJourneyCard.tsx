@@ -34,7 +34,7 @@ export function LearningJourneyCard() {
           <p className="text-xs text-muted-foreground mt-0.5">
             {completed
               ? 'Yolculuğu tamamladın. Dilediğinde geri dönüp tekrar keşfedebilirsin.'
-              : 'Kısa, sıcak bir keşif — sınav değil. Gerçek durumlarda iyi bir mentorluğun nasıl hissettirdiğini birlikte deneyimleyelim.'}
+              : 'Kısa, sıcak bir keşif — sınav değil. Gerçek durumlarda iyi bir mentörlüğün nasıl hissettirdiğini birlikte deneyimleyelim.'}
           </p>
         </div>
         <Button asChild size="sm" variant={completed ? 'outline' : 'default'}>
