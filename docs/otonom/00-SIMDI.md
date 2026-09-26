@@ -1,15 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 18:26 UTC · çatı main HEAD `86ed188` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 18:28 UTC · çatı main HEAD `49c8cbb` · backend main HEAD `9723c50`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** Şerit 1 (alt ajan): GV-19. Şerit 2: CI/inceleme bekleyenler — IC-08 #151/#332 (7b sürüyor) · PS-10 #333 · YN-13 #334 · PS-09 backend #153. Sonra: F-23, KR-21, AN-07.
+**Şu an yapılan:** Şerit 1 (alt ajan): GV-19. Şerit 2: KR-21 backend #154 CI → merge → pointer bump (PS-09 #153 ile birlikte). Sonra: F-23, AN-07.
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #334 | YN-13 (kişi adı) | belge işi |
+| backend #153 | PS-09 (skorlama vakaları CI'da) | pointer bump bekliyor (yalnız test) |
 | çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) | ok:true, db:up, site 200 |
 | çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) | ok:true, db:up, site 200 |
 | çatı #330 | KR-22 (verify.sh ↔ CI) | ok:true, db:up |
@@ -23,8 +25,7 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #334 | YN-13 (kişi adı — yasal metin dışı 3 geçiş) · 🟢 | koşuyor | gerekmiyor | CI bekleniyor → merge |
-| backend #153 | PS-09 (skorlama vakaları CI'da) · 🟢 | koşuyor | gerekmiyor (yalnız test) | CI → merge → pointer |
+| backend #154 | KR-21 (rapor sıklığı) · 🟢 | koşuyor | gerekmiyor | CI → merge → pointer bump (+PS-09) |
 | backend #151 + çatı #332 | IC-08 (onay bekleyene düzeltme notu) · 🟢+7b (auth) | yeşil | ✅ ONAY (5848715616 / 5848715830) | ⛔ #151 merge sınıflandırıcı reddi (Engeller) → #332 pointer re-bump bekliyor |
 | backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeşil | ✅ **2. tur ONAY** (5848708006 / 5848708123) | **PO EVET'i (KARAR-97)** + `Conversation` yedeği bekler (bu ortamda DB yok) |
 | backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (backend 882 test · çatı 8/8) | ✅ **2. tur ONAY** (yorum 5848666630 / 5848666801) | **PO EVET'i (KARAR-96)** + `Consent` tablosu yedeği bekler (bu ortamda DB yok → EVET gelirse "tek seferlik DB erişimi" gerekecek) |
