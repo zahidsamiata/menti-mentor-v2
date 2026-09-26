@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 21:42 UTC · çatı main HEAD `c333c71` · backend main HEAD `eb48287` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 21:54 UTC · çatı main HEAD `28b06f9` · backend main HEAD `eb48287` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — önceki tur kapandı (TUR ÖZETİ: `02-ILERLEME.md` başı), yeni tur başladı (VPS · en fazla 2 şerit).
 
-**Şu an yapılan:** K5-Y2 bitti (64 satır: 46 tutuyor · 17 tutmuyor · 1 ❓). 4 satır BEKLIYOR'a döndü (KR-19 · GV-12 · K-05 · F-28). Alt ajan: KR-19b (engellenmiş çift mesaj/istek gönderemez). Ben: AN-10b PR.
+**Şu an yapılan:** KR-19b (backend #168 + çatı #348) 7b incelemesi · F-28b çatı #349 CI. Sonra: GV-12 / K-05 (denetimde tutmayan).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -20,6 +20,8 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
+| backend #168 + çatı #348 | KR-19b engellenmiş çift mesaj/istek gönderemez · 🟢+7b | yeşil (986 test) | sürüyor | 7b ONAY → merge → re-bump |
+| çatı #349 | F-28b durum metinleri UI_TEXT · 🟢 | koşuyor | gerekmiyor | CI → merge |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
 | backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim | yeşil | ✅ ONAY | kapı 🔵 ama migration'sız → kapı kararı (strateji) |
 | backend #151 + çatı #332 | IC-08 düzeltme notu | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi |
