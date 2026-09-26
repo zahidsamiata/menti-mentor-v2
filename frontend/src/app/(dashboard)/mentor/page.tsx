@@ -42,7 +42,7 @@ const METRIC_DEFS: {
   { label: 'Aktif Mentilerim',       color: 'brand',   value: (m) => m.activeMentis },
   { label: 'Bekleyen Talepler',      color: 'warning', value: (m) => m.pendingRequests },
   { label: 'Ortalama NPS',           color: 'success', value: (m) => m.avgNps },
-  { label: 'Tamamlanan Toplantılar', color: 'neutral', value: (m) => m.completedMeetings },
+  { label: 'Tamamlanan Görüşmeler', color: 'neutral', value: (m) => m.completedMeetings },
   // P-11: emek "kaç saat" görünür — tamamlanan görüşmelerin toplam süresi (backend'den saat).
   { label: 'Mentörlük Saati',        color: 'success', value: (m) => m.totalMentoringHours ?? null },
 ];
@@ -263,7 +263,7 @@ export default function MentorDashboardPage() {
           ne beklemesi gerektiğini görür. */}
       <Card className="border-amber-300 dark:border-amber-700">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-base">Toplantı Talepleri</CardTitle>
+          <CardTitle className="text-base">Görüşme Talepleri</CardTitle>
           {(pendingMeetings?.items?.length ?? 0) > 0 && (
             <Badge variant="warning" className="text-xs">
               {pendingMeetings!.items.length} bekliyor
@@ -273,7 +273,7 @@ export default function MentorDashboardPage() {
         {(pendingMeetings?.items?.length ?? 0) === 0 ? (
           <CardContent>
             <p className="text-sm text-muted-foreground text-center py-6">
-              Henüz toplantı talebiniz yok. Bir menti sizinle görüşmek istediğinde talepleri burada onaylayıp yanıtlayabilirsiniz.
+              Henüz görüşme talebiniz yok. Bir menti sizinle görüşmek istediğinde talepleri burada onaylayıp yanıtlayabilirsiniz.
             </p>
           </CardContent>
         ) : (
@@ -349,7 +349,7 @@ export default function MentorDashboardPage() {
                           type="text"
                           value={approveLinks[m.id] ?? ''}
                           onChange={(e) => setApproveLinks((prev) => ({ ...prev, [m.id]: e.target.value }))}
-                          placeholder="Toplantı linki (https://...)"
+                          placeholder="Görüşme bağlantısı (https://...)"
                           className="w-48 rounded-lg border border-border bg-background px-2 py-1 text-xs"
                         />
                       )}
@@ -541,7 +541,7 @@ export default function MentorDashboardPage() {
       {/* Yaklaşan (onaylı) toplantılar */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-base">Yaklaşan Toplantılar</CardTitle>
+          <CardTitle className="text-base">Yaklaşan Görüşmeler</CardTitle>
           {upcomingMeetings.length > 0 && (
             <Badge variant="secondary" className="text-xs">{upcomingMeetings.length}</Badge>
           )}
@@ -549,7 +549,7 @@ export default function MentorDashboardPage() {
         <CardContent>
           {upcomingMeetings.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-6">
-              Yaklaşan toplantınız yok.
+              Yaklaşan görüşmeniz yok.
             </p>
           ) : (
             <div className="divide-y divide-border">

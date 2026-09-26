@@ -259,7 +259,7 @@ export default function MentiDashboardPage() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <DashboardMetricCard label="Gönderilen Talepler" value={sentRequestCount} color="brand" />
         <DashboardMetricCard label="Onaylanan Eşleşmeler" value={countApprovedMatchMentors(meetings)} color="success" />
-        <DashboardMetricCard label="Tamamlanan Toplantılar" value={countCompletedMeetings(meetings)} color="neutral" />
+        <DashboardMetricCard label="Tamamlanan Görüşmeler" value={countCompletedMeetings(meetings)} color="neutral" />
         {/* #12: DISC çoklu harf (ör. "Di") — yoksa tek harfe düşer. */}
         <DashboardMetricCard label="DISC Profili" value={user?.discLetters || user?.discType || '—'} color="warning" />
       </div>
@@ -283,7 +283,7 @@ export default function MentiDashboardPage() {
             <div className="text-center py-8 space-y-2">
               <p className="text-sm font-medium">Yönetici onayı bekleniyor</p>
               <p className="text-xs text-muted-foreground">
-                Profiliniz inceleniyor. Onay sonrasında mentor listesine erişip randevu alabilirsiniz.
+                Profiliniz inceleniyor. Onay sonrasında mentor listesine erişip görüşme talep edebilirsiniz.
               </p>
             </div>
           ) : mentorsLoading ? (
@@ -355,10 +355,10 @@ export default function MentiDashboardPage() {
                       size="sm"
                       variant="outline"
                       disabled={!mentor.isBookable}
-                      title={mentor.isBookable ? undefined : 'Bu mentör şu an randevu için uygun değil'}
+                      title={mentor.isBookable ? undefined : 'Bu mentör şu an görüşme talebi için uygun değil'}
                       onClick={() => router.push(`/book-meeting?mentorId=${mentor.mentorId}`)}
                     >
-                      Randevu Al
+                      Görüşme Talep Et
                     </Button>
                     <Button
                       size="sm"
@@ -372,7 +372,7 @@ export default function MentiDashboardPage() {
                   </div>
                   {!mentor.isBookable && (
                     <p className="text-[11px] text-muted-foreground">
-                      Bu mentör şu an randevu için uygun değil — mesaj gönderebilirsiniz.
+                      Bu mentör şu an görüşme talebi için uygun değil — mesaj gönderebilirsiniz.
                     </p>
                   )}
                 </div>

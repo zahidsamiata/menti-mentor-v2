@@ -18,7 +18,7 @@ const SCENARIOS: LocalScenario[] = [
   {
     id: '1',
     situationText: 'İlk görüşme gününüz. Mentorunuzla 30 dakikanız var.',
-    question: 'İlk buluşmada ne yaparsınız?',
+    question: 'İlk görüşmede ne yaparsınız?',
     choices: [
       { key: 'A', label: 'Hemen somut bir iş veya staj fırsatı istersiniz.', outcome: 'wrong', feedback: 'İlk görüşmede doğrudan iş istemek ilişkiyi başlamadan bitirir. Güven inşa etmek önce gelir.' },
       { key: 'B', label: 'Kendinizi tanıtır, hedeflerinizi paylaşır ve mentorunuzun deneyimini dinlersiniz.', outcome: 'correct', feedback: 'Doğru! İlk görüşme bir keşif oturumudur. Birbirinizi tanıyın, beklentileri netleştirin.' },
