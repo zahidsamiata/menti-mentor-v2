@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { render, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import BookMeetingPage from '@/app/(dashboard)/book-meeting/page';
 
 const pushMock = vi.fn();
@@ -15,6 +15,14 @@ vi.mock('@/hooks/useApiClient', () => ({ useApiClient: () => ({}) }));
 const startConversationMock = vi.fn();
 vi.mock('@/lib/api/conversations', () => ({
   conversationsApi: { start: (...args: unknown[]) => startConversationMock(...args) },
+}));
+
+const bookMeetingMock = vi.fn();
+vi.mock('@/lib/api/meetings', () => ({
+  meetingsApi: {
+    getAvailability: vi.fn(),
+    bookMeeting: (...args: unknown[]) => bookMeetingMock(...args),
+  },
 }));
 
 // Mutable availability mock — set startTime/endTime to null to reproduce the crash
@@ -37,20 +45,16 @@ describe('BookMeeting — availability null-safety regression', () => {
     expect(() => render(<BookMeetingPage />)).not.toThrow();
   });
 
-  it('startTime/endTime null iken tarih+saat seçilince isFitAvailability çökmez', () => {
+  // K-05b: serbest tarih/saat girişi kaldırıldı — null saatli bloklar seçilebilir saat ÜRETMEZ,
+  // ekran çökmeden "uygun müsait saat yok" der (önceki: tarih+saat seçilince isFitAvailability çökmez).
+  it('startTime/endTime null bloklarda saat listesi çökmez, uygun saat yok mesajı gösterilir', () => {
     availabilityMock.data = {
       blocks: [{ weekday: 'MON', startTime: null, endTime: null }],
     };
     render(<BookMeetingPage />);
-    const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
-    const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
-    expect(dateInput).toBeTruthy();
-    expect(timeInput).toBeTruthy();
-    // Trigger isFitAvailability with null startTime blocks — should not throw
-    expect(() => {
-      fireEvent.change(dateInput, { target: { value: '2027-01-04' } }); // Monday
-      fireEvent.change(timeInput, { target: { value: '14:00' } });
-    }).not.toThrow();
+    expect(screen.getByTestId('no-bookable-slots')).toBeInTheDocument();
+    expect(document.querySelector('input[type="date"]')).not.toBeInTheDocument();
+    expect(document.querySelector('input[type="time"]')).not.toBeInTheDocument();
   });
 
   // K-20 (KARAR-53 ④, 2026-09-26): mentör hiç bloğu yoksa backend HER randevu talebini kesin
@@ -69,50 +73,72 @@ describe('BookMeeting — availability null-safety regression', () => {
     expect(screen.getByTestId('weekly-meeting-limit')).toHaveTextContent(/kurumun belirlediği sıklığa bağlıdır/);
   });
 
-  // K-05: KATI (①, bloklu) mentörde blok dışı saat seçilince backend talebi 409 ile KESİN
-  // reddeder (meetingController.ts). Önceki metin "Yine de talep gönderebilirsiniz" diyerek
-  // esnekmiş gibi yanıltıyordu; artık kesin ret ve doğru saat aralığına yönlendirme gösterilir.
-  it('K-05: KATI mentörde blok dışı saat seçilince kesin-ret uyarısı gösterir (yanıltıcı "yine de gönder" YOK)', () => {
-    availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
-    render(<BookMeetingPage />);
-    const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
-    const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
-    fireEvent.change(dateInput, { target: { value: '2027-01-04' } }); // Monday
-    fireEvent.change(timeInput, { target: { value: '10:00' } }); // blok dışı (14:00-16:00 değil)
+  // K-05 → K-05b: KATI (①, bloklu) mentörde önceden blok dışı saat SEÇİLEBİLİYOR, yalnız uyarı +
+  // pasif buton çıkıyordu. Artık serbest saat girişi yok; blok dışı saat hiç listelenmez.
+  describe('K-05b: KATI mentörde yalnız müsait saatler seçilebilir', () => {
+    beforeEach(() => {
+      // 2027-01-03 Pazar 12:00 UTC (= 15:00 İstanbul). Yalnız Date sahtelenir; waitFor etkilenmez.
+      vi.useFakeTimers({ toFake: ['Date'] });
+      vi.setSystemTime(new Date('2027-01-03T12:00:00Z'));
+    });
+    afterEach(() => { vi.useRealTimers(); });
 
-    expect(screen.getByText(/yalnızca müsait gösterdiği saatlerden seçebilirsiniz/i)).toBeInTheDocument();
-    expect(screen.queryByText(/yine de talep gönderebilirsiniz/i)).not.toBeInTheDocument();
-  });
+    it('serbest tarih/saat girişi yok; yanıltıcı "yine de gönder" metni yok', () => {
+      availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+      render(<BookMeetingPage />);
+      expect(document.querySelector('input[type="date"]')).not.toBeInTheDocument();
+      expect(document.querySelector('input[type="time"]')).not.toBeInTheDocument();
+      expect(screen.queryByText(/yine de talep gönderebilirsiniz/i)).not.toBeInTheDocument();
+    });
 
-  // K-05: uyarı göstermek yetmiyordu — geçerli bir niyet mesajı yazılsa bile buton blok-dışı
-  // seçimde tıklanabilir kalıyordu (backend zaten 409 ile reddediyordu, ama "gönder" denenebiliyordu).
-  it('K-05: geçerli niyet mesajı yazılsa bile blok dışı saatte "Görüşme Talebini Gönder" devre dışı', () => {
-    availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
-    render(<BookMeetingPage />);
-    const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
-    const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
-    fireEvent.change(dateInput, { target: { value: '2027-01-04' } }); // Monday
-    fireEvent.change(timeInput, { target: { value: '10:00' } }); // blok dışı (14:00-16:00 değil)
-    const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
-    fireEvent.change(textarea, { target: { value: 'B'.repeat(60) } }); // msgValid = true
+    it('yalnız blok içi başlangıç saatleri (60 dk süreyle) listelenir, blok dışı saat listede yok', () => {
+      availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+      render(<BookMeetingPage />);
+      fireEvent.click(screen.getByRole('button', { name: '4 Ocak Pazartesi' }));
+      const times = within(screen.getByRole('group', { name: 'Saat seçin' }))
+        .getAllByRole('button').map((b) => b.textContent);
+      expect(times).toEqual(['14:00', '14:30', '15:00']);
+      expect(screen.queryByRole('button', { name: '10:00' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: '15:30' })).not.toBeInTheDocument(); // 60 dk bloğu aşar
+    });
 
-    const submitButton = screen.getByRole('button', { name: /görüşme talebini gönder/i });
-    expect(submitButton).toBeDisabled();
-  });
+    it('geçerli niyet mesajı yazılsa bile saat seçilmeden "Görüşme Talebini Gönder" devre dışı', () => {
+      availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+      render(<BookMeetingPage />);
+      fireEvent.change(document.querySelector('textarea') as HTMLTextAreaElement, { target: { value: 'B'.repeat(60) } });
+      expect(screen.getByRole('button', { name: /görüşme talebini gönder/i })).toBeDisabled();
+      fireEvent.click(screen.getByRole('button', { name: '4 Ocak Pazartesi' }));
+      expect(screen.getByRole('button', { name: /görüşme talebini gönder/i })).toBeDisabled();
+    });
 
-  it('K-05: blok İÇİ saat + geçerli mesajla "Görüşme Talebini Gönder" aktif', () => {
-    availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
-    render(<BookMeetingPage />);
-    const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
-    const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
-    fireEvent.change(dateInput, { target: { value: '2027-01-04' } }); // Monday
-    // Blok varsayılan 'Europe/Istanbul' (UTC+3); test ortamı UTC → 11:30 UTC = 14:30 İstanbul (blok içi).
-    fireEvent.change(timeInput, { target: { value: '11:30' } });
-    const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
-    fireEvent.change(textarea, { target: { value: 'B'.repeat(60) } });
+    it('blok içi saat + geçerli mesajla buton aktif; gönderilen an İstanbul saatinin UTC karşılığı', async () => {
+      availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+      bookMeetingMock.mockResolvedValueOnce({ ok: true, data: { meeting: {}, awaitingMentorApproval: true } });
+      render(<BookMeetingPage />);
+      fireEvent.click(screen.getByRole('button', { name: '4 Ocak Pazartesi' }));
+      fireEvent.click(screen.getByRole('button', { name: '14:30' }));
+      fireEvent.change(document.querySelector('textarea') as HTMLTextAreaElement, { target: { value: 'B'.repeat(60) } });
+      const submitButton = screen.getByRole('button', { name: /görüşme talebini gönder/i });
+      expect(submitButton).not.toBeDisabled();
+      fireEvent.click(submitButton);
+      await waitFor(() => expect(bookMeetingMock).toHaveBeenCalled());
+      expect(bookMeetingMock.mock.calls[0]![1]).toMatchObject({
+        startsAt: '2027-01-04T11:30:00.000Z', // 14:30 İstanbul (+03)
+        endsAt: '2027-01-04T12:30:00.000Z',
+      });
+    });
 
-    const submitButton = screen.getByRole('button', { name: /görüşme talebini gönder/i });
-    expect(submitButton).not.toBeDisabled();
+    it('süre uzayınca artık sığmayan seçili saat düşer, buton yeniden pasifleşir', () => {
+      availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+      render(<BookMeetingPage />);
+      fireEvent.change(document.querySelector('textarea') as HTMLTextAreaElement, { target: { value: 'B'.repeat(60) } });
+      fireEvent.click(screen.getByRole('button', { name: '4 Ocak Pazartesi' }));
+      fireEvent.click(screen.getByRole('button', { name: '15:00' }));
+      expect(screen.getByRole('button', { name: /görüşme talebini gönder/i })).not.toBeDisabled();
+      fireEvent.click(screen.getByRole('button', { name: '90 dk' }));
+      expect(screen.queryByRole('button', { name: '15:00' })).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /görüşme talebini gönder/i })).toBeDisabled();
+    });
   });
 
   // K-20 (KARAR-53 ④, 2026-09-26): mentörün hiç bloğu yoksa randevu formu hiç render edilmez —

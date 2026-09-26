@@ -1,7 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
-import { useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
@@ -11,7 +10,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
-import { fitsAvailability, weekdayLabelTr, type AvailabilityBlockLike } from '@/lib/meetingAvailability';
+import {
+  BOOKING_WINDOW_DAYS,
+  DEFAULT_AVAILABILITY_TIMEZONE,
+  fitsAvailability,
+  groupSlotsByDay,
+  listBookableSlots,
+  weekdayLabelTr,
+  type AvailabilityBlockLike,
+} from '@/lib/meetingAvailability';
 import { conversationsApi } from '@/lib/api/conversations';
 
 const FORMATS = [
@@ -47,8 +54,9 @@ function BookMeetingContent() {
   const noAvailabilityConfirmed = !availabilityLoading && availability !== null && !hasAvailabilityBlocks;
 
   const [format, setFormat]           = useState<'ONLINE' | 'IN_PERSON' | 'PHONE'>('ONLINE');
-  const [date, setDate]               = useState('');
-  const [time, setTime]               = useState('');
+  // K-05b: serbest tarih+saat yerine mentörün müsait aralıklarından üretilen başlangıç anı (ISO).
+  const [selectedDay, setSelectedDay]   = useState('');
+  const [selectedSlot, setSelectedSlot] = useState('');
   const [duration, setDuration]       = useState(60);
   const [location, setLocation]       = useState('');
   const [requestMessage, setMsg]      = useState('');
@@ -78,7 +86,21 @@ function BookMeetingContent() {
   const msgLen = requestMessage.length;
   const msgValid = msgLen >= 50 && msgLen <= 500;
 
-  const selectedStart = date && time ? new Date(`${date}T${time}:00`) : null;
+  // K-05b (KARAR-53 ①, KATI): menti yalnız bu listeden seçebilir — blok dışı saat listede yoktur.
+  const blocks = useMemo(
+    () => ((availability?.blocks ?? []) as AvailabilityBlockLike[]),
+    [availability],
+  );
+  const displayTimeZone = blocks.find((b) => b.timezone)?.timezone || DEFAULT_AVAILABILITY_TIMEZONE;
+  const slotGroups = useMemo(
+    () => groupSlotsByDay(listBookableSlots({ blocks, durationMinutes: duration, now: new Date() }), displayTimeZone),
+    [blocks, duration, displayTimeZone],
+  );
+  // Süre değişince seçili saat artık sığmıyorsa seçim düşer (eski seçim sessizce gönderilmesin).
+  const activeGroup = slotGroups.find((g) => g.dayKey === selectedDay) ?? null;
+  const activeSlot  = activeGroup?.slots.find((s) => s.iso === selectedSlot) ?? null;
+
+  const selectedStart = activeSlot ? new Date(activeSlot.iso) : null;
   const selectedEnd   = selectedStart ? addMinutes(selectedStart, duration) : null;
 
   // KR-12: kontrol, backend ile aynı kuralla blok saat diliminde (vars. Europe/Istanbul) yapılır.
@@ -89,7 +111,7 @@ function BookMeetingContent() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!user || !selectedStart || !selectedEnd) return;
+    if (!user || !selectedStart || !selectedEnd || !isFitAvailability) return;
     if (!msgValid) {
       setError('Niyet mesajı 50-500 karakter arasında olmalıdır.');
       return;
@@ -172,13 +194,6 @@ function BookMeetingContent() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && <AlertMessage type="error" message={error} />}
-            {/* K-05: bu uyarı yalnızca mentörün BELİRLİ bloğu varken (KATI/①) ve seçilen saat o bloğa
-                uymadığında görünür (isFitAvailability, blok yokken her zaman true döner) — backend bu
-                durumda talebi 409 ile KESİN reddeder (meetingController.ts ~505). */}
-            {selectedStart && !isFitAvailability && (
-              <AlertMessage type="error" message="Seçtiğiniz saat mentörün müsaitlik bloğu dışında. Bu mentör yalnızca müsait gösterdiği saatlerden seçebilirsiniz — talebiniz aksi halde reddedilir." />
-            )}
-
             <div className="space-y-2">
               <label className="text-sm font-medium">Görüşme Formatı</label>
               <div className="grid grid-cols-3 gap-2">
@@ -188,19 +203,6 @@ function BookMeetingContent() {
                     {label}
                   </button>
                 ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <label className="text-sm font-medium">Tarih</label>
-                <input type="date" required min={new Date().toISOString().split('T')[0]} value={date} onChange={(e) => setDate(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm" />
-              </div>
-              <div className="space-y-1">
-                <label className="text-sm font-medium">Saat</label>
-                <input type="time" required value={time} onChange={(e) => setTime(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm" />
               </div>
             </div>
 
@@ -214,6 +216,48 @@ function BookMeetingContent() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* K-05b: "Menti müsait olmayan saati SEÇEMİYOR" — serbest tarih/saat girişi kaldırıldı;
+                yalnız mentörün müsait bloklarına (süresiyle birlikte) sığan, geçmemiş başlangıç
+                saatleri listelenir. Saatler blok saat diliminde (vars. Europe/Istanbul) gösterilir. */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Tarih ve Saat</label>
+              {!hasAvailabilityBlocks ? (
+                <p className="text-sm text-muted-foreground">Müsait saatler yükleniyor…</p>
+              ) : slotGroups.length === 0 ? (
+                <p className="text-sm text-muted-foreground" data-testid="no-bookable-slots">
+                  Önümüzdeki {BOOKING_WINDOW_DAYS} gün içinde bu süreye uygun müsait saat yok. Daha kısa bir süre seçebilir ya da mentörünüze mesaj gönderebilirsiniz.
+                </p>
+              ) : (
+                <>
+                  <div className="flex flex-wrap gap-2" role="group" aria-label="Gün seçin">
+                    {slotGroups.map((g) => (
+                      <button key={g.dayKey} type="button"
+                        aria-pressed={selectedDay === g.dayKey}
+                        onClick={() => { setSelectedDay(g.dayKey); setSelectedSlot(''); }}
+                        className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${selectedDay === g.dayKey ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}>
+                        {g.dayLabel}
+                      </button>
+                    ))}
+                  </div>
+                  {activeGroup ? (
+                    <div className="grid grid-cols-4 gap-2" role="group" aria-label="Saat seçin">
+                      {activeGroup.slots.map((slot) => (
+                        <button key={slot.iso} type="button"
+                          aria-pressed={selectedSlot === slot.iso}
+                          onClick={() => setSelectedSlot(slot.iso)}
+                          className={`rounded-lg border px-2 py-1.5 text-xs transition-colors ${selectedSlot === slot.iso ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}>
+                          {slot.timeLabel}
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-muted-foreground">Önce bir gün seçin.</p>
+                  )}
+                  <p className="text-xs text-muted-foreground">Saatler Türkiye saatiyle gösterilir.</p>
+                </>
+              )}
             </div>
 
             {format === 'ONLINE' ? (
@@ -259,10 +303,8 @@ function BookMeetingContent() {
               </div>
             </div>
 
-            {/* K-05: "Menti müsait olmayan saati SEÇEMİYOR" — uyarı göstermek yetmiyordu, buton
-                blok-dışı seçimde de tıklanabilir kalıyordu (backend zaten 409 ile reddediyordu,
-                ama menti "gönder"e tıklayabiliyordu). Artık KATI mentörde blok dışı seçim gönderilemez. */}
-            <Button type="submit" className="w-full" disabled={submitting || !date || !time || !msgValid || !isFitAvailability}>
+            {/* K-05/K-05b: seçim yapılmadan ya da (savunma amaçlı) blok dışı bir anla gönderilemez. */}
+            <Button type="submit" className="w-full" disabled={submitting || !selectedStart || !msgValid || !isFitAvailability}>
               {submitting ? 'Gönderiliyor…' : 'Görüşme Talebini Gönder'}
             </Button>
             <p className="text-xs text-muted-foreground text-center">Talebiniz mentöre iletilecek, onaylaması gerekiyor.</p>
