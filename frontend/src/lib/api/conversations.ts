@@ -35,7 +35,13 @@ export interface ConversationThread {
   mentor: ConversationCounterpart;
   menti: ConversationCounterpart;
   counterpart: ConversationCounterpart | null;
+  // U-18: mentör bu mesaj talebini reddettiyse dolu — konuşma kapanır (bkz. messages/[id]/page.tsx).
+  rejectedAt: string | null;
   messages: ChatMessage[];
+}
+
+export interface RejectConversationResponse {
+  conversation: { id: string; rejectedAt: string };
 }
 
 export interface StartConversationResponse {
@@ -65,4 +71,8 @@ export const conversationsApi = {
 
   markRead: (api: BoundClient, id: string): Promise<ApiResult<{ ok: boolean; readAt: string }>> =>
     api<{ ok: boolean; readAt: string }>(`/api/conversations/${id}/read`, { method: 'POST' }),
+
+  // U-18: yalnız mentör çağırabilir — mesaj talebini nazikçe reddeder (KARAR-22 B).
+  reject: (api: BoundClient, id: string): Promise<ApiResult<RejectConversationResponse>> =>
+    api<RejectConversationResponse>(`/api/conversations/${id}/reject`, { method: 'POST' }),
 };

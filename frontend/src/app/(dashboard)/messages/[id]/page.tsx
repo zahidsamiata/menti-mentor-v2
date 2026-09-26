@@ -7,12 +7,21 @@ import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { Button } from '@/components/ui/button';
+import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { conversationsApi } from '@/lib/api/conversations';
 import { UI_TEXT } from '@/lib/uiText';
 
 const MESSAGE_MAX = 2000;
+
+// U-18 (KARAR-22 B + KARAR-80/M1): ret sebebi menti'ye ASLA gösterilmez — mentör bir gerekçe
+// yazsa dahi burada yer almaz. Alternatif mentör önerisi de BİLİNÇLİ olarak yok (B: "alternatif YOK").
+const REJECT_CONFIRM_TEXT =
+  'Reddetmek normaldir. Kapasiten yoksa ya da uygun hissetmiyorsan, kabul edip yarım bırakmaktan iyidir.\n\nSebebini yazman gerekmez.';
+const REJECTED_MENTI_TEXT =
+  'Bu eşleşme gerçekleşmedi.\n\nMentörler genelde kapasite ya da uygunluk nedeniyle dönüş yapamıyor — çoğu zaman aynı anda birkaç mentiyle çalışıyorlar.\n\nBu senin profilinle ilgili değil.';
+const REJECTED_MENTOR_TEXT = 'Bu konuşmayı reddettiniz. Artık mesaj gönderemezsiniz.';
 
 function formatTime(iso: string): string {
   return new Date(iso).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
@@ -28,6 +37,9 @@ export default function ConversationThreadPage() {
   const [text, setText] = useState('');
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
+  const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
+  const [rejecting, setRejecting] = useState(false);
+  const [rejectError, setRejectError] = useState<string | null>(null);
   const markedRef = useRef(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -70,7 +82,23 @@ export default function ConversationThreadPage() {
     }
   }
 
+  async function handleReject() {
+    setRejecting(true);
+    setRejectError(null);
+    const result = await conversationsApi.reject(api, conversationId);
+    setRejecting(false);
+    if (result.ok) {
+      setRejectDialogOpen(false);
+      refetch();
+    } else {
+      setRejectError(result.error.message ?? 'Reddedilemedi.');
+    }
+  }
+
   const counterpart = data?.counterpart;
+  const isMentor = !!data && data.mentor.id === user?.id;
+  const isMenti = !!data && data.menti.id === user?.id;
+  const isRejected = !!data?.rejectedAt;
 
   return (
     <div className="mx-auto flex h-[calc(100vh-6rem)] max-w-2xl flex-col animate-fade-in">
@@ -80,9 +108,14 @@ export default function ConversationThreadPage() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         {counterpart && <UserAvatar src={counterpart.avatarUrl} name={counterpart.fullName} size={36} />}
-        <div>
+        <div className="flex-1">
           <p className="text-sm font-semibold">{counterpart?.fullName ?? 'Konuşma'}</p>
         </div>
+        {isMentor && !isRejected && (
+          <Button variant="outline" size="sm" onClick={() => setRejectDialogOpen(true)}>
+            Reddet
+          </Button>
+        )}
       </div>
 
       {/* Mesajlar */}
@@ -117,29 +150,51 @@ export default function ConversationThreadPage() {
         <div ref={bottomRef} />
       </div>
 
-      {/* Gönderme kutusu */}
+      {/* Gönderme kutusu — reddedilen konuşmada YERİNE ret metni/notu gösterilir (U-18). */}
       <div className="border-t border-border pt-3">
-        {sendError && <p className="mb-2 text-xs text-destructive" role="alert">{sendError}</p>}
-        <div className="flex items-end gap-2">
-          <textarea
-            className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-            rows={2}
-            maxLength={MESSAGE_MAX}
-            placeholder="Bir mesaj yazın…"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                void handleSend();
-              }
-            }}
-          />
-          <Button onClick={handleSend} disabled={sending || text.trim().length === 0}>
-            {sending ? UI_TEXT.status.sending : UI_TEXT.actions.send}
-          </Button>
-        </div>
+        {isRejected ? (
+          <p className="whitespace-pre-line rounded-xl bg-muted px-3 py-3 text-sm text-muted-foreground">
+            {isMenti ? REJECTED_MENTI_TEXT : REJECTED_MENTOR_TEXT}
+          </p>
+        ) : (
+          <>
+            {sendError && <p className="mb-2 text-xs text-destructive" role="alert">{sendError}</p>}
+            <div className="flex items-end gap-2">
+              <textarea
+                className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                rows={2}
+                maxLength={MESSAGE_MAX}
+                placeholder="Bir mesaj yazın…"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    void handleSend();
+                  }
+                }}
+              />
+              <Button onClick={handleSend} disabled={sending || text.trim().length === 0}>
+                {sending ? UI_TEXT.status.sending : UI_TEXT.actions.send}
+              </Button>
+            </div>
+          </>
+        )}
       </div>
+
+      <ConfirmDialog
+        open={rejectDialogOpen}
+        title="Bu mesaj talebini reddetmek istediğine emin misin?"
+        description={REJECT_CONFIRM_TEXT}
+        confirmLabel="Evet, reddet"
+        variant="danger"
+        isLoading={rejecting}
+        onConfirm={handleReject}
+        onCancel={() => { setRejectDialogOpen(false); setRejectError(null); }}
+      />
+      {rejectError && (
+        <p className="mt-2 text-xs text-destructive" role="alert">{rejectError}</p>
+      )}
     </div>
   );
 }
