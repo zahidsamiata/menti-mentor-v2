@@ -137,6 +137,8 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-93** | **Üyeyi kurumdan çıkarma — 30 gün sonra kişilik verisi silme onayı** | **1** (Y-14) | ⬜ boş · CANLI VERİ SİLME · evet/hayır · öneri B şimdi |
 | **KARAR-94** | **Dışa aktarım hakkı (GV-17) çıkış blokeri olsun mu** | **1** (GV-17) | ⬜ boş · ⭐ KARAR-80/M18'den doğdu (2026-09-26) · öneri A (blokeri olsun) |
 | **KARAR-95** | **Kriz kanalı — güvenlik sorusu olarak yeniden** | **2** (I-18, IC-13) | ⬜ boş · ⭐ KARAR-80/M20'den doğdu (2026-09-26), KARAR-69 (c) gereği · öneri A |
+| **KARAR-96** | **🔵 EVET/HAYIR — AN-30 ayrı ayrı rıza kutuları (veritabanına 6 yeni rıza türü)** | **1** (AN-30) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #142 + çatı #320 |
+| **KARAR-97** | **🔵 EVET/HAYIR — U-18 mentör mesaj talebini reddedebilsin (veritabanına 1 yeni alan)** | **1** (U-18) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #148 + çatı #326 |
 
 ---
 
@@ -1615,6 +1617,32 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** A kurum içi sorumluluk zincirini kullanır ama yönetici gecikebilir; B en hızlı yardıma yönlendirir ama kurum kör kalır; C ikisini birleştirir, en güvenli ama en yavaş teslim.
 **Benim önerim:** C — can güvenliği konusunda "ya biri ya diğeri" riskli; ikisi de ucuz eklenir (bildirim altyapısı zaten var, statik ekran S efor).
 **Cevap vermezsen:** I-18/IC-13 🔴 KARAR-95 kilidinde kalır.
+**CEVAP:**
+
+---
+
+### KARAR-96 · 🔵 EVET/HAYIR — AN-30: kayıtta ayrı ayrı rıza kutuları canlıya çıksın mı? (1 iş açar: AN-30) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** EVET + merge sonrasında **hiçbir değişiklik görmez** — ekran iki açma/kapama anahtarının (backend `GRANULAR_CONSENT_ENABLED`, arayüz `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED`) arkasında ve ikisi de varsayılan KAPALI; kayıtta bugünkü tek KVKK kutusu aynen kalır. Anahtarlar PO tarafından Dokploy'da açılınca (ve avukat onaylı metin gelince) kayıt ekranında (e-postayla ve Google/LinkedIn ile kayıt) tek kutu yerine ayrı ayrı rıza kutuları çıkar: 4 zorunlu (DISC ile eşleştirme · yurt dışında saklama · veri işleme · anonim iyileştirme) + 2 isteğe bağlı (kurumlar arası paylaşım · OCEAN kişilik profili). Kanıt: backend PR `menti-mentor#142` (`config` → `granularConsentEnabled: process.env.GRANULAR_CONSENT_ENABLED === 'true'`), çatı PR `menti-mentor-v2#320` (açıklaması: "Flag varsayılan kapalı olduğu için görsel/davranışsal fark YOK"). Anahtar açma adımı: `03-PO-ELLE-ISLER.md` § 🟡 KAPI SATIRLARININ PO KISMI.
+**Ne değişir:** Veritabanındaki rıza türü listesine 6 yeni değer EKLENİR (`ConsentType`). Mevcut hiçbir kayıt değişmez, silinmez. Dosya: `prisma/migrations/20260926150000_add_granular_consent_types/migration.sql` (`ALTER TYPE ... ADD VALUE IF NOT EXISTS`, yalnız ekleme).
+**Geri alınır mı:** Ekran ve kod tek tıkla geri alınır (revert). Eklenen 6 rıza türü veritabanında kalır — boş ve zararsızdır, ama PostgreSQL'de bir tür listesinden değer silmek zahmetlidir (pratikte "kalıcı ekleme" say).
+**Yedeği alınacak tablo:** `Consent` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye yazılır). Not: merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
+**Durum:** kod hazır · CI yeşil · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK · ⚠️ metinler yer tutucudur, yayın metni avukat onayına bağlı (03-PO-ELLE-ISLER avukat paketi).
+**EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; kayıtta tek kutu kalır.
+**Cevap vermezsen:** AN-30 (⛔ çıkış blokeri) PR-ACIK kalır.
+**CEVAP:**
+
+---
+
+### KARAR-97 · 🔵 EVET/HAYIR — U-18: mentör mesaj talebini nazikçe reddedebilsin mi? (1 iş açar: U-18) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** Mentör, mesaj kutusunda bir menti talebine "Reddet" diyebilir; menti nazik bir kapanış mesajı görür, o konuşmaya iki taraf da artık yazamaz. Kanıt: backend PR `menti-mentor#148` (`POST /api/conversations/:id/reject`), çatı PR `menti-mentor-v2#326`.
+**Ne değişir:** Veritabanında konuşma tablosuna 1 yeni boş alan EKLENİR (`Conversation.rejectedAt`, "ne zaman reddedildi"). Mevcut konuşmalar değişmez, hiçbir veri silinmez. Dosya: `prisma/migrations/20260926120000_add_conversation_rejected_at/migration.sql` (`ADD COLUMN IF NOT EXISTS`, yalnız ekleme).
+**Geri alınır mı:** Evet — kod revert edilir; boş alan kalabilir ya da ayrı bir adımla kaldırılabilir.
+**Yedeği alınacak tablo:** `Conversation` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye yazılır). Not: merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
+**Durum:** kod hazır · CI yeşil (backend +7, çatı +6 test) · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK.
+**EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; mentör talebi reddedemez (bugünkü gibi).
+**Cevap vermezsen:** U-18 PR-ACIK kalır; AN-20 (uyum rozeti dili) sırası U-18'e bağlı (KARAR-80/M5).
 **CEVAP:**
 
 ---
