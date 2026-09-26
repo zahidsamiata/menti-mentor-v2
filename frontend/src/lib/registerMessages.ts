@@ -42,6 +42,10 @@ const CODE_MESSAGES: Record<string, string> = {
   TENANT_BULUNAMADI: 'Kuruluş bulunamadı. Davet bağlantınızın doğru olduğundan emin olun.',
   TENANT_ONAY_BEKLENIYOR:
     'Kurumunuz henüz platform tarafından onaylanmadı. Onaylandığında kayıt olabilirsiniz.',
+  // AN-30 / KARAR-34 (OAuth ayağı) — POST /api/auth/oauth/complete-registration hata kodları.
+  PENDING_TOKEN_GECERSIZ:
+    'Kayıt bağlantınızın süresi doldu. Lütfen OAuth ile tekrar giriş yapmayı deneyin.',
+  KULLANICI_MEVCUT: 'Bu e-posta adresiyle zaten bir hesabınız var. Lütfen giriş yapın.',
 };
 
 /** Kayıt hatası ApiError'ını kullanıcıya gösterilecek net mesaja çevirir. */
