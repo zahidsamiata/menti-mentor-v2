@@ -2,6 +2,43 @@
 
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
 
+## TUR ÖZETİ (2026-09-26, VPS oturumu — GÖREV 0 kapı 4 renk + GÖREV 1 uzun çalışma, 2026-09-26 21:32 UTC)
+
+**Kapı dağılımı (açık satır, BITTI ve "→" hariç):** önce (GÖREV 0 öncesi) 122 satır — 🟢 19 · 🟡 51 · 🔴 49 (+2 karışık) · 🔵 0 → GÖREV 0 sonrası 🟢 51 · 🔵 11 · 🟡 9 · 🔴 51 → **tur sonu 90 satır: 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51.**
+
+**BITTI ve CANLIDA (kullanıcı artık şunu görüyor):**
+- GÖREV 0 (#328) — kuyruk 4 renkli kapıyla çalışıyor.
+- PS-A1 — kişilik profili OCEAN değerleri doğru ölçekte · GV-08 — hesap silinince arketip ve serbest yorumlar da anonimleşiyor · KR-14 — testler canlı DB'nin hiçbir adresine koşamıyor (#329).
+- KR-22 — verify her CI adımını ayrı raporluyor, atlanan adım yeşil sayılmıyor (#330).
+- IC-01 — mentör panelinde DISC etiketleri Türkçe ("D — Kararlılık…") (#331).
+- PS-10 — boş mentör listesinde menti suçlanmıyor, teste gönderilmiyor (#333).
+- YN-13 — kişi adı yasal metin dışı belgelerden kalktı (#334; PO kısmı kaldı).
+- KR-21 — kurumun seçtiği rapor sıklığı ağırlık ayarını belirliyor · PS-09 — formül vakaları CI'da (#336).
+- GV-19 — profilde "Şifreyi değiştir"; zayıf şifreler reddediliyor · AN-09 — şüphe bildirimi platform yöneticisine e-postayla (#335).
+- IC-11 — tek terim "görüşme" (Görüşme Talep Et / Görüşme Talepleri) · Y-02 — platform okuma uçları denetim izi bırakıyor (#338).
+- AN-10 (yazım ayağı) — panelde tek yazım "mentör" (#339).
+- KR-16 — sunucu açılışı internetsiz, Prisma CLI imajda sabit sürüm · IC-12 (#341).
+- F-18 — kurum yöneticisi KPI raporunu CSV indiriyor (k-anonim) (#342).
+- Y1-B9 / B9b / B9c — dondurulmuş/reddedilmiş kurumun kullanıcıları erişemiyor (KVKK hakları açık), önerilerde görünmüyor, başka kurumdan istek alamıyor (#344 · #345 · #346).
+- Belge/doğrulama: AN-53 (G-kart 145 kalem doğrulandı) · AN-54 (694 şema kalemi, 2 gerekçesiz) · YN-11 · AN-43 · AN-44 · IC-12 · YN-15 · doc-senkron: GV-10/11/12/13 · PS-01/06 · F-23 · içerik yazıldı (onay bekliyor): IC-10 · AN-05.
+
+**KARAR BEKLIYOR (bu turda açılan):** KARAR-96 (AN-30 🔵) · KARAR-97 (U-18 🔵) · KARAR-98 (AN-26 🔵 + paylaşımlı havuz alt sorusu) · KARAR-99 (AN-02 🔵) · KARAR-100 (`SJT_ENRICHED` gerekçesiz) · ⭐ **KARAR-101** (güvenlik açığı B8 nasıl kapansın — Bekleme Odası). AN-30/U-18/AN-26'nın kodu 7b ONAY'lı, yalnız EVET + DB yedeği bekliyor.
+
+**PR-ACIK (merge edilmedi):** IC-08 (backend #151 merge sınıflandırıcı reddi — ONAY'lı, çatı #332) · P-05 (#162/#340, ONAY'lı; kapı 🔵 ama migration'sız → kapı kararı) · Y1-B8 (#164/#343 → KARAR-101) · AN-30 · U-18 · AN-26 · AN-02.
+
+**BASARISIZ / ATLANDI:** I-12 ATLANDI (KARAR-57) · Y-05 tek seferlik DB erişimi (EXPLAIN) gerekiyor · YN-01/07/08/14 BASARISIZ (önceki turun "CLAUDE.md'ye dokunma" talimatı; bu turda açılmadı).
+
+**CANLIDA KONTROL EDİLECEKLER:** KR-16 sonrası Dokploy'da ayrı başlatma komutu yok mu (03-PO-ELLE-ISLER) · F-18 CSV Excel'de açılıyor mu · GV-19 şifre değiştirme akışı.
+
+**PO'NUN KENDİ YAPMASI GEREKENLER:** `03-PO-ELLE-ISLER.md` § "🟡 KAPI SATIRLARININ PO KISMI" — en kritik 3: (1) Dokploy başlatma komutu teyidi (KR-16) · (2) SMTP + `TENANT_NOTIFICATIONS_ENABLED` (DK-02) · (3) backend `.claude/settings.local.json` kişisel yol (YN-13).
+
+**BACKEND:** pointer `cde7bb8` → **`eb48287`** · çatı main pointer = backend main HEAD ✅ (`git ls-tree origin/main backend` = `eb48287`).
+**STASH:** yok.
+**Kural ihlali (kendi kaydım):** 1 kez canlıya kimliksiz POST (change-password) atıldı — veri yazılmadı; ayrıntı aşağıda 18:5x kaydında.
+**Limitin en çok gittiği yer:** bağımsız 7b incelemeleri (her auth/KVKK işi 1-2 tur) — kaçınılmaz; ama birkaç düzeltme turunu (AN-30, U-18, AN-26 main çakışmaları) önceden main birleştirmesiyle önlemek mümkündü.
+
+---
+
 **ARA KAYIT — çatı #316 (K-05) ve #315 (GV-09b) merge edildi.** İkisi de bağımsız inceleme ONAY, CI yeşil, `~/menti` içinden `gh pr merge` SORUNSUZ geçti. Merge sonrası canlı kontrol: `GET /health` → `ok:true, db:up, smtp:verified, cron:enabled` · site 200. Sorun yok, revert gerekmedi. K-05'in bağımsız incelemesi kapsam dışı gerçek bir bug buldu (bloksuz mentörde backend/frontend davranış uyuşmazlığı) → kuyruğa **K-20** olarak eklendi (🟡, TEYİT GEREK notuyla — KARAR-53 ④'e göre doğru davranış zaten cevaplanmış olabilir). K-05 satırı kısmen BITTI (mesajlaşma dilimi), takvim görünümü kalan iş olarak açık bırakıldı.
 
 **PS-02 CI yeşile döndü** (test düzeltmesi doğrulandı) — yeniden inceleme başlatıldı.

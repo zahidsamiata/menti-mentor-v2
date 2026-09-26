@@ -933,3 +933,10 @@ Kaynak: `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E
 *(taşıma 2026-09-25, YN-09 — satırdan karakter değiştirilmeden)*
 
 ⚠️ **ÇİFT KOD (2026-09-08):** iki durum kodu (belirsizlik); tek koda indirme PO kararı — bkz. kod sözlüğü ÇİFT KOD KURALI. · ⚠️ **PO KARARI (2026-09-08): `🔴/🟡` GEÇERSİZ** (iki durum kodu). ⭐ Sebep kod seçimi değil: **satırda ÜÇ İŞ var** (platform büyüme metrikleri + platform ayar UI + 3. seviye kullanıcı drill) — **madde 7 ile aynı desen.** ~~**BÖLÜNMESİ ÖNERİLİYOR.** ⬜ **PO onayı bekliyor**; bu turda bölünmedi, tek kod da seçilmedi.~~ · 
+
+> **⚡ GÜNCELLEME (2026-09-26, OTONOM VPS TURU — yalnız bu turda değişenler, NUMARA VERİLMEDİ):**
+> - aday · **Kapı düzeni 4 renk** (🟢 yap+merge · 🔵 hazırla+PO evet · 🟡 PO eli · 🔴 karar) — kaynak `OTONOM-PROMPT.txt` Bölüm 7, çatı #328.
+> - aday · **Karar kartları KARAR-96..101** açıldı (`docs/otonom/01-KARARLAR.md`) — 96/97/98/99 🔵 EVET/HAYIR, 100 gerekçesiz şema değeri, 101 güvenlik açığı B8'in kapatılma biçimi.
+> - aday · **Kuyrukta satırı olmayan bulgular** (strateji katmanı satır açsın mı): G-kart doğrulaması (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) ~30 ⬜ kalem · `GET /api/system-logs` denetim izi/meta · kurum-içi sayımlar `User.role` · frontend askı ekranı yok · token türü ayrımı (OAuth pending).
+> - Güncel durum ve iş takibi: `docs/otonom/00-KUYRUK.md` (bu belge durum TUTMAZ).
+
