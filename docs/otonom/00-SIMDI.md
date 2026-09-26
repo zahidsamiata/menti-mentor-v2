@@ -1,15 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 21:54 UTC · çatı main HEAD `28b06f9` · backend main HEAD `eb48287` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 22:08 UTC · çatı main HEAD `424ea3b` · backend main HEAD `4f92627` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — önceki tur kapandı (TUR ÖZETİ: `02-ILERLEME.md` başı), yeni tur başladı (VPS · en fazla 2 şerit).
 
-**Şu an yapılan:** KR-19b (backend #168 + çatı #348) 7b incelemesi · F-28b çatı #349 CI. Sonra: GV-12 / K-05 (denetimde tutmayan).
+**Şu an yapılan:** Alt ajan: K-05b (menti saat seçimi yalnız müsait aralıklardan). KR-19b ve F-28b canlıda. GV-12 → KARAR-102.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #168 + çatı #348 | KR-19b (engellenmiş çift mesaj/istek gönderemez) | ok:true, db:up, site 200 |
+| çatı #349 · #347 | F-28b (UI_TEXT) · AN-10b (mentörlüğün) | ok:true, db:up |
 | backend #167 + çatı #346 | Y1-B9c (askıdaki kuruma çapraz istek yok) | ok:true, db:up, site 200 |
 | backend #166 + çatı #345 | Y1-B9b (askıdaki kurum önerilerde yok, reapply kapalı) | ok:true, db:up, site 200 |
 | backend #165 + çatı #344 | Y1-B9 (dondurulmuş/reddedilmiş kurum erişemez; KVKK hakları açık) | ok:true, db:up ×2, site 200 |
@@ -20,8 +22,6 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| backend #168 + çatı #348 | KR-19b engellenmiş çift mesaj/istek gönderemez · 🟢+7b | yeşil (986 test) | sürüyor | 7b ONAY → merge → re-bump |
-| çatı #349 | F-28b durum metinleri UI_TEXT · 🟢 | koşuyor | gerekmiyor | CI → merge |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
 | backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim | yeşil | ✅ ONAY | kapı 🔵 ama migration'sız → kapı kararı (strateji) |
 | backend #151 + çatı #332 | IC-08 düzeltme notu | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi |
@@ -37,7 +37,7 @@
 - ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` (Ardışık ret sayısı sıfırlandı; sonraki merge'ler geçti.)
 - 🗄️ Tek seferlik DB erişimi gerekiyor: **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
 
-**PO'ya sorular:** ⭐ **KARAR-101** (B8 güvenlik açığı — Bekleme Odası) · KARAR-96/97/98/99 (🔵 EVET/HAYIR; 98'de paylaşımlı havuz alt sorusu) · KARAR-100 (`SJT_ENRICHED`).
+**PO'ya sorular:** ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
 - Kuyrukta satırı olmayan bulgular: G-kart doğrulaması ~30 ⬜ kalem (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) · `GET /api/system-logs` iz/meta · kurum-içi sayımlar `User.role` (KPI + G1-18) · frontend askı ekranı yok · token türü ayrımı (OAuth pending) · U-18 gerçek bildirim/inbox ret işareti.
