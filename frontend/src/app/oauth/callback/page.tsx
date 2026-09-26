@@ -13,6 +13,7 @@
 import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
+import { oauthErrorRedirect } from '@/lib/oauthCallbackRoute';
 
 function OAuthCallbackInner() {
   const router = useRouter();
@@ -22,7 +23,8 @@ function OAuthCallbackInner() {
   useEffect(() => {
     const error = params.get('error');
     if (error) {
-      router.replace(`/login?error=${encodeURIComponent(error)}`);
+      // Onay bekleyen hesap bekleme ekranına, diğerleri giriş ekranına (lib/oauthCallbackRoute).
+      router.replace(oauthErrorRedirect(error));
       return;
     }
 

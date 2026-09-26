@@ -37,6 +37,13 @@ const OAUTH_CODE_MESSAGES: Record<string, string> = {
   TENANT_ONAY_BEKLENIYOR:
     'Kurumunuz henüz inceleme aşamasında. Onaylandıktan sonra kayıt olabilirsiniz.',
   SUNUCU_HATASI: 'Bir hata oluştu. Lütfen tekrar deneyin.',
+  // Y1-B8: sosyal girişte de onay kapısı. Kimlik sağlayıcıda doğrulandıktan SONRA gelir (şifreli
+  // girişteki doğru-şifre-sonrası durum mesajlarıyla aynı) → hesap varlığı sızıntısı değildir.
+  // Tekrar başvuru şifreyle yapıldığı için sosyal hesapta yönetici yönlendirmesi verilir.
+  HESAP_REDDEDILDI:
+    'Başvurunuz şu an onaylanmadı. Ayrıntı ve yeniden başvuru için kurum yöneticinizle iletişime geçin.',
+  HESAP_ONAY_BEKLENIYOR:
+    'Hesabınız henüz yönetici tarafından onaylanmamıştır. Onay sonrası giriş yapabilirsiniz.',
 };
 
 /** Sosyal giriş hata kodunu gösterilecek mesaja çevirir (bilinmeyen kod → genel mesaj). */
