@@ -6,6 +6,20 @@
 import { apiClient } from './client';
 import type { LoginResponse, RefreshResponse } from '@/types/auth';
 
+/**
+ * AN-30 / KARAR-34 — granüler rıza grubu gövdesi. Register (form) ucu VE OAuth
+ * complete-registration ucu AYNI şekli paylaşır (backend `GranularConsentSchema`,
+ * authController.ts) — DRY, tek yerde tanımlı.
+ */
+export interface GranularConsentPayload {
+  discMatching: true;
+  foreignStorage: true;
+  dataProcessing: true;
+  anonymizedImprovement: true;
+  crossTenantSharing?: boolean;
+  oceanProfiling?: boolean;
+}
+
 export interface RegisterPayload {
   email: string;
   password: string;
@@ -18,11 +32,31 @@ export interface RegisterPayload {
   // Davet token'ı (davet linkindeki ?token). Backend doğrular → geçerliyse davetli APPROVED
   // olur ve login PENDING 403'üne takılmaz (PO kararı 2026-09-01, Seçenek A).
   inviteToken?: string;
+  // AN-30 / KARAR-34 — granüler rıza ekranı FLAG'lı (NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED,
+  // varsayılan kapalı; bkz. _RegisterContent.tsx). Flag kapalıyken bu alan HİÇ gönderilmez →
+  // backend eski tek-kutu (`kvkkConsent`) davranışını aynen uygular.
+  granularConsent?: GranularConsentPayload;
 }
 
 export interface RegisterResponse {
   message: string;
   user: { id: string; email: string; fullName: string; role: string; approvalStatus: string };
+}
+
+// AN-30 / KARAR-34 (OAuth ayağı) — `/oauth/callback` sayfasının `pendingConsentToken` query
+// param'ıyla aldığı bekleyen-kayıt token'ını granüler rıza ile tamamlar. Bu param yalnız
+// backend `GRANULAR_CONSENT_ENABLED` AÇIKKEN gelir; flag kapalıyken hiç üretilmez (bkz.
+// oauth/callback/page.tsx — kendi flag'ine bakmaz, yalnız bu param'ın varlığına bakar).
+export interface CompleteOAuthRegistrationPayload {
+  pendingToken: string;
+  // 18 yaş beyanı + KVKK Aydınlatma Metni + açık rıza (form kaydındaki `kvkkConsent` ile aynı anlam).
+  kvkkConsent: true;
+  granularConsent: GranularConsentPayload;
+}
+
+export interface CompleteOAuthRegistrationResponse {
+  accessToken: string;
+  isNewUser: boolean;
 }
 
 export const authApi = {
@@ -34,6 +68,15 @@ export const authApi = {
 
   register: (payload: RegisterPayload) =>
     apiClient<RegisterResponse>('/api/auth/register', {
+      method: 'POST',
+      body: payload,
+    }),
+
+  // AN-30 / KARAR-34 (OAuth ayağı) — granüler rıza ekranından sonra bekleyen OAuth kaydını
+  // tamamlar. Register'dan farkı: redirect değil JSON döner (frontend zaten /oauth/callback
+  // sayfasındadır) — bkz. backend authController.completeOAuthRegistration.
+  completeOAuthRegistration: (payload: CompleteOAuthRegistrationPayload) =>
+    apiClient<CompleteOAuthRegistrationResponse>('/api/auth/oauth/complete-registration', {
       method: 'POST',
       body: payload,
     }),
