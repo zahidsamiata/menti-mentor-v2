@@ -1141,3 +1141,12 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - **Limitin en çok gittiği yer:** arka plan ajanlarının bağımsız inceleme + mutasyon testi turları (PS-A1, K-20, K-19/321-144) — doğru yerde harcandı, tekrar eden pahalı adım yok.
 
 **Kalan 🟢 BEKLIYOR:** aranıyor (bkz. 00-SIMDI.md sıradaki 5 iş). **PR-ACIK bekleyenler:** AN-30 (#142/#320, migration → PO kararı), PS-A1 (#143, PO elle merge), K-19 (#144/#321, inceleme sürüyor).
+
+### ARA KAYIT 6 · 2026-09-26 — K-19 canlıda, GV-08 açıldı, AN-30 OAuth genişliyor
+- **K-19/KARAR-7 BITTI:** backend #144 + çatı #321 merge (bağımsız inceleme: backend'de gerçek CI kırmızısı bulundu — yeni test mentöre müsaitlik bloğu tanımlamamıştı, K-05 ailesinin var olan 409 gate'i tetiklendi; düzeltildi, ONAY). Pointer `7aa8a18`. CANLIDA BAK: menti online randevu isterken link görmüyor, mentör onaylarken giriyor. Canlı kontrol temiz.
+- **GV-08 açıldı (PR-ACIK):** backend #145 — anonimleştirmenin atladığı `User.password/rejectionReason`, `Meeting.locationUrl`, `UserReport.reviewNote`, `Match.mentorArchetype/mentiArchetype` düzeltildi. `MatchFeedback.comment` KASITLI dışarıda (KARAR-39 cevapsız). Bağımsız inceleme sürüyor.
+- **AN-30 genişliyor:** OAuth kayıt akışına granüler rıza ekranı ekleniyor (arka planda, izole worktree'de) — aynı PR'lara (#142/#320) yeni commit olarak eklenecek, flag hâlâ kapalı.
+- **⚠️ SÜREÇ DÜZELTMESİ:** iki bağımsız-inceleme ajanı YANLIŞLIKLA ana checkout'ta (`/home/ajan/menti`, `/home/ajan/menti/backend`) çalıştırıldı — biri lokal test için branch checkout + stash yaptı, benim eşzamanlı 00-KUYRUK.md düzenlemem kısa süre stash'e gitti (veri kaybı YOK, geri alındı, `git stash show` ile doğrulanarak `git stash apply` edildi). Bundan sonra TÜM arka plan ajanları (uygulama VEYA inceleme, yerel test/checkout gerektiren) izole `git worktree` içinde çalıştırılıyor. Bu, OTONOM-PROMPT.txt'ye kalıcı kural olarak eklenmeli (K5 turunda ya da bir sonraki belge senkron turunda).
+- Canlı kontrol her merge sonrası temiz (`/health` ok:true/db:up, site 200).
+- **DB/migration/seed uygulanmadı · #110 ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
+- **Limitin en çok gittiği yer:** bu turda arka plan ajanlarının bağımsız inceleme + mutasyon testleri (K-19, PS-A1, GV-08) — gerekçeli, tekrar eden pahalı adım yok. İkinci en büyük harcama: yanlışlıkla paylaşılan checkout'ta çalışan review agent'ın branch/stash karışıklığını teşhis etmek (öğrenilen ders yukarıda).

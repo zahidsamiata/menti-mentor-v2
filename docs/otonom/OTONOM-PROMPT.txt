@@ -454,6 +454,19 @@ Uzun okumalari, taramalari ve incelemeleri alt ajanlara ver, ana baglama yalniz
 ozet gelsin. Buyuk dosyalarda hedefli ara (grep / satir araligi). Durumu
 bellekte degil dosyalarda tut.
 
+⚠️ K4.1 · ALT AJAN İZOLASYONU (2026-09-26 eklendi, gercek carpismadan sonra):
+Bir alt ajana yerel `git checkout`/branch degistirme/test calistirma/tsc/build
+gerektiren HERHANGI bir is (inceleme dahil — "yalniz gh pr diff okuyacak"
+sansa birakma, cogu inceleme ajani lokal test de calistirir) verilirken ONA
+AYRI bir `git worktree` ata (`~/menti/.worktrees/<is-adi>`), ana `~/menti` ve
+`~/menti/backend` checkout'larina DOKUNMASINI YASAKLA. Ana checkout'ta ayni
+anda SEN de calisiyorsan (docs guncelleme, baska PR merge) ve alt ajan izole
+degilse, ajanin git checkout/stash islemleri seninkiyle CARPISIR (yasandi:
+bir inceleme ajani lokal test icin branch degistirdi + stash yapti, ayni anda
+suren 00-KUYRUK.md duzenlemesi stash'e gitti — veri kaybolmadi ama tur
+zaman kaybetti). Salt `gh pr view/diff/comment/checks` gibi GitHub API
+komutlari herhangi bir dizinden guvenlidir; riskli olan LOKAL git durumu.
+
 ── K5 · YEDEK IS HAVUZU (yapilabilir 🟢/🟡 kalmayinca, sirayla; hicbiri canli veriye dokunmaz) ──
 Y1 · `docs/raporlar/kesif/kod-inceleme-2026-09-24.md`'de [teyit gerek] kalan
      maddeleri (A4, A6-A9, B8-B11, C2-C4, D2-D7) koda karsi dogrula -> dogrulanan
