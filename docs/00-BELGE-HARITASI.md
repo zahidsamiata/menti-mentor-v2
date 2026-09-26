@@ -316,7 +316,7 @@ Bugünkü 17'nin **8'i o defterden SONRA yazıldı** ve hiç bilanço görmedi:
 | `consent-modeli-plani-2026-08-28.md` | 92 | Consent (Rıza) Modeli — Şema Tasarımı + Migration Planı | 📸 | 2026-08-28 (23g) |
 | `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | 232 | Tasarım: Eşleşme Sonrası Değerlendirme + Metrik Takip + Ot | 🔄 | 2026-08-28 (23g) · ad:2026-08-19 |
 | `degerlendirme-sistemi-tasarim-2026-08-27.md` | 774 | Değerlendirme + Eşleştirme Sistemi — Tasarım Belgesi | ❓ | 2026-09-04 (16g) · ad:2026-08-27 |
-| `tasarim-kararlari-admin-2026-08-11.md` | 133 | STK Admin Paneli — Tasarım Kararları (2026-08-11) | 🔄 | 2026-08-11 (40g) |
+| `tasarim-kararlari-admin.md` *(2026-09-26 AN-44: tarihsiz ada taşındı; eski yolda yönlendirme)* | 133 | STK Admin Paneli — Tasarım Kararları (2026-08-11) | 🔄 | 2026-08-11 (40g) |
 
 ### `docs/kararlar/konu/kvkk-metinleri/` — 10 dosya / 437 satır
 

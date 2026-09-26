@@ -15,7 +15,7 @@
 >
 > **İlgili belgeler:** iş kuyruğu `10-yol-haritasi.md` (bu kararlar oradaki #12 / #35 / #36 kalemlerine bağlanır) ·
 > DISC/psikometri `03-psikometri-ve-algoritma.md` · onay/red akışı geçmişi `09-DURUM.md` ("İŞ 3 P2/P3") ·
-> STK admin kararları `tasarim-kararlari-admin-2026-08-11.md` (KARAR 11 = DISC ikincil harf — bu belgenin KARAR 1'i onu
+> STK admin kararları `tasarim-kararlari-admin.md` *(2026-09-26 AN-44: eski adı `…-2026-08-11.md`)* (KARAR 11 = DISC ikincil harf — bu belgenin KARAR 1'i onu
 > **detaylandırır/yerine geçer**). Kişi adı yok.
 
 ---
