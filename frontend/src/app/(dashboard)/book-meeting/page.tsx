@@ -99,7 +99,7 @@ function BookMeetingContent() {
       mentorUserId: mentorId, matchId, format,
       startsAt: selectedStart.toISOString(), endsAt: selectedEnd.toISOString(),
       requestMessage,
-      ...(format === 'ONLINE'    && location ? { locationUrl:  location } : {}),
+      // KARAR-7 (A): online toplantı linkini menti değil mentör, onayda girer.
       ...(format === 'IN_PERSON' && location ? { locationText: location } : {}),
       ...(format === 'PHONE'     && location ? { phoneNumber:  location } : {}),
     });
@@ -216,14 +216,21 @@ function BookMeetingContent() {
               </div>
             </div>
 
-            <div className="space-y-1">
-              <label className="text-sm font-medium">
-                {format === 'ONLINE' ? 'Toplantı Linki (opsiyonel)' : format === 'IN_PERSON' ? 'Buluşma Yeri' : 'Telefon Numarası'}
-              </label>
-              <input type="text" value={location} onChange={(e) => setLocation(e.target.value)}
-                placeholder={format === 'ONLINE' ? 'https://meet.google.com/...' : format === 'IN_PERSON' ? 'Örn: Kadıköy, İstanbul' : '+90 5xx xxx xx xx'}
-                className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm" />
-            </div>
+            {format === 'ONLINE' ? (
+              // KARAR-7 (A): online toplantı linkini mentör, onayda girer — menti burada girmez.
+              <p className="text-xs text-muted-foreground">
+                Toplantı linkini mentörünüz, talebinizi onaylarken paylaşacak.
+              </p>
+            ) : (
+              <div className="space-y-1">
+                <label className="text-sm font-medium">
+                  {format === 'IN_PERSON' ? 'Buluşma Yeri' : 'Telefon Numarası'}
+                </label>
+                <input type="text" value={location} onChange={(e) => setLocation(e.target.value)}
+                  placeholder={format === 'IN_PERSON' ? 'Örn: Kadıköy, İstanbul' : '+90 5xx xxx xx xx'}
+                  className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm" />
+              </div>
+            )}
 
             <div className="space-y-1">
               <label className="text-sm font-medium">
