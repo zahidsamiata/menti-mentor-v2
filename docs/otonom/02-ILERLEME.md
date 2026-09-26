@@ -2,6 +2,8 @@
 
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
 
+**ARA KAYIT — çatı #316 (K-05) ve #315 (GV-09b) merge edildi.** İkisi de bağımsız inceleme ONAY, CI yeşil, `~/menti` içinden `gh pr merge` SORUNSUZ geçti. Merge sonrası canlı kontrol: `GET /health` → `ok:true, db:up, smtp:verified, cron:enabled` · site 200. Sorun yok, revert gerekmedi. K-05'in bağımsız incelemesi kapsam dışı gerçek bir bug buldu (bloksuz mentörde backend/frontend davranış uyuşmazlığı) → kuyruğa **K-20** olarak eklendi (🟡, TEYİT GEREK notuyla — KARAR-53 ④'e göre doğru davranış zaten cevaplanmış olabilir). K-05 satırı kısmen BITTI (mesajlaşma dilimi), takvim görünümü kalan iş olarak açık bırakıldı.
+
 ## TUR ÖZETİ (2026-09-26, üçüncü tur — KARAR-80 işlendi)
 
 **Bölüm 3 — tura devam, ÇIKIŞ BLOKERİ öncelikli:** KARAR-80 sonrası artık işlenebilir (🟢/🟡) 6 ÇIKIŞ BLOKERİ satırı bulundu: K-05 · F-04 · U-01 · GV-09b · PS-02 · AN-30.
