@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 17:59 UTC · çatı main HEAD `21984ad` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 18:08 UTC · çatı main HEAD `dd614a3` · backend main HEAD `d87b227`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** Şerit 1 (alt ajan): AN-30 düzeltmeleri (7b bulguları, main merge, 18+/Aydınlatma, rıza geri çekme) — merge YOK (🔵). Şerit 2: KR-22 çatı #330 CI bekliyor → sonra U-18 düzeltmesi, 🟢 kuyruk (I-12, E-3…).
+**Şu an yapılan:** Şerit 1 (alt ajan): AN-30 düzeltmeleri (merge YOK, 🔵). Şerit 2: IC-01 çatı #331 CI bekliyor → sonra U-18 düzeltmesi, PS-10, IC-08, GV-19 …
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #330 | KR-22 (verify.sh ↔ CI) | ok:true, db:up |
 | backend #143 · #145 · #150 + çatı #329 | PS-A1 · GV-08 · KR-14 (pointer `cde7bb8`→`d87b227`) | ok:true, db:up, smtp:verified, cron:enabled, site 200 (uptime 26 sn — yeni dağıtım) |
 | çatı #328 | GÖREV 0 — kapı düzeni 4 renk (belge) | ok:true, db:up, smtp:verified, cron:enabled, site 200 |
 | backend #149 + çatı pointer #327 | KR-19 (yönetici çift engeli — iki yönde uygulama) | ok:true, db:up, site 200 |
@@ -20,7 +21,7 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #330 | KR-22 (verify.sh ↔ CI hizalama) · 🟢 | koşuyor | gerekmiyor (hassas dosya değil) | CI bekleniyor → merge |
+| çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) · 🟢 | koşuyor | gerekmiyor | CI bekleniyor → merge |
 | backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeşil (eski taban) | **SORUN VAR** (7b, 2026-09-26): iki PR da main ile ÇAKIŞIYOR (KR-19 blok kontrolü korunarak rebase gerekir; çatı pointer `1660da4` backend main'in devamı değil) + menti panelden tekrar yazınca ham hata metni · bildirim servisi yalnız log · reddetme hatası onay penceresinin arkasında | düzeltme sırada; PO EVET'i de bekler |
 | backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (eski taban) | **SORUN VAR** (7b): main ile ÇAKIŞIYOR (GV-18 #147 sonrası) · anahtar açılmadan önce: granüler formda 18+ beyanı + Aydınlatma Metni bağlantısı yok, hesap silmede 6 yeni rıza geri çekilmiyor · küçükler PR yorumunda | düzeltme sırada; PO EVET'i + yedek bekler |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
