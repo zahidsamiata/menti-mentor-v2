@@ -4,6 +4,7 @@ import { Zap, TrendingUp, Users } from 'lucide-react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { cn } from '@/lib/utils';
+import { discDimensionLabel } from '@/types/discTest';
 
 /**
  * P-03 — DISC "özgüven aşısı" rapeli.
@@ -77,8 +78,8 @@ export function DiscRecallCardView({
       <div className="grid grid-cols-2 gap-2 rounded-xl bg-background/60 p-3 text-xs">
         <div className="flex flex-col items-center gap-1">
           <Zap className="h-4 w-4 text-primary" aria-hidden />
-          <span className="text-muted-foreground">Dominant</span>
-          <span className="font-bold text-foreground">{card.dominant}</span>
+          <span className="text-muted-foreground">Baskın boyut</span>
+          <span className="font-bold text-foreground">{discDimensionLabel(card.dominant)}</span>
         </div>
         <div className="flex flex-col items-center gap-1">
           <Users className="h-4 w-4 text-primary" aria-hidden />
