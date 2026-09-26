@@ -88,7 +88,7 @@ export default function AgreementPage() {
             </div>
             <div>
               <p className="text-xs text-muted-foreground">Gündem sahibi</p>
-              <p className="font-medium">{agreement.agendaOwner === 'MENTI' ? 'Menti' : 'Mentor'}</p>
+              <p className="font-medium">{agreement.agendaOwner === 'MENTI' ? 'Menti' : 'Mentör'}</p>
             </div>
           </div>
           <div>
@@ -96,7 +96,7 @@ export default function AgreementPage() {
             <p className="bg-muted rounded-lg p-3 text-sm">{agreement.mentiGoal}</p>
           </div>
           <div className="flex gap-4 text-xs text-muted-foreground">
-            <span>Mentor onayı: {agreement.mentorConfirmedAt ? '✅' : '⏳ Bekleniyor'}</span>
+            <span>Mentör onayı: {agreement.mentorConfirmedAt ? '✅' : '⏳ Bekleniyor'}</span>
             <span>Menti onayı: {agreement.mentiConfirmedAt ? '✅' : '⏳ Bekleniyor'}</span>
           </div>
           {agreement.expiresAt && (

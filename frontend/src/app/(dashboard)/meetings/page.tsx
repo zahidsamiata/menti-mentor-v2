@@ -240,7 +240,7 @@ export default function MeetingsPage() {
               <p>Yaklaşan görüşme yok.</p>
               {user?.role === 'MENTI' && (
                 <Button asChild variant="link" size="sm" className="mt-1">
-                  <Link href="/menti">Mentor listesine git →</Link>
+                  <Link href="/menti">Mentör listesine git →</Link>
                 </Button>
               )}
             </div>

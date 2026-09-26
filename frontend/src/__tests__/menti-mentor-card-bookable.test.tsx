@@ -117,7 +117,7 @@ describe('PS-10 · Menti boş mentör listesi — profili suçlamaz, teste gönd
 
   it('boş listede doğru sebep yazar ve /disc-test bağlantısı göstermez', async () => {
     render(<MentiDashboardPage />);
-    expect(await screen.findByText('Programınızda şu an görüşülebilecek mentor yok')).toBeInTheDocument();
+    expect(await screen.findByText('Programınızda şu an görüşülebilecek mentör yok')).toBeInTheDocument();
     expect(screen.getByText(/Bu, profilinizle ilgili değil/)).toBeInTheDocument();
     expect(screen.queryByText(/DISC Profilini Güncelle/)).not.toBeInTheDocument();
     expect(screen.queryByText(/profilinizle eşleşen mentor yok/)).not.toBeInTheDocument();

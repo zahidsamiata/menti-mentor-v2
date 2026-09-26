@@ -54,7 +54,7 @@ describe('Menti bekleme odası afişi — haftalık görüşme sıklığı (I-05
     weeklyLimitResponse = { ok: true, data: { maxMeetingsPerWeek: null } };
     render(<MentiDashboardPage />);
     // Afişin mentor sayısı satırı gelene kadar bekle → sorgular çözülmüş olur.
-    expect(await screen.findByText(/5 onaylı mentor/)).toBeInTheDocument();
+    expect(await screen.findByText(/5 onaylı mentör/)).toBeInTheDocument();
     expect(screen.getByText('Bekleme Odasındasınız')).toBeInTheDocument();
     expect(screen.queryByTestId('waiting-weekly-meeting-limit')).not.toBeInTheDocument();
     expect(screen.queryByText(/haftalık görüşme/i)).not.toBeInTheDocument();
@@ -63,7 +63,7 @@ describe('Menti bekleme odası afişi — haftalık görüşme sıklığı (I-05
   it('negatif: uç hata verirse afiş bozulmaz, not görünmez', async () => {
     weeklyLimitResponse = { ok: false, error: { error: 'X', message: 'hata' }, status: 500 };
     render(<MentiDashboardPage />);
-    expect(await screen.findByText(/5 onaylı mentor/)).toBeInTheDocument();
+    expect(await screen.findByText(/5 onaylı mentör/)).toBeInTheDocument();
     expect(screen.getByText('Bekleme Odasındasınız')).toBeInTheDocument();
     expect(screen.queryByTestId('waiting-weekly-meeting-limit')).not.toBeInTheDocument();
   });

@@ -281,7 +281,7 @@ export default function MentorCertificationPage() {
       <div>
         <h1 className="text-2xl font-bold">Mentör Sertifikası</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Gerçek mentorluk durumlarını çöz. Her seçimden sonra kısa bir açıklama göreceksin — amaç öğrenmek.
+          Gerçek mentörlük durumlarını çöz. Her seçimden sonra kısa bir açıklama göreceksin — amaç öğrenmek.
         </p>
       </div>
 

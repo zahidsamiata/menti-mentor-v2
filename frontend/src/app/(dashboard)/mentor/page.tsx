@@ -164,9 +164,9 @@ export default function MentorDashboardPage() {
         <div className="flex items-center gap-3">
           {tenant && <TenantLogo tenant={tenant} size={40} />}
           <div>
-            <h1 className="text-2xl font-bold">Mentor Paneli</h1>
+            <h1 className="text-2xl font-bold">Mentör Paneli</h1>
             <p className="text-sm text-muted-foreground">
-              Hoş geldiniz, {user?.fullName?.split(' ')[0] ?? 'Mentor'}
+              Hoş geldiniz, {user?.fullName?.split(' ')[0] ?? 'Mentör'}
             </p>
           </div>
         </div>
