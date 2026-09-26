@@ -13,15 +13,23 @@
 
 import type { ApiError, ApiResult } from '@/types/api';
 import { invalidateQueries } from '@/lib/queryCache';
+import { isUserFacingMessage } from '@/lib/apiErrorMessage';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
 /**
- * Doğrulama (Zod) hatalarında backend `message` alanı GÖNDERMEZ; yalnızca
- * `details` (flatten: { formErrors, fieldErrors }) döner. Bu durumda details'teki
- * (zaten Türkçe) ilk anlamlı mesajı `message`'a taşırız — böylece tüm çağıranlar
- * `error.message` üzerinden generic "Hata" yerine anlamlı açıklama görür.
- * GÜVENLİK: yalnızca Zod'un kullanıcı-dostu alan mesajları yüzeye çıkar; stack/DB/iç detay YOK.
+ * Backend her hatada `message` doldurmaz — iki farklı eksik biçim var:
+ *  1. Doğrulama (Zod) hataları: `message` YOK, yalnızca `details`
+ *     (flatten: { formErrors, fieldErrors }) döner. details'teki (zaten Türkçe)
+ *     ilk anlamlı alan mesajını `message`'a taşırız.
+ *  2. Bazı controller'lar (ör. meetingController 409'ları — K-05) insan-okunur
+ *     Türkçe cümleyi `message` yerine `error` alanına yazar (`error` genelde
+ *     `NOT_FOUND` gibi tek-token bir kod olsa da, tutarlı değil). `error` bir kod
+ *     DEĞİL de cümleyse (isUserFacingMessage — kod/stack/Zod-İngilizce filtresi
+ *     zaten var, IC-07) onu `message`'a yükseltiriz.
+ * Böylece tüm çağıranlar `error.message` üzerinden generic yedek yerine backend'in
+ * gerçek Türkçe açıklamasını görür.
+ * GÜVENLİK: yalnızca kullanıcı-dostu görünen metin yüzeye çıkar; kod/stack/iç detay YOK.
  */
 function withValidationMessage(err: ApiError): ApiError {
   if (err.message) return err;
@@ -30,8 +38,10 @@ function withValidationMessage(err: ApiError): ApiError {
     | undefined;
   const fromField = d?.fieldErrors ? Object.values(d.fieldErrors).flat().find(Boolean) : undefined;
   const fromForm = d?.formErrors?.find(Boolean);
-  const msg = fromField ?? fromForm;
-  return msg ? { ...err, message: msg } : err;
+  const fromDetails = fromField ?? fromForm;
+  if (fromDetails) return { ...err, message: fromDetails };
+  if (isUserFacingMessage(err.error)) return { ...err, message: err.error };
+  return err;
 }
 
 export interface RequestOptions {
