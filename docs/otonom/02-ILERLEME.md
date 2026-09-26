@@ -1290,3 +1290,4 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 21:54 UTC · **GV-12 ATLANDI(karar)** — kalan e-posta sızıntısı yalnız "önce e-posta doğrulaması" akışıyla tam kapanır (kodun kendi notu) → **KARAR-102** açıldı.
 - 2026-09-26 22:08 UTC · **KR-19 BITTI (yeniden)** — KR-19b 7b ONAY · backend #168 + çatı #348 (`424ea3b`). **F-28 BITTI (yeniden)** — #349. Canlı ok:true · db:up · site 200. K-05b alt ajanda.
 - 2026-09-26 22:44 UTC · **K-05 BITTI (yeniden)** — K-05b çatı #350 (`dc09d20`; F-28b ile tek satır çakışması çözüldü). Canlı ok:true · db:up · site 200. Sıradaki: K5-Y3.
+- 2026-09-26 22:48 UTC · **K5-Y3 taraması** — 179 uç, 134'ünde kurum izolasyonu/IDOR negatif testi yok (`docs/raporlar/kesif/negatif-test-boslugu-2026-09-26.md`); clubRoutes/jobListingRoutes test uygulamasına bağlı değil. En riskli 10 uç için test yazımı alt ajanda (yalnız test; açık bulunursa `it.fails` + rapor).
