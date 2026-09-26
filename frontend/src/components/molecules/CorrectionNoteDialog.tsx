@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { CORRECTION_NOTE_PRESETS } from '@/types/admin';
 import { cn } from '@/lib/utils';
 import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
+import { UI_TEXT } from '@/lib/uiText';
 
 interface CorrectionNoteDialogProps {
   open: boolean;
@@ -97,12 +98,12 @@ export function CorrectionNoteDialog({
       </div>
 
       <div className="mt-6 flex justify-end gap-2">
-        <Button variant="outline" onClick={onCancel} disabled={isLoading}>Vazgeç</Button>
+        <Button variant="outline" onClick={onCancel} disabled={isLoading}>{UI_TEXT.actions.cancel}</Button>
         <Button
           onClick={() => activeNote && onConfirm(activeNote)}
           disabled={!activeNote || isLoading}
         >
-          {isLoading ? 'Gönderiliyor…' : 'Düzeltme Gönder'}
+          {isLoading ? UI_TEXT.status.sending : 'Düzeltme Gönder'}
         </Button>
       </div>
     </dialog>

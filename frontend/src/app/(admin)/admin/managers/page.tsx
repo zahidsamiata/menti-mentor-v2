@@ -6,6 +6,7 @@ import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Button } from '@/components/ui/button';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function ManagersPage() {
   const api       = useApiClient();
@@ -64,7 +65,7 @@ export default function ManagersPage() {
           </p>
         </div>
         <Button size="sm" onClick={() => setShowAssign((v) => !v)} disabled={atAdminLimit && !showAssign}>
-          {showAssign ? 'Kapat' : '+ Yönetici Ata'}
+          {showAssign ? UI_TEXT.actions.close : '+ Yönetici Ata'}
         </Button>
       </div>
 
@@ -78,7 +79,7 @@ export default function ManagersPage() {
       {showAssign && (
         <div className="rounded-xl border p-4 space-y-3">
           <p className="text-sm font-medium">Yönetici atanacak kullanıcı seç</p>
-          {approved.isLoading && <p className="text-sm text-muted-foreground">Yükleniyor…</p>}
+          {approved.isLoading && <p className="text-sm text-muted-foreground">{UI_TEXT.status.loading}</p>}
           {approved.error && <AlertMessage type="error" message={approved.error} />}
           {approved.data && assignable.length === 0 && (
             <p className="text-sm text-muted-foreground">Atanabilecek onaylı kullanıcı yok.</p>
@@ -102,7 +103,7 @@ export default function ManagersPage() {
         </div>
       )}
 
-      {isLoading && <p className="text-sm text-muted-foreground">Yükleniyor…</p>}
+      {isLoading && <p className="text-sm text-muted-foreground">{UI_TEXT.status.loading}</p>}
 
       {data && (
         <div className="rounded-xl border overflow-hidden">

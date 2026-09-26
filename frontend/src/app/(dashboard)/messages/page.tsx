@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { conversationsApi } from '@/lib/api/conversations';
+import { UI_TEXT } from '@/lib/uiText';
 
 function formatWhen(iso: string): string {
   const d = new Date(iso);
@@ -48,7 +49,7 @@ export default function MessagesInboxPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="py-6 text-center text-sm text-muted-foreground">Yükleniyor…</p>
+            <p className="py-6 text-center text-sm text-muted-foreground">{UI_TEXT.status.loading}</p>
           ) : !data || data.items.length === 0 ? (
             <div className="py-8 text-center space-y-1">
               <p className="text-sm font-medium">Henüz mesajınız yok</p>

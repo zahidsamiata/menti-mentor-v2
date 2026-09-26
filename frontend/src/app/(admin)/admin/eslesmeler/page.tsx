@@ -20,10 +20,11 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { MatchStatus } from '@/types/admin';
 import { RISK_META } from '@/lib/adminMetrics';
 import { cn } from '@/lib/utils';
+import { UI_TEXT } from '@/lib/uiText';
 
 // null = "Tümü" (durum filtresi yok)
 const STATUS_TABS: { label: string; value: MatchStatus | null }[] = [
-  { label: 'Tümü',        value: null },
+  { label: UI_TEXT.filters.all, value: null },
   { label: 'Aktif',       value: 'ACTIVE' },
   { label: 'Tamamlanan',  value: 'COMPLETED' },
   { label: 'Erken Biten', value: 'EARLY_EXIT' },
