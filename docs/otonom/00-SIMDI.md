@@ -1,7 +1,7 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 19:07 UTC · çatı main HEAD `9749f68` · backend main HEAD `60715c7` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 19:09 UTC · çatı main HEAD `62e4dad` · backend main HEAD `60715c7` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
@@ -24,6 +24,7 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil | **SORUN VAR** → düzeltme sürüyor | 7b ONAY + PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
+| çatı #339 | AN-10 mentör yazımı (panel) · 🟢 | koşuyor | gerekmiyor | CI → merge |
 | backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
 | backend #148 + çatı #326 | U-18 · 🔵 KARAR-97 | yeşil | ✅ ONAY (2. tur) | PO EVET + `Conversation` yedeği (DB erişimi gerekir) |
 | backend #142 + çatı #320 | AN-30 · 🔵 KARAR-96 · ⛔ çıkış blokeri | yeşil | ✅ ONAY (2. tur) | PO EVET + `Consent` yedeği (DB erişimi gerekir) |
