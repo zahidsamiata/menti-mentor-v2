@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { ReportReason, ReportStatus, TenantReport } from '@/types/admin';
+import { UI_TEXT } from '@/lib/uiText';
 
 const REASON_LABELS: Record<ReportReason, string> = {
   SPAM: 'Spam / istenmeyen',
@@ -35,7 +36,7 @@ const STATUS_FILTERS: { key: ReportStatus | 'ALL'; label: string }[] = [
   { key: 'OPEN', label: 'Açık' },
   { key: 'REVIEWED', label: 'İncelendi' },
   { key: 'DISMISSED', label: 'Reddedildi' },
-  { key: 'ALL', label: 'Tümü' },
+  { key: 'ALL', label: UI_TEXT.filters.all },
 ];
 
 /** Sayfaları birleştirir; sayfa sınırında kayma olursa aynı kaydı iki kez göstermez. */
@@ -244,7 +245,7 @@ export default function AdminReportsPage() {
       {hasMore && (
         <div className="flex justify-center">
           <Button variant="outline" size="sm" disabled={loadingMore} onClick={() => void loadMore()}>
-            {loadingMore ? 'Yükleniyor…' : 'Daha fazla göster'}
+            {loadingMore ? UI_TEXT.status.loading : 'Daha fazla göster'}
           </Button>
         </div>
       )}

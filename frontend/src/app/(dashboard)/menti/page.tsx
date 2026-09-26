@@ -26,6 +26,7 @@ import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard'
 import { NotificationOptInButton } from '@/components/organisms/NotificationOptInButton';
 import { weeklyLimitText, WEEKLY_LIMIT_FALLBACK } from '@/components/molecules/WeeklyMeetingLimitNote';
 import type { MentorMatch } from '@/types/matching';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function MentiDashboardPage() {
   const { user, isLoading } = useAuth();
@@ -395,10 +396,10 @@ export default function MentiDashboardPage() {
 
             <div className="mt-4 flex justify-end gap-2">
               <Button variant="outline" onClick={closeModal} disabled={sending}>
-                Vazgeç
+                {UI_TEXT.actions.cancel}
               </Button>
               <Button onClick={handleSend} disabled={sending || message.trim().length === 0}>
-                {sending ? 'Gönderiliyor…' : 'Gönder'}
+                {sending ? UI_TEXT.status.sending : UI_TEXT.actions.send}
               </Button>
             </div>
           </>

@@ -1,5 +1,6 @@
 import type { TenantMember, TenantMemberRole } from '@/lib/api/platform';
 import { certStatusBadge } from '@/lib/enumLabels';
+import { UI_TEXT } from '@/lib/uiText';
 
 type RoleFilter = TenantMemberRole | 'ALL';
 
@@ -57,7 +58,7 @@ export function MembersTable({
       </div>
 
       {loading ? (
-        <p className="text-muted-foreground text-sm">Yükleniyor…</p>
+        <p className="text-muted-foreground text-sm">{UI_TEXT.status.loading}</p>
       ) : members.length === 0 ? (
         <p className="text-muted-foreground text-sm">Üye bulunamadı.</p>
       ) : (

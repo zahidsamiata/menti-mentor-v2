@@ -14,6 +14,7 @@ import { topicLabel } from '@/lib/certificationTopics';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
 import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 import type { CertQuestion, CertReveal, CertResult, CertOutcome } from '@/types/certification';
+import { UI_TEXT } from '@/lib/uiText';
 
 // Renk semantiği: yeşil=doğru, sarı=kabul edilebilir, kırmızı=yanlış (renk körlüğü için ikon da).
 const OUTCOME_STYLE: Record<CertOutcome, { badge: string; icon: string; label: string }> = {
@@ -193,7 +194,7 @@ export default function MentorCertificationPage() {
     return (
       <div className="max-w-2xl mx-auto py-10 space-y-4">
         <AlertMessage type="error" message={loadError} />
-        <Button onClick={() => void loadQuestions()}>Tekrar dene</Button>
+        <Button onClick={() => void loadQuestions()}>{UI_TEXT.actions.retry}</Button>
       </div>
     );
   }

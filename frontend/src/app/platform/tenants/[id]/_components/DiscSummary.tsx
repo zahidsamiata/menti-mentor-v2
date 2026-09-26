@@ -1,4 +1,5 @@
 import type { TenantAnalytics } from '@/lib/api/platform';
+import { UI_TEXT } from '@/lib/uiText';
 
 export function DiscSummary({
   analytics,
@@ -7,7 +8,7 @@ export function DiscSummary({
   analytics: TenantAnalytics | null;
   loading: boolean;
 }) {
-  if (loading) return <p className="text-muted-foreground text-sm">Yükleniyor…</p>;
+  if (loading) return <p className="text-muted-foreground text-sm">{UI_TEXT.status.loading}</p>;
   if (!analytics || analytics.discDistribution.length === 0) {
     return <p className="text-muted-foreground text-sm">DISC analizi için yeterli veri yok.</p>;
   }

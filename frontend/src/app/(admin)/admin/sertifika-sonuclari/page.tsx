@@ -20,10 +20,11 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { CertificationStatus } from '@/types/admin';
 import { cn } from '@/lib/utils';
 import { CERT_STATUS_BADGE } from '@/lib/enumLabels';
+import { UI_TEXT } from '@/lib/uiText';
 
 // Filtre sekmeleri: value null ise "Tümü" (filtresiz)
 const STATUS_TABS: { label: string; value: CertificationStatus | null }[] = [
-  { label: 'Tümü',       value: null },
+  { label: UI_TEXT.filters.all, value: null },
   { label: 'Sertifikalı', value: 'CERTIFIED' },
   { label: 'Başarısız',  value: 'FAILED' },
   { label: 'Bekleme',    value: 'COOLDOWN' },

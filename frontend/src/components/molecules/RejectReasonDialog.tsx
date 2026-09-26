@@ -11,6 +11,7 @@
 import { useId, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { UI_TEXT } from '@/lib/uiText';
 
 const MAX = 500;
 
@@ -66,7 +67,7 @@ export function RejectReasonDialog({
       </div>
 
       <div className="mt-6 flex justify-end gap-2">
-        <Button variant="outline" onClick={onCancel} disabled={isLoading}>Vazgeç</Button>
+        <Button variant="outline" onClick={onCancel} disabled={isLoading}>{UI_TEXT.actions.cancel}</Button>
         <Button
           className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           onClick={() => onConfirm(reason)}

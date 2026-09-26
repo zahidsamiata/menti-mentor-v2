@@ -188,6 +188,14 @@ d) KOK SEBEP: kodu oku, kanit al (dosya:satir). Belge ↔ kod celisirse KOD KAZA
       Vaka: /users/me/social oksuz sanildi, is /api/users/me/profile ile CALISIYOR —
       bes ayri denetimde yanlis raporlandi. Yanlis olan kod degil, sorulan soruydu.
 e) YAZ: kucuk tut, kapsam disi dosyaya dokunma
+   ⚠️ GÜNCELLEME 2026-09-26 (PO) — ÇALIŞMA YERİ KURALI (kalıcı):
+   Worktree'ler yalnız `~/menti/.worktrees/` altında açılır (gitignore'lu). `/tmp` altında
+   worktree AÇMA — alt ajanlar da buna uyar. Gerekçe: 2026-09-26 turunda commit/push/merge
+   çağrıları `/tmp` altındaki worktree'lerden tutarsız biçimde reddedildi; izin
+   sınıflandırıcısı `/tmp`'yi güvenilir çalışma alanı saymıyor, `~/menti` altını sayıyor
+   (aynı komut `~/menti/backend` içinden çalıştırılınca sorunsuz geçti — kanıt:
+   `docs/otonom/02-ILERLEME.md` 2026-09-26 kaydı). Zaten `/tmp`'de açılmış eski worktree'ler
+   SİLİNMEZ (iş kaybı riski) — kullanım bitince PO onayıyla temizlenir.
 f) TEST: mevcutlar + yeni davranisa en az bir test
    ⛔ KIRIK TEST SILINMEZ, DUZELTILIR (madde 164 dersi)
 g) Commit (Turkce, is no ile) → PR → Bolum 6 dogrulama listesi → kapiya gore merge

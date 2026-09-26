@@ -20,6 +20,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { useDiscTest } from '@/hooks/useDiscTest';
 import { DiscTestCard } from '@/components/organisms/DiscTestCard';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function DiscTestPage() {
   const router = useRouter();
@@ -137,7 +138,7 @@ function DiscTestLoadError({ message, onRetry }: { message: string; onRetry: () 
         onClick={onRetry}
         className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
       >
-        Tekrar dene
+        {UI_TEXT.actions.retry}
       </button>
     </div>
   );
