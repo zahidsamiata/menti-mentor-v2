@@ -4,6 +4,12 @@
 
 ## TUR ÖZETİ (2026-09-26, üçüncü tur — KARAR-80 işlendi)
 
+**Bölüm 3 — tura devam, ÇIKIŞ BLOKERİ öncelikli:** KARAR-80 sonrası artık işlenebilir (🟢/🟡) 6 ÇIKIŞ BLOKERİ satırı bulundu: K-05 · F-04 · U-01 · GV-09b · PS-02 · AN-30.
+- **F-04 → BITTI** (kod zaten yapılmıştı, yalnız kayıt güncellendi — bkz. yukarı).
+- **GV-09b → çatı #315 açıldı** (`otonom/GV-09b-kvkk-ulke-duzeltmesi-20260926`, ben yazdım, test yeşil, tsc temiz) — **bağımsız inceleme BEKLİYOR** (agent slotu doluyken sıraya alındı).
+- **PS-02, U-01, K-05 → 3 paralel alt-ajana verildi** (limit: en fazla 3), her biri kendi `~/menti/.worktrees/<ad>` altında çalışıyor, PR açacak ama MERGE ETMEYECEK (bağımsız inceleme ayrı adım). AN-30 bu turda başlatılmadı (slot yok), sıradaki round'da alınacak.
+
+
 **Bölüm 2 küçük takipler:**
 - **CSP report-only başlığı (#314):** tekrar kontrol edildi (yalnız GET, ~1 saat sonra) — **artık GÖRÜNÜYOR:** `content-security-policy-report-only: default-src 'self'; script-src 'self' 'unsafe-inline'; ...` sağlıklı bir politika. Önceki "görünmüyor" bulgusu **önbellek/dağıtım gecikmesiydi**, yapılandırma sorunu DEĞİL — düzeltme işi açılmadı.
 - **`/health` `version` alanı:** kuyruğa **V-16** (🟢) olarak eklendi — Dockerfile build sırasında git SHA'sını `version`/`commit` alanına taşıma önerisiyle. Sırası geldiğinde işlenecek, bu turda YAPILMADI (yalnız kuyruğa eklendi, PO talimatı buydu).
