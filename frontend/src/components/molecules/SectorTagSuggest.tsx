@@ -5,6 +5,7 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { Button } from '@/components/ui/button';
 import { tagsApi, validateTagSuggestion, TAG_SUGGEST_MAX, type SuggestTagResponse } from '@/lib/api/tags';
 import { cn } from '@/lib/utils';
+import { UI_TEXT } from '@/lib/uiText';
 
 /**
  * Sektör etiketleri + "listede yok mu? öner" (madde 127, Y-16).
@@ -116,7 +117,7 @@ export function SectorTagSuggest({ currentTags }: { currentTags: string[] }) {
             )}
           />
           <Button type="submit" variant="outline" disabled={submitting} className="rounded-xl shrink-0">
-            {submitting ? 'Gönderiliyor…' : 'Öner'}
+            {submitting ? UI_TEXT.status.sending : 'Öner'}
           </Button>
         </div>
         {feedback && (

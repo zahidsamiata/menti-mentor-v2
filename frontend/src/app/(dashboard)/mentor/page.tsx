@@ -24,6 +24,7 @@ import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard'
 import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
 import type { DiscType, MentorFilter } from '@/types/matching';
 import { discDimensionLabel } from '@/types/discTest';
+import { UI_TEXT } from '@/lib/uiText';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
   { value: 'D', label: discDimensionLabel('D'), color: 'text-red-600 dark:text-red-400' },
@@ -459,7 +460,7 @@ export default function MentorDashboardPage() {
                   onClick={saveFilter}
                   disabled={filterSaving}
                 >
-                  {filterSaving ? 'Kaydediliyor…' : 'Filtreleri Kaydet'}
+                  {filterSaving ? UI_TEXT.status.saving : 'Filtreleri Kaydet'}
                 </Button>
                 {filterSaved && (
                   <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>

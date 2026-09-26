@@ -12,6 +12,7 @@ import { meetingMilestone, type MeetingMilestone } from '@/lib/milestones';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { UI_TEXT } from '@/lib/uiText';
 
 const STARS = [1, 2, 3, 4, 5];
 const CONTINUE_OPTIONS = [
@@ -180,7 +181,7 @@ function MeetingCheckInContent() {
                 onClick={() => handleSubmit(false)}
                 disabled={!canSubmit || submitting}
               >
-                {submitting ? 'Kaydediliyor…' : 'Hızlı Gönder (90 sn)'}
+                {submitting ? UI_TEXT.status.saving : 'Hızlı Gönder (90 sn)'}
               </Button>
               <Button
                 variant="outline"
@@ -246,7 +247,7 @@ function MeetingCheckInContent() {
               onClick={() => handleSubmit(true)}
               disabled={submitting}
             >
-              {submitting ? 'Kaydediliyor…' : 'Gönder'}
+              {submitting ? UI_TEXT.status.saving : UI_TEXT.actions.send}
             </Button>
           </CardContent>
         </Card>

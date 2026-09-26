@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { apiClient } from '@/lib/api/client';
+import { UI_TEXT } from '@/lib/uiText';
 
 const NPS_LABELS: Record<number, string> = {
   0: 'Kesinlikle hayır', 5: 'Belki', 10: 'Kesinlikle evet',
@@ -189,7 +190,7 @@ function PeriodicSurveyContent() {
             onClick={handleSubmit}
             disabled={!canSubmit || submitting}
           >
-            {submitting ? 'Kaydediliyor…' : 'Değerlendirmeyi Gönder'}
+            {submitting ? UI_TEXT.status.saving : 'Değerlendirmeyi Gönder'}
           </Button>
         </CardContent>
       </Card>

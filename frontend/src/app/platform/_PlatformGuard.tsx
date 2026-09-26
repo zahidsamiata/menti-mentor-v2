@@ -17,6 +17,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { getPlatformHealth } from '@/lib/api/platform';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function PlatformGuard({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -54,7 +55,7 @@ export default function PlatformGuard({ children }: { children: ReactNode }) {
   if (!isLoginPage && !checked) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-sm text-muted-foreground animate-pulse">Yükleniyor…</p>
+        <p className="text-sm text-muted-foreground animate-pulse">{UI_TEXT.status.loading}</p>
       </div>
     );
   }
