@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { discDimensionLabel } from '@/types/discTest';
+import { UI_TEXT } from '@/lib/uiText';
 
 const DISC_COLORS: Record<string, string> = {
   D: 'text-red-600 dark:text-red-400', I: 'text-yellow-600 dark:text-yellow-400', S: 'text-green-600 dark:text-green-400', C: 'text-blue-600 dark:text-blue-400', GENERAL: 'text-gray-400',
@@ -263,7 +264,7 @@ export default function QuestionsPage() {
                             onClick={() => handleUpdate(q)}
                             disabled={savingEdit || !editText.trim() || editText.trim() === q.text}
                           >
-                            {savingEdit ? 'Kaydediliyor…' : 'Kaydet'}
+                            {savingEdit ? UI_TEXT.status.saving : UI_TEXT.actions.save}
                           </Button>
                           <Button size="sm" variant="outline" onClick={cancelEdit} disabled={savingEdit}>
                             Vazgeç

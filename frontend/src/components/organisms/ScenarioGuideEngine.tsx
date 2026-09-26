@@ -22,6 +22,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { shuffle } from '@/lib/shuffle';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
+import { UI_TEXT } from '@/lib/uiText';
 
 export type ScenarioOutcome = 'correct' | 'warn' | 'wrong';
 
@@ -309,7 +310,7 @@ export function ScenarioGuideEngine({
             <p className="text-sm text-muted-foreground whitespace-pre-line">{completion.message}</p>
             {error && <AlertMessage type="error" message={error} />}
             <Button onClick={() => void complete()} disabled={completing}>
-              {completing ? (completion.loadingLabel ?? 'Kaydediliyor…') : completion.buttonLabel}
+              {completing ? (completion.loadingLabel ?? UI_TEXT.status.saving) : completion.buttonLabel}
             </Button>
           </CardContent>
         </Card>

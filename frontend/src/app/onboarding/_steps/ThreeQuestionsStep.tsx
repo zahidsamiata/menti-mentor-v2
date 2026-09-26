@@ -22,6 +22,7 @@ import type {
   PriorityValue,
 } from '@/types/onboarding';
 import type { UserRole } from '@/types/auth';
+import { UI_TEXT } from '@/lib/uiText';
 
 interface ThreeQuestionsStepProps {
   role?:        UserRole;
@@ -179,7 +180,7 @@ export function ThreeQuestionsStep({ role, onComplete, isSubmitting, error }: Th
         size="lg"
         className="w-full h-12 text-base rounded-xl gap-2"
       >
-        {isSubmitting ? 'Kaydediliyor…' : 'Tamamla ve Eşleşmeye Geç'}
+        {isSubmitting ? UI_TEXT.status.saving : 'Tamamla ve Eşleşmeye Geç'}
         {!isSubmitting && <ChevronRight className="h-4 w-4" aria-hidden />}
       </Button>
     </div>
