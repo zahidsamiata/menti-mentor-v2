@@ -41,14 +41,18 @@ Merge öncesi kontrol listesi — bir madde bile eksikse merge YOK, PR bırakıl
 Merge sonrası: **submodule pointer'ını backend main HEAD'e re-bump et** (bkz. "Merge sonrası pointer bump").
 Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>`
 
-**🟡 işler** (riskli/geniş): PR'da durur, merge edilmez.
+~~[ESKİ · 2026-09-26] **🟡 işler** (riskli/geniş): PR'da durur, merge edilmez.~~
+⚠️ **GÜNCELLEME 2026-09-26 (PO): 4 renk** — tam metin `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7 / 7b:
+- **🟢 işler**: ajan yapar + merge eder (varsayılan). Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa bağımsız inceleme "SONUÇ: ONAY" + negatif test şartı kendiliğinden eklenir (yukarıdaki listenin "auth / KVKK / matching dosyalarına dokunulmadı" maddesi yerine).
+- **🔵 işler**: migration · seed · canlı veriye yazma · karantina → ajan hazırlar (PR + inceleme ONAY + `01-KARARLAR.md`'de EVET/HAYIR kartı), PO'nun tek "EVET"i + tarihli yedekle merge edilir.
+- **🟡 işler**: yalnız PO'nun eliyle yapılabilen iş (sunucu/Dokploy · hesap/anahtar · GitHub ayarı · avukat · kuruma görünen/hukuki metnin onayı); kod kısmı 🟢 kurallarıyla yapılır, PO kısmı `docs/otonom/03-PO-ELLE-ISLER.md`'ye yazılır.
 **🔴 işler**: ilgili KARAR cevaplanmadan dokunulmaz.
 
 ⛔ **DEĞİŞMEYEN İKİ KURAL** — bunlar kaldırılmadı, aynen geçerli:
 1. **Migration/DB**: canlı = lokal AYNI Neon. Yalnız ilgili KARAR "evet" ise VE etkilenen tablo için
    tarihli yedek tablo alındıktan sonra. Yedek adı + satır sayısı `02-ILERLEME.md`'ye yazılır.
 2. **seed**: `seed.ts` / `npm run seed` / `prisma db seed` ASLA.
-   Güvenli olanlar: `seed-questions`, `seed-learning-journey`, `seed-certification`, `seed-test-tenant`
+   Güvenli olanlar: ~~`seed-questions`~~ (silindi 2026-08-23, bkz. :263 — § CANLI = LOKAL AYNI DB), `seed-learning-journey`, `seed-certification`, `seed-test-tenant`
    — bunlar da yalnız KARAR evet + yedek sonrası.
 
 ## ⭐ KARAR AYRIMI — neyi sorma, neyi sor
@@ -77,7 +81,8 @@ Hiçbir kod · uç · alan · tablo · bileşen · dosya · test şu beş adım 
    ⛔ Arşiv satırı yazılmadan silme commit'i atılmaz.
 5. **ÖNCE KARANTİNA** — doğrudan silme YOK. Kod yerinde kalır, devre dışı bırakılır
    (rota kapalı / `@deprecated` / export kaldırıldı). Bir tur sorunsuz geçerse, **PO'nun İKİNCİ onayıyla** silinir.
-   Karantina 🟡'dır, gerçek silme 🔴'dır.
+   ~~[ESKİ · 2026-09-26] Karantina 🟡'dır, gerçek silme 🔴'dır.~~
+   ⚠️ GÜNCELLEME 2026-09-26 (PO): Karantina 🔵'dır (PO'nun tek "EVET"i), gerçek silme 🔴'dır (İKİNCİ onay).
 
 ⚠️ İstisna YOK. "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz.
 
@@ -133,8 +138,12 @@ Dal adı: `otonom/K-xx-kisa-ad-YYYYMMDD` · her iş ayrı dal, ayrı PR (tek tek
 | 🟥 | **BYPASS** | Kod yazar, commit atar, PR açar, kapısı uygunsa merge eder |
 | 🟩 | **PLANLA** | Salt-okuma keşif. Hiçbir şey değişmez. |
 
-⛔ **KARE ≠ DAİRE.** 🟢 🟡 🔴 daireleri `00-KUYRUK.md`'de **kapı** anlamındadır
-(🟢 yap+merge · 🟡 yap+PR · 🔴 karar bekler). Mod etiketi asla daire kullanmaz;
+⛔ **KARE ≠ DAİRE.** ~~[ESKİ · 2026-09-26] 🟢 🟡 🔴 daireleri `00-KUYRUK.md`'de **kapı** anlamındadır
+(🟢 yap+merge · 🟡 yap+PR · 🔴 karar bekler).~~
+⚠️ GÜNCELLEME 2026-09-26 (PO): 🟢 🔵 🟡 🔴 daireleri `00-KUYRUK.md`'de **kapı** anlamındadır
+(🟢 yap+merge · 🔵 hazırla+PO evet · 🟡 PO eli · 🔴 karar bekler).
+⚠️ `00-KUYRUK` kapı sütunundaki 🔵 ≠ `00-KARAR-TAKIP` durum işareti 🔵 (orada: "tasarım hazır kod bekliyor" — `docs/kararlar/00-KARAR-TAKIP.md:218` lejantı; aynı belgenin özet tablosunda `:70` "v2 backlog" olarak da geçer). Bu belgenin Karar-Takip bölümündeki 🔵 de o durum işaretidir.
+Mod etiketi asla daire kullanmaz;
 kapı etiketi asla kare kullanmaz. Bir promptun başında 🟥 görmek "dur" demek DEĞİLDİR.
 
 **Yerleşim:** mod etiketi kopyalanan promptun İÇİNDE değil, ÜSTÜNDE ve ALTINDA durur.
@@ -176,7 +185,8 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **Geri-alınamaz adımda DUR**: merge, prod deploy, prod DB yazımı (backfill/migration), force-push, external
   servise gönderim → önce DUR, onay bekle.
 - ~~[ESKİ · 2026-09-10 öncesi] **PR aç, MERGE ETME**: merge kararı kullanıcınındır. Push + PR yeterli.~~
-  ⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `CLAUDE.md:25-45` (MERGE POLİTİKASI) · `docs/otonom/00-KUYRUK.md:6-16` · `docs/otonom/OTONOM-PROMPT.txt:151-152`. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (`CLAUDE.md:163`) — orada "PR aç, merge etme" **aynen geçerlidir**.
+  ~~[ESKİ · 2026-09-26]⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `CLAUDE.md:25-45` (MERGE POLİTİKASI) · `docs/otonom/00-KUYRUK.md:6-16` · `docs/otonom/OTONOM-PROMPT.txt:151-152`. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (`CLAUDE.md:163`) — orada "PR aç, merge etme" **aynen geçerlidir**.~~
+  ⚠️ **GÜNCELLEME 2026-09-26 (PO): 4 renk —** **🟢 → doğrulama listesi (+ hassas dosyada bağımsız inceleme ONAY + negatif test) tamsa MERGE ET** · **🔵 → hazırla, PR + EVET/HAYIR kartı; PO "EVET"i + tarihli yedek olmadan merge etme** · **🟡 → yalnız PO eli; kod kısmı 🟢 gibi, PO kısmı `03-PO-ELLE-ISLER.md`** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7/7b · `docs/otonom/00-KUYRUK.md` § Kapılar. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (§ Bulut oturumu farkı) — orada "PR aç, merge etme" **aynen geçerlidir**.
 - **Uçtan uca yürüt**: iş verilince tek turda kapsamlı ilerle; karar gerekeni "kullanıcı kararı gerekli: …" diye
   NOT et, gereksiz durma.
 - **SHA/commit/branch tahmin etme**: durumu git'ten DOĞRULA, hafızadan varsayma.
