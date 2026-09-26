@@ -6,10 +6,17 @@
  * Veri zaten geliyordu (backend listMeetings `include: { mentor: {...} }`).
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import MeetingsPage from '@/app/(dashboard)/meetings/page';
 import type { Meeting } from '@/lib/api/meetings';
+
+// U-01: sayfa artık her zaman bir <ConfirmDialog> (native <dialog>) mount ediyor;
+// jsdom showModal/close metodlarını tanımlamaz — polyfill (bkz. critical-flows.test.tsx).
+beforeAll(() => {
+  HTMLDialogElement.prototype.showModal = vi.fn();
+  HTMLDialogElement.prototype.close     = vi.fn();
+});
 
 const MENTI_ID  = 'menti-1';
 const MENTOR_ID = 'mentor-1';

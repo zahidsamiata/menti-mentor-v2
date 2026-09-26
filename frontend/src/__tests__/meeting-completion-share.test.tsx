@@ -5,10 +5,17 @@
  * görünür; tamamlanmamış görüşmede görünmez.
  */
 
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import MeetingsPage from '@/app/(dashboard)/meetings/page';
 import type { Meeting } from '@/lib/api/meetings';
+
+// U-01: sayfa artık her zaman bir <ConfirmDialog> (native <dialog>) mount ediyor;
+// jsdom showModal/close metodlarını tanımlamaz — polyfill (bkz. critical-flows.test.tsx).
+beforeAll(() => {
+  HTMLDialogElement.prototype.showModal = vi.fn();
+  HTMLDialogElement.prototype.close     = vi.fn();
+});
 
 const meetingsMock: { items: Meeting[] } = { items: [] };
 
