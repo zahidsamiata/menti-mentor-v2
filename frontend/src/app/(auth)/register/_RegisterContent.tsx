@@ -26,7 +26,18 @@ import { buildTenantThemeVars } from '@/lib/branding';
 import { useAuth }    from '@/providers/AuthProvider';
 import { cn }         from '@/lib/utils';
 import { REGISTER_MESSAGES, resolveRegisterError } from '@/lib/registerMessages';
+import {
+  GranularConsentForm,
+  EMPTY_GRANULAR_CONSENT,
+  isGranularConsentValid,
+  type GranularConsentValue,
+} from '@/components/organisms/GranularConsentForm';
 import type { InvitationData } from '@/types/invitation';
+
+// AN-30 / KARAR-34 — granüler rıza ekranı FLAG'lı: gerçek avukat-onaylı metin gelmeden
+// canlıda GERÇEK kullanıcıya AÇILMAZ (KARAR-80 M17). Bu env değişkeni hiçbir ortamda set
+// EDİLMEZ (varsayılan kapalı) — açılınca tek onay kutusu yerine GranularConsentForm gösterilir.
+const GRANULAR_CONSENT_ENABLED = process.env.NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED === 'true';
 
 // ─── İlerleme Göstergesi ──────────────────────────────────────────────────────
 
@@ -161,6 +172,9 @@ export default function RegisterContent() {
   const [errors,    setErrors]    = useState<{ email?: string; password?: string; confirm?: string; kvkk?: string }>({});
   // K4 (18+ beyanı) ayrı kutu değil — tek KVKK onayının metnine gömülü (PO kararı).
   const [kvkkConsent, setKvkkConsent] = useState(false);
+  // AN-30 / KARAR-34 — yalnız GRANULAR_CONSENT_ENABLED açıkken kullanılır (flag kapalıyken
+  // hiç render edilmez, gönderilmez; kvkkConsent yukarıdaki eski akış aynen çalışmaya devam eder).
+  const [granularConsent, setGranularConsent] = useState<GranularConsentValue>(EMPTY_GRANULAR_CONSENT);
   const [submitErr, setSubmitErr] = useState<string | null>(null);
   const [loading,   setLoading]   = useState(false);
 
@@ -192,7 +206,11 @@ export default function RegisterContent() {
     if (password !== confirm) {
       e.confirm = 'Şifreler eşleşmiyor.';
     }
-    if (!kvkkConsent) {
+    if (GRANULAR_CONSENT_ENABLED) {
+      if (!isGranularConsentValid(granularConsent)) {
+        e.kvkk = 'Zorunlu onay maddelerinin tamamı işaretlenmelidir.';
+      }
+    } else if (!kvkkConsent) {
       e.kvkk = 'KVKK onayı ve 18+ beyanı zorunludur.';
     }
     setErrors(e);
@@ -220,7 +238,26 @@ export default function RegisterContent() {
 
     // Davet token'ını backend'e ilet → geçerliyse davetli APPROVED olur (davet = onay, PO 2026-09-01).
     // Böylece aşağıdaki otomatik login() PENDING 403'üne takılmaz; kullanıcı /onboarding'e ulaşır.
-    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true, inviteToken: token ?? undefined });
+    const regResult = await authApi.register({
+      email,
+      password,
+      fullName,
+      role,
+      tenantSlug,
+      kvkkConsent: true,
+      inviteToken: token ?? undefined,
+      // AN-30 / KARAR-34: flag kapalıyken bu alan HİÇ eklenmez → backend eski davranışı uygular.
+      ...(GRANULAR_CONSENT_ENABLED && {
+        granularConsent: {
+          discMatching: true,
+          foreignStorage: true,
+          dataProcessing: true,
+          anonymizedImprovement: true,
+          crossTenantSharing: granularConsent.crossTenantSharing,
+          oceanProfiling: granularConsent.oceanProfiling,
+        },
+      }),
+    });
 
     if (!regResult.ok) {
       setLoading(false);
@@ -397,31 +434,49 @@ export default function RegisterContent() {
           )}
 
           {/* ── KVKK onayı ───────────────────────────────────────────── */}
-          <div className="space-y-1">
-            <label className="flex items-start gap-2.5 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={kvkkConsent}
-                onChange={(e) => {
-                  setKvkkConsent(e.target.checked);
-                  if (e.target.checked) setErrors((p) => ({ ...p, kvkk: undefined }));
+          {/* AN-30 / KARAR-34: flag açıkken tek kutu yerine granüler onay formu gösterilir.
+              Flag KAPALIYKEN (varsayılan, canlı) aşağıdaki eski tek-kutu davranışı AYNEN kalır. */}
+          {GRANULAR_CONSENT_ENABLED ? (
+            <div className="space-y-1">
+              <GranularConsentForm
+                value={granularConsent}
+                onChange={(v) => {
+                  setGranularConsent(v);
+                  if (isGranularConsentValid(v)) setErrors((p) => ({ ...p, kvkk: undefined }));
                 }}
-                className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
-                aria-invalid={!!errors.kvkk}
                 disabled={loading}
               />
-              <span className="text-xs text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">18 yaşından büyük olduğumu beyan ederim</strong> ve{' '}
-                <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
-                  KVKK Aydınlatma Metni
-                </a>
-                {'’'}ni okuyup kişisel verilerimin işlenmesine açık rıza veriyorum. (Zorunlu)
-              </span>
-            </label>
-            {errors.kvkk && (
-              <p role="alert" className="text-xs text-destructive pl-6">{errors.kvkk}</p>
-            )}
-          </div>
+              {errors.kvkk && (
+                <p role="alert" className="text-xs text-destructive">{errors.kvkk}</p>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-1">
+              <label className="flex items-start gap-2.5 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={kvkkConsent}
+                  onChange={(e) => {
+                    setKvkkConsent(e.target.checked);
+                    if (e.target.checked) setErrors((p) => ({ ...p, kvkk: undefined }));
+                  }}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+                  aria-invalid={!!errors.kvkk}
+                  disabled={loading}
+                />
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">18 yaşından büyük olduğumu beyan ederim</strong> ve{' '}
+                  <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
+                    KVKK Aydınlatma Metni
+                  </a>
+                  {'’'}ni okuyup kişisel verilerimin işlenmesine açık rıza veriyorum. (Zorunlu)
+                </span>
+              </label>
+              {errors.kvkk && (
+                <p role="alert" className="text-xs text-destructive pl-6">{errors.kvkk}</p>
+              )}
+            </div>
+          )}
 
           {/* ── Genel hata ───────────────────────────────────────────── */}
           {submitErr && (
