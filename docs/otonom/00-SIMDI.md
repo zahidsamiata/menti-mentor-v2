@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 22:44 UTC · çatı main HEAD `dc09d20` · backend main HEAD `4f92627` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 23:08 UTC · çatı main HEAD `731b76a` · backend main HEAD `9f9a75b` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — önceki tur kapandı (TUR ÖZETİ: `02-ILERLEME.md` başı), yeni tur başladı (VPS · en fazla 2 şerit).
 
-**Şu an yapılan:** K-05b canlıda. K5-Y3: yetki/kurum izolasyonu uçlarında eksik negatif test taraması (salt-okuma alt ajan).
+**Şu an yapılan:** K5-Y3 testleri canlıda (41 test, 10 uçta açık yok). Alt ajan: Y3b — iki yanlış durum kodu (başka kurumun KVKK isteği 500→404 · mentör metrikleri 200-sıfır→ret).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #169 + çatı #351 | K5-Y3 (10 uca 41 negatif test — açık yok) | ok:true, db:up, site 200 |
 | çatı #350 | K-05b (saat yalnız müsait aralıklardan) | ok:true, db:up, site 200 |
 | backend #168 + çatı #348 | KR-19b (engellenmiş çift mesaj/istek gönderemez) | ok:true, db:up, site 200 |
 | çatı #349 · #347 | F-28b (UI_TEXT) · AN-10b (mentörlüğün) | ok:true, db:up |
