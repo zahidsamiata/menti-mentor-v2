@@ -391,3 +391,87 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
      STASH: `git stash list` bossa "yok", doluysa icerigi
 
 PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-KARARLAR.
+
+═══════════════════════════════════════════════════════════════
+14 — UZUN CALISMA KIPI (GUNCELLEME 2026-09-26 PO)
+═══════════════════════════════════════════════════════════════
+Yukaridaki kurallar GECERLI kalir. Celiski olursa BU BOLUM kazanir; yalniz
+guvenlik sinirlari (Bolum 10) ve Bolum 7b (merge sartlari) her zaman kazanir.
+
+Amac: (1) turlarin erken durmasini kalici coz — durma sebepleri: dar gorev
+bitince "hazirim" demek · CI'i bosta beklemek · baglam sismesi · karar bekleyen
+isler yuzunden "is kalmadi" sanmak. (2) gorunurlugu coz — PO terminali okumuyor,
+strateji katmani yalniz REPOYA PUSH EDILENI goruyor, PR yorumu/CI sonucunu her
+zaman goremiyor. Kural: PO'ya ve strateji katmanina soylenecek HER SEY once
+repoda olmali, sohbet yalniz bir isaretcidir. (3) yarim isleri kapatip turu baslat.
+
+── K0 · GORUNURLUK: REPO = TEK KANAL ──
+K0.1 `docs/otonom/00-SIMDI.md` anlik durum fotografidir: her guncellemede
+     UZERINE YAZILIR, buyumez, en fazla ~60 satir. Gecmis 02-ILERLEME'de kalir.
+     Sabit basliklar: Son guncelleme (tarih-saat · cati main HEAD · backend main
+     HEAD) · Durum (CALISIYOR / DURDU (K1 hangi harf) / LIMIT UYARISI) · Su an
+     yapilan (is kodlari + serit durumu) · Son merge'ler (son 10: PR · is · canli
+     kontrol) · Acik PR'lar (PR · is · CI · inceleme karari · neden acik) · Push
+     edilmemis is (dal · SHA · yol · neden; bossa "yok") · Engeller (denetleyici
+     retleri AYNEN · CI kirmizilari · limit mesajlari) · PO'ya sorular (yalniz
+     karar karti no + tek satir) · Strateji katmanina not (dosya:satir) · Karar
+     kilidi tablosu (cevapsiz kartlar, kilitledigi is sayisina gore buyukten
+     kucuge) · Siradaki 5 is.
+K0.2 00-SIMDI ne zaman push edilir: her merge'den, her PR acilisindan, her
+     engelden (ret / CI kirmizi / canli sorun) sonra VE durmadan hemen once.
+     Limit uyarisiz kesebilir; kayitta olmayan is kaybolmus sayilir. 00-SIMDI
+     guncellemesi ayni andaki 02-ILERLEME ve kuyruk guncellemesiyle TEK commit
+     olur ("docs(otonom): SIMDI - <kisa>").
+K0.3 Sohbete PO icin bilgi YAZMA. Her durusta ve her uzun mesajin sonunda
+     sohbete yalniz su tek satiri yaz: "Durum: docs/otonom/00-SIMDI.md @ <SHA>".
+     PO'ya SOHBETTE SORU SORULMAZ; urun sorusu karar kartina, is sorusu
+     00-SIMDI'ye yazilir ve is beklemeden devam edilir.
+K0.4 Terminalde kalan her sey gorunmezdir: CI sonucu, inceleme yorumunun ozu,
+     denetleyici reddi, push edilemeyen commit. Bunlar 00-SIMDI'ye tasinmadan
+     bir is "tamam" sayilmaz.
+
+── K1 · DURMA KOSULU (tek liste; disinda durulmaz) ──
+(a) Kuyrukta ve yedek havuzda (K5) yapilabilir is kalmadi.
+(b) "CANLI SORUN": /health ok:false ya da db:down ve revert duzeltmedi.
+(c) Uc ardisik denetleyici reddi.
+(d) Yanlislikla DB/seed komutu calisti.
+(e) Oturum ya da haftalik limit.
+Durmadan once: 00-SIMDI (Durum: DURDU + harf) + TUR OZETI -> push -> sohbete
+tek satir isaretci. Bir tur kapaninca TUR OZETI'ni yaz ve DURMADAN yeni tura basla.
+
+── K2 · ACILIS (her oturumda, baglam bos varsayilarak, idempotent) ──
+00-SIMDI'yi oku -> kurtarma envanteri (takili bekleme donguleri · worktrees'te
+push edilmemis is · iki repodaki acik PR'lar) -> 00-SIMDI'yi tazele ve push et
+-> yarim kalanlari kapat -> kuyruga devam. Hicbir isi iki kez yapma.
+
+── K3 · BOSTA BEKLEME YASAK ──
+CI ya da alt ajan beklerken, acik PR'larla dosya cakismasi olmayan siradaki isi
+baslat. 3 serit mumkun oldugunca dolu kalsin. CI icin en fazla 20 dakika bekle,
+sonra "CI bekliyor" yaz ve baska ise gec.
+
+── K4 · BAGLAM EKONOMISI ──
+Uzun okumalari, taramalari ve incelemeleri alt ajanlara ver, ana baglama yalniz
+ozet gelsin. Buyuk dosyalarda hedefli ara (grep / satir araligi). Durumu
+bellekte degil dosyalarda tut.
+
+── K5 · YEDEK IS HAVUZU (yapilabilir 🟢/🟡 kalmayinca, sirayla; hicbiri canli veriye dokunmaz) ──
+Y1 · `docs/raporlar/kesif/kod-inceleme-2026-09-24.md`'de [teyit gerek] kalan
+     maddeleri (A4, A6-A9, B8-B11, C2-C4, D2-D7) koda karsi dogrula -> dogrulanan
+     is olur, curuyen "curudu + kanit".
+Y2 · Son 60 BITTI isin "Bitti demek" olcutunu koda karsi yeniden kontrol et
+     (alt ajan, hepsi) -> tutmayan BEKLIYOR + "denetimde tutmadi: <kanit>".
+Y3 · Kurum izolasyonu ve yetki gerektiren uclarda eksik negatif testleri yaz
+     (🟡, merge).
+Y4 · Cevapsiz karar kartlarinin "su an ne var" kanitini tazele ve her kartin
+     basina "bu kart N isi kilitliyor" yaz. YENI kart acma.
+Y5 · 09-DURUM.md basina guncel tarihli bolum (yalniz ekleme).
+
+── K6 · LIMIT FARKINDALIGI ──
+Tekrarlanan pahali adimi fark edersen daha ucuz yolu sec. TUR OZETI'nde "limitin
+en cok gittigi yer" tek cumleyle yazilsin.
+
+── K7 · BASLAT MESAJI ──
+PO her oturumda sunu gonderir: "OTONOM-PROMPT.txt'yi oku ve uzun calisma
+kipinde uygula. PO NOTU: <bos ya da kisa not>". PO NOTU o oturumda kuyrugun
+onune gecer.
+
