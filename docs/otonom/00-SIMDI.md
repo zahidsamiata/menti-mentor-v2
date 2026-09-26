@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 19:52 UTC · çatı main HEAD `457a744` · backend main HEAD `14877f7` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 19:56 UTC · çatı main HEAD `8e38161` · backend main HEAD `14877f7` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
-**Şu an yapılan:** Kuyrukta yapılabilir 🟢 kalmadı sayılır (kalanlar karar/PO/büyük özellik bağımlı — bkz. strateji notu). K5 yedek havuzuna geçiliyor (Y1: kod-inceleme raporundaki [teyit gerek] maddeleri).
+**Şu an yapılan:** K5-Y1 bitti (21 madde: 15 kuyrukta kapanmış · 4 doğrulandı · 1 çürüdü · 1 ❓). Kuyrukta karşılığı olmayan 2 güvenlik bulgusu iş olarak ele alınıyor (K5-Y1 "doğrulanan iş olur"): **Y1-B8** (onay bekleyen kullanıcı OAuth ile oturum açabiliyor) · **Y1-B9** (dondurulan/reddedilen kurumun kullanıcıları erişmeye devam ediyor).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -46,6 +46,7 @@
 **PO'ya sorular:** KARAR-96 (AN-30) · KARAR-97 (U-18) · KARAR-98 (AN-26 + alt soru) · KARAR-99 (AN-02 metin) — 🔵 EVET/HAYIR · KARAR-100 (`SJT_ENRICHED` gerekçesiz değer; KARAR-76 ile aynı tür).
 
 **Strateji katmanına not:**
+- (K5-Y1) `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md`: B8 + B9 güvenlik açıkları kuyrukta satırsızdı → ajan K5-Y1 gereği "Y1-B8" / "Y1-B9" kod adlarıyla PR açıyor (kuyruğa satır EKLENMEDİ; satır açmak sizde). D8 (09-DURUM bayat) tur kapanışındaki belge senkronunda ele alınacak.
 - (F-18 7b) Kurum-içi rol sayımları hâlâ `User.role`'den (KPI servisi + G1-18) — CLAUDE.md kuralı `TenantMembership.role`; kuyrukta satırı yok.
 - (P-05) Kuyrukta 🔵 ama uygulama migration/seed/canlı veri İÇERMİYOR (KARAR-22 B: jenerik metin). 7b ONAY'lı ve CI yeşil — kapı 🟢'ye çekilirse ajan merge eder.
 - (AN-53) `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md` §Öne çıkan bulgular: kuyrukta karşılığı OLMAYAN ~30 ⬜ kalem (ör. G1-09 KVKK başvuru adresi, G1-10 aydınlatma kategorileri, G1-18 `User.role` sayımları, G7-02 açık tema kontrastı, G10-12 `/clubs`) ve "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23, F-27/G6-01, G6-03, G7-13, F-21/G7-09). Ajan iş eklemez → satır açma kararı sizde.
