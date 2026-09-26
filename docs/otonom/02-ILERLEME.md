@@ -1240,3 +1240,4 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 19:38 UTC · **KR-16 BITTI** — backend #161 + çatı pointer #341 (`33a0b03`, pointer `02ac78c`, IC-12 dahil). Yeni açılış komutu canlıda sorunsuz: /health ok:true · db:up · site 200 (3 ardışık). Dokploy başlatma komutu teyidi 03-PO-ELLE-ISLER'e. **P-05 PR-ACIK** (backend #162 + çatı #340; migration yok, `notes` mentiye kapatıldı); 7b sürüyor.
 - 2026-09-26 19:40 UTC · **F-18 PR-ACIK** (alt ajan) — backend #163 + çatı #342; CI yeşil. 7b incelemesi başlatıldı (rol dağılımı sayılarının ham kalması ve `server.ts` CORS `exposedHeaders` eki özellikle incelemede).
 - 2026-09-26 19:41 UTC · **P-05 7b ONAY** (backend #162 · çatı #340). Kapı sütunu 🔵 → merge edilmedi; strateji katmanına kapı notu.
+- 2026-09-26 19:52 UTC · **F-18 BITTI** — backend #163 + çatı #342 (`457a744`). CANLIDA BAK: KPI ekranında "CSV olarak indir". Canlı ok:true · db:up · site 200.
