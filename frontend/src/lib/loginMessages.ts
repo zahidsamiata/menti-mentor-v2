@@ -36,6 +36,8 @@ const OAUTH_CODE_MESSAGES: Record<string, string> = {
   TENANT_BULUNAMADI: 'Kuruluş bulunamadı. Bağlantıyı kontrol edin.',
   TENANT_ONAY_BEKLENIYOR:
     'Kurumunuz henüz inceleme aşamasında. Onaylandıktan sonra kayıt olabilirsiniz.',
+  // Y1-B9: dondurulmuş / reddedilmiş kuruma sosyal girişle yeni kayıt kapalı.
+  KURUM_KAYDA_KAPALI: 'Bu kuruma şu an yeni kayıt alınmıyor. Kurum yöneticinizle iletişime geçin.',
   SUNUCU_HATASI: 'Bir hata oluştu. Lütfen tekrar deneyin.',
 };
 
