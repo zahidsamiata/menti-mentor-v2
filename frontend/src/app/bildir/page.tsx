@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { submitSuspicionReport } from '@/lib/api/platform';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function BildirPage() {
   const [form, setForm] = useState({
@@ -97,7 +98,7 @@ export default function BildirPage() {
             disabled={loading}
             className="w-full rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-50"
           >
-            {loading ? 'Gönderiliyor…' : 'Bildirimi Gönder'}
+            {loading ? UI_TEXT.status.sending : 'Bildirimi Gönder'}
           </button>
         </form>
       </div>

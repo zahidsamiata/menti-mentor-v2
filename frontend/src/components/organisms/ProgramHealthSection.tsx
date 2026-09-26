@@ -18,6 +18,7 @@ import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { cn } from '@/lib/utils';
 import type { HealthMetricsData, NudgeKind } from '@/types/admin';
+import { UI_TEXT } from '@/lib/uiText';
 
 type MetricKey = 'mentorless' | 'dead' | 'passive';
 
@@ -182,7 +183,7 @@ function NudgeButton({ state, onClick, label }: { state?: NudgeState; onClick: (
   return (
     <div className="shrink-0 text-right">
       <Button size="sm" variant="outline" disabled={state === 'sending'} onClick={onClick}>
-        {state === 'sending' ? 'Gönderiliyor…' : label}
+        {state === 'sending' ? UI_TEXT.status.sending : label}
       </Button>
       {errorMsg && <p className="mt-0.5 text-xs text-destructive">{errorMsg}</p>}
     </div>

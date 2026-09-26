@@ -13,6 +13,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
 import { fitsAvailability, weekdayLabelTr, type AvailabilityBlockLike } from '@/lib/meetingAvailability';
 import { conversationsApi } from '@/lib/api/conversations';
+import { UI_TEXT } from '@/lib/uiText';
 
 const FORMATS = [
   { value: 'ONLINE'    as const, label: 'Online (video)' },
@@ -148,7 +149,7 @@ function BookMeetingContent() {
                 className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm resize-none"
               />
               <Button type="submit" className="w-full" disabled={convoSending || !convoMessage.trim()}>
-                {convoSending ? 'Gönderiliyor…' : 'Mesaj Gönder'}
+                {convoSending ? UI_TEXT.status.sending : 'Mesaj Gönder'}
               </Button>
             </form>
           </CardContent>
@@ -263,7 +264,7 @@ function BookMeetingContent() {
                 blok-dışı seçimde de tıklanabilir kalıyordu (backend zaten 409 ile reddediyordu,
                 ama menti "gönder"e tıklayabiliyordu). Artık KATI mentörde blok dışı seçim gönderilemez. */}
             <Button type="submit" className="w-full" disabled={submitting || !date || !time || !msgValid || !isFitAvailability}>
-              {submitting ? 'Gönderiliyor…' : 'Görüşme Talebini Gönder'}
+              {submitting ? UI_TEXT.status.sending : 'Görüşme Talebini Gönder'}
             </Button>
             <p className="text-xs text-muted-foreground text-center">Talebiniz mentöre iletilecek, onaylaması gerekiyor.</p>
           </form>

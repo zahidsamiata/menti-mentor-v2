@@ -10,6 +10,7 @@
 import { Suspense } from 'react';
 import { type Metadata } from 'next';
 import JoinContent from './_JoinContent';
+import { UI_TEXT } from '@/lib/uiText';
 
 export const metadata: Metadata = {
   title:       'Davete Katıl',
@@ -23,7 +24,7 @@ function JoinFallback() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center gap-4" role="status">
         <div className="h-16 w-16 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
-        <p className="text-sm text-muted-foreground">Yükleniyor…</p>
+        <p className="text-sm text-muted-foreground">{UI_TEXT.status.loading}</p>
       </div>
     </div>
   );

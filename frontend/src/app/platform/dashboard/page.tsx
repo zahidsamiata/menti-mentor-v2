@@ -32,6 +32,7 @@ import {
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { logLevelLabel, logBadgeLabel } from '@/lib/enumLabels';
 import { useModalDialog } from '@/hooks/useModalDialog';
+import { UI_TEXT } from '@/lib/uiText';
 
 type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'abuse' | 'logs';
 
@@ -270,7 +271,7 @@ export default function PlatformDashboard() {
       )}
 
       <main className="px-6 py-6">
-        {loading && <p className="text-muted-foreground text-sm">Yükleniyor…</p>}
+        {loading && <p className="text-muted-foreground text-sm">{UI_TEXT.status.loading}</p>}
         {error && <p className="text-destructive text-sm">{error}</p>}
 
         {/* OVERVIEW */}
@@ -432,7 +433,7 @@ export default function PlatformDashboard() {
                   disabled={correctionSaving || correctionNote.trim().length < 10}
                   className="rounded-lg bg-amber-600 hover:bg-amber-500 px-3 py-1.5 text-sm font-medium text-white transition-colors disabled:opacity-50"
                 >
-                  {correctionSaving ? 'Gönderiliyor…' : 'Düzeltme İste'}
+                  {correctionSaving ? UI_TEXT.status.sending : 'Düzeltme İste'}
                 </button>
               </div>
             </div>
@@ -592,7 +593,7 @@ export default function PlatformDashboard() {
                     disabled={loadingMoreUserReports}
                     className="rounded-lg bg-muted hover:bg-muted/80 px-4 py-2 text-sm font-medium text-foreground transition-colors disabled:opacity-60"
                   >
-                    {loadingMoreUserReports ? 'Yükleniyor…' : 'Daha fazla göster'}
+                    {loadingMoreUserReports ? UI_TEXT.status.loading : 'Daha fazla göster'}
                   </button>
                 </div>
               )}
