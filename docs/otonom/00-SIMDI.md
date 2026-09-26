@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 17:55 UTC · çatı main HEAD `5ca205a` · backend main HEAD `cde7bb8`
+**Son güncelleme:** 2026-09-26 17:42 UTC · çatı main HEAD `e0c3deb` · backend main HEAD `cde7bb8`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** GÖREV 0 — kapı düzeni 4 renk: çatı PR **#328** açık (5 commit), bağımsız inceleme sürüyor, CI bekleniyor. Tek şerit (GÖREV 0 bitmeden başka işe geçilmez).
+**Şu an yapılan:** GÖREV 0 BİTTİ (#328 merge). GÖREV 1 (a): PS-A1 backend #143 + GV-08 backend #145 — dallar main'le güncelleniyor, CI yeniden koşuyor, sonra merge + pointer bump + canlı kontrol.
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #328 | GÖREV 0 — kapı düzeni 4 renk (belge) | ok:true, db:up, smtp:verified, cron:enabled, site 200 |
 | backend #149 + çatı pointer #327 | KR-19 (yönetici çift engeli — iki yönde uygulama) | ok:true, db:up, site 200 |
 | backend #147 + çatı #324 | GV-18 (rıza sürümü kontrolü) | ok:true, db:up, site 200 |
 | çatı #325 | pointer bump (AN-28 merge commit) | ok:true, db:up, site 200 |
@@ -18,12 +19,20 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #328 | GÖREV 0 — kapı düzeni 4 renk (belge) | bekleniyor | sürüyor | yeni açıldı |
 | backend #148 + çatı #326 | U-18 (mesaj talebi kabul/ret kapısı) | yeşil, mergeable | henüz yapılmadı | ⛔ MIGRATION dosyası (`Conversation.rejectedAt`) — ajan asla merge etmez, PO kararı gerekir |
 | backend #143 | PS-A1 (OCEAN ölçek düzeltmesi) | yeşil, mergeable | ONAY (bağımsız) | **PO'nun elle merge etmesi gerekiyor** — izin sınıflandırıcısı reddi |
 | backend #145 | GV-08 (anonimleştirme eksik alanlar) | yeşil, mergeable | ONAY (bağımsız) | **PO'nun elle merge etmesi gerekiyor** — aynı sınıflandırıcı reddi |
 | backend #142 · çatı #320 | AN-30 (granüler rıza — klasik kayıt + OAuth) | yeşil | yapılmadı | ⛔ MIGRATION dosyası — ajan asla merge etmez, PO kararı gerekir |
 | çatı #110 | ⛔ MERGE ETME işaretli (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
+
+**⭐ YENİ KAPI DAĞILIMI (2026-09-26, #328 sonrası — açık 122 satır; BITTI ve "→" katlanmış hariç, ~~…~~ yok sayıldı):**
+| Kapı | Anlam | Önce | Sonra | Beklenen |
+|---|---|---:|---:|---:|
+| 🟢 | ajan yapar + merge | 19 (+E-3 🟢/🟡) | **51** | 51 |
+| 🔵 | ajan hazırlar, PO tek "EVET" | 0 | **11** | 11 |
+| 🟡 | yalnız PO eli | 51 | **9** | 6 |
+| 🔴 | yön kararı | 49 (+KR-08, F-14 karışık) | **51** | 50 |
+Fark: 🟡 +3 = PS-A1 · PS-A3 · PS-A4 (49'luk listede yoklar, kapıları değiştirilmedi; yeni tanımla matching işi → 🟢 + 7b olmaları beklenir → **strateji katmanı kararı**). 🔴 +1 = KR-08 (`~~🔴 KARAR-77~~ 🟡 … → 🔴 KARAR-89`) ve F-14 (`~~~~🟡~~ 🟢~~ 🔴 KARAR-46`) karışık hücre, ikisi 🔴 sayıldı — hangisinin beklenen 50'de olmadığı teyit gerek.
 
 **Push edilmemiş iş:**
 | Dal | SHA | Yol | Neden |
