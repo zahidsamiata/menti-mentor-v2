@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 22:08 UTC · çatı main HEAD `424ea3b` · backend main HEAD `4f92627` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 22:44 UTC · çatı main HEAD `dc09d20` · backend main HEAD `4f92627` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — önceki tur kapandı (TUR ÖZETİ: `02-ILERLEME.md` başı), yeni tur başladı (VPS · en fazla 2 şerit).
 
-**Şu an yapılan:** Alt ajan: K-05b (menti saat seçimi yalnız müsait aralıklardan). KR-19b ve F-28b canlıda. GV-12 → KARAR-102.
+**Şu an yapılan:** K-05b canlıda. K5-Y3: yetki/kurum izolasyonu uçlarında eksik negatif test taraması (salt-okuma alt ajan).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #350 | K-05b (saat yalnız müsait aralıklardan) | ok:true, db:up, site 200 |
 | backend #168 + çatı #348 | KR-19b (engellenmiş çift mesaj/istek gönderemez) | ok:true, db:up, site 200 |
 | çatı #349 · #347 | F-28b (UI_TEXT) · AN-10b (mentörlüğün) | ok:true, db:up |
 | backend #167 + çatı #346 | Y1-B9c (askıdaki kuruma çapraz istek yok) | ok:true, db:up, site 200 |
