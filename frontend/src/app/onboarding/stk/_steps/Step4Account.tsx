@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
@@ -54,6 +56,8 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
   const [domainTier,      setDomainTier]       = useState<DomainTier>('INSTITUTION');
   const [institutionRole, setInstitutionRole]  = useState('');
   const [verificationNote, setVerificationNote] = useState('');
+  // GV-12: başvuru alındı ama oturum açılmadı → "e-postanızı kontrol edin" ekranı.
+  const [checkEmail,      setCheckEmail]       = useState(false);
 
   useEffect(() => {
     if (data.email.includes('@')) {
@@ -87,6 +91,12 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
 
     if (!regResult.ok) {
       setLoading(false);
+      // Geriye uyum: eski backend kayıtlı e-postada 409 EMAIL_MEVCUT döndürüyordu. Onun
+      // "zaten kayıtlı" mesajı gösterilmez (hesap varlığı sızar) → yeni sürümle aynı ekran.
+      if (regResult.error.error === 'EMAIL_MEVCUT') {
+        setCheckEmail(true);
+        return;
+      }
       // STK'ya özel backend mesajları (ör. slug alınmış) korunur; yalnızca
       // genel fallback paylaşılan sabitten gelir (dağınık string yerine).
       setServerError(regResult.error.message ?? REGISTER_MESSAGES.GENERIC_FAIL);
@@ -95,6 +105,14 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
 
     const { tenant, accessToken } = regResult.data;
     // refreshToken HttpOnly cookie'de — localStorage'a yazmıyoruz
+
+    // GV-12: kurum oluşturulmadı / oturum açılmadı (backend hesap varlığını gizliyor). Kurulum
+    // adımı işaretlenmez, sihirbaz ilerlemez, panele yönlendirilmez — yalnız e-posta ekranı.
+    if (!tenant || !accessToken) {
+      setLoading(false);
+      setCheckEmail(true);
+      return;
+    }
 
     // Kayıt başarılıysa kurulum HER durumda "tamamlandı" işaretlenir. Eskiden yalnız logo ya da
     // özel renk seçilince işaretleniyordu; diğer kurumlar (ve incelemeye düşenler) taslak adımda
@@ -121,6 +139,35 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
     setLoading(false);
     onNext();
   };
+
+  if (checkEmail) {
+    return (
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-4 text-center" role="status">
+        <div className="flex justify-center">
+          <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+            <Mail className="h-8 w-8 text-primary" />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-xl font-bold text-foreground">{REGISTER_MESSAGES.APPLICATION_CHECK_EMAIL_TITLE}</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed">{REGISTER_MESSAGES.APPLICATION_CHECK_EMAIL_DESC}</p>
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Sorularınız için{' '}
+          <a href="mailto:destek@mentimentor.io" className="text-primary underline underline-offset-2 hover:text-primary/80">
+            destek@mentimentor.io
+          </a>{' '}
+          adresine yazabilirsiniz.
+        </p>
+        <Link
+          href="/login"
+          className="inline-block text-sm text-muted-foreground hover:text-foreground underline underline-offset-2 transition-colors"
+        >
+          Giriş Sayfasına Dön
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">

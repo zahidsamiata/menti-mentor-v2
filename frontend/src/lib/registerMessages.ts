@@ -23,6 +23,13 @@ export const REGISTER_MESSAGES = {
     'Hesabınız oluşturuldu. Giriş yapmak için giriş sayfasına yönlendiriliyorsunuz.',
   /** Bilinmeyen/eşlenmemiş hata için güvenli genel mesaj. */
   GENERIC_FAIL: 'Kayıt tamamlanamadı. Bilgilerinizi kontrol edip tekrar deneyin.',
+  /**
+   * GV-12 — Kurum başvurusu alındı ama oturum açılmadı (backend `tenant: null`). Hesap
+   * varlığını sızdırmamak için "kayıtlı" DENMEZ; yalnız e-postaya yönlendirilir.
+   */
+  APPLICATION_CHECK_EMAIL_TITLE: 'Başvurunuz Alındı',
+  APPLICATION_CHECK_EMAIL_DESC:
+    'Başvurunuzla ilgili bilgilendirme e-posta adresinize gönderildi. Devam etmek için e-postanızı kontrol edin.',
 } as const;
 
 /**
