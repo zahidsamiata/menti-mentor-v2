@@ -1,6 +1,7 @@
 > 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
 > TÜR: 🧊 · SON DOĞRULAMA: 2026-08-27 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
 > ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-27 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+> ⚠️ GÜNCELLEME 2026-09-26 (AN-53): bu kartın açık kalemleri koda karşı doğrulandı → `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md` (✅ canlıda / ⬜ hâlâ açık / ❓ doğrulanamadı, kanıtlı). Kart gövdesi değiştirilmedi.
 
 # BİLANÇO KARAR DOSYASI — G9: Belge düzeni / çalışma tarzı / süreç
 
