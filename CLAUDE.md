@@ -52,7 +52,7 @@ Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>
 1. **Migration/DB**: canlı = lokal AYNI Neon. Yalnız ilgili KARAR "evet" ise VE etkilenen tablo için
    tarihli yedek tablo alındıktan sonra. Yedek adı + satır sayısı `02-ILERLEME.md`'ye yazılır.
 2. **seed**: `seed.ts` / `npm run seed` / `prisma db seed` ASLA.
-   Güvenli olanlar: `seed-questions`, `seed-learning-journey`, `seed-certification`, `seed-test-tenant`
+   Güvenli olanlar: ~~`seed-questions`~~ (silindi 2026-08-23, bkz. :263 — § CANLI = LOKAL AYNI DB), `seed-learning-journey`, `seed-certification`, `seed-test-tenant`
    — bunlar da yalnız KARAR evet + yedek sonrası.
 
 ## ⭐ KARAR AYRIMI — neyi sorma, neyi sor
