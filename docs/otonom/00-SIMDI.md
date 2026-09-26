@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 18:16 UTC · çatı main HEAD `9f0d095` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 18:18 UTC · çatı main HEAD `87f1c6f` · backend main HEAD `d87b227`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** 🔵 AN-30 ve U-18 düzeltme turları push edildi → 2. tur 7b incelemeleri sürüyor (alt ajanlar, salt okuma). IC-01 #331 · IC-08 #151/#332 CI/inceleme bekliyor. Sıradaki: PS-10, GV-19, E-3 kalanları.
+**Şu an yapılan:** IC-01 #331 son CI işi · IC-08 #151/#332 7b incelemesi · U-18 2. tur 7b · PS-10 #333 CI. Sıradaki: GV-19, E-3 kalanları, F-24.
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -21,10 +21,11 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) · 🟢 | koşuyor | gerekmiyor | CI bekleniyor → merge |
+| çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) · 🟢 | 7/8 geçti, 1 koşuyor | gerekmiyor | CI bekleniyor → merge |
+| çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) · 🟢 | koşuyor | gerekmiyor (yalnız metin) | CI bekleniyor → merge |
 | backend #151 + çatı #332 | IC-08 (onay bekleyene düzeltme notu) · 🟢+7b (auth) | koşuyor | sürüyor | CI + 7b ONAY → backend merge → pointer re-bump → çatı merge |
 | backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeniden koşuyor | 1. tur SORUN VAR → düzeltildi (main merge `12f2fb4`/`1137b64`, nazik metin, hata pencere içinde) → **2. tur sürüyor** | PO EVET'i (KARAR-97) + yedek bekler |
-| backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (backend 882 test · çatı 8/8) | 1. tur SORUN VAR → düzeltildi (`df8db92`/`43490fc`: main merge, 18+ + Aydınlatma bağlantısı, tüm rızalar geri çekiliyor, bayrak kapalıyken eski davranış, çift tıklama 409) → **2. tur sürüyor** | PO EVET'i (KARAR-96) + yedek bekler |
+| backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (backend 882 test · çatı 8/8) | ✅ **2. tur ONAY** (yorum 5848666630 / 5848666801) | **PO EVET'i (KARAR-96)** + `Consent` tablosu yedeği bekler (bu ortamda DB yok → EVET gelirse "tek seferlik DB erişimi" gerekecek) |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **⭐ YENİ KAPI DAĞILIMI (2026-09-26, #328 sonrası — açık 122 satır; BITTI ve "→" katlanmış hariç, ~~…~~ yok sayıldı):**
@@ -51,6 +52,8 @@ Fark: 🟡 +3 = PS-A1 · PS-A3 · PS-A4 (49'luk listede yoklar, kapıları deği
 **PO'ya sorular:** yok (56 cevapsız karar kartı duruyor)
 
 **Strateji katmanına not:**
+- (2026-09-26) AN-30 7b 2. tur: **token türü ayrımı** (OAuth pending token access token ile aynı sır, `typ` yok — sömürülemez) kuyrukta satırı YOK; ajan iş eklemez → strateji katmanı satır açsın mı karar versin. AN-30 merge edildiği turda `CLAUDE.md` public uç listesine `POST /api/auth/oauth/complete-registration` eklenmeli (bayrak kapalıyken 404).
+- (2026-09-26) PS-A1 · PS-A3 · PS-A4 kapı sütunu 🟡 kaldı (49'luk listede yoktu); yeni tanımla matching işi → 🟢 + 7b beklenir. PS-A1 PO talimatıyla 🟢 işlenip BITTI.
 - **PS-A1 (#143) ve GV-08 (#145) merge için hazır** — yalnız PO'nun GitHub'dan tıklaması gerekiyor.
 - **U-18 (#148/#326) migration içeriyor** — PO'nun açık "evet"i + `Conversation` tablosunda yedek sonrası uygulanabilir; kod tarafı tamamen bitti.
 - Doc-senkron taraması (main'in atası mı kontrolü) 3 kez gerçek stale satır buldu bu turda — periyodik olarak tekrarlanmalı.
