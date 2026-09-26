@@ -1222,3 +1222,4 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 18:40 UTC · **AN-09** backend #155 merge (`613f03b`) — sonraki pointer bump'ında canlıya çıkacak.
 - 2026-09-26 18:40 UTC · **GV-19 PR-ACIK** (alt ajan, izole worktree): backend #152 + çatı #335 — oturum içi şifre değiştirme + tek kaynak şifre kuralı; CI yeşil (backend 887 test; çatı 8/8). 7b başlatıldı.
 - 2026-09-26 18:40 UTC · **Y-02 PR-ACIK** — backend #156 (4 platform okuma ucunda denetim izi + komşu mükerrer super-admin ucunda PII maskeleme). 7b başlatıldı.
+- 2026-09-26 18:43 UTC · **GV-19 7b ONAY** (backend yorum 5848843137 · çatı 5848843269; engel olmayan notlar: 429 negatif testi yok, diğer cihazların access token'ı süresi dolana dek geçerli — reset ile aynı). Backend **#152 MERGE** (`b6418c2`). Çatı #335'e main merge + pointer `b6418c2` (AN-09 #155 dahil). AN-26 alt ajana verildi (🔵: migration dosyası + PR, merge YOK).

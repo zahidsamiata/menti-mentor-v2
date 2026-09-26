@@ -1,16 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 18:45 UTC · çatı main HEAD `f219c29` · backend main HEAD `613f03b` (canlı pointer `3f76c7b`)
+**Son güncelleme:** 2026-09-26 18:43 UTC · çatı main HEAD `921c38e` · backend main HEAD `b6418c2` (canlı pointer `3f76c7b`)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
-**Şu an yapılan:** 7b incelemeleri sürüyor — GV-19 (backend #152 + çatı #335) · Y-02 (backend #156). Bekleyen pointer bump: AN-09 #155 (+ GV-19/Y-02 ONAY gelirse birlikte). Sıradaki iş seçiliyor.
+**Şu an yapılan:** Şerit 1 (alt ajan): AN-26 (🔵 — migration'lı; kod + PR, merge YOK). Şerit 2: GV-19 çatı #335 pointer `b6418c2`'ye re-bump edildi (AN-09 dahil) → CI → merge → canlı kontrol. Y-02 7b sürüyor.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
-| backend #155 | AN-09 (şüphe bildiriminde platforma e-posta) | pointer bump bekliyor |
+| backend #152 | GV-19 (şifre değiştirme — backend) | çatı #335 ile canlıya çıkacak |
+| backend #155 | AN-09 (şüphe bildiriminde platforma e-posta) | çatı #335 pointer'ında |
 | backend #153 · #154 + çatı #336 | PS-09 · KR-21 (pointer → `3f76c7b`) | ok:true, db:up, site 200 |
 | çatı #334 | YN-13 (kişi adı) | belge işi |
 | çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) | ok:true, db:up, site 200 |
@@ -22,7 +23,7 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| backend #152 + çatı #335 | GV-19 şifre değiştirme + şifre kuralı · 🟢+7b | yeşil | sürüyor | 7b ONAY → merge → pointer re-bump |
+| çatı #335 | GV-19 şifre değiştirme (frontend) + pointer `b6418c2` · 🟢+7b | koşuyor | ✅ ONAY | CI → merge → canlı kontrol |
 | backend #156 | Y-02 platform okuma denetim izi · 🟢+7b | koşuyor | sürüyor | CI + 7b ONAY → merge |
 | backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
 | backend #148 + çatı #326 | U-18 · 🔵 KARAR-97 | yeşil | ✅ ONAY (2. tur) | PO EVET + `Conversation` yedeği (DB erişimi gerekir) |
