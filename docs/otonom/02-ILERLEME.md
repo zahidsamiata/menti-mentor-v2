@@ -1123,3 +1123,21 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - Pointer: çatı main `backend` = `187e4d3` (backend main `e17a4c3`; fark yalnız #123 → #303 ile kapanacak).
 - KARAR-81 cevabı kaydedildi (PO): temizlik sürer, taslaklar test verisi; ileriye dönük boşluk → **KR-23** (🟡, yeni satır).
 - Merge kuralları `docs/otonom/OTONOM-PROMPT.txt`'ye yazıldı (Bölüm 2.1, 4/-1, 4/5, 4/6, 7, **7b**, 8) — denetleyici reddi YOK.
+
+### ARA KAYIT 5 · 2026-09-26 — UZUN ÇALIŞMA KİPİ turu (Bölüm 14 ilk uygulaması)
+**Mod:** 🟥 BYPASS. 3 şerit paralel (2 arka plan ajan + ben). `docs/otonom/00-SIMDI.md` ilk kez oluşturuldu.
+
+- **OTONOM-PROMPT.txt Bölüm 14** eklendi (K0-K7, UZUN ÇALIŞMA KİPİ) — PO isteği.
+- **U-01 BITTI:** çatı #317 merge (bağımsız inceleme ONAY, CI 8/8). Pointer teyitli. CANLIDA BAK: bitiş saati geçen SCHEDULED görüşmeler otomatik COMPLETED oluyor, mentör "gerçekleşmedi" düzeltebiliyor. ⛔ ÇIKIŞ BLOKERİ kapandı.
+- **K-20 BITTI:** kök sebep teyidi — backend davranışı KARAR-53 ④ ile TUTARLI, gerçek hata yalnız FE'deydi (kapı 🟡→🟢). Çatı #318 merge (bağımsız inceleme ONAY, CI 8/8). CANLIDA BAK: bloksuz mentöre randevu formu yerine mesaj kutusu.
+- **V-16 BITTI:** backend #141 + çatı #319 merge. `/health.commit` alanı eklendi (GIT_SHA build-arg, Dokploy notu 03-PO-ELLE-ISLER.md'ye eklendi).
+- **E-3c düzeltme:** çatı #313'ün "merge YAPILAMADI" notu BAYATTI, aslında merge edilmiş (2026-09-26T10:18) — kayıt düzeltildi.
+- **K-19/KARAR-7 PR-ACIK:** backend #144 + çatı #321 (bağımsız inceleme sürüyor) — online toplantı linkini artık mentör onayda giriyor, menti alanı kalktı.
+- **AN-30 BAŞLATILDI (PR-ACIK, tam bitmedi):** backend #142 (⛔ MIGRATION dosyası, UYGULANMADI) + çatı #320 — granüler rıza ekranı mekanizması, flag arkasında (canlıda kapalı). OAuth + self-serve kapsam dışı bırakıldı, ayrı iş olarak kalacak.
+- **PS-A1 PR-ACIK (merge hazır, PO bekliyor):** backend #143 — OCEAN ölçek hatası düzeltmesi + 24 test. Bağımsız inceleme ONAY, CI yeşil, `mergeable: MERGEABLE` — **ajan `gh pr merge` izin sınıflandırıcısı tarafından reddedildi** ("Merge Without Review", E-3c/#313'te de yaşanmıştı) → **PO'nun GitHub'dan elle merge etmesi gerekiyor.**
+- **Kurtarma envanteri (K2 açılış):** `.worktrees/` ve `.claude/worktrees/agent-*` altındaki ~20 eski worktree kontrol edildi — HEPSİ zaten merge edilmiş dallardı (kayıp iş YOK); temizlenebilenler temizlendi (`.worktrees/k05`, `ps02`, `backend-u01`), harness-yönetimli `.claude/worktrees/*` ve `/tmp/.../scratchpad/*` dokunulmadı (kural: /tmp'dekiler PO onayı ister).
+- **Canlı kontrol (her merge sonrası):** `/health` ok:true/db:up, site 200 — hepsi temiz.
+- **DB/migration/seed uygulanmadı · şema değişmedi · #110 (MERGE ETME) ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
+- **Limitin en çok gittiği yer:** arka plan ajanlarının bağımsız inceleme + mutasyon testi turları (PS-A1, K-20, K-19/321-144) — doğru yerde harcandı, tekrar eden pahalı adım yok.
+
+**Kalan 🟢 BEKLIYOR:** aranıyor (bkz. 00-SIMDI.md sıradaki 5 iş). **PR-ACIK bekleyenler:** AN-30 (#142/#320, migration → PO kararı), PS-A1 (#143, PO elle merge), K-19 (#144/#321, inceleme sürüyor).

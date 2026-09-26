@@ -1,39 +1,42 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 12:35 UTC · çatı main HEAD `a98a45e` · backend main HEAD `c2a9682`
+**Son güncelleme:** 2026-09-26 12:55 UTC · çatı main HEAD `85fd4ac` · backend main HEAD `11ed7dc`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan (3 şerit):**
-- Şerit 1 (arka plan ajan): AN-30 — kayıt ekranı ayrı rıza kutuları mekanizması (backend enum+migration dosyası UYGULANMADI + servis + uç, frontend flag'li bileşen). Kapsam: yalnız klasik kayıt; OAuth + self-serve KAPSAM DIŞI (ayrı iş olarak kalacak).
-- Şerit 2 (arka plan ajan): PS-A1 — OCEAN motoru ölçek hatası düzeltmesi + eksik birim testleri (KARAR-10 aşama 1, kullanıcı etkilenmiyor).
-- Şerit 3 (ben): V-16 PR'larının CI'ını izliyorum, sıradaki işe geçiyorum.
+**Şu an yapılan:**
+- Şerit 1 (arka plan ajan): K-19/KARAR-7 PR'larının (#144 backend, #321 çatı) bağımsız incelemesi sürüyor.
+- Şerit 2-3: boşta — sıradaki işe geçilecek (bu güncellemenin hemen ardından).
 
-**Son merge'ler (bu turda):**
+**Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
-| çatı #317 | U-01 (mentör "gerçekleşmedi" düğmesi) | ok:true, db:up, site 200 |
+| çatı #319 + backend #141 | V-16 (`/health.commit`) | ok:true, db:up, site 200 |
 | çatı #318 | K-20 (bloksuz mentörde mesaj yolu) | ok:true, db:up, site 200 |
+| çatı #317 | U-01 (mentör "gerçekleşmedi" düğmesi) | ok:true, db:up, site 200 |
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| backend #141 | V-16 (`/health.commit`) | pending | — | CI bekleniyor, 🟢 gate, bağımsız inceleme gerekmiyor |
-| çatı #319 | V-16 (docker-compose GIT_SHA + kuyruk BITTI güncellemeleri) | pending (Backend/FE geçti, Integration+E2E sürüyor) | — | CI bekleniyor |
+| backend #144 · çatı #321 | K-19/KARAR-7 (toplantı linki mentörde) | yeşil bekleniyor | sürüyor (arka plan ajan) | inceleme sonucu bekleniyor |
+| backend #143 | PS-A1 (OCEAN ölçek düzeltmesi) | yeşil, mergeable | ONAY (bağımsız) | **PO'nun elle merge etmesi gerekiyor** — `gh pr merge` izin sınıflandırıcısı "Merge Without Review" ile reddetti |
+| backend #142 · çatı #320 | AN-30 (granüler rıza mekanizması) | yeşil (çatı 382/382, backend guard'lı) | yapılmadı | ⛔ MIGRATION dosyası içeriyor — ajan asla merge etmez, PO kararı gerekir |
 | çatı #110 | ⛔ MERGE ETME işaretli (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **Push edilmemiş iş:** yok
 
-**Engeller:** yok (bu turda denetleyici reddi / CI kırmızısı yaşanmadı)
+**Engeller:**
+- `gh pr merge` iki kez (PS-A1 #143, daha önce E-3c #313'te de) izin sınıflandırıcısı tarafından "Merge Without Review" gerekçesiyle reddedildi — bağımsız inceleme YAPILMIŞ olsa bile ajan bu PR'ları merge edemiyor. Desen: bir GitHub PR yorum incelemesi bu sınıflandırıcı için "review" sayılmıyor olabilir.
 
-**PO'ya sorular:** yok bu turda (mevcut 56 cevapsız karar kartı duruyor, aşağıya bkz.)
+**PO'ya sorular:** yok (56 cevapsız karar kartı duruyor, aşağıya bkz.)
 
 **Strateji katmanına not:**
-- U-01 ve K-20 canlı kontrolü GET ile doğrulandı (`/health` ok:true/db:up, site 200) — `docs/otonom/00-KUYRUK.md` ilgili satırlarında kanıt var.
-- AN-30 kapsamı BİLEREK dar tutuldu (yalnız klasik kayıt ekranı, flag varsayılan KAPALI) — migration + auth/KVKK dosyası olduğu için merge edilmeyecek, PO onayı bekleyecek.
+- **PS-A1 (#143) merge için hazır** — CI yeşil, bağımsız inceleme ONAY, `mergeable: MERGEABLE`. Yalnız PO'nun GitHub'dan tıklaması gerekiyor (ajan izin sınıflandırıcısı tarafından engellendi).
+- AN-30 (#142/#320) kapsamı BİLEREK dar (yalnız klasik kayıt, flag kapalı) — OAuth + self-serve kapsam dışı, migration nedeniyle merge de PO kararı bekliyor.
+- Kurtarma envanteri yapıldı: eski worktree'lerin hiçbirinde kayıp iş yoktu (hepsi zaten merge edilmiş dallardı).
 
-**Karar kilidi tablosu (etkiye göre, cevapsız 56 karttan en çok iş açanlar):**
+**Karar kilidi tablosu (etkiye göre, cevapsız 56 karttan en çok iş açanlar — değişmedi):**
 | Karar | Konu | Kilitlediği iş sayısı |
 |---|---|---|
 | KARAR-57 | Mizaç sonucunu hangi test belirlesin | 4 |
@@ -50,8 +53,8 @@
 | KARAR-64 | Kullanıcıya görünen ad: mizaç/karakter/kişilik | 1 |
 
 **Sıradaki 5 iş:**
-1. V-16 PR'larını CI yeşil olunca merge et + canlı kontrol
-2. AN-30 agent'ının PR'larını al, kuyruğa işle (PR-ACIK, migration → merge yok)
-3. PS-A1 agent'ının PR'ını al, bağımsız inceleme başlat, kuyruğa işle
-4. Kuyrukta kalan 🟢/🟡 işlerden dosya çakışmayan bir sonrakini seç (K5 yedek havuzuna düşülmedi, ana kuyrukta hâlâ 🟡 aile işleri var)
+1. K-19 PR'larının (#144/#321) inceleme sonucunu al, koşullar tamsa merge et + pointer bump + canlı kontrol
+2. Kuyrukta kalan 🟢/🟡 işlerden dosya çakışmayan bir sonrakini seç (AŞAMA A/B/U/V taranacak)
+3. AN-30/PS-A1 için PO'nun elle yapması gerekenleri 03-PO-ELLE-ISLER.md'de görünür tut
+4. Yedek iş havuzuna (K5) düşülmedi — ana kuyrukta hâlâ işlenmemiş 🟡 aile işleri var, önce onlar
 5. K1 durma koşulu oluşmadıkça devam
