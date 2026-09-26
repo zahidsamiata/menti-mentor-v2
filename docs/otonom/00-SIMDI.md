@@ -1,16 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 19:26 UTC · çatı main HEAD `4d3ea1c` · backend main HEAD `dea79d8` (canlı pointer `60715c7`)
+**Son güncelleme:** 2026-09-26 19:38 UTC · çatı main HEAD `33a0b03` · backend main HEAD `02ac78c` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
-**Şu an yapılan:** KR-16 backend #161 (CI kanıtı yeşil) → bağımsız inceleme sürüyor → ONAY'da merge + pointer + canlı kontrol (açılış komutu değişiyor — dikkatli). Şerit 2 (alt ajan): P-05. Ben: içerik işleri (IC-10 ✅ · AN-05 ✅ yazıldı, onay bekliyor).
+**Şu an yapılan:** Şerit 1 (alt ajan): F-18 KPI CSV dışa aktarımı. P-05 (backend #162 + çatı #340) 7b incelemesi sürüyor — kapı 🔵 olduğu için merge yok. KR-16 canlıda.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
-| çatı #339 | AN-10 (mentör yazımı) | dağıtım bekleniyor |
+| backend #161 · #159 + çatı #341 | KR-16 (Prisma CLI imajda, yeni açılış komutu) · IC-12 | ok:true, db:up, site 200 (3 ardışık) |
+| çatı #339 | AN-10 (mentör yazımı) | ok:true, db:up, site 200 |
 | backend #156 · #158 + çatı #338 | Y-02 · IC-11 (pointer → `60715c7`) | ok:true, db:up, site 200 |
 | backend #152 + çatı #335 | GV-19 (şifre değiştirme) + AN-09 (#155) | ok:true, db:up, site 200 |
 | backend #153 · #154 + çatı #336 | PS-09 · KR-21 (pointer → `3f76c7b`) | ok:true, db:up, site 200 |
@@ -25,7 +26,7 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (941 test) | ✅ ONAY (2. tur) | PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
-| backend #161 | KR-16 Prisma CLI imajda (açılış internetsiz) · 🟢 | yeşil (+ Docker ağsız job) | sürüyor | inceleme ONAY → merge → pointer → canlı kontrol |
+| backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim · kuyrukta 🔵 (içerik migration'sız) | yeşil | sürüyor | kapı yeniden değerlendirilmeli (strateji) |
 | backend #160 | AN-02 seed metin yazımı · 🔵 KARAR-99 | koşuyor | gerekmiyor (yalnız metin) | PO EVET + `Question`/`SjtQuestion` yedeği + 2 satır UPDATE |
 | backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
 | backend #148 + çatı #326 | U-18 · 🔵 KARAR-97 | yeşil | ✅ ONAY (2. tur) | PO EVET + `Conversation` yedeği (DB erişimi gerekir) |
