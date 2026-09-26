@@ -5,7 +5,7 @@
 > Hangi kuralları geçersiz kıldığı aşağıda tek tek yazılı — eski satırlar silinmedi, tarihsel iz korunuyor.
 
 ## Nedir
-PO (Zahid) kod yazmaz ve her adımda onay veremez. İş artık sohbetten değil **dosyalardan** yürür.
+PO (ürün sahibi) kod yazmaz ve her adımda onay veremez. *(⚠️ GÜNCELLEME 2026-09-26, YN-13: kişi adı kaldırıldı — § Kişi Adı Yasağı.)* İş artık sohbetten değil **dosyalardan** yürür.
 Ajan kuyruğu baştan sona işler, karar noktasında DURMAZ — soruyu dosyaya yazıp sonraki işe geçer.
 PO toplu karar verir, aynı prompt tekrar gönderilir, kaldığı yerden devam eder.
 

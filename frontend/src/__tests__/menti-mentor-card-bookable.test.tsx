@@ -108,3 +108,18 @@ describe('AN-28 · Menti mentör kartı — isFaded / isBookable', () => {
     expect(within(card).queryByText('Sınırlı')).not.toBeInTheDocument();
   });
 });
+
+describe('PS-10 · Menti boş mentör listesi — profili suçlamaz, teste göndermez', () => {
+  beforeEach(() => {
+    apiMock.mockClear();
+    mentorMatchesResponse = { ok: true, data: { items: [] } };
+  });
+
+  it('boş listede doğru sebep yazar ve /disc-test bağlantısı göstermez', async () => {
+    render(<MentiDashboardPage />);
+    expect(await screen.findByText('Programınızda şu an görüşülebilecek mentor yok')).toBeInTheDocument();
+    expect(screen.getByText(/Bu, profilinizle ilgili değil/)).toBeInTheDocument();
+    expect(screen.queryByText(/DISC Profilini Güncelle/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/profilinizle eşleşen mentor yok/)).not.toBeInTheDocument();
+  });
+});

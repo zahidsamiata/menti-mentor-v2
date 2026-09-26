@@ -31,7 +31,7 @@ describe('DiscRecallCardView (P-03)', () => {
     expect(screen.getByText('İkna')).toBeInTheDocument();
     expect(screen.getByText(/Detayları atlamamaya/)).toBeInTheDocument();
     expect(screen.getByText('S + C')).toBeInTheDocument();
-    expect(screen.getByText('I')).toBeInTheDocument();
+    expect(screen.getByText('I — Etki')).toBeInTheDocument();
   });
 
   // F-16: menti rolünde özgüven tonu görünür, diğer rollerde görünmez.

@@ -294,14 +294,12 @@ export default function MentiDashboardPage() {
             </div>
           ) : !mentorsData?.items.length ? (
             <div className="text-center py-8 space-y-2">
-              <p className="text-sm font-medium">Şu an uygun mentor bulunamadı</p>
+              {/* PS-10: menti tarafında DISC'e bağlı eleme YOK (matching.ts rankMentorsForMenti) — liste yalnız
+                  programda onaylı ve erişilebilir mentor yoksa boş kalır. Profili suçlama, teste gönderme. */}
+              <p className="text-sm font-medium">Programınızda şu an görüşülebilecek mentor yok</p>
               <p className="text-xs text-muted-foreground">
-                Programınıza henüz mentor katılmamış ya da profilinizle eşleşen mentor yok.
-                DISC profilinizin güncel olduğundan emin olun.
+                Bu, profilinizle ilgili değil. Programınıza mentorlar katıldıkça burada görünecekler.
               </p>
-              <Button asChild variant="outline" size="sm">
-                <Link href="/disc-test">DISC Profilini Güncelle →</Link>
-              </Button>
             </div>
           ) : (
             // Havuz KART görünümü (KARAR 2/7): uyum skoru (yüzde) + "neden uyumlu" L1.
