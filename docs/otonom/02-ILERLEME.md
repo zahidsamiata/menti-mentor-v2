@@ -1158,3 +1158,11 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - **Süreç notu:** İki bağımsız-inceleme ajanı bu turda YANLIŞLIKLA ana checkout'a dispatch edilmişti (önceki ara kayıtta not edildi) — o turdan sonra TÜM inceleme/uygulama ajanları izole worktree'de çalıştırıldı (K4.1), yeni çakışma yaşanmadı.
 - Canlı kontrol her merge sonrası temiz (`/health` ok:true/db:up, site 200).
 - **DB/migration/seed uygulanmadı · #110 ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
+
+### ARA KAYIT 8 · 2026-09-26 — GV-18 canlıda, iki tur bağımsız inceleme + bir git bozulması giderildi
+- **GV-18 BITTI:** backend #147 + çatı #324 merge. 1. tur bağımsız inceleme GERÇEK bir bug buldu: `hasCurrentSignupConsent` legacy (2026-08-28 backfill) kullanıcıları sonsuza dek yanlış tetikleyecekti — düzeltildi (yalnız ACIK_RIZA kontrolü, LEGACY_VERSION bugünkü baseline'a eşdeğer sayılıyor), 2. tur ONAY. CANLIDA BAK: görünmez (bu doğru, sürüm hiç artmadı).
+- **GEÇİCİ GİT BOZULMASI giderildi:** çok sayıda worktree add/remove sonrası backend submodule'ün paylaşılan config'ine yanlış bir `core.worktree` satırı sızmış, ana backend checkout'ta TÜM git komutlarını kırmıştı. Satır elle silindi, tüm worktree'ler doğrulandı, sorun çözüldü.
+- **GitHub'ın yanlış "CONFLICTING" raporu:** çatı #324 için `mergeable:CONFLICTING` gösterdi ama yerel merge tamamen temizdi (submodule pointer fast-forward) — CLAUDE.md'nin bilinen deseni. `git merge origin/main` + push ile çözüldü.
+- Canlı kontrol her merge sonrası temiz (`/health` ok:true/db:up, site 200).
+- **DB/migration/seed uygulanmadı · #110 ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
+- **Limitin en çok gittiği yer:** bu turda git worktree bozulmasının teşhisi (~15 dakika) ve GitHub mergeable false-negative'inin araştırılması — ikisi de gerçek engellerdi, kaçınılmazdı.
