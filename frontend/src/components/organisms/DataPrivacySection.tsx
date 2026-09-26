@@ -19,6 +19,7 @@ import { Input } from '@/components/ui/input';
 import { useModalDialog } from '@/hooks/useModalDialog';
 import { fetchMyDataExport, deleteMyAccount } from '@/lib/api/kvkk';
 import { summarizeDataExport, type DataSummarySection } from '@/lib/kvkkSummary';
+import { UI_TEXT } from '@/lib/uiText';
 
 type DeleteStep = 'closed' | 'warning' | 'confirm';
 
@@ -214,7 +215,7 @@ export function DataPrivacySection() {
                   <p>Ortak kayıtlarda (mesaj, görüşme) kimliğiniz kaldırılır; karşı tarafın verisi korunur.</p>
                 </div>
                 <div className="flex justify-end gap-2 pt-1">
-                  <Button variant="outline" onClick={resetDeleteFlow}>Vazgeç</Button>
+                  <Button variant="outline" onClick={resetDeleteFlow}>{UI_TEXT.actions.cancel}</Button>
                   <Button variant="destructive" onClick={() => setStep('confirm')}>Devam et</Button>
                 </div>
               </>
@@ -245,7 +246,7 @@ export function DataPrivacySection() {
                 )}
                 <div className="flex justify-end gap-2 pt-1">
                   <Button variant="outline" onClick={resetDeleteFlow} disabled={deleting}>
-                    Vazgeç
+                    {UI_TEXT.actions.cancel}
                   </Button>
                   <Button
                     variant="destructive"

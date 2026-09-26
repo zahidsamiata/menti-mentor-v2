@@ -23,7 +23,7 @@ const SUCCESS_RATE_EMPTY_TEXT =
 
 export default function KpiPage() {
   const api = useApiClient();
-  const { data, isLoading, error } = useQuery(() => adminApi.getKpi(api), []);
+  const { data, isLoading, error } = useQuery(() => adminApi.getKpi(api), [], { cacheKey: 'admin:kpi' });
 
   // F-19: yöneticiyi harekete geçiren proaktif kırmızı uyarılar (eşik aşımı).
   const alerts = computeAdminAlerts(data);

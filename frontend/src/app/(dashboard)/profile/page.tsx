@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import type { UserProfileData, AvatarUploadResponse } from '@/lib/api/profile';
 import { WeeklyMeetingLimitNote } from '@/components/molecules/WeeklyMeetingLimitNote';
 import { SectorTagSuggest } from '@/components/molecules/SectorTagSuggest';
+import { UI_TEXT } from '@/lib/uiText';
 
 // İstemci ön-kontrolü — asıl doğrulama backend'de (magic-byte). Backend limitiyle eşlenir.
 const AVATAR_ACCEPT = 'image/jpeg,image/png,image/webp';
@@ -84,7 +85,7 @@ export default function ProfilePage() {
   const { data: profile, isLoading: profileLoading } = useQuery<UserProfileData>(
     fetcher,
     [user?.id],
-    { enabled: !!user?.id },
+    { enabled: !!user?.id, cacheKey: 'users:me:profile' },
   );
 
   // Form alanlarını mevcut veriyle doldur
@@ -171,7 +172,7 @@ export default function ProfilePage() {
   if (authLoading || profileLoading) {
     return (
       <div className="flex justify-center py-20">
-        <p className="text-muted-foreground animate-pulse">Yükleniyor…</p>
+        <p className="text-muted-foreground animate-pulse">{UI_TEXT.status.loading}</p>
       </div>
     );
   }
@@ -194,7 +195,7 @@ export default function ProfilePage() {
               avatarUploading && 'pointer-events-none opacity-60',
             )}
           >
-            {avatarUploading ? 'Yükleniyor…' : 'Fotoğraf yükle'}
+            {avatarUploading ? UI_TEXT.status.loading : 'Fotoğraf yükle'}
             <input
               type="file"
               accept={AVATAR_ACCEPT}
@@ -456,7 +457,7 @@ export default function ProfilePage() {
         size="lg"
         className="w-full h-12 text-base rounded-xl"
       >
-        {saving ? 'Kaydediliyor…' : 'Kaydet'}
+        {saving ? UI_TEXT.status.saving : UI_TEXT.actions.save}
       </Button>
 
       {/* ── KVKK: Verilerim ve Gizlilik (G1-05) ───────────────────────── */}

@@ -9,6 +9,7 @@ import { useId, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { UI_TEXT } from '@/lib/uiText';
 
 interface MergeTagDialogProps {
   open: boolean;
@@ -53,7 +54,7 @@ export function MergeTagDialog({ open, tagValue, isLoading = false, onConfirm, o
         </p>
       </div>
       <div className="mt-6 flex justify-end gap-2">
-        <Button variant="outline" onClick={onCancel} disabled={isLoading}>Vazgeç</Button>
+        <Button variant="outline" onClick={onCancel} disabled={isLoading}>{UI_TEXT.actions.cancel}</Button>
         <Button onClick={() => target && onConfirm(target)} disabled={!target || isLoading}>
           {isLoading ? 'Birleştiriliyor…' : 'Birleştir'}
         </Button>

@@ -27,7 +27,7 @@ export default function ApprovalsPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => adminApi.listUsers(api, { approvalStatus: 'PENDING', page }),
     [page],
-    { enabled: true },
+    { enabled: true, cacheKey: `admin:users:PENDING:${page}` },
   );
 
   return (

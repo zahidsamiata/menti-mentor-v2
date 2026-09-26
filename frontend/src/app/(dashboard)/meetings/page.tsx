@@ -134,7 +134,7 @@ export default function MeetingsPage() {
   const { data, isLoading: meetingsLoading, error } = useQuery(
     () => meetingsApi.list(api, listParams),
     [api, user?.id],
-    { enabled: Boolean(user?.id) },
+    { enabled: Boolean(user?.id), cacheKey: `meetings:list:${JSON.stringify(listParams)}` },
   );
 
   if (!user && !isLoading) return null;

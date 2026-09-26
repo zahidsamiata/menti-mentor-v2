@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
+import { UI_TEXT } from '@/lib/uiText';
 
 const FREQ_OPTIONS: { value: ReportingFrequency; label: string; desc: string }[] = [
   { value: 'WEEKLY',   label: 'Haftalık',    desc: 'Her Pazar analiz yapılır' },
@@ -24,12 +25,14 @@ export default function AlgorithmTunerPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => algorithmTunerApi.getPending(api),
     [api],
+    { cacheKey: 'admin:algorithm-tuner:pending' },
   );
 
   // #9/9a: kurumun MEVCUT eşleştirme ağırlıkları — gösterim + manuel ayar.
   const { data: weightsData, refetch: refetchWeights } = useQuery(
     () => algorithmTunerApi.getWeights(api),
     [api],
+    { cacheKey: 'admin:algorithm-tuner:weights' },
   );
   const weights = weightsData?.weights ?? null;
   // 95: son manuel değişikliğin izi (kim/ne zaman/eski→yeni). Yoksa null.
@@ -178,7 +181,7 @@ export default function AlgorithmTunerPage() {
               {weightSaved && !weightsDirty && <AlertMessage type="success" message="Ağırlıklar güncellendi." />}
               <div className="flex justify-center">
                 <Button onClick={saveWeights} disabled={!weightsDirty || weightSaving}>
-                  {weightSaving ? 'Kaydediliyor…' : 'Kaydet'}
+                  {weightSaving ? UI_TEXT.status.saving : UI_TEXT.actions.save}
                 </Button>
               </div>
               {/* 95: "Son değişiklik: kim · ne zaman · eski→yeni". Manuel ayar izi (lastChange)
@@ -230,7 +233,7 @@ export default function AlgorithmTunerPage() {
           </div>
           <div className="flex items-center gap-3">
             <Button size="sm" onClick={saveFrequency} disabled={freqSaving}>
-              {freqSaving ? 'Kaydediliyor…' : 'Kaydet'}
+              {freqSaving ? UI_TEXT.status.saving : UI_TEXT.actions.save}
             </Button>
             {freqSaved && <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>}
           </div>
@@ -341,7 +344,7 @@ export default function AlgorithmTunerPage() {
             ? 'Algoritma ağırlıkları önerilen değerlere güncellenecek.'
             : 'Öneri reddedilecek, mevcut ağırlıklar korunacak.'
         }
-        confirmLabel={confirmAction === 'approve' ? 'Onayla' : 'Reddet'}
+        confirmLabel={confirmAction === 'approve' ? UI_TEXT.actions.confirm : 'Reddet'}
         variant={confirmAction === 'reject' ? 'danger' : 'default'}
         isLoading={actionLoading}
         onConfirm={() => confirmAction && handleAction(confirmAction)}

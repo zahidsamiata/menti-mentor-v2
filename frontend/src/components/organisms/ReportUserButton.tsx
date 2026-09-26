@@ -10,6 +10,7 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useModalDialog } from '@/hooks/useModalDialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { UI_TEXT } from '@/lib/uiText';
 
 const REASONS = [
   { key: 'SPAM', label: 'Spam / istenmeyen içerik' },
@@ -78,7 +79,7 @@ export function ReportUserButton({ targetUserId, targetName }: { targetUserId: s
             {state === 'sent' ? (
               <div className="space-y-4">
                 <p className="text-sm text-emerald-600 dark:text-emerald-400">Şikayetiniz alındı. Teşekkürler.</p>
-                <Button onClick={close} className="w-full">Kapat</Button>
+                <Button onClick={close} className="w-full">{UI_TEXT.actions.close}</Button>
               </div>
             ) : (
               <>
@@ -109,9 +110,9 @@ export function ReportUserButton({ targetUserId, targetName }: { targetUserId: s
                 )}
 
                 <div className="flex gap-2">
-                  <Button variant="outline" onClick={close} className="flex-1">Vazgeç</Button>
+                  <Button variant="outline" onClick={close} className="flex-1">{UI_TEXT.actions.cancel}</Button>
                   <Button onClick={submit} disabled={state === 'sending'} className="flex-1">
-                    {state === 'sending' ? 'Gönderiliyor…' : 'Şikayet Et'}
+                    {state === 'sending' ? UI_TEXT.status.sending : 'Şikayet Et'}
                   </Button>
                 </div>
               </>

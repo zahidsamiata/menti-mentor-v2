@@ -34,7 +34,11 @@ function daysSince(iso?: string | null): string {
 
 export function ProgramHealthSection() {
   const api = useApiClient();
-  const { data, isLoading, error } = useQuery<HealthMetricsData>(() => adminApi.getHealthMetrics(api), []);
+  const { data, isLoading, error } = useQuery<HealthMetricsData>(
+    () => adminApi.getHealthMetrics(api),
+    [],
+    { cacheKey: 'admin:health-metrics' },
+  );
   const [selected, setSelected] = useState<MetricKey | null>(null);
   const [nudges, setNudges] = useState<Record<string, NudgeState>>({});
 

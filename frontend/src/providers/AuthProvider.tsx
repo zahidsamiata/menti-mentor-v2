@@ -23,6 +23,7 @@ import {
 } from 'react';
 import { apiClient, refreshCallbackRef } from '@/lib/api/client';
 import { toTenantBranding } from '@/lib/sessionTenant';
+import { clearQueryCache, setQueryCacheScope } from '@/lib/queryCache';
 import type { TenantBranding } from '@/types/tenant';
 import type {
   AuthContextValue,
@@ -51,6 +52,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const refreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // F-32: sekme önbelleğinin kapsamı = kullanıcı + kurum. Render sırasında (effect'ten önce)
+  // bildirilir ki çocuk bileşenler ilk render'da önceki kullanıcının verisini OKUYAMASIN;
+  // çağrı idempotenttir (aynı değerde hiçbir şey yapmaz), kapsam değişince önbellek silinir.
+  setQueryCacheScope(user && accessToken ? `${user.id}:${user.tenantId}` : null);
 
   // KR-02/KR-03: refresh yanıtı kullanıcıyı ve kendi kurum markasını da taşır; F5 sonrası
   // oturum ve marka buradan geri gelir. Eski backend alan döndürmezse mevcut değer korunur.
@@ -84,6 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const clearSession = useCallback(() => {
+    clearQueryCache();
     setUser(null);
     setTenant(null);
     setAccessToken(null);
@@ -155,6 +162,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const { accessToken: newToken, expiresIn, user: userData } = result.data;
+    clearQueryCache(); // F-32: yeni oturum önceki oturumun önbelleğini asla görmez
     // refreshToken artık HttpOnly cookie'de — localStorage'a yazmıyoruz
 
     setAccessToken(newToken);
@@ -169,6 +177,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const loginWithTokens = useCallback(
     async (newAccessToken: string, expiresIn: number) => {
       // refreshToken HttpOnly cookie'de (backend redirect'te set etti)
+      clearQueryCache(); // F-32: yeni oturum önceki oturumun önbelleğini asla görmez
       setAccessToken(newAccessToken);
       scheduleTokenRefresh(expiresIn);
 

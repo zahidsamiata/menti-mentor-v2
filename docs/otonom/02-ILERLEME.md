@@ -23,6 +23,17 @@
   - **Karar kartları:** KARAR-81 (acil) · KARAR-82 U-12 · KARAR-83 U-13 · KARAR-84 U-15 · KARAR-85 U-17 · KARAR-86 platform DISC görünürlüğü.
   - **Açık PR:** backend #103 KR-06 (inceleme ONAY, CI bekliyor) · çatı #275 KR-09 (ONAY, CI bekliyor). Şeritlerde: I-05 · AN-01 · PS-05 · AN-17.
   - **Denetleyici retleri bu turda:** 1 — A bölümünde CLAUDE.md okuması ("server-side classifier judged this action dangerous", gerekçe verilmedi); A kural yazımı yapılmadı, düzenleme geri alındı.
+- **ARA KAYIT 3 — kurtarma (2026-09-26, haftalık limit sonrası bağlam temizlendi, PO bilgisayar başında değil):**
+  - **0.1 Takılı işler:** yok. `ps aux` taramasında `sleep 15`/`sleep 10` iki PID görüldü, kontrol anında zaten bitmişlerdi (komutları okunamadı) — otonom döngüye ait değildi, dokunulmadı.
+  - **0.2 Yerel iş taraması (çatı 29 worktree + backend 16 worktree, `git status`+`ahead/behind` tek tek):** **kayıp iş YOK.** Tümü `AHEAD=0 BEHIND=0 DIRTY=0` — zaten push edilmiş. İki istisna, ikisi de zararsız: (a) `/home/ajan/menti` ana ağaç → `backend` submodule pointer diff (detached HEAD `1d42040` vs main'in kayıtlı `a6d9177`) — commit edilmemiş, normal geçiş durumu, sıralı pointer bump'ta zaten ele alınacak; (b) `be-gv10` worktree'de yalnız `?? node_modules` (untracked, gerçek değişiklik değil).
+  - **0.3 Açık PR envanteri (gh ile teyit):**
+    - **backend (menti-mentor) MERGED — kayda geçmemiş:** #131 GV-12 (`666c56a`), #132 GV-11, #133 KR-07 (`260e319`), #134 PS-06, #135 E-3c (`bdb5d9c`), #136 PS-01, #137 GV-13 — hepsi 2026-09-25 10:23-10:44 arası merge edilmiş. backend origin/main HEAD artık `bdb5d9c` (#135 sonrası).
+    - **backend AÇIK:** **#138 GV-10** — CI KIRMIZI: `tests/user-detail-approval-gate.test.ts:41` + `tests/matching-approval-gate.test.ts:47` "expected 403, got 401" (run `36125522947`). İnceleme yorumu YOK. Gerçek kod/test işi gerekiyor, kurtarma değil.
+    - **çatı (menti-mentor-v2) MERGED — kayda geçmemiş:** #308 E-3b, #309 IC-06, #310 F-32 (2026-09-25 10:23-10:25).
+    - **çatı AÇIK:** **#311** F-28 (🟢, CI yeşil, mergeable, inceleme gerekmiyor — 🟢 kuralı) · **#312** GV-12 FE (🟡, CI yeşil, mergeable, **inceleme yorumu YOK**) · **#313** E-3c FE (🟡, CI yeşil, **inceleme yorumu VAR "SONUÇ: ONAY"**, ama `mergeable=CONFLICTING` — #308 ile aynı blokta çakışma, incelemede çözüm zaten yazılı: 3 satır + `hiddenQuestions` satırı birlikte kalır; ayrıca backend #135 pointer'ı bu PR'a veya ayrı pointer PR'ına eklenmeli) · **#314** F-04 CSP report-only (🟡, CI yeşil, **inceleme yorumu YOK**).
+    - **çatı #110** ("🛑 MERGE ETME — çerez izni yok, KVKK riski") — eski (08-23), kasıtlı dokunulmuyor, kurtarma kapsamı dışı.
+  - **0.4 Karar kartı kontrolü:** **KARAR-81** zaten ✅ CEVAPLANDI (2026-09-25, istenen ÖZEL metinle uyumlu) — tekrar yazılmadı. **KARAR-93** (Y-14/KARAR-33 B, "30 gün sonra psikometrik veri silme") kartı **zaten yazılmış** (`01-KARARLAR.md:1571-1582`), hâlâ ⬜ boş (PO cevabı bekliyor) — protokole uygun, tekrar yazılmadı.
+  - **Sonuç:** kaybolan iş yok; asıl açık iş #138 CI kırmızısı + üç çatı PR'ının inceleme/çakışma eksiği. Sıra (Bölüm 1): #311 merge → #313 çakışma çöz + pointer + merge → #312/#314 bağımsız inceleme → #138 kök sebep.
 
 ---
 

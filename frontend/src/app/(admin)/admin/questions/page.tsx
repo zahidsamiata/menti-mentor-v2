@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
-import { questionsApi, type Question } from '@/lib/api/questions';
+import { questionsApi, type Question, type HiddenQuestion } from '@/lib/api/questions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,6 +24,13 @@ export default function QuestionsPage() {
     () => questionsApi.list(api),
     [api],
   );
+
+  // Kurumun gizlediği sorular — GET /api/questions bunları listeden çıkarır; geri açabilmek için ayrı liste.
+  const {
+    data: hiddenData,
+    error: hiddenError,
+    refetch: refetchHidden,
+  } = useQuery(() => questionsApi.listHidden(api), [api]);
 
   const [actionError, setActionError] = useState<string | null>(null);
   const [loadingId, setLoadingId] = useState<string | null>(null);
@@ -50,6 +57,19 @@ export default function QuestionsPage() {
     setLoadingId(null);
     if (result.ok) refetch();
     else setActionError((result as { ok: false; error: { message?: string } }).error.message ?? 'Hata');
+  }
+
+  async function handleUnhide(q: HiddenQuestion) {
+    setLoadingId(q.id);
+    setActionError(null);
+    const result = await questionsApi.unhide(api, q.id);
+    setLoadingId(null);
+    if (result.ok) {
+      refetch();
+      refetchHidden();
+    } else {
+      setActionError((result as { ok: false; error: { message?: string } }).error.message ?? 'Soru tekrar gösterilemedi.');
+    }
   }
 
   async function handleDelete(q: Question) {
@@ -111,6 +131,7 @@ export default function QuestionsPage() {
   const listedQuestions  = [...(data?.items ?? []), ...(data?.stkQuestions ?? [])];
   const globalQuestions  = listedQuestions.filter((q) => q.tenantId == null);
   const tenantQuestions  = listedQuestions.filter((q) => q.tenantId != null);
+  const hiddenQuestions  = hiddenData?.items ?? [];
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -285,6 +306,45 @@ export default function QuestionsPage() {
                 ))}
               </CardContent>
             </Card>
+
+          {/* Gizlenen Sorular (E-3b) — yalnız gizlenmiş soru varsa (ya da liste yüklenemediyse) görünür;
+              gizleme düğmesi ekranda olmadığı için boş bir bölüm göstermek kafa karıştırırdı. */}
+          {(hiddenQuestions.length > 0 || hiddenError) && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Gizlenen Sorular</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Bu sorular kurumunuzdaki kullanıcılara gösterilmiyor. İsterseniz tekrar gösterebilirsiniz.
+                </p>
+              </CardHeader>
+              <CardContent className="divide-y divide-border">
+                {hiddenError && (
+                  <AlertMessage type="error" message="Gizlenen sorular yüklenemedi. Sayfayı yenileyip tekrar deneyin." />
+                )}
+                {hiddenQuestions.map((q) => (
+                  <div key={q.id} className="flex items-start justify-between gap-3 py-3">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-muted-foreground">{q.text}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className={`text-xs font-bold ${DISC_COLORS[q.discDimension]}`}>{q.discDimension}</span>
+                        <Badge variant="secondary" className="text-xs">{TYPE_LABELS[q.type] ?? q.type}</Badge>
+                        <Badge variant="secondary" className="text-xs">Gizli</Badge>
+                      </div>
+                    </div>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="shrink-0 text-xs"
+                      disabled={loadingId === q.id}
+                      onClick={() => handleUnhide(q)}
+                    >
+                      {loadingId === q.id ? 'Gösteriliyor…' : 'Tekrar göster'}
+                    </Button>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
         </>
       )}
 

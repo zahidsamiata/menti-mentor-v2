@@ -20,10 +20,11 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { CertificationStatus } from '@/types/admin';
 import { cn } from '@/lib/utils';
 import { CERT_STATUS_BADGE } from '@/lib/enumLabels';
+import { UI_TEXT } from '@/lib/uiText';
 
 // Filtre sekmeleri: value null ise "Tümü" (filtresiz)
 const STATUS_TABS: { label: string; value: CertificationStatus | null }[] = [
-  { label: 'Tümü',       value: null },
+  { label: UI_TEXT.filters.all, value: null },
   { label: 'Sertifikalı', value: 'CERTIFIED' },
   { label: 'Başarısız',  value: 'FAILED' },
   { label: 'Bekleme',    value: 'COOLDOWN' },
@@ -41,6 +42,7 @@ export default function CertResultsPage() {
   const { data, isLoading, error } = useQuery(
     () => adminApi.listCertResults(api, { status: status ?? undefined, page }),
     [status, page],
+    { cacheKey: `admin:cert-results:${status ?? 'ALL'}:${page}` },
   );
 
   const handleTabChange = (newStatus: CertificationStatus | null) => {

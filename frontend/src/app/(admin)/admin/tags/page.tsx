@@ -37,7 +37,7 @@ export default function TagsPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => adminApi.listPendingTags(api, page),
     [status, page],
-    { enabled: true },
+    { enabled: true, cacheKey: `admin:tags:${status}:${page}` },
   );
 
   const handleTabChange = (newStatus: PendingTagStatus) => {

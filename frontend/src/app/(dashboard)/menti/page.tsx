@@ -26,6 +26,7 @@ import { LearningJourneyCard } from '@/components/organisms/LearningJourneyCard'
 import { NotificationOptInButton } from '@/components/organisms/NotificationOptInButton';
 import { weeklyLimitText, WEEKLY_LIMIT_FALLBACK } from '@/components/molecules/WeeklyMeetingLimitNote';
 import type { MentorMatch } from '@/types/matching';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function MentiDashboardPage() {
   const { user, isLoading } = useAuth();
@@ -48,7 +49,7 @@ export default function MentiDashboardPage() {
   const { data: agreementData } = useQuery(
     () => agreementsApi.getActive(api),
     [api],
-    { enabled: isApproved && !needsOrientation },
+    { enabled: isApproved && !needsOrientation, cacheKey: 'agreements:active' },
   );
 
   // ONAYLANMIŞ: uyum skorlu mentör kartları (KARAR 5 güvenli — discType dönmez).
@@ -56,14 +57,14 @@ export default function MentiDashboardPage() {
   const { data: mentorsData, isLoading: mentorsLoading } = useQuery(
     () => matchingApi.mentorMatches(api, user?.id ?? ''),
     [api, user?.id],
-    { enabled: isApproved && !needsDiscTest && !!user?.id },
+    { enabled: isApproved && !needsDiscTest && !!user?.id, cacheKey: `matching:mentors:${user?.id}` },
   );
 
   // PENDING + DISC tamamsa: PII-free sayım (KVKK — mentor isimleri tarayıcıya gönderilmez)
   const { data: mentorCountData } = useQuery(
     () => matchingApi.countMentors(api),
     [api],
-    { enabled: !isApproved && !needsDiscTest },
+    { enabled: !isApproved && !needsDiscTest, cacheKey: 'matching:mentor-count' },
   );
 
   // I-05 (madde 156): bekleme odasında da kurumun haftalık görüşme sıklığı görünsün.
@@ -71,7 +72,7 @@ export default function MentiDashboardPage() {
   const { data: weeklyLimitData } = useQuery(
     () => meetingsApi.getWeeklyLimit(api),
     [api],
-    { enabled: !isApproved && !needsDiscTest },
+    { enabled: !isApproved && !needsDiscTest, cacheKey: 'meetings:weekly-limit' },
   );
   const waitingWeeklyLimitText = weeklyLimitText(weeklyLimitData?.maxMeetingsPerWeek);
   const showWaitingWeeklyLimit = waitingWeeklyLimitText !== WEEKLY_LIMIT_FALLBACK;
@@ -81,7 +82,7 @@ export default function MentiDashboardPage() {
   const { data: meetingsData } = useQuery(
     () => meetingsApi.list(api, {}),
     [api],
-    { enabled: isApproved },
+    { enabled: isApproved, cacheKey: 'meetings:list:all' },
   );
   const meetings = meetingsData?.items ?? [];
 
@@ -90,7 +91,7 @@ export default function MentiDashboardPage() {
   const { data: conversationsData } = useQuery(
     () => conversationsApi.list(api),
     [api],
-    { enabled: isApproved },
+    { enabled: isApproved, cacheKey: 'conversations:list' },
   );
 
   // Talep modalı state
@@ -395,10 +396,10 @@ export default function MentiDashboardPage() {
 
             <div className="mt-4 flex justify-end gap-2">
               <Button variant="outline" onClick={closeModal} disabled={sending}>
-                Vazgeç
+                {UI_TEXT.actions.cancel}
               </Button>
               <Button onClick={handleSend} disabled={sending || message.trim().length === 0}>
-                {sending ? 'Gönderiliyor…' : 'Gönder'}
+                {sending ? UI_TEXT.status.sending : UI_TEXT.actions.send}
               </Button>
             </div>
           </>

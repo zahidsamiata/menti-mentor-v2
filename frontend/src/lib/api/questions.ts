@@ -27,6 +27,22 @@ export interface QuestionsResponse {
   };
 }
 
+/** GET /api/questions/hidden — kurumun gizlediği (global) soru; hiddenAt gizlenme anı. */
+export interface HiddenQuestion {
+  id: string;
+  tenantId: string | null;
+  text: string;
+  type: 'CORE' | 'DEEPENING';
+  discDimension: 'D' | 'I' | 'S' | 'C' | 'GENERAL';
+  order: number;
+  hiddenAt: string;
+}
+
+export interface HiddenQuestionsResponse {
+  items: HiddenQuestion[];
+  total: number;
+}
+
 export interface AdaptiveProgress {
   totalAnswered: number;
   coreAnswered: number;
@@ -66,6 +82,10 @@ export const questionsApi = {
 
   unhide: (api: BoundClient, questionId: string) =>
     api(`/api/questions/${questionId}/hide`, { method: 'DELETE' }),
+
+  /** Yalnız ADMIN — kendi kurumunun gizlediği sorular (geri açmak için). */
+  listHidden: (api: BoundClient): Promise<ApiResult<HiddenQuestionsResponse>> =>
+    api<HiddenQuestionsResponse>('/api/questions/hidden'),
 
   getNextAdaptive: (api: BoundClient, userId: string): Promise<ApiResult<NextQuestionResponse>> =>
     api<NextQuestionResponse>(`/api/users/${userId}/adaptive-test/next`),

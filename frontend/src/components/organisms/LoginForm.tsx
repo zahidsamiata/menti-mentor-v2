@@ -23,6 +23,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useFormState } from '@/hooks/useFormState';
 import { authApi } from '@/lib/api/auth';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
+import { resolveLoginError } from '@/lib/loginMessages';
 
 interface LoginFormProps {
   /** OAuth düğmeleri için tenant slug (URL'den okunur) */
@@ -83,7 +84,8 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
         setRejected({ reason: e.rejectionReason ?? null });
         return;
       }
-      form.setServerError(err instanceof Error ? err.message : 'Giriş başarısız. Bilgilerinizi kontrol edin.');
+      // Enumeration-safe: kimlik doğrulanamadıysa sabit tek tip mesaj (lib/loginMessages).
+      form.setServerError(resolveLoginError(e.code, err instanceof Error ? err.message : undefined));
     }
   };
 

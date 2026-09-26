@@ -23,6 +23,7 @@ import {
   type LearningAudience,
   type StageOutcome,
 } from '@/lib/api/learningJourney';
+import { UI_TEXT } from '@/lib/uiText';
 
 const AUDIENCES: { value: LearningAudience; label: string }[] = [
   { value: 'MENTOR', label: 'Mentör Yolculuğu' },
@@ -50,6 +51,7 @@ export default function AdminLearningJourneyPage() {
   const { data, isLoading, error, refetch } = useQuery(
     () => learningJourneyApi.adminList(api, audience),
     [api, audience],
+    { cacheKey: `admin:learning-journey:${audience}` },
   );
 
   const stages = data?.items ?? [];
@@ -78,7 +80,7 @@ export default function AdminLearningJourneyPage() {
           </p>
         </div>
         <Button size="sm" onClick={() => { setShowAdd((s) => !s); setEditId(null); }}>
-          {showAdd ? 'Vazgeç' : '+ Yeni Aşama'}
+          {showAdd ? UI_TEXT.actions.cancel : '+ Yeni Aşama'}
         </Button>
       </div>
 
@@ -224,7 +226,7 @@ export default function AdminLearningJourneyPage() {
                           disabled={isBusy}
                           onClick={() => void run(stage.id, () => learningJourneyApi.adminDelete(api, stage.id))}
                         >
-                          {stage.clonedFromId ? 'Varsayılana dön' : 'Sil'}
+                          {stage.clonedFromId ? 'Varsayılana dön' : UI_TEXT.actions.delete}
                         </Button>
                       </>
                     )}
@@ -397,9 +399,9 @@ function StageForm({ audience, initial, onCancel, onSubmit }: StageFormProps) {
         {formError && <AlertMessage type="error" message={formError} />}
 
         <div className="flex justify-end gap-2 pt-1">
-          <Button size="sm" variant="outline" onClick={onCancel} disabled={saving}>Vazgeç</Button>
+          <Button size="sm" variant="outline" onClick={onCancel} disabled={saving}>{UI_TEXT.actions.cancel}</Button>
           <Button size="sm" onClick={() => void submit()} disabled={saving}>
-            {saving ? 'Kaydediliyor…' : 'Kaydet'}
+            {saving ? UI_TEXT.status.saving : UI_TEXT.actions.save}
           </Button>
         </div>
       </CardContent>

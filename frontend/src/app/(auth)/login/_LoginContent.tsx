@@ -8,16 +8,9 @@
 import { useSearchParams } from 'next/navigation';
 import { LoginForm } from '@/components/organisms/LoginForm';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { resolveOAuthError } from '@/lib/loginMessages';
 
-const OAUTH_ERROR_MESSAGES: Record<string, string> = {
-  KULLANICI_REDDETTI:   'Giriş işlemi iptal edildi.',
-  PROVIDER_CATISMASI:   'Bu e-posta başka bir yöntemle kayıtlı.',
-  GECERSIZ_STATE:       'Oturum süresi doldu. Lütfen tekrar deneyin.',
-  PROVIDER_HATASI:      'Sosyal giriş sağlayıcısında hata oluştu.',
-  TENANT_BULUNAMADI:    'Kuruluş bulunamadı. Bağlantıyı kontrol edin.',
-  TENANT_ONAY_BEKLENIYOR: 'Kurumunuz henüz inceleme aşamasında. Onaylandıktan sonra kayıt olabilirsiniz.',
-  SUNUCU_HATASI:        'Bir hata oluştu. Lütfen tekrar deneyin.',
-};
+// Sosyal giriş hata kodları → mesaj eşlemesi tek yerde: lib/loginMessages (enumeration-safe).
 
 export default function LoginContent() {
   const params = useSearchParams();
@@ -38,7 +31,7 @@ export default function LoginContent() {
       {errorCode && (
         <AlertMessage
           type="error"
-          message={OAUTH_ERROR_MESSAGES[errorCode] ?? 'Giriş sırasında hata oluştu.'}
+          message={resolveOAuthError(errorCode)}
           className="mb-4"
         />
       )}

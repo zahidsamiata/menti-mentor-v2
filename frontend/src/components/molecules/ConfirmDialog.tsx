@@ -7,6 +7,7 @@
 
 import { useId, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
+import { UI_TEXT } from '@/lib/uiText';
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -22,7 +23,7 @@ interface ConfirmDialogProps {
 
 export function ConfirmDialog({
   open, title, description,
-  confirmLabel = 'Onayla', cancelLabel = 'Vazgeç',
+  confirmLabel = UI_TEXT.actions.confirm, cancelLabel = UI_TEXT.actions.cancel,
   variant = 'default', isLoading = false,
   onConfirm, onCancel,
 }: ConfirmDialogProps) {

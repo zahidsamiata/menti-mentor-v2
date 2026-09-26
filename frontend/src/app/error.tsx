@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, RotateCcw, Home } from 'lucide-react';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function Error({
   error,
@@ -48,7 +49,7 @@ export default function Error({
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button onClick={() => reset()} className="gap-2">
             <RotateCcw className="h-4 w-4" aria-hidden />
-            Tekrar dene
+            {UI_TEXT.actions.retry}
           </Button>
           <Button asChild variant="outline" className="gap-2">
             <Link href="/">
