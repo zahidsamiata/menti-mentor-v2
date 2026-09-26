@@ -24,7 +24,7 @@ import type {
   ReviewReportResponse,
   ReportStatus,
 } from '@/types/admin';
-import type { RequestOptions } from './client';
+import type { RequestOptions, DownloadedFile } from './client';
 
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
@@ -32,6 +32,9 @@ export const adminApi = {
   // ── KPI ───────────────────────────────────────────────────────────────────
   getKpi: (api: BoundClient): Promise<ApiResult<KpiData>> =>
     api<KpiData>('/api/admin/kpi'),
+  // F-18: aynı toplu KPI'lar CSV dosyası olarak (kişi düzeyinde veri yok, k-anonim)
+  downloadKpiCsv: (api: BoundClient): Promise<ApiResult<DownloadedFile>> =>
+    api<DownloadedFile>('/api/admin/kpi/export', { responseType: 'file' }),
 
   // ── K-11: Kurum-içi şikayetler (UserReport) ────────────────────────────────
   // AN-39: sayfalı — `limit`/`offset` verilmezse backend varsayılanı (ilk 50) döner; `total` filtreye uyan tüm kayıt sayısıdır.
