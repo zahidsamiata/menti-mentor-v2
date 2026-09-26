@@ -5,7 +5,7 @@
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
-**Şu an yapılan:** Şerit 1 (alt ajan): KR-16 (Prisma CLI imajda + CI'da Docker kanıt job'u). Okuma: AN-54 taraması. Şerit 2: 🔵 işler kod+PR+kart (AN-02 #160 açıldı; sıradaki Y-05).
+**Şu an yapılan:** Şerit 1 (alt ajan): KR-16 (Prisma CLI imajda + CI Docker kanıtı). Şerit 2 (alt ajan): P-05 (görüşme reddinde nazik bildirim; migration YOK). Ben: belge/merge/koordinasyon.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -36,10 +36,11 @@
 **Push edilmemiş iş:** yok. (Önceki oturumun `/tmp` worktree'sindeki KR-22 yarım işi kurtarıldı → #330; eski `/tmp` worktree'leri silinmedi — PO onayıyla temizlenir.)
 
 **Engeller:**
+- 🗄️ Tek seferlik DB erişimi gerekiyor: **Y-05** (`SystemLog.meta` JSON yol sorguları için indeks — önce `EXPLAIN` ile sorgu planı doğrulanmalı).
 - ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` (backend, IC-08) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` #151 CI yeşil + 7b ONAY (yorum 5848715616); çatı #332 buna bağlı. Ardışık ret: 1 (sonraki merge'ler başarılı → sayaç sıfırlandı).
 - 🔵 DB erişimi: AN-30 (KARAR-96) ve U-18 (KARAR-97) için PO "EVET" verirse tarihli yedek gerekir → bu VPS'te DATABASE_URL yok: "tek seferlik DB erişimi gerekiyor: AN-30 #142/#320 · U-18 #148/#326".
 
-**PO'ya sorular:** KARAR-96 (AN-30) · KARAR-97 (U-18) · KARAR-98 (AN-26 + alt soru) · KARAR-99 (AN-02 metin düzeltmesi) — hepsi 🔵 EVET/HAYIR.
+**PO'ya sorular:** KARAR-96 (AN-30) · KARAR-97 (U-18) · KARAR-98 (AN-26 + alt soru) · KARAR-99 (AN-02 metin) — 🔵 EVET/HAYIR · KARAR-100 (`SJT_ENRICHED` gerekçesiz değer; KARAR-76 ile aynı tür).
 
 **Strateji katmanına not:**
 - (AN-53) `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md` §Öne çıkan bulgular: kuyrukta karşılığı OLMAYAN ~30 ⬜ kalem (ör. G1-09 KVKK başvuru adresi, G1-10 aydınlatma kategorileri, G1-18 `User.role` sayımları, G7-02 açık tema kontrastı, G10-12 `/clubs`) ve "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23, F-27/G6-01, G6-03, G7-13, F-21/G7-09). Ajan iş eklemez → satır açma kararı sizde.
