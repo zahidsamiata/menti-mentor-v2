@@ -49,6 +49,8 @@ export interface RegisterResponse {
 // oauth/callback/page.tsx — kendi flag'ine bakmaz, yalnız bu param'ın varlığına bakar).
 export interface CompleteOAuthRegistrationPayload {
   pendingToken: string;
+  // 18 yaş beyanı + KVKK Aydınlatma Metni + açık rıza (form kaydındaki `kvkkConsent` ile aynı anlam).
+  kvkkConsent: true;
   granularConsent: GranularConsentPayload;
 }
 

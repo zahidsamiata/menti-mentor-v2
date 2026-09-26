@@ -30,6 +30,7 @@ import {
   GranularConsentForm,
   EMPTY_GRANULAR_CONSENT,
   isGranularConsentValid,
+  toGranularConsentPayload,
   type GranularConsentValue,
 } from '@/components/organisms/GranularConsentForm';
 import type { InvitationData } from '@/types/invitation';
@@ -238,25 +239,23 @@ export default function RegisterContent() {
 
     // Davet token'ını backend'e ilet → geçerliyse davetli APPROVED olur (davet = onay, PO 2026-09-01).
     // Böylece aşağıdaki otomatik login() PENDING 403'üne takılmaz; kullanıcı /onboarding'e ulaşır.
+    // AN-30 7b: rıza alanları sabit `true` değil, GERÇEK kutulardan türer. Flag kapalıyken
+    // `granularConsent` HİÇ eklenmez → backend eski davranışı uygular.
+    const granularPayload = GRANULAR_CONSENT_ENABLED ? toGranularConsentPayload(granularConsent) : null;
+    if (GRANULAR_CONSENT_ENABLED && !granularPayload) {
+      // validate() bunu zaten yakalar; savunma amaçlı ikinci kapı (eksik onayla istek gitmez).
+      setLoading(false);
+      return;
+    }
     const regResult = await authApi.register({
       email,
       password,
       fullName,
       role,
       tenantSlug,
-      kvkkConsent: true,
+      kvkkConsent: granularPayload ? granularPayload.kvkkConsent : kvkkConsent,
       inviteToken: token ?? undefined,
-      // AN-30 / KARAR-34: flag kapalıyken bu alan HİÇ eklenmez → backend eski davranışı uygular.
-      ...(GRANULAR_CONSENT_ENABLED && {
-        granularConsent: {
-          discMatching: true,
-          foreignStorage: true,
-          dataProcessing: true,
-          anonymizedImprovement: true,
-          crossTenantSharing: granularConsent.crossTenantSharing,
-          oceanProfiling: granularConsent.oceanProfiling,
-        },
-      }),
+      ...(granularPayload && { granularConsent: granularPayload.granularConsent }),
     });
 
     if (!regResult.ok) {

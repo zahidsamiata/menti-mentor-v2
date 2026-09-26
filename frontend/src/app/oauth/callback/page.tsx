@@ -28,6 +28,7 @@ import {
   GranularConsentForm,
   EMPTY_GRANULAR_CONSENT,
   isGranularConsentValid,
+  toGranularConsentPayload,
   type GranularConsentValue,
 } from '@/components/organisms/GranularConsentForm';
 
@@ -47,22 +48,14 @@ function PendingConsentForm({ pendingToken }: { pendingToken: string }) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!isGranularConsentValid(value)) return;
+    // AN-30 7b: gövde sabit `true` değil GERÇEK kutulardan türer; zorunlu biri eksikse istek gitmez.
+    const consentPayload = toGranularConsentPayload(value);
+    if (!consentPayload) return;
 
     setSubmitting(true);
     setError(null);
 
-    const result = await authApi.completeOAuthRegistration({
-      pendingToken,
-      granularConsent: {
-        discMatching: true,
-        foreignStorage: true,
-        dataProcessing: true,
-        anonymizedImprovement: true,
-        crossTenantSharing: value.crossTenantSharing,
-        oceanProfiling: value.oceanProfiling,
-      },
-    });
+    const result = await authApi.completeOAuthRegistration({ pendingToken, ...consentPayload });
 
     if (!result.ok) {
       setSubmitting(false);
@@ -127,7 +120,16 @@ function OAuthCallbackInner() {
   const params = useSearchParams();
   const { loginWithTokens } = useAuth();
 
-  const pendingConsentToken = params.get('pendingConsentToken');
+  // AN-30 7b: token İLK render'da state'e alınır, sonra adres çubuğundan silinir (aşağıdaki
+  // effect). Token 10 dk boyunca hesap açıp oturum veren bir taşıyıcı değerdir ve içinde
+  // e-posta/ad var → form doldurulurken URL'de, tarayıcı geçmişinde, ekran paylaşımında durmamalı.
+  // Dallanma param'a değil state'e bağlı: URL temizlenince (searchParams değişince) form kaybolmaz.
+  const [pendingConsentToken] = useState(() => params.get('pendingConsentToken'));
+
+  useEffect(() => {
+    if (!pendingConsentToken) return;
+    window.history.replaceState(window.history.state, '', window.location.pathname);
+  }, [pendingConsentToken]);
 
   useEffect(() => {
     // AN-30 OAuth ayağı: rıza ekranı gösterilecekse aşağıdaki eski accessToken/error akışı

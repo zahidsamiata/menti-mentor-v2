@@ -18,8 +18,14 @@
  * aynı desen — bkz. _RegisterContent.tsx `kvkkConsent` state'i).
  */
 
+import type { GranularConsentPayload } from '@/lib/api/auth';
+
 export interface GranularConsentValue {
   // ── Zorunlu grup (KARAR-34) ──────────────────────────────────────────────
+  // AN-30 7b: 18 yaş beyanı + KVKK Aydınlatma Metni (/kvkk) + açık rıza. Eski tek kutunun
+  // (K4, PO kararı: 18+ beyanı KVKK onayına gömülü) BİREBİR anlamını taşır; API'ye granüler
+  // grubun içinde değil `kvkkConsent` alanı olarak gider (backend AYDINLATMA + ACIK_RIZA yazar).
+  ageAndNotice: boolean;
   discMatching: boolean;
   foreignStorage: boolean;
   dataProcessing: boolean;
@@ -30,6 +36,7 @@ export interface GranularConsentValue {
 }
 
 export const EMPTY_GRANULAR_CONSENT: GranularConsentValue = {
+  ageAndNotice: false,
   discMatching: false,
   foreignStorage: false,
   dataProcessing: false,
@@ -41,11 +48,42 @@ export const EMPTY_GRANULAR_CONSENT: GranularConsentValue = {
 /** Zorunlu grubun TAMAMI işaretlenmiş mi? (isteğe bağlılar bu sonucu etkilemez). */
 export function isGranularConsentValid(value: GranularConsentValue): boolean {
   return (
+    value.ageAndNotice &&
     value.discMatching &&
     value.foreignStorage &&
     value.dataProcessing &&
     value.anonymizedImprovement
   );
+}
+
+/**
+ * Formun değerini API gövdesine çevirir. Zorunlu grubun TAMAMI işaretli değilse `null` döner —
+ * böylece gövde sabit `true` değil GERÇEK kutulardan türer (işaretlenmemiş bir madde asla
+ * "onaylandı" diye gönderilemez).
+ */
+export function toGranularConsentPayload(
+  value: GranularConsentValue,
+): { kvkkConsent: true; granularConsent: GranularConsentPayload } | null {
+  if (
+    !value.ageAndNotice ||
+    !value.discMatching ||
+    !value.foreignStorage ||
+    !value.dataProcessing ||
+    !value.anonymizedImprovement
+  ) {
+    return null;
+  }
+  return {
+    kvkkConsent: value.ageAndNotice,
+    granularConsent: {
+      discMatching: value.discMatching,
+      foreignStorage: value.foreignStorage,
+      dataProcessing: value.dataProcessing,
+      anonymizedImprovement: value.anonymizedImprovement,
+      crossTenantSharing: value.crossTenantSharing,
+      oceanProfiling: value.oceanProfiling,
+    },
+  };
 }
 
 const PLACEHOLDER_TAG = '[YER TUTUCU — avukat onayı bekliyor]';
@@ -122,6 +160,40 @@ function ConsentCheckbox({ item, checked, onToggle, disabled, required }: Consen
   );
 }
 
+/** 18 yaş beyanı + Aydınlatma Metni bağlantısı — eski tek kutunun metniyle aynı anlam. */
+function AgeAndNoticeCheckbox({
+  checked,
+  onToggle,
+  disabled,
+}: {
+  checked: boolean;
+  onToggle: (key: keyof GranularConsentValue, checked: boolean) => void;
+  disabled?: boolean;
+}) {
+  return (
+    <label className="flex items-start gap-2.5 cursor-pointer select-none">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onToggle('ageAndNotice', e.target.checked)}
+        disabled={disabled}
+        aria-required
+        className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+      />
+      <span className="text-xs text-muted-foreground leading-relaxed">
+        <span className="block text-[10px] font-medium uppercase tracking-wide text-amber-600 dark:text-amber-400">
+          {PLACEHOLDER_TAG}
+        </span>
+        <strong className="text-foreground">18 yaşından büyük olduğumu beyan ederim</strong> ve{' '}
+        <a href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary/80">
+          KVKK Aydınlatma Metni
+        </a>
+        {'’'}ni okuyup kişisel verilerimin işlenmesine açık rıza veriyorum. (Zorunlu)
+      </span>
+    </label>
+  );
+}
+
 interface GranularConsentFormProps {
   value: GranularConsentValue;
   onChange: (value: GranularConsentValue) => void;
@@ -137,6 +209,7 @@ export function GranularConsentForm({ value, onChange, disabled }: GranularConse
     <div className="space-y-4">
       <div className="space-y-2.5">
         <p className="text-xs font-semibold text-foreground">Zorunlu onaylar</p>
+        <AgeAndNoticeCheckbox checked={value.ageAndNotice} onToggle={handleToggle} disabled={disabled} />
         {MANDATORY_ITEMS.map((item) => (
           <ConsentCheckbox
             key={item.key}

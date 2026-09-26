@@ -43,7 +43,8 @@ describe('/oauth/callback — pendingConsentToken VARKEN (AN-30 OAuth ayağı)',
   it('granüler rıza formu render edilir, accessToken akışı (loginWithTokens) TETİKLENMEZ', async () => {
     render(<OAuthCallbackPage />);
     await waitFor(() => expect(screen.getByText(/son bir adım kaldı/i)).toBeInTheDocument());
-    expect(screen.getAllByRole('checkbox')).toHaveLength(6);
+    expect(screen.getAllByRole('checkbox')).toHaveLength(7); // 18+/Aydınlatma + 4 zorunlu + 2 isteğe bağlı
+    expect(screen.getByRole('link', { name: /kvkk aydınlatma metni/i })).toHaveAttribute('href', '/kvkk');
     expect(loginWithTokensMock).not.toHaveBeenCalled();
   });
 
@@ -53,7 +54,25 @@ describe('/oauth/callback — pendingConsentToken VARKEN (AN-30 OAuth ayağı)',
     expect(screen.getByRole('button', { name: /devam et/i })).toBeDisabled();
   });
 
-  it('zorunlu 4 madde işaretlenince buton aktif olur, submit → doğru API çağrısı + başarılı girişte yönlendirme', async () => {
+  it('form açılınca token adres çubuğundan silinir (history.replaceState), form yerinde kalır', async () => {
+    const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
+    render(<OAuthCallbackPage />);
+    await waitFor(() => expect(screen.getByText(/son bir adım kaldı/i)).toBeInTheDocument());
+    expect(replaceStateSpy).toHaveBeenCalledTimes(1);
+    const newUrl = String(replaceStateSpy.mock.calls[0][2]);
+    expect(newUrl).not.toContain('pendingConsentToken');
+    expect(newUrl).not.toContain('pending-tok-123');
+    replaceStateSpy.mockRestore();
+  });
+
+  it('18+/Aydınlatma kutusu işaretlenmezse (diğer 4 zorunlu işaretli olsa da) buton disabled kalır', async () => {
+    render(<OAuthCallbackPage />);
+    await waitFor(() => expect(screen.getByText(/son bir adım kaldı/i)).toBeInTheDocument());
+    screen.getAllByRole('checkbox').slice(1, 5).forEach((cb) => fireEvent.click(cb));
+    expect(screen.getByRole('button', { name: /devam et/i })).toBeDisabled();
+  });
+
+  it('zorunlu 5 madde işaretlenince buton aktif olur, submit → doğru API çağrısı + başarılı girişte yönlendirme', async () => {
     completeOAuthRegistrationMock.mockResolvedValue({
       ok: true,
       data: { accessToken: 'new-access-token', isNewUser: true },
@@ -63,8 +82,8 @@ describe('/oauth/callback — pendingConsentToken VARKEN (AN-30 OAuth ayağı)',
     await waitFor(() => expect(screen.getByText(/son bir adım kaldı/i)).toBeInTheDocument());
 
     const checkboxes = screen.getAllByRole('checkbox');
-    // İlk 4 checkbox zorunlu grup (bkz. GranularConsentForm MANDATORY_ITEMS sırası)
-    checkboxes.slice(0, 4).forEach((cb) => fireEvent.click(cb));
+    // İlk 5 checkbox zorunlu grup: 18+/Aydınlatma + MANDATORY_ITEMS (bkz. GranularConsentForm)
+    checkboxes.slice(0, 5).forEach((cb) => fireEvent.click(cb));
 
     const submitBtn = screen.getByRole('button', { name: /devam et/i });
     expect(submitBtn).not.toBeDisabled();
@@ -73,6 +92,7 @@ describe('/oauth/callback — pendingConsentToken VARKEN (AN-30 OAuth ayağı)',
     await waitFor(() => expect(completeOAuthRegistrationMock).toHaveBeenCalledTimes(1));
     const payload = completeOAuthRegistrationMock.mock.calls[0][0];
     expect(payload.pendingToken).toBe('pending-tok-123');
+    expect(payload.kvkkConsent).toBe(true);
     expect(payload.granularConsent).toMatchObject({
       discMatching: true,
       foreignStorage: true,
@@ -94,7 +114,7 @@ describe('/oauth/callback — pendingConsentToken VARKEN (AN-30 OAuth ayağı)',
     render(<OAuthCallbackPage />);
     await waitFor(() => expect(screen.getByText(/son bir adım kaldı/i)).toBeInTheDocument());
 
-    screen.getAllByRole('checkbox').slice(0, 4).forEach((cb) => fireEvent.click(cb));
+    screen.getAllByRole('checkbox').slice(0, 5).forEach((cb) => fireEvent.click(cb));
     fireEvent.click(screen.getByRole('button', { name: /devam et/i }));
 
     await waitFor(() =>
