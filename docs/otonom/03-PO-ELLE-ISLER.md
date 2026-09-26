@@ -58,7 +58,8 @@ Her iş için **değişkenin tam adı · değer biçimi · hangi servise (backen
 ## Ortak doğrulama yolu
 ~~[ESKİ · 2026-09-19] Çoğu ortam değeri tek yerden görülür: **`GET /health`** → `env` alanı. Bu tur `/health` zenginleştirilirse (Bölüm 6 + V-01/V-04/V-11) SMTP · DB · cron durumu da buradan okunacak.~~
 ⚠️ **GÜNCELLEME (2026-09-21, kod-teyitli): `/health` ZENGİNLEŞTİRİLDİ — V-01/V-11 İNDİ.** Tek istekte dört şey birden görülüyor:
-**`GET <BACKEND-ALAN>/health`** → `{ "ok", "db": "up|down", "smtp": "verified|failed|unconfigured|unknown", "cron": "enabled|disabled", "env", "ts", "version", "uptime" }`
+⚠️ **GÜNCELLEME (2026-09-26, PO teyidi): canlı adresler** — Site: `https://sivilkapasite.org` · Backend: `https://api.sivilkapasite.org`. Kaynak: `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md:155` + `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-09-21.md:95` + PO teyidi. Bu adresler daha önce yaşayan belgelerde yoktu.
+**`GET https://api.sivilkapasite.org/health`** → `{ "ok", "db": "up|down", "smtp": "verified|failed|unconfigured|unknown", "cron": "enabled|disabled", "env", "ts", "version", "uptime" }`
 Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `backend/src/server.ts:60-63` (uç — **auth YOK, rate limit YOK**) · SMTP durum değerleri `backend/src/services/emailService.ts:26,48-52`.
 ⇒ **A3 (`env`) · B4 (`smtp`) · B9 (`cron`) artık TEK tarayıcı sekmesinden doğrulanır.** DB erişilemezse uç **503** döner → Docker healthcheck'in yalancı "healthy" vermesi bitti.
 

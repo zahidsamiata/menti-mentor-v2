@@ -254,6 +254,13 @@ Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
    Kart sade dille yazılır; PO evet/hayır der; "evet" gelirse tarihli yedeği AJAN alır.
 ⛔ AİLE PR AKIŞI YOK: iş başına ayrı PR.
 Merge sonrası: SIRALI pointer bump (Bölüm 8) + 02-ILERLEME'ye "CANLIDA BAK: <kullanıcı ne görüyor>".
+⚠️ GÜNCELLEME 2026-09-26 (PO): Merge sonrası canlı adres kontrolü de EKLENDİ — dağıtım için kısa bir
+süre bekle, sonra `GET https://api.sivilkapasite.org/health` → `ok:true` · `db:up` olmalı; ayrıca
+`https://sivilkapasite.org` 200 dönmeli. Yalnız GET; canlıya yazma/giriş denemesi/form gönderme/yük
+testi YOK. Sonucu CANLIDA BAK satırına ekle. `ok:false` ya da `db:down` → son merge'ü REVERT ET,
+BAŞARISIZ + sebep, 02-ILERLEME'ye "CANLI SORUN" yaz, DUR. `smtp`/`cron` beklenmedik değer → revert
+YOK, yalnız kaydet (PO'nun elle işi olabilir, bkz. 03-PO-ELLE-ISLER.md). İstek denetleyiciye takılırsa
+zorlama: reddi aynen yaz, "PO elle bakacak" işaretle, devam et.
 
 ═══════════════════════════════════════════════════════════════
 8 — BACKEND ISLERI VE SUBMODULE POINTER
