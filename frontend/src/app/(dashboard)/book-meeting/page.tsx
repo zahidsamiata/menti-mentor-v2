@@ -105,13 +105,13 @@ function BookMeetingContent() {
     });
     setSubmitting(false);
     if (result.ok) { setSuccess(true); setTimeout(() => router.push('/menti'), 2000); }
-    else { setError(result.error.message ?? 'Randevu oluşturulamadı.'); }
+    else { setError(result.error.message ?? 'Görüşme talebi oluşturulamadı.'); }
   }
 
   if (success) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
       <p className="text-4xl">📅</p>
-      <h2 className="text-xl font-semibold">Randevu Talebiniz Gönderildi</h2>
+      <h2 className="text-xl font-semibold">Görüşme Talebiniz Gönderildi</h2>
       <p className="text-sm text-muted-foreground text-center">Mentör onayladığında bildirim alacaksınız.</p>
       <WeeklyMeetingLimitNote className="max-w-md text-center" />
     </div>
@@ -120,7 +120,7 @@ function BookMeetingContent() {
   return (
     <div className="max-w-lg mx-auto space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold">Randevu Talebi</h1>
+        <h1 className="text-2xl font-bold">Görüşme Talebi</h1>
         <p className="text-sm text-muted-foreground">Mentörünüzle görüşme için uygun bir zaman seçin.</p>
       </div>
 
@@ -134,7 +134,7 @@ function BookMeetingContent() {
           <CardHeader><CardTitle className="text-sm">Bu mentör henüz müsait saat belirtmemiş</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Şu an bu mentöre randevu talebi gönderemezsiniz. Mentörünüze mesaj göndererek uygun bir zaman ayarlayabilirsiniz.
+              Şu an bu mentöre görüşme talebi gönderemezsiniz. Mentörünüze mesaj göndererek uygun bir zaman ayarlayabilirsiniz.
             </p>
             <form onSubmit={handleSendMessage} className="space-y-3">
               {convoError && <AlertMessage type="error" message={convoError} />}
@@ -219,12 +219,12 @@ function BookMeetingContent() {
             {format === 'ONLINE' ? (
               // KARAR-7 (A): online toplantı linkini mentör, onayda girer — menti burada girmez.
               <p className="text-xs text-muted-foreground">
-                Toplantı linkini mentörünüz, talebinizi onaylarken paylaşacak.
+                Görüşme bağlantısını mentörünüz, talebinizi onaylarken paylaşacak.
               </p>
             ) : (
               <div className="space-y-1">
                 <label className="text-sm font-medium">
-                  {format === 'IN_PERSON' ? 'Buluşma Yeri' : 'Telefon Numarası'}
+                  {format === 'IN_PERSON' ? 'Görüşme Yeri' : 'Telefon Numarası'}
                 </label>
                 <input type="text" value={location} onChange={(e) => setLocation(e.target.value)}
                   placeholder={format === 'IN_PERSON' ? 'Örn: Kadıköy, İstanbul' : '+90 5xx xxx xx xx'}
@@ -263,7 +263,7 @@ function BookMeetingContent() {
                 blok-dışı seçimde de tıklanabilir kalıyordu (backend zaten 409 ile reddediyordu,
                 ama menti "gönder"e tıklayabiliyordu). Artık KATI mentörde blok dışı seçim gönderilemez. */}
             <Button type="submit" className="w-full" disabled={submitting || !date || !time || !msgValid || !isFitAvailability}>
-              {submitting ? 'Gönderiliyor…' : 'Randevu Talebini Gönder'}
+              {submitting ? 'Gönderiliyor…' : 'Görüşme Talebini Gönder'}
             </Button>
             <p className="text-xs text-muted-foreground text-center">Talebiniz mentöre iletilecek, onaylaması gerekiyor.</p>
           </form>

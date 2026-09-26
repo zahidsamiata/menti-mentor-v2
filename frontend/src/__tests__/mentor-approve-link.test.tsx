@@ -61,7 +61,7 @@ describe('K-19/KARAR-7: mentör onayında toplantı linki', () => {
   it('link girilince "Onayla" aktifleşir ve locationUrl ile approveMeeting çağrılır', async () => {
     approveMeetingMock.mockResolvedValueOnce({ ok: true, data: { meeting: {} } });
     render(<MentorDashboardPage />);
-    const linkInput = screen.getByPlaceholderText('Toplantı linki (https://...)');
+    const linkInput = screen.getByPlaceholderText('Görüşme bağlantısı (https://...)');
     fireEvent.change(linkInput, { target: { value: 'https://meet.google.com/abc-defg-hij' } });
     const approveButton = screen.getByRole('button', { name: 'Onayla' });
     expect(approveButton).not.toBeDisabled();
@@ -71,12 +71,12 @@ describe('K-19/KARAR-7: mentör onayında toplantı linki', () => {
   });
 
   it('backend hata dönerse (ör. linksiz onay reddi) kullanıcı hatayı görür, sessizce yutulmaz', async () => {
-    approveMeetingMock.mockResolvedValueOnce({ ok: false, error: { message: 'Online görüşmeyi onaylamak için toplantı bağlantısı girmelisiniz.' } });
+    approveMeetingMock.mockResolvedValueOnce({ ok: false, error: { message: 'Online görüşmeyi onaylamak için görüşme bağlantısı girmelisiniz.' } });
     render(<MentorDashboardPage />);
-    const linkInput = screen.getByPlaceholderText('Toplantı linki (https://...)');
+    const linkInput = screen.getByPlaceholderText('Görüşme bağlantısı (https://...)');
     fireEvent.change(linkInput, { target: { value: 'https://meet.google.com/abc' } });
     fireEvent.click(screen.getByRole('button', { name: 'Onayla' }));
-    await waitFor(() => expect(screen.getByText('Online görüşmeyi onaylamak için toplantı bağlantısı girmelisiniz.')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('Online görüşmeyi onaylamak için görüşme bağlantısı girmelisiniz.')).toBeInTheDocument());
     expect(refetchPendingMock).not.toHaveBeenCalled();
   });
 });

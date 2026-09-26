@@ -196,7 +196,7 @@ export default function MeetingsPage() {
     <div className="space-y-6 max-w-2xl mx-auto animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold">Görüşmelerim</h1>
-        <p className="text-sm text-muted-foreground">Tüm randevularınız ve geçmiş görüşmeleriniz.</p>
+        <p className="text-sm text-muted-foreground">Yaklaşan ve geçmiş tüm görüşmeleriniz.</p>
       </div>
 
       {/* Bekleyen feedback uyarısı */}

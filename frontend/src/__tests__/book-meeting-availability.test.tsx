@@ -86,7 +86,7 @@ describe('BookMeeting — availability null-safety regression', () => {
 
   // K-05: uyarı göstermek yetmiyordu — geçerli bir niyet mesajı yazılsa bile buton blok-dışı
   // seçimde tıklanabilir kalıyordu (backend zaten 409 ile reddediyordu, ama "gönder" denenebiliyordu).
-  it('K-05: geçerli niyet mesajı yazılsa bile blok dışı saatte "Randevu Talebini Gönder" devre dışı', () => {
+  it('K-05: geçerli niyet mesajı yazılsa bile blok dışı saatte "Görüşme Talebini Gönder" devre dışı', () => {
     availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
     render(<BookMeetingPage />);
     const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
@@ -96,11 +96,11 @@ describe('BookMeeting — availability null-safety regression', () => {
     const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
     fireEvent.change(textarea, { target: { value: 'B'.repeat(60) } }); // msgValid = true
 
-    const submitButton = screen.getByRole('button', { name: /randevu talebini gönder/i });
+    const submitButton = screen.getByRole('button', { name: /görüşme talebini gönder/i });
     expect(submitButton).toBeDisabled();
   });
 
-  it('K-05: blok İÇİ saat + geçerli mesajla "Randevu Talebini Gönder" aktif', () => {
+  it('K-05: blok İÇİ saat + geçerli mesajla "Görüşme Talebini Gönder" aktif', () => {
     availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
     render(<BookMeetingPage />);
     const dateInput = document.querySelector('input[type="date"]') as HTMLInputElement;
@@ -111,7 +111,7 @@ describe('BookMeeting — availability null-safety regression', () => {
     const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
     fireEvent.change(textarea, { target: { value: 'B'.repeat(60) } });
 
-    const submitButton = screen.getByRole('button', { name: /randevu talebini gönder/i });
+    const submitButton = screen.getByRole('button', { name: /görüşme talebini gönder/i });
     expect(submitButton).not.toBeDisabled();
   });
 
