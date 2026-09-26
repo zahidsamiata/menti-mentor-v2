@@ -1233,3 +1233,4 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 19:16 UTC · **AN-53 BITTI** — 5 salt-okuma ajanı (Workflow): 145 açık kart kalemi → ✅ 24 · ⬜ 73 · ❓ 48; rapor `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`; 12 G-karta atıf notu (gövde değişmedi). Kuyruk dışı ⬜ kalemler ve BITTI-ama-eksik vakalar 00-SIMDI strateji notunda.
 - 2026-09-26 19:16 UTC · **AN-10 (mentör yazımı ayağı) BITTI** — çatı #339 (`9606240`). **AN-26 7b 2. tur ONAY** (KARAR-98'e işlendi). **IC-12 PR-ACIK** (çatı dizini main'de + backend #159).
 - 2026-09-26 19:18 UTC · **AN-44 BITTI** (tasarim-kararlari-admin tarihsiz ada taşındı + yönlendirme) · **IC-12 BITTI** (backend #159 `dea79d8`).
+- 2026-09-26 19:20 UTC · **AN-02 PR-ACIK (🔵)** — backend #160 (seed.ts iki yazım hatası; seed çalıştırılmadı). Canlı düzeltme için **KARAR-99** EVET/HAYIR kartı açıldı.
