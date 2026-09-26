@@ -1194,3 +1194,9 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - PS-A1 #143 · GV-08 #145: main'e göre 13/8 commit gerideydi (metin çakışması yok) → API ile dal güncellendi, CI yeniden koşuyor.
 - 2026-09-26 17:51 UTC · **MERGE (backend):** #143 PS-A1 (`cb61803`) · #145 GV-08 (`923ab6d`) · #150 KR-14 (`d87b227`) — üçü de main'le güncel dalda CI SUCCESS, mergeable CLEAN; PS-A1/GV-08 önceki bağımsız inceleme ONAY. Merge komutu bu oturumda REDDEDİLMEDİ. Çatı pointer PR **#329** (`cde7bb8` → `d87b227`, ata kontrolü ✅) CI bekliyor.
 - 2026-09-26 17:51 UTC · **AN-30 7b incelemesi: SORUN VAR** (backend #142 yorum 5848447553 · çatı #320 yorum 5848447672). KARAR-96/97 kartlarına 7b sonuçları eklendi (CEVAP alanlarına dokunulmadı).
+- 2026-09-26 17:59 UTC · **CANLIDA:** çatı pointer **#329** merge (`21984ad`, backend `cde7bb8`→`d87b227`). Canlı kontrol: /health ok:true · db:up · smtp:verified · cron:enabled · uptime 26 sn (yeni dağıtım) · site 200.
+  - **PS-A1 BITTI** — CANLIDA BAK: DISC sonucu OCEAN'a doğru ölçekte (0-100) çevriliyor; kişilik profili değerleri sıfıra yakın çıkmıyor.
+  - **GV-08 BITTI** — CANLIDA BAK: hesap silinince arketip kopyası ve serbest yorumlar da anonimleşiyor (arayüz değişmez, veri tarafı).
+  - **KR-14 BITTI** — CANLIDA BAK: (iç) testler canlı DB'nin hiçbir adresine karşı koşamıyor.
+- 2026-09-26 17:59 UTC · **KR-22 PR-ACIK** — çatı **#330** (verify.sh ↔ CI hizalama; önceki oturumun yarım yaması kurtarıldı). VPS koşusu: 6/6 yeşil, entegrasyon + E2E ATLANDI, çıkış 2.
+- 2026-09-26 17:59 UTC · AN-30 düzeltmesi alt ajana verildi (izole worktree `.worktrees/an30`, merge YOK).

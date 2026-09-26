@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 17:51 UTC · çatı main HEAD `ce104b5` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 17:59 UTC · çatı main HEAD `21984ad` · backend main HEAD `d87b227`
 
 **Durum:** ÇALIŞIYOR
 
-**Şu an yapılan:** backend #143 (PS-A1) · #145 (GV-08) · #150 (KR-14) MERGE edildi → çatı pointer PR **#329** CI bekliyor → merge + canlı kontrol. Sonra: AN-30 ve U-18 düzeltmeleri (ikisi de 7b SORUN VAR), 🟢 kuyruk.
+**Şu an yapılan:** Şerit 1 (alt ajan): AN-30 düzeltmeleri (7b bulguları, main merge, 18+/Aydınlatma, rıza geri çekme) — merge YOK (🔵). Şerit 2: KR-22 çatı #330 CI bekliyor → sonra U-18 düzeltmesi, 🟢 kuyruk (I-12, E-3…).
 
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #143 · #145 · #150 + çatı #329 | PS-A1 · GV-08 · KR-14 (pointer `cde7bb8`→`d87b227`) | ok:true, db:up, smtp:verified, cron:enabled, site 200 (uptime 26 sn — yeni dağıtım) |
 | çatı #328 | GÖREV 0 — kapı düzeni 4 renk (belge) | ok:true, db:up, smtp:verified, cron:enabled, site 200 |
 | backend #149 + çatı pointer #327 | KR-19 (yönetici çift engeli — iki yönde uygulama) | ok:true, db:up, site 200 |
 | backend #147 + çatı #324 | GV-18 (rıza sürümü kontrolü) | ok:true, db:up, site 200 |
@@ -19,7 +20,7 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #329 | pointer → `d87b227` (PS-A1 #143 · GV-08 #145 · KR-14 #150 merge edildi) | koşuyor | gerekmiyor (yalnız pointer) | CI bekleniyor → merge |
+| çatı #330 | KR-22 (verify.sh ↔ CI hizalama) · 🟢 | koşuyor | gerekmiyor (hassas dosya değil) | CI bekleniyor → merge |
 | backend #148 + çatı #326 | U-18 · 🔵 · KARAR-97 | yeşil (eski taban) | **SORUN VAR** (7b, 2026-09-26): iki PR da main ile ÇAKIŞIYOR (KR-19 blok kontrolü korunarak rebase gerekir; çatı pointer `1660da4` backend main'in devamı değil) + menti panelden tekrar yazınca ham hata metni · bildirim servisi yalnız log · reddetme hatası onay penceresinin arkasında | düzeltme sırada; PO EVET'i de bekler |
 | backend #142 + çatı #320 | AN-30 · 🔵 · KARAR-96 · ⛔ çıkış blokeri | yeşil (eski taban) | **SORUN VAR** (7b): main ile ÇAKIŞIYOR (GV-18 #147 sonrası) · anahtar açılmadan önce: granüler formda 18+ beyanı + Aydınlatma Metni bağlantısı yok, hesap silmede 6 yeni rıza geri çekilmiyor · küçükler PR yorumunda | düzeltme sırada; PO EVET'i + yedek bekler |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
@@ -36,7 +37,7 @@ Fark: 🟡 +3 = PS-A1 · PS-A3 · PS-A4 (49'luk listede yoklar, kapıları deği
 **Push edilmemiş iş:**
 | Dal | SHA | Yol | Neden |
 |---|---|---|---|
-| `otonom/KR-22-verify-ci-20260925` | `843366c` + commit edilmemiş `scripts/verify.sh` değişikliği (+155/−37) | `/tmp/.../scratchpad/umb-kr22` | Önceki oturum yarıda kesildi. Silinmedi; yama yedeği: `~/menti/.worktrees/_yarim/KR-22-verify-sh-yarim-20260926.patch` (gitignore'lu, 211 satır). KR-22 işlenirken değerlendirilecek. |
+| `otonom/KR-22-verify-ci-20260925` | `843366c` + commit edilmemiş `scripts/verify.sh` | `/tmp/.../scratchpad/umb-kr22` | ✅ İçerik kurtarıldı: yeni dal `otonom/KR-22-verify-ci-hizalama-20260926` → çatı #330. Eski `/tmp` worktree SİLİNMEDİ (kural: /tmp worktree'ler PO onayıyla temizlenir). |
 
 **Bu turda bulunan doc-senkron gapleri (düzeltildi — main'in atası mı taraması ileride tekrar faydalı):**
 - **V-16, U-19, KR-07**: kod zaten canlıydı/main'e girmişti ama kuyruk satırı `BEKLIYOR` kalmıştı → üçü de `✅ BITTI`'ye çekildi.
