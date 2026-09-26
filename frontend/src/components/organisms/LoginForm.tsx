@@ -24,6 +24,7 @@ import { useFormState } from '@/hooks/useFormState';
 import { authApi } from '@/lib/api/auth';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
 import { resolveLoginError } from '@/lib/loginMessages';
+import { storePendingCorrectionNote } from '@/lib/pendingCorrectionNote';
 
 interface LoginFormProps {
   /** OAuth düğmeleri için tenant slug (URL'den okunur) */
@@ -74,8 +75,15 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
       router.push(target === '/pending-approval' ? withPendingEmail(values.email) : target);
     } catch (err) {
       // PENDING: backend JWT vermeden 403 atar — biz yine de /pending-approval'a yönlendiririz.
-      const e = err as Error & { code?: string; rejectionReason?: string | null; canReapply?: boolean };
+      const e = err as Error & {
+        code?: string;
+        rejectionReason?: string | null;
+        correctionNote?: string | null;
+        canReapply?: boolean;
+      };
       if (e.code === 'HESAP_ONAY_BEKLENIYOR') {
+        // IC-08: not URL'ye konmaz (serbest metin, kişisel olabilir) — yalnız bu sekmenin oturum belleğinde taşınır.
+        storePendingCorrectionNote(e.correctionNote ?? null);
         router.push(withPendingEmail(values.email));
         return;
       }

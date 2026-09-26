@@ -1,10 +1,11 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
-import { Clock, Mail, LogOut } from 'lucide-react';
+import { Clock, Mail, LogOut, PenLine } from 'lucide-react';
+import { clearPendingCorrectionNote, readPendingCorrectionNote } from '@/lib/pendingCorrectionNote';
 
 function PendingApprovalContent() {
   const { user, logout } = useAuth();
@@ -12,6 +13,11 @@ function PendingApprovalContent() {
   // PENDING kullanıcıya JWT verilmediğinden user genelde null olur → e-postayı
   // login formundan gelen query'den al (U-07). Token varsa (edge) user.email öncelikli.
   const email = user?.email ?? searchParams.get('email') ?? undefined;
+  // IC-08: yöneticinin düzeltme notu — giriş formu sekme belleğine bırakır (bkz. lib/pendingCorrectionNote).
+  const [correctionNote, setCorrectionNote] = useState<string | null>(null);
+  useEffect(() => {
+    setCorrectionNote(readPendingCorrectionNote());
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
@@ -40,6 +46,19 @@ function PendingApprovalContent() {
           </p>
         </div>
 
+        {correctionNote && (
+          <div
+            role="status"
+            className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-5 text-left space-y-2"
+          >
+            <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+              <PenLine className="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden />
+              Yöneticinizin notu
+            </div>
+            <p className="whitespace-pre-line break-words text-sm text-foreground">{correctionNote}</p>
+          </div>
+        )}
+
         {/* Bilgi kutusu */}
         <div className="rounded-xl border border-border bg-muted/50 p-5 text-left space-y-3">
           <div className="flex items-start gap-3">
@@ -65,7 +84,10 @@ function PendingApprovalContent() {
         <Button
           variant="outline"
           className="gap-2"
-          onClick={() => void logout()}
+          onClick={() => {
+            clearPendingCorrectionNote();
+            void logout();
+          }}
         >
           <LogOut className="h-4 w-4" aria-hidden />
           Farklı hesapla giriş yap

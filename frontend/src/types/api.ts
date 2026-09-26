@@ -10,6 +10,8 @@ export interface ApiError {
   details?: Record<string, string[]>;
   // İş 3 P2: reddedilen kullanıcı girişinde backend gerekçeyi + tekrar-başvuru bilgisini taşır.
   rejectionReason?: string | null;
+  /** IC-08: onay bekleyen hesapta yöneticinin "düzeltme iste" notu (yalnız doğru şifreden sonra döner). */
+  correctionNote?: string | null;
   canReapply?: boolean;
 }
 
