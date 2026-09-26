@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 20:13 UTC · çatı main HEAD `470bed0` · backend main HEAD `14877f7` (= canlı pointer)
+**Son güncelleme:** 2026-09-26 20:38 UTC · çatı main HEAD `3ba3afd` · backend main HEAD `91fcd0a` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
-**Şu an yapılan:** K5-Y1 bitti (21 madde: 15 kuyrukta kapanmış · 4 doğrulandı · 1 çürüdü · 1 ❓). Kuyrukta karşılığı olmayan 2 güvenlik bulgusu iş olarak ele alınıyor (K5-Y1 "doğrulanan iş olur"): **Y1-B8** (onay bekleyen kullanıcı OAuth ile oturum açabiliyor) · **Y1-B9** (dondurulan/reddedilen kurumun kullanıcıları erişmeye devam ediyor).
+**Şu an yapılan:** Y1-B9 canlıda. Takip (alt ajan): askıdaki kurumun kullanıcıları eşleşme önerilerinden çıkarılsın + `reapply` askı kontrolü. Y1-B8 KARAR-101'i bekliyor.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #165 + çatı #344 | Y1-B9 (dondurulmuş/reddedilmiş kurum erişemez; KVKK hakları açık) | ok:true, db:up ×2, site 200 |
 | backend #163 + çatı #342 | F-18 (KPI CSV dışa aktarımı) | ok:true, db:up, site 200 |
 | backend #161 · #159 + çatı #341 | KR-16 (Prisma CLI imajda, yeni açılış komutu) · IC-12 | ok:true, db:up, site 200 (3 ardışık) |
 | çatı #339 | AN-10 (mentör yazımı) | ok:true, db:up, site 200 |
@@ -27,7 +28,6 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (941 test) | ✅ ONAY (2. tur) | PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
-| backend #165 + çatı #344 | Y1-B9 dondurulmuş/reddedilmiş kurum erişemez · 🟢+7b (auth; K5-Y1, kuyrukta satırsız) | yeşil (955 test) | ek düzeltme: KVKK veri hakları uçları askıdan muaf tutuluyor → sonra 7b | 7b ONAY → merge → re-bump |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı · 🟢+7b (auth) | yeşil | **SORUN VAR (ürün):** Bekleme Odası kimseye açılmaz | **KARAR-101** (A: olduğu gibi · B: bekleme odası açık, iç uçlar kapalı) |
 | backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim · kuyrukta 🔵 (içerik migration'sız) | yeşil | ✅ ONAY | kapı yeniden değerlendirilmeli; 🟢'ye çekilirse #162 → re-bump → #340 |
 | backend #160 | AN-02 seed metin yazımı · 🔵 KARAR-99 | koşuyor | gerekmiyor (yalnız metin) | PO EVET + `Question`/`SjtQuestion` yedeği + 2 satır UPDATE |
@@ -48,6 +48,7 @@
 **PO'ya sorular:** ⭐ **KARAR-101** (güvenlik açığı B8 nasıl kapansın — Bekleme Odası kalsın mı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100 (gerekçesiz değer).
 
 **Strateji katmanına not:**
+- (Y1-B9 7b takipleri) frontend `isSuspended`'ı okumuyor (askı ekranı yok, kullanıcı her sayfada ayrı hata görür) · süper-yönetici reddinden sonra onay vermek erişimi açmıyor (ayrıca aktif etmek gerekiyor) · reddedilen kurumun tek yöneticisi hesabını kapatamıyor (SON_ADMIN). Backend takipleri (eşleşme önerileri, reapply) ajan tarafından yapılıyor.
 - (K5-Y1) `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md`: B8 + B9 güvenlik açıkları kuyrukta satırsızdı → ajan K5-Y1 gereği "Y1-B8" / "Y1-B9" kod adlarıyla PR açıyor (kuyruğa satır EKLENMEDİ; satır açmak sizde). D8 (09-DURUM bayat) tur kapanışındaki belge senkronunda ele alınacak.
 - (F-18 7b) Kurum-içi rol sayımları hâlâ `User.role`'den (KPI servisi + G1-18) — CLAUDE.md kuralı `TenantMembership.role`; kuyrukta satırı yok.
 - (P-05) Kuyrukta 🔵 ama uygulama migration/seed/canlı veri İÇERMİYOR (KARAR-22 B: jenerik metin). 7b ONAY'lı ve CI yeşil — kapı 🟢'ye çekilirse ajan merge eder.
