@@ -1,3 +1,6 @@
+> 🔄 YAŞAYAN — klasör dizini; klasöre belge eklenince güncellenir.
+> TÜR: 🔄 · SON DOĞRULAMA: 2026-09-26 (YN-11 ile etiket eklendi) · TAZELEME TETİKLEYİCİSİ: `panel/` klasörüne belge eklenince/taşınınca
+
 # panel/ — INDEX + ÇAPRAZ ATIFLAR
 
 Bu klasör: platform ↔ tenant admin panel envanteri + strateji (kardeş çiftler) (KONU ekseni).

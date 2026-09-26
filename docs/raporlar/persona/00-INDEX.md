@@ -1,3 +1,6 @@
+> 🔄 YAŞAYAN — klasör dizini; klasöre belge eklenince güncellenir.
+> TÜR: 🔄 · SON DOĞRULAMA: 2026-09-26 (YN-11 ile etiket eklendi) · TAZELEME TETİKLEYİCİSİ: `persona/` klasörüne belge eklenince/taşınınca
+
 # persona/ — INDEX + ÇAPRAZ ATIFLAR
 
 Bu klasör: menti/mentör/yönetici persona + sevdirme/metrik belgeleri (KONU ekseni).
