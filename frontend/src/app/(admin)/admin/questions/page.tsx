@@ -126,8 +126,11 @@ export default function QuestionsPage() {
     }
   }
 
-  const globalQuestions  = data?.items.filter((q) => q.tenantId === null) ?? [];
-  const tenantQuestions  = data?.items.filter((q) => q.tenantId !== null) ?? [];
+  // E-3c: yönetici yanıtı DISC havuzunu (items) ve kurum STK sorularını (stkQuestions) ayrı taşır.
+  // Ayrım tenantId'ye göre: null/eksik → sistem sorusu (düzenlenemez — güvenli taraf), dolu → kuruma özel.
+  const listedQuestions  = [...(data?.items ?? []), ...(data?.stkQuestions ?? [])];
+  const globalQuestions  = listedQuestions.filter((q) => q.tenantId == null);
+  const tenantQuestions  = listedQuestions.filter((q) => q.tenantId != null);
   const hiddenQuestions  = hiddenData?.items ?? [];
 
   return (
