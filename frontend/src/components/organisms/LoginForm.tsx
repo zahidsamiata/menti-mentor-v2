@@ -24,7 +24,7 @@ import { useFormState } from '@/hooks/useFormState';
 import { authApi } from '@/lib/api/auth';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
 import { resolveLoginError } from '@/lib/loginMessages';
-import { storePendingCorrectionNote } from '@/lib/pendingCorrectionNote';
+import { clearPendingCorrectionNote, storePendingCorrectionNote } from '@/lib/pendingCorrectionNote';
 
 interface LoginFormProps {
   /** OAuth düğmeleri için tenant slug (URL'den okunur) */
@@ -69,6 +69,7 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
   const onSubmit = async (values: LoginFormValues) => {
     try {
       const userData = await login(values);
+      clearPendingCorrectionNote();
       // PENDING kullanıcıya JWT verilmediğinden /pending-approval'da user=null olur;
       // e-postayı query ile taşı ki kendi adresini görebilsin (U-07).
       const target = getSmartRedirect(userData);
@@ -89,6 +90,7 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
       }
       // REDDEDİLDİ: gerekçe + tekrar-başvuru ekranı (giriş bilgileri formda duruyor → reapply için kullanılır).
       if (e.code === 'HESAP_REDDEDILDI') {
+        clearPendingCorrectionNote();
         setRejected({ reason: e.rejectionReason ?? null });
         return;
       }
