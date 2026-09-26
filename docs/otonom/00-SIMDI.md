@@ -1,16 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 18:54 UTC · çatı main HEAD `ce0477a` · backend main HEAD `0deb76b` (canlı pointer `b6418c2`)
+**Son güncelleme:** 2026-09-26 18:57 UTC · çatı main HEAD `96be884` · backend main HEAD `60715c7` (canlı pointer `b6418c2`)
 
 **Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
 
-**Şu an yapılan:** Şerit 1 (alt ajan): AN-26 (🔵, backend #157 açıldı). Şerit 2: IC-11 backend #158 + çatı #338 CI → #158 merge → #338 pointer re-bump (Y-02 #156 dahil) → merge → canlı kontrol.
+**Şu an yapılan:** Şerit 1 (alt ajan): AN-26 7b düzeltme turu. Şerit 2: IC-11 çatı #338 pointer `60715c7`'ye re-bump (IC-11 #158 + Y-02 #156) → CI → merge → canlı kontrol.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
-| backend #156 | Y-02 (platform okuma denetim izi) | #338 pointer'ıyla çıkacak |
+| backend #156 · #158 | Y-02 (platform okuma denetim izi) · IC-11 (backend metinler) | #338 pointer'ıyla çıkacak |
 | backend #152 + çatı #335 | GV-19 (şifre değiştirme) + AN-09 (#155) | ok:true, db:up, site 200 |
 | backend #153 · #154 + çatı #336 | PS-09 · KR-21 (pointer → `3f76c7b`) | ok:true, db:up, site 200 |
 | çatı #334 | YN-13 (kişi adı) | belge işi |
@@ -23,8 +23,8 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| backend #158 + çatı #338 | IC-11 tek terim "görüşme" · 🟢 | koşuyor | gerekmiyor | CI → #158 merge → #338 re-bump (+Y-02) → merge |
-| backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (923 test) | sürüyor | 7b ONAY + PO EVET + `Conversation` yedeği |
+| çatı #338 | IC-11 (frontend) + pointer `60715c7` (IC-11 #158 · Y-02 #156) · 🟢 | koşuyor | gerekmiyor | CI → merge → canlı kontrol |
+| backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil | **SORUN VAR** → düzeltme sürüyor | 7b ONAY + PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
 | backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
 | backend #148 + çatı #326 | U-18 · 🔵 KARAR-97 | yeşil | ✅ ONAY (2. tur) | PO EVET + `Conversation` yedeği (DB erişimi gerekir) |
 | backend #142 + çatı #320 | AN-30 · 🔵 KARAR-96 · ⛔ çıkış blokeri | yeşil | ✅ ONAY (2. tur) | PO EVET + `Consent` yedeği (DB erişimi gerekir) |
