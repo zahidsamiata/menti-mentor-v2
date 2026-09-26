@@ -1,7 +1,7 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ).
 
-**Son güncelleme:** 2026-09-26 18:25 UTC · çatı main HEAD `572c75e` · backend main HEAD `d87b227`
+**Son güncelleme:** 2026-09-26 18:26 UTC · çatı main HEAD `86ed188` · backend main HEAD `d87b227`
 
 **Durum:** ÇALIŞIYOR
 
@@ -10,6 +10,7 @@
 **Son merge'ler (bu turda, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) | ok:true, db:up, site 200 |
 | çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) | ok:true, db:up, site 200 |
 | çatı #330 | KR-22 (verify.sh ↔ CI) | ok:true, db:up |
 | backend #143 · #145 · #150 + çatı #329 | PS-A1 · GV-08 · KR-14 (pointer `cde7bb8`→`d87b227`) | ok:true, db:up, smtp:verified, cron:enabled, site 200 (uptime 26 sn — yeni dağıtım) |
@@ -22,7 +23,6 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) · 🟢 | koşuyor | gerekmiyor (yalnız metin) | CI bekleniyor → merge |
 | çatı #334 | YN-13 (kişi adı — yasal metin dışı 3 geçiş) · 🟢 | koşuyor | gerekmiyor | CI bekleniyor → merge |
 | backend #153 | PS-09 (skorlama vakaları CI'da) · 🟢 | koşuyor | gerekmiyor (yalnız test) | CI → merge → pointer |
 | backend #151 + çatı #332 | IC-08 (onay bekleyene düzeltme notu) · 🟢+7b (auth) | yeşil | ✅ ONAY (5848715616 / 5848715830) | ⛔ #151 merge sınıflandırıcı reddi (Engeller) → #332 pointer re-bump bekliyor |
