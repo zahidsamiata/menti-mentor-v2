@@ -25,11 +25,13 @@ import { apiClient, refreshCallbackRef } from '@/lib/api/client';
 import { toTenantBranding } from '@/lib/sessionTenant';
 import { clearQueryCache, setQueryCacheScope } from '@/lib/queryCache';
 import type { TenantBranding } from '@/types/tenant';
+import type { TenantVerificationStatus } from '@/lib/api/selfServe';
 import type {
   AuthContextValue,
   AuthUser,
   LoginCredentials,
   LoginResponse,
+  LoginResult,
   RefreshResponse,
 } from '@/types/auth';
 
@@ -144,7 +146,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // ── Giriş ───────────────────────────────────────────────────────────────
 
-  const login = useCallback(async (credentials: LoginCredentials): Promise<LoginResponse['user']> => {
+  const login = useCallback(async (credentials: LoginCredentials): Promise<LoginResult> => {
     const result = await apiClient<LoginResponse>('/api/auth/login', {
       method: 'POST',
       body: credentials,
@@ -170,7 +172,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(userData as AuthUser);
     setTenant(toTenantBranding(result.data.tenant));
     scheduleTokenRefresh(expiresIn);
-    return userData;
+
+    // AJ-35: kurum yöneticisi sonradan giriş yaptığında kurumunun başvuru durumunu (inceleniyor /
+    // reddedildi) görebilsin diye durumu oku. Login yanıtı bu alanı taşımaz; `/api/auth/me` askı
+    // kapısından muaftır (reddedilen kurumda da yanıt verir) ve kurumu oturumdan alır (IDOR yok).
+    if (userData.role !== 'ADMIN') return userData;
+    const meResult = await apiClient<{ tenant: { verificationStatus: TenantVerificationStatus } | null }>(
+      '/api/auth/me',
+      { token: newToken, tenantId: userData.tenantId },
+    );
+    const tenantVerificationStatus = meResult.ok ? (meResult.data.tenant?.verificationStatus ?? null) : null;
+    return { ...userData, tenantVerificationStatus };
   }, [scheduleTokenRefresh]);
 
   // ── OAuth token ile giriş (Google / LinkedIn callback) ──────────────────

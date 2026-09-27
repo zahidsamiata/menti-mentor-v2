@@ -27,6 +27,7 @@ import { resolveLoginError } from '@/lib/loginMessages';
 import { clearPendingCorrectionNote, storePendingCorrectionNote } from '@/lib/pendingCorrectionNote';
 import { clearPendingApprovalEmail, storePendingApprovalEmail } from '@/lib/pendingApprovalEmail';
 import { UI_TEXT } from '@/lib/uiText';
+import type { TenantVerificationStatus } from '@/lib/api/selfServe';
 
 interface LoginFormProps {
   /** OAuth düğmeleri için tenant slug (URL'den okunur) */
@@ -36,13 +37,27 @@ interface LoginFormProps {
 // Giriş sonrası akıllı yönlendirme (dokümandaki durum tablosuna birebir uyar):
 //   status PENDING  → /pending-approval  (backend 403 → catch bloğu yakalar)
 //   status APPROVED → rol bazlı:
-//     ADMIN   → /admin/waiting-room
+//     ADMIN   → kurum başvurusu inceleniyor/reddedildi ise /onboarding/stk/pending-review (AJ-35),
+//               değilse /admin/waiting-room
 //     MENTOR  → discType yoksa /onboarding (8-soru DISC), varsa /mentor
 //     MENTI   → discType yoksa /onboarding (8-soru DISC), varsa /menti
 // Not: Platform admin (/platform) ayrı endpoint'ten giriş yapar; buradan yönlendirilmez.
-function getSmartRedirect(user: { role: string; approvalStatus: string; discType: string | null }): string {
+function getSmartRedirect(user: {
+  role: string;
+  approvalStatus: string;
+  discType: string | null;
+  tenantVerificationStatus?: TenantVerificationStatus | null;
+}): string {
   if (user.approvalStatus === 'PENDING') return '/pending-approval';
-  if (user.role === 'ADMIN') return '/admin/waiting-room';
+  if (user.role === 'ADMIN') {
+    // AJ-35: eskiden kurum durum ekranı yalnız kayıt anında açılıyordu; sonradan giriş yapan
+    // yönetici "inceleniyor/reddedildi" bilgisini göremiyordu. Düzeltme istenen kurum panele
+    // gider (düzeltme formu panel bandında — TenantCorrectionBanner).
+    if (user.tenantVerificationStatus && TENANT_REVIEW_SCREEN_STATUSES.includes(user.tenantVerificationStatus)) {
+      return TENANT_REVIEW_PATH;
+    }
+    return '/admin/waiting-room';
+  }
   // /disc-test = adaptif Likert (mevcut kullanıcı). Yeni kullanıcı (discType=null) → /onboarding.
   if (!user.discType) return '/onboarding';
   if (user.role === 'MENTOR') return '/mentor';
@@ -53,6 +68,11 @@ function getSmartRedirect(user: { role: string; approvalStatus: string; discType
 // PENDING kullanıcının token'ı olmadığından e-postayı bekleme ekranına biz taşırız (U-07).
 // AJ-24: URL'ye (`?email=`) konmaz — adres geçmişe/erişim günlüğüne düşmesin; yalnız sekme belleği.
 const PENDING_APPROVAL_PATH = '/pending-approval';
+
+/** Kurum başvuru durum ekranı (kayıt sonrası da buraya gidilir — Step4Account). */
+const TENANT_REVIEW_PATH = '/onboarding/stk/pending-review';
+/** Yöneticiyi panel yerine durum ekranına götüren kurum durumları. */
+const TENANT_REVIEW_SCREEN_STATUSES: readonly TenantVerificationStatus[] = ['PENDING_REVIEW', 'REJECTED'];
 
 const INITIAL: LoginFormValues = { email: '', password: '' };
 
