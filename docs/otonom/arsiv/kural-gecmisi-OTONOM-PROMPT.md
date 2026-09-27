@@ -214,7 +214,7 @@ UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 K
 OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB).
 ```
 
-## 7b MERGE ŞARTLARI · (a) maddesi · eski satır 322-323 · taşındı 2026-09-27 (mutasyon kutusu istisnası eklendi, 7b #381 S5)
+## 7b MERGE ŞARTLARI · (a) maddesi · eski satır 294-295 (main) · taşındı 2026-09-27 (mutasyon kutusu istisnası eklendi, 7b #381 S5)
 
 ```text
  (a) Bölüm 6 kutuları tam — "auth/KVKK/matching dosyalarına dokunulmadı" maddesi HARİÇ
