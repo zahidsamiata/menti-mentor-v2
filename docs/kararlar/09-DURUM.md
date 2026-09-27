@@ -1,3 +1,5 @@
+> ⚠️ 2026-09-20'den beri güncellenmiyor. Güncel durum: docs/otonom/00-SIMDI.md + 00-KUYRUK.md. Genel belge taraması ileride yapılacak (PO).
+
 > 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
 > TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: her tur kapanışı (OTONOM-PROMPT § 13.2)
 

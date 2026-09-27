@@ -55,6 +55,9 @@ Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>
    Güvenli olanlar: ~~`seed-questions`~~ (silindi 2026-08-23, bkz. :263 — § CANLI = LOKAL AYNI DB), `seed-learning-journey`, `seed-certification`, `seed-test-tenant`
    — bunlar da yalnız KARAR evet + yedek sonrası.
 
+## ⭐ PO KARARLARI 2026-09-26 — K-A arşive taşı · K-B · K-C ajan-ekledi
+Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
+
 ## ⭐ KARAR AYRIMI — neyi sorma, neyi sor
 **SEN KARAR VER, SORMA (teknik):** kütüphane · dosya/klasör yapısı · isimlendirme · state yönetimi ·
 test yöntemi · refaktör kapsamı · hata mesajı metni · renk paleti · hizalama · index/performans · çeviri
@@ -193,12 +196,12 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **Dürüst pushback**: yanlış/riskli görüneni söyle; testi/CI'ı yeşil GÖSTERME — gerçek durumu ver.
 
 ## 📁 Proje Hafızası — nereye bakılır
-- **Güncel durum (canonical, ŞU AN): docs/kararlar/09-DURUM.md** — her oturum başında oku.
+- **Güncel durum (canonical, ŞU AN): `docs/otonom/00-SIMDI.md` + `docs/otonom/00-KUYRUK.md`** — her oturum başında oku. (09-DURUM 2026-09-20'den beri güncellenmiyor — PO 2026-09-26.)
 - Genel tanıtım (dondurulmuş onboarding): docs/arsiv/PROJECT_STATUS.md — güncel durum İÇİN DEĞİL (bkz. 09-DURUM). ⚠️ GÜNCELLEME (2026-08-28, G9-09): kökten `docs/arsiv/`'e taşındı; güncel durum canonical = `docs/kararlar/09-DURUM.md`.
 - Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
 - Geçmiş raporlar: docs/raporlar/
 - **PO'nun elle yapacakları (kod dışı: Dokploy/SMTP/Neon/env): docs/otonom/03-PO-ELLE-ISLER.md** — ⚠️ GÜNCELLEME (2026-09-19): W+X denetimlerinden çıkan, kodla çözülemeyen işler burada; ajan bunları kuyruğa yazmaz, PO tek tek yapar.
-- Yeni bir işe başlarken: önce docs/kararlar/09-DURUM.md oku (nerede kaldık).
+- Yeni bir işe başlarken: önce `docs/otonom/00-SIMDI.md` + `00-KUYRUK.md` oku (nerede kaldık).
 
 ## Push Öncesi — ZORUNLU
 - **Her push öncesi `npm run verify` koş.** Yeşil değilse push yok.
@@ -337,7 +340,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 > Amaç: alınan ama uygulanmayan kararlar, yarım işler ve bağlanmamış (ölü) kod görünür kalsın; ürün sahibi
 > canlıda eksik keşfetmesin. Tek canonical: `docs/kararlar/00-KARAR-TAKIP.md` (🔄 açık iş/karar/ölü-kod takibi).
 
-- **KURAL 1 — Oturum başında OKU + hatırlat (proaktif):** Her yeni oturumun İLK adımı `00-KARAR-TAKIP.md`'yi okumak
+- **KURAL 1 — Oturum başında OKU + hatırlat (proaktif):** *(PO 2026-09-26: 00-KARAR-TAKIP 2026-09-20'den beri güncellenmiyor → açık iş için `docs/otonom/00-SIMDI.md` + `00-KUYRUK.md` okunur.)* Her yeni oturumun İLK adımı `00-KARAR-TAKIP.md`'yi okumak
   ve ürün sahibine **açık maddeleri** (🔴/🟡/🔵/❓) kısaca hatırlatmaktır. Ürün sahibi "arkada ne kaldı?" diye
   sormak zorunda kalmamalı — ajan proaktif söyler.
 - **KURAL 2 — Tur sonunda GÜNCELLE (zorunlu bitiş adımı):** Her BYPASS (iş yapan) tur bitişinde `00-KARAR-TAKIP.md`
