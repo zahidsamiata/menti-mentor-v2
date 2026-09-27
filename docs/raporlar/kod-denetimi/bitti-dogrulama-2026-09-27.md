@@ -263,3 +263,273 @@
 - Envanter: `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/00-envanter.md`
 - Partiler (ayrıntı: her işin (1)-(4) adımları): `parti-01.md` … `parti-11.md` (01-04 opus R1 · 05-11 sonnet R2/R3)
 - Kalite kontrol: `kalite-kontrol-QA.md` (✅-dışı) · `QB`/`QC` (R1 ✅) · `QD` (R2/R3 örneklem) · `QE1`-`QE5` (çürüyen partilerin ve parti 08'in kalan ✅'leri) — hepsi opus, partileri yapmayan denetçi.
+
+## GÖREV B — belge kapanış senkronu (2026-09-27, aynı gün eki)
+
+> Bu bölüm GÖREV B tamamlanınca eklendi (aynı oturum). Dal `otonom/BELGE-SENKRON-20260927`.
+
+### B.0 — dondurulmuş belge listesi
+Kural: `docs/` altında (`docs/arsiv/`, `docs/otonom/arsiv/` hariç) ilk 5 satırında 📸 ya da "DONDURULDU/donduruldu" geçen belgeler + adıyla dondurulmuş `docs/kararlar/10-yol-haritasi.md`, `docs/kararlar/00-CIKIS-PLANI.md`. **Ek (7b inceleme #379):** `docs/kararlar/00-KART-INDEKSI.md` — 📸 damgası 7. satırda ("durum tutmaz, güncellenmez", "Burada durum değiştirilmez") → dondurulmuş sayıldı; ilk uygulamadaki 25 satırlık işaret geri alındı, kayıtları eşleme tablosuna taşındı. Diğer yaşayan belgelerin 6-15. satırlarında geçen 📸/dondurul ifadeleri etiket değil, kavram anlatımı (kontrol edildi). Sayım (dal tabanı `c648ed2`): toplam 203 belge → **dondurulmuş 154** · yaşayan 49. `00-KUYRUK.md`, `00-KARAR-TAKIP.md`, `09-DURUM.md` dondurulmuş DEĞİL.
+<details><summary>Dondurulmuş belgelerin tam listesi (154)</summary>
+
+- `docs/devir/00-INDEX.md`
+- `docs/devir/01-felsefe-ve-calisma-tarzi.md`
+- `docs/devir/02-proje-durumu.md`
+- `docs/devir/03-kvkk-is-paketi.md`
+- `docs/devir/04-13-admin-bulgusu.md`
+- `docs/devir/05-bekleyen-kararlar-ve-manuel.md`
+- `docs/devir/06-devir-kilavuzu.md`
+- `docs/devir/08-oturum-tezi-2026-08-28.md`
+- `docs/devir/gunluk/oturum-2026-08.md`
+- `docs/devir/gunluk/oturum-2026-09.md`
+- `docs/kararlar/00-CIKIS-PLANI.md`
+- `docs/kararlar/10-yol-haritasi.md`
+- `docs/kararlar/dokploy-foto-volume-talimati.md`
+- `docs/kararlar/oz-denetim/belge-aksiyon-denetimi-2026-08-11.md`
+- `docs/kararlar/oz-denetim/belge-denetimi-2026-08-10.md`
+- `docs/kararlar/oz-denetim/belge-temizlik-haritasi-2026-08-14.md`
+- `docs/kararlar/oz-denetim/durum-panosu-2026-08-14.md`
+- `docs/kararlar/oz-denetim/karar-statu-haritasi-2026-08-14.md`
+- `docs/kararlar/oz-denetim/stk-admin-bulgu-envanteri-2026-08-11.md`
+- `docs/kararlar/oz-denetim/unutulmus-niyet-envanteri-2026-08-10.md`
+- `docs/kararlar/sertifika-soru-standardi-gerekce-2026-09-21.md`
+- `docs/raporlar/bilanco/belge-bilancosu-2026-08-26.md`
+- `docs/raporlar/bilanco/bilanco-po-ozet-2026-08-26.md`
+- `docs/raporlar/bilanco/bolumler/T1-A-canonical.md`
+- `docs/raporlar/bilanco/bolumler/T1-B1-kararlar-kok.md`
+- `docs/raporlar/bilanco/bolumler/T1-B2-kararlar-konu.md`
+- `docs/raporlar/bilanco/bolumler/T1-B3-kararlar-ozdenetim.md`
+- `docs/raporlar/bilanco/bolumler/T2-A-raporlar-kok.md`
+- `docs/raporlar/bilanco/bolumler/T2-B-kesif.md`
+- `docs/raporlar/bilanco/bolumler/T2-C-kod-denetimi.md`
+- `docs/raporlar/bilanco/bolumler/T2-D-panel-persona.md`
+- `docs/raporlar/bilanco/bolumler/T2-E-icerik.md`
+- `docs/raporlar/bilanco/bolumler/T3-A-oturum-gunlugu.md`
+- `docs/raporlar/bilanco/bolumler/T3-B-devir-diger.md`
+- `docs/raporlar/bilanco/bolumler/T3-C-calisma-tarzi.md`
+- `docs/raporlar/bilanco/bolumler/T3-D-tur1-denklestirme.md`
+- `docs/raporlar/bilanco/bolumler/T4-A1-arsiv-erken.md`
+- `docs/raporlar/bilanco/bolumler/T4-A2-arsiv-strateji.md`
+- `docs/raporlar/bilanco/bolumler/T4-A3-arsiv-katmanlar.md`
+- `docs/raporlar/bilanco/karar-defteri-2026-08-26.md`
+- `docs/raporlar/bilanco/kararlar/00-KATLAMA-IZI-2026-08-27.md`
+- `docs/raporlar/bilanco/kararlar/00-OKUMA-REHBERI-2026-08-27.md`
+- `docs/raporlar/bilanco/kararlar/00-ONCELIK-SIRASI-2026-08-28.md`
+- `docs/raporlar/bilanco/kararlar/00-PO-KARARLARI-2026-08-27.md`
+- `docs/raporlar/bilanco/kararlar/00-SAYIM-2026-08-27.md`
+- `docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md`
+- `docs/raporlar/bilanco/kararlar/G10-olu-kod-terk.md`
+- `docs/raporlar/bilanco/kararlar/G11-urun-stratejisi.md`
+- `docs/raporlar/bilanco/kararlar/G2-eslestirme-psikometri.md`
+- `docs/raporlar/bilanco/kararlar/G3-icerik.md`
+- `docs/raporlar/bilanco/kararlar/G4a-panel-akis.md`
+- `docs/raporlar/bilanco/kararlar/G4b-panel-akis.md`
+- `docs/raporlar/bilanco/kararlar/G5-bildirim-mail.md`
+- `docs/raporlar/bilanco/kararlar/G6-veri-modeli-borc.md`
+- `docs/raporlar/bilanco/kararlar/G7-ux-tasarim.md`
+- `docs/raporlar/bilanco/kararlar/G8-altyapi-po-manuel.md`
+- `docs/raporlar/bilanco/kararlar/G9-belge-surec.md`
+- `docs/raporlar/bilanco/tekrar-onleme-2026-08-26.md`
+- `docs/raporlar/icerik/arketip-ve-yaklasim-icerigi-2026-09-03.md`
+- `docs/raporlar/icerik/bolumler/01-disc.md`
+- `docs/raporlar/icerik/bolumler/02-sjt.md`
+- `docs/raporlar/icerik/bolumler/03-sertifika.md`
+- `docs/raporlar/icerik/bolumler/04-ogrenme-kurumozel.md`
+- `docs/raporlar/icerik/bolumler/05-felsefe-motoru.md`
+- `docs/raporlar/icerik/eslesme-uyum-po-inceleme-2026-08-26.md`
+- `docs/raporlar/icerik/faz6-ogrenme-ve-sertifika-2026-09-03.md`
+- `docs/raporlar/icerik/menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md`
+- `docs/raporlar/icerik/senaryo-bankasi-2026-09-03.md`
+- `docs/raporlar/icerik/sertifika-oturum1-4-kritik-konu-2026-09-08.md`
+- `docs/raporlar/icerik/sertifika-oturum2-3-konu-2026-09-08.md`
+- `docs/raporlar/icerik/sertifika-oturum3-4-konu-2026-09-08.md`
+- `docs/raporlar/icerik/sorular-po-inceleme-2026-08-26.md`
+- `docs/raporlar/icerik/tam-soru-dokumu-2026-08-26.md`
+- `docs/raporlar/kesif/00-ANALIZ-TURU-OZETI-2026-09-23.md`
+- `docs/raporlar/kesif/belge-mimarisi-ve-merge-cozumu-onerileri-2026-08-19.md`
+- `docs/raporlar/kesif/bitti-yeniden-denetim-2026-09-26.md`
+- `docs/raporlar/kesif/depo-denetimi-2026-08-02.md`
+- `docs/raporlar/kesif/devir-analizi-2026-09-21.md`
+- `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md`
+- `docs/raporlar/kesif/eslestirme-motoru-kesfi-2026-08-27.md`
+- `docs/raporlar/kesif/faz5-onkosul-kesfi-2026-09-04.md`
+- `docs/raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md`
+- `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`
+- `docs/raporlar/kesif/gelen-kutusu-envanteri-2026-09-23.md`
+- `docs/raporlar/kesif/gerekcesiz-kalem-taramasi-2026-09-26.md`
+- `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md`
+- `docs/raporlar/kesif/hayalet-backend-2026-08-02.md`
+- `docs/raporlar/kesif/hayalet-envanter-2026-09-19.md`
+- `docs/raporlar/kesif/icerik-kalitesi-2026-09-23.md`
+- `docs/raporlar/kesif/icerik-mutabakati-2026-09-23.md`
+- `docs/raporlar/kesif/icerik-onkosul-kesifleri-2026-09-03.md`
+- `docs/raporlar/kesif/icerik-tam-okuma-2026-09-23.md`
+- `docs/raporlar/kesif/kapasite-analizi-2026-08-02.md`
+- `docs/raporlar/kesif/kart-havuz-backend-envanteri-2026-08-02.md`
+- `docs/raporlar/kesif/katilim-modeli-mevcut-durum-notu-2026-08-02.md`
+- `docs/raporlar/kesif/kod-inceleme-2026-09-24.md`
+- `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md`
+- `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`
+- `docs/raporlar/kesif/konsey-icerik-2026-09-21.md`
+- `docs/raporlar/kesif/konsey-icerik-kalitesi-E-arastirma-brifleri-2026-09-23.md`
+- `docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`
+- `docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`
+- `docs/raporlar/kesif/konu-bilanco-denetimi-2026-09-23.md`
+- `docs/raporlar/kesif/mentor-karti-rakip-analizi-2026-08-02.md`
+- `docs/raporlar/kesif/negatif-test-boslugu-2026-09-26.md`
+- `docs/raporlar/kesif/oksuz-bulgu-sayimi-2026-09-23.md`
+- `docs/raporlar/kesif/operasyonel-hazirlik-2026-09-19.md`
+- `docs/raporlar/kesif/panel-denetimi-mentor-menti-2026-09-19.md`
+- `docs/raporlar/kesif/persona-panel-gelisimi-2026-09-23.md`
+- `docs/raporlar/kesif/po-cikis-kilavuzu-2026-09-21.md`
+- `docs/raporlar/kesif/profil-envanteri-2026-08-29.md`
+- `docs/raporlar/kesif/sema-drift-2026-08-30.md`
+- `docs/raporlar/kesif/tema-durum-ve-landing-maliyeti-2026-08-02.md`
+- `docs/raporlar/kesif/teshis-raporu-2026-08-02.md`
+- `docs/raporlar/kesif/uctan-uca-kurum-yolculugu-2026-09-19.md`
+- `docs/raporlar/kesif/yetki-haritasi-2026-08-29.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/00-envanter.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QA.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QB.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QC.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QD.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QE1.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QE2.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QE3.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QE4.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/kalite-kontrol-QE5.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-01.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-02.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-03.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-04.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-05.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-06.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-07.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-08.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-09.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-10.md`
+- `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/parti-11.md`
+- `docs/raporlar/kod-denetimi/degerlendirme-test-soru-envanteri-2026-08-15.md`
+- `docs/raporlar/kod-denetimi/eksikler-derinlestirilmis-2026-08-15.md`
+- `docs/raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`
+- `docs/raporlar/kod-denetimi/proje-analizi-kapsamli-denetim-2026-08-22.md`
+- `docs/raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md`
+- `docs/raporlar/kod-denetimi/tam-belge-taramasi-2026-08-23.md`
+- `docs/raporlar/kod-denetimi/tam-envanter-gercek-durum-2026-08-19.md`
+- `docs/raporlar/kod-denetimi/yarim-is-niyet-envanteri-2026-08-23.md`
+- `docs/raporlar/panel/platform-admin-panel-envanteri-2026-08-02.md`
+- `docs/raporlar/panel/platform-admin-strateji-2026-08-02.md`
+- `docs/raporlar/panel/stk-yonetici-panel-envanteri-2026-08-02.md`
+- `docs/raporlar/panel/stk-yonetici-strateji-2026-08-02.md`
+- `docs/raporlar/persona/menti-persona-ve-sevdirme-2026-08-02.md`
+- `docs/raporlar/persona/mentor-persona-ve-sevdirme-2026-08-02.md`
+- `docs/raporlar/persona/yonetici-persona-ve-metrikler-2026-08-02.md`
+- `docs/kararlar/00-KART-INDEKSI.md`
+
+</details>
+
+**Yaşayan ama B'de düzenlenmeyenler (gerekçe):** `docs/otonom/01-KARARLAR.md` (PO kararı — dokunma yasağı) · `docs/otonom/00-SIMDI.md`, `docs/otonom/02-ILERLEME.md`, `docs/devir/07-oturum-gunlugu.md` (günlük/anlık kayıt; geçmiş olay metni kapatılmaz) · `docs/otonom/00-KUYRUK.md` (BITTI kaydının kendisi; aktif satırlar BITTI değil) · `docs/kararlar/konu/kvkk-metinleri/*` (hukuki metin, iş durumu taşımaz) · `docs/kararlar/konu/belge-duzeni-rehberi.md`, `rtk-komut-rehberi.md` (kural/rehber). Taranan yaşayan hedef: 32 belge.
+
+### B.1-B.2 — yaşayan belgelerde kapanan yerler
+Tarama: 4 opus salt-okuma alt-ajan (iş kimliği + kuyruk satırındaki atıflar + ayırt edici ifadeler; grep + satır okuma). Uygulama betiği yalnız doğrulama sınıfı KAPAT (✅ 127 + güncel hâli ölçütü karşılayan 🔁 10 + kod ✅ 👁 11 = 148 iş) ve KISMEN (⚠️ 56 + kısmen 🔁 3 = 59 iş) kayıtlarını uyguladı. İşaret biçimi: `✅ yapıldı — <iş> · PR <no> · <tarih> · doğrulama: bitti-dogrulama-2026-09-27` · `🟨 kısmen — <iş>; kalan: <…> → AJ-<no>`. Yerleşim: durum hücresi yalnız salt işaretse (⬜ · 🔵 · 🔴 · 🟡 · ⬜ AÇIK · ⬜ BEKLİYOR) işaretin yerine yazılır; açıklayıcı metin taşıyan hücre/satırda metin KORUNUR, not hemen yanına eklenir (7b #379 bulguları: metin kaybı olmasın). ❌ P-07 ve 👁 GV-09b'ye dokunulmadı. 7b düzeltmeleri: KART-INDEKSI geri alındı (dondurulmuş) · `kod-kalemleri-2026-09-03.md:30` (madde 141) teyite alındı (KARAR-TAKIP:311 ile tutarlı) · eksik PR/tarihler dolduruldu.
+
+| Belge | Değişen satır | ✅ işaret | 🟨 işaret | "⬜/AÇIK/bekliyor/PR'DA" geçen satır: önce → sonra |
+|---|---|---|---|---|
+| `docs/kararlar/00-KARAR-TAKIP.md` | 23 | 16 | 8 | 154 → 153 |
+| `docs/kararlar/09-DURUM.md` | 1 | 1 | 0 | 23 → 24 |
+| `docs/kararlar/konu/06-tasarim-ux.md` | 1 | 1 | 0 | 5 → 5 |
+| `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md` | 1 | 1 | 0 | 48 → 47 |
+| `docs/kararlar/konu/tasarim-kararlari-admin.md` | 1 | 1 | 0 | 10 → 10 |
+| `docs/otonom/03-PO-ELLE-ISLER.md` | 1 | 1 | 0 | 22 → 22 |
+| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md` | 7 | 5 | 2 | 11 → 11 |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md` | 4 | 4 | 0 | 0 → 0 |
+| **Toplam** | **39** | **30** | **10** | |
+
+Not: "önce → sonra" sütunu bu kelimelerden biri geçen satır sayısıdır (kaba ölçü); açıklayıcı durum metni korunduğu için düşüş, işaretlenen yer sayısından azdır. Eski metinler: `docs/arsiv/belge-senkron-2026-09-27.md`.
+
+### B.3 — dondurulmuş belge eşlemesi
+`docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` — **129 satır, 16 belge** (2 sonnet salt-okuma alt-ajan + KART-INDEKSI'nden taşınan 42 kayıt). Dondurulmuş belgelerde değişiklik YOK.
+
+### B.4
+- `00-KARAR-TAKIP.md` ve `09-DURUM.md` ilk satırındaki "⚠️ 2026-09-20'den beri güncellenmiyor…" uyarısı aynen arşive taşındı; yerine "Son senkron: 2026-09-27 (…bitti-dogrulama-2026-09-27.md). Anlık durum: docs/otonom/00-SIMDI.md".
+- `09-DURUM.md` en üste (ters-kronolojik) "⚡ 2026-09-27 — KAPANIŞ SENKRONU: ŞU AN NE DURUMDA" bölümü.
+- `00-KARAR-TAKIP.md`: madde 141 (I-02, "ERTELENDİ" notu) ve madde 164 (sertifika eşiği KARAR-46'ya bağlı) KAPATILMADI → teyit listesinde.
+
+### B.5 — TEYİT listesi (işaretlenmedi)
+**68 kayıt.** Neden: eşleşme belirsiz (belge maddesi işten geniş / başka KARAR'a bağlı / ERTELENDİ notu / çelişkili ifade). (KART-INDEKSI'nin teyitleri eşleme tablosunda "belirsiz" olarak.)
+
+| Belge:satır | İş | Neden |
+|---|---|---|
+| `docs/kararlar/00-KARAR-TAKIP.md:149` | U-19 | mentorVisibilityEnabled 'kablosuz' deniyor; U-19/AN-28 alanı havuzda soluk gösterime bağladı ama alanın yazılıp yazılmadığı ve U-19 kalanı belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:153` | V-05 | Devreden listede k-anonimlik OCEAN uçurumuyla aynı satırda; G1-22 ailesi V-05'ten geniş (P-00 + diğer uçlar). |
+| `docs/kararlar/00-KARAR-TAKIP.md:180` | F-15 | S2 sözü Y1-Y7'nin tümünü kapsıyor; F-15 yalnız Y1 (bekleme anı) ayağı, Y5/Y6 vb. açık. |
+| `docs/kararlar/00-KARAR-TAKIP.md:180` | F-18 | S2 sözü Y1-Y7'nin tümünü kapsıyor; F-18 yalnız Y3 export ayağı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:180` | F-19 | S2 sözü Y1-Y7'nin tümünü kapsıyor; F-19 yalnız Y4 (proaktif kırmızı uyarı). |
+| `docs/kararlar/00-KARAR-TAKIP.md:180` | P-05 | S2 sözü Y1-Y7'nin tümünü kapsıyor; P-05 yalnız Y2'nin ret ayağı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:180` | F-22 | S2 sözü Y1-Y7'nin tümünü kapsıyor; F-22 yalnız Y2'nin kutlama ayağı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:180` | F-24 | S2 sözü Y1-Y7'nin tümünü kapsıyor; F-24 yalnız Y7→Y11 kullanıcı drill ayağı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:192` | K-14 | S19 sunucu/altyapı taraması (HTTPS/firewall/SSH/yedek) K-14'ün kod tarafından geniş; K-14 yalnız limit anahtarı ayağını yaptı (trust proxy yok). |
+| `docs/kararlar/00-KARAR-TAKIP.md:309` | IC-10 | Madde 139 çoklu-arketip metin SEÇİMİ (gösterim, motor bekliyor); IC-10 yalnız eksik 4 menti metnini yazdı (onay bekliyor). |
+| `docs/kararlar/00-KARAR-TAKIP.md:310` | I-02 | Madde 140 kapsamındaki akış sırası I-02 ile yapıldı, ama iki katmanlı kart (beş boyut) motor bekliyor; madde işten geniş. |
+| `docs/kararlar/00-KARAR-TAKIP.md:311` | I-02 | Madde 141 cümlesi + akış sırası I-02 ile yapıldı, ama satır 'ERTELENDİ' notu ve madde 140'a bağlılık taşıyor; PO ek önlemleri (görsel dil, gecikme) belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:314` | K-06 | Madde 144 diğer şıkların gerekçesinin yüklenmemesini 'numara adayı' bırakıyor; K-06 4 şık açıklamasını gösterdi, ama 144'ün 'yalnız seçilen görünür' ilkesiyle ilişkisi belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:322` | AN-05 | Madde 152 eşleşme detay sayfası (FE + 15 kombinasyon içerik); AN-05 yalnız 15/16 kombinasyon metnini yazdı, koda girmedi (KARAR-45). |
+| `docs/kararlar/00-KARAR-TAKIP.md:325` | P-05 | Madde 155 ret akışı (alternatif aynı ekranda + mentör metni); P-05 KARAR-22 B ile nazik ret yaptı, alternatif mentör YOK — madde işten geniş/farklı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:328` | AN-01 | Madde 158 deneme sınırı + bekleme + yolculuk yönlendirmesi; AN-01 yalnız ekrandaki bekleme metnini gerçek kurala uydurdu, kalan süre gösterilmiyor. |
+| `docs/kararlar/00-KARAR-TAKIP.md:332` | PS-02 | Madde 162 üç DISC yolunun birleştirilmesi; PS-02 yalnız onboarding vektörüne confidence ekledi, buildDiscVector/yol birleştirmesi ve DB teyidi belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:334` | I-04 | Madde 164 eşik >=2 (backend #71) I-04 notunda 'zaten kodda' diye anılıyor; madde başka iş (PR #71) ve seed blokerlerine bağlı, I-04 kapsamı değil. |
+| `docs/kararlar/00-KARAR-TAKIP.md:350` | Y-16 | Sektör/etiket havuzu satırında talep-onay akışı Y-16 ile ekranda, ama başlangıç havuzu (seed/admin tablo, KARAR 12) ayağı ayrı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:351` | GV-18 | K3 eski kayıt rıza politikası PO ürün/hukuk kararı; GV-18 sürüm değişince yeniden onay mekanizmasını ekledi, politika kararı karşılanmış mı belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:395` | P-05 | Y2 ret yumuşatma + küçük başarı kutlaması iki ayak; P-05 ret ayağını alternatifsiz yaptı (KARAR-22 B). |
+| `docs/kararlar/00-KARAR-TAKIP.md:395` | F-22 | Y2 ret yumuşatma + kutlama iki ayak; F-22 kutlama kartını yaptı (LinkedIn bağlantısı sabit alan adı, kalan AJ-23). |
+| `docs/kararlar/00-KARAR-TAKIP.md:396` | F-18 | Y3 rapor export + ivme/oran metrikleri; F-18 yalnız KPI CSV export'unu yaptı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:403` | F-24 | Y11 3. seviye kullanıcı drill Y9/Y10 üstüne derinleştirme olarak tanımlı; F-24 platform tek-kullanıcı detay ucunu ekledi. |
+| `docs/kararlar/00-KARAR-TAKIP.md:489` | U-19 | Satır profile-completeness servisi + ProfileStrengthCard dashboard kartını anıyor; U-19 servisi eşleştirmeye bağladı ama ProfileStrengthCard hâlâ mount edilmemiş, madde işten geniş. |
+| `docs/kararlar/00-KARAR-TAKIP.md:494` | E-3e | Okuma-tarafı boşlukları satırı altı ayrı ucu anıyor; E-3e yalnız check-in/değerlendirme okumasını bağladı, diğer uçlar (GET /requests, /meetings/active, orientation-lock, questions/respond) kapsam dışı. |
+| `docs/kararlar/00-KARAR-TAKIP.md:524` | AN-44 | Madde üç belgeyi anıyor (durum-panosu, tasarim-kararlari-admin, degerlendirme-metrik); AN-44 yalnız tasarim-kararlari-admin adını tarihsizleştirdi. |
+| `docs/kararlar/00-KARAR-TAKIP.md:563` | GV-18 | madde 82 rıza sürümünün tutulmadığını söylüyor; GV-18 sürümün zaten kaydedildiğini varsayıp yeniden-onay kontrolünü ekledi, sürüm kaydının kendisini hangi işin kapattığı belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:575` | PS-A1 | madde 101 SJT/OCEAN katmanının canlı eşleştirmede okunmamasını ve ölçek bozukluğunu anıyor; PS-A1 yalnız ölçek hatasını düzeltti, bağlama kararı (Faz 5) açık — madde işten geniş. |
+| `docs/kararlar/00-KARAR-TAKIP.md:590` | AJ-08 | T5 güvenli seed runner satırı hâlâ PR'DA diyor (asıl kapanış backend #69); AJ-08 npm seed:certification komutunu ekledi ama satır SJT muhafızı ve #69 durumunu da taşıyor, eşleşme kısmi. |
+| `docs/kararlar/00-KARAR-TAKIP.md:592` | AN-28 | T7 mentör görünürlük opt-in FE ekranını backend setVisibilityOptIn üzerinden anıyor; AN-28 farklı mekanizmayla (mentorVisibilityEnabled toggle) mentöre görünürlük ayarı verdi, visibility-optin ucu FE'de hâlâ çağrılmıyor. |
+| `docs/kararlar/00-KARAR-TAKIP.md:595` | P-14 | T10 mentör emeği görünürlüğü (takdir/rozet/yılın mentörü) geniş; P-14 yalnız takdir cümlesini ekledi, rozet/yılın mentörü ayağı başka işlere (P-12) ya da hiçbir işe düşüyor. |
+| `docs/kararlar/00-KARAR-TAKIP.md:602` | F-27 | F.4 teyit listesi N+1 konuşma listesini diğer 7 kalemle birlikte anıyor; F-27 N+1 + sayfalamayı canlıya çıkardı, satır çok kalemli. |
+| `docs/kararlar/00-KARAR-TAKIP.md:602` | AJ-06 | F.4 teyit listesindeki N+1 konuşma listesi kaleminin F-27 kalanı AJ-06 ile kapandı; satır çok kalemli ve AJ-06 KISMEN (sorgu sayısı testi yok). |
+| `docs/kararlar/00-KARAR-TAKIP.md:602` | Y-04 | F.4 "pagination'sız listeler" kalemi; Y-04 üç liste ucunu sayfaladı, satır çok kalemli ve hangi listelerin kastedildiği belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:602` | AN-39 | F.4 "pagination'sız listeler" kalemi; AN-39 user-reports sayfalamasını yaptı, satır çok kalemli ve kapsam belirsiz. |
+| `docs/kararlar/00-KARAR-TAKIP.md:602` | F-21 | F.4 a11y (modal/label/radiogroup) kalemi; F-21 erişilebilirlik paketini canlıya çıkardı, satır çok kalemli. |
+| `docs/kararlar/00-KARAR-TAKIP.md:602` | AJ-07 | F.4 "DISC light WCAG" kalemi; AJ-07 açık temada DISC kontrastını ve WCAG raporunu tamamladı, satır çok kalemli. |
+| `docs/kararlar/00-KARAR-TAKIP.md:602` | U-19 | F.4 "profile-completeness uçtan uca bağı" kalemi; U-19 servisi eşleştirmeye bağladı, satır çok kalemli ve U-19 KISMEN. |
+| `docs/kararlar/00-KARAR-TAKIP.md:621` | AN-09 | madde 105 genel "Bildir"→mail mekanizmasını anıyor; AN-09 yalnız şüphe raporu bildirim e-postasını ekledi, her sayfada genel Bildir akışı ayrı kalıyor. |
+| `docs/kararlar/00-KARAR-TAKIP.md:635` | V-05 | madde 119 (G1-22) super-admin küçük-grup metrik k-anonimliği; V-05 admin KPI ve platform analytics uçlarına k-anonimlik ekledi ama algoritma ayar ekranında aynı sorunun takip adayı olduğunu not ediyor. |
+| `docs/kararlar/00-KARAR-TAKIP.md:636` | K-14 | madde 120 (G1-28) kod dışı altyapı sertleştirmesini (Dokploy/firewall/SSH/SSL/yedek) anıyor; K-14 yalnız kod tarafını yaptı, altyapı PO listesine devredildi. |
+| `docs/kararlar/00-KARAR-TAKIP.md:942` | AJ-02 | Kuyrukta satırı olmayan bulgular listesi GET /api/system-logs denetim izi/meta kalemini başka kalemlerle birlikte anıyor; AJ-02 bunu kapattı ama satır çok kalemli. |
+| `docs/kararlar/00-KARAR-TAKIP.md:942` | AJ-01 | Aynı liste kurum-içi sayımlar User.role kalemini anıyor; AJ-01 kısmen kapattı (Mentörsüz Menti/kullanıcı listesi kaldı), satır çok kalemli. |
+| `docs/kararlar/konu/05-ozellikler-ve-paneller.md:61` | F-13 | 08'deki aynı açık soru (yönetici sertifika sorusu ekleyebilmeli mi); F-13 gerekçe belgesiyle cevaplandı ama ürün sorusu biçiminde, PO kararı sayılıp sayılmayacağı belirsiz. |
+| `docs/kararlar/konu/06-tasarim-ux.md:23` | AJ-07 | DISC renk ton kararının kullanıcı gözüyle onayını bekliyor; AJ-07 kontrastı düzeltti ama tonun PO'ca onaylanması ayrı bir karar, kapanıp kapanmadığı belirsiz. |
+| `docs/kararlar/konu/06-tasarim-ux.md:32` | F-10 | Havuz kart tasarımını 'tasarlanacak/henüz kodlanmadı' gösteriyor; F-10 menti→mentör kartının var olduğunu doğruladı ama bölüm çift yönlü havuz, sayfalama, detay sayfası gibi daha geniş kalemler içeriyor. |
+| `docs/kararlar/konu/08-acik-sorular.md:6` | AN-44 | Çift-kaynağı tek kaynağa indirmeyi AN-44 işi diye anıyor; ancak AN-44 yalnız ad-tarihsizleştirme ayağını bitirdi, 08-acik-sorular ayağı KARAR-80/M15 ile YN-06/KARAR-51'e devredildi. |
+| `docs/kararlar/konu/08-acik-sorular.md:37` | F-13 | Sertifika soru ekleme kısıtının bilinçli olup olmadığını açık soru olarak tutuyor; F-13 gerekçe belgesini yazdı (kurum ekleyemez, bilinçli) ama madde bir ürün sorusu olarak soruluyor. |
+| `docs/kararlar/konu/08-acik-sorular.md:52` | AJ-07 | 06 D22'ye bağlı DISC renk ton kararını 'hâlâ açık' diyor; AJ-07 kontrast düzeltmesi yaptı fakat PO ton onayı ayrı karar olarak kalmış olabilir. |
+| `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:721` | V-05 | Açık karar 7 'k-anonimlik eşiği … kodda YOK, platformTenantController.ts:269' diyor; V-05 tam o uca maskeleme ekledi, ama maddenin PO notu (eşik sayısı) ayrı karar. |
+| `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:757` | V-05 | K-anonimlik eşiğinin (G1-22) belirlenmesini bekliyor; V-05 KPI/analytics uçlarına k-anonimlik uyguladı ama eşik sayısının PO kararı olarak kesinleşip kesinleşmediği belirsiz. |
+| `docs/otonom/03-PO-ELLE-ISLER.md:101` | U-01 | PO teyit satırı 'Kod SCHEDULED→COMPLETED geçişi yazmıyor (U-01)' diyor; U-01 bunu yazdı, ama satırın kendisi PO'nun canlı DB teyidi. |
+| `docs/otonom/03-PO-ELLE-ISLER.md:113` | P-05 | P-05 canlı kontrol adımı çanın 'henüz yok' olduğunu söylüyor; P-05 kapanışı notificationService'e dokundu, çan ayağı kodda doğrulanmalı. |
+| `docs/otonom/03-PO-ELLE-ISLER.md:130` | U-01 | G8-04 PO satırındaki 'COMPLETED geçişi kodda hiç yazılmıyor (U-01)' şüphesi bayat; satırın kendisi PO'nun gözle kontrolü. |
+| `docs/otonom/03-PO-ELLE-ISLER.md:133` | F-13 | Satır sertifika gerekçesini PO'nun yazmasını bekliyor; F-13 ajan tarafından gerekçe belgesi yazılarak kapandı — PO onayı gerekip gerekmediği çelişkili. |
+| `docs/otonom/03-PO-ELLE-ISLER.md:239` | U-08 | Kod tarafı teyit sorusu: U-08 mentor-matches'e onay kapısı ekledi, ama rank-mentors ucu hâlâ açık (KISMEN) — soru kısmen cevaplandı. |
+| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:30` | I-02 | madde 141 — 00-KARAR-TAKIP.md:311 ile aynı madde teyitte (ERTELENDİ notu); iki belge tutarlı kalsın (7b inceleme #379 bulgu 5) |
+| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:52` | K-06 | M3→madde 144 'yalnız seçilen şık; diğerleri kapalı/açılabilir; renk yok' kod bekliyor; K-06 diğer şıkların açıklamasını açılır ve işaretsiz gösterdi, ama eşleşme madde atfıyla değil anahtar ifadeyle. |
+| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:58` | P-05 | M9→madde 155 'sebep gizli, alternatif aynı ekranda' kod bekliyor; P-05 nazik ret bildirimini canlıya aldı fakat KARAR-22 B gereği alternatif mentör yok, madde işten geniş. |
+| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:68` | I-06 | 3B başlığı üç yapısal kalemi (143, 148, 160) birlikte ⬜ AÇIK sayıyor; I-06 yalnız madde 160'ı kapattı. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:32` | U-01 | Öncelik satırı 'Görüşme yapıldı düğmesi KARAR-80/M11'e bağlı (🔴)' diyor; U-01 bitti ama satır birden çok kalemi birlikte sıralıyor. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:32` | E-3b | Öncelik listesinde 'gizlenen soruyu geri açma' yapılacak olarak sıralı; E-3b bitti ama satır diğer açık kalemlerle (anlaşma taslağı, bağlamsal geri bildirim) birlikte. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:32` | E-3e | Öncelik listesinde 'check-in geçmişi' yapılacak olarak sıralı; E-3e bitti ama satır açık kalemlerle birlikte. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:63` | GV-08 | Yönetici KVKK işlemleri (anonymize/hard-delete) TERK/ÜRÜN listesinde 'GV-08 🔴' diye açık; GV-08 anonimleştirme kapsamını kısmen düzeltti ama bu satır uçların ekrana bağlanmasını (ürün kararı) anlatıyor. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:66` | E-3b | 'Kuyrukta kendi satırı olmayan BAĞLA kalemleri' arasında soru geri açma sayılıyor; E-3b bitti ama satır açık kalemlerle birlikte. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:30` | E-3e | 7b #379 3. tur: satır `GET /api/meetings/:meetingId/feedback` (değerlendirme okuma) ucunu anlatıyor; E-3e bu ucu değil `…/check-ins`'i okuyor (`frontend/src/components/organisms/MeetingCheckInReadout.tsx:6-13`); Feedback okuma AJ-14'e bağlı → işaret geri alındı. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:66` | E-3e | 'check-in geçmişi · değerlendirme okuma' kalemi: E-3e yalnız check-in okumayı karşılıyor, değerlendirme (Feedback) okuma açık (AJ-14); satırda başka açık kalemler de var. |
+
+### B.8 — diff kontrolü
+Betik (`git diff -U0 <merge-base> -- docs/`): silinen her satır arşiv dosyasında birebir aranır. Sonuç: **silinen 41 satır · arşivde olmayan 0.** Eklenen satırlar: 39 işaretli satır + 2 ilk satır + 09-DURUM 2026-09-27 bölümü (1 satır + boş satır) + yeni dosyalar (arşiv, eşleme tablosu, bu bölüm). Değişen tablo satırlarında `|` sayısı korunur. Belgelerin başka içeriği değişmedi.
+
