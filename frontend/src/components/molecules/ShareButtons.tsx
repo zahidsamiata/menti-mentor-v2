@@ -8,15 +8,19 @@
  */
 
 import { cn } from '@/lib/utils';
+import { getSiteUrl } from '@/lib/siteUrl';
 
 interface ShareButtonsProps {
   /** Paylaşılan metin (WhatsApp gövdesi + LinkedIn başlığı). */
   shareHeadline: string;
-  /** LinkedIn paylaşımına eklenen URL. */
+  /**
+   * LinkedIn paylaşımına eklenen URL. Verilmezse canlı site kökü (`getSiteUrl()`) kullanılır —
+   * AJ-23: önceki sabit varsayılan ürüne ait olmayan bir alan adına gidiyordu.
+   */
   shareUrl?: string;
 }
 
-export function ShareButtons({ shareHeadline, shareUrl = 'https://menti-mentor.io' }: ShareButtonsProps) {
+export function ShareButtons({ shareHeadline, shareUrl = getSiteUrl() }: ShareButtonsProps) {
   const encodedText = encodeURIComponent(shareHeadline);
   const whatsappUrl = `https://wa.me/?text=${encodedText}`;
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&title=${encodedText}`;
