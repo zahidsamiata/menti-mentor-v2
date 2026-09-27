@@ -1,3 +1,6 @@
+> 📸 DONDURULMUŞ (2026-09-27) — BITTI son doğrulama ara dosyası; güncellenmez. Özet ve nihai kategoriler: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`.
+> TÜR: 📸 · SON DOĞRULAMA: 2026-09-27 · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # BITTI son doğrulama — ENVANTER (A.1) · 2026-09-27
 
 Kaynak: `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md` + `docs/otonom/00-KUYRUK.md` @ çatı `191a256`. Seçim: tablo satırının **Durum** hücresinde (üstü çizili `~~…~~` kısım atılarak) `BITTI` geçen satırlar; Durum'u `→` ile başlayan (katlanmış) satırlar hariç. Ek: aktif kuyrukta Durum'u BITTI olmayan ama Not'unda alt kalem için `BITTI` yazan 4 birim (E-3b · E-3d · E-3e · GV-12).

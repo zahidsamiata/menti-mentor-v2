@@ -1,3 +1,6 @@
+> 📸 DONDURULMUŞ (2026-09-27) — BITTI son doğrulama ara dosyası; güncellenmez. Özet ve nihai kategoriler: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`.
+> TÜR: 📸 · SON DOĞRULAMA: 2026-09-27 · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
+
 # Kalite kontrolü QB — BITTI son doğrulama (2026-09-27)
 Denetçi: opus alt-ajan (partileri yapmayan) · referans: çatı 191a256 · backend 3bd9ad3 · salt-okuma
 Özet: kontrol edilen 26 · TUTAR 24 · ÇÜRÜDÜ 2 (parti-01: 0 · parti-02: 2) · yeniden koşulan mutasyon 0 (iki ÇÜRÜDÜ bulgu da DB gerektiren entegrasyon testine dayandığı için satır okuması ve grep ile kanıtlandı)
