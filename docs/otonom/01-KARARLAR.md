@@ -144,7 +144,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-100** | **`ProfileSource.SJT_ENRICHED` değeri ne olsun (silme protokolü — gerekçe bulunamadı)** | **0** (AN-54 bulgusu) | ⬜ boş · KARAR-76 ile aynı tür soru |
 | **KARAR-101** | **Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi)** | **1** (Y1-B8 — PR #164/#343) | ⬜ boş · güvenlik + ürün · öneri B |
 | **KARAR-102** | **Kayıttan sonra hemen giriş mi, önce e-posta doğrulaması mı (e-posta sızıntısının son kalıntısı)** | **1** (GV-12 kalanı) | ⬜ boş · güvenlik + ürün · öneri C |
-| **KARAR-103** | **Eski planlardaki 12 yapılmamış özellik — hangileri yapılsın** | **12** (AJ-16) | ⬜ boş · ajan-ekledi (K-C) · öneri B (4 küçük şemasız özellik) |
+| **KARAR-103** | **Eski planlardaki 13 yapılmamış özellik — hangileri yapılsın** | **13** (AJ-11) | ⬜ boş · ajan-ekledi (K-C) · öneri B (4 küçük şemasız özellik) |
 
 ---
 
@@ -1592,10 +1592,10 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 
 ---
 
-### KARAR-103 · Eski planlardaki 12 yapılmamış özellik — hangileri yapılsın? (12 işi açar)  [ÜRÜN KARARI]
-> ⭐ Kaynak: G-kart doğrulaması (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`), kodda yeniden doğrulandı 2026-09-27 (ajan-ekledi, K-C). Kuyruk satırı: **AJ-16**.
+### KARAR-103 · Eski planlardaki 13 yapılmamış özellik — hangileri yapılsın? (13 işi açar)  [ÜRÜN KARARI]
+> ⭐ Kaynak: G-kart doğrulaması (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`), kodda yeniden doğrulandı 2026-09-27 (ajan-ekledi, K-C). Kuyruk satırı: **AJ-11**.
 
-**Şu an ne var:** Ağustos planlarında (G-kartları) yazılmış ama hiç yapılmamış 12 özellik. Bugün kullanıcı bunların hiçbirini görmüyor:
+**Şu an ne var:** Ağustos planlarında (G-kartları) yazılmış ama hiç yapılmamış 13 özellik. Bugün kullanıcı bunların hiçbirini görmüyor:
 1. Platform yöneticisi için büyüme grafiği yok — yalnız anlık sayılar (`backend/src/controllers/platformController.ts:75`).
 2. Platform genel ayarlar ekranı yok (`frontend/src/app/platform/` altında yalnız dashboard/tenants).
 3. Kurum paketi (FREE/PRO/ENTERPRISE) kaydediliyor ama hiçbir sınır uygulamıyor (`backend/prisma/schema.prisma:194`; kısıt kodu 0).
@@ -1608,6 +1608,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 10. Kurum KPI panelinde zaman içindeki değişim (trend) yok — yalnız anlık oran (`backend/src/services/retentionMetrics.service.ts:130-138`).
 11. Telefon bildirimi (push) gerçek değil — servis gönderilmiş gibi davranıyor (`backend/src/services/notificationService.ts:52-58`).
 12. Mizaç testinde "ters kodlu" soru (cevap tutarlılığını ölçen soru) yok (`backend/prisma/schema.prisma:738-752`).
+13. Mentöre giden bildirimlerin sıklığı ayarlanmıyor — toplu özet ya da seyreltme yok (`backend/src/services/notificationService.ts`; throttle/digest araması 0). Ne sıklıkta bildirim gideceği ürün kararı.
 
 **Sorun ne:** Bunlar planda "yapılacak" diye duruyor ama kimse "gerçekten istiyor muyuz?" diye sormadı. Kuyrukta satırları olmadığı için ne yapılıyor ne de bilinçli olarak erteleniyor; plan belgeleri ürünün olduğundan büyük görünmesine yol açıyor.
 
@@ -1620,5 +1621,5 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 
 **Karşılaştırma:** Önce ilk kurumla canlıya çıkmak istiyorsan A odağı korur. Ürünün ilk izlenimde daha dolu görünmesini istiyorsan B küçük ve güvenli bir paket. Belirli bir kurum talebin varsa C.
 **Benim önerim:** B — dördü de şemasız ve geri alınabilir; gerisi gelir modeli ve dış hesap kararı beklediği için şimdi yapılırsa yarım kalır. *(Bu senin ürün kararın; önerime güvenme.)*
-**Cevap vermezsen:** AJ-16 kilitli kalır; 12 özelliğin hiçbiri yapılmaz, planlarda "yapılacak" diye durmaya devam eder.
+**Cevap vermezsen:** AJ-11 kilitli kalır; 13 özelliğin hiçbiri yapılmaz, planlarda "yapılacak" diye durmaya devam eder.
 **CEVAP:**
