@@ -139,3 +139,10 @@ PO (ürün sahibi) kod yazmaz ve her adımda onay veremez. *(⚠️ GÜNCELLEME 
 Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
 ```
 
+## DEĞİŞMEYEN İKİ KURAL + CANLI = LOKAL AYNI DB (seed "güvenli" listesi) · taşındı 2026-09-27 (AJ-08 7b bulgusu: seed-certification pasifleştiriyor)
+
+```text
+   Güvenli olanlar: `seed-learning-journey`, `seed-certification`, `seed-test-tenant` (`seed-questions` 2026-08-23'te silindi — § CANLI = LOKAL AYNI DB)
+  Kod-kanıtlı güvenli liste (yalnız `upsert`, `deleteMany` YOK): `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs` (`seed-questions.ts` 2026-08-23'te silindi, backend `5745e0f`).
+```
+

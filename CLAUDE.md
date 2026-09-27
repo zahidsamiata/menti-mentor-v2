@@ -50,7 +50,7 @@ Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>
 1. **Migration/DB**: canlı = lokal AYNI Neon. Yalnız ilgili KARAR "evet" ise VE etkilenen tablo için
    tarihli yedek tablo alındıktan sonra. Yedek adı + satır sayısı `02-ILERLEME.md`'ye yazılır.
 2. **seed**: `seed.ts` / `npm run seed` / `prisma db seed` ASLA.
-   Güvenli olanlar: `seed-learning-journey`, `seed-certification`, `seed-test-tenant` (`seed-questions` 2026-08-23'te silindi — § CANLI = LOKAL AYNI DB)
+   Toplu silme YAPMAYANLAR: `seed-learning-journey`, `seed-certification`, `seed-test-tenant` (`seed-questions` 2026-08-23'te silindi — § CANLI = LOKAL AYNI DB). ⚠️ "Silmez" ≠ "zararsız": `seed-certification` sertifika havuzunu ezer ve bankada olmayan soruları pasifleştirir (`backend/prisma/seed-certification.ts:307`); npm komutları ve etkileri `backend/README.md` (AJ-08).
    — bunlar da yalnız KARAR evet + yedek sonrası.
 
 ## ⭐ PO KARARLARI 2026-09-26 — K-A arşive taşı · K-B · K-C ajan-ekledi
@@ -253,7 +253,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
   > ⚠️ **ÇELİŞKİ (2026-09-21) — TEK KOPYA:** bu bölüm ("canlı ve lokal **AYNI Neon**") ile § Ortam / Veritabanı'nın PROD satırı ("docker-compose Postgres, **Neon değil**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
 - Lokalde DB'ye yazmak = canlıyı anında etkilemek. Seed/migration/DB işleminde onay al.
 - Tehlikeli seed.ts / npm run seed / prisma db seed VERİ SİLER — asla çalıştırma.
-  Kod-kanıtlı güvenli liste (yalnız `upsert`, `deleteMany` YOK): `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs` (`seed-questions.ts` 2026-08-23'te silindi, backend `5745e0f`).
+  Toplu silme yapmayan betikler (`deleteMany` YOK): `seed-certification.ts` (⚠️ içerik ezer + `:307` `updateMany` ile pasifleştirir) · `seed-learning-journey.ts` (global aşamaları kanonik içeriğe geri yazar) · `scripts/seed-test-tenant.mjs` (varsayılan dry-run) (`seed-questions.ts` 2026-08-23'te silindi, backend `5745e0f`). Npm komutları: `seed:certification` · `seed:learning-journey` · `seed:test-tenant` (AJ-08).
   **Tehlikeli = `prisma/seed.ts`** (`npm run seed` = `tsx prisma/seed.ts`) — satır 300-307'de toplu `deleteMany()` (userResponse/feedback/meeting/matchRequest… siler). ASLA çalıştırma.
 
 ## Ortam / Veritabanı — PROD ≠ DEV ≠ TEST
