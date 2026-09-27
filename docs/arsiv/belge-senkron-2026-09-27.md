@@ -200,11 +200,6 @@ Kaynak: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` § GÖREV B. 
 | POST /api/tenants/:id/block-pair | adminSettingsRoutes.ts:18 | çift engeli backend'de var, arayüzü yok | "Çifti engelle" · S-M · 🟡 · KR-19'dan sonra | KR-19 |
 ````
 
-### docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:30 · E-3e
-````text
-| GET /api/meetings/:meetingId/feedback | meetingRoutes.ts:98 | geri bildirim gönderiliyor, okunmuyor | "verdiğim değerlendirme" · S · 🟡 · düşük değer | — |
-````
-
 ## B.4 — ilk satır uyarıları
 
 ### docs/kararlar/00-KARAR-TAKIP.md:1 · B.4 ilk satır uyarısı (senkron tamamlanınca aynen arşive)

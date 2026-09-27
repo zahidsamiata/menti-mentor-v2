@@ -443,8 +443,8 @@ Tarama: 4 opus salt-okuma alt-ajan (iş kimliği + kuyruk satırındaki atıflar
 | `docs/kararlar/konu/tasarim-kararlari-admin.md` | 1 | 1 | 0 | 10 → 10 |
 | `docs/otonom/03-PO-ELLE-ISLER.md` | 1 | 1 | 0 | 22 → 22 |
 | `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md` | 7 | 5 | 2 | 11 → 11 |
-| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md` | 5 | 5 | 0 | 0 → 0 |
-| **Toplam** | **40** | **31** | **10** | |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md` | 4 | 4 | 0 | 0 → 0 |
+| **Toplam** | **39** | **30** | **10** | |
 
 Not: "önce → sonra" sütunu bu kelimelerden biri geçen satır sayısıdır (kaba ölçü); açıklayıcı durum metni korunduğu için düşüş, işaretlenen yer sayısından azdır. Eski metinler: `docs/arsiv/belge-senkron-2026-09-27.md`.
 
@@ -457,7 +457,7 @@ Not: "önce → sonra" sütunu bu kelimelerden biri geçen satır sayısıdır (
 - `00-KARAR-TAKIP.md`: madde 141 (I-02, "ERTELENDİ" notu) ve madde 164 (sertifika eşiği KARAR-46'ya bağlı) KAPATILMADI → teyit listesinde.
 
 ### B.5 — TEYİT listesi (işaretlenmedi)
-**67 kayıt.** Neden: eşleşme belirsiz (belge maddesi işten geniş / başka KARAR'a bağlı / ERTELENDİ notu / çelişkili ifade). (KART-INDEKSI'nin teyitleri eşleme tablosunda "belirsiz" olarak.)
+**68 kayıt.** Neden: eşleşme belirsiz (belge maddesi işten geniş / başka KARAR'a bağlı / ERTELENDİ notu / çelişkili ifade). (KART-INDEKSI'nin teyitleri eşleme tablosunda "belirsiz" olarak.)
 
 | Belge:satır | İş | Neden |
 |---|---|---|
@@ -527,8 +527,9 @@ Not: "önce → sonra" sütunu bu kelimelerden biri geçen satır sayısıdır (
 | `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:32` | E-3e | Öncelik listesinde 'check-in geçmişi' yapılacak olarak sıralı; E-3e bitti ama satır açık kalemlerle birlikte. |
 | `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:63` | GV-08 | Yönetici KVKK işlemleri (anonymize/hard-delete) TERK/ÜRÜN listesinde 'GV-08 🔴' diye açık; GV-08 anonimleştirme kapsamını kısmen düzeltti ama bu satır uçların ekrana bağlanmasını (ürün kararı) anlatıyor. |
 | `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:66` | E-3b | 'Kuyrukta kendi satırı olmayan BAĞLA kalemleri' arasında soru geri açma sayılıyor; E-3b bitti ama satır açık kalemlerle birlikte. |
-| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:66` | E-3e | 'check-in geçmişi · değerlendirme okuma' kuyruksuz açık BAĞLA kalemi diye listeleniyor; E-3e ikisini birlikte karşıladı ama satırda açık başka kalemler de var. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:30` | E-3e | 7b #379 3. tur: satır `GET /api/meetings/:meetingId/feedback` (değerlendirme okuma) ucunu anlatıyor; E-3e bu ucu değil `…/check-ins`'i okuyor (`frontend/src/components/organisms/MeetingCheckInReadout.tsx:6-13`); Feedback okuma AJ-14'e bağlı → işaret geri alındı. |
+| `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:66` | E-3e | 'check-in geçmişi · değerlendirme okuma' kalemi: E-3e yalnız check-in okumayı karşılıyor, değerlendirme (Feedback) okuma açık (AJ-14); satırda başka açık kalemler de var. |
 
 ### B.8 — diff kontrolü
-Betik (`git diff -U0 <merge-base> -- docs/`): silinen her satır arşiv dosyasında birebir aranır. Sonuç: **silinen 42 satır · arşivde olmayan 0.** Eklenen satırlar: 40 işaretli satır + 2 ilk satır + 09-DURUM 2026-09-27 bölümü (1 satır + boş satır) + yeni dosyalar (arşiv, eşleme tablosu, bu bölüm). Değişen tablo satırlarında `|` sayısı korunur. Belgelerin başka içeriği değişmedi.
+Betik (`git diff -U0 <merge-base> -- docs/`): silinen her satır arşiv dosyasında birebir aranır. Sonuç: **silinen 41 satır · arşivde olmayan 0.** Eklenen satırlar: 39 işaretli satır + 2 ilk satır + 09-DURUM 2026-09-27 bölümü (1 satır + boş satır) + yeni dosyalar (arşiv, eşleme tablosu, bu bölüm). Değişen tablo satırlarında `|` sayısı korunur. Belgelerin başka içeriği değişmedi.
 

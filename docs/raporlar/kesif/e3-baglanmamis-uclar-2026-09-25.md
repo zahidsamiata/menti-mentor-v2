@@ -27,7 +27,7 @@ Rapor `kod-inceleme-2026-09-24.md` D11'deki "28 bağlanmamış"ın büyük kısm
 | GET /api/meetings/pair-signal | meetingRoutes.ts:132 | sarmalayıcı hazır (`lib/api/meetings.ts:130`), çağrılmıyor | admin/eslesmeler satırına çift sinyali rozeti · S · 🟢 | — |
 | GET /api/meetings/:meetingId/check-ins | meetingRoutes.ts:126 | check-in yazılıyor, hiçbir ekranda okunmuyor | meetings "check-in'lerim" · S-M · 🟡 (mahrem veri) | GV-04 (BITTI) · ✅ yapıldı — E-3e · PR çatı #372 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27 |
 | POST /api/tenants/:id/block-pair | adminSettingsRoutes.ts:18 | çift engeli backend'de var, arayüzü yok | "Çifti engelle" · S-M · 🟡 · KR-19'dan sonra | KR-19 · ✅ yapıldı — E-3d · PR backend #187 + çatı #371 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27 |
-| GET /api/meetings/:meetingId/feedback | meetingRoutes.ts:98 | geri bildirim gönderiliyor, okunmuyor | "verdiğim değerlendirme" · S · 🟡 · düşük değer | — · ✅ yapıldı — E-3e · PR çatı #372 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27 |
+| GET /api/meetings/:meetingId/feedback | meetingRoutes.ts:98 | geri bildirim gönderiliyor, okunmuyor | "verdiğim değerlendirme" · S · 🟡 · düşük değer | — |
 
 **Öncelik (en az emek / en çok değer):** 1) bağlamsal geri bildirim kartı (🟡 M) · 2) anlaşma taslağı formu (🟡 M) · 3) çift sinyali rozeti (🟢 S) · 4) gizlenen soruyu geri açma (🟢 S-M) · 5) check-in geçmişi (🟡 S-M). En yüksek değerli kalem "Görüşme yapıldı" düğmesi, ama KARAR-80/M11'e bağlı (🔴).
 
