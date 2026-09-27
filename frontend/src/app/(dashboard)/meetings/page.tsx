@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ShareButtons } from '@/components/molecules/ShareButtons';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
-import { MeetingFeedbackReadout } from '@/components/organisms/MeetingFeedbackReadout';
+import { MeetingCheckInReadout } from '@/components/organisms/MeetingCheckInReadout';
 import type { Meeting } from '@/lib/api/meetings';
 import { MEETING_FORMAT_LABELS } from '@/lib/enumLabels';
 
@@ -32,13 +32,15 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'warning' | 'succe
 };
 
 function MeetingCard({
-  meeting, userId, onMarkNotHappened, api,
+  meeting, userId, onMarkNotHappened, api, isAdmin,
 }: {
   meeting: Meeting;
   userId: string;
   // U-01: mentöre COMPLETED görüşmeyi "gerçekleşmedi" diyerek düzeltme imkânı.
   onMarkNotHappened: (meetingId: string) => void;
   api: ReturnType<typeof useApiClient>;
+  // E-3e: kurum yöneticisi görünümünde "Değerlendirmeniz" değil "Değerlendirmeler" etiketi kullanılır.
+  isAdmin: boolean;
 }) {
   const isMentor  = meeting.mentorUserId === userId;
   // Karşı taraf: mentör bakarken menti, menti bakarken mentör. Menti tarafı eskiden
@@ -146,9 +148,9 @@ function MeetingCard({
         </Button>
       )}
 
-      {/* E-3e: kendi yazdığın değerlendirmeyi okur, yoksa değerlendirme akışına yönlendirir. */}
+      {/* E-3e: kendi check-in'ini okur, yoksa değerlendirme akışına yönlendirir. */}
       {meeting.status === 'COMPLETED' && (
-        <MeetingFeedbackReadout api={api} meetingId={meeting.id} />
+        <MeetingCheckInReadout api={api} meetingId={meeting.id} currentUserId={userId} isAdmin={isAdmin} />
       )}
     </div>
   );
@@ -263,7 +265,7 @@ export default function MeetingsPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              {upcoming.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} api={api} />)}
+              {upcoming.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} api={api} isAdmin={user?.role === 'ADMIN'} />)}
             </div>
           )}
         </CardContent>
@@ -277,7 +279,7 @@ export default function MeetingsPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {past.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} api={api} />)}
+              {past.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} api={api} isAdmin={user?.role === 'ADMIN'} />)}
             </div>
           </CardContent>
         </Card>

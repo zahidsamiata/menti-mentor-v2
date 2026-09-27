@@ -50,40 +50,6 @@ export interface MeetingsListResponse {
   total: number;
 }
 
-/**
- * E-3e / GV-04 / KARAR-80 (M22, A kabul): backend `getMeetingFeedback`
- * (feedbackController.ts) taraf bazlı böler — yazan yalnız KENDİ kaydını,
- * kurum yöneticisi hepsini görür; karşı tarafın alanları HİÇ dönmez ("en dar
- * görünürlük"). Bu yüzden alanların TAMAMI opsiyonel: hangi rolden (mentör/
- * menti/admin) bakıldığına göre bazıları hiç gelmez.
- */
-export interface MeetingFeedback {
-  id: string;
-  meetingId: string;
-  tenantId: string;
-  mentorId: string;
-  mentiId: string;
-  // Menti → Mentor
-  guidanceScore?: number | null;
-  resourceSharingScore?: number | null;
-  trustScore?: number | null;
-  // Mentor → Menti
-  preparednessScore?: number | null;
-  proactivityScore?: number | null;
-  engagementScore?: number | null;
-  goalClarityScore?: number | null;
-  keyLearnings?: string | null;
-  specificComments?: string | null;
-  // Dönemlik derin
-  periodicCareerGrowth?: string | null;
-  periodicTrustScore?: number | null;
-  periodicNetworkScore?: number | null;
-  periodicConfidenceScore?: number | null;
-  periodicNpsScore?: number | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface CheckIn {
   overallRating: number;
   progressRating: number;
@@ -94,6 +60,40 @@ export interface CheckIn {
   concernTag?: string;
   continuationView?: string;
   openNote?: string;
+}
+
+/**
+ * E-3e / GV-04: backend `getCheckIns` (meetingCheckInController.ts) taraf bazlı
+ * en dar görünürlük uygular — normal taraf (mentör/menti) sorguyu zaten `userId`
+ * ile filtreler, bu yüzden `items` ya boştur ya da YALNIZ KENDİ kaydını içerir;
+ * kurum yöneticisi (ADMIN) tarafların TAMAMININ kaydını görür. Ön yüz bunun
+ * ötesinde bir filtreleme yapmaz — hangi kayıt geldiyse onu gösterir.
+ *
+ * ⚠️ Bu, `Feedback` modelinden (guidanceScore/preparednessScore/…, `GET /:id/feedback`)
+ * FARKLI bir tablodur — "Değerlendirme Yap" (/meeting-checkin) akışı buraya yazar.
+ * Feedback tablosunun okuma ekranı ayrı bir iş (AJ-14), bu PR'ın kapsamında değil.
+ */
+export interface MeetingCheckInRecord {
+  id: string;
+  meetingId: string;
+  tenantId: string;
+  userId: string;
+  role: 'MENTOR' | 'MENTI';
+  overallRating: number;
+  progressRating: number;
+  continueIntent: 'EVET' | 'BELIRSIZ' | 'HAYIR';
+  menteePreparedness?: number | null;
+  wantedMore?: string | null;
+  nextTopicNote?: string | null;
+  concernTag?: string | null;
+  continuationView?: string | null;
+  openNote?: string | null;
+  submittedAt: string;
+}
+
+export interface MeetingCheckInsResponse {
+  items: MeetingCheckInRecord[];
+  total: number;
 }
 
 export interface AvailabilityBlock {
@@ -168,11 +168,11 @@ export const meetingsApi = {
   submitCheckIn: (api: BoundClient, meetingId: string, data: CheckIn): Promise<ApiResult<CheckIn>> =>
     api<CheckIn>(`/api/meetings/${meetingId}/check-in`, { method: 'POST', body: data }),
 
-  // E-3e: KENDİ yazdığın görüşme değerlendirmesini okur. Kayıt yoksa 404, taraf
-  // değilsen 403 döner (backend zaten taraf/admin kontrolü yapıyor) — çağıran
-  // bu iki durumu ayrı ele almalı (bkz. MeetingFeedbackReadout).
-  getFeedback: (api: BoundClient, meetingId: string): Promise<ApiResult<MeetingFeedback>> =>
-    api<MeetingFeedback>(`/api/meetings/${meetingId}/feedback`),
+  // E-3e: görüşmenin check-in kayıtlarını okur. Taraf yalnız kendi kaydını (0
+  // ya da 1 öğe), ADMIN tarafların tamamını görür — bkz. MeetingCheckInRecord.
+  // Meeting bulunamazsa 404, taraf/admin değilsen 403 döner.
+  getCheckIns: (api: BoundClient, meetingId: string): Promise<ApiResult<MeetingCheckInsResponse>> =>
+    api<MeetingCheckInsResponse>(`/api/meetings/${meetingId}/check-ins`),
 
   getPairSignal: (
     api: BoundClient,
