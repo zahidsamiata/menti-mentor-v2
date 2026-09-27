@@ -67,6 +67,15 @@ export default function AdminCertificationPage() {
 
       {loading || !data ? (
         <p className="text-center text-muted-foreground py-8">{UI_TEXT.status.loading}</p>
+      ) : data.topics.length === 0 ? (
+        // U-10: sertifika havuzu boşsa (içerik henüz yüklenmemiş) sessiz boş ekran yerine
+        // ne olduğunu ve kimin çözeceğini söyleyen boş durum.
+        <Card>
+          <CardContent className="p-6 text-center text-sm text-muted-foreground">
+            Henüz sertifika konusu yüklenmemiş. Senaryolar platform ekibi tarafından hazırlanır;
+            yüklendiğinde konular burada listelenir ve açıp kapatabilirsiniz.
+          </CardContent>
+        </Card>
       ) : (
         <>
           {/* Backend'den gelen tek-kaynak eşik özeti (UI kendi hesaplamaz) */}
