@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useMemo, useState } from 'react';
+import { Suspense, useId, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
@@ -63,6 +63,9 @@ function BookMeetingContent() {
   const [requestMessage, setMsg]      = useState('');
   const [submitting, setSubmitting]   = useState(false);
   const [error, setError]             = useState<string | null>(null);
+  // AJ-07: label'lar htmlFor/id ile bağlı değildi (WCAG 1.3.1 / 4.1.2).
+  const locationId = useId();
+  const messageId = useId();
   const [success, setSuccess]         = useState(false);
 
   // K-20: mentörün müsaitliği yokken (KARAR-53 ④) randevu yerine mesaj yolu.
@@ -168,6 +171,7 @@ function BookMeetingContent() {
                 maxLength={500}
                 rows={4}
                 placeholder="Mentörünüze kendinizi tanıtın ve görüşme talebinizi kısaca yazın."
+                aria-label="Mentöre mesaj"
                 className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm resize-none"
               />
               <Button type="submit" className="w-full" disabled={convoSending || !convoMessage.trim()}>
@@ -196,10 +200,13 @@ function BookMeetingContent() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && <AlertMessage type="error" message={error} />}
             <div className="space-y-2">
-              <label className="text-sm font-medium">Görüşme Formatı</label>
-              <div className="grid grid-cols-3 gap-2">
+              <label className="text-sm font-medium" id="meeting-format-label">Görüşme Formatı</label>
+              {/* AJ-07: aşağıdaki gün/saat seçim butonlarıyla aynı aile (KOMŞU UÇ) — orada
+                  role="group"/aria-pressed vardı, burada eksikti; hizalandı. */}
+              <div className="grid grid-cols-3 gap-2" role="group" aria-labelledby="meeting-format-label">
                 {FORMATS.map(({ value, label }) => (
                   <button key={value} type="button" onClick={() => { setFormat(value); setLocation(''); }}
+                    aria-pressed={format === value}
                     className={`rounded-xl border p-2.5 text-xs transition-colors ${format === value ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}>
                     {label}
                   </button>
@@ -208,10 +215,11 @@ function BookMeetingContent() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Süre</label>
-              <div className="flex gap-2">
+              <label className="text-sm font-medium" id="meeting-duration-label">Süre</label>
+              <div className="flex gap-2" role="group" aria-labelledby="meeting-duration-label">
                 {DURATIONS.map((d) => (
                   <button key={d} type="button" onClick={() => setDuration(d)}
+                    aria-pressed={duration === d}
                     className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${duration === d ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}>
                     {d} dk
                   </button>
@@ -268,20 +276,21 @@ function BookMeetingContent() {
               </p>
             ) : (
               <div className="space-y-1">
-                <label className="text-sm font-medium">
+                <label htmlFor={locationId} className="text-sm font-medium">
                   {format === 'IN_PERSON' ? 'Görüşme Yeri' : 'Telefon Numarası'}
                 </label>
-                <input type="text" value={location} onChange={(e) => setLocation(e.target.value)}
+                <input id={locationId} type="text" value={location} onChange={(e) => setLocation(e.target.value)}
                   placeholder={format === 'IN_PERSON' ? 'Örn: Kadıköy, İstanbul' : '+90 5xx xxx xx xx'}
                   className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm" />
               </div>
             )}
 
             <div className="space-y-1">
-              <label className="text-sm font-medium">
+              <label htmlFor={messageId} className="text-sm font-medium">
                 Neden bu görüşmeyi istiyorsunuz? <span className="text-destructive">*</span>
               </label>
               <textarea
+                id={messageId}
                 required
                 value={requestMessage}
                 onChange={(e) => setMsg(e.target.value)}
@@ -298,7 +307,8 @@ function BookMeetingContent() {
                 <span className={msgLen > 0 && msgLen < 50 ? 'text-destructive' : 'text-muted-foreground'}>
                   {msgLen < 50 && msgLen > 0 ? `En az ${50 - msgLen} karakter daha yazın` : ''}
                 </span>
-                <span className={msgLen > 450 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}>
+                {/* AJ-07: amber-600 beyaz zeminde ~3.2:1 (AA metin eşiği 4.5:1 altı) — amber-700'e çekildi (~5.0:1). */}
+                <span className={msgLen > 450 ? 'text-amber-700 dark:text-amber-400' : 'text-muted-foreground'}>
                   {msgLen}/500
                 </span>
               </div>

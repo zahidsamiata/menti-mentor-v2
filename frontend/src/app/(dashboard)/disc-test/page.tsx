@@ -67,7 +67,7 @@ function DiscTestContent({ token, tenantId, onComplete }: DiscTestContentProps) 
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-6 text-center animate-fade-in">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-brand/10">
-          <svg className="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
               d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
             />
@@ -125,7 +125,7 @@ function DiscTestLoadError({ message, onRetry }: { message: string; onRetry: () 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-4 text-center animate-fade-in px-4">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
-        <svg className="h-8 w-8 text-destructive" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="h-8 w-8 text-destructive" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
             d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
@@ -150,7 +150,7 @@ function DiscTestEmpty() {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-3 text-center animate-fade-in px-4">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
-        <svg className="h-8 w-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="h-8 w-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>

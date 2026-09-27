@@ -78,7 +78,8 @@ export function ReportUserButton({ targetUserId, targetName }: { targetUserId: s
 
             {state === 'sent' ? (
               <div className="space-y-4">
-                <p className="text-sm text-emerald-600 dark:text-emerald-400">Şikayetiniz alındı. Teşekkürler.</p>
+                {/* AJ-07: emerald-600 beyaz zeminde ~3.8:1 (AA metin eşiği 4.5:1 altı) — emerald-700'e çekildi (~5.5:1). */}
+                <p className="text-sm text-emerald-700 dark:text-emerald-400">Şikayetiniz alındı. Teşekkürler.</p>
                 <Button onClick={close} className="w-full">{UI_TEXT.actions.close}</Button>
               </div>
             ) : (

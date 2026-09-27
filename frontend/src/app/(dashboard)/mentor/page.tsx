@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useId } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
@@ -28,8 +28,8 @@ import { UI_TEXT } from '@/lib/uiText';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
   { value: 'D', label: discDimensionLabel('D'), color: 'text-red-600 dark:text-red-400' },
-  { value: 'I', label: discDimensionLabel('I'), color: 'text-yellow-600 dark:text-yellow-400' },
-  { value: 'S', label: discDimensionLabel('S'), color: 'text-green-600 dark:text-green-400' },
+  { value: 'I', label: discDimensionLabel('I'), color: 'text-yellow-700 dark:text-yellow-400' },
+  { value: 'S', label: discDimensionLabel('S'), color: 'text-green-700 dark:text-green-400' },
   { value: 'C', label: discDimensionLabel('C'), color: 'text-blue-600 dark:text-blue-400' },
 ];
 
@@ -129,6 +129,9 @@ export default function MentorDashboardPage() {
   const [filterInitialised, setFilterInitialised] = useState(false);
   const [filterSaving, setFilterSaving] = useState(false);
   const [filterSaved, setFilterSaved] = useState(false);
+  // AJ-07: label ile input arasında programatik bağ (htmlFor/id) yoktu — screen reader kullanıcısı
+  // için etiket kayboluyordu (WCAG 1.3.1 / 4.1.2).
+  const minScoreId = useId();
 
   // Yüklenen tercihleri form state'e kopyala (bir kez)
   if (savedFilter && !filterInitialised) {
@@ -351,6 +354,7 @@ export default function MentorDashboardPage() {
                           value={approveLinks[m.id] ?? ''}
                           onChange={(e) => setApproveLinks((prev) => ({ ...prev, [m.id]: e.target.value }))}
                           placeholder="Görüşme bağlantısı (https://...)"
+                          aria-label="Görüşme bağlantısı"
                           className="w-48 rounded-lg border border-border bg-background px-2 py-1 text-xs"
                         />
                       )}
@@ -398,7 +402,7 @@ export default function MentorDashboardPage() {
               {/* Minimum uyum skoru */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium">Minimum Uyum Skoru</label>
+                  <label htmlFor={minScoreId} className="text-sm font-medium">Minimum Uyum Skoru</label>
                   <span className="text-sm font-bold text-primary">
                     {filter.minCompatibilityScore === 0
                       ? 'Filtre yok'
@@ -406,6 +410,7 @@ export default function MentorDashboardPage() {
                   </span>
                 </div>
                 <input
+                  id={minScoreId}
                   type="range"
                   min={0}
                   max={100}
@@ -463,7 +468,8 @@ export default function MentorDashboardPage() {
                   {filterSaving ? UI_TEXT.status.saving : 'Filtreleri Kaydet'}
                 </Button>
                 {filterSaved && (
-                  <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>
+                  // AJ-07: emerald-600 beyaz zeminde ~3.8:1 (AA metin eşiği 4.5:1 altı) — emerald-700'e çekildi (~5.5:1).
+                  <span className="text-xs text-emerald-700 dark:text-emerald-400">✓ Kaydedildi</span>
                 )}
               </div>
             </>
