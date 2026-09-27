@@ -1062,3 +1062,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **GÖREV A MERGE** — çatı #378 (`c648ed2`), 7b ONAY + CI 10/10. GÖREV B başladı (dal `otonom/BELGE-SENKRON-20260927`).
 - 2026-09-27 · **GÖREV B PR-AÇIK** — çatı #379: 66 satır / 9 belge (✅ + 🟨), B.4 ilk satırlar + 09-DURUM 2026-09-27 bölümü, dondurulmuş eşleme 87 satır / 15 belge, teyit 80, B.8 silinen 68 → arşivde 68.
 - 2026-09-27 · **GÖREV B MERGE** — çatı #379 (`695f74a`), 7b 4 tur (bulgular: KART-INDEKSI dondurulmuş sayıldı · metin kaybı → açıklayıcı metin korunur · madde 141 teyit · E-3e yakın-ama-farklı uç geri alındı), son ONAY, CI 10/10. 39 satır / 8 belge · teyit 68 · eşleme 129/16 · B.8 41/41.
+- 2026-09-27 · **GÖREV C PR-AÇIK** — çatı #380: kural (h) + bekçi UYARI + istisna (I-02 → madde 141) + 5 test (12/12).
