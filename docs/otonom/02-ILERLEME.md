@@ -1006,3 +1006,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **AN-12 🔵 hazır** — backend #186 (interactionStyle karantina, 7b ONAY) + çatı #370 (arşiv) → KARAR-107 EVET/HAYIR; tie-break → KARAR-108.
 - 2026-09-27 · **E-3d BITTI** — backend #187 + çatı #371 (`0cf3006`). CANLIDA BAK: yönetici çift engelleme/listeleme/kaldırma ekranı. 7b: ilk hâli (yalnız engelle, geri alınamaz) ajan tarafından durduruldu, liste+kaldırma eklendi; #371 1. tur SORUN VAR (pointer/açıklama/CI) → 2. tur ONAY. Canlı ok:true · db:up · site 200.
 - 2026-09-27 · **E-3e BITTI** — çatı #372 (`e79ddff`). CANLIDA BAK: görüşme kartında kullanıcının kendi değerlendirmesi. Canlı ok:true · db:up · site 200.
+- 2026-09-27 · **AJ-15 BITTI** — backend #188 + çatı #373 (`6276e99`), inceleme ONAY; 20 uca 27 negatif test, açık yok. Canlı ok:true · db:up · site 200.
