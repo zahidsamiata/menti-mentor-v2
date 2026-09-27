@@ -48,9 +48,16 @@ Not sütununda **`⛔ ÇIKIŞ BLOKERİ (T…)`** gören iş, **canlıya çıkı�
 **Sayı (2026-09-21):** 24 çıkış blokeri — **14'ü ajanda** (bu dosyada işaretli), **10'u PO'da** (`docs/otonom/03-PO-ELLE-ISLER.md` en üstteki tablo). Kaynak: `docs/raporlar/kesif/devir-analizi-2026-09-21.md` §11.
 
 ## "Bitti" tanımı
-1. **Kullanıcı görüyor** — ekranda bir şey değişti ya da bir hata kayboldu. "Backend hazır" sayılmaz.
-2. **Testler yeşil** — mevcutlar + yeni davranış için en az bir test
+> TEK KAYNAK (AJ-46 · YN-14, 2026-09-27): `CLAUDE.md` § Bitti tanımı buraya atıf yapar.
+
+Bir iş ancak şu üçü varsa ✅:
+1. **Kullanıcı görüyor** — ekranda bir şey değişti ya da bir hata kayboldu.
+   ⛔ "Backend hazır" · "bileşen yazıldı ama mount edilmedi" · "uç eklendi" → BİTMEDİ.
+2. **Testler yeşil** — mevcutlar + yeni davranış için en az bir test (`CLAUDE.md` § MERGE POLİTİKASI kontrol listesi)
 3. **02-ILERLEME.md'ye yazıldı** — ne yapıldı, dosyalar, PR, "kullanıcı artık şunu görüyor"
+
+Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz:
+✅ "artık /disc-test açılıyor"   ❌ "loading state düzeltildi"
 
 ## ⛔ K-20 ZAMANLAMASI — belge senkronu gerçekten EN SON
 K-20 PR'ı, diğer TÜM PR'lar merge edildikten SONRA hazırlanır.

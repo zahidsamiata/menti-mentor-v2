@@ -280,3 +280,12 @@ Bir iş ancak şu üçü varsa ✅:
 Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz:
 ✅ "artık /disc-test açılıyor"   ❌ "loading state düzeltildi"
 ```
+
+### B.4-9 · 00-KUYRUK.md § "Bitti" tanımı (CLAUDE.md gövdesiyle birleşti; TEK KAYNAK artık burası) · 00-KUYRUK'tan
+
+```text
+## "Bitti" tanımı
+1. **Kullanıcı görüyor** — ekranda bir şey değişti ya da bir hata kayboldu. "Backend hazır" sayılmaz.
+2. **Testler yeşil** — mevcutlar + yeni davranış için en az bir test
+3. **02-ILERLEME.md'ye yazıldı** — ne yapıldı, dosyalar, PR, "kullanıcı artık şunu görüyor"
+```
