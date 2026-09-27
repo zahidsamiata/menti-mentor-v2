@@ -154,6 +154,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-110** | **Periyodik anket (ilişki geneli değerlendirme) ne olsun** | **1** (AJ-14) | ⬜ boş · ajan-ekledi · öneri A |
 | **KARAR-111** | **🔵 EVET/HAYIR — müsaitliğe görüşme türü + süre (K-15, ⛔ MIGRATION)** | **1** (K-15) | ⬜ boş · 🔵 · yedek: `AvailabilityBlock` |
 | **KARAR-112** | **Kurum logosu hangi adreslerden gösterilebilsin? (AJ-22 kalanı — izleme pikseli)** | **1** (AJ-22) | ⬜ boş |
+| **KARAR-113** | **Sertifika sınavında her seferinde kaç konu sorulsun, baraj neye göre? (AJ-34 / madde 149)** | **1** (AJ-34) | ⬜ boş |
 
 ---
 
@@ -1761,4 +1762,18 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** Gerçek kurum sayısı azken A pratikte düşük risklidir; kurum sayısı artınca B hızlı bir ara çözüm, C kalıcı çözümdür. B ile C birlikte de düşünülebilir (önce B, sonra C).
 **Benim önerim:** A şimdilik, C ayrı iş olarak planlansın — çünkü bugün gerçek kurum yok ve B logoları kırarken C riski tamamen kaldırır; bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** AJ-22 "kısmen" kalır; bugünkü davranış (A) sürer.
+**CEVAP:**
+
+
+### KARAR-113 · Sertifika sınavında her seferinde kaç konu sorulsun, baraj neye göre hesaplansın? (1 işi açar: AJ-34) [ÜRÜN KARARI]
+**Şu an ne var:** Mentör sertifika sınavında kurumun açtığı bütün konuları görüyor (10 konu açıksa 10 senaryo); geçmek için ilk seçimde %80'ini doğru yapmak gerekiyor (10'da 8). Tasarımdaki "4 kritik konu garantili + 4 rastgele" çekim yapılmıyor — rastgele kısım hiç çalışmıyor; kritik konular zaten her şey geldiği için her sınavda var. Kanıt: `backend/src/services/certification.service.ts:320` (`selectExamQuestions` çağrısı `maxTopics` vermiyor) · `backend/src/services/certExamSelection.ts:17-20` ("önce puanlama kararı gerekir") · baraj `requiredToPass(totalTopics)` = kurumdaki TÜM açık konular (`certification.service.ts` ~170-176) · kurum paneli "en az {requiredToPass} konuda başarılı" (`frontend/src/app/(admin)/admin/certification/page.tsx:77`) · mentör sonucu "{passed}/{totalTopics} konu" (`frontend/src/app/(dashboard)/mentor/certification/page.tsx:215,226`).
+**Sorun ne:** Tasarım belgesi sınavın 8 senaryo olacağını söylüyor (`docs/raporlar/icerik/faz6-ogrenme-ve-sertifika-2026-09-03.md:158-161`) ama barajın 8 üzerinden mi yoksa kurumdaki bütün konular üzerinden mi hesaplanacağını söylemiyor (aynı belge `:666` "gözden geçirilmeli" diye bırakmış). Çekimi açıp barajı değiştirmezsek 8 soruda 8 doğru gerekir — sınav fiilen "hatasız" olur.
+**Neden sana soruyorum:** Seçenekler mentörün kaç soru gördüğünü, sertifikanın ne kadar zor olduğunu ve kurum yöneticisinin panelde okuduğu "en az X konuda başarılı olmalı" cümlesini değiştiriyor — sertifikanın anlamı.
+**Seçenekler:**
+- **A) 4+4 çekim, baraj çekilen 8 senaryo üzerinden (8'de 7).** · Kullanıcı ne görür: her sınavda 8 senaryo (4 kritik + 4 rastgele, denemeden denemeye değişir); sonuç "7/8"; panel "8 konudan en az 7'si" · Kazanç: tasarıma uyar, sınav kısalır, ezberlenemez · Kaybedersin: mentör bazı açık konulardan hiç sınanmadan sertifika alabilir; iki mentör farklı zorlukta sınav görebilir; 8'den az konu açık kurum için ek kural gerekir (öneri: hepsi gelir) · Süre: M · Geri alınır: evet · Migration: yok (çekim sunucuda tohumlu, yeniden hesaplanır)
+- **B) Bugünkü gibi hepsi gelsin, baraj tüm açık konular (10'da 8); tasarım belgesi düzeltilsin.** · Kullanıcı ne görür: hiçbir şey değişmez · Kazanç: her mentör eşit ve eksiksiz sınanır, sonuçlar karşılaştırılabilir, kod riski yok · Kaybedersin: "rastgele 4" fikri bırakılır; sınav uzun kalır; tekrarda aynı konular gelir (yalnız senaryo varyantı değişir) · Süre: S · Geri alınır: evet · Migration: yok
+- **C) 4+4 çekim, baraj bugünkü formül (tüm açık konular).** · Kullanıcı ne görür: 8 senaryo, 8'in 8'i doğru gerekir · Kazanç: kurum panelindeki sayı değişmez · Kaybedersin: sertifika "tek hata eler" olur; 10'dan fazla konu açık kurumda baraj ulaşılamaz · Süre: S · Geri alınır: evet · Migration: yok (önerilmez; tam liste için)
+**Karşılaştırma:** Eşit ve eksiksiz ölçüm, karşılaştırılabilir sonuç istiyorsan B; kısa ve ezberlenemeyen sınav öncelikliyse A (az konulu kurum için ek kuralla). C tasarımın sayısını uygular ama barajın anlamını bozar.
+**Benim önerim:** B — tüm konuları sormak kritik konu garantisini zaten sağlıyor ve kuruma görünen metni değiştirmiyor; bu senin ürün kararın, önerime güvenme (tasarımı sen 4+4 yazdın).
+**Cevap vermezsen:** AJ-34 bekler; sınav bugünkü gibi eksiksiz çalışır, kullanıcıya zarar yok; madde 149 "kısmen" kalır.
 **CEVAP:**
