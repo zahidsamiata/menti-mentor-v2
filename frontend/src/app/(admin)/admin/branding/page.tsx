@@ -21,7 +21,7 @@
  */
 
 import { useState } from 'react';
-import { isSafeLogoUrl } from '@/lib/logoUrl';
+import { isLogoUrlSafeToSave, LOGO_URL_SAVE_ERROR } from '@/lib/logoUrl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -57,7 +57,7 @@ export default function BrandingPage() {
   const [saving, setSaving] = useState(false);
   const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const logoUrlValid = isSafeLogoUrl(logoUrl);
+  const logoUrlValid = isLogoUrlSafeToSave(logoUrl);
   const colorValid = HEX_COLOR.test(primaryColor);
   const canSave = logoUrlValid && colorValid && !saving;
 
@@ -65,7 +65,7 @@ export default function BrandingPage() {
     setAlert(null);
 
     if (!logoUrlValid) {
-      setAlert({ type: 'error', message: 'Geçerli bir https:// resim URL’si girin.' });
+      setAlert({ type: 'error', message: LOGO_URL_SAVE_ERROR });
       return;
     }
     if (!colorValid) {
@@ -126,10 +126,10 @@ export default function BrandingPage() {
               aria-invalid={!logoUrlValid}
             />
             {!logoUrlValid && (
-              <p className="text-xs text-destructive">Geçerli bir https:// resim URL&rsquo;si girin.</p>
+              <p className="text-xs text-destructive">{LOGO_URL_SAVE_ERROR}</p>
             )}
             <p className="text-xs text-muted-foreground">
-              Yalnızca https:// ile başlayan doğrudan resim bağlantıları kabul edilir. Boş bırakırsanız baş harfler gösterilir.
+              Yalnızca https:// ile başlayan, .png/.jpg/.jpeg/.webp uzantılı doğrudan resim bağlantıları kabul edilir. Boş bırakırsanız baş harfler gösterilir.
             </p>
           </div>
 

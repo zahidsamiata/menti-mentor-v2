@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import type { WizardData } from '../_StkOnboardingContent';
-import { isSafeLogoUrl, LOGO_URL_ERROR } from '@/lib/logoUrl';
+import { isLogoUrlSafeToSave, LOGO_URL_SAVE_ERROR } from '@/lib/logoUrl';
 
 interface Props {
   data: WizardData;
@@ -21,8 +21,9 @@ const PRESET_COLORS = [
 ] as const;
 
 export function Step3Branding({ data, onUpdate, onNext }: Props) {
-  // F-04: backend yalnız https logo kabul eder; burada engellenmezse kayıt adımı sessizce yarım kalırdı.
-  const logoUrlValid = isSafeLogoUrl(data.logoUrl);
+  // AJ-05: backend yazma yolunda https + izinli uzantı + özel ağ/localhost reddi ister;
+  // burada aynı kural uygulanmazsa kayıt adımı sessizce yarım kalırdı.
+  const logoUrlValid = isLogoUrlSafeToSave(data.logoUrl);
   return (
     <div className="space-y-5">
       <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-5">
@@ -35,7 +36,7 @@ export function Step3Branding({ data, onUpdate, onNext }: Props) {
           placeholder="https://..."
           value={data.logoUrl}
           onChange={(e) => onUpdate({ logoUrl: e.target.value })}
-          error={logoUrlValid ? undefined : LOGO_URL_ERROR}
+          error={logoUrlValid ? undefined : LOGO_URL_SAVE_ERROR}
         />
 
         {/* Ana renk */}
