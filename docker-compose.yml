@@ -70,6 +70,8 @@ services:
       LINKEDIN_CLIENT_ID: ${LINKEDIN_CLIENT_ID:-}
       LINKEDIN_CLIENT_SECRET: ${LINKEDIN_CLIENT_SECRET:-}
       LINKEDIN_REDIRECT_URI: ${BACKEND_URL:-http://localhost:3000}/api/auth/linkedin/callback
+      # F-05 (G1-26): boşsa CAPTCHA doğrulaması no-op'tur (middleware/turnstile.ts).
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
     ports:
       - "${BACKEND_PORT:-3000}:3000"
     healthcheck:
@@ -90,6 +92,8 @@ services:
         NEXT_PUBLIC_API_URL: ${BACKEND_URL:-http://localhost:3000}
         # Y-09: kanonik site kökü (og:image/sitemap). Boşsa getSiteUrl() localhost fallback'i.
         NEXT_PUBLIC_SITE_URL: ${FRONTEND_URL:-}
+        # F-05 (G1-26): Turnstile site key (public). Boşsa CAPTCHA widget'ı render edilmez.
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
     restart: unless-stopped
     depends_on:
       backend:

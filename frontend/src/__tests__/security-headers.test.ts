@@ -74,4 +74,11 @@ describe('buildSecurityHeaders (F-04 CSP)', () => {
     expect(d['img-src']).not.toContain('http://cdn.example.org');
     expect(d['img-src']).not.toContain('https:');
   });
+
+  it('F-05 (G1-26): Cloudflare Turnstile script-src + frame-src içinde — rapor modu kapatılmadı', () => {
+    expect(CSP_HEADER_NAME).toBe('Content-Security-Policy-Report-Only');
+    const d = parsePolicy(buildContentSecurityPolicy({ apiUrl: 'https://api.example.org' }));
+    expect(d['script-src']).toContain('https://challenges.cloudflare.com');
+    expect(d['frame-src']).toContain('https://challenges.cloudflare.com');
+  });
 });

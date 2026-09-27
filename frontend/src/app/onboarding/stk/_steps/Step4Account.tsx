@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/molecules/TurnstileWidget';
 import { selfServeRegister, updateOnboarding } from '@/lib/api/selfServe';
 import { REGISTER_MESSAGES } from '@/lib/registerMessages';
 import { PASSWORD_RULE_HINT, passwordRuleError } from '@/lib/validation';
@@ -61,6 +62,9 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
   const [verificationNote, setVerificationNote] = useState('');
   // GV-12: başvuru alındı ama oturum açılmadı → "e-postanızı kontrol edin" ekranı.
   const [checkEmail,      setCheckEmail]       = useState(false);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken,    setCaptchaToken]     = useState<string | undefined>(undefined);
+  const captchaRef = useRef<TurnstileWidgetHandle>(null);
 
   useEffect(() => {
     if (data.email.includes('@')) {
@@ -86,6 +90,7 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
       slug:             data.slug,
       programTemplate:  data.programTemplate,
       kvkkConsent:      data.kvkkConsent,
+      captchaToken,
       ...(needsVerification && {
         institutionRole,
         verificationNote,
@@ -102,6 +107,10 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
       }
       // STK'ya özel backend mesajları (ör. slug alınmış) korunur; yalnızca
       // genel fallback paylaşılan sabitten gelir (dağınık string yerine).
+      // Token tek kullanımlıktır (bkz. TurnstileWidget dosya başı) — sıfırlanmazsa
+      // kullanıcı ikinci denemede kendi hatasını değil CAPTCHA_GECERSIZ'i görür.
+      captchaRef.current?.reset();
+      setCaptchaToken(undefined);
       setServerError(regResult.error.message ?? REGISTER_MESSAGES.GENERIC_FAIL);
       return;
     }
@@ -269,6 +278,9 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
             <p className={cn('text-xs text-destructive pl-7')}>{errors['kvkk']}</p>
           )}
         </div>
+
+        {/* CAPTCHA (F-05/G1-26) */}
+        <TurnstileWidget ref={captchaRef} onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
 
       </div>
 

@@ -18,6 +18,9 @@ export interface RegisterPayload {
   // Davet token'ı (davet linkindeki ?token). Backend doğrular → geçerliyse davetli APPROVED
   // olur ve login PENDING 403'üne takılmaz (PO kararı 2026-09-01, Seçenek A).
   inviteToken?: string;
+  // F-05 (G1-26): Cloudflare Turnstile CAPTCHA token'ı. Site key tanımsızsa widget hiç
+  // render edilmediğinden bu alan gönderilmez; backend de anahtar yokken no-op'tur.
+  captchaToken?: string;
 }
 
 export interface RegisterResponse {
@@ -67,10 +70,11 @@ export const authApi = {
 
   // Şifre sıfırlama e-postası tetikler. Backend, kullanıcı tespitini önlemek için
   // e-posta kayıtlı olmasa da aynı generic mesajı döndürür.
-  forgotPassword: (email: string) =>
+  // captchaToken: F-05 (G1-26) — site key tanımsızsa undefined gider, backend no-op'tur.
+  forgotPassword: (email: string, captchaToken?: string) =>
     apiClient<{ message: string }>('/api/auth/forgot-password', {
       method: 'POST',
-      body: { email },
+      body: { email, captchaToken },
     }),
 
   // E-postadaki token + yeni şifre ile şifreyi günceller.
