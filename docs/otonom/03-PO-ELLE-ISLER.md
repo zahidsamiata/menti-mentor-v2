@@ -14,6 +14,14 @@
 
 > 🟢 **YENİ (2026-09-26, V-16) — Dokploy: backend build argümanı `GIT_SHA` (isteğe bağlı, düşük risk).** `/health` yanıtına canlıda hangi backend commit'inin koştuğunu gösteren `commit` alanı eklendi. Dokploy'da backend build'i için `GIT_SHA` host ortam değişkeni deploy edilen commit'in kısa SHA'sı ile set edilmeli (Dokploy'un "pre-build command" ya da "build args" ayarına `export GIT_SHA=$(git rev-parse --short HEAD)` ya da Dokploy'un kendi sağladığı commit-SHA değişkeni eşlenebilir — panelde hangisi varsa). **Ayarlanmazsa** `/health.commit` sabit `"unknown"` döner — YANLIŞ bir değer değil, yalnız bilgisiz; acil değil. **Doğrulama:** deploy sonrası `curl https://api.sivilkapasite.org/health` → `commit` alanı gerçek kısa SHA'yı göstermeli. (Kod tarafı: backend Dockerfile `ARG GIT_SHA` + çatı `docker-compose.yml` `build.args`.)
 
+> 🟠 **YENİ (2026-09-27, F-05/G1-26) — Cloudflare Turnstile CAPTCHA hesabı + iki anahtar.** Kod kısmı hazır (backend PR #183, çatı PR #367, MERGE YOK) — public 4 uçta (kayıt, self-serve kurum kaydı, şifremi unuttum, şüphe bildirimi) CAPTCHA doğrulaması eklendi ama **anahtar girilene kadar etkisizdir** (no-op, bugünkü davranış aynen). PO'nun yapacakları:
+> 1. **dash.cloudflare.com** → ücretsiz hesap aç (yoksa) → Turnstile → "Add site" → widget tipi **Managed**, domain: canlı frontend alan adı.
+> 2. Cloudflare iki değer verir: **Site Key** (public) ve **Secret Key** (gizli).
+> 3. **Backend Dokploy env'ine** `TURNSTILE_SECRET_KEY` = Secret Key gir.
+> 4. **Frontend Dokploy build argümanına** `NEXT_PUBLIC_TURNSTILE_SITE_KEY` = Site Key gir (frontend `NEXT_PUBLIC_*` değişkenleri build sırasında koda gömülür — `NEXT_PUBLIC_SITE_URL` ile aynı desen, ayrı build tetiklemek gerekir).
+> 5. İki PR'ı **CI yeşilken merge et** (backend önce, sonra çatı pointer'ı re-bump — bkz. CLAUDE.md "Merge sonrası pointer bump").
+> **Doğrulama:** her iki anahtar da girilip yeniden deploy sonrası `/register`, `/bildir`, `/onboarding/stk` (Adım 4), `/forgot-password` sayfalarında "robot değilim" kutusu görünmeli; kutu işaretlenmeden gönderim "Lütfen robot olmadığınızı doğrulayın" hatası dönmeli. **Yalnız backend anahtarı girilir, frontend anahtarı girilmezse:** widget hiç görünmez ama form yine de gönderilebilir (backend token bekler, kullanıcı hep 400 alır) — bu yüzden ikisi BİRLİKTE girilmeli. **Acil değil** — anahtar girilene kadar hiçbir davranış değişmez, mevcut IP rate-limit koruması olduğu gibi çalışmaya devam eder.
+
 ## ⛔ GÜVENLİK — bu belgeye ASLA gerçek değer yazılmaz
 Repo **PUBLIC**. Şifre · API anahtarı · token · SMTP parolası · JWT secret **buraya YAZILMAZ.**
 Yalnız "hangi değişken · nereye · neden · nasıl doğrularım" yazılır. Değerler PO'da/Dokploy'da kalır.
