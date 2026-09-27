@@ -2,7 +2,7 @@
 > TÜR: 🧊 · SON DOĞRULAMA: 2026-09-23 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
 
 📸 ARŞİV — 2026-09-23. Buradaki kayıtlar TAMAMLANMIŞ/CEVAPLANMIŞ'tır.
-Aktif iş ve cevapsız kararlar ana dosyadadır (`docs/otonom/01-KARARLAR.md`). Buraya YENİ kayıt EKLENMEZ.
+Aktif iş ve cevapsız kararlar ana dosyadadır (`docs/otonom/01-KARARLAR.md`). ⚠️ 2026-09-27 (PO K-A): bu arşive kural gereği YENİ kayıt EKLENİR — OTONOM-PROMPT.txt § AKTİF/ARŞİV AYRIMI (iş BITTI / kart İŞLENDİ olunca aynı commit'te buraya). Eski kayıtlar değiştirilmez.
 
 # 01-KARARLAR — CEVAPLANMIŞ KARARLAR ARŞİVİ (2026-09)
 
