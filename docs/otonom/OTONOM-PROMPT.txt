@@ -237,6 +237,8 @@ Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARIS
     Dondurulmus (📸) belgeye DOKUNULMAZ → `docs/raporlar/kod-denetimi/donmus-belge-esleme-*.md` tablosuna satir.
     Degisen satirin eski metni `docs/arsiv/belge-senkron-<tarih>.md`'ye AYNEN. (2026-09-27 BITTI son
     dogrulamasinda 209 isin kaynaklari "acik" kalmisti — borc birikmesin diye.)
+    Is kaynak maddenin yalniz BIR PARCASINI yapiyorsa, KALAN parca AYNI commit'te bir SAHIBE baglanir
+    (AJ satiri · kuyruk isi · KARAR karti · 03-PO maddesi); sahipsiz kalan birakilmaz (PO 2026-09-27).
 Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
 01-KARARLAR'da "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta kod disi `~~[ESKI` blogu.
 UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
@@ -261,6 +263,28 @@ satiri "madde N" atfi tasiyor ve 00-KARAR-TAKIP'te madde N satirinda ✅/🟨 yo
        tenant izolasyonu → baska kurumun verisi gorunmuyor ·
        bildirim → gonderim basarisiz olunca cagiran BUNU GORUYOR.
      Test yoksa PR "KANIT EKSIK" etiketiyle acilir, merge onerilmez.
+ [ ] ⭐ MUTASYON KANITI (PO 2026-09-27): BITTI icin olcutu olcen test, duzeltme geri alindiginda
+     KIRMIZI olmali. Yerel kosabiliyorsa (backend `.unit.` · frontend) yerelde; DB gerekiyorsa
+     §MUTASYON-CI yontemiyle. Kanit PR aciklamasina VE kuyruk Not'una:
+     "mutasyon: <test adi> kirmizi · <kosu linki / cikti>". Test yazilamiyorsa is BITTI DEGILDIR →
+     "BITTI (kismen — test yok)" olarak kapanir.
+     Bu kutu icin ISTISNA: kutu bos olsa da merge ENGELLENMEZ (digerleri tamsa); Durum
+     "BITTI (kismen — test yok / test olcmuyor)" olur ve satir kuyrukta KALIR (5c-a "belirsiz satir",
+     arsive tasinmaz), eksik test kalani ayni commit'te bir sahibe baglanir (5c-h).
+     Kod degisikligi olmayan is (yalniz belge/kural): bu kutu N/A.
+     Bolum 5 (c) "zaten yapilmis → BITTI" ve K5-Y2 yeniden kontrolu de ayni mutasyon kanitini ister.
+     Dal adi: mutasyon dallari `mutasyon/<is>-<tarih>` (otonom/... kuralinin istisnasi).
+
+§MUTASYON-CI (DB isteyen testler — yerelde DATABASE_URL yok):
+  duzeltme PR'i merge EDILMEDEN once ondan ayri `mutasyon/<is>-<tarih>` dali ac → YALNIZ duzeltme
+  satirlarini geri al, testleri BIRAK → TASLAK (draft) PR → CI kossun → ilgili test adlari KIRMIZI
+  olmali → sonuc ana PR aciklamasina → taslak PR merge EDILMEDEN kapatilir (dal silinmez).
+  Bir kovanin tum kalemleri tek mutasyon dalinda geri alinabilir; hangi testin hangi kalemi
+  yakaladigi CI ciktisinda adiyla gorulmeli. Mutasyon dali ASLA main'e merge edilmez (Dokploy
+  autodeploy yalniz main'i izler — `docs/kararlar/konu/02-mimari-ve-altyapi.md:37`).
+  Mutasyonda test YESIL kalirsa test olcmuyor: testi duzelt, tekrarla; 3 denemede kirmizi
+  olmazsa is "kismen — test olcmuyor" kapanir.
+
 Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
 
 ═══════════════════════════════════════════════════════════════
@@ -290,9 +314,13 @@ Karantina 🔵 olur; gerçek silme (silme protokolünün son adımı) 🔴 kalı
 ⚠️ Çelişkide BU bölüm kazanır: hassas dosya → 🟢 + 7b (b)(c); migration/seed/canlı veri/karantina → 🔵.
 
 ─── 7b — MERGE ŞARTLARI (4 renk, PO 2026-09-26) ───
+⭐ DOGRULAYAN MODEL (PO 2026-09-27): Dogrulama, kalite kontrolu ve 7b bagimsiz incelemesi YALNIZ
+   opus alt-ajanla yapilir. Sonnet alt-ajanlar yalniz arama/listeleme/envanter cikarir;
+   "dogru / yanlis / tutar" hukmu VERMEZ. Gerekce: bitti-dogrulama-2026-09-27'de sonnet ✅'lerinin
+   %34'u curudu (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` § Ozet).
 🟢 bir iş şu şartlarla merge edilir; biri eksikse PR-ACIK + eksik şart yazılır:
  (a) Bölüm 6 kutuları tam — "auth/KVKK/matching dosyalarına dokunulmadı" maddesi HARİÇ
-     (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar).
+     (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar). MUTASYON KANITI kutusu boşsa Bölüm 6'daki istisna geçerli (merge edilir, Durum "BITTI (kısmen …)", satır kuyrukta kalır).
  (b) HASSAS DOSYA (auth/yetki · KVKK/rıza · matching/skorlama) değişiyorsa: işi YAZMAYAN bir
      inceleme alt-ajanının PR'a yazdığı "Bağımsız inceleme kaydı" yorumu, "SONUÇ: ONAY" ile
      biten. İnceleme şunlara bakar: kapsam · güvenlik listesi (CLAUDE.md § Güvenlik Kuralları) ·
@@ -505,6 +533,10 @@ sonra "CI bekliyor" yaz ve baska ise gec.
 Uzun okumalari, taramalari ve incelemeleri alt ajanlara ver, ana baglama yalniz
 ozet gelsin. Buyuk dosyalarda hedefli ara (grep / satir araligi). Durumu
 bellekte degil dosyalarda tut.
+
+K4.0 · ALT AJAN MODELI (PO 2026-09-27): hukum veren her alt ajan (dogrulama · kalite kontrolu ·
+7b inceleme · siniflandirma) OPUS'tur. Sonnet yalniz arama/listeleme/envanter; bulgusu opus
+tarafindan hukme baglanir (bkz. Bolum 7b "DOGRULAYAN MODEL").
 
 ⚠️ K4.1 · ALT AJAN İZOLASYONU (2026-09-26 eklendi, gercek carpismadan sonra):
 Bir alt ajana yerel `git checkout`/branch degistirme/test calistirma/tsc/build
