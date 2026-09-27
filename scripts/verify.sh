@@ -17,9 +17,12 @@
 #   - `npx prisma migrate deploy` ayrı adım olarak koşulmaz; tests/globalSetup.ts zaten
 #     migrate deploy çalıştırır ve bunu YALNIZ TEST_DATABASE_URL'e (guard'dan geçerek) yapar.
 #   - e2e-browser job'u hiç koşulmaz → çıktıda "ATLANDI" yazar; kanıt CI'dır.
-#   - Backend reposunun kendi CI'ı (backend/.github/workflows/ci.yml) yalnız npm ci · prisma generate ·
+#   - Backend reposunun kendi CI'ı (backend/.github/workflows/ci.yml, `ci` job'u) yalnız npm ci · prisma generate ·
 #     tsc --noEmit · vitest run koşar; tsc (tests) ve ESLint ADIMI YOK. Bu iki adımın CI kanıtı
 #     çatı CI'ıdır (her dalda koşar, backend'i submodule pointer'ı üzerinden doğrular).
+#   - Backend CI'ın `docker-prisma` job'u (KR-16: `docker build` + ağsız konteynerde Prisma CLI/motor
+#     sürümü lockfile ile aynı mı + imajdaki CLI ile boş Postgres'e `prisma migrate deploy`) yerelde
+#     HİÇ koşulmaz (Docker + servis Postgres ister); kanıtı yalnız backend CI'dır (main-hedefli PR).
 #
 # KURAL 14 (CI YEŞİL ≠ TEST KOŞTU): atlanan adım ASLA ✓ gösterilmez.
 #   Çıkış kodları: 0 = koşulabilen tüm adımlar yeşil (yalnız e2e atlandı, kanıt CI)

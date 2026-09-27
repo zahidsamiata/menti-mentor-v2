@@ -10,6 +10,7 @@
 # UYARI (çıkış kodunu değiştirmez): boyut eşikleri (Bölüm 5c) · kural (h): arşivdeki BITTI satırı "madde N"
 #   atfı taşıyor ve docs/kararlar/00-KARAR-TAKIP.md'de madde N satırında ✅ / 🟨 yok → "BITTI işin kaynağı açık"
 #   (gerekçeli istisna: docs/raporlar/kod-denetimi/bekci-istisna.txt — satır biçimi "<iş> madde <N> # <gerekçe>").
+#   · kural (i): CI job'u scripts/verify.sh başlığında anılmıyor (KR-22)
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -99,6 +100,32 @@ if takip is not None:
                     continue
                 if not any('✅' in t or '🟨' in t for t in satirlar):
                     warnings.append(f'BITTI işin kaynağı açık: {kimlik} → madde {madde} (00-KARAR-TAKIP; {aname}:{no}) — kural (h): "✅ yapıldı — {kimlik} · PR #" ya da istisna')
+
+# Kural (i) KR-22: CI job'ları scripts/verify.sh başlık yorumunda anılıyor mu — yalnız UYARI.
+# Yerelde koşulmayan job da "bilinçli fark" olarak başlıkta yazılı olmalı. backend/ CI dosyası yalnız
+# submodule çekiliyse okunur (çatı docs-guard job'u submodule çekmez → orada atlanır).
+vsh = read('scripts/verify.sh')
+if vsh is not None:
+    header = []
+    for vline in vsh.split('\n'):
+        if not vline.startswith('#'):
+            break
+        header.append(vline)
+    header = '\n'.join(header)
+    for ci_rel in ('.github/workflows/ci.yml', 'backend/.github/workflows/ci.yml'):
+        ci_text = read(ci_rel)
+        if ci_text is None:
+            continue
+        in_jobs = False
+        for cline in ci_text.split('\n'):
+            if re.match(r'^jobs:\s*$', cline):
+                in_jobs = True
+                continue
+            if in_jobs and re.match(r'^\S', cline):
+                in_jobs = False
+            jm = re.match(r'^  ([A-Za-z0-9_-]+):\s*(#.*)?$', cline) if in_jobs else None
+            if jm and not re.search(r'(?<![\w-])' + re.escape(jm.group(1)) + r'(?![\w-])', header):
+                warnings.append(f'{ci_rel} job "{jm.group(1)}" scripts/verify.sh başlığında anılmıyor — adım eşlemesine ya da "bilinçli farklar"a yaz (KR-22)')
 
 LIMITS = [('docs/otonom/00-KUYRUK.md', 150), ('docs/otonom/01-KARARLAR.md', 150),
           ('docs/otonom/02-ILERLEME.md', 150), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),

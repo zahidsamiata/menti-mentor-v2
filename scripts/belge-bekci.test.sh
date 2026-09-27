@@ -93,4 +93,23 @@ echo 'X-09 madde 777' >"$TMP/root/docs/raporlar/kod-denetimi/bekci-istisna.txt"
 expect 0 "kural (h) istisna gerekçesiz → istisna sayılmaz, iki uyarı"
 grep -q "kaynağı açık: X-09" "$TMP/out" && grep -q "gerekçe eksik" "$TMP/out" || { echo "  ✗ kural (h): gerekçesiz istisna yanlış işlendi"; FAIL=1; }
 
+# ── kural (i) KR-22: CI job'u verify.sh başlığında anılmalı → yalnız UYARI ──
+setup_i() {  # setup_i <verify.sh başlığındaki metin>
+  setup_clean
+  mkdir -p "$TMP/root/scripts" "$TMP/root/backend/.github/workflows"
+  printf '#!/usr/bin/env bash\n# eşleme: backend-check\n# %s\nset -euo pipefail\n# docker-prisma (başlık dışı)\n' "$1" >"$TMP/root/scripts/verify.sh"
+  printf 'name: CI\non:\n  push:\njobs:\n  backend-check:\n    runs-on: x\n' >"$TMP/root/.github-ci.tmp"
+  mkdir -p "$TMP/root/.github/workflows" && mv "$TMP/root/.github-ci.tmp" "$TMP/root/.github/workflows/ci.yml"
+  printf 'name: CI\njobs:\n  docker-prisma:\n    runs-on: x\n' >"$TMP/root/backend/.github/workflows/ci.yml"
+}
+
+setup_i 'bilinçli fark: `docker-prisma` yerelde koşmaz'
+expect 0 "kural (i) pozitif: backend job'u başlıkta anılıyor → uyarı yok"
+grep -q "KR-22" "$TMP/out" && { echo "  ✗ kural (i): anılan job için uyarı çıktı"; FAIL=1; }
+
+setup_i 'başka bir not'
+expect 0 "kural (i) negatif: backend job'u başlıkta yok (yalnız gövdede) → yeşil + uyarı"
+grep -q 'job "docker-prisma" scripts/verify.sh başlığında anılmıyor' "$TMP/out" || { echo "  ✗ kural (i) uyarısı çıktıda yok"; FAIL=1; }
+grep -q 'job "push"' "$TMP/out" && { echo "  ✗ kural (i): on: altındaki push job sanıldı"; FAIL=1; }
+
 exit $FAIL
