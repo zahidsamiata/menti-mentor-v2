@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
+import { UI_TEXT } from '@/lib/uiText';
 
 interface Props {
   userId: string;
@@ -109,7 +110,7 @@ export function DailyQuestionWidget({ userId }: Props) {
                 disabled={selected === null || submitting}
                 onClick={handleSubmit}
               >
-                {submitting ? 'Kaydediliyor…' : 'Gönder ve devam et'}
+                {submitting ? UI_TEXT.status.saving : 'Gönder ve devam et'}
               </Button>
               <button
                 className="text-xs text-muted-foreground hover:text-foreground"

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { ProfileData, ExpectationCategory, TimeCommitment } from '@/types/onboarding';
 import type { UserRole } from '@/types/auth';
+import { UI_TEXT } from '@/lib/uiText';
 
 // ─── Statik veriler ────────────────────────────────────────────────────────────
 
@@ -312,7 +313,7 @@ export function ProfileStep({ role, onComplete, isSubmitting, error }: ProfileSt
         size="lg"
         className="w-full h-12 text-base rounded-xl gap-2"
       >
-        {isSubmitting ? 'Kaydediliyor…' : 'Devam Et — Mizaç Testine Geç'}
+        {isSubmitting ? UI_TEXT.status.saving : 'Devam Et — Mizaç Testine Geç'}
         {!isSubmitting && <ChevronRight className="h-4 w-4" aria-hidden />}
       </Button>
     </div>

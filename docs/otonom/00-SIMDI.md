@@ -1,55 +1,53 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 19:20 UTC · çatı main HEAD `df1ec56` · backend main HEAD `dea79d8` (canlı pointer `60715c7`)
+**Son güncelleme:** 2026-09-27 (oturum açılışı) UTC · çatı main HEAD `75979b3` · backend main HEAD `4db73a1` (= canlı pointer)
 
-**Durum:** ÇALIŞIYOR (VPS oturumu · en fazla 2 şerit)
+**Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** Şerit 1 (alt ajan): KR-16 (Prisma CLI imajda + CI'da Docker kanıt job'u). Okuma: AN-54 taraması. Şerit 2: 🔵 işler kod+PR+kart (AN-02 #160 açıldı; sıradaki Y-05).
+**Şu an yapılan:** K2 açılış tamam (worktree'lerde push edilmemiş iş yok; Y1-B9 KVKK md.11 muafiyeti zaten main'de: backend `src/middleware/tenantSuspension.ts:31-54`, #165). Şerit 1: GÖREV 0 belgeleri · Şerit 2: P-05 merge (backend #162 → pointer → çatı #340).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
-| çatı #339 | AN-10 (mentör yazımı) | dağıtım bekleniyor |
-| backend #156 · #158 + çatı #338 | Y-02 · IC-11 (pointer → `60715c7`) | ok:true, db:up, site 200 |
-| backend #152 + çatı #335 | GV-19 (şifre değiştirme) + AN-09 (#155) | ok:true, db:up, site 200 |
-| backend #153 · #154 + çatı #336 | PS-09 · KR-21 (pointer → `3f76c7b`) | ok:true, db:up, site 200 |
-| çatı #334 | YN-13 (kişi adı) | belge işi |
-| çatı #333 | PS-10 (boş mentör listesi profili suçlamıyor) | ok:true, db:up, site 200 |
-| çatı #331 | IC-01 (DISC boyut etiketleri Türkçe) | ok:true, db:up, site 200 |
-| çatı #330 | KR-22 (verify.sh ↔ CI) | ok:true, db:up |
-| backend #143 · #145 · #150 + çatı #329 | PS-A1 · GV-08 · KR-14 | ok:true, db:up, site 200 |
-| çatı #328 | GÖREV 0 — kapı düzeni 4 renk | ok:true, db:up, site 200 |
+| backend #171 + çatı #353 | AN-07 (aday kesmesi skordan sonra) | ok:true, db:up, site 200 |
+| backend #170 + çatı #352 | Y3b (başka kurumun KVKK/metrik isteği → 404) | ok:true, db:up, site 200 |
+| backend #169 + çatı #351 | K5-Y3 (10 uca 41 negatif test — açık yok) | ok:true, db:up, site 200 |
+| çatı #350 | K-05b (saat yalnız müsait aralıklardan) | ok:true, db:up, site 200 |
+| backend #168 + çatı #348 | KR-19b (engellenmiş çift mesaj/istek gönderemez) | ok:true, db:up, site 200 |
+| çatı #349 · #347 | F-28b (UI_TEXT) · AN-10b (mentörlüğün) | ok:true, db:up |
+| backend #167 + çatı #346 | Y1-B9c (askıdaki kuruma çapraz istek yok) | ok:true, db:up, site 200 |
+| backend #166 + çatı #345 | Y1-B9b (askıdaki kurum önerilerde yok, reapply kapalı) | ok:true, db:up, site 200 |
+| backend #165 + çatı #344 | Y1-B9 (dondurulmuş/reddedilmiş kurum erişemez; KVKK hakları açık) | ok:true, db:up ×2, site 200 |
+| backend #163 + çatı #342 | F-18 (KPI CSV) | ok:true, db:up, site 200 |
+| backend #161 · #159 + çatı #341 | KR-16 (açılış internetsiz) · IC-12 | ok:true, db:up ×3, site 200 |
+| çatı #339 · #338 · #335 · #336 · #334 · #333 · #331 · #330 · #329 · #328 | AN-10 · IC-11/Y-02 · GV-19/AN-09 · KR-21/PS-09 · YN-13 · PS-10 · IC-01 · KR-22 · PS-A1/GV-08/KR-14 · GÖREV 0 | hepsi ok:true, db:up, site 200 |
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| backend #157 + çatı #337 | AN-26 · 🔵 KARAR-98 (migration) | yeşil (941 test) | ✅ ONAY (2. tur) | PO EVET (+ alt soru: paylaşımlı havuzda kime) + `Conversation` yedeği |
-| backend #160 | AN-02 seed metin yazımı · 🔵 KARAR-99 | koşuyor | gerekmiyor (yalnız metin) | PO EVET + `Question`/`SjtQuestion` yedeği + 2 satır UPDATE |
-| backend #151 + çatı #332 | IC-08 onay bekleyene düzeltme notu · 🟢+7b | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi (Engeller) |
-| backend #148 + çatı #326 | U-18 · 🔵 KARAR-97 | yeşil | ✅ ONAY (2. tur) | PO EVET + `Conversation` yedeği (DB erişimi gerekir) |
-| backend #142 + çatı #320 | AN-30 · 🔵 KARAR-96 · ⛔ çıkış blokeri | yeşil | ✅ ONAY (2. tur) | PO EVET + `Consent` yedeği (DB erişimi gerekir) |
+| backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
+| backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim | yeşil | ✅ ONAY | kapı 🔵 ama migration'sız → kapı kararı (strateji) |
+| backend #151 + çatı #332 | IC-08 düzeltme notu | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi |
+| backend #157 + çatı #337 | AN-26 hatırlatma/eskalasyon · 🔵 | yeşil | ✅ ONAY | KARAR-98 EVET (+ alt soru) + `Conversation` yedeği |
+| backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 | yeşil | ✅ ONAY | KARAR-97 EVET + `Conversation` yedeği |
+| backend #142 + çatı #320 | AN-30 granüler rıza · 🔵 · çıkış blokeri | yeşil | ✅ ONAY | KARAR-96 EVET + `Consent` yedeği |
+| backend #160 | AN-02 seed metin yazımı · 🔵 | yeşil | — | KARAR-99 EVET + 2 satır UPDATE |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
-**Kapı dağılımı (#328 sonrası, açık 122 satır):** 🟢 51 · 🔵 11 · 🟡 9 · 🔴 51 (beklenen 51/11/6/50). Fark: 🟡 +3 = PS-A1 · PS-A3 · PS-A4 (49'luk listede yoktu, değiştirilmedi); 🔴 +1 = KR-08 / F-14 karışık hücre (teyit gerek). Ayrıntı: `02-ILERLEME.md` 2026-09-26 kaydı · PR #328.
-
-**Push edilmemiş iş:** yok. (Önceki oturumun `/tmp` worktree'sindeki KR-22 yarım işi kurtarıldı → #330; eski `/tmp` worktree'leri silinmedi — PO onayıyla temizlenir.)
+**Push edilmemiş iş:** yok.
 
 **Engeller:**
-- ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` (backend, IC-08) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` #151 CI yeşil + 7b ONAY (yorum 5848715616); çatı #332 buna bağlı. Ardışık ret: 1 (sonraki merge'ler başarılı → sayaç sıfırlandı).
-- 🔵 DB erişimi: AN-30 (KARAR-96) ve U-18 (KARAR-97) için PO "EVET" verirse tarihli yedek gerekir → bu VPS'te DATABASE_URL yok: "tek seferlik DB erişimi gerekiyor: AN-30 #142/#320 · U-18 #148/#326".
+- ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` (Ardışık ret sayısı sıfırlandı; sonraki merge'ler geçti.)
+- 🗄️ Tek seferlik DB erişimi gerekiyor: **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
 
-**PO'ya sorular:** KARAR-96 (AN-30) · KARAR-97 (U-18) · KARAR-98 (AN-26 + alt soru) · KARAR-99 (AN-02 metin düzeltmesi) — hepsi 🔵 EVET/HAYIR.
+**PO'ya sorular:** ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
-- (AN-53) `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md` §Öne çıkan bulgular: kuyrukta karşılığı OLMAYAN ~30 ⬜ kalem (ör. G1-09 KVKK başvuru adresi, G1-10 aydınlatma kategorileri, G1-18 `User.role` sayımları, G7-02 açık tema kontrastı, G10-12 `/clubs`) ve "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23, F-27/G6-01, G6-03, G7-13, F-21/G7-09). Ajan iş eklemez → satır açma kararı sizde.
-- (Y-02 7b) `GET /api/system-logs` iz bırakmıyor ve `meta`'yı tam döndürüyor — kuyrukta satırı yok.
-- AN-30 7b: OAuth pending token ile access token aynı sırrı kullanıyor (`typ` yok, sömürülemez) — kuyrukta satırı yok; AN-30 merge edildiği turda CLAUDE.md public uç listesine `POST /api/auth/oauth/complete-registration` eklenmeli.
-- U-18 takip: gerçek bildirim + inbox'ta ret işareti (bildirim servisi hâlâ stub — OB-09).
-- PS-A1/PS-A3/PS-A4 kapı sütunu 🟡 (yeni tanımla matching → 🟢+7b beklenir).
-- `/api/super-admin/*` uçları frontend'de kullanılmıyor (MÜKERRER, K-13); Y-02 PR'ı maskesiz PII sızıntısını kapattı, kaldırma silme protokolüne tabi.
-- I-12 ATLANDI(karar): KARAR-57 cevabına bağlı. AN-06 kod ayağı büyük olasılıkla migration (🔵) + PO teyidi.
+- Kuyrukta satırı olmayan bulgular: G-kart doğrulaması ~30 ⬜ kalem (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) · `GET /api/system-logs` iz/meta · kurum-içi sayımlar `User.role` (KPI + G1-18) · frontend askı ekranı yok · token türü ayrımı (OAuth pending) · U-18 gerçek bildirim/inbox ret işareti.
+- Kapı: P-05 (🔵 ama migration'sız, ONAY'lı) · PS-A3/PS-A4 🟡 (yeni tanımla 🟢+7b).
+- "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23 · F-27/G6-01 · G6-03 · G7-13 · F-21/G7-09) — K5-Y2 bu turda denetliyor.
 
-**Karar kilidi (en çok iş açan cevapsız kartlar):** KARAR-57 (4, +I-12) · KARAR-45 (4) · KARAR-56 (3) · KARAR-68/65/62/61/59/55 (2'şer) · 🔵 KARAR-96 (AN-30 çıkış blokeri) · 🔵 KARAR-97 (U-18).
+**Karar kilidi (en çok iş açan cevapsız kartlar):** KARAR-57 (4, +I-12) · KARAR-45 (4, + IC-10/AN-05 adları) · KARAR-56 (3) · KARAR-68/65/62/61/59/55 (2'şer) · KARAR-101 (güvenlik) · 🔵 96/97/98/99.
 
-**Sıradaki 5 iş:** (1) GV-19/Y-02 7b sonucu → merge + pointer bump (AN-09 dahil) · (2) E-3 kalan BAĞLA kalemleri (çifti engelle arayüzü) · (3) AN-26 hatırlatma/eskalasyon · (4) Y-17 / Y-12 değerlendirmesi · (5) K5 yedek havuz (Y1 teyit-gerek maddeleri).
+**Sıradaki 5 iş:** (1) K5-Y2 sonucu → tutmayan BITTI'ler BEKLIYOR'a · (2) K5-Y3 eksik negatif testler · (3) F-01 belge reorg (büyük, belge) · (4) PO cevapları gelirse 🔵 işler (yedek + merge) · (5) K5-Y4 karar kartı kanıt tazeleme.

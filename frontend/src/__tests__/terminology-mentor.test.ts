@@ -16,6 +16,7 @@ const FILES = [
   'src/app/(dashboard)/mentor/certification/page.tsx',
   'src/app/(dashboard)/mentor/page.tsx',
   'src/app/onboarding/stk/_steps/Step2Template.tsx',
+  'src/components/organisms/LearningJourneyCard.tsx',
 ];
 
 // Türkçe metin içinde (boşluk/tırnak/> sonrası) ek almış ya da yalın "mentor" — kod tanımlayıcısı değil.

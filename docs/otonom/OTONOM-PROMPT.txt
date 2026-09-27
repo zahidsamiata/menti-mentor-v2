@@ -45,8 +45,8 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
     · docs/otonom/00-KUYRUK.md    → is listesi, kapilar, durum
     · docs/otonom/02-ILERLEME.md  → son kayitlar
     · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler (bunlara dokunma)
-    · docs/kararlar/09-DURUM.md → ⚠️ ters-kronolojik katmanli, yeni icerik BASA eklenir.
-      "TEK BAKISTA" baslikli bolum adina ragmen GUNCEL DEGIL. Yalniz EN USTTEKI tarihli bolumu oku.
+    · docs/otonom/00-SIMDI.md → anlik durum (Bolum 14 K0.1). (PO 2026-09-26: docs/kararlar/09-DURUM.md
+      ve 00-KARAR-TAKIP.md 2026-09-20'den beri guncellenmiyor — rutin turda OKUNMAZ, YAZILMAZ.)
     · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
     · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
     · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
@@ -205,6 +205,19 @@ g) Commit (Turkce, is no ile) → PR → Bolum 6 dogrulama listesi → kapiya go
 h) ⛔ ARA KAYIT: push et, sonraki ise gecmeden
 i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>")
 j) Kalan 🟢 sayisini 02-ILERLEME'ye yaz, sonraki ise gec
+
+5b — PO KARARLARI 2026-09-26 (kalici)
+K-A ARSIVE TASI: Sik okunan dosyalarda (CLAUDE.md · OTONOM-PROMPT.txt · 00-KUYRUK · 01-KARARLAR ·
+    02-ILERLEME · 03-PO-ELLE-ISLER · 00-BELGE-HARITASI) eski metin "~~[ESKI]~~ + GUNCELLEME" katmani
+    olarak YERINDE BIRAKILMAZ. Aktif dosyada yalniz GUNCEL dogru durur; eski metin arsive AYNEN
+    tasinir (silinmez). Git gecmisi + arsiv = denetim izi.
+K-B "CLAUDE.md'ye DOKUNMA" yasagi (2026-09-25) su isler icin KALKTI: belge aktif/arsiv ayrimi
+    (2026-09-26 GOREV 1) ve YN-01/YN-14'un yarim kalan kucultme isi.
+K-C AJAN-EKLEDI: Ajan, kodda dosya:satir ile DOGRULADIGI hata/eksik icin kuyruga AJ-<sira> satiri
+    EKLER ve PO onayi beklemeden kapiya gore isler. Not'ta zorunlu: "ajan-ekledi <tarih> · kaynak:
+    <rapor:satir> · kanit: <dosya:satir>". Kapi: varsayilan 🟢 (hassas dosyada 7b) · migration/seed/
+    canli veri/karantina → 🔵 + EVET karti · urun/yetki/KVKK sonucu olan soru → 🔴 + karar karti.
+    Dogrulanamayan bulgu satir OLMAZ. Silme → silme protokolu. Ayrinti: 00-KUYRUK § AJAN-EKLEDI SATIRLAR.
 
 ═══════════════════════════════════════════════════════════════
 6 — DOGRULAMA LISTESI  (merge oncesi — hepsi ✅ olmadan merge YOK)

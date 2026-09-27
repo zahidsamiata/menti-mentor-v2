@@ -13,6 +13,7 @@
 import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
+import { UI_TEXT } from '@/lib/uiText';
 
 function OAuthCallbackInner() {
   const router = useRouter();
@@ -57,7 +58,7 @@ export default function OAuthCallbackPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <p className="text-muted-foreground text-sm animate-pulse">Yükleniyor…</p>
+          <p className="text-muted-foreground text-sm animate-pulse">{UI_TEXT.status.loading}</p>
         </div>
       }
     >

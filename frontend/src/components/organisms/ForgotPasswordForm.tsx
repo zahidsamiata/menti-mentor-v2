@@ -16,6 +16,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { useFormState } from '@/hooks/useFormState';
 import { forgotPasswordSchema, type ForgotPasswordFormValues } from '@/lib/validation';
 import { authApi } from '@/lib/api/auth';
+import { UI_TEXT } from '@/lib/uiText';
 
 const INITIAL: ForgotPasswordFormValues = { email: '' };
 
@@ -63,7 +64,7 @@ export function ForgotPasswordForm() {
       />
 
       <Button type="submit" className="w-full" disabled={form.isSubmitting}>
-        {form.isSubmitting ? 'Gönderiliyor…' : 'Sıfırlama Bağlantısı Gönder'}
+        {form.isSubmitting ? UI_TEXT.status.sending : 'Sıfırlama Bağlantısı Gönder'}
       </Button>
 
       <p className="text-center text-sm text-muted-foreground">

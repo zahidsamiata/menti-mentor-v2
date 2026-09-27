@@ -52,6 +52,25 @@ export interface RequestOptions {
   headers?: Record<string, string>;
   /** true: 401 alınırsa refresh dene ve tekrar et (varsayılan: true) */
   withRefresh?: boolean;
+  /**
+   * 'file': başarılı yanıt JSON değil, indirilecek dosyadır (ör. CSV rapor) → `data` bir
+   * `DownloadedFile` olur. Hata yanıtları yine JSON olarak okunur. Kimlik/yenileme akışı aynıdır.
+   */
+  responseType?: 'json' | 'file';
+}
+
+/** `responseType: 'file'` başarılı yanıtı — dosya içeriği + sunucunun önerdiği dosya adı. */
+export interface DownloadedFile {
+  blob: Blob;
+  /** Content-Disposition'dan okunur; yoksa null (çağıran varsayılan ad kullanır). */
+  filename: string | null;
+}
+
+/** `attachment; filename="x.csv"` başlığından dosya adını çıkarır. */
+export function filenameFromContentDisposition(header: string | null): string | null {
+  if (!header) return null;
+  const match = /filename="?([^";]+)"?/i.exec(header);
+  return match?.[1]?.trim() || null;
 }
 
 /** AuthProvider tarafından set edilir; null iken refresh devre dışı. */
@@ -63,15 +82,15 @@ export async function apiClient<T>(
   path: string,
   options: RequestOptions = {},
 ): Promise<ApiResult<T>> {
-  const { method = 'GET', body, token, tenantId, headers: extra = {}, withRefresh = true } = options;
+  const { method = 'GET', body, token, tenantId, headers: extra = {}, withRefresh = true, responseType = 'json' } = options;
 
-  const result = await executeRequest<T>(path, method, body, token, tenantId, extra);
+  const result = await executeRequest<T>(path, method, body, token, tenantId, extra, responseType);
 
   // 401 aldık + refresh mümkünse — bir kez yenile ve tekrar dene
   if (!result.ok && result.status === 401 && withRefresh && refreshCallbackRef.current) {
     const newToken = await refreshCallbackRef.current();
     if (newToken) {
-      const retried = await executeRequest<T>(path, method, body, newToken, tenantId, extra);
+      const retried = await executeRequest<T>(path, method, body, newToken, tenantId, extra, responseType);
       invalidateAfterWrite(path, method, retried.ok);
       return retried;
     }
@@ -96,6 +115,7 @@ async function executeRequest<T>(
   token: string | undefined,
   tenantId: string | undefined,
   extra: Record<string, string>,
+  responseType: 'json' | 'file' = 'json',
 ): Promise<ApiResult<T>> {
   // FormData (dosya yükleme) gönderiliyorsa Content-Type'ı ELLE set ETME — tarayıcının
   // multipart boundary'yi kendisi eklemesi gerekir. Aksi hâlde backend body'yi parse edemez.
@@ -120,6 +140,14 @@ async function executeRequest<T>(
     });
 
     if (response.status === 204) return { ok: true, data: undefined as T };
+
+    if (responseType === 'file' && response.ok) {
+      const file: DownloadedFile = {
+        blob: await response.blob(),
+        filename: filenameFromContentDisposition(response.headers.get('Content-Disposition')),
+      };
+      return { ok: true, data: file as T };
+    }
 
     const json = await response.json() as T | ApiError;
 

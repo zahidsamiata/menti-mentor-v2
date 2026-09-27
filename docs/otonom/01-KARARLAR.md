@@ -141,6 +141,9 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-97** | **🔵 EVET/HAYIR — U-18 mentör mesaj talebini reddedebilsin (veritabanına 1 yeni alan)** | **1** (U-18) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #148 + çatı #326 |
 | **KARAR-98** | **🔵 EVET/HAYIR — AN-26 yanıtsız mentöre hatırlatma + yöneticiye bildirim (veritabanına 3 yeni alan)** | **1** (AN-26) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #157 + çatı #337 |
 | **KARAR-99** | **🔵 EVET/HAYIR — AN-02 iki soru metnindeki yazım hatası canlıda düzeltilsin mi** | **1** (AN-02) | ⬜ boş · 🔵 canlı veriye yazma (2 satır) · PR backend #160 |
+| **KARAR-100** | **`ProfileSource.SJT_ENRICHED` değeri ne olsun (silme protokolü — gerekçe bulunamadı)** | **0** (AN-54 bulgusu) | ⬜ boş · KARAR-76 ile aynı tür soru |
+| **KARAR-101** | **Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi)** | **1** (Y1-B8 — PR #164/#343) | ⬜ boş · güvenlik + ürün · öneri B |
+| **KARAR-102** | **Kayıttan sonra hemen giriş mi, önce e-posta doğrulaması mı (e-posta sızıntısının son kalıntısı)** | **1** (GV-12 kalanı) | ⬜ boş · güvenlik + ürün · öneri C |
 
 ---
 
@@ -1672,6 +1675,52 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **EVET** → ajan tarihli yedeği alır → iki satırı günceller → canlıda görür → #160 merge. (DB erişimi yoksa: "EVET var, tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar.)
 **HAYIR** → canlı metinler olduğu gibi kalır; #160 (yalnız dosya) yine de merge edilebilir ya da kapatılır — cevabında belirt.
 **Cevap vermezsen:** AN-02 PR-ACIK kalır; iki soru hatalı yazımla görünmeye devam eder.
+**CEVAP:**
+
+---
+
+### KARAR-100 · `ProfileSource.SJT_ENRICHED` değeri ne olsun? (silme protokolü — gerekçe bulunamadı) (0 iş açar) [VERİ KARARI · SİLME PROTOKOLÜ]
+> ⭐ Kaynak: AN-54 taraması (2026-09-26, `docs/raporlar/kesif/gerekcesiz-kalem-taramasi-2026-09-26.md`) — 694 şema kalemi tarandı, **2** kalemde gerekçe bulunamadı: biri zaten KARAR-76 (`Tenant.verifiedBy`), diğeri bu. **KARAR-76 ile aynı tür soru** — istersen ikisine aynı harfi yaz.
+**Şu an ne var:** Kişilik profilinin "nereden geldiği" bilgisini tutan listede (`ProfileSource`) `SJT_ENRICHED` diye bir değer var. Kod bu değeri **hiç yazmıyor, hiç okumuyor**: senaryo testi (SJT) sonrası profil `HYBRID` olarak işaretleniyor (`backend/src/services/scoring.service.ts:104-105`). Değeri ekleyen commit (`de6be04`, toplu "sprint 8-11" commit'i) açıklama içermiyor, PR yok, belgelerde hiç geçmiyor.
+**Sorun ne:** Ne işe yaradığı bilinmeyen bir değer silme protokolünün ilk adımında (niyet) takılı; her taramada yeniden "öksüz mü" diye çıkacak.
+**Neden sana soruyorum:** Silme protokolü "gerekçe bulunamazsa SİLİNMEZ, PO'ya SORULUR" diyor; ayrıca bu değer ileride SJT'nin ayrı bir profil durumu olarak kullanılmak üzere planlanmış olabilir (KARAR-10 OCEAN/SJT motoru) — bunu yalnız sen bilirsin.
+**Seçenekler:**
+- **A) KALSIN** — SJT motoru (KARAR-10 aşamaları) açılınca ayrı durum olarak kullanılacak. · Kullanıcı ne görür: hiçbir şey · Kazanç: sıfır iş · **Ne kaybedersin:** gerekçesiz değer durmaya devam eder; bir sonraki taramada yine çıkar (kararı bu karta yazarak kapanır).
+- **B) KARANTİNA** — değer yerinde kalır, koda "kullanılmıyor — KARAR-100" notu + arşiv belgesi; bir tur sorunsuz geçerse senin ikinci onayınla silinir. · Kazanç: silme protokolünün güvenli ara adımı · **Ne kaybedersin:** iki aşamalı iş · Süre S · geri alınır ✅ · karantina 🔵.
+- **C) SİL** — arşivle + migration (enum'dan değer çıkarma). · Kazanç: şema temizlenir · **Ne kaybedersin:** PostgreSQL'de enum değeri çıkarmak zahmetli bir migration; SJT ayrı durum isterse yeniden eklenir · Süre M · geri alınır ⚠️ zor · migration VAR (🔵 + 🔴 ikinci onay).
+**Karşılaştırma:** SJT motoru yakında açılacaksa A doğru; açılmayacaksa B güvenli yol; C temizler ama pahalı ve geri dönüşü zor.
+**Benim önerim:** A — KARAR-10'un SJT aşamaları henüz açılmadı ve değer kimseye zarar vermiyor; kararın bu kartta yazılı olması tekrar tekrar sorulmasını bitirir. *(Veri kararın, önerime güvenme.)*
+**Cevap vermezsen:** hiçbir iş kilitlenmez; değer her şema taramasında yeniden "gerekçesiz" çıkar.
+**CEVAP:**
+
+---
+
+### KARAR-101 · Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi? (1 iş açar: Y1-B8) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Onay bekleyen bir kullanıcı **şifreyle** girmeye çalışınca oturum açamıyor ("Onay Bekleniyor" ekranına düşüyor — `authController.ts` ~:380). Ama **Google/LinkedIn ile** girince oturum açabiliyor ve menti panelindeki **"Bekleme Odasındasınız"** bölümünü görüyor: DISC testi, programdaki mentör sayısı, haftalık görüşme sıklığı, umut mesajı (F-15, I-05 ile canlıya çıktı — `frontend/src/app/(dashboard)/menti/page.tsx`). Aynı oturumla onay beklerken sohbet/randevu/anlaşma uçlarına da istek atabiliyor (onay kapısı yalnız eşleşme ve kullanıcı uçlarında). Kanıt: `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md` B8.
+**Sorun ne:** İki giriş yolu farklı davranıyor ve biri güvenlik açığı: onaylanmamış biri, yöneticinin onayından önce kurumun iç özelliklerine erişebiliyor. Ajanın hazırladığı düzeltme (PR backend #164 + çatı #343) OAuth yolunu da şifreli giriş gibi kapatıyor — ama o zaman **Bekleme Odası kimseye görünmüyor** (bağımsız inceleme bunu yakaladı, SONUÇ: SORUN VAR).
+**Neden sana soruyorum:** Bir özelliğin (Bekleme Odası) açık kalıp kalmayacağı ve onay bekleyenin neyi yapabileceği ürün kararı.
+**Seçenekler:**
+- **A) Kapat** — onay bekleyen kimse oturum açamaz (PR olduğu gibi). · Kullanıcı ne görür: yalnız "Onay Bekleniyor" sayfası; Bekleme Odası (DISC testi, mentör sayısı, umut mesajı) görünmez · Ne kazanırsın: açık hemen kapanır, en basit · **Ne kaybedersin:** bekleme süresi boş geçer, F-15/I-05 emeği görünmez olur · Süre S (hazır) · geri alınır ✅ · migration yok.
+- **B) Bekleme odası açık, iç özellikler kapalı** — onay bekleyen oturum açar ama yalnız bekleme odası uçlarını kullanır (profil, DISC testi, mentör sayısı, haftalık sıklık); sohbet/randevu/anlaşma/talep uçları onay kapısıyla kapanır. Hem şifreli hem OAuth girişi böyle olur. · Kullanıcı ne görür: onay beklerken DISC testini çözer, bekleme odasını görür; mesaj/randevu yapamaz · Ne kazanırsın: açık kapanır + bekleme süresi değerli kalır + iki giriş yolu eşitlenir · **Ne kaybedersin:** daha çok iş (her uç için kapı listesi, test) ve "hangi uç bekleme odasına ait" listesinin bakımı · Süre M · geri alınır ✅ · migration yok.
+- **C) Bugünkü hâl sürsün** (yalnız OAuth ile bekleme odası). · Ne kazanırsın: iş yok · **Ne kaybedersin:** güvenlik açığı açık kalır; şifreyle giren hiçbir zaman bekleme odasını görmez.
+**Karşılaştırma:** Hız öncelikse A (açık bugün kapanır, bekleme odası sonra B ile geri gelebilir). Onay süreleri uzunsa ve bekleme odası değerliyse B doğrudur. C güvenlik açığını bıraktığı için önerilmez.
+**Benim önerim:** B — güvenlik açığını kapatırken zaten canlıda olan ve bekleme süresini anlamlı kılan özelliği korur; iki giriş yolunu da eşitler. (A'yı ara adım olarak hemen, B'yi ardından da seçebilirsin — cevabında belirt.)
+**Cevap vermezsen:** Y1-B8 PR'ları (#164/#343) açık kalır; güvenlik açığı sürer.
+**CEVAP:**
+
+---
+
+### KARAR-102 · Kayıttan sonra hemen giriş mi, önce e-posta doğrulaması mı? (1 iş açar: GV-12 kalanı) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Kurum kaydı (ve normal kayıt) başarılı olunca kişi **hemen oturum açmış** olarak kurulum ekranına geçiyor. E-posta zaten kayıtlıysa GV-12 düzeltmesiyle "zaten kayıtlı" denmiyor, aynı başarı mesajı dönüyor — ama bu sefer **oturum açılmıyor ve ekran farklı** (kurulum yerine "e-postanı kontrol et"). Yani dikkatli biri, sonraki ekrana bakarak bir e-postanın sistemde kayıtlı olup olmadığını anlayabiliyor. Kanıt: `backend/src/controllers/selfServeController.ts` GV-12 notu ("tam ayırt-edilemezlik oturumsuz kayıt gerektirir — ürün kararı"), `frontend/.../onboarding/stk/_steps/Step4Account.tsx:110-140`; denetim: `docs/raporlar/kesif/bitti-yeniden-denetim-2026-09-26.md` GV-12.
+**Sorun ne:** Bir kişinin platformda hesabı olup olmadığı (hangi dernekle çalıştığı dahil) dışarıdan öğrenilebiliyor. Küçük bir sızıntı ama kişisel veri.
+**Neden sana soruyorum:** Kapatmanın tek tam yolu kayıt akışını değiştirmek: herkes kayıttan sonra aynı "e-postanı kontrol et" ekranını görür, giriş e-postadaki bağlantıyla olur. Bu, yeni kullanıcı deneyimini (ilk dakikayı) değiştiren bir ürün kararı.
+**Seçenekler:**
+- **A) Önce e-posta doğrulaması (herkes için)** · Kullanıcı ne görür: kayıttan sonra "e-postanı kontrol et"; bağlantıya tıklayınca kurulum başlar · Ne kazanırsın: sızıntı tamamen kapanır + sahte e-postayla kayıt biter · **Ne kaybedersin:** kayıt bir adım uzar; e-posta gecikirse (SMTP) kullanıcı bekler; bazıları bırakır · Süre M · geri alınır ✅ · migration muhtemelen VAR (doğrulama bayrağı/token) → 🔵.
+- **B) Bugünkü hâl** (hemen giriş; kayıtlı e-postada farklı ekran) · Ne kazanırsın: en akıcı kayıt · **Ne kaybedersin:** küçük sızıntı kalır.
+- **C) Şimdilik B, ilk gerçek kurumlar girmeden önce A** · Ne kazanırsın: çıkış öncesi akış bozulmaz, sızıntı kurumlar gelmeden kapanır · **Ne kaybedersin:** iş ertelenir, unutulma riski (kuyrukta satır olarak durur).
+**Karşılaştırma:** Gerçek kullanıcı ~0 iken B'nin riski düşük; ilk dernekler gelmeden A daha doğru. SMTP henüz tam güvenilir değilse A kaydı kilitleyebilir.
+**Benim önerim:** C — sızıntı bugün kimseyi etkilemiyor; A'yı SMTP ayarları kesinleşince (03-PO-ELLE-ISLER B4) ve ilk kurumdan önce yapmak en güvenlisi. *(Ürün kararın, önerime güvenme.)*
+**Cevap vermezsen:** GV-12 kalanı açık kalır (bilinen sınır olarak).
 **CEVAP:**
 
 ---

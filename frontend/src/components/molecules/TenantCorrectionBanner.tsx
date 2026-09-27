@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useAuth } from '@/providers/AuthProvider';
 import { resubmitTenantApplication, type TenantVerificationStatus } from '@/lib/api/selfServe';
+import { UI_TEXT } from '@/lib/uiText';
 
 interface MeResponse {
   role: string;
@@ -142,7 +143,7 @@ export function TenantCorrectionBanner() {
               disabled={saving || proof.trim().length === 0}
               className="rounded-lg bg-amber-600 hover:bg-amber-500 px-3 py-1.5 text-sm font-medium text-white transition-colors disabled:opacity-50"
             >
-              {saving ? 'Gönderiliyor…' : 'Tekrar Gönder'}
+              {saving ? UI_TEXT.status.sending : 'Tekrar Gönder'}
             </button>
             <button
               onClick={() => setOpen(false)}

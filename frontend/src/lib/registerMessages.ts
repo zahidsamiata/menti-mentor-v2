@@ -42,6 +42,8 @@ const CODE_MESSAGES: Record<string, string> = {
   TENANT_BULUNAMADI: 'Kuruluş bulunamadı. Davet bağlantınızın doğru olduğundan emin olun.',
   TENANT_ONAY_BEKLENIYOR:
     'Kurumunuz henüz platform tarafından onaylanmadı. Onaylandığında kayıt olabilirsiniz.',
+  // Y1-B9: dondurulmuş / reddedilmiş kuruma yeni üye kaydı kapalı.
+  KURUM_KAYDA_KAPALI: 'Bu kuruma şu an yeni kayıt alınmıyor. Kurum yöneticinizle iletişime geçin.',
 };
 
 /** Kayıt hatası ApiError'ını kullanıcıya gösterilecek net mesaja çevirir. */
