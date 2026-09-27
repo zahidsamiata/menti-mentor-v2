@@ -1,15 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 04:55 UTC · çatı main HEAD `ab42a29` · backend main HEAD `f4f624a` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 05:05 UTC · çatı main HEAD `79bc0f7` · backend main HEAD `fd8eb0b` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** GÖREV 0 ✅ (#354) · GÖREV 1 ✅ (#355, 7b 2. tur ONAY) · GÖREV 2: satır PR'ı #356 (CI yeşil, merge reddedildi → bağımsız inceleme sürüyor) · GÖREV 3: AJ-02 backend #172 (7b inceleme sürüyor).
+**Şu an yapılan:** GÖREV 0 ✅ #354 · GÖREV 1 ✅ #355 · GÖREV 2 ✅ #356 (AJ-01…AJ-11 + KARAR-103; 7b 3 tur) · GÖREV 3 (Bölüm 14): AJ-02 ✅ canlıda · AJ-01 backend #173 (7b SORUN VAR → düzeltiliyor: platform/süper-admin sayımları kapsam dışı, son-admin negatif testi) · AJ-06 backend #174 (7b inceleme sürüyor).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #172 + çatı #357 | AJ-02 (system-logs meta + denetim izi) | ok:true, db:up, site 200 (uptime 43 sn → dağıtıldı) |
+| çatı #356 | GÖREV 2 — AJ satırları + KARAR-103 | docs |
 | çatı #355 | GÖREV 1 — belge aktif/arşiv ayrımı + kural 5c + bekçi (YN-01/YN-14 kapandı) | docs · CI 5/5 |
 | backend #162 + çatı #340 | P-05 (reddedilen görüşmede menti'ye nazik bildirim) — kapı 🟢 (PO 0.2) | ok:true, db:up, site 200 (uptime 455 sn — dağıtım teyidi bir sonraki kontrolde) |
 | çatı #354 | GÖREV 0 — PO kararları K-A/K-B/K-C + kapı düzeltmeleri | docs |
@@ -40,11 +42,11 @@
 **Push edilmemiş iş:** yok.
 
 **Engeller:**
-- ⛔ 2026-09-27 04:50 UTC — `gh pr merge 356 --merge` (GÖREV 2 belge PR'ı, CI yeşil) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` → bağımsız inceleme başlatıldı; ardışık ret: 1.
+- ⛔ 2026-09-27 04:50 UTC — `gh pr merge 356 --merge` (GÖREV 2 belge PR'ı, CI yeşil) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` → bağımsız inceleme (3 tur) ONAY sonrası merge geçti (`79bc0f7`); ardışık ret sayacı sıfırlandı.
 - ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` (Ardışık ret sayısı sıfırlandı; sonraki merge'ler geçti.)
 - 🗄️ Tek seferlik DB erişimi gerekiyor: **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
 
-**PO'ya sorular:** ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
+**PO'ya sorular:** KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
 - Kuyrukta satırı olmayan bulgular: G-kart doğrulaması ~30 ⬜ kalem (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) · `GET /api/system-logs` iz/meta · kurum-içi sayımlar `User.role` (KPI + G1-18) · frontend askı ekranı yok · token türü ayrımı (OAuth pending) · U-18 gerçek bildirim/inbox ret işareti.
