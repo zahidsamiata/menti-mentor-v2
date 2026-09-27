@@ -145,7 +145,7 @@ export default function QuestionsPage() {
           </p>
         </div>
         <Button size="sm" onClick={() => setShowAddForm((v) => !v)}>
-          {showAddForm ? 'Vazgeç' : '+ Yeni Soru'}
+          {showAddForm ? UI_TEXT.actions.cancel : '+ Yeni Soru'}
         </Button>
       </div>
 
@@ -267,7 +267,7 @@ export default function QuestionsPage() {
                             {savingEdit ? UI_TEXT.status.saving : UI_TEXT.actions.save}
                           </Button>
                           <Button size="sm" variant="outline" onClick={cancelEdit} disabled={savingEdit}>
-                            Vazgeç
+                            {UI_TEXT.actions.cancel}
                           </Button>
                         </div>
                       </div>
