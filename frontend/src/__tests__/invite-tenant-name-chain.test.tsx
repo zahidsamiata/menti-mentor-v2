@@ -17,7 +17,7 @@ import InvitePage from '@/app/(admin)/admin/invite/page';
 
 const TENANT_NAME = 'Deneme Gençlik Vakfı';
 
-const apiMock = vi.fn(async (path: string, _opts?: unknown) => {
+const apiMock = vi.fn<(path: string, opts?: unknown) => Promise<unknown>>(async (path) => {
   if (path === '/api/auth/refresh') {
     return {
       ok: true,

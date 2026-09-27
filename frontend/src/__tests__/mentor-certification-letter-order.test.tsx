@@ -16,7 +16,7 @@ vi.mock('@/lib/shuffle', () => ({
   shuffle: <T,>(items: readonly T[]): T[] => items.slice().reverse(),
 }));
 
-const apiMock = vi.fn(async (path: string, _opts?: unknown) => {
+const apiMock = vi.fn<(path: string, opts?: unknown) => Promise<unknown>>(async (path) => {
   if (path === '/api/scoring/certification/questions') {
     return {
       ok: true,
