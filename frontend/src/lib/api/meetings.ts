@@ -62,6 +62,40 @@ export interface CheckIn {
   openNote?: string;
 }
 
+/**
+ * E-3e / GV-04: backend `getCheckIns` (meetingCheckInController.ts) taraf bazlı
+ * en dar görünürlük uygular — normal taraf (mentör/menti) sorguyu zaten `userId`
+ * ile filtreler, bu yüzden `items` ya boştur ya da YALNIZ KENDİ kaydını içerir;
+ * kurum yöneticisi (ADMIN) tarafların TAMAMININ kaydını görür. Ön yüz bunun
+ * ötesinde bir filtreleme yapmaz — hangi kayıt geldiyse onu gösterir.
+ *
+ * ⚠️ Bu, `Feedback` modelinden (guidanceScore/preparednessScore/…, `GET /:id/feedback`)
+ * FARKLI bir tablodur — "Değerlendirme Yap" (/meeting-checkin) akışı buraya yazar.
+ * Feedback tablosunun okuma ekranı ayrı bir iş (AJ-14), bu PR'ın kapsamında değil.
+ */
+export interface MeetingCheckInRecord {
+  id: string;
+  meetingId: string;
+  tenantId: string;
+  userId: string;
+  role: 'MENTOR' | 'MENTI';
+  overallRating: number;
+  progressRating: number;
+  continueIntent: 'EVET' | 'BELIRSIZ' | 'HAYIR';
+  menteePreparedness?: number | null;
+  wantedMore?: string | null;
+  nextTopicNote?: string | null;
+  concernTag?: string | null;
+  continuationView?: string | null;
+  openNote?: string | null;
+  submittedAt: string;
+}
+
+export interface MeetingCheckInsResponse {
+  items: MeetingCheckInRecord[];
+  total: number;
+}
+
 export interface AvailabilityBlock {
   weekday: string;
   startTime: string;
@@ -133,6 +167,12 @@ export const meetingsApi = {
 
   submitCheckIn: (api: BoundClient, meetingId: string, data: CheckIn): Promise<ApiResult<CheckIn>> =>
     api<CheckIn>(`/api/meetings/${meetingId}/check-in`, { method: 'POST', body: data }),
+
+  // E-3e: görüşmenin check-in kayıtlarını okur. Taraf yalnız kendi kaydını (0
+  // ya da 1 öğe), ADMIN tarafların tamamını görür — bkz. MeetingCheckInRecord.
+  // Meeting bulunamazsa 404, taraf/admin değilsen 403 döner.
+  getCheckIns: (api: BoundClient, meetingId: string): Promise<ApiResult<MeetingCheckInsResponse>> =>
+    api<MeetingCheckInsResponse>(`/api/meetings/${meetingId}/check-ins`),
 
   getPairSignal: (
     api: BoundClient,
