@@ -1084,3 +1084,5 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **GÖREV C PR-AÇIK** — çatı #380: kural (h) + bekçi UYARI + istisna (I-02 → madde 141) + 5 test (12/12).
 - 2026-09-27 18:40 UTC · **GÖREV C MERGE** (#380 `0832f89`, 7b ONAY, CI 10/10; canlı ok:true · db:up · site 200). **TUR KAPANDI — DURDU K1-a** (TUR ÖZETİ başta).
 - 2026-09-27 · **TUR BAŞLANGIÇ — GÖREV 0-4 (kural opus+mutasyon · AJ-20…AJ-48 · belge · AJ değerlendirme okuma · sahipsiz kalanlar)** · yapılacak AJ: 27 (AJ-29 🟡 ve AJ-38 🔴 hariç) · Dokploy autodeploy yalnız main (`docs/kararlar/konu/02-mimari-ve-altyapi.md:37`) → mutasyon/ dalları canlıya gitmez.
+- 2026-09-27 · **GÖREV 0 MERGE** #381 (7b 3 tur: S1 mutasyon kutusu/merge çelişkisi → istisna (a); S5 7b (a)) · **GÖREV 3 MERGE** #382 (AJ-49 🔴 KARAR-89+110; E-3 notu düzeltildi).
+- 2026-09-27 · **AJ-21 BITTI** (backend #194 + çatı #384; mutasyon CI taslak #195 kırmızı) · **AJ-24 BITTI** (#383; mutasyon yerel 5/8 kırmızı) · **AJ-20** backend #196 merge (mutasyon yerel 3 kırmızı), pointer #386 CI. Canlı: ok:true · db:up · site 200. AJ-50 🔵 açıldı.

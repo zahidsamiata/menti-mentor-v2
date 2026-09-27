@@ -1,17 +1,19 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-> ⛔ **GÜVENLİK BULGUSU (2026-09-27, BITTI doğrulaması — U-08 ⚠️, kalite kontrolü QB):** `POST /api/scoring/rank-mentors` onay kapısı yok — `backend/src/routes/sjtScoringRoutes.ts:25-29` yalnız `requireAuth()`; komşu uç `backend/src/controllers/matchingController.ts:74` `rejectIfCallerNotApproved` uyguluyor. Onay bekleyen/reddedilen menti mentör kimlik no + uyum skoru alabiliyor (ad dönmüyor). Bu oturumda DÜZELTME YOK → AJ satırı (sonraki tur).
+> ✅ GÜVENLİK BULGUSU (U-08 → AJ-20) kapanıyor: backend #196 merge, çatı pointer #386 CI'da. KVKK AJ-21 CANLIDA (#194/#384).
 
 **Son güncelleme:** 2026-09-27 · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3`
 
 **Durum:** CALISIYOR — PO görevi: GÖREV 0 (kural: doğrulama opus + mutasyon kanıtı) → 1 (AJ-20…AJ-48; AJ-29/AJ-38 hariç) → 2 (kayıt+belge, kural h) → 3 (AJ: değerlendirme okuma ucu + E-3 notu) → 4 (sahipsiz kalanlar, salt-okuma) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 0 (dal `otonom/KURAL-DOGRULAMA-OPUS-20260927`) + GÖREV 1 başlıyor (AJ-21 → AJ-20 …, en fazla 2 yazan ajan).
+**Şu an yapılan:** GÖREV 1 — BITTI+canlı: AJ-21 (#194/#384) · AJ-24 (#383) · AJ-20 (#196, pointer #386 CI) · yapılıyor: AJ-30 (OAuth hata kodu) · AJ-31 (iptal listesi kalıcı) · sırada: AJ-32 → AJ-22 → AJ-28 → AJ-44 → AJ-40 → AJ-25 → AJ-26 → AJ-27 → AJ-33 → AJ-45 → kalanlar. AJ-50 🔵 açıldı (AJ-21 kalanı: mevcut kayıt temizliği).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #382 | GÖREV 3 — AJ-49 + E-3 notu (docs) | CI 10/10 |
+| çatı #381 | GÖREV 0 — doğrulama opus + mutasyon kanıtı kuralı (docs) | CI 10/10 |
 | çatı #380 | GÖREV C — kural (h) + bekçi UYARI (docs+script) | CI 10/10 · canlı ok:true, db:up, site 200 |
 | çatı #379 | GÖREV B — belge kapanış senkronu (docs) | docs · CI 10/10 |
 | çatı #378 | GÖREV A — BITTI son doğrulama (docs) | docs · CI 10/10 |
