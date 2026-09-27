@@ -3,6 +3,50 @@
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
 > Önceki haftalar: `docs/otonom/arsiv/02-ILERLEME-2026-W38.md` (haftalık döndürme — OTONOM-PROMPT § AKTİF/ARŞİV AYRIMI (d)).
 
+## TUR ÖZETİ (2026-09-27, VPS oturumu — PO NOTU: GÖREV 0-3 · kapanış 13:45 UTC · DURDU K1-a)
+
+**BITTI ve CANLIDA: 22 iş** (her biri canlı kontrol `ok:true · db:up · site 200`)
+- **P-05** — reddedilen görüşmede menti nazik bildirim görüyor (#162/#340).
+- **AJ-02** — platform log listesi iç ayrıntıyı (`meta`) göstermiyor, her görüntüleme denetim kaydına düşüyor (#172/#357).
+- **AJ-01** — kurum yöneticisi KPI/yönetici sayılarını yalnız kendi kurumundaki üyeliklere göre görüyor (#173/#358).
+- **AJ-06** — mesajlar sayfası çok konuşmada sabit sayıda sorguyla açılıyor (#174/#358).
+- **AJ-07** — açık temada DISC etiketleri okunabiliyor; formlarda etiketler girdilere bağlı; ilk erişilebilirlik raporu (#359).
+- **AJ-03** — çıkış yapınca oturum anahtarı hemen geçersiz (kurum + platform) (#175/#360).
+- **AJ-04 · AJ-13 · AJ-15 · AJ-16 · AJ-18 · AJ-19** — negatif test kovası tamamlandı: ~110 uca kurum izolasyonu/IDOR testi (#176 #184 #188 #190 #192 #193).
+- **AJ-12** — mentör görüşme reddi gövdesiz istekte sunucu hatası vermiyor (#178/#361).
+- **AJ-08** — sertifika/öğrenme içeriği için açık adlı npm komutları + gerçek etkilerini yazan README; CLAUDE.md seed listesi düzeltildi (hiçbir seed çalıştırılmadı) (#177/#362).
+- **PS-A4** — menti listesinde kurum uyum barajının altındaki mentörler yok (varsayılan 50) (#180/#364).
+- **AJ-05** — güvensiz logo adresi (IP, localhost, port, SVG…) kaydedilemiyor; eski logolar görünür (#179/#363).
+- **AJ-09** — çerez + kişisel veri seçimi tek yerden (görünmez) (#181/#365).
+- **F-24** — platform yöneticisi kurum üyesinin özet sayfasını görüyor (yeni kişisel veri alanı yok) (#182/#366).
+- **F-05 (kod kısmı)** — CAPTCHA altyapısı hazır, anahtar girilene kadar etkisiz (#183/#367; satır 🟡, PO anahtarı bekliyor).
+- **IC-08** — bekleme ekranında yöneticinin düzeltme notu (#151/#332).
+- **E-3d** — yönetici çift engelleyebiliyor, engelleri görüp kaldırabiliyor (#187/#371).
+- **E-3e** — görüşme kartında kullanıcı kendi değerlendirmesini görüyor (#372).
+- **AJ-17** — yöneticinin elle tetiklediği veri temizliği/kalibrasyon yalnız kendi kurumunu etkiliyor (AJ-16 testinin bulduğu kurumlar arası açık; #191/#375).
+- Belge: **GÖREV 0** (#354) · **GÖREV 1** belge aktif/arşiv + kural 5c + bekçi (#355) · **GÖREV 2** AJ satırları + KARAR-103 (#356) · AN-52 planı (#369).
+
+**DOSYA BOYUTLARI (bayt) — oturum başı → GÖREV 1 sonrası → şimdi:** 00-KUYRUK 332.647 → 136.433 → 140.730 · 01-KARARLAR 263.408 → 242.786 → 270.666 (9 yeni kart) · 02-ILERLEME 165.666 → 128.886 → ~150 KB · CLAUDE.md 40.972 → 38.449 → 38.894 · OTONOM-PROMPT 40.634 → ~39.3 KB → 39.168 · 03-PO 47.082 → 44.987 → 47.711 · 00-BELGE-HARİTASI 58.514 → 21.262 → 21.262. Bekçi: HATA 0 (her commit'te).
+
+**AÇILAN AJ SATIRLARI:** AJ-01…AJ-19 (19). Kapanış: 🟢 BITTI 16 · 🔴 3 (AJ-10 → KARAR-15/36 · AJ-11 → KARAR-103 · AJ-14 → KARAR-110). Açılmayanlar (mükerrer / doğrulanamayan) GÖREV 2 kaydında.
+
+**YENİ KARTLAR:** KARAR-103 (13 yapılmamış özellik) · 104 (eşik ince ayarı) · 105 (kurumlar arası anonim karşılaştırma) · **106 🔵** (AN-52 anket tablosu) · **107 🔵** (AN-12 karantina) · 108 (DISC eşitlik sırası) · 109 (anlaşma taslağını kim başlatır) · 110 (periyodik anket) · **111 🔵** (K-15 müsaitliğe tür+süre).
+
+**🔵 EVET BEKLEYEN HAZIR PR'LAR:** AN-52-1 (#185, KARAR-106, yedek gerekmez) · AN-12 (#186 + #370, KARAR-107, yedek gerekmez) · K-15 (#189 + #374, KARAR-111, `AvailabilityBlock` yedeği merge'den ÖNCE) · önceki turdan AN-30 (96) · U-18 (97) · AN-26 (98) · AN-02 (99).
+
+**KARAR BEKLİYOR (en çok iş kilitleyen):** KARAR-64 (4) · KARAR-46 (3) · KARAR-58 → PS-A2 → PS-A3 → Y-17 zinciri · ⭐ KARAR-101 (Y1-B8 güvenlik).
+
+**ENGELLER:** #356 merge'ü bir kez "Merge Without Review" ile reddedildi → bağımsız inceleme sonrası geçti (ardışık ret 1, sıfırlandı). #151 dünkü ret bugün tekrarlanmadı. Tek seferlik DB erişimi: K-15 (<60 dk blok sayımı + yedek) · Y-05. **Süreç hatası (kayıt):** #365 CI Integration işi bitmeden merge edildi; sonradan yeşil doğrulandı; o andan itibaren merge CI sonucuna koşullu zincirlendi.
+
+**PO'NUN KENDİ YAPMASI GEREKENLER (en kritik 3):** (1) 🔵 kartlara EVET/HAYIR (106, 107, 111 yeni) · (2) `03-PO-ELLE-ISLER.md` en üst: Turnstile hesabı + iki anahtar (F-05) · (3) C-14 üyelik tamamlaması teyidi (AJ-01'in sayıları buna bağlı).
+
+**KUYRUK SON DAĞILIMI (açık satırlar, son renk):** 🔴 55 · 🔵 13 (6 PR-ACIK) · 🟡 7 · 🟢 18 (hepsi engelli: karar zinciri, PO eli, bu oturumun `docs/kararlar/` yasağı [F-01], #110 kuralı [Y-12], CLAUDE.md içerik izni [YN-07/08], AN-30 bağımlılığı [AN-29], belirsiz-BITTI satırları).
+
+**BACKEND:** pointer `4db73a1` (oturum başı) → `3bd9ad3` = backend main HEAD (her merge sonrası sıralı bump, ata kontrolü geçti).
+**STASH:** yok.
+**LİMİTİN EN ÇOK GİTTİĞİ YER:** 7b bağımsız incelemeleri (her PR için ayrı opus ajanı, çoğu 2 tur) — kalite getirdi (15 PR'da gerçek sorun yakaladı) ama tokenin en büyük kalemi.
+**SONRAKİ TUR İÇİN:** PO cevapları gelince 🔵 merge'leri (yedekle) · hazırlanabilir 🔵 adaylar: AN-27 (zaman önerisi mesaj tipi, KARAR-53) · P-08 (öğrenme ilerlemesi) · I-08 (günlük deneme sınırı) · E-4 (karantina turu) · VPS dersi: ağır komutlar `flock ~/menti/.worktrees/.heavy.lock` ile.
+
 ## TUR ÖZETİ (2026-09-26, VPS oturumu — 2. tur, 2026-09-26 23:50 UTC)
 
 **Kuyruk son dağılımı:** 90 satır: 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51 (1. tur sonu: 90 satır — 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51).
@@ -1011,3 +1055,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **AJ-16 + AJ-17 BITTI** — backend #190 + #191, çatı pointer #375 (`3ed0c1e`). AJ-16 testleri kurumlar arası elle temizlik açığını buldu → AJ-17 aynı gün düzeltildi (7b ONAY). CANLIDA BAK: kurum yöneticisinin elle tetiklediği temizlik/kalibrasyon yalnız kendi kurumu. Canlı ok:true · db:up · site 200.
 - 2026-09-27 · **AJ-18 BITTI** — backend #192 + çatı #376; 27 negatif test, açık yok. Canlı kontrol: bkz. 00-SIMDI.
 - 2026-09-27 · **AJ-19 PR-AÇIK (son parti)** — backend `menti-mentor#193` (`otonom/AJ-19-negatif-test-son-parti-20260927`). Raporun (2026-09-26 fotoğrafı) 134 "(c)/(d) eksik" uçlarından önceki altı parti sonrası kalan her aday `grep -rn <yol> tests/` ile TÜM test dosyaları taranarak tek tek doğrulandı — bu, raporun fotoğrafından SONRA yazılmış veya sezgisel taramanın kaçırdığı gerçek kapsamayı ortaya çıkardı (`compute-profile-idor.test.ts`, `meeting-reject-notify.test.ts`, `question-global-guard.test.ts`, `checkin-visibility.test.ts`, `analytics-idor.test.ts` kısmi, `aj15-negatif-test-3-parti.test.ts:485`). Gerçek kalan **7 uca 13 yeni test** (`tests/aj19-negatif-test-son-parti.test.ts`): `GET /api/analytics/:userId` (a,c) · `GET/POST /api/conversations/:id/{messages,read}` (a,c) · `POST /api/questions/respond` + `/:questionId/respond` (c) · `GET /api/tenants/:slug/preview` (a,b,c). Geri kalan hücrelerin çoğu kod okunarak **anlamsız** işaretlendi (self-servis/tenantId oturumdan sabit/ADMIN-yalnız eylemde (d)≡(b)/kaynak tenant-geneli görünür by design) — tam döküm PR #193 açıklamasında (134 uçluk durum tablosu). AÇIK bulgu yok, kaynak koda dokunulmadı. tsc-test + lint yeşil; backend CI (Docker imajı + ci) YEŞİL (`gh run 36322238735`). MERGE YOK — kontrol listesi tam olduğundan sıradaki turda merge edilebilir (bu turda ajan merge etmedi).
+- 2026-09-27 13:45 UTC · **AJ-19 BITTI** (#193/#377) — negatif test kovası tamamlandı. **TUR KAPANDI — DURDU K1-a** (TUR ÖZETİ başta).

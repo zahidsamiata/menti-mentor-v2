@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 · çatı main HEAD `3ed0c1e`+docs · backend main HEAD `2d5a18e` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 13:45 UTC · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
 
-**Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
+**Durum:** DURDU (K1-a) — kuyrukta hemen yapılabilir 🟢 yok; kalanlar karar / PO eli / 🔵 EVET bekliyor. Gerekçe ve liste: `02-ILERLEME.md` başındaki 2026-09-27 TUR ÖZETİ.
 
-**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3: 21 iş canlıda · 🔵 hazır ve EVET bekliyor: AN-52-1 (#185, KARAR-106) · AN-12 (#186+#370, KARAR-107) · K-15 (#189+#374, KARAR-111).
+**Şu an yapılan:** yok — PO cevapları (🔵 KARAR-106/107/111 ve 96-99; ⭐ KARAR-101) gelince devam. Sonraki tur: 🔵 merge'ler (yedekle) + hazırlanabilir 🔵 adaylar (AN-27 · P-08 · I-08 · E-4).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #193 + çatı #377 | AJ-19 (negatif test son parti) | ok:true, db:up, site 200 |
 | backend #192 + çatı #376 | AJ-18 (19 uca negatif test) | ok:true, db:up, site 200 |
 | backend #190 + #191 + çatı #375 | AJ-16 (20 uca negatif test) · AJ-17 (elle temizlik/kalibrasyon yalnız kendi kurumu) | ok:true, db:up, site 200 |
 | backend #188 + çatı #373 | AJ-15 (20 uca negatif test) | ok:true, db:up, site 200 |
@@ -75,4 +76,4 @@
 
 **Karar kilidi (cevapsız kartlar, kilitlediği açık kuyruk satırı sayısına göre — 2026-09-27 yeniden sayım):** KARAR-64 (4: I-01, I-11, AN-50, AN-51) · KARAR-46 (3: F-14, P-99, AN-03) · KARAR-95/88/72/58/57/50/36 (2'şer; KARAR-58 → PS-A2 → PS-A3 → Y-17 zinciri) · 33 kart 1'er iş · 41 cevapsız kart hiçbir kuyruk satırını kilitlemiyor (bilgi/ince ayar). 🔵 EVET bekleyenler: KARAR-96 (AN-30) · 97 (U-18) · 98 (AN-26) · 99 (AN-02). ⭐ Güvenlik: KARAR-101 (Y1-B8).
 
-**Sıradaki 5 iş:** (1) K5-Y2 sonucu → tutmayan BITTI'ler BEKLIYOR'a · (2) K5-Y3 eksik negatif testler · (3) F-01 belge reorg (büyük, belge) · (4) PO cevapları gelirse 🔵 işler (yedek + merge) · (5) K5-Y4 karar kartı kanıt tazeleme.
+**Sıradaki 5 iş:** (1) PO EVET gelirse K-15 (<60 dk blok sayımı + yedek → #189 → pointer → #374) · (2) AN-52-1 #185 / AN-12 #186+#370 merge (yedek gerekmez) · (3) AN-27 🔵 hazırlık · (4) P-08 / I-08 değerlendirme · (5) E-4 karantina turu (K-13 ile).
