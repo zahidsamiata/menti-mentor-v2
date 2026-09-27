@@ -112,4 +112,15 @@ expect 0 "kural (i) negatif: backend job'u başlıkta yok (yalnız gövdede) →
 grep -q 'job "docker-prisma" scripts/verify.sh başlığında anılmıyor' "$TMP/out" || { echo "  ✗ kural (i) uyarısı çıktıda yok"; FAIL=1; }
 grep -q 'job "push"' "$TMP/out" && { echo "  ✗ kural (i): on: altındaki push job sanıldı"; FAIL=1; }
 
+# ── kural (j) YN-11: raporlarda TÜR etiketi → yalnız UYARI ──
+setup_clean
+mkdir -p "$TMP/root/docs/raporlar/kesif"
+printf '> 📸 DONDURULMUŞ (2026-09-27)\n# Rapor\n' >"$TMP/root/docs/raporlar/kesif/etiketli.md"
+expect 0 "kural (j) pozitif: etiketli rapor → uyarı yok"
+grep -q "YN-11" "$TMP/out" && { echo "  ✗ kural (j): etiketli raporda uyarı çıktı"; FAIL=1; }
+
+printf '# Rapor\n\n\n\n\n> 📸 altıncı satırda — sayılmaz\n' >"$TMP/root/docs/raporlar/kesif/etiketsiz.md"
+expect 0 "kural (j) negatif: etiketsiz rapor → yeşil + uyarı"
+grep -q "kesif/etiketsiz.md ilk 5 satırda TÜR etiketi" "$TMP/out" || { echo "  ✗ kural (j) uyarısı çıktıda yok"; FAIL=1; }
+
 exit $FAIL

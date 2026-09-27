@@ -11,6 +11,7 @@
 #   atfı taşıyor ve docs/kararlar/00-KARAR-TAKIP.md'de madde N satırında ✅ / 🟨 yok → "BITTI işin kaynağı açık"
 #   (gerekçeli istisna: docs/raporlar/kod-denetimi/bekci-istisna.txt — satır biçimi "<iş> madde <N> # <gerekçe>").
 #   · kural (i): CI job'u scripts/verify.sh başlığında anılmıyor (KR-22)
+#   · kural (j): docs/raporlar/ altında ilk 5 satırında TÜR etiketi olmayan rapor (YN-11)
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -126,6 +127,19 @@ if vsh is not None:
             jm = re.match(r'^  ([A-Za-z0-9_-]+):\s*(#.*)?$', cline) if in_jobs else None
             if jm and not re.search(r'(?<![\w-])' + re.escape(jm.group(1)) + r'(?![\w-])', header):
                 warnings.append(f'{ci_rel} job "{jm.group(1)}" scripts/verify.sh başlığında anılmıyor — adım eşlemesine ya da "bilinçli farklar"a yaz (KR-22)')
+
+# Kural (j) YN-11: docs/raporlar/ altındaki her rapor ilk 5 satırında TÜR etiketi taşır — yalnız UYARI.
+# (belge-duzeni-rehberi KURAL 3: 🔄 yaşayan · 📸 dondurulmuş; ısı katmanı 🔥/🌡️/🧊 da etiket sayılır.)
+TUR_ETIKETI = ('📸', '🔄', '🔥', '🧊', '🌡️', '🌡')
+for dirpath, _dirs, files in os.walk(os.path.join(root, 'docs/raporlar')):
+    for fname in sorted(files):
+        if not fname.endswith('.md'):
+            continue
+        rpath = os.path.join(dirpath, fname)
+        with open(rpath, encoding='utf-8') as fh:
+            head = ''.join(fh.readline() for _ in range(5))
+        if not any(t in head for t in TUR_ETIKETI):
+            warnings.append(f'{os.path.relpath(rpath, root)} ilk 5 satırda TÜR etiketi (📸/🔄/🔥/🌡️/🧊) yok — başa etiket yaz (YN-11, rehber KURAL 3)')
 
 LIMITS = [('docs/otonom/00-KUYRUK.md', 150), ('docs/otonom/01-KARARLAR.md', 150),
           ('docs/otonom/02-ILERLEME.md', 150), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),
