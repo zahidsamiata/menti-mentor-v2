@@ -23,6 +23,7 @@ import type {
   TenantReportsResponse,
   ReviewReportResponse,
   ReportStatus,
+  BlockPairResponse,
 } from '@/types/admin';
 import type { RequestOptions, DownloadedFile } from './client';
 
@@ -147,4 +148,20 @@ export const adminApi = {
 
   demoteFromAdmin: (api: BoundClient, userId: string) =>
     api<{ ok: boolean }>(`/api/admin/users/${userId}/demote-admin`, { method: 'POST' }),
+
+  // ── E-3d: Çifti Engelle (KR-19) ────────────────────────────────────────────
+  // `/api/tenants/:id/settings` ile aynı aile (X-Tenant-Id header'ı KULLANMAZ,
+  // tenantId URL param + JWT eşleşmesiyle korunur — bkz. adminSettingsRoutes.ts).
+  // Engeli KALDIRAN veya MEVCUT engelleri LİSTELEYEN bir uç yok (E-3d denetimi) —
+  // yalnızca ekleme mümkün.
+  blockPair: (
+    api: BoundClient,
+    tenantId: string,
+    fromUserId: string,
+    toUserId: string,
+  ): Promise<ApiResult<BlockPairResponse>> =>
+    api<BlockPairResponse>(`/api/tenants/${tenantId}/block-pair`, {
+      method: 'POST',
+      body: { fromUserId, toUserId },
+    }),
 };

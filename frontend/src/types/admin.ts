@@ -92,6 +92,25 @@ export interface AdminMatch {
   riskReasons?: string[];
 }
 
+// ─── E-3d: Çifti Engelle (KR-19) ──────────────────────────────────────────────
+// Admin iki üyeyi birbirleriyle eşleşmeye kapatır — engel liste/mesaj/randevu/anlaşma
+// dört yüzeyde iki yönlü uygulanır (backend `blockedPairs`, adminSettingsController.ts).
+
+export interface BlockedPairRecord {
+  fromUserId: string;
+  toUserId:   string;
+  blockedAt:  string;
+  blockedBy:  string;
+}
+
+export interface BlockPairResponse {
+  message:  string;
+  blocked:  BlockedPairRecord;
+  fromUser: { id: string; fullName: string };
+  toUser:   { id: string; fullName: string };
+  totalBlockedPairs: number;
+}
+
 export type AdminMatchesResponse = PaginatedResponse<AdminMatch>;
 
 // ─── Sertifika Sonuç Panosu (A4) ─────────────────────────────────────────────

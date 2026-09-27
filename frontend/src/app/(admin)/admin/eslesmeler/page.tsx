@@ -21,6 +21,7 @@ import type { MatchStatus } from '@/types/admin';
 import { RISK_META } from '@/lib/adminMetrics';
 import { cn } from '@/lib/utils';
 import { UI_TEXT } from '@/lib/uiText';
+import { BlockPairPanel } from './BlockPairPanel';
 
 // null = "Tümü" (durum filtresi yok)
 const STATUS_TABS: { label: string; value: MatchStatus | null }[] = [
@@ -64,6 +65,9 @@ export default function EslesmelerPage() {
           Kurumunuzdaki mentör-menti eşleşmeleri.
         </p>
       </div>
+
+      {/* E-3d: kurumsal huzur için admin iki üyeyi birbirleriyle eşleşmeye kapatır (KR-19) */}
+      <BlockPairPanel />
 
       {/* Durum sekmeleri */}
       <div className="flex flex-wrap gap-1 rounded-lg bg-muted p-1 w-fit">
