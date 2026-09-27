@@ -7,7 +7,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { ResetPasswordForm } from '@/components/organisms/ResetPasswordForm';
+import { ResetPasswordForm, REQUEST_NEW_RESET_LINK_TEXT } from '@/components/organisms/ResetPasswordForm';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 
 export default function ResetPasswordContent() {
@@ -33,7 +33,7 @@ export default function ResetPasswordContent() {
               href="/forgot-password"
               className="block text-center text-sm text-primary hover:underline"
             >
-              Yeni bağlantı talep et
+              {REQUEST_NEW_RESET_LINK_TEXT}
             </Link>
           </div>
         )}
