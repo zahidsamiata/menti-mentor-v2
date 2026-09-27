@@ -10,7 +10,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
-import { discoverPublicPaths, ROBOTS_DISALLOW } from '@/lib/publicRoutes';
+import { discoverPublicPaths, findPrivatePagesWithoutNoindex, PRIVATE_PATH_PREFIXES } from '@/lib/publicRoutes';
 import sitemap from '@/app/sitemap';
 import robots from '@/app/robots';
 
@@ -67,14 +67,11 @@ describe('Y-13 gerçek app dizini', () => {
     expect(entries.slice(1).every((e) => e.priority === 0.6)).toBe(true);
   });
 
-  it('sitemap robots.txt disallow edilen hiçbir yolu içermez', () => {
-    const rules = robots().rules;
-    const disallow = (Array.isArray(rules) ? rules[0].disallow : rules.disallow) as string[];
-    expect(disallow).toEqual([...ROBOTS_DISALLOW]);
+  it('sitemap hiçbir özel alan önekini içermez', () => {
     const base = 'http://localhost:3001';
     for (const entry of sitemap()) {
       const urlPath = entry.url.slice(base.length);
-      for (const prefix of disallow) {
+      for (const prefix of PRIVATE_PATH_PREFIXES) {
         expect(urlPath === prefix || urlPath.startsWith(`${prefix}/`)).toBe(false);
       }
     }
@@ -141,5 +138,72 @@ describe('Y-13 tarama kuralları (sahte app dizini)', () => {
       'join/page.tsx': PAGE,
     });
     expect(discoverPublicPaths(app)).toEqual(['', '/mentorluk']);
+  });
+});
+
+/**
+ * AJ-47 — Özel alanlar robots.txt ile KAPATILMAZ (kapalı yolda tarayıcı noindex'i okuyamaz),
+ * her özel sayfa noindex taşır.
+ */
+describe('AJ-47 robots.txt özel alanları kapatmaz, noindex dizin dışı tutar', () => {
+  function disallowList(): string[] {
+    const rules = robots().rules;
+    const list = (Array.isArray(rules) ? rules.flatMap((r) => r.disallow ?? []) : rules.disallow) ?? [];
+    return Array.isArray(list) ? list : [list];
+  }
+
+  it('robots.txt hiçbir yolu Disallow etmez, tüm siteye izin verir ve sitemap gösterir', () => {
+    const rules = robots().rules;
+    expect(Array.isArray(rules) ? rules[0].allow : rules.allow).toBe('/');
+    expect(disallowList()).toEqual([]);
+    expect(robots().sitemap).toBe('http://localhost:3001/sitemap.xml');
+  });
+
+  it.each([...PRIVATE_PATH_PREFIXES])('%s robots.txt ile kapatılmaz', (prefix) => {
+    for (const rule of disallowList()) {
+      expect(prefix === rule || prefix.startsWith(rule.endsWith('/') ? rule : `${rule}/`)).toBe(false);
+    }
+  });
+
+  it('gerçek app dizininde özel önek altındaki HER sayfa noindex taşır', () => {
+    expect(findPrivatePagesWithoutNoindex(APP_DIR)).toEqual([]);
+  });
+
+  it('denetim noindex taşımayan özel sayfayı gerçekten görür (boş geçme koruması)', () => {
+    // Walker yanlışlıkla hiçbir şey gezmiyorsa üstteki test boş geçerdi — örnek kanıt:
+    const app = makeApp({ 'onboarding/stk/page.tsx': PAGE });
+    expect(findPrivatePagesWithoutNoindex(app)).toEqual(['/onboarding/stk']);
+  });
+
+  it('noindex layout altı, noindex sayfa ve route grubu layout kapsamı kabul edilir', () => {
+    const app = makeApp({
+      'page.tsx': PAGE,
+      '(panel)/layout.tsx': PRIVATE_LAYOUT,
+      '(panel)/mentor/page.tsx': PAGE,
+      '(panel)/messages/[id]/page.tsx': PAGE,
+      'admin/layout.tsx': PRIVATE_LAYOUT,
+      'admin/ayarlar/page.tsx': PAGE,
+      'onboarding/page.tsx': PRIVATE_LAYOUT,
+      'hakkimizda/page.tsx': PAGE,
+    });
+    expect(findPrivatePagesWithoutNoindex(app)).toEqual([]);
+  });
+
+  it('sabit yalnız import edilip metadata nesnesine verilmezse noindex sayılmaz', () => {
+    const app = makeApp({
+      'mentor/page.tsx':
+        "import { PRIVATE_AREA_METADATA } from '@/lib/privateAreaMetadata';\n// PRIVATE_AREA_METADATA\nexport const metadata = { title: 'x' };",
+    });
+    expect(findPrivatePagesWithoutNoindex(app)).toEqual(['/mentor']);
+  });
+
+  it('noindex taşımayan özel sayfa (dinamik segment dahil) yakalanır', () => {
+    const app = makeApp({
+      'page.tsx': PAGE,
+      'platform/tenants/[id]/page.tsx': PAGE,
+      'dashboard/page.tsx': PAGE,
+      'mentorluk/page.tsx': PAGE,
+    });
+    expect(findPrivatePagesWithoutNoindex(app)).toEqual(['/dashboard', '/platform/tenants/[id]']);
   });
 });

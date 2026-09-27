@@ -14,6 +14,7 @@ import { metadata as dashboardLayout } from '@/app/(dashboard)/layout';
 import { metadata as adminLayout } from '@/app/(admin)/admin/layout';
 import { metadata as platformLayout } from '@/app/platform/layout';
 import { metadata as onboardingPage } from '@/app/onboarding/page';
+import { metadata as stkOnboardingPage } from '@/app/onboarding/stk/page';
 import { metadata as stkPendingReviewLayout } from '@/app/onboarding/stk/pending-review/layout';
 import { metadata as pendingApprovalLayout } from '@/app/pending-approval/layout';
 import { metadata as oauthLayout } from '@/app/oauth/layout';
@@ -38,6 +39,7 @@ describe('Y-08 özel alanlar noindex', () => {
     ['/admin layout', adminLayout],
     ['/platform layout', platformLayout],
     ['/onboarding sayfası', onboardingPage],
+    ['/onboarding/stk sayfası (AJ-47)', stkOnboardingPage],
     ['/onboarding/stk/pending-review layout', stkPendingReviewLayout],
     ['/pending-approval layout', pendingApprovalLayout],
     ['/oauth layout', oauthLayout],
@@ -47,6 +49,10 @@ describe('Y-08 özel alanlar noindex', () => {
 
   it('/onboarding sayfası başlığını korur', () => {
     expect(onboardingPage.title).toBe('Profilini Tamamla');
+  });
+
+  it('/onboarding/stk sayfası başlığını korur', () => {
+    expect(stkOnboardingPage.title).toBe('Kurumunu Kur — MentiMentor');
   });
 });
 
