@@ -31,8 +31,9 @@ başlatır, seçmeli (çoktan seçmeli), tek seferlik**. §4'te ayrı iş kalemi
 ## 1. Sorular — hangi varsayımı sınıyor
 
 Kaynak: `persona-panel-gelisimi-2026-09-23.md` §3, "34 varsayım · ⬜ HÂLÂ TEST EDİLMEDİ: 10 — davranışsal;
-gerçek kullanıcı görüşmesi olmadan sınanamaz" (satır 78). Aşağıdaki 6 soru bu 10 varsayımdan **6'sını** hedefler;
-kalan 4'ü aşağıda (§1.1) neden soru OLARAK tasarlanmadığı gerekçesiyle birlikte açıkça dışlanmıştır (uydurma soru
+gerçek kullanıcı görüşmesi olmadan sınanamaz" (satır 78). Aşağıdaki **7 soru (S1-S7)** bu 10 varsayımdan
+**8'ini** hedefler (S4 iki varsayımı kümelediği için 7 soru 8 varsayıma karşılık gelir); kalan **2'si**
+aşağıda (§1.1) neden soru OLARAK tasarlanmadığı gerekçesiyle birlikte açıkça dışlanmıştır (uydurma soru
 eklenmedi — CLAUDE.md "Yanlış Soru Tuzağı" ilkesi: gerçek karşılığı olmayan yerde soru üretmek yerine boşluğu
 adlandırmak tercih edildi).
 
@@ -80,33 +81,54 @@ Tüm sorular: **Türkçe · isteğe bağlı · köşede küçük kart · X ile k
 - Seçenekler: `Bir bildirim/hatırlatma gördüm` · `Kendiliğinden aklıma geldi` · `Bekleyen bir görüşmem/mesajım vardı`
   · `Diğer`
 - Neden özellikle önemli: bugün bildirim gönderimi varsayılan **kapalı** (`TENANT_NOTIFICATIONS_ENABLED=false`,
-  `backend/src/config.ts:135`). "Bir bildirim/hatırlatma gördüm" seçeneği bu bayrak açılana kadar zaten seçilemez
+  `backend/src/config.ts:145`). "Bir bildirim/hatırlatma gördüm" seçeneği bu bayrak açılana kadar zaten seçilemez
   olmalı — bu, S6'nın kendisinin bir doğrulama testi olduğu anlamına gelir (bildirim kapalıyken kimse bu şıkkı
   seçmemeli; seçen çıkarsa veri tutarsızlığı = ölçüm hatası sinyali).
 
-**S7 — (bugün UYGULANAMAZ, ileriye not) Ret kişisel alınır mı**
+**S7 — Ret sonrası his** *(⚠️ DÜZELTME 2026-09-27, bağımsız inceleme: bu belgenin ilk sürümü "ret akışı yok"
+diyordu — bayattı, aşağıda düzeltildi)*
 - Sınadığı varsayım: **M-A5** "Ret kişisel alınır → yumuşatılmalı, alternatif ver" (`persona-panel-gelisimi-2026-09-23.md:89`)
-- Bugün eklenemez: persona raporunun kendi notu — *"uygulama ❌ HİÇ YOK — mentör→menti ret + alternatif akışı
-  yok, ret maili yok"*. Soracak bir "ret ekranı" bugün yok (KARAR-80/M1 henüz karar bekliyor: P-05 · F-17 · I-16 ·
-  U-18 ret deneyimi dört satıra dağılmış). **Öneri:** ret akışı (P-05/M1) yapılınca bu soru o ekranın parçası
-  olarak eklensin; şimdiden numara ayrılmasın (bağımlı iş, ayrı takip).
+- **Güncel durum (persona raporunun 2026-09-23 notu artık geçerli DEĞİL):** P-05 canlıda —
+  `backend/src/controllers/meetingController.ts:711` `rejectMeetingByMentor`, mentör bir görüşme talebini
+  reddedince mentiye hem uygulama içi bildirim (`notifyMeetingRequestDeclined`, :741-742) hem ret e-postası
+  (`sendMeetingRejectedEmail`, :743) gönderiyor; ekranda nötr, suçlamayan bir açıklama var
+  (`frontend/src/app/(dashboard)/meetings/page.tsx:71-75`: *"Bu görüşme gerçekleşmedi. Bu durum seninle ya da
+  profilinle ilgili bir değerlendirme değil."*). Kayıt: `02-ILERLEME.md:975` (P-05 BITTI, backend #162 + çatı
+  #340). Artık **soracak bir gerçek an var** — bu soru bugün eklenebilir.
+- Soru: *"Bu mesajı okuduktan sonra nasıl hissettin?"*
+- Seçenekler: `Anladım, sorun değil` · `Yine de biraz üzüldüm` · `Neden reddedildiğimi merak ediyorum`
+- Yer: `frontend/src/app/(dashboard)/meetings/page.tsx:71-75`, reddedilen (CANCELLED) görüşme kartının HEMEN
+  ALTINDA, mevcut yumuşatma cümlesiyle birlikte — bildirim/e-posta anında DEĞİL (KARAR-71 hassasiyeti: ret anının
+  kendisi hassas bir an, soruyu bildirime/e-postaya değil, kullanıcı kendi isteğiyle bu sayfayı açıp kartı
+  gördüğü ana bağlamak baskı hissini azaltır).
+- Sıklık: kullanıcı başına **1 kez** — ilk reddedilen görüşme kartını gördüğünde.
+- **Hâlâ eksik olan iki ayak (bu soru bunları KAPATMAZ, yalnız sinyal toplar):**
+  1. **Alternatif mentör önerisi (F-17)** — KARAR-22 B'nin bilinçli tercihi gereği **YOK**; F-17, P-05'e referans
+     olarak katlandı (KARAR-80/M1, 2026-09-26: *"KARAR-22 B'ye göre nazik ret mesajı, alternatif mentör YOK"*).
+     Bu eksiklik bir hata değil, alınmış bir üründür kararı. S7'nin üçüncü şıkkı ("neden reddedildiğimi merak
+     ediyorum") yüksek oranda seçilirse, bu KARAR-22 B'nin yeniden gözden geçirilmesi için veri sağlar.
+  2. **Mesaj talebi (Conversation) kabul/ret kapısı (U-18)** — ayrı bir akış, henüz CANLI DEĞİL: migration'lı PR
+     hazır (backend `#148` + çatı `#326`, ikisi de CI yeşil, 7b ONAY var) ama **PO'nun KARAR-97 EVET'i + `Conversation`
+     tablosu tarihli yedeği bekliyor** (`00-KUYRUK.md:288`). S7 yalnız GÖRÜŞME (Meeting) reddini kapsar; mesaj
+     talebi reddi (U-18) canlıya çıkınca (KARAR-97 EVET + merge) orada benzer bir soru ayrıca değerlendirilebilir
+     — bu planın kapsamı dışında, §4'e AN-52-8 olarak not düşüldü.
 
-### 1.1 Bilerek soru yapılmayan 4 varsayım (10 - 6 - 1 kalan = 3 gerekçeyle + M-A1)
+### 1.1 Bilerek soru yapılmayan 2 varsayım
 
 - **M-A1** "Menti kırılgandır, ilk olumsuz deneyimde sessizce kaybolur" — **otomatik soru bunu test EDEMEZ.**
   KARAR-70'in kendi CEVAP'ı bunu zaten söylüyor: *"otomatik sorular KALANLARI anlatır, GİDENLERİ değil."*
   Vazgeçen kullanıcı platformda değildir, köşe kartını hiç görmez. Telafi zaten KARAR-70 CEVAP'ında var: ilk kurum
   geldiğinde bırakanlarla 2-3 kişilik yarım saatlik görüşme (PO eli, `03-PO-ELLE-ISLER.md`). Bu plana dahil
   edilmedi çünkü yanlış araç yanlış soruyu üretir.
-- **M-A5** — bkz. S7 (bağımlı, uygulanamaz durumda, dışlanmadı, ertelendi).
 - **U-A6** "Belge gerçek kullanıcıyla doğrulanacak" — bu meta bir varsayım (yedi belgenin toplamı hakkında),
-  tek bir soruyla test edilemez; S1-S6'nın toplamı zaten bunun küçük bir parçasını karşılar, geri kalanı gerçek
+  tek bir soruyla test edilemez; S1-S7'nin toplamı zaten bunun küçük bir parçasını karşılar, geri kalanı gerçek
   görüşmeyle (KARAR-70 CEVAP, C→B sırası) kapanır.
-- **M-A2 ve MT-A2** ayrı ayrı sayılmadı, S4'e kümelendi (yukarıda not edildi) — bu ikisi "dışlanan" değil,
-  birleştirilen varsayımlardır.
 
-Toplam: **6 uygulanabilir soru (S1-S6) + 1 bağımlı/ertelenen (S7) + 3 açık gerekçeyle dışlanan/kümelenen.**
-10 ⬜ varsayımın tamamına hesap verildi.
+Not: **M-A2 ve MT-A2** ayrı ayrı sayılmadı, S4'e kümelendi (yukarıda not edildi) — bu ikisi "dışlanan" değil,
+**birleştirilen** varsayımlardır; dışlanan listesine girmezler.
+
+Toplam: **7 uygulanabilir soru (S1-S7), 8 varsayımı karşılıyor** (S4 iki varsayımı kümelediği için) **+ 2 açık
+gerekçeyle dışlanan (M-A1, U-A6).** 8 + 2 = 10 ⬜ varsayımın tamamına hesap verildi.
 
 ## 2. Nereye gömülecek, sıklık ve kırılgan kullanıcı sınırı
 
@@ -118,6 +140,7 @@ Toplam: **6 uygulanabilir soru (S1-S6) + 1 bağımlı/ertelenen (S7) + 3 açık 
 | S4 | `frontend/src/app/(dashboard)/mentor/page.tsx` (mentör paneli) | Mentörün ilk tamamlanmış görüşmesinden sonra **veya** hesap 14 günden eskiyse (hangisi önce gelirse), panel açılışında | Kullanıcı başına **1 kez** |
 | S5 | Mentör paneli, takdir/istatistik kartının göründüğü an (P-14) | Mentör ilk kez takdir/rozet göstergesini gördükten sonra | Kullanıcı başına **1 kez** |
 | S6 | Giriş sonrası ana panel (mentör veya menti ortak) | Kullanıcının hesabındaki **2. giriş** (1. giriş hariç) | Kullanıcı başına **1 kez** |
+| S7 | `frontend/src/app/(dashboard)/meetings/page.tsx:71-75` (reddedilen görüşme kartı) | Kullanıcının hesabındaki **İLK** reddedilen (CANCELLED, mentör kaynaklı) görüşme kartını gördüğünde | Kullanıcı başına **1 kez** |
 
 **Ortak kurallar (KARAR-70 eki + KARAR-71'in bugünkü, henüz cevaplanmamış hâliyle en muhafazakâr yorumu):**
 - **Zorunlu değil** — soru cevaplanmadan hiçbir akış durmaz, hiçbir düğme kilitlenmez.
@@ -126,7 +149,7 @@ Toplam: **6 uygulanabilir soru (S1-S6) + 1 bağımlı/ertelenen (S7) + 3 açık 
   sorma" sınırını en güvenli tarafta tutar).
 - **Aynı oturumda en fazla 1 soru** gösterilir; birden fazla tetikleyici aynı anda tutarsa sıraya girer, üst üste
   binmez.
-- **Kullanıcı ömrü boyunca en fazla 6 otomatik soru** (bu setin tamamı) — F-31'in serbest "hata/öneri bildir" köşesi
+- **Kullanıcı ömrü boyunca en fazla 7 otomatik soru** (bu setin tamamı) — F-31'in serbest "hata/öneri bildir" köşesi
   bu sınıra dahil değildir (o süreklidir ama kullanıcı-başlatır, sistem onu hiç push etmez).
 - **Ton kısıtı** (KARAR-71 cevaplanana kadar en muhafazakâr varsayım — platform kırılgan/kaygılı genç dahil
   HERKESİ hedeflediği için ayrım yapılmaz, hepsine aynı nazik kural uygulanır): suçluluk dili YOK ("cevaplamazsan
@@ -140,12 +163,15 @@ Toplam: **6 uygulanabilir soru (S1-S6) + 1 bağımlı/ertelenen (S7) + 3 açık 
 ### 3.1 Mevcut tablolarla mümkün mü — HAYIR, kanıtla
 
 AN-47 envanteri (`docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md`) dört geri bildirim kutusunu
-doğruladı; hiçbiri bu 6 sorunun bağlanacağı ana olaylara (bekleme, ilk talep, onboarding bitişi, panel açılışı,
-2. giriş) uymuyor:
+doğruladı; hiçbiri bu 7 sorunun bağlanacağı ana olaylara (bekleme, ilk talep, onboarding bitişi, panel açılışı,
+2. giriş, görüşme reddi) uymuyor:
 
 - **`MeetingCheckIn`** (`backend/prisma/schema.prisma:586`) — bugün gerçekten dolan TEK kutu, ama **her kaydın
-  bir `meetingId`'ye bağlı olması ZORUNLU** (`@unique([meetingId, userId])`). S1/S3/S4/S6 hiçbir görüşmeye bağlı
-  değil (bekleme anı, onboarding bitişi, panel açılışı, giriş anı) — şemaya sığmaz.
+  bir `meetingId`'ye bağlı olması ZORUNLU** (`@unique([meetingId, userId])`) VE `overallRating`/`progressRating`/
+  `continueIntent` alanları **zorunlu (NOT NULL)** — bu üçü S7'nin sorusuyla ilgisiz olduğu için zorla
+  doldurulmaları anlamsız olurdu. S1/S3/S4/S6 hiçbir görüşmeye bağlı değil (bekleme anı, onboarding bitişi, panel
+  açılışı, giriş anı) — şemaya hiç sığmaz; S7 bir görüşmeye bağlı olsa da (CANCELLED), bu kutunun zorunlu
+  alanlarına uymuyor.
 - **`Feedback`** (`:621`) — `meetingId` üzerinden **tekil** (`@unique`), aynı sınır; ayrıca `/periodic-survey`
   zaten her göndermede reddediliyor (KARAR-78 konusu, ölü).
 - **`MatchFeedback`** (`:1165`) — `matchId` + `Checkpoint` (DAY_3/14/30) zorunlu; bir **eşleşmesi olmayan** kullanıcı
@@ -179,10 +205,10 @@ model ProductSurveyResponse {   // ÖNERİ — bu planda kod yazılmadı, tasar�
 }
 ```
 
-Bu tasarımın kazancı: **yeni bir soru eklemek (S7 hazır olduğunda, ya da KARAR-90'ın yeni soruları) yeni bir
-migration İSTEMEZ** — yalnız kod tarafında yeni bir `questionKey` sabiti ve tetikleyici mantığı eklenir. Tek
-migration = tüm setin (bugünkü 6 + gelecekteki tüm ek sorular) ortak deposu. Bu, KARAR-80/M12'nin istediği
-**"tek kutu, tek migration"** hedefiyle birebir örtüşür.
+Bu tasarımın kazancı: **yeni bir soru eklemek (ör. U-18 canlıya çıkınca mesaj talebi reddi için bir soru, ya da
+KARAR-90'ın yeni soruları) yeni bir migration İSTEMEZ** — yalnız kod tarafında yeni bir `questionKey` sabiti ve
+tetikleyici mantığı eklenir. Tek migration = tüm setin (bugünkü 7 + gelecekteki tüm ek sorular) ortak deposu. Bu,
+KARAR-80/M12'nin istediği **"tek kutu, tek migration"** hedefiyle birebir örtüşür.
 
 **`@@unique([userId, questionKey])`** aynı zamanda §2'deki "bir kullanıcıya bir soru en fazla 1 kez" kuralını kod
 seviyesinde değil **veritabanı seviyesinde** garanti eder — ikinci bir yazma denemesi constraint hatası verir,
@@ -215,11 +241,12 @@ UI seviyesindeki kontrol tek başına yeterli değildir (aynı kullanıcı iki s
 |---|---|---|---|
 | AN-52-1 | `ProductSurveyResponse` modeli — yeni tablo migration'ı | 🔵 | Var olan veriye dokunmuyor (yeni tablo, mevcut satır değişmiyor) — CLAUDE.md "yedek zorunlu" kuralı var olan veriyi DEĞİŞTİREN migration'lar için; burada yedek konusu YOK ama şema değişikliği yine PO'nun tek EVET'ini gerektirir (CANLI=LOKAL AYNI DB kuralı). EVET/HAYIR kartı hazırlanır. |
 | AN-52-2 | Backend: `POST /api/product-survey/respond` (cevap/kapatma yaz), `GET /api/product-survey/pending` (bu kullanıcının o an görebileceği soruları döndür — hangi tetikleyici koşulları sağlanmış) | 🟢 | AN-52-1'e bağlı (migration sonrası). Auth zorunlu, `userId` oturumdan alınır (istek gövdesinden DEĞİL — Komşu Uç Karşılaştırması kuralı), Zod doğrulama, tenant izolasyonu. |
-| AN-52-3 | Frontend: tek bir "köşe soru kartı" bileşeni (generic, kapatılabilir) + 6 tetikleyici noktasına entegrasyon (§2 tablosu) | 🟢 | Soru metinleri/şıkları TEK config dosyasında (sihirli dize yok kuralı) — yeni soru eklemek bu dosyaya satır eklemektir. |
+| AN-52-3 | Frontend: tek bir "köşe soru kartı" bileşeni (generic, kapatılabilir) + 7 tetikleyici noktasına entegrasyon (§2 tablosu, S1-S7) | 🟢 | Soru metinleri/şıkları TEK config dosyasında (sihirli dize yok kuralı) — yeni soru eklemek bu dosyaya satır eklemektir. |
 | AN-52-4 | KVKK: `gdprService.ts` `exportUserData` + `anonymizeUser`'a `ProductSurveyResponse` ekle | 🟢 | Güvenlik/KVKK kuralı zaten zorunlu kılıyor; AN-52-1'e bağlı. |
 | AN-52-5 | KVKK aydınlatma metni taraması: mevcut metin bu toplama amacını kapsıyor mu, madde eklenmesi mi gerekiyor | 🟡 | Kod değil — avukat/PO eli; `docs/otonom/03-PO-ELLE-ISLER.md`'ye madde (GV-09/KARAR-38 paketine eklenmesi önerilir, ayrı metin değil). |
-| AN-52-6 | S7 (ret kişisel alınır mı) — P-05/KARAR-80 M1 (ret akışı) yapılınca eklenecek soru olarak not düşüldü, şimdi numara/iş açılmadı | — | Bağımlı, beklemede; ret akışı işine not olarak bırakılır. |
+| AN-52-6 | *(boşaltıldı — S7 artık S1-S6 ile birlikte AN-52-3'ün parçası, ayrı iş değil)* | — | Bu belgenin önceki sürümünde S7 "ret akışı yok" gerekçesiyle ertelenmişti; P-05'in BITTI olduğu doğrulanınca (bkz. S7) bu satır boşaltıldı, numara boş bırakıldı (yeniden kullanılmaz — belge hijyeni). |
 | AN-52-7 | Yönetici tarafında bu verinin AGGREGATE görünümü (ör. "%X kullanıcı bekleme anını 'endişeli' işaretledi") | 🔴 | Ürün kararı: bkz. §5 taslak kart — kişi bazlı mı toplu mu, hangi rol görsün. CEVAP boş bırakıldı. |
+| AN-52-8 | U-18 (mesaj talebi/`Conversation` reddi) canlıya çıkınca, S7'ye benzer bir soru orada da değerlendirilsin mi | — | Bağımlı/beklemede: önce KARAR-97 EVET'i + `Conversation` yedeği + merge gerekir (`00-KUYRUK.md:288`). Bu planın kapsamı dışında, yalnız not. |
 
 **Sıra notu:** AN-52-1 (migration kararı) diğer tüm işleri bloke eder. AN-52-2/3/4 aynı migration turunda,
 sıralı ilerler (paylaşılan şema dosyası — "Koşullu Paralellik" kuralı gereği migration+pointer+submodule işleri
@@ -232,7 +259,7 @@ olduğu için birleştirme riski düşük.
 ## 5. Taslak karar kartı (numara verilmedi, CEVAP boş)
 
 ### KARAR-?? · AN-52 anket cevapları yöneticiye nasıl görünsün? [ÜRÜN KARARI · KVKK]
-**Şu an ne var:** AN-52 planı (bu belge) 6 otomatik soru öneriyor; cevaplar kullanıcıya bağlı (`userId`) saklanacak.
+**Şu an ne var:** AN-52 planı (bu belge) 7 otomatik soru öneriyor; cevaplar kullanıcıya bağlı (`userId`) saklanacak.
 Yöneticinin bu veriyi görüp göremeyeceği, görürse hangi ayrıntı düzeyinde göreceği belirsiz.
 **Sorun ne:** Persona raporunun C1 çatışması (yönetici drill-down'ı kişinin serbest notuna insin mi) burada da
 aynen çıkıyor — S1 gibi bir soruya "Endişeliyim" diyen bir menti, yöneticinin o kişiyi tek tek görebileceği bir
