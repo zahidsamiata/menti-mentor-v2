@@ -5,8 +5,9 @@
 
 Otonom dosyalardan (kuyruk, kararlar, kurallar) aktif/arşiv ayrımıyla taşınan metin — AYNEN (K-A, OTONOM-PROMPT 5c).
 
-## İçerik (9)
+## İçerik (10)
 - `00-BELGE-HARITASI-ayrinti.md` — 📍 BELGE HARİTASI — docs/ tam envanteri
+- `00-KUYRUK-gecmis.md` — 00-KUYRUK satırlarından taşınan üstü-çizili katmanlar (YN-09)
 - `00-KUYRUK-bitti-2026-09.md` — 00-KUYRUK — BİTTİ İŞLER ARŞİVİ (2026-09)
 - `00-KUYRUK-katlanmis.md` — 00-KUYRUK — KATLANMIŞ SATIRLAR ARŞİVİ
 - `01-KARARLAR-cevaplanmis.md` — 01-KARARLAR — CEVAPLANMIŞ KARARLAR ARŞİVİ (2026-09)
