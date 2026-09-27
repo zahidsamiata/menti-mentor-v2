@@ -400,13 +400,13 @@ Belge oluşturur/düzenlerken oraya bak; kuralların tamamı orada.
   korunmuyor. Kanıt: `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md` §0.)*
 - KASITLI public olan endpoint'ler (V-09 kod-teyitli tam liste, 2026-09-21):
   **auth:** `POST /api/auth/register` · `/login` · `/refresh` · `/logout` · `/forgot-password` ·
-  `/reset-password` · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
+  `/reset-password` · `/reapply` (reddedilen kullanıcının yeniden başvurusu; e-posta+şifre ile kimlik doğrular, AJ-27) · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
   **platform:** `POST /api/platform/auth` · `/logout` ·
   **onboarding/kurum:** `GET /api/invitations/:token/join` · `GET /api/tenants/self-serve/check-slug` ·
   `POST /api/tenants/self-serve/register` · `GET /api/tenants/unsubscribe` ·
   **diğer:** `POST /api/suspicion-reports` · `GET /health` · `GET /uploads/**` (statik, CSP-sandbox).
   Hepsi rate-limitli. **Bunun DIŞINDA public endpoint YOK** — yeni public uç eklenirse buraya eklenir.
-  (Kanıt: `authRoutes.ts:21-56` · `platformRoutes.ts:34-35` · `invitationRoutes.ts:13` ·
+  (Kanıt: `authRoutes.ts:21-72` · `platformRoutes.ts:34-35` · `invitationRoutes.ts:13` ·
   `selfServeRoutes.ts:23-38` · `suspicionRoutes.ts:9` · `server.ts:60,71`.)
 
 ### Veri döndürürken

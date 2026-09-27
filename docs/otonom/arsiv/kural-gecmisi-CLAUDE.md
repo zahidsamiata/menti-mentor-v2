@@ -146,3 +146,9 @@ Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyal
   Kod-kanıtlı güvenli liste (yalnız `upsert`, `deleteMany` YOK): `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs` (`seed-questions.ts` 2026-08-23'te silindi, backend `5745e0f`).
 ```
 
+## Güvenlik Kuralları · KASITLI public uç listesi · eski satır 403 ve 409 · taşındı 2026-09-27 (AJ-27: `/api/auth/reapply` eklendi)
+
+```text
+  `/reset-password` · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
+  (Kanıt: `authRoutes.ts:21-56` · `platformRoutes.ts:34-35` · `invitationRoutes.ts:13` ·
+```
