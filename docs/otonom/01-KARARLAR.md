@@ -153,6 +153,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-109** | **Mentörlük anlaşması taslağını kim başlatabilsin** | **1** (E-3 anlaşma taslağı) | ⬜ boş · ajan-ekledi (E-3 ayıklaması) · öneri A |
 | **KARAR-110** | **Periyodik anket (ilişki geneli değerlendirme) ne olsun** | **1** (AJ-14) | ⬜ boş · ajan-ekledi · öneri A |
 | **KARAR-111** | **🔵 EVET/HAYIR — müsaitliğe görüşme türü + süre (K-15, ⛔ MIGRATION)** | **1** (K-15) | ⬜ boş · 🔵 · yedek: `AvailabilityBlock` |
+| **KARAR-112** | **Kurum logosu hangi adreslerden gösterilebilsin? (AJ-22 kalanı — izleme pikseli)** | **1** (AJ-22) | ⬜ boş |
 
 ---
 
@@ -1746,4 +1747,18 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **EVET** → (1) 60 dk'dan kısa blok sayımı (2) yedek tablo + satır sayısı `02-ILERLEME`'ye (3) #189 merge (4) pointer + #374 merge (5) canlı kontrol.
 **HAYIR** → PR'lar kapatılır; randevu bugünkü gibi (menti türü/süreyi serbest seçer) kalır.
 **Cevap vermezsen:** K-15 PR-ACIK bekler; bugünkü davranış sürer.
+**CEVAP:**
+
+
+### KARAR-112 · Kurum logosu hangi adreslerden gösterilebilsin? (1 işi açar: AJ-22 kalanı) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Kurum yöneticisi logo adresi olarak herhangi bir güvenli (https) internet adresi girebiliyor; sitenin tarayıcı güvenlik politikası (CSP — tarayıcıya "hangi kaynaklara izin var" diyen kural) 2026-09-27'den beri engelleme modunda ama görseller için her https adresine izin veriyor. Kanıt: `frontend/src/lib/securityHeaders.mjs` (img-src `https:`, AJ-22 #387) · logo yazma kısıtı `backend/src/services/logoUrl.ts:64-76` (yalnız IP/localhost reddi) · ham çizim `frontend/src/components/organisms/TenantSwitcher.tsx:199`, `frontend/src/app/(admin)/admin/branding/page.tsx:199`.
+**Sorun ne:** Kötü niyetli ya da ele geçirilmiş bir kurum yöneticisi logo adresi olarak kendi sunucusundaki görünmez bir görseli (izleme pikseli) verirse, kurumun her üyesi paneli açtığında o sunucu üyelerin IP adresini ve tarayıcı bilgisini görür (kişisel veri).
+**Neden sana soruyorum:** Seçeneklerden biri bazı kurumların logosunun görünmemesine, biri de PO'nun elle liste tutmasına yol açıyor — kurumların ne göreceğini etkileyen ürün kararı.
+**Seçenekler:**
+- **A) Bugünkü hâl kalsın (her https adres).** · Kullanıcı ne görür: her kurumun logosu görünür · Kazanç: sıfır iş, hiçbir logo kırılmaz · Kaybedersin: izleme pikseli riski sürer · Süre: — · Geri alınır: evet · Migration: yok
+- **B) İzinli alan adı listesi.** · Kullanıcı ne görür: listedeki sitelerde duran logolar görünür, diğerleri görünmez (yöneticiye "bu adres izinli değil" uyarısı) · Kazanç: piksel riski büyük ölçüde kalkar · Kaybedersin: listeyi PO elle tutar; listede olmayan kurumun logosu görünmez · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Logo bizim sunucumuza indirilip oradan gösterilsin.** · Kullanıcı ne görür: tüm logolar görünür, kaynağı bizim sunucumuz · Kazanç: en güvenlisi — üyelerin tarayıcısı dış adrese hiç gitmez · Kaybedersin: büyük iş; sunucunun dış adrese istek atması için ayrıca savunma (SSRF — sunucunun iç ağa yönlendirilmesi) gerekir; dosya depolama (kalıcı disk, 03-PO) · Süre: L · Geri alınır: evet · Migration: yok (dosya depolama ayarı PO)
+**Karşılaştırma:** Gerçek kurum sayısı azken A pratikte düşük risklidir; kurum sayısı artınca B hızlı bir ara çözüm, C kalıcı çözümdür. B ile C birlikte de düşünülebilir (önce B, sonra C).
+**Benim önerim:** A şimdilik, C ayrı iş olarak planlansın — çünkü bugün gerçek kurum yok ve B logoları kırarken C riski tamamen kaldırır; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** AJ-22 "kısmen" kalır; bugünkü davranış (A) sürer.
 **CEVAP:**
