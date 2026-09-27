@@ -268,6 +268,12 @@ satiri "madde N" atfi tasiyor ve 00-KARAR-TAKIP'te madde N satirinda ✅/🟨 yo
      §MUTASYON-CI yontemiyle. Kanit PR aciklamasina VE kuyruk Not'una:
      "mutasyon: <test adi> kirmizi · <kosu linki / cikti>". Test yazilamiyorsa is BITTI DEGILDIR →
      "BITTI (kismen — test yok)" olarak kapanir.
+     Bu kutu icin ISTISNA: kutu bos olsa da merge ENGELLENMEZ (digerleri tamsa); Durum
+     "BITTI (kismen — test yok / test olcmuyor)" olur ve satir kuyrukta KALIR (5c-a "belirsiz satir",
+     arsive tasinmaz), eksik test kalani ayni commit'te bir sahibe baglanir (5c-h).
+     Kod degisikligi olmayan is (yalniz belge/kural): bu kutu N/A.
+     Bolum 5 (c) "zaten yapilmis → BITTI" ve K5-Y2 yeniden kontrolu de ayni mutasyon kanitini ister.
+     Dal adi: mutasyon dallari `mutasyon/<is>-<tarih>` (otonom/... kuralinin istisnasi).
 
 §MUTASYON-CI (DB isteyen testler — yerelde DATABASE_URL yok):
   duzeltme PR'i merge EDILMEDEN once ondan ayri `mutasyon/<is>-<tarih>` dali ac → YALNIZ duzeltme
