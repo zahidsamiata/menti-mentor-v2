@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-26 23:50 UTC · çatı main HEAD `75979b3` · backend main HEAD `4db73a1` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 (oturum açılışı) UTC · çatı main HEAD `75979b3` · backend main HEAD `4db73a1` (= canlı pointer)
 
-**Durum:** DURDU (K1-a'ya en yakın) — kuyrukta hemen yapılabilir 🟢 yok; kalanlar karar/PO eli/büyük özellik bekliyor. Gerekçe ve liste: `02-ILERLEME.md` başındaki 2. tur TUR ÖZETİ.
+**Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** yok — PO cevapları (özellikle ⭐ KARAR-101) gelince devam. Bir sonraki turda: K5-Y4 · F-01 · cevaplanan 🔵 kartlarının yedek+merge'ü.
+**Şu an yapılan:** K2 açılış tamam (worktree'lerde push edilmemiş iş yok; Y1-B9 KVKK md.11 muafiyeti zaten main'de: backend `src/middleware/tenantSuspension.ts:31-54`, #165). Şerit 1: GÖREV 0 belgeleri · Şerit 2: P-05 merge (backend #162 → pointer → çatı #340).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
