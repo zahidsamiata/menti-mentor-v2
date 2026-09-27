@@ -49,7 +49,7 @@
 | backend #142 + çatı #320 | AN-30 granüler rıza · 🔵 · çıkış blokeri | yeşil | ✅ ONAY | KARAR-96 EVET + `Consent` yedeği |
 | backend #160 | AN-02 seed metin yazımı · 🔵 | yeşil | — | KARAR-99 EVET + 2 satır UPDATE |
 | backend #185 | AN-52-1 anket tablosu · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-106 EVET bekliyor (yedek gerekmez — yeni tablo) |
-| backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (#370 arşiv düzeltiliyor) | KARAR-107 EVET bekliyor |
+| backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **Push edilmemiş iş:** yok.
