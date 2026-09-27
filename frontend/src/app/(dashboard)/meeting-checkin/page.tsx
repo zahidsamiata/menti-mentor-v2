@@ -7,8 +7,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { meetingsApi } from '@/lib/api/meetings';
-import { countCompletedMeetings } from '@/lib/mentiMetrics';
-import { meetingMilestone, type MeetingMilestone } from '@/lib/milestones';
+import { checkInMilestone, meetingMilestone, type MeetingMilestone } from '@/lib/milestones';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
@@ -36,7 +35,8 @@ function MeetingCheckInContent() {
 
   const meetingId = params.get('meetingId') ?? '';
 
-  // P-07: kilometre taşı için tamamlanan görüşme sayısı (bu görüşme henüz COMPLETED değil → +1).
+  // P-07/AJ-33: kilometre taşı için tamamlanan görüşme sayısı. Check-in yalnız COMPLETED görüşmede
+  // açıldığından bu görüşme listede zaten COMPLETED sayılır (+1 YOK).
   const { data: meetingsData } = useQuery(
     () => meetingsApi.list(api, {}),
     [api],
@@ -83,9 +83,7 @@ function MeetingCheckInContent() {
     const result = await meetingsApi.submitCheckIn(api, meetingId, payload);
     setSubmitting(false);
     if (result.ok) {
-      // Bu görüşme dahil sayı = önceki tamamlananlar + 1 (bu görüşme henüz COMPLETED değil).
-      const completedIncludingThis = countCompletedMeetings(meetingsData?.items ?? []) + 1;
-      setMilestone(meetingMilestone(completedIncludingThis));
+      setMilestone(checkInMilestone(meetingsData?.items ?? []));
       setStep('done');
       setTimeout(() => router.push(isMentor ? '/mentor' : '/menti'), 2500);
     } else {

@@ -29,7 +29,7 @@
 
 | İş | Risk | Ölçüt (kısa) | Kanıt dosya:satır | Test dosya:satır | Mutasyon | Kategori | QC | Not / AJ |
 |---|---|---|---|---|---|---|---|---|
-| P-07 | R2 | Menti kilometre taşlarında kişiye özel kutlama görüyor | meeting-checkin/page.tsx:38,87 '+1' varsayımı 'bu görüşme henüz COMPLETED değil' · BE meetingCheckInController.ts:48 check-in yalnız COMPLETED'ta açılır (36746b2, P-07'den önce) | frontend/src/__tests__/milestones.test.ts (6 test) | hayır | ❌ | QE1 ÇÜRÜDÜ (✅→) | → **AJ-33** · Sayı bir fazla: ilk görüşmede '2. görüşmen tamamlandı!', 10. eşik 9. görüşmede çıkıyor; milestones.test.ts yalnız saf fonksiyonu ölçüyor |
+| P-07 | R2 | Menti kilometre taşlarında kişiye özel kutlama görüyor | meeting-checkin/page.tsx:38,87 '+1' varsayımı 'bu görüşme henüz COMPLETED değil' · BE meetingCheckInController.ts:48 check-in yalnız COMPLETED'ta açılır (36746b2, P-07'den önce) | frontend/src/__tests__/milestones.test.ts (6 test) | hayır | ❌ | QE1 ÇÜRÜDÜ (✅→) | → **AJ-33** · Sayı bir fazla: ilk görüşmede '2. görüşmen tamamlandı!', 10. eşik 9. görüşmede çıkıyor; milestones.test.ts yalnız saf fonksiyonu ölçüyor · → kapandı: AJ-33 · PR çatı #391 · mutasyon: kırmızı |
 
 ## ⚠️ KISMEN
 
