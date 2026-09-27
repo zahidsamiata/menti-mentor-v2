@@ -145,4 +145,13 @@ printf -- '- `CLAUDE.md:4-5`teki kural\n' >>"$TMP/root/CLAUDE.md"
 expect 0 "kural (l) negatif: CLAUDE.md:4-5 kendine atıf → yeşil + uyarı"
 grep -q 'kendi içine satır atfı "CLAUDE.md:4-5"' "$TMP/out" || { echo "  ✗ kural (l) uyarısı çıktıda yok"; FAIL=1; }
 
+# ── kural (m) YN-09: 1.000 karakteri aşan kuyruk satırı → yalnız UYARI ──
+setup_clean
+expect 0 "kural (m) pozitif: kısa satırlar → uyarı yok"
+grep -q "YN-09" "$TMP/out" && { echo "  ✗ kural (m): kısa satırlarda uyarı çıktı"; FAIL=1; }
+
+printf '| X-05 | Ş0 | uzun iş | 🟢 | görünür | BEKLIYOR | %s |\n' "$(head -c 1100 /dev/zero | tr '\0' 'n')" >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+expect 0 "kural (m) negatif: 1.000+ karakterlik kuyruk satırı → yeşil + uyarı"
+grep -q "00-KUYRUK.md 1 satır > 1000 karakter" "$TMP/out" || { echo "  ✗ kural (m) uyarısı çıktıda yok"; FAIL=1; }
+
 exit $FAIL
