@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { TenantMember, TenantMemberRole } from '@/lib/api/platform';
 import { certStatusBadge } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
@@ -29,11 +30,13 @@ function roleBadgeClass(role: TenantMemberRole): string {
 }
 
 export function MembersTable({
+  tenantId,
   members,
   loading,
   roleFilter,
   onRoleFilterChange,
 }: {
+  tenantId: string;
   members: TenantMember[];
   loading: boolean;
   roleFilter: RoleFilter;
@@ -79,7 +82,14 @@ export function MembersTable({
             <tbody>
               {members.map((m) => (
                 <tr key={m.id} className="border-t border-border hover:bg-muted/50">
-                  <td className="px-4 py-3 text-foreground">{m.fullName}</td>
+                  <td className="px-4 py-3 text-foreground">
+                    <Link
+                      href={`/platform/tenants/${tenantId}/users/${m.id}`}
+                      className="hover:text-primary hover:underline"
+                    >
+                      {m.fullName}
+                    </Link>
+                  </td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full ${roleBadgeClass(m.role)}`}>
                       {ROLE_LABEL[m.role]}
