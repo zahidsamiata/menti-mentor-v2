@@ -33,8 +33,8 @@ const SKILL_CHIPS = [
 
 const DISC_META = {
   D: { archetype: 'Öncü',      icon: '🦅', color: 'text-red-600 dark:text-red-400'    },
-  I: { archetype: 'Ateşleyici', icon: '🔥', color: 'text-yellow-600 dark:text-yellow-400' },
-  S: { archetype: 'Yapı Taşı', icon: '🌿', color: 'text-green-600 dark:text-green-400'  },
+  I: { archetype: 'Ateşleyici', icon: '🔥', color: 'text-yellow-700 dark:text-yellow-400' },
+  S: { archetype: 'Yapı Taşı', icon: '🌿', color: 'text-green-700 dark:text-green-400'  },
   C: { archetype: 'Kâşif',     icon: '🧭', color: 'text-blue-600 dark:text-blue-400'   },
 } as const;
 

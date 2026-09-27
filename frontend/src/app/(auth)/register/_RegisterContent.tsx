@@ -393,9 +393,9 @@ export default function RegisterContent() {
             autoComplete="new-password"
           />
 
-          {/* Eşleşme onayı */}
+          {/* Eşleşme onayı — AJ-07: emerald-600 beyaz zeminde ~3.8:1 (AA eşiği 4.5:1 altı), emerald-700'e çekildi (~5.5:1). */}
           {confirm.length > 0 && password === confirm && (
-            <p className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 -mt-2">
+            <p className="flex items-center gap-1 text-xs text-emerald-700 dark:text-emerald-400 -mt-2">
               <CheckCircle2 className="h-3.5 w-3.5 shrink-0" aria-hidden />
               Şifreler eşleşiyor
             </p>

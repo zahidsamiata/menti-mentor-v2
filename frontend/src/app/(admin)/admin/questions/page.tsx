@@ -13,7 +13,7 @@ import { discDimensionLabel } from '@/types/discTest';
 import { UI_TEXT } from '@/lib/uiText';
 
 const DISC_COLORS: Record<string, string> = {
-  D: 'text-red-600 dark:text-red-400', I: 'text-yellow-600 dark:text-yellow-400', S: 'text-green-600 dark:text-green-400', C: 'text-blue-600 dark:text-blue-400', GENERAL: 'text-gray-400',
+  D: 'text-red-600 dark:text-red-400', I: 'text-yellow-700 dark:text-yellow-400', S: 'text-green-700 dark:text-green-400', C: 'text-blue-600 dark:text-blue-400', GENERAL: 'text-gray-400',
 };
 
 // Soru tipi enum'u (CORE/DEEPENING) DB değeridir — DEĞİŞMEZ. Yalnızca görünen etiket Türkçe.

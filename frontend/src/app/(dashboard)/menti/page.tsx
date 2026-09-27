@@ -403,6 +403,7 @@ export default function MentiDashboardPage() {
               rows={5}
               maxLength={2000}
               placeholder="Merhaba, ben... Bu eşleşmeden beklentim..."
+              aria-label="Mesajınız"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               autoFocus
