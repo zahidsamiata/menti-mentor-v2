@@ -67,7 +67,10 @@ export function isLogoUrlSafeToSave(url: string): boolean {
   if (parsed.username !== '' || parsed.password !== '') return false;
   if (parsed.port !== '') return false;
 
-  const hostname = parsed.hostname;
+  // Sondaki kök-bölge noktası (`localhost.`, `x.local.`) DNS'te geçerli bir FQDN gösterimidir ve
+  // tarayıcı AYNI host'u çözer; URL ayrıştırıcısı bunu SİLMEZ, backend'le aynı kalması için burada
+  // ayıklanır (bkz. `backend/src/services/logoUrl.ts`).
+  const hostname = parsed.hostname.replace(/\.+$/, '');
   if (isIPv4Literal(hostname) || isIPv6Literal(hostname)) return false;
   if (isLocalOrInternalHostname(hostname)) return false;
 
@@ -78,4 +81,6 @@ export function isLogoUrlSafeToSave(url: string): boolean {
 }
 
 export const LOGO_URL_SAVE_ERROR =
-  'Logo adresi https:// ile başlayan, güvenli ve desteklenen bir görsel adresi olmalı (.png, .jpg, .jpeg, .webp).';
+  'Logo adresi https:// ile başlayan, gerçek bir alan adına ait (IP adresi, localhost, port veya ' +
+  'kullanıcı bilgisi İÇERMEYEN) ve desteklenen bir uzantıyla biten (.png, .jpg, .jpeg, .webp) bir ' +
+  'görsel adresi olmalı.';
