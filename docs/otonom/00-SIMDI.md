@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 · çatı main HEAD `c03f754`+docs · backend main HEAD `e68f306` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 · çatı main HEAD `b70bf1f`+docs · backend main HEAD `a38b89b` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3: AJ-01…09 + AJ-12 + PS-A4 + F-24 + F-05 (kod) ✅ canlıda · AJ-13 (negatif test 2. parti, backend #184) 7b düzeltmesinde.
+**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3: AJ-01…09 + AJ-12 + AJ-13 + PS-A4 + F-24 + F-05 (kod) ✅ canlıda · AN-52 planı (çatı #369, 7b düzeltmesi).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #184 + çatı #368 | AJ-13 (11 uca negatif test) | ok:true, db:up, site 200 |
 | backend #183 + çatı #367 | F-05 kod kısmı (CAPTCHA, anahtar yokken etkisiz) | ok:true, db:up, site 200 |
 | backend #182 + çatı #366 | F-24 (platform kullanıcı özet sayfası) | ok:true, db:up, site 200 |
 | backend #181 + çatı #365 | AJ-09 (çerez + PII select refaktörü) | ok:true, db:up, site 200 |
