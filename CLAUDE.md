@@ -5,7 +5,7 @@
 > Hangi kuralları geçersiz kıldığı aşağıda tek tek yazılı — eski satırlar silinmedi, tarihsel iz korunuyor.
 
 ## Nedir
-PO (ürün sahibi) kod yazmaz ve her adımda onay veremez. *(⚠️ GÜNCELLEME 2026-09-26, YN-13: kişi adı kaldırıldı — § Kişi Adı Yasağı.)* İş artık sohbetten değil **dosyalardan** yürür.
+PO (ürün sahibi) kod yazmaz ve her adımda onay veremez. İş artık sohbetten değil **dosyalardan** yürür.
 Ajan kuyruğu baştan sona işler, karar noktasında DURMAZ — soruyu dosyaya yazıp sonraki işe geçer.
 PO toplu karar verir, aynı prompt tekrar gönderilir, kaldığı yerden devam eder.
 
@@ -23,8 +23,7 @@ Durum güncellemeleri normal commit'lerle gider.
 Ana prompt: `docs/otonom/OTONOM-PROMPT.txt` — her turda aynen gönderilir, yeniden yazılmaz.
 
 ## ✅ MERGE POLİTİKASI — "PR aç, MERGE ETME" kuralı KISMEN KALDIRILDI
-~~[ESKİ · 2026-09-19] `CLAUDE.md:8`'deki **"PR aç, MERGE ETME"** kuralı ve `CLAUDE.md:35`'teki akış bu bölümle güncellenmiştir.~~
-⚠️ **GÜNCELLEME (2026-09-21): atıf hedefleri kaymıştı —** bu bölümün güncellediği gerçek satırlar **`CLAUDE.md:178`** ("PR aç, MERGE ETME", bu turda üstü çizildi) ve **`CLAUDE.md:207`** ("PR açılır → CI yeşil → merge") akışıdır. Bugün `:8` = "PO kod yazmaz…", `:35` = "Şema/migration değişikliği YOK" — başka içerik. (Satır numaraları 2026-09-21 itibarıyladır.)
+Bu bölüm § Çalışma Sözleşmesi'ndeki eski "PR aç, MERGE ETME" kuralını ve § Branch Akışı'ndaki "PR açılır → CI yeşil → merge" akışını günceller.
 Gerekçe: gerçek kullanıcı ~sıfır, her iş ayrı PR (tek tek revert edilebilir), `npm run verify` kapısı var.
 
 **🟢 işler: doğrulama listesi tam geçerse MERGE EDİLİR, PO beklenmez.**
@@ -35,15 +34,14 @@ Merge öncesi kontrol listesi — bir madde bile eksikse merge YOK, PR bırakıl
 - [ ] CI iki repoda da yeşil (çatı + backend; backend CI yalnız main-hedefli PR'da koşar)
 - [ ] Şema/migration değişikliği YOK
 - [ ] seed komutu çalıştırılmadı
-- [ ] auth / KVKK / matching dosyalarına dokunulmadı
+- [ ] auth / KVKK / matching dosyasına dokunulduysa: bağımsız inceleme "SONUÇ: ONAY" + negatif test (4 renk, 2026-09-26)
 - [ ] Değişiklik yalnız o işin kapsamındaki dosyalarda
 
 Merge sonrası: **submodule pointer'ını backend main HEAD'e re-bump et** (bkz. "Merge sonrası pointer bump").
 Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>`
 
-~~[ESKİ · 2026-09-26] **🟡 işler** (riskli/geniş): PR'da durur, merge edilmez.~~
-⚠️ **GÜNCELLEME 2026-09-26 (PO): 4 renk** — tam metin `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7 / 7b:
-- **🟢 işler**: ajan yapar + merge eder (varsayılan). Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa bağımsız inceleme "SONUÇ: ONAY" + negatif test şartı kendiliğinden eklenir (yukarıdaki listenin "auth / KVKK / matching dosyalarına dokunulmadı" maddesi yerine).
+**4 renk (PO 2026-09-26)** — tam metin `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7 / 7b:
+- **🟢 işler**: ajan yapar + merge eder (varsayılan). Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa bağımsız inceleme "SONUÇ: ONAY" + negatif test şartı kendiliğinden eklenir.
 - **🔵 işler**: migration · seed · canlı veriye yazma · karantina → ajan hazırlar (PR + inceleme ONAY + `01-KARARLAR.md`'de EVET/HAYIR kartı), PO'nun tek "EVET"i + tarihli yedekle merge edilir.
 - **🟡 işler**: yalnız PO'nun eliyle yapılabilen iş (sunucu/Dokploy · hesap/anahtar · GitHub ayarı · avukat · kuruma görünen/hukuki metnin onayı); kod kısmı 🟢 kurallarıyla yapılır, PO kısmı `docs/otonom/03-PO-ELLE-ISLER.md`'ye yazılır.
 **🔴 işler**: ilgili KARAR cevaplanmadan dokunulmaz.
@@ -52,11 +50,11 @@ Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>
 1. **Migration/DB**: canlı = lokal AYNI Neon. Yalnız ilgili KARAR "evet" ise VE etkilenen tablo için
    tarihli yedek tablo alındıktan sonra. Yedek adı + satır sayısı `02-ILERLEME.md`'ye yazılır.
 2. **seed**: `seed.ts` / `npm run seed` / `prisma db seed` ASLA.
-   Güvenli olanlar: ~~`seed-questions`~~ (silindi 2026-08-23, bkz. :263 — § CANLI = LOKAL AYNI DB), `seed-learning-journey`, `seed-certification`, `seed-test-tenant`
+   Güvenli olanlar: `seed-learning-journey`, `seed-certification`, `seed-test-tenant` (`seed-questions` 2026-08-23'te silindi — § CANLI = LOKAL AYNI DB)
    — bunlar da yalnız KARAR evet + yedek sonrası.
 
 ## ⭐ PO KARARLARI 2026-09-26 — K-A arşive taşı · K-B · K-C ajan-ekledi
-Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
+Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b · **aktif/arşiv ayrımı kuralı: Bölüm 5c** (otomatik bekçi `scripts/belge-bekci.sh`). Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
 
 ## ⭐ KARAR AYRIMI — neyi sorma, neyi sor
 **SEN KARAR VER, SORMA (teknik):** kütüphane · dosya/klasör yapısı · isimlendirme · state yönetimi ·
@@ -84,8 +82,7 @@ Hiçbir kod · uç · alan · tablo · bileşen · dosya · test şu beş adım 
    ⛔ Arşiv satırı yazılmadan silme commit'i atılmaz.
 5. **ÖNCE KARANTİNA** — doğrudan silme YOK. Kod yerinde kalır, devre dışı bırakılır
    (rota kapalı / `@deprecated` / export kaldırıldı). Bir tur sorunsuz geçerse, **PO'nun İKİNCİ onayıyla** silinir.
-   ~~[ESKİ · 2026-09-26] Karantina 🟡'dır, gerçek silme 🔴'dır.~~
-   ⚠️ GÜNCELLEME 2026-09-26 (PO): Karantina 🔵'dır (PO'nun tek "EVET"i), gerçek silme 🔴'dır (İKİNCİ onay).
+   Karantina 🔵'dır (PO'nun tek "EVET"i), gerçek silme 🔴'dır (İKİNCİ onay).
 
 ⚠️ İstisna YOK. "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz.
 
@@ -118,8 +115,7 @@ Yanlış olan kod değil, sorulan soruydu.
 ⚠️ Kendi önerine güvenmiyorsan yaz: *"bu senin ürün kararın, önerime güvenme."*
 
 ### ⭐ Karar kartı sayısı — ÜST SINIR YOKTUR (PO kararı, 2026-09-19)
-> ⚠️ GÜNCELLEME (2026-09-19): Önceki turlarda uygulanan **"en fazla 5/10 yeni kart"** sınırı KALDIRILDI.
-> Gerekçe (PO): bastırılan karar, PO'nun göremediği tıkanma üretir. Eski "≤5/≤10" ifadeleri artık geçerli değil.
+> Gerekçe (PO): bastırılan karar, PO'nun göremediği tıkanma üretir.
 - Karar kartı sayısında **ÜST SINIR YOKTUR.** Gerekli her karar için kart açılır. Ama kartlar şu üç şarta uyar:
   1. **KÜMELE** — aynı ürün sorusunu paylaşan kalemler TEK kartta toplanır.
   2. **SIRALA** — etkiye göre: kaç işi açıyor + kullanıcıya etkisi. Başlığa `(n işi açar)` etiketi konur.
@@ -141,9 +137,7 @@ Dal adı: `otonom/K-xx-kisa-ad-YYYYMMDD` · her iş ayrı dal, ayrı PR (tek tek
 | 🟥 | **BYPASS** | Kod yazar, commit atar, PR açar, kapısı uygunsa merge eder |
 | 🟩 | **PLANLA** | Salt-okuma keşif. Hiçbir şey değişmez. |
 
-⛔ **KARE ≠ DAİRE.** ~~[ESKİ · 2026-09-26] 🟢 🟡 🔴 daireleri `00-KUYRUK.md`'de **kapı** anlamındadır
-(🟢 yap+merge · 🟡 yap+PR · 🔴 karar bekler).~~
-⚠️ GÜNCELLEME 2026-09-26 (PO): 🟢 🔵 🟡 🔴 daireleri `00-KUYRUK.md`'de **kapı** anlamındadır
+⛔ **KARE ≠ DAİRE.** 🟢 🔵 🟡 🔴 daireleri `00-KUYRUK.md`'de **kapı** anlamındadır
 (🟢 yap+merge · 🔵 hazırla+PO evet · 🟡 PO eli · 🔴 karar bekler).
 ⚠️ `00-KUYRUK` kapı sütunundaki 🔵 ≠ `00-KARAR-TAKIP` durum işareti 🔵 (orada: "tasarım hazır kod bekliyor" — `docs/kararlar/00-KARAR-TAKIP.md:218` lejantı; aynı belgenin özet tablosunda `:70` "v2 backlog" olarak da geçer). Bu belgenin Karar-Takip bölümündeki 🔵 de o durum işaretidir.
 Mod etiketi asla daire kullanmaz;
@@ -187,9 +181,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **Mod bildir**: her turda mod net olsun — PLAN (salt-okuma) / BYPASS (uygula) / MANUEL-ONAY (öner→onay→uygula).
 - **Geri-alınamaz adımda DUR**: merge, prod deploy, prod DB yazımı (backfill/migration), force-push, external
   servise gönderim → önce DUR, onay bekle.
-- ~~[ESKİ · 2026-09-10 öncesi] **PR aç, MERGE ETME**: merge kararı kullanıcınındır. Push + PR yeterli.~~
-  ~~[ESKİ · 2026-09-26]⚠️ **GÜNCELLEME (2026-09-21): doğrusu —** kapıya göre: **🟢 → doğrulama listesi tamsa MERGE ET** · **🟡 → PR aç, merge etme** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `CLAUDE.md:25-45` (MERGE POLİTİKASI) · `docs/otonom/00-KUYRUK.md:6-16` · `docs/otonom/OTONOM-PROMPT.txt:151-152`. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (`CLAUDE.md:163`) — orada "PR aç, merge etme" **aynen geçerlidir**.~~
-  ⚠️ **GÜNCELLEME 2026-09-26 (PO): 4 renk —** **🟢 → doğrulama listesi (+ hassas dosyada bağımsız inceleme ONAY + negatif test) tamsa MERGE ET** · **🔵 → hazırla, PR + EVET/HAYIR kartı; PO "EVET"i + tarihli yedek olmadan merge etme** · **🟡 → yalnız PO eli; kod kısmı 🟢 gibi, PO kısmı `03-PO-ELLE-ISLER.md`** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7/7b · `docs/otonom/00-KUYRUK.md` § Kapılar. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (§ Bulut oturumu farkı) — orada "PR aç, merge etme" **aynen geçerlidir**.
+- **Merge — kapıya göre (4 renk, PO 2026-09-26):** **🟢 → doğrulama listesi (+ hassas dosyada bağımsız inceleme ONAY + negatif test) tamsa MERGE ET** · **🔵 → hazırla, PR + EVET/HAYIR kartı; PO "EVET"i + tarihli yedek olmadan merge etme** · **🟡 → yalnız PO eli; kod kısmı 🟢 gibi, PO kısmı `03-PO-ELLE-ISLER.md`** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7/7b · `docs/otonom/00-KUYRUK.md` § Kapılar. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (§ Bulut oturumu farkı) — orada "PR aç, merge etme" **aynen geçerlidir**.
 - **Uçtan uca yürüt**: iş verilince tek turda kapsamlı ilerle; karar gerekeni "kullanıcı kararı gerekli: …" diye
   NOT et, gereksiz durma.
 - **SHA/commit/branch tahmin etme**: durumu git'ten DOĞRULA, hafızadan varsayma.
@@ -197,10 +189,10 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 
 ## 📁 Proje Hafızası — nereye bakılır
 - **Güncel durum (canonical, ŞU AN): `docs/otonom/00-SIMDI.md` + `docs/otonom/00-KUYRUK.md`** — her oturum başında oku. (09-DURUM 2026-09-20'den beri güncellenmiyor — PO 2026-09-26.)
-- Genel tanıtım (dondurulmuş onboarding): docs/arsiv/PROJECT_STATUS.md — güncel durum İÇİN DEĞİL (bkz. 09-DURUM). ⚠️ GÜNCELLEME (2026-08-28, G9-09): kökten `docs/arsiv/`'e taşındı; güncel durum canonical = `docs/kararlar/09-DURUM.md`.
+- Genel tanıtım (dondurulmuş onboarding): `docs/arsiv/PROJECT_STATUS.md` — güncel durum İÇİN DEĞİL (2026-08-28'de `docs/arsiv/`'e taşındı).
 - Detaylı kararlar (konu bazlı): docs/kararlar/00-INDEX.md (buradan ilgili konuya git)
 - Geçmiş raporlar: docs/raporlar/
-- **PO'nun elle yapacakları (kod dışı: Dokploy/SMTP/Neon/env): docs/otonom/03-PO-ELLE-ISLER.md** — ⚠️ GÜNCELLEME (2026-09-19): W+X denetimlerinden çıkan, kodla çözülemeyen işler burada; ajan bunları kuyruğa yazmaz, PO tek tek yapar.
+- **PO'nun elle yapacakları (kod dışı: Dokploy/SMTP/Neon/env): docs/otonom/03-PO-ELLE-ISLER.md** — kodla çözülemeyen işler; ajan bunları kuyruğa yazmaz, PO tek tek yapar.
 - Yeni bir işe başlarken: önce `docs/otonom/00-SIMDI.md` + `00-KUYRUK.md` oku (nerede kaldık).
 
 ## Push Öncesi — ZORUNLU
@@ -216,8 +208,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
   pointer'ı üzerinden çalıştırır.
 
 ## Branch Akışı — DOĞRUDAN main'E PUSH YOK (istisna: yalnız docs/)
-- ~~[ESKİ · 2026-09-25] Her iş feature branch'te yapılır: `git checkout -b feat/xxx`~~
-  ⚠️ **GÜNCELLEME 2026-09-25 (PO):** YALNIZ `docs/` altını değiştiren commit'ler doğrudan main'e push edilebilir. Kod, schema, script, CI, Dockerfile ve package dosyaları HER ZAMAN dal + PR ile gider (`git checkout -b feat/xxx`).
+- *(PO 2026-09-25)* YALNIZ `docs/` altını değiştiren commit'ler doğrudan main'e push edilebilir. Kod, schema, script, CI, Dockerfile ve package dosyaları HER ZAMAN dal + PR ile gider (`git checkout -b feat/xxx`).
 - PR açılır → CI iki repoda da yeşil → merge.
 - Main hep yeşil kalır, "Run failed" maili gitmez.
 
@@ -259,14 +250,11 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 
 ## ⚠️ CANLI = LOKAL AYNI DB (kritik)
 - Canlı ve lokal AYNI Neon DB'sini paylaşıyor (ep-fancy-tooth-ab4u5xhr).
-  > ⚠️ **ÇELİŞKİ (2026-09-21):** Bu satır ("canlı ve lokal **AYNI Neon**") ile aşağıdaki **"Ortam / Veritabanı — PROD ≠ DEV ≠ TEST"** bölümünün PROD satırı ("docker-compose Postgres, **Neon değil**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
+  > ⚠️ **ÇELİŞKİ (2026-09-21) — TEK KOPYA:** bu bölüm ("canlı ve lokal **AYNI Neon**") ile § Ortam / Veritabanı'nın PROD satırı ("docker-compose Postgres, **Neon değil**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
 - Lokalde DB'ye yazmak = canlıyı anında etkilemek. Seed/migration/DB işleminde onay al.
 - Tehlikeli seed.ts / npm run seed / prisma db seed VERİ SİLER — asla çalıştırma.
-  Güvenli: seed-questions.ts, seed-learning-journey.ts, seed-test-tenant.mjs.
-  > ⚠️ GÜNCELLEME (2026-08-23): `seed-questions.ts` **SİLİNDİ** (backend `5745e0f`, "ölü/çelişen seed-questions.ts kaldır")
-  > — artık güvenli listede DEĞİL. Kod-kanıtlı **gerçek güvenli** liste (yalnız `upsert`, `deleteMany` YOK):
-  > `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs`.
-  > **Tehlikeli = `prisma/seed.ts`** (`npm run seed` = `tsx prisma/seed.ts`) — satır 300-307'de toplu `deleteMany()` (userResponse/feedback/meeting/matchRequest… siler). ASLA çalıştırma.
+  Kod-kanıtlı güvenli liste (yalnız `upsert`, `deleteMany` YOK): `seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs` (`seed-questions.ts` 2026-08-23'te silindi, backend `5745e0f`).
+  **Tehlikeli = `prisma/seed.ts`** (`npm run seed` = `tsx prisma/seed.ts`) — satır 300-307'de toplu `deleteMany()` (userResponse/feedback/meeting/matchRequest… siler). ASLA çalıştırma.
 
 ## Ortam / Veritabanı — PROD ≠ DEV ≠ TEST
 - **Lokal geliştirme**: `backend/.env` → ana Neon (`ep-fancy-tooth-ab4u5xhr`, eu-west-2 = **Londra/Birleşik Krallık**, AB üyesi DEĞİL — madde 92, PO teyitli 2026-08-26). Bu CANLI veri;
@@ -276,7 +264,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **CI**: ephemeral localhost Postgres (service container). `.env.test` gitignored → CI'a girmez; test env
   `tests/setup.ts`'te set edilir.
 - **PROD**: docker-compose Postgres (`@postgres:5432`), Neon değil. Migration/backfill prod'da prod `DATABASE_URL` ile.
-  > ⚠️ **ÇELİŞKİ (2026-09-21):** Bu satır ("PROD: docker-compose Postgres, **Neon değil**") ile yukarıdaki **"⚠️ CANLI = LOKAL AYNI DB"** bölümünün ilk satırı ("canlı ve lokal **AYNI Neon**") birbirini yalanlıyor. PO Dokploy'da `DATABASE_URL`'in hangi sunucuyu gösterdiğini teyit edecek. **O zamana kadar EN KÖTÜ DURUMU varsay: migration/seed öncesi yedek ZORUNLU.** — takip: `docs/otonom/03-PO-ELLE-ISLER.md` (en üstteki teyit maddesi) · kanıt: `docs/raporlar/kesif/devir-analizi-2026-09-21.md`.
+  > ⚠️ ÇELİŞKİ (2026-09-21): bkz. § CANLI = LOKAL AYNI DB (tek kopya) — o zamana kadar migration/seed öncesi yedek ZORUNLU.
 - **Kural**: hangi DB'ye bağlı olduğunu ÖNCE host'tan doğrula (secret'sız). Yanlış DB'de iş yapma.
 
 ## Neon test branch — geçici izole DB koreografisi
@@ -302,8 +290,6 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - Mevcut belgelerdeki isimler ayrı bir temizlik işinde giderilir; yeni içeriğe isim eklenmez.
 
 ## Model Yönlendirme
-> ⚠️ GÜNCELLEME (2026-08-28, G9-15): Model isimleri (sürüm/sınıf) ve "basit iş→hafif model" ilkesi bu bölümden
-> ÇIKARILDI — model seçimi her turun promptunda belirtildiği için belgede sabitlenmesi yalnız eskiyen bilgi üretiyordu.
 - Model seçimi her turun promptunda belirtilir; belgede sabitlenmez.
 
 ## Hata Felsefesi — panik yok
@@ -312,8 +298,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - Panikle deneme-yanılma düzeltme YAPMA.
 
 ## Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI (atlanamaz)
-> ⚠️ GÜNCELLEME (2026-08-11): Eski "iş bitince 09-DURUM güncellenir" kuralı bu **atlanamaz bitiş adımıyla**
-> güçlendirildi (kararlar yazılıp unutuluyor sorununu kökten önlemek için). İçerik kaybı yok — genişletildi.
+> ⚠️ PO 2026-09-26: `09-DURUM.md` ve `00-KARAR-TAKIP.md` 2026-09-20'den beri güncellenmiyor; genel belge taraması yapılana kadar otonom turlar bu iki dosyaya yazmaz — tur sonu kaydı `docs/otonom/00-SIMDI.md` + `02-ILERLEME.md`.
 
 - **Her BYPASS (kod/iş yapan) tur, aşağıdaki belge-senkron kontrolü yapılmadan TAMAMLANMIŞ SAYILMAZ.**
   Aynı tur/commit (docs branch'inde) içinde şunlar KONTROL EDİLİR ve gerekiyorsa güncellenir:
@@ -360,6 +345,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 ## Belge Düzeltme Deseni — tarihsel iz korunur
 - Eski/yanlış çıkan bir kararı SİLME; üstüne `⚠️ GÜNCELLEME (tarih): …` notu ekle.
 - Böylece kararın neden değiştiği ve tarihsel iz korunur.
+- **İstisna (K-A, PO 2026-09-26):** sık okunan 7 dosyada (CLAUDE.md · OTONOM-PROMPT · 00-KUYRUK · 01-KARARLAR · 02-ILERLEME · 03-PO-ELLE-ISLER · 00-BELGE-HARITASI) eski metin yerinde üstü çizili BIRAKILMAZ — arşive AYNEN taşınır (`OTONOM-PROMPT.txt` § AKTİF/ARŞİV AYRIMI; CLAUDE.md için `docs/otonom/arsiv/kural-gecmisi-CLAUDE.md`).
 - **⭐ KALICI KURAL — bayat gövde satırı üstü-çizili damgalanır (2026-08-28, G9-03):** Bir ⚠️ GÜNCELLEME notu
   eklerken ESKİ yanlış cümleyi normal yazıyla BIRAKMA — okuyan onu hâlâ geçerli sanır. Cümleyi SİLME ama üstünü çiz
   + `[ESKİ]` damgası ver. Desen (bu 2 satır birlikte):
@@ -410,8 +396,7 @@ Belge oluşturur/düzenlerken oraya bak; kuralların tamamı orada.
   *(Gerekçe: 11 güvenlik bulgusunun 9'unda doğru koruma aynı dosyada ya da aynı ailede ZATEN VARDI,
   yalnız bir yolda uygulanmamıştı — okuma korunuyor/yazma korunmuyor, ikiz uç korunuyor/eski uç
   korunmuyor. Kanıt: `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md` §0.)*
-- KASITLI public olan endpoint'ler (⚠️ GÜNCELLEME 2026-09-21, V-09 — kod-teyitli tam liste;
-  eski liste 10 ucu atlıyordu → denetimlerde yanlış "fazlalık" alarmı doğuruyordu):
+- KASITLI public olan endpoint'ler (V-09 kod-teyitli tam liste, 2026-09-21):
   **auth:** `POST /api/auth/register` · `/login` · `/refresh` · `/logout` · `/forgot-password` ·
   `/reset-password` · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
   **platform:** `POST /api/platform/auth` · `/logout` ·

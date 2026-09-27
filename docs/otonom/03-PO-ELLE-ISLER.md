@@ -1,11 +1,8 @@
 > 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt § 0.4
 > TÜR: 🔥 · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: PO bir işi yapınca ya da yeni kod-dışı iş çıkınca
+> Tamamlananlar: `docs/otonom/arsiv/03-PO-ELLE-ISLER-tamamlanan.md`
 
 # 03 — PO'NUN ELLE YAPACAKLARI (kod değiştirilerek çözülemeyen işler)
-
-> ~~[ESKİ · 2026-09-25] ⛔⛔ **ACİL (2026-09-25) — canlıda "taslak" kurum var mı?** Yeni kurum kaydı, sihirbazda logo girilmediyse / renk değiştirilmediyse / platform onayı bekliyorsa "taslak" adımında kalıyordu; her gün çalışan temizlik 96 saati geçen, anlaşması olmayan taslak kurumları **kullanıcılarıyla birlikte siliyor** (`backend/src/services/cronScheduler.ts:181-212`). İleriye dönük düzeltme: menti-mentor-v2 #272. **Senin bakman gereken:** Neon/prod veritabanında `SELECT id, slug, "createdAt", "onboardingStep", "verificationStatus" FROM "Tenant" WHERE "onboardingStep" IN ('TEMPLATE','LOGO','PREVIEW') AND "isActive" = true;` (salt okuma). Satır varsa **KARAR-81**'i cevapla; ajan tarihli yedek alıp düzeltir. Acil güvence istersen Dokploy'da geçici `CRON_ENABLED=false` (tüm zamanlanmış işleri durdurur — KVKK imhası dahil; bkz. V-11).~~
-> ✅ **GÜNCELLEME 2026-09-25 (PO): gerek kalmadı — KARAR-81.** Canlıda gerçek kurum yok; mevcut taslaklar test verisi, silinmeleri sorun değil. Sorgu ve `CRON_ENABLED=false` gerekmiyor. İleriye dönük düzeltme kuyrukta: KR-23.
-
 
 🔄 YAŞAYAN · Oluşturma: 2026-09-19 · Kaynak: W (`operasyonel-hazirlik-2026-09-19.md`) + X (`uctan-uca-kurum-yolculugu-2026-09-19.md`) denetimleri.
 
@@ -58,7 +55,6 @@ Her iş için **değişkenin tam adı · değer biçimi · hangi servise (backen
 > ⚠️ **Ajan tarafındaki 14 çıkış blokeri** `00-KUYRUK.md`'de Not sütununda **`⛔ ÇIKIŞ BLOKERİ (T…)`** ile işaretlidir — PO'nun yapacağı bir şey yok, bilgi amaçlı.
 
 ## Ortak doğrulama yolu
-~~[ESKİ · 2026-09-19] Çoğu ortam değeri tek yerden görülür: **`GET /health`** → `env` alanı. Bu tur `/health` zenginleştirilirse (Bölüm 6 + V-01/V-04/V-11) SMTP · DB · cron durumu da buradan okunacak.~~
 ⚠️ **GÜNCELLEME (2026-09-21, kod-teyitli): `/health` ZENGİNLEŞTİRİLDİ — V-01/V-11 İNDİ.** Tek istekte dört şey birden görülüyor:
 ⚠️ **GÜNCELLEME (2026-09-26, PO teyidi): canlı adresler** — Site: `https://sivilkapasite.org` · Backend: `https://api.sivilkapasite.org`. Kaynak: `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md:155` + `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-09-21.md:95` + PO teyidi. Bu adresler daha önce yaşayan belgelerde yoktu.
 **`GET https://api.sivilkapasite.org/health`** → `{ "ok", "db": "up|down", "smtp": "verified|failed|unconfigured|unknown", "cron": "enabled|disabled", "env", "ts", "version", "uptime" }`
@@ -150,7 +146,6 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 
 > ⭐ **YENİ (2026-09-21, dört konsey): KARAR-38…52 — 15 kart.** Kümeler: 38-40 güvenlik/KVKK · 41-44 psikometri/eşleştirme · 45-48 içerik/metin · 49-52 belge yönetişimi.
 > En çok iş açanlar: **KARAR-45** (arketip ad↔kod, 4 iş) · **KARAR-47** (hukuki metin paketi, 5 kalem — #16/#17/#20 hepsi burada) · **KARAR-50** (kural geçersizleşme koşulu, 4 iş).
-~~[ESKİ · 2026-09-19] Bu belgedeki bazı işler bir ÜRÜN/HUKUK kararına bağlı. Kartlar bu turda açıldı (KARAR-23+): kurum bildirimleri açılsın mı (§4.1) · hata stack'i panele açılsın mı (§4.2) · yedek nereye (§4.3) · yedek tablo DROP (§4.4) · `mentorVisibilityEnabled` (§4.5) · oryantasyon kilidi engel mi (§9.2) · dış hata izleme servisi kurulsun mu · `LLM_PROVIDER`/OpenAI ölü env silinsin mi.~~
 ⚠️ **GÜNCELLEME (2026-09-21): YANLIŞ BEYAN DÜZELTİLDİ.** Yukarıdaki cümle *"kartlar bu turda açıldı (KARAR-23+)"* diyordu; **açılmamışlar.** Kod-teyidi: `01-KARARLAR.md`'de kart numaraları **KARAR-0…29 (30 kart)**, en yüksek **29**; `grep "mentorVisibilityEnabled"` → **0 sonuç**, "oryantasyon kilidi" → tek isabet ve o da **başka bir kartın gövdesinde**, kendi kartı yok. ⇒ PO listeye bakıp arayacak, bulamayacaktı.
 **Doğrusu:** bu belgedeki işlerin bağlı olduğu kararlardan **bir kısmının kartı hâlâ YOK.** Bu turda (BB) açılan yeni kartlar `01-KARARLAR.md` sonunda **KARAR-30'dan** başlar; içindekiler tablosuna da eklendi. Kartı olmayan konular yeni kartlarda kümelenmiştir — hangi işin hangi karta bağlı olduğu ilgili satırın Not sütununda yazılıdır.
 
@@ -216,7 +211,6 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 ## ❓ Kod tarafı TEYİT GEREK (ajan bulutta yapamadı, canlı/gerçek hesap ister)
 - `book-meeting` saat dilimi kayması İstanbul'da 409 üretiyor mu (X §8#5, gerçek deneme).
 - PENDING (OAuth) menti `mentor-matches`'ten veri alıyor mu (X §8#6 / U-08, gerçek hesap).
-- ~~[ESKİ · 2026-09-19] `.dockerignore` ↔ `migrate deploy` çelişkisi kurtarmada şema oluşturuyor mu (W §7#28 / V-14, `docker build`).~~ ⚠️ **GÜNCELLEME (2026-09-21): BU SATIR PO İŞİ DEĞİL** — `docker build` lokal/CI'da koşar, Dokploy veya Neon erişimi gerektirmez ⇒ **ajan işi**, `00-KUYRUK.md`'de **V-14** Not'una taşındı. Buradan çıkarıldı.
 
 ---
 

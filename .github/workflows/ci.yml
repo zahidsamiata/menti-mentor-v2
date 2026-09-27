@@ -21,6 +21,21 @@ env:
   NODE_VERSION: '22'
 
 jobs:
+  # ── Belge bekçisi: aktif/arşiv ayrımı (OTONOM-PROMPT.txt Bölüm 5c) ────────────
+  docs-guard:
+    name: Belge bekçisi (aktif/arşiv)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repoyu çek
+        uses: actions/checkout@v4
+
+      - name: Bekçi testleri (negatif + pozitif)
+        run: bash scripts/belge-bekci.test.sh
+
+      - name: Belge bekçisi
+        run: bash scripts/belge-bekci.sh
+
   # ── Backend: TypeScript + Prisma + Lint ──────────────────────────────────────
   backend-check:
     name: Backend — TS + Prisma + Lint

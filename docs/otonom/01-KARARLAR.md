@@ -121,7 +121,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-77** | **Görüşmeye iki taraf da değerlendirme yazsın mı** | **2** (KR-08 · KR-11 dolaylı) | ✅ **CEVAPLANDI (2026-09-25): A** — her taraf kendi kaydı, görünürlük değişmez · kart KR-08 bitene kadar ana dosyada |
 | **KARAR-78** | **Dönemlik anket: bağla / karantina / beklet** | **1** (KR-11) | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) |
 | **KARAR-79** | **Zamanlanmış iş tetikleme yetkisi kimde** | **1** (KR-05) | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı |
-| **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **85** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ✅ **CEVAPLANDI (2026-09-26): M1-M22 hepsi A** — 85 satır işlendi (kilit açıldı/katlandı/açık karara bağlandı); 2 yeni kart açtı: KARAR-94 (GV-17), KARAR-95 (kriz kanalı) |
+| **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **85** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ✅ **CEVAPLANDI (2026-09-26): M1-M22 hepsi A** — 85 satır işlendi (kilit açıldı/katlandı/açık karara bağlandı); 2 yeni kart açtı: KARAR-94 (GV-17), KARAR-95 (kriz kanalı) · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` |
 | **KARAR-81** | **Taslak kurumlar · kurulum ne zaman tamam** | **2** (mevcut taslaklar · kayıt anında tamamlandı) | ✅ CEVAPLANDI 2026-09-25: ÖZEL — temizlik sürer, mevcut taslaklar test verisi (dokunulmaz); işaret kayıtla aynı transaction'da → KR-23 |
 | **KARAR-82** | **Davet bağlantısı modeli** | **1** (U-12) | ⬜ boş · çıkış blokeri · öneri B (iptal edilebilir toplu link) |
 | **KARAR-83** | **Rolü kim, nasıl değiştirir** | **1** (U-13) | ⬜ boş · çıkış blokeri · YETKİ · öneri B (yalnız düşürme hatası) |
@@ -461,6 +461,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 
 ### KARAR-31 · Kriz bildirimi (kendine zarar) + yaş sınırı  [ÜRÜN + HUKUK] (2 işi açar)
 **Şu an ne var:** Sertifika sınavında mentöre *"menti kendine zarar ifadesi kullanırsa ne yaparsın"* diye **soruluyor** (red-line konu `kriz-yonetimi`) ama canlıda böyle bir akış **yok**. Kanıt: 7 terim, İKİ DİLLİ, harf duyarsız (`kriz`·`crisis`·`selfharm`·`self-harm`·`kendine zarar`·`acil durum`·`emergency`) → **2 satır, 0'ı akış** (biri iş unvanı listesi, biri sınav konu etiketi).
+· Ayrıca menti tarafında: menti kriz/kendine zarar ifadesi kullandığında uygulamada hiçbir kanal yok (22 terimlik iki dilli tarama → 0 sonuç); mentör terapist değil. Çözüm araştırma + ruh sağlığı uzmanı + avukat görüşü ister (`persona-panel-gelisimi-2026-09-23.md:259-269`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-31)*
 **Sorun ne:** Mentör eğitimde öğrendiği refleksi uygulayacak bir yer bulamıyor; kriz anında sistem sessiz. Sertifika bir davranışı öğretiyor, ürün karşılığını sunmuyor.
 **Neden sana soruyorum:** Bir kişinin en kırılgan anında kimin haberdar olacağı hukuki ve etik bir karardır; yanlış kurgu zarar verir.
 **Seçenekler:**
@@ -471,7 +472,6 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** Yok — **bu senin ürün kararın, önerime güvenme.** Avukat görüşü alınmadan hiçbiri seçilmemeli.
 ⚠️ **BAĞLI SORU (aynı kart, avukata TEK soru olarak gitmeli):** Bu akış 18 yaş altı menti varsayıyorsa **`G1-01` çöker** — bugün *"18+ beyanı yeterli"* deniyor; gerçek yaş ve veli onayı gerekir.
 **Cevap vermezsen:** **I-18** kuyrukta bekler; sertifika bir davranışı öğretip karşılığını sunmamaya devam eder.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — persona R7 / kriz-kendine zarar KANALI):** Menti bir kriz/kendine zarar ifadesi kullandığında sistem BUGÜN hiçbir şey yapmıyor: hiçbir kanal yok, 22 terimlik iki-dilli tarama → 0 sonuç; kriz sertifika senaryolarında (`CERT_T10_A/B`) sınanıyor ama uygulamada karşılığı yok; mentör terapist değil (`persona-panel-gelisimi-2026-09-23.md:259-269` · `konsey-icerik:267-271`). Kırılgan genç kitle hedeflenirken en savunmasız kullanıcı korumasız. ⚠️ Bu EK KARAR-31 kapsamına bir **kanal seçeneği** olarak girer AMA gerçek çözüm **ARAŞTIRMA + RUH SAĞLIĞI UZMANI + AVUKAT** görüşü gerektirir (pasif 112/183 yönlendirmesi mi, aktif tespit+eskalasyon mu — KVKK/yetki karmaşası ağır). Uzman = Bölüm 6.5(b), avukat = Bölüm 6.4.
 **CEVAP:**
 
 ---
@@ -657,6 +657,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 Ayrıca yazılmış ama hiç gösterilmeyen **8 yeni arketip kartı** var (Mimar · Ayna · Liman · Pusula / Rotacı · Kâşif ·
 Denge Arayan · İz Açan) — `arketip-ve-yaklasim-icerigi-2026-09-03.md:153-261`.
 
+· Kodda DÖRDÜNCÜ bir ad seti de var: kurum kayıt önizlemesi "Lider · İlham Veren · Denge Kurucusu · Analist" gösteriyor (`selfServeController.ts:77-82`) — hangi seçenek seçilirse seçilsin bu set de hizalanmalı. Yeni 8 ad 2026-08-28'de PO kararıyla seçildi (TAS); eşlemesi TAS'taki Big Five profillerinden türetilebilir (`TAS:71-107`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-45)*
 **Sorun ne:** Üç ayrı yerde "**Kâşif**" var ve üçü farklı kişiyi anlatıyor: canlıdaki DISC kartında bir mizaç tipi
 (`onboardingController.ts:94`), eski karar belgesinde bir **mentör** tipi (`03-psikometri-ve-algoritma.md:14`),
 yeni içerikte bir **menti** tipi (`arketip-...md:53`). Üstelik yeni 8 adın hiçbirinin, sistemin içindeki kod
@@ -686,7 +687,6 @@ yazılması.
 turda kapatmak ucuz.
 **Cevap vermezsen:** I-01 (yaklaşım metinleri), I-15 (arketip kartı), C-?? (ham `M1` kodları) ve madde 139'un
 menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — dördüncü ad seti + PSI damgasızlığı):** Kodda **DÖRDÜNCÜ** bir arketip ad seti var: kurum kayıt önizlemesi "Lider · İlham Veren · Denge Kurucusu · Analist" gösteriyor ve kurum yöneticisi kayıt sırasında bunu görüyor (`selfServeController.ts:77-82`). Hangi seçenek seçilirse seçilsin bu set de hizalanmalı. Yeni 8 ad "sessiz" değil — TAS 2026-08-28'de PO kararıyla seçildi; kartın "eski karar belgesi" dediği PSI ise HİÇ damgalanmamış. 8 yeni adın M1…m4 kodlarına eşlemesi yok ama TAS her ada bir Big Five profili yazmış (`TAS:71-107,84-103`), eşleme buradan türetilebilir. Kanıt: `icerik-mutabakati-2026-09-23.md:250` · `devir/08-oturum-tezi-2026-08-28.md:32`.
 **CEVAP:**
 
 ---
@@ -699,6 +699,7 @@ menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
 2026-09-08 tarihli oturum belgeleri · **kodda bambaşka bir üçüncü sahne** (`seed-certification.ts:216-217`).
 Hangisinin canlıya gideceği hiçbir belgede yazmıyor; faz6 hâlâ "dondurulmuş" etiketli.
 
+· A seçilirse seed'deki iki STK-özel konu (`gonullu-tukenmisligi`, `okul-gonulluluk-dengesi`) canlıdan kalkar ve sonuç ekranındaki (I-03) konu adları değişir; seed'deki "mentorluk/mentörlük" karışıklığı kendiliğinden düzelir (`seed-certification.ts:87,141`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-46)*
 **Sorun ne:** Kuyruk (P-99) işi "22 senaryoyu seed'e taşı" diye tarif ediyor; gerçekte **22'nin 17'sinin seed'de
 karşılığı yok, seed'deki 20'nin 15'i belgelerde gerekçeli elenmiş** ve ortak olan 5 senaryonun **5'i de yeniden
 yazılmış** — birinde puanlamanın anlamı ters dönmüş. Ayrıca taşımadan önce üç teknik soru cevapsız: konu
@@ -727,7 +728,6 @@ olması acilse ama toplu değişimi istemiyorsan B; ama karışık sürüm yöne
 **Benim önerim:** A — ama **KARAR-3 ve KARAR-4 cevaplanmadan başlanamaz** (kriz senaryolarının 8 şıkkı onlara
 bağlı) ve iş ikiye bölünmeli: "içerik taşıma PR'ı" ve "seed çalıştırma turu".
 **Cevap vermezsen:** P-99 ve K-16 açık kalır; sertifika ekranı bugünkü hâliyle kalır.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — A seçilirse STK-özel konu kaybı + ad tutarsızlığı):** A seçilirse seed'deki iki STK-özel sertifika konusu (`gonullu-tukenmisligi`, `okul-gonulluluk-dengesi`) canlıdan kalkar; "harmanla" kararının "3 konu geri gelir" gerekçesi okul-gönüllülük için gerçekleşmedi, "mentinin hayat önceliklerine saygı" yetkinliği açıkta kalır. Konu adları üç kaynakta farklı; A seçilirse sonuç ekranındaki (I-03) konu adları da değişir. Seed'de "mentorluk/mentörlük" karışık; A seçilirse kendiliğinden düzelir. Kanıt: `O2:243-247,289-291` · `O3:442-445,498-502` · `seed-certification.ts:87,141` · `icerik-mutabakati-2026-09-23.md:251`.
 **CEVAP:**
 
 ---
@@ -781,6 +781,7 @@ yazıyor ve *"…en uygun … kişiyle **eşleştirileceksin**"* diye söz veriy
 Eşleşme kartında *"%87 uyum"* gibi bir sayı var (`menti/page.tsx:311`), gerekçe üretilemezse yerine
 *"Genel profil uyumu"* basılıyor (`matchingController.ts:15`).
 
+· Kimlik dili ve tutulamayan vaat kodda: "Sen bir Öncüsün!" (`ResultStep.tsx:38` · `DiscRecallCard.tsx:56` · `onboardingController.ts:67`), "En İyi Eş" / "…eşleştirileceksin" (`ResultStep.tsx:71,97-100`) — metodoloji "kişilik tanısı değildir" diyor. En somut, araştırma beklemeyen düzeltme: "En İyi Eş" + "eşleştirileceksin" vaadinin kaldırılması. *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-48)*
 **Sorun ne:** Ürünün kendi metodoloji sayfası *"kesin bir başarı garantisi değil"*, *"DISC kişilik tanısı
 değildir"* diyor — ama kullanıcının **gerçekten okuduğu** ekranlar (sonuç kartı, eşleşme kartı) bu temkinli dili
 taşımıyor: kimlik etiketi ("Sen bir X'sin"), üstünlük ("En İyi Eş"), kesin vaat ("eşleştirileceksin") ve
@@ -806,7 +807,6 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 önemliyse A. C yalnızca bu çelişkiyi bilinçli kabul ediyorsan savunulabilir.
 **Benim önerim:** A — yüzde ve "eşleştirileceksin" ürünün **tutamadığı** iki vaat; kalan kısım zaten güçlü.
 **Cevap vermezsen:** C1-1…C1-6 (6 metin) olduğu gibi kalır; eşleşme kartındaki boş gerekçe de sürer.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — K-F damgalayan dil + persona C3 sevdirme dili):** Canlı arketip kartı kimlik dili + tutulamayan vaat kullanıyor: "Sen bir Öncüsün!" (`ResultStep.tsx:38` · `DiscRecallCard.tsx:56` · `onboardingController.ts:67`) ve "En İyi Eş" / "…eşleştirileceksin" (`ResultStep.tsx:71,97-100`) — belge ilkesi (`arketip-…:149` "eğilim, kimlik değil") ve ürünün kendi davet metniyle (`admin/invite/page.tsx:22`) çelişiyor. Persona konseyi ayrıca "sevdirme dili ne kadar kesin/iddialı olmalı" (§7 C3, `persona-panel-gelisimi-2026-09-23.md:235-237`) sorusunu soruyor: metodoloji "kişilik tanısı değildir" derken ekran kesin kimlik veriyor. **En somut, araştırma-beklemez düzeltme:** "En İyi Eş" + "eşleştirileceksin" tutulamayan gelecek vaadinin kaldırılması.
 **CEVAP:**
 
 ---
@@ -1272,140 +1272,6 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Benim önerim:** A — açık en dar yetkiyle hemen kapanır; kurum yöneticisine ihtiyaç çıkarsa sonradan C'ye genişletmek geri alınabilir bir adımdır.
 **Cevap vermezsen:** KR-05 kilitli kalır ve yetki kapsamı hatası açık kalır; aynı dosyaya dokunan KR-20 sırası da etkilenir.
 **CEVAP:**
-
----
-
-### KARAR-80 · Kuyruk çelişkileri (22 madde · 84 satırı açar) [ÜRÜN KARARI · KUYRUK DÜZENİ]
-> ⭐ Kaynak: çelişki taraması (2026-09-25, 3 paralel salt-okuma ajanı; `00-KUYRUK.md` BEKLIYOR satırlarının tamamı + cevaplı kartlar + arşiv CEVAP satırları + `09-DURUM.md` en üst bölüm). Aşağıdaki satırların kapısı bu kart cevaplanana kadar **🔴 KARAR-80/<madde>**; eski kapı Not'ta yazılı. Hiçbir iş silinmedi, IPTAL edilmedi.
-> **Tek cevap seçeneği: "Hepsinde öneriyi kabul ediyorum" ya da madde madde (ör. `M1 A · M3 B · diğerleri öneri`).**
-> "Katlanır" = iş kaybolmaz; ana satırın kapsamına girer, katlanan satır "→ <ana satır>" notuyla kapanır (IPTAL değil, BITTI'ye ana satırla birlikte çekilir).
-
-**M1 · Ret deneyimi dört satıra dağılmış, iki karar birbirini çekiyor** — P-05 · F-17 · I-16 · U-18
-- Şu an: P-05 "görüşme reddi" (`meetingController.ts` rejectMeetingByMentor var, bildirimsiz); I-16 + U-18 "mesaj talebi reddi" (MatchRequest'te durum yok). P-05 Not'u "F-17 + I-16 aynı akış, tek PR" diyor; U-18 "P-05 ile karıştırma" diyor. KARAR-22=B "nazik mesaj, **alternatif YOK**"; I-16 "Bitti demek" ise "alternatif mentör görüyor"; KARAR-20=A alternatifi içeriyor.
-- Kullanıcı gözünden: yanlış kurulursa reddedilen menti ya kararda olmayan "alternatif mentör" ekranı görür ya da iki ret türünden biri yarım kalır.
-- **A)** İki ayrı iş: görüşme reddi = P-05, mesaj talebi reddi = U-18 (+I-16 metinleri); ikisi de KARAR-22 B'ye göre (nazik mesaj, alternatif yok); F-17 bu ikisine katlanır. · Kullanıcı: nazik ret mesajı görür · Kazanç: kararla uyumlu, iki akış doğru nesneye bağlanır · Kayıp: alternatif mentör önerisi yok · Geri alınır: evet
-- **B)** Ret ekranında alternatif mentör de gösterilsin (KARAR-20 A yönü; KARAR-22 B revize olur). · Kullanıcı: ret + "şu mentörlere bakabilirsin" · Kazanç: menti yolda kalmaz · Kayıp: KARAR-22'de "kırıcı olmasın" gerekçesiyle reddettiğin seçenek geri gelir; daha çok iş · Geri alınır: evet
-- **Öneri: A** — en son cevaplanan KARAR-22 B ile tutarlı; iki farklı ret nesnesi karışmaz.
-
-**M2 · Bekleyen talebin 7. günü: kapanış mı, ikinci hatırlatma mı** — I-10 · AN-26
-- Şu an: I-10 (madde 154) "3. gün hatırlatma, 7. gün otomatik kapanış + alternatif"; AN-26 (KARAR-53 ④, sonraki karar) "3 gün mentöre hatırlatma, 7 gün 2. hatırlatma, 10 gün yöneticiye".
-- Kullanıcı gözünden: talep 7. gün kapanırsa 10. gün yönetici uyarısı hiç çalışmaz.
-- **A)** KARAR-53 ④ esas: tek zamanlayıcı (3/7/10); I-10'un "kapanış + alternatif" ayağı üstü çizilir. · Kazanç: sonraki kararla tutarlı, yönetici devreye girer · Kayıp: menti 7. gün otomatik kapanış görmez · Geri alınır: evet
-- **B)** I-10 esas: 7. gün kapanış + alternatif; eskalasyon yok. · Kazanç: menti belirsizlikte kalmaz · Kayıp: yönetici hiç haberdar olmaz; KARAR-53 ④ geri alınır · Geri alınır: evet
-- **Öneri: A** — daha yeni karar ve M1 A ile uyumlu (alternatif yok).
-
-**M3 · Menti mentör listesini görecek mi** — K-19 · PS-A4 · AN-28
-- Şu an: KARAR-6 CEVAP "A" harfiyle "liste olmasın, menti yalnız eşleştiği mentörü görür" okunuyor; ama aynı kartın PO eki ("uyum oranı görünsün", "uygun olmayanı görmesin → eşik"), KARAR-32 revizyonu ve KARAR-66 B listeyi var sayıyor. Kod: `menti/page.tsx:288-318` mentör kart listesi var.
-- Kullanıcı gözünden: K-19 kararın harfine göre yapılırsa menti bugün gördüğü mentör listesini kaybeder.
-- **A)** Liste kalır + alt uyum eşiği (PS-A4) + soluk görünüm (AN-28). · Kullanıcı: yalnız kendine uygun mentörleri listede görür · Kazanç: bugünkü akış korunur, sonraki kararlarla tutarlı · Kayıp: "tek mentör" sadeliği yok · Geri alınır: evet
-- **B)** Liste kaldırılır, menti yalnız sistemin önerdiği tek mentörü görür. · Kazanç: kararın harfi · Kayıp: menti seçim hakkını kaybeder; PS-A4/AN-28 boşa gider; KARAR-66 "sistem önerir, karar sende" diliyle çelişir · Geri alınır: evet ama ekran yeniden yazılır
-- **Öneri: A** — PO eki ve sonraki üç karar listeyi koruyor.
-
-**M4 · Online görüşme linkini kim girer** — K-19 (link ayağı)
-- Şu an: KARAR-7=A "linki mentör girer"; kodda linki menti randevu alırken giriyor (`book-meeting/page.tsx:82` → `meetingController.ts` bookMeeting), mentör onayı link almıyor. Gösterim zaten var (U-02 BITTI; AN-18 bu turda BITTI'ye çekildi).
-- **A)** Mentör onaylarken linki girer; menti alanı kalkar. · Kazanç: kararla aynı; linkin sahibi görüşmeyi yöneten kişi · Kayıp: menti kendi linkini öneremez · Geri alınır: evet
-- **B)** İkisi de girebilir; mentörünki önceliklidir. · Kazanç: esneklik · Kayıp: iki link karışabilir, daha çok iş · Geri alınır: evet
-- **Öneri: A** — KARAR-7'nin kendisi.
-
-**M5 · Mentörün "%uyum" rozeti üç satırda** — P-04 · AN-20 · PS-04 (kök: U-18)
-- Şu an: üçü aynı rozeti (`mentor/page.tsx:292`, `m.match` null) tarif ediyor; P-04 gerekçesi "%92 aha vaadi" — KARAR-66 B bu iddiayı geri çekti; AN-20 aynı rozeti "yönlendirme uyumu" diye güncellemiş; KARAR-48 (yüzde mi bant mı) cevapsız.
-- **A)** Tek satır AN-20 (yönlendirme dili, KARAR-48'e bağlı); P-04 ve PS-04 ona katlanır; sıra: GV-08 → U-18 (Match yazımı) → AN-20. · Kazanç: rozet bir kez, doğru dille · Kayıp: yok (iş birleşir) · Geri alınır: evet
-- **B)** Üçü ayrı kalsın. · Kayıp: aynı rozet üç PR'da farklı dille çıkabilir
-- **Öneri: A**.
-
-**M6 · "Senin gibi N kişi bekliyor" sayacı iki satırda, iki farklı kapıyla** — P-06 · AN-21
-- **A)** Tek satır, kapı 🔴 KARAR-56 + küçük sayı gizleme (k-anonimlik). · Kazanç: küçük kurumda kişi ifşası olmaz · Kayıp: sayaç karar gelene kadar yok · Geri alınır: evet
-- **B)** P-06 🟡 ile hemen yapılsın. · Kayıp: KVKK riskli sayı kararsız çıkar
-- **Öneri: A**.
-
-**M7 · Mentör görünürlük anahtarı üç satırda, iki anlamda** — U-19 · Y-15 · AN-28
-- Şu an: üçü de `mentorVisibilityEnabled` alanını bağlıyor. KARAR-32 revizyonu "havuzdan çıkmaz, soluk görünür, yalnız mesaj alır"; Y-15 "Bitti demek" hâlâ "havuza açıp kapatabiliyor", U-19 "profili tamam olmayan havuzda görünmez" diyor.
-- **A)** Alan bağlantısı tek satırda (AN-28, soluk gösterim); U-19 yalnız "profil tamamlanma ölçütü"ne daralır; profili eksik mentör de **soluk** gösterilir. · Kazanç: KARAR-32 ile tutarlı, tek anlam · Kayıp: eksik profilli mentör listede görünmeye devam eder (soluk) · Geri alınır: evet
-- **B)** Aynı; ama profili eksik mentör **gizlenir**. · Kazanç: liste temiz · Kayıp: KARAR-32'nin "gizleme yok" ruhundan sapar · Geri alınır: evet
-- **Öneri: A**.
-
-**M8 · Kişilik sonucunu hangi test belirler — karar verilmeden kodla seçiliyor** — PS-02 · PS-03 (KARAR-57 cevapsız)
-- Şu an: KARAR-57 kartı "cevap vermezsen PS-02 bağlanamaz" diyor; PS-02/PS-03 kilitsiz. PS-03 Likert yolunu `discType` yazar yapıyor (fiilen KARAR-57 A seçimi).
-- **A)** PS-03 KARAR-57'ye kilitlenir; PS-02'nin karardan bağımsız dar kısmı ("güven değeri yazılsın", çıkış blokeri) ayrılıp ilerler. · Kazanç: karar kodla verilmez; çıkış blokeri durmaz · Kayıp: PS-03 bekler · Geri alınır: evet
-- **B)** İkisi de şimdi yapılsın (fiilen KARAR-57 A). · Kayıp: kararı kod vermiş olur
-- **Öneri: A**.
-
-**M9 · Psikometri motoru: aynı iş beş satırda, iki farklı yön** — I-13 · I-14 · I-15 · F-11 · PS-A1 · PS-A2 · PS-A3 · F-09 (AN-04 zaten 🔴)
-- Şu an: PS-A1 "= I-13 + I-14"; I-15 "= F-11 alt kümesi = KARAR-10 3. aşama"; F-11 formül %45/30/25 + 2 veto içeriyor ama bunlar cevapsız KARAR-61/65 konusu; PS-A2 canlı veriyi yeniden hesaplıyor ama KARAR-58 A (kesme geçiş) gelirse o veri arşivlenir; F-09 eski SJT'ye 12 senaryo yüklüyor, AN-04 yeni Big Five bankası getiriyor (KARAR-57/58/62).
-- **A)** PS-A1 ana satır (I-13/I-14 katlanır) ve bağımsız ilerler; PS-A2 (yeniden hesaplama) KARAR-58 sonrasına; PS-A3 bağlama (I-15 katlanır); F-11 yalnız "formül + veto" olarak daralır, 🔴 KARAR-61/65; F-09 KARAR-57/58 sonrasına. · Kazanç: canlı veriye boşa dokunulmaz, formül kararsız değişmez · Kayıp: yeniden hesaplama ve SJT içeriği bekler · Geri alınır: evet
-- **B)** Satırlar bugünkü hâliyle kalsın. · Kayıp: aynı iş iki kez yapılabilir; KARAR-58 A gelirse PS-A2 emeği boşa gider
-- **Öneri: A**.
-
-**M10 · Randevu: tek migration paketi ve takvim ekranı iki satırda** — K-15 · AN-25 · K-05 · AN-24
-- Şu an: KARAR-53 "KARAR-1 ile tek migration, ayrı açma"; K-15 yalnız format+süre, AN-25 koşul alanlarını ayrı satırda tutuyor. K-05 ① takvim görünümü = AN-24 ①. Ek bulgu: K-05'in "409 mesajı Türkçe gösteriliyor" iddiası kodla şüpheli (`lib/api/client.ts:25-34` `error` alanını mesaja çevirmiyor; TEYİT GEREK).
-- **A)** K-15 kapsamı "format + süre + koşul alanları" (AN-25 katlanır, tek migration, tek yedek); AN-24 ① K-05'e katlanır. · Kazanç: tek canlı DB değişikliği, tek takvim · Kayıp: K-15 büyür · Geri alınır: migration kısmı zor (A2 kuralı: migration PR'ı ayrıca evet/hayır kartı)
-- **B)** Ayrı kalsın. · Kayıp: iki migration, iki yedek, iki onay
-- **Öneri: A**.
-
-**M11 · "Görüşme tamamlandı" iki satırda; kim işaretleyecek hiç sorulmadı** — U-01 · AN-19
-- Şu an: görüşmeyi tamamlandı yapan ekran ya da otomatik iş yok; bu yüzden değerlendirme ve check-in hiç açılmıyor.
-- **A)** Tek satır U-01 (AN-19 katlanır); saat geçince otomatik "tamamlandı", mentör "gerçekleşmedi" diye düzeltebilir. · Kullanıcı: görüşme bitince değerlendirme kendiliğinden açılır · Kazanç: veri akışı başlar, kimseye ek yük yok · Kayıp: yapılmamış görüşme mentör düzeltmezse "tamamlandı" sayılır · Geri alınır: evet
-- **B)** Yalnız mentör işaretler. · Kazanç: kayıt kesin doğru · Kayıp: mentör unutursa değerlendirme hiç açılmaz
-- **C)** İki taraf da işaretler, biri yeter. · Kazanç: esnek · Kayıp: çelişen beyan olabilir
-- **Öneri: A** — bugünkü asıl sorun değerlendirmenin hiç açılmaması.
-
-**M12 · Geri bildirim: iki "soru soran" sistem ve iki Feedback değişikliği** — F-31 · AN-52 (+ sıra: AN-47 → KR-08 · AN-48; KARAR-44 ↔ KARAR-78)
-- Şu an: F-31 her sayfada "hata/öneri bildir" + yeni model; AN-52 (KARAR-70 eki) köşede isteğe bağlı sorular — ikisi aynı ürün içi geri bildirim deposu. KARAR-44 önerisi dönemlik anketi "asıl NPS" yapmak, KARAR-78 önerisi anketi karantinaya almak — ikisi birlikte seçilirse ağırlık ayarının tek veri kaynağı kapanır.
-- **A)** Tek ürün içi geri bildirim modeli: AN-52 ana satır, F-31 katlanır; KARAR-44 ile KARAR-78 aynı oturumda cevaplanır; sıra AN-47 (envanter) → KR-08 → AN-48 aynı migration'a. · Kazanç: tek kutu, tek migration · Kayıp: F-31'in "hata bildir" ayağı AN-52'yi bekler · Geri alınır: evet
-- **B)** Ayrı kalsın. · Kayıp: kullanıcı iki ayrı geri bildirim kutusu görebilir
-- **Öneri: A**.
-
-**M13 · Yönetici rapor dışa aktarımı iki satırda** — F-18 · AN-22 · **A)** AN-22 → F-18'e katlanır · **B)** ayrı kalsın · Kayıp (B): aynı özellik iki kez · **Öneri: A**.
-
-**M14 · Ölü kod karantinası dört-beş satırda** — K-13 · E-4 · AN-13 · AN-40 · AN-54
-- Şu an: K-13 "E-4 kalsın, bu satır referans" diyor ama BEKLIYOR; K-13 İş metni hâlâ "KARAR-11 cevabı beklenir" (KARAR-11=A cevaplandı).
-- **A)** E-4 ana satır (tek karantina turu, silme protokolü); AN-54 ilk adımı; K-13, AN-13, AN-40 katlanır. · Kazanç: tek tur · Kayıp: yok · Geri alınır: evet · **Öneri: A**.
-
-**M15 · Belge düzeni işleri tekrar ediyor ve üç karar kilidi eksik** — F-01 · YN-03 · YN-02 · YN-05 · YN-06 · AN-44 · IC-12 · YN-04 · AN-14 · AN-23 · AN-42 · AN-53 · AN-46 · Y-02 · YN-11 · AN-43
-- Şu an: YN-03 → F-01 · YN-05 → YN-02 · AN-44 (08-acik-sorular kısmı) → YN-06 · IC-12 (registerMessages kalemi) → YN-04 · AN-14/23/42/46 → AN-53 çatısı · Y-02 ↔ AN-46 (G1-03 iki kez) · YN-11 ↔ AN-43 (kısmen yapılmış). Ayrıca KARAR-50 (YN-04/05), KARAR-51 (YN-06), KARAR-52 (YN-02) cevapsız ama satırlar kilitsiz.
-- **A)** Katlanmalar yukarıdaki gibi; YN-02 → 🔴 KARAR-52, YN-04/05 → 🔴 KARAR-50, YN-06 → 🔴 KARAR-51 (karara bağlı olmayan kısımları Not'ta ayrılır). · Kazanç: aynı belge düzeltmesi bir kez · Kayıp: yok · Geri alınır: evet · **Öneri: A**.
-
-**M16 · İçerik metinleri tekrar ediyor + geri çekilen "eşleştirme" dili** — IC-10 · AN-05 · IC-11 · AN-10 · IC-01 · AN-16 · I-01 · I-11
-- Şu an: "şimdilik" varyantları IC-10 = AN-05 (= I-15 m.139); görüşme/toplantı/randevu terimi IC-11 = AN-10; İngilizce DISC adları IC-01 = AN-16. I-01/I-11/I-16'nın bağlayacağı hazır metinler "eşleşme" dili taşıyor (KARAR-66 B öncesi).
-- **A)** IC-10, IC-11, IC-01 ana satır; AN-05 yalnız "15/16 kombinasyon metni"ne, AN-10 yalnız mizaç/karakter/kişilik (KARAR-64) ve mentor/mentör ayağına daralır; AN-16 katlanır; I-01/I-11 metinleri AN-50 "yönlendirme" diline çevrilerek bağlanır. · Kazanç: metin bir kez, doğru dille · Kayıp: I-01/I-11 metin çevirisi kadar gecikir · Geri alınır: evet · **Öneri: A**.
-
-**M17 · Rıza ekranı iki satırda, farklı öncelikle** — F-03 · AN-30 · AN-29
-- Şu an: F-03'ün ikinci bulgusu (tek kutu hem KVKK hem 18+) = AN-30'un ayrı onay ekranı; AN-30 çıkış blokeri, F-03 değil. AN-29 kapısı "🔴 KARAR-34" ama KARAR-34 cevaplandı; kalan tek şey avukat metni. AN-30 kendi Not'unda "avukat onayı ek iş değil, ekran mekanizması blokeri" diyor.
-- **A)** F-03 AN-30'a katlanır; ekran mekanizması yer tutucu metinle yapılır (🟡), metnin yayını avukata bağlı kalır; AN-29 kapısı 🟡. · Kazanç: çıkış blokeri ilerler · Kayıp: ekran önce yer tutucu metinle durur (canlıya avukat onaylı metin gelmeden açılmaz) · Geri alınır: evet · **Öneri: A**.
-
-**M18 · KVKK çıkış blokeri etiketleri eksik (KARAR-69 b)** — GV-08 · GV-09 · GV-17 · GV-18 · AN-41
-- Şu an: KARAR-69 (b) "aydınlatma · açık rıza · silme hakkı · yurtdışı saklama bilgilendirmesi → çıkış blokeri" diyor; GV-08 (silme eksik), GV-09 (yanlış ülke beyanı), GV-18 (rıza sürümü kontrol edilmiyor) bu kovada ama etiketsiz. GV-09 kapısı avukata bağlı, oysa yanlış ülke bir olgu düzeltmesi. AN-41 avukata "rıza sürümleme var" diyecek, ama sürüm hiç kontrol edilmiyor (GV-18).
-- **A)** GV-08/09/18 ⛔ ÇIKIŞ BLOKERİ (T1); GV-09'un olgu düzeltmesi (ülke adı) karardan ayrı satır, KARAR-38 yalnız hukuki rejim yorumunda; AN-41'e GV-18 notu; GV-17 (dışa aktarım hakkı) için ayrıca sen karar ver (A'da blokersiz kalır). · Kazanç: ilk dernek yanlış KVKK beyanıyla karşılaşmaz · Kayıp: çıkış listesi 3 iş uzar · Geri alınır: evet
-- **B)** Etiketleme yapılmasın. · Kayıp: yanlış ülke beyanı ve eksik silme canlıda kalabilir
-- **Öneri: A**.
-
-**M19 · Açık karara bağlı ama kapısı açık satırlar** — P-15 (KARAR-41) · P-99 (KARAR-46) · Y-18 (KARAR-36, silme protokolü) · V-15 (KARAR-40) · I-09 (KARAR-30) · F-08 (KARAR-44) · AN-37 (KARAR-19 ↔ KARAR-74 aynı kalem iki kartta)
-- **A)** Her biri ilgili açık karta 🔴 ile bağlansın; KARAR-19'un kurum silme kısmı KARAR-74'e yönlendirilsin. · Kazanç: ajan senin vermediğin kararı kodla vermez · Kayıp: bu 7 iş kartlar cevaplanana kadar bekler · Geri alınır: evet
-- **B)** Açık kalsın, ajan "en güvenli" yorumla ilerlesin. · Kayıp: ürün kararı kodla verilmiş olur
-- **Öneri: A**.
-
-**M20 · Kriz kanalı yanlış kovada bekliyor** — I-18 · IC-13
-- Şu an: KARAR-69 (c) "kriz kanalı hukuk değil GÜVENLİK, ayrı karar olarak yeniden sorulacak" dedi; I-18 hâlâ "hukuki ön koşul + KARAR-31 + avukat", IC-13 aynı karara bağlı. Ayrı kart henüz açılmadı.
-- **A)** Tek "kriz kanalı" güvenlik kartı açılsın (bir sonraki turda, bağlam konuşmasından sonra); I-18/IC-13 ona bağlansın. · Kazanç: karar doğru soruyla sorulur · Kayıp: kriz akışı bir tur daha bekler · Geri alınır: evet
-- **B)** KARAR-31 + avukat yolunda kalsın. · Kayıp: KARAR-69 (c) uygulanmamış olur
-- **Öneri: A**.
-
-**M21 · Sıra ve karşılıklı etki notları (karar değil, bilgin olsun)** — KR-20 · Y-14 · Y-17 · U-17 · DK-01 · DK-02 · DK-03 · GV-07
-- KR-20 (reddedileni yeniden başvurtma) ↔ KARAR-72 (kalıcı red) ters yönde olabilir; Y-14 GV-10 ve KR-20'den SONRA; Y-17 PS-A1..A3'ten SONRA; U-17'nin "seed koruması" ayağı = KR-01; DK-02 ret mailini bastırmayı da kapsamalı ve avukat ön koşulu KARAR-69 (a) gereği kalkmalı (düzeltme maili metni kodda zaten var: `tenantNotifications.ts:50-63`); DK-01/DK-03 ortak kişisel veri temizleyicisini GV-07'den almalı.
-- **A)** Bu notlar satırlara işlensin; KR-20 KARAR-72 cevabına kadar bekler, DK-02'den avukat ön koşulu kalkar. · Kayıp: KR-20 bekler · Geri alınır: evet
-- **B)** Yalnız sıra notları işlensin, KR-20 ve DK-02 bugünkü hâliyle kalsın. · Kayıp: KR-20 KARAR-72 A ile çelişebilir
-- **Öneri: A**.
-
-**M22 · Görüşme değerlendirme notlarını kim görecek (bilgi — iş kilitlenmedi)** — GV-04
-- Şu an: GV-04 "Bitti demek" "taraflar ve yönetici görür" diyor; KARAR-77 A ruhu "karşı taraf diğerinin cevabını görmez". GV-04 bir güvenlik açığı ve PO öncelik bloğunda, bu yüzden kilitlenmedi: **en dar görünürlükle yapıldı** (yazan kendi kaydını + kurum yöneticisi hepsini görür; karşı taraf görmez). Genişletmek kolaydır.
-- **A)** En dar görünürlük kalsın. · Kazanç: KARAR-77 ile tutarlı, dürüst değerlendirme · Kayıp: taraflar birbirinin notunu göremez · Geri alınır: evet
-- **B)** Taraflar birbirinin notunu da görsün. · Kazanç: şeffaflık · Kayıp: mentörün menti hakkındaki hazırlık notu mentiye görünür · Geri alınır: evet
-- **Öneri: A**.
-
-**Cevap vermezsen:** yukarıdaki satırlar 🔴 KARAR-80 kilidinde kalır; tur bunları atlar. En çok iş kilitleyen: M9 (8 satır), M15 (16 satır), M1 (4), M16 (8).
-**CEVAP:** Hepsinde öneriyi kabul ediyorum (M1-M22 hepsi A). Ürün etkisi olan maddeler strateji katmanıyla konuşuldu: M1 ret = nazik mesaj, alternatif mentör yok (KARAR-22 B) · M3 menti mentör listesini görmeye devam eder + uyum eşiği · M4 online linki mentör onaylarken girer (KARAR-7) · M11 saati geçen görüşme otomatik tamamlandı, mentör "gerçekleşmedi" diye düzeltebilir. (PO, 2026-09-26)
-
-> ✅ **İŞLENDİ (2026-09-26):** `00-KUYRUK.md`'deki 85 satırın tamamı bu cevaba göre güncellendi — "katlanır" denenler ana satıra `→ <ana satır>` notuyla bağlandı (silinmedi), başka açık karara bağlananlar `🔴 KARAR-<no>` oldu, kalanlar eski kapısına (genelde 🟢/🟡) döndü. M18'den **KARAR-94** (GV-17 dışa aktarım hakkı), M20'den **KARAR-95** (kriz kanalı) doğdu. Kapı öncesi/sonrası dağılımı ve kilitli kalan satır sayısı: `docs/otonom/02-ILERLEME.md` bu turun TUR ÖZETİ'nde.
 
 ---
 
