@@ -51,6 +51,7 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
     · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
     · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
       gerekirse ac. Rutin turda ana dosyalar (00-KUYRUK · 01-KARARLAR) yeter.
+      (istisna: 5c kural f — kimlik aktif dosyada yoksa arsivde grep ZORUNLU.)
 
 02-ILERLEME.md'ye tur baslangic satiri yaz: tur adi · baslangic saati · kalan 🟢 is sayisi.
 
@@ -187,7 +188,8 @@ f) TEST: mevcutlar + yeni davranisa en az bir test
    ⛔ KIRIK TEST SILINMEZ, DUZELTILIR (madde 164 dersi)
 g) Commit (Turkce, is no ile) → PR → Bolum 6 dogrulama listesi → kapiya gore merge
 h) ⛔ ARA KAYIT: push et, sonraki ise gecmeden
-i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>")
+i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>");
+   Durum BITTI ise satir AYNI commit'te arsive (5c kural a).
 j) Kalan 🟢 sayisini 02-ILERLEME'ye yaz, sonraki ise gec
 
 5b — PO KARARLARI 2026-09-26 (kalici)
@@ -202,6 +204,34 @@ K-C AJAN-EKLEDI: Ajan, kodda dosya:satir ile DOGRULADIGI hata/eksik icin kuyruga
     <rapor:satir> · kanit: <dosya:satir>". Kapi: varsayilan 🟢 (hassas dosyada 7b) · migration/seed/
     canli veri/karantina → 🔵 + EVET karti · urun/yetki/KVKK sonucu olan soru → 🔴 + karar karti.
     Dogrulanamayan bulgu satir OLMAZ. Silme → silme protokolu. Ayrinti: 00-KUYRUK § AJAN-EKLEDI SATIRLAR.
+
+5c — AKTIF/ARSIV AYRIMI (kalici · PO K-A 2026-09-26 · Bolum 5 ve 13'e bagli)
+Ilke: ayrim TEMAYA gore degil DURUMA gore (aktif ↔ arsiv). Kuyruk tek dosya kalir, bolunmez.
+Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARISIZ.
+(a) Is BITTI → satir AYNI commit'te (kapanis commit'i) `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md`'ye
+    (ay degisince yeni ay dosyasi), asama basligi altina. BITTI satiri kuyrukta birakmak YASAK.
+    Asama basligindaki "Bu asamada N is BITTI → arsiv" notu ayni commit'te guncellenir.
+    Durumu belirsiz satir ("kismen", "onay bekliyor") tasinmaz; Not'ta sebebi yazilir.
+(b) Satir katlaninca (Durum "→ X") ayni commit'te `docs/otonom/arsiv/00-KUYRUK-katlanmis.md`'ye.
+(c) KARAR cevabi kuyruga ISLENINCE (kartta "✅ ISLENDI" notu) kart ayni commit'te
+    `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md`'ye; indeks satirina "📦 tam metin" atfi.
+    Cevapsiz karta yeni bilgi "EK BILGI" katmani olarak EKLENMEZ: "Su an ne var" guncellenir,
+    eski hali `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md`'ye (kart no + tarih). Secenekler,
+    oneri ve CEVAP alani DEGISMEZ.
+(d) Her ISO haftasinin ilk turunda 02-ILERLEME'nin onceki haftasi
+    `docs/otonom/arsiv/02-ILERLEME-<YYYY>-W<hh>.md`'ye AYNEN; aktif dosyanin basindaki
+    "Onceki haftalar" atfi guncellenir.
+(e) Kural dosyasi (CLAUDE.md · OTONOM-PROMPT.txt) degisince eski metin
+    `docs/otonom/arsiv/kural-gecmisi-CLAUDE.md` / `kural-gecmisi-OTONOM-PROMPT.md`'ye (bolum + tarih + AYNEN);
+    aktif dosyada `~~[ESKI]~~` katmani BIRAKILMAZ. 03-PO-ELLE-ISLER ve 00-BELGE-HARITASI icin de ayni:
+    tamamlanan/eski → `docs/otonom/arsiv/03-PO-ELLE-ISLER-tamamlanan.md` · `00-BELGE-HARITASI-ayrinti.md`.
+(f) Bir kimlik (is no, KARAR no) aktif dosyada yoksa `docs/otonom/arsiv/` altinda grep ile aranir;
+    "yok" demeden IKI yer de aranir (0.4'teki "arsiv/ OKUMA" kuralinin istisnasi).
+(g) AJ- satirlari da (a)-(c)'ye tabidir.
+Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
+01-KARARLAR'da "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta kod disi `~~[ESKI` blogu.
+UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
+OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB).
 
 ═══════════════════════════════════════════════════════════════
 6 — DOGRULAMA LISTESI  (merge oncesi — hepsi ✅ olmadan merge YOK)
@@ -381,6 +411,7 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
 ═══════════════════════════════════════════════════════════════
 13 — KAPANIS  (YALNIZ 2.1 kosulu saglanirsa)
 ═══════════════════════════════════════════════════════════════
+13.0 Kapanista 5c (AKTIF/ARSIV AYRIMI) denetimi: `bash scripts/belge-bekci.sh` HATA vermemeli.
 13.1 Backend isi yapildiysa: Bolum 8'e gore TEK pointer bump + teyit.
 
 13.2 Belge senkronu — TEK PR, EN SON:

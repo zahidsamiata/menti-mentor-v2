@@ -54,7 +54,7 @@ Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>
    — bunlar da yalnız KARAR evet + yedek sonrası.
 
 ## ⭐ PO KARARLARI 2026-09-26 — K-A arşive taşı · K-B · K-C ajan-ekledi
-Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
+Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b · **aktif/arşiv ayrımı kuralı: Bölüm 5c** (otomatik bekçi `scripts/belge-bekci.sh`). Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
 
 ## ⭐ KARAR AYRIMI — neyi sorma, neyi sor
 **SEN KARAR VER, SORMA (teknik):** kütüphane · dosya/klasör yapısı · isimlendirme · state yönetimi ·
