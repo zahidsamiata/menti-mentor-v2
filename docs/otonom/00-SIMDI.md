@@ -54,7 +54,7 @@
 - ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` (Ardışık ret sayısı sıfırlandı; sonraki merge'ler geçti.)
 - 🗄️ Tek seferlik DB erişimi gerekiyor: **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
 
-**PO'ya sorular:** KARAR-104 (eşik ince ayarı, öneri A) · KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
+**PO'ya sorular:** KARAR-105 (kurumlar arası anonim karşılaştırma) · KARAR-104 (eşik ince ayarı, öneri A) · KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
 - AJ-01 kapsam dışı bıraktı: platform/süper-admin geneli rol sayımları (`backend/src/controllers/platformController.ts`, `adminSettingsController.ts`) hâlâ `User.role` — tekil kişi mi üyelik mi sayılacağı ürün kararı adayı.
