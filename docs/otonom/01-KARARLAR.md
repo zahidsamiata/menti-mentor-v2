@@ -147,6 +147,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-103** | **Eski planlardaki 13 yapılmamış özellik — hangileri yapılsın** | **13** (AJ-11) | ⬜ boş · ajan-ekledi (K-C) · öneri B (4 küçük şemasız özellik) |
 | **KARAR-104** | **Uyum eşiğini geçen tek mentör randevuya kapalıysa menti ne görsün** | **0** (PS-A4 sonrası ince ayar) | ⬜ boş · ajan-ekledi (PS-A4 7b notu) · öneri A |
 | **KARAR-105** | **Kurumlar arası anonim karşılaştırma: izni kim açar, hangi sayılar paylaşılır** | **1** (AN-31) | ⬜ boş · KARAR-34 SORU 2 (B) ayrıntısı · migration gerekir · öneri A |
+| **KARAR-106** | **🔵 EVET/HAYIR — AN-52-1 ürün-içi anket cevap tablosu (yeni tablo, mevcut veri etkilenmez)** | **1** (AN-52-3) | ⬜ boş · 🔵 canlı DB değişikliği (yeni tablo, yedek gerekmez) · PR backend #185 |
 
 ---
 
@@ -1654,4 +1655,17 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** Hızlı ve anlaşılır bir karşılaştırma istiyorsan A. Her kişinin açık rızasını esas almak istiyorsan B, ama sayılar küçük kalabilir. İlk kurumlarla canlıya çıkış öncelikliyse C.
 **Benim önerim:** C şimdilik, sonra A. Toplamlar zaten 3'ten küçük grupları gizliyor ama karşılaştırma yapılacak kadar çok kurum henüz yok. *(Bu senin ürün kararın; önerime güvenme.)*
 **Cevap vermezsen:** AN-31 kilitli kalır; başka iş etkilenmez.
+**CEVAP:**
+
+---
+
+### KARAR-106 · 🔵 EVET/HAYIR — AN-52-1: ürün-içi anket cevap tablosu canlıya alınsın mı? (1 iş açar: AN-52-3 — frontend) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** Bu PR'ın kendisi henüz hiçbir şeyi değiştirmiyor (ön yüz entegrasyonu AN-52-3, ayrı iş/PR). Migration canlıya alınıp AN-52-3 de tamamlanınca kullanıcı köşede küçük, isteğe bağlı, X ile kapatılabilir bir soru kartı görecek (7 sorudan biri — bekleme anı, ilk talep, mentörlüğe başlama nedeni, kapasite, takdir, geri dönüş nedeni, ret sonrası his). Kanıt: backend PR `menti-mentor#185` (`GET /api/surveys/pending`, `POST /api/surveys/:questionKey/respond`).
+**Ne değişir:** Veritabanına **yeni bir tablo** eklenir (`ProductSurveyResponse`) — mevcut hiçbir tabloya ALTER yok, mevcut hiçbir satır değişmiyor/silinmiyor. Dosya: `prisma/migrations/20260927120000_add_product_survey_response/migration.sql` (`CREATE TABLE/INDEX IF NOT EXISTS` + FK `duplicate_object` guard, yalnız ekleme).
+**Geri alınır mı:** Evet — kod revert edilir; tablo boş/yeni olduğu için `DROP TABLE IF EXISTS "ProductSurveyResponse";` ile de geri alınabilir, mevcut veriyi ETKİLEMEZ.
+**Yedeği alınacak tablo:** YOK — yeni tablo, mevcut veriye dokunmuyor. (CLAUDE.md "yedek zorunlu" kuralı var olan veriyi DEĞİŞTİREN migration'lar içindir; burada öyle bir tablo yok. Yine de şema değişikliği CANLI=LOKAL AYNI Neon kuralı gereği PO'nun tek EVET'ini gerektiriyor.)
+**Durum:** kod hazır (AN-52-1 migration + AN-52-2 uçlar + AN-52-4 KVKK aynı PR'da) · CI: bakılıyor (bu turda açıldı) · bağımsız inceleme: bu turda başlatıldı, sonucu bu satıra eklenecek — ONAY yoksa EVET gelse de merge yok.
+**EVET** → ajan merge eder → canlı sunucu açılışta `migrate deploy` ile tabloyu kendisi oluşturur (yedek konusu yok, yeni tablo). Sonra AN-52-3 (frontend) sıraya girebilir.
+**HAYIR** → PR kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; AN-52 seti (7 soru) hiç canlıya çıkmaz.
+**Cevap vermezsen:** AN-52-3 (frontend entegrasyonu) başlamaz; AN-52-2/AN-52-4 kodu PR'da bekler.
 **CEVAP:**
