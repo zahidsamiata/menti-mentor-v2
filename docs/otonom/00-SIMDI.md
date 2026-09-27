@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 15:20 UTC · çatı main HEAD `191a256` (+ bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
 
 **Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
 
-**Şu an yapılan:** GÖREV A — 209 doğrulama birimi, 11 parti (R1: 01-04 opus · R2/R3: 05-11 sonnet), en fazla 3 paralel salt-okuma alt-ajanı. Parti dosyaları: `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/` (dal `otonom/BITTI-DOGRULAMA-20260927`).
+**Şu an yapılan:** GÖREV A — 11 parti TAMAM (209 birim: ✅ 169 · ⚠️ 27 · 🔁 7 · 👁 6 · ❌ 0 · ❓ 0 — kalite kontrol öncesi). Kalite kontrolü sürüyor: QA (40 ✅-dışı) · QB/QC (51 R1 ✅) · QD (24 R2/R3 ✅ örneklem, sırada). Parti dosyaları push edildi: dal `otonom/BITTI-DOGRULAMA-20260927` @ `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/`. Sonra: rapor + AJ satırları + kabul listesi → PR → 7b → merge → GÖREV B.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
