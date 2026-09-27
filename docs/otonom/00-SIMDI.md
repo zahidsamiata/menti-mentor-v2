@@ -7,11 +7,12 @@
 
 **Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
 
-**Şu an yapılan:** GÖREV B PR-AÇIK — çatı #379 (9 yaşayan belgede 66 satır işaretlendi: ✅/🟨; eski metin `docs/arsiv/belge-senkron-2026-09-27.md`; dondurulmuş eşleme 87 satır; teyit 80; B.8 68/68). 7b inceleme + CI bekleniyor. Sonra GÖREV C (kural h + bekçi UYARI).
+**Şu an yapılan:** GÖREV B MERGE (#379 → `695f74a`; 7b 4 tur, son ONAY; CI 10/10): 8 yaşayan belgede 39 satır (✅ 29/30 · 🟨 10), teyit 68, dondurulmuş eşleme 129 satır / 16 belge, B.8 41/41. GÖREV C başlıyor (kural h + bekçi UYARI).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #379 | GÖREV B — belge kapanış senkronu (docs) | docs · CI 10/10 |
 | çatı #378 | GÖREV A — BITTI son doğrulama (docs) | docs · CI 10/10 |
 | backend #193 + çatı #377 | AJ-19 (negatif test son parti) | ok:true, db:up, site 200 |
 | backend #192 + çatı #376 | AJ-18 (19 uca negatif test) | ok:true, db:up, site 200 |
@@ -52,7 +53,6 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #379 | GÖREV B — belge kapanış senkronu | bekliyor | bekliyor | 7b + CI |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
 | backend #157 + çatı #337 | AN-26 hatırlatma/eskalasyon · 🔵 | yeşil | ✅ ONAY | KARAR-98 EVET (+ alt soru) + `Conversation` yedeği |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 | yeşil | ✅ ONAY | KARAR-97 EVET + `Conversation` yedeği |
@@ -73,6 +73,7 @@
 **PO'ya sorular:** KARAR-111 (🔵 K-15 müsaitliğe tür+süre — mevcut bloklar Online/60'a daralır) · KARAR-110 (periyodik anket) · KARAR-109 (anlaşma taslağını kim başlatır) · KARAR-107 (🔵 AN-12 karantina EVET/HAYIR) · KARAR-108 (DISC eşitlik sırası) · KARAR-106 (🔵 AN-52 anket tablosu EVET/HAYIR — yeni tablo, yedek gerekmez) · KARAR-105 (kurumlar arası anonim karşılaştırma) · KARAR-104 (eşik ince ayarı, öneri A) · KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
+- (7b #379 N1) `GET /api/meetings/:meetingId/feedback` (değerlendirme okuma) ucunun kuyrukta sahibi yok — rapor B.5 teyitinde "AJ-14'e bağlı" yazıyor ama AJ-14 periyodik anket işi; `00-KUYRUK.md` E-3 notu hâlâ "E-3e değerlendirme okumayı da karşıladı" diyor (yanlış: E-3e `…/check-ins` okuyor, `frontend/src/components/organisms/MeetingCheckInReadout.tsx:6-13`). Sonraki tur: AJ satırı + E-3 notu düzeltmesi. · (N2) `PATCH /api/meetings/:id (→COMPLETED)` ön yüzden çağrılmıyor; iş otomatik tamamlanmayla kapandı — mükerrer uç adayı (silme protokolü).
 - AJ-01 kapsam dışı bıraktı: platform/süper-admin geneli rol sayımları (`backend/src/controllers/platformController.ts`, `adminSettingsController.ts`) hâlâ `User.role` — tekil kişi mi üyelik mi sayılacağı ürün kararı adayı.
 - Kuyrukta satırı olmayan bulgular: G-kart doğrulaması ~30 ⬜ kalem (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) · `GET /api/system-logs` iz/meta · kurum-içi sayımlar `User.role` (KPI + G1-18) · frontend askı ekranı yok · token türü ayrımı (OAuth pending) · U-18 gerçek bildirim/inbox ret işareti.
 - Kapı: P-05 (🔵 ama migration'sız, ONAY'lı) · PS-A3/PS-A4 🟡 (yeni tanımla 🟢+7b).
