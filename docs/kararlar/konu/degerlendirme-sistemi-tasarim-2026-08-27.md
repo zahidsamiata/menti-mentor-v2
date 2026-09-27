@@ -765,7 +765,7 @@ Bu belgeden çıkan her kalem: **kalem · durum · numara-adayı-mı**
 | 19 | Sınırsız yeniden-derinleşme sınırı (G3-03) | ❓ TEYİT GEREK | evet |
 | 20 | Özet alanı yönergesi | ❓ TEYİT GEREK | evet |
 | 21 | Derinleşme EN BELİRSİZ boyuttan sorsun + profili aşağı çekebilsin | ⬜ AÇIK | evet |
-| 22 | Sertifika hatalı-konu hedefleme ekle | ⬜ AÇIK | evet |
+| 22 | Sertifika hatalı-konu hedefleme ekle | ✅ yapıldı — I-07 · PR backend #90 + çatı #264 · 2026-09-25 · doğrulama: bitti-dogrulama-2026-09-27 | evet |
 | 23 | Öğrenme ↔ sertifika varyant yeniden dağıtımı | ⬜ AÇIK | evet |
 | 24 | Menti personası çeşitlendirme (tek tip → çok tip) | ⬜ AÇIK | evet |
 

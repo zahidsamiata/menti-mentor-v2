@@ -18,7 +18,7 @@
 
 ## TEMA — KALAN İŞLER (⏳)
 - **D21:** Toggle admin/platform nav'a eklenmeli. 🟢✅ **TAMAMLANDI** (2026-08-02, frontend `188aad5`).
-- **D22:** DISC renkleri light'ta WCAG FAIL (kontrast 1.8–3.9:1, olması gereken 4.5). Sarı/gri beyaz zeminde soluk. 5 dosya ~7 renk, 600/700 tonuna çekilmeli.
+- **D22:** DISC renkleri light'ta WCAG FAIL (kontrast 1.8–3.9:1, olması gereken 4.5). Sarı/gri beyaz zeminde soluk. 5 dosya ~7 renk, 600/700 tonuna çekilmeli. · ✅ yapıldı — AJ-07 · PR çatı #359 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27
 - **D23:** Platform admin rozetleri light'ta koyu leke (koyu-alfa tint), light varyant gerekli.
 - **🔴 KARAR BEKLİYOR:** DISC renk TON kararı kullanıcının gözünden verilecek — light'ta henüz onaylanmadı (dashboard'lar çöktüğü için görülemedi, sonra seed geldi ama tema light test edilmedi).
 

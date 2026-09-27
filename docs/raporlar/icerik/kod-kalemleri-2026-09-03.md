@@ -27,7 +27,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | A1 → **138** | Arketip hesabı: en yüksek boyut + ikinci; fark < 10 puan ise "şimdilik" dili kullanılsın | 🔵 | ✅ |
 | A2 → **139** | İki/üç boyut yakınsa çoklu-arketip metni seçilsin | 🔵 | ✅ |
 | A3 → **140** | Kart iki katmanlı: arketip ekranı + "detayları gör" (beş boyut) | 🔵 | ✅ |
-| A4 → **141** | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | 🔵 | ✅ |
+| A4 → **141** | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | ✅ yapıldı — I-02 · PR — · 2026-09-23 · doğrulama: bitti-dogrulama-2026-09-27 | ✅ |
 | A5 → **151** | Yaklaşım metni (#31) eşleşme kurulduktan sonra iki tarafa gösterilsin (⚠️ M6/**152**'den BAĞIMSIZ — 8 metin hazır) | 🔵 | ✅ |
 | A6 → **142** | Kart derinleştikçe güncellensin (arketip değişebilir) | 🔵 | ✅ |
 
@@ -36,11 +36,11 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | Etiket → B.1 no | Kalem (tek cümle) | Durum | Numaralandı |
 |---|---|:---:|:---:|
 | F1 → **146** | İsim değişkeni altyapısı — metinler `{menti_denge}` biçiminde tutulsun, gösterimde çözülsün, tenant bazında özelleştirilebilir (**BİRLEŞİK F1+M2**) | 🔵 | ✅ |
-| F2 → **157** | Hatalı-konu hedefleme — yanlış yapılan konu tekrar denemede mutlaka gelsin, diğer varyantıyla | 🔵 | ✅ |
-| F3 → **149** | Kritik konu garantisi — her sınavda 4 kritik konudan birer soru | 🔵 | ✅ |
+| F2 → **157** | Hatalı-konu hedefleme — yanlış yapılan konu tekrar denemede mutlaka gelsin, diğer varyantıyla | ✅ yapıldı — I-07 · PR backend #90 + çatı #264 · 2026-09-25 · doğrulama: bitti-dogrulama-2026-09-27 | ✅ |
+| F3 → **149** | Kritik konu garantisi — her sınavda 4 kritik konudan birer soru | 🟨 kısmen — I-04; kalan: 4+4 rastgele çekim devreye alınmadı; tüm aktif sorular geliyor. → AJ-34 | ✅ |
 | F4 → **158** | Deneme sınırı — günde 2, üçüncüsü için bekleme; bekleme süresince öğrenme yolculuğuna yönlendirme | 🔵 | ✅ |
 | F5 → **143** | Şık sırası karıştırma — sertifikada ve öğrenmede, her gösterimde (⚠️ = Madde 1 — uygulanmamış PO kararı, kodda henüz yok) | 🔵 | ✅ |
-| F6 → **150** | Konu bazlı geri bildirim — sınav sonunda zayıf konu + ilgili öğrenme aşamasına yönlendirme | 🔵 | ✅ |
+| F6 → **150** | Konu bazlı geri bildirim — sınav sonunda zayıf konu + ilgili öğrenme aşamasına yönlendirme | ✅ yapıldı — I-03 · PR — · 2026-09-23 · doğrulama: bitti-dogrulama-2026-09-27 | ✅ |
 | F7 → **159** | Kriz bildirimi — kendine zarar ifadesi geçtiğinde kurum yöneticisine otomatik bildirim (4B'nin canlı karşılığı; ⚠️ hukuki teyit) | 🔵 | ✅ |
 
 ### Menti belgesinden (`menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md` §11) — 10 kalem
@@ -52,11 +52,11 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | M3 → **144** | Geri bildirim gösterimi — yalnız seçilen şık; diğerleri kapalı/açılabilir; renk yok | 🔵 | ✅ |
 | M4 → **145** | ⭐ Öğrenme cevapları kişilik profiline İŞLENMESİN (Kalem A) | 🔵 | ✅ |
 | M5 → **S31** | ⭐ `outcome` alanı teyidi — bugün nereye gidiyor, kodda kontrol (Kalem B). **KOD KALEMİ DEĞİL → SÖZ S31** (keşif) | ⬜ | söz |
-| M6 → **152** | Eşleşme detay sayfası — 3 bölüm, arketip kombinasyonuna göre metin seçimi (⚠️ Bölüm 2: 15 kombinasyon yazılmadı; A5/**151** bağımsız) | 🔵 | ✅ |
+| M6 → **152** | Eşleşme detay sayfası — 3 bölüm, arketip kombinasyonuna göre metin seçimi (⚠️ 🟨 kısmen — AN-05; kalan: Metin yazıldı; ölçüt "menti ekranda görüyor", koda girmedi. → KARAR-45; A5/**151** bağımsız) | 🔵 | ✅ |
 | M7 → **153** | Örtüşme cümlesi üretimi — S1/S2/S3 verisinden şablon; ⚠️ S1 içeriği gösterilmez, yalnız örtüşme | 🔵 | ✅ |
 | M8 → **154** | Bekleme zamanlayıcısı — 3. gün hatırlatma, 7. gün otomatik kapanış + alternatif gösterimi | 🔵 | ✅ |
 | M9 → **155** | Ret akışı — sebep gizli, alternatif aynı ekranda | 🔵 | ✅ |
-| M10 → **156** | Görüşme sıklığı bilgisi — profilde ve bekleme metninde görünsün | 🔵 | ✅ |
+| M10 → **156** | Görüşme sıklığı bilgisi — profilde ve bekleme metninde görünsün | ✅ yapıldı — I-05 · PR backend #90 + çatı #264 + çatı #278 · 2026-09-25 · doğrulama: bitti-dogrulama-2026-09-27 | ✅ |
 
 > **Not (PO kararı 2026-09-03):** **F1 + M2 BİRLEŞTİ → tek madde 146** (aynı isim-değişkeni altyapısının iki
 > yarısı — 14 değişken tek altyapıda). **A5 (151) ↔ M6 (152) BİRLEŞMEDİ** — PO gerekçesi: A5'in 8 metni HAZIR,
@@ -101,7 +101,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
   Yeni ilke: kültüre uygun, cinsiyet dağılımı dengeli isimler (sertifika 3E/3K, öğrenme 2E/2K).
 - **Eski kayıt (yerini bul):** `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410` —
   "**İSİMLER:** unisex (Deniz gibi). Anlatılan kişi hep aynı ad, karşı taraf …".
-- **Yapılacak (bu turda YAPILMADI — belge turu, çözme yasak):** eski satır SİLİNMEZ; üstü çizilip `[ESKİ]`
+- **✅ yapıldı — I-06 · PR — · 2026-09-23 · doğrulama: bitti-dogrulama-2026-09-27:** eski satır SİLİNMEZ; üstü çizilip `[ESKİ]`
   damgası + yeni belgeye (`faz6-…-2026-09-03.md §4`) yönlendirme düşülmeli (Belge Düzeltme Deseni, G9-03).
 - **Durum:** ✅ Numaralandı → **B.1 madde 160** (belge-hijyen aksiyonu, kod değil).
 
@@ -139,7 +139,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | 23 kod kalemi (A1-A6 · F1-F7 · M1-M10) | 🔵 | ✅ **B.1 138-160** (F1+M2 birleşti→146; M5→S31 söz; 3B Madde 2→148, Madde 3→160 madde aldı → net 23) |
 | Madde 1 (UYGULANMAMIŞ PO KARARI) — şık sırası kodda henüz yok (= F5) | 🔵 | ✅ **143** |
 | Madde 2 (DEĞİŞTİRİLECEK İÇERİK) — öğrenme yolculuğu 7+6 → 8+5 | 🔵 | ✅ **148** |
-| Madde 3 (KARAR DEĞİŞİKLİĞİ) — eski unisex kararına [ESKİ] damgası | 🔵 | ✅ **160** |
+| Madde 3 (KARAR DEĞİŞİKLİĞİ) — eski unisex kararına [ESKİ] damgası | ✅ yapıldı — I-06 · PR — · 2026-09-23 · doğrulama: bitti-dogrulama-2026-09-27 | ✅ **160** |
 | M5 `outcome` teyidi — kod kalemi DEĞİL, keşif | ⬜ | ✅ **söz S31** |
 | 4 kardeş belge eksik (senaryo-bankasi/olcme-mimarisi/senaryo-denetim/olcme-arastirmasi 2026-09-03) | ⬜ AÇIK | Hayır (belge kaydı, kod değil) |
 | Dürüstlük sınırları (12 madde) — pazarlama/koda geçerken korunacak | ⬜ AÇIK | Hayır (uyarı, kalem değil) |
