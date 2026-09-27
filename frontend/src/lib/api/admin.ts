@@ -23,6 +23,9 @@ import type {
   TenantReportsResponse,
   ReviewReportResponse,
   ReportStatus,
+  BlockPairResponse,
+  BlockedPairsListResponse,
+  UnblockPairResponse,
 } from '@/types/admin';
 import type { RequestOptions, DownloadedFile } from './client';
 
@@ -147,4 +150,28 @@ export const adminApi = {
 
   demoteFromAdmin: (api: BoundClient, userId: string) =>
     api<{ ok: boolean }>(`/api/admin/users/${userId}/demote-admin`, { method: 'POST' }),
+
+  // ── E-3d: Çifti Engelle (KR-19) ────────────────────────────────────────────
+  // `/api/tenants/:id/settings` ile aynı aile (X-Tenant-Id header'ı KULLANMAZ,
+  // tenantId URL param + JWT eşleşmesiyle korunur — bkz. adminSettingsRoutes.ts).
+  blockPair: (
+    api: BoundClient,
+    tenantId: string,
+    fromUserId: string,
+    toUserId: string,
+  ): Promise<ApiResult<BlockPairResponse>> =>
+    api<BlockPairResponse>(`/api/tenants/${tenantId}/block-pair`, {
+      method: 'POST',
+      body: { fromUserId, toUserId },
+    }),
+
+  // Mevcut engelleri listeler (taraf adları + tarih; e-posta dönmez).
+  listBlockedPairs: (api: BoundClient, tenantId: string): Promise<ApiResult<BlockedPairsListResponse>> =>
+    api<BlockedPairsListResponse>(`/api/tenants/${tenantId}/block-pairs`),
+
+  // Engeli kaldırır — çift yeniden eşleşme/mesaj/randevu/anlaşma kurabilir.
+  unblockPair: (api: BoundClient, tenantId: string, pairId: string): Promise<ApiResult<UnblockPairResponse>> =>
+    api<UnblockPairResponse>(`/api/tenants/${tenantId}/block-pair/${encodeURIComponent(pairId)}`, {
+      method: 'DELETE',
+    }),
 };
