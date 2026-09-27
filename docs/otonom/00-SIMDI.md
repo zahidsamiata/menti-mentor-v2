@@ -7,7 +7,7 @@
 
 **Durum:** CALISIYOR — PO görevi: GÖREV 0 (kural: doğrulama opus + mutasyon kanıtı) → 1 (AJ-20…AJ-48; AJ-29/AJ-38 hariç) → 2 (kayıt+belge, kural h) → 3 (AJ: değerlendirme okuma ucu + E-3 notu) → 4 (sahipsiz kalanlar, salt-okuma) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 1 — BITTI (19): AJ-20 · 21 · 23 · 24 · 25 · 26 · 27 · 28 · 30 · 31 · 32 (8/8) · 33 · 35 · 36 · 37 · 40 · 44 · 45 (14/14) + AJ-22 kısmen (KARAR-112) · AJ-34 ATLANDI(karar) → KARAR-113 · ONAY sonrası merge sırada: AJ-39 (#399 incelemede) · yapılıyor: AJ-41, AJ-42 · sırada: AJ-43 → AJ-46 → AJ-47 → AJ-48 → sonra GÖREV 2 raporu + GÖREV 4. Yeni satırlar: AJ-49…AJ-60 · KARAR-112, KARAR-113.
+**Şu an yapılan:** GÖREV 1 — 27 işten BITTI 24 (AJ-20 21 23 24 25 26 27 28 30 31 32 33 35 36 37 39 40 41 42 43 44 45 47 48) · kısmen 1 (AJ-22 → KARAR-112) · ATLANDI(karar) 1 (AJ-34 → KARAR-113) · yapılıyor 1 (AJ-46 belge kovası) · 🔵 hazırlık: AJ-50 (temizlik betiği, merge YOK). GÖREV 3 BITTI (AJ-49). GÖREV 4: (a) 68 · (c) 108 sınıflandı + S1 kalite kontrolü (19 S1'den 7 çürüdü → düzeltildi) · (d)+(b) sınıflandırılıyor. Yeni satırlar AJ-49…AJ-62 · KARAR-112…115.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
