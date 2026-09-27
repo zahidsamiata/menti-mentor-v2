@@ -25,6 +25,7 @@ import { authApi } from '@/lib/api/auth';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
 import { resolveLoginError } from '@/lib/loginMessages';
 import { clearPendingCorrectionNote, storePendingCorrectionNote } from '@/lib/pendingCorrectionNote';
+import { clearPendingApprovalEmail, storePendingApprovalEmail } from '@/lib/pendingApprovalEmail';
 import { UI_TEXT } from '@/lib/uiText';
 
 interface LoginFormProps {
@@ -49,11 +50,9 @@ function getSmartRedirect(user: { role: string; approvalStatus: string; discType
   return '/dashboard';
 }
 
-// PENDING kullanıcının token'ı olmadığından e-postayı query ile taşırız (U-07).
-function withPendingEmail(email: string): string {
-  const trimmed = email.trim();
-  return trimmed ? `/pending-approval?email=${encodeURIComponent(trimmed)}` : '/pending-approval';
-}
+// PENDING kullanıcının token'ı olmadığından e-postayı bekleme ekranına biz taşırız (U-07).
+// AJ-24: URL'ye (`?email=`) konmaz — adres geçmişe/erişim günlüğüne düşmesin; yalnız sekme belleği.
+const PENDING_APPROVAL_PATH = '/pending-approval';
 
 const INITIAL: LoginFormValues = { email: '', password: '' };
 
@@ -72,9 +71,15 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
       const userData = await login(values);
       clearPendingCorrectionNote();
       // PENDING kullanıcıya JWT verilmediğinden /pending-approval'da user=null olur;
-      // e-postayı query ile taşı ki kendi adresini görebilsin (U-07).
+      // e-postayı sekme belleğiyle taşı ki kendi adresini görebilsin (U-07, AJ-24).
       const target = getSmartRedirect(userData);
-      router.push(target === '/pending-approval' ? withPendingEmail(values.email) : target);
+      if (target === PENDING_APPROVAL_PATH) {
+        storePendingApprovalEmail(values.email);
+        router.push(PENDING_APPROVAL_PATH);
+        return;
+      }
+      clearPendingApprovalEmail();
+      router.push(target);
     } catch (err) {
       // PENDING: backend JWT vermeden 403 atar — biz yine de /pending-approval'a yönlendiririz.
       const e = err as Error & {
@@ -86,12 +91,14 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
       if (e.code === 'HESAP_ONAY_BEKLENIYOR') {
         // IC-08: not URL'ye konmaz (serbest metin, kişisel olabilir) — yalnız bu sekmenin oturum belleğinde taşınır.
         storePendingCorrectionNote(e.correctionNote ?? null);
-        router.push(withPendingEmail(values.email));
+        storePendingApprovalEmail(values.email);
+        router.push(PENDING_APPROVAL_PATH);
         return;
       }
       // REDDEDİLDİ: gerekçe + tekrar-başvuru ekranı (giriş bilgileri formda duruyor → reapply için kullanılır).
       if (e.code === 'HESAP_REDDEDILDI') {
         clearPendingCorrectionNote();
+        clearPendingApprovalEmail();
         setRejected({ reason: e.rejectionReason ?? null });
         return;
       }

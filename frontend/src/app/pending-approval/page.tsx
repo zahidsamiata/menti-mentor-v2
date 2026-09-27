@@ -1,21 +1,22 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Clock, Mail, LogOut, PenLine } from 'lucide-react';
 import { clearPendingCorrectionNote, readPendingCorrectionNote } from '@/lib/pendingCorrectionNote';
+import { clearPendingApprovalEmail, readPendingApprovalEmail } from '@/lib/pendingApprovalEmail';
 
-function PendingApprovalContent() {
+export default function PendingApprovalPage() {
   const { user, logout } = useAuth();
-  const searchParams = useSearchParams();
-  // PENDING kullanıcıya JWT verilmediğinden user genelde null olur → e-postayı
-  // login formundan gelen query'den al (U-07). Token varsa (edge) user.email öncelikli.
-  const email = user?.email ?? searchParams.get('email') ?? undefined;
+  // PENDING kullanıcıya JWT verilmediğinden user genelde null olur → e-postayı giriş formunun
+  // sekme belleğine bıraktığı değerden al (U-07; AJ-24: URL'de taşınmaz). Token varsa user.email öncelikli.
+  const [storedEmail, setStoredEmail] = useState<string | null>(null);
+  const email = user?.email ?? storedEmail ?? undefined;
   // IC-08: yöneticinin düzeltme notu — giriş formu sekme belleğine bırakır (bkz. lib/pendingCorrectionNote).
   const [correctionNote, setCorrectionNote] = useState<string | null>(null);
   useEffect(() => {
+    setStoredEmail(readPendingApprovalEmail());
     setCorrectionNote(readPendingCorrectionNote());
   }, []);
 
@@ -86,6 +87,7 @@ function PendingApprovalContent() {
           className="gap-2"
           onClick={() => {
             clearPendingCorrectionNote();
+            clearPendingApprovalEmail();
             void logout();
           }}
         >
@@ -95,14 +97,5 @@ function PendingApprovalContent() {
 
       </div>
     </div>
-  );
-}
-
-// useSearchParams bir Suspense sınırı ister (Next 15) → sarmalanır.
-export default function PendingApprovalPage() {
-  return (
-    <Suspense fallback={null}>
-      <PendingApprovalContent />
-    </Suspense>
   );
 }
