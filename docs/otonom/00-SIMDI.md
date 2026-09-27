@@ -3,11 +3,11 @@
 
 > ⛔ **GÜVENLİK BULGUSU (2026-09-27, BITTI doğrulaması — U-08 ⚠️, kalite kontrolü QB):** `POST /api/scoring/rank-mentors` onay kapısı yok — `backend/src/routes/sjtScoringRoutes.ts:25-29` yalnız `requireAuth()`; komşu uç `backend/src/controllers/matchingController.ts:74` `rejectIfCallerNotApproved` uyguluyor. Onay bekleyen/reddedilen menti mentör kimlik no + uyum skoru alabiliyor (ad dönmüyor). Bu oturumda DÜZELTME YOK → AJ satırı (sonraki tur).
 
-**Son güncelleme:** 2026-09-27 18:40 UTC · çatı main HEAD (bu commit; GÖREV C merge `0832f89`) · backend main HEAD `3bd9ad3` (= canlı pointer; bu turda backend değişmedi)
+**Son güncelleme:** 2026-09-27 · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3`
 
-**Durum:** DURDU (K1-a) — PO görevi (BITTI son doğrulama A → belge senkronu B → kural h + bekçi C) tamamlandı; PO talimatı gereği K5 yedek havuzuna GEÇİLMEDİ. Bu turda açılan AJ-20…AJ-48 sonraki turun işi (K1-a'da sayılmadı).
+**Durum:** CALISIYOR — PO görevi: GÖREV 0 (kural: doğrulama opus + mutasyon kanıtı) → 1 (AJ-20…AJ-48; AJ-29/AJ-38 hariç) → 2 (kayıt+belge, kural h) → 3 (AJ: değerlendirme okuma ucu + E-3 notu) → 4 (sahipsiz kalanlar, salt-okuma) → DURDU (K1-a).
 
-**Şu an yapılan:** yok. **TUR ÖZETİ (2026-09-27 BITTI son doğrulama):** 209 birim (205 BITTI satırı + 4 alt kalem) → **✅ 127 · ⚠️ 56 · ❌ 1 (P-07) · 🔁 13 · 👁 12 (hepsi kod ✅) · ❓ 0** · R1 63 (✅ 47 · ⚠️ 13 · 🔁 3) · R2 98 (✅ 55 · ⚠️ 26 · 🔁 8 · 👁 8 · ❌ 1) · R3 48 (✅ 25 · ⚠️ 17 · 🔁 2 · 👁 4) · **kalite kontrolü:** 209'un tamamı opus denetçiden geçti → 162 TUTAR / 47 ÇÜRÜDÜ (R1 ✅ 51'in 4'ü, R2/R3 ✅ 118'in 40'ı) · **mutasyon:** 78 işlik kapsam, 44 koşum → 42 kırmızı, 3 mutant yeşil (PS-02, PS-A1, GV-07 → ⚠️ test boş), 36 DB gerekli (satır okuması), 1 yapılamadı (F-15) · **AJ:** AJ-20…AJ-48 = 29 satır; güvenlik/KVKK 13 (AJ-20…AJ-32, kuyruk en üstü; ⛔ AJ-20 U-08 `rank-mentors` onay kapısı · AJ-21 ham DISC vektörü mentöre dönüyor) · **kabul testi listesi:** 12 madde (`03-PO-ELLE-ISLER.md`) · **belge senkronu:** 8 yaşayan belgede 39 satır (00-KARAR-TAKIP 23 · kod-kalemleri 7 · e3-baglanmamis-uclar 4 · 09-DURUM/06-tasarim-ux/degerlendirme-sistemi/tasarim-kararlari-admin/03-PO 1'er; ✅ 30 · 🟨 10) · teyit listesi 68 · dondurulmuş eşleme 129 satır / 16 belge · B.8 41/41 · **bekçi kural (h) kalan uyarı: 0** (tek aday I-02 → madde 141 gerekçeli istisnada) · **limitin en çok gittiği yer:** kalite kontrolü — sonnet partilerinde ✅ çürüme oranı %34 çıkınca 9 ek opus denetçiyle 209'un tamamı yeniden kontrol edildi; ayrıca B PR'ı 4 inceleme turu. Rapor: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`.
+**Şu an yapılan:** GÖREV 0 (dal `otonom/KURAL-DOGRULAMA-OPUS-20260927`) + GÖREV 1 başlıyor (AJ-21 → AJ-20 …, en fazla 2 yazan ajan).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |

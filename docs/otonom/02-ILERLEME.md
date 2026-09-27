@@ -1083,3 +1083,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **GÖREV B MERGE** — çatı #379 (`695f74a`), 7b 4 tur (bulgular: KART-INDEKSI dondurulmuş sayıldı · metin kaybı → açıklayıcı metin korunur · madde 141 teyit · E-3e yakın-ama-farklı uç geri alındı), son ONAY, CI 10/10. 39 satır / 8 belge · teyit 68 · eşleme 129/16 · B.8 41/41.
 - 2026-09-27 · **GÖREV C PR-AÇIK** — çatı #380: kural (h) + bekçi UYARI + istisna (I-02 → madde 141) + 5 test (12/12).
 - 2026-09-27 18:40 UTC · **GÖREV C MERGE** (#380 `0832f89`, 7b ONAY, CI 10/10; canlı ok:true · db:up · site 200). **TUR KAPANDI — DURDU K1-a** (TUR ÖZETİ başta).
+- 2026-09-27 · **TUR BAŞLANGIÇ — GÖREV 0-4 (kural opus+mutasyon · AJ-20…AJ-48 · belge · AJ değerlendirme okuma · sahipsiz kalanlar)** · yapılacak AJ: 27 (AJ-29 🟡 ve AJ-38 🔴 hariç) · Dokploy autodeploy yalnız main (`docs/kararlar/konu/02-mimari-ve-altyapi.md:37`) → mutasyon/ dalları canlıya gitmez.
