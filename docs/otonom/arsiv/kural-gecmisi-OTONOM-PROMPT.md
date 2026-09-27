@@ -205,3 +205,11 @@ i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>")
     02-ILERLEME · 03-PO-ELLE-ISLER · 00-BELGE-HARITASI) eski metin "~~[ESKI]~~ + GUNCELLEME" katmani
 ```
 
+## 5c AKTIF/ARSIV AYRIMI · "Otomatik bekci" paragrafı · eski satır 233-236 · taşındı 2026-09-27 (kural h eklendi, UYARI listesi genişledi)
+
+```text
+Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
+01-KARARLAR'da "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta kod disi `~~[ESKI` blogu.
+UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
+OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB).
+```

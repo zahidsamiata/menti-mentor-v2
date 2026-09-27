@@ -59,4 +59,38 @@ head -c 40000 /dev/zero | tr '\0' 'a' >>"$TMP/root/CLAUDE.md"
 expect 0 "CLAUDE.md > 35 KB → yalnız UYARI (yeşil kalır)"
 grep -q "UYARI  CLAUDE.md" "$TMP/out" || { echo "  ✗ boyut uyarısı çıktıda yok"; FAIL=1; }
 
+# ── kural (h): BITTI işin kaynağı açık → yalnız UYARI ──
+setup_h() {  # setup_h <madde-satırındaki durum>
+  setup_clean
+  mkdir -p "$TMP/root/docs/otonom/arsiv" "$TMP/root/docs/kararlar" "$TMP/root/docs/raporlar/kod-denetimi"
+  cat >"$TMP/root/docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md" <<'EOF2'
+| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
+|---|---|---|---|---|---|---|
+| X-09 | Ş1 | **madde 777 — örnek iş** | 🟢 | görünür | BITTI | kanıt |
+EOF2
+  printf '| No | İş | Durum |\n|---|---|---|\n| 777 | örnek madde | %s |\n' "$1" >"$TMP/root/docs/kararlar/00-KARAR-TAKIP.md"
+}
+
+setup_h '⬜ AÇIK'
+expect 0 "kural (h) negatif: BITTI işin maddesi açık → yeşil kalır"
+grep -q "BITTI işin kaynağı açık: X-09 → madde 777" "$TMP/out" || { echo "  ✗ kural (h) uyarısı çıktıda yok"; FAIL=1; }
+
+setup_h '✅ yapıldı — X-09 · PR #1'
+expect 0 "kural (h) pozitif: madde ✅ işaretli → uyarı yok"
+grep -q "kaynağı açık" "$TMP/out" && { echo "  ✗ kural (h): işaretli maddede uyarı çıktı"; FAIL=1; }
+
+setup_h '🟨 kısmen — X-09; kalan: y → AJ-1'
+expect 0 "kural (h) pozitif: madde 🟨 işaretli → uyarı yok"
+grep -q "kaynağı açık" "$TMP/out" && { echo "  ✗ kural (h): 🟨 maddede uyarı çıktı"; FAIL=1; }
+
+setup_h '⬜ AÇIK'
+echo 'X-09 madde 777 # madde işten geniş, teyit' >"$TMP/root/docs/raporlar/kod-denetimi/bekci-istisna.txt"
+expect 0 "kural (h) istisna: gerekçeli istisna → uyarı yok"
+grep -q "kaynağı açık" "$TMP/out" && { echo "  ✗ kural (h): istisnadaki madde uyarı verdi"; FAIL=1; }
+
+setup_h '⬜ AÇIK'
+echo 'X-09 madde 777' >"$TMP/root/docs/raporlar/kod-denetimi/bekci-istisna.txt"
+expect 0 "kural (h) istisna gerekçesiz → istisna sayılmaz, iki uyarı"
+grep -q "kaynağı açık: X-09" "$TMP/out" && grep -q "gerekçe eksik" "$TMP/out" || { echo "  ✗ kural (h): gerekçesiz istisna yanlış işlendi"; FAIL=1; }
+
 exit $FAIL

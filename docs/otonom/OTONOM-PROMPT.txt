@@ -230,10 +230,19 @@ Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARIS
 (f) Bir kimlik (is no, KARAR no) aktif dosyada yoksa `docs/otonom/arsiv/` altinda grep ile aranir;
     "yok" demeden IKI yer de aranir (0.4'teki "arsiv/ OKUMA" kuralinin istisnasi).
 (g) AJ- satirlari da (a)-(c)'ye tabidir.
+(h) Is BITTI olunca, kuyruk satirinin atif yaptigi KAYNAK (00-KARAR-TAKIP maddesi · G-kart · konu belgesi ·
+    rapor kalemi) AYNI commit'te "✅ yapildi — <is id> · PR #<no> · <tarih>" ile isaretlenir. Durum hucresi
+    yalniz salt isaretse (⬜ 🔵 🔴 🟡) onun yerine yazilir; aciklayici metin KORUNUR, not yanina eklenir.
+    Is kaynagi yalniz KISMEN karsiliyorsa kapatilmaz: "🟨 kismen — <is id>; kalan: <tek cumle>".
+    Dondurulmus (📸) belgeye DOKUNULMAZ → `docs/raporlar/kod-denetimi/donmus-belge-esleme-*.md` tablosuna satir.
+    Degisen satirin eski metni `docs/arsiv/belge-senkron-<tarih>.md`'ye AYNEN. (2026-09-27 BITTI son
+    dogrulamasinda 209 isin kaynaklari "acik" kalmisti — borc birikmesin diye.)
 Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
 01-KARARLAR'da "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta kod disi `~~[ESKI` blogu.
 UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
-OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB).
+OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB) · kural (h): arsivdeki BITTI
+satiri "madde N" atfi tasiyor ve 00-KARAR-TAKIP'te madde N satirinda ✅/🟨 yok → "BITTI isin kaynagi acik"
+(gerekceli istisna: `docs/raporlar/kod-denetimi/bekci-istisna.txt`).
 
 ═══════════════════════════════════════════════════════════════
 6 — DOGRULAMA LISTESI  (merge oncesi — hepsi ✅ olmadan merge YOK)
