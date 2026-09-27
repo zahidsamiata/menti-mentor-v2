@@ -3,6 +3,7 @@
  */
 
 import type { TenantBranding } from './tenant';
+import type { TenantVerificationStatus } from '@/lib/api/selfServe';
 
 export type UserRole = 'ADMIN' | 'MENTOR' | 'MENTI';
 export type ApprovalStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
@@ -39,6 +40,15 @@ export interface LoginResponse {
   } | null;
 }
 
+/**
+ * AuthProvider.login dönüşü: login yanıtındaki kullanıcı + (yalnız kurum yöneticisi için)
+ * kurumun başvuru durumu. AJ-35: login yanıtı kurum durumunu taşımaz; yönetici girişinde
+ * askı kapısından muaf `/api/auth/me` ucundan okunur. Okunamazsa `null` (yönlendirme değişmez).
+ */
+export type LoginResult = LoginResponse['user'] & {
+  tenantVerificationStatus?: TenantVerificationStatus | null;
+};
+
 /** login / refresh yanıtındaki kurum markası (oturumdaki kullanıcının KENDİ kurumu). */
 export type SessionTenant = NonNullable<LoginResponse['tenant']>;
 
@@ -63,7 +73,7 @@ export interface AuthContextValue {
   isAuthenticated: boolean;
   isLoading: boolean;
   /** Başarılı girişte login response'undaki user verisini döner (smart redirect için). */
-  login: (credentials: LoginCredentials) => Promise<LoginResponse['user']>;
+  login: (credentials: LoginCredentials) => Promise<LoginResult>;
   logout: () => Promise<void>;
   /** 401 interceptor tarafından çağrılır; yeni token veya null döner */
   refreshAccessToken: () => Promise<string | null>;
