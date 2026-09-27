@@ -132,7 +132,7 @@ Dal adı: `otonom/K-xx-kisa-ad-YYYYMMDD` · her iş ayrı dal, ayrı PR (tek tek
 `02-ILERLEME.md`'ye yazarken tek seferde EKLE (append), başkasının satırını silme.
 
 ## ⭐ MOD ETİKETİ — renk kodu ve yerleşim (2026-09-19)
-`CLAUDE.md:4-5`'teki "Mod bildir" kuralının görsel karşılığı:
+§ Çalışma Sözleşmesi'ndeki "Mod bildir" kuralının görsel karşılığı:
 
 | İşaret | Mod | Anlam |
 |---|---|---|
@@ -151,7 +151,7 @@ kapı etiketi asla kare kullanmaz. Bir promptun başında 🟥 görmek "dur" dem
 - `🟥 BYPASS — K-06 şık açıklamaları` … `🟥 BYPASS — K-06 yazıldı, PR açıldı, merge edildi.`
 
 ## Belge senkronu — SONA, tek sefer
-`CLAUDE.md:126` "her turun sonunda belge senkronu" kuralı otonom turda şöyle uygulanır:
+§ Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI'ndaki "her turun sonunda belge senkronu" kuralı otonom turda şöyle uygulanır:
 her iş sonrası DEĞİL, **kuyruğun sonunda TEK PR** (K-20). Ajan `00-KARAR-TAKIP.md`'ye
 **numara VERMEZ**, "aday" etiketiyle yazar; eski satırları silmez, üstünü çizer.
 Gerekçe: son bir ayda belge muhasebesi tur bütçesinin büyük kısmını yedi; ürün büyümedi.

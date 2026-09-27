@@ -135,4 +135,14 @@ rm "$TMP/root/docs/kararlar/konu/00-KART-INDEKSI.md"
 expect 0 "kural (k) negatif: indekssiz klasör → yeşil + uyarı"
 grep -q "docs/kararlar/konu/ giriş noktası (00-INDEX.md) yok" "$TMP/out" || { echo "  ✗ kural (k) uyarısı çıktıda yok"; FAIL=1; }
 
+# ── kural (l) YN-10: CLAUDE.md içinde kendine satır atfı → yalnız UYARI ──
+setup_clean
+printf -- '- bkz. § Çalışma Sözleşmesi · başka dosya: `backend/CLAUDE.md:12` · `00-KUYRUK.md:5`\n' >>"$TMP/root/CLAUDE.md"
+expect 0 "kural (l) pozitif: bölüm adı + başka dosya satır atfı → uyarı yok"
+grep -q "YN-10" "$TMP/out" && { echo "  ✗ kural (l): bölüm adlı atıfta uyarı çıktı"; FAIL=1; }
+
+printf -- '- `CLAUDE.md:4-5`teki kural\n' >>"$TMP/root/CLAUDE.md"
+expect 0 "kural (l) negatif: CLAUDE.md:4-5 kendine atıf → yeşil + uyarı"
+grep -q 'kendi içine satır atfı "CLAUDE.md:4-5"' "$TMP/out" || { echo "  ✗ kural (l) uyarısı çıktıda yok"; FAIL=1; }
+
 exit $FAIL

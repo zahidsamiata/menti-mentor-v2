@@ -159,3 +159,10 @@ Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyal
   Hepsi rate-limitli. **Bunun DIŞINDA public endpoint YOK** — yeni public uç eklenirse buraya eklenir.
   `selfServeRoutes.ts:23-38` · `suspicionRoutes.ts:9` · `server.ts:60,71`.)
 ```
+
+## MOD ETİKETİ + Belge senkronu — SONA (satır numarası atıfları) · taşındı 2026-09-27 (AJ-46 · YN-10: satır atfı → bölüm adı)
+
+```text
+`CLAUDE.md:4-5`'teki "Mod bildir" kuralının görsel karşılığı:
+`CLAUDE.md:126` "her turun sonunda belge senkronu" kuralı otonom turda şöyle uygulanır:
+```

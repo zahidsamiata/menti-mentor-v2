@@ -13,6 +13,7 @@
 #   · kural (i): CI job'u scripts/verify.sh başlığında anılmıyor (KR-22)
 #   · kural (j): docs/raporlar/ altında ilk 5 satırında TÜR etiketi olmayan rapor (YN-11)
 #   · kural (k): docs/ altında indekssiz (giriş noktası olmayan) klasör (YN-12)
+#   · kural (l): CLAUDE.md'nin kendi içine satır numarasıyla atfı (YN-10)
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -153,6 +154,14 @@ for dirpath, _dirs, files in os.walk(docs_root):
         continue
     if not any(INDEKS.match(f) for f in files):
         warnings.append(f'{os.path.relpath(dirpath, root)}/ giriş noktası (00-INDEX.md) yok — kısa indeks aç (YN-12, rehber KURAL 2-B)')
+
+# Kural (l) YN-10: CLAUDE.md kendi içine satır numarasıyla atıf yapmaz (her düzenlemede kayar) — yalnız UYARI.
+# Atıf bölüm adıyla yazılır: "§ Çalışma Sözleşmesi". Başka dosyaya satır atfı (ör. `00-KUYRUK.md:12`) bu kuralın dışında.
+claude_md = read('CLAUDE.md')
+if claude_md is not None:
+    for no, line in enumerate(claude_md.split('\n'), 1):
+        for sm in re.finditer(r'(?<![\w/.-])CLAUDE\.md:\d+(?:-\d+)?', line):
+            warnings.append(f'CLAUDE.md:{no} kendi içine satır atfı "{sm.group(0)}" — bölüm adına çevir ("§ <başlık>") (YN-10)')
 
 LIMITS = [('docs/otonom/00-KUYRUK.md', 150), ('docs/otonom/01-KARARLAR.md', 150),
           ('docs/otonom/02-ILERLEME.md', 150), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),
