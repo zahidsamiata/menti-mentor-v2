@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 · çatı main HEAD `b194fef` · backend main HEAD `dfa248c` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 06:46 UTC · çatı main HEAD `3a3d7a4`+docs · backend main HEAD `2d6f6c7` (canlı pointer `03befaa`; AJ-08 bump #362'de)
 
 **Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3: AJ-02 · AJ-01 · AJ-06 · AJ-07 · AJ-03 ✅ canlıda · AJ-04 backend #176 (inceleme).
+**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3: AJ-01/02/03/04/06/07/12 ✅ canlıda · AJ-08 backend #177 merge + çatı #362 (pointer + CLAUDE.md seed listesi düzeltmesi; inceleme sürüyor).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #176 + #178 + çatı #361 | AJ-04 (20 uca negatif test) · AJ-12 (ret ucu gövdesiz 500) | ok:true, db:up, site 200 |
 | backend #175 + çatı #360 | AJ-03 (çıkışta erişim anahtarı iptali) | ok:true, db:up, site 200 |
 | çatı #359 | AJ-07 (DISC kontrastı + erişilebilirlik) | ok:true, db:up, site 200 |
 | backend #173 + #174 + çatı #358 | AJ-01 (kurum-içi rol sayımı üyelikten) · AJ-06 (mesaj listesi N+1) | ok:true, db:up, site 200 (uptime 12 sn) |
