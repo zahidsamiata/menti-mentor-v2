@@ -105,9 +105,11 @@ export default function MentiDashboardPage() {
   const dialogTitleId = useId();
 
   // Kalıcı konuşmalar + oturum-içi yeni gönderilenler birleştirilir (mükerrer sayım yok).
+  // AJ-42: liste sayfalı (30) — gerçek sayı yanıttaki `total`'dan okunur.
   const sentRequestCount = countSentRequests(
     (conversationsData?.items ?? []).map((c) => c.counterpart?.id),
     sentIds,
+    conversationsData?.total,
   );
 
   useEffect(() => {

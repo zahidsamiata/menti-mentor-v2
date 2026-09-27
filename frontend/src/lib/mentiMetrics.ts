@@ -33,14 +33,25 @@ export function countApprovedMatchMentors(meetings: readonly Meeting[]): number 
  * Menti başlattığı her konuşma bir taleptir; kalıcı konuşma sahiplerini oturum-içi yeni
  * gönderilen mentör id'leriyle BİRLEŞTİRİR (mükerrer sayım yok). Böylece sayfa yenilenince
  * (oturum state'i sıfırlanınca) sayı 0'a düşmez.
+ *
+ * AJ-42 — konuşma listesi sayfalıdır (F-27: varsayılan 30 kayıt), yüklenen liste uzunluğu
+ * gerçek sayıyı vermez. Sunucunun döndürdüğü `totalConversations` yüklenen sayfadan
+ * büyükse (liste kırpılmış) sayı `total` üzerinden hesaplanır; oturum-içi gönderilenlerden
+ * yalnız yüklenen sayfada görünmeyenler eklenir.
  */
 export function countSentRequests(
   conversationCounterpartIds: readonly (string | null | undefined)[],
   sessionSentMentorIds: ReadonlySet<string>,
+  totalConversations?: number,
 ): number {
-  const contacted = new Set<string>(sessionSentMentorIds);
+  const loaded = new Set<string>();
   for (const id of conversationCounterpartIds) {
-    if (id) contacted.add(id);
+    if (id) loaded.add(id);
   }
-  return contacted.size;
+  const contacted = new Set<string>([...loaded, ...sessionSentMentorIds]);
+  const isTruncated =
+    typeof totalConversations === 'number' && totalConversations > conversationCounterpartIds.length;
+  if (!isTruncated) return contacted.size;
+  const sessionOnly = [...sessionSentMentorIds].filter((id) => !loaded.has(id)).length;
+  return totalConversations + sessionOnly;
 }
