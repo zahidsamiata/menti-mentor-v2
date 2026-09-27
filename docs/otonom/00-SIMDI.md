@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 05:05 UTC · çatı main HEAD `79bc0f7` · backend main HEAD `fd8eb0b` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 05:24 UTC · çatı main HEAD `b415dd7` · backend main HEAD `4107678` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** GÖREV 0 ✅ #354 · GÖREV 1 ✅ #355 · GÖREV 2 ✅ #356 (AJ-01…AJ-11 + KARAR-103; 7b 3 tur) · GÖREV 3 (Bölüm 14): AJ-02 ✅ canlıda · AJ-01 backend #173 (7b SORUN VAR → düzeltiliyor: platform/süper-admin sayımları kapsam dışı, son-admin negatif testi) · AJ-06 backend #174 (7b inceleme sürüyor).
+**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3 (Bölüm 14): AJ-02 · AJ-01 · AJ-06 ✅ canlıda · AJ-07 (DISC kontrastı + erişilebilirlik denetimi) alt ajanda.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #173 + #174 + çatı #358 | AJ-01 (kurum-içi rol sayımı üyelikten) · AJ-06 (mesaj listesi N+1) | ok:true, db:up, site 200 (uptime 12 sn) |
 | backend #172 + çatı #357 | AJ-02 (system-logs meta + denetim izi) | ok:true, db:up, site 200 (uptime 43 sn → dağıtıldı) |
 | çatı #356 | GÖREV 2 — AJ satırları + KARAR-103 | docs |
 | çatı #355 | GÖREV 1 — belge aktif/arşiv ayrımı + kural 5c + bekçi (YN-01/YN-14 kapandı) | docs · CI 5/5 |
@@ -49,6 +50,7 @@
 **PO'ya sorular:** KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
+- AJ-01 kapsam dışı bıraktı: platform/süper-admin geneli rol sayımları (`backend/src/controllers/platformController.ts`, `adminSettingsController.ts`) hâlâ `User.role` — tekil kişi mi üyelik mi sayılacağı ürün kararı adayı.
 - Kuyrukta satırı olmayan bulgular: G-kart doğrulaması ~30 ⬜ kalem (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) · `GET /api/system-logs` iz/meta · kurum-içi sayımlar `User.role` (KPI + G1-18) · frontend askı ekranı yok · token türü ayrımı (OAuth pending) · U-18 gerçek bildirim/inbox ret işareti.
 - Kapı: P-05 (🔵 ama migration'sız, ONAY'lı) · PS-A3/PS-A4 🟡 (yeni tanımla 🟢+7b).
 - "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23 · F-27/G6-01 · G6-03 · G7-13 · F-21/G7-09) — K5-Y2 bu turda denetliyor.
