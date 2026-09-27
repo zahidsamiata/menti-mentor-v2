@@ -30,7 +30,7 @@ import {
   type AnomalyFlag,
 } from '@/lib/api/platform';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
-import { logLevelLabel, logBadgeLabel } from '@/lib/enumLabels';
+import { logLevelLabel, logBadgeLabel, reportReasonLabel, reportStatusLabel } from '@/lib/enumLabels';
 import { useModalDialog } from '@/hooks/useModalDialog';
 import { UI_TEXT } from '@/lib/uiText';
 
@@ -556,9 +556,9 @@ export default function PlatformDashboard() {
                       <div className="space-y-1 min-w-0">
                         <p className="font-semibold text-foreground text-sm">
                           {r.reporter.fullName} → {r.target.fullName}
-                          <span className="ml-2 text-xs font-normal text-muted-foreground">({r.reason})</span>
+                          <span className="ml-2 text-xs font-normal text-muted-foreground">({reportReasonLabel(r.reason)})</span>
                         </p>
-                        <p className="text-xs text-muted-foreground">Kurum: {r.tenantName} · {r.status}</p>
+                        <p className="text-xs text-muted-foreground">Kurum: {r.tenantName} · {reportStatusLabel(r.status)}</p>
                         {r.description && <p className="text-sm text-muted-foreground mt-1">{r.description}</p>}
                         {r.reviewNote && <p className="text-xs text-muted-foreground mt-1">Not: {r.reviewNote}</p>}
                         <p className="text-xs text-muted-foreground">{new Date(r.createdAt).toLocaleString('tr-TR')}</p>

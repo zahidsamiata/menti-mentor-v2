@@ -9,7 +9,7 @@
  * Bilinmeyen değer (backend'e yeni enum eklendi ama burası güncellenmedi) → ham değer
  * aynen döner; ekran boş kalmaz, eksik çeviri göze çarpar.
  */
-import type { CertificationStatus, PendingTagStatus } from '@/types/admin';
+import type { CertificationStatus, PendingTagStatus, ReportReason, ReportStatus } from '@/types/admin';
 
 function labelFrom(map: Record<string, string>, value: string | null | undefined): string {
   if (!value) return '—';
@@ -74,3 +74,25 @@ export const logLevelLabel = (level: string | null | undefined): string => label
 
 export const logBadgeLabel = (log: { level: string; category: string }): string =>
   log.category === 'AUDIT' ? 'Denetim' : logLevelLabel(log.level);
+
+/** Kullanıcı şikâyeti durumu (platform paneli + kurum şikâyet ekranı ile aynı karşılıklar). */
+export const REPORT_STATUS_LABELS: Record<ReportStatus, string> = {
+  OPEN: 'Açık',
+  REVIEWED: 'İncelendi',
+  DISMISSED: 'Reddedildi',
+};
+
+export const reportStatusLabel = (status: string | null | undefined): string =>
+  labelFrom(REPORT_STATUS_LABELS, status);
+
+/** Kullanıcı şikâyeti nedeni (kurum şikâyet ekranındaki karşılıklarla aynı). */
+export const REPORT_REASON_LABELS: Record<ReportReason, string> = {
+  SPAM: 'Spam / istenmeyen',
+  HARASSMENT: 'Taciz / rahatsız edici',
+  INAPPROPRIATE: 'Uygunsuz içerik',
+  NO_SHOW: 'Görüşmeye gelmedi',
+  OTHER: 'Diğer',
+};
+
+export const reportReasonLabel = (reason: string | null | undefined): string =>
+  labelFrom(REPORT_REASON_LABELS, reason);
