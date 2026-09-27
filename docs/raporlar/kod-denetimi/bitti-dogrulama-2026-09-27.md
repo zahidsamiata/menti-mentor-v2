@@ -269,8 +269,8 @@
 > Bu bölüm GÖREV B tamamlanınca eklendi (aynı oturum). Dal `otonom/BELGE-SENKRON-20260927`.
 
 ### B.0 — dondurulmuş belge listesi
-Kural: `docs/` altında (`docs/arsiv/`, `docs/otonom/arsiv/` hariç) ilk 5 satırında 📸 ya da "DONDURULDU/donduruldu" geçen belgeler + adıyla dondurulmuş `docs/kararlar/10-yol-haritasi.md`, `docs/kararlar/00-CIKIS-PLANI.md`. Sayım (bu dal açılırken, `c648ed2`): toplam 203 belge → **dondurulmuş 153** · yaşayan 50. `00-KUYRUK.md`, `00-KARAR-TAKIP.md`, `09-DURUM.md` dondurulmuş DEĞİL.
-<details><summary>Dondurulmuş belgelerin tam listesi (153)</summary>
+Kural: `docs/` altında (`docs/arsiv/`, `docs/otonom/arsiv/` hariç) ilk 5 satırında 📸 ya da "DONDURULDU/donduruldu" geçen belgeler + adıyla dondurulmuş `docs/kararlar/10-yol-haritasi.md`, `docs/kararlar/00-CIKIS-PLANI.md`. **Ek (7b inceleme #379):** `docs/kararlar/00-KART-INDEKSI.md` — 📸 damgası 7. satırda ("durum tutmaz, güncellenmez", "Burada durum değiştirilmez") → dondurulmuş sayıldı; ilk uygulamadaki 25 satırlık işaret geri alındı, kayıtları eşleme tablosuna taşındı. Diğer yaşayan belgelerin 6-15. satırlarında geçen 📸/dondurul ifadeleri etiket değil, kavram anlatımı (kontrol edildi). Sayım (dal tabanı `c648ed2`): toplam 203 belge → **dondurulmuş 154** · yaşayan 49. `00-KUYRUK.md`, `00-KARAR-TAKIP.md`, `09-DURUM.md` dondurulmuş DEĞİL.
+<details><summary>Dondurulmuş belgelerin tam listesi (154)</summary>
 
 - `docs/devir/00-INDEX.md`
 - `docs/devir/01-felsefe-ve-calisma-tarzi.md`
@@ -425,31 +425,31 @@ Kural: `docs/` altında (`docs/arsiv/`, `docs/otonom/arsiv/` hariç) ilk 5 satı
 - `docs/raporlar/persona/menti-persona-ve-sevdirme-2026-08-02.md`
 - `docs/raporlar/persona/mentor-persona-ve-sevdirme-2026-08-02.md`
 - `docs/raporlar/persona/yonetici-persona-ve-metrikler-2026-08-02.md`
+- `docs/kararlar/00-KART-INDEKSI.md`
 
 </details>
 
-**Yaşayan ama B'de düzenlenmeyenler (gerekçe):** `docs/otonom/01-KARARLAR.md` (PO kararı — dokunma yasağı) · `docs/otonom/00-SIMDI.md`, `docs/otonom/02-ILERLEME.md`, `docs/devir/07-oturum-gunlugu.md` (günlük/anlık kayıt; geçmiş olay metni kapatılmaz) · `docs/otonom/00-KUYRUK.md` (BITTI kaydının kendisi; aktif satırlar BITTI değil) · `docs/kararlar/konu/kvkk-metinleri/*` (hukuki metin, iş durumu taşımaz) · `docs/kararlar/konu/belge-duzeni-rehberi.md`, `rtk-komut-rehberi.md` (kural/rehber). Taranan yaşayan hedef: 33 belge.
+**Yaşayan ama B'de düzenlenmeyenler (gerekçe):** `docs/otonom/01-KARARLAR.md` (PO kararı — dokunma yasağı) · `docs/otonom/00-SIMDI.md`, `docs/otonom/02-ILERLEME.md`, `docs/devir/07-oturum-gunlugu.md` (günlük/anlık kayıt; geçmiş olay metni kapatılmaz) · `docs/otonom/00-KUYRUK.md` (BITTI kaydının kendisi; aktif satırlar BITTI değil) · `docs/kararlar/konu/kvkk-metinleri/*` (hukuki metin, iş durumu taşımaz) · `docs/kararlar/konu/belge-duzeni-rehberi.md`, `rtk-komut-rehberi.md` (kural/rehber). Taranan yaşayan hedef: 32 belge.
 
 ### B.1-B.2 — yaşayan belgelerde kapanan yerler
-Tarama: 4 opus salt-okuma alt-ajan (iş kimliği + kuyruk satırındaki atıflar + ayırt edici ifadeler; grep + satır okuma) → 150 aday kayıt → uygulama betiği yalnız doğrulama sınıfı KAPAT (✅ 127 + güncel hâli ölçütü karşılayan 🔁 10 + kod ✅ 👁 11 = 148 iş) ve KISMEN (⚠️ 56 + kısmen 🔁 3 = 59 iş) kayıtlarını uyguladı. İşaret biçimi: `✅ yapıldı — <iş> · PR <no> · <tarih> · doğrulama: bitti-dogrulama-2026-09-27` · `🟨 kısmen — <iş>; kalan: <…> → AJ-<no>`. ❌ P-07 ve 👁 GV-09b'ye dokunulmadı.
+Tarama: 4 opus salt-okuma alt-ajan (iş kimliği + kuyruk satırındaki atıflar + ayırt edici ifadeler; grep + satır okuma). Uygulama betiği yalnız doğrulama sınıfı KAPAT (✅ 127 + güncel hâli ölçütü karşılayan 🔁 10 + kod ✅ 👁 11 = 148 iş) ve KISMEN (⚠️ 56 + kısmen 🔁 3 = 59 iş) kayıtlarını uyguladı. İşaret biçimi: `✅ yapıldı — <iş> · PR <no> · <tarih> · doğrulama: bitti-dogrulama-2026-09-27` · `🟨 kısmen — <iş>; kalan: <…> → AJ-<no>`. ❌ P-07 ve 👁 GV-09b'ye dokunulmadı. 7b inceleme (#379) düzeltmeleri: KART-INDEKSI geri alındı (dondurulmuş) · `00-KARAR-TAKIP.md:572` ve `:750` hücre içi kısmi değiştirme yerine satır sonuna not (metin kaybı giderildi) · `kod-kalemleri-2026-09-03.md:30` (madde 141) teyite alındı (KARAR-TAKIP:311 ile tutarlı) · `03-PO-ELLE-ISLER.md:231` "Kılavuz ✅ yapıldı — AN-32" (görüşmenin kendisi açık kalır) · eksik PR/tarihler dolduruldu.
 
 | Belge | Değişen satır | ✅ işaret | 🟨 işaret | "⬜/AÇIK/bekliyor/PR'DA" geçen satır: önce → sonra |
 |---|---|---|---|---|
 | `docs/kararlar/00-KARAR-TAKIP.md` | 23 | 16 | 8 | 154 → 151 |
-| `docs/kararlar/00-KART-INDEKSI.md` | 25 | 17 | 11 | 86 → 69 |
-| `docs/kararlar/09-DURUM.md` | 1 | 1 | 0 | 23 → 24 |
+| `docs/kararlar/09-DURUM.md` | 1 | 1 | 0 | 23 → 23 |
 | `docs/kararlar/konu/06-tasarim-ux.md` | 1 | 1 | 0 | 5 → 5 |
 | `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md` | 1 | 1 | 0 | 48 → 47 |
 | `docs/kararlar/konu/tasarim-kararlari-admin.md` | 1 | 1 | 0 | 10 → 10 |
 | `docs/otonom/03-PO-ELLE-ISLER.md` | 1 | 1 | 0 | 22 → 22 |
-| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md` | 8 | 6 | 2 | 11 → 11 |
+| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md` | 7 | 5 | 2 | 11 → 11 |
 | `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md` | 5 | 5 | 0 | 0 → 0 |
-| **Toplam** | **66** | **49** | **21** | |
+| **Toplam** | **40** | **31** | **10** | |
 
-Not: "önce → sonra" sütunu satır içinde bu kelimelerden biri geçen satır sayısıdır (kaba ölçü); bir satır birden çok madde taşıyabildiği ve işaret notu "kalan" metninde bu kelimeleri içerebildiği için düşüş işaretlenen yer sayısından azdır. Eski metinler: `docs/arsiv/belge-senkron-2026-09-27.md` (66 satır + B.4 iki ilk satır).
+Not: "önce → sonra" sütunu bu kelimelerden biri geçen satır sayısıdır (kaba ölçü); satırlar birden çok madde taşıyabildiği ve işaret satır sonuna eklendiğinde eski durum kelimesi satırda kaldığı için düşüş, işaretlenen yer sayısından azdır. Eski metinler: `docs/arsiv/belge-senkron-2026-09-27.md`.
 
 ### B.3 — dondurulmuş belge eşlemesi
-`docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` — **87 satır, 15 belge** (2 salt-okuma alt-ajan). Dondurulmuş belgelerde değişiklik YOK.
+`docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` — **129 satır, 16 belge** (2 sonnet salt-okuma alt-ajan + KART-INDEKSI'nden taşınan 42 kayıt). Dondurulmuş belgelerde değişiklik YOK.
 
 ### B.4
 - `00-KARAR-TAKIP.md` ve `09-DURUM.md` ilk satırındaki "⚠️ 2026-09-20'den beri güncellenmiyor…" uyarısı aynen arşive taşındı; yerine "Son senkron: 2026-09-27 (…bitti-dogrulama-2026-09-27.md). Anlık durum: docs/otonom/00-SIMDI.md".
@@ -457,7 +457,7 @@ Not: "önce → sonra" sütunu satır içinde bu kelimelerden biri geçen satır
 - `00-KARAR-TAKIP.md`: madde 141 (I-02, "ERTELENDİ" notu) ve madde 164 (sertifika eşiği KARAR-46'ya bağlı) KAPATILMADI → teyit listesinde.
 
 ### B.5 — TEYİT listesi (işaretlenmedi)
-**80 kayıt.** Neden: eşleşme belirsiz (belge maddesi işten geniş / başka KARAR'a bağlı / ERTELENDİ notu / çelişkili ifade).
+**67 kayıt.** Neden: eşleşme belirsiz (belge maddesi işten geniş / başka KARAR'a bağlı / ERTELENDİ notu / çelişkili ifade). (KART-INDEKSI'nin teyitleri eşleme tablosunda "belirsiz" olarak.)
 
 | Belge:satır | İş | Neden |
 |---|---|---|
@@ -505,20 +505,6 @@ Not: "önce → sonra" sütunu satır içinde bu kelimelerden biri geçen satır
 | `docs/kararlar/00-KARAR-TAKIP.md:636` | K-14 | madde 120 (G1-28) kod dışı altyapı sertleştirmesini (Dokploy/firewall/SSH/SSL/yedek) anıyor; K-14 yalnız kod tarafını yaptı, altyapı PO listesine devredildi. |
 | `docs/kararlar/00-KARAR-TAKIP.md:942` | AJ-02 | Kuyrukta satırı olmayan bulgular listesi GET /api/system-logs denetim izi/meta kalemini başka kalemlerle birlikte anıyor; AJ-02 bunu kapattı ama satır çok kalemli. |
 | `docs/kararlar/00-KARAR-TAKIP.md:942` | AJ-01 | Aynı liste kurum-içi sayımlar User.role kalemini anıyor; AJ-01 kısmen kapattı (Mentörsüz Menti/kullanıcı listesi kaldı), satır çok kalemli. |
-| `docs/kararlar/00-KART-INDEKSI.md:51` | V-05 | G1-22 k-anonimlik metrik yuvarlama (madde 119): V-05 KPI/analytics uçlarına k-anonimlik ekledi; 'yuvarlama' ayağı aynı mı belirsiz. |
-| `docs/kararlar/00-KART-INDEKSI.md:54` | GV-06 | G1-25 createMeeting kapsamsız findUnique: GV-06 createMeeting kimliğini oturuma bağladı; findUnique kapsamı ayrıca düzeltildi mi belirsiz. |
-| `docs/kararlar/00-KART-INDEKSI.md:57` | K-14 | G1-28 sunucu sertleştirme kartı K-14 kod tarafından GENİŞ (altyapı KARAR-18'de, PO işi); K-14 da yalnız limit anahtarı ayağı, trust proxy eksik. |
-| `docs/kararlar/00-KART-INDEKSI.md:124` | F-15 | G4-23 umut sinyali KUYRUK=F-15 · P-06; P-06 bu işte değil ve F-15 sayı uydurmadan yalnız metin ekledi — kart daha geniş olabilir. |
-| `docs/kararlar/00-KART-INDEKSI.md:126` | P-05 | G4-25 reddi yumuşat + kutlama kartı P-05'ten geniş: F-17 (kutlama) ve KARAR-20 de bağlı. |
-| `docs/kararlar/00-KART-INDEKSI.md:129` | P-14 | G4-28 mentör 'kendi etkim' yuvası (md.78) P-14 takdir cümlesinden geniş olabilir; rozet çeşitliliği (G4-26) aynı maddeye bağlı. |
-| `docs/kararlar/00-KART-INDEKSI.md:150` | P-10 | G5-06 mentör bildirim RİTMİ P-10'dan geniş; P-10 yalnız talep e-postası ekledi. |
-| `docs/kararlar/00-KART-INDEKSI.md:161` | Y-03 | G6-06 temiz-kod borcu (md.47) Y-03'ün Zod doğrulama tekilleştirmesinden (madde 47) çok geniş. |
-| `docs/kararlar/00-KART-INDEKSI.md:174` | Y-10 | G7-08 kurumsal sayfalar + JSON-LD (md.57-63) Y-10'dan geniş; Y-10 yalnız JSON-LD (madde 62). |
-| `docs/kararlar/00-KART-INDEKSI.md:174` | Y-06 | G7-08 md.57-63 kapsamında madde 58 (footer yasal linkler) Y-06 ile kısmen yapıldı; kart daha geniş. |
-| `docs/kararlar/00-KART-INDEKSI.md:185` | K-04 | G8-01 foto kalıcı disk asıl olarak PO/Dokploy işi (KARAR-18); K-04 yalnız anlaşılır hata mesajını ekledi. |
-| `docs/kararlar/00-KART-INDEKSI.md:186` | K-04 | G8-02 ortam değişkeni teyidi PO işi (KARAR-18); K-04 yalnız kod tarafı. |
-| `docs/kararlar/00-KART-INDEKSI.md:223` | E-1 | G10-01 kesin-ölü kod bloğu K-13 · E-1..E-5 zincirine bağlı; E-1 envanteri tek başına kartı kapatmaz, K-13 kararı açık. |
-| `docs/kararlar/00-KART-INDEKSI.md:223` | E-2 | G10-01 E-1..E-5 zincirinin E-2 triyaj ayağı bitti ama K-13 ve karantina kararları açık. |
 | `docs/kararlar/konu/05-ozellikler-ve-paneller.md:61` | F-13 | 08'deki aynı açık soru (yönetici sertifika sorusu ekleyebilmeli mi); F-13 gerekçe belgesiyle cevaplandı ama ürün sorusu biçiminde, PO kararı sayılıp sayılmayacağı belirsiz. |
 | `docs/kararlar/konu/06-tasarim-ux.md:23` | AJ-07 | DISC renk ton kararının kullanıcı gözüyle onayını bekliyor; AJ-07 kontrastı düzeltti ama tonun PO'ca onaylanması ayrı bir karar, kapanıp kapanmadığı belirsiz. |
 | `docs/kararlar/konu/06-tasarim-ux.md:32` | F-10 | Havuz kart tasarımını 'tasarlanacak/henüz kodlanmadı' gösteriyor; F-10 menti→mentör kartının var olduğunu doğruladı ama bölüm çift yönlü havuz, sayfalama, detay sayfası gibi daha geniş kalemler içeriyor. |
@@ -532,6 +518,7 @@ Not: "önce → sonra" sütunu satır içinde bu kelimelerden biri geçen satır
 | `docs/otonom/03-PO-ELLE-ISLER.md:130` | U-01 | G8-04 PO satırındaki 'COMPLETED geçişi kodda hiç yazılmıyor (U-01)' şüphesi bayat; satırın kendisi PO'nun gözle kontrolü. |
 | `docs/otonom/03-PO-ELLE-ISLER.md:133` | F-13 | Satır sertifika gerekçesini PO'nun yazmasını bekliyor; F-13 ajan tarafından gerekçe belgesi yazılarak kapandı — PO onayı gerekip gerekmediği çelişkili. |
 | `docs/otonom/03-PO-ELLE-ISLER.md:239` | U-08 | Kod tarafı teyit sorusu: U-08 mentor-matches'e onay kapısı ekledi, ama rank-mentors ucu hâlâ açık (KISMEN) — soru kısmen cevaplandı. |
+| `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:30` | I-02 | madde 141 — 00-KARAR-TAKIP.md:311 ile aynı madde teyitte (ERTELENDİ notu); iki belge tutarlı kalsın (7b inceleme #379 bulgu 5) |
 | `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:52` | K-06 | M3→madde 144 'yalnız seçilen şık; diğerleri kapalı/açılabilir; renk yok' kod bekliyor; K-06 diğer şıkların açıklamasını açılır ve işaretsiz gösterdi, ama eşleşme madde atfıyla değil anahtar ifadeyle. |
 | `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:58` | P-05 | M9→madde 155 'sebep gizli, alternatif aynı ekranda' kod bekliyor; P-05 nazik ret bildirimini canlıya aldı fakat KARAR-22 B gereği alternatif mentör yok, madde işten geniş. |
 | `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:68` | I-06 | 3B başlığı üç yapısal kalemi (143, 148, 160) birlikte ⬜ AÇIK sayıyor; I-06 yalnız madde 160'ı kapattı. |
@@ -543,5 +530,5 @@ Not: "önce → sonra" sütunu satır içinde bu kelimelerden biri geçen satır
 | `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md:66` | E-3e | 'check-in geçmişi · değerlendirme okuma' kuyruksuz açık BAĞLA kalemi diye listeleniyor; E-3e ikisini birlikte karşıladı ama satırda açık başka kalemler de var. |
 
 ### B.8 — diff kontrolü
-Betik (`git diff -U0 <merge-base> -- docs/`): silinen her satır arşiv dosyasında birebir aranır. Sonuç: **silinen 68 satır · arşivde olmayan 0.** Eklenen satırlar: 66 işaretli satır + 2 ilk satır + 09-DURUM 2026-09-27 bölümü (1 satır + boş satır) + yeni dosyalar (arşiv, eşleme tablosu, bu bölüm). Belgelerin başka içeriği değişmedi.
+Betik (`git diff -U0 <merge-base> -- docs/`): silinen her satır arşiv dosyasında birebir aranır. Sonuç: **silinen 42 satır · arşivde olmayan 0.** Eklenen satırlar: 40 işaretli satır + 2 ilk satır + 09-DURUM 2026-09-27 bölümü (1 satır + boş satır) + yeni dosyalar (arşiv, eşleme tablosu, bu bölüm). Değişen tablo satırlarında `|` sayısı korunur. Belgelerin başka içeriği değişmedi.
 

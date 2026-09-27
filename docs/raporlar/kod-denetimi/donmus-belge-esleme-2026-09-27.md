@@ -3,7 +3,7 @@
 
 # Dondurulmuş belge eşlemesi — 2026-09-27
 
-Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`). Dondurulmuş belge listesi: B.0 kuralı (ilk 5 satırda 📸 / DONDURULDU + `10-yol-haritasi.md`, `00-CIKIS-PLANI.md`), `docs/arsiv/` ve `docs/otonom/arsiv/` hariç, bu doğrulamanın kendi dosyaları hariç. Tarama: 2 salt-okuma alt-ajan (grep + satır okuma). "Durum" = 2026-09-27 doğrulama kategorisi (✅ doğrulandı · ⚠️ kısmen · 🔁 sonradan değişti · 👁 insan gözü (kod ✅) · ❌ tutmuyor). "Eşleşme belirsiz" satırları bilgi amaçlıdır.
+Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`). Dondurulmuş belge listesi: B.0 kuralı (ilk 5 satırda 📸 / DONDURULDU + `10-yol-haritasi.md`, `00-CIKIS-PLANI.md`) + `00-KART-INDEKSI.md` (📸 damgası 7. satırda, "durum değiştirilmez" — 7b inceleme #379), `docs/arsiv/` ve `docs/otonom/arsiv/` hariç, bu doğrulamanın kendi dosyaları hariç. Tarama: 2 salt-okuma alt-ajan (grep + satır okuma). "Durum" = 2026-09-27 doğrulama kategorisi (✅ doğrulandı · ⚠️ kısmen · 🔁 sonradan değişti · 👁 insan gözü (kod ✅) · ❌ tutmuyor). "Eşleşme belirsiz" satırları bilgi amaçlıdır.
 
 | Belge:satır | İş | Durum | Eşleşme | Belgedeki ifade |
 |---|---|---|---|---|
@@ -94,3 +94,45 @@ Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`).
 | docs/raporlar/kesif/konsey-icerik-kalitesi-E-arastirma-brifleri-2026-09-23.md:293 | PS-A1 | ⚠️ | tam | PS-A1'e ek madde: payda düzeltmesi + test yazılır (henüz yok) |
 | docs/raporlar/kesif/panel-denetimi-mentor-menti-2026-09-19.md:225 | K-09 | ✅ | belirsiz | 09-DURUM çelişkisi: K-09 CANLIDA ↔ Menti ⬜ (sıradaki) |
 | docs/raporlar/kesif/persona-panel-gelisimi-2026-09-23.md:325 | I-02 | ✅ | tam | Bazı işler merge bekliyor (I-02) |
+| docs/kararlar/00-KART-INDEKSI.md:32 | Y-02 | ✅ | tam | G1-03 / listPendingTenants audit izi / ❓ / md.94 / — / G-kartı |
+| docs/kararlar/00-KART-INDEKSI.md:43 | F-06 | ⚠️ | tam | G1-14 / Kalibrasyon audit ateşle-unut / ❓ / md.98 / F-06 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:52 | F-04 | ⚠️ | tam | G1-23 / logoUrl XSS koruması / ⬜ / — / F-04 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:52 | AJ-05 | ⚠️ | tam | G1-23 / logoUrl XSS koruması / ⬜ / — / F-04 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:57 | K-14 | ⚠️ | belirsiz | G1-28 / Sunucu/altyapı sertleştirme / ⬜ / **madde 120** / K-14 · KARAR-18 / KUYR |
+| docs/kararlar/00-KART-INDEKSI.md:87 | AJ-08 | ⚠️ | tam | G3-09 / Güvenli sertifika seed runner / ⬜ / md.73 / K-16 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:102 | F-10 | ✅ | tam | G4-01 / Havuz KART görünümü rol-bazlı / ⬜ / KARAR-2 / F-10 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:106 | F-23 | ⚠️ | tam | G4-05 / adminSettings zayıf izolasyon / ⬜ / — / F-23 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:109 | F-24 | ✅ | tam | G4-08 / Platform drill-down yok / ⬜ / md.77 / F-24 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:115 | F-25 | ⚠️ | tam | G4-14 / Sistem sağlığı mail-göstergesi / 🟡 / — / F-25 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:117 | AN-39 | ✅ | tam | G4-16 / user-reports sayfalama yok / ⬜ / — / — / G-kartı |
+| docs/kararlar/00-KART-INDEKSI.md:118 | F-26 | ✅ | tam | G4-17 / PLATFORM_ADMIN_EMAIL .env.example / ⬜ / — / F-26 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:123 | F-15 | ⚠️ | tam | G4-22 / Menti "bekleme anı" / ⬜ / Y1 / F-15 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:124 | F-15 | ⚠️ | belirsiz | G4-23 / Umut sinyali / sosyal-kanıt / ⬜ / Y1 / F-15 · P-06 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:125 | F-16 | ✅ | tam | G4-24 / Menti "özgüven aşısı" sunumu / ⬜ / — / F-16 · P-03 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:125 | P-03 | ✅ | tam | G4-24 / Menti "özgüven aşısı" sunumu / ⬜ / — / F-16 · P-03 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:126 | P-05 | 👁 | belirsiz | G4-25 / Reddi yumuşat + kutlama / ⬜ / Y2 / F-17 · P-05 · KARAR-20/22 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:129 | P-14 | 👁 | belirsiz | G4-28 / Mentör "kendi etkim" yuvası / 🟡 / md.78 / P-14 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:131 | F-18 | ✅ | tam | G4-30 / Yönetici rapor EXPORT / ⬜ / Y3 / F-18 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:132 | F-19 | ✅ | tam | G4-31 / Proaktif kırmızı uyarı / 🟡 / Y4 / F-19 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:140 | F-22 | ⚠️ | tam | G4-39 / "Görüşme tamamladım" paylaşım kartı / 🟡 / — / F-22 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:148 | F-20 | ⚠️ | tam | G5-04 / Bekleme salonu bildirim izni / ⬜ / — / F-20 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:150 | P-10 | 👁 | belirsiz | G5-06 / Mentör bildirim ritmi / ⬜ / — / P-10 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:156 | F-27 | 🔁 | tam | G6-01 / N+1 konuşma listesi / ⬜ / md.48 / F-27 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:156 | AJ-06 | ⚠️ | tam | G6-01 / N+1 konuşma listesi / ⬜ / md.48 / F-27 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:160 | F-28 | ⚠️ | tam | G6-05 / Sayfa metni merkezileştirme / ⬜ / md.47/C17 / F-28 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:161 | Y-03 | ⚠️ | belirsiz | G6-06 / Temiz-kod borcu / ⬜ / md.47 / — / G-kartı |
+| docs/kararlar/00-KART-INDEKSI.md:167 | F-21 | 👁 | tam | G7-01 / Ekran-okuyucu düzeltmeleri / ⬜ / md.50 / F-21 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:168 | AJ-07 | ✅ | tam | G7-02 / DISC kontrast (WCAG) / ⬜ / md.64 / F-21 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:169 | F-29 | 🔁 | belirsiz | G7-03 / SEO teknik paketi / ⬜ / md.51-55 / F-29 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:174 | Y-10 | 👁 | belirsiz | G7-08 / Kurumsal sayfalar + JSON-LD / ⬜ / md.57-63 / — / G-kartı |
+| docs/kararlar/00-KART-INDEKSI.md:174 | Y-06 | ⚠️ | belirsiz | G7-08 / Kurumsal sayfalar + JSON-LD / ⬜ / md.57-63 / — / G-kartı |
+| docs/kararlar/00-KART-INDEKSI.md:175 | AJ-07 | ✅ | tam | G7-09 / WCAG 2.1 AA bütünsel / ⬜ / md.64 / F-21 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:185 | K-04 | ✅ | belirsiz | G8-01 / Fotoğraf kalıcı disk (volume) / ⬜ / A22 / K-04 · KARAR-18 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:186 | K-04 | ✅ | belirsiz | G8-02 / Ortam değişkeni teyidi / ⬜ / — / K-04 · KARAR-18 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:197 | F-32 | ✅ | tam | G8-13 / Sekme geçiş yavaşlığı / ❓ / E17/B10 / F-32 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:198 | F-33 | 👁 | tam | G8-14 / Sol-alt kullanıcı kartı / ❓ / B12 / F-33 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:223 | E-1 | ⚠️ | belirsiz | G10-01 / Kesin-ölü kod bloğu / 🟡 / md.44 / K-13 · E-1..E-5 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:223 | E-2 | ✅ | belirsiz | G10-01 / Kesin-ölü kod bloğu / 🟡 / md.44 / K-13 · E-1..E-5 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:244 | F-30 | ✅ | tam | G10-22 / LoginForm "Sprint 14" yorum / ❓ / — / F-30 / KUYRUK |
+| docs/kararlar/00-KART-INDEKSI.md:51 | V-05 | ✅ | belirsiz | G1-22 / k-anonimlik metrik yuvarlama / ⬜ / **madde 119** / — / G-kartı |
+| docs/kararlar/00-KART-INDEKSI.md:54 | GV-06 | ✅ | belirsiz | G1-25 / createMeeting kapsamsız findUnique / ❓ / — / — / G-kartı |
