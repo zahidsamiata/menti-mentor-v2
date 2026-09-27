@@ -15,6 +15,8 @@ const FILES = [
   'src/app/(dashboard)/mentor/page.tsx',
   'src/app/(dashboard)/mentor/availability/page.tsx',
   'src/app/_sections/GameSection.tsx',
+  // AJ-41: yönetici çift engelleme onay metni (E-3d ile "randevu" geri gelmişti).
+  'src/app/(admin)/admin/eslesmeler/BlockPairPanel.tsx',
 ];
 
 function userFacingLines(file: string): string[] {

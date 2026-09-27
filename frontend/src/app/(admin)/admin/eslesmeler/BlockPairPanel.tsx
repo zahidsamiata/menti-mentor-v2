@@ -65,7 +65,7 @@ export function BlockPairPanel() {
     const mentiName = mentis.data?.items.find((u) => u.id === mentiId)?.fullName ?? 'seçilen menti';
 
     const confirmed = window.confirm(
-      `${mentorName} ile ${mentiName} birbirini artık listede göremez, mesajlaşamaz, randevu alamaz. ` +
+      `${mentorName} ile ${mentiName} birbirini artık listede göremez, mesajlaşamaz, görüşme planlayamaz. ` +
         'Bu çifti engellemek istediğinize emin misiniz?',
     );
     if (!confirmed) return;
@@ -91,7 +91,7 @@ export function BlockPairPanel() {
     const b = toName ?? 'ikinci taraf';
     const confirmed = window.confirm(
       `${a} ile ${b} arasındaki engeli kaldırmak istediğinize emin misiniz? ` +
-        'Kaldırıldıktan sonra bu çift birbirini yeniden listede görebilir, mesajlaşabilir, randevu alabilir.',
+        'Kaldırıldıktan sonra bu çift birbirini yeniden listede görebilir, mesajlaşabilir, görüşme planlayabilir.',
     );
     if (!confirmed) return;
 
