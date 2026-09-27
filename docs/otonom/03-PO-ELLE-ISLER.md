@@ -103,6 +103,22 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 
 ---
 
+## KABUL TESTİ LİSTESİ (2026-09-27)
+> Kaynak: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` — kodu doğrulanmış ama davranışı yalnız canlıda bir insanın görebileceği 12 iş (👁). R1 (yetki/KVKK/eşleştirme) kaynaklı 👁 iş YOK; sıra: önce KVKK etkili olanlar. Her madde: **kim olarak gir → ne yap → ne görmelisin**. Sonucu maddenin sonuna ✅/❌ + tarih olarak yazman yeterli.
+
+1. **GV-09b** · Dokploy yöneticisi olarak → canlı uygulamanın veritabanı adresinin hangi sunucuyu gösterdiğine bak (bu belgedeki ADIM 0) → sonra sitede /kvkk sayfasını aç → sayfadaki "verinin tutulduğu ülke" cümlesi gerçek sunucunun ülkesiyle aynı olmalı.
+2. **V-08** · Dokploy yöneticisi olarak → uygulamanın ayarlarında sunucu adresi (BACKEND_URL) dolu mu bak → sonra sistemden gelen herhangi bir e-postadaki "abonelikten çık" bağlantısına tıkla → bağlantı sivilkapasite.org alan adında açılmalı, "localhost" olmamalı · test kurumu gerekir (🔵 kart bekliyor).
+3. **KR-16** · Dokploy yöneticisi olarak → uygulamanın başlatma komutu alanına bak → komutta "npx" geçmemeli (boş ya da yalnız uygulamanın kendi başlatma komutu olmalı).
+4. **P-10** · Menti olarak gir → bir mentörden görüşme talep et → mentörün e-posta kutusuna "yeni görüşme talebi" e-postası gelmeli · test kurumu gerekir (🔵 kart bekliyor).
+5. **P-05** · Mentör olarak gir → bir görüşme talebini reddet → mentinin e-posta kutusuna nazik bir ret e-postası gelmeli; menti ekranında kırmızı "İptal" yerine yumuşak bir etiket görmeli (uygulama içi çan bildirimi henüz yok) · test kurumu gerekir (🔵 kart bekliyor).
+6. **AN-09** · Giriş yapmadan sitede "bildir" sayfasını aç → bir şüphe bildirimi gönder → platform yöneticisi e-posta kutusuna bildirim e-postası gelmeli.
+7. **IC-09** · Kurum yöneticisi olarak gir → onay bekleyen bir üyeye "düzeltme iste" notu gönder → üyenin e-postasındaki metin suçlayıcı değil, nazik ve yol gösterici olmalı · test kurumu gerekir (🔵 kart bekliyor).
+8. **P-14** · Mentör olarak gir (en az bir görüşmesi olan) → paneli aç → emeğini anlatan bir teşekkür cümlesi görmelisin; "İlk mentin eşleştiğinde…" cümlesi yalnız hiç mentisi olmayan mentörde çıkmalı · test kurumu gerekir (🔵 kart bekliyor).
+9. **F-33** · Menti ya da mentör olarak gir → paneli aç → sol altta kendi adın ve rolün olan küçük kart görünmeli; sayfa içeriğinin üstüne binmemeli (telefonda da dene) · test kurumu gerekir (🔵 kart bekliyor).
+10. **F-21** · Giriş yapmadan giriş sayfasını aç → yalnız klavye (Tab/Enter) ile formu doldurup gönder; telefonda ekran okuyucuyu (VoiceOver/TalkBack) açıp alanların adlarının okunduğunu dinle → her alanın adı okunmalı, odak kaybolmamalı.
+11. **Y-09** · Tarayıcıda siteyi aç → sekmedeki küçük simge MentiMentor simgesi olmalı; site bağlantısını WhatsApp/LinkedIn'e yapıştır → önizlemede görsel ve başlık çıkmalı (önizleme görseli sivilkapasite.org adresinden gelmeli).
+12. **Y-10** · Google "Zengin Sonuç Testi" sayfasına sivilkapasite.org adresini gir → kuruluş/site bilgisi hatasız okunmalı; adreslerde "localhost" geçmemeli.
+
 ## D — CANLI GÖZLEM TESTLERİ (kod hazır, gerçek hesapla ekran doğrulaması gerekir)
 
 > Kaynak: `09-DURUM.md:439,441` · kartlar `G8-altyapi-po-manuel.md:48-70` (G8-03 · G8-04, ikisi ⬜, "[x] işleme al" PO işaretli) · `01-KARARLAR.md` KARAR-18 · `00-CIKIS-PLANI.md:75` (K4).
