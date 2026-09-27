@@ -239,7 +239,7 @@ export default function MentiDashboardPage() {
               🗓️ {waitingWeeklyLimitText}
             </p>
           )}
-          {/* F-20: onay/eşleşme olunca haberdar olmak için tarayıcı bildirim izni istemi */}
+          {/* F-20: tarayıcı bildirim izni istemi (AJ-39: bugün bildirim gönderilmiyor, metin vaat etmez) */}
           <NotificationOptInButton />
         </div>
       )}

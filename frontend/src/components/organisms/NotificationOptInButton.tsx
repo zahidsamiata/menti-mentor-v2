@@ -8,10 +8,22 @@
  * kod tabanında 0 kullanım). Bu bileşen yalnız izin "default" iken bir düğme gösterir;
  * verilmiş/reddedilmiş durumda düğme yerine kısa bir durum metni gösterir. Tarayıcı
  * Notification API'sini desteklemiyorsa (veya SSR) hiçbir şey render etmez.
+ *
+ * AJ-39 — METİN GERÇEĞE UYDURULDU: uygulama bugün hiçbir tarayıcı bildirimi GÖNDERMİYOR
+ * (`new Notification` / push / service worker kullanımı yok). Eski "önemli bir gelişme olduğunda
+ * haber vereceğiz" metni karşılıksız bir vaatti. Gerçek bildirim gönderimi eklenmesi ürün kararıdır;
+ * o karar verilene kadar metinler vaat içermez. Bildirim gönderimi eklenirse bu metinler güncellenir.
  */
 
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+
+/** Bu bileşene özgü kullanıcı metinleri (tek kullanım → UI_TEXT sözlüğüne girmez). */
+export const NOTIFICATION_OPT_IN_TEXT = {
+  button: '🔔 Bildirimlere izin ver',
+  granted: '🔔 Tarayıcı bildirim izni verildi. Gelişmeleri şimdilik bu panelden takip edebilirsin.',
+  denied: 'Bildirim izni verilmedi. Gelişmeleri bu panelden takip edebilirsin.',
+} as const;
 
 export type BrowserNotificationPermission = 'default' | 'granted' | 'denied' | 'unsupported';
 
@@ -30,9 +42,9 @@ export function notificationPromptView(
     case 'default':
       return { showButton: true, statusText: null };
     case 'granted':
-      return { showButton: false, statusText: '🔔 Bildirimler açık — önemli bir gelişme olduğunda haber vereceğiz.' };
+      return { showButton: false, statusText: NOTIFICATION_OPT_IN_TEXT.granted };
     case 'denied':
-      return { showButton: false, statusText: 'Bildirimler kapalı. Dilersen tarayıcı ayarlarından açabilirsin.' };
+      return { showButton: false, statusText: NOTIFICATION_OPT_IN_TEXT.denied };
     case 'unsupported':
     default:
       return { showButton: false, statusText: null };
@@ -67,7 +79,7 @@ export function NotificationOptInButton() {
   if (view.showButton) {
     return (
       <Button size="sm" variant="outline" onClick={handleClick}>
-        🔔 Bildirimlere izin ver
+        {NOTIFICATION_OPT_IN_TEXT.button}
       </Button>
     );
   }
