@@ -226,6 +226,7 @@ export default function TenantDetailPage() {
               <div className="pt-6">
                 {tab === 'members' && (
                   <MembersTable
+                    tenantId={id}
                     members={members}
                     loading={membersLoading || !membersLoaded}
                     roleFilter={roleFilter}

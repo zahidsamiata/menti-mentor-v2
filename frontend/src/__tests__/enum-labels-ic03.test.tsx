@@ -133,7 +133,7 @@ describe('Platform kurum detayı — üye ve görüşme tabloları', () => {
 
   it('sertifika durumu Türkçe, "Journey" başlığı Türkçe', () => {
     render(
-      <MembersTable members={[member('COOLDOWN')]} loading={false} roleFilter="ALL" onRoleFilterChange={() => {}} />,
+      <MembersTable tenantId="t1" members={[member('COOLDOWN')]} loading={false} roleFilter="ALL" onRoleFilterChange={() => {}} />,
     );
     expect(screen.getByText('Bekleme')).toBeInTheDocument();
     expect(screen.queryByText('COOLDOWN')).not.toBeInTheDocument();
@@ -143,7 +143,7 @@ describe('Platform kurum detayı — üye ve görüşme tabloları', () => {
 
   it('bilinmeyen sertifika durumu ham değerle görünür (boş kalmaz)', () => {
     render(
-      <MembersTable members={[member('NEW_STATE')]} loading={false} roleFilter="ALL" onRoleFilterChange={() => {}} />,
+      <MembersTable tenantId="t1" members={[member('NEW_STATE')]} loading={false} roleFilter="ALL" onRoleFilterChange={() => {}} />,
     );
     expect(screen.getByText('NEW_STATE')).toBeInTheDocument();
   });
