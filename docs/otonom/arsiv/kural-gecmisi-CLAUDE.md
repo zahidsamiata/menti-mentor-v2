@@ -152,3 +152,10 @@ Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyal
   `/reset-password` · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
   (Kanıt: `authRoutes.ts:21-56` · `platformRoutes.ts:34-35` · `invitationRoutes.ts:13` ·
 ```
+
+## Güvenlik Kuralları · KASITLI public uç listesi (devam) · eski satır 408, 410 · taşındı 2026-09-27 (AJ-27 7b: rate-limit kapsamı + kayan kanıt satırları)
+
+```text
+  Hepsi rate-limitli. **Bunun DIŞINDA public endpoint YOK** — yeni public uç eklenirse buraya eklenir.
+  `selfServeRoutes.ts:23-38` · `suspicionRoutes.ts:9` · `server.ts:60,71`.)
+```
