@@ -132,3 +132,10 @@ PO (ürün sahibi) kod yazmaz ve her adımda onay veremez. *(⚠️ GÜNCELLEME 
 - KASITLI public olan endpoint'ler (⚠️ GÜNCELLEME 2026-09-21, V-09 — kod-teyitli tam liste;
   eski liste 10 ucu atlıyordu → denetimlerde yanlış "fazlalık" alarmı doğuruyordu):
 ```
+
+## PO KARARLARI 2026-09-26 (5c atfı eklenmeden önce) · taşındı 2026-09-27
+
+```text
+Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
+```
+

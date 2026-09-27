@@ -47,6 +47,10 @@ printf '### KARAR-2 · soru\n> ✅ **İŞLENDİ (2026-09-26):** kuyruğa işlend
 expect 1 "01-KARARLAR'da İŞLENDİ notlu kart → kırmızı"
 
 setup_clean
+printf '### KARAR-3 · soru\n> ✅ **ISLENDI (2026-09-26):** ascii yazım\n**CEVAP:** B\n' >>"$TMP/root/docs/otonom/01-KARARLAR.md"
+expect 1 "01-KARARLAR'da ASCII ISLENDI notlu kart → kırmızı"
+
+setup_clean
 echo '~~[ESKİ · 2026-09-25] eski kural~~' >>"$TMP/root/docs/otonom/OTONOM-PROMPT.txt"
 expect 1 "OTONOM-PROMPT'ta kod dışı ~~[ESKİ katmanı → kırmızı"
 

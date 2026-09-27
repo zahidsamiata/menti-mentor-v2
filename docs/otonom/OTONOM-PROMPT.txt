@@ -73,10 +73,12 @@ kayboluyorsa BITER. "Backend hazir" · "bilesen yazildi ama mount edilmedi" ·
 ═══════════════════════════════════════════════════════════════
 2.1 KAPANIS KOSULU
     Turu YALNIZ su sart saglanirsa kapat (PO 2026-09-25):
-      BEKLIYOR durumunda 🟢 ya da 🟡 is kalmadi; kalanlar yalniz 🔴 veya sebebi yazili BASARISIZ.
+      BEKLIYOR durumunda 🟢, 🔵 ya da 🟡 is kalmadi (🔵 isler PR + EVET karti ile PR-ACIK'a,
+      🟡 isler kod kismi yapilip PO kismi 03-PO-ELLE-ISLER'e yazilarak cikar);
+      kalanlar yalniz 🔴 veya sebebi yazili BASARISIZ.
     ⛔ Bir tane bile 🟢 BEKLIYOR is varsa TURU KAPATMA, sonraki ise gec.
-    ⛔ 🟢 bitti ama 🟡'ler hic islenmediyse TURU KAPATMA — Bolum 4 adim 5'e gec.
-    Her is bitiminde kalan 🟢 ve PR'siz 🟡 sayisini say ve 02-ILERLEME'ye yaz.
+    ⛔ 🟢 bitti ama 🔵/🟡'ler hic islenmediyse TURU KAPATMA — Bolum 4 adim 5'e gec.
+    Her is bitiminde kalan 🟢 ve PR'siz 🔵/🟡 sayisini say ve 02-ILERLEME'ye yaz.
 
 2.1b DURUM KODLARI  (baskasi YASAK)
     BEKLIYOR · CALISILIYOR · PR-ACIK · BITTI · ATLANDI(karar) · BASARISIZ · IPTAL(PO)
@@ -427,7 +429,7 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
      BASARISIZ: n — sebepleriyle
      CANLIDA KONTROL EDILECEKLER: kisa liste
      PO'NUN KENDI YAPMASI GEREKENLER: 03-PO-ELLE-ISLER.md atfi + en kritik 3'u
-     KUYRUK SON DAGILIMI: 🟢 / 🟡 / 🔴
+     KUYRUK SON DAGILIMI: 🟢 / 🔵 / 🟡 / 🔴
      BACKEND: pointer eski → yeni + esitlik teyidi
      STASH: `git stash list` bossa "yok", doluysa icerigi
 

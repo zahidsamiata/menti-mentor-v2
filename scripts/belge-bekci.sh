@@ -46,7 +46,7 @@ if kuyruk is not None:
 kararlar = read('docs/otonom/01-KARARLAR.md')
 if kararlar is not None:
     for card in re.split(r'(?m)^(?=### KARAR-)', kararlar)[1:]:
-        if 'İŞLENDİ' in card:
+        if re.search(r'İŞLENDİ|\bISLENDI\b', card):
             errors.append(f'01-KARARLAR.md {card.split(chr(10), 1)[0][:60]} "İŞLENDİ" notlu kart aktif dosyada → arsiv/01-KARARLAR-cevaplanmis.md (5c-c)')
 
 for rel in ('CLAUDE.md', 'docs/otonom/OTONOM-PROMPT.txt'):

@@ -177,3 +177,31 @@ Y5 · 09-DURUM.md basina guncel tarihli bolum (yalniz ekleme).
 ```text
 ── K8 · VPS ORTAMI (GÜNCELLEME 2026-09-26, PO) ──
 ```
+
+## 2.1 KAPANIS KOSULU (🔵'siz metin) · taşındı 2026-09-27 (7b inceleme bulgusu: 4 renk notu kaldırılınca 🔵 eklendi)
+
+```text
+      BEKLIYOR durumunda 🟢 ya da 🟡 is kalmadi; kalanlar yalniz 🔴 veya sebebi yazili BASARISIZ.
+    ⛔ Bir tane bile 🟢 BEKLIYOR is varsa TURU KAPATMA, sonraki ise gec.
+    ⛔ 🟢 bitti ama 🟡'ler hic islenmediyse TURU KAPATMA — Bolum 4 adim 5'e gec.
+    Her is bitiminde kalan 🟢 ve PR'siz 🟡 sayisini say ve 02-ILERLEME'ye yaz.
+```
+
+## 13.3 dağılım satırı · taşındı 2026-09-27
+
+```text
+     KUYRUK SON DAGILIMI: 🟢 / 🟡 / 🔴
+```
+
+## 5 DONGU · i) (5c atfı eklenmeden önce) · taşındı 2026-09-27
+
+```text
+i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>")
+```
+
+## 5b K-A (tırnak → ters tırnak; bekçi kod-içi kuralı) · taşındı 2026-09-27
+
+```text
+    02-ILERLEME · 03-PO-ELLE-ISLER · 00-BELGE-HARITASI) eski metin "~~[ESKI]~~ + GUNCELLEME" katmani
+```
+
