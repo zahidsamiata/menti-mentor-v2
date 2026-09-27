@@ -7,7 +7,7 @@
 
 **Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
 
-**Şu an yapılan:** GÖREV A MERGE (#378 → `c648ed2`, CI 10/10, 7b ONAY). GÖREV B başladı — dal `otonom/BELGE-SENKRON-20260927`; 148 KAPAT + 59 KISMEN işin belge yerleri taranıyor (B1-B4 yaşayan belgeler · F1-F2 dondurulmuş eşleme). Belge değişikliği henüz yok.
+**Şu an yapılan:** GÖREV B PR-AÇIK — çatı #379 (9 yaşayan belgede 66 satır işaretlendi: ✅/🟨; eski metin `docs/arsiv/belge-senkron-2026-09-27.md`; dondurulmuş eşleme 87 satır; teyit 80; B.8 68/68). 7b inceleme + CI bekleniyor. Sonra GÖREV C (kural h + bekçi UYARI).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -52,6 +52,7 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
+| çatı #379 | GÖREV B — belge kapanış senkronu | bekliyor | bekliyor | 7b + CI |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
 | backend #157 + çatı #337 | AN-26 hatırlatma/eskalasyon · 🔵 | yeşil | ✅ ONAY | KARAR-98 EVET (+ alt soru) + `Conversation` yedeği |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 | yeşil | ✅ ONAY | KARAR-97 EVET + `Conversation` yedeği |

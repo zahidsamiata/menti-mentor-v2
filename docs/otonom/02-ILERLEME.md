@@ -1060,3 +1060,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **GÖREV A partiler tamam** — 11 parti, 209 birim (✅ 169 · ⚠️ 27 · 🔁 7 · 👁 6 · ❌ 0); kalite kontrolü (4 opus denetçi) başladı. Not: parti 06 ve 08 ajanları kendi içinde 4'er alt-ajan açtı (3 paralel sınırı aşıldı; 09'dan itibaren yasaklandı).
 - 2026-09-27 · **GÖREV A PR-AÇIK** — çatı #378. 209 birim; tamamı opus kalite kontrolü (162 TUTAR / 47 ÇÜRÜDÜ); nihai ✅ 127 · ⚠️ 56 · ❌ 1 · 🔁 13 · 👁 12. GÜVENLİK BULGUSU U-08 kalanı → AJ-20; KVKK yan bulgu → AJ-21. 29 AJ satırı (bu oturumda yapılmaz).
 - 2026-09-27 · **GÖREV A MERGE** — çatı #378 (`c648ed2`), 7b ONAY + CI 10/10. GÖREV B başladı (dal `otonom/BELGE-SENKRON-20260927`).
+- 2026-09-27 · **GÖREV B PR-AÇIK** — çatı #379: 66 satır / 9 belge (✅ + 🟨), B.4 ilk satırlar + 09-DURUM 2026-09-27 bölümü, dondurulmuş eşleme 87 satır / 15 belge, teyit 80, B.8 silinen 68 → arşivde 68.
