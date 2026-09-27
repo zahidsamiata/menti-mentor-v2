@@ -1,11 +1,13 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 13:45 UTC · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
+> ⛔ **GÜVENLİK BULGUSU (2026-09-27, BITTI doğrulaması — U-08 ⚠️, kalite kontrolü QB):** `POST /api/scoring/rank-mentors` onay kapısı yok — `backend/src/routes/sjtScoringRoutes.ts:25-29` yalnız `requireAuth()`; komşu uç `backend/src/controllers/matchingController.ts:74` `rejectIfCallerNotApproved` uyguluyor. Onay bekleyen/reddedilen menti mentör kimlik no + uyum skoru alabiliyor (ad dönmüyor). Bu oturumda DÜZELTME YOK → AJ satırı (sonraki tur).
 
-**Durum:** DURDU (K1-a) — kuyrukta hemen yapılabilir 🟢 yok; kalanlar karar / PO eli / 🔵 EVET bekliyor. Gerekçe ve liste: `02-ILERLEME.md` başındaki 2026-09-27 TUR ÖZETİ.
+**Son güncelleme:** 2026-09-27 · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
 
-**Şu an yapılan:** yok — PO cevapları (🔵 KARAR-106/107/111 ve 96-99; ⭐ KARAR-101) gelince devam. Sonraki tur: 🔵 merge'ler (yedekle) + hazırlanabilir 🔵 adaylar (AN-27 · P-08 · I-08 · E-4).
+**Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
+
+**Şu an yapılan:** GÖREV A — 11 parti TAMAM (209 birim: ✅ 169 · ⚠️ 27 · 🔁 7 · 👁 6 · ❌ 0 · ❓ 0 — kalite kontrol öncesi). Kalite kontrolü sürüyor: QA (40 ✅-dışı) · QB/QC (51 R1 ✅) · QD (24 R2/R3 ✅ örneklem, sırada). Parti dosyaları push edildi: dal `otonom/BITTI-DOGRULAMA-20260927` @ `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/`. Sonra: rapor + AJ satırları + kabul listesi → PR → 7b → merge → GÖREV B.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
