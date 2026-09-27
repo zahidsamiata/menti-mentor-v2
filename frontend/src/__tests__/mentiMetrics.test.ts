@@ -62,5 +62,21 @@ describe('mentiMetrics — K-09 gerçek metrik türetme', () => {
     it('hiç talep yoksa 0', () => {
       expect(countSentRequests([], new Set())).toBe(0);
     });
+
+    // AJ-42: konuşma listesi 30 kayıtla sayfalı; sayaç yanıttaki total'dan okunmalı.
+    const firstPage = Array.from({ length: 30 }, (_, i) => `mentor-${i + 1}`);
+
+    it('35 talep, ilk sayfada 30 konuşma yüklü → sayaç 35 (30 değerinde takılmaz)', () => {
+      expect(countSentRequests(firstPage, new Set(), 35)).toBe(35);
+    });
+
+    it('liste kırpılmışken oturum-içi yeni gönderilen eklenir, yüklenen sayfadaki tekrar sayılmaz', () => {
+      // mentor-1 ilk sayfada zaten var → tekrar sayılmaz; mentor-new yalnız oturumda → +1.
+      expect(countSentRequests(firstPage, new Set(['mentor-1', 'mentor-new']), 35)).toBe(36);
+    });
+
+    it('liste tamamsa (total = yüklenen) mükerrer birleştirme korunur', () => {
+      expect(countSentRequests(['m1', 'm2'], new Set(['m1', 'm3']), 2)).toBe(3);
+    });
   });
 });
