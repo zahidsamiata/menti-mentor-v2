@@ -1,15 +1,16 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 04:12 UTC · çatı main HEAD `f220bbe` · backend main HEAD `f4f624a` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 04:55 UTC · çatı main HEAD `ab42a29` · backend main HEAD `f4f624a` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** GÖREV 0 ✅ (#354). GÖREV 1 dalı `otonom/BELGE-AKTIF-ARSIV-20260926`: 6/7 commit hazır (kuyruk · kararlar · ilerleme · CLAUDE/PROMPT · kural 5c · bekçi); 03-PO + BELGE-HARİTASI alt ajanda → sonra PR + 7b. GÖREV 2 doğrulama taraması 2 salt-okuma alt ajanda. ⚠️ Kuyruk/ILERLEME güncellemeleri GÖREV 1 merge'ünü bekliyor (P-05 BITTI kaydı dahil).
+**Şu an yapılan:** GÖREV 0 ✅ (#354) · GÖREV 1 ✅ (#355, 7b 2. tur ONAY) · GÖREV 2: satır PR'ı #356 (CI yeşil, merge reddedildi → bağımsız inceleme sürüyor) · GÖREV 3: AJ-02 backend #172 (7b inceleme sürüyor).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #355 | GÖREV 1 — belge aktif/arşiv ayrımı + kural 5c + bekçi (YN-01/YN-14 kapandı) | docs · CI 5/5 |
 | backend #162 + çatı #340 | P-05 (reddedilen görüşmede menti'ye nazik bildirim) — kapı 🟢 (PO 0.2) | ok:true, db:up, site 200 (uptime 455 sn — dağıtım teyidi bir sonraki kontrolde) |
 | çatı #354 | GÖREV 0 — PO kararları K-A/K-B/K-C + kapı düzeltmeleri | docs |
 | backend #171 + çatı #353 | AN-07 (aday kesmesi skordan sonra) | ok:true, db:up, site 200 |
@@ -39,6 +40,7 @@
 **Push edilmemiş iş:** yok.
 
 **Engeller:**
+- ⛔ 2026-09-27 04:50 UTC — `gh pr merge 356 --merge` (GÖREV 2 belge PR'ı, CI yeşil) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` → bağımsız inceleme başlatıldı; ardışık ret: 1.
 - ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` (Ardışık ret sayısı sıfırlandı; sonraki merge'ler geçti.)
 - 🗄️ Tek seferlik DB erişimi gerekiyor: **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
 
