@@ -1,0 +1,4 @@
+# belge-bekci.sh kural (h) istisnaları — "BITTI işin kaynağı açık" UYARISI bu satırlar için verilmez.
+# Biçim: <iş> madde <N> # <gerekçe>   (gerekçesiz satır yok sayılır ve UYARI üretir)
+# Kaynak: docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md § GÖREV B · B.5 TEYİT listesi.
+I-02 madde 141 # madde 141 "ERTELENDİ" notu ve belirsiz PO ek önlemleri taşıyor; I-02 yalnız kart sırasını düzeltti — madde işten geniş, TEYİT (00-KARAR-TAKIP.md:311, 2026-09-27)
