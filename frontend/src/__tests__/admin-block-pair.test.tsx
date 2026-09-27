@@ -103,7 +103,7 @@ describe('Çifti Engelle paneli (E-3d)', () => {
     await waitFor(() =>
       expect(blockPairSpy).toHaveBeenCalledWith(expect.anything(), 'tenant-1', 'mentor-1', 'menti-1'),
     );
-    expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining('birbirini artık listede göremez, mesajlaşamaz, randevu alamaz'));
+    expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining('birbirini artık listede göremez, mesajlaşamaz, görüşme planlayamaz'));
   });
 
   it('onay penceresi reddedilirse istek gönderilmez', async () => {
@@ -173,7 +173,7 @@ describe('Çifti Engelle paneli (E-3d)', () => {
       expect(unblockPairSpy).toHaveBeenCalledWith(expect.anything(), 'tenant-1', 'menti-1::mentor-1'),
     );
     expect(window.confirm).toHaveBeenCalledWith(
-      expect.stringContaining('bu çift birbirini yeniden listede görebilir, mesajlaşabilir, randevu alabilir'),
+      expect.stringContaining('bu çift birbirini yeniden listede görebilir, mesajlaşabilir, görüşme planlayabilir'),
     );
     await waitFor(() => expect(blockedRefetchSpy).toHaveBeenCalled());
   });

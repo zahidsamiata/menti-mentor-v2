@@ -150,7 +150,7 @@ export function TenantCorrectionBanner() {
               disabled={saving}
               className="rounded-lg border border-amber-300 dark:border-amber-800 px-3 py-1.5 text-sm text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors"
             >
-              Vazgeç
+              {UI_TEXT.actions.cancel}
             </button>
           </div>
         </div>

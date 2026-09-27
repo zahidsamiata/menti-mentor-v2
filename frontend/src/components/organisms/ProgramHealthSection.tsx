@@ -19,6 +19,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { cn } from '@/lib/utils';
 import type { HealthMetricsData, NudgeKind } from '@/types/admin';
 import { UI_TEXT } from '@/lib/uiText';
+import { roleLabel } from '@/lib/enumLabels';
 
 type MetricKey = 'mentorless' | 'dead' | 'passive';
 
@@ -152,7 +153,7 @@ export function ProgramHealthSection() {
                         <UserAvatar src={m.avatarUrl} name={m.fullName} size={32} className="text-xs" />
                         <div className="min-w-0">
                           <p className="truncate text-sm font-medium">{m.fullName}</p>
-                          <p className="text-xs text-muted-foreground">{m.role} · son giriş: {daysSince(m.lastLoginAt)}</p>
+                          <p className="text-xs text-muted-foreground">{roleLabel(m.role)} · son giriş: {daysSince(m.lastLoginAt)}</p>
                         </div>
                       </div>
                       <NudgeButton

@@ -7,6 +7,8 @@
  *   2. Sözlüğe bağlanan bileşenler aynı metni göstermeye devam eder (bağlama ekranda hiçbir harfi
  *      değiştirmemeli).
  */
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join, relative } from 'node:path';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { UI_TEXT } from '@/lib/uiText';
@@ -77,5 +79,38 @@ describe('Sözlüğe bağlanan bileşenler metni değiştirmedi', () => {
     );
     expect(screen.getByText('Gönderiliyor…')).toBeInTheDocument();
     expect(screen.getByText('Vazgeç')).toBeInTheDocument();
+  });
+});
+
+/**
+ * AJ-41 (F-28 kalıntısı) — "Vazgeç" düğme metni kaynakta satır içi yazılmaz; `UI_TEXT.actions.cancel`
+ * kullanılır. Sözlük dosyası ve testler hariç tüm `src/` taranır; yorum satırları sayılmaz.
+ */
+const SRC_ROOT = join(process.cwd(), 'src');
+const DICTIONARY_FILE = join(SRC_ROOT, 'lib', 'uiText.ts');
+
+function sourceFiles(dir: string): string[] {
+  return readdirSync(dir).flatMap((name) => {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) return name === '__tests__' ? [] : sourceFiles(full);
+    return /\.(ts|tsx)$/.test(name) && !/\.test\.tsx?$/.test(name) ? [full] : [];
+  });
+}
+
+function isCommentLine(line: string): boolean {
+  const t = line.trim();
+  return t.startsWith('//') || t.startsWith('*') || t.startsWith('/*') || t.startsWith('{/*');
+}
+
+describe('AJ-41 · satır içi "Vazgeç" kalıntısı yok', () => {
+  it('src/ altında sözlük dışında "Vazgeç" metni geçmiyor', () => {
+    const offenders: string[] = [];
+    for (const file of sourceFiles(SRC_ROOT)) {
+      if (file === DICTIONARY_FILE) continue;
+      readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
+        if (!isCommentLine(line) && line.includes('Vazgeç')) offenders.push(`${relative(SRC_ROOT, file)}:${i + 1}`);
+      });
+    }
+    expect(offenders).toEqual([]);
   });
 });
