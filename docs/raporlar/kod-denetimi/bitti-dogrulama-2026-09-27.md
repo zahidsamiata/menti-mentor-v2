@@ -432,12 +432,12 @@ Kural: `docs/` altında (`docs/arsiv/`, `docs/otonom/arsiv/` hariç) ilk 5 satı
 **Yaşayan ama B'de düzenlenmeyenler (gerekçe):** `docs/otonom/01-KARARLAR.md` (PO kararı — dokunma yasağı) · `docs/otonom/00-SIMDI.md`, `docs/otonom/02-ILERLEME.md`, `docs/devir/07-oturum-gunlugu.md` (günlük/anlık kayıt; geçmiş olay metni kapatılmaz) · `docs/otonom/00-KUYRUK.md` (BITTI kaydının kendisi; aktif satırlar BITTI değil) · `docs/kararlar/konu/kvkk-metinleri/*` (hukuki metin, iş durumu taşımaz) · `docs/kararlar/konu/belge-duzeni-rehberi.md`, `rtk-komut-rehberi.md` (kural/rehber). Taranan yaşayan hedef: 32 belge.
 
 ### B.1-B.2 — yaşayan belgelerde kapanan yerler
-Tarama: 4 opus salt-okuma alt-ajan (iş kimliği + kuyruk satırındaki atıflar + ayırt edici ifadeler; grep + satır okuma). Uygulama betiği yalnız doğrulama sınıfı KAPAT (✅ 127 + güncel hâli ölçütü karşılayan 🔁 10 + kod ✅ 👁 11 = 148 iş) ve KISMEN (⚠️ 56 + kısmen 🔁 3 = 59 iş) kayıtlarını uyguladı. İşaret biçimi: `✅ yapıldı — <iş> · PR <no> · <tarih> · doğrulama: bitti-dogrulama-2026-09-27` · `🟨 kısmen — <iş>; kalan: <…> → AJ-<no>`. ❌ P-07 ve 👁 GV-09b'ye dokunulmadı. 7b inceleme (#379) düzeltmeleri: KART-INDEKSI geri alındı (dondurulmuş) · `00-KARAR-TAKIP.md:572` ve `:750` hücre içi kısmi değiştirme yerine satır sonuna not (metin kaybı giderildi) · `kod-kalemleri-2026-09-03.md:30` (madde 141) teyite alındı (KARAR-TAKIP:311 ile tutarlı) · `03-PO-ELLE-ISLER.md:231` "Kılavuz ✅ yapıldı — AN-32" (görüşmenin kendisi açık kalır) · eksik PR/tarihler dolduruldu.
+Tarama: 4 opus salt-okuma alt-ajan (iş kimliği + kuyruk satırındaki atıflar + ayırt edici ifadeler; grep + satır okuma). Uygulama betiği yalnız doğrulama sınıfı KAPAT (✅ 127 + güncel hâli ölçütü karşılayan 🔁 10 + kod ✅ 👁 11 = 148 iş) ve KISMEN (⚠️ 56 + kısmen 🔁 3 = 59 iş) kayıtlarını uyguladı. İşaret biçimi: `✅ yapıldı — <iş> · PR <no> · <tarih> · doğrulama: bitti-dogrulama-2026-09-27` · `🟨 kısmen — <iş>; kalan: <…> → AJ-<no>`. Yerleşim: durum hücresi yalnız salt işaretse (⬜ · 🔵 · 🔴 · 🟡 · ⬜ AÇIK · ⬜ BEKLİYOR) işaretin yerine yazılır; açıklayıcı metin taşıyan hücre/satırda metin KORUNUR, not hemen yanına eklenir (7b #379 bulguları: metin kaybı olmasın). ❌ P-07 ve 👁 GV-09b'ye dokunulmadı. 7b düzeltmeleri: KART-INDEKSI geri alındı (dondurulmuş) · `kod-kalemleri-2026-09-03.md:30` (madde 141) teyite alındı (KARAR-TAKIP:311 ile tutarlı) · eksik PR/tarihler dolduruldu.
 
 | Belge | Değişen satır | ✅ işaret | 🟨 işaret | "⬜/AÇIK/bekliyor/PR'DA" geçen satır: önce → sonra |
 |---|---|---|---|---|
-| `docs/kararlar/00-KARAR-TAKIP.md` | 23 | 16 | 8 | 154 → 151 |
-| `docs/kararlar/09-DURUM.md` | 1 | 1 | 0 | 23 → 23 |
+| `docs/kararlar/00-KARAR-TAKIP.md` | 23 | 16 | 8 | 154 → 153 |
+| `docs/kararlar/09-DURUM.md` | 1 | 1 | 0 | 23 → 24 |
 | `docs/kararlar/konu/06-tasarim-ux.md` | 1 | 1 | 0 | 5 → 5 |
 | `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md` | 1 | 1 | 0 | 48 → 47 |
 | `docs/kararlar/konu/tasarim-kararlari-admin.md` | 1 | 1 | 0 | 10 → 10 |
@@ -446,7 +446,7 @@ Tarama: 4 opus salt-okuma alt-ajan (iş kimliği + kuyruk satırındaki atıflar
 | `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md` | 5 | 5 | 0 | 0 → 0 |
 | **Toplam** | **40** | **31** | **10** | |
 
-Not: "önce → sonra" sütunu bu kelimelerden biri geçen satır sayısıdır (kaba ölçü); satırlar birden çok madde taşıyabildiği ve işaret satır sonuna eklendiğinde eski durum kelimesi satırda kaldığı için düşüş, işaretlenen yer sayısından azdır. Eski metinler: `docs/arsiv/belge-senkron-2026-09-27.md`.
+Not: "önce → sonra" sütunu bu kelimelerden biri geçen satır sayısıdır (kaba ölçü); açıklayıcı durum metni korunduğu için düşüş, işaretlenen yer sayısından azdır. Eski metinler: `docs/arsiv/belge-senkron-2026-09-27.md`.
 
 ### B.3 — dondurulmuş belge eşlemesi
 `docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` — **129 satır, 16 belge** (2 sonnet salt-okuma alt-ajan + KART-INDEKSI'nden taşınan 42 kayıt). Dondurulmuş belgelerde değişiklik YOK.
