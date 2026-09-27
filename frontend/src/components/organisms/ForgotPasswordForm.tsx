@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { TurnstileWidget } from '@/components/molecules/TurnstileWidget';
 import { useFormState } from '@/hooks/useFormState';
 import { forgotPasswordSchema, type ForgotPasswordFormValues } from '@/lib/validation';
 import { authApi } from '@/lib/api/auth';
@@ -23,9 +24,11 @@ const INITIAL: ForgotPasswordFormValues = { email: '' };
 export function ForgotPasswordForm() {
   const form = useFormState(forgotPasswordSchema, INITIAL);
   const [sent, setSent] = useState(false);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
 
   const onSubmit = async (values: ForgotPasswordFormValues) => {
-    const result = await authApi.forgotPassword(values.email);
+    const result = await authApi.forgotPassword(values.email, captchaToken);
     if (result.ok) {
       setSent(true);
     } else {
@@ -62,6 +65,8 @@ export function ForgotPasswordForm() {
         error={form.errors.email}
         disabled={form.isSubmitting}
       />
+
+      <TurnstileWidget onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
 
       <Button type="submit" className="w-full" disabled={form.isSubmitting}>
         {form.isSubmitting ? UI_TEXT.status.sending : 'Sıfırlama Bağlantısı Gönder'}

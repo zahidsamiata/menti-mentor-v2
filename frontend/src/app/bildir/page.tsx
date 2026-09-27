@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { submitSuspicionReport } from '@/lib/api/platform';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
 import { UI_TEXT } from '@/lib/uiText';
+import { TurnstileWidget } from '@/components/molecules/TurnstileWidget';
 
 export default function BildirPage() {
   const [form, setForm] = useState({
@@ -16,6 +17,8 @@ export default function BildirPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
   const [error, setError]         = useState<string | null>(null);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -25,7 +28,7 @@ export default function BildirPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const result = await submitSuspicionReport(form);
+    const result = await submitSuspicionReport({ ...form, captchaToken });
     setLoading(false);
     if (result.ok) {
       setSubmitted(true);
@@ -90,6 +93,8 @@ export default function BildirPage() {
               className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
             />
           </div>
+
+          <TurnstileWidget onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
 
           {error && <p className="text-sm text-destructive">{error}</p>}
 

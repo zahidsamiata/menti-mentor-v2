@@ -19,6 +19,7 @@ import { Button }     from '@/components/ui/button';
 import { Input }      from '@/components/ui/input';
 import { Label }      from '@/components/ui/label';
 import { OAuthButtons } from '@/components/molecules/OAuthButtons';
+import { TurnstileWidget } from '@/components/molecules/TurnstileWidget';
 import { TenantLogo }   from '@/components/atoms/TenantLogo';
 import { fetchInvitation } from '@/lib/api/invitation';
 import { authApi }    from '@/lib/api/auth';
@@ -164,6 +165,8 @@ export default function RegisterContent() {
   const [kvkkConsent, setKvkkConsent] = useState(false);
   const [submitErr, setSubmitErr] = useState<string | null>(null);
   const [loading,   setLoading]   = useState(false);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
 
   // ── Şifre gücü göstergesi (uzunluk tabanlı; kurala uymayan şifre her zaman "Zayıf") ──
   const pwStrength = password.length === 0 ? 0
@@ -223,7 +226,11 @@ export default function RegisterContent() {
 
     // Davet token'ını backend'e ilet → geçerliyse davetli APPROVED olur (davet = onay, PO 2026-09-01).
     // Böylece aşağıdaki otomatik login() PENDING 403'üne takılmaz; kullanıcı /onboarding'e ulaşır.
-    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true, inviteToken: token ?? undefined });
+    const regResult = await authApi.register({
+      email, password, fullName, role, tenantSlug, kvkkConsent: true,
+      inviteToken: token ?? undefined,
+      captchaToken,
+    });
 
     if (!regResult.ok) {
       setLoading(false);
@@ -427,6 +434,9 @@ export default function RegisterContent() {
               <p role="alert" className="text-xs text-destructive pl-6">{errors.kvkk}</p>
             )}
           </div>
+
+          {/* ── CAPTCHA (F-05/G1-26) ─────────────────────────────────── */}
+          <TurnstileWidget onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
 
           {/* ── Genel hata ───────────────────────────────────────────── */}
           {submitErr && (

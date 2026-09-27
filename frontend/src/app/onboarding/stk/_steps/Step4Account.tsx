@@ -7,6 +7,7 @@ import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { TurnstileWidget } from '@/components/molecules/TurnstileWidget';
 import { selfServeRegister, updateOnboarding } from '@/lib/api/selfServe';
 import { REGISTER_MESSAGES } from '@/lib/registerMessages';
 import { PASSWORD_RULE_HINT, passwordRuleError } from '@/lib/validation';
@@ -61,6 +62,8 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
   const [verificationNote, setVerificationNote] = useState('');
   // GV-12: başvuru alındı ama oturum açılmadı → "e-postanızı kontrol edin" ekranı.
   const [checkEmail,      setCheckEmail]       = useState(false);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken,    setCaptchaToken]     = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (data.email.includes('@')) {
@@ -86,6 +89,7 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
       slug:             data.slug,
       programTemplate:  data.programTemplate,
       kvkkConsent:      data.kvkkConsent,
+      captchaToken,
       ...(needsVerification && {
         institutionRole,
         verificationNote,
@@ -269,6 +273,9 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
             <p className={cn('text-xs text-destructive pl-7')}>{errors['kvkk']}</p>
           )}
         </div>
+
+        {/* CAPTCHA (F-05/G1-26) */}
+        <TurnstileWidget onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
 
       </div>
 

@@ -140,6 +140,8 @@ export async function submitSuspicionReport(data: {
   reporterRole: string;
   contact: string;
   description: string;
+  // F-05 (G1-26): Cloudflare Turnstile CAPTCHA token'ı — site key yoksa undefined gider.
+  captchaToken?: string;
 }) {
   const res = await apiClient<{ id: string; ok: boolean }>('/api/suspicion-reports', {
     method: 'POST',
