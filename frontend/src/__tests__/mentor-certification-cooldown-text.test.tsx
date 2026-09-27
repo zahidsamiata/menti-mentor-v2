@@ -15,6 +15,8 @@ const question = {
 };
 
 let attempts = 1;
+// AJ-37: molanın başlayıp başlamadığı artık backend'in `cooldownUntil` alanından okunur.
+let cooldownUntil: string | null = null;
 
 const apiMock = vi.fn(async (path: string) => {
   if (path === '/api/scoring/certification/questions') {
@@ -28,7 +30,7 @@ const apiMock = vi.fn(async (path: string) => {
       ok: true,
       data: {
         certScore: 0, passRate: 0, totalTopics: 1, passedTopics: 0, passed: false,
-        status: 'FAILED', failReason: 'BELOW_THRESHOLD', attempts,
+        status: 'FAILED', failReason: 'BELOW_THRESHOLD', attempts, cooldownUntil,
         topicResults: [{ topic: 'topic1', isRedLine: false, firstScore: 0, passed: false }],
       },
     };
@@ -53,16 +55,18 @@ describe('Sertifika sonuç ekranı — bekleme kuralı metni (AN-01)', () => {
 
   it('ilk başarısız denemede hemen tekrar denenebileceğini ve 2 denemede 24 saat mola kuralını söyler', async () => {
     attempts = 1;
+    cooldownUntil = null;
     await finishExam();
     expect(screen.getByText(/Hemen yeniden başlayabilirsin/)).toBeInTheDocument();
     expect(screen.getByText(/her 2 başarısız denemeden sonra 24 saatlik bir mola verilir/)).toBeInTheDocument();
     expect(screen.queryByText(/Ceza veya bekleme yok/)).not.toBeInTheDocument();
   });
 
-  it('ikinci başarısız denemede 24 saatlik molanın başladığını söyler', async () => {
+  it('ikinci başarısız denemede molanın başladığını ve kalan süreyi söyler', async () => {
     attempts = 2;
+    cooldownUntil = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
     await finishExam();
-    expect(screen.getByText(/Şimdi 24 saatlik bir mola başlıyor/)).toBeInTheDocument();
+    expect(screen.getByText(/Şimdi bir mola başlıyor; yaklaşık 24 saat sonra yeniden deneyebilirsin/)).toBeInTheDocument();
     expect(screen.queryByText(/Hemen yeniden başlayabilirsin/)).not.toBeInTheDocument();
     expect(screen.queryByText(/Ceza veya bekleme yok/)).not.toBeInTheDocument();
   });

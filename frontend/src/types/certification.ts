@@ -67,5 +67,7 @@ export interface CertResult {
   // kritik (red-line) konu elemesi, açık konu yok, ya da bekleme süresi aktif.
   failReason: 'BELOW_THRESHOLD' | 'RED_LINE_FAILED' | 'NO_ACTIVE_TOPICS' | 'COOLDOWN_ACTIVE' | null;
   attempts: number;
+  /** Mola bitiş anı (ISO). Bu deneme molayı başlattıysa dolu, yoksa null (backend `EvaluationResult`). */
+  cooldownUntil: string | null;
   topicResults: CertTopicResult[];
 }

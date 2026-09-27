@@ -15,6 +15,7 @@ import { apiErrorMessage } from '@/lib/apiErrorMessage';
 import { handleRadioGroupKeyDown, rovingTabIndex } from '@/lib/a11y/radioGroup';
 import type { CertQuestion, CertReveal, CertResult, CertOutcome } from '@/types/certification';
 import { UI_TEXT } from '@/lib/uiText';
+import { CERT_COOLDOWN_TEXT, formatRemaining, isCooldownActive } from '@/lib/certificationCooldownText';
 
 // Renk semantiği: yeşil=doğru, sarı=kabul edilebilir, kırmızı=yanlış (renk körlüğü için ikon da).
 const OUTCOME_STYLE: Record<CertOutcome, { badge: string; icon: string; label: string }> = {
@@ -23,15 +24,14 @@ const OUTCOME_STYLE: Record<CertOutcome, { badge: string; icon: string; label: s
   wrong:      { badge: 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800',       icon: '❌', label: 'Zararlı / zayıf' },
 };
 
-// AN-01: sınav-seviyesi bekleme kuralı — backend `CERT_CONFIG`
-// (backend/src/services/certification.service.ts:31,33 ve :226-231) ile birebir aynı tutulmalı:
-// her `attemptsBeforeCooldown` başarısız denemede bir `cooldownHours` saatlik bekleme başlar.
+// AN-01: sınav-seviyesi bekleme kuralı — YALNIZ bilgilendirme cümlesi için ("her 2 başarısız
+// denemeden sonra 24 saat"). Backend `CERT_CONFIG` (certification.service.ts:31,33) bu sayıları
+// yanıtta göndermiyor. Molanın başlayıp başlamadığı ve ne zaman biteceği bu sabitten HESAPLANMAZ:
+// backend'in döndürdüğü `cooldownUntil` okunur (AJ-37).
 const CERT_RETRY_RULE = { attemptsBeforeCooldown: 2, cooldownHours: 24 } as const;
 
-/** Bu başarısız sonuç bekleme süresini başlattı mı? (backend `cooldownTriggered` ile aynı hesap) */
-function failedResultStartsCooldown(attempts: number): boolean {
-  return attempts > 0 && attempts % CERT_RETRY_RULE.attemptsBeforeCooldown === 0;
-}
+/** Mola sürerken kalan süre metni dakikada bir tazelensin (ve süre dolunca düğme açılsın). */
+const COOLDOWN_TICK_MS = 60_000;
 
 interface Topic {
   topic: string;
@@ -80,6 +80,9 @@ export default function MentorCertificationPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   // 2 denemeden sonra bekleme (cooldown) — bu sırada öğrenme yolculuğuna davet ederiz.
   const [cooldownActive, setCooldownActive] = useState(false);
+  // AJ-37: COOLDOWN_ACTIVE yanıtındaki mola bitiş anı (backend `cooldownUntil`).
+  const [cooldownUntil, setCooldownUntil] = useState<string | null>(null);
+  const [now, setNow] = useState(() => Date.now());
   const scenarioTitleId = useId();
 
   const loadQuestions = useCallback(async () => {
@@ -108,6 +111,15 @@ export default function MentorCertificationPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [activeQuestion?.code],
   );
+
+  // AJ-37: mola bitişi ya sonuçtan (bu deneme molayı başlattı) ya da COOLDOWN_ACTIVE yanıtından gelir.
+  const cooldownEnd = result?.cooldownUntil ?? cooldownUntil;
+  const cooldownRunning = isCooldownActive(cooldownEnd, now);
+  useEffect(() => {
+    if (!cooldownRunning) return;
+    const timer = setInterval(() => setNow(Date.now()), COOLDOWN_TICK_MS);
+    return () => clearInterval(timer);
+  }, [cooldownRunning]);
 
   if (!user || user.role !== 'MENTOR') return null;
 
@@ -160,14 +172,17 @@ export default function MentorCertificationPage() {
     setSubmitting(true);
     setSubmitError(null);
     setCooldownActive(false);
+    setCooldownUntil(null);
     const res = await certificationApi.certify(api, firstAttempts);
     setSubmitting(false);
+    setNow(Date.now());
     if (res.ok) {
       setResult(res.data);
     } else if (res.error.error === 'COOLDOWN_ACTIVE') {
-      // 2 denemeden sonra bekleme — düşük baskılı, destekleyici mesaj.
+      // 2 denemeden sonra bekleme — düşük baskılı, destekleyici mesaj; kalan süre render'da
+      // `cooldownUntil`'den hesaplanır (AJ-37: eski metin "kısa bir bekleme" diyordu, mola 24 saat).
       setCooldownActive(true);
-      setSubmitError('Şimdilik bir mola verelim. Kısa bir bekleme sonrası tekrar deneyebilirsin — acele yok.');
+      setCooldownUntil(res.error.cooldownUntil ?? null);
     } else if (res.error.error === 'NO_ACTIVE_TOPICS') {
       setSubmitError('Şu an açık sertifika konusu yok. Lütfen kurum yöneticinle iletişime geç.');
     } else {
@@ -176,6 +191,7 @@ export default function MentorCertificationPage() {
   }
 
   function restart() {
+    if (cooldownRunning) return; // AJ-37: mola bitmeden yeni deneme başlatılmaz.
     setResult(null);
     setTopicIdx(0);
     setVariantIdx(0);
@@ -230,8 +246,8 @@ export default function MentorCertificationPage() {
                   ? 'Puanın yeterli olsa bile, kritik bir konuyu ilk denemede geçemedin — kritik konuların hepsi ilk denemede geçilmeli.'
                   : 'Sertifika için en az %80 gerekli.'}
                 <br />
-                {failedResultStartsCooldown(result.attempts)
-                  ? `Şimdi ${CERT_RETRY_RULE.cooldownHours} saatlik bir mola başlıyor; mola bitince yeniden deneyebilirsin. Bu arada konuları Öğrenme Yolculuğu'nda pekiştirebilirsin.`
+                {cooldownRunning && result.cooldownUntil
+                  ? CERT_COOLDOWN_TEXT.startedOnResult(formatRemaining(result.cooldownUntil, now))
                   : `Hemen yeniden başlayabilirsin. Bilgin olsun: her ${CERT_RETRY_RULE.attemptsBeforeCooldown} başarısız denemeden sonra ${CERT_RETRY_RULE.cooldownHours} saatlik bir mola verilir.`}
               </p>
               {failed.length > 0 && (
@@ -254,13 +270,18 @@ export default function MentorCertificationPage() {
                 </div>
               )}
               <div className="flex flex-col sm:flex-row gap-2 justify-center">
-                <Button onClick={restart}>Yeniden başla</Button>
+                <Button onClick={restart} disabled={cooldownRunning}>Yeniden başla</Button>
                 {failed.length > 0 && (
                   <Button asChild variant="outline">
                     <Link href="/learning-journey">Öğrenme Yolculuğu&apos;na git →</Link>
                   </Button>
                 )}
               </div>
+              {cooldownRunning && result.cooldownUntil && (
+                <p className="text-xs text-muted-foreground">
+                  {CERT_COOLDOWN_TEXT.restartLocked(formatRemaining(result.cooldownUntil, now))}
+                </p>
+              )}
             </CardContent>
           </Card>
         )}
@@ -383,6 +404,16 @@ export default function MentorCertificationPage() {
             </div>
           )}
 
+          {cooldownActive && (
+            <AlertMessage
+              type="error"
+              message={
+                cooldownRunning && cooldownUntil
+                  ? CERT_COOLDOWN_TEXT.alreadyActive(formatRemaining(cooldownUntil, now))
+                  : CERT_COOLDOWN_TEXT.alreadyActiveUnknown
+              }
+            />
+          )}
           {submitError && <AlertMessage type="error" message={submitError} />}
 
           {/* Köprü: bekleme sırasında öğrenme yolculuğuna davet — kaldığın

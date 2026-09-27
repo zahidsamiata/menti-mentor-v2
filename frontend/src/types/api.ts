@@ -13,6 +13,8 @@ export interface ApiError {
   /** IC-08: onay bekleyen hesapta yöneticinin "düzeltme iste" notu (yalnız doğru şifreden sonra döner). */
   correctionNote?: string | null;
   canReapply?: boolean;
+  /** AJ-37: sertifika COOLDOWN_ACTIVE (409) yanıtında molanın bitiş anı (ISO). */
+  cooldownUntil?: string | null;
 }
 
 /** fetch wrapper'ının dönüş tipi. */
