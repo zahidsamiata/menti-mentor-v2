@@ -12,6 +12,7 @@
 #   (gerekçeli istisna: docs/raporlar/kod-denetimi/bekci-istisna.txt — satır biçimi "<iş> madde <N> # <gerekçe>").
 #   · kural (i): CI job'u scripts/verify.sh başlığında anılmıyor (KR-22)
 #   · kural (j): docs/raporlar/ altında ilk 5 satırında TÜR etiketi olmayan rapor (YN-11)
+#   · kural (k): docs/ altında indekssiz (giriş noktası olmayan) klasör (YN-12)
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -140,6 +141,18 @@ for dirpath, _dirs, files in os.walk(os.path.join(root, 'docs/raporlar')):
             head = ''.join(fh.readline() for _ in range(5))
         if not any(t in head for t in TUR_ETIKETI):
             warnings.append(f'{os.path.relpath(rpath, root)} ilk 5 satırda TÜR etiketi (📸/🔄/🔥/🌡️/🧊) yok — başa etiket yaz (YN-11, rehber KURAL 3)')
+
+# Kural (k) YN-12: docs/ altındaki her klasörün giriş noktası (indeks) var — yalnız UYARI.
+# İndeks deseni rehber KURAL 2-B ile aynı: ^00-.*ind(ex|eks) (dört kalıbı da yakalar). docs/ kökünün girişi 00-BELGE-HARITASI.md.
+INDEKS = re.compile(r'^00-.*ind(ex|eks)', re.I)
+docs_root = os.path.join(root, 'docs')
+for dirpath, _dirs, files in os.walk(docs_root):
+    if dirpath == docs_root:
+        continue
+    if not any(f.endswith(('.md', '.txt')) for f in files):
+        continue
+    if not any(INDEKS.match(f) for f in files):
+        warnings.append(f'{os.path.relpath(dirpath, root)}/ giriş noktası (00-INDEX.md) yok — kısa indeks aç (YN-12, rehber KURAL 2-B)')
 
 LIMITS = [('docs/otonom/00-KUYRUK.md', 150), ('docs/otonom/01-KARARLAR.md', 150),
           ('docs/otonom/02-ILERLEME.md', 150), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),

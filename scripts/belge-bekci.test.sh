@@ -123,4 +123,16 @@ printf '# Rapor\n\n\n\n\n> 📸 altıncı satırda — sayılmaz\n' >"$TMP/root/
 expect 0 "kural (j) negatif: etiketsiz rapor → yeşil + uyarı"
 grep -q "kesif/etiketsiz.md ilk 5 satırda TÜR etiketi" "$TMP/out" || { echo "  ✗ kural (j) uyarısı çıktıda yok"; FAIL=1; }
 
+# ── kural (k) YN-12: indekssiz klasör → yalnız UYARI ──
+setup_clean
+mkdir -p "$TMP/root/docs/kararlar/konu"
+printf '# x\n' >"$TMP/root/docs/kararlar/konu/a.md"
+printf '# idx\n' >"$TMP/root/docs/kararlar/konu/00-KART-INDEKSI.md"
+expect 0 "kural (k) pozitif: klasörde (Türkçe adlı) indeks var → uyarı yok"
+grep -q "docs/kararlar/konu/ giriş noktası" "$TMP/out" && { echo "  ✗ kural (k): indeksli klasörde uyarı çıktı"; FAIL=1; }
+
+rm "$TMP/root/docs/kararlar/konu/00-KART-INDEKSI.md"
+expect 0 "kural (k) negatif: indekssiz klasör → yeşil + uyarı"
+grep -q "docs/kararlar/konu/ giriş noktası (00-INDEX.md) yok" "$TMP/out" || { echo "  ✗ kural (k) uyarısı çıktıda yok"; FAIL=1; }
+
 exit $FAIL
