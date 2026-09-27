@@ -148,6 +148,8 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-104** | **Uyum eşiğini geçen tek mentör randevuya kapalıysa menti ne görsün** | **0** (PS-A4 sonrası ince ayar) | ⬜ boş · ajan-ekledi (PS-A4 7b notu) · öneri A |
 | **KARAR-105** | **Kurumlar arası anonim karşılaştırma: izni kim açar, hangi sayılar paylaşılır** | **1** (AN-31) | ⬜ boş · KARAR-34 SORU 2 (B) ayrıntısı · migration gerekir · öneri A |
 | **KARAR-106** | **🔵 EVET/HAYIR — AN-52-1 ürün-içi anket cevap tablosu (yeni tablo, mevcut veri etkilenmez)** | **1** (AN-52-3) | ⬜ boş · 🔵 canlı DB değişikliği (yeni tablo, yedek gerekmez) · PR backend #185 |
+| **KARAR-107** | **🔵 EVET/HAYIR — dondurulmuş `interactionStyle` alanının yazılması kapatılsın mı (karantina)** | **1** (AN-12) | ⬜ boş · 🔵 · migration yok · yedek gerekmez |
+| **KARAR-108** | **DISC eşitlik sırası iki yerde farklı — tek kaynak hangisi** | **0** (bugün etkisi yok) | ⬜ boş · psikometri · öneri A |
 
 ---
 
@@ -1669,4 +1671,30 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **EVET** → ajan merge eder → canlı sunucu açılışta `migrate deploy` ile tabloyu kendisi oluşturur (yedek konusu yok, yeni tablo). Sonra AN-52-3 (frontend) sıraya girebilir.
 **HAYIR** → PR kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; AN-52 seti (7 soru) hiç canlıya çıkmaz.
 **Cevap vermezsen:** AN-52-3 (frontend entegrasyonu) başlamaz; AN-52-2/AN-52-4 kodu PR'da bekler.
+**CEVAP:**
+
+### KARAR-107 · 🔵 EVET/HAYIR — dondurulmuş "çalışma tarzı" alanının (`interactionStyle`) yazılması kapatılsın mı? (1 işi açar: AN-12)  [🔵 KARANTİNA]
+**Kullanıcı ne görür:** Hiçbir değişiklik görmez. Bu alan artık hiçbir ekranda sorulmuyor (2026-08-30'dan beri); yalnız sunucunun 3 kayıt yolu hâlâ kabul ediyordu.
+**Ne değişir:** Sunucu, bu alanı kaydetmeyi bırakır (profil güncelleme, kullanıcı oluşturma, profil tamamlama). Veritabanındaki mevcut değerler SİLİNMEZ ve okunmaya devam eder; tablo yapısı değişmez. Neden: senin 2026-08-29 kararın — "interactionStyle DONDURULUR … hiçbir yere yazılmaz" (`docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:574-586`); bugün aynı işi `supportApproach` alanı yapıyor. Eşleştirmedeki ilgili +10 puanlık bonus zaten fiilen çalışmıyor (menti tarafı hiç toplanmıyor) — dokunulmadı.
+**Geri alınır mı:** Evet — tek commit geri alınır (`git -C backend revert 11bbb84` + merge commit'i); değişiklik öncesi kodun tamamı `docs/arsiv/silinenler-2026-09-27.md`'de.
+**Yedeği alınacak tablo:** YOK — veri değişmiyor, migration yok.
+**Durum:** backend #186 (7b ONAY https://github.com/zahidsamiata/menti-mentor/pull/186#issuecomment-5854917286, CI yeşil) · arşiv belgesi çatı #370 (düzeltiliyor). Silme DEĞİL: gerçek silme ayrıca PO'nun ikinci onayını ister (🔴).
+**EVET** → ajan backend #186 + #370'i merge eder, pointer'ı taşır, canlı kontrol yapar.
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye; alan 3 yolda yazılabilir kalır.
+**Cevap vermezsen:** AN-12 PR-ACIK bekler; kullanıcıya etkisi yok.
+**CEVAP:**
+
+### KARAR-108 · DISC eşitlik sırası iki yerde farklı — tek kaynak hangisi olsun? (0 iş kilitler; bugün kullanıcı etkisi yok)  [ÜRÜN KARARI · PSİKOMETRİ]
+> ⭐ Kaynak: AN-12 incelemesi B kısmı (2026-09-27, salt-okuma); `backend/src/controllers/onboardingController.ts:214-215`'teki kod yorumu da bu çelişkiyi not ediyor.
+
+**Şu an ne var:** Kullanıcının DISC harfini belirleyen dört yerden üçü eşit puanda **D > I > S > C** sırasını kullanıyor: canlı onboarding testi (`onboardingController.ts:213-217`), çok harfli gösterim (`discLetters.ts:44-45`), yeni uyarlanabilir test (`adaptiveTestEngine.ts:100-101`). Dördüncüsü, eski 7 soruluk mizaç testi ucu (`temperamentAnalysis.ts:15-16`), **D > I > C > S** kullanıyor. Bu uç hiçbir ekrandan çağrılmıyor (ön yüzde 0 referans) ama sunucuda açık (`userRoutes.ts:63`).
+**Sorun ne:** Fark yalnız S ve C puanı eşit ve en yüksek olduğunda çıkıyor: biri "S", diğeri "C" der. Eski uç bir gün yeniden bağlanırsa ya da doğrudan çağrılırsa aynı kişi farklı mizaç kartı (ve vektörü yoksa farklı eşleştirme puanı) görebilir.
+**Neden sana soruyorum:** Eşitlikte hangi mizacın öne çıkacağı psikometrik bir tercih; kullanıcının kendisi hakkında okuduğu sonucu değiştirir.
+**Seçenekler:**
+- **A) Her yerde D > I > S > C** (bugünkü 3 canlı yolun sırası) — Kullanıcı: hiçbir değişiklik görmez · Kazanç: tek kaynak, canlı davranış aynı · Kayıp: eski testin (muhtemelen bilinçli) D > I > C > S tercihi terk edilir · Süre S · Geri alınır · Migration yok.
+- **B) Her yerde D > I > C > S** — Kullanıcı: eşit S/C puanlı kişilerde canlı testin sonucu değişir (S yerine C) · Kazanç: tek kaynak · Kayıp: canlı 3 yolun davranışı değişir, bazı kullanıcıların harfi değişebilir · Süre S · Geri alınır · Migration yok.
+- **C) Şimdilik dokunma; eski mizaç testi ucunu ayrıca karantinaya al** (zaten çağrılmıyor) — Kullanıcı: değişiklik yok · Kazanç: en az iş · Kayıp: çelişki kodda kalır · Süre S · Geri alınır (karantina 🔵 ayrı EVET ister) · Migration yok.
+**Karşılaştırma:** Bugün gerçek etkisi yok; soru "gelecekte hangisine sabitleyelim". A canlı davranışı hiç değiştirmez; B değiştirir; C kararı erteler.
+**Benim önerim:** A — canlı üç yol zaten bu sırada, kimsenin sonucu değişmez. *(Bu senin ürün kararın; önerime güvenme.)*
+**Cevap vermezsen:** Çelişki kodda işaretli kalır; hiçbir iş kilitlenmez.
 **CEVAP:**
