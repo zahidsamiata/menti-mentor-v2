@@ -10,6 +10,7 @@
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #192 + çatı #376 | AJ-18 (19 uca negatif test) | ok:true, db:up, site 200 |
 | backend #190 + #191 + çatı #375 | AJ-16 (20 uca negatif test) · AJ-17 (elle temizlik/kalibrasyon yalnız kendi kurumu) | ok:true, db:up, site 200 |
 | backend #188 + çatı #373 | AJ-15 (20 uca negatif test) | ok:true, db:up, site 200 |
 | çatı #372 | E-3e (görüşme kartında kendi değerlendirmesi) | ok:true, db:up, site 200 |

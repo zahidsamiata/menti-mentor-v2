@@ -1009,3 +1009,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **AJ-15 BITTI** — backend #188 + çatı #373 (`6276e99`), inceleme ONAY; 20 uca 27 negatif test, açık yok. Canlı ok:true · db:up · site 200.
 - 2026-09-27 · **K-15 🔵 hazır** — backend #189 (⛔ MIGRATION) + çatı #374, 7b ONAY (iki PR). EVET/HAYIR: KARAR-111 (riskler kartta: mevcut bloklar Online/60'a daralır, <60 dk bloklar saat göstermez, yedek merge'den ÖNCE).
 - 2026-09-27 · **AJ-16 + AJ-17 BITTI** — backend #190 + #191, çatı pointer #375 (`3ed0c1e`). AJ-16 testleri kurumlar arası elle temizlik açığını buldu → AJ-17 aynı gün düzeltildi (7b ONAY). CANLIDA BAK: kurum yöneticisinin elle tetiklediği temizlik/kalibrasyon yalnız kendi kurumu. Canlı ok:true · db:up · site 200.
+- 2026-09-27 · **AJ-18 BITTI** — backend #192 + çatı #376; 27 negatif test, açık yok. Canlı kontrol: bkz. 00-SIMDI.
