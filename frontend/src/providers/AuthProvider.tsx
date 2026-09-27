@@ -156,6 +156,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       Object.assign(err, {
         code: result.error.error,
         rejectionReason: result.error.rejectionReason ?? null,
+        correctionNote: result.error.correctionNote ?? null,
         canReapply: result.error.canReapply ?? false,
       });
       throw err;

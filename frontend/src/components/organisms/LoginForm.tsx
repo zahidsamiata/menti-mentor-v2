@@ -24,6 +24,7 @@ import { useFormState } from '@/hooks/useFormState';
 import { authApi } from '@/lib/api/auth';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
 import { resolveLoginError } from '@/lib/loginMessages';
+import { clearPendingCorrectionNote, storePendingCorrectionNote } from '@/lib/pendingCorrectionNote';
 import { UI_TEXT } from '@/lib/uiText';
 
 interface LoginFormProps {
@@ -69,19 +70,28 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
   const onSubmit = async (values: LoginFormValues) => {
     try {
       const userData = await login(values);
+      clearPendingCorrectionNote();
       // PENDING kullanıcıya JWT verilmediğinden /pending-approval'da user=null olur;
       // e-postayı query ile taşı ki kendi adresini görebilsin (U-07).
       const target = getSmartRedirect(userData);
       router.push(target === '/pending-approval' ? withPendingEmail(values.email) : target);
     } catch (err) {
       // PENDING: backend JWT vermeden 403 atar — biz yine de /pending-approval'a yönlendiririz.
-      const e = err as Error & { code?: string; rejectionReason?: string | null; canReapply?: boolean };
+      const e = err as Error & {
+        code?: string;
+        rejectionReason?: string | null;
+        correctionNote?: string | null;
+        canReapply?: boolean;
+      };
       if (e.code === 'HESAP_ONAY_BEKLENIYOR') {
+        // IC-08: not URL'ye konmaz (serbest metin, kişisel olabilir) — yalnız bu sekmenin oturum belleğinde taşınır.
+        storePendingCorrectionNote(e.correctionNote ?? null);
         router.push(withPendingEmail(values.email));
         return;
       }
       // REDDEDİLDİ: gerekçe + tekrar-başvuru ekranı (giriş bilgileri formda duruyor → reapply için kullanılır).
       if (e.code === 'HESAP_REDDEDILDI') {
+        clearPendingCorrectionNote();
         setRejected({ reason: e.rejectionReason ?? null });
         return;
       }
