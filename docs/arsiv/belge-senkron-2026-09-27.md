@@ -245,3 +245,8 @@ Kaynak: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` § GÖREV B. 
 ````text
 | **98** | **Kalibrasyon audit yazımı `void` (fire-and-forget)** — `logger.info('AUDIT', …)` beklenmez; DB yazımı hata alırsa "son değişiklik" izi **sessizce kaybolur** (KVKK Md.12 denetim kaydı için zayıf). | teknik-borç (KVKK denetim) | `adminController.setAlgorithmWeightsHandler` `void logger.info(...)`; `logger.ts` catch sessiz | 🔵 küçük (migration'sız; audit yazımını await + hata yüzeye çıkar) · 🟨 kısmen — F-06; kalan: Hata yolu (audit yazımı başarısız) hiçbir testte ölçülmüyor; F-06'nın eklediği .catch hiç tetiklenemez. → AJ-45 |
 ````
+
+### docs/kararlar/00-KARAR-TAKIP.md:620 · F-20 → AJ-39 kapandı
+````text
+| 104 | Bekleme salonu bildirim izni (`Notification.requestPermission`) | ⬜ AÇIK (PO önceliklendirmedi) · 🟨 kısmen — F-20; kalan: Tıklama→requestPermission testsiz; izin hiçbir bildirimde kullanılmıyor, "haber vereceğiz" metni (:34) karşılıksız vaat → AJ-39 | ⬜ | T2-C(A7)/T3-B(C-3)/T4-A2 | Bekleme retention — menti bekleme salonunda sessizce kaybolmasın, bildirimle geri çağır ("en kritik UX") | grep 0 dosya (`frontend/src`'te `requestPermission` yok); kodlanmamış |
+````
