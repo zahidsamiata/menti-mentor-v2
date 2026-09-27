@@ -1,15 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 · çatı main HEAD `769ac36`+docs · backend main HEAD `26efc49` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 08:00 UTC · çatı main HEAD `62dec53`+docs · backend main HEAD `31b7715` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3: AJ-01/02/03/04/06/07/08/12 + PS-A4 ✅ canlıda · AJ-05 (backend #179 + çatı #363) 2. tur inceleme.
+**Şu an yapılan:** GÖREV 0-2 ✅ · GÖREV 3: AJ-01…AJ-09 + AJ-12 + PS-A4 ✅ canlıda (AJ-10 🔵, AJ-11 🔴 KARAR-103 kaldı) · sıradaki: F-24 · AN-31 · F-05 kod kısmı.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #181 + çatı #365 | AJ-09 (çerez + PII select refaktörü) | ok:true, db:up, site 200 |
+| backend #179 + çatı #363 | AJ-05 (logo adresi kısıtı) | ok:true, db:up, site 200 |
 | backend #180 + çatı #364 | PS-A4 (menti alt uyum eşiği) | ok:true, db:up, site 200 |
 | backend #177 + çatı #362 | AJ-08 (seed komutları + CLAUDE.md seed listesi düzeltmesi) | ok:true, db:up, site 200 |
 | backend #176 + #178 + çatı #361 | AJ-04 (20 uca negatif test) · AJ-12 (ret ucu gövdesiz 500) | ok:true, db:up, site 200 |
