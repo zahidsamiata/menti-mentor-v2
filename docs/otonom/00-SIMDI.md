@@ -7,7 +7,7 @@
 
 **Durum:** CALISIYOR — PO görevi: GÖREV 0 (kural: doğrulama opus + mutasyon kanıtı) → 1 (AJ-20…AJ-48; AJ-29/AJ-38 hariç) → 2 (kayıt+belge, kural h) → 3 (AJ: değerlendirme okuma ucu + E-3 notu) → 4 (sahipsiz kalanlar, salt-okuma) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 1 — BITTI+canlı: AJ-21 (#194/#384) · AJ-24 (#383) · AJ-20 (#196, pointer #386 CI) · yapılıyor: AJ-30 (OAuth hata kodu) · AJ-31 (iptal listesi kalıcı) · sırada: AJ-32 → AJ-22 → AJ-28 → AJ-44 → AJ-40 → AJ-25 → AJ-26 → AJ-27 → AJ-33 → AJ-45 → kalanlar. AJ-50 🔵 açıldı (AJ-21 kalanı: mevcut kayıt temizliği).
+**Şu an yapılan:** GÖREV 1 — CANLIDA: AJ-21 · AJ-24 · AJ-20 · AJ-30 · AJ-27 · AJ-22 (kısmen — KARAR-112; AJ-52) · pointer #390 CI'da: AJ-31 · AJ-32 (8/8) · AJ-28 · AJ-44 · yapılıyor: AJ-40, AJ-25 · sırada: AJ-26 → AJ-33 → AJ-45 → AJ-23 → AJ-34 → AJ-35 → AJ-36 → AJ-37 → AJ-39 → AJ-41 → AJ-42 → AJ-43 → AJ-46 → AJ-47 → AJ-48. Yeni satırlar: AJ-50 🔵 · AJ-51…AJ-55 · KARAR-112.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |

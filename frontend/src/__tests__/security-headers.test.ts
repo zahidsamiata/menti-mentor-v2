@@ -1,8 +1,9 @@
 /**
  * F-04 (G1-23) — İçerik Güvenlik Politikası (CSP) başlık üreticisi.
  *
- * Politika şimdilik yalnız rapor modunda gönderilir; kritik yönergelerin varlığı ve
- * canlı politikada `'unsafe-eval'` bulunmaması burada kilitlenir.
+ * AJ-22: politika ENGELLEYEN modda (`Content-Security-Policy`) gönderilir; rapor moduna geri
+ * dönüş, kritik yönergelerin varlığı, canlı politikada `'unsafe-eval'` bulunmaması ve img-src'nin
+ * yalnız https (şema düzeyi) kabul etmesi burada kilitlenir.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -26,14 +27,17 @@ function parsePolicy(policy: string): Record<string, string[]> {
 }
 
 describe('buildSecurityHeaders (F-04 CSP)', () => {
-  it('yalnız Report-Only başlığı gönderir (engelleyen CSP başlığı YOK)', () => {
+  it('AJ-22: engelleyen CSP başlığı gönderir (Report-Only DEĞİL)', () => {
     const headers = buildSecurityHeaders({ apiUrl: 'https://api.example.org' });
-    expect(CSP_HEADER_NAME).toBe('Content-Security-Policy-Report-Only');
-    expect(headers.map((h) => h.key)).toEqual(['Content-Security-Policy-Report-Only']);
-    expect(headers.some((h) => h.key === 'Content-Security-Policy')).toBe(false);
+    expect(CSP_HEADER_NAME).toBe('Content-Security-Policy');
+    expect(headers.map((h) => h.key)).toEqual(['Content-Security-Policy']);
+    expect(headers.some((h) => /report-only/i.test(h.key))).toBe(false);
+    const d = parsePolicy(headers[0].value);
+    expect(d['frame-ancestors']).toEqual(["'none'"]);
+    expect(d['object-src']).toEqual(["'none'"]);
   });
 
-  it('kritik yönergeler mevcut', () => {
+  it("kritik yönergeler mevcut; script/style 'unsafe-inline' korunur (Next.js satır içi betikleri)", () => {
     const d = parsePolicy(buildContentSecurityPolicy({ apiUrl: 'https://api.example.org' }));
     expect(d['default-src']).toEqual(["'self'"]);
     expect(d['object-src']).toEqual(["'none'"]);
@@ -41,6 +45,8 @@ describe('buildSecurityHeaders (F-04 CSP)', () => {
     expect(d['base-uri']).toEqual(["'self'"]);
     expect(d['form-action']).toEqual(["'self'"]);
     expect(d['font-src']).toEqual(["'self'"]);
+    expect(d['script-src']).toContain("'unsafe-inline'");
+    expect(d['style-src']).toContain("'unsafe-inline'");
   });
 
   it("canlı politikada 'unsafe-eval' YOK", () => {
@@ -65,18 +71,21 @@ describe('buildSecurityHeaders (F-04 CSP)', () => {
     expect(d['connect-src']).toEqual(["'self'"]);
   });
 
-  it('img-src görsel host listesini yalnız https ile içerir', () => {
-    const d = parsePolicy(
-      buildContentSecurityPolicy({ imageDomains: resolveImageDomains('cdn.example.org, ,cdn.example.org') }),
-    );
-    for (const host of DEFAULT_IMAGE_DOMAINS) expect(d['img-src']).toContain(`https://${host}`);
-    expect(d['img-src'].filter((s) => s === 'https://cdn.example.org')).toHaveLength(1);
-    expect(d['img-src']).not.toContain('http://cdn.example.org');
-    expect(d['img-src']).not.toContain('https:');
+  it('AJ-22: img-src kurum logoları için yalnız https şemasını kabul eder (http/joker YOK)', () => {
+    const d = parsePolicy(buildContentSecurityPolicy({ apiUrl: 'https://api.example.org' }));
+    expect(d['img-src']).toEqual(["'self'", 'data:', 'blob:', 'https://api.example.org', 'https:']);
+    expect(d['img-src']).not.toContain('http:');
+    expect(d['img-src']).not.toContain('*');
   });
 
-  it('F-05 (G1-26): Cloudflare Turnstile script-src + frame-src içinde — rapor modu kapatılmadı', () => {
-    expect(CSP_HEADER_NAME).toBe('Content-Security-Policy-Report-Only');
+  it('resolveImageDomains (next/image remotePatterns) varsayılan + env hostlarını tekrarsız döner', () => {
+    const domains = resolveImageDomains('cdn.example.org, ,cdn.example.org');
+    for (const host of DEFAULT_IMAGE_DOMAINS) expect(domains).toContain(host);
+    expect(domains.filter((h) => h === 'cdn.example.org')).toHaveLength(1);
+    expect(domains).not.toContain('');
+  });
+
+  it('F-05 (G1-26): Cloudflare Turnstile script-src + frame-src içinde (enforce modda engellenmez)', () => {
     const d = parsePolicy(buildContentSecurityPolicy({ apiUrl: 'https://api.example.org' }));
     expect(d['script-src']).toContain('https://challenges.cloudflare.com');
     expect(d['frame-src']).toContain('https://challenges.cloudflare.com');
