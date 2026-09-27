@@ -65,6 +65,6 @@
 - Kapı: P-05 (🔵 ama migration'sız, ONAY'lı) · PS-A3/PS-A4 🟡 (yeni tanımla 🟢+7b).
 - "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23 · F-27/G6-01 · G6-03 · G7-13 · F-21/G7-09) — K5-Y2 bu turda denetliyor.
 
-**Karar kilidi (en çok iş açan cevapsız kartlar):** KARAR-57 (4, +I-12) · KARAR-45 (4, + IC-10/AN-05 adları) · KARAR-56 (3) · KARAR-68/65/62/61/59/55 (2'şer) · KARAR-101 (güvenlik) · 🔵 96/97/98/99.
+**Karar kilidi (cevapsız kartlar, kilitlediği açık kuyruk satırı sayısına göre — 2026-09-27 yeniden sayım):** KARAR-64 (4: I-01, I-11, AN-50, AN-51) · KARAR-46 (3: F-14, P-99, AN-03) · KARAR-95/88/72/58/57/50/36 (2'şer; KARAR-58 → PS-A2 → PS-A3 → Y-17 zinciri) · 33 kart 1'er iş · 41 cevapsız kart hiçbir kuyruk satırını kilitlemiyor (bilgi/ince ayar). 🔵 EVET bekleyenler: KARAR-96 (AN-30) · 97 (U-18) · 98 (AN-26) · 99 (AN-02). ⭐ Güvenlik: KARAR-101 (Y1-B8).
 
 **Sıradaki 5 iş:** (1) K5-Y2 sonucu → tutmayan BITTI'ler BEKLIYOR'a · (2) K5-Y3 eksik negatif testler · (3) F-01 belge reorg (büyük, belge) · (4) PO cevapları gelirse 🔵 işler (yedek + merge) · (5) K5-Y4 karar kartı kanıt tazeleme.
