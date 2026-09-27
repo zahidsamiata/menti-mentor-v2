@@ -110,7 +110,7 @@ const TIMELINE_EVENTS = [
   },
   {
     day:    'Gün 14',
-    label:  'İlk Eşleşme Toplantısı',
+    label:  'İlk Eşleşme Görüşmesi',
     badge:  '⭐ Mentör Onayı',
     color:  'bg-emerald-500',
     done:   true,

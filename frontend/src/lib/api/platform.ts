@@ -140,6 +140,8 @@ export async function submitSuspicionReport(data: {
   reporterRole: string;
   contact: string;
   description: string;
+  // F-05 (G1-26): Cloudflare Turnstile CAPTCHA token'ı — site key yoksa undefined gider.
+  captchaToken?: string;
 }) {
   const res = await apiClient<{ id: string; ok: boolean }>('/api/suspicion-reports', {
     method: 'POST',
@@ -300,6 +302,22 @@ export interface TenantMembersResponse {
   members: TenantMember[];
 }
 
+// F-24/G4-08: tek kullanıcı drill-down — alan kümesi BİLEREK TenantMember ile aynıdır
+// (bkz. backend `getTenantUserDetail` yorumu). Yeni PII kategorisi yok.
+export interface TenantUserDetail {
+  id: string;
+  fullName: string;
+  role: TenantMemberRole;
+  isActive: boolean;
+  joinedAt: string;
+  emailMasked: string;
+  discType: string | null;
+  certificationStatus: string;
+  isCertified: boolean;
+  learningJourneyCompletedAt: string | null;
+  hasKvkkConsent: boolean;
+}
+
 export interface TenantMeeting {
   id: string;
   startsAt: string;
@@ -339,6 +357,10 @@ export async function listTenantMembers(
   if (opts.page) params.set('page', String(opts.page));
   const q = params.toString() ? `?${params.toString()}` : '';
   return platformFetch<TenantMembersResponse>(`/api/platform/tenants/${id}/members${q}`);
+}
+
+export async function getTenantUserDetail(id: string, userId: string) {
+  return platformFetch<TenantUserDetail>(`/api/platform/tenants/${id}/users/${userId}`);
 }
 
 export async function listTenantMeetings(

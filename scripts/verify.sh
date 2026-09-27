@@ -10,6 +10,7 @@
 #   [6] frontend-check    → npm run build (NEXT_PUBLIC_API_URL=http://localhost:3000)
 #   [7] integration-tests → npm run test:coverage (NODE_ENV=test, TEST_DATABASE_URL zorunlu)
 #   [8] e2e-browser       → YEREL KOŞULMAZ (servis Postgres + seed-test-tenant + Playwright chromium)
+#   [9] docs-guard        → bash scripts/belge-bekci.test.sh · bash scripts/belge-bekci.sh (OTONOM-PROMPT 5c)
 #
 # Bilinçli farklar (yerelde güvenli/koşulabilir olmadığı için):
 #   - `npm ci` koşulmaz (yerel node_modules kullanılır). CI ile birebir bağımlılık için: --ci-install
@@ -45,7 +46,7 @@ for arg in "$@"; do
   esac
 done
 
-TOTAL=8
+TOTAL=9
 STEP=0
 RESULTS=()          # "DURUM|adım|not"
 INTEGRATION_SKIPPED=0
@@ -126,6 +127,10 @@ if [[ "$CI_INSTALL" == 1 ]]; then
 else
   echo "  ℹ️  npm ci koşulmadı (yerel node_modules). CI ile birebir için: --ci-install"
 fi
+
+# ── docs-guard (belge bekçisi — ucuz, önce koşar) ─────────────────────────────
+run_step "Belge bekçisi (aktif/arşiv ayrımı, 5c)" "$ROOT" \
+  bash -c 'bash scripts/belge-bekci.test.sh && bash scripts/belge-bekci.sh'
 
 # ── backend-check ─────────────────────────────────────────────────────────────
 run_step "Backend prisma generate + tsc (src)" "$ROOT/backend" \

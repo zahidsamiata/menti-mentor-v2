@@ -24,7 +24,9 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'warning' | 'succe
   SCHEDULED:  { label: 'Onaylandı',       variant: 'success' },
   IN_PROGRESS:{ label: 'Devam Ediyor',    variant: 'brand' as 'success' },
   COMPLETED:  { label: 'Tamamlandı',      variant: 'secondary' },
-  CANCELLED:  { label: 'İptal Edildi',    variant: 'destructive' },
+  // P-05 / KARAR-22 (B): kırmızı "İptal Edildi" menti'ye reddi çıplak gösteriyordu. Veride
+  // "mentör reddetti" ile diğer iptaller ayırt edilemediği için (ikisi de CANCELLED) nötr, suçlamayan etiket.
+  CANCELLED:  { label: 'Gerçekleşmedi',   variant: 'secondary' },
   APPROVED:   { label: 'Onaylandı',       variant: 'success' },
 };
 
@@ -64,6 +66,14 @@ function MeetingCard({
       <p className="text-xs text-muted-foreground">
         {opponentLabel}: <span className="font-medium text-foreground">{opponentName}</span>
       </p>
+
+      {/* P-05 / KARAR-22 (B): gerçekleşmeyen görüşmede menti'ye nazik, jenerik açıklama.
+          Mentörün gerekçesi gösterilmez (backend menti'ye `notes` döndürmez); alternatif mentör önerilmez. */}
+      {meeting.status === 'CANCELLED' && !isMentor && (
+        <p className="text-xs text-muted-foreground">
+          Bu görüşme gerçekleşmedi. Bu durum seninle ya da profilinle ilgili bir değerlendirme değil.
+        </p>
+      )}
 
       {/* Format */}
       <p className="text-xs text-muted-foreground">{FORMAT_LABELS[meeting.format] ?? meeting.format}</p>
@@ -196,7 +206,7 @@ export default function MeetingsPage() {
     <div className="space-y-6 max-w-2xl mx-auto animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold">Görüşmelerim</h1>
-        <p className="text-sm text-muted-foreground">Tüm randevularınız ve geçmiş görüşmeleriniz.</p>
+        <p className="text-sm text-muted-foreground">Yaklaşan ve geçmiş tüm görüşmeleriniz.</p>
       </div>
 
       {/* Bekleyen feedback uyarısı */}
@@ -240,7 +250,7 @@ export default function MeetingsPage() {
               <p>Yaklaşan görüşme yok.</p>
               {user?.role === 'MENTI' && (
                 <Button asChild variant="link" size="sm" className="mt-1">
-                  <Link href="/menti">Mentor listesine git →</Link>
+                  <Link href="/menti">Mentör listesine git →</Link>
                 </Button>
               )}
             </div>

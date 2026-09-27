@@ -19,6 +19,7 @@ import { KpiCards } from './_components/KpiCards';
 import { MembersTable, type RoleFilter } from './_components/MembersTable';
 import { MeetingsTable } from './_components/MeetingsTable';
 import { DiscSummary } from './_components/DiscSummary';
+import { UI_TEXT } from '@/lib/uiText';
 
 type DetailTab = 'members' | 'meetings' | 'analytics';
 
@@ -154,7 +155,7 @@ export default function TenantDetailPage() {
       </header>
 
       <main className="px-6 py-6 space-y-6">
-        {loading && <p className="text-muted-foreground text-sm">Yükleniyor…</p>}
+        {loading && <p className="text-muted-foreground text-sm">{UI_TEXT.status.loading}</p>}
         {error && !loading && <p className="text-destructive text-sm">{error}</p>}
 
         {!loading && !error && overview && (
@@ -225,6 +226,7 @@ export default function TenantDetailPage() {
               <div className="pt-6">
                 {tab === 'members' && (
                   <MembersTable
+                    tenantId={id}
                     members={members}
                     loading={membersLoading || !membersLoaded}
                     roleFilter={roleFilter}

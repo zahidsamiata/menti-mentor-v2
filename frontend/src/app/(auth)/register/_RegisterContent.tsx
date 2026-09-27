@@ -12,13 +12,14 @@
  * fullName: Minimum sürtünme için e-posta öneki kullanılır; kullanıcı onboarding'de günceller.
  */
 
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff, CheckCircle2, AlertCircle, CreditCard } from 'lucide-react';
 import { Button }     from '@/components/ui/button';
 import { Input }      from '@/components/ui/input';
 import { Label }      from '@/components/ui/label';
 import { OAuthButtons } from '@/components/molecules/OAuthButtons';
+import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/molecules/TurnstileWidget';
 import { TenantLogo }   from '@/components/atoms/TenantLogo';
 import { fetchInvitation } from '@/lib/api/invitation';
 import { authApi }    from '@/lib/api/auth';
@@ -26,6 +27,7 @@ import { buildTenantThemeVars } from '@/lib/branding';
 import { useAuth }    from '@/providers/AuthProvider';
 import { cn }         from '@/lib/utils';
 import { REGISTER_MESSAGES, resolveRegisterError } from '@/lib/registerMessages';
+import { PASSWORD_RULE_HINT, passwordRuleError } from '@/lib/validation';
 import type { InvitationData } from '@/types/invitation';
 
 // ─── İlerleme Göstergesi ──────────────────────────────────────────────────────
@@ -163,10 +165,13 @@ export default function RegisterContent() {
   const [kvkkConsent, setKvkkConsent] = useState(false);
   const [submitErr, setSubmitErr] = useState<string | null>(null);
   const [loading,   setLoading]   = useState(false);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
+  const captchaRef = useRef<TurnstileWidgetHandle>(null);
 
-  // ── Şifre gücü göstergesi (uzunluk tabanlı) ──────────────────────────────────
+  // ── Şifre gücü göstergesi (uzunluk tabanlı; kurala uymayan şifre her zaman "Zayıf") ──
   const pwStrength = password.length === 0 ? 0
-    : password.length < 8  ? 1
+    : passwordRuleError(password) ? 1
     : password.length < 12 ? 2
     : password.length < 16 ? 3
     : 4;
@@ -186,8 +191,10 @@ export default function RegisterContent() {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       e.email = 'Geçerli bir e-posta adresi girin.';
     }
-    if (!password || password.length < 8) {
-      e.password = 'Şifre en az 8 karakter olmalıdır.';
+    // GV-19: backend passwordPolicy ile aynı kural (8-128, harf + rakam).
+    const pwError = passwordRuleError(password);
+    if (pwError) {
+      e.password = pwError;
     }
     if (password !== confirm) {
       e.confirm = 'Şifreler eşleşmiyor.';
@@ -220,10 +227,18 @@ export default function RegisterContent() {
 
     // Davet token'ını backend'e ilet → geçerliyse davetli APPROVED olur (davet = onay, PO 2026-09-01).
     // Böylece aşağıdaki otomatik login() PENDING 403'üne takılmaz; kullanıcı /onboarding'e ulaşır.
-    const regResult = await authApi.register({ email, password, fullName, role, tenantSlug, kvkkConsent: true, inviteToken: token ?? undefined });
+    const regResult = await authApi.register({
+      email, password, fullName, role, tenantSlug, kvkkConsent: true,
+      inviteToken: token ?? undefined,
+      captchaToken,
+    });
 
     if (!regResult.ok) {
       setLoading(false);
+      // Token tek kullanımlıktır (bkz. TurnstileWidget dosya başı) — sıfırlanmazsa
+      // kullanıcı ikinci denemede kendi hatasını değil CAPTCHA_GECERSIZ'i görür.
+      captchaRef.current?.reset();
+      setCaptchaToken(undefined);
       setSubmitErr(resolveRegisterError(regResult.error));
       return;
     }
@@ -355,6 +370,8 @@ export default function RegisterContent() {
             autoComplete="new-password"
           />
 
+          <p className="-mt-2 text-xs text-muted-foreground">{PASSWORD_RULE_HINT}</p>
+
           {/* Şifre gücü göstergesi */}
           {password.length > 0 && (
             <div className="space-y-1 -mt-2">
@@ -373,7 +390,7 @@ export default function RegisterContent() {
               </div>
               <p className="text-[10px] text-muted-foreground">
                 Güç: <strong>{PW_LABELS[pwStrength]}</strong>
-                {pwStrength < 2 && ' — en az 8 karakter kullanın'}
+                {pwStrength < 2 && ' — en az 8 karakter, harf ve rakam kullanın'}
               </p>
             </div>
           )}
@@ -388,9 +405,9 @@ export default function RegisterContent() {
             autoComplete="new-password"
           />
 
-          {/* Eşleşme onayı */}
+          {/* Eşleşme onayı — AJ-07: emerald-600 beyaz zeminde ~3.8:1 (AA eşiği 4.5:1 altı), emerald-700'e çekildi (~5.5:1). */}
           {confirm.length > 0 && password === confirm && (
-            <p className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 -mt-2">
+            <p className="flex items-center gap-1 text-xs text-emerald-700 dark:text-emerald-400 -mt-2">
               <CheckCircle2 className="h-3.5 w-3.5 shrink-0" aria-hidden />
               Şifreler eşleşiyor
             </p>
@@ -422,6 +439,9 @@ export default function RegisterContent() {
               <p role="alert" className="text-xs text-destructive pl-6">{errors.kvkk}</p>
             )}
           </div>
+
+          {/* ── CAPTCHA (F-05/G1-26) ─────────────────────────────────── */}
+          <TurnstileWidget ref={captchaRef} onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
 
           {/* ── Genel hata ───────────────────────────────────────────── */}
           {submitErr && (

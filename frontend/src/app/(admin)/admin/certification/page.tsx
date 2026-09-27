@@ -10,6 +10,7 @@ import { certificationApi } from '@/lib/api/certification';
 import type { CertTopicsResponse } from '@/types/certification';
 import { topicLabel as label } from '@/lib/certificationTopics';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
+import { UI_TEXT } from '@/lib/uiText';
 
 export default function AdminCertificationPage() {
   const { user } = useAuth();
@@ -65,7 +66,7 @@ export default function AdminCertificationPage() {
       {error && <AlertMessage type="error" message={error} />}
 
       {loading || !data ? (
-        <p className="text-center text-muted-foreground py-8">Yükleniyor…</p>
+        <p className="text-center text-muted-foreground py-8">{UI_TEXT.status.loading}</p>
       ) : (
         <>
           {/* Backend'den gelen tek-kaynak eşik özeti (UI kendi hesaplamaz) */}

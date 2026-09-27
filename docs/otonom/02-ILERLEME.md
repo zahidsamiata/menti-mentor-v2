@@ -1,6 +1,64 @@
 # 02-ILERLEME — Otonom Tur İlerleme Defteri
 
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
+> Önceki haftalar: `docs/otonom/arsiv/02-ILERLEME-2026-W38.md` (haftalık döndürme — OTONOM-PROMPT § AKTİF/ARŞİV AYRIMI (d)).
+
+## TUR ÖZETİ (2026-09-26, VPS oturumu — 2. tur, 2026-09-26 23:50 UTC)
+
+**Kuyruk son dağılımı:** 90 satır: 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51 (1. tur sonu: 90 satır — 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51).
+
+**BITTI ve CANLIDA (kullanıcı artık şunu görüyor):**
+- KR-19b — yönetici engellediği çiftte mesaj gönderme ve eşleşme isteği de reddediliyor (#348).
+- F-28b — 21 ekranda durum metinleri tek sözlükten (#349) · AN-10b — öğrenme kartında "mentörlüğün" (#347).
+- K-05b — menti görüşme saatini yalnız mentörün müsait aralıklarından seçiyor (#350).
+- K5-Y3 — 10 riskli uca 41 negatif test; açık yok (#351) · Y3b — başka kurumun KVKK/metrik isteği 404 (#352).
+- AN-07 — kalabalık havuzda en iyi aday kaybolmuyor, liste daha hızlı (#353).
+- Denetimler: K5-Y2 (64 BITTI satırı yeniden denetlendi — 4'ü yeniden açılıp 3'ü kapatıldı, GV-12 → KARAR-102) · K5-Y3 tarama (179 uç, 134'ünde izolasyon testi yok — rapor).
+
+**KARAR BEKLIYOR (bu turda açılan):** KARAR-102 (kayıt sonrası e-posta doğrulaması — GV-12 kalanı). Önceki turdan: ⭐ KARAR-101 · KARAR-96/97/98/99/100.
+
+**DURDU — gerekçe:** Kuyrukta hemen yapılabilir 🟢 kalmadı: kalanlar karar bekliyor (E-3 kalemleri, AN-12, AN-49, IC-10/AN-05 adları), PO eli/dış hizmet gerektiriyor (F-05 CAPTCHA sağlayıcısı, Y-12 çerez/analitik), büyük özellik ya da sıra bağımlı (AN-29, AN-31, F-24, Y-17 → PS-A3). K5'ten Y1-Y3 yapıldı; Y4 (karar kartı kanıt tazeleme) ve F-01 (büyük belge reorg) düşük değerli belge işi olarak bir sonraki tura bırakıldı — K1-(a)'ya en yakın durum.
+
+**BACKEND:** pointer `eb48287` → **`4db73a1`** (= backend main HEAD ✅). **STASH:** yok. **Açık worktree'ler:** yalnız önceki oturumlardan kalan `/tmp` ve `.claude/worktrees` kopyaları (silinmedi — PO onayıyla temizlenir).
+
+---
+
+## TUR ÖZETİ (2026-09-26, VPS oturumu — GÖREV 0 kapı 4 renk + GÖREV 1 uzun çalışma, 2026-09-26 21:32 UTC)
+
+**Kapı dağılımı (açık satır, BITTI ve "→" hariç):** önce (GÖREV 0 öncesi) 122 satır — 🟢 19 · 🟡 51 · 🔴 49 (+2 karışık) · 🔵 0 → GÖREV 0 sonrası 🟢 51 · 🔵 11 · 🟡 9 · 🔴 51 → **tur sonu 90 satır: 🟢 20 · 🔵 11 · 🟡 8 · 🔴 51.**
+
+**BITTI ve CANLIDA (kullanıcı artık şunu görüyor):**
+- GÖREV 0 (#328) — kuyruk 4 renkli kapıyla çalışıyor.
+- PS-A1 — kişilik profili OCEAN değerleri doğru ölçekte · GV-08 — hesap silinince arketip ve serbest yorumlar da anonimleşiyor · KR-14 — testler canlı DB'nin hiçbir adresine koşamıyor (#329).
+- KR-22 — verify her CI adımını ayrı raporluyor, atlanan adım yeşil sayılmıyor (#330).
+- IC-01 — mentör panelinde DISC etiketleri Türkçe ("D — Kararlılık…") (#331).
+- PS-10 — boş mentör listesinde menti suçlanmıyor, teste gönderilmiyor (#333).
+- YN-13 — kişi adı yasal metin dışı belgelerden kalktı (#334; PO kısmı kaldı).
+- KR-21 — kurumun seçtiği rapor sıklığı ağırlık ayarını belirliyor · PS-09 — formül vakaları CI'da (#336).
+- GV-19 — profilde "Şifreyi değiştir"; zayıf şifreler reddediliyor · AN-09 — şüphe bildirimi platform yöneticisine e-postayla (#335).
+- IC-11 — tek terim "görüşme" (Görüşme Talep Et / Görüşme Talepleri) · Y-02 — platform okuma uçları denetim izi bırakıyor (#338).
+- AN-10 (yazım ayağı) — panelde tek yazım "mentör" (#339).
+- KR-16 — sunucu açılışı internetsiz, Prisma CLI imajda sabit sürüm · IC-12 (#341).
+- F-18 — kurum yöneticisi KPI raporunu CSV indiriyor (k-anonim) (#342).
+- Y1-B9 / B9b / B9c — dondurulmuş/reddedilmiş kurumun kullanıcıları erişemiyor (KVKK hakları açık), önerilerde görünmüyor, başka kurumdan istek alamıyor (#344 · #345 · #346).
+- Belge/doğrulama: AN-53 (G-kart 145 kalem doğrulandı) · AN-54 (694 şema kalemi, 2 gerekçesiz) · YN-11 · AN-43 · AN-44 · IC-12 · YN-15 · doc-senkron: GV-10/11/12/13 · PS-01/06 · F-23 · içerik yazıldı (onay bekliyor): IC-10 · AN-05.
+
+**KARAR BEKLIYOR (bu turda açılan):** KARAR-96 (AN-30 🔵) · KARAR-97 (U-18 🔵) · KARAR-98 (AN-26 🔵 + paylaşımlı havuz alt sorusu) · KARAR-99 (AN-02 🔵) · KARAR-100 (`SJT_ENRICHED` gerekçesiz) · ⭐ **KARAR-101** (güvenlik açığı B8 nasıl kapansın — Bekleme Odası). AN-30/U-18/AN-26'nın kodu 7b ONAY'lı, yalnız EVET + DB yedeği bekliyor.
+
+**PR-ACIK (merge edilmedi):** IC-08 (backend #151 merge sınıflandırıcı reddi — ONAY'lı, çatı #332) · P-05 (#162/#340, ONAY'lı; kapı 🔵 ama migration'sız → kapı kararı) · Y1-B8 (#164/#343 → KARAR-101) · AN-30 · U-18 · AN-26 · AN-02.
+
+**BASARISIZ / ATLANDI:** I-12 ATLANDI (KARAR-57) · Y-05 tek seferlik DB erişimi (EXPLAIN) gerekiyor · YN-01/07/08/14 BASARISIZ (önceki turun "CLAUDE.md'ye dokunma" talimatı; bu turda açılmadı).
+
+**CANLIDA KONTROL EDİLECEKLER:** KR-16 sonrası Dokploy'da ayrı başlatma komutu yok mu (03-PO-ELLE-ISLER) · F-18 CSV Excel'de açılıyor mu · GV-19 şifre değiştirme akışı.
+
+**PO'NUN KENDİ YAPMASI GEREKENLER:** `03-PO-ELLE-ISLER.md` § "🟡 KAPI SATIRLARININ PO KISMI" — en kritik 3: (1) Dokploy başlatma komutu teyidi (KR-16) · (2) SMTP + `TENANT_NOTIFICATIONS_ENABLED` (DK-02) · (3) backend `.claude/settings.local.json` kişisel yol (YN-13).
+
+**BACKEND:** pointer `cde7bb8` → **`eb48287`** · çatı main pointer = backend main HEAD ✅ (`git ls-tree origin/main backend` = `eb48287`).
+**STASH:** yok.
+**Kural ihlali (kendi kaydım):** 1 kez canlıya kimliksiz POST (change-password) atıldı — veri yazılmadı; ayrıntı aşağıda 18:5x kaydında.
+**Limitin en çok gittiği yer:** bağımsız 7b incelemeleri (her auth/KVKK işi 1-2 tur) — kaçınılmaz; ama birkaç düzeltme turunu (AN-30, U-18, AN-26 main çakışmaları) önceden main birleştirmesiyle önlemek mümkündü.
+
+---
 
 **ARA KAYIT — çatı #316 (K-05) ve #315 (GV-09b) merge edildi.** İkisi de bağımsız inceleme ONAY, CI yeşil, `~/menti` içinden `gh pr merge` SORUNSUZ geçti. Merge sonrası canlı kontrol: `GET /health` → `ok:true, db:up, smtp:verified, cron:enabled` · site 200. Sorun yok, revert gerekmedi. K-05'in bağımsız incelemesi kapsam dışı gerçek bir bug buldu (bloksuz mentörde backend/frontend davranış uyuşmazlığı) → kuyruğa **K-20** olarak eklendi (🟡, TEYİT GEREK notuyla — KARAR-53 ④'e göre doğru davranış zaten cevaplanmış olabilir). K-05 satırı kısmen BITTI (mesajlaşma dilimi), takvim görünümü kalan iş olarak açık bırakıldı.
 
@@ -758,352 +816,7 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 
 ---
 
-## TUR ÖZETİ — TUR AB (2026-09-20 gece) · 10 iş CANLIDA + prompt güncellemesi · TUR YARIM (kalan 🟢: 40)
-
-**Neden yarım:** K-20 (belge senkronu) YALNIZ hiç 🟢 iş kalmayınca yapılır (DURMAMA KURALI D.1). Kuyrukta hâlâ
-**40 tane 🟢 BEKLIYOR** iş var → K-20 YAPILMADI, tur yarım kapandı. Bağlam dolduğu için temiz kesim (D.4).
-Sonraki tur aynı promptla kaldığı yerden devam eder.
-
-### ✅ BİTTİ ve CANLIDA — 10 kuyruk işi (+ prompt + pointer bump) — hepsi ayrı PR, tek tek revert edilebilir
-**Frontend (çatı, canlı):**
-1. **P-02 (PR #211):** Menti "Gönderilen Talepler" sayfa yenilenince artık sıfırlanmıyor (kalıcı `/api/conversations`).
-2. **P-03 (PR #209):** Menti panelinde DISC arketip "aha" kartı rapeli — kayıttan sonra tekrar görülebiliyor.
-3. **P-07 (PR #214):** Görüşme değerlendirmesi sonrası kaçıncı görüşme olduğuna göre kişiye özel kutlama (jenerik değil).
-4. **P-09 (PR #210):** Yeni mentör boş panelde 'Toplantı Talepleri' kartını + doğru rol metnini görüyor.
-5. **P-14 (PR #216):** Mentör panelinde emeğini anlatan takdir cümlesi ('💚 …').
-6. **U-14 (PR #212):** Süresi dolmuş davette 'Yeni davet iste' + 'Giriş yap' düğmeleri.
-**Backend (submodule, pointer #215 ile CANLIDA):**
-7. **V-10 (PR #78):** `/users/:id/export` rate limit (KVKK export bypass'ı kapandı).
-8. **V-07 (PR #79):** Hatırlatma mailinde batch tavanı + toplantı-başına cooldown (SMTP spam koruması).
-9. **V-13 (PR #80):** `/api/tags/suggest` requireTenant+requireAuth ile mount (fail-closed ölü uç çözüldü).
-10. **F-06 (PR #81):** Kalibrasyon audit yazımı artık yutulmuyor (await + catch, G1-14).
-**Altyapı:** OTONOM-PROMPT.txt'ye DURMAMA KURALI + ARA KAYIT eklendi (#208) · backend pointer `4528048`→`19e7703` bump (#215).
-
-### KARAR BEKLİYOR — 0 yeni kart açıldı
-Bu tur yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değişmedi, CEVAP satırlarına dokunulmadı.
-
-### BAŞARISIZ — 0
-
-### CANLIDA KONTROL EDİLECEKLER (PO gözle bakacak)
-- Menti panelinde DISC arketip kartı tekrar görünüyor mu (P-03) + gönderilen talep sayısı yenilenince korunuyor mu (P-02)
-- Görüşme değerlendirmesi sonrası kilometre-taşı kutlaması (P-07)
-- Yeni mentör boş panelinde 'Toplantı Talepleri' kartı + takdir cümlesi (P-09/P-14)
-- Süresi dolmuş davette 'Yeni davet iste' düğmesi (U-14)
-- (Backend) `/api/tags/suggest` artık 201 dönüyor · hatırlatma maili tekrar tetiklenince spam atmıyor
-
-### KUYRUK SON DAĞILIMI
-- **BITTI (bu tur):** 10 · **kalan 🟢 BEKLIYOR: 40** (K-04/05/06/08/10/11/12 · F-01/10/13/14/15/16/19/20/21/22/25/26/27/28/29/31/32/33 · P-10/11/12/13 · U-04/05/10/16 · V-01/02/08/09/11/14 · E-3)
-- 🟡 ve 🔴 sabit (KARAR bekleyenlere dokunulmadı).
-- **Test:** Backend CI 67 test dosyası passed (yeni: reminder-batch-cooldown 2 + export-id-rate-limit 1 + tags-suggest-mount 2; F-06 audit testi deterministik) · Frontend 25 test dosyası passed (yeni: disc-recall-card·mentor-empty-panel·mentiMetrics+4·milestones 6·mentorAppreciation 4·join-expired). KURAL 14: test adları CI logunda doğrulandı.
-
-### BACKEND
-- pointer eski `4528048` → yeni `19e7703` (V-07/10/13/F-06). Ata teyidi ileri-sarım güvenli. Çatı pointer == backend main HEAD → **SARKMA YOK.**
-
-### PO'NUN KENDİ YAPMASI GEREKENLER
-`docs/otonom/03-PO-ELLE-ISLER.md` (değişmedi). En kritik 3: avatar kalıcı disk (K-04/Dokploy) · SMTP değerleri (V-01/U-15) · yedek+restore provası.
-
-### DOKUNULMAYANLAR
-⛔ DB/migration/seed YOK · şema DEĞİŞMEDİ · `server.ts` rate-limit/trust-proxy (yasak bölge) DOKUNULMADI · auth guard/KVKK-silme/matching motoru DEĞİŞMEDİ · KIRIK TEST YOK (yalnız test EKLENDİ) · `docs/gelen/` ELLENMEDİ · KARAR CEVAP satırı doldurulmadı · #110 ellenmedi · hiçbir şey silinmedi.
-
----
-
-## TUR ÖZETİ — TUR AA (2026-09-20) · OTONOM-PROMPT güncelleme + 5 uçtan-uca (U) + 1 temizlik CANLIDA
-
-**Neden bu tur:** OTONOM-PROMPT.txt 2026-09-19'dan bayattı (en kritik: ARA KAYIT kuralı yoktu → önceki gece 2 turun emeği push edilmeden kayboldu). Önce prompt güncellendi, sonra kuyruktaki uçtan-uca (U) yolculuğu tıkayan 🟢 FE düzeltmeleri işlendi. Her iş bittiğinde ANINDA commit+push+PR (ARA KAYIT).
-
-### BİTTİ ve CANLIDA — 6 iş merge edildi (hepsi FE; backend/şema/DB DEĞİŞMEDİ)
-1. **Bölüm A — OTONOM-PROMPT.txt (PR #200):** 7 madde eklendi (ARA KAYIT kuralı · kapı politikası gevşetmesi · 6 aşama · PO/ajan ayrımı · 3. mod REMOTE CONTROL · yasak bölge server.ts). *Belge — kullanıcıya görünmez ama sonraki turların davranışını düzeltir.*
-2. **U-02 (PR #201):** Menti/mentör "Görüşmelerim"de online görüşmenin **katılım linkini** görüp tıklıyor (yüz yüze→konum, telefon→numara). Eskiden backend gönderiyordu ama 0 yerde render ediliyordu.
-3. **U-07 (PR #202):** Onay bekleyen kullanıcı `/pending-approval`'da **kendi e-postasını** görüyor (eskiden boştu — token yoktu).
-4. **U-03 (PR #204):** Davet ekranında link/şablon **hatası artık görünüyor** (eskiden sessizdi, 403 dahil); kopyalanan davet metninde **kurum adı dolu** (eskiden boştu).
-5. **U-09 (PR #203):** Boş onay/bekleme panelinde yanıltıcı "🎉 Tüm kayıtlar işlendi" yerine **doğru metin + "Davet gönder" düğmesi**.
-6. **U-11 (PR #205):** Kurum onboarding son adımında davet süresi **30 gün** (koddaki gerçek; eskiden "90 gün" yazıyordu).
-7. **F-30 (PR #206):** `LoginForm` bayat "Sprint 14" yorumu temizlendi (yalnız yorum).
-
-### KARAR BEKLİYOR — 0 yeni kart açıldı
-Bu turda ürün kararı gerektiren işe girilmedi (yalnız kararsız, geri-alınır FE düzeltmeleri seçildi). Mevcut açık KARAR-1..28 değişmedi.
-
-### BAŞARISIZ — 0
-
-### CANLIDA KONTROL EDİLECEKLER
-- "Görüşmelerim"de online görüşmede katılım linki tıklanabilir mi (U-02)
-- Onay bekleyen ekranında e-posta dolu mu (U-07)
-- Davet metni kopyalanınca kurum adı dolu mu + hata görünüyor mu (U-03)
-- Yeni kurumda boş onay panelinde "Davet gönder" düğmesi var mı (U-09)
-
-### PO'NUN KENDİ YAPMASI GEREKENLER
-`docs/otonom/03-PO-ELLE-ISLER.md` (değişmedi). En kritik 3: avatar kalıcı disk (K-04) · SMTP değerleri (U-04/U-15/V-01) · yedek+restore provası (madde 120/G1-28).
-
-### KUYRUK SON DAĞILIMI
-6 iş 🟢'dan BITTI'ye · 🟡 sabit · 🔴 12 sabit. Test: FE suite 78/78 (11 yeni test bu tur), 6 PR'ın hepsinde CI 8/8. Backend işi YOK → submodule pointer değişmedi (`4528048`).
-
-### DOKUNULMAYANLAR
-⛔ DB'ye komut GİTMEDİ · migration YOK · seed YOK · şema DEĞİŞMEDİ · `server.ts` rate-limit/trust-proxy (yasak bölge) DOKUNULMADI · auth guard/KVKK/matching dosyası DEĞİŞMEDİ · KIRIK TEST YOK (yalnız 11 test EKLENDİ) · `docs/gelen/` ELLENMEDİ · KARAR CEVAP satırı doldurulmadı · ölü `config.invitationTokenExpiry` SİLİNMEDİ (protokol).
-
----
-
-## TUR ÖZETİ — TUR Z (2026-09-20) · W+X denetimleri kuyruğa + 3 güvenlik/sağlamlık düzeltmesi
-
-**Neden bu tur:** 2026-09-19'daki iki büyük denetim (X uçtan-uca kurum yolculuğu, W operasyonel hazırlık) rapor olarak duruyordu ama kuyruğa hiç işlenmemişti (öksüz bulgu). Bu tur işledi + birbirine dokunmayan 3 açığı kapattı.
-
-### ⭐ CANLIDA BAK (PO gözle/operatör bakacak) — 3 düzeltme canlıya alındı
-1. **Güvenlik (IDOR):** Bir mentör, başka bir mentörün ID'sini kullanarak onun adına "görünürlük opt-in" kaydı **artık yazamıyor** — 403 alıyor (kendi adına veya ADMIN yazabilir). *(backend PR #76)*
-2. **Sağlamlık (/health):** Veritabanı çökerse `/health` artık **503** dönüyor (eskiden "her şey yolunda" diyordu). Docker konteyneri gerçekten "unhealthy" görünür. *(backend PR #77)*
-3. **Beyaz ekran gitti:** Bir sayfa çökerse kullanıcı beyaz ekran yerine **"Bir şeyler ters gitti" + Tekrar dene / Ana sayfaya dön** görüyor; bilinmeyen adres → **404 ekranı**. Hata ayrıntısı kullanıcıya gösterilmiyor (güvenlik). *(çatı PR #197)*
-
-### Belgeye işlenenler (kod değil, kuyruk/karar)
-- **`00-KUYRUK` AŞAMA U** (X raporu, U-01..U-19) + **AŞAMA V** (W raporu, V-01..V-15). Numaralar "aday" — PO onaylayınca kesinleşir.
-- **`.env.example`** 17 belgelenmemiş ortam değişkeni eklendi + 3 ölü ayar işaretlendi *(backend PR #75)*.
-- Yeni **`docs/otonom/03-PO-ELLE-ISLER.md`** — senin elle yapman gereken kod-dışı işler (Dokploy avatar diski, SMTP, yedek, NODE_ENV, kurum bildirimi env…), her biri "nasıl anladığın" doğrulama adımıyla.
-- **`01-KARARLAR` KARAR-23..28** açıldı — 6 yeni ürün/hukuk kararı seni bekliyor (kurum bildirimleri · hata izi panele · yedek nereye · yedek tablo silme · dış hata izleme · ölü LLM env). **Cevap bekliyor.**
-
-### ⛔ SENİN ELLE YAPMAN GEREKENLER (özet — ayrıntı 03-PO-ELLE-ISLER.md)
-En acil: **avatar için kalıcı disk (Dokploy)** · **düzenli yedek + geri-yükleme provası** (🔴 çıkış blokeri) · **NODE_ENV=production teyidi** · **SMTP doldur** · **TENANT_NOTIFICATIONS_ENABLED=true**.
-
-### Doğrulama
-- 3 kod PR'ı CI yeşil; yeni testler CI log'unda doğrulandı (KURAL 14): IDOR 3 test (→468), /health 2 test (→467), frontend 8/8.
-- `npm run verify`: tsc/eslint/frontend(69 test)+build ✓; backend entegrasyon TEST_DATABASE_URL guard'ıyla durdu (lokalde beklenen) → asıl kanıt CI.
-- Submodule pointer `61aae07 → 4528048` (backend main HEAD, ata teyitli). Çatı pointer == backend main HEAD ✅.
-
-### ⛔ DOKUNULMAYANLAR
-Yeni ürün kodu (3 düzeltme dışında) YAZILMADI · DB/migration/seed YOK · şema DEĞİŞMEDİ · `server.ts` rate-limit/trust-proxy'ye DOKUNULMADI (K-14/F-04 yasak bölge) · 🔴 sayısı **12** sabit · hiçbir CEVAP satırı doldurulmadı · #110 (MERGE ETME) ellenmedi · hiçbir şey silinmedi (ölü ayarlar yalnız işaretlendi).
-
----
-
-## TUR ÖZETİ — TUR 1 (2026-09-19)
-
-**BİTTİ ve CANLIDA (3 iş):**
-- **K-01** — (kullanıcı-görünmez altyapı) submodule pointer sarkması giderildi; defter temiz.
-- **K-07** — Kullanıcı artık sertifika ve öğrenme yolculuğu şıklarını **her zaman üstten A, B, C, D** sırasıyla görüyor (karıştırma sonrası harfler artık yapışık kalmıyor).
-- **K-09** — Menti panelinde "Onaylanan Eşleşmeler" ve "Tamamlanan Toplantılar" kartları artık **gerçek sayı** gösteriyor (eskiden hep 0'dı).
-
-**BİTTİ ve CANLIDA — K-02 de merge oldu (toplam 4 iş):**
-- **K-02** — /disc-test artık hata/boş durumda **sonsuz iskelet yerine** anlaşılır mesaj + "Tekrar dene" gösteriyor. (PR #179 merged, CI 8/8.)
-
-**KARAR BEKLEYEN:** Bu turda yalnız migration'sız/karar'sız 🟢 işler yapıldı. Tüm KARAR-1..11 hâlâ **cevapsız** → 🔴 işler (K-13, K-15..K-19, E-5) ve 🟡 işler bekliyor. Bunları açmak için `01-KARARLAR.md`'yi cevaplaman gerekiyor.
-
-**BAŞARISIZ:** 0.
-
-**CANLIDA KONTROL EDİLECEKLER:**
-- Sertifika sınavı / öğrenme yolculuğu: şıklar üstten A→D mı?
-- Menti paneli: eşleşme/toplantı kartları gerçek sayı mı?
-- /disc-test: (soru havuzu boşsa/istek başarısızsa) sonsuz iskelet yerine mesaj + Tekrar dene çıkıyor mu?
-
-**PO'NUN KENDİ YAPMASI GEREKENLER:**
-- `01-KARARLAR.md`'deki KARAR-1..11'i cevapla → kilitli işler (randevu mimarisi, sertifika seed, profil linki, öğrenme yolculuğu seed, mükerrer uç temizliği) açılır.
-- KARAR-8 (repoları private yap) — GitHub hesabı gerektirir, ajan yapamaz.
-
-**SONRAKİ TUR İÇİN NOT (ajan):** K-08 (sosyal alan platform doğrulaması) FE+BE — backend submodule + pointer akışı gerektiriyor; bu tur bağlam bütçesi için bilinçli SIRAYA bırakıldı, kök sebep kanıtlandı (`backend userController.ts:325-336` NULLABLE_URL platform kontrolü yok; FE `profile/page.tsx:392-419`). K-03/K-06/K-10/K-11/K-12 de bekliyor.
-
----
-
----
-
-## TUR 1 — 2026-09-19 11:42
-**Aktif şeritler:** Tek orkestratör, SIRALI yürütme (git kilidi riski + submodule → şüphede sıralı).
-Okuma keşifleri paralel alt-ajanla. Yazma işleri sırayla.
-
-**Açılışta doğrulanan durum (kanıt):**
-- Çatı origin/main = `15c624e` (PR #175 madde164 MERGED), backend pointer `02129fe` (feature commit → SARKMA)
-- Backend origin/main HEAD = `1304790` (merge commit #71)
-- `02129fe → 1304790` ileri sarım güvenli (merge-base --is-ancestor = 0)
-- Lokal main geride (`6ae7d4b`) → güncellenecek
-- `docs/otonom/` + `docs/gelen/` untracked (PO yerel dosyaları, korunuyor)
-- Tüm KARARLAR (KARAR-1..11) CEVAP boş → 🔴 işler kilitli, atlanacak
-- gh: zahidsamiata authenticated
-
-### İş kayıtları (append-only)
-
-**TUR 3 — 2026-09-19 · AŞAMA E (E-1 niyet arkeolojisi + E-2 triyaj) · salt-okuma keşif**
-- **E-1 ✅ BİTTİ** — Rapor: `docs/raporlar/kesif/hayalet-envanter-2026-09-19.md`. 4 paralel salt-okuma alt-ajan.
-  - Envanter (baştan çıkarıldı): **35 öksüz backend ucu** · **4 ölü şema alanı** (1'i WIP internalNote, 1'i verifiedBy) · **3 mount edilmeyen bileşen**.
-  - Eski "~56 uç / ~44 kalem" repoda kanıtlanamadı — gerçek 2026-08-02 raporu **6 uç** saymış; "~56" başka oturumun şişmiş sayısı.
-  - Yanlış-pozitif elendi: `platform/tenants/:id/meetings` aslında çağrılıyor. `IndustryNode.parentId` relation'la okunuyor (ölü değil).
-  - **GEREKÇE BULUNAMADI = 1** (yalnız `Tenant.verifiedBy` alanının kendi niyeti; kardeş alanlar belgeli).
-- **E-2 ✅ BİTTİ** — 4 kova: 🔧BAĞLA~7 · 🔒KARANTİNA ADAYI~13 (hepsi mevcut KARAR-11) · ⚙️OPERASYON~7 · ❓SOR (KARAR-9/10/12/15).
-  - **6 YENİ kümelenmiş karar kartı: KARAR-12..17** (01-KARARLAR sonuna). ≤10 sınırı korundu.
-  - Mükerrer uçlar (KARAR-11), kulüp+iş ilanları (KARAR-9), OCEAN/SJT+triggersOn/signalsArchetype (KARAR-10) → mevcut kartlara REFERANS, tekrar kart açılmadı.
-  - Kart açılmayan düşük-değer (sonraki tura): tags/suggest · /requests GET · verifiedBy audit yazımı (teknik).
-- **⛔ Kod/DB/şema/seed DEĞİŞMEDİ · frontend/ backend/ yalnız OKUNDU · hiçbir şey silinmedi/karantinaya alınmadı · 01-KARARLAR CEVAP satırlarına dokunulmadı (yalnız sona kart eklendi).**
-- **PO'YA:** 01-KARARLAR'da artık **17 karar** cevap bekliyor (KARAR-1..11 eski + KARAR-12..17 yeni). Hepsi tek oturumda cevaplanabilir.
-
-
-**K-01 · Submodule pointer re-bump · ✅ BİTTİ & CANLIDA (PR #176 merged)**
-- Çatı pointer `02129fe` (feature) → `1304790` (backend main HEAD, merge commit #71). Ata teyitli.
-- CI: 8/8 pass (backend/frontend/integration/e2e). Doğrulama listesi tam.
-- CANLIDA BAK: kullanıcı-görünür değişiklik yok; defter/pointer düzeltmesi (sarkma giderildi).
-
-**K-07 · Şık harfleri karıştırmadan sonra A→D · ✅ BİTTİ & CANLIDA (PR #177 merged)**
-- Kök: `certification/page.tsx:290` + `ScenarioGuideEngine.tsx:218` görünüm harfini `o.key`/`c.key`'den basıyordu → shuffle sonrası harfler orijinal sıraya yapışık.
-- Düzeltme: görünüm harfi map index'inden (`String.fromCharCode(65+idx)`); cevap kimliği (`o.key`) korunur.
-- Test: ScenarioGuideEngine.test.tsx 5/5 (yeni: shuffle sonrası ilk şık 'A)'). CI 8/8.
-- CANLIDA BAK: sertifika + öğrenme yolculuğu şıkları hep üstten A,B,C,D sırasıyla.
-
-**K-09 · Menti paneli sahte 0 kartları gerçek veriye · ✅ BİTTİ & CANLIDA (PR #178 merged)**
-- Kök: `menti/page.tsx:203-204` "Onaylanan Eşleşmeler"/"Tamamlanan Toplantılar" `value={0}` hardcoded.
-- Düzeltme: `/api/meetings` (backend kendi toplantılarına kapsar) verisinden türetildi; sayım saf helper'a (`lib/mentiMetrics.ts`) çıkarıldı + test (3/3). Backend değişmedi.
-- Tamamlanan = COMPLETED sayısı · Onaylanan eşleşme = PENDING/CANCELLED dışı tekil mentör.
-- CANLIDA BAK: menti panelinde gerçek tamamlanan toplantı + onaylanan eşleşme sayısı.
-- NOT: "Gönderilen Talepler" kartı oturum-içi sayaç (sahte 0 değil) → kapsam dışı bırakıldı.
-
-**K-02 · /disc-test sonsuz iskelet → hata/boş ekranı · ✅ BİTTİ & CANLIDA (PR #179 merged, CI 8/8)**
-- Kök (kesin): `disc-test/page.tsx:86` iskeleti `questions.length===0` ile gösteriyordu → yükleniyor/hata/boş üçü karışıyor; getQuestions başarısızsa hata hiç görünmeden sonsuz iskelet.
-- Düzeltme: `DiscTestState.loading` bayrağı + `reload()`; sayfa üç durumu ayırır (iskelet / 'Test yüklenemedi'+Tekrar dene / 'Aktif test sorusu yok'). Test-içi hata hâlâ kartta inline.
-- Test: useDiscTest.test.tsx 3/3. Lokal tsc+eslint temiz.
-- CANLIDA BAK (merge sonrası): /disc-test hata/boş durumda anlaşılır mesaj + Tekrar dene.
-
----
-
-## TUR 2 — 2026-09-19 · BİLANÇO DENKLEŞTİRME (AŞAMA F) · salt-okuma denetim + yalnız belge yazımı
-**Mod:** 🟩 PLANLA (kod/DB/şema DEĞİŞMEDİ) → SONDA yalnız belge yazımı. 8 paralel salt-okuma alt-ajan (Faz 1-8).
-
-**Ne yapıldı:** `00-ONCELIK-SIRASI-2026-08-28.md` (2026-08-28'de yazılmış, 21 gün işlenmemiş "87 işleme al" sırası)
-Faz 0-8'deki her kalem **bugünün koduna karşı** doğrulandı (dosya:satır kanıtı). Açık kalemler `00-KUYRUK.md` AŞAMA F'ye devredildi.
-
-- **ADIM 0 (tekrarı önle):** `T3-D-tur1-denklestirme.md` okundu — o belge FARKLI bir işti (TUR-1 sayım-tahminlerini
-  denkleştirdi: ~103/~140 → kesin sayı, 🟡 kodu ekleme, ThemeToggle düzeltmesi). "87 işleme al" kalemlerini koda karşı
-  doğrulama YAPILMAMIŞTI → bu tur o boşluğu doldurdu, tekrar yok.
-- **Taranan:** ~71 öncelik-sırası kalemi (birim: sırada adı geçen satır; G9-grubu tek satır=12 belge kalemi temsil eder).
-  Kaynağın "87" sayısı tek tek G-kartını sayar (G9 tek başına 16 kart) → fark birim tanımından, çelişki değil.
-- **Dört durum dağılımı:** ✅ 20 · 🟡 14 · ⬜ 31 · 🗑️ 2 (G2-10 çift-çarpım çürütüldü #138, G10-23 dosya silinmiş) ·
-  ⚫ geçersiz/bilinçli-devredildi 3 (G1-01 yaş→metin beyanı · G1-17 backend'de çözüldü · G1-04 public form, izolasyon açığı değil) · ❓ 1 (G3-16/18 canlı içerik = DB teyit turu).
-- **⭐ "Yapıldı sanılıp yapılmamış" = 0.** Tersine, **"yapılmamış sanılıp YAPILMIŞ" (kart bayat, kod ilerlemiş) = 5:**
-  - **G3-19** etiket havuzu — kart ⬜ der; `schema.prisma:843-880 PendingTag` + `tagController` (suggest/approve/merge/reject) + admin route'ları VAR.
-  - **G2-11** davetli=onaylı tetiği — kart "kodda yok" der; `authController.ts:165-169` inviteToken→APPROVED tetiği VAR (PO 2026-09-01 Seçenek A).
-  - **G4-02** menti-yönü "neden uyumlu" — kart eksik der; `menti/page.tsx:288-291 compatibilityReason` render ediliyor.
-  - **G4-04** yönetici atama + onaylı liste — kart 🟡 der; `(admin)/admin/managers/page.tsx` tam panel.
-  - **G10-25** profil düzenleme — kart ❓ der; `(dashboard)/profile` + `lib/api/profile.ts` çalışıyor (YANLIŞ SORU TUZAĞI'nın klasik örneği).
-- **Örtüşme (yeni satır AÇILMADI, mevcut K- satırına Not eklendi):** K-13 = G10-01(c)/G4-09/G4-10/G10-23 · K-14 = G1-28/F-04/F-05 ·
-  K-16 = G3-08/G3-09 · K-04 = G8-01/G8-02. (⚠️ K-16'da sayı bayatı yakalandı: KARAR-3 metni "22/88" der, kod 20/80.)
-- **AŞAMA F'ye eklenen:** **33 satır** (F-01..F-33). Faz dağılımı: Faz1=1 · Faz2=2 · Faz3=4 · Faz4=0(→KARAR-19) ·
-  Faz5=4 · Faz6=3 · Faz7=8 · Faz8=11. Faz sırası korundu (Faz1 üstte, Faz8 altta).
-- **Açılan yeni KARAR kartı: 4** — KARAR-18 (PO-manuel işler listesi, 11 kalem) · KARAR-19 (KVKK geri-dönülmez küme: kurum silme + eski-rıza + iz saklama) ·
-  KARAR-20 (mentör reddi akışı var mı) · KARAR-21 (STK anket cevap tipi). ≤5 sınırı korundu.
-- **Faz 5 tespiti:** algoritma çekirdeğinin çoğu (OCEAN/sektör motoru bağlama, yeni %45/30/25 skor + 2 veto, B12 göç)
-  **KARAR-10'a kilitli** ve o karar cevapsız → F-11 tek satırda kümelendi. Motorlar YAZILI ama `matching.ts` çağırmıyor.
-- **⛔ DOKUNULMAYANLAR:** frontend/ backend/ yalnız OKUNDU · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi/karantinaya alınmadı ·
-  01-KARARLAR CEVAP satırlarına dokunulmadı (yalnız sona KARAR-18..21 eklendi) · mevcut K- işleri (K-03/05/06/08/10/11/12...) YAPILMADI.
-- **Değişen dosyalar:** `00-KUYRUK.md` (AŞAMA F + 4 K-satırı Not) · `01-KARARLAR.md` (KARAR-18..21) · `02-ILERLEME.md` (bu kayıt) ·
-  `00-ONCELIK-SIRASI-2026-08-28.md` (devir notu, gövde silinmedi).
-
----
-
-## TUR 3 — 2026-09-19 · BÖLÜM A: backend merge + submodule pointer bump
-**Mod:** 🟥 BYPASS (yalnız merge + pointer, ürün kodu YAZILMADI).
-
-- **Backend PR #72** (`otonom/G-platform-email-env-20260919`) — `PLATFORM_ADMIN_EMAIL` `.env.example`'a eklendi +
-  production'da varsayılan değerdeyse `console.warn` (throw DEĞİL) + unit test.
-- **A.1 doğrulama:** CI yeşil (ci pass 2m36s). **throw kontrolü: kod satırlarında throw YOK** — 3 `throw` sözcüğü de
-  yorum satırında (JSDoc + inline gerekçe). Production yolu `console.warn` (`config.ts`). Değişen dosyalar tam 3 izinli:
-  `.env.example` · `src/config.ts` · `tests/platformAdminEmail.unit.test.ts`. Fazlası YOK.
-- **A.2 merge:** squash merge, dal silindi. Backend main HEAD → `f229ffe`.
-- **A.3 pointer bump:** eski çatı pointer `1304790` → yeni `f229ffe`. Ata teyidi: `merge-base --is-ancestor 1304790 f229ffe` = 0 (ileri sarım GÜVENLİ).
-  Çatı PR **#185** (`otonom/J-pointer-bump-...`), CI 8/8 yeşil (backend+frontend+integration+e2e, iki koşu), merge edildi.
-- **A.4 teyit:** çatı pointer `f229ffe` == backend main HEAD `f229ffe` → **SARKMA YOK.** Düzeltme artık pointer üzerinden canlıya çıkabilir.
-- **⚠️ PO YAPACAK:** Dokploy ortam değişkenlerine `PLATFORM_ADMIN_EMAIL` eklenmeli (yoksa kod yalnız uyarı loglar, giriş e-postası varsayılanda kalır).
-
----
-
-## TUR 3 — 2026-09-19 · BÖLÜM B: kayıt düzeltmeleri (belge-only)
-**Mod:** 🟥 BYPASS (yalnız belge; ürün kodu YAZILMADI). Dal: `otonom/I-kayit-duzeltmeleri-20260919`.
-
-- **B.1 — 5 bayat G-kartı kod-teyidiyle düzeltildi** (eski durum üstü çizili, tarihli DÜZELTME notu):
-  - G3-19 (G3-icerik.md) ⬜/❓ → ✅ `PendingTag` + `tagController` + adminRoutes:63-66.
-  - G2-11 (G2-eslestirme-psikometri.md) ❓ → ✅ `authController.ts:165-169` invite→APPROVED. Eski KOD-TEYİT yanlış dosyaya (`selfServeController`) bakmıştı → o da düzeltildi.
-  - G4-02 (G4a-panel-akis.md) ⬜ → ✅ `menti/page.tsx:290 compatibilityReason`.
-  - G4-04 (G4a-panel-akis.md) 🟡 → ✅ `managers/page.tsx:24,37,45`.
-  - G10-25 (G10-olu-kod-terk.md) ❓ → ✅ profil düzenleme çalışıyor + ⛔ **YANLIŞ SORU TUZAĞI 5. TEKRAR** uyarısı karta yazıldı (6. kez olmasın).
-- **B.2 — Sertifika sayısı: "22/88 bayat" DEĞİLMİŞ (düzeltmenin düzeltmesi).** Kod-teyit: **iki sayı da gerçek, farklı kaynak.**
-  - "22 senaryo / 88 şık" = YAZILI İÇERİK (`docs/raporlar/icerik/sertifika-oturum1/2/3-...-2026-09-08.md`, 3 belge, 11 konu×2). Doğru.
-  - Seed kodu `seed-certification.ts` = **20 senaryo / 80 şık** (eski sürüm; 20× CERT_T, 80 options, 10 topic). Finalize 22/88 içeriği seed'e **taşınMADI** → K-16 bugün seed atarsa 20/80 çıkar.
-  - ⚠️ **SAYI DÜZELTMESİ-2 (2026-09-21, içerik konseyi ① — kaynak-teyitli):** ~~[ESKİ · 2026-09-21] fark yalnız **2 senaryo + 8 şık** (20/80 → 22/88)~~ — **BU YANLIŞTI.** Doğrusu: `tam.md` (= seed'in birebir kaynağı, `seed-certification.ts:7`) 20 sahne sundu, finalize içerik bunların **yalnız 5'ini** aldı (%25) — yani seed'deki **20 senaryonun 15'i gerekçeli olarak ELENDİ** ("ELENEN SAHNELER" tabloları: yüzey ayrımı/çelişki). Kalan **5'inin 5'i de yeniden yazıldı** (5/5'inde metin farkı, **birinde puan anlamı TERS DÖNDÜ**). ⛔ Pratik sonuç: taşınacak şık sayısı 8 değil **88'in TAMAMI**; düşecek senaryo **15**. Efor **S değil L**. Kanıt: `docs/raporlar/kesif/konsey-icerik-2026-09-21.md:16-19,118-122`.
-  - Düzeltilen yerler: KARAR-3 (SAYI DÜZELTMESİ notu) + 00-KUYRUK K-16 satırı + AŞAMA F örtüşme notu (PR #184'teki "sayı bayat" ifadem düzeltildi). `10-yol-haritasi:152` + `00-KARAR-TAKIP:281` DOKUNULMADI (içeriği doğru anlatıyorlar). `docs/gelen/*` ⛔ ellenmedi (PO-yerel).
-- **B.3 — "En fazla 5/10 karar kartı" ÜST SINIRI KALDIRILDI** (PO). İki yer: CLAUDE.md ("Karar kartı sayısı — ÜST SINIR YOKTUR" + KÜMELE/SIRALA/İNDEKS) + 00-KUYRUK E-2 satırı ("≤10" üstü çizili + GÜNCELLEME).
-- **B.4 — 01-KARARLAR.md başına İÇİNDEKİLER eklendi** (22 satır, KARAR-0..21). "Kaç işi açar" = 🔴 bağlı K-/F-/E- satırı, kanıtlı, etkiye göre sıralı. En çok iş açan 3: **KARAR-11 (2: K-13/E-5)** · KARAR-10/1/2/3/4/5/6/7/19/20/21 (1'er). ⚠️ K-19 kapı etiketi "KARAR-8, KARAR-10" olası yazım hatası (içeriği KARAR-6/7) — indekste içeriğe göre eşlendi + not düşüldü, kart gövdesi taşınMADI.
-- **B.5 — PO KARAR MUTABAKATI** (`00-PO-KARARLARI-2026-08-27.md` okundu, kod-teyitli):
-  - 6 karta "⚠️ AĞUSTOS SİNYALİ" notu eklendi (A/B/C DEĞİL, yalnız yön): KARAR-9 (kulüp kurumu aktif/modül ⏸️) · KARAR-10 (bağlama yönü) · KARAR-11 (karantina yönü) · KARAR-19 (G1-15/16/29 işleme-al) · KARAR-20 (varsayım hatalı) · KARAR-21 (C dışlanmış).
-  - ⛔ Hiçbir CEVAP satırı DOLDURULMADI (yalnız işaret). Teyit: 21 boş CEVAP + KARAR-0 (eski PO cevabı) + KARAR-18 (isteğe bağlı hatırlatma).
-  - **Ağustosta ✅ işleme-al ama kuyrukta karşılığı OLMAYAN kalem: 0.** ⏸️ şimdilik-alma kalemleri G4-11/G4-12 (v2 anomali/büyüme) + G11-01/02 (uzun-vade strateji) kuyrukta iz taşımıyor — ama ⏸️ oldukları için bu normal (eksik iş değil, görünürlük boşluğu; kuyruğa EKLENMEDİ).
-- **⛔ DOKUNULMAYANLAR:** frontend/backend kaynak DEĞİŞMEDİ · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi · #110 ellenmedi · `panel-denetimi-mentor-menti-2026-09-19.md` ellenmedi · `docs/gelen/*` ellenmedi · CEVAP satırları dolmadı.
-- **Değişen dosyalar:** `01-KARARLAR.md` (indeks + KARAR-3 sayı notu + 6 ağustos notu) · `00-KUYRUK.md` (K-16/F-notu + E-2 sınır) · `CLAUDE.md` (kart sınırı) · `G3-icerik.md` · `G2-eslestirme-psikometri.md` · `G4a-panel-akis.md` · `G10-olu-kod-terk.md` · `02-ILERLEME.md` (bu kayıt).
-
----
-
-## TUR 4 — 2026-09-19 · Panel denetimi bulguları kuyruğa (AŞAMA P) · belge-only
-**Mod:** 🟥 BYPASS (yalnız merge + belge; ürün kodu YAZILMADI). Dal: `otonom/L-panel-bulgulari-kuyruga-20260919`.
-
-- **İŞ 1 — H dalı merge:** PR **#186** (`panel-denetimi-mentor-menti-2026-09-19.md` tek dosya). 3-noktalı (merge-base) diff = yalnız 1 dosya eklendi (başka değişiklik yok). CI 8/8 yeşil → squash merge, dal silindi.
-- **İŞ 2 — AŞAMA P:** Rapor §2/§3'teki **14 açık kalem (11 🟡 + 3 ⬜)** + §6 beşlisi + güvenlik + seed önkoşulu kuyruğa alındı → **P-00..P-16 + P-99 = 18 satır.** Sıra: en az emek→en çok değer (rapor ölçütü). §6 beşlisi P-01..P-05.
-  Kapsam denetimi: 14 açık kalemin hepsi eşlendi (M3→P-06·M5→P-05·M6→P-07·M8→P-08·M9→P-01·M13→P-02·MT1→P-04·MT2→P-09·MT5→P-10·MT6→P-11·MT7→P-12·MT9→P-13·MT10→P-14·MT13→P-15). Alınmayan: ✅ VAR (11) + ❓ M11 (ölçülemez his) — İŞ2 gereği doğru.
-- **İŞ 3 — GÜVENLİK:** **P-00** (k-anonimlik eşiği yalnız FE — `userController.ts:125-135` maskeleme yok; CLAUDE.md "frontend guard yeterli değil" ihlali, 🟡 PR'da dursun) + **P-16** (sayım `User.role` üzerinden, kural `TenantMembership.role` — çok kurumluda şişer, TEYİT GEREK). ⛔ Kendim DÜZELTMEDİM.
-- **İŞ 4 — Belge yanlışları (BY-1..BY-6): 5/6 düzeltildi, 1 atlandı (gerekçeli).**
-  - **BY-1/2/3/4** → hepsi `docs/raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` (📸 DONDURULMUŞ) → gövde değişmedi, sona **"KOD DOĞRULAMA NOTU (2026-09-19)"** bölümü eklendi (platform-admin deseni), her biri üstü-çizili eski iddia + DÜZELTME + kanıt + kuyruk eşlemesi (P-04/P-01/P-12/P-03).
-  - **BY-6** → `docs/kararlar/09-DURUM.md:432` "Menti ⬜" → G9-03 deseniyle üstü çizili + "Menti ✅" düzeltmesi (`:5` ile çelişiyordu).
-  - **BY-5 ATLANDI** → `backend/CLAUDE.md` submodule kaynağı; ⛔ DevSecOps "backend/ kaynak dosyalarını değiştirme". Rapor §5 BY-5 + §7 Ç-1'de kanıtıyla duruyor → sıradaki backend turuna bırakıldı.
-  - ⛔ `docs/00-BELGE-HARITASI.md` + `docs/devir/` ELLENMEDİ (başka tur alanı).
-- **İŞ 5 — Sertifika seed önkoşulu:** **P-99** (içerik→seed taşıma, K-16 önkoşulu, 🟡) + K-16 Not'una "ÖNKOŞUL: P-99" eklendi.
-- **İŞ 6 — KARAR-22** (mentör reddederken ne olsun — ret deneyimi) açıldı, 4 alt-soru KÜMELENDİ (gerekçe/alternatif/bildirim/gösterim). İndekse eklendi (1 iş: P-05). ⚠️ KARAR-20 ile aynı tema tespit edildi (ret KODDA VAR — `mentor/page.tsx:257-274` MT11; eksik olan deneyim) → çapraz-referans + "kümelenmeli" notu iki karta da düşüldü. ⛔ CEVAP DOLDURULMADI.
-- **⛔ DOKUNULMAYANLAR:** frontend/backend kaynak DEĞİŞMEDİ · DB/migration/seed YOK · şema DEĞİŞMEDİ · hiçbir şey silinmedi · mevcut K-/F-/E- işleri YAPILMADI · `docs/00-BELGE-HARITASI.md` + `docs/devir/` ellenmedi · CEVAP satırları dolmadı.
-- **Değişen dosyalar:** `00-KUYRUK.md` (AŞAMA P + K-16 önkoşul notu) · `01-KARARLAR.md` (KARAR-22 + indeks) · `strateji-gercek-denetimi-2026-08-20.md` (BY-1..4 KOD DOĞRULAMA NOTU) · `09-DURUM.md` (BY-6) · `02-ILERLEME.md` (bu kayıt).
-
----
-
-## TUR 5 — 2026-09-19 · BÜYÜK TUR: 4 PR merge + pointer + yapısal düzeltmeler + bütünsel doğrulama
-**Mod:** 🟥 BYPASS (merge + belge + doğrulama; YENİ ÜRÜN KODU YAZILMADI). Dallar: A/B/D merge PR'ları · C=`otonom/S-pointer-bump-...` · E+F=`otonom/T-yapisal-ve-kuyruk-...`
-
-### A) Frontend PR'ları (çatı)
-- **#190 (N)** menti mentör adı — 3-nokta diff tam 3 dosya (`meetings/page.tsx`·`lib/api/meetings.ts`·test), CI 8/8 → **merged.**
-- **#191 (O)** müsaitlik çoklu aralık (K-03) — 3-nokta diff tam 2 dosya (`mentor/availability/page.tsx`·test), CI 8/8 → **merged.**
-
-### B) Backend PR + BY-5
-- **#73 (M)** mentor-count k-anonimlik backend'e taşındı — 3 dosya (`userController.ts`·`mask.ts`·test), CI pass → **merged.** Backend HEAD `f229ffe→4aff01e`.
-- **BY-5 (#74)** — `backend/CLAUDE.md:65` "requestMessage on VisibilityOptIn (Akış B) and MatchRequest" ifadesi kod-teyidiyle düzeltildi: KOD 09-DURUM'u doğruladı — **Akış B silinmiş** (VisibilityOptIn.requestMessage alanı `schema.prisma:407` durur, akış yok); canlı niyet mektubu YALNIZ `Meeting.requestMessage`; `MatchRequest.requestMessage` yalnız `POST /api/requests` (`requestController.ts:60`, FE caller yok), canlı yol `conversationController.ts:154` requestMessage'sız yaratır→NULL. Üstü çizili + DÜZELTME. CI pass → **merged.** Backend HEAD `4aff01e→61aae07`.
-
-### C) Submodule pointer bump (#192)
-- Eski `f229ffe` → yeni **`61aae07`** (backend main HEAD, #73+#74 dahil). Ata teyidi: `merge-base --is-ancestor f229ffe 61aae07`=0 (ileri sarım güvenli). CI 8/8 → **merged.**
-- **C.4 TEYİT:** çatı pointer `61aae07` == backend main HEAD `61aae07` → **SARKMA YOK.**
-
-### D) #188 belge haritası
-- **Satır doğrulaması:** main 07-oturum = 1333; dal 3 dosya toplamı = 139 (07-oturum kısaltılmış) + 715 (oturum-2026-08) + 527 (oturum-2026-09) = **1381 ≥ 1333** (satır kaybı YOK, +48 indeks). CI 8/8 → **merged.** (+ `00-BELGE-HARITASI.md` 565 satır bonus.)
-
-### E) Yapısal düzeltmeler (harita kaynak)
-- **E.1 EKSEN KURALI:** `belge-duzeni-rehberi.md`'ye **KURAL 2-B** eklendi (KONU+YÖNTEM çakışırsa → YÖNTEM klasörü + KONU'ya zorunlu çapraz atıf). Geriye dönük: `raporlar/persona/00-INDEX.md` + `raporlar/panel/00-INDEX.md` **oluşturuldu** (2 dosya); beş kıyas bölümü çapraz atıflandı (B.1 s.64 · B.2 s.87 · B.3 s.109 · B.4 s.177 · B.5 s.232); B.5 için `arsiv/admin-panelleri-tasarim-2026-08-02.md`'ye de atıf. **Toplam atıf: 8** (persona 4 + panel 4-satır).
-- **E.2 NUMARA ÇİFTLERİ:** haritanın 7 doğrulanmış çifti çift-yönlü bağlandı (119↔G1-22 · 120↔G1-28 · 111↔G2-06 · 121↔G8-05 · 113↔G10-10 · 114↔G10-09 · 116↔G4-38) — `00-KARAR-TAKIP` madde satırı + G-kartı başlığı (14 edit). **Atlanan çift: 0** (harita "7 doğrulanmış" dedi, hepsi kod-mevcut).
-- **E.3 KART İNDEKSİ:** `docs/kararlar/00-KART-INDEKSI.md` köprü belgesi oluşturuldu — **184/184 kart** (G1..G11, 12 G-dosyası tam tarama): konu·durum·madde·KUYRUK·canonical kaynak. "Durum TUTMAZ, yönlendirir." `kararlar/00-INDEX.md`'ye eklendi (KURAL 5). Eksik: 0 kart (kapsam tam); zayıf nokta = madde-no bazı yerlerde karar-defteri iç-numarası (belgede açıkça yazıldı) + G2 numara-ekseni çakışması (F-08 öncelik-doc no).
-- **E.4 HARİTA NOTU:** `00-BELGE-HARITASI.md` B.0 + P-1 + P-2 yanına tarihli "✅ ÇÖZÜLDÜ" notları.
-
-### F) Kuyruk + bütünsel doğrulama
-- **F.1** 3 iş BITTI'ye çekildi (numara kod-teyitli): **P-00**=k-anonimlik (M #73), **P-01**=menti mentör adı (N #190), **K-03**=müsaitlik çoklu aralık (O #191). Her birine PR + "CANLIDA BAK" notu.
-- **F.2 ⭐ BÜTÜNSEL DOĞRULAMA:** `npm run verify` çalıştı (exit 0). Backend tsc/tsc-test/eslint + frontend tsc/vitest/build adımları geçti; **backend entegrasyon testleri TEST_DATABASE_URL güvenlik kilidine takıldı** (lokalde beklenen — canlı Neon'a TRUNCATE atmaz) → **"yeşil" SAYILMADI** (KURAL 14). **Asıl kanıt CI:** 5 merge edilen PR'ın (#190·#191·#73/#74·#192·#188) HEPSİNDE `Integration Tests (Auth+Matching+Admin)` + `E2E Browser` + `Backend TS+Prisma+Lint` + `Frontend TS+Build` = **pass**. Frontend PR'ları (N/O) yeni test ekledi (meetings-opponent-name · mentor-availability-multi-block) → CI frontend suite'inde koştu, geçti. **KIRMIZI = 0 → REVERT YOK.**
-- **F.3 CANLI DOĞRULAMA (PO gözle bakacak):**
-  1. Menti "Görüşmelerim"de mentörün **adı** görünüyor mu? (N)
-  2. Mentör iki farklı gün müsaitlik ekleyip kaydedebiliyor mu? Test: **Pazartesi 09:00-17:00, sonra Cuma 11:00-17:00 → İKİSİ de kalmalı** (O)
-  3. Menti panelinde **mentör sayısı** kartı doğru davranıyor mu (N<3 gizli)? (M — backend maskeleme)
-- **⛔ DOKUNULMAYANLAR:** yeni ürün kodu YAZILMADI · DB/migration/seed YOK · şema DEĞİŞMEDİ · #110 (MERGE ETME) ellenmedi · hiçbir CEVAP satırı doldurulmadı · hiçbir şey silinmedi (üstü çizili + not).
-- **Değişen dosyalar (E+F, branch T):** `belge-duzeni-rehberi.md` · `raporlar/persona/00-INDEX.md` (yeni) · `raporlar/panel/00-INDEX.md` (yeni) · `arsiv/admin-panelleri-tasarim-2026-08-02.md` · `00-KARAR-TAKIP.md` (7 çift) · 5 G-kartı (G1/G2/G8/G10/G4b) · `00-KART-INDEKSI.md` (yeni) · `kararlar/00-INDEX.md` · `00-BELGE-HARITASI.md` · `00-KUYRUK.md` (F.1) · `02-ILERLEME.md`.
-
----
-
-## TUR AB — 2026-09-20 (gece) · OTONOM: çoklu 🟢 iş — ARA KAYIT (devam ediyor)
-**Mod:** 🟥 BYPASS. Her iş ayrı dal + ayrı PR + merge (tek tek revert edilebilir). DURMAMA KURALI aktif.
-
-### CHECKPOINT 1 — 7 iş merge edildi (bu bir ara kayıttır, tur DEVAM EDİYOR)
-- **Bölüm A — OTONOM-PROMPT.txt (PR #208 merged):** DURMAMA KURALI (D.1-D.4) + ARA KAYIT bölümleri eklendi (bayattı).
-- **P-03 (PR #209 merged):** `DiscRecallCard` — menti panelinde DISC arketip "aha" kartı rapeli (`/api/users/:id` discResultCard, salt-okunur). Test 1.
-- **P-09 (PR #210 merged):** mentör onay kuyruğu kartı boşken kaybolmuyor + mesaj boş-durum metni role göre. Test 2.
-- **P-02 (PR #211 merged):** "Gönderilen Talepler" kalıcı — `/api/conversations`'tan türetilir (`countSentRequests` helper). Sayfa yenilenince 0'a düşmüyor. Test +4.
-- **V-10 (backend PR #78 merged):** `/users/:id/export` rate limit eklendi (bypass kapandı). Test 1 (integration).
-- **V-07 (backend PR #79 merged):** hatırlatma mail batch tavanı + toplantı-başına cooldown (SMTP burst koruması, şema değişmedi). Test 2 (integration).
-- **V-13 (backend PR #80 merged):** `/api/tags/suggest` requireTenant+requireAuth ile mount (fail-closed ölü uç çözüldü). Test 2 (integration).
-
-### ⚠️ BEKLEYEN
-- **U-14 (PR #212):** süresi dolmuş davette "yeni davet iste" + "giriş yap" düğmeleri. CI'da, merge bekliyor.
-- **BACKEND POINTER BUMP:** V-07/V-10/V-13 backend main'e merge edildi ama çatı pointer HENÜZ bump edilMEDİ →
-  bu 3 backend düzeltmesi CANLIDA DEĞİL. Turun SONUNDA tek bump yapılacak (eski `4528048` → yeni backend main HEAD).
-- **DB/migration/seed YOK · şema DEĞİŞMEDİ · server.ts rate-limit/trust-proxy (yasak bölge) DOKUNULMADI · KARAR CEVAP satırı doldurulmadı · hiçbir şey silinmedi.**
-
----
-TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · sıradaki: U-10 (4 ekran boş-durum) ya da V-01/V-02 (güvenlik). K-20 YAPILMADI (🟢 iş kaldı, DURMAMA D.1). Bağlam doldu → temiz kesim (D.4). Sonraki tur aynı promptla devam.
+## ARA KAYITLAR (2026-09-25 → 2026-09-27) — ⚠️ üst başlıkları "TUR AB — 2026-09-20 (gece)" idi; o başlık ve W38 kısmı `docs/otonom/arsiv/02-ILERLEME-2026-W38.md`'de
 
 ### ARA KAYIT 3 · 2026-09-25 — canlıya çıkanlar (pointer #289 + çatı #285/#288)
 - **GV-03** (backend #107 + çatı #284) — CANLIDA BAK: görüşme kartında bağlantı yalnız http(s) adres ise tıklanabilir.
@@ -1204,3 +917,83 @@ TUR YARIM KALDI — son biten iş: P-14 (mentör takdir) · kalan 🟢: 40 · s�
 - 2026-09-26 18:01 UTC · **I-12 ATLANDI(karar)** — kartı yeniden hesaplamak KARAR-57'yi (hangi test esas) fiilen cevaplamak olur.
 - 2026-09-26 18:08 UTC · **KR-22 BITTI** — çatı #330 merge (`dd614a3`). CANLIDA BAK: (iç) verify her adımı ayrı raporluyor, atlanan adım yeşil sayılmıyor. Canlı ok:true · db:up.
 - 2026-09-26 18:08 UTC · **IC-01 PR-ACIK** — çatı #331 (mentör filtresi, admin soru formu, sonuç kartı, hatırlatma kartı: "Dominant/Influential…" → "D — Kararlılık…"). 68/68 ilgili test, tsc temiz.
+- 2026-09-26 18:12 UTC · **IC-08 PR-ACIK** — backend #151 + çatı #332 (onay bekleyen kullanıcı yöneticinin düzeltme notunu bekleme ekranında görür; not yalnız doğru şifreden sonra döner, URL'ye konmaz). Testler: FE 17/17 (4 dosya), BE +3 (1 negatif) CI'da. 7b incelemesi başlatıldı.
+- 2026-09-26 18:16 UTC · **AN-30 düzeltme turu** (alt ajan, izole worktree): backend #142 → `df8db92` · çatı #320 → `43490fc` (main merge, force-push yok). CI: backend 135 dosya / 882 test · çatı 8/8 job (frontend 410 test). Kapanan 7b bulguları: main çakışması · 18+ beyanı + /kvkk bağlantısı · kvkkConsent gerçek kutulardan · hesap silmede tüm aktif rızalar geri çekiliyor (AYDINLATMA belgeli kararla hariç) · bayrak kapalıyken form/OAuth eski davranış · çift tıklama 409. Açık bırakılanlar: token türü ayrımı · pending token'da e-posta · CLAUDE.md public uç listesi. 2. tur 7b başlatıldı. MERGE YOK (🔵, KARAR-96).
+- 2026-09-26 18:16 UTC · **U-18 düzeltme turu**: backend #148 → `12f2fb4` (main merge, KR-19 blok kontrolü korunarak) · çatı #326 → `1137b64` (nazik ret metni menti paneli + randevu sayfasında, ret hatası onay penceresinin içinde). 81/81 ilgili FE testi, tsc temiz. KARAR-97'ye "kullanıcı ne görür" sınırı eklendi (inbox'ta ret işareti/bildirim yok). 2. tur 7b başlatıldı. MERGE YOK (🔵).
+- Not: paylaşılan `backend/node_modules` Prisma istemcisi U-18 şemasıyla üretilmişti → main şemasıyla yeniden üretildi (ana backend checkout `d87b227`'ye ileri sarıldı).
+- 2026-09-26 18:18 UTC · **AN-30 7b 2. tur: SONUÇ: ONAY** (backend #142 · çatı #320). Kod EVET'e hazır; merge yalnız KARAR-96 "EVET" + `Consent` yedeği sonrası. Yeni gözlem → 03-PO-ELLE-ISLER: bayraklar açılırken önce backend.
+- 2026-09-26 18:18 UTC · **PS-10 PR-ACIK** — çatı #333: boş mentör listesinde "Programınızda şu an görüşülebilecek mentor yok — Bu, profilinizle ilgili değil"; çıkışsız /disc-test yönlendirmesi kalktı. Kök sebep: menti tarafında DISC elemesi yok (`matching.ts` rankMentorsForMenti), eski metin yanlış suçluyordu. k-anonimlik: yeni sayı/bayrak yok.
+- 2026-09-26 18:20 UTC · **IC-01 BITTI** — çatı #331 merge (`8383ede`). CANLIDA BAK: mentör paneli DISC filtresi "D — Kararlılık…"; sonuç/hatırlatma kartında "Baskın boyut". Canlı ok:true · db:up · site 200. GV-19 alt ajana verildi (izole worktree, merge YOK).
+- 2026-09-26 18:24 UTC · **U-18 7b 2. tur: SONUÇ: ONAY** (backend #148 · çatı #326). Kod EVET'e hazır; merge yalnız KARAR-97 "EVET" + `Conversation` yedeği sonrası. Takip önerileri (kuyrukta satırı yok → strateji katmanı): gerçek bildirim + inbox'ta ret işareti.
+- 2026-09-26 18:24 UTC · **YN-15 BITTI** (GÖREV 0 #328 ile). **YN-13 PR-ACIK** (çatı #334; PO'ya kalan backend `.claude/settings.local.json` → 03-PO-ELLE-ISLER). **PS-09 PR-ACIK** (backend #153, 17 vaka birebir).
+- 2026-09-26 18:25 UTC · **IC-08 7b ONAY** (iki PR). ⛔ `gh pr merge 151` sınıflandırıcı reddi ("Merge Without Review") → PR-ACIK, 00-SIMDI Engeller'e aynen yazıldı (ardışık ret: 1). #332'ye 7b önerisi eklendi (`41ed345`, 9/9 test).
+- 2026-09-26 18:26 UTC · **PS-10 BITTI** — çatı #333 merge (`86ed188`). CANLIDA BAK: boş mentör listesinde menti profili suçlanmıyor, DISC testine yönlendirme yok. Canlı ok:true · db:up · site 200.
+- 2026-09-26 18:28 UTC · **YN-13 BITTI (kısmen)** — çatı #334 (`49c8cbb`); PO kısmı 03-PO-ELLE-ISLER'de. **PS-09** backend #153 merge (`9723c50`), pointer bump KR-21 ile. **KR-21 PR-ACIK** — backend #154.
+- 2026-09-26 18:33 UTC · **KR-21** backend #154 merge (`3f76c7b`) · çatı pointer PR **#336** (PS-09 + KR-21). **F-23 BITTI (doc-senkron)** — GV-11 #132 ile ortak `authenticateTenantAdmin` + `membershipAccess` deseni zaten canlıda; satırdaki kanıt bayattı.
+- 2026-09-26 18:35 UTC · **AN-09 PR-ACIK** — backend #155 (şüphe bildirimi → platform yöneticisine yalnız kayıt no'lu e-posta). AN-07 ertelendi (satırın kendi "düşük öncelik" notu). AN-06: kod ayağı migration gerektirebilir (pooler'da oturum kilidi güvenilmez) + PO teyidi → not düşüldü.
+- 2026-09-26 18:40 UTC · **CANLIDA:** çatı pointer **#336** (`aeea646`, backend `d87b227`→`3f76c7b`): **KR-21 BITTI** (rapor sıklığı gerçekten okunuyor) · **PS-09 BITTI** (formül vakaları CI'da). Canlı ok:true · db:up · site 200.
+- 2026-09-26 18:40 UTC · **AN-09** backend #155 merge (`613f03b`) — sonraki pointer bump'ında canlıya çıkacak.
+- 2026-09-26 18:40 UTC · **GV-19 PR-ACIK** (alt ajan, izole worktree): backend #152 + çatı #335 — oturum içi şifre değiştirme + tek kaynak şifre kuralı; CI yeşil (backend 887 test; çatı 8/8). 7b başlatıldı.
+- 2026-09-26 18:40 UTC · **Y-02 PR-ACIK** — backend #156 (4 platform okuma ucunda denetim izi + komşu mükerrer super-admin ucunda PII maskeleme). 7b başlatıldı.
+- 2026-09-26 18:43 UTC · **GV-19 7b ONAY** (backend yorum 5848843137 · çatı 5848843269; engel olmayan notlar: 429 negatif testi yok, diğer cihazların access token'ı süresi dolana dek geçerli — reset ile aynı). Backend **#152 MERGE** (`b6418c2`). Çatı #335'e main merge + pointer `b6418c2` (AN-09 #155 dahil). AN-26 alt ajana verildi (🔵: migration dosyası + PR, merge YOK).
+- 2026-09-26 18:52 UTC · **GV-19 BITTI** — backend #152 + çatı #335 (`576cf53`). CANLIDA BAK: profil sayfasında "Şifreyi değiştir"; zayıf şifreler (harf+rakam yok) reddediliyor. **AN-09 BITTI** (#155 aynı pointer'la canlıda). Canlı: /health ok:true · db:up · smtp:verified · site 200.
+- ⚠️ **KURAL İHLALİ (kendi kaydım):** 2026-09-26 18:52 UTC canlı kontrolde `POST https://api.sivilkapasite.org/api/auth/change-password` isteği **kimliksiz ve gövdesiz** gönderildi (yanıt 400 — kimlik/kurum başlığı olmadığı için reddedildi, hiçbir veri yazılmadı). Bölüm 7b canlı kontrolü **yalnız GET** izin verir; bu istek atılmamalıydı. Bundan sonra canlı kontrolde yalnız GET /health ve site 200.
+- 2026-09-26 18:52 UTC · **Y-02** 7b 2. tur ONAY (CI 916 test) → backend #156 merge (`0deb76b`). **IC-11 PR-ACIK** — backend #158 + çatı #338. AN-26 backend PR #157 açıldı (alt ajan sürüyor).
+- 2026-09-26 18:54 UTC · **YN-11 BITTI** (3 rapor etiketlendi; etiketsiz 0) · **AN-43 BITTI** (doğrulama: kalan yok) · **AN-26 PR-ACIK** (🔵 — backend #157 + çatı #337; migration dosyası, çalıştırılmadı) → **KARAR-98** EVET/HAYIR kartı açıldı; 7b sürüyor.
+- 2026-09-26 18:57 UTC · **AN-26 7b 1. tur: SORUN VAR** (5848943894): paylaşımlı havuzda eskalasyon alıcısı (ürün kararı → KARAR-98 alt sorusu, cevaba kadar gönderilmez) · KARAR-53 ④ kapsamı · pasif menti/üyelik · main gerisinde. Düzeltme alt ajana verildi. **IC-11** backend #158 merge (`60715c7`) → çatı #338 pointer re-bump (Y-02 dahil).
+- 2026-09-26 19:07 UTC · **CANLIDA:** çatı #338 (`9749f68`, pointer `60715c7`): **IC-11 BITTI** (tek terim "görüşme") · **Y-02 BITTI** (platform okuma denetim izi + mükerrer uçta maskeleme). Canlı ok:true · db:up · site 200. AN-53 doğrulaması 5 salt-okuma ajanına verildi (Workflow; K4 + satırın "paralel alt-ajanla böl" notu).
+- 2026-09-26 19:09 UTC · **AN-10 PR-ACIK** — çatı #339 (panel ekranlarında "mentör" yazımı; 47/47 test).
+- 2026-09-26 19:16 UTC · **AN-53 BITTI** — 5 salt-okuma ajanı (Workflow): 145 açık kart kalemi → ✅ 24 · ⬜ 73 · ❓ 48; rapor `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`; 12 G-karta atıf notu (gövde değişmedi). Kuyruk dışı ⬜ kalemler ve BITTI-ama-eksik vakalar 00-SIMDI strateji notunda.
+- 2026-09-26 19:16 UTC · **AN-10 (mentör yazımı ayağı) BITTI** — çatı #339 (`9606240`). **AN-26 7b 2. tur ONAY** (KARAR-98'e işlendi). **IC-12 PR-ACIK** (çatı dizini main'de + backend #159).
+- 2026-09-26 19:18 UTC · **AN-44 BITTI** (tasarim-kararlari-admin tarihsiz ada taşındı + yönlendirme) · **IC-12 BITTI** (backend #159 `dea79d8`).
+- 2026-09-26 19:20 UTC · **AN-02 PR-ACIK (🔵)** — backend #160 (seed.ts iki yazım hatası; seed çalıştırılmadı). Canlı düzeltme için **KARAR-99** EVET/HAYIR kartı açıldı.
+- 2026-09-26 19:22 UTC · **AN-54 BITTI** — 694 şema kalemi; gerekçesiz 2 (`Tenant.verifiedBy` bilinen · `ProfileSource.SJT_ENRICHED` yeni → **KARAR-100**). Rapor `docs/raporlar/kesif/gerekcesiz-kalem-taramasi-2026-09-26.md`. **Y-05** kodu yazılmadı: EXPLAIN için tek seferlik DB erişimi gerekiyor (Engeller). **P-05** alt ajana verildi (migration'sız uygulama; kapı sütunu 🔵 → merge yok, strateji katmanına not).
+- 2026-09-26 19:24 UTC · **IC-10** — menti "şimdilik" 4 varyantı yazıldı (`docs/raporlar/icerik/menti-simdilik-varyantlari.md`, dondurulmuş kaynak belgeye dokunulmadı; içerik dizinine eklendi). Koda girişi I-15 (🔴 KARAR-10) + KARAR-45 adları; PO metin onayı belgede.
+- 2026-09-26 19:26 UTC · **AN-05** — detay sayfası "Birlikte nasıl çalışırsınız" 15 eksik kombinasyon metni yazıldı (`docs/raporlar/icerik/birlikte-calisma-kombinasyonlari.md`; onay bekliyor). **KR-16 PR** — backend #161 (CI: ağsız `prisma --version` + CI DB'ye 45 migration ✅); canlı açılışı değiştirdiği için merge öncesi bağımsız inceleme başlatıldı.
+- 2026-09-26 19:38 UTC · **KR-16 BITTI** — backend #161 + çatı pointer #341 (`33a0b03`, pointer `02ac78c`, IC-12 dahil). Yeni açılış komutu canlıda sorunsuz: /health ok:true · db:up · site 200 (3 ardışık). Dokploy başlatma komutu teyidi 03-PO-ELLE-ISLER'e. **P-05 PR-ACIK** (backend #162 + çatı #340; migration yok, `notes` mentiye kapatıldı); 7b sürüyor.
+- 2026-09-26 19:40 UTC · **F-18 PR-ACIK** (alt ajan) — backend #163 + çatı #342; CI yeşil. 7b incelemesi başlatıldı (rol dağılımı sayılarının ham kalması ve `server.ts` CORS `exposedHeaders` eki özellikle incelemede).
+- 2026-09-26 19:41 UTC · **P-05 7b ONAY** (backend #162 · çatı #340). Kapı sütunu 🔵 → merge edilmedi; strateji katmanına kapı notu.
+- 2026-09-26 19:52 UTC · **F-18 BITTI** — backend #163 + çatı #342 (`457a744`). CANLIDA BAK: KPI ekranında "CSV olarak indir". Canlı ok:true · db:up · site 200.
+- 2026-09-26 19:56 UTC · **K5-Y1** — kod-inceleme [teyit gerek] doğrulaması: 21 madde → 15 kuyrukta kapanmış · 4 DOĞRULANDI · 1 ÇÜRÜDÜ (D10) · 1 ❓ (D11). Rapor `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md`. Karşılığı olmayan: **B8** (PENDING kullanıcı OAuth ile oturum açıyor) · **B9** (dondurulan/reddedilen kurumun kullanıcıları erişiyor) · D8 (09-DURUM bayat). B8/B9 K5-Y1 gereği iş olarak ele alındı.
+- 2026-09-26 20:10 UTC · **Y1-B8 PR-ACIK** — backend #164 + çatı #343 (OAuth yolunda PENDING/REJECTED'e token yok; refresh ucu onaysız hesapta kapandı). CI yeşil. 7b başlatıldı. Y1-B9 alt ajanda sürüyor.
+- 2026-09-26 20:13 UTC · **Y1-B8 7b: SORUN VAR (ürün)** — güvenlik düzeltmesi doğru ama Bekleme Odası (F-15/I-05) kimseye açılmaz hâle geliyor (yalnız OAuth yolu açıktı). Özellik kapatma = ürün kararı → **KARAR-101** açıldı (öneri B: bekleme odası açık, sohbet/randevu/anlaşma onay kapısıyla kapalı). PR'lar merge edilmedi.
+- 2026-09-26 20:13 UTC · **Y1-B9 PR-ACIK** — backend #165 + çatı #344 (isActive=false/REJECTED kurumda `KURUM_ASKIDA` 403; kayıt/OAuth/davet kapalı; kurulum ve PENDING_REVIEW/CORRECTION_REQUESTED akışı açık; migration yok). Ek düzeltme istendi: KVKK md.11 veri hakları uçları askı kapısından muaf olmalı. Sonra 7b.
+- 2026-09-26 20:38 UTC · **Y1-B9 BITTI** — 7b ONAY (kilit yanlış pozitifi yok; izin listesi tam eşleşme; önbellek 5 durum değişikliğinde temizleniyor; CI 18+6 test) · backend #165 (`91fcd0a`) + çatı #344 (`3ba3afd`). CANLIDA BAK: platformun dondurduğu/reddettiği kurumun kullanıcıları "Kurumunuzun hesabı askıda" (403) alır; veri indirme/hesap silme açık. Canlı ok:true · db:up ×2 · site 200.
+- 2026-09-26 21:12 UTC · **Y1-B9b BITTI** — 7b ONAY (976 test) · backend #166 (`58d0b31`) + çatı #345 (`3b190e0`). CANLIDA BAK: askıdaki kurumun mentör/mentileri başka kurumların önerilerinde görünmüyor; yeniden başvuru 403. Canlı ok:true · db:up · site 200.
+- 2026-09-26 21:33 UTC · **YENİ TUR BAŞLANGICI** (önceki tur kapandı, TUR ÖZETİ yukarıda) · kalan 🟢 20 (hepsi karar/PO/büyük özellik/sıra bağımlı) → K5-Y2 (BITTI yeniden denetimi) salt-okuma alt ajanda.
+- 2026-09-26 21:42 UTC · **K5-Y2** — 64 BITTI satırı yeniden denetlendi: 46 TUTUYOR · 17 TUTMUYOR · 1 ❓ (V-16: Dokploy GIT_SHA). Rapor `docs/raporlar/kesif/bitti-yeniden-denetim-2026-09-26.md`. Satırın KENDİ ölçütü açıkça tutmayan 4'ü BEKLIYOR'a çekildi: KR-19 · GV-12 · K-05 · F-28. Diğerleri (ölçüt bayat ya da başka satır/karar kapsıyor: U-19 KARAR-80 · PS-01 → AN-07 · GV-10 1 saatlik token bilinen sınır · F-04/F-27/G6-03/G7-13 geniş G-kalem · YN-09/YN-10 belge) not olarak raporda. Hızlı düzeltmeler: AN-10b PR · G9 kartında alıntı ad kaldırıldı. KR-19b alt ajanda.
+- 2026-09-26 21:54 UTC · **AN-10b** çatı #347 merge (`28b06f9`). **KR-19b PR-ACIK** (backend #168 + çatı #348; 7b sürüyor). **F-28b PR-ACIK** (çatı #349).
+- 2026-09-26 21:54 UTC · **GV-12 ATLANDI(karar)** — kalan e-posta sızıntısı yalnız "önce e-posta doğrulaması" akışıyla tam kapanır (kodun kendi notu) → **KARAR-102** açıldı.
+- 2026-09-26 22:08 UTC · **KR-19 BITTI (yeniden)** — KR-19b 7b ONAY · backend #168 + çatı #348 (`424ea3b`). **F-28 BITTI (yeniden)** — #349. Canlı ok:true · db:up · site 200. K-05b alt ajanda.
+- 2026-09-26 22:44 UTC · **K-05 BITTI (yeniden)** — K-05b çatı #350 (`dc09d20`; F-28b ile tek satır çakışması çözüldü). Canlı ok:true · db:up · site 200. Sıradaki: K5-Y3.
+- 2026-09-26 22:48 UTC · **K5-Y3 taraması** — 179 uç, 134'ünde kurum izolasyonu/IDOR negatif testi yok (`docs/raporlar/kesif/negatif-test-boslugu-2026-09-26.md`); clubRoutes/jobListingRoutes test uygulamasına bağlı değil. En riskli 10 uç için test yazımı alt ajanda (yalnız test; açık bulunursa `it.fails` + rapor).
+- 2026-09-26 23:08 UTC · **K5-Y3** — backend #169 + çatı #351 (`731b76a`): 10 riskli uca 41 negatif test (kimliksiz · yanlış rol · başka kurum · aynı kurumda başkası); **açık bulunmadı**. İki yanlış durum kodu (veri sızıntısı yok) → Y3b alt ajanda. Canlı ok:true · db:up · site 200.
+- 2026-09-26 23:28 UTC · **Y3b BITTI** — 7b ONAY · backend #170 (`ec2bd97`) + çatı #352 (`8f3a2c5`). CANLIDA BAK: başka kurumun yöneticisi bir kullanıcının verisini dışa aktarma/silmeye çalışırsa 404 (önce 500); mentör metriklerinde 404 (önce 200 sıfır). Canlı ok:true · db:up · site 200. Not: metrik kurum kontrolü `User.tenantId`'e dayanıyor (çoklu üyelik gelirse değişmeli).
+- 2026-09-26 23:50 UTC · **AN-07 BITTI** — backend #171 + çatı #353 (`75979b3`). Canlı ok:true · db:up · site 200. **2. tur kapandı** (TUR ÖZETİ başta).
+- 2026-09-27 · **TUR BAŞLADI (PO NOTU oturumu: GÖREV 0→1→2→3)** — K2 açılış: worktree'lerde push edilmemiş iş yok · stash yok · açık PR'lar 00-SIMDI ile aynı. Y1-B9 KVKK md.11 muafiyeti zaten main'de (backend `src/middleware/tenantSuspension.ts:31-54`, #165) → iki kez yapılmadı.
+- 2026-09-27 · **GÖREV 0 — PO KARARLARI (2026-09-26) YAZILDI:** **K-A** "arşive taşı" (sık okunan 7 dosyada eski metin aktif dosyada `~~[ESKİ]~~` katmanı olarak kalmaz, arşive AYNEN taşınır) · **K-B** "CLAUDE.md'ye DOKUNMA" yasağı belge aktif/arşiv işi + YN-01/YN-14 için kalktı · **K-C** AJAN-EKLEDİ (`AJ-<sıra>`, kodda doğrulanmış hata için ajan satır açar). Yer: `OTONOM-PROMPT.txt` Bölüm 5b · `00-KUYRUK.md` başlık + § AJAN-EKLEDİ SATIRLAR · `CLAUDE.md` § PO KARARLARI 2026-09-26. **Kapı düzeltmeleri:** P-05 🔵→🟢 · PS-A3/PS-A4 🟡→🟢(+7b) · PS-A1 Durum → BITTI (kod teyidi `disc-to-ocean.adapter.ts:22`) · KR-08 → tek 🔴 KARAR-89 · F-14 → tek 🔴 KARAR-46. 09-DURUM + 00-KARAR-TAKIP başına "güncellenmiyor" uyarısı; CLAUDE.md/OTONOM-PROMPT 0.4 okuma yönlendirmesi → 00-SIMDI + 00-KUYRUK. Y1-B8: KARAR-101 cevapsız → 🔴, dokunulmadı.
+- 2026-09-27 04:10 UTC · **P-05 BITTI** — backend #162 (`f4f624a`) + çatı #340 (`f220bbe`), kapı 🟢 (PO 0.2), 7b ONAY. CANLIDA BAK: mentör görüşme talebini reddedince menti nazik bir bildirim görüyor. Canlı: ok:true · db:up · site 200. Satır aynı commit'te arşive (5c-a).
+- 2026-09-27 04:34 UTC · **GÖREV 1 BITTI — belge aktif/arşiv ayrımı** — çatı #355 (`ab42a29`), 7b: 1. tur SORUN VAR (2.1'de 🔵 düşmüştü) → düzeltildi → 2. tur ONAY; CI 5/5 yeşil (yeni `docs-guard` dahil). **ÖNCE → SONRA (bayt/satır):** 00-KUYRUK 332.647/598 → 136.433/473 · 01-KARARLAR 263.408/1726 → 242.786/1592 · 02-ILERLEME 165.666/1318 → 128.886/974 · CLAUDE.md 40.972/508 → 38.449/493 · OTONOM-PROMPT 40.634/567 → ~39.3 KB (+5c kural bölümü) · 03-PO-ELLE-ISLER 47.082/267 → 44.987/261 · 00-BELGE-HARITASI 58.514/604 → 21.262/268. **Taşınan = arşive eklenen:** kuyruk 232 = 95 aktif + 112 BITTI + 25 katlanmış (+ YN-01/YN-14 kapanışı 2) · kayıp kimlik 0 · açık kapı dağılımı önce=sonra (🔴51 🟢28 🔵10 🟡6); 01-KARARLAR 84 → 83 kart (KARAR-80 arşive), CEVAP satırı değişen 0; 02-ILERLEME W38 347 satır, eksik 0; CLAUDE.md 19 + OTONOM-PROMPT 18(+4) blok kural-gecmisi arşivlerinde, ## başlık eksiği 0; 03-PO 4 blok, eksik 0; HARİTA tam kopya arşivde, yol kaybı 0/235. **Bekçi:** `scripts/belge-bekci.test.sh` 7/7 (5 kırmızı vaka kırmızı, 2 yeşil vaka yeşil); main'in eski dosyalarında 156 HATA verdi (taşınan 137 satırın hepsini yakaladı). **YN-01 · YN-14 BITTI.** Kalan UYARI'lar: 01-KARARLAR 237 KB (82 cevapsız kart), 03-PO 44 KB (açık PO işi), CLAUDE.md/PROMPT ~38 KB, HARİTA 21 KB.
+- 2026-09-27 04:40 UTC · **GÖREV 2 — AJAN-EKLEDİ satırları açıldı (K-C):** 11 satır (AJ-01…AJ-11) + KARAR-103 (13 özellik kümesi). Kapılar: 🟢 9 (AJ-01/02/03/05/09 hassas → 7b) · 🔵 1 (AJ-10 bağlanmamış bileşenler, silme protokolü) · 🔴 1 (AJ-11 → KARAR-103). *(7b incelemesi #356 SORUN VAR → 5 aday çıkarıldı: landing teması (G7-11/13 canlı-sonrasına ertelenmiş kararı, `00-KARAR-TAKIP.md:373` madde 22 · `06-tasarim-ux.md:15-16`) · DISC derinleşme eşiği (madde 102 "çakışmıyor, TEYİT GEREK" — psikometri kararı) · bildirim sıklığı (ürün kararı → KARAR-103 madde 13) · U-18 takibi (KARAR-97 kapsamında, ön koşul migration'lı PR) · liste sanallaştırma (liste zaten sayfalı, doğrulanmış hata yok).)* Kanıtlar satırların Not'unda (dosya:satır). **"BITTI ama eksik":** F-04 → AJ-05 · F-27 → AJ-06 · F-21 → AJ-07 · G7-13 → ertelenmiş karar (canlı-sonrası) · G6-03 → mükerrer (AN-37/KARAR-74). **Mükerrer / açılmadı:** G1-09, G1-10+G1-13, G9-07, G8-06 → KARAR-18 checklist · G10-12 → KARAR-9 · G4-11 → PO "v1 yeterli" · KVKK metni kategori eksiği → KARAR-18 (avukat) · şema enum/çift rol (G6-02) → madde 49'da bilinçli satırsız · Redis rate-limit → AN-06 (dağıtım topolojisi) · B8 → Y1-B8/KARAR-101 · B9 → Y1-B9 main'de · `Tenant.verifiedBy` → KARAR-76 · `SJT_ENRICHED` → KARAR-100 · super-admin ikiz uçlar → K-13/E-4 · K5-Y2'nin 17 TUTMUYOR'undan 15'i zaten kapalı/bağlı (F-28b, K-05b, KR-19b, AN-07, KARAR-64/102/10…). **Teyit gerek (satır açılmadı):** OAuth pending token "typ yok" iddiası çürüdü (`type` alanı var ve kontrol ediliyor; AN-30 dalı) · askıdaki kurum için özel ön yüz ekranı (genel hata yüzeyi Türkçe mesajı gösteriyor olabilir; ekran taraması yapılmadı) · AN-30 merge edilince CLAUDE.md public listesine `POST /api/auth/oauth/complete-registration` eklenecek (uç main'de yok) · G9-07 OneDrive (PO makinesi). Kaynak tablolar: g-kart-dogrulama + bitti-yeniden-denetim + negatif-test-boslugu + strateji notları.
+- 2026-09-27 04:56 UTC · **AJ-02 BITTI** — backend #172 (`fd8eb0b`, 7b ONAY, negatif test CI'da koştu: tenant ADMIN → 403, iz yazılmaz) + çatı pointer #357 (`d2292e4`). CANLIDA BAK: `/api/system-logs` artık `meta` döndürmüyor ve her görüntüleme denetim kaydına düşüyor (ön yüz bu ucu kullanmıyor). Canlı: api ok:true · db:up · site 200 (04:55'te bir kez 502 → 5 sn sonra 200; kalıcı değil).
+- 2026-09-27 05:23 UTC · **AJ-01 BITTI** — backend #173 + çatı #358 (`b415dd7`). 7b: 1. tur SORUN VAR (son-admin testi yok · platform sayımları kapsam dışı) → düzeltildi → 2. tur ONAY. CANLIDA BAK: kurum yöneticisi KPI/yönetici sayımlarını yalnız kendi kurumundaki aktif üyeliklere göre görüyor. Canlı ok:true · db:up · site 200.
+- 2026-09-27 05:23 UTC · **AJ-06 BITTI** — backend #174 + çatı #358. 7b: 1. tur SORUN VAR (Prisma `distinct` emülasyonu tüm mesajları belleğe çekiyordu) → ham SQL `DISTINCT ON` → 2. tur ONAY. CANLIDA BAK: mesajlar sayfası çok konuşmada hızlı. Kalan 🟢 (AJ): AJ-03 · AJ-04 · AJ-05 · AJ-07 (çalışılıyor) · AJ-08 · AJ-09.
+- 2026-09-27 · **AJ-07 BITTI** — çatı #359 (`f1fc4e7`), bağımsız inceleme ONAY, CI 5/5, FE 90 dosya/441 test. CANLIDA BAK: açık temada DISC I/S etiketleri okunabilir; form etiketleri girdilere bağlı. Rapor: `docs/raporlar/kesif/erisilebilirlik-denetimi-2026-09-27.md`. Canlı ok:true · db:up · site 200.
+- 2026-09-27 · **AJ-03 BITTI** — backend #175 + çatı #360 (`b194fef`), 7b ONAY. CANLIDA BAK: çıkış yapan kullanıcının oturum anahtarı hemen geçersiz (kurum + platform). Canlı ok:true · db:up · site 200. AJ-04 (backend #176, 20 uca 32 negatif test, açık yok) incelemede.
+- 2026-09-27 · **AJ-04** backend #176 (`16a4609`) merge — 20 uca 32 negatif test, açık bulunmadı, bağımsız inceleme ONAY; pointer AJ-08 ile birlikte taşınacak. Yan bulgu → **AJ-12** açıldı (ret ucu gövdesiz 500, `meetingController.ts:706`).
+- 2026-09-27 06:45 UTC · **AJ-04 + AJ-12 BITTI** — backend #176 + #178, çatı pointer #361 (`3a3d7a4`). CANLIDA BAK: mentör görüşme reddi gövdesiz istekte sunucu hatası vermiyor; 20 uca izolasyon testi (açık yok). Canlı ok:true · db:up · site 200.
+- 2026-09-27 · **VPS DERSİ (K8):** ağır komut sırası için `pgrep -f` bekleme döngüsü KİLİTLENDİ (desen kendi bash komut satırını ve diğer ajanın döngüsünü eşliyor). Doğrusu: `flock ~/menti/.worktrees/.heavy.lock nice -n 10 <komut>`. İki ajan bununla sorunsuz sıralandı.
+- 2026-09-27 · **AJ-08 BITTI** — backend #177 + çatı #362 (`fed6b94`, CLAUDE.md seed listesi düzeltmesiyle). 7b: 1. tur SORUN VAR (README komutları serbest gösteriyordu; seed-certification pasifleştiriyor) → düzeltildi → 2. tur ONAY. Hiçbir seed çalıştırılmadı. Canlı ok:true · db:up · site 200.
+- 2026-09-27 · **PS-A4 BITTI** — backend #180 + çatı #364 (`769ac36`), 7b ONAY. CANLIDA BAK: menti listesinde kurum barajı altındaki mentörler yok (varsayılan 50). Yeni kart: KARAR-104 (öneri A). Canlı ok:true · db:up · site 200.
+- 2026-09-27 · **AJ-05 BITTI** — backend #179 + çatı #363 (`55778b8`); 7b: #363 1. tur SORUN VAR (branding eski logoda kilitleniyordu) → düzeltildi → 2. tur ONAY. CANLIDA BAK: güvensiz logo adresi kaydedilemiyor. CSP zorunlu mod → ayrı iş (hazırlık raporu).
+- 2026-09-27 · **AJ-09 BITTI** — backend #181 + çatı #365 (`62dec53`), 7b ONAY; görünmez refaktör. ⚠️ **SÜREÇ HATASI (kayıt):** #365, PR CI'ının Integration işi bitmeden merge edildi (`gh pr checks --watch` zaman aşımına uğradı, komut zinciri merge'e geçti). Sonradan doğrulandı: run 36304347029 success; zarar yok. Ders: merge komutu CI sonucuna koşullu (`gh pr checks` çıkış kodu) zincirlenecek.
+- 2026-09-27 · **Kalan 🟢 ayıklaması:** yapılabilir → F-24 · AN-31 · F-05 (kod kısmı; CAPTCHA anahtarı PO eli) · AN-52 (önce içerik planı) · AN-29 (AN-30 sonrası) · F-01 (belge, L). Engelli → AN-06 (03-PO #29) · AN-26 (KARAR-98) · AN-49/PS-A3/Y-17 (KARAR-58 → PS-A2 zinciri) · IC-08 (merge sınıflandırıcı reddi; kod hazır) · YN-07/YN-08 (CLAUDE.md içerik düzeltmesi K-B kapsamı dışı). Y-12: #110 'MERGE ETME' kalıcı kural + çerez bandı metni hukuki → dokunulmadı. Kapı hücresi tutarsız: AN-12 (karantina → 🔵 olmalı) · AN-26 (gövde 🔵 akışı) · F-05 (anahtar PO eli).
+- 2026-09-27 · **AN-31 → 🔴 KARAR-105** — uygulama denemesi: izin yeri + metrik seti kararda yok, izin alanı migration gerektiriyor; PR açılmadı, kod değişmedi. Kart: KARAR-105 (öneri C şimdilik, sonra A).
+- 2026-09-27 · **F-05 PR-ACIK** (kod kısmı) — backend #183 + çatı #367 (Cloudflare Turnstile CAPTCHA; anahtar yokken no-op — bugünkü davranış aynen, 4 public uçta: `/api/auth/register` · `/api/auth/forgot-password` · `/api/tenants/self-serve/register` · `/api/suspicion-reports`). Fail politikası: ağ hatasında da fail-closed 400 (503 DEĞİL), tek politika dört uçta da aynı (komşu-uç tutarlılığı). Backend testleri: no-op regresyon + token yok/geçersiz/geçerli (fetch mock, negatif: DB'ye yazılmıyor) — yerelde `TEST_DATABASE_URL` yok, guard'la durdu; mantık `tsx` ile elle 20/20 doğrulandı, asıl kanıt CI. Frontend: `npx vitest run` 93 dosya/458 test yeşil, tsc/lint/build temiz. CI bekleniyor. MERGE YOK — PO kısmı (Turnstile hesabı + iki anahtar) `03-PO-ELLE-ISLER.md`'ye eklendi.
+- 2026-09-27 · **F-05 CI YEŞİL** — backend #183 ilk koşuda 1 test FAIL (kendi yazdığım `turnstile.test.ts`: `cleanDb()` `SuspicionReport`'u truncate etmiyor, mutlak sayı yerine fark kullanılmalıydı) → düzeltildi (`6df5678`), ikinci koşu yeşil (6/6, backend ci 6m13s). Çatı #367 iki koşuda da 10/10 yeşil (Backend TS/Lint · Frontend TS/Build · Belge bekçisi · E2E Playwright · Integration). MERGE YOK — PO'nun tek işi kaldı: Turnstile hesabı + iki anahtar (`03-PO-ELLE-ISLER.md`).
+- 2026-09-27 · **F-24 BITTI** — backend #182 + çatı #366 (`fbb97e4`), 7b ONAY (iki PR). CANLIDA BAK: platform yöneticisi üye adından kullanıcı özet sayfasına gidiyor. Canlı ok:true · db:up · site 200. Merge bu kez CI'ın tüm işleri bitince koşullu yapıldı.
+- 2026-09-27 · **AJ-10 → 🔴 KARAR-15 + KARAR-36** — niyet arkeolojisi: iki bileşen de cevapsız kararlara bağlı, ikame yok → silme/karantina yok; kararlar gelince bağlanacak.
+- 2026-09-27 · **F-01 ATLANMADI ama bu oturumda YAPILAMAZ:** PO NOTU bu oturum için `docs/kararlar/` altında tek satırlık uyarı dışında değişikliği yasakladı; F-01 (09-DURUM/00-KARAR-TAKIP taşıma) o dizinde → sonraki oturum ("genel belge taraması" PO kararıyla birlikte).
+- 2026-09-27 · **F-05 7b takip düzeltmesi BITTI** — bağımsız incelemenin engelleyici olmayan notu (token tek kullanımlık, başarısız gönderimden sonra widget sıfırlanmıyordu → ikinci denemede kullanıcı kendi hatasını değil CAPTCHA_GECERSIZ görüyordu) çatı #367'de kapatıldı (`65e9833`): `TurnstileWidget` artık `ref.reset()` açıyor, dört form (kayıt/self-serve/şifremi-unuttum/şüphe-bildirimi) başarısız her yanıttan sonra hem widget'ı sıfırlıyor hem `captchaToken` state'ini temizliyor. 3 yeni test (94 dosya/461 test yeşil), tsc/lint/build temiz. CI izleniyor. MERGE YOK (backend #183 + çatı #367 hâlâ PO'nun Turnstile anahtarlarını bekliyor).
+- 2026-09-27 · **F-05 kod kısmı canlıda** — backend #183 + çatı #367 (`c03f754`), 7b ONAY (çatı 2 tur: widget sıfırlama eklendi). CANLIDA BAK: anahtar girilene kadar formlar aynı; PO Turnstile anahtarlarını girince 4 formda 'robot değilim' kutusu çıkar. Satır 🟡: PO kısmı `03-PO-ELLE-ISLER.md`. Canlı ok:true · db:up · site 200.
+- 2026-09-27 · **AJ-13 BITTI** — backend #184 + çatı #368 (`b70bf1f`); 7b 1. tur SORUN VAR (2 sahte-geçen test + #169 tekrarı) → düzeltildi → 2. tur ONAY. 11 yeni uç, açık yok. Canlı ok:true · db:up · site 200.

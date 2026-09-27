@@ -201,7 +201,7 @@ export default function MentiDashboardPage() {
           <div>
             <h3 className="font-semibold text-sm">DISC Profilinizi Tamamlayın</h3>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Profil tamamlandığında size uygun mentorlar gösterilmeye başlar.
+              Profil tamamlandığında size uygun mentörler gösterilmeye başlar.
             </p>
           </div>
           <Button asChild size="sm">
@@ -220,12 +220,12 @@ export default function MentiDashboardPage() {
             // Küçük havuz koruması: eşik altında (<3) sayı gösterme — kimliği daraltabilir
             <p className="text-xs text-amber-700 dark:text-amber-400">
               Profiliniz analiz edildi.{' '}
-              <strong className="font-semibold">{mentorCountData.count} onaylı mentor</strong>{' '}
+              <strong className="font-semibold">{mentorCountData.count} onaylı mentör</strong>{' '}
               bu programda yer alıyor — yönetici onayı sonrası eşleşme başlayacak.
             </p>
           ) : (
             <p className="text-xs text-amber-700 dark:text-amber-400">
-              DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentor listesine erişebilirsiniz.
+              DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentör listesine erişebilirsiniz.
             </p>
           )}
           {/* F-15: umut/anlam sinyali — bekleme "boş" hissettirmesin (sayı uydurmadan). */}
@@ -259,7 +259,7 @@ export default function MentiDashboardPage() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <DashboardMetricCard label="Gönderilen Talepler" value={sentRequestCount} color="brand" />
         <DashboardMetricCard label="Onaylanan Eşleşmeler" value={countApprovedMatchMentors(meetings)} color="success" />
-        <DashboardMetricCard label="Tamamlanan Toplantılar" value={countCompletedMeetings(meetings)} color="neutral" />
+        <DashboardMetricCard label="Tamamlanan Görüşmeler" value={countCompletedMeetings(meetings)} color="neutral" />
         {/* #12: DISC çoklu harf (ör. "Di") — yoksa tek harfe düşer. */}
         <DashboardMetricCard label="DISC Profili" value={user?.discLetters || user?.discType || '—'} color="warning" />
       </div>
@@ -267,13 +267,13 @@ export default function MentiDashboardPage() {
       {/* Önerilen Mentorlar */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Önerilen Mentorlar</CardTitle>
+          <CardTitle className="text-base">Önerilen Mentörler</CardTitle>
         </CardHeader>
         <CardContent>
           {needsDiscTest ? (
             <div className="text-center py-8 space-y-3">
               <p className="text-sm text-muted-foreground">
-                DISC profilinizi tamamladıktan sonra size uygun mentorlar burada görünecek.
+                DISC profilinizi tamamladıktan sonra size uygun mentörler burada görünecek.
               </p>
               <Button asChild size="sm">
                 <Link href="/disc-test">DISC Testini Başlat →</Link>
@@ -283,7 +283,7 @@ export default function MentiDashboardPage() {
             <div className="text-center py-8 space-y-2">
               <p className="text-sm font-medium">Yönetici onayı bekleniyor</p>
               <p className="text-xs text-muted-foreground">
-                Profiliniz inceleniyor. Onay sonrasında mentor listesine erişip randevu alabilirsiniz.
+                Profiliniz inceleniyor. Onay sonrasında mentör listesine erişip görüşme talep edebilirsiniz.
               </p>
             </div>
           ) : mentorsLoading ? (
@@ -294,14 +294,12 @@ export default function MentiDashboardPage() {
             </div>
           ) : !mentorsData?.items.length ? (
             <div className="text-center py-8 space-y-2">
-              <p className="text-sm font-medium">Şu an uygun mentor bulunamadı</p>
+              {/* PS-10: menti tarafında DISC'e bağlı eleme YOK (matching.ts rankMentorsForMenti) — liste yalnız
+                  programda onaylı ve erişilebilir mentor yoksa boş kalır. Profili suçlama, teste gönderme. */}
+              <p className="text-sm font-medium">Programınızda şu an görüşülebilecek mentör yok</p>
               <p className="text-xs text-muted-foreground">
-                Programınıza henüz mentor katılmamış ya da profilinizle eşleşen mentor yok.
-                DISC profilinizin güncel olduğundan emin olun.
+                Bu, profilinizle ilgili değil. Programınıza mentörler katıldıkça burada görünecekler.
               </p>
-              <Button asChild variant="outline" size="sm">
-                <Link href="/disc-test">DISC Profilini Güncelle →</Link>
-              </Button>
             </div>
           ) : (
             // Havuz KART görünümü (KARAR 2/7): uyum skoru (yüzde) + "neden uyumlu" L1.
@@ -357,10 +355,10 @@ export default function MentiDashboardPage() {
                       size="sm"
                       variant="outline"
                       disabled={!mentor.isBookable}
-                      title={mentor.isBookable ? undefined : 'Bu mentör şu an randevu için uygun değil'}
+                      title={mentor.isBookable ? undefined : 'Bu mentör şu an görüşme talebi için uygun değil'}
                       onClick={() => router.push(`/book-meeting?mentorId=${mentor.mentorId}`)}
                     >
-                      Randevu Al
+                      Görüşme Talep Et
                     </Button>
                     <Button
                       size="sm"
@@ -374,7 +372,7 @@ export default function MentiDashboardPage() {
                   </div>
                   {!mentor.isBookable && (
                     <p className="text-[11px] text-muted-foreground">
-                      Bu mentör şu an randevu için uygun değil — mesaj gönderebilirsiniz.
+                      Bu mentör şu an görüşme talebi için uygun değil — mesaj gönderebilirsiniz.
                     </p>
                   )}
                 </div>
@@ -405,6 +403,7 @@ export default function MentiDashboardPage() {
               rows={5}
               maxLength={2000}
               placeholder="Merhaba, ben... Bu eşleşmeden beklentim..."
+              aria-label="Mesajınız"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               autoFocus

@@ -19,6 +19,12 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 # getSiteUrl() (src/lib/siteUrl.ts) localhost fallback'ine düşer — prod'da set edilmeli.
 ARG NEXT_PUBLIC_SITE_URL=
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+# F-05 (G1-26): Cloudflare Turnstile CAPTCHA site key (public, gizli DEĞİL). Boş bırakılırsa
+# TurnstileWidget hiç render edilmez (bugünkü görünüm aynen korunur) — backend'deki
+# TURNSTILE_SECRET_KEY ile birlikte set edilmeli, aksi halde widget görünür ama backend
+# no-op kalır (zararsız ama gereksiz).
+ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 RUN npm run build
 

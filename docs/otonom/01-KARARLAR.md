@@ -121,7 +121,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-77** | **Görüşmeye iki taraf da değerlendirme yazsın mı** | **2** (KR-08 · KR-11 dolaylı) | ✅ **CEVAPLANDI (2026-09-25): A** — her taraf kendi kaydı, görünürlük değişmez · kart KR-08 bitene kadar ana dosyada |
 | **KARAR-78** | **Dönemlik anket: bağla / karantina / beklet** | **1** (KR-11) | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) |
 | **KARAR-79** | **Zamanlanmış iş tetikleme yetkisi kimde** | **1** (KR-05) | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı |
-| **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **85** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ✅ **CEVAPLANDI (2026-09-26): M1-M22 hepsi A** — 85 satır işlendi (kilit açıldı/katlandı/açık karara bağlandı); 2 yeni kart açtı: KARAR-94 (GV-17), KARAR-95 (kriz kanalı) |
+| **KARAR-80** | **Kuyruk çelişkileri (22 madde, tek cevapla)** | **85** (liste kartta · her satırın Not'unda "çelişki: KARAR-80/Mx") | ✅ **CEVAPLANDI (2026-09-26): M1-M22 hepsi A** — 85 satır işlendi (kilit açıldı/katlandı/açık karara bağlandı); 2 yeni kart açtı: KARAR-94 (GV-17), KARAR-95 (kriz kanalı) · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` |
 | **KARAR-81** | **Taslak kurumlar · kurulum ne zaman tamam** | **2** (mevcut taslaklar · kayıt anında tamamlandı) | ✅ CEVAPLANDI 2026-09-25: ÖZEL — temizlik sürer, mevcut taslaklar test verisi (dokunulmaz); işaret kayıtla aynı transaction'da → KR-23 |
 | **KARAR-82** | **Davet bağlantısı modeli** | **1** (U-12) | ⬜ boş · çıkış blokeri · öneri B (iptal edilebilir toplu link) |
 | **KARAR-83** | **Rolü kim, nasıl değiştirir** | **1** (U-13) | ⬜ boş · çıkış blokeri · YETKİ · öneri B (yalnız düşürme hatası) |
@@ -139,6 +139,14 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-95** | **Kriz kanalı — güvenlik sorusu olarak yeniden** | **2** (I-18, IC-13) | ⬜ boş · ⭐ KARAR-80/M20'den doğdu (2026-09-26), KARAR-69 (c) gereği · öneri A |
 | **KARAR-96** | **🔵 EVET/HAYIR — AN-30 ayrı ayrı rıza kutuları (veritabanına 6 yeni rıza türü)** | **1** (AN-30) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #142 + çatı #320 |
 | **KARAR-97** | **🔵 EVET/HAYIR — U-18 mentör mesaj talebini reddedebilsin (veritabanına 1 yeni alan)** | **1** (U-18) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #148 + çatı #326 |
+| **KARAR-98** | **🔵 EVET/HAYIR — AN-26 yanıtsız mentöre hatırlatma + yöneticiye bildirim (veritabanına 3 yeni alan)** | **1** (AN-26) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #157 + çatı #337 |
+| **KARAR-99** | **🔵 EVET/HAYIR — AN-02 iki soru metnindeki yazım hatası canlıda düzeltilsin mi** | **1** (AN-02) | ⬜ boş · 🔵 canlı veriye yazma (2 satır) · PR backend #160 |
+| **KARAR-100** | **`ProfileSource.SJT_ENRICHED` değeri ne olsun (silme protokolü — gerekçe bulunamadı)** | **0** (AN-54 bulgusu) | ⬜ boş · KARAR-76 ile aynı tür soru |
+| **KARAR-101** | **Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi)** | **1** (Y1-B8 — PR #164/#343) | ⬜ boş · güvenlik + ürün · öneri B |
+| **KARAR-102** | **Kayıttan sonra hemen giriş mi, önce e-posta doğrulaması mı (e-posta sızıntısının son kalıntısı)** | **1** (GV-12 kalanı) | ⬜ boş · güvenlik + ürün · öneri C |
+| **KARAR-103** | **Eski planlardaki 13 yapılmamış özellik — hangileri yapılsın** | **13** (AJ-11) | ⬜ boş · ajan-ekledi (K-C) · öneri B (4 küçük şemasız özellik) |
+| **KARAR-104** | **Uyum eşiğini geçen tek mentör randevuya kapalıysa menti ne görsün** | **0** (PS-A4 sonrası ince ayar) | ⬜ boş · ajan-ekledi (PS-A4 7b notu) · öneri A |
+| **KARAR-105** | **Kurumlar arası anonim karşılaştırma: izni kim açar, hangi sayılar paylaşılır** | **1** (AN-31) | ⬜ boş · KARAR-34 SORU 2 (B) ayrıntısı · migration gerekir · öneri A |
 
 ---
 
@@ -456,6 +464,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 
 ### KARAR-31 · Kriz bildirimi (kendine zarar) + yaş sınırı  [ÜRÜN + HUKUK] (2 işi açar)
 **Şu an ne var:** Sertifika sınavında mentöre *"menti kendine zarar ifadesi kullanırsa ne yaparsın"* diye **soruluyor** (red-line konu `kriz-yonetimi`) ama canlıda böyle bir akış **yok**. Kanıt: 7 terim, İKİ DİLLİ, harf duyarsız (`kriz`·`crisis`·`selfharm`·`self-harm`·`kendine zarar`·`acil durum`·`emergency`) → **2 satır, 0'ı akış** (biri iş unvanı listesi, biri sınav konu etiketi).
+· Ayrıca menti tarafında: menti kriz/kendine zarar ifadesi kullandığında uygulamada hiçbir kanal yok (22 terimlik iki dilli tarama → 0 sonuç); mentör terapist değil. Çözüm araştırma + ruh sağlığı uzmanı + avukat görüşü ister (`persona-panel-gelisimi-2026-09-23.md:259-269`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-31)*
 **Sorun ne:** Mentör eğitimde öğrendiği refleksi uygulayacak bir yer bulamıyor; kriz anında sistem sessiz. Sertifika bir davranışı öğretiyor, ürün karşılığını sunmuyor.
 **Neden sana soruyorum:** Bir kişinin en kırılgan anında kimin haberdar olacağı hukuki ve etik bir karardır; yanlış kurgu zarar verir.
 **Seçenekler:**
@@ -466,7 +475,6 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 **Benim önerim:** Yok — **bu senin ürün kararın, önerime güvenme.** Avukat görüşü alınmadan hiçbiri seçilmemeli.
 ⚠️ **BAĞLI SORU (aynı kart, avukata TEK soru olarak gitmeli):** Bu akış 18 yaş altı menti varsayıyorsa **`G1-01` çöker** — bugün *"18+ beyanı yeterli"* deniyor; gerçek yaş ve veli onayı gerekir.
 **Cevap vermezsen:** **I-18** kuyrukta bekler; sertifika bir davranışı öğretip karşılığını sunmamaya devam eder.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — persona R7 / kriz-kendine zarar KANALI):** Menti bir kriz/kendine zarar ifadesi kullandığında sistem BUGÜN hiçbir şey yapmıyor: hiçbir kanal yok, 22 terimlik iki-dilli tarama → 0 sonuç; kriz sertifika senaryolarında (`CERT_T10_A/B`) sınanıyor ama uygulamada karşılığı yok; mentör terapist değil (`persona-panel-gelisimi-2026-09-23.md:259-269` · `konsey-icerik:267-271`). Kırılgan genç kitle hedeflenirken en savunmasız kullanıcı korumasız. ⚠️ Bu EK KARAR-31 kapsamına bir **kanal seçeneği** olarak girer AMA gerçek çözüm **ARAŞTIRMA + RUH SAĞLIĞI UZMANI + AVUKAT** görüşü gerektirir (pasif 112/183 yönlendirmesi mi, aktif tespit+eskalasyon mu — KVKK/yetki karmaşası ağır). Uzman = Bölüm 6.5(b), avukat = Bölüm 6.4.
 **CEVAP:**
 
 ---
@@ -652,6 +660,7 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 Ayrıca yazılmış ama hiç gösterilmeyen **8 yeni arketip kartı** var (Mimar · Ayna · Liman · Pusula / Rotacı · Kâşif ·
 Denge Arayan · İz Açan) — `arketip-ve-yaklasim-icerigi-2026-09-03.md:153-261`.
 
+· Kodda DÖRDÜNCÜ bir ad seti de var: kurum kayıt önizlemesi "Lider · İlham Veren · Denge Kurucusu · Analist" gösteriyor (`selfServeController.ts:77-82`) — hangi seçenek seçilirse seçilsin bu set de hizalanmalı. Yeni 8 ad 2026-08-28'de PO kararıyla seçildi (TAS); eşlemesi TAS'taki Big Five profillerinden türetilebilir (`TAS:71-107`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-45)*
 **Sorun ne:** Üç ayrı yerde "**Kâşif**" var ve üçü farklı kişiyi anlatıyor: canlıdaki DISC kartında bir mizaç tipi
 (`onboardingController.ts:94`), eski karar belgesinde bir **mentör** tipi (`03-psikometri-ve-algoritma.md:14`),
 yeni içerikte bir **menti** tipi (`arketip-...md:53`). Üstelik yeni 8 adın hiçbirinin, sistemin içindeki kod
@@ -681,7 +690,6 @@ yazılması.
 turda kapatmak ucuz.
 **Cevap vermezsen:** I-01 (yaklaşım metinleri), I-15 (arketip kartı), C-?? (ham `M1` kodları) ve madde 139'un
 menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — dördüncü ad seti + PSI damgasızlığı):** Kodda **DÖRDÜNCÜ** bir arketip ad seti var: kurum kayıt önizlemesi "Lider · İlham Veren · Denge Kurucusu · Analist" gösteriyor ve kurum yöneticisi kayıt sırasında bunu görüyor (`selfServeController.ts:77-82`). Hangi seçenek seçilirse seçilsin bu set de hizalanmalı. Yeni 8 ad "sessiz" değil — TAS 2026-08-28'de PO kararıyla seçildi; kartın "eski karar belgesi" dediği PSI ise HİÇ damgalanmamış. 8 yeni adın M1…m4 kodlarına eşlemesi yok ama TAS her ada bir Big Five profili yazmış (`TAS:71-107,84-103`), eşleme buradan türetilebilir. Kanıt: `icerik-mutabakati-2026-09-23.md:250` · `devir/08-oturum-tezi-2026-08-28.md:32`.
 **CEVAP:**
 
 ---
@@ -694,6 +702,7 @@ menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
 2026-09-08 tarihli oturum belgeleri · **kodda bambaşka bir üçüncü sahne** (`seed-certification.ts:216-217`).
 Hangisinin canlıya gideceği hiçbir belgede yazmıyor; faz6 hâlâ "dondurulmuş" etiketli.
 
+· A seçilirse seed'deki iki STK-özel konu (`gonullu-tukenmisligi`, `okul-gonulluluk-dengesi`) canlıdan kalkar ve sonuç ekranındaki (I-03) konu adları değişir; seed'deki "mentorluk/mentörlük" karışıklığı kendiliğinden düzelir (`seed-certification.ts:87,141`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-46)*
 **Sorun ne:** Kuyruk (P-99) işi "22 senaryoyu seed'e taşı" diye tarif ediyor; gerçekte **22'nin 17'sinin seed'de
 karşılığı yok, seed'deki 20'nin 15'i belgelerde gerekçeli elenmiş** ve ortak olan 5 senaryonun **5'i de yeniden
 yazılmış** — birinde puanlamanın anlamı ters dönmüş. Ayrıca taşımadan önce üç teknik soru cevapsız: konu
@@ -722,7 +731,6 @@ olması acilse ama toplu değişimi istemiyorsan B; ama karışık sürüm yöne
 **Benim önerim:** A — ama **KARAR-3 ve KARAR-4 cevaplanmadan başlanamaz** (kriz senaryolarının 8 şıkkı onlara
 bağlı) ve iş ikiye bölünmeli: "içerik taşıma PR'ı" ve "seed çalıştırma turu".
 **Cevap vermezsen:** P-99 ve K-16 açık kalır; sertifika ekranı bugünkü hâliyle kalır.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — A seçilirse STK-özel konu kaybı + ad tutarsızlığı):** A seçilirse seed'deki iki STK-özel sertifika konusu (`gonullu-tukenmisligi`, `okul-gonulluluk-dengesi`) canlıdan kalkar; "harmanla" kararının "3 konu geri gelir" gerekçesi okul-gönüllülük için gerçekleşmedi, "mentinin hayat önceliklerine saygı" yetkinliği açıkta kalır. Konu adları üç kaynakta farklı; A seçilirse sonuç ekranındaki (I-03) konu adları da değişir. Seed'de "mentorluk/mentörlük" karışık; A seçilirse kendiliğinden düzelir. Kanıt: `O2:243-247,289-291` · `O3:442-445,498-502` · `seed-certification.ts:87,141` · `icerik-mutabakati-2026-09-23.md:251`.
 **CEVAP:**
 
 ---
@@ -776,6 +784,7 @@ yazıyor ve *"…en uygun … kişiyle **eşleştirileceksin**"* diye söz veriy
 Eşleşme kartında *"%87 uyum"* gibi bir sayı var (`menti/page.tsx:311`), gerekçe üretilemezse yerine
 *"Genel profil uyumu"* basılıyor (`matchingController.ts:15`).
 
+· Kimlik dili ve tutulamayan vaat kodda: "Sen bir Öncüsün!" (`ResultStep.tsx:38` · `DiscRecallCard.tsx:56` · `onboardingController.ts:67`), "En İyi Eş" / "…eşleştirileceksin" (`ResultStep.tsx:71,97-100`) — metodoloji "kişilik tanısı değildir" diyor. En somut, araştırma beklemeyen düzeltme: "En İyi Eş" + "eşleştirileceksin" vaadinin kaldırılması. *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-48)*
 **Sorun ne:** Ürünün kendi metodoloji sayfası *"kesin bir başarı garantisi değil"*, *"DISC kişilik tanısı
 değildir"* diyor — ama kullanıcının **gerçekten okuduğu** ekranlar (sonuç kartı, eşleşme kartı) bu temkinli dili
 taşımıyor: kimlik etiketi ("Sen bir X'sin"), üstünlük ("En İyi Eş"), kesin vaat ("eşleştirileceksin") ve
@@ -801,7 +810,6 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 önemliyse A. C yalnızca bu çelişkiyi bilinçli kabul ediyorsan savunulabilir.
 **Benim önerim:** A — yüzde ve "eşleştirileceksin" ürünün **tutamadığı** iki vaat; kalan kısım zaten güçlü.
 **Cevap vermezsen:** C1-1…C1-6 (6 metin) olduğu gibi kalır; eşleşme kartındaki boş gerekçe de sürer.
-**⚠️ EK BİLGİ (2026-09-23, KAYIT turu — K-F damgalayan dil + persona C3 sevdirme dili):** Canlı arketip kartı kimlik dili + tutulamayan vaat kullanıyor: "Sen bir Öncüsün!" (`ResultStep.tsx:38` · `DiscRecallCard.tsx:56` · `onboardingController.ts:67`) ve "En İyi Eş" / "…eşleştirileceksin" (`ResultStep.tsx:71,97-100`) — belge ilkesi (`arketip-…:149` "eğilim, kimlik değil") ve ürünün kendi davet metniyle (`admin/invite/page.tsx:22`) çelişiyor. Persona konseyi ayrıca "sevdirme dili ne kadar kesin/iddialı olmalı" (§7 C3, `persona-panel-gelisimi-2026-09-23.md:235-237`) sorusunu soruyor: metodoloji "kişilik tanısı değildir" derken ekran kesin kimlik veriyor. **En somut, araştırma-beklemez düzeltme:** "En İyi Eş" + "eşleştirileceksin" tutulamayan gelecek vaadinin kaldırılması.
 **CEVAP:**
 
 ---
@@ -1270,140 +1278,6 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 
 ---
 
-### KARAR-80 · Kuyruk çelişkileri (22 madde · 84 satırı açar) [ÜRÜN KARARI · KUYRUK DÜZENİ]
-> ⭐ Kaynak: çelişki taraması (2026-09-25, 3 paralel salt-okuma ajanı; `00-KUYRUK.md` BEKLIYOR satırlarının tamamı + cevaplı kartlar + arşiv CEVAP satırları + `09-DURUM.md` en üst bölüm). Aşağıdaki satırların kapısı bu kart cevaplanana kadar **🔴 KARAR-80/<madde>**; eski kapı Not'ta yazılı. Hiçbir iş silinmedi, IPTAL edilmedi.
-> **Tek cevap seçeneği: "Hepsinde öneriyi kabul ediyorum" ya da madde madde (ör. `M1 A · M3 B · diğerleri öneri`).**
-> "Katlanır" = iş kaybolmaz; ana satırın kapsamına girer, katlanan satır "→ <ana satır>" notuyla kapanır (IPTAL değil, BITTI'ye ana satırla birlikte çekilir).
-
-**M1 · Ret deneyimi dört satıra dağılmış, iki karar birbirini çekiyor** — P-05 · F-17 · I-16 · U-18
-- Şu an: P-05 "görüşme reddi" (`meetingController.ts` rejectMeetingByMentor var, bildirimsiz); I-16 + U-18 "mesaj talebi reddi" (MatchRequest'te durum yok). P-05 Not'u "F-17 + I-16 aynı akış, tek PR" diyor; U-18 "P-05 ile karıştırma" diyor. KARAR-22=B "nazik mesaj, **alternatif YOK**"; I-16 "Bitti demek" ise "alternatif mentör görüyor"; KARAR-20=A alternatifi içeriyor.
-- Kullanıcı gözünden: yanlış kurulursa reddedilen menti ya kararda olmayan "alternatif mentör" ekranı görür ya da iki ret türünden biri yarım kalır.
-- **A)** İki ayrı iş: görüşme reddi = P-05, mesaj talebi reddi = U-18 (+I-16 metinleri); ikisi de KARAR-22 B'ye göre (nazik mesaj, alternatif yok); F-17 bu ikisine katlanır. · Kullanıcı: nazik ret mesajı görür · Kazanç: kararla uyumlu, iki akış doğru nesneye bağlanır · Kayıp: alternatif mentör önerisi yok · Geri alınır: evet
-- **B)** Ret ekranında alternatif mentör de gösterilsin (KARAR-20 A yönü; KARAR-22 B revize olur). · Kullanıcı: ret + "şu mentörlere bakabilirsin" · Kazanç: menti yolda kalmaz · Kayıp: KARAR-22'de "kırıcı olmasın" gerekçesiyle reddettiğin seçenek geri gelir; daha çok iş · Geri alınır: evet
-- **Öneri: A** — en son cevaplanan KARAR-22 B ile tutarlı; iki farklı ret nesnesi karışmaz.
-
-**M2 · Bekleyen talebin 7. günü: kapanış mı, ikinci hatırlatma mı** — I-10 · AN-26
-- Şu an: I-10 (madde 154) "3. gün hatırlatma, 7. gün otomatik kapanış + alternatif"; AN-26 (KARAR-53 ④, sonraki karar) "3 gün mentöre hatırlatma, 7 gün 2. hatırlatma, 10 gün yöneticiye".
-- Kullanıcı gözünden: talep 7. gün kapanırsa 10. gün yönetici uyarısı hiç çalışmaz.
-- **A)** KARAR-53 ④ esas: tek zamanlayıcı (3/7/10); I-10'un "kapanış + alternatif" ayağı üstü çizilir. · Kazanç: sonraki kararla tutarlı, yönetici devreye girer · Kayıp: menti 7. gün otomatik kapanış görmez · Geri alınır: evet
-- **B)** I-10 esas: 7. gün kapanış + alternatif; eskalasyon yok. · Kazanç: menti belirsizlikte kalmaz · Kayıp: yönetici hiç haberdar olmaz; KARAR-53 ④ geri alınır · Geri alınır: evet
-- **Öneri: A** — daha yeni karar ve M1 A ile uyumlu (alternatif yok).
-
-**M3 · Menti mentör listesini görecek mi** — K-19 · PS-A4 · AN-28
-- Şu an: KARAR-6 CEVAP "A" harfiyle "liste olmasın, menti yalnız eşleştiği mentörü görür" okunuyor; ama aynı kartın PO eki ("uyum oranı görünsün", "uygun olmayanı görmesin → eşik"), KARAR-32 revizyonu ve KARAR-66 B listeyi var sayıyor. Kod: `menti/page.tsx:288-318` mentör kart listesi var.
-- Kullanıcı gözünden: K-19 kararın harfine göre yapılırsa menti bugün gördüğü mentör listesini kaybeder.
-- **A)** Liste kalır + alt uyum eşiği (PS-A4) + soluk görünüm (AN-28). · Kullanıcı: yalnız kendine uygun mentörleri listede görür · Kazanç: bugünkü akış korunur, sonraki kararlarla tutarlı · Kayıp: "tek mentör" sadeliği yok · Geri alınır: evet
-- **B)** Liste kaldırılır, menti yalnız sistemin önerdiği tek mentörü görür. · Kazanç: kararın harfi · Kayıp: menti seçim hakkını kaybeder; PS-A4/AN-28 boşa gider; KARAR-66 "sistem önerir, karar sende" diliyle çelişir · Geri alınır: evet ama ekran yeniden yazılır
-- **Öneri: A** — PO eki ve sonraki üç karar listeyi koruyor.
-
-**M4 · Online görüşme linkini kim girer** — K-19 (link ayağı)
-- Şu an: KARAR-7=A "linki mentör girer"; kodda linki menti randevu alırken giriyor (`book-meeting/page.tsx:82` → `meetingController.ts` bookMeeting), mentör onayı link almıyor. Gösterim zaten var (U-02 BITTI; AN-18 bu turda BITTI'ye çekildi).
-- **A)** Mentör onaylarken linki girer; menti alanı kalkar. · Kazanç: kararla aynı; linkin sahibi görüşmeyi yöneten kişi · Kayıp: menti kendi linkini öneremez · Geri alınır: evet
-- **B)** İkisi de girebilir; mentörünki önceliklidir. · Kazanç: esneklik · Kayıp: iki link karışabilir, daha çok iş · Geri alınır: evet
-- **Öneri: A** — KARAR-7'nin kendisi.
-
-**M5 · Mentörün "%uyum" rozeti üç satırda** — P-04 · AN-20 · PS-04 (kök: U-18)
-- Şu an: üçü aynı rozeti (`mentor/page.tsx:292`, `m.match` null) tarif ediyor; P-04 gerekçesi "%92 aha vaadi" — KARAR-66 B bu iddiayı geri çekti; AN-20 aynı rozeti "yönlendirme uyumu" diye güncellemiş; KARAR-48 (yüzde mi bant mı) cevapsız.
-- **A)** Tek satır AN-20 (yönlendirme dili, KARAR-48'e bağlı); P-04 ve PS-04 ona katlanır; sıra: GV-08 → U-18 (Match yazımı) → AN-20. · Kazanç: rozet bir kez, doğru dille · Kayıp: yok (iş birleşir) · Geri alınır: evet
-- **B)** Üçü ayrı kalsın. · Kayıp: aynı rozet üç PR'da farklı dille çıkabilir
-- **Öneri: A**.
-
-**M6 · "Senin gibi N kişi bekliyor" sayacı iki satırda, iki farklı kapıyla** — P-06 · AN-21
-- **A)** Tek satır, kapı 🔴 KARAR-56 + küçük sayı gizleme (k-anonimlik). · Kazanç: küçük kurumda kişi ifşası olmaz · Kayıp: sayaç karar gelene kadar yok · Geri alınır: evet
-- **B)** P-06 🟡 ile hemen yapılsın. · Kayıp: KVKK riskli sayı kararsız çıkar
-- **Öneri: A**.
-
-**M7 · Mentör görünürlük anahtarı üç satırda, iki anlamda** — U-19 · Y-15 · AN-28
-- Şu an: üçü de `mentorVisibilityEnabled` alanını bağlıyor. KARAR-32 revizyonu "havuzdan çıkmaz, soluk görünür, yalnız mesaj alır"; Y-15 "Bitti demek" hâlâ "havuza açıp kapatabiliyor", U-19 "profili tamam olmayan havuzda görünmez" diyor.
-- **A)** Alan bağlantısı tek satırda (AN-28, soluk gösterim); U-19 yalnız "profil tamamlanma ölçütü"ne daralır; profili eksik mentör de **soluk** gösterilir. · Kazanç: KARAR-32 ile tutarlı, tek anlam · Kayıp: eksik profilli mentör listede görünmeye devam eder (soluk) · Geri alınır: evet
-- **B)** Aynı; ama profili eksik mentör **gizlenir**. · Kazanç: liste temiz · Kayıp: KARAR-32'nin "gizleme yok" ruhundan sapar · Geri alınır: evet
-- **Öneri: A**.
-
-**M8 · Kişilik sonucunu hangi test belirler — karar verilmeden kodla seçiliyor** — PS-02 · PS-03 (KARAR-57 cevapsız)
-- Şu an: KARAR-57 kartı "cevap vermezsen PS-02 bağlanamaz" diyor; PS-02/PS-03 kilitsiz. PS-03 Likert yolunu `discType` yazar yapıyor (fiilen KARAR-57 A seçimi).
-- **A)** PS-03 KARAR-57'ye kilitlenir; PS-02'nin karardan bağımsız dar kısmı ("güven değeri yazılsın", çıkış blokeri) ayrılıp ilerler. · Kazanç: karar kodla verilmez; çıkış blokeri durmaz · Kayıp: PS-03 bekler · Geri alınır: evet
-- **B)** İkisi de şimdi yapılsın (fiilen KARAR-57 A). · Kayıp: kararı kod vermiş olur
-- **Öneri: A**.
-
-**M9 · Psikometri motoru: aynı iş beş satırda, iki farklı yön** — I-13 · I-14 · I-15 · F-11 · PS-A1 · PS-A2 · PS-A3 · F-09 (AN-04 zaten 🔴)
-- Şu an: PS-A1 "= I-13 + I-14"; I-15 "= F-11 alt kümesi = KARAR-10 3. aşama"; F-11 formül %45/30/25 + 2 veto içeriyor ama bunlar cevapsız KARAR-61/65 konusu; PS-A2 canlı veriyi yeniden hesaplıyor ama KARAR-58 A (kesme geçiş) gelirse o veri arşivlenir; F-09 eski SJT'ye 12 senaryo yüklüyor, AN-04 yeni Big Five bankası getiriyor (KARAR-57/58/62).
-- **A)** PS-A1 ana satır (I-13/I-14 katlanır) ve bağımsız ilerler; PS-A2 (yeniden hesaplama) KARAR-58 sonrasına; PS-A3 bağlama (I-15 katlanır); F-11 yalnız "formül + veto" olarak daralır, 🔴 KARAR-61/65; F-09 KARAR-57/58 sonrasına. · Kazanç: canlı veriye boşa dokunulmaz, formül kararsız değişmez · Kayıp: yeniden hesaplama ve SJT içeriği bekler · Geri alınır: evet
-- **B)** Satırlar bugünkü hâliyle kalsın. · Kayıp: aynı iş iki kez yapılabilir; KARAR-58 A gelirse PS-A2 emeği boşa gider
-- **Öneri: A**.
-
-**M10 · Randevu: tek migration paketi ve takvim ekranı iki satırda** — K-15 · AN-25 · K-05 · AN-24
-- Şu an: KARAR-53 "KARAR-1 ile tek migration, ayrı açma"; K-15 yalnız format+süre, AN-25 koşul alanlarını ayrı satırda tutuyor. K-05 ① takvim görünümü = AN-24 ①. Ek bulgu: K-05'in "409 mesajı Türkçe gösteriliyor" iddiası kodla şüpheli (`lib/api/client.ts:25-34` `error` alanını mesaja çevirmiyor; TEYİT GEREK).
-- **A)** K-15 kapsamı "format + süre + koşul alanları" (AN-25 katlanır, tek migration, tek yedek); AN-24 ① K-05'e katlanır. · Kazanç: tek canlı DB değişikliği, tek takvim · Kayıp: K-15 büyür · Geri alınır: migration kısmı zor (A2 kuralı: migration PR'ı ayrıca evet/hayır kartı)
-- **B)** Ayrı kalsın. · Kayıp: iki migration, iki yedek, iki onay
-- **Öneri: A**.
-
-**M11 · "Görüşme tamamlandı" iki satırda; kim işaretleyecek hiç sorulmadı** — U-01 · AN-19
-- Şu an: görüşmeyi tamamlandı yapan ekran ya da otomatik iş yok; bu yüzden değerlendirme ve check-in hiç açılmıyor.
-- **A)** Tek satır U-01 (AN-19 katlanır); saat geçince otomatik "tamamlandı", mentör "gerçekleşmedi" diye düzeltebilir. · Kullanıcı: görüşme bitince değerlendirme kendiliğinden açılır · Kazanç: veri akışı başlar, kimseye ek yük yok · Kayıp: yapılmamış görüşme mentör düzeltmezse "tamamlandı" sayılır · Geri alınır: evet
-- **B)** Yalnız mentör işaretler. · Kazanç: kayıt kesin doğru · Kayıp: mentör unutursa değerlendirme hiç açılmaz
-- **C)** İki taraf da işaretler, biri yeter. · Kazanç: esnek · Kayıp: çelişen beyan olabilir
-- **Öneri: A** — bugünkü asıl sorun değerlendirmenin hiç açılmaması.
-
-**M12 · Geri bildirim: iki "soru soran" sistem ve iki Feedback değişikliği** — F-31 · AN-52 (+ sıra: AN-47 → KR-08 · AN-48; KARAR-44 ↔ KARAR-78)
-- Şu an: F-31 her sayfada "hata/öneri bildir" + yeni model; AN-52 (KARAR-70 eki) köşede isteğe bağlı sorular — ikisi aynı ürün içi geri bildirim deposu. KARAR-44 önerisi dönemlik anketi "asıl NPS" yapmak, KARAR-78 önerisi anketi karantinaya almak — ikisi birlikte seçilirse ağırlık ayarının tek veri kaynağı kapanır.
-- **A)** Tek ürün içi geri bildirim modeli: AN-52 ana satır, F-31 katlanır; KARAR-44 ile KARAR-78 aynı oturumda cevaplanır; sıra AN-47 (envanter) → KR-08 → AN-48 aynı migration'a. · Kazanç: tek kutu, tek migration · Kayıp: F-31'in "hata bildir" ayağı AN-52'yi bekler · Geri alınır: evet
-- **B)** Ayrı kalsın. · Kayıp: kullanıcı iki ayrı geri bildirim kutusu görebilir
-- **Öneri: A**.
-
-**M13 · Yönetici rapor dışa aktarımı iki satırda** — F-18 · AN-22 · **A)** AN-22 → F-18'e katlanır · **B)** ayrı kalsın · Kayıp (B): aynı özellik iki kez · **Öneri: A**.
-
-**M14 · Ölü kod karantinası dört-beş satırda** — K-13 · E-4 · AN-13 · AN-40 · AN-54
-- Şu an: K-13 "E-4 kalsın, bu satır referans" diyor ama BEKLIYOR; K-13 İş metni hâlâ "KARAR-11 cevabı beklenir" (KARAR-11=A cevaplandı).
-- **A)** E-4 ana satır (tek karantina turu, silme protokolü); AN-54 ilk adımı; K-13, AN-13, AN-40 katlanır. · Kazanç: tek tur · Kayıp: yok · Geri alınır: evet · **Öneri: A**.
-
-**M15 · Belge düzeni işleri tekrar ediyor ve üç karar kilidi eksik** — F-01 · YN-03 · YN-02 · YN-05 · YN-06 · AN-44 · IC-12 · YN-04 · AN-14 · AN-23 · AN-42 · AN-53 · AN-46 · Y-02 · YN-11 · AN-43
-- Şu an: YN-03 → F-01 · YN-05 → YN-02 · AN-44 (08-acik-sorular kısmı) → YN-06 · IC-12 (registerMessages kalemi) → YN-04 · AN-14/23/42/46 → AN-53 çatısı · Y-02 ↔ AN-46 (G1-03 iki kez) · YN-11 ↔ AN-43 (kısmen yapılmış). Ayrıca KARAR-50 (YN-04/05), KARAR-51 (YN-06), KARAR-52 (YN-02) cevapsız ama satırlar kilitsiz.
-- **A)** Katlanmalar yukarıdaki gibi; YN-02 → 🔴 KARAR-52, YN-04/05 → 🔴 KARAR-50, YN-06 → 🔴 KARAR-51 (karara bağlı olmayan kısımları Not'ta ayrılır). · Kazanç: aynı belge düzeltmesi bir kez · Kayıp: yok · Geri alınır: evet · **Öneri: A**.
-
-**M16 · İçerik metinleri tekrar ediyor + geri çekilen "eşleştirme" dili** — IC-10 · AN-05 · IC-11 · AN-10 · IC-01 · AN-16 · I-01 · I-11
-- Şu an: "şimdilik" varyantları IC-10 = AN-05 (= I-15 m.139); görüşme/toplantı/randevu terimi IC-11 = AN-10; İngilizce DISC adları IC-01 = AN-16. I-01/I-11/I-16'nın bağlayacağı hazır metinler "eşleşme" dili taşıyor (KARAR-66 B öncesi).
-- **A)** IC-10, IC-11, IC-01 ana satır; AN-05 yalnız "15/16 kombinasyon metni"ne, AN-10 yalnız mizaç/karakter/kişilik (KARAR-64) ve mentor/mentör ayağına daralır; AN-16 katlanır; I-01/I-11 metinleri AN-50 "yönlendirme" diline çevrilerek bağlanır. · Kazanç: metin bir kez, doğru dille · Kayıp: I-01/I-11 metin çevirisi kadar gecikir · Geri alınır: evet · **Öneri: A**.
-
-**M17 · Rıza ekranı iki satırda, farklı öncelikle** — F-03 · AN-30 · AN-29
-- Şu an: F-03'ün ikinci bulgusu (tek kutu hem KVKK hem 18+) = AN-30'un ayrı onay ekranı; AN-30 çıkış blokeri, F-03 değil. AN-29 kapısı "🔴 KARAR-34" ama KARAR-34 cevaplandı; kalan tek şey avukat metni. AN-30 kendi Not'unda "avukat onayı ek iş değil, ekran mekanizması blokeri" diyor.
-- **A)** F-03 AN-30'a katlanır; ekran mekanizması yer tutucu metinle yapılır (🟡), metnin yayını avukata bağlı kalır; AN-29 kapısı 🟡. · Kazanç: çıkış blokeri ilerler · Kayıp: ekran önce yer tutucu metinle durur (canlıya avukat onaylı metin gelmeden açılmaz) · Geri alınır: evet · **Öneri: A**.
-
-**M18 · KVKK çıkış blokeri etiketleri eksik (KARAR-69 b)** — GV-08 · GV-09 · GV-17 · GV-18 · AN-41
-- Şu an: KARAR-69 (b) "aydınlatma · açık rıza · silme hakkı · yurtdışı saklama bilgilendirmesi → çıkış blokeri" diyor; GV-08 (silme eksik), GV-09 (yanlış ülke beyanı), GV-18 (rıza sürümü kontrol edilmiyor) bu kovada ama etiketsiz. GV-09 kapısı avukata bağlı, oysa yanlış ülke bir olgu düzeltmesi. AN-41 avukata "rıza sürümleme var" diyecek, ama sürüm hiç kontrol edilmiyor (GV-18).
-- **A)** GV-08/09/18 ⛔ ÇIKIŞ BLOKERİ (T1); GV-09'un olgu düzeltmesi (ülke adı) karardan ayrı satır, KARAR-38 yalnız hukuki rejim yorumunda; AN-41'e GV-18 notu; GV-17 (dışa aktarım hakkı) için ayrıca sen karar ver (A'da blokersiz kalır). · Kazanç: ilk dernek yanlış KVKK beyanıyla karşılaşmaz · Kayıp: çıkış listesi 3 iş uzar · Geri alınır: evet
-- **B)** Etiketleme yapılmasın. · Kayıp: yanlış ülke beyanı ve eksik silme canlıda kalabilir
-- **Öneri: A**.
-
-**M19 · Açık karara bağlı ama kapısı açık satırlar** — P-15 (KARAR-41) · P-99 (KARAR-46) · Y-18 (KARAR-36, silme protokolü) · V-15 (KARAR-40) · I-09 (KARAR-30) · F-08 (KARAR-44) · AN-37 (KARAR-19 ↔ KARAR-74 aynı kalem iki kartta)
-- **A)** Her biri ilgili açık karta 🔴 ile bağlansın; KARAR-19'un kurum silme kısmı KARAR-74'e yönlendirilsin. · Kazanç: ajan senin vermediğin kararı kodla vermez · Kayıp: bu 7 iş kartlar cevaplanana kadar bekler · Geri alınır: evet
-- **B)** Açık kalsın, ajan "en güvenli" yorumla ilerlesin. · Kayıp: ürün kararı kodla verilmiş olur
-- **Öneri: A**.
-
-**M20 · Kriz kanalı yanlış kovada bekliyor** — I-18 · IC-13
-- Şu an: KARAR-69 (c) "kriz kanalı hukuk değil GÜVENLİK, ayrı karar olarak yeniden sorulacak" dedi; I-18 hâlâ "hukuki ön koşul + KARAR-31 + avukat", IC-13 aynı karara bağlı. Ayrı kart henüz açılmadı.
-- **A)** Tek "kriz kanalı" güvenlik kartı açılsın (bir sonraki turda, bağlam konuşmasından sonra); I-18/IC-13 ona bağlansın. · Kazanç: karar doğru soruyla sorulur · Kayıp: kriz akışı bir tur daha bekler · Geri alınır: evet
-- **B)** KARAR-31 + avukat yolunda kalsın. · Kayıp: KARAR-69 (c) uygulanmamış olur
-- **Öneri: A**.
-
-**M21 · Sıra ve karşılıklı etki notları (karar değil, bilgin olsun)** — KR-20 · Y-14 · Y-17 · U-17 · DK-01 · DK-02 · DK-03 · GV-07
-- KR-20 (reddedileni yeniden başvurtma) ↔ KARAR-72 (kalıcı red) ters yönde olabilir; Y-14 GV-10 ve KR-20'den SONRA; Y-17 PS-A1..A3'ten SONRA; U-17'nin "seed koruması" ayağı = KR-01; DK-02 ret mailini bastırmayı da kapsamalı ve avukat ön koşulu KARAR-69 (a) gereği kalkmalı (düzeltme maili metni kodda zaten var: `tenantNotifications.ts:50-63`); DK-01/DK-03 ortak kişisel veri temizleyicisini GV-07'den almalı.
-- **A)** Bu notlar satırlara işlensin; KR-20 KARAR-72 cevabına kadar bekler, DK-02'den avukat ön koşulu kalkar. · Kayıp: KR-20 bekler · Geri alınır: evet
-- **B)** Yalnız sıra notları işlensin, KR-20 ve DK-02 bugünkü hâliyle kalsın. · Kayıp: KR-20 KARAR-72 A ile çelişebilir
-- **Öneri: A**.
-
-**M22 · Görüşme değerlendirme notlarını kim görecek (bilgi — iş kilitlenmedi)** — GV-04
-- Şu an: GV-04 "Bitti demek" "taraflar ve yönetici görür" diyor; KARAR-77 A ruhu "karşı taraf diğerinin cevabını görmez". GV-04 bir güvenlik açığı ve PO öncelik bloğunda, bu yüzden kilitlenmedi: **en dar görünürlükle yapıldı** (yazan kendi kaydını + kurum yöneticisi hepsini görür; karşı taraf görmez). Genişletmek kolaydır.
-- **A)** En dar görünürlük kalsın. · Kazanç: KARAR-77 ile tutarlı, dürüst değerlendirme · Kayıp: taraflar birbirinin notunu göremez · Geri alınır: evet
-- **B)** Taraflar birbirinin notunu da görsün. · Kazanç: şeffaflık · Kayıp: mentörün menti hakkındaki hazırlık notu mentiye görünür · Geri alınır: evet
-- **Öneri: A**.
-
-**Cevap vermezsen:** yukarıdaki satırlar 🔴 KARAR-80 kilidinde kalır; tur bunları atlar. En çok iş kilitleyen: M9 (8 satır), M15 (16 satır), M1 (4), M16 (8).
-**CEVAP:** Hepsinde öneriyi kabul ediyorum (M1-M22 hepsi A). Ürün etkisi olan maddeler strateji katmanıyla konuşuldu: M1 ret = nazik mesaj, alternatif mentör yok (KARAR-22 B) · M3 menti mentör listesini görmeye devam eder + uyum eşiği · M4 online linki mentör onaylarken girer (KARAR-7) · M11 saati geçen görüşme otomatik tamamlandı, mentör "gerçekleşmedi" diye düzeltebilir. (PO, 2026-09-26)
-
-> ✅ **İŞLENDİ (2026-09-26):** `00-KUYRUK.md`'deki 85 satırın tamamı bu cevaba göre güncellendi — "katlanır" denenler ana satıra `→ <ana satır>` notuyla bağlandı (silinmedi), başka açık karara bağlananlar `🔴 KARAR-<no>` oldu, kalanlar eski kapısına (genelde 🟢/🟡) döndü. M18'den **KARAR-94** (GV-17 dışa aktarım hakkı), M20'den **KARAR-95** (kriz kanalı) doğdu. Kapı öncesi/sonrası dağılımı ve kilitli kalan satır sayısı: `docs/otonom/02-ILERLEME.md` bu turun TUR ÖZETİ'nde.
-
----
-
 ### KARAR-81 · ⛔ ACİL — Taslakta kalmış kurumlar ve "kurulum ne zaman tamamlanmış sayılır" (2 iş açar) [ÜRÜN KARARI · CANLI VERİ]
 > ⭐ Kaynak: F-04 incelemesi (menti-mentor#102 yorum 5827846263 · menti-mentor-v2#272 yorum 5827975996), kodla doğrulandı 2026-09-25.
 **Şu an ne var:** Yeni kurum kendi kendine kayıt olduğunda "taslak" adımıyla açılıyor (`backend/src/controllers/selfServeController.ts:282`). Kurulumu "tamamlandı" yapan tek yer sihirbazın hesap adımıydı ve yalnız logo girilince ya da renk değiştirilince çalışıyordu; platform onayı bekleyen kurumlarda hiç çalışmıyordu. Her gün çalışan taslak temizliği, 96 saatten eski ve anlaşması olmayan taslak kurumları **kullanıcılarıyla birlikte siliyor** (`backend/src/services/cronScheduler.ts:181-212`); 72. saatte de hatırlatma e-postası atıyor (`:102-125`).
@@ -1626,7 +1500,7 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Ne değişir:** Veritabanındaki rıza türü listesine 6 yeni değer EKLENİR (`ConsentType`). Mevcut hiçbir kayıt değişmez, silinmez. Dosya: `prisma/migrations/20260926150000_add_granular_consent_types/migration.sql` (`ALTER TYPE ... ADD VALUE IF NOT EXISTS`, yalnız ekleme).
 **Geri alınır mı:** Ekran ve kod tek tıkla geri alınır (revert). Eklenen 6 rıza türü veritabanında kalır — boş ve zararsızdır, ama PostgreSQL'de bir tür listesinden değer silmek zahmetlidir (pratikte "kalıcı ekleme" say).
 **Yedeği alınacak tablo:** `Consent` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye yazılır). Not: merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
-**Durum:** kod hazır · CI yeşil · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK · ⚠️ 7b SONUCU (2026-09-26): **SORUN VAR** — backend #142 yorum 5848447553 · çatı #320 yorum 5848447672: iki PR da main ile çakışıyor (GV-18 #147 sonrası; rebase + yeni CI gerekir); anahtar açılmadan önce granüler formda 18+ beyanı ve Aydınlatma Metni bağlantısı eksik; hesap silmede 6 yeni rıza türü geri çekilmiyor. Düzeltme ajan kuyruğunda; düzeltilene kadar EVET gelse de merge yok · ⚠️ metinler yer tutucudur, yayın metni avukat onayına bağlı (03-PO-ELLE-ISLER avukat paketi).
+**Durum:** kod hazır · CI yeşil · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK · ⚠️ 7b SONUCU (2026-09-26): **SORUN VAR** — backend #142 yorum 5848447553 · çatı #320 yorum 5848447672: iki PR da main ile çakışıyor (GV-18 #147 sonrası; rebase + yeni CI gerekir); anahtar açılmadan önce granüler formda 18+ beyanı ve Aydınlatma Metni bağlantısı eksik; hesap silmede 6 yeni rıza türü geri çekilmiyor. Düzeltme ajan kuyruğunda; düzeltilene kadar EVET gelse de merge yok · ✅ **7b 2. TUR: SONUÇ: ONAY** (2026-09-26 — backend #142 `df8db92` yorum 5848666630 · çatı #320 `43490fc` yorum 5848666801; iki PR main ile temiz birleşiyor, CI yeşil). Kod tarafı EVET'e hazır · ⚠️ metinler yer tutucudur, yayın metni avukat onayına bağlı (03-PO-ELLE-ISLER avukat paketi).
 **EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
 **HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; kayıtta tek kutu kalır.
 **Cevap vermezsen:** AN-30 (⛔ çıkış blokeri) PR-ACIK kalır.
@@ -1635,14 +1509,149 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 ---
 
 ### KARAR-97 · 🔵 EVET/HAYIR — U-18: mentör mesaj talebini nazikçe reddedebilsin mi? (1 iş açar: U-18) [🔵 CANLI DB DEĞİŞİKLİĞİ]
-**Kullanıcı ne görür:** Mentör, mesaj kutusunda bir menti talebine "Reddet" diyebilir; menti nazik bir kapanış mesajı görür, o konuşmaya iki taraf da artık yazamaz. Kanıt: backend PR `menti-mentor#148` (`POST /api/conversations/:id/reject`), çatı PR `menti-mentor-v2#326`.
+**Kullanıcı ne görür:** Mentör, mesaj kutusunda bir menti talebine "Reddet" diyebilir; menti nazik bir kapanış mesajı görür, o konuşmaya iki taraf da artık yazamaz. ⚠️ Sınır (2026-09-26, 7b bulgusu): menti reddi ancak konuşmayı açınca (ya da o mentöre tekrar yazmayı deneyince nazik bir metinle) öğrenir — mesaj listesinde ret işareti ve anlık bildirim YOK (bildirim servisi henüz yalnız kayıt tutuyor, bkz. AN-09). Kanıt: backend PR `menti-mentor#148` (`POST /api/conversations/:id/reject`), çatı PR `menti-mentor-v2#326`.
 **Ne değişir:** Veritabanında konuşma tablosuna 1 yeni boş alan EKLENİR (`Conversation.rejectedAt`, "ne zaman reddedildi"). Mevcut konuşmalar değişmez, hiçbir veri silinmez. Dosya: `prisma/migrations/20260926120000_add_conversation_rejected_at/migration.sql` (`ADD COLUMN IF NOT EXISTS`, yalnız ekleme).
 **Geri alınır mı:** Evet — kod revert edilir; boş alan kalabilir ya da ayrı bir adımla kaldırılabilir.
 **Yedeği alınacak tablo:** `Conversation` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye yazılır). Not: merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
-**Durum:** kod hazır · CI yeşil (backend +7, çatı +6 test) · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK · ⚠️ 7b SONUCU (2026-09-26): **SORUN VAR** — backend #148 yorum 5848438003 · çatı #326 yorum 5848438125: iki PR da main ile çakışıyor (KR-19 #149 blok kontrolü korunarak rebase gerekir); menti panelden tekrar yazınca ham hata metni görüyor; reddetme hatası onay penceresinin arkasında kalıyor. Düzeltme ajan kuyruğunda; düzeltilene kadar EVET gelse de merge yok.
+**Durum:** kod hazır · CI yeşil (backend +7, çatı +6 test) · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK · ⚠️ 7b SONUCU (2026-09-26): **SORUN VAR** — backend #148 yorum 5848438003 · çatı #326 yorum 5848438125: iki PR da main ile çakışıyor (KR-19 #149 blok kontrolü korunarak rebase gerekir); menti panelden tekrar yazınca ham hata metni görüyor; reddetme hatası onay penceresinin arkasında kalıyor. Düzeltme ajan kuyruğunda; düzeltilene kadar EVET gelse de merge yok · ✅ **7b 2. TUR: SONUÇ: ONAY** (2026-09-26 — backend #148 `12f2fb4` yorum 5848708006 · çatı #326 `1137b64` yorum 5848708123; main ile temiz, KR-19 blok kontrolü korunuyor, CI yeşil). Kod tarafı EVET'e hazır.
 **EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
 **HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; mentör talebi reddedemez (bugünkü gibi).
 **Cevap vermezsen:** U-18 PR-ACIK kalır; AN-20 (uyum rozeti dili) sırası U-18'e bağlı (KARAR-80/M5).
 **CEVAP:**
 
 ---
+
+### KARAR-98 · 🔵 EVET/HAYIR — AN-26: yanıt vermeyen mentöre hatırlatma, uzun sessizlikte kurum yöneticisine bildirim canlıya çıksın mı? (1 iş açar: AN-26) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** Bir menti mentöre mesaj talebi gönderdikten sonra mentör hiç yanıt vermezse: **3. gün** mentöre nazik bir hatırlatma e-postası, **7. gün** ikinci hatırlatma, **10. gün** kurumun yöneticilerine "şu mentör 10 gündür yanıt vermedi" e-postası gider (senin KARAR-53 ④ cevabındaki süreler). Menti tarafında değişiklik yok (alternatif mentör önerilmez — KARAR-22 B). E-postalarda menti adı ya da mesaj içeriği yok. Canlıya çıktığı gün 14 günden eski konuşmalar için e-posta gönderilmez (toplu e-posta yağmuru olmasın diye). Kanıt: backend PR `menti-mentor#157` (`cronScheduler.ts` `runMentorResponseReminderCron`, her gün 12:00 UTC), çatı PR `menti-mentor-v2#337` (yalnız pointer).
+**Ne değişir:** Veritabanında konuşma tablosuna 3 boş alan EKLENİR ("1. hatırlatma ne zaman gitti", "2. hatırlatma ne zaman gitti", "yöneticiye ne zaman bildirildi") — aynı e-postanın iki kez gitmemesi için. Mevcut kayıtlar değişmez, hiçbir veri silinmez. Dosya: `prisma/migrations/20260926100000_add_conversation_reminder_guards/migration.sql` (`ADD COLUMN IF NOT EXISTS`, yalnız ekleme).
+**Geri alınır mı:** Evet — kod revert edilince e-postalar durur; boş alanlar kalabilir ya da ayrı bir adımla kaldırılabilir.
+**Yedeği alınacak tablo:** `Conversation` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye). Not: U-18 (KARAR-97) de aynı tabloya alan ekliyor — ikisine birden EVET gelirse tek yedek yeterli olabilir. Merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
+**Durum:** kod hazır · CI yeşil (backend 923 test; yeni 13 test, negatif: başka kurumun ve pasif üyeliğin yöneticisine gitmez) · bağımsız 7b incelemesi: sürüyor (sonucu bu satıra eklenecek; ONAY yoksa EVET gelse de merge yok). ⚠️ **7b 1. tur: SORUN VAR** (2026-09-26, yorum 5848943894): düzeltme sürüyor — main ile birleştirme, KARAR-53 ④ kapsamı (yalnız müsaitlik bloğu olmayan mentörler), pasif menti/üyelik kontrolü. ✅ **7b 2. TUR: SONUÇ: ONAY** (2026-09-26 — backend #157 `cb6b83d` yorum 5849046560 · çatı #337 `10346e0` yorum 5849046681; 941 test). Kod tarafı EVET'e hazır. Not: "koşul" alanları şemada henüz yok → kapsam şimdilik "aktif müsaitlik bloğu olmayan mentör"; yayın günü 10-14 günlük konuşmalar doğrudan yönetici bildirimine düşer.
+**Alt soru (paylaşımlı havuz) — ayrıca cevapla:** mentör ile menti FARKLI kurumlardaysa 10. gün bildirimi kimin yöneticisine gitsin? **A)** mentinin kurumunun yöneticisine (menti o kurumun üyesi; ama mentör üzerinde yetkisi yok) · **B)** mentörün kendi kurumunun yöneticisine (mentör üzerinde yetkili; ama mentiyi tanımıyor) · **C)** ikisine birden. Cevap gelene kadar kod bu durumda **bildirimi göndermez** (hatırlatmalar mentöre yine gider). Benim önerim: **B** — yanıt vermeyen mentörle konuşabilecek kişi onun kendi yöneticisi. Bu senin ürün kararın, önerime güvenme.
+**EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye; yanıtsız talepler bugünkü gibi sessiz kalır.
+**Cevap vermezsen:** AN-26 PR-ACIK kalır.
+**CEVAP:**
+
+---
+
+### KARAR-99 · 🔵 EVET/HAYIR — AN-02: iki soru metnindeki yazım hatası canlıda düzeltilsin mi? (1 iş açar: AN-02) [🔵 CANLI VERİYE YAZMA]
+**Kullanıcı ne görür:** Kullanıcılar iki soruyu doğru yazımla okur: "Başkalarını motive etmek ve ilham vermek benim doğal bir **güçlü yanım** gibi hissettiriyor." (bugün "güçlüğüm") ve SJT senaryosunda "**Mentin**, haftalardır çalıştığı bir projeyi…" (bugün "Menteen"). Kanıt: backend PR `menti-mentor#160` (`prisma/seed.ts:70` ve `:540`).
+**Ne değişir:** Canlı veritabanında **2 satırın metni** güncellenir: `Question` tablosunda 1 soru metni, `SjtQuestion` tablosunda 1 senaryo metni. Başka hiçbir kayıt değişmez; kullanıcı cevapları etkilenmez (cevaplar soru kimliğine bağlı, metne değil — uygulama öncesi kontrol edilecek). ⛔ `seed.ts` ÇALIŞTIRILMAZ (yıkıcı seed); düzeltme yalnız bu iki satıra hedefli `UPDATE` ile yapılır.
+**Geri alınır mı:** Evet — eski iki metin yedekten geri yazılabilir.
+**Yedeği alınacak tablo:** `Question` ve `SjtQuestion` (tarihli yedek; satır sayıları `02-ILERLEME.md`'ye).
+**Durum:** seed dosyası düzeltmesi PR'da (#160, CI bekliyor) · canlı UPDATE için DB erişimi gerekir (bu VPS'te yok).
+**EVET** → ajan tarihli yedeği alır → iki satırı günceller → canlıda görür → #160 merge. (DB erişimi yoksa: "EVET var, tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar.)
+**HAYIR** → canlı metinler olduğu gibi kalır; #160 (yalnız dosya) yine de merge edilebilir ya da kapatılır — cevabında belirt.
+**Cevap vermezsen:** AN-02 PR-ACIK kalır; iki soru hatalı yazımla görünmeye devam eder.
+**CEVAP:**
+
+---
+
+### KARAR-100 · `ProfileSource.SJT_ENRICHED` değeri ne olsun? (silme protokolü — gerekçe bulunamadı) (0 iş açar) [VERİ KARARI · SİLME PROTOKOLÜ]
+> ⭐ Kaynak: AN-54 taraması (2026-09-26, `docs/raporlar/kesif/gerekcesiz-kalem-taramasi-2026-09-26.md`) — 694 şema kalemi tarandı, **2** kalemde gerekçe bulunamadı: biri zaten KARAR-76 (`Tenant.verifiedBy`), diğeri bu. **KARAR-76 ile aynı tür soru** — istersen ikisine aynı harfi yaz.
+**Şu an ne var:** Kişilik profilinin "nereden geldiği" bilgisini tutan listede (`ProfileSource`) `SJT_ENRICHED` diye bir değer var. Kod bu değeri **hiç yazmıyor, hiç okumuyor**: senaryo testi (SJT) sonrası profil `HYBRID` olarak işaretleniyor (`backend/src/services/scoring.service.ts:104-105`). Değeri ekleyen commit (`de6be04`, toplu "sprint 8-11" commit'i) açıklama içermiyor, PR yok, belgelerde hiç geçmiyor.
+**Sorun ne:** Ne işe yaradığı bilinmeyen bir değer silme protokolünün ilk adımında (niyet) takılı; her taramada yeniden "öksüz mü" diye çıkacak.
+**Neden sana soruyorum:** Silme protokolü "gerekçe bulunamazsa SİLİNMEZ, PO'ya SORULUR" diyor; ayrıca bu değer ileride SJT'nin ayrı bir profil durumu olarak kullanılmak üzere planlanmış olabilir (KARAR-10 OCEAN/SJT motoru) — bunu yalnız sen bilirsin.
+**Seçenekler:**
+- **A) KALSIN** — SJT motoru (KARAR-10 aşamaları) açılınca ayrı durum olarak kullanılacak. · Kullanıcı ne görür: hiçbir şey · Kazanç: sıfır iş · **Ne kaybedersin:** gerekçesiz değer durmaya devam eder; bir sonraki taramada yine çıkar (kararı bu karta yazarak kapanır).
+- **B) KARANTİNA** — değer yerinde kalır, koda "kullanılmıyor — KARAR-100" notu + arşiv belgesi; bir tur sorunsuz geçerse senin ikinci onayınla silinir. · Kazanç: silme protokolünün güvenli ara adımı · **Ne kaybedersin:** iki aşamalı iş · Süre S · geri alınır ✅ · karantina 🔵.
+- **C) SİL** — arşivle + migration (enum'dan değer çıkarma). · Kazanç: şema temizlenir · **Ne kaybedersin:** PostgreSQL'de enum değeri çıkarmak zahmetli bir migration; SJT ayrı durum isterse yeniden eklenir · Süre M · geri alınır ⚠️ zor · migration VAR (🔵 + 🔴 ikinci onay).
+**Karşılaştırma:** SJT motoru yakında açılacaksa A doğru; açılmayacaksa B güvenli yol; C temizler ama pahalı ve geri dönüşü zor.
+**Benim önerim:** A — KARAR-10'un SJT aşamaları henüz açılmadı ve değer kimseye zarar vermiyor; kararın bu kartta yazılı olması tekrar tekrar sorulmasını bitirir. *(Veri kararın, önerime güvenme.)*
+**Cevap vermezsen:** hiçbir iş kilitlenmez; değer her şema taramasında yeniden "gerekçesiz" çıkar.
+**CEVAP:**
+
+---
+
+### KARAR-101 · Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi? (1 iş açar: Y1-B8) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Onay bekleyen bir kullanıcı **şifreyle** girmeye çalışınca oturum açamıyor ("Onay Bekleniyor" ekranına düşüyor — `authController.ts` ~:380). Ama **Google/LinkedIn ile** girince oturum açabiliyor ve menti panelindeki **"Bekleme Odasındasınız"** bölümünü görüyor: DISC testi, programdaki mentör sayısı, haftalık görüşme sıklığı, umut mesajı (F-15, I-05 ile canlıya çıktı — `frontend/src/app/(dashboard)/menti/page.tsx`). Aynı oturumla onay beklerken sohbet/randevu/anlaşma uçlarına da istek atabiliyor (onay kapısı yalnız eşleşme ve kullanıcı uçlarında). Kanıt: `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md` B8.
+**Sorun ne:** İki giriş yolu farklı davranıyor ve biri güvenlik açığı: onaylanmamış biri, yöneticinin onayından önce kurumun iç özelliklerine erişebiliyor. Ajanın hazırladığı düzeltme (PR backend #164 + çatı #343) OAuth yolunu da şifreli giriş gibi kapatıyor — ama o zaman **Bekleme Odası kimseye görünmüyor** (bağımsız inceleme bunu yakaladı, SONUÇ: SORUN VAR).
+**Neden sana soruyorum:** Bir özelliğin (Bekleme Odası) açık kalıp kalmayacağı ve onay bekleyenin neyi yapabileceği ürün kararı.
+**Seçenekler:**
+- **A) Kapat** — onay bekleyen kimse oturum açamaz (PR olduğu gibi). · Kullanıcı ne görür: yalnız "Onay Bekleniyor" sayfası; Bekleme Odası (DISC testi, mentör sayısı, umut mesajı) görünmez · Ne kazanırsın: açık hemen kapanır, en basit · **Ne kaybedersin:** bekleme süresi boş geçer, F-15/I-05 emeği görünmez olur · Süre S (hazır) · geri alınır ✅ · migration yok.
+- **B) Bekleme odası açık, iç özellikler kapalı** — onay bekleyen oturum açar ama yalnız bekleme odası uçlarını kullanır (profil, DISC testi, mentör sayısı, haftalık sıklık); sohbet/randevu/anlaşma/talep uçları onay kapısıyla kapanır. Hem şifreli hem OAuth girişi böyle olur. · Kullanıcı ne görür: onay beklerken DISC testini çözer, bekleme odasını görür; mesaj/randevu yapamaz · Ne kazanırsın: açık kapanır + bekleme süresi değerli kalır + iki giriş yolu eşitlenir · **Ne kaybedersin:** daha çok iş (her uç için kapı listesi, test) ve "hangi uç bekleme odasına ait" listesinin bakımı · Süre M · geri alınır ✅ · migration yok.
+- **C) Bugünkü hâl sürsün** (yalnız OAuth ile bekleme odası). · Ne kazanırsın: iş yok · **Ne kaybedersin:** güvenlik açığı açık kalır; şifreyle giren hiçbir zaman bekleme odasını görmez.
+**Karşılaştırma:** Hız öncelikse A (açık bugün kapanır, bekleme odası sonra B ile geri gelebilir). Onay süreleri uzunsa ve bekleme odası değerliyse B doğrudur. C güvenlik açığını bıraktığı için önerilmez.
+**Benim önerim:** B — güvenlik açığını kapatırken zaten canlıda olan ve bekleme süresini anlamlı kılan özelliği korur; iki giriş yolunu da eşitler. (A'yı ara adım olarak hemen, B'yi ardından da seçebilirsin — cevabında belirt.)
+**Cevap vermezsen:** Y1-B8 PR'ları (#164/#343) açık kalır; güvenlik açığı sürer.
+**CEVAP:**
+
+---
+
+### KARAR-102 · Kayıttan sonra hemen giriş mi, önce e-posta doğrulaması mı? (1 iş açar: GV-12 kalanı) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Kurum kaydı (ve normal kayıt) başarılı olunca kişi **hemen oturum açmış** olarak kurulum ekranına geçiyor. E-posta zaten kayıtlıysa GV-12 düzeltmesiyle "zaten kayıtlı" denmiyor, aynı başarı mesajı dönüyor — ama bu sefer **oturum açılmıyor ve ekran farklı** (kurulum yerine "e-postanı kontrol et"). Yani dikkatli biri, sonraki ekrana bakarak bir e-postanın sistemde kayıtlı olup olmadığını anlayabiliyor. Kanıt: `backend/src/controllers/selfServeController.ts` GV-12 notu ("tam ayırt-edilemezlik oturumsuz kayıt gerektirir — ürün kararı"), `frontend/.../onboarding/stk/_steps/Step4Account.tsx:110-140`; denetim: `docs/raporlar/kesif/bitti-yeniden-denetim-2026-09-26.md` GV-12.
+**Sorun ne:** Bir kişinin platformda hesabı olup olmadığı (hangi dernekle çalıştığı dahil) dışarıdan öğrenilebiliyor. Küçük bir sızıntı ama kişisel veri.
+**Neden sana soruyorum:** Kapatmanın tek tam yolu kayıt akışını değiştirmek: herkes kayıttan sonra aynı "e-postanı kontrol et" ekranını görür, giriş e-postadaki bağlantıyla olur. Bu, yeni kullanıcı deneyimini (ilk dakikayı) değiştiren bir ürün kararı.
+**Seçenekler:**
+- **A) Önce e-posta doğrulaması (herkes için)** · Kullanıcı ne görür: kayıttan sonra "e-postanı kontrol et"; bağlantıya tıklayınca kurulum başlar · Ne kazanırsın: sızıntı tamamen kapanır + sahte e-postayla kayıt biter · **Ne kaybedersin:** kayıt bir adım uzar; e-posta gecikirse (SMTP) kullanıcı bekler; bazıları bırakır · Süre M · geri alınır ✅ · migration muhtemelen VAR (doğrulama bayrağı/token) → 🔵.
+- **B) Bugünkü hâl** (hemen giriş; kayıtlı e-postada farklı ekran) · Ne kazanırsın: en akıcı kayıt · **Ne kaybedersin:** küçük sızıntı kalır.
+- **C) Şimdilik B, ilk gerçek kurumlar girmeden önce A** · Ne kazanırsın: çıkış öncesi akış bozulmaz, sızıntı kurumlar gelmeden kapanır · **Ne kaybedersin:** iş ertelenir, unutulma riski (kuyrukta satır olarak durur).
+**Karşılaştırma:** Gerçek kullanıcı ~0 iken B'nin riski düşük; ilk dernekler gelmeden A daha doğru. SMTP henüz tam güvenilir değilse A kaydı kilitleyebilir.
+**Benim önerim:** C — sızıntı bugün kimseyi etkilemiyor; A'yı SMTP ayarları kesinleşince (03-PO-ELLE-ISLER B4) ve ilk kurumdan önce yapmak en güvenlisi. *(Ürün kararın, önerime güvenme.)*
+**Cevap vermezsen:** GV-12 kalanı açık kalır (bilinen sınır olarak).
+**CEVAP:**
+
+---
+
+### KARAR-103 · Eski planlardaki 13 yapılmamış özellik — hangileri yapılsın? (13 işi açar)  [ÜRÜN KARARI]
+> ⭐ Kaynak: G-kart doğrulaması (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`), kodda yeniden doğrulandı 2026-09-27 (ajan-ekledi, K-C). Kuyruk satırı: **AJ-11**.
+
+**Şu an ne var:** Ağustos planlarında (G-kartları) yazılmış ama hiç yapılmamış 13 özellik. Bugün kullanıcı bunların hiçbirini görmüyor:
+1. Platform yöneticisi için büyüme grafiği yok — yalnız anlık sayılar (`backend/src/controllers/platformController.ts:75`).
+2. Platform genel ayarlar ekranı yok (`frontend/src/app/platform/` altında yalnız dashboard/tenants).
+3. Kurum paketi (FREE/PRO/ENTERPRISE) kaydediliyor ama hiçbir sınır uygulamıyor (`backend/prisma/schema.prisma:194`; kısıt kodu 0).
+4. Kurum yöneticisi için "demo/önizleme modu" yok — yalnız logo/renk önizlemesi (`frontend/src/app/(admin)/admin/branding/page.tsx:173-195`).
+5. Üye persona şablonları (mezun, gönüllü…) ekranı yok.
+6. Kurumun "etki duvarı" (mentörlük istatistiklerini gösteren vitrin) yok.
+7. Bir kurumun başka kurumu platforma davet etmesi yok.
+8. Mentör rozetleri yalnız "Sertifikalı" (`frontend/src/app/(dashboard)/mentor/page.tsx:190-202`).
+9. Menti mentör listesini sektöre göre süzemiyor (`backend/src/controllers/mentorFilterController.ts`: "sector" 0).
+10. Kurum KPI panelinde zaman içindeki değişim (trend) yok — yalnız anlık oran (`backend/src/services/retentionMetrics.service.ts:130-138`).
+11. Telefon bildirimi (push) gerçek değil — servis gönderilmiş gibi davranıyor (`backend/src/services/notificationService.ts:52-58`).
+12. Mizaç testinde "ters kodlu" soru (cevap tutarlılığını ölçen soru) yok (`backend/prisma/schema.prisma:738-752`).
+13. Mentöre giden bildirimlerin sıklığı ayarlanmıyor — toplu özet ya da seyreltme yok (`backend/src/services/notificationService.ts`; throttle/digest araması 0). Ne sıklıkta bildirim gideceği ürün kararı.
+
+**Sorun ne:** Bunlar planda "yapılacak" diye duruyor ama kimse "gerçekten istiyor muyuz?" diye sormadı. Kuyrukta satırları olmadığı için ne yapılıyor ne de bilinçli olarak erteleniyor; plan belgeleri ürünün olduğundan büyük görünmesine yol açıyor.
+
+**Neden sana soruyorum:** Her biri "bu özellik olsun mu" sorusu — kullanıcıların ne görüp ne yapabileceğini değiştirir. 3 (paket sınırları) ve 7 (kurumdan kuruma davet) gelir/büyüme modeline bağlı; 11 (gerçek bildirim) yeni bir dış servis hesabı ister (senin elin); 12 psikometri tasarımını ve şemayı değiştirir.
+
+**Seçenekler:**
+- **A) Hepsi v2'ye ertelensin** — Kullanıcı: bugünkünü görür, değişiklik yok · Kazanç: ekip çıkış işlerine odaklanır, kuyruk sade kalır · Kayıp: bu özelliklerin hiçbiri ilk kurumlarla gelmez; özellikle 9 (sektör filtresi) ve 8 (rozetler) gibi küçük kazançlar da bekler · Süre: — · Geri alınır: evet · Migration: yok.
+- **B) Yalnız küçük ve şemasız olanlar şimdi (8 rozet · 9 sektör filtresi · 10 KPI trendi · 1 büyüme grafiği), gerisi v2** — Kullanıcı: mentör listesinde sektör süzgeci, mentör panelinde yeni rozetler, yöneticide trend grafikleri · Kazanç: az emekle görünür iyileşme · Kayıp: paket sınırı, davet kanalı, demo modu, gerçek bildirim gelmez; rozet kuralları (hangi başarıya rozet?) için ajan varsayılanı kullanılır · Süre: M · Geri alınır: evet · Migration: yok.
+- **C) Numara yazarak seç** (örnek: "C: 1, 8, 9, 11") — Kullanıcı: yalnız seçtiklerin gelir · Kazanç: tam kontrol · Kayıp: her seçim ayrı iş; 3/7/11/12 seçilirse ek karar/hesap/migration gerekir ve süre uzar · Süre: seçime göre S-L · Geri alınır: çoğu evet · Migration: 3 ve 12 seçilirse muhtemel.
+
+**Karşılaştırma:** Önce ilk kurumla canlıya çıkmak istiyorsan A odağı korur. Ürünün ilk izlenimde daha dolu görünmesini istiyorsan B küçük ve güvenli bir paket. Belirli bir kurum talebin varsa C.
+**Benim önerim:** B — dördü de şemasız ve geri alınabilir; gerisi gelir modeli ve dış hesap kararı beklediği için şimdi yapılırsa yarım kalır. *(Bu senin ürün kararın; önerime güvenme.)*
+**Cevap vermezsen:** AJ-11 kilitli kalır; 13 özelliğin hiçbiri yapılmaz, planlarda "yapılacak" diye durmaya devam eder.
+**CEVAP:**
+
+### KARAR-104 · Uyum eşiğini geçen tek mentör randevuya kapalıysa menti ne görsün? (0 iş kilitler — PS-A4 sonrası ince ayar)  [ÜRÜN KARARI]
+> ⭐ Kaynak: PS-A4 bağımsız incelemesi (backend #180, https://github.com/zahidsamiata/menti-mentor/pull/180#issuecomment-5853702508), 2026-09-27.
+
+**Şu an ne var:** PS-A4 ile menti, kurumun uyum barajının (varsayılan 50; yönetici 20-90 arası ayarlar) altındaki mentörleri listede görmüyor. Barajı geçen hiç mentör yoksa liste boş kalmasın diye hepsi gösteriliyor (`backend/src/services/matching.ts` `rankMentorsForMenti`). Barajı geçen mentör randevuya kapalıysa (görünürlüğü kapalı ya da müsaitliği yok) kartı soluk görünüyor (KARAR-80 M7).
+**Sorun ne:** Barajı geçen mentörlerin hepsi soluksa (randevu alınamıyorsa), menti randevu alabileceği hiçbir mentör görmüyor. Barajın biraz altında kalan ama müsait mentörler ise gizli kalıyor. Menti "kimse yok" sanıp bırakabilir.
+**Neden sana soruyorum:** Mentiye uyumu düşük ama müsait bir mentörü göstermek mi, yoksa yalnız uyumluyu gösterip beklemesini istemek mi daha doğru, bu bir ürün tercihi (KARAR-6 ek(1) "uygun olmayanı görmesin" ile KARAR-80 M7 "kart hep kalır" arasındaki denge).
+**Seçenekler:**
+- **A) Barajı geçen RANDEVUYA AÇIK mentör yoksa baraj altındakiler de gösterilsin** (soluk olanlar yine soluk) — Kullanıcı: her zaman randevu alabileceği en az bir mentör görür (varsa) · Kazanç: menti takılmaz · Kayıp: bazen uyumu düşük mentör görünür, "uygun olmayanı görmesin" kuralı esner · Süre S · Geri alınır · Migration yok.
+- **B) Bugünkü gibi kalsın** — Kullanıcı: yalnız uyumlu mentörleri görür, hepsi soluksa bekler · Kazanç: KARAR-6 ek(1) tam uygulanır · Kayıp: küçük kurumda menti randevu alamadan kalabilir · Süre — · Geri alınır · Migration yok.
+- **C) Her zaman en az N (örn. 3) randevuya açık mentör gösterilsin**, gerekirse baraj altından tamamlanarak — Kullanıcı: seçim yapabileceği birkaç mentör görür · Kazanç: seçenek duygusu · Kayıp: uyumu düşük mentör daha sık görünür; N sayısı ayrıca belirlenmeli · Süre S-M · Geri alınır · Migration yok.
+**Karşılaştırma:** Menti bırakmasın istiyorsan A ya da C; uyum kalitesi öncelikse B. A en az değişiklikle "takılma"yı çözer.
+**Benim önerim:** A — yalnız "hiç randevu alınamıyor" durumunda devreye giriyor, geri kalan her durumda baraj aynen işliyor.
+**Cevap vermezsen:** Bugünkü davranış (B) sürer; başka iş kilitlenmez.
+**CEVAP:**
+
+### KARAR-105 · Kurumlar arası anonim karşılaştırma: izni kim açar, hangi sayılar paylaşılır? (1 işi açar: AN-31)  [ÜRÜN KARARI · KVKK · MIGRATION]
+> ⭐ Kaynak: AN-31 uygulama denemesi (2026-09-27, salt-okuma). KARAR-34 SORU 2'ye verdiğin **B** cevabının ("izin verilirse yalnız ANONİM TOPLU veri paylaşılır") ayrıntısı.
+
+**Şu an ne var:** Kurumlar birbirinin verisini hiç görmüyor. Anonimleştirme altyapısı hazır: 3 kişiden küçük gruplar gizleniyor (`backend/src/services/mask.ts:70`). Ancak bir kurumun "anonim karşılaştırmaya katılıyorum" demesini kaydedecek bir yer yok (`backend/prisma/schema.prisma:181-262`). Mevcut `isSharedPoolActive` (`:185`) başka bir şey: kişilerin kurumlar arası eşleştirilmesi.
+**Sorun ne:** "İzin verilirse" dedin ama izni kimin vereceği (kurum yöneticisi mi, tek tek kullanıcılar mı) ve karşılaştırmada hangi sayıların görüneceği belli değil. Ayrıca izni kaydetmek için veritabanına yeni bir alan eklemek gerekiyor (migration — canlı veritabanında yapı değişikliği).
+**Neden sana soruyorum:** Kimin verisinin, kimin izniyle, hangi biçimde başka kurumlara gösterileceği KVKK sonucu olan bir ürün kararı.
+**Seçenekler:**
+- **A) Kurum yöneticisi açar/kapatır; paylaşılan yalnız kurum düzeyinde toplamlar** (ör. aktif menti sayısı, eşleşme oranı, ortalama görüşme sayısı — hepsi 3'ten küçük grupta gizli) — Kullanıcı: yönetici panelde "anonim karşılaştırmaya katıl" anahtarı ve katılan kurumların ortalamasıyla kendi kurumunu görür · Kazanç: basit, kurum kararı tek noktada · Kayıp: tek tek kullanıcıların sözü yok (verileri toplama girer); aydınlatma metninde yazılması gerekir · Süre M · Geri alınır (anahtar kapatılır) · Migration VAR (kurumda izin alanı).
+- **B) Yönetici açar AMA yalnız bireysel rıza vermiş kullanıcıların verisi sayılır** (AN-30'daki kurumlar arası paylaşım rızasıyla birlikte) — Kullanıcı: aynı ekran, sayılar yalnız rıza verenlerden · Kazanç: KVKK açısından en temkinli · Kayıp: rıza oranı düşükse sayılar küçük ve çoğu grup gizlenir; AN-30'un (KARAR-96) EVET'ine bağlı · Süre M-L · Geri alınır · Migration VAR.
+- **C) Şimdilik yapılmasın** (v2) — Kullanıcı: bugünkü gibi · Kazanç: migration yok, hukuki metin yükü yok · Kayıp: kurumlar kendini diğerleriyle kıyaslayamaz · Süre — · Geri alınır · Migration yok.
+**Karşılaştırma:** Hızlı ve anlaşılır bir karşılaştırma istiyorsan A. Her kişinin açık rızasını esas almak istiyorsan B, ama sayılar küçük kalabilir. İlk kurumlarla canlıya çıkış öncelikliyse C.
+**Benim önerim:** C şimdilik, sonra A. Toplamlar zaten 3'ten küçük grupları gizliyor ama karşılaştırma yapılacak kadar çok kurum henüz yok. *(Bu senin ürün kararın; önerime güvenme.)*
+**Cevap vermezsen:** AN-31 kilitli kalır; başka iş etkilenmez.
+**CEVAP:**

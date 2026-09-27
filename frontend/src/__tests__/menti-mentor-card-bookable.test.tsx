@@ -2,7 +2,7 @@
  * AN-28 — menti panelindeki mentör kartı: gerçekten randevu alınabilir mi?
  *
  * KARAR-80/M7: kart isFaded=true olsa da HİÇ kaldırılmaz, yalnız soluk (opacity) + "Sınırlı"
- * rozetiyle işaretlenir. KARAR-32 revizyonu: isBookable=false olan mentörde "Randevu Al"
+ * rozetiyle işaretlenir. KARAR-32 revizyonu: isBookable=false olan mentörde "Görüşme Talep Et"
  * devre dışı kalır, "Mesaj" HER ZAMAN aktif kalır.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -71,21 +71,21 @@ describe('AN-28 · Menti mentör kartı — isFaded / isBookable', () => {
     mentorMatchesResponse = { ok: true, data: { items: [bookableMentor, fadedMentor] } };
   });
 
-  it('isBookable:true mentörde "Randevu Al" aktif ve tıklanabilir', async () => {
+  it('isBookable:true mentörde "Görüşme Talep Et" aktif ve tıklanabilir', async () => {
     render(<MentiDashboardPage />);
     await screen.findByText('Uygun Mentör');
 
     const card = screen.getByText('Uygun Mentör').closest('div.rounded-xl') as HTMLElement;
-    const bookButton = within(card).getByRole('button', { name: 'Randevu Al' });
+    const bookButton = within(card).getByRole('button', { name: 'Görüşme Talep Et' });
     expect(bookButton).not.toBeDisabled();
   });
 
-  it('isBookable:false mentörde "Randevu Al" devre dışı, "Mesaj" aktif kalır', async () => {
+  it('isBookable:false mentörde "Görüşme Talep Et" devre dışı, "Mesaj" aktif kalır', async () => {
     render(<MentiDashboardPage />);
     await screen.findByText('Soluk Mentör');
 
     const card = screen.getByText('Soluk Mentör').closest('div.rounded-xl') as HTMLElement;
-    const bookButton = within(card).getByRole('button', { name: 'Randevu Al' });
+    const bookButton = within(card).getByRole('button', { name: 'Görüşme Talep Et' });
     expect(bookButton).toBeDisabled();
 
     const messageButton = within(card).getByRole('button', { name: 'Mesaj' });
@@ -106,5 +106,20 @@ describe('AN-28 · Menti mentör kartı — isFaded / isBookable', () => {
     await screen.findByText('Uygun Mentör');
     const card = screen.getByText('Uygun Mentör').closest('div.rounded-xl') as HTMLElement;
     expect(within(card).queryByText('Sınırlı')).not.toBeInTheDocument();
+  });
+});
+
+describe('PS-10 · Menti boş mentör listesi — profili suçlamaz, teste göndermez', () => {
+  beforeEach(() => {
+    apiMock.mockClear();
+    mentorMatchesResponse = { ok: true, data: { items: [] } };
+  });
+
+  it('boş listede doğru sebep yazar ve /disc-test bağlantısı göstermez', async () => {
+    render(<MentiDashboardPage />);
+    expect(await screen.findByText('Programınızda şu an görüşülebilecek mentör yok')).toBeInTheDocument();
+    expect(screen.getByText(/Bu, profilinizle ilgili değil/)).toBeInTheDocument();
+    expect(screen.queryByText(/DISC Profilini Güncelle/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/profilinizle eşleşen mentor yok/)).not.toBeInTheDocument();
   });
 });

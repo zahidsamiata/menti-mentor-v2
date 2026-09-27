@@ -26,6 +26,10 @@
  * - connect: kendi origin + backend API (`NEXT_PUBLIC_API_URL`).
  * - form-action: tüm formlar JS `onSubmit` ile gönderilir; OAuth `window.location.assign` ile
  *   backend'e YÖNLENDİRME'dir (form gönderimi değil) → 'self' yeterli.
+ * - F-05 (G1-26): Cloudflare Turnstile CAPTCHA widget'ı `challenges.cloudflare.com`'dan bir
+ *   <script> yükler (script-src) ve kendi doğrulama arayüzünü bir <iframe> içinde render eder
+ *   (frame-src). `NEXT_PUBLIC_TURNSTILE_SITE_KEY` tanımsızken widget hiç mount edilmez → bu
+ *   kaynaklar rapor modunda dahi hiçbir isteğe yol açmaz; anahtar girilince aktifleşir.
  */
 
 /** Şu an gönderilen başlık adı. Enforce'a geçişte `Content-Security-Policy` yapılır. */
@@ -77,12 +81,12 @@ export function buildContentSecurityPolicy({ apiUrl, imageDomains = DEFAULT_IMAG
   /** @type {Record<string, string[]>} */
   const directives = {
     'default-src': ["'self'"],
-    'script-src': ["'self'", "'unsafe-inline'", ...(isDev ? ["'unsafe-eval'"] : [])],
+    'script-src': ["'self'", "'unsafe-inline'", 'https://challenges.cloudflare.com', ...(isDev ? ["'unsafe-eval'"] : [])],
     'style-src': ["'self'", "'unsafe-inline'"],
     'img-src': ["'self'", 'data:', 'blob:', ...apiSources, ...imageHosts],
     'font-src': ["'self'"],
     'connect-src': ["'self'", ...apiSources],
-    'frame-src': ["'none'"],
+    'frame-src': ['https://challenges.cloudflare.com'],
     'object-src': ["'none'"],
     'base-uri': ["'self'"],
     'form-action': ["'self'"],

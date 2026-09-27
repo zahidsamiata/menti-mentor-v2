@@ -164,7 +164,7 @@ export default function AvailabilityPage() {
       <div>
         <h1 className="text-2xl font-bold">Müsaitlik Takvimim</h1>
         <p className="text-sm text-muted-foreground">
-          Mentileriniz bu aralıklarda randevu talep edebilir.
+          Mentileriniz bu aralıklarda görüşme talep edebilir.
         </p>
       </div>
 
@@ -178,7 +178,7 @@ export default function AvailabilityPage() {
         <CardContent className="space-y-3">
           <p className="text-sm text-muted-foreground">
             Kapatırsanız yeni mentiler sizi listede soluk görür ve yalnızca mesaj gönderebilir;
-            randevu talebi alamazsınız. Devam eden eşleşmeleriniz etkilenmez.
+            görüşme talebi alamazsınız. Devam eden eşleşmeleriniz etkilenmez.
           </p>
           {visibilityError && <AlertMessage type="error" message={visibilityError} />}
           {visibilitySaved && <AlertMessage type="success" message="Görünürlük tercihiniz kaydedildi." />}
@@ -275,7 +275,7 @@ export default function AvailabilityPage() {
             </div>
           ) : blocks.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-6">
-              Henüz müsaitlik eklenmedi. Mentileriniz randevu talep edemez.
+              Henüz müsaitlik eklenmedi. Mentileriniz görüşme talep edemez.
             </p>
           ) : (
             <div className="space-y-2">

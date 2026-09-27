@@ -9,6 +9,7 @@ import { useQuery } from '@/hooks/useQuery';
 import { Button } from '@/components/ui/button';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { DataPrivacySection } from '@/components/organisms/DataPrivacySection';
+import { ChangePasswordSection } from '@/components/organisms/ChangePasswordSection';
 import { DiscRecallCardView } from '@/components/organisms/DiscRecallCard';
 import { cn } from '@/lib/utils';
 import type { UserProfileData, AvatarUploadResponse } from '@/lib/api/profile';
@@ -32,8 +33,8 @@ const SKILL_CHIPS = [
 
 const DISC_META = {
   D: { archetype: 'Öncü',      icon: '🦅', color: 'text-red-600 dark:text-red-400'    },
-  I: { archetype: 'Ateşleyici', icon: '🔥', color: 'text-yellow-600 dark:text-yellow-400' },
-  S: { archetype: 'Yapı Taşı', icon: '🌿', color: 'text-green-600 dark:text-green-400'  },
+  I: { archetype: 'Ateşleyici', icon: '🔥', color: 'text-yellow-700 dark:text-yellow-400' },
+  S: { archetype: 'Yapı Taşı', icon: '🌿', color: 'text-green-700 dark:text-green-400'  },
   C: { archetype: 'Kâşif',     icon: '🧭', color: 'text-blue-600 dark:text-blue-400'   },
 } as const;
 
@@ -459,6 +460,9 @@ export default function ProfilePage() {
       >
         {saving ? UI_TEXT.status.saving : UI_TEXT.actions.save}
       </Button>
+
+      {/* ── Şifreyi değiştir (GV-19) ──────────────────────────────────── */}
+      <ChangePasswordSection />
 
       {/* ── KVKK: Verilerim ve Gizlilik (G1-05) ───────────────────────── */}
       <DataPrivacySection />

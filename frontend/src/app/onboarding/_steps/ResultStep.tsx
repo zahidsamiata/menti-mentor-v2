@@ -6,6 +6,7 @@ import { ConfettiBlast } from '@/components/atoms/ConfettiBlast';
 import { ShareButtons } from '@/components/molecules/ShareButtons';
 import { cn } from '@/lib/utils';
 import type { DiscResultCard } from '@/types/onboarding';
+import { discDimensionLabel } from '@/types/discTest';
 
 // ─── ResultStep ───────────────────────────────────────────────────────────────
 
@@ -66,7 +67,7 @@ export function ResultStep({ resultCard, onContinue }: ResultStepProps) {
           {/* İstatistik çubuğu */}
           <div className="grid grid-cols-3 gap-2 rounded-xl bg-background/60 p-3 text-xs">
             {[
-              { icon: Zap,       label: 'Dominant',   value: resultCard.dominant   },
+              { icon: Zap,       label: 'Baskın boyut', value: discDimensionLabel(resultCard.dominant) },
               { icon: TrendingUp, label: 'Uyum',      value: `${Math.round((resultCard.discVector[resultCard.dominant] ?? 0) * 100)}%` },
               { icon: Users,     label: 'En İyi Eş',  value: resultCard.compatibleWith.join(' + ') },
             ].map(({ icon: Icon, label, value }) => (

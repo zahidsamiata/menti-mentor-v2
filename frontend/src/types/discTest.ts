@@ -139,3 +139,9 @@ export const DISC_DIMENSION_LABELS: Record<DiscDimension, string> = {
   C: 'Titizlik',
   GENERAL: 'Genel',
 };
+
+/** Tek kaynak: DISC harfini ekranda "D — Kararlılık" biçiminde gösterir (bilinmeyen değer olduğu gibi döner). */
+export function discDimensionLabel(dimension: string): string {
+  const label = DISC_DIMENSION_LABELS[dimension as DiscDimension];
+  return label ? `${dimension} — ${label}` : dimension;
+}

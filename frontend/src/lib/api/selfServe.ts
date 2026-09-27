@@ -79,6 +79,8 @@ export function selfServeRegister(data: {
   kvkkConsent: boolean;
   institutionRole?: string;
   verificationNote?: string;
+  // F-05 (G1-26): Cloudflare Turnstile CAPTCHA token'ı — site key yoksa undefined gider.
+  captchaToken?: string;
 }): Promise<ApiResult<SelfServeRegisterResponse>> {
   return apiClient<SelfServeRegisterResponse>('/api/tenants/self-serve/register', {
     method: 'POST',

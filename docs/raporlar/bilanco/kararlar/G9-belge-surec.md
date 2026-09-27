@@ -1,6 +1,7 @@
 > 🧊 DONMUŞ — rutin turda okunmaz (yalnız bir kalemin geçmişi aranırken, grep ile).
 > TÜR: 🧊 · SON DOĞRULAMA: 2026-08-27 (📸 fotoğraf tarihi) · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş)
 > ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-08-27 durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+> ⚠️ GÜNCELLEME 2026-09-26 (AN-53): bu kartın açık kalemleri koda karşı doğrulandı → `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md` (✅ canlıda / ⬜ hâlâ açık / ❓ doğrulanamadı, kanıtlı). Kart gövdesi değiştirilmedi.
 
 # BİLANÇO KARAR DOSYASI — G9: Belge düzeni / çalışma tarzı / süreç
 
@@ -273,7 +274,7 @@ Numara: NUMARASIZ
 
 ---
 **[G9-14] Kişi-adı yasağı: mevcut belgelerdeki isimler AYRI temizlik işinde**
-> ✅ YAPILDI (2026-08-28, Faz 1a) — KANITA DAYALI 0 nötrleştirme: tek gerçek kişi adı ("Zahid Sami Ata") YALNIZ `kvkk-metinleri/`'nde (6×, yasal gereklilik → DOKUNULMADI, G9-14 mutlak istisna). GitHub handle `zahidsamiata` (3 belge) = URL/git teknik metadata → dokunulmadı. Belge gövdesinde başka kişi adı bulunmadı. Kutu değişmedi.
+> ✅ YAPILDI (2026-08-28, Faz 1a) — KANITA DAYALI 0 nötrleştirme: tek gerçek kişi adı ("veri sorumlusu adı" — ad 2026-09-26 YN-13 ile kaldırıldı) YALNIZ `kvkk-metinleri/`'nde (6×, yasal gereklilik → DOKUNULMADI, G9-14 mutlak istisna). GitHub handle `zahidsamiata` (3 belge) = URL/git teknik metadata → dokunulmadı. Belge gövdesinde başka kişi adı bulunmadı. Kutu değişmedi.
 
 Ne: CLAUDE.md kalıcı kuralı (satır ~kişi-adı yasağı) yeni içeriğe isim eklemeyi yasaklar; mevcut belgelerdeki isimler ayrı bir temizlik turunda giderilecek — o tur henüz yapılmadı.
 Neden başlanmıştı: NİYET var — kişi-adı yasağı (kalıcı kural); geriye-dönük temizlik ertelendi.

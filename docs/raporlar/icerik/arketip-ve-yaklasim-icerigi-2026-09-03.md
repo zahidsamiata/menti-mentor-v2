@@ -28,7 +28,7 @@ Kardeş belgeler (ayrı kayıt turunda işlendi):
 ## 1. ÇALIŞMA TARZI — sonraki oturumun bilmesi gerekenler
 
 **Rol dağılımı:**
-- PO (Zahid) kararları verir, kod yazmaz
+- PO (ürün sahibi) kararları verir, kod yazmaz *(kişi adı kaldırıldı 2026-09-26, YN-13)*
 - Strateji katmanı (bu sohbet) içerik üretir, prompt yazar, dürüst pushback yapar
 - Claude Code yalnız uygular ve kaydeder — tasarlamaz
 

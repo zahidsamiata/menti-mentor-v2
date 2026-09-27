@@ -8,26 +8,35 @@
  * mesajı döndürür — bu yüzden başarı durumunda her zaman aynı bilgi gösterilir.
  */
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/molecules/TurnstileWidget';
 import { useFormState } from '@/hooks/useFormState';
 import { forgotPasswordSchema, type ForgotPasswordFormValues } from '@/lib/validation';
 import { authApi } from '@/lib/api/auth';
+import { UI_TEXT } from '@/lib/uiText';
 
 const INITIAL: ForgotPasswordFormValues = { email: '' };
 
 export function ForgotPasswordForm() {
   const form = useFormState(forgotPasswordSchema, INITIAL);
   const [sent, setSent] = useState(false);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
+  const captchaRef = useRef<TurnstileWidgetHandle>(null);
 
   const onSubmit = async (values: ForgotPasswordFormValues) => {
-    const result = await authApi.forgotPassword(values.email);
+    const result = await authApi.forgotPassword(values.email, captchaToken);
     if (result.ok) {
       setSent(true);
     } else {
+      // Token tek kullanımlıktır (bkz. TurnstileWidget dosya başı) — başarısız her
+      // yanıttan sonra sıfırlanmazsa ikinci deneme her zaman CAPTCHA_GECERSIZ alır.
+      captchaRef.current?.reset();
+      setCaptchaToken(undefined);
       form.setServerError(result.error.message ?? 'Bir hata oluştu. Lütfen tekrar deneyin.');
     }
   };
@@ -62,8 +71,10 @@ export function ForgotPasswordForm() {
         disabled={form.isSubmitting}
       />
 
+      <TurnstileWidget ref={captchaRef} onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
+
       <Button type="submit" className="w-full" disabled={form.isSubmitting}>
-        {form.isSubmitting ? 'Gönderiliyor…' : 'Sıfırlama Bağlantısı Gönder'}
+        {form.isSubmitting ? UI_TEXT.status.sending : 'Sıfırlama Bağlantısı Gönder'}
       </Button>
 
       <p className="text-center text-sm text-muted-foreground">

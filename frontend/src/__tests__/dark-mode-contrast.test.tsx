@@ -56,12 +56,25 @@ describe('K-10 · DiscTestStep şıkları koyu modda okunur', () => {
 });
 
 describe('K-10 · DISC renkleri', () => {
-  it('DiscBadge sarı (I) harfi açıkta 600, koyuda 400 tonu kullanır; düşük kontrastlı 500 tonu yok', () => {
+  // AJ-07: yellow-600 beyaz zeminde ~2.9:1 (WCAG AA metin eşiği 4.5:1'in altında) — yellow-700'e
+  // çekildi (~4.9:1). Koyu mod (400 tonu) K-10'dan beri zaten AA'yı geçiyor, dokunulmadı.
+  it('DiscBadge sarı (I) harfi açıkta 700 (AA kontrast), koyuda 400 tonu kullanır; düşük kontrastlı 500/600 tonu yok', () => {
     render(<DiscBadge discLetters="Is" />);
     const el = screen.getByText('Is');
-    expect(el.className).toContain('text-yellow-600');
+    expect(el.className).toContain('text-yellow-700');
     expect(el.className).toContain('dark:text-yellow-400');
     expect(el.className).not.toMatch(/(?:^|\s)text-yellow-500(?:\s|$)/);
+    expect(el.className).not.toMatch(/(?:^|\s)text-yellow-600(?:\s|$)/);
+  });
+
+  // AJ-07: green-600 beyaz zeminde ~3.3:1 — green-700'e çekildi (~5.0:1).
+  it('DiscBadge yeşil (S) harfi açıkta 700 (AA kontrast), koyuda 400 tonu kullanır; düşük kontrastlı 500/600 tonu yok', () => {
+    render(<DiscBadge discLetters="Sd" />);
+    const el = screen.getByText('Sd');
+    expect(el.className).toContain('text-green-700');
+    expect(el.className).toContain('dark:text-green-400');
+    expect(el.className).not.toMatch(/(?:^|\s)text-green-500(?:\s|$)/);
+    expect(el.className).not.toMatch(/(?:^|\s)text-green-600(?:\s|$)/);
   });
 
   it('DISC boyut rozetlerinin hepsi koyu mod eşi taşır; GENERAL sabit gri yerine tema token\'ı', () => {

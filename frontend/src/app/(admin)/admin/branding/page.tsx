@@ -11,17 +11,26 @@
  * ── Güvenlik (Katman 5 — logoUrl XSS) ─────────────────────────────────────
  * Kullanıcının girdiği logoUrl doğrudan render edilir; bu bir XSS yüzeyidir.
  * Korumalar:
- *  - Sadece `https://` ile başlayan URL kabul edilir; http:/data:/javascript:
- *    şemaları reddedilir (data:/SVG içine gömülü script backend'in url()
- *    kontrolünü geçebilir → burada erken kesilir).
+ *  - Sadece `https://` ile başlayan, gerçek bir alan adına ait (IP/localhost/port/kullanıcı
+ *    bilgisi içermeyen) ve izinli uzantılı (.png/.jpg/.jpeg/.webp) URL kabul edilir
+ *    (`isLogoUrlSafeToSave` — backend `logoUrlSchema` ile aynı kural).
  *  - Önizleme <img src> ile yapılır; asla CSS background url() ile DEĞİL
  *    (CSS injection yüzeyini kapatır).
  *  - Geçersiz URL varken kaydetme engellenir ve uyarı gösterilir.
  * primaryColor için hex `#RRGGBB` regex doğrulaması yapılır.
+ *
+ * ── Yalnız DEĞİŞEN logo doğrulanır/gönderilir ─────────────────────────────
+ * `logoUrl` doğrulaması ve kaydetme isteğine eklenmesi yalnız kullanıcı alanı KAYITLI
+ * değerden FARKLI bir şeye değiştirdiyse uygulanır (`logoUrlChanged`). Nedeni: AJ-05 ile
+ * kural sıkılaştırıldı (bkz. `@/lib/logoUrl`); daha önce kaydedilmiş ama yeni kurala uymayan
+ * bir logosu olan kurum (ör. uzantısız/`.svg`/IP-adresli bir URL) sayfayı açar açmaz kilitli
+ * bulmasın — yalnızca RENK değiştirmek isteyen yönetici logoya hiç dokunmadan kaydedebilsin.
+ * Aynı nedenle: alan BOŞSA hiçbir zaman `logoUrl: ''` gönderilmez (backend boş dizeyi reddeder,
+ * alan nullable değil — logo TEMİZLEME bu ekranda desteklenmiyor, ayrı bir iştir).
  */
 
 import { useState } from 'react';
-import { isSafeLogoUrl } from '@/lib/logoUrl';
+import { isLogoUrlSafeToSave, LOGO_URL_SAVE_ERROR } from '@/lib/logoUrl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -52,12 +61,18 @@ export default function BrandingPage() {
   const { user, accessToken } = useAuth();
   const { tenant } = useTenant();
 
+  // Kayıtlı başlangıç değeri — yalnız bundan FARKLI bir logo yeni kurala tabidir (bkz. dosya başı notu).
+  const [initialLogoUrl] = useState((tenant?.logoUrl ?? '').trim());
   const [logoUrl, setLogoUrl] = useState(tenant?.logoUrl ?? '');
   const [primaryColor, setPrimaryColor] = useState(tenant?.primaryColor ?? DEFAULT_COLOR);
   const [saving, setSaving] = useState(false);
   const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const logoUrlValid = isSafeLogoUrl(logoUrl);
+  const trimmedLogoUrl = logoUrl.trim();
+  const logoUrlChanged = trimmedLogoUrl !== initialLogoUrl;
+  // Kayıtlı (değişmemiş) bir logo — yeni kuralla uyumsuz olsa bile — kaydetmeyi kilitlemez;
+  // yalnız kullanıcının GİRDİĞİ yeni ve dolu bir değer sıkılaştırılmış kurala tabidir.
+  const logoUrlValid = !logoUrlChanged || trimmedLogoUrl === '' || isLogoUrlSafeToSave(trimmedLogoUrl);
   const colorValid = HEX_COLOR.test(primaryColor);
   const canSave = logoUrlValid && colorValid && !saving;
 
@@ -65,7 +80,7 @@ export default function BrandingPage() {
     setAlert(null);
 
     if (!logoUrlValid) {
-      setAlert({ type: 'error', message: 'Geçerli bir https:// resim URL’si girin.' });
+      setAlert({ type: 'error', message: LOGO_URL_SAVE_ERROR });
       return;
     }
     if (!colorValid) {
@@ -79,7 +94,9 @@ export default function BrandingPage() {
 
     setSaving(true);
     const result = await updateOnboarding(user.tenantId, accessToken, {
-      logoUrl: logoUrl.trim(),
+      // logoUrl yalnız gerçekten DEĞİŞTİYSE ve doluysa gönderilir — backend boş dizeyi
+      // reddediyor (nullable değil) ve değişmemiş bir değeri tekrar göndermenin anlamı yok.
+      ...(logoUrlChanged && trimmedLogoUrl !== '' && { logoUrl: trimmedLogoUrl }),
       primaryColor,
     });
     setSaving(false);
@@ -91,8 +108,9 @@ export default function BrandingPage() {
     }
   }
 
-  // Önizlemede yalnızca güvenli ve dolu URL gösterilir.
-  const showLogo = logoUrl.trim() !== '' && logoUrlValid;
+  // Önizlemede kayıtlı/geçerli URL gösterilir; yalnız YENİ girilmiş ve kurala uymayan bir
+  // değer için baş harflere düşer (kayıtlı ama eski-kural URL'i önizlemede kırılmaz).
+  const showLogo = trimmedLogoUrl !== '' && logoUrlValid;
   const previewName = tenant?.displayName ?? tenant?.name ?? 'Kurumunuz';
 
   return (
@@ -126,10 +144,11 @@ export default function BrandingPage() {
               aria-invalid={!logoUrlValid}
             />
             {!logoUrlValid && (
-              <p className="text-xs text-destructive">Geçerli bir https:// resim URL&rsquo;si girin.</p>
+              <p className="text-xs text-destructive">{LOGO_URL_SAVE_ERROR}</p>
             )}
             <p className="text-xs text-muted-foreground">
-              Yalnızca https:// ile başlayan doğrudan resim bağlantıları kabul edilir. Boş bırakırsanız baş harfler gösterilir.
+              Yalnızca https:// ile başlayan, .png/.jpg/.jpeg/.webp uzantılı doğrudan resim bağlantıları kabul edilir.
+              Kurumunuzun logosu yoksa baş harfler gösterilir; alanı boş bırakıp kaydetmek mevcut logoyu SİLMEZ.
             </p>
           </div>
 

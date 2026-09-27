@@ -45,12 +45,13 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
     · docs/otonom/00-KUYRUK.md    → is listesi, kapilar, durum
     · docs/otonom/02-ILERLEME.md  → son kayitlar
     · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler (bunlara dokunma)
-    · docs/kararlar/09-DURUM.md → ⚠️ ters-kronolojik katmanli, yeni icerik BASA eklenir.
-      "TEK BAKISTA" baslikli bolum adina ragmen GUNCEL DEGIL. Yalniz EN USTTEKI tarihli bolumu oku.
+    · docs/otonom/00-SIMDI.md → anlik durum (Bolum 14 K0.1). (PO 2026-09-26: docs/kararlar/09-DURUM.md
+      ve 00-KARAR-TAKIP.md 2026-09-20'den beri guncellenmiyor — rutin turda OKUNMAZ, YAZILMAZ.)
     · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
     · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
     · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
       gerekirse ac. Rutin turda ana dosyalar (00-KUYRUK · 01-KARARLAR) yeter.
+      (istisna: 5c kural f — kimlik aktif dosyada yoksa arsivde grep ZORUNLU.)
 
 02-ILERLEME.md'ye tur baslangic satiri yaz: tur adi · baslangic saati · kalan 🟢 is sayisi.
 
@@ -70,16 +71,14 @@ kayboluyorsa BITER. "Backend hazir" · "bilesen yazildi ama mount edilmedi" ·
 ═══════════════════════════════════════════════════════════════
 2 — ⛔ DURMAMA KURALI
 ═══════════════════════════════════════════════════════════════
-2.1 KAPANIS KOSULU  (⚠️ 2026-09-21'de GENISLETILDI — eskiden yalniz 🟢 sayiliyordu)
-    ~~[ESKİ · 2026-09-25] Turu (Bolum 13'teki belge senkronunu) YALNIZ su IKI sart birden saglanirsa kapat:
-      (a) kuyrukta durumu BEKLIYOR ve kapisi 🟢 olan HICBIR is kalmadi, VE
-      (b) her 🟡 isin ya PR'i ACIK (Durum "PR-ACIK", Not'ta PR no) ya da
-          neden yapilamadigi yazili (BASARISIZ + sebep).~~
-    ⚠️ GÜNCELLEME 2026-09-25 (PO): Turu YALNIZ su sart saglanirsa kapat:
-      BEKLIYOR durumunda 🟢 ya da 🟡 is kalmadi; kalanlar yalniz 🔴 veya sebebi yazili BASARISIZ.
+2.1 KAPANIS KOSULU
+    Turu YALNIZ su sart saglanirsa kapat (PO 2026-09-25):
+      BEKLIYOR durumunda 🟢, 🔵 ya da 🟡 is kalmadi (🔵 isler PR + EVET karti ile PR-ACIK'a,
+      🟡 isler kod kismi yapilip PO kismi 03-PO-ELLE-ISLER'e yazilarak cikar);
+      kalanlar yalniz 🔴 veya sebebi yazili BASARISIZ.
     ⛔ Bir tane bile 🟢 BEKLIYOR is varsa TURU KAPATMA, sonraki ise gec.
-    ⛔ 🟢 bitti ama 🟡'ler hic islenmediyse TURU KAPATMA — Bolum 4 adim 5'e gec.
-    Her is bitiminde kalan 🟢 ve PR'siz 🟡 sayisini say ve 02-ILERLEME'ye yaz.
+    ⛔ 🟢 bitti ama 🔵/🟡'ler hic islenmediyse TURU KAPATMA — Bolum 4 adim 5'e gec.
+    Her is bitiminde kalan 🟢 ve PR'siz 🔵/🟡 sayisini say ve 02-ILERLEME'ye yaz.
 
 2.1b DURUM KODLARI  (baskasi YASAK)
     BEKLIYOR · CALISILIYOR · PR-ACIK · BITTI · ATLANDI(karar) · BASARISIZ · IPTAL(PO)
@@ -130,15 +129,12 @@ etmeyen ikisinin saatlerce suren emegi tamamen kayboldu.
 
  -1. ⭐ PO ÖNCELİK BLOĞU (00-KUYRUK.md'de '⭐ ÖNCELİK (PO)' satırı): bu satırda sayılan işler,
      KAPISINDAN BAĞIMSIZ olarak her şeyden önce ve yazılı sırayla işlenir. 🟢 olanlar merge edilir.
-     ~~[ESKİ · 2026-09-25] 🟡 olanlar yapılır, PR açılır, MERGE EDİLMEZ (PR-ACIK).~~
-     ~~[ESKİ · 2026-09-26] ⚠️ GÜNCELLEME 2026-09-25 (PO): 🟡: bağımsız inceleme yorumu + şartlar tamamsa MERGE (bkz. Bölüm 7b).~~
-     ⚠️ GÜNCELLEME 2026-09-26 (PO): 4 renk — 🔵 olanlar yapılır, PR + 7b incelemesi ONAY + EVET/HAYIR
+     4 renk (PO 2026-09-26) — 🔵 olanlar yapılır, PR + 7b incelemesi ONAY + EVET/HAYIR
      kartı; merge EDİLMEZ (PO "EVET"i + tarihli yedek bekler). 🟡 olanların kod kısmı 🟢 kurallarıyla
      yapılır, PO'ya kalan kısmı 03-PO-ELLE-ISLER.md'ye yazılır (bkz. Bölüm 7).
      🔴 olanlar KARAR boşsa atlanır.
-     Madde 5'teki '🟢'ler bitmeden 🟡'ye geçme' kuralı bu blok için GEÇERSİZDİR. Bu 🟡 işler
-     aile PR'ına KATILMAZ: her biri ayrı PR olur (güvenlik yamaları tek tek incelenebilsin ve
-     geri alınabilsin).  (PO güncellemesi, 2026-09-25)
+     Madde 5'teki '🟢'ler bitmeden 🟡'ye geçme' kuralı bu blok için GEÇERSİZDİR. Her iş ayrı PR
+     olur (güvenlik yamaları tek tek incelenebilsin ve geri alınabilsin).  (PO 2026-09-25)
  0. ⛔ CIKIS BLOKERI isaretli AJAN isleri (Not sutununda "⛔ CIKIS BLOKERI (T1/T2/T3)")
     — bunlar canliya cikisi tek tek engelliyor, hepsinden once gelir.
  1. ⭐ ASAMA I — ICERIK (PO "EN ON SIRA", 2026-09-03)
@@ -149,29 +145,20 @@ etmeyen ikisinin saatlerce suren emegi tamamen kayboldu.
  4. Kalanlar (K, F, E, Y asamalari)
 Ayni oncelik icinde: en az emekle en cok kullanici degeri once.
 
- 5. ⭐ 🟢'LER BITINCE 🟡'LERE GEC (2026-09-21 kurali — onceden 🟡'ler hic islenmiyordu):
-    Sirada BEKLIYOR durumunda 🟢 kalmadiysa 🟡 islere basla:
-      · ~~[ESKİ · 2026-09-25] YAP, PR AC, ⛔ MERGE ETME~~
-        ⚠️ GÜNCELLEME 2026-09-25 (PO): YAP, PR AC, Bölüm 7b şartları tamamsa MERGE ET
-        (migration/seed/canlı veri/silme → merge YOK, karar kartı)
-      · ~~[ESKİ · 2026-09-25] Durum → "PR-ACIK", Not'a PR numarasini YAZ~~
-        ⚠️ GÜNCELLEME 2026-09-25 (PO): Merge edildiyse BITTI + kanıt; şart eksikse PR-ACIK + eksik şart
+ 5. ⭐ 🟢'LER BITINCE 🔵 VE 🟡 SATIRLARA GEC (2026-09-21 kurali; 4 renk PO 2026-09-26):
+    Sirada BEKLIYOR durumunda 🟢 kalmadiysa:
+      · 🔵 → YAP, PR AC, 7b incelemesi ONAY → EVET/HAYIR karti → PR-ACIK
+        (merge yalniz PO "EVET"i + tarihli yedek sonrasi — Bolum 7)
+      · 🟡 → satirin KOD kismi 🟢 kurallariyla; PO kismi 03-PO-ELLE-ISLER.md'ye
       · PR aciklamasinin BASINA: "KULLANICI ARTIK SUNU GORUYOR: <tek cumle>"
-      · PR aciklamasinda ayrica: 🟡 olmasinin sebebi hangi istisna
-        (migration/seed · auth-KVKK-matching · geri donulmez)
-    ⛔ MIGRATION iceren 🟡 PR'in BASLIGINA sunu ekle:
+      · PR aciklamasinda ayrica: kapinin sebebi
+        (migration/seed · canli veri · karantina · PO eli)
+    ⛔ MIGRATION iceren PR'in BASLIGINA sunu ekle:
        "⛔ MIGRATION — merge edilirse CANLI DB'ye uygulanir"
     Gerekce: PO merge ederken neyin canli DB'ye dokunacagini basliktan gormeli.
 
- 6. ⭐ AILE PR AKISI (2026-09-23, PO onayli kapi cozumu — bkz. 00-KUYRUK "🟡 AILE HARITASI"):
-    🟢'ler bitince 🟡 AILELERI sirayla islenir: bir ailenin tum isleri TEK dalda,
-    TEK PR'da. PR aciklamasinda her is icin (a) ne degisti (b) hangi test riski
-    kapatiyor (c) kullanici ne goruyor yazilir. Durum → PR-ACIK.
-    ⛔ Aile PR'i MERGE EDILMEZ.
-    ⛔ Y-G (migration/seed) GRUPLANMAZ: her biri ayri PR, yedek + PO onayi sart.
-    ~~[ESKİ · 2026-09-25] Madde 6'nın tamamı (aile PR akışı).~~
-    ⚠️ GÜNCELLEME 2026-09-25 (PO): AİLE PR AKIŞI KALDIRILDI — iş başına ayrı dal, ayrı PR
-    (tek tek incelenebilsin ve geri alınabilsin). 00-KUYRUK "AİLE HARİTASI" yalnız sıra bilgisidir.
+ 6. AILE PR AKISI YOK (PO 2026-09-25): is basina ayri dal, ayri PR (tek tek incelenebilsin ve
+    geri alinabilsin). 00-KUYRUK "AILE HARITASI" yalniz sira bilgisidir.
 
 Kuyruk asamalari: I (icerik — PO en on sira) · K (kullanici testi) · F (bilanco devri) ·
 P (panel denetimi) · E (hayalet envanter) · U (uctan uca yolculuk) ·
@@ -191,7 +178,7 @@ d) KOK SEBEP: kodu oku, kanit al (dosya:satir). Belge ↔ kod celisirse KOD KAZA
       Vaka: /users/me/social oksuz sanildi, is /api/users/me/profile ile CALISIYOR —
       bes ayri denetimde yanlis raporlandi. Yanlis olan kod degil, sorulan soruydu.
 e) YAZ: kucuk tut, kapsam disi dosyaya dokunma
-   ⚠️ GÜNCELLEME 2026-09-26 (PO) — ÇALIŞMA YERİ KURALI (kalıcı):
+   ÇALIŞMA YERİ KURALI (kalıcı, PO 2026-09-26):
    Worktree'ler yalnız `~/menti/.worktrees/` altında açılır (gitignore'lu). `/tmp` altında
    worktree AÇMA — alt ajanlar da buna uyar. Gerekçe: 2026-09-26 turunda commit/push/merge
    çağrıları `/tmp` altındaki worktree'lerden tutarsız biçimde reddedildi; izin
@@ -203,8 +190,50 @@ f) TEST: mevcutlar + yeni davranisa en az bir test
    ⛔ KIRIK TEST SILINMEZ, DUZELTILIR (madde 164 dersi)
 g) Commit (Turkce, is no ile) → PR → Bolum 6 dogrulama listesi → kapiya gore merge
 h) ⛔ ARA KAYIT: push et, sonraki ise gecmeden
-i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>")
+i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>");
+   Durum BITTI ise satir AYNI commit'te arsive (5c kural a).
 j) Kalan 🟢 sayisini 02-ILERLEME'ye yaz, sonraki ise gec
+
+5b — PO KARARLARI 2026-09-26 (kalici)
+K-A ARSIVE TASI: Sik okunan dosyalarda (CLAUDE.md · OTONOM-PROMPT.txt · 00-KUYRUK · 01-KARARLAR ·
+    02-ILERLEME · 03-PO-ELLE-ISLER · 00-BELGE-HARITASI) eski metin `~~[ESKI]~~` + GUNCELLEME katmani
+    olarak YERINDE BIRAKILMAZ. Aktif dosyada yalniz GUNCEL dogru durur; eski metin arsive AYNEN
+    tasinir (silinmez). Git gecmisi + arsiv = denetim izi.
+K-B "CLAUDE.md'ye DOKUNMA" yasagi (2026-09-25) su isler icin KALKTI: belge aktif/arsiv ayrimi
+    (2026-09-26 GOREV 1) ve YN-01/YN-14'un yarim kalan kucultme isi.
+K-C AJAN-EKLEDI: Ajan, kodda dosya:satir ile DOGRULADIGI hata/eksik icin kuyruga AJ-<sira> satiri
+    EKLER ve PO onayi beklemeden kapiya gore isler. Not'ta zorunlu: "ajan-ekledi <tarih> · kaynak:
+    <rapor:satir> · kanit: <dosya:satir>". Kapi: varsayilan 🟢 (hassas dosyada 7b) · migration/seed/
+    canli veri/karantina → 🔵 + EVET karti · urun/yetki/KVKK sonucu olan soru → 🔴 + karar karti.
+    Dogrulanamayan bulgu satir OLMAZ. Silme → silme protokolu. Ayrinti: 00-KUYRUK § AJAN-EKLEDI SATIRLAR.
+
+5c — AKTIF/ARSIV AYRIMI (kalici · PO K-A 2026-09-26 · Bolum 5 ve 13'e bagli)
+Ilke: ayrim TEMAYA gore degil DURUMA gore (aktif ↔ arsiv). Kuyruk tek dosya kalir, bolunmez.
+Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARISIZ.
+(a) Is BITTI → satir AYNI commit'te (kapanis commit'i) `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md`'ye
+    (ay degisince yeni ay dosyasi), asama basligi altina. BITTI satiri kuyrukta birakmak YASAK.
+    Asama basligindaki "Bu asamada N is BITTI → arsiv" notu ayni commit'te guncellenir.
+    Durumu belirsiz satir ("kismen", "onay bekliyor") tasinmaz; Not'ta sebebi yazilir.
+(b) Satir katlaninca (Durum "→ X") ayni commit'te `docs/otonom/arsiv/00-KUYRUK-katlanmis.md`'ye.
+(c) KARAR cevabi kuyruga ISLENINCE (kartta "✅ ISLENDI" notu) kart ayni commit'te
+    `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md`'ye; indeks satirina "📦 tam metin" atfi.
+    Cevapsiz karta yeni bilgi "EK BILGI" katmani olarak EKLENMEZ: "Su an ne var" guncellenir,
+    eski hali `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md`'ye (kart no + tarih). Secenekler,
+    oneri ve CEVAP alani DEGISMEZ.
+(d) Her ISO haftasinin ilk turunda 02-ILERLEME'nin onceki haftasi
+    `docs/otonom/arsiv/02-ILERLEME-<YYYY>-W<hh>.md`'ye AYNEN; aktif dosyanin basindaki
+    "Onceki haftalar" atfi guncellenir.
+(e) Kural dosyasi (CLAUDE.md · OTONOM-PROMPT.txt) degisince eski metin
+    `docs/otonom/arsiv/kural-gecmisi-CLAUDE.md` / `kural-gecmisi-OTONOM-PROMPT.md`'ye (bolum + tarih + AYNEN);
+    aktif dosyada `~~[ESKI]~~` katmani BIRAKILMAZ. 03-PO-ELLE-ISLER ve 00-BELGE-HARITASI icin de ayni:
+    tamamlanan/eski → `docs/otonom/arsiv/03-PO-ELLE-ISLER-tamamlanan.md` · `00-BELGE-HARITASI-ayrinti.md`.
+(f) Bir kimlik (is no, KARAR no) aktif dosyada yoksa `docs/otonom/arsiv/` altinda grep ile aranir;
+    "yok" demeden IKI yer de aranir (0.4'teki "arsiv/ OKUMA" kuralinin istisnasi).
+(g) AJ- satirlari da (a)-(c)'ye tabidir.
+Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
+01-KARARLAR'da "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta kod disi `~~[ESKI` blogu.
+UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
+OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB).
 
 ═══════════════════════════════════════════════════════════════
 6 — DOGRULAMA LISTESI  (merge oncesi — hepsi ✅ olmadan merge YOK)
@@ -214,9 +243,9 @@ j) Kalan 🟢 sayisini 02-ILERLEME'ye yaz, sonraki ise gec
      bunu "yesil" SAYMA; o durumda CI asil kanittir
  [ ] CI iki repoda da yesil (backend CI yalniz main-hedefli PR'da kosar)
  [ ] sema degisikligi YOK · seed calistirilmadi
- [ ] auth / KVKK / matching dosyalarina dokunulmadi (dokunulduysa kapi 🟡'dir)
+ [ ] auth / KVKK / matching dosyasina dokunulduysa: 7b (b) bagimsiz inceleme ONAY + (c) negatif test
  [ ] degisiklik yalniz o isin kapsamindaki dosyalarda
- [ ] ⭐ KANIT ZORUNLULUGU (🟡 isler, 2026-09-23): 🟡 bir isin PR'i, riski KAPATTIGINI
+ [ ] ⭐ KANIT ZORUNLULUGU (hassas dosyali 🟢 ve 🔵 isler, 2026-09-23): isin PR'i, riski KAPATTIGINI
      ISPATLAYAN en az bir test icermeli:
        yetki isi → yetkisiz cagiran 403 alir VE kaynak DEGISMEZ ·
        KVKK silme → veri gercekten gitti (ilgili tablolar kontrol edilir) ·
@@ -228,18 +257,7 @@ Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
 ═══════════════════════════════════════════════════════════════
 7 — KAPI POLITIKASI
 ═══════════════════════════════════════════════════════════════
-~~[ESKİ · 2026-09-26] (Bölüm 7'nin 3 renkli metni — aşağıdaki blok bütünüyle)
-🟢 VARSAYILANDIR → yap, dogrulama listesi tamsa MERGE ET, canliya al.
-~~[ESKİ · 2026-09-25] 🟡 yalniz su uc istisnada → yap, PR ac, MERGE ETME:~~
-⚠️ GÜNCELLEME 2026-09-25 (PO): 🟡 yalniz su uc istisnada → yap, PR ac, Bölüm 7b şartları tamamsa MERGE ET
-(1. madde — migration/seed — ve 3. madde — canlı veri — MERGE EDİLMEZ, karar kartına döner):
-   1. migration / seed gerektiriyorsa
-   2. hassas dosyaya dokunuyorsa: auth/yetkilendirme (guard, middleware, token,
-      session) · KVKK/riza/aydinlatma/veri imha-disa aktarma · matching/eslestirme/skorlama
-   3. canli veriye geri donulmez dokunuyorsa
-🔴 ilgili KARAR cevapsiz → DOKUNMA, atla, sonrakine gec.
-~~
-⚠️ GÜNCELLEME 2026-09-26 (PO): 4 renk — kapı tanımları (00-KUYRUK "## Kapılar" ile birebir):
+4 renk (PO 2026-09-26) — kapı tanımları (00-KUYRUK "## Kapılar" ile birebir):
 🟢 AJAN YAPAR + MERGE EDER. Varsayılan. Bölüm 6 doğrulama listesi tamsa merge et, canlıya al.
    Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa Bölüm 7b'nin (b) bağımsız
    inceleme "SONUÇ: ONAY" ve (c) negatif test şartları KENDİLİĞİNDEN eklenir; ayrı renk yok.
@@ -260,32 +278,9 @@ Karantina 🔵 olur; gerçek silme (silme protokolünün son adımı) 🔴 kalı
 ⛔ PO'DAN ASLA "GitHub'dan merge et" İSTENMEZ. `gh pr merge` ya da git komutu izin
    sınıflandırıcısına takılırsa: reddi AYNEN 00-SIMDI "Engeller"e yaz, PR-ACIK bırak, başka
    işe geç. Strateji katmanı çözer.
-⚠️ Bu dosyanın başka yerlerindeki 🟡 atıfları (2.1 · Bölüm 4 madde 5 · Bölüm 6 "dokunulduysa
-   kapı 🟡'dir") 2026-09-26 öncesi anlamdadır ("yap + PR, hassas iş"). Çelişkide BU bölüm
-   kazanır: hassas dosya → 🟢 + 7b (b)(c); migration/seed/canlı veri/karantina → 🔵.
+⚠️ Çelişkide BU bölüm kazanır: hassas dosya → 🟢 + 7b (b)(c); migration/seed/canlı veri/karantina → 🔵.
 
-─── 7b — MERGE ŞARTLARI (GÜNCELLEME 2026-09-26, PO: 4 renk) ───
-~~[ESKİ · 2026-09-26] (7b'nin 🟡 merge şartları metni — aşağıdaki blok bütünüyle)
-─── 7b — 🟡 MERGE ŞARTLARI (GÜNCELLEME 2026-09-25, PO) ───
-🟡 bir iş ancak DÖRDÜ birden tamamsa merge edilir; biri eksikse PR-ACIK + eksik şart yazılır:
- (a) 🟢 kontrol listesi tam (Bölüm 5 kutuları) — "auth/KVKK/matching dosyalarına dokunulmadı"
-     maddesi HARİÇ.
- (b) İşi YAZMAYAN bir inceleme alt-ajanının PR'a yazdığı "Bağımsız inceleme kaydı" yorumu,
-     "SONUÇ: ONAY" ile biten. İnceleme şunlara bakar: kapsam · güvenlik listesi (CLAUDE.md
-     § Güvenlik Kuralları) · KOMŞU UÇ karşılaştırması · tenant filtresi · explicit select ·
-     davranış değişikliği. "SORUN VAR" → düzelt, YENİDEN inceleme.
- (c) auth / yetki / KVKK / tenant izolasyonu işlerinde NEGATİF test (yetkisiz → 403/404,
-     başka kurum görünmez vb.) — CI log'unda gerçekten koştuğu doğrulanır.
- (d) İki repoda CI yeşil (çatı + backend).
-⛔ Şunlar MERGE EDİLMEZ, KARAR KARTINA döner:
-   · migration (Dockerfile açılışta `migrate deploy` çalıştırır → merge = canlı DB değişikliği)
-   · seed (her türü)
-   · canlı veriye yazan / silen işler
-   · silme protokolü (karantina dahil)
-   Kart sade dille yazılır; PO evet/hayır der; "evet" gelirse tarihli yedeği AJAN alır.
-⛔ AİLE PR AKIŞI YOK: iş başına ayrı PR.
-~~
-⚠️ GÜNCELLEME 2026-09-26 (PO): 4 renk.
+─── 7b — MERGE ŞARTLARI (4 renk, PO 2026-09-26) ───
 🟢 bir iş şu şartlarla merge edilir; biri eksikse PR-ACIK + eksik şart yazılır:
  (a) Bölüm 6 kutuları tam — "auth/KVKK/matching dosyalarına dokunulmadı" maddesi HARİÇ
      (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar).
@@ -304,7 +299,7 @@ Karantina 🔵 olur; gerçek silme (silme protokolünün son adımı) 🔴 kalı
 🔴: gerçek silme (silme protokolünün son adımı) — PO'nun İKİNCİ onayı.
 ⛔ AİLE PR AKIŞI YOK: iş başına ayrı PR.
 Merge sonrası: SIRALI pointer bump (Bölüm 8) + 02-ILERLEME'ye "CANLIDA BAK: <kullanıcı ne görüyor>".
-⚠️ GÜNCELLEME 2026-09-26 (PO): Merge sonrası canlı adres kontrolü de EKLENDİ — dağıtım için kısa bir
+Merge sonrası canlı adres kontrolü (PO 2026-09-26) — dağıtım için kısa bir
 süre bekle, sonra `GET https://api.sivilkapasite.org/health` → `ok:true` · `db:up` olmalı; ayrıca
 `https://sivilkapasite.org` 200 dönmeli. Yalnız GET; canlıya yazma/giriş denemesi/form gönderme/yük
 testi YOK. Sonucu CANLIDA BAK satırına ekle. `ok:false` ya da `db:down` → son merge'ü REVERT ET,
@@ -317,9 +312,7 @@ zorlama: reddi aynen yaz, "PO elle bakacak" işaretle, devam et.
 ═══════════════════════════════════════════════════════════════
 Backend (menti-mentor) bir SUBMODULE'dur.
 · Backend PR'lari backend reposunda acilir ve merge edilir.
-· ~~[ESKİ · 2026-09-25] Turun SONUNDA (ya da durman gerekirse durmadan once) TEK submodule pointer bump yap —
-  her isten sonra ayri ayri degil.~~
-  ⚠️ GÜNCELLEME 2026-09-25 (PO): Backend merge'lerinden sonra SIRALI pointer bump: birikmiş backend merge'leri
+· Backend merge'lerinden sonra SIRALI pointer bump (PO 2026-09-25): birikmiş backend merge'leri
   tek çatı PR'ında main HEAD'e taşınır (açık bir çatı PR'ı varsa bump oraya eklenir), inceleme
   + CI + merge; ardından 02-ILERLEME'ye "CANLIDA BAK". Backend merge'i canlıya ancak bump ile çıkar.
 · Ata kontrolu: `git merge-base --is-ancestor <eski> <yeni>` basarisizsa BUMP YAPMA, bildir.
@@ -420,14 +413,14 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
 ═══════════════════════════════════════════════════════════════
 13 — KAPANIS  (YALNIZ 2.1 kosulu saglanirsa)
 ═══════════════════════════════════════════════════════════════
+13.0 Kapanista 5c (AKTIF/ARSIV AYRIMI) denetimi: `bash scripts/belge-bekci.sh` HATA vermemeli.
 13.1 Backend isi yapildiysa: Bolum 8'e gore TEK pointer bump + teyit.
 
 13.2 Belge senkronu — TEK PR, EN SON:
      Bir is merge edilmeden belgeye "CANLIDA" YAZILMAZ.
      Kontrol: `gh pr list --state open --author @me` bu turun islerinden bos olmali.
-     · 09-DURUM.md: EN USTE yeni tarihli bolum (eskiyi silme)
-     · 00-KARAR-TAKIP.md: yalniz bu turda degisenler · NUMARA VERME · "aday" etiketi ·
-       eski satiri silme, ustunu ciz
+     · 09-DURUM.md / 00-KARAR-TAKIP.md: YAZILMAZ (PO 2026-09-26 — 2026-09-20'den beri donuk;
+       genel belge taramasina kadar). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
      · docs/devir/ oturum gunlugu: bir kayit
 
 13.3 02-ILERLEME.md'nin EN BASINA tur ozeti:
@@ -436,14 +429,14 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
      BASARISIZ: n — sebepleriyle
      CANLIDA KONTROL EDILECEKLER: kisa liste
      PO'NUN KENDI YAPMASI GEREKENLER: 03-PO-ELLE-ISLER.md atfi + en kritik 3'u
-     KUYRUK SON DAGILIMI: 🟢 / 🟡 / 🔴
+     KUYRUK SON DAGILIMI: 🟢 / 🔵 / 🟡 / 🔴
      BACKEND: pointer eski → yeni + esitlik teyidi
      STASH: `git stash list` bossa "yok", doluysa icerigi
 
 PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-KARARLAR.
 
 ═══════════════════════════════════════════════════════════════
-14 — UZUN CALISMA KIPI (GUNCELLEME 2026-09-26 PO)
+14 — UZUN CALISMA KIPI (PO 2026-09-26)
 ═══════════════════════════════════════════════════════════════
 Yukaridaki kurallar GECERLI kalir. Celiski olursa BU BOLUM kazanir; yalniz
 guvenlik sinirlari (Bolum 10) ve Bolum 7b (merge sartlari) her zaman kazanir.
@@ -524,16 +517,16 @@ Y1 · `docs/raporlar/kesif/kod-inceleme-2026-09-24.md`'de [teyit gerek] kalan
 Y2 · Son 60 BITTI isin "Bitti demek" olcutunu koda karsi yeniden kontrol et
      (alt ajan, hepsi) -> tutmayan BEKLIYOR + "denetimde tutmadi: <kanit>".
 Y3 · Kurum izolasyonu ve yetki gerektiren uclarda eksik negatif testleri yaz
-     (🟡, merge).
+     (🟢+7b, merge).
 Y4 · Cevapsiz karar kartlarinin "su an ne var" kanitini tazele ve her kartin
      basina "bu kart N isi kilitliyor" yaz. YENI kart acma.
-Y5 · 09-DURUM.md basina guncel tarihli bolum (yalniz ekleme).
+Y5 · (PO 2026-09-26: 09-DURUM yazilmaz — bu madde askida; genel belge taramasini bekler.)
 
 ── K6 · LIMIT FARKINDALIGI ──
 Tekrarlanan pahali adimi fark edersen daha ucuz yolu sec. TUR OZETI'nde "limitin
 en cok gittigi yer" tek cumleyle yazilsin.
 
-── K8 · VPS ORTAMI (GÜNCELLEME 2026-09-26, PO) ──
+── K8 · VPS ORTAMI (PO 2026-09-26) ──
 Oturum PO'nun VPS'inde (ayrı kullanıcı, sudo/docker YOK, yalnız ~/menti) çalışıyorsa kalıcı kurallar:
 K8.1 Canlı site AYNI makinede (2 çekirdek · 8 GB). Ağır komutlar (npm ci/install, build, tsc,
      test) `nice -n 10` ile çalışır; aynı anda EN FAZLA 1 ağır komut. Yazma şeridi en fazla 2

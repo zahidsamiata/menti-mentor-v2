@@ -89,3 +89,75 @@ export function fitsAvailability(
     return s.minutes >= blkS && e.minutes <= blkE;
   });
 }
+
+// ── K-05b: menti yalnız müsait başlangıç saatlerinden seçer ─────────────────────────────
+//
+// Neden: KATI (KARAR-53 ①) mentörde serbest tarih+saat girişi, mentinin blok dışı saati
+// SEÇMESİNE izin veriyordu (yalnız gönderemiyordu). Burada seçilebilir saatler üretilir.
+// İkinci bir saat dilimi mantığı yazmamak için aday anlar mutlak zamanda (UTC) adım adım
+// taranır ve her biri yukarıdaki `fitsAvailability` ile (blok diliminde) süzülür — yerel
+// saatten UTC'ye ters dönüşüm gerekmez.
+
+export const BOOKING_WINDOW_DAYS = 14;
+export const SLOT_STEP_MINUTES = 30;
+
+export interface BookableSlotOptions {
+  blocks: ReadonlyArray<AvailabilityBlockLike>;
+  durationMinutes: number;
+  now: Date;
+  days?: number;
+  stepMinutes?: number;
+}
+
+/**
+ * Önümüzdeki `days` gün içinde, süresiyle birlikte mentörün bir bloğuna tamamen sığan
+ * başlangıç anları (geçmiş anlar hariç), artan sırada.
+ */
+export function listBookableSlots({
+  blocks,
+  durationMinutes,
+  now,
+  days = BOOKING_WINDOW_DAYS,
+  stepMinutes = SLOT_STEP_MINUTES,
+}: BookableSlotOptions): Date[] {
+  if (!blocks.length || durationMinutes <= 0 || Number.isNaN(now.getTime())) return [];
+  const stepMs = stepMinutes * 60_000;
+  const firstMs = Math.ceil((now.getTime() + 1) / stepMs) * stepMs; // şimdiden SONRAKİ ilk adım
+  const lastMs = now.getTime() + days * 24 * 60 * 60_000;
+  const slots: Date[] = [];
+  for (let t = firstMs; t <= lastMs; t += stepMs) {
+    const start = new Date(t);
+    const end = new Date(t + durationMinutes * 60_000);
+    if (fitsAvailability(start, end, blocks)) slots.push(start);
+  }
+  return slots;
+}
+
+export interface SlotDayGroup {
+  /** Blok dilimindeki yerel gün (YYYY-MM-DD) */
+  dayKey: string;
+  /** Örn. "Pazartesi, 4 Ocak" */
+  dayLabel: string;
+  slots: Array<{ iso: string; timeLabel: string }>;
+}
+
+/** Başlangıç anlarını blok diliminde yerel güne göre gruplar; saatler "HH:MM" gösterilir. */
+export function groupSlotsByDay(
+  slots: ReadonlyArray<Date>,
+  timeZone: string = DEFAULT_AVAILABILITY_TIMEZONE,
+): SlotDayGroup[] {
+  const keyFmt = new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' });
+  const dayFmt = new Intl.DateTimeFormat('tr-TR', { timeZone, weekday: 'long', day: 'numeric', month: 'long' });
+  const timeFmt = new Intl.DateTimeFormat('tr-TR', { timeZone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const groups: SlotDayGroup[] = [];
+  for (const slot of slots) {
+    const dayKey = keyFmt.format(slot);
+    let group = groups[groups.length - 1];
+    if (!group || group.dayKey !== dayKey) {
+      group = { dayKey, dayLabel: dayFmt.format(slot), slots: [] };
+      groups.push(group);
+    }
+    group.slots.push({ iso: slot.toISOString(), timeLabel: timeFmt.format(slot) });
+  }
+  return groups;
+}

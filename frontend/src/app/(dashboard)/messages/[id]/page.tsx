@@ -126,6 +126,7 @@ export default function ConversationThreadPage() {
             rows={2}
             maxLength={MESSAGE_MAX}
             placeholder="Bir mesaj yazın…"
+            aria-label="Mesaj"
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {

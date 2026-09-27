@@ -7,12 +7,18 @@
  *
  * Renk: birincil (ilk) harfe göre — D kırmızı · I sarı · S yeşil · C mavi (havuz sayfalarıyla aynı palet).
  * Büyük/küçük harf ayrımı (güçlü vs destekleyici) korunur; tooltip Türkçe arketip açıklaması verir.
+ *
+ * AJ-07: açık temada I (`yellow-600` ~2.9:1) ve S (`green-600` ~3.3:1) beyaz zeminde WCAG AA
+ * (metin ≥4.5:1) altındaydı. `yellow-700`/`green-700`'e çekildi (~4.9:1 / ~5.0:1). Koyu mod
+ * (`dark:*-400`, K-10) DOKUNULMADI. Aynı harf→renk eşlemesi profile/page.tsx, mentor/page.tsx ve
+ * admin/questions/page.tsx'te tekrar ediyor — kapsam: dördü de hizalandı (bkz. AJ-07 notu, tek
+ * kaynağa taşımak ayrı bir refaktör olur, bu turun kapsamı dışında bırakıldı).
  */
 
 const DISC_META: Record<string, { archetype: string; color: string }> = {
   D: { archetype: 'Öncü',       color: 'text-red-600 dark:text-red-400'    },
-  I: { archetype: 'Ateşleyici', color: 'text-yellow-600 dark:text-yellow-400' },
-  S: { archetype: 'Yapı Taşı',  color: 'text-green-600 dark:text-green-400'  },
+  I: { archetype: 'Ateşleyici', color: 'text-yellow-700 dark:text-yellow-400' },
+  S: { archetype: 'Yapı Taşı',  color: 'text-green-700 dark:text-green-400'  },
   C: { archetype: 'Kâşif',      color: 'text-blue-600 dark:text-blue-400'   },
 };
 

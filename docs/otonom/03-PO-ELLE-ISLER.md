@@ -1,11 +1,8 @@
 > 🔥 SICAK — her otonom turda okunur. Hedefli okuma: OTONOM-PROMPT.txt § 0.4
 > TÜR: 🔥 · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: PO bir işi yapınca ya da yeni kod-dışı iş çıkınca
+> Tamamlananlar: `docs/otonom/arsiv/03-PO-ELLE-ISLER-tamamlanan.md`
 
 # 03 — PO'NUN ELLE YAPACAKLARI (kod değiştirilerek çözülemeyen işler)
-
-> ~~[ESKİ · 2026-09-25] ⛔⛔ **ACİL (2026-09-25) — canlıda "taslak" kurum var mı?** Yeni kurum kaydı, sihirbazda logo girilmediyse / renk değiştirilmediyse / platform onayı bekliyorsa "taslak" adımında kalıyordu; her gün çalışan temizlik 96 saati geçen, anlaşması olmayan taslak kurumları **kullanıcılarıyla birlikte siliyor** (`backend/src/services/cronScheduler.ts:181-212`). İleriye dönük düzeltme: menti-mentor-v2 #272. **Senin bakman gereken:** Neon/prod veritabanında `SELECT id, slug, "createdAt", "onboardingStep", "verificationStatus" FROM "Tenant" WHERE "onboardingStep" IN ('TEMPLATE','LOGO','PREVIEW') AND "isActive" = true;` (salt okuma). Satır varsa **KARAR-81**'i cevapla; ajan tarihli yedek alıp düzeltir. Acil güvence istersen Dokploy'da geçici `CRON_ENABLED=false` (tüm zamanlanmış işleri durdurur — KVKK imhası dahil; bkz. V-11).~~
-> ✅ **GÜNCELLEME 2026-09-25 (PO): gerek kalmadı — KARAR-81.** Canlıda gerçek kurum yok; mevcut taslaklar test verisi, silinmeleri sorun değil. Sorgu ve `CRON_ENABLED=false` gerekmiyor. İleriye dönük düzeltme kuyrukta: KR-23.
-
 
 🔄 YAŞAYAN · Oluşturma: 2026-09-19 · Kaynak: W (`operasyonel-hazirlik-2026-09-19.md`) + X (`uctan-uca-kurum-yolculugu-2026-09-19.md`) denetimleri.
 
@@ -16,6 +13,15 @@
 > 🟠 **YENİ (2026-09-25) — Dokploy: frontend build argümanı `NEXT_PUBLIC_SITE_URL`.** Sitenin paylaşım görseli (Y-09), sitemap ve arama motoru adresleri bu değişkenden kuruluyor ve değer **build sırasında** koda gömülüyor. Dokploy'da frontend uygulamasının **build argümanlarına** `NEXT_PUBLIC_SITE_URL` = sitenin herkese açık adresi (https ile, sonda `/` olmadan) eklenmeli. Eklenmezse link paylaşıldığında görsel çıkmaz (adres `localhost` olur). **Doğrulama:** yeniden deploy sonrası ana sayfanın kaynağında `og:image` satırı canlı alan adıyla başlamalı. (Kod tarafı: çatı #297 Dockerfile ARG.)
 
 > 🟢 **YENİ (2026-09-26, V-16) — Dokploy: backend build argümanı `GIT_SHA` (isteğe bağlı, düşük risk).** `/health` yanıtına canlıda hangi backend commit'inin koştuğunu gösteren `commit` alanı eklendi. Dokploy'da backend build'i için `GIT_SHA` host ortam değişkeni deploy edilen commit'in kısa SHA'sı ile set edilmeli (Dokploy'un "pre-build command" ya da "build args" ayarına `export GIT_SHA=$(git rev-parse --short HEAD)` ya da Dokploy'un kendi sağladığı commit-SHA değişkeni eşlenebilir — panelde hangisi varsa). **Ayarlanmazsa** `/health.commit` sabit `"unknown"` döner — YANLIŞ bir değer değil, yalnız bilgisiz; acil değil. **Doğrulama:** deploy sonrası `curl https://api.sivilkapasite.org/health` → `commit` alanı gerçek kısa SHA'yı göstermeli. (Kod tarafı: backend Dockerfile `ARG GIT_SHA` + çatı `docker-compose.yml` `build.args`.)
+
+> 🟠 **YENİ (2026-09-27, F-05/G1-26) — Cloudflare Turnstile CAPTCHA hesabı + iki anahtar.** Kod kısmı CANLIDA (backend #183 `e68f306` + çatı #367 `c03f754`, 2026-09-27) — public 4 uçta (kayıt, self-serve kurum kaydı, şifremi unuttum, şüphe bildirimi) CAPTCHA doğrulaması eklendi ama **anahtar girilene kadar etkisizdir** (no-op, bugünkü davranış aynen). PO'nun yapacakları:
+> 1. **dash.cloudflare.com** → ücretsiz hesap aç (yoksa) → Turnstile → "Add site" → widget tipi **Managed**, domain: canlı frontend alan adı.
+> 2. Cloudflare iki değer verir: **Site Key** (public) ve **Secret Key** (gizli).
+> 3. **Backend Dokploy env'ine** `TURNSTILE_SECRET_KEY` = Secret Key gir.
+> 4. **Frontend Dokploy build argümanına** `NEXT_PUBLIC_TURNSTILE_SITE_KEY` = Site Key gir (frontend `NEXT_PUBLIC_*` değişkenleri build sırasında koda gömülür — `NEXT_PUBLIC_SITE_URL` ile aynı desen, ayrı build tetiklemek gerekir).
+> ⚠️ **Kesinti notu (7b incelemesi):** anahtar girildikten sonra Cloudflare doğrulama servisine erişilemezse kayıt / şifre sıfırlama / şüphe bildirimi GEÇİCİ OLARAK DURUR (bilinçli "fail-closed"). Acil çözüm: Dokploy'da `TURNSTILE_SECRET_KEY`'i boşaltıp backend'i yeniden başlatmak — CAPTCHA kapanır, formlar eskisi gibi çalışır.
+> 5. İki PR'ı **CI yeşilken merge et** (backend önce, sonra çatı pointer'ı re-bump — bkz. CLAUDE.md "Merge sonrası pointer bump").
+> **Doğrulama:** her iki anahtar da girilip yeniden deploy sonrası `/register`, `/bildir`, `/onboarding/stk` (Adım 4), `/forgot-password` sayfalarında "robot değilim" kutusu görünmeli; kutu işaretlenmeden gönderim "Lütfen robot olmadığınızı doğrulayın" hatası dönmeli. **Yalnız backend anahtarı girilir, frontend anahtarı girilmezse:** widget hiç görünmez ama form yine de gönderilebilir (backend token bekler, kullanıcı hep 400 alır) — bu yüzden ikisi BİRLİKTE girilmeli. **Acil değil** — anahtar girilene kadar hiçbir davranış değişmez, mevcut IP rate-limit koruması olduğu gibi çalışmaya devam eder.
 
 ## ⛔ GÜVENLİK — bu belgeye ASLA gerçek değer yazılmaz
 Repo **PUBLIC**. Şifre · API anahtarı · token · SMTP parolası · JWT secret **buraya YAZILMAZ.**
@@ -58,7 +64,6 @@ Her iş için **değişkenin tam adı · değer biçimi · hangi servise (backen
 > ⚠️ **Ajan tarafındaki 14 çıkış blokeri** `00-KUYRUK.md`'de Not sütununda **`⛔ ÇIKIŞ BLOKERİ (T…)`** ile işaretlidir — PO'nun yapacağı bir şey yok, bilgi amaçlı.
 
 ## Ortak doğrulama yolu
-~~[ESKİ · 2026-09-19] Çoğu ortam değeri tek yerden görülür: **`GET /health`** → `env` alanı. Bu tur `/health` zenginleştirilirse (Bölüm 6 + V-01/V-04/V-11) SMTP · DB · cron durumu da buradan okunacak.~~
 ⚠️ **GÜNCELLEME (2026-09-21, kod-teyitli): `/health` ZENGİNLEŞTİRİLDİ — V-01/V-11 İNDİ.** Tek istekte dört şey birden görülüyor:
 ⚠️ **GÜNCELLEME (2026-09-26, PO teyidi): canlı adresler** — Site: `https://sivilkapasite.org` · Backend: `https://api.sivilkapasite.org`. Kaynak: `docs/arsiv/09-DURUM-ve-yolharitasi-arsiv-2026-08-10.md:155` + `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-09-21.md:95` + PO teyidi. Bu adresler daha önce yaşayan belgelerde yoktu.
 **`GET https://api.sivilkapasite.org/health`** → `{ "ok", "db": "up|down", "smtp": "verified|failed|unconfigured|unknown", "cron": "enabled|disabled", "env", "ts", "version", "uptime" }`
@@ -94,6 +99,7 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | 11 | **Canlı DB'de seed tabloları dolu mu — teyit** (`Question` / `CertificationQuestion` / `LearningStage`) | Temiz DB'de bu yol DISC testinde kırılır (`isComplete` asla `true` olamaz, X §4.6). Havuz yalnız `prisma/seed.ts` ile dolar ve o dosya **prod'da yıkıcı** (`:295-319` koşulsuz `deleteMany`). | Neon konsolu (salt-okuma sorgu). | `SELECT count(*) FROM "Question";` > 0 · aynısı `CertificationQuestion`, `LearningStage`. |
 | 12 | **2026-09-09 hata teşhisi + "yakılan hatırlatma" etkisi — canlı sorgu** | (a) `SystemLog`'ta o günün ERROR'ları `EACCES`/`ensureUploadDir` içeriyor mu → avatar-izin teşhisini kesinleştirir. (b) `cronScheduler.ts:143-153` mail atlansa da `reminderEmailSentAt` yazıyor → kaç kurumda hatırlatma "yakıldı". | Neon konsolu (salt-okuma). | W §6.2'deki 3 SQL sorgusu (SystemLog ERROR filtresi + GROUP BY + yedek tablo listesi). |
 | 13 | **Canlıda `COMPLETED` görüşme var mı / `/admin/eslesmeler` boş mu — teyit** | Kod `SCHEDULED→COMPLETED` geçişi yazmıyor (X §6#2/U-01) ve `Match` tablosuna yazan kod yok (`createMatchIfEligible` 0 çağıran). Canlıda eski/elle veri olabilir; ürün kararı bu teyide bağlı. | Neon konsolu (salt-okuma). | `SELECT count(*) FROM "Meeting" WHERE status='COMPLETED';` ve `SELECT count(*) FROM "Match";`. |
+| 14 | **Eski kullanıcıların kurum üyeliği (`TenantMembership`) tamam mı — teyit** (2026-09-27, AJ-01 7b notu) | Kurum paneli ve KPI rol sayımları artık üyelikten yapılıyor (AJ-01). Üyeliği eksik eski kullanıcı varsa sayılar düşük çıkar. `backend/scripts/backfill-memberships.mjs` var ama canlıda koşulup "kalan eksik: 0" alındığı belgelenmemiş (`docs/kararlar/konu/08-acik-sorular.md:40` hâlâ bekliyor) | Canlı DB (salt-okuma sayım; betik koşulacaksa önce yedek + KARAR) | `User` başına (`tenantId`) karşılık gelen aktif `TenantMembership` olmayan kullanıcı sayısı = 0 |
 
 ---
 
@@ -141,14 +147,15 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | DK-02 | Dokploy'da SMTP ayarlarını gir ve `TENANT_NOTIFICATIONS_ENABLED='true'` yap | Platform panelinde bir kuruma "düzeltme iste" denince kurum e-postası gelir | B5 · #5 · A8 |
 | DK-03 | teyit gerek — satırda PO eli gerektiren adım yazılı değil; yalnız kapsam dışı "kayıtsız tam erişim" sorusu avukatta | Avukat cevabı A6'ya yazılır | A6 |
 | AN-36 | Kurumun yasal kimlik bilgilerini (adres · KEP · MERSİS) sağla; veri işleyen sözleşme metnini avukata onaylat | Bilgiler panelde görünür; sözleşme metni avukat onaylı | — |
-| AN-30 (🔵, KARAR-96 EVET'inden sonra) | Dokploy'da backend'e `GRANULAR_CONSENT_ENABLED='true'`, frontend'e `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED='true'` gir (frontend değişkeni derleme anında okunur → yeniden dağıtım gerekir); önce rıza metinlerinin avukat onayını al | Kayıt ekranında tek KVKK kutusu yerine 4 zorunlu + 2 isteğe bağlı kutu görünür | KARAR-96 |
+| AN-30 (🔵, KARAR-96 EVET'inden sonra) | Dokploy'da backend'e `GRANULAR_CONSENT_ENABLED='true'`, frontend'e `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED='true'` gir — ⚠️ SIRA: **önce (ya da aynı anda) backend**, sonra frontend; yalnız frontend açık kalırsa formdaki seçimler sessizce kaybolur (7b 2. tur gözlemi) (frontend değişkeni derleme anında okunur → yeniden dağıtım gerekir); önce rıza metinlerinin avukat onayını al | Kayıt ekranında tek KVKK kutusu yerine 4 zorunlu + 2 isteğe bağlı kutu görünür | KARAR-96 |
+| YN-13 (kişi adı) | Backend reposundaki `.claude/settings.local.json` dosyası (yerel izin ayarları) kişisel bilgisayar klasör yolu içeriyor ve public repoda. Dosyayı repodan çıkarmak ya da yolları genelleştirmek (izin ayarı olduğu için ajan dokunmaz) | `git -C backend grep -n -i "users\\\\" -- .claude` boş döner | — |
+| KR-16 (teyit) | Dokploy'da backend servisinin **başlatma komutu (command/start override)** tanımlı mı bak. Tanımlıysa ve `npx prisma migrate deploy` içeriyorsa kaldır — imaj artık `./node_modules/.bin/prisma migrate deploy && node dist/server.js` ile açılıyor (backend #161) | Panelde override yok; sunucu yeniden başlayınca /health `ok:true` | — |
 | AN-41 | Kod-senkron güncellenen KVKK metin paketini avukata götür, onaylat | Avukat onayı tarihiyle `02-ILERLEME`'ye yazılır | avukat paketi |
 
 ## Karar bekleyenler (kart `01-KARARLAR.md`'de — PO cevap yazacak)
 
 > ⭐ **YENİ (2026-09-21, dört konsey): KARAR-38…52 — 15 kart.** Kümeler: 38-40 güvenlik/KVKK · 41-44 psikometri/eşleştirme · 45-48 içerik/metin · 49-52 belge yönetişimi.
 > En çok iş açanlar: **KARAR-45** (arketip ad↔kod, 4 iş) · **KARAR-47** (hukuki metin paketi, 5 kalem — #16/#17/#20 hepsi burada) · **KARAR-50** (kural geçersizleşme koşulu, 4 iş).
-~~[ESKİ · 2026-09-19] Bu belgedeki bazı işler bir ÜRÜN/HUKUK kararına bağlı. Kartlar bu turda açıldı (KARAR-23+): kurum bildirimleri açılsın mı (§4.1) · hata stack'i panele açılsın mı (§4.2) · yedek nereye (§4.3) · yedek tablo DROP (§4.4) · `mentorVisibilityEnabled` (§4.5) · oryantasyon kilidi engel mi (§9.2) · dış hata izleme servisi kurulsun mu · `LLM_PROVIDER`/OpenAI ölü env silinsin mi.~~
 ⚠️ **GÜNCELLEME (2026-09-21): YANLIŞ BEYAN DÜZELTİLDİ.** Yukarıdaki cümle *"kartlar bu turda açıldı (KARAR-23+)"* diyordu; **açılmamışlar.** Kod-teyidi: `01-KARARLAR.md`'de kart numaraları **KARAR-0…29 (30 kart)**, en yüksek **29**; `grep "mentorVisibilityEnabled"` → **0 sonuç**, "oryantasyon kilidi" → tek isabet ve o da **başka bir kartın gövdesinde**, kendi kartı yok. ⇒ PO listeye bakıp arayacak, bulamayacaktı.
 **Doğrusu:** bu belgedeki işlerin bağlı olduğu kararlardan **bir kısmının kartı hâlâ YOK.** Bu turda (BB) açılan yeni kartlar `01-KARARLAR.md` sonunda **KARAR-30'dan** başlar; içindekiler tablosuna da eklendi. Kartı olmayan konular yeni kartlarda kümelenmiştir — hangi işin hangi karta bağlı olduğu ilgili satırın Not sütununda yazılıdır.
 
@@ -214,7 +221,6 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 ## ❓ Kod tarafı TEYİT GEREK (ajan bulutta yapamadı, canlı/gerçek hesap ister)
 - `book-meeting` saat dilimi kayması İstanbul'da 409 üretiyor mu (X §8#5, gerçek deneme).
 - PENDING (OAuth) menti `mentor-matches`'ten veri alıyor mu (X §8#6 / U-08, gerçek hesap).
-- ~~[ESKİ · 2026-09-19] `.dockerignore` ↔ `migrate deploy` çelişkisi kurtarmada şema oluşturuyor mu (W §7#28 / V-14, `docker build`).~~ ⚠️ **GÜNCELLEME (2026-09-21): BU SATIR PO İŞİ DEĞİL** — `docker build` lokal/CI'da koşar, Dokploy veya Neon erişimi gerektirmez ⇒ **ajan işi**, `00-KUYRUK.md`'de **V-14** Not'una taşındı. Buradan çıkarıldı.
 
 ---
 

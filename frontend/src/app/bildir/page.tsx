@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { submitSuspicionReport } from '@/lib/api/platform';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
+import { UI_TEXT } from '@/lib/uiText';
+import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/molecules/TurnstileWidget';
 
 export default function BildirPage() {
   const [form, setForm] = useState({
@@ -15,6 +17,9 @@ export default function BildirPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
   const [error, setError]         = useState<string | null>(null);
+  // F-05 (G1-26): site key tanımsızsa widget hiç render edilmez → her zaman undefined kalır.
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
+  const captchaRef = useRef<TurnstileWidgetHandle>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -24,11 +29,15 @@ export default function BildirPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const result = await submitSuspicionReport(form);
+    const result = await submitSuspicionReport({ ...form, captchaToken });
     setLoading(false);
     if (result.ok) {
       setSubmitted(true);
     } else {
+      // Token tek kullanımlıktır (bkz. TurnstileWidget dosya başı) — sıfırlanmazsa
+      // kullanıcı ikinci denemede kendi hatasını değil CAPTCHA_GECERSIZ'i görür.
+      captchaRef.current?.reset();
+      setCaptchaToken(undefined);
       setError(apiErrorMessage(result.error, 'Bildirim gönderilemedi. Lütfen tekrar deneyin.'));
     }
   }
@@ -90,6 +99,8 @@ export default function BildirPage() {
             />
           </div>
 
+          <TurnstileWidget ref={captchaRef} onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(undefined)} />
+
           {error && <p className="text-sm text-destructive">{error}</p>}
 
           <button
@@ -97,7 +108,7 @@ export default function BildirPage() {
             disabled={loading}
             className="w-full rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-50"
           >
-            {loading ? 'Gönderiliyor…' : 'Bildirimi Gönder'}
+            {loading ? UI_TEXT.status.sending : 'Bildirimi Gönder'}
           </button>
         </form>
       </div>

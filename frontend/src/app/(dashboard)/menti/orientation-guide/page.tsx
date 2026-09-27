@@ -17,11 +17,11 @@ type LocalScenario = { id: string; situationText: string; question: string; choi
 const SCENARIOS: LocalScenario[] = [
   {
     id: '1',
-    situationText: 'İlk görüşme gününüz. Mentorunuzla 30 dakikanız var.',
-    question: 'İlk buluşmada ne yaparsınız?',
+    situationText: 'İlk görüşme gününüz. Mentörünüzle 30 dakikanız var.',
+    question: 'İlk görüşmede ne yaparsınız?',
     choices: [
       { key: 'A', label: 'Hemen somut bir iş veya staj fırsatı istersiniz.', outcome: 'wrong', feedback: 'İlk görüşmede doğrudan iş istemek ilişkiyi başlamadan bitirir. Güven inşa etmek önce gelir.' },
-      { key: 'B', label: 'Kendinizi tanıtır, hedeflerinizi paylaşır ve mentorunuzun deneyimini dinlersiniz.', outcome: 'correct', feedback: 'Doğru! İlk görüşme bir keşif oturumudur. Birbirinizi tanıyın, beklentileri netleştirin.' },
+      { key: 'B', label: 'Kendinizi tanıtır, hedeflerinizi paylaşır ve mentörünüzün deneyimini dinlersiniz.', outcome: 'correct', feedback: 'Doğru! İlk görüşme bir keşif oturumudur. Birbirinizi tanıyın, beklentileri netleştirin.' },
       { key: 'C', label: 'Hazırladığınız uzun bir soru listesini hızlıca bitirmeye çalışırsınız.', outcome: 'warn', feedback: 'Sorular hazırlamak iyi — ama hepsini bitirmek zorunda değilsiniz. İki yönlü bir sohbet olsun.' },
     ],
   },
@@ -30,24 +30,24 @@ const SCENARIOS: LocalScenario[] = [
     situationText: 'Görüşme sabahı yoğun hissediyorsunuz. Hazırlık yapmaya vaktiniz olmadı.',
     question: 'Ne yaparsınız?',
     choices: [
-      { key: 'A', label: 'Görüşmeye girer, hazır olmadığınızı söylemezsiniz — her şey yolunda gibi davranırsınız.', outcome: 'wrong', feedback: 'Hazırlıksız gelip bunu gizlemek güveni zedeler. Mentorunuz fark eder.' },
+      { key: 'A', label: 'Görüşmeye girer, hazır olmadığınızı söylemezsiniz — her şey yolunda gibi davranırsınız.', outcome: 'wrong', feedback: 'Hazırlıksız gelip bunu gizlemek güveni zedeler. Mentörünüz fark eder.' },
       { key: 'B', label: 'Görüşmeyi iptal eder, bir daha aynı durumun yaşanmaması için plan yaparsınız.', outcome: 'warn', feedback: 'Bazen zorunlu olabilir — ama sık sık iptal etmek sinyaldir. Bir sonraki adım planını paylaşın.' },
-      { key: 'C', label: 'Kısa bir mesajla "bugün hazırlığım yetersiz kaldı, en temel soruyu sorabileceğim" diyerek görüşürsünüz.', outcome: 'correct', feedback: 'Dürüstlük en güçlü hazırlıktır. Mentorunuz bu iletişimi takdir eder.' },
+      { key: 'C', label: 'Kısa bir mesajla "bugün hazırlığım yetersiz kaldı, en temel soruyu sorabileceğim" diyerek görüşürsünüz.', outcome: 'correct', feedback: 'Dürüstlük en güçlü hazırlıktır. Mentörünüz bu iletişimi takdir eder.' },
     ],
   },
   {
     id: '3',
-    situationText: 'Mentorunuz sizi kendi hayatından uzun bir hikâye anlatmaya başladı.',
-    question: 'Mentorunuz kendi hikâyesini anlatırken ne yaparsınız?',
+    situationText: 'Mentörünüz sizi kendi hayatından uzun bir hikâye anlatmaya başladı.',
+    question: 'Mentörünüz kendi hikâyesini anlatırken ne yaparsınız?',
     choices: [
       { key: 'A', label: 'Kibarca not alır, ardından "sizden öğrenmek istediğim şey şu" diye konuşmayı yönlendirirsiniz.', outcome: 'correct', feedback: 'Doğru! Dinlemek saygıdır — ama gündemini de sahiplenmek senin işin.' },
-      { key: 'B', label: 'Sözünü keser, kendi sorularınıza geçmesini istersiniz.', outcome: 'wrong', feedback: 'Mentoru kesmek ilişkiye zarar verir. Sabırla dinleyin, doğal ara noktada yönlendirin.' },
+      { key: 'B', label: 'Sözünü keser, kendi sorularınıza geçmesini istersiniz.', outcome: 'wrong', feedback: 'Mentörü kesmek ilişkiye zarar verir. Sabırla dinleyin, doğal ara noktada yönlendirin.' },
       { key: 'C', label: 'Tamamen pasif dinler, hiç soru sormaz, gündem boşa gider.', outcome: 'warn', feedback: 'Pasif kalmak fırsatı kaçırır. Her 10 dakikada bir bağlantı sorusu sorun.' },
     ],
   },
   {
     id: '4',
-    situationText: 'Görüşme sonunda mentorunuz "sana yardımcı olabilirim" dedi.',
+    situationText: 'Görüşme sonunda mentörünüz "sana yardımcı olabilirim" dedi.',
     question: 'Bu söz için ne yaparsınız?',
     choices: [
       { key: 'A', label: 'Teşekkür eder, bir sonraki görüşme için somut bir soru hazırlayacağınızı söylersiniz.', outcome: 'correct', feedback: 'Harika! Belirsiz "yardım" vaadi somut takiple anlam kazanır.' },

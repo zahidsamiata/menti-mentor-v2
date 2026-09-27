@@ -24,7 +24,7 @@ const TEMPLATES: Array<{
     value: 'MEZUN',
     icon: GraduationCap,
     title: 'Mezun Mentörlüğü',
-    description: 'Mezunların aktif üyelerle birebir mentorlük yapması.',
+    description: 'Mezunların aktif üyelerle birebir mentörlük yapması.',
     bullets: ['Kariyer yönlendirme odaklı', 'Uzun soluklu eşleşmeler', 'Etki raporu dahil'],
   },
   {

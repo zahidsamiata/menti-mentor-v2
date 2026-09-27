@@ -25,6 +25,7 @@ import { authApi } from '@/lib/api/auth';
 import { loginSchema, type LoginFormValues } from '@/lib/validation';
 import { resolveLoginError } from '@/lib/loginMessages';
 import { clearPendingCorrectionNote, storePendingCorrectionNote } from '@/lib/pendingCorrectionNote';
+import { UI_TEXT } from '@/lib/uiText';
 
 interface LoginFormProps {
   /** OAuth düğmeleri için tenant slug (URL'den okunur) */
@@ -136,7 +137,7 @@ export function LoginForm({ tenantSlug }: LoginFormProps) {
             </div>
             {reapplyError && <AlertMessage type="error" message={reapplyError} />}
             <Button className="w-full" onClick={handleReapply} disabled={reapplyStatus === 'loading'}>
-              {reapplyStatus === 'loading' ? 'Gönderiliyor…' : 'Tekrar Başvur'}
+              {reapplyStatus === 'loading' ? UI_TEXT.status.sending : 'Tekrar Başvur'}
             </Button>
             <button
               type="button"
