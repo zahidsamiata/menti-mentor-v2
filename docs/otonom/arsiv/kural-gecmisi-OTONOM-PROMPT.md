@@ -213,3 +213,10 @@ Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI
 UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
 OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB).
 ```
+
+## 7b MERGE ŞARTLARI · (a) maddesi · eski satır 322-323 · taşındı 2026-09-27 (mutasyon kutusu istisnası eklendi, 7b #381 S5)
+
+```text
+ (a) Bölüm 6 kutuları tam — "auth/KVKK/matching dosyalarına dokunulmadı" maddesi HARİÇ
+     (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar).
+```

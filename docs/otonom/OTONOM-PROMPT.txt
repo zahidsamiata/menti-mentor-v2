@@ -320,7 +320,7 @@ Karantina 🔵 olur; gerçek silme (silme protokolünün son adımı) 🔴 kalı
    %34'u curudu (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` § Ozet).
 🟢 bir iş şu şartlarla merge edilir; biri eksikse PR-ACIK + eksik şart yazılır:
  (a) Bölüm 6 kutuları tam — "auth/KVKK/matching dosyalarına dokunulmadı" maddesi HARİÇ
-     (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar).
+     (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar). MUTASYON KANITI kutusu boşsa Bölüm 6'daki istisna geçerli (merge edilir, Durum "BITTI (kısmen …)", satır kuyrukta kalır).
  (b) HASSAS DOSYA (auth/yetki · KVKK/rıza · matching/skorlama) değişiyorsa: işi YAZMAYAN bir
      inceleme alt-ajanının PR'a yazdığı "Bağımsız inceleme kaydı" yorumu, "SONUÇ: ONAY" ile
      biten. İnceleme şunlara bakar: kapsam · güvenlik listesi (CLAUDE.md § Güvenlik Kuralları) ·
