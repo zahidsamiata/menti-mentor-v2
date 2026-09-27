@@ -23,15 +23,38 @@ const WEEKDAYS = [
 ] as const;
 
 type Weekday = typeof WEEKDAYS[number]['value'];
+type Format = 'ONLINE' | 'IN_PERSON' | 'PHONE';
 
-interface Block { weekday: Weekday; startTime: string; endTime: string }
+// K-15 (KARAR-1 → A): mentör slot açarken görüşme formatını da seçer — menti artık bunu
+// serbest seçemez, yalnız mentörün tanımladığı slotu (dolayısıyla formatı) seçer.
+const FORMATS: ReadonlyArray<{ value: Format; label: string }> = [
+  { value: 'ONLINE',    label: 'Online' },
+  { value: 'IN_PERSON', label: 'Yüz yüze' },
+  { value: 'PHONE',     label: 'Telefon' },
+];
+const FORMAT_LABEL: Record<Format, string> = Object.fromEntries(
+  FORMATS.map(({ value, label }) => [value, label])
+) as Record<Format, string>;
+
+// Backend sınırıyla AYNI (meetingController.ts MIN/MAX_BLOCK_DURATION_MIN) — tek yerde
+// tutulmadığı için burada da açıkça not düşülür: değişirse ikisi birden güncellenir.
+const MIN_DURATION_MIN = 15;
+const MAX_DURATION_MIN = 240;
+const DEFAULT_DURATION_MIN = 60;
+
+interface Block { weekday: Weekday; startTime: string; endTime: string; format: Format; durationMin: number }
 
 const WEEKDAY_LABEL: Record<Weekday, string> = Object.fromEntries(
   WEEKDAYS.map(({ value, label }) => [value, label])
 ) as Record<Weekday, string>;
 
 /** Aynı aralığın iki kez listelenmemesi için tekilleştirme anahtarı. */
-const blockKey = (b: Block) => `${b.weekday}|${b.startTime}|${b.endTime}`;
+const blockKey = (b: Block) => `${b.weekday}|${b.startTime}|${b.endTime}|${b.format}|${b.durationMin}`;
+
+function toMinutes(hhmm: string): number {
+  const [h, m] = hhmm.split(':').map(Number);
+  return (h ?? 0) * 60 + (m ?? 0);
+}
 
 export default function AvailabilityPage() {
   const { user, isLoading } = useAuth();
@@ -59,7 +82,10 @@ export default function AvailabilityPage() {
   );
 
   const [blocks, setBlocks] = useState<Block[]>([]);
-  const [newBlock, setNewBlock] = useState<Block>({ weekday: 'MON', startTime: '09:00', endTime: '17:00' });
+  const [newBlock, setNewBlock] = useState<Block>({
+    weekday: 'MON', startTime: '09:00', endTime: '17:00',
+    format: 'ONLINE', durationMin: DEFAULT_DURATION_MIN,
+  });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -86,11 +112,15 @@ export default function AvailabilityPage() {
     hydratedRef.current = true;
 
     // Sunucu satırları Prisma alanlarını da taşır (id/tenantId/timezone…);
-    // forma yalnız bu üç alan girer, kaydederken de yalnız bu üçü geri gider.
-    const serverBlocks: Block[] = (data.blocks as Block[]).map((b) => ({
-      weekday:   b.weekday,
-      startTime: b.startTime,
-      endTime:   b.endTime,
+    // forma yalnız bu alanlar girer, kaydederken de yalnız bunlar geri gider.
+    const serverBlocks: Block[] = (data.blocks as Array<Partial<Block>>).map((b) => ({
+      weekday:     b.weekday as Weekday,
+      startTime:   b.startTime as string,
+      endTime:     b.endTime as string,
+      // K-15: eski/kısmi kayıtlarda format/durationMin gelmemiş olabilir — şema
+      // varsayılanıyla (ONLINE/60dk) AYNI değeri burada da uygularız.
+      format:      b.format ?? 'ONLINE',
+      durationMin: b.durationMin ?? DEFAULT_DURATION_MIN,
     }));
     const serverKeys = new Set(serverBlocks.map(blockKey));
 
@@ -112,6 +142,14 @@ export default function AvailabilityPage() {
   function addBlock() {
     if (newBlock.startTime >= newBlock.endTime) {
       setError('Başlangıç saati bitiş saatinden önce olmalı.');
+      return;
+    }
+    if (!Number.isInteger(newBlock.durationMin) || newBlock.durationMin < MIN_DURATION_MIN || newBlock.durationMin > MAX_DURATION_MIN) {
+      setError(`Süre ${MIN_DURATION_MIN}-${MAX_DURATION_MIN} dakika arasında olmalı.`);
+      return;
+    }
+    if (newBlock.durationMin > toMinutes(newBlock.endTime) - toMinutes(newBlock.startTime)) {
+      setError('Süre, aralığın kendisinden uzun olamaz.');
       return;
     }
     setBlocks((prev) => [...prev, { ...newBlock }]);
@@ -246,6 +284,38 @@ export default function AvailabilityPage() {
               />
             </div>
           </div>
+          {/* K-15 (KARAR-1 → A): format+süre artık mentörün tanımı — menti bu ikisini
+              kendi seçemez, yalnız mentörün açtığı slotu (dolayısıyla format+süresini) seçer. */}
+          <div className="space-y-1">
+            <label className="text-sm font-medium" id="new-block-format-label">Görüşme Formatı</label>
+            <div className="grid grid-cols-3 gap-2" role="group" aria-labelledby="new-block-format-label">
+              {FORMATS.map(({ value, label }) => (
+                <button
+                  key={value}
+                  type="button"
+                  aria-pressed={newBlock.format === value}
+                  onClick={() => setNewBlock((b) => ({ ...b, format: value }))}
+                  className={`rounded-xl border p-2 text-xs transition-colors ${newBlock.format === value ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-1">
+            <label htmlFor="new-block-duration" className="text-sm font-medium">Süre (dakika)</label>
+            <input
+              id="new-block-duration"
+              type="number"
+              min={MIN_DURATION_MIN}
+              max={MAX_DURATION_MIN}
+              step={5}
+              value={newBlock.durationMin}
+              onChange={(e) => setNewBlock((b) => ({ ...b, durationMin: Number(e.target.value) }))}
+              className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
+            />
+            <p className="text-xs text-muted-foreground">Menti bu aralıktan yalnız bu süreyle görüşme talep edebilir.</p>
+          </div>
           <Button onClick={addBlock} variant="outline" className="w-full">+ Ekle</Button>
         </CardContent>
       </Card>
@@ -284,6 +354,7 @@ export default function AvailabilityPage() {
                   <span className="text-sm">
                     <span className="font-medium">{WEEKDAY_LABEL[blk.weekday]}</span>
                     {' '}{blk.startTime}–{blk.endTime}
+                    {' · '}{FORMAT_LABEL[blk.format]}, {blk.durationMin} dk
                   </span>
                   <button
                     onClick={() => removeBlock(i)}

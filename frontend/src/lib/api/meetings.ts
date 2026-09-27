@@ -100,6 +100,12 @@ export interface AvailabilityBlock {
   weekday: string;
   startTime: string;
   endTime: string;
+  // K-15 (KARAR-1 → A): mentör artık bloğu açarken format+süreyi de tanımlar. Backend
+  // şema varsayılanıyla (ONLINE/60dk) her zaman dolu döner — opsiyonel değil; yine de
+  // eski/kısmi mock verisiyle çalışan testler kırılmasın diye tüketen kod tarafında
+  // (meetingAvailability.ts) yokmuş gibi de davranılabilir.
+  format?: 'ONLINE' | 'IN_PERSON' | 'PHONE';
+  durationMin?: number;
 }
 
 export interface AvailabilityResponse {
@@ -120,7 +126,11 @@ export interface BookMeetingPayload {
 }
 
 export interface SaveAvailabilityPayload {
-  blocks: { weekday: string; startTime: string; endTime: string }[];
+  blocks: {
+    weekday: string; startTime: string; endTime: string;
+    // K-15: gönderilmezse backend şema varsayılanını (ONLINE/60dk) uygular.
+    format?: 'ONLINE' | 'IN_PERSON' | 'PHONE'; durationMin?: number;
+  }[];
 }
 
 /** GET /api/meetings/weekly-limit — kurumun haftalık görüşme sıklığı (madde 156). null = ayar yok. */

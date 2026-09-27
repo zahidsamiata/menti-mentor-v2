@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useId, useMemo, useState } from 'react';
+import { Suspense, useEffect, useId, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
@@ -14,23 +14,31 @@ import {
   BOOKING_WINDOW_DAYS,
   DEFAULT_AVAILABILITY_TIMEZONE,
   fitsAvailability,
+  filterBlocksByOffer,
   groupSlotsByDay,
+  listAvailabilityOffers,
   listBookableSlots,
   weekdayLabelTr,
   type AvailabilityBlockLike,
+  type AvailabilityOffer,
 } from '@/lib/meetingAvailability';
 import { conversationsApi } from '@/lib/api/conversations';
 import { UI_TEXT } from '@/lib/uiText';
 
-const FORMATS = [
-  { value: 'ONLINE'    as const, label: 'Online (video)' },
-  { value: 'IN_PERSON' as const, label: 'Yüz yüze' },
-  { value: 'PHONE'     as const, label: 'Telefon' },
-];
-const DURATIONS = [30, 45, 60, 90];
+// K-15 (KARAR-1 → A): format artık menti'nin SERBEST seçimi değil, mentörün slotuna bağlı —
+// bu yalnız GÖRÜNTÜLEME etiketleri için kalır (aşağıdaki FORMAT_LABEL).
+const FORMAT_LABEL: Record<'ONLINE' | 'IN_PERSON' | 'PHONE', string> = {
+  ONLINE:    'Online (video)',
+  IN_PERSON: 'Yüz yüze',
+  PHONE:     'Telefon',
+};
 
 function addMinutes(date: Date, minutes: number): Date {
   return new Date(date.getTime() + minutes * 60_000);
+}
+
+function offerLabel(offer: AvailabilityOffer): string {
+  return `${FORMAT_LABEL[offer.format]} · ${offer.durationMin} dk`;
 }
 
 function BookMeetingContent() {
@@ -54,11 +62,9 @@ function BookMeetingContent() {
   const hasAvailabilityBlocks = (availability?.blocks?.length ?? 0) > 0;
   const noAvailabilityConfirmed = !availabilityLoading && availability !== null && !hasAvailabilityBlocks;
 
-  const [format, setFormat]           = useState<'ONLINE' | 'IN_PERSON' | 'PHONE'>('ONLINE');
   // K-05b: serbest tarih+saat yerine mentörün müsait aralıklarından üretilen başlangıç anı (ISO).
   const [selectedDay, setSelectedDay]   = useState('');
   const [selectedSlot, setSelectedSlot] = useState('');
-  const [duration, setDuration]       = useState(60);
   const [location, setLocation]       = useState('');
   const [requestMessage, setMsg]      = useState('');
   const [submitting, setSubmitting]   = useState(false);
@@ -95,31 +101,67 @@ function BookMeetingContent() {
     () => ((availability?.blocks ?? []) as AvailabilityBlockLike[]),
     [availability],
   );
-  const displayTimeZone = blocks.find((b) => b.timezone)?.timezone || DEFAULT_AVAILABILITY_TIMEZONE;
+
+  // K-15 (KARAR-1 → A): mentör slot açarken format+süreyi de belirler — menti kendi
+  // format/süresini DAYATAMAZ, yalnız mentörün sunduğu (format, süre) kombinasyonlarından
+  // ("teklif") birini seçer. Tek teklif varsa (yaygın durum) otomatik seçilir; menti hiçbir
+  // ek tıklama yapmadan doğrudan saat seçimine geçer.
+  const offers = useMemo(() => listAvailabilityOffers(blocks), [blocks]);
+  const [selectedOffer, setSelectedOffer] = useState<AvailabilityOffer | null>(null);
+
+  useEffect(() => {
+    setSelectedOffer((prev) => {
+      if (prev && offers.some((o) => o.format === prev.format && o.durationMin === prev.durationMin)) {
+        return prev;
+      }
+      return offers.length === 1 ? offers[0]! : null;
+    });
+  }, [offers]);
+
+  function chooseOffer(offer: AvailabilityOffer) {
+    setSelectedOffer(offer);
+    setLocation('');
+    // Süre/format değişince eski gün+saat seçimi artık geçersiz olabilir — düşürülür
+    // (aksi halde eski seçim, yeni teklife uymayan bir anla sessizce gönderilebilirdi).
+    setSelectedDay('');
+    setSelectedSlot('');
+  }
+
+  const blocksForOffer = useMemo(
+    () => (selectedOffer ? filterBlocksByOffer(blocks, selectedOffer) : []),
+    [blocks, selectedOffer],
+  );
+  const displayTimeZone = blocksForOffer.find((b) => b.timezone)?.timezone || DEFAULT_AVAILABILITY_TIMEZONE;
   const slotGroups = useMemo(
-    () => groupSlotsByDay(listBookableSlots({ blocks, durationMinutes: duration, now: new Date() }), displayTimeZone),
-    [blocks, duration, displayTimeZone],
+    () => groupSlotsByDay(
+      listBookableSlots({ blocks: blocksForOffer, durationMinutes: selectedOffer?.durationMin ?? 0, now: new Date() }),
+      displayTimeZone,
+    ),
+    [blocksForOffer, selectedOffer, displayTimeZone],
   );
   // Süre değişince seçili saat artık sığmıyorsa seçim düşer (eski seçim sessizce gönderilmesin).
   const activeGroup = slotGroups.find((g) => g.dayKey === selectedDay) ?? null;
   const activeSlot  = activeGroup?.slots.find((s) => s.iso === selectedSlot) ?? null;
 
   const selectedStart = activeSlot ? new Date(activeSlot.iso) : null;
-  const selectedEnd   = selectedStart ? addMinutes(selectedStart, duration) : null;
+  const selectedEnd   = selectedStart && selectedOffer ? addMinutes(selectedStart, selectedOffer.durationMin) : null;
 
   // KR-12: kontrol, backend ile aynı kuralla blok saat diliminde (vars. Europe/Istanbul) yapılır.
+  // Slot, bloksForOffer'dan (seçili teklifle eşleşen bloklar) üretildiği için bu esasen bir
+  // savunma katmanıdır — backend AYRICA format+süreyi kendi tarafında yeniden doğrular.
   const isFitAvailability =
-    !selectedStart || !selectedEnd || !availability?.blocks?.length
+    !selectedStart || !selectedEnd || !blocksForOffer.length
       ? true
-      : fitsAvailability(selectedStart, selectedEnd, availability.blocks as AvailabilityBlockLike[]);
+      : fitsAvailability(selectedStart, selectedEnd, blocksForOffer);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!user || !selectedStart || !selectedEnd || !isFitAvailability) return;
+    if (!user || !selectedOffer || !selectedStart || !selectedEnd || !isFitAvailability) return;
     if (!msgValid) {
       setError('Niyet mesajı 50-500 karakter arasında olmalıdır.');
       return;
     }
+    const format = selectedOffer.format;
     setSubmitting(true); setError(null);
     const result = await meetingsApi.bookMeeting(api, {
       mentorUserId: mentorId, matchId, format,
@@ -199,44 +241,47 @@ function BookMeetingContent() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && <AlertMessage type="error" message={error} />}
-            <div className="space-y-2">
-              <label className="text-sm font-medium" id="meeting-format-label">Görüşme Formatı</label>
-              {/* AJ-07: aşağıdaki gün/saat seçim butonlarıyla aynı aile (KOMŞU UÇ) — orada
-                  role="group"/aria-pressed vardı, burada eksikti; hizalandı. */}
-              <div className="grid grid-cols-3 gap-2" role="group" aria-labelledby="meeting-format-label">
-                {FORMATS.map(({ value, label }) => (
-                  <button key={value} type="button" onClick={() => { setFormat(value); setLocation(''); }}
-                    aria-pressed={format === value}
-                    className={`rounded-xl border p-2.5 text-xs transition-colors ${format === value ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}>
-                    {label}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium" id="meeting-duration-label">Süre</label>
-              <div className="flex gap-2" role="group" aria-labelledby="meeting-duration-label">
-                {DURATIONS.map((d) => (
-                  <button key={d} type="button" onClick={() => setDuration(d)}
-                    aria-pressed={duration === d}
-                    className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${duration === d ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}>
-                    {d} dk
-                  </button>
-                ))}
+            {/* K-15 (KARAR-1 → A): format+süre artık mentörün slot tanımı — menti yalnız
+                mentörün sunduğu bir "görüşme türü" seçer, kendi format/süresini yazamaz.
+                Mentör tek tür sunuyorsa (yaygın durum) seçim otomatik yapılır, hiçbir
+                buton gösterilmez. */}
+            {offers.length > 1 && (
+              <div className="space-y-2">
+                <label className="text-sm font-medium" id="meeting-offer-label">Görüşme Türü</label>
+                <div className="grid grid-cols-2 gap-2" role="group" aria-labelledby="meeting-offer-label">
+                  {offers.map((offer) => {
+                    const active = selectedOffer?.format === offer.format && selectedOffer?.durationMin === offer.durationMin;
+                    return (
+                      <button key={`${offer.format}|${offer.durationMin}`} type="button"
+                        onClick={() => chooseOffer(offer)}
+                        aria-pressed={active}
+                        className={`rounded-xl border p-2.5 text-xs transition-colors ${active ? 'border-primary bg-primary/10 font-medium' : 'border-border hover:bg-muted'}`}>
+                        {offerLabel(offer)}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
+            {offers.length === 1 && selectedOffer && (
+              <p className="text-xs text-muted-foreground">
+                Görüşme: {offerLabel(selectedOffer)} — mentörünüzün bu aralık için belirlediği format ve süre.
+              </p>
+            )}
 
             {/* K-05b: "Menti müsait olmayan saati SEÇEMİYOR" — serbest tarih/saat girişi kaldırıldı;
-                yalnız mentörün müsait bloklarına (süresiyle birlikte) sığan, geçmemiş başlangıç
+                yalnız mentörün müsait bloklarına (seçili görüşme türüyle) sığan, geçmemiş başlangıç
                 saatleri listelenir. Saatler blok saat diliminde (vars. Europe/Istanbul) gösterilir. */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Tarih ve Saat</label>
               {!hasAvailabilityBlocks ? (
                 <p className="text-sm text-muted-foreground">Müsait saatler yükleniyor…</p>
+              ) : !selectedOffer ? (
+                <p className="text-sm text-muted-foreground">Önce bir görüşme türü seçin.</p>
               ) : slotGroups.length === 0 ? (
                 <p className="text-sm text-muted-foreground" data-testid="no-bookable-slots">
-                  Önümüzdeki {BOOKING_WINDOW_DAYS} gün içinde bu süreye uygun müsait saat yok. Daha kısa bir süre seçebilir ya da mentörünüze mesaj gönderebilirsiniz.
+                  Önümüzdeki {BOOKING_WINDOW_DAYS} gün içinde bu türe uygun müsait saat yok. Mentörünüze mesaj gönderebilirsiniz.
                 </p>
               ) : (
                 <>
@@ -269,21 +314,21 @@ function BookMeetingContent() {
               )}
             </div>
 
-            {format === 'ONLINE' ? (
+            {selectedOffer?.format === 'ONLINE' ? (
               // KARAR-7 (A): online toplantı linkini mentör, onayda girer — menti burada girmez.
               <p className="text-xs text-muted-foreground">
                 Görüşme bağlantısını mentörünüz, talebinizi onaylarken paylaşacak.
               </p>
-            ) : (
+            ) : selectedOffer ? (
               <div className="space-y-1">
                 <label htmlFor={locationId} className="text-sm font-medium">
-                  {format === 'IN_PERSON' ? 'Görüşme Yeri' : 'Telefon Numarası'}
+                  {selectedOffer.format === 'IN_PERSON' ? 'Görüşme Yeri' : 'Telefon Numarası'}
                 </label>
                 <input id={locationId} type="text" value={location} onChange={(e) => setLocation(e.target.value)}
-                  placeholder={format === 'IN_PERSON' ? 'Örn: Kadıköy, İstanbul' : '+90 5xx xxx xx xx'}
+                  placeholder={selectedOffer.format === 'IN_PERSON' ? 'Örn: Kadıköy, İstanbul' : '+90 5xx xxx xx xx'}
                   className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm" />
               </div>
-            )}
+            ) : null}
 
             <div className="space-y-1">
               <label htmlFor={messageId} className="text-sm font-medium">
@@ -315,7 +360,7 @@ function BookMeetingContent() {
             </div>
 
             {/* K-05/K-05b: seçim yapılmadan ya da (savunma amaçlı) blok dışı bir anla gönderilemez. */}
-            <Button type="submit" className="w-full" disabled={submitting || !selectedStart || !msgValid || !isFitAvailability}>
+            <Button type="submit" className="w-full" disabled={submitting || !selectedOffer || !selectedStart || !msgValid || !isFitAvailability}>
               {submitting ? UI_TEXT.status.sending : 'Görüşme Talebini Gönder'}
             </Button>
             <p className="text-xs text-muted-foreground text-center">Talebiniz mentöre iletilecek, onaylaması gerekiyor.</p>
