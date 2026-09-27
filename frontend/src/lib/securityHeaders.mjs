@@ -4,13 +4,14 @@
  * Neden `.mjs`: `next.config.mjs` bu dosyayı build sırasında doğrudan içe aktarır (TS derlenmez);
  * birim testi de aynı fonksiyonu `@/lib/securityHeaders.mjs` üzerinden sınar.
  *
- * ── Neden REPORT-ONLY ────────────────────────────────────────────────────────────
- * Başlık `Content-Security-Policy-Report-Only` olarak gönderilir: tarayıcı HİÇBİR ŞEYİ
- * ENGELLEMEZ, yalnız ihlali konsola yazar. Amaç, siteyi bozmadan politikanın gerçek trafikte
- * neyi yakalayacağını görmek. Enforce'a (engelleyen `Content-Security-Policy`) geçiş, konsol
- * raporları izlendikten sonra `CSP_HEADER_NAME` değiştirilerek yapılır (PR açıklamasındaki adımlar).
- * ⚠️ Tarayıcılar report-only modunda `frame-ancestors`'u YOK SAYAR — tıklama tuzağı (clickjacking)
- * koruması ancak enforce'ta devreye girer.
+ * ── Neden ZORUNLU (enforce) — AJ-22 ─────────────────────────────────────────────
+ * Başlık `Content-Security-Policy` olarak gönderilir: politikaya uymayan kaynak tarayıcıda
+ * ENGELLENİR. Önceki rapor modu (`...-Report-Only`) hiçbir şeyi engellemiyordu ve ihlal raporu
+ * hiçbir yere toplanmıyordu (hazırlık: `docs/raporlar/kesif/csp-zorunlu-mod-hazirlik-2026-09-27.md`).
+ * Geçişte script-src/style-src içeriği DEĞİŞMEDİ ('unsafe-inline' korunur) → Next.js satır içi
+ * betikleri enforce'ta da çalışır; yeni engelleme yalnız dış kaynak listelerinde olur.
+ * `frame-ancestors 'none'` artık etkindir (report-only'de tarayıcı bunu yok sayıyordu).
+ * Acil geri dönüş: `CSP_HEADER_NAME`'i yeniden `Content-Security-Policy-Report-Only` yapmak.
  *
  * ── Kaynak kararları (koddan çıkarıldı) ─────────────────────────────────────────
  * - script: Next App Router sayfaya satır içi `<script>` (self.__next_f.push…) basar;
@@ -20,9 +21,14 @@
  * - style: Tailwind derlenmiş CSS ('self') + next/font ve React `style={}` satır içi → `'unsafe-inline'`.
  * - font: `next/font/google` (Inter) fontu build'de indirip kendi origin'inden sunar → yalnız 'self'.
  *   Google Fonts'a çalışma zamanı isteği YOK.
- * - img: next/image `/_next/image` ('self') + ham `<img>` ile çizilen https kurum logoları
- *   (TenantSwitcher, marka önizleme) → `next.config.mjs` `images.remotePatterns` ile AYNI host listesi
- *   + backend origin (`/uploads` avatarları) + `data:`/`blob:`.
+ * - img: next/image `/_next/image` ('self') + backend origin (`/uploads` avatarları) + `data:`/`blob:`
+ *   + ŞEMA düzeyinde `https:`. Neden host listesi değil: kurum logosu (`<img>`: TenantSwitcher,
+ *   marka önizleme) kurumun kendi https CDN'inde olabilir ve alan adı kısıtlanmadı (AJ-05);
+ *   host listesiyle enforce logoları sessizce kırardı. Kaynak denetimi backend yazma katmanındadır
+ *   (`backend/src/services/logoUrl.ts`: yalnız https, IP/localhost/özel ağ/port/userinfo reddi,
+ *   görsel uzantısı). `http:`/`javascript:`/diğer şemalar engellenir. Host listesine daraltmak
+ *   ürün kararı ister (izinli görsel alan adları). `images.remotePatterns` (next/image) ayrı ve
+ *   hâlâ host listesiyle (`resolveImageDomains`) sınırlıdır.
  * - connect: kendi origin + backend API (`NEXT_PUBLIC_API_URL`).
  * - form-action: tüm formlar JS `onSubmit` ile gönderilir; OAuth `window.location.assign` ile
  *   backend'e YÖNLENDİRME'dir (form gönderimi değil) → 'self' yeterli.
@@ -32,10 +38,10 @@
  *   kaynaklar rapor modunda dahi hiçbir isteğe yol açmaz; anahtar girilince aktifleşir.
  */
 
-/** Şu an gönderilen başlık adı. Enforce'a geçişte `Content-Security-Policy` yapılır. */
-export const CSP_HEADER_NAME = 'Content-Security-Policy-Report-Only';
+/** Gönderilen başlık adı — engelleyen (enforce) mod. */
+export const CSP_HEADER_NAME = 'Content-Security-Policy';
 
-/** OAuth avatar hostları — `images.remotePatterns` ile paylaşılır (tek liste). */
+/** OAuth avatar hostları — `images.remotePatterns` (next/image) listesi. */
 export const DEFAULT_IMAGE_DOMAINS = [
   'avatars.githubusercontent.com', // GitHub OAuth avatar'ları
   'lh3.googleusercontent.com', // Google OAuth avatar'ları
@@ -70,20 +76,19 @@ export function apiOrigin(apiUrl) {
 
 /**
  * CSP metnini üretir.
- * @param {{ apiUrl?: string, imageDomains?: string[], isDev?: boolean }} options
+ * @param {{ apiUrl?: string, isDev?: boolean }} options
  * @returns {string}
  */
-export function buildContentSecurityPolicy({ apiUrl, imageDomains = DEFAULT_IMAGE_DOMAINS, isDev = false } = {}) {
+export function buildContentSecurityPolicy({ apiUrl, isDev = false } = {}) {
   const api = apiOrigin(apiUrl);
   const apiSources = api ? [api] : [];
-  const imageHosts = imageDomains.map((host) => `https://${host}`);
 
   /** @type {Record<string, string[]>} */
   const directives = {
     'default-src': ["'self'"],
     'script-src': ["'self'", "'unsafe-inline'", 'https://challenges.cloudflare.com', ...(isDev ? ["'unsafe-eval'"] : [])],
     'style-src': ["'self'", "'unsafe-inline'"],
-    'img-src': ["'self'", 'data:', 'blob:', ...apiSources, ...imageHosts],
+    'img-src': ["'self'", 'data:', 'blob:', ...apiSources, 'https:'],
     'font-src': ["'self'"],
     'connect-src': ["'self'", ...apiSources],
     'frame-src': ['https://challenges.cloudflare.com'],
@@ -100,7 +105,7 @@ export function buildContentSecurityPolicy({ apiUrl, imageDomains = DEFAULT_IMAG
 
 /**
  * `next.config.mjs` `headers()` için başlık listesi.
- * @param {{ apiUrl?: string, imageDomains?: string[], isDev?: boolean }} options
+ * @param {{ apiUrl?: string, isDev?: boolean }} options
  * @returns {{ key: string, value: string }[]}
  */
 export function buildSecurityHeaders(options = {}) {

@@ -27,9 +27,8 @@ const nextConfig = (phase) => ({
   },
 
   /**
-   * F-04 (G1-23) — İçerik Güvenlik Politikası, şimdilik YALNIZ RAPOR modunda
-   * (`Content-Security-Policy-Report-Only`): hiçbir şeyi engellemez, ihlali konsola yazar.
-   * Değerler build anında sabitlenir (NEXT_PUBLIC_API_URL / TENANT_IMAGE_DOMAINS build argümanı).
+   * F-04 (G1-23) / AJ-22 — İçerik Güvenlik Politikası ENGELLEYEN modda (`Content-Security-Policy`).
+   * Değerler build anında sabitlenir (NEXT_PUBLIC_API_URL build argümanı). Ayrıntı: `src/lib/securityHeaders.mjs`.
    */
   async headers() {
     return [
@@ -37,7 +36,6 @@ const nextConfig = (phase) => ({
         source: '/:path*',
         headers: buildSecurityHeaders({
           apiUrl: process.env.NEXT_PUBLIC_API_URL,
-          imageDomains: resolveImageDomains(process.env.TENANT_IMAGE_DOMAINS),
           isDev: phase === PHASE_DEVELOPMENT_SERVER,
         }),
       },
@@ -51,7 +49,7 @@ const nextConfig = (phase) => ({
  */
 function buildImagePatterns() {
   // Varsayılan OAuth avatar hostları (GitHub/Google/LinkedIn) + TENANT_IMAGE_DOMAINS —
-  // liste `src/lib/securityHeaders.mjs`'te; CSP img-src ile AYNI kaynaktan beslenir.
+  // liste `src/lib/securityHeaders.mjs`'te. (CSP img-src artık şema düzeyinde `https:`; AJ-22.)
   const patterns = resolveImageDomains(process.env.TENANT_IMAGE_DOMAINS).map((hostname) => ({
     protocol: /** @type {'https'} */ ('https'),
     hostname,
