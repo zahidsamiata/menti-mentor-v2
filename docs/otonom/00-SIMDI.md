@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 13:45 UTC · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 15:20 UTC · çatı main HEAD `191a256` (+ bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
 
-**Durum:** DURDU (K1-a) — kuyrukta hemen yapılabilir 🟢 yok; kalanlar karar / PO eli / 🔵 EVET bekliyor. Gerekçe ve liste: `02-ILERLEME.md` başındaki 2026-09-27 TUR ÖZETİ.
+**Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
 
-**Şu an yapılan:** yok — PO cevapları (🔵 KARAR-106/107/111 ve 96-99; ⭐ KARAR-101) gelince devam. Sonraki tur: 🔵 merge'ler (yedekle) + hazırlanabilir 🔵 adaylar (AN-27 · P-08 · I-08 · E-4).
+**Şu an yapılan:** GÖREV A — 209 doğrulama birimi, 11 parti (R1: 01-04 opus · R2/R3: 05-11 sonnet), en fazla 3 paralel salt-okuma alt-ajanı. Parti dosyaları: `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/` (dal `otonom/BITTI-DOGRULAMA-20260927`).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
