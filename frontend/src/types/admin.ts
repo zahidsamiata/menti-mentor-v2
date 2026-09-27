@@ -111,6 +111,27 @@ export interface BlockPairResponse {
   totalBlockedPairs: number;
 }
 
+// E-3d takip: liste (GET /block-pairs) + kaldırma (DELETE /block-pair/:pairId).
+// `pairId` yön bağımsız, backend'in fromUserId/toUserId'den türettiği anahtar
+// (ayrı bir id sütunu yok — bkz. backend services/blockList.ts pairKey).
+export interface BlockedPairListItem {
+  pairId:    string;
+  fromUser:  { id: string; fullName: string | null };
+  toUser:    { id: string; fullName: string | null };
+  blockedAt: string;
+  blockedByName: string | null;
+}
+
+export interface BlockedPairsListResponse {
+  items: BlockedPairListItem[];
+  total: number;
+}
+
+export interface UnblockPairResponse {
+  message: string;
+  totalBlockedPairs: number;
+}
+
 export type AdminMatchesResponse = PaginatedResponse<AdminMatch>;
 
 // ─── Sertifika Sonuç Panosu (A4) ─────────────────────────────────────────────

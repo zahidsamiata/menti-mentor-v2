@@ -3,11 +3,12 @@
 /**
  * Çifti Engelle Paneli (E-3d, KR-19)
  *
- * Kurum yöneticisi bir mentör + bir menti seçip aralarındaki eşleşmeyi kapatır.
- * KR-19/KR-19b sayesinde backend bu engeli dört yüzeyde iki yönlü uygular:
- * liste (matching), mesaj (konuşma), randevu (görüşme), anlaşma. Bu panel yalnız
- * engeli KOYAR — KALDIRAN veya MEVCUT engelleri LİSTELEYEN bir backend ucu yok
- * (E-3d denetimi, 2026-09-27); o iş ayrı bir uç ister, burada kapsam dışı.
+ * Kurum yöneticisi bir mentör + bir menti seçip aralarındaki eşleşmeyi kapatır,
+ * mevcut engelleri görür ve istediğinde kaldırır. KR-19/KR-19b sayesinde backend
+ * bu engeli dört yüzeyde iki yönlü uygular: liste (matching), mesaj (konuşma),
+ * randevu (görüşme), anlaşma. Engel kaldırılınca çift bu dört yüzeyde de yeniden
+ * birbirine erişebilir (backend `pairKey` ile aynı yön-bağımsız kimlik — bkz.
+ * `adminApi.unblockPair`).
  *
  * Yetki: backend `authenticateTenantAdmin` zaten ADMIN zorunlu kılıyor; bu sayfa
  * `(admin)/layout.tsx` altında olduğu için ADMIN olmayan kullanıcı zaten
@@ -27,12 +28,20 @@ import { UI_TEXT } from '@/lib/uiText';
 export function BlockPairPanel() {
   const api = useApiClient();
   const { user } = useAuth();
+  const tenantId = user?.tenantId;
+
   const [open, setOpen] = useState(false);
   const [mentorId, setMentorId] = useState('');
   const [mentiId, setMentiId] = useState('');
   const [busy, setBusy] = useState(false);
+  const [removingId, setRemovingId] = useState<string | null>(null);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  const blocked = useQuery(
+    () => adminApi.listBlockedPairs(api, tenantId ?? ''),
+    [tenantId],
+    { enabled: !!tenantId, cacheKey: tenantId ? `admin:blocked-pairs:${tenantId}` : undefined },
+  );
   const mentors = useQuery(
     () => adminApi.listUsers(api, { role: 'MENTOR', approvalStatus: 'APPROVED' }),
     [open],
@@ -50,7 +59,7 @@ export function BlockPairPanel() {
   }
 
   async function handleBlock() {
-    if (!user?.tenantId || !mentorId || !mentiId) return;
+    if (!tenantId || !mentorId || !mentiId) return;
 
     const mentorName = mentors.data?.items.find((u) => u.id === mentorId)?.fullName ?? 'seçilen mentör';
     const mentiName = mentis.data?.items.find((u) => u.id === mentiId)?.fullName ?? 'seçilen menti';
@@ -62,25 +71,49 @@ export function BlockPairPanel() {
     if (!confirmed) return;
 
     setBusy(true);
-    const result = await adminApi.blockPair(api, user.tenantId, mentorId, mentiId);
+    const result = await adminApi.blockPair(api, tenantId, mentorId, mentiId);
     setBusy(false);
 
     if (result.ok) {
       notify('success', `${mentorName} ile ${mentiName} artık birbiriyle eşleşemez.`);
       setMentorId('');
       setMentiId('');
+      blocked.refetch();
     } else {
       notify('error', result.error.message ?? 'Engelleme başarısız oldu.');
     }
   }
 
+  async function handleUnblock(pairId: string, fromName: string | null, toName: string | null) {
+    if (!tenantId) return;
+
+    const a = fromName ?? 'birinci taraf';
+    const b = toName ?? 'ikinci taraf';
+    const confirmed = window.confirm(
+      `${a} ile ${b} arasındaki engeli kaldırmak istediğinize emin misiniz? ` +
+        'Kaldırıldıktan sonra bu çift birbirini yeniden listede görebilir, mesajlaşabilir, randevu alabilir.',
+    );
+    if (!confirmed) return;
+
+    setRemovingId(pairId);
+    const result = await adminApi.unblockPair(api, tenantId, pairId);
+    setRemovingId(null);
+
+    if (result.ok) {
+      notify('success', `${a} ile ${b} arasındaki engel kaldırıldı.`);
+      blocked.refetch();
+    } else {
+      notify('error', result.error.message ?? 'Engel kaldırılamadı.');
+    }
+  }
+
   return (
-    <div className="rounded-xl border p-4 space-y-3">
+    <div className="rounded-xl border p-4 space-y-4">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-sm font-medium">Çifti Engelle</p>
           <p className="text-xs text-muted-foreground">
-            Bir mentör ve bir mentiyi birbiriyle eşleşmeye kapatır.
+            Bir mentör ve bir mentiyi birbiriyle eşleşmeye kapatır; mevcut engelleri buradan kaldırabilirsiniz.
           </p>
         </div>
         <Button size="sm" variant="outline" onClick={() => setOpen((v) => !v)}>
@@ -88,11 +121,46 @@ export function BlockPairPanel() {
         </Button>
       </div>
 
-      {open && (
-        <div className="space-y-3 pt-1">
-          {msg && <AlertMessage type={msg.type} message={msg.text} />}
+      {msg && <AlertMessage type={msg.type} message={msg.text} />}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {/* Mevcut engeller — her zaman görünür, panel açık/kapalı fark etmez */}
+      <div className="space-y-2">
+        {blocked.isLoading && <p className="text-xs text-muted-foreground">{UI_TEXT.status.loading}</p>}
+        {blocked.error && <AlertMessage type="error" message={blocked.error} />}
+        {blocked.data && blocked.data.items.length === 0 && (
+          <p className="text-xs text-muted-foreground">Şu an engellenmiş bir çift yok.</p>
+        )}
+        {blocked.data && blocked.data.items.length > 0 && (
+          <div className="rounded-lg border divide-y divide-border">
+            {blocked.data.items.map((pair) => (
+              <div key={pair.pairId} className="flex items-center justify-between gap-3 px-3 py-2 text-sm">
+                <div className="min-w-0">
+                  <p className="truncate">
+                    <span className="font-medium">{pair.fromUser.fullName ?? 'Silinmiş kullanıcı'}</span>
+                    {' ↔ '}
+                    <span className="font-medium">{pair.toUser.fullName ?? 'Silinmiş kullanıcı'}</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {new Date(pair.blockedAt).toLocaleDateString('tr-TR')}
+                    {pair.blockedByName && ` · ${pair.blockedByName} engelledi`}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleUnblock(pair.pairId, pair.fromUser.fullName, pair.toUser.fullName)}
+                  disabled={removingId === pair.pairId}
+                  className="shrink-0 text-xs text-destructive hover:text-destructive/80 transition-colors disabled:opacity-50"
+                >
+                  {removingId === pair.pairId ? 'Kaldırılıyor…' : 'Engeli kaldır'}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {open && (
+        <div className="space-y-3 pt-1 border-t border-border">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
             <div>
               <label className="text-xs font-medium text-muted-foreground" htmlFor="block-pair-mentor">
                 Mentör
