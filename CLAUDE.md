@@ -29,8 +29,7 @@ Gerekçe: gerçek kullanıcı ~sıfır, her iş ayrı PR (tek tek revert edilebi
 **🟢 işler: doğrulama listesi tam geçerse MERGE EDİLİR, PO beklenmez.**
 Merge öncesi kontrol listesi — bir madde bile eksikse merge YOK, PR bırakılır:
 - [ ] `npm run verify` yeşil (backend tsc + tsc-test + eslint + frontend tsc + vitest + build + entegrasyon)
-- [ ] ⚠️ `TEST_DATABASE_URL` yoksa entegrasyon testleri guard'la DURUR → **bunu "yeşil" sayma.**
-      Bu durumda asıl kanıt CI'dır; CI yeşil değilse merge YOK. (KURAL 14: CI YEŞİL ≠ TEST KOŞTU)
+- [ ] Entegrasyon testleri gerçekten koştu — koşmadıysa kanıt CI'dır (§ verify ↔ CI farkı); CI yeşil değilse merge YOK.
 - [ ] CI iki repoda da yeşil (çatı + backend; backend CI yalnız main-hedefli PR'da koşar)
 - [ ] Şema/migration değişikliği YOK
 - [ ] seed komutu çalıştırılmadı
@@ -40,11 +39,8 @@ Merge öncesi kontrol listesi — bir madde bile eksikse merge YOK, PR bırakıl
 Merge sonrası: **submodule pointer'ını backend main HEAD'e re-bump et** (bkz. "Merge sonrası pointer bump").
 Merge sonrası `02-ILERLEME.md`'ye ekle: `CANLIDA BAK: <kullanıcı ne görmeli>`
 
-**4 renk (PO 2026-09-26)** — tam metin `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7 / 7b:
-- **🟢 işler**: ajan yapar + merge eder (varsayılan). Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa bağımsız inceleme "SONUÇ: ONAY" + negatif test şartı kendiliğinden eklenir.
-- **🔵 işler**: migration · seed · canlı veriye yazma · karantina → ajan hazırlar (PR + inceleme ONAY + `01-KARARLAR.md`'de EVET/HAYIR kartı), PO'nun tek "EVET"i + tarihli yedekle merge edilir.
-- **🟡 işler**: yalnız PO'nun eliyle yapılabilen iş (sunucu/Dokploy · hesap/anahtar · GitHub ayarı · avukat · kuruma görünen/hukuki metnin onayı); kod kısmı 🟢 kurallarıyla yapılır, PO kısmı `docs/otonom/03-PO-ELLE-ISLER.md`'ye yazılır.
-**🔴 işler**: ilgili KARAR cevaplanmadan dokunulmaz.
+**4 renk (PO 2026-09-26)** — kapı tanımları TEK yerde: `docs/otonom/00-KUYRUK.md` § Kapılar (tam metin `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7 / 7b).
+Kısa: 🟢 yap + merge (auth/KVKK/matching dosyasında 7b inceleme ONAY + negatif test) · 🔵 migration/seed/canlı veri/karantina → hazırla, PO "EVET"i + tarihli yedekle merge · 🟡 PO'nun eli (`03-PO-ELLE-ISLER.md`), kod kısmı 🟢 · 🔴 KARAR cevapsızsa dokunma.
 
 ⛔ **DEĞİŞMEYEN İKİ KURAL** — bunlar kaldırılmadı, aynen geçerli:
 1. **Migration/DB**: canlı = lokal AYNI Neon. Yalnız ilgili KARAR "evet" ise VE etkilenen tablo için
@@ -126,8 +122,7 @@ Yanlış olan kod değil, sorulan soruydu.
 ## Paralellik — şerit sistemi
 **Okuma** (keşif/envanter/arkeoloji): sınırsız paralel alt-ajan.
 **Yazma**: en fazla 4 şerit. Her şeridin SAHİP OLDUĞU dosyalar `00-KUYRUK.md`'de yazılı.
-⛔ Bir şerit başka şeridin dosyasına DOKUNMAZ. Ortak dosya gerekiyorsa işler SIRALI yapılır.
-Şüphede: SIRALI. Bozuk kod, hızlı koddan pahalıdır.
+⛔ Bir şerit başka şeridin dosyasına DOKUNMAZ. Ortak dosya ya da şüphe → SIRALI (genel kural: § Koşullu Paralellik).
 Dal adı: `otonom/K-xx-kisa-ad-YYYYMMDD` · her iş ayrı dal, ayrı PR (tek tek revert edilebilir).
 `02-ILERLEME.md`'ye yazarken tek seferde EKLE (append), başkasının satırını silme.
 
@@ -151,20 +146,11 @@ kapı etiketi asla kare kullanmaz. Bir promptun başında 🟥 görmek "dur" dem
 - `🟥 BYPASS — K-06 şık açıklamaları` … `🟥 BYPASS — K-06 yazıldı, PR açıldı, merge edildi.`
 
 ## Belge senkronu — SONA, tek sefer
-§ Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI'ndaki "her turun sonunda belge senkronu" kuralı otonom turda şöyle uygulanır:
-her iş sonrası DEĞİL, **kuyruğun sonunda TEK PR** (K-20). Ajan `00-KARAR-TAKIP.md`'ye
-**numara VERMEZ**, "aday" etiketiyle yazar; eski satırları silmez, üstünü çizer.
-Gerekçe: son bir ayda belge muhasebesi tur bütçesinin büyük kısmını yedi; ürün büyümedi.
+Otonom turdaki uygulaması (kuyruğun sonunda TEK PR, K-20) tek yerde: § Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI › "Otonom turda".
 
 ## Bitti tanımı — tek ölçü
-Bir iş ancak şu üçü varsa ✅:
-1. **Kullanıcı görüyor** — ekranda bir şey değişti ya da bir hata kayboldu.
-   ⛔ "Backend hazır" · "bileşen yazıldı ama mount edilmedi" · "uç eklendi" → BİTMEDİ.
-2. Testler yeşil (yukarıdaki kontrol listesi)
-3. `02-ILERLEME.md`'ye yazıldı — dosyalar, PR, ve "kullanıcı artık şunu görüyor" cümlesi
-
-Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz:
-✅ "artık /disc-test açılıyor"   ❌ "loading state düzeltildi"
+Tanım TEK yerde: `docs/otonom/00-KUYRUK.md` § "Bitti" tanımı (kullanıcı görüyor · testler yeşil · `02-ILERLEME.md`'ye yazıldı).
+Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz.
 
 ## Bulut oturumu farkı (claude.ai/code)
 Bulut VM'de Neon DB ve Dokploy erişimi YOKTUR → migration ve seed işleri (🔴) bulutta YAPILAMAZ, atlanır.
@@ -183,7 +169,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **Mod bildir**: her turda mod net olsun — PLAN (salt-okuma) / BYPASS (uygula) / MANUEL-ONAY (öner→onay→uygula).
 - **Geri-alınamaz adımda DUR**: merge, prod deploy, prod DB yazımı (backfill/migration), force-push, external
   servise gönderim → önce DUR, onay bekle.
-- **Merge — kapıya göre (4 renk, PO 2026-09-26):** **🟢 → doğrulama listesi (+ hassas dosyada bağımsız inceleme ONAY + negatif test) tamsa MERGE ET** · **🔵 → hazırla, PR + EVET/HAYIR kartı; PO "EVET"i + tarihli yedek olmadan merge etme** · **🟡 → yalnız PO eli; kod kısmı 🟢 gibi, PO kısmı `03-PO-ELLE-ISLER.md`** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7/7b · `docs/otonom/00-KUYRUK.md` § Kapılar. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (§ Bulut oturumu farkı) — orada "PR aç, merge etme" **aynen geçerlidir**.
+- **Merge — kapıya göre (4 renk, PO 2026-09-26):** kural § MERGE POLİTİKASI'nda; kapı tanımları `docs/otonom/00-KUYRUK.md` § Kapılar (tam metin `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7/7b). ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (§ Bulut oturumu farkı) — orada "PR aç, merge etme" **aynen geçerlidir**.
 - **Uçtan uca yürüt**: iş verilince tek turda kapsamlı ilerle; karar gerekeni "kullanıcı kararı gerekli: …" diye
   NOT et, gereksiz durma.
 - **SHA/commit/branch tahmin etme**: durumu git'ten DOĞRULA, hafızadan varsayma.
@@ -203,8 +189,9 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - `scripts/verify.sh` içeriği CI workflow ile eşlenmiş tutulur.
 
 ## verify ↔ CI farkı — dikkat
-- `npm run verify` backend entegrasyon testlerini `TEST_DATABASE_URL` guard'ına tabi koşar. Lokalde TEST_DATABASE_URL
-  YOKSA testler guard'la DURUR (canlı Neon'a truncate atmaz) → yeşil sanma; asıl kanıt CI'dadır.
+- ⭐ **`TEST_DATABASE_URL` kuralı (TEK KAYNAK):** entegrasyon testleri yalnız izole `TEST_DATABASE_URL`'e koşar. Yoksa guard
+  (`assertTestDatabase.ts`) devreye girer, testler DURUR (canlı Neon'a TRUNCATE atılmaz) → **"yeşil" sayma**; asıl kanıt CI'dadır
+  (KURAL 14: CI YEŞİL ≠ TEST KOŞTU). `npm run verify` bu durumda çıkış 2 (KISMİ) verir.
 - Backend CI yalnızca `main` hedefli PR/push'ta tetiklenir. Stacked (panel/feature-base) PR'larda backend CI koşmaz
   → gerçek CI ancak main-base olunca çıkar. Çatı (umbrella) CI her branch'te koşar ve backend suite'ini submodule
   pointer'ı üzerinden çalıştırır.
@@ -221,7 +208,8 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 ## Submodule Senkronizasyonu
 - Backend değişince aynı tur içinde pointer güncellenir ve çatı push edilir.
 - Backend push ile pointer güncellemesi arasında ASLA ara commit/push olmaz.
-- Sıra: backend commit → backend push → çatı repo `git add backend` → çatı commit → çatı push.
+- Sıra — merge ÖNCESİ: backend commit → backend push → çatı repo `git add backend` → çatı commit → çatı push.
+  Merge SONRASI sıra tek yerde: aşağıdaki § Merge sonrası pointer bump, (1)→(5).
 
 ### Merge sonrası pointer bump — DANS ÖNLEME (her merge turunda tekrarlıyordu)
 > Kök neden: backend PR merge edilince backend `main` HEAD ilerler (merge commit); çatı feature PR'ı ise açıldığı
@@ -233,8 +221,8 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - Paralel çatı PR'ı varsa: bump'ı TEK noktada (en son açık PR'da) yap — her PR'da ayrı bump CI'ı gereksiz tekrar bekletir.
 - Pointer "CONFLICTING" ama **descendant** görünüyorsa: git auto-resolve eder, zararsız — panik yok, doğrula:
   `git merge-base --is-ancestor <eski-pointer> <yeni-pointer>` (0 dönerse güvenli, ileri sarım).
-- ⚠️ **Merge SIRASI (2026-08-28'de yaşandı, bkz. Faz 1b):** backend PR merge → **çatı pointer re-bump → çatı PR merge.**
-  Çatı PR'ı pointer düzeltilmeden merge edilirse main, backend **feature-commit'ini** gösterir (ağaç DOĞRU kalır — kod sağlam —
+- ⚠️ **Sıra bozulursa (2026-08-28'de yaşandı, bkz. Faz 1b):** yukarıdaki (1)→(5) atlanıp
+  çatı PR'ı pointer düzeltilmeden merge edilirse main, backend **feature-commit'ini** gösterir (ağaç DOĞRU kalır — kod sağlam —
   ama pointer **sarkar**). Düzeltme: temiz main'den ayrı `chore(pointer)` PR'ı ile `main` HEAD'e re-bump. Sarkma zararsızdır
   (feature-commit backend main'in atası) ama temiz değildir → tek turda kapat.
 
@@ -261,8 +249,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 ## Ortam / Veritabanı — PROD ≠ DEV ≠ TEST
 - **Lokal geliştirme**: `backend/.env` → ana Neon (`ep-fancy-tooth-ab4u5xhr`, eu-west-2 = **Londra/Birleşik Krallık**, AB üyesi DEĞİL — madde 92, PO teyitli 2026-08-26). Bu CANLI veri;
   lokalde ona bağlıyken DB'ye YAZMA (salt-okuma sorgu, PII maskeli).
-- **Test**: `TEST_DATABASE_URL` (izole DB) beklenir. Yoksa guard (`assertTestDatabase.ts`) devreye girer — canlı
-  Neon'a TRUNCATE atılmaz, suite durur.
+- **Test**: izole `TEST_DATABASE_URL` + guard — kural tek yerde: § verify ↔ CI farkı.
 - **CI**: ephemeral localhost Postgres (service container). `.env.test` gitignored → CI'a girmez; test env
   `tests/setup.ts`'te set edilir.
 - **PROD**: docker-compose Postgres (`@postgres:5432`), Neon değil. Migration/backfill prod'da prod `DATABASE_URL` ile.
@@ -285,7 +272,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
   Özellikle şunlar HER ZAMAN sıralıdır: migration, merge, submodule pointer güncelleme, paylaşılan
   servis/config dosyaları. Burada paralellik çakışma ve veri bozulması riski taşır.
 - Paralel başlatmadan ÖNCE parçaların gerçekten bağımsız olduğunu doğrula. Şüphede kalırsan sıralı git:
-  doğruluk ve güvenlik hızdan önce gelir.
+  doğruluk ve güvenlik hızdan önce gelir — bozuk kod, hızlı koddan pahalıdır. (Otonom yazma şeritleri: § Paralellik — şerit sistemi.)
 
 ## Kişi Adı Yasağı — KALICI
 - Hiçbir kod/yorum/commit/PR/belgeye kişi adı YAZMA. Nötr terim kullan ("ürün sahibi" / "PO").
@@ -307,9 +294,14 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
   1. **İş/özellik tamamlandıysa →** `docs/kararlar/09-DURUM.md` güncellenir: ne yapıldı + PR no + bilinen sınırlar.
      (Sonraki oturum nerede kalındığını buradan görür.)
   2. **İş kuyruğu değiştiyse** (madde düştü / eklendi / önceliği değişti) **→** `docs/kararlar/10-yol-haritasi.md` güncellenir.
-  3. **Güncelleme gerekmiyorsa** (ör. salt-okuma PLANLA turu veya durumu değiştirmeyen iş) **→** bu AÇIKÇA belirtilir:
-     "belge güncellemesi gerekmedi: [neden]".
+  3. **Karar-takip →** `docs/kararlar/00-KARAR-TAKIP.md`: tamamlanan iş ✅'a çekilir **(yalnız KOD GERÇEĞİYLE doğrulanarak — belge asla
+     koddan önce "yapıldı" demez)**, yarım kalan 🟡 olarak nedeniyle işaretlenir, turda çıkan yeni iş/karar 🔴 satır olarak EKLENİR.
+  4. **Güncelleme gerekmiyorsa** (ör. salt-okuma PLANLA turu veya durumu değiştirmeyen iş) **→** bu AÇIKÇA belirtilir:
+     "belge güncellemesi gerekmedi: [neden]" / "karar-takip güncellemesi gerekmedi: [neden]".
 - Bu adım atlanırsa **tur EKSİK sayılır** — kapanış raporunda belge-senkron durumu her zaman belirtilir.
+- **Otonom turda:** her iş sonrası DEĞİL, **kuyruğun sonunda TEK PR** (K-20). Ajan `00-KARAR-TAKIP.md`'ye
+  **numara VERMEZ**, "aday" etiketiyle yazar; eski satırları silmez, üstünü çizer.
+  Gerekçe: son bir ayda belge muhasebesi tur bütçesinin büyük kısmını yedi; ürün büyümedi.
 - Belge hijyeni geçerli: eskiyi SİLME → `⚠️ GÜNCELLEME (tarih): …` notuyla ekle veya `docs/arsiv/`'e taşı (bkz. "Belge Düzeltme Deseni").
 
 ### Docs çakışması önleme — SERİLEŞTİR (09-DURUM / 10-yol-haritasi)
@@ -330,13 +322,10 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - **KURAL 1 — Oturum başında OKU + hatırlat (proaktif):** *(PO 2026-09-26: 00-KARAR-TAKIP 2026-09-20'den beri güncellenmiyor → açık iş için `docs/otonom/00-SIMDI.md` + `00-KUYRUK.md` okunur.)* Her yeni oturumun İLK adımı `00-KARAR-TAKIP.md`'yi okumak
   ve ürün sahibine **açık maddeleri** (🔴/🟡/🔵/❓) kısaca hatırlatmaktır. Ürün sahibi "arkada ne kaldı?" diye
   sormak zorunda kalmamalı — ajan proaktif söyler.
-- **KURAL 2 — Tur sonunda GÜNCELLE (zorunlu bitiş adımı):** Her BYPASS (iş yapan) tur bitişinde `00-KARAR-TAKIP.md`
-  güncellenir: tamamlanan iş ✅'a çekilir **(yalnız KOD GERÇEĞİYLE doğrulanarak — belge asla koddan önce "yapıldı"
-  demez)**, yarım kalan 🟡 olarak nedeniyle işaretlenir, turda çıkan yeni iş/karar 🔴 satır olarak EKLENİR.
-  Gerekmiyorsa açıkça "karar-takip güncellemesi gerekmedi: [neden]" denir. Atlanırsa **tur EKSİK sayılır.**
+- **KURAL 2 — Tur sonunda GÜNCELLE (zorunlu bitiş adımı):** gövde tek yerde — § Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI, madde 3-4.
 - **09-DURUM/10-yol ile ilişki (çakışmaz, tamamlar):** `00-KARAR-TAKIP` = "**ne kaldı**" görünürlüğü (açık iş +
   ölü kod + karar tek bakışta) · `09-DURUM` = "**şu an ne oldu**" anlatısı · `10-yol-haritasi` = öncelikli sıra.
-  Yukarıdaki "Belge Senkronizasyonu" bitiş adımı geçerliliğini korur; bu ona EK bir adımdır.
+  Üçü de tek bitiş listesinde: § Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI.
 - **Ölü kod ilkesi:** ölü/bağlanmamış kod için "sil" varsayılan DEĞİL — önce **niyeti anla + neye bağlanacağını**
   bul (çoğu yarım özelliğin parçası). Gerçek terk adayı "❓ bilinçli terk mi, PO kararı" işaretlenir; silme PO kararıdır.
 

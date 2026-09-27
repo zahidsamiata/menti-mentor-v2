@@ -166,3 +166,117 @@ Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b. Özet: sık okunan dosyal
 `CLAUDE.md:4-5`'teki "Mod bildir" kuralının görsel karşılığı:
 `CLAUDE.md:126` "her turun sonunda belge senkronu" kuralı otonom turda şöyle uygulanır:
 ```
+
+## YN-14 birleştirmeleri (B.4-4/5/6/7/9) · taşındı 2026-09-27 (AJ-46)
+
+> Aynı kural birden çok yerde yazıyordu; her biri TEK yerde bırakıldı, diğer yerlerde atıf. Kural ANLAMI değişmedi.
+> Aşağıda her bloğun CLAUDE.md'deki ESKİ metni AYNEN (yeni hâli CLAUDE.md'de).
+
+### B.4-4 · MERGE POLİTİKASI kontrol listesi (TEST_DATABASE_URL maddesi)
+
+```text
+- [ ] ⚠️ `TEST_DATABASE_URL` yoksa entegrasyon testleri guard'la DURUR → **bunu "yeşil" sayma.**
+      Bu durumda asıl kanıt CI'dır; CI yeşil değilse merge YOK. (KURAL 14: CI YEŞİL ≠ TEST KOŞTU)
+```
+
+### B.4-4 · verify ↔ CI farkı (TEST_DATABASE_URL — tek kaynak yapıldı)
+
+```text
+- `npm run verify` backend entegrasyon testlerini `TEST_DATABASE_URL` guard'ına tabi koşar. Lokalde TEST_DATABASE_URL
+  YOKSA testler guard'la DURUR (canlı Neon'a truncate atmaz) → yeşil sanma; asıl kanıt CI'dadır.
+```
+
+### B.4-4 · Ortam / Veritabanı (Test satırı)
+
+```text
+- **Test**: `TEST_DATABASE_URL` (izole DB) beklenir. Yoksa guard (`assertTestDatabase.ts`) devreye girer — canlı
+  Neon'a TRUNCATE atılmaz, suite durur.
+```
+
+### B.4-5 · Paralellik — şerit sistemi (şüphe kuralı)
+
+```text
+⛔ Bir şerit başka şeridin dosyasına DOKUNMAZ. Ortak dosya gerekiyorsa işler SIRALI yapılır.
+Şüphede: SIRALI. Bozuk kod, hızlı koddan pahalıdır.
+```
+
+### B.4-5 · Koşullu Paralellik (son madde)
+
+```text
+- Paralel başlatmadan ÖNCE parçaların gerçekten bağımsız olduğunu doğrula. Şüphede kalırsan sıralı git:
+  doğruluk ve güvenlik hızdan önce gelir.
+```
+
+### B.4-6 · Belge senkronu — SONA, tek sefer (gövde)
+
+```text
+§ Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI'ndaki "her turun sonunda belge senkronu" kuralı otonom turda şöyle uygulanır:
+her iş sonrası DEĞİL, **kuyruğun sonunda TEK PR** (K-20). Ajan `00-KARAR-TAKIP.md`'ye
+**numara VERMEZ**, "aday" etiketiyle yazar; eski satırları silmez, üstünü çizer.
+Gerekçe: son bir ayda belge muhasebesi tur bütçesinin büyük kısmını yedi; ürün büyümedi.
+```
+
+### B.4-6 · Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI (madde 3 + bitiş)
+
+```text
+  3. **Güncelleme gerekmiyorsa** (ör. salt-okuma PLANLA turu veya durumu değiştirmeyen iş) **→** bu AÇIKÇA belirtilir:
+     "belge güncellemesi gerekmedi: [neden]".
+- Bu adım atlanırsa **tur EKSİK sayılır** — kapanış raporunda belge-senkron durumu her zaman belirtilir.
+```
+
+### B.4-6 · Karar-Takip Disiplini KURAL 2 (gövde bitiş listesine taşındı)
+
+```text
+- **KURAL 2 — Tur sonunda GÜNCELLE (zorunlu bitiş adımı):** Her BYPASS (iş yapan) tur bitişinde `00-KARAR-TAKIP.md`
+  güncellenir: tamamlanan iş ✅'a çekilir **(yalnız KOD GERÇEĞİYLE doğrulanarak — belge asla koddan önce "yapıldı"
+  demez)**, yarım kalan 🟡 olarak nedeniyle işaretlenir, turda çıkan yeni iş/karar 🔴 satır olarak EKLENİR.
+  Gerekmiyorsa açıkça "karar-takip güncellemesi gerekmedi: [neden]" denir. Atlanırsa **tur EKSİK sayılır.**
+```
+
+### B.4-6 · Karar-Takip Disiplini (09-DURUM/10-yol ilişkisi son satırı)
+
+```text
+  Yukarıdaki "Belge Senkronizasyonu" bitiş adımı geçerliliğini korur; bu ona EK bir adımdır.
+```
+
+### B.4-7 · Submodule Senkronizasyonu (Sıra)
+
+```text
+- Sıra: backend commit → backend push → çatı repo `git add backend` → çatı commit → çatı push.
+```
+
+### B.4-7 · Merge sonrası pointer bump (Merge SIRASI maddesi — sıra tekrarı)
+
+```text
+- ⚠️ **Merge SIRASI (2026-08-28'de yaşandı, bkz. Faz 1b):** backend PR merge → **çatı pointer re-bump → çatı PR merge.**
+  Çatı PR'ı pointer düzeltilmeden merge edilirse
+```
+
+### B.4-9 · Çalışma Sözleşmesi (Merge — kapıya göre; 4 renk tekrarı)
+
+```text
+- **Merge — kapıya göre (4 renk, PO 2026-09-26):** **🟢 → doğrulama listesi (+ hassas dosyada bağımsız inceleme ONAY + negatif test) tamsa MERGE ET** · **🔵 → hazırla, PR + EVET/HAYIR kartı; PO "EVET"i + tarihli yedek olmadan merge etme** · **🟡 → yalnız PO eli; kod kısmı 🟢 gibi, PO kısmı `03-PO-ELLE-ISLER.md`** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7/7b · `docs/otonom/00-KUYRUK.md` § Kapılar.
+```
+
+### B.4-9 · MERGE POLİTİKASI (4 renk listesi — tanım 00-KUYRUK § Kapılar'da)
+
+```text
+**4 renk (PO 2026-09-26)** — tam metin `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7 / 7b:
+- **🟢 işler**: ajan yapar + merge eder (varsayılan). Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa bağımsız inceleme "SONUÇ: ONAY" + negatif test şartı kendiliğinden eklenir.
+- **🔵 işler**: migration · seed · canlı veriye yazma · karantina → ajan hazırlar (PR + inceleme ONAY + `01-KARARLAR.md`'de EVET/HAYIR kartı), PO'nun tek "EVET"i + tarihli yedekle merge edilir.
+- **🟡 işler**: yalnız PO'nun eliyle yapılabilen iş (sunucu/Dokploy · hesap/anahtar · GitHub ayarı · avukat · kuruma görünen/hukuki metnin onayı); kod kısmı 🟢 kurallarıyla yapılır, PO kısmı `docs/otonom/03-PO-ELLE-ISLER.md`'ye yazılır.
+**🔴 işler**: ilgili KARAR cevaplanmadan dokunulmaz.
+```
+
+### B.4-9 · Bitti tanımı — tek ölçü (gövde 00-KUYRUK § "Bitti" tanımı'na taşındı)
+
+```text
+Bir iş ancak şu üçü varsa ✅:
+1. **Kullanıcı görüyor** — ekranda bir şey değişti ya da bir hata kayboldu.
+   ⛔ "Backend hazır" · "bileşen yazıldı ama mount edilmedi" · "uç eklendi" → BİTMEDİ.
+2. Testler yeşil (yukarıdaki kontrol listesi)
+3. `02-ILERLEME.md`'ye yazıldı — dosyalar, PR, ve "kullanıcı artık şunu görüyor" cümlesi
+
+Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz:
+✅ "artık /disc-test açılıyor"   ❌ "loading state düzeltildi"
+```
