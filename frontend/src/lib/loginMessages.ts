@@ -25,10 +25,13 @@ export const LOGIN_MESSAGES = {
 
 /**
  * Sosyal giriş dönüşünde (/login?error=KOD) gelen kod → kullanıcı mesajı.
- * Hesabın varlığına bağlı kodlar (PROVIDER_CATISMASI, HESAP_PASIF) AYNI metne düşer.
+ * Hesabın varlığına bağlı kodlar AYNI metne düşer. AJ-30: backend artık bu durumların hepsi için
+ * tek kod (OAUTH_GIRIS_YAPILAMADI) gönderir; eski kodlar (PROVIDER_CATISMASI, HESAP_PASIF) eski
+ * backend sürümüyle dağıtım arası uyum için aynı metne eşli kalır.
  */
 const OAUTH_CODE_MESSAGES: Record<string, string> = {
   KULLANICI_REDDETTI: 'Giriş işlemi iptal edildi.',
+  OAUTH_GIRIS_YAPILAMADI: LOGIN_MESSAGES.OAUTH_NOT_ALLOWED,
   PROVIDER_CATISMASI: LOGIN_MESSAGES.OAUTH_NOT_ALLOWED,
   HESAP_PASIF: LOGIN_MESSAGES.OAUTH_NOT_ALLOWED,
   GECERSIZ_STATE: 'Oturum süresi doldu. Lütfen tekrar deneyin.',
