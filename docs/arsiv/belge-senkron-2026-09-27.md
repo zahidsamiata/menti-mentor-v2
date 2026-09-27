@@ -235,3 +235,13 @@ Kaynak: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` § GÖREV B. 
 ````text
 | 110 | "Görüşme tamamladım 🎉" paylaşım kartı (DISC-kartından ayrı) | ⬜ AÇIK (PO önceliklendirmedi) · 🟨 kısmen — F-22; kalan: Kart görünüyor ama LinkedIn paylaşımı ürünün olmayan sabit bir alan adına bağlanıyor; getSiteUrl() kullanılmalı → AJ-23 | 🟡 | T4-A2 | Görüşme sonrası paylaşılabilir kutlama kartı | DISC-sonuç paylaşım kartı VAR; görüşme-paylaşım kartı grep yok |
 ````
+
+### docs/kararlar/00-KARAR-TAKIP.md:394 · F-15 → AJ-45 kapandı
+````text
+| Y1 | Menti **bekleme anı** deneyimi — öğrenme+DISC derinleştirme'yi bekleme ekranına bağla + umut/peer-count mesajı | 🟨 kısmen — F-15; kalan: Metin var, hiçbir testte assert edilmiyor. → AJ-45 | Bekleme ekranı CTA + sosyal-kanıt (S) | denetim B.1/6-8 |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:572 · F-06 → AJ-45 kapandı
+````text
+| **98** | **Kalibrasyon audit yazımı `void` (fire-and-forget)** — `logger.info('AUDIT', …)` beklenmez; DB yazımı hata alırsa "son değişiklik" izi **sessizce kaybolur** (KVKK Md.12 denetim kaydı için zayıf). | teknik-borç (KVKK denetim) | `adminController.setAlgorithmWeightsHandler` `void logger.info(...)`; `logger.ts` catch sessiz | 🔵 küçük (migration'sız; audit yazımını await + hata yüzeye çıkar) · 🟨 kısmen — F-06; kalan: Hata yolu (audit yazımı başarısız) hiçbir testte ölçülmüyor; F-06'nın eklediği .catch hiç tetiklenemez. → AJ-45 |
+````
