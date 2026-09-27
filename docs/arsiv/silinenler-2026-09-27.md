@@ -64,7 +64,8 @@ aşağıdaki üç YAZMA yolu.**
 
 #### 4a. `src/controllers/userController.ts` — `UpdateUserSchema` + `updateUser` (ADMIN, `PATCH /api/users/:id`)
 
-Değişiklik öncesi (son commit `5fb1416`):
+Kaynak komutu: `git -C backend show 5fb1416:src/controllers/userController.ts` (satır 271-324).
+Değişiklik öncesi, KIRPILMADAN, iki fonksiyon/şema eksiksiz:
 ```ts
 const UpdateUserSchema = z.object({
   fullName: z.string().min(2).max(200).optional(),
@@ -100,12 +101,26 @@ export async function updateUser(req: RequestWithTenant, res: Response) {
     return res.status(404).json({ error: 'NOT_FOUND', message: 'Kullanıcı bulunamadı.' });
   }
 
-  // ...
+  // KVKK/over-fetch (madde 38): select'siz update ham User objesini (password hash +
+  // discVector + selfProfile + tüm PII) response'a taşırdı. Bu uç ADMIN-only profil
+  // düzenlemesidir → USER_FULL_SELECT ile döner (password global omit + select ile iki kat
+  // dışarıda), AYRICA ham psikometri (discVector/temperamentJson/selfProfile) — düzenleme
+  // onayı için gereksiz, veri-minimizasyonu — getUser'ın KARAR 5 desenindeki gibi çıkarılır.
   const updated = await prisma.user.update({
     where: { id: existing.id },
     data: parsed.data,
     select: USER_FULL_SELECT,
   });
+
+  // GV-10: pasife alınan kullanıcının oturumu yenilenemez. Elindeki access token'ı
+  // requireTenant bir sonraki istekte reddeder (User.isActive=false → 401).
+  if (parsed.data.isActive === false) {
+    await prisma.refreshToken.deleteMany({ where: { userId: existing.id } });
+  }
+
+  const { discVector: _dv, temperamentJson: _tj, selfProfile: _sp, ...safe } = updated;
+  return res.json(safe);
+}
 ```
 
 **Neden karantinaya alındı:** `interactionStyle` DONDURULMUŞ; bu ADMIN ucu `parsed.data`'yı
@@ -120,13 +135,22 @@ amacından (sessizce yok say) daha yıkıcı bir davranış değişikliği olurd
 
 **Geri alma komutu (gerçek silme DEĞİL — bu bir karantina, geri alma = eski davranışa dönüş):**
 ```bash
-git -C backend revert <bu-turun-commit-hash'i>
-# veya elle: userController.ts'te `updateData` yerine `parsed.data` kullan (destructure'ı kaldır).
+# Şu an (backend PR #186 henüz merge edilmedi): karantina commit'i doğrudan main'in ucunda değil,
+# `otonom/AN-12-interactionstyle-karantina-20260927` dalında — dalı silmek ya da commit'i revert etmek yeterli.
+git -C backend revert 11bbb84
+# PR #186 MERGE EDİLDİKTEN SONRA: 11bbb84 artık main'de farklı bir SHA'ya sahip olabilir
+# (squash-merge ise yeni tek commit, "merge commit" ise 11bbb84 ikinci ebeveyn olarak kalır).
+# Doğru hedefi bul: gh pr view 186 --repo zahidsamiata/menti-mentor --json mergeCommit,mergedAt
+# - Squash-merge ise: git -C backend revert <o-squash-commit-sha>
+# - "Create a merge commit" ile birleştiyse: git -C backend revert -m 1 <merge-commit-sha>
+# İkisinde de sonuç: üç yazma ucu 5fb1416 hâline (yukarıdaki tam kod) döner.
+# Elle alternatif: userController.ts'te `updateData` yerine `parsed.data` kullan (destructure'ı kaldır).
 ```
 
 #### 4b. `src/controllers/userController.ts` — `CreateUserSchema` + `createUser` (ADMIN, `POST /api/users`)
 
-Değişiklik öncesi (son commit `5fb1416`):
+Kaynak komutu: `git -C backend show 5fb1416:src/controllers/userController.ts` (satır 326-347, 485-559).
+Değişiklik öncesi, KIRPILMADAN, iki fonksiyon/şema eksiksiz:
 ```ts
 const CreateUserSchema = z.object({
   role: z.enum(['ADMIN', 'MENTOR', 'MENTI']),
@@ -141,7 +165,15 @@ const CreateUserSchema = z.object({
     .array(z.enum(EXPECTATION_CATEGORY_VALUES))
     .max(2, 'Maksimum 2 beklenti kategorisi seçilebilir.')
     .optional(),
-  // ...
+  // Menti CV
+  volunteerHistory: boundedJson,
+  pastProjects: boundedJson,
+  education: boundedJson,
+  skills: z.array(z.string().max(100)).max(30).optional(),
+  // Zengin profil alanları
+  bioSummary: z.string().max(2000).optional(),
+  expertiseDetails: z.string().max(2000).optional(),
+  targetAudience: z.string().max(1000).optional(),
 });
 
 export async function createUser(req: RequestWithTenant, res: Response) {
@@ -160,8 +192,65 @@ export async function createUser(req: RequestWithTenant, res: Response) {
       timeCommitment: parsed.data.timeCommitment,
       interactionStyle: parsed.data.interactionStyle,
       expectationCategories: parsed.data.expectationCategories ?? [],
-      // ...
+      volunteerHistory: parsed.data.volunteerHistory,
+      pastProjects: parsed.data.pastProjects,
+      education: parsed.data.education,
+      skills: parsed.data.skills ?? [],
+      bioSummary: parsed.data.bioSummary,
+      expertiseDetails: parsed.data.expertiseDetails,
+      targetAudience: parsed.data.targetAudience,
     },
+    // Explicit select: ham create objesi password/discVector/selfProfile gibi hassas
+    // alanları da taşır. Response'ta ve iç mantıkta yalnızca gereken güvenli alanlar.
+    select: {
+      id: true,
+      tenantId: true,
+      role: true,
+      email: true,
+      fullName: true,
+      sectorTags: true,
+      discType: true,
+      isActive: true,
+      approvalStatus: true,
+      avatarUrl: true,
+      createdAt: true,
+    },
+  });
+
+  // b3: Kurum üyeliğini garanti et. GÜVENLİK: non-fatal — kullanıcı oluşturmayı bozmaz.
+  await ensureMembershipSafe(prisma, user.id, user.tenantId, user.role);
+
+  // MENTOR/MENTI kayıtları PENDING başlar — tenant adminlerine bildirim gönder
+  if (user.role === 'MENTOR' || user.role === 'MENTI') {
+    const [admins, tenantRecord] = await Promise.all([
+      prisma.user.findMany({
+        where: { tenantId: req.tenant.tenantId, role: 'ADMIN', isActive: true },
+        select: USER_CONTACT_SELECT,
+      }),
+      prisma.tenant.findUnique({
+        where: { id: req.tenant.tenantId },
+        select: { name: true },
+      }),
+    ]);
+    const tenantName = tenantRecord?.name ?? req.tenant.tenantId;
+    for (const admin of admins) {
+      void sendAdminNewUserNotification({
+        toEmail: admin.email,
+        adminName: admin.fullName,
+        newUserFullName: user.fullName,
+        newUserRole: user.role,
+        tenantName,
+      });
+    }
+    void notifyAdminsPendingUser({
+      tenantId: req.tenant.tenantId,
+      newUserFullName: user.fullName,
+      newUserRole: user.role,
+    });
+  }
+
+  return res.status(201).json(user);
+}
 ```
 
 **Neden karantinaya alındı:** aynı gerekçe (4a) — `CreateUserSchema` `.strict()` DEĞİL, bu
@@ -171,42 +260,114 @@ yüzden Zod anahtarını kaldırmak burada 400 riskine yol açmıyordu, ama tuta
 `interactionStyle: null` (Prisma varsayılanı) ile oluşuyor.
 
 **Geri alma:** `interactionStyle: parsed.data.interactionStyle,` satırını `prisma.user.create`
-veri nesnesine (timeCommitment satırından sonra) geri ekle.
+veri nesnesine (`timeCommitment: parsed.data.timeCommitment,` satırından sonra) geri ekle.
+Tam otomatik geri alma için bkz. 4a'daki `git revert` komutu (aynı commit `11bbb84`, üç ucu
+birden geri alır).
 
 #### 4c. `src/controllers/onboardingController.ts` — `CompleteProfileSchema` + `completeProfile` (`POST /api/users/profile/complete`, kendi profilini tamamlayan MENTOR/MENTI)
 
-Değişiklik öncesi (son commit `5fb1416`):
+Kaynak komutu: `git -C backend show 5fb1416:src/controllers/onboardingController.ts` (satır 279-377).
+Değişiklik öncesi, KIRPILMADAN, iki fonksiyon/şema eksiksiz:
 ```ts
 const CompleteProfileSchema = z.object({
   sector:                SECTOR_TAG_SCHEMA,
   skills:                z.array(z.string().min(1).max(100)).max(30).default([]),
   experienceYears:       z.number().int().min(0).max(60),
+  // Rol-spesifik alanlar (opsiyonel — menti ve mentor akışları bu endpoint'i paylaşır)
   expectationCategories: z.array(z.enum(EXPECTATION_CATEGORIES)).max(6).optional(),
   timeCommitment:        z.enum(TIME_COMMITMENTS).optional(),
   interactionStyle:      z.enum(INTERACTION_STYLES).optional(),
-  goals:                 z.array(z.string().max(100)).max(30).optional(),
-  schools:               z.array(z.string().max(120)).max(20).optional(),
-  companies:             z.array(z.string().max(120)).max(20).optional(),
-  communities:           z.array(z.string().max(120)).max(20).optional(),
+  // ── UserProfile skorlama alanları için opsiyonel veri toplama (Aşama 1) ──────
+  // Ham diziler kabul edilir; kalıcılaştırmadan önce sanitizeTags ile temizlenir.
+  goals:                 z.array(z.string().max(100)).max(30).optional(), // → goalTags (Analytical)
+  schools:               z.array(z.string().max(120)).max(20).optional(), // → PII
+  companies:             z.array(z.string().max(120)).max(20).optional(), // → PII
+  communities:           z.array(z.string().max(120)).max(20).optional(), // → PII
 });
 
 export async function completeProfile(req: RequestWithTenant, res: Response) {
-  // ...
+  if (!req.auth) {
+    return res.status(401).json({
+      error:   'KIMLIK_DOGRULANMADI',
+      message: 'Bu işlem için giriş yapmanız gerekmektedir.',
+    });
+  }
+
+  const parsed = validateRequest(CompleteProfileSchema, req.body, res);
+  if (!parsed.success) return parsed.response;
+
   const {
     sector, skills, experienceYears, expectationCategories, timeCommitment, interactionStyle,
     goals, schools, companies, communities,
   } = parsed.data;
-  // ...
+
+  const user = await prisma.user.findUnique({
+    where:  { id: req.auth.userId },
+    select: { id: true, sectorTags: true, selfProfile: true },
+  });
+  if (!user) {
+    return res.status(404).json({ error: 'KULLANICI_BULUNAMADI', message: 'Kullanıcı bulunamadı.' });
+  }
+
+  // Sektörü mevcut etiket listesine ekle (tekrar varsa seti temizle)
+  const mergedTags = [...new Set([...user.sectorTags, sector])];
+
+  // experienceYears → selfProfile JSON bloğuna yaz (User modelinde ayrı alan yok)
+  const existingSelf = (user.selfProfile as Record<string, unknown>) ?? {};
+  const updatedSelf  = { ...existingSelf, experienceYears };
+
   const updated = await prisma.user.update({
     where: { id: user.id },
     data: {
       sectorTags:  mergedTags,
       skills,
       selfProfile: updatedSelf,
+      // Rol-spesifik alanlar: yalnızca gönderilmişse güncelle
       ...(expectationCategories !== undefined && { expectationCategories }),
       ...(timeCommitment        !== undefined && { timeCommitment        }),
       ...(interactionStyle      !== undefined && { interactionStyle      }),
     },
+    select: {
+      id:                    true,
+      fullName:              true,
+      sectorTags:            true,
+      skills:                true,
+      selfProfile:           true,
+      expectationCategories: true,
+      timeCommitment:        true,
+      interactionStyle:      true,
+      updatedAt:             true,
+    },
+  });
+
+  // ── UserProfile skorlama alanlarını doldur (Aşama 1 — yalnızca veri toplama) ──
+  // Canlı eşleştirme (matching.ts) bu alanları KULLANMAZ; buraya yazmak canlı davranışı
+  // değiştirmez. Yukarıdaki User.* yazımı olduğu gibi korunur.
+  // Eşlemeler: skills→skillTags, goals→goalTags, sector→industryCode,
+  //            experienceYears→yearsExp, schools/companies/communities→PII bağlam alanları.
+  const skillTags   = sanitizeTags(skills, 60);
+  const goalTags    = sanitizeTags(goals, 60);
+  const industryCode = SECTOR_TO_INDUSTRY_CODE.get(sector) ?? null;
+  const profileSectorData = {
+    skillTags,
+    goalTags,
+    industryCode,
+    yearsExp:    experienceYears,
+    schools:     sanitizeTags(schools, 120),
+    companies:   sanitizeTags(companies, 120),
+    communities: sanitizeTags(communities, 120),
+  };
+  await prisma.userProfile.upsert({
+    where:  { userId: user.id },
+    create: { userId: user.id, ...profileSectorData },
+    update: profileSectorData,
+  });
+
+  return res.json({
+    message: 'Profil başarıyla tamamlandı.',
+    user:    updated,
+  });
+}
 ```
 
 **Neden karantinaya alındı:** bu, GERÇEK CANLI kullanıcı akışının (onboarding profil
@@ -220,7 +381,8 @@ hiç girmiyor — DB'de var olan değer (varsa) DEĞİŞMİYOR, yoksa (null) nul
 
 **Geri alma:** destructure'a `interactionStyle`'ı geri ekle, `prisma.user.update` veri
 nesnesine `...(interactionStyle !== undefined && { interactionStyle }),` satırını
-`timeCommitment` satırından sonra geri ekle.
+`timeCommitment` satırından sonra geri ekle. Tam otomatik geri alma için bkz. 4a'daki
+`git revert` komutu (aynı commit `11bbb84`, üç ucu birden geri alır).
 
 ### 5. ÖNCE KARANTİNA — ne YAPILMADI (bilerek)
 
@@ -239,9 +401,28 @@ nesnesine `...(interactionStyle !== undefined && { interactionStyle }),` satır�
   engellendi. Karantina öncesi zaten dolu olan bir `interactionStyle` değeri varsa (yukarıdaki
   4a/4c geri alma senaryosunda olduğu gibi) o değer OKUNMAYA devam eder.
 
+### Kapsam beyanı (KURAL 13) — kalan tek yazıcı
+
+Yukarıdaki üç uç dışında, repoda `interactionStyle`'a yazan **tek bir yer daha** var:
+`prisma/seed.ts:427` ve `prisma/seed.ts:468` (`interactionStyle: pick(INTERACTION_STYLES),`,
+sahte mentor/menti kayıtları üretirken). Bu dosya BİLEREK karantinaya ALINMADI çünkü:
+- CLAUDE.md § CANLI = LOKAL AYNI DB: `prisma/seed.ts` (`npm run seed` / `tsx prisma/seed.ts`)
+  zaten **ASLA çalıştırılmaması gereken TEHLİKELİ seed** — satır 300-307'de toplu
+  `deleteMany()` (userResponse/feedback/meeting/matchRequest… siler). Güvenli seed listesi
+  (`seed-certification.ts` · `seed-learning-journey.ts` · `scripts/seed-test-tenant.mjs`)
+  bu dosyayı İÇERMEZ.
+- Bu satırlar yalnız `seed.ts` çalıştırılırsa devreye girer; bu turun kapsamı **canlıda/gelişimde
+  gerçekten çalışabilen yazma yolları** (createUser/updateUser/completeProfile) idi.
+  `seed.ts` hiç çalıştırılmadığı için karantinaya alınmasa da kullanıcı verisine bir etkisi yok.
+- Kapsam dışı bırakma bilinçli bir sınırlamadır, gözden kaçma değildir — ileride biri
+  `seed.ts`'i (kuralın dışına çıkarak) çalıştırırsa bu iki satır hâlâ `interactionStyle` yazar;
+  bu, ayrı bir iş (seed.ts'in kendisinin karantinaya/silinmeye aday olup olmadığı sorusu) olarak
+  PO'ya bırakılmıştır, AN-12'nin kapsamına dahil edilmemiştir.
+
 ### Durum
 
 🔵 **KARANTİNA — PO'nun tek "EVET"i bekliyor** (`docs/otonom/OTONOM-PROMPT.txt` Bölüm 7).
-PR'lar: backend (bkz. PR linki `02-ILERLEME.md`'de aranabilir — bu turda kuyruk/karar
-dosyalarına yazılmadı, PO'ya rapor edildi) + çatı (bu arşiv belgesi, ayrı PR).
-Merge PO onayından SONRA yapılacak.
+- **Backend:** https://github.com/zahidsamiata/menti-mentor/pull/186 (`otonom/AN-12-interactionstyle-karantina-20260927`, commit `11bbb84`) — CI ✓ yeşil.
+- **Çatı (bu arşiv belgesi):** https://github.com/zahidsamiata/menti-mentor-v2/pull/370 (aynı dal adı, commit `7d27f03` + bu düzeltme) — CI ✓ yeşil.
+İkisi de **MERGE EDİLMEDİ.** Merge PO'nun `docs/otonom/01-KARARLAR.md`'ye eklenecek EVET/HAYIR
+kartına cevabından SONRA yapılacak; backend #186 merge → çatı pointer bump → çatı #370 merge sırası izlenir.
