@@ -31,7 +31,7 @@ const LEAK_PATTERN = /kayıtlı|google|linkedin|microsoft|github|şifre ile|devr
 describe('IC-06 · sosyal giriş dönüş mesajları (enumeration-safe)', () => {
   beforeEach(() => { searchMock.error = null; });
 
-  it.each(['PROVIDER_CATISMASI', 'HESAP_PASIF'])(
+  it.each(['OAUTH_GIRIS_YAPILAMADI', 'PROVIDER_CATISMASI', 'HESAP_PASIF'])(
     '%s → ekranda sağlayıcı adı / "kayıtlı" ifadesi yok, tek tip mesaj var',
     (code) => {
       searchMock.error = code;
@@ -44,6 +44,8 @@ describe('IC-06 · sosyal giriş dönüş mesajları (enumeration-safe)', () => 
 
   it('hesaba bağlı kodlar birbirinden ayırt edilemez (aynı metin)', () => {
     expect(resolveOAuthError('PROVIDER_CATISMASI')).toBe(resolveOAuthError('HESAP_PASIF'));
+    // AJ-30: backend'in tek tip kodu da aynı metne düşer (genel "hata oluştu"ya değil).
+    expect(resolveOAuthError('OAUTH_GIRIS_YAPILAMADI')).toBe(LOGIN_MESSAGES.OAUTH_NOT_ALLOWED);
     expect(resolveOAuthError('PROVIDER_CATISMASI')).not.toMatch(LEAK_PATTERN);
   });
 
