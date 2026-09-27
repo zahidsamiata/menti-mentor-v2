@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ShareButtons } from '@/components/molecules/ShareButtons';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
+import { MeetingFeedbackReadout } from '@/components/organisms/MeetingFeedbackReadout';
 import type { Meeting } from '@/lib/api/meetings';
 import { MEETING_FORMAT_LABELS } from '@/lib/enumLabels';
 
@@ -31,12 +32,13 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'warning' | 'succe
 };
 
 function MeetingCard({
-  meeting, userId, onMarkNotHappened,
+  meeting, userId, onMarkNotHappened, api,
 }: {
   meeting: Meeting;
   userId: string;
   // U-01: mentöre COMPLETED görüşmeyi "gerçekleşmedi" diyerek düzeltme imkânı.
   onMarkNotHappened: (meetingId: string) => void;
+  api: ReturnType<typeof useApiClient>;
 }) {
   const isMentor  = meeting.mentorUserId === userId;
   // Karşı taraf: mentör bakarken menti, menti bakarken mentör. Menti tarafı eskiden
@@ -142,6 +144,11 @@ function MeetingCard({
         >
           Gerçekleşmedi olarak işaretle
         </Button>
+      )}
+
+      {/* E-3e: kendi yazdığın değerlendirmeyi okur, yoksa değerlendirme akışına yönlendirir. */}
+      {meeting.status === 'COMPLETED' && (
+        <MeetingFeedbackReadout api={api} meetingId={meeting.id} />
       )}
     </div>
   );
@@ -256,7 +263,7 @@ export default function MeetingsPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              {upcoming.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} />)}
+              {upcoming.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} api={api} />)}
             </div>
           )}
         </CardContent>
@@ -270,7 +277,7 @@ export default function MeetingsPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {past.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} />)}
+              {past.map((m) => <MeetingCard key={m.id} meeting={m} userId={user!.id} onMarkNotHappened={setNotHappenedTarget} api={api} />)}
             </div>
           </CardContent>
         </Card>

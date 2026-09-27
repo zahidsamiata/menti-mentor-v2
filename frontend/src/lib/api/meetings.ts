@@ -50,6 +50,40 @@ export interface MeetingsListResponse {
   total: number;
 }
 
+/**
+ * E-3e / GV-04 / KARAR-80 (M22, A kabul): backend `getMeetingFeedback`
+ * (feedbackController.ts) taraf bazlı böler — yazan yalnız KENDİ kaydını,
+ * kurum yöneticisi hepsini görür; karşı tarafın alanları HİÇ dönmez ("en dar
+ * görünürlük"). Bu yüzden alanların TAMAMI opsiyonel: hangi rolden (mentör/
+ * menti/admin) bakıldığına göre bazıları hiç gelmez.
+ */
+export interface MeetingFeedback {
+  id: string;
+  meetingId: string;
+  tenantId: string;
+  mentorId: string;
+  mentiId: string;
+  // Menti → Mentor
+  guidanceScore?: number | null;
+  resourceSharingScore?: number | null;
+  trustScore?: number | null;
+  // Mentor → Menti
+  preparednessScore?: number | null;
+  proactivityScore?: number | null;
+  engagementScore?: number | null;
+  goalClarityScore?: number | null;
+  keyLearnings?: string | null;
+  specificComments?: string | null;
+  // Dönemlik derin
+  periodicCareerGrowth?: string | null;
+  periodicTrustScore?: number | null;
+  periodicNetworkScore?: number | null;
+  periodicConfidenceScore?: number | null;
+  periodicNpsScore?: number | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface CheckIn {
   overallRating: number;
   progressRating: number;
@@ -133,6 +167,12 @@ export const meetingsApi = {
 
   submitCheckIn: (api: BoundClient, meetingId: string, data: CheckIn): Promise<ApiResult<CheckIn>> =>
     api<CheckIn>(`/api/meetings/${meetingId}/check-in`, { method: 'POST', body: data }),
+
+  // E-3e: KENDİ yazdığın görüşme değerlendirmesini okur. Kayıt yoksa 404, taraf
+  // değilsen 403 döner (backend zaten taraf/admin kontrolü yapıyor) — çağıran
+  // bu iki durumu ayrı ele almalı (bkz. MeetingFeedbackReadout).
+  getFeedback: (api: BoundClient, meetingId: string): Promise<ApiResult<MeetingFeedback>> =>
+    api<MeetingFeedback>(`/api/meetings/${meetingId}/feedback`),
 
   getPairSignal: (
     api: BoundClient,
