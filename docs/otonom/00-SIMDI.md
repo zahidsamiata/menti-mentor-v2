@@ -7,11 +7,13 @@
 
 **Durum:** CALISIYOR — PO görevi: GÖREV 0 (kural: doğrulama opus + mutasyon kanıtı) → 1 (AJ-20…AJ-48; AJ-29/AJ-38 hariç) → 2 (kayıt+belge, kural h) → 3 (AJ: değerlendirme okuma ucu + E-3 notu) → 4 (sahipsiz kalanlar, salt-okuma) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 0 (dal `otonom/KURAL-DOGRULAMA-OPUS-20260927`) + GÖREV 1 başlıyor (AJ-21 → AJ-20 …, en fazla 2 yazan ajan).
+**Şu an yapılan:** GÖREV 0 MERGE (#381, 7b 3 tur ONAY) · GÖREV 3 MERGE (#382, AJ-49 🔴 KARAR-89) · GÖREV 1 sürüyor: AJ-21 backend #194 (7b incelemede) · AJ-24 çatı #383 (7b incelemede) · AJ-20 ve AJ-30 yapılıyor.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #382 | GÖREV 3 — AJ-49 + E-3 notu (docs) | CI 10/10 |
+| çatı #381 | GÖREV 0 — doğrulama opus + mutasyon kanıtı kuralı (docs) | CI 10/10 |
 | çatı #380 | GÖREV C — kural (h) + bekçi UYARI (docs+script) | CI 10/10 · canlı ok:true, db:up, site 200 |
 | çatı #379 | GÖREV B — belge kapanış senkronu (docs) | docs · CI 10/10 |
 | çatı #378 | GÖREV A — BITTI son doğrulama (docs) | docs · CI 10/10 |
