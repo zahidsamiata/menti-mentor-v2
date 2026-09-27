@@ -400,14 +400,14 @@ Belge oluşturur/düzenlerken oraya bak; kuralların tamamı orada.
   korunmuyor. Kanıt: `docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md` §0.)*
 - KASITLI public olan endpoint'ler (V-09 kod-teyitli tam liste, 2026-09-21):
   **auth:** `POST /api/auth/register` · `/login` · `/refresh` · `/logout` · `/forgot-password` ·
-  `/reset-password` · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
+  `/reset-password` · `/reapply` (reddedilen kullanıcının yeniden başvurusu; e-posta+şifre ile kimlik doğrular; `loginRateLimiter`, IP-bazlı — AJ-27) · `GET /api/auth/:provider` (+`/callback`, OAuth) ·
   **platform:** `POST /api/platform/auth` · `/logout` ·
   **onboarding/kurum:** `GET /api/invitations/:token/join` · `GET /api/tenants/self-serve/check-slug` ·
   `POST /api/tenants/self-serve/register` · `GET /api/tenants/unsubscribe` ·
   **diğer:** `POST /api/suspicion-reports` · `GET /health` · `GET /uploads/**` (statik, CSP-sandbox).
-  Hepsi rate-limitli. **Bunun DIŞINDA public endpoint YOK** — yeni public uç eklenirse buraya eklenir.
-  (Kanıt: `authRoutes.ts:21-56` · `platformRoutes.ts:34-35` · `invitationRoutes.ts:13` ·
-  `selfServeRoutes.ts:23-38` · `suspicionRoutes.ts:9` · `server.ts:60,71`.)
+  `/api` altındakilerin hepsi rate-limitli (genel sınır yalnız `/api` altına bağlı — `server.ts:87-88`; `/health` ve `/uploads/**` hariç). **Bunun DIŞINDA public endpoint YOK** — yeni public uç eklenirse buraya eklenir.
+  (Kanıt: `authRoutes.ts:25-87` · `platformRoutes.ts:35-36` · `invitationRoutes.ts:13` ·
+  `selfServeRoutes.ts:24-40` · `suspicionRoutes.ts:11` · `server.ts:63,74`.)
 
 ### Veri döndürürken
 - Explicit `select` kullan — `password` ASLA dönmesin.
