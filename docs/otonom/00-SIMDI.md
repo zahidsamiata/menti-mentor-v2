@@ -1,15 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-27 (oturum açılışı) UTC · çatı main HEAD `75979b3` · backend main HEAD `4db73a1` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 04:12 UTC · çatı main HEAD `f220bbe` · backend main HEAD `f4f624a` (= canlı pointer)
 
 **Durum:** ÇALIŞIYOR — PO NOTU oturumu: GÖREV 0 (PO kararları K-A/K-B/K-C + kapı düzeltmeleri) → GÖREV 1 (belge aktif/arşiv ayrımı + bekçi) → GÖREV 2 (AJ- satırları) → Bölüm 14.
 
-**Şu an yapılan:** K2 açılış tamam (worktree'lerde push edilmemiş iş yok; Y1-B9 KVKK md.11 muafiyeti zaten main'de: backend `src/middleware/tenantSuspension.ts:31-54`, #165). Şerit 1: GÖREV 0 belgeleri · Şerit 2: P-05 merge (backend #162 → pointer → çatı #340).
+**Şu an yapılan:** GÖREV 0 ✅ (#354). GÖREV 1 dalı `otonom/BELGE-AKTIF-ARSIV-20260926`: 6/7 commit hazır (kuyruk · kararlar · ilerleme · CLAUDE/PROMPT · kural 5c · bekçi); 03-PO + BELGE-HARİTASI alt ajanda → sonra PR + 7b. GÖREV 2 doğrulama taraması 2 salt-okuma alt ajanda. ⚠️ Kuyruk/ILERLEME güncellemeleri GÖREV 1 merge'ünü bekliyor (P-05 BITTI kaydı dahil).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| backend #162 + çatı #340 | P-05 (reddedilen görüşmede menti'ye nazik bildirim) — kapı 🟢 (PO 0.2) | ok:true, db:up, site 200 (uptime 455 sn — dağıtım teyidi bir sonraki kontrolde) |
+| çatı #354 | GÖREV 0 — PO kararları K-A/K-B/K-C + kapı düzeltmeleri | docs |
 | backend #171 + çatı #353 | AN-07 (aday kesmesi skordan sonra) | ok:true, db:up, site 200 |
 | backend #170 + çatı #352 | Y3b (başka kurumun KVKK/metrik isteği → 404) | ok:true, db:up, site 200 |
 | backend #169 + çatı #351 | K5-Y3 (10 uca 41 negatif test — açık yok) | ok:true, db:up, site 200 |
@@ -27,7 +29,6 @@
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
-| backend #162 + çatı #340 | P-05 görüşme reddinde nazik bildirim | yeşil | ✅ ONAY | kapı 🔵 ama migration'sız → kapı kararı (strateji) |
 | backend #151 + çatı #332 | IC-08 düzeltme notu | yeşil | ✅ ONAY | ⛔ #151 merge sınıflandırıcı reddi |
 | backend #157 + çatı #337 | AN-26 hatırlatma/eskalasyon · 🔵 | yeşil | ✅ ONAY | KARAR-98 EVET (+ alt soru) + `Conversation` yedeği |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 | yeşil | ✅ ONAY | KARAR-97 EVET + `Conversation` yedeği |
