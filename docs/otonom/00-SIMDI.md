@@ -7,7 +7,7 @@
 
 **Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
 
-**Şu an yapılan:** GÖREV A — 11 parti TAMAM (209 birim: ✅ 169 · ⚠️ 27 · 🔁 7 · 👁 6 · ❌ 0 · ❓ 0 — kalite kontrol öncesi). Kalite kontrolü sürüyor: QA (40 ✅-dışı) · QB/QC (51 R1 ✅) · QD (24 R2/R3 ✅ örneklem, sırada). Parti dosyaları push edildi: dal `otonom/BITTI-DOGRULAMA-20260927` @ `docs/raporlar/kod-denetimi/bitti-dogrulama-partiler/`. Sonra: rapor + AJ satırları + kabul listesi → PR → 7b → merge → GÖREV B.
+**Şu an yapılan:** GÖREV A tamam → çatı PR #378 açık (rapor `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` · AJ-20…AJ-48 · kabul testi listesi 12 madde) — 7b bağımsız inceleme + CI bekleniyor. Nihai: 209 birim · ✅ 127 · ⚠️ 56 · ❌ 1 (P-07) · 🔁 13 · 👁 12 · ❓ 0 (tamamı opus QC; 47 çürüdü). Sonra GÖREV B (148 iş).
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
@@ -51,6 +51,7 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
+| çatı #378 | GÖREV A — BITTI son doğrulama | bekliyor | bekliyor | 7b + CI |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
 | backend #157 + çatı #337 | AN-26 hatırlatma/eskalasyon · 🔵 | yeşil | ✅ ONAY | KARAR-98 EVET (+ alt soru) + `Conversation` yedeği |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 | yeşil | ✅ ONAY | KARAR-97 EVET + `Conversation` yedeği |
