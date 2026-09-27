@@ -53,6 +53,7 @@
 | backend #160 | AN-02 seed metin yazımı · 🔵 | yeşil | — | KARAR-99 EVET + 2 satır UPDATE |
 | backend #185 | AN-52-1 anket tablosu · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-106 EVET bekliyor (yedek gerekmez — yeni tablo) |
 | backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
+| backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **Push edilmemiş iş:** yok.
@@ -60,9 +61,9 @@
 **Engeller:**
 - ⛔ 2026-09-27 04:50 UTC — `gh pr merge 356 --merge` (GÖREV 2 belge PR'ı, CI yeşil) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` → bağımsız inceleme (3 tur) ONAY sonrası merge geçti (`79bc0f7`); ardışık ret sayacı sıfırlandı.
 - ✅ (çözüldü 2026-09-27: #151 tazelenip merge edildi) ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` (Ardışık ret sayısı sıfırlandı; sonraki merge'ler geçti.)
-- 🗄️ Tek seferlik DB erişimi gerekiyor: **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
+- 🗄️ Tek seferlik DB erişimi gerekiyor: K-15 (<60 dk blok sayımı + yedek, KARAR-111 EVET gelirse) · **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
 
-**PO'ya sorular:** KARAR-110 (periyodik anket) · KARAR-109 (anlaşma taslağını kim başlatır) · KARAR-107 (🔵 AN-12 karantina EVET/HAYIR) · KARAR-108 (DISC eşitlik sırası) · KARAR-106 (🔵 AN-52 anket tablosu EVET/HAYIR — yeni tablo, yedek gerekmez) · KARAR-105 (kurumlar arası anonim karşılaştırma) · KARAR-104 (eşik ince ayarı, öneri A) · KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
+**PO'ya sorular:** KARAR-111 (🔵 K-15 müsaitliğe tür+süre — mevcut bloklar Online/60'a daralır) · KARAR-110 (periyodik anket) · KARAR-109 (anlaşma taslağını kim başlatır) · KARAR-107 (🔵 AN-12 karantina EVET/HAYIR) · KARAR-108 (DISC eşitlik sırası) · KARAR-106 (🔵 AN-52 anket tablosu EVET/HAYIR — yeni tablo, yedek gerekmez) · KARAR-105 (kurumlar arası anonim karşılaştırma) · KARAR-104 (eşik ince ayarı, öneri A) · KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
 - AJ-01 kapsam dışı bıraktı: platform/süper-admin geneli rol sayımları (`backend/src/controllers/platformController.ts`, `adminSettingsController.ts`) hâlâ `User.role` — tekil kişi mi üyelik mi sayılacağı ürün kararı adayı.
