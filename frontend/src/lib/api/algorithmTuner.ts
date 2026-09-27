@@ -42,7 +42,12 @@ export const algorithmTunerApi = {
   // 95: lastChange = son manuel değişikliğin izi (kim/ne zaman/eski→yeni); yoksa null.
   getWeights: (
     api: BoundClient,
-  ): Promise<ApiResult<{ weights: AlgorithmWeights; lastChange: WeightChangeInfo | null }>> =>
+  ): Promise<ApiResult<{
+    weights: AlgorithmWeights;
+    lastChange: WeightChangeInfo | null;
+    // AJ-48: kurumun kayıtlı kalibrasyon sıklığı (eski backend'de alan yoksa undefined).
+    reportingFrequency?: ReportingFrequency;
+  }>> =>
     api('/api/admin/algorithm-tuner/weights'),
 
   // 9a: kurum yöneticisi sektör ağırlığını MANUEL ayarlar. discWeight backend'de
