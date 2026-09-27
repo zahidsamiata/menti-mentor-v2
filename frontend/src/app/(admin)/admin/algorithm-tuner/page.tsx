@@ -41,7 +41,9 @@ export default function AlgorithmTunerPage() {
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
   const [confirmAction, setConfirmAction] = useState<'approve' | 'reject' | null>(null);
-  const [selectedFreq, setSelectedFreq] = useState<ReportingFrequency>('WEEKLY');
+  // AJ-48: kayıtlı sıklık /weights yanıtından yüklenir; kullanıcı seçim yapınca taslak onu ezer.
+  const [draftFreq, setDraftFreq] = useState<ReportingFrequency | null>(null);
+  const selectedFreq: ReportingFrequency = draftFreq ?? weightsData?.reportingFrequency ?? 'WEEKLY';
   const [freqSaved, setFreqSaved] = useState(false);
   const [freqSaving, setFreqSaving] = useState(false);
 
@@ -219,7 +221,8 @@ export default function AlgorithmTunerPage() {
             {FREQ_OPTIONS.map(({ value, label, desc }) => (
               <button
                 key={value}
-                onClick={() => { setSelectedFreq(value); setFreqSaved(false); }}
+                aria-pressed={selectedFreq === value}
+                onClick={() => { setDraftFreq(value); setFreqSaved(false); }}
                 className={`rounded-xl border p-3 text-left transition-colors ${
                   selectedFreq === value
                     ? 'border-primary bg-primary/10'
