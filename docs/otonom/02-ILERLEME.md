@@ -3,6 +3,25 @@
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
 > Önceki haftalar: `docs/otonom/arsiv/02-ILERLEME-2026-W38.md` (haftalık döndürme — OTONOM-PROMPT § AKTİF/ARŞİV AYRIMI (d)).
 
+## TUR ÖZETİ (2026-09-27, VPS oturumu — BITTI SON DOĞRULAMA: GÖREV A/B/C · kapanış 18:40 UTC · DURDU K1-a)
+
+**BITTI ve CANLIDA (belge/süreç işi, 3 PR):**
+- **GÖREV A (#378)** — PO, kuyrukta "BITTI" denen 209 işin hangisinin gerçekten bittiğini tek raporda dosya:satır kanıtıyla görüyor: ✅ 127 · ⚠️ 56 · ❌ 1 · 🔁 13 · 👁 12 · ❓ 0 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`). Tamamı opus kalite kontrolünden geçti (162 TUTAR / 47 ÇÜRÜDÜ). Mutasyon: 44 koşum → 42 kırmızı.
+- **GÖREV B (#379)** — 00-KARAR-TAKIP, 09-DURUM ve 6 belgede doğrulanmış işler artık "açık" görünmüyor (39 satır: ✅ 30 · 🟨 10); belirsiz 68 yer kapatılmadı (teyit listesi); dondurulmuş belgeler için 129 satırlık eşleme tablosu. 09-DURUM ve 00-KARAR-TAKIP "Son senkron: 2026-09-27" diyor.
+- **GÖREV C (#380)** — iş BITTI olunca kaynağı aynı commit'te işaretlenir (OTONOM-PROMPT 5c kural h); belge bekçisi açık kalan kaynağı UYARI olarak gösteriyor (bugün 0 uyarı).
+
+**⛔ GÜVENLİK BULGUSU:** U-08 kalanı — onay bekleyen/reddedilen hesap `POST /api/scoring/rank-mentors` ile mentör kimlik no + uyum skoru alabiliyor → **AJ-20**. KVKK yan bulgu: başkasının profilinde ham DISC vektörü/puanları dönüyor → **AJ-21**. (Bu turda düzeltme yok — PO talimatı.)
+**❌ TUTMUYOR:** P-07 — ilk görüşmede "2. görüşmen tamamlandı!" → AJ-33.
+**AÇILAN AJ:** AJ-20…AJ-48 (29; güvenlik/KVKK 13 kuyruğun en üstünde). Sonraki turun işi.
+**KARAR BEKLİYOR:** bu turda yeni kart açılmadı (PO talimatı); AJ Not'larında "karar gerekebilir": AJ-21 · AJ-22 · AJ-28 · AJ-34 · AJ-38 · AJ-39 · AJ-46.
+**BAŞARISIZ:** 0.
+**CANLIDA KONTROL EDİLECEKLER (PO):** `03-PO-ELLE-ISLER.md` § KABUL TESTİ LİSTESİ (2026-09-27) — 12 madde; önce GV-09b / V-08 / KR-16 (Dokploy teyitleri).
+**PO'NUN KENDİ YAPMASI GEREKENLER:** kabul testi listesi · 🔵 EVET kartları (KARAR-96/97/98/99/106/107/111) · ⭐ KARAR-101.
+**KUYRUK SON DAĞILIMI:** hemen yapılabilir 🟢: AJ-20…AJ-48'in 🟢 olanları (sonraki tur) · 🔵 PR-AÇIK: 8 · 🔴: değişmedi.
+**BACKEND:** pointer `3bd9ad3` = backend main HEAD (bu turda backend değişmedi).
+**STASH:** yok (bu oturumda stash kullanılmadı).
+**Süreç notları:** parti 06/08 ajanları kendi içinde 4'er alt-ajan açtı (3 paralel sınırı aşıldı; 09'dan itibaren yasaklandı). Mutasyon worktree'leri PO talimatıyla /tmp altında (commit/push yok, hepsi kaldırıldı). B PR'ı 4 inceleme turu: KART-INDEKSI dondurulmuş sayıldı, açıklayıcı durum metni korunur kuralı, madde 141 teyit, yakın-ama-farklı uç (E-3e) geri alındı.
+
 ## TUR ÖZETİ (2026-09-27, VPS oturumu — PO NOTU: GÖREV 0-3 · kapanış 13:45 UTC · DURDU K1-a)
 
 **BITTI ve CANLIDA: 22 iş** (her biri canlı kontrol `ok:true · db:up · site 200`)
@@ -1063,3 +1082,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **GÖREV B PR-AÇIK** — çatı #379: 66 satır / 9 belge (✅ + 🟨), B.4 ilk satırlar + 09-DURUM 2026-09-27 bölümü, dondurulmuş eşleme 87 satır / 15 belge, teyit 80, B.8 silinen 68 → arşivde 68.
 - 2026-09-27 · **GÖREV B MERGE** — çatı #379 (`695f74a`), 7b 4 tur (bulgular: KART-INDEKSI dondurulmuş sayıldı · metin kaybı → açıklayıcı metin korunur · madde 141 teyit · E-3e yakın-ama-farklı uç geri alındı), son ONAY, CI 10/10. 39 satır / 8 belge · teyit 68 · eşleme 129/16 · B.8 41/41.
 - 2026-09-27 · **GÖREV C PR-AÇIK** — çatı #380: kural (h) + bekçi UYARI + istisna (I-02 → madde 141) + 5 test (12/12).
+- 2026-09-27 18:40 UTC · **GÖREV C MERGE** (#380 `0832f89`, 7b ONAY, CI 10/10; canlı ok:true · db:up · site 200). **TUR KAPANDI — DURDU K1-a** (TUR ÖZETİ başta).

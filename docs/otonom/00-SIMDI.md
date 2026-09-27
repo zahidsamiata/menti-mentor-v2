@@ -3,15 +3,16 @@
 
 > ⛔ **GÜVENLİK BULGUSU (2026-09-27, BITTI doğrulaması — U-08 ⚠️, kalite kontrolü QB):** `POST /api/scoring/rank-mentors` onay kapısı yok — `backend/src/routes/sjtScoringRoutes.ts:25-29` yalnız `requireAuth()`; komşu uç `backend/src/controllers/matchingController.ts:74` `rejectIfCallerNotApproved` uyguluyor. Onay bekleyen/reddedilen menti mentör kimlik no + uyum skoru alabiliyor (ad dönmüyor). Bu oturumda DÜZELTME YOK → AJ satırı (sonraki tur).
 
-**Son güncelleme:** 2026-09-27 · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3` (= canlı pointer)
+**Son güncelleme:** 2026-09-27 18:40 UTC · çatı main HEAD (bu commit; GÖREV C merge `0832f89`) · backend main HEAD `3bd9ad3` (= canlı pointer; bu turda backend değişmedi)
 
-**Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
+**Durum:** DURDU (K1-a) — PO görevi (BITTI son doğrulama A → belge senkronu B → kural h + bekçi C) tamamlandı; PO talimatı gereği K5 yedek havuzuna GEÇİLMEDİ. Bu turda açılan AJ-20…AJ-48 sonraki turun işi (K1-a'da sayılmadı).
 
-**Şu an yapılan:** GÖREV C PR-AÇIK — çatı #380 (OTONOM-PROMPT 5c kural (h) + belge-bekci "BITTI işin kaynağı açık" UYARISI + gerekçeli istisna + 5 test; bekçide kalan kural (h) uyarısı 0). 7b + CI bekleniyor; sonra DURDU (K1-a).
+**Şu an yapılan:** yok. **TUR ÖZETİ (2026-09-27 BITTI son doğrulama):** 209 birim (205 BITTI satırı + 4 alt kalem) → **✅ 127 · ⚠️ 56 · ❌ 1 (P-07) · 🔁 13 · 👁 12 (hepsi kod ✅) · ❓ 0** · R1 63 (✅ 47 · ⚠️ 13 · 🔁 3) · R2 98 (✅ 55 · ⚠️ 26 · 🔁 8 · 👁 8 · ❌ 1) · R3 48 (✅ 25 · ⚠️ 17 · 🔁 2 · 👁 4) · **kalite kontrolü:** 209'un tamamı opus denetçiden geçti → 162 TUTAR / 47 ÇÜRÜDÜ (R1 ✅ 51'in 4'ü, R2/R3 ✅ 118'in 40'ı) · **mutasyon:** 78 işlik kapsam, 44 koşum → 42 kırmızı, 3 mutant yeşil (PS-02, PS-A1, GV-07 → ⚠️ test boş), 36 DB gerekli (satır okuması), 1 yapılamadı (F-15) · **AJ:** AJ-20…AJ-48 = 29 satır; güvenlik/KVKK 13 (AJ-20…AJ-32, kuyruk en üstü; ⛔ AJ-20 U-08 `rank-mentors` onay kapısı · AJ-21 ham DISC vektörü mentöre dönüyor) · **kabul testi listesi:** 12 madde (`03-PO-ELLE-ISLER.md`) · **belge senkronu:** 8 yaşayan belgede 39 satır (00-KARAR-TAKIP 23 · kod-kalemleri 7 · e3-baglanmamis-uclar 4 · 09-DURUM/06-tasarim-ux/degerlendirme-sistemi/tasarim-kararlari-admin/03-PO 1'er; ✅ 30 · 🟨 10) · teyit listesi 68 · dondurulmuş eşleme 129 satır / 16 belge · B.8 41/41 · **bekçi kural (h) kalan uyarı: 0** (tek aday I-02 → madde 141 gerekçeli istisnada) · **limitin en çok gittiği yer:** kalite kontrolü — sonnet partilerinde ✅ çürüme oranı %34 çıkınca 9 ek opus denetçiyle 209'un tamamı yeniden kontrol edildi; ayrıca B PR'ı 4 inceleme turu. Rapor: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #380 | GÖREV C — kural (h) + bekçi UYARI (docs+script) | CI 10/10 · canlı ok:true, db:up, site 200 |
 | çatı #379 | GÖREV B — belge kapanış senkronu (docs) | docs · CI 10/10 |
 | çatı #378 | GÖREV A — BITTI son doğrulama (docs) | docs · CI 10/10 |
 | backend #193 + çatı #377 | AJ-19 (negatif test son parti) | ok:true, db:up, site 200 |
@@ -53,7 +54,6 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #380 | GÖREV C — kural (h) + bekçi | bekliyor | bekliyor | 7b + CI |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
 | backend #157 + çatı #337 | AN-26 hatırlatma/eskalasyon · 🔵 | yeşil | ✅ ONAY | KARAR-98 EVET (+ alt soru) + `Conversation` yedeği |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 | yeşil | ✅ ONAY | KARAR-97 EVET + `Conversation` yedeği |
@@ -82,4 +82,4 @@
 
 **Karar kilidi (cevapsız kartlar, kilitlediği açık kuyruk satırı sayısına göre — 2026-09-27 yeniden sayım):** KARAR-64 (4: I-01, I-11, AN-50, AN-51) · KARAR-46 (3: F-14, P-99, AN-03) · KARAR-95/88/72/58/57/50/36 (2'şer; KARAR-58 → PS-A2 → PS-A3 → Y-17 zinciri) · 33 kart 1'er iş · 41 cevapsız kart hiçbir kuyruk satırını kilitlemiyor (bilgi/ince ayar). 🔵 EVET bekleyenler: KARAR-96 (AN-30) · 97 (U-18) · 98 (AN-26) · 99 (AN-02). ⭐ Güvenlik: KARAR-101 (Y1-B8).
 
-**Sıradaki 5 iş:** (1) PO EVET gelirse K-15 (<60 dk blok sayımı + yedek → #189 → pointer → #374) · (2) AN-52-1 #185 / AN-12 #186+#370 merge (yedek gerekmez) · (3) AN-27 🔵 hazırlık · (4) P-08 / I-08 değerlendirme · (5) E-4 karantina turu (K-13 ile).
+**Sıradaki 5 iş:** (1) ⛔ AJ-20 (rank-mentors onay kapısı, 🟢+7b) · (2) AJ-21 (ham DISC vektörü/puan mentöre dönüyor, 🟢+7b) · (3) AJ-22…AJ-32 güvenlik/KVKK kalanları (AJ-29 🟡 yasak bölge — PO turu) · (4) AJ-33 P-07 kutlama sayısı (❌) · (5) Feedback okuma ucu için AJ satırı + E-3 notu düzeltmesi (7b #379 N1). PO: KABUL TESTİ LİSTESİ (12 madde) + 🔵 EVET kartları.
