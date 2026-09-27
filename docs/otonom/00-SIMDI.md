@@ -7,11 +7,12 @@
 
 **Durum:** CALISIYOR — PO görevi: GÖREV A (BITTI son doğrulama, salt-okuma) → B (belge kapanış senkronu) → C (kural h + bekçi) → DURDU (K1-a). K5 yedek havuzuna geçilmeyecek.
 
-**Şu an yapılan:** GÖREV A tamam → çatı PR #378 açık (rapor `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` · AJ-20…AJ-48 · kabul testi listesi 12 madde) — 7b bağımsız inceleme + CI bekleniyor. Nihai: 209 birim · ✅ 127 · ⚠️ 56 · ❌ 1 (P-07) · 🔁 13 · 👁 12 · ❓ 0 (tamamı opus QC; 47 çürüdü). Sonra GÖREV B (148 iş).
+**Şu an yapılan:** GÖREV A MERGE (#378 → `c648ed2`, CI 10/10, 7b ONAY). GÖREV B başladı — dal `otonom/BELGE-SENKRON-20260927`; 148 KAPAT + 59 KISMEN işin belge yerleri taranıyor (B1-B4 yaşayan belgeler · F1-F2 dondurulmuş eşleme). Belge değişikliği henüz yok.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #378 | GÖREV A — BITTI son doğrulama (docs) | docs · CI 10/10 |
 | backend #193 + çatı #377 | AJ-19 (negatif test son parti) | ok:true, db:up, site 200 |
 | backend #192 + çatı #376 | AJ-18 (19 uca negatif test) | ok:true, db:up, site 200 |
 | backend #190 + #191 + çatı #375 | AJ-16 (20 uca negatif test) · AJ-17 (elle temizlik/kalibrasyon yalnız kendi kurumu) | ok:true, db:up, site 200 |
@@ -51,7 +52,6 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #378 | GÖREV A — BITTI son doğrulama | bekliyor | bekliyor | 7b + CI |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | yeşil | SORUN VAR (ürün) | **KARAR-101** — Bekleme Odası kalsın mı |
 | backend #157 + çatı #337 | AN-26 hatırlatma/eskalasyon · 🔵 | yeşil | ✅ ONAY | KARAR-98 EVET (+ alt soru) + `Conversation` yedeği |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 | yeşil | ✅ ONAY | KARAR-97 EVET + `Conversation` yedeği |
