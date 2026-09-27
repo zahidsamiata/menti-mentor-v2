@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
 export const NOTIFICATION_OPT_IN_TEXT = {
   button: '🔔 Bildirimlere izin ver',
   granted: '🔔 Tarayıcı bildirim izni verildi. Gelişmeleri şimdilik bu panelden takip edebilirsin.',
-  denied: 'Bildirimler kapalı. Dilersen tarayıcı ayarlarından açabilirsin.',
+  denied: 'Bildirim izni verilmedi. Gelişmeleri bu panelden takip edebilirsin.',
 } as const;
 
 export type BrowserNotificationPermission = 'default' | 'granted' | 'denied' | 'unsupported';

@@ -37,7 +37,9 @@ describe('notificationPromptView (F-20)', () => {
   it("'denied' iken düğme yok, kapalı durum metni gösterilir", () => {
     const v = notificationPromptView('denied');
     expect(v.showButton).toBe(false);
-    expect(v.statusText).toMatch(/kapalı/i);
+    expect(v.statusText).toBe(NOTIFICATION_OPT_IN_TEXT.denied);
+    // AJ-39 (7b #399): ret metni kullanıcıyı etkisiz bir işe (tarayıcı ayarından açmaya) yönlendirmez
+    expect(v.statusText).not.toMatch(/ayarlar[ıi]ndan|açabilirsin/i);
   });
 
   it("desteklenmeyen tarayıcıda hiçbir şey render edilmez", () => {
