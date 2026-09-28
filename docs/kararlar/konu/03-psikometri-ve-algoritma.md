@@ -9,28 +9,28 @@
 > aşamasında kaldı (⏳ ile işaretli). Kod iteratif değişti — "en son hali" esastır.
 
 ## MODEL TEMELİ
-- **DISC görünür + Big Five (OCEAN) motor.** Kullanıcıya sezgisel arketipler gösterilir; algoritma altta OCEAN sürekli boyutlarında çalışır. 🟢✅
+- **DISC görünür + Big Five (OCEAN) motor.** Kullanıcıya sezgisel arketipler gösterilir; algoritma altta OCEAN sürekli boyutlarında çalışır. 🟢✅ · 🟨 kısmen (doğrulama 09-28) — var: `backend/src/services/disc-to-ocean.adapter.ts` · eksik: canlı eşleştirme OCEAN okumuyor (`backend/src/services/matching.ts:3` DISC+sektör) → F-11 (00-KUYRUK) · madde 101
 - Gerekçe: MBTI/Enneagram düşük psikometrik geçerlilik; Big Five ampirik olarak en sağlam.
 - **Adapter stratejisi:** DISC silinmez, üstüne adapter (köprü). `discToOcean` ile OCEAN türetilir; O ve N (DISC'te zayıf) SJT ile override edilir. Bağlam: `disc-to-ocean.adapter.ts`.
 
-## 8 ARKETİP (4 mentör + 4 menti) 🟢✅
+## 8 ARKETİP (4 mentör + 4 menti) 🟢✅ · 🟨 kısmen (doğrulama 09-28) — var: `backend/src/services/scoring.config.ts:33-34` (M1-M4/m1-m4) · eksik: arketip yalnız uyuyan `scoring.service.ts` yolunda; canlı `matching.ts` kullanmıyor → F-11 / PS-A3 (00-KUYRUK)
 - **Mentör:** Mimar (M1), Kâşif (M2), Çoban (M3), Komutan (M4).
 - **Menti:** İnşaatçı (m1), Gezgin (m2), Tohum (m3), Atılgan (m4).
 - 4×4=16 hücre yönetilebilir çözünürlük.
 
-## EŞLEŞME FORMÜLÜ 🟢✅
+## EŞLEŞME FORMÜLÜ 🟢✅ · doğrulama 09-28: `backend/src/services/scoring.ts:106-109,118-121` (canlı çarpan sınırı 0.8–1.2)
 - **Toplam = (Sektör × 0.60) + (Mizaç × 0.40), sonra × qualityMultiplier** (0.7–1.15 clamp).
 - **Hard-gate = kapı, çarpan ≠ toplam terimi:** Toksik eşleşme skorlama ÖNCESİ elenir (Gate→Score). Mentörlük yetkinliği toplama eklenmez, çarpan olarak modüle eder.
 - Bağlam: `calculateMatchScore`, `scoring.service.ts`. (DİKKAT: bu fonksiyon 3 kez değişti — temel→çarpan→sertifika kapısı; en son hali kullanılmalı.)
 
-## HARD-GATE (TOKSİK BLOK) 🟢✅
+## HARD-GATE (TOKSİK BLOK) 🟢✅ · 🟨 kısmen (doğrulama 09-28) — var: D↔S anti-match canlı (`backend/src/services/scoring.ts:24`) · eksik: M4-m3 arketip vetosu yalnız uyuyan `scoring.service.ts:36` → F-11 (00-KUYRUK)
 - M4-m3 (Komutan-Tohum) toksik → **kesinlikle bloklanır** (mutlak veto, override edilemez).
 - M1-m4 çatışma, M3-m3 düşük (gelişimsiz).
 - Anti-match: D tipi mentör + S tipi menti bloklu (toksik dinamik riski).
 - Bağlam: `BLOCKED_PAIRS` (scoring.config.ts).
 - **Yönetici eşiği ≠ hard-gate:** Yönetici kalite eşiğini oynatabilir ama güvenlik bloğunu (toksik) açamaz. Panelde ayrı gösterilmeli.
 
-## SJT (Durumsal Yargı Testi) & YANIT FORMATI 🟢✅
+## SJT (Durumsal Yargı Testi) & YANIT FORMATI 🟢✅ · 🟨 kısmen (doğrulama 09-28) — var: `backend/src/services/sjt-scorer.ts` · `backend/prisma/schema.prisma:927` (MOST_LEAST) · eksik: SJT/OCEAN canlı eşleştirmede okunmuyor → madde 101 / PS-A2 (00-KUYRUK)
 - Likert ("1-5 puan ver") REDDEDİLDİ → senaryo-bazlı SJT (sosyal arzu edilebilirliğe dirençli).
 - **İki katmanlı soru:** CORE (zorunlu, ilk girişte %70 profil) + FOLLOWUP (opsiyonel/adaptif, kararsız boyutlarda tetiklenir).
 - **KATMANLI HİBRİT format:** CORE = Single-Select, FOLLOWUP = Most/Least. Saf multi-select + şık-başı Likert REDDEDİLDİ.
@@ -44,7 +44,7 @@
 - **DURUM:** ~~Reçete onaylandı ama kod YAZILMADI — şu an stub (nötr 50 dönüyor). ⏳~~ ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): kod gerçeği farklı — `backend/src/services/sector-scorer.service.ts:7` ağırlık formülü (`W={A:0.30,B:0.25,C:0.25,D:0.15,E:0.05}`) + `:67 resolveSectorScore` **TAM yazılmış** (stub değil). ANCAK `matching.ts` bu servisi **0 kez import ediyor** (grep-teyitli) → yazılmış-ama-bağlanmamış/atıl. İki taraf da doğru: skorlayıcı var, motora bağlı değil. Karar/bağlama PO'nun (KARAR-10 aşamalı). Kanıt: `sector-scorer.service.ts:7,67` · `matching.ts` (0 import).
 - Uyuyan `sector-scorer.service.ts` ile bağlantılı (bugünkü teşhiste görüldü).
 
-## MENTÖRLÜK YETKİNLİĞİ & SERTİFİKASYON 🟢✅
+## MENTÖRLÜK YETKİNLİĞİ & SERTİFİKASYON 🟢✅ · 🟨 kısmen (doğrulama 09-28) — var: sertifika kapısı + 24s bekleme + %80 konu eşiği `backend/src/services/certification.service.ts:27,33,52` · eksik: "Mini Akademi 4 modül" kodda/FE'de yok → AJ aday #1 (eski-onay raporu)
 - **3. sütun: Mentörlük Yetkinliği** — 5 boyut (P1 Pedagoji, P2 Geri bildirim, P3 Empati, P4 Adanmışlık, P5 Uyarlanabilirlik).
 - **"Önce Eğit, Sonra Kalibre Et":** Sertifikasyon = kabul kapısı (0→1); kalite çarpanı = gerçek performans (1'den başlar). Yeni mentör düşük çarpanla yargılanmaz.
 - **Mini Akademi:** 4 modül (Yönlendir/Dinle/Güvenli alan/Sınırlar), ~6 dk puansız + ~~[ESKİ · düzeltildi 2026-08-17] 4 pedagojik SJT~~ → **kod gerçeği 3 SJT** (bkz. alttaki ⚠️ GÜNCELLEME).
@@ -52,7 +52,7 @@
 - **Baraj 65 + kırmızı-çizgi + cooldown:** 12 puan üzerinden %65 baraj VE hiçbir kırmızı-çizgi (isRedLine) sorusunda 0 puanlık şık seçilmemeli; 2. başarısızlıktan sonra 24s cooldown; baraj geçen çarpan=1.0.
 - Bağlam: `certification.service.ts`, PASS_THRESHOLD=65, CERT_CONFIG (passRateThreshold 0.8).
 
-## PROGRESSIVE PROFILING & FALLBACK 🟢✅
+## PROGRESSIVE PROFILING & FALLBACK 🟢✅ · doğrulama 09-28: `backend/src/services/matching.ts:52,128` · `backend/src/services/scoring.ts:118-121`
 - Test yarım kalsa da kesirli DISC vektörü + confidence skoru.
 - **Kademeli fallback:** Eşleşme yoksa filtreler sırayla gevşer (Seviye 0→3). Boş sonuç HATA DEĞİL, geçerli durum → `{ items: [], fallbackLevel }` döner, throw etmez. [P0 güvenlik — boş havuzda deadlock olmamalı]
 - **Geri bildirim döngüsü:** Son 10 görüşme ±%20 kalite çarpanı; <3 görüşme = 1.0 (yeni mentöre ceza yok).

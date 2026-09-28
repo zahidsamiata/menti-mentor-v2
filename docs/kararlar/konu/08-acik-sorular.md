@@ -29,7 +29,7 @@
 - **Eşleşme hesaplama tetikleyicisi:** Event-driven mi, sayfa-açılınca mı? "Aha anı" buna bağlı. ❓
 - **Baraj "0 puan" kuralı kapsamı:** Tüm sorularda mı, sadece isRedLine'da mı? (şu an sadece isRedLine kodlandı) ❓
 - **Format enum uyumsuzluğu:** frontend "online" vs Prisma "ONLINE" — potansiyel bug, doğrulanmadı. ❓
-- ~~**timezone bug'ı (bookMeeting):** UTC vs Europe/Istanbul — gerçek bug mu, doğrulanacak.~~ ✅ ÇÖZÜLDÜ (2026-08-02, backend `6a30f21`) — bkz. 09-DURUM.
+- ~~**timezone bug'ı (bookMeeting):** UTC vs Europe/Istanbul — gerçek bug mu, doğrulanacak.~~ ✅ ÇÖZÜLDÜ (2026-08-02, backend `6a30f21`) — bkz. 09-DURUM. · doğrulama 09-28: `backend/src/controllers/meetingController.ts:521`
 - **Çarpan vs hard-gate yumuşaması:** P5 ile hard-gate'in ileride yumuşaması (muhafazakâr vs vizyoner) karara bağlanmadı. ❓
 
 ## 🟡 ÖZELLİK / PANEL
