@@ -522,4 +522,304 @@ Kaynak: `docs/otonom/kararlar/KARAR-125.md` (origin/main, değişiklik öncesi).
 **Cevap vermezsen:** Kanal kapalı kalır; başka iş kilitlenmez.
 **CEVAP:**
 ```
+### KARAR-14 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-014.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-14 · Yönetici, bir kullanıcının verisini panelden silebilsin/indirebilsin mi?  [ÜRÜN KARARI · HUKUKİ/KVKK]
+**Şu an ne var:** Kullanıcının kendisi verilerini indirebiliyor ve hesabını silebiliyor (self-servis, çalışıyor — `/api/me/data-export`, `/api/me/delete-account`). Bunun bir de YÖNETİCİ tarafı backend'de yazılı: yönetici bir kullanıcının verisini dışa aktarabilir, anonimleştirebilir veya kalıcı silebilir. Kanıt: `userRoutes.ts:177` (anonymize), `:182` (hard-delete), `:187` (export). Hiçbirinin ekranda butonu yok.
+**Sorun ne:** KVKK kapsamında bir kullanıcı "verimi silin" diye kuruma başvurursa, yöneticinin bunu yapabilmesi gerekebilir. Ama bu aynı zamanda tehlikeli: bir yönetici başka birinin verisini kalıcı silebilir/indirebilir — kötüye kullanım ve gizlilik riski.
+**Neden sana soruyorum:** Hukuki (KVKK) sonucu olan ve geri dönülmez (kalıcı silme) bir yetki — kimin, kimin verisine dokunabileceği ürün+hukuk kararı. Ben avukat değilim.
+**Kapsadığı kalemler:** `/api/users/:id/anonymize`, `/api/users/:id/hard-delete` (DELETE), `/api/users/:id/export` (ADMIN muadilleri).
+**Seçenekler:**
+**A) Yönetici bu üç işlemi panelden yapabilsin** (onay + log ile) · Kullanıcı (yönetici): kullanıcı kartında "veriyi indir / anonimleştir / sil" · Kazanç: KVKK başvurusuna kurum hızlı cevap verir, self-servise erişemeyen kullanıcı için de çözüm · Kaybedersin: yönetici başkasının verisini görebilir/silebilir — gizlilik yüzeyi büyür, kötüye kullanım riski, her işlem denetim izi ister · Süre: L · Geri alınır: hard-delete HAYIR (kalıcı) · Migration: yok
+**B) Yalnız anonimleştirme ve dışa aktarma, kalıcı silme YOK** · Kullanıcı: yönetici indirir/anonimleştirir ama kalıcı silemez · Kazanç: KVKK ihtiyacı büyük ölçüde karşılanır, geri dönülmez silme riskini almaz · Kaybedersin: "tamamen sil" talebi yalnız kullanıcının kendisiyle ya da seninle çözülür · Süre: M · Geri alınır: evet (anonimleştirme geri alınamaz ama silme kadar sert değil) · Migration: yok
+**C) Hiç açma, yalnız self-servis kalsın** · Kullanıcı: değişiklik yok · Kazanç: en dar gizlilik yüzeyi, yönetici kimsenin verisine dokunamaz · Kaybedersin: self-servise erişemeyen (hesabı kilitli, vefat vb.) kullanıcının KVKK talebi karşılıksız kalır, yük sana biner · Süre: yok · Migration: yok
+**Karşılaştırma:** Kurumların KVKK sorumluluğunu kendi panellerinden yönetmesini istiyorsan A ama kalıcı silme için sağlam onay+log+yetki şart. Riski minimize edip ihtiyacın çoğunu karşılamak istiyorsan B en dengeli. Gizliliği en üstte tutuyorsan ve kurum sayısı azken sen aracılık edebiliyorsan C.
+**Benim önerim:** B — KVKK ihtiyacının çoğunu karşılar, geri dönülmez silme yetkisini yöneticiye vermenin riskini almaz; kalıcı silme ayrı bir karar olarak sonra gelebilir. (Bu senin ürün+hukuk kararın, önerime güvenme — avukat görüşü değerli olur.)
+**Cevap vermezsen:** ADMIN KVKK uçları bağlanmaz, self-servis çalışmaya devam eder. Başka iş etkilenmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-19 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-019.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-19 · KVKK geri-dönülmez yetkiler kümesi  [ÜRÜN KARARI · HUKUKİ · GERİ DÖNÜLMEZ]
+**Şu an ne var:** Üç KVKK kalemi teknik olarak yarım kaldı ve hepsi geri-dönülmez/hukuki sonuç taşıdığı için ajan kendi başına ilerletemiyor:
+(a) Kurum (tenant) **kalıcı silme** ucu yok — sadece "dondurma" var (`platformRoutes.ts:53` freeze; cron yalnız TASLAK kurum siler). (b) Rıza mekanizması **öncesi** kayıtlar için yeniden-rıza politikası belirsiz (teknik backfill ✅ yapıldı `backfill-consent.ts`, ama eski kayıt politikası açık — G1-16). (c) Denetim izi (kalibrasyon AUDIT) SystemLog'ta **90 günde siliniyor** (`gdprService.ts:341,366`) → iz-koruma ile KVKK imha süresi çelişiyor (G1-15).
+**Sorun ne:** Bir kurum "bizi tamamen silin" derse yapının buna cevabı yok; eski kayıtların rıza durumu belirsiz kalırsa hukuki açık; denetim izini hem tutup hem 90 günde silmek ikisini de zayıflatıyor.
+**Neden sana soruyorum:** Üçü de geri-dönülmez (kalıcı silme) ve/veya hukuki (rıza, saklama süresi). Ben avukat değilim; aşağıdakiler hukuki görüş değildir.
+**Seçenekler:**
+**A) Üçünü de şimdi netleştir** (kurum hard-delete ucu + eski-kayıt yeniden-rıza akışı + denetim izi ayrı saklama) · Kullanıcı: kurum tam silinebilir, eski kayıtlar yeniden rıza ister, denetim izi korunur · Kazanç: KVKK duruşu tam · Kaybedersin: en büyük iş, kalıcı silme riski, hukukçu onayı şart, migration · Süre: L · Geri alınır: kurum silme HAYIR · Migration: VAR
+**B) Yalnız denetim izi saklamasını çöz** (audit izini SystemLog 90g'den ayır, uzun sakla), kurum silme + eski-rıza ertele · Kullanıcı: değişiklik yok · Kazanç: en düşük riskli, iz kaybı önlenir · Kaybedersin: kurum silme + eski-rıza açık kalır · Süre: M · Geri alınır: evet · Migration: küçük
+**C) Şimdilik hiçbiri, hukukçu paketiyle birlikte** · Kullanıcı: değişiklik yok · Kazanç: emek çekirdeğe gider, tek hukuk turunda toplanır · Kaybedersin: üç açık da sürer · Süre: yok · Migration: yok
+**Karşılaştırma:** Yakında kuruma satış/KVKK denetimi bekliyorsan A gerekli ama hukukçu ve migration şart. Riski minimize edip en somut açığı (iz kaybı) kapatmak istiyorsan B. KVKK paketini avukatla toptan çözeceksen C — bu projede hukuk zaten G1-10'da bekliyor.
+**Benim önerim:** C şimdi + B'yi kuyruk adayı — kalıcı kurum silme ve eski-rıza avukat metnine (G1-10) bağlı; denetim izi saklaması ise düşük riskli, ayrı yapılabilir. (Bu senin ürün+hukuk kararın, önerime güvenme.)
+**Cevap vermezsen:** F-02/F-07 ve G1-29/G1-16 açık kalır. Başka iş etkilenmez.
+⚠️ AĞUSTOS SİNYALİ (2026-08-27, KISMİ — A/B/C DEĞİL): Üç alt-kalem de ağustosta ✅ İŞLEME AL kovasında: G1-29 (kurum silme) · G1-16 (eski-rıza) · G1-15 (denetim izi) (`00-PO-KARARLARI-2026-08-27.md:58`). Yani "yapılacak" yönü var; ama HANGİ kapsam/sıra (bu kartın A/B/C'si) ağustosta belirlenmedi. G1-10 (aydınlatma metni, avukat) çıkış blokeri (`:51`) — bu kararlar ona bağlı. PO teyit ederse CEVAP'a yazılabilir.
+**CEVAP:**
+
+---
+```
+
+### KARAR-39 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-039.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-39 · Anonimleştirme kapsamı: psikometrik kopyalar ve başkasının yazdığı yorumlar  [ÜRÜN + KVKK] (1 işi açar)
+> ⭐ **Kaynak:** güvenlik konseyi (`docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** Hesap kapatınca `UserProfile.archetype`, OCEAN ve DISC değerleri **özenle siliniyor** (`gdprService.ts:112-119`) — ama **aynı arketip `Match` tablosunda düz metin duruyor** (`schema.prisma:1035-1036`, **NOT NULL**) ve `Match.mentorId → UserProfile.id → userId` zinciriyle hâlâ kişiye bağlanabiliyor. Ayrıca `MatchFeedback.comment` (başkasının o kişi hakkında yazdığı 1000 karakterlik yorum) hiç ellenmiyor; `fromUserId`'de **FK bile yok** (`:1170`) → şema düzeyinde hiçbir cascade yakalayamaz. Kullanıcıya verilen metin ise *"kimliğinizle ilişkilendirilebilir verileriniz geri döndürülemez şekilde anonimleştirildi"* diyor (`:50`).
+**Sorun ne:** Verilen taahhüt **psikometrik veri için gerçekleşmiyor**. Ayrıca `Match` satırını boşaltmak kurumun geçmiş eşleştirme istatistiklerini de etkiler — bu bir denge sorusu.
+**Neden sana soruyorum:** "Kişi gitti; ama onun hakkında **başkasının yazdığı** yorum ve onunla kurulmuş eşleşmenin istatistiği kalsın mı?" — bu bir KVKK yorumu değil, **ürün ve etik** kararıdır.
+**Seçenekler:**
+· **A — Arketipi boşalt, yorumu da boşalt.** Kullanıcı ne görür: verilen taahhüt aynen gerçekleşir. Ne kazanırsın: en temiz konum; taahhüt metni doğru olur. **NE KAYBEDERSİN:** `Match.mentorArchetype` **NOT NULL** → ya migration ile nullable yapılır ya `'[kaldırıldı]'` yazılır; kurumun geçmiş eşleştirme kalitesi analizi bozulur. Süre **M** · geri alınır ✅ · **migration olası**.
+· **B — Arketipi boşalt, yorumu bırak (yazarın verisi say).** Kullanıcı ne görür: profili gider, hakkında yazılanlar kalır. Ne kazanırsın: yazarın ifade kaydı korunur; **projede bu desen zaten var** (`gdprService.ts:168-171`, `MentorshipAgreement`'ta yalnız menti tarafı boşaltılıyor). **NE KAYBEDERSİN:** kişi hakkında 1000 karakterlik yorum sistemde kalır — "unutulma hakkı" tam karşılanmaz, kişi itiraz ederse savunması zor. Süre **S** · geri alınır ✅ · migration **yok**.
+· **C — İkisini de bırak, taahhüt metnini düzelt.** Kullanıcı ne görür: "anonimleştirildi" yerine "bir kısmı kalır" diyen dürüst ama küçültülmüş bir vaat. Ne kazanırsın: sıfır kod işi. **NE KAYBEDERSİN:** ürünün **en hassas vaadinden geri adım**; KVKK açısından da en zayıf konum. Süre **S** · geri alınır ✅ · migration **yok**.
+**Karşılaştırma:** A taahhüde birebir uyar ama istatistik maliyeti ve migration getirir. B mevcut proje desenine uygun ve ucuz, ama yorum konusunda savunması zayıf. C dürüst ama vaadi küçültür.
+**Benim önerim:** **B + taahhüt metninin netleştirilmesi** — arketip (kişinin **kendi** psikometrik verisi) A'daki gibi temizlenmeli; yorum ise projenin zaten benimsediği "yazarın verisi" desenine bırakılmalı; ama `gdprService.ts:50`'deki metin bu ayrımı **açıkça** söylemeli.
+**Cevap vermezsen:** GV-08'in **yorum ayağı** kilitli kalır (arketip + 4 alan ayağı karardan bağımsız yapılabilir); anonimleştirme 6 tabloyu atlamaya devam eder ve kullanıcıya verilen taahhüt yanlış kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-41 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-041.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-41 · Mentörün bir kontenjanı olsun mu? (1 işi açar — P-15)  [ÜRÜN KARARI · ŞEMA]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** Kapasite/kontenjan kavramı **kodda hiç yok** (kapsam: BE `src/` · `prisma/` · `tests/`; terimler `maxMentees · capacity · maxMenti · kontenjan · kapasite · activeMentiLimit · mentiLimit`, harf duyarsız + iki dilli → ilgili **0 eşleşme**; dönen 4 satır SMTP adresi, seed soru metni ve e-posta testi). Eşleştirmenin hiçbir elemesi aktif menti sayısına bakmıyor (`matching.ts:267,270,274,278,283`).
+**Sorun ne:** 20 aktif mentisi olan mentör ile hiç mentisi olmayan mentör **aynı havuzda, aynı skorla** yarışıyor. Sektörü uyan popüler bir mentör herkese önerilmeye devam ediyor; yeni katılan mentöre hiç talep gitmiyor. Mentör personasının kendi endişesi tam olarak bu: *"sürekli meşgul edilmek istemem — mentörlük ara ara bir iştir"* ve *"herkesle eşleşmek istemem, seçicilik korunmalı"* (`persona/mentor-persona-...:60-62`).
+**Neden sana soruyorum:** Kontenjan koymak *"kim kiminle eşleşebilir"i* değiştirir — bir mentör, uyumlu olduğu hâlde bir mentiye artık görünmez. Bu bir ürün vaadidir, teknik ayar değil.
+**Seçenekler:**
+**A) Kontenjan yok (bugünkü durum)** · Kullanıcı ne görür: değişiklik yok · Ne kazanırsın: iş yok; menti her zaman en uyumlu mentörü görür · **Ne kaybedersin:** popüler mentör bunalır ve platformu bırakabilir; yeni mentör hiç talep almaz, o da bırakır; P-15 satırı sonsuza kadar kilitli kalır · Süre **yok** · Geri alınır **—(değişiklik yok)** · Migration **yok**
+**B) Mentör kendi kontenjanını belirlesin** (profilinde "aynı anda en fazla N menti") · Kullanıcı ne görür: mentör bir sayı seçer, dolunca havuzdan düşer · Ne kazanırsın: seçicilik mentörün elinde, persona endişesi doğrudan karşılanır · **Ne kaybedersin:** **yeni alan = migration**; menti "dün gördüğüm mentör kayboldu" diyebilir ve sebebini kimse açıklayamaz; kontenjanların dolu olduğu bir kurumda menti **hiç mentör göremeyebilir** · Süre **M** · Geri alınır **evet** (alan kalır, filtre kapatılır) · Migration **VAR**
+**C) Kontenjan yok ama skorda yumuşak yük dengesi** (aktif menti sayısı arttıkça skor bir miktar düşer) · Kullanıcı ne görür: yoğun mentör listede aşağı iner ama **kaybolmaz** · Ne kazanırsın: migration yok (sayım canlı hesaplanır); kimse havuz dışında kalmaz · **Ne kaybedersin:** mentörün kendi tercihi **sorulmamış** olur, persona endişesi tam karşılanmaz; "%uyum" artık saf uyum olmaktan çıkar, sayının anlamı bulanır ve kullanıcıya açıklanamaz · Süre **M** · Geri alınır **evet** · Migration **yok**
+**Karşılaştırma:** Sorun bugün "mentör bunalıyor" mu, yoksa "yeni mentör talep alamıyor" mu — cevaba göre değişir. Birincisiyse B (tercih mentörde), ikincisiyse C (dağıtım düzelir, kimse kaybolmaz). A yalnız mentör sayısı mentiden fazlaysa güvenlidir.
+**Benim önerim:** **C** — çünkü migration gerektirmiyor ve iki sorunun da acı tarafını azaltıyor; B sonradan üzerine eklenebilir. *(Bu senin ürün kararın; mentörlerin "beni koru" demesi senin için asıl mesele ise B doğrudur — önerime güvenme.)*
+**Cevap vermezsen:** **P-15 satırı kilitli kalır** (bugün "kartsız gizli 🔴" durumunda); dağıtım dengesizliği sessizce sürer ve kimse şikâyet etmediği için fark edilmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-43 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-043.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-43 · İki yön neden farklı? Menti, mentörün eleyeceği bir eşleşmeyi görmeye devam etmeli mi? (1 işi açar — cevap sonrası yeni satır)  [ÜRÜN KARARI]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** Eşleştirme iki yönde **asimetrik** çalışıyor (`matching.ts:265-323` ↔ `:406-427`). Mentör→menti yönünde altı mekanizma var: kalite çarpanı (`:300`), toksik-çift vetosu D×S (`:283`), zaman uyumu filtresi (`:274-276`), beklenti kesişimi (`:278-281`), 4 kademeli fallback (`:200-227`), iletişim tarzı bonusu +10 (`:288-294`). **Menti→mentör yönünde bunların HİÇBİRİ yok.**
+**Sorun ne:** Aynı çift, iki taraftan bakınca **farklı yüzde** görüyor. Mentörün *"bana uygun değil"* diye eleyeceği bir menti, kendi panelinde o mentörü yüksek uyumla görüp talep gönderiyor — ve reddediliyor. Menti için bu, sistemin ona **yanlış umut** vermesidir.
+**Neden sana soruyorum:** "Menti neyi görebilmeli" doğrudan ürün kararıdır. Filtreleri menti yönüne de uygulamak menti havuzunu **daraltır** — az mentörlü kurumda menti ekranı boşalabilir.
+**Seçenekler:**
+**A) Bugünkü gibi kalsın (menti her şeyi görür)** · Kullanıcı ne görür: değişiklik yok · Ne kazanırsın: menti ekranı hiç boşalmaz, umut sinyali korunur; iş yok · **Ne kaybedersin:** yanlış umut ve boşa giden talepler sürer; "neden mentörde %74, bende %88 yazıyor?" sorusunun cevabı hiç olmaz; her ret bir hayal kırıklığı üretir (P-05'in yükünü artırır) · Süre **yok** · Geri alınır **— (değişiklik yok)** · Migration **yok**
+**B) Filtreler iki yöne de uygulansın (simetrik)** · Kullanıcı ne görür: menti yalnız gerçekten uyumlu mentörleri görür · Ne kazanırsın: yüzdeler tutarlı, boşa talep azalır · **Ne kaybedersin:** **menti ekranı boşalabilir** — özellikle küçük kurumda; "hiç mentör yok" hissi menti personasının en büyük kayıp riski (`menti-persona-...:65,73`); boşalan ekranın sebebini de açıklayamayız (PS-10 ile çakışır) · Süre **M** · Geri alınır **evet** · Migration **yok**
+**C) Simetrik filtre + menti yönünde fallback** (eleme uygulanır, liste boşalırsa mentör yönündeki 4 kademenin aynısı gevşetir) · Kullanıcı ne görür: uyumlu liste görür; liste boşalırsa "uyum düşük" rozetiyle yine bir şey görür · Ne kazanırsın: B'nin tutarlılığı + A'nın boşalmama güvencesi · **Ne kaybedersin:** en büyük iş; iki yönün kodu ortaklaştırılmalı (bugün ayrı yazılmış) ⇒ **canlı sıralama regresyon riski** ve bu riski yakalayacak test bugün yok (PS-07/PS-08 önce yapılmalı) · Süre **L** · Geri alınır **evet** · Migration **yok**
+**Karşılaştırma:** Kurumlarda mentör sayısı mentiden azsa B tehlikelidir — menti boş ekran görür ve gider. C bu riski kapatır ama en pahalısıdır. A yalnız "yanlış umut"un maliyetini kabul ediyorsan doğrudur.
+**Benim önerim:** **C** — çünkü fallback mekanizması zaten yazılı (`matching.ts:200-227`), diğer yöne taşınması sıfırdan tasarım değil. *(Bu senin ürün kararın.)*
+**Cevap vermezsen:** Asimetri sürer; iki taraftaki yüzde tutarsızlığı açıklanamaz ve mentörün eleyeceği mentiler talep göndermeye devam eder.
+**CEVAP:**
+
+---
+```
+
+### KARAR-61 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-061.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-61 · Eşleşme puanının yeni formülü arketip motoruyla AYNI ANDA mı açılsın?  (2 işi açar)  [ÜRÜN KARARI]
+**Şu an ne var:** Kullanıcının eşleşme kartında gördüğü yüzde bugün iki parçadan hesaplanıyor: alan/sektör benzerliği %60 + DISC mizaç uyumu %40 (`scoring.ts:89-90`). Eşleşmeyi tamamen engelleyen tek kural "D tipi mentör + S tipi menti" ve havuz daralınca gevşiyor (`matching.ts:210`). Ağustos tasarım kararı (`TAS:428,494`) bunu üç parçaya çeviriyor: hedef/değer uyumu %45 + alan %30 + kişilik %25; engelleme de iki kişilik-tabanlı kurala (V1/V2, `TAS:460-462`) dönüşüyor. Yeni formül kodda yok.
+**Sorun ne:** KARAR-10'a "C, aşamalı" cevabı verildi: kişilik motoru üç adımda açılacak, son adımda eski↔yeni sıralama karşılaştırmalı gösterilecek. Ama formül değişikliğinin o adıma dahil olup olmadığı yazılı değil; kuyruk ikisini aynı satırda (F-11) sayıyor. İkisi aynı anda açılırsa farkın ne kadarının motordan, ne kadarının yeni ağırlıklardan geldiği ayrılamaz. Ayrıca %45'lik "hedef/değer" parçası kayıttaki üç sorunun cevabına dayanıyor; eski kullanıcılarda bu doluluk ölçülmedi.
+**Neden sana soruyorum:** Kullanıcının gördüğü uyum yüzdesi değişir ve bazı çiftlerin sırası yer değiştirir; bu kaç kez ve hangi sırayla olsun kararı ürün kararıdır.
+**Seçenekler:**
+· **A — Tek seferde: motor + yeni formül + yeni engelleme kuralları birlikte açılır.** Kullanıcı ne görür: yüzdeler bir kez değişir. Ne kazanırsın: tasarım kararı tek turda canlıya çıkar; iş bir kez yapılır. **Ne kaybedersin:** karşılaştırmada farkın kaynağı ayrılamaz; sorun çıkarsa hangi parça bozdu bulunamaz; üç soruyu boş bırakan kullanıcıda ağırlığın %45'i boş veriyle hesaplanır. Süre L · geri alınır ✅ (açma/kapama) · migration yok (TEYİT GEREK)
+· **B — İki adım: önce motor bugünkü 60/40 içinde açılır, yeni formül sonraki adımda gelir.** Kullanıcı ne görür: yüzdeler iki kez değişir. Ne kazanırsın: her adımda tek değişken, karşılaştırma anlamlı kalır; üç sorunun doluluğu arada ölçülür. **Ne kaybedersin:** iş iki kez test edilir; eski formül bir süre daha canlıda kalır; kullanıcı yüzdenin iki kez oynadığını fark edebilir. Süre M+M · geri alınır ✅ · migration yok
+· **C — Yeni formül rafa kalkar, 60/40 kalıcı olur.** Kullanıcı ne görür: bugünkü yüzdeler (motor açılınca yalnız kişilik kısmı değişir). Ne kazanırsın: en az iş, en az risk. **Ne kaybedersin:** "ne arıyorsun ↔ ne verebilirim" uyumu puana hiç girmez; üç soru toplanır ama kullanılmaz; Ağustos kararı yeniden açılır. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Hızlı tek seferlik geçiş istiyorsan ve sorun çıkarsa hepsini birden kapatmayı göze alıyorsan A. KARAR-10'daki "önce/sonra karşılaştırması" gerçekten anlamlı olsun istiyorsan B. Tasarım kararından vazgeçtiysen C.
+**Benim önerim:** B — KARAR-10'a verdiğin "aşamalı ve karşılaştırmalı" cevabın ruhu, her aşamada tek şeyin değişmesi.
+**Cevap vermezsen:** PS-A3 (bağlama) hangi formülle açılacağını bilemez; F-11'in formül ayağı belirsiz kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-65 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-065.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-65 · "D mentör + S menti" yasağı menti tarafında da geçerli olsun mu?  (2 işi açar)  [ÜRÜN KARARI]
+> ⚠️ KARAR-61 (formül) ile BİRLİKTE cevaplanmalı — yeni formül gelirse bu kural zaten kişilik-tabanlı V1/V2 kurallarına dönüşüyor.
+**Şu an ne var:** Mentörün menti listesinde bu çift eleniyor (aday yoksa gevşiyor) — `matching.ts:200-216,283`. Menti'nin mentör listesinde ise hiç uygulanmıyor — `matching.ts:351-431`. Aynı çift bir yönde yasak, diğerinde serbest.
+**Sorun ne:** Belgeler "hiç eşleştirilmez" diyor (`eslesme-uyum:60`); tasarım belgesi bu kuralı tamamen kaldırıyor (`TAS:468`). Kod ikisinin arasında, yöne göre farklı davranıyor.
+**Neden sana soruyorum:** Kimin kimi görebileceği ürün kararı; ayrıca bu kural KARAR-61 (formül) ile birlikte kalkabilir.
+**Seçenekler:**
+· **A — Kural iki yönde de uygulanır.** Ne kazanırsın: tutarlı. **Ne kaybedersin:** menti listesi daralır. Süre S · geri alınır ✅ · migration yok
+· **B — Kural iki yönde de kaldırılır (TAS kararı).** Ne kazanırsın: tasarımla uyumlu. **Ne kaybedersin:** dayanağı zayıf da olsa bir koruma kalkar. Süre S · geri alınır ✅ · migration yok
+· **C — Bugünkü hal, yeni formüle kadar.** Ne kazanırsın: iş yok. **Ne kaybedersin:** tutarsızlık sürer. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Yeni formül yakınsa C; değilse A ya da B'den biri.
+**Benim önerim:** B — `TAS:468` gerekçeyle kaldırdı; ama KARAR-61 ile birlikte cevaplanmalı.
+**Cevap vermezsen:** md.165 ve TAS kalem 5 bağlanamaz.
+**CEVAP:**
+
+---
+```
+
+### KARAR-74 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-074.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-74 · Kurum (tenant) kalıcı silme hakkı (G1-29) — (1 iş açar: AN-37) [ÜRÜN + KVKK KARARI]
+> ⭐ Kaynak: CS bilanço denetimi §7 KARAR-C.
+**Şu an ne var:** Platform admin bir kurumu yalnız "dondurabiliyor" (`platformRoutes.ts:53 /freeze`); kalıcı silme (DELETE) yok (grep: `hardDeleteTenant` yok).
+**Sorun ne:** Bir kurum platformdan tümüyle silinmek isterse (KVKK "unutulma hakkı" kurumsal karşılığı) bunu yapacak yol yok; veriler süresiz dondurulmuş kalır.
+**Neden sana soruyorum:** Kurumun tüm verisinin (üyeler, eşleşmeler, geçmiş) geri-dönülmez silinmesi hem KVKK yükümlülüğü hem geri-alınamaz bir işlem — ürün+hukuk kararı.
+**Seçenekler:**
+- **A) Kalıcı silme eklensin (anonimleştirme+silme):** · Kazanç: KVKK uyumu, gerçek "unutulma" · Kayıp: yanlış silme felaketi; yedek/onay katmanı şart · Süre M · Migration VAR · Geri alınamaz
+- **B) Yalnız freeze kalsın + elle DB silme:** · Kazanç: 0 iş · Kayıp: KVKK talebinde manuel/riskli operasyon; iz bırakmaz · Süre 0
+- **C) Freeze + zamanlı otomatik imha (X ay sonra):** · Kazanç: dondur→sil köprüsü · Kayıp: en çok iş, süre kararı gerekir · Süre L · Migration VAR
+**Karşılaştırma:** A KVKK'yı tam karşılar ama en riskli işlem; B hukuki talepte açık verir; C otomatik ama süre eşiği yeni bir karar doğurur.
+**Benim önerim:** A — ama çift-onay + tarihli yedek tablo zorunluluğuyla (CLAUDE.md silme protokolü). *(Ürün+hukuk kararın.)*
+**Cevap vermezsen:** G1-29 öksüz kalır; ilk kurum silme talebinde hazırlıksız yakalanılır (AN-37 kilitli).
+**CEVAP:**
+```
+
+### KARAR-86 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-086.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-86 · Platform üye listesinde kişilik tipi görünsün mü? (0 iş — yeni iş açar) [KVKK KARARI]
+> ⭐ Kaynak: V-05 incelemesi (menti-mentor#100 yorum 5827763970).
+**Şu an ne var:** Platform yöneticisinin kurum detayındaki üye listesi her satırda ad ile birlikte DISC tipini gösteriyor (`backend/src/controllers/platformTenantController.ts:185,200`). V-05 ile toplu grafikte küçük gruplar gizlendi, ama aynı bilgi üye listesinde kişi bazında duruyor.
+**Neden sana soruyorum:** Psikometrik veri (KVKK) kimin, hangi düzeyde göreceği ürün/KVKK kararı.
+**Seçenekler:**
+- **A) Üye listesinde DISC gösterilmesin (yalnız toplu grafik)** · Kazanç: platform düzeyinde kişi bazında psikometri görünmez · **Ne kaybedersin:** destek verirken kişinin tipine bakılamaz · Süre S · Migration: yok
+- **B) Kalsın (platform yöneticisi destek için görmeli)** · Kazanç: sıfır iş · **Ne kaybedersin:** V-05'in platform tarafındaki kazancı sembolik kalır · Süre 0
+- **C) Kalsın ama her görüntüleme iz kaydına düşsün** · Kazanç: hesap verebilirlik · **Ne kaybedersin:** iz kaydı işi · Süre S · Migration: yok
+**Karşılaştırma:** A veri minimizasyonuna en uygun; B pratik; C ara yol.
+**Benim önerim:** A — platform yöneticisinin kişi bazında kişilik tipine ihtiyacı olan somut bir destek senaryosu kodda yok. *(KVKK kararı senin.)*
+**Cevap vermezsen:** mevcut durum sürer.
+**CEVAP:**
+
+---
+```
+
+### KARAR-93 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-093.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-93 · Üyeyi kurumdan çıkarma: KARAR-33 (B)'deki "30 gün sonra kişilik verisi silinir" adımı için onay (1 iş açar: Y-14) [CANLI VERİ SİLME · EVET/HAYIR]
+> ⭐ Kaynak: Y-14 uygulanırken (2026-09-25) koddan çıktı. KARAR-33'ü (B) cevapladın; bu kart yalnız o cevabın **veri silen** adımının onayı — yeni kural gereği (OTONOM-PROMPT §7b) veri silen iş sen "evet" demeden canlıya çıkmaz.
+**Şu an ne var:** Yöneticinin elinde onaylı bir üyeyi kurumdan çıkaracak düğme yok. Arka taraftaki tek uç (`backend/src/controllers/adminController.ts:740-781`) kişiyi kurumdan değil **bütün platformdan** kapatıyor (hesap pasif, başka kurumlarına da giremez), ona "tekrar başvurabilirsiniz" e-postası atıyor ve kişi tek tıkla geri başvurabiliyor (`authController.ts:441-453`). Bu, KARAR-33 (B) cevabına aykırı; o yüzden düğme bağlanmadı.
+**KARAR-33 (B)'nin istediği:** üyelik o kurum için **dondurulur** · yönetici **sebep seçer** · mesajın tonu sebebe göre değişir · mentörün görüşme sayısı düşmez · **30 gün sonra kişinin kişilik (DISC/psikometri) verisi silinir.**
+**Neden sana soruyorum:** İlk dört adım geri alınabilir, ben yaparım. 30 gün sonra silme ise **canlı veriyi kalıcı olarak silen zamanlanmış iş**: sen "evet" demeden yazılsa bile canlıya çıkmaz.
+**Seçenekler:**
+- **A) Evet — 30 gün sonra silme dahil hepsini yap** · Kullanıcı ne görür: çıkarılan üye 30 gün içinde geri alınabilir, sonra kişilik verisi silinir · Kazanç: KARAR-33 tam uygulanır, veri minimizasyonu · **Ne kaybedersin:** 30 gün sonra geri alma kişilik testini yeniden çözdürmeyi gerektirir · Süre M · Geri alınır: 30 güne kadar · Migration: dondurma için alan gerekebilir (gerekiyorsa ayrıca yedek + onay)
+- **B) Evet ama silme olmadan (şimdilik yalnız dondurma + sebep + mesaj)** · Kazanç: düğme hemen gelir, hiçbir veri silinmez · **Ne kaybedersin:** çıkarılan üyenin kişilik verisi süresiz kalır (KVKK saklama açığı)
+- **C) Hayır — şimdilik düğme yok** · **Ne kaybedersin:** yönetici onaylı üyeyi çıkaramaz (yalnız platform ekibi)
+**Karşılaştırma:** A kararının tamamı; B hızlı ve güvenli ama saklama açığı bırakır; C bekletir.
+**Benim önerim:** B şimdi, silme adımı A olarak ayrı PR'da (sen "evet" dersen). *(Canlı veri silme senin kararın.)*
+**Cevap vermezsen:** Y-14 bekler.
+**CEVAP:**
+
+---
+```
+
+### KARAR-94 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-094.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-94 · Dışa aktarım hakkı (GV-17) çıkış blokeri olsun mu (1 iş açar: GV-17) [ÜRÜN KARARI · KVKK]
+> ⭐ Kaynak: KARAR-80/M18 işlenirken (2026-09-26) doğdu. GV-08/GV-09/GV-18 zaten ⛔ ÇIKIŞ BLOKERİ (T1) — KARAR-69 (b)'nin "silme hakkı" ve "aydınlatma" maddelerine giriyorlar. GV-17 aynı kovada (KVKK) ama "dışa aktarım/taşınabilirlik hakkı" ayrı bir madde; KARAR-69 (b) bunu açıkça saymamıştı, o yüzden ajan kendiliğinden blokere eklemedi.
+**Şu an ne var:** Kullanıcı "verilerimi indir" dediğinde (`gdprService.ts:284-333`) yalnız 6 kaynak dışa aktarılıyor; kendi psikometrik profili (OCEAN/arketip/DISC türevleri, ≈22 `User` alanı + 16 tablo) ve kendi yazdığı mesajların içeriği YOK.
+**Sorun ne:** KVKK'nın "veri taşınabilirliği" hakkı — kullanıcı kendi verisinin tam kopyasını isteyebilmeli. Bugün istediği kopya eksik; bunu bir denetim ya da kullanıcı şikayeti ortaya çıkarırsa ilk kurumla karşılaşılan ilk KVKK talebi eksik yanıtlanmış olur.
+**Neden sana soruyorum:** Bunu "çıkış blokeri" (canlıya çıkmadan önce şart) sayıp saymayacağın hukuki risk toleransına bağlı bir ürün kararı; ajan bunu kendi başına "elbette blokeri" diyip iş sırasını değiştiremez.
+**Seçenekler:**
+- **A) Evet, çıkış blokeri (T1)** · Kullanıcı ne görür: "verilerimi indir" artık eksiksiz · Kazanç: ilk kurum canlıya çıkmadan KVKK taşınabilirlik açığı kapanır · **Ne kaybedersin:** çıkış listesi bir iş daha uzar (efor M — 16 tablo + mesaj içerikleri) · Süre M · Geri alınır: evet · Migration: yok
+- **B) Hayır, normal öncelikte (🟡) kalsın** · Kazanç: çıkış listesi uzamaz · **Ne kaybedersin:** ilk kurum canlıdayken eksik dışa aktarım açığı sürer; bir KVKK talebi gelirse elle tamamlanması gerekir
+**Karşılaştırma:** İlk gerçek kurum + gerçek kullanıcı verisi varken bir KVKK "verilerimi ver" talebi gelme ihtimali düşük ama sıfır değil; A bu riski baştan kapatır, B riski PO'nun elle takip etmesine bırakır.
+**Benim önerim:** A — GV-08/09/18 zaten aynı kovada bloker; dışa aktarımı ayrı bırakmak KVKK paketini yarım gösterir.
+**Cevap vermezsen:** GV-17 🔴 KARAR-94 kilidinde kalır, 🟡 öncelikte de işlenmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-104 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-104.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-104 · Uyum eşiğini geçen tek mentör randevuya kapalıysa menti ne görsün? (0 iş kilitler — PS-A4 sonrası ince ayar)  [ÜRÜN KARARI]
+> ⭐ Kaynak: PS-A4 bağımsız incelemesi (backend #180, https://github.com/zahidsamiata/menti-mentor/pull/180#issuecomment-5853702508), 2026-09-27.
+
+**Şu an ne var:** PS-A4 ile menti, kurumun uyum barajının (varsayılan 50; yönetici 20-90 arası ayarlar) altındaki mentörleri listede görmüyor. Barajı geçen hiç mentör yoksa liste boş kalmasın diye hepsi gösteriliyor (`backend/src/services/matching.ts` `rankMentorsForMenti`). Barajı geçen mentör randevuya kapalıysa (görünürlüğü kapalı ya da müsaitliği yok) kartı soluk görünüyor (KARAR-80 M7).
+**Sorun ne:** Barajı geçen mentörlerin hepsi soluksa (randevu alınamıyorsa), menti randevu alabileceği hiçbir mentör görmüyor. Barajın biraz altında kalan ama müsait mentörler ise gizli kalıyor. Menti "kimse yok" sanıp bırakabilir.
+**Neden sana soruyorum:** Mentiye uyumu düşük ama müsait bir mentörü göstermek mi, yoksa yalnız uyumluyu gösterip beklemesini istemek mi daha doğru, bu bir ürün tercihi (KARAR-6 ek(1) "uygun olmayanı görmesin" ile KARAR-80 M7 "kart hep kalır" arasındaki denge).
+**Seçenekler:**
+- **A) Barajı geçen RANDEVUYA AÇIK mentör yoksa baraj altındakiler de gösterilsin** (soluk olanlar yine soluk) — Kullanıcı: her zaman randevu alabileceği en az bir mentör görür (varsa) · Kazanç: menti takılmaz · Kayıp: bazen uyumu düşük mentör görünür, "uygun olmayanı görmesin" kuralı esner · Süre S · Geri alınır · Migration yok.
+- **B) Bugünkü gibi kalsın** — Kullanıcı: yalnız uyumlu mentörleri görür, hepsi soluksa bekler · Kazanç: KARAR-6 ek(1) tam uygulanır · Kayıp: küçük kurumda menti randevu alamadan kalabilir · Süre — · Geri alınır · Migration yok.
+- **C) Her zaman en az N (örn. 3) randevuya açık mentör gösterilsin**, gerekirse baraj altından tamamlanarak — Kullanıcı: seçim yapabileceği birkaç mentör görür · Kazanç: seçenek duygusu · Kayıp: uyumu düşük mentör daha sık görünür; N sayısı ayrıca belirlenmeli · Süre S-M · Geri alınır · Migration yok.
+**Karşılaştırma:** Menti bırakmasın istiyorsan A ya da C; uyum kalitesi öncelikse B. A en az değişiklikle "takılma"yı çözer.
+**Benim önerim:** A — yalnız "hiç randevu alınamıyor" durumunda devreye giriyor, geri kalan her durumda baraj aynen işliyor.
+**Cevap vermezsen:** Bugünkü davranış (B) sürer; başka iş kilitlenmez.
+**CEVAP:**
+```
+
+### KARAR-116 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-116.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-116 · 🔵 EVET/HAYIR — Eski kişilik kartlarındaki ham test puanlarını veritabanından temizleyelim mi? (1 işi açar: AJ-50) [🔵 CANLI VERİYE YAZMA]
+**Şu an ne var:** Kişilik testini (DISC) 27 Eylül 2026'dan önce tamamlayan kullanıcıların "kişilik kartı" kaydında, kartta görünmeyen iki ham alan da saklı duruyor: ham test vektörü ve ham puanlar. Bu alanlar başkasının profiline bakan kişiye artık GÖNDERİLMİYOR (AJ-21, backend #194); yeni kayıtlar zaten temiz. Kanıt: `backend/src/services/discVisibility.ts:31-46` · `backend/src/controllers/onboardingController.ts:482-489`.
+**Ne değişir:** Veritabanındaki eski kartlardan yalnız bu iki ham alan silinir. Kartın görünen kısmı (arketip, ikon, güçlü yönler, baskın tip, tarih) AYNEN kalır. Kişinin kendi DISC sonucu ve eşleştirme puanı etkilenmez (kaynakları ayrı "discVector" alanı, ona dokunulmaz).
+**Kullanıcı ne görür:** Hiçbir şey — ekranda değişiklik yok. Kazanç KVKK tarafında: hassas psikometrik veri gereksiz ikinci bir yerde saklanmıyor (veri minimizasyonu).
+**Nasıl yapılır:** backend PR #212'deki betik (7b ONAY 2. tur). Önce KURU ÇALIŞMA (yalnız sayar, yazmaz) → sayıyı görürsün → sonra `--uygula --onay="TEMIZLE <host>"` (host'u birebir yazmadan hiçbir veritabanında yazmaz). Tek işlemde: önce yedek, sonra temizlik; sayılar tutmazsa hiçbir şey değişmez. DB erişimi gerekir (VPS'te yok) — tek seferlik erişimle yapılır.
+**Yedeği alınacak tablo/sütun:** "User" tablosundan yalnız etkilenecek satırların `id` + `discResultCard` sütunu → yeni tablo `User_discResultCard_yedek_YYYYMMDD` (çalıştırma günü). Yedek adı + satır sayısı 02-ILERLEME'ye yazılır.
+**Yedeğin kendisi hassas:** Yedek tablo ham psikometrik veriyi içerir ve hesap silme akışı onu TEMİZLEMEZ → yedek, temizlikten sonra EN GEÇ 30 GÜN içinde (tarih 02-ILERLEME'ye yazılır) senin onayınla silinir.
+**Etkilenecek kayıt tahmini:** DISC testini AJ-21 öncesi tamamlamış herkes; gerçek kullanıcı ~sıfır olduğundan büyük ihtimalle test/demo hesapları. Kesin sayıyı kuru çalışma verir.
+**Geri alınır mı:** Evet, ama YALNIZ temizlikten hemen sonra ve yedek silinmeden önce — yedekten tek SQL ile geri yazılır (betik başlığında). Arada testi yeniden çözen kullanıcı olursa geri alma onun yeni kartını eskisiyle ezer.
+**Migration:** Yok (şema değişmez).
+**Seçenekler:**
+- **EVET** · Kullanıcı ne görür: hiçbir şey · Kazanç: KVKK veri minimizasyonu · Kaybedersin: eski kartlardaki ham puanlar 30 gün yalnız yedekte kalır, sonra tamamen gider; canlı DB'ye bir kez yazma riski (yedek + sayı kontrolü + host onayıyla sınırlı); 30 günlük yedeği silmeyi hatırlama yükü · Süre: S · Geri alınır: evet (kısa süre) · Migration: yok
+- **HAYIR** · Kullanıcı ne görür: hiçbir şey · Kazanç: canlı veriye dokunulmaz · Kaybedersin: hassas veri gereksiz bir kopyada durmaya devam eder; ileride süzgeci atlayan yeni bir okuma yolu açılırsa yeniden sızabilir · Süre: — · Geri alınır: — · Migration: yok
+**Benim önerim:** EVET — geri alınabilir, kullanıcıya görünmez ve KVKK veri minimizasyonunu kapatır; acil değil.
+**Cevap vermezsen:** Yalnız AJ-50 bekler; başka iş etkilenmez.
+**CEVAP:**
+```
+
+### KARAR-123 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-123.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-123 · Kayıtta üç soruyu atlayan kişiye sonradan sorulsun mu? (0 iş kilitliyor) [ÜRÜN KARARI]
+**Şu an ne var:** "Ne arıyorsun / nasıl destek istersin / neye önem verirsin" üç sorusu yalnız kayıt akışında soruluyor; sekmeyi kapatan kişiye bir daha sorulmuyor, profil sayfasında da yok. Kanıt: `frontend/src/app/onboarding/_OnboardingContent.tsx:249` · `frontend/src/app/(dashboard)` araması (`mentiNeeds`/`supportApproach`) 0 · kaynak `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:597`.
+**Sorun ne:** Cevapsız kişi eşleştirmede nötr sayılıyor; eşleşme kartındaki "ikiniz de …" cümlesi (I-11) onun için hiç çıkmayacak.
+**Neden sana soruyorum:** Kullanıcıya nerede ve ne sıklıkla soru sorulacağı ürün kararı.
+**Seçenekler:**
+- **A) Profil sayfasına "Üç soruyu tamamla" kartı.** · Kullanıcı ne görür: profilinde eksik kartı, isterse doldurur · Kazanç: veri tamamlanır, baskı yok · Kaybedersin: az kişi kendiliğinden döner · Süre: S · Geri alınır: evet · Migration: yok
+- **B) Panelde bir kez hatırlatma + profil kartı.** · Kullanıcı ne görür: girişte bir kez "eşleşmen iyileşsin" notu · Kazanç: doluluk artar · Kaybedersin: hafif sürtünme · Süre: S-M · Geri alınır: evet · Migration: yok
+- **C) Sorma.** · Kullanıcı ne görür: değişiklik yok · Kazanç: iş yok · Kaybedersin: bu kişiler için ihtiyaç verisi hiç oluşmaz · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Verinin yeni formülde (KARAR-61) kullanılacağı kesinse A ya da B değer taşır; formül rafa kalkarsa C yeterli.
+**Benim önerim:** A — sürtünmesiz ve geri alınabilir; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Atlayan kişi cevapsız kalır; başka iş kilitlenmez.
+**CEVAP:**
+```
 

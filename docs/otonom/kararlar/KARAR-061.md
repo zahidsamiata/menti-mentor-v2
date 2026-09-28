@@ -1,5 +1,5 @@
 ### KARAR-61 · Eşleşme puanının yeni formülü arketip motoruyla AYNI ANDA mı açılsın?  (2 işi açar)  [ÜRÜN KARARI]
-**Şu an ne var:** Kullanıcının eşleşme kartında gördüğü yüzde bugün iki parçadan hesaplanıyor: alan/sektör benzerliği %60 + DISC mizaç uyumu %40 (`scoring.ts:89-90`). Eşleşmeyi tamamen engelleyen tek kural "D tipi mentör + S tipi menti" ve havuz daralınca gevşiyor (`matching.ts:210`). Ağustos tasarım kararı (`TAS:428,494`) bunu üç parçaya çeviriyor: hedef/değer uyumu %45 + alan %30 + kişilik %25; engelleme de iki kişilik-tabanlı kurala (V1/V2, `TAS:460-462`) dönüşüyor. Yeni formül kodda yok.
+**Şu an ne var:** Kullanıcının eşleşme kartında gördüğü yüzde bugün iki parçadan hesaplanıyor: alan/sektör benzerliği %60 + DISC mizaç uyumu %40 (`scoring.ts:89-90`). Eşleşmeyi tamamen engelleyen tek kural "D tipi mentör + S tipi menti" ve havuz daralınca gevşiyor (`matching.ts:348`; 3. yedek kademede kapanıyor `:275`). Ağustos tasarım kararı (`TAS:428,494`) bunu üç parçaya çeviriyor: hedef/değer uyumu %45 + alan %30 + kişilik %25; engelleme de iki kişilik-tabanlı kurala (V1/V2, `TAS:460-462`) dönüşüyor. Yeni formül kodda yok.
 **Sorun ne:** KARAR-10'a "C, aşamalı" cevabı verildi: kişilik motoru üç adımda açılacak, son adımda eski↔yeni sıralama karşılaştırmalı gösterilecek. Ama formül değişikliğinin o adıma dahil olup olmadığı yazılı değil; kuyruk ikisini aynı satırda (F-11) sayıyor. İkisi aynı anda açılırsa farkın ne kadarının motordan, ne kadarının yeni ağırlıklardan geldiği ayrılamaz. Ayrıca %45'lik "hedef/değer" parçası kayıttaki üç sorunun cevabına dayanıyor; eski kullanıcılarda bu doluluk ölçülmedi.
 **Neden sana soruyorum:** Kullanıcının gördüğü uyum yüzdesi değişir ve bazı çiftlerin sırası yer değiştirir; bu kaç kez ve hangi sırayla olsun kararı ürün kararıdır.
 **Seçenekler:**
@@ -8,7 +8,8 @@
 · **C — Yeni formül rafa kalkar, 60/40 kalıcı olur.** Kullanıcı ne görür: bugünkü yüzdeler (motor açılınca yalnız kişilik kısmı değişir). Ne kazanırsın: en az iş, en az risk. **Ne kaybedersin:** "ne arıyorsun ↔ ne verebilirim" uyumu puana hiç girmez; üç soru toplanır ama kullanılmaz; Ağustos kararı yeniden açılır. Süre — · geri alınır ✅ · migration yok
 **Karşılaştırma:** Hızlı tek seferlik geçiş istiyorsan ve sorun çıkarsa hepsini birden kapatmayı göze alıyorsan A. KARAR-10'daki "önce/sonra karşılaştırması" gerçekten anlamlı olsun istiyorsan B. Tasarım kararından vazgeçtiysen C.
 **Benim önerim:** B — KARAR-10'a verdiğin "aşamalı ve karşılaştırmalı" cevabın ruhu, her aşamada tek şeyin değişmesi.
-**Cevap vermezsen:** PS-A3 (bağlama) hangi formülle açılacağını bilemez; F-11'in formül ayağı belirsiz kalır.
+**Cevap vermezsen:** PS-A3 (bağlama) hangi formülle açılacağını bilemez; F-11'in formül ayağı belirsiz kalır; AJ-92 (yeni formülde çift-ceza testi) da bu cevabı bekler.
+**İlgili kartlar:** KARAR-10 (cevaplı; motorun aşamalı açılışı oradan geliyor) · KARAR-41 (yük dengesi skora girerse formül değişir) · KARAR-43 (iki yönün simetrisi formülle birlikte yeniden yazılır) · KARAR-65 (D+S yasağı yeni formülde V1/V2'ye dönüşüyor) · KARAR-123 (%45'lik parçanın verisi üç sorudan geliyor) — birlikte cevaplanması önerilir: KARAR-61 + KARAR-65
 **CEVAP:**
 
 ---
