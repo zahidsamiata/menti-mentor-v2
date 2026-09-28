@@ -80,6 +80,17 @@ export interface ScenarioGuideEngineProps {
    * false → Görüşme Rehberi eski renkli/işaretli davranışı korur. Sertifika bu motoru KULLANMAZ.
    */
   neutralFeedback?: boolean;
+  /**
+   * P-08: kaldığı yerden başlama — ilk gösterilecek aşamanın indeksi (0-tabanlı).
+   * `scenarios.length` verilirse doğrudan kapanış ekranı açılır. Yalnız ilk render'da okunur.
+   * Varsayılan 0 (Görüşme Rehberi her zaman baştan).
+   */
+  initialIndex?: number;
+  /**
+   * P-08: kullanıcı bir aşamanın geri bildirimini görüp "Sonraki"/"Tamamla" ile geçince çağrılır
+   * (kalıcı ilerleme kaydı). Bekletilmez; hatası akışı durdurmaz.
+   */
+  onStageDone?: (scenarioId: string) => void;
 }
 
 const OUTCOME_STYLE: Record<ScenarioOutcome, { badge: string; icon: string }> = {
@@ -100,8 +111,12 @@ export function ScenarioGuideEngine({
   completion,
   shuffleChoices = false,
   neutralFeedback = false,
+  initialIndex = 0,
+  onStageDone,
 }: ScenarioGuideEngineProps) {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(() =>
+    Math.min(Math.max(0, Math.floor(initialIndex)), scenarios.length),
+  );
   const [selected, setSelected] = useState<string | null>(null);
   const [result, setResult] = useState<{ outcome: ScenarioOutcome; feedback: string } | null>(null);
   const [pending, setPending] = useState(false);
@@ -180,7 +195,13 @@ export function ScenarioGuideEngine({
     if (opening) void loadOthersFeedback();
   }
 
+  // Geçilen aşamayı bildir (P-08). Seçim yapılmadan (revealed değilken) çağrılmaz.
+  function reportStageDone() {
+    if (scenario && revealed) onStageDone?.(scenario.id);
+  }
+
   function next() {
+    reportStageDone();
     setSelected(null);
     setResult(null);
     setError(null);
@@ -287,7 +308,13 @@ export function ScenarioGuideEngine({
             {revealed && (
               <div className="pt-2 flex justify-end">
                 {isLast ? (
-                  <Button onClick={() => setCurrent(scenarios.length)} size="sm">
+                  <Button
+                    onClick={() => {
+                      reportStageDone();
+                      setCurrent(scenarios.length);
+                    }}
+                    size="sm"
+                  >
                     Tamamla →
                   </Button>
                 ) : (

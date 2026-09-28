@@ -10,10 +10,12 @@ import {
   type EngineScenario,
 } from '@/components/organisms/ScenarioGuideEngine';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { resumeStageIndex } from '@/lib/learningJourneyProgress';
 
 /**
  * Öğrenme Yolculuğu — mentör ve menti için keşif akışı (ortak motor).
  * İçerik API'den gelir (audience = kullanıcının rolü); cevap anahtarı önden yüklenmez.
+ * P-08: ilerleme kalıcıdır — geçilen aşama sunucuya yazılır, sayfa kaldığı aşamadan açılır.
  */
 export default function LearningJourneyPage() {
   const { user } = useAuth();
@@ -28,9 +30,13 @@ export default function LearningJourneyPage() {
     { enabled: isPlayer, cacheKey: 'learning-journey:stages' },
   );
 
+  // Kaldığı yer: önbelleksiz — her açılışta sunucudaki güncel ilerleme okunur. Hata akışı
+  // durdurmaz (yolculuk baştan açılır).
+  const status = useQuery(() => learningJourneyApi.getStatus(api), [api], { enabled: isPlayer });
+
   if (!user || !isPlayer) return null;
 
-  if (isLoading) {
+  if (isLoading || status.isLoading) {
     return (
       <div className="max-w-2xl mx-auto py-6">
         <div className="h-40 rounded-2xl bg-muted animate-pulse" />
@@ -58,6 +64,17 @@ export default function LearningJourneyPage() {
     return { outcome: res.data.outcome, feedback: res.data.feedback };
   }
 
+  const initialIndex = resumeStageIndex(
+    scenarios.map((s) => s.id),
+    status.data,
+  );
+
+  // Geçilen aşamayı kalıcı kaydet (P-08). Bekletilmez: kayıt başarısız olursa kişi yine ilerler,
+  // yalnız o aşama bir sonraki açılışta tekrar gösterilir.
+  function onStageDone(stageId: string) {
+    void learningJourneyApi.recordProgress(api, stageId).catch(() => undefined);
+  }
+
   async function onComplete() {
     const res = await learningJourneyApi.complete(api);
     if (res.ok) router.push(user?.role === 'MENTOR' ? '/mentor' : '/menti');
@@ -71,6 +88,8 @@ export default function LearningJourneyPage() {
       scenarios={scenarios}
       resolveChoice={resolveChoice}
       onComplete={onComplete}
+      initialIndex={initialIndex}
+      onStageDone={onStageDone}
       shuffleChoices  /* madde 143 — şık sırası her gösterimde karışır */
       neutralFeedback /* madde 144 — renk/işaret yok; yalnız seçilen + feedback; diğerleri kapalı */
       completion={{

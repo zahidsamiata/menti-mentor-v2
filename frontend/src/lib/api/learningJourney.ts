@@ -41,11 +41,29 @@ export interface ChoiceResult {
   feedback: string;
 }
 
+/** Sıradaki (ilk geçilmemiş) aşama; index 0-tabanlı. */
+export interface NextStage {
+  id: string;
+  title: string;
+  index: number;
+}
+
 export interface JourneyStatus {
   audience: LearningAudience;
   completed: boolean;
   completedAt: string | null;
   totalStages: number;
+  /** P-08: kalıcı ilerleme — geçilen görünür aşama sayısı ve id'leri (aşama sırasıyla). */
+  completedStages: number;
+  completedStageIds: string[];
+  /** Hepsi geçildiyse null. */
+  nextStage: NextStage | null;
+}
+
+export interface StageProgressResponse {
+  completedStages: number;
+  totalStages: number;
+  nextStage: NextStage | null;
 }
 
 // ─── Yönetici (STK) tarafı — tam aşama (cevap anahtarı dahil) ─────────────────
@@ -105,6 +123,10 @@ export const learningJourneyApi = {
       method: 'POST',
       body: { choiceKey },
     }),
+
+  /** P-08: aşamayı "geçildi" kaydet (idempotent) — sayfadan çıkan kaldığı yerden devam eder. */
+  recordProgress: (api: BoundClient, stageId: string): Promise<ApiResult<StageProgressResponse>> =>
+    api<StageProgressResponse>(`/api/learning-journey/stages/${stageId}/progress`, { method: 'POST' }),
 
   complete: (api: BoundClient): Promise<ApiResult<{ completed: boolean; completedAt: string }>> =>
     api('/api/learning-journey/complete', { method: 'POST' }),
