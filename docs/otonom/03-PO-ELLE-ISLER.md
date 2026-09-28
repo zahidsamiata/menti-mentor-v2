@@ -119,6 +119,7 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 11. **Y-09** · Tarayıcıda siteyi aç → sekmedeki küçük simge MentiMentor simgesi olmalı; site bağlantısını WhatsApp/LinkedIn'e yapıştır → önizlemede görsel ve başlık çıkmalı (önizleme görseli sivilkapasite.org adresinden gelmeli).
 12. **Y-10** · Google "Zengin Sonuç Testi" sayfasına sivilkapasite.org adresini gir → kuruluş/site bilgisi hatasız okunmalı; adreslerde "localhost" geçmemeli.
 13. **AJ-22 (güvenlik politikası engelleme modu)** · Giriş yapmadan ana sayfayı ve giriş sayfasını aç, sonra menti ya da mentör olarak giriş yap ve paneli aç; ayrıca Google/LinkedIn ile giriş dene ve (anahtar girildiyse) doğrulama kutusunun (CAPTCHA) göründüğünü kontrol et → sayfalar eksiksiz açılmalı, kurum logosu görünmeli; tarayıcıda F12 → Konsol sekmesinde "Content Security Policy" diye başlayan kırmızı hata OLMAMALI. Hata varsa ekran görüntüsünü ajana ver (geri dönüş tek satır) · test kurumu gerekir (🔵 kart bekliyor) — panel kısmı için.
+13.1 **AJ-73 (sosyal girişte anahtar adreste değil, 2026-09-28)** · Çıkış yapmış bir tarayıcıda (bilgisayar + iPhone Safari) Google ile, sonra LinkedIn ile giriş yap → panel açılmalı; giriş sonrası adres çubuğunda ve tarayıcı geçmişinde `accessToken` geçmemeli (yalnız `?isNewUser=` görünebilir). Açılmazsa: hangi tarayıcı + ekrandaki hata kodu → ajan geri alır (revert).
 
 ## D — CANLI GÖZLEM TESTLERİ (kod hazır, gerçek hesapla ekran doğrulaması gerekir)
 
