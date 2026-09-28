@@ -4,7 +4,7 @@
 
 # 00-KART-İNDEKSİ — 184 bilanço kartı köprü belgesi
 
-**📸 DONDURULMUŞ (snapshot, 2026-09-21)** — köprü/yönlendirme belgesi; **durum tutmaz, güncellenmez.**
+**📸 DONDURULMUŞ (snapshot, 2026-09-21)** — köprü/yönlendirme belgesi; **açıklama sütunları 2026-09-21 fotoğrafıdır, güncellenmez · DURUM hücreleri 2026-09-28 senkron (GÖREV 2.3) — güncel durum kuyrukta** (`docs/otonom/00-KUYRUK.md`).
 > **Neden:** belge zaten kendisi *"DURUM TUTMAZ, YÖNLENDİRİR"* diyor. Ölçüm: oluşturulduğu 2026-09-19'dan beri **içerik güncellemesi 0** (son 14 günde 1 commit = oluşturma). 184 satırlık elle senkron maliyeti faydayı aşıyor. Güncel durum için satırdaki "canonical kaynak" bağlantısına gidin; açık iş için `docs/otonom/00-KUYRUK.md`.
 
 > **Durum hücreleri 2026-09-28 senkron** (GÖREV 2.3): durum hücresi kuyruktaki iş kimliğini gösterir; güncel durum kuyrukta, gerekçe G-kart belgesinde.
@@ -256,7 +256,7 @@
 
 ## Kapsam raporu (dürüstlük)
 - **184/184 kart** listelendi (grup sayımı yukarıda; kaynak: 12 G-dosyası tam tarama 2026-09-19).
-- **durum** kolonu G-kartı snapshot'ıdır — canonical DEĞİL; güncel durum "canonical" kolonundaki dosyadan okunur.
+- **durum** kolonu 2026-09-28 senkron (GÖREV 2.3; kuyruk kimliğiyle eşleşmeyen hücreler G-kartı snapshot kodunu korur) — canonical DEĞİL; güncel durum kuyrukta (`docs/otonom/00-KUYRUK.md`), gerekçe "canonical" kolonundaki dosyada.
 - **KUYRUK eşlemesi:** AŞAMA F/P + K-satırlarının `=Gxx` etiketlerinden türetildi (bidirectional, kod-teyitli). Kuyrukta izi olmayan kartlarda "—".
 - **Eksik/zayıf noktalar (sessizce kırpılmadı):**
   1. **madde no** kolonu G-kartlarının "Kaynak/Numara" satırından alındı; bir kısmı karar-defteri iç-numarası (A/B/E/Y/md.) — `00-KARAR-TAKIP` tablo-numarasıyla birebir olmayabilir. Yalnız 7 doğrulanmış çift (**119/120/111/121/113/114/116**) kesin (E.2, çift-yönlü atıflı).

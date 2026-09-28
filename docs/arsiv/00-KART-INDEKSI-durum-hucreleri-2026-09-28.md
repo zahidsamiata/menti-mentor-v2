@@ -5,7 +5,7 @@
 
 Kaynak dosya: `docs/kararlar/00-KART-INDEKSI.md` · taban: çatı `origin/main` `06c5fc7`. Yeni hücre kuyruk kimliğinden (aktif `00-KUYRUK.md` · `arsiv/00-KUYRUK-bitti-2026-09.md` · `arsiv/00-KUYRUK-katlanmis.md`) + `donmus-belge-esleme-2026-09-27.md` + `sahipsiz-kalanlar-2026-09-27.md` + `bitti-dogrulama-2026-09-27.md` eşlemesinden türetildi; kimlik eşleşmesi kanıtsız hücrelere dokunulmadı.
 
-## A. Başlık notları (4 satır)
+## A. Başlık notları (6 satır)
 
 | satır | eski metin (AYNEN) |
 |---|---|
@@ -13,6 +13,8 @@ Kaynak dosya: `docs/kararlar/00-KART-INDEKSI.md` · taban: çatı `origin/main` 
 | 10 | > **Bu belge DURUM TUTMAZ, YÖNLENDİRİR.** Bir kalemin güncel durumu için "canonical kaynak" kolonundaki dosyaya bak. |
 | 11 | > Burada durum değiştirilmez. (Oluşturuldu: 2026-09-19, harita P-2 çözümü — `docs/00-BELGE-HARITASI.md`.) |
 | 14 | - **durum** = G-kartındaki en son geçerli durum (snapshot; canonical DEĞİL). 6 kod: ✅ YAPILDI · 🟡 YARIM · ⬜ AÇIK · ❓ TEYİT · 🗑️ GEÇERSİZ · 🔵 v2-backlog. |
+| 7 | **📸 DONDURULMUŞ (snapshot, 2026-09-21)** — köprü/yönlendirme belgesi; **durum tutmaz, güncellenmez.** |
+| 259 | - **durum** kolonu G-kartı snapshot'ıdır — canonical DEĞİL; güncel durum "canonical" kolonundaki dosyadan okunur. |
 
 ## B. Durum hücreleri (111 satır)
 
