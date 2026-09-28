@@ -249,8 +249,12 @@ Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARIS
     dogrulamasinda 209 isin kaynaklari "acik" kalmisti — borc birikmesin diye.)
     Is kaynak maddenin yalniz BIR PARCASINI yapiyorsa, KALAN parca AYNI commit'te bir SAHIBE baglanir
     (AJ satiri · kuyruk isi · KARAR karti · 03-PO maddesi); sahipsiz kalan birakilmaz (PO 2026-09-27).
-(n) Kapisi 🔴 olan kuyruk satiri `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'de durur (ilk KARAR'inin
-    grubunda, AYNEN); 00-KUYRUK § 🔴 KILIT HARITASI'nda her KARAR icin tek isaretci (is sayisina gore sirali).
+(n) Kapisi 🔴 olan YA DA Durumu ATLANDI(karar) olan kuyruk satiri `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'de
+    durur (ilk KARAR'inin grubunda, AYNEN); 00-KUYRUK § 🔴 KILIT HARITASI'nda her KARAR icin tek isaretci
+    (bekleyen is sayisina gore sirali). Kismen yapilip KALAN AYAGI bir KARAR'i bekleyen (ya da 🔵 PR-ACIK olup
+    EVET/HAYIR kartini bekleyen) satir AKTIF kalir: isaretcide "aktif kuyrukta ayrica bekleyen: <is> (<ne>)"
+    olarak listelenir ve Not'unda "kilit: kalan ayak KARAR-N bekliyor (...)" yazar. 01-KARARLAR indeksindeki
+    "kilitledigi isler" ayni kumeyi tasir (kart govdesi degismez; kart sayisi eskiyse indekste not).
     CEVAP gelince bagli satirlar AYNI commit'te 00-KUYRUK'a (grubun "Geri donus yeri" bolumune) doner,
     kapi cevaba gore guncellenir, isaretci guncellenir/kalkar. Yeni 🔴 satir dogrudan KARAR-BEKLEYEN'e +
     isaretci. (GOREV 2.4, 2026-09-28)
@@ -478,8 +482,8 @@ Bagli kuyruk satiri 🔴 olursa 5c (n).
 13.2 Belge senkronu — TEK PR, EN SON:
      Bir is merge edilmeden belgeye "CANLIDA" YAZILMAZ.
      Kontrol: `gh pr list --state open --author @me` bu turun islerinden bos olmali.
-     · 09-DURUM.md / 00-KARAR-TAKIP.md: YAZILMAZ (PO 2026-09-26 — 2026-09-20'den beri donuk;
-       genel belge taramasina kadar). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
+     · 09-DURUM.md / 00-KARAR-TAKIP.md: 2026-09-27'de senkronlandi; rutin turda okunmaz; yalniz kural (h)
+       geregi kapanis isaretleri yazilir (5c-h). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
      · docs/devir/ oturum gunlugu: bir kayit
 
 13.3 02-ILERLEME.md'nin EN BASINA tur ozeti:

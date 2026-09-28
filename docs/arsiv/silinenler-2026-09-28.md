@@ -310,3 +310,13 @@ const TENANT_SCOPED = new Set([
 - **Son commit (değişiklikten önce):** dosyaya son dokunan `47d3804e9d0e99452d28433d9bf88111427585f8` · çatı main `03da00623b34965a1ab2c1b9a285d43d50752778`
 - **Geri alma:** çatıda `git revert <GÖREV 2.4-E commit>` (yalnız script + test; şema/migration yok).
 
+### 2) `scripts/belge-bekci.sh` — kural (n) başlık yorumu (GÖREV 2.4 düzeltmesi)
+- **Eski hâl (AYNEN):**
+```text
+#   · kural (n): 00-KUYRUK'ta kapısı 🔴 olan satır → 00-KUYRUK-KARAR-BEKLEYEN.md'ye (GÖREV 2.4, 5c-n)
+```
+- **Neden yazılmıştı:** 5c (n) ilk hâlinde yalnız kapısı 🔴 satırları kapsıyordu (aynı PR, commit `2dae3ef`).
+- **Neden değişti:** geri bakılabilirlik testi, Durumu ATLANDI(karar) olan (kapısı 🟢) satırların da karar beklediğini ama haritada görünmediğini buldu; (n) bunları da kapsayacak şekilde genişletildi, bekçi ATLANDI(karar) satırı için de UYARI veriyor (+1 test vakası).
+- **Son commit (değişiklikten önce):** `2dae3ef` (bu PR'ın E commit'i; origin/main'de bu satır yoktu)
+- **Geri alma:** `git revert <GÖREV 2.4-G commit>`.
+

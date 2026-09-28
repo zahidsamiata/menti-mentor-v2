@@ -302,3 +302,15 @@ PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-
 (f) Bir kimlik (is no, KARAR no) aktif dosyada yoksa `docs/otonom/arsiv/` altinda grep ile aranir;
     "yok" demeden IKI yer de aranir (0.4'teki "arsiv/ OKUMA" kuralinin istisnasi).
 ```
+
+## GÖREV 2.4 düzeltme — 5c (n) genişletildi (ATLANDI(karar) + aktif bekleyenler) · 13.2 09-DURUM notu 0.4 ile tutarlı · taşındı 2026-09-28
+
+```text
+(n) Kapisi 🔴 olan kuyruk satiri `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'de durur (ilk KARAR'inin
+    grubunda, AYNEN); 00-KUYRUK § 🔴 KILIT HARITASI'nda her KARAR icin tek isaretci (is sayisina gore sirali).
+```
+
+```text
+     · 09-DURUM.md / 00-KARAR-TAKIP.md: YAZILMAZ (PO 2026-09-26 — 2026-09-20'den beri donuk;
+       genel belge taramasina kadar). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
+```

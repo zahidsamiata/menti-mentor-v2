@@ -67,6 +67,11 @@ expect 0 "kuyrukta 🔴 kapılı satır → yeşil + uyarı (5c-n)"
 grep -q "X-05 kapısı 🔴" "$TMP/out" || { echo "  ✗ (n) uyarısı çıktıda yok"; FAIL=1; }
 
 setup_clean
+echo '| X-06 | Ş0 | karar bekleyen iş | 🟢 | görünür | ATLANDI(karar) | KARAR-9 bekliyor |' >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+expect 0 "kuyrukta ATLANDI(karar) satırı → yeşil + uyarı (5c-n)"
+grep -q "X-06 Durum ATLANDI" "$TMP/out" || { echo "  ✗ (n) ATLANDI uyarısı çıktıda yok"; FAIL=1; }
+
+setup_clean
 echo '~~[ESKİ · 2026-09-25] eski kural~~' >>"$TMP/root/docs/otonom/OTONOM-PROMPT.txt"
 expect 1 "OTONOM-PROMPT'ta kod dışı ~~[ESKİ katmanı → kırmızı"
 

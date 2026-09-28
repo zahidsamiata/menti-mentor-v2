@@ -15,7 +15,7 @@
 #   · kural (k): docs/ altında indekssiz (giriş noktası olmayan) klasör (YN-12)
 #   · kural (l): CLAUDE.md'nin kendi içine satır numarasıyla atfı (YN-10)
 #   · kural (m): 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri aşan satır sayısı (YN-09)
-#   · kural (n): 00-KUYRUK'ta kapısı 🔴 olan satır → 00-KUYRUK-KARAR-BEKLEYEN.md'ye (GÖREV 2.4, 5c-n)
+#   · kural (n): 00-KUYRUK'ta kapısı 🔴 ya da Durumu ATLANDI(karar) olan satır → 00-KUYRUK-KARAR-BEKLEYEN.md'ye (GÖREV 2.4, 5c-n)
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -80,6 +80,8 @@ if kuyruk is not None:
             continue
         if re.sub(r'~~.*?~~', '', cells[4]).strip().startswith('🔴'):
             warnings.append(f'00-KUYRUK.md:{no} {cells[1].strip()} kapısı 🔴 → docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md + § 🔴 KİLİT HARİTASI işaretçisi (5c-n)')
+        elif cells[6].strip().startswith('ATLANDI'):
+            warnings.append(f'00-KUYRUK.md:{no} {cells[1].strip()} Durum ATLANDI(karar) → docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md + § 🔴 KİLİT HARİTASI işaretçisi (5c-n)')
 
 # Kural (h): BITTI işin kaynağı (00-KARAR-TAKIP maddesi) açık kalmasın — yalnız UYARI.
 takip = read('docs/kararlar/00-KARAR-TAKIP.md')

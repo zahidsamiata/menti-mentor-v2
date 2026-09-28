@@ -287,7 +287,7 @@ Bulut yalnız **repodaki** dosyaları görür → `docs/otonom/` commit edilmiş
 - Panikle deneme-yanılma düzeltme YAPMA.
 
 ## Belge Senkronizasyonu — ZORUNLU BİTİŞ ADIMI (atlanamaz)
-> ⚠️ PO 2026-09-26: `09-DURUM.md` ve `00-KARAR-TAKIP.md` 2026-09-20'den beri güncellenmiyor; genel belge taraması yapılana kadar otonom turlar bu iki dosyaya yazmaz — tur sonu kaydı `docs/otonom/00-SIMDI.md` + `02-ILERLEME.md`.
+> ⚠️ `09-DURUM.md` ve `00-KARAR-TAKIP.md` 2026-09-27'de senkronlandı; rutin turda okunmaz, yalnız kural (h) gereği kapanış işaretleri yazılır (OTONOM-PROMPT § 5c-h) — tur sonu kaydı `docs/otonom/00-SIMDI.md` + `02-ILERLEME.md`. (Gerekçe: PO 2026-09-26'da iki dosyanın 2026-09-20'den beri güncellenmediğini tespit etmişti; 2026-09-27 senkronu bunu kapattı.)
 
 - **Her BYPASS (kod/iş yapan) tur, aşağıdaki belge-senkron kontrolü yapılmadan TAMAMLANMIŞ SAYILMAZ.**
   Aynı tur/commit (docs branch'inde) içinde şunlar KONTROL EDİLİR ve gerekiyorsa güncellenir:

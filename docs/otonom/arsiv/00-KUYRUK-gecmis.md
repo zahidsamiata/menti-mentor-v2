@@ -271,3 +271,222 @@ Bu, **YN-07**'nin tam vakasıydı; hizalama o satırın bir ayağını kapatır.
 **Önceki tam satır (AYNEN, 514 bayt — yalnız İş hücresine NEDEN cümlesi eklendi, taşınan katman yok):**
 
 | AJ-62 | Ş0 | **Zod kullanmayan elle yazılmış 400 yanıtları ortak hata biçiminin dışında** (AJ-43 kalanı). | 🟢 | Bu yanıtlar da `{ error:'VALIDATION', message?, details }` biçiminde (ya da gerekçeli istisna); ön yüz okuyan yerler kırılmıyor; test | BEKLIYOR | ajan-ekledi 2026-09-27 · kaynak: AJ-43 (backend #209) · kanıt: `backend/src/controllers/userController.ts:463-472` (`details` yok) · `backend/src/controllers/meetingController.ts:365-378,427` (`{ error:'<Türkçe cümle>' }`) |
+
+## GÖREV 2.4 — geri bakılabilirlik testi düzeltmeleri (2026-09-28)
+
+### Y-12 (2026-09-28, düzeltme)
+
+**Değişiklik:** NEDEN cümlesi yalnız kaynaktaki ifadeye indirildi (7b)
+
+**Önceki tam satır (AYNEN, 1285 bayt):**
+
+| Y-12 | Ş4 | **madde 56+67 — ölçüm kodu (GTM/GA4/Clarity) ve çerez izni.** ⭐ **PR #110'u açan anahtar.** NEDEN: kurum sahibi ziyaretçi ölçümü istiyor; ölçüm kodu çerez izni olmadan yüklenirse kullanıcı verisi rızasız üçüncü tarafa gider (KVKK) — #110 bu yüzden "MERGE ETME" işaretli. | ~~🟡~~ 🟢 | Kullanıcı ilk girişte çerez tercihini seçiyor; reddederse izleme yüklenmiyor; kurum sahibi ziyaretçi sayısını görüyor | BEKLIYOR | ⚠️ **BİRLEŞTİRİLDİ (2026-09-21):** madde 67 **tek başına açılmamalı** — bugünkü main'de üçüncü-taraf çerez **SIFIR** (7 terim, harf duyarsız → ölçüm/izin kodu 0) ve `app/gizlilik/page.tsx:62-63` bunu açıkça beyan ediyor ⇒ bugün çerez bandı **yasal olarak gereksiz**. ⛔ **SIRA BAĞIMLILIĞI: 67 → 56.** 56 önce merge edilirse KVKK ihlali doğar. ⭐ Kod **YAZILMIŞ**: `origin/feat/analytics-seo-2026-08-22` (`dcf5d9a`) içinde `components/analytics/Analytics.tsx` var, main'de yok; **PR #110 AÇIK** (GitHub teyidi 2026-09-21, başlık: *"🛑 MERGE ETME — çerez izni yok, KVKK riski"*). Bu satır = **#110'u merge edilebilir hale getirmek**, sıfırdan yazmak değil. · aile: Y-B · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § Y-12 (2026-09-28) |
+
+### AN-36 (2026-09-28, düzeltme)
+
+**Değişiklik:** NEDEN cümlesi yalnız kaynaktaki ifadeye indirildi (7b)
+
+**Önceki tam satır (AYNEN, 807 bayt):**
+
+| AN-36 | Ş3 | **Veri İşleyen Sözleşmesi için Tenant yasal-kimlik alanları (G1-12).** NEDEN: kurumla KVKK veri işleyen sözleşmesi yapılabilmesi için kurumun yasal kimliği (adres/KEP/MERSİS) kayıtlı olmalı; bugün bu alanlar yok (G1-12). | 🟡 | Kurum, KVKK veri-işleyen sözleşmesini panelden imzalayıp yönetebilir | BEKLIYOR | kaynak: CS raporu (KN-04) · §4.2 (G1 en değerli öksüz). Kanıt: `G1-guvenlik-kvkk.md` G1-12; kuyrukta karşılığı yok. 🟡: migration + KVKK/hukuk. `[PO DOLDURACAK]` yasal alanlar (adres/KEP/MERSİS) **kod-dışı** → 03-PO-ELLE. · aile: Y-G · PO kısmı: kurumun yasal kimlik bilgilerini (adres/KEP/MERSİS) sağlamak ve veri işleyen sözleşme metnini avukata onaylatmak; kod kısmı migration içerdiğinden 🔵 akışıyla hazırlanır. |
+
+### AN-52 (2026-09-28, düzeltme)
+
+**Değişiklik:** kısaltmada düşen KARAR-44/78 sıra notu geri (7b) · kilit notu KARAR-106 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1972 bayt):**
+
+| AN-52 | Ş1 | ⭐ **Ürün-içi OTOMATİK geri bildirim soruları** — köşede, ZORUNLU DEĞİL, kapatılabilir; her soru HANGİ varsayımı sınadığını belirtir. Çıktı: soru seti + nereye gömüleceği + veri nasıl birikeceği. | 🔵 | Kullanıcı köşede isteğe bağlı soru görüyor; cevaplarsa veri otomatik birikiyor | PR-ACIK | kaynak: **KARAR-70 eki** (E.3). ⛔ Zorunlu tutma · ⛔ tekrar tekrar sorma (kırılgan kullanıcıda baskı = KARAR-71 tutundurma etiği sınırı). ⚠️ STRATEJİ NOTU: otomatik sorular KALANLARI anlatır, GİDENLERİ değil → KARAR-70 C'deki "bırakanla 2-3 görüşme" bunu telafi eder. Neden gerekli: PO tek tek insan aramaz, veri otomatik biriksin. · ⭐ **PLAN HAZIR 2026-09-27:** çatı #369 (`64e8afc`, 7b 2 tur ONAY) — `docs/raporlar/kesif/an52-urun-ici-geri-bildirim-plani-2026-09-27.md`: 7 soru (8 varsayım), kullanıcı başına 1 kez, oturumda en fazla 1, kapatılan bir daha sorulmaz. **KAPI 🟢→🔵 (kural uygulaması):** mevcut 4 geri bildirim tablosu bu anlara uymuyor (görüşme/eşleşmeye zorunlu bağlı) → yeni `ProductSurveyResponse` tablosu = migration. Sıra: AN-52-1 🔵 migration + EVET kartı → AN-52-2/3/4 🟢 (uçlar, köşe kart + 7 tetikleyici, KVKK dışa aktarım/silme) → AN-52-5 🟡 aydınlatma metni (avukat) · AN-52-7 🔴 yönetici görünürlüğü (planda taslak kart). ⚠️ S7 tetikleyicisi: iptal durumu ret dışı yollarla da oluşuyor (`meetingController.ts:794`) — uygulama turu ayırt etmeli. · F-31 buraya katlandı (KARAR-80/M12; sıra notu: AN-47 → KR-08 → AN-48 aynı migration'a) · AN-52-1 PR-ACIK: backend #185 (`ProductSurveyResponse` yeni tablo; migration elle yazıldı, uygulanmadı; AN-52-2 uçları + AN-52-4 KVKK dışa aktarım/anonimleştirme aynı PR'da) · EVET/HAYIR: KARAR-106 (yedek gerekmez — yeni tablo) · merge PO EVET'ini bekliyor · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § AN-52 (2026-09-28) |
+
+### E-3 (2026-09-28, düzeltme)
+
+**Değişiklik:** Durum: tüm kalan ayaklar devredildi (koordinatör md.6); takip kalemleri AJ-106 · kilit notu KARAR-109 (koordinatör md.1b) · kilit notu KARAR-97 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1194 bayt):**
+
+| E-3 | değişir | **BAĞLA kovasını yap.** Her kalem ayrı PR, kendi şeridinde. Küçük ve migration'sız olanlar 🟢, diğerleri 🟡. Sırala: en az emekle en çok kullanıcı değeri önce. | ~~🟢/🟡~~ 🟢 | Her kalem için kullanıcı ekranda bir şey görüyor | BEKLIYOR | ⭐ **KEŞİF (2026-09-25):** `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md` — 62 uç: **BAĞLA 10** (1'i 🔴 U-01) · MÜKERRER 21 · İÇ/SİSTEM 7 · TERK/ÜRÜN 24 (silinmez, yalnız listelendi) · DURUM (2026-09-27): E-3a gereksiz (rozet zaten `admin/eslesmeler` Risk sütununda) · E-3b (backend #127 + çatı #308) · E-3c (backend #135 + çatı #313) · E-3d (backend #187 + çatı #371) · E-3e (çatı #372) BITTI · KALAN: anlaşma taslağı → 🔴 KARAR-109 (kim başlatır — PO) · bağlamsal geri bildirim kartı → U-18 / KARAR-97 (PO EVET'i bekliyor) · değerlendirme okuma (`GET /api/meetings/:meetingId/feedback`) → AJ-49 · takip (satırı yok): engel koyma ucu denetim kaydı yazmıyor; eşzamanlı iki yönetici güncellemesinde kayıp güncelleme riski; seçim listeleri ilk sayfa · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § E-3 (2026-09-28) |
+
+### AJ-22 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-112 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1123 bayt):**
+
+| AJ-22 | Ş0 | **Tarayıcı güvenlik politikası (CSP) yalnız rapor modunda; kurum logosu herhangi bir https adresine konabiliyor** — izleme pikseli üyelerin IP/tarayıcı bilgisini toplayabilir (F-04 + AJ-05 kalanı). | 🟢 (+7b) | CSP engelleme modunda; logo yalnız izinli kaynaktan çiziliyor; test | BITTI (kısmen — KARAR-112) | ajan-ekledi 2026-09-27 · kaynak: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` (F-04 QE5, AJ-05 QE2) · kanıt: `frontend/src/lib/securityHeaders.mjs:36` (`Content-Security-Policy-Report-Only`) · `backend/src/services/logoUrl.ts:64-76` (yalnız IP/localhost reddi) · hazırlık: `docs/raporlar/kesif/csp-zorunlu-mod-hazirlik-2026-09-27.md` · DURUM: CSP engelleme modunda canlıda (çatı #387, 7b ONAY; test `frontend/src/__tests__/security-headers.test.ts` 9 test; mutasyon yerel) · KALAN: logo yalnız izinli kaynaktan çizilsin → KARAR-112 (PO kararı: her https / alan adı listesi / sunucuya indirme) · CSP ihlal kaydı → AJ-52 · satır 5c-a gereği kuyrukta (kısmen) · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § AJ-22 (2026-09-28) |
+
+### AJ-77 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-128 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1443 bayt):**
+
+| AJ-77 | Ş0 | **Durum alanlarının enum'a çevrilmesi + çift rol (`User.role` ↔ `TenantMembership.role`) okuma yolları envanteri** (G6-02 / madde 49) — serbest metin durum alanları geçersiz değer kabul ediyor; bazı okumalar hâlâ genel rolden. | 🔵 (migration; envanter + taslak kısmı 🟢) | Envanter (alan · canlı değer dağılımı, salt-okuma) + migration PR'ı + tarihli yedek planı + EVET/HAYIR kartı hazır; rol okumalarının `TenantMembership.role`'e geçiş listesi (AJ-01/40/56 sonrası kalan) | PR-ACIK | ajan-ekledi 2026-09-27 · kaynak: `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:186` (GÖREV 4) · kanıt: `backend/prisma/schema.prisma` (Tenant · MeetingCheckIn · UserReport · MentorshipAgreement · InvitationTemplate String alanları) · `docs/otonom/00-KUYRUK.md:342` (madde 49 alınmadı) · 🔵 **PR-ACIK 2026-09-28:** backend #227 (⛔ MIGRATION `20260928000000_durum_alanlari_enum`, 13 kolon / 5 tablo) + çatı #420 (envanter `docs/raporlar/kod-denetimi/aj77-durum-alanlari-envanter-2026-09-28.md`); 7b ONAY https://github.com/zahidsamiata/menti-mentor/pull/227#issuecomment-5865731487 · test `backend/tests/aj77-status-enum.unit.test.ts` (40) · mutasyon yerel 2/2 kırmızı · EVET kartı KARAR-128 · merge öncesi: §3b sayımı 0 + tarihli yedek (DB erişimi) · girmeyen: `Tenant.plan` (KARAR-119) · `SystemLog.category` (AUDIT temizliği) · rol okuma envanteri → AJ-105 |
+
+### AJ-78 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-103 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 794 bayt):**
+
+| AJ-78 | Ş0 | **Kurum KPI paneli ve CSV'de tamamlama oranları ve tamamlanan görüşme sayısı yok** (G4-30 kalanı + 08-acik-sorular genişletmesi) — CSV yalnız sayı, NPS ve eşleşme içeriyor. | 🟢 (+7b KVKK: toplu veri dışa aktarımı) | Kurum yöneticisi panelde ve CSV'de "kaydını tamamlayan üye %", "DISC tamamlama %" ve "tamamlanan görüşme" görüyor; küçük grupta (eşik 3) gizli; test (kurum izolasyonu + k-anonimlik). Dönemsel tarih aralığı → KARAR-103 md.10 | BEKLIYOR | ajan-ekledi 2026-09-27 · kaynak: `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:152` · `docs/kararlar/konu/08-acik-sorular.md:55` (GÖREV 4) · kanıt: `backend/src/services/kpiReport.service.ts:136-186` (CSV satırları) · `backend/src/controllers/adminController.ts:44-66` |
+
+### K-15 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-111 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 967 bayt):**
+
+| K-15 | Ş2 | **AvailabilityBlock'a format + süre (tam randevu mimarisi).** ⛔ önce `availability_block_yedek_20260910`; migration default'lu (format=ONLINE, durationMin=60); mentör slot açarken format+süre seçer; menti slottan seçer. | ~~🟡~~ 🔵 | Mentör format+süre belirliyor, menti seçiyor, eski kayıtlar bozulmadı | PR-ACIK | KAYNAK: KARAR-1 → A (2026-09-21; PO şartı: önce tarihli yedek, sonra açık onay) · AN-25 buraya katlandı (KARAR-80/M10; koşul alanları bu PR'da yok) · aile: Y-G · 🔵 **HAZIRLANDI 2026-09-27:** backend #189 (⛔ MIGRATION: `AvailabilityBlock.format` @default ONLINE + `durationMin` @default 60; 7b ONAY) + çatı #374 (form + randevu ekranı; 7b ONAY). AN-25 koşul alanları bilerek dışarıda (tasarlanmadı). EVET/HAYIR: **KARAR-111** (mevcut blokların ONLINE/60'a daralması, <60 dk blok riski, yedek MERGE'DEN ÖNCE). · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § K-15 (2026-09-28) |
+
+### U-18 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-97 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1270 bayt):**
+
+| U-18 | Ş0 | **`MatchRequest` durumsuz → mentörün mesaj talebini kabul/ret kapısı yok;** `Match` tablosuna yazan kod yok (`createMatchIfEligible` 0 çağıran). | ~~🟡~~ 🔵 | Mentör mesaj talebini kabul/ret edebiliyor (karara göre) | PR-ACIK | aile: Y-C · DURUM: PR-ACIK — backend #148 + çatı #326 (CI yeşil; 7b 2. tur ONAY 2026-09-26) · ⛔ MIGRATION `Conversation.rejectedAt` (boş bırakılabilir ek alan; dosya elle yazıldı, uygulanmadı) → merge için PO EVET'i (KARAR-97) + `Conversation` tarihli yedeği · Uygulama: mentör `POST /api/conversations/:id/reject` ile reddediyor (menti/yönetici/yabancı → 404), menti nazik ret metni görüyor, alternatif mentör önerisi YOK (KARAR-22 B; I-16 ret metinleri buraya katlandı — KARAR-80/M1) · Kapsam dışı: P-05 (görüşme reddi) · e-posta bildirimi (SMTP) · `MatchRequest` durum alanı · Takip (satırı yok, strateji katmanına): gerçek bildirim + gelen kutusunda ret işareti; bildirim metnindeki "Mentörünüz" · ⛔ Sıra kuralı: `Match` yazımı ancak silme yolu (GV-08, tamamlandı) sonrası açılır · KAYNAK: X §3 K6 / §10#23 · kod incelemesi D1 · kanıt `schema.prisma:439-456` · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § U-18 (2026-09-28) |
+
+### PS-A3 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-58 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1648 bayt):**
+
+| PS-A3 | Ş0 | **⭐ KARAR-10 · AŞAMA 3 — EŞLEŞTİRMEYE BAĞLA, AÇMA/KAPAMA ANAHTARIYLA.** Yeni motor eskisinin **yanında** çalışır (feature flag); önce **eski/yeni sıralama karşılaştırması PO'ya gösterilir**; PO onaylarsa açılır, **tek tuşla eskiye dönülür.** | 🟢 | PO karşılaştırmayı gördükten ve onayladıktan sonra: kullanıcı daha zengin profile göre sıralanmış mentör listesi görüyor — ve anahtar kapatılırsa eski listeye anında dönülüyor | BEKLIYOR | ⛔ Ön koşul **PS-A1 → PS-A2**. ⛔ **ANAHTAR (feature flag) ZORUNLU — PO şartı.** ⚠️ **I-13 düzeltilmeden bağlama RASTGELEDEN BETERDİR:** `COMPATIBILITY_MATRIX['M1_m1']=60` (`scoring.config.ts:38-44`) karakter skorunu **düzleştirir**, `BLOCKED_PAIRS` (`:33`) yüzünden toksik-çift vetosu **hiç tetiklenmez**. ⚠️ **ÖLÇÜM MEKANİZMASI YOK** — `Match` tablosuna yazılmıyor ⇒ *"daha iyi"* bir süre **PO'nun gözüyle** değerlendirilir. ⛔ **`Match` yazımı açılırsa KVKK sırası bağlayıcıdır:** önce silme yolu (`GV-08`), SONRA `Match` yazımı (`U-18`) — ters sıra = KVKK ihlali. ⚠️ **KARAR-6 bağlantısı:** menti ekranındaki uyum yüzdesi bugün DISC skorudur → motor bağlanınca **YÜZDELER DEĞİŞİR.** = `F-11` / `I-15` şemsiyesi altında. Efor XL · aile: Y-C · Kapı 🟢 + 7b (b)(c) (PO 2026-09-27, GÖREV 0.2 — matching dosyası); ön koşul ve anahtar şartları geçerli · I-15 buraya katlandı (KARAR-80/M9) · ön koşul durumu: PS-A1 tamamlandı · PS-A2 🔴 KARAR-58 bekliyor · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § PS-A3 (2026-09-28) |
+
+### IC-10 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-45 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1392 bayt):**
+
+| IC-10 | Ş1 | **madde 139'un eksik yarısı: 4 menti "şimdilik" varyantı YAZILSIN.** Bugün yalnız mentör tarafı yazılı (4/8). | 🟢 | (ön koşul işi — kullanıcı etkisi `I-15` ile birlikte görünür: çoklu-arketip çıkan **menti** de "şimdilik" metnini okur) | ✅ BITTI (2026-09-26, metin yazıldı — onay bekliyor) | §0② · §2.1. Belge `arketip-ve-yaklasim-icerigi-2026-09-03.md:269` menti sürümü için **metin değil talimat** bırakmış; yazılı 4 varyant `:271,279,287,295` **yalnız mentör**. ⛔ **`I-15`'in ön koşulu** — I-15 bugün kodlanırsa menti tarafı boş kalır. Ayrı satır açıldı çünkü I-15 🔴 KARAR-10 kilitli, bu iş 🟢 ve ondan bağımsız ilerler. ⚠️ Eşik dalı yazılırken sihirli sayı YOK: eşik sabiti `scoring.config.ts:31` komşusuna. ⚠️ Ad seçimi ad↔kod kararına bağlı (**KARAR-45**). Efor S (yazım) · ⛔ **çelişki: KARAR-80/M16** (2026-09-25) · eski kapı: 🟢 · KARAR-80 işlendi (2026-09-26, A kabul) — M16: ana satır ('şimdilik' varyantları); AN-05 yalnız '15/16 kombinasyon metni'ne daraltılmış olarak ayrıca ilerler. · ✅ **YAZILDI 2026-09-26:** `docs/raporlar/icerik/menti-simdilik-varyantlari.md` (4 varyant, mentör §6 yapısının birebir aynası; adlar yer tutuculu — KARAR-45). Kullanıcı etkisi I-15 ile görünür (🔴 KARAR-10). PO metin onayı belgede ⬜. |
+
+### AN-05 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-45 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1069 bayt):**
+
+| AN-05 | Ş1 | **Menti "şimdilik" 4 varyantı + eşleşme detay 15/16 kombinasyon metnini yaz.** | 🟢 | Menti belirsiz eşleşmede doğru "şimdilik" metnini görüyor | 🟨 kısmen (metin yazıldı, PO onayı bekliyor — bitti-dogrulama 09-27 ⚠️) · ✅ BITTI (2026-09-26, metin yazıldı — onay bekliyor) | Kaynak: A6 · IK(D) · TO Y-30. IC-10 / I-11 ön koşulu; menti varyantı 0 yazılı. Neden: bugün boş/eksik metin. · ⛔ **çelişki: KARAR-80/M16** (2026-09-25) · eski kapı: 🟢 · KARAR-80 işlendi (2026-09-26, A kabul) — M16: yalnız '15/16 kombinasyon metni'ne DARALTILDI (IC-10 ana satırdır, geri kalanı orada); bu dar kapsam bağımsız ilerler. · ✅ **YAZILDI 2026-09-26 (daraltılmış kapsam: 15/16 kombinasyon):** `docs/raporlar/icerik/birlikte-calisma-kombinasyonlari.md` — kaynak örnek (Rotacı×Ayna) aynen + 15 yeni metin, aynı 4 parçalı yapı; "eşleşme" sözcüğü kullanılmadı (KARAR-66 B). Adlar KARAR-45'e bağlı; PO metin onayı belgede ⬜. Menti "şimdilik" varyantları IC-10 ile ayrıca yazıldı. |
+
+### AN-02 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-99 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 626 bayt):**
+
+| AN-02 | Ş1 | **Seed metin yazım düzeltmesi:** `seed.ts:69` "güçlüğüm"→"güçlü yanım" + `seed.ts:537` "Menteen"→"Mentin". | ~~🟡~~ 🔵 | Kullanıcı doğru yazımı görüyor | PR-ACIK | Kaynak: A3 · IK(A.3). 🟡: seed dosyası (⛔ seed ÇALIŞTIRILMAZ, yalnız metin düzeltme); canlıda görünür. · aile: Y-G · kapı 2026-09-26 (4 renk) · 🔀 **PR-ACIK 2026-09-26 (🔵):** backend #160 — `seed.ts:70` "güçlüğüm"→"güçlü yanım" · `:540` "Menteen"→"Mentin" (seed ÇALIŞTIRILMADI; güncel satır numaraları 70/540). Canlı düzeltme = 2 satır UPDATE → **KARAR-99** EVET/HAYIR. |
+
+### AN-10 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-64 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 814 bayt):**
+
+| AN-10 | Ş1 | **Terim tutarsızlığı: §5'teki 31 nokta** (mizaç/karakter/kişilik · mentor/mentör · görüşme/toplantı/randevu). NEDEN: aynı kavram ekranlarda farklı adlarla geçiyor (TO §5: 31 nokta) — kullanıcı tutarsız dil görüyor, aynı şeyi ayrı şey sanabilir. | 🟢 | Kullanıcı aynı şeyi her ekranda aynı adla görüyor | ✅ BITTI (kısmen, KARAR-64 ayağı açık) | Kaynak: A12 · TO §5 · IK. IC-02/IC-11 ekine. ⚠️ **KARAR-64 (mizaç/karakter/kişilik) cevabından SONRA** yapılır. · DURUM: mentor/mentör yazım ayağı BITTI (çatı #339 + AN-10b #347) · görüşme ayağı IC-11 ile BITTI · KALAN: mizaç/karakter/kişilik adlandırma ayağı → 🔴 KARAR-64 (PO; KARAR-80/M16) · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § AN-10 (2026-09-28) |
+
+### AN-12 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-107 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 971 bayt):**
+
+| AN-12 | Ş3 | **`interactionStyle` karantina** (dondurulmuş alanı yazma şemalarından çıkar) + tie-break tek kaynak (D>I>S>C ↔ D>I>C>S). | 🔵 | Tek tie-break kuralı; ölü alan yazılmıyor | PR-ACIK | Kaynak: A14 · TO Y-13/Y-16. ⛔ SİLME PROTOKOLÜ (karantina, silme değil). 🟡 matching; tie-break önce doğrula (harf sonucu değişir). · aile: Y-C · kapı 2026-09-26 (4 renk) · ⭐ **KAPI DÜZELTMESİ 2026-09-27 (kural uygulaması):** 🟢→🔵 — iş "karantina" (dondurulmuş alanı yazma şemalarından çıkar); OTONOM-PROMPT Bölüm 7: karantina 🔵 (PR + 7b + EVET kartı). Kaynak: kalan 🟢 ayıklaması (02-ILERLEME 2026-09-27). · 🔵 **HAZIRLANDI 2026-09-27:** backend #186 (karantina: 3 yazma yolu kapandı, okuma/şema aynı; 7b ONAY, CI yeşil) + çatı #370 (silme protokolü arşivi `docs/arsiv/silinenler-2026-09-27.md`). EVET/HAYIR: **KARAR-107**. Tie-break kısmı ayrı ürün sorusu: **KARAR-108** (bugün etkisi yok). |
+
+### AN-26 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-98 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1465 bayt):**
+
+| AN-26 | Ş2 | **Müsaitlik hatırlatması (zamanlanmış iş) + kurum yöneticisine eskalasyon:** menti talebinden 3 gün→mentöre hatırlatma · 7 gün→2. hatırlatma · 10 gün→yöneticiye bildirim. | 🔵 | Yanıtsız mentör dürtülüyor, uzun sessizlikte yönetici haberdar | PR-ACIK | Kaynak: **KARAR-53 ④** (Bölüm 3, süreler ajan varsayılanı gerekçeli). ⚠️ SMTP'ye bağlı (03-PO B4); zamanlanmış iş altyapısı. 🟡. · aile: Y-D · ⛔ **çelişki: KARAR-80/M2** (2026-09-25) · eski kapı: 🟡 · KARAR-80 işlendi (2026-09-26, A kabul) — M2: ana satır — KARAR-53 ④'e göre 3 gün mentöre hatırlatma, 7 gün 2. hatırlatma, 10 gün yöneticiye eskalasyon; I-10 buraya katlandı. · kapı 2026-09-26 (4 renk) · 🔀 **PR-ACIK 2026-09-26 (🔵 akışı — uygulama migration gerektirdi):** backend #157 (`fb6c411`) + çatı #337 (pointer). Migration: `Conversation` +3 nullable guard alanı (yalnız ekleme, ÇALIŞTIRILMADI). CI yeşil (923 test). **KARAR-98** EVET/HAYIR kartı açıldı. 7b incelemesi sürüyor. · ✅ 7b 2. tur ONAY (2026-09-26; backend #157 `cb6b83d` yorum 5849046560 · çatı #337 `10346e0` yorum 5849046681; 941 test). Kalan: KARAR-98 EVET (+ alt soru) + `Conversation` yedeği. · ⭐ **KAPI DÜZELTMESİ 2026-09-27 (kural uygulaması):** hücre 🟢 gösteriyordu, gövde 🔵 akışı (migration'lı PR backend #157 + çatı #337, KARAR-98 EVET + `Conversation` yedeği bekliyor) → 🔵. |
+
+### AN-30 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-96 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1281 bayt):**
+
+| AN-30 | Ş3 | **Kayıt ekranı: zorunlu + isteğe bağlı maddeler** (DISC eşleştirme · yurt dışı saklama · veri işleme · anonim iyileştirme = ZORUNLU; kurumlar-arası paylaşım · OCEAN = İSTEĞE BAĞLI). Aynı ekran kurum yöneticilerine de. | ~~🟡~~ 🔵 | Kullanıcı ayrı ayrı onay veriyor; zorunlu eksikse giriş yok | PR-ACIK | KAYNAK: KARAR-34 SORU 1 · F-03 buraya katlandı (KARAR-80/M17) · ⛔ ÇIKIŞ BLOKERİ (KARAR-69 B, 2026-09-23): onay ekranı ilk kullanıcıyla devreye giren KVKK tabanı · DURUM: PR-ACIK — backend #142 (⛔ MIGRATION: `ConsentType`'a 6 yeni değer; dosya elle yazıldı, uygulanmadı) + çatı #320: klasik ve OAuth kaydında `GranularConsentForm` (6 kutu), `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED` bayrağı arkasında (varsayılan kapalı → canlıda görünmez) · metinler yer tutucu: ⛔ avukat onayı olmadan canlıya açılmaz · KALAN (PO): ⓐ migration onayı ⓑ STK self-serve kurum kaydı ekranı ayrı iş olarak kuyruğa alınsın mı (satırı yok) ⓒ bayrağın açılışı avukat metni sonrası · ✅ 7b 2. tur ONAY (2026-09-26; backend `df8db92` · çatı `43490fc`) — PO EVET'i (KARAR-96) + `Consent` yedeği bekler. · geçmiş: bkz. `docs/otonom/arsiv/00-KUYRUK-gecmis.md` § AN-30 (2026-09-28) |
+
+### AN-41 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-47 (koordinatör md.1b) · kilit notu KARAR-75 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 983 bayt):**
+
+| AN-41 | Ş3 | **KVKK metin paketini kod-senkron güncelle** (avukata gitmeden önce; 4 boşluk kodda kapandı). | 🟡 | Avukat, ürünün gerçek (güncel) KVKK durumunu görür | BEKLIYOR | kaynak: CS raporu (KN-09) · Ç-12..15. Kanıt: metin "YOK/PR bekliyor" der, kodda merged: rıza sürümleme `consentService.ts:28` · hardDelete→anonymize `gdprService.ts:233` · FeedbackLog 3-yıl `gdprService.ts:370` · FE veri-hakları `profile/page.tsx:443`. ⚠️ KARAR-75 (kişi adı yasağı ↔ yasal metin, Ç-16) + YN-13 ile bağlı. 🟡 KVKK. KARAR-47 avukat paketine katılabilir. · aile: Y-B · ⛔ **çelişki: KARAR-80/M18** (2026-09-25) · eski kapı: 🟡 · KARAR-80 işlendi (2026-09-26, A kabul) — M18: GV-18 notu eklendi — rıza sürümü kaydediliyor ama hiç kontrol edilmiyor; avukata 'sürümleme var' denecekse önce GV-18 kapanmalı. · PO kısmı: kod-senkron güncellenen KVKK metin paketini avukata götürüp onaylatmak (avukat paketi, KARAR-47). |
+
+### AN-49 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-67 (koordinatör md.1b) · kilit notu KARAR-89 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 671 bayt):**
+
+| AN-49 | Ş3 | ⭐ **Dört feedback modeli tek KALİTE GÖRÜNÜMÜNE bağlansın.** Kim görür → KARAR-67 (drill-down) ile bağlantılı, önce ona bak. | ~~🟡~~ 🟢 | Yönetici tek, tutarlı kalite görünümü görüyor | BEKLIYOR | kaynak: strateji karar oturumu (E.1c). ⛔ **SIRA ÖNEMLİ:** (1) KVKK silme yolu düzeltilsin (GV-08) → (2) SONRA `Match` yazımı açılsın (U-18/PS-04/F-11) → (3) SONRA kalite görünümü. Ters sıra KVKK ihlali doğurur. ⚠️ **KARAR-66 B ile çelişki YOK** — ölçüm kurulunca "yönlendirme kalitesi" iddiası KANITLA geri KONABİLİR. 🟡: matching/KVKK bağımlı. · aile: Y-C · kapı 2026-09-26 (4 renk) |
+
+### AJ-50 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-116 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 1319 bayt):**
+
+| AJ-50 | Ş0 | **Mevcut kayıtlarda kişilik kartının içinde ham DISC vektörü/puanı duruyor** (AJ-21 kalanı) — okuma yolu artık süzüyor, yeni kayıtlar temiz; eski kayıtların kartında fazlalık veritabanında kalıyor. | 🔵 (canlı veriye yazma) | Mevcut `discResultCard` kayıtlarında `discVector`/`rawScores` anahtarı yok; tarihli yedek alındı | PR-ACIK | ajan-ekledi 2026-09-27 · kaynak: AJ-21 (backend #194) · kanıt: `backend/src/controllers/onboardingController.ts` (2026-09-27 öncesi yazım karta `discVector` + `rawScores` gömüyordu) · okuma süzgeci `backend/src/services/discVisibility.ts:31-46` · yöntem önerisi: tarihli yedek + tek seferlik JSON güncellemesi (`discResultCard - 'discVector' - 'rawScores'`); DB erişimi gerekir (VPS'te yok) → hazırlık PR + EVET kartı · acil değil (sızıntı okuma yolunda kapalı) · 🔵 **PR-ACIK 2026-09-27:** backend #212 (7b ONAY 2. tur https://github.com/zahidsamiata/menti-mentor/pull/212#issuecomment-5861236295; CI yeşil; betik varsayılan kuru çalışma, `--uygula` her hedefte birebir host onayı; test `backend/tests/discCardCleanup.unit.test.ts` (16); mutasyon yerel — TEST_DATABASE_URL istisnası geri gelince 3 kırmızı). EVET/HAYIR: **KARAR-116**. MERGE YOK — PO EVET + tarihli yedek (DB erişimi) sonrası. |
+
+### AJ-90 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-54 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 731 bayt):**
+
+| AJ-90 | Ş0 | **Mentinin mentör havuzu sayfalanmıyor** — ön yüz tek istekte en çok 100 mentör çekiyor, uç sayfa/toplam dönmüyor; 100'den fazla uygun mentörü olan menti kalanları hiç görmüyor. | 🟢 (+7b) | Uç sayfa + sayfa boyutu + toplam döndürüyor, ön yüzde sayfa düğmeleri; sıralama sayfalar arasında kararlı; test: 40 aday → 3 sayfa, sınırda tekrar/eksik yok | BEKLIYOR | ajan-ekledi 2026-09-27 · kaynak: `docs/kararlar/konu/06-tasarim-ux.md:40` (GÖREV 4) · kanıt: `frontend/src/lib/api/matching.ts:24` (`limit=100`) · `backend/src/controllers/matchingController.ts:101-103` (yalnız `limit`, en çok 200) · sayfa başına kart sayısı KARAR-54'e bağlı; cevap yoksa 18 (tek sabit) |
+
+### AJ-99 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-12 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 949 bayt):**
+
+| AJ-99 | Ş0 | **Mentör panelindeki kendi NPS ortalaması küçük örnekte maskesiz** (AJ-69 7b yan bulgusu) — tek mentisi olan mentör, o kişinin verdiği puanı birebir görür; kurum ekranlarındaki k-anonimlik kuralı (eşik 3) burada yok. | 🟢 (+7b KVKK) | Yanıt sayısı eşiğin altındaysa mentör panelinde ortalama yerine "gizli (<3 yanıt)" görünüyor; negatif test (n=1,2 → ortalama dönmüyor) | BEKLIYOR | ajan-ekledi 2026-09-28 · kaynak: 7b #220 https://github.com/zahidsamiata/menti-mentor/pull/220#issuecomment-5864565605 · kanıt: `backend/src/controllers/mentorMetricsController.ts:49,99-100` (maskesiz ortalama) ↔ komşu `backend/src/services/mask.ts` `maskNpsSample` (AJ-69) · NEDEN: değerlendirme puanı kimin verdiği bilinirse menti dürüst puan vermekten çekinir · ⚠️ ürün sorusu olabilir: mentörün kendi geri bildirimini görmesi KARAR-12/44 ile ilişkili — uygulayıcı önce kontrol eder |
+
+### AJ-101 (2026-09-28, düzeltme)
+
+**Değişiklik:** kilit notu KARAR-127 (koordinatör md.1b)
+
+**Önceki tam satır (AYNEN, 782 bayt):**
+
+| AJ-101 | Ş0 | **Psikometri belgesinin "Mentörlük yetkinliği & sertifikasyon ✅" bölümü kodla çelişiyor** (GÖREV 2.2 KISMEN) — "Mini Akademi 4 modül" kodda yok, "Baraj 65" T4 kararıyla "%80 konu" oldu; belge ✅ diyor. | 🟢 belge (+ 🔴 KARAR-127 ürün kısmı) | Bölüm başlığı ve maddeler kod gerçeğine göre güncel (eski metin arşivde); Mini Akademi maddesi KARAR-127 cevabına bağlı olarak "yapılmadı / planlandı" | BEKLIYOR | ajan-ekledi 2026-09-28 · kaynak: `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md` (AJ aday 1) · kanıt: `docs/kararlar/konu/03-psikometri-ve-algoritma.md:47-50` ↔ `backend/src/services/certification.service.ts:27,33,52` · NEDEN: belge "var" dediği için kimse yapmıyor ya da kararını vermiyor |
+
+### Y-18 (2026-09-28, düzeltme)
+
+**Değişiklik:** KARAR-BEKLEYEN satırı · kod içindeki `|` → `\|` (tablo hücresi onarımı, anlam aynı)
+
+**Önceki tam satır (AYNEN, 852 bayt):**
+
+| Y-18 | Ş0 | **madde 126 — `answeredFollowup` olmayan tabloyu sorguluyor; profil tamamlanma yüzdesi sistematik DÜŞÜK.** | 🔴 KARAR-36 | Profil tamamlanma yüzdesi gerçek veriye dayanıyor | BEKLIYOR | ⚠️ **RAPOR DÜZELTMESİ — etki sanılandan BÜYÜK.** Rapor *"try/catch sessizce 0 dönüyor"* dedi; gerçek daha kötü: `profile-completeness.service.ts:43-50` **`(prisma as any).answeredFollowup?.count(...)`** — optional chaining **fırlatmadan `undefined` döner** → ` · ⛔ **çelişki: KARAR-80/M19** (2026-09-25) · eski kapı: 🟢 || 0` → **HER ZAMAN 0** ve **`catch` bloğu ÖLÜ KOD**, yani `profileSource==='HYBRID' ? 1 : 0` yedeği **hiç çalışmıyor**. Tablo gerçekten yok (`grep answeredFollowup schema.prisma` → 0). · KARAR-80 işlendi (2026-09-26, A kabul) — M19: açık karara bağlandı, CEVAPSIZ. |
+
+### I-11 (2026-09-28, düzeltme)
+
+**Değişiklik:** KARAR-BEKLEYEN satırı · kod içindeki `|` → `\|` (tablo hücresi onarımı, anlam aynı)
+
+**Önceki tam satır (AYNEN, 1476 bayt):**
+
+| I-11 | Ş1 | **madde 151+152+153 — eşleşme detay sayfası yok.** Bugün yalnız tek cümlelik "neden uyumlu" var. | 🔴 KARAR-64 | Menti "neden bu mentör · nasıl çalışırsınız · ilk görüşmede ne konuşulur" bölümlerini görüyor | BEKLIYOR | 🟡 KALIR: **içerik ön koşullu** — Bölüm 2'nin 16 kombinasyonundan **15'i YAZILMADI**. Katman-1 VAR: `compatibilityReason` render ediliyor (`menti/page.tsx:318`, `mentor/page.tsx:482-484`). Detay rotası YOK (FE dizin listesi teyitli). madde 153: cümle S1/S2/S3'ten DEĞİL, skor eşiğinden üretiliyor (`matchingController.ts:12-15,48-60`; `supportApproach · ⛔ **çelişki: KARAR-80/M16** (2026-09-25) · eski kapı: 🟡 |needStatement|threeQuestion` → 0). ⚠️ **Bölüm 1 ve 3 BAĞIMSIZ ilerler** — PO isterse ikiye bölünsün. ⚠️ S1 (`mentiNeeds`) karşı tarafa GÖSTERİLMEZ, yalnız örtüşme cümlesi. ⚠️ = psikometri konseyi §5 D.2 (KOPMA 3), ek bulgu: üç sorunun (mentiNeeds · mentorStrengths · supportApproach · priorityValue) tek yazanı onboardingController.ts; matching.ts · scoring.ts · scoring.service.ts · sector-scorer.service.ts içinde 0 eşleşme ⇒ veri toplanıyor ama hiçbir skorlama dosyasında okunmuyor (I-11'in "detay sayfası" ayağından ayrı, SKORLAMA ayağı). · aile: Y-C · KARAR-80 işlendi (2026-09-26, A kabul) — M16: hazır metinler AN-50 diline çevrilerek bağlanacak; AN-50 KARAR-64'e kilitli (CEVAPSIZ) → zincirleme kilit. |
+
+### U-17 (2026-09-28, düzeltme)
+
+**Değişiklik:** KARAR-BEKLEYEN satırı · kod içindeki `|` → `\|` (tablo hücresi onarımı, anlam aynı)
+
+**Önceki tam satır (AYNEN, 1514 bayt):**
+
+| U-17 | Ş0 | **Temiz DB'de DISC havuzu boş kalıyor ve yalnız yıkıcı `prisma/seed.ts` ile dolabiliyor** (`createQuestion` DISC'i 403'lüyor). Yeni ortam kurulurken patlar. | 🔴 KARAR-85 | Temiz DB'de DISC havuzu güvenli yolla dolabiliyor | BEKLIYOR | ⛔ **ÇIKIŞ BLOKERİ (T2)** — temiz DB'de DISC havuzu boş — yeni ortam kurulurken patlar; tek yol yıkıcı `seed.ts` · 🟡 KALIR: SEED + yıkıcı `seed.ts` riski (PO kararı). = X §4.6 / §10#21. Kanıt: `questionService.ts:174`; `questionController.ts:124-129`; `seed.ts:295-319` koşulsuz `deleteMany`. Efor L ⚠️ = güvenlik konseyi §3.3, ek bulgu: aynı dosyada ikinci sorun — `prisma/seed.ts` prod'da çalışmayı ENGELLEYEN guard taşımıyor (*kapsam:* `prisma/seed.ts`, desen `NODE_ENV · **KARAR-80/M21 sıra notu:** seed koruması ayağı = KR-01 (#91 merge edildi). · 🔴 **kart açıldı (2026-09-25): KARAR-85** · eski kapı: 🟡 |isProd` harf duyarsız → 0) ve `:293` sabit bir seed şifresi içeriyor (`:383` yorumu düz metin tekrarlıyor). U-17 ile BİRLİKTE yapılmalı: dosyaya dokunulurken guard da eklensin. ⚠️ = psikometri konseyi §4 C.1, ek bulgu: havuz boşken /disc-test DOĞRU davranıyor (DiscTestEmpty, K-02'de düzeltilmiş) ama /onboarding savunmasız (→ PS-11); ayrıca mantık hatası questionService.ts:173 ve questionController.ts:327'de 0 >= 0 ⇒ havuz TEK soruya düşerse ilk cevapta discAssessmentCompletedAt yazılır ve admin'e "test tamamlandı" e-postası gider. · aile: Y-G |
+
+### AN-26 (2026-09-28, düzeltme — 1.500 bayt aşımı)
+
+**Satırdan çıkarılan katmanlar (AYNEN; önceki tam satır yukarıda § AN-26 düzeltme kaydında):**
+
+- ⛔ **çelişki: KARAR-80/M2** (2026-09-25)
+- eski kapı: 🟡
+- kapı 2026-09-26 (4 renk)
+- ⭐ **KAPI DÜZELTMESİ 2026-09-27 (kural uygulaması):** hücre 🟢 gösteriyordu, gövde 🔵 akışı (migration'lı PR backend #157 + çatı #337, KARAR-98 EVET + `Conversation` yedeği bekliyor) → 🔵.

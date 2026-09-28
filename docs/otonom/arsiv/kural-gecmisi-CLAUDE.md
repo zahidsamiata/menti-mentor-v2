@@ -334,3 +334,9 @@ Karar kartları kart başına dosyaya (`docs/otonom/kararlar/`) ve 🔴 kuyruk s
 ```text
   3. **İNDEKS** — `01-KARARLAR.md`'nin BAŞINDA içindekiler tablosu tutulur.
 ```
+
+## GÖREV 2.4 düzeltme — § Belge Senkronizasyonu 09-DURUM notu 0.4 ile tutarlı · taşındı 2026-09-28
+
+```text
+> ⚠️ PO 2026-09-26: `09-DURUM.md` ve `00-KARAR-TAKIP.md` 2026-09-20'den beri güncellenmiyor; genel belge taraması yapılana kadar otonom turlar bu iki dosyaya yazmaz — tur sonu kaydı `docs/otonom/00-SIMDI.md` + `02-ILERLEME.md`.
+```
