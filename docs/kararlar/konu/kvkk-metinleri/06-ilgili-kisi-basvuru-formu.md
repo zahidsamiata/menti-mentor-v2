@@ -14,8 +14,10 @@
 ## ⚠️ Bilinen kısıt (dürüst — kod gerçeği)
 - ~~Platformda kullanıcının verisini **kendi kendine indirebileceği/silebileceği bir ekran şu an YOKTUR** (madde 40/84). Bu ekran hazırlanana kadar talepler **e-posta ile** karşılanır.~~
   ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında FE veri-hakları ekranı MOUNT EDİLMİŞ — `DataPrivacySection.tsx` bileşeni `frontend/src/app/(dashboard)/profile/page.tsx:443`'te mount edilmiş. Metin "ekran şu an YOKTUR" diyor; kod tarafında ekran bağlı → iki taraf çelişik, metin bayat. Kanıt: `frontend/src/app/(dashboard)/profile/page.tsx:443`. Karar PO'nun.
+  ⚠️ GÜNCELLEME (2026-09-29): `origin/main`'de doğrulandı — satır artık `profile/page.tsx:468`; "Verilerimi indir" (`GET /api/me/data-export`) + "Hesabımı kapat" (`POST /api/me/delete-account`) — `backend/src/routes/userRoutes.ts:203-214`; backend PR #59 + çatı PR #135 (2026-08-29). Üstü çizili cümlenin yerine yayında ne yazılacağı avukat/PO işi → kapak Bölüm 10 not N-2.
 - **Silme/kapatma talebi anonimleştirmeyle karşılanır** (avukat onaylı yöntem — silme yerine anonimleştirme): kimliğinizle ilişkilendirilebilir veriler (ad, iletişim, kişilik, **serbest metin/mesaj içeriği**, yüklenen fotoğraf) geri döndürülemez şekilde temizlenir, oturumunuz kapatılır. Ortak kayıtlarda (görüşme/mesaj) kimliğiniz kaldırılır; içerik anonimleştirilir. *(Teknik ayrıntı: `00-KARAR-TAKIP` madde 39/93; anonimleştirme düzeyi hukukçu değerlendirmesinde — kapak H-9.)*
 - **Başvuru e-posta adresi kodda tanımlı olana kadar bu belge yayınlanamaz** → PO'nun `destek@` adresini kurup bağlaması ön koşuldur.
+  ⚠️ GÜNCELLEME (2026-09-29): ön yüzde `destek@mentimentor.io` bağlantısı zaten görünüyor (`Step4Account.tsx:169`, `join/_JoinContent.tsx:65`, `onboarding/stk/pending-review/page.tsx:108,172`); adresin kurulu ve okunuyor olduğu teyit edilmedi (`backend/src/config.ts:143`) → kapak Bölüm 10 not N-7.
 
 ## BAŞVURU FORMU (şablon)
 

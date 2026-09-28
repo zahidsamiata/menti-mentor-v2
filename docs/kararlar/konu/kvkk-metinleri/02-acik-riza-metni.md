@@ -32,13 +32,18 @@
 ## ⚠️ MEVCUT DURUM BULGUSU (kod gerçeği — envanter C-6) — dürüst beyan
 Aşağıdakiler **şu anki kodda böyle**; hukukçu onayıyla düzeltilecek. Bu paket bunları gizlemez:
 1. **KVKK onayı + 18+ beyanı TEK kutuda birleşik** (`_RegisterContent.tsx:414`) — açık rıza "özgür/ayrık" ilkesiyle çelişebilir.
+   *(2026-09-29 doğrulandı — hâlâ geçerli: `_RegisterContent.tsx:416-435`.)*
 2. **OAuth (Google/LinkedIn) girişinde açık rıza kutusu UI'da GÖSTERİLMİYOR** — kod "OAuth başlatmak = rıza" varsayıyor (`oauthService.ts:112` implicit `kvkkConsentAt`).
-3. **Self-serve kurum başvurusunda 18+ ibaresi bile yok.**
+   *(2026-09-29 doğrulandı — hâlâ geçerli: Google/LinkedIn düğmeleri kutudan önce ve kutuya bağlı değil `_RegisterContent.tsx:321-329`; sunucu rızayı `OAUTH` kaynağıyla kaydediyor `backend/src/services/oauth/oauthService.ts:133-141`.)*
+3. ~~[ESKİ · 2026-09-29] **Self-serve kurum başvurusunda 18+ ibaresi bile yok.**~~
+   ⚠️ GÜNCELLEME (2026-09-29): Kurum başvurusu kutusunda da artık "18 yaşından büyük olduğumu beyan ederim" yazıyor (`frontend/src/app/onboarding/stk/_steps/Step4Account.tsx:267`; commit `dcb9d6f`, 2026-08-28). Ancak bu da **aynı birleşik kutu** (madde 1) — ayrı kutu değil.
 4. ~~**Rıza metninin SÜRÜMÜ tutulmuyor** (yalnız zaman damgası) → hangi metne rıza verildiği ispatlanamıyor.~~
    ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında rıza sürümleme UYGULANMIŞ — `consentService.ts:28` `CONSENT_VERSION='v1.0'` + dual-write + testler VAR (G1-07 uygulandı). Metin tarafı "sürüm tutulmuyor" diyor; kod tarafı sürümlüyor → iki taraf çelişik, metin bayat. Kanıt: `consentService.ts:28`. Karar PO'nun.
+   ⚠️ GÜNCELLEME (2026-09-29): `origin/main`'de doğrulandı — sürüm kaydı `backend/src/services/consentService.ts:29` (backend PR #58, 2026-08-28) **+ sürüm kontrolü** (sürüm yükselince yeniden onay: `consentService.ts:193-197`, `authController.ts:404,553,897`, ekran bandı `ReconsentBanner.tsx` — backend PR #147 + çatı PR #324, 2026-09-26). Bugünkü `v1.0` yer tutucudur → kapak Bölüm 10 not N-1.
 
 ### Önerilen ayrık tasarım (yalnız TASLAK öneri — KOD BU TURDA YAZILMADI)
 - Kayıt/giriş ekranında **ayrı kutular:** (a) Aydınlatma metnini okudum · (b) 18 yaşımı doldurdum · (c) Genel açık rıza · (d) Psikometrik veri açık rızası · (e) Yurt dışı aktarım açık rızası. Her biri **bağımsız**, hizmet için zorunlu olmayanlar işaretsiz bırakılabilir.
 - OAuth akışında da aynı kutular giriş ÖNCESİ gösterilir.
 - Her rıza için **metin sürümü** (ör. `v2026-09`) DB'ye kaydedilir → ispat.
+  ⚠️ GÜNCELLEME (2026-09-29): bu madde **kodda yapıldı** (yukarıdaki madde 4 notu); kalan öneriler (ayrı kutular + OAuth öncesi kutu) yapılmadı.
 - Uygulama iş maddeleri: `00-KARAR-TAKIP` madde 82 (sürümleme) + madde 83 (rıza kutusu ayrımı). **Kod değişikliği hukukçu kararına bağlı.**

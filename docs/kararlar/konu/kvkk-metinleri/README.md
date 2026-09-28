@@ -21,3 +21,5 @@
 
 ## Durum
 ⚠️ **TASLAK** — hukukçu onayı bekliyor. Ön koşullar: hukukçu onayı + kalan `[PO DOLDURACAK]` alanları (özellikle başvuru `destek@` e-postası; veri sorumlusu adres/KEP/VERBİS). ✅ **Kapandı (2026-08-26, PO teyitli):** veri sorumlusu kimliği (gerçek kişi) + sunucu ülkesi (**Londra / Birleşik Krallık**, AWS `eu-west-2` — AB üyesi DEĞİL). Kaynak: `../../../raporlar/kod-denetimi/kvkk-veri-aktarim-envanteri-2026-08-25.md`.
+
+⚠️ GÜNCELLEME (2026-09-29, AN-41): `.md` dosyalarındaki durum beyanları kodla senkronlandı (kapak Bölüm 10). `KVKK-BELGE-PAKETI-2026-08-25.docx` bu senkronu **içermez** — avukata gönderilmeden önce `python scripts/kvkk-docx-gen.py` ile yeniden üretilmeli (PO).

@@ -30,11 +30,13 @@ Size uygun mentor/menti eşleştirmesi yapmak, programı yürütmek ve kalitesin
 - Sistem/güvenlik kayıtları **90 gün** sonra otomatik silinir.
 - **Diğer verilerin çoğu için şu an otomatik imha süreci YOKTUR** — hesabınız açık kaldığı sürece saklanır. Önerilen saklama süreleri ve otomatik imha, hukukçu/PO onayıyla belirlenecektir (bkz. Belge 5).
 - **Not:** Mesaj içeriği ve bazı geri bildirim alanları, hesap silme işleminde bile teknik bir kısıt (madde 39) nedeniyle şu an tamamen silinememektedir; bu düzeltilecek bir iş maddesidir.
+> ⚠️ GÜNCELLEME (2026-09-29, AN-41 — yalnız durum; politika cümleleri DEĞİŞTİRİLMEDİ): bu bölümdeki iki cümle koddan geride — hesap kapanışında mesaj içeriği `[silindi]` olur (madde 39/93 canlıda, backend PR #54) ve `FeedbackLog` 3 yılda otomatik imha edilir (backend PR #57). Cümlelerin yeniden yazılması hukuki metin olduğu için avukat/PO işidir → kapak Bölüm 10 not N-2.
 
 ## Haklarınız
 KVKK Md.11 kapsamındaki tüm haklara sahipsiniz (öğrenme, düzeltme, silme/anonimleştirme, itiraz, giderim). Kullanım için: bkz. Belge 6.
 > ~~**Şu an:** verilerinizi kendiniz indirebileceğiniz/silebileceğiniz bir kullanıcı ekranı **henüz yok**; talepler [PO DOLDURACAK: başvuru e-postası] üzerinden karşılanır. Bu ekran bir iş maddesidir (madde 40/84).~~
 > ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında FE veri-hakları ekranı MOUNT EDİLMİŞ — `DataPrivacySection.tsx` bileşeni `frontend/src/app/(dashboard)/profile/page.tsx:443`'te mount edilmiş. Metin "ekran henüz yok" diyor; kod tarafında ekran bağlı → iki taraf çelişik, metin bayat. Kanıt: `frontend/src/app/(dashboard)/profile/page.tsx:443`. Karar PO'nun.
+> ⚠️ GÜNCELLEME (2026-09-29): `origin/main`'de doğrulandı — ekran `frontend/src/app/(dashboard)/profile/page.tsx:468` (satır kaydı; `DataPrivacySection`), uçlar `backend/src/routes/userRoutes.ts:203-214` — backend PR #59 + çatı PR #135 (2026-08-29). Üstü çizili cümlenin **yerine yayında ne yazılacağı** avukat/PO işi → kapak Bölüm 10 not N-2.
 
 ## Güvenlik tedbirleri (gerçek olanlar — kod)
 - **Kurum (tenant) izolasyonu:** her sorgu kurum kimliğiyle sınırlandırılır; kurumlar birbirinin verisine erişemez.
@@ -48,3 +50,4 @@ Platform **18 yaş ve üzeri** kullanıma yöneliktir. Şu an yaş yalnızca **b
 ## Değişiklikler
 Bu politika güncellenebilir; önemli değişiklikler kullanıcılara bildirilir. ~~*(Rıza sürümleme henüz yok — madde 82.)*~~
 > ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında rıza sürümleme UYGULANMIŞ — `consentService.ts:28` `CONSENT_VERSION='v1.0'` + dual-write + testler VAR (G1-07 uygulandı). Metin "sürümleme henüz yok" diyor; kod sürümlüyor → iki taraf çelişik, metin bayat. Kanıt: `consentService.ts:28`. Karar PO'nun.
+> ⚠️ GÜNCELLEME (2026-09-29): `origin/main`'de doğrulandı (sürüm kaydı + kontrolü) → kapak Bölüm 6 / Bölüm 10.
