@@ -32,12 +32,12 @@ function MeetingLimitControl() {
                    [&::-webkit-slider-thumb]:cursor-grab"
         aria-label="Haftalık görüşme limiti"
       />
-      <div className="flex justify-between text-[10px] text-slate-600">
+      <div className="flex justify-between text-[10px] text-slate-400">
         {[1, 2, 3, 4, 5, 6, 7].map((n) => (
           <span key={n} className={n === value ? 'text-indigo-400 font-bold' : ''}>{n}</span>
         ))}
       </div>
-      <p className="text-[10px] text-slate-500 leading-relaxed">
+      <p className="text-[10px] text-slate-400 leading-relaxed">
         Bir menti haftada en fazla <strong className="text-slate-300">{value}</strong> görüşme
         yapabilir. Fazlası sistematik olarak engellenir.
       </p>
@@ -78,7 +78,7 @@ function QualityThreshold() {
           </button>
         ))}
       </div>
-      <p className="text-[10px] text-slate-500 leading-relaxed">
+      <p className="text-[10px] text-slate-400 leading-relaxed">
         %{selected} altındaki uyum skoruna sahip çiftler birbirini göremez.
         Bu barajın altında kalan üyeler havuzda kalır ama önlere çıkmaz.
       </p>
@@ -100,7 +100,7 @@ function BlockList() {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <span className="text-xs font-medium text-slate-300">Kara Liste / Engelli Çiftler</span>
-        <span className="text-[10px] text-slate-500">{pairs.length} kayıt</span>
+        <span className="text-[10px] text-slate-400">{pairs.length} kayıt</span>
       </div>
       <div className="space-y-2">
         {pairs.map(({ id, a, b, reason }) => (
@@ -111,14 +111,14 @@ function BlockList() {
             <ShieldAlert className="h-3.5 w-3.5 text-red-400 shrink-0" aria-hidden />
             <div className="flex-1 min-w-0">
               <span className="text-xs text-slate-300 font-medium">{a}</span>
-              <span className="text-xs text-slate-600 mx-1">↔</span>
+              <span className="text-xs text-slate-400 mx-1">↔</span>
               <span className="text-xs text-slate-300 font-medium">{b}</span>
-              <span className="text-[10px] text-slate-500 ml-2">· {reason}</span>
+              <span className="text-[10px] text-slate-400 ml-2">· {reason}</span>
             </div>
             <button
               type="button"
               onClick={() => setPairs((p) => p.filter((x) => x.id !== id))}
-              className="text-slate-600 hover:text-red-400 transition-colors shrink-0"
+              className="text-slate-400 hover:text-red-400 transition-colors shrink-0"
               aria-label={`${a} - ${b} engelini kaldır`}
             >
               <X className="h-3.5 w-3.5" />
@@ -129,7 +129,7 @@ function BlockList() {
       <button
         type="button"
         onClick={() => setPairs((p) => [...p, { id: Date.now(), a: 'Yeni A.', b: 'Yeni B.', reason: 'Eklendi' }])}
-        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-700 py-2 text-xs text-slate-500 hover:border-slate-500 hover:text-slate-400 transition-colors"
+        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-700 py-2 text-xs text-slate-400 hover:border-slate-500 hover:text-slate-300 transition-colors"
       >
         <Plus className="h-3.5 w-3.5" aria-hidden />
         Yeni çift ekle
@@ -197,9 +197,9 @@ export function AdminCockpit() {
         </div>
 
         {/* Alt açıklama */}
-        <p className="mt-6 text-center text-xs text-slate-600">
+        <p className="mt-6 text-center text-xs text-slate-400">
           Tüm ayarlar anlık geçerli olur · API anahtarı veya teknik bilgi gerektirmez ·
-          <strong className="text-slate-500"> KVKK uyumlu</strong>
+          <strong className="text-slate-400"> KVKK uyumlu</strong>
         </p>
       </div>
     </section>
