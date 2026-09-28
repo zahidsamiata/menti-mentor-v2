@@ -100,6 +100,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-131 | Mentör sertifikası kişiye mi ait, kuruma mı (rozet ↔ mentör paneli tutarsızlığı) | 0 | ⬜ boş · ajan-ekledi (AJ-66 7b) | A | [kart](kararlar/KARAR-131.md) |
 | KARAR-132 | Küçük grup gizliliği eşiği 3 mü 5 mi + "herkes aynısını seçti" gizlensin mi (KVKK) | 0 | ⬜ boş · ajan-ekledi (AJ-89 7b) | C | [kart](kararlar/KARAR-132.md) |
 | KARAR-133 | Başka kurumun yöneticisi misafir üyenin onay/rolünü değiştirebilsin mi + havuz kartından işlem (yetki) | 1 (AJ-56 kalan) | ⬜ boş · ajan-ekledi (AJ-56/AJ-63) | A | [kart](kararlar/KARAR-133.md) |
+| KARAR-134 | 🔵 EVET/HAYIR — kullanılmayan 7 yedek uç + 1 ekran parçası kapatılsın mı (karantina, silme yok) | **1** (E-4) · aktif kuyrukta: E-4 (🔵 PR-ACIK — EVET/HAYIR kartı) | ⬜ boş · 🔵 · migration yok · yedek gerekmez · ek soru: gerekçesiz 2 uç | — | [kart](kararlar/KARAR-134.md) |
 | KARAR-8 | Repoları private yap | 0 (PO aksiyonu) | ⬜ boş | B | [kart](kararlar/KARAR-008.md) |
 | KARAR-9 | Kulüp modülü + İş İlanları | 0 (eklenmezse B) | ⬜ boş · ⚠️ ağustos G1-13 kulüp kurumu aktif / G10-12 modül ⏸️ · ⚠️ kulüp-kurum ayağı KARAR-34 ile çözüldü; kalan kulüp ekranı + iş ilanları | B | [kart](kararlar/KARAR-009.md) |
 | KARAR-13 | Yöneticiye manuel "işlet" butonları | 0 | ⬜ boş | B | [kart](kararlar/KARAR-013.md) |
