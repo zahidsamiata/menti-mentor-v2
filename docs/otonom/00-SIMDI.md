@@ -5,7 +5,7 @@
 
 **Durum:** CALISIYOR — PO görevi (2026-09-28): GÖREV 1 (T1 güvenlik/KVKK/veri kaybı) → 2 (belge düzeni) → 3 (karar kartları + KARAR-PAKETI) → 4 (T2 → T3 → T4 → T5) → DURDU (K1-a). K5'e geçilmez.
 
-**Şu an yapılan:** GÖREV 1 — BITTI 8: AJ-57 · 73 · 74 · 88 · 87 · 69 · 54 · 51 (hepsi 7b ONAY + mutasyon kırmızı + canlı ok). Açık: AJ-59 (çatı #415, 7b'de) · AJ-55 (yazılıyor) · AJ-75 (son). GÖREV 2: 2.2 #414 (7b ONAY, CI) · 2.1 yazılıyor · 2.3/2.4/2.5 sırada. Önceki turun TUR ÖZETİ: `02-ILERLEME.md` başı.
+**Şu an yapılan:** GÖREV 1 TAMAM — T1 11/11 BITTI (hepsi 7b ONAY + mutasyon kırmızı + canlı ok) · 🔵 AJ-77 PR-ACIK (KARAR-128). GÖREV 2: 2.1 #416 · 2.2 #414 · 2.3 #418 MERGE; şimdi 2.4 (duruma göre bölme — tek başına) → 2.5. Önceki turun TUR ÖZETİ: `02-ILERLEME.md` başı.
 
 **Son merge'ler:** backend #223 + çatı #413 (AJ-51) · #222 + #412 (AJ-54) · #220 + #411 (AJ-69) · #219 + #410 (AJ-87) · #216 + #218 + #408 (AJ-74 · AJ-88) · #214 + #407 (AJ-57) · #213 + #406 (AJ-73) — her merge sonrası canlı ok:true · db:up · site 200.
 
@@ -21,8 +21,6 @@
 | backend #185 | AN-52-1 anket tablosu · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-106 EVET bekliyor (yedek gerekmez — yeni tablo) |
 | backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
 | backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
-| çatı #414 | GÖREV 2.2 eski ✅ doğrulama (140 satır: 135 VAR · 5 KISMEN · 0 YOK) | koşuyor | ✅ ONAY | CI |
-| çatı #415 | AJ-59 OAuth yönetici yönlendirme | yeşil | 7b sürüyor | inceleme |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
@@ -36,4 +34,4 @@
 
 **Strateji katmanına not:** 7b bir kez `node_modules` sembolik bağının backend commit'ine girdiğini yakaladı (AJ-69) — backend `.gitignore` `node_modules/` bağı yakalamıyordu; düzeltildi, uygulayıcı kurallarına ders eklendi. Yeni satırlar: AJ-96 · 97 · 98 · 99 · 100.
 
-**Sıradaki 5 iş:** AJ-59 merge → AJ-55 → AJ-75 → GÖREV 2.1/2.3 → GÖREV 2.4 (taşıma, tek başına).
+**Sıradaki 5 iş:** GÖREV 2.4 → 2.4 geri bakılabilirlik testi → 2.5 (kural i + bekçi) → GÖREV 3 (KARAR-PAKETI) → GÖREV 4 T2 (AJ-72 …).
