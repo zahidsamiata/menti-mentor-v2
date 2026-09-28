@@ -629,3 +629,9 @@ INDEX'e işlenmesi ve INDEX'in 13 eksik belgesi **HÂLÂ AÇIK** (`00-KUYRUK` **
 ```text
 | 🧊 ARŞİV (otonom) | **9** |
 ```
+
+(aynı taşıma — sayım tablosu satırının TAM eski hâli)
+
+```text
+| 🧊 ARŞİV (otonom) | **9** | `docs/otonom/arsiv/` — K-A aktif/arşiv ayrımı ürünü |
+```

@@ -294,3 +294,19 @@ const TENANT_SCOPED = new Set([
 - **Not:** `backend/eslint.config.mjs`'te mevcut satır kaldırılmadı/değişmedi; yalnız ekleme (liste + `src/**/*.ts` için `no-restricted-syntax` bloğu). 18 kaynak dosyaya yalnız `// eslint-disable-next-line` yorum satırı eklendi.
 - **Son commit (değişiklikten önce, backend):** `900a472daaa5607fab846a3fed2227a48f36b97d` (dosyaya son dokunan) · backend main `f92e528245a902b842842b57b6b2eb7bc9fac984`
 - **Geri alma:** backend'de `git revert <AJ-75 backend commit>` (şema/migration yok).
+
+## GÖREV 2.4 · Duruma göre bölme — belge bekçisinin karar kartı kontrolü yeni yola
+
+### 1) `scripts/belge-bekci.sh` — başlık yorumu ve 01-KARARLAR "İŞLENDİ" hata mesajı
+- **Eski hâl (AYNEN):**
+```text
+#   · docs/otonom/01-KARARLAR.md'de "İŞLENDİ" notlu karar kartı (kural c)
+```
+```python
+            errors.append(f'01-KARARLAR.md {card.split(chr(10), 1)[0][:60]} "İŞLENDİ" notlu kart aktif dosyada → arsiv/01-KARARLAR-cevaplanmis.md (5c-c)')
+```
+- **Neden yazılmıştı:** kart gövdeleri `01-KARARLAR.md` içindeydi; cevabı işlenen kart `arsiv/01-KARARLAR-cevaplanmis.md`'ye taşınmalıydı (OTONOM-PROMPT 5c-c).
+- **Neden değişti:** kartlar kart başına dosyaya ayrıldı (`docs/otonom/kararlar/KARAR-NNN.md`); işlenen kartın yeni yeri `docs/otonom/arsiv/kararlar/`. Yorum ve mesaj yeni yolu söylüyor; kontrol `kararlar/KARAR-*.md` dosyalarını da tarıyor (HATA), ayrıca yeni UYARI (n) — 00-KUYRUK'ta 🔴 kapılı satır. Eski kontrol (01-KARARLAR.md içindeki kartlar) KALDI.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `47d3804e9d0e99452d28433d9bf88111427585f8` · çatı main `03da00623b34965a1ab2c1b9a285d43d50752778`
+- **Geri alma:** çatıda `git revert <GÖREV 2.4-E commit>` (yalnız script + test; şema/migration yok).
+

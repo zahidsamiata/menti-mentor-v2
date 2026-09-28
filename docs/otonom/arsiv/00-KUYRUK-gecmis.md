@@ -243,3 +243,31 @@ Bu, **YN-07**'nin tam vakasıydı; hizalama o satırın bir ayağını kapatır.
 ```text
 🔵 **AJAN HAZIRLAR, PO'NUN TEK "EVET"İYLE CANLIYA ÇIKAR** — migration · seed (her türü) · canlı veriye yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → `01-KARARLAR.md`'ye sade Türkçe EVET/HAYIR kartı (kullanıcı ne görür · ne değişir · geri alınır mı · yedeği alınacak tablo) → Durum PR-ACIK. "EVET" → tarihli yedek → merge → canlı kontrol (DB erişimi yoksa merge YOK, `00-SIMDI` Engeller'e yazılır). "HAYIR" → PR kapatılır.
 ```
+
+### AN-10 (2026-09-28)
+
+**Önceki tam satır (AYNEN, 1393 bayt — origin/main):**
+
+| AN-10 | Ş1 | **Terim tutarsızlığı: §5'teki 31 nokta** (mizaç/karakter/kişilik · mentor/mentör · görüşme/toplantı/randevu). | 🟢 | Kullanıcı aynı şeyi her ekranda aynı adla görüyor | ✅ BITTI (kısmen, KARAR-64 ayağı açık) | Kaynak: A12 · TO §5 · IK. IC-02/IC-11 ekine. ⚠️ **KARAR-64 (mizaç/karakter/kişilik) cevabından SONRA** yapılır. · ⛔ **çelişki: KARAR-80/M16** (2026-09-25) · eski kapı: 🟢 · KARAR-80 işlendi (2026-09-26, A kabul) — M16: 'mizaç/karakter/kişilik' adlandırma ayağı KARAR-64'e bağlı (CEVAPSIZ, bu tur uygulanmaz); 'mentor/mentör' yazım tutarlılığı ayağı BAĞIMSIZ, şimdi yapılabilir. · 🔀 **PR-ACIK 2026-09-26:** çatı #339 — mentor/mentör yazım ayağı (8 panel dosyası → "mentör"; marka/sektör verisi/tanıtım/SEO kapsam dışı). Görüşme ayağı IC-11 ile BITTI; mizaç/karakter/kişilik ayağı KARAR-64 bekliyor. · ✅ **mentor/mentör ayağı BITTI 2026-09-26:** çatı #339 (`9606240`). CANLIDA BAK: panelde "Önerilen Mentörler", "Mentör Paneli", oryantasyon rehberinde "Mentörünüz…". Mizaç/karakter/kişilik ayağı KARAR-64 cevabını bekliyor. · ⚠️ K5-Y2: `LearningJourneyCard.tsx:37` "mentorluğun" atlanmıştı → AN-10b PR'ı açıldı; mizaç ayağı KARAR-64. · AN-10b çatı #347 MERGE (`28b06f9`) — öğrenme yolculuğu kartı "mentörlüğün". |
+
+**Satırdan çıkarılan katmanlar (AYNEN, 985 bayt; NEDEN cümlesi eklenince satır 1.500 baytı aştığı için):**
+
+- ⛔ **çelişki: KARAR-80/M16** (2026-09-25)
+- eski kapı: 🟢
+- KARAR-80 işlendi (2026-09-26, A kabul) — M16: 'mizaç/karakter/kişilik' adlandırma ayağı KARAR-64'e bağlı (CEVAPSIZ, bu tur uygulanmaz); 'mentor/mentör' yazım tutarlılığı ayağı BAĞIMSIZ, şimdi yapılabilir.
+- 🔀 **PR-ACIK 2026-09-26:** çatı #339 — mentor/mentör yazım ayağı (8 panel dosyası → "mentör"; marka/sektör verisi/tanıtım/SEO kapsam dışı). Görüşme ayağı IC-11 ile BITTI; mizaç/karakter/kişilik ayağı KARAR-64 bekliyor.
+- ✅ **mentor/mentör ayağı BITTI 2026-09-26:** çatı #339 (`9606240`). CANLIDA BAK: panelde "Önerilen Mentörler", "Mentör Paneli", oryantasyon rehberinde "Mentörünüz…". Mizaç/karakter/kişilik ayağı KARAR-64 cevabını bekliyor.
+- ⚠️ K5-Y2: `LearningJourneyCard.tsx:37` "mentorluğun" atlanmıştı → AN-10b PR'ı açıldı; mizaç ayağı KARAR-64.
+- AN-10b çatı #347 MERGE (`28b06f9`) — öğrenme yolculuğu kartı "mentörlüğün".
+
+### AN-36 (2026-09-28)
+
+**Önceki tam satır (AYNEN, 646 bayt — yalnız İş hücresine NEDEN cümlesi eklendi, taşınan katman yok):**
+
+| AN-36 | Ş3 | **Veri İşleyen Sözleşmesi için Tenant yasal-kimlik alanları (G1-12).** | 🟡 | Kurum, KVKK veri-işleyen sözleşmesini panelden imzalayıp yönetebilir | BEKLIYOR | kaynak: CS raporu (KN-04) · §4.2 (G1 en değerli öksüz). Kanıt: `G1-guvenlik-kvkk.md` G1-12; kuyrukta karşılığı yok. 🟡: migration + KVKK/hukuk. `[PO DOLDURACAK]` yasal alanlar (adres/KEP/MERSİS) **kod-dışı** → 03-PO-ELLE. · aile: Y-G · PO kısmı: kurumun yasal kimlik bilgilerini (adres/KEP/MERSİS) sağlamak ve veri işleyen sözleşme metnini avukata onaylatmak; kod kısmı migration içerdiğinden 🔵 akışıyla hazırlanır. |
+
+### AJ-62 (2026-09-28)
+
+**Önceki tam satır (AYNEN, 514 bayt — yalnız İş hücresine NEDEN cümlesi eklendi, taşınan katman yok):**
+
+| AJ-62 | Ş0 | **Zod kullanmayan elle yazılmış 400 yanıtları ortak hata biçiminin dışında** (AJ-43 kalanı). | 🟢 | Bu yanıtlar da `{ error:'VALIDATION', message?, details }` biçiminde (ya da gerekçeli istisna); ön yüz okuyan yerler kırılmıyor; test | BEKLIYOR | ajan-ekledi 2026-09-27 · kaynak: AJ-43 (backend #209) · kanıt: `backend/src/controllers/userController.ts:463-472` (`details` yok) · `backend/src/controllers/meetingController.ts:365-378,427` (`{ error:'<Türkçe cümle>' }`) |
