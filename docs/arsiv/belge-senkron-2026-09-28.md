@@ -743,3 +743,16 @@
 ```text
 - **durum** = 2026-09-28 senkron (GÖREV 2.3): `✅ <iş> · PR #` kuyrukta BITTI · `🟨 kısmen — <iş>; kalan → <sahip>` · `⬜ → <iş> (BEKLIYOR/PR-ACIK)` · `🔴 KARAR-N` cevapsız karar. Kuyrukta eşleşmesi olmayan hücreler G-kart snapshot kodunu korur: ✅ YAPILDI · 🟡 YARIM · ⬜ AÇIK · ❓ TEYİT · 🗑️ GEÇERSİZ · 🔵 v2-backlog.
 ```
+
+## İŞ 2 bekçisi (5c-t1) · AJ-99 kapanışı — kural (h) işareti (2026-09-28, eski satırlar AYNEN)
+
+- docs/kararlar/00-KARAR-TAKIP.md:153
+
+```text
+>   + **DEVREDEN:** tasarım↔kod uçurumu (OCEAN, madde 101) · k-anonimlik yok (G1-22). · 🟨 kısmen — V-05: eşik 3 (`backend/src/services/mask.ts:52`), KPI ve platform analitiği maskeli; kalan: algoritma ayar ekranı ve ağırlık önerisi e-postası NPS ortalamasını 1-2 yanıtla gösteriyor → AJ-69 · OCEAN ayağı → PS-A3 · ✅ AJ-69 kalanı yapıldı — PR #220/#411 · 2026-09-28 (algoritma ayar ekranı + e-posta maskeli; kalan küçük çıkarım → KARAR-126, mentör paneli → AJ-99)
+```
+- docs/kararlar/00-KARAR-TAKIP.md:635
+
+```text
+| 119 | k-anonimlik (super-admin küçük-grup metrik yuvarlama) (= G1-22, bkz. bilanco/kararlar/G1-guvenlik-kvkk.md) | ⬜ AÇIK (PO önceliklendirmedi) · 🟨 kısmen — V-05: eşik 3 (`backend/src/services/mask.ts:52`), KPI ve platform analitiği maskeli; kalan: algoritma ayar ekranı + öneri e-postası NPS'i maskesiz → AJ-69 | ⬜ | T4-A2 | KVKK-agregat borcu: küçük grupta yeniden-tanımlanma riski | grep boş; iz zayıf | · ✅ AJ-69 kalanı yapıldı — PR #220/#411 · 2026-09-28 (algoritma ayar ekranı + e-posta maskeli; kalan küçük çıkarım → KARAR-126, mentör paneli → AJ-99)
+```
