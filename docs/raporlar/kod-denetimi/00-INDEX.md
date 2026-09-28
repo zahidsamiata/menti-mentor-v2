@@ -5,7 +5,8 @@
 
 Kod/ürün denetimi (belge ne diyor ↔ kod ne yapıyor) — `oz-denetim/` ile karıştırma.
 
-## İçerik (14)
+## İçerik (15)
+- `aj77-durum-alanlari-envanter-2026-09-28.md` — 📸 Durum alanları (String → enum) + çift rol okuma envanteri — AJ-77 (16 alan: 13 migration'a, 2 karar/temizlik; 24 `User.role` okuması; canlı sayım sorguları, yedek planı, EVET kartı)
 - `bekci-istisna.txt` — belge-bekci.sh kural (h) istisnaları — "BITTI işin kaynağı açık" UYARISI bu satırlar için verilmez.
 - `bitti-dogrulama-2026-09-27.md` — BITTI SON DOĞRULAMA — 2026-09-27
 - `bitti-dogrulama-partiler/` — alt klasör (kendi `00-INDEX.md`'si ya da giriş dosyası var)

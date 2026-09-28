@@ -280,3 +280,107 @@ async function checkOrientationLock(mentiId: string, res: Response): Promise<boo
 - **Neden değişti:** `findUnique` kurum filtresi taşımıyor (otomatik kurum filtresinin bilinçli dışında) ve 404 kontrollerinden önce koşuyordu → başka kurumdaki bir menti kimliğiyle istekte kilitliyse 403 `ORYANTASYON_KILIDI`, değilse 404 dönüyor, başka kurumdaki kaydın kilit durumu yanıttan çıkarılabiliyordu. Artık kilit, kurum-kapsamlı `findFirst` ile bulunan menti kaydından (`needsOrientation` seçime eklendi) okunuyor ve 404 kontrollerinden SONRA değerlendiriliyor (`rejectIfOrientationLocked`). Kendi kurumunda kilitli menti yine 403 `ORYANTASYON_KILIDI` alır.
 - **Son commit (değişiklikten önce, backend):** `e1bce3bdf4bccdf944396586a5cd591a0f9d40e2` (dosyaya son dokunan) · backend main `b79547dd51c24bae7a3a96348f475d8268488124`
 - **Geri alma:** backend'de `git revert <AJ-74 backend commit>` (şema/migration yok).
+
+---
+
+## AJ-77 — durum/tür alanları String → enum; Zod listeleri Prisma enum'undan okunuyor (backend `otonom/AJ-77-durum-enum-envanter-20260928`)
+
+**Özet gerekçe:** 13 alan DB'de serbest metindi (TEXT); kabul edilen değer kümesi yalnız controller'lardaki elle yazılmış
+`z.enum([...])` listelerinde ve şema yorumlarında yaşıyordu (iki yerde ayrı ayrı güncellenmesi gerekiyordu; DB kendisi
+denetlemiyordu). Küme artık `backend/prisma/schema.prisma` enum'larında; Zod `backend/src/services/statusFieldSchemas.ts`
+üzerinden aynı enum'u okur. **Davranış değişmedi** (aynı değerler kabul, aynı değerler 400). Hiçbir uç/dosya silinmedi.
+Envanter: `docs/raporlar/kod-denetimi/aj77-durum-alanlari-envanter-2026-09-28.md`.
+**Neden yazılmıştı:** alanlar ilk eklendiklerinde (sprint 8-11 ve sonrası) hızlı iskelet için String + yorum deseni seçilmişti;
+G6-02 / madde 49 bunu borç olarak işaretledi.
+**Son commit (değişiklikten önce, backend main):** `f92e528`
+**Geri alma:** backend'de `git revert <AJ-77 backend commit>` + migration uygulanmışsa rapor §5'teki geri alma SQL'i
++ `prisma migrate resolve --rolled-back 20260928000000_durum_alanlari_enum`.
+
+### Eski hâl (aynen)
+
+`backend/prisma/schema.prisma`:
+```prisma
+  plan            String  @default("FREE") // FREE | PRO | ENTERPRISE
+  onboardingStep  String  @default("PENDING") // PENDING | TEMPLATE | LOGO | PREVIEW | DONE
+  programTemplate String? // "MEZUN" | "KULUP" | "GONULLU" | "OZEL"
+  reportingFrequency String @default("WEEKLY")
+  continueIntent String // EVET | BELIRSIZ | HAYIR
+  wantedMore       String? // YONLENDIRME | KAYNAK | BAGLANIT | GERI_BILDIRIM | HAYIR
+  concernTag       String? // mentör: MOT_DUSUK | HEDEF_BELIRSIZ | ZAMAN_YOK | ILETISIM | HAYIR
+  continuationView String? // KESINLIKLE | EVET | KARARSIZ | HAYIR
+  reason         String // SPAM | HARASSMENT | INAPPROPRIATE | NO_SHOW | OTHER
+  status         String   @default("OPEN") // OPEN | REVIEWED | DISMISSED
+  meetingFrequency     String // WEEKLY | BIWEEKLY | MONTHLY
+  communicationChannel String // ONLINE | IN_PERSON | PHONE
+  agendaOwner          String  @default("MENTI") // Gündem kim belirler
+  role     String // MENTOR | MENTI
+  format   String // EMAIL | WHATSAPP
+```
+(`plan` satırı yalnız yorum aldı — tipi String kaldı.)
+
+`backend/src/controllers/adminSettingsController.ts`:
+```ts
+    reportingFrequency:     z.enum(['WEEKLY', 'BIWEEKLY', 'MONTHLY']).optional(),
+```
+`backend/src/controllers/agreementController.ts`:
+```ts
+  meetingFrequency:     z.enum(['WEEKLY', 'BIWEEKLY', 'MONTHLY']),
+  communicationChannel: z.enum(['ONLINE', 'IN_PERSON', 'PHONE']),
+  agendaOwner:          z.enum(['MENTOR', 'MENTI']).default('MENTI'),
+```
+`backend/src/controllers/meetingCheckInController.ts`:
+```ts
+  continueIntent: z.enum(['EVET', 'BELIRSIZ', 'HAYIR']),
+  wantedMore:       z.enum(['YONLENDIRME', 'KAYNAK', 'BAGLANIT', 'GERI_BILDIRIM', 'HAYIR']).optional(),
+  concernTag:       z.enum(['MOT_DUSUK', 'HEDEF_BELIRSIZ', 'ZAMAN_YOK', 'ILETISIM', 'HAYIR']).optional(),
+  continuationView: z.enum(['KESINLIKLE', 'EVET', 'KARARSIZ', 'HAYIR']).optional(),
+```
+`backend/src/controllers/platformController.ts` (`listUserReports` + `PlatformReviewReportSchema`):
+```ts
+  const statusRaw = req.query['status'] as string | undefined;
+  const status = statusRaw && ['OPEN', 'REVIEWED', 'DISMISSED'].includes(statusRaw) ? statusRaw : undefined;
+```
+```ts
+  status: z.enum(['REVIEWED', 'DISMISSED']),
+```
+`backend/src/controllers/reportController.ts`:
+```ts
+const REPORT_REASONS = ['SPAM', 'HARASSMENT', 'INAPPROPRIATE', 'NO_SHOW', 'OTHER'] as const;
+```
+```ts
+  reason: z.enum(REPORT_REASONS),
+```
+```ts
+  status: z.enum(['OPEN', 'REVIEWED', 'DISMISSED']).optional(),
+```
+```ts
+  status: z.enum(['REVIEWED', 'DISMISSED']),
+```
+`backend/src/controllers/selfServeController.ts`:
+```ts
+  programTemplate:  z.enum(['MEZUN', 'KULUP', 'GONULLU', 'OZEL']).default('OZEL'),
+```
+```ts
+const ONBOARDING_STEPS = ['PENDING', 'TEMPLATE', 'LOGO', 'PREVIEW', 'DONE'] as const;
+```
+```ts
+    onboardingStep:  z.enum(ONBOARDING_STEPS).optional(),
+```
+```ts
+  role:    z.enum(['MENTOR', 'MENTI']),
+  format:  z.enum(['EMAIL', 'WHATSAPP']),
+```
+`backend/src/services/cronScheduler.ts`:
+```ts
+import type { Checkpoint } from '@prisma/client';
+```
+```ts
+const DRAFT_STEPS: string[] = ['TEMPLATE', 'LOGO', 'PREVIEW'];
+```
+`backend/tests/cron-probe.ts`:
+```ts
+import { PrismaClient } from '@prisma/client';
+```
+```ts
+  const DRAFT_STEPS = ['TEMPLATE', 'LOGO', 'PREVIEW'];
+```
