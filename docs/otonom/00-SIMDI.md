@@ -1,11 +1,17 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-28 ~19:05 UTC · çatı main HEAD (bu commit) · backend main HEAD `b7f8df1`
+**Son güncelleme:** 2026-09-28 ~20:05 UTC · çatı main HEAD (bu commit) · backend main HEAD `00a79ff`
 
-**Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (özet + REPODA BAK: 02-ILERLEME başı); normal kuyruk: Ş1 AJ-103 (paylaşım kapısı sırası, 🟢+7b) · Ş2 AJ-104 (kayıt özet sırası, 🟢+7b) — uygulayıcı alt-ajanlar izole worktree'de.
+**Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (02-ILERLEME başı). Normal kuyruk (güvenlik önce).
 
-**Son merge'ler:** backend #255 AJ-96 · çatı #456 pointer → b7f8df1 · #455 İŞ 2 bekçi · #457 İŞ 3 KARAR-101 — canlı ok:true · db:up · site 200.
+**Şu an yapılan:**
+- AJ-99 (backend #259 merge) + AJ-112 (backend #260 merge) → çatı #460 (AJ-112 tip + pointer → `00a79ff`) CI → merge → arşiv.
+- AJ-100 — backend #262 · mutasyon taslak #261 · 7b inceleniyor.
+- AJ-106 — uygulayıcı çalışıyor (engel koyma denetim kaydı · eşzamanlılık · seçim listesi arama).
+- AJ-98 ⏳ tarih kapısı 2026-10-29 (geçildi).
+
+**Son merge'ler:** backend #255 AJ-96 · #256 AJ-104 · #257 AJ-103 · #259 AJ-99 · #260 AJ-112 · çatı #456/#458 pointer · #455 İŞ 2 · #457 İŞ 3 · #459 AJ-99 ön yüz — canlı ok:true · db:up · site 200.
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
@@ -30,6 +36,6 @@
 
 **PO'ya sorular:** ⭐ **toplu karar paketi: `docs/otonom/KARAR-PAKETI.md`** — ilk 10 karar 28 iş açar · 🔵 EVET/HAYIR: KARAR-96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ⭐ güvenlik: KARAR-101 · bu oturumun yeni kartları: KARAR-126…133 · kabul testleri: `03-PO-ELLE-ISLER.md` 13.1 (sosyal giriş) · 13.2 (8 madde) · 13.3 (landing teması).
 
-**Strateji katmanına not:** (0) İŞ 2 teyit listesi (#455): G7-10 "mobil" ayağı AJ-86 ölçütünde yok · G7-14 "sanallaştırma" kodda yok (AJ-83 sayfalama yaptı) — ikisi de 🟨, bitip bitmediği PO/strateji teyidi · 7b notu: Y3 (00-KARAR-TAKIP) PDF/Excel biçimi istenirse ayrı iş. İŞ 2 CI: bekçi mevcut docs-guard job'unda koşuyor, iş akışı dosyası değişmedi.  (1) Bekçi (i5) E-5 uyarısı bilinçli: KARAR-11 ✅ ama gerçek silme PO ikinci onayı + karantina turu bekliyor. (2) 00-KUYRUK 116 KB > 90 KB eşiği — kalan uzunluk AJ-96…111 yeni satırlarından ve gerekçeli uzun satırlardan (AJ-68 kısmen). (3) 🔵 PR'ların 4'ü main ile çakışıyor — EVET gelince rebase gerekir. (4) Paylaşılan backend `.gitignore` artık `node_modules` sembolik bağını da yakalıyor (AJ-69 dersi).
+**Strateji katmanına not:** (00) AJ-99 7b notu: `GET /api/feedback-logs` mentöre kendi FeedbackLog kayıtlarını ham puan + menti adıyla döndürüyor; bugün FeedbackLog'a menti yazmıyor → risk yok, ama KARAR-12 "B" seçilirse (menti yazarsa) liste ucu k-anonimlik maskesini aşar — KARAR-12 cevabında dikkate alınmalı. (0) İŞ 2 teyit listesi (#455): G7-10 "mobil" ayağı AJ-86 ölçütünde yok · G7-14 "sanallaştırma" kodda yok (AJ-83 sayfalama yaptı) — ikisi de 🟨, bitip bitmediği PO/strateji teyidi · 7b notu: Y3 (00-KARAR-TAKIP) PDF/Excel biçimi istenirse ayrı iş. İŞ 2 CI: bekçi mevcut docs-guard job'unda koşuyor, iş akışı dosyası değişmedi.  (1) Bekçi (i5) E-5 uyarısı bilinçli: KARAR-11 ✅ ama gerçek silme PO ikinci onayı + karantina turu bekliyor. (2) 00-KUYRUK 116 KB > 90 KB eşiği — kalan uzunluk AJ-96…111 yeni satırlarından ve gerekçeli uzun satırlardan (AJ-68 kısmen). (3) 🔵 PR'ların 4'ü main ile çakışıyor — EVET gelince rebase gerekir. (4) Paylaşılan backend `.gitignore` artık `node_modules` sembolik bağını da yakalıyor (AJ-69 dersi).
 
 **Sıradaki 5 iş:** kuyruk: AJ-97…111 (örn. AJ-103/104 güvenlik) · AJ-95b/c.
