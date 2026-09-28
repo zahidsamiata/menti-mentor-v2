@@ -173,7 +173,7 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | AJ-76 | Yalnız birden çok backend kopyası çalışıyorsa: paylaşımlı sayaç deposu (Redis) servisini aç, bağlantı değişkenini Dokploy'a gir | Kopya sayısı #29 teyidine bağlı; tek kopyaysa gerekmez (ajan "bellek içi yeterli" gerekçesini koda yazar) | #29 |
 | AJ-91 | Kurum yönetici paneli yeni sayfa açıklama metinlerini onayla (PR'daki eski/yeni tablo) | Onay PR yorumunda ya da 02-ILERLEME'de; beğenmezsen metin geri alınır | — |
 
-## Karar bekleyenler (kart `01-KARARLAR.md`'de — PO cevap yazacak)
+## Karar bekleyenler (indeks `01-KARARLAR.md` → kart dosyası `docs/otonom/kararlar/KARAR-NNN.md` — PO cevabı kart dosyasının en altındaki CEVAP satırına yazacak)
 
 > ⭐ **YENİ (2026-09-21, dört konsey): KARAR-38…52 — 15 kart.** Kümeler: 38-40 güvenlik/KVKK · 41-44 psikometri/eşleştirme · 45-48 içerik/metin · 49-52 belge yönetişimi.
 > En çok iş açanlar: **KARAR-45** (arketip ad↔kod, 4 iş) · **KARAR-47** (hukuki metin paketi, 5 kalem — #16/#17/#20 hepsi burada) · **KARAR-50** (kural geçersizleşme koşulu, 4 iş).
