@@ -80,3 +80,4 @@
 - 2026-09-28 · **AJ-82 BITTI** (çatı #441; yalnız test; mutasyon yerel). · **AJ-95a** backend #246 merge (7b ONAY), çatı #439 CI.
 - 2026-09-28 · **AJ-95 BITTI (kısmen — 95b/95c)**: 95a psikometrik Json yazım doğrulaması (backend #246 + çatı #439; 7b ONAY; mutasyon yerel 6/6). Canlı ok:true · db:up. Yeni: AJ-108 · AJ-109.
 - 2026-09-28 · **AJ-84 BITTI** (çatı #443; yalnız test; mutasyon yerel 3/3).
+- 2026-09-28 · **AJ-56 BITTI (kısmen — KARAR-133)** (backend #249 + çatı #442; 7b ONAY; mutasyon CI #247/#248) — CANLIDA BAK: misafir üyede hatırlatma/koçluk çalışıyor, pasif sayımı üyelikten; kişi-genel işlemler KARAR-133'e kadar kapalı. Canlı ok:true · db:up.
