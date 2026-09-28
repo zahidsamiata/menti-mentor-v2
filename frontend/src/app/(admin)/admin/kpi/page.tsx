@@ -11,6 +11,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { computeAdminAlerts } from '@/lib/adminAlerts';
 import { Button } from '@/components/ui/button';
+import type { KpiCompletionRate } from '@/types/admin';
 
 /**
  * PS-05: Backend'in k-anonimlik eşiği (`backend/src/services/mask.ts` K_ANONYMITY_THRESHOLD, V-05).
@@ -37,6 +38,28 @@ function saveBlob(blob: Blob, filename: string): void {
 const SUCCESS_RATE_EMPTY_TEXT =
   `3. ay başarı oranı henüz hesaplanamıyor: yeterli 3. ay değerlendirmesi yok. ` +
   `Kişilerin puanı tek tek okunamasın diye en az ${MIN_RESPONSES_FOR_AVERAGE} yanıt gerekiyor.`;
+
+/**
+ * AJ-78: tamamlama oranı kartının değeri + alt satırı. Gizliyse (grup ya da tamamlayan eşik altında)
+ * sessiz "0" ya da "—" yerine nedeni yazılır; görünürse "pay/payda üye" gösterilir.
+ */
+function completionRateCard(
+  rate: KpiCompletionRate,
+  minGroupSize: number,
+  definition: string,
+): { value: string; description: string } {
+  if (rate.suppressed || rate.percent === null) {
+    return { value: 'Gizli', description: `Gizlilik için en az ${minGroupSize} kişi gerekiyor` };
+  }
+  return { value: `%${rate.percent}`, description: `${rate.completed}/${rate.eligible} mentör ve menti ${definition}` };
+}
+
+/**
+ * AJ-78: oranın neyi saydığı kartta açık yazılır (CSV açıklamasıyla aynı tanım). "Kaydını tamamlayan"
+ * = hesabı yönetici tarafından onaylanmış (onay kullanıcı düzeyindedir, kuruma özel değildir).
+ */
+const REGISTRATION_DEFINITION = '(hesabı onaylı)';
+const DISC_DEFINITION = '(DISC testini bitirmiş)';
 
 export default function KpiPage() {
   const api = useApiClient();
@@ -106,6 +129,27 @@ export default function KpiPage() {
             <DashboardMetricCard label="Bekleyen Opt-In" value={data.stats.matching.pendingOptIns} color="warning" />
             <DashboardMetricCard label="Aktif İş İlanları" value={data.stats.activeJobListings} color="neutral" />
           </div>
+
+          {/* AJ-78: tamamlama oranları — k-anonim (pay ve payda); eski yanıtta alan yok */}
+          {data.stats.completion && (
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-3" data-testid="kpi-completion">
+              <DashboardMetricCard
+                label="Kaydını Tamamlayan Üye"
+                color="brand"
+                {...completionRateCard(data.stats.completion.registration, data.stats.completion.minGroupSize, REGISTRATION_DEFINITION)}
+              />
+              <DashboardMetricCard
+                label="DISC Tamamlama"
+                color="brand"
+                {...completionRateCard(data.stats.completion.disc, data.stats.completion.minGroupSize, DISC_DEFINITION)}
+              />
+              <DashboardMetricCard
+                label="Tamamlanan Görüşme"
+                value={data.stats.completion.completedMeetings}
+                color="success"
+              />
+            </div>
+          )}
 
           <div className="grid gap-4 md:grid-cols-2">
             {/* Rol dağılımı */}

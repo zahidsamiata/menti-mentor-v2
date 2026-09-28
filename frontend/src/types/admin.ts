@@ -169,7 +169,27 @@ export interface KpiData {
     activeJobListings: number;
     /** AJ-89: mentilerin S1 ihtiyaç dağılımı — yalnız toplu, k-anonim (§10.3). Eski yanıtta yok. */
     mentiNeeds?: MentiNeedsDistribution;
+    /** AJ-78: kayıt/DISC tamamlama oranları + tamamlanan görüşme. Eski yanıtta yok. */
+    completion?: KpiCompletion;
   };
+}
+
+/**
+ * Backend `kpiReport.service.ts` `KpiCompletionRate`. Pay VE payda k-anonim:
+ * biri eşik altındaysa `suppressed`, sayılar 0 ve yüzde null.
+ */
+export interface KpiCompletionRate {
+  completed: number;
+  eligible: number;
+  percent: number | null;
+  suppressed: boolean;
+}
+
+export interface KpiCompletion {
+  registration: KpiCompletionRate;
+  disc: KpiCompletionRate;
+  completedMeetings: number;
+  minGroupSize: number;
 }
 
 /** Tek S1 seçeneğinin toplu sayımı. `suppressed` iken sayı 0, yüzde null (eşik altı gizli). */
