@@ -9,7 +9,7 @@
 > Bilinen düzeltmeler: **IDOR "2 açık" DEĞİL — kod korumalı** (`/mentors/:mentorId/candidates` + `/requests/:id` tenant izolasyonu + sahiplik, düzeltme `161ae00`; bkz. `devir/07-oturum-gunlugu.md` 2026-08-14). **K2/K4/K5 KVKK maddeleri CANLIDA** (2026-08-15). Kalan KVKK: K3 (eski-kayıt consent, canlı öncesi) + K6 (admin server guard → v2) → `00-KARAR-TAKIP.md`. · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
 
 > UYARI: Bazı güvenlik maddeleri "kod görülmeden" yazılmış hipotezlerdi (strateji chat'i).
-> Bugünkü teşhis (docs/teshis-raporu-2026-08-02.md) bazılarını gerçek kodda doğruladı.
+> Bugünkü teşhis (docs/raporlar/kesif/teshis-raporu-2026-08-02.md) bazılarını gerçek kodda doğruladı.
 > Her maddenin "doğrulandı mı" durumuna dikkat.
 
 ## AYRIM (önce bunu bil)
