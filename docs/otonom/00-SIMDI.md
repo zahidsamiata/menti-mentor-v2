@@ -5,7 +5,7 @@
 
 **Durum:** CALISIYOR (devam turu — kota ~09:30 UTC'de kesti; 00-SIMDI 08:01'den beri güncellenmemişti). Sıra: 2.4 bölmeyi bitir (TEK BAŞINA) → AJ-58 → AJ-72 kaydı → 2.5 → GÖREV 3 KARAR-PAKETI (merge) + kart zenginleştirme → GÖREV 4 (AJ-83 …) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 3 — KARAR-PAKETI MERGE (#425; ilk 10 karar → 24 iş tam + 4 koşullu). Sırada: 3.1 kart zenginleştirme (kart kart) ∥ GÖREV 4: AJ-83 #426 inceleme → AJ-90.
+**Şu an yapılan:** GÖREV 3.1 kart zenginleştirme (dal `otonom/KART-ZENGIN-20260928`, kart kart commit) ∥ GÖREV 4 AJ-90 (mentör havuzu sayfalama, yazılıyor). BITTI bu devam turunda: 2.4 · AJ-72 kaydı · AJ-58 · 2.5 · KARAR-PAKETI · AJ-83.
 
 **Devam turu — kesinti öncesi yarım kalanlar ve nasıl kapandı:**
 | İş | Dal | Son hâl (11:20 UTC teyit) | Kapanış PR'ı |
@@ -29,7 +29,6 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 | backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
 | backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
-| çatı #426 | AJ-83 mesaj listesi sayfalama | yeşil | inceleme | — |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **Push edilmemiş iş:** yok.
@@ -42,4 +41,4 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 
 **Strateji katmanına not:** 7b bir kez `node_modules` sembolik bağının backend commit'ine girdiğini yakaladı (AJ-69) — backend `.gitignore` `node_modules/` bağı yakalamıyordu; düzeltildi, uygulayıcı kurallarına ders eklendi. Yeni satırlar: AJ-96 · 97 · 98 · 99 · 100.
 
-**Sıradaki 5 iş:** 2.5 merge → KARAR-PAKETI merge → kart zenginleştirme (3.1) ∥ AJ-83 → AJ-90 → AJ-60.
+**Sıradaki 5 iş:** AJ-90 → AJ-60 → AJ-89 (yönetici kolu; mentör kolu KARAR) → AJ-78 → AJ-65 · 3.1 PR.

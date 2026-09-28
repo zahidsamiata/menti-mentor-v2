@@ -21,6 +21,8 @@ export interface ConversationListItem {
 export interface ConversationListResponse {
   items: ConversationListItem[];
   total: number;
+  limit?: number;
+  offset?: number;
 }
 
 export interface ChatMessage {
@@ -44,8 +46,18 @@ export interface StartConversationResponse {
 }
 
 export const conversationsApi = {
-  list: (api: BoundClient): Promise<ApiResult<ConversationListResponse>> =>
-    api<ConversationListResponse>('/api/conversations'),
+  // AJ-83: sunucu sayfalar (varsayılan 30, en çok 100 — conversationController F-27);
+  // `offset` verilirse sonraki sayfa istenir. Parametresiz çağrı ilk sayfayı döndürür.
+  list: (
+    api: BoundClient,
+    params: { limit?: number; offset?: number } = {},
+  ): Promise<ApiResult<ConversationListResponse>> => {
+    const q = new URLSearchParams();
+    if (params.limit !== undefined) q.set('limit', String(params.limit));
+    if (params.offset !== undefined) q.set('offset', String(params.offset));
+    const qs = q.toString();
+    return api<ConversationListResponse>(`/api/conversations${qs ? `?${qs}` : ''}`);
+  },
 
   unreadCount: (api: BoundClient): Promise<ApiResult<{ count: number }>> =>
     api<{ count: number }>('/api/conversations/unread-count'),

@@ -252,3 +252,5 @@ Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`).
 | docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:58 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting oryantasyon kilidi kurum filtresiz |
 | docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md:404 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting oryantasyon kilidi tenant-kapsamsız findUnique |
 | docs/kararlar/00-KART-INDEKSI.md:54 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting kapsamsız findUnique |
+| docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:185 | G6-01 → AJ-83 | ✅ yapıldı — AJ-83 · PR #426 · 2026-09-28 | tam | mesajlar listesi ilk 30 konuşma |
+| docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:205 | G7-14 → AJ-83 | ✅ yapıldı — AJ-83 · PR #426 · 2026-09-28 | tam | mesajlar sayfalama |
