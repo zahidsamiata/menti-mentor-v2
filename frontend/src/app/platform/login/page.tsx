@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { platformLogin } from '@/lib/api/platform';
+import { DANGER_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 export default function PlatformLoginPage() {
   const router = useRouter();
@@ -65,8 +66,9 @@ export default function PlatformLoginPage() {
             />
           </div>
 
+          {/* AJ-117: eski koyu kırmızı saydam zemin açık temada 1.49:1'di — rozetlerle aynı AA deseni. */}
           {error && (
-            <p className="text-sm text-destructive bg-red-950/40 rounded-lg px-3 py-2">{error}</p>
+            <p className={`text-sm rounded-lg px-3 py-2 ${DANGER_PILL_CLASS}`}>{error}</p>
           )}
 
           <button
