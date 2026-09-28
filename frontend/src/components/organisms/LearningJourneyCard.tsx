@@ -2,7 +2,8 @@
 
 /**
  * Öğrenme Yolculuğu davet kartı — mentör ve menti panolarında ortak kullanılır (DRY).
- * Davetkâr, baskısız: tamamlanmışsa "tekrar bak", değilse "başla".
+ * Davetkâr, baskısız: tamamlanmışsa "tekrar bak", yarıdaysa "Aşama X/Y · sıradaki: …" +
+ * "kaldığın yerden devam et" (P-08 — ilerleme kalıcı), hiç başlamadıysa "başla".
  */
 
 import Link from 'next/link';
@@ -12,12 +13,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { learningJourneyApi } from '@/lib/api/learningJourney';
+import { journeyProgressLine } from '@/lib/learningJourneyProgress';
 
 export function LearningJourneyCard() {
   const api = useApiClient();
   const { data } = useQuery(() => learningJourneyApi.getStatus(api), [api]);
 
   const completed = data?.completed === true;
+  const progressLine = journeyProgressLine(data);
 
   return (
     <Card className="border-primary/30 bg-primary/5">
@@ -34,11 +37,15 @@ export function LearningJourneyCard() {
           <p className="text-xs text-muted-foreground mt-0.5">
             {completed
               ? 'Yolculuğu tamamladın. Dilediğinde geri dönüp tekrar keşfedebilirsin.'
-              : 'Kısa, sıcak bir keşif — sınav değil. Gerçek durumlarda iyi bir mentörlüğün nasıl hissettirdiğini birlikte deneyimleyelim.'}
+              : progressLine
+                ? progressLine
+                : 'Kısa, sıcak bir keşif — sınav değil. Gerçek durumlarda iyi bir mentörlüğün nasıl hissettirdiğini birlikte deneyimleyelim.'}
           </p>
         </div>
         <Button asChild size="sm" variant={completed ? 'outline' : 'default'}>
-          <Link href="/learning-journey">{completed ? 'Tekrar bak →' : 'Yolculuğa başla →'}</Link>
+          <Link href="/learning-journey">
+            {completed ? 'Tekrar bak →' : progressLine ? 'Kaldığın yerden devam et →' : 'Yolculuğa başla →'}
+          </Link>
         </Button>
       </CardContent>
     </Card>
