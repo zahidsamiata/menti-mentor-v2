@@ -18,6 +18,7 @@
 | "Şu an neredeyiz, en son ne oldu?" | `otonom/00-SIMDI.md` | 🔄 |
 | "Ne kaldı, hangi iş yarım, hangi kod ölü?" | `otonom/00-KUYRUK.md` | 🔄 |
 | "Sırada ne var, öncelik ne?" | `otonom/00-KUYRUK.md` (eski: `kararlar/10-yol-haritasi.md`) | 🔄 |
+| "PO hangi kararları vermeli, hangisi kaç iş açar?" | `otonom/KARAR-PAKETI.md` (indeks: `otonom/01-KARARLAR.md`) | 🌡️ |
 | "Hangi belge nerede, hangisi yetkili?" | `kararlar/00-INDEX.md` | 🔄 canonical |
 | "Belge nasıl yazılır/nereye konur?" | `kararlar/konu/belge-duzeni-rehberi.md` | 🔄 canonical (16 kural) |
 | "Nasıl çalışıyoruz, hangi kurallar?" | kök `CLAUDE.md` | 🔄 canonical |
