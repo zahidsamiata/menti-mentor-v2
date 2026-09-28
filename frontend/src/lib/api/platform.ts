@@ -107,6 +107,14 @@ export async function getPlatformLogs(limit = 100, category?: string, level?: st
   return platformFetch<{ items: SystemLog[]; total: number }>(`/api/platform/logs?limit=${limit}${cat}${lvl}`);
 }
 
+/**
+ * DK-03 (KARAR-24 → B): tek bir HATA kaydının kişisel veri temizlenmiş iz kaydı (stack).
+ * Liste ucu `/logs` meta döndürmez (AJ-102); iz yalnız bu tek-kayıtlık uçtan, istenince çekilir.
+ */
+export async function getPlatformLogTrace(id: string) {
+  return platformFetch<ErrorTrace>(`/api/platform/logs/${encodeURIComponent(id)}/trace`);
+}
+
 export async function getPlatformHealth() {
   return platformFetch<PlatformHealth>('/api/platform/health');
 }
@@ -213,6 +221,20 @@ export interface SystemLog {
   message: string;
   meta?: Record<string, unknown> | null;
   createdAt: string;
+}
+
+/** DK-03: `GET /api/platform/logs/:id/trace` yanıtı — backend `services/errorTrace.ts` ErrorTraceView. */
+export interface ErrorTrace {
+  id: string;
+  category: string;
+  message: string;
+  createdAt: string;
+  errorMessage: string | null;
+  stack: string | null;
+  method: string | null;
+  url: string | null;
+  userId: string | null;
+  tenantId: string | null;
 }
 
 export interface UserReport {

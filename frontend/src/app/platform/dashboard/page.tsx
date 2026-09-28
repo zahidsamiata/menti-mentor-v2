@@ -32,6 +32,7 @@ import {
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { logLevelLabel, logBadgeLabel, reportReasonLabel, reportStatusLabel } from '@/lib/enumLabels';
 import { useModalDialog } from '@/hooks/useModalDialog';
+import { ErrorTraceToggle } from '@/components/organisms/ErrorTraceToggle';
 import { UI_TEXT } from '@/lib/uiText';
 import { AUDIT_PILL_CLASS, DANGER_PILL_CLASS, SUCCESS_PILL_CLASS, WARNING_PILL_CLASS } from '@/lib/a11y/statusColors';
 
@@ -652,6 +653,7 @@ export default function PlatformDashboard() {
                       {log.category === 'AUDIT' && target != null && (
                         <span className="text-muted-foreground text-xs">hedef: {String(target)} · IP: {String(meta?.['ip'] ?? '—')}</span>
                       )}
+                      {log.level === 'ERROR' && <ErrorTraceToggle logId={log.id} />}
                     </div>
                     <span className="text-muted-foreground text-xs whitespace-nowrap">
                       {new Date(log.createdAt).toLocaleString('tr-TR')}
