@@ -5,8 +5,9 @@
 
 Kod/ürün denetimi (belge ne diyor ↔ kod ne yapıyor) — `oz-denetim/` ile karıştırma.
 
-## İçerik (14)
+## İçerik (15)
 - `bekci-istisna.txt` — belge-bekci.sh kural (h) istisnaları — "BITTI işin kaynağı açık" UYARISI bu satırlar için verilmez.
+- `belge-ad-envanteri-2026-09-28.md` — 📸 Belge adı / klasör envanteri — AJ-120 (78 kurala uymayan dosya; 1 taşındı: `icerik/00-INDEKS` → `00-INDEX`; kırık atıf 15 → 14)
 - `bitti-dogrulama-2026-09-27.md` — BITTI SON DOĞRULAMA — 2026-09-27
 - `bitti-dogrulama-partiler/` — alt klasör (kendi `00-INDEX.md`'si ya da giriş dosyası var)
 - `degerlendirme-test-soru-envanteri-2026-08-15.md` — Değerlendirme / Test / Soru Sistemi — Envanter Raporu (2026-08-15)

@@ -3,7 +3,7 @@
 
 # `docs/raporlar/icerik/bolumler/` — indeks
 
-İçerik raporunun bölümleri. Üst indeks: `docs/raporlar/icerik/00-INDEKS.md`.
+İçerik raporunun bölümleri. Üst indeks: `docs/raporlar/icerik/00-INDEX.md`.
 
 ## İçerik (5)
 - `01-disc.md` — İçerik Dökümü — DISC Soruları (2026-08-26)

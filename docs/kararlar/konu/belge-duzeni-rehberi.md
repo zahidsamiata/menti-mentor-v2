@@ -54,11 +54,12 @@
   `00-icerik-index` · `00-KART-INDEKSI`) yakalar. Bir indeks varsa **satır eklenir, yeni dosya AÇILMAZ.**
   (Arşivdeki `docs/arsiv/icerik/00-icerik-index.md` yeniden adlandırılmaz — arşiv/📸 KURAL 6.) (Gerekçe: yukarıdaki *"yoksa oluşturulur"* ifadesi, Türkçe adlı
   indeksi göremeyip aynı klasörde **ikinci indeks** açma riski taşıyordu.)
-  ⚠️ **Mevcut `docs/raporlar/icerik/00-INDEKS.md` YENİDEN ADLANDIRILMADI** — 2026-09-21 ölçümü:
+  ~~[ESKİ · 2026-09-28] ⚠️ **Mevcut `docs/raporlar/icerik/00-INDEKS.md` YENİDEN ADLANDIRILMADI** — 2026-09-21 ölçümü:
   **11 atıf / 4 dosya**, markdown link biçiminde **0**, kod/script atfı **0**. Atıfların bir kısmı
   tarihsel kayıtta (oturum günlüğü, 09-DURUM) olduğu için adlandırma değişikliği tarihsel iz bozar;
   kural genişletmesi aynı riski tek satırda kapatıyor. İki ad **kalıcı değil, geçicidir**: o klasör
-  bir sonraki düzenlemede `00-INDEX.md`'ye taşınırsa atıflar aynı turda güncellenir.
+  bir sonraki düzenlemede `00-INDEX.md`'ye taşınırsa atıflar aynı turda güncellenir.~~
+  ⚠️ GÜNCELLEME (2026-09-28, AJ-120): klasör taşındı — `git mv docs/raporlar/icerik/00-INDEKS.md → docs/raporlar/icerik/00-INDEX.md` (içerik aynı). Yaşayan atıflar yeni yola çevrildi; eski yolda "↪️ TAŞINDI" yönlendirmesi durur (dondurulmuş/arşiv/günlük atıfları kırılmasın — AN-44/AJ-71 deseni). Envanter: `docs/raporlar/kod-denetimi/belge-ad-envanteri-2026-09-28.md`.
   Biçim: `<konu> kod denetimi → ../<yöntem-klasörü>/<dosya>.md (tarih, satır aralığı)`
 
 Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `panel/` altında arandı, bulunamadı, **bir tur tamamen tekrar edildi** (bkz. `docs/00-BELGE-HARITASI.md` B.0).
