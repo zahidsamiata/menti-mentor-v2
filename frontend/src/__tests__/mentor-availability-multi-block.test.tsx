@@ -77,9 +77,11 @@ describe('Mentör müsaitlik — birden fazla aralık', () => {
 
     await waitFor(() => expect(saveAvailability).toHaveBeenCalled());
     const payload = saveAvailability.mock.calls[0][1] as { blocks: unknown[] };
+    // K-15: form her aralığa varsayılan format+süreyi (ONLINE/60dk) de ekler — mentör
+    // formu değiştirmediği sürece bu, menti'nin gördüğü slotun format+süresi olur.
     expect(payload.blocks).toEqual([
-      { weekday: 'MON', startTime: '09:00', endTime: '17:00' },
-      { weekday: 'FRI', startTime: '11:00', endTime: '17:00' },
+      { weekday: 'MON', startTime: '09:00', endTime: '17:00', format: 'ONLINE', durationMin: 60 },
+      { weekday: 'FRI', startTime: '11:00', endTime: '17:00', format: 'ONLINE', durationMin: 60 },
     ]);
   });
 
@@ -124,10 +126,11 @@ describe('Mentör müsaitlik — birden fazla aralık', () => {
 
     await waitFor(() => expect(saveAvailability).toHaveBeenCalled());
     const payload = saveAvailability.mock.calls[0][1] as { blocks: unknown[] };
-    // Prisma satırındaki fazladan alanlar geri gönderilmez; kayıtlı blok korunur.
+    // Prisma satırındaki fazladan alanlar (id/tenantId/timezone/isActive) geri gönderilmez;
+    // kayıtlı bloğun format/durationMin'i (sunucudan gelmediyse şema varsayılanı) korunur.
     expect(payload.blocks).toEqual([
-      { weekday: 'MON', startTime: '09:00', endTime: '17:00' },
-      { weekday: 'FRI', startTime: '11:00', endTime: '17:00' },
+      { weekday: 'MON', startTime: '09:00', endTime: '17:00', format: 'ONLINE', durationMin: 60 },
+      { weekday: 'FRI', startTime: '11:00', endTime: '17:00', format: 'ONLINE', durationMin: 60 },
     ]);
   });
 });
