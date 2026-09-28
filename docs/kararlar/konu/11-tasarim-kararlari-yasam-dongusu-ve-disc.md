@@ -39,7 +39,7 @@ dengeyi kurar.
    - Birincilden **belirgin daha zayıf** ama yine orta çizgiyi geçen harfler **küçük** yazılır.
    - Örnekler: `DI` (iki güçlü tip) · `Di` (baskın D + destekleyici i) · `DIs` (iki güçlü + zayıfça geçen s). Sonuç ~~1–4~~ 1–3 harf arası değişir. ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): kod 1–3 üretir (`discLetters.ts:5,15`) — bkz. yukarıdaki KARAR 1 notu.
 
-**⚠️ Açık nokta (#12 turunda netleşecek — bu belgede SAYI verilmez):**
+**⚠️ Açık nokta (#12 turunda netleşecek — bu belgede SAYI verilmez):** · ✅ yapıldı — eşik kodda: orta çizgi 0.25 · büyük harf oranı 0.75 (`backend/src/services/discLetters.ts:28-40`, PO onayı 2026-08-17; test `backend/tests/discLetters.unit.test.ts:8,19-24`) · doğrulama: sahipsiz-kalanlar-2026-09-27
 - "Çok yakın = BÜYÜK" için **kesin sayısal eşik** (ör. ikincil, birincilin %X'i mi) sistemin kendi DISC puanlama
   **ölçeğine** bağlıdır. Aynı şekilde "orta çizgi" değerinin bu ölçekte nereye düştüğü de koda bağlıdır.
 - **#12 turunun ilk adımı KEŞİF olacak:** mevcut DISC puanlama kodu okunacak (ölçek nedir, vektör nasıl normalize ediliyor,
@@ -86,6 +86,7 @@ başvuruları **kalıcı** kapatabilmeli, üstelik başvuranı gereksiz yere umu
 ---
 
 ## KARAR 3 — Onaylanmış (aktif) kullanıcıyı sistemden çıkarma (iş: 2b · yol haritası #36)
+> 🟨 kısmen — iş kuyrukta; kalan: onaylı üyeyi kurumdan çıkarma ekranı → Y-14 (🔴 KARAR-93) · doğrulama: sahipsiz-kalanlar-2026-09-27
 
 **Ne:** Yönetici, **APPROVED (aktif)** bir menti/mentörü sonradan sistemden çıkarabilir (red değil — kabul edilmiş kişiyi
 çıkarma). Yönetici **iki seçenek** arasında karar verir:

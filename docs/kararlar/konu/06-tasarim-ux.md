@@ -7,7 +7,7 @@
 
 ## TEMA (dark/light)
 - **Toggle var:** İsteyen light'a geçebilir. Altyapı kuruldu (PR #32: .dark class, ThemeProvider, localStorage, FOUC önleme, ThemeToggle butonu). 🟢✅
-- **Landing dark/light: CANLI-SONRASINA ERTELENDİ (2026-08-02 geç oturum'da güncellendi).** 🟢
+- **Landing dark/light: CANLI-SONRASINA ERTELENDİ (2026-08-02 geç oturum'da güncellendi).** 🟢 · 🟨 kısmen — karar yazılı (canlı-sonrası); kalan: landing tema + UX paketi kodu → AJ-86
   - Eski karar: "Landing HER ZAMAN DARK kalır". Yeni karar: landing ileride dark/light **seçilebilir yapılabilir AMA canlı-öncesi değil**.
   - Gerekçe (tema-durum-ve-landing-maliyeti raporu): landing'i seçilebilir yapmak ~256 hardcoded nokta / ~10-13 saat / **orta risk**. Şu an öncelik değil.
   - Şimdilik landing DARK kalır (app tarafı — dashboard/formlar — zaten toggle'lı).
@@ -20,7 +20,7 @@
 - **D21:** Toggle admin/platform nav'a eklenmeli. 🟢✅ **TAMAMLANDI** (2026-08-02, frontend `188aad5`).
 - **D22:** DISC renkleri light'ta WCAG FAIL (kontrast 1.8–3.9:1, olması gereken 4.5). Sarı/gri beyaz zeminde soluk. 5 dosya ~7 renk, 600/700 tonuna çekilmeli. · ✅ yapıldı — AJ-07 · PR çatı #359 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27
 - **D23:** Platform admin rozetleri light'ta koyu leke (koyu-alfa tint), light varyant gerekli.
-- **🔴 KARAR BEKLİYOR:** DISC renk TON kararı kullanıcının gözünden verilecek — light'ta henüz onaylanmadı (dashboard'lar çöktüğü için görülemedi, sonra seed geldi ama tema light test edilmedi).
+- **🔴 KARAR BEKLİYOR:** DISC renk TON kararı kullanıcının gözünden verilecek — light'ta henüz onaylanmadı (dashboard'lar çöktüğü için görülemedi, sonra seed geldi ama tema light test edilmedi). · ⚪ geçersiz — renk tonu kural gereği ajanın teknik kararı (CLAUDE.md § KARAR AYRIMI); açık tema DISC tonları AJ-07 ile WCAG AA'ya göre seçildi (`frontend/src/components/atoms/DiscBadge.tsx`) (PO teyit listesinde)
 
 ## LANDING
 - **Slogan değişikliği** (mail/panel chat'i): Eski "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin" ZAYIF → yeni slogan.
@@ -30,19 +30,19 @@
 - **Landing UX paketi (kodlanmadı ⏳):** tooltip metnin üstüne biniyor + hover köprüsü yok + kaynak linkleri tıklanamıyor; "i" ikonu keşfedilemez (koyu zeminde soluk); düşük kontrast gri metinler (WCAG); SIFIR-etikette sıfır-olmayan skor çelişkisi (AlgorithmBento — mantık hatası, öncelikli); mobil test.
 
 ## KART TASARIMI — MENTİ/MENTÖR HAVUZU (2026-08-02 geç oturum, ⏳ tasarlanacak)
-Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-envanteri raporu).
+Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-envanteri raporu). · 🟨 kısmen — menti→mentör kartı yapıldı (F-10, `frontend/src/app/(dashboard)/menti/page.tsx:305-347`); kalan: çift yönlü havuz, sayfa başına kart, detay biçimi → KARAR-54 · yönetici havuzu kartı → AJ-63 · sayfalama → AJ-90
 - **Düz liste DEĞİL, görsel kartlar** (Mentornity tarzı). Minimal — yığılma yok.
 - **Kartta gösterilecek:** foto + isim + rol + DISC rozeti + sektör etiketi + **%UYUM** + aksiyon butonu.
 - **%UYUM** = sektör etiketi uyumu + DISC uyum skoru. **Rating/yıldız YOK.**
   - Mevcut skor API'den dönüyor (`/mentors/:id/candidates`, `totalScore/sectorScore/discScore`) →
     **İŞ 7'ye (sektör-scorer) BAĞLI DEĞİL, bugünkü skorla çalışır.**
 - **Kartta GÖSTERİLMEYECEK:** deneyim (yıl/şirket — etiket yeter); sosyal linkler; müsaitlik.
-- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa.
+- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa. · 🟨 kısmen — kart ızgarası var; kalan: sayfalama (bugün tek istekte en çok 100) → AJ-90
 - **Detay sayfası (karta tıklayınca):**
   - Sosyal linkler (LinkedIn/Instagram) **burada + KOŞULLU** — kişi bilgi girmişse göster, girmemişse hiçbir şey gösterme.
   - Müsaitlik takvimi → müsait saate tıkla → **niyet mektubu yaz** akışı.
 - **Çift yönlü havuz:** mentör menti havuzunu, menti mentör havuzunu görür — **aynı kart mantığı**.
-- **Fotoğraf:** herkesten istenecek. Şimdilik **opsiyonel**, ileride zorunlu (bkz. 08 açık soru). Altyapı hazır (bugün tamamlandı).
+- **Fotoğraf:** herkesten istenecek. Şimdilik **opsiyonel**, ileride zorunlu (bkz. 08 açık soru). Altyapı hazır (bugün tamamlandı). · 🟨 kısmen — fotoğraf altyapısı var, opsiyonel; kalan: "ne zaman zorunlu" → E-4 (AN-13 katlandı) — ⚠️ ürün sorusu E-4 karantina işinde kaybolmasın
 - **Referanslar:** docs/raporlar/kesif/kart-havuz-backend-envanteri-2026-08-02.md + docs/raporlar/kesif/mentor-karti-rakip-analizi-2026-08-02.md (rakip analizi + kart kararları).
 - **Deneyim referansı (persona):** kart + akış tasarımı iki tarafın deneyimini farklı etkiler —
   menti tarafında **"bekleme anı" riski** (talep sonrası onay beklerken kaybolma), mentör
@@ -56,7 +56,7 @@ Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-e
 
 ## UX İYİLEŞTİRMELERİ (bugünkü oturumda bulundu, ⏳)
 - **Sol menü tipografi:** Yazılar küçük/soluk, biraz büyütülüp kontrast artırılmalı (CV360 örneği daha okunaklı).
-- **Sayfa açıklama metinleri:** Her admin sayfasının başındaki "bu sayfa ne işe yarar" metni daha basit/açıklayıcı olmalı (imleç/tooltip değil, metin iyileştirme).
+- **Sayfa açıklama metinleri:** Her admin sayfasının başındaki "bu sayfa ne işe yarar" metni daha basit/açıklayıcı olmalı (imleç/tooltip değil, metin iyileştirme). · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: sade sayfa açıklama metinleri → AJ-91 (🟡 metin onayı PO)
 - **Soru ekleme dropdown'ları:** CORE/DEEPENING neden İngilizce → Türkçeleştir. "Genel (bilgi amaçlı)" dropdown'ında neden DISC (D/I/S/C) seçenekleri var → gözden geçir (kişi DISC üzerinden onaylama yapamaz).
 
 ## ONBOARDING UX
@@ -66,4 +66,4 @@ Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-e
 - 5 uzman rolüyle keşif prompt'u hazır, gönderilmedi. Bilinen: "davet bilgisi eksik" hatası, belirsiz hata mesajları (bugün B14 ile hata mesajları kısmen düzeldi).
 
 ## AÇIK SORULAR (bkz. 08)
-- Çift-aha onboarding, bildirim yedeği vb. orta öncelikli işler — asistan "değerli ama sonra" dedi, kullanıcı karar vermedi. ⚪
+- Çift-aha onboarding, bildirim yedeği vb. orta öncelikli işler — asistan "değerli ama sonra" dedi, kullanıcı karar vermedi. ⚪ · 🟨 kısmen — iş karta bağlandı; kalan: çift-aha → KARAR-17, bildirim yedeği → KARAR-103 md.11/13

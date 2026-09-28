@@ -364,7 +364,7 @@ derinleşme senaryosu. Haftalara yayılır.
 > canlandırılacak.
 
 > ⚠️ **AÇIK:** sınırsız yeniden-derinleşme davranışı — her tur profili
-> değiştiriyor, sınır yok (G3-03). Karara bağlanmadı.
+> değiştiriyor, sınır yok (G3-03). Karara bağlanmadı. · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: yeniden cevaplama sınırı kararı → KARAR-122
 
 ---
 
@@ -569,7 +569,7 @@ S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla
 - Farklı eksenler: `expectationCategories` KONU (Kariyer/Teknik/İş-Staj/Girişimcilik/Kişisel/Sektör), S1 İHTİYAÇ TİPİ (karar veremiyorum / beceride takıldım / güvenmiyorum / tanımıyorum / konuşacak biri). Bir menti "Kariyer konusunda karar veremiyorum" der — ikisi birden.
 - `expectationCategories` DEĞİŞMEZ (canlı gate, `matching.ts:278`). `mentiNeeds` YENİ alan olarak eklenir.
 - ⚠️ **KAYDA (düzeltildi 2026-08-29):** ~~çift-ağırlık riski — ikisi de "menti ne istiyor" sinyali, TEK KEZ ağırlıklandırılmalı.~~ Doğrulama turu (`matching.ts:278-280`) gösterdi ki `expectationCategories` bir **GATE**'tir (ortak beklenti yoksa aday `continue` ile ELENİR, skora ağırlık KATMAZ); `mentiNeeds` ise skor bileşeni olacak. → **İkisi FARKLI MEKANİZMA (gate vs ağırlık), üst üste ağırlık binmiyor** — "çift-ağırlık" çerçevesi yanlıştı. KARAR 1 aynen geçerli.
-  - ⚠️ Faz 5 için kalan GERÇEK soru (açık kalem, PO numaralandıracak): gate (eleme) ile skor aynı sinyali iki kez cezalandırıyor mu — yani ortak-beklentisi-olmayan aday hem eleniyor hem düşük skor alıyor mu?
+  - ⚠️ Faz 5 için kalan GERÇEK soru (açık kalem, PO numaralandıracak): gate (eleme) ile skor aynı sinyali iki kez cezalandırıyor mu — yani ortak-beklentisi-olmayan aday hem eleniyor hem düşük skor alıyor mu? · 🟨 kısmen — bugün çift ceza yok (skorda beklenti yok, yalnız eleme: `backend/src/services/matching.ts:343-345`); kalan: yeni formül bağlanırken çift-ceza testi → AJ-92 (🔴 KARAR-61)
 
 **KARAR 2 · `interactionStyle` ↔ S2 → YENİ ALAN, ESKİSİ DONDURULUR.** *(REVİZE — PO, 2026-08-29)*
 - Yeni alan: `supportApproach`, 3 değer (yol gösterme / birlikte düşünme / dinleme).
@@ -583,7 +583,7 @@ S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla
 - **Köprü canlıyı KORUMAZ, DEĞİŞTİRİR:** türetme yapılsaydı menti tarafı dolar, bonus **CANLANIRDI** → canlı sıralama davranışı değişirdi. **Bir veri turunda canlı skor davranışı değiştirilmez.**
 - **YENİ KARAR:** `interactionStyle` **DONDURULUR** — mentöre eski soru SORULMAZ, sütun şemada KALIR, **TÜRETME YOK**, hiçbir yere yazılmaz. Faz 5'te motor `supportApproach` okumaya başlayınca sütun emekliye ayrılır.
 - ⭐ **KAZANÇ:** köprü borcu **hiç doğmadı** (kaldırma borcu bir eksik). Donmuş sütun borcu, köprü borcundan daha kolay kaldırılır.
-- **İŞ 0 bulgusu (dondurma güvenli mi):** `interactionStyle` `matching.ts` DIŞINDA **fonksiyonel olarak okunmuyor** — yalnız 2 pasif SELECT (`userController.ts:175` getUser DTO · `onboardingController.ts:330` onboarding yanıtı) + FE DTO tipi (`lib/api/profile.ts:33`; profil sayfası **render etmiyor**). Dondurulunca SELECT'ler null döner, hiçbir mantık/gösterim tüketmediği için **fonksiyonel etki YOK.** *(Pasif SELECT'lerin sonradan temizlenmesi açık kalem — PO numaralandıracak.)*
+- **İŞ 0 bulgusu (dondurma güvenli mi):** `interactionStyle` `matching.ts` DIŞINDA **fonksiyonel olarak okunmuyor** — yalnız 2 pasif SELECT (`userController.ts:175` getUser DTO · `onboardingController.ts:330` onboarding yanıtı) + FE DTO tipi (`lib/api/profile.ts:33`; profil sayfası **render etmiyor**). Dondurulunca SELECT'ler null döner, hiçbir mantık/gösterim tüketmediği için **fonksiyonel etki YOK.** *(Pasif SELECT'lerin sonradan temizlenmesi açık kalem — PO numaralandıracak.)* · 🟨 kısmen — yazımı kapatan karantina hazırlandı (AN-12); kalan: pasif SELECT temizliği → AN-12/KARAR-107 sonrası silme protokolü
 
 #### ✅ EKRAN KARARI — üç soru nereye konur (PO, 2026-08-29)
 
@@ -594,7 +594,7 @@ S21 envanteri (`raporlar/kesif/profil-envanteri-2026-08-29.md`) mevcut alanlarla
 - **Gerekçe (PO):** kişi "sen bir Limansın" görmüş, ilgisi taze, 40 saniye daha verir; formun ortasına konursa sürtünme olur.
 - **Süre etkisi:** ilk oturum ~6 dk → ~7 dk.
 - ⚠️ **ŞART (PO): S2 metni NÖTR yazılacak.** Sebep: kişiye az önce arketip etiketi verildi; "nasıl destek isterim" sorusu kişiliğe en yakın soru olduğu için kişi etikete uygun cevap verme eğilimine girebilir (Liman denen kişi "dinlesin" der, çünkü Liman öyle olmalı gibi gelir) → ölçüm bozulur. Metin arketipten bağımsız, davranışsal yazılacak. → İçerik oturumunun işi, ajan yazmaz.
-- ⚠️ **AÇIK KALEM (PO numaralandıracak):** kayıt akışının sonunda sekmeyi kapatan kişi üç soruya CEVAPSIZ kalır. Migration additive olduğu için sistem çalışır (nötr) ama o kişiye SONRADAN SORMA YOLU YOK. Profil sayfasından tamamlama akışı gerekiyor mu — karar verilmedi.
+- ⚠️ **AÇIK KALEM (PO numaralandıracak):** kayıt akışının sonunda sekmeyi kapatan kişi üç soruya CEVAPSIZ kalır. Migration additive olduğu için sistem çalışır (nötr) ama o kişiye SONRADAN SORMA YOLU YOK. Profil sayfasından tamamlama akışı gerekiyor mu — karar verilmedi. · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: sonradan sorma kararı → KARAR-123
 
 > ⚠️ **FORM TURU KALEMİ (PO, 2026-08-30):** enum SABİTLERİ kesinleşti (`RESULT`/`LEARNING`/`UNDERSTOOD`/`PERSPECTIVE`, `MentiNeed`/`MentorStrength`/`SupportApproach` değerleri) ama KULLANICI METNİ form turunda keskinleştirilecek. Özellikle S3'te "öğrenmek" (`LEARNING`) ile "yeni bakış açısı" (`PERSPECTIVE`) aynı eksende bulanıklaşıyor — metin ayrımı form turunun işi.
 > - ⭐ **Metin değişikliği MIGRATION GEREKTİRMEZ** (enum sabiti ≠ görünen metin) — bu ayrım kayda geçsin ki form turunda "migration lazım mı" tartışması çıkmasın.
@@ -718,7 +718,7 @@ birinde `[ ] PO notu:`. **Kalan açık karar: 7** (madde 8 → 2026-08-29'da kap
 4. Sınırsız yeniden-derinleşme sınırı (G3-03) — `[ ] PO notu:`
 5. Özet alanı yönergesi — `[ ] PO notu:`
 6. Göç planı (a/b/c) — `[ ] PO notu:`
-7. K-anonimlik eşiği (kaç kişiden az olunca gizlensin) — `[ ] PO notu:` (S21 teyit: kodda YOK, `platformTenantController.ts:269`)
+7. K-anonimlik eşiği (kaç kişiden az olunca gizlensin) — `[ ] PO notu:` ~~[ESKİ · 2026-09-27] (S21 teyit: kodda YOK, `platformTenantController.ts:269`)~~ ⚠️ GÜNCELLEME (2026-09-27): eşik kodda `K_ANONYMITY_THRESHOLD = 3` (`backend/src/services/mask.ts:52`), KPI ve platform analitiği maskeli (V-05) — kanıt: `backend/tests/k-anonymity-kpi-analytics.test.ts` · doğrulama: sahipsiz-kalanlar-2026-09-27
 8. ✅ **KARARA BAĞLANDI (2026-08-29):** Profil envanteri (S21) yapıldı → `raporlar/kesif/profil-envanteri-2026-08-29.md`; iki çakışma karara bağlandı (§10.2 KARAR 1 expectationCategories yan yana · KARAR 2 supportApproach yeni + her iki rol, interactionStyle türetilir).
 
 ---
@@ -750,18 +750,18 @@ Bu belgeden çıkan her kalem: **kalem · durum · numara-adayı-mı**
 | 4 | İki veto (V1/V2) + kademeli gevşeme uygula | ⬜ AÇIK | evet |
 | 5 | Eski "D mentör + S menti" vetosu kaldır | ⬜ AÇIK | evet |
 | 6 | Sektör asimetri düzeltmesi (payda = etiket birleşimi) | ⬜ AÇIK | evet |
-| 7 | Çatılı eşleşme — IndustryNode/LCA mantığını bağla | ⬜ AÇIK | evet |
-| 8 | Kalite çarpanı çift-uygulama hatasını düzelt | ⬜ AÇIK | evet |
+| 7 | Çatılı eşleşme — IndustryNode/LCA mantığını bağla | 🟨 kısmen — LCA mantığı hazır (`backend/src/services/taxonomy.service.ts:44`), canlıya bağlı değil; kalan: bağlama → F-11/PS-A3 (🔴 KARAR-61) | evet |
+| 8 | Kalite çarpanı çift-uygulama hatasını düzelt | ⚪ geçersiz — çift çarpım yok, belgenin kendi :39 notu çürüttü (`backend/src/services/scoring.ts:109`) (PO teyit listesinde) | evet |
 | 9 | Üç soru (S1/S2/S3 menti+mentör) veri toplama ekle | ⬜ AÇIK | evet |
-| 10 | Görünürlük kuralları (10.3) uygula | ⬜ AÇIK | evet |
-| 11 | K-anonimlik eşiği (G1-22) belirle | ❓ TEYİT GEREK | evet |
-| 12 | Eşleşme kartı metni (10.5) — algılanan benzerlik cümlesi | ⬜ AÇIK | evet |
+| 10 | Görünürlük kuralları (10.3) uygula | 🟨 kısmen — S1 ihtiyacı hiçbir ekranda gösterilmiyor (seçimde gizlilik fiilen sağlanıyor); kalan: eşleşme sonrası mentöre görünme + yöneticiye yalnız toplu dağılım → AJ-89 | evet |
+| 11 | K-anonimlik eşiği (G1-22) belirle | ⚠️ GÜNCELLEME (2026-09-27): ✅ eşik = 3 (`backend/src/services/mask.ts:52`), V-05 ile KPI/analitiğe uygulandı; kalan algoritma ayar ekranı → AJ-69 · doğrulama: sahipsiz-kalanlar-2026-09-27 | evet |
+| 12 | Eşleşme kartı metni (10.5) — algılanan benzerlik cümlesi | 🟨 kısmen — iş sahiplendi; kalan: üç sorudan üretilen kart cümlesi → I-11 (🔴 KARAR-64) | evet |
 | 13 | Profil/hedef verisi envanter keşfi (S21) — üç soru ön koşulu | ⬜ AÇIK | evet |
 | 14 | Manuel eşleştirme yok kararı (T8/76 kapandı) | ✅ YAPILDI (KOD DIŞI — karar) | hayır |
 | 15 | Göç planı (a/b/c) seç | ❓ TEYİT GEREK | evet |
-| 16 | Kalibrasyon yön-kontrolü metrikleri kur (match length ana) | ⬜ AÇIK | evet |
+| 16 | Kalibrasyon yön-kontrolü metrikleri kur (match length ana) | 🟨 kısmen — iş sahiplendi; kalan: hangi metrik esas → KARAR-44 + uzman G-2 | evet |
 | 17 | "İz Açan" arketip adı onayı | ❓ TEYİT GEREK | evet |
-| 18 | Karma ölçüm formatı (ipsatif) tasarımı | ⬜ AÇIK | evet |
+| 18 | Karma ölçüm formatı (ipsatif) tasarımı | 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: cevap biçimi kararı → KARAR-121 | evet |
 | 19 | Sınırsız yeniden-derinleşme sınırı (G3-03) | ❓ TEYİT GEREK | evet |
 | 20 | Özet alanı yönergesi | ❓ TEYİT GEREK | evet |
 | 21 | Derinleşme EN BELİRSİZ boyuttan sorsun + profili aşağı çekebilsin | ⬜ AÇIK | evet |

@@ -27,9 +27,9 @@ Rapor `kod-inceleme-2026-09-24.md` D11'deki "28 bağlanmamış"ın büyük kısm
 | GET /api/meetings/pair-signal | meetingRoutes.ts:132 | sarmalayıcı hazır (`lib/api/meetings.ts:130`), çağrılmıyor | admin/eslesmeler satırına çift sinyali rozeti · S · 🟢 | — |
 | GET /api/meetings/:meetingId/check-ins | meetingRoutes.ts:126 | check-in yazılıyor, hiçbir ekranda okunmuyor | meetings "check-in'lerim" · S-M · 🟡 (mahrem veri) | GV-04 (BITTI) · ✅ yapıldı — E-3e · PR çatı #372 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27 |
 | POST /api/tenants/:id/block-pair | adminSettingsRoutes.ts:18 | çift engeli backend'de var, arayüzü yok | "Çifti engelle" · S-M · 🟡 · KR-19'dan sonra | KR-19 · ✅ yapıldı — E-3d · PR backend #187 + çatı #371 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27 |
-| GET /api/meetings/:meetingId/feedback | meetingRoutes.ts:98 | geri bildirim gönderiliyor, okunmuyor | "verdiğim değerlendirme" · S · 🟡 · düşük değer | — |
+| GET /api/meetings/:meetingId/feedback | meetingRoutes.ts:98 | geri bildirim gönderiliyor, okunmuyor | "verdiğim değerlendirme" · S · 🟡 · düşük değer | 🟨 kısmen — gönderme var; kalan: okuma ekranı → AJ-49 (🔴 KARAR-89) |
 
-**Öncelik (en az emek / en çok değer):** 1) bağlamsal geri bildirim kartı (🟡 M) · 2) anlaşma taslağı formu (🟡 M) · 3) çift sinyali rozeti (🟢 S) · 4) gizlenen soruyu geri açma (🟢 S-M) · 5) check-in geçmişi (🟡 S-M). En yüksek değerli kalem "Görüşme yapıldı" düğmesi, ama KARAR-80/M11'e bağlı (🔴).
+**Öncelik (en az emek / en çok değer):** 1) bağlamsal geri bildirim kartı (🟡 M) · 2) anlaşma taslağı formu (🟡 M) · 3) çift sinyali rozeti (🟢 S) · 4) gizlenen soruyu geri açma (🟢 S-M) · 5) check-in geçmişi (🟡 S-M). En yüksek değerli kalem "Görüşme yapıldı" düğmesi, ama KARAR-80/M11'e bağlı (🔴). · 🟨 kısmen — U-01 ("Görüşme yapıldı"), E-3b (soru geri açma) ve E-3e (check-in geçmişi) yapıldı; kalan: anlaşma taslağı → KARAR-109, bağlamsal geri bildirim → U-18/KARAR-97, çift sinyali → E-4 (mükerrer)
 
 ## MÜKERRER (21) — yalnız listelendi
 | Uç | Handler | İşi yapan yol | Kuyruk |
@@ -60,10 +60,10 @@ Rapor `kod-inceleme-2026-09-24.md` D11'deki "28 bağlanmamış"ın büyük kısm
 OAuth callback (`authRoutes.ts:61`) · abonelikten çıkma (`selfServeRoutes.ts:38`) · cron elle tetikleme ×2 (`adminRoutes.ts:80-81`) · `POST /api/meetings/reminders/send` (cron aynı işi yapıyor) · `POST /api/questions/respond` (toplu/veri taşıma) · `GET /api/feedback-logs/combination-scores` (ADMIN analiz).
 
 ## TERK / ÜRÜN KARARI (24) — yalnız listelendi
-Kulüp ailesi (7 + `/users/:userId/clubs`) · iş ilanı ailesi (4) · feedback-log ailesi (3; AN-47/KARAR-89) · `GET /api/analytics/:userId` (ham DISC türevi, KVKK hassas) · `POST /api/admin/users/:id/rematch` (KARAR-80/M14) · visibility-optin ×2 (Y-15, KARAR-80/M7) · `DELETE /api/meetings/orientation-lock/:userId` (KARAR-80/M19, KARAR-92) · `PATCH /api/users/:id` (yetki sorusu) · yönetici KVKK işlemleri `anonymize`/`hard-delete` (GV-08 🔴) · `GET /api/tenants/:slug/preview` (sihirbaz önizleme adımı hiç yapılmamış).
+Kulüp ailesi (7 + `/users/:userId/clubs`) · iş ilanı ailesi (4) · feedback-log ailesi (3; AN-47/KARAR-89) · `GET /api/analytics/:userId` (ham DISC türevi, KVKK hassas) · `POST /api/admin/users/:id/rematch` (KARAR-80/M14) · visibility-optin ×2 (Y-15, KARAR-80/M7) · `DELETE /api/meetings/orientation-lock/:userId` (KARAR-80/M19, KARAR-92) · `PATCH /api/users/:id` (yetki sorusu) · yönetici KVKK işlemleri `anonymize`/`hard-delete` (GV-08 🔴) · `GET /api/tenants/:slug/preview` (sihirbaz önizleme adımı hiç yapılmamış). · 🟨 kısmen — anonimleştirme kapsamı düzeltildi (GV-08); kalan: yönetici KVKK işlem ekranı → KARAR-14
 
 ## Kuyruğa not
-Kuyrukta kendi satırı olmayan BAĞLA kalemleri: bağlamsal geri bildirim kartı · anlaşma taslağı · çift sinyali · soru geri açma · check-in geçmişi · değerlendirme okuma. Kuyruk satırı olmayan MÜKERRER'ler: temperament-test, compute-profile/rank-mentors, `POST /api/users`, requests ailesi.
+Kuyrukta kendi satırı olmayan BAĞLA kalemleri: bağlamsal geri bildirim kartı · anlaşma taslağı · çift sinyali · soru geri açma · check-in geçmişi · değerlendirme okuma. Kuyruk satırı olmayan MÜKERRER'ler: temperament-test, compute-profile/rank-mentors, `POST /api/users`, requests ailesi. · 🟨 kısmen — soru geri açma (E-3b) ve check-in geçmişi (E-3e) yapıldı; kalan: anlaşma → KARAR-109, bağlamsal geri bildirim → U-18/KARAR-97, değerlendirme okuma → AJ-49 (KARAR-89), mükerrerler → E-4
 
 ## ⚠️ GÜNCELLEME (2026-09-25, uygulama sırasında doğrulama)
 - ~~[ESKİ · 2026-09-25] BAĞLA: GET /api/meetings/pair-signal — çift sinyali rozeti · S · 🟢~~

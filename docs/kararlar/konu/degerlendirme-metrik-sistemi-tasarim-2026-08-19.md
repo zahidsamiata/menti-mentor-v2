@@ -155,7 +155,7 @@ Arama terimleri: retest/reassess/reevaluate/retake/redoTest/resetTest/recertify/
 ## 5. GÖRÜNÜRLÜK / KVKK KARARI
 - **Kişi-bazlı feedback/kalite puanı YALNIZCA STK yöneticisine görünür** (kişinin kendisi görmez). Gerekçe:
   KARAR 5 ruhu — feedback vereni koru, puan enflasyonunu ve kişiler-arası gerilimi önle.
-- **AÇIK NOKTA (hukuk):** KVKK Md.11 kapsamında kişinin kendi verisine erişim hakkı ayrı bir hukukçu konusudur.
+- **AÇIK NOKTA (hukuk):** KVKK Md.11 kapsamında kişinin kendi verisine erişim hakkı ayrı bir hukukçu konusudur. · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: kalite puanına erişim hakkı sorusu → 03-PO avukat paketi A11
   Buradaki karar **ürün/gösterim** kararıdır ("yalnız yönetici görür"); yasal metin tarafı (K1 taslak metinler,
   `01/04` belgeleri) ayrıca ele alınmalı. Bu belge yasal görüş yerine geçmez.
 

@@ -3,11 +3,11 @@
 
 # 08 — AÇIK SORULAR VE KARARA BAĞLANMAYANLAR
 **🔄 YAŞAYAN** (canonical: açık sorular / karar kuyruğu) · bkz. dondurulmuş keşif `unutulmus-niyet-envanteri-2026-08-10.md` (konu çakışması: KVKK / fotoğraf / eşleşme tetikleyicisi)
-> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-09): bu etiket "🔄 YAŞAYAN (canonical: açık sorular)" ↔ aşağıdaki `:5` GÜNCELLEME "canonical açık-karar takibi artık `00-KARAR-TAKIP.md`" = **çift-kaynak** ("AKTİF İŞ KAYNAĞI TEKTİR" kuralıyla çelişir, YN-06). Tek-kaynağa indirme = AN-44 kuyruk işi; karar PO'nun.
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-09): bu etiket "🔄 YAŞAYAN (canonical: açık sorular)" ↔ aşağıdaki `:5` GÜNCELLEME "canonical açık-karar takibi artık `00-KARAR-TAKIP.md`" = **çift-kaynak** ("AKTİF İŞ KAYNAĞI TEKTİR" kuralıyla çelişir, YN-06). Tek-kaynağa indirme = AN-44 kuyruk işi; karar PO'nun. · 🟨 kısmen — ad ayağı (AN-44) yapıldı; kalan: tek kaynağa indirme → YN-06 (🔴 KARAR-51)
 **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler
 
 > **⚠️ GÜNCELLEME (2026-08-23):** Bazı maddeler karara bağlandı — canonical açık-karar takibi artık `00-KARAR-TAKIP.md`.
-> Çözülenler: **K2 OAuth consent · K4 18+ · K5 sunucu konumu → CANLIDA** (2026-08-15). Hâlâ açık (bu belgede): yaş politikası detayı, veri sorumlusu kimliği (K3 ile birleşik, canlı öncesi en son). Bu belge ↔ `unutulmus-niyet-envanteri-2026-08-10` konu çakışması var.
+> Çözülenler: **K2 OAuth consent · K4 18+ · K5 sunucu konumu → CANLIDA** (2026-08-15). Hâlâ açık (bu belgede): yaş politikası detayı, veri sorumlusu kimliği (K3 ile birleşik, canlı öncesi en son). Bu belge ↔ `unutulmus-niyet-envanteri-2026-08-10` konu çakışması var. · 🟨 kısmen — K2/K4/K5 canlıda; kalan: yaş → KARAR-31, veri sorumlusu → KARAR-75, K3 → KARAR-19 (b)
 
 > Bunlar HENÜZ karara bağlanmamış konular. Karar verildikçe ilgili belgeye taşınır + buradan silinir.
 
@@ -19,10 +19,10 @@
 - **Yasal metin incelemesi:** /kvkk, /terms, /gizlilik taslak var; üretim öncesi hukukçu şart (DISC = hassas veriye yakın). ⏳
 
 ## 🟡 ÜRÜN / VİZYON
-- **Gelir/sürdürülebilirlik modeli:** Hangi kanal (sponsor premium / kurumsal partnerlik / hibe / bağış)? MVP sonrası. Prensip: yük kulüplerde değil. ❓
+- **Gelir/sürdürülebilirlik modeli:** Hangi kanal (sponsor premium / kurumsal partnerlik / hibe / bağış)? MVP sonrası. Prensip: yük kulüplerde değil. ❓ · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: gelir kanalı seçimi → KARAR-119
 - **Pilot kulüp/üniversite:** MVP hangi pilotla test edilecek? ❓
 - **İsim detayı:** Sivilkapasite ana marka netleşti; alt-ürün adlandırması (MentiMentor mu başka mı) ince detay. 🟡
-- **Modül önceliklendirme onayı:** Viral/panel/metrik özellikleri "ürün gerçek kullanıcı kazanınca" ertelendi ama kullanıcı bu sırayı açıkça onaylamadı. ⚪
+- **Modül önceliklendirme onayı:** Viral/panel/metrik özellikleri "ürün gerçek kullanıcı kazanınca" ertelendi ama kullanıcı bu sırayı açıkça onaylamadı. ⚪ · ⚪ geçersiz — öncelik sırası KARAR-69 cevabı ve tek kaynak kuyrukla yönetiliyor; ertelenen özellikler tek tek KARAR-103'te (PO teyit listesinde)
 
 ## 🟡 ALGORİTMA / TEKNİK
 - **Sektör ağırlıkları (30/25/25/15/5) nihai mi?** Kullanıcı "reçete harika" dedi ama tek tek onaylamadı. ❓
@@ -34,10 +34,10 @@
 
 ## 🟡 ÖZELLİK / PANEL
 - **Yöneticilik verme akışı (A9):** YENİDEN KURGULANACAK — kod öncesi kullanıcıya sorulacak (söz verildi). Şu an: promote-admin var, max 3 admin, "tüm onaylı kullanıcı listesi" eksik. ❓
-- **Sertifika soru ekleme:** Yönetici ekleyebilmeli mi, yoksa bilinçli kısıt mı? ❓
+- **Sertifika soru ekleme:** Yönetici ekleyebilmeli mi, yoksa bilinçli kısıt mı? ❓ · 🟨 kısmen — ajan gerekçesi yazılı; kalan: kısıtın bilinçli olduğunu PO teyidi → 03-PO #18
 - **DISC/sektör dağılım oranı ayarı (A6):** Hardcoded; istenirse BÜYÜK iş (migration+endpoint+UI). Yapılacak mı? ❓
 - **Etiket ekleme:** Yönetici doğrudan etiket ekleyebilmeli mi (öneri beklemeden)? 🟡 (kullanıcı istedi, kod durumu belirsiz)
-- **Arkadaşın başvurusu:** Canlıdan kaydoldu, "inceleniyor" gördü ama panelde "bekleyen yok". Çözülmedi. GERÇEK KİŞİ bekliyor. b3 membership backfill ile ilgili olabilir. ⏳
+- **Arkadaşın başvurusu:** Canlıdan kaydoldu, "inceleniyor" gördü ama panelde "bekleyen yok". Çözülmedi. GERÇEK KİŞİ bekliyor. b3 membership backfill ile ilgili olabilir. ⏳ · ⚪ geçersiz — 2026-08-02 tarihli tekil operasyonel not (bilanço 🗑️); bekleyen kurum başvuruları listesi kodda var (`backend/src/routes/platformRoutes.ts:49`) (PO teyit listesinde)
 - **Onay bildirimi maili:** Kurum onaylanınca/reddedilince başvurana mail gidiyor mu? ❓
 
 ## 🟡 ALTYAPI
@@ -49,11 +49,11 @@
 - **Fotoğraf ne zaman ZORUNLU olacak?** Şu an opsiyonel (altyapı hazır). Zorunluluk tarihi/koşulu belirsiz. ❓
 - **Kart DISC gösterimi:** harf mi (D/I/S/C), renk mi, kelime/arketip mi? Kart tasarımında karara bağlanacak. ❓
 - **Sayfa başına kart sayısı:** 15 / 18 / 20 — kesin sayı? ❓
-- **DISC renk TON kararı (light):** hâlâ açık (bkz. 06 D22) — kart rozetini de etkiler. ❓
+- **DISC renk TON kararı (light):** hâlâ açık (bkz. 06 D22) — kart rozetini de etkiler. ❓ · ⚪ geçersiz — renk tonu ajanın teknik kararı; açık tema kontrastı AJ-07 ile düzeltildi (PO teyit listesinde)
 
 ## 🟡 RETENTION / YÖNETİCİ PANELİ (2026-08-02 geç oturum)
-- ~~**Yönetici paneli çekirdek metrikleri:**~~ İlk set YAPILDI (mentörsüz menti / ölü eşleşme / pasif üye / arz-talep — health-metrics). Genişletme (görüşme sayıları, onboarding-%) hâlâ açık. 🟡
-- **Otomatik-nudge (KVKK/rıza):** Pasif üyelere OTOMATİK toplu re-engagement maili gönderilsin mi? Elle nudge yapıldı; otomatik = istenmeden mail (rıza/opt-out tasarımı gerekir) → bilinçli ERTELENDİ. Karar + tasarım ürün sahibinde. ❓
+- ~~**Yönetici paneli çekirdek metrikleri:**~~ İlk set YAPILDI (mentörsüz menti / ölü eşleşme / pasif üye / arz-talep — health-metrics). Genişletme (görüşme sayıları, onboarding-%) hâlâ açık. 🟡 · 🟨 kısmen — ilk metrik seti yapıldı; kalan: tamamlanan görüşme sayısı + onboarding tamamlama % → AJ-78
+- **Otomatik-nudge (KVKK/rıza):** Pasif üyelere OTOMATİK toplu re-engagement maili gönderilsin mi? Elle nudge yapıldı; otomatik = istenmeden mail (rıza/opt-out tasarımı gerekir) → bilinçli ERTELENDİ. Karar + tasarım ürün sahibinde. ❓ · 🟨 kısmen — elle hatırlatma var; kalan: otomatik hatırlatma kararı → KARAR-120
 - **Pasif/ölü eşiği:** pasif=30g, ölü-eşleşme=14g default kondu — bu eşikler doğru mu, tenant başına ayarlanabilir mi (query'de var, UI'de yok)? ❓
 - **(İdeal) Gerçek kullanıcılarla görüşme — ÜÇ TARAF:** yönetici + mentör + menti. Üçü için de gerçek görüşme, persona taslaklarını (üç sevdirme belgesi) doğrular. Şu an hepsi "eğitimli taslak". ⚪
 - Referanslar (3 persona seti): docs/raporlar/persona/yonetici-persona-ve-metrikler-2026-08-02.md · mentor-persona-ve-sevdirme-2026-08-02.md · menti-persona-ve-sevdirme-2026-08-02.md.

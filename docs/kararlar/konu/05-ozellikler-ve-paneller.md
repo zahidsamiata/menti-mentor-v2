@@ -51,13 +51,13 @@ Backend büyük ölçüde hazırdı, eksik olan UI'dı. Hepsi tenant-izole + KVK
 - 4 KPI + Erken Uyarı (Aktif Yolculuklar, Boştaki Kapasite, Eşleşme Süresi, NPS).
 
 ## BEKLEYEN İŞLER (detay: 09-DURUM.md)
-- Panel PR'ları (#26/#29) merge — kodlandı, test bekliyor.
+- ~~[ESKİ · 2026-09-27] Panel PR'ları (#26/#29) merge — kodlandı, test bekliyor.~~ ⚠️ GÜNCELLEME (2026-09-27): backend #26 ve #29 main'e merge edildi — kanıt: backend `git log origin/main` (#26 `dacc171`, #29 `975c03f`) · doğrulama: sahipsiz-kalanlar-2026-09-27
 - Sertifika + öğrenme yolculuğu uçtan uca test.
 - Onay bildirimi maili (kurum onaylanınca başvurana gidiyor mu belirsiz).
 - Yöneticilik verme akışı (A9) — YENİDEN KURGULANACAK, kod öncesi kullanıcıya sorulacak (söz verildi).
 - Geri bildirim mekanizması — her sayfada "hata/öneri bildir" → mail (Resend). Takip sistemi şimdilik yok.
 
 ## AÇIK SORULAR (bkz. 08)
-- Sertifika soru ekleme: yönetici ekleyebilmeli mi, bilinçli kısıt mı? ❓
+- Sertifika soru ekleme: yönetici ekleyebilmeli mi, bilinçli kısıt mı? ❓ · 🟨 kısmen — gerekçe taslağı ajan tarafından yazıldı (`docs/kararlar/sertifika-soru-standardi-gerekce-2026-09-21.md`); kalan: PO'nun tek cümle teyidi → 03-PO #18
 - DISC/sektör dağılım oranı ayarı (A6): hardcoded, büyük iş, yapılacak mı? ❓
 - Arkadaşın başvurusu: canlıdan kaydoldu, panelde görünmedi — çözülmedi (b3 membership backfill ile ilgili olabilir). ⏳
