@@ -37,6 +37,9 @@ export interface MentorMatch {
   // kart ASLA gizlenmez. isBookable=false → "Randevu Al" gösterilmez, yalnız "Mesaj" kalır.
   isFaded: boolean;
   isBookable: boolean;
+  // AJ-66 · KARAR 4: mentör herhangi bir kurumda sertifikalı mı. Yalnız true'da "✓ Sertifikalı"
+  // rozeti gösterilir; false'ta hiçbir etiket yok (olumsuz etiketleme yapılmaz).
+  isCertified: boolean;
 }
 
 export interface MentorMatchesResponse {

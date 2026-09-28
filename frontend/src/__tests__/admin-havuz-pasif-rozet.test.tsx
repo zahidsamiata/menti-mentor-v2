@@ -4,7 +4,10 @@
  *
  * Önceden rozet yalnız onay durumundan türüyordu; `isActive=false` onaylı kişi "Onaylı" görünüyordu.
  * - saf yardımcı: pasif → "Pasif" (onay durumundan önce gelir); etkin → onay rozeti;
- * - iki sayfa: pasif kişinin satırında "Pasif" var, etkin kişide yok (negatif).
+ * - iki sayfa: pasif kişinin kartında "Pasif" var, etkin kişide yok (negatif).
+ *
+ * AJ-63 güncellemesi: havuz tablodan karta geçti (admin KARAR 2) → kişinin kapsayıcısı `tr` yerine
+ * `article` (AdminPoolCard). Beklentiler aynen korunuyor.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
@@ -68,16 +71,16 @@ describe.each([
     ];
   });
 
-  it('isActive=false satırında "Pasif" rozeti var, "Onaylı" yok', async () => {
+  it('isActive=false kartında "Pasif" rozeti var, "Onaylı" yok', async () => {
     render(<Page />);
-    const row = (await screen.findByText('Pasif Kişi')).closest('tr') as HTMLElement;
+    const row = (await screen.findByText('Pasif Kişi')).closest('article') as HTMLElement;
     expect(within(row).getByText('Pasif')).toBeInTheDocument();
     expect(within(row).queryByText('Onaylı')).not.toBeInTheDocument();
   });
 
-  it('negatif: isActive=true satırında "Pasif" yok, onay rozeti var', async () => {
+  it('negatif: isActive=true kartında "Pasif" yok, onay rozeti var', async () => {
     render(<Page />);
-    const row = (await screen.findByText('Etkin Kişi')).closest('tr') as HTMLElement;
+    const row = (await screen.findByText('Etkin Kişi')).closest('article') as HTMLElement;
     expect(within(row).queryByText('Pasif')).not.toBeInTheDocument();
     expect(within(row).getByText('Onaylı')).toBeInTheDocument();
   });

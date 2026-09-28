@@ -6,19 +6,18 @@
  * Veri akışı:
  *  useApiClient → adminApi.listUsers({ role: 'MENTI', page }) → useQuery → AdminUser[]
  *
- * Salt-okunur liste + sayfalama. Eşleşme durumu burada gösterilmez (yalınlık).
+ * Kart ızgarası (admin KARAR 2, AJ-63 — kart: AdminPoolCard) + sayfalama. Eşleşme durumu burada
+ * gösterilmez (yalınlık).
  */
 
 import { useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
-import { DiscBadge } from '@/components/atoms/DiscBadge';
-import { userStatusBadge } from '@/lib/enumLabels';
+import { AdminPoolCard } from '@/components/organisms/AdminPoolCard';
 
 export default function MentiHavuzuPage() {
   const api = useApiClient();
@@ -70,114 +69,15 @@ export default function MentiHavuzuPage() {
         </div>
       )}
 
-      {/* Tablo */}
+      {/* Kart ızgarası — admin KARAR 2 (AJ-63): mobilde 1, sm 2, xl 3 sütun. */}
       {!isLoading && data && data.items.length > 0 && (
-        <Card className="overflow-hidden p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="border-b border-border bg-muted/50">
-                <tr>
-                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Ad</th>
-                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">E-posta</th>
-                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">DISC</th>
-                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Sektörler</th>
-                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Durum</th>
-                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Öğrenme Yolculuğu</th>
-                  <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kayıt</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {data.items.map((user) => {
-                  const sectorTags = user.sectorTags ?? [];
-                  // Pasif > onay durumu (AJ-65, gerekçe: enumLabels.userStatusBadge).
-                  const approval = userStatusBadge(user);
-                  const registeredAt = new Date(user.createdAt).toLocaleDateString('tr-TR');
-
-                  return (
-                    <tr key={user.id} className="transition-colors hover:bg-muted/30">
-                      {/* Ad */}
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold">
-                            {user.fullName[0]?.toUpperCase()}
-                          </div>
-                          <span className="font-medium truncate max-w-[180px]">{user.fullName}</span>
-                        </div>
-                      </td>
-
-                      {/* E-posta */}
-                      <td className="px-4 py-3 text-muted-foreground truncate max-w-[220px]">
-                        {user.email}
-                      </td>
-
-                      {/* DISC — #12 çoklu harf (ör. "Di"); birincil harfe göre renk. */}
-                      <td className="px-4 py-3">
-                        <DiscBadge discLetters={user.discLetters} discType={user.discType} />
-                      </td>
-
-                      {/* Sektörler */}
-                      <td className="px-4 py-3 max-w-[200px]">
-                        {sectorTags.length > 0 ? (
-                          <span className="text-xs text-muted-foreground">
-                            {sectorTags.slice(0, 2).join(', ')}
-                            {sectorTags.length > 2 && ` +${sectorTags.length - 2}`}
-                          </span>
-                        ) : (
-                          <span className="text-muted-foreground">—</span>
-                        )}
-                      </td>
-
-                      {/* Durum + onay/red izi (İş 2) + red gerekçesi (İş 3) — yalnız admin */}
-                      <td className="px-4 py-3">
-                        <Badge variant={approval.variant} className="text-xs">
-                          {approval.label}
-                        </Badge>
-                        {user.approvalStatus === 'APPROVED' && user.approvedAt && (
-                          <p className="mt-1 text-[11px] text-muted-foreground">
-                            Onaylayan: {user.approvedByName ?? 'bir yönetici'} · {new Date(user.approvedAt).toLocaleDateString('tr-TR')}
-                          </p>
-                        )}
-                        {user.approvalStatus === 'REJECTED' && (
-                          <>
-                            {user.rejectedAt && (
-                              <p className="mt-1 text-[11px] text-muted-foreground">
-                                Reddeden: {user.rejectedByName ?? 'bir yönetici'} · {new Date(user.rejectedAt).toLocaleDateString('tr-TR')}
-                              </p>
-                            )}
-                            {user.rejectionReason && (
-                              <p
-                                className="mt-0.5 text-[11px] italic text-muted-foreground max-w-[180px] truncate"
-                                title={user.rejectionReason}
-                              >
-                                “{user.rejectionReason}”
-                              </p>
-                            )}
-                          </>
-                        )}
-                      </td>
-
-                      {/* Öğrenme Yolculuğu — #34: tamamlandıysa tarih (✓), yoksa "—". Retention göstergesi. */}
-                      <td className="px-4 py-3 text-xs whitespace-nowrap">
-                        {user.learningJourneyCompletedAt ? (
-                          <Badge variant="success" className="text-xs">
-                            ✓ {new Date(user.learningJourneyCompletedAt).toLocaleDateString('tr-TR')}
-                          </Badge>
-                        ) : (
-                          <span className="text-muted-foreground" title="Öğrenme yolculuğu henüz tamamlanmadı">—</span>
-                        )}
-                      </td>
-
-                      {/* Kayıt */}
-                      <td className="px-4 py-3 text-xs text-muted-foreground whitespace-nowrap">
-                        {registeredAt}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+        <ul role="list" aria-label="Menti listesi" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {data.items.map((user) => (
+            <li key={user.id}>
+              <AdminPoolCard user={user} variant="menti" />
+            </li>
+          ))}
+        </ul>
       )}
 
       {/* Sayfalandırma */}
