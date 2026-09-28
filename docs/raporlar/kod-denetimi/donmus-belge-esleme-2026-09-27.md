@@ -246,3 +246,9 @@ Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`).
 | docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:46 | Eski kvkkConsentAt alanının kaldırılması | 🟨 S3 → AJ-88 (platform göstergesi) + eski alan kaldırma silme protokolü adayı | tam | Eski kvkkConsentAt (User/Tenant) alanı kaldırılması ayrı/sonraki iş |
 | docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:88 | G1-08 OAuth rıza gösterimi + tipli yazım | 🟨 S2 → AN-30 · KARAR-96 · 03-PO #17 | tam | G1-08: OAuth rıza gösterimi + tipli yazım |
 | docs/kararlar/konu/chat-v1-teslim.md:67 | VisibilityOptIn.requestMessage ölü alan | 🟨 S3 → silme protokolü adayı (E-4 karantina; G10-02 ile aynı) | tam | kolon DROP ayrı PO-onaylı temizlik turu |
+| docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:57 | G1-24 → AJ-73 | ✅ yapıldı — AJ-73 · PR #213/#406 · 2026-09-28 | tam | OAuth accessToken URL sorgusunda |
+| docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md:391 | G1-24 → AJ-73 | ✅ yapıldı — AJ-73 · PR #213/#406 · 2026-09-28 | tam | OAuth erişim token'ı URL sorgusunda |
+| docs/kararlar/00-KART-INDEKSI.md:53 | G1-24 → AJ-73 | ✅ yapıldı — AJ-73 · PR #213/#406 · 2026-09-28 | tam | OAuth token URL'de |
+| docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:58 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting oryantasyon kilidi kurum filtresiz |
+| docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md:404 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting oryantasyon kilidi tenant-kapsamsız findUnique |
+| docs/kararlar/00-KART-INDEKSI.md:54 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting kapsamsız findUnique |
