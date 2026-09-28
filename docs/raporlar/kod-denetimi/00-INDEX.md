@@ -5,13 +5,14 @@
 
 Kod/ürün denetimi (belge ne diyor ↔ kod ne yapıyor) — `oz-denetim/` ile karıştırma.
 
-## İçerik (13)
+## İçerik (14)
 - `bekci-istisna.txt` — belge-bekci.sh kural (h) istisnaları — "BITTI işin kaynağı açık" UYARISI bu satırlar için verilmez.
 - `bitti-dogrulama-2026-09-27.md` — BITTI SON DOĞRULAMA — 2026-09-27
 - `bitti-dogrulama-partiler/` — alt klasör (kendi `00-INDEX.md`'si ya da giriş dosyası var)
 - `degerlendirme-test-soru-envanteri-2026-08-15.md` — Değerlendirme / Test / Soru Sistemi — Envanter Raporu (2026-08-15)
 - `donmus-belge-esleme-2026-09-27.md` — Dondurulmuş belge eşlemesi — 2026-09-27
 - `eksikler-derinlestirilmis-2026-08-15.md` — Değerlendirme/Test Sistemi — Derinleştirilmiş Eksik Analizi (2026-08-15)
+- `eski-onay-dogrulama-2026-09-28.md` — 📸 Eski ✅ iddiaları — kodda var mı? (GÖREV 2.2: 415 aday, 140 satır koda karşı: 135 VAR · 5 KISMEN · 0 YOK; AJ adayı, 03-PO kabul testi, test kovası)
 - `kvkk-veri-aktarim-envanteri-2026-08-25.md` — KVKK Veri Aktarım Envanteri — kod-kanıtlı (2026-08-25)
 - `proje-analizi-kapsamli-denetim-2026-08-22.md` — Proje Analizi — Kapsamlı Denetim Raporu
 - `sahipsiz-kalanlar-2026-09-27.md` — 📸 Sahipsiz kalanlar — GÖREV 4 (259 kalem: sınıf, kanıt, yeni AJ/KARAR/03-PO sahipleri)

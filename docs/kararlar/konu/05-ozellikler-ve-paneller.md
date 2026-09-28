@@ -6,7 +6,7 @@
 **Son güncelleme:** 2026-08-02 · Kaynak: mail/panel chat'i, psikometri chat'i, bugünkü oturum
 
 ## PLATFORM ADMIN PANELİ (mail/panel chat'inde kodlandı)
-- **Kapsam B (Orta):** Kurum detayı + Mentörler/Mentiler/Görüşmeler listeleri + DISC dağılımı, MEVCUT veriyle, şema değişikliği YOK. 🟢✅ (kodlandı, merge edilmedi)
+- **Kapsam B (Orta):** Kurum detayı + Mentörler/Mentiler/Görüşmeler listeleri + DISC dağılımı, MEVCUT veriyle, şema değişikliği YOK. 🟢✅ (kodlandı, merge edilmedi) · doğrulama 09-28: `frontend/src/app/platform/tenants/[id]/page.tsx:27-28` · `frontend/src/app/platform/tenants/[id]/_components/DiscSummary.tsx`
 - Mimari C'ye açık (modüler: KpiCards/MembersTable/MeetingsTable/DiscSummary) → ileride grafik/export/aktiflik eklenebilir.
 - Tasarım: üstte özet+KPI, altta sekmeler (Üyeler/Görüşmeler/Analizler), Üyeler açık.
 - Güvenlik: TAM (audit log + KVKK maskeleme + rate-limit + token domain ayrımı).
@@ -17,18 +17,18 @@
 
 ## 5 ADMIN PANELİ (bugünkü oturumda kodlandı — PR #32 / #26)
 Backend büyük ölçüde hazırdı, eksik olan UI'dı. Hepsi tenant-izole + KVKK maskeli:
-- **A2 Mentör havuzu** ✅ (mevcut endpoint `GET /api/users?role=MENTOR`).
-- **A3 Menti havuzu** ✅ (aynı endpoint).
-- **A4 Sertifika sonuç panosu** ✅ (yeni endpoint; TenantMembership certScore/status/attempts).
-- **A1 Eşleşme paneli** ✅ (Match DB'ye persist ediliyor — scoring.service.ts:137 doğrulandı).
-- **A7 Branding düzenleme** ✅ (logoURL XSS koruması: https-only + güvenli img render).
+- **A2 Mentör havuzu** ✅ (mevcut endpoint `GET /api/users?role=MENTOR`). · doğrulama 09-28: `frontend/src/app/(admin)/admin/mentor-havuzu/page.tsx`
+- **A3 Menti havuzu** ✅ (aynı endpoint). · doğrulama 09-28: `frontend/src/app/(admin)/admin/menti-havuzu/page.tsx`
+- **A4 Sertifika sonuç panosu** ✅ (yeni endpoint; TenantMembership certScore/status/attempts). · doğrulama 09-28: `backend/src/routes/adminRoutes.ts:55` · `frontend/src/app/(admin)/admin/sertifika-sonuclari/`
+- **A1 Eşleşme paneli** ✅ (Match DB'ye persist ediliyor — scoring.service.ts:137 doğrulandı). · doğrulama 09-28: `backend/src/routes/adminRoutes.ts:54` · `backend/src/services/scoring.service.ts:141`
+- **A7 Branding düzenleme** ✅ (logoURL XSS koruması: https-only + güvenli img render). · doğrulama 09-28: `backend/src/services/logoUrl.ts` · `frontend/src/app/(admin)/admin/branding/`
 
-## TAKVİM / FEEDBACK (psikometri chat'i) 🟢✅
+## TAKVİM / FEEDBACK (psikometri chat'i) 🟢✅ · doğrulama 09-28: `frontend/src/components/organisms/MeetingFeedbackCard.tsx` · `backend/prisma/schema.prisma:564,1171-1173`
 - **Availability** (haftalık şablon: weekday+HH:mm) + **Meeting** (format ONLINE/IN_PERSON/PHONE, startsAt/endsAt UTC, status).
 - **Bağlamsal feedback:** Görüşme endsAt'ı geçince sağ altta MeetingFeedbackCard (2 saatlik pencere; feedbackPrompted çift-tetiklemeyi önler).
 - **Kademeli feedback:** Emoji (rapportScore) → Çip (P1-P5) → Açık uç; slider (progressScore); dipte "farklı birini dene" (earlyExit, suçlamasız).
 - Bağlam: MeetingContext/MeetingProvider, meetingController. ~~[ESKİ · düzeltildi 2026-08-14] UYARI: timezone bug'ı tespit edildi (UTC vs Europe/Istanbul), düzeltilmedi. ⏳~~ (bkz. alttaki ✅ GÜNCELLEME)
-  - **✅ GÜNCELLEME (2026-08-14): DÜZELTİLDİ** — commit `6a30f21` (bookMeeting UTC/Istanbul tutarsızlığı giderildi). Yukarıdaki "düzeltilmedi ⏳" ifadesi BAYAT.
+  - **✅ GÜNCELLEME (2026-08-14): DÜZELTİLDİ** — commit `6a30f21` (bookMeeting UTC/Istanbul tutarsızlığı giderildi). Yukarıdaki "düzeltilmedi ⏳" ifadesi BAYAT. · doğrulama 09-28: `backend/src/controllers/meetingController.ts:521`
 
 ## ÖĞRENME YOLCULUĞU / OYUNLAŞTIRMA
 - Keşif motoru (learningJourney.service.ts, 550 satır): Durum→Seçenek→Outcome+Feedback.

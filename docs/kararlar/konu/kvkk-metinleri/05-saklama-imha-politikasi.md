@@ -16,13 +16,13 @@
 
 | Veri kategorisi | Tablo | Kod gerçeği (şu an) | Otomatik imha? | [PO/HUKUKÇU ONAYI] önerilen süre + gerekçe |
 |---|---|---|---|---|
-| Sistem/güvenlik kaydı | `SystemLog` | 90 gün sonra otomatik silinir | ✅ VAR (haftalık cron) | 90 gün (mevcut — güvenlik/iz sürme için makul) |
+| Sistem/güvenlik kaydı | `SystemLog` | 90 gün sonra otomatik silinir | ✅ VAR (haftalık cron) | 90 gün (mevcut — güvenlik/iz sürme için makul) · doğrulama 09-28: `backend/src/services/gdprService.ts:414` · `backend/src/services/cronScheduler.ts:18` |
 | Kimlik/profil/psikometrik | `User`, `UserProfile`, `UserResponse` | Hesap silme/anonimleştirmeye kadar (kullanıcı-tetikli) | ❌ YOK | Hesap kapanışından sonra **[öneri: X ay]** anonimleştirme — gerekçe: ihtilaf zamanaşımı süresince asgari saklama |
 | Mesaj içeriği | `Message`/`Conversation` | Hesap kapanışında **yazarın içeriği `[silindi]`** olur (karşı tarafınki + sohbet iskeleti kalır) — madde 93 (PR bekliyor) | ❌ süre-bazlı YOK | **[öneri: X ay]** genel saklama; hesap kapanışında yazarın içeriği anonimleştirilir |
 | Geri bildirim | `FeedbackLog`, `Feedback` | ~~Süresiz (kodda "3 yıl" yorumu ama uygulanmamış)~~ ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında 3-yıl purge UYGULANMIŞ — `gdprService.ts:370` 3-yıl purge + `cronScheduler.ts:89` haftalık cron VAR. Metin "süresiz/uygulanmamış" diyor; kod otomatik purge yapıyor → iki taraf çelişik, metin bayat. Kanıt: `gdprService.ts:370`, `cronScheduler.ts:89`. Karar PO'nun. | ❌ YOK | **[öneri: 3 yıl]** sonra anonimleştirme — gerekçe: program kalite analizi + zamanaşımı |
 | Görüşme/randevu | `Meeting`, `MeetingCheckIn` | Süresiz; hesap silmede kalıyor | ❌ YOK | **[öneri: X ay]** anonimleştirme |
 | Oturum/şifre jetonu | `RefreshToken`, `PasswordResetToken` | `expiresAt`'e kadar; süre-bazlı otomatik purge yok | ⚠️ kısmi | Süresi dolanların düzenli temizliği (iş maddesi) |
-| Taslak kurum başvurusu | `Tenant`+`User` (taslak) | 96 saat taslak kalırsa silinir | ✅ VAR | mevcut |
+| Taslak kurum başvurusu | `Tenant`+`User` (taslak) | 96 saat taslak kalırsa silinir | ✅ VAR | mevcut · doğrulama 09-28: `backend/src/services/cronScheduler.ts:120,195` |
 
 ## Mevcut imha yetenekleri (kod — 2026-08-26 teyidi, madde 93 genişletildi, PR bekliyor)
 - **Anonimleştirme (`anonymizeUser`) TEMİZLER:** ad, e-posta (anonim değere çevrilir), biyografi/uzmanlık, CV (gönüllülük/proje/eğitim), **sosyal medya bağlantıları (LinkedIn/Instagram), avatar bağlantısı**, kişilik verileri (DISC/mizaç/enneagram/"aha" kartı), test yanıtları, kurum-profil kişilik alanları. **YENİ (madde 93):** bağlı **serbest-metin** (yazarın **mesaj içeriği → `[silindi]`**, görüşme not/telefon/adres, geri-bildirim/talep/şikayet serbest metinleri, sözleşme menti-hedefi), **yüklenen fotoğrafın fiziksel dosyası** (diskten silinir), **oturum/erişim jetonları** (RefreshToken/PasswordResetToken silinir + üyelik pasife alınır → eski token'la işlem yapılamaz).

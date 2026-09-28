@@ -6,7 +6,7 @@
 **Son güncelleme:** 2026-08-28 (Faz 1b: G7-12 H1 uygulandı + G7-13 yön canonical'landı) · önceki: 2026-08-02 (kart tasarımı + foto + tema/landing) · Kaynak: mail/panel chat'i
 
 ## TEMA (dark/light)
-- **Toggle var:** İsteyen light'a geçebilir. Altyapı kuruldu (PR #32: .dark class, ThemeProvider, localStorage, FOUC önleme, ThemeToggle butonu). 🟢✅
+- **Toggle var:** İsteyen light'a geçebilir. Altyapı kuruldu (PR #32: .dark class, ThemeProvider, localStorage, FOUC önleme, ThemeToggle butonu). 🟢✅ · doğrulama 09-28: `frontend/src/providers/ThemeProvider.tsx` · `frontend/src/app/layout.tsx:26`
 - **Landing dark/light: CANLI-SONRASINA ERTELENDİ (2026-08-02 geç oturum'da güncellendi).** 🟢 · 🟨 kısmen — karar yazılı (canlı-sonrası); kalan: landing tema + UX paketi kodu → AJ-86
   - Eski karar: "Landing HER ZAMAN DARK kalır". Yeni karar: landing ileride dark/light **seçilebilir yapılabilir AMA canlı-öncesi değil**.
   - Gerekçe (tema-durum-ve-landing-maliyeti raporu): landing'i seçilebilir yapmak ~256 hardcoded nokta / ~10-13 saat / **orta risk**. Şu an öncelik değil.
@@ -17,7 +17,7 @@
 - **M² logo dokunulmayacak** (beğenildi). 🟢
 
 ## TEMA — KALAN İŞLER (⏳)
-- **D21:** Toggle admin/platform nav'a eklenmeli. 🟢✅ **TAMAMLANDI** (2026-08-02, frontend `188aad5`).
+- **D21:** Toggle admin/platform nav'a eklenmeli. 🟢✅ **TAMAMLANDI** (2026-08-02, frontend `188aad5`). · doğrulama 09-28: `frontend/src/app/(admin)/layout.tsx:99` · `frontend/src/app/platform/dashboard/page.tsx:234`
 - **D22:** DISC renkleri light'ta WCAG FAIL (kontrast 1.8–3.9:1, olması gereken 4.5). Sarı/gri beyaz zeminde soluk. 5 dosya ~7 renk, 600/700 tonuna çekilmeli. · ✅ yapıldı — AJ-07 · PR çatı #359 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27
 - **D23:** Platform admin rozetleri light'ta koyu leke (koyu-alfa tint), light varyant gerekli.
 - **🔴 KARAR BEKLİYOR:** DISC renk TON kararı kullanıcının gözünden verilecek — light'ta henüz onaylanmadı (dashboard'lar çöktüğü için görülemedi, sonra seed geldi ama tema light test edilmedi). · ⚪ geçersiz — renk tonu kural gereği ajanın teknik kararı (CLAUDE.md § KARAR AYRIMI); açık tema DISC tonları AJ-07 ile WCAG AA'ya göre seçildi (`frontend/src/components/atoms/DiscBadge.tsx`) (PO teyit listesinde)
@@ -25,7 +25,7 @@
 ## LANDING
 - **Slogan değişikliği** (mail/panel chat'i): Eski "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin" ZAYIF → yeni slogan.
   - ~~[ESKİ · 2026-08-28] yeni H1 "Mentörlük programınızı doğru eşleşmelerle, zahmetsizce yönetin." + alt "DISC davranış modeline göre mentör ve mentileri eşleştirin, tüm süreci tek panelden takip edin." 🟢 ⏳ (karar verildi, uygulanmadı)~~
-  - ✅ **GÜNCELLEME (2026-08-28, G7-12, Faz 1b PR):** H1 **UYGULANDI** → `HeroSection.tsx` H1 artık **"Mentörlük programınızı zahmetsizce yönetin"** (PO'nun son/kısa metni; "doğru eşleşmelerle" ibaresi çıkarıldı). **Alt metin (subtitle) PO'ca KESİNLEŞMEDİ → DOKUNULMADI** (mevcut "DISC davranış modeline dayalı…" alt metni kod'da duruyor; kesinleşince ayrı iş). Kanıt: `HeroSection.tsx:38-45`.
+  - ✅ **GÜNCELLEME (2026-08-28, G7-12, Faz 1b PR):** H1 **UYGULANDI** → `HeroSection.tsx` H1 artık **"Mentörlük programınızı zahmetsizce yönetin"** (PO'nun son/kısa metni; "doğru eşleşmelerle" ibaresi çıkarıldı). **Alt metin (subtitle) PO'ca KESİNLEŞMEDİ → DOKUNULMADI** (mevcut "DISC davranış modeline dayalı…" alt metni kod'da duruyor; kesinleşince ayrı iş). Kanıt: `HeroSection.tsx:38-45`. · doğrulama 09-28: `frontend/src/app/_sections/HeroSection.tsx:37-43`
   - Slogan yöneticiye (karar verici), alt metin herkese (mentör/menti de landing'e gelir). "yüzlerce ilişki" → "tüm süreç".
 - **Landing UX paketi (kodlanmadı ⏳):** tooltip metnin üstüne biniyor + hover köprüsü yok + kaynak linkleri tıklanamıyor; "i" ikonu keşfedilemez (koyu zeminde soluk); düşük kontrast gri metinler (WCAG); SIFIR-etikette sıfır-olmayan skor çelişkisi (AlgorithmBento — mantık hatası, öncelikli); mobil test.
 
