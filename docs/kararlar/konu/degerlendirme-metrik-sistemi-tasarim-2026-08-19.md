@@ -215,9 +215,9 @@ Salt-okuma keşif + tek tasarım belgesi. **SIFIR** kod/migration/DB/seed. Açı
 PR olarak açıldı, **MERGE EDİLMEDİ**. Sıradaki adımı PO seçer (Aşama 1'e girmeden önce açık merge kuyruğunu
 temizlemek dahil).
 
-> **⚡ GÜNCELLEME (2026-08-19, merge turu) — AŞAMA 1 ✅ MERGED, CANLIDA:** backend #48 (→ backend main `b5f4b88`) +
+> **⚡ GÜNCELLEME (2026-08-19, merge turu) — AŞAMA 1 ✅ MERGED, CANLIDA:** backend #48 (→ backend main `b5f4b88`) + · doğrulama 09-28: `backend/src/services/cronScheduler.ts:490` · `backend/src/services/scoring.ts:169` · `backend/src/controllers/adminController.ts:422`
 > çatı #100 (→ çatı main `ef2b995`, pointer senkron) merge edildi; iki main CI yeşil → aşağıda "bağlanan" kısımlar
-> autodeploy ile CANLIDA. Aşağıya "PR'da, MERGE OLMADI" olarak yazılmıştı; artık merged. Aşama 2/3 kapsamı değişmedi (açık).
+> autodeploy ile CANLIDA. Aşağıya "PR'da, MERGE OLMADI" olarak yazılmıştı; artık merged. Aşama 2/3 kapsamı değişmedi (açık). · doğrulama 09-28: `backend/src/services/cronScheduler.ts:490` · `backend/src/services/scoring.ts:169` · `backend/src/controllers/adminController.ts:422`
 >
 > **⚡ GÜNCELLEME (2026-08-19) — AŞAMA 1 UYGULANDI (PR'da, MERGE OLMADI):** backend **#48** + çatı **#100**.
 > **Bağlanan (migration'sız):** (1) kalite puanı `TenantMembership.qualityMultiplier`'a kalıcı yazım (event-driven,

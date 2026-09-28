@@ -43,7 +43,7 @@
   > Eski "açık PR" katmanları (her turun tarihsel izi) → `docs/arsiv/09-DURUM-gecmis-katmanlar-2026-08-19.md` (C bölümü).
 - **İzole test DB:** `backend/.env.test` + `assertTestDatabase` guard VAR (lokal `verify` güvenli).
 
-## ✅ #7 AŞAMA 1 — DEĞERLENDİRME/METRİK ÖLÜ UÇLARINI BAĞLA — MERGED, CANLIDA (2026-08-19)
+## ✅ #7 AŞAMA 1 — DEĞERLENDİRME/METRİK ÖLÜ UÇLARINI BAĞLA — MERGED, CANLIDA (2026-08-19) · doğrulama 09-28: `backend/src/services/cronScheduler.ts:490` · `backend/src/services/scoring.ts:169` · `backend/src/controllers/adminController.ts:422`
 > **⚡ GÜNCELLEME (2026-08-19, merge turu):** ~~PR'DA (MERGE OLMADI)~~ → **MERGED, canlıda.** Backend **#48** → backend main `b5f4b88`;
 > çatı **#100** → çatı main `ef2b995`; merge sırasında pointer backend main HEAD `b5f4b88`'e bump edildi (ileri-sarım teyitli: `6b84e27` ANCESTOR `b5f4b88`); pointer senkron; iki main CI yeşil. Aşağıdaki bağlanan uçlar artık CANLIDA (autodeploy). MERGE EDİLDİ.
 >
@@ -59,7 +59,7 @@
 - **Doğrulama:** backend PR #48 CI **yeşil** (entegrasyon+unit CI'da geçti); FE lokal tsc ✓ · vitest 38/38 ✓ · build ✓. Lokal backend entegrasyon testleri TEST_DATABASE_URL guard'ıyla durur (canlıya truncate yok) — asıl kanıt CI.
 - **Merge sırası (PO için):** backend #48 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı #100 merge.
 
-## ✅ #37 KURUM DÜZELTME-İSTE — MERGED, CANLIDA (2026-08-19)
+## ✅ #37 KURUM DÜZELTME-İSTE — MERGED, CANLIDA (2026-08-19) · doğrulama 09-28: `backend/prisma/schema.prisma:178,227` · `backend/src/routes/platformRoutes.ts:53`
 > **⚡ GÜNCELLEME (2026-08-19, merge turu):** ~~PR'DA (MERGE OLMADI)~~ → **MERGED, canlıda.** Backend **#50** → backend main `ba92dfa`;
 > çatı **#104** → çatı main `2639e2e` (pointer backend main HEAD `ba92dfa`'ya bump, ileri-sarım teyitli: `decfc75` ANCESTOR `ba92dfa`); pointer senkron; iki main CI yeşil. Kod gerçeği main'de + canlı DB'de (enum+kolon) teyitli. Aşağıdaki akış CANLIDA (autodeploy). **Mail GÖNDERİM HÂLÂ KAPALI** (env açılmadı). MERGE EDİLDİ.
 >
@@ -73,7 +73,7 @@
 - **Bulgu:** iki paralel kurum-doğrulama yolu (`/api/platform/*` FE-kullanımı ↔ `/api/super-admin/verify` testler). Pre-existing duplikasyon, birleştirilmedi.
 - **Merge sırası (PO için):** backend #50 merge → çatı pointer bump → çatı PR merge.
 
-## ✅ KÜÇÜK İŞLER PAKETİ — #34 + #7(A) + #9-gösterim — MERGED, CANLIDA (2026-08-19)
+## ✅ KÜÇÜK İŞLER PAKETİ — #34 + #7(A) + #9-gösterim — MERGED, CANLIDA (2026-08-19) · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
 > **⚡ GÜNCELLEME (2026-08-19, merge turu):** ~~PR'DA (MERGE OLMADI)~~ → **MERGED, canlıda.** Backend **#49** → backend main `18cfc42`;
 > çatı **#102** → çatı main `0fd4942` (pointer backend main HEAD `18cfc42`'ye bump, ileri-sarım teyitli: `8d1d1dd` ANCESTOR `18cfc42`); pointer senkron; iki main CI yeşil. Kod gerçeği main'de doğrulandı. Aşağıdaki uçlar artık CANLIDA (autodeploy). MERGE EDİLDİ.
 >
@@ -86,7 +86,7 @@
 - **Merge sırası (PO için):** backend #49 merge → çatı pointer'ı backend main HEAD'e bump (`git submodule update --remote backend`) → çatı PR merge.
 - **FAZ 4 keşif (kurum başvuru "düzeltme iste"):** salt-okuma yapıldı, kod yazılmadı → bulgular 00-KARAR-TAKIP yeni madde (b)'de.
 
-## ✅ #37 LOGIN ENUMERATION SERTLEŞTİRME — MERGED, CANLIDA (2026-08-19)
+## ✅ #37 LOGIN ENUMERATION SERTLEŞTİRME — MERGED, CANLIDA (2026-08-19) · doğrulama 09-28: `backend/src/controllers/authController.ts:323-330`
 > Backend **#46** (`b6187c1`) + çatı pointer **#91** (`af33339`) + docs **#92** (`1cd2c56`) MERGED → canlıda (git doğrulandı). İki repo main CI yeşil.
 - **Sorun:** login akışında kimlik doğrulaması BAŞARISIZ olduğunda durum sızıyordu — (1) PENDING hesap yanlış/rastgele
   şifreyle `403 HESAP_ONAY_BEKLENIYOR` (`authController.ts:257-262` eski); (2) OAuth hesap şifre denemeden
@@ -98,7 +98,7 @@
 - **Doğrulama:** lokal backend tsc (src+test) + eslint yeşil; entegrasyon/enumeration testleri CI'da (lokal `TEST_DATABASE_URL` guard'ı canlı DB'yi korur).
 - **Bilinen sınır:** timing (zamanlama) yan-kanalı kapsam dışı bırakıldı (üretim-öncesi, düşük risk).
 
-## ✅ #12 DISC ÇOKLU HARF — MERGED, CANLIDA (2026-08-19)
+## ✅ #12 DISC ÇOKLU HARF — MERGED, CANLIDA (2026-08-19) · doğrulama 09-28: `backend/src/services/discLetters.ts:58`
 > Backend **#47** (`4c63d0e`) + çatı (FE + pointer) **#93** (`61b6eb2`) + docs **#94** (`42e35bf`) MERGED → canlıda (git doğrulandı). İki repo main CI yeşil.
 - **Ne:** DISC kimliği tek baskın harf yerine türetilmiş **1–3 harf** (ör. `D`, `DI`, `Di`, `DIs`) — KARAR 1 (#12=md.4).
 - **Onaylanan eşikler (PO, 2026-08-17):** orta çizgi (midline) **0.25** (normalize vektör, eşit pay); geçen tipler gösterilir,
@@ -114,17 +114,17 @@
   `tsx` ile 8/8 ✓. Entegrasyon/unit DISC testleri → CI (lokal TEST_DATABASE_URL guard'ı canlı DB'yi korur).
 - **Sıradaki (Grup 2):** 2a ghost red (#35) — migration, AYRI tur.
 
-## ✅ ① GRUBU — MASA TEMİZLİĞİ MERGED, CANLIDA (2026-08-17)
+## ✅ ① GRUBU — MASA TEMİZLİĞİ MERGED, CANLIDA (2026-08-17) · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
 > Çatı main `41f91b4` · backend main `e83ec9c` · submodule pointer `e83ec9c` (senkron) · açık PR **0/0** (git + `gh pr list` doğrulandı). Merge sırası: backend #44 → #45 → çatı pointer bump #88 → çatı FE #87. Her adımda iki repo main CI yeşil. **Migration/DB yazımı/seed çalıştırma SIFIR.**
 - **#32 — Admin soru düzenleme UI (çatı #87), canlıda:** kuruma özel soruya **Düzenle** butonu + inline form (`(admin)/admin/questions/page.tsx`). Backend PATCH `/api/questions/:id` (requireRole ADMIN + tenant-scoped IDOR: global soru `GLOBAL_SORU_KILITLI`, çapraz-tenant `YETKI_YETERSIZ`) **zaten hazırdı** → yalnız FE eksikti. Yalnız metin düzenlenir (backend `UpdateQuestionSchema` gereği; discDimension/type yapısal). CI Integration (Admin) yeşil.
-- **#6 — Onay/red maili TEYİT + correction-fix (backend #44), canlıda:** `approveUser`→onay maili ✅, `rejectUser`→red maili (gerekçeli) ✅ **zaten çalışıyordu** (teyit). Bulunan bug: `requestCorrection` düzeltme notunu (`feedbackNote`) DB'ye yazıyor ama **e-postaya iletmiyordu** (yorum "iletir" diyordu, etmiyordu) → tek satır fix (`rejectionReason: parsed.data.feedbackNote`). PII yok.
+- **#6 — Onay/red maili TEYİT + correction-fix (backend #44), canlıda:** `approveUser`→onay maili ✅, `rejectUser`→red maili (gerekçeli) ✅ **zaten çalışıyordu** (teyit). Bulunan bug: `requestCorrection` düzeltme notunu (`feedbackNote`) DB'ye yazıyor ama **e-postaya iletmiyordu** (yorum "iletir" diyordu, etmiyordu) → tek satır fix (`rejectionReason: parsed.data.feedbackNote`). PII yok. · doğrulama 09-28: `backend/src/controllers/adminController.ts:663,711,771`
   > ⚠️ NOT: 10-yol-haritasi md.6 "onay paneli bildirim maili" **kurum onay/ret + `destek@` + prod `PLATFORM_ADMIN_EMAIL`** kapsıyor — bu AYRI/geniş; yalnız kullanıcı onay/red/correction maili teyit+fix edildi, kurum/env kısmı DEĞİL.
 - **#33 — Ölü/çelişen seed dosyası temizliği (backend #45), canlıda (KISMİ):** `prisma/seed-questions.ts` (hiç import edilmeyen standalone CLI, 20 global DISC sorusu) **silindi** — aktif `seed.ts` (32 soru) ile çelişiyordu. **DB'ye dokunulmadı, hiçbir seed çalıştırılmadı.**
   > ⚠️ KALAN (PO kararı, ayrı tur — canlı DB yazımı gerektirir): (1) **seed↔canlı tutarsızlığı**: canlı DB'de **20 DISC sorusu** var (eski standalone seed'in izi), aktif `seed.ts` **32** üretir → hangi set canonical, canlı re-seed mi seed.ts trim mi? (2) **SJT belge-kod çelişkisi**: `03-psikometri:47` "4 pedagojik SJT" der, **kod 3** (`seed.ts` SJT_QUESTIONS = 3, doğrulandı) → belge kod gerçeğine hizalandı (bu tur), içerik 4'e genişletme PO kararı.
-- **#5 — ThemeToggle admin/platform nav (kod-doğrulandı bu tur):** ✅ **ZATEN MEVCUT** — `(admin)/layout.tsx:92` `<ThemeToggle />` + platform dashboard'da var. Yol haritasından düşürülebilir (kod gerçeği).
+- **#5 — ThemeToggle admin/platform nav (kod-doğrulandı bu tur):** ✅ **ZATEN MEVCUT** — `(admin)/layout.tsx:92` `<ThemeToggle />` + platform dashboard'da var. Yol haritasından düşürülebilir (kod gerçeği). · doğrulama 09-28: `frontend/src/app/(admin)/layout.tsx:99` · `frontend/src/app/platform/dashboard/page.tsx:234`
 - **⚠️ BRIEF DÜZELTMELERİ (git+kod esas, dürüst pushback):** Bu turun brief'i 3 yanlış içeriyordu: (a) **#13 cevap-tipi "yapıldı" DEĞİL** — önceki turda migration gerektirdiği için ATLANDI, PR yok, hâlâ açık; (b) **SJT "kod 4" DEĞİL** — kod 3 (belge 4 diyor, tersi); (c) **#9/#34 "yapıldı" DEĞİL** — kod-doğrulama negatif (#9 ağırlık gösterimi yok, #34 `learningJourneyCompletedAt` STK adminController select'inde yok, yalnız platform süper-admin'de).
 
-## ✅ İŞ 3 P2/P3 — REDDEDİLEN KULLANICI AKIŞI, CANLIDA (2026-08-16)
+## ✅ İŞ 3 P2/P3 — REDDEDİLEN KULLANICI AKIŞI, CANLIDA (2026-08-16) · doğrulama 09-28: `backend/prisma/schema.prisma:309-313` · `backend/src/routes/authRoutes.ts:72`
 > Çatı main `513ba84` · backend main `a9fc0bf` · submodule senkron · açık PR 0/0. Yaklaşım: **Yol 1** (token vermeden).
 - **P2 (gerekçe görme) — backend #43 + çatı #85, canlıda:** reddedilen kullanıcı doğru şifreyle giriş deneyince **token VERİLMEZ**; 403 yanıtında `rejectionReason` + `canReapply` döner; FE kibar red ekranı gösterir. **Enumeration-safe:** REJECTED kontrolü `bcrypt.compare`'den SONRA (yanlış şifre → generic 401, red bilgisi sızmaz). Token olmadığından reddedilen hiçbir korumalı sayfaya erişemez.
 - **P3 (tekrar başvuru) — canlıda:** `POST /api/auth/reapply` (public, rate-limit) — email+şifre doğrular (enumeration-safe), yalnız **kendi** hesabını (IDOR yok) `REJECTED→PENDING` yapar, `isActive=true`. **Red geçmişi KORUNUR** (`rejectionReason`/`rejectedBy`/`rejectedAt` silinmez — çok-yönetici). Test/DISC/profil verisine dokunulmaz.
@@ -132,24 +132,24 @@
 - **Testler:** enumeration (P2+reapply yanlış şifre generic), IDOR-durum (reapply yalnız REJECTED), geçiş + geçmiş koruma + test-verisi koruma. CI'da geçti.
 - **⚠️ KABUL EDİLEN SINIR (PO):** (1) **PENDING durumu login'de şifre-öncesi sızıyor** (mevcut, kapsam dışı) → ileride "giriş enumeration sertleştirme" ile ele alınacak (10-yol-haritasi). (2) **Uygulama-içi profil düzeltme YOK** (Yol 1); istenirse Yol 2 mimarisiyle ayrı iş.
 
-## ✅ İŞ 2 + İŞ 3 P1 — ONAY/RED İZİ + GEREKÇE, CANLIDA (2026-08-16)
+## ✅ İŞ 2 + İŞ 3 P1 — ONAY/RED İZİ + GEREKÇE, CANLIDA (2026-08-16) · doğrulama 09-28: `backend/prisma/schema.prisma:309-313` · `backend/src/routes/authRoutes.ts:72`
 > Çatı main `b66e07c` · backend main `ed84806` · açık PR: yönetici-adı (#42+#83, merge PO'da).
-- **Migration CANLIDA (additive/nullable, veri kaybı yok):** `User`'a `approvedBy`, `approvedAt`, `rejectedBy`, `rejectedAt`, `rejectionReason`. Yöntem: `db execute` (IF NOT EXISTS) + `migrate resolve --applied`; salt-okuma SELECT ile doğrulandı. `db push` kullanılmadı.
+- **Migration CANLIDA (additive/nullable, veri kaybı yok):** `User`'a `approvedBy`, `approvedAt`, `rejectedBy`, `rejectedAt`, `rejectionReason`. Yöntem: `db execute` (IF NOT EXISTS) + `migrate resolve --applied`; salt-okuma SELECT ile doğrulandı. `db push` kullanılmadı. · doğrulama 09-28: `backend/prisma/schema.prisma:309-313` · `backend/src/routes/authRoutes.ts:72`
 - **İş 2 (kim onayladı/reddetti izi) — backend #41 + çatı #81, canlıda:** `approveUser`/`rejectUser` yapan yöneticiyi + zamanı kaydeder; `approveUser` eski red izini temizler. `adminListUsers` denetim alanlarını döndürür (yalnız admin, audit).
 - **İş 3 P1 (red gerekçesi) — canlıda:** `rejectUser` opsiyonel `reason` (≤500) → `rejectionReason`; `requestCorrection` `feedbackNote`'u kalıcı kaydeder (önceden yalnız e-posta).
 - **İş 2/3 FE — çatı #82, canlıda:** havuz tablolarında onay/red tarihi + red gerekçesi (title ile tam metin) + reddet akışında gerekçe kutusu (`RejectReasonDialog`, PII uyarısı). Yalnız admin.
 - **Yönetici-adı gösterimi (backend #42 + çatı #83, merge PO'da):** `approvedBy`/`rejectedBy` userId'si TEK sorgu + TENANT-SCOPED `fullName`'e çözülür (`approvedByName`/`rejectedByName`); çapraz-tenant isim sızmaz; havuzda "Onaylayan/Reddeden: [Ad] · [tarih]".
 - **⏳ KALAN (AYRI TUR — auth/güvenlik kararı):** İş 3 **P2** (reddedilen kullanıcı kendi ekranında gerekçe görür) + **P3** (REJECTED→PENDING tekrar başvuru + başvuru revizyonu). Reddedilen `isActive=false` → login generic 401 (enumeration koruması); bu akışı değiştirmek PO ürün+güvenlik kararı.
 
-## ✅ MASA TEMİZLİĞİ — 5 PR MERGED, CANLIDA (2026-08-15, geç oturumlar)
+## ✅ MASA TEMİZLİĞİ — 5 PR MERGED, CANLIDA (2026-08-15, geç oturumlar) · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
 > Çatı main `444c025` · backend main `5eafbbd` · submodule senkron · açık PR 0/0 (git doğrulandı).
-- **v1 #8 — admin sol menü 4-grup (çatı #76):** ✅ TAMAMLANDI, canlıda. Gruplar: Günlük İşler · İnsanlar · Program & İçerik · Ayarlar & Kurulum (KARAR 1). Salt-frontend (`(admin)/layout.tsx`).
-- **v1 #11 — sertifika rozeti (backend #40 + çatı #77):** ✅ TAMAMLANDI, canlıda. **KİŞİ-GENELİ:** kişi HERHANGİ bir kurumda sertifikalıysa mentör havuzunda "✓ Sertifikalı" görünür — `TenantMembership.isCertified` üzerinden `some()` ile türetilir. `UserProfile.isCertified` **bakımsız** (hiç yazılmıyor) olduğu için kullanılmadı (kod kanıtıyla; migration gerekmedi).
-- **v1 #10 — durum rozeti:** ✅ **ZATEN MEVCUTTU** (kod gerçeği — yol haritasında ⏳ görünüyordu ama yanlıştı). Mentör + menti havuz tablosunda "Durum" sütunu `APPROVAL_META` ile Onaylı/Bekliyor/Reddedildi gösteriyor (`mentor-havuzu/page.tsx`, `menti-havuzu/page.tsx`); admin-only. Yeniden yapılmadı, teyit edildi.
+- **v1 #8 — admin sol menü 4-grup (çatı #76):** ✅ TAMAMLANDI, canlıda. Gruplar: Günlük İşler · İnsanlar · Program & İçerik · Ayarlar & Kurulum (KARAR 1). Salt-frontend (`(admin)/layout.tsx`). · doğrulama 09-28: `frontend/src/app/(admin)/layout.tsx:30-58`
+- **v1 #11 — sertifika rozeti (backend #40 + çatı #77):** ✅ TAMAMLANDI, canlıda. **KİŞİ-GENELİ:** kişi HERHANGİ bir kurumda sertifikalıysa mentör havuzunda "✓ Sertifikalı" görünür — `TenantMembership.isCertified` üzerinden `some()` ile türetilir. `UserProfile.isCertified` **bakımsız** (hiç yazılmıyor) olduğu için kullanılmadı (kod kanıtıyla; migration gerekmedi). · doğrulama 09-28: `backend/src/controllers/adminController.ts:284` · `frontend/src/app/(admin)/admin/mentor-havuzu/page.tsx:168`
+- **v1 #10 — durum rozeti:** ✅ **ZATEN MEVCUTTU** (kod gerçeği — yol haritasında ⏳ görünüyordu ama yanlıştı). Mentör + menti havuz tablosunda "Durum" sütunu `APPROVAL_META` ile Onaylı/Bekliyor/Reddedildi gösteriyor (`mentor-havuzu/page.tsx`, `menti-havuzu/page.tsx`); admin-only. Yeniden yapılmadı, teyit edildi. · doğrulama 09-28: `frontend/src/app/(admin)/admin/mentor-havuzu/page.tsx:25`
 - **Raporlar (çatı #78 + #79):** değerlendirme/test/soru envanteri (`docs/raporlar/kod-denetimi/degerlendirme-test-soru-envanteri-2026-08-15.md`) + içerik dökümü (`docs/raporlar/icerik/`) + derinleştirilmiş eksik analizi (`docs/raporlar/kod-denetimi/eksikler-derinlestirilmis-2026-08-15.md`). Canlı DB salt-okuma sayımıyla seed↔canlı tutarlılığı doğrulandı.
   - ⚠️ **Kritik tespit:** sertifika bankası kodda 20 senaryo ama **canlıda yalnız 5 soru** (seed edilmemiş). Ayrıca STK-custom canlıda 1 (envanterin "0"ı düzeltildi). Detay: eksikler raporu.
 
-## ✅ BU OTURUM — v1 İŞLERİ MERGED, CANLIDA (2026-08-15)
+## ✅ BU OTURUM — v1 İŞLERİ MERGED, CANLIDA (2026-08-15) · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
 > ⚠️ GÜNCELLEME (2026-08-15, merge turu): **4 kod PR sırayla MERGED, canlıya deploy oldu** (#38→#73→#39→#74, `--merge`).
 > Submodule TAM SENKRON (`379658a`). İki repo main CI yeşil. Regresyon testleri (oauth-kvkk-consent, mentor-matches, disc-visibility)
 > CI Integration suite'te geçiyor. Açık PR yalnız bu docs (#72). **Aşağıdaki maddeler artık "tamamlandı" — merge oldu.**
@@ -175,7 +175,7 @@
     (tablo→kart + durum rozeti KARAR 3 + sertifika rozeti KARAR 4, `tenantMembership.isCertified` DTO'ya) · (3) **sol menü
     4-grup** (KARAR 1). Bunlar `10-yol-haritasi.md` md.7/8/10/11'de.
 
-## ✅ GÜVENLİK — KARAR 5 DÜZELTİLDİ, CANLIDA (backend #37 + çatı #71 MERGED)
+## ✅ GÜVENLİK — KARAR 5 DÜZELTİLDİ, CANLIDA (backend #37 + çatı #71 MERGED) · doğrulama 09-28: `backend/src/services/discVisibility.ts:22`
 > ⚠️ GÜNCELLEME (2026-08-15, merge turu): açık **KAPANDI, canlıda**. Backend **#37** (`0850eaa`) + çatı **#71** (`4c48a8e`)
 > `--merge` ile MERGED; submodule pointer `0850eaa` backend main HEAD ile **tam senkron**; iki repo main CI yeşil; autodeploy
 > ile canlıya çıktı. Regresyon testi `disc-visibility.test.ts` CI'da (Integration suite) geçiyor → açığın geri gelmesi guard'lı.
@@ -199,17 +199,17 @@
 - `10-yol-haritasi.md` gerçekle hizalandı + v1/v2 etiketlendi (kaynak: `00-karar-statu-haritasi-2026-08-14`). Biten işler
   (F1 foto upload / F2 platform drill-down / F7 KPI drill-down) düşürüldü; tasarım kararları (KARAR 1/3/4/11) eklendi.
   **v1 #1 = KARAR 5 güvenlik.** Sıradaki: v1 işlerini tek tek kodlama turları.
-  > ⚠️ GÜNCELLEME (2026-08-15): **v1 #1 (KARAR 5) ✅ tamamlandı, canlıda** (#37+#71). Sıradaki v1 adayı: **havuz KART görünümü + "Neden uyumlu" L1 (KARAR 2/7)** — DISC güvenliği kapandığı için ön-koşul karşılandı, artık yapılabilir.
+  > ⚠️ GÜNCELLEME (2026-08-15): **v1 #1 (KARAR 5) ✅ tamamlandı, canlıda** (#37+#71). Sıradaki v1 adayı: **havuz KART görünümü + "Neden uyumlu" L1 (KARAR 2/7)** — DISC güvenliği kapandığı için ön-koşul karşılandı, artık yapılabilir. · doğrulama 09-28: `backend/src/services/discVisibility.ts:22`
 
-## ✅ CANLIDA / KAPANMIŞ (kod main'de)
+## ✅ CANLIDA / KAPANMIŞ (kod main'de) · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
 > ⚠️ GÜNCELLEME (2026-08-28, G9-05 uzlaştırma): Bilanço bu belgede "belge-içi 4 çelişki" (chat 3-durum · VisibilityOptIn 2-durum · 4-rol · platform-tema) işaretlemişti (T1-B3 :59-62). **Kanıt-teyidi:** eski SERT çelişkili bloklar ("chat #47 açık/taşınıyor", "#34 PR açık", "platform tema yapılacak") bu belgede ARADAN kapandı — güncellendi, arşive taşınacak bayat blok kalmadı (T1-B3 :90 = "✅ YAPILDI, aradan kapandı"). Kalan tek okuma-karışıklığı için tek-gerçek aşağıda sabitlendi:
-> - **CHAT:** kod TAM CANLIDA (aşağıdaki blok) · geriye YALNIZ PO'nun uçtan-uca manuel testi kaldı (⏳ BEKLEYEN bölümü) — çelişki değil, iki ayrı gerçek.
+> - **CHAT:** kod TAM CANLIDA (aşağıdaki blok) · geriye YALNIZ PO'nun uçtan-uca manuel testi kaldı (⏳ BEKLEYEN bölümü) — çelişki değil, iki ayrı gerçek. · doğrulama 09-28: `frontend/src/components/organisms/MessagesBell.tsx:17` · `backend/src/controllers/conversationController.ts:119`
 > - **VisibilityOptIn:** Taraf-2 (menti-driven) SİLİNDİ · Taraf-1 `setVisibilityOptIn` korundu · `requestMessage` ŞEMA kolonu DROP ertelendi (migration turu) — üçü tamamlayıcı, çelişki değil (bkz. aşağıdaki iki blok).
-> - **4-rol / platform-tema:** Mentör ✅ + tema toggle ✅ ZATEN mevcut (madde 5, satır ~229); "yapılacak" ifadeleri güncellendi.
-- **CHAT v1 — TAM CANLIDA.** menti↔mentör mesajlaşma: inbox/thread + `MessagesBell` (45sn polling) +
+> - **4-rol / platform-tema:** Mentör ✅ + tema toggle ✅ ZATEN mevcut (madde 5, satır ~229); "yapılacak" ifadeleri güncellendi. · doğrulama 09-28: `frontend/src/app/(admin)/layout.tsx:99` · `frontend/src/app/platform/dashboard/page.tsx:234`
+- **CHAT v1 — TAM CANLIDA.** menti↔mentör mesajlaşma: inbox/thread + `MessagesBell` (45sn polling) + · doğrulama 09-28: `frontend/src/components/organisms/MessagesBell.tsx:17` · `backend/src/controllers/conversationController.ts:119`
   menti zorunlu ilk mesaj + katılımcı-bazlı yetki + okundu-bazlı e-posta. Backend #33 + frontend #47/#48 MERGED.
   Canlı Neon'da `Conversation`+`Message` tabloları var (migration applied). Detay: `chat-v1-teslim.md`.
-- **MENTÖR PANELİ — TAM CANLIDA.** Gerçek metrik kartları (aktif menti · bekleyen · tamamlanan · ortalama NPS)
+- **MENTÖR PANELİ — TAM CANLIDA.** Gerçek metrik kartları (aktif menti · bekleyen · tamamlanan · ortalama NPS) · doğrulama 09-28: `frontend/src/app/(dashboard)/mentor/page.tsx:43-46` · `backend/src/routes/userRoutes.ts:101`
   endpoint `GET /api/mentors/:mentorId/dashboard-metrics` (IDOR korumalı `requireSelfOrAdmin`, salt-okuma) +
   **Yaklaşan Toplantılar** (onaylı/SCHEDULED). Backend #36 + çatı #52/#51 MERGED.
 - **Ölü kod temizliği — menti-driven görünürlük talebi (Taraf-2):** `mentiRequestController.ts` + 3 rota

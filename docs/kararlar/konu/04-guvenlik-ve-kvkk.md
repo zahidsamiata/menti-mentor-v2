@@ -6,7 +6,7 @@
 **Son güncelleme:** 2026-08-02 · Kaynak: strateji/güvenlik chat'i, repo-inceleme chat'i, mail/panel chat'i, bugünkü teşhis
 
 > **⚠️ GÜNCELLEME (2026-08-23):** Bazı satırlar eskidi — güncel gerçek `09-DURUM.md` + `00-KARAR-TAKIP.md`'de.
-> Bilinen düzeltmeler: **IDOR "2 açık" DEĞİL — kod korumalı** (`/mentors/:mentorId/candidates` + `/requests/:id` tenant izolasyonu + sahiplik, düzeltme `161ae00`; bkz. `devir/07-oturum-gunlugu.md` 2026-08-14). **K2/K4/K5 KVKK maddeleri CANLIDA** (2026-08-15). Kalan KVKK: K3 (eski-kayıt consent, canlı öncesi) + K6 (admin server guard → v2) → `00-KARAR-TAKIP.md`.
+> Bilinen düzeltmeler: **IDOR "2 açık" DEĞİL — kod korumalı** (`/mentors/:mentorId/candidates` + `/requests/:id` tenant izolasyonu + sahiplik, düzeltme `161ae00`; bkz. `devir/07-oturum-gunlugu.md` 2026-08-14). **K2/K4/K5 KVKK maddeleri CANLIDA** (2026-08-15). Kalan KVKK: K3 (eski-kayıt consent, canlı öncesi) + K6 (admin server guard → v2) → `00-KARAR-TAKIP.md`. · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
 
 > UYARI: Bazı güvenlik maddeleri "kod görülmeden" yazılmış hipotezlerdi (strateji chat'i).
 > Bugünkü teşhis (docs/teshis-raporu-2026-08-02.md) bazılarını gerçek kodda doğruladı.
@@ -35,7 +35,7 @@
 - `/mentors/:mentorId/candidates` — başka mentörün aday listesi görülebiliyor.
 - `/requests/:id` — başka kullanıcının match request'i görülebiliyor.
 - ~~[ESKİ · düzeltildi 2026-08-14] Durum: ⏳ DÜZELTİLMEDİ. Küçük fix ama canlı-kritik.~~ (bkz. alttaki ✅ GÜNCELLEME — IDOR açığı YOK, korumalı)
-- **✅ GÜNCELLEME (2026-08-14):** Kod incelemesi (salt-okuma keşif) bu 2 endpoint'in **tenant izolasyonu + sahiplik kontrolü ile KORUMALI** olduğunu KANITLADI — **IDOR açığı YOK**. İlgili endpoint'ler (mentör aday listesi, talep detayı) çift katmanlı korumalı: tenant filtresi + sahiplik/ADMIN kontrolü, null-auth 401 ile reddedilir. Düzeltme commit `161ae00`. Kanıt: `matchingController.ts:45-52`, `requestController.ts:116-121`. Yukarıdaki "⏳ DÜZELTİLMEDİ" satırı BAYAT.
+- **✅ GÜNCELLEME (2026-08-14):** Kod incelemesi (salt-okuma keşif) bu 2 endpoint'in **tenant izolasyonu + sahiplik kontrolü ile KORUMALI** olduğunu KANITLADI — **IDOR açığı YOK**. İlgili endpoint'ler (mentör aday listesi, talep detayı) çift katmanlı korumalı: tenant filtresi + sahiplik/ADMIN kontrolü, null-auth 401 ile reddedilir. Düzeltme commit `161ae00`. Kanıt: `matchingController.ts:45-52`, `requestController.ts:116-121`. Yukarıdaki "⏳ DÜZELTİLMEDİ" satırı BAYAT. · doğrulama 09-28: `backend/src/controllers/matchingController.ts:49-52` · `backend/src/controllers/requestController.ts:139-142`
 
 ## 🟡 P1 — ÖNEMLİ AMA ÇIKIŞI DURDURMAZ
 - **DISC matematik edge-case:** `calculateDiscResult`'ta sıfıra bölme/NaN guard (`hits>0`, `Number.isFinite`); `deriveArchetype` asla undefined dönmemeli. "Varsayılana düşen profil oranı" izlenmeli.
