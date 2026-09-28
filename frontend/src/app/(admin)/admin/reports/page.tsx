@@ -15,27 +15,30 @@ import { adminApi } from '@/lib/api/admin';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
-import type { ReportReason, ReportStatus, TenantReport } from '@/types/admin';
+import type { ReportStatus, TenantReport } from '@/types/admin';
+import { REPORT_STATUS_LABELS, reportReasonLabel, reportStatusLabel } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
 
-const REASON_LABELS: Record<ReportReason, string> = {
-  SPAM: 'Spam / istenmeyen',
-  HARASSMENT: 'Taciz / rahatsız edici',
-  INAPPROPRIATE: 'Uygunsuz içerik',
-  NO_SHOW: 'Görüşmeye gelmedi',
-  OTHER: 'Diğer',
+/**
+ * AJ-61 — Durum/neden METİNLERİ tek kaynaktan (`lib/enumLabels.ts`) okunur; platform paneli de
+ * aynı sözlüğü kullanır, iki ekran ayrışmaz. Burada yalnız rozet RENGİ (görsel karar) tutulur.
+ */
+type StatusBadgeVariant = 'warning' | 'success' | 'secondary';
+
+const STATUS_BADGE_VARIANT: Record<ReportStatus, StatusBadgeVariant> = {
+  OPEN: 'warning',
+  REVIEWED: 'success',
+  DISMISSED: 'secondary',
 };
 
-const STATUS_INFO: Record<ReportStatus, { label: string; variant: 'warning' | 'success' | 'secondary' }> = {
-  OPEN: { label: 'Açık', variant: 'warning' },
-  REVIEWED: { label: 'İncelendi', variant: 'success' },
-  DISMISSED: { label: 'Reddedildi', variant: 'secondary' },
-};
+/** Sözlükte olup renk haritasında olmayan (yeni) durum nötr rozetle gösterilir. */
+const DEFAULT_STATUS_BADGE_VARIANT: StatusBadgeVariant = 'secondary';
 
 const STATUS_FILTERS: { key: ReportStatus | 'ALL'; label: string }[] = [
-  { key: 'OPEN', label: 'Açık' },
-  { key: 'REVIEWED', label: 'İncelendi' },
-  { key: 'DISMISSED', label: 'Reddedildi' },
+  ...(Object.keys(REPORT_STATUS_LABELS) as ReportStatus[]).map((key) => ({
+    key,
+    label: reportStatusLabel(key),
+  })),
   { key: 'ALL', label: UI_TEXT.filters.all },
 ];
 
@@ -66,14 +69,14 @@ function ReportCard({ report, onDone }: { report: TenantReport; onDone: () => vo
     else setErr(res.error.message ?? 'İşlem başarısız. Lütfen tekrar deneyin.');
   }
 
-  const statusInfo = STATUS_INFO[report.status];
+  const statusVariant = STATUS_BADGE_VARIANT[report.status] ?? DEFAULT_STATUS_BADGE_VARIANT;
   const when = new Date(report.createdAt).toLocaleString('tr-TR', { dateStyle: 'medium', timeStyle: 'short' });
 
   return (
     <div className="rounded-xl border border-border p-4 space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-sm font-semibold">{REASON_LABELS[report.reason] ?? report.reason}</p>
+          <p className="text-sm font-semibold">{reportReasonLabel(report.reason)}</p>
           <p className="text-xs text-muted-foreground">
             <span className="font-medium text-foreground">{report.reporter?.fullName ?? 'Bilinmiyor'}</span>
             {' → '}
@@ -81,7 +84,7 @@ function ReportCard({ report, onDone }: { report: TenantReport; onDone: () => vo
             {' · '}{when}
           </p>
         </div>
-        <Badge variant={statusInfo.variant} className="text-xs shrink-0">{statusInfo.label}</Badge>
+        <Badge variant={statusVariant} className="text-xs shrink-0">{reportStatusLabel(report.status)}</Badge>
       </div>
 
       {report.description && (
