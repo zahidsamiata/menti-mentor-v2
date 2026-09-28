@@ -20,7 +20,7 @@
 - **D21:** Toggle admin/platform nav'a eklenmeli. 🟢✅ **TAMAMLANDI** (2026-08-02, frontend `188aad5`).
 - **D22:** DISC renkleri light'ta WCAG FAIL (kontrast 1.8–3.9:1, olması gereken 4.5). Sarı/gri beyaz zeminde soluk. 5 dosya ~7 renk, 600/700 tonuna çekilmeli. · ✅ yapıldı — AJ-07 · PR çatı #359 · 2026-09-27 · doğrulama: bitti-dogrulama-2026-09-27
 - **D23:** Platform admin rozetleri light'ta koyu leke (koyu-alfa tint), light varyant gerekli.
-- **🔴 KARAR BEKLİYOR:** DISC renk TON kararı kullanıcının gözünden verilecek — light'ta henüz onaylanmadı (dashboard'lar çöktüğü için görülemedi, sonra seed geldi ama tema light test edilmedi).
+- **🔴 KARAR BEKLİYOR:** DISC renk TON kararı kullanıcının gözünden verilecek — light'ta henüz onaylanmadı (dashboard'lar çöktüğü için görülemedi, sonra seed geldi ama tema light test edilmedi). · ⚪ geçersiz — renk tonu kural gereği ajanın teknik kararı (CLAUDE.md § KARAR AYRIMI); açık tema DISC tonları AJ-07 ile WCAG AA'ya göre seçildi (`frontend/src/components/atoms/DiscBadge.tsx`) (PO teyit listesinde)
 
 ## LANDING
 - **Slogan değişikliği** (mail/panel chat'i): Eski "Ağınızı Sadece Takvimle Değil, İnsan Kimyasıyla Yönetin" ZAYIF → yeni slogan.
@@ -30,7 +30,7 @@
 - **Landing UX paketi (kodlanmadı ⏳):** tooltip metnin üstüne biniyor + hover köprüsü yok + kaynak linkleri tıklanamıyor; "i" ikonu keşfedilemez (koyu zeminde soluk); düşük kontrast gri metinler (WCAG); SIFIR-etikette sıfır-olmayan skor çelişkisi (AlgorithmBento — mantık hatası, öncelikli); mobil test.
 
 ## KART TASARIMI — MENTİ/MENTÖR HAVUZU (2026-08-02 geç oturum, ⏳ tasarlanacak)
-Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-envanteri raporu).
+Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-envanteri raporu). · 🟨 kısmen — menti→mentör kartı yapıldı (F-10, `frontend/src/app/(dashboard)/menti/page.tsx:305-347`); kalan: çift yönlü havuz, sayfa başına kart, detay biçimi → KARAR-54 · yönetici havuzu kartı → AJ-63 · sayfalama → AJ-90
 - **Düz liste DEĞİL, görsel kartlar** (Mentornity tarzı). Minimal — yığılma yok.
 - **Kartta gösterilecek:** foto + isim + rol + DISC rozeti + sektör etiketi + **%UYUM** + aksiyon butonu.
 - **%UYUM** = sektör etiketi uyumu + DISC uyum skoru. **Rating/yıldız YOK.**

@@ -718,7 +718,7 @@ birinde `[ ] PO notu:`. **Kalan açık karar: 7** (madde 8 → 2026-08-29'da kap
 4. Sınırsız yeniden-derinleşme sınırı (G3-03) — `[ ] PO notu:`
 5. Özet alanı yönergesi — `[ ] PO notu:`
 6. Göç planı (a/b/c) — `[ ] PO notu:`
-7. K-anonimlik eşiği (kaç kişiden az olunca gizlensin) — `[ ] PO notu:` (S21 teyit: kodda YOK, `platformTenantController.ts:269`)
+7. K-anonimlik eşiği (kaç kişiden az olunca gizlensin) — `[ ] PO notu:` ~~[ESKİ · 2026-09-27] (S21 teyit: kodda YOK, `platformTenantController.ts:269`)~~ ⚠️ GÜNCELLEME (2026-09-27): eşik kodda `K_ANONYMITY_THRESHOLD = 3` (`backend/src/services/mask.ts:52`), KPI ve platform analitiği maskeli (V-05) — kanıt: `backend/tests/k-anonymity-kpi-analytics.test.ts` · doğrulama: sahipsiz-kalanlar-2026-09-27
 8. ✅ **KARARA BAĞLANDI (2026-08-29):** Profil envanteri (S21) yapıldı → `raporlar/kesif/profil-envanteri-2026-08-29.md`; iki çakışma karara bağlandı (§10.2 KARAR 1 expectationCategories yan yana · KARAR 2 supportApproach yeni + her iki rol, interactionStyle türetilir).
 
 ---
@@ -754,7 +754,7 @@ Bu belgeden çıkan her kalem: **kalem · durum · numara-adayı-mı**
 | 8 | Kalite çarpanı çift-uygulama hatasını düzelt | ⬜ AÇIK | evet |
 | 9 | Üç soru (S1/S2/S3 menti+mentör) veri toplama ekle | ⬜ AÇIK | evet |
 | 10 | Görünürlük kuralları (10.3) uygula | ⬜ AÇIK | evet |
-| 11 | K-anonimlik eşiği (G1-22) belirle | ❓ TEYİT GEREK | evet |
+| 11 | K-anonimlik eşiği (G1-22) belirle | ⚠️ GÜNCELLEME (2026-09-27): ✅ eşik = 3 (`backend/src/services/mask.ts:52`), V-05 ile KPI/analitiğe uygulandı; kalan algoritma ayar ekranı → AJ-69 · doğrulama: sahipsiz-kalanlar-2026-09-27 | evet |
 | 12 | Eşleşme kartı metni (10.5) — algılanan benzerlik cümlesi | ⬜ AÇIK | evet |
 | 13 | Profil/hedef verisi envanter keşfi (S21) — üç soru ön koşulu | ⬜ AÇIK | evet |
 | 14 | Manuel eşleştirme yok kararı (T8/76 kapandı) | ✅ YAPILDI (KOD DIŞI — karar) | hayır |

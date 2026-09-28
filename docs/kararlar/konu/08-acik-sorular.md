@@ -3,7 +3,7 @@
 
 # 08 — AÇIK SORULAR VE KARARA BAĞLANMAYANLAR
 **🔄 YAŞAYAN** (canonical: açık sorular / karar kuyruğu) · bkz. dondurulmuş keşif `unutulmus-niyet-envanteri-2026-08-10.md` (konu çakışması: KVKK / fotoğraf / eşleşme tetikleyicisi)
-> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-09): bu etiket "🔄 YAŞAYAN (canonical: açık sorular)" ↔ aşağıdaki `:5` GÜNCELLEME "canonical açık-karar takibi artık `00-KARAR-TAKIP.md`" = **çift-kaynak** ("AKTİF İŞ KAYNAĞI TEKTİR" kuralıyla çelişir, YN-06). Tek-kaynağa indirme = AN-44 kuyruk işi; karar PO'nun.
+> ⚠️ ÇELİŞKİ (2026-09-23, CS raporu / Ç-09): bu etiket "🔄 YAŞAYAN (canonical: açık sorular)" ↔ aşağıdaki `:5` GÜNCELLEME "canonical açık-karar takibi artık `00-KARAR-TAKIP.md`" = **çift-kaynak** ("AKTİF İŞ KAYNAĞI TEKTİR" kuralıyla çelişir, YN-06). Tek-kaynağa indirme = AN-44 kuyruk işi; karar PO'nun. · 🟨 kısmen — ad ayağı (AN-44) yapıldı; kalan: tek kaynağa indirme → YN-06 (🔴 KARAR-51)
 **Son güncelleme:** 2026-08-02 · Kaynak: tüm chat'ler
 
 > **⚠️ GÜNCELLEME (2026-08-23):** Bazı maddeler karara bağlandı — canonical açık-karar takibi artık `00-KARAR-TAKIP.md`.
@@ -34,7 +34,7 @@
 
 ## 🟡 ÖZELLİK / PANEL
 - **Yöneticilik verme akışı (A9):** YENİDEN KURGULANACAK — kod öncesi kullanıcıya sorulacak (söz verildi). Şu an: promote-admin var, max 3 admin, "tüm onaylı kullanıcı listesi" eksik. ❓
-- **Sertifika soru ekleme:** Yönetici ekleyebilmeli mi, yoksa bilinçli kısıt mı? ❓
+- **Sertifika soru ekleme:** Yönetici ekleyebilmeli mi, yoksa bilinçli kısıt mı? ❓ · 🟨 kısmen — ajan gerekçesi yazılı; kalan: kısıtın bilinçli olduğunu PO teyidi → 03-PO #18
 - **DISC/sektör dağılım oranı ayarı (A6):** Hardcoded; istenirse BÜYÜK iş (migration+endpoint+UI). Yapılacak mı? ❓
 - **Etiket ekleme:** Yönetici doğrudan etiket ekleyebilmeli mi (öneri beklemeden)? 🟡 (kullanıcı istedi, kod durumu belirsiz)
 - **Arkadaşın başvurusu:** Canlıdan kaydoldu, "inceleniyor" gördü ama panelde "bekleyen yok". Çözülmedi. GERÇEK KİŞİ bekliyor. b3 membership backfill ile ilgili olabilir. ⏳
@@ -49,7 +49,7 @@
 - **Fotoğraf ne zaman ZORUNLU olacak?** Şu an opsiyonel (altyapı hazır). Zorunluluk tarihi/koşulu belirsiz. ❓
 - **Kart DISC gösterimi:** harf mi (D/I/S/C), renk mi, kelime/arketip mi? Kart tasarımında karara bağlanacak. ❓
 - **Sayfa başına kart sayısı:** 15 / 18 / 20 — kesin sayı? ❓
-- **DISC renk TON kararı (light):** hâlâ açık (bkz. 06 D22) — kart rozetini de etkiler. ❓
+- **DISC renk TON kararı (light):** hâlâ açık (bkz. 06 D22) — kart rozetini de etkiler. ❓ · ⚪ geçersiz — renk tonu ajanın teknik kararı; açık tema kontrastı AJ-07 ile düzeltildi (PO teyit listesinde)
 
 ## 🟡 RETENTION / YÖNETİCİ PANELİ (2026-08-02 geç oturum)
 - ~~**Yönetici paneli çekirdek metrikleri:**~~ İlk set YAPILDI (mentörsüz menti / ölü eşleşme / pasif üye / arz-talep — health-metrics). Genişletme (görüşme sayıları, onboarding-%) hâlâ açık. 🟡

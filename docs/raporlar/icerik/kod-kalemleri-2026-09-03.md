@@ -27,7 +27,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | A1 → **138** | Arketip hesabı: en yüksek boyut + ikinci; fark < 10 puan ise "şimdilik" dili kullanılsın | 🔵 | ✅ |
 | A2 → **139** | İki/üç boyut yakınsa çoklu-arketip metni seçilsin | 🔵 | ✅ |
 | A3 → **140** | Kart iki katmanlı: arketip ekranı + "detayları gör" (beş boyut) | 🔵 | ✅ |
-| A4 → **141** | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | 🔵 | ✅ |
+| A4 → **141** | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | ⚠️ GÜNCELLEME (2026-09-27): ✅ canlıda — cümle `frontend/src/app/onboarding/_OnboardingContent.tsx:190`, üç soru karttan önce (`:36`); test `frontend/src/__tests__/onboarding-order.test.tsx:6`; PO ek önlemleri → AJ-70 · doğrulama: sahipsiz-kalanlar-2026-09-27 | ✅ |
 | A5 → **151** | Yaklaşım metni (#31) eşleşme kurulduktan sonra iki tarafa gösterilsin (⚠️ M6/**152**'den BAĞIMSIZ — 8 metin hazır) | 🔵 | ✅ |
 | A6 → **142** | Kart derinleştikçe güncellensin (arketip değişebilir) | 🔵 | ✅ |
 
@@ -49,13 +49,13 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 |---|---|:---:|:---:|
 | M1 → **147** | Menti yolculuğu — 5 aşama, mentör yolculuğuyla aynı altyapı | 🔵 | ✅ |
 | M2 → **146** | Mentör isim değişkenleri — `{mentor_mimar}` vb., tenant bazında özelleştirilebilir (**BİRLEŞİK F1+M2**) | 🔵 | ✅ |
-| M3 → **144** | Geri bildirim gösterimi — yalnız seçilen şık; diğerleri kapalı/açılabilir; renk yok | 🔵 | ✅ |
+| M3 → **144** | Geri bildirim gösterimi — yalnız seçilen şık; diğerleri kapalı/açılabilir; renk yok | ⚠️ GÜNCELLEME (2026-09-27): ✅ canlıda — yalnız seçilen şık işaretsiz gösterilir, diğerleri "Diğer seçenekler…" ile açıklamalarıyla açılır (K-06, KARAR-29 A; `frontend/src/components/organisms/ScenarioGuideEngine.tsx:329,370`); test `ScenarioGuideEngine.test.tsx:110-125` · doğrulama: sahipsiz-kalanlar-2026-09-27 | ✅ |
 | M4 → **145** | ⭐ Öğrenme cevapları kişilik profiline İŞLENMESİN (Kalem A) | 🔵 | ✅ |
 | M5 → **S31** | ⭐ `outcome` alanı teyidi — bugün nereye gidiyor, kodda kontrol (Kalem B). **KOD KALEMİ DEĞİL → SÖZ S31** (keşif) | ⬜ | söz |
 | M6 → **152** | Eşleşme detay sayfası — 3 bölüm, arketip kombinasyonuna göre metin seçimi (⚠️ Bölüm 2: 15 kombinasyon yazılmadı · 🟨 kısmen — AN-05; kalan: Metin yazıldı; ölçüt "menti ekranda görüyor", koda girmedi. → KARAR-45; A5/**151** bağımsız) | 🔵 | ✅ |
 | M7 → **153** | Örtüşme cümlesi üretimi — S1/S2/S3 verisinden şablon; ⚠️ S1 içeriği gösterilmez, yalnız örtüşme | 🔵 | ✅ |
 | M8 → **154** | Bekleme zamanlayıcısı — 3. gün hatırlatma, 7. gün otomatik kapanış + alternatif gösterimi | 🔵 | ✅ |
-| M9 → **155** | Ret akışı — sebep gizli, alternatif aynı ekranda | 🔵 | ✅ |
+| M9 → **155** | Ret akışı — sebep gizli, alternatif aynı ekranda | ⚪ geçersiz — "alternatif aynı ekranda" ayağı KARAR-22 B ile düştü; "sebep gizli" canlıda (P-05) (PO teyit listesinde) | ✅ |
 | M10 → **156** | Görüşme sıklığı bilgisi — profilde ve bekleme metninde görünsün | ✅ yapıldı — I-05 · PR backend #90 + çatı #264 + çatı #278 · 2026-09-25 · doğrulama: bitti-dogrulama-2026-09-27 | ✅ |
 
 > **Not (PO kararı 2026-09-03):** **F1 + M2 BİRLEŞTİ → tek madde 146** (aynı isim-değişkeni altyapısının iki
@@ -66,6 +66,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 ---
 
 ## 3B. ⭐ AÇIK YAPISAL KALEMLER (3 kalem — ⬜ AÇIK)
+> 🟨 kısmen — 143 (şık sırası karıştırma, `frontend/src/lib/shuffle.ts:9`) ve 160 (I-06) yapıldı; kalan: 148 öğrenme yolculuğu içeriği → K-18 (🔴 KARAR-5) · doğrulama: sahipsiz-kalanlar-2026-09-27
 
 > Strateji katmanında tespit edilip bu turda KODLA doğrulandı. Bunlar belge ile kod arasında **çözülmesi
 > gereken bir çelişki değildir** — belge doğru, kod/canlı içerik henüz yeni tasarıma yetişmemiştir (PO

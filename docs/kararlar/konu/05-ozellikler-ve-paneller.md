@@ -58,6 +58,6 @@ Backend büyük ölçüde hazırdı, eksik olan UI'dı. Hepsi tenant-izole + KVK
 - Geri bildirim mekanizması — her sayfada "hata/öneri bildir" → mail (Resend). Takip sistemi şimdilik yok.
 
 ## AÇIK SORULAR (bkz. 08)
-- Sertifika soru ekleme: yönetici ekleyebilmeli mi, bilinçli kısıt mı? ❓
+- Sertifika soru ekleme: yönetici ekleyebilmeli mi, bilinçli kısıt mı? ❓ · 🟨 kısmen — gerekçe taslağı ajan tarafından yazıldı (`docs/kararlar/sertifika-soru-standardi-gerekce-2026-09-21.md`); kalan: PO'nun tek cümle teyidi → 03-PO #18
 - DISC/sektör dağılım oranı ayarı (A6): hardcoded, büyük iş, yapılacak mı? ❓
 - Arkadaşın başvurusu: canlıdan kaydoldu, panelde görünmedi — çözülmedi (b3 membership backfill ile ilgili olabilir). ⏳
