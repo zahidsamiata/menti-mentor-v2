@@ -5,7 +5,7 @@
 
 **Durum:** CALISIYOR (devam turu — kota ~09:30 UTC'de kesti; 00-SIMDI 08:01'den beri güncellenmemişti). Sıra: 2.4 bölmeyi bitir (TEK BAŞINA) → AJ-58 → AJ-72 kaydı → 2.5 → GÖREV 3 KARAR-PAKETI (merge) + kart zenginleştirme → GÖREV 4 (AJ-83 …) → DURDU (K1-a).
 
-**Şu an yapılan:** Adım 4 — GÖREV 2.5 (kural BAĞLAM SÖZLEŞMESİ + bekçi eksik uyarıları; dal `otonom/KURAL-I-BAGLAM-20260928`, yazılıyor) · KARAR-PAKETI taslağı scratchpad'de hazırlanıyor (Adım 5, 2.5 merge'inden sonra repoya).
+**Şu an yapılan:** Adım 5 — KARAR-PAKETI çatı #425 (7b'de; ilk 10 karar 24 iş tam + 4 koşullu). Adım 6 — AJ-83 yazılıyor. 2.5 MERGE (#424).
 
 **Devam turu — kesinti öncesi yarım kalanlar ve nasıl kapandı:**
 | İş | Dal | Son hâl (11:20 UTC teyit) | Kapanış PR'ı |
@@ -29,6 +29,7 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 | backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
 | backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
+| çatı #425 | GÖREV 3.5 KARAR-PAKETI | koşuyor | 7b sürüyor | inceleme |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **Push edilmemiş iş:** yok.
