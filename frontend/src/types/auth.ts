@@ -78,8 +78,10 @@ export interface AuthContextValue {
   /** 401 interceptor tarafından çağrılır; yeni token veya null döner */
   refreshAccessToken: () => Promise<string | null>;
   /**
-   * OAuth callback sayfası tarafından çağrılır.
-   * refreshToken artık HttpOnly cookie'de — sadece accessToken + expiresIn alır.
+   * Dışarıdan alınan erişim anahtarıyla oturum açar (refreshToken HttpOnly çerezde).
+   * AJ-73 (2026-09-28): OAuth callback sayfası artık bunu ÇAĞIRMAZ — erişim anahtarı adreste
+   * gelmiyor, oturum açılıştaki sessiz refresh ile kurulur. Şu an çağıranı yok; kaldırılması
+   * silme protokolüne tabidir (karantina PO onayıyla), bu iş kapsamında dokunulmadı.
    */
   loginWithTokens: (accessToken: string, expiresIn: number) => Promise<void>;
 }
