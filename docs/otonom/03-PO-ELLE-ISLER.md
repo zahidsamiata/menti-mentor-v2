@@ -168,6 +168,7 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | YN-13 (kişi adı) | Backend reposundaki `.claude/settings.local.json` dosyası (yerel izin ayarları) kişisel bilgisayar klasör yolu içeriyor ve public repoda. Dosyayı repodan çıkarmak ya da yolları genelleştirmek (izin ayarı olduğu için ajan dokunmaz) | `git -C backend grep -n -i "users\\\\" -- .claude` boş döner | — |
 | KR-16 (teyit) | Dokploy'da backend servisinin **başlatma komutu (command/start override)** tanımlı mı bak. Tanımlıysa ve `npx prisma migrate deploy` içeriyorsa kaldır — imaj artık `./node_modules/.bin/prisma migrate deploy && node dist/server.js` ile açılıyor (backend #161) | Panelde override yok; sunucu yeniden başlayınca /health `ok:true` | — |
 | AN-41 | Kod-senkron güncellenen KVKK metin paketini avukata götür, onaylat | Avukat onayı tarihiyle `02-ILERLEME`'ye yazılır | avukat paketi |
+| AJ-76 | Yalnız birden çok backend kopyası çalışıyorsa: paylaşımlı sayaç deposu (Redis) servisini aç, bağlantı değişkenini Dokploy'a gir | Kopya sayısı #29 teyidine bağlı; tek kopyaysa gerekmez (ajan "bellek içi yeterli" gerekçesini koda yazar) | #29 |
 
 ## Karar bekleyenler (kart `01-KARARLAR.md`'de — PO cevap yazacak)
 
@@ -232,6 +233,17 @@ Kanıt: `backend/src/services/health.ts:7-17` (tip) · `:40-49` (gövde) · `bac
 | 27 | ⭐ **GERÇEK KULLANICI GÖRÜŞMESİ yürüt** — 7 persona/panel/strateji belgesinin 7'si de "gerçek mentilerle doğrulanmalı" şartını koştu; **7 haftadır yapılmadı**; 10 davranışsal varsayım YALNIZ bununla sınanabilir. Kılavuzu ajan hazırlıyor · ✅ yapıldı — AN-32 · PR çatı #296 · 2026-09-25 · doğrulama: bitti-dogrulama-2026-09-27 (kuyruk **AN-32**, KARAR-70). ⚠️ 2026-09-09 testi PO'nun KENDİ hesaplarıyla gezinti (dogfooding) testiydi — **gerçek kullanıcı görüşmesi DEĞİL.** | Ürünün en büyük belirsizliği davranışsal ("menti gerçekten kırılgan mı, mentör gerçekten seçici mi") → koda karşı test edilemez, yalnız gerçek insanla. persona-v2 (KARAR-68 B) bunsuz üretilemez. | PO — AN-32 kılavuzuyla, gerçek menti/mentör/yönetici ile | Tek-sayfa kılavuzdaki soru seti gerçek kişilerle soruldu ✅; bulgular `02-ILERLEME.md`/09-DURUM'a. **Tetikleyici + öncelik = KARAR-70 cevabı** (öneri A: 3-5 kişi, erken). |
 | 28 | **`docs/gelen/` temizliği** — 13 dosya var, **hepsi güvenle silinebilir** (özleri izlenen belge/kodda kayıtlı; kanıt: `gelen-kutusu-envanteri-2026-09-23.md`). Klasör `.gitignore`'da → ajanlar göremez. | Kişisel prompt taslakları birikiyor; içlerinde kayıtlanmamış karar/içerik OLSAYDI kaybolurdu (bu turda tarandı, yoktu). | PO — dosyaları sil (ya da arşivle) | Klasör boş ya da yalnız aktif taslak içeriyor ✅. ⭐ **KURAL önerisi:** *"karar ya da içerik taşıyan hiçbir metin `docs/gelen/`'de BIRAKILMAZ; ilgili `docs/` klasörüne taşınır"* — çünkü `.gitignore` → bulut ajanları göremez. |
 | 29 | **Analiz turu salt-okuma DB sayımları** (bulutta DB yok) — (a) canlıda **eski 20 DISC sorusu** kaç ve hangi metin (TO §6-1) · (b) **STK-custom soru** canlı sayısı (OB-13) · (c) **sertifika canlı senaryo** sayısı (IK §C `03-sertifika:21`). Ayrıca **deploy topolojisi:** Dokploy tek-instance mi çok-instance mi (OB-08 cron-duplication kararını belirler) · Neon `connection_limit` (OB-06). | Bu sayılar bilinmeden AN-04 (banka taşıma), AN-13 (ölü triyaj) ve cron kararı büyüklüğü kestirilemez; ajan bulutta canlı Neon'a bakamaz. ⚠️ **KARAR-35 (salt-okuma izni) ve #11/#22 ile aynı oturumda.** | Neon konsolu (salt-okuma `SELECT`) + Dokploy paneli (yalnız topoloji bilgisi) | Beş sayı/bilgi `02-ILERLEME.md`'ye yazıldı ✅. ⛔ değer/secret yazma, yalnız sayım. |
+
+---
+
+## 📥 GÖREV 4 — SAHİPSİZ KALANLAR PO İŞLERİ (2026-09-27)
+
+> Sahipsiz kalan kalemlerin taranmasından (GÖREV 4) çıkan, kodla çözülemeyen PO işleri. Kaynak: `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md`.
+
+| # | İş | Neden gerekli | Nerede yapılır | Nasıl anlaşılır |
+|---|---|---|---|---|
+| 30 | **Yönetici anahtarını ve oturum imza sırrını yenile (rotasyon)** — `PLATFORM_ADMIN_KEY` (ve depo geçmişinde görünmüş olabilecek `JWT_SECRET`) | Kodda yalnız "varsayılan değer mi" kontrolü var (`backend/src/config.ts:38-40`); yenileme hiç yapılmadıysa eski ya da sızmış bir değer hâlâ geçerli olabilir (G1-27) | Dokploy → backend ortam değişkenleri: yeni güçlü değer üret, gir, backend'i yeniden başlat. Değeri hiçbir belgeye yazma | Eski anahtarla platform girişi reddediliyor, yenisiyle çalışıyor. `JWT_SECRET` değiştiyse herkesin bir kez yeniden giriş yapması beklenen etki |
+| 31 | **68 soruluk soru bankası inceleme formunu doldur** (`docs/raporlar/icerik/sorular-po-inceleme-2026-08-26.md`) — KARAR-57/58 cevaplandıktan SONRA | Kutular boş; form doldurulmadan ajan içerik düzeltmesi yapamaz (G3-10). Senin notun: "tasarım tezine bağlı, tez bitince sıraya girecek" | PO — belge içinde beğen / ele / düzelt | Formda boş "PO notu" kalmıyor; ajan işaretlenenleri AN-02 deseniyle içerik düzeltme satırına çevirebiliyor |
 
 ---
 

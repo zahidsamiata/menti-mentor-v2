@@ -159,6 +159,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-115** | **"Kurumunu Kur" sayfası arama motorlarında görünsün mü? (AJ-47 sonrası)** | **0** | ⬜ boş · ajan-ekledi · öneri A |
 | **KARAR-116** | **🔵 EVET/HAYIR — eski kişilik kartlarındaki ham test puanları temizlensin mi (AJ-50)** | **1** (AJ-50) | ⬜ boş · 🔵 · yedek: `User.discResultCard` (etkilenecek satırlar) |
 | **KARAR-117** | **Mentörün emeği dönemsel olarak da takdir edilsin mi ("dönemin/yılın mentörü")** | **0** | ⬜ boş · ajan-ekledi · öneri A |
+| **KARAR-118** | **Ayrı bir deneme (staging) ortamı kurulsun mu** | **0** | ⬜ boş · ajan-ekledi · öneri B |
 
 ---
 
@@ -1840,4 +1841,18 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** İlk kurumlarda sade kalmak istiyorsan A; kurumlar teşekkür/tören kültürü istiyorsa B; mentör sayısı büyük ve ölçüt güvenilirse C.
 **Benim önerim:** A (şimdilik) — gerçek kullanıcı yokken takdir düzeni tasarlamak erken; bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** T10'un "dönemsel takdir" ayağı bekler; başka iş kilitlenmez.
+**CEVAP:**
+
+
+### KARAR-118 · Ayrı bir deneme (staging) ortamı kurulsun mu? (0 iş kilitliyor) [ÜRÜN + ALTYAPI KARARI]
+**Şu an ne var:** Tek ortam var: lokal geliştirme canlı veritabanını kullanıyor (CLAUDE.md § CANLI = LOKAL AYNI DB), ayrı bir deneme sitesi yok. Kanıt: depoda staging izi yok (`docker-compose.yml`, `.github`, `scripts`, `frontend/src`, `backend/src` araması 0) · kaynak `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:212` (G8-07).
+**Sorun ne:** Her değişiklik ilk kez gerçek kullanıcıların sitesinde denenir; lokal bir veri hatası anında canlıya yansır.
+**Neden sana soruyorum:** Aylık maliyet ve hesap/sunucu kurulumu (Dokploy, Neon) yalnız sende.
+**Seçenekler:**
+- **A) Tam staging (ayrı site + ayrı veritabanı dalı).** · Kullanıcı ne görür: değişiklik yok (sen yeni sürümü önce deneme sitesinde görürsün) · Kazanç: canlıdan önce gerçekçi deneme, kurumlara demo/kabul testi; lokal canlı veritabanından kurtulur · Kaybedersin: aylık maliyet; iki ortamın ayarlarını eşit tutma yükü · Süre: M · Geri alınır: evet · Migration: yok
+- **B) Yalnız ayrı veritabanı (Neon dalı) — lokal ve testler ona bağlanır, site tek.** · Kullanıcı ne görür: değişiklik yok · Kazanç: canlı veriye kazara yazma riski biter, ucuz · Kaybedersin: arayüz değişikliği yine ilk kez canlıda görülür · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Şimdilik hiçbiri.** · Kullanıcı ne görür: değişiklik yok · Kazanç: maliyet ve emek yok · Kaybedersin: "canlı = lokal" riski ve "ilk deneme canlıda" durumu sürer · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Kullanıcı gelmeden önce riski ucuza kapatmak istiyorsan B; kurumlara demo ya da kabul testi yapacaksan A; maliyet şu an kesin engel ise C.
+**Benim önerim:** B — asıl risk canlı veriye kazara yazmak ve B bunu en ucuza kapatır; bu senin maliyet kararın, önerime güvenme. (Hangi veritabanının canlı olduğu teyidi — 03-PO ADIM 0 — ile birlikte düşün.)
+**Cevap vermezsen:** G8-07 açık kalır; migration/seed işleri canlı yedek şartıyla sürer.
 **CEVAP:**
