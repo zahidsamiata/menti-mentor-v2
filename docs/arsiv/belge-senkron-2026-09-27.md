@@ -849,3 +849,8 @@ Kuyrukta kendi satırı olmayan BAĞLA kalemleri: bağlamsal geri bildirim kart�
 ````text
 2 strateji denetlendi (aşağıdaki B.3/B.4); 2 envanter (`*-panel-envanteri`) denetlenmedi → `kod-denetimi/strateji-gercek-denetimi:337` "sonraki tur".
 ````
+
+### docs/raporlar/kod-denetimi/00-INDEX.md:8 · indeks sayısı (yeni rapor satırı eklendi)
+````text
+## İçerik (12)
+````
