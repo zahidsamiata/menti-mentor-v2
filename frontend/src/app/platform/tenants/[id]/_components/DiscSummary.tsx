@@ -1,4 +1,4 @@
-import type { TenantAnalytics } from '@/lib/api/platform';
+import type { TenantAnalytics, TenantDefaultProfile } from '@/lib/api/platform';
 import { UI_TEXT } from '@/lib/uiText';
 
 export function DiscSummary({
@@ -10,13 +10,19 @@ export function DiscSummary({
 }) {
   if (loading) return <p className="text-muted-foreground text-sm">{UI_TEXT.status.loading}</p>;
   if (!analytics || analytics.discDistribution.length === 0) {
-    return <p className="text-muted-foreground text-sm">DISC analizi için yeterli veri yok.</p>;
+    return (
+      <div className="space-y-4">
+        <DefaultProfileLine profile={analytics?.defaultProfile} />
+        <p className="text-muted-foreground text-sm">DISC analizi için yeterli veri yok.</p>
+      </div>
+    );
   }
 
   const max = Math.max(...analytics.discDistribution.map((d) => d.count), 1);
 
   return (
     <div className="space-y-4">
+      <DefaultProfileLine profile={analytics.defaultProfile} />
       <p className="text-sm text-muted-foreground">
         DISC tipi belirlenmiş üye sayısı:{' '}
         <span className="text-foreground font-semibold">{analytics.totalWithDisc}</span>
@@ -47,5 +53,27 @@ export function DiscSummary({
         })}
       </div>
     </div>
+  );
+}
+
+/**
+ * AJ-79 (md.111): DISC vektörü olmayan aktif üye oranı — eşleştirmede bu üyeler vektör skoru
+ * yerine varsayılan skora düşer. Toplu sayı; kişi listesi yok. Küçük kurumda backend gizler.
+ */
+function DefaultProfileLine({ profile }: { profile?: TenantDefaultProfile }) {
+  if (!profile) return null;
+  let value: string;
+  if (profile.suppressed) {
+    value = `gizli (<${profile.minGroupSize} üye)`;
+  } else if (profile.ratePercent === null) {
+    value = 'veri yok';
+  } else {
+    value = `%${profile.ratePercent.toLocaleString('tr-TR')} (${profile.withoutVector}/${profile.activeMembers})`;
+  }
+  return (
+    <p className="text-sm text-muted-foreground" data-testid="default-profile-rate">
+      Varsayılana düşen profil (DISC vektörü olmayan aktif üye):{' '}
+      <span className="text-foreground font-semibold">{value}</span>
+    </p>
   );
 }
