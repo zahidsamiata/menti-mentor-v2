@@ -24,9 +24,9 @@ vi.mock('@/components/organisms/DiscRecallCard', () => ({ DiscRecallCard: () => 
 vi.mock('@/components/organisms/LearningJourneyCard', () => ({ LearningJourneyCard: () => null }));
 vi.mock('@/components/organisms/NotificationOptInButton', () => ({ NotificationOptInButton: () => null }));
 
-// Sunucu F-27 sayfalaması: ilk sayfada 30 konuşma, toplam 35.
+// Sunucu F-27 sayfalaması: ilk sayfada 30 konuşma; toplam her testte ayrı (AJ-107: 31 sınır durumu).
 const PAGE_SIZE = 30;
-const TOTAL_CONVERSATIONS = 35;
+let totalConversations = 35;
 const firstPageItems = Array.from({ length: PAGE_SIZE }, (_, i) => ({
   id: `conv-${i + 1}`,
   counterpart: { id: `mentor-${i + 1}` },
@@ -40,7 +40,7 @@ const apiMock = vi.fn(async (path: string) => {
   if (path === '/api/agreements/active') return { ok: false, error: { error: 'NOT_FOUND', message: 'yok' }, status: 404 };
   if (path === '/api/meetings') return { ok: true, data: { items: [] } };
   if (path === '/api/conversations') {
-    return { ok: true, data: { items: firstPageItems, total: TOTAL_CONVERSATIONS, limit: PAGE_SIZE, offset: 0 } };
+    return { ok: true, data: { items: firstPageItems, total: totalConversations, limit: PAGE_SIZE, offset: 0 } };
   }
   return { ok: false, error: { error: 'NOT_MOCKED', message: 'yok' }, status: 404 };
 });
@@ -55,10 +55,12 @@ function sentRequestsValue(): string | null {
 }
 
 describe('AJ-42 · Menti paneli — Gönderilen Talepler sayacı total kullanır', () => {
-  it('konuşma listesi 30 kayıtla kırpılmış, total=35 → kart 35 gösterir (30 değil)', async () => {
+  // AJ-107: 31 = bir sayfadan TEK fazla (sınır durumu); 35 = AJ-42'nin ilk vakası.
+  it.each([31, 35])('konuşma listesi 30 kayıtla kırpılmış, total=%i → kart total gösterir (30 değil)', async (total) => {
+    totalConversations = total;
     render(<MentiDashboardPage />);
     await waitFor(() => expect(apiMock).toHaveBeenCalledWith('/api/conversations'));
-    await waitFor(() => expect(sentRequestsValue()).toBe(String(TOTAL_CONVERSATIONS)));
+    await waitFor(() => expect(sentRequestsValue()).toBe(String(total)));
     expect(sentRequestsValue()).not.toBe(String(PAGE_SIZE));
   });
 });
