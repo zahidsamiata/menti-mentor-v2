@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import MentorCertificationPage from '@/app/(dashboard)/mentor/certification/page';
 import { formatRemaining, isCooldownActive } from '@/lib/certificationCooldownText';
 
@@ -17,10 +17,12 @@ const question = {
 };
 
 let certifyResponse: unknown;
+// AJ-60: soru ucunun döndürdüğü mola bitişi (sayfa mola sırasında açıldı senaryosu).
+let questionsCooldownUntil: string | null = null;
 
 const apiMock = vi.fn(async (path: string) => {
   if (path === '/api/scoring/certification/questions') {
-    return { ok: true, data: { questions: [question] } };
+    return { ok: true, data: { questions: [question], cooldownUntil: questionsCooldownUntil } };
   }
   if (path === '/api/scoring/certification/answer') {
     return { ok: true, data: { outcome: 'wrong', explanation: 'Açıklama', isRedLine: false, firstAttemptPass: false } };
@@ -54,7 +56,10 @@ async function answerAndSubmit() {
 const questionLoads = () => apiMock.mock.calls.filter(([p]) => p === '/api/scoring/certification/questions').length;
 
 describe('Sertifika molası — kalan süre ve yeniden başla kilidi (AJ-37)', () => {
-  beforeEach(() => apiMock.mockClear());
+  beforeEach(() => {
+    apiMock.mockClear();
+    questionsCooldownUntil = null;
+  });
 
   it('mola başladıysa kalan süreyi gösterir, "Yeniden başla" kapalıdır ve tıklama yeni deneme başlatmaz', async () => {
     certifyResponse = failedResult(new Date(Date.now() + (5 * 60 + 30) * MINUTE).toISOString());
@@ -106,6 +111,58 @@ describe('Sertifika molası — kalan süre ve yeniden başla kilidi (AJ-37)', (
     expect(await screen.findByText(/Yaklaşık 23 saat sonra yeniden deneyebilirsin/)).toBeInTheDocument();
     expect(screen.queryByText(/Kısa bir bekleme/)).not.toBeInTheDocument();
     expect(screen.getByText(/Bu arada: Öğrenme Yolculuğu/)).toBeInTheDocument();
+  });
+});
+
+describe('Sertifika molası — sayfa mola sırasında açılınca (AJ-60)', () => {
+  beforeEach(() => {
+    apiMock.mockClear();
+    questionsCooldownUntil = null;
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('açılışta mola sürüyorsa kalan süre görünür ve "Bitir ve değerlendir" kilitlidir', async () => {
+    questionsCooldownUntil = new Date(Date.now() + (3 * 60 + 15) * MINUTE).toISOString();
+    render(<MentorCertificationPage />);
+
+    // Açılır açılmaz (henüz cevap yok) kalan süre görünür.
+    expect(await screen.findByText(/Yaklaşık 3 saat 15 dakika sonra yeniden deneyebilirsin/)).toBeInTheDocument();
+    expect(screen.getByText(/Bu arada: Öğrenme Yolculuğu/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Seçenek A'));
+    const finish = await screen.findByRole('button', { name: /Bitir ve değerlendir/ });
+    expect(finish).toBeDisabled();
+    expect(screen.getByText(/Değerlendirme 3 saat 15 dakika sonra açılır/)).toBeInTheDocument();
+
+    fireEvent.click(finish);
+    expect(apiMock.mock.calls.some(([p]) => p === '/api/scoring/certify')).toBe(false);
+  });
+
+  it('süre dolunca metin "mola bitti"ye döner ve düğme açılır', async () => {
+    questionsCooldownUntil = new Date(Date.now() + 90_000).toISOString(); // 1,5 dakika
+    render(<MentorCertificationPage />);
+    fireEvent.click(await screen.findByText('Seçenek A'));
+    const finish = await screen.findByRole('button', { name: /Bitir ve değerlendir/ });
+    expect(finish).toBeDisabled();
+
+    await act(async () => {
+      vi.advanceTimersByTime(2 * MINUTE);
+    });
+
+    expect(screen.getByText(/Mola bitti/)).toBeInTheDocument();
+    expect(screen.queryByText(/Mola bitince/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/sonra açılır/)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Bitir ve değerlendir/ })).toBeEnabled();
+  });
+
+  it('mola yoksa (cooldownUntil null) uyarı yok, düğme açık', async () => {
+    render(<MentorCertificationPage />);
+    fireEvent.click(await screen.findByText('Seçenek A'));
+    expect(await screen.findByRole('button', { name: /Bitir ve değerlendir/ })).toBeEnabled();
+    expect(screen.queryByText(/mola/i)).not.toBeInTheDocument();
   });
 });
 

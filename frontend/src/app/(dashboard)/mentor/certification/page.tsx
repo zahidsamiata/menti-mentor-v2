@@ -93,6 +93,11 @@ export default function MentorCertificationPage() {
     if (res.ok) {
       setTopics(groupByTopic(res.data.questions));
       setRetryTopics(new Set(res.data.retryTopics ?? []));
+      // AJ-60: sayfa mola sırasında (yeniden) açıldıysa kalan süre ve kilit en baştan görünsün.
+      const openedCooldown = res.data.cooldownUntil ?? null;
+      setNow(Date.now());
+      setCooldownUntil(openedCooldown);
+      setCooldownActive(isCooldownActive(openedCooldown, Date.now()));
     } else {
       setLoadError(apiErrorMessage(res.error, 'Senaryolar yüklenemedi. Lütfen tekrar deneyin.'));
     }
@@ -115,6 +120,8 @@ export default function MentorCertificationPage() {
   // AJ-37: mola bitişi ya sonuçtan (bu deneme molayı başlattı) ya da COOLDOWN_ACTIVE yanıtından gelir.
   const cooldownEnd = result?.cooldownUntil ?? cooldownUntil;
   const cooldownRunning = isCooldownActive(cooldownEnd, now);
+  // AJ-60: ekran açıkken mola süresi doldu — metin "bitti"ye döner, kilit açılır.
+  const cooldownEnded = cooldownActive && Boolean(cooldownUntil) && !cooldownRunning;
   useEffect(() => {
     if (!cooldownRunning) return;
     const timer = setInterval(() => setNow(Date.now()), COOLDOWN_TICK_MS);
@@ -126,6 +133,12 @@ export default function MentorCertificationPage() {
   const currentTopic    = topics[topicIdx];
   const currentQuestion = currentTopic?.variants[variantIdx];
   const isLearningRetry = variantIdx > 0;
+  // Son adımdaki düğme değerlendirmeyi gönderir ("Bitir ve değerlendir"); mola sürerken kilitli (AJ-60).
+  const isFinalStep =
+    Boolean(reveal && currentTopic) &&
+    topicIdx >= topics.length - 1 &&
+    !(variantIdx === 0 && !reveal!.firstAttemptPass && currentTopic!.variants.length > 1);
+  const submitLocked = isFinalStep && cooldownRunning;
 
   async function choose(key: string) {
     if (reveal || revealing || !currentQuestion || !currentTopic) return;
@@ -161,6 +174,7 @@ export default function MentorCertificationPage() {
 
     // Sonraki konu — ya da bitir.
     if (topicIdx >= topics.length - 1) {
+      if (cooldownRunning) return; // AJ-60: mola bitmeden değerlendirme gönderilmez.
       await submit();
       return;
     }
@@ -395,21 +409,25 @@ export default function MentorCertificationPage() {
                   ? 'Bir de benzer bir durumla pekiştirelim.'
                   : 'Açıklamayı okudun — devam edelim.'}
               </span>
-              <Button onClick={() => void proceed()} size="sm">
-                {topicIdx >= topics.length - 1 &&
-                !(variantIdx === 0 && !reveal.firstAttemptPass && currentTopic.variants.length > 1)
-                  ? 'Bitir ve değerlendir →'
-                  : 'Devam →'}
+              <Button onClick={() => void proceed()} size="sm" disabled={submitLocked}>
+                {isFinalStep ? 'Bitir ve değerlendir →' : 'Devam →'}
               </Button>
             </div>
+          )}
+          {submitLocked && cooldownEnd && (
+            <p className="text-xs text-muted-foreground text-right">
+              {CERT_COOLDOWN_TEXT.submitLocked(formatRemaining(cooldownEnd, now))}
+            </p>
           )}
 
           {cooldownActive && (
             <AlertMessage
-              type="error"
+              type={cooldownEnded ? 'info' : 'error'}
               message={
                 cooldownRunning && cooldownUntil
                   ? CERT_COOLDOWN_TEXT.alreadyActive(formatRemaining(cooldownUntil, now))
+                  : cooldownEnded
+                  ? CERT_COOLDOWN_TEXT.ended
                   : CERT_COOLDOWN_TEXT.alreadyActiveUnknown
               }
             />
@@ -418,7 +436,7 @@ export default function MentorCertificationPage() {
 
           {/* Köprü: bekleme sırasında öğrenme yolculuğuna davet — kaldığın
               mentorluk konularını sıcak senaryolarla pekiştirebilirsin. */}
-          {cooldownActive && (
+          {cooldownActive && !cooldownEnded && (
             <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold flex items-center gap-2">🚀 Bu arada: Öğrenme Yolculuğu</p>
