@@ -50,8 +50,8 @@ function meetingFixture(overrides: Partial<Meeting> = {}): Meeting {
     endsAt: new Date(Date.now() + 90_000_000).toISOString(),
     notes: null,
     requestMessage: null,
-    mentor: { id: MENTOR_ID, fullName: 'Ayşe Yıldız' },
-    menti:  { id: MENTI_ID, fullName: 'Deniz Kaya', sectorTags: [], expectationCategories: [] },
+    mentor: { id: MENTOR_ID, fullName: 'Örnek Mentör' },
+    menti:  { id: MENTI_ID, fullName: 'Örnek Menti', sectorTags: [], expectationCategories: [] },
     ...overrides,
   };
 }
@@ -65,10 +65,10 @@ describe('Görüşmelerim — karşı taraf adı', () => {
   it('menti bakınca mentörün adı "Mentör" etiketiyle görünür', () => {
     render(<MeetingsPage />);
 
-    expect(screen.getByText('Ayşe Yıldız')).toBeInTheDocument();
+    expect(screen.getByText('Örnek Mentör')).toBeInTheDocument();
     expect(screen.getByText(/Mentör:/)).toBeInTheDocument();
     // Menti kendi adını karşı taraf olarak görmemeli
-    expect(screen.queryByText('Deniz Kaya')).not.toBeInTheDocument();
+    expect(screen.queryByText('Örnek Menti')).not.toBeInTheDocument();
   });
 
   it('mentör bakınca mevcut davranış korunur: mentinin adı "Menti" etiketiyle görünür', () => {
@@ -76,9 +76,9 @@ describe('Görüşmelerim — karşı taraf adı', () => {
 
     render(<MeetingsPage />);
 
-    expect(screen.getByText('Deniz Kaya')).toBeInTheDocument();
+    expect(screen.getByText('Örnek Menti')).toBeInTheDocument();
     expect(screen.getByText(/Menti:/)).toBeInTheDocument();
-    expect(screen.queryByText('Ayşe Yıldız')).not.toBeInTheDocument();
+    expect(screen.queryByText('Örnek Mentör')).not.toBeInTheDocument();
   });
 
   it('mentör adı gelmezse satır boş kalmaz, yedek metin gösterilir', () => {
