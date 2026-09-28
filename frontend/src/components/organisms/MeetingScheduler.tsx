@@ -44,6 +44,13 @@ const FORMATS: { key: MeetingFormat; label: string; icon: React.ComponentType<{ 
   { key: 'PHONE',     label: 'Telefon',   icon: Phone  },
 ];
 
+/**
+ * @deprecated E-4 KARANTİNA (KARAR-11 = A, silme protokolü adım 5) — hiçbir sayfa bu bileşeni
+ * kullanmıyor; aynı işi `app/(dashboard)/mentor/availability/page.tsx` (mentör müsaitliği) ve
+ * `app/(dashboard)/book-meeting/page.tsx` (menti randevusu) kendi içinde yapıyor. Yeni yerde
+ * KULLANMA. Dosya silinmedi; tam içerik + geri alma: `docs/arsiv/silinenler-2026-09-10.md`.
+ * Gerçek silme ayrı turda, PO'nun ikinci onayıyla (E-5).
+ */
 export default function MeetingScheduler(props: MeetingSchedulerProps) {
   return props.mode === 'mentor' ? (
     <MentorAvailability {...props} />

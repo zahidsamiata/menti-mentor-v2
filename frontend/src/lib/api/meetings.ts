@@ -174,6 +174,11 @@ export const meetingsApi = {
   getCheckIns: (api: BoundClient, meetingId: string): Promise<ApiResult<MeetingCheckInsResponse>> =>
     api<MeetingCheckInsResponse>(`/api/meetings/${meetingId}/check-ins`),
 
+  /**
+   * @deprecated E-4 KARANTİNA — sunucu ucu `GET /api/meetings/pair-signal` 410 döner (kapatıldı).
+   * Çift sinyali yönetici eşleşme listesinde "Risk" sütunu olarak zaten gösteriliyor
+   * (`app/(admin)/admin/eslesmeler/page.tsx`). Arşiv: `docs/arsiv/silinenler-2026-09-10.md`.
+   */
   getPairSignal: (
     api: BoundClient,
     mentorId: string,
