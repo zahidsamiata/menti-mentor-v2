@@ -78,3 +78,5 @@
 - 2026-09-28 · **AJ-81 BITTI** (çatı #440; yalnız test; mutasyon yerel 4/4) — menti kartındaki uyum yüzdesi/gerekçe ve DISC gizliliği testle korunuyor.
 - 2026-09-28 · **AJ-78 BITTI** (backend #238 + çatı #435; 7b 2 tur; mutasyon CI #239/#240/#241/#245 + yerel) — CANLIDA BAK: KPI panelinde ve CSV'de tamamlama oranları + tamamlanan görüşme. Canlı ok:true · db:up · /admin/kpi 200. KARAR-133 açıldı (AJ-56 kalanı + havuz kartından işlem).
 - 2026-09-28 · **AJ-82 BITTI** (çatı #441; yalnız test; mutasyon yerel). · **AJ-95a** backend #246 merge (7b ONAY), çatı #439 CI.
+- 2026-09-28 · **AJ-95 BITTI (kısmen — 95b/95c)**: 95a psikometrik Json yazım doğrulaması (backend #246 + çatı #439; 7b ONAY; mutasyon yerel 6/6). Canlı ok:true · db:up. Yeni: AJ-108 · AJ-109.
+- 2026-09-28 · **AJ-84 BITTI** (çatı #443; yalnız test; mutasyon yerel 3/3).
