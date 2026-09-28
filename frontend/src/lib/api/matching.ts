@@ -11,6 +11,12 @@ import type {
 
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
+// AJ-90: menti mentör havuzunda bir sayfada kaç kart gelir. TEK SABİT — ürün kararı
+// KARAR-54.3 (sayfa başına kart sayısı) cevaplanınca yalnız bu değer değişir.
+// Geçici değer 18: kuyruğun "cevap yoksa" varsayılanı; kart ızgarası 2 sütun (sm:grid-cols-2)
+// olduğundan çift sayı son satırı boş bırakmaz; eski davranışa (tek seferde 100) 9'dan yakındır.
+export const MENTOR_POOL_PAGE_SIZE = 18;
+
 export const matchingApi = {
   // Menti için: tenant içindeki aktif mentorları listele (SADECE ONAYLANAN kullanıcılar çağırmalı).
   // /api/users artık sayfalı (varsayılan 50); menti-tarama tam listeyi beklediğinden max sayfa
@@ -20,8 +26,18 @@ export const matchingApi = {
 
   // Menti için: kendisine uygun mentörleri UYUM SKORUYLA getir (KARAR 5 güvenli — discType yok).
   // IDOR: backend requireSelfOrAdmin ile korur; mentiId kendi id'si olmalı.
-  mentorMatches: (api: BoundClient, mentiId: string): Promise<ApiResult<MentorMatchesResponse>> =>
-    api<MentorMatchesResponse>(`/api/mentis/${mentiId}/mentor-matches?limit=100`),
+  // AJ-90: sayfalı — `offset` verilirse o sıradan sonraki sayfa gelir; yanıttaki `total` tüm
+  // uygun mentör sayısıdır. Sıra backend'de kararlı (skor azalan, eşitlikte id) → sayfa sınırında
+  // tekrar/eksik yok.
+  mentorMatches: (
+    api: BoundClient,
+    mentiId: string,
+    params: { offset?: number } = {},
+  ): Promise<ApiResult<MentorMatchesResponse>> => {
+    const qs = new URLSearchParams({ limit: String(MENTOR_POOL_PAGE_SIZE) });
+    if (params.offset) qs.set('offset', String(params.offset));
+    return api<MentorMatchesResponse>(`/api/mentis/${mentiId}/mentor-matches?${qs.toString()}`);
+  },
 
   // PENDING menti için: PII içermeyen mentor sayısı (KVKK — isim/e-posta gönderilmez)
   countMentors: (api: BoundClient): Promise<ApiResult<{ count: number }>> =>

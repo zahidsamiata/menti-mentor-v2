@@ -1,5 +1,5 @@
 ### KARAR-127 · Mentörlere sertifikadan önce "Mini Akademi" (4 kısa modül) yapılsın mı? (0 iş kilitliyor; cevap 1 iş açar) [ÜRÜN KARARI]
-**Şu an ne var:** Mentör sertifika kapısı çalışıyor (sınav, 24 saat bekleme, konuların %80'i eşiği — `backend/src/services/certification.service.ts:27,33,52`); mentör panelinde Öğrenme Yolculuğu → sertifika yolu var (`frontend/src/app/(dashboard)/mentor/page.tsx:193`). Tasarım belgesi ise "Önce Eğit, Sonra Kalibre Et" ilkesiyle 4 kısa, puansız modül (Yönlendir · Dinle · Güvenli alan · Sınırlar) öngörüyor ve başlığı ✅ diyor (`docs/kararlar/konu/03-psikometri-ve-algoritma.md:47-50`). Kodda ve ön yüzde "Mini Akademi" yok (backend+frontend grep "akademi|academy" 0 — GÖREV 2.2, `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`). "Baraj 65" de T4 kararıyla "%80 konu" oldu. İçerik denetimi bunu numarasız bıraktı (`docs/raporlar/kesif/icerik-tam-okuma-2026-09-23.md:496`).
+**Şu an ne var:** Mentör sertifika kapısı çalışıyor (sınav, 24 saat bekleme, konuların %80'i eşiği — `backend/src/services/certification.service.ts:27,33,52`); mentör panelinde Öğrenme Yolculuğu → sertifika yolu var (`frontend/src/app/(dashboard)/mentor/page.tsx:190-191`). Tasarım belgesi ise "Önce Eğit, Sonra Kalibre Et" ilkesiyle 4 kısa, puansız modül (Yönlendir · Dinle · Güvenli alan · Sınırlar) öngörüyor ve başlığı ✅ diyor (`docs/kararlar/konu/03-psikometri-ve-algoritma.md:47-50`). Kodda ve ön yüzde "Mini Akademi" yok (backend+frontend grep "akademi|academy" 0 — GÖREV 2.2, `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`). "Baraj 65" de T4 kararıyla "%80 konu" oldu. İçerik denetimi bunu numarasız bıraktı (`docs/raporlar/kesif/icerik-tam-okuma-2026-09-23.md:496`).
 **Sorun ne:** Belge "var" diyor, ürün yok. Yeni mentör sertifika sınavına kısa bir hazırlık modülü görmeden giriyor; Öğrenme Yolculuğu bu işi karşılıyor mu, kimse karar yazmamış.
 **Neden sana soruyorum:** Kullanıcıya yeni içerik/özellik eklenip eklenmeyeceği ve mentör deneyiminin sırası ürün kararı; modül metinleri de kurumlara/kullanıcılara görünen içerik.
 **Seçenekler:**
@@ -9,5 +9,6 @@
 **Karşılaştırma:** İlk mentörlerin hızla sertifika almasını istiyorsan A; ilkeyi mevcut yapıyla ucuza uygulamak istiyorsan B; mentör kalitesi ana farklılaşma olacaksa C.
 **Benim önerim:** A şimdilik (belge düzeltilir), gerçek mentör geri bildirimi gelince B — bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** Belge "var" demeye devam eder (bugün 🟨 notlu); başka iş kilitlenmez. İlgili: AJ-101.
+**İlgili kartlar:** KARAR-5 (B seçeneği öğrenme yolculuğu içeriğine ekler, aynı seed) · KARAR-46 (hazırlık modülü sertifika içeriğinin konularına dayanır)
 **CEVAP:**
 

@@ -11,5 +11,6 @@
 **Karşılaştırma:** Bugün gerçek etkisi yok; soru "gelecekte hangisine sabitleyelim". A canlı davranışı hiç değiştirmez; B değiştirir; C kararı erteler.
 **Benim önerim:** A — canlı üç yol zaten bu sırada, kimsenin sonucu değişmez. *(Bu senin ürün kararın; önerime güvenme.)*
 **Cevap vermezsen:** Çelişki kodda işaretli kalır; hiçbir iş kilitlenmez.
+**İlgili kartlar:** KARAR-57 (üç DISC yolu tekleşirse eşitlik sırası da tekleşir) · KARAR-107 (aynı AN-12 işinin karantina ayağı; PR #186 açık)
 **CEVAP:**
 

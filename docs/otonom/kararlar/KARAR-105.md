@@ -11,6 +11,7 @@
 **Karşılaştırma:** Hızlı ve anlaşılır bir karşılaştırma istiyorsan A. Her kişinin açık rızasını esas almak istiyorsan B, ama sayılar küçük kalabilir. İlk kurumlarla canlıya çıkış öncelikliyse C.
 **Benim önerim:** C şimdilik, sonra A. Toplamlar zaten 3'ten küçük grupları gizliyor ama karşılaştırma yapılacak kadar çok kurum henüz yok. *(Bu senin ürün kararın; önerime güvenme.)*
 **Cevap vermezsen:** AN-31 kilitli kalır; başka iş etkilenmez.
+**İlgili kartlar:** KARAR-34 (cevaplı; SORU 2 → B, yalnız anonim toplu paylaşım) · KARAR-96 (B seçeneği AN-30 bireysel rızasına bağlı) · KARAR-119 (karşılaştırma bir paket ayrıcalığı olabilir)
 **CEVAP:**
 
 ---

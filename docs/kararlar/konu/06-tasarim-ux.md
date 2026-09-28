@@ -37,7 +37,7 @@ Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-e
   - Mevcut skor API'den dönüyor (`/mentors/:id/candidates`, `totalScore/sectorScore/discScore`) →
     **İŞ 7'ye (sektör-scorer) BAĞLI DEĞİL, bugünkü skorla çalışır.**
 - **Kartta GÖSTERİLMEYECEK:** deneyim (yıl/şirket — etiket yeter); sosyal linkler; müsaitlik.
-- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa. · 🟨 kısmen — kart ızgarası var; kalan: sayfalama (bugün tek istekte en çok 100) → AJ-90
+- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa. · 🟨 kısmen — kart ızgarası var; kalan: sayfalama (bugün tek istekte en çok 100) → AJ-90 · ✅ sayfalama yapıldı — AJ-90 · PR #230/#428 · 2026-09-28 (18 kart + "Daha fazla göster"; kesin sayı KARAR-54)
 - **Detay sayfası (karta tıklayınca):**
   - Sosyal linkler (LinkedIn/Instagram) **burada + KOŞULLU** — kişi bilgi girmişse göster, girmemişse hiçbir şey gösterme.
   - Müsaitlik takvimi → müsait saate tıkla → **niyet mektubu yaz** akışı.

@@ -13,6 +13,7 @@
 - **HAYIR** · Kullanıcı ne görür: hiçbir şey · Kazanç: canlı veriye dokunulmaz · Kaybedersin: hassas veri gereksiz bir kopyada durmaya devam eder; ileride süzgeci atlayan yeni bir okuma yolu açılırsa yeniden sızabilir · Süre: — · Geri alınır: — · Migration: yok
 **Benim önerim:** EVET — geri alınabilir, kullanıcıya görünmez ve KVKK veri minimizasyonunu kapatır; acil değil.
 **Cevap vermezsen:** Yalnız AJ-50 bekler; başka iş etkilenmez.
+**İlgili kartlar:** KARAR-86 (aynı DISC verisinin kime görüneceği)
 **CEVAP:**
 
 
