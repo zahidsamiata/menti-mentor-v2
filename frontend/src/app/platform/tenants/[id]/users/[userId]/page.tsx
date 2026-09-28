@@ -11,7 +11,7 @@ import {
 } from '@/lib/api/platform';
 import { certStatusBadge } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
-import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
+import { DANGER_PILL_CLASS, INFO_PILL_CLASS, SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 const ROLE_LABEL: Record<TenantMemberRole, string> = {
   ADMIN: 'Admin',
@@ -24,7 +24,7 @@ function roleBadgeClass(role: TenantMemberRole): string {
     case 'ADMIN':
       return 'bg-primary/15 text-primary';
     case 'MENTOR':
-      return 'bg-sky-900/60 text-sky-600 dark:text-sky-400';
+      return INFO_PILL_CLASS;
     case 'MENTI':
       return 'bg-muted text-muted-foreground';
   }
@@ -33,7 +33,7 @@ function roleBadgeClass(role: TenantMemberRole): string {
 function activeBadgeClass(isActive: boolean): string {
   return isActive
     ? SUCCESS_PILL_CLASS
-    : 'bg-red-900/60 text-destructive';
+    : DANGER_PILL_CLASS;
 }
 
 export default function TenantUserDetailPage() {
