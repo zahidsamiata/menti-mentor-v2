@@ -24,11 +24,13 @@ const OUTCOME_STYLE: Record<CertOutcome, { badge: string; icon: string; label: s
   wrong:      { badge: 'bg-red-100 text-red-800 border-red-300 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800',       icon: '❌', label: 'Zararlı / zayıf' },
 };
 
-// AN-01: sınav-seviyesi bekleme kuralı — YALNIZ bilgilendirme cümlesi için ("her 2 başarısız
-// denemeden sonra 24 saat"). Backend `CERT_CONFIG` (certification.service.ts:31,33) bu sayıları
-// yanıtta göndermiyor. Molanın başlayıp başlamadığı ve ne zaman biteceği bu sabitten HESAPLANMAZ:
-// backend'in döndürdüğü `cooldownUntil` okunur (AJ-37).
-const CERT_RETRY_RULE = { attemptsBeforeCooldown: 2, cooldownHours: 24 } as const;
+// AN-01 + I-08 (madde 158): sınav-seviyesi deneme kuralı — YALNIZ bilgilendirme cümlesi için
+// ("günde en fazla 2 deneme; hak dolunca ertesi gün Türkiye saatiyle 00:00"). Backend
+// `CERT_CONFIG.attemptsBeforeCooldown` bu sayıyı yanıtta göndermiyor. Molanın başlayıp
+// başlamadığı ve ne zaman biteceği bu sabitten HESAPLANMAZ: backend'in döndürdüğü
+// `cooldownUntil` okunur (AJ-37). Molasız başarısız sonuç = günün ilk denemesi (günün son
+// hakkı da kalınırsa backend molayı başlatır) → "bugün 1 hakkın daha var" doğrudur.
+const CERT_RETRY_RULE = { dailyAttempts: 2 } as const;
 
 /** Mola sürerken kalan süre metni dakikada bir tazelensin (ve süre dolunca düğme açılsın). */
 const COOLDOWN_TICK_MS = 60_000;
@@ -262,7 +264,7 @@ export default function MentorCertificationPage() {
                 <br />
                 {cooldownRunning && result.cooldownUntil
                   ? CERT_COOLDOWN_TEXT.startedOnResult(formatRemaining(result.cooldownUntil, now))
-                  : `Hemen yeniden başlayabilirsin. Bilgin olsun: her ${CERT_RETRY_RULE.attemptsBeforeCooldown} başarısız denemeden sonra ${CERT_RETRY_RULE.cooldownHours} saatlik bir mola verilir.`}
+                  : `Hemen yeniden başlayabilirsin — bugün ${CERT_RETRY_RULE.dailyAttempts - 1} deneme hakkın daha var. Bilgin olsun: günde en fazla ${CERT_RETRY_RULE.dailyAttempts} deneme yapılabilir; hakların ertesi gün (Türkiye saatiyle 00:00) yenilenir.`}
               </p>
               {failed.length > 0 && (
                 <div className="text-left rounded-xl border border-amber-200 dark:border-amber-800/50 bg-white/60 dark:bg-amber-950/10 p-4 space-y-2">
