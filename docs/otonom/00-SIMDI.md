@@ -28,6 +28,7 @@
 **Push edilmemiş iş:** yok.
 
 **Engeller:**
+- ⛔ 2026-09-28 ~07:50 UTC — AJ-75 7b inceleme ajanının `gh pr comment` çağrısı (backend #226) REDDEDİLDİ. Ret metni AYNEN (ajan raporundan): `Excess Sensitive Detail`. → kısa, hassas ayrıntısız yorum yazıldı; ayrıntılar AJ-103/AJ-104 satırlarında. Ardışık ret sayacı: 1 (sonraki komutlar geçti).
 - 🗄️ Tek seferlik DB erişimi gerekiyor: K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02 · AJ-50.
 
 **PO'ya sorular:** 🔵 EVET/HAYIR: KARAR-96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · ⭐ güvenlik: KARAR-101 · yeni: KARAR-126 (az yanıtlı ilk ayda NPS düşüş önerisi — KVKK çıkarımı) · toplu karar paketi GÖREV 3'te (`docs/otonom/KARAR-PAKETI.md`).
