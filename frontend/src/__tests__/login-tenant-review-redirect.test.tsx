@@ -72,6 +72,25 @@ describe('AJ-35 · LoginForm: kurum yöneticisi kurum durumuna göre yönlendiri
     expect(await submitAs({ role: 'MENTOR', approvalStatus: 'APPROVED', discType: 'S', tenantVerificationStatus: 'PENDING_REVIEW' }))
       .toBe('/mentor');
   });
+
+  // AJ-59: kural ortak modüle taşındı; e-posta girişi davranışı aynı kalmalı.
+  it('AJ-59 · hedef ortak yönlendiriciyle (postLoginRedirect.getSmartRedirect) aynıdır', async () => {
+    const { getSmartRedirect } = await import('@/lib/postLoginRedirect');
+    for (const status of ['PENDING_REVIEW', 'REJECTED', 'APPROVED', null]) {
+      pushMock.mockReset();
+      const result = { ...admin, tenantVerificationStatus: status };
+      const target = await submitAs(result);
+      expect(target).toBe(getSmartRedirect(result as Parameters<typeof getSmartRedirect>[0]));
+      document.body.innerHTML = '';
+    }
+  });
+
+  it('AJ-59 · negatif: dondurulmuş (onaylı ama askıda) kurumun yöneticisi durum ekranına gönderilmez', async () => {
+    // Askı `verificationStatus` değil `isSuspended` ile gelir; onaylı kurum durum ekranında
+    // "Onaylandı → Giriş Yap" görür → giriş döngüsü. Mevcut davranış (panel) korunur.
+    expect(await submitAs({ ...admin, tenantVerificationStatus: 'APPROVED', isSuspended: true }))
+      .toBe('/admin/waiting-room');
+  });
 });
 
 // ─── 2) AuthProvider.login kurum durumunu okur ─────────────────────────────────────────────
@@ -133,6 +152,8 @@ describe('AJ-35 · AuthProvider.login: yönetici için kurum durumu /api/auth/me
     mockBackend('ADMIN', 'REJECTED');
     expect(await loginAndGetResult()).toEqual({ role: 'ADMIN', status: 'REJECTED' });
     expect(apiMock).toHaveBeenCalledWith('/api/auth/me', expect.objectContaining({ token: 'yeni-anahtar' }));
+    // AJ-59: ortak okuyucu 401'de sessiz yenileme tetiklemez (ikinci refresh rotasyon kilidine takılır).
+    expect(apiMock).toHaveBeenCalledWith('/api/auth/me', expect.objectContaining({ withRefresh: false }));
   });
 
   it('durum okunamazsa null döner (giriş bozulmaz)', async () => {

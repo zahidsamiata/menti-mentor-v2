@@ -25,7 +25,7 @@ import { apiClient, refreshCallbackRef } from '@/lib/api/client';
 import { toTenantBranding } from '@/lib/sessionTenant';
 import { clearQueryCache, setQueryCacheScope } from '@/lib/queryCache';
 import type { TenantBranding } from '@/types/tenant';
-import type { TenantVerificationStatus } from '@/lib/api/selfServe';
+import { fetchOwnTenantVerificationStatus } from '@/lib/api/tenantStatus';
 import type {
   AuthContextValue,
   AuthUser,
@@ -177,11 +177,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // reddedildi) görebilsin diye durumu oku. Login yanıtı bu alanı taşımaz; `/api/auth/me` askı
     // kapısından muaftır (reddedilen kurumda da yanıt verir) ve kurumu oturumdan alır (IDOR yok).
     if (userData.role !== 'ADMIN') return userData;
-    const meResult = await apiClient<{ tenant: { verificationStatus: TenantVerificationStatus } | null }>(
-      '/api/auth/me',
-      { token: newToken, tenantId: userData.tenantId },
-    );
-    const tenantVerificationStatus = meResult.ok ? (meResult.data.tenant?.verificationStatus ?? null) : null;
+    const tenantVerificationStatus = await fetchOwnTenantVerificationStatus(newToken, userData.tenantId);
     return { ...userData, tenantVerificationStatus };
   }, [scheduleTokenRefresh]);
 

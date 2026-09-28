@@ -15,12 +15,19 @@
  *
  * Eski backend / eski sekme adreste `accessToken` getirirse o değer KULLANILMAZ, adresten
  * temizlenir; oturum yine çerezden kurulur (yeni ön yüz eski backend'le de çalışır).
+ *
+ * AJ-59: hedef, e-posta girişiyle AYNI ortak kuraldan seçilir (`lib/postLoginRedirect`). Kurum
+ * yöneticisinin kurum durumu refresh yanıtında yoktur; yalnız yöneticide `/api/auth/me` bir kez
+ * okunur (refresh DEĞİL — 401'de yenileme tetiklemez). İnceleme bekleyen / reddedilen kurumun
+ * yöneticisi durum ekranına, diğerleri önceki gibi panele (`/dashboard`) gider.
  */
 
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { UI_TEXT } from '@/lib/uiText';
+import { getOAuthRedirect } from '@/lib/postLoginRedirect';
+import { fetchOwnTenantVerificationStatus } from '@/lib/api/tenantStatus';
 
 /** Eski dönüş biçiminin adreste taşıdığı, artık okunmayan gizli parametreler. */
 const LEGACY_SECRET_PARAMS = ['accessToken', 'refreshToken', 'expiresIn'] as const;
@@ -31,7 +38,10 @@ const SESSION_FAILED_ERROR = 'SUNUCU_HATASI';
 function OAuthCallbackInner() {
   const router = useRouter();
   const params = useSearchParams();
-  const { isLoading, isAuthenticated } = useAuth();
+  const { isLoading, isAuthenticated, user, accessToken } = useAuth();
+  // Hedef bir kez seçilir: bağımlılıklar değişip effect yeniden koşsa da `/api/auth/me` ikinci
+  // kez okunmaz, iki ayrı yönlendirme yarışmaz.
+  const redirectStartedRef = useRef(false);
 
   useEffect(() => {
     const error = params.get('error');
@@ -52,14 +62,24 @@ function OAuthCallbackInner() {
     // AuthProvider'ın açılış yenilemesi (çerezle) bitene kadar bekle.
     if (isLoading) return;
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !user || !accessToken) {
       router.replace(`/login?error=${SESSION_FAILED_ERROR}`);
       return;
     }
 
+    if (redirectStartedRef.current) return;
+    redirectStartedRef.current = true;
+
     const isNewUser = params.get('isNewUser') === 'true';
-    router.replace(isNewUser ? '/dashboard?welcome=1' : '/dashboard');
-  }, [params, router, isLoading, isAuthenticated]);
+    if (user.role !== 'ADMIN') {
+      router.replace(getOAuthRedirect(user, { isNewUser }));
+      return;
+    }
+    void (async () => {
+      const tenantVerificationStatus = await fetchOwnTenantVerificationStatus(accessToken, user.tenantId);
+      router.replace(getOAuthRedirect({ role: user.role, tenantVerificationStatus }, { isNewUser }));
+    })();
+  }, [params, router, isLoading, isAuthenticated, user, accessToken]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
