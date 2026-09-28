@@ -2715,3 +2715,36 @@ Yalnız Durum/Öneri hücreleri değişti (⚪ adayı, PR CONFLICTING, kodla bay
 | KARAR-49 | `devir/01` ve `devir/06`: dondurulmuş mu, kalıcı referans mı | **2** (6 bayat "merge etme" satırı) · kart metni eski: "(2 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ yönetişim konseyi · BELGE POLİTİKASI | B | [kart](kararlar/KARAR-049.md) |
 | KARAR-101 | Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi) | **1** (Y1-B8 — PR #164/#343) · kart metni eski: "(1 iş açar: Y1-B8)"; güncel: 0 iş | ⬜ boş · güvenlik + ürün · öneri B | B | [kart](kararlar/KARAR-101.md) |
 ```
+
+## KARAR-101 · 2026-09-28 (PO NOTU İŞ 3 — zenginleştirme öncesi hâli AYNEN)
+
+> NEDEN: PO NOTU 2026-09-28 — (1) iki PR da CONFLICTING, A "hazır" değil; (2) A'nın bugünkü fiilî kaybı yazılmamıştı; (3) B yasak listesi olarak tarif edilmişti (yeni uçlar açık doğar) → izin listesi olarak yeniden yazıldı; (4) alternatif öneri satırı. PO kararı ERTELEDİ; CEVAP satırı bayt bayt aynı.
+
+```markdown
+### KARAR-101 · Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi? (1 iş açar: Y1-B8) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Onay bekleyen bir kullanıcı **şifreyle** girmeye çalışınca oturum açamıyor ("Onay Bekleniyor" ekranına düşüyor — `backend/src/controllers/authController.ts:360-366`). Ama **Google/LinkedIn ile** girince oturum açabiliyor ve menti panelindeki **"Bekleme Odasındasınız"** bölümünü görüyor: DISC testi, programdaki mentör sayısı, haftalık görüşme sıklığı, umut mesajı (F-15, I-05 ile canlıya çıktı — `frontend/src/app/(dashboard)/menti/page.tsx:219`). Aynı oturumla onay beklerken sohbet/randevu/anlaşma uçlarına da istek atabiliyor (onay kapısı yalnız eşleşme ve kullanıcı uçlarında). Kanıt: `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md` B8.
+**Kod kanıtı (2026-09-28):** OAuth ile yeni açılan hesap onay beklese de oturum alıyor (`backend/src/services/oauth/oauthService.ts:116-117,153`); mevcut hesapla OAuth girişinde onay durumuna hiç bakılmıyor (`oauthService.ts:62-81`). Onay kapısı yalnız eşleşme/sıralama ve kullanıcı listesi uçlarında (`backend/src/middleware/approvalGate.ts:12-24` → `matchingController.ts`, `sjtScoringController.ts`; `userController.ts:56,210`); genel kurum üyeliği kapısı yalnız reddedileni durduruyor (`backend/src/middleware/membershipAccess.ts:50`).
+**Sorun ne:** İki giriş yolu farklı davranıyor ve biri güvenlik açığı: onaylanmamış biri, yöneticinin onayından önce kurumun iç özelliklerine erişebiliyor. Ajanın hazırladığı düzeltme (PR backend #164 + çatı #343) OAuth yolunu da şifreli giriş gibi kapatıyor — ama o zaman **Bekleme Odası kimseye görünmüyor** (bağımsız inceleme bunu yakaladı, SONUÇ: SORUN VAR).
+**Neden sana soruyorum:** Bir özelliğin (Bekleme Odası) açık kalıp kalmayacağı ve onay bekleyenin neyi yapabileceği ürün kararı.
+**Seçenekler:**
+- **A) Kapat** — onay bekleyen kimse oturum açamaz (PR olduğu gibi). · Kullanıcı ne görür: yalnız "Onay Bekleniyor" sayfası; Bekleme Odası (DISC testi, mentör sayısı, umut mesajı) görünmez · Ne kazanırsın: açık hemen kapanır, en basit · **Ne kaybedersin:** bekleme süresi boş geçer, F-15/I-05 emeği görünmez olur · Süre S (hazır) · geri alınır ✅ · migration yok.
+- **B) Bekleme odası açık, iç özellikler kapalı** — onay bekleyen oturum açar ama yalnız bekleme odası uçlarını kullanır (profil, DISC testi, mentör sayısı, haftalık sıklık); sohbet/randevu/anlaşma/talep uçları onay kapısıyla kapanır. Hem şifreli hem OAuth girişi böyle olur. · Kullanıcı ne görür: onay beklerken DISC testini çözer, bekleme odasını görür; mesaj/randevu yapamaz · Ne kazanırsın: açık kapanır + bekleme süresi değerli kalır + iki giriş yolu eşitlenir · **Ne kaybedersin:** daha çok iş (her uç için kapı listesi, test) ve "hangi uç bekleme odasına ait" listesinin bakımı · Süre M · geri alınır ✅ · migration yok.
+- **C) Bugünkü hâl sürsün** (yalnız OAuth ile bekleme odası). · Ne kazanırsın: iş yok · **Ne kaybedersin:** güvenlik açığı açık kalır; şifreyle giren hiçbir zaman bekleme odasını görmez. · Kullanıcı ne görür: bugünkü gibi — OAuth ile giren onay bekleyen bekleme odasını görür ve iç özelliklere istek atabilir, şifreyle giren yalnız "Onay Bekleniyor" sayfasını görür · Süre 0 · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Hız öncelikse A (açık bugün kapanır, bekleme odası sonra B ile geri gelebilir). Onay süreleri uzunsa ve bekleme odası değerliyse B doğrudur. C güvenlik açığını bıraktığı için önerilmez.
+**Benim önerim:** B — güvenlik açığını kapatırken zaten canlıda olan ve bekleme süresini anlamlı kılan özelliği korur; iki giriş yolunu da eşitler. (A'yı ara adım olarak hemen, B'yi ardından da seçebilirsin — cevabında belirt.)
+**Cevap vermezsen:** Y1-B8 PR'ları (backend #164 / çatı #343) açık kalır; güvenlik açığı sürer. İki PR da bugün (2026-09-28, `gh pr view`) CONFLICTING: hangi seçenek gelirse gelsin rebase + yeni CI + bağımsız inceleme tekrarı gerekir; B seçilirse PR kapsamı da değişir.
+**İlgili işler:** AJ-20 · AJ-59 (neden: AJ-20 onay kapısını mentör sıralama ucuna ekledi — B seçeneğinin diğer uçlara yayacağı aynı `approvalGate.ts` yardımcısı; AJ-59 OAuth girişinde kurum durumuna göre yönlendirmeyi şifreli girişle eşitledi — bu kart aynı eşitlemeyi kullanıcının onay durumu için soruyor; ikisi de BITTI: `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md:445,624`)
+**İlgili kartlar:** KARAR-102 (doğrulanmamış yeni hesap girişten hemen sonra ne görür) · KARAR-84 (giriş kapısı: kim, hangi yoldan hesaba girer)
+**CEVAP:**
+
+---
+```
+
+## KARAR-PAKETI · 2026-09-28 (PO NOTU İŞ 3 — değişen satırların eski hâli AYNEN)
+
+> NEDEN: KARAR-101 PR'ları "hazır" değil (CONFLICTING) ve B izin listesi olarak yeniden yazıldı; paketin en üstüne RİSK SIRASI eklendi (mevcut (e) sıralaması silinmedi).
+
+```text
+⚠️ Sayıya girmeyen ama önce cevaplanması önerilen: **KARAR-101** — canlıda açık güvenlik boşluğu (onay bekleyen kişi Google/LinkedIn ile oturum alıyor, `oauthService.ts:116-117,153`); PR'ı hazır ama çakışmalı. **KARAR-82…85** — her biri tek bir ⛔ çıkış blokerini açar.
+| 101 | Onay bekleyen kişi girip yalnız "Bekleme Odası"nı görsün mü? | B — açık kapanır, bekleme odası korunur | Y1-B8 (PR #164/#343, çakışmalı; kuyrukta satırı yok) | ✅ | 🛡️ canlıda açık | [kart](kararlar/KARAR-101.md) | |
+```
