@@ -1,17 +1,17 @@
 > 🌡️ ILIK — gerektiğinde okunur (rutin turda değil). Okuma kuralı: OTONOM-PROMPT.txt § 0.4
 > TÜR: 🌡️ · SON DOĞRULAMA: ❓ içerik denetlenmedi (başlık 2026-09-23 DA turunda eklendi) · TAZELEME TETİKLEYİCİSİ: bir G-kartı kalemi kuyruğa devredilince ya da kapanınca
-> ⚠️ Bu belge kalemlerin TANIMINI tutar, DURUMUNU TUTMAZ. Buradaki işaretler 2026-09-23 öncesi (belgenin kendi tarihleri) durumudur. Güncel durum: `docs/otonom/00-KUYRUK.md` (köprü: `docs/kararlar/00-KART-INDEKSI.md`)
+> ✅ Durum hücreleri 2026-09-28 senkron; güncel durum kuyrukta (`docs/otonom/00-KUYRUK.md`); gerekçe G-kart belgesinde (`docs/raporlar/bilanco/kararlar/G*.md`). Eski not + eski hücreler: `docs/arsiv/00-KART-INDEKSI-durum-hucreleri-2026-09-28.md`
 
 # 00-KART-İNDEKSİ — 184 bilanço kartı köprü belgesi
 
 **📸 DONDURULMUŞ (snapshot, 2026-09-21)** — köprü/yönlendirme belgesi; **durum tutmaz, güncellenmez.**
 > **Neden:** belge zaten kendisi *"DURUM TUTMAZ, YÖNLENDİRİR"* diyor. Ölçüm: oluşturulduğu 2026-09-19'dan beri **içerik güncellemesi 0** (son 14 günde 1 commit = oluşturma). 184 satırlık elle senkron maliyeti faydayı aşıyor. Güncel durum için satırdaki "canonical kaynak" bağlantısına gidin; açık iş için `docs/otonom/00-KUYRUK.md`.
 
-> **Bu belge DURUM TUTMAZ, YÖNLENDİRİR.** Bir kalemin güncel durumu için "canonical kaynak" kolonundaki dosyaya bak.
-> Burada durum değiştirilmez. (Oluşturuldu: 2026-09-19, harita P-2 çözümü — `docs/00-BELGE-HARITASI.md`.)
+> **Durum hücreleri 2026-09-28 senkron** (GÖREV 2.3): durum hücresi kuyruktaki iş kimliğini gösterir; güncel durum kuyrukta, gerekçe G-kart belgesinde.
+> Kalemin tanımı ve kanıtı için "canonical kaynak" kolonundaki dosyaya bak. (Oluşturuldu: 2026-09-19, harita P-2 çözümü — `docs/00-BELGE-HARITASI.md`.)
 
 ## Nasıl okunur
-- **durum** = G-kartındaki en son geçerli durum (snapshot; canonical DEĞİL). 6 kod: ✅ YAPILDI · 🟡 YARIM · ⬜ AÇIK · ❓ TEYİT · 🗑️ GEÇERSİZ · 🔵 v2-backlog.
+- **durum** = 2026-09-28 senkron (GÖREV 2.3): `✅ <iş> · PR #` kuyrukta BITTI · `🟨 kısmen — <iş>; kalan → <sahip>` · `⬜ → <iş> (BEKLIYOR/PR-ACIK)` · `🔴 KARAR-N` cevapsız karar. Kuyrukta eşleşmesi olmayan hücreler G-kart snapshot kodunu korur: ✅ YAPILDI · 🟡 YARIM · ⬜ AÇIK · ❓ TEYİT · 🗑️ GEÇERSİZ · 🔵 v2-backlog.
 - **madde** = `kararlar/00-KARAR-TAKIP.md` karşılık numarası (varsa). **KUYRUK** = `otonom/00-KUYRUK.md` satırı (varsa).
 - **canonical durum kaynağı** kuralı (KURAL 15 + harita P-2): *kuyrukta satırı varsa* → **KUYRUK** (aktif iş orada takip ediliyor); *yoksa* → **G-kartı**.
 - Kart tam tanımı + kanıtı her zaman `bilanco/kararlar/G*.md`'de (KURAL 15: çelişkide KART kazanır).
@@ -29,34 +29,34 @@
 |---|---|:---:|---|---|---|
 | G1-01 | Yaş 18+ form-input/DB alanı | 🗑️ | md.3-alt | — | G-kartı |
 | G1-02 | Menti→mentör DISC harf gizleme | ✅ | md.1-alt | — | G-kartı |
-| G1-03 | listPendingTenants audit izi | ❓ | md.94 | — | G-kartı |
+| G1-03 | listPendingTenants audit izi | ✅ Y-02 · PR #156/#338 | md.94 | — | G-kartı |
 | G1-04 | SuspicionReport tenantId | 🗑️ | md.71 | — | G-kartı |
-| G1-05 | KVKK kullanıcı-yüzü UI | ✅ | md.40/97 | K-12 | KUYRUK |
-| G1-06 | KVKK otomatik veri imhası | 🟡 | md.81 | F-02 | KUYRUK |
+| G1-05 | KVKK kullanıcı-yüzü UI | ✅ K-12 · PR #220 | md.40/97 | K-12 | KUYRUK |
+| G1-06 | KVKK otomatik veri imhası | ⬜ → F-02 (BEKLIYOR) | md.81 | F-02 | KUYRUK |
 | G1-07 | Rıza sürümü | ✅ | md.82 | — | G-kartı |
-| G1-08 | OAuth açık rıza UI | ⬜ | md.83 | F-03 | KUYRUK |
+| G1-08 | OAuth açık rıza UI | ⬜ → AN-30 (PR-ACIK) | md.83 | F-03 | KUYRUK |
 | G1-09 | destek@ + hak-kullanım | ⬜ | md.84 | KARAR-18 | G-kartı |
 | G1-10 | Aydınlatma metni eksik kategori | ⬜ | md.85 | KARAR-18 | G-kartı |
 | G1-11 | DISC ayrı açık rıza | 🔵 | md.25(v2) | — | G-kartı |
-| G1-12 | Veri İşleyen Sözleşmesi | ⬜ | md.90 | — | G-kartı |
-| G1-13 | Kulüp-tipi kurum aktif | ⬜ | md.91 | KARAR-9/18 | G-kartı |
-| G1-14 | Kalibrasyon audit ateşle-unut | ❓ | md.98 | F-06 | KUYRUK |
-| G1-15 | SystemLog 90g iz kaybı | ⬜ | md.99 | F-07 · KARAR-19 | KUYRUK |
-| G1-16 | Eski kayıt rıza backfill politikası | 🟡 | — | KARAR-19 | G-kartı |
+| G1-12 | Veri İşleyen Sözleşmesi | ⬜ → AN-36 (BEKLIYOR) | md.90 | — | G-kartı |
+| G1-13 | Kulüp-tipi kurum aktif | ⬜ → AN-29 (BEKLIYOR) | md.91 | KARAR-9/18 | G-kartı |
+| G1-14 | Kalibrasyon audit ateşle-unut | ✅ F-06 + AJ-45 · PR #81, #208/#395 | md.98 | F-06 | KUYRUK |
+| G1-15 | SystemLog 90g iz kaybı | 🔴 KARAR-19 (→ F-07) | md.99 | F-07 · KARAR-19 | KUYRUK |
+| G1-16 | Eski kayıt rıza backfill politikası | 🔴 KARAR-19 | — | KARAR-19 | G-kartı |
 | G1-17 | Admin server-side koruma | 🗑️ | md.66 | — | G-kartı |
-| G1-18 | Çift-tenant kimlik teyidi | ❓ | — | — | G-kartı |
+| G1-18 | Çift-tenant kimlik teyidi | ⬜ → AJ-56 (BEKLIYOR) | — | — | G-kartı |
 | G1-19 | qualityMultiplier okuma kaynağı | ✅ | — | — | G-kartı |
-| G1-20 | RLS lint kuralı | ⬜ | md.26(v2) | — | G-kartı |
+| G1-20 | RLS lint kuralı | ⬜ → AJ-75 (BEKLIYOR) | md.26(v2) | — | G-kartı |
 | G1-21 | Başlıksız→varsayılan tenant | 🟡 | — | — | G-kartı |
-| G1-22 | k-anonimlik metrik yuvarlama | ⬜ | **madde 119** | — | G-kartı |
-| G1-23 | logoUrl XSS koruması | ⬜ | — | F-04 | KUYRUK |
-| G1-24 | OAuth token URL'de | ❓ | — | — | G-kartı |
-| G1-25 | createMeeting kapsamsız findUnique | ❓ | — | — | G-kartı |
-| G1-26 | Şüphe formu IP-limit/CAPTCHA | 🟡 | — | F-05 | KUYRUK |
+| G1-22 | k-anonimlik metrik yuvarlama | ✅ V-05 + AJ-69 · PR #100/#273, #220/#411 | **madde 119** | — | G-kartı |
+| G1-23 | logoUrl XSS koruması | 🟨 kısmen — F-04 + AJ-22 · PR #102/#272/#314, #387; kalan → AJ-52 · KARAR-112 | — | F-04 | KUYRUK |
+| G1-24 | OAuth token URL'de | ✅ AJ-73 · PR #213/#406 | — | — | G-kartı |
+| G1-25 | createMeeting kapsamsız findUnique | ✅ AJ-74 · PR #216/#408 | — | — | G-kartı |
+| G1-26 | Şüphe formu IP-limit/CAPTCHA | ⬜ → F-05 (BEKLIYOR) | — | F-05 | KUYRUK |
 | G1-27 | Prod admin anahtarı rotasyon | ⬜ | — | — | G-kartı |
-| G1-28 | Sunucu/altyapı sertleştirme | ⬜ | **madde 120** | K-14 · KARAR-18 | KUYRUK |
-| G1-29 | Kurum kalıcı silme yok | ⬜ | md.16(v2) | KARAR-19 | G-kartı |
-| G1-30 | Çerez-izni bandı | ⬜ | md.67 | — | G-kartı |
+| G1-28 | Sunucu/altyapı sertleştirme | 🟨 kısmen — K-14 · PR #97/#269; kalan → AJ-29 | **madde 120** | K-14 · KARAR-18 | KUYRUK |
+| G1-29 | Kurum kalıcı silme yok | 🔴 KARAR-19 / KARAR-74 (→ AN-37) | md.16(v2) | KARAR-19 | G-kartı |
+| G1-30 | Çerez-izni bandı | ⬜ → Y-12 (BEKLIYOR) | md.67 | — | G-kartı |
 
 ## G2 — Eşleştirme / psikometri (11 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
@@ -66,136 +66,136 @@
 | G2-03 | Tiebreak D>I>S>C | 🗑️ | md.103 | — | G-kartı |
 | G2-04 | Psikometrik gerekçe | 🗑️ | md.103 | — | G-kartı |
 | G2-05 | %60/40 varsayılan oran | 🗑️ | md.9-alt | — | G-kartı |
-| G2-06 | "Varsayılana düşen oran" metriği | ⬜ | **madde 111** | — | G-kartı |
-| G2-07 | md.101 SJT/OCEAN okunmuyor | ⬜ | md.101 | F-11 · KARAR-10 | KUYRUK |
-| G2-08 | md.14 sector-scorer uyuyor | 🟡 | md.14 | F-11 · KARAR-10 | KUYRUK |
-| G2-09 | CORE-eşiği tutarsızlığı (kart) | ❓ | md.102 | — | G-kartı |
+| G2-06 | "Varsayılana düşen oran" metriği | ⬜ → AJ-79 (BEKLIYOR) | **madde 111** | — | G-kartı |
+| G2-07 | md.101 SJT/OCEAN okunmuyor | 🔴 KARAR-61 (→ F-11) | md.101 | F-11 · KARAR-10 | KUYRUK |
+| G2-08 | md.14 sector-scorer uyuyor | 🔴 KARAR-61 (→ F-11) | md.14 | F-11 · KARAR-10 | KUYRUK |
+| G2-09 | CORE-eşiği tutarsızlığı (kart) | ⬜ → AJ-80 (BEKLIYOR) | md.102 | — | G-kartı |
 | G2-10 | Eşleşme tetikleyicisi (kart) | ❓ | A14 | — | G-kartı |
 | G2-11 | Davetli otomatik onay tetiği | ✅ | KARAR-6 | — | G-kartı |
 
 ## G3 — İçerik (19 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G3-01 | DISC-tipe-özel yaklaşım içeriği | ⬜ | md.31 | F-14 | KUYRUK |
+| G3-01 | DISC-tipe-özel yaklaşım içeriği | 🔴 KARAR-46 (→ F-14) | md.31 | F-14 | KUYRUK |
 | G3-02 | DISC-derinleşme kurgusu | 🔵 | A1 | — | G-kartı |
 | G3-03 | Sınırsız yeniden-derinleşme | ❓ | A3 | — | G-kartı |
 | G3-04 | STK-custom soru değer | ❓ | B8a | — | G-kartı |
-| G3-05 | Sertifika soru ekleme yetkisi | ✅ | — | F-13 | KUYRUK |
+| G3-05 | Sertifika soru ekleme yetkisi | ✅ F-13 · commit f1884f0 (belge) | — | F-13 | KUYRUK |
 | G3-06 | DISC canlı soru sayısı | ❓ | Ç3 | — | G-kartı |
-| G3-07 | SJT içerik 3→4 | ⬜ | md.33 | — | G-kartı |
-| G3-08 | Sertifika seed↔canlı tutarsızlık | ⬜ | md.30 | K-16 · P-99 | KUYRUK |
-| G3-09 | Güvenli sertifika seed runner | ⬜ | md.73 | K-16 | KUYRUK |
+| G3-07 | SJT içerik 3→4 | 🔴 KARAR-57 (→ F-09) | md.33 | — | G-kartı |
+| G3-08 | Sertifika seed↔canlı tutarsızlık | 🔴 KARAR-46 (→ P-99 → K-16) | md.30 | K-16 · P-99 | KUYRUK |
+| G3-09 | Güvenli sertifika seed runner | ✅ AJ-08 + AJ-26 · PR #177/#362, #206 | md.73 | K-16 | KUYRUK |
 | G3-10 | PO 68-soru inceleme | ⬜ | A2/A4 | — | G-kartı |
 | G3-11 | 17 eşleştirme PO-onay | 🗑️ | md.103 | — | G-kartı |
 | G3-12 | İçerik & soru felsefesi | ⬜ | A4 | — | G-kartı |
-| G3-13 | Kurum-özel soru answerType | ⬜ | md.13 | F-12 · KARAR-21 | KUYRUK |
-| G3-14 | İçerik felsefesi gözlemleri | ⬜ | — | — | G-kartı |
-| G3-15 | Soru metni yazım hataları | ⬜ | — | — | G-kartı |
-| G3-16 | Global içerik seed ana Neon | ⬜ | Y6 | — | G-kartı |
-| G3-17 | Öğrenme yolculuğu kalan uçlar | ❓ | A15 | — | G-kartı |
+| G3-13 | Kurum-özel soru answerType | 🔴 KARAR-21 (→ F-12) | md.13 | F-12 · KARAR-21 | KUYRUK |
+| G3-14 | İçerik felsefesi gözlemleri | 🔴 KARAR-103 (→ AJ-11) | — | — | G-kartı |
+| G3-15 | Soru metni yazım hataları | ⬜ → AN-02 (PR-ACIK) | — | — | G-kartı |
+| G3-16 | Global içerik seed ana Neon | 🔴 KARAR-5 (→ K-18) | Y6 | — | G-kartı |
+| G3-17 | Öğrenme yolculuğu kalan uçlar | 🔴 KARAR-5 (→ K-18) | A15 | — | G-kartı |
 | G3-18 | 6 canlı-teyit kuyruğu (DB) | ❓ | Y6 | — | G-kartı |
 | G3-19 | Sertifika/etiket havuzu admin tablo | ✅ | KARAR-12/A9 | — | G-kartı |
 
 ## G4 — Panel / akış (39 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G4-01 | Havuz KART görünümü rol-bazlı | ⬜ | KARAR-2 | F-10 | KUYRUK |
+| G4-01 | Havuz KART görünümü rol-bazlı | 🟨 kısmen — F-10 · commit d9fd456 (PR gerekmedi); kalan → AJ-81 | KARAR-2 | F-10 | KUYRUK |
 | G4-02 | "Neden uyumlu" Katman-1 menti | ✅ | KARAR-7 | — | G-kartı |
 | G4-03 | Manuel eşleştirme | 🗑️ | md.76 | — | G-kartı |
 | G4-04 | Yöneticilik-verme + onaylı liste | ✅ | md.A9 | — | G-kartı |
-| G4-05 | adminSettings zayıf izolasyon | ⬜ | — | F-23 | KUYRUK |
+| G4-05 | adminSettings zayıf izolasyon | ✅ F-23 + AJ-44 · PR #132, #203 | — | F-23 | KUYRUK |
 | G4-06 | "Çok yakın" eşik kalibrasyonu | ❓ | md.12-alt | — | G-kartı |
 | G4-07 | Sektör kolonu "—" veri boş | 🔵 | B3/KARAR-10 | — | G-kartı |
-| G4-08 | Platform drill-down yok | ⬜ | md.77 | F-24 | KUYRUK |
-| G4-09 | Mükerrer platform API | ❓ | md.74 | K-13 | KUYRUK |
-| G4-10 | setVisibilityOptIn Taraf-1 | ❓ | md.86 | K-13 | KUYRUK |
+| G4-08 | Platform drill-down yok | ✅ F-24 · PR #182/#366 | md.77 | F-24 | KUYRUK |
+| G4-09 | Mükerrer platform API | ⬜ → E-4 (BEKLIYOR) | md.74 | K-13 | KUYRUK |
+| G4-10 | setVisibilityOptIn Taraf-1 | ⬜ → E-4 (BEKLIYOR) | md.86 | K-13 | KUYRUK |
 | G4-11 | Otomatik anomali tespiti (v2) | 🟡 | — | — | G-kartı |
-| G4-12 | Platform büyüme trendi | ⬜ | Y7 | — | G-kartı |
-| G4-13 | Platform ayarlar UI | ⬜ | Y7 | — | G-kartı |
-| G4-14 | Sistem sağlığı mail-göstergesi | 🟡 | — | F-25 | KUYRUK |
-| G4-15 | reviewedBy gerçek kimlik | ⬜ | — | — | G-kartı |
-| G4-16 | user-reports sayfalama yok | ⬜ | — | — | G-kartı |
-| G4-17 | PLATFORM_ADMIN_EMAIL .env.example | ⬜ | — | F-26 | KUYRUK |
+| G4-12 | Platform büyüme trendi | 🔴 KARAR-103 (→ AJ-11) | Y7 | — | G-kartı |
+| G4-13 | Platform ayarlar UI | 🔴 KARAR-103 (→ AJ-11) | Y7 | — | G-kartı |
+| G4-14 | Sistem sağlığı mail-göstergesi | ✅ F-25 + AJ-45 · PR #84/#227, #208/#395 | — | F-25 | KUYRUK |
+| G4-15 | reviewedBy gerçek kimlik | 🔴 KARAR-87 (→ AN-38) | — | — | G-kartı |
+| G4-16 | user-reports sayfalama yok | ✅ AN-39 · PR #112/#290 | — | — | G-kartı |
+| G4-17 | PLATFORM_ADMIN_EMAIL .env.example | ✅ F-26 · PR #72 | — | F-26 | KUYRUK |
 | G4-18 | Fotoğraf zorunlu kılma | 🟡 | — | — | G-kartı |
-| G4-19 | Premium kilit + Tenant.plan | ⬜ | E13/E24 | — | G-kartı |
+| G4-19 | Premium kilit + Tenant.plan | 🔴 KARAR-103 (→ AJ-11) | E13/E24 | — | G-kartı |
 | G4-20 | Hayalet mod + toplu CSV davet | 🔵 | md.17 | — | G-kartı |
 | G4-21 | "Neden uyumlu" Katman-2 | 🔵 | md.19/KARAR-8 | — | G-kartı |
-| G4-22 | Menti "bekleme anı" | ⬜ | Y1 | F-15 | KUYRUK |
-| G4-23 | Umut sinyali / sosyal-kanıt | ⬜ | Y1 | F-15 · P-06 | KUYRUK |
-| G4-24 | Menti "özgüven aşısı" sunumu | ⬜ | — | F-16 · P-03 | KUYRUK |
-| G4-25 | Reddi yumuşat + kutlama | ⬜ | Y2 | F-17 · P-05 · KARAR-20/22 | KUYRUK |
-| G4-26 | Mentör rozet çeşitliliği | ⬜ | md.78 | — | G-kartı |
-| G4-27 | Mentör kapasite sınırı | ⬜ | Y5 | P-15 | KUYRUK |
-| G4-28 | Mentör "kendi etkim" yuvası | 🟡 | md.78 | P-14 | KUYRUK |
-| G4-29 | Mentör sektör filtresi | 🟡 | — | — | G-kartı |
-| G4-30 | Yönetici rapor EXPORT | ⬜ | Y3 | F-18 | KUYRUK |
-| G4-31 | Proaktif kırmızı uyarı | 🟡 | Y4 | F-19 | KUYRUK |
-| G4-32 | STK zaman-serisi KPI | 🟡 | Y3/Y7 | — | G-kartı |
-| G4-33 | Çift-aha yönetici-önizleme | ⬜ | A13 | KARAR-17 | G-kartı |
-| G4-34 | STK "iki-aha modeli" | ❓ | A13 | KARAR-17 | G-kartı |
-| G4-35 | Onboarding şablon-seçim | ⬜ | — | — | G-kartı |
+| G4-22 | Menti "bekleme anı" | 🟨 kısmen — F-15 + AJ-45 · PR #228, #208/#395; kalan → AJ-82 | Y1 | F-15 | KUYRUK |
+| G4-23 | Umut sinyali / sosyal-kanıt | 🟨 kısmen — F-15 · PR #228; kalan → AN-21 (🔴 KARAR-56) | Y1 | F-15 · P-06 | KUYRUK |
+| G4-24 | Menti "özgüven aşısı" sunumu | ✅ F-16 + P-03 · PR #228, #209 | — | F-16 · P-03 | KUYRUK |
+| G4-25 | Reddi yumuşat + kutlama | ✅ P-05 + AJ-33 · PR #162/#340, #391 | Y2 | F-17 · P-05 · KARAR-20/22 | KUYRUK |
+| G4-26 | Mentör rozet çeşitliliği | 🔴 KARAR-103 (→ AJ-11) | md.78 | — | G-kartı |
+| G4-27 | Mentör kapasite sınırı | 🔴 KARAR-41 (→ P-15) | Y5 | P-15 | KUYRUK |
+| G4-28 | Mentör "kendi etkim" yuvası | ✅ P-14 · PR #216 | md.78 | P-14 | KUYRUK |
+| G4-29 | Mentör sektör filtresi | 🔴 KARAR-103 (→ AJ-11) | — | — | G-kartı |
+| G4-30 | Yönetici rapor EXPORT | 🟨 kısmen — F-18 · PR #163/#342; kalan → AJ-78 | Y3 | F-18 | KUYRUK |
+| G4-31 | Proaktif kırmızı uyarı | ✅ F-19 · PR #231 | Y4 | F-19 | KUYRUK |
+| G4-32 | STK zaman-serisi KPI | 🔴 KARAR-103 (→ AJ-11) | Y3/Y7 | — | G-kartı |
+| G4-33 | Çift-aha yönetici-önizleme | 🔴 KARAR-17 / KARAR-103 (→ AJ-11) | A13 | KARAR-17 | G-kartı |
+| G4-34 | STK "iki-aha modeli" | 🔴 KARAR-17 | A13 | KARAR-17 | G-kartı |
+| G4-35 | Onboarding şablon-seçim | 🔴 KARAR-103 (→ AJ-11) | — | — | G-kartı |
 | G4-36 | Menti/mentör retention sevdirme | ⬜ | — | — | G-kartı |
-| G4-37 | Kurumlar-arası sosyal kanıt duvarı | ⬜ | — | — | G-kartı |
-| G4-38 | Bottom-up "ters çekim" kanalı | ⬜ | **madde 116** | — | G-kartı |
-| G4-39 | "Görüşme tamamladım" paylaşım kartı | 🟡 | — | F-22 | KUYRUK |
+| G4-37 | Kurumlar-arası sosyal kanıt duvarı | 🔴 KARAR-103 (→ AJ-11) | — | — | G-kartı |
+| G4-38 | Bottom-up "ters çekim" kanalı | 🔴 KARAR-103 (→ AJ-11) | **madde 116** | — | G-kartı |
+| G4-39 | "Görüşme tamamladım" paylaşım kartı | ✅ F-22 + AJ-23 · PR #226, #392 | — | F-22 | KUYRUK |
 
 ## G5 — Bildirim / mail (7 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G5-01 | Kurum başvuru maili açma | ⬜ | md.37m | KARAR-18 | G-kartı |
+| G5-01 | Kurum başvuru maili açma | ⬜ → DK-02 (BEKLIYOR) | md.37m | KARAR-18 | G-kartı |
 | G5-02 | Kurum onay/ret maili + destek@ | 🟡 | md.6/84 | KARAR-18 | G-kartı |
 | G5-03 | Otomatik nudge | 🔵 | md.24(v2) | — | G-kartı |
-| G5-04 | Bekleme salonu bildirim izni | ⬜ | — | F-20 | KUYRUK |
-| G5-05 | Kullanıcı→ürün geri bildirim | ⬜ | E24 | F-31 | KUYRUK |
-| G5-06 | Mentör bildirim ritmi | ⬜ | — | P-10 | KUYRUK |
-| G5-07 | Gerçek push (Expo/FCM) stub | 🔵 | md.23 | P-10 | KUYRUK |
+| G5-04 | Bekleme salonu bildirim izni | ✅ F-20 + AJ-39 · PR #218, #399 | — | F-20 | KUYRUK |
+| G5-05 | Kullanıcı→ürün geri bildirim | ⬜ → AN-52 (PR-ACIK) | E24 | F-31 | KUYRUK |
+| G5-06 | Mentör bildirim ritmi | 🟨 kısmen — P-10 · PR #89; kalan → AJ-11 (🔴 KARAR-103) | — | P-10 | KUYRUK |
+| G5-07 | Gerçek push (Expo/FCM) stub | 🔴 KARAR-103 (→ AJ-11) | md.23 | P-10 | KUYRUK |
 
 ## G6 — Veri modeli / borç (7 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G6-01 | N+1 konuşma listesi | ⬜ | md.48 | F-27 | KUYRUK |
-| G6-02 | String→enum + çift-rol | ⬜ | md.49 | — | G-kartı |
-| G6-03 | onDelete stratejisi | ⬜ | md.49-akraba | — | G-kartı (✅ migrate edildi, bkz. G6-03 kartı) |
+| G6-01 | N+1 konuşma listesi | 🟨 kısmen — F-27 + AJ-45 · PR #86/#229, #208/#395; kalan → AJ-83 | md.48 | F-27 | KUYRUK |
+| G6-02 | String→enum + çift-rol | ⬜ → AJ-77 (BEKLIYOR) | md.49 | — | G-kartı |
+| G6-03 | onDelete stratejisi | 🔴 KARAR-74 (→ AN-37) | md.49-akraba | — | G-kartı (✅ migrate edildi, bkz. G6-03 kartı) |
 | G6-04 | User.email unique + index | ❓ | — | — | G-kartı |
-| G6-05 | Sayfa metni merkezileştirme | ⬜ | md.47/C17 | F-28 | KUYRUK |
-| G6-06 | Temiz-kod borcu | ⬜ | md.47 | — | G-kartı |
+| G6-05 | Sayfa metni merkezileştirme | ✅ F-28 + AJ-41 · PR #311/#349, #400 | md.47/C17 | F-28 | KUYRUK |
+| G6-06 | Temiz-kod borcu | ✅ Y-03 + AJ-43 · PR #123/#303, #209 | md.47 | — | G-kartı |
 | G6-07 | Kullanılmayan 5 @radix-ui | ✅ | md.46 | — | G-kartı |
 
 ## G7 — UX / tasarım (14 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G7-01 | Ekran-okuyucu düzeltmeleri | ⬜ | md.50 | F-21 | KUYRUK |
-| G7-02 | DISC kontrast (WCAG) | ⬜ | md.64 | F-21 | KUYRUK |
-| G7-03 | SEO teknik paketi | ⬜ | md.51-55 | F-29 | KUYRUK |
+| G7-01 | Ekran-okuyucu düzeltmeleri | 🟨 kısmen — F-21 · PR #305; kalan → AJ-84 | md.50 | F-21 | KUYRUK |
+| G7-02 | DISC kontrast (WCAG) | ✅ AJ-07 · PR #359 | md.64 | F-21 | KUYRUK |
+| G7-03 | SEO teknik paketi | ✅ F-29 + AJ-47 · PR #219, #402 | md.51-55 | F-29 | KUYRUK |
 | G7-04 | www→301 yönlendirme | ✅ | md.66 | — | G-kartı |
-| G7-05 | Ziyaretçi ölçümü | ⬜ | md.56 | — | G-kartı |
+| G7-05 | Ziyaretçi ölçümü | ⬜ → Y-12 (BEKLIYOR) | md.56 | — | G-kartı |
 | G7-06 | Çıkışta GA (PO) | ❓ | A19 | — | G-kartı |
 | G7-07 | GTM+GA4 son kontrol | 🔵 | A12 | — | G-kartı |
-| G7-08 | Kurumsal sayfalar + JSON-LD | ⬜ | md.57-63 | — | G-kartı |
-| G7-09 | WCAG 2.1 AA bütünsel | ⬜ | md.64 | F-21 | KUYRUK |
-| G7-10 | Açılış UX paketi | ⬜ | md.22(v2) | — | G-kartı |
-| G7-11 | Açılış koyu/açık tema | ⬜ | md.22(v2) | — | G-kartı |
+| G7-08 | Kurumsal sayfalar + JSON-LD | 🔴 KARAR-88 (→ Y-07 · Y-11) | md.57-63 | — | G-kartı |
+| G7-09 | WCAG 2.1 AA bütünsel | 🟨 kısmen — F-21 + AJ-07 · PR #305, #359; kalan → AJ-85 | md.64 | F-21 | KUYRUK |
+| G7-10 | Açılış UX paketi | ⬜ → AJ-86 (BEKLIYOR) | md.22(v2) | — | G-kartı |
+| G7-11 | Açılış koyu/açık tema | ⬜ → AJ-86 (BEKLIYOR) | md.22(v2) | — | G-kartı |
 | G7-12 | Açılış slogan | ✅ | F4/md.22 | — | G-kartı |
-| G7-13 | Yumuşak lacivert tema yönü | ✅ | E4/md.65 | — | G-kartı |
-| G7-14 | Mesaj listesi sanallaştırma | ⬜ | — | — | G-kartı |
+| G7-13 | Yumuşak lacivert tema yönü | ⬜ → AJ-86 (BEKLIYOR) | E4/md.65 | — | G-kartı |
+| G7-14 | Mesaj listesi sanallaştırma | ⬜ → AJ-83 (BEKLIYOR) | — | — | G-kartı |
 
 ## G8 — Altyapı / PO-manuel (14 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G8-01 | Fotoğraf kalıcı disk (volume) | ⬜ | A22 | K-04 · KARAR-18 | KUYRUK |
-| G8-02 | Ortam değişkeni teyidi | ⬜ | — | K-04 · KARAR-18 | KUYRUK |
+| G8-01 | Fotoğraf kalıcı disk (volume) | 🟨 kısmen — K-04 · PR #85/#229; kalan → 03-PO A1 (kalıcı disk, PO eli) | A22 | K-04 · KARAR-18 | KUYRUK |
+| G8-02 | Ortam değişkeni teyidi | 🟨 kısmen — K-04 · PR #85/#229; kalan → 03-PO A1/B6/B7 (PO eli) | — | K-04 · KARAR-18 | KUYRUK |
 | G8-03 | Chat canlı uçtan-uca test | ⬜ | A22 | KARAR-18 | G-kartı |
 | G8-04 | Mentör paneli canlıda görme | ⬜ | A22 | KARAR-18 | G-kartı |
 | G8-05 | .env.backup-anaDB sil | ⬜ | **madde 121** | KARAR-18 | G-kartı |
 | G8-06 | Ortam temizliği (branch/worktree) | 🟡 | md.28(v2) | KARAR-18 | G-kartı |
-| G8-07 | Ayrı staging ortamı | ⬜ | md.27(v2) | — | G-kartı |
+| G8-07 | Ayrı staging ortamı | 🔴 KARAR-118 | md.27(v2) | — | G-kartı |
 | G8-08 | İzole test DB | 🟡 | md.İŞ2 | KARAR-18 | G-kartı |
 | G8-09 | DB havuzu + mail seri | ❓ | — | — | G-kartı |
-| G8-10 | Eşleştirme önbelleği yok | ⬜ | — | — | G-kartı |
-| G8-11 | Rate limiter Redis'e | ⬜ | md.02:50/E2 | — | G-kartı |
-| G8-12 | Cron çok-sunucuda çift | ⬜ | — | — | G-kartı |
-| G8-13 | Sekme geçiş yavaşlığı | ❓ | E17/B10 | F-32 | KUYRUK |
-| G8-14 | Sol-alt kullanıcı kartı | ❓ | B12 | F-33 | KUYRUK |
+| G8-10 | Eşleştirme önbelleği yok | ✅ AN-07 · PR #171/#353 | — | — | G-kartı |
+| G8-11 | Rate limiter Redis'e | ⬜ → AJ-76 (BEKLIYOR) | md.02:50/E2 | — | G-kartı |
+| G8-12 | Cron çok-sunucuda çift | ⬜ → AN-06 (BEKLIYOR) | — | — | G-kartı |
+| G8-13 | Sekme geçiş yavaşlığı | ✅ F-32 · PR #310 | E17/B10 | F-32 | KUYRUK |
+| G8-14 | Sol-alt kullanıcı kartı | ✅ F-33 · PR #285 | B12 | F-33 | KUYRUK |
 
 ## G9 — Belge / süreç (16 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
@@ -205,13 +205,13 @@
 | G9-03 | Belge-içi bayat gövde (BH1-5) | ✅ | — | — | G-kartı |
 | G9-04 | AdminAuditLog bayat | ✅ | — | — | G-kartı |
 | G9-05 | 09-DURUM çelişki blokları | ✅ | — | — | G-kartı |
-| G9-06 | durum-panosu 📸'ye | 🟡 | A11 | F-01 (reorg) | KUYRUK |
+| G9-06 | durum-panosu 📸'ye | ⬜ → F-01 (BEKLIYOR) | A11 | F-01 (reorg) | KUYRUK |
 | G9-07 | OneDrive → yerel disk | 🟡 | A10 | KARAR-18 | G-kartı |
 | G9-08 | icerik/ 6 belge bayat | ✅ | — | — | G-kartı |
 | G9-09 | PROJECT_STATUS.md arşivle | ✅ | — | — | G-kartı |
 | G9-10 | INDEX + üst-etiket eksik | ✅ | — | — | G-kartı |
-| G9-11 | Belge reorg 5 taşıyıcı ad | 🟡 | A5 | F-01 | KUYRUK |
-| G9-12 | Belge yeniden yapılandırma | ⬜ | A5 | F-01 | KUYRUK |
+| G9-11 | Belge reorg 5 taşıyıcı ad | ⬜ → F-01 (BEKLIYOR) | A5 | F-01 | KUYRUK |
+| G9-12 | Belge yeniden yapılandırma | ⬜ → F-01 (BEKLIYOR) | A5 | F-01 | KUYRUK |
 | G9-13 | admin-panelleri arşiv | ✅ | — | — | G-kartı |
 | G9-14 | Kişi-adı geriye-dönük temizlik | ✅ | — | — | G-kartı |
 | G9-15 | Model tercihi çelişkisi | ✅ | BÇ5/E12 | — | G-kartı |
@@ -220,28 +220,28 @@
 ## G10 — Ölü kod / terk (25 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G10-01 | Kesin-ölü kod bloğu | 🟡 | md.44 | K-13 · E-1..E-5 | KUYRUK |
-| G10-02 | VisibilityOptIn.requestMessage DROP | 🔵 | md.18/A21 | — | G-kartı |
-| G10-03 | matchingInterface USER-strategy | 🔵 | U2/md.44 | — | G-kartı |
-| G10-04 | findMatchesDueForCheckpoint LOG-ONLY | 🟡 | D1 | — | G-kartı |
-| G10-05 | Feedback şema alanları yazılmıyor | 🟡 | — | — | G-kartı |
-| G10-06 | ContextualFeedbackHost bağlanmadı | ⬜ | F5/F6 | — | G-kartı |
+| G10-01 | Kesin-ölü kod bloğu | 🟨 kısmen — E-1 + E-2 · PR #183; kalan → E-4 (BEKLIYOR) | md.44 | K-13 · E-1..E-5 | KUYRUK |
+| G10-02 | VisibilityOptIn.requestMessage DROP | ⬜ → E-4 (BEKLIYOR) | md.18/A21 | — | G-kartı |
+| G10-03 | matchingInterface USER-strategy | ⬜ → E-4 (BEKLIYOR) | U2/md.44 | — | G-kartı |
+| G10-04 | findMatchesDueForCheckpoint LOG-ONLY | ⬜ → E-4 (BEKLIYOR) | D1 | — | G-kartı |
+| G10-05 | Feedback şema alanları yazılmıyor | 🔴 KARAR-110 (→ AJ-14 · E-4) | — | — | G-kartı |
+| G10-06 | ContextualFeedbackHost bağlanmadı | 🔴 KARAR-78 (→ E-4) | F5/F6 | — | G-kartı |
 | G10-07 | llmRetry.ts silindi | ✅ | D2/md.44 | — | G-kartı |
-| G10-08 | UserProfile.qualityMultiplier ikiz | ❓ | D3 | — | G-kartı |
+| G10-08 | UserProfile.qualityMultiplier ikiz | ⬜ → E-4 (BEKLIYOR) | D3 | — | G-kartı |
 | G10-09 | SjtQuestion/Option ölü-tablo çürüdü | ✅ | **madde 114** | — | G-kartı |
-| G10-10 | PATCH /users/me/social bağlanmamış | ❓ | **madde 113** | K-13 | KUYRUK |
-| G10-11 | PATCH /users/:id/self-profile mükerrer | ❓ | A20 | K-13 | KUYRUK |
-| G10-12 | /clubs 7 uç FE'siz | ⬜ | md.41 | KARAR-9 | G-kartı |
-| G10-13 | /feedback-logs FE'siz | ❓ | md.42 | KARAR-12 | G-kartı |
-| G10-14 | /rematch admin FE yok | ⬜ | — | KARAR-16 | G-kartı |
-| G10-15 | questionController toplu-yanıt | ⬜ | md.70 | — | G-kartı |
+| G10-10 | PATCH /users/me/social bağlanmamış | ⬜ → E-4 (BEKLIYOR) | **madde 113** | K-13 | KUYRUK |
+| G10-11 | PATCH /users/:id/self-profile mükerrer | ⬜ → E-4 (BEKLIYOR) | A20 | K-13 | KUYRUK |
+| G10-12 | /clubs 7 uç FE'siz | 🔴 KARAR-9 | md.41 | KARAR-9 | G-kartı |
+| G10-13 | /feedback-logs FE'siz | 🔴 KARAR-12 | md.42 | KARAR-12 | G-kartı |
+| G10-14 | /rematch admin FE yok | 🔴 KARAR-16 (→ E-4) | — | KARAR-16 | G-kartı |
+| G10-15 | questionController toplu-yanıt | ⬜ → E-4 (BEKLIYOR) | md.70 | — | G-kartı |
 | G10-16 | rewardPenalty import çürüdü | ✅ | — | — | G-kartı |
 | G10-17 | discResultCard yaz-oku çözüldü | ✅ | — | — | G-kartı |
-| G10-18 | enneagramWing tüketici yok | 🟡 | md.86/101 | — | G-kartı |
+| G10-18 | enneagramWing tüketici yok | ⬜ → E-4 (BEKLIYOR) | md.86/101 | — | G-kartı |
 | G10-19 | mentorVisibilityEnabled ölü PLG | ❓ | md.86 | — | G-kartı |
-| G10-20 | 5-dosya yarım-özellik bundle | 🔵 | md.45 | — | G-kartı |
-| G10-21 | taxonomy/IndustryNode skorlamada yok | ⬜ | — | F-11 · KARAR-10 | KUYRUK |
-| G10-22 | LoginForm "Sprint 14" yorum | ❓ | — | F-30 | KUYRUK |
+| G10-20 | 5-dosya yarım-özellik bundle | 🔴 KARAR-15/36 (→ AJ-10) | md.45 | — | G-kartı |
+| G10-21 | taxonomy/IndustryNode skorlamada yok | 🔴 KARAR-61 (→ F-11) | — | F-11 · KARAR-10 | KUYRUK |
+| G10-22 | LoginForm "Sprint 14" yorum | ✅ F-30 · PR #206 | — | F-30 | KUYRUK |
 | G10-23 | mentiRequestController YOK çözüldü | ✅ | — | K-13 | KUYRUK |
 | G10-24 | Mentör karar ekranı menti ilk chat | ⬜ | — | — | G-kartı |
 | G10-25 | Profil-düzenleme keşfi | ✅ | — | — | G-kartı |
@@ -250,7 +250,7 @@
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
 | G11-01 | Modül sırası (yol haritası) | ⬜ | — | — | G-kartı |
-| G11-02 | Gelir modeli + pilot | ⬜ | — | — | G-kartı |
+| G11-02 | Gelir modeli + pilot | ⬜ → AN-52 (PR-ACIK) · AN-29 (BEKLIYOR) | — | — | G-kartı |
 
 ---
 

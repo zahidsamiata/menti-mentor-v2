@@ -17,3 +17,7 @@
 ## docs/kararlar/00-KARAR-TAKIP.md:635 (AJ-69)
 
 | 119 | k-anonimlik (super-admin küçük-grup metrik yuvarlama) (= G1-22, bkz. bilanco/kararlar/G1-guvenlik-kvkk.md) | ⬜ AÇIK (PO önceliklendirmedi) · 🟨 kısmen — V-05: eşik 3 (`backend/src/services/mask.ts:52`), KPI ve platform analitiği maskeli; kalan: algoritma ayar ekranı + öneri e-postası NPS'i maskesiz → AJ-69 | ⬜ | T4-A2 | KVKK-agregat borcu: küçük grupta yeniden-tanımlanma riski | grep boş; iz zayıf |
+
+## docs/devir/07-oturum-gunlugu.md:126 (GÖREV 2.3)
+
+- **K-02 🔀 PR'DA (PR #179):** kök `disc-test/page.tsx:86` (loading==`questions.length===0` → hata/boş/yükleniyor karışık, getQuestions hatası sonsuz iskelet). `DiscTestState.loading` + `reload()` + üç ekran. Test 3/3 (useDiscTest.test.tsx).
