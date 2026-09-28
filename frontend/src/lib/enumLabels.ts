@@ -10,6 +10,7 @@
  * aynen döner; ekran boş kalmaz, eksik çeviri göze çarpar.
  */
 import type { CertificationStatus, PendingTagStatus, ReportReason, ReportStatus } from '@/types/admin';
+import type { ApprovalStatus } from '@/types/auth';
 
 function labelFrom(map: Record<string, string>, value: string | null | undefined): string {
   if (!value) return '—';
@@ -96,3 +97,35 @@ export const REPORT_REASON_LABELS: Record<ReportReason, string> = {
 
 export const reportReasonLabel = (reason: string | null | undefined): string =>
   labelFrom(REPORT_REASON_LABELS, reason);
+
+/**
+ * Yönetici havuzlarındaki durum rozeti (admin KARAR 3: Onaylı / Bekliyor / Pasif — yalnız
+ * yönetici görür, otomatik belirlenir). Mentör ve menti havuzu aynı yardımcıyı kullanır;
+ * kart düzenine geçişte (AJ-63) de buradan okunur.
+ */
+export type UserStatusBadgeVariant = 'success' | 'warning' | 'destructive' | 'secondary';
+
+export interface UserStatusBadge {
+  label: string;
+  variant: UserStatusBadgeVariant;
+}
+
+export const APPROVAL_STATUS_BADGE: Record<ApprovalStatus, UserStatusBadge> = {
+  APPROVED: { label: 'Onaylı', variant: 'success' },
+  PENDING: { label: 'Bekliyor', variant: 'warning' },
+  REJECTED: { label: 'Reddedildi', variant: 'destructive' },
+};
+
+export const INACTIVE_STATUS_BADGE: UserStatusBadge = { label: 'Pasif', variant: 'secondary' };
+
+/**
+ * Tek rozet döner. Öncelik: pasif > onay durumu.
+ * Neden: pasif kişi onay durumundan bağımsız olarak sisteme giremez; "Onaylı" rozeti
+ * yöneticiye onu etkin sanır. KARAR 3 durumu tek rozet olarak tanımlar (üç değer), bu yüzden
+ * iki rozet yan yana konmaz. Onay/red izi (kim, ne zaman) rozetin altında ayrıca görünmeye
+ * devam eder, yani onay bilgisi kaybolmaz.
+ */
+export function userStatusBadge(user: { isActive: boolean; approvalStatus: ApprovalStatus }): UserStatusBadge {
+  if (user.isActive === false) return INACTIVE_STATUS_BADGE;
+  return APPROVAL_STATUS_BADGE[user.approvalStatus] ?? { label: user.approvalStatus || '—', variant: 'secondary' };
+}
