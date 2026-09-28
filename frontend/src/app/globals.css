@@ -53,6 +53,21 @@
     /* primary = brand ile eşlenir (shadcn/ui Button, Input focus vb.) */
     --primary: 238 84% 67%;
     --primary-foreground: 0 0% 100%;
+
+    /* ── Landing (açılış sayfası) yüzeyleri — AJ-86c ─────────────────
+       Karar: docs/kararlar/konu/06-tasarim-ux.md § TEMA (G7-10/11/13) — landing
+       tema düğmesine uyar; koyu hâl siyah değil yumuşak lacivert. Yalnız
+       app/_sections/* + app/page.tsx kullanır (bg-landing-*, text-landing-*).
+       Metin/zemin çiftleri iki temada da WCAG AA (≥ 4.5:1) — ölçüm testi:
+       src/__tests__/landing-theme-aj86c.test.tsx. */
+    --landing-bg: 220 40% 97%;
+    --landing-surface: 0 0% 100%;
+    --landing-raised: 220 33% 94%;
+    --landing-track: 220 24% 88%;
+    --landing-border: 220 20% 84%;
+    --landing-fg: 224 47% 14%;
+    --landing-soft: 222 32% 26%;
+    --landing-muted: 220 18% 36%;
   }
 
   /* ── Karanlık mod — `.dark` class'ı ile (ThemeProvider yönetir) ──────
@@ -75,6 +90,16 @@
     --secondary-foreground: 210 40% 98%;
     --accent: 216 34% 17%;
     --accent-foreground: 210 40% 98%;
+
+    /* Landing koyu hâli: yumuşak lacivert (eski sabit bg-slate-950 ≈ %5 açıklık). */
+    --landing-bg: 224 40% 12%;
+    --landing-surface: 224 36% 16%;
+    --landing-raised: 224 30% 21%;
+    --landing-track: 224 24% 28%;
+    --landing-border: 224 24% 28%;
+    --landing-fg: 0 0% 100%;
+    --landing-soft: 214 32% 86%;
+    --landing-muted: 216 24% 72%;
   }
 }
 

@@ -64,6 +64,19 @@ const config: Config = {
           light: 'hsl(var(--brand-light))',
           dark: 'hsl(var(--brand-dark))',
         },
+
+        // ── Landing yüzeyleri (AJ-86c) — açık/koyu değerleri globals.css'te ──
+        // `<alpha-value>`: bg-landing-surface/80 gibi saydamlık kipleri çalışsın.
+        landing: {
+          bg: 'hsl(var(--landing-bg) / <alpha-value>)',
+          surface: 'hsl(var(--landing-surface) / <alpha-value>)',
+          raised: 'hsl(var(--landing-raised) / <alpha-value>)',
+          track: 'hsl(var(--landing-track) / <alpha-value>)',
+          border: 'hsl(var(--landing-border) / <alpha-value>)',
+          fg: 'hsl(var(--landing-fg) / <alpha-value>)',
+          soft: 'hsl(var(--landing-soft) / <alpha-value>)',
+          muted: 'hsl(var(--landing-muted) / <alpha-value>)',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

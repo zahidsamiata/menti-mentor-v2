@@ -47,26 +47,26 @@ export default function LandingPage() {
         <AdminCockpit />
 
         {/* ── Footer ──────────────────────────────────────────────────── */}
-        <footer className="bg-slate-950 border-t border-slate-800 py-10 px-4">
+        <footer className="bg-landing-bg border-t border-landing-border py-10 px-4">
           <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600">
                 <span className="text-[10px] font-black text-white">M²</span>
               </div>
-              <span className="text-sm font-bold text-white">
-                Menti<span className="text-indigo-400">Mentor</span>
+              <span className="text-sm font-bold text-landing-fg">
+                Menti<span className="text-indigo-700 dark:text-indigo-300">Mentor</span>
               </span>
             </div>
-            <p className="text-xs text-slate-400 text-center">
+            <p className="text-xs text-landing-muted text-center">
               © {new Date().getFullYear()} MentiMentor · KVKK uyumlu · Türkiye&apos;de geliştirildi 🇹🇷
             </p>
             {/* Y-06: yasal linkler artık tıklanabilir (önceden ölü <span>'di). */}
-            <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-400" aria-label="Yasal bağlantılar">
-              <Link href="/gizlilik" className="hover:text-white underline-offset-4 hover:underline">Gizlilik Politikası</Link>
+            <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-landing-muted" aria-label="Yasal bağlantılar">
+              <Link href="/gizlilik" className="hover:text-landing-fg underline-offset-4 hover:underline">Gizlilik Politikası</Link>
               <span aria-hidden>·</span>
-              <Link href="/kvkk" className="hover:text-white underline-offset-4 hover:underline">KVKK</Link>
+              <Link href="/kvkk" className="hover:text-landing-fg underline-offset-4 hover:underline">KVKK</Link>
               <span aria-hidden>·</span>
-              <Link href="/terms" className="hover:text-white underline-offset-4 hover:underline">Kullanım Koşulları</Link>
+              <Link href="/terms" className="hover:text-landing-fg underline-offset-4 hover:underline">Kullanım Koşulları</Link>
             </nav>
           </div>
         </footer>
