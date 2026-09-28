@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { TenantMember, TenantMemberRole } from '@/lib/api/platform';
 import { certStatusBadge } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
-import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
+import { DANGER_PILL_CLASS, INFO_PILL_CLASS, SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 type RoleFilter = TenantMemberRole | 'ALL';
 
@@ -24,7 +24,7 @@ function roleBadgeClass(role: TenantMemberRole): string {
     case 'ADMIN':
       return 'bg-primary/15 text-primary';
     case 'MENTOR':
-      return 'bg-sky-900/60 text-sky-600 dark:text-sky-400';
+      return INFO_PILL_CLASS;
     case 'MENTI':
       return 'bg-muted text-muted-foreground';
   }
@@ -116,7 +116,7 @@ export function MembersTable({
                   </td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full ${
-                      m.isActive ? SUCCESS_PILL_CLASS : 'bg-red-900/60 text-destructive'
+                      m.isActive ? SUCCESS_PILL_CLASS : DANGER_PILL_CLASS
                     }`}>
                       {m.isActive ? 'Aktif' : 'Pasif'}
                     </span>

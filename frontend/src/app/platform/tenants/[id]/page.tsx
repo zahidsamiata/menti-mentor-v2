@@ -20,6 +20,7 @@ import { MembersTable, type RoleFilter } from './_components/MembersTable';
 import { MeetingsTable } from './_components/MeetingsTable';
 import { DiscSummary } from './_components/DiscSummary';
 import { UI_TEXT } from '@/lib/uiText';
+import { DANGER_PILL_CLASS, SUCCESS_PILL_CLASS, WARNING_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 type DetailTab = 'members' | 'meetings' | 'analytics';
 
@@ -30,11 +31,11 @@ const TABS: { key: DetailTab; label: string }[] = [
 ];
 
 function tenantStatusBadge(tenant: TenantOverview['tenant']) {
-  if (!tenant.isActive) return { cls: 'bg-red-900/60 text-destructive', label: 'Dondurulmuş' };
+  if (!tenant.isActive) return { cls: DANGER_PILL_CLASS, label: 'Dondurulmuş' };
   if (tenant.verificationStatus === 'PENDING_REVIEW')
-    return { cls: 'bg-yellow-900/60 text-amber-600 dark:text-amber-400', label: tenant.verificationStatus };
+    return { cls: WARNING_PILL_CLASS, label: tenant.verificationStatus };
   if (tenant.verificationStatus === 'APPROVED' || tenant.verificationStatus === 'AUTO_APPROVED')
-    return { cls: 'bg-green-900/60 text-emerald-600 dark:text-emerald-400', label: tenant.verificationStatus };
+    return { cls: SUCCESS_PILL_CLASS, label: tenant.verificationStatus };
   return { cls: 'bg-muted text-muted-foreground', label: tenant.verificationStatus };
 }
 
@@ -175,8 +176,8 @@ export default function TenantDetailPage() {
                 <span
                   className={`text-xs px-2 py-0.5 rounded-full ${
                     overview.tenant.isActive
-                      ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400'
-                      : 'bg-red-900/60 text-destructive'
+                      ? SUCCESS_PILL_CLASS
+                      : DANGER_PILL_CLASS
                   }`}
                 >
                   {overview.tenant.isActive ? 'Aktif' : 'Pasif'}

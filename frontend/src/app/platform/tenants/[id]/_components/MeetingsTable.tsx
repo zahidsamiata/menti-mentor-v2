@@ -1,7 +1,7 @@
 import type { TenantMeeting } from '@/lib/api/platform';
 import { meetingFormatLabel } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
-import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
+import { DANGER_PILL_CLASS, INFO_PILL_CLASS, SUCCESS_PILL_CLASS, WARNING_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 const STATUS_LABEL: Record<string, string> = {
   PENDING: 'Beklemede',
@@ -18,13 +18,13 @@ function statusBadgeClass(status: string): string {
     case 'APPROVED':
       return SUCCESS_PILL_CLASS;
     case 'CANCELLED':
-      return 'bg-red-900/60 text-destructive';
+      return DANGER_PILL_CLASS;
     case 'PENDING':
-      return 'bg-yellow-900/60 text-amber-600 dark:text-amber-400';
+      return WARNING_PILL_CLASS;
     case 'IN_PROGRESS':
       return 'bg-primary/15 text-primary';
     case 'SCHEDULED':
-      return 'bg-sky-900/60 text-sky-600 dark:text-sky-400';
+      return INFO_PILL_CLASS;
     default:
       return 'bg-muted text-muted-foreground';
   }

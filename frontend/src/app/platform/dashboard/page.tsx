@@ -33,7 +33,7 @@ import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { logLevelLabel, logBadgeLabel, reportReasonLabel, reportStatusLabel } from '@/lib/enumLabels';
 import { useModalDialog } from '@/hooks/useModalDialog';
 import { UI_TEXT } from '@/lib/uiText';
-import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
+import { AUDIT_PILL_CLASS, DANGER_PILL_CLASS, SUCCESS_PILL_CLASS, WARNING_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'abuse' | 'logs';
 
@@ -268,7 +268,7 @@ export default function PlatformDashboard() {
 
       {/* Action notification */}
       {actionMsg && (
-        <div className="mx-6 mt-4 rounded-lg bg-green-900/50 border border-green-700 px-4 py-2 text-sm text-green-300">
+        <div className="mx-6 mt-4 rounded-lg border border-emerald-300 bg-emerald-100 px-4 py-2 text-sm text-emerald-800 dark:border-green-700 dark:bg-green-900/50 dark:text-green-300">
           {actionMsg}
         </div>
       )}
@@ -321,8 +321,8 @@ export default function PlatformDashboard() {
                 {stats.recentLogs.slice(0, 5).map((log) => (
                   <div key={log.id} className="border-b border-border last:border-0 px-4 py-2.5 flex gap-3 text-sm">
                     <span className={`font-mono text-xs px-1.5 py-0.5 rounded ${
-                      log.level === 'ERROR' ? 'bg-red-900/60 text-destructive' :
-                      log.level === 'WARN'  ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
+                      log.level === 'ERROR' ? DANGER_PILL_CLASS :
+                      log.level === 'WARN'  ? WARNING_PILL_CLASS :
                       'bg-muted text-muted-foreground'
                     }`}>{logLevelLabel(log.level)}</span>
                     <span className="text-muted-foreground text-xs">{log.category}</span>
@@ -468,8 +468,8 @@ export default function PlatformDashboard() {
                     <td className="px-4 py-3 text-muted-foreground font-mono text-xs">{t.slug}</td>
                     <td className="px-4 py-3">
                       <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        !t.isActive            ? 'bg-red-900/60 text-destructive' :
-                        t.verificationStatus === 'PENDING_REVIEW' ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
+                        !t.isActive            ? DANGER_PILL_CLASS :
+                        t.verificationStatus === 'PENDING_REVIEW' ? WARNING_PILL_CLASS :
                         t.verificationStatus === 'APPROVED' || t.verificationStatus === 'AUTO_APPROVED' ? SUCCESS_PILL_CLASS :
                         'bg-muted text-muted-foreground'
                       }`}>
@@ -642,9 +642,9 @@ export default function PlatformDashboard() {
                 return (
                   <div key={log.id} className="border-b border-border last:border-0 px-4 py-2.5 flex gap-3 text-sm">
                     <span className={`font-mono text-xs px-1.5 py-0.5 rounded shrink-0 ${
-                      log.level === 'ERROR' ? 'bg-red-900/60 text-destructive' :
-                      log.level === 'WARN'  ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
-                      log.category === 'AUDIT' ? 'bg-blue-900/60 text-blue-600 dark:text-blue-400' :
+                      log.level === 'ERROR' ? DANGER_PILL_CLASS :
+                      log.level === 'WARN'  ? WARNING_PILL_CLASS :
+                      log.category === 'AUDIT' ? AUDIT_PILL_CLASS :
                       'bg-muted text-muted-foreground'
                     }`}>{logBadgeLabel(log)}</span>
                     <div className="flex-1 min-w-0">
