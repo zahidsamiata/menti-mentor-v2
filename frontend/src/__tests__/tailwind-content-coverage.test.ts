@@ -12,10 +12,12 @@ import postcss from 'postcss';
 import tailwindcss from 'tailwindcss';
 import tailwindConfig from '../../tailwind.config';
 import { DISC_DIMENSION_COLORS } from '@/types/discTest';
+import { STATUS_PILL_CLASSES } from '@/lib/a11y/statusColors';
+import { SHARE_BUTTON_CLASSES } from '@/lib/a11y/shareColors';
 
-/** Tailwind'in seçicide kaçırdığı karakterler (`:` `/` `[` `]` `=` `.`) — `.dark\:bg-green-500\/15` biçimi. */
+/** Tailwind'in seçicide kaçırdığı karakterler (`:` `/` `[` `]` `=` `.` `#`) — `.dark\:bg-green-500\/15` biçimi. */
 function toSelector(cls: string): string {
-  return '.' + cls.replace(/([:/[\]=.])/g, '\\$1');
+  return '.' + cls.replace(/([:/[\]=.#])/g, '\\$1');
 }
 
 describe('K-10 · tailwind content taraması', () => {
@@ -34,5 +36,19 @@ describe('K-10 · tailwind content taraması', () => {
     expect(css).toContain(toSelector('dark:bg-green-500/15'));
     expect(css).toContain(toSelector('bg-yellow-100'));
     expect(css).toContain(toSelector('text-yellow-800'));
+  }, 60_000);
+
+  it('AJ-121: content globları src/lib klasörünü kapsıyor', () => {
+    const content = tailwindConfig.content as string[];
+    expect(content).toContain('./src/lib/**/*.{ts,tsx}');
+  });
+
+  it('AJ-121: lib/a11y renk sınıfları (durum rozetleri + paylaş düğmeleri, dark: ve hover: dahil) üretilen CSS\'te var', async () => {
+    const result = await postcss([tailwindcss(tailwindConfig)]).process('@tailwind utilities;', { from: undefined });
+    const classes = [...Object.values(STATUS_PILL_CLASSES), ...Object.values(SHARE_BUTTON_CLASSES)]
+      .flatMap((s) => s.split(/\s+/))
+      .filter(Boolean);
+    const missing = classes.filter((cls) => !result.css.includes(toSelector(cls)));
+    expect(missing).toEqual([]);
   }, 60_000);
 });

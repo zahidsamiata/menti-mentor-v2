@@ -17,6 +17,9 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     // K-10: sınıf haritaları (ör. DISC_DIMENSION_COLORS) types/ altında da tutuluyor; taranmazsa CSS'e girmez.
     './src/types/**/*.{ts,tsx}',
+    // AJ-121: erişilebilir renk sınıfları (`lib/a11y/statusColors.ts`, `shareColors.ts`) lib/ altında;
+    // taranmazsa rozet/paylaş düğmesi renkleri CSS'e girmez (AJ-110 rozet sınıfları bu yüzden üretilmiyordu).
+    './src/lib/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {

@@ -10,6 +10,7 @@
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { getSiteUrl } from '@/lib/siteUrl';
+import { LINKEDIN_SHARE_CLASS, WHATSAPP_SHARE_CLASS } from '@/lib/a11y/shareColors';
 
 interface ShareButtonsProps {
   /** Paylaşılan metin (WhatsApp gövdesi + LinkedIn başlığı). */
@@ -50,7 +51,7 @@ export function ShareButtons({ shareHeadline, shareUrl }: ShareButtonsProps) {
         rel="noopener noreferrer"
         className={cn(
           'flex flex-1 items-center justify-center gap-2 rounded-xl border border-border',
-          'bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20',
+          WHATSAPP_SHARE_CLASS,
           'px-4 py-3 text-sm font-semibold transition-colors',
         )}
       >
@@ -63,7 +64,7 @@ export function ShareButtons({ shareHeadline, shareUrl }: ShareButtonsProps) {
         rel="noopener noreferrer"
         className={cn(
           'flex flex-1 items-center justify-center gap-2 rounded-xl border border-border',
-          'bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2]/20',
+          LINKEDIN_SHARE_CLASS,
           'px-4 py-3 text-sm font-semibold transition-colors',
         )}
       >
