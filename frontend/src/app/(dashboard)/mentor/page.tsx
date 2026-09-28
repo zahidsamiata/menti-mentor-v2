@@ -38,11 +38,20 @@ const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
 const METRIC_DEFS: {
   label: string;
   color: 'brand' | 'warning' | 'success' | 'neutral';
-  value: (m: MentorDashboardMetrics) => number | null;
+  value: (m: MentorDashboardMetrics) => number | string | null;
 }[] = [
   { label: 'Aktif Mentilerim',       color: 'brand',   value: (m) => m.activeMentis },
   { label: 'Bekleyen Talepler',      color: 'warning', value: (m) => m.pendingRequests },
-  { label: 'Ortalama NPS',           color: 'success', value: (m) => m.avgNps },
+  // AJ-99: yanıt sayısı k-anonimlik eşiğinin altındaysa backend ortalamayı döndürmez;
+  // kurum ekranlarıyla aynı "gizli (<N yanıt)" metni gösterilir (eşik backend'den gelir).
+  {
+    label: 'Ortalama NPS',
+    color: 'success',
+    value: (m) =>
+      m.npsSuppressed && m.npsMinSampleSize !== undefined
+        ? `gizli (<${m.npsMinSampleSize} yanıt)`
+        : m.avgNps,
+  },
   { label: 'Tamamlanan Görüşmeler', color: 'neutral', value: (m) => m.completedMeetings },
   // P-11: emek "kaç saat" görünür — tamamlanan görüşmelerin toplam süresi (backend'den saat).
   { label: 'Mentörlük Saati',        color: 'success', value: (m) => m.totalMentoringHours ?? null },
