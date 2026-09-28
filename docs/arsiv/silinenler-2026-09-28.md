@@ -320,3 +320,37 @@ const TENANT_SCOPED = new Set([
 - **Son commit (değişiklikten önce):** `2dae3ef` (bu PR'ın E commit'i; origin/main'de bu satır yoktu)
 - **Geri alma:** `git revert <GÖREV 2.4-G commit>`.
 
+
+## AJ-83 · Mesajlar gelen kutusu sayfalama
+
+### 1) `frontend/src/lib/api/conversations.ts` — `conversationsApi.list`
+- **Eski hâl (AYNEN):**
+```ts
+  list: (api: BoundClient): Promise<ApiResult<ConversationListResponse>> =>
+    api<ConversationListResponse>('/api/conversations'),
+```
+- **Neden yazılmıştı:** sunucu sayfalamasından (F-27) önce uç tüm konuşmaları döndürüyordu; parametre gerekmiyordu.
+- **Neden değişti:** F-27 sonrası sunucu yalnız ilk 30'u döndürüyor; ön yüz sonraki sayfayı isteyebilsin diye isteğe bağlı `{ limit?, offset? }` eklendi. Parametresiz çağrı (ör. `menti/page.tsx`) aynı isteği atar — davranış değişmedi.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `41e53abc8fbde1ff775fbe49b2ebe0559482a69f` · çatı main `a99fe89ff22f24fa268f681207f55e1d6d099897`
+- **Geri alma:** çatıda `git revert <AJ-83 commit>` (şema/migration yok).
+
+### 2) `frontend/src/app/(dashboard)/messages/page.tsx` — liste gövdesi
+- **Eski hâl (AYNEN, değişen satırlar):**
+```tsx
+  const { data, isLoading: loading } = useQuery(
+    () => conversationsApi.list(api),
+    [api],
+    { enabled: !!user, cacheKey: 'conversations:list' },
+  );
+```
+```tsx
+          ) : !data || data.items.length === 0 ? (
+```
+```tsx
+            <div className="divide-y divide-border">
+              {data.items.map((c) => (
+```
+- **Neden yazılmıştı:** tek sorgu tüm listeyi getiriyordu (F-27 öncesi).
+- **Neden değişti:** yalnız ilk sayfa görünüyordu (30'dan sonrası erişilemez). Artık ilk sayfa + "Daha fazla göster" ile eklenen sayfalar id ile tekilleştirilerek gösteriliyor; ilk sayfa hatasında "Henüz mesajınız yok" yerine Türkçe hata görünüyor. Liste satırının biçimi değişmedi (yalnız bir kat girinti).
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `cefa2c439ac16a97c1a7015bc46bb32d4352a554` · çatı main `a99fe89ff22f24fa268f681207f55e1d6d099897`
+- **Geri alma:** çatıda `git revert <AJ-83 commit>`.
