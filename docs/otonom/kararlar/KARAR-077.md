@@ -10,5 +10,6 @@
 **Karşılaştırma:** İki yönlü değerlendirme kalite döngüsünün girdisiyse A en temiz yol ama migration ister. B migration'sız hızlı yol, ama ortak metin alanı ve "kim yazdı" belirsizliği bırakır. C yalnız kullanıcının hatayı anlamasını sağlar, veri kaybını çözmez. Dört ayrı geri bildirim modeli envanteri (AN-47) A'nın tasarımını besler; önce o yapılabilir.
 **Benim önerim:** A — iki taraflı değerlendirme ürünün kalite ölçümünün temeli; B'nin ortak metin alanları iki kişinin verisini karıştırır.
 **Cevap vermezsen:** KR-08 kilitli kalır; her görüşmede bir tarafın değerlendirmesi kaybolmaya devam eder; KR-11 (dönemlik anket) bağlansa bile aynı kilide takılır.
+**İlgili kartlar:** KARAR-89 (A cevabının hangi kutuda uygulanacağı; KR-08'in Feedback'i bölme planıyla çelişki)
 **CEVAP:** A — Her taraf görüşme başına kendi değerlendirme kaydını yazar (görüşme + yazan başına bir kayıt). GÖRÜNÜRLÜK DEĞİŞMEZ: karşı taraf diğerinin cevabını hiçbir zaman görmez; kurum yöneticisi hepsini görür; yazan kendi cevabını görebilir (feedbackController.ts'teki mevcut 'KARAR 1' kuralı aynen korunur). Gerekçe (PO): anketi taraflar platform/kurum için dolduruyor; mentör gördüğü eksiği görüşmede zaten aktarıyor, dürüstlük için karşı taraf görmemeli. (PO, 2026-09-25)
 

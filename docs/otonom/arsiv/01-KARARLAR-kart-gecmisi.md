@@ -822,4 +822,272 @@ Kaynak: `docs/otonom/kararlar/KARAR-123.md` (origin/main, değişiklik öncesi).
 **Cevap vermezsen:** Atlayan kişi cevapsız kalır; başka iş kilitlenmez.
 **CEVAP:**
 ```
+### KARAR-12 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-012.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-12 · Görüşme geri bildirim kayıt sistemi ne olsun?  [ÜRÜN KARARI]
+**Şu an ne var:** Görüşme sonrası menti/mentör bir "check-in" (kısa değerlendirme) dolduruyor ve bu çalışıyor. Ama bunun ALTINDA, bundan ayrı, ikinci bir "geri bildirim kaydı" sistemi backend'de tam yazılı: her etkileşimi ayrı ayrı kaydedip analiz için saklıyor. Kanıt: `backend/src/routes/feedbackLogRoutes.ts:17-30` (3 uç: yaz/listele/tek-kayıt). Bu üç ucun frontend'de HİÇBİR çağıranı yok (kapsam: `frontend/src` tümü, harf duyarsız, 0 sonuç).
+**Sorun ne:** Bu sistem eşleştirmeyi zamanla iyileştirmek için tasarlanmış (hangi eşleşme iyi gitti, hangisi kötü — bir tür öğrenme döngüsü). Ama kimse bu verileri ne giriyor ne görüyor. Ya bağlanmalı ya da niyeti netleşmeli.
+**Neden sana soruyorum:** Bu verinin "kullanıcıya görünen bir panel" mi yoksa "yalnız senin göreceğin iç analiz aracı" mı olacağı bir ürün tercihi — teknik değil.
+**Kapsadığı kalemler:** `feedbackLogRoutes.ts` (3 uç) + `FeedbackLog` modeli + buna bağlı `rewardPenalty.ts` skorlama mantığı (aktif import edilmiş). Not: KVKK 3-yıl saklama zaten uygulanmış.
+**Seçenekler:**
+**A) İç analiz aracı yap** (yalnız platform admin görür, kullanıcıya görünmez) · Kullanıcı: hiçbir şey görmez, arka planda veri birikir · Kazanç: eşleştirme kalitesini ölçmeye başlarsın, kullanıcıyı yormazsın · Kaybedersin: kullanıcı katkısı hissetmez; panel yapımı senin işin, kimse "geri bildirim verdim" demez · Süre: M · Geri alınır: evet · Migration: yok
+**B) Kullanıcıya görünen geri bildirim özelliği yap** · Kullanıcı: görüşme sonrası açık uçlu geri bildirim bırakır, belki geçmişini görür · Kazanç: kullanıcı sesini duyurur, zengin veri · Kaybedersin: mevcut check-in ile çakışır/tekrar olur, kullanıcıyı iki kez sorguya çeker · Süre: L · Geri alınır: zor (kullanıcı alışır) · Migration: yok
+**C) Şimdilik dursun, check-in yeterli** · Kullanıcı: değişiklik yok · Kazanç: emek çekirdeğe gider, mükerrerlik riski yok · Kaybedersin: yazılmış sistem rafta kalır, öğrenme döngüsü hiç başlamaz · Süre: yok · Migration: yok
+**Karşılaştırma:** Eşleştirme motorunu veriyle iyileştirmek yakın hedefinse A doğru ve check-in ile çakışmaz (biri kullanıcıya, biri sana). Kullanıcı sesini ürünün parçası yapmak istiyorsan B, ama check-in ile sınırı iyi çizilmeli. Çekirdek akış (eşleş→randevu→görüş) hâlâ pürüzlüyse C.
+**Benim önerim:** A — check-in kullanıcı tarafını zaten karşılıyor; bu sistemin değeri sana ölçüm verisi vermesinde, kullanıcıyı tekrar yormadan.
+**Cevap vermezsen:** feedbackLog uçları bağlanmaz, öğrenme döngüsü kapalı kalır. Başka iş etkilenmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-44 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-044.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-44 · Algoritma kendi sonuçlarından öğrensin mi — ve hangi memnuniyet verisi "gerçek" sayılsın? (2-3 işi açar)  [ÜRÜN + VERİ KARARI]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+⚠️ **KÜMELEME UYARISI (PO'ya):** Bu kartın kapsamı **mevcut KARAR-12** (*"Görüşme geri bildirim kayıt sistemi ne olsun?"*, `01-KARARLAR.md:282`) ile **büyük ölçüde örtüşüyor** — KARAR-12 açıkça `feedbackLogRoutes.ts` + `FeedbackLog` modeli + **`rewardPenalty.ts` skorlama mantığını** kapsıyor. `CLAUDE.md` **"KÜMELE"** kuralı gereği PO iki seçenekten birini tercih etmeli: **(i)** bu kart açılmaz, metni **KARAR-12'ye `⚠️ EK` olarak** eklenir; **(ii)** ayrı kart açılır ve KARAR-12 *"bu kartla birlikte cevaplanır"* diye işaretlenir. **Ajan karar vermedi.**
+**Şu an ne var:** Öğrenme döngüsü **yazılmış ama kapalı**; iki ayrı kopma:
+ 1. Görüşme sonrası check-in'lerden *"D mentör + S menti bu kurumda kötü gidiyor"* sinyali hesaplanıp `MatchCombinationScore` tablosuna **yazılıyor** (`rewardPenalty.ts:58-62`, 16 DISC kombinasyonu) — ama eşleştirme motoru bu tabloyu **hiç okumuyor** (kapsam K5: `rewardPenalty · getCombinationScores · matchCombinationScore · applyFeedbackSignal` × BE+FE → sıralama yolunda **0 okuma**). Kodun kendi yorumu gelecek zamanla yazılmış: *"…bonus/ceza **uygulayabilir**"* (`:66-68`).
+ 2. Haftalık otomatik ağırlık ayarı (Pazar 02:00 UTC, `cronScheduler.ts:71`) `FeedbackLog`'un NPS'ini okuyor (`algorithmTuner.ts:144-161`) — ama **hiçbir ekran o tabloya yazmıyor** (FE'de `POST /api/feedback-logs` → **0**). Gerçek memnuniyet **başka tabloya** gidiyor: `Feedback.periodicNpsScore` (`periodic-survey/page.tsx:54-58`, `schema.prisma:648`). İki alan arasında senkron yok ⇒ cron her hafta koşup *"yeterli veri yok"* deyip dönüyor (`algorithmTuner.ts:286,290-292`), yöneticinin **"Başarı oranı"** kartı da bu yüzden daima boş (`adminController.ts:91-96` → `admin/kpi/page.tsx:70` `—`).
+**Sorun ne:** Ürün *"gerçek kullanıcı verisi biriktikçe kalibre edilecek"* diye **yazılı bir söz** veriyor (`eslesme-uyum-po-inceleme-2026-08-26.md:91`). Bugün o söz **yapısal olarak tutulamaz**: veri toplanıyor, bir yere yazılıyor, ama okuyan yok. Kurum *"eşleştirmeniz işe yarıyor mu"* diye sorduğunda sistem cevap veremiyor.
+**Neden sana soruyorum:** İki ayrı ürün sorusu var, ikisi de teknik değil: (a) algoritma kendi kendine değişsin mi, yoksa her değişiklik insan onayından mı geçsin; (b) hangi memnuniyet ölçümü **resmî** sayılsın. (b) verinin anlamını belirler ve geri dönüşü zordur.
+**Seçenekler:**
+**A) Döngü kapalı kalsın; yalnız dürüstlük düzeltilsin** (KPI kartı yanıltıcı `—` yerine "veri yok" desin = PS-05) · Kullanıcı ne görür: yönetici kartın neden boş olduğunu okur · Ne kazanırsın: en ucuz; yanlış izlenim biter · **Ne kaybedersin:** algoritma **hiç öğrenmez**, ağırlıklar sonsuza kadar sezgisel kalır; toplanan check-in verisi çöpe gider; kalibrasyon sözü belgede kalırsa her denetimde yeniden bulunur (çıkarılması gerekir) · Süre **S** · Geri alınır **evet** · Migration **yok**
+**B) Tek canonical NPS seç + otomatik ayarı çalışır hâle getir** (`Feedback.periodicNpsScore`'u tuner'a bağla) · Kullanıcı ne görür: yönetici gerçek başarı oranını görür; ağırlıklar veriye göre **önerilir** (uygulama yine admin onayıyla, `algorithmTuner.ts:373`) · Ne kazanırsın: verilen söz tutulur, ağırlık sezgiden çıkar, insan onayı korunur · **Ne kaybedersin:** iki alandan biri **terk edilir** → `FeedbackLog.npsScore` ölü alan olur ve SİLME PROTOKOLÜ gerektirir; eşiğe (≥10 yanıt) ulaşana kadar kart yine boş görünür; iki alanın geçmiş verisi **birleştirilemez** · Süre **M** · Geri alınır **evet** · Migration **yok** (mevcut alanlar kullanılır)
+**C) B + kombinasyon skorunu da sıralamaya bağla** (tam öğrenme döngüsü) · Kullanıcı ne görür: eşleştirme zamanla o kuruma özel iyileşir · Ne kazanırsın: yatırılmış emeğin tamamı karşılığını verir; ürünün asıl iddiası gerçekleşir · **Ne kaybedersin:** **sıralama kendiliğinden değişmeye başlar** — aynı menti dün gördüğü mentörü bugün göremeyebilir ve sebebini kimse açıklayamaz; az veriyle erken öğrenme **yanlış** öğrenmedir (birkaç kötü check-in koca bir DISC kombinasyonunu cezalandırır); hata ayıklaması zor ve bugün bunu yakalayacak test yok (PS-07/PS-08 ön koşul) · Süre **L** · Geri alınır **kısmen** (bayrakla kapatılır, öğrenilmiş katsayılar kalır) · Migration **yok**
+**Karşılaştırma:** Canlıda kullanıcı sayısı düşükken C tehlikelidir. B, sözü tutar ve insan onayını korur. A yalnız "şimdilik ölçmeyeceğiz" demeye hazırsan doğrudur — ama o zaman kalibrasyon sözünün belgeden **çıkarılması** gerekir.
+**Benim önerim:** **B** — çünkü sözü tutuyor, insan onayını koruyor ve az veriyle yanlış öğrenme riskini almıyor. *(Bu senin ürün kararın.)*
+**Cevap vermezsen:** Cron her hafta boşa koşar, KPI kartı sessizce boş kalır, toplanan check-in verisi hiçbir işe yaramaz; **KARAR-12 de fiilen cevapsız kalır.**
+**CEVAP:**
+
+---
+```
+
+### KARAR-67 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-067.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-67 · Yönetici drill-down'ı kişinin serbest-metin endişe notuna inmeli mi?  (1 işi açar)  [ÜRÜN KARARI · KVKK]
+**Şu an ne var:** Drill-down kişiye iniyor (`yonetici:80`); check-in notları (1000 karakter + endişe etiketi) sahiplik kontrolsüz okunuyor (G-3, `konsey-guvenlik-kvkk`). Kanıt: `persona-panel-gelisimi-2026-09-23.md:271-272` (C1).
+**Sorun ne:** Yöneticinin "kim kaynıyor" görme hakkı ile mentinin özel notunun mahremiyeti çarpışıyor.
+**Neden sana soruyorum:** Yetki + KVKK + kullanıcı güveni kararı.
+**Seçenekler:**
+· **A — Yönetici yalnız AGGREGATE + durum görür, serbest-metin notu göremez.** Ne kazanırsın: mahremiyet. **Ne kaybedersin:** yönetici bağlamı azalır. Süre M · geri alınır ✅ · migration yok
+· **B — Görür ama LOGLU + kullanıcı bilgilendirilir.** Ne kazanırsın: aksiyon gücü. **Ne kaybedersin:** kırılgan not maruz kalır. Süre M · geri alınır ✅ (🔴 KVKK) · migration yok
+· **C — Notlar zaten yalnız taraflar arası — yöneticiye hiç açılmaz.** Ne kazanırsın: en güvenli. **Ne kaybedersin:** yönetici müdahale edemez. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** A dengeli; B güçlü ama riskli; C en korumacı ama aksiyonu keser.
+**Benim önerim:** A. *(Ürün+KVKK kararın.)*
+**Cevap vermezsen:** PL-A2, C1 çatışması + G-3 (kontrolsüz not okuma) açık kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-73 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-073.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-73 · Değerlendirme AŞAMA 2/3 (otomatik pasifleştirme) yapılacak mı? (1 iş açar: AN-34) [ÜRÜN KARARI]
+> ⭐ Kaynak: CS bilanço denetimi §7 KARAR-B.
+**Şu an ne var:** Eşleşme sonrası karşılıklı değerlendirme AŞAMA 1 canlıda (kalite puanı `TenantMembership.qualityMultiplier`'a yazılıyor, yönetici havuzda görüyor). AŞAMA 2 (eşik-altı mentörün otomatik pasifleşmesi) ve AŞAMA 3 (yeniden-değerlendirme + onay döngüsü) yalnız tasarımda. Kanıt: `konu/degerlendirme-metrik-sistemi-tasarim-2026-08-19.md:175-188`.
+**Sorun ne:** Düşük puanlı bir mentör kendiliğinden pasifleşmiyor; yönetici elle müdahale etmezse zayıf eşleşmeler sürer.
+**Neden sana soruyorum:** Bir mentörün otomatik (insan onayı olmadan) pasifleştirilmesi, mentörün göreceği/hissedeceği geri-dönülebilir ama hassas bir sonuç — eşiği ve otomasyon derecesini ürün sahibi belirler.
+**Seçenekler:**
+- **A) Tam otomatik pasifleştirme (eşik 3.1/5):** · Mentör: eşik altına düşünce eşleşme almaz · Kazanç: kalite kendini korur · Kayıp: tek kötü dönem mentörü haksız cezalandırır; 3.1 eşiği dayanaksız (belge itiraf ediyor) · Süre L · Migration VAR (`blocked`/`restrictedUntil`)
+- **B) Yönetici-önerili (otomatik uyarı, elle onay):** · Mentör: yönetici karar verir · Kazanç: insan denetimi · Kayıp: yönetici iş yükü · Süre M · Migration VAR
+- **C) Şimdilik yapılmasın:** · Kazanç: 0 iş, gerçek veri ~sıfır · Kayıp: kalite döngüsü yarım kalır · Süre 0
+**Karşılaştırma:** Gerçek değerlendirme verisi ~sıfırken A'nın eşiği kalibre edilemez; B insan denetimiyle güvenli ama iş yükü; C en düşük risk. Veri birikene kadar C→B doğal yol.
+**Benim önerim:** C şimdilik, veri birikince B — çünkü 3.1 eşiği bugün ampirik olarak savunulamaz. *(Ürün kararın.)*
+**Cevap vermezsen:** AŞAMA 2/3 tasarımı öksüz kalır; kalite döngüsü "yarım özellik" olarak asılı durur (AN-34 kilitli).
+**CEVAP:**
+```
+
+### KARAR-77 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-077.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-77 · Bir görüşmeye iki taraf da değerlendirme yazabilsin mi? (2 iş açar: KR-08 · KR-11 dolaylı) [ÜRÜN KARARI · MIGRATION]
+> ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A5 [D].
+**Şu an ne var:** Görüşme tamamlanınca menti mentörü (yönlendirme · kaynak paylaşımı · güven), mentör de mentiyi (hazırlık · proaktiflik) puanlıyor. İki tarafın puanı **aynı kayda** yazılıyor ve bir görüşme için **yalnız bir kayıt** olabiliyor. İlk gönderen kaydı açıyor, görüşme "değerlendirildi" diye işaretleniyor; ikinci taraf *"Bu toplantı için geri bildirim zaten gönderildi"* hatası alıyor. Kanıt: `backend/prisma/schema.prisma:623` (görüşme başına tek kayıt) · `backend/src/controllers/feedbackController.ts:63-64` (ikinci gönderimde ret) · `:118` (ilk kayıtta işaret).
+**Sorun ne:** Her görüşmede değerlendirmenin yarısı kayboluyor. Menti önce yazarsa mentörün mentiye verdiği puan hiç kaydedilmiyor (hazırlık puanına bağlı kilit hiç çalışmıyor); mentör önce yazarsa mentinin mentöre puanı kayboluyor (mentörün kalite puanı beslenmiyor). Dönemlik anket (KARAR-78) de aynı kayda yazmaya çalıştığı için o da kilitli.
+**Neden sana soruyorum:** Çözüm veritabanı değişikliği (migration) ister ve verinin anlamını değiştirir: "bir görüşme = bir değerlendirme" yerine "bir görüşme = her taraftan bir değerlendirme" olur; mevcut kayıtların nasıl yorumlanacağı da değişir.
+**Seçenekler:**
+- **A) Her taraf kendi kaydını yazsın** (görüşme + yazan kişi başına bir kayıt) · Kullanıcı ne görür: iki taraf da formu gönderebiliyor, hata yok · Ne kazanırsın: iki yönlü veri tam; kalite puanı ve hazırlık kilidi her görüşmede beslenir; kimin ne yazdığı net · **Ne kaybedersin:** migration + tarihli yedek gerekir; mevcut kayıtlar "yazan kim" bilgisiyle yeniden yorumlanır (hangi alanlar doluysa yazan ondan çıkarılır); okuma ekranları iki kayda göre güncellenir · Süre M · Geri alınır: zor (iki kayda bölünen veri kolay birleşmez) · Migration: VAR
+- **B) Tek kayıt kalsın, ikinci taraf aynı kaydın kendi alanlarını doldursun** · Kullanıcı ne görür: iki taraf da gönderebiliyor · Ne kazanırsın: tablo yapısı aynı kalır, hızlı · **Ne kaybedersin:** "değerlendirildi" işaretinin anlamı bulanıklaşır (biri mi yazdı, ikisi mi?); ortak metin alanlarını (öğrenilenler · yorum) iki taraf paylaşır, biri diğerinin yazdığını ezebilir; aynı anda gönderimde üzerine yazma riski · Süre S-M · Geri alınır: evet · Migration: yok (metin alanları taraf başına ayrılacaksa VAR)
+- **C) Bugünkü gibi kalsın, yalnız ekran açıklasın** · Kullanıcı ne görür: ikinci taraf "karşı taraf bu görüşmeyi zaten değerlendirdi" mesajını görür, puan veremez · Ne kazanırsın: sıfır risk, sıfır migration · **Ne kaybedersin:** verinin yarısı kaybolmaya devam eder; kalite puanı ve kilit kimin önce yazdığına göre rastgele beslenir; dönemlik anket kilitli kalır · Süre S · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** İki yönlü değerlendirme kalite döngüsünün girdisiyse A en temiz yol ama migration ister. B migration'sız hızlı yol, ama ortak metin alanı ve "kim yazdı" belirsizliği bırakır. C yalnız kullanıcının hatayı anlamasını sağlar, veri kaybını çözmez. Dört ayrı geri bildirim modeli envanteri (AN-47) A'nın tasarımını besler; önce o yapılabilir.
+**Benim önerim:** A — iki taraflı değerlendirme ürünün kalite ölçümünün temeli; B'nin ortak metin alanları iki kişinin verisini karıştırır.
+**Cevap vermezsen:** KR-08 kilitli kalır; her görüşmede bir tarafın değerlendirmesi kaybolmaya devam eder; KR-11 (dönemlik anket) bağlansa bile aynı kilide takılır.
+**CEVAP:** A — Her taraf görüşme başına kendi değerlendirme kaydını yazar (görüşme + yazan başına bir kayıt). GÖRÜNÜRLÜK DEĞİŞMEZ: karşı taraf diğerinin cevabını hiçbir zaman görmez; kurum yöneticisi hepsini görür; yazan kendi cevabını görebilir (feedbackController.ts'teki mevcut 'KARAR 1' kuralı aynen korunur). Gerekçe (PO): anketi taraflar platform/kurum için dolduruyor; mentör gördüğü eksiği görüşmede zaten aktarıyor, dürüstlük için karşı taraf görmemeli. (PO, 2026-09-25)
+```
+
+### KARAR-78 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-078.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-78 · Dönemlik anket özelliği kalsın mı, bağlansın mı, kaldırılsın mı? (1 iş açar: KR-11) [ÜRÜN KARARI · SİLME PROTOKOLÜ]
+> ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
+> ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A8 [D].
+**Şu an ne var:** `/periodic-survey` adında bir anket sayfası yazılı: kariyer netliği, güven (1-10), özgüven değişimi, tavsiye puanı (0-10) ve açık not soruyor. Veritabanında bu cevapların alanları hazır ve yanında *"ayda bir tetiklenir"* notu var. Ama: hiçbir ekrandan bu sayfaya bağlantı yok, ayda bir tetikleyen bir iş yok, sayfa gönderse de sunucu bu alanları tanımadığı için her gönderim reddediliyor. Kanıt: `frontend/src/app/(dashboard)/periodic-survey/page.tsx:54-65` · `backend/src/controllers/feedbackController.ts:9-28` · `backend/prisma/schema.prisma:643-648` · bağlantı araması `frontend/src` içinde boş.
+**Sorun ne:** Kullanıcı bu anketi hiç görmüyor; özellik fiilen yok. "Mentörlük ilişkisi bir ayda ne kattı" verisi hiç toplanmıyor. Ölü sayfa her denetimde yeniden bulgu olarak çıkıyor.
+**Neden sana soruyorum:** Bir özelliğin var olup olmayacağı ve kaldırılması ürün kararıdır (CLAUDE.md "DUR VE SOR"). Kaldırma seçeneği silme protokolüne tabidir: önce niyet (şemadaki "ayda bir" notu), sonra yeni karar, arşiv, karantina; gerçek silme ancak ikinci onayla.
+**Seçenekler:**
+- **A) Bağla: ayda bir eşleşmiş çifte kısa anket** · Kullanıcı ne görür: ayda bir panelde isteğe bağlı anket kartı · Ne kazanırsın: dönemlik derin veri (kariyer · özgüven · tavsiye puanı); eşleştirme ayarı ve kalite görünümü (AN-49) için gerçek girdi · **Ne kaybedersin:** kullanıcıya üçüncü form (görüşme sonrası check-in + görüşme değerlendirmesi + anket); kırılgan kullanıcıda soru yükü (KARAR-71 tutundurma etiği sınırı); zamanlanmış iş + test işi; KARAR-77 cevabına bağlı (aynı kayda yazıyor) · Süre M · Geri alınır: evet · Migration: KARAR-77'ye göre (ayrı tablo istenirse VAR)
+- **B) Kaldır — önce karantina** (sayfa kapatılır, kod yerinde `@deprecated` kalır, arşiv kaydı yazılır; bir tur sorunsuz geçerse senin ikinci onayınla silinir; veritabanı alanları yerinde kalır) · Kullanıcı ne görür: hiçbir değişiklik (zaten görmüyor) · Ne kazanırsın: ölü kod belirsizliği biter, niyet arşivde korunur; soruların içeriği AN-52 (ürün içi isteğe bağlı sorular, KARAR-70) tasarımına aktarılabilir · **Ne kaybedersin:** dönemlik veri bu yoldan toplanmaz; ileride istenirse yeniden bağlama işi · Süre S · Geri alınır: evet (karantina) · Migration: yok
+- **C) Olduğu gibi kalsın, karar ertelensin** · Kullanıcı ne görür: değişiklik yok · Ne kazanırsın: sıfır iş · **Ne kaybedersin:** ölü sayfa ve boş alanlar durur; her denetimde yeniden bulgu olur; veri toplanmaz · Süre 0 · Geri alınır: — · Migration: yok
+**Karşılaştırma:** A bu veriyi ayrı bir formla toplamaya değer buluyorsan doğru, ama kullanıcıyı üçüncü kez sorgular ve KARAR-77'ye bağlı. B, KARAR-70'te zaten kararlaştırılan ürün içi isteğe bağlı sorular (AN-52) aynı ihtiyacı karşılayacaksa en tutarlı yol. C yalnız kararı erteler.
+**Benim önerim:** B — AN-52 aynı "ilişki ne kattı" sorusunu tek ve isteğe bağlı bir yoldan sormak için zaten kararlaştırıldı; ayrı bir üçüncü form yükü artırır. *(Bu senin ürün kararın; veri toplamayı öne alıyorsan A.)*
+**Cevap vermezsen:** KR-11 kilitli; sayfa ölü kalır, her denetimde yeniden bulgu olur.
+**CEVAP:**
+```
+
+### KARAR-89 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-089.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-89 · Görüşme değerlendirmesinin TEK kutusu hangisi olsun? (3 iş açar: KR-08, AN-49, KR-11) [ÜRÜN KARARI · MIGRATION]
+> ⭐ Kaynak: AN-47 envanteri `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md` (çatı #301; 8 iddia koda karşı doğrulandı, inceleme 5829476679). **KARAR-77 (A) cevabıyla ÇELİŞKİ tespiti — KR-08 bu kart cevaplanana kadar 🔴.**
+**Şu an ne var:** Görüşme sonrası değerlendirme için dört ayrı kayıt kutusu var. Ekrandan gerçekten dolan TEK kutu `MeetingCheckIn` (görüşme sonrası kısa değerlendirme sayfası `/meeting-checkin`, `frontend/src/app/…/meeting-checkin/page.tsx:82`); bu kutu KARAR-77'nin istediği "her taraf kendi kaydını yazar" düzenini zaten uyguluyor. `Feedback` kutusu (puanlar, NPS) ekrandan dolmuyor: `/periodic-survey` her gönderimde reddediliyor (`backend/src/controllers/feedbackController.ts:9-28`). Ama eşleştirmedeki mentör kalite katsayısı `Feedback`'ten okunuyor, bu yüzden herkes nötr 1.0.
+**Sorun ne:** KR-08, KARAR-77=A'yı `Feedback` kutusunu "taraf başına" bölerek uygulamayı öngörüyor (migration). Bu yapılırsa aynı işi yapan İKİNCİ bir "taraf başına değerlendirme" kutusu doğar; kullanıcı iki ayrı form görür ya da biri yine boş kalır.
+**Neden sana soruyorum:** Hangi verinin ürünün tek doğru kaynağı olacağı ve migration (veritabanı yapısı değişikliği) ürün kararı.
+**Seçenekler:**
+- **A) `Feedback`'i böl (KR-08 olduğu gibi)** · Kullanıcı ne görür: yeni/düzeltilmiş periyodik anket formu, check-in formu da kalır · Kazanç: KR-08 planı değişmez · **Ne kaybedersin:** iki ayrı değerlendirme kutusu ve iki form; kullanıcıya çift soru; hangisi "doğru" belirsiz · Süre M · Migration VAR · Geri alınması zor
+- **B) Puanları `MeetingCheckIn`'e taşı, tek kutu o olsun** · Kullanıcı ne görür: görüşme sonrası tek form (bugünkü check-in), puan/NPS soruları oraya eklenir · Kazanç: bugün gerçekten dolan kutu esas alınır; kalite katsayısı ve KPI gerçek veriyle dolar · **Ne kaybedersin:** `Feedback`'i okuyan yerler (kalite katsayısı, oryantasyon kilidi, KPI) yeniden bağlanır; `Feedback` ve `MatchFeedback` silme protokolüne girer (hemen silinmez) · Süre M · Migration VAR (yeni alanlar) · Geri alınır (eski kutular yerinde kalır)
+- **C) Şimdilik migration yok; okuyan yerleri `MeetingCheckIn`'deki MEVCUT alanlara bağla** · Kazanç: migrationsız, hızlı · **Ne kaybedersin:** NPS gibi check-in'de olmayan ölçüler boş kalır; KR-08 askıda
+**Karşılaştırma:** A mevcut planı korur ama çift kutu üretir. B tek doğru kaynak kurar ama okuyan yerlerin yeniden bağlanmasını ister. C hızlıdır ama eksik kalır.
+**Benim önerim:** B — bugün gerçekten dolan tek kutu bu; KARAR-77'nin istediğini zaten yapıyor. *(Migration kararı senin; önerime güvenme.)*
+**Cevap vermezsen:** KR-08, AN-49 ve KR-11 bekler. Kalite katsayısı ve yönetici NPS kartı boş kalmaya devam eder.
+**CEVAP:**
+```
+
+### KARAR-90 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-090.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-90 · Görüşme sonrası sorulara hangi yeni sorular eklensin? (AN-48 önerileri; 1 iş açar) [ÜRÜN KARARI]
+> ⭐ Kaynak: `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md` §AN-48 (11 öneri: Ö1-Ö11).
+**Şu an ne var:** Görüşme sonrası soruların çoğu memnuniyet ölçüyor ("beğendin mi" türü). "Hedefinize ne kadar yaklaştınız?" puanı kaydediliyor ama hiçbir ekranda okunmuyor. "Geçen sefer konuştuğun adımı attın mı / sonraki adımın ne" gibi davranış sorusu hiç yok.
+**Sorun ne:** Memnuniyet sorusu zayıf sinyaldir; programın işe yarayıp yaramadığını göstermez.
+**Neden sana soruyorum:** Kullanıcıya sorulacak soru metni ve sayısı ürün kararı; bir kısmı yeni alan (migration) ister.
+**Seçenekler:**
+- **A) Yalnız migrationsız öneriler (Ö3, Ö4, Ö6, Ö7, Ö9, Ö11)** · Kazanç: hemen yapılabilir · **Ne kaybedersin:** en güçlü davranış soruları (Ö1, Ö2, Ö5, Ö8) dışarıda kalır · Süre S · Migration yok
+- **B) Hepsi — migration'lı olanlar KARAR-89 migration'ıyla aynı pakette** · Kazanç: tek seferde tam set · **Ne kaybedersin:** KARAR-89'a bağlanır; form uzar (tamamlama oranı düşebilir) · Süre M · Migration VAR
+- **C) Şimdilik değişiklik yok; önce kullanıcı görüşmeleri (AN-32 kılavuzu)** · Kazanç: sorular gerçek kullanıcıyla sınanır · **Ne kaybedersin:** zayıf sinyal sürer
+**Karşılaştırma:** A hızlı ama eksik. B tam ama KARAR-89'a bağlı. C daha fazla öğrenir ama bekletir.
+**Benim önerim:** A şimdi, gerisi B ile KARAR-89 paketinde. *(Soru metni senin kararın.)*
+**Cevap vermezsen:** AN-48 önerileri uygulanmaz.
+**CEVAP:**
+```
+
+### KARAR-91 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-091.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-91 · Görüşme değerlendirmeleri ne kadar saklansın? (1 iş açar) [HUKUKİ · KVKK]
+> ⭐ Kaynak: `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md` (inceleme doğruladı: saklama süresi sonu imhası `MeetingCheckIn`'i kapsamıyor; KVKK veri dışa aktarımı da içermiyor — `backend/src/services/gdprService.ts:283-306`).
+**Şu an ne var:** Tek gerçek değerlendirme kutusu `MeetingCheckIn` için silme süresi yok. Kullanıcının "verilerimi indir" çıktısında bu değerlendirmeler yok ("0 kayıt" görünüyor). Diğer kutularda süre var (ör. `FeedbackLog` 3 yıl).
+**Sorun ne:** Kişi hakkında yazılmış değerlendirmeler süresiz tutuluyor ve kişi bunları dışa aktarımda göremiyor. Bu, KVKK'daki saklama ve erişim hakkıyla uyumsuz.
+**Neden sana soruyorum:** Saklama süresi hukuki bir karar.
+**Seçenekler:**
+- **A) 3 yıl (FeedbackLog ile aynı) + dışa aktarıma ekle** · Kazanç: tutarlı politika · **Ne kaybedersin:** 3 yıldan eski değerlendirmeler otomatik silinir · Süre S · Migration yok
+- **B) Program bitişinden sonra 1 yıl + dışa aktarım** · Kazanç: veri minimizasyonu · **Ne kaybedersin:** uzun dönem analiz verisi kaybolur · Süre S · Migration yok
+- **C) Yalnız dışa aktarıma ekle, süreyi sonra belirle** · Kazanç: erişim hakkı hemen sağlanır · **Ne kaybedersin:** süresiz saklama sürer
+**Karşılaştırma:** A basit ve tutarlı. B daha az veri tutar. C erişim açığını hemen kapatır ama saklama açığını bırakır.
+**Benim önerim:** C şimdi (dışa aktarım teknik bir düzeltme, 🟡), süre için hukuk görüşüyle A ya da B. *(Hukuki karar senin, önerime güvenme.)*
+**Cevap vermezsen:** değerlendirmeler süresiz saklanır; dışa aktarım eksik kalır.
+**CEVAP:**
+```
+
+### KARAR-92 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-092.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-92 · Mentör "menti hazırlıksızdı" derse oryantasyon kilidi devreye girsin mi? (1 iş açar) [ÜRÜN KARARI]
+> ⭐ Kaynak: `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md`.
+**Şu an ne var:** Menti için bir "oryantasyon kilidi" var (hazırlıksız menti önce oryantasyonu tamamlasın diye). Ama kilit, hiç dolmayan `Feedback` kutusuna bağlı olduğu için hiçbir zaman tetiklenmiyor. Mentör check-in'de "menti hazırlıklı mıydı" sorusunu cevaplıyor ama bu cevap hiçbir yerde okunmuyor.
+**Sorun ne:** Kilit ya bağlanmalı ya da bilinçli olarak kapalı tutulmalı. Bugün "var gibi görünüp çalışmıyor."
+**Neden sana soruyorum:** Kilit açılırsa menti bir sonraki görüşmeden önce engellenir; bu, kullanıcıyı doğrudan etkileyen bir yetki kararı.
+**Seçenekler:**
+- **A) Evet, mentörün "hazırlıksızdı" cevabı kilidi tetiklesin** · Kullanıcı ne görür: menti bir sonraki randevudan önce oryantasyonu tamamlamaya yönlendirilir · Kazanç: kalite · **Ne kaybedersin:** tek bir olumsuz cevap mentiyi engeller (haksız olabilir) · Süre S · Migration yok
+- **B) Evet ama ancak 2 ardışık "hazırlıksız" cevapta** · Kazanç: haksız kilit riski azalır · **Ne kaybedersin:** ilk sorunda müdahale gecikir · Süre S
+- **C) Hayır, kilit kapalı kalsın; bilgi yalnız yöneticiye gitsin** · Kazanç: menti engellenmez · **Ne kaybedersin:** kilidin amacı gerçekleşmez
+**Karşılaştırma:** A katı, B dengeli, C yumuşak.
+**Benim önerim:** B — tek cevapla kilit haksız olabilir. *(Bu senin ürün kararın, önerime güvenme.)*
+**Cevap vermezsen:** kilit çalışmamaya devam eder.
+**CEVAP:**
+
+---
+```
+
+### KARAR-106 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-106.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-106 · 🔵 EVET/HAYIR — AN-52-1: ürün-içi anket cevap tablosu canlıya alınsın mı? (1 iş açar: AN-52-3 — frontend) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** Bu PR'ın kendisi henüz hiçbir şeyi değiştirmiyor (ön yüz entegrasyonu AN-52-3, ayrı iş/PR). Migration canlıya alınıp AN-52-3 de tamamlanınca kullanıcı köşede küçük, isteğe bağlı, X ile kapatılabilir bir soru kartı görecek (7 sorudan biri — bekleme anı, ilk talep, mentörlüğe başlama nedeni, kapasite, takdir, geri dönüş nedeni, ret sonrası his). Kanıt: backend PR `menti-mentor#185` (`GET /api/surveys/pending`, `POST /api/surveys/:questionKey/respond`).
+**Ne değişir:** Veritabanına **yeni bir tablo** eklenir (`ProductSurveyResponse`) — mevcut hiçbir tabloya ALTER yok, mevcut hiçbir satır değişmiyor/silinmiyor. Dosya: `prisma/migrations/20260927120000_add_product_survey_response/migration.sql` (`CREATE TABLE/INDEX IF NOT EXISTS` + FK `duplicate_object` guard, yalnız ekleme).
+**Geri alınır mı:** Evet — kod revert edilir; tablo boş/yeni olduğu için `DROP TABLE IF EXISTS "ProductSurveyResponse";` ile de geri alınabilir, mevcut veriyi ETKİLEMEZ.
+**Yedeği alınacak tablo:** YOK — yeni tablo, mevcut veriye dokunmuyor. (CLAUDE.md "yedek zorunlu" kuralı var olan veriyi DEĞİŞTİREN migration'lar içindir; burada öyle bir tablo yok. Yine de şema değişikliği CANLI=LOKAL AYNI Neon kuralı gereği PO'nun tek EVET'ini gerektiriyor.)
+**Bağımsız inceleme (7b):** ONAY — https://github.com/zahidsamiata/menti-mentor/pull/185#issuecomment-5854854281 (migration yalnız yeni tablo, tekrar çalıştırılabilir, CI'da boş veritabanına uygulandı). Bilinmesi gereken üç sınır: (a) kart görülüp ne cevaplanır ne kapatılırsa soru tekrar gelebilir (kural "en fazla 1 kez cevap/kapatma" olarak uygulandı; "gösterildi" kaydı ön yüz işinde eklenebilir); (b) "ilk talep", "2. giriş" gibi anları ön yüz bildiriyor, sunucu yalnız rolü doğruluyor (güvenlik riski yok, veri güvenilirliği notu); (c) birden çok kurumda üye kullanıcı bir soruyu toplamda 1 kez görür.
+**Durum:** kod hazır (AN-52-1 migration + AN-52-2 uçlar + AN-52-4 KVKK aynı PR'da) · ✅ **CI YEŞİL** (backend #185 — `ci` 5m22s + `docker-prisma` [migrate deploy dahil] 1m8s, ikisi de pass) · ✅ **bağımsız inceleme: SONUÇ: ONAY** (2026-09-27) — additive/idempotent migration, requireTenant→requireAuth sırası doğru, rol TenantMembership'ten (JWT'den değil), kimlik yalnız `req.auth.userId`'den (gövdedeki sahte userId test edilerek doğrulandı), Zod doğrulama tam, `@@unique`+P2002→409 gerçek insert ile doğrulandı, cross-tenant testi gerçekten `requireTenant`'ın 403 dalını tetikliyor, explicit select her yerde, KVKK export/anonymize gerçek DB round-trip'le doğrulandı. Gözlem (blocker değil): `@@unique([userId, questionKey])` tenantId'siz/global — Consent modeliyle aynı bilinçli konvansiyon.
+**EVET** → ajan merge eder → canlı sunucu açılışta `migrate deploy` ile tabloyu kendisi oluşturur (yedek konusu yok, yeni tablo). Sonra AN-52-3 (frontend) sıraya girebilir.
+**HAYIR** → PR kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; AN-52 seti (7 soru) hiç canlıya çıkmaz.
+**Cevap vermezsen:** AN-52-3 (frontend entegrasyonu) başlamaz; AN-52-2/AN-52-4 kodu PR'da bekler.
+**CEVAP:**
+```
+
+### KARAR-110 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-110.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-110 · Periyodik anket (mentörlük ilişkisinin genel değerlendirmesi) ne olsun? (1 işi açar: AJ-14)  [ÜRÜN KARARI]
+> ⭐ Kaynak: E-3e yan bulgusu + 7b incelemesi (2026-09-27); kuyrukta AJ-14.
+
+**Şu an ne var:** `/periodic-survey` adında bir sayfa var (tavsiye puanı, güven, özgüven, kariyer katkısı soruları; `frontend/src/app/(dashboard)/periodic-survey/page.tsx`). Ama (1) hiçbir ekrandan ya da e-postadan bu sayfaya bağlantı yok; (2) sayfa açılsa bile gönderim her seferinde "En az bir değerlendirme puanı girilmelidir" hatasıyla reddediliyor (`backend/src/controllers/feedbackController.ts:11-30`); (3) cevaplar görüşme başına TEK satırlık geri bildirim kaydına yazılmaya çalışılıyor — mentör ve menti ikisi de doldurursa biri diğerinin cevabını ezer, ve menti'nin notu mentöre görünür (`feedbackController.ts:185-189`).
+**Sorun ne:** Yarım kalmış bir özellik: kimse ulaşamıyor, ulaşsa kaydedemiyor, kaydedebilse gizlilik kuralını (KARAR-80 M22 "herkes yalnız kendi yazdığını görür") bozar.
+**Neden sana soruyorum:** Periyodik anketin hiç olup olmayacağı, kime ve ne sıklıkta gösterileceği ürün kararı; düzgün çalışması yeni bir kayıt yapısı (migration) istiyor.
+**Seçenekler:**
+- **A) AN-52 anket altyapısına katılsın** (KARAR-106 EVET olursa gelen `ProductSurveyResponse` tablosu; kişi başına ayrı kayıt, gizlilik doğal olarak korunur) ve eski sayfa karantinaya alınsın — Kullanıcı: ilişki değerlendirme soruları köşedeki isteğe bağlı soru kartlarında, belirli anlarda çıkar · Kazanç: tek anket sistemi, ek migration yok (KARAR-106 ile gelir), gizlilik sorunu kökten çözülür · Kayıp: eski sayfa kalkar (karantina, silme değil); KARAR-106'ya bağlı · Süre M · Geri alınır · Migration: KARAR-106'nınki.
+- **B) Eski sayfa ayrı bir kayıt yapısıyla onarılsın ve belirli aralıkla (ör. 3 ayda bir) e-postayla gönderilsin** — Kullanıcı: dönemsel "ilişkiniz nasıl gidiyor?" e-postası ve sayfa · Kazanç: bağımsız, dönemsel ölçüm · Kayıp: ikinci bir anket sistemi; ayrı migration + e-posta zamanlayıcısı; SMTP'ye bağlı · Süre L · Geri alınır · Migration VAR.
+- **C) Şimdilik dokunulmasın** — Kullanıcı: değişiklik yok (sayfa zaten erişilemez) · Kazanç: iş yok · Kayıp: yarım kod durur; biri sayfayı bağlarsa hem hata hem gizlilik sorunu çıkar · Süre — · Geri alınır · Migration yok.
+**Karşılaştırma:** Tek ve tutarlı bir anket sistemi istiyorsan A; dönemsel e-posta ölçümü ayrı bir hedefse B; ilk kurumlarla canlıya çıkış öncelikliyse C.
+**Benim önerim:** A — gizlilik sorununu yeni kodla değil mevcut planlanan altyapıyla çözer, iki anket sistemi doğmaz.
+**Cevap vermezsen:** AJ-14 bekler; sayfa erişilemez olduğu için kullanıcı etkisi yok.
+**CEVAP:**
+```
+
+### KARAR-126 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-126.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-126 · Az yanıtlı ilk ayda "NPS düşüşü" önerisi hiç çıkmasın mı? (0 iş kilitliyor; cevap 1 küçük iş açar) [ÜRÜN KARARI · KVKK]
+**Şu an ne var:** Algoritma ayar ekranı ve öneri e-postası artık 1-2 yanıtlı NPS ortalamasını göstermiyor ("gizli (<3 yanıt)") — AJ-69, backend #220. Ama öneri motoru kararı ham sayıyla veriyor: "1. aydan 3. aya NPS düşüşü" gerekçesi yalnız 1. ay ortalaması 7 ve üstüyse çıkıyor. Kanıt: `backend/src/services/algorithmTuner.ts` `decideSectorWeight` (düşüş dalı, 1. ay ≥ 7 şartı) · maske `backend/src/services/mask.ts` `maskNpsSample`.
+**Sorun ne:** 1. ayda yalnız 1-2 kişi puan verdiyse ve bu gerekçe ekrana geldiyse, kurum yöneticisi "o 1-2 kişinin ortalaması en az 7'ydi" sonucunu çıkarabilir. Sayı görünmüyor ama bir bitlik bilgi sızıyor. Pencere dar, yalnız kurum yöneticisi görüyor (7b incelemesi: engelleyici değil, kalan risk).
+**Neden sana soruyorum:** Kapatmak öneri motorunun davranışını değiştirir — bazı kurumlara hiç "düşüş" önerisi gitmez. Bu, ürünün ne önereceği kararı; gizlilik ile öneri kalitesi arasında seçim.
+**Seçenekler:**
+- **A) Bugünkü gibi kalsın (sayı gizli, gerekçe çıkabilir).** · Kullanıcı ne görür: az yanıtta da düşüş önerisi gelebilir, sayı "gizli" · Kazanç: öneri kalitesi değişmez · Kaybedersin: küçük örnekte "≥7" çıkarımı mümkün kalır · Süre: — · Geri alınır: evet · Migration: yok
+- **B) 1. ay yanıtı eşiğin (3) altındaysa düşüş kuralı hiç çalışmasın.** · Kullanıcı ne görür: az yanıtlı kurumda "düşüş" önerisi yok; öneri yalnız 3. ay verisine dayanır · Kazanç: çıkarım kapanır, küçük örnekten karar verilmez (istatistiksel olarak da daha sağlam) · Kaybedersin: gerçekten düşüş olan küçük kurumda erken uyarı gecikir · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Gerekçe metni hiç gösterilmesin, yalnız önerilen ağırlık görünsün.** · Kullanıcı ne görür: "Sektör ağırlığı 0,55 önerildi" — nedeni yazmaz · Kazanç: hiçbir çıkarım yok, motor aynı · Kaybedersin: yönetici önerinin nedenini bilmeden onaylar; güven azalır · Süre: S · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Küçük kurumlarda gizlilik öndeyse B; öneri nedeninin şeffaflığı öndeyse A; motoru hiç değiştirmeden gizliliği sağlamak istiyorsan C (ama yönetici kör onaylar).
+**Benim önerim:** B — 1-2 yanıttan "düşüş" sonucu çıkarmak zaten zayıf bir karar; aynı değişiklik çıkarımı da kapatıyor.
+**Cevap vermezsen:** Bugünkü davranış (A) sürer; başka iş kilitlenmez. İlgili: AJ-69 (BITTI olunca), AJ-99 (mentör paneli NPS).
+**CEVAP:**
+```
 
