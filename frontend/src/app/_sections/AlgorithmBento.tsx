@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ShieldX, CheckCircle2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { bentoMatchScore } from '@/lib/landingBentoScore';
 
 // ─── Sol bento: Teknik Eşleştirme (%60) ──────────────────────────────────────
 
@@ -33,8 +34,7 @@ function TechnicalBento() {
       return next;
     });
 
-  const rawScore = 52 + selected.size * 4;
-  const matchScore = Math.min(97, rawScore);
+  const matchScore = bentoMatchScore(selected.size);
 
   return (
     <div className="flex flex-col h-full gap-5">
