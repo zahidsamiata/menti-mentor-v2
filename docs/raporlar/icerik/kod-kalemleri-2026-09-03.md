@@ -100,7 +100,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 - **Yeni karar:** faz6 §4 (satır 126-134) "unisex ısrarından vazgeçildi" — gerekçe yazılı: temsil sorununu
   çözen şey unisex isim değil **persona çeşitliliği** (§3); ayrıca tam-unisex + Türk-İslam kesişimi dar.
   Yeni ilke: kültüre uygun, cinsiyet dağılımı dengeli isimler (sertifika 3E/3K, öğrenme 2E/2K).
-- **Eski kayıt (yerini bul):** `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410` —
+- **Eski kayıt (yerini bul):** `docs/kararlar/konu/degerlendirme-sistemi-tasarim.md:410` —
   "**İSİMLER:** unisex (Deniz gibi). Anlatılan kişi hep aynı ad, karşı taraf …".
 - **Yapılacak (bu turda YAPILMADI — belge turu, çözme yasak) · ✅ yapıldı — I-06 · PR çatı #243 · 2026-09-23 · doğrulama: bitti-dogrulama-2026-09-27:** eski satır SİLİNMEZ; üstü çizilip `[ESKİ]`
   damgası + yeni belgeye (`faz6-…-2026-09-03.md §4`) yönlendirme düşülmeli (Belge Düzeltme Deseni, G9-03).
