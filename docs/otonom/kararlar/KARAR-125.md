@@ -9,5 +9,6 @@
 **Karşılaştırma:** Önce ilk kurumların oturması istiyorsan A; büyümeyi insan kontrolünde denemek istiyorsan B; kurum kazanımı ana büyüme kanalı olacaksa C.
 **Benim önerim:** A (şimdilik) — gerçek kullanıcı ~0 iken büyüme kanalı erken; gelir modeli (KARAR-119) ile birlikte düşün; bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** Kanal kapalı kalır; başka iş kilitlenmez.
+**İlgili kartlar:** KARAR-103 (md.7 kurumdan kuruma davet, komşu kanal) · KARAR-119 (hangi kurum kazanımına hizmet ettiği gelir modeline bağlı) — birlikte cevaplanması önerilir: KARAR-125 + KARAR-103
 **CEVAP:**
 

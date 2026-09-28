@@ -233,3 +233,86 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 
 ---
 ```
+
+## §GÖREV 3.1/3.3/3.4 · kart zenginleştirme öncesi TAM gövdeler (2026-09-28)
+
+GÖREV 3.1 (eksik alan tamamlama, kodla düzeltme), 3.3 (ilgili kart bağları) ve 3.4 (⚪ gereksiz adayı) turunda değiştirilen her kartın değişiklik ÖNCESİ tam gövdesi, taban  (babddf7) üzerinden AYNEN. Kartın güncel hâli .
+
+### KARAR-2 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-9 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-17 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-21 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-28 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-103 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-105 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-109 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-114 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-115 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-117 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-119 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
+### KARAR-125 (2026-09-28, 3.1)
+
+Kaynak:  (origin/main, değişiklik öncesi).
+
+
+
