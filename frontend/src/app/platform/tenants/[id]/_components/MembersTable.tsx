@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { TenantMember, TenantMemberRole } from '@/lib/api/platform';
 import { certStatusBadge } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
+import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 type RoleFilter = TenantMemberRole | 'ALL';
 
@@ -44,10 +45,13 @@ export function MembersTable({
 }) {
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-1">
+      {/* AJ-85: görünür başlık yok → grup adı aria-label; seçili filtre aria-pressed ile duyurulur. */}
+      <div className="flex flex-wrap gap-1" role="group" aria-label="Role göre filtrele">
         {ROLE_FILTERS.map((f) => (
           <button
             key={f.key}
+            type="button"
+            aria-pressed={roleFilter === f.key}
             onClick={() => onRoleFilterChange(f.key)}
             className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
               roleFilter === f.key
@@ -112,7 +116,7 @@ export function MembersTable({
                   </td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full ${
-                      m.isActive ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-red-900/60 text-destructive'
+                      m.isActive ? SUCCESS_PILL_CLASS : 'bg-red-900/60 text-destructive'
                     }`}>
                       {m.isActive ? 'Aktif' : 'Pasif'}
                     </span>

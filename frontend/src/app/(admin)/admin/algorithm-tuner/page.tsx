@@ -236,16 +236,18 @@ export default function AlgorithmTunerPage() {
       {/* Bildirim Sıklığı */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Analiz Bildirimi Sıklığı</CardTitle>
+          <CardTitle id="nps-frequency-title" className="text-base">Analiz Bildirimi Sıklığı</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
             Sistem NPS verilerini ne sıklıkla analiz edip size öneri sunacak?
           </p>
-          <div className="grid gap-2 sm:grid-cols-3">
+          {/* AJ-85: seçenek düğmeleri kart başlığıyla adlandırılmış grup. */}
+          <div className="grid gap-2 sm:grid-cols-3" role="group" aria-labelledby="nps-frequency-title">
             {FREQ_OPTIONS.map(({ value, label, desc }) => (
               <button
                 key={value}
+                type="button"
                 aria-pressed={selectedFreq === value}
                 onClick={() => { setDraftFreq(value); setFreqSaved(false); }}
                 className={`rounded-xl border p-3 text-left transition-colors ${
@@ -263,7 +265,7 @@ export default function AlgorithmTunerPage() {
             <Button size="sm" onClick={saveFrequency} disabled={freqSaving}>
               {freqSaving ? UI_TEXT.status.saving : UI_TEXT.actions.save}
             </Button>
-            {freqSaved && <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>}
+            {freqSaved && <span className="text-xs text-emerald-700 dark:text-emerald-400">✓ Kaydedildi</span>}
           </div>
         </CardContent>
       </Card>
