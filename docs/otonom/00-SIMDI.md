@@ -1,17 +1,43 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-> ✅ GÜVENLİK BULGUSU (U-08 → AJ-20) kapanıyor: backend #196 merge, çatı pointer #386 CI'da. KVKK AJ-21 CANLIDA (#194/#384).
+**Son güncelleme:** 2026-09-28 · çatı main HEAD (bu commit) · backend main HEAD `b79547d`
 
-**Son güncelleme:** 2026-09-27 · çatı main HEAD (bu commit) · backend main HEAD `3bd9ad3`
+**Durum:** DURDU (K1-a) — PO görevi GÖREV 0-4 tamamlandı. K5 yedek havuzuna geçilmedi (PO talimatı). Sonraki tur: yeni PO görevi ya da `00-KUYRUK.md` EN ÜST tablo (AJ-69 · 73 · 74 · 75 · 76 · 77 · 78 · 87 · 88 · 89 — KVKK/yetki).
 
-**Durum:** CALISIYOR — PO görevi: GÖREV 0 (kural: doğrulama opus + mutasyon kanıtı) → 1 (AJ-20…AJ-48; AJ-29/AJ-38 hariç) → 2 (kayıt+belge, kural h) → 3 (AJ: değerlendirme okuma ucu + E-3 notu) → 4 (sahipsiz kalanlar, salt-okuma) → DURDU (K1-a).
+## TUR ÖZETİ (2026-09-27/28 · GÖREV 0-4)
 
-**Şu an yapılan:** GÖREV 1 TAMAM — 27 işten BITTI 24 · kısmen 2 (AJ-22 → KARAR-112 · AJ-46 → AJ-68) · ATLANDI(karar) 1 (AJ-34 → KARAR-113) · 🔵 PR-ACIK AJ-50 (#212, KARAR-116). GÖREV 2: kapanan her işin rapor satırına "→ kapandı" notu + kaynak belge işaretleri. GÖREV 3 TAMAM (AJ-49). GÖREV 4: 259 kalem sınıflandı (S1 18 · S2 144 · S3 59 · S4 16 · S5 14 · teyit 7; S1 kalite kontrolünde 26'dan 8 çürüdü → düzeltildi) · yazma adımı sürüyor (dal `otonom/SAHIPSIZ-KALANLAR-20260927`). ⚠️ S3 = 59 > 30 → **sahipsiz kalan yığını — strateji katmanı önceliklendirsin.**
+**Kapanan AJ (GÖREV 1 — 27 iş; AJ-29 🟡 ve AJ-38 🔴 kapsam dışı):**
+- ⛔ **Güvenlik / KVKK / yetki (7b opus ONAY + negatif test + mutasyon):** AJ-20 (U-08 rank-mentors onay kapısı — #196/#386) · AJ-21 (ham DISC vektörü mentöre dönmüyor — #194/#384) · AJ-22 **kısmen** (CSP engelleme modunda canlı — #387; kalan logo img-src → KARAR-112 + AJ-52) · AJ-24 (#383) · AJ-28 (#202/#390) · AJ-30 (#197/#385) · AJ-31 (#198/#390, migration'sız) · AJ-32 (#200/#390, 8/8 kalem) · AJ-40 (#205/#393; 7b: misafir üyede başka kurumun karar/gerekçe alanları maskelendi) · AJ-44 (#203/#390).
+- **Diğer BITTI:** AJ-23 (#392) · AJ-25 (#389) · AJ-26 (#206/#393) · AJ-27 (#388, belge) · AJ-33 (#391) · AJ-35 (#396) · AJ-36 (#397) · AJ-37 (#398) · AJ-39 (#399) · AJ-41 (#400, 3/3) · AJ-42 (#401) · AJ-43 (#209/#403) · AJ-45 (#208/#395, 14/14) · AJ-47 (#402) · AJ-48 (#211/#403).
+- **Kısmen:** AJ-22 (→ KARAR-112 / AJ-52) · AJ-46 (#404, belge kovası 8 kalem tam; YN-09 kalanı → AJ-68).
+- **ATLANDI(karar):** AJ-34 → KARAR-113 (#394). **🔵 PR-ACIK:** AJ-50 (backend #212, 7b ONAY 2. tur; KARAR-116 EVET + yedek bekliyor).
+- Toplam: **24 BITTI · 2 kısmen · 1 karar · 1 🔵** (AJ-50 GÖREV 1 içinde açılan satır).
+
+**Kova kalem durumu:** AJ-32 8/8 · AJ-41 3/3 · AJ-45 14/14 · AJ-46 8 tam + YN-09 kısmen (→ AJ-68) · AJ-22 CSP tam, logo img-src kısmen (→ KARAR-112).
+
+**Mutasyon kanıtı:** 26 kapanışın 25'inde mutasyon kırmızı (yerel 20 iş · CI taslak 6 PR: #195 · #199 · #201 · #204 · #207 · #210 — hepsi kapatıldı, merge yok) · 1 N/A (AJ-27 belge işi, Bölüm 6) · boş kutu 0.
+
+**Yeni KARAR kartları:** KARAR-112 (logo img-src) · 113 (sertifika sınavı 4+4/baraj) · 114 (tarayıcı bildirimi) · 115 (kurum kayıt sayfası arama) · 116 (🔵 AJ-50 EVET/HAYIR) · 117…125 (GÖREV 4; KVKK: KARAR-120). Toplam 14. CEVAP alanlarına dokunulmadı.
+
+**🔵 PR'lar (merge edilmedi):** backend #212 (AJ-50 · KARAR-116 · `User.discResultCard` yedeği + DB erişimi gerekir).
+
+**7b SORUN VAR turları (hepsi düzeltildi, sonra ONAY):** #381 · #382 · #387 · #388 · backend #200 (test verisinde kişi adı) · backend #205 (kurumlar arası gerekçe sızıntısı) · #394 · #399 · #401 (sayfa bağlantısı testsizdi) · #404 · #405 (dondurulmuş 2 belge işaretlenmişti) · backend #212 · #392 (canlıda NEXT_PUBLIC_SITE_URL yok → origin'den).
+
+**⚠️ sayısı (bitti-dogrulama raporu):** GÖREV A sayımı 56 birim; raporda bugün ⚠️ taşıyan 58 tablo satırı → **45 kapandı · 3 kısmen · 10 açık.** Açık 10'un sahibi var: AJ-29 (K-14, 🟡 kapsam dışı) · AJ-38 (PS-05, 🔴 kapsam dışı) · AJ-34/KARAR-113 (I-04) · KARAR-102 (GV-12) · KARAR-64 (AN-10) · KARAR-45 (AN-05) · 03-PO GIT_SHA (V-16) · 03-PO:151 (YN-13) · 2'si iş gerektirmiyor (AN-11 · IC-10 PO içerik onayı). ❌ 1 → 0.
+
+**GÖREV 4 — sahipsiz kalanlar** (#405, `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md`): 259 kalem — a teyit listesi 68 · c G-kart 108 · d yaşayan belgeler 83. **S1 18 · S2 144 · S3 59 · S4 16 · S5 14 · teyit 7 · aday-değil 1.** Açılan: **AJ-69…AJ-95 (27; KVKK/yetki 10: AJ-69 · 73 · 74 · 75 · 76 · 77 · 78 · 87 · 88 · 89)** · KARAR-117…125 (9; KVKK 1: KARAR-120) · 03-PO #30…#35 + avukat A11 (7; KVKK 2). Kalite kontrolü: S1 %20 örneklem çürüdü → tüm parti yeniden kontrol; 26 S1 kararından 8'i çürüdü, düzeltildi. Dondurulmuş belgelere işaret yok → 110 eşleme satırı.
+⚠️ **S3 = 59 > 30 → sahipsiz kalan yığını — strateji katmanı önceliklendirsin** (27 AJ satırı kuyrukta bekliyor).
+
+**Limit en çok nereye gitti:** (1) GÖREV 4 — 259 kalemi koda karşı sınıflamak + S1 kalite kontrolünün tam parti tekrarı · (2) 13 PR'da 7b SORUN VAR düzeltme turları (her tur yeniden CI + inceleme) · (3) backend PR → çatı pointer PR çift CI beklemeleri.
+
+**Canlı:** her merge sonrası `/health` ok:true · db:up · site 200. CANLIDA BAK satırları `02-ILERLEME.md`'de.
 
 **Son merge'ler (bu oturum, en yeniden eskiye):**
 | PR | İş | Canlı kontrol |
 |---|---|---|
+| çatı #405 | GÖREV 4 — sahipsiz kalanlar (AJ-69…95 · KARAR-117…125 · 03-PO 7) | docs · 7b 2 tur ONAY · CI yeşil |
+| çatı #383…#404 + backend #194 · #196 · #197 · #198 · #200 · #202 · #203 · #205 · #206 · #208 · #209 · #211 | GÖREV 1 — AJ-20…AJ-48 (bkz. TUR ÖZETİ) | her merge sonrası ok:true, db:up, site 200 |
 | çatı #382 | GÖREV 3 — AJ-49 + E-3 notu (docs) | CI 10/10 |
 | çatı #381 | GÖREV 0 — doğrulama opus + mutasyon kanıtı kuralı (docs) | CI 10/10 |
 | çatı #380 | GÖREV C — kural (h) + bekçi UYARI (docs+script) | CI 10/10 · canlı ok:true, db:up, site 200 |
@@ -70,6 +96,7 @@
 **Push edilmemiş iş:** yok.
 
 **Engeller:**
+- 🗄️ Tek seferlik DB erişimi gerekiyor: **AJ-50** (backend #212, KARAR-116 EVET gelirse `User.discResultCard` tarihli yedeği).
 - ⛔ 2026-09-27 04:50 UTC — `gh pr merge 356 --merge` (GÖREV 2 belge PR'ı, CI yeşil) REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` → bağımsız inceleme (3 tur) ONAY sonrası merge geçti (`79bc0f7`); ardışık ret sayacı sıfırlandı.
 - ✅ (çözüldü 2026-09-27: #151 tazelenip merge edildi) ⛔ 2026-09-26 18:25 UTC — `gh pr merge 151 --merge` REDDEDİLDİ. Ret metni AYNEN: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Merge Without Review].` (Ardışık ret sayısı sıfırlandı; sonraki merge'ler geçti.)
 - 🗄️ Tek seferlik DB erişimi gerekiyor: K-15 (<60 dk blok sayımı + yedek, KARAR-111 EVET gelirse) · **Y-05** (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02.
@@ -77,7 +104,9 @@
 **PO'ya sorular:** KARAR-111 (🔵 K-15 müsaitliğe tür+süre — mevcut bloklar Online/60'a daralır) · KARAR-110 (periyodik anket) · KARAR-109 (anlaşma taslağını kim başlatır) · KARAR-107 (🔵 AN-12 karantina EVET/HAYIR) · KARAR-108 (DISC eşitlik sırası) · KARAR-106 (🔵 AN-52 anket tablosu EVET/HAYIR — yeni tablo, yedek gerekmez) · KARAR-105 (kurumlar arası anonim karşılaştırma) · KARAR-104 (eşik ince ayarı, öneri A) · KARAR-103 (eski planlardaki 13 özellik, öneri B) · 03-PO C-14 (üyelik tamamlaması teyidi) · ⭐ **KARAR-101** (B8 güvenlik — Bekleme Odası) · KARAR-102 (kayıt sonrası e-posta doğrulaması, GV-12 kalanı) · KARAR-96/97/98/99 (🔵 EVET/HAYIR) · KARAR-100.
 
 **Strateji katmanına not:**
-- (7b #379 N1) `GET /api/meetings/:meetingId/feedback` (değerlendirme okuma) ucunun kuyrukta sahibi yok — rapor B.5 teyitinde "AJ-14'e bağlı" yazıyor ama AJ-14 periyodik anket işi; `00-KUYRUK.md` E-3 notu hâlâ "E-3e değerlendirme okumayı da karşıladı" diyor (yanlış: E-3e `…/check-ins` okuyor, `frontend/src/components/organisms/MeetingCheckInReadout.tsx:6-13`). Sonraki tur: AJ satırı + E-3 notu düzeltmesi. · (N2) `PATCH /api/meetings/:id (→COMPLETED)` ön yüzden çağrılmıyor; iş otomatik tamamlanmayla kapandı — mükerrer uç adayı (silme protokolü). · 🟨 kısmen — N1: sahibi açıldı → AJ-49 (E-3 notu düzeltildi, GÖREV 3); kalan: N2 `PATCH /api/meetings/:id` → silme protokolü adayı (E-4 karantina turu; AJ açılmadı)
+- ⭐ (2026-09-28) S3 = 59 > 30 → **sahipsiz kalan yığını — strateji katmanı önceliklendirsin:** AJ-69…AJ-95 (27 satır; önce EN ÜST'teki 10 KVKK/yetki satırı). Silme protokolü adayları: `VisibilityOptIn.requestMessage` · `PATCH /api/meetings/:id` · eski `kvkkConsentAt`.
+- (2026-09-28) Canlıda `NEXT_PUBLIC_SITE_URL` tanımsız (sitemap/robots `localhost:3001` gösteriyordu; AJ-23 artık adresi tarayıcıdan alıyor) → `03-PO-ELLE-ISLER.md` kabul testi 13. · AJ-30 notu: açık backend #164 yeniden tabanlanırken çakışabilir (#164'e dokunulmadı).
+- (7b #379) N1 kapandı: değerlendirme okuma ucunun sahibi **AJ-49** (🔴 KARAR-89 + KARAR-110), E-3 notu düzeltildi (#382). N2 `PATCH /api/meetings/:id (→COMPLETED)` mükerrer uç adayı — silme protokolü (GÖREV 4 raporu §4).
 - AJ-01 kapsam dışı bıraktı: platform/süper-admin geneli rol sayımları (`backend/src/controllers/platformController.ts`, `adminSettingsController.ts`) hâlâ `User.role` — tekil kişi mi üyelik mi sayılacağı ürün kararı adayı. · 🟨 kısmen — kurum-içi sayımlar üyelikten (AJ-01); kalan: platform geneli sayım kişi mi üyelik mi → KARAR-124
 - Kuyrukta satırı olmayan bulgular: G-kart doğrulaması ~30 ⬜ kalem (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) · `GET /api/system-logs` iz/meta · kurum-içi sayımlar `User.role` (KPI + G1-18) · frontend askı ekranı yok · token türü ayrımı (OAuth pending) · U-18 gerçek bildirim/inbox ret işareti. · ✅ yapıldı — system-logs iz/meta (AJ-02, `backend/src/controllers/systemLogController.ts:47,56`) ve kurum-içi sayımlar `TenantMembership.role` (AJ-01, `backend/src/services/kpiReport.service.ts:45-54`) · doğrulama: sahipsiz-kalanlar-2026-09-27 · 🟨 kısmen — kalan: askı ekranı → AJ-72, token türü ayrımı → AJ-87, U-18 ret işareti → U-18/KARAR-97, gerçek bildirim → KARAR-103 md.11; G-kart kalemleri → `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md`
 - Kapı: P-05 (🔵 ama migration'sız, ONAY'lı) · PS-A3/PS-A4 🟡 (yeni tanımla 🟢+7b).
@@ -85,4 +114,4 @@
 
 **Karar kilidi (cevapsız kartlar, kilitlediği açık kuyruk satırı sayısına göre — 2026-09-27 yeniden sayım):** KARAR-64 (4: I-01, I-11, AN-50, AN-51) · KARAR-46 (3: F-14, P-99, AN-03) · KARAR-95/88/72/58/57/50/36 (2'şer; KARAR-58 → PS-A2 → PS-A3 → Y-17 zinciri) · 33 kart 1'er iş · 41 cevapsız kart hiçbir kuyruk satırını kilitlemiyor (bilgi/ince ayar). 🔵 EVET bekleyenler: KARAR-96 (AN-30) · 97 (U-18) · 98 (AN-26) · 99 (AN-02). ⭐ Güvenlik: KARAR-101 (Y1-B8).
 
-**Sıradaki 5 iş:** (1) ⛔ AJ-20 (rank-mentors onay kapısı, 🟢+7b) · (2) AJ-21 (ham DISC vektörü/puan mentöre dönüyor, 🟢+7b) · (3) AJ-22…AJ-32 güvenlik/KVKK kalanları (AJ-29 🟡 yasak bölge — PO turu) · (4) AJ-33 P-07 kutlama sayısı (❌) · (5) Feedback okuma ucu için AJ satırı + E-3 notu düzeltmesi (7b #379 N1). PO: KABUL TESTİ LİSTESİ (12 madde) + 🔵 EVET kartları.
+**Sıradaki 5 iş:** (1) ⛔ AJ-73 (OAuth dönüşünde erişim anahtarı adres çubuğunda, 🟢+7b) · (2) AJ-74 (görüşme oluşturmada kurum-kapsamsız sorgu, 🟢+7b) · (3) AJ-69 (küçük grupta metrik k-anonimliği, 🟢+7b) · (4) AJ-75 · AJ-78 · AJ-87 · AJ-88 · AJ-89 (EN ÜST KVKK/yetki kalanları) · (5) AJ-52 / AJ-68 (AJ-22 ve AJ-46 kalanları). PO: KABUL TESTİ LİSTESİ (13 madde) + 🔵 EVET kartları (KARAR-116 dahil) + KARAR-112…125.

@@ -834,3 +834,25 @@ Kuyrukta kendi satırı olmayan BAĞLA kalemleri: bağlamsal geri bildirim kart�
 ````text
 ## İçerik (12)
 ````
+
+## Kapanış düzeltmesi (2026-09-28) — 7b #405 engellemeyen notlar; eski satırlar AYNEN
+
+- `docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` eski:
+
+| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:21 | Big Five ayrı açık rıza (G1-11) | S2 → AN-30 · KARAR-96 (🔵) | tam | Big Five kişilik profili ayrı açık rıza gerektirebilir |
+
+- `docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` eski:
+
+| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:46 | Eski kvkkConsentAt alanının kaldırılması | S3 → AJ-88 (platform göstergesi) + eski alan kaldırma silme protokolü adayı | tam | Eski kvkkConsentAt (User/Tenant) alanı kaldırılması ayrı/sonraki iş |
+
+- `docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` eski:
+
+| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:88 | G1-08 OAuth rıza gösterimi + tipli yazım | S2 → AN-30 · KARAR-96 · 03-PO #17 | tam | G1-08: OAuth rıza gösterimi + tipli yazım |
+
+- `docs/raporlar/kod-denetimi/donmus-belge-esleme-2026-09-27.md` eski:
+
+| docs/kararlar/konu/chat-v1-teslim.md:67 | VisibilityOptIn.requestMessage ölü alan | S3 → silme protokolü adayı (E-4 karantina; G10-02 ile aynı) | tam | kolon DROP ayrı PO-onaylı temizlik turu |
+
+- `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md` eski:
+
+- `git diff -U0 origin/main -- docs/` ile silinen **120 satırın 120'si** `docs/arsiv/` altında birebir bulundu (eksik 0) — betik: satır satır tam eşleşme, 51 (a) + 68 (d) işaret satırı + 1 indeks satırı.

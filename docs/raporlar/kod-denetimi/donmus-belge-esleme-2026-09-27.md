@@ -242,7 +242,7 @@ Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`).
 | docs/raporlar/kesif/erisilebilirlik-denetimi-2026-09-27.md:25 | AJ-07 kalanı | 🟨 S3 → 03-PO #32 | tam | Ekran okuyucuyla (VoiceOver/NVDA) gerçek gezinme testi hiç yapılmadı |
 | docs/raporlar/kesif/csp-zorunlu-mod-hazirlik-2026-09-27.md:123 | AJ-22 kalanı | ✅ S1 — kodda + testte (bkz. rapor) | tam | Frontend X-Frame-Options göndermiyor (clickjacking) — ayrı bağımsız iş |
 | docs/raporlar/kesif/csp-zorunlu-mod-hazirlik-2026-09-27.md:139 | AJ-22 kalanı | 🟨 S2 → AJ-22 · AJ-52 · KARAR-112 · 03-PO kabul testi 13 | tam | CSP zorunlu moda geçiş adımları 3-5 (enforce + smoke: logo, OAuth, next/image avatar, branding) |
-| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:21 | Big Five ayrı açık rıza (G1-11) | S2 → AN-30 · KARAR-96 (🔵) | tam | Big Five kişilik profili ayrı açık rıza gerektirebilir |
-| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:46 | Eski kvkkConsentAt alanının kaldırılması | S3 → AJ-88 (platform göstergesi) + eski alan kaldırma silme protokolü adayı | tam | Eski kvkkConsentAt (User/Tenant) alanı kaldırılması ayrı/sonraki iş |
-| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:88 | G1-08 OAuth rıza gösterimi + tipli yazım | S2 → AN-30 · KARAR-96 · 03-PO #17 | tam | G1-08: OAuth rıza gösterimi + tipli yazım |
-| docs/kararlar/konu/chat-v1-teslim.md:67 | VisibilityOptIn.requestMessage ölü alan | S3 → silme protokolü adayı (E-4 karantina; G10-02 ile aynı) | tam | kolon DROP ayrı PO-onaylı temizlik turu |
+| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:21 | Big Five ayrı açık rıza (G1-11) | 🟨 S2 → AN-30 · KARAR-96 (🔵) | tam | Big Five kişilik profili ayrı açık rıza gerektirebilir |
+| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:46 | Eski kvkkConsentAt alanının kaldırılması | 🟨 S3 → AJ-88 (platform göstergesi) + eski alan kaldırma silme protokolü adayı | tam | Eski kvkkConsentAt (User/Tenant) alanı kaldırılması ayrı/sonraki iş |
+| docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:88 | G1-08 OAuth rıza gösterimi + tipli yazım | 🟨 S2 → AN-30 · KARAR-96 · 03-PO #17 | tam | G1-08: OAuth rıza gösterimi + tipli yazım |
+| docs/kararlar/konu/chat-v1-teslim.md:67 | VisibilityOptIn.requestMessage ölü alan | 🟨 S3 → silme protokolü adayı (E-4 karantina; G10-02 ile aynı) | tam | kolon DROP ayrı PO-onaylı temizlik turu |

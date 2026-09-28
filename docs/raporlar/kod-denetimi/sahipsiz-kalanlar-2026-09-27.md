@@ -86,7 +86,7 @@ Kümeleme: 59 S3 kalemi 45 sahipte toplandı (27 AJ · 9 KARAR · 7 03-PO · 2 s
 
 ## 6. Arşiv kontrolü (B.8 benzeri) ve bekçi
 
-- `git diff -U0 origin/main -- docs/` ile silinen **120 satırın 120'si** `docs/arsiv/` altında birebir bulundu (eksik 0) — betik: satır satır tam eşleşme, 51 (a) + 68 (d) işaret satırı + 1 indeks satırı.
+- `git diff -U0 origin/main -- docs/` ile silinen **116 satırın 116'sı** `docs/arsiv/` altında birebir bulundu (eksik 0) — betik: satır satır tam eşleşme, 51 (a) + 64 (d) işaret satırı (7b #405: dondurulmuş 2 belgedeki 4 işaret geri alındı) + 1 indeks satırı.
 - `bash scripts/belge-bekci.sh`: **HATA yok** (yalnız önceden var olan UYARI'lar: 1.000+ karakter satırlar, SICAK dosya boyutları, belirsiz BITTI).
 
 ## 7. PO teyit listesi (S5 — geçersiz)
