@@ -49,9 +49,9 @@ describe('KPI — tamamlama kartları (AJ-78)', () => {
     render(<KpiPage />);
 
     expect(cardOf('Kaydını Tamamlayan Üye')).toHaveTextContent('%75');
-    expect(cardOf('Kaydını Tamamlayan Üye')).toHaveTextContent('9/12 mentör ve menti');
+    expect(cardOf('Kaydını Tamamlayan Üye')).toHaveTextContent('9/12 mentör ve menti (hesabı onaylı)');
     expect(cardOf('DISC Tamamlama')).toHaveTextContent('%33');
-    expect(cardOf('DISC Tamamlama')).toHaveTextContent('4/12 mentör ve menti');
+    expect(cardOf('DISC Tamamlama')).toHaveTextContent('4/12 mentör ve menti (DISC testini bitirmiş)');
     expect(cardOf('Tamamlanan Görüşme')).toHaveTextContent('17');
   });
 

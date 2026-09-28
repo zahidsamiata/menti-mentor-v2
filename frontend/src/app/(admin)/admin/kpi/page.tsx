@@ -43,12 +43,23 @@ const SUCCESS_RATE_EMPTY_TEXT =
  * AJ-78: tamamlama oranı kartının değeri + alt satırı. Gizliyse (grup ya da tamamlayan eşik altında)
  * sessiz "0" ya da "—" yerine nedeni yazılır; görünürse "pay/payda üye" gösterilir.
  */
-function completionRateCard(rate: KpiCompletionRate, minGroupSize: number): { value: string; description: string } {
+function completionRateCard(
+  rate: KpiCompletionRate,
+  minGroupSize: number,
+  definition: string,
+): { value: string; description: string } {
   if (rate.suppressed || rate.percent === null) {
     return { value: 'Gizli', description: `Gizlilik için en az ${minGroupSize} kişi gerekiyor` };
   }
-  return { value: `%${rate.percent}`, description: `${rate.completed}/${rate.eligible} mentör ve menti` };
+  return { value: `%${rate.percent}`, description: `${rate.completed}/${rate.eligible} mentör ve menti ${definition}` };
 }
+
+/**
+ * AJ-78: oranın neyi saydığı kartta açık yazılır (CSV açıklamasıyla aynı tanım). "Kaydını tamamlayan"
+ * = hesabı yönetici tarafından onaylanmış (onay kullanıcı düzeyindedir, kuruma özel değildir).
+ */
+const REGISTRATION_DEFINITION = '(hesabı onaylı)';
+const DISC_DEFINITION = '(DISC testini bitirmiş)';
 
 export default function KpiPage() {
   const api = useApiClient();
@@ -125,12 +136,12 @@ export default function KpiPage() {
               <DashboardMetricCard
                 label="Kaydını Tamamlayan Üye"
                 color="brand"
-                {...completionRateCard(data.stats.completion.registration, data.stats.completion.minGroupSize)}
+                {...completionRateCard(data.stats.completion.registration, data.stats.completion.minGroupSize, REGISTRATION_DEFINITION)}
               />
               <DashboardMetricCard
                 label="DISC Tamamlama"
                 color="brand"
-                {...completionRateCard(data.stats.completion.disc, data.stats.completion.minGroupSize)}
+                {...completionRateCard(data.stats.completion.disc, data.stats.completion.minGroupSize, DISC_DEFINITION)}
               />
               <DashboardMetricCard
                 label="Tamamlanan Görüşme"
