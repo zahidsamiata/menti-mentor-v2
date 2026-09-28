@@ -105,7 +105,7 @@ export function EngineSection() {
             <div key={dim} className={`rounded-xl border ${border} ${bg} p-4 text-center`}>
               <p className={`text-3xl font-black ${color} mb-1`}>{dim}</p>
               <p className="text-sm font-bold text-white">{label}</p>
-              <p className="text-xs text-slate-500 mt-1 leading-snug">{desc}</p>
+              <p className="text-xs text-slate-400 mt-1 leading-snug">{desc}</p>
             </div>
           ))}
         </div>

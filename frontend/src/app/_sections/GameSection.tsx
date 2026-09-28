@@ -27,7 +27,7 @@ function CoreQuestions() {
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">
           <span className="font-medium text-slate-300">Mizaç Testi</span>
-          <span className="text-slate-500">Soru <strong className="text-white">3</strong> / 8</span>
+          <span className="text-slate-400">Soru <strong className="text-white">3</strong> / 8</span>
         </div>
         <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
           <div className="h-full w-[37.5%] rounded-full bg-gradient-to-r from-indigo-500 to-violet-500" />
@@ -66,7 +66,7 @@ function CoreQuestions() {
 
       {/* Arketip ödül kartları */}
       <div>
-        <p className="text-xs text-slate-500 mb-3 text-center">Test bittiğinde kazanacağın arketip:</p>
+        <p className="text-xs text-slate-400 mb-3 text-center">Test bittiğinde kazanacağın arketip:</p>
         <div className="grid grid-cols-4 gap-2">
           {ARCHETYPES.map(({ icon, name, dim, color }) => (
             <div
@@ -83,7 +83,7 @@ function CoreQuestions() {
             </div>
           ))}
         </div>
-        <p className="mt-2 text-center text-[10px] text-slate-500">
+        <p className="mt-2 text-center text-[10px] text-slate-400">
           Bu kullanıcı → <strong className="text-blue-400">🔥 Ateşleyici</strong> kazanıyor
         </p>
       </div>
@@ -150,7 +150,7 @@ function GrowthTimeline() {
             )}>
               <div className="flex items-center justify-between gap-2">
                 <div>
-                  <p className="text-xs text-slate-500 font-medium">{day}</p>
+                  <p className="text-xs text-slate-400 font-medium">{day}</p>
                   <p className="text-sm font-semibold text-white mt-0.5">{label}</p>
                 </div>
                 <span className="shrink-0 rounded-full bg-slate-700/80 px-2.5 py-1 text-xs font-medium text-slate-300">
@@ -162,7 +162,7 @@ function GrowthTimeline() {
                   <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" aria-hidden />
                   <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" aria-hidden />
                   <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" aria-hidden />
-                  <span className="text-[10px] text-slate-500 ml-1">Asla geriye düşmez (Monotonic)</span>
+                  <span className="text-[10px] text-slate-400 ml-1">Asla geriye düşmez (Monotonic)</span>
                 </div>
               )}
             </div>
@@ -199,7 +199,7 @@ export function GameSection() {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-white">CORE Sorular</h3>
-                <p className="text-xs text-slate-500">İlk 90 Saniye · 8 Senaryo · Anında Ödül</p>
+                <p className="text-xs text-slate-400">İlk 90 Saniye · 8 Senaryo · Anında Ödül</p>
               </div>
             </div>
             <CoreQuestions />
@@ -213,7 +213,7 @@ export function GameSection() {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-white">Sürekli Gelişim</h3>
-                <p className="text-xs text-slate-500">Monotonic İlerleme · Streak & Rozetler</p>
+                <p className="text-xs text-slate-400">Monotonic İlerleme · Streak & Rozetler</p>
               </div>
             </div>
             <GrowthTimeline />

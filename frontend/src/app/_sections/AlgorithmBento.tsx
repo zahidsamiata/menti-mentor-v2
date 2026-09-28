@@ -44,7 +44,7 @@ function TechnicalBento() {
           <span className="text-3xl font-black text-indigo-400">%60</span>
           <span className="text-sm font-semibold text-slate-300">Teknik Uyum</span>
         </div>
-        <p className="text-xs text-slate-500 leading-relaxed">
+        <p className="text-xs text-slate-400 leading-relaxed">
           Sektör, rol ve yetkinlik örtüşmesi. Etiketleri seçerek eşleşme skorunu canlı gör.
         </p>
       </div>
@@ -85,7 +85,7 @@ function TechnicalBento() {
             style={{ width: `${matchScore}%` }}
           />
         </div>
-        <p className="mt-2 text-[10px] text-slate-500">
+        <p className="mt-2 text-[10px] text-slate-400">
           {selected.size} ortak alan · {selected.size} etiket seçili
         </p>
       </div>
@@ -142,7 +142,7 @@ function DiscProfileCard({ profile }: { profile: DiscProfile }) {
         </div>
         <div>
           <p className="text-xs font-semibold text-white">{profile.name}</p>
-          <p className="text-[10px] text-slate-500">{profile.role}</p>
+          <p className="text-[10px] text-slate-400">{profile.role}</p>
         </div>
       </div>
       {/* DISC Barları */}
@@ -156,7 +156,7 @@ function DiscProfileCard({ profile }: { profile: DiscProfile }) {
                 style={{ width: `${pct}%` }}
               />
             </div>
-            <span className="w-6 text-right text-[10px] text-slate-500">{pct}%</span>
+            <span className="w-6 text-right text-[10px] text-slate-400">{pct}%</span>
           </div>
         ))}
       </div>
@@ -173,7 +173,7 @@ function PsychometricBento() {
           <span className="text-3xl font-black text-violet-400">%40</span>
           <span className="text-sm font-semibold text-slate-300">Psikometrik Derinlik</span>
         </div>
-        <p className="text-xs text-slate-500 leading-relaxed">
+        <p className="text-xs text-slate-400 leading-relaxed">
           DISC davranış modeline dayalı mizaç motoru. Tamamlayıcı profiller güçlü, çakışanlar engellenir.
         </p>
       </div>
@@ -214,7 +214,7 @@ function PsychometricBento() {
               </div>
               <div>
                 <div className="text-[10px] font-semibold text-slate-300">D Profili</div>
-                <div className="text-[9px] text-slate-500">Baskın Lider</div>
+                <div className="text-[9px] text-slate-400">Baskın Lider</div>
               </div>
             </div>
           ))}

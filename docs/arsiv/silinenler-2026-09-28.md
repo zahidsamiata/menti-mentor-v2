@@ -736,3 +736,111 @@ frontend/src/app/(admin)/admin/tags/page.tsx:58-59
       <div className="flex gap-1 rounded-lg bg-muted p-1 w-fit">
 ```
 (Grup düğmelerine eklenen `type="button"` / `aria-pressed` satırları salt eklemedir; eski hâlde yoklardı.)
+
+## AJ-86b · Landing bilgi balonu (InfoTooltip) + gri metin kontrastı (çatı `otonom/AJ-86b-tooltip-kontrast-20260928`)
+
+Silme YOK — bileşenin davranışı/sınıfları değişti, landing metni aynı. Taban commit: `9f3787e` (çatı main; `InfoTooltip.tsx` son commit'i `32673ff`). Geri alma: `git revert <AJ-86b commit>` ya da aşağıdaki eski hâli aynen geri koy.
+
+- **Neden yazılmıştı:** landing'deki doğrulanabilir iddiaların yanına kaynaklı açıklama balonu (hover + tıklama); gri tonlar koyu landing tasarımının ikincil metin hiyerarşisi.
+- **Neden değişti:** `docs/kararlar/konu/06-tasarim-ux.md` § Landing UX paketi: balon ile ikon arasındaki `mt-2` boşluğunda fare kapsayıcıdan çıkıp balon kapanıyordu (kaynak linklerine ulaşılamıyordu); tetikleyicinin `onBlur`'u link tıklaması tamamlanmadan balonu kaldırıyordu; balon ekrana sığmasa da hep altta/ortalı açılıyordu; ikon `text-muted-foreground` koyu zeminde soluk; kaynak linki `text-primary` açık temada beyaz balonda 4.34:1 (AA altı). `text-slate-500` koyu landing zeminlerinde 3.07–4.24:1, `text-slate-600` 1.93–2.66:1 (AA 4.5:1 altı) → `text-slate-400` (≥5.71:1).
+
+Eski `frontend/src/components/atoms/InfoTooltip.tsx` render bloğu (aynen; üstteki import/prop/Escape-dışarı-tıklama kısmı değişmeden korunuyor):
+```tsx
+    return () => {
+      document.removeEventListener('mousedown', handlePointer);
+      document.removeEventListener('keydown', handleKey);
+    };
+  }, [open]);
+
+  return (
+    <span
+      ref={containerRef}
+      className={cn('relative inline-flex align-middle', className)}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-label={label}
+        aria-expanded={open}
+        aria-describedby={open ? contentId : undefined}
+        onClick={() => setOpen((v) => !v)}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
+        className={cn(
+          'inline-flex h-4 w-4 items-center justify-center rounded-full',
+          'text-muted-foreground hover:text-foreground transition-colors',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-background',
+        )}
+      >
+        <Info className="h-3.5 w-3.5" aria-hidden />
+      </button>
+
+      {open && (
+        <span
+          id={contentId}
+          role="tooltip"
+          className={cn(
+            'absolute left-1/2 top-full z-50 mt-2 w-72 -translate-x-1/2',
+            'rounded-lg border border-border bg-card p-3 text-left shadow-xl',
+            'text-xs leading-relaxed text-muted-foreground',
+          )}
+        >
+          {detail}
+          {sources && sources.length > 0 && (
+            <span className="mt-2 block border-t border-border pt-2">
+              <span className="block font-semibold text-muted-foreground">Kaynak</span>
+              {sources.map((s) =>
+                s.url ? (
+                  <a
+                    key={s.url}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 block text-primary hover:text-primary/80 hover:underline"
+                  >
+                    {s.label}
+                  </a>
+                ) : (
+                  <span key={s.label} className="mt-1 block text-muted-foreground">
+                    {s.label}
+                  </span>
+                ),
+              )}
+            </span>
+          )}
+        </span>
+      )}
+    </span>
+  );
+}
+```
+
+Eski gri sınıflı satırlar (dosya:satır, aynen — tümü `text-slate-400` oldu; `AdminCockpit.tsx:132` hover'ı `hover:text-slate-400` → `hover:text-slate-300`):
+```
+frontend/src/app/_sections/AdminCockpit.tsx:35:      <div className="flex justify-between text-[10px] text-slate-600">
+frontend/src/app/_sections/AdminCockpit.tsx:40:      <p className="text-[10px] text-slate-500 leading-relaxed">
+frontend/src/app/_sections/AdminCockpit.tsx:81:      <p className="text-[10px] text-slate-500 leading-relaxed">
+frontend/src/app/_sections/AdminCockpit.tsx:103:        <span className="text-[10px] text-slate-500">{pairs.length} kayıt</span>
+frontend/src/app/_sections/AdminCockpit.tsx:114:              <span className="text-xs text-slate-600 mx-1">↔</span>
+frontend/src/app/_sections/AdminCockpit.tsx:116:              <span className="text-[10px] text-slate-500 ml-2">· {reason}</span>
+frontend/src/app/_sections/AdminCockpit.tsx:121:              className="text-slate-600 hover:text-red-400 transition-colors shrink-0"
+frontend/src/app/_sections/AdminCockpit.tsx:132:        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-700 py-2 text-xs text-slate-500 hover:border-slate-500 hover:text-slate-400 transition-colors"
+frontend/src/app/_sections/AdminCockpit.tsx:200:        <p className="mt-6 text-center text-xs text-slate-600">
+frontend/src/app/_sections/AdminCockpit.tsx:202:          <strong className="text-slate-500"> KVKK uyumlu</strong>
+frontend/src/app/_sections/EngineSection.tsx:108:              <p className="text-xs text-slate-500 mt-1 leading-snug">{desc}</p>
+frontend/src/app/_sections/AlgorithmBento.tsx:47:        <p className="text-xs text-slate-500 leading-relaxed">
+frontend/src/app/_sections/AlgorithmBento.tsx:88:        <p className="mt-2 text-[10px] text-slate-500">
+frontend/src/app/_sections/AlgorithmBento.tsx:145:          <p className="text-[10px] text-slate-500">{profile.role}</p>
+frontend/src/app/_sections/AlgorithmBento.tsx:159:            <span className="w-6 text-right text-[10px] text-slate-500">{pct}%</span>
+frontend/src/app/_sections/AlgorithmBento.tsx:176:        <p className="text-xs text-slate-500 leading-relaxed">
+frontend/src/app/_sections/AlgorithmBento.tsx:217:                <div className="text-[9px] text-slate-500">Baskın Lider</div>
+frontend/src/app/_sections/GameSection.tsx:30:          <span className="text-slate-500">Soru <strong className="text-white">3</strong> / 8</span>
+frontend/src/app/_sections/GameSection.tsx:69:        <p className="text-xs text-slate-500 mb-3 text-center">Test bittiğinde kazanacağın arketip:</p>
+frontend/src/app/_sections/GameSection.tsx:86:        <p className="mt-2 text-center text-[10px] text-slate-500">
+frontend/src/app/_sections/GameSection.tsx:153:                  <p className="text-xs text-slate-500 font-medium">{day}</p>
+frontend/src/app/_sections/GameSection.tsx:165:                  <span className="text-[10px] text-slate-500 ml-1">Asla geriye düşmez (Monotonic)</span>
+frontend/src/app/_sections/GameSection.tsx:202:                <p className="text-xs text-slate-500">İlk 90 Saniye · 8 Senaryo · Anında Ödül</p>
+frontend/src/app/_sections/GameSection.tsx:216:                <p className="text-xs text-slate-500">Monotonic İlerleme · Streak & Rozetler</p>
+frontend/src/app/page.tsx:60:            <p className="text-xs text-slate-600 text-center">
+```

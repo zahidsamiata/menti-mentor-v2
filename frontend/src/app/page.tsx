@@ -57,7 +57,7 @@ export default function LandingPage() {
                 Menti<span className="text-indigo-400">Mentor</span>
               </span>
             </div>
-            <p className="text-xs text-slate-600 text-center">
+            <p className="text-xs text-slate-400 text-center">
               © {new Date().getFullYear()} MentiMentor · KVKK uyumlu · Türkiye&apos;de geliştirildi 🇹🇷
             </p>
             {/* Y-06: yasal linkler artık tıklanabilir (önceden ölü <span>'di). */}
