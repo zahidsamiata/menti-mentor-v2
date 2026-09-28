@@ -5,14 +5,13 @@
 
 **Durum:** CALISIYOR (devam turu — kota ~09:30 UTC'de kesti; 00-SIMDI 08:01'den beri güncellenmemişti). Sıra: 2.4 bölmeyi bitir (TEK BAŞINA) → AJ-58 → AJ-72 kaydı → 2.5 → GÖREV 3 KARAR-PAKETI (merge) + kart zenginleştirme → GÖREV 4 (AJ-83 …) → DURDU (K1-a).
 
-**Şu an yapılan:** Adım 2 — AJ-58 (backend #228 + çatı #423): main ile güncelle → 7b → merge. GÖREV 2.4 MERGE (#421, geri bakılabilirlik 20/20).
+**Şu an yapılan:** Adım 4 — GÖREV 2.5 (kural BAĞLAM SÖZLEŞMESİ + bekçi eksik uyarıları; dal `otonom/KURAL-I-BAGLAM-20260928`, yazılıyor) · KARAR-PAKETI taslağı scratchpad'de hazırlanıyor (Adım 5, 2.5 merge'inden sonra repoya).
 
 **Devam turu — kesinti öncesi yarım kalanlar ve nasıl kapandı:**
 | İş | Dal | Son hâl (11:20 UTC teyit) | Kapanış PR'ı |
 |---|---|---|---|
 | GÖREV 2.4 bölme | `otonom/DURUMA-GORE-BOLME-20260928` | ✅ MERGE `71869b8` — geri bakılabilirlik 3. koşu 20/20; 7b ONAY (A-F + G/H delta + I) | #421 |
-| AJ-58 | backend `…AJ-58-hatirlatma-basarisiz-eposta-20260928` `1918164` · çatı `f32d73d` | PR'lar açık backend #228 + çatı #423, CI yeşil, 7b YAPILMADI, merge YOK | — |
-| AJ-72 | çatı `otonom/AJ-72-kurum-askida-ekrani-20260928` | #422 MERGE (7b ONAY, canlı ok, 4 sayfa 200); kuyruk/arşiv/kaynak kaydı (kural h) main'de YOK | kayıt Adım 3 |
+| AJ-58 | backend `…AJ-58-hatirlatma-basarisiz-eposta-20260928` | ✅ MERGE (7b ONAY; canlı ok) | AJ-72 | çatı `otonom/AJ-72-kurum-askida-ekrani-20260928` | ✅ #422 MERGE + kural h kaydı yeni yapıda (yönetici metni → KARAR-129) | #422 + `6ef28cc` |
 Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürütüldü (docs'a dokunmadılar, zarar yok) — kural ihlali, bu turda tekrarlanmaz.
 
 **Son merge'ler:** çatı #422 (AJ-72) · #419 (AJ-75) · #418 (GÖREV 2.3) · #417 (AJ-55) · #416 (GÖREV 2.1) · #415 (AJ-59) · #414 (GÖREV 2.2) · #413 (AJ-51) · #412 (AJ-54) · #411 (AJ-69) — her merge sonrası canlı ok:true · db:up · site 200 (11:20 UTC: ok:true · db:up · site 200).
@@ -29,7 +28,6 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 | backend #185 | AN-52-1 anket tablosu · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-106 EVET bekliyor (yedek gerekmez — yeni tablo) |
 | backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
 | backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
-| backend #228 + çatı #423 | AJ-58 hatırlatma başarısız e-posta | yeşil | 7b yok | Adım 2 |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
@@ -43,4 +41,4 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 
 **Strateji katmanına not:** 7b bir kez `node_modules` sembolik bağının backend commit'ine girdiğini yakaladı (AJ-69) — backend `.gitignore` `node_modules/` bağı yakalamıyordu; düzeltildi, uygulayıcı kurallarına ders eklendi. Yeni satırlar: AJ-96 · 97 · 98 · 99 · 100.
 
-**Sıradaki 5 iş:** 2.4 merge → AJ-58 7b+merge → AJ-72 kural h kaydı → 2.5 → KARAR-PAKETI.
+**Sıradaki 5 iş:** 2.5 merge → KARAR-PAKETI merge → kart zenginleştirme (3.1) ∥ AJ-83 → AJ-90 → AJ-60.
