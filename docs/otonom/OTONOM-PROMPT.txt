@@ -249,6 +249,21 @@ Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARIS
     dogrulamasinda 209 isin kaynaklari "acik" kalmisti — borc birikmesin diye.)
     Is kaynak maddenin yalniz BIR PARCASINI yapiyorsa, KALAN parca AYNI commit'te bir SAHIBE baglanir
     (AJ satiri · kuyruk isi · KARAR karti · 03-PO maddesi); sahipsiz kalan birakilmaz (PO 2026-09-27).
+(i) BAGLAM SOZLESMESI VE DURUMA GORE AYIRMA (PO 2026-09-28 · GOREV 2.5)
+    ⭐ TEKRAR YOK: her ise baslamadan "daha once yapildi mi" bakilir — 00-KUYRUK + arsiv kuyruklari
+    (`docs/otonom/arsiv/00-KUYRUK-bitti-*` · `-katlanmis` · `-gecmis`), `docs/raporlar/kod-denetimi/`,
+    belge-senkron arsivleri (`docs/arsiv/belge-senkron-*`), bekci ciktisi. Yapilmissa kanitla (dosya:satir ·
+    PR) "zaten yapilmis" yazilir ve atlanir (Bolum 5 (c)); kismen yapilmissa yalniz KALAN yapilir.
+    ⭐ SISMESIN AMA BAGLAM KAYBOLMASIN: tasarruf yalniz TEKRARDAN ve GECMIS ANLATIMINDAN yapilir; NEDEN ve
+    KARAR KAYNAGI hic atilmaz; soguk (🧊) dosyada tasarruf yapilmaz.
+    BAGLAM SOZLESMESI: her is/kart kaydi bes sey tasir — NE · NEDEN (kullanici/is gozunden) · KAYNAK
+    ("kaynak:" · "ajan-ekledi" · KARAR-N · madde N · G-kart · belge yolu) · DURUM (ne kaldi, kimde) ·
+    AYRINTI (arsivdeki yeri).
+    DURUMA GORE AYIRMA: olcut boyut degil "bu turda kimin isine yariyor": karar bekleyen satirlar
+    KARAR-BEKLEYEN'de (kilit haritasi isaretcisiyle, (n)), kart govdeleri kart dosyalarinda (c), BITTI arsivde (a);
+    CEVAP gelince bagli satirlar AYNI commit'te geri doner. "Dolunca yeni cilt" YOK — boyut esigi asilirsa
+    tekrar/gecmis anlatimi arsive tasinir, dosya ciltlere bolunmez.
+    Harf: (i) bu kuralindir; AJ-46 bekci uyarilari artik is kimligiyle anilir (asagida). Bekci: UYARI (i1)-(i5).
 (n) Kapisi 🔴 olan YA DA Durumu ATLANDI(karar) olan kuyruk satiri `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'de
     durur (ilk KARAR'inin grubunda, AYNEN); 00-KUYRUK § 🔴 KILIT HARITASI'nda her KARAR icin tek isaretci
     (bekleyen is sayisina gore sirali). Kismen yapilip KALAN AYAGI bir KARAR'i bekleyen (ya da 🔵 PR-ACIK olup
@@ -261,13 +276,20 @@ Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARIS
 Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
 01-KARARLAR'da ya da `docs/otonom/kararlar/KARAR-*.md`'de "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta
 kod disi `~~[ESKI` blogu. UYARI (n): 00-KUYRUK'ta kapisi 🔴 satir (→ KARAR-BEKLEYEN).
-UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
+UYARI (kirmizi degil): boyut esikleri (00-KUYRUK > 90 KB · 01-KARARLAR > 40 KB · 02-ILERLEME > 80 KB · CLAUDE.md /
 OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB) · kural (h): arsivdeki BITTI
 satiri "madde N" atfi tasiyor ve 00-KARAR-TAKIP'te madde N satirinda ✅/🟨 yok → "BITTI isin kaynagi acik"
 (gerekceli istisna: `docs/raporlar/kod-denetimi/bekci-istisna.txt`).
-UYARI (AJ-46, 2026-09-27): (i) CI job'u `scripts/verify.sh` basliginda anilmiyor · (j) `docs/raporlar/` altinda
-ilk 5 satirda TUR etiketi (📸/🔄/🔥/🌡️/🧊) olmayan rapor · (k) `docs/` altinda indekssiz klasor · (l) CLAUDE.md'nin
-kendi icine satir numarasiyla atfi · (m) 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri asan satir sayisi.
+UYARI (AJ-46, 2026-09-27 · is kimligiyle anilir; 2026-09-28'e kadar etiketleri (i)-(m) idi): KR-22 CI job'u
+`scripts/verify.sh` basliginda anilmiyor · YN-11 `docs/raporlar/` altinda ilk 5 satirda TUR etiketi (📸/🔄/🔥/🌡️/🧊)
+olmayan rapor · YN-12 `docs/` altinda indekssiz klasor · YN-10 CLAUDE.md'nin kendi icine satir numarasiyla atfi ·
+YN-09 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri asan satir sayisi.
+UYARI kural (i) (GOREV 2.5): (i1) `docs/raporlar/kod-denetimi/bitti-dogrulama-*.md`'de ❌/⚠️/🔁 olan is bitti
+arsivinde Durum'u 🟨 KISMEN / ❌ TUTMUYOR / 🔁 SONRADAN DEGISTI / ✅ TAMAMLANDI on eki olmadan duruyor ·
+(i2) kirik baglam isaretcisi: KILIT HARITASI isaretcisinin gosterdigi KARAR-BEKLEYEN § yok, sayilan is orada
+yok, sayi tutmuyor ya da tersi (§ ya da satir isaretcide yok) · (i3) aktif kuyruk / KARAR-BEKLEYEN satirinda
+kaynak izi yok · (i4) 01-KARARLAR indeksi ↔ kart CEVAP celiskisi (kartta dolu + indeks ⬜ ya da indeks ✍️/✅ +
+kartta bos) · (i5) indekste ✍️/✅ olan kararin isi hala KARAR-BEKLEYEN'de.
 
 ═══════════════════════════════════════════════════════════════
 6 — DOGRULAMA LISTESI  (merge oncesi — hepsi ✅ olmadan merge YOK)

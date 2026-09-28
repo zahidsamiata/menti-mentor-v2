@@ -321,6 +321,24 @@ const TENANT_SCOPED = new Set([
 - **Geri alma:** `git revert <GÖREV 2.4-G commit>`.
 
 
+---
+
+## GÖREV 2.5 — belge bekçisi boyut eşikleri daraltıldı (çatı `otonom/KURAL-I-BAGLAM-20260928`)
+
+**Tam yol:** `scripts/belge-bekci.sh` — `LIMITS` listesinin ilk iki satırı (eski hâl AYNEN):
+
+```python
+LIMITS = [('docs/otonom/00-KUYRUK.md', 150), ('docs/otonom/01-KARARLAR.md', 150),
+          ('docs/otonom/02-ILERLEME.md', 150), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),
+```
+
+**Yeni hâl:** `('docs/otonom/00-KUYRUK.md', 90), ('docs/otonom/01-KARARLAR.md', 40), ('docs/otonom/02-ILERLEME.md', 80)` (diğer eşikler aynı).
+**Neden yazılmıştı:** PO K-A (2026-09-26) — sık okunan dosyalarda şişmeyi yakalamak için ilk eşikler; o gün dosyalar 150 KB civarındaydı.
+**Neden değişti:** GÖREV 2.4 (2026-09-28) duruma göre bölmeden sonra 01-KARARLAR yalnız indeks (≈35 KB), karar bekleyen satırlar ayrı dosyada; 150 KB eşiği artık hiçbir şişmeyi yakalamıyordu. PO GÖREV 2.5 isteği: 00-KUYRUK 90 · 01-KARARLAR 40 · 02-ILERLEME 80 KB. Yalnız UYARI (çıkış kodu değişmez).
+**Son commit hash (değişiklik öncesi):** `060594c` (`scripts/belge-bekci.sh` son değişikliği).
+**Geri alma:** üç sayıyı 150'ye çevir (ya da `git show 060594c:scripts/belge-bekci.sh`); test `scripts/belge-bekci.test.sh` "boyut negatif/pozitif" vakaları eşikle birlikte güncellenmeli.
+Kural metnindeki eski eşik satırı: `docs/otonom/arsiv/kural-gecmisi-OTONOM-PROMPT.md` § GÖREV 2.5.
+
 ## AJ-83 · Mesajlar gelen kutusu sayfalama
 
 ### 1) `frontend/src/lib/api/conversations.ts` — `conversationsApi.list`

@@ -7,15 +7,21 @@
 #     (istisna: Durum'u "kısmen" / "bekliyor" içeren belirsiz satırlar — taşınmaz, UYARI olarak listelenir)
 #   · docs/otonom/01-KARARLAR.md'de ya da docs/otonom/kararlar/KARAR-*.md kart dosyasında "İŞLENDİ" notlu karar kartı (kural c)
 #   · CLAUDE.md / docs/otonom/OTONOM-PROMPT.txt'te kod (`...`) dışında "~~[ESKİ" katmanı (kural e)
-# UYARI (çıkış kodunu değiştirmez): boyut eşikleri (Bölüm 5c) · kural (h): arşivdeki BITTI satırı "madde N"
+# UYARI (çıkış kodunu değiştirmez): boyut eşikleri (Bölüm 5c; GÖREV 2.5: 00-KUYRUK 90 · 01-KARARLAR 40 · 02-ILERLEME 80 KB) · kural (h): arşivdeki BITTI satırı "madde N"
 #   atfı taşıyor ve docs/kararlar/00-KARAR-TAKIP.md'de madde N satırında ✅ / 🟨 yok → "BITTI işin kaynağı açık"
 #   (gerekçeli istisna: docs/raporlar/kod-denetimi/bekci-istisna.txt — satır biçimi "<iş> madde <N> # <gerekçe>").
-#   · kural (i): CI job'u scripts/verify.sh başlığında anılmıyor (KR-22)
-#   · kural (j): docs/raporlar/ altında ilk 5 satırında TÜR etiketi olmayan rapor (YN-11)
-#   · kural (k): docs/ altında indekssiz (giriş noktası olmayan) klasör (YN-12)
-#   · kural (l): CLAUDE.md'nin kendi içine satır numarasıyla atfı (YN-10)
-#   · kural (m): 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri aşan satır sayısı (YN-09)
+#   · KR-22 (eski etiket (i)): CI job'u scripts/verify.sh başlığında anılmıyor (KR-22)
+#   · YN-11 (eski etiket (j)): docs/raporlar/ altında ilk 5 satırında TÜR etiketi olmayan rapor (YN-11)
+#   · YN-12 (eski etiket (k)): docs/ altında indekssiz (giriş noktası olmayan) klasör (YN-12)
+#   · YN-10 (eski etiket (l)): CLAUDE.md'nin kendi içine satır numarasıyla atfı (YN-10)
+#   · YN-09 (eski etiket (m)): 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri aşan satır sayısı (YN-09)
 #   · kural (n): 00-KUYRUK'ta kapısı 🔴 ya da Durumu ATLANDI(karar) olan satır → 00-KUYRUK-KARAR-BEKLEYEN.md'ye (GÖREV 2.4, 5c-n)
+#   · kural (i) BAĞLAM SÖZLEŞMESİ (GÖREV 2.5, 5c-i): (i1) BITTI doğrulamasında ❌/⚠️/🔁 olan iş bitti arşivinde
+#     ön eksiz (🟨 KISMEN / ❌ TUTMUYOR / 🔁 SONRADAN DEĞİŞTİ / ✅ TAMAMLANDI) · (i2) kırık bağlam işaretçisi
+#     (KİLİT HARİTASI ↔ KARAR-BEKLEYEN §, iki yön) · (i3) kaynak izi olmayan aktif / karar bekleyen satır ·
+#     (i4) 01-KARARLAR indeksi ↔ kart CEVAP çelişkisi · (i5) ✍️/✅ kararın işi hâlâ KARAR-BEKLEYEN'de
+#   Harf notu: (i)-(m) eskiden AJ-46 uyarılarının etiketiydi; 5c kurallarıyla karışmasın diye o uyarılar
+#   2026-09-28'den beri iş kimliğiyle (KR-22 · YN-11 · YN-12 · YN-10 · YN-09) anılır, (i) kural harfi oldu.
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -122,7 +128,7 @@ if takip is not None:
                 if not any('✅' in t or '🟨' in t for t in satirlar):
                     warnings.append(f'BITTI işin kaynağı açık: {kimlik} → madde {madde} (00-KARAR-TAKIP; {aname}:{no}) — kural (h): "✅ yapıldı — {kimlik} · PR #" ya da istisna')
 
-# Kural (i) KR-22: CI job'ları scripts/verify.sh başlık yorumunda anılıyor mu — yalnız UYARI.
+# KR-22 (eski etiket (i)): CI job'ları scripts/verify.sh başlık yorumunda anılıyor mu — yalnız UYARI.
 # Yerelde koşulmayan job da "bilinçli fark" olarak başlıkta yazılı olmalı. backend/ CI dosyası yalnız
 # submodule çekiliyse okunur (çatı docs-guard job'u submodule çekmez → orada atlanır).
 vsh = read('scripts/verify.sh')
@@ -148,7 +154,7 @@ if vsh is not None:
             if jm and not re.search(r'(?<![\w-])' + re.escape(jm.group(1)) + r'(?![\w-])', header):
                 warnings.append(f'{ci_rel} job "{jm.group(1)}" scripts/verify.sh başlığında anılmıyor — adım eşlemesine ya da "bilinçli farklar"a yaz (KR-22)')
 
-# Kural (j) YN-11: docs/raporlar/ altındaki her rapor ilk 5 satırında TÜR etiketi taşır — yalnız UYARI.
+# YN-11 (eski etiket (j)): docs/raporlar/ altındaki her rapor ilk 5 satırında TÜR etiketi taşır — yalnız UYARI.
 # (belge-duzeni-rehberi KURAL 3: 🔄 yaşayan · 📸 dondurulmuş; ısı katmanı 🔥/🌡️/🧊 da etiket sayılır.)
 TUR_ETIKETI = ('📸', '🔄', '🔥', '🧊', '🌡️', '🌡')
 for dirpath, _dirs, files in os.walk(os.path.join(root, 'docs/raporlar')):
@@ -161,7 +167,7 @@ for dirpath, _dirs, files in os.walk(os.path.join(root, 'docs/raporlar')):
         if not any(t in head for t in TUR_ETIKETI):
             warnings.append(f'{os.path.relpath(rpath, root)} ilk 5 satırda TÜR etiketi (📸/🔄/🔥/🌡️/🧊) yok — başa etiket yaz (YN-11, rehber KURAL 3)')
 
-# Kural (k) YN-12: docs/ altındaki her klasörün giriş noktası (indeks) var — yalnız UYARI.
+# YN-12 (eski etiket (k)): docs/ altındaki her klasörün giriş noktası (indeks) var — yalnız UYARI.
 # İndeks deseni rehber KURAL 2-B ile aynı: ^00-.*ind(ex|eks) (dört kalıbı da yakalar). docs/ kökünün girişi 00-BELGE-HARITASI.md.
 INDEKS = re.compile(r'^00-.*ind(ex|eks)', re.I)
 docs_root = os.path.join(root, 'docs')
@@ -173,7 +179,7 @@ for dirpath, _dirs, files in os.walk(docs_root):
     if not any(INDEKS.match(f) for f in files):
         warnings.append(f'{os.path.relpath(dirpath, root)}/ giriş noktası (00-INDEX.md) yok — kısa indeks aç (YN-12, rehber KURAL 2-B)')
 
-# Kural (l) YN-10: CLAUDE.md kendi içine satır numarasıyla atıf yapmaz (her düzenlemede kayar) — yalnız UYARI.
+# YN-10 (eski etiket (l)): CLAUDE.md kendi içine satır numarasıyla atıf yapmaz (her düzenlemede kayar) — yalnız UYARI.
 # Atıf bölüm adıyla yazılır: "§ Çalışma Sözleşmesi". Başka dosyaya satır atfı (ör. `00-KUYRUK.md:12`) bu kuralın dışında.
 claude_md = read('CLAUDE.md')
 if claude_md is not None:
@@ -181,7 +187,7 @@ if claude_md is not None:
         for sm in re.finditer(r'(?<![\w/.-])CLAUDE\.md:\d+(?:-\d+)?', line):
             warnings.append(f'CLAUDE.md:{no} kendi içine satır atfı "{sm.group(0)}" — bölüm adına çevir ("§ <başlık>") (YN-10)')
 
-# Kural (m) YN-09: kuyruk ve karar-takip satırları 1.000 karakter tavanını aşmasın — yalnız UYARI (dosya başına tek satır).
+# YN-09 (eski etiket (m)): kuyruk ve karar-takip satırları 1.000 karakter tavanını aşmasın — yalnız UYARI (dosya başına tek satır).
 # Tavan: CLAUDE.md § "tarihsel iz satırın İÇİNDE tutulmaz" madde 1. Karar-takip'te ## GEÇMİŞ bölümü sayılmaz.
 SATIR_TAVANI = 1000
 for rel in ('docs/otonom/00-KUYRUK.md', 'docs/kararlar/00-KARAR-TAKIP.md'):
@@ -198,8 +204,127 @@ for rel in ('docs/otonom/00-KUYRUK.md', 'docs/kararlar/00-KARAR-TAKIP.md'):
         en_uzun = max(uzun)
         warnings.append(f'{rel} {len(uzun)} satır > {SATIR_TAVANI} karakter (en uzun :{en_uzun[1]} = {en_uzun[0]}) — eski katmanı GEÇMİŞ/arşive taşı (YN-09)')
 
-LIMITS = [('docs/otonom/00-KUYRUK.md', 150), ('docs/otonom/01-KARARLAR.md', 150),
-          ('docs/otonom/02-ILERLEME.md', 150), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),
+# ── Kural (i) GÖREV 2.5 (2026-09-28): BAĞLAM SÖZLEŞMESİ VE DURUMA GÖRE AYIRMA — (i1)-(i5) yalnız UYARI ──
+# Kuyruk satırı: ilk hücresi iş kimliği (X-01, AJ-10, PS-A2…) olan, en az 8 sütunlu tablo satırı.
+IS_KIMLIGI = re.compile(r'^[A-Z][A-Z0-9]*-[A-Za-z0-9-]+$')
+def kuyruk_satirlari(text):
+    for no, line in enumerate(text.split('\n'), 1):
+        cells = line.split('|')
+        if line.startswith('| ') and len(cells) >= 9 and IS_KIMLIGI.match(cells[1].strip()):
+            yield no, cells
+
+def kimlik_geciyor(kimlik, text):
+    return re.search(r'(?<![\w-])' + re.escape(kimlik) + r'(?![\w-])', text) is not None
+
+bekleyen = read('docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md')
+# KARAR-BEKLEYEN bölümleri: "## <başlık>" → (satır kimlikleri, bölüm metni)
+bolumler = {}
+if bekleyen is not None:
+    for blok in re.split(r'(?m)^(?=## )', bekleyen):
+        if not blok.startswith('## '):
+            continue
+        baslik = blok.split('\n', 1)[0][3:].strip()
+        bolumler[baslik] = ([c[1].strip() for _n, c in kuyruk_satirlari(blok)], blok)
+bekleyen_kimlikler = {k for ids, _b in bolumler.values() for k in ids}
+
+# (i1) Doğrulanmamış BITTI arşivde işaretsiz: BITTI doğrulama raporunda ❌/⚠️/🔁 bölümündeki iş, bitti
+# arşivinde Durum'u dört ön ekten biriyle başlamıyorsa (okuyan onu hâlâ "tam bitti" sanır).
+ON_EKLER = ('🟨 KISMEN', '❌ TUTMUYOR', '🔁 SONRADAN DEĞİŞTİ', '✅ TAMAMLANDI')
+supheli = {}
+for rpath in sorted(glob.glob(os.path.join(root, 'docs/raporlar/kod-denetimi/bitti-dogrulama-*.md'))):
+    bolum = None
+    for dline in open(rpath, encoding='utf-8').read().split('\n'):
+        if dline.startswith('## '):
+            bolum = next((e for e in ('❌', '⚠️', '🔁') if dline[3:].startswith(e)), None)
+            continue
+        cells = dline.split('|')
+        if bolum and dline.startswith('| ') and len(cells) > 3 and IS_KIMLIGI.match(cells[1].strip()):
+            supheli.setdefault(cells[1].strip(), (bolum, os.path.basename(rpath)))
+if supheli:
+    for arch in sorted(glob.glob(os.path.join(root, 'docs/otonom/arsiv/00-KUYRUK-bitti-*.md'))):
+        aname = os.path.relpath(arch, root)
+        for no, cells in kuyruk_satirlari(open(arch, encoding='utf-8').read()):
+            kimlik = cells[1].strip()
+            durum = re.sub(r'~~.*?~~', '', cells[6]).strip().replace('**', '')
+            if kimlik in supheli and not durum.startswith(ON_EKLER):
+                bolum, rapor = supheli[kimlik]
+                warnings.append(f'{aname}:{no} {kimlik} doğrulamada {bolum} ({rapor}) ama Durum ön eksiz — 🟨 KISMEN / ❌ TUTMUYOR / 🔁 SONRADAN DEĞİŞTİ / ✅ TAMAMLANDI yaz (5c-i1)')
+
+# (i2) Kırık bağlam işaretçisi: 00-KUYRUK § 🔴 KİLİT HARİTASI ↔ KARAR-BEKLEYEN bölümleri iki yönde tutmalı.
+if kuyruk is not None and bekleyen is not None:
+    harita = re.search(r'(?ms)^## 🔴 KİLİT HARİTASI.*?(?=^## |\Z)', kuyruk)
+    isaretci = {}  # bölüm → işaretçide sayılan işler
+    for hline in (harita.group(0) if harita else '').split('\n'):
+        hm = re.search(r' → (\d+) iş (?:bekliyor: ([^·]*)|KARAR-BEKLEYEN)', hline)
+        if not hline.startswith('- ') or not hm:
+            continue
+        etiket = hline[2:hline.index(' → ')][:40]
+        sayilan = [x.strip() for x in (hm.group(2) or '').split(',') if x.strip()]
+        if int(hm.group(1)) != len(sayilan):
+            warnings.append(f'00-KUYRUK § KİLİT HARİTASI "{etiket}" {hm.group(1)} iş diyor, {len(sayilan)} iş sayıyor (5c-i2)')
+        am = re.search(r'ayrıntı: 00-KUYRUK-KARAR-BEKLEYEN\.md § (.+?)\s*$', hline)
+        if not am:
+            if sayilan:
+                warnings.append(f'00-KUYRUK § KİLİT HARİTASI "{etiket}" iş sayıyor ama KARAR-BEKLEYEN § göstermiyor (5c-i2)')
+            continue
+        hedef = am.group(1)
+        isaretci.setdefault(hedef, set()).update(sayilan)
+        if hedef not in bolumler:
+            warnings.append(f'00-KUYRUK § KİLİT HARİTASI "{etiket}" → KARAR-BEKLEYEN § {hedef} yok (5c-i2)')
+            continue
+        ids, metin = bolumler[hedef]
+        for kimlik in sayilan:
+            if kimlik not in ids and not (kimlik in bekleyen_kimlikler and kimlik_geciyor(kimlik, metin)):
+                warnings.append(f'00-KUYRUK § KİLİT HARİTASI "{etiket}" {kimlik} sayıyor ama KARAR-BEKLEYEN § {hedef}\'de yok (5c-i2)')
+    for baslik, (ids, _metin) in bolumler.items():
+        if baslik not in isaretci:
+            warnings.append(f'00-KUYRUK-KARAR-BEKLEYEN.md § {baslik} için 00-KUYRUK § KİLİT HARİTASI\'nda işaretçi yok (5c-i2)')
+            continue
+        for kimlik in ids:
+            if kimlik not in isaretci[baslik]:
+                warnings.append(f'00-KUYRUK-KARAR-BEKLEYEN.md § {baslik} {kimlik} işaretçide sayılmıyor (5c-i2)')
+
+# (i3) Kaynaksız aktif iş: bağlam sözleşmesinin KAYNAK ayağı — kaynak izi = "kaynak" · "ajan-ekledi" ·
+# KARAR-N · madde N / md.N · G-kart (G1-23) · belge yolu (docs/… ya da *.md).
+KAYNAK_IZI = re.compile(r'kaynak(?!s[ıi]z)|ajan-ekledi|KARAR-\d|\bmadde\s+\d|\bmd\.\s*\d|\bG\d+-\d+|docs/|[\w-]\.md\b', re.I)
+for rel, text in (('00-KUYRUK.md', kuyruk), ('00-KUYRUK-KARAR-BEKLEYEN.md', bekleyen)):
+    for no, cells in kuyruk_satirlari(text or ''):
+        if not KAYNAK_IZI.search('|'.join(cells)):
+            warnings.append(f'{rel}:{no} {cells[1].strip()} kaynak izi yok (kaynak: · ajan-ekledi · KARAR-N · madde N · G-kart · belge yolu) — bağlam sözleşmesi (5c-i3)')
+
+# (i4) İndeks ↔ kart CEVAP çelişkisi · (i5) ✍️/✅ kararın işi hâlâ KARAR-BEKLEYEN'de.
+cevapli = set()
+if kararlar is not None:
+    for kline in kararlar.split('\n'):
+        km = re.match(r'^\| KARAR-(\d+) \|', kline)
+        cells = kline.split('|')
+        if not km or len(cells) < 6:
+            continue
+        no = int(km.group(1))
+        durum = re.sub(r'~~.*?~~', '', cells[4]).replace('**', '').strip()
+        if durum.startswith(('✍️', '✍', '✅')):
+            cevapli.add(no)
+        elif not durum.startswith('⬜'):
+            continue
+        kart = next((p for p in (os.path.join(root, f'docs/otonom/{d}/KARAR-{no:03d}.md') for d in ('kararlar', 'arsiv/kararlar')) if os.path.exists(p)), None)
+        if kart is None:
+            continue
+        cevap_satirlari = re.findall(r'(?m)^\*\*CEVAP[^*\n]*:\*\*(.*)$', open(kart, encoding='utf-8').read())
+        dolu = bool(cevap_satirlari) and cevap_satirlari[-1].strip() != ''
+        kname = os.path.relpath(kart, root)
+        if dolu and durum.startswith('⬜'):
+            warnings.append(f'01-KARARLAR indeksi KARAR-{no} ⬜ ama {kname} CEVAP dolu → indekste ✍️ (5c-i4)')
+        elif not dolu and no in cevapli:
+            warnings.append(f'01-KARARLAR indeksi KARAR-{no} {durum[:2].strip()} ama {kname} CEVAP boş (5c-i4)')
+for baslik, (_ids, metin) in bolumler.items():
+    bm = re.match(r'^KARAR-(\d+)$', baslik)
+    for _n, cells in kuyruk_satirlari(metin):
+        bagli = [int(x) for x in re.findall(r'KARAR-(\d+)', cells[4])] or ([int(bm.group(1))] if bm else [])
+        if bagli and all(k in cevapli for k in bagli):
+            warnings.append(f'00-KUYRUK-KARAR-BEKLEYEN.md § {baslik} {cells[1].strip()} bağlı KARAR ({", ".join(f"KARAR-{k}" for k in bagli)}) ✍️/✅ ama iş hâlâ KARAR-BEKLEYEN\'de → 00-KUYRUK "Geri dönüş yeri"ne (5c-i5)')
+
+LIMITS = [('docs/otonom/00-KUYRUK.md', 90), ('docs/otonom/01-KARARLAR.md', 40),
+          ('docs/otonom/02-ILERLEME.md', 80), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),
           ('docs/otonom/03-PO-ELLE-ISLER.md', 30), ('docs/00-BELGE-HARITASI.md', 20)]
 for rel, kb in LIMITS:
     p = os.path.join(root, rel)
