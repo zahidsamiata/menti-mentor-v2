@@ -21,12 +21,21 @@ export interface WeightChangeInfo {
   newDiscWeight: number;
 }
 
+// AJ-69: backend k-anonim maskeli döner (mask.ts maskNpsSample). suppressed=true iken
+// avgNps=null ve sampleSize=0'dır (gerçek 1-2 yanıt sayısı da gizli); minSampleSize = eşik.
+export interface NpsSample {
+  avgNps: number | null;
+  sampleSize: number;
+  suppressed: boolean;
+  minSampleSize: number;
+}
+
 export interface PendingAdjustment {
   tenantId: string;
   previousWeights: AlgorithmWeights;
   newWeights: AlgorithmWeights;
-  phase1Nps: { avgNps: number | null; sampleSize: number };
-  phase3Nps: { avgNps: number | null; sampleSize: number };
+  phase1Nps: NpsSample;
+  phase3Nps: NpsSample;
   adjusted: boolean;
   reason: string;
   proposedAt: string;
