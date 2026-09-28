@@ -331,7 +331,7 @@ for baslik, (_ids, metin) in bolumler.items():
 # işin durumunu KOPYALAMAZ, yalnız işaretçi yazar ("→ AJ-75"). Kopya zamanla bayatlar: 2026-09-28 tur sonu
 # denetiminde 00-KART-INDEKSI G1-20 / G7-10 / G7-11 / G7-13 / G7-14 bitmiş işi "BEKLIYOR" gösteriyordu.
 #   (t1) HATA  bitti arşivindeki (tam BITTI/✅, aktif kuyrukta yeniden açılmamış) iş aktif belgede açık durumla
-#              anılıyor: "X (BEKLIYOR|⬜|açık|CALISILIYOR|PR-ACIK)" · "⬜/BEKLIYOR/AÇIK → X" · "X: BEKLIYOR"
+#              anılıyor: "X (BEKLIYOR|⬜|açık|CALISILIYOR|PR-ACIK)" · "⬜/BEKLIYOR/AÇIK → X · Y" · "kalan … → X" · "X: BEKLIYOR"
 #   (t2) HATA  herhangi bir iş kimliğinin değişken kuyruk durumu parantezle kopyalanmış: "X (BEKLIYOR|
 #              CALISILIYOR|PR-ACIK|BASARISIZ|ATLANDI…)" → işaretçi yaz ("→ X"). BITTI kopyası serbest (değişmez olgu).
 #   (t3) UYARI "⬜ → X" ama X kuyrukta "BITTI (kısmen …)" → hücreyi "🟨 kısmen — X; kalan → <sahip>" yap.
@@ -365,9 +365,10 @@ for bpath in sorted(glob.glob(os.path.join(root, 'docs/otonom/arsiv/00-KUYRUK-bi
 bitmis -= set(aktif_durum)  # aktif kuyrukta yeniden açılmış iş bitmiş sayılmaz
 
 KIMLIK = r'(?<![\w-])([A-Z][A-Z0-9]{0,3}(?:-[A-Z0-9]+)+[a-z]?)(?![\w-])'
-ACIK = r'(?:BEKL[İI]YOR|⬜|[Aa]çık|AÇIK|CALISILIYOR|ÇALIŞILIYOR|PR-ACIK)'
+ACIK = r'(?:BEKL[İI]YOR|⬜|[Aa]çık(?!\w)|AÇIK(?!\w)|CALISILIYOR|ÇALIŞILIYOR|PR-ACIK)'
 T1_SONRA = re.compile(KIMLIK + r'\s*(?:\(\s*' + ACIK + r'|:\s*(?:BEKL[İI]YOR|⬜))')
-T1_ONCE = re.compile(r'(?:⬜|BEKL[İI]YOR|AÇIK)\s*(?:→|->)\s*' + KIMLIK)
+# "⬜ → A · B" ve "kalan … → A": oktan sonraki kimlik LİSTESİ (· , + / ile ayrılmış) açık iş sayılır.
+T1_ONCE = re.compile(r'(?:⬜|BEKL[İI]YOR|AÇIK(?!\w)|kalan[^|]*?)\s*(?:→|->)\s*((?:(?<![\w-])[A-Z][A-Z0-9]{0,3}(?:-[A-Z0-9]+)+[a-z]?(?![\w-])[\s·,+/]*)+)')
 T2 = re.compile(KIMLIK + r'\s*\(\s*(BEKL[İI]YOR|CALISILIYOR|ÇALIŞILIYOR|PR-ACIK|BASARISIZ|ATLANDI)')
 T3 = re.compile(r'⬜\s*(?:→|->)\s*' + KIMLIK)
 
@@ -382,10 +383,13 @@ for rel in dict.fromkeys(TEK_KAYNAK_BELGELER):
             continue
         satir = re.sub(r'`[^`]*`', '', re.sub(r'~~.*?~~', '', line))  # kod içi = kural örneği
         bulunan = set()
-        for m in list(T1_SONRA.finditer(satir)) + list(T1_ONCE.finditer(satir)):
-            if m.group(1) in bitmis and m.group(1) not in bulunan:
-                bulunan.add(m.group(1))
-                errors.append(f'{rel}:{no} {m.group(1)} bitti arşivinde ama burada açık görünüyor ("{m.group(0)[:40]}") — kart kendi durumunu "✅ {m.group(1)} · PR #" yapsın ya da işaretçi yaz (5c-t1)')
+        adaylar = [(m.group(1), m.group(0)) for m in T1_SONRA.finditer(satir)]
+        adaylar += [(k, m.group(0)) for m in T1_ONCE.finditer(satir) for k in re.findall(KIMLIK, m.group(1))]
+        for kimlik, parca in adaylar:
+            # aynı satırda "✅ … X" (kural h kapanış işareti) varsa X bu satırda kapanmış sayılır
+            if kimlik in bitmis and kimlik not in bulunan and not re.search(r'✅[^|✅]{0,40}?(?<![\w-])' + re.escape(kimlik) + r'(?![\w-])', satir):
+                bulunan.add(kimlik)
+                errors.append(f'{rel}:{no} {kimlik} bitti arşivinde ama burada açık görünüyor ("{parca[:40]}") — kart kendi durumunu "✅ {kimlik} · PR #" yapsın ya da işaretçi yaz (5c-t1)')
         for m in T2.finditer(satir):
             if m.group(1) not in bulunan:
                 errors.append(f'{rel}:{no} {m.group(1)} durumu kopyalanmış ("{m.group(0)[:40]}") — durum yalnız kuyrukta; işaretçi yaz: "→ {m.group(1)}" (5c-t2)')

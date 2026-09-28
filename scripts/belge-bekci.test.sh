@@ -303,6 +303,18 @@ expect 1 "t1: bitmiş işe parantezsiz işaretçi ama kartın kendi durumu ⬜ �
 setup_t; printf 'Not: X-10 (açık) kalmıştı\n' >>"$TMP/root/docs/otonom/00-SIMDI.md"
 expect 1 "t1: 00-SIMDI'de bitmiş iş \"(açık)\" → kırmızı"
 
+setup_t; kart '| G6-01 | x | 🟨 kısmen — Y-1 · PR #9; kalan → X-10 |'
+expect 1 "t1: \"kalan → X\" ama X bitmiş → kırmızı"
+
+setup_t; kart '| G11-02 | x | ⬜ → X-01 · X-10 |'
+expect 1 "t1: oktan sonraki listede ikinci kimlik bitmiş → kırmızı"
+
+setup_t; kart '| 22 | x | 🟨 kısmen — Y-1; kalan: kod → X-10 · ✅ X-10 kalanı yapıldı — PR #5 |'
+expect 0 "t1 pozitif: aynı satırda \"✅ … X\" kapanış işareti → yeşil"
+
+setup_t; kart '| G1-20 | x | ✅ X-10 (açıklama: tamam) |'
+expect 0 "t1 pozitif: \"(açıklama\" \"açık\" sayılmaz → yeşil"
+
 setup_t; kart '| G1-06 | x | ⬜ → X-01 (BEKLIYOR) |'
 expect 1 "t2: aktif işin durumu parantezle kopyalanmış → kırmızı"
 grep -q "5c-t2" "$TMP/out" || { echo "  ✗ t2 etiketi yok"; FAIL=1; }

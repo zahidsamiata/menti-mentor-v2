@@ -49,7 +49,7 @@
 | G1-20 | RLS lint kuralı | ✅ AJ-75 · PR backend #226 + çatı #419 | md.26(v2) | — | G-kartı |
 | G1-21 | Başlıksız→varsayılan tenant | 🟡 | — | — | G-kartı |
 | G1-22 | k-anonimlik metrik yuvarlama | ✅ V-05 + AJ-69 · PR #100/#273, #220/#411 | **madde 119** | — | G-kartı |
-| G1-23 | logoUrl XSS koruması | 🟨 kısmen — F-04 + AJ-22 · PR #102/#272/#314, #387; kalan → AJ-52 · KARAR-112 | — | F-04 | KUYRUK |
+| G1-23 | logoUrl XSS koruması | 🟨 kısmen — F-04 + AJ-22 + AJ-52 · PR #102/#272/#314, #387, backend #254 + çatı #450; kalan → KARAR-112 | — | F-04 | KUYRUK |
 | G1-24 | OAuth token URL'de | ✅ AJ-73 · PR #213/#406 | — | — | G-kartı |
 | G1-25 | createMeeting kapsamsız findUnique | ✅ AJ-74 · PR #216/#408 | — | — | G-kartı |
 | G1-26 | Şüphe formu IP-limit/CAPTCHA | ⬜ → F-05 | — | F-05 | KUYRUK |
@@ -99,7 +99,7 @@
 ## G4 — Panel / akış (39 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G4-01 | Havuz KART görünümü rol-bazlı | 🟨 kısmen — F-10 · commit d9fd456 (PR gerekmedi); kalan → AJ-81 | KARAR-2 | F-10 | KUYRUK |
+| G4-01 | Havuz KART görünümü rol-bazlı | ✅ F-10 + AJ-81 · commit d9fd456, PR çatı #440 | KARAR-2 | F-10 | KUYRUK |
 | G4-02 | "Neden uyumlu" Katman-1 menti | ✅ | KARAR-7 | — | G-kartı |
 | G4-03 | Manuel eşleştirme | 🗑️ | md.76 | — | G-kartı |
 | G4-04 | Yöneticilik-verme + onaylı liste | ✅ | md.A9 | — | G-kartı |
@@ -120,7 +120,7 @@
 | G4-19 | Premium kilit + Tenant.plan | 🔴 KARAR-103 (→ AJ-11) | E13/E24 | — | G-kartı |
 | G4-20 | Hayalet mod + toplu CSV davet | 🔵 | md.17 | — | G-kartı |
 | G4-21 | "Neden uyumlu" Katman-2 | 🔵 | md.19/KARAR-8 | — | G-kartı |
-| G4-22 | Menti "bekleme anı" | 🟨 kısmen — F-15 + AJ-45 · PR #228, #208/#395; kalan → AJ-82 | Y1 | F-15 | KUYRUK |
+| G4-22 | Menti "bekleme anı" | ✅ F-15 + AJ-45 + AJ-82 · PR #228, #208/#395, çatı #441 | Y1 | F-15 | KUYRUK |
 | G4-23 | Umut sinyali / sosyal-kanıt | 🟨 kısmen — F-15 · PR #228; kalan → AN-21 (🔴 KARAR-56) | Y1 | F-15 · P-06 | KUYRUK |
 | G4-24 | Menti "özgüven aşısı" sunumu | ✅ F-16 + P-03 · PR #228, #209 | — | F-16 · P-03 | KUYRUK |
 | G4-25 | Reddi yumuşat + kutlama | ✅ P-05 + AJ-33 · PR #162/#340, #391 | Y2 | F-17 · P-05 · KARAR-20/22 | KUYRUK |
@@ -128,7 +128,7 @@
 | G4-27 | Mentör kapasite sınırı | 🔴 KARAR-41 (→ P-15) | Y5 | P-15 | KUYRUK |
 | G4-28 | Mentör "kendi etkim" yuvası | ✅ P-14 · PR #216 | md.78 | P-14 | KUYRUK |
 | G4-29 | Mentör sektör filtresi | 🔴 KARAR-103 (→ AJ-11) | — | — | G-kartı |
-| G4-30 | Yönetici rapor EXPORT | 🟨 kısmen — F-18 · PR #163/#342; kalan → AJ-78 | Y3 | F-18 | KUYRUK |
+| G4-30 | Yönetici rapor EXPORT | ✅ F-18 + AJ-78 · PR #163/#342, backend #238 + çatı #435 | Y3 | F-18 | KUYRUK |
 | G4-31 | Proaktif kırmızı uyarı | ✅ F-19 · PR #231 | Y4 | F-19 | KUYRUK |
 | G4-32 | STK zaman-serisi KPI | 🔴 KARAR-103 (→ AJ-11) | Y3/Y7 | — | G-kartı |
 | G4-33 | Çift-aha yönetici-önizleme | 🔴 KARAR-17 / KARAR-103 (→ AJ-11) | A13 | KARAR-17 | G-kartı |
@@ -153,7 +153,7 @@
 ## G6 — Veri modeli / borç (7 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G6-01 | N+1 konuşma listesi | 🟨 kısmen — F-27 + AJ-45 · PR #86/#229, #208/#395; kalan → AJ-83 | md.48 | F-27 | KUYRUK |
+| G6-01 | N+1 konuşma listesi | ✅ F-27 + AJ-45 + AJ-06 + AJ-83 · PR #86/#229, #208/#395, backend #174 (N+1), çatı #426 (sayfalama ön yüz) | md.48 | F-27 | KUYRUK |
 | G6-02 | String→enum + çift-rol | ⬜ → AJ-77 | md.49 | — | G-kartı |
 | G6-03 | onDelete stratejisi | 🔴 KARAR-74 (→ AN-37) | md.49-akraba | — | G-kartı (✅ migrate edildi, bkz. G6-03 kartı) |
 | G6-04 | User.email unique + index | ❓ | — | — | G-kartı |
@@ -164,7 +164,7 @@
 ## G7 — UX / tasarım (14 kart)
 | kart | konu | durum | madde | KUYRUK | canonical |
 |---|---|:---:|---|---|---|
-| G7-01 | Ekran-okuyucu düzeltmeleri | 🟨 kısmen — F-21 · PR #305; kalan → AJ-84 | md.50 | F-21 | KUYRUK |
+| G7-01 | Ekran-okuyucu düzeltmeleri | ✅ F-21 + AJ-84 · PR #305, çatı #443 | md.50 | F-21 | KUYRUK |
 | G7-02 | DISC kontrast (WCAG) | ✅ AJ-07 · PR #359 | md.64 | F-21 | KUYRUK |
 | G7-03 | SEO teknik paketi | ✅ F-29 + AJ-47 · PR #219, #402 | md.51-55 | F-29 | KUYRUK |
 | G7-04 | www→301 yönlendirme | ✅ | md.66 | — | G-kartı |
@@ -172,7 +172,7 @@
 | G7-06 | Çıkışta GA (PO) | ❓ | A19 | — | G-kartı |
 | G7-07 | GTM+GA4 son kontrol | 🔵 | A12 | — | G-kartı |
 | G7-08 | Kurumsal sayfalar + JSON-LD | 🔴 KARAR-88 (→ Y-07 · Y-11) | md.57-63 | — | G-kartı |
-| G7-09 | WCAG 2.1 AA bütünsel | 🟨 kısmen — F-21 + AJ-07 · PR #305, #359; kalan → AJ-85 | md.64 | F-21 | KUYRUK |
+| G7-09 | WCAG 2.1 AA bütünsel | ✅ F-21 + AJ-07 + AJ-85 · PR #305, #359, çatı #445 | md.64 | F-21 | KUYRUK |
 | G7-10 | Açılış UX paketi | 🟨 kısmen — AJ-86 · PR çatı #451 · #452 · #454; kalan: "mobil" ayağı AJ-86 ölçütünde yok → TEYİT GEREK (İŞ 2 teyit listesi) | md.22(v2) | — | G-kartı |
 | G7-11 | Açılış koyu/açık tema | ✅ AJ-86 · PR çatı #451 · #452 · #454 | md.22(v2) | — | G-kartı |
 | G7-12 | Açılış slogan | ✅ | F4/md.22 | — | G-kartı |
