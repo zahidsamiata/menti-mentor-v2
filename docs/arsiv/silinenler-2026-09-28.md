@@ -737,6 +737,20 @@ frontend/src/app/(admin)/admin/tags/page.tsx:58-59
 ```
 (Grup düğmelerine eklenen `type="button"` / `aria-pressed` satırları salt eklemedir; eski hâlde yoklardı.)
 
+## AJ-86a · Landing Bento skoru — sıfır etikette %52 (çatı `otonom/AJ-86a-bento-20260928`)
+
+Silme YOK — satır-içi formül saf fonksiyona (`frontend/src/lib/landingBentoScore.ts` `bentoMatchScore`) taşındı. Taban commit: `9f3787e` (çatı main; dosyanın son commit'i `4a0b5f4`). Geri alma: `git revert <AJ-86a commit>` ya da aşağıdaki eski satırları aynen geri koy.
+
+- **Neden yazılmıştı:** landing "Teknik Eşleşme Skoru" demosu — seçilen etiket sayısıyla canlı artan görsel skor (taban 52, etiket başı 4, tavan 97).
+- **Neden değişti:** taban puan etiket sayısından bağımsız eklendiği için hiç etiket seçilmediğinde de %52 gösteriyordu ("0 ortak alan" yazısıyla çelişki; `docs/kararlar/konu/06-tasarim-ux.md` § Landing UX paketi "mantık hatası, öncelikli"). Yeni kural: 0 etiket → 0; 1+ etiket → eski formül aynen (başlangıçtaki 4 etiket yine %68).
+
+Eski satırlar (dosya:satır, aynen):
+```
+frontend/src/app/_sections/AlgorithmBento.tsx:36-37
+  const rawScore = 52 + selected.size * 4;
+  const matchScore = Math.min(97, rawScore);
+```
+
 ## AJ-86b · Landing bilgi balonu (InfoTooltip) + gri metin kontrastı (çatı `otonom/AJ-86b-tooltip-kontrast-20260928`)
 
 Silme YOK — bileşenin davranışı/sınıfları değişti, landing metni aynı. Taban commit: `9f3787e` (çatı main; `InfoTooltip.tsx` son commit'i `32673ff`). Geri alma: `git revert <AJ-86b commit>` ya da aşağıdaki eski hâli aynen geri koy.
