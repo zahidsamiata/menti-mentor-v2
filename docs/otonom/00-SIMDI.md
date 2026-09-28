@@ -5,12 +5,12 @@
 
 **Durum:** CALISIYOR (devam turu — kota ~09:30 UTC'de kesti; 00-SIMDI 08:01'den beri güncellenmemişti). Sıra: 2.4 bölmeyi bitir (TEK BAŞINA) → AJ-58 → AJ-72 kaydı → 2.5 → GÖREV 3 KARAR-PAKETI (merge) + kart zenginleştirme → GÖREV 4 (AJ-83 …) → DURDU (K1-a).
 
-**Şu an yapılan:** Adım 1 — GÖREV 2.4 bölme (çatı #421) main ile güncelleniyor → kontroller → geri bakılabilirlik testi (4. koşu = devam turunun 1. koşusu).
+**Şu an yapılan:** Adım 2 — AJ-58 (backend #228 + çatı #423): main ile güncelle → 7b → merge. GÖREV 2.4 MERGE (#421, geri bakılabilirlik 20/20).
 
 **Devam turu — kesinti öncesi yarım kalanlar ve nasıl kapandı:**
 | İş | Dal | Son hâl (11:20 UTC teyit) | Kapanış PR'ı |
 |---|---|---|---|
-| GÖREV 2.4 bölme | `otonom/DURUMA-GORE-BOLME-20260928` (8 commit A…H, `4712dde`) | push'lu, merge YOK; 7b ONAY (1. sürüm); geri bakılabilirlik 1. koşu 19/20 (zayıf 9), 2. koşu 17/20, 3. koşu (H sonrası) YAPILMADI; main'in gerisinde (AJ-72) | #421 — sürüyor |
+| GÖREV 2.4 bölme | `otonom/DURUMA-GORE-BOLME-20260928` | ✅ MERGE `71869b8` — geri bakılabilirlik 3. koşu 20/20; 7b ONAY (A-F + G/H delta + I) | #421 |
 | AJ-58 | backend `…AJ-58-hatirlatma-basarisiz-eposta-20260928` `1918164` · çatı `f32d73d` | PR'lar açık backend #228 + çatı #423, CI yeşil, 7b YAPILMADI, merge YOK | — |
 | AJ-72 | çatı `otonom/AJ-72-kurum-askida-ekrani-20260928` | #422 MERGE (7b ONAY, canlı ok, 4 sayfa 200); kuyruk/arşiv/kaynak kaydı (kural h) main'de YOK | kayıt Adım 3 |
 Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürütüldü (docs'a dokunmadılar, zarar yok) — kural ihlali, bu turda tekrarlanmaz.
@@ -29,7 +29,6 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 | backend #185 | AN-52-1 anket tablosu · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-106 EVET bekliyor (yedek gerekmez — yeni tablo) |
 | backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
 | backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
-| çatı #421 | GÖREV 2.4 bölme | yeşil (H) | 7b ONAY (A-F) | geri bakılabilirlik testi 20/20 bekliyor |
 | backend #228 + çatı #423 | AJ-58 hatırlatma başarısız e-posta | yeşil | 7b yok | Adım 2 |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |

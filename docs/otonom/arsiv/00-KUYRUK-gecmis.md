@@ -1314,3 +1314,11 @@ Bu, **YN-07**'nin tam vakasıydı; hizalama o satırın bir ayağını kapatır.
 **Çıkarılan katmanlar (AYNEN):**
 
 - ⛔ **çelişki: KARAR-80/M16** (2026-09-25)
+
+### AN-49 (2026-09-28, 2.4 sonrası düzeltme — geri bakılabilirlik puanlaması notu)
+
+| AN-49 | Ş3 | ⭐ **Dört feedback modeli tek KALİTE GÖRÜNÜMÜNE bağlansın.** Kim görür → KARAR-67 (drill-down) ile bağlantılı, önce ona bak. NEDEN: dört ayrı geri bildirim modeli var; yönetici tek ve tutarlı bir kalite görünümü göremiyor (strateji karar oturumu E.1c). | 🟢 | Yönetici tek, tutarlı kalite görünümü görüyor | BEKLIYOR | kaynak: strateji karar oturumu (E.1c). ⛔ **SIRA ÖNEMLİ:** (1) KVKK silme yolu düzeltilsin (GV-08) → (2) SONRA `Match` yazımı açılsın (U-18/PS-04/F-11) → (3) SONRA kalite görünümü. Ters sıra KVKK ihlali doğurur. ⚠️ **KARAR-66 B ile çelişki YOK** — ölçüm kurulunca "yönlendirme kalitesi" iddiası KANITLA geri KONABİLİR. hassasiyet: matching/KVKK bağımlı. · aile: Y-C · kilit: kalan ayak KARAR-67 bekliyor (önce KARAR-67: kim görür (drill-down)) — § 🔴 KİLİT HARİTASI · kilit: kalan ayak KARAR-89 bekliyor (kart KARAR-89 bu işi kilitlediğini söylüyor (tek değerlendirme kutusu)) |
+
+### AJ-68 (2026-09-28, 2.4 sonrası düzeltme — geri bakılabilirlik puanlaması notu)
+
+| AJ-68 | Ş0 | **1.000+ karakterlik satırlar (YN-09 kalanı)** — kuyrukta 39, karar-takipte 25 satır tavanı aşıyor; üstü-çizili zincirler taşındı (AJ-46), kalan uzunluk tarihli GÜNCELLEME/BITTI katmanlarından. Satır başına elle yargı: son geçerli hâl satırda, eski katman `arsiv/00-KUYRUK-gecmis.md` / KARAR-TAKIP `## GEÇMİŞ`'e AYNEN. | 🟢 | Bekçi kural (m) iki dosyada da uyarı vermiyor; her taşımada `kalan + taşınan = önceki` sayısı PR'da | BEKLIYOR | ajan-ekledi 2026-09-27 (AJ-46/YN-09 kalanı) · ölçüm: `bash scripts/belge-bekci.sh` kural (m) · en uzunlar: kuyruk E-3 (4.830), karar-takip md.162 (2.880) · ⛔ anlam denetimi: taşınan katman "geçerli bilgi" içeriyorsa satırda özeti kalır · dikkat: kuyruk satırları ana ajanla aynı dosyada → sıralı · ek (2026-09-28, GÖREV 2.1 7b notu): AJ-46 (bu satırla) arşive geçince `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md`'deki 7 AJ-46 kaleminin (AN-35 · AN-54 · E-1 · YN-10 · YN-11 · YN-12 · YN-14) 🟨 ön eki AYNI commit'te ✅ TAMAMLANDI'ya çevrilir |
