@@ -50,12 +50,13 @@ describe('Pending-review durum ekranı (U-04)', () => {
     expect(screen.getByText(/Web sitenizi ekleyin/)).toBeInTheDocument();
   });
 
-  it('AJ-123 / KARAR-23: bildirim metni ret için e-posta sözü vermez', async () => {
+  it('AJ-123 / KARAR-23: bildirim metni e-posta sözü vermez (ret hiç; onay/düzeltme bayrağa bağlı)', async () => {
     meMock.ok = true; meMock.status = 'PENDING_REVIEW'; meMock.note = null;
     render(<PendingReviewPage />);
     await waitFor(() => expect(screen.getByText(/Karar bu ekranda görünür/)).toBeTruthy());
     expect(screen.queryByText(/ret kararı bu ekranda görünür; e-posta/i)).toBeNull();
-    expect(screen.getByText(/onay ve düzeltme isteği ayrıca e-postayla/)).toBeTruthy();
+    // E-posta gönderimi bayrağa bağlı (TENANT_NOTIFICATIONS_ENABLED, varsayılan kapalı) → metin e-posta sözü vermez.
+    expect(screen.queryByText(/e-posta/i)).toBeNull();
   });
 
   it('oturum yok (401) → güvenli varsayılan "İnceleniyor"', async () => {
