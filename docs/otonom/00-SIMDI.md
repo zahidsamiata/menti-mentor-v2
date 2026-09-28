@@ -34,6 +34,7 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 **Push edilmemiş iş:** yok.
 
 **Engeller:**
+- ⛔ 2026-09-28 ~14:45 UTC — AJ-66 7b inceleme ajanının `gh pr comment` (#237, #432) çağrısı REDDEDİLDİ. Ret metni AYNEN (ajan raporundan): `Excess Sensitive Detail`. → ana ajan hassas ayrıntısız kısa inceleme kaydını gönderdi (geçti). Ardışık ret sayacı: 1 (aradaki komutlar geçti).
 - ⛔ 2026-09-28 ~07:50 UTC — AJ-75 7b inceleme ajanının `gh pr comment` çağrısı (backend #226) REDDEDİLDİ. Ret metni AYNEN (ajan raporundan): `Excess Sensitive Detail`. → kısa, hassas ayrıntısız yorum yazıldı; ayrıntılar AJ-103/AJ-104 satırlarında. Ardışık ret sayacı: 1 (sonraki komutlar geçti).
 - 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + yedek) · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02 · AJ-50.
 

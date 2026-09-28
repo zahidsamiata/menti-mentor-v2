@@ -28,7 +28,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 Durum: ⬜ cevap bekliyor · ✍️ CEVAP yazıldı, henüz işlenmedi · ✅ cevaplandı. Kilitlediği işler = eski indeksteki "kaç işi açar" bilgisi + `00-KUYRUK-KARAR-BEKLEYEN.md`'deki satırlar (🔴 ya da ATLANDI(karar)) + aktif kuyrukta kalan ayağı ya da 🔵 EVET/HAYIR kartı bu karara bağlı satırlar; kart başlığındaki sayı eskiyse "kart metni eski" notu (kart gövdesi değişmez).
 Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) göre (çoktan aza), eşitse numara; cevaplanmışlar numara sırasıyla.
 
-### ⬜ / ✍️ Cevap bekleyen (109)
+### ⬜ / ✍️ Cevap bekleyen (111)
 
 | # | Konu | Kilitlediği işler | Durum | Öneri | Kart |
 |---|---|---|---|---|---|
@@ -97,6 +97,8 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-128 | 🔵 EVET/HAYIR — 13 durum alanı veritabanında enum (AJ-77, migration) | **1** (AJ-77) · aktif kuyrukta: AJ-77 (🔵 PR-ACIK — EVET/HAYIR kartı) | ⬜ boş · 🔵 · öneri EVET (§3b sayımı 0 şartıyla) | EVET | [kart](kararlar/KARAR-128.md) |
 | KARAR-129 | Askıdaki kurumun YÖNETİCİSİ ne görsün, kime başvursun (kuruma görünen metin) | 0 (cevap AJ-72'ye küçük ek iş açar) | ⬜ boş · ajan-ekledi (AJ-72) | A | [kart](kararlar/KARAR-129.md) |
 | KARAR-130 | Mentör, mentinin ihtiyaç cevabını hangi anda görsün (KVKK/yetki) | 1 (AJ-89 mentör kolu) | ⬜ boş · ajan-ekledi (AJ-89) | A | [kart](kararlar/KARAR-130.md) |
+| KARAR-131 | Mentör sertifikası kişiye mi ait, kuruma mı (rozet ↔ mentör paneli tutarsızlığı) | 0 | ⬜ boş · ajan-ekledi (AJ-66 7b) | A | [kart](kararlar/KARAR-131.md) |
+| KARAR-132 | Küçük grup gizliliği eşiği 3 mü 5 mi + "herkes aynısını seçti" gizlensin mi (KVKK) | 0 | ⬜ boş · ajan-ekledi (AJ-89 7b) | C | [kart](kararlar/KARAR-132.md) |
 | KARAR-8 | Repoları private yap | 0 (PO aksiyonu) | ⬜ boş | B | [kart](kararlar/KARAR-008.md) |
 | KARAR-9 | Kulüp modülü + İş İlanları | 0 (eklenmezse B) | ⬜ boş · ⚠️ ağustos G1-13 kulüp kurumu aktif / G10-12 modül ⏸️ · ⚠️ kulüp-kurum ayağı KARAR-34 ile çözüldü; kalan kulüp ekranı + iş ilanları | B | [kart](kararlar/KARAR-009.md) |
 | KARAR-13 | Yöneticiye manuel "işlet" butonları | 0 | ⬜ boş | B | [kart](kararlar/KARAR-013.md) |
