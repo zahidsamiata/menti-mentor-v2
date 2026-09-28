@@ -25,9 +25,9 @@ export function formatRemaining(cooldownUntil: string, now: number): string {
 }
 
 export const CERT_COOLDOWN_TEXT = {
-  /** Sonuç ekranı: bu deneme molayı başlattı. */
+  /** Sonuç ekranı: bu deneme günün son hakkıydı, molayı başlattı (I-08: ertesi gün 00:00'a kadar). */
   startedOnResult: (remaining: string) =>
-    `Şimdi bir mola başlıyor; yaklaşık ${remaining} sonra yeniden deneyebilirsin. Bu arada konuları Öğrenme Yolculuğu'nda pekiştirebilirsin.`,
+    `Bugünkü deneme hakların doldu. Şimdi bir mola başlıyor; yaklaşık ${remaining} sonra yeniden deneyebilirsin. Bu arada konuları Öğrenme Yolculuğu'nda pekiştirebilirsin.`,
   /** Değerlendirme gönderildiğinde mola zaten sürüyordu (backend COOLDOWN_ACTIVE). */
   alreadyActive: (remaining: string) =>
     `Şimdilik bir mola verelim. Yaklaşık ${remaining} sonra yeniden deneyebilirsin — acele yok.`,
