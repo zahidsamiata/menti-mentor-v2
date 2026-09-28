@@ -123,7 +123,7 @@
 - **K-01 ✅ CANLIDA (PR #176):** çatı submodule pointer `02129fe`(feature) → `1304790`(backend main HEAD #71). `merge-base --is-ancestor` = 0 (ileri sarım). Sarkma giderildi. CI 8/8.
 - **K-07 ✅ CANLIDA (PR #177):** şık görünüm harfi karıştırmadan SONRA `String.fromCharCode(65+idx)`; cevap kimliği `o.key`/`c.key` korundu. `certification/page.tsx:290` + `ScenarioGuideEngine.tsx:218`. Test 5/5 (yeni: shuffle→ilk şık 'A)').
 - **K-09 ✅ CANLIDA (PR #178):** `menti/page.tsx:203-204` hardcoded `value={0}` iki kart `/api/meetings` verisine bağlandı (bind — kaldırma değil; SİLME PROTOKOLÜ'ne gerek kalmadı). Sayım saf helper `lib/mentiMetrics.ts` + test 3/3. Backend değişmedi (`meetingController:238` kendi toplantılarına kapsar).
-- **K-02 🔀 PR'DA (PR #179):** kök `disc-test/page.tsx:86` (loading==`questions.length===0` → hata/boş/yükleniyor karışık, getQuestions hatası sonsuz iskelet). `DiscTestState.loading` + `reload()` + üç ekran. Test 3/3 (useDiscTest.test.tsx).
+- **K-02 🔀 PR'DA (PR #179):** kök `disc-test/page.tsx:86` (loading==`questions.length===0` → hata/boş/yükleniyor karışık, getQuestions hatası sonsuz iskelet). `DiscTestState.loading` + `reload()` + üç ekran. Test 3/3 (useDiscTest.test.tsx). · ✅ yapıldı — K-02 · PR #179
 
 ## C) Kanıt disiplini / dürüst pushback
 - Alt-ajan K-07 için "key'i ez" önerdi → **reddedildi**: `o.key` cevap kimliği (choose(o.key)), ezmek seçimi bozardı. Kimlik korunup görünüm harfi index'ten hesaplandı.

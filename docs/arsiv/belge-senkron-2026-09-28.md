@@ -577,3 +577,7 @@
 ## docs/kararlar/konu/kvkk-metinleri/05-saklama-imha-politikasi.md:25 (GÖREV 2.2 eski-onay doğrulaması — taslak kurum 96 saat silme VAR)
 
 | Taslak kurum başvurusu | `Tenant`+`User` (taslak) | 96 saat taslak kalırsa silinir | ✅ VAR | mevcut |
+
+## docs/devir/07-oturum-gunlugu.md:126 (GÖREV 2.3)
+
+- **K-02 🔀 PR'DA (PR #179):** kök `disc-test/page.tsx:86` (loading==`questions.length===0` → hata/boş/yükleniyor karışık, getQuestions hatası sonsuz iskelet). `DiscTestState.loading` + `reload()` + üç ekran. Test 3/3 (useDiscTest.test.tsx).
