@@ -43,7 +43,7 @@ model Consent {
 ```
 - **"Güncel rıza" okuma:** verilen özne+`type` için `revokedAt = null` olan en yeni `grantedAt` satırı. Geçmiş satırlar **silinmez** (denetim izi + sürüm geçmişi).
 - **18+ beyanı bu tabloya GİRMEZ** — beyandır, rıza değil; tek kutuda kalır (G1-01 kararı). KVKK ayrıklık kuralı **veri işleme rızaları** için geçerli.
-- Mevcut `kvkkConsentAt` (User:277, Tenant:186) **bu turda silinmez** — geriye uyum; yeni yazımlar Consent'e (dual-write), eski alanın kaldırılması ayrı/sonraki iş.
+- Mevcut `kvkkConsentAt` (User:277, Tenant:186) **bu turda silinmez** — geriye uyum; yeni yazımlar Consent'e (dual-write), eski alanın kaldırılması ayrı/sonraki iş. · 🟨 kısmen — AJ-88 · PR #218/#408 · 2026-09-28 (platform göstergesi artık Consent'ten okuyor); kalan: eski alanın kaldırılması → AJ-97 (silme protokolü)
 
 ## 3. Başlangıç `type` değerleri (enum)
 ```prisma

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
-import { algorithmTunerApi, type ReportingFrequency } from '@/lib/api/algorithmTuner';
+import { algorithmTunerApi, type NpsSample, type ReportingFrequency } from '@/lib/api/algorithmTuner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +17,31 @@ const FREQ_OPTIONS: { value: ReportingFrequency; label: string; desc: string }[]
   { value: 'BIWEEKLY', label: '2 Haftada 1', desc: '1. ve 3. Pazar analiz yapılır' },
   { value: 'MONTHLY',  label: 'Aylık',       desc: 'Ayın ilk Pazar günü analiz yapılır' },
 ];
+
+/**
+ * AJ-69: NPS kutusu. Yanıt sayısı k-anonimlik eşiğinin altındaysa backend ortalamayı hiç göndermez
+ * (suppressed) — küçük kurumda 1-2 kişinin puanı okunmasın. Eşik backend'den gelir (minSampleSize).
+ */
+function NpsTile({ label, sample }: { label: string; sample: NpsSample }) {
+  return (
+    <div className="rounded-xl border border-border p-3 text-center">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      {sample.suppressed ? (
+        <>
+          <p className="text-2xl font-bold mt-1">gizli</p>
+          <p className="text-xs text-muted-foreground">
+            (&lt;{sample.minSampleSize} yanıt — gizlilik için gösterilmiyor)
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="text-2xl font-bold mt-1">{sample.avgNps ?? '—'}</p>
+          <p className="text-xs text-muted-foreground">{sample.sampleSize} yanıt</p>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function AlgorithmTunerPage() {
   const { user } = useAuth();
@@ -272,20 +297,8 @@ export default function AlgorithmTunerPage() {
 
               {/* NPS Verileri */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-xl border border-border p-3 text-center">
-                  <p className="text-xs text-muted-foreground">1. Ay NPS</p>
-                  <p className="text-2xl font-bold mt-1">
-                    {pending.phase1Nps.avgNps ?? '—'}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{pending.phase1Nps.sampleSize} yanıt</p>
-                </div>
-                <div className="rounded-xl border border-border p-3 text-center">
-                  <p className="text-xs text-muted-foreground">3. Ay NPS</p>
-                  <p className="text-2xl font-bold mt-1">
-                    {pending.phase3Nps.avgNps ?? '—'}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{pending.phase3Nps.sampleSize} yanıt</p>
-                </div>
+                <NpsTile label="1. Ay NPS" sample={pending.phase1Nps} />
+                <NpsTile label="3. Ay NPS" sample={pending.phase3Nps} />
               </div>
 
               {/* Ağırlık değişimi */}

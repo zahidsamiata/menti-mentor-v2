@@ -249,3 +249,6 @@ Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`).
 | docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:57 | G1-24 → AJ-73 | ✅ yapıldı — AJ-73 · PR #213/#406 · 2026-09-28 | tam | OAuth accessToken URL sorgusunda |
 | docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md:391 | G1-24 → AJ-73 | ✅ yapıldı — AJ-73 · PR #213/#406 · 2026-09-28 | tam | OAuth erişim token'ı URL sorgusunda |
 | docs/kararlar/00-KART-INDEKSI.md:53 | G1-24 → AJ-73 | ✅ yapıldı — AJ-73 · PR #213/#406 · 2026-09-28 | tam | OAuth token URL'de |
+| docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:58 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting oryantasyon kilidi kurum filtresiz |
+| docs/raporlar/bilanco/kararlar/G1-guvenlik-kvkk.md:404 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting oryantasyon kilidi tenant-kapsamsız findUnique |
+| docs/kararlar/00-KART-INDEKSI.md:54 | G1-25 → AJ-74 | ✅ yapıldı — AJ-74 · PR #216/#408 · 2026-09-28 | tam | createMeeting kapsamsız findUnique |
