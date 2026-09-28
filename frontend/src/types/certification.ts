@@ -18,6 +18,8 @@ export interface CertQuestionsResponse {
   questions: CertQuestion[];
   /** Önceki denemede geçilemeyen konular (bu sınavda başta ve diğer varyantıyla gelir). */
   retryTopics?: string[];
+  /** AJ-60: mola sürüyorsa bitiş anı (ISO), yoksa null — sayfa yeniden açılınca kalan süre için. */
+  cooldownUntil?: string | null;
 }
 
 export type CertOutcome = 'correct' | 'acceptable' | 'wrong';

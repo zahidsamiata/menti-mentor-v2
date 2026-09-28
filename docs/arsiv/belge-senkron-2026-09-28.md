@@ -589,3 +589,7 @@
 ## docs/kararlar/konu/06-tasarim-ux.md:40 (AJ-90)
 
 - **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa. · 🟨 kısmen — kart ızgarası var; kalan: sayfalama (bugün tek istekte en çok 100) → AJ-90
+
+## docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:756 (AJ-89)
+
+| 10 | Görünürlük kuralları (10.3) uygula | 🟨 kısmen — S1 ihtiyacı hiçbir ekranda gösterilmiyor (seçimde gizlilik fiilen sağlanıyor); kalan: eşleşme sonrası mentöre görünme + yöneticiye yalnız toplu dağılım → AJ-89 | evet |

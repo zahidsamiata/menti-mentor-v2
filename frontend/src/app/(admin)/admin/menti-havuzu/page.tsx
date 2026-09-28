@@ -18,13 +18,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { DiscBadge } from '@/components/atoms/DiscBadge';
-import type { ApprovalStatus } from '@/types/auth';
-
-const APPROVAL_META: Record<ApprovalStatus, { label: string; variant: 'success' | 'warning' | 'destructive' }> = {
-  APPROVED: { label: 'Onaylı', variant: 'success' },
-  PENDING:  { label: 'Bekliyor', variant: 'warning' },
-  REJECTED: { label: 'Reddedildi', variant: 'destructive' },
-};
+import { userStatusBadge } from '@/lib/enumLabels';
 
 export default function MentiHavuzuPage() {
   const api = useApiClient();
@@ -95,7 +89,8 @@ export default function MentiHavuzuPage() {
               <tbody className="divide-y divide-border">
                 {data.items.map((user) => {
                   const sectorTags = user.sectorTags ?? [];
-                  const approval = APPROVAL_META[user.approvalStatus];
+                  // Pasif > onay durumu (AJ-65, gerekçe: enumLabels.userStatusBadge).
+                  const approval = userStatusBadge(user);
                   const registeredAt = new Date(user.createdAt).toLocaleDateString('tr-TR');
 
                   return (

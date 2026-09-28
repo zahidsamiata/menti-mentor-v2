@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import { ThreeQuestionsStep } from '@/app/onboarding/_steps/ThreeQuestionsStep';
 import type { MatchingPreferences } from '@/types/onboarding';
 
@@ -80,6 +80,36 @@ describe('ThreeQuestionsStep', () => {
     // yalnız S2 seçili, S3 yok → buton disabled
     fireEvent.click(screen.getByRole('radio', { name: 'Birlikte düşünelim' }));
     fireEvent.click(screen.getByRole('button', { name: /Tamamla ve Eşleşmeye Geç/ }));
+    expect(onComplete).not.toHaveBeenCalled();
+  });
+
+  // AJ-70 (madde 141 PO ek önlemi 1): tercihler kart ekranından ayrı görsel dilde — form.
+  it('form görünümü: adlandırılmış form bölgesi, sorular fieldset/legend, gönderim form üzerinden', () => {
+    const onComplete = vi.fn();
+    render(<ThreeQuestionsStep role="MENTI" onComplete={onComplete} isSubmitting={false} error={null} />);
+
+    const form = screen.getByRole('form', { name: 'Tercihler' });
+    expect(form.tagName).toBe('FORM');
+    // Üç soru, formun içinde üç ayrı soru grubu (fieldset → role="group") olarak durur
+    expect(within(form).getAllByRole('group')).toHaveLength(3);
+    expect(within(form).getAllByRole('radiogroup')).toHaveLength(2);
+    // Gönder düğmesi formun gönderim düğmesidir
+    const submit = within(form).getByRole('button', { name: /Tamamla ve Eşleşmeye Geç/ });
+    expect(submit).toHaveAttribute('type', 'submit');
+
+    fireEvent.click(within(form).getByRole('radio', { name: 'Birlikte düşünelim' }));
+    fireEvent.click(within(form).getByRole('radio', { name: 'Öğrenmek' }));
+    fireEvent.submit(form);
+    expect(onComplete).toHaveBeenCalledTimes(1);
+  });
+
+  it('kaydedilirken form ikinci kez gönderilemez', () => {
+    const onComplete = vi.fn();
+    const { rerender } = render(<ThreeQuestionsStep role="MENTI" onComplete={onComplete} isSubmitting={false} error={null} />);
+    fireEvent.click(screen.getByRole('radio', { name: 'Birlikte düşünelim' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Öğrenmek' }));
+    rerender(<ThreeQuestionsStep role="MENTI" onComplete={onComplete} isSubmitting error={null} />);
+    fireEvent.submit(screen.getByRole('form', { name: 'Tercihler' }));
     expect(onComplete).not.toHaveBeenCalled();
   });
 });

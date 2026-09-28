@@ -35,4 +35,8 @@ export const CERT_COOLDOWN_TEXT = {
   alreadyActiveUnknown: 'Şimdilik bir mola verelim. Mola bitince yeniden deneyebilirsin — acele yok.',
   /** Mola sürerken kapalı "Yeniden başla" düğmesinin yanındaki açıklama. */
   restartLocked: (remaining: string) => `Yeniden başla düğmesi ${remaining} sonra açılır.`,
+  /** Mola sürerken kapalı "Bitir ve değerlendir" düğmesinin yanındaki açıklama (AJ-60). */
+  submitLocked: (remaining: string) => `Değerlendirme ${remaining} sonra açılır. Senaryoları okumaya devam edebilirsin.`,
+  /** Ekran açıkken mola süresi doldu (AJ-60): eski "mola bitince" metni takılı kalmasın. */
+  ended: 'Mola bitti — artık değerlendirmeyi gönderebilirsin.',
 } as const;

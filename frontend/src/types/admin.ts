@@ -4,6 +4,7 @@
 
 import type { UserRole, ApprovalStatus } from './auth';
 import type { PaginatedResponse } from './api';
+import type { MentiNeed } from './onboarding';
 
 // ─── Onboarding Onay Modülü ───────────────────────────────────────────────────
 
@@ -166,7 +167,25 @@ export interface KpiData {
       successRate: number | null;
     };
     activeJobListings: number;
+    /** AJ-89: mentilerin S1 ihtiyaç dağılımı — yalnız toplu, k-anonim (§10.3). Eski yanıtta yok. */
+    mentiNeeds?: MentiNeedsDistribution;
   };
+}
+
+/** Tek S1 seçeneğinin toplu sayımı. `suppressed` iken sayı 0, yüzde null (eşik altı gizli). */
+export interface MentiNeedCell {
+  need: MentiNeed;
+  count: number;
+  percent: number | null;
+  suppressed: boolean;
+}
+
+/** Backend `mentiNeedsDistribution.service.ts` yanıtı. `suppressed` → cevaplayan eşik altında, liste boş. */
+export interface MentiNeedsDistribution {
+  respondentCount: number;
+  suppressed: boolean;
+  minGroupSize: number;
+  options: MentiNeedCell[];
 }
 
 // ─── Program Sağlığı / Retention ("kimse kaynıyor mu") — drill-down ──────────

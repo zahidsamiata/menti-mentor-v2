@@ -6,6 +6,7 @@ import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
 import { DashboardMetricCard } from '@/components/organisms/DashboardMetricCard';
 import { ProgramHealthSection } from '@/components/organisms/ProgramHealthSection';
+import { MentiNeedsDistributionCard } from '@/components/organisms/MentiNeedsDistributionCard';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { computeAdminAlerts } from '@/lib/adminAlerts';
@@ -153,6 +154,9 @@ export default function KpiPage() {
                 ))}
               </CardContent>
             </Card>
+
+            {/* AJ-89: mentilerin S1 ihtiyacı — yalnız toplu, k-anonim (§10.3); eski yanıtta alan yok */}
+            {data.stats.mentiNeeds && <MentiNeedsDistributionCard distribution={data.stats.mentiNeeds} />}
           </div>
         </>
       )}

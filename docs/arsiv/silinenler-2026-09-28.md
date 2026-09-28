@@ -372,3 +372,217 @@ Kural metnindeki eski eşik satırı: `docs/otonom/arsiv/kural-gecmisi-OTONOM-PR
 - **Neden değişti:** yalnız ilk sayfa görünüyordu (30'dan sonrası erişilemez). Artık ilk sayfa + "Daha fazla göster" ile eklenen sayfalar id ile tekilleştirilerek gösteriliyor; ilk sayfa hatasında "Henüz mesajınız yok" yerine Türkçe hata görünüyor. Liste satırının biçimi değişmedi (yalnız bir kat girinti).
 - **Son commit (değişiklikten önce):** dosyaya son dokunan `cefa2c439ac16a97c1a7015bc46bb32d4352a554` · çatı main `a99fe89ff22f24fa268f681207f55e1d6d099897`
 - **Geri alma:** çatıda `git revert <AJ-83 commit>`.
+
+## AJ-60 · Sertifika molası: sayfa yeniden açılınca kalan süre (değişen satırlar)
+
+### 1) `backend/src/controllers/sjtScoringController.ts` — `certQuestionsHandler`
+- **Eski hâl (AYNEN, değişen satırlar):**
+```ts
+    select: { certWrongTopics: true, certAttempts: true },
+```
+```ts
+  return res.status(200).json({ questions, retryTopics });
+```
+- **Neden yazılmıştı:** soru ucu yalnız sınav sırası (yanlış konular başa, diğer varyant) için kişinin kendi `certWrongTopics`/`certAttempts` verisini okuyordu (madde 157).
+- **Neden değişti:** mola bitiş anı yalnız değerlendirme yanıtında (AJ-37) dönüyordu; sayfa mola sırasında açılınca kalan süre görünmüyordu. Select'e `cooldownUntil` eklendi, yanıt `cooldownUntil` (gelecekteyse ISO, değilse null) alanıyla genişledi — eski alanlar aynen duruyor.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `cd95f0f53fda028a478d19a6e0751fdf1bd39d22` · backend main `b3502a52d4ac21952c41fc82016d75a972ebe501`
+- **Geri alma:** backend'de `git revert <AJ-60 commit>` (şema/migration yok).
+
+### 2) `frontend/src/app/(dashboard)/mentor/certification/page.tsx` — son adım düğmesi ve mola uyarısı
+- **Eski hâl (AYNEN, değişen satırlar):**
+```tsx
+              <Button onClick={() => void proceed()} size="sm">
+                {topicIdx >= topics.length - 1 &&
+                !(variantIdx === 0 && !reveal.firstAttemptPass && currentTopic.variants.length > 1)
+                  ? 'Bitir ve değerlendir →'
+                  : 'Devam →'}
+              </Button>
+```
+```tsx
+            <AlertMessage
+              type="error"
+              message={
+                cooldownRunning && cooldownUntil
+                  ? CERT_COOLDOWN_TEXT.alreadyActive(formatRemaining(cooldownUntil, now))
+                  : CERT_COOLDOWN_TEXT.alreadyActiveUnknown
+              }
+            />
+```
+```tsx
+          {cooldownActive && (
+            <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+```
+- **Neden yazılmıştı:** AJ-37 kalan süreyi yalnız değerlendirme gönderildikten sonra (409 / sonuç ekranı) gösterdi; son adım düğmesi her zaman açıktı.
+- **Neden değişti:** mola sürerken "Bitir ve değerlendir" kilitlenir (koşul `isFinalStep` sabitine çıkarıldı — metin seçimi aynı); süre ekran açıkken dolunca uyarı "mola bitince" metninde takılı kalmak yerine `CERT_COOLDOWN_TEXT.ended` gösterir ve Öğrenme Yolculuğu köprüsü gizlenir.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `23a7431ec8575428c7dd45ce1ecb6163dabe71af` · çatı main `23f761a517dd9041f4e7a1abac4c566fb9c4a8a0`
+- **Geri alma:** çatıda `git revert <AJ-60 commit>`.
+
+
+---
+
+## AJ-70 — üç soru ekranı form görünümüne alındı + kart öncesi kısa geçiş (çatı `otonom/AJ-70-onboarding-gecis-20260928`)
+
+**Özet gerekçe:** madde 141 (`docs/kararlar/00-KARAR-TAKIP.md:311`) PO ek önlemleri: (1) üç soru kart ekranından
+FARKLI görsel dilde olmalı ("test bitti, form dolduruyorum" hissi); (2) kart açılışına kısa gecikme — sorulardan
+ayırsın, ödül anını belirginleştirsin. I-02 yalnız sıra + cümleyi yapmıştı. Hiçbir özellik/veri/uç kaldırılmadı;
+yalnız görünüm (sınıflar, kap öğesi) ve adım geçişi değişti. Son commit (iki dosya): `1a1fb9a`.
+Geri alma: `git revert <AJ-70 merge commit>` ya da aşağıdaki eski hâlleri geri yapıştır.
+
+### 1. `frontend/src/app/onboarding/_steps/ThreeQuestionsStep.tsx` — kap öğesi + seçenek görünümü (satır 58-188, eski hâl aynen)
+
+- **Neden yazılmıştı:** §10.2 üç soru ekranı (S1 çoklu, S2/S3 tek seçim); F-21 radiogroup erişilebilirliği.
+- **Neden değişti:** kart ekranıyla aynı görsel dili (yuvarlak hap düğmeler, `rounded-xl` kartlar, `scale-105`) paylaşıyordu.
+  Yeni hâl: adlandırılmış `<form aria-label="Tercihler">`, nötr zemin + düz kenarlık, bölmeli sorular, onay kutusu /
+  seçim düğmesi işaretli satırlar, gönderim form `onSubmit` üzerinden (düğme `type="submit"`). Seçenek metinleri,
+  roller, `aria-pressed`/`aria-checked`, gönderilen veri AYNI.
+
+```tsx
+  const handleSubmit = () => {
+    if (!canSubmit) return;
+    const s1Payload = isMentor
+      ? (s1Sel.length > 0 ? { mentorStrengths: s1Sel as MentorStrength[] } : {})
+      : (s1Sel.length > 0 ? { mentiNeeds: s1Sel as MentiNeed[] } : {});
+    onComplete({
+      ...s1Payload,
+      supportApproach: supportApproach!,
+      priorityValue:   priorityValue!,
+    });
+  };
+
+  return (
+    <div className="space-y-8">
+      {/* ── S1 — ihtiyaç / fayda (en fazla 2, opsiyonel) ─────────────────── */}
+      <fieldset>
+        <legend className="text-sm font-semibold text-foreground mb-1">{s1.prompt}</legend>
+        <p className="text-xs text-muted-foreground mb-3">
+          En fazla 2 seçebilirsin · emin değilsen boş bırakabilirsin
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {s1.options.map(({ value, label }) => {
+            const selected = s1Sel.includes(value);
+            const disabled = !selected && atLimit;
+            return (
+              <button
+                key={value}
+                type="button"
+                onClick={() => toggleS1(value)}
+                disabled={disabled}
+                aria-pressed={selected}
+                className={cn(
+                  'rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all',
+                  selected
+                    ? 'bg-primary/15 text-primary border-primary shadow-sm scale-105'
+                    : disabled
+                      ? 'bg-muted/40 text-muted-foreground/40 border-border cursor-not-allowed'
+                      : 'bg-background text-muted-foreground border-border hover:border-primary/50 hover:text-foreground',
+                )}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      {/* ── S2 — yaklaşım (zorunlu, tek seçim) ───────────────────────────── */}
+      <fieldset>
+        <legend id={s2LegendId} className="text-sm font-semibold text-foreground mb-3">
+          {s2.prompt} <span className="text-destructive">*</span>
+        </legend>
+        {/* F-21: tek seçim → radiogroup (ok tuşlarıyla gezilir ve seçilir). S1 çoklu seçim olduğu
+            için aria-pressed'li düğme olarak kalır. */}
+        <div
+          role="radiogroup"
+          aria-labelledby={s2LegendId}
+          aria-required="true"
+          onKeyDown={(e) => handleRadioGroupKeyDown(e)}
+          className="grid gap-2"
+        >
+          {s2.options.map(({ value, label }, index) => (
+            <button
+              key={value}
+              type="button"
+              role="radio"
+              aria-checked={supportApproach === value}
+              tabIndex={rovingTabIndex(index, s2.options.findIndex((o) => o.value === supportApproach))}
+              onClick={() => setSupportApproach(value)}
+              className={cn(
+                'rounded-xl border p-3 text-left text-sm transition-all',
+                supportApproach === value
+                  ? 'bg-primary/10 border-primary text-foreground font-semibold'
+                  : 'bg-card border-border hover:border-primary/40',
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
+      {/* ── S3 — öncelik/değer (zorunlu, tek seçim) ──────────────────────── */}
+      <fieldset>
+        <legend id={s3LegendId} className="text-sm font-semibold text-foreground mb-3">
+          {S3.prompt} <span className="text-destructive">*</span>
+        </legend>
+        <div
+          role="radiogroup"
+          aria-labelledby={s3LegendId}
+          aria-required="true"
+          onKeyDown={(e) => handleRadioGroupKeyDown(e)}
+          className="grid grid-cols-2 gap-2"
+        >
+          {S3.options.map(({ value, label }, index) => (
+            <button
+              key={value}
+              type="button"
+              role="radio"
+              aria-checked={priorityValue === value}
+              tabIndex={rovingTabIndex(index, S3.options.findIndex((o) => o.value === priorityValue))}
+              onClick={() => setPriorityValue(value)}
+              className={cn(
+                'rounded-xl border p-3 text-center text-sm transition-all',
+                priorityValue === value
+                  ? 'bg-primary/10 border-primary text-foreground font-semibold'
+                  : 'bg-card border-border hover:border-primary/40',
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
+      {error && (
+        <p className="text-sm text-destructive text-center" role="alert">{error}</p>
+      )}
+
+      <Button
+        onClick={handleSubmit}
+        disabled={!canSubmit || isSubmitting}
+        size="lg"
+        className="w-full h-12 text-base rounded-xl gap-2"
+      >
+        {isSubmitting ? UI_TEXT.status.saving : 'Tamamla ve Eşleşmeye Geç'}
+        {!isSubmitting && <ChevronRight className="h-4 w-4" aria-hidden />}
+      </Button>
+    </div>
+  );
+}
+```
+
+### 2. `frontend/src/app/onboarding/_OnboardingContent.tsx` — başarıda anında kart adımı (satır 163-170, eski hâl aynen)
+
+- **Neden yazılmıştı:** I-02 — üç soru kaydedilince kart (adım 4) açılsın.
+- **Neden değişti:** madde 141 PO ek önlemi 2 — kart doğrudan değil, kısa geçişle (`CARD_REVEAL_DELAY_MS`,
+  `frontend/src/lib/onboardingReveal.ts`) açılır; `prefers-reduced-motion`'da geçiş atlanır ve eski davranış (anında kart) korunur.
+
+```tsx
+    const result = await submitMatchingPreferences(data, accessToken, user.tenantId);
+
+    setIsSubmitting(false);
+    if (result.ok) {
+      setStep(3);
+    } else {
+      setStepError(result.error.message ?? 'Tercihlerin kaydedilemedi. Tekrar deneyin.');
+    }
+```

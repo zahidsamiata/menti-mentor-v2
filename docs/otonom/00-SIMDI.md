@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-28 11:25 UTC · çatı main HEAD (bu commit) · backend main HEAD `07d71a2`
+**Son güncelleme:** 2026-09-28 ~14:20 UTC · çatı main HEAD (bu commit) · backend main HEAD `e070ca4`
 
 **Durum:** CALISIYOR (devam turu — kota ~09:30 UTC'de kesti; 00-SIMDI 08:01'den beri güncellenmemişti). Sıra: 2.4 bölmeyi bitir (TEK BAŞINA) → AJ-58 → AJ-72 kaydı → 2.5 → GÖREV 3 KARAR-PAKETI (merge) + kart zenginleştirme → GÖREV 4 (AJ-83 …) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 3.1 kart zenginleştirme (dal `otonom/KART-ZENGIN-20260928`, kart kart commit) ∥ GÖREV 4 AJ-90 (mentör havuzu sayfalama, yazılıyor). BITTI bu devam turunda: 2.4 · AJ-72 kaydı · AJ-58 · 2.5 · KARAR-PAKETI · AJ-83.
+**Şu an yapılan:** GÖREV 4 — AJ-89 çatı #430 CI (backend #235 merge) · yazılıyor: AJ-66 · AJ-70. Bu devam turunda BITTI: 2.4 · AJ-72 kaydı · AJ-58 · 2.5 · KARAR-PAKETI · 3.1 (109 kart) · AJ-83 · AJ-90 · AJ-60 · AJ-65. Yeni kartlar: KARAR-129 · 130.
 
 **Devam turu — kesinti öncesi yarım kalanlar ve nasıl kapandı:**
 | İş | Dal | Son hâl (11:20 UTC teyit) | Kapanış PR'ı |
@@ -41,4 +41,4 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 
 **Strateji katmanına not:** 7b bir kez `node_modules` sembolik bağının backend commit'ine girdiğini yakaladı (AJ-69) — backend `.gitignore` `node_modules/` bağı yakalamıyordu; düzeltildi, uygulayıcı kurallarına ders eklendi. Yeni satırlar: AJ-96 · 97 · 98 · 99 · 100.
 
-**Sıradaki 5 iş:** AJ-90 → AJ-60 → AJ-89 (yönetici kolu; mentör kolu KARAR) → AJ-78 → AJ-65 · 3.1 PR.
+**Sıradaki 5 iş:** AJ-89 merge → AJ-78 (KPI, AJ-89'dan sonra) → AJ-63 → AJ-56 (kararsız kısım) → T3 AJ-94.
