@@ -41,6 +41,10 @@ export interface MentorMatch {
 
 export interface MentorMatchesResponse {
   items: MentorMatch[];
+  // AJ-90: sayfalama — total = tüm uygun mentör sayısı (sayfadan bağımsız).
+  total: number;
+  limit: number;
+  offset: number;
 }
 
 export interface RankedMenti {

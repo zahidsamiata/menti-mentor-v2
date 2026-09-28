@@ -8,6 +8,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import MentiDashboardPage from '@/app/(dashboard)/menti/page';
+import { MENTOR_POOL_PAGE_SIZE } from '@/lib/api/matching';
 import type { MentorMatch } from '@/types/matching';
 
 vi.mock('next/navigation', () => ({
@@ -54,7 +55,7 @@ const fadedMentor: MentorMatch = {
 let mentorMatchesResponse: unknown = { ok: true, data: { items: [bookableMentor, fadedMentor] } };
 
 const apiMock = vi.fn(async (path: string) => {
-  if (path === '/api/mentis/menti-1/mentor-matches?limit=100') return mentorMatchesResponse;
+  if (path === `/api/mentis/menti-1/mentor-matches?limit=${MENTOR_POOL_PAGE_SIZE}`) return mentorMatchesResponse;
   if (path === '/api/agreements/active') return { ok: false, error: { error: 'NOT_FOUND', message: 'yok' }, status: 404 };
   if (path === '/api/meetings') return { ok: true, data: { items: [] } };
   if (path === '/api/conversations') return { ok: true, data: { items: [] } };
