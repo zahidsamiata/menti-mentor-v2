@@ -25,7 +25,7 @@ import { apiClient, refreshCallbackRef } from '@/lib/api/client';
 import { toTenantBranding } from '@/lib/sessionTenant';
 import { clearQueryCache, setQueryCacheScope } from '@/lib/queryCache';
 import type { TenantBranding } from '@/types/tenant';
-import { fetchOwnTenantVerificationStatus } from '@/lib/api/tenantStatus';
+import { fetchOwnTenantStatus } from '@/lib/api/tenantStatus';
 import type {
   AuthContextValue,
   AuthUser,
@@ -176,9 +176,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // AJ-35: kurum yöneticisi sonradan giriş yaptığında kurumunun başvuru durumunu (inceleniyor /
     // reddedildi) görebilsin diye durumu oku. Login yanıtı bu alanı taşımaz; `/api/auth/me` askı
     // kapısından muaftır (reddedilen kurumda da yanıt verir) ve kurumu oturumdan alır (IDOR yok).
+    // AJ-72: aynı yanıttan kurumun askıda olup olmadığı da okunur (dondurulmuş kurumun yöneticisi
+    // panel yerine askı ekranına gider) — ek istek yok.
     if (userData.role !== 'ADMIN') return userData;
-    const tenantVerificationStatus = await fetchOwnTenantVerificationStatus(newToken, userData.tenantId);
-    return { ...userData, tenantVerificationStatus };
+    const ownTenant = await fetchOwnTenantStatus(newToken, userData.tenantId);
+    return {
+      ...userData,
+      tenantVerificationStatus: ownTenant?.verificationStatus ?? null,
+      tenantIsSuspended: ownTenant?.isSuspended ?? null,
+    };
   }, [scheduleTokenRefresh]);
 
   // ── OAuth token ile giriş (Google / LinkedIn callback) ──────────────────

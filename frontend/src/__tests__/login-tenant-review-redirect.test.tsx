@@ -86,10 +86,14 @@ describe('AJ-35 · LoginForm: kurum yöneticisi kurum durumuna göre yönlendiri
   });
 
   it('AJ-59 · negatif: dondurulmuş (onaylı ama askıda) kurumun yöneticisi durum ekranına gönderilmez', async () => {
-    // Askı `verificationStatus` değil `isSuspended` ile gelir; onaylı kurum durum ekranında
-    // "Onaylandı → Giriş Yap" görür → giriş döngüsü. Mevcut davranış (panel) korunur.
-    expect(await submitAs({ ...admin, tenantVerificationStatus: 'APPROVED', isSuspended: true }))
-      .toBe('/admin/waiting-room');
+    // Askı `verificationStatus` değil askı bayrağıyla gelir; onaylı kurum durum ekranında
+    // "Onaylandı → Giriş Yap" görür → giriş döngüsü. Durum ekranına GİTMEZ.
+    // ⚠️ AJ-72 (2026-09-28): beklenen hedef panel → askı ekranı. Gerekçe: panelde her istek 403
+    // KURUM_ASKIDA alıyordu (açıklamasız); artık yönetici askı ekranını görür. Alan adı da
+    // AuthProvider.login dönüşüyle aynı (`tenantIsSuspended`).
+    const target = await submitAs({ ...admin, tenantVerificationStatus: 'APPROVED', tenantIsSuspended: true });
+    expect(target).not.toBe(REVIEW_PATH);
+    expect(target).toBe('/kurum-askida');
   });
 });
 
@@ -123,7 +127,7 @@ describe('AJ-35 · AuthProvider.login: yönetici için kurum durumu /api/auth/me
       if (path === '/api/auth/me') {
         return Promise.resolve(meStatus === 'ERROR'
           ? { ok: false, status: 500, error: {} }
-          : { ok: true, data: { tenant: { verificationStatus: meStatus } } });
+          : { ok: true, data: { tenant: { verificationStatus: meStatus, isSuspended: meStatus === 'REJECTED' } } });
       }
       return Promise.resolve({ ok: false, status: 404, error: {} });
     });
@@ -137,7 +141,7 @@ describe('AJ-35 · AuthProvider.login: yönetici için kurum durumu /api/auth/me
       return (
         <button onClick={async () => {
           const r = await login({ email: 'y@ornek-kurum.test', password: 'Gizli-sifre-1' });
-          setOut(JSON.stringify({ role: r.role, status: r.tenantVerificationStatus ?? 'yok' }));
+          setOut(JSON.stringify({ role: r.role, status: r.tenantVerificationStatus ?? 'yok', suspended: r.tenantIsSuspended ?? 'yok' }));
         }}>{out}</button>
       );
     }
@@ -145,12 +149,13 @@ describe('AJ-35 · AuthProvider.login: yönetici için kurum durumu /api/auth/me
     await waitFor(() => expect(apiMock).toHaveBeenCalledWith('/api/auth/refresh', expect.anything()));
     fireEvent.click(screen.getByRole('button'));
     await waitFor(() => expect(screen.getByRole('button')).not.toHaveTextContent('bekliyor'));
-    return JSON.parse(screen.getByRole('button').textContent ?? '{}') as { role: string; status: string };
+    return JSON.parse(screen.getByRole('button').textContent ?? '{}') as { role: string; status: string; suspended: boolean | 'yok' };
   }
 
   it('yönetici girişinde durum yeni anahtarla /api/auth/me\'den okunur ve döner', async () => {
     mockBackend('ADMIN', 'REJECTED');
-    expect(await loginAndGetResult()).toEqual({ role: 'ADMIN', status: 'REJECTED' });
+    // AJ-72: askı bilgisi aynı yanıttan okunur (ek istek yok).
+    expect(await loginAndGetResult()).toEqual({ role: 'ADMIN', status: 'REJECTED', suspended: true });
     expect(apiMock).toHaveBeenCalledWith('/api/auth/me', expect.objectContaining({ token: 'yeni-anahtar' }));
     // AJ-59: ortak okuyucu 401'de sessiz yenileme tetiklemez (ikinci refresh rotasyon kilidine takılır).
     expect(apiMock).toHaveBeenCalledWith('/api/auth/me', expect.objectContaining({ withRefresh: false }));
@@ -158,12 +163,12 @@ describe('AJ-35 · AuthProvider.login: yönetici için kurum durumu /api/auth/me
 
   it('durum okunamazsa null döner (giriş bozulmaz)', async () => {
     mockBackend('ADMIN', 'ERROR');
-    expect(await loginAndGetResult()).toEqual({ role: 'ADMIN', status: 'yok' });
+    expect(await loginAndGetResult()).toEqual({ role: 'ADMIN', status: 'yok', suspended: 'yok' });
   });
 
   it('yönetici olmayan üyede /api/auth/me çağrılmaz', async () => {
     mockBackend('MENTI', 'PENDING_REVIEW');
-    expect(await loginAndGetResult()).toEqual({ role: 'MENTI', status: 'yok' });
+    expect(await loginAndGetResult()).toEqual({ role: 'MENTI', status: 'yok', suspended: 'yok' });
     expect(apiMock.mock.calls.some((c) => c[0] === '/api/auth/me')).toBe(false);
   });
 });

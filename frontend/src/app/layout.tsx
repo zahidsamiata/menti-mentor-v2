@@ -3,6 +3,7 @@
  *
  * Provider hiyerarşisi:
  *   AuthProvider           → token, user state
+ *     TenantSuspensionRedirect → 403 KURUM_ASKIDA gelince askı ekranına yönlendirir (AJ-72)
  *     AuthTenantBridge     → login sonrası tenant verisini çeker, TenantProvider'ı besler
  *       {children}
  *
@@ -15,6 +16,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { AuthTenantBridge } from '@/providers/AuthTenantBridge';
+import { TenantSuspensionRedirect } from '@/providers/TenantSuspensionRedirect';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { getSiteUrl } from '@/lib/siteUrl';
 import { ScrollToTopButton } from '@/components/atoms/ScrollToTopButton';
@@ -63,6 +65,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider>
           <AuthProvider>
+            {/* AJ-72: 403 KURUM_ASKIDA → askı ekranı (tek yerden). */}
+            <TenantSuspensionRedirect />
             <AuthTenantBridge>
               {children}
             </AuthTenantBridge>

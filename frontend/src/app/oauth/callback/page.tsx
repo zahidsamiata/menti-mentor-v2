@@ -20,6 +20,7 @@
  * yöneticisinin kurum durumu refresh yanıtında yoktur; yalnız yöneticide `/api/auth/me` bir kez
  * okunur (refresh DEĞİL — 401'de yenileme tetiklemez). İnceleme bekleyen / reddedilen kurumun
  * yöneticisi durum ekranına, diğerleri önceki gibi panele (`/dashboard`) gider.
+ * AJ-72: aynı yanıttaki askı bilgisiyle dondurulmuş kurumun yöneticisi askı ekranına gider.
  */
 
 import { Suspense, useEffect, useRef } from 'react';
@@ -27,7 +28,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { UI_TEXT } from '@/lib/uiText';
 import { getOAuthRedirect } from '@/lib/postLoginRedirect';
-import { fetchOwnTenantVerificationStatus } from '@/lib/api/tenantStatus';
+import { fetchOwnTenantStatus } from '@/lib/api/tenantStatus';
 
 /** Eski dönüş biçiminin adreste taşıdığı, artık okunmayan gizli parametreler. */
 const LEGACY_SECRET_PARAMS = ['accessToken', 'refreshToken', 'expiresIn'] as const;
@@ -76,8 +77,12 @@ function OAuthCallbackInner() {
       return;
     }
     void (async () => {
-      const tenantVerificationStatus = await fetchOwnTenantVerificationStatus(accessToken, user.tenantId);
-      router.replace(getOAuthRedirect({ role: user.role, tenantVerificationStatus }, { isNewUser }));
+      const ownTenant = await fetchOwnTenantStatus(accessToken, user.tenantId);
+      router.replace(getOAuthRedirect({
+        role: user.role,
+        tenantVerificationStatus: ownTenant?.verificationStatus ?? null,
+        tenantIsSuspended: ownTenant?.isSuspended ?? null,
+      }, { isNewUser }));
     })();
   }, [params, router, isLoading, isAuthenticated, user, accessToken]);
 

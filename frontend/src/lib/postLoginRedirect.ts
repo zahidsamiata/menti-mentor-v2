@@ -6,13 +6,14 @@
  * yöneticisi, kurumu inceleme bekliyor ya da reddedilmiş olsa da panele gidiyordu. Kural buraya
  * taşındı ki iki giriş yolu aynı sonucu versin. Saf fonksiyonlardır (ağ/React yok) — birim testlenir.
  *
- * Bilerek KAPSAM DIŞI: platformun dondurduğu (onaylı ama askıdaki, `isActive=false`) kurum.
- * Onun durumu `verificationStatus` değil `tenant.isSuspended` ile gelir; bu modül ona özel bir
- * hedef seçmez (yönetici eskisi gibi panele gider). Durum ekranı APPROVED kurum için "Onaylandı →
- * Giriş Yap" gösterdiğinden dondurulmuş kurumu oraya göndermek giriş döngüsü yaratırdı. Askıdaki
- * yöneticiye ne gösterileceği ürün kararıdır (kuruma görünen metin).
+ * AJ-72: platformun dondurduğu (onaylı ama askıdaki, `isActive=false`) kurumun yöneticisi artık
+ * askı ekranına (`/kurum-askida`) gider — eskiden panele gidip her istekte 403 alıyordu. Askı
+ * `verificationStatus` değil `tenant.isSuspended` ile gelir. Durum ekranına (`pending-review`)
+ * GÖNDERİLMEZ: o ekran APPROVED kurum için "Onaylandı → Giriş Yap" gösterir → giriş döngüsü.
+ * Reddedilen (REJECTED) kurum da askıdadır ama kendi ret ekranı olduğundan durum ekranı önceliklidir.
  */
 import type { TenantVerificationStatus } from '@/lib/api/selfServe';
+import { TENANT_SUSPENDED_PATH } from '@/lib/tenantSuspension';
 
 /** Hesabı onay bekleyen kullanıcının bekleme ekranı. */
 export const PENDING_APPROVAL_PATH = '/pending-approval';
@@ -37,16 +38,22 @@ export interface PostLoginUser {
   discType: string | null;
   /** Yalnız kurum yöneticisi için okunur; okunamadıysa null/undefined (yönlendirme değişmez). */
   tenantVerificationStatus?: TenantVerificationStatus | null;
+  /** AJ-72: kurum askıda mı (dondurma/ret). Yalnız kurum yöneticisi için okunur; yoksa askı sayılmaz. */
+  tenantIsSuspended?: boolean | null;
 }
 
 /**
- * Kurum yöneticisinin durum ekranına gitmesi gerekiyorsa o adresi, gerekmiyorsa null döner.
- * İki giriş yolunun ORTAK kuralı budur.
+ * Kurum yöneticisinin durum ekranına ya da askı ekranına gitmesi gerekiyorsa o adresi,
+ * gerekmiyorsa null döner. İki giriş yolunun ORTAK kuralı budur.
+ * Sıra: inceleniyor/reddedildi → durum ekranı (ret ekranı orada) · değilse askıda → askı ekranı.
  */
-export function getTenantReviewRedirect(user: Pick<PostLoginUser, 'role' | 'tenantVerificationStatus'>): string | null {
+export function getTenantReviewRedirect(
+  user: Pick<PostLoginUser, 'role' | 'tenantVerificationStatus' | 'tenantIsSuspended'>,
+): string | null {
   if (user.role !== 'ADMIN') return null;
   const status = user.tenantVerificationStatus;
   if (status && TENANT_REVIEW_SCREEN_STATUSES.includes(status)) return TENANT_REVIEW_PATH;
+  if (user.tenantIsSuspended === true) return TENANT_SUSPENDED_PATH;
   return null;
 }
 
@@ -54,7 +61,7 @@ export function getTenantReviewRedirect(user: Pick<PostLoginUser, 'role' | 'tena
 //   status PENDING  → /pending-approval  (backend 403 → LoginForm catch bloğu da yakalar)
 //   status APPROVED → rol bazlı:
 //     ADMIN   → kurum başvurusu inceleniyor/reddedildi ise /onboarding/stk/pending-review (AJ-35),
-//               değilse /admin/waiting-room
+//               kurum askıdaysa /kurum-askida (AJ-72), değilse /admin/waiting-room
 //     MENTOR  → discType yoksa /onboarding (8-soru DISC), varsa /mentor
 //     MENTI   → discType yoksa /onboarding (8-soru DISC), varsa /menti
 // Not: Platform admin (/platform) ayrı endpoint'ten giriş yapar; buradan yönlendirilmez.
@@ -74,7 +81,7 @@ export function getSmartRedirect(user: PostLoginUser): string {
  * için hoş geldin).
  */
 export function getOAuthRedirect(
-  user: Pick<PostLoginUser, 'role' | 'tenantVerificationStatus'>,
+  user: Pick<PostLoginUser, 'role' | 'tenantVerificationStatus' | 'tenantIsSuspended'>,
   options: { isNewUser: boolean },
 ): string {
   return getTenantReviewRedirect(user) ?? (options.isNewUser ? OAUTH_WELCOME_PATH : OAUTH_DEFAULT_PATH);

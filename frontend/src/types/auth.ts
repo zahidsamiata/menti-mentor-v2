@@ -47,6 +47,8 @@ export interface LoginResponse {
  */
 export type LoginResult = LoginResponse['user'] & {
   tenantVerificationStatus?: TenantVerificationStatus | null;
+  /** AJ-72: kurum askıda mı (aynı `/api/auth/me` yanıtından; okunamazsa null). */
+  tenantIsSuspended?: boolean | null;
 };
 
 /** login / refresh yanıtındaki kurum markası (oturumdaki kullanıcının KENDİ kurumu). */
