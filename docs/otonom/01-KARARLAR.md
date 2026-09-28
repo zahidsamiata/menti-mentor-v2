@@ -167,6 +167,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-123** | **Kayıtta üç soruyu atlayan kişiye sonradan sorulsun mu** | **0** | ⬜ boş · ajan-ekledi · öneri A |
 | **KARAR-124** | **Platform yöneticisinin "mentör/menti sayısı" neyi saysın: kişiyi mi, kurum üyeliğini mi** | **0** (cevap 1 küçük iş açar) | ⬜ boş · ajan-ekledi · öneri C |
 | **KARAR-125** | **Mentör/menti kendi kurumunu platforma önerebilsin mi ("ters çekim")** | **0** | ⬜ boş · ajan-ekledi · öneri A |
+| **KARAR-126** | **Az yanıtlı ilk ayda "NPS düşüşü" önerisi çıkmasın mı (KVKK çıkarımı)** | **0** | ⬜ boş · ajan-ekledi (AJ-69) · öneri B |
 
 ---
 
@@ -1961,4 +1962,17 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** Önce ilk kurumların oturması istiyorsan A; büyümeyi insan kontrolünde denemek istiyorsan B; kurum kazanımı ana büyüme kanalı olacaksa C.
 **Benim önerim:** A (şimdilik) — gerçek kullanıcı ~0 iken büyüme kanalı erken; gelir modeli (KARAR-119) ile birlikte düşün; bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** Kanal kapalı kalır; başka iş kilitlenmez.
+**CEVAP:**
+
+### KARAR-126 · Az yanıtlı ilk ayda "NPS düşüşü" önerisi hiç çıkmasın mı? (0 iş kilitliyor; cevap 1 küçük iş açar) [ÜRÜN KARARI · KVKK]
+**Şu an ne var:** Algoritma ayar ekranı ve öneri e-postası artık 1-2 yanıtlı NPS ortalamasını göstermiyor ("gizli (<3 yanıt)") — AJ-69, backend #220. Ama öneri motoru kararı ham sayıyla veriyor: "1. aydan 3. aya NPS düşüşü" gerekçesi yalnız 1. ay ortalaması 7 ve üstüyse çıkıyor. Kanıt: `backend/src/services/algorithmTuner.ts` `decideSectorWeight` (düşüş dalı, 1. ay ≥ 7 şartı) · maske `backend/src/services/mask.ts` `maskNpsSample`.
+**Sorun ne:** 1. ayda yalnız 1-2 kişi puan verdiyse ve bu gerekçe ekrana geldiyse, kurum yöneticisi "o 1-2 kişinin ortalaması en az 7'ydi" sonucunu çıkarabilir. Sayı görünmüyor ama bir bitlik bilgi sızıyor. Pencere dar, yalnız kurum yöneticisi görüyor (7b incelemesi: engelleyici değil, kalan risk).
+**Neden sana soruyorum:** Kapatmak öneri motorunun davranışını değiştirir — bazı kurumlara hiç "düşüş" önerisi gitmez. Bu, ürünün ne önereceği kararı; gizlilik ile öneri kalitesi arasında seçim.
+**Seçenekler:**
+- **A) Bugünkü gibi kalsın (sayı gizli, gerekçe çıkabilir).** · Kullanıcı ne görür: az yanıtta da düşüş önerisi gelebilir, sayı "gizli" · Kazanç: öneri kalitesi değişmez · Kaybedersin: küçük örnekte "≥7" çıkarımı mümkün kalır · Süre: — · Geri alınır: evet · Migration: yok
+- **B) 1. ay yanıtı eşiğin (3) altındaysa düşüş kuralı hiç çalışmasın.** · Kullanıcı ne görür: az yanıtlı kurumda "düşüş" önerisi yok; öneri yalnız 3. ay verisine dayanır · Kazanç: çıkarım kapanır, küçük örnekten karar verilmez (istatistiksel olarak da daha sağlam) · Kaybedersin: gerçekten düşüş olan küçük kurumda erken uyarı gecikir · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Gerekçe metni hiç gösterilmesin, yalnız önerilen ağırlık görünsün.** · Kullanıcı ne görür: "Sektör ağırlığı 0,55 önerildi" — nedeni yazmaz · Kazanç: hiçbir çıkarım yok, motor aynı · Kaybedersin: yönetici önerinin nedenini bilmeden onaylar; güven azalır · Süre: S · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Küçük kurumlarda gizlilik öndeyse B; öneri nedeninin şeffaflığı öndeyse A; motoru hiç değiştirmeden gizliliği sağlamak istiyorsan C (ama yönetici kör onaylar).
+**Benim önerim:** B — 1-2 yanıttan "düşüş" sonucu çıkarmak zaten zayıf bir karar; aynı değişiklik çıkarımı da kapatıyor.
+**Cevap vermezsen:** Bugünkü davranış (A) sürer; başka iş kilitlenmez. İlgili: AJ-69 (BITTI olunca), AJ-99 (mentör paneli NPS).
 **CEVAP:**
