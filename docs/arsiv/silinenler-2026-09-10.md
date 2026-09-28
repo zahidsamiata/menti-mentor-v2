@@ -15,7 +15,7 @@
 - Kapı, rota zincirinde **kimlik doğrulamadan SONRA** durur: oturumsuz/yanlış rol eskisi gibi 401/403 alır; yetkili çağıran `410 {"error":"ENDPOINT_QUARANTINED","message":"Bu uç kullanımdan kaldırıldı."}` alır, handler çalışmaz.
 - Her çağrı `SystemLog`'a yazılır: seviye WARN, kategori HTTP, mesaj `Karantinadaki uç çağrıldı: <anahtar>`, meta `{key, method, route}` (rota KALIBI, id yok). ⇒ **Bir tur izleme ölçütü:** platform paneli › Sistem kayıtları'nda bu mesaj hiç görünmüyorsa uç gerçekten kullanılmıyor demektir (E-5 silme turunun kanıtı).
 - **Acil geri açma (kod değişmeden):** sunucu ortamına `QUARANTINE_REOPEN=<anahtar>[,<anahtar>…]` eklenir (Dokploy ortam değişkeni — PO eli). İstek anında okunur.
-- **Kalıcı geri alma (tümü):** backend karantina commit'i `0c8a97d` → `git -C backend revert 0c8a97d` (merge edildiyse merge commit'i: `git -C backend revert -m 1 <merge-sha>`), çatı ön yüz işaretleri → çatı karantina commit'inin `git revert`'ü. **Tek uç için:** ilgili rota satırından `quarantined('<anahtar>')` argümanını sil.
+- **Kalıcı geri alma (tümü):** backend karantina commit'i `0c8a97d` → `git -C backend revert 0c8a97d` (merge edildiyse merge commit'i: `git -C backend revert -m 1 <merge-sha>`), çatı ön yüz işaretleri (commit `ae7139b` arşivle birlikte geldi; arşivi korumak için yalnız iki dosyayı geri al) → `git checkout ae7139b~1 -- frontend/src/components/organisms/MeetingScheduler.tsx frontend/src/lib/api/meetings.ts`. **Tek uç için:** ilgili rota satırından `quarantined('<anahtar>')` argümanını sil.
 
 ## Karantinaya alınanlar — özet tablo
 

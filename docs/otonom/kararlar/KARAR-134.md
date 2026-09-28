@@ -9,7 +9,7 @@
 - kullanılmayan randevu bileşeni (`MeetingScheduler`) → mentör müsaitlik sayfası + menti randevu sayfası işi kendi içinde yapıyor
 
 **Ne değişir:** Bu 7 uç çağrılırsa artık "kullanımdan kaldırıldı" (410) yanıtı verir ve her çağrı sistem kayıtlarına yazılır (platform paneli › Sistem kayıtları, "Karantinadaki uç çağrıldı"). Kod SİLİNMEZ; yerinde durur. Ekran bileşeni yalnız "kullanma" notuyla işaretlenir. Giriş yapmamış biri eskisi gibi "giriş gerekli" alır — güvenlik kapıları değişmez. Neden: senin KARAR-11 cevabın (A — "önce karantina, bir tur bekle, sonra sil"). Tam liste, her birinin neden yazıldığı ve eski kodun tamamı: `docs/arsiv/silinenler-2026-09-10.md`.
-**Geri alınır mı:** Evet, iki yoldan. (1) Kod değişmeden: sunucu ayarına `QUARANTINE_REOPEN=<uç adı>` eklenirse o uç hemen geri açılır. (2) Kalıcı: tek commit geri alınır (`git -C backend revert 0c8a97d` + çatı commit'inin revert'ü).
+**Geri alınır mı:** Evet, iki yoldan. (1) Kod değişmeden: sunucu ayarına `QUARANTINE_REOPEN=<uç adı>` eklenirse o uç hemen geri açılır. (2) Kalıcı: tek commit geri alınır (`git -C backend revert 0c8a97d`; ön yüz işaretleri için arşivdeki tek satırlık komut).
 **Yedeği alınacak tablo:** YOK — veri değişmiyor, veritabanı yapısı değişmiyor.
 **Durum:** backend PR (dal `otonom/E-4-karantina-20260928`) + çatı PR (aynı dal: arşiv belgesi + ön yüz işaretleri + bu kart). Silme DEĞİL: gerçek silme bir tur sonra ayrı iştir (E-5) ve senin İKİNCİ onayını ister.
 **EVET** → ajan iki PR'ı merge eder, pointer'ı taşır, canlı kontrol yapar. Bir tur boyunca sistem kayıtlarına bakılır: bu uçlara hiç çağrı gelmezse E-5'te silme için ikinci onayın sorulur.
