@@ -394,10 +394,10 @@ Belge oluşturur/düzenlerken oraya bak; kuralların tamamı orada.
   **platform:** `POST /api/platform/auth` · `/logout` ·
   **onboarding/kurum:** `GET /api/invitations/:token/join` · `GET /api/tenants/self-serve/check-slug` ·
   `POST /api/tenants/self-serve/register` · `GET /api/tenants/unsubscribe` ·
-  **diğer:** `POST /api/suspicion-reports` · `GET /health` · `GET /uploads/**` (statik, CSP-sandbox).
+  **diğer:** `POST /api/suspicion-reports` · `POST /api/csp-reports` (tarayıcının CSP ihlal raporu; `cspReportRateLimiter` IP-bazlı, 8 KB, her durumda 204 — AJ-52) · `GET /health` · `GET /uploads/**` (statik, CSP-sandbox).
   `/api` altındakilerin hepsi rate-limitli (genel sınır yalnız `/api` altına bağlı — `server.ts:87-88`; `/health` ve `/uploads/**` hariç). **Bunun DIŞINDA public endpoint YOK** — yeni public uç eklenirse buraya eklenir.
   (Kanıt: `authRoutes.ts:25-87` · `platformRoutes.ts:35-36` · `invitationRoutes.ts:13` ·
-  `selfServeRoutes.ts:24-40` · `suspicionRoutes.ts:11` · `server.ts:63,74`.)
+  `selfServeRoutes.ts:24-40` · `suspicionRoutes.ts:11` · `cspReportRoutes.ts:12-18` · `server.ts:63,74`.)
 
 ### Veri döndürürken
 - Explicit `select` kullan — `password` ASLA dönmesin.

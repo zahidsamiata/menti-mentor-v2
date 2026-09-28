@@ -36,10 +36,24 @@
  *   <script> yükler (script-src) ve kendi doğrulama arayüzünü bir <iframe> içinde render eder
  *   (frame-src). `NEXT_PUBLIC_TURNSTILE_SITE_KEY` tanımsızken widget hiç mount edilmez → bu
  *   kaynaklar rapor modunda dahi hiçbir isteğe yol açmaz; anahtar girilince aktifleşir.
+ *
+ * ── İhlal raporu — AJ-52 ─────────────────────────────────────────────────────────
+ * Engellenen kaynak tarayıcıda sessizce kaybolmasın diye tarayıcı ihlali backend'e bildirir:
+ * `report-uri <api-origin>/api/csp-reports` (eski yol; Firefox dahil yaygın destek) +
+ * `report-to csp-endpoint` ve `Reporting-Endpoints` başlığı (Reporting API; destekleyen tarayıcı
+ * `report-uri`'yi yok sayar → çift rapor olmaz). Uç public'tir, oran sınırlı ve PII'siz yazar
+ * (`backend/src/services/cspReport.ts`). API origin'i bilinmiyorsa (NEXT_PUBLIC_API_URL yok/geçersiz)
+ * rapor yönergesi EKLENMEZ: göreli adres ön yüzün kendisine gider, orada uç yok.
  */
 
 /** Gönderilen başlık adı — engelleyen (enforce) mod. */
 export const CSP_HEADER_NAME = 'Content-Security-Policy';
+
+/** Backend'deki ihlal raporu ucunun yolu (`backend/src/server.ts`). */
+export const CSP_REPORT_PATH = '/api/csp-reports';
+
+/** `report-to` ve `Reporting-Endpoints` başlığındaki uç adı. */
+export const CSP_REPORT_GROUP = 'csp-endpoint';
 
 /** OAuth avatar hostları — `images.remotePatterns` (next/image) listesi. */
 export const DEFAULT_IMAGE_DOMAINS = [
@@ -96,6 +110,10 @@ export function buildContentSecurityPolicy({ apiUrl, isDev = false } = {}) {
     'base-uri': ["'self'"],
     'form-action': ["'self'"],
     'frame-ancestors': ["'none'"],
+    ...(api && {
+      'report-uri': [`${api}${CSP_REPORT_PATH}`],
+      'report-to': [CSP_REPORT_GROUP],
+    }),
   };
 
   return Object.entries(directives)
@@ -109,5 +127,9 @@ export function buildContentSecurityPolicy({ apiUrl, isDev = false } = {}) {
  * @returns {{ key: string, value: string }[]}
  */
 export function buildSecurityHeaders(options = {}) {
-  return [{ key: CSP_HEADER_NAME, value: buildContentSecurityPolicy(options) }];
+  const api = apiOrigin(options.apiUrl);
+  return [
+    { key: CSP_HEADER_NAME, value: buildContentSecurityPolicy(options) },
+    ...(api ? [{ key: 'Reporting-Endpoints', value: `${CSP_REPORT_GROUP}="${api}${CSP_REPORT_PATH}"` }] : []),
+  ];
 }

@@ -13,6 +13,8 @@ import {
   apiOrigin,
   buildContentSecurityPolicy,
   buildSecurityHeaders,
+  CSP_REPORT_GROUP,
+  CSP_REPORT_PATH,
   resolveImageDomains,
 } from '@/lib/securityHeaders.mjs';
 
@@ -30,7 +32,7 @@ describe('buildSecurityHeaders (F-04 CSP)', () => {
   it('AJ-22: engelleyen CSP başlığı gönderir (Report-Only DEĞİL)', () => {
     const headers = buildSecurityHeaders({ apiUrl: 'https://api.example.org' });
     expect(CSP_HEADER_NAME).toBe('Content-Security-Policy');
-    expect(headers.map((h) => h.key)).toEqual(['Content-Security-Policy']);
+    expect(headers.map((h) => h.key)).toEqual(['Content-Security-Policy', 'Reporting-Endpoints']);
     expect(headers.some((h) => /report-only/i.test(h.key))).toBe(false);
     const d = parsePolicy(headers[0].value);
     expect(d['frame-ancestors']).toEqual(["'none'"]);
@@ -89,5 +91,25 @@ describe('buildSecurityHeaders (F-04 CSP)', () => {
     const d = parsePolicy(buildContentSecurityPolicy({ apiUrl: 'https://api.example.org' }));
     expect(d['script-src']).toContain('https://challenges.cloudflare.com');
     expect(d['frame-src']).toContain('https://challenges.cloudflare.com');
+  });
+
+  it('AJ-52: ihlal raporu backend ucuna gider — report-uri + report-to + Reporting-Endpoints', () => {
+    const headers = buildSecurityHeaders({ apiUrl: 'https://api.example.org/api?x=1' });
+    const d = parsePolicy(headers[0].value);
+    expect(CSP_REPORT_PATH).toBe('/api/csp-reports');
+    expect(d['report-uri']).toEqual(['https://api.example.org/api/csp-reports']);
+    expect(d['report-to']).toEqual([CSP_REPORT_GROUP]);
+    const endpoints = headers.find((h) => h.key === 'Reporting-Endpoints');
+    expect(endpoints?.value).toBe('csp-endpoint="https://api.example.org/api/csp-reports"');
+  });
+
+  it('AJ-52: API adresi yok/geçersizse rapor yönergesi ve Reporting-Endpoints EKLENMEZ (göreli adres yok)', () => {
+    for (const apiUrl of [undefined, 'not a url']) {
+      const headers = buildSecurityHeaders({ apiUrl });
+      expect(headers.map((h) => h.key)).toEqual(['Content-Security-Policy']);
+      const d = parsePolicy(headers[0].value);
+      expect(d['report-uri']).toBeUndefined();
+      expect(d['report-to']).toBeUndefined();
+    }
   });
 });
