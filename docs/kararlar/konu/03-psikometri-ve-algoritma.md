@@ -52,7 +52,8 @@
   > ⚠️ GÜNCELLEME (2026-08-17): **BELGE-KOD ÇELİŞKİSİ — kod gerçeği = 3 SJT, "4" tasarım niyetidir.** `backend/prisma/seed.ts` `SJT_QUESTIONS` dizisinde **tam 3 soru** var (Q_MENTOR_CORE_01, Q_MENTI_CORE_01, Q_MENTI_FOLLOWUP_N_01, satır 530-573; doğrulandı) — ve bunlar OCEAN kalibrasyonu içindir, "Mini Akademi" modülü olarak kodlanmamıştır. İçeriği 4'e (niyet) genişletme = seed+içerik işi → **PO kararı** (yol haritası #33). Kod DEĞİŞMEDİ; yalnız bu not eklendi (envanter/içerik raporları da "kod 3, belge 4" der).
 - ~~[ESKİ · 2026-09-28] **Baraj 65 + kırmızı-çizgi + cooldown:** 12 puan üzerinden %65 baraj VE hiçbir kırmızı-çizgi (isRedLine) sorusunda 0 puanlık şık seçilmemeli; 2. başarısızlıktan sonra 24s cooldown; baraj geçen çarpan=1.0.~~
   > ⚠️ GÜNCELLEME (2026-09-28, AJ-101): **baraj = aktif konuların %80'i ilk denemede geçilmeli (yukarı yuvarlanır), "12 puan üzerinden %65" DEĞİL** (T4 kararı) · kırmızı-çizgi korunuyor · 2 başarısız denemeden sonra 24 saat bekleme · sertifika alınınca çarpan 1.0 — kanıt: `backend/src/services/certification.service.ts:27-38` (`CERT_CONFIG.passRateThreshold: 0.8`, `attemptsBeforeCooldown: 2`, `cooldownHours: 24`) · `:52` `requiredToPass`.
-- Bağlam: `certification.service.ts`, PASS_THRESHOLD=65, CERT_CONFIG (passRateThreshold 0.8).
+- ~~[ESKİ · 2026-09-28] Bağlam: `certification.service.ts`, PASS_THRESHOLD=65, CERT_CONFIG (passRateThreshold 0.8).~~
+  > ⚠️ GÜNCELLEME (2026-09-28, AJ-101): `PASS_THRESHOLD` sabiti kodda YOK; tek eşik `CERT_CONFIG.passRateThreshold` 0.8 (`backend/src/services/certification.service.ts:27`).
 
 ## PROGRESSIVE PROFILING & FALLBACK 🟢✅ · doğrulama 09-28: `backend/src/services/matching.ts:52,128` · `backend/src/services/scoring.ts:118-121`
 - Test yarım kalsa da kesirli DISC vektörü + confidence skoru.

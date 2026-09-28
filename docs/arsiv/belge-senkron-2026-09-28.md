@@ -770,3 +770,9 @@
 ```text
 - **Baraj 65 + kırmızı-çizgi + cooldown:** 12 puan üzerinden %65 baraj VE hiçbir kırmızı-çizgi (isRedLine) sorusunda 0 puanlık şık seçilmemeli; 2. başarısızlıktan sonra 24s cooldown; baraj geçen çarpan=1.0.
 ```
+
+- (AJ-101, 7b notu) docs/kararlar/konu/03-psikometri-ve-algoritma.md:55 eski satır:
+
+```text
+- Bağlam: `certification.service.ts`, PASS_THRESHOLD=65, CERT_CONFIG (passRateThreshold 0.8).
+```
