@@ -365,6 +365,11 @@ export default function MentiDashboardPage() {
                           {mentor.isFaded && (
                             <Badge variant="outline" className="text-[10px] shrink-0">Sınırlı</Badge>
                           )}
+                          {/* AJ-66 · KARAR 4: sertifika herkese görünür, YALNIZ pozitif — sertifikasız
+                              mentörde hiçbir etiket yok. Metin yönetici havuzu rozetiyle aynı. */}
+                          {mentor.isCertified && (
+                            <Badge variant="success" className="text-[10px] shrink-0">✓ Sertifikalı</Badge>
+                          )}
                         </div>
                         <p className="text-xs text-muted-foreground truncate">
                           {mentor.sectorTags.length > 0
