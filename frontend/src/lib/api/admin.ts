@@ -68,9 +68,14 @@ export const adminApi = {
     api<NudgeResponse>(`/api/admin/users/${userId}/nudge`, { method: 'POST', body: { kind } }),
 
   // ── Kullanıcı Yönetimi ────────────────────────────────────────────────────
-  listUsers: (api: BoundClient, params: { approvalStatus?: string; role?: string; page?: number } = {}) => {
+  listUsers: (
+    api: BoundClient,
+    params: { approvalStatus?: string; role?: string; page?: number; search?: string } = {},
+  ) => {
     const qs = new URLSearchParams();
     if (params.approvalStatus) qs.set('approvalStatus', params.approvalStatus);
+    // AJ-106: ada göre arama (backend `search`) — seçim listeleri yalnız ilk sayfayla sınırlı kalmasın.
+    if (params.search) qs.set('search', params.search);
     if (params.role) qs.set('role', params.role);
     if (params.page) qs.set('page', String(params.page));
     return api<AdminUsersResponse>(`/api/admin/users?${qs.toString()}`);
