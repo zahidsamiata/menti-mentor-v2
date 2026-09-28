@@ -753,7 +753,7 @@ Bu belgeden çıkan her kalem: **kalem · durum · numara-adayı-mı**
 | 7 | Çatılı eşleşme — IndustryNode/LCA mantığını bağla | 🟨 kısmen — LCA mantığı hazır (`backend/src/services/taxonomy.service.ts:44`), canlıya bağlı değil; kalan: bağlama → F-11/PS-A3 (🔴 KARAR-61) | evet |
 | 8 | Kalite çarpanı çift-uygulama hatasını düzelt | ⚪ geçersiz — çift çarpım yok, belgenin kendi :39 notu çürüttü (`backend/src/services/scoring.ts:109`) (PO teyit listesinde) | evet |
 | 9 | Üç soru (S1/S2/S3 menti+mentör) veri toplama ekle | ⬜ AÇIK | evet |
-| 10 | Görünürlük kuralları (10.3) uygula | 🟨 kısmen — S1 ihtiyacı hiçbir ekranda gösterilmiyor (seçimde gizlilik fiilen sağlanıyor); kalan: eşleşme sonrası mentöre görünme + yöneticiye yalnız toplu dağılım → AJ-89 | evet |
+| 10 | Görünürlük kuralları (10.3) uygula | 🟨 kısmen — S1 ihtiyacı hiçbir ekranda gösterilmiyor (seçimde gizlilik fiilen sağlanıyor); kalan: eşleşme sonrası mentöre görünme + yöneticiye yalnız toplu dağılım → AJ-89 · 🟨 yönetici toplu dağılımı yapıldı — AJ-89 · PR #235/#430 · 2026-09-28; kalan: mentöre görünme anı → KARAR-130 | evet |
 | 11 | K-anonimlik eşiği (G1-22) belirle | ⚠️ GÜNCELLEME (2026-09-27): ✅ eşik = 3 (`backend/src/services/mask.ts:52`), V-05 ile KPI/analitiğe uygulandı; kalan algoritma ayar ekranı → AJ-69 · doğrulama: sahipsiz-kalanlar-2026-09-27 | evet |
 | 12 | Eşleşme kartı metni (10.5) — algılanan benzerlik cümlesi | 🟨 kısmen — iş sahiplendi; kalan: üç sorudan üretilen kart cümlesi → I-11 (🔴 KARAR-64) | evet |
 | 13 | Profil/hedef verisi envanter keşfi (S21) — üç soru ön koşulu | ⬜ AÇIK | evet |
