@@ -1,0 +1,14 @@
+### KARAR-89 · Görüşme değerlendirmesinin TEK kutusu hangisi olsun? (3 iş açar: KR-08, AN-49, KR-11) [ÜRÜN KARARI · MIGRATION]
+> ⭐ Kaynak: AN-47 envanteri `docs/raporlar/kesif/geri-bildirim-envanteri-2026-09-25.md` (çatı #301; 8 iddia koda karşı doğrulandı, inceleme 5829476679). **KARAR-77 (A) cevabıyla ÇELİŞKİ tespiti — KR-08 bu kart cevaplanana kadar 🔴.**
+**Şu an ne var:** Görüşme sonrası değerlendirme için dört ayrı kayıt kutusu var. Ekrandan gerçekten dolan TEK kutu `MeetingCheckIn` (görüşme sonrası kısa değerlendirme sayfası `/meeting-checkin`, `frontend/src/app/…/meeting-checkin/page.tsx:82`); bu kutu KARAR-77'nin istediği "her taraf kendi kaydını yazar" düzenini zaten uyguluyor. `Feedback` kutusu (puanlar, NPS) ekrandan dolmuyor: `/periodic-survey` her gönderimde reddediliyor (`backend/src/controllers/feedbackController.ts:9-28`). Ama eşleştirmedeki mentör kalite katsayısı `Feedback`'ten okunuyor, bu yüzden herkes nötr 1.0.
+**Sorun ne:** KR-08, KARAR-77=A'yı `Feedback` kutusunu "taraf başına" bölerek uygulamayı öngörüyor (migration). Bu yapılırsa aynı işi yapan İKİNCİ bir "taraf başına değerlendirme" kutusu doğar; kullanıcı iki ayrı form görür ya da biri yine boş kalır.
+**Neden sana soruyorum:** Hangi verinin ürünün tek doğru kaynağı olacağı ve migration (veritabanı yapısı değişikliği) ürün kararı.
+**Seçenekler:**
+- **A) `Feedback`'i böl (KR-08 olduğu gibi)** · Kullanıcı ne görür: yeni/düzeltilmiş periyodik anket formu, check-in formu da kalır · Kazanç: KR-08 planı değişmez · **Ne kaybedersin:** iki ayrı değerlendirme kutusu ve iki form; kullanıcıya çift soru; hangisi "doğru" belirsiz · Süre M · Migration VAR · Geri alınması zor
+- **B) Puanları `MeetingCheckIn`'e taşı, tek kutu o olsun** · Kullanıcı ne görür: görüşme sonrası tek form (bugünkü check-in), puan/NPS soruları oraya eklenir · Kazanç: bugün gerçekten dolan kutu esas alınır; kalite katsayısı ve KPI gerçek veriyle dolar · **Ne kaybedersin:** `Feedback`'i okuyan yerler (kalite katsayısı, oryantasyon kilidi, KPI) yeniden bağlanır; `Feedback` ve `MatchFeedback` silme protokolüne girer (hemen silinmez) · Süre M · Migration VAR (yeni alanlar) · Geri alınır (eski kutular yerinde kalır)
+- **C) Şimdilik migration yok; okuyan yerleri `MeetingCheckIn`'deki MEVCUT alanlara bağla** · Kazanç: migrationsız, hızlı · **Ne kaybedersin:** NPS gibi check-in'de olmayan ölçüler boş kalır; KR-08 askıda
+**Karşılaştırma:** A mevcut planı korur ama çift kutu üretir. B tek doğru kaynak kurar ama okuyan yerlerin yeniden bağlanmasını ister. C hızlıdır ama eksik kalır.
+**Benim önerim:** B — bugün gerçekten dolan tek kutu bu; KARAR-77'nin istediğini zaten yapıyor. *(Migration kararı senin; önerime güvenme.)*
+**Cevap vermezsen:** KR-08, AN-49 ve KR-11 bekler. Kalite katsayısı ve yönetici NPS kartı boş kalmaya devam eder.
+**CEVAP:**
+
