@@ -340,3 +340,12 @@ Karar kartları kart başına dosyaya (`docs/otonom/kararlar/`) ve 🔴 kuyruk s
 ```text
 > ⚠️ PO 2026-09-26: `09-DURUM.md` ve `00-KARAR-TAKIP.md` 2026-09-20'den beri güncellenmiyor; genel belge taraması yapılana kadar otonom turlar bu iki dosyaya yazmaz — tur sonu kaydı `docs/otonom/00-SIMDI.md` + `02-ILERLEME.md`.
 ```
+
+## AJ-52 — § Güvenlik Kuralları › KASITLI public listesi: `POST /api/csp-reports` eklendi · taşındı 2026-09-28
+
+Kural değişikliği DEĞİL (yeni public uç listeye eklendi, CLAUDE.md'nin kendi talimatı: "yeni public uç eklenirse buraya eklenir"). Değişen iki satırın eski hâli AYNEN:
+
+```text
+  **diğer:** `POST /api/suspicion-reports` · `GET /health` · `GET /uploads/**` (statik, CSP-sandbox).
+  `selfServeRoutes.ts:24-40` · `suspicionRoutes.ts:11` · `server.ts:63,74`.)
+```
