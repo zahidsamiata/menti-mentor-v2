@@ -1,20 +1,18 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-28 ~21:40 UTC · çatı main HEAD (bu commit) · backend main HEAD `41b60ea`
+**Son güncelleme:** 2026-09-28 ~23:30 UTC · çatı main HEAD (bu commit) · backend main HEAD `c2cbd29` (= çatı pointer)
 
-**Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (02-ILERLEME başı). Normal kuyruk (güvenlik önce).
+**Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (02-ILERLEME başı). Normal kuyruk; 🟢'ler neredeyse bitti.
 
-**Bu oturumda BITTI (kuyruk):** AJ-96 · AJ-104 · AJ-103 · AJ-99 · AJ-112 · AJ-100 · AJ-113 · AJ-106 · AJ-102 (hepsi 7b opus ONAY + mutasyon + canlı ok). Ajan-ekledi: AJ-112 · AJ-113 · AJ-114.
+**Bu oturumda BITTI (kuyruk, 20):** AJ-96 · 104 · 103 · 99 · 112 · 100 · 113 · 106 · 102 · 101 · 108 · 109 · 105 · 114 · 115 · 116 · 107 · 110 · 117 + F-01 (kısmen → AJ-120). Hepsi 7b/opus ONAY + mutasyon (kod işleri) + canlı ok. Ajan-ekledi: AJ-112 … AJ-121.
 
 **Şu an yapılan:**
-- AJ-108 + AJ-109 — backend #269/#270 merge · pointer #465 CI → merge → arşiv.
-- AJ-101 (belge) — çatı #464 · doğrulama ONAY · CI → merge.
-- AJ-110 (rozet kontrastı) — çatı #463 · inceleniyor.
-- AJ-105 (üyelik rol okumaları, 7b) — backend #272 · mutasyon #271 · inceleniyor.
-- Sırada (AJ-105 dosyalarıyla çakışmasın diye bekliyor): AJ-107 · AJ-114 · Y-17. AJ-98 ⏳ 2026-10-29.
-
-**Son merge'ler:** backend #255-#270 (AJ-96 · 104 · 103 · 99 · 112 · 100 · 113 · 106 · 102 · 108 · 109) · çatı #455-#462 · canlı ok:true · db:up · site 200.
+- ⚠️ çatı #469 (AJ-121 + Tailwind `src/lib` taraması) — öncelikli inceleme: `statusColors.ts` taranmadığı için AJ-85/110/117 rozet sınıflarının bir kısmı canlı CSS'te eksik olabilir.
+- backend #282 AJ-118 (yönetici uçları üyelik rolü) · #284 AJ-119 (platform liste sırası) — inceleme.
+- çatı #470 AJ-120 (belge adı, 1 dosya + envanter; kalan 77 rehber hedef tanımı bekliyor) — doğrulama.
+- Kilitli 🟢 (notlu): PS-A3 · Y-17 (KARAR-58) · Y-12 (#110 kuralı) · AN-06 (PO teyidi) · AN-29 (kapı aslında 🔵 — migration) · AJ-98 (⏳ 2026-10-29) · AN-49 (KARAR-67/89).
+- Sonra: Bölüm 4 madde 5 → 🔵/🟡 satırlar.
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
