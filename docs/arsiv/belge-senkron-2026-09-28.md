@@ -776,3 +776,29 @@
 ```text
 - Bağlam: `certification.service.ts`, PASS_THRESHOLD=65, CERT_CONFIG (passRateThreshold 0.8).
 ```
+
+## AJ-120 · `raporlar/icerik/00-INDEKS.md` → `00-INDEX.md` (2026-09-28, eski satırlar AYNEN)
+
+> NEDEN: rehber KURAL 2-B "indeks adı tektir: `00-INDEX.md`" + aynı rehberin "taşınırsa atıflar aynı turda güncellenir" hükmü — kaynak AJ-120 (F-01 #467 kalanı · G9-12).
+
+## docs/00-BELGE-HARITASI.md:31 (AJ-120)
+
+| "Sertifika/DISC/öğrenme soruları ne?" | `raporlar/icerik/00-INDEKS.md` | 🔄 |
+
+## docs/00-BELGE-HARITASI.md:160 (AJ-120)
+
+- `00-INDEKS.md` 🔄 İçerik Belgeleri İndeksi —…
+
+## docs/raporlar/icerik/bolumler/00-INDEX.md:6 (AJ-120)
+
+İçerik raporunun bölümleri. Üst indeks: `docs/raporlar/icerik/00-INDEKS.md`.
+
+## docs/kararlar/konu/belge-duzeni-rehberi.md:57-61 (AJ-120 — yerinde ~~[ESKİ]~~ damgalandı; metin aynen)
+
+```text
+  ⚠️ **Mevcut `docs/raporlar/icerik/00-INDEKS.md` YENİDEN ADLANDIRILMADI** — 2026-09-21 ölçümü:
+  **11 atıf / 4 dosya**, markdown link biçiminde **0**, kod/script atfı **0**. Atıfların bir kısmı
+  tarihsel kayıtta (oturum günlüğü, 09-DURUM) olduğu için adlandırma değişikliği tarihsel iz bozar;
+  kural genişletmesi aynı riski tek satırda kapatıyor. İki ad **kalıcı değil, geçicidir**: o klasör
+  bir sonraki düzenlemede `00-INDEX.md`'ye taşınırsa atıflar aynı turda güncellenir.
+```

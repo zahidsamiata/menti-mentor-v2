@@ -28,7 +28,7 @@
 | "Mentör/menti paneli ne olmalıydı?" | `raporlar/persona/{mentor,menti}-persona-*.md` | 📸 |
 | "…peki kodda ne var?" | `raporlar/kod-denetimi/strateji-gercek-denetimi-2026-08-20.md` B.1/B.2 | 📸 |
 | "Admin panelleri ne olmalıydı / kodda ne var?" | `raporlar/panel/` (4 belge) | 📸 |
-| "Sertifika/DISC/öğrenme soruları ne?" | `raporlar/icerik/00-INDEKS.md` | 🔄 |
+| "Sertifika/DISC/öğrenme soruları ne?" | `raporlar/icerik/00-INDEX.md` | 🔄 |
 | "KVKK metinleri / avukat paketi?" | `kararlar/konu/kvkk-metinleri/00-AVUKAT-KONTROL-DOSYASI.md` | ❓ |
 | "Bir karar neden böyle alındı?" | `raporlar/bilanco/kararlar/G*.md` | 📸/🔄 |
 | "Otonom kuyruk / bekleyen PO kararı?" | `otonom/00-KUYRUK.md` (çalışılabilir işler + 🔴 kilit haritası) · `otonom/01-KARARLAR.md` (karar indeksi → `otonom/kararlar/KARAR-NNN.md`) · karar bekleyen satırlar: `otonom/00-KUYRUK-KARAR-BEKLEYEN.md` | 🔄 |
@@ -157,7 +157,7 @@
 - `konsey-yonetisim-2026-09-21.md` 📸 Yönetişim konseyi
 
 **`docs/raporlar/icerik/`** (12):
-- `00-INDEKS.md` 🔄 İçerik Belgeleri İndeksi —…
+- `00-INDEX.md` 🔄 İçerik Belgeleri İndeksi —…
 - `arketip-ve-yaklasim-icerigi-2026-09-03.md` 📸 Arketip Kartları, Yaklaşım İçeriği ve Ölçme…
 - `eslesme-uyum-po-inceleme-2026-08-26.md` 📸 Eşleştirme Uyum Tablosu — Ürün Sahibi…
 - `faz6-ogrenme-ve-sertifika-2026-09-03.md` 📸 Faz 6 — Öğrenme Yolculuğu ve Sertifika İçeriği
