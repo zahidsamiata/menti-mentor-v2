@@ -609,3 +609,7 @@
 ## docs/kararlar/00-KARAR-TAKIP.md:208 (AJ-93)
 
 | S35 | ⭐ İlk tenant özel ağırlık kaydettiğinde sıralamanın beklendiği gibi değiştiği doğrulanacak — 9b canlıda ama 0 tenant kullandı, etkisi hiç gözlenmedi | 2026-09-08 | 🟨 kısmen — kaydetme/doğrulama/izolasyon testli (`backend/tests/algorithm-weights-manual.test.ts`); kalan: özel ağırlığın sıralamayı değiştirdiğini kanıtlayan test → AJ-93 | 9b · 171 |
+
+## docs/kararlar/00-KARAR-TAKIP.md:340 (AJ-95a)
+
+| 170 | JSON yazım koruması — Prisma `Json?` sütunlarına yazarken tip `InputJsonValue` olduğu için uygulama tipi hiç uygulanmıyor; 13 JSON alanında yapısal boşluk. Gözlenen tek hata `discVector`'da | 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: `schema.prisma`'daki 13 `Json` alanına yazım öncesi yapı doğrulaması → AJ-95 | KOD+KEŞİF | ⚠️ **KAPSAM BEYANI EKSİK:** "diğer alanlar okuma tarafında savunuluyor" iddiası keşif turunun GÖZLEMİDİR, sistematik tarama DEĞİL — 13 alanın **her** okuma noktası taranmadı. **Tek korumasız okuma yolu varsa bu kalemin "opsiyonel" gerekçesi çöker.** İş: (a) KAPSAM BEYANLI tarama, (b) sonra tip-checked sarmalayıcı kararı | `.prisma/client/index.d.ts` `InputJsonValue` · madde 162/169 | Hayır | M |
