@@ -16,7 +16,7 @@
  * kendi başına ayrıca rol kontrolü YAPMAZ, komşu admin sayfalarıyla aynı desen.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useAuth } from '@/providers/AuthProvider';
 import { useQuery } from '@/hooks/useQuery';
@@ -24,6 +24,21 @@ import { adminApi } from '@/lib/api/admin';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { UI_TEXT } from '@/lib/uiText';
+
+// Arama kutusu her tuşta istek atmasın diye kısa bekleme (ms).
+const SEARCH_DEBOUNCE_MS = 300;
+/** Sunucu şemasıyla aynı üst sınır (backend AdminUserListSchema `search` .max(100)) — aşan metin 400 alırdı. */
+const SEARCH_MAX_LENGTH = 100;
+
+/** Yazmayı bitirdikten SEARCH_DEBOUNCE_MS sonra kırpılmış arama metnini döner. */
+function useDebouncedSearch(value: string): string {
+  const [debounced, setDebounced] = useState(value.trim());
+  useEffect(() => {
+    const t = setTimeout(() => setDebounced(value.trim()), SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(t);
+  }, [value]);
+  return debounced;
+}
 
 export function BlockPairPanel() {
   const api = useApiClient();
@@ -36,6 +51,14 @@ export function BlockPairPanel() {
   const [busy, setBusy] = useState(false);
   const [removingId, setRemovingId] = useState<string | null>(null);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  // AJ-106: seçim listeleri eskiden yalnız ilk sayfadaki (50) kişiyi gösteriyordu; ada göre arama
+  // backend'de (`search`) tüm onaylı üyelerde yapılır. Seçilen kişinin adı ayrıca tutulur ki
+  // arama değişince seçim listeden düşse de onay metninde ve seçim kutusunda görünmeye devam etsin.
+  const [mentorSearch, setMentorSearch] = useState('');
+  const [mentiSearch, setMentiSearch] = useState('');
+  const [selectedNames, setSelectedNames] = useState<Record<string, string>>({});
+  const mentorQuery = useDebouncedSearch(mentorSearch);
+  const mentiQuery = useDebouncedSearch(mentiSearch);
 
   const blocked = useQuery(
     () => adminApi.listBlockedPairs(api, tenantId ?? ''),
@@ -43,15 +66,32 @@ export function BlockPairPanel() {
     { enabled: !!tenantId, cacheKey: tenantId ? `admin:blocked-pairs:${tenantId}` : undefined },
   );
   const mentors = useQuery(
-    () => adminApi.listUsers(api, { role: 'MENTOR', approvalStatus: 'APPROVED' }),
-    [open],
-    { enabled: open, cacheKey: 'admin:users:MENTOR:APPROVED:1' },
+    () => adminApi.listUsers(api, { role: 'MENTOR', approvalStatus: 'APPROVED', search: mentorQuery || undefined }),
+    [open, mentorQuery],
+    { enabled: open, cacheKey: `admin:users:MENTOR:APPROVED:1:${mentorQuery}` },
   );
   const mentis = useQuery(
-    () => adminApi.listUsers(api, { role: 'MENTI', approvalStatus: 'APPROVED' }),
-    [open],
-    { enabled: open, cacheKey: 'admin:users:MENTI:APPROVED:1' },
+    () => adminApi.listUsers(api, { role: 'MENTI', approvalStatus: 'APPROVED', search: mentiQuery || undefined }),
+    [open, mentiQuery],
+    { enabled: open, cacheKey: `admin:users:MENTI:APPROVED:1:${mentiQuery}` },
   );
+
+  function selectUser(
+    id: string,
+    items: { id: string; fullName: string }[] | undefined,
+    setId: (id: string) => void,
+  ) {
+    setId(id);
+    const name = items?.find((u) => u.id === id)?.fullName;
+    if (name) setSelectedNames((prev) => ({ ...prev, [id]: name }));
+  }
+
+  /** Seçim kutusu seçenekleri: arama sonucu + (sonuçta yoksa) seçili kişi. */
+  function optionsFor(items: { id: string; fullName: string }[] | undefined, selectedId: string) {
+    const list = items ?? [];
+    if (!selectedId || list.some((u) => u.id === selectedId) || !selectedNames[selectedId]) return list;
+    return [{ id: selectedId, fullName: selectedNames[selectedId] }, ...list];
+  }
 
   function notify(type: 'success' | 'error', text: string) {
     setMsg({ type, text });
@@ -61,8 +101,10 @@ export function BlockPairPanel() {
   async function handleBlock() {
     if (!tenantId || !mentorId || !mentiId) return;
 
-    const mentorName = mentors.data?.items.find((u) => u.id === mentorId)?.fullName ?? 'seçilen mentör';
-    const mentiName = mentis.data?.items.find((u) => u.id === mentiId)?.fullName ?? 'seçilen menti';
+    const mentorName = selectedNames[mentorId]
+      ?? mentors.data?.items.find((u) => u.id === mentorId)?.fullName ?? 'seçilen mentör';
+    const mentiName = selectedNames[mentiId]
+      ?? mentis.data?.items.find((u) => u.id === mentiId)?.fullName ?? 'seçilen menti';
 
     const confirmed = window.confirm(
       `${mentorName} ile ${mentiName} birbirini artık listede göremez, mesajlaşamaz, görüşme planlayamaz. ` +
@@ -165,36 +207,70 @@ export function BlockPairPanel() {
               <label className="text-xs font-medium text-muted-foreground" htmlFor="block-pair-mentor">
                 Mentör
               </label>
+              <input
+                type="search"
+                maxLength={SEARCH_MAX_LENGTH}
+                aria-label="Mentör ara"
+                placeholder="Ada göre ara…"
+                className="mt-1 w-full rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
+                value={mentorSearch}
+                onChange={(e) => setMentorSearch(e.target.value)}
+              />
               <select
                 id="block-pair-mentor"
                 className="mt-1 w-full rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
                 value={mentorId}
-                onChange={(e) => setMentorId(e.target.value)}
+                onChange={(e) => selectUser(e.target.value, mentors.data?.items, setMentorId)}
                 disabled={mentors.isLoading}
               >
                 <option value="">Mentör seçin…</option>
-                {(mentors.data?.items ?? []).map((u) => (
+                {optionsFor(mentors.data?.items, mentorId).map((u) => (
                   <option key={u.id} value={u.id}>{u.fullName}</option>
                 ))}
               </select>
+              {mentors.data && mentors.data.totalPages > 1 && (
+                <p className="mt-1 text-xs text-muted-foreground">
+                  İlk {mentors.data.items.length} kişi gösteriliyor ({mentors.data.total} kişiden). Aradığınız kişiyi bulamazsanız adını yazın.
+                </p>
+              )}
+              {mentors.data && mentors.data.items.length === 0 && mentorSearch.trim() && (
+                <p className="mt-1 text-xs text-muted-foreground">Bu adla eşleşen onaylı mentör bulunamadı.</p>
+              )}
             </div>
 
             <div>
               <label className="text-xs font-medium text-muted-foreground" htmlFor="block-pair-menti">
                 Menti
               </label>
+              <input
+                type="search"
+                maxLength={SEARCH_MAX_LENGTH}
+                aria-label="Menti ara"
+                placeholder="Ada göre ara…"
+                className="mt-1 w-full rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
+                value={mentiSearch}
+                onChange={(e) => setMentiSearch(e.target.value)}
+              />
               <select
                 id="block-pair-menti"
                 className="mt-1 w-full rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
                 value={mentiId}
-                onChange={(e) => setMentiId(e.target.value)}
+                onChange={(e) => selectUser(e.target.value, mentis.data?.items, setMentiId)}
                 disabled={mentis.isLoading}
               >
                 <option value="">Menti seçin…</option>
-                {(mentis.data?.items ?? []).map((u) => (
+                {optionsFor(mentis.data?.items, mentiId).map((u) => (
                   <option key={u.id} value={u.id}>{u.fullName}</option>
                 ))}
               </select>
+              {mentis.data && mentis.data.totalPages > 1 && (
+                <p className="mt-1 text-xs text-muted-foreground">
+                  İlk {mentis.data.items.length} kişi gösteriliyor ({mentis.data.total} kişiden). Aradığınız kişiyi bulamazsanız adını yazın.
+                </p>
+              )}
+              {mentis.data && mentis.data.items.length === 0 && mentiSearch.trim() && (
+                <p className="mt-1 text-xs text-muted-foreground">Bu adla eşleşen onaylı menti bulunamadı.</p>
+              )}
             </div>
           </div>
 
