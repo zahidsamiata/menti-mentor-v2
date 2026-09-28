@@ -16,40 +16,40 @@
 
 | # | İş | Durum / PR | Tarih |
 |---|-----|-----------|-------|
-| 1 | KARAR 5 — DISC güvenlik açığı (menti mentörün DISC tipini görmesin) | ✅ backend #37 + çatı #71 | 2026-08-15 |
-| 2 | K2 — OAuth `kvkkConsentAt` ispat yükü | ✅ #38+#73 | 2026-08-15 |
-| 3 | K4 — Yaş 18+ öz-beyan (KVKK metnine gömülü) | ✅ #38+#73 | 2026-08-15 |
-| 4 | K5 — Sunucu konumu/yurt dışı aktarım beyanı | ✅ #73 | 2026-08-15 |
-| 5 | ThemeToggle admin/platform nav | ✅ zaten mevcut (kod-doğrulandı) | 2026-08-17 |
-| 8 | Sol menü 4-grup gruplama (KARAR 1) | ✅ çatı #76 | 2026-08-15 |
-| 10 | Durum rozeti (KARAR 3) | ✅ zaten mevcuttu (kod-doğrulandı) | 2026-08-15 |
-| 11 | Sertifika rozeti (KARAR 4, kişi-geneli) | ✅ backend #40 + çatı #77 | 2026-08-15 |
-| 12 | DISC baskın+ikincil harf "DI" (KARAR 11) | ✅ backend #47 + çatı #93 + docs #94 | 2026-08-19 |
-| 29 | İş 2 + İş 3 (P1+P2+P3) — onay/red izi + gerekçe + yönetici-adı + reddedilen akışı | ✅ #41-#43, #81-#85 | 2026-08-16 |
-| 32 | Admin soru düzenleme UI | ✅ çatı #87 | 2026-08-17 |
-| 34 | Öğrenme yolculuğu tamamlanma görünürlüğü (STK admin havuz kolonu) | ✅ backend #49 + çatı #102 | 2026-08-19 |
-| 37 | Giriş enumeration sertleştirme (PENDING dahil) | ✅ backend #46 + çatı #91 + docs #92 | 2026-08-19 |
-| 38 | `updateUser`/temperament password+PII sızıntısı (db.ts global omit + explicit select) | ✅ backend #51 | 2026-08-25 |
-| 68 | `SuspicionReport` reporter PII maskeleme (maskName/maskContact) | ✅ backend #51 | 2026-08-25 |
-| 80 | `getPlatformLogs` select + `listUserReports` fullName maske | ✅ backend #51 | 2026-08-25 |
-| 88 | `getPlatformStats` recentLogs meta çıkarıldı | ✅ backend #51 | 2026-08-25 |
-| 89 | `listPendingTenants` admin fullName+email maske | ✅ backend #51 | 2026-08-25 |
-| 79 | Haftalık görüşme limiti enforce (sabit 7-günlük UTC kova) | ✅ backend #51 | 2026-08-25 |
-| 69 | Zod validation yanıtında anlamlı `message` (FE otomatik gösterir) | ✅ backend #51 | 2026-08-25 |
-| 70 | adaptive-test `progress` (FE guard kaldırma = ayrı tur, kalan) | ✅ backend #51 | 2026-08-25 |
-| 9b | Motor kaydedilen tenant ağırlığını okur (scoring opsiyonel ağırlık, N+1 yok; madde 87 çözüldü) | ✅ backend #52 | 2026-08-26 |
-| 9a | Tenant manuel ağırlık ayarı (PUT weights + FE +/− %5 UI; migration YOK) | ✅ backend #52 + çatı #114 | 2026-08-26 |
-| 70-FE | DailyQuestionWidget progress guard kaldırıldı (backend progress canlıda) | ✅ çatı #114 | 2026-08-26 |
-| 92 | KVKK sunucu ülkesi Londra/BK (AB üyesi değil) + veri sorumlusu kimliği | ✅ çatı #117 (docs) | 2026-08-26 |
-| 95 | Kalibrasyon "son değişiklik" aktör izi (actorName yalnız AD; tenant-izolasyon; migration YOK) | ✅ backend #53 + çatı #116 | 2026-08-26 |
-| 93+39 | Tam anonimleştirme (serbest metin+foto dosyası+token) + hardDelete→anonymize; PO (c)+(iii)+(2), migration YOK; sınır: userId cuid kalır (H-9) | ✅ backend #54 + çatı #117 (metin) | 2026-08-26 |
+| 1 | KARAR 5 — DISC güvenlik açığı (menti mentörün DISC tipini görmesin) | ✅ backend #37 + çatı #71 | 2026-08-15 · doğrulama 09-28: `backend/src/services/discVisibility.ts:22` |
+| 2 | K2 — OAuth `kvkkConsentAt` ispat yükü | ✅ #38+#73 | 2026-08-15 · doğrulama 09-28: `backend/src/services/oauth/oauthService.ts:134` |
+| 3 | K4 — Yaş 18+ öz-beyan (KVKK metnine gömülü) | ✅ #38+#73 | 2026-08-15 · doğrulama 09-28: `frontend/src/app/(auth)/register/_RegisterContent.tsx:431` |
+| 4 | K5 — Sunucu konumu/yurt dışı aktarım beyanı | ✅ #73 | 2026-08-15 · doğrulama 09-28: `frontend/src/app/kvkk/page.tsx:96` |
+| 5 | ThemeToggle admin/platform nav | ✅ zaten mevcut (kod-doğrulandı) | 2026-08-17 · doğrulama 09-28: `frontend/src/app/(admin)/layout.tsx:99` · `frontend/src/app/platform/dashboard/page.tsx:234` |
+| 8 | Sol menü 4-grup gruplama (KARAR 1) | ✅ çatı #76 | 2026-08-15 · doğrulama 09-28: `frontend/src/app/(admin)/layout.tsx:30-58` |
+| 10 | Durum rozeti (KARAR 3) | ✅ zaten mevcuttu (kod-doğrulandı) | 2026-08-15 · doğrulama 09-28: `frontend/src/app/(admin)/admin/mentor-havuzu/page.tsx:25` |
+| 11 | Sertifika rozeti (KARAR 4, kişi-geneli) | ✅ backend #40 + çatı #77 | 2026-08-15 · doğrulama 09-28: `backend/src/controllers/adminController.ts:284` · `frontend/src/app/(admin)/admin/mentor-havuzu/page.tsx:168` |
+| 12 | DISC baskın+ikincil harf "DI" (KARAR 11) | ✅ backend #47 + çatı #93 + docs #94 | 2026-08-19 · doğrulama 09-28: `backend/src/services/discLetters.ts:58` |
+| 29 | İş 2 + İş 3 (P1+P2+P3) — onay/red izi + gerekçe + yönetici-adı + reddedilen akışı | ✅ #41-#43, #81-#85 | 2026-08-16 · doğrulama 09-28: `backend/prisma/schema.prisma:309-313` · `backend/src/routes/authRoutes.ts:72` |
+| 32 | Admin soru düzenleme UI | ✅ çatı #87 | 2026-08-17 · doğrulama 09-28: `frontend/src/app/(admin)/admin/questions/page.tsx:292` · `backend/src/routes/questionRoutes.ts:57` |
+| 34 | Öğrenme yolculuğu tamamlanma görünürlüğü (STK admin havuz kolonu) | ✅ backend #49 + çatı #102 | 2026-08-19 · doğrulama 09-28: `backend/src/controllers/adminController.ts:315` · `frontend/src/app/(admin)/admin/mentor-havuzu/page.tsx:190` |
+| 37 | Giriş enumeration sertleştirme (PENDING dahil) | ✅ backend #46 + çatı #91 + docs #92 | 2026-08-19 · doğrulama 09-28: `backend/src/controllers/authController.ts:323-330` |
+| 38 | `updateUser`/temperament password+PII sızıntısı (db.ts global omit + explicit select) | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/db.ts:52` |
+| 68 | `SuspicionReport` reporter PII maskeleme (maskName/maskContact) | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/controllers/platformController.ts:466-467` |
+| 80 | `getPlatformLogs` select + `listUserReports` fullName maske | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/controllers/platformController.ts:224,516` |
+| 88 | `getPlatformStats` recentLogs meta çıkarıldı | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/controllers/platformController.ts:134` |
+| 89 | `listPendingTenants` admin fullName+email maske | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/controllers/platformController.ts:259` |
+| 79 | Haftalık görüşme limiti enforce (sabit 7-günlük UTC kova) | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/controllers/meetingController.ts:120,557` |
+| 69 | Zod validation yanıtında anlamlı `message` (FE otomatik gösterir) | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/controllers/questionController.ts:91` |
+| 70 | adaptive-test `progress` (FE guard kaldırma = ayrı tur, kalan) | ✅ backend #51 | 2026-08-25 · doğrulama 09-28: `backend/src/services/adaptiveTestEngine.ts:116` · `frontend/src/components/organisms/DailyQuestionWidget.tsx:42` |
+| 9b | Motor kaydedilen tenant ağırlığını okur (scoring opsiyonel ağırlık, N+1 yok; madde 87 çözüldü) | ✅ backend #52 | 2026-08-26 · doğrulama 09-28: `backend/src/services/matching.ts:67-72,168` |
+| 9a | Tenant manuel ağırlık ayarı (PUT weights + FE +/− %5 UI; migration YOK) | ✅ backend #52 + çatı #114 | 2026-08-26 · doğrulama 09-28: `backend/src/routes/adminRoutes.ts:78` · `frontend/src/app/(admin)/admin/algorithm-tuner/page.tsx:51` |
+| 70-FE | DailyQuestionWidget progress guard kaldırıldı (backend progress canlıda) | ✅ çatı #114 | 2026-08-26 · doğrulama 09-28: `frontend/src/components/organisms/DailyQuestionWidget.tsx:37-42` |
+| 92 | KVKK sunucu ülkesi Londra/BK (AB üyesi değil) + veri sorumlusu kimliği | ✅ çatı #117 (docs) | 2026-08-26 · doğrulama 09-28: `frontend/src/app/kvkk/page.tsx:96` |
+| 95 | Kalibrasyon "son değişiklik" aktör izi (actorName yalnız AD; tenant-izolasyon; migration YOK) | ✅ backend #53 + çatı #116 | 2026-08-26 · doğrulama 09-28: `backend/src/services/algorithmTuner.ts:230` |
+| 93+39 | Tam anonimleştirme (serbest metin+foto dosyası+token) + hardDelete→anonymize; PO (c)+(iii)+(2), migration YOK; sınır: userId cuid kalır (H-9) | ✅ backend #54 + çatı #117 (metin) | 2026-08-26 · doğrulama 09-28: `backend/src/services/gdprService.ts:110,159,212,266` |
 
-> ⚠️ Kısmen: **madde 93** (anonimleştirme sosyal/avatar/kişilik alanları eklendi ✅ / mesaj+foto-dosyası+userId-bağı AÇIK) — `00-KARAR-TAKIP` F.5.
+> ⚠️ Kısmen: **madde 93** (anonimleştirme sosyal/avatar/kişilik alanları eklendi ✅ / mesaj+foto-dosyası+userId-bağı AÇIK) — `00-KARAR-TAKIP` F.5. · doğrulama 09-28: `backend/src/services/gdprService.ts:159,212` (mesaj+foto artık kodda; userId bağı H-9 sınırı)
 > **Umbrella pointer:** #51→#113 (b4b6d66); #52→pointer bump PR chore/pointer-bump-52 (b4b6d66→838d128).
 
-> **Kısmi/kalanı açık olanlar aktif roadmap'te kalır:** md.6 (kullanıcı maili ✅ / kurum maili AÇIK) ·
-> md.7 (menti→mentör kart + (A) gerekçe + Aşama 1 ✅ / Aşama 2-3 AÇIK) · md.9 (ağırlık gösterimi + 9a/9b ✅ CANLIDA) ·
-> md.33 (ölü seed ✅ / seed↔canlı + SJT AÇIK). Bunlar `10-yol-haritasi.md`'de açık işler index'inde.
+> **Kısmi/kalanı açık olanlar aktif roadmap'te kalır:** md.6 (kullanıcı maili ✅ / kurum maili AÇIK) · · doğrulama 09-28: `backend/src/controllers/adminController.ts:663,711,771`
+> md.7 (menti→mentör kart + (A) gerekçe + Aşama 1 ✅ / Aşama 2-3 AÇIK) · md.9 (ağırlık gösterimi + 9a/9b ✅ CANLIDA) · · doğrulama 09-28: alt kalemler kodda — `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`
+> md.33 (ölü seed ✅ / seed↔canlı + SJT AÇIK). Bunlar `10-yol-haritasi.md`'de açık işler index'inde. · doğrulama 09-28: `backend/prisma/` (seed-questions.ts yok; `5745e0f` main atası)
 
 ---
 
@@ -58,9 +58,9 @@
 > Bu, `10-yol-haritasi.md` md.1'in uzun tarihsel gövdesidir; aktif roadmap'te kompakt ✅ stub'a indirildi, tam kayıt burada.
 > Güncel anlatı: `09-DURUM.md` "✅ GÜVENLİK — KARAR 5" bölümü.
 
-**✅ KARAR 5 — DISC güvenlik açığı düzeltmesi — v1 #1, canlı-öncesi ŞART → TAMAMLANDI, CANLIDA** *(backend #37 `0850eaa` + çatı #71 `4c48a8e` MERGED)*.
+**✅ KARAR 5 — DISC güvenlik açığı düzeltmesi — v1 #1, canlı-öncesi ŞART → TAMAMLANDI, CANLIDA** *(backend #37 `0850eaa` + çatı #71 `4c48a8e` MERGED)*. · doğrulama 09-28: `backend/src/services/discVisibility.ts:22`
 
-- **✅ tamamlandı, canlıda:** `--merge` ile MERGED; submodule pointer senkron; iki repo main CI yeşil; regresyon testi CI Integration suite'te geçiyor. **v1 #1 kapandı.**
+- **✅ tamamlandı, canlıda:** `--merge` ile MERGED; submodule pointer senkron; iki repo main CI yeşil; regresyon testi CI Integration suite'te geçiyor. **v1 #1 kapandı.** · doğrulama 09-28: `backend/src/services/discVisibility.ts:22`
 - **Fix:** Merkezi `discVisibility.ts` (`canViewerSeeDiscType`): `listUsers`+`getUser` menti→mentör `discType`/`discResultCard`'ı response'tan çıkarır; FE menti kartı DISC göstermez; regresyon testi eklendi.
 - **Bulgu (salt-okuma denetimi):** Menti, mentörün DISC **tipini (harf) + arketipini** görüyordu → KARAR 5 ihlali. Kanıt: `backend/src/controllers/userController.ts:90` (`listUsers` select `discType`) + `:138-139` (`USER_PUBLIC_SELECT`) + `frontend/src/app/(dashboard)/menti/page.tsx:262-266` (render). Ham vektör güvenli (`USER_FULL_SELECT` self/admin).
 - **Çelişki:** kod `discType`'ı bilinçli public tasarlamıştı (yorum s.138) — KARAR 5 (2026-08-11) daha yeni PO kararı → **KARAR 5 kazandı**.
