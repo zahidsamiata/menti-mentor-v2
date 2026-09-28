@@ -1440,4 +1440,345 @@ Kaynak: `docs/otonom/kararlar/KARAR-127.md` (origin/main, değişiklik öncesi).
 **Cevap vermezsen:** Belge "var" demeye devam eder (bugün 🟨 notlu); başka iş kilitlenmez. İlgili: AJ-101.
 **CEVAP:**
 ```
+### KARAR-42 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-042.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-42 · DISC testi tekrar edilebilsin mi? (3 düğme bunu vaat ediyor, hiçbiri çalışmıyor)  [ÜRÜN KARARI · VERİ]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+⚠️ **Kaç işi açar:** bugün kuyrukta **doğrudan karşılığı olan satır YOK** — cevap gelince PO'nun **yeni satır açması gerekir**; ayrıca **PS-10**'daki çıkışsız döngünün diğer ucunu kapatır ve **PS-03**'ün (Likert `discType`) kullanıcı faydasını görünür kılar.
+**Şu an ne var:** Arayüzde üç ayrı düğme *"DISC Testini Güncelle"* / *"DISC Profilini Güncelle"* diyor (`mentor/page.tsx:163` · `menti/page.tsx:284` · `profile/page.tsx:225,234`). Üçü de `/disc-test`'e götürüyor. Ama soru havuzunun **tamamını** cevaplamış bir kullanıcı oraya girince **tek soru bile göremiyor**: sistem *"DISC Profiliniz Hazır!"* yazıp **2,5 saniye sonra panoya geri atıyor** (`questionService.ts:174` → `useDiscTest.ts:223,195-199` → `disc-test/page.tsx:53-56`). Cevapları sıfırlayan hiçbir yol yok (kapsam: BE `src/` tamamı, `userResponse.delete|reset.*test|retake` harf duyarsız → tek isabet `gdprService.ts:108`, o da hesap silme).
+⚠️ **Sınır — abartma:** bu yalnız **havuzun tamamını** cevaplamış kullanıcıyı etkiler; onboarding'i bitirip Likert havuzuna hiç girmemiş kullanıcı testi normal görür. Etkilenen kitlenin büyüklüğü **TEYİT GEREK (canlı DB)**.
+**Sorun ne:** Kullanıcıya bir söz veriliyor ve sessizce tutulmuyor. Kişi kendini değişmiş hissedip profilini güncellemek istiyor, düğmeye basıyor, hiçbir şey olmuyor. Üstelik "uygun mentor bulunamadı" ekranı da onu **aynı çalışmayan sayfaya** yönlendiriyor (`menti/page.tsx:276-287`) → **çıkışsız döngü**.
+**Neden sana soruyorum:** Testin tekrar edilebilmesi teknik değil ürün/veri kararı. Tekrar test **eski cevapların üzerine yazar** (`@@unique([userId, questionId])` + `upsert`, `questionService.ts:198-208`) — geçmiş tutulmuyor (kapsam: `schema.prisma` tamamı, `ResponseHistory|ResponseVersion|Audit.*Response` → yok). "Kişinin eski profili silinsin mi, saklansın mı" verinin anlamını belirler.
+**Seçenekler:**
+**A) Düğmeleri dürüst yap** — tekrar testi açma, düğmeyi *"DISC profilimi gör"*e çevir · Kullanıcı ne görür: vaat edilmeyen şeyi beklemiyor · Ne kazanırsın: yalan biter, iş küçük · **Ne kaybedersin:** kişi profilini **hiç** güncelleyemez; zamanla profil bayatlar ve eşleştirme eskiyen veriyle çalışır; PS-03'ün (Likert `discType`) düzeltmesi kullanıcıya hiç yansımaz · Süre **S** · Geri alınır **evet** · Migration **yok**
+**B) Tekrar testi aç, eski cevapların üzerine yaz** · Kullanıcı ne görür: testi baştan alabiliyor · Ne kazanırsın: vaat tutulur, profil tazelenir, çıkışsız döngü kapanır · **Ne kaybedersin:** **eski profil geri getirilemez**; "kişi zamanla nasıl değişti" sorusu sonsuza kadar cevapsız kalır; kötü niyetli kullanıcı skorunu deneme-yanılmayla optimize edebilir · Süre **M** · Geri alınır **hayır (veri kaybı)** · Migration **yok**
+**C) Tekrar testi aç + eski cevabı sürümle** (geçmiş tablosu) · Kullanıcı ne görür: B ile aynı · Ne kazanırsın: profil değişimi izlenebilir, ileride "gelişim grafiği" mümkün · **Ne kaybedersin:** **yeni tablo = migration**; canlı DB'ye dokunuş ve yedek zorunluluğu; iş belirgin büyür; KVKK saklama süresi sorusu da açılır · Süre **L** · Geri alınır **kısmen** · Migration **VAR**
+**Karşılaştırma:** Canlıda çok az kullanıcı varsa B'nin veri kaybı küçüktür ve vaadi hemen tutar. Ürün ileride "kendi gelişimini gör" iddiası taşıyacaksa C'yi **sonradan** eklemek geriye dönük veriyi kurtaramaz — o veri zaten kaybolmuş olur. A en ucuz ve en dürüst olan; ama profil tazeleme ihtiyacını tamamen erteler.
+**Benim önerim:** **B** — çünkü vaat zaten verilmiş durumda ve tutulmaması kullanıcıya bugün zarar veriyor; sürümleme ayrı ve sonradan verilebilecek bir karardır. *(Bu senin ürün kararın; "geçmişi saklamak" sana önemli geliyorsa önerime güvenme, C doğrudur.)*
+**Cevap vermezsen:** Üç düğme yalan söylemeye devam eder; "uygun mentor yok" ekranındaki çıkışsız döngü (PS-10) kapanmaz.
+**CEVAP:**
+
+---
+```
+
+### KARAR-45 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-045.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-45 · Arketip adları: hangi metin hangi koda bağlanacak? (4 işi açar) [ÜRÜN KARARI]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** **KARAR-10** (OCEAN motoru) ile karıştırma — o *motor açılsın mı*, bu *hangi ad hangi koda bağlansın*. Motor açılmasa bile ad↔kod kararı **IC-14 · I-01 · I-15**'i açar.
+
+**Şu an ne var:** Kullanıcı bugün mizaç testini bitirince "Sen bir **Öncü**sün!" gibi bir kart görüyor
+(4 ad: Öncü · Ateşleyici · Yapı Taşı · Kâşif). Kanıt: `onboardingController.ts:53-104`, ekran `ResultStep.tsx:39-43`.
+Ayrıca yazılmış ama hiç gösterilmeyen **8 yeni arketip kartı** var (Mimar · Ayna · Liman · Pusula / Rotacı · Kâşif ·
+Denge Arayan · İz Açan) — `arketip-ve-yaklasim-icerigi-2026-09-03.md:153-261`.
+
+· Kodda DÖRDÜNCÜ bir ad seti de var: kurum kayıt önizlemesi "Lider · İlham Veren · Denge Kurucusu · Analist" gösteriyor (`selfServeController.ts:77-82`) — hangi seçenek seçilirse seçilsin bu set de hizalanmalı. Yeni 8 ad 2026-08-28'de PO kararıyla seçildi (TAS); eşlemesi TAS'taki Big Five profillerinden türetilebilir (`TAS:71-107`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-45)*
+**Sorun ne:** Üç ayrı yerde "**Kâşif**" var ve üçü farklı kişiyi anlatıyor: canlıdaki DISC kartında bir mizaç tipi
+(`onboardingController.ts:94`), eski karar belgesinde bir **mentör** tipi (`03-psikometri-ve-algoritma.md:14`),
+yeni içerikte bir **menti** tipi (`arketip-...md:53`). Üstelik yeni 8 adın hiçbirinin, sistemin içindeki kod
+değerine (M1…m4 gibi teknik etiketler) karşılığı **hiçbir belgede yazılı değil**. Buna karar verilmeden yeni
+kartlar bağlanamaz; bağlanırsa kullanıcı aynı adı iki ekranda iki farklı anlamda görür. Ayrıca yeni adlardan
+**"İz Açan" senin onayını almamış** (belge `:263` bunu kendisi not etmiş).
+
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında okuduğu **kimlik etiketi**. Teknik değil; hangi adın
+kalacağı, hangisinin emekli olacağı ürün kararı ve geri dönmesi zor (kullanıcı ekran görüntüsü paylaşıyor —
+`onboardingController.ts:68` `shareHeadline`).
+
+**Seçenekler:**
+**A) Yeni 8 ad kazanır, canlıdaki 4 DISC adı emekli olur** · Kullanıcı: yeni kartları görür, eski adlar kaybolur ·
+Kazanç: tek sistem, çakışma biter · Kayıp: bugün test çözmüş kullanıcıların bildiği ad değişir; "Kâşif" anlam
+değiştirir (mizaç tipi → menti arketipi) · Süre: M · Geri alınır: evet (metin) · Migration: yok
+**B) İkisi yan yana yaşar — farklı şeyler oldukları açıkça yazılır** · Kullanıcı: hem mizaç kartını hem arketip
+kartını görür · Kazanç: hiçbir içerik çöpe gitmez · Kayıp: iki kavramı ayırt etmek kullanıcıya iş yükü;
+"Kâşif" çakışması **sürer** (ad değişmezse kafa karışıklığı kalıcı) · Süre: M · Geri alınır: evet · Migration: yok
+**C) Yeni 8 ad kazanır ama çakışan adlar yeniden adlandırılır** ("Kâşif" ve onaysız "İz Açan" değişir) ·
+Kullanıcı: çakışmasız tek sistem · Kazanç: hem çakışma hem onay sorunu biter · Kayıp: 2 ad yeniden yazılır,
+8 kartın ilgili cümleleri elden geçer (belgeye göre "İz Açan" 6 yerde geçiyor) · Süre: M+ · Geri alınır: evet
+
+**Karşılaştırma:** Eski 4 adın kullanıcı zihninde yer ettiğini düşünüyorsan B; tek ve temiz bir sistem istiyorsan
+A; A'yı istiyorsun ama "Kâşif"in iki anlamı seni rahatsız ediyorsa C. A ve C arasındaki tek fark iki adın yeniden
+yazılması.
+**Benim önerim:** C — çakışma kalıcı kafa karışıklığı üretir ve "İz Açan" zaten onayını bekliyor; ikisini tek
+turda kapatmak ucuz.
+**Cevap vermezsen:** I-01 (yaklaşım metinleri), I-15 (arketip kartı), C-?? (ham `M1` kodları) ve madde 139'un
+menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı.
+**CEVAP:**
+
+---
+```
+
+### KARAR-48 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-048.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-48 · Test sonucu ve eşleşme skoru kullanıcıya nasıl anlatılsın? (3 ekran) [ÜRÜN KARARI]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** Mizaç testi bitince ekran *"Sen bir Öncüsün!"* diyor, konfeti atıyor, *"En İyi Eş: S + C"*
+yazıyor ve *"…en uygun … kişiyle **eşleştirileceksin**"* diye söz veriyor (`ResultStep.tsx:39-43,71,98-100`).
+Eşleşme kartında *"%87 uyum"* gibi bir sayı var (`menti/page.tsx:311`), gerekçe üretilemezse yerine
+*"Genel profil uyumu"* basılıyor (`matchingController.ts:15`).
+
+· Kimlik dili ve tutulamayan vaat kodda: "Sen bir Öncüsün!" (`ResultStep.tsx:38` · `DiscRecallCard.tsx:56` · `onboardingController.ts:67`), "En İyi Eş" / "…eşleştirileceksin" (`ResultStep.tsx:71,97-100`) — metodoloji "kişilik tanısı değildir" diyor. En somut, araştırma beklemeyen düzeltme: "En İyi Eş" + "eşleştirileceksin" vaadinin kaldırılması. *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-48)*
+**Sorun ne:** Ürünün kendi metodoloji sayfası *"kesin bir başarı garantisi değil"*, *"DISC kişilik tanısı
+değildir"* diyor — ama kullanıcının **gerçekten okuduğu** ekranlar (sonuç kartı, eşleşme kartı) bu temkinli dili
+taşımıyor: kimlik etiketi ("Sen bir X'sin"), üstünlük ("En İyi Eş"), kesin vaat ("eşleştirileceksin") ve
+açıklamasız bir yüzde. Üstelik sonuç kartında **paylaş düğmesi** var, yani bu dil ürünün dışına taşınıyor.
+Ayrıca havuz boşsa aynı kullanıcı birkaç ekran sonra *"uygun mentor bulunamadı"* görüyor — vaat tutulmuyor.
+
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında ne öğrendiği ve üründen ne beklediği; ölçü değil **vaat**
+meselesi. Teknik değil.
+
+**Seçenekler:**
+**A) Koşullu dile geç** ("şu an şu eğilimi gösteriyorsun", "genelde iyi anlaşılan", "eşleştirmeye çalışacağız",
+yüzde yerine bant) · Kullanıcı: daha dürüst, daha az kesin bir kart görür · Kazanç: metodoloji sayfasıyla tutarlı
+olur, vaat tutulmadığında hayal kırıklığı azalır · Kayıp: "aha anı" zayıflar, paylaşılabilirlik düşer ·
+Süre: S · Migration: yok
+**B) Bugünkü dil kalsın, yanına küçük bir çekince satırı eklensin** · Kullanıcı: aynı heyecanı yaşar, altında bir
+açıklama görür · Kazanç: etki korunur, dürüstlük eklenir · Kayıp: çekinceyi kimse okumaz; çelişki görünür kalır ·
+Süre: S · Migration: yok
+**C) Hiçbir şey değişmesin** · Kullanıcı: bugünkü kartı görür · Kazanç: sıfır iş, en güçlü ilk izlenim ·
+Kayıp: ürün iki dille konuşur (metodoloji temkinli, kart iddialı); yüzde açıklanmadığı için "neden bu mentör"
+sorusu cevapsız kalır · Süre: — · Geri alınır: —
+
+**Karşılaştırma:** İlk izlenimin çarpıcılığı büyüme için kritikse B; ürünün tek sesle konuşması senin için
+önemliyse A. C yalnızca bu çelişkiyi bilinçli kabul ediyorsan savunulabilir.
+**Benim önerim:** A — yüzde ve "eşleştirileceksin" ürünün **tutamadığı** iki vaat; kalan kısım zaten güçlü.
+**Cevap vermezsen:** C1-1…C1-6 (6 metin) olduğu gibi kalır; eşleşme kartındaki boş gerekçe de sürer.
+**CEVAP:**
+
+---
+```
+
+### KARAR-54 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-054.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-54 · Mentör/menti kart havuzu 5 tasarım kararı  (5+ işi açar)  [ÜRÜN KARARI · TASARIM · EN YÜKSEK ÖNCELİK]
+**Şu an ne var:** Backend rozet/sektör etiketi/uyum% alanlarını üretiyor ama kart havuzu ekranı henüz açılmadı; bu beş tasarım kararı verilmeden frontend bağlanamaz. Kanıt: `mentor-karti-rakip-analizi:87-91` · OB-01..05 (`00-ANALIZ-TURU-OZETI-2026-09-23.md:86`).
+**Sorun ne:** Kullanıcı mentör/menti ararken bir kart havuzu görecek; bu havuzun beş temel biçim kararı (mizaç nasıl gösterilsin, sektör etiketi kaç tane, sayfa başına kaç kart, arama/filtre bu turda mı, menti kartı mentör kartıyla aynı mı) verilmeden ekran çizilemez. Beşi de kullanıcının ne göreceğini belirler, teknik değildir.
+**Neden sana soruyorum:** Beş kalem de "kullanıcı ne görür / neyi yapabilir" kararı; kütüphane/kod değil, ürün biçimi.
+**Seçenekler:** (bu kart KÜMELE — beş alt-soruyu tek tek A/B ile sun)
+
+**54.1 — Mizaç kartta nasıl gösterilsin?**
+· **A — Arketip adı + rozet** (ör. "Öncü" + renkli rozet). Ne kazanırsın: sıcak, oyunsu, tek bakışta. **Ne kaybedersin:** ham boyut bilgisi gizlenir; "damgalayan dil" riski (bkz. KARAR-48). Süre S · geri alınır ✅ · migration yok
+· **B — Kısa ipucu cümlesi** ("iletişimde doğrudan"). Ne kazanırsın: temkinli, etiketlemez. **Ne kaybedersin:** daha sönük, kart kalabalıklaşır. Süre S · geri alınır ✅ · migration yok
+
+**54.2 — Sektör etiketi kaç tane + "+N" katlaması?**
+· **A — En fazla 2 etiket + "+N"** (ör. "Yazılım, Eğitim +3"). Ne kazanırsın: kart temiz. **Ne kaybedersin:** kullanıcı tüm sektörleri kartta göremez, tıklaması gerekir. Süre S · geri alınır ✅ · migration yok
+· **B — En fazla 3 etiket + "+N"**. Ne kazanırsın: daha çok bağlam. **Ne kaybedersin:** dar ekranda kart taşar. Süre S · geri alınır ✅ · migration yok
+
+**54.3 — Sayfa başına kaç kart?**
+· **A — 9 kart (3×3 grid) + sayfalama**. Ne kazanırsın: hızlı yüklenir, net. **Ne kaybedersin:** çok mentör varken çok sayfa gezilir. Süre S · geri alınır ✅ · migration yok
+· **B — 12+ kart, sonsuz kaydırma**. Ne kazanırsın: akıcı gezinme. **Ne kaybedersin:** performans yükü (backend `take:500` + cache, A8), konum kaybı. Süre M · geri alınır ✅ · migration yok
+
+**54.4 — Arama/filtre bu turda mı?**
+· **A — Bu tur yalnız liste, arama/filtre sonraki tur**. Ne kazanırsın: havuz hızlı canlıya çıkar. **Ne kaybedersin:** çok mentörde kullanıcı istediğini bulmakta zorlanır. Süre S · geri alınır ✅ · migration yok
+· **B — Sektör + uyum% filtresi bu tur**. Ne kazanırsın: kullanıcı ilk günden filtreler. **Ne kaybedersin:** havuz işi büyür, gecikir. Süre M · geri alınır ✅ · migration yok
+
+**54.5 — Menti kartı mentör kartıyla aynı mı?**
+· **A — Aynı şablon** (aynı alanlar, aynı düzen). Ne kazanırsın: tek bileşen, bakımı kolay. **Ne kaybedersin:** menti ile mentörün gösterilmesi gereken bilgi farklı olabilir (menti aranan konu, mentör uzmanlık). Süre S · geri alınır ✅ · migration yok
+· **B — İki ayrı şablon**. Ne kazanırsın: her role uygun alan. **Ne kaybedersin:** iki bileşen bakımı, tutarsızlık riski. Süre M · geri alınır ✅ · migration yok
+
+**Karşılaştırma:** Beş kalemin ortak mantığı "hızlı canlıya çıkar + sade" (A tarafı) ile "zengin + esnek" (B tarafı) arasında. Havuzu bir an önce kullanıcının önüne koymak öncelikse çoğunlukla A; ilk izlenimde zenginlik öncelikse B.
+**Benim önerim:** öneri YOK — bu beş alt-soru tamamen ürün/tasarım tercihi; her biri geri alınır ve düşük riskli, PO'nun görsel önceliğine bağlı.
+**Cevap vermezsen:** kart havuzu ekranı (OB-01..05) frontend'e hiç bağlanamaz; backend'in ürettiği rozet/sektör/uyum% kullanıcıya görünmez kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-57 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-057.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-57 · Kullanıcının mizaç sonucunu hangi test belirlesin?  (4 işi açar)  [ÜRÜN KARARI · TEKNİK]
+**Şu an ne var:** Aynı mizaç sonucuna üç ayrı yol yazıyor: (1) kayıt sırasındaki 8 soruluk test (`onboardingController.ts:109-190`), (2) `/disc-test` sayfasındaki 32 soruluk test (`questionService` + `discVectorService`), (3) panodaki "günün sorusu" kutusu (`adaptiveTestEngine`). Üçü farklı formülle hesaplıyor (boş boyut 0.25 ↔ 0.5, güven hesabı farklı, derinleşme soruları farklı açılıyor) ve en son hangisi çalıştıysa sonuç o oluyor. Kanıt: `icerik-tam-okuma-2026-09-23.md` §0-2.
+**Sorun ne:** Kullanıcı panodaki bir soruyu cevaplayınca mizaç tipi (ve eşleşme puanı) başka formülle yeniden hesaplanıp değişebilir. Kullanıcı bunun nedenini göremez.
+**Neden sana soruyorum:** Hangi ölçümün "gerçek" sayıldığı, kullanıcının gördüğü kartı ve eşleşmelerini belirler; yeni senaryo motoru (TAS) gelene kadar hangisinin yaşayacağı ürün kararıdır.
+**Seçenekler:**
+· **A — Tek yol: 32 soruluk test esas, diğer ikisi yalnız ona veri besler (ortak hesap).** Ne kazanırsın: tek formül, tutarlı sonuç. **Ne kaybedersin:** kayıttaki 8 soru ayrı ağırlıkla sayılmaz. Süre M · geri alınır ✅ · migration yok
+· **B — Kayıttaki 8 soru esas, 32 soruluk test ve pano yalnız "güveni artırır".** Ne kazanırsın: herkes aynı başlangıç noktasına sahip. **Ne kaybedersin:** 32 soruluk test anlamını yitirir. Süre M · geri alınır ✅ · migration yok
+· **C — Bugünkü hal sürer, yeni senaryo motoruna kadar dokunulmaz.** Ne kazanırsın: iş yok. **Ne kaybedersin:** sonuç sessizce değişmeye devam eder. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Senaryo motoru yakında gelecekse C geçici olarak kabul edilebilir; uzun sürecekse A.
+**Benim önerim:** A — md.162'nin "ortak buildDiscVector" önerisiyle aynı yön.
+**Cevap vermezsen:** md.162, md.168, md.169, PS-02 bağlanamaz.
+**CEVAP:**
+
+---
+```
+
+### KARAR-58 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-058.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-58 · Eski DISC ölçümü ↔ yeni Big Five senaryo bankası geçiş dönemi  (2+ işi açar)  [ÜRÜN KARARI · MIGRATION · GERİ DÖNÜLMEZ]
+**Şu an ne var:** Canlıda 8 hardcoded DISC sorusu (`onboardingController.ts:109-190`) + seed'de 32 Likert DISC (`seed.ts:30-184`). Big Five 39 senaryo/117 şık bankası yazılı ama koda hiç geçmemiş; motor da ölü (I-13). Kanıt: `icerik-kalitesi-2026-09-23.md:223`.
+**Sorun ne:** İki ölçüm sistemi çelişiyor (belge "ölçek yok, 3 şık, MOST_LEAST" ↔ kod "1-5 Likert / 4 şık"); banka canlıya çıkarsa eski DISC cevaplı kullanıcıların profili, iki ölçümün bir arada yürüyüp yürümeyeceği, eski `discVector`/`discType` alanlarının akıbeti belirsiz. Kuyrukta bu geçişi kapsayan satır yok (I-13 yalnız ölçek hatası, I-15 yalnız motor bağlama).
+**Neden sana soruyorum:** Kullanıcının ölçüldüğü temel araç değişiyor (DISC→Big Five); geçmiş veri anlamı + göç yolu geri dönülmez, migration içerir.
+**Seçenekler:**
+· **A — Kesme geçiş: banka açılınca herkes yeni ölçümden geçer, eski DISC verisi arşivlenir.** Kullanıcı ne görür: yeni senaryo testi, eski mizaç sonucu sıfırlanır. Ne kazanırsın: tek tutarlı sistem, temiz başlangıç. **Ne kaybedersin:** eski cevaplayanlar yeniden test olur; eski `discVector` verisinin anlamı kaybolur; GERİ DÖNÜLMEZ migration. Süre L · geri alınır ⛔ · migration VAR
+· **B — Paralel geçiş: eski DISC sonucu korunur, yeni banka yalnız yeni kullanıcılarda + isteyende çalışır.** Kullanıcı ne görür: eskiler eski sonucunu, yeniler yeni ölçümü. Ne kazanırsın: kimse veri kaybetmez, kademeli. **Ne kaybedersin:** iki ölçüm sistemi bir süre birlikte yaşar (bakım + tutarsızlık); eşleşme iki farklı temelden hesaplanır. Süre L · geri alınır ✅ (yeni sistem kapatılabilir) · migration VAR (ek alan)
+· **C — Banka bu tur canlıya çıkmaz, karar ertelenir.** Ne kazanırsın: risk yok, iş yok. **Ne kaybedersin:** 39 senaryo/117 şık ölü kalır; tasarım kararı beklemede. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Temiz tek sisteme hızlı geçiş öncelikse ve eski veri kaybı kabul edilebilirse A; hiçbir kullanıcının verisini kaybetmemek öncelikse B; banka henüz olgun değilse C. ⚠️ A ve B canlı veriye geri dönülmez dokunur — migration/seed öncesi yedek ZORUNLU (CLAUDE.md).
+**Benim önerim:** öneri YOK — bu geçmiş veri anlamını değiştiren geri dönülmez bir migration kararı; yalnız PO verir. En azından hangi eski alanın (discVector/discType) korunacağı ayrıca netleşmeli.
+**Cevap vermezsen:** senaryo bankasının koda girişi (I-13, I-15) hangi geçiş yolunu kuracağını bilemez; banka ölü kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-60 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-060.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-60 · Kullanıcı kişilik boyut yüzdesini görür mü?  (1 işi açar)  [ÜRÜN KARARI]
+**Şu an ne var:** Belgeler çelişiyor: TAS "kullanıcı yüzdeyi görmez" diyor (`TAS:44`), ARK "görebilir" diyor (kaynaksız, `ARK:46`), API ise ham OCEAN boyut değerlerini döndürüyor. Kanıt: `icerik-tam-okuma-2026-09-23.md` Z-15, Y-19.
+**Sorun ne:** Kullanıcının kendi kişilik kartında ham yüzde (ör. "Dışadönüklük %72") görüp görmeyeceği kararsız; API ham veriyi döndürdüğü için frontend'de sızma riski de var. Kullanıcı bir ekranda yüzde görürken diğerinde yalnız arketip görebilir.
+**Neden sana soruyorum:** Kullanıcının kendisi hakkında ne kadar ham veri gördüğü bir ürün + ton kararı; "yüzde soğuk/klinik" hissi tasarımın arketip metaforu seçme gerekçesiyle (`devir/08-oturum-tezi-2026-08-28.md:32`) ilgili.
+**Seçenekler:**
+· **A — Yüzde gösterilmez, yalnız arketip/ipucu (TAS).** Kullanıcı ne görür: "Öncü" gibi bir arketip, sayı yok. Ne kazanırsın: sıcak, damgalamayan, "eğilim" diliyle tutarlı. **Ne kaybedersin:** meraklı kullanıcı ham sonucu göremez; API ham veriyi döndürmeye devam ederse şeffaflık dengesizliği kalır. Süre S · geri alınır ✅ · migration yok
+· **B — Yüzde gösterilir (ARK).** Kullanıcı ne görür: her boyut için sayı. Ne kazanırsın: şeffaf, meraklıyı tatmin eder. **Ne kaybedersin:** klinik/soğuk his; dayanağı zayıf skorun kesin sayı gibi sunulması (KARAR-66 ile çelişir); kırılganda yanlış özdeğer riski. Süre S · geri alınır ✅ · migration yok
+**Karşılaştırma:** Ürünün temkinli metodoloji diliyle tek ses A; şeffaflık ve merak öndeyse B ama sayıyı "kesin ölçüm" gibi göstermenin etik riskini taşır.
+**Benim önerim:** A — KARAR-48/KARAR-64'ün temkinli "eğilim" diliyle en tutarlısı; API ham veri sızmasının da ayrıca kapatılması gerekir.
+**Cevap vermezsen:** kişilik kartı işi hangi veriyi göstereceğini bilemez; API ham OCEAN döndürmeye devam eder.
+**CEVAP:**
+
+---
+```
+
+### KARAR-62 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-062.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-62 · İlk ölçüm: herkes aynı senaryoları mı çözsün, sistem kişiye göre mi seçsin?  (2 işi açar)  [ÜRÜN KARARI · ÖLÇME YÖNTEMİ]
+> Cross-ref: KARAR-57 "hangi test kanonik" kararıdır; bu kart "aynı mı, adaptif mi" ayrı ölçme yöntemi kararıdır.
+**Şu an ne var:** Kodda senaryo bankası henüz yok. Kullanıcı bugün 8 soruluk DISC testi çözüyor (`onboardingController.ts:109-190`). Yazılı iki plan birbirini tutmuyor: Tasarım belgesi "ilk oturum 12 senaryo, herkes aynı 12'yi görür, karşılaştırma için şart" (`TAS:159-163`); senaryo bankası "5 sabit + 10 kişiye göre seçilen = 15 senaryo" (`BANKA:14,45`, "PO onaylı").
+**Sorun ne:** Daha yeni belge daha eskisindeki "şart" kelimesini gerekçe yazmadan aşmış. 15 senaryolu planda kişiler arası doğrudan karşılaştırma yalnız 5 ortak senaryoda mümkün. "Kişiye göre seçme" motoru kodda hiç yok (`triggersOn` alanı var, kullanımı 0).
+**Neden sana soruyorum:** Ölçme yöntemi değişiyor: kullanıcının kaç soru çözeceği ve iki kişinin aynı ölçüyle ölçülüp ölçülmediği. Teknik değil.
+**Seçenekler:**
+· **A — 5 sabit + 10 kişiye göre seçilen (senaryo bankası planı).** Kullanıcı ne görür: 15 senaryo (~5 dk), belirsiz kaldığı tarafa odaklanan sorular. Ne kazanırsın: en çok bilgi, en az "şimdilik" etiketi. **Ne kaybedersin:** kişiler arası karşılaştırma 5 senaryoya düşer; seçim motoru yazılmadan başlanamaz (ek iş M-L); tasarımdaki "şart" geri alınır. Süre L · geri alınır ✅ · migration muhtemelen VAR (TEYİT GEREK)
+· **B — 12 sabit senaryo, herkese aynı (tasarım belgesi planı).** Kullanıcı ne görür: 12 senaryo (~4 dk). Ne kazanırsın: en basit, herkese adil, karşılaştırılabilir; seçim motoru gerekmez. **Ne kaybedersin:** 39'luk bankada "12'lik çekirdek" yok, yeniden seçilmesi gerekir; belirsiz boyuta odaklanma olmaz; daha az sinyal (`TAS:332` bunu "dürüst sınır" demiş). Süre M · geri alınır ✅ · migration aynı
+· **C — Geçiş planı: şimdilik 15 SABİT senaryo (5 çekirdek + havuzdan seçilmiş sabit 10), kişiye göre seçim sonra.** Kullanıcı ne görür: 15 senaryo, herkes aynı. Ne kazanırsın: seçim motorunu beklemeden 15 sinyal + karşılaştırılabilirlik; A'ya sonra geçilir. **Ne kaybedersin:** sabit 10'u birinin seçmesi gerekir (içerik işi); "en bulanık boyuta odaklanma" ertelenir; iki geçiş olur. Süre M · geri alınır ✅ · migration aynı
+**Karşılaştırma:** Ölçümün kişiye özel keskinliği önemliyse ve seçim motorunun işine hazırsan A. Kurum yöneticisinin iki kişiyi aynı ölçüyle kıyaslaması önemliyse B. Hemen başlamak ama A'yı kapatmamak istiyorsan C.
+**Benim önerim:** C — seçim motoru bugün yok, C bugün uygulanabilir ve A'ya açık kalır. ⚠️ Bu bir ölçme yöntemi kararı; önerime güvenme, kendi önceliğine göre seç.
+**Cevap vermezsen:** senaryo bankasının koda girişi (Faz 5 "a"+"f": 39 senaryo seed + 5+10 akış) hangi akışı kuracağını bilemez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-63 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-063.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-63 · Arketip atama eşiği: 45/55/60 bandı belgelensin mi, kaldırılsın mı?  (1 işi açar)  [ÜRÜN KARARI · PUANLAMA]
+**Şu an ne var:** Arketip atayan kod bir kişilik boyutunun 45/55/60 eşiklerini aşıp aşmadığına bakıyor (`scoring.config.ts:31`). Hiçbir eşik aşılmazsa kişiye otomatik "M1" (mentörde Mimar) / "m1" (mentide Rotacı) veriliyor (`disc-to-ocean.adapter.ts:35,42`). Bu eşikler hiçbir belgede yazılı değil. İçerik belgesindeki kural (P3) farklı: herkes arketip alır, en yüksek boyut + ikinci gösterilir, fark 10 puandan azsa "şimdilik" dili (`ARK:83-106`). Eski karar belgesinde üçüncü kural: 40-60 arası "kararsız", ek soru açılır (`PSI:36`).
+**Sorun ne:** Bugünkü kod P3 kararını ihlal ediyor — eşiği aşamayan herkes Mimar/Rotacı oluyor, kendi baskın tarafını değil varsayılanı görüyor. Beş boyuttan dört arketipe geçiş yazılı değil (`ARK:96,440`). PS-A1 (ölçek düzeltme) tam bu dosyaya dokunacak; karar verilmezse "düzeltme" belgesiz eşikleri kalıcılaştırır.
+**Neden sana soruyorum:** Kişinin kendisi hakkında okuyacağı etiketi hangi puanın belirleyeceği, puanlama/eşik kararıdır.
+**Seçenekler:**
+· **A — İçerik belgesi kuralı (P3): en yüksek boyut kazanır, 10 puan altı fark "şimdilik" dili alır; 45/55/60 kaldırılır.** Kullanıcı ne görür: herkes kendi baskın tarafının arketipini, belirsizse "şimdilik" diliyle. Ne kazanırsın: P3 kararınla birebir; "herkese Mimar" hatası biter. **Ne kaybedersin:** zayıf öne çıkış bile arketip verir (belirsizlik dille yönetilir); 10 puan "muhakeme", ampirik değil (`ARK:98`). Süre M · geri alınır ✅ · migration yok
+· **B — Koddaki mutlak eşikler (45/55/60) kalır, belgeye yazılır; "şimdilik" dili yalnız metin katmanında.** Kullanıcı ne görür: yalnız gerçekten yüksek çıkan boyut arketip verir; diğerleri varsayılan/"henüz belirlenmedi". Ne kazanırsın: güçlü etiket yalnız güçlü sinyale. **Ne kaybedersin:** P3'te reddettiğin "arketip verme" yoluna dönülür; varsayılanın ne olacağı yeni bir soru olur. Süre S · geri alınır ✅ · migration yok
+· **C — Katmanlı: A kuralı arketip verir, 40-60 bandı yalnız "hangi boyut için ek senaryo" tetiği olur, 45/55/60 kaldırılır.** Kullanıcı ne görür: A ile aynı + belirsiz tarafına derinleşme soruları. Ne kazanırsın: üç kuralın her birinin tek görevi olur, çelişki biter. **Ne kaybedersin:** derinleşme motoru yazılmadan 40-60 ayağı çalışmaz (KARAR-62'ye bağlı); en karmaşık seçenek. Süre M+ · geri alınır ✅ · migration yok
+**Karşılaştırma:** P3 kararın hâlâ geçerliyse A ya da C. Güçlü etiketi yalnız güçlü sinyale vermek istiyorsan B, ama bu P3'ü geri almak demek. A ile C'nin tek farkı, 40-60 bandının derinleşme için kullanılıp kullanılmaması.
+**Benim önerim:** A — P3 zaten senin kararın; C'nin fazlası derinleşme motoru gelince eklenebilir.
+**Cevap vermezsen:** PS-A1 ölçeği düzeltir ama eşikleri olduğu gibi bırakır (sessiz kalıcılaşma); I-15 arketip kartı hangi kuralla dolacağını bilmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-64 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-064.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-64 · Kullanıcıya görünen ad: "mizaç" mı, "karakter" mi, "kişilik" mi?  (1 işi açar)  [ÜRÜN KARARI · KULLANICI METNİ]
+**Şu an ne var:** Aynı şey üç adla anılıyor. Canlı ekranda "Mizaç profilin hazır!" (`onboardingController.ts:492`); yeni içerik belgeleri "karakter kartın" (`ARK:124`) ve "karakter ölçümü" (`BANKA:13`); aynı belgeler ağırlıktan söz ederken "kişilik" (`ARK:57-60`, `BANKA:48`). Terim sayımları: kullanıcı yüzeyi "mizaç" (15), admin/hukuki "karakter" (8), belgeler karışık (`icerik-mutabakati-2026-09-23.md` §5).
+**Sorun ne:** Kullanıcı aynı testi farklı ekranlarda farklı adla görecek. Hiçbir belge terim seçimini gerekçelendirmemiş.
+**Neden sana soruyorum:** Kullanıcıya görünen ürün adı; üç kelimenin Türkçede farklı çağrışımları var.
+**Seçenekler:**
+· **A — "Mizaç".** Kullanıcı ne görür: bugünkü ad. Ne kazanırsın: tanıdık, canlıda değişiklik yok. **Ne kaybedersin:** "doğuştan, değişmez" çağrışımı; KARAR-48'in "değişmez kimlik etiketi" eleştirisiyle ve Big Five "eğilim" diliyle çatışır. Süre S · geri alınır ✅ · migration yok
+· **B — "Karakter".** Kullanıcı ne görür: "karakter kartın". Ne kazanırsın: sıcak ve oyunsu, yeni içerik belgeleriyle uyumlu. **Ne kaybedersin:** Türkçede ahlaki yargı çağrıştırır ("iyi/kötü karakter"); paylaşılan kartta yanlış okunabilir. Süre S · geri alınır ✅ · migration yok
+· **C — "Kişilik".** Kullanıcı ne görür: "kişilik kartın". Ne kazanırsın: motorun bilimsel adıyla (Big Five) birebir, en dürüst ad. **Ne kaybedersin:** daha klinik ve soğuk; tasarım arketip metaforunu tam da "yüzde soğuk" diye seçmişti (`devir/08-oturum-tezi-2026-08-28.md:32`). Süre S · geri alınır ✅ · migration yok
+**Karşılaştırma:** Canlıda hiçbir şey değişmesin istiyorsan A. Sıcaklık ve oyun hissi öndeyse B. Metodoloji sayfasıyla tek sesle konuşmak öndeyse C.
+**Benim önerim:** C — ürünün temkinli metodoloji diliyle (KARAR-48) en tutarlısı. ⚠️ Bu tamamen bir ton kararı; önerime güvenme.
+**Cevap vermezsen:** yeni içerik (I-15 kartı, BANKA metinleri) koda "karakter" diye, canlı ekran "mizaç" diye girer; kullanıcı iki ad görür.
+**CEVAP:**
+
+---
+```
+
+### KARAR-108 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-108.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-108 · DISC eşitlik sırası iki yerde farklı — tek kaynak hangisi olsun? (0 iş kilitler; bugün kullanıcı etkisi yok)  [ÜRÜN KARARI · PSİKOMETRİ]
+> ⭐ Kaynak: AN-12 incelemesi B kısmı (2026-09-27, salt-okuma); `backend/src/controllers/onboardingController.ts:214-215`'teki kod yorumu da bu çelişkiyi not ediyor.
+
+**Şu an ne var:** Kullanıcının DISC harfini belirleyen dört yerden üçü eşit puanda **D > I > S > C** sırasını kullanıyor: canlı onboarding testi (`onboardingController.ts:213-217`), çok harfli gösterim (`discLetters.ts:44-45`), yeni uyarlanabilir test (`adaptiveTestEngine.ts:100-101`). Dördüncüsü, eski 7 soruluk mizaç testi ucu (`temperamentAnalysis.ts:15-16`), **D > I > C > S** kullanıyor. Bu uç hiçbir ekrandan çağrılmıyor (ön yüzde 0 referans) ama sunucuda açık (`userRoutes.ts:63`).
+**Sorun ne:** Fark yalnız S ve C puanı eşit ve en yüksek olduğunda çıkıyor: biri "S", diğeri "C" der. Eski uç bir gün yeniden bağlanırsa ya da doğrudan çağrılırsa aynı kişi farklı mizaç kartı (ve vektörü yoksa farklı eşleştirme puanı) görebilir.
+**Neden sana soruyorum:** Eşitlikte hangi mizacın öne çıkacağı psikometrik bir tercih; kullanıcının kendisi hakkında okuduğu sonucu değiştirir.
+**Seçenekler:**
+- **A) Her yerde D > I > S > C** (bugünkü 3 canlı yolun sırası) — Kullanıcı: hiçbir değişiklik görmez · Kazanç: tek kaynak, canlı davranış aynı · Kayıp: eski testin (muhtemelen bilinçli) D > I > C > S tercihi terk edilir · Süre S · Geri alınır · Migration yok.
+- **B) Her yerde D > I > C > S** — Kullanıcı: eşit S/C puanlı kişilerde canlı testin sonucu değişir (S yerine C) · Kazanç: tek kaynak · Kayıp: canlı 3 yolun davranışı değişir, bazı kullanıcıların harfi değişebilir · Süre S · Geri alınır · Migration yok.
+- **C) Şimdilik dokunma; eski mizaç testi ucunu ayrıca karantinaya al** (zaten çağrılmıyor) — Kullanıcı: değişiklik yok · Kazanç: en az iş · Kayıp: çelişki kodda kalır · Süre S · Geri alınır (karantina 🔵 ayrı EVET ister) · Migration yok.
+**Karşılaştırma:** Bugün gerçek etkisi yok; soru "gelecekte hangisine sabitleyelim". A canlı davranışı hiç değiştirmez; B değiştirir; C kararı erteler.
+**Benim önerim:** A — canlı üç yol zaten bu sırada, kimsenin sonucu değişmez. *(Bu senin ürün kararın; önerime güvenme.)*
+**Cevap vermezsen:** Çelişki kodda işaretli kalır; hiçbir iş kilitlenmez.
+**CEVAP:**
+```
+
+### KARAR-121 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-121.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-121 · Kişilik testinin cevap biçimi: zorunlu seçim mi, puanlama mı, karma mı? (0 iş kilitliyor; KARAR-58 ve KARAR-103 md.12 ile ilişkili) [ÜRÜN KARARI · PSİKOMETRİ]
+**Şu an ne var:** Mizaç soruları iki ayrı biçimde: kayıtta "dört şıktan birini seç", /disc-test'te 1-5 katılım ölçeği. Karma biçim tasarlanmadı; ters ifadeli (tutarlılık) soru da yok. Kanıt: `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:716,764` · `backend/prisma/schema.prisma:738-752`.
+**Sorun ne:** Yalnız "birini seç" biçimi kişileri birbirleriyle kıyaslamayı bozar (herkesin toplamı aynı çıkar); yalnız puanlama ise "hepsine 5 veririm" kaymasına açık.
+**Neden sana soruyorum:** Kullanıcının testi nasıl yaşadığını ve sonucun anlamını değiştirir; psikometri tasarım kararı.
+**Seçenekler:**
+- **A) Karma: temel sorular puanlama + birkaç zorunlu seçim sorusu.** · Kullanıcı ne görür: iki tür soru · Kazanç: iki sorunun da etkisi azalır · Kaybedersin: test biraz uzar; puanlama kodu ve içerik yeniden yazılır · Süre: L · Geri alınır: evet (eski cevaplar korunursa) · Migration: muhtemel (soru tipi alanı)
+- **B) Bugünkü biçim kalsın, yalnız ters ifadeli tutarlılık soruları eklensin.** · Kullanıcı ne görür: birkaç ters ifadeli soru · Kazanç: az iş, kayma tespit edilir · Kaybedersin: kıyaslama sorunu sürer · Süre: M · Geri alınır: evet · Migration: muhtemel
+- **C) Big Five geçişine (KARAR-58) kadar dokunma.** · Kullanıcı ne görür: değişiklik yok · Kazanç: iş yok; geçişte tek seferde tasarlanır · Kaybedersin: bugünkü ölçüm zayıflığı sürer · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Ölçüm kalitesi hemen önemliyse A; hafif iyileştirme yeterliyse B; test zaten Big Five'a geçecekse C emek israfını önler.
+**Benim önerim:** C — KARAR-58 cevapsızken biçim tasarlamak iki kez iş demek; bu senin ürün kararın, önerime güvenme (uzman paketi G-6 ile birlikte düşün).
+**Cevap vermezsen:** Test biçimi olduğu gibi kalır; başka iş kilitlenmez.
+**CEVAP:**
+```
+
+### KARAR-122 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-122.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-122 · Kişi derinleşme sorularını sınırsız yeniden cevaplayıp profilini değiştirebilsin mi? (0 iş kilitliyor) [ÜRÜN KARARI · PSİKOMETRİ]
+⚠️ **KARAR-42 ile AYNI ürün sorusu (kümeleme):** kişi cevaplarını yeniden verip profilini değiştirebilir mi — iki kart BİRLİKTE cevaplanmalı (çelişkili cevap riski: 42=B sınırsız yeniden test ↔ 122=B 30 günlük sınır). Bugün arayüz havuzu bitiren kullanıcıya yeniden soru göstermiyor (KARAR-42); sınırsız yeniden cevap yalnız doğrudan API çağrısıyla mümkün (`POST /api/questions/:id/respond`).
+**Şu an ne var:** Ek (derinleşme) sorular her cevaplandığında mizaç profili baştan hesaplanıyor; kaç kez cevaplanabileceğine sınır yok. Kanıt: `backend/src/controllers/questionController.ts:318-321` (her yanıtta `recalcDiscVector`) · kaynak `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:366` (G3-03).
+**Sorun ne:** Kişi istediği profili çıkarana kadar cevapları değiştirebilir; eşleşme önerileri de her seferinde kayar.
+**Neden sana soruyorum:** Kullanıcının kendi profiline ne kadar hükmedebileceği ürün kararı.
+**Seçenekler:**
+- **A) Sınırsız kalsın.** · Kullanıcı ne görür: istediği kadar günceller · Kazanç: özgürlük; "değiştim" diyenin profili tazelenir · Kaybedersin: oyunlama, eşleşme istikrarsızlığı · Süre: — · Geri alınır: — · Migration: yok
+- **B) Dönemsel sınır (ör. 30 günde bir yeniden derinleşme).** · Kullanıcı ne görür: "bir sonraki güncelleme X tarihinde" notu · Kazanç: istikrar, oyunlama zorlaşır · Kaybedersin: gerçek değişim de beklemek zorunda · Süre: S · Geri alınır: evet · Migration: muhtemelen yok (son cevap tarihi mevcut)
+- **C) Yeniden cevap serbest, ama profil yalnız belirgin değişimde güncellenir (eşik).** · Kullanıcı ne görür: küçük oynamalarda profil değişmez · Kazanç: hem özgürlük hem istikrar · Kaybedersin: davranış kullanıcıya anlaşılmaz gelebilir; eşik psikometri kararı ister · Süre: M · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Kullanıcı güveni öncelikse A; eşleşme istikrarı öncelikse B; ikisi arasında denge istiyorsan C.
+**Benim önerim:** B — basit ve anlaşılır; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Sınırsız davranış sürer; başka iş kilitlenmez.
+**CEVAP:**
+```
 
