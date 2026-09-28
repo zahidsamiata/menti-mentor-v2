@@ -39,6 +39,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { updateOnboarding } from '@/lib/api/selfServe';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 // ─── Sabitler ────────────────────────────────────────────────────────────────
 
@@ -117,9 +118,7 @@ export default function BrandingPage() {
     <div className="max-w-2xl mx-auto py-8 px-4 space-y-6">
       <div className="space-y-1">
         <h1 className="text-2xl font-bold text-foreground">Marka Ayarları</h1>
-        <p className="text-sm text-muted-foreground">
-          Kurumunuzun logo ve rengini düzenleyin. Değişiklikler tüm kullanıcılarınıza yansır.
-        </p>
+        <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.branding}</p>
       </div>
 
       <Card>

@@ -21,6 +21,7 @@ import type { CertificationStatus } from '@/types/admin';
 import { cn } from '@/lib/utils';
 import { CERT_STATUS_BADGE } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 // Filtre sekmeleri: value null ise "Tümü" (filtresiz)
 const STATUS_TABS: { label: string; value: CertificationStatus | null }[] = [
@@ -55,9 +56,7 @@ export default function CertResultsPage() {
       {/* Başlık */}
       <div>
         <h1 className="text-2xl font-bold">Mentör Sertifika Sonuçları</h1>
-        <p className="text-sm text-muted-foreground">
-          Mentörlerin sertifikasyon durumlarını, skorlarını ve deneme sayılarını inceleyin.
-        </p>
+        <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS['sertifika-sonuclari']}</p>
       </div>
 
       {/* Durum sekmeleri — AJ-85: adlandırılmış düğme grubu, seçili sekme aria-pressed. */}

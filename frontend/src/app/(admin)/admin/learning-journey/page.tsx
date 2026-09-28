@@ -24,6 +24,7 @@ import {
   type StageOutcome,
 } from '@/lib/api/learningJourney';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 const AUDIENCES: { value: LearningAudience; label: string }[] = [
   { value: 'MENTOR', label: 'Mentör Yolculuğu' },
@@ -74,10 +75,7 @@ export default function AdminLearningJourneyPage() {
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <h1 className="text-xl font-bold">Öğrenme Yolculuğu</h1>
-          <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
-            Keşif temelli aşamalar — sınav değil. Global çekirdek aşamalar kilitlidir;
-            özelleştirerek kendi kopyanı düzenleyebilir ya da gizleyebilirsin.
-          </p>
+          <p className="text-sm text-muted-foreground mt-1 max-w-2xl">{ADMIN_PAGE_DESCRIPTIONS['learning-journey']}</p>
         </div>
         <Button size="sm" onClick={() => { setShowAdd((s) => !s); setEditId(null); }}>
           {showAdd ? UI_TEXT.actions.cancel : '+ Yeni Aşama'}

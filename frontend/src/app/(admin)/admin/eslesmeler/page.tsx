@@ -22,6 +22,7 @@ import { RISK_META } from '@/lib/adminMetrics';
 import { cn } from '@/lib/utils';
 import { UI_TEXT } from '@/lib/uiText';
 import { BlockPairPanel } from './BlockPairPanel';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 // null = "Tümü" (durum filtresi yok)
 const STATUS_TABS: { label: string; value: MatchStatus | null }[] = [
@@ -61,9 +62,7 @@ export default function EslesmelerPage() {
       {/* Başlık */}
       <div>
         <h1 className="text-2xl font-bold">Eşleşmeler</h1>
-        <p className="text-sm text-muted-foreground">
-          Kurumunuzdaki mentör-menti eşleşmeleri.
-        </p>
+        <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.eslesmeler}</p>
       </div>
 
       {/* E-3d: kurumsal huzur için admin iki üyeyi birbirleriyle eşleşmeye kapatır (KR-19) */}

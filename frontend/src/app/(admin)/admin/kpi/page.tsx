@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { computeAdminAlerts } from '@/lib/adminAlerts';
 import { Button } from '@/components/ui/button';
 import type { KpiCompletionRate } from '@/types/admin';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 /**
  * PS-05: Backend'in k-anonimlik eşiği (`backend/src/services/mask.ts` K_ANONYMITY_THRESHOLD, V-05).
@@ -88,7 +89,7 @@ export default function KpiPage() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">KPI Paneli</h1>
-          <p className="text-sm text-muted-foreground">Tenant bazlı istatistikler (aggregate — PII içermez).</p>
+          <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.kpi}</p>
         </div>
         <div className="flex flex-col items-end gap-1">
           <Button variant="outline" onClick={handleDownloadCsv} disabled={downloading} data-testid="kpi-csv-download">

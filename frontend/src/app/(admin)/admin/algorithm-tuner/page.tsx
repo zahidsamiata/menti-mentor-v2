@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 const FREQ_OPTIONS: { value: ReportingFrequency; label: string; desc: string }[] = [
   { value: 'WEEKLY',   label: 'Haftalık',    desc: 'Her Pazar analiz yapılır' },
@@ -132,9 +133,7 @@ export default function AlgorithmTunerPage() {
     <div className="space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold">Algoritma Kalibrasyon Merkezi</h1>
-        <p className="text-sm text-muted-foreground">
-          Eşleştirme ağırlıklarını NPS verilerine göre optimize edin.
-        </p>
+        <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS['algorithm-tuner']}</p>
       </div>
 
       {actionError && <AlertMessage type="error" message={actionError} />}

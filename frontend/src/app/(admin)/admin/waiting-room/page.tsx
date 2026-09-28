@@ -13,6 +13,7 @@ import { CoachingSuggestionsDialog } from '@/components/organisms/CoachingSugges
 import { DiscBadge } from '@/components/atoms/DiscBadge';
 import type { AdminUser } from '@/types/admin';
 import { roleLabel } from '@/lib/enumLabels';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 export default function WaitingRoomPage() {
   const api = useApiClient();
@@ -51,9 +52,7 @@ export default function WaitingRoomPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Bekleme Odası</h1>
-          <p className="text-sm text-muted-foreground">
-            DISC testini tamamlayan ve onay bekleyen kullanıcılar.
-          </p>
+          <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS['waiting-room']}</p>
         </div>
         {!isLoading && (
           <Badge variant={pendingCount > 0 ? 'warning' : 'success'} className="text-sm px-3 py-1">

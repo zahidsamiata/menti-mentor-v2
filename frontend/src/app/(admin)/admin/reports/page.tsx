@@ -18,6 +18,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { ReportStatus, TenantReport } from '@/types/admin';
 import { REPORT_STATUS_LABELS, reportReasonLabel, reportStatusLabel } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 /**
  * AJ-61 — Durum/neden METİNLERİ tek kaynaktan (`lib/enumLabels.ts`) okunur; platform paneli de
@@ -195,9 +196,7 @@ export default function AdminReportsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Şikayetler</h1>
-          <p className="text-sm text-muted-foreground">
-            Kurum üyelerinin birbirleri hakkında bıraktığı şikayetleri inceleyin.
-          </p>
+          <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.reports}</p>
         </div>
         {data && (
           <Badge variant="warning" className="text-sm px-3 py-1">{total}</Badge>

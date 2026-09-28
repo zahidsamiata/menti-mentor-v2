@@ -19,6 +19,7 @@ import { PendingUserCard } from '@/components/organisms/PendingUserCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 export default function ApprovalsPage() {
   const api = useApiClient();
@@ -36,9 +37,7 @@ export default function ApprovalsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Onay Kuyruğu</h1>
-          <p className="text-sm text-muted-foreground">
-            Platforma katılmak isteyen kullanıcıları inceleyin.
-          </p>
+          <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.approvals}</p>
         </div>
         {data && (
           <Badge variant="warning" className="text-sm px-3 py-1">
