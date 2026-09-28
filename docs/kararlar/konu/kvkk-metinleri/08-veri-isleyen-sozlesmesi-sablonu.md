@@ -39,10 +39,11 @@ Barındırma ve OAuth sağlayıcıları yurt dışındadır. Aktarım **[HUKUKÇ
 Veri İşleyen, bir ihlali öğrenmesinden itibaren **gecikmeksizin** Veri Sorumlusu'na bildirir; Veri Sorumlusu Kurul'a/ilgili kişilere bildirim yükümlülüğünü yerine getirir. [HUKUKÇU KARARI: bildirim süresi — Kurul "en kısa sürede/72 saat" pratiği.]
 
 ## 7. Silme / iade
-Sözleşme sona erdiğinde Veri İşleyen, Veri Sorumlusu'nun talimatına göre verileri **siler veya anonimleştirir ya da iade eder** (avukat: anonimleştirme yeterli). *(Not: mevcut tam-silme kısıtı madde 39 — düzeltme iş maddesi.)*
+Sözleşme sona erdiğinde Veri İşleyen, Veri Sorumlusu'nun talimatına göre verileri **siler veya anonimleştirir ya da iade eder** (avukat: anonimleştirme yeterli). ~~[ESKİ · 2026-09-29] *(Not: mevcut tam-silme kısıtı madde 39 — düzeltme iş maddesi.)*~~
+> ⚠️ GÜNCELLEME (2026-09-29): madde 39 kapandı — "silme" talebi anonimleştirmeye yönlendirildi ve canlıda (`backend/src/services/gdprService.ts:266-267`, backend PR #54, 2026-08-26). Sözleşme cümlesi değiştirilmedi.
 
 ## 8. Denetim
 Veri Sorumlusu, makul bildirimle Veri İşleyen'in bu sözleşmeye uyumunu denetleyebilir (bilgi talebi / rapor).
 
 ---
-> **[KURUM DOLDURACAK]** ve **[PO DOLDURACAK]** alanları taraflarca tamamlanır. **Kayıt akışına entegrasyon (Tenant yasal kimlik alanları) KOD OLARAK YAPILMADI** → migration gerektirir, ayrı iş maddesi (`00-KARAR-TAKIP`). Bu şablon hukukçu onayı sonrası yürürlüğe girer.
+> **[KURUM DOLDURACAK]** ve **[PO DOLDURACAK]** alanları taraflarca tamamlanır. **Kayıt akışına entegrasyon (Tenant yasal kimlik alanları) KOD OLARAK YAPILMADI** *(2026-09-29 doğrulandı — hâlâ geçerli: `backend/prisma/schema.prisma`'da unvan/vergi/KEP/MERSİS alanı yok)* → migration gerektirir, ayrı iş maddesi (`00-KARAR-TAKIP`). Bu şablon hukukçu onayı sonrası yürürlüğe girer.

@@ -34,6 +34,7 @@ Kullanıcı tarafından girilen içerik kullanıcıya aittir; platform hizmeti s
 - İşletmeci, kötüye kullanım hâlinde hesabı askıya alabilir/sonlandırabilir.
 - ~~**Dürüst not:** hesap tam silme akışı şu an teknik kısıt (madde 39) nedeniyle sınırlıdır; düzeltilecektir.~~
   ⚠️ ÇELİŞKİ (2026-09-23, CS raporu): Kod tarafında hardDelete→anonymize BİRLEŞTİRİLMİŞ (merged) — `gdprService.ts:233` `hardDeleteUser`→`anonymizeUser`; hesap kapatma anonimleştirmeyle karşılanıyor, "düzeltilecek" değil uygulanmış. Metin "sınırlıdır/düzeltilecektir" diyor; kod tarafında akış yerinde → iki taraf çelişik, metin bayat. Kanıt: `gdprService.ts:233`. Karar PO'nun.
+  ⚠️ GÜNCELLEME (2026-09-29): `origin/main`'de doğrulandı — `backend/src/services/gdprService.ts:266-267` (backend PR #54, 2026-08-26); kullanıcı kendisi de başlatabilir (profil → "Hesabımı kapat", backend PR #59 + çatı PR #135). Üstü çizili cümlenin yerine yayında ne yazılacağı avukat/PO işi → kapak Bölüm 10 not N-2 · tek yönetici kısıtı → N-4.
 
 ## 8. Değişiklikler ve uygulanacak hukuk
 Koşullar güncellenebilir; önemli değişiklikler bildirilir. Uyuşmazlıklarda [HUKUKÇU KARARI: yetkili mahkeme/uygulanacak hukuk — gerçek kişi işletmeci + tüketici mevzuatı bağlamında].
