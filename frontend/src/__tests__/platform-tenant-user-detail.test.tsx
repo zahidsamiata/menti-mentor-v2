@@ -25,7 +25,7 @@ vi.mock('@/lib/api/platform', () => ({
 function detail(overrides: Partial<TenantUserDetail> = {}): TenantUserDetail {
   return {
     id: 'user-1',
-    fullName: 'Ayşe Yılmaz',
+    fullName: 'Örnek Kullanıcı',
     role: 'MENTOR',
     isActive: true,
     joinedAt: '2026-01-15T10:00:00.000Z',
@@ -49,7 +49,7 @@ describe('Platform paneli — kullanıcı detay görünümü (F-24)', () => {
     getTenantUserDetail.mockResolvedValue(detail());
     render(<TenantUserDetailPage />);
 
-    expect(await screen.findByText('Ayşe Yılmaz')).toBeInTheDocument();
+    expect(await screen.findByText('Örnek Kullanıcı')).toBeInTheDocument();
     expect(screen.getByText('Mentör')).toBeInTheDocument();
     expect(screen.getByText('a***@ornek.com')).toBeInTheDocument();
     expect(screen.getByText('D')).toBeInTheDocument();
