@@ -289,3 +289,20 @@ Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz:
 2. **Testler yeşil** — mevcutlar + yeni davranış için en az bir test
 3. **02-ILERLEME.md'ye yazıldı** — ne yapıldı, dosyalar, PR, "kullanıcı artık şunu görüyor"
 ```
+
+## AJ-46 7b düzeltmesi (2026-09-27) — YN-14'te değişen iki CLAUDE.md satırının TAM eski hâli (önceki kayıtta yalnız baş kısmı vardı)
+
+### § Çalışma Sözleşmesi — "Merge — kapıya göre" · eski satır 186 (main)
+
+```text
+- **Merge — kapıya göre (4 renk, PO 2026-09-26):** **🟢 → doğrulama listesi (+ hassas dosyada bağımsız inceleme ONAY + negatif test) tamsa MERGE ET** · **🔵 → hazırla, PR + EVET/HAYIR kartı; PO "EVET"i + tarihli yedek olmadan merge etme** · **🟡 → yalnız PO eli; kod kısmı 🟢 gibi, PO kısmı `03-PO-ELLE-ISLER.md`** · **🔴 → KARAR cevapsızsa dokunma.** — kanıt: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 7/7b · `docs/otonom/00-KUYRUK.md` § Kapılar. ⚠️ Bulut oturumu (claude.ai/code) **hiçbir kapıda merge edemez** (§ Bulut oturumu farkı) — orada "PR aç, merge etme" **aynen geçerlidir**.
+```
+
+### § Merge sonrası pointer bump — "Merge SIRASI" bloğu · eski satır 236-239 (main)
+
+```text
+- ⚠️ **Merge SIRASI (2026-08-28'de yaşandı, bkz. Faz 1b):** backend PR merge → **çatı pointer re-bump → çatı PR merge.**
+  Çatı PR'ı pointer düzeltilmeden merge edilirse main, backend **feature-commit'ini** gösterir (ağaç DOĞRU kalır — kod sağlam —
+  ama pointer **sarkar**). Düzeltme: temiz main'den ayrı `chore(pointer)` PR'ı ile `main` HEAD'e re-bump. Sarkma zararsızdır
+  (feature-commit backend main'in atası) ama temiz değildir → tek turda kapat.
+```
