@@ -756,3 +756,23 @@
 ```text
 | 119 | k-anonimlik (super-admin küçük-grup metrik yuvarlama) (= G1-22, bkz. bilanco/kararlar/G1-guvenlik-kvkk.md) | ⬜ AÇIK (PO önceliklendirmedi) · 🟨 kısmen — V-05: eşik 3 (`backend/src/services/mask.ts:52`), KPI ve platform analitiği maskeli; kalan: algoritma ayar ekranı + öneri e-postası NPS'i maskesiz → AJ-69 | ⬜ | T4-A2 | KVKK-agregat borcu: küçük grupta yeniden-tanımlanma riski | grep boş; iz zayıf | · ✅ AJ-69 kalanı yapıldı — PR #220/#411 · 2026-09-28 (algoritma ayar ekranı + e-posta maskeli; kalan küçük çıkarım → KARAR-126, mentör paneli → AJ-99)
 ```
+
+## AJ-101 · docs/kararlar/konu/03-psikometri-ve-algoritma.md — MENTÖRLÜK YETKİNLİĞİ & SERTİFİKASYON (2026-09-28, eski satırlar AYNEN)
+
+> NEDEN: bölüm kodla çelişiyordu (baraj %65 → kodda %80 konu; Mini Akademi kodda yok) — kaynak `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md` (AJ aday 1).
+
+```text
+## MENTÖRLÜK YETKİNLİĞİ & SERTİFİKASYON 🟢✅ · 🟨 kısmen (doğrulama 09-28) — var: sertifika kapısı + 24s bekleme + %80 konu eşiği `backend/src/services/certification.service.ts:27,33,52` · eksik: "Mini Akademi 4 modül" kodda/FE'de yok → AJ aday #1 (eski-onay raporu)
+```
+```text
+- **Mini Akademi:** 4 modül (Yönlendir/Dinle/Güvenli alan/Sınırlar), ~6 dk puansız + ~~[ESKİ · düzeltildi 2026-08-17] 4 pedagojik SJT~~ → **kod gerçeği 3 SJT** (bkz. alttaki ⚠️ GÜNCELLEME).
+```
+```text
+- **Baraj 65 + kırmızı-çizgi + cooldown:** 12 puan üzerinden %65 baraj VE hiçbir kırmızı-çizgi (isRedLine) sorusunda 0 puanlık şık seçilmemeli; 2. başarısızlıktan sonra 24s cooldown; baraj geçen çarpan=1.0.
+```
+
+- (AJ-101, 7b notu) docs/kararlar/konu/03-psikometri-ve-algoritma.md:55 eski satır:
+
+```text
+- Bağlam: `certification.service.ts`, PASS_THRESHOLD=65, CERT_CONFIG (passRateThreshold 0.8).
+```
