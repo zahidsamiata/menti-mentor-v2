@@ -1,5 +1,5 @@
 ### KARAR-115 · "Kurumunu Kur" (kurum kayıt) sayfası arama motorlarında görünsün mü? (0 iş kilitliyor) [ÜRÜN KARARI]
-**Şu an ne var:** Ana sayfanın bağlantı verdiği kurum kayıt sayfası (`/onboarding/stk`) arama sonuçlarında görünmüyor. Önceden bu, `robots.txt`'teki genel kapatma sayesindeydi; AJ-47 (#402) ile `robots.txt` artık hiçbir yolu kapatmıyor, sayfa kendi "dizine ekleme" (noindex) etiketiyle dışarıda tutuluyor — davranış aynı kaldı. Kanıt: `frontend/src/app/onboarding/stk/page.tsx:2,6` · `frontend/src/lib/publicRoutes.ts` (`PRIVATE_PATH_PREFIXES` içinde `/onboarding`).
+**Şu an ne var:** Ana sayfanın bağlantı verdiği kurum kayıt sayfası (`/onboarding/stk`) arama sonuçlarında görünmüyor. Önceden bu, `robots.txt`'teki genel kapatma sayesindeydi; AJ-47 (#402) ile `robots.txt` artık hiçbir yolu kapatmıyor, sayfa kendi "dizine ekleme" (noindex) etiketiyle dışarıda tutuluyor — davranış aynı kaldı. Kanıt: `frontend/src/app/onboarding/stk/page.tsx:2,6` · `frontend/src/lib/publicRoutes.ts:35` (`PRIVATE_PATH_PREFIXES` içinde `/onboarding`) · `frontend/src/app/robots.ts:12-20`.
 **Sorun ne:** Yeni kurumlar siteyi aramada "kurum kaydı" ile bulamaz; yalnız ana sayfadan ulaşır.
 **Neden sana soruyorum:** Kurum kazanımı için sayfanın aramada görünmesi bir pazarlama/ürün tercihi.
 **Seçenekler:**
@@ -7,7 +7,8 @@
 - **B) Görünsün.** · Kullanıcı ne görür: aramada "Kurumunu Kur" sayfası çıkar · Kazanç: yeni kurumlar doğrudan kayda ulaşır · Kaybedersin: onboarding yolu için özel istisna (liste bakımı); sayfanın başlık/açıklaması arama için yazılmalı · Süre: S · Geri alınır: evet · Migration: yok
 **Karşılaştırma:** Kurum kazanımı ağırlıklı ana sayfa üzerinden yürüyorsa A yeterli; arama trafiği hedefleniyorsa B.
 **Benim önerim:** A şimdilik — canlıda site adresi ayarı (`NEXT_PUBLIC_SITE_URL`, 03-PO) henüz yapılmadı, arama görünürlüğü o düzelmeden anlamlı olmaz; bu senin ürün kararın, önerime güvenme.
-**Cevap vermezsen:** Bugünkü davranış sürer (A).
+**Cevap vermezsen:** Bugünkü davranış sürer (A); hiçbir iş kilitli değil.
+**İlgili kartlar:** KARAR-119 (aramadan kurum kazanımı gelir modeline hizmet eder)
 **CEVAP:**
 
 

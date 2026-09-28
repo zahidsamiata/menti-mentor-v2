@@ -1,7 +1,8 @@
+> ⚪ gereksiz olabilir — KARAR-110 aynı `/periodic-survey` sayfasını daha güncel seçeneklerle soruyor (KR-11 ile AJ-14 aynı arıza: `backend/src/controllers/feedbackController.ts:11-30`); kapatma PO'nun
 ### KARAR-78 · Dönemlik anket özelliği kalsın mı, bağlansın mı, kaldırılsın mı? (1 iş açar: KR-11) [ÜRÜN KARARI · SİLME PROTOKOLÜ]
 > ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
 > ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A8 [D].
-**Şu an ne var:** `/periodic-survey` adında bir anket sayfası yazılı: kariyer netliği, güven (1-10), özgüven değişimi, tavsiye puanı (0-10) ve açık not soruyor. Veritabanında bu cevapların alanları hazır ve yanında *"ayda bir tetiklenir"* notu var. Ama: hiçbir ekrandan bu sayfaya bağlantı yok, ayda bir tetikleyen bir iş yok, sayfa gönderse de sunucu bu alanları tanımadığı için her gönderim reddediliyor. Kanıt: `frontend/src/app/(dashboard)/periodic-survey/page.tsx:54-65` · `backend/src/controllers/feedbackController.ts:9-28` · `backend/prisma/schema.prisma:643-648` · bağlantı araması `frontend/src` içinde boş.
+**Şu an ne var:** `/periodic-survey` adında bir anket sayfası yazılı: kariyer netliği, güven (1-10), özgüven değişimi, tavsiye puanı (0-10) ve açık not soruyor. Veritabanında bu cevapların alanları hazır ve yanında *"ayda bir tetiklenir"* notu var. Ama: hiçbir ekrandan bu sayfaya bağlantı yok, ayda bir tetikleyen bir iş yok, sayfa gönderse de sunucu bu alanları tanımadığı için her gönderim reddediliyor. Kanıt: `frontend/src/app/(dashboard)/periodic-survey/page.tsx:55-66` · `backend/src/controllers/feedbackController.ts:11-30` · `backend/prisma/schema.prisma:643-648` · bağlantı araması `frontend/src` içinde boş.
 **Sorun ne:** Kullanıcı bu anketi hiç görmüyor; özellik fiilen yok. "Mentörlük ilişkisi bir ayda ne kattı" verisi hiç toplanmıyor. Ölü sayfa her denetimde yeniden bulgu olarak çıkıyor.
 **Neden sana soruyorum:** Bir özelliğin var olup olmayacağı ve kaldırılması ürün kararıdır (CLAUDE.md "DUR VE SOR"). Kaldırma seçeneği silme protokolüne tabidir: önce niyet (şemadaki "ayda bir" notu), sonra yeni karar, arşiv, karantina; gerçek silme ancak ikinci onayla.
 **Seçenekler:**
@@ -11,5 +12,6 @@
 **Karşılaştırma:** A bu veriyi ayrı bir formla toplamaya değer buluyorsan doğru, ama kullanıcıyı üçüncü kez sorgular ve KARAR-77'ye bağlı. B, KARAR-70'te zaten kararlaştırılan ürün içi isteğe bağlı sorular (AN-52) aynı ihtiyacı karşılayacaksa en tutarlı yol. C yalnız kararı erteler.
 **Benim önerim:** B — AN-52 aynı "ilişki ne kattı" sorusunu tek ve isteğe bağlı bir yoldan sormak için zaten kararlaştırıldı; ayrı bir üçüncü form yükü artırır. *(Bu senin ürün kararın; veri toplamayı öne alıyorsan A.)*
 **Cevap vermezsen:** KR-11 kilitli; sayfa ölü kalır, her denetimde yeniden bulgu olur.
+**İlgili kartlar:** KARAR-77 (cevaplı; A seçeneğinin kayıt yapısını belirler) · KARAR-89 (anketin yazdığı Feedback kutusunun geleceği) · KARAR-106 (B'deki AN-52 altyapısının tablosu) · KARAR-110 (aynı sayfa — mükerrer) — birlikte cevaplanması önerilir: KARAR-78 + KARAR-110
 **CEVAP:**
 

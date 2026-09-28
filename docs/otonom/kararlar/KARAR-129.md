@@ -1,5 +1,5 @@
 ### KARAR-129 · Askıya alınmış kurumun YÖNETİCİSİ ekranda ne görsün, kime başvursun? (0 iş kilitliyor; cevap 1 küçük iş açar) [ÜRÜN KARARI · KURUMA GÖRÜNEN METİN]
-**Şu an ne var:** Kurum askıya alınınca (platform yöneticisi dondurunca) kurumun üyeleri artık dağınık hata yerine tek bir ekran görüyor: "Kurumunuzun hesabı şu an askıda. Kurum yöneticinizle iletişime geçin." (backend'in zaten döndürdüğü cümle — `backend/src/middleware/tenantSuspension.ts:64`; ekran `frontend/src/app/kurum-askida/page.tsx`, AJ-72 · çatı #422). Kurumun YÖNETİCİSİ aynı ekranı yalnız ilk cümleyle görüyor: "Kurumunuzun hesabı şu an askıda." — kime yazacağı, neden askıya alındığı, nasıl itiraz edeceği yazmıyor.
+**Şu an ne var:** Kurum askıya alınınca (platform yöneticisi dondurunca) kurumun üyeleri artık dağınık hata yerine tek bir ekran görüyor: "Kurumunuzun hesabı şu an askıda. Kurum yöneticinizle iletişime geçin." (backend'in zaten döndürdüğü cümle — `backend/src/middleware/tenantSuspension.ts:64`; ekran `frontend/src/app/kurum-askida/page.tsx`, yöneticiye ipucu satırı gizleniyor `:73,86-91`, AJ-72 · çatı #422). Kurumun YÖNETİCİSİ aynı ekranı yalnız ilk cümleyle görüyor: "Kurumunuzun hesabı şu an askıda." — kime yazacağı, neden askıya alındığı, nasıl itiraz edeceği yazmıyor.
 **Sorun ne:** Yönetici kurumunun neden durduğunu ve ne yapması gerektiğini bilmiyor; platforma ulaşma yolu ekranda yok. Üyelerine "yöneticinizle iletişime geçin" denildiği için sorular ona geliyor, onun ise gidecek yeri yok.
 **Neden sana soruyorum:** Kuruma görünen metin ve kurumun platformla ilişkisi (destek/itiraz kanalı) ürün kararı; hangi iletişim adresinin kurumlara açık gösterileceği de senin kararın.
 **Seçenekler:**
@@ -9,4 +9,5 @@
 **Karşılaştırma:** Askıya alma nadir ve hep önceden konuşuluyorsa C yeterli; kurumlara şeffaf bir kanal açmak istiyorsan A ucuz yol; itirazların kayıt altında olması (ör. hukuki gerekçe) önemliyse B.
 **Benim önerim:** A — tek cümle ve bir adres; gerçek kullanıcı ~0 iken B'nin emeği erken. Adres seçimi senin.
 **Cevap vermezsen:** Yönetici bugünkü nötr ekranı görür (C fiilen yürürlükte); başka iş kilitlenmez. İlgili: AJ-72 (BITTI), AJ-59.
+**İlgili kartlar:** KARAR-88 (kurumlara gösterilecek resmi platform iletişim adresi aynı soru) — birlikte cevaplanması önerilir: KARAR-88 + KARAR-129
 **CEVAP:**

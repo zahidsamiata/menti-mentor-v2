@@ -9,6 +9,7 @@
 **Karşılaştırma:** Kısa vadede kurum sayısı öncelikse B ya da C sürtünmesiz; gelir hemen gerekiyorsa A, ama altyapı ve hukuk yükü getirir.
 **Benim önerim:** C — ilk kurum çıkışından (KARAR-69) önce kurulan gelir altyapısı yarım kalır; bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** KARAR-103 md.3/md.7 kararsız kalır; başka iş kilitlenmez.
+**İlgili kartlar:** KARAR-103 (md.3 paket sınırı ve md.7 kurumdan kuruma davet gelir kanalına bağlı) · KARAR-105 (kurumlar arası karşılaştırma bir paket ayrıcalığı olabilir) · KARAR-115 (kurum kazanımı: kayıt sayfasının aramada görünmesi) · KARAR-125 (bireyden kuruma büyüme kanalı gelir modeline hizmet eder) · KARAR-128 (`Tenant.plan` seçenek listesi bu karara bırakıldı) — birlikte cevaplanması önerilir: KARAR-119 + KARAR-103
 **CEVAP:**
 
 
