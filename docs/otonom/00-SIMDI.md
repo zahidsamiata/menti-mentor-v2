@@ -23,13 +23,14 @@
 | backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
 | çatı #414 | GÖREV 2.2 eski ✅ doğrulama (140 satır: 135 VAR · 5 KISMEN · 0 YOK) | koşuyor | ✅ ONAY | CI |
 | çatı #415 | AJ-59 OAuth yönetici yönlendirme | yeşil | 7b sürüyor | inceleme |
+| backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
 **Push edilmemiş iş:** yok.
 
 **Engeller:**
 - ⛔ 2026-09-28 ~07:50 UTC — AJ-75 7b inceleme ajanının `gh pr comment` çağrısı (backend #226) REDDEDİLDİ. Ret metni AYNEN (ajan raporundan): `Excess Sensitive Detail`. → kısa, hassas ayrıntısız yorum yazıldı; ayrıntılar AJ-103/AJ-104 satırlarında. Ardışık ret sayacı: 1 (sonraki komutlar geçti).
-- 🗄️ Tek seferlik DB erişimi gerekiyor: K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02 · AJ-50.
+- 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + yedek) · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek için: AN-30 · U-18 · AN-26 · AN-02 · AJ-50.
 
 **PO'ya sorular:** 🔵 EVET/HAYIR: KARAR-96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · ⭐ güvenlik: KARAR-101 · yeni: KARAR-126 (az yanıtlı ilk ayda NPS düşüş önerisi — KVKK çıkarımı) · toplu karar paketi GÖREV 3'te (`docs/otonom/KARAR-PAKETI.md`).
 
