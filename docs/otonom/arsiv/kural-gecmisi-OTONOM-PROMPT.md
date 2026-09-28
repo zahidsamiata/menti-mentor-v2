@@ -322,3 +322,18 @@ PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-
       (docs/otonom/kararlar/KARAR-*.md) — yalniz bir KARAR cevaplaninca ya da bir 🔴 isin ayrintisi
       gerekince ilgili § / kart acilir.
 ```
+
+## GÖREV 2.5 — 5c bekçi paragrafı (boyut eşikleri 150 KB → 90/40/80 KB · AJ-46 uyarı etiketleri (i)-(m) → iş kimliği; (i) harfi yeni kural BAĞLAM SÖZLEŞMESİ için) · eski satır 261-270 · taşındı 2026-09-28
+
+```text
+Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
+01-KARARLAR'da ya da `docs/otonom/kararlar/KARAR-*.md`'de "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta
+kod disi `~~[ESKI` blogu. UYARI (n): 00-KUYRUK'ta kapisi 🔴 satir (→ KARAR-BEKLEYEN).
+UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
+OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB) · kural (h): arsivdeki BITTI
+satiri "madde N" atfi tasiyor ve 00-KARAR-TAKIP'te madde N satirinda ✅/🟨 yok → "BITTI isin kaynagi acik"
+(gerekceli istisna: `docs/raporlar/kod-denetimi/bekci-istisna.txt`).
+UYARI (AJ-46, 2026-09-27): (i) CI job'u `scripts/verify.sh` basliginda anilmiyor · (j) `docs/raporlar/` altinda
+ilk 5 satirda TUR etiketi (📸/🔄/🔥/🌡️/🧊) olmayan rapor · (k) `docs/` altinda indekssiz klasor · (l) CLAUDE.md'nin
+kendi icine satir numarasiyla atfi · (m) 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri asan satir sayisi.
+```

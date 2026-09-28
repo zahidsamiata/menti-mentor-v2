@@ -52,6 +52,7 @@ Kısa: 🟢 yap + merge (auth/KVKK/matching dosyasında 7b inceleme ONAY + negat
 ## ⭐ PO KARARLARI 2026-09-26 — K-A arşive taşı · K-B · K-C ajan-ekledi
 Tam metin: `docs/otonom/OTONOM-PROMPT.txt` Bölüm 5b · **aktif/arşiv ayrımı kuralı: Bölüm 5c** (otomatik bekçi `scripts/belge-bekci.sh`). Özet: sık okunan dosyalarda eski metin arşive AYNEN taşınır, aktif dosyada `~~[ESKİ]~~` katmanı bırakılmaz (K-A) · ajan kodda doğruladığı hata için `AJ-` satırı açıp kapıya göre işler (K-C).
 **Kural (h) (2026-09-27):** iş BITTI olunca kaynağı (KARAR-TAKIP maddesi · G-kart · konu belgesi · rapor kalemi) AYNI commit'te `✅ yapıldı — <iş> · PR #` ile işaretlenir; dondurulmuş belge → `docs/raporlar/kod-denetimi/donmus-belge-esleme-*.md` — tam metin OTONOM-PROMPT 5c (h), bekçi UYARI verir.
+**Kural (i) BAĞLAM SÖZLEŞMESİ VE DURUMA GÖRE AYIRMA (2026-09-28):** her işe başlamadan "daha önce yapıldı mı" bakılır (yapılmışsa kanıtla atla, kısmensa yalnız kalanı yap); her kayıt NE · NEDEN · KAYNAK · DURUM · AYRINTI taşır, NEDEN ve karar kaynağı hiç atılmaz — tam metin OTONOM-PROMPT 5c (i), bekçi UYARI (i1)-(i5).
 **Doğrulama opus + mutasyon kanıtı (2026-09-27):** doğrulama/kalite kontrolü/7b incelemesi yalnız opus alt-ajan (sonnet hüküm vermez); BITTI = ölçüt kodda + düzeltme geri alınınca KIRMIZI olan test (DB'li testte §MUTASYON-CI taslak PR) + main (test yazılamıyorsa "BITTI (kısmen — test yok)", satır kuyrukta kalır) — tam metin OTONOM-PROMPT Bölüm 6, 7b, K4.0, 5c (h).
 
 ## ⭐ KARAR AYRIMI — neyi sorma, neyi sor

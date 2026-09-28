@@ -114,7 +114,7 @@ echo 'X-09 madde 777' >"$TMP/root/docs/raporlar/kod-denetimi/bekci-istisna.txt"
 expect 0 "kural (h) istisna gerekçesiz → istisna sayılmaz, iki uyarı"
 grep -q "kaynağı açık: X-09" "$TMP/out" && grep -q "gerekçe eksik" "$TMP/out" || { echo "  ✗ kural (h): gerekçesiz istisna yanlış işlendi"; FAIL=1; }
 
-# ── kural (i) KR-22: CI job'u verify.sh başlığında anılmalı → yalnız UYARI ──
+# ── KR-22 (eski etiket (i)): CI job'u verify.sh başlığında anılmalı → yalnız UYARI ──
 setup_i() {  # setup_i <verify.sh başlığındaki metin>
   setup_clean
   mkdir -p "$TMP/root/scripts" "$TMP/root/backend/.github/workflows"
@@ -125,54 +125,158 @@ setup_i() {  # setup_i <verify.sh başlığındaki metin>
 }
 
 setup_i 'bilinçli fark: `docker-prisma` yerelde koşmaz'
-expect 0 "kural (i) pozitif: backend job'u başlıkta anılıyor → uyarı yok"
-grep -q "KR-22" "$TMP/out" && { echo "  ✗ kural (i): anılan job için uyarı çıktı"; FAIL=1; }
+expect 0 "KR-22 pozitif: backend job'u başlıkta anılıyor → uyarı yok"
+grep -q "KR-22" "$TMP/out" && { echo "  ✗ KR-22: anılan job için uyarı çıktı"; FAIL=1; }
 
 setup_i 'başka bir not'
-expect 0 "kural (i) negatif: backend job'u başlıkta yok (yalnız gövdede) → yeşil + uyarı"
-grep -q 'job "docker-prisma" scripts/verify.sh başlığında anılmıyor' "$TMP/out" || { echo "  ✗ kural (i) uyarısı çıktıda yok"; FAIL=1; }
-grep -q 'job "push"' "$TMP/out" && { echo "  ✗ kural (i): on: altındaki push job sanıldı"; FAIL=1; }
+expect 0 "KR-22 negatif: backend job'u başlıkta yok (yalnız gövdede) → yeşil + uyarı"
+grep -q 'job "docker-prisma" scripts/verify.sh başlığında anılmıyor' "$TMP/out" || { echo "  ✗ KR-22 uyarısı çıktıda yok"; FAIL=1; }
+grep -q 'job "push"' "$TMP/out" && { echo "  ✗ KR-22: on: altındaki push job sanıldı"; FAIL=1; }
 
-# ── kural (j) YN-11: raporlarda TÜR etiketi → yalnız UYARI ──
+# ── YN-11 (eski etiket (j)): raporlarda TÜR etiketi → yalnız UYARI ──
 setup_clean
 mkdir -p "$TMP/root/docs/raporlar/kesif"
 printf '> 📸 DONDURULMUŞ (2026-09-27)\n# Rapor\n' >"$TMP/root/docs/raporlar/kesif/etiketli.md"
-expect 0 "kural (j) pozitif: etiketli rapor → uyarı yok"
-grep -q "YN-11" "$TMP/out" && { echo "  ✗ kural (j): etiketli raporda uyarı çıktı"; FAIL=1; }
+expect 0 "YN-11 pozitif: etiketli rapor → uyarı yok"
+grep -q "YN-11" "$TMP/out" && { echo "  ✗ YN-11: etiketli raporda uyarı çıktı"; FAIL=1; }
 
 printf '# Rapor\n\n\n\n\n> 📸 altıncı satırda — sayılmaz\n' >"$TMP/root/docs/raporlar/kesif/etiketsiz.md"
-expect 0 "kural (j) negatif: etiketsiz rapor → yeşil + uyarı"
-grep -q "kesif/etiketsiz.md ilk 5 satırda TÜR etiketi" "$TMP/out" || { echo "  ✗ kural (j) uyarısı çıktıda yok"; FAIL=1; }
+expect 0 "YN-11 negatif: etiketsiz rapor → yeşil + uyarı"
+grep -q "kesif/etiketsiz.md ilk 5 satırda TÜR etiketi" "$TMP/out" || { echo "  ✗ YN-11 uyarısı çıktıda yok"; FAIL=1; }
 
-# ── kural (k) YN-12: indekssiz klasör → yalnız UYARI ──
+# ── YN-12 (eski etiket (k)): indekssiz klasör → yalnız UYARI ──
 setup_clean
 mkdir -p "$TMP/root/docs/kararlar/konu"
 printf '# x\n' >"$TMP/root/docs/kararlar/konu/a.md"
 printf '# idx\n' >"$TMP/root/docs/kararlar/konu/00-KART-INDEKSI.md"
-expect 0 "kural (k) pozitif: klasörde (Türkçe adlı) indeks var → uyarı yok"
-grep -q "docs/kararlar/konu/ giriş noktası" "$TMP/out" && { echo "  ✗ kural (k): indeksli klasörde uyarı çıktı"; FAIL=1; }
+expect 0 "YN-12 pozitif: klasörde (Türkçe adlı) indeks var → uyarı yok"
+grep -q "docs/kararlar/konu/ giriş noktası" "$TMP/out" && { echo "  ✗ YN-12: indeksli klasörde uyarı çıktı"; FAIL=1; }
 
 rm "$TMP/root/docs/kararlar/konu/00-KART-INDEKSI.md"
-expect 0 "kural (k) negatif: indekssiz klasör → yeşil + uyarı"
-grep -q "docs/kararlar/konu/ giriş noktası (00-INDEX.md) yok" "$TMP/out" || { echo "  ✗ kural (k) uyarısı çıktıda yok"; FAIL=1; }
+expect 0 "YN-12 negatif: indekssiz klasör → yeşil + uyarı"
+grep -q "docs/kararlar/konu/ giriş noktası (00-INDEX.md) yok" "$TMP/out" || { echo "  ✗ YN-12 uyarısı çıktıda yok"; FAIL=1; }
 
-# ── kural (l) YN-10: CLAUDE.md içinde kendine satır atfı → yalnız UYARI ──
+# ── YN-10 (eski etiket (l)): CLAUDE.md içinde kendine satır atfı → yalnız UYARI ──
 setup_clean
 printf -- '- bkz. § Çalışma Sözleşmesi · başka dosya: `backend/CLAUDE.md:12` · `00-KUYRUK.md:5`\n' >>"$TMP/root/CLAUDE.md"
-expect 0 "kural (l) pozitif: bölüm adı + başka dosya satır atfı → uyarı yok"
-grep -q "YN-10" "$TMP/out" && { echo "  ✗ kural (l): bölüm adlı atıfta uyarı çıktı"; FAIL=1; }
+expect 0 "YN-10 pozitif: bölüm adı + başka dosya satır atfı → uyarı yok"
+grep -q "YN-10" "$TMP/out" && { echo "  ✗ YN-10: bölüm adlı atıfta uyarı çıktı"; FAIL=1; }
 
 printf -- '- `CLAUDE.md:4-5`teki kural\n' >>"$TMP/root/CLAUDE.md"
-expect 0 "kural (l) negatif: CLAUDE.md:4-5 kendine atıf → yeşil + uyarı"
-grep -q 'kendi içine satır atfı "CLAUDE.md:4-5"' "$TMP/out" || { echo "  ✗ kural (l) uyarısı çıktıda yok"; FAIL=1; }
+expect 0 "YN-10 negatif: CLAUDE.md:4-5 kendine atıf → yeşil + uyarı"
+grep -q 'kendi içine satır atfı "CLAUDE.md:4-5"' "$TMP/out" || { echo "  ✗ YN-10 uyarısı çıktıda yok"; FAIL=1; }
 
-# ── kural (m) YN-09: 1.000 karakteri aşan kuyruk satırı → yalnız UYARI ──
+# ── YN-09 (eski etiket (m)): 1.000 karakteri aşan kuyruk satırı → yalnız UYARI ──
 setup_clean
-expect 0 "kural (m) pozitif: kısa satırlar → uyarı yok"
-grep -q "YN-09" "$TMP/out" && { echo "  ✗ kural (m): kısa satırlarda uyarı çıktı"; FAIL=1; }
+expect 0 "YN-09 pozitif: kısa satırlar → uyarı yok"
+grep -q "YN-09" "$TMP/out" && { echo "  ✗ YN-09: kısa satırlarda uyarı çıktı"; FAIL=1; }
 
 printf '| X-05 | Ş0 | uzun iş | 🟢 | görünür | BEKLIYOR | %s |\n' "$(head -c 1100 /dev/zero | tr '\0' 'n')" >>"$TMP/root/docs/otonom/00-KUYRUK.md"
-expect 0 "kural (m) negatif: 1.000+ karakterlik kuyruk satırı → yeşil + uyarı"
-grep -q "00-KUYRUK.md 1 satır > 1000 karakter" "$TMP/out" || { echo "  ✗ kural (m) uyarısı çıktıda yok"; FAIL=1; }
+expect 0 "YN-09 negatif: 1.000+ karakterlik kuyruk satırı → yeşil + uyarı"
+grep -q "00-KUYRUK.md 1 satır > 1000 karakter" "$TMP/out" || { echo "  ✗ YN-09 uyarısı çıktıda yok"; FAIL=1; }
+
+# ── kural (i) GÖREV 2.5: BAĞLAM SÖZLEŞMESİ — (i1)-(i5) + boyut eşikleri, hepsi yalnız UYARI ──
+# (i1) doğrulanmamış BITTI arşivde işaretsiz
+setup_i1() {  # setup_i1 <arşiv satırının Durum hücresi>
+  setup_clean
+  mkdir -p "$TMP/root/docs/otonom/arsiv" "$TMP/root/docs/raporlar/kod-denetimi"
+  cat >"$TMP/root/docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md" <<'EOF2'
+> 📸 DONDURULMUŞ
+## ⚠️ KISMEN
+| İş | Risk | Ölçüt |
+|---|---|---|
+| X-21 | R1 | ölçüt |
+## ✅ DOĞRULANDI
+| İş | Risk | Ölçüt |
+|---|---|---|
+| X-22 | R1 | ölçüt |
+EOF2
+  printf '| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |\n|---|---|---|---|---|---|---|\n| X-21 | Ş0 | iş (madde 1) | 🟢 | görünür | %s | not |\n| X-22 | Ş0 | iş (madde 2) | 🟢 | görünür | BITTI | not |\n' "$1" >"$TMP/root/docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md"
+}
+setup_i1 'BITTI 2026-09-26 — PR #1'
+expect 0 "kural (i1) negatif: doğrulamada ⚠️ olan iş arşivde ön eksiz → yeşil + uyarı"
+grep -q "X-21 doğrulamada ⚠️" "$TMP/out" || { echo "  ✗ (i1) uyarısı çıktıda yok"; FAIL=1; }
+grep -q "X-22 doğrulamada" "$TMP/out" && { echo "  ✗ (i1): ✅ DOĞRULANDI bölümündeki iş uyarı verdi"; FAIL=1; }
+
+setup_i1 '🟨 KISMEN — BITTI 2026-09-26; kalan: test → AJ-1'
+expect 0 "kural (i1) pozitif: ön ekli (🟨 KISMEN) arşiv satırı → uyarı yok"
+grep -q "5c-i1" "$TMP/out" && { echo "  ✗ (i1): ön ekli satırda uyarı çıktı"; FAIL=1; }
+
+# (i2) kırık bağlam işaretçisi + (i5) cevaplı kararın işi KARAR-BEKLEYEN'de
+setup_i2() {  # setup_i2 <işaretçi satırı> <01-KARARLAR KARAR-9 durum hücresi>
+  setup_clean
+  printf '\n## 🔴 KİLİT HARİTASI\n%s\n\n## AŞAMA Z\n' "$1" >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+  cat >"$TMP/root/docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md" <<'EOF2'
+# KARAR BEKLEYEN
+## KARAR-9
+| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
+|---|---|---|---|---|---|---|
+| X-31 | Ş0 | iş (madde 3) | 🔴 KARAR-9 | görünür | BEKLIYOR | |
+## KARAR-10
+→ bkz. X-31 (KARAR-9 grubunda)
+EOF2
+  printf '| # | Konu | Kilitlediği işler | Durum | Öneri | Kart |\n|---|---|---|---|---|---|\n| KARAR-9 | soru | X-31 | %s | A | k |\n' "$2" >"$TMP/root/docs/otonom/01-KARARLAR.md"
+}
+IYI_HARITA=$'- KARAR-9 (soru) → 1 iş bekliyor: X-31 · ayrıntı: 00-KUYRUK-KARAR-BEKLEYEN.md § KARAR-9\n- KARAR-10 (soru) → 1 iş bekliyor: X-31 · ayrıntı: 00-KUYRUK-KARAR-BEKLEYEN.md § KARAR-10'
+setup_i2 "$IYI_HARITA" '⬜ boş'
+expect 0 "kural (i2)+(i5) pozitif: işaretçi ↔ bölüm tutarlı (bkz. atfı dahil), karar ⬜ → uyarı yok"
+grep -q "5c-i2\|5c-i5" "$TMP/out" && { echo "  ✗ (i2)/(i5): tutarlı haritada uyarı çıktı"; FAIL=1; }
+
+setup_i2 $'- KARAR-9 (soru) → 2 iş bekliyor: X-31, X-99 · ayrıntı: 00-KUYRUK-KARAR-BEKLEYEN.md § KARAR-9\n- KARAR-11 (soru) → 1 iş bekliyor: X-31 · ayrıntı: 00-KUYRUK-KARAR-BEKLEYEN.md § KARAR-11' '⬜ boş'
+expect 0 "kural (i2) negatif: sayılan iş bölümde yok · § yok · bölümün işaretçisi yok → yeşil + uyarı"
+grep -q "X-99 sayıyor ama KARAR-BEKLEYEN § KARAR-9'de yok" "$TMP/out" || { echo "  ✗ (i2) eksik iş uyarısı yok"; FAIL=1; }
+grep -q "KARAR-BEKLEYEN § KARAR-11 yok" "$TMP/out" || { echo "  ✗ (i2) olmayan § uyarısı yok"; FAIL=1; }
+grep -q "§ KARAR-10 için 00-KUYRUK § KİLİT HARİTASI'nda işaretçi yok" "$TMP/out" || { echo "  ✗ (i2) ters yön uyarısı yok"; FAIL=1; }
+
+setup_i2 "$IYI_HARITA" '✅ CEVAPLANDI: A'
+expect 0 "kural (i5) negatif: KARAR-9 ✅ ama X-31 hâlâ KARAR-BEKLEYEN'de → yeşil + uyarı"
+grep -q "§ KARAR-9 X-31 bağlı KARAR (KARAR-9) ✍️/✅" "$TMP/out" || { echo "  ✗ (i5) uyarısı çıktıda yok"; FAIL=1; }
+
+# (i3) kaynaksız aktif iş
+setup_clean
+echo '| X-41 | Ş0 | kaynaksız iş (izsiz) | 🟢 | görünür | BEKLIYOR | not |' >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+expect 0 "kural (i3) negatif: kaynak izi olmayan aktif satır → yeşil + uyarı"
+grep -q "X-41 kaynak izi yok" "$TMP/out" || { echo "  ✗ (i3) uyarısı çıktıda yok"; FAIL=1; }
+
+setup_clean
+echo '| X-42 | Ş0 | iş | 🟢 | görünür | BEKLIYOR | ajan-ekledi 2026-09-28 · kaynak: rapor:3 |' >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+echo '| X-43 | Ş0 | iş (G3-08) | 🟢 | görünür | BEKLIYOR | not |' >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+expect 0 "kural (i3) pozitif: ajan-ekledi / G-kart izi olan satırlar → uyarı yok"
+grep -q "X-4[23] kaynak izi yok" "$TMP/out" && { echo "  ✗ (i3): kaynaklı satırda uyarı çıktı"; FAIL=1; }
+
+# (i4) indeks ↔ kart CEVAP çelişkisi
+setup_i4() {  # setup_i4 <indeks durum> <kart CEVAP metni>
+  setup_clean
+  mkdir -p "$TMP/root/docs/otonom/kararlar"
+  printf '| # | Konu | Kilitlediği işler | Durum | Öneri | Kart |\n|---|---|---|---|---|---|\n| KARAR-7 | soru | 0 | %s | A | k |\n' "$1" >"$TMP/root/docs/otonom/01-KARARLAR.md"
+  printf '### KARAR-7 · soru\n**Seçenekler:** A/B\n**CEVAP:** %s\n' "$2" >"$TMP/root/docs/otonom/kararlar/KARAR-007.md"
+}
+setup_i4 '⬜ boş' 'A'
+expect 0 "kural (i4) negatif: kartta CEVAP dolu ama indeks ⬜ → yeşil + uyarı"
+grep -q "KARAR-7 ⬜ ama docs/otonom/kararlar/KARAR-007.md CEVAP dolu" "$TMP/out" || { echo "  ✗ (i4) ⬜ uyarısı yok"; FAIL=1; }
+setup_i4 '✍️ CEVAP yazıldı' ''
+expect 0 "kural (i4) negatif: indeks ✍️ ama kartta CEVAP boş → yeşil + uyarı"
+grep -q "KARAR-7 ✍️ ama docs/otonom/kararlar/KARAR-007.md CEVAP boş" "$TMP/out" || { echo "  ✗ (i4) ✍️ uyarısı yok"; FAIL=1; }
+setup_i4 '✍️ CEVAP yazıldı' 'B — not'
+expect 0 "kural (i4) pozitif: indeks ✍️ + kart CEVAP dolu → uyarı yok"
+grep -q "5c-i4" "$TMP/out" && { echo "  ✗ (i4): tutarlı kartta uyarı çıktı"; FAIL=1; }
+setup_i4 '⬜ boş' ''
+expect 0 "kural (i4) pozitif: indeks ⬜ + kart CEVAP boş → uyarı yok"
+grep -q "5c-i4" "$TMP/out" && { echo "  ✗ (i4): boş kartta uyarı çıktı"; FAIL=1; }
+
+# boyut eşikleri (GÖREV 2.5): 00-KUYRUK 90 KB · 01-KARARLAR 40 KB · 02-ILERLEME 80 KB
+setup_clean
+head -c 85000 /dev/zero | tr '\0' 'a' >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+head -c 38000 /dev/zero | tr '\0' 'a' >>"$TMP/root/docs/otonom/01-KARARLAR.md"
+head -c 75000 /dev/zero | tr '\0' 'a' >"$TMP/root/docs/otonom/02-ILERLEME.md"
+expect 0 "boyut pozitif: eşiklerin altında (85/38/75 KB) → boyut uyarısı yok"
+grep -q "KB eşiği" "$TMP/out" && { echo "  ✗ boyut: eşik altında uyarı çıktı"; FAIL=1; }
+head -c 10000 /dev/zero | tr '\0' 'a' >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+head -c 5000 /dev/zero | tr '\0' 'a' >>"$TMP/root/docs/otonom/01-KARARLAR.md"
+head -c 10000 /dev/zero | tr '\0' 'a' >>"$TMP/root/docs/otonom/02-ILERLEME.md"
+expect 0 "boyut negatif: 00-KUYRUK > 90 · 01-KARARLAR > 40 · 02-ILERLEME > 80 KB → yeşil + üç uyarı"
+for e in "00-KUYRUK.md 93 KB > 90 KB" "01-KARARLAR.md 42 KB > 40 KB" "02-ILERLEME.md 83 KB > 80 KB"; do
+  grep -q "$e" "$TMP/out" || { echo "  ✗ boyut uyarısı yok: $e"; FAIL=1; }
+done
 
 exit $FAIL
