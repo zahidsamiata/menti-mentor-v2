@@ -314,3 +314,11 @@ PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-
      · 09-DURUM.md / 00-KARAR-TAKIP.md: YAZILMAZ (PO 2026-09-26 — 2026-09-20'den beri donuk;
        genel belge taramasina kadar). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
 ```
+
+## GÖREV 2.4 3. düzeltme — 0.4 "rutin turda okunmaz" maddesi netleştirildi · taşındı 2026-09-28
+
+```text
+    · ⛔ Rutin turda OKUNMAZ: docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md ve kart dosyalari
+      (docs/otonom/kararlar/KARAR-*.md) — yalniz bir KARAR cevaplaninca ya da bir 🔴 isin ayrintisi
+      gerekince ilgili § / kart acilir.
+```

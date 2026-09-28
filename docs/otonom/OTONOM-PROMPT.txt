@@ -50,9 +50,9 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
     · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler (bunlara dokunma)
     · docs/otonom/00-SIMDI.md → anlik durum (Bolum 14 K0.1). docs/kararlar/09-DURUM.md ve 00-KARAR-TAKIP.md
       2026-09-27'de senkronlandi; rutin turda OKUNMAZ; kural (h) geregi kapanis isaretleri yazilir (5c-h).
-    · ⛔ Rutin turda OKUNMAZ: docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md ve kart dosyalari
-      (docs/otonom/kararlar/KARAR-*.md) — yalniz bir KARAR cevaplaninca ya da bir 🔴 isin ayrintisi
-      gerekince ilgili § / kart acilir.
+    · docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md ve kart dosyalari (docs/otonom/kararlar/KARAR-*.md) rutin
+      turda BASTAN SONA OKUNMAZ; kilitli bir isin ya da kartin ayrintisi gerektiginde 00-KUYRUK § 🔴 KILIT
+      HARITASI isaretcisi (ya da 01-KARARLAR indeks satiri) ile yalniz o bolum / o kart acilir.
     · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
     · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
     · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
