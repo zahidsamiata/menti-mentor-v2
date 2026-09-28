@@ -76,7 +76,7 @@ export const logLevelLabel = (level: string | null | undefined): string => label
 export const logBadgeLabel = (log: { level: string; category: string }): string =>
   log.category === 'AUDIT' ? 'Denetim' : logLevelLabel(log.level);
 
-/** Kullanıcı şikâyeti durumu (platform paneli + kurum şikâyet ekranı ile aynı karşılıklar). */
+/** Kullanıcı şikâyeti durumu — platform paneli + kurum şikâyet ekranının TEK kaynağı (AJ-61). */
 export const REPORT_STATUS_LABELS: Record<ReportStatus, string> = {
   OPEN: 'Açık',
   REVIEWED: 'İncelendi',
@@ -86,7 +86,7 @@ export const REPORT_STATUS_LABELS: Record<ReportStatus, string> = {
 export const reportStatusLabel = (status: string | null | undefined): string =>
   labelFrom(REPORT_STATUS_LABELS, status);
 
-/** Kullanıcı şikâyeti nedeni (kurum şikâyet ekranındaki karşılıklarla aynı). */
+/** Kullanıcı şikâyeti nedeni — platform paneli + kurum şikâyet ekranının TEK kaynağı (AJ-61). */
 export const REPORT_REASON_LABELS: Record<ReportReason, string> = {
   SPAM: 'Spam / istenmeyen',
   HARASSMENT: 'Taciz / rahatsız edici',

@@ -51,7 +51,7 @@ export default function PendingReviewPage() {
   if (status === 'APPROVED' || status === 'AUTO_APPROVED') {
     return (
       <Shell
-        icon={<CheckCircle2 className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />}
+        icon={<CheckCircle2 className="h-8 w-8 text-emerald-700 dark:text-emerald-400" />}
         iconBg="bg-emerald-100 dark:bg-emerald-950/30"
         title="Başvurunuz Onaylandı 🎉"
         desc="Kurumunuz onaylandı. Artık giriş yapıp programınızı yönetmeye başlayabilirsiniz."

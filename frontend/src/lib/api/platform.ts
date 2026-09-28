@@ -339,9 +339,23 @@ export interface DiscDistributionItem {
   count: number;
 }
 
+/**
+ * AJ-79: DISC vektörü olmayan (eşleştirmede varsayılan skora düşen) aktif üye oranı.
+ * Kurum `minGroupSize` üyeden küçükse `suppressed: true` — sayılar 0, oran null gelir.
+ */
+export interface TenantDefaultProfile {
+  withoutVector: number;
+  activeMembers: number;
+  ratePercent: number | null;
+  suppressed: boolean;
+  minGroupSize: number;
+}
+
 export interface TenantAnalytics {
   totalWithDisc: number;
   discDistribution: DiscDistributionItem[];
+  /** Eski backend yanıtında yoktur — alan gelmezse satır gösterilmez. */
+  defaultProfile?: TenantDefaultProfile;
 }
 
 export async function getTenantOverview(id: string) {

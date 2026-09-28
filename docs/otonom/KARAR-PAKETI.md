@@ -8,6 +8,9 @@
 
 ---
 
+## ℹ️ BİLGİ — karar değil (2026-09-28)
+- **AJ-86 · Açılış sayfası (landing) görünüm paketi yapılıyor (T5):** ziyaretçi açılış sayfasını siyah yerine yumuşak lacivert zeminde görecek; açık temayı seçen ziyaretçide landing de açık olacak; bilgi (i) ipuçları metnin üstüne binmeyecek ve okunur olacak; demo kartında hiç etiket seçilmezse uyum %52 yerine %0 gösterecek. Landing METNİ değişmez. Dayanak: 2026-09-28 PO görevi T5'i sıraya koydu (belgede eski "canlı-sonrası" zamanlama notu vardı — `docs/kararlar/konu/06-tasarim-ux.md:10`); yön G7-13 "yumuşak lacivert". Beğenmezsen: tek PR geri alınır.
+
 ## (e) İLK 10 KARAR — bununla açılan iş sayısı
 
 Seçim ölçüsü: kilitlediği iş sayısı (güncel indeks + `00-KUYRUK.md` § 🔴 KİLİT HARİTASI), eşitlikte risk (can güvenliği > KVKK > ürün).
