@@ -1781,4 +1781,318 @@ Kaynak: `docs/otonom/kararlar/KARAR-122.md` (origin/main, değişiklik öncesi).
 **Cevap vermezsen:** Sınırsız davranış sürer; başka iş kilitlenmez.
 **CEVAP:**
 ```
+### KARAR-18 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-018.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-18 · PO-MANUEL İŞLER LİSTESİ  [PO AKSİYONU — ajan yapamaz]
+Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bulut VM'de hiç yapamaz. Her biri tek satır — yaptıkça `[x]` işaretle.
+
+- [ ] **G8-01 + G8-02** foto yükleme kalıcı volume + env (Dokploy). Kod hazır; sunucuda volume tanımı gerekiyor. Detay: `docs/kararlar/dokploy-foto-volume-talimati.md`. (↔ K-04)
+- [ ] **G5-01 + G5-02** kurum onay/red maili — kod HAZIR, `destek@` mail kutusu yok, bekliyor.
+- [ ] **G1-09** `destek@` mail adresi/kutusu kurulumu (yukarıdaki mail zincirini açar).
+- [ ] **G1-10 + G1-13** KVKK aydınlatma metni + kulüp beyanı — avukatta. (Kulüp aktifse beyan ŞART.) F-02/F-03/F-07 buna bağlı.
+- [ ] **G1-28** sunucu sertleştirme (HTTPS/firewall/SSH/yedek) — altyapı. Kod tarafı = K-14.
+- [ ] **G8-03 + G8-04** canlı akış gözle testleri — gerçek kullanıcıyla ekran doğrulaması.
+- [ ] **G8-05** yedek `.env` dosyasını sil (sızıntı yüzeyi).
+- [ ] **G8-08** izole test DB kur (`TEST_DATABASE_URL`) — entegrasyon testleri lokalde guard'la duruyor.
+- [ ] **G9-07** repoyu OneDrive dışına (`C:\dev\`) taşı — `.git` senkron/bozulma riski.
+- [ ] **G8-06** git dal/worktree + geçici script temizliği.
+- [ ] **KARAR-8** repoları private yap (ayrı kartta duruyor, hatırlatma).
+
+**CEVAP (isteğe bağlı — bu bir onay kartı değil, hatırlatma listesi):**
+
+---
+```
+
+### KARAR-37 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-037.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-37 · `00-KARAR-TAKIP` madde 103 — kart mı özet mi kazanır  [BELGE/METODOLOJİ]
+**Şu an ne var:** `G2-01..05` kartları madde 103 için **🗑️ geçersiz** diyor; madde 103 satırı hâlâ **🔵❓** duruyor.
+**Sorun ne:** Aynı kalem iki yerde iki farklı durumda. KURAL 15 *"çelişkide KART kazanır"* diyor — ama kartın konusu *"DISC matrisi onayı"*, madde 103'ünki *"psikometrik gerekçenin belgelenmemesi"*; **aynı şey olmayabilir.**
+**Neden sana soruyorum:** Bu tam olarak **G1-23 vakasının tekrarı** — orada da özet belge, farklı konulu bir kanıta dayanarak bir kalemi yanlışlıkla kapatmıştı ("21. hayalet tamamlanmış") ve bu, KURAL 15'in doğma sebebi oldu.
+**Seçenekler:**
+· **A — Kart kazanır, madde 103 🗑️.** Ne kazanırsın: tek hamlede kapanır. Ne kaybedersin: **gerçekten ayrı bir konuysa sessizce kaybolur** (G1-23 tekrarı). Süre **S** · geri alınır ✅.
+· **B — Ayrı konu; madde 103 ⬜ AÇIK kalır, gerekirse yeni kart açılır.** Ne kazanırsın: kayıp yok. Ne kaybedersin: bir kalem daha açık listede. Süre **S** · geri alınır ✅.
+· **C — ❓ TEYİT GEREK bırak.** Ne kaybedersin: belirsizlik sürer, her turda yeniden tartışılır. Süre **0** · geri alınır ✅.
+**Karşılaştırma:** A hızlı ama G1-23 dersini görmezden gelir; B bir kalem maliyetine kaybı önler; C hiçbir şey çözmez.
+**Benim önerim:** **B** — çünkü aynı hata bu projede bir kez ölçülmüş ve kural hâline getirilmiş (KURAL 15'in gerekçesi).
+**Cevap vermezsen:** madde 103 belirsiz kalır, her denetim turunda yeniden gündeme gelir.
+**CEVAP:**
+
+---
+```
+
+### KARAR-49 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-049.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-49 · `devir/01` ve `devir/06`: "dondurulmuş" mu, "kalıcı referans" mı?  [BELGE POLİTİKASI] (2 işi açar)
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** İki devir belgesi künyesinde **tek cümle içinde** hem 📸 DONDURULMUŞ hem *"kalıcı referans"* yazıyor (`devir/01-felsefe-ve-calisma-tarzi.md:3` · `devir/06-devir-kilavuzu.md:3`). Üstelik `01`'in başlığı **"yeni sohbet önce bunu oku"**. İçlerinde bugün geçersiz olan **6 "PR aç, merge etme" satırı** var (`01`'de 2 · `06`'da 2 · `03`'te 1 · `04`'te 1). Kanıt: `docs/00-BELGE-HARITASI.md:61`. İkinci kat çelişki: `00-BELGE-HARITASI.md:38` bu iki dosyayı **🔄** etiketliyor, dosyalar kendini **📸** diyor.
+
+**Sorun ne:** Yeni bir oturum "önce bunu oku" diyen belgeyi açıp **artık geçerli olmayan merge kuralını** öğreniyor. Doğrusu kapıya bağlı (🟢 merge et · 🟡 PR'da bekle · 🔴 dokunma). Sonuç: ajan 🟢 işleri merge etmiyor, otonom kuyruk tıkanıyor. BB turu 9 yeri düzeltti, bu 6'sına "dondurulmuş belgeye dokunulmaz" gerekçesiyle dokunmadı — **iki turdur açık**.
+
+**Neden sana soruyorum:** Dondurulmuş belgeye dokunmak "tarihsel iz" ilkesini deler; dokunmamak yanlış kuralı yürürlükte bırakır. İkisi de belge politikası kararı, teknik değil.
+
+**Seçenekler:**
+· **A — Künyeden "kalıcı referans" ibaresini kaldır, yönlendirme ekle.** Kullanıcı ne görür: `01`/`06` açınca *"bu 2026-08-11 fotoğrafıdır; güncel kural `CLAUDE.md § MERGE POLİTİKASI`"*. Ne kazanırsın: tarihsel iz **tam korunur**, yanlış kural etkisizleşir. **Ne kaybedersin:** belge hâlâ "önce bunu oku" diyor — yeni gelen yine oradan başlar, 6 bayat satırı yine okur. Süre **S** · geri alınır ✅ · migration yok.
+· **B — 6 bayat satırı `~~[ESKİ]~~` + ⚠️ GÜNCELLEME ile damgala** (BB'nin diğer 9'da yaptığının aynısı). Kullanıcı ne görür: satırı görür ama üstü çizilidir, altında doğrusu yazar. Ne kazanırsın: **tutarlılık** — aynı kural her yerde aynı biçimde düzeltilmiş olur. **Ne kaybedersin:** dondurulmuş belge düzenlenmiş olur (ilke esner, emsal doğar); 4 dosyaya dokunulur; ileride "hangi 📸 belgeye dokunulabilir" sorusu belirsizleşir. Süre **S** · geri alınır ✅ · migration yok.
+· **C — `devir/01-06` setini arşive taşı, yerine tek "yeni gelen" sayfası.** Kullanıcı ne görür: tek güncel başlangıç sayfası. Ne kazanırsın: kök sorun biter, "önce bunu oku" tek ve doğru yere işaret eder. **Ne kaybedersin: en pahalısı** — 6 belge taşınır, onlara giden atıflar kırılır, devir hikâyesi dağılır; SİLME PROTOKOLÜ'nün 5 adımı işletilmeli. Süre **M** · geri alınır ⚠️ (git mv + atıflar elle) · migration yok.
+
+**Karşılaştırma:** A en ucuz ve ilkeye en sadık olanı ama "önce bunu oku" tuzağını bırakıyor. B tutarlılığı sağlıyor ve BB'nin zaten kurduğu deseni tamamlıyor; ilkeden sapması küçük çünkü damga **silme değil ekleme**. C sorunu kökten çözüyor ama bu turun kapasitesinin üstünde ve atıf ağını riske atıyor.
+
+**Benim önerim:** **B** — çünkü BB zaten 9 yeri bu desenle düzeltti; 6'sını dışarıda bırakmak kuralın kendisini yarım uygulamak oluyor, ve damga hiçbir tarihsel izi silmiyor.
+
+**Cevap vermezsen:** Belge işleri ilerler ama **yeni her oturum yanlış merge kuralını okumaya devam eder**; otonom kuyruk 🟢 işlerde tıkanmayı sürdürür.
+
+**CEVAP:**
+
+---
+```
+
+### KARAR-50 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-050.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-50 · Kuralların "geçersizleşme koşulu" zorunlu olsun mu?  [BELGE/METODOLOJİ] (4 işi açar)
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** 74 kuraldan **6'sının** (%8,1) geçersizleşme koşulu yazılı; **68'inin yok**. 6'sının hiçbiri ölçülebilir tetik taşımıyor (*"X olunca"* diyor, X'i kimin ne zaman kontrol edeceği yazılı değil) — bu yüzden **hiçbiri kendiliğinden tetiklenmemiş**. Sonuç: koşulu fiilen sağlanmış 4 kural hâlâ yürürlükte görünüyor, biri **yanlış kanıta dayanan bir güvenlik kuralı** (`CLAUDE.md § Güvenlik Kuralları › Yeniden kullanılacak kalıplar`, 24 gündür yanlış).
+⚠️ Brief *"KURAL 17 var ama yarım uygulanmış"* diyordu — **öyle bir kural hiç yazılmadı** (13 terim · BB + 11 dal · 0 dosya; bu turda `docs/` + `CLAUDE.md` yeniden tarandı → yalnız raporun kendi 4 "yok" beyanı çıktı).
+
+**Sorun ne:** Kurallar yalnız **birikiyor**, hiç düşmüyor. Her ders yeni kural oluyor, hiçbiri emekliye ayrılmıyor. CLAUDE.md bugün bölmeyle 34.742'ye indi ama **payı yalnız 258 karakter** — bir sonraki ders sınırı yeniden aşar.
+
+**Neden sana soruyorum:** Bu konseyin özel kuralı *"CLAUDE.md'yi BÜYÜTECEK hiçbir öneri kabul edilmez"* diyor. Böyle bir kural eklemek CLAUDE.md'yi büyütür. **Ben bu yüzden önermiyorum ve kuralı YAZMADIM** — ama sorunun kendisi gerçek ve kararı senin.
+
+**Seçenekler:**
+· **A — Kural EKLEME. Bunun yerine 4 bayat kuralı tek seferde düzelt** (YN-04, YN-05 + 2 takip kalemi). Kullanıcı/ajan ne görür: yanlış kanıta dayanan güvenlik kuralı düzelir. Ne kazanırsın: CLAUDE.md **büyümez**, bugünkü zarar biter, 258 karakterlik pay korunur. **Ne kaybedersin: mekanizma kurulmaz** — 3 ay sonra aynı yerde olursunuz, bayat kurallar yeniden birikir. Süre **S** · geri alınır ✅ · migration yok.
+· **B — Kural ekle ama yer aç: YN-14 birleştirmeleriyle BİRLİKTE uygula.** Ne kazanırsın: mekanizma kurulur **ve** dosya yine de küçülür (birleştirme ≈4.494 kazandırıyor, kural ~400 maliyet). **Ne kaybedersin:** kural sayısı artar, her yeni kural yazımı zahmetlenir; ve konseyin "büyütme" yasağını ancak bir paketle birlikte delmiş olursun — emsal doğar. Süre **M** · geri alınır ✅ · migration yok.
+· **C — Kural yerine ALIŞKANLIK: KURAL 12'nin 3. ayağını (tazelik denetimi) script'e bağla.** Ne kazanırsın: **sıfır karakter maliyeti** — denetim otomatikleşir, CLAUDE.md hiç büyümez. **Ne kaybedersin:** script yazılana kadar hiçbir şey değişmez; `CLAUDE.md` bunu *"ileride script ile"* diyeli beri **hiç yapılmadı** (`scripts/` altında tazelik script'i yok, yalnız `kvkk-docx-gen.py` + `verify.sh`) — aynı akıbet olabilir. Süre **M** · geri alınır ✅ · migration yok.
+
+**Karşılaştırma:** A bugünü kurtarır, yarını kurtarmaz. B kalıcı çözüm ama kural sayısını artırır ve yasakla ancak paket hâlinde bağdaşır. C en zarif olanı (maliyet sıfır) ama aynı söz bir kez verilip tutulmadı; script gerçekten yazılacaksa en iyisi, yazılmayacaksa en kötüsü.
+
+**Benim önerim:** **A şimdi, C sonra** — B'yi önermiyorum çünkü konseyin yasağını ancak bir paketle birlikte deler; A'nın kazancı kesin ve bugün alınabilir, C ayrı bir iş olarak kuyruğa girebilir.
+
+**Cevap vermezsen:** 4 bayat kural yürürlükte kalır — en ciddisi `CLAUDE.md § Güvenlik Kuralları › Yeniden kullanılacak kalıplar`'deki **yanlış kanıtlı güvenlik kuralı**; ve kural birikmesi aynı hızla sürer, 258 karakterlik pay kısa sürede tükenir.
+
+**CEVAP:**
+
+---
+```
+
+### KARAR-51 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-051.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-51 · 4 "yaşayan ama ölü" belge dondurulsun mu?  [BELGE POLİTİKASI] (2 işi açar)
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+
+**Şu an ne var:** 26 aktif 🔄 YAŞAYAN belgeden **2'si kesin ölü**, **2'si ölü adayı**. İkisi kendi içinde *"işi X devraldı"* yazıyor ama künyesi hâlâ 🔄 diyor: `kararlar/konu/08-acik-sorular.md:5` (→ `00-KARAR-TAKIP.md`) · `raporlar/icerik/kod-kalemleri-2026-09-03.md:8` (→ `00-KUYRUK.md` AŞAMA I). Adaylar: `kararlar/10-yol-tamamlananlar.md` · `raporlar/bilanco/kararlar/G9-belge-surec.md`.
+
+**Sorun ne:** 🔄 damgası "buraya bak, güncel" demek. Okuyan ölü belgeyi güncel sanıp yanlış yere yazıyor ya da bayat bilgiyi doğru sanıyor.
+
+**Neden sana soruyorum:** Bir belgeyi dondurmak *"bu artık canonical değil"* demektir — KURAL 7 gereği canonical kararı PO'nundur. Ayrıca `10-yol-tamamlananlar` için **atıf zinciri** var: `10-yol-haritasi.md:7` hâlâ oraya yönlendiriyor.
+
+**Seçenekler:**
+· **A — Yalnız 2 kesin ölüyü dondur.** Kullanıcı ne görür: bu ikisi *"📸 dondurulmuş, güncel için X"* diyor. Ne kazanırsın: kanıtı kendi içinde olan iki vaka kapanır, risk sıfır, hazır metinler mevcut. **Ne kaybedersin:** 2 ölü aday belirsiz kalır; `00-BELGE-HARITASI`'nın 🔄 sayımı yine tam doğru olmaz. Süre **S** · geri alınır ✅ · migration yok.
+· **B — Dördünü birden dondur.** Ne kazanırsın: 🔄 kümesi tamamen dürüst olur, sayım bir kerede düzelir. **Ne kaybedersin:** `10-yol-tamamlananlar` dondurulursa `10-yol-haritasi.md:7`'deki yönlendirme **kırık atıf** olur — önce o düzeltilmeli; `G9` için KURAL 12 eşiği henüz dolmadı (**2026-10-02**), erken dondurmak kendi kuralını delmek olur. Süre **M** · geri alınır ✅ · migration yok.
+· **C — Hiçbirini dondurma, yalnız "son güncelleme" tarihi ekle.** Ne kazanırsın: hiçbir canonical değişmez, sıfır risk. **Ne kaybedersin: asıl sorun çözülmez** — okuyan yine 🔄 görüp güncel sanar; tarih eklemek "bu belge ölü" demez. Süre **S** · geri alınır ✅ · migration yok.
+
+**Karşılaştırma:** A risksiz ve kanıtı belgelerin kendisinde. B daha eksiksiz ama iki ön koşul istiyor (atıf düzeltme + eşik bekleme). C sorunu görünür kılar ama çözmez.
+
+**Benim önerim:** **A** — iki kesin vaka bugün kapansın; `10-yol-tamamlananlar` ancak `10-yol-haritasi.md:7` düzeltildikten sonra, `G9` ise 2026-10-02'de kendi kuralıyla dondurulsun.
+
+**Cevap vermezsen:** 4 belge 🔄 görünmeye devam eder; `00-BELGE-HARITASI`'nın 🔄 sayımı da yanlış kalır.
+
+**CEVAP:**
+
+---
+```
+
+### KARAR-52 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-052.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-52 · Taşınan KURAL 8 mükerreri: hangi gövde kalsın?  [BELGE/METODOLOJİ] — ⭐ BU TURDA DOĞDU
+> ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
+> ⚠️ **BU TURDA DOĞDU:** mükerrer, bu PR'daki CLAUDE.md bölmesiyle iki dosyadan tek dosyaya taşındı (YN-02).
+
+**Şu an ne var:** Bölme sonrası `belge-duzeni-rehberi.md`'de **KURAL 8 iki kez** var: `:99-109` (rehberin kendi gövdesi, 2026-08-23) ve `:143-152` (CLAUDE.md'den 2026-09-21'de taşınan kopya). Rapor `:337` (B.4-1) bu taşımanın mükerreri **çözeceğini** söylüyordu; fiilen mükerrer **iki dosyadan tek dosyaya taşındı**, ortadan kalkmadı.
+
+**Sorun ne:** Rehberin kendi KURAL 1'i *"tek gerçek kaynağı"* diyor — şimdi kendi dosyasının içinde iki gerçek kaynağı var. Okuyan hangisine uyacağını bilemez; ikisi birebir aynı da değil (rehber hâli 1.300 karakter, taşınan hâli 974).
+
+**Neden sana soruyorum:** Bir kural gövdesini elemek `CLAUDE.md § SİLME PROTOKOLÜ`'ne ve rapor `:333`'teki *"hiçbir kural gövdesi silinmiyor"* taahhüdüne dokunuyor. Hangi gövdenin canonical olduğu belge politikası kararıdır.
+
+**Seçenekler:**
+· **A — Rehberin kendi gövdesi (`:99-109`) kalsın; taşınan kopya `## GEÇMİŞ`e insin.** Kullanıcı/ajan ne görür: tek KURAL 8, en uzun ve en eski gövde. Ne kazanırsın: canonical zinciri bozulmaz, hiçbir satır silinmez. **Ne kaybedersin:** CLAUDE.md'nin son hâli (974 karakter) daha güncel olabilir — bu turda içerik farkı **karşılaştırılmadı** (❓ TEYİT GEREK); yanlış gövdeyi seçme riski var. Süre **S** · geri alınır ✅.
+· **B — İki gövdeyi BİRLEŞTİR, farkları tek metinde topla.** Ne kazanırsın: hiçbir bilgi kaybı yok, tek gerçek kaynağı gerçekten tek olur. **Ne kaybedersin:** elle karşılaştırma gerektirir (iki gövde satır satır okunmalı); birleştirme sırasında sessiz bir kayıp riski — bu yüzden ⛔ `kalan + taşınan = önceki` denetimi zorunlu olur. Süre **M** · geri alınır ✅.
+· **C — İkisi de kalsın, taşınan kopyaya *"bkz. yukarıdaki KURAL 8"* notu düşülsün.** Ne kazanırsın: sıfır risk, sıfır karar. **Ne kaybedersin:** dosya **8.103 karakterlik** taşımanın üstüne ~974 karakter gereksiz taşımaya devam eder; ve "mükerrer bırakma" bu projede üç kez sorun doğurdu. Süre **S** · geri alınır ✅.
+
+**Karşılaştırma:** A hızlı ama hangi gövdenin daha güncel olduğu doğrulanmadan seçim yapıyor. B tek doğru çözüm ama emek istiyor ve denetim şart. C hiçbir şeyi çözmez, yalnız görünür kılar.
+
+**Benim önerim:** **B** — iki gövde de kural metni, ikisi de kısa; birleştirme yarım saatlik iş ve `CLAUDE.md § SİLME PROTOKOLÜ`'ne hiç girmiyor (silme değil birleştirme). A'yı ancak gövdeler birebir aynı çıkarsa öneririm.
+
+**Cevap vermezsen:** YN-02 kuyrukta bekler; `belge-duzeni-rehberi.md` kendi KURAL 1'ini ihlal etmeye devam eder ve "kuralları oku" diyen ajan aynı kuralı iki farklı uzunlukta okur.
+
+**CEVAP:**
+
+---
+```
+
+### KARAR-56 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-056.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-56 · Menti aynı hafta birden fazla mentöre görüşme talebi gönderebilsin mi?  (3 işi açar)  [ÜRÜN KARARI]
+**Şu an ne var:** Haftalık görüşme sınırına (varsayılan 2) onay BEKLEYEN talepler de sayılıyor. Menti o hafta 2 talep gönderdiyse 3.'yü gönderemez, sistem hata (409) döner. Kanıt: `meetingController.ts:79-84,184-187`.
+**Sorun ne:** Menti yolculuğu tasarımı "menti istediği kadar başvurur; kim dönerse onunla başlar, sıklık dolduysa diğeri sonraki haftaya kalır" diyor ve bekleme metni "birden fazla başvuru normaldir" yazıyor (`menti-yolculugu:304-310,324-326`). Bugünkü kodla bu metin yanlış olur.
+**Neden sana soruyorum:** Kullanıcının ne yapabileceği (kaç talep) bir ürün kararı; mentörlerin gelen kutusu da etkilenir.
+**Seçenekler:**
+· **A — Bugünkü hal: bekleyen talepler sınıra sayılır.** Kullanıcı ne görür: 2 bekleyen talepten sonra yeni talep gönderemez. Ne kazanırsın: mentör gelen kutusu şişmez. **Ne kaybedersin:** yanıt vermeyen mentör menti'yi bir hafta kilitler; tasarım metni değişmeli. Süre S · geri alınır ✅ · migration yok
+· **B — Yalnız onaylanan görüşmeler sayılır, talep serbest.** Kullanıcı ne görür: istediği kadar talep gönderir; onaylar sınıra ulaşınca kalanlar sonraki haftaya. Ne kazanırsın: tasarımla uyumlu, bekleme ölü zamanı yok. **Ne kaybedersin:** mentörler reddedilecek/eskiyecek talep görür; 3/7 gün zamanlayıcısı (md.154) daha kritik olur. Süre M · geri alınır ✅ · migration yok
+· **C — Bekleyen talep için ayrı, daha yüksek sınır (örn. 3).** Ne kazanırsın: ara yol. **Ne kaybedersin:** iki sayaç = kullanıcıya anlatması zor. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** Mentör tarafı az ve yavaşsa A korur; menti kaybı önemliyse B. C ancak ölçüm verisi varsa anlamlı.
+**Benim önerim:** B — bekleme/ret akışının (md.154/155) tüm metinleri bu varsayımla yazıldı. Bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** I-10 (bekleme zamanlayıcısı), I-16 (ret), I-05 (sıklık gösterimi) metinleri kodla çelişik kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-68 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-068.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-68 · Persona/panel belgeleri nasıl gelişmeli: A/B/C?  (2 işi açar)  [BELGE POLİTİKASI]
+**Şu an ne var:** 7 persona/panel belgesi 📸 dondurulmuş, 7 hafta güncellenmedi, kimse "varsayım tuttu mu" bakmadı. Kanıt: `persona-panel-gelisimi-2026-09-23.md:284` (§7 E) + §5.1 (`:171-177`).
+**Sorun ne:** Tasarım zemini bayat; ama kör güncelleme tur bütçesini yer (projede yaşanmış sorun).
+**Neden sana soruyorum:** Belgelerin nasıl yaşayacağı bir belge-yönetimi + ürün kararı; "aktif iş kaynağı tektir" kuralıyla ilişkisi var.
+**Seçenekler:**
+· **A — Dondurmayı kaldır, YAŞAYAN yap.** Ne kazanırsın: her zaman güncel tasarım zemini. **Ne kaybedersin:** tur bütçesinin büyük kısmı belge muhasebesine gider; "eğitimli taslak" niteliği kaybolur; ⚠️ zayıf — sürekli güncellenen ikinci bir gerçek kaynağı doğar. Süre L (sürekli) · geri alınır ✅ · migration yok
+· **B — HALEF yaşayan belge (persona-v2), eskiyi "yerini X aldı" ile yönlendir.** Ne kazanırsın: gerçek kullanıcı verisiyle beslenmiş yeni zemin; tarihsel iz korunur. **Ne kaybedersin:** halefi üretecek girdi (gerçek kullanıcı testi) YOKKEN üretilirse yine tahmin olur. Süre M (tetikleyicide) · geri alınır ✅ · migration yok
+· **C — Dondurulmuş kalsın; güncel bilgi tek yerde (KUYRUK/09-DURUM), personalar tarihsel zemin.** Ne kazanırsın: minimum bakım, tek gerçek kaynağı korunur. **Ne kaybedersin:** personaların "varsayım tuttu mu" bilgisi hiçbir yere işlenmez → tekrar bayatlar (bugünkü sorun sürer). Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Sürekli güncel zemin öncelik ama bütçe kabulse A; öğrenmeyi kalıcı kaybetmek istemiyorsan ve gerçek kullanıcı testini bekleyebiliyorsan B; minimum bakım öncelikse C ama bayatlama sürer.
+**Benim önerim:** Tetikleyicili B (o zamana kadar C) — belgelerin kendi koştuğu şart (gerçek kullanıcı testi) yerine gelmeden A/B yeni tahmin üretir; C öğrenmeyi kalıcı kaybeder; doğru hamle güncellemeyi ilk kullanıcı testine bağlamak (§5.1).
+**Cevap vermezsen:** U-A6 açık kalır, belgeler tekrar bayatlar.
+**CEVAP:**
+
+---
+```
+
+### KARAR-71 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-071.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-71 · Kırılgan kullanıcıda tutundurma etiğinin sınırı nerede?  (1+ işi açar)  [ÜRÜN KARARI · ETİK · UZMAN GÖRÜŞÜNE BAĞLI]
+**Şu an ne var:** Persona tasarımı kullanıcıyı bilinçle "kırılgan/kaygılı genç" seçip elde tutmayı optimize ediyor (`persona-panel-gelisimi-2026-09-23.md:237` C3). Bugün canlıda tutundurma öğeleri var: umut sinyali (F-15/F-16), kutlama/konfeti (P-07), takdir (P-14), bildirim izni (F-20). Riskli aile (henüz yok ama sıradaki adım olabilir): suçlulu hatırlatma · seri/streak · yapay kıtlık · ayrılmayı zorlaştırma.
+**Sorun ne:** Kırılgan bir kitlede "kullanıcıyı elde tut" hedefi bir yerde etik sınırı geçip baskı/manipülasyona dönüşür. Nerede tutundurma biter, baskı başlar? Bu çizgi tanımsız; tanımsız kalırsa her yeni "tutundurma" özelliği (streak, hatırlatma) fark edilmeden riskli tarafa kayabilir.
+**Neden sana soruyorum:** Bu bir etik + ürün kararı ve ⚠️ RUH SAĞLIĞI UZMANI görüşü gerektirir — özellikle kırılgan/kaygılı genç kitlede hangi tutundurma tekniğinin zararlı olduğu klinik bilgi ister.
+**Seçenekler:** (⚠️ seçenekler uzman görüşüne bağlı — kesin öneri verilmez)
+· **A — Yalnız pozitif/gönüllü tutundurma** (kutlama, takdir, umut sinyali; suçluluk/streak/kıtlık YOK). Ne kazanırsın: etik zemin net, kırılgan kitlede güvenli. **Ne kaybedersin:** bazı kanıtlanmış tutundurma teknikleri (streak) masada kalır; retention metriği daha düşük olabilir. Süre — (ilke) · geri alınır ✅ · migration yok
+· **B — Uzman onaylı bir "izin verilen teknikler" listesi** — her tutundurma özelliği canlıya çıkmadan uzman süzgecinden geçer. Ne kazanırsın: her özellik ayrı değerlendirilir, esnek ama korumalı. **Ne kaybedersin:** her özellik için uzman turu = yavaşlık ve dış bağımlılık. Süre M (sürekli) · geri alınır ✅ · migration yok
+· **C — Şimdilik mevcut öğeler kalsın, sınır kararı uzman görüşü gelene kadar ertelensin.** Ne kazanırsın: iş yok, mevcut öğeler zaten görece hafif. **Ne kaybedersin:** yeni tutundurma özellikleri sınırsız eklenebilir; risk sessizce büyür. Süre — · geri alınır ✅ · migration yok
+**Karşılaştırma:** Net ve muhafazakâr bir etik zemin öncelikse A; esneklik + koruma dengesi isteniyorsa B (ama uzman bağımlılığı); acil değilse C ama koruma açığı büyür. Üçü de bir ruh sağlığı uzmanının çizeceği çizgiye göre yeniden değerlendirilmeli.
+**Benim önerim:** öneri YOK — bu bir ruh sağlığı uzmanı görüşüne bağlı etik karar; ajan bu çizgiyi çizmeye yetkin değil. Öneri: bir uzmandan "kırılgan genç kitlede kabul edilebilir tutundurma teknikleri" görüşü al, sonra A/B'den birini seç.
+**Cevap vermezsen:** yeni tutundurma özellikleri (streak, hatırlatma vb.) etik sınır tanımsızken eklenmeye devam eder; kırılgan kullanıcıda manipülasyon riski denetimsiz büyür.
+**CEVAP:**
+
+---
+```
+
+### KARAR-72 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-072.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-72 · Ghost / "kalıcı red" özelliği olacak mı? (1 iş açar: AN-33) [ÜRÜN + HUKUK KARARI]
+> ⭐ Kaynak: CS bilanço denetimi (`docs/raporlar/kesif/konu-bilanco-denetimi-2026-09-23.md` §7 KARAR-A). CS'nin "A/B/C/D" harf kimlikleri bu turda 72-75 numaralarına dönüştürüldü.
+**Şu an ne var:** Yönetici bir başvuruyu reddedince kullanıcı "düzeltme" mesajıyla bilgilendiriliyor ve yeniden başvurabiliyor (`adminController.ts:740 rejectUser`). "Sessiz/kalıcı" red yok. Kanıt: `konu/11-tasarim-kararlari-yasam-dongusu-ve-disc.md:53-81` tam tasarım var ama kodda 0.
+**Sorun ne:** Kötü niyetli/uygunsuz bir kullanıcıyı sessizce (ona bildirmeden) ve kalıcı olarak (yeniden başvuramayacak şekilde) eleme yolu yok. Tasarım yazılmış ama hiçbir iş kuyruğuna girmemiş — 7 haftadır unutulmuş.
+**Neden sana soruyorum:** Bir kişinin platformdan sessizce ve kalıcı elenmesi geri dönülmez bir kullanıcı-deneyimi ve olası KVKK/itiraz sonucu doğurur — teknik değil ürün+hukuk kararı.
+**Seçenekler:**
+- **A) Yapılsın (tasarımdaki gibi):** · Kullanıcı: uygunsuz kişi sessizce elenir, tekrar giremez · Kazanç: topluluk güvenliği · Kayıp: yanlış-red edilen kişi neden reddedildiğini bilemez, itiraz edemez (KVKK şeffaflık gerilimi) · Süre M · Geri alınır (kayıt tutulursa) · Migration VAR (`rejectionType` alanı)
+- **B) Yalnız "düzeltme redi" kalsın (bugünkü):** · Kullanıcı: her red şeffaf, yeniden başvurabilir · Kazanç: şeffaflık, KVKK güvenli · Kayıp: kötü niyetli kullanıcı tekrar tekrar başvurabilir · Süre 0 · Migration YOK
+- **C) Ghost yerine "süreli engelleme":** · Kullanıcı: X gün başvuramaz, sonra açılır · Kazanç: orta yol · Kayıp: ek tasarım · Süre M · Migration VAR
+**Karşılaştırma:** A topluluk güvenliğini maksimize eder ama KVKK şeffaflığıyla gerilimli; B en güvenli/en zayıf koruma; C dengeli ama en çok iş. Gerçek kötüye-kullanım hacmi ~sıfırsa B yeterli olabilir.
+**Benim önerim:** B (koru), gerçek kötüye-kullanım görülene kadar — çünkü ghost-red'in KVKK maliyeti, bugünkü ~sıfır kullanıcıda somut faydasından büyük. *(Bu senin ürün kararın; önerime güvenme — güvenlik ekibi farklı düşünebilir.)*
+**Cevap vermezsen:** `11-...disc` KARAR 2 tasarımı belgede asılı kalır, tekrar tekrar "öksüz" raporlanır (AN-33 kilitli).
+**CEVAP:**
+```
+
+### KARAR-88 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-088.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-88 · Hakkımızda / İletişim sayfaları ve yüzen WhatsApp düğmesi — içerik ve iletişim kanalı (2 iş açar: Y-07, Y-11) [ÜRÜN KARARI · KURUMLARA GÖRÜNEN METİN]
+> ⭐ Kaynak: otonom tur 2026-09-25; Y-07 ve Y-11 kuyrukta 🟢, ama ikisi de senden gelecek bilgiye bağlı.
+**Şu an ne var:** Sitede "Hakkımızda" ve "İletişim" sayfası yok (`frontend/src/app/` altında böyle bir klasör yok). Yüzen WhatsApp düğmesi de yok; WhatsApp yalnız davet metni paylaşımında geçiyor (`frontend/src/app/(admin)/admin/invite/page.tsx`). Ekranda gösterilen tek iletişim adresi `destek@mentimentor.io` (`frontend/src/app/join/_JoinContent.tsx:65`, `onboarding/stk/pending-review/page.tsx:108,172`). E-postaların gönderen adresi ise `noreply@sivilkapasite.org` (`backend/src/config.ts`). İki farklı alan adı görünüyor. Ayrıca kurum bildirim e-postaları `destek@` kurulana kadar kapalı (03-PO-ELLE-ISLER).
+**Sorun ne:** Siteye gelen biri kimin arkasında olduğunu ve nasıl ulaşacağını göremiyor. Kurumlar için güven eksikliği. Ben bu sayfaların metnini ve iletişim bilgisini uyduramam.
+**Neden sana soruyorum:** Kurumlara görünen metin ve resmi iletişim kanalı senin kararın. Hangi adres, hangi numara, kimin adına konuşulduğu da senin kararın.
+**Seçenekler:**
+- **A) İki sayfa + yalnız e-posta (WhatsApp yok)** · Kullanıcı ne görür: altbilgide "Hakkımızda · İletişim" bağlantıları; iletişimde tek resmi e-posta · Kazanç: sade, telefon numarası yayımlanmaz · **Ne kaybedersin:** hızlı soru soracak kurum için anlık kanal yok · Süre S (metin gelince) · Geri alınır · Migration yok
+- **B) İki sayfa + e-posta + yüzen WhatsApp düğmesi** · Kullanıcı ne görür: A'ya ek olarak her sayfanın köşesinde WhatsApp düğmesi · Kazanç: kurumlara anlık ulaşım · **Ne kaybedersin:** bir telefon numarası herkese açık olur, mesajlara cevap verecek biri gerekir; düğme mobilde ekran alanı kaplar · Süre S · Geri alınır · Migration yok
+- **C) Şimdilik yok (erteleme)** · Kazanç: sıfır iş · **Ne kaybedersin:** güven eksikliği sürer; Y-07 ve Y-11 kilitli kalır
+**Karşılaştırma:** A, iletişim yükünü e-postada tutar. B, kurumlarla hızlı temas ister ama bir sorumlu kişi gerektirir. C, içerik hazır olana kadar erteler.
+**Benim önerim:** A — bugün gerçek kullanıcı az; anlık kanal açmak cevap yükü doğurur, e-posta yeterli. *(Bu senin ürün kararın, önerime güvenme.)*
+**Senden gereken (A veya B seçersen):** (1) Hakkımızda için 3-5 cümle: kim, neden, kimin için. (2) Resmi iletişim e-postası: `destek@mentimentor.io` mı, başka bir adres mi? (3) B seçersen WhatsApp numarası.
+**Cevap vermezsen:** Y-07 ve Y-11'in WhatsApp kısmı bekler. "Yukarı çık" düğmesi teknik bir iş, ondan bağımsız yapılır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-95 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-095.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-95 · Kriz kanalı — güvenlik sorusu olarak yeniden sorulsun (2 iş açar: I-18, IC-13) [ÜRÜN KARARI · GÜVENLİK]
+> ⭐ Kaynak: KARAR-80/M20'den doğdu (2026-09-26). KARAR-69 (c) zaten "kriz kanalı hukuk değil GÜVENLİK, ayrı karar olarak yeniden sorulacak" demişti; I-18/IC-13 hâlâ eski çerçevede ("hukuki ön koşul + KARAR-31 + avukat") duruyordu, ayrı kart hiç açılmamıştı — bu kart o boşluğu kapatıyor.
+**Şu an ne var:** Bir kullanıcı test/mesaj sırasında kendine zarar verme ya da acil durum ifadesi yazarsa **kimse haberdar olmuyor**. Sertifika sınavında "kriz senaryosu" SORULUYOR ama canlıda gerçek bir kriz karşısında hiçbir akış çalışmıyor — sistem bunu bir konu başlığı gibi test ediyor, gerçekte hiçbir şey yapmıyor.
+**Sorun ne:** Bu bir metin eksikliği değil, güvenlik/can güvenliği boşluğu. Kim haberdar edilecek (kurum yöneticisi mi, harici bir kriz hattı mı, ikisi mi), ne kadar hızlı, ve sistemin bunu "algıladığını" nasıl anladığı (anahtar kelime mi, işaretli bir soru mu) — bunlar ürün + güvenlik kararı, ajan kendi başına "en güvenli" yorumla bir bildirim akışı kuramaz (madde 19/M19 ilkesiyle aynı gerekçe).
+**Neden sana soruyorum:** Yanlış kurulmuş bir kriz akışı (ör. kimseye ulaşmayan bir bildirim, ya da yanlış kişiye giden hassas bir uyarı) hukuki ve etik olarak boş akıştan daha kötü olabilir; bu yüzden "nasıl" sorusu senin.
+**Seçenekler:**
+- **A) Kurum yöneticisine anlık bildirim + panelde "Kriz" etiketli görünürlük** · Kullanıcı ne görür: kriz ifadesi yazan kişi fark etmez (arka planda haberdar edilme olur), kurum yöneticisi panelinde acil bir uyarı görür · Kazanç: mevcut altyapıyla (bildirim sistemi zaten var) hızlı kurulur, dış servise bağımlılık yok · **Ne kaybedersin:** kurum yöneticisi 7/24 müsait olmayabilir, gerçek bir acil durumda gecikme riski · Süre M · Geri alınır: evet
+- **B) Harici bir kriz hattı/kaynağına yönlendiren statik ekran** (ör. "144" ya da ilgili kurumun kendi kriz hattı bilgisi) · Kullanıcı ne görür: kendine zarar ifadesi sonrası ekranda doğrudan yardım hattı bilgisi · Kazanç: gecikme yok, uzman kaynağa yönlendirir, ajan sorumluluğu daha net · **Ne kaybedersin:** kurum yöneticisi haberdar olmaz, takip kimsenin elinde değil
+- **C) İkisi birden** (yöneticiye bildirim + kullanıcıya yardım hattı ekranı) · Kazanç: hem anlık yönlendirme hem kurum içi takip · **Ne kaybedersin:** en çok iş; iki ayrı akış test edilmeli
+**Karşılaştırma:** A kurum içi sorumluluk zincirini kullanır ama yönetici gecikebilir; B en hızlı yardıma yönlendirir ama kurum kör kalır; C ikisini birleştirir, en güvenli ama en yavaş teslim.
+**Benim önerim:** C — can güvenliği konusunda "ya biri ya diğeri" riskli; ikisi de ucuz eklenir (bildirim altyapısı zaten var, statik ekran S efor).
+**Cevap vermezsen:** I-18/IC-13 🔴 KARAR-95 kilidinde kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-129 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-129.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-129 · Askıya alınmış kurumun YÖNETİCİSİ ekranda ne görsün, kime başvursun? (0 iş kilitliyor; cevap 1 küçük iş açar) [ÜRÜN KARARI · KURUMA GÖRÜNEN METİN]
+**Şu an ne var:** Kurum askıya alınınca (platform yöneticisi dondurunca) kurumun üyeleri artık dağınık hata yerine tek bir ekran görüyor: "Kurumunuzun hesabı şu an askıda. Kurum yöneticinizle iletişime geçin." (backend'in zaten döndürdüğü cümle — `backend/src/middleware/tenantSuspension.ts:64`; ekran `frontend/src/app/kurum-askida/page.tsx`, AJ-72 · çatı #422). Kurumun YÖNETİCİSİ aynı ekranı yalnız ilk cümleyle görüyor: "Kurumunuzun hesabı şu an askıda." — kime yazacağı, neden askıya alındığı, nasıl itiraz edeceği yazmıyor.
+**Sorun ne:** Yönetici kurumunun neden durduğunu ve ne yapması gerektiğini bilmiyor; platforma ulaşma yolu ekranda yok. Üyelerine "yöneticinizle iletişime geçin" denildiği için sorular ona geliyor, onun ise gidecek yeri yok.
+**Neden sana soruyorum:** Kuruma görünen metin ve kurumun platformla ilişkisi (destek/itiraz kanalı) ürün kararı; hangi iletişim adresinin kurumlara açık gösterileceği de senin kararın.
+**Seçenekler:**
+- **A) Platform iletişim adresini göster** ("Kurumunuzun hesabı şu an askıda. Ayrıntı ve itiraz için: <platform iletişim adresi>") · Kullanıcı ne görür: yönetici kime yazacağını bilir · Kazanç: en ucuz, hemen çözülür · Kaybedersin: bir iletişim adresi kurumlara açıkça gösterilir (spam/yük); itirazlar kayıt dışı e-postada kalır · Süre: S · Geri alınır: evet · Migration: yok
+- **B) Ekranda itiraz/iletişim formu** (yönetici kısa bir not bırakır, platform yöneticisine düşer) · Kullanıcı ne görür: "Bize yazın" formu · Kazanç: itirazlar kayıtlı ve izlenebilir · Kaybedersin: yeni özellik (form + uç + bildirim), kötüye kullanım önlemi gerekir; muhtemelen yeni tablo (migration) · Süre: M · Geri alınır: evet · Migration: büyük ihtimalle var
+- **C) Bugünkü gibi nötr kalsın** · Kullanıcı ne görür: yalnız "askıda" cümlesi · Kazanç: iş yok, askıya alma zaten platformla konuşularak yapılıyorsa yeterli · Kaybedersin: yönetici ne yapacağını bilmez, üyeler ona sorar · Süre: — · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Askıya alma nadir ve hep önceden konuşuluyorsa C yeterli; kurumlara şeffaf bir kanal açmak istiyorsan A ucuz yol; itirazların kayıt altında olması (ör. hukuki gerekçe) önemliyse B.
+**Benim önerim:** A — tek cümle ve bir adres; gerçek kullanıcı ~0 iken B'nin emeği erken. Adres seçimi senin.
+**Cevap vermezsen:** Yönetici bugünkü nötr ekranı görür (C fiilen yürürlükte); başka iş kilitlenmez. İlgili: AJ-72 (BITTI), AJ-59.
+**CEVAP:**
+```
 

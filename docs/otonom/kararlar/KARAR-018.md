@@ -13,6 +13,8 @@ Bunlar kod değil; sunucu/hesap/hukuk/yerel-makine adımları. Ajan yapamaz, bul
 - [ ] **G8-06** git dal/worktree + geçici script temizliği.
 - [ ] **KARAR-8** repoları private yap (ayrı kartta duruyor, hatırlatma).
 
+**İlgili kartlar:** KARAR-8 (listedeki "repoları private yap" maddesinin kartı) · KARAR-25 (G1-28 yedek/sertleştirme maddesinin karar kartı)
+
 **CEVAP (isteğe bağlı — bu bir onay kartı değil, hatırlatma listesi):**
 
 ---
