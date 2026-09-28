@@ -5,6 +5,10 @@
  * rozetiyle işaretlenir. KARAR-32 revizyonu: isBookable=false olan mentörde "Görüşme Talep Et"
  * devre dışı kalır, "Mesaj" HER ZAMAN aktif kalır.
  * AJ-66 (KARAR 4): sertifikalı mentörde "✓ Sertifikalı" rozeti; sertifikasızda hiçbir etiket yok.
+ * AJ-81 (KARAR 2/5/7): kartta uyum yüzdesi ("%80" + "uyum") ve "Neden uyumlu:" gerekçesi görünür;
+ * mentörün DISC harfi/tipi GÖRÜNMEZ. DTO'da discType zaten yoktur (backend
+ * `matchingController.ts` buildMentiFacingMentorItem beyaz liste + `backend/tests/mentor-matches.test.ts`);
+ * buradaki negatif test ek savunma katmanını ölçer: yanıta sızsa bile kart onu ekrana basmaz.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
@@ -132,6 +136,65 @@ describe('AJ-66 · Menti mentör kartı — "✓ Sertifikalı" rozeti', () => {
     await screen.findByText('Soluk Mentör');
     const card = screen.getByText('Soluk Mentör').closest('div.rounded-xl') as HTMLElement;
     expect(within(card).queryByText(/sertifika/i)).not.toBeInTheDocument();
+  });
+});
+
+// AJ-81 · KARAR 2/7: uyum yüzdesi + gerekçe görünür · KARAR 5: mentörün DISC tipi görünmez.
+describe('AJ-81 · Menti mentör kartı — uyum yüzdesi, gerekçe, DISC gizliliği', () => {
+  // Backend DTO'su discType/discLetters TAŞIMAZ; burada sızmış gibi eklenir (tip dışı alan) ki
+  // ön yüzün bunu ekrana basmadığı ölçülsün. C → arketip "Kâşif" (DiscBadge DISC_META).
+  const leakedDiscMentor = {
+    ...bookableMentor,
+    mentorId: 'mentor-leaked-disc',
+    mentorName: 'Sızıntı Mentör',
+    matchScore: 73,
+    compatibilityReason: 'İletişim tarzları uyumlu',
+    discType: 'C',
+    discLetters: 'Cs',
+  } as MentorMatch;
+
+  beforeEach(() => {
+    apiMock.mockClear();
+    mentorMatchesResponse = { ok: true, data: { items: [bookableMentor, fadedMentor, leakedDiscMentor] } };
+  });
+
+  function cardOf(name: string): HTMLElement {
+    return screen.getByText(name).closest('div.rounded-xl') as HTMLElement;
+  }
+
+  it('her kartta uyum skoru "%<sayı>" biçiminde ve "uyum" etiketiyle görünür', async () => {
+    render(<MentiDashboardPage />);
+    await screen.findByText('Uygun Mentör');
+    const bookable = cardOf('Uygun Mentör');
+    expect(within(bookable).getByText('%80')).toBeInTheDocument();
+    expect(within(bookable).getByText('uyum')).toBeInTheDocument();
+    // Kart kendi skorunu gösterir, başka kartınkini değil.
+    expect(within(bookable).queryByText('%60')).not.toBeInTheDocument();
+    expect(within(cardOf('Soluk Mentör')).getByText('%60')).toBeInTheDocument();
+  });
+
+  it('her kartta "Neden uyumlu:" başlığıyla o mentörün gerekçesi görünür', async () => {
+    render(<MentiDashboardPage />);
+    await screen.findByText('Uygun Mentör');
+    const bookableReason = within(cardOf('Uygun Mentör')).getByText('Neden uyumlu:', { exact: false }).closest('p');
+    expect(bookableReason).toHaveTextContent('Neden uyumlu: Ortak sektör ve ilgi alanları');
+    const fadedReason = within(cardOf('Soluk Mentör')).getByText('Neden uyumlu:', { exact: false }).closest('p');
+    expect(fadedReason).toHaveTextContent('Neden uyumlu: Genel profil uyumu');
+  });
+
+  it('negatif: yanıta discType/discLetters sızsa bile kartta DISC harfi, tipi ya da arketipi görünmez', async () => {
+    render(<MentiDashboardPage />);
+    await screen.findByText('Sızıntı Mentör');
+    const card = cardOf('Sızıntı Mentör');
+    // Kartın geri kalanı normal çiziliyor (test boş kartı ölçmüyor).
+    expect(within(card).getByText('%73')).toBeInTheDocument();
+    expect(card).toHaveTextContent('Neden uyumlu: İletişim tarzları uyumlu');
+    // DISC hiçbir biçimde yok: harf (tek/çoklu), "DISC" kelimesi, arketip adı, tooltip.
+    expect(within(card).queryByText('C')).not.toBeInTheDocument();
+    expect(within(card).queryByText('Cs')).not.toBeInTheDocument();
+    expect(within(card).queryByText(/DISC/i)).not.toBeInTheDocument();
+    expect(card.textContent ?? '').not.toMatch(/Kâşif|Öncü|Ateşleyici|Yapı Taşı/);
+    expect(card.querySelector('[title*="Kâşif"]')).toBeNull();
   });
 });
 
