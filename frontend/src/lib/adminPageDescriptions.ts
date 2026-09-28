@@ -17,16 +17,16 @@
  */
 export const ADMIN_PAGE_DESCRIPTIONS = {
   'algorithm-tuner':
-    'Görüşme memnuniyet puanlarına bakarak eşleştirmede hangi özelliğin ne kadar önemli olacağını buradan ayarlayabilirsiniz.',
+    'Eşleşmelerin birinci ve üçüncü ay memnuniyet puanlarına göre platformun önerdiği eşleştirme ayarlarını buradan onaylayabilir, reddedebilir ya da oranları kendiniz değiştirebilirsiniz.',
   approvals: 'Kurumunuza katılmak için başvuran kişileri burada inceleyip karara bağlayabilirsiniz.',
   branding: 'Kurumunuzun logosunu ve rengini buradan değiştirebilirsiniz; değişiklik tüm üyelerinize görünür.',
   certification:
-    'Mentörlerinizin sertifika sınavında hangi konuların çıkacağını buradan açıp kapatabilirsiniz; konuların içeriğini uzmanlar hazırlar ve kritik konular her zaman açıktır.',
+    'Mentörlerinizin sertifika sınavında hangi konuların çıkacağını buradan açıp kapatabilirsiniz; konuları uzmanlar hazırlar, eklenemez veya düzenlenemez ve kritik konular her zaman açıktır.',
   eslesmeler: 'Kurumunuzda hangi mentörün hangi mentiyle eşleştiğini burada görebilirsiniz.',
   invite: 'Hazır davet metnini düzenleyip kopyalayın ve kendi e-postanızdan ya da WhatsApp üzerinden gönderin.',
   kpi: 'Kurumunuzdaki mentörlük programının genel sayılarını burada görürsünüz; kişilerin bilgileri gösterilmez.',
   'learning-journey':
-    'Üyelerinizin sınav olmadan adım adım ilerlediği öğrenme aşamalarını buradan düzenleyebilir, hazır aşamaları kopyalayıp değiştirebilir ya da gizleyebilirsiniz.',
+    'Üyelerinizin sınav olmadan adım adım ilerlediği öğrenme aşamalarını buradan yönetebilirsiniz; hazır aşamalar kilitlidir, onları gizleyebilir ya da kopyalayıp kendi sürümünüzü düzenleyebilirsiniz.',
   managers:
     'Kurumunuzun yöneticilerini burada görebilir, onaylı üyelerinizden yönetici atayabilir veya çıkarabilirsiniz (en fazla 3 yönetici).',
   'menti-havuzu': 'Kurumunuza kayıtlı tüm mentileri ve başvurularının onay durumunu burada görebilirsiniz.',
@@ -37,7 +37,8 @@ export const ADMIN_PAGE_DESCRIPTIONS = {
   'sertifika-sonuclari':
     'Mentörlerinizin sertifika sınavındaki durumlarını, puanlarını ve kaç kez denediklerini burada görebilirsiniz.',
   tags: 'Üyelerinizin önerdiği yeni etiketleri buradan onaylayabilir, benzeriyle birleştirebilir ya da reddedebilirsiniz.',
-  'waiting-room': 'Kişilik testini (DISC) bitirip onayınızı bekleyen kişiler burada listelenir.',
+  'waiting-room':
+    "Onay Kuyruğu'ndaki başvuruların aynısını burada tablo hâlinde, varsa kişilik testi (DISC) sonucu ve koçluk önerileriyle birlikte görür, onaylayabilir ya da reddedebilirsiniz.",
 } as const;
 
 export type AdminPageKey = keyof typeof ADMIN_PAGE_DESCRIPTIONS;
