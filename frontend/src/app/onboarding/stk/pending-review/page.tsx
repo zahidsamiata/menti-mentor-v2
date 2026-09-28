@@ -10,6 +10,7 @@
  *
  * Not: e-posta bildiriminin AÇILMASI PO adımıdır (TENANT_NOTIFICATIONS_ENABLED + SMTP,
  * bkz. 03-PO-ELLE-ISLER). Bu ekran uygulama-içi göstergeyi sağlar; e-postadan bağımsızdır.
+ * AJ-123 / KARAR-23: ret kararı e-postayla GÖNDERİLMEZ (backend isTenantNotificationEmailed) — metin buna söz vermez.
  */
 
 import { useEffect, useState } from 'react';
@@ -128,7 +129,7 @@ export default function PendingReviewPage() {
           <div className="space-y-1">
             <p className="text-sm font-medium text-foreground">Bildirim</p>
             <p className="text-xs text-muted-foreground">
-              Onay veya ret kararı bu ekranda görünür; e-posta bildirimi de gönderilir.
+              Karar bu ekranda görünür; onay ve düzeltme isteği ayrıca e-postayla da bildirilir.
             </p>
           </div>
         </div>
