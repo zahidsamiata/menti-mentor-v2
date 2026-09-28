@@ -2381,4 +2381,311 @@ Kaynak: `docs/otonom/kararlar/KARAR-118.md` (origin/main, değişiklik öncesi).
 **Cevap vermezsen:** G8-07 açık kalır; migration/seed işleri canlı yedek şartıyla sürer.
 **CEVAP:**
 ```
+### KARAR-15 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-015.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-15 · Çok kuruma üye kullanıcı, kurumlar arası geçiş yapabilsin mi?  [ÜRÜN KARARI]
+**Şu an ne var:** Bir kullanıcı birden fazla kuruma üye olabiliyor (veri modeli buna izin veriyor). Bunun için bir "kurum değiştirici" arayüz bileşeni de yazılmış (üyelikleri listeler, aktif kurumu değiştirir). Ama bu bileşen hiçbir ekrana konulmamış — kullanıcı şu an yalnız tek kurumda çalışıyor gibi görünüyor. Kanıt: `frontend/src/components/organisms/TenantSwitcher.tsx:36` — hiçbir yerden import edilmiyor (kapsam: `frontend/src` tümü, 0 referans).
+**Sorun ne:** Bir kullanıcı hem üniversitesinde hem de bir STK'da mentörse, şu an ikisi arasında geçiş yapamıyor. Ya bu özellik açılmalı ya da "bu ürün tek-kurum kullanıcı içindir" diye netleşmeli.
+**Neden sana soruyorum:** "Kullanıcı aynı anda kaç kuruma ait olabilir ve bunu görebilir mi" ürünün temel kapsamıyla ilgili bir karar.
+**Kapsadığı kalemler:** `TenantSwitcher` bileşeni (+ bağlı çok-kurumlu üyelik akışı).
+**Seçenekler:**
+**A) Kurum değiştiriciyi aç** (üst menüye koy) · Kullanıcı: birden çok kurumu varsa üstte kurum seçer, geçiş yapar · Kazanç: çok-kurumlu kullanıcı (üniversite+STK) gerçek ihtiyaç, model zaten destekliyor · Kaybedersin: tek-kurumlu kullanıcı için gereksiz bir öğe, test/kenar durum yükü (yanlış kurumda işlem riski) · Süre: M · Geri alınır: evet · Migration: yok
+**B) Yalnız birden fazla üyeliği olana göster** (tek üyelikte gizli) · Kullanıcı: çoğu kullanıcı hiç görmez, yalnız çok-kurumlu olan görür · Kazanç: ihtiyacı olana çözüm, çoğunluk için sade · Kaybedersin: yine de test/kenar durum yükü, nadir bir senaryoya emek · Süre: M · Geri alınır: evet · Migration: yok
+**C) Açma, tek-kurum modeli kalsın** · Kullanıcı: değişiklik yok · Kazanç: en sade akış, sıfır kenar durum · Kaybedersin: çok-kurumlu kullanıcı ikinci kurumuna erişemez, yazılmış bileşen rafta kalır · Süre: yok · Migration: yok
+**Karşılaştırma:** Aynı kişinin birden çok kurumda yer alması senin hedef senaryonsa (üniversite mezunu + iş yeri gibi) B en akıllıcası — ihtiyacı olana açılır, çoğunluğu yormaz. Bu senaryo nadir/uzaksa C yeterli. A yalnızca çoğu kullanıcının çok-kurumlu olacağını düşünüyorsan mantıklı.
+**Benim önerim:** B — model zaten destekliyor, bileşen hazır; koşullu göstermek düşük maliyetle gerçek ihtiyacı karşılar, çoğunluğu etkilemez.
+**Cevap vermezsen:** TenantSwitcher bağlanmaz, tek-kurum akışı devam eder. Başka iş etkilenmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-25 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-025.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-25 · Gerçek yedek nereye yazılsın? (0 işi açar — G1-28 🔴 blokerine bağlı)  [ÜRÜN KARARI · KVKK · ALTYAPI]
+**Şu an ne var:** Düzenli/bütün-veritabanı yedeği YOK; 6 saatten eski veri kaybına karşı sıfır koruma. Üstelik haftalık silme işi Pazar 03:00 UTC çalışıyor. Kanıt: W §B.1, `cronScheduler.ts:414`. = `madde 120 / [G1-28]` 🔴 çıkış blokeri.
+**Sorun ne:** Pazartesi mesaide fark edilen bir sorunda Neon'un 6 saatlik geri-alma penceresi çoktan kapanmış olur → veri kalıcı gider.
+**Neden sana soruyorum:** Üç seçenek farklı maliyet/hukuk profiline sahip; özellikle biri KVKK'da "üçüncü ülkeye veri aktarımı" sayılabilir (proje zaten bir aktarım envanteri tutuyor).
+**Seçenekler:**
+**A) Dokploy diskine (volume) yazan cron** · Ne kazanırsın: veri VPS içinde kalır, KVKK aktarımı yok · Ne kaybedersin: aynı sunucu tamamen giderse yedek de gider; cron+script eforu · Süre M · Migration yok
+**B) Neon ücretli plan (pencere 6 saat → 30 gün)** · Ne kazanırsın: kod işi yok, en az emek · Ne kaybedersin: aylık ücret; yine tek sağlayıcıya bağımlı · Süre S (hesap) · Migration yok
+**C) GitHub Actions yedek dosyası (artifact)** · Ne kazanırsın: repo altyapısında, kolay · Ne kaybedersin: ⚠️ KVKK'da **üçüncü ülkeye aktarım** sayılabilir (aktarım envanterine eklenmeli), ABD sunucu · Süre M · Migration yok
+**Karşılaştırma:** KVKK'da veriyi yurt içinde/VPS'te tutmak istiyorsan A. En az emekle pencereyi büyütmek istiyorsan B (ama tek sağlayıcı riski sürer). Repo araçlarını kullanmak kolayına gidiyorsa C — ama aktarım envanteri ve hukuki değerlendirme şart.
+**Benim önerim:** Bu senin ürün+hukuk kararın, önerime güvenme — yalnız KVKK açısından A veya B, C'den daha güvenli. İdeali: A/B + restore (geri yükleme) provası.
+**Cevap vermezsen:** 🔴 çıkış blokeri (G1-28) açık kalır; 03-PO A#2 (yedek + restore provası) yapılamaz.
+**CEVAP:**
+
+---
+```
+
+### KARAR-26 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-026.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-26 · İki yedek tablo (S26/S37) düşürülsün mü? (0 işi açar — DB)  [ÜRÜN KARARI · DB · GERİ DÖNÜLMEZ]
+**Şu an ne var:** `MentorshipAgreement_yedek_20260830` (150 satır, 21 gündür) ve `CertificationOption_yedek_20260909` (20 satır, 11 gündür) canlı veritabanında duruyor; ikisi de güncel şemada yok. Kanıt: W §4.4, `00-KARAR-TAKIP.md:189`.
+**Sorun ne:** Şemada olmayan bu tablolar, bir `migrate`/`db push` sırasında "fazlalık" görülüp silinmek istenebilir — yani koruma amaçlı yedek, koruduğu veriyi kaybetme riski taşıyor. Tek savunma bir insan kuralı (`--accept-data-loss` yasağı).
+**Neden sana soruyorum:** DROP (tablo silme) geri dönülmez bir veri işlemidir; "artık gerek yok" (regresyon görülmedi) kararını yalnız sen verebilirsin.
+**Seçenekler:**
+**A) Şimdi DROP et (regresyon yok teyidiyle)** · Ne kazanırsın: drift + kazara-silme riski biter, şema temiz · Ne kaybedersin: yedek verisi kalıcı gider · Süre S · Migration/DB · **GERİ DÖNÜLMEZ**
+**B) Beklet (regresyon penceresi dolana kadar)** · Ne kazanırsın: veri elde kalır (gerekirse geri dönülür) · Ne kaybedersin: drift/DROP riski sürer, yedekler birikmeye devam eder · Süre yok
+**C) Kalıcı sakla — şemaya "arşiv tablo" olarak ekle** · Ne kazanırsın: hem korunur hem drift biter · Ne kaybedersin: şema kirlenir, migration eforu · Süre M · Migration
+**Karşılaştırma:** İlgili işlerin regresyonsuz çalıştığından eminsen A (temiz). Emin değilsen B (veri elde kalsın). Bu yedekleri kalıcı kanıt olarak tutmak istiyorsan C.
+**Benim önerim:** Bu senin veri kararın, önerime güvenme — regresyon teyitliyse A, değilse B. ⛔ Bulutta yapılamaz (canlı Neon gerekir), 03-PO C#10'da.
+**Cevap vermezsen:** Drift + migrate DROP riski sürer.
+**CEVAP:**
+
+---
+```
+
+### KARAR-35 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-035.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-35 · Canlı veritabanına salt-okuma izni  [OPERASYON KARARI] (5+ işi açar)
+**Şu an ne var:** madde 30 · 33 · 118, söz S10 ve Y6 — hepsi *"canlı veritabanında kaç kayıt var"* sorusuna bağlı ve bu soru **hiç sorulmamış**. Proje kuralı canlı veritabanına `SELECT` için bile onay istiyor.
+**Sorun ne:** Beş iş, tek bir sayım yapılamadığı için aylardır kilitli.
+**Neden sana soruyorum:** Canlı ve yerel aynı veritabanını paylaşıyor (⚠️ bu varsayım da bu turda **çelişkili** çıktı — bkz. `03-PO-ELLE-ISLER.md` ADIM 0); dokunma izni sende.
+**Seçenekler:**
+· **A — Salt-okuma `SELECT count(*)` izni ver.** Ne kazanırsın: beş iş **aynı anda** açılır; kişisel veri okunmaz, yalnız sayı döner. Ne kaybedersin: yanlış yazılmış bir sorgu teorik olarak yük bindirir (pratikte `count(*)` zararsız). Süre **S** · geri alınır ✅.
+· **B — Sen kendi panelinden say, sayıyı belgeye yaz.** Ne kazanırsın: ajan veritabanına hiç dokunmaz. Ne kaybedersin: **iş sende**; her teyit turunda tekrar gerekir. Süre **S (senin için)** · geri alınır ✅.
+· **C — Ertele.** Ne kaybedersin: madde 30/33/118 + S10 + Y6 **kilitli kalır**; sertifika ve öğrenme içeriği ilerlemez. Süre **0** · geri alınır ✅.
+**Karşılaştırma:** A ile B aynı sonucu verir; fark işin kimde olduğudur. C hiçbir şey çözmez, yalnız erteler.
+**Benim önerim:** **A** — `count(*)` kişisel veri döndürmez ve beş kalemi tek hamlede açar.
+⚠️ **Ön koşul:** Hangi veritabanının canlı olduğu (`03-PO-ELLE-ISLER.md` ADIM 0) netleşmeden sayım anlamsızdır.
+**Cevap vermezsen:** Beş kalem teyitsiz kapalı kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-36 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-036.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-36 · Yarım kalmış üç teknik kalem: `answeredFollowup` · `qualityMultiplier` ikizi · iki yedek tablo  [VERİ KARARI] (4 işi açar)
+**Şu an ne var:** (a) Kod var olmayan bir tabloyu sorguluyor — `profile-completeness.service.ts:43-50`; ⚠️ **bu turda daha kötüsü bulundu:** `(prisma as any).answeredFollowup?.count(...)` optional chaining yüzünden **hata fırlatmadan `undefined` dönüyor** → sonuç **her zaman 0** ve `catch` bloğu **ölü kod**, yedek hesaplama hiç çalışmıyor → profil tamamlanma yüzdesi **sistematik düşük**. (b) `UserProfile.qualityMultiplier` kullanılmıyor; canlı akış `TenantMembership` üzerinden yürüyor. (c) İki yedek tablo (`MentorshipAgreement_yedek_20260830` 150 satır · `CertificationOption_yedek_20260909` 20 satır) şemada **yok** → `migrate dev`/`db push` onları fazlalık görüp silebilir.
+**Sorun ne:** Üçü de "yarım bırakılmış"; hiçbiri hata vermiyor, bu yüzden kimse fark etmiyor. Ama üçü de bir gün sessizce veri kaybettirebilir.
+**Neden sana soruyorum:** Üçü de **silme** kararına dokunuyor; SİLME PROTOKOLÜ senin ikinci onayını şart koşuyor.
+**Seçenekler (her kalem için aynı üçlü):**
+· **A — Tamamla/kalıcılaştır.** (a) tabloyu aç · (b) ikizi doğru bağla · (c) yedek tabloları şemaya ekle. Ne kazanırsın: hiçbir şey kaybolmaz; (c) için `migrate dev`'in kazara silmesi **imkânsızlaşır**. Ne kaybedersin: **migration** + kalıcı bakım yükü. Süre **M** · geri alınır ✅ · migration **var**.
+· **B — Karantinaya al** (`@deprecated`, rota kapalı), bir tur sonra ikinci onayla sil. Ne kazanırsın: protokole uygun, geri dönülebilir. Ne kaybedersin: iki tur sürer. Süre **M** · geri alınır ✅.
+· **C — Şimdi sil (DROP).** Ne kazanırsın: en temiz. Ne kaybedersin: **geri dönüşü yok**; yedek tablolar silinirse 6 saatlik geri-yükleme penceresi dışındaki **tek koruma gider**. Süre **S** · geri alınamaz ⛔ · migration **var**.
+**Karşılaştırma:** (c) yedek tablolar için özellikle dikkat — onlar **koruma amaçlı** duruyor; erken silmek koruma kaybıdır. (a) ve (b) normal ölü-kod protokolüne girer.
+**Benim önerim:** (a)+(b) için **B** (karantina), (c) için **A** (şemaya ekle) — çünkü yedek tabloyu şemaya eklemek kazara silinmesini önler ve silme kararını aceleye getirmez.
+**Cevap vermezsen:** **Y-18** (madde 126), D3, **S26** ve **S37** açık kalır; bir `migrate dev` turunda yedek tablolar **uyarısız kaybolabilir**.
+**CEVAP:**
+
+---
+```
+
+### KARAR-76 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-076.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-76 · `Tenant.verifiedBy` alanı ne olsun? (silme protokolü boşluğu) [VERİ KARARI · SİLME PROTOKOLÜ]
+> ⭐ Kaynak: hayalet envanter turu (2026-09-19) — bu alan için "GEREKÇE BULUNAMADI" dendi; silme protokolü "gerekçe bulunamazsa PO'ya sorulur" der ama soru PO'ya HİÇ ulaşmadı (E.5a).
+**Şu an ne var:** `Tenant.verifiedBy` alanı şemada duruyor (`backend/prisma/schema.prisma` — Tenant modeli; kardeş alan `verifiedAt`/`isVerified` belgeli), ama neden eklendiği HİÇBİR belgede yazılı değil (git log/commit/PR/docs tarandı, gerekçe yok). Bugün yazan tek yer önerilen AN-08 işidir (doğrulama controller'ında `verifiedBy: adminId` — henüz yazılmıyor).
+**Sorun ne:** Gerekçesi bulunamayan bir alan silme protokolünün İLK adımında (niyet) takılı; ne silinebiliyor ne de "kalsın" kararı var. Her envanter turunda yeniden "öksüz mü" diye işaretleniyor.
+**Neden sana soruyorum:** Silme protokolü "gerekçe bulunamazsa SİLİNMEZ, PO'ya SORULUR" diyor; bu o soru. Şema alanının kaderi = veri kararı.
+**Seçenekler:**
+- **A) KALSIN** — ileride kurum doğrulama audit'i için (AN-08 bu alana yazar). · Kullanıcı ne görür: hiçbir şey · Kazanç: sıfır iş, AN-08 doğrudan bağlanır · **Ne kaybedersin:** gerekçesiz alan şemada durur, her envanterde yeniden sorulur · Süre — · geri alınır ✅ · migration yok
+- **B) KARANTİNA** — kod yerinde ama devre dışı + arşiv belgesi; 3 ay kimse aramazsa silinir. · Kazanç: güvenli ara adım (silme protokolünün önerdiği) · **Ne kaybedersin:** iki aşamalı iş, takip gerekir · Süre S · geri alınır ✅ · migration yok
+- **C) SİL** — arşivle + migration. · Kazanç: şema temizlenir · **Ne kaybedersin:** geri dönüş migration gerektirir; aynı özellik istenirse yeniden yazılır (AN-08 iptal olur) · Süre M · geri alınır ⚠️ zor · migration VAR
+**Karşılaştırma:** A en ucuz ama belirsizlik sürer; B silme protokolünün kendi önerdiği güvenli ara adım; C temizler ama geri-dönüşü pahalı ve AN-08'i iptal eder.
+⚠️ C seçilirse kırmızı kural: yedek tablo + PO açık onayı şart (CLAUDE.md silme protokolü).
+**Benim önerim:** B — silme protokolünün kendi önerdiği ara adım; ama AN-08 (audit yazımı) yakında yapılacaksa A daha ucuz. *(Veri kararın.)*
+**Cevap vermezsen:** alan belirsiz kalır, her envanter turunda yeniden "öksüz" diye işaretlenir; AN-08 de kilitli kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-96 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-096.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-96 · 🔵 EVET/HAYIR — AN-30: kayıtta ayrı ayrı rıza kutuları canlıya çıksın mı? (1 iş açar: AN-30) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** EVET + merge sonrasında **hiçbir değişiklik görmez** — ekran iki açma/kapama anahtarının (backend `GRANULAR_CONSENT_ENABLED`, arayüz `NEXT_PUBLIC_GRANULAR_CONSENT_ENABLED`) arkasında ve ikisi de varsayılan KAPALI; kayıtta bugünkü tek KVKK kutusu aynen kalır. Anahtarlar PO tarafından Dokploy'da açılınca (ve avukat onaylı metin gelince) kayıt ekranında (e-postayla ve Google/LinkedIn ile kayıt) tek kutu yerine ayrı ayrı rıza kutuları çıkar: 4 zorunlu (DISC ile eşleştirme · yurt dışında saklama · veri işleme · anonim iyileştirme) + 2 isteğe bağlı (kurumlar arası paylaşım · OCEAN kişilik profili). Kanıt: backend PR `menti-mentor#142` (`config` → `granularConsentEnabled: process.env.GRANULAR_CONSENT_ENABLED === 'true'`), çatı PR `menti-mentor-v2#320` (açıklaması: "Flag varsayılan kapalı olduğu için görsel/davranışsal fark YOK"). Anahtar açma adımı: `03-PO-ELLE-ISLER.md` § 🟡 KAPI SATIRLARININ PO KISMI.
+**Ne değişir:** Veritabanındaki rıza türü listesine 6 yeni değer EKLENİR (`ConsentType`). Mevcut hiçbir kayıt değişmez, silinmez. Dosya: `prisma/migrations/20260926150000_add_granular_consent_types/migration.sql` (`ALTER TYPE ... ADD VALUE IF NOT EXISTS`, yalnız ekleme).
+**Geri alınır mı:** Ekran ve kod tek tıkla geri alınır (revert). Eklenen 6 rıza türü veritabanında kalır — boş ve zararsızdır, ama PostgreSQL'de bir tür listesinden değer silmek zahmetlidir (pratikte "kalıcı ekleme" say).
+**Yedeği alınacak tablo:** `Consent` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye yazılır). Not: merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
+**Durum:** kod hazır · CI yeşil · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK · ⚠️ 7b SONUCU (2026-09-26): **SORUN VAR** — backend #142 yorum 5848447553 · çatı #320 yorum 5848447672: iki PR da main ile çakışıyor (GV-18 #147 sonrası; rebase + yeni CI gerekir); anahtar açılmadan önce granüler formda 18+ beyanı ve Aydınlatma Metni bağlantısı eksik; hesap silmede 6 yeni rıza türü geri çekilmiyor. Düzeltme ajan kuyruğunda; düzeltilene kadar EVET gelse de merge yok · ✅ **7b 2. TUR: SONUÇ: ONAY** (2026-09-26 — backend #142 `df8db92` yorum 5848666630 · çatı #320 `43490fc` yorum 5848666801; iki PR main ile temiz birleşiyor, CI yeşil). Kod tarafı EVET'e hazır · ⚠️ metinler yer tutucudur, yayın metni avukat onayına bağlı (03-PO-ELLE-ISLER avukat paketi).
+**EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; kayıtta tek kutu kalır.
+**Cevap vermezsen:** AN-30 (⛔ çıkış blokeri) PR-ACIK kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-97 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-097.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-97 · 🔵 EVET/HAYIR — U-18: mentör mesaj talebini nazikçe reddedebilsin mi? (1 iş açar: U-18) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** Mentör, mesaj kutusunda bir menti talebine "Reddet" diyebilir; menti nazik bir kapanış mesajı görür, o konuşmaya iki taraf da artık yazamaz. ⚠️ Sınır (2026-09-26, 7b bulgusu): menti reddi ancak konuşmayı açınca (ya da o mentöre tekrar yazmayı deneyince nazik bir metinle) öğrenir — mesaj listesinde ret işareti ve anlık bildirim YOK (bildirim servisi henüz yalnız kayıt tutuyor, bkz. AN-09). Kanıt: backend PR `menti-mentor#148` (`POST /api/conversations/:id/reject`), çatı PR `menti-mentor-v2#326`.
+**Ne değişir:** Veritabanında konuşma tablosuna 1 yeni boş alan EKLENİR (`Conversation.rejectedAt`, "ne zaman reddedildi"). Mevcut konuşmalar değişmez, hiçbir veri silinmez. Dosya: `prisma/migrations/20260926120000_add_conversation_rejected_at/migration.sql` (`ADD COLUMN IF NOT EXISTS`, yalnız ekleme).
+**Geri alınır mı:** Evet — kod revert edilir; boş alan kalabilir ya da ayrı bir adımla kaldırılabilir.
+**Yedeği alınacak tablo:** `Conversation` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye yazılır). Not: merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
+**Durum:** kod hazır · CI yeşil (backend +7, çatı +6 test) · bağımsız inceleme: henüz yapılmadı — ⚠️ geçiş notu: PR 4 renk düzeninden (2026-09-26) ÖNCE açıldı; yeni akıştaki "7b ONAY → kart" sırası bu kart için tersine döndü. 7b incelemesi bu turda yapılır, sonucu (PR yorum bağlantısıyla) bu satıra eklenir; ONAY yoksa EVET gelse de merge YOK · ⚠️ 7b SONUCU (2026-09-26): **SORUN VAR** — backend #148 yorum 5848438003 · çatı #326 yorum 5848438125: iki PR da main ile çakışıyor (KR-19 #149 blok kontrolü korunarak rebase gerekir); menti panelden tekrar yazınca ham hata metni görüyor; reddetme hatası onay penceresinin arkasında kalıyor. Düzeltme ajan kuyruğunda; düzeltilene kadar EVET gelse de merge yok · ✅ **7b 2. TUR: SONUÇ: ONAY** (2026-09-26 — backend #148 `12f2fb4` yorum 5848708006 · çatı #326 `1137b64` yorum 5848708123; main ile temiz, KR-19 blok kontrolü korunuyor, CI yeşil). Kod tarafı EVET'e hazır.
+**EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye yazılır; mentör talebi reddedemez (bugünkü gibi).
+**Cevap vermezsen:** U-18 PR-ACIK kalır; AN-20 (uyum rozeti dili) sırası U-18'e bağlı (KARAR-80/M5).
+**CEVAP:**
+
+---
+```
+
+### KARAR-98 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-098.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-98 · 🔵 EVET/HAYIR — AN-26: yanıt vermeyen mentöre hatırlatma, uzun sessizlikte kurum yöneticisine bildirim canlıya çıksın mı? (1 iş açar: AN-26) [🔵 CANLI DB DEĞİŞİKLİĞİ]
+**Kullanıcı ne görür:** Bir menti mentöre mesaj talebi gönderdikten sonra mentör hiç yanıt vermezse: **3. gün** mentöre nazik bir hatırlatma e-postası, **7. gün** ikinci hatırlatma, **10. gün** kurumun yöneticilerine "şu mentör 10 gündür yanıt vermedi" e-postası gider (senin KARAR-53 ④ cevabındaki süreler). Menti tarafında değişiklik yok (alternatif mentör önerilmez — KARAR-22 B). E-postalarda menti adı ya da mesaj içeriği yok. Canlıya çıktığı gün 14 günden eski konuşmalar için e-posta gönderilmez (toplu e-posta yağmuru olmasın diye). Kanıt: backend PR `menti-mentor#157` (`cronScheduler.ts` `runMentorResponseReminderCron`, her gün 12:00 UTC), çatı PR `menti-mentor-v2#337` (yalnız pointer).
+**Ne değişir:** Veritabanında konuşma tablosuna 3 boş alan EKLENİR ("1. hatırlatma ne zaman gitti", "2. hatırlatma ne zaman gitti", "yöneticiye ne zaman bildirildi") — aynı e-postanın iki kez gitmemesi için. Mevcut kayıtlar değişmez, hiçbir veri silinmez. Dosya: `prisma/migrations/20260926100000_add_conversation_reminder_guards/migration.sql` (`ADD COLUMN IF NOT EXISTS`, yalnız ekleme).
+**Geri alınır mı:** Evet — kod revert edilince e-postalar durur; boş alanlar kalabilir ya da ayrı bir adımla kaldırılabilir.
+**Yedeği alınacak tablo:** `Conversation` (tarihli yedek tablo, satır sayısı `02-ILERLEME.md`'ye). Not: U-18 (KARAR-97) de aynı tabloya alan ekliyor — ikisine birden EVET gelirse tek yedek yeterli olabilir. Merge edilince canlı sunucu açılışta değişikliği KENDİSİ uygular (`migrate deploy`).
+**Durum:** kod hazır · CI yeşil (backend 923 test; yeni 13 test, negatif: başka kurumun ve pasif üyeliğin yöneticisine gitmez) · bağımsız 7b incelemesi: sürüyor (sonucu bu satıra eklenecek; ONAY yoksa EVET gelse de merge yok). ⚠️ **7b 1. tur: SORUN VAR** (2026-09-26, yorum 5848943894): düzeltme sürüyor — main ile birleştirme, KARAR-53 ④ kapsamı (yalnız müsaitlik bloğu olmayan mentörler), pasif menti/üyelik kontrolü. ✅ **7b 2. TUR: SONUÇ: ONAY** (2026-09-26 — backend #157 `cb6b83d` yorum 5849046560 · çatı #337 `10346e0` yorum 5849046681; 941 test). Kod tarafı EVET'e hazır. Not: "koşul" alanları şemada henüz yok → kapsam şimdilik "aktif müsaitlik bloğu olmayan mentör"; yayın günü 10-14 günlük konuşmalar doğrudan yönetici bildirimine düşer.
+**Alt soru (paylaşımlı havuz) — ayrıca cevapla:** mentör ile menti FARKLI kurumlardaysa 10. gün bildirimi kimin yöneticisine gitsin? **A)** mentinin kurumunun yöneticisine (menti o kurumun üyesi; ama mentör üzerinde yetkisi yok) · **B)** mentörün kendi kurumunun yöneticisine (mentör üzerinde yetkili; ama mentiyi tanımıyor) · **C)** ikisine birden. Cevap gelene kadar kod bu durumda **bildirimi göndermez** (hatırlatmalar mentöre yine gider). Benim önerim: **B** — yanıt vermeyen mentörle konuşabilecek kişi onun kendi yöneticisi. Bu senin ürün kararın, önerime güvenme.
+**EVET** → ajan tarihli yedeği alır → merge → canlı kontrol. (Bu ortamda DB erişimi yoksa: "EVET var, yedek için tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar ve bekler.)
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye; yanıtsız talepler bugünkü gibi sessiz kalır.
+**Cevap vermezsen:** AN-26 PR-ACIK kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-99 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-099.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-99 · 🔵 EVET/HAYIR — AN-02: iki soru metnindeki yazım hatası canlıda düzeltilsin mi? (1 iş açar: AN-02) [🔵 CANLI VERİYE YAZMA]
+**Kullanıcı ne görür:** Kullanıcılar iki soruyu doğru yazımla okur: "Başkalarını motive etmek ve ilham vermek benim doğal bir **güçlü yanım** gibi hissettiriyor." (bugün "güçlüğüm") ve SJT senaryosunda "**Mentin**, haftalardır çalıştığı bir projeyi…" (bugün "Menteen"). Kanıt: backend PR `menti-mentor#160` (`prisma/seed.ts:70` ve `:540`).
+**Ne değişir:** Canlı veritabanında **2 satırın metni** güncellenir: `Question` tablosunda 1 soru metni, `SjtQuestion` tablosunda 1 senaryo metni. Başka hiçbir kayıt değişmez; kullanıcı cevapları etkilenmez (cevaplar soru kimliğine bağlı, metne değil — uygulama öncesi kontrol edilecek). ⛔ `seed.ts` ÇALIŞTIRILMAZ (yıkıcı seed); düzeltme yalnız bu iki satıra hedefli `UPDATE` ile yapılır.
+**Geri alınır mı:** Evet — eski iki metin yedekten geri yazılabilir.
+**Yedeği alınacak tablo:** `Question` ve `SjtQuestion` (tarihli yedek; satır sayıları `02-ILERLEME.md`'ye).
+**Durum:** seed dosyası düzeltmesi PR'da (#160, CI bekliyor) · canlı UPDATE için DB erişimi gerekir (bu VPS'te yok).
+**EVET** → ajan tarihli yedeği alır → iki satırı günceller → canlıda görür → #160 merge. (DB erişimi yoksa: "EVET var, tek seferlik DB erişimi gerekiyor" diye `00-SIMDI`'ye yazar.)
+**HAYIR** → canlı metinler olduğu gibi kalır; #160 (yalnız dosya) yine de merge edilebilir ya da kapatılır — cevabında belirt.
+**Cevap vermezsen:** AN-02 PR-ACIK kalır; iki soru hatalı yazımla görünmeye devam eder.
+**CEVAP:**
+
+---
+```
+
+### KARAR-100 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-100.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-100 · `ProfileSource.SJT_ENRICHED` değeri ne olsun? (silme protokolü — gerekçe bulunamadı) (0 iş açar) [VERİ KARARI · SİLME PROTOKOLÜ]
+> ⭐ Kaynak: AN-54 taraması (2026-09-26, `docs/raporlar/kesif/gerekcesiz-kalem-taramasi-2026-09-26.md`) — 694 şema kalemi tarandı, **2** kalemde gerekçe bulunamadı: biri zaten KARAR-76 (`Tenant.verifiedBy`), diğeri bu. **KARAR-76 ile aynı tür soru** — istersen ikisine aynı harfi yaz.
+**Şu an ne var:** Kişilik profilinin "nereden geldiği" bilgisini tutan listede (`ProfileSource`) `SJT_ENRICHED` diye bir değer var. Kod bu değeri **hiç yazmıyor, hiç okumuyor**: senaryo testi (SJT) sonrası profil `HYBRID` olarak işaretleniyor (`backend/src/services/scoring.service.ts:104-105`). Değeri ekleyen commit (`de6be04`, toplu "sprint 8-11" commit'i) açıklama içermiyor, PR yok, belgelerde hiç geçmiyor.
+**Sorun ne:** Ne işe yaradığı bilinmeyen bir değer silme protokolünün ilk adımında (niyet) takılı; her taramada yeniden "öksüz mü" diye çıkacak.
+**Neden sana soruyorum:** Silme protokolü "gerekçe bulunamazsa SİLİNMEZ, PO'ya SORULUR" diyor; ayrıca bu değer ileride SJT'nin ayrı bir profil durumu olarak kullanılmak üzere planlanmış olabilir (KARAR-10 OCEAN/SJT motoru) — bunu yalnız sen bilirsin.
+**Seçenekler:**
+- **A) KALSIN** — SJT motoru (KARAR-10 aşamaları) açılınca ayrı durum olarak kullanılacak. · Kullanıcı ne görür: hiçbir şey · Kazanç: sıfır iş · **Ne kaybedersin:** gerekçesiz değer durmaya devam eder; bir sonraki taramada yine çıkar (kararı bu karta yazarak kapanır).
+- **B) KARANTİNA** — değer yerinde kalır, koda "kullanılmıyor — KARAR-100" notu + arşiv belgesi; bir tur sorunsuz geçerse senin ikinci onayınla silinir. · Kazanç: silme protokolünün güvenli ara adımı · **Ne kaybedersin:** iki aşamalı iş · Süre S · geri alınır ✅ · karantina 🔵.
+- **C) SİL** — arşivle + migration (enum'dan değer çıkarma). · Kazanç: şema temizlenir · **Ne kaybedersin:** PostgreSQL'de enum değeri çıkarmak zahmetli bir migration; SJT ayrı durum isterse yeniden eklenir · Süre M · geri alınır ⚠️ zor · migration VAR (🔵 + 🔴 ikinci onay).
+**Karşılaştırma:** SJT motoru yakında açılacaksa A doğru; açılmayacaksa B güvenli yol; C temizler ama pahalı ve geri dönüşü zor.
+**Benim önerim:** A — KARAR-10'un SJT aşamaları henüz açılmadı ve değer kimseye zarar vermiyor; kararın bu kartta yazılı olması tekrar tekrar sorulmasını bitirir. *(Veri kararın, önerime güvenme.)*
+**Cevap vermezsen:** hiçbir iş kilitlenmez; değer her şema taramasında yeniden "gerekçesiz" çıkar.
+**CEVAP:**
+
+---
+```
+
+### KARAR-107 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-107.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-107 · 🔵 EVET/HAYIR — dondurulmuş "çalışma tarzı" alanının (`interactionStyle`) yazılması kapatılsın mı? (1 işi açar: AN-12)  [🔵 KARANTİNA]
+**Kullanıcı ne görür:** Hiçbir değişiklik görmez. Bu alan artık hiçbir ekranda sorulmuyor (2026-08-30'dan beri); yalnız sunucunun 3 kayıt yolu hâlâ kabul ediyordu.
+**Ne değişir:** Sunucu, bu alanı kaydetmeyi bırakır (profil güncelleme, kullanıcı oluşturma, profil tamamlama). Veritabanındaki mevcut değerler SİLİNMEZ ve okunmaya devam eder; tablo yapısı değişmez. Neden: senin 2026-08-29 kararın — "interactionStyle DONDURULUR … hiçbir yere yazılmaz" (`docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:574-586`); bugün aynı işi `supportApproach` alanı yapıyor. Eşleştirmedeki ilgili +10 puanlık bonus zaten fiilen çalışmıyor (menti tarafı hiç toplanmıyor) — dokunulmadı.
+**Geri alınır mı:** Evet — tek commit geri alınır (`git -C backend revert 11bbb84` + merge commit'i); değişiklik öncesi kodun tamamı `docs/arsiv/silinenler-2026-09-27.md`'de.
+**Yedeği alınacak tablo:** YOK — veri değişmiyor, migration yok.
+**Durum:** backend #186 (7b ONAY https://github.com/zahidsamiata/menti-mentor/pull/186#issuecomment-5854917286, CI yeşil) · arşiv belgesi çatı #370 (7b 2. tur ONAY https://github.com/zahidsamiata/menti-mentor-v2/pull/370#issuecomment-5854997208 — kırpılmamış tam kod, çalışır geri alma komutu). Silme DEĞİL: gerçek silme ayrıca PO'nun ikinci onayını ister (🔴).
+**EVET** → ajan backend #186 + #370'i merge eder, pointer'ı taşır, canlı kontrol yapar.
+**HAYIR** → PR'lar kapatılır, gerekçe `02-ILERLEME.md`'ye; alan 3 yolda yazılabilir kalır.
+**Cevap vermezsen:** AN-12 PR-ACIK bekler; kullanıcıya etkisi yok.
+**CEVAP:**
+```
+
+### KARAR-111 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-111.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-111 · 🔵 EVET/HAYIR — mentör müsaitliğine görüşme türü + süre eklensin mi? (1 işi açar: K-15) [🔵 ⛔ MIGRATION]
+**Kullanıcı ne görür:** Mentör müsaitlik eklerken her zaman aralığı için görüşme türünü (çevrim içi / yüz yüze / telefon) ve süresini (15-240 dk) seçer. Menti randevu alırken artık türü ve süreyi kendisi seçmez; mentörün o saat için tanımladığı "Görüşme Türü" seçeneklerinden birini seçer. Uymayan istek anlaşılır bir mesajla reddedilir. Bu, KARAR-1 (A) cevabının uygulaması.
+**Ne değişir (DİKKAT — bilmen gereken üç şey):**
+1. **Mevcut tüm müsaitlikler "Çevrim içi · 60 dk" olur.** Mentör formu yeniden kaydedene kadar mentileri yalnız bu türde randevu alabilir (bugün 3 tür ve 30/45/60/90 dk arasında seçebiliyorlar). KARAR-1'deki önerim "varsayılanlarla mevcut kayıtlar bozulmaz" demişti ama bu daralmayı açıkça yazmamıştı — şimdi yazıyorum.
+2. **60 dakikadan kısa mevcut müsaitlikler hiç randevu saati göstermez** (60 dk sığmaz). Onayından önce canlıda kaç tane olduğu salt-okuma sorguyla sayılmalı; sayı bilinmiyor, sıfıra yakın olabilir.
+3. Raporlardaki görüşme süreleri değişir: kayıtlar artık gerçek süreyi tutar (önceden hep 60 yazılıyordu).
+**Geri alınır mı:** Evet — iki sütun kaldırılarak ya da yedekten geri yüklenerek (SQL'ler backend #189 açıklamasında).
+**Yedeği alınacak tablo:** `AvailabilityBlock` → `availability_block_yedek_<tarih>` — **MERGE'DEN ÖNCE** alınmalı: sunucu açılışta migration'ı kendiliğinden uygular (`backend/Dockerfile:58` `prisma migrate deploy`). Bu oturumda veritabanı erişimi yok → EVET gelince "tek seferlik DB erişimi" gerekir.
+**Kapsam notu:** KARAR-80 M10 "tek migration paketi" diyordu; AN-25 (esnek mod koşul alanları) tasarlanmadığı için bu pakete ALINMADI → ileride ikinci bir migration + ikinci yedek gerekecek. EVET, bu ayrımı da onaylamak demektir.
+**Durum:** backend #189 (7b ONAY https://github.com/zahidsamiata/menti-mentor/pull/189#issuecomment-5855586568, CI yeşil, 8 yeni test) + çatı #374 (7b ONAY https://github.com/zahidsamiata/menti-mentor-v2/pull/374#issuecomment-5855586681). İkisi AYNI turda çıkmalı: #189 → pointer → #374 (yoksa eski ekranlar yeni sunucuyla çakışır).
+**EVET** → (1) 60 dk'dan kısa blok sayımı (2) yedek tablo + satır sayısı `02-ILERLEME`'ye (3) #189 merge (4) pointer + #374 merge (5) canlı kontrol.
+**HAYIR** → PR'lar kapatılır; randevu bugünkü gibi (menti türü/süreyi serbest seçer) kalır.
+**Cevap vermezsen:** K-15 PR-ACIK bekler; bugünkü davranış sürer.
+**CEVAP:**
+```
+
+### KARAR-124 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-124.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-124 · Platform yöneticisinin "mentör/menti sayısı" neyi saysın: kişiyi mi, kurum üyeliğini mi? (0 iş kilitliyor; cevap 1 küçük iş açar) [ÜRÜN KARARI · VERİNİN ANLAMI]
+**Şu an ne var:** Platform ve süper-yönetici panelindeki mentör/menti sayıları kullanıcının genel rolünden sayılıyor; kurum panelleri ise AJ-01 ile kurum üyeliğindeki role geçti. Kanıt: `backend/src/controllers/platformController.ts:121-124` · `backend/src/controllers/adminSettingsController.ts:292-293` · kaynak `docs/otonom/00-SIMDI.md:81`.
+**Sorun ne:** İki kurumda farklı rolde olan bir kişi platformda tek rolle sayılıyor; kurum toplamlarıyla platform toplamı tutmuyor.
+**Neden sana soruyorum:** Sayının anlamı (kaç insan mı, kaç kurum-rolü mü) yöneticiye verilen mesajı değiştirir.
+**Seçenekler:**
+- **A) Üyelik say (kurum-rol çifti).** · Kullanıcı ne görür: platform toplamı kurum toplamlarının toplamına eşit · Kazanç: tutarlılık · Kaybedersin: aynı kişi iki kez sayılır; "kaç insan" sorusu cevapsız · Süre: S · Geri alınır: evet · Migration: yok
+- **B) Tekil kişi say; rolü "en az bir kurumda mentör" diye tanımla.** · Kullanıcı ne görür: gerçek insan sayısı · Kazanç: büyüme için doğru ölçü · Kaybedersin: iki rolü olan kişi iki grupta da görünür; toplamlar toplanmaz · Süre: S · Geri alınır: evet · Migration: yok
+- **C) İkisini birden göster ("X kişi · Y üyelik").** · Kullanıcı ne görür: iki sayı yan yana · Kazanç: iki soru da cevaplı · Kaybedersin: panel kalabalıklaşır · Süre: S · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Kurum raporlarıyla tutarlılık istiyorsan A; platform büyümesini insan olarak izlemek istiyorsan B; ikisini de görmek istiyorsan C.
+**Benim önerim:** C — iki sayı da düşük maliyetli ve yanlış yorum riskini kaldırır; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Platform sayıları genel role göre kalır (tutarsızlık sürer).
+**CEVAP:**
+```
+
+### KARAR-128 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-128.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-128 · 🔵 EVET/HAYIR — Durum alanlarını (13 alan) veritabanında da "yalnız bilinen seçenekler" yapalım mı? (1 işi açar: AJ-77) [🔵 MIGRATION]
+**Şu an ne var:** Kurum kurulum adımı, görüşme sonrası kısa anket cevapları, şikâyet nedeni/durumu, mentörlük anlaşması sıklık/kanal/gündem sahibi, davet şablonu rol/biçimi gibi 13 alan veritabanında serbest metin olarak tutuluyor (5 tablo: Tenant · MeetingCheckIn · UserReport · MentorshipAgreement · InvitationTemplate). Uygulama bugün doğru değerleri yazıyor (her yazma yolu doğrulamadan geçiyor), ama veritabanının kendisi yanlış bir değeri de kabul eder. Kanıt: `docs/raporlar/kod-denetimi/aj77-durum-alanlari-envanter-2026-09-28.md` §1-2 · backend PR #227 (`prisma/migrations/20260928000000_durum_alanlari_enum/migration.sql`) · 7b ONAY https://github.com/zahidsamiata/menti-mentor/pull/227#issuecomment-5865731487.
+**Ne değişir:** Bu 13 alan için seçenek listesi tek yerde (şemada) tutulur; veritabanı listede olmayan değeri reddeder. Veri silinmez, değerler aynen dönüştürülür.
+**Kullanıcı ne görür:** Hiçbir şey — formlar aynı seçeneklerle çalışır. Kazanç: bir hata ya da elle müdahale yanlış bir değeri kalıcı yazamaz; raporlar ve filtreler bozuk değerle karşılaşmaz.
+**Nasıl yapılır (sıra ŞART):** (1) tek seferlik salt-okuma sorguları — rapor §3a (değer dağılımı) ve §3b (listede olmayan değer sayısı) → §3b'de her satır 0 olmalı; değilse merge YOK (migration açılışta hata verir ve backend AÇILMAZ) · (2) tarihli yedek (rapor §6) · (3) merge → Dokploy açılışta migration'ı uygular · (4) canlı kontrol.
+**Yedeği alınacak tablolar:** Tenant · MeetingCheckIn · UserReport · MentorshipAgreement · InvitationTemplate → `<tablo>_yedek_YYYYMMDD` + satır sayısı eşitliği (rapor §6). Yedek adı + satır sayısı 02-ILERLEME'ye.
+**Geri alınır mı:** Evet — geri alma SQL'i rapor §5'te (alanlar serbest metne döner) + kod revert; veri kaybı yok.
+**Migration:** VAR (⛔ merge = canlı DB değişikliği). Tek seferlik DB erişimi gerekiyor (VPS'te yok).
+**Seçenekler:**
+- **EVET** · Kullanıcı ne görür: hiçbir şey · Kazanç: veri bütünlüğü veritabanı seviyesinde güvence altında; seçenek listesi tek yerde · Kaybedersin: bir kez canlı DB'ye şema değişikliği (sayım + yedekle sınırlı); ileride yeni bir seçenek eklemek küçük bir migration ister · Süre: S (sorgu + yedek + merge) · Geri alınır: evet · Migration: var
+- **HAYIR** · Kullanıcı ne görür: hiçbir şey · Kazanç: canlı DB'ye dokunulmaz; yeni seçenek eklemek yalnız kod değişikliği · Kaybedersin: yanlış değer yazımı veritabanında engellenmez; PR kapatılır · Süre: — · Geri alınır: — · Migration: yok
+**Benim önerim:** EVET — kullanıcıya görünen etkisi yok, geri alınabilir ve veri kaybı yok; §3b = 0 şartıyla.
+**Not (ayrı ürün sorusu, bu karta dahil değil):** `Tenant.plan` (paket) alanı migration'a KONMADI — paket kümesi (FREE/PRO/…) gelir modeli kararına bağlı → KARAR-119.
+**Cevap vermezsen:** AJ-77 PR-ACIK kalır; başka iş kilitlenmez.
+**CEVAP:**
+```
 
