@@ -581,3 +581,7 @@
 ## docs/devir/07-oturum-gunlugu.md:126 (GÖREV 2.3)
 
 - **K-02 🔀 PR'DA (PR #179):** kök `disc-test/page.tsx:86` (loading==`questions.length===0` → hata/boş/yükleniyor karışık, getQuestions hatası sonsuz iskelet). `DiscTestState.loading` + `reload()` + üç ekran. Test 3/3 (useDiscTest.test.tsx).
+
+## docs/kararlar/00-KARAR-TAKIP.md:942 (AJ-72)
+
+> - aday · **Kuyrukta satırı olmayan bulgular** (strateji katmanı satır açsın mı): G-kart doğrulaması (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) ~30 ⬜ kalem · `GET /api/system-logs` denetim izi/meta · kurum-içi sayımlar `User.role` · frontend askı ekranı yok · token türü ayrımı (OAuth pending). · 🟨 kısmen — system-logs iz/meta (AJ-02) ve kurum-içi sayımlar (AJ-01/AJ-40) yapıldı; kalan: askı ekranı → AJ-72, token türü → AJ-87, platform geneli rol sayımı → KARAR-124, G-kart kalemleri → `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md` · ✅ token türü yapıldı — AJ-87 · PR #219/#410 · 2026-09-28
