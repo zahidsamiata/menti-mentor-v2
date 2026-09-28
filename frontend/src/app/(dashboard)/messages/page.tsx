@@ -64,7 +64,7 @@ export default function MessagesInboxPage() {
   const [moreError, setMoreError] = useState<string | null>(null);
   // Sayfa kapanıp açılırsa (unmount) geç gelen yanıt state'e yazılmasın.
   const mounted = useRef(true);
-  useEffect(() => () => { mounted.current = false; }, []);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
 
   const items = data ? mergeUniqueById(data.items, moreItems) : [];
   const total = Math.max(moreTotal ?? 0, data?.total ?? 0);
