@@ -586,3 +586,95 @@ Geri alma: `git revert <AJ-70 merge commit>` ya da aşağıdaki eski hâlleri ge
       setStepError(result.error.message ?? 'Tercihlerin kaydedilemedi. Tekrar deneyin.');
     }
 ```
+
+## AJ-56 · Misafir üye — pasif sayım, onaylayan adı, hatırlatma, koçluk önerisi üyelikten (backend `otonom/AJ-56-misafir-uye-okuma-20260928`)
+
+### 1) `backend/src/services/retentionMetrics.service.ts` — `computeHealthMetrics` — `passiveWhere` + pasif sayım/liste sorgusu + dönüş
+- **Eski hâl (AYNEN, değişen/kaldırılan satırlar):**
+```ts
+    approvalStatus: 'APPROVED' as const,
+    OR: [
+      { lastLoginAt: { lt: passiveCutoff } },
+      { lastLoginAt: null, createdAt: { lt: passiveCutoff } },
+    ],
+```
+```ts
+    prisma.user.count({ where: passiveWhere }),
+    prisma.user.findMany({
+```
+```ts
+      select: { id: true, fullName: true, role: true, lastLoginAt: true, createdAt: true },
+      orderBy: { lastLoginAt: { sort: 'asc', nulls: 'first' } }, // en pasif üstte
+```
+```ts
+    passiveMembers: { count: passiveCount, items: passiveItems },
+```
+- **Neden yazılmıştı:** Pasif üye (X gündür girişsiz) sayımı ve drill-down listesi; tek kuruma scoped (yönetici paneli S2 sorusu).
+- **Neden değişti:** Sorgu `prisma.user` + `tenantId` = ev-sahibi kurumdu; misafir üye (ev-sahibi başka kurum, bu kurumda aktif üyelik) sayılmıyordu. Komşu `mentorlessWhere` (AJ-40) gibi üyelikten başlar; rol = bu kurumdaki üyelik rolü.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `4afdab3e4ec76332dfb140c02e8539f05c6c1ed2` · backend main `2efa2630a59f4011f68cc07876e3ccba77a7f576`
+- **Geri alma:** backend'de `git revert <AJ-56 commit>` (şema/migration yok).
+
+### 2) `backend/src/controllers/adminController.ts` — `nudgeUser` hedef arama · `adminListUsers` onaylayan/reddeden adı · `getCoachingSuggestions` hedef arama
+- **Eski hâl (AYNEN, değişen/kaldırılan satırlar):**
+```ts
+  // Tenant izolasyonu: hedef bu tenant'ın üyesi olmalı.
+  const target = await prisma.user.findFirst({
+    where: { id: targetId, tenantId },
+    select: { id: true, email: true, fullName: true, role: true, isActive: true },
+  });
+  if (!target || !target.isActive) {
+```
+```ts
+  if (target.role === 'ADMIN') {
+```
+```ts
+    const admins = await prisma.user.findMany({
+      where: { id: { in: adminIds }, tenantId: req.tenant.tenantId },
+      select: { id: true, fullName: true },
+```
+```ts
+    for (const a of admins) nameById.set(a.id, a.fullName);
+```
+```ts
+  const user = await prisma.user.findFirst({
+    where: { id: userId, tenantId: req.tenant.tenantId },
+    select: { id: true, fullName: true },
+  });
+  if (!user) {
+```
+- **Neden yazılmıştı:** Hedef kişinin bu kurumun üyesi olduğunu doğrulamak (kurum izolasyonu) ve onaylayan yönetici adını çapraz-kurum sızdırmadan çözmek.
+- **Neden değişti:** `prisma.user.findFirst/findMany({ id, tenantId })` ev-sahibi kurumla arıyordu → misafir üye 404 / misafir yöneticinin adı null. Artık `findTenantMember` (aktif üyelik) / `tenantMembership.findMany` — kurum filtresi üyelik satırında. Kişi-genel yazan işlemler DEĞİŞMEDİ (KARAR-133).
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `97d59ee1ed9ff5a5c01b39c2e57ebe18b9f36678` · backend main `2efa2630a59f4011f68cc07876e3ccba77a7f576`
+- **Geri alma:** backend'de `git revert <AJ-56 commit>` (şema/migration yok).
+
+### 3) `backend/src/services/coachingSuggestions.ts` — `generateSuggestions` — kişi arama
+- **Eski hâl (AYNEN, değişen/kaldırılan satırlar):**
+```ts
+  const user = await prisma.user.findFirst({
+    where: { id: userId, tenantId },
+    select: {
+      id: true, role: true, fullName: true,
+      discType: true, approvalStatus: true,
+      needsOrientation: true, rematchCount: true,
+      createdAt: true,
+    },
+```
+```ts
+  if (!user) return [];
+```
+- **Neden yazılmıştı:** Kural bazlı koçluk önerisi için kişinin metriklerini okumak; bu kurumla sınırlı.
+- **Neden değişti:** Ev-sahibi kurum sorgusu misafirde boş öneri döndürüyordu. `findTenantMember` ile üyelikten; kullanılmayan `role/fullName/approvalStatus` seçimi düştü; misafirde `rematchCount` (başka kurumun kararı, AJ-40 maskesi) 0 sayılır.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `1e6da66881da97eea56de84110606ed78cf05449` · backend main `2efa2630a59f4011f68cc07876e3ccba77a7f576`
+- **Geri alma:** backend'de `git revert <AJ-56 commit>` (şema/migration yok).
+
+### 4) `backend/src/services/nudgeService.ts` — `wasRecentlyNudged` — spam limiti filtresi
+- **Eski hâl (AYNEN, değişen/kaldırılan satırlar):**
+```ts
+      meta: { path: ['targetUserId'], equals: targetUserId },
+      // tenantId de meta'da tutulur; targetUserId zaten tenant'a özgü olduğundan tek filtre yeterli.
+```
+- **Neden yazılmıştı:** Aynı kişiye 24 saatte tek dürtme (spam limiti); yorumda "targetUserId zaten tenant'a özgü" varsayımı.
+- **Neden değişti:** Varsayım misafir üyede geçersiz: A kurumunun dürtmesi B yöneticisine 429 olarak sızıyordu. Filtre `meta.tenantId` ile kurum başına.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `465ae47bc431abbccad2bf1a90f416dca2bb7cd5` · backend main `2efa2630a59f4011f68cc07876e3ccba77a7f576`
+- **Geri alma:** backend'de `git revert <AJ-56 commit>` (şema/migration yok).
+
