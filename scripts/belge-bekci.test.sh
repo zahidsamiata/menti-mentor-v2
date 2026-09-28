@@ -51,6 +51,22 @@ printf '### KARAR-3 · soru\n> ✅ **ISLENDI (2026-09-26):** ascii yazım\n**CEV
 expect 1 "01-KARARLAR'da ASCII ISLENDI notlu kart → kırmızı"
 
 setup_clean
+mkdir -p "$TMP/root/docs/otonom/kararlar"
+printf '### KARAR-4 · soru\n> ✅ **İŞLENDİ (2026-09-28):** kuyruğa işlendi\n**CEVAP:** A\n' >"$TMP/root/docs/otonom/kararlar/KARAR-004.md"
+expect 1 "kararlar/KARAR-004.md kart dosyasında İŞLENDİ → kırmızı (GÖREV 2.4)"
+
+setup_clean
+mkdir -p "$TMP/root/docs/otonom/kararlar"
+printf '### KARAR-5 · soru\n**CEVAP:** B\n' >"$TMP/root/docs/otonom/kararlar/KARAR-005.md"
+printf '# indeks\n- İŞLENDİ olan kart arşive taşınır\n' >"$TMP/root/docs/otonom/kararlar/00-INDEX.md"
+expect 0 "kararlar/ cevaplı ama İŞLENDİ notsuz kart + indeks dosyasında İŞLENDİ sözcüğü → yeşil"
+
+setup_clean
+echo '| X-05 | Ş0 | karar bekleyen iş | 🔴 KARAR-9 | görünür | BEKLIYOR | not |' >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+expect 0 "kuyrukta 🔴 kapılı satır → yeşil + uyarı (5c-n)"
+grep -q "X-05 kapısı 🔴" "$TMP/out" || { echo "  ✗ (n) uyarısı çıktıda yok"; FAIL=1; }
+
+setup_clean
 echo '~~[ESKİ · 2026-09-25] eski kural~~' >>"$TMP/root/docs/otonom/OTONOM-PROMPT.txt"
 expect 1 "OTONOM-PROMPT'ta kod dışı ~~[ESKİ katmanı → kırmızı"
 

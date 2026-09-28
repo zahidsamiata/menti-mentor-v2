@@ -14,7 +14,7 @@ Ajan bu dosyayı OKUR, `Durum` ve `Not` kolonlarını günceller. **AJAN-EKLEDİ
 > ⚠️ **GÜNCELLEME 2026-09-26 (PO): 4 renk** — tam metin `OTONOM-PROMPT.txt` Bölüm 7 / 7b.
 
 🟢 **AJAN YAPAR + MERGE EDER** — varsayılan. Auth/yetki · KVKK/rıza · matching/skorlama dosyasına dokunuyorsa Bölüm 7b'nin (b) bağımsız inceleme "SONUÇ: ONAY" ve (c) negatif test şartları KENDİLİĞİNDEN eklenir; ayrı renk yok. Merge sonrası canlı kontrol aynen geçerli.
-🔵 **AJAN HAZIRLAR, PO'NUN TEK "EVET"İYLE CANLIYA ÇIKAR** — migration · seed (her türü) · canlı veriye yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → `01-KARARLAR.md`'ye sade Türkçe EVET/HAYIR kartı (kullanıcı ne görür · ne değişir · geri alınır mı · yedeği alınacak tablo) → Durum PR-ACIK. "EVET" → tarihli yedek → merge → canlı kontrol (DB erişimi yoksa merge YOK, `00-SIMDI` Engeller'e yazılır). "HAYIR" → PR kapatılır.
+🔵 **AJAN HAZIRLAR, PO'NUN TEK "EVET"İYLE CANLIYA ÇIKAR** — migration · seed (her türü) · canlı veriye yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → sade Türkçe EVET/HAYIR kartı (`docs/otonom/kararlar/KARAR-NNN.md` + `01-KARARLAR.md` indeks satırı) (kullanıcı ne görür · ne değişir · geri alınır mı · yedeği alınacak tablo) → Durum PR-ACIK. "EVET" → tarihli yedek → merge → canlı kontrol (DB erişimi yoksa merge YOK, `00-SIMDI` Engeller'e yazılır). "HAYIR" → PR kapatılır.
 🟡 **YALNIZ PO'NUN ELİYLE YAPILABİLEN İŞ** — sunucu/Dokploy ayarı · hesap açma/anahtar girme · GitHub ayarı · avukat · kuruma görünen/hukuki metnin onayı. Satırın kod kısmı ajan tarafından 🟢 kurallarıyla yapılır; PO kısmı `03-PO-ELLE-ISLER.md`'ye "ne yapılacak + nasıl doğrulanır" biçiminde yazılır. Satır PO kısmı bitene kadar açık kalır.
 🔴 **YÖN KARARI BEKLER** — ilgili KARAR cevapsızsa DOKUNMA, atla, sonrakine geç. (Değişmedi.)
 Karantina / gerçek silme ayrımı → OTONOM-PROMPT § 7.
@@ -99,7 +99,7 @@ ikisi karıştırılmaz (YN-07'nin ikinci ayağı).
 ---
 
 ## 🔴 KİLİT HARİTASI (GÖREV 2.4, 2026-09-28)
-> Kapısı 🔴 olan 62 iş rutin turda okunmasın diye `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'ye AYNEN taşındı (kural: OTONOM-PROMPT § 5c (i)). Her KARAR için tek işaretçi; açtığı iş sayısına göre sıralı. CEVAP gelince bağlı satırlar AYNI commit'te buraya (eski bölümlerine) geri döner.
+> Kapısı 🔴 olan 62 iş rutin turda okunmasın diye `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'ye AYNEN taşındı (kural: OTONOM-PROMPT § 5c (n)). Her KARAR için tek işaretçi; açtığı iş sayısına göre sıralı. CEVAP gelince bağlı satırlar AYNI commit'te buraya (eski bölümlerine) geri döner.
 
 - KARAR-64 ("Mizaç" mı "karakter" mi "kişilik" mi) → 4 iş bekliyor: I-01, I-11, AN-50, AN-51 · ayrıntı: 00-KUYRUK-KARAR-BEKLEYEN.md § KARAR-64
 - KARAR numarasız 🔴 (silme protokolü · karar çelişkisi · keşif · açılmamış kart) → 4 iş bekliyor: AN-45, AJ-64, AJ-67, AJ-97 · ayrıntı: 00-KUYRUK-KARAR-BEKLEYEN.md § KARAR numarasız 🔴

@@ -7,7 +7,7 @@
 **🔄 YAŞAYAN** · **Son güncelleme:** 2026-09-27 (aktif/arşiv ayrımı, PO K-A 2026-09-26)
 **Bu belge ne yapar:** her belge → tek satır amaç → durum etiketi (🔄 YAŞAYAN · 📸 DONDURULMUŞ · 🗄️ ARŞİV · ❓ etiketsiz). Ayrıntılı çelişki/mükerrer analizi ve gerekçeler artık bu dosyada değil, ayrıntı arşivinde.
 
-> ⚠️ **GÜNCEL DURUM NEREDE (PO 2026-09-26):** `docs/kararlar/09-DURUM.md` ve `docs/kararlar/00-KARAR-TAKIP.md` **2026-09-20'den beri güncellenmiyor** — genel belge taraması yapılana kadar otonom turlar bu iki dosyaya yazmıyor. Güncel durum ve açık iş için: **`docs/otonom/00-SIMDI.md`** (anlık durum fotoğrafı) + **`docs/otonom/00-KUYRUK.md`** (iş kuyruğu, fiilî omurga).
+> ⚠️ **GÜNCEL DURUM NEREDE:** `docs/kararlar/09-DURUM.md` ve `docs/kararlar/00-KARAR-TAKIP.md` 2026-09-27'de senkronlandı; rutin turda okunmaz, yalnız kural (h) gereği kapanış işaretleri yazılır (OTONOM-PROMPT § 5c-h). Güncel durum ve açık iş için: **`docs/otonom/00-SIMDI.md`** (anlık durum fotoğrafı) + **`docs/otonom/00-KUYRUK.md`** (iş kuyruğu, fiilî omurga).
 
 ---
 
@@ -30,10 +30,10 @@
 | "Sertifika/DISC/öğrenme soruları ne?" | `raporlar/icerik/00-INDEKS.md` | 🔄 |
 | "KVKK metinleri / avukat paketi?" | `kararlar/konu/kvkk-metinleri/00-AVUKAT-KONTROL-DOSYASI.md` | ❓ |
 | "Bir karar neden böyle alındı?" | `raporlar/bilanco/kararlar/G*.md` | 📸/🔄 |
-| "Otonom kuyruk / bekleyen PO kararı?" | `otonom/00-KUYRUK.md` · `otonom/01-KARARLAR.md` | 🔄 |
+| "Otonom kuyruk / bekleyen PO kararı?" | `otonom/00-KUYRUK.md` (çalışılabilir işler + 🔴 kilit haritası) · `otonom/01-KARARLAR.md` (karar indeksi → `otonom/kararlar/KARAR-NNN.md`) · karar bekleyen satırlar: `otonom/00-KUYRUK-KARAR-BEKLEYEN.md` | 🔄 |
 | "PO'nun elle yapacakları nedir?" | `otonom/03-PO-ELLE-ISLER.md` | 🔄 |
 | "Otonom ana prompt nedir?" | `otonom/OTONOM-PROMPT.txt` | 🔄 |
-| "Eski/tamamlanan iş+karar+kural kayıtları?" | `otonom/arsiv/` (9 dosya — aşağıda) | 🧊 |
+| "Eski/tamamlanan iş+karar+kural kayıtları?" | `otonom/arsiv/` (liste: `otonom/arsiv/00-INDEX.md`; cevaplanmış kart dosyaları `otonom/arsiv/kararlar/`) | 🧊 |
 
 ---
 
@@ -99,10 +99,12 @@
 - `07-oturum-gunlugu.md` 🔄 07 — OTURUM GÜNLÜĞÜ (yaşayan devir kaydı)
 - `08-oturum-tezi-2026-08-28.md` 📸 08 — OTURUM TEZİ (2026-08-28): kararların…
 
-**`docs/otonom/`** (6):
+**`docs/otonom/`** (7 + `kararlar/`):
 - `00-SIMDI.md` 🔄 Güncel durum kısa özeti (canonical, ANLIK)
-- `00-KUYRUK.md` 🔄 Sıralı iş listesi, şerit dağılımı, kapılar
-- `01-KARARLAR.md` 🔄 Ürün kararı kuyruğu (PO cevap yazar)
+- `00-KUYRUK.md` 🔄 Sıralı iş listesi, şerit dağılımı, kapılar, 🔴 kilit haritası
+- `00-KUYRUK-KARAR-BEKLEYEN.md` 🔄 Kapısı 🔴 (karar bekleyen) kuyruk satırları, KARAR'a göre gruplu — rutin turda okunmaz
+- `01-KARARLAR.md` 🔄 Ürün kararı indeksi (kart başına tek satır)
+- `kararlar/KARAR-NNN.md` 🔄 Karar kartları, kart başına dosya (PO CEVAP'ı buraya yazar)
 - `02-ILERLEME.md` 🔄 Ne yapıldı/atlandı/bozuldu — tur kayıtları
 - `03-PO-ELLE-ISLER.md` 🔄 Kod dışı, PO'nun elle yapacağı işler
 - `OTONOM-PROMPT.txt` 🔄 Ana prompt — her turda aynen gönderilir
@@ -245,7 +247,7 @@
 | 📸 DONDURULMUŞ | **98** | Fotoğraf — güncellenmez |
 | 🔄 YAŞAYAN | **43** | Güncellenmeye devam eden canonical'lar (otonom/ dahil) |
 | 🗄️ ARŞİV | **15** | `docs/arsiv/` altı — eskimiş, tarihsel iz için saklanan |
-| 🧊 ARŞİV (otonom) | **9** | `docs/otonom/arsiv/` — K-A aktif/arşiv ayrımı ürünü |
+| 🧊 ARŞİV (otonom) | **10** (+ `arsiv/kararlar/`) | `docs/otonom/arsiv/` — K-A aktif/arşiv ayrımı ürünü |
 | ❓ ETİKETSİZ | **17** | Üst-etiketi yok (çoğu `kvkk-metinleri/` ve `konu/` altı) |
 
 ## ⚠️ Bilinen sorunlar (tam gerekçe/kanıt ayrıntı arşivde)

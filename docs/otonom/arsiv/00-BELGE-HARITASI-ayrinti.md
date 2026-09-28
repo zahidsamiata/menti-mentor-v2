@@ -604,3 +604,28 @@ INDEX'e işlenmesi ve INDEX'in 13 eksik belgesi **HÂLÂ AÇIK** (`00-KUYRUK` **
 ---
 
 *Bu harita bir ÖLÇÜM belgesidir, yetki dağıtmaz. Canonical'ı `kararlar/00-INDEX.md` söyler; bir kalemin doğrusunu `bilanco/kararlar/G*.md` kartı söyler (KURAL 15); kod ile belge çelişirse **KOD kazanır**.*
+
+## GÖREV 2.4 duruma göre bölme — 00-BELGE-HARITASI değişen satırların eski hâli · taşındı 2026-09-28
+
+```text
+> ⚠️ **GÜNCEL DURUM NEREDE (PO 2026-09-26):** `docs/kararlar/09-DURUM.md` ve `docs/kararlar/00-KARAR-TAKIP.md` **2026-09-20'den beri güncellenmiyor** — genel belge taraması yapılana kadar otonom turlar bu iki dosyaya yazmıyor. Güncel durum ve açık iş için: **`docs/otonom/00-SIMDI.md`** (anlık durum fotoğrafı) + **`docs/otonom/00-KUYRUK.md`** (iş kuyruğu, fiilî omurga).
+```
+
+```text
+| "Otonom kuyruk / bekleyen PO kararı?" | `otonom/00-KUYRUK.md` · `otonom/01-KARARLAR.md` | 🔄 |
+```
+
+```text
+| "Eski/tamamlanan iş+karar+kural kayıtları?" | `otonom/arsiv/` (9 dosya — aşağıda) | 🧊 |
+```
+
+```text
+**`docs/otonom/`** (6):
+- `00-SIMDI.md` 🔄 Güncel durum kısa özeti (canonical, ANLIK)
+- `00-KUYRUK.md` 🔄 Sıralı iş listesi, şerit dağılımı, kapılar
+- `01-KARARLAR.md` 🔄 Ürün kararı kuyruğu (PO cevap yazar)
+```
+
+```text
+| 🧊 ARŞİV (otonom) | **9** |
+```

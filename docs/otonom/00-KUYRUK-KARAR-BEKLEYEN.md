@@ -1,5 +1,5 @@
 > 🧊 RUTİN TURDA OKUNMAZ — yalnız bir KARAR cevaplanınca (ya da bir 🔴 işin ayrıntısı gerekince) ilgili § açılır. Rutin turda `00-KUYRUK.md` § 🔴 KİLİT HARİTASI yeter.
-> TÜR: 🔥 (yaşayan, soğuk okunur) · Kural: OTONOM-PROMPT.txt § 5c (i) · İlk kuruluş: GÖREV 2.4 duruma göre bölme, 2026-09-28.
+> TÜR: 🔥 (yaşayan, soğuk okunur) · Kural: OTONOM-PROMPT.txt § 5c (n) · İlk kuruluş: GÖREV 2.4 duruma göre bölme, 2026-09-28.
 
 # 00-KUYRUK — KARAR BEKLEYEN İŞLER (🔴)
 

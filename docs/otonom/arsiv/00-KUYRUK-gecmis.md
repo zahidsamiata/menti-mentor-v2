@@ -237,3 +237,9 @@ Bu, **YN-07**'nin tam vakasıydı; hizalama o satırın bir ayağını kapatır.
 - E-1: `docs/raporlar/kesif/hayalet-envanter-niyet-kaniti-ek-2026-09-27.md` (toplam 43 uç; gerekçesiz 3)
 - KR-22: `scripts/verify.sh` başlığı
 - bekçi: `scripts/belge-bekci.sh` yeni UYARI (i)-(m), `belge-bekci.test.sh` 22/22. mutasyon: bekçi kuralları kapatılınca negatif testler kırmızı (inceleyici j/k/l'yi tekrarladı). KALAN: YN-09 — 1.000+ karakter satır sayısı düşmedi (kuyruk 39, karar-takip 25; zincirler taşındı, uzunluk geçerli katmanlardan) → **AJ-68**. E-1'de gerekçesiz iki uç (`PATCH /users/:id/self-profile`, `POST /users/:id/temperament-test`) KARAR-11 kapsamında — silme protokolü gereği karantinaya bile alınmaz. CANLIDA BAK: (belge) bekçi yeni uyarıları CI'da.
+
+### BAŞLIK · § Kapılar 🔵 satırı — kart yolu (2026-09-28)
+
+```text
+🔵 **AJAN HAZIRLAR, PO'NUN TEK "EVET"İYLE CANLIYA ÇIKAR** — migration · seed (her türü) · canlı veriye yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → `01-KARARLAR.md`'ye sade Türkçe EVET/HAYIR kartı (kullanıcı ne görür · ne değişir · geri alınır mı · yedeği alınacak tablo) → Durum PR-ACIK. "EVET" → tarihli yedek → merge → canlı kontrol (DB erişimi yoksa merge YOK, `00-SIMDI` Engeller'e yazılır). "HAYIR" → PR kapatılır.
+```

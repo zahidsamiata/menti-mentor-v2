@@ -22,3 +22,9 @@
 > Kaynak: `## ❓ Kod tarafı TEYİT GEREK (ajan bulutta yapamadı, canlı/gerçek hesap ister)` listesinin üçüncü maddesi. Güncelleme notu bu satırın PO işi olmadığını ve `00-KUYRUK.md`'nin V-14 Notu'na taşındığını belgeliyordu ("Buradan çıkarıldı") — madde bütünüyle kapandığı için aktif dosyadan tamamen kaldırıldı.
 
 - ~~[ESKİ · 2026-09-19] `.dockerignore` ↔ `migrate deploy` çelişkisi kurtarmada şema oluşturuyor mu (W §7#28 / V-14, `docker build`).~~ ⚠️ **GÜNCELLEME (2026-09-21): BU SATIR PO İŞİ DEĞİL** — `docker build` lokal/CI'da koşar, Dokploy veya Neon erişimi gerektirmez ⇒ **ajan işi**, `00-KUYRUK.md`'de **V-14** Not'una taşındı. Buradan çıkarıldı.
+
+## Başlık · "Karar bekleyenler" (GÖREV 2.4 kart başına dosya düzeni) · taşındı 2026-09-28
+
+```text
+## Karar bekleyenler (kart `01-KARARLAR.md`'de — PO cevap yazacak)
+```
