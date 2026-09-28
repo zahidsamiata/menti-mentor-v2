@@ -1090,4 +1090,354 @@ Kaynak: `docs/otonom/kararlar/KARAR-126.md` (origin/main, değişiklik öncesi).
 **Cevap vermezsen:** Bugünkü davranış (A) sürer; başka iş kilitlenmez. İlgili: AJ-69 (BITTI olunca), AJ-99 (mentör paneli NPS).
 **CEVAP:**
 ```
+### KARAR-3 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-003.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-3 · Sertifika senaryosunda "bildirim yükümlülüğü" metni  [ÜRÜN KARARI · HUKUKİ]
+**Şu an ne var:** Sertifika soru bankasında 22 senaryo / 88 şık yazılı ama canlıya hiç aktarılmadı. Ekranda "Senaryo Q_T1 / Seçenek A" gibi kod isimleri görünüyor (testte görüldü).
+> ⚠️ SAYI DÜZELTMESİ (2026-09-19, kod-teyitli — İKİ SAYI DA GERÇEK, biri diğerini geçersiz kılmaz):
+> **"22 senaryo / 88 şık" = YAZILI İÇERİK** — `docs/raporlar/icerik/sertifika-oturum1/2/3-...-2026-09-08.md` üç belgesinde (11 konu × 2 varyant). Bu doğru, kaynak-kanıtlı.
+> **AMA seed kodu `backend/prisma/seed-certification.ts` şu an 20 senaryo / 80 şık** (eski sürüm; kanıt: 20× `CERT_T`, 80 `options`, 10 tekil `topic`). **Finalize 22/88 içeriği henüz seed'e taşınMADI.**
+> ⚠️ **SAYI DÜZELTMESİ-2 (2026-09-21, içerik konseyi ① — kaynak-teyitli):** ~~[ESKİ · 2026-09-21] fark yalnız **2 senaryo + 8 şık** (20/80 → 22/88)~~ — **BU YANLIŞTI.** Doğrusu: `tam.md` (= seed'in birebir kaynağı, `seed-certification.ts:7`) 20 sahne sundu, finalize içerik bunların **yalnız 5'ini** aldı (%25) — yani seed'deki **20 senaryonun 15'i gerekçeli olarak ELENDİ** ("ELENEN SAHNELER" tabloları: yüzey ayrımı/çelişki). Kalan **5'inin 5'i de yeniden yazıldı** (5/5'inde metin farkı, **birinde puan anlamı TERS DÖNDÜ**). ⛔ Pratik sonuç: taşınacak şık sayısı 8 değil **88'in TAMAMI**; düşecek senaryo **15**. Efor **S değil L**. Kanıt: `docs/raporlar/kesif/konsey-icerik-2026-09-21.md:16-19,118-122`.
+> ⛔ SONUÇ: K-16 bugün `seed-certification` çalıştırırsa **20/80 çıkar, 22/88 değil.** Seed öncesi bir "içerik→seed taşıma" adımı gerekir (KARAR-3/4 metni + madde 159 kriz hukuki teyidi + KALEM 8 destek kaynağı adı bloklarıyla birlikte). Bu, KARAR-3'ün hukuki-metin sorusunu değiştirmez; yalnız seed'in bugünkü kapsamını netleştirir.
+**Sorun ne:** Bankadaki bir senaryoda mentörün ciddi bir durumu öğrendiğinde ne yapacağı soruluyor ve doğru şıkta **yasal bildirim yükümlülüğü** ima ediliyor. Bu hukuki bir iddia, avukat onayı yok. Bu tek cümle yüzünden 88 şıkın tamamı üç haftadır canlıya çıkmıyor.
+**Neden sana soruyorum:** Hukuki sonucu olan bir metin. Ben avukat değilim, aşağıdaki hiçbir şey hukuki görüş değildir.
+**Seçenekler:**
+**A) Yasal iddia içermeyen metinle yaz** — "kurumun belirlediği destek birimine yönlendirir ve kurum politikasını uygular" · Kullanıcı: sertifika içeriği bugün canlıya çıkar · Kazanç: 87 şık serbest kalır, hukuki risk almazsın · Kayıp: avukat sonra "aslında bildirim zorunlu" derse metin yeniden yazılır · Süre: S · Geri alınır: evet
+**B) O senaryoyu bankadan geçici çıkar** (21 senaryo / 84 şık seed edilir) · Kullanıcı: sertifika çıkar, bir senaryo eksik · Kazanç: tartışmalı cümleye hiç dokunmazsın · Kayıp: banka eksik, sertifikanın kapsamı daralır, sonra tekrar seed gerekir · Süre: S · Geri alınır: evet
+**C) Avukat cevabını bekle** · Kullanıcı: sertifika ekranı bozuk kalmaya devam eder · Kazanç: sıfır risk · Kayıp: süresiz bekleme; bugünkü durum bu · Süre: ? · Geri alınır: —
+**Karşılaştırma:** A ile B arasındaki fark, "yumuşatılmış metinle yayınlamak" ile "hiç sormamak". Konunun mentör eğitiminde yer alması senin için önemliyse A; konu hassas ve yarım söylemektense hiç söylememeyi tercih ediyorsan B. C yalnızca avukat görüşünün günler içinde geleceğini biliyorsan mantıklı.
+**Benim önerim:** A — metin hukuki iddia içermiyor, kurum politikasına yönlendiriyor; avukat gelince tek satır değişir.
+**Cevap vermezsen:** K-16 atlanır → sertifika ekranı bozuk kalır (madde 30 açık).
+**CEVAP:**
+
+---
+```
+
+### KARAR-4 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-004.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-4 · Kriz durumunda yönlendirilecek "destek kaynağı" ne yazsın?  [ÜRÜN KARARI]
+**Şu an ne var:** Bir şıkta "somut destek kaynağına yönlendirir" yazıyor ama kaynağın adı boş bırakılmış.
+**Sorun ne:** Her kurumun kaynağı farklı: üniversitede psikolojik danışma birimi, şirkette İK, STK'da başka bir yapı. Tek metin hepsine uymuyor.
+**Neden sana soruyorum:** Kurumlara görünen metin + kriz anıyla ilgili, yani yanlış yönlendirme zararlı olabilir.
+**Seçenekler:**
+**A) Sabit metin:** "kurumun psikolojik destek birimi; acil durumda 112" · Kullanıcı: her kurumda aynı metni görür · Kazanç: bugün çıkar, her kuruma kabaca uyar · Kayıp: birimi olmayan kurumda metin havada kalır · Süre: S · Migration: yok
+**B) Kuruma özel alan** (`supportContactText`) — kurum kendi yazar, boşsa A metni görünür · Kullanıcı: kendi kurumunun gerçek birimini görür · Kazanç: doğru yönlendirme · Kayıp: küçük migration + kurum yönetici ekranı; kurumlar doldurmazsa zaten A'ya düşer · Süre: M · Migration: VAR
+**C) Yalnız "112 / acil yardım hattı"** · Kullanıcı: tek ulusal numara · Kazanç: her zaman doğru, hiç bakım istemez · Kayıp: kurum içi destek yolu görünmez; her durum 112'lik değil, orantısız kaçabilir · Süre: S · Migration: yok
+**Karşılaştırma:** Kurumların çeşitliliği senin satış hikâyenin parçasıysa B doğru yatırım. Hızlı çıkmak istiyorsan A yeterli ve B'ye sonradan geçilebilir (A metni varsayılan olur). C tek başına eksik ama A ile birleştirilmiş hali zaten A'nın içinde.
+**Benim önerim:** A şimdi, B'yi kuyruk adayı yap — A ile seed bugün atılır, B sonra üstüne gelir.
+**Cevap vermezsen:** K-16 atlanır (KARAR-3 ile birlikte sertifika seed'ini kilitliyor).
+**CEVAP:**
+
+---
+```
+
+### KARAR-5 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-005.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-5 · Öğrenme yolculuğu içeriği canlıya girsin mi?  [ÜRÜN KARARI · SEED]
+**Şu an ne var:** İçerik hazır (`seed-learning-journey` güvenli komut), canlıya hiç atılmamış. Neden atılmadığı belgelerde yazmıyor.
+**Sorun ne:** Kullanıcı öğrenme yolculuğu bölümünde ya boş ekran ya eksik içerik görüyor.
+**Neden sana soruyorum:** Seed = canlı veriye yazma. Senin iki değişmez kuralından biri.
+**Seçenekler:**
+**A) At (önce yedek)** · Kullanıcı: içeriği görmeye başlar · Kazanç: hazır iş kullanıcıya ulaşır · Kayıp: içeriği kimse okumadan canlıya gider; kötü/eksik metin kullanıcıya görünür · Süre: S · Geri alınır: evet (yedek var)
+**B) Önce sen oku, sonra at** · Kullanıcı: bir gün daha bekler · Kazanç: canlıya çıkan metni görmüş olursun · Kayıp: sana bir okuma işi daha düşer · Süre: S + senin zamanın
+**C) Ertele** · Kullanıcı: boş ekran devam · Kazanç: yok · Kayıp: hazır iş rafta kalmaya devam eder
+**Karşılaştırma:** Bu içeriğin kalitesinden eminsen A. Kim yazdığını/ne yazdığını hatırlamıyorsan B — ajan içeriği okunur biçimde ilerleme dosyasına döker, sen beş dakikada bakarsın. C'nin savunması yok.
+**Benim önerim:** B — kullanıcıya ilk görünen içerik, bir kez göz gezdirmeye değer.
+**Cevap vermezsen:** K-18 atlanır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-30 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-030.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-30 · Senaryo isimleri: seed'den ÖNCE mi SONRA mı değişken yapılsın  [ÜRÜN + SIRA KARARI] (2 işi açar)
+**Şu an ne var:** Senaryo metinlerindeki kişi isimleri koda gömülü. Kurum kendi bağlamına uygun isim kullanamıyor. Kanıt: 9 terim (`menti_denge`·`mentor_mimar`·`sert_1` …) iki repo tamamında harf duyarsız → **kodda 0 dosya** (7 isabetin hepsi belge). İçerik hazır: `docs/raporlar/icerik/menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md:56` (14 değişken).
+**Sorun ne:** Bu iş **tek başına** bir sıra sorusu doğuruyor: sertifika (K-16) ve öğrenme yolculuğu (K-18) içerikleri **canlı veritabanına yazılacak**. İsim değişkeni altyapısı bu yazımdan ÖNCE yapılırsa isimler baştan değişken olarak girer; SONRA yapılırsa **aynı içeriği ikinci kez yazmak** gerekir.
+**Neden sana soruyorum:** Canlı veritabanına içerik yazımı geri dönülmez bir işlem ve onayın şart; sıranın yanlış seçilmesi aynı işi iki kez yaptırır.
+**Seçenekler:**
+· **A — Önce isim altyapısı, sonra içerik yazımı.** Kullanıcı ne görür: bir süre daha bugünkü "Seçenek A" metinleri. Ne kazanırsın: içerik canlıya **bir kez** yazılır, kurum ilk günden kendi isimlerini kullanır. Ne kaybedersin: sertifika/yolculuk içeriği **gecikir** (isim altyapısı önce bitmeli). Süre **M** · geri alınır ✅ · migration **olası** (kurum-bazlı isim alanı).
+· **B — Önce içerik yazımı, isimler sonra.** Kullanıcı ne görür: gerçek senaryolar **hemen** canlıda. Ne kazanırsın: en hızlı görünür değer. Ne kaybedersin: isim altyapısı gelince **aynı içerik ikinci kez yazılır** — canlı veritabanına ikinci geri-dönülmez işlem + ikinci onay turu. Süre **S sonra M** · geri alınır ⚠️ zor · migration **olası**.
+· **C — İsimler sabit kalsın, değişken altyapısı hiç yapılmasın.** Kullanıcı ne görür: bugünkü hâli, kalıcı. Ne kazanırsın: sıfır iş. Ne kaybedersin: **kurum kendi bağlamını kuramaz**; senaryolar her kurumda aynı kurgu isimlerle okunur, sahiplik hissi düşer. Süre **0** · geri alınır ✅.
+**Karşılaştırma:** Sertifika/yolculuk içeriğini yakında canlıya almak istiyorsan B hızlıdır ama ikinci yazım maliyetini kabul etmiş olursun. İçerik birkaç hafta bekleyebiliyorsa A toplamda daha ucuz. C yalnız "isim özelleştirme bizim için önemli değil" diyorsan doğrudur.
+**Benim önerim:** **A** — çünkü canlı veritabanına içerik yazımı bu projede onay + yedek gerektiren ağır bir işlem; onu iki kez yapmaktansa bir kez doğru yapmak daha ucuz.
+**Cevap vermezsen:** **I-09** kuyrukta bekler; ayrıca **K-16** ve **K-18** seed işleri "hangi sıra" sorusu cevapsız olduğu için güvenle başlatılamaz.
+**CEVAP:**
+
+---
+```
+
+### KARAR-31 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-031.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-31 · Kriz bildirimi (kendine zarar) + yaş sınırı  [ÜRÜN + HUKUK] (2 işi açar)
+**Şu an ne var:** Sertifika sınavında mentöre *"menti kendine zarar ifadesi kullanırsa ne yaparsın"* diye **soruluyor** (red-line konu `kriz-yonetimi`) ama canlıda böyle bir akış **yok**. Kanıt: 7 terim, İKİ DİLLİ, harf duyarsız (`kriz`·`crisis`·`selfharm`·`self-harm`·`kendine zarar`·`acil durum`·`emergency`) → **2 satır, 0'ı akış** (biri iş unvanı listesi, biri sınav konu etiketi).
+· Ayrıca menti tarafında: menti kriz/kendine zarar ifadesi kullandığında uygulamada hiçbir kanal yok (22 terimlik iki dilli tarama → 0 sonuç); mentör terapist değil. Çözüm araştırma + ruh sağlığı uzmanı + avukat görüşü ister (`persona-panel-gelisimi-2026-09-23.md:259-269`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-31)*
+**Sorun ne:** Mentör eğitimde öğrendiği refleksi uygulayacak bir yer bulamıyor; kriz anında sistem sessiz. Sertifika bir davranışı öğretiyor, ürün karşılığını sunmuyor.
+**Neden sana soruyorum:** Bir kişinin en kırılgan anında kimin haberdar olacağı hukuki ve etik bir karardır; yanlış kurgu zarar verir.
+**Seçenekler:**
+· **A — Bildirim yok, yalnız yardım hattı metni.** Kullanıcı ne görür: kriz ifadesinde ekranda destek hattı bilgisi. Ne kazanırsın: hukuki risk en düşük, mahremiyet tam. Ne kaybedersin: **kurum hiçbir zaman haberdar olmaz**; mentör yalnız kalır. Süre **S** · geri alınır ✅ · migration yok.
+· **B — Sessiz bildirim (menti bilmez).** Kullanıcı ne görür: menti hiçbir şey görmez; kurum yöneticisine bildirim düşer. Ne kazanırsın: müdahale mümkün. Ne kaybedersin: **menti izlendiğini bilmiyor** — güven ihlali ve KVKK açık rıza sorunu. Süre **M** · geri alınır ⚠️ (gönderilen bildirim geri alınamaz) · migration **var**.
+· **C — Şeffaf bildirim (menti görür).** Kullanıcı ne görür: *"bu mesaj kurum yöneticisiyle paylaşıldı"* bilgisi. Ne kazanırsın: dürüst ve KVKK-uyumlu. Ne kaybedersin: menti **bir daha o konuyu açmaz** — özellik kendi amacını zayıflatır. Süre **M** · geri alınır ⚠️ · migration **var**.
+**Karşılaştırma:** Üçü de avukat onayı ister. A en güvenli ama en az koruyucu; C etik olarak en savunulabilir ama işlevi zayıflatır; B en riskli çünkü kişi bilmeden izlenir.
+**Benim önerim:** Yok — **bu senin ürün kararın, önerime güvenme.** Avukat görüşü alınmadan hiçbiri seçilmemeli.
+⚠️ **BAĞLI SORU (aynı kart, avukata TEK soru olarak gitmeli):** Bu akış 18 yaş altı menti varsayıyorsa **`G1-01` çöker** — bugün *"18+ beyanı yeterli"* deniyor; gerçek yaş ve veli onayı gerekir.
+**Cevap vermezsen:** **I-18** kuyrukta bekler; sertifika bir davranışı öğretip karşılığını sunmamaya devam eder.
+**CEVAP:**
+
+---
+```
+
+### KARAR-38 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-038.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-38 · Kurum sunucusunun ülkesi ve aydınlatma metninin düzeltilmesi  [HUKUK + ÜRÜN] (1 işi açar)
+> ⭐ **Kaynak:** güvenlik konseyi (`docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** bu kartın avukat sorusu **KARAR-47** (hukuki metin paketi) içinde tek seferde sorulur — ayrı bir hukuk görüşmesi açma.
+**Şu an ne var:** KVKK aydınlatma sayfası (`app/kvkk/page.tsx:92-107`) *"İrlanda (Avrupa Birliği) bölgesinde … GDPR standartlarına tabidir"* diyor. Proje belgesi ise PO teyidiyle veritabanı bölgesinin **Londra / Birleşik Krallık** olduğunu yazıyor (`CLAUDE.md § Ortam / Veritabanı`, madde 92, 2026-08-26) — **BK, AB üyesi değil.** Metin ayrıca "yönetilen PostgreSQL hizmeti" diyor, PROD ise kendi konteynerinde Postgres çalıştırıyor (`docker-compose.yml:16-24`). Aktarım bölümü (`:60-64`) Google/LinkedIn OAuth ve e-posta sağlayıcısını **hiç saymıyor**; işlenen veri listesinde (`:31-39`) 8 kategori eksik (mesaj içeriği, telefon, sosyal linkler, avatar, OCEAN/arketip, şikâyet kayıtları, IP adresi `platformAudit.ts:32`, `lastLoginAt`).
+**Sorun ne:** Kuruma ve kullanıcıya **yanlış ülke ve yanlış hukuki rejim** beyan ediliyor. Bir denetimde ilk bakılacak belge budur; yanlış beyan, eksik beyandan daha ağır sonuç doğurur.
+**Neden sana soruyorum:** Metin hukuki sonuç doğuruyor ve ajan doğru cevabı koddan çıkaramaz — **uygulama sunucusunun ülkesi kodda hiç yok** (yalnız veritabanı bölgesi belgede).
+**Seçenekler:**
+· **A — Metni gerçeğe uydur (Londra/BK + tüm alıcılar).** Kullanıcı ne görür: doğru ülke, doğru rejim ve tam alıcı listesi. Ne kazanırsın: beyan gerçeğe uyar, denetimde savunulabilir. **NE KAYBEDERSİN:** BK'ye aktarım **yurt dışı aktarım** sayılırsa KVKK Md.9 gereği ek açık rıza/taahhütname gerekebilir → **yeni bir rıza akışı** ve mevcut kullanıcılardan yeniden onay demek. Süre **M** · geri alınır ✅ · migration **yok**.
+· **B — Sunucuyu AB/Türkiye'ye taşı, metni koru.** Kullanıcı ne görür: hiçbir değişiklik. Ne kazanırsın: en temiz hukuki konum, ek rıza yükü yok. **NE KAYBEDERSİN:** taşıma **geri dönülmez bir altyapı işi** — kesinti riski, yeniden yapılandırma, maliyet; üstelik taşıma maliyeti bu turda **ölçülmedi**. Süre **L** · geri alınması **zor ⛔** · migration **yok** (veri taşınır).
+· **C — Önce avukata sor, sonra karar ver.** Kullanıcı ne görür: bir süre daha bugünkü (yanlış) metni. Ne kazanırsın: yanlış yöne para/zaman harcanmaz. **NE KAYBEDERSİN:** metin **yanlış hâliyle canlıda kalmaya devam eder**; her geçen gün yanlış beyanla kullanıcı alınır. Süre **S** (soru) + bekleme · geri alınır ✅ · migration **yok**.
+**Karşılaştırma:** A hızlı ve dürüst ama yeni bir rıza yükü getirebilir. B en temiz ama en pahalı ve maliyeti bugün bilinmiyor. C tek başına çözüm değil; A veya B'nin ön adımıdır.
+**Benim önerim:** **C → sonra A.** Çünkü "BK'ye aktarım ek rıza ister mi" sorusunun cevabı A'nın maliyetini tamamen değiştiriyor ve bunu ajan bilemez. Ama C'de **beklerken metin düzeltilmeli** — en azından "İrlanda/AB" ifadesinin kaldırılıp "sunucu konumu teyit ediliyor" denmesi, yanlış beyandan iyidir.
+**Cevap vermezsen:** GV-09 kilitli kalır; aydınlatma metni yanlış ülke beyanıyla canlıda durur. Avukat paketine bağlı **F-02** (mesaj saklama süresi), **F-03** (OAuth rıza metni) ve **GV-18** (rıza sürümü, `CONSENT_VERSION` yer tutucu) da **birlikte kilitli kalır**.
+**CEVAP:**
+
+---
+```
+
+### KARAR-46 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-046.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-46 · Sertifika içeriğinin hangi sürümü canlıya gidecek? (P-99'u açar) [ÜRÜN KARARI · SEED]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** **KARAR-3** (kriz senaryosunun hukuki metni) ile aynı seed'i bekliyor ama farklı soru — o *tek cümlenin hukuku*, bu *hangi sürüm*. İkisi de cevaplanmadan **P-99 → K-16** zinciri açılmaz. ⚠️ Kapsam: yeni sürüm 88 şıkın TAMAMINI taşır ve seed'deki 20 senaryonun 15'ini eler (bkz. `00-KUYRUK` P-99 sayı düzeltmesi).
+
+**Şu an ne var:** Aynı sertifika sahnesi **üç farklı metinle** üç yerde duruyor: 2026-09-03 tarihli faz6 belgesi ·
+2026-09-08 tarihli oturum belgeleri · **kodda bambaşka bir üçüncü sahne** (`seed-certification.ts:216-217`).
+Hangisinin canlıya gideceği hiçbir belgede yazmıyor; faz6 hâlâ "dondurulmuş" etiketli.
+
+· A seçilirse seed'deki iki STK-özel konu (`gonullu-tukenmisligi`, `okul-gonulluluk-dengesi`) canlıdan kalkar ve sonuç ekranındaki (I-03) konu adları değişir; seed'deki "mentorluk/mentörlük" karışıklığı kendiliğinden düzelir (`seed-certification.ts:87,141`). *(2026-09-23 EK BİLGİ katmanı buraya işlendi 2026-09-27; aslı: `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md` §KARAR-46)*
+**Sorun ne:** Kuyruk (P-99) işi "22 senaryoyu seed'e taşı" diye tarif ediyor; gerçekte **22'nin 17'sinin seed'de
+karşılığı yok, seed'deki 20'nin 15'i belgelerde gerekçeli elenmiş** ve ortak olan 5 senaryonun **5'i de yeniden
+yazılmış** — birinde puanlamanın anlamı ters dönmüş. Ayrıca taşımadan önce üç teknik soru cevapsız: konu
+kodlarının değişmesi kurumların "kapattığım konu" kaydını öksüz bırakır, geçme eşiği 10 konuda 8 iken 11 konuda
+**9'a çıkar** (sertifika zorlaşır), ve belgelerdeki 17 "iç not" konu düzeyinde yazılmış ama alan **şık**
+düzeyinde (`schema.prisma:1158`).
+
+**Neden sana soruyorum:** Hangi içeriğin mentörlere sınav olarak çıkacağı ve sertifikanın **zorlaşması** ürün
+kararı; ayrıca canlı veriye yazma (seed) senin iki değişmez kuralından biri.
+
+**Seçenekler:**
+**A) 2026-09-08 serisi kazanır — tam taşıma** · Kullanıcı: 11 konu / 22 senaryo ile sınava girer, sertifika
+zorlaşır (8→9 konu) · Kazanç: en olgun içerik canlıya çıkar, elenen 15 sahnenin gerekçesi zaten yazılı ·
+Kayıp: 88 şıkkın tamamı yeniden yazılacak (efor L), konu kodları değişince eski kayıtlar öksüz kalır ·
+Süre: L · Geri alınır: evet (yedek + pasifleştirme) · Migration: yok (iç not şık düzeyinde kalırsa)
+**B) Önce yalnız 4 kritik (red-line) konu taşınır, gerisi sonra** · Kullanıcı: kriz/sınır/gizlilik/geri bildirim
+konularında yeni metni görür, kalan 7 konu eski metinde kalır · Kazanç: en riskli içerik önce düzelir, efor M ·
+Kayıp: bir süre **karışık sürüm** yayında olur (bazı konular yeni, bazıları eski); geçme eşiği iki kez değişir ·
+Süre: M · Geri alınır: evet · Migration: yok
+**C) Hiç taşıma — bugünkü 20/80 kalır** · Kullanıcı: bugünkü sınavı görmeye devam eder · Kazanç: sıfır risk,
+sıfır iş · Kayıp: üç haftadır yazılı duran içerik rafta kalır; **puanlama anlamı ters olan senaryo canlıda
+kalmaya devam eder** · Süre: — · Geri alınır: —
+
+**Karşılaştırma:** Sertifikanın zorlaşmasını şimdi göze alabiliyorsan A tek turda biter. Kriz içeriğinin doğru
+olması acilse ama toplu değişimi istemiyorsan B; ama karışık sürüm yönetmek gerekir. C'nin tek savunması zaman.
+**Benim önerim:** A — ama **KARAR-3 ve KARAR-4 cevaplanmadan başlanamaz** (kriz senaryolarının 8 şıkkı onlara
+bağlı) ve iş ikiye bölünmeli: "içerik taşıma PR'ı" ve "seed çalıştırma turu".
+**Cevap vermezsen:** P-99 ve K-16 açık kalır; sertifika ekranı bugünkü hâliyle kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-47 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-047.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-47 · Hukuki metin paketi — avukata tek seferde ne sorulacak? (5 kalem) [HUKUKİ · PO+AVUKAT]
+> ⭐ **Kaynak:** içerik konseyi (`docs/raporlar/kesif/konsey-icerik-2026-09-21.md`), 2026-09-21.
+> ⚠️ **ÇAPRAZ:** **KARAR-38** (sunucu ülkesi/aydınlatma metni) · **KARAR-3/KARAR-4** (sertifika kriz metni) · **F-02** (mesaj saklama süresi) · **F-03**/**GV-18** (rıza sürümü) hepsi aynı avukat paketine bağlı — **tek görüşmede** sorulmalı.
+
+**Şu an ne var:** Ürünün üç hukuki sayfası (KVKK aydınlatma · gizlilik · kullanım koşulları) **kendi içinde
+"bu metin taslaktır" diyor** (`kvkk/page.tsx:109` · `gizlilik/page.tsx:85` · `terms/page.tsx:73`), ama kayıt
+ekranı kullanıcıya bu metinler için **zorunlu açık rıza** aldırıyor (`_RegisterContent.tsx:398-418`).
+
+**Sorun ne:** Beş ayrı yerde, kodun gerçekten yaptığından **daha fazlasını vaat eden** ya da eksik kalan metin var:
+① davet kartı *"Bilgileriniz KVKK uyumlu … ve güvendedir"* (`InvitationCard.tsx:142`) ve footer *"KVKK uyumlu"*
+damgası (`page.tsx:65`) — metinler taslakken koşulsuz uyum beyanı · ② geri bildirim ekranı *"kimliğin
+paylaşılmaz"* diyor (`MeetingFeedbackCard.tsx:173`) ama yönetici geri bildirimleri **ad-soyadla** listeliyor
+(`feedbackLogController.ts:134-135`) · ③ "Sertifikalı Mentör" rozeti hiçbir yerde "bu mesleki bir yeterlilik
+değildir" demiyor (kapsam: `frontend/src/app/**`, 6 terim TR+EN → **0 çekince**) · ④ landing *"Sonsuza kadar
+ücretsiz"* diyor (`HeroSection.tsx:34,51`), koşullarda karşılığı yok · ⑤ 18 yaş beyanı ayrı kutu değil, KVKK
+rızasının metnine gömülü (`_RegisterContent.tsx:162`) ve **yaş verisi hiç saklanmıyor** → beyanın ispatı yok
+(`consentService.ts:59`).
+
+**Neden sana soruyorum:** Hepsi hukuki sonucu olan metin. Ben avukat değilim; aşağıdaki hiçbir şey hukuki görüş
+değildir ve **metin önerisi yazılmadı**.
+
+**Seçenekler:**
+**A) Beşini tek pakette avukata sor, cevap gelene kadar dokunma** · Kullanıcı: bugünkü metinleri görmeye devam
+eder · Kazanç: tek seferde doğru metin, dağınık düzeltme olmaz · Kayıp: süresiz bekleme; "güvendedir" ve
+"kimliğin paylaşılmaz" gibi **kodla çelişen** cümleler yayında kalır · Süre: ? · Geri alınır: —
+**B) Kodla ÇELİŞENLERİ hemen düzelt (② ve ①), geri kalanı avukata bırak** · Kullanıcı: doğru kapsamı okur ·
+Kazanç: yanlış beyan bugün kalkar, hukuki yorum gerektirenler beklemede kalır · Kayıp: iki kez metin turu olur ·
+Süre: S + bekleme · Geri alınır: evet
+**C) Beşini de şimdi yumuşat, avukat gelince rafine et** · Kullanıcı: daha temkinli metinler görür ·
+Kazanç: risk bugün düşer · Kayıp: pazarlama gücü azalır ("sonsuza kadar ücretsiz" ve "KVKK uyumlu" satış
+cümleleri); avukat gelince üçüncü kez yazılır · Süre: M · Geri alınır: evet
+
+**Karşılaştırma:** ② ve ① kodun yaptığıyla doğrudan çelişiyor — bunlar hukuki yorum değil **olgu düzeltmesi**,
+avukat beklemeye gerek yok. ③④⑤ gerçekten hukuki yorum istiyor. B bu ayrımı yapan tek seçenek.
+**Benim önerim:** B — ama bu senin ürün/hukuk kararın, önerime güvenme.
+**Cevap vermezsen:** 13 hukuki bulgunun hiçbiri hareket etmez; ②'deki çelişki (kimlik paylaşılmaz ↔ yönetici
+ad-soyad görüyor) yayında kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-55 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-055.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-55 · Sertifikada geri bildirim ne zaman gösterilsin?  (2 işi açar)  [ÜRÜN KARARI · SERTİFİKA]
+**Şu an ne var:** Mentör sertifika sınavında her şıkkı seçtiği anda o şıkkın açıklamasını görüyor (neden doğru/yanlış). Kanıt: `certification.service.ts:444-465` · `mentor/certification/page.tsx:102-129`. Sınav sonunda ayrıca "pekiştirilecek konular" listesi çıkıyor (`:187-219`).
+**Sorun ne:** Tasarım belgeleri tam tersini istiyor: "geri bildirim sınav SONUNDA, konu bazlı" (`faz6:360,650` · `menti-yolculugu:204-214`). Anında açıklama, sınavı bir öğrenme turuna çevirir; aynı oturumda B varyantı da geldiği için ikinci soruyu açıklamayı okuyarak geçmek kolaylaşır.
+**Neden sana soruyorum:** Mentörün sınavda ne gördüğü bir ürün kararı; sınavın "ehliyet mi, son tekrar mı" olduğu sorusuna bağlı (`TAS:369-371` "eleme sınavı değil, son tekrar").
+**Seçenekler:**
+· **A — Anında açıklama kalsın (bugünkü hal).** Kullanıcı ne görür: her seçimden sonra neden doğru/yanlış olduğunu. Ne kazanırsın: öğretici, iş yok. **Ne kaybedersin:** sınav ölçmekten çok öğretir; B varyantı "kopya" ile geçilebilir. Süre S · geri alınır ✅ · migration yok
+· **B — Açıklamalar sınav sonunda, konu bazlı (belgelerdeki tasarım).** Kullanıcı ne görür: sınav boyunca yalnız soruları; sonunda konu konu açıklama. Ne kazanırsın: ölçüm temiz. **Ne kaybedersin:** anında öğrenme anı kaybolur; FE sonuç ekranı yeniden yazılır. Süre M · geri alınır ✅ · migration yok
+· **C — Anında yalnız "doğru/yanlış", açıklama sonda.** Kullanıcı ne görür: renk/işaret anında, gerekçe sonda. Ne kazanırsın: ara yol. **Ne kaybedersin:** iki gösterim modu = daha karmaşık kod ve metin. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** Sertifika "son tekrar" ise A savunulabilir; "yetkinlik kanıtı" ise B doğru. C ikisinin arası ama iki mod bakımı getirir.
+**Benim önerim:** B — belgelerdeki üç ayrı karar da bu yönde ve 88 şıklık yeni içerik "sonda, konu bazlı" varsayımıyla yazıldı. Bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** 88 şık taşıma turu (KARAR-46) gösterim biçimini belirsiz bırakarak ilerler; IC-04 aynı ekranda.
+**CEVAP:**
+
+---
+```
+
+### KARAR-59 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-059.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-59 · Kurgu/persona kişi adları "Kişi Adı Yasağı"na dahil mi?  (2 işi açar)  [ÜRÜN KARARI · KURAL/KVKK]
+**Şu an ne var:** İki ayrı yerde koda/belgeye gömülü kurgu kişi adları var:
+1. **Seed/kod senaryoları:** öğrenme yolculuğu senaryolarında "Zeynep"/"Deniz" gibi adlar koda gömülü (`seed-learning-journey.ts`). Belge isim-değişkeni öngörüyor, kod uygulamamış. Kanıt: `icerik-kalitesi-2026-09-23.md:229-230` (A.4).
+2. **Persona belgeleri:** persona/panel tasarım belgelerinde kurgu kişi adları kullanılmış. Kanıt: `persona-panel-gelisimi-2026-09-23.md:165,247` (A.4).
+**Sorun ne:** CLAUDE.md "Kişi Adı Yasağı" kuralı gerçek kişi adlarını yasaklıyor; ama kurgu/persona adlarının (bir senaryodaki hayali "Zeynep", bir persona belgesindeki temsili kişi) bu yasağa girip girmediği tanımsız. Persona mı, ihlal mi belirsiz.
+**Neden sana soruyorum:** Kurgu adın "kabul edilebilir tasarım öğesi" mi "kural ihlali" mi olduğu bir politika kararı; kullanıcıya görünen içerikte (senaryolar) ve iç belgede (persona) farklı sonuç verebilir.
+**Seçenekler:**
+· **A — Kurgu/persona adları yasağın DIŞINDA (kabul edilebilir kurgu).** Ne kazanırsın: senaryolar ve personalar sıcak, okunur kalır; iş yok. **Ne kaybedersin:** yasağın sınırı bulanıklaşır; ileride gerçek ad kurgu sanılabilir. Süre S · geri alınır ✅ · migration yok
+· **B — Kurgu adlar da nötrleştirilir** (senaryolarda "bir menti", "M." gibi; personalarda "R1/menti"). Ne kazanırsın: tek net kural, ihlal riski sıfır. **Ne kaybedersin:** senaryolar/personalar soğur, okunması zorlaşır; iki yerde metin işi. Süre M · geri alınır ✅ · migration yok
+· **C — Ayrı ayrı: senaryolarda (kullanıcı görür) kalsın, persona belgelerinde (iç) nötrleştirilsin.** Ne kazanırsın: kullanıcı deneyimi sıcak, iç belge kurala uyumlu. **Ne kaybedersin:** iki farklı politika = anlatması ve denetlemesi zor. Süre M · geri alınır ✅ · migration yok
+**Karşılaştırma:** Yasak yalnız gerçek kişiyi korumak içinse A yeterli; kuralın mutlak netliği öncelikse B; kullanıcı sıcaklığı ile iç disiplin ayrı ele alınacaksa C.
+**Benim önerim:** öneri YOK — bu bir kural yorumu + KVKK sınırı kararı; yasağın amacını yalnız PO tanımlayabilir.
+**Cevap vermezsen:** öğrenme yolculuğu senaryolarının (A.4) ad-değişkeni işi ve persona belgelerinin gelişimi (KARAR-68) hangi ad politikasıyla ilerleyeceğini bilemez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-75 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-075.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-75 · KVKK yasal metinlerinde kişi adı — yasak mı istisna mı? (Ç-16 · AN-41/YN-13 ile bağlı) [HUKUK + POLİTİKA KARARI]
+> ⭐ Kaynak: CS bilanço denetimi §7 KARAR-D.
+**Şu an ne var:** Kök `CLAUDE.md` "hiçbir belgeye kişi adı yazma" diyor; ama KVKK yasal metinleri (aydınlatma, gizlilik, kullanım koşulları, veri-işleyen sözleşmesi) veri sorumlusunu **açık kişi/kurum adıyla** yazıyor (`kvkk-metinleri/01:11,43`, `03:9`, `07:7,39`, `08:6`).
+**Sorun ne:** İki kural birbirini yalanlıyor — biri isim yasaklıyor, diğeri (yasal geçerlilik için) isim zorunlu kılıyor olabilir.
+**Neden sana soruyorum:** Yasal metnin geçerliliği için veri sorumlusunun adının yazılması gerekip gerekmediği hukuk kararı; "kişi adı yasağı"nın bu metinlere istisna olup olmadığı politika kararı.
+**Seçenekler:**
+- **A) KVKK metinleri yasağa İSTİSNA (isim kalır):** · Kazanç: yasal geçerlilik · Kayıp: yasak kuralı delinir, sınır bulanıklaşır · Süre 0 · Geri alınır
+- **B) İsimler kurum/unvana çevrilsin ("Veri Sorumlusu: [Kurum]"):** · Kazanç: yasak korunur · Kayıp: avukat "yeterli mi" teyidi gerekir · Süre S · Geri alınır
+**Karşılaştırma:** A pratik ama kuralı zayıflatır; B tutarlı ama hukuk teyidi ister. İkisi de ucuz.
+**Benim önerim:** B (kurum/unvan) + avukat teyidi — çünkü kişisel ad zaten gereksiz, kurum adı yeterli. *(Hukuk kararın.)*
+**Cevap vermezsen:** KVKK paketi hem yasağı ihlal etmeye devam eder hem her denetimde tekrar işaretlenir (AN-41 + YN-13 etkilenir).
+**CEVAP:**
+
+---
+```
+
+### KARAR-113 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-113.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-113 · Sertifika sınavında her seferinde kaç konu sorulsun, baraj neye göre hesaplansın? (1 işi açar: AJ-34) [ÜRÜN KARARI]
+**Şu an ne var:** Mentör sertifika sınavında kurumun açtığı bütün konuları görüyor (10 konu açıksa 10 senaryo); geçmek için ilk seçimde %80'ini doğru yapmak gerekiyor (10'da 8). Tasarımdaki "4 kritik konu garantili + 4 rastgele" çekim yapılmıyor — rastgele kısım hiç çalışmıyor; kritik konular zaten her şey geldiği için her sınavda var. Kanıt: `backend/src/services/certification.service.ts:320` (`selectExamQuestions` çağrısı `maxTopics` vermiyor) · `backend/src/services/certExamSelection.ts:17-20` ("önce puanlama kararı gerekir") · baraj `requiredToPass(totalTopics)` = kurumdaki TÜM açık konular (`certification.service.ts:51` tanım, `:171-177` konu sayısı, `:213` çağrı) · ayrıca kritik konu eleme kapısı: kritik bir konuda ilk seçim 0 ya da 1 puansa mentör doğrudan elenir (`RED_LINE_FAILED`) — bu kapı HER seçenekte aynen kalır · kurum paneli "en az {requiredToPass} konuda başarılı" (`frontend/src/app/(admin)/admin/certification/page.tsx:77`) · mentör sonucu "{passed}/{totalTopics} konu" (`frontend/src/app/(dashboard)/mentor/certification/page.tsx:215,226`).
+**Sorun ne:** Tasarım belgesi sınavın 8 senaryo olacağını söylüyor (`docs/raporlar/icerik/faz6-ogrenme-ve-sertifika-2026-09-03.md:158-161`) ama barajın 8 üzerinden mi yoksa kurumdaki bütün konular üzerinden mi hesaplanacağını söylemiyor (aynı belge `:666` "gözden geçirilmeli" diye bırakmış). ⚠️ Senin 2026-09-04 kararın (T4 / madde 72, `docs/kararlar/00-KARAR-TAKIP.md:589`): "TOPLAM EŞİĞİ (KONU'nun %80'i, ceil) … Kod ZATEN uyguluyor … Eşik KONU bazlı, PUAN değil (8 konu→7)" — "kod zaten uyguluyor" bugünkü davranışı (B), "8 konu→7" ise A'yı destekliyor; bu yüzden cümle iki okumaya da açık. Çekimi açıp barajı değiştirmezsek 8 soruda 8 doğru gerekir — sınav fiilen "hatasız" olur.
+**Neden sana soruyorum:** Seçenekler mentörün kaç soru gördüğünü, sertifikanın ne kadar zor olduğunu ve kurum yöneticisinin panelde okuduğu "en az X konuda başarılı olmalı" cümlesini değiştiriyor — sertifikanın anlamı.
+**Seçenekler:**
+- **A) 4+4 çekim, baraj çekilen 8 senaryo üzerinden (8'de 7).** · Kullanıcı ne görür: her sınavda 8 senaryo (4 kritik + 4 rastgele, denemeden denemeye değişir); sonuç "7/8"; panel "8 konudan en az 7'si" · Kazanç: tasarıma uyar, sınav kısalır, ezberlenemez · Kaybedersin: mentör bazı açık konulardan hiç sınanmadan sertifika alabilir; iki mentör farklı zorlukta sınav görebilir; 8'den az konu açık kurum için ek kural gerekir (öneri: hepsi gelir) · Süre: M · Geri alınır: evet · Migration: yok (çekim sunucuda tohumlu, yeniden hesaplanır)
+- **B) Bugünkü gibi hepsi gelsin, baraj tüm açık konular (10'da 8); tasarım belgesi düzeltilsin.** · Kullanıcı ne görür: hiçbir şey değişmez · Kazanç: her mentör eşit ve eksiksiz sınanır, sonuçlar karşılaştırılabilir, kod riski yok · Kaybedersin: "rastgele 4" fikri bırakılır; sınav uzun kalır; tekrarda aynı konular gelir (yalnız senaryo varyantı değişir) · Süre: S · Geri alınır: evet · Migration: yok
+- **C) 4+4 çekim, baraj bugünkü formül (tüm açık konular).** · Kullanıcı ne görür: 8 senaryo, 8'in 8'i doğru gerekir · Kazanç: kurum panelindeki sayı değişmez · Kaybedersin: sertifika "tek hata eler" olur; 10'dan fazla konu açık kurumda baraj ulaşılamaz · Süre: S · Geri alınır: evet · Migration: yok (önerilmez; tam liste için)
+**Karşılaştırma:** Eşit ve eksiksiz ölçüm, karşılaştırılabilir sonuç istiyorsan B; kısa ve ezberlenemeyen sınav öncelikliyse A (az konulu kurum için ek kuralla). C tasarımın sayısını uygular ama barajın anlamını bozar.
+**Benim önerim:** B — tüm konuları sormak kritik konu garantisini zaten sağlıyor ve kuruma görünen metni değiştirmiyor; bu senin ürün kararın, önerime güvenme (tasarımı sen 4+4 yazdın).
+**Cevap vermezsen:** AJ-34 bekler; sınav bugünkü gibi eksiksiz çalışır, kullanıcıya zarar yok; madde 149 "kısmen" kalır.
+**CEVAP:**
+```
+
+### KARAR-120 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-120.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-120 · Pasif üyelere otomatik hatırlatma e-postası gitsin mi? (0 iş kilitliyor) [ÜRÜN KARARI · KVKK]
+**Şu an ne var:** Kurum yöneticisi pasif bir üyeye tek tek elle hatırlatma gönderebiliyor; otomatik ya da toplu gönderim yok. Kanıt: `docs/kararlar/00-KARAR-TAKIP.md:377` (madde 24, v2 bekleme listesi: "elle hatırlatma var") · kaynak `docs/kararlar/konu/08-acik-sorular.md:56`.
+**Sorun ne:** 30 günü aşan pasif üyeler ancak yönetici hatırlarsa uyarılıyor; büyük kurumda elle takip sürmez.
+**Neden sana soruyorum:** Kişinin istemediği e-postayı almaması (rıza, abonelikten çıkma) ve e-posta metni hukuki/ürün kararı.
+**Seçenekler:**
+- **A) Otomatik hatırlatma — kişi başına ayda en çok 1, her e-postada abonelikten çıkma bağlantısı.** · Kullanıcı ne görür: pasif üye ayda bir nazik e-posta alır · Kazanç: yöneticiye iş düşmez, geri dönüş artar · Kaybedersin: istenmeyen e-posta şikâyeti riski; avukattan metin/rıza teyidi gerekir · Süre: M · Geri alınır: evet (ayar bayrağı) · Migration: tercih alanı gerekirse var
+- **B) Yarı otomatik — sistem "hatırlatılacaklar" listesini önerir, yönetici tek tuşla gönderir.** · Kullanıcı ne görür: yönetici listeyi onaylar; üye yine yöneticinin gönderdiği e-postayı alır · Kazanç: insan onayı korunur, rıza riski düşük · Kaybedersin: yönetici yine bir adım atmak zorunda · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Bugünkü gibi yalnız elle.** · Kullanıcı ne görür: değişiklik yok · Kazanç: sıfır risk · Kaybedersin: pasif üyeler fark edilmeden kaybolur · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Kurumlar büyükse A ölçeklenir ama hukuk teyidi ister; B riski düşük orta yol; C küçük pilot için yeterli.
+**Benim önerim:** B — rıza riski olmadan yöneticinin işini hafifletir; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Yalnız elle hatırlatma sürer; başka iş kilitlenmez.
+**CEVAP:**
+```
+
+### KARAR-127 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-127.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-127 · Mentörlere sertifikadan önce "Mini Akademi" (4 kısa modül) yapılsın mı? (0 iş kilitliyor; cevap 1 iş açar) [ÜRÜN KARARI]
+**Şu an ne var:** Mentör sertifika kapısı çalışıyor (sınav, 24 saat bekleme, konuların %80'i eşiği — `backend/src/services/certification.service.ts:27,33,52`); mentör panelinde Öğrenme Yolculuğu → sertifika yolu var (`frontend/src/app/(dashboard)/mentor/page.tsx:193`). Tasarım belgesi ise "Önce Eğit, Sonra Kalibre Et" ilkesiyle 4 kısa, puansız modül (Yönlendir · Dinle · Güvenli alan · Sınırlar) öngörüyor ve başlığı ✅ diyor (`docs/kararlar/konu/03-psikometri-ve-algoritma.md:47-50`). Kodda ve ön yüzde "Mini Akademi" yok (backend+frontend grep "akademi|academy" 0 — GÖREV 2.2, `docs/raporlar/kod-denetimi/eski-onay-dogrulama-2026-09-28.md`). "Baraj 65" de T4 kararıyla "%80 konu" oldu. İçerik denetimi bunu numarasız bıraktı (`docs/raporlar/kesif/icerik-tam-okuma-2026-09-23.md:496`).
+**Sorun ne:** Belge "var" diyor, ürün yok. Yeni mentör sertifika sınavına kısa bir hazırlık modülü görmeden giriyor; Öğrenme Yolculuğu bu işi karşılıyor mu, kimse karar yazmamış.
+**Neden sana soruyorum:** Kullanıcıya yeni içerik/özellik eklenip eklenmeyeceği ve mentör deneyiminin sırası ürün kararı; modül metinleri de kurumlara/kullanıcılara görünen içerik.
+**Seçenekler:**
+- **A) Öğrenme Yolculuğu yeterli — Mini Akademi yapılmaz; belge buna göre düzeltilir.** · Kullanıcı ne görür: değişiklik yok · Kazanç: iş yok, tek yol · Kaybedersin: "önce eğit" ilkesinin kısa/puansız ayağı olmaz; sınava hazırlıksız girme hissi sürer · Süre: S (belge) · Geri alınır: evet · Migration: yok
+- **B) Öğrenme Yolculuğu'nun ilk aşamasına 4 kısa modül eklenir (içerik PO onaylı).** · Kullanıcı ne görür: mentör panelinde sertifikadan önce 4 kısa okuma/etkinlik · Kazanç: tasarım ilkesi gerçekleşir, mevcut altyapı kullanılır · Kaybedersin: içerik yazımı + onay emeği; aşama içeriği canlı veriye yazılır (seed/içerik güncellemesi → 🔵 yedek ve EVET) · Süre: M · Geri alınır: evet · Migration: yok (içerik yazımı canlı veri)
+- **C) Ayrı "Mini Akademi" ekranı (puansız, 6 dk, sınavdan önce zorunlu).** · Kullanıcı ne görür: sertifika sayfasından önce ayrı bir akademi adımı · Kazanç: ilke tam uygulanır, ölçülebilir tamamlama · Kaybedersin: yeni ekran + ilerleme kaydı (büyük ihtimalle yeni alan → migration), mentöre ek adım (terk riski) · Süre: L · Geri alınır: kısmen · Migration: var
+**Karşılaştırma:** İlk mentörlerin hızla sertifika almasını istiyorsan A; ilkeyi mevcut yapıyla ucuza uygulamak istiyorsan B; mentör kalitesi ana farklılaşma olacaksa C.
+**Benim önerim:** A şimdilik (belge düzeltilir), gerçek mentör geri bildirimi gelince B — bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Belge "var" demeye devam eder (bugün 🟨 notlu); başka iş kilitlenmez. İlgili: AJ-101.
+**CEVAP:**
+```
 
