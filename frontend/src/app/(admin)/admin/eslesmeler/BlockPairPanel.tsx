@@ -27,6 +27,8 @@ import { UI_TEXT } from '@/lib/uiText';
 
 // Arama kutusu her tuşta istek atmasın diye kısa bekleme (ms).
 const SEARCH_DEBOUNCE_MS = 300;
+/** Sunucu şemasıyla aynı üst sınır (backend AdminUserListSchema `search` .max(100)) — aşan metin 400 alırdı. */
+const SEARCH_MAX_LENGTH = 100;
 
 /** Yazmayı bitirdikten SEARCH_DEBOUNCE_MS sonra kırpılmış arama metnini döner. */
 function useDebouncedSearch(value: string): string {
@@ -207,6 +209,7 @@ export function BlockPairPanel() {
               </label>
               <input
                 type="search"
+                maxLength={SEARCH_MAX_LENGTH}
                 aria-label="Mentör ara"
                 placeholder="Ada göre ara…"
                 className="mt-1 w-full rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
@@ -241,6 +244,7 @@ export function BlockPairPanel() {
               </label>
               <input
                 type="search"
+                maxLength={SEARCH_MAX_LENGTH}
                 aria-label="Menti ara"
                 placeholder="Ada göre ara…"
                 className="mt-1 w-full rounded-lg border border-border bg-background px-2 py-1.5 text-sm"
