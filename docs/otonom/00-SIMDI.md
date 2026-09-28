@@ -3,7 +3,7 @@
 
 **Son güncelleme:** 2026-09-28 ~19:05 UTC · çatı main HEAD (bu commit) · backend main HEAD `b7f8df1`
 
-**Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (özet + REPODA BAK: 02-ILERLEME başı); normal kuyruğa devam.
+**Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (özet + REPODA BAK: 02-ILERLEME başı); normal kuyruk: Ş1 AJ-103 (paylaşım kapısı sırası, 🟢+7b) · Ş2 AJ-104 (kayıt özet sırası, 🟢+7b) — uygulayıcı alt-ajanlar izole worktree'de.
 
 **Son merge'ler:** backend #255 AJ-96 · çatı #456 pointer → b7f8df1 · #455 İŞ 2 bekçi · #457 İŞ 3 KARAR-101 — canlı ok:true · db:up · site 200.
 
