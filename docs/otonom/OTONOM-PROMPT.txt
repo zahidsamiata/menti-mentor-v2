@@ -41,12 +41,18 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
        bitmis ama Durum guncellenmemis olabilir.
 
 0.4 OKU  (yalniz gerekeni — butun dosyayi degil)
-    · docs/otonom/01-KARARLAR.md  → hangi CEVAP dolu
-    · docs/otonom/00-KUYRUK.md    → is listesi, kapilar, durum
-    · docs/otonom/02-ILERLEME.md  → son kayitlar
+    · docs/otonom/01-KARARLAR.md  → indeks; yalniz ✍️ (CEVAP yazilmis, islenmemis) satirin kart dosyasini
+      ac (docs/otonom/kararlar/KARAR-NNN.md). Dolu CEVAP taramasi (PO indeksi isaretlemeden de yazabilir):
+      `grep -l '^\*\*CEVAP[^*]*:\*\* *[^ ]' docs/otonom/kararlar/KARAR-*.md` → indekste ✅ olmayan = ✍️
+    · docs/otonom/00-KUYRUK.md    → calisilabilir isler + § 🔴 KILIT HARITASI (karar bekleyenlerin
+      isaretcileri), kapilar, durum
+    · docs/otonom/02-ILERLEME.md  → son kayitlar (yalniz bu hafta; onceki haftalar HAFTA DIZINI'nde)
     · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler (bunlara dokunma)
-    · docs/otonom/00-SIMDI.md → anlik durum (Bolum 14 K0.1). (PO 2026-09-26: docs/kararlar/09-DURUM.md
-      ve 00-KARAR-TAKIP.md 2026-09-20'den beri guncellenmiyor — rutin turda OKUNMAZ, YAZILMAZ.)
+    · docs/otonom/00-SIMDI.md → anlik durum (Bolum 14 K0.1). docs/kararlar/09-DURUM.md ve 00-KARAR-TAKIP.md
+      2026-09-27'de senkronlandi; rutin turda OKUNMAZ; kural (h) geregi kapanis isaretleri yazilir (5c-h).
+    · docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md ve kart dosyalari (docs/otonom/kararlar/KARAR-*.md) rutin
+      turda BASTAN SONA OKUNMAZ; kilitli bir isin ya da kartin ayrintisi gerektiginde 00-KUYRUK § 🔴 KILIT
+      HARITASI isaretcisi (ya da 01-KARARLAR indeks satiri) ile yalniz o bolum / o kart acilir.
     · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
     · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
     · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
@@ -208,27 +214,31 @@ K-C AJAN-EKLEDI: Ajan, kodda dosya:satir ile DOGRULADIGI hata/eksik icin kuyruga
     Dogrulanamayan bulgu satir OLMAZ. Silme → silme protokolu. Ayrinti: 00-KUYRUK § AJAN-EKLEDI SATIRLAR.
 
 5c — AKTIF/ARSIV AYRIMI (kalici · PO K-A 2026-09-26 · Bolum 5 ve 13'e bagli)
-Ilke: ayrim TEMAYA gore degil DURUMA gore (aktif ↔ arsiv). Kuyruk tek dosya kalir, bolunmez.
+Ilke: ayrim TEMAYA gore degil DURUMA gore (aktif ↔ arsiv). Kuyruk TEMAYA gore bolunmez; yalniz DURUMA
+gore ayrilir: 🔴 karar bekleyenler (n), BITTI (a), katlanmis (b).
 Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARISIZ.
 (a) Is BITTI → satir AYNI commit'te (kapanis commit'i) `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md`'ye
     (ay degisince yeni ay dosyasi), asama basligi altina. BITTI satiri kuyrukta birakmak YASAK.
     Asama basligindaki "Bu asamada N is BITTI → arsiv" notu ayni commit'te guncellenir.
     Durumu belirsiz satir ("kismen", "onay bekliyor") tasinmaz; Not'ta sebebi yazilir.
 (b) Satir katlaninca (Durum "→ X") ayni commit'te `docs/otonom/arsiv/00-KUYRUK-katlanmis.md`'ye.
-(c) KARAR cevabi kuyruga ISLENINCE (kartta "✅ ISLENDI" notu) kart ayni commit'te
-    `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md`'ye; indeks satirina "📦 tam metin" atfi.
+(c) KARAR cevabi kuyruga ISLENINCE (kartta "✅ ISLENDI" notu) kart dosyasi ayni commit'te
+    `docs/otonom/kararlar/KARAR-NNN.md` → `docs/otonom/arsiv/kararlar/KARAR-NNN.md` (git mv, metin AYNEN);
+    01-KARARLAR indeks satiri ✅ ve baglantisi arsiv yoluna. (2026-09-28 oncesi cevaplananlar tek dosyada:
+    `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md`.)
     Cevapsiz karta yeni bilgi "EK BILGI" katmani olarak EKLENMEZ: "Su an ne var" guncellenir,
     eski hali `docs/otonom/arsiv/01-KARARLAR-kart-gecmisi.md`'ye (kart no + tarih). Secenekler,
     oneri ve CEVAP alani DEGISMEZ.
 (d) Her ISO haftasinin ilk turunda 02-ILERLEME'nin onceki haftasi
     `docs/otonom/arsiv/02-ILERLEME-<YYYY>-W<hh>.md`'ye AYNEN; aktif dosyanin basindaki
-    "Onceki haftalar" atfi guncellenir.
+    HAFTA DIZINI'ne o hafta icin tek satir (dosya · ana tema · neden o isler).
 (e) Kural dosyasi (CLAUDE.md · OTONOM-PROMPT.txt) degisince eski metin
     `docs/otonom/arsiv/kural-gecmisi-CLAUDE.md` / `kural-gecmisi-OTONOM-PROMPT.md`'ye (bolum + tarih + AYNEN);
     aktif dosyada `~~[ESKI]~~` katmani BIRAKILMAZ. 03-PO-ELLE-ISLER ve 00-BELGE-HARITASI icin de ayni:
     tamamlanan/eski → `docs/otonom/arsiv/03-PO-ELLE-ISLER-tamamlanan.md` · `00-BELGE-HARITASI-ayrinti.md`.
 (f) Bir kimlik (is no, KARAR no) aktif dosyada yoksa `docs/otonom/arsiv/` altinda grep ile aranir;
-    "yok" demeden IKI yer de aranir (0.4'teki "arsiv/ OKUMA" kuralinin istisnasi).
+    "yok" demeden IKI yer de aranir (0.4'teki "arsiv/ OKUMA" kuralinin istisnasi). Aktif yerler:
+    is no → 00-KUYRUK + 00-KUYRUK-KARAR-BEKLEYEN · KARAR no → docs/otonom/kararlar/.
 (g) AJ- satirlari da (a)-(c)'ye tabidir.
 (h) Is BITTI olunca, kuyruk satirinin atif yaptigi KAYNAK (00-KARAR-TAKIP maddesi · G-kart · konu belgesi ·
     rapor kalemi) AYNI commit'te "✅ yapildi — <is id> · PR #<no> · <tarih>" ile isaretlenir. Durum hucresi
@@ -239,8 +249,18 @@ Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARIS
     dogrulamasinda 209 isin kaynaklari "acik" kalmisti — borc birikmesin diye.)
     Is kaynak maddenin yalniz BIR PARCASINI yapiyorsa, KALAN parca AYNI commit'te bir SAHIBE baglanir
     (AJ satiri · kuyruk isi · KARAR karti · 03-PO maddesi); sahipsiz kalan birakilmaz (PO 2026-09-27).
+(n) Kapisi 🔴 olan YA DA Durumu ATLANDI(karar) olan kuyruk satiri `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'de
+    durur (ilk KARAR'inin grubunda, AYNEN); 00-KUYRUK § 🔴 KILIT HARITASI'nda her KARAR icin tek isaretci
+    (bekleyen is sayisina gore sirali). Kismen yapilip KALAN AYAGI bir KARAR'i bekleyen (ya da 🔵 PR-ACIK olup
+    EVET/HAYIR kartini bekleyen) satir AKTIF kalir: isaretcide "aktif kuyrukta ayrica bekleyen: <is> (<ne>)"
+    olarak listelenir ve Not'unda "kilit: kalan ayak KARAR-N bekliyor (...)" yazar. 01-KARARLAR indeksindeki
+    "kilitledigi isler" ayni kumeyi tasir (kart govdesi degismez; kart sayisi eskiyse indekste not).
+    CEVAP gelince bagli satirlar AYNI commit'te 00-KUYRUK'a (grubun "Geri donus yeri" bolumune) doner,
+    kapi cevaba gore guncellenir, isaretci guncellenir/kalkar. Yeni 🔴 satir dogrudan KARAR-BEKLEYEN'e +
+    isaretci. (GOREV 2.4, 2026-09-28)
 Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
-01-KARARLAR'da "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta kod disi `~~[ESKI` blogu.
+01-KARARLAR'da ya da `docs/otonom/kararlar/KARAR-*.md`'de "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta
+kod disi `~~[ESKI` blogu. UYARI (n): 00-KUYRUK'ta kapisi 🔴 satir (→ KARAR-BEKLEYEN).
 UYARI (kirmizi degil): boyut esikleri (00-KUYRUK/01-KARARLAR/02-ILERLEME > 150 KB · CLAUDE.md /
 OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB) · kural (h): arsivdeki BITTI
 satiri "madde N" atfi tasiyor ve 00-KARAR-TAKIP'te madde N satirinda ✅/🟨 yok → "BITTI isin kaynagi acik"
@@ -299,8 +319,9 @@ Bir kutu bile bossa → merge ETME, PR birak, sebebini yaz, sonrakine gec.
    inceleme "SONUÇ: ONAY" ve (c) negatif test şartları KENDİLİĞİNDEN eklenir; ayrı renk yok.
    Merge sonrası canlı kontrol kuralı (7b sonu) aynen geçerli.
 🔵 AJAN HAZIRLAR, PO'NUN TEK "EVET"İYLE CANLIYA ÇIKAR. Migration · seed (her türü) · canlı veriye
-   yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → 01-KARARLAR.md'ye sade Türkçe
-   EVET/HAYIR kartı (kullanıcı ne görür · ne değişir · geri alınır mı · yedeği alınacak tablo)
+   yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → sade Türkçe EVET/HAYIR kartı
+   (`docs/otonom/kararlar/KARAR-NNN.md` + 01-KARARLAR indeks satırı; kullanıcı ne görür · ne değişir ·
+   geri alınır mı · yedeği alınacak tablo)
    → Durum PR-ACIK. "EVET" gelince: tarihli yedek alınır → merge → canlı kontrol.
    Yedek DB erişimi ister; erişim yoksa (VPS) merge ETME, 00-SIMDI'ye
    "EVET var, yedek için tek seferlik DB erişimi gerekiyor: <PR>" yaz.
@@ -372,8 +393,10 @@ verinin anlamini degistiren migration · yetki kimde · canli veriye geri donulm
 dokunus · seed · kurumlara gorunen metin.
 Kararsizsan tek soru: "bunu geri almak kolay mi?" Kolaysa kendin yap, zorsa kart ac.
 
-Kart: 01-KARARLAR.md'nin SONUNA ekle (mevcut en yuksek numaradan devam, numarayi
-DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir ekle.
+Kart: YENI DOSYA `docs/otonom/kararlar/KARAR-NNN.md` (3 hane; mevcut en yuksek numaradan devam — numarayi
+kararlar/ · arsiv/kararlar/ · arsiv/01-KARARLAR-cevaplanmis.md ucunde DOGRULA) + 01-KARARLAR.md indeksine
+TEK satir (no · konu · kilitledigi isler · ⬜ · oneri · baglanti); isi ATLA, DURMA, sonrakine gec.
+Bagli kuyruk satiri 🔴 olursa 5c (n).
 
   ### KARAR-N · <baslik> (n isi acar)  [URUN KARARI]
   **Su an ne var:** kullanici gozunden, kanit dosya:satir
@@ -459,8 +482,8 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
 13.2 Belge senkronu — TEK PR, EN SON:
      Bir is merge edilmeden belgeye "CANLIDA" YAZILMAZ.
      Kontrol: `gh pr list --state open --author @me` bu turun islerinden bos olmali.
-     · 09-DURUM.md / 00-KARAR-TAKIP.md: YAZILMAZ (PO 2026-09-26 — 2026-09-20'den beri donuk;
-       genel belge taramasina kadar). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
+     · 09-DURUM.md / 00-KARAR-TAKIP.md: 2026-09-27'de senkronlandi; rutin turda okunmaz; yalniz kural (h)
+       geregi kapanis isaretleri yazilir (5c-h). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
      · docs/devir/ oturum gunlugu: bir kayit
 
 13.3 02-ILERLEME.md'nin EN BASINA tur ozeti:
@@ -473,7 +496,8 @@ DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir
      BACKEND: pointer eski → yeni + esitlik teyidi
      STASH: `git stash list` bossa "yok", doluysa icerigi
 
-PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-KARARLAR.
+PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME; cevap icin girisi 01-KARARLAR indeksi (CEVAP kart
+dosyasina yazilir).
 
 ═══════════════════════════════════════════════════════════════
 14 — UZUN CALISMA KIPI (PO 2026-09-26)

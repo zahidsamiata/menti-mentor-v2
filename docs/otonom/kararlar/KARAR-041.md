@@ -1,0 +1,16 @@
+### KARAR-41 · Mentörün bir kontenjanı olsun mu? (1 işi açar — P-15)  [ÜRÜN KARARI · ŞEMA]
+> ⭐ **Kaynak:** psikometri konseyi (`docs/raporlar/kesif/konsey-psikometri-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** Kapasite/kontenjan kavramı **kodda hiç yok** (kapsam: BE `src/` · `prisma/` · `tests/`; terimler `maxMentees · capacity · maxMenti · kontenjan · kapasite · activeMentiLimit · mentiLimit`, harf duyarsız + iki dilli → ilgili **0 eşleşme**; dönen 4 satır SMTP adresi, seed soru metni ve e-posta testi). Eşleştirmenin hiçbir elemesi aktif menti sayısına bakmıyor (`matching.ts:267,270,274,278,283`).
+**Sorun ne:** 20 aktif mentisi olan mentör ile hiç mentisi olmayan mentör **aynı havuzda, aynı skorla** yarışıyor. Sektörü uyan popüler bir mentör herkese önerilmeye devam ediyor; yeni katılan mentöre hiç talep gitmiyor. Mentör personasının kendi endişesi tam olarak bu: *"sürekli meşgul edilmek istemem — mentörlük ara ara bir iştir"* ve *"herkesle eşleşmek istemem, seçicilik korunmalı"* (`persona/mentor-persona-...:60-62`).
+**Neden sana soruyorum:** Kontenjan koymak *"kim kiminle eşleşebilir"i* değiştirir — bir mentör, uyumlu olduğu hâlde bir mentiye artık görünmez. Bu bir ürün vaadidir, teknik ayar değil.
+**Seçenekler:**
+**A) Kontenjan yok (bugünkü durum)** · Kullanıcı ne görür: değişiklik yok · Ne kazanırsın: iş yok; menti her zaman en uyumlu mentörü görür · **Ne kaybedersin:** popüler mentör bunalır ve platformu bırakabilir; yeni mentör hiç talep almaz, o da bırakır; P-15 satırı sonsuza kadar kilitli kalır · Süre **yok** · Geri alınır **—(değişiklik yok)** · Migration **yok**
+**B) Mentör kendi kontenjanını belirlesin** (profilinde "aynı anda en fazla N menti") · Kullanıcı ne görür: mentör bir sayı seçer, dolunca havuzdan düşer · Ne kazanırsın: seçicilik mentörün elinde, persona endişesi doğrudan karşılanır · **Ne kaybedersin:** **yeni alan = migration**; menti "dün gördüğüm mentör kayboldu" diyebilir ve sebebini kimse açıklayamaz; kontenjanların dolu olduğu bir kurumda menti **hiç mentör göremeyebilir** · Süre **M** · Geri alınır **evet** (alan kalır, filtre kapatılır) · Migration **VAR**
+**C) Kontenjan yok ama skorda yumuşak yük dengesi** (aktif menti sayısı arttıkça skor bir miktar düşer) · Kullanıcı ne görür: yoğun mentör listede aşağı iner ama **kaybolmaz** · Ne kazanırsın: migration yok (sayım canlı hesaplanır); kimse havuz dışında kalmaz · **Ne kaybedersin:** mentörün kendi tercihi **sorulmamış** olur, persona endişesi tam karşılanmaz; "%uyum" artık saf uyum olmaktan çıkar, sayının anlamı bulanır ve kullanıcıya açıklanamaz · Süre **M** · Geri alınır **evet** · Migration **yok**
+**Karşılaştırma:** Sorun bugün "mentör bunalıyor" mu, yoksa "yeni mentör talep alamıyor" mu — cevaba göre değişir. Birincisiyse B (tercih mentörde), ikincisiyse C (dağıtım düzelir, kimse kaybolmaz). A yalnız mentör sayısı mentiden fazlaysa güvenlidir.
+**Benim önerim:** **C** — çünkü migration gerektirmiyor ve iki sorunun da acı tarafını azaltıyor; B sonradan üzerine eklenebilir. *(Bu senin ürün kararın; mentörlerin "beni koru" demesi senin için asıl mesele ise B doğrudur — önerime güvenme.)*
+**Cevap vermezsen:** **P-15 satırı kilitli kalır** (bugün "kartsız gizli 🔴" durumunda); dağıtım dengesizliği sessizce sürer ve kimse şikâyet etmediği için fark edilmez.
+**CEVAP:**
+
+---
+

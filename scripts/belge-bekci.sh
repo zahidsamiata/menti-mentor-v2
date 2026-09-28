@@ -5,7 +5,7 @@
 # HATA (çıkış 1 — CI kırmızı):
 #   · docs/otonom/00-KUYRUK.md'de Durum=BITTI satırı (kural a) ya da "→" katlanmış satır (kural b)
 #     (istisna: Durum'u "kısmen" / "bekliyor" içeren belirsiz satırlar — taşınmaz, UYARI olarak listelenir)
-#   · docs/otonom/01-KARARLAR.md'de "İŞLENDİ" notlu karar kartı (kural c)
+#   · docs/otonom/01-KARARLAR.md'de ya da docs/otonom/kararlar/KARAR-*.md kart dosyasında "İŞLENDİ" notlu karar kartı (kural c)
 #   · CLAUDE.md / docs/otonom/OTONOM-PROMPT.txt'te kod (`...`) dışında "~~[ESKİ" katmanı (kural e)
 # UYARI (çıkış kodunu değiştirmez): boyut eşikleri (Bölüm 5c) · kural (h): arşivdeki BITTI satırı "madde N"
 #   atfı taşıyor ve docs/kararlar/00-KARAR-TAKIP.md'de madde N satırında ✅ / 🟨 yok → "BITTI işin kaynağı açık"
@@ -15,6 +15,7 @@
 #   · kural (k): docs/ altında indekssiz (giriş noktası olmayan) klasör (YN-12)
 #   · kural (l): CLAUDE.md'nin kendi içine satır numarasıyla atfı (YN-10)
 #   · kural (m): 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri aşan satır sayısı (YN-09)
+#   · kural (n): 00-KUYRUK'ta kapısı 🔴 ya da Durumu ATLANDI(karar) olan satır → 00-KUYRUK-KARAR-BEKLEYEN.md'ye (GÖREV 2.4, 5c-n)
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -30,6 +31,7 @@ def read(rel):
     p = os.path.join(root, rel)
     return open(p, encoding='utf-8').read() if os.path.exists(p) else None
 
+import glob
 STATUS = re.compile(r'^(✅ )?(BITTI|BEKLIYOR|CALISILIYOR|PR-ACIK|BASARISIZ|ATLANDI|IPTAL|→)')
 
 kuyruk = read('docs/otonom/00-KUYRUK.md')
@@ -54,7 +56,12 @@ kararlar = read('docs/otonom/01-KARARLAR.md')
 if kararlar is not None:
     for card in re.split(r'(?m)^(?=### KARAR-)', kararlar)[1:]:
         if re.search(r'İŞLENDİ|\bISLENDI\b', card):
-            errors.append(f'01-KARARLAR.md {card.split(chr(10), 1)[0][:60]} "İŞLENDİ" notlu kart aktif dosyada → arsiv/01-KARARLAR-cevaplanmis.md (5c-c)')
+            errors.append(f'01-KARARLAR.md {card.split(chr(10), 1)[0][:60]} "İŞLENDİ" notlu kart aktif dosyada → arsiv/kararlar/ (5c-c)')
+# GÖREV 2.4 (2026-09-28): kart gövdeleri kart başına dosyada — aktif klasörde İŞLENDİ notlu kart kalmasın.
+for kpath in sorted(glob.glob(os.path.join(root, 'docs/otonom/kararlar/KARAR-*.md'))):
+    card = open(kpath, encoding='utf-8').read()
+    if re.search(r'İŞLENDİ|\bISLENDI\b', card):
+        errors.append(f'{os.path.relpath(kpath, root)} "İŞLENDİ" notlu kart aktif klasörde → docs/otonom/arsiv/kararlar/ (5c-c)')
 
 for rel in ('CLAUDE.md', 'docs/otonom/OTONOM-PROMPT.txt'):
     text = read(rel)
@@ -65,8 +72,18 @@ for rel in ('CLAUDE.md', 'docs/otonom/OTONOM-PROMPT.txt'):
         if re.search(r'~~\[ESK[İI]', outside_code):
             errors.append(f'{rel}:{no} "~~[ESKİ" katmanı aktif kural dosyasında → arsiv/kural-gecmisi-*.md (5c-e)')
 
+# Kural (n) GÖREV 2.4: kapısı 🔴 olan satır 00-KUYRUK-KARAR-BEKLEYEN.md'de durur — yalnız UYARI.
+if kuyruk is not None:
+    for no, line in enumerate(kuyruk.split('\n'), 1):
+        cells = line.split('|')
+        if not line.startswith('| ') or len(cells) < 9 or not STATUS.match(cells[6].strip()):
+            continue
+        if re.sub(r'~~.*?~~', '', cells[4]).strip().startswith('🔴'):
+            warnings.append(f'00-KUYRUK.md:{no} {cells[1].strip()} kapısı 🔴 → docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md + § 🔴 KİLİT HARİTASI işaretçisi (5c-n)')
+        elif cells[6].strip().startswith('ATLANDI'):
+            warnings.append(f'00-KUYRUK.md:{no} {cells[1].strip()} Durum ATLANDI(karar) → docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md + § 🔴 KİLİT HARİTASI işaretçisi (5c-n)')
+
 # Kural (h): BITTI işin kaynağı (00-KARAR-TAKIP maddesi) açık kalmasın — yalnız UYARI.
-import glob
 takip = read('docs/kararlar/00-KARAR-TAKIP.md')
 if takip is not None:
     madde_rows = {}

@@ -220,3 +220,105 @@ OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB).
  (a) Bölüm 6 kutuları tam — "auth/KVKK/matching dosyalarına dokunulmadı" maddesi HARİÇ
      (o dosyalara dokunmak artık rengi değiştirmez, (b) ve (c)'yi zorunlu kılar).
 ```
+
+## GÖREV 2.4 duruma göre bölme — değişen bölümlerin TAM eski hâli · taşındı 2026-09-28
+
+### 0.4 OKU (okuma listesi — yeni dosya düzeni + bayat 09-DURUM notu)
+
+```text
+    · docs/otonom/01-KARARLAR.md  → hangi CEVAP dolu
+    · docs/otonom/00-KUYRUK.md    → is listesi, kapilar, durum
+    · docs/otonom/02-ILERLEME.md  → son kayitlar
+    · docs/otonom/03-PO-ELLE-ISLER.md → ajanin YAPAMAYACAGI isler (bunlara dokunma)
+    · docs/otonom/00-SIMDI.md → anlik durum (Bolum 14 K0.1). (PO 2026-09-26: docs/kararlar/09-DURUM.md
+      ve 00-KARAR-TAKIP.md 2026-09-20'den beri guncellenmiyor — rutin turda OKUNMAZ, YAZILMAZ.)
+
+```
+
+### 5c Ilke (kuyruk yalniz DURUMA gore bolunur)
+
+```text
+Ilke: ayrim TEMAYA gore degil DURUMA gore (aktif ↔ arsiv). Kuyruk tek dosya kalir, bolunmez.
+
+```
+
+### 5c (c) cevaplanmis kart arsiv yolu
+
+```text
+(c) KARAR cevabi kuyruga ISLENINCE (kartta "✅ ISLENDI" notu) kart ayni commit'te
+    `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md`'ye; indeks satirina "📦 tam metin" atfi.
+
+```
+
+### 5c (d) haftalik dondurme — HAFTA DIZINI
+
+```text
+    `docs/otonom/arsiv/02-ILERLEME-<YYYY>-W<hh>.md`'ye AYNEN; aktif dosyanin basindaki
+    "Onceki haftalar" atfi guncellenir.
+
+```
+
+### 5c (h) sonrasina (n) — 🔴 satirlar KARAR-BEKLEYEN'de
+
+```text
+    (AJ satiri · kuyruk isi · KARAR karti · 03-PO maddesi); sahipsiz kalan birakilmaz (PO 2026-09-27).
+
+```
+
+### 5c Otomatik bekci — HATA/UYARI listesi
+
+```text
+Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
+01-KARARLAR'da "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta kod disi `~~[ESKI` blogu.
+
+```
+
+### 7 KAPI POLITIKASI 🔵 — EVET/HAYIR karti nereye
+
+```text
+   yazma · karantina. Akış: kod → PR → 7b incelemesi ONAY → 01-KARARLAR.md'ye sade Türkçe
+   EVET/HAYIR kartı (kullanıcı ne görür · ne değişir · geri alınır mı · yedeği alınacak tablo)
+
+```
+
+### 9 KARAR NOKTASI — kart nereye acilir
+
+```text
+Kart: 01-KARARLAR.md'nin SONUNA ekle (mevcut en yuksek numaradan devam, numarayi
+DOGRULA), isi ATLA, DURMA, sonrakine gec. Dosya basindaki indeks tablosuna satir ekle.
+
+```
+
+### 13.3 sonu — PO nereyi cevaplar
+
+```text
+PO'nun turdan sonra okuyacagi TEK dosya 02-ILERLEME, cevaplayacagi TEK dosya 01-KARARLAR.
+
+```
+
+### 5c (f) aktif yerler (GÖREV 2.4, 2026-09-28)
+
+```text
+(f) Bir kimlik (is no, KARAR no) aktif dosyada yoksa `docs/otonom/arsiv/` altinda grep ile aranir;
+    "yok" demeden IKI yer de aranir (0.4'teki "arsiv/ OKUMA" kuralinin istisnasi).
+```
+
+## GÖREV 2.4 düzeltme — 5c (n) genişletildi (ATLANDI(karar) + aktif bekleyenler) · 13.2 09-DURUM notu 0.4 ile tutarlı · taşındı 2026-09-28
+
+```text
+(n) Kapisi 🔴 olan kuyruk satiri `docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md`'de durur (ilk KARAR'inin
+    grubunda, AYNEN); 00-KUYRUK § 🔴 KILIT HARITASI'nda her KARAR icin tek isaretci (is sayisina gore sirali).
+```
+
+```text
+     · 09-DURUM.md / 00-KARAR-TAKIP.md: YAZILMAZ (PO 2026-09-26 — 2026-09-20'den beri donuk;
+       genel belge taramasina kadar). Tur sonu kaydi: 00-SIMDI.md + 02-ILERLEME.md.
+```
+
+## GÖREV 2.4 3. düzeltme — 0.4 "rutin turda okunmaz" maddesi netleştirildi · taşındı 2026-09-28
+
+```text
+    · ⛔ Rutin turda OKUNMAZ: docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md ve kart dosyalari
+      (docs/otonom/kararlar/KARAR-*.md) — yalniz bir KARAR cevaplaninca ya da bir 🔴 isin ayrintisi
+      gerekince ilgili § / kart acilir.
+```
