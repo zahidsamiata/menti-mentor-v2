@@ -21,6 +21,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import type { PendingTagStatus } from '@/types/admin';
 import { cn } from '@/lib/utils';
 import { tagStatusLabel } from '@/lib/enumLabels';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 const STATUS_TABS: { label: string; value: PendingTagStatus }[] = [
   { label: 'Bekleyen',       value: 'PENDING' },
@@ -50,9 +51,7 @@ export default function TagsPage() {
       {/* Başlık */}
       <div>
         <h1 className="text-2xl font-bold">Etiket Yönetimi</h1>
-        <p className="text-sm text-muted-foreground">
-          Kullanıcıların önerdiği özel etiketleri inceleyin: onaylayın, birleştirin veya reddedin.
-        </p>
+        <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.tags}</p>
       </div>
 
       {/* Durum sekmeleri — AJ-85: adlandırılmış düğme grubu, seçili sekme aria-pressed. */}

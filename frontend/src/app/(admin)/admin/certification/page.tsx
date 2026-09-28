@@ -11,6 +11,7 @@ import type { CertTopicsResponse } from '@/types/certification';
 import { topicLabel as label } from '@/lib/certificationTopics';
 import { apiErrorMessage } from '@/lib/apiErrorMessage';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 export default function AdminCertificationPage() {
   const { user } = useAuth();
@@ -56,11 +57,7 @@ export default function AdminCertificationPage() {
     <div className="max-w-2xl mx-auto space-y-6 py-6">
       <div>
         <h1 className="text-2xl font-bold">Sertifika Konuları</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Mentörlerinizin sertifika akışında hangi konuların görüneceğini seçin. Senaryolar ve
-          puanlama uzmanlarca hazırlanır — <strong>eklenemez veya düzenlenemez</strong>, yalnızca
-          açılıp kapatılır. Kritik (red-line) konular her zaman zorunludur.
-        </p>
+        <p className="text-sm text-muted-foreground mt-1">{ADMIN_PAGE_DESCRIPTIONS.certification}</p>
       </div>
 
       {error && <AlertMessage type="error" message={error} />}

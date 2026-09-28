@@ -11,6 +11,7 @@ import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { discDimensionLabel } from '@/types/discTest';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 const DISC_COLORS: Record<string, string> = {
   D: 'text-red-600 dark:text-red-400', I: 'text-yellow-700 dark:text-yellow-400', S: 'text-green-700 dark:text-green-400', C: 'text-blue-600 dark:text-blue-400', GENERAL: 'text-gray-400',
@@ -140,9 +141,7 @@ export default function QuestionsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Soru Yönetimi</h1>
-          <p className="text-sm text-muted-foreground">
-            DISC soruları sistem tarafından yönetilir, değiştirilemez. Kuruma özel sorular ekleyip yönetebilirsiniz.
-          </p>
+          <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.questions}</p>
         </div>
         <Button size="sm" onClick={() => setShowAddForm((v) => !v)}>
           {showAddForm ? UI_TEXT.actions.cancel : '+ Yeni Soru'}

@@ -18,6 +18,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { AdminPoolCard } from '@/components/organisms/AdminPoolCard';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 export default function MentiHavuzuPage() {
   const api = useApiClient();
@@ -35,9 +36,7 @@ export default function MentiHavuzuPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Menti Havuzu</h1>
-          <p className="text-sm text-muted-foreground">
-            Sisteme kayıtlı tüm mentiler ve onay durumları.
-          </p>
+          <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS['menti-havuzu']}</p>
         </div>
         {!isLoading && data && (
           <Badge variant="secondary" className="text-sm px-3 py-1">

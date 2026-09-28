@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { apiClient } from '@/lib/api/client';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 type Role   = 'MENTI' | 'MENTOR';
 type Format = 'EMAIL' | 'WHATSAPP';
@@ -189,9 +190,7 @@ export default function InvitePage() {
   return (
     <div className="max-w-3xl mx-auto py-8 px-4 space-y-6">
       <h1 className="text-2xl font-bold">Davet Metni Oluştur</h1>
-      <p className="text-sm text-muted-foreground">
-        Aşağıdaki metni düzenleyip kopyalayın, kendi e-posta veya WhatsApp mesajınızdan gönderin.
-      </p>
+      <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.invite}</p>
 
       {/* Rol + Format seçimi */}
       <div className="flex flex-wrap gap-3">

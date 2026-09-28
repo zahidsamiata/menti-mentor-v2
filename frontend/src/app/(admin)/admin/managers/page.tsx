@@ -7,6 +7,7 @@ import { adminApi } from '@/lib/api/admin';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Button } from '@/components/ui/button';
 import { UI_TEXT } from '@/lib/uiText';
+import { ADMIN_PAGE_DESCRIPTIONS } from '@/lib/adminPageDescriptions';
 
 export default function ManagersPage() {
   const api       = useApiClient();
@@ -60,9 +61,7 @@ export default function ManagersPage() {
       <div className="flex items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Yöneticiler</h1>
-          <p className="text-sm text-muted-foreground">
-            Kurumunuzdaki tüm yöneticiler. Onaylı kullanıcıları buradan yönetici atayabilir veya çıkarabilirsiniz (en fazla 3 yönetici).
-          </p>
+          <p className="text-sm text-muted-foreground">{ADMIN_PAGE_DESCRIPTIONS.managers}</p>
         </div>
         <Button size="sm" onClick={() => setShowAssign((v) => !v)} disabled={atAdminLimit && !showAssign}>
           {showAssign ? UI_TEXT.actions.close : '+ Yönetici Ata'}
