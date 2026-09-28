@@ -280,3 +280,17 @@ async function checkOrientationLock(mentiId: string, res: Response): Promise<boo
 - **Neden değişti:** `findUnique` kurum filtresi taşımıyor (otomatik kurum filtresinin bilinçli dışında) ve 404 kontrollerinden önce koşuyordu → başka kurumdaki bir menti kimliğiyle istekte kilitliyse 403 `ORYANTASYON_KILIDI`, değilse 404 dönüyor, başka kurumdaki kaydın kilit durumu yanıttan çıkarılabiliyordu. Artık kilit, kurum-kapsamlı `findFirst` ile bulunan menti kaydından (`needsOrientation` seçime eklendi) okunuyor ve 404 kontrollerinden SONRA değerlendiriliyor (`rejectIfOrientationLocked`). Kendi kurumunda kilitli menti yine 403 `ORYANTASYON_KILIDI` alır.
 - **Son commit (değişiklikten önce, backend):** `e1bce3bdf4bccdf944396586a5cd591a0f9d40e2` (dosyaya son dokunan) · backend main `b79547dd51c24bae7a3a96348f475d8268488124`
 - **Geri alma:** backend'de `git revert <AJ-74 backend commit>` (şema/migration yok).
+
+## AJ-75 · Kurum-kapsamlı modellerde findUnique lint kuralı
+
+### 1) `backend/src/db.ts` — TENANT_SCOPED kümesi dışa açıldı
+- **Eski hâl (AYNEN):**
+```ts
+// Bu modeller tenantId sütunu taşır; okuma sorgularına otomatik filtre enjekte edilir.
+const TENANT_SCOPED = new Set([
+```
+- **Neden yazılmıştı:** kurum-kapsamlı model listesi yalnız bu dosyadaki kurum filtresi (RLS eklentisi) için kullanılıyordu; dışarıya açmaya gerek yoktu.
+- **Neden değişti:** `export const TENANT_SCOPED` oldu + iki satır açıklama eklendi. `eslint.config.mjs` (findUnique bekçisi) aynı listeyi tutuyor; `tests/eslint-tenant-findunique.unit.test.ts` iki listenin eşit kaldığını ölçmek için bu kümeyi içe aktarıyor. Davranış değişmedi (yalnız erişilebilirlik).
+- **Not:** `backend/eslint.config.mjs`'te mevcut satır kaldırılmadı/değişmedi; yalnız ekleme (liste + `src/**/*.ts` için `no-restricted-syntax` bloğu). 18 kaynak dosyaya yalnız `// eslint-disable-next-line` yorum satırı eklendi.
+- **Son commit (değişiklikten önce, backend):** `900a472daaa5607fab846a3fed2227a48f36b97d` (dosyaya son dokunan) · backend main `f92e528245a902b842842b57b6b2eb7bc9fac984`
+- **Geri alma:** backend'de `git revert <AJ-75 backend commit>` (şema/migration yok).
