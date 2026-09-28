@@ -129,7 +129,7 @@ export default function TenantSwitcher({
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <span>{ROLE_LABEL[membership.role]}</span>
                       {membership.isCertified && (
-                        <span className="inline-flex items-center gap-0.5 rounded bg-emerald-50 px-1 text-[10px] font-medium text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+                        <span className="inline-flex items-center gap-0.5 rounded bg-emerald-50 px-1 text-[10px] font-medium text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
                           <BadgeCheck className="h-3 w-3" /> Sertifikalı
                         </span>
                       )}

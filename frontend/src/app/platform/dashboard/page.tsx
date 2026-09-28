@@ -33,6 +33,7 @@ import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { logLevelLabel, logBadgeLabel, reportReasonLabel, reportStatusLabel } from '@/lib/enumLabels';
 import { useModalDialog } from '@/hooks/useModalDialog';
 import { UI_TEXT } from '@/lib/uiText';
+import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 type Tab = 'overview' | 'pending' | 'tenants' | 'reports' | 'abuse' | 'logs';
 
@@ -241,11 +242,13 @@ export default function PlatformDashboard() {
         </div>
       </header>
 
-      {/* Tabs */}
-      <nav className="border-b border-border px-6 flex gap-1">
+      {/* Tabs — AJ-85: bölüm düğmeleri adlandırılmış gezinme alanında, seçili bölüm aria-pressed. */}
+      <nav className="border-b border-border px-6 flex gap-1" aria-label="Platform paneli bölümleri">
         {tabs.map((t) => (
           <button
             key={t.key}
+            type="button"
+            aria-pressed={tab === t.key}
             onClick={() => setTab(t.key)}
             className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 ${
               tab === t.key
@@ -467,7 +470,7 @@ export default function PlatformDashboard() {
                       <span className={`text-xs px-2 py-0.5 rounded-full ${
                         !t.isActive            ? 'bg-red-900/60 text-destructive' :
                         t.verificationStatus === 'PENDING_REVIEW' ? 'bg-yellow-900/60 text-amber-600 dark:text-amber-400' :
-                        t.verificationStatus === 'APPROVED' || t.verificationStatus === 'AUTO_APPROVED' ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' :
+                        t.verificationStatus === 'APPROVED' || t.verificationStatus === 'AUTO_APPROVED' ? SUCCESS_PILL_CLASS :
                         'bg-muted text-muted-foreground'
                       }`}>
                         {!t.isActive ? 'Dondurulmuş' : t.verificationStatus}
@@ -483,7 +486,7 @@ export default function PlatformDashboard() {
                         </button>
                       ) : (
                         <button onClick={(e) => { e.stopPropagation(); void handleActivate(t.id); }}
-                          className="text-xs text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300">
+                          className="text-xs text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
                           Aktifleştir
                         </button>
                       )}
@@ -669,7 +672,7 @@ function HealthPill({ label, ok, okText, badText }: { label: string; ok: boolean
   return (
     <div className="rounded-xl border border-border bg-card p-3">
       <p className="text-xs text-muted-foreground">{label}</p>
-      <p className={`text-sm font-semibold mt-1 flex items-center gap-1.5 ${ok ? 'text-emerald-600 dark:text-emerald-400' : 'text-destructive'}`}>
+      <p className={`text-sm font-semibold mt-1 flex items-center gap-1.5 ${ok ? 'text-emerald-700 dark:text-emerald-400' : 'text-destructive'}`}>
         <span className={`inline-block h-2 w-2 rounded-full ${ok ? 'bg-emerald-500' : 'bg-red-500'}`} />
         {ok ? okText : badText}
       </p>

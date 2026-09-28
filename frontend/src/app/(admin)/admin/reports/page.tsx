@@ -201,11 +201,13 @@ export default function AdminReportsPage() {
         )}
       </div>
 
-      {/* Durum filtresi */}
-      <div className="flex flex-wrap gap-2">
+      {/* Durum filtresi — AJ-85: adlandırılmış düğme grubu, seçili filtre aria-pressed. */}
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Duruma göre filtrele">
         {STATUS_FILTERS.map((f) => (
           <button
             key={f.key}
+            type="button"
+            aria-pressed={filter === f.key}
             onClick={() => changeFilter(f.key)}
             className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               filter === f.key ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/70'

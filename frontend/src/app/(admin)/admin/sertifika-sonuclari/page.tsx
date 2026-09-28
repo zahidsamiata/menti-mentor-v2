@@ -60,11 +60,13 @@ export default function CertResultsPage() {
         </p>
       </div>
 
-      {/* Durum sekmeleri */}
-      <div className="flex flex-wrap gap-1 rounded-lg bg-muted p-1 w-fit">
+      {/* Durum sekmeleri — AJ-85: adlandırılmış düğme grubu, seçili sekme aria-pressed. */}
+      <div className="flex flex-wrap gap-1 rounded-lg bg-muted p-1 w-fit" role="group" aria-label="Duruma göre filtrele">
         {STATUS_TABS.map(({ label, value }) => (
           <button
             key={label}
+            type="button"
+            aria-pressed={status === value}
             onClick={() => handleTabChange(value)}
             className={cn(
               'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
