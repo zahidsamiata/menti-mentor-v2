@@ -11,6 +11,7 @@ import {
 } from '@/lib/api/platform';
 import { certStatusBadge } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
+import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 const ROLE_LABEL: Record<TenantMemberRole, string> = {
   ADMIN: 'Admin',
@@ -31,7 +32,7 @@ function roleBadgeClass(role: TenantMemberRole): string {
 
 function activeBadgeClass(isActive: boolean): string {
   return isActive
-    ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400'
+    ? SUCCESS_PILL_CLASS
     : 'bg-red-900/60 text-destructive';
 }
 

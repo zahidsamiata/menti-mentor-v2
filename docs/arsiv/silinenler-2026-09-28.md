@@ -678,3 +678,61 @@ Geri alma: `git revert <AJ-70 merge commit>` ya da aşağıdaki eski hâlleri ge
 - **Son commit (değişiklikten önce):** dosyaya son dokunan `465ae47bc431abbccad2bf1a90f416dca2bb7cd5` · backend main `2efa2630a59f4011f68cc07876e3ccba77a7f576`
 - **Geri alma:** backend'de `git revert <AJ-56 commit>` (şema/migration yok).
 
+## AJ-85 · text-emerald-600 kontrastı + düğme grubu adları (çatı `otonom/AJ-85-kontrast-grup-etiket-20260928`)
+
+Silme YOK — yalnız sınıf/öznitelik değişti. Taban commit: `6fdd83b` (çatı main). Geri alma: `git revert <AJ-85 commit>` ya da aşağıdaki eski satırları aynen geri koy.
+
+- **Neden yazılmıştı:** yeşil "olumlu durum" tonu olarak `text-emerald-600` (koyu tema `emerald-400`) — AJ-07/K-10 koyu tema düzeltmesinin açık tema yarısı. Platform rozetleri `bg-green-900/60` zemini koyu tema için seçilmişti.
+- **Neden değişti:** WCAG 1.4.3 — `emerald-600` beyaz zeminde 3.77:1 (AA 4.5:1 altı); rozetlerde `bg-green-900/60` açık temada beyazla karışınca (#729881) üstündeki yeşil metin 1.17:1. Metin → `text-emerald-700` (5.48:1; `bg-emerald-50` üstünde 5.21:1); rozet → `SUCCESS_PILL_CLASS` (`frontend/src/lib/a11y/statusColors.ts`: açıkta `bg-emerald-100 text-emerald-800` 6.78:1, koyu tema eski çift `dark:` ile aynen). Düğme gruplarına `role="group"` + ad + `aria-pressed` eklendi (erişilebilirlik denetimi bulgu #11).
+- ⏳ `frontend/src/app/platform/tenants/[id]/page.tsx:37,178` DOKUNULMADI (AJ-79 dosya çakışması) — test istisna listesinde.
+
+Eski satırlar (dosya:satır, aynen):
+```
+frontend/src/components/organisms/TenantSwitcher.tsx:132
+                        <span className="inline-flex items-center gap-0.5 rounded bg-emerald-50 px-1 text-[10px] font-medium text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+frontend/src/components/organisms/ProgramHealthSection.tsx:11,67,78-79,181
+import { useState } from 'react';
+        <h2 className="text-lg font-semibold">Program Sağlığı</h2>
+      {/* Tıklanabilir özet sayılar */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+    return <span className="shrink-0 text-xs font-medium text-emerald-600 dark:text-emerald-400">Gönderildi ✓</span>;
+frontend/src/app/platform/dashboard/page.tsx:244-245,470,486,672
+      {/* Tabs */}
+      <nav className="border-b border-border px-6 flex gap-1">
+                        t.verificationStatus === 'APPROVED' || t.verificationStatus === 'AUTO_APPROVED' ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' :
+                          className="text-xs text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300">
+      <p className={`text-sm font-semibold mt-1 flex items-center gap-1.5 ${ok ? 'text-emerald-600 dark:text-emerald-400' : 'text-destructive'}`}>
+frontend/src/app/platform/tenants/[id]/_components/MeetingsTable.tsx:18,71
+      return 'bg-green-900/60 text-emerald-600 dark:text-emerald-400';
+                  m.hasFeedback ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-muted text-muted-foreground'
+frontend/src/app/platform/tenants/[id]/_components/MembersTable.tsx:47,115
+      <div className="flex flex-wrap gap-1">
+                      m.isActive ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-red-900/60 text-destructive'
+frontend/src/app/platform/tenants/[id]/users/[userId]/page.tsx:34
+    ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400'
+frontend/src/components/molecules/SectorTagSuggest.tsx:24
+  success: 'text-emerald-600 dark:text-emerald-400',
+frontend/src/app/(dashboard)/profile/page.tsx:449
+        <p className="text-sm text-emerald-600 dark:text-emerald-400 text-center font-medium" role="status">
+frontend/src/app/onboarding/stk/pending-review/page.tsx:54
+        icon={<CheckCircle2 className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />}
+frontend/src/app/onboarding/stk/_steps/Step1Slug.tsx:70,115
+    if (slugStatus === 'available') return <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />;
+            <p className="text-xs text-emerald-600 dark:text-emerald-400">Bu adres kullanılabilir.</p>
+frontend/src/app/onboarding/stk/_steps/Step5Invite.tsx:27
+      {copied ? <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />}
+frontend/src/app/(admin)/admin/algorithm-tuner/page.tsx:239,245,266
+          <CardTitle className="text-base">Analiz Bildirimi Sıklığı</CardTitle>
+          <div className="grid gap-2 sm:grid-cols-3">
+            {freqSaved && <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ Kaydedildi</span>}
+frontend/src/app/(admin)/admin/reports/page.tsx:204-205
+      {/* Durum filtresi */}
+      <div className="flex flex-wrap gap-2">
+frontend/src/app/(admin)/admin/eslesmeler/page.tsx:72-73 · sertifika-sonuclari/page.tsx:63-64
+      {/* Durum sekmeleri */}
+      <div className="flex flex-wrap gap-1 rounded-lg bg-muted p-1 w-fit">
+frontend/src/app/(admin)/admin/tags/page.tsx:58-59
+      {/* Durum sekmeleri */}
+      <div className="flex gap-1 rounded-lg bg-muted p-1 w-fit">
+```
+(Grup düğmelerine eklenen `type="button"` / `aria-pressed` satırları salt eklemedir; eski hâlde yoklardı.)
