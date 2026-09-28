@@ -306,3 +306,31 @@ Raporda YAPTIĞINI değil KULLANICININ GÖRECEĞİNİ yaz:
   ama pointer **sarkar**). Düzeltme: temiz main'den ayrı `chore(pointer)` PR'ı ile `main` HEAD'e re-bump. Sarkma zararsızdır
   (feature-commit backend main'in atası) ama temiz değildir → tek turda kapat.
 ```
+
+## GÖREV 2.4 duruma göre bölme · taşındı 2026-09-28
+
+Karar kartları kart başına dosyaya (`docs/otonom/kararlar/`) ve 🔴 kuyruk satırları `00-KUYRUK-KARAR-BEKLEYEN.md`'ye ayrılınca değişen CLAUDE.md satırlarının TAM eski hâli. OTONOM-PROMPT'ta AYNEN bulunan tekrar metin taraması: 0 blok (CLAUDE.md Türkçe karakterli, OTONOM-PROMPT eski bölümleri ASCII — kelimesi kelimesine eşleşme yok) → atfa dönen metin yok.
+
+### § Üç dosya — tablo satırı 00-KUYRUK
+
+```text
+| `docs/otonom/00-KUYRUK.md` | Sıralı iş listesi, şerit dağılımı, kapılar | PO ekler · ajan yalnız Durum/Not günceller |
+```
+
+### § Üç dosya — tablo satırı 01-KARARLAR
+
+```text
+| `docs/otonom/01-KARARLAR.md` | Ürün kararı kuyruğu | Ajan SORU ekler · **yalnız PO CEVAP yazar** |
+```
+
+### § Karar kartı biçimi — ilk cümle
+
+```text
+Ürün kararına gelince `01-KARARLAR.md`'nin SONUNA ekle, işi ATLA, DURMA. Şablon:
+```
+
+### § Karar kartı sayısı — madde 3 İNDEKS
+
+```text
+  3. **İNDEKS** — `01-KARARLAR.md`'nin BAŞINDA içindekiler tablosu tutulur.
+```

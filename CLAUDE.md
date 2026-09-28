@@ -12,8 +12,8 @@ PO toplu karar verir, aynı prompt tekrar gönderilir, kaldığı yerden devam e
 ## Üç dosya — çalışma buradan okunur
 | Dosya | Ne işe yarar | Kim yazar |
 |---|---|---|
-| `docs/otonom/00-KUYRUK.md` | Sıralı iş listesi, şerit dağılımı, kapılar | PO ekler · ajan yalnız Durum/Not günceller |
-| `docs/otonom/01-KARARLAR.md` | Ürün kararı kuyruğu | Ajan SORU ekler · **yalnız PO CEVAP yazar** |
+| `docs/otonom/00-KUYRUK.md` | Sıralı iş listesi, şerit dağılımı, kapılar, 🔴 kilit haritası (karar bekleyen satırlar: `00-KUYRUK-KARAR-BEKLEYEN.md`, rutin turda okunmaz) | PO ekler · ajan yalnız Durum/Not günceller |
+| `docs/otonom/01-KARARLAR.md` | Ürün kararı indeksi (kart başına tek satır); kart gövdeleri `docs/otonom/kararlar/KARAR-NNN.md` | Ajan SORU ekler (yeni kart dosyası + indeks satırı) · **yalnız PO CEVAP yazar (kart dosyasına)** |
 | `docs/otonom/02-ILERLEME.md` | Ne yapıldı, ne atlandı, ne bozuldu | Ajan yazar · PO okur |
 
 ⛔ Bu üç dosya **git'te izlenir ve commit edilir.** Lokalde kalmaları kabul edilmez:
@@ -94,7 +94,7 @@ Varsa bulgu "eksik özellik" değil **MÜKERRER KOD**'dur — işi bağlamak de�
 Yanlış olan kod değil, sorulan soruydu.
 
 ## Karar kartı biçimi — PO teknik bilmiyor
-Ürün kararına gelince `01-KARARLAR.md`'nin SONUNA ekle, işi ATLA, DURMA. Şablon:
+Ürün kararına gelince yeni kart dosyası aç (`docs/otonom/kararlar/KARAR-<sonraki no>.md`) + `01-KARARLAR.md` indeksine tek satır ekle, işi ATLA, DURMA. Şablon:
 
 ```
 ### KARAR-N · <başlık>  [ÜRÜN KARARI]
@@ -117,7 +117,7 @@ Yanlış olan kod değil, sorulan soruydu.
 - Karar kartı sayısında **ÜST SINIR YOKTUR.** Gerekli her karar için kart açılır. Ama kartlar şu üç şarta uyar:
   1. **KÜMELE** — aynı ürün sorusunu paylaşan kalemler TEK kartta toplanır.
   2. **SIRALA** — etkiye göre: kaç işi açıyor + kullanıcıya etkisi. Başlığa `(n işi açar)` etiketi konur.
-  3. **İNDEKS** — `01-KARARLAR.md`'nin BAŞINDA içindekiler tablosu tutulur.
+  3. **İNDEKS** — `01-KARARLAR.md` yalnız indekstir (kart başına tek satır; kart gövdesi `docs/otonom/kararlar/`).
 
 ## Paralellik — şerit sistemi
 **Okuma** (keşif/envanter/arkeoloji): sınırsız paralel alt-ajan.
