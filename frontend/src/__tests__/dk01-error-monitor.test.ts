@@ -10,7 +10,9 @@
  */
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import * as SentryBrowser from '@sentry/browser';
 import {
+  DATA_COLLECTION_OFF,
   buildSdkOptions,
   captureError,
   initErrorMonitor,
@@ -65,7 +67,9 @@ describe('initErrorMonitor — anahtar varsa', () => {
     expect(options.sendDefaultPii).toBe(false);
     expect(options.tracesSampleRate).toBeUndefined();
     expect(options.replaysSessionSampleRate).toBeUndefined();
-    expect(options.integrations).toBeUndefined();
+    // Entegrasyon listesi yalnız SÜZÜLÜR (replay/tracing eklenmez).
+    const filter = options.integrations as (d: Array<{ name: string }>) => Array<{ name: string }>;
+    expect(filter([{ name: 'GlobalHandlers' }]).map((i) => i.name)).toEqual(['GlobalHandlers']);
     expect(typeof options.beforeSend).toBe('function');
 
     captureError(new Error('boom'));
@@ -139,5 +143,59 @@ describe('CSP — izleme origin\'i yalnız DSN varken', () => {
     const csp = buildContentSecurityPolicy({ apiUrl: 'https://api.example.org', errorMonitorDsn: DSN });
     expect(csp).toContain("connect-src 'self' https://api.example.org https://o1.ingest.de.sentry.io;");
     expect(csp).not.toContain('publickey123');
+  });
+});
+
+describe('7b — Sentry v11 dataCollection + oturum takibi kapalı', () => {
+  it('buildSdkOptions: dataCollection alanlarının hepsi kapalı', () => {
+    expect(buildSdkOptions(DSN).dataCollection).toEqual(DATA_COLLECTION_OFF);
+    expect(DATA_COLLECTION_OFF).toMatchObject({
+      userInfo: false,
+      cookies: false,
+      httpHeaders: false,
+      httpBodies: [],
+      urlQueryParams: false,
+      stackFrameVariables: false,
+    });
+  });
+
+  it('BrowserSession (oturum takibi) entegrasyonu çıkarılır', () => {
+    const filter = buildSdkOptions(DSN).integrations as (d: Array<{ name: string }>) => Array<{ name: string }>;
+    const kept = filter([{ name: 'GlobalHandlers' }, { name: 'BrowserSession' }, { name: 'Dedupe' }]);
+    expect(kept.map((i) => i.name)).toEqual(['GlobalHandlers', 'Dedupe']);
+  });
+
+  it('gerçek @sentry/browser: IP çıkarımı "never", oturum/IP gönderilmez, toplama kapalı', async () => {
+    const envelopes: string[] = [];
+    const client = SentryBrowser.init({
+      ...(buildSdkOptions(DSN) as SentryBrowser.BrowserOptions),
+      transport: () => ({
+        send: async (envelope: unknown) => {
+          envelopes.push(JSON.stringify(envelope));
+          return {};
+        },
+        flush: async () => true,
+      }),
+    });
+    SentryBrowser.captureException(new Error(`boom ${EMAIL}`));
+    await SentryBrowser.flush(2000);
+    const resolved = client!.getDataCollectionOptions();
+    const hasSession = client!.getIntegrationByName('BrowserSession') !== undefined;
+    await client!.close();
+
+    expect(hasSession).toBe(false);
+    expect(resolved.userInfo).toBe(false);
+    expect(resolved.urlQueryParams).toBe(false);
+    const all = envelopes.join('\n');
+    expect(envelopes.length).toBeGreaterThan(0);
+    expect(all).toContain('"infer_ip":"never"');
+    expect(all).not.toContain('{{auto}}');
+    expect(all).not.toContain('"type":"session"');
+    expect(all).not.toContain('ornek.kisi');
+  });
+
+  it('işlem adı (transaction) yolundaki sorgu/JWT düşer', () => {
+    const out = scrubEvent({ transaction: `/join/${JWT}?token=davet-gizli` });
+    expect(out.transaction).toBe('/join/[gizli]');
   });
 });

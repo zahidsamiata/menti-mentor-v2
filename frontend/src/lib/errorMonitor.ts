@@ -42,6 +42,7 @@ export interface ScrubbableBreadcrumb {
 
 export interface ScrubbableEvent {
   message?: string;
+  transaction?: string;
   request?: { url?: string; method?: string; headers?: unknown; cookies?: unknown; data?: unknown; query_string?: unknown };
   user?: { id?: string | number; email?: string; ip_address?: string | null; username?: string };
   exception?: {
@@ -128,6 +129,11 @@ export function scrubBreadcrumb<T extends ScrubbableBreadcrumb>(breadcrumb: T): 
 export function scrubEvent<T extends ScrubbableEvent>(event: T): T {
   const out: T = { ...event };
   if (typeof out.message === 'string') out.message = scrubMonitorText(out.message);
+  if (typeof out.transaction === 'string') {
+    out.transaction = out.transaction.startsWith('/') || out.transaction.includes('://')
+      ? scrubMonitorUrl(out.transaction)
+      : scrubMonitorText(out.transaction);
+  }
   if (out.request) {
     out.request = {
       ...(typeof out.request.method === 'string' && { method: out.request.method }),
@@ -176,12 +182,39 @@ let initStarted = false;
 const defaultLoadSdk = async (): Promise<ErrorMonitorSdk> =>
   (await import('@sentry/browser')) as unknown as ErrorMonitorSdk;
 
+/**
+ * Sentry v11'de veri toplamayı `sendDefaultPii` DEĞİL `dataCollection` yönetir ve varsayılanları AÇIKTIR
+ * (`@sentry/core` `resolveDataCollectionOptions`). `userInfo: false` ayrıca tarayıcı istemcisinin IP
+ * çıkarımını (`infer_ip: "never"`) ve oturuma `{{auto}}` IP eklenmesini kapatır (`@sentry/browser` client).
+ */
+export const DATA_COLLECTION_OFF = {
+  userInfo: false,
+  cookies: false,
+  httpHeaders: false,
+  httpBodies: [] as string[],
+  urlQueryParams: false,
+  stackFrameVariables: false,
+  databaseQueryData: false,
+  queues: false,
+  graphQL: { document: false, variables: false },
+  genAI: { inputs: false, outputs: false },
+};
+
+/**
+ * Varsayılan listeden çıkarılan entegrasyonlar. `BrowserSession`: oturum (sağlık) takibi — yalnız hata
+ * toplanıyor; her sayfa açılışında oturum gönderimi gereksiz veri aktarımıdır.
+ */
+const DISABLED_INTEGRATIONS = new Set(['BrowserSession']);
+
 /** `init`e verilen seçenekler — replay/tracing entegrasyonu EKLENMEZ, örnekleme oranı verilmez. */
 export function buildSdkOptions(dsn: string, environment?: string): Record<string, unknown> {
   return {
     dsn,
     environment,
+    dataCollection: DATA_COLLECTION_OFF,
     sendDefaultPii: false,
+    integrations: (defaults: Array<{ name: string }>) =>
+      defaults.filter((integration) => !DISABLED_INTEGRATIONS.has(integration.name)),
     beforeSend: (event: ScrubbableEvent) => scrubEvent(event),
     beforeBreadcrumb: (breadcrumb: ScrubbableBreadcrumb) => scrubBreadcrumb(breadcrumb),
   };
