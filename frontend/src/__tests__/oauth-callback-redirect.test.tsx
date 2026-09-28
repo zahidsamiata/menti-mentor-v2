@@ -158,11 +158,16 @@ describe('AJ-59 · OAuth callback: kurum yöneticisi e-posta girişiyle aynı ye
     await waitFor(() => expect(replaceMock).toHaveBeenCalledWith(OAUTH_DEFAULT_PATH));
   });
 
-  it('negatif: dondurulmuş (onaylı ama askıda) kurumun yöneticisi durum ekranına GÖNDERİLMEZ — mevcut davranış korunur', async () => {
+  it('negatif: dondurulmuş (onaylı ama askıda) kurumun yöneticisi durum ekranına GÖNDERİLMEZ — askı ekranına gider', async () => {
+    // ⚠️ AJ-72 (2026-09-28): beklenen hedef panel → askı ekranı. Gerekçe: panelde her istek 403
+    // KURUM_ASKIDA alıyordu (açıklamasız). Durum ekranına gitmeme (giriş döngüsü yok) kuralı aynen.
     mockBackend('ADMIN', { verificationStatus: 'APPROVED', isSuspended: true });
     renderCallback('isNewUser=false');
-    await waitFor(() => expect(replaceMock).toHaveBeenCalledWith(OAUTH_DEFAULT_PATH));
+    await waitFor(() => expect(replaceMock).toHaveBeenCalledWith('/kurum-askida'));
     expect(replaceMock).not.toHaveBeenCalledWith(TENANT_REVIEW_PATH);
+    expect(replaceMock).not.toHaveBeenCalledWith(OAUTH_DEFAULT_PATH);
+    expect(meCalls()).toHaveLength(1);
+    expect(refreshCalls()).toHaveLength(1);
   });
 
   it('kurum durumu okunamazsa (500) giriş bozulmaz, panele gidilir', async () => {

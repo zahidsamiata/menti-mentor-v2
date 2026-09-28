@@ -14,6 +14,7 @@
 import type { ApiError, ApiResult } from '@/types/api';
 import { invalidateQueries } from '@/lib/queryCache';
 import { isUserFacingMessage } from '@/lib/apiErrorMessage';
+import { TENANT_SUSPENDED_ERROR_CODE } from '@/lib/tenantSuspension';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
@@ -78,6 +79,22 @@ export const refreshCallbackRef: { current: (() => Promise<string | null>) | nul
   current: null,
 };
 
+/**
+ * AJ-72: askıdaki kurum yanıtı (403 `KURUM_ASKIDA`) gelince çağrılır. `TenantSuspensionRedirect`
+ * (kök layout) set eder ve kullanıcıyı askı ekranına götürür. `refreshCallbackRef` ile aynı desen:
+ * istemci React'e/router'a bağımlı olmaz; null iken (ör. testte) yalnız sonuç döner.
+ * Yanıt çağırana AYNEN döner — yönlendirme ek bir yan etkidir, hata akışını değiştirmez.
+ */
+export const tenantSuspendedCallbackRef: { current: (() => void) | null } = {
+  current: null,
+};
+
+function notifyIfTenantSuspended<T>(result: ApiResult<T>): void {
+  if (!result.ok && result.status === 403 && result.error?.error === TENANT_SUSPENDED_ERROR_CODE) {
+    tenantSuspendedCallbackRef.current?.();
+  }
+}
+
 export async function apiClient<T>(
   path: string,
   options: RequestOptions = {},
@@ -92,11 +109,13 @@ export async function apiClient<T>(
     if (newToken) {
       const retried = await executeRequest<T>(path, method, body, newToken, tenantId, extra, responseType);
       invalidateAfterWrite(path, method, retried.ok);
+      notifyIfTenantSuspended(retried);
       return retried;
     }
   }
 
   invalidateAfterWrite(path, method, result.ok);
+  notifyIfTenantSuspended(result);
   return result;
 }
 
