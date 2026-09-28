@@ -8,6 +8,13 @@
 
 ---
 
+## ⭐ RİSK SIRASI (PO oturum sırası) — PO NOTU 2026-09-28
+Önce bu üçü, sonra aşağıdaki (e) listesi (o sıralama silinmedi; iş sayısına göre, bu ise riske göre):
+1. **KARAR-101** — canlıda AÇIK güvenlik boşluğu: onay bekleyen kişi Google/LinkedIn ile oturum alıp kurumun iç özelliklerine istek atabiliyor. [kart](kararlar/KARAR-101.md) · öneri B (izin listesiyle) · alternatif: A şimdi + B sonra.
+2. **KARAR-95** — can güvenliği: kendine zarar ifadesinde kim haberdar olsun. [kart](kararlar/KARAR-095.md) · öneri C.
+3. **KARAR-72** — KVKK + hukuk: sessiz/kalıcı red ("ghost") özelliği olsun mu. [kart](kararlar/KARAR-072.md) · öneri B.
+Sonra: (e) İLK 10 KARAR (aşağıda, sıra aynen).
+
 ## ℹ️ BİLGİ — karar değil (2026-09-28)
 - **AJ-86 · Açılış sayfası (landing) görünüm paketi yapılıyor (T5):** ziyaretçi açılış sayfasını siyah yerine yumuşak lacivert zeminde görecek; açık temayı seçen ziyaretçide landing de açık olacak; bilgi (i) ipuçları metnin üstüne binmeyecek ve okunur olacak; demo kartında hiç etiket seçilmezse uyum %52 yerine %0 gösterecek. Landing METNİ değişmez. Dayanak: 2026-09-28 PO görevi T5'i sıraya koydu (belgede eski "canlı-sonrası" zamanlama notu vardı — `docs/kararlar/konu/06-tasarim-ux.md:10`); yön G7-13 "yumuşak lacivert". Beğenmezsen: tek PR geri alınır.
 
@@ -29,7 +36,7 @@ Seçim ölçüsü: kilitlediği iş sayısı (güncel indeks + `00-KUYRUK.md` §
 | 10 | KARAR-44 | Resmî memnuniyet ölçüsü + algoritma öğrensin mi? | F-08, AJ-38 | 1 | AJ-38 (+KARAR-12) |
 
 **Bu 10 kararla 24 iş tamamen açılır; 4 iş daha (K-16, AN-49, AN-04, AJ-38) birer ek kararla açılır (KARAR-3+4, 67, 62, 12) → toplam 28 iş.**
-⚠️ Sayıya girmeyen ama önce cevaplanması önerilen: **KARAR-101** — canlıda açık güvenlik boşluğu (onay bekleyen kişi Google/LinkedIn ile oturum alıyor, `oauthService.ts:116-117,153`); PR'ı hazır ama çakışmalı. **KARAR-82…85** — her biri tek bir ⛔ çıkış blokerini açar.
+⚠️ Sayıya girmeyen ama önce cevaplanması önerilen: **KARAR-101** — canlıda açık güvenlik boşluğu (onay bekleyen kişi Google/LinkedIn ile oturum alıyor, `oauthService.ts:116-117,153`); düzeltme PR'ları (backend #164 + çatı #343) yazılı ama **hazır değil**: ikisi de CONFLICTING (2026-09-28 `gh pr view`) → hangi seçenek gelirse gelsin rebase + CI + 7b tekrarı. **KARAR-82…85** — her biri tek bir ⛔ çıkış blokerini açar.
 
 ---
 
@@ -39,7 +46,7 @@ Seçim ölçüsü: kilitlediği iş sayısı (güncel indeks + `00-KUYRUK.md` §
 
 | No | Soru | Öneri (kartın) | Açtığı işler | Geri al. | Risk | Kart | PO seçimi (→ PO NOTU) |
 |---|---|---|---|---|---|---|---|
-| 101 | Onay bekleyen kişi girip yalnız "Bekleme Odası"nı görsün mü? | B — açık kapanır, bekleme odası korunur | Y1-B8 (PR #164/#343, çakışmalı; kuyrukta satırı yok) | ✅ | 🛡️ canlıda açık | [kart](kararlar/KARAR-101.md) | |
+| 101 | Onay bekleyen kişi girip yalnız "Bekleme Odası"nı görsün mü? | B — açık kapanır, bekleme odası İZİN LİSTESİYLE korunur (alternatif: A şimdi + B sonra) | Y1-B8 (PR #164/#343 CONFLICTING — A dahil rebase + CI + 7b gerekir; kuyrukta satırı yok) | ✅ | 🛡️ canlıda açık | [kart](kararlar/KARAR-101.md) | |
 | 46 | Sertifikaya 22 senaryoluk yeni içerik tam taşınsın mı? | A — en olgun içerik; 3 ve 4 önce | F-14, P-99, AN-03, K-16 | ✅ (yedekle) | ⛔ÇB · 🌱 | [kart](kararlar/KARAR-046.md) | |
 | 95 | Kendine zarar ifadesinde kim haberdar olsun? | C — yönetici bildirimi + yardım ekranı, ikisi de ucuz | I-18, IC-13 | ✅ | 🛡️ can | [kart](kararlar/KARAR-095.md) | |
 | 72 | Uygunsuz kişiyi sessiz ve kalıcı reddetme olsun mu? | B — yok, bugünkü şeffaf red kalsın | KR-20, AN-33 | ✅ | 🔒 ⚖️ | [kart](kararlar/KARAR-072.md) | |
