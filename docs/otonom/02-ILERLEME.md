@@ -82,3 +82,4 @@
 - 2026-09-28 · **AJ-84 BITTI** (çatı #443; yalnız test; mutasyon yerel 3/3).
 - 2026-09-28 · **AJ-56 BITTI (kısmen — KARAR-133)** (backend #249 + çatı #442; 7b ONAY; mutasyon CI #247/#248) — CANLIDA BAK: misafir üyede hatırlatma/koçluk çalışıyor, pasif sayımı üyelikten; kişi-genel işlemler KARAR-133'e kadar kapalı. Canlı ok:true · db:up.
 - 2026-09-28 · **AJ-85 BITTI** (çatı #445; mutasyon yerel) — açık temada yeşil durum metinleri AA; düğme grupları adlandırıldı. Yeni: AJ-110.
+- 2026-09-28 · **AJ-79 BITTI (kısmen — AJ-111 🔵)** (backend #251 + çatı #444; 7b ONAY; mutasyon CI #250 + yerel) — CANLIDA BAK: platform kurum analitiğinde varsayılana düşen profil oranı. Canlı ok:true · db:up. Not: AJ-85 kuyruk kaydı #445 merge'inden ÖNCE yazıldı (merge ilk denemede çakışmaya takıldı; çakışma çözüldü, CI'dan sonra merge ediliyor).
