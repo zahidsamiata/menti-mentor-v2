@@ -1,13 +1,21 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-28 07:05 UTC · çatı main HEAD (bu commit) · backend main HEAD `3b1a2d6`
+**Son güncelleme:** 2026-09-28 11:25 UTC · çatı main HEAD (bu commit) · backend main HEAD `07d71a2`
 
-**Durum:** CALISIYOR — PO görevi (2026-09-28): GÖREV 1 (T1 güvenlik/KVKK/veri kaybı) → 2 (belge düzeni) → 3 (karar kartları + KARAR-PAKETI) → 4 (T2 → T3 → T4 → T5) → DURDU (K1-a). K5'e geçilmez.
+**Durum:** CALISIYOR (devam turu — kota ~09:30 UTC'de kesti; 00-SIMDI 08:01'den beri güncellenmemişti). Sıra: 2.4 bölmeyi bitir (TEK BAŞINA) → AJ-58 → AJ-72 kaydı → 2.5 → GÖREV 3 KARAR-PAKETI (merge) + kart zenginleştirme → GÖREV 4 (AJ-83 …) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 1 TAMAM — T1 11/11 BITTI (hepsi 7b ONAY + mutasyon kırmızı + canlı ok) · 🔵 AJ-77 PR-ACIK (KARAR-128). GÖREV 2: 2.1 #416 · 2.2 #414 · 2.3 #418 MERGE; şimdi 2.4 (duruma göre bölme — tek başına) → 2.5. Önceki turun TUR ÖZETİ: `02-ILERLEME.md` başı.
+**Şu an yapılan:** Adım 1 — GÖREV 2.4 bölme (çatı #421) main ile güncelleniyor → kontroller → geri bakılabilirlik testi (4. koşu = devam turunun 1. koşusu).
 
-**Son merge'ler:** backend #223 + çatı #413 (AJ-51) · #222 + #412 (AJ-54) · #220 + #411 (AJ-69) · #219 + #410 (AJ-87) · #216 + #218 + #408 (AJ-74 · AJ-88) · #214 + #407 (AJ-57) · #213 + #406 (AJ-73) — her merge sonrası canlı ok:true · db:up · site 200.
+**Devam turu — kesinti öncesi yarım kalanlar ve nasıl kapandı:**
+| İş | Dal | Son hâl (11:20 UTC teyit) | Kapanış PR'ı |
+|---|---|---|---|
+| GÖREV 2.4 bölme | `otonom/DURUMA-GORE-BOLME-20260928` (8 commit A…H, `4712dde`) | push'lu, merge YOK; 7b ONAY (1. sürüm); geri bakılabilirlik 1. koşu 19/20 (zayıf 9), 2. koşu 17/20, 3. koşu (H sonrası) YAPILMADI; main'in gerisinde (AJ-72) | #421 — sürüyor |
+| AJ-58 | backend `…AJ-58-hatirlatma-basarisiz-eposta-20260928` `1918164` · çatı `f32d73d` | PR'lar açık backend #228 + çatı #423, CI yeşil, 7b YAPILMADI, merge YOK | — |
+| AJ-72 | çatı `otonom/AJ-72-kurum-askida-ekrani-20260928` | #422 MERGE (7b ONAY, canlı ok, 4 sayfa 200); kuyruk/arşiv/kaynak kaydı (kural h) main'de YOK | kayıt Adım 3 |
+Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürütüldü (docs'a dokunmadılar, zarar yok) — kural ihlali, bu turda tekrarlanmaz.
+
+**Son merge'ler:** çatı #422 (AJ-72) · #419 (AJ-75) · #418 (GÖREV 2.3) · #417 (AJ-55) · #416 (GÖREV 2.1) · #415 (AJ-59) · #414 (GÖREV 2.2) · #413 (AJ-51) · #412 (AJ-54) · #411 (AJ-69) — her merge sonrası canlı ok:true · db:up · site 200 (11:20 UTC: ok:true · db:up · site 200).
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
@@ -21,6 +29,8 @@
 | backend #185 | AN-52-1 anket tablosu · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-106 EVET bekliyor (yedek gerekmez — yeni tablo) |
 | backend #186 + çatı #370 | AN-12 karantina · 🔵 | yeşil | ✅ ONAY (iki PR) | KARAR-107 EVET bekliyor |
 | backend #189 + çatı #374 | K-15 müsaitlik tür+süre · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-111 EVET + `AvailabilityBlock` yedeği (merge'den önce) |
+| çatı #421 | GÖREV 2.4 bölme | yeşil (H) | 7b ONAY (A-F) | geri bakılabilirlik testi 20/20 bekliyor |
+| backend #228 + çatı #423 | AJ-58 hatırlatma başarısız e-posta | yeşil | 7b yok | Adım 2 |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | Dokunulmuyor (kalıcı kural) |
 
@@ -34,4 +44,4 @@
 
 **Strateji katmanına not:** 7b bir kez `node_modules` sembolik bağının backend commit'ine girdiğini yakaladı (AJ-69) — backend `.gitignore` `node_modules/` bağı yakalamıyordu; düzeltildi, uygulayıcı kurallarına ders eklendi. Yeni satırlar: AJ-96 · 97 · 98 · 99 · 100.
 
-**Sıradaki 5 iş:** GÖREV 2.4 → 2.4 geri bakılabilirlik testi → 2.5 (kural i + bekçi) → GÖREV 3 (KARAR-PAKETI) → GÖREV 4 T2 (AJ-72 …).
+**Sıradaki 5 iş:** 2.4 merge → AJ-58 7b+merge → AJ-72 kural h kaydı → 2.5 → KARAR-PAKETI.
