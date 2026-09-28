@@ -10,6 +10,17 @@
 | 2026-W39 (21-27 Eylül) | `docs/otonom/arsiv/02-ILERLEME-2026-W39.md` | Devir analizi + dört konsey (GV/PS/IC/YN) kuyruğa · KARAR cevapları (KARAR-80 çelişki paketi dahil) · 4 renk kapı ve uzun çalışma kipi · 209 BITTI biriminin son doğrulaması · AJ güvenlik/KVKK negatif test kovaları | Altı ayrı plan belgesi PO önceliğini 21 gün kuyruktan kaçırmıştı; turlar erken duruyordu; "BITTI" denen işlerin bir kısmı koda karşı tutmuyordu |
 | 2026-W40 (28 Eylül →) | bu dosya | T1 güvenlik/KVKK/veri kaybı işleri (AJ-51…AJ-87) · belge düzeni (GÖREV 2.x: bağlam ön ekleri, kart indeksi senkronu, duruma göre bölme) | Çıkış öncesi kalan güvenlik açıkları kapanıyor; sıcak dosyalar her turda gereksiz içerik okutuyordu |
 
+## TUR ÖZETİ — PO NOTU 2026-09-28 (İŞ 1-3) · tamam ~19:00 UTC
+
+**BITTI ve CANLIDA: 3 iş**
+- **İŞ 1 · AJ-96** (backend #255 + pointer #456; 7b opus ONAY 2 tur; mutasyon 4 test kırmızı; CI 213 dosya) — geliştirici/ajan onay değişkeni verse bile `npm run prisma:migrate` artık yerel olmayan (canlı) veritabanı adresinde çalışmıyor; ret mesajı nedenini söylüyor. N2 kararı: onay değişkeninin adı mesajda kalır (repo açık, asıl koruma host şartı). **REPODA BAK:** `backend/src/dangerousDbGuard.ts:121` · `backend/src/seedGuard.ts` (checkLocalDatabaseUrl) · `backend/tests/db-guard.unit.test.ts` (AJ-96 bloğu).
+- **İŞ 2 · bayat belge bekçisi** (çatı #455; 7b 1. tur SORUN VAR → düzeltildi → 2. tur ONAY) — PO/strateji katmanı kart indeksinde bitmiş işi artık "BEKLIYOR" görmüyor; bir belge işin durumunu kopyalar ya da bitmiş işi açık gösterirse CI (docs-guard) kırmızı. İlk koşu: 37 HATA (5 bayat + 32 kopya) + genişletilmiş kuralla 14 bayat satır daha (7 kart hücresi + 7 KARAR-TAKIP kural (h) işareti). Mutasyon: 12 bayat satır geri → 12 HATA. **REPODA BAK:** `scripts/belge-bekci.sh:329` (kural t) · `docs/otonom/OTONOM-PROMPT.txt:57` (durumun yeri = kuyruk) · `docs/otonom/OTONOM-PROMPT.txt:203` + `:310` (bekçi yeşil olmadan merge yok) · `docs/kararlar/00-KART-INDEKSI.md:49` (G1-20 ✅ AJ-75).
+- **İŞ 3 · KARAR-101 zenginleştirme + RİSK SIRASI** (çatı #457; 7b ONAY; CEVAP satırı bayt bayt aynı) — PO kartta A'nın da hazır olmadığını (iki PR CONFLICTING), bugünkü fiilî kaybını (~0 kullanıcı, TEYİT GEREK) ve izin listesiyle yeniden yazılmış B'yi görüyor; karar paketinin başında risk sırası 101 → 95 → 72. **REPODA BAK:** `docs/otonom/kararlar/KARAR-101.md:8` (B izin listesi) · `:12` (alternatif öneri) · `docs/otonom/KARAR-PAKETI.md:11` (RİSK SIRASI).
+
+**TEYİT LİSTESİ (İŞ 2, tahmin edilmedi):** G7-10 "mobil" ayağı AJ-86 ölçütünde yok · G7-14 "sanallaştırma" kodda yok (AJ-83 sayfalama yaptı). 7b notu: 00-KARAR-TAKIP Y3 — PDF/Excel biçimi istenirse ayrı iş.
+**KARAR BEKLİYOR:** KARAR-101 (PO erteledi). **BASARISIZ:** 0. **Canlı:** `/health` ok:true · db:up · site 200 (yalnız GET). **BACKEND:** pointer `635f220` → `b7f8df1` = backend main HEAD. **STASH:** yok.
+**Limitin en çok gittiği yer:** 7b opus incelemelerinin ikinci turları (İŞ 1 `$` deltası, İŞ 2 "kalan → X" genişletmesi).
+
 ## TUR ÖZETİ (2026-09-28, VPS — GÖREV 1-4 + devam turu · kapanış ~18:20 UTC · DURDU K1-a)
 
 **Devam turu — kesinti öncesi yarım 3 iş kapandı:** GÖREV 2.4 bölme (çatı #421, geri bakılabilirlik 20/20) · AJ-72 kural (h) kaydı (yeni yapıda; yönetici metni → KARAR-129) · AJ-58 (backend #228 + çatı #423).
@@ -108,3 +119,6 @@
 - 2026-09-28 · **AJ-68 BITTI (kısmen)** (çatı #453; 7b ONAY; kayıp 0) — uzun satırlar kuyruk 34→15, karar-takip 28→3; kalanlar gerekçeli.
 - 2026-09-28 ~18:20 UTC · **TUR KAPANDI — DURDU K1-a** (GÖREV 1-4 + devam turu). TUR ÖZETİ bu dosyanın başında ve 00-SIMDI'de. K5'e geçilmedi.
 - 2026-09-28 ~18:25 UTC · **TUR BAŞLADI — PO NOTU (İŞ 1 AJ-96 · İŞ 2 bayat belge bekçisi · İŞ 3 KARAR-101)** · VPS · kalan 🟢: PO NOTU 3 iş önde, ardından kuyruk (AJ-97…111). · İŞ 1 backend #255 açıldı (7b ONAY) · İŞ 2 çatı #455 açıldı.
+- 2026-09-28 · **AJ-96 BITTI** (backend #255 + çatı pointer #456; 7b ONAY; mutasyon yerel 4 kırmızı) — CANLIDA BAK: onaylı `prisma:migrate` uzak adreste reddediliyor. Canlı ok:true · db:up · site 200.
+- 2026-09-28 · **İŞ 2 BITTI** (çatı #455; 7b 2 tur ONAY) — CANLIDA BAK: `docs/kararlar/00-KART-INDEKSI.md` durum hücreleri işaretçi; bayat/kopya durum CI docs-guard'da kırmızı.
+- 2026-09-28 · **İŞ 3 BITTI** (çatı #457; 7b ONAY) — CANLIDA BAK: KARAR-101 kartı + KARAR-PAKETI RİSK SIRASI. **PO NOTU İŞ 1-3 tamam** → normal kuyruğa devam.
