@@ -593,3 +593,7 @@
 ## docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:756 (AJ-89)
 
 | 10 | Görünürlük kuralları (10.3) uygula | 🟨 kısmen — S1 ihtiyacı hiçbir ekranda gösterilmiyor (seçimde gizlilik fiilen sağlanıyor); kalan: eşleşme sonrası mentöre görünme + yöneticiye yalnız toplu dağılım → AJ-89 | evet |
+
+## docs/kararlar/00-KARAR-TAKIP.md:311 (AJ-70)
+
+| 141 | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | 🟨 kısmen — cümle + sıra canlıda (I-02, `frontend/src/app/onboarding/_OnboardingContent.tsx:36,190`); kalan: PO ek önlemleri (ayrı görsel dil + kart öncesi kısa geçiş) yapılmadı → AJ-70 | FE-metin+akış | ~~[ESKİ · 2026-09-04] Üç-soru ekranına tek cümle ekle~~ **⚠️ ERTELENDİ (2026-09-04, kod turu).** Karar VERİLMİŞ (arketip §4: kart üç sorudan SONRA), ama mevcut kod TERSİ çalışıyor: Profil → Mizaç Testi → Sonuç(kart) → Tercihler(3 soru) (`_OnboardingContent.tsx:223-234`). ⭐ Yani 141 yalnız METİN işi DEĞİL — **AKIŞ SIRASI DEĞİŞİKLİĞİ** içerir. Ayrıca vaat edilen kart madde 140 (motor bekliyor). **Ön koşul: akış yeniden sıralaması + madde 140.** ⚠️ PO ek önlemleri (141 kapsamına): (1) sorular kart ekranıyla FARKLI görsel dilde ("test bitti, form dolduruyorum" hissi); (2) kart açılışına kısa gecikme — sorulardan ayırsın, ödül anını belirginleştirsin. | arketip §4/§10-4 | Hayır | S |
