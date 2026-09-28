@@ -40,6 +40,7 @@ function mentor(n: number): MentorMatch {
     compatibilityReason: 'Ortak sektör ve ilgi alanları',
     isFaded: false,
     isBookable: true,
+    isCertified: false,
   };
 }
 

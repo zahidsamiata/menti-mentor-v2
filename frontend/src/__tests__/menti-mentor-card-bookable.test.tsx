@@ -4,6 +4,7 @@
  * KARAR-80/M7: kart isFaded=true olsa da HİÇ kaldırılmaz, yalnız soluk (opacity) + "Sınırlı"
  * rozetiyle işaretlenir. KARAR-32 revizyonu: isBookable=false olan mentörde "Görüşme Talep Et"
  * devre dışı kalır, "Mesaj" HER ZAMAN aktif kalır.
+ * AJ-66 (KARAR 4): sertifikalı mentörde "✓ Sertifikalı" rozeti; sertifikasızda hiçbir etiket yok.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
@@ -38,6 +39,7 @@ const bookableMentor: MentorMatch = {
   compatibilityReason: 'Ortak sektör ve ilgi alanları',
   isFaded: false,
   isBookable: true,
+  isCertified: true,
 };
 
 const fadedMentor: MentorMatch = {
@@ -50,6 +52,7 @@ const fadedMentor: MentorMatch = {
   compatibilityReason: 'Genel profil uyumu',
   isFaded: true,
   isBookable: false,
+  isCertified: false,
 };
 
 let mentorMatchesResponse: unknown = { ok: true, data: { items: [bookableMentor, fadedMentor] } };
@@ -107,6 +110,28 @@ describe('AN-28 · Menti mentör kartı — isFaded / isBookable', () => {
     await screen.findByText('Uygun Mentör');
     const card = screen.getByText('Uygun Mentör').closest('div.rounded-xl') as HTMLElement;
     expect(within(card).queryByText('Sınırlı')).not.toBeInTheDocument();
+  });
+});
+
+// AJ-66 · KARAR 4: sertifika rozeti herkese görünür, yalnız pozitif (sertifikasızda etiket YOK).
+describe('AJ-66 · Menti mentör kartı — "✓ Sertifikalı" rozeti', () => {
+  beforeEach(() => {
+    apiMock.mockClear();
+    mentorMatchesResponse = { ok: true, data: { items: [bookableMentor, fadedMentor] } };
+  });
+
+  it('isCertified:true mentör kartında "✓ Sertifikalı" rozeti görünür', async () => {
+    render(<MentiDashboardPage />);
+    await screen.findByText('Uygun Mentör');
+    const card = screen.getByText('Uygun Mentör').closest('div.rounded-xl') as HTMLElement;
+    expect(within(card).getByText('✓ Sertifikalı')).toBeInTheDocument();
+  });
+
+  it('isCertified:false mentör kartında sertifikayla ilgili HİÇBİR etiket yok (olumsuz etiket yok)', async () => {
+    render(<MentiDashboardPage />);
+    await screen.findByText('Soluk Mentör');
+    const card = screen.getByText('Soluk Mentör').closest('div.rounded-xl') as HTMLElement;
+    expect(within(card).queryByText(/sertifika/i)).not.toBeInTheDocument();
   });
 });
 
