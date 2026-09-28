@@ -171,7 +171,10 @@ describe('InfoTooltip — erişilebilirlik ve etkileşim', () => {
 describe('Landing gri metin kontrastı (kaynak taraması)', () => {
   // slate-500 koyu landing zemininde 3.07–4.24:1, slate-600 1.93–2.66:1 (AA 4.5:1 altı);
   // slate-400 aynı zeminlerde ≥ 5.71:1.
-  const LOW_CONTRAST_GRAY = /(?<![\w-])text-(?:slate|gray|zinc|neutral)-(?:500|600|700|800|900)(?![\w-])/g;
+  // AJ-86c: landing artık tema-duyarlı — gri metin `text-landing-*` token'ından gelir. Açık temada
+  // koyu gri geçerlidir; bu yüzden `dark:` önekli sınıf taramaya girmez (tema eşi, iki temanın ölçümü
+  // `landing-theme-aj86c.test.tsx`'te). Önek yoksa sınıf iki temada da geçerlidir → yasak.
+  const LOW_CONTRAST_GRAY = /(?<!dark:)(?<![\w-])text-(?:slate|gray|zinc|neutral)-(?:500|600|700|800|900)(?![\w-])/g;
   const APP = join(__dirname, '..', 'app');
   const files = [
     ...readdirSync(join(APP, '_sections')).filter((n) => n.endsWith('.tsx')).map((n) => join(APP, '_sections', n)),

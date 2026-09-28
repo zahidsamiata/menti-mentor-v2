@@ -858,3 +858,197 @@ frontend/src/app/_sections/GameSection.tsx:202:                <p className="tex
 frontend/src/app/_sections/GameSection.tsx:216:                <p className="text-xs text-slate-500">Monotonic İlerleme · Streak & Rozetler</p>
 frontend/src/app/page.tsx:60:            <p className="text-xs text-slate-600 text-center">
 ```
+
+## AJ-86c · Landing tema: sabit koyu → yumuşak lacivert + açık tema (çatı `otonom/AJ-86c-tema-20260928`)
+
+Silme YOK — yalnız renk sınıfları değişti (landing metni aynı; metin-karşılaştırma betiğiyle 0 fark). Taban commit: `c815379` (çatı main). Geri alma: `git revert <AJ-86c commit>` ya da aşağıdaki eski satırları aynen geri koy (globals.css/tailwind.config.ts'e yalnız ekleme yapıldı; eklenen `--landing-*` token'ları ve `landing` renk grubu silinir).
+
+- **Neden yazılmıştı:** eski karar "Landing HER ZAMAN DARK" (`docs/kararlar/konu/06-tasarim-ux.md` § TEMA) → bölümler sabit `bg-slate-950` / `text-white` / `text-slate-*` / `*-400` vurgularla yazıldı; 2026-08-02'de landing tema seçimi "canlı-sonrası"na ertelendi (~256 sabit nokta).
+- **Neden değişti:** G7-10/11/13 (aynı belge): landing tema düğmesine uymalı, koyu hâli siyah değil yumuşak lacivert. PO'nun 2026-09-28 görevi T5'i (AJ-86) sıraya koydu. Sabit renkler → `landing-*` semantik token'ları (`globals.css` :root/.dark) + renkli vurgular `text-X-700|800 dark:text-X-<eski ton>` eşli çiftleri; koyu vurgu indigo-400 → indigo-300 (lacivert zeminde %20 indigo tint üstünde 4.23 → AA).
+
+Eski satırlar (`git diff -U0 c815379` '-' satırları, aynen):
+```
+== frontend/src/app/_sections/AdminCockpit.tsx
+-        <span className="text-xs font-medium text-slate-300">Haftalık Görüşme Limiti</span>
+-        <span className="text-sm font-extrabold text-indigo-400">{value} görüşme / hafta</span>
+-        className="w-full h-2 rounded-full bg-slate-700 appearance-none cursor-pointer
+-      <div className="flex justify-between text-[10px] text-slate-400">
+-          <span key={n} className={n === value ? 'text-indigo-400 font-bold' : ''}>{n}</span>
+-      <p className="text-[10px] text-slate-400 leading-relaxed">
+-        Bir menti haftada en fazla <strong className="text-slate-300">{value}</strong> görüşme
+-      <span className="text-xs font-medium text-slate-300">Minimum Eşleşme Barajı</span>
+-                ? 'border-violet-500/50 bg-violet-500/15 text-violet-300'
+-                : 'border-slate-700 bg-slate-800/50 text-slate-400 hover:border-slate-600',
+-      <p className="text-[10px] text-slate-400 leading-relaxed">
+-        <span className="text-xs font-medium text-slate-300">Kara Liste / Engelli Çiftler</span>
+-        <span className="text-[10px] text-slate-400">{pairs.length} kayıt</span>
+-            <ShieldAlert className="h-3.5 w-3.5 text-red-400 shrink-0" aria-hidden />
+-              <span className="text-xs text-slate-300 font-medium">{a}</span>
+-              <span className="text-xs text-slate-400 mx-1">↔</span>
+-              <span className="text-xs text-slate-300 font-medium">{b}</span>
+-              <span className="text-[10px] text-slate-400 ml-2">· {reason}</span>
+-              className="text-slate-400 hover:text-red-400 transition-colors shrink-0"
+-        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-slate-700 py-2 text-xs text-slate-400 hover:border-slate-500 hover:text-slate-300 transition-colors"
+-    <section className="py-20 sm:py-28 px-4 sm:px-6 bg-slate-950">
+-          <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">
+-          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white text-balance">
+-          <p className="mt-3 text-slate-400 max-w-lg mx-auto text-sm">
+-          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-5 backdrop-blur">
+-                <Settings2 className="h-4 w-4 text-indigo-400" aria-hidden />
+-              <span className="text-sm font-bold text-white">Görüşme Yönetimi</span>
+-          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-5 backdrop-blur">
+-                <BarChart3 className="h-4 w-4 text-violet-400" aria-hidden />
+-              <span className="text-sm font-bold text-white">Kalite Barajı</span>
+-          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-5 backdrop-blur">
+-                <ShieldAlert className="h-4 w-4 text-red-400" aria-hidden />
+-              <span className="text-sm font-bold text-white">İdari Override</span>
+-        <p className="mt-6 text-center text-xs text-slate-400">
+-          <strong className="text-slate-400"> KVKK uyumlu</strong>
+== frontend/src/app/_sections/AlgorithmBento.tsx
+-          <span className="text-3xl font-black text-indigo-400">%60</span>
+-          <span className="text-sm font-semibold text-slate-300">Teknik Uyum</span>
+-        <p className="text-xs text-slate-400 leading-relaxed">
+-                  ? 'bg-indigo-500/20 border-indigo-500/60 text-indigo-300 scale-105 shadow-sm shadow-indigo-500/20'
+-                  : 'bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-500 hover:text-slate-300',
+-      <div className="mt-auto rounded-xl bg-slate-800/60 border border-slate-700/50 p-4">
+-          <span className="text-xs text-slate-400 font-medium">Teknik Eşleşme Skoru</span>
+-          <span className="text-lg font-extrabold text-indigo-400">%{matchScore}</span>
+-        <div className="h-2 w-full rounded-full bg-slate-700 overflow-hidden">
+-        <p className="mt-2 text-[10px] text-slate-400">
+-    <div className="rounded-xl bg-slate-800/70 border border-slate-700/50 p-3 space-y-3 flex-1">
+-          <p className="text-xs font-semibold text-white">{profile.name}</p>
+-          <p className="text-[10px] text-slate-400">{profile.role}</p>
+-            <span className="w-3 text-[10px] font-bold text-slate-400">{dim}</span>
+-            <div className="flex-1 h-1.5 rounded-full bg-slate-700 overflow-hidden">
+-            <span className="w-6 text-right text-[10px] text-slate-400">{pct}%</span>
+-          <span className="text-3xl font-black text-violet-400">%40</span>
+-          <span className="text-sm font-semibold text-slate-300">Psikometrik Derinlik</span>
+-        <p className="text-xs text-slate-400 leading-relaxed">
+-      <div className="rounded-xl bg-slate-800/60 border border-green-500/20 p-4">
+-            <span className="text-xl font-black text-green-400">%88</span>
+-            <CheckCircle2 className="h-5 w-5 text-green-400" aria-hidden />
+-            <span className="text-[9px] text-green-500 font-medium text-center leading-tight">
+-          <CheckCircle2 className="h-3.5 w-3.5 text-green-400 shrink-0" aria-hidden />
+-          <span className="text-[10px] text-green-400 font-medium">
+-      <div className="rounded-xl bg-slate-800/60 border border-red-500/20 p-4">
+-            <div key={initials} className="flex-1 rounded-lg bg-slate-800 border border-slate-700 p-2.5 flex items-center gap-2 opacity-70">
+-                <div className="text-[10px] font-semibold text-slate-300">D Profili</div>
+-                <div className="text-[9px] text-slate-400">Baskın Lider</div>
+-            <ShieldX className="h-7 w-7 text-red-400" aria-hidden />
+-            <span className="text-[9px] text-red-400 font-bold text-center leading-tight">
+-          <ShieldX className="h-3.5 w-3.5 text-red-400 shrink-0 mt-0.5" aria-hidden />
+-          <span className="text-[10px] text-red-400 font-medium leading-relaxed">
+-    <section id="algorithm" className="bg-slate-950 py-20 sm:py-28 px-4 sm:px-6">
+-          <span className="text-xs font-semibold uppercase tracking-widest text-indigo-400">
+-          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white text-balance">
+-          <p className="mt-3 text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
+-          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-6 backdrop-blur">
+-          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-6 backdrop-blur">
+-        <div className="mt-6 flex items-center justify-center gap-0 rounded-xl border border-slate-700/50 bg-slate-900/60 p-4 overflow-hidden">
+-            <span className="text-sm font-bold text-indigo-400 shrink-0">%60 Teknik</span>
+-          <div className="h-8 w-px bg-slate-700 shrink-0" />
+-            <span className="text-sm font-bold text-violet-400 shrink-0">%40 Psikometrik</span>
+== frontend/src/app/_sections/EngineSection.tsx
+-  { dim: 'D', label: 'Öncü',      color: 'text-orange-400',  bg: 'bg-orange-500/10',  border: 'border-orange-500/20', desc: 'Kararlı, hızlı, sonuç odaklı' },
+-  { dim: 'I', label: 'Ateşleyici', color: 'text-yellow-400', bg: 'bg-yellow-500/10',  border: 'border-yellow-500/20', desc: 'İlham veren, sosyal, enerjik' },
+-  { dim: 'S', label: 'Yapı Taşı', color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', desc: 'Güvenilir, sabırlı, uyumlu' },
+-  { dim: 'C', label: 'Kâşif',     color: 'text-sky-400',     bg: 'bg-sky-500/10',     border: 'border-sky-500/20',    desc: 'Analitik, titiz, derinlikli' },
+-    <section id="algorithm" className="bg-slate-950 py-24 px-4 border-t border-white/5">
+-          <p className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-3">
+-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+-          <p className="mt-4 text-slate-400 max-w-xl mx-auto">
+-                <Briefcase className="h-5 w-5 text-indigo-400" aria-hidden />
+-                <p className="text-2xl font-extrabold text-white">%60</p>
+-                <p className="text-sm font-semibold text-indigo-400">Sektör Uyumu</p>
+-            <p className="text-sm text-slate-400 leading-relaxed">
+-                <Brain className="h-5 w-5 text-violet-400" aria-hidden />
+-                <p className="text-2xl font-extrabold text-white">%40</p>
+-                <p className="text-sm font-semibold text-violet-400">
+-            <p className="text-sm text-slate-400 leading-relaxed">
+-              <p className="text-sm font-bold text-white">{label}</p>
+-              <p className="text-xs text-slate-400 mt-1 leading-snug">{desc}</p>
+-        <div className="rounded-xl border border-rose-500/20 bg-rose-950/15 p-4 mb-10 text-sm text-slate-400 leading-relaxed text-center">
+-          <span className="font-semibold text-rose-400">Toksik eşleşme koruması:</span>{' '}
+== frontend/src/app/_sections/GameSection.tsx
+-    { letter: 'A', text: 'Liderliği üstlenir, hızlıca hedef koyarım',    color: 'border-violet-500/40 bg-violet-500/10 text-violet-300' },
+-    { letter: 'B', text: 'Ekibi motive eder, enerji katarım',              color: 'border-blue-500/40   bg-blue-500/10   text-blue-300'   },
+-    { letter: 'C', text: 'Grubun ihtiyaçlarını destekler, uyum sağlarım', color: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300' },
+-    { letter: 'D', text: 'Planı analiz eder, en doğru kararı veririm',    color: 'border-amber-500/40  bg-amber-500/10  text-amber-300'  },
+-          <span className="font-medium text-slate-300">Mizaç Testi</span>
+-          <span className="text-slate-400">Soru <strong className="text-white">3</strong> / 8</span>
+-        <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
+-      <div className="rounded-xl border border-slate-700 bg-slate-800/60 p-5">
+-        <p className="text-sm font-semibold text-white leading-relaxed">{SAMPLE_QUESTION.text}</p>
+-                : 'border-slate-700/50 bg-slate-800/40',
+-              i === 1 ? 'bg-blue-500 text-white' : 'bg-slate-700 text-slate-400',
+-            <span className={cn('text-xs leading-relaxed', i === 1 ? 'text-blue-200' : 'text-slate-400')}>
+-        <p className="text-xs text-slate-400 mb-3 text-center">Test bittiğinde kazanacağın arketip:</p>
+-        <p className="mt-2 text-center text-[10px] text-slate-400">
+-          Bu kullanıcı → <strong className="text-blue-400">🔥 Ateşleyici</strong> kazanıyor
+-      <div className="absolute left-4 top-3 bottom-3 w-0.5 bg-gradient-to-b from-indigo-500 via-violet-500 to-slate-700" aria-hidden />
+-              done ? color : 'bg-slate-700 border-2 border-slate-600',
+-                ? 'border-slate-700 bg-slate-800/60'
+-                : 'border-dashed border-slate-700/40 bg-slate-800/20 opacity-60',
+-                  <p className="text-xs text-slate-400 font-medium">{day}</p>
+-                  <p className="text-sm font-semibold text-white mt-0.5">{label}</p>
+-                <span className="shrink-0 rounded-full bg-slate-700/80 px-2.5 py-1 text-xs font-medium text-slate-300">
+-                  <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" aria-hidden />
+-                  <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" aria-hidden />
+-                  <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" aria-hidden />
+-                  <span className="text-[10px] text-slate-400 ml-1">Asla geriye düşmez (Monotonic)</span>
+-    <section className="py-20 sm:py-28 px-4 sm:px-6 bg-gradient-to-b from-slate-950 to-slate-900">
+-          <span className="text-xs font-semibold uppercase tracking-widest text-violet-400">
+-          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white text-balance">
+-          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-6 backdrop-blur">
+-                <Flame className="h-5 w-5 text-indigo-400" aria-hidden />
+-                <h3 className="text-sm font-bold text-white">CORE Sorular</h3>
+-                <p className="text-xs text-slate-400">İlk 90 Saniye · 8 Senaryo · Anında Ödül</p>
+-          <div className="rounded-2xl border border-slate-700/50 bg-slate-900/80 p-6 backdrop-blur">
+-                <Trophy className="h-5 w-5 text-amber-400" aria-hidden />
+-                <h3 className="text-sm font-bold text-white">Sürekli Gelişim</h3>
+-                <p className="text-xs text-slate-400">Monotonic İlerleme · Streak & Rozetler</p>
+-            <div className="mt-5 flex items-center gap-2 rounded-lg bg-slate-800/60 px-3 py-2.5">
+-              <ChevronRight className="h-4 w-4 text-indigo-400 shrink-0" aria-hidden />
+-              <p className="text-xs text-slate-400 leading-snug">
+-                <strong className="text-white"> düşüremez</strong> — sadece gelişim vardır.
+== frontend/src/app/_sections/HeroSection.tsx
+-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-slate-950 pt-16">
+-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-300">
+-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] text-balance">
+-        <p className="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed text-balance">
+-          <strong className="text-slate-200 font-semibold">DISC davranış modeline dayalı</strong>{' '}
+-          <strong className="text-slate-200 font-semibold">sonsuza kadar ücretsiz.</strong>
+-            className="h-12 px-8 text-base border-white/20 text-slate-300 bg-transparent hover:bg-white/5 hover:text-white hover:border-white/30"
+-        <div className="h-8 w-5 rounded-full border-2 border-slate-600 flex items-start justify-center p-1">
+-          <div className="h-1.5 w-1 rounded-full bg-slate-400" />
+== frontend/src/app/_sections/Navbar.tsx
+-    <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+-            <span className="text-base font-bold text-white hidden sm:block">
+-              Menti<span className="text-indigo-400">Mentor</span>
+-                className="rounded-md px-3 py-1.5 text-sm text-slate-300 hover:text-white hover:bg-white/8 transition-colors"
+-            className="md:hidden rounded-md p-2 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+-                className="rounded-lg px-3 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-white/8 transition-colors"
+== frontend/src/app/_sections/PainSection.tsx
+-    <section className="bg-slate-950 py-24 px-4 border-t border-white/5">
+-          <p className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-3">
+-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+-            <span className="text-rose-400">yanlış eşleşme</span>
+-          <p className="mt-4 text-slate-400 max-w-xl mx-auto">
+-          <div className="rounded-2xl border border-rose-500/20 bg-rose-950/20 p-6">
+-            <p className="text-sm font-bold text-rose-400 mb-5 flex items-center gap-2">
+-                <li key={item} className="flex items-start gap-3 text-sm text-slate-400">
+-                  <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" aria-hidden />
+-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/15 p-6">
+-            <p className="text-sm font-bold text-emerald-400 mb-5 flex items-center gap-2">
+-                <li key={item} className="flex items-start gap-3 text-sm text-slate-300">
+-                  <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" aria-hidden />
+== frontend/src/app/page.tsx
+-        <footer className="bg-slate-950 border-t border-slate-800 py-10 px-4">
+-              <span className="text-sm font-bold text-white">
+-                Menti<span className="text-indigo-400">Mentor</span>
+-            <p className="text-xs text-slate-400 text-center">
+-            <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-400" aria-label="Yasal bağlantılar">
+-              <Link href="/gizlilik" className="hover:text-white underline-offset-4 hover:underline">Gizlilik Politikası</Link>
+-              <Link href="/kvkk" className="hover:text-white underline-offset-4 hover:underline">KVKK</Link>
+-              <Link href="/terms" className="hover:text-white underline-offset-4 hover:underline">Kullanım Koşulları</Link>
+```

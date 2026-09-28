@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-slate-950 pt-16">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-landing-bg pt-16">
 
       {/* ── Arka plan parlamaları ─────────────────────────────────────── */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -26,7 +26,7 @@ export function HeroSection() {
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center">
 
         {/* Üst rozet */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-300">
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-400" />
@@ -35,7 +35,7 @@ export function HeroSection() {
         </div>
 
         {/* Ana başlık */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] text-balance">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-landing-fg leading-[1.1] text-balance">
           Mentörlük programınızı{' '}
           <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-300 bg-clip-text text-transparent">
             zahmetsizce
@@ -44,11 +44,11 @@ export function HeroSection() {
         </h1>
 
         {/* Alt başlık */}
-        <p className="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed text-balance">
+        <p className="mt-6 text-base sm:text-lg text-landing-muted max-w-2xl mx-auto leading-relaxed text-balance">
           Dernekler, vakıflar ve üniversite kulüpleri için kapalı devre,{' '}
-          <strong className="text-slate-200 font-semibold">DISC davranış modeline dayalı</strong>{' '}
+          <strong className="text-landing-soft font-semibold">DISC davranış modeline dayalı</strong>{' '}
           akıllı mentörlük altyapısı. Kurulum sadece 10 dakika,{' '}
-          <strong className="text-slate-200 font-semibold">sonsuza kadar ücretsiz.</strong>
+          <strong className="text-landing-soft font-semibold">sonsuza kadar ücretsiz.</strong>
         </p>
 
         {/* CTA butonları */}
@@ -65,7 +65,7 @@ export function HeroSection() {
           </Button>
 
           <Button asChild variant="outline" size="lg"
-            className="h-12 px-8 text-base border-white/20 text-slate-300 bg-transparent hover:bg-white/5 hover:text-white hover:border-white/30"
+            className="h-12 px-8 text-base border-landing-border text-landing-soft bg-transparent hover:bg-landing-raised/60 hover:text-landing-fg hover:border-landing-muted"
           >
             <Link href="/metodoloji">Nasıl Çalışır?</Link>
           </Button>
@@ -74,8 +74,8 @@ export function HeroSection() {
 
       {/* ── Aşağı kaydır oku ─────────────────────────────────────────── */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="h-8 w-5 rounded-full border-2 border-slate-600 flex items-start justify-center p-1">
-          <div className="h-1.5 w-1 rounded-full bg-slate-400" />
+        <div className="h-8 w-5 rounded-full border-2 border-landing-border flex items-start justify-center p-1">
+          <div className="h-1.5 w-1 rounded-full bg-landing-muted" />
         </div>
       </div>
     </section>

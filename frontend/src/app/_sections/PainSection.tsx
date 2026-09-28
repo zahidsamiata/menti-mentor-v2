@@ -19,16 +19,16 @@ const AFTER = [
 
 export function PainSection() {
   return (
-    <section className="bg-slate-950 py-24 px-4 border-t border-white/5">
+    <section className="bg-landing-bg py-24 px-4 border-t border-landing-border/60">
       <div className="mx-auto max-w-5xl">
 
         <div className="text-center mb-16">
-          <p className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-indigo-700 dark:text-indigo-300 mb-3">
             Tanıyor musunuz?
           </p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-landing-fg leading-tight">
             Başarısız mentorlukların kökeninde çoğu zaman{' '}
-            <span className="text-rose-400">yanlış eşleşme</span>
+            <span className="text-rose-700 dark:text-rose-400">yanlış eşleşme</span>
             {' '}vardır.
             <InfoTooltip
               className="ml-2"
@@ -49,7 +49,7 @@ export function PainSection() {
               ]}
             />
           </h2>
-          <p className="mt-4 text-slate-400 max-w-xl mx-auto">
+          <p className="mt-4 text-landing-muted max-w-xl mx-auto">
             Sorun motivasyon değil. Araştırmalar, mentör-menti uyumuna göre yapılan eşleştirmenin
             mentorluğun etkisini ikiye katlayabildiğini gösteriyor.
           </p>
@@ -57,15 +57,15 @@ export function PainSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* ── Öncesi ──────────────────────────────────────────────────── */}
-          <div className="rounded-2xl border border-rose-500/20 bg-rose-950/20 p-6">
-            <p className="text-sm font-bold text-rose-400 mb-5 flex items-center gap-2">
+          <div className="rounded-2xl border border-rose-500/20 bg-rose-50 dark:bg-rose-950/20 p-6">
+            <p className="text-sm font-bold text-rose-700 dark:text-rose-400 mb-5 flex items-center gap-2">
               <X className="h-4 w-4" aria-hidden />
               Klasik Program Yönetimi
             </p>
             <ul className="space-y-3">
               {BEFORE.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-slate-400">
-                  <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" aria-hidden />
+                <li key={item} className="flex items-start gap-3 text-sm text-landing-muted">
+                  <X className="h-4 w-4 text-rose-700 dark:text-rose-500 shrink-0 mt-0.5" aria-hidden />
                   {item}
                 </li>
               ))}
@@ -73,15 +73,15 @@ export function PainSection() {
           </div>
 
           {/* ── Sonrası ─────────────────────────────────────────────────── */}
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/15 p-6">
-            <p className="text-sm font-bold text-emerald-400 mb-5 flex items-center gap-2">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-50 dark:bg-emerald-950/15 p-6">
+            <p className="text-sm font-bold text-emerald-800 dark:text-emerald-400 mb-5 flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4" aria-hidden />
               MentiMentor ile
             </p>
             <ul className="space-y-3">
               {AFTER.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-slate-300">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" aria-hidden />
+                <li key={item} className="flex items-start gap-3 text-sm text-landing-soft">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-800 dark:text-emerald-500 shrink-0 mt-0.5" aria-hidden />
                   {item}
                 </li>
               ))}

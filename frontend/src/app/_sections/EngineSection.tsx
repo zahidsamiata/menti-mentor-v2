@@ -4,29 +4,29 @@ import { Button } from '@/components/ui/button';
 import { InfoTooltip } from '@/components/atoms/InfoTooltip';
 
 const DISC_TYPES = [
-  { dim: 'D', label: 'Öncü',      color: 'text-orange-400',  bg: 'bg-orange-500/10',  border: 'border-orange-500/20', desc: 'Kararlı, hızlı, sonuç odaklı' },
-  { dim: 'I', label: 'Ateşleyici', color: 'text-yellow-400', bg: 'bg-yellow-500/10',  border: 'border-yellow-500/20', desc: 'İlham veren, sosyal, enerjik' },
-  { dim: 'S', label: 'Yapı Taşı', color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', desc: 'Güvenilir, sabırlı, uyumlu' },
-  { dim: 'C', label: 'Kâşif',     color: 'text-sky-400',     bg: 'bg-sky-500/10',     border: 'border-sky-500/20',    desc: 'Analitik, titiz, derinlikli' },
+  { dim: 'D', label: 'Öncü',      color: 'text-orange-800 dark:text-orange-400',  bg: 'bg-orange-500/10',  border: 'border-orange-500/20', desc: 'Kararlı, hızlı, sonuç odaklı' },
+  { dim: 'I', label: 'Ateşleyici', color: 'text-yellow-800 dark:text-yellow-400', bg: 'bg-yellow-500/10',  border: 'border-yellow-500/20', desc: 'İlham veren, sosyal, enerjik' },
+  { dim: 'S', label: 'Yapı Taşı', color: 'text-emerald-800 dark:text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', desc: 'Güvenilir, sabırlı, uyumlu' },
+  { dim: 'C', label: 'Kâşif',     color: 'text-sky-800 dark:text-sky-400',     bg: 'bg-sky-500/10',     border: 'border-sky-500/20',    desc: 'Analitik, titiz, derinlikli' },
 ] as const;
 
 export function EngineSection() {
   return (
-    <section id="algorithm" className="bg-slate-950 py-24 px-4 border-t border-white/5">
+    <section id="algorithm" className="bg-landing-bg py-24 px-4 border-t border-landing-border/60">
       <div className="mx-auto max-w-5xl">
 
         <div className="text-center mb-16">
-          <p className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-indigo-700 dark:text-indigo-300 mb-3">
             Eşleştirme Motoru
           </p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-landing-fg leading-tight">
             Sadece takvime değil,{' '}
             <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
               insan kimyasına
             </span>{' '}
             bak.
           </h2>
-          <p className="mt-4 text-slate-400 max-w-xl mx-auto">
+          <p className="mt-4 text-landing-muted max-w-xl mx-auto">
             İki boyutlu davranışsal skor: kim kiminle çalışır, kim çatışır?
           </p>
         </div>
@@ -37,14 +37,14 @@ export function EngineSection() {
           <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/20">
-                <Briefcase className="h-5 w-5 text-indigo-400" aria-hidden />
+                <Briefcase className="h-5 w-5 text-indigo-700 dark:text-indigo-300" aria-hidden />
               </div>
               <div>
-                <p className="text-2xl font-extrabold text-white">%60</p>
-                <p className="text-sm font-semibold text-indigo-400">Sektör Uyumu</p>
+                <p className="text-2xl font-extrabold text-landing-fg">%60</p>
+                <p className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">Sektör Uyumu</p>
               </div>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-landing-muted leading-relaxed">
               Mentör ve mentinin sektör/alan etiketlerinin ne kadar örtüştüğüne bakılır.
               Ortak alan yoksa skor sıfır; güçlü örtüşme yüksek skor sağlar.
               <InfoTooltip
@@ -68,11 +68,11 @@ export function EngineSection() {
           <div className="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
-                <Brain className="h-5 w-5 text-violet-400" aria-hidden />
+                <Brain className="h-5 w-5 text-violet-700 dark:text-violet-400" aria-hidden />
               </div>
               <div>
-                <p className="text-2xl font-extrabold text-white">%40</p>
-                <p className="text-sm font-semibold text-violet-400">
+                <p className="text-2xl font-extrabold text-landing-fg">%40</p>
+                <p className="text-sm font-semibold text-violet-700 dark:text-violet-400">
                   DISC Mizaç Uyumu
                   <InfoTooltip
                     className="ml-1.5"
@@ -92,7 +92,7 @@ export function EngineSection() {
                 </p>
               </div>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-landing-muted leading-relaxed">
               4 boyutlu psikometrik matris — tamamlayıcı profiller yüksek sinerji üretir.
               Çatışan profiller (ör. D↔D) hard-gate ile otomatik engellenir, not düşürülmez.
             </p>
@@ -104,15 +104,15 @@ export function EngineSection() {
           {DISC_TYPES.map(({ dim, label, color, bg, border, desc }) => (
             <div key={dim} className={`rounded-xl border ${border} ${bg} p-4 text-center`}>
               <p className={`text-3xl font-black ${color} mb-1`}>{dim}</p>
-              <p className="text-sm font-bold text-white">{label}</p>
-              <p className="text-xs text-slate-400 mt-1 leading-snug">{desc}</p>
+              <p className="text-sm font-bold text-landing-fg">{label}</p>
+              <p className="text-xs text-landing-muted mt-1 leading-snug">{desc}</p>
             </div>
           ))}
         </div>
 
         {/* ── Hard-gate notu ────────────────────────────────────────────────── */}
-        <div className="rounded-xl border border-rose-500/20 bg-rose-950/15 p-4 mb-10 text-sm text-slate-400 leading-relaxed text-center">
-          <span className="font-semibold text-rose-400">Toksik eşleşme koruması:</span>{' '}
+        <div className="rounded-xl border border-rose-500/20 bg-rose-50 dark:bg-rose-950/15 p-4 mb-10 text-sm text-landing-muted leading-relaxed text-center">
+          <span className="font-semibold text-rose-700 dark:text-rose-400">Toksik eşleşme koruması:</span>{' '}
           Belirli DISC kombinasyonları (örn. iki yüksek D profili) mentorluk bağlamında sistematik
           çatışma üretir. Bu çiftler algoritmik hard-gate ile eşleştirme havuzundan tamamen çıkarılır —
           skor düşürme değil, tam engelleme.

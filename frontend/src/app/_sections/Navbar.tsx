@@ -16,7 +16,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+    <header className="fixed top-0 inset-x-0 z-50 border-b border-landing-border bg-landing-bg/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
 
@@ -25,8 +25,8 @@ export function Navbar() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg">
               <span className="text-xs font-black text-white tracking-tighter">M²</span>
             </div>
-            <span className="text-base font-bold text-white hidden sm:block">
-              Menti<span className="text-indigo-400">Mentor</span>
+            <span className="text-base font-bold text-landing-fg hidden sm:block">
+              Menti<span className="text-indigo-700 dark:text-indigo-300">Mentor</span>
             </span>
           </Link>
 
@@ -36,7 +36,7 @@ export function Navbar() {
               <Link
                 key={label}
                 href={href}
-                className="rounded-md px-3 py-1.5 text-sm text-slate-300 hover:text-white hover:bg-white/8 transition-colors"
+                className="rounded-md px-3 py-1.5 text-sm text-landing-soft hover:text-landing-fg hover:bg-landing-raised transition-colors"
               >
                 {label}
               </Link>
@@ -56,7 +56,7 @@ export function Navbar() {
 
           {/* ── Mobile toggle ────────────────────────────────────────── */}
           <button
-            className="md:hidden rounded-md p-2 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="md:hidden rounded-md p-2 text-landing-muted hover:text-landing-fg hover:bg-landing-raised transition-colors"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'}
@@ -76,7 +76,7 @@ export function Navbar() {
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-white/8 transition-colors"
+                className="rounded-lg px-3 py-2.5 text-sm text-landing-soft hover:text-landing-fg hover:bg-landing-raised transition-colors"
               >
                 {label}
               </Link>
