@@ -2095,4 +2095,290 @@ Kaynak: `docs/otonom/kararlar/KARAR-129.md` (origin/main, değişiklik öncesi).
 **Cevap vermezsen:** Yönetici bugünkü nötr ekranı görür (C fiilen yürürlükte); başka iş kilitlenmez. İlgili: AJ-72 (BITTI), AJ-59.
 **CEVAP:**
 ```
+### KARAR-8 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-008.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-8 · Repoları private yapma  [PO AKSİYONU — ajan yapamaz]
+**Şu an ne var:** Karar dosyası (`00-KARAR-TAKIP.md:517`) "repolar PO tarafından private yapıldı" diyor. **Gerçekte ikisi de public** — 2026-09-09'da kimlik doğrulaması olmadan klonlandı.
+**Sorun ne:** Kod, KVKK metinleri, güvenlik denetim raporu, tüm karar geçmişi herkese açık. Kapatıldığı sanılan bir açık aslında açık.
+**Neden sana soruyorum:** GitHub hesabı senin; ajan yapamaz.
+**Seçenekler:**
+**A) Bugün private yap** · Kazanç: açık kapanır · Kayıp: strateji sohbetinin repoya doğrudan erişimi kapanır, bağlam paketi yöntemine dönülür · Süre: 2 dakika
+**B) Otonom turlar bitince yap** · Kazanç: birkaç gün daha hızlı bağlam · Kayıp: o günlerde açık sürüyor · Süre: 2 dakika (sonra)
+**C) Public kalsın** · Kazanç: açık kaynak görünürlüğü · Kayıp: KVKK metinleri ve güvenlik raporu dahil her şey açıkta
+**Karşılaştırma:** Gerçek kullanıcı ~sıfır olduğu için sızacak kişisel veri yok; risk daha çok iş/itibar tarafında. Yine de karar dosyasının yanlış bilgi taşıması başlı başına sorun — hangi seçeneği seçersen seç o satır düzeltilmeli.
+**Benim önerim:** B — sonra kesinlikle yap, unutma.
+**Cevap vermezsen:** Hiçbir iş kilitlenmez; açık sürer.
+**CEVAP:**
+
+---
+```
+
+### KARAR-13 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-013.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-13 · Yöneticiye manuel "işlet" butonları verilsin mi?  [ÜRÜN KARARI]
+> ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
+**Şu an ne var:** Sistemde arka planda otomatik çalışan bakım işleri var: eşleştirme ayarını yeniden hesaplama, eski/çöp veriyi temizleme, görüşme sonrası geri bildirim hatırlatması gönderme, ve bir mentinin "oryantasyon kilidini" kaldırma. Bunların hepsi backend'de uç olarak da yazılı ama hiçbir ekranda butonu yok. Kanıt: `adminRoutes.ts:80-81` (tuning/purge), `meetingRoutes.ts:132` (hatırlatıcı), `meetingRoutes.ts:137` (kilit kaldır). Frontend'de 0 çağrı.
+· ⚠️ **Güncel durum (2026-09-27, kod teyitli):** Ekranda buton yok ama uçlar AÇIK: herhangi bir kurumun yöneticisi `POST /api/admin/cron/run-purge` ve `/run-tuning`'i doğrudan çağırabiliyor (`backend/src/routes/adminRoutes.ts:83-84`) ve bu işler TÜM kurumlarda çalışıyor. Bu kurumlar arası etki bir hata olarak AJ-17'de düzeltiliyor (tetikleme yalnız kendi kurumunu etkileyecek); bu kartın sorusu ("buton verilsin mi") aynen geçerli.
+**Sorun ne:** Bu işler otomatiğe bağlı (zamanlanmış). Ama bir yönetici "şimdi çalıştır" demek isteyebilir — ör. yeni mentörler eklendi, eşleştirmeyi hemen yenilemek istiyor; ya da bir menti yanlışlıkla kilitlendi, elle açmak istiyor. Şu an bunu yapamıyor, otomatik işin sırasını beklemek zorunda.
+**Neden sana soruyorum:** "Yöneticiye ne kadar kontrol verelim" bir ürün tercihi — fazla buton paneli karmaşıklaştırır, az buton yöneticiyi çaresiz bırakır.
+**Kapsadığı kalemler:** `admin/cron/run-tuning`, `admin/cron/run-purge`, `meetings/reminders/send`, `meetings/orientation-lock/:userId` (DELETE).
+**Seçenekler:**
+**A) Hepsine yönetici butonu ver** · Kullanıcı (yönetici): "eşleştirmeyi yenile", "hatırlatıcı gönder", "kilidi kaldır" butonları görür · Kazanç: yönetici tam kontrol, otomatiği beklemez · Kaybedersin: yanlış tıklama riski (purge veri siler!), panel karmaşıklaşır, her butona onay/uyarı gerekir · Süre: M · Geri alınır: evet · Migration: yok
+**B) Yalnız güvenli/sık olanlara buton ver** (kilit kaldır + eşleştirme yenile), tehlikelileri (purge) otomatikte bırak · Kullanıcı: iki güvenli buton · Kazanç: en sık ihtiyaç karşılanır, tehlikeli işlem elden uzak · Kaybedersin: purge/hatırlatıcı hâlâ elle tetiklenemez · Süre: S · Geri alınır: evet · Migration: yok
+**C) Hiç buton verme, hepsi otomatik kalsın** · Kullanıcı: değişiklik yok · Kazanç: sıfır yanlış-tıklama riski, panel sade · Kaybedersin: yönetici çaresiz kaldığı durumlarda (yanlış kilit vb.) sana başvurmak zorunda · Süre: yok · Migration: yok
+**Karşılaştırma:** Yönetici deneyimini güçlendirmek istiyorsan B en dengeli — sık ve güvenli işleri açar, veri silen purge'ü elden uzak tutar. Tam kontrol felsefen varsa A ama purge butonu ciddi risk. Kurumlar henüz azsa ve sen destek verebiliyorsan C yeterli.
+**Benim önerim:** B — "kilidi kaldır" gerçek bir kullanıcı-kurtarma ihtiyacı; purge gibi yıkıcı işi butona koymak orantısız risk.
+**Cevap vermezsen:** Bu uçlar bağlanmaz, otomatik çalışmaya devam eder (kırık değil). Başka iş etkilenmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-16 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-016.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-16 · Yöneticiye eşleştirme kontrolleri (görünürlük onayı + yeniden eşleştirme) verilsin mi?  [ÜRÜN KARARI]
+**Şu an ne var:** Backend'de iki yönetici aksiyonu yazılı ama ekranda yok: (1) bir mentörün "görünür olma" onayını yönetici teyit eder (double-opt-in); (2) yönetici bir kullanıcıyı "yeniden eşleştir" diyerek eşleştirme sırasına tekrar sokar. Kanıt: `adminRoutes.ts:69` (visibility-optin confirm), `adminRoutes.ts:56` (rematch). Frontend'de 0 çağrı. Not: rematch'in bildirim kısmı henüz taslak (stub).
+**Sorun ne:** Yönetici bir mentörü onaylamak ya da kötü giden bir eşleşmeyi yeniden kurmak isteyebilir ama şu an yapamıyor. Eşleştirme tamamen otomatik; yöneticinin müdahale kolu yok.
+**Neden sana soruyorum:** "Eşleştirmeye yönetici ne kadar karışsın" ürünün "biz doğru eşi buluyoruz" iddiasına dokunuyor — fazla müdahale motorun değerini zayıflatır.
+**Kapsadığı kalemler:** `admin/visibility-optin/:optInId/confirm`, `admin/users/:id/rematch` (+ rematch bildirimi stub → gerçek bildirim gerekebilir).
+**Seçenekler:**
+**A) İkisini de aç** (onay + yeniden eşleştir butonları) · Kullanıcı (yönetici): mentör görünürlüğünü onaylar, kötü eşleşmeyi yeniden kurar · Kazanç: yönetici gerçek kontrol, sıkışan durumları çözer · Kaybedersin: yönetici motoru sık ezerse "otomatik eşleştirme" değeri aşınır; rematch bildirimi stub olduğu için kullanıcı neden yeniden eşleştiğini anlamayabilir · Süre: M · Geri alınır: evet · Migration: yok
+**B) Yalnız görünürlük onayını aç, rematch'i sonraya bırak** · Kullanıcı: yönetici mentör onaylar; yeniden eşleştirme yok · Kazanç: en sık ve düşük riskli ihtiyaç karşılanır, bildirimi tamamlanmamış rematch beklemede kalır · Kaybedersin: kötü eşleşmeyi yönetici elle düzeltemez · Süre: S · Geri alınır: evet · Migration: yok
+**C) İkisini de açma** · Kullanıcı: değişiklik yok · Kazanç: motor saf otomatik kalır, panel sade · Kaybedersin: yönetici sıkışan durumda (onay bekleyen mentör, kötü eşleşme) çaresiz · Süre: yok · Migration: yok
+**Karşılaştırma:** Yöneticiye eşleştirmede söz hakkı vermek istiyorsan ama motoru korumak istiyorsan B en güvenli başlangıç — görünürlük onayı motoru ezmez, yalnız kapı açar. Tam müdahale kolu istiyorsan A ama rematch bildiriminin tamamlanması gerekir. Motorun tam otomatik kalmasını savunuyorsan C.
+**Benim önerim:** B — görünürlük onayı düşük riskli ve net bir ihtiyaç; rematch, bildirimi tamamlanmadan açılırsa kullanıcı kafa karışıklığı yaratır.
+**Cevap vermezsen:** İki uç da bağlanmaz. Başka iş etkilenmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-40 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-040.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-40 · Eski `POST /api/meetings` ucu: düzeltilsin mi, karantinaya mı alınsın  [ÜRÜN/TEKNİK] (1 işi açar)
+> ⭐ **Kaynak:** güvenlik konseyi (`docs/raporlar/kesif/konsey-guvenlik-kvkk-2026-09-21.md`), 2026-09-21.
+**Şu an ne var:** İki görüşme yaratma yolu var. Canlı arayüz `POST /api/meetings/book` kullanıyor (kimliği **token'dan** alıyor, güvenli — `meetingController.ts:515`). Eski `POST /api/meetings` ise kimliği **gövdeden** alıyor ve sahiplik kontrolü yok (`:155-211`, GV-06) — ama oryantasyon kilidini **uygulayan tek yol** da bu (`:162`).
+**Sorun ne:** Açık uç canlıda mount'lu ve her mentiye yetkili. Bunu düzeltmek mi kapatmak mı gerektiği bir mükerrer-kod kararı.
+**Neden sana soruyorum:** Uç kapatmak **geri dönülmez** ve projenin SİLME PROTOKOLÜ'ne tabi (`K-13`, `E-4`); protokol senin ikinci onayını şart koşuyor.
+**Seçenekler:**
+· **A — Sahiplik kapısı ekle, uç kalsın.** Kullanıcı ne görür: kimse başkası adına randevu açamaz; başka hiçbir şey değişmez. Ne kazanırsın: **bugün güvenli**, hiçbir şey kaybolmaz, protokol gerekmez. **NE KAYBEDERSİN:** mükerrer kod kalır; iki yol arasındaki davranış farkı (oryantasyon kilidi yalnız eski yolda) sürer ve gelecekte yine karışır. Süre **S** · geri alınır ✅ · migration **yok**.
+· **B — Karantinaya al (rota kapalı), oryantasyon kilidini `book`'a taşı.** Kullanıcı ne görür: tek bir randevu yolu; kilit artık gerçekten çalışıyor. Ne kazanırsın: mükerrerlik biter, kilit **doğru yolda** uygulanır (V-15'i de çözer). **NE KAYBEDERSİN:** iki iş birden; `K-13` protokolü gereği **niyet + ikame kanıtı + arşiv belgesi** yazılmalı; bir tur bekler ve bu arada açık uç açık kalır. Süre **M** · geri alınır ✅ (karantina 🟡) · migration **yok**.
+· **C — Şimdilik dokunma, `K-13`/`E-4` turunu bekle.** Kullanıcı ne görür: hiçbir değişiklik. Ne kazanırsın: hiçbir şey. **NE KAYBEDERSİN:** ⛔ **açık uç canlıda açık kalır** — GV-06 bir çıkış blokeri; kabul edilemez. Süre **0** · geri alınır ✅ · migration **yok**.
+**Karşılaştırma:** A açığı bugün kapatır ama teknik borcu bırakır. B doğru son hâldir ama yavaştır. C açığı açık bırakır.
+**Benim önerim:** **A şimdi, B sonra** — sahiplik kapısı bugün eklensin (GV-06 kapansın), karantina kararı `K-13`/`E-4` turunda SİLME PROTOKOLÜ ile verilsin. Güvenlik düzeltmesi temizlik kararını **beklememeli**.
+**Cevap vermezsen:** GV-06'nın **acil yaması yine de yapılabilir** (A yolu karardan bağımsızdır), ama mükerrerlik ve oryantasyon kilidinin yanlış yolda durması sürer; V-15 ve K-13 ile birlikte belirsiz kalır.
+**CEVAP:**
+
+---
+```
+
+### KARAR-79 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-079.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-79 · Zamanlanmış bakım işlerini elle tetikleme yetkisi kimde olsun? (1 iş açar: KR-05) [YETKİ KARARI · GÜVENLİK]
+> ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
+> ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` B5 [D]. ⛔ Public repo: güvenlik ayrıntısı bu kartta yazılmaz; ayrıntı iş kapanınca rapora eklenir.
+**Şu an ne var:** Eşleştirme ağırlık ayarı ve KVKK veri temizliği her hafta otomatik çalışıyor. Bunları elle tetikleyen uçlar da var, ancak bu uçların **yetki kapsamı hatalı**. Dosyalar: `backend/src/routes/adminRoutes.ts` · `backend/src/controllers/adminController.ts`.
+**Sorun ne:** Hangi rolün bu işleri, hangi kapsamda (tüm platform mı, yalnız kendi kurumu mu) tetikleyebileceği belirlenmeden düzeltme yapılamıyor. O sürece kadar yetki kapsamı hatası açık kalıyor.
+**Neden sana soruyorum:** "Yetki kimde" CLAUDE.md'ye göre ürün kararıdır. Ayrıca KARAR-13 (yöneticiye manuel "işlet" düğmesi) ile doğrudan bağlı: bu kartın cevabı KARAR-13'ün ağırlık ayarı ve temizlik düğmeleri için anlamlı seçenekleri belirler. İkisinin birlikte cevaplanması önerilir.
+**Seçenekler:**
+- **A) Yalnız platform yöneticisi** · Kullanıcı ne görür: kurum yöneticisi bu işlemleri tetikleyemez; gerektiğinde platform yöneticisi çalıştırır · Ne kazanırsın: en dar yetki, açık en hızlı kapanır, küçük iş · **Ne kaybedersin:** kurum yöneticisi "eşleştirmeyi şimdi yenile" diyemez, sana başvurur; KARAR-13'ün bu iki düğmesi kurum panelinde anlamsızlaşır · Süre S · Geri alınır: evet · Migration: yok
+- **B) Kurum yöneticisi, yalnız kendi kurumu kapsamında** · Kullanıcı ne görür: kurum yöneticisi kendi kurumu için ağırlık ayarını ve temizliği tetikleyebilir · Ne kazanırsın: yönetici bağımsız; KARAR-13 düğmeleri anlamlı kalır · **Ne kaybedersin:** iki işin de kurum kapsamında çalışacak şekilde yeniden düzenlenmesi gerekir; daha çok iş ve test; kapsam hatalı kurulursa veri kaybı riski (temizlik işi veri siler) · Süre M · Geri alınır: evet · Migration: yok
+- **C) Karma: ağırlık ayarı kurum yöneticisinde (kendi kurumu), veri temizliği yalnız platform yöneticisinde** · Kullanıcı ne görür: kurum yöneticisi yalnız eşleştirmeyi yenileyebilir · Ne kazanırsın: sık ve güvenli iş yöneticide, veri silen iş platformda (KARAR-13'teki "güvenli olan düğme, yıkıcı olan elden uzak" önerisiyle uyumlu) · **Ne kaybedersin:** iki farklı yetki modeli, daha çok test; ağırlık ayarının kurum kapsamına indirilmesi yine gerekir · Süre M · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** A açığı en hızlı ve en güvenli kapatır ama yöneticiye esneklik vermez. B yöneticiye tam kontrol verir, en çok işi ve en yüksek yanlış kurulum riskini taşır. C, KARAR-13 önerisiyle tutarlı orta yol.
+**Benim önerim:** A — açık en dar yetkiyle hemen kapanır; kurum yöneticisine ihtiyaç çıkarsa sonradan C'ye genişletmek geri alınabilir bir adımdır.
+**Cevap vermezsen:** KR-05 kilitli kalır ve yetki kapsamı hatası açık kalır; aynı dosyaya dokunan KR-20 sırası da etkilenir.
+**CEVAP:**
+
+---
+```
+
+### KARAR-82 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-082.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-82 · Davet bağlantısı modeli (1 iş açar: U-12) [ÜRÜN + GÜVENLİK KARARI]
+**Şu an ne var:** Kurum yöneticisinin ürettiği davet bağlantısı 30 gün geçerli, belirli bir e-postaya bağlı değil, birden çok kez kullanılabiliyor ve iptal edilemiyor (`backend/src/controllers/selfServeController.ts:571` — `expiresIn: '30d'`, veritabanı kaydı yok).
+**Sorun ne:** Bağlantı yanlış kişinin eline geçerse (yanlış gruba iletilirse) 30 gün boyunca herkes kurumun üyesi olarak kayıt olabilir; yönetici bunu durduramaz. Davetli kişi artık doğrudan onaylı açıldığı için (form ve OAuth) etkisi büyüdü.
+**Neden sana soruyorum:** Kurumların davet deneyimini (toplu link mi, kişiye özel mi) ve güvenlik/kolaylık dengesini belirler.
+**Seçenekler:**
+- **A) Süreyi kısalt (7 gün), gerisi aynı** · Kullanıcı: yönetici haftalık yeni link üretir · Kazanç: en ucuz, migration yok · **Ne kaybedersin:** sızan link yine 7 gün kullanılabilir, iptal yok · Süre S · Geri alınır: evet · Migration: yok
+- **B) İptal edilebilir toplu link (veritabanı kaydı + "linki iptal et" düğmesi)** · Kullanıcı: yönetici sızan linki tek tıkla kapatır · Kazanç: kontrol yöneticide · **Ne kaybedersin:** yeni tablo + ekran işi · Süre M · Geri alınır: evet · Migration: VAR
+- **C) Kişiye özel, e-postaya bağlı, tek kullanımlık davet** · Kullanıcı: her davetli kendi linkini e-postayla alır · Kazanç: en güvenli · **Ne kaybedersin:** toplu WhatsApp paylaşımı biter, SMTP'ye bağımlı, en çok iş · Süre L · Geri alınır: zor · Migration: VAR
+**Karşılaştırma:** A hızlı ama sınırlı; B toplu paylaşımı koruyup kontrol verir; C en güvenli ama derneklerin toplu davet alışkanlığını bozar.
+**Benim önerim:** B — derneklerin toplu paylaşım alışkanlığını korurken sızıntıda yöneticiye kapatma imkânı verir.
+**Cevap vermezsen:** U-12 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+```
+
+### KARAR-83 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-083.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-83 · Kullanıcının rolünü kim, nasıl değiştirir? (1 iş açar: U-13) [YETKİ KARARI]
+**Şu an ne var:** MENTOR↔MENTI rol değiştiren bir yol yok; yanlış rolle kayıt olan düzeltilemiyor. Yöneticilikten düşürme her zaman "MENTOR" yazıyor (`backend/src/controllers/adminController.ts:972`) — kişi aslında mentiyse rolü bozuluyor.
+**Neden sana soruyorum:** "Yetki kimde" kararı ve rol değişince kişinin eşleşme/görüşme geçmişinin ne olacağı ürün sorusu.
+**Seçenekler:**
+- **A) Kurum yöneticisi rolü değiştirebilir; düşürmede hedef rolü seçer** · Kullanıcı: yönetici panelinde "rolü değiştir" · Kazanç: yanlış kayıt düzelir, düşürme bozulmaz · **Ne kaybedersin:** yöneticinin elinde güçlü bir araç; eski eşleşmeler yeni role uymayabilir · Süre M · Geri alınır: evet · Migration: yok
+- **B) Yalnız düşürme hatası düzeltilsin (hedef rolü yönetici seçer); rol değiştirme yok** · Kazanç: en küçük iş, bozulma biter · **Ne kaybedersin:** yanlış rolle kayıt yine düzeltilemez (kişi yeniden kayıt olur) · Süre S · Geri alınır: evet · Migration: yok
+- **C) Rol değişikliği yalnız platform yöneticisinde** · Kazanç: kontrol merkezde · **Ne kaybedersin:** her talep sana gelir · Süre M · Migration: yok
+**Karşılaştırma:** A kurumlara özerklik verir; B yalnız hatayı giderir; C denetimi artırır ama iş yükünü sana taşır.
+**Benim önerim:** B şimdi, A ihtiyaç doğunca — düşürmedeki sessiz bozulma bugünkü tek gerçek hata.
+**Cevap vermezsen:** U-13 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+```
+
+### KARAR-84 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-084.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-84 · E-posta çalışmazsa şifresini unutan nasıl girer? (1 iş açar: U-15) [YETKİ + ÜRÜN KARARI]
+**Şu an ne var:** Şifre sıfırlama yalnız e-postayla (`backend/src/controllers/authController.ts:548-575`). E-posta gönderimi başarısız olsa da kullanıcı "gönderildi" benzeri genel mesaj görüyor (hesap var mı bilgisini sızdırmamak için bilinçli); yöneticinin sıfırlama yolu yok.
+**Neden sana soruyorum:** Başkasının şifresini sıfırlama yetkisi kimde olacak — yetki kararı.
+**Seçenekler:**
+- **A) Kurum yöneticisi, üyesi için tek kullanımlık sıfırlama bağlantısı üretir (e-postasız, elden iletir)** · Kazanç: e-posta kapalıyken de çözüm · **Ne kaybedersin:** yönetici başkasının hesabına geçici erişim üretebilir (kötüye kullanım riski, iz kaydı şart) · Süre M · Migration: yok
+- **B) Yalnız platform yöneticisi üretir** · Kazanç: yetki dar · **Ne kaybedersin:** her talep sana gelir · Süre M · Migration: yok
+- **C) Şimdilik yalnız e-posta; gönderim hatası yöneticiye/izlemeye düşsün** · Kazanç: yetki değişmez · **Ne kaybedersin:** e-posta kapalıyken kullanıcı yine giremez · Süre S · Migration: yok
+**Karşılaştırma:** A kurum içinde hızlı çözüm; B daha güvenli ama merkezi yük; C en az risk, en az çözüm. E-postanın canlıda çalıştığı teyit edilirse (03-PO SMTP maddesi) C yeterli olabilir.
+**Benim önerim:** B — başkasının hesabına erişim üretmek hassas; ilk kurumlarda talep sayısı düşük. *(Yetki kararı senin.)*
+**Cevap vermezsen:** U-15 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+```
+
+### KARAR-85 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-085.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-85 · Yeni ortamda DISC soru havuzu nasıl dolacak? (1 iş açar: U-17) [SEED KARARI]
+**Şu an ne var:** Temiz bir veritabanında DISC soru havuzu boş kalıyor; dolduran tek yol veri silen `prisma/seed.ts` (bu turda KR-01 ile kilitlendi, yerel olmayan veritabanında artık çalışmaz). Yöneticinin soru ekleme ekranı DISC sorusu eklemeyi engelliyor.
+**Neden sana soruyorum:** Seed ve canlı veriye yazım kuralı gereği her seed işi senin onayını ister.
+**Seçenekler:**
+- **A) Ayrı, yalnız ekleyen/güncelleyen (silmeyen) bir "DISC soru havuzu" betiği** · Kazanç: yeni ortam güvenle kurulur; mevcut canlı veriye dokunmaz · **Ne kaybedersin:** yeni betik + bakım; çalıştırılması yine senin onayına bağlı · Süre S · Migration: yok
+- **B) Soruları migration içine göm** · Kazanç: kurulumda kendiliğinden gelir · **Ne kaybedersin:** migration = canlı DB değişikliği (her ortamda çalışır), içerik değişince yeni migration · Süre M · Migration: VAR
+- **C) Şimdilik yalnız kurulum belgesi (elle yöntem)** · Kazanç: sıfır kod · **Ne kaybedersin:** yeni ortam kurulumu kırılgan kalır · Süre S · Migration: yok
+**Karşılaştırma:** A en güvenli ve tekrarlanabilir; B otomatik ama her değişiklikte canlıya dokunur; C erteleme.
+**Benim önerim:** A — silmeyen betik mevcut güvenli seed desenleriyle (`seed-certification`, `seed-learning-journey`) aynı.
+**Cevap vermezsen:** U-17 (çıkış blokeri) kilitli kalır.
+**CEVAP:**
+```
+
+### KARAR-87 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-087.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-87 · Birden çok platform yöneticisi olacak mı? (1 iş açar: AN-38) [YETKİ KARARI]
+> ⭐ Kaynak: AN-38 uygulanırken (2026-09-25) koddan çıktı.
+**Şu an ne var:** Platform yönetim paneline tek bir ortak hesapla giriliyor; e-posta ve şifre sunucu ayarlarında duruyor (`backend/src/controllers/platformController.ts:35-60`). Bir kullanıcı şikâyeti incelendiğinde kayda "platform-admin" yazılıyor (`platformController.ts:525`); denetim izi de aynı adı kullanıyor (`backend/src/services/platformAudit.ts:18`). Yani "kim inceledi" sorusunun cevabı bugün zaten tek: o ortak hesap.
+**Sorun ne:** Kuyruktaki AN-38 "rapor incelendi kaydında gerçek yönetici adı görünsün" diyor. Ortak tek hesap varken kaydedilebilecek başka bir ad yok. Paneli birden çok kişi kullanırsa kimin ne yaptığı ayırt edilemez.
+**Neden sana soruyorum:** Platform düzeyinde kimin yetkili olduğu ve yöneticilerin kişi bazında izlenip izlenmeyeceği bir yetki kararı. Ayrıca kişiye özel hesap, yeni bir hesap modeli ister.
+**Seçenekler:**
+- **A) Tek ortak hesap kalsın; AN-38 "değişiklik gerekmez" diye kapansın** · Kullanıcı ne görür: hiçbir şey değişmez · Kazanç: sıfır iş · **Ne kaybedersin:** paneli ileride iki kişi kullanırsa kim-ne-yaptı ayrımı olmaz · Süre 0 · Geri alınır · Migration yok
+- **B) Kişiye özel platform yöneticisi hesapları** · Kullanıcı ne görür: her yönetici kendi e-postasıyla girer, incelemelerde kendi adı yazar · Kazanç: tam hesap verebilirlik (KVKK iz kaydı kişi bazında) · **Ne kaybedersin:** yeni hesap modeli + giriş akışı + yönetici ekleme/çıkarma ekranı; **migration VAR** · Süre L · Geri alınması zor
+- **C) Tek hesap kalsın ama girişte "incelemeyi yapan" adı sorulsun** · Kazanç: hafif ayrım · **Ne kaybedersin:** ad beyana dayalı, doğrulanmaz · Süre S · Migration yok
+**Karşılaştırma:** Paneli tek kişi kullanıyorsa A yeterli. Birden çok kişi kullanacaksa gerçek çözüm B. C ise doğrulanmayan bir ara yol.
+**Benim önerim:** A — bugün paneli kullanan tek ekip var; B, ekip büyüdüğünde ayrı bir iş olarak açılabilir. *(Bu senin ürün kararın, önerime güvenme.)*
+**Cevap vermezsen:** AN-38 kilitli kalır. Başka hiçbir iş etkilenmez.
+**CEVAP:**
+
+---
+```
+
+### KARAR-101 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-101.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-101 · Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi? (1 iş açar: Y1-B8) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Onay bekleyen bir kullanıcı **şifreyle** girmeye çalışınca oturum açamıyor ("Onay Bekleniyor" ekranına düşüyor — `authController.ts` ~:380). Ama **Google/LinkedIn ile** girince oturum açabiliyor ve menti panelindeki **"Bekleme Odasındasınız"** bölümünü görüyor: DISC testi, programdaki mentör sayısı, haftalık görüşme sıklığı, umut mesajı (F-15, I-05 ile canlıya çıktı — `frontend/src/app/(dashboard)/menti/page.tsx`). Aynı oturumla onay beklerken sohbet/randevu/anlaşma uçlarına da istek atabiliyor (onay kapısı yalnız eşleşme ve kullanıcı uçlarında). Kanıt: `docs/raporlar/kesif/kod-inceleme-teyit-dogrulamasi-2026-09-26.md` B8.
+**Sorun ne:** İki giriş yolu farklı davranıyor ve biri güvenlik açığı: onaylanmamış biri, yöneticinin onayından önce kurumun iç özelliklerine erişebiliyor. Ajanın hazırladığı düzeltme (PR backend #164 + çatı #343) OAuth yolunu da şifreli giriş gibi kapatıyor — ama o zaman **Bekleme Odası kimseye görünmüyor** (bağımsız inceleme bunu yakaladı, SONUÇ: SORUN VAR).
+**Neden sana soruyorum:** Bir özelliğin (Bekleme Odası) açık kalıp kalmayacağı ve onay bekleyenin neyi yapabileceği ürün kararı.
+**Seçenekler:**
+- **A) Kapat** — onay bekleyen kimse oturum açamaz (PR olduğu gibi). · Kullanıcı ne görür: yalnız "Onay Bekleniyor" sayfası; Bekleme Odası (DISC testi, mentör sayısı, umut mesajı) görünmez · Ne kazanırsın: açık hemen kapanır, en basit · **Ne kaybedersin:** bekleme süresi boş geçer, F-15/I-05 emeği görünmez olur · Süre S (hazır) · geri alınır ✅ · migration yok.
+- **B) Bekleme odası açık, iç özellikler kapalı** — onay bekleyen oturum açar ama yalnız bekleme odası uçlarını kullanır (profil, DISC testi, mentör sayısı, haftalık sıklık); sohbet/randevu/anlaşma/talep uçları onay kapısıyla kapanır. Hem şifreli hem OAuth girişi böyle olur. · Kullanıcı ne görür: onay beklerken DISC testini çözer, bekleme odasını görür; mesaj/randevu yapamaz · Ne kazanırsın: açık kapanır + bekleme süresi değerli kalır + iki giriş yolu eşitlenir · **Ne kaybedersin:** daha çok iş (her uç için kapı listesi, test) ve "hangi uç bekleme odasına ait" listesinin bakımı · Süre M · geri alınır ✅ · migration yok.
+- **C) Bugünkü hâl sürsün** (yalnız OAuth ile bekleme odası). · Ne kazanırsın: iş yok · **Ne kaybedersin:** güvenlik açığı açık kalır; şifreyle giren hiçbir zaman bekleme odasını görmez.
+**Karşılaştırma:** Hız öncelikse A (açık bugün kapanır, bekleme odası sonra B ile geri gelebilir). Onay süreleri uzunsa ve bekleme odası değerliyse B doğrudur. C güvenlik açığını bıraktığı için önerilmez.
+**Benim önerim:** B — güvenlik açığını kapatırken zaten canlıda olan ve bekleme süresini anlamlı kılan özelliği korur; iki giriş yolunu da eşitler. (A'yı ara adım olarak hemen, B'yi ardından da seçebilirsin — cevabında belirt.)
+**Cevap vermezsen:** Y1-B8 PR'ları (#164/#343) açık kalır; güvenlik açığı sürer.
+**CEVAP:**
+
+---
+```
+
+### KARAR-102 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-102.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-102 · Kayıttan sonra hemen giriş mi, önce e-posta doğrulaması mı? (1 iş açar: GV-12 kalanı) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Kurum kaydı (ve normal kayıt) başarılı olunca kişi **hemen oturum açmış** olarak kurulum ekranına geçiyor. E-posta zaten kayıtlıysa GV-12 düzeltmesiyle "zaten kayıtlı" denmiyor, aynı başarı mesajı dönüyor — ama bu sefer **oturum açılmıyor ve ekran farklı** (kurulum yerine "e-postanı kontrol et"). Yani dikkatli biri, sonraki ekrana bakarak bir e-postanın sistemde kayıtlı olup olmadığını anlayabiliyor. Kanıt: `backend/src/controllers/selfServeController.ts` GV-12 notu ("tam ayırt-edilemezlik oturumsuz kayıt gerektirir — ürün kararı"), `frontend/.../onboarding/stk/_steps/Step4Account.tsx:110-140`; denetim: `docs/raporlar/kesif/bitti-yeniden-denetim-2026-09-26.md` GV-12.
+**Sorun ne:** Bir kişinin platformda hesabı olup olmadığı (hangi dernekle çalıştığı dahil) dışarıdan öğrenilebiliyor. Küçük bir sızıntı ama kişisel veri.
+**Neden sana soruyorum:** Kapatmanın tek tam yolu kayıt akışını değiştirmek: herkes kayıttan sonra aynı "e-postanı kontrol et" ekranını görür, giriş e-postadaki bağlantıyla olur. Bu, yeni kullanıcı deneyimini (ilk dakikayı) değiştiren bir ürün kararı.
+**Seçenekler:**
+- **A) Önce e-posta doğrulaması (herkes için)** · Kullanıcı ne görür: kayıttan sonra "e-postanı kontrol et"; bağlantıya tıklayınca kurulum başlar · Ne kazanırsın: sızıntı tamamen kapanır + sahte e-postayla kayıt biter · **Ne kaybedersin:** kayıt bir adım uzar; e-posta gecikirse (SMTP) kullanıcı bekler; bazıları bırakır · Süre M · geri alınır ✅ · migration muhtemelen VAR (doğrulama bayrağı/token) → 🔵.
+- **B) Bugünkü hâl** (hemen giriş; kayıtlı e-postada farklı ekran) · Ne kazanırsın: en akıcı kayıt · **Ne kaybedersin:** küçük sızıntı kalır.
+- **C) Şimdilik B, ilk gerçek kurumlar girmeden önce A** · Ne kazanırsın: çıkış öncesi akış bozulmaz, sızıntı kurumlar gelmeden kapanır · **Ne kaybedersin:** iş ertelenir, unutulma riski (kuyrukta satır olarak durur).
+**Karşılaştırma:** Gerçek kullanıcı ~0 iken B'nin riski düşük; ilk dernekler gelmeden A daha doğru. SMTP henüz tam güvenilir değilse A kaydı kilitleyebilir.
+**Benim önerim:** C — sızıntı bugün kimseyi etkilemiyor; A'yı SMTP ayarları kesinleşince (03-PO-ELLE-ISLER B4) ve ilk kurumdan önce yapmak en güvenlisi. *(Ürün kararın, önerime güvenme.)*
+**Cevap vermezsen:** GV-12 kalanı açık kalır (bilinen sınır olarak).
+**CEVAP:**
+
+---
+```
+
+### KARAR-112 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-112.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-112 · Kurum logosu hangi adreslerden gösterilebilsin? (1 işi açar: AJ-22 kalanı) [ÜRÜN KARARI · GÜVENLİK]
+**Şu an ne var:** Kurum yöneticisi logo adresi olarak herhangi bir güvenli (https) internet adresi girebiliyor; sitenin tarayıcı güvenlik politikası (CSP — tarayıcıya "hangi kaynaklara izin var" diyen kural) 2026-09-27'den beri engelleme modunda ama görseller için her https adresine izin veriyor. Kanıt: `frontend/src/lib/securityHeaders.mjs` (img-src `https:`, AJ-22 #387) · logo yazma kısıtı `backend/src/services/logoUrl.ts:64-76` (https zorunlu; IP/localhost, port, kullanıcı bilgisi ve güvensiz dosya uzantısı reddedilir — ama alan adı serbest) · ham çizim `frontend/src/components/organisms/TenantSwitcher.tsx:199`, `frontend/src/app/(admin)/admin/branding/page.tsx:199`.
+**Sorun ne:** Kötü niyetli ya da ele geçirilmiş bir kurum yöneticisi logo adresi olarak kendi sunucusundaki görünmez bir görseli (izleme pikseli) verirse, kurumun her üyesi paneli açtığında o sunucu üyelerin IP adresini ve tarayıcı bilgisini görür (kişisel veri).
+**Neden sana soruyorum:** Seçeneklerden biri bazı kurumların logosunun görünmemesine, biri de PO'nun elle liste tutmasına yol açıyor — kurumların ne göreceğini etkileyen ürün kararı.
+**Seçenekler:**
+- **A) Bugünkü hâl kalsın (her https adres).** · Kullanıcı ne görür: her kurumun logosu görünür · Kazanç: sıfır iş, hiçbir logo kırılmaz · Kaybedersin: izleme pikseli riski sürer · Süre: — · Geri alınır: evet · Migration: yok
+- **B) İzinli alan adı listesi.** · Kullanıcı ne görür: listedeki sitelerde duran logolar görünür, diğerleri görünmez (yöneticiye "bu adres izinli değil" uyarısı) · Kazanç: piksel riski büyük ölçüde kalkar · Kaybedersin: listeyi PO elle tutar; listede olmayan kurumun logosu görünmez · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Logo bizim sunucumuza indirilip oradan gösterilsin.** · Kullanıcı ne görür: tüm logolar görünür, kaynağı bizim sunucumuz · Kazanç: en güvenlisi — üyelerin tarayıcısı dış adrese hiç gitmez · Kaybedersin: büyük iş; sunucunun dış adrese istek atması için ayrıca savunma (SSRF — sunucunun iç ağa yönlendirilmesi) gerekir; dosya depolama (kalıcı disk, 03-PO) · Süre: L · Geri alınır: evet · Migration: yok (dosya depolama ayarı PO)
+**Karşılaştırma:** Gerçek kurum sayısı azken A pratikte düşük risklidir; kurum sayısı artınca B hızlı bir ara çözüm, C kalıcı çözümdür. B ile C birlikte de düşünülebilir (önce B, sonra C).
+**Benim önerim:** A şimdilik, C ayrı iş olarak planlansın — çünkü bugün gerçek kurum yok ve B logoları kırarken C riski tamamen kaldırır; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** AJ-22 "kısmen" kalır; bugünkü davranış (A) sürer.
+**CEVAP:**
+```
+
+### KARAR-118 (2026-09-28, 3.1)
+
+Kaynak: `docs/otonom/kararlar/KARAR-118.md` (origin/main, değişiklik öncesi).
+
+```text
+### KARAR-118 · Ayrı bir deneme (staging) ortamı kurulsun mu? (0 iş kilitliyor) [ÜRÜN + ALTYAPI KARARI]
+**Şu an ne var:** Tek ortam var: lokal geliştirme canlı veritabanını kullanıyor (CLAUDE.md § CANLI = LOKAL AYNI DB), ayrı bir deneme sitesi yok. Kanıt: depoda staging izi yok (`docker-compose.yml`, `.github`, `scripts`, `frontend/src`, `backend/src` araması 0) · kaynak `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:212` (G8-07).
+**Sorun ne:** Her değişiklik ilk kez gerçek kullanıcıların sitesinde denenir; lokal bir veri hatası anında canlıya yansır.
+**Neden sana soruyorum:** Aylık maliyet ve hesap/sunucu kurulumu (Dokploy, Neon) yalnız sende.
+**Seçenekler:**
+- **A) Tam staging (ayrı site + ayrı veritabanı dalı).** · Kullanıcı ne görür: değişiklik yok (sen yeni sürümü önce deneme sitesinde görürsün) · Kazanç: canlıdan önce gerçekçi deneme, kurumlara demo/kabul testi; lokal canlı veritabanından kurtulur · Kaybedersin: aylık maliyet; iki ortamın ayarlarını eşit tutma yükü · Süre: M · Geri alınır: evet · Migration: yok
+- **B) Yalnız ayrı veritabanı (Neon dalı) — lokal ve testler ona bağlanır, site tek.** · Kullanıcı ne görür: değişiklik yok · Kazanç: canlı veriye kazara yazma riski biter, ucuz · Kaybedersin: arayüz değişikliği yine ilk kez canlıda görülür · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Şimdilik hiçbiri.** · Kullanıcı ne görür: değişiklik yok · Kazanç: maliyet ve emek yok · Kaybedersin: "canlı = lokal" riski ve "ilk deneme canlıda" durumu sürer · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Kullanıcı gelmeden önce riski ucuza kapatmak istiyorsan B; kurumlara demo ya da kabul testi yapacaksan A; maliyet şu an kesin engel ise C.
+**Benim önerim:** B — asıl risk canlı veriye kazara yazmak ve B bunu en ucuza kapatır; bu senin maliyet kararın, önerime güvenme. (Hangi veritabanının canlı olduğu teyidi — 03-PO ADIM 0 — ile birlikte düşün.)
+**Cevap vermezsen:** G8-07 açık kalır; migration/seed işleri canlı yedek şartıyla sürer.
+**CEVAP:**
+```
 

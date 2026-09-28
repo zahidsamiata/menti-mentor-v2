@@ -9,6 +9,7 @@
 **Karşılaştırma:** Kullanıcı gelmeden önce riski ucuza kapatmak istiyorsan B; kurumlara demo ya da kabul testi yapacaksan A; maliyet şu an kesin engel ise C.
 **Benim önerim:** B — asıl risk canlı veriye kazara yazmak ve B bunu en ucuza kapatır; bu senin maliyet kararın, önerime güvenme. (Hangi veritabanının canlı olduğu teyidi — 03-PO ADIM 0 — ile birlikte düşün.)
 **Cevap vermezsen:** G8-07 açık kalır; migration/seed işleri canlı yedek şartıyla sürer.
+**İlgili kartlar:** KARAR-25 (yedek de aynı Neon hesabı/plan kararına bağlı) · KARAR-26 (canlıdaki şemasız yedek tablolar; migration önce ayrı dalda denenirse kazara silinme riski azalır) · KARAR-35 (canlı veritabanına dokunma izni; ayrı dal "lokal = canlı" sorununu kaldırır)
 **CEVAP:**
 
 
