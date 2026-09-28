@@ -745,26 +745,6 @@ Kuyrukta kendi satırı olmayan BAĞLA kalemleri: bağlamsal geri bildirim kart�
 - `02-ILERLEME.md` için (⚠️ 2026-09-25 itibarıyla bu arşivleme `main`'de henüz YAPILMADI — tur sonunda güncel main üzerinde baştan yapılacak): son üç tur ana dosyada; öncekiler `docs/otonom/arsiv/02-ILERLEME-<YYYY-MM>.md`'ye.
 ````
 
-### docs/kararlar/konu/chat-v1-teslim.md:67 · VisibilityOptIn.requestMessage ölü alan — kolon DROP ayrı PO-onaylı te (#201)
-````text
-- **`VisibilityOptIn.requestMessage` (ölü alan) kaldırılmadı:** kolon DROP = şema değişikliği → bu tur "DB şeması değişmez" kuralı gereği **ertelendi**. Frontend'de kullanılmıyor (kanıt: 0 referans); backend `mentiRequestController` hâlâ yazıyor. Ayrı, PO-onaylı bir temizlik turu gerektirir.
-````
-
-### docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:21 · Big Five kişilik profili ayrı açık rıza gerektirebilir (G1-11, avukat  (#195)
-````text
-**PO kararı — ayrı tipli+sürümlü `Consent` modeli:** Minimal şemada (tek `consentVersion` alanı) **her yeni rıza türü = yeni migration** (canlı DB kırmızı kural). Tipli tabloda **yeni satır yeter, migration gerekmez.** Avukattan kaç rıza türü geleceği belirsiz → esnek yapı şart. Örn. **Big Five kişilik profili ayrı açık rıza gerektirebilir (G1-11, avukat bekliyor)** → tipli tabloda tek `type` satırı olur.
-````
-
-### docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:46 · Eski kvkkConsentAt (User/Tenant) alanının kaldırılması 'ayrı/sonraki i (#196)
-````text
-- Mevcut `kvkkConsentAt` (User:277, Tenant:186) **bu turda silinmez** — geriye uyum; yeni yazımlar Consent'e (dual-write), eski alanın kaldırılması ayrı/sonraki iş.
-````
-
-### docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:88 · G1-08: OAuth rıza gösterimi + tipli yazım (#197)
-````text
-- **G1-08:** OAuth rıza gösterimi + tipli yazım — bu modele bağlı, aynı/sonraki tur.
-````
-
 ### docs/kararlar/konu/degerlendirme-metrik-sistemi-tasarim-2026-08-19.md:158 · KVKK Md.11: kişi hakkındaki kalite puanına erişim hakkı — hukukçu konu (#206)
 ````text
 - **AÇIK NOKTA (hukuk):** KVKK Md.11 kapsamında kişinin kendi verisine erişim hakkı ayrı bir hukukçu konusudur.
