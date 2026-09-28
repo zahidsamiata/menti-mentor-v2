@@ -649,3 +649,97 @@
 ## docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:103 (AJ-71)
 
 - **Eski kayıt (yerini bul):** `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410` —
+
+## docs/kararlar/00-KART-INDEKSI.md — İŞ 2 TEK KAYNAK (bayat bekçisi 5c-t, 2026-09-28)
+
+> NEDEN: kart indeksi bağlı işin kuyruk durumunu kopyalıyordu ("⬜ → AJ-75 (BEKLIYOR)"); iş bitince kopya bayatladı. Durum hücresi işaretçiye çevrildi, bağlı iş bittiyse kartın kendi durumu güncellendi. Eski satırlar AYNEN:
+
+- :35 (G1-06) `| G1-06 | KVKK otomatik veri imhası | ⬜ → F-02 (BEKLIYOR) | md.81 | F-02 | KUYRUK |`
+- :37 (G1-08) `| G1-08 | OAuth açık rıza UI | ⬜ → AN-30 (PR-ACIK) | md.83 | F-03 | KUYRUK |`
+- :41 (G1-12) `| G1-12 | Veri İşleyen Sözleşmesi | ⬜ → AN-36 (BEKLIYOR) | md.90 | — | G-kartı |`
+- :42 (G1-13) `| G1-13 | Kulüp-tipi kurum aktif | ⬜ → AN-29 (BEKLIYOR) | md.91 | KARAR-9/18 | G-kartı |`
+- :47 (G1-18) `| G1-18 | Çift-tenant kimlik teyidi | ⬜ → AJ-56 (BEKLIYOR) | — | — | G-kartı |`
+- :49 (G1-20) `| G1-20 | RLS lint kuralı | ⬜ → AJ-75 (BEKLIYOR) | md.26(v2) | — | G-kartı |`
+- :55 (G1-26) `| G1-26 | Şüphe formu IP-limit/CAPTCHA | ⬜ → F-05 (BEKLIYOR) | — | F-05 | KUYRUK |`
+- :59 (G1-30) `| G1-30 | Çerez-izni bandı | ⬜ → Y-12 (BEKLIYOR) | md.67 | — | G-kartı |`
+- :69 (G2-06) `| G2-06 | "Varsayılana düşen oran" metriği | ⬜ → AJ-79 (BEKLIYOR) | **madde 111** | — | G-kartı |`
+- :72 (G2-09) `| G2-09 | CORE-eşiği tutarsızlığı (kart) | ⬜ → AJ-80 (BEKLIYOR) | md.102 | — | G-kartı |`
+- :93 (G3-15) `| G3-15 | Soru metni yazım hataları | ⬜ → AN-02 (PR-ACIK) | — | — | G-kartı |`
+- :110 (G4-09) `| G4-09 | Mükerrer platform API | ⬜ → E-4 (BEKLIYOR) | md.74 | K-13 | KUYRUK |`
+- :111 (G4-10) `| G4-10 | setVisibilityOptIn Taraf-1 | ⬜ → E-4 (BEKLIYOR) | md.86 | K-13 | KUYRUK |`
+- :145 (G5-01) `| G5-01 | Kurum başvuru maili açma | ⬜ → DK-02 (BEKLIYOR) | md.37m | KARAR-18 | G-kartı |`
+- :149 (G5-05) `| G5-05 | Kullanıcı→ürün geri bildirim | ⬜ → AN-52 (PR-ACIK) | E24 | F-31 | KUYRUK |`
+- :157 (G6-02) `| G6-02 | String→enum + çift-rol | ⬜ → AJ-77 (BEKLIYOR) | md.49 | — | G-kartı |`
+- :171 (G7-05) `| G7-05 | Ziyaretçi ölçümü | ⬜ → Y-12 (BEKLIYOR) | md.56 | — | G-kartı |`
+- :176 (G7-10) `| G7-10 | Açılış UX paketi | ⬜ → AJ-86 (BEKLIYOR) | md.22(v2) | — | G-kartı |`
+- :177 (G7-11) `| G7-11 | Açılış koyu/açık tema | ⬜ → AJ-86 (BEKLIYOR) | md.22(v2) | — | G-kartı |`
+- :179 (G7-13) `| G7-13 | Yumuşak lacivert tema yönü | ⬜ → AJ-86 (BEKLIYOR) | E4/md.65 | — | G-kartı |`
+- :180 (G7-14) `| G7-14 | Mesaj listesi sanallaştırma | ⬜ → AJ-83 (BEKLIYOR) | — | — | G-kartı |`
+- :195 (G8-11) `| G8-11 | Rate limiter Redis'e | ⬜ → AJ-76 (BEKLIYOR) | md.02:50/E2 | — | G-kartı |`
+- :196 (G8-12) `| G8-12 | Cron çok-sunucuda çift | ⬜ → AN-06 (BEKLIYOR) | — | — | G-kartı |`
+- :208 (G9-06) `| G9-06 | durum-panosu 📸'ye | ⬜ → F-01 (BEKLIYOR) | A11 | F-01 (reorg) | KUYRUK |`
+- :213 (G9-11) `| G9-11 | Belge reorg 5 taşıyıcı ad | ⬜ → F-01 (BEKLIYOR) | A5 | F-01 | KUYRUK |`
+- :214 (G9-12) `| G9-12 | Belge yeniden yapılandırma | ⬜ → F-01 (BEKLIYOR) | A5 | F-01 | KUYRUK |`
+- :223 (G10-01) `| G10-01 | Kesin-ölü kod bloğu | 🟨 kısmen — E-1 + E-2 · PR #183; kalan → E-4 (BEKLIYOR) | md.44 | K-13 · E-1..E-5 | KUYRUK |`
+- :224 (G10-02) `| G10-02 | VisibilityOptIn.requestMessage DROP | ⬜ → E-4 (BEKLIYOR) | md.18/A21 | — | G-kartı |`
+- :225 (G10-03) `| G10-03 | matchingInterface USER-strategy | ⬜ → E-4 (BEKLIYOR) | U2/md.44 | — | G-kartı |`
+- :226 (G10-04) `| G10-04 | findMatchesDueForCheckpoint LOG-ONLY | ⬜ → E-4 (BEKLIYOR) | D1 | — | G-kartı |`
+- :230 (G10-08) `| G10-08 | UserProfile.qualityMultiplier ikiz | ⬜ → E-4 (BEKLIYOR) | D3 | — | G-kartı |`
+- :232 (G10-10) `| G10-10 | PATCH /users/me/social bağlanmamış | ⬜ → E-4 (BEKLIYOR) | **madde 113** | K-13 | KUYRUK |`
+- :233 (G10-11) `| G10-11 | PATCH /users/:id/self-profile mükerrer | ⬜ → E-4 (BEKLIYOR) | A20 | K-13 | KUYRUK |`
+- :237 (G10-15) `| G10-15 | questionController toplu-yanıt | ⬜ → E-4 (BEKLIYOR) | md.70 | — | G-kartı |`
+- :240 (G10-18) `| G10-18 | enneagramWing tüketici yok | ⬜ → E-4 (BEKLIYOR) | md.86/101 | — | G-kartı |`
+- :253 (G11-02) `| G11-02 | Gelir modeli + pilot | ⬜ → AN-52 (PR-ACIK) · AN-29 (BEKLIYOR) | — | — | G-kartı |`
+- (Nasıl okunur lejantı) eski: `⬜ → <iş> (BEKLIYOR/PR-ACIK)`
+
+## İŞ 2 · 7b düzeltmesi (2026-09-28) — "kalan → X" kalıbı: bağlı iş bitmiş hücreler (eski satırlar AYNEN)
+
+> NEDEN: 7b incelemesi (#455) bekçinin "kalan → X" kalıbını ve oktan sonraki kimlik listesini görmediğini buldu; kural genişletilince 7 kart hücresi ve 00-KARAR-TAKIP'te kural (h) kapanış işareti eksik 7 satır çıktı. Kart hücresi bağlı işin kuyruk kaydına göre ✅/🟨 yapıldı; 00-KARAR-TAKIP satırlarına açıklayıcı metin KORUNARAK "✅ X kalanı yapıldı — PR #" eklendi. G6-01: N+1 ayağı AJ-06 ile kapanmış (`backend/src/controllers/conversationController.ts:298-329` groupBy, commit b42a36e).
+
+- docs/kararlar/00-KART-INDEKSI.md:52 (G1-23) `| G1-23 | logoUrl XSS koruması | 🟨 kısmen — F-04 + AJ-22 · PR #102/#272/#314, #387; kalan → AJ-52 · KARAR-112 | — | F-04 | KUYRUK |`
+- docs/kararlar/00-KART-INDEKSI.md:102 (G4-01) `| G4-01 | Havuz KART görünümü rol-bazlı | 🟨 kısmen — F-10 · commit d9fd456 (PR gerekmedi); kalan → AJ-81 | KARAR-2 | F-10 | KUYRUK |`
+- docs/kararlar/00-KART-INDEKSI.md:123 (G4-22) `| G4-22 | Menti "bekleme anı" | 🟨 kısmen — F-15 + AJ-45 · PR #228, #208/#395; kalan → AJ-82 | Y1 | F-15 | KUYRUK |`
+- docs/kararlar/00-KART-INDEKSI.md:131 (G4-30) `| G4-30 | Yönetici rapor EXPORT | 🟨 kısmen — F-18 · PR #163/#342; kalan → AJ-78 | Y3 | F-18 | KUYRUK |`
+- docs/kararlar/00-KART-INDEKSI.md:156 (G6-01) `| G6-01 | N+1 konuşma listesi | 🟨 kısmen — F-27 + AJ-45 · PR #86/#229, #208/#395; kalan → AJ-83 | md.48 | F-27 | KUYRUK |`
+- docs/kararlar/00-KART-INDEKSI.md:167 (G7-01) `| G7-01 | Ekran-okuyucu düzeltmeleri | 🟨 kısmen — F-21 · PR #305; kalan → AJ-84 | md.50 | F-21 | KUYRUK |`
+- docs/kararlar/00-KART-INDEKSI.md:175 (G7-09) `| G7-09 | WCAG 2.1 AA bütünsel | 🟨 kısmen — F-21 + AJ-07 · PR #305, #359; kalan → AJ-85 | md.64 | F-21 | KUYRUK |`
+- docs/kararlar/00-KARAR-TAKIP.md:108
+
+```text
+> ⚠️ **GÜNCELLEME (2026-09-02, G1 çapraz doğrulama): ⭐ YANLIŞ KAPATMA — düzeltildi.** **NEDEN yanlış kapandı:** logoUrl **sahiplik/IDOR guard'ı** gerçekten VAR → o tespit DOĞRU (kaybolmaz). AMA **G1-23 kartının konusu XSS** (host/MIME beyaz listesi + CSP) ve o KODDA YOK (`tenantController.ts:11,82` çıplak `z.string().url()`; CSP `server.ts:74` yalnız `/uploads`, tenant `logoUrl`'i kapsamıyor). → **G1-23 kartı ⬜ AÇIK'a DÖNDÜ · 🟨 kısmen — F-04 + AJ-22 (#387: CSP engelleme modu yapıldı, 2026-09-27); kalan: logo yalnız izinli kaynaktan → KARAR-112 · CSP ihlal kaydı → AJ-52 · 🟨 kısmen — AJ-05 + AJ-22 (#387: CSP engelleme modu yapıldı, 2026-09-27); kalan: logo yalnız izinli kaynaktan → KARAR-112 · CSP ihlal kaydı → AJ-52** (XSS gerçek açık iş; kart takip taşıyıcısıdır). Kaynak hiyerarşisi: bkz. **KURAL 15** (kök CLAUDE.md — çelişkide KART kazanır). Detay/kanıt: `bilanco/kararlar/G1-guvenlik-kvkk.md` [G1-23]. · geçmiş: bkz. GEÇMİŞ §G1-23-yanlis-kapatma-2026-09-02 (AJ-68)
+```
+- docs/kararlar/00-KARAR-TAKIP.md:311
+
+```text
+| 141 | Üç sorunun önüne tek cümle: "Son üç soru. Sonra karakter kartın hazır." | 🟨 kısmen — cümle + sıra canlıda (I-02, `frontend/src/app/onboarding/_OnboardingContent.tsx:36,190`); kalan: PO ek önlemleri (ayrı görsel dil + kart öncesi kısa geçiş) yapılmadı → AJ-70 | FE-metin+akış | ⚠️ PO ek önlemleri (141 kapsamına): (1) sorular kart ekranıyla FARKLI görsel dilde ("test bitti, form dolduruyorum" hissi); (2) kart açılışına kısa gecikme — sorulardan ayırsın, ödül anını belirginleştirsin. | arketip §4/§10-4 | Hayır | S · ✅ PO ek önlemleri yapıldı — AJ-70 · PR #433 · 2026-09-28 (form görünümü + kart öncesi geçiş) · geçmiş: bkz. GEÇMİŞ §md.141 (AJ-68) |
+```
+- docs/kararlar/00-KARAR-TAKIP.md:328
+
+```text
+| 158 | Sertifika deneme sınırı — günde 2, üçüncüsü için bekleme; bekleme süresince öğrenme yolculuğuna yönlendirme | 🟨 kısmen — mola metni + öğrenme yolculuğu yönlendirmesi canlıda (AN-01); kalan: takvim günü başına 2 deneme sınırı → I-08, sayfa yeniden açılınca kalan süre → AJ-60 | backend-mantık | Günlük deneme sayacı + bekleme + yolculuk yönlendirme | faz6 §5/§10-4 | ❓ (deneme sayacı/zaman alanı) | M |
+```
+- docs/kararlar/00-KARAR-TAKIP.md:339
+
+```text
+| 169 | **İki ayrı `DiscVector` tipi var** — `scoring.ts:12-18` (`confidence` zorunlu) ve `scoring.config.ts:8` (`confidence` yok, küçük harfli alanlar). Onboarding'in yazdığı obje ikisine de tam uymuyor. Tipler adlandırılıp ayrılsın ya da birleştirilsin | 🟨 kısmen — ölçek testi kapandı (PS-A1/AJ-32); kalan: iki `DiscVector` tipi hâlâ ayrı (`backend/src/services/scoring.ts:12` ↔ `scoring.config.ts:8`) → AJ-94 | KOD | İki tipi ayır/adlandır; `buildDiscVector` (madde 162) tek tipe dayansın · **⚠️ KAPSAM DARALTMASI (2026-09-08):**  → **keşif YAPILDI, kapsam netleşti.** Yapısal boşluk 13 JSON alanının hepsinde var; gözlenen hata yalnız `discVector`'da, çünkü katı app-tip sözleşmesi olan tek alan o. Bu madde artık **yalnız iki tip ayrımını** kapsar (S); genel JSON sertleştirmesi ayrı kalem (F.14, numarasız, M) | `scoring.ts:12-18` vs `scoring.config.ts:8` | Hayır | S · geçmiş: bkz. GEÇMİŞ §md.169 · ✅ yapıldı — AJ-94 · PR #242/#436 · 2026-09-28 · geçmiş: bkz. GEÇMİŞ §md.169 (AJ-68) |
+```
+- docs/kararlar/00-KARAR-TAKIP.md:373
+
+```text
+| 22 | Landing UX paketi + yumuşak lacivert tema | 🟨 kısmen — belge yönü yazıldı (G7-13); kalan: canlı-sonrası landing tema + UX paketi kodu → AJ-86 | Hayır | canlı-sonrası |
+```
+- docs/kararlar/00-KARAR-TAKIP.md:396
+
+```text
+| Y3 | Yönetici **rapor EXPORT** (PDF/CSV) + görüşme ivmesi/tamamlama-uyum ORAN metrikleri | 🟨 kısmen — CSV dışa aktarım (F-18) yapıldı; kalan: görüşme ivmesi/trend → KARAR-103 md.10, tamamlama oranı → AJ-78 | En az export (S) — Persona B/C kanıtı | denetim B.3/2,3,10,11,12,14 |
+```
+- docs/kararlar/00-KARAR-TAKIP.md:524
+
+```text
+- **🟡 Etiket-gerçek çelişkisi — 3 yaşayan belge (KURAL 3/4 ihlali, AJAN-E 2026-08-23):** (a) `oz-denetim/durum-panosu-2026-08-14.md` · 🟨 kısmen — (a) durum-panosu 📸, (b) tasarim-kararlari-admin ↪️ (AN-44); kalan: (c) `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` hâlâ 🔄 + tarihli ad → AJ-71
+```
+- docs/kararlar/00-KART-INDEKSI.md "Nasıl okunur" lejantı — eski satırın TAMAMI:
+
+```text
+- **durum** = 2026-09-28 senkron (GÖREV 2.3): `✅ <iş> · PR #` kuyrukta BITTI · `🟨 kısmen — <iş>; kalan → <sahip>` · `⬜ → <iş> (BEKLIYOR/PR-ACIK)` · `🔴 KARAR-N` cevapsız karar. Kuyrukta eşleşmesi olmayan hücreler G-kart snapshot kodunu korur: ✅ YAPILDI · 🟡 YARIM · ⬜ AÇIK · ❓ TEYİT · 🗑️ GEÇERSİZ · 🔵 v2-backlog.
+```
