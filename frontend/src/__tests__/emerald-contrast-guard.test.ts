@@ -12,6 +12,11 @@
  * 3) `statusColors.ts` içindeki her rozet sınıfının kontrastı Tailwind paletinden WCAG formülüyle
  *    hesaplanır: açık temada (beyaz zemin) ve koyu temada (sayfa + kart zemini üstüne karışmış
  *    saydam zemin) ≥ 4.5:1.
+ * 4) AJ-121: açık temada da uygulanan keyfi hex METİN rengi (`text-[#hex]`, önek zincirinde `dark`
+ *    yok) açık sayfa/kart zemininde ≥ 4.5:1 olmalı. Paylaş düğmesindeki `text-[#25D366]` (WhatsApp
+ *    yeşili) beyazda 1.98:1'di. Marka rengi zemin/ikon olarak kalabilir; metin koyu tona çekilir,
+ *    parlak marka tonu yalnız `dark:` ile. Renkli tint zemin üstündeki ölçüm (düğmenin kendi
+ *    `bg-[#hex]/10` zemini, hover dahil) `share-buttons-contrast.test.ts` içindedir.
  */
 import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
@@ -20,11 +25,14 @@ import colors from 'tailwindcss/colors';
 
 import { STATUS_PILL_CLASSES, SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
 
+import {
+  AA_TEXT, SURFACES, blend, contrast, hexToRgb, luminance, parseAlpha, type Rgb,
+} from './helpers/wcag';
+
 const SRC = join(__dirname, '..');
 const LOW_CONTRAST = /(?<![\w-])text-emerald-600(?![\w-])/;
 const PALETTE = 'red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|slate|gray|zinc|neutral|stone';
 const SOURCE_EXT = /\.(?:tsx?|jsx?|mjs|css)$/;
-const AA_TEXT = 4.5;
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -33,53 +41,6 @@ function walk(dir: string): string[] {
     return SOURCE_EXT.test(name) ? [full] : [];
   });
 }
-
-// ─── WCAG 2.x göreli parlaklık / kontrast ───────────────────────────────────
-type Rgb = [number, number, number];
-
-function hexToRgb(hex: string): Rgb {
-  const v = hex.replace('#', '');
-  return [0, 2, 4].map((i) => parseInt(v.slice(i, i + 2), 16) / 255) as Rgb;
-}
-
-function hslToRgb(h: number, s: number, l: number): Rgb {
-  const sat = s / 100;
-  const light = l / 100;
-  const k = (n: number) => (n + h / 30) % 12;
-  const a = sat * Math.min(light, 1 - light);
-  const f = (n: number) => light - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
-  return [f(0), f(8), f(4)];
-}
-
-function luminance([r, g, b]: Rgb): number {
-  const f = (x: number) => (x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
-  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
-}
-
-function contrast(a: Rgb, b: Rgb): number {
-  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
-  return (hi + 0.05) / (lo + 0.05);
-}
-
-function blend(fg: Rgb, bg: Rgb, alpha: number): Rgb {
-  return fg.map((c, i) => c * alpha + bg[i] * (1 - alpha)) as Rgb;
-}
-
-// ─── globals.css zeminleri (rozetlerin durduğu yüzeyler: sayfa + kart) ──────
-const GLOBALS_CSS = readFileSync(join(SRC, 'app/globals.css'), 'utf8');
-
-function themeToken(block: ':root' | '.dark', token: 'background' | 'card'): Rgb {
-  const start = GLOBALS_CSS.indexOf(`${block} {`);
-  const body = GLOBALS_CSS.slice(start, GLOBALS_CSS.indexOf('}', start));
-  const m = body.match(new RegExp(`--${token}:\\s*([\\d.]+)\\s+([\\d.]+)%\\s+([\\d.]+)%`));
-  if (start < 0 || !m) throw new Error(`globals.css ${block} --${token} bulunamadı`);
-  return hslToRgb(Number(m[1]), Number(m[2]), Number(m[3]));
-}
-
-const SURFACES = {
-  light: { background: themeToken(':root', 'background'), card: themeToken(':root', 'card') },
-  dark: { background: themeToken('.dark', 'background'), card: themeToken('.dark', 'card') },
-};
 
 type Swatch = { rgb: Rgb; alpha: number };
 
@@ -105,18 +66,6 @@ const DARK_HEX_MAX_LUMINANCE = Math.max(
   ),
 );
 
-/** `/40` · `/[0.4]` · `/[.4]` · `/[40%]` → 0.4; saydamlık yoksa 1. */
-function parseAlpha(raw: string | undefined): number {
-  if (!raw) return 1;
-  const arbitrary = raw.match(/^\[([\d.]+)(%?)\]$/);
-  if (arbitrary) return Number(arbitrary[1]) / (arbitrary[2] ? 100 : 1);
-  return Number(raw) / 100;
-}
-
-function expandHex(hex: string): string {
-  return hex.length === 3 ? hex.split('').map((c) => c + c).join('') : hex;
-}
-
 /**
  * Bir kaynak satırındaki, açık temada da uygulanan koyu zemin sınıfları. Önek zincirinde `dark`
  * geçmeyen her sınıf (öneksiz, `hover:`, `md:`, `md:hover:` …) açık temada da geçerlidir.
@@ -134,7 +83,7 @@ function darkTintsOnLight(line: string): string[] {
     const hex = base.match(HEX_BG);
     if (hex) {
       return parseAlpha(hex[2]) >= MIN_DARK_ALPHA
-        && luminance(hexToRgb(expandHex(hex[1]))) <= DARK_HEX_MAX_LUMINANCE;
+        && luminance(hexToRgb(hex[1])) <= DARK_HEX_MAX_LUMINANCE;
     }
     return false;
   });
@@ -160,6 +109,22 @@ const DARK_BG_EXCEPTIONS: { file: string; token: string; reason: string }[] = [
     reason: 'dolu kırmızı düğme, beyaz metin',
   },
 ];
+
+// ─── Açık temada keyfi hex metin taraması (AJ-121) ─────────────────────────
+const HEX_TEXT = /^text-\[#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\](?:\/(.+))?$/;
+
+/** Bir kaynak satırındaki, açık temada da uygulanan keyfi hex metin sınıfları (yorum satırları hariç). */
+function hexTextsOnLight(line: string): { token: string; rgb: Rgb; alpha: number }[] {
+  const trimmed = line.trim();
+  if (/^(?:\/\/|\/\*|\*|\{\/\*)/.test(trimmed)) return [];
+  return line.split(/[\s'"`{}(),;]+/).flatMap((token) => {
+    const parts = token.replace(/^!/, '').split(':');
+    const base = parts.pop()!.replace(/^!/, '');
+    if (parts.some((variant) => variant.includes('dark'))) return [];
+    const hex = base.match(HEX_TEXT);
+    return hex ? [{ token, rgb: hexToRgb(hex[1]), alpha: parseAlpha(hex[2]) }] : [];
+  });
+}
 
 function isException(rel: string, token: string): boolean {
   return DARK_BG_EXCEPTIONS.some((e) => e.file === rel && e.token === token);
@@ -218,6 +183,30 @@ describe('AJ-85 · AJ-110 · açık temada düşük kontrastlı renkli metin / r
       .filter((hit) => !isException(hit.rel, hit.token))
       .map((hit) => `${hit.rel}:${hit.line} ${hit.token}`);
     expect(offending).toEqual([]);
+  });
+
+  it('AJ-121: açık temada uygulanan keyfi hex metin (`text-[#hex]`) açık sayfa ve kart zemininde ≥ 4.5:1', () => {
+    const hits = files.flatMap((rel) =>
+      readFileSync(join(SRC, rel), 'utf8')
+        .split('\n')
+        .flatMap((text, i) => hexTextsOnLight(text).map((hit) => ({ ...hit, where: `${rel}:${i + 1}` }))),
+    );
+    // Boş tarama yeşil sayılmaz: paylaş düğmeleri hex metin taşıyor.
+    expect(hits.some((hit) => hit.where.startsWith('lib/a11y/shareColors.ts'))).toBe(true);
+    const failing = hits.flatMap((hit) =>
+      Object.entries(SURFACES.light).flatMap(([surfaceName, surface]) => {
+        const ratio = contrast(blend(hit.rgb, surface, hit.alpha), surface);
+        return ratio >= AA_TEXT ? [] : [`${hit.where} ${hit.token} / ${surfaceName} = ${ratio.toFixed(2)}`];
+      }),
+    );
+    expect(failing).toEqual([]);
+  });
+
+  it('AJ-121 desen: hex metin önek/saydamlık biçimleri yakalanır, dark: ve yorum serbest', () => {
+    expect(hexTextsOnLight("'bg-[#25D366]/10 text-[#25D366]'").map((h) => h.token)).toEqual(['text-[#25D366]']);
+    expect(hexTextsOnLight('hover:text-[#abc]/80').map((h) => [h.token, h.alpha])).toEqual([['hover:text-[#abc]/80', 0.8]]);
+    expect(hexTextsOnLight('dark:text-[#25D366] md:dark:text-[#fff]')).toEqual([]);
+    expect(hexTextsOnLight('// eski: text-[#25D366]')).toEqual([]);
   });
 
   it('istisna listesi bayat değil: her istisna kaynakta hâlâ geçiyor', () => {
