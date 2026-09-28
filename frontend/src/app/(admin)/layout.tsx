@@ -58,6 +58,7 @@ const NAV_GROUPS = [
     title: 'Ayarlar & Kurulum',
     items: [
       { href: '/admin/branding',        label: 'Marka',           icon: '🎨' },
+      { href: '/admin/yasal-bilgiler',  label: 'Yasal Bilgiler',  icon: '⚖️' },
       { href: '/admin/algorithm-tuner', label: 'Algoritma',       icon: '🧠' },
       { href: '/admin/tags',            label: 'Etiket Yönetimi', icon: '🏷️' },
     ],
