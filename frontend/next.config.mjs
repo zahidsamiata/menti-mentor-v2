@@ -37,6 +37,8 @@ const nextConfig = (phase) => ({
         headers: buildSecurityHeaders({
           apiUrl: process.env.NEXT_PUBLIC_API_URL,
           isDev: phase === PHASE_DEVELOPMENT_SERVER,
+          // DK-01: hata izleme servisinin origin'i connect-src'ye (DSN boşsa eklenmez).
+          errorMonitorDsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
         }),
       },
     ];

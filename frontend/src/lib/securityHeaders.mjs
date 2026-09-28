@@ -29,7 +29,8 @@
  *   görsel uzantısı). `http:`/`javascript:`/diğer şemalar engellenir. Host listesine daraltmak
  *   ürün kararı ister (izinli görsel alan adları). `images.remotePatterns` (next/image) ayrı ve
  *   hâlâ host listesiyle (`resolveImageDomains`) sınırlıdır.
- * - connect: kendi origin + backend API (`NEXT_PUBLIC_API_URL`).
+ * - connect: kendi origin + backend API (`NEXT_PUBLIC_API_URL`) + (DK-01) hata izleme servisinin
+ *   olay alma adresi — yalnız `NEXT_PUBLIC_SENTRY_DSN` doluysa ve https ise (anahtarsız hiçbir şey eklenmez).
  * - form-action: tüm formlar JS `onSubmit` ile gönderilir; OAuth `window.location.assign` ile
  *   backend'e YÖNLENDİRME'dir (form gönderimi değil) → 'self' yeterli.
  * - F-05 (G1-26): Cloudflare Turnstile CAPTCHA widget'ı `challenges.cloudflare.com`'dan bir
@@ -89,13 +90,30 @@ export function apiOrigin(apiUrl) {
 }
 
 /**
+ * DK-01: Sentry DSN'inden (`https://<anahtar>@<host>/<proje>`) yalnız olay alma origin'ini çıkarır.
+ * Anahtar (userinfo) origin'e girmez. https değilse ya da geçersizse null.
+ * @param {string | undefined} dsn
+ * @returns {string | null}
+ */
+export function errorMonitorOrigin(dsn) {
+  if (!dsn || !dsn.trim()) return null;
+  try {
+    const u = new URL(dsn.trim());
+    return u.protocol === 'https:' ? u.origin : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * CSP metnini üretir.
- * @param {{ apiUrl?: string, isDev?: boolean }} options
+ * @param {{ apiUrl?: string, isDev?: boolean, errorMonitorDsn?: string }} options
  * @returns {string}
  */
-export function buildContentSecurityPolicy({ apiUrl, isDev = false } = {}) {
+export function buildContentSecurityPolicy({ apiUrl, isDev = false, errorMonitorDsn } = {}) {
   const api = apiOrigin(apiUrl);
   const apiSources = api ? [api] : [];
+  const monitor = errorMonitorOrigin(errorMonitorDsn);
 
   /** @type {Record<string, string[]>} */
   const directives = {
@@ -104,7 +122,7 @@ export function buildContentSecurityPolicy({ apiUrl, isDev = false } = {}) {
     'style-src': ["'self'", "'unsafe-inline'"],
     'img-src': ["'self'", 'data:', 'blob:', ...apiSources, 'https:'],
     'font-src': ["'self'"],
-    'connect-src': ["'self'", ...apiSources],
+    'connect-src': ["'self'", ...apiSources, ...(monitor ? [monitor] : [])],
     'frame-src': ['https://challenges.cloudflare.com'],
     'object-src': ["'none'"],
     'base-uri': ["'self'"],
@@ -123,7 +141,7 @@ export function buildContentSecurityPolicy({ apiUrl, isDev = false } = {}) {
 
 /**
  * `next.config.mjs` `headers()` için başlık listesi.
- * @param {{ apiUrl?: string, isDev?: boolean }} options
+ * @param {{ apiUrl?: string, isDev?: boolean, errorMonitorDsn?: string }} options
  * @returns {{ key: string, value: string }[]}
  */
 export function buildSecurityHeaders(options = {}) {
