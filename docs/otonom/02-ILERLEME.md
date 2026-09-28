@@ -3,6 +3,34 @@
 > PO'nun turdan sonra okuyacağı TEK dosya. En baştaki "TUR ÖZETİ" bölümü kapanışta doldurulur.
 > Önceki haftalar: `docs/otonom/arsiv/02-ILERLEME-2026-W38.md` (haftalık döndürme — OTONOM-PROMPT § AKTİF/ARŞİV AYRIMI (d)).
 
+## TUR ÖZETİ (2026-09-27/28, VPS oturumu — GÖREV 0-4 · DURDU K1-a) — 00-SIMDI'den AYNEN taşındı 2026-09-28
+
+**Kapanan AJ (GÖREV 1 — 27 iş; AJ-29 🟡 ve AJ-38 🔴 kapsam dışı):**
+- ⛔ **Güvenlik / KVKK / yetki (7b opus ONAY + negatif test + mutasyon):** AJ-20 (U-08 rank-mentors onay kapısı — #196/#386) · AJ-21 (ham DISC vektörü mentöre dönmüyor — #194/#384) · AJ-22 **kısmen** (CSP engelleme modunda canlı — #387; kalan logo img-src → KARAR-112 + AJ-52) · AJ-24 (#383) · AJ-28 (#202/#390) · AJ-30 (#197/#385) · AJ-31 (#198/#390, migration'sız) · AJ-32 (#200/#390, 8/8 kalem) · AJ-40 (#205/#393; 7b: misafir üyede başka kurumun karar/gerekçe alanları maskelendi) · AJ-44 (#203/#390).
+- **Diğer BITTI:** AJ-23 (#392) · AJ-25 (#389) · AJ-26 (#206/#393) · AJ-27 (#388, belge) · AJ-33 (#391) · AJ-35 (#396) · AJ-36 (#397) · AJ-37 (#398) · AJ-39 (#399) · AJ-41 (#400, 3/3) · AJ-42 (#401) · AJ-43 (#209/#403) · AJ-45 (#208/#395, 14/14) · AJ-47 (#402) · AJ-48 (#211/#403).
+- **Kısmen:** AJ-22 (→ KARAR-112 / AJ-52) · AJ-46 (#404, belge kovası 8 kalem tam; YN-09 kalanı → AJ-68).
+- **ATLANDI(karar):** AJ-34 → KARAR-113 (#394). **🔵 PR-ACIK:** AJ-50 (backend #212, 7b ONAY 2. tur; KARAR-116 EVET + yedek bekliyor).
+- Toplam: **24 BITTI · 2 kısmen · 1 karar · 1 🔵** (AJ-50 GÖREV 1 içinde açılan satır).
+
+**Kova kalem durumu:** AJ-32 8/8 · AJ-41 3/3 · AJ-45 14/14 · AJ-46 8 tam + YN-09 kısmen (→ AJ-68) · AJ-22 CSP tam, logo img-src kısmen (→ KARAR-112).
+
+**Mutasyon kanıtı:** 26 kapanışın 25'inde mutasyon kırmızı (yerel 20 iş · CI taslak 6 PR: #195 · #199 · #201 · #204 · #207 · #210 — hepsi kapatıldı, merge yok) · 1 N/A (AJ-27 belge işi, Bölüm 6) · boş kutu 0.
+
+**Yeni KARAR kartları:** KARAR-112 (logo img-src) · 113 (sertifika sınavı 4+4/baraj) · 114 (tarayıcı bildirimi) · 115 (kurum kayıt sayfası arama) · 116 (🔵 AJ-50 EVET/HAYIR) · 117…125 (GÖREV 4; KVKK: KARAR-120). Toplam 14. CEVAP alanlarına dokunulmadı.
+
+**🔵 PR'lar (merge edilmedi):** backend #212 (AJ-50 · KARAR-116 · `User.discResultCard` yedeği + DB erişimi gerekir).
+
+**7b SORUN VAR turları (hepsi düzeltildi, sonra ONAY):** #381 · #382 · #387 · #388 · backend #200 (test verisinde kişi adı) · backend #205 (kurumlar arası gerekçe sızıntısı) · #394 · #399 · #401 (sayfa bağlantısı testsizdi) · #404 · #405 (dondurulmuş 2 belge işaretlenmişti) · backend #212 · #392 (canlıda NEXT_PUBLIC_SITE_URL yok → origin'den).
+
+**⚠️ sayısı (bitti-dogrulama raporu):** GÖREV A sayımı 56 birim; raporda bugün ⚠️ taşıyan 58 tablo satırı → **45 kapandı · 3 kısmen · 10 açık.** Açık 10'un sahibi var: AJ-29 (K-14, 🟡 kapsam dışı) · AJ-38 (PS-05, 🔴 kapsam dışı) · AJ-34/KARAR-113 (I-04) · KARAR-102 (GV-12) · KARAR-64 (AN-10) · KARAR-45 (AN-05) · 03-PO GIT_SHA (V-16) · 03-PO:151 (YN-13) · 2'si iş gerektirmiyor (AN-11 · IC-10 PO içerik onayı). ❌ 1 → 0.
+
+**GÖREV 4 — sahipsiz kalanlar** (#405, `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md`): 259 kalem — a teyit listesi 68 · c G-kart 108 · d yaşayan belgeler 83. **S1 18 · S2 144 · S3 59 · S4 16 · S5 14 · teyit 7 · aday-değil 1.** Açılan: **AJ-69…AJ-95 (27; KVKK/yetki 10: AJ-69 · 73 · 74 · 75 · 76 · 77 · 78 · 87 · 88 · 89)** · KARAR-117…125 (9; KVKK 1: KARAR-120) · 03-PO #30…#35 + avukat A11 (7; KVKK 2). Kalite kontrolü: S1 %20 örneklem çürüdü → tüm parti yeniden kontrol; 26 S1 kararından 8'i çürüdü, düzeltildi. Dondurulmuş belgelere işaret yok → 110 eşleme satırı.
+⚠️ **S3 = 59 > 30 → sahipsiz kalan yığını — strateji katmanı önceliklendirsin** (27 AJ satırı kuyrukta bekliyor).
+
+**Limit en çok nereye gitti:** (1) GÖREV 4 — 259 kalemi koda karşı sınıflamak + S1 kalite kontrolünün tam parti tekrarı · (2) 13 PR'da 7b SORUN VAR düzeltme turları (her tur yeniden CI + inceleme) · (3) backend PR → çatı pointer PR çift CI beklemeleri.
+
+**Canlı:** her merge sonrası `/health` ok:true · db:up · site 200. CANLIDA BAK satırları `02-ILERLEME.md`'de.
+
 ## TUR ÖZETİ (2026-09-27, VPS oturumu — BITTI SON DOĞRULAMA: GÖREV A/B/C · kapanış 18:40 UTC · DURDU K1-a)
 
 **BITTI ve CANLIDA (belge/süreç işi, 3 PR):**
@@ -1093,3 +1121,4 @@ Yalnız kararsız/geri-alınır 🟢 işler seçildi. Açık KARAR-1..28 değiş
 - 2026-09-27 · **AJ-46 (#404) BITTI (kısmen — AJ-68)** · AJ-50 🔵 PR-ACIK (#212) + KARAR-116 · **GÖREV 1 TAMAM** (24 BITTI · 2 kısmen · 1 karar · 1 🔵). GÖREV 4 yazma adımı başladı.
 - 2026-09-28 · **GÖREV 4 MERGE** — çatı #405 (`06f80ee`), 7b 2 tur (1. tur: dondurulmuş 2 belgeye işaret konmuştu → geri alındı, eşlemeye taşındı; KARAR-122 ↔ KARAR-42 bağlandı) · 259 kalem: S1 18 · S2 144 · S3 59 · S4 16 · S5 14 · teyit 7 · aday-değil 1 · açılan AJ-69…95 (27; KVKK/yetki 10) · KARAR-117…125 · 03-PO 7. S3 > 30 → strateji notu 00-SIMDI'de. CANLIDA BAK: (belge) kullanıcıya görünen değişiklik yok.
 - 2026-09-28 · **TUR KAPANDI — DURDU K1-a** (GÖREV 0-4). TUR ÖZETİ `00-SIMDI.md` başında: 24 BITTI · 2 kısmen · 1 karar · 1 🔵 (#212) · mutasyon 25 kırmızı + 1 N/A · 14 yeni KARAR · ⚠️ 58 satırın 45'i kapandı, 3 kısmen, 10 sahipli açık. K5'e geçilmedi.
+- 2026-09-28 · **TUR BAŞLANGIÇ — GÖREV 1-4 (T1 güvenlik/KVKK/veri kaybı · belge düzeni · karar paketi · T2-T5)** · K2 açılış: worktree'lerde push edilmemiş/kirli iş yok · stash yok · açık PR'lar 00-SIMDI ile aynı (çatı 7 · backend 9) · çatı `413b0c9` · backend `b79547d`. Önceki turun TUR ÖZETİ 00-SIMDI'den bu dosyanın başına taşındı. Yapılacak T1: 11 iş (AJ-57 · 73 · 87 · 74 · 88 · 69 · 51 · 54 · 59 · 55 · 75); 🔵 hazırlık: AJ-77 (AJ-50 zaten PR-ACIK #212).
