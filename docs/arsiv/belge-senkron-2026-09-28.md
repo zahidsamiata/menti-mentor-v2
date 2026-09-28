@@ -585,3 +585,7 @@
 ## docs/kararlar/00-KARAR-TAKIP.md:942 (AJ-72)
 
 > - aday · **Kuyrukta satırı olmayan bulgular** (strateji katmanı satır açsın mı): G-kart doğrulaması (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) ~30 ⬜ kalem · `GET /api/system-logs` denetim izi/meta · kurum-içi sayımlar `User.role` · frontend askı ekranı yok · token türü ayrımı (OAuth pending). · 🟨 kısmen — system-logs iz/meta (AJ-02) ve kurum-içi sayımlar (AJ-01/AJ-40) yapıldı; kalan: askı ekranı → AJ-72, token türü → AJ-87, platform geneli rol sayımı → KARAR-124, G-kart kalemleri → `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md` · ✅ token türü yapıldı — AJ-87 · PR #219/#410 · 2026-09-28
+
+## docs/kararlar/konu/06-tasarim-ux.md:40 (AJ-90)
+
+- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa. · 🟨 kısmen — kart ızgarası var; kalan: sayfalama (bugün tek istekte en çok 100) → AJ-90
