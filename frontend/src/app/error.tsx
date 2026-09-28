@@ -8,7 +8,8 @@
  *
  * - Kullanıcıya anlaşılır, suçlayıcı olmayan Türkçe mesaj + "Tekrar dene" / "Ana sayfaya dön".
  * - Hata AYRINTISI (stack/mesaj) kullanıcıya GÖSTERİLMEZ (KVKK/güvenlik) — yalnız konsola.
- * - Dış hata izleme servisi (Sentry vb.) EKLENMEZ; o ayrı bir PO kararıdır.
+ * - DK-01 (KARAR-27 → A): hata dış izleme servisine de iletilir — kişisel veri süzgecinden geçerek;
+ *   `NEXT_PUBLIC_SENTRY_DSN` yoksa hiçbir şey gönderilmez (`@/lib/errorMonitor`).
  */
 
 import { useEffect } from 'react';
@@ -16,6 +17,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, RotateCcw, Home } from 'lucide-react';
 import { UI_TEXT } from '@/lib/uiText';
+import { captureError } from '@/lib/errorMonitor';
 
 export default function Error({
   error,
@@ -27,6 +29,7 @@ export default function Error({
   useEffect(() => {
     // Yalnız konsola — kullanıcıya sızdırılmaz.
     console.error('[error-boundary]', error);
+    captureError(error);
   }, [error]);
 
   return (

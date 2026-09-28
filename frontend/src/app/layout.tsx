@@ -20,6 +20,7 @@ import { TenantSuspensionRedirect } from '@/providers/TenantSuspensionRedirect';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { getSiteUrl } from '@/lib/siteUrl';
 import { ScrollToTopButton } from '@/components/atoms/ScrollToTopButton';
+import { ErrorMonitorInit } from '@/providers/ErrorMonitorInit';
 
 /**
  * FOUC önleme: React hidrasyonundan ÖNCE `<html>` üzerine tema class'ını senkron uygula.
@@ -63,6 +64,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+        {/* DK-01: dış hata izleme — NEXT_PUBLIC_SENTRY_DSN yoksa hiçbir şey yapmaz. */}
+        <ErrorMonitorInit />
         <ThemeProvider>
           <AuthProvider>
             {/* AJ-72: 403 KURUM_ASKIDA → askı ekranı (tek yerden). */}

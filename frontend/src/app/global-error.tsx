@@ -6,11 +6,13 @@
  * `error.tsx` route segment'lerini yakalar; `global-error.tsx` ise KÖK layout'un kendisi
  * patladığında devreye girer ve kendi <html>/<body>'sini render etmek ZORUNDADIR (layout
  * yüklenmemiş olabilir). Bu yüzden tasarım token'larına/provider'lara güvenmeden inline stil
- * kullanılır. Hata ayrıntısı kullanıcıya GÖSTERİLMEZ — yalnız konsola.
+ * kullanılır. Hata ayrıntısı kullanıcıya GÖSTERİLMEZ — yalnız konsola ve (DK-01, anahtar varsa)
+ * kişisel veri süzgecinden geçerek dış hata izleme servisine.
  */
 
 import { useEffect } from 'react';
 import { UI_TEXT } from '@/lib/uiText';
+import { captureError, initErrorMonitor } from '@/lib/errorMonitor';
 
 export default function GlobalError({
   error,
@@ -21,6 +23,8 @@ export default function GlobalError({
 }) {
   useEffect(() => {
     console.error('[global-error-boundary]', error);
+    // Kök layout çöktüyse `ErrorMonitorInit` hiç çalışmamış olabilir → önce başlatmayı dene.
+    void initErrorMonitor().then(() => captureError(error));
   }, [error]);
 
   return (

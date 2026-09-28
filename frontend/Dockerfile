@@ -25,6 +25,12 @@ ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 # no-op kalır (zararsız ama gereksiz).
 ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY=
 ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
+# DK-01: hata izleme (Sentry) — boşsa izleme tamamen kapalı (SDK yüklenmez, ağ çağrısı yok).
+# Anahtar yalnız avukat onayı (aydınlatma metni + yurtdışı aktarım) sonrası Dokploy build argümanı olarak girilir.
+ARG NEXT_PUBLIC_SENTRY_DSN=
+ENV NEXT_PUBLIC_SENTRY_DSN=$NEXT_PUBLIC_SENTRY_DSN
+ARG NEXT_PUBLIC_SENTRY_ENVIRONMENT=
+ENV NEXT_PUBLIC_SENTRY_ENVIRONMENT=$NEXT_PUBLIC_SENTRY_ENVIRONMENT
 
 RUN npm run build
 
