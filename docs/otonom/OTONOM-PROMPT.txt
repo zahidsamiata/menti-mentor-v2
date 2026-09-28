@@ -54,7 +54,8 @@ Onceki tur yarida kalmis olabilir. Hicbir is yapmadan once su dort kontrol:
       turda BASTAN SONA OKUNMAZ; kilitli bir isin ya da kartin ayrintisi gerektiginde 00-KUYRUK § 🔴 KILIT
       HARITASI isaretcisi (ya da 01-KARARLAR indeks satiri) ile yalniz o bolum / o kart acilir.
     · Belge ararken ONCE: docs/00-BELGE-HARITASI.md
-    · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
+    · Bir ISIN durumu YALNIZ kuyrukta: 00-KUYRUK + 00-KUYRUK-KARAR-BEKLEYEN + arsiv/00-KUYRUK-bitti-*
+      (5c-t). docs/kararlar/00-KART-INDEKSI.md = G-kart → is ISARETCISI (`⬜ → <is>`); durum kopyalamaz.
     · ⚠️ docs/otonom/arsiv/ dosyalarini OKUMA — yalniz bir kalemin gecmisini aramak
       gerekirse ac. Rutin turda ana dosyalar (00-KUYRUK · 01-KARARLAR) yeter.
       (istisna: 5c kural f — kimlik aktif dosyada yoksa arsivde grep ZORUNLU.)
@@ -197,7 +198,9 @@ f) TEST: mevcutlar + yeni davranisa en az bir test
 g) Commit (Turkce, is no ile) → PR → Bolum 6 dogrulama listesi → kapiya gore merge
 h) ⛔ ARA KAYIT: push et, sonraki ise gecmeden
 i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>");
-   Durum BITTI ise satir AYNI commit'te arsive (5c kural a).
+   Durum BITTI ise satir AYNI commit'te arsive (5c kural a); bu ise isaret eden kart hucresi
+   (00-KART-INDEKSI "⬜ → <is>") AYNI commit'te "✅ <is> · PR #" / "🟨 kismen — <is>; kalan → <sahip>" (5c-h, 5c-t).
+   ⛔ `bash scripts/belge-bekci.sh` YESIL olmadan merge YOK (CI docs-guard job'u da ayni betik).
 j) Kalan 🟢 sayisini 02-ILERLEME'ye yaz, sonraki ise gec
 
 5b — PO KARARLARI 2026-09-26 (kalici)
@@ -273,9 +276,18 @@ Tasima SILME DEGILDIR: metin arsive AYNEN gider; tek satir kaybolursa is BASARIS
     CEVAP gelince bagli satirlar AYNI commit'te 00-KUYRUK'a (grubun "Geri donus yeri" bolumune) doner,
     kapi cevaba gore guncellenir, isaretci guncellenir/kalkar. Yeni 🔴 satir dogrudan KARAR-BEKLEYEN'e +
     isaretci. (GOREV 2.4, 2026-09-28)
+(t) TEK KAYNAK (PO 2026-09-28, IS 2): bir isin durumu YALNIZ kuyrukta yasar (00-KUYRUK + KARAR-BEKLEYEN +
+    arsiv/00-KUYRUK-bitti-*). Diger aktif belgeler baska bir isin durumunu KOPYALAMAZ, yalniz isaretci yazar
+    (`→ <is>`); kartin KENDI durum hucresi kalir ama bagli is bitince (a) ile AYNI commit'te guncellenir.
+    Gerekce: kopya is bitince bayatliyor (2026-09-28 denetimi: 00-KART-INDEKSI G1-20 · G7-10/11/13/14 bitmis
+    isi "BEKLIYOR" gosteriyordu); fazladan inceleme ajani degil mekanik bekci + tek kaynak.
+    Kapsam disi: docs/arsiv/ · docs/otonom/arsiv/ · docs/raporlar/ · 02-ILERLEME (tarihli kayit) · ## GECMIS ·
+    ~~cizili~~ · CEVAP satiri.
 Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
 01-KARARLAR'da ya da `docs/otonom/kararlar/KARAR-*.md`'de "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta
-kod disi `~~[ESKI` blogu. UYARI (n): 00-KUYRUK'ta kapisi 🔴 satir (→ KARAR-BEKLEYEN).
+kod disi `~~[ESKI` blogu · (t1) bitti arsivindeki is aktif belgede BEKLIYOR/⬜/acik durumla · (t2) bir isin
+degisken kuyruk durumu parantezle kopyalanmis (`<is> (BEKLIYOR)`). UYARI (n): 00-KUYRUK'ta kapisi 🔴 satir
+(→ KARAR-BEKLEYEN) · (t3) "⬜ → X" ama X kuyrukta BITTI (kismen).
 UYARI (kirmizi degil): boyut esikleri (00-KUYRUK > 90 KB · 01-KARARLAR > 40 KB · 02-ILERLEME > 80 KB · CLAUDE.md /
 OTONOM-PROMPT > 35 KB · 03-PO-ELLE-ISLER > 30 KB · 00-BELGE-HARITASI > 20 KB) · kural (h): arsivdeki BITTI
 satiri "madde N" atfi tasiyor ve 00-KARAR-TAKIP'te madde N satirinda ✅/🟨 yok → "BITTI isin kaynagi acik"
@@ -295,6 +307,7 @@ kartta bos) · (i5) indekste ✍️/✅ olan kararin isi hala KARAR-BEKLEYEN'de.
 6 — DOGRULAMA LISTESI  (merge oncesi — hepsi ✅ olmadan merge YOK)
 ═══════════════════════════════════════════════════════════════
  [ ] npm run verify yesil
+ [ ] belge bekcisi yesil (`bash scripts/belge-bekci.sh`, 5c-t dahil) — bekci yesil olmadan merge YOK
  [ ] ⚠️ TEST_DATABASE_URL yoksa entegrasyon testleri guard'la DURUR →
      bunu "yesil" SAYMA; o durumda CI asil kanittir
  [ ] CI iki repoda da yesil (backend CI yalniz main-hedefli PR'da kosar)

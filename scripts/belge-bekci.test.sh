@@ -279,4 +279,63 @@ for e in "00-KUYRUK.md 93 KB > 90 KB" "01-KARARLAR.md 42 KB > 40 KB" "02-ILERLEM
   grep -q "$e" "$TMP/out" || { echo "  ✗ boyut uyarısı yok: $e"; FAIL=1; }
 done
 
+# ── kural (t) TEK KAYNAK (İŞ 2, 2026-09-28): durum yalnız kuyrukta; bitmiş iş aktif belgede açık görünmez ──
+setup_t() {  # X-10 bitti arşivinde (tam BITTI) · X-01 aktif kuyrukta BEKLIYOR · X-11 arşivde yalnız kısmen
+  setup_clean
+  mkdir -p "$TMP/root/docs/otonom/arsiv" "$TMP/root/docs/kararlar"
+  cat >"$TMP/root/docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md" <<'EOF2'
+| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
+|---|---|---|---|---|---|---|
+| X-10 | Ş0 | bitmiş iş | 🟢 | görünür | BITTI | kaynak: test |
+| X-11 | Ş0 | yarım iş | 🟢 | görünür | 🟨 KISMEN (doğrulama) — kalan var | kaynak: test |
+EOF2
+  printf '| kart | konu | durum |\n|---|---|---|\n' >"$TMP/root/docs/kararlar/00-KART-INDEKSI.md"
+}
+kart() { echo "$1" >>"$TMP/root/docs/kararlar/00-KART-INDEKSI.md"; }
+
+setup_t; kart '| G1-20 | RLS | ⬜ → X-10 (BEKLIYOR) |'
+expect 1 "t1: bitmiş iş kart indeksinde \"⬜ → X (BEKLIYOR)\" → kırmızı"
+grep -q "5c-t1" "$TMP/out" || { echo "  ✗ t1 etiketi yok"; FAIL=1; }
+
+setup_t; kart '| G7-10 | tema | ⬜ → X-10 |'
+expect 1 "t1: bitmiş işe parantezsiz işaretçi ama kartın kendi durumu ⬜ → kırmızı"
+
+setup_t; printf 'Not: X-10 (açık) kalmıştı\n' >>"$TMP/root/docs/otonom/00-SIMDI.md"
+expect 1 "t1: 00-SIMDI'de bitmiş iş \"(açık)\" → kırmızı"
+
+setup_t; kart '| G1-06 | x | ⬜ → X-01 (BEKLIYOR) |'
+expect 1 "t2: aktif işin durumu parantezle kopyalanmış → kırmızı"
+grep -q "5c-t2" "$TMP/out" || { echo "  ✗ t2 etiketi yok"; FAIL=1; }
+
+setup_t; mkdir -p "$TMP/root/docs/otonom/kararlar"; printf '### KARAR-7 · soru\nbağlı: X-01 (PR-ACIK)\n**CEVAP:**\n' >"$TMP/root/docs/otonom/kararlar/KARAR-007.md"
+expect 1 "t2: kart dosyasında durum kopyası → kırmızı"
+
+setup_t; kart '| G1-20 | RLS | ✅ X-10 · PR #1 |'; kart '| G1-06 | x | ⬜ → X-01 |'; kart '| G1-07 | y | 🟨 kısmen — X-11; kalan → KARAR-1 |'
+expect 0 "t pozitif: bitmiş iş ✅ · aktif işe işaretçi · kısmen hücresi → yeşil"
+
+setup_t; kart '| G1-21 | z | ⬜ → X-11 (⬜ yarım) |'
+expect 0 "t pozitif: arşivde yalnız KISMEN olan iş bitmiş sayılmaz (t1 yok) → yeşil"
+
+setup_t; printf 'ref: X-10 (BITTI 2026-09-27) · X-01 (BITTI olunca)\n' >>"$TMP/root/docs/otonom/00-SIMDI.md"
+expect 0 "t pozitif: BITTI kopyası değişmez olgu → yeşil"
+
+setup_t; printf -- '- 2026-09-26 · X-10 (BEKLIYOR) · X-01 (PR-ACIK)\n' >"$TMP/root/docs/otonom/02-ILERLEME.md"
+mkdir -p "$TMP/root/docs/raporlar/kesif" "$TMP/root/docs/arsiv"
+printf '> 📸\nX-10 (BEKLIYOR)\n' >"$TMP/root/docs/raporlar/kesif/r.md"
+printf 'X-10 (BEKLIYOR)\n' >"$TMP/root/docs/arsiv/eski.md"
+expect 0 "t kapsam: 02-ILERLEME günlüğü · docs/raporlar · docs/arsiv tarihli fotoğraf → yeşil"
+
+setup_t; kart '| G1-20 | RLS | ~~⬜ → X-10 (BEKLIYOR)~~ ✅ X-10 |'
+printf '## GEÇMİŞ\n| G1-06 | x | ⬜ → X-01 (BEKLIYOR) |\n' >>"$TMP/root/docs/kararlar/00-KART-INDEKSI.md"
+mkdir -p "$TMP/root/docs/otonom/kararlar"; printf '### KARAR-8 · soru\n**CEVAP:** X-10 (BEKLIYOR) iken A\n' >"$TMP/root/docs/otonom/kararlar/KARAR-008.md"
+printf 'örnek: `⬜ → X-10 (BEKLIYOR)`\n' >>"$TMP/root/docs/otonom/OTONOM-PROMPT.txt"
+expect 0 "t kapsam: üstü çizili · ## GEÇMİŞ bölümü · CEVAP satırı · kod içi örnek → yeşil"
+
+setup_t; printf '| X-10 | Ş0 | yeniden açılan iş | 🟢 | görünür | BEKLIYOR | kaynak: test |\n' >>"$TMP/root/docs/otonom/00-KUYRUK.md"; kart '| G1-20 | RLS | ⬜ → X-10 |'
+expect 0 "t pozitif: arşivde BITTI ama aktif kuyrukta yeniden açılmış iş → yeşil"
+
+setup_t; printf '| X-12 | Ş0 | kısmen iş | 🟢 | görünür | BITTI (kısmen — KARAR-9) | kaynak: test |\n' >>"$TMP/root/docs/otonom/00-KUYRUK.md"; kart '| G2-09 | eşik | ⬜ → X-12 |'
+expect 0 "t3: \"⬜ → X\" ama X kuyrukta BITTI (kısmen) → yeşil + uyarı"
+grep -q "5c-t3" "$TMP/out" || { echo "  ✗ t3 uyarısı yok"; FAIL=1; }
+
 exit $FAIL

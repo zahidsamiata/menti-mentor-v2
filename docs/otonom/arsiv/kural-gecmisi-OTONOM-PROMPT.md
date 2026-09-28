@@ -337,3 +337,38 @@ UYARI (AJ-46, 2026-09-27): (i) CI job'u `scripts/verify.sh` basliginda anilmiyor
 ilk 5 satirda TUR etiketi (📸/🔄/🔥/🌡️/🧊) olmayan rapor · (k) `docs/` altinda indekssiz klasor · (l) CLAUDE.md'nin
 kendi icine satir numarasiyla atfi · (m) 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri asan satir sayisi.
 ```
+
+## 0.4 OKU · "Bir kalemin durumu icin" · eski satır 57 · taşındı 2026-09-28 (İŞ 2 — TEK KAYNAK)
+
+NEDEN değişti: bu satır durumun yeri olarak 00-KART-INDEKSI'ni gösteriyordu, ama iş-bitti adımları (5 i, 7b "Merge sonrası") indeksi güncellemiyordu ve indeks başka işin durumunu kopyalıyordu ("⬜ → AJ-75 (BEKLIYOR)"). 2026-09-28 tur sonu denetimi: G1-20 (AJ-75 #419 ile bitti), G7-10, G7-11, G7-13 (AJ-86 bitti), G7-14 (AJ-83 bitti) hâlâ "BEKLIYOR". PO kararı: çözüm mekanik bekçi + tek kaynak (durum yalnız kuyrukta, indeks işaretçi) — 5c kural (t).
+
+```text
+    · Bir kalemin durumu icin: docs/kararlar/00-KART-INDEKSI.md
+```
+
+## 5 HER IS ICIN DONGU · (i) · eski satır 199-200 · taşındı 2026-09-28 (İŞ 2)
+
+NEDEN değişti: iş-bitti adımı bağlı kart hücresini ve bekçi kapısını anmıyordu → kart indeksi bayatladı. Eklendi: kart hücresi aynı commit'te + "bekçi yeşil olmadan merge yok".
+
+```text
+i) 00-KUYRUK.md: Durum + Not (PR no + "CANLIDA BAK: <kullanici ne gormeli>");
+   Durum BITTI ise satir AYNI commit'te arsive (5c kural a).
+```
+
+## 5c · Otomatik bekci (HATA listesi) · eski satır 276-278 · taşındı 2026-09-28 (İŞ 2)
+
+NEDEN değişti: HATA listesine (t1) bayat durum ve (t2) durum kopyası eklendi; üstüne kural (t) metni.
+
+```text
+Otomatik bekci: `scripts/belge-bekci.sh` (verify + CI). HATA: 00-KUYRUK'ta BITTI ya da "→" satiri ·
+01-KARARLAR'da ya da `docs/otonom/kararlar/KARAR-*.md`'de "ISLENDI" notlu kart · CLAUDE.md / OTONOM-PROMPT'ta
+kod disi `~~[ESKI` blogu. UYARI (n): 00-KUYRUK'ta kapisi 🔴 satir (→ KARAR-BEKLEYEN).
+```
+
+## 6 DOGRULAMA LISTESI · eski satır 297 (ilk kutu) · 2026-09-28 (İŞ 2)
+
+NEDEN değişti: altına "belge bekçisi yeşil olmadan merge YOK" kutusu eklendi (eski satır aynen duruyor; yalnız ekleme).
+
+```text
+ [ ] npm run verify yesil
+```

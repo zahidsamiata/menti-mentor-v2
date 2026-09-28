@@ -649,3 +649,45 @@
 ## docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:103 (AJ-71)
 
 - **Eski kayıt (yerini bul):** `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410` —
+
+## docs/kararlar/00-KART-INDEKSI.md — İŞ 2 TEK KAYNAK (bayat bekçisi 5c-t, 2026-09-28)
+
+> NEDEN: kart indeksi bağlı işin kuyruk durumunu kopyalıyordu ("⬜ → AJ-75 (BEKLIYOR)"); iş bitince kopya bayatladı. Durum hücresi işaretçiye çevrildi, bağlı iş bittiyse kartın kendi durumu güncellendi. Eski satırlar AYNEN:
+
+- :35 (G1-06) `| G1-06 | KVKK otomatik veri imhası | ⬜ → F-02 (BEKLIYOR) | md.81 | F-02 | KUYRUK |`
+- :37 (G1-08) `| G1-08 | OAuth açık rıza UI | ⬜ → AN-30 (PR-ACIK) | md.83 | F-03 | KUYRUK |`
+- :41 (G1-12) `| G1-12 | Veri İşleyen Sözleşmesi | ⬜ → AN-36 (BEKLIYOR) | md.90 | — | G-kartı |`
+- :42 (G1-13) `| G1-13 | Kulüp-tipi kurum aktif | ⬜ → AN-29 (BEKLIYOR) | md.91 | KARAR-9/18 | G-kartı |`
+- :47 (G1-18) `| G1-18 | Çift-tenant kimlik teyidi | ⬜ → AJ-56 (BEKLIYOR) | — | — | G-kartı |`
+- :49 (G1-20) `| G1-20 | RLS lint kuralı | ⬜ → AJ-75 (BEKLIYOR) | md.26(v2) | — | G-kartı |`
+- :55 (G1-26) `| G1-26 | Şüphe formu IP-limit/CAPTCHA | ⬜ → F-05 (BEKLIYOR) | — | F-05 | KUYRUK |`
+- :59 (G1-30) `| G1-30 | Çerez-izni bandı | ⬜ → Y-12 (BEKLIYOR) | md.67 | — | G-kartı |`
+- :69 (G2-06) `| G2-06 | "Varsayılana düşen oran" metriği | ⬜ → AJ-79 (BEKLIYOR) | **madde 111** | — | G-kartı |`
+- :72 (G2-09) `| G2-09 | CORE-eşiği tutarsızlığı (kart) | ⬜ → AJ-80 (BEKLIYOR) | md.102 | — | G-kartı |`
+- :93 (G3-15) `| G3-15 | Soru metni yazım hataları | ⬜ → AN-02 (PR-ACIK) | — | — | G-kartı |`
+- :110 (G4-09) `| G4-09 | Mükerrer platform API | ⬜ → E-4 (BEKLIYOR) | md.74 | K-13 | KUYRUK |`
+- :111 (G4-10) `| G4-10 | setVisibilityOptIn Taraf-1 | ⬜ → E-4 (BEKLIYOR) | md.86 | K-13 | KUYRUK |`
+- :145 (G5-01) `| G5-01 | Kurum başvuru maili açma | ⬜ → DK-02 (BEKLIYOR) | md.37m | KARAR-18 | G-kartı |`
+- :149 (G5-05) `| G5-05 | Kullanıcı→ürün geri bildirim | ⬜ → AN-52 (PR-ACIK) | E24 | F-31 | KUYRUK |`
+- :157 (G6-02) `| G6-02 | String→enum + çift-rol | ⬜ → AJ-77 (BEKLIYOR) | md.49 | — | G-kartı |`
+- :171 (G7-05) `| G7-05 | Ziyaretçi ölçümü | ⬜ → Y-12 (BEKLIYOR) | md.56 | — | G-kartı |`
+- :176 (G7-10) `| G7-10 | Açılış UX paketi | ⬜ → AJ-86 (BEKLIYOR) | md.22(v2) | — | G-kartı |`
+- :177 (G7-11) `| G7-11 | Açılış koyu/açık tema | ⬜ → AJ-86 (BEKLIYOR) | md.22(v2) | — | G-kartı |`
+- :179 (G7-13) `| G7-13 | Yumuşak lacivert tema yönü | ⬜ → AJ-86 (BEKLIYOR) | E4/md.65 | — | G-kartı |`
+- :180 (G7-14) `| G7-14 | Mesaj listesi sanallaştırma | ⬜ → AJ-83 (BEKLIYOR) | — | — | G-kartı |`
+- :195 (G8-11) `| G8-11 | Rate limiter Redis'e | ⬜ → AJ-76 (BEKLIYOR) | md.02:50/E2 | — | G-kartı |`
+- :196 (G8-12) `| G8-12 | Cron çok-sunucuda çift | ⬜ → AN-06 (BEKLIYOR) | — | — | G-kartı |`
+- :208 (G9-06) `| G9-06 | durum-panosu 📸'ye | ⬜ → F-01 (BEKLIYOR) | A11 | F-01 (reorg) | KUYRUK |`
+- :213 (G9-11) `| G9-11 | Belge reorg 5 taşıyıcı ad | ⬜ → F-01 (BEKLIYOR) | A5 | F-01 | KUYRUK |`
+- :214 (G9-12) `| G9-12 | Belge yeniden yapılandırma | ⬜ → F-01 (BEKLIYOR) | A5 | F-01 | KUYRUK |`
+- :223 (G10-01) `| G10-01 | Kesin-ölü kod bloğu | 🟨 kısmen — E-1 + E-2 · PR #183; kalan → E-4 (BEKLIYOR) | md.44 | K-13 · E-1..E-5 | KUYRUK |`
+- :224 (G10-02) `| G10-02 | VisibilityOptIn.requestMessage DROP | ⬜ → E-4 (BEKLIYOR) | md.18/A21 | — | G-kartı |`
+- :225 (G10-03) `| G10-03 | matchingInterface USER-strategy | ⬜ → E-4 (BEKLIYOR) | U2/md.44 | — | G-kartı |`
+- :226 (G10-04) `| G10-04 | findMatchesDueForCheckpoint LOG-ONLY | ⬜ → E-4 (BEKLIYOR) | D1 | — | G-kartı |`
+- :230 (G10-08) `| G10-08 | UserProfile.qualityMultiplier ikiz | ⬜ → E-4 (BEKLIYOR) | D3 | — | G-kartı |`
+- :232 (G10-10) `| G10-10 | PATCH /users/me/social bağlanmamış | ⬜ → E-4 (BEKLIYOR) | **madde 113** | K-13 | KUYRUK |`
+- :233 (G10-11) `| G10-11 | PATCH /users/:id/self-profile mükerrer | ⬜ → E-4 (BEKLIYOR) | A20 | K-13 | KUYRUK |`
+- :237 (G10-15) `| G10-15 | questionController toplu-yanıt | ⬜ → E-4 (BEKLIYOR) | md.70 | — | G-kartı |`
+- :240 (G10-18) `| G10-18 | enneagramWing tüketici yok | ⬜ → E-4 (BEKLIYOR) | md.86/101 | — | G-kartı |`
+- :253 (G11-02) `| G11-02 | Gelir modeli + pilot | ⬜ → AN-52 (PR-ACIK) · AN-29 (BEKLIYOR) | — | — | G-kartı |`
+- (Nasıl okunur lejantı) eski: `⬜ → <iş> (BEKLIYOR/PR-ACIK)`

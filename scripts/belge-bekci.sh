@@ -7,6 +7,8 @@
 #     (istisna: Durum'u "kısmen" / "bekliyor" içeren belirsiz satırlar — taşınmaz, UYARI olarak listelenir)
 #   · docs/otonom/01-KARARLAR.md'de ya da docs/otonom/kararlar/KARAR-*.md kart dosyasında "İŞLENDİ" notlu karar kartı (kural c)
 #   · CLAUDE.md / docs/otonom/OTONOM-PROMPT.txt'te kod (`...`) dışında "~~[ESKİ" katmanı (kural e)
+#   · kural (t) TEK KAYNAK (PO 2026-09-28, İŞ 2): bitti arşivindeki iş aktif belgede BEKLIYOR / ⬜ / açık
+#     durumla anılıyor (t1) · bir işin değişken kuyruk durumu başka belgeye parantezle kopyalanmış (t2)
 # UYARI (çıkış kodunu değiştirmez): boyut eşikleri (Bölüm 5c; GÖREV 2.5: 00-KUYRUK 90 · 01-KARARLAR 40 · 02-ILERLEME 80 KB) · kural (h): arşivdeki BITTI satırı "madde N"
 #   atfı taşıyor ve docs/kararlar/00-KARAR-TAKIP.md'de madde N satırında ✅ / 🟨 yok → "BITTI işin kaynağı açık"
 #   (gerekçeli istisna: docs/raporlar/kod-denetimi/bekci-istisna.txt — satır biçimi "<iş> madde <N> # <gerekçe>").
@@ -20,6 +22,7 @@
 #     ön eksiz (🟨 KISMEN / ❌ TUTMUYOR / 🔁 SONRADAN DEĞİŞTİ / ✅ TAMAMLANDI) · (i2) kırık bağlam işaretçisi
 #     (KİLİT HARİTASI ↔ KARAR-BEKLEYEN §, iki yön) · (i3) kaynak izi olmayan aktif / karar bekleyen satır ·
 #     (i4) 01-KARARLAR indeksi ↔ kart CEVAP çelişkisi · (i5) ✍️/✅ kararın işi hâlâ KARAR-BEKLEYEN'de
+#   · kural (t3) TEK KAYNAK: "⬜ → X" ama X kuyrukta "BITTI (kısmen …)" (İŞ 2, 2026-09-28)
 #   Harf notu: (i)-(m) eskiden AJ-46 uyarılarının etiketiydi; 5c kurallarıyla karışmasın diye o uyarılar
 #   2026-09-28'den beri iş kimliğiyle (KR-22 · YN-11 · YN-12 · YN-10 · YN-09) anılır, (i) kural harfi oldu.
 #
@@ -322,6 +325,74 @@ for baslik, (_ids, metin) in bolumler.items():
         bagli = [int(x) for x in re.findall(r'KARAR-(\d+)', cells[4])] or ([int(bm.group(1))] if bm else [])
         if bagli and all(k in cevapli for k in bagli):
             warnings.append(f'00-KUYRUK-KARAR-BEKLEYEN.md § {baslik} {cells[1].strip()} bağlı KARAR ({", ".join(f"KARAR-{k}" for k in bagli)}) ✍️/✅ ama iş hâlâ KARAR-BEKLEYEN\'de → 00-KUYRUK "Geri dönüş yeri"ne (5c-i5)')
+
+# ── kural (t) TEK KAYNAK (PO 2026-09-28, İŞ 2): bir işin durumu YALNIZ kuyrukta yaşar ──────────────
+# Kuyruk = 00-KUYRUK + 00-KUYRUK-KARAR-BEKLEYEN + arsiv/00-KUYRUK-bitti-*. Diğer aktif belgeler başka bir
+# işin durumunu KOPYALAMAZ, yalnız işaretçi yazar ("→ AJ-75"). Kopya zamanla bayatlar: 2026-09-28 tur sonu
+# denetiminde 00-KART-INDEKSI G1-20 / G7-10 / G7-11 / G7-13 / G7-14 bitmiş işi "BEKLIYOR" gösteriyordu.
+#   (t1) HATA  bitti arşivindeki (tam BITTI/✅, aktif kuyrukta yeniden açılmamış) iş aktif belgede açık durumla
+#              anılıyor: "X (BEKLIYOR|⬜|açık|CALISILIYOR|PR-ACIK)" · "⬜/BEKLIYOR/AÇIK → X" · "X: BEKLIYOR"
+#   (t2) HATA  herhangi bir iş kimliğinin değişken kuyruk durumu parantezle kopyalanmış: "X (BEKLIYOR|
+#              CALISILIYOR|PR-ACIK|BASARISIZ|ATLANDI…)" → işaretçi yaz ("→ X"). BITTI kopyası serbest (değişmez olgu).
+#   (t3) UYARI "⬜ → X" ama X kuyrukta "BITTI (kısmen …)" → hücreyi "🟨 kısmen — X; kalan → <sahip>" yap.
+# Kapsam: aktif belgeler. HARİÇ: docs/arsiv/ · docs/otonom/arsiv/ · docs/raporlar/ (tarihli fotoğraf) ·
+# 02-ILERLEME.md (tarihli günlük — o anki durumu kaydeder) · "## GEÇMİŞ" bölümü · ~~üstü çizili~~ · `kod` (örnek) ·
+# kart dosyalarında **CEVAP** satırı (yalnız PO yazar, bayt bayt korunur).
+TEK_KAYNAK_BELGELER = ['docs/kararlar/00-KART-INDEKSI.md', 'docs/kararlar/00-KARAR-TAKIP.md',
+                       'docs/kararlar/10-yol-haritasi.md', 'docs/otonom/OTONOM-PROMPT.txt']
+TEK_KAYNAK_BELGELER += sorted(os.path.relpath(p, root) for p in glob.glob(os.path.join(root, 'docs/otonom/*.md'))
+                              if os.path.basename(p) != '02-ILERLEME.md')
+TEK_KAYNAK_BELGELER += sorted(os.path.relpath(p, root) for p in glob.glob(os.path.join(root, 'docs/otonom/kararlar/*.md')))
+
+def is_satirlari(rel):
+    text = read(rel)
+    if text is None:
+        return
+    for line in text.split('\n'):
+        cells = line.split('|')
+        if line.startswith('| ') and len(cells) >= 9:
+            yield cells[1].strip().strip('*').strip(), cells[6].strip()
+
+aktif_durum = {}
+for rel in ('docs/otonom/00-KUYRUK.md', 'docs/otonom/00-KUYRUK-KARAR-BEKLEYEN.md'):
+    for kimlik, durum in is_satirlari(rel):
+        aktif_durum.setdefault(kimlik, durum)
+bitmis = set()
+for bpath in sorted(glob.glob(os.path.join(root, 'docs/otonom/arsiv/00-KUYRUK-bitti-*.md'))):
+    for kimlik, durum in is_satirlari(os.path.relpath(bpath, root)):
+        if re.match(r'^(✅|BITTI)', durum) and not re.search(r'k[ıi]smen', durum, re.I):
+            bitmis.add(kimlik)
+bitmis -= set(aktif_durum)  # aktif kuyrukta yeniden açılmış iş bitmiş sayılmaz
+
+KIMLIK = r'(?<![\w-])([A-Z][A-Z0-9]{0,3}(?:-[A-Z0-9]+)+[a-z]?)(?![\w-])'
+ACIK = r'(?:BEKL[İI]YOR|⬜|[Aa]çık|AÇIK|CALISILIYOR|ÇALIŞILIYOR|PR-ACIK)'
+T1_SONRA = re.compile(KIMLIK + r'\s*(?:\(\s*' + ACIK + r'|:\s*(?:BEKL[İI]YOR|⬜))')
+T1_ONCE = re.compile(r'(?:⬜|BEKL[İI]YOR|AÇIK)\s*(?:→|->)\s*' + KIMLIK)
+T2 = re.compile(KIMLIK + r'\s*\(\s*(BEKL[İI]YOR|CALISILIYOR|ÇALIŞILIYOR|PR-ACIK|BASARISIZ|ATLANDI)')
+T3 = re.compile(r'⬜\s*(?:→|->)\s*' + KIMLIK)
+
+for rel in dict.fromkeys(TEK_KAYNAK_BELGELER):
+    text = read(rel)
+    if text is None:
+        continue
+    for no, line in enumerate(text.split('\n'), 1):
+        if re.match(r'^##\s+GEÇMİŞ', line):
+            break
+        if re.match(r'^\s*\*\*CEVAP', line):
+            continue
+        satir = re.sub(r'`[^`]*`', '', re.sub(r'~~.*?~~', '', line))  # kod içi = kural örneği
+        bulunan = set()
+        for m in list(T1_SONRA.finditer(satir)) + list(T1_ONCE.finditer(satir)):
+            if m.group(1) in bitmis and m.group(1) not in bulunan:
+                bulunan.add(m.group(1))
+                errors.append(f'{rel}:{no} {m.group(1)} bitti arşivinde ama burada açık görünüyor ("{m.group(0)[:40]}") — kart kendi durumunu "✅ {m.group(1)} · PR #" yapsın ya da işaretçi yaz (5c-t1)')
+        for m in T2.finditer(satir):
+            if m.group(1) not in bulunan:
+                errors.append(f'{rel}:{no} {m.group(1)} durumu kopyalanmış ("{m.group(0)[:40]}") — durum yalnız kuyrukta; işaretçi yaz: "→ {m.group(1)}" (5c-t2)')
+        for m in T3.finditer(satir):
+            durum = aktif_durum.get(m.group(1), '')
+            if re.match(r'^(✅ )?BITTI', durum):
+                warnings.append(f'{rel}:{no} "⬜ → {m.group(1)}" ama kuyrukta "{durum[:40]}" → "🟨 kısmen — {m.group(1)}; kalan → <sahip>" (5c-t3)')
 
 LIMITS = [('docs/otonom/00-KUYRUK.md', 90), ('docs/otonom/01-KARARLAR.md', 40),
           ('docs/otonom/02-ILERLEME.md', 80), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),
