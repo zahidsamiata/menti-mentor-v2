@@ -213,6 +213,6 @@ UNION ALL SELECT 'InvitationTemplate', (SELECT count(*) FROM "InvitationTemplate
   (geçersiz değer sayısı). §3b'de 0 olmayan satır varsa merge EDİLMEZ — o değerler için ayrı karar gerekir.
   ⚠️ Bu sayım atlanıp geçersiz değer çıkarsa backend açılışta durur (site API'si kapalı kalır).
 **Kapsam dışı bırakılanlar:** Tenant.plan (paket listesi ürün kararı) · SystemLog.category (önce temizlik).
-**PR:** backend #<no> · çatı #<no>
+**PR:** backend zahidsamiata/menti-mentor#227 · çatı zahidsamiata/menti-mentor-v2#420
 **CEVAP:**
 ```
