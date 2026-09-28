@@ -239,3 +239,6 @@ Kaynak: GÖREV B.3 (`docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md`).
 | docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:256 | G10-21 | 🟨 S2 → F-11 (🔴 KARAR-61) | tam | taxonomy/IndustryNode skorlamada yok |
 | docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:258 | G11-01 | ⚪ S5 — PO sırayı onayladı ve yıllara erteledi; açık iş/karar değil. (PO teyit listesinde) | tam | Modül sırası vizyonu |
 | docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:259 | G11-02 | 🟨 S2 → KARAR-70 → AN-52 · AN-29 · gelir kanalı → KARAR-119 | tam | Gelir modeli + pilot + kullanıcı görüşmesi |
+| docs/raporlar/kesif/erisilebilirlik-denetimi-2026-09-27.md:25 | AJ-07 kalanı | 🟨 S3 → 03-PO #32 | tam | Ekran okuyucuyla (VoiceOver/NVDA) gerçek gezinme testi hiç yapılmadı |
+| docs/raporlar/kesif/csp-zorunlu-mod-hazirlik-2026-09-27.md:123 | AJ-22 kalanı | ✅ S1 — kodda + testte (bkz. rapor) | tam | Frontend X-Frame-Options göndermiyor (clickjacking) — ayrı bağımsız iş |
+| docs/raporlar/kesif/csp-zorunlu-mod-hazirlik-2026-09-27.md:139 | AJ-22 kalanı | 🟨 S2 → AJ-22 · AJ-52 · KARAR-112 · 03-PO kabul testi 13 | tam | CSP zorunlu moda geçiş adımları 3-5 (enforce + smoke: logo, OAuth, next/image avatar, branding) |

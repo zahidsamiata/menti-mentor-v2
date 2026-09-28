@@ -64,7 +64,7 @@ Yeni mesaj oluşturulmadan ÖNCE, alıcının o konuşmadaki okunmamış sayıs�
 
 ## Bilinen sınırlar / açık noktalar (PO kararı)
 - **Backfill YOK:** eski `MatchRequest.requestMessage` kayıtları chat'e taşınmadı (kapsam gereği). Geçmiş talep mesajları thread'de görünmez.
-- **`VisibilityOptIn.requestMessage` (ölü alan) kaldırılmadı:** kolon DROP = şema değişikliği → bu tur "DB şeması değişmez" kuralı gereği **ertelendi**. Frontend'de kullanılmıyor (kanıt: 0 referans); backend `mentiRequestController` hâlâ yazıyor. Ayrı, PO-onaylı bir temizlik turu gerektirir.
+- **`VisibilityOptIn.requestMessage` (ölü alan) kaldırılmadı:** kolon DROP = şema değişikliği → bu tur "DB şeması değişmez" kuralı gereği **ertelendi**. Frontend'de kullanılmıyor (kanıt: 0 referans); backend `mentiRequestController` hâlâ yazıyor. Ayrı, PO-onaylı bir temizlik turu gerektirir. · 🟨 kısmen — yazan uç kalmadı, alan yalnız anonimleştirmede boşaltılıyor (`backend/src/services/gdprService.ts:186`); kalan: kolonun kaldırılması → silme protokolü adayı (E-4 karantina turu, G10-02 ile aynı kalem; AJ açılmadı)
 - **`Meeting.requestMessage` AYRI akış** — kasıtlı, dokunulmadı.
 - **Unread sayımı** inbox/badge'de konuşma-başına `count` (küçük ölçekte uygun; çok konuşmada optimize edilebilir).
 - **Deep-link e-postada yok:** mevcut mail deseni (link'siz "giriş yapıp bakın") izlendi; istenirse `/messages/:id` derin linki eklenebilir.

@@ -171,7 +171,7 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
 
 ### KURAL 11 — Söz açılışta okunur (EN KRİTİK — disiplin sona değil BAŞA)
 - `00-KARAR-TAKIP.md`'de **"⭐ SONRAKİ-TUR SÖZLERİ"** bölümü tutulur (YENİ DOSYA AÇMA — ikinci kaynak = çelişki riski).
-- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no). ⚠️ (2026-09-24, DC turu): 📸 `07` günlük olarak donduruldu (son kayıt 2026-09-20); tur kaydının fiilî yeri `docs/otonom/02-ILERLEME.md`. Kural↔uygulama çelişkisi PO kararına bırakıldı — bkz. `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md` §"Bulunan kural çelişkisi".
+- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no). ⚠️ (2026-09-24, DC turu): 📸 `07` günlük olarak donduruldu (son kayıt 2026-09-20); tur kaydının fiilî yeri `docs/otonom/02-ILERLEME.md`. Kural↔uygulama çelişkisi PO kararına bırakıldı — bkz. `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md` §"Bulunan kural çelişkisi". · 🟨 kısmen — 07 günlüğü donduruldu; kalan: `OTONOM-PROMPT.txt:464`'teki "oturum günlüğü" satırının düzeltilmesi → 03-PO #34
 - **Her oturum BAŞINDA bu bölüm OKUNUR** ve ürün sahibine açık sözler hatırlatılır. Söz yerine getirilince ✅ + kaldırılır. *(Teşhis: 15 sözün 11'i devralınmadığı için düştü; disiplin oturum sonundan başına taşındı.)*
 
 ### KURAL 12 — Tazelik denetimi (3 ayak; 30-gün ikincil)
@@ -260,7 +260,7 @@ Her belge okunma sıklığına göre üç sınıftan birindedir; sınıf belgeni
 - 🌡️ ILIK için tavan 120.000; aşılırsa aynı sıra. 🧊 DONMUŞ için tavan YOK (bir kez okunur, rutin maliyet üretmez).
 - ⚠️ `CLAUDE.md` 2026-09-23'te 34.742 karakter (2026-09-23 itibarıyla) — 40.000'e yaklaşmasın diye buraya yalnız **tek satır atıf** girer.
 - **Ölçüm her tur:** kapanış raporunda 🔥 SICAK dosyaların karakter sayısı + 1.000 karakteri aşan satır sayısı yazılır
-  (`OTONOM-PROMPT.txt` § 13.5 — bu bölüm henüz `main`'de YOK, PO kararı bekliyor — TEYİT GEREK). Böylece şişme **üç hafta sonra değil, o turda** görünür.
+  (`OTONOM-PROMPT.txt` § 13.5 — bu bölüm henüz `main`'de YOK, PO kararı bekliyor — TEYİT GEREK). Böylece şişme **üç hafta sonra değil, o turda** görünür. · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: §13.5 eklensin mi kararı → 03-PO #34
 - **Satır tavanı (1.000 karakter)** zaten var (`CLAUDE.md` § "tarihsel iz satırın İÇİNDE tutulmaz"); bu kural ona
   yalnız **ölçüm** ekler. Yeni oluşan 1.000+ satır o turda düzeltilir (geçmiş → belgenin `## GEÇMİŞ` bölümü).
   ⛔ **Not kolonu KISALTILMAZ** — kanıt disiplini korunur; hedefli okuma o satırları zaten yüklemiyor.
@@ -289,7 +289,7 @@ Her belge okunma sıklığına göre üç sınıftan birindedir; sınıf belgeni
 ## KURAL 21 — Ekleme-yalnızca günlükler: otomatik arşivleme eşiği
 - Ekleme-yalnızca dosyalar (ilerleme günlüğü · oturum günlüğü) **40.000 karakteri aşınca EN ESKİ kayıtlar aya göre
   arşive taşınır. Son ÜÇ kayıt ana dosyada kalır.**
-- `02-ILERLEME.md` için (⚠️ 2026-09-25 itibarıyla bu arşivleme `main`'de henüz YAPILMADI — tur sonunda güncel main üzerinde baştan yapılacak): son üç tur ana dosyada; öncekiler `docs/otonom/arsiv/02-ILERLEME-<YYYY-MM>.md`'ye.
+- `02-ILERLEME.md` için ~~[ESKİ · 2026-09-27] (⚠️ 2026-09-25 itibarıyla bu arşivleme `main`'de henüz YAPILMADI — tur sonunda güncel main üzerinde baştan yapılacak): son üç tur ana dosyada;~~ ⚠️ GÜNCELLEME (2026-09-27): arşivleme haftalık döndürmeye çevrildi ve yapıldı — `docs/otonom/OTONOM-PROMPT.txt:223` (d), `docs/otonom/arsiv/02-ILERLEME-2026-W38.md` (commit `255019d`) · doğrulama: sahipsiz-kalanlar-2026-09-27; öncekiler `docs/otonom/arsiv/02-ILERLEME-<YYYY-MM>.md`'ye.
   Ana dosyanın başında `Önceki turlar: <arşiv yolu>` satırı durur.
 - ⛔ **SATIR DOĞRULAMASI her taşımada ZORUNLU:** `(ana + arşiv)` toplamı taşımadan önceki toplamdan **AZALAMAZ**
   (yalnız başlık/atıf satırı kadar artabilir). Azalırsa **GERİ AL, DUR, bildir.** Sayılar kapanış raporuna yazılır.

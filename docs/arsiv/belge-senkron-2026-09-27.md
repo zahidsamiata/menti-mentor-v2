@@ -509,3 +509,343 @@ Kulüp ailesi (7 + `/users/:userId/clubs`) · iş ilanı ailesi (4) · feedback-
 ````text
 Kuyrukta kendi satırı olmayan BAĞLA kalemleri: bağlamsal geri bildirim kartı · anlaşma taslağı · çift sinyali · soru geri açma · check-in geçmişi · değerlendirme okuma. Kuyruk satırı olmayan MÜKERRER'ler: temperament-test, compute-profile/rank-mentors, `POST /api/users`, requests ailesi.
 ````
+
+### docs/kararlar/00-KARAR-TAKIP.md:207 · S34 söz: onboarding kullanıcılarının UserResponse satırı var mı — gerç (#218)
+````text
+| S34 | ⭐ **Onboarding kullanıcılarının `UserResponse` satırı var mı SORULACAK** — DISC quiz `UserResponse` yazmıyor, `recalcDiscVector` ondan okuyor → madde 162'nin `buildDiscVector` çözümü buna dayanır | 2026-09-08 | ⬜ **BUGÜN SORULMAYACAK** (6 test kullanıcısı, pratik değeri yok). ⚠️ **SÖZ: gerçek kullanıcı gelir gelmez sorulacak** — sonra sormak pahalı olur. ⚠️ SELECT bile PO onayı ister (kırmızı kural 1) | 162 |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:208 · S35: ilk tenant özel ağırlık kaydettiğinde sıralamanın değiştiği doğru (#219)
+````text
+| S35 | ⭐ İlk tenant özel ağırlık kaydettiğinde sıralamanın beklendiği gibi değiştiği doğrulanacak — 9b canlıda ama 0 tenant kullandı, etkisi hiç gözlenmedi | 2026-09-08 | ⬜ BEKLİYOR | 9b · 171 |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:335 · md.165 Ağırlık modeli 2→3 bileşen (Faz 5 i) (#221)
+````text
+| 165 | Ağırlık modeli 2→3 bileşen (8 kod noktası, **migration YOK**) | ⬜ AÇIK | KOD | Faz 5 (i) · ⚠️ migration YOK, F.13'e TAKILMIYOR | `../raporlar/kesif/faz5-veri-akisi-kesfi-2026-09-08.md` §E | Hayır | M |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:338 · md.168 matching.ts ham DiscVector cast'i yerine parseDiscVector guard' (#222)
+````text
+| 168 | `matching.ts:286` ve `:400`'deki ham cast yerine mevcut `parseDiscVector` guard'ı kullanılsın — bugün `User.discVector` JSON'u doğrulamasız cast ediliyor; şekli bozuk bir kayıt sessizce yanlış skor üretebilir. Guard zaten kodda var, kullanılmıyor | ⬜ AÇIK | KOD | İki çağrı noktasını `parseDiscVector` guard'ından geçir | `matching.ts:286,400` + mevcut `parseDiscVector` | Hayır | S |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:339 · md.169 İki ayrı DiscVector tipi (scoring.ts BÜYÜK+confidence ↔ scoring (#223)
+````text
+| 169 | **İki ayrı `DiscVector` tipi var** — `scoring.ts:12-18` (`confidence` zorunlu) ve `scoring.config.ts:8` (`confidence` yok, küçük harfli alanlar). Onboarding'in yazdığı obje ikisine de tam uymuyor. Tipler adlandırılıp ayrılsın ya da birleştirilsin | ⬜ AÇIK | KOD | İki tipi ayır/adlandır; `buildDiscVector` (madde 162) tek tipe dayansın · **⚠️ KAPSAM DARALTMASI (2026-09-08):**  → **keşif YAPILDI, kapsam netleşti.** Kök sebep: Prisma `Json?` sütununa yazarken tip `InputJsonValue` oluyor, uygulama tipi yazma sınırında hiç uygulanmıyor (kanıt: `.prisma/client/index.d.ts` `discVector?: NullableJsonNullValueInput \| InputJsonValue`). **Kod TEMİZ** — yazma noktasında `as`/`any`/`@ts-ignore` YOK, `tsconfig` `strict: true`. Tip kaçış sayımı: `@ts-ignore` **0** · `: any` **0** · `as any` **4** · `as unknown as` 171 ama %90'ı Express `RequestHandler` route şablonu, veriyle ilgisiz. **Boşluk kaçış-deseni kaynaklı DEĞİL.** Yapısal boşluk 13 JSON alanının hepsinde var; gözlenen hata yalnız `discVector`'da, çünkü katı app-tip sözleşmesi olan tek alan o. Bu madde artık **yalnız iki tip ayrımını** kapsar (S); genel JSON sertleştirmesi ayrı kalem (F.14, numarasız, M) | `scoring.ts:12-18` vs `scoring.config.ts:8` | Hayır | S · geçmiş: bkz. GEÇMİŞ §md.169 |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:340 · md.170 JSON yazım koruması — 13 Json? alanda uygulama tipi yazımda uyg (#224)
+````text
+| 170 | JSON yazım koruması — Prisma `Json?` sütunlarına yazarken tip `InputJsonValue` olduğu için uygulama tipi hiç uygulanmıyor; 13 JSON alanında yapısal boşluk. Gözlenen tek hata `discVector`'da | ⬜ AÇIK | KOD+KEŞİF | ⚠️ **KAPSAM BEYANI EKSİK:** "diğer alanlar okuma tarafında savunuluyor" iddiası keşif turunun GÖZLEMİDİR, sistematik tarama DEĞİL — 13 alanın **her** okuma noktası taranmadı. **Tek korumasız okuma yolu varsa bu kalemin "opsiyonel" gerekçesi çöker.** İş: (a) KAPSAM BEYANLI tarama, (b) sonra tip-checked sarmalayıcı kararı | `.prisma/client/index.d.ts` `InputJsonValue` · madde 162/169 | Hayır | M |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:366 · md.15 Eşleştirmeyi birleştir (iki skorlama → tek) — v2 (#226)
+````text
+| 15 | Eşleştirmeyi birleştir (iki skorlama → tek) | ⏸️ | Hayır | 14'ten sonra, staging |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:373 · md.22 Landing UX paketi + yumuşak lacivert tema — canlı-sonrası (#228)
+````text
+| 22 | Landing UX paketi + yumuşak lacivert tema | ⏸️ | Hayır | canlı-sonrası |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:401 · Y9 Platform büyüme metrikleri (ivme, aktif/pasif oran) — canlı-sonrası (#242)
+````text
+| Y9 | Platform **büyüme metrikleri** (ivme, aktif/pasif oran) | 🔴 | veri işi · düşük öncelik, canlı-sonrası · ⚠️ **Y7'den ayrıldı (PO kararı 2026-09-08)** | denetim B.4/3,4,12,18 |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:402 · Y10 Platform ayar UI — canlı-sonrası (#243)
+````text
+| Y10 | Platform **ayar UI** | 🔴 | arayüz işi · düşük öncelik, canlı-sonrası · ⚠️ **Y7'den ayrıldı (PO kararı 2026-09-08)** | denetim B.4/3,4,12,18 |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:558 · md.90 Veri İşleyen Sözleşmesi + Tenant yasal kimlik alanları (unvan/ad (#244)
+````text
+| **90** | **Veri İşleyen Sözleşmesi kayıt akışına entegrasyon** — Tenant yasal kimlik alanları (unvan/adres/VERBİS) | yapılmamış-iş (KVKK) | Belge 8; şema alanı yok → **migration** | 🟡 (hukukçu onayı sonrası) |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:564 · md.83 OAuth'ta açık rıza UI'da alınmıyor + KVKK/18+ tek kutu + aydınla (#245)
+````text
+| **83** | **OAuth'ta açık rıza UI'da alınmıyor** (`oauthService.ts:112` implicit set; ekranda kutu yok) + KVKK/18+ **tek kutuda birleşik** + aydınlatma≠açık rıza ayrımı yok | yapılmamış-iş/[HUKUKÇU] | envanter C-6; `_RegisterContent.tsx:414` | 🟡 (hukukçu kararına bağlı) |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:573 · md.99 SystemLog 90 gün purge → 'son değişiklik' izi 3 ayda kaybolur (P (#246)
+````text
+| **99** | **SystemLog 90 gün purge → "son değişiklik" izi 3 ay sonra kaybolur** — ağırlık özel kalsa bile aktör/eski→yeni izi `purgeExpiredData` ile silinir. PO kararı "iz tutulsun" idi (9a). | teknik-borç (KVKK/iz) | `gdprService.purgeExpiredData` 90g; `getLastWeightChange` SystemLog'a bağlı | 🔵 küçük (migration'sız; ağırlık değişim izini ayrı/kalıcı tut ya da AUDIT'i purge dışı bırak) |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:588 · T3 SuspicionReport'ta tenantId yok → tenant-izolasyon boşluğu (#247)
+````text
+| T3 | `SuspicionReport`'ta `tenantId` yok → raporlar global, tenant-izolasyon boşluğu | açık-soru/güvenlik | `platformController.ts:348-356` | S | Olası |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:622 · md.106 Onboarding şablon-seçim ekranı (Mezun/Gönüllü/Kulüp) (#229)
+````text
+| 106 | Onboarding şablon-seçim ekranı ("Mezun/Gönüllü/Kulüp") | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | "Terk-oranını en-çok-düşüren ekran" (kayıtta rol/şablon seçimi) | grep: şablon-seçim ekranı yok |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:623 · md.107 Menti/mentör retention 'sevdirme'/onboarding-aha — 'izi yok' (#230)
+````text
+| 107 | Menti/mentör tarafı retention "sevdirme"/onboarding-aha deneyimi | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A1(E36)/T2-D(persona) | Persona-temelli sevdirme; kullanıcı ürüne bağlansın | Yalnız STK-yönetici dilimi yapıldı; menti/mentör sevdirme izi yok |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:627 · md.111 'Varsayılana düşen profil oranı' izleme metriği (= G2-06) (#231)
+````text
+| 111 | "Varsayılana düşen profil oranı" izleme metriği (= G2-06, bkz. bilanco/kararlar/G2-eslestirme-psikometri.md) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | Psikometrik kör-nokta: kaç profil varsayılan/nötr'e düşüyor (madde 103 akrabası) | grep boş; metrik yok |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:628 · md.112 Profil-düzenleme keşfi (kayıt sonrası bilgi/foto güncelleme var (#232)
+````text
+| 112 | Profil-düzenleme keşfi (kayıt-sonrası bilgi/foto güncelleme yeteneği var mı) | ⬜ AÇIK (PO önceliklendirmedi) | ❓ | T4-A1(E34) | Kullanıcı kayıttan sonra bilgisini/fotoğrafını güncelleyebilmeli | PLANLA keşfi hiç yapılmamış (gerçek tür ❓: önce kod-keşif) |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:629 · md.113 PATCH /users/me/social bağlanmamış uç (= G10-10) (#233)
+````text
+| 113 | `PATCH /users/me/social` bağlanmamış endpoint (= G10-10, bkz. bilanco/kararlar/G10-olu-kod-terk.md) | ⬜ AÇIK (PO önceliklendirmedi) | ❓ | T2-C | **NİYET HİÇBİR BELGEDE YOK** (NİYET BELGELENMEMİŞ) | `onboardingController.ts:461` bağlanmamış; bilinçli terk mi bağlanacak mı = PO · ⚠️ **KAYNAK İZİ (2026-09-08):** F.6'da `b141738` (2026-08-26) ile numaralandı; endpoint ayrıca C.2'de (ölü kod) izli, orada da "niyet belgede yok". ⬜ Niyet hâlâ hiçbir belgede yok; ~~**PO kararı gerekiyor: bilinçli terk mi bağlanacak mı (🗑️ mı ⬜ mı)?**~~ · ⚠️ **PO KARARI (2026-09-08): SİLİNMEZ, TETİĞE BAĞLANDI.** `PATCH /users/me/social` bağlanmamış uç. **TETİK: madde 152 (eşleşme detay sayfası) yapılırken karar verilecek — bağlanır ya da silinir.** Gerekçe: menti belgesinde profil/eşleşme işleri var, sosyal bağlantı oraya bağlanabilir. **Silmek geri alınamaz, bırakmak ucuz.** |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:630 · md.114 SjtQuestion/SjtOption tabloları 0 prisma query (= G10-09) (#234)
+````text
+| 114 | `SjtQuestion`/`SjtOption` tabloları 0 prisma query (= G10-09, bkz. bilanco/kararlar/G10-olu-kod-terk.md) | ⬜ AÇIK (PO önceliklendirmedi) | ❓ | T2-C(1.A) | SJT tabanlı profil (alternatif psikometri yolu) | `schema.prisma:889,906` 0 query; ölü-tablo mu SJT-genişletme mi = PO (DURUŞ SEBEBİ YOK) · ⚠️ **KAYNAK İZİ (2026-09-08):** SAHİPSİZ DEĞİL — niyet C.2 satırında belgeli: "SJT tabanlı profil+mentör sıralama alternatif yolu (cert paketleri, `1e11e73`)"; ayrıca Faz 5 / madde 101 ile ilişkili. Duruş sebebi: SJT canlıya girmedi. ⬜ Girecek mi = PO. |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:631 · md.115 Kurumlar-arası sosyal kanıt duvarı + paylaşılabilir kurum 'Etki (#235)
+````text
+| 115 | Kurumlar-arası "sosyal kanıt" duvarı + paylaşılabilir kurum "Etki kartı" | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | B2B2C viral büyüme (kurumlar birbirini görsün, etki kartı paylaşılsın) | grep: kamuya-açık kurum-duvarı/etki-kartı FE yok |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:632 · md.116 Mentör/menti-kaynaklı 'ters çekim' bottom-up büyüme kanalı (= G (#236)
+````text
+| 116 | Mentör/menti-kaynaklı "ters çekim" bottom-up büyüme kanalı (= G4-38, bkz. bilanco/kararlar/G4b-panel-akis.md) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T4-A2 | Kullanıcı-kaynaklı büyüme kanalı (multi-tenant altyapı hazır) | Kanala çevrilmedi |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:633 · md.117 Premium 'kilitli görünür' + Tenant.plan/limits freemium altyapı (#237)
+````text
+| 117 | Premium "kilitli görünür" + `Tenant.plan/limits` freemium altyapısı | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T1-B2(01:18)/T2-C/T4-A2 | Freemium iş modeli (bazı özellikler premium'da açılsın) | Şema alanı var; uygulama-mantığı yok |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:634 · md.118 Global içerik seed'i ana Neon'a (DISC/LearningJourney boş görün (#238)
+````text
+| 118 | Global içerik seed'i ana Neon'a uygula (DISC/LearningJourney "boş" görünüyor) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | T2-B(:10/:86)/T4-A2/T4-A1(A8) | Canlıda içerik dolsun (seed eksik görünüyor) | ⚠️ **CANLI DB YAZIMI → PO onayı ZORUNLU** (canlı=lokal aynı Neon); canlı sayı ⏳ DB-teyit |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:654 · md.125 triggersOn ölü alan — SJT adaptif tetikleme okuyan kod yok (#239)
+````text
+| 125 | `triggersOn` ölü alan — SJT adaptif tetikleme (boyut belirsizse o boyutun FOLLOWUP'ını aç) okuyan kod YOK | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | keşif §6.1 | Boyut-belirsizliğini kapatan derinleşme mekanizması (havuzu adaptif büyüt) | Veri modelinde tanımlı (`schema.prisma:896`, `seed.ts`) ama hiçbir servis okumuyor (grep `triggersOn` src boş); okuyucu katman yazılmadı. madde 101 akrabası, ayrı mekanizma · ⚠️ GÜNCELLEME (2026-08-28): tasarım belgesinde ele alındı (B6 derinleşme) → `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:657 · md.128 Eş-anlamlı/normalize etiket otomasyonu yok (yazılım↔software) (#240)
+````text
+| 128 | Eş-anlamlı/normalize etiket otomasyonu YOK (yazılım↔software ayrı etiket, skorda eşleşmez) | ⬜ AÇIK (PO önceliklendirmedi) | ⬜ | keşif §4 | Etiket kesişim skorunun eş-anlamlıları yakalaması (isabet artışı) | grep synonym/alias/stem boş; tek birleştirme = admin manuel `array_replace` merge. `toLowerCase()` locale-duyarsız (Türkçe İ/ı). Hiç otomasyon yazılmadı · ⚠️ GÜNCELLEME (2026-08-28): tasarım belgesinde ele alındı (B9.4 çatılı eşleşme) → `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:659 · md.130 IndustryNode taksonomi ağacı seed durumu ❓ — boşsa taksonomi bi (#241)
+````text
+| 130 | IndustryNode taksonomi ağacı seed durumu ❓ — ağaç boşsa 5-bileşen A (taksonomi %30) hep 0 döner | ⬜ AÇIK (PO önceliklendirmedi) | ❓ (DB-teyit) | keşif §8 | Sektör kodları hiyerarşik ağaçta yakınlık ölçsün (LCA çatı-eşleşme) | `taxonomy.service` çalışır ama ağaç/`industryCode` atamaları seed'li mi DB'ye sorulmadı (kural). Boşsa sector-scorer bağlansa bile A bileşeni etkisiz · ⚠️ GÜNCELLEME (2026-08-28): tasarım belgesinde ele alındı (B9.4 IndustryNode/LCA) → `konu/degerlendirme-sistemi-tasarim-2026-08-27.md` |
+````
+
+### docs/kararlar/00-KARAR-TAKIP.md:925 · md.163 CertificationOption.internalNote migration'ı canlıya uygulanmad (#248)
+````text
+⚠️ **🔀 ŞEMA HAZIR — MIGRATION ÇALIŞTIRILMADI (2026-09-09, backend PR #70).** `CertificationOption.internalNote String?` eklendi (`schema.prisma:1158`) + migration dosyası üretildi (`20260909000000_add_internal_note`). **SQL:** `ALTER TABLE "CertificationOption" ADD COLUMN IF NOT EXISTS "internalNote" TEXT;` (schema-to-schema diff, DB-free; yasak ifade yok). Sızma yok (FE-dönük okumalar explicit `select`). ⛔ **MIGRATION ÇALIŞTIRILMADI** — canlı DB'ye dokunulmadı. Çalıştırma **AYRI TUR + PO ONAYI** ister. ⚠️ **F.13 KURALI:** çalıştırma turunda **önce `CertificationOption` için yedek tablo alınacak** (restore penceresi 6 saat). ⬜ Sonraki adım: PO migration'ı inceler → onaylarsa çalıştırma turu → sonra madde 164 → madde 30 (seed). · ⚠️ **F.13'e (Neon yedeği) TAKILI** · Oturum 1'in 🔒 iç notlarını BLOKLAR · ⚠️ **F.13 ÇÖZÜLDÜ (2026-09-08)** — restore penceresi 6 saat. Bu migration'da **yedek tablo ZORUNLU** (F.13 önlem kuralı). · 
+````
+
+### docs/kararlar/konu/01-urun-vizyonu.md:34 · Gelir/sürdürülebilirlik modeli hangi kanal (sponsor/kurumsal/hibe/bağı (#179)
+````text
+- Gelir/sürdürülebilirlik modeli hangi kanal (sponsor premium / kurumsal partnerlik / hibe / bağış)? ❓ MVP sonrası.
+````
+
+### docs/kararlar/konu/04-guvenlik-ve-kvkk.md:55 · KVKK açık soruları: yaş politikası · veri sorumlusu kimliği · sunucu k (#177)
+````text
+- Bunlar açık sorulara bağlı (bkz. 08): yaş politikası, veri sorumlusu kimliği, sunucu konumu beyanı.
+````
+
+### docs/kararlar/konu/04-guvenlik-ve-kvkk.md:58 · Dokploy HTTP+açık: firewall · SSH sertleştirme · SSL · yedekleme (#178)
+````text
+- Dokploy HTTP+açık = kritik. Firewall, SSH sertleştirme, SSL, yedekleme.
+````
+
+### docs/kararlar/konu/05-ozellikler-ve-paneller.md:54 · Panel PR'ları (#26/#29) merge — kodlandı, test bekliyor (#186)
+````text
+- Panel PR'ları (#26/#29) merge — kodlandı, test bekliyor.
+````
+
+### docs/kararlar/konu/06-tasarim-ux.md:10 · Landing dark/light seçilebilir yapılsın — canlı-sonrasına ertelendi (#189)
+````text
+- **Landing dark/light: CANLI-SONRASINA ERTELENDİ (2026-08-02 geç oturum'da güncellendi).** 🟢
+````
+
+### docs/kararlar/konu/06-tasarim-ux.md:40 · Mentör kart grid'i: sayfa başı ~15-18 kart, 300 mentör → çok sayfa (ke (#191)
+````text
+- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa.
+````
+
+### docs/kararlar/konu/06-tasarim-ux.md:45 · Fotoğraf herkesten istenecek — şimdilik opsiyonel, ne zaman zorunlu? ( (#192)
+````text
+- **Fotoğraf:** herkesten istenecek. Şimdilik **opsiyonel**, ileride zorunlu (bkz. 08 açık soru). Altyapı hazır (bugün tamamlandı).
+````
+
+### docs/kararlar/konu/06-tasarim-ux.md:59 · Admin sayfalarının başındaki açıklama metinleri daha basit/açıklayıcı  (#193)
+````text
+- **Sayfa açıklama metinleri:** Her admin sayfasının başındaki "bu sayfa ne işe yarar" metni daha basit/açıklayıcı olmalı (imleç/tooltip değil, metin iyileştirme).
+````
+
+### docs/kararlar/konu/06-tasarim-ux.md:69 · Çift-aha onboarding, bildirim yedeği vb. — kullanıcı karar vermedi (#194)
+````text
+- Çift-aha onboarding, bildirim yedeği vb. orta öncelikli işler — asistan "değerli ama sonra" dedi, kullanıcı karar vermedi. ⚪
+````
+
+### docs/kararlar/konu/08-acik-sorular.md:10 · Hâlâ açık: yaş politikası detayı, veri sorumlusu kimliği (K3 ile birle (#180)
+````text
+> Çözülenler: **K2 OAuth consent · K4 18+ · K5 sunucu konumu → CANLIDA** (2026-08-15). Hâlâ açık (bu belgede): yaş politikası detayı, veri sorumlusu kimliği (K3 ile birleşik, canlı öncesi en son). Bu belge ↔ `unutulmus-niyet-envanteri-2026-08-10` konu çakışması var.
+````
+
+### docs/kararlar/konu/08-acik-sorular.md:22 · Gelir/sürdürülebilirlik modeli (sponsor/kurumsal/hibe/bağış)? MVP sonr (#181)
+````text
+- **Gelir/sürdürülebilirlik modeli:** Hangi kanal (sponsor premium / kurumsal partnerlik / hibe / bağış)? MVP sonrası. Prensip: yük kulüplerde değil. ❓
+````
+
+### docs/kararlar/konu/08-acik-sorular.md:25 · Modül önceliklendirme onayı (viral/panel/metrik 'gerçek kullanıcı sonr (#182)
+````text
+- **Modül önceliklendirme onayı:** Viral/panel/metrik özellikleri "ürün gerçek kullanıcı kazanınca" ertelendi ama kullanıcı bu sırayı açıkça onaylamadı. ⚪
+````
+
+### docs/kararlar/konu/08-acik-sorular.md:40 · Arkadaşın başvurusu 'inceleniyor' ama panelde 'bekleyen yok' — gerçek  (#183)
+````text
+- **Arkadaşın başvurusu:** Canlıdan kaydoldu, "inceleniyor" gördü ama panelde "bekleyen yok". Çözülmedi. GERÇEK KİŞİ bekliyor. b3 membership backfill ile ilgili olabilir. ⏳
+````
+
+### docs/kararlar/konu/08-acik-sorular.md:55 · Yönetici paneli metrik genişletme: görüşme sayıları, onboarding tamaml (#184)
+````text
+- ~~**Yönetici paneli çekirdek metrikleri:**~~ İlk set YAPILDI (mentörsüz menti / ölü eşleşme / pasif üye / arz-talep — health-metrics). Genişletme (görüşme sayıları, onboarding-%) hâlâ açık. 🟡
+````
+
+### docs/kararlar/konu/08-acik-sorular.md:56 · Pasif üyelere OTOMATİK toplu re-engagement maili (rıza/opt-out) — bili (#185)
+````text
+- **Otomatik-nudge (KVKK/rıza):** Pasif üyelere OTOMATİK toplu re-engagement maili gönderilsin mi? Elle nudge yapıldı; otomatik = istenmeden mail (rıza/opt-out tasarımı gerekir) → bilinçli ERTELENDİ. Karar + tasarım ürün sahibinde. ❓
+````
+
+### docs/kararlar/konu/11-tasarim-kararlari-yasam-dongusu-ve-disc.md:42 · 'Çok yakın = BÜYÜK' harf için kesin sayısal eşik (DISC ölçeğine bağlı) (#187)
+````text
+**⚠️ Açık nokta (#12 turunda netleşecek — bu belgede SAYI verilmez):**
+````
+
+### docs/kararlar/konu/belge-duzeni-rehberi.md:174 · 07-oturum-gunlugu donduruldu ama OTONOM-PROMPT/rehber hâlâ oraya yazdı (#205)
+````text
+- Oturum kapanışında verilen her söz ("sonraki turda/ileride yapılacak"), `07-oturum-gunlugu`'ye yazıldığı AN buraya da **tek satır** kopyalanır (söz · hangi oturum · durum · ilgili madde no). ⚠️ (2026-09-24, DC turu): 📸 `07` günlük olarak donduruldu (son kayıt 2026-09-20); tur kaydının fiilî yeri `docs/otonom/02-ILERLEME.md`. Kural↔uygulama çelişkisi PO kararına bırakıldı — bkz. `docs/raporlar/kesif/devir-klasoru-envanteri-2026-09-24.md` §"Bulunan kural çelişkisi".
+````
+
+### docs/kararlar/konu/belge-duzeni-rehberi.md:263 · OTONOM-PROMPT § 13.5 (kapanışta SICAK dosya karakter ölçümü) main'de y (#203)
+````text
+  (`OTONOM-PROMPT.txt` § 13.5 — bu bölüm henüz `main`'de YOK, PO kararı bekliyor — TEYİT GEREK). Böylece şişme **üç hafta sonra değil, o turda** görünür.
+````
+
+### docs/kararlar/konu/belge-duzeni-rehberi.md:292 · 02-ILERLEME arşivlemesi main'de henüz yapılmadı (son 3 tur ana dosyada (#204)
+````text
+- `02-ILERLEME.md` için (⚠️ 2026-09-25 itibarıyla bu arşivleme `main`'de henüz YAPILMADI — tur sonunda güncel main üzerinde baştan yapılacak): son üç tur ana dosyada; öncekiler `docs/otonom/arsiv/02-ILERLEME-<YYYY-MM>.md`'ye.
+````
+
+### docs/kararlar/konu/chat-v1-teslim.md:67 · VisibilityOptIn.requestMessage ölü alan — kolon DROP ayrı PO-onaylı te (#201)
+````text
+- **`VisibilityOptIn.requestMessage` (ölü alan) kaldırılmadı:** kolon DROP = şema değişikliği → bu tur "DB şeması değişmez" kuralı gereği **ertelendi**. Frontend'de kullanılmıyor (kanıt: 0 referans); backend `mentiRequestController` hâlâ yazıyor. Ayrı, PO-onaylı bir temizlik turu gerektirir.
+````
+
+### docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:21 · Big Five kişilik profili ayrı açık rıza gerektirebilir (G1-11, avukat  (#195)
+````text
+**PO kararı — ayrı tipli+sürümlü `Consent` modeli:** Minimal şemada (tek `consentVersion` alanı) **her yeni rıza türü = yeni migration** (canlı DB kırmızı kural). Tipli tabloda **yeni satır yeter, migration gerekmez.** Avukattan kaç rıza türü geleceği belirsiz → esnek yapı şart. Örn. **Big Five kişilik profili ayrı açık rıza gerektirebilir (G1-11, avukat bekliyor)** → tipli tabloda tek `type` satırı olur.
+````
+
+### docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:46 · Eski kvkkConsentAt (User/Tenant) alanının kaldırılması 'ayrı/sonraki i (#196)
+````text
+- Mevcut `kvkkConsentAt` (User:277, Tenant:186) **bu turda silinmez** — geriye uyum; yeni yazımlar Consent'e (dual-write), eski alanın kaldırılması ayrı/sonraki iş.
+````
+
+### docs/kararlar/konu/consent-modeli-plani-2026-08-28.md:88 · G1-08: OAuth rıza gösterimi + tipli yazım (#197)
+````text
+- **G1-08:** OAuth rıza gösterimi + tipli yazım — bu modele bağlı, aynı/sonraki tur.
+````
+
+### docs/kararlar/konu/degerlendirme-metrik-sistemi-tasarim-2026-08-19.md:158 · KVKK Md.11: kişi hakkındaki kalite puanına erişim hakkı — hukukçu konu (#206)
+````text
+- **AÇIK NOKTA (hukuk):** KVKK Md.11 kapsamında kişinin kendi verisine erişim hakkı ayrı bir hukukçu konusudur.
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:367 · Sınırsız yeniden-derinleşme davranışı (G3-03) — her tur profili yenide (#214)
+````text
+> değiştiriyor, sınır yok (G3-03). Karara bağlanmadı.
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:572 · Faz 5: gate (expectationCategories eleme) ile yeni skor aynı sinyali i (#215)
+````text
+  - ⚠️ Faz 5 için kalan GERÇEK soru (açık kalem, PO numaralandıracak): gate (eleme) ile skor aynı sinyali iki kez cezalandırıyor mu — yani ortak-beklentisi-olmayan aday hem eleniyor hem düşük skor alıyor mu?
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:586 · interactionStyle dondurma: pasif SELECT'lerin sonradan temizlenmesi (#216)
+````text
+- **İŞ 0 bulgusu (dondurma güvenli mi):** `interactionStyle` `matching.ts` DIŞINDA **fonksiyonel olarak okunmuyor** — yalnız 2 pasif SELECT (`userController.ts:175` getUser DTO · `onboardingController.ts:330` onboarding yanıtı) + FE DTO tipi (`lib/api/profile.ts:33`; profil sayfası **render etmiyor**). Dondurulunca SELECT'ler null döner, hiçbir mantık/gösterim tüketmediği için **fonksiyonel etki YOK.** *(Pasif SELECT'lerin sonradan temizlenmesi açık kalem — PO numaralandıracak.)*
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:597 · Kayıt sonunda sekmeyi kapatan üç soruya cevapsız kalır; profil sayfası (#217)
+````text
+- ⚠️ **AÇIK KALEM (PO numaralandıracak):** kayıt akışının sonunda sekmeyi kapatan kişi üç soruya CEVAPSIZ kalır. Migration additive olduğu için sistem çalışır (nötr) ama o kişiye SONRADAN SORMA YOLU YOK. Profil sayfasından tamamlama akışı gerekiyor mu — karar verilmedi.
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:753 · §16 #7 Çatılı eşleşme — IndustryNode/LCA mantığını bağla (#207)
+````text
+| 7 | Çatılı eşleşme — IndustryNode/LCA mantığını bağla | ⬜ AÇIK | evet |
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:754 · §16 #8 Kalite çarpanı çift-uygulama hatasını düzelt (#208)
+````text
+| 8 | Kalite çarpanı çift-uygulama hatasını düzelt | ⬜ AÇIK | evet |
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:756 · §16 #10 Görünürlük kuralları (10.3): S1 ihtiyacı seçimde gizli, mentör (#209)
+````text
+| 10 | Görünürlük kuralları (10.3) uygula | ⬜ AÇIK | evet |
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:758 · §16 #12 Eşleşme kartı metni (10.5) — algılanan benzerlik cümlesi (#210)
+````text
+| 12 | Eşleşme kartı metni (10.5) — algılanan benzerlik cümlesi | ⬜ AÇIK | evet |
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:762 · §16 #16 Kalibrasyon yön-kontrolü metrikleri (ana: ilişki süresi) (#211)
+````text
+| 16 | Kalibrasyon yön-kontrolü metrikleri kur (match length ana) | ⬜ AÇIK | evet |
+````
+
+### docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:764 · §16 #18 Karma ölçüm formatı (ipsatif sorunu) tasarımı (#212)
+````text
+| 18 | Karma ölçüm formatı (ipsatif) tasarımı | ⬜ AÇIK | evet |
+````
+
+### docs/otonom/00-SIMDI.md:80 · (7b #379 N1) GET /api/meetings/:meetingId/feedback okuma ucunun sahibi + (7b #379 N2) PATCH /api/meetings/:id (→COMPLETED) ön yüzden çağrılmıyo (#250, #251)
+````text
+- (7b #379 N1) `GET /api/meetings/:meetingId/feedback` (değerlendirme okuma) ucunun kuyrukta sahibi yok — rapor B.5 teyitinde "AJ-14'e bağlı" yazıyor ama AJ-14 periyodik anket işi; `00-KUYRUK.md` E-3 notu hâlâ "E-3e değerlendirme okumayı da karşıladı" diyor (yanlış: E-3e `…/check-ins` okuyor, `frontend/src/components/organisms/MeetingCheckInReadout.tsx:6-13`). Sonraki tur: AJ satırı + E-3 notu düzeltmesi. · (N2) `PATCH /api/meetings/:id (→COMPLETED)` ön yüzden çağrılmıyor; iş otomatik tamamlanmayla kapandı — mükerrer uç adayı (silme protokolü).
+````
+
+### docs/otonom/00-SIMDI.md:81 · AJ-01 kapsam dışı: platform/süper-admin geneli rol sayımları hâlâ User (#252)
+````text
+- AJ-01 kapsam dışı bıraktı: platform/süper-admin geneli rol sayımları (`backend/src/controllers/platformController.ts`, `adminSettingsController.ts`) hâlâ `User.role` — tekil kişi mi üyelik mi sayılacağı ürün kararı adayı.
+````
+
+### docs/otonom/00-SIMDI.md:82 · Frontend askı ekranı yok (kurum askıdayken) + GET /api/system-logs iz/meta + Kurum-içi sayımlar User.role (KPI + G1-18) + Token türü ayrımı (OAuth pending) + U-18 gerçek bildirim / inbox ret işareti (#253, #254, #255, #256, #257)
+````text
+- Kuyrukta satırı olmayan bulgular: G-kart doğrulaması ~30 ⬜ kalem (`docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md`) · `GET /api/system-logs` iz/meta · kurum-içi sayımlar `User.role` (KPI + G1-18) · frontend askı ekranı yok · token türü ayrımı (OAuth pending) · U-18 gerçek bildirim/inbox ret işareti.
+````
+
+### docs/otonom/00-SIMDI.md:84 · 'BITTI ama kalemin tamamı değil' 5 vaka (F-04/G1-23 · F-27/G6-01 · G6- (#258)
+````text
+- "BITTI ama kalemin tamamı değil" 5 vaka (F-04/G1-23 · F-27/G6-01 · G6-03 · G7-13 · F-21/G7-09) — K5-Y2 bu turda denetliyor.
+````
+
+### docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:145 · 4 kardeş belge eksik (senaryo-bankasi/olcme-mimarisi/senaryo-denetim/o (#202)
+````text
+| 4 kardeş belge eksik (senaryo-bankasi/olcme-mimarisi/senaryo-denetim/olcme-arastirmasi 2026-09-03) | ⬜ AÇIK | Hayır (belge kaydı, kod değil) |
+````
+
+### docs/raporlar/panel/00-INDEX.md:13 · 2 panel envanteri (*-panel-envanteri) kodla denetlenmedi → 'sonraki tu (#176)
+````text
+2 strateji denetlendi (aşağıdaki B.3/B.4); 2 envanter (`*-panel-envanteri`) denetlenmedi → `kod-denetimi/strateji-gercek-denetimi:337` "sonraki tur".
+````

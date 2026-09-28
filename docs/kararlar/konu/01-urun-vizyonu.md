@@ -31,7 +31,7 @@ STK / vakıf / üniversite kulüpleri / dernekler. Karar verici = **yönetici** 
 - Kapsayıcılık ana ilke — yük kulüplerde/kurumlarda değil.
 
 ## AÇIK SORULAR (detay: 08-acik-sorular.md)
-- Gelir/sürdürülebilirlik modeli hangi kanal (sponsor premium / kurumsal partnerlik / hibe / bağış)? ❓ MVP sonrası.
+- Gelir/sürdürülebilirlik modeli hangi kanal (sponsor premium / kurumsal partnerlik / hibe / bağış)? ❓ MVP sonrası. · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: gelir kanalı seçimi → KARAR-119
 - Pilot kulüp/üniversite hangisi? ❓
 - İsmin kesin kapsamı (Sivilkapasite ana marka olarak netleşti ama alt-ürün adlandırması detayı). 🟡
 

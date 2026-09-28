@@ -142,7 +142,7 @@ Beyan: arketip 6 + faz6 7 + menti 10 = **23**. → Üç belgenin "KOD KALEMLERİ
 | Madde 2 (DEĞİŞTİRİLECEK İÇERİK) — öğrenme yolculuğu 7+6 → 8+5 | 🔵 | ✅ **148** |
 | Madde 3 (KARAR DEĞİŞİKLİĞİ) — eski unisex kararına [ESKİ] damgası | ✅ yapıldı — I-06 · PR çatı #243 · 2026-09-23 · doğrulama: bitti-dogrulama-2026-09-27 | ✅ **160** |
 | M5 `outcome` teyidi — kod kalemi DEĞİL, keşif | ⬜ | ✅ **söz S31** |
-| 4 kardeş belge eksik (senaryo-bankasi/olcme-mimarisi/senaryo-denetim/olcme-arastirmasi 2026-09-03) | ⬜ AÇIK | Hayır (belge kaydı, kod değil) |
+| 4 kardeş belge eksik (senaryo-bankasi/olcme-mimarisi/senaryo-denetim/olcme-arastirmasi 2026-09-03) | 🟨 kısmen — senaryo-bankasi repoda (gerçekte 3 belge eksik); kalan: kayıp 3 belgeyi bul ya da kayıp ilan et → 03-PO #33 | Hayır (belge kaydı, kod değil) |
 | Dürüstlük sınırları (12 madde) — pazarlama/koda geçerken korunacak | ⬜ AÇIK | Hayır (uyarı, kalem değil) |
 
 > **Sayılan birim (KURAL 16):** "23 kalem" = üç belgenin **§KOD KALEMLERİ bölümlerindeki madde satırları**

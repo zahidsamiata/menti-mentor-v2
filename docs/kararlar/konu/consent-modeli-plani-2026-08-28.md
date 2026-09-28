@@ -18,7 +18,7 @@
 ## 1. Neden tipli tablo (minimal değil)
 Mevcut durum kod-teyitli: rıza yalnız zaman damgası — `kvkkConsentAt DateTime?` (`schema.prisma:186` Tenant, `:277` User). Sürüm/tip YOK (`consentVersion` grep boş). Yazımı 3 yolda: `authController.ts:176` (normal), `selfServeController.ts` (STK), `oauthService.ts:112` (OAuth — UI'da rıza göstermeden).
 
-**PO kararı — ayrı tipli+sürümlü `Consent` modeli:** Minimal şemada (tek `consentVersion` alanı) **her yeni rıza türü = yeni migration** (canlı DB kırmızı kural). Tipli tabloda **yeni satır yeter, migration gerekmez.** Avukattan kaç rıza türü geleceği belirsiz → esnek yapı şart. Örn. **Big Five kişilik profili ayrı açık rıza gerektirebilir (G1-11, avukat bekliyor)** → tipli tabloda tek `type` satırı olur.
+**PO kararı — ayrı tipli+sürümlü `Consent` modeli:** Minimal şemada (tek `consentVersion` alanı) **her yeni rıza türü = yeni migration** (canlı DB kırmızı kural). Tipli tabloda **yeni satır yeter, migration gerekmez.** Avukattan kaç rıza türü geleceği belirsiz → esnek yapı şart. Örn. **Big Five kişilik profili ayrı açık rıza gerektirebilir (G1-11, avukat bekliyor)** → tipli tabloda tek `type` satırı olur. · 🟨 kısmen — Big Five için ayrı isteğe bağlı rıza maddesi hazırlandı (AN-30); kalan: → KARAR-96 EVET (🔵)
 
 ## 2. Consent tablosu — alanlar
 ```prisma
@@ -43,7 +43,7 @@ model Consent {
 ```
 - **"Güncel rıza" okuma:** verilen özne+`type` için `revokedAt = null` olan en yeni `grantedAt` satırı. Geçmiş satırlar **silinmez** (denetim izi + sürüm geçmişi).
 - **18+ beyanı bu tabloya GİRMEZ** — beyandır, rıza değil; tek kutuda kalır (G1-01 kararı). KVKK ayrıklık kuralı **veri işleme rızaları** için geçerli.
-- Mevcut `kvkkConsentAt` (User:277, Tenant:186) **bu turda silinmez** — geriye uyum; yeni yazımlar Consent'e (dual-write), eski alanın kaldırılması ayrı/sonraki iş.
+- Mevcut `kvkkConsentAt` (User:277, Tenant:186) **bu turda silinmez** — geriye uyum; yeni yazımlar Consent'e (dual-write), eski alanın kaldırılması ayrı/sonraki iş. · 🟨 kısmen — yeni yazımlar Consent'e gidiyor (dual-write); kalan: platform ekranındaki "KVKK rızası" göstergesi hâlâ eski alandan okuyor → AJ-88 · eski alanın kaldırılması → silme protokolü adayı (AJ açılmadı; PO)
 
 ## 3. Başlangıç `type` değerleri (enum)
 ```prisma
@@ -85,7 +85,7 @@ Geri çekme = ilgili aktif satıra `revokedAt = now()` (yeni "iptal" satırı de
 - **Geri alma yolu:** tablo **additive** + dual-write → güvenli. Rollback = `DROP TABLE Consent` + enum'ları düşür (yalnız yeni consent satırları kaybolur; `kvkkConsentAt` dokunulmadığı için legacy akış tam çalışır). Kodun dual-write'ı geri alınır.
 
 ## 7. Bağlı işler / açık uçlar
-- **G1-08:** OAuth rıza gösterimi + tipli yazım — bu modele bağlı, aynı/sonraki tur.
+- **G1-08:** OAuth rıza gösterimi + tipli yazım — bu modele bağlı, aynı/sonraki tur. · 🟨 kısmen — iş sahiplendi; kalan: OAuth rıza gösterimi → AN-30 (🔵 KARAR-96), metin → 03-PO #17
 - **G1-10:** avukat aydınlatma metni → `CONSENT_VERSION` sürümü + geri-çekme nihai davranışı + Message saklama süresi bu pakete bağlı.
 - **G1-11:** Big Five açık rızası — geldiğinde tipli tabloya `BIG_FIVE_PROFIL` satırı (migration yok).
 - **G1-16:** eski kayıt backfill = §4 (birlikte yapılır).

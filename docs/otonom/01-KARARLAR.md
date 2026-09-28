@@ -160,6 +160,13 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 | **KARAR-116** | **🔵 EVET/HAYIR — eski kişilik kartlarındaki ham test puanları temizlensin mi (AJ-50)** | **1** (AJ-50) | ⬜ boş · 🔵 · yedek: `User.discResultCard` (etkilenecek satırlar) |
 | **KARAR-117** | **Mentörün emeği dönemsel olarak da takdir edilsin mi ("dönemin/yılın mentörü")** | **0** | ⬜ boş · ajan-ekledi · öneri A |
 | **KARAR-118** | **Ayrı bir deneme (staging) ortamı kurulsun mu** | **0** | ⬜ boş · ajan-ekledi · öneri B |
+| **KARAR-119** | **Gelir/sürdürülebilirlik modeli hangi kanal (kurumsal abonelik · sponsor/hibe · ertele)** | **0** (KARAR-103 md.3/7'yi etkiler) | ⬜ boş · ajan-ekledi · öneri C |
+| **KARAR-120** | **Pasif üyelere otomatik hatırlatma e-postası gitsin mi (KVKK)** | **0** | ⬜ boş · ajan-ekledi · öneri B |
+| **KARAR-121** | **Kişilik testinin cevap biçimi: zorunlu seçim mi, puanlama mı, karma mı** | **0** | ⬜ boş · ajan-ekledi · öneri C |
+| **KARAR-122** | **Kişi derinleşme sorularını sınırsız yeniden cevaplayıp profilini değiştirebilsin mi** | **0** | ⬜ boş · ajan-ekledi · öneri B |
+| **KARAR-123** | **Kayıtta üç soruyu atlayan kişiye sonradan sorulsun mu** | **0** | ⬜ boş · ajan-ekledi · öneri A |
+| **KARAR-124** | **Platform yöneticisinin "mentör/menti sayısı" neyi saysın: kişiyi mi, kurum üyeliğini mi** | **0** (cevap 1 küçük iş açar) | ⬜ boş · ajan-ekledi · öneri C |
+| **KARAR-125** | **Mentör/menti kendi kurumunu platforma önerebilsin mi ("ters çekim")** | **0** | ⬜ boş · ajan-ekledi · öneri A |
 
 ---
 
@@ -1855,4 +1862,102 @@ sorusu cevapsız kalır · Süre: — · Geri alınır: —
 **Karşılaştırma:** Kullanıcı gelmeden önce riski ucuza kapatmak istiyorsan B; kurumlara demo ya da kabul testi yapacaksan A; maliyet şu an kesin engel ise C.
 **Benim önerim:** B — asıl risk canlı veriye kazara yazmak ve B bunu en ucuza kapatır; bu senin maliyet kararın, önerime güvenme. (Hangi veritabanının canlı olduğu teyidi — 03-PO ADIM 0 — ile birlikte düşün.)
 **Cevap vermezsen:** G8-07 açık kalır; migration/seed işleri canlı yedek şartıyla sürer.
+**CEVAP:**
+
+
+### KARAR-119 · Gelir/sürdürülebilirlik modeli hangi kanal olsun? (0 iş kilitliyor; KARAR-103 md.3 ve md.7'yi etkiler) [ÜRÜN KARARI]
+**Şu an ne var:** Kurum paketi alanı (FREE/PRO/ENTERPRISE) kaydediliyor ama hiçbir sınır ya da ücret uygulanmıyor; gelir kanalı hiçbir belgede seçilmedi ("MVP sonrası" diye bırakıldı). Kanıt: `backend/prisma/schema.prisma:194` · `docs/kararlar/konu/01-urun-vizyonu.md:34` · `docs/kararlar/konu/08-acik-sorular.md:22`.
+**Sorun ne:** Paket sınırları ve kurumdan kuruma davet gibi özellikler (KARAR-103 md.3, md.7) hangi gelir kanalına hizmet edeceği bilinmeden tasarlanamıyor.
+**Neden sana soruyorum:** Kimin ödeyeceği (kurum mu, sponsor mu, hibe mi) ürünün kime ne göstereceğini belirler; iş modeli kararı.
+**Seçenekler:**
+- **A) Kurumsal abonelik (paket sınırı).** · Kullanıcı ne görür: kurum yöneticisi paketini ve sınırlarını görür · Kazanç: öngörülebilir gelir; KARAR-103 md.3 anlam kazanır · Kaybedersin: küçük STK'lar için giriş engeli; ödeme altyapısı + sözleşme gerekir · Süre: L · Geri alınır: kısmen · Migration: muhtemel
+- **B) Sponsor/hibe destekli ücretsiz platform.** · Kullanıcı ne görür: değişiklik yok; sponsor raporu (F-18 CSV) öne çıkar · Kazanç: STK'lar için sürtünmesiz · Kaybedersin: gelir dış kaynağa bağımlı; paket alanı atıl kalır · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Karar ilk kurum çıkışı sonrasına ertelensin.** · Kullanıcı ne görür: değişiklik yok · Kazanç: odak çıkış işlerinde · Kaybedersin: KARAR-103 md.3/md.7 cevapsız kalır; paket alanı yanıltıcı kalır · Süre: — · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Kısa vadede kurum sayısı öncelikse B ya da C sürtünmesiz; gelir hemen gerekiyorsa A, ama altyapı ve hukuk yükü getirir.
+**Benim önerim:** C — ilk kurum çıkışından (KARAR-69) önce kurulan gelir altyapısı yarım kalır; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** KARAR-103 md.3/md.7 kararsız kalır; başka iş kilitlenmez.
+**CEVAP:**
+
+
+### KARAR-120 · Pasif üyelere otomatik hatırlatma e-postası gitsin mi? (0 iş kilitliyor) [ÜRÜN KARARI · KVKK]
+**Şu an ne var:** Kurum yöneticisi pasif bir üyeye tek tek elle hatırlatma gönderebiliyor; otomatik ya da toplu gönderim yok. Kanıt: `docs/kararlar/00-KARAR-TAKIP.md:377` (madde 24, v2 bekleme listesi: "elle hatırlatma var") · kaynak `docs/kararlar/konu/08-acik-sorular.md:56`.
+**Sorun ne:** 30 günü aşan pasif üyeler ancak yönetici hatırlarsa uyarılıyor; büyük kurumda elle takip sürmez.
+**Neden sana soruyorum:** Kişinin istemediği e-postayı almaması (rıza, abonelikten çıkma) ve e-posta metni hukuki/ürün kararı.
+**Seçenekler:**
+- **A) Otomatik hatırlatma — kişi başına ayda en çok 1, her e-postada abonelikten çıkma bağlantısı.** · Kullanıcı ne görür: pasif üye ayda bir nazik e-posta alır · Kazanç: yöneticiye iş düşmez, geri dönüş artar · Kaybedersin: istenmeyen e-posta şikâyeti riski; avukattan metin/rıza teyidi gerekir · Süre: M · Geri alınır: evet (ayar bayrağı) · Migration: tercih alanı gerekirse var
+- **B) Yarı otomatik — sistem "hatırlatılacaklar" listesini önerir, yönetici tek tuşla gönderir.** · Kullanıcı ne görür: yönetici listeyi onaylar; üye yine yöneticinin gönderdiği e-postayı alır · Kazanç: insan onayı korunur, rıza riski düşük · Kaybedersin: yönetici yine bir adım atmak zorunda · Süre: S · Geri alınır: evet · Migration: yok
+- **C) Bugünkü gibi yalnız elle.** · Kullanıcı ne görür: değişiklik yok · Kazanç: sıfır risk · Kaybedersin: pasif üyeler fark edilmeden kaybolur · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Kurumlar büyükse A ölçeklenir ama hukuk teyidi ister; B riski düşük orta yol; C küçük pilot için yeterli.
+**Benim önerim:** B — rıza riski olmadan yöneticinin işini hafifletir; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Yalnız elle hatırlatma sürer; başka iş kilitlenmez.
+**CEVAP:**
+
+
+### KARAR-121 · Kişilik testinin cevap biçimi: zorunlu seçim mi, puanlama mı, karma mı? (0 iş kilitliyor; KARAR-58 ve KARAR-103 md.12 ile ilişkili) [ÜRÜN KARARI · PSİKOMETRİ]
+**Şu an ne var:** Mizaç soruları iki ayrı biçimde: kayıtta "dört şıktan birini seç", /disc-test'te 1-5 katılım ölçeği. Karma biçim tasarlanmadı; ters ifadeli (tutarlılık) soru da yok. Kanıt: `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:716,764` · `backend/prisma/schema.prisma:738-752`.
+**Sorun ne:** Yalnız "birini seç" biçimi kişileri birbirleriyle kıyaslamayı bozar (herkesin toplamı aynı çıkar); yalnız puanlama ise "hepsine 5 veririm" kaymasına açık.
+**Neden sana soruyorum:** Kullanıcının testi nasıl yaşadığını ve sonucun anlamını değiştirir; psikometri tasarım kararı.
+**Seçenekler:**
+- **A) Karma: temel sorular puanlama + birkaç zorunlu seçim sorusu.** · Kullanıcı ne görür: iki tür soru · Kazanç: iki sorunun da etkisi azalır · Kaybedersin: test biraz uzar; puanlama kodu ve içerik yeniden yazılır · Süre: L · Geri alınır: evet (eski cevaplar korunursa) · Migration: muhtemel (soru tipi alanı)
+- **B) Bugünkü biçim kalsın, yalnız ters ifadeli tutarlılık soruları eklensin.** · Kullanıcı ne görür: birkaç ters ifadeli soru · Kazanç: az iş, kayma tespit edilir · Kaybedersin: kıyaslama sorunu sürer · Süre: M · Geri alınır: evet · Migration: muhtemel
+- **C) Big Five geçişine (KARAR-58) kadar dokunma.** · Kullanıcı ne görür: değişiklik yok · Kazanç: iş yok; geçişte tek seferde tasarlanır · Kaybedersin: bugünkü ölçüm zayıflığı sürer · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Ölçüm kalitesi hemen önemliyse A; hafif iyileştirme yeterliyse B; test zaten Big Five'a geçecekse C emek israfını önler.
+**Benim önerim:** C — KARAR-58 cevapsızken biçim tasarlamak iki kez iş demek; bu senin ürün kararın, önerime güvenme (uzman paketi G-6 ile birlikte düşün).
+**Cevap vermezsen:** Test biçimi olduğu gibi kalır; başka iş kilitlenmez.
+**CEVAP:**
+
+
+### KARAR-122 · Kişi derinleşme sorularını sınırsız yeniden cevaplayıp profilini değiştirebilsin mi? (0 iş kilitliyor) [ÜRÜN KARARI · PSİKOMETRİ]
+**Şu an ne var:** Ek (derinleşme) sorular her cevaplandığında mizaç profili baştan hesaplanıyor; kaç kez cevaplanabileceğine sınır yok. Kanıt: `backend/src/controllers/questionController.ts:318-321` (her yanıtta `recalcDiscVector`) · kaynak `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:366` (G3-03).
+**Sorun ne:** Kişi istediği profili çıkarana kadar cevapları değiştirebilir; eşleşme önerileri de her seferinde kayar.
+**Neden sana soruyorum:** Kullanıcının kendi profiline ne kadar hükmedebileceği ürün kararı.
+**Seçenekler:**
+- **A) Sınırsız kalsın.** · Kullanıcı ne görür: istediği kadar günceller · Kazanç: özgürlük; "değiştim" diyenin profili tazelenir · Kaybedersin: oyunlama, eşleşme istikrarsızlığı · Süre: — · Geri alınır: — · Migration: yok
+- **B) Dönemsel sınır (ör. 30 günde bir yeniden derinleşme).** · Kullanıcı ne görür: "bir sonraki güncelleme X tarihinde" notu · Kazanç: istikrar, oyunlama zorlaşır · Kaybedersin: gerçek değişim de beklemek zorunda · Süre: S · Geri alınır: evet · Migration: muhtemelen yok (son cevap tarihi mevcut)
+- **C) Yeniden cevap serbest, ama profil yalnız belirgin değişimde güncellenir (eşik).** · Kullanıcı ne görür: küçük oynamalarda profil değişmez · Kazanç: hem özgürlük hem istikrar · Kaybedersin: davranış kullanıcıya anlaşılmaz gelebilir; eşik psikometri kararı ister · Süre: M · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Kullanıcı güveni öncelikse A; eşleşme istikrarı öncelikse B; ikisi arasında denge istiyorsan C.
+**Benim önerim:** B — basit ve anlaşılır; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Sınırsız davranış sürer; başka iş kilitlenmez.
+**CEVAP:**
+
+
+### KARAR-123 · Kayıtta üç soruyu atlayan kişiye sonradan sorulsun mu? (0 iş kilitliyor) [ÜRÜN KARARI]
+**Şu an ne var:** "Ne arıyorsun / nasıl destek istersin / neye önem verirsin" üç sorusu yalnız kayıt akışında soruluyor; sekmeyi kapatan kişiye bir daha sorulmuyor, profil sayfasında da yok. Kanıt: `frontend/src/app/onboarding/_OnboardingContent.tsx:249` · `frontend/src/app/(dashboard)` araması (`mentiNeeds`/`supportApproach`) 0 · kaynak `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:597`.
+**Sorun ne:** Cevapsız kişi eşleştirmede nötr sayılıyor; eşleşme kartındaki "ikiniz de …" cümlesi (I-11) onun için hiç çıkmayacak.
+**Neden sana soruyorum:** Kullanıcıya nerede ve ne sıklıkla soru sorulacağı ürün kararı.
+**Seçenekler:**
+- **A) Profil sayfasına "Üç soruyu tamamla" kartı.** · Kullanıcı ne görür: profilinde eksik kartı, isterse doldurur · Kazanç: veri tamamlanır, baskı yok · Kaybedersin: az kişi kendiliğinden döner · Süre: S · Geri alınır: evet · Migration: yok
+- **B) Panelde bir kez hatırlatma + profil kartı.** · Kullanıcı ne görür: girişte bir kez "eşleşmen iyileşsin" notu · Kazanç: doluluk artar · Kaybedersin: hafif sürtünme · Süre: S-M · Geri alınır: evet · Migration: yok
+- **C) Sorma.** · Kullanıcı ne görür: değişiklik yok · Kazanç: iş yok · Kaybedersin: bu kişiler için ihtiyaç verisi hiç oluşmaz · Süre: — · Geri alınır: — · Migration: yok
+**Karşılaştırma:** Verinin yeni formülde (KARAR-61) kullanılacağı kesinse A ya da B değer taşır; formül rafa kalkarsa C yeterli.
+**Benim önerim:** A — sürtünmesiz ve geri alınabilir; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Atlayan kişi cevapsız kalır; başka iş kilitlenmez.
+**CEVAP:**
+
+
+### KARAR-124 · Platform yöneticisinin "mentör/menti sayısı" neyi saysın: kişiyi mi, kurum üyeliğini mi? (0 iş kilitliyor; cevap 1 küçük iş açar) [ÜRÜN KARARI · VERİNİN ANLAMI]
+**Şu an ne var:** Platform ve süper-yönetici panelindeki mentör/menti sayıları kullanıcının genel rolünden sayılıyor; kurum panelleri ise AJ-01 ile kurum üyeliğindeki role geçti. Kanıt: `backend/src/controllers/platformController.ts:121-124` · `backend/src/controllers/adminSettingsController.ts:292-293` · kaynak `docs/otonom/00-SIMDI.md:81`.
+**Sorun ne:** İki kurumda farklı rolde olan bir kişi platformda tek rolle sayılıyor; kurum toplamlarıyla platform toplamı tutmuyor.
+**Neden sana soruyorum:** Sayının anlamı (kaç insan mı, kaç kurum-rolü mü) yöneticiye verilen mesajı değiştirir.
+**Seçenekler:**
+- **A) Üyelik say (kurum-rol çifti).** · Kullanıcı ne görür: platform toplamı kurum toplamlarının toplamına eşit · Kazanç: tutarlılık · Kaybedersin: aynı kişi iki kez sayılır; "kaç insan" sorusu cevapsız · Süre: S · Geri alınır: evet · Migration: yok
+- **B) Tekil kişi say; rolü "en az bir kurumda mentör" diye tanımla.** · Kullanıcı ne görür: gerçek insan sayısı · Kazanç: büyüme için doğru ölçü · Kaybedersin: iki rolü olan kişi iki grupta da görünür; toplamlar toplanmaz · Süre: S · Geri alınır: evet · Migration: yok
+- **C) İkisini birden göster ("X kişi · Y üyelik").** · Kullanıcı ne görür: iki sayı yan yana · Kazanç: iki soru da cevaplı · Kaybedersin: panel kalabalıklaşır · Süre: S · Geri alınır: evet · Migration: yok
+**Karşılaştırma:** Kurum raporlarıyla tutarlılık istiyorsan A; platform büyümesini insan olarak izlemek istiyorsan B; ikisini de görmek istiyorsan C.
+**Benim önerim:** C — iki sayı da düşük maliyetli ve yanlış yorum riskini kaldırır; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Platform sayıları genel role göre kalır (tutarsızlık sürer).
+**CEVAP:**
+
+
+### KARAR-125 · Mentör ya da menti kendi kurumunu platforma önerebilsin mi ("ters çekim")? (0 iş kilitliyor) [ÜRÜN KARARI]
+**Şu an ne var:** Kurumlar platforma yalnız kendi başvurusuyla ("Kurumunu Kur") ya da platform yöneticisi eliyle geliyor; bir kullanıcı "kendi kurumumu da davet et" diyemiyor. KARAR-103 madde 7 yalnız kurumdan kuruma daveti soruyor, bireyden kuruma değil. Kanıt: `frontend/src` araması (`refer` / `kurumunu.*davet` / `ters çekim`) 0 · `docs/raporlar/kesif/g-kart-dogrulama-2026-09-26.md:160` (G4-38) · kaynak `docs/kararlar/00-KARAR-TAKIP.md:632` (madde 116).
+**Sorun ne:** Bir kurumda memnun kalan mentör/menti, üyesi olduğu başka bir kurumu (okul, dernek, mezun ağı) getiremiyor; organik kurum kazanımı kanalı kapalı.
+**Neden sana soruyorum:** Kullanıcıya yeni bir özellik ve büyüme modeli kararı; üçüncü kişinin (kurum yetkilisinin) e-postasını işlemek KVKK sonucu doğurabilir.
+**Seçenekler:**
+- **A) Yok (bugünkü).** · Kullanıcı ne görür: değişiklik yok · Kazanç: iş yok, üçüncü kişi verisi işlenmez · Kaybedersin: bireylerden gelen kurum kazanımı kanalı kapalı kalır · Süre: — · Geri alınır: evet · Migration: yok
+- **B) Basit öneri formu — kullanıcı kurum adını ve (isteğe bağlı) yetkili e-postasını yazar; bildirim platform yöneticisine gider, davet elle yapılır.** · Kullanıcı ne görür: panelde "Kurumunu öner" bağlantısı · Kazanç: ucuz, insan kontrolünde · Kaybedersin: platform yöneticisine iş düşer; yetkili e-postası işlenirse aydınlatma metnine eklenmeli · Süre: S · Geri alınır: evet · Migration: yok (e-posta ile) ya da muhtemel (öneri kaydı)
+- **C) Otomatik davet bağlantısı — kullanıcı kurum yetkilisine "Kurumunu Kur" bağlantısı gönderir, kimin getirdiği izlenir.** · Kullanıcı ne görür: paylaşılabilir davet bağlantısı · Kazanç: ölçeklenir; getiren kişiye takdir verilebilir · Kaybedersin: izleme alanı (migration), KVKK değerlendirmesi, kötüye kullanım (spam) önlemi gerekir · Süre: M · Geri alınır: kısmen · Migration: var
+**Karşılaştırma:** Önce ilk kurumların oturması istiyorsan A; büyümeyi insan kontrolünde denemek istiyorsan B; kurum kazanımı ana büyüme kanalı olacaksa C.
+**Benim önerim:** A (şimdilik) — gerçek kullanıcı ~0 iken büyüme kanalı erken; gelir modeli (KARAR-119) ile birlikte düşün; bu senin ürün kararın, önerime güvenme.
+**Cevap vermezsen:** Kanal kapalı kalır; başka iş kilitlenmez.
 **CEVAP:**

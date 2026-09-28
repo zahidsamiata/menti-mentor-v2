@@ -52,10 +52,10 @@
 
 ## 🔴 KVKK CANLI-ÖNCESİ BLOCKER'LARI (kod ama önce KARAR gerekiyor)
 - Privacy center UI, DISC için ayrı rıza, Meeting/Feedback FK nullable, 18+ yaş doğrulama.
-- Bunlar açık sorulara bağlı (bkz. 08): yaş politikası, veri sorumlusu kimliği, sunucu konumu beyanı.
+- Bunlar açık sorulara bağlı (bkz. 08): yaş politikası, veri sorumlusu kimliği, sunucu konumu beyanı. · 🟨 kısmen — sunucu konumu teyitli (Londra, md.92); kalan: yaş → KARAR-31 + 03-PO A3, veri sorumlusu → KARAR-75, yurt dışı aktarım → 03-PO #20
 
 ## 🔴 SUNUCU/ALTYAPI GÜVENLİĞİ (HİÇ ELE ALINMADI)
-- Dokploy HTTP+açık = kritik. Firewall, SSH sertleştirme, SSL, yedekleme.
+- Dokploy HTTP+açık = kritik. Firewall, SSH sertleştirme, SSL, yedekleme. · 🟨 kısmen — kod tarafı (K-14) yapıldı; kalan: firewall/SSH/SSL/yedek → KARAR-18 (G1-28) + 03-PO #2/A2
 - Gerçek kişisel veri gelmeden yapılması önemli. Kendi turu olmalı. Prompt hazır (bir chat'te), gönderilip gönderilmediği belirsiz.
 - Depoları PRIVATE yapma (GitHub, ticari SaaS). ⏳
 

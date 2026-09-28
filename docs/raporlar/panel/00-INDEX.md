@@ -10,7 +10,7 @@ Bu klasör: platform ↔ tenant admin panel envanteri + strateji (kardeş çiftl
 - `stk-yonetici-strateji-*.md` · `stk-yonetici-panel-envanteri-*.md`
 
 ## ⚠️ Denetim durumu (P-5, harita)
-2 strateji denetlendi (aşağıdaki B.3/B.4); 2 envanter (`*-panel-envanteri`) denetlenmedi → `kod-denetimi/strateji-gercek-denetimi:337` "sonraki tur".
+2 strateji denetlendi (aşağıdaki B.3/B.4); 2 envanter (`*-panel-envanteri`) denetlenmedi → `kod-denetimi/strateji-gercek-denetimi:337` "sonraki tur". · ⚪ geçersiz — iki envanter 📸 dondurulmuş tanım belgesi; kalemler G-kart doğrulamasıyla (2026-09-26) koda karşı denetlendi, kalan panel özellikleri KARAR-103'te (PO teyit listesinde)
 
 ## ⛔ ÇAPRAZ ATIF — bu panellerin KOD DENETİMİ başka klasörde (KURAL 2-B, 2026-09-19)
 > Panel ↔ kod kıyasları YÖNTEM klasöründe (`kod-denetimi/`) yazıldı; burada aranmasın diye atıf bırakıldı.

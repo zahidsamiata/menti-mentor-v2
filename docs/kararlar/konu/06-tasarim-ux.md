@@ -7,7 +7,7 @@
 
 ## TEMA (dark/light)
 - **Toggle var:** İsteyen light'a geçebilir. Altyapı kuruldu (PR #32: .dark class, ThemeProvider, localStorage, FOUC önleme, ThemeToggle butonu). 🟢✅
-- **Landing dark/light: CANLI-SONRASINA ERTELENDİ (2026-08-02 geç oturum'da güncellendi).** 🟢
+- **Landing dark/light: CANLI-SONRASINA ERTELENDİ (2026-08-02 geç oturum'da güncellendi).** 🟢 · 🟨 kısmen — karar yazılı (canlı-sonrası); kalan: landing tema + UX paketi kodu → AJ-86
   - Eski karar: "Landing HER ZAMAN DARK kalır". Yeni karar: landing ileride dark/light **seçilebilir yapılabilir AMA canlı-öncesi değil**.
   - Gerekçe (tema-durum-ve-landing-maliyeti raporu): landing'i seçilebilir yapmak ~256 hardcoded nokta / ~10-13 saat / **orta risk**. Şu an öncelik değil.
   - Şimdilik landing DARK kalır (app tarafı — dashboard/formlar — zaten toggle'lı).
@@ -37,12 +37,12 @@ Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-e
   - Mevcut skor API'den dönüyor (`/mentors/:id/candidates`, `totalScore/sectorScore/discScore`) →
     **İŞ 7'ye (sektör-scorer) BAĞLI DEĞİL, bugünkü skorla çalışır.**
 - **Kartta GÖSTERİLMEYECEK:** deneyim (yıl/şirket — etiket yeter); sosyal linkler; müsaitlik.
-- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa.
+- **Grid + sayfalama:** sayfa başına ~15-18 kart (kesin sayı açık soru, bkz. 08); masaüstü 3 / tablet 2 / mobil 1 sütun. 300 mentör → çok sayfa. · 🟨 kısmen — kart ızgarası var; kalan: sayfalama (bugün tek istekte en çok 100) → AJ-90
 - **Detay sayfası (karta tıklayınca):**
   - Sosyal linkler (LinkedIn/Instagram) **burada + KOŞULLU** — kişi bilgi girmişse göster, girmemişse hiçbir şey gösterme.
   - Müsaitlik takvimi → müsait saate tıkla → **niyet mektubu yaz** akışı.
 - **Çift yönlü havuz:** mentör menti havuzunu, menti mentör havuzunu görür — **aynı kart mantığı**.
-- **Fotoğraf:** herkesten istenecek. Şimdilik **opsiyonel**, ileride zorunlu (bkz. 08 açık soru). Altyapı hazır (bugün tamamlandı).
+- **Fotoğraf:** herkesten istenecek. Şimdilik **opsiyonel**, ileride zorunlu (bkz. 08 açık soru). Altyapı hazır (bugün tamamlandı). · 🟨 kısmen — fotoğraf altyapısı var, opsiyonel; kalan: "ne zaman zorunlu" → E-4 (AN-13 katlandı) — ⚠️ ürün sorusu E-4 karantina işinde kaybolmasın
 - **Referanslar:** docs/raporlar/kesif/kart-havuz-backend-envanteri-2026-08-02.md + docs/raporlar/kesif/mentor-karti-rakip-analizi-2026-08-02.md (rakip analizi + kart kararları).
 - **Deneyim referansı (persona):** kart + akış tasarımı iki tarafın deneyimini farklı etkiler —
   menti tarafında **"bekleme anı" riski** (talep sonrası onay beklerken kaybolma), mentör
@@ -56,7 +56,7 @@ Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-e
 
 ## UX İYİLEŞTİRMELERİ (bugünkü oturumda bulundu, ⏳)
 - **Sol menü tipografi:** Yazılar küçük/soluk, biraz büyütülüp kontrast artırılmalı (CV360 örneği daha okunaklı).
-- **Sayfa açıklama metinleri:** Her admin sayfasının başındaki "bu sayfa ne işe yarar" metni daha basit/açıklayıcı olmalı (imleç/tooltip değil, metin iyileştirme).
+- **Sayfa açıklama metinleri:** Her admin sayfasının başındaki "bu sayfa ne işe yarar" metni daha basit/açıklayıcı olmalı (imleç/tooltip değil, metin iyileştirme). · 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: sade sayfa açıklama metinleri → AJ-91 (🟡 metin onayı PO)
 - **Soru ekleme dropdown'ları:** CORE/DEEPENING neden İngilizce → Türkçeleştir. "Genel (bilgi amaçlı)" dropdown'ında neden DISC (D/I/S/C) seçenekleri var → gözden geçir (kişi DISC üzerinden onaylama yapamaz).
 
 ## ONBOARDING UX
@@ -66,4 +66,4 @@ Karar verildi, henüz kodlanmadı. Backend %90 hazır (bkz. kart-havuz-backend-e
 - 5 uzman rolüyle keşif prompt'u hazır, gönderilmedi. Bilinen: "davet bilgisi eksik" hatası, belirsiz hata mesajları (bugün B14 ile hata mesajları kısmen düzeldi).
 
 ## AÇIK SORULAR (bkz. 08)
-- Çift-aha onboarding, bildirim yedeği vb. orta öncelikli işler — asistan "değerli ama sonra" dedi, kullanıcı karar vermedi. ⚪
+- Çift-aha onboarding, bildirim yedeği vb. orta öncelikli işler — asistan "değerli ama sonra" dedi, kullanıcı karar vermedi. ⚪ · 🟨 kısmen — iş karta bağlandı; kalan: çift-aha → KARAR-17, bildirim yedeği → KARAR-103 md.11/13

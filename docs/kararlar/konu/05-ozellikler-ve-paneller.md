@@ -51,7 +51,7 @@ Backend büyük ölçüde hazırdı, eksik olan UI'dı. Hepsi tenant-izole + KVK
 - 4 KPI + Erken Uyarı (Aktif Yolculuklar, Boştaki Kapasite, Eşleşme Süresi, NPS).
 
 ## BEKLEYEN İŞLER (detay: 09-DURUM.md)
-- Panel PR'ları (#26/#29) merge — kodlandı, test bekliyor.
+- ~~[ESKİ · 2026-09-27] Panel PR'ları (#26/#29) merge — kodlandı, test bekliyor.~~ ⚠️ GÜNCELLEME (2026-09-27): backend #26 ve #29 main'e merge edildi — kanıt: backend `git log origin/main` (#26 `dacc171`, #29 `975c03f`) · doğrulama: sahipsiz-kalanlar-2026-09-27
 - Sertifika + öğrenme yolculuğu uçtan uca test.
 - Onay bildirimi maili (kurum onaylanınca başvurana gidiyor mu belirsiz).
 - Yöneticilik verme akışı (A9) — YENİDEN KURGULANACAK, kod öncesi kullanıcıya sorulacak (söz verildi).
