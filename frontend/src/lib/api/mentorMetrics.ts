@@ -12,8 +12,12 @@ export interface MentorDashboardMetrics {
   pendingRequests: number;
   completedMeetings: number;
   activeMentis: number;
-  /** Ortalama NPS; yeterli geri bildirim yoksa null. */
+  /** Ortalama NPS; yeterli geri bildirim yoksa ya da gizlendiyse (npsSuppressed) null. */
   avgNps: number | null;
+  /** AJ-99: yanıt sayısı k-anonimlik eşiğinin altında → ortalama gizlendi (mask.ts maskNpsSample). */
+  npsSuppressed?: boolean;
+  /** AJ-99: gizleme eşiği (backend K_ANONYMITY_THRESHOLD). */
+  npsMinSampleSize?: number;
   // ── Aşağıdakiler backend pointer bump'ından ÖNCE gelmeyebilir (opsiyonel) ──
   /** P-11: tamamlanan görüşmelerin toplam süresi (saat). */
   totalMentoringHours?: number;
