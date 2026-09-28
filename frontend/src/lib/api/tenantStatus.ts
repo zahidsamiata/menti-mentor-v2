@@ -13,17 +13,30 @@ import { apiClient } from './client';
 import type { TenantVerificationStatus } from './selfServe';
 
 interface MeTenantStatusResponse {
-  tenant: { verificationStatus: TenantVerificationStatus } | null;
+  tenant: { verificationStatus: TenantVerificationStatus; isSuspended?: boolean } | null;
 }
 
-export async function fetchOwnTenantVerificationStatus(
+/**
+ * AJ-72: askı bilgisi (`isSuspended` — dondurma ya da ret) aynı yanıtta gelir; ikinci bir istek
+ * atılmaz. Eski backend alanı döndürmezse `false` sayılır (yönlendirme eski davranışa düşer).
+ */
+export interface OwnTenantStatus {
+  verificationStatus: TenantVerificationStatus;
+  isSuspended: boolean;
+}
+
+export async function fetchOwnTenantStatus(
   accessToken: string,
   tenantId: string,
-): Promise<TenantVerificationStatus | null> {
+): Promise<OwnTenantStatus | null> {
   const result = await apiClient<MeTenantStatusResponse>('/api/auth/me', {
     token: accessToken,
     tenantId,
     withRefresh: false,
   });
-  return result.ok ? (result.data.tenant?.verificationStatus ?? null) : null;
+  if (!result.ok || !result.data.tenant) return null;
+  return {
+    verificationStatus: result.data.tenant.verificationStatus,
+    isSuspended: result.data.tenant.isSuspended === true,
+  };
 }
