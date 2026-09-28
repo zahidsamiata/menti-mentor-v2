@@ -6,7 +6,9 @@
  * Adımlar:
  *  1. Profil tamamlama (sektör, beceriler, deneyim yılı)
  *  2. Oyunlaştırılmış DISC testi (8 senaryo sorusu)
- *  3. "Aha Anı" — mizaç sonuç kartı + paylaşım + dashboard'a geçiş
+ *  3. Tercihler — üç soru (form görünümü, madde 141)
+ *  4. "Aha Anı" — mizaç sonuç kartı + paylaşım + dashboard'a geçiş
+ *     (kart, üç sorudan sonra kısa bir geçiş ekranıyla açılır — AJ-70)
  *
  * API çağrıları bu bileşende merkezlenir; adım bileşenleri saf UI rolü üstlenir.
  */
@@ -27,6 +29,8 @@ import { ThreeQuestionsStep } from './_steps/ThreeQuestionsStep';
 import type { DiscAnswer, DiscQuestion, DiscResultCard, ProfileData, MatchingPreferences } from '@/types/onboarding';
 import type { UserRole } from '@/types/auth';
 import { cn } from '@/lib/utils';
+import { prefersReducedMotion } from '@/lib/a11y/reducedMotion';
+import { CARD_REVEAL_DELAY_MS, CARD_REVEAL_STATUS_TEXT } from '@/lib/onboardingReveal';
 
 // ─── Adım göstergesi ─────────────────────────────────────────────────────────
 
@@ -87,6 +91,29 @@ function LoadingShell() {
   );
 }
 
+// ─── Kart öncesi geçiş (AJ-70 · madde 141 PO ek önlemi 2) ─────────────────────
+// Üç soru (form) ile kart arasında kısa ayırıcı ekran. `role="status"` → ekran okuyucu
+// durumu duyurur. Hareket yalnız `motion-safe` altında; hareketi azaltan kullanıcı bu
+// ekranı hiç görmez (bkz. handleThreeQuestionsComplete).
+
+function CardRevealTransition() {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="flex flex-col items-center justify-center py-16 text-center motion-safe:animate-fade-in"
+    >
+      <div
+        aria-hidden
+        className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-3xl text-primary motion-safe:animate-pulse"
+      >
+        ✦
+      </div>
+      <p className="mt-4 text-base font-semibold text-foreground">{CARD_REVEAL_STATUS_TEXT}</p>
+    </div>
+  );
+}
+
 // ─── _OnboardingContent ───────────────────────────────────────────────────────
 
 export default function OnboardingContent() {
@@ -103,6 +130,8 @@ export default function OnboardingContent() {
   // "Yükleniyor" ile "boş liste" ayrımı (PS-11): başlangıç `[]` iki durumda da aynı
   // görünüyordu → boş gelen listede gösterge sonsuza kadar dönüyordu.
   const [questionsLoaded, setQuestionsLoaded] = useState(false);
+  // Üç soru kaydedildi, kart açılmadan önceki kısa geçiş sürüyor (AJ-70).
+  const [revealingCard,  setRevealingCard]  = useState(false);
 
   // ── Soru çekimi — mount'ta ────────────────────────────────────────────────
   useEffect(() => {
@@ -118,6 +147,16 @@ export default function OnboardingContent() {
       setQuestionsLoaded(true);
     })();
   }, [accessToken, user]);
+
+  // ── Kart öncesi geçiş: süre dolunca kartı aç; bileşen kalkarsa zamanlayıcı temizlenir ──
+  useEffect(() => {
+    if (!revealingCard) return;
+    const timer = setTimeout(() => {
+      setRevealingCard(false);
+      setStep(3);
+    }, CARD_REVEAL_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [revealingCard]);
 
   // ── Auth yüklenene kadar bekle ────────────────────────────────────────────
   if (authLoading || !accessToken || !user) return <LoadingShell />;
@@ -156,6 +195,8 @@ export default function OnboardingContent() {
   };
 
   // ── Adım 3 tamamlandı: üç soruyu kaydet, ÖDÜL adımına (kart) geç ─────────
+  // Kart doğrudan değil, kısa bir geçişle açılır (madde 141: sorulardan ayırsın, ödül anını
+  // belirginleştirsin). Hareketi azaltan kullanıcıda geçiş atlanır, kart hemen açılır.
   const handleThreeQuestionsComplete = async (data: MatchingPreferences) => {
     setIsSubmitting(true);
     setStepError(null);
@@ -164,7 +205,11 @@ export default function OnboardingContent() {
 
     setIsSubmitting(false);
     if (result.ok) {
-      setStep(3);
+      if (prefersReducedMotion()) {
+        setStep(3);
+      } else {
+        setRevealingCard(true);
+      }
     } else {
       setStepError(result.error.message ?? 'Tercihlerin kaydedilemedi. Tekrar deneyin.');
     }
@@ -245,7 +290,9 @@ export default function OnboardingContent() {
           )
         )}
 
-        {step === 2 && (
+        {step === 2 && revealingCard && <CardRevealTransition />}
+
+        {step === 2 && !revealingCard && (
           <ThreeQuestionsStep
             role={userRole}
             onComplete={handleThreeQuestionsComplete}
