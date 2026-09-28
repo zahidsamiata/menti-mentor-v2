@@ -10,6 +10,11 @@
 # UYARI (çıkış kodunu değiştirmez): boyut eşikleri (Bölüm 5c) · kural (h): arşivdeki BITTI satırı "madde N"
 #   atfı taşıyor ve docs/kararlar/00-KARAR-TAKIP.md'de madde N satırında ✅ / 🟨 yok → "BITTI işin kaynağı açık"
 #   (gerekçeli istisna: docs/raporlar/kod-denetimi/bekci-istisna.txt — satır biçimi "<iş> madde <N> # <gerekçe>").
+#   · kural (i): CI job'u scripts/verify.sh başlığında anılmıyor (KR-22)
+#   · kural (j): docs/raporlar/ altında ilk 5 satırında TÜR etiketi olmayan rapor (YN-11)
+#   · kural (k): docs/ altında indekssiz (giriş noktası olmayan) klasör (YN-12)
+#   · kural (l): CLAUDE.md'nin kendi içine satır numarasıyla atfı (YN-10)
+#   · kural (m): 00-KUYRUK / 00-KARAR-TAKIP'te 1.000 karakteri aşan satır sayısı (YN-09)
 #
 # Kullanım: bash scripts/belge-bekci.sh [kök-dizin]   (varsayılan: reponun kökü; testler geçici kök verir)
 set -euo pipefail
@@ -99,6 +104,82 @@ if takip is not None:
                     continue
                 if not any('✅' in t or '🟨' in t for t in satirlar):
                     warnings.append(f'BITTI işin kaynağı açık: {kimlik} → madde {madde} (00-KARAR-TAKIP; {aname}:{no}) — kural (h): "✅ yapıldı — {kimlik} · PR #" ya da istisna')
+
+# Kural (i) KR-22: CI job'ları scripts/verify.sh başlık yorumunda anılıyor mu — yalnız UYARI.
+# Yerelde koşulmayan job da "bilinçli fark" olarak başlıkta yazılı olmalı. backend/ CI dosyası yalnız
+# submodule çekiliyse okunur (çatı docs-guard job'u submodule çekmez → orada atlanır).
+vsh = read('scripts/verify.sh')
+if vsh is not None:
+    header = []
+    for vline in vsh.split('\n'):
+        if not vline.startswith('#'):
+            break
+        header.append(vline)
+    header = '\n'.join(header)
+    for ci_rel in ('.github/workflows/ci.yml', 'backend/.github/workflows/ci.yml'):
+        ci_text = read(ci_rel)
+        if ci_text is None:
+            continue
+        in_jobs = False
+        for cline in ci_text.split('\n'):
+            if re.match(r'^jobs:\s*$', cline):
+                in_jobs = True
+                continue
+            if in_jobs and re.match(r'^\S', cline):
+                in_jobs = False
+            jm = re.match(r'^  ([A-Za-z0-9_-]+):\s*(#.*)?$', cline) if in_jobs else None
+            if jm and not re.search(r'(?<![\w-])' + re.escape(jm.group(1)) + r'(?![\w-])', header):
+                warnings.append(f'{ci_rel} job "{jm.group(1)}" scripts/verify.sh başlığında anılmıyor — adım eşlemesine ya da "bilinçli farklar"a yaz (KR-22)')
+
+# Kural (j) YN-11: docs/raporlar/ altındaki her rapor ilk 5 satırında TÜR etiketi taşır — yalnız UYARI.
+# (belge-duzeni-rehberi KURAL 3: 🔄 yaşayan · 📸 dondurulmuş; ısı katmanı 🔥/🌡️/🧊 da etiket sayılır.)
+TUR_ETIKETI = ('📸', '🔄', '🔥', '🧊', '🌡️', '🌡')
+for dirpath, _dirs, files in os.walk(os.path.join(root, 'docs/raporlar')):
+    for fname in sorted(files):
+        if not fname.endswith('.md'):
+            continue
+        rpath = os.path.join(dirpath, fname)
+        with open(rpath, encoding='utf-8') as fh:
+            head = ''.join(fh.readline() for _ in range(5))
+        if not any(t in head for t in TUR_ETIKETI):
+            warnings.append(f'{os.path.relpath(rpath, root)} ilk 5 satırda TÜR etiketi (📸/🔄/🔥/🌡️/🧊) yok — başa etiket yaz (YN-11, rehber KURAL 3)')
+
+# Kural (k) YN-12: docs/ altındaki her klasörün giriş noktası (indeks) var — yalnız UYARI.
+# İndeks deseni rehber KURAL 2-B ile aynı: ^00-.*ind(ex|eks) (dört kalıbı da yakalar). docs/ kökünün girişi 00-BELGE-HARITASI.md.
+INDEKS = re.compile(r'^00-.*ind(ex|eks)', re.I)
+docs_root = os.path.join(root, 'docs')
+for dirpath, _dirs, files in os.walk(docs_root):
+    if dirpath == docs_root:
+        continue
+    if not any(f.endswith(('.md', '.txt')) for f in files):
+        continue
+    if not any(INDEKS.match(f) for f in files):
+        warnings.append(f'{os.path.relpath(dirpath, root)}/ giriş noktası (00-INDEX.md) yok — kısa indeks aç (YN-12, rehber KURAL 2-B)')
+
+# Kural (l) YN-10: CLAUDE.md kendi içine satır numarasıyla atıf yapmaz (her düzenlemede kayar) — yalnız UYARI.
+# Atıf bölüm adıyla yazılır: "§ Çalışma Sözleşmesi". Başka dosyaya satır atfı (ör. `00-KUYRUK.md:12`) bu kuralın dışında.
+claude_md = read('CLAUDE.md')
+if claude_md is not None:
+    for no, line in enumerate(claude_md.split('\n'), 1):
+        for sm in re.finditer(r'(?<![\w/.-])CLAUDE\.md:\d+(?:-\d+)?', line):
+            warnings.append(f'CLAUDE.md:{no} kendi içine satır atfı "{sm.group(0)}" — bölüm adına çevir ("§ <başlık>") (YN-10)')
+
+# Kural (m) YN-09: kuyruk ve karar-takip satırları 1.000 karakter tavanını aşmasın — yalnız UYARI (dosya başına tek satır).
+# Tavan: CLAUDE.md § "tarihsel iz satırın İÇİNDE tutulmaz" madde 1. Karar-takip'te ## GEÇMİŞ bölümü sayılmaz.
+SATIR_TAVANI = 1000
+for rel in ('docs/otonom/00-KUYRUK.md', 'docs/kararlar/00-KARAR-TAKIP.md'):
+    text = read(rel)
+    if text is None:
+        continue
+    uzun = []
+    for no, line in enumerate(text.split('\n'), 1):
+        if line.startswith('## GEÇMİŞ'):
+            break
+        if len(line) > SATIR_TAVANI:
+            uzun.append((len(line), no))
+    if uzun:
+        en_uzun = max(uzun)
+        warnings.append(f'{rel} {len(uzun)} satır > {SATIR_TAVANI} karakter (en uzun :{en_uzun[1]} = {en_uzun[0]}) — eski katmanı GEÇMİŞ/arşive taşı (YN-09)')
 
 LIMITS = [('docs/otonom/00-KUYRUK.md', 150), ('docs/otonom/01-KARARLAR.md', 150),
           ('docs/otonom/02-ILERLEME.md', 150), ('CLAUDE.md', 35), ('docs/otonom/OTONOM-PROMPT.txt', 35),

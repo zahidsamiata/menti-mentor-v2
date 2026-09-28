@@ -143,6 +143,7 @@ Yatay tablo → **KART görünümü**. Kart içeriği **bakan kişinin ROLÜNE g
 > Kod kanıtı: çatı `origin/main` @ `802f5cd`; backend satırları submodule pointer'ı `a958faf` üzerinden.
 > Kapsam: 12 kararın hepsi (8 kesinleşmiş + 4 keşif). Lejant: ✅ uygulanmış · 🟡 kısmen · ⬜ uygulanmamış.
 > ⚠️ Önerilen satırlar kuyruğa EKLENMEDİ — kuyruğa alma PO/kuyruk sahibinin işi.
+> ⚠️ GÜNCELLEME (2026-09-27, AJ-46): eklendi — AJ-63…AJ-67 (aşağıdaki "Önerilen kuyruk satırları" notu).
 
 | Karar | Kısa ad | Statü | Kanıt (kod) | Kuyruk karşılığı / önerilen satır |
 |---|---|---|---|---|
@@ -162,6 +163,7 @@ Yatay tablo → **KART görünümü**. Kart içeriği **bakan kişinin ROLÜNE g
 **Sayım:** ✅ 6 (1, 5, 6, 7, 10, 11) · 🟡 4 (2, 3, 4, 12) · ⬜ 2 (8, 9 — ikisi de bilinçli ertelenmiş vizyon). Kuyruğa bağlı açık karar: yalnız KARAR 2 (kısmen, `P-04` üzerinden).
 
 ### Önerilen kuyruk satırları (EKLENMEDİ — kuyruk sahibi karar verir)
+> ⚠️ GÜNCELLEME (2026-09-27, AJ-46 · AN-35): öneriler kuyruğa bağlandı — Ö1 → **AJ-63** · Ö2 → **AJ-64** · Ö3 → **AJ-65** · Ö4 → **AJ-66** · Ö5 → **AJ-67** (🔴, KARAR kartı bekler). Durum yalnız `docs/otonom/00-KUYRUK.md`'de.
 | Öneri | İş | Kapı önerisi | Bitti ölçütü (kullanıcı ne görür) | Not |
 |---|---|---|---|---|
 | Ö1 | **Yönetici mentör/menti havuzunu tablodan KART görünümüne çevir** (KARAR 2): fotoğraf · isim · DISC harfi · durum rozeti · sertifika rozeti · aksiyon | 🟢 (yalnız frontend, 2 sayfa) | Yönetici havuz sayfalarında kişileri kart olarak görüyor | Kalite puanı, öğrenme yolculuğu, onay izi gibi tablo sütunları kartta nereye gider — teknik/düzen kararı, sorulmaz |

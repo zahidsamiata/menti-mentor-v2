@@ -1,3 +1,6 @@
+> 📸 DONDURULMUŞ (2026-09-27) — o günün fotoğrafı, güncellenmez. Güncel durum: `docs/otonom/00-KUYRUK.md` (AJ-07).
+> TÜR: 📸 · SON DOĞRULAMA: 2026-09-27 · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş) · etiket: AJ-46/YN-11
+
 # Erişilebilirlik Denetimi — 2026-09-27 (AJ-07)
 
 > Kapsam: giriş, kayıt, DISC testi (adaptif + onboarding), menti paneli, mentör paneli, mesajlar, randevu

@@ -1,3 +1,6 @@
+> 📸 DONDURULMUŞ (2026-09-27) — o günün fotoğrafı, güncellenmez. Güncel durum: `docs/otonom/00-KUYRUK.md` (AJ-05 (F-04 kalanı)).
+> TÜR: 📸 · SON DOĞRULAMA: 2026-09-27 · TAZELEME TETİKLEYİCİSİ: KALICI — tazeleme gerekmez (dondurulmuş) · etiket: AJ-46/YN-11
+
 # CSP: Report-Only → Zorunlu (enforce) mod geçiş hazırlığı (2026-09-27)
 
 Kaynak: AJ-05 görevi (F-04 kalanı) kapsamında B) maddesi — CSP'yi doğrudan zorunlu moda ALMADIK

@@ -93,4 +93,65 @@ echo 'X-09 madde 777' >"$TMP/root/docs/raporlar/kod-denetimi/bekci-istisna.txt"
 expect 0 "kural (h) istisna gerekçesiz → istisna sayılmaz, iki uyarı"
 grep -q "kaynağı açık: X-09" "$TMP/out" && grep -q "gerekçe eksik" "$TMP/out" || { echo "  ✗ kural (h): gerekçesiz istisna yanlış işlendi"; FAIL=1; }
 
+# ── kural (i) KR-22: CI job'u verify.sh başlığında anılmalı → yalnız UYARI ──
+setup_i() {  # setup_i <verify.sh başlığındaki metin>
+  setup_clean
+  mkdir -p "$TMP/root/scripts" "$TMP/root/backend/.github/workflows"
+  printf '#!/usr/bin/env bash\n# eşleme: backend-check\n# %s\nset -euo pipefail\n# docker-prisma (başlık dışı)\n' "$1" >"$TMP/root/scripts/verify.sh"
+  printf 'name: CI\non:\n  push:\njobs:\n  backend-check:\n    runs-on: x\n' >"$TMP/root/.github-ci.tmp"
+  mkdir -p "$TMP/root/.github/workflows" && mv "$TMP/root/.github-ci.tmp" "$TMP/root/.github/workflows/ci.yml"
+  printf 'name: CI\njobs:\n  docker-prisma:\n    runs-on: x\n' >"$TMP/root/backend/.github/workflows/ci.yml"
+}
+
+setup_i 'bilinçli fark: `docker-prisma` yerelde koşmaz'
+expect 0 "kural (i) pozitif: backend job'u başlıkta anılıyor → uyarı yok"
+grep -q "KR-22" "$TMP/out" && { echo "  ✗ kural (i): anılan job için uyarı çıktı"; FAIL=1; }
+
+setup_i 'başka bir not'
+expect 0 "kural (i) negatif: backend job'u başlıkta yok (yalnız gövdede) → yeşil + uyarı"
+grep -q 'job "docker-prisma" scripts/verify.sh başlığında anılmıyor' "$TMP/out" || { echo "  ✗ kural (i) uyarısı çıktıda yok"; FAIL=1; }
+grep -q 'job "push"' "$TMP/out" && { echo "  ✗ kural (i): on: altındaki push job sanıldı"; FAIL=1; }
+
+# ── kural (j) YN-11: raporlarda TÜR etiketi → yalnız UYARI ──
+setup_clean
+mkdir -p "$TMP/root/docs/raporlar/kesif"
+printf '> 📸 DONDURULMUŞ (2026-09-27)\n# Rapor\n' >"$TMP/root/docs/raporlar/kesif/etiketli.md"
+expect 0 "kural (j) pozitif: etiketli rapor → uyarı yok"
+grep -q "YN-11" "$TMP/out" && { echo "  ✗ kural (j): etiketli raporda uyarı çıktı"; FAIL=1; }
+
+printf '# Rapor\n\n\n\n\n> 📸 altıncı satırda — sayılmaz\n' >"$TMP/root/docs/raporlar/kesif/etiketsiz.md"
+expect 0 "kural (j) negatif: etiketsiz rapor → yeşil + uyarı"
+grep -q "kesif/etiketsiz.md ilk 5 satırda TÜR etiketi" "$TMP/out" || { echo "  ✗ kural (j) uyarısı çıktıda yok"; FAIL=1; }
+
+# ── kural (k) YN-12: indekssiz klasör → yalnız UYARI ──
+setup_clean
+mkdir -p "$TMP/root/docs/kararlar/konu"
+printf '# x\n' >"$TMP/root/docs/kararlar/konu/a.md"
+printf '# idx\n' >"$TMP/root/docs/kararlar/konu/00-KART-INDEKSI.md"
+expect 0 "kural (k) pozitif: klasörde (Türkçe adlı) indeks var → uyarı yok"
+grep -q "docs/kararlar/konu/ giriş noktası" "$TMP/out" && { echo "  ✗ kural (k): indeksli klasörde uyarı çıktı"; FAIL=1; }
+
+rm "$TMP/root/docs/kararlar/konu/00-KART-INDEKSI.md"
+expect 0 "kural (k) negatif: indekssiz klasör → yeşil + uyarı"
+grep -q "docs/kararlar/konu/ giriş noktası (00-INDEX.md) yok" "$TMP/out" || { echo "  ✗ kural (k) uyarısı çıktıda yok"; FAIL=1; }
+
+# ── kural (l) YN-10: CLAUDE.md içinde kendine satır atfı → yalnız UYARI ──
+setup_clean
+printf -- '- bkz. § Çalışma Sözleşmesi · başka dosya: `backend/CLAUDE.md:12` · `00-KUYRUK.md:5`\n' >>"$TMP/root/CLAUDE.md"
+expect 0 "kural (l) pozitif: bölüm adı + başka dosya satır atfı → uyarı yok"
+grep -q "YN-10" "$TMP/out" && { echo "  ✗ kural (l): bölüm adlı atıfta uyarı çıktı"; FAIL=1; }
+
+printf -- '- `CLAUDE.md:4-5`teki kural\n' >>"$TMP/root/CLAUDE.md"
+expect 0 "kural (l) negatif: CLAUDE.md:4-5 kendine atıf → yeşil + uyarı"
+grep -q 'kendi içine satır atfı "CLAUDE.md:4-5"' "$TMP/out" || { echo "  ✗ kural (l) uyarısı çıktıda yok"; FAIL=1; }
+
+# ── kural (m) YN-09: 1.000 karakteri aşan kuyruk satırı → yalnız UYARI ──
+setup_clean
+expect 0 "kural (m) pozitif: kısa satırlar → uyarı yok"
+grep -q "YN-09" "$TMP/out" && { echo "  ✗ kural (m): kısa satırlarda uyarı çıktı"; FAIL=1; }
+
+printf '| X-05 | Ş0 | uzun iş | 🟢 | görünür | BEKLIYOR | %s |\n' "$(head -c 1100 /dev/zero | tr '\0' 'n')" >>"$TMP/root/docs/otonom/00-KUYRUK.md"
+expect 0 "kural (m) negatif: 1.000+ karakterlik kuyruk satırı → yeşil + uyarı"
+grep -q "00-KUYRUK.md 1 satır > 1000 karakter" "$TMP/out" || { echo "  ✗ kural (m) uyarısı çıktıda yok"; FAIL=1; }
+
 exit $FAIL
