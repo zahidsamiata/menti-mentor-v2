@@ -13,6 +13,10 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 
 ---
 
+**Toplu karar için:** [`KARAR-PAKETI.md`](KARAR-PAKETI.md) — açık kartların tamamı tek satırda, ilk 10 kararın açtığı iş sayısı, 🔵 EVET/HAYIR listesi, birlikte verilmesi gerekenler, geçersiz/teyit listesi. Seçimlerini PO NOTU olarak yaz; CEVAP'ın tek kaynağı yine kart dosyasıdır.
+
+---
+
 ## ✍️ PO NOTU
 > Serbest not alanı (karar kartına sığmayan kısa bir yön notu). Ajan bu dosyayı okurken görür; işlediğinde notu 02-ILERLEME'ye kaydedip alanı boşaltır.
 

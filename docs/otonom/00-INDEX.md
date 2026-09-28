@@ -16,3 +16,4 @@ Otonom çalışma dosyaları. Giriş noktası: `00-SIMDI.md` (şu an) + `00-KUYR
 - `03-PO-ELLE-ISLER.md` — 03 — PO'NUN ELLE YAPACAKLARI (kod değiştirilerek çözülemeyen işler)
 - `OTONOM-PROMPT.txt`
 - `arsiv/` — alt klasör (kendi `00-INDEX.md`'si ya da giriş dosyası var)
+- `KARAR-PAKETI.md` — 🌡️ PO toplu karar paketi (GÖREV 3.5, 2026-09-28); rutin turda okunmaz.
