@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-28 ~15:30 UTC · çatı main HEAD (bu commit) · backend main HEAD `b8ff889`
+**Son güncelleme:** 2026-09-28 ~17:10 UTC · çatı main HEAD (bu commit) · backend main HEAD `e97f9dc`
 
 **Durum:** CALISIYOR (devam turu — kota ~09:30 UTC'de kesti; 00-SIMDI 08:01'den beri güncellenmemişti). Sıra: 2.4 bölmeyi bitir (TEK BAŞINA) → AJ-58 → AJ-72 kaydı → 2.5 → GÖREV 3 KARAR-PAKETI (merge) + kart zenginleştirme → GÖREV 4 (AJ-83 …) → DURDU (K1-a).
 
-**Şu an yapılan:** GÖREV 4 — AJ-78 çatı #435 CI (backend #238 merge; 7b 2. tur ONAY) · yazılıyor: AJ-95a (Json psikometrik Zod) · AJ-81 (menti kart testleri). Bu devam turunda BITTI: 2.4 · AJ-72 kaydı · AJ-58 · 2.5 · KARAR-PAKETI · 3.1 · AJ-83 · 90 · 60 · 65 · 66 · 70 · 63 · 94 · 93 · kısmen: AJ-89 (KARAR-130) · AJ-80 (KARAR-57). Yeni kartlar: KARAR-129…132.
+**Şu an yapılan:** GÖREV 4 son işler — AJ-52 (CSP rapor ucu; server.ts'e dokunmayacak biçimde yeniden bağlanıyor) · AJ-86 (T5 landing, 3 PR) · sonra AJ-68 (kuyruk uzun satırları, tek başına) → KAPANIŞ. Bu devam turunda BITTI: 2.4 · AJ-72 kaydı · AJ-58 · 2.5 · KARAR-PAKETI · 3.1 · AJ-83 · 90 · 60 · 65 · 66 · 70 · 63 · 94 · 93 · 78 · 81 · 82 · 84 · 85 · 61 · 62 · 53 · 71 · kısmen: AJ-89 (KARAR-130) · 80 (KARAR-57) · 95 (95b/c) · 56 (KARAR-133) · 79 (AJ-111). Yeni kartlar: KARAR-129…133.
 
 **Devam turu — kesinti öncesi yarım kalanlar ve nasıl kapandı:**
 | İş | Dal | Son hâl (11:20 UTC teyit) | Kapanış PR'ı |
@@ -42,4 +42,4 @@ Süreç notu: 2.4 "tek başına" olmalıydı; AJ-72 ve AJ-58 aynı anda yürüt�
 
 **Strateji katmanına not:** 7b bir kez `node_modules` sembolik bağının backend commit'ine girdiğini yakaladı (AJ-69) — backend `.gitignore` `node_modules/` bağı yakalamıyordu; düzeltildi, uygulayıcı kurallarına ders eklendi. Yeni satırlar: AJ-96 · 97 · 98 · 99 · 100.
 
-**Sıradaki 5 iş:** AJ-78 merge → AJ-56 (kararsız kısım + KARAR kartı) → AJ-79 → T4: AJ-82 → AJ-84.
+**Sıradaki 5 iş:** AJ-52 7b → AJ-86 a/b/c → AJ-68 → TUR ÖZETİ + DURDU (K1-a).

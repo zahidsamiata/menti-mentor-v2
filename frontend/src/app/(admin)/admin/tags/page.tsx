@@ -55,11 +55,13 @@ export default function TagsPage() {
         </p>
       </div>
 
-      {/* Durum sekmeleri */}
-      <div className="flex gap-1 rounded-lg bg-muted p-1 w-fit">
+      {/* Durum sekmeleri — AJ-85: adlandırılmış düğme grubu, seçili sekme aria-pressed. */}
+      <div className="flex gap-1 rounded-lg bg-muted p-1 w-fit" role="group" aria-label="Duruma göre filtrele">
         {STATUS_TABS.map(({ label, value }) => (
           <button
             key={value}
+            type="button"
+            aria-pressed={status === value}
             onClick={() => handleTabChange(value)}
             className={cn(
               'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',

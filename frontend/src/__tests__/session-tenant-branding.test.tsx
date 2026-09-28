@@ -55,7 +55,7 @@ describe('KR-02/KR-03: F5 sonrası oturum + kurum markası', () => {
             accessToken: 'tok',
             expiresIn: 3600,
             user: {
-              id: 'u1', tenantId: 't1', role: 'MENTI', fullName: 'Ayşe Menti', email: 'a@example.com',
+              id: 'u1', tenantId: 't1', role: 'MENTI', fullName: 'Örnek Menti', email: 'a@example.com',
               approvalStatus: 'APPROVED', discType: null, discLetters: '', needsOrientation: false,
             },
             tenant: { id: 't1', name: 'Acme Vakfı', slug: 'acme', logoUrl: null, primaryColor: '#112233' },
@@ -67,7 +67,7 @@ describe('KR-02/KR-03: F5 sonrası oturum + kurum markası', () => {
 
     renderApp();
 
-    await waitFor(() => expect(screen.getByTestId('user')).toHaveTextContent('Ayşe Menti'));
+    await waitFor(() => expect(screen.getByTestId('user')).toHaveTextContent('Örnek Menti'));
     expect(screen.getByTestId('brand')).toHaveTextContent('Acme Vakfı|#112233');
     const calledPaths = apiMock.mock.calls.map((c) => c[0] as string);
     expect(calledPaths.some((p) => p.startsWith('/api/tenants/'))).toBe(false);

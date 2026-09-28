@@ -89,13 +89,13 @@ describe('Mentör paneli veri zenginleştirme (P-11/P-12/P-13)', () => {
   it('P-13: "Mentilerim" listesi aktif menti isimlerini gösterir', () => {
     metricsMock.isCertified = false;
     metricsMock.activeMentees = [
-      { id: 'a', fullName: 'Ada Yılmaz' },
-      { id: 'b', fullName: 'Bora Demir' },
+      { id: 'a', fullName: 'Birinci Menti' },
+      { id: 'b', fullName: 'İkinci Menti' },
     ];
     render(<MentorDashboardPage />);
     expect(screen.getByText('Mentilerim')).toBeInTheDocument();
-    expect(screen.getByText('Ada Yılmaz')).toBeInTheDocument();
-    expect(screen.getByText('Bora Demir')).toBeInTheDocument();
+    expect(screen.getByText('Birinci Menti')).toBeInTheDocument();
+    expect(screen.getByText('İkinci Menti')).toBeInTheDocument();
   });
 
   it('P-13: menti yoksa "Mentilerim" listesi görünmez', () => {

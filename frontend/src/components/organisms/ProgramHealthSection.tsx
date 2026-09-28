@@ -8,7 +8,7 @@
  * Listeler backend'de CAP'lenir; count > gösterilen ise "+N daha" bilgisi verilir.
  */
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { adminApi } from '@/lib/api/admin';
@@ -43,6 +43,7 @@ export function ProgramHealthSection() {
   );
   const [selected, setSelected] = useState<MetricKey | null>(null);
   const [nudges, setNudges] = useState<Record<string, NudgeState>>({});
+  const headingId = useId();
 
   const doNudge = async (userId: string, kind: NudgeKind) => {
     setNudges((p) => ({ ...p, [userId]: 'sending' }));
@@ -66,15 +67,15 @@ export function ProgramHealthSection() {
   return (
     <div className="space-y-4">
       <div className="flex items-baseline justify-between">
-        <h2 className="text-lg font-semibold">Program Sağlığı</h2>
+        <h2 id={headingId} className="text-lg font-semibold">Program Sağlığı</h2>
         <p className="text-xs text-muted-foreground">
           Arz-talep: {data.supplyDemand.mentors} mentör / {data.supplyDemand.mentis} menti
           {data.supplyDemand.ratio !== null && ` (oran ${data.supplyDemand.ratio})`}
         </p>
       </div>
 
-      {/* Tıklanabilir özet sayılar */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      {/* Tıklanabilir özet sayılar — AJ-85: aria-pressed düğmeleri görünür başlıkla adlandırılmış grup. */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3" role="group" aria-labelledby={headingId}>
         {cards.map((c) => {
           const active = selected === c.key;
           return (
@@ -178,7 +179,7 @@ export function ProgramHealthSection() {
 
 function NudgeButton({ state, onClick, label }: { state?: NudgeState; onClick: () => void; label: string }) {
   if (state === 'sent') {
-    return <span className="shrink-0 text-xs font-medium text-emerald-600 dark:text-emerald-400">Gönderildi ✓</span>;
+    return <span className="shrink-0 text-xs font-medium text-emerald-700 dark:text-emerald-400">Gönderildi ✓</span>;
   }
   const errorMsg = typeof state === 'object' ? state.error : null;
   return (

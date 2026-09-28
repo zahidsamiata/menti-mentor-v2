@@ -613,3 +613,39 @@
 ## docs/kararlar/00-KARAR-TAKIP.md:340 (AJ-95a)
 
 | 170 | JSON yazım koruması — Prisma `Json?` sütunlarına yazarken tip `InputJsonValue` olduğu için uygulama tipi hiç uygulanmıyor; 13 JSON alanında yapısal boşluk. Gözlenen tek hata `discVector`'da | 🟨 kısmen — sahipsizdi (GÖREV 4); kalan: `schema.prisma`'daki 13 `Json` alanına yazım öncesi yapı doğrulaması → AJ-95 | KOD+KEŞİF | ⚠️ **KAPSAM BEYANI EKSİK:** "diğer alanlar okuma tarafında savunuluyor" iddiası keşif turunun GÖZLEMİDİR, sistematik tarama DEĞİL — 13 alanın **her** okuma noktası taranmadı. **Tek korumasız okuma yolu varsa bu kalemin "opsiyonel" gerekçesi çöker.** İş: (a) KAPSAM BEYANLI tarama, (b) sonra tip-checked sarmalayıcı kararı | `.prisma/client/index.d.ts` `InputJsonValue` · madde 162/169 | Hayır | M |
+
+## docs/00-BELGE-HARITASI.md:68 (AJ-71)
+
+- `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` 🔄 Tasarım: Eşleşme Sonrası Değerlendirme +…
+
+## docs/00-BELGE-HARITASI.md:69 (AJ-71)
+
+- `degerlendirme-sistemi-tasarim-2026-08-27.md` ❓ Değerlendirme + Eşleştirme Sistemi —…
+
+## docs/kararlar/00-INDEX.md:89 (AJ-71)
+
+| `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` | #7 eşleşme-sonrası değerlendirme + metrik takip + otomatik pasifleştirme + yeniden değerlendirme + periyodik hatırlatma vizyonu; VİZYON ↔ KOD GERÇEĞİ ayrı; 3 aşamalı plan | 🔄 YAŞAYAN (#7 inşasına başlarken) |
+
+## docs/kararlar/00-INDEX.md:90 (AJ-71)
+
+| `degerlendirme-sistemi-tasarim-2026-08-27.md` | Değerlendirme + eşleştirme sistemi tasarım belgesi (16 bölüm, iki tur): DISC→Big Five model kararı, metafor arketipler, Likert→senaryo ölçme + çekirdek 12 senaryo, derinleşme, sertifika, eşleştirme algoritması (%45/30/25), üç soru veri boşluğu, süreç/göç/kalibrasyon; Bölüm 16 KALEM LİSTESİ | 🔄 YAŞAYAN (kalemler 00-KARAR-TAKIP'e girecek) |
+
+## docs/kararlar/00-INDEX.md:148 (AJ-71)
+
+| `eslestirme-motoru-kesfi-2026-08-27.md` | Eşleştirme motoru keşfi (katman ağırlıkları/veto/sektör asimetri) — `degerlendirme-sistemi-tasarim-2026-08-27` tasarımının kaynağı |
+
+## docs/kararlar/konu/00-INDEX.md:21 (AJ-71)
+
+- `degerlendirme-metrik-sistemi-tasarim-2026-08-19.md` — Tasarım: Eşleşme Sonrası Değerlendirme + Metrik Takip + Otomatik Pasifleştirme (iş #7)
+
+## docs/kararlar/konu/00-INDEX.md:22 (AJ-71)
+
+- `degerlendirme-sistemi-tasarim-2026-08-27.md` — Değerlendirme + Eşleştirme Sistemi — Tasarım Belgesi
+
+## docs/otonom/03-PO-ELLE-ISLER.md:206 (AJ-71)
+
+| A11 | **YENİ (GÖREV 4, 2026-09-27) — Kişi hakkında türetilen kalite puanı (mentör kalite çarpanı) KVKK Md.11 erişim hakkı kapsamında mı?** Puan yalnız kurum yöneticisine görünüyor; kişinin "verilerimi indir" çıktısında yok (`backend/src/services/gdprService.ts:318-361`). Kişiye gösterilmeli / dışa aktarımda verilmeli mi; gerekiyorsa ham puan mı, açıklamalı özet mi? | Kişi hakkında türetilmiş veri erişim hakkına girerse dışa aktarım eksik kalır. | KARAR-91 ile kümelenir; "evet" ise ajan dışa aktarıma alan ekleyen 🟢 (+7b) satır açar (kaynak: `docs/kararlar/konu/degerlendirme-metrik-sistemi-tasarim-2026-08-19.md:158`) |
+
+## docs/raporlar/icerik/kod-kalemleri-2026-09-03.md:103 (AJ-71)
+
+- **Eski kayıt (yerini bul):** `docs/kararlar/konu/degerlendirme-sistemi-tasarim-2026-08-27.md:410` —

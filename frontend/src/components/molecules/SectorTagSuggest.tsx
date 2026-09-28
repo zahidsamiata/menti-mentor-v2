@@ -21,7 +21,7 @@ import { UI_TEXT } from '@/lib/uiText';
 type Feedback = { kind: 'success' | 'info' | 'error'; text: string } | null;
 
 const FEEDBACK_STYLES: Record<'success' | 'info' | 'error', string> = {
-  success: 'text-emerald-600 dark:text-emerald-400',
+  success: 'text-emerald-700 dark:text-emerald-400',
   info:    'text-muted-foreground',
   error:   'text-destructive',
 };

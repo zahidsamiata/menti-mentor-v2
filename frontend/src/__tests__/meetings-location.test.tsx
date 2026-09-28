@@ -48,8 +48,8 @@ function meetingFixture(overrides: Partial<Meeting> = {}): Meeting {
     endsAt: new Date(Date.now() + 90_000_000).toISOString(),
     notes: null,
     requestMessage: null,
-    mentor: { id: MENTOR_ID, fullName: 'Ayşe Yıldız' },
-    menti:  { id: MENTI_ID, fullName: 'Deniz Kaya', sectorTags: [], expectationCategories: [] },
+    mentor: { id: MENTOR_ID, fullName: 'Örnek Mentör' },
+    menti:  { id: MENTI_ID, fullName: 'Örnek Menti', sectorTags: [], expectationCategories: [] },
     ...overrides,
   };
 }

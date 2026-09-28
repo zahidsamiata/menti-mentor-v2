@@ -1,6 +1,7 @@
 import type { TenantMeeting } from '@/lib/api/platform';
 import { meetingFormatLabel } from '@/lib/enumLabels';
 import { UI_TEXT } from '@/lib/uiText';
+import { SUCCESS_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 const STATUS_LABEL: Record<string, string> = {
   PENDING: 'Beklemede',
@@ -15,7 +16,7 @@ function statusBadgeClass(status: string): string {
   switch (status) {
     case 'COMPLETED':
     case 'APPROVED':
-      return 'bg-green-900/60 text-emerald-600 dark:text-emerald-400';
+      return SUCCESS_PILL_CLASS;
     case 'CANCELLED':
       return 'bg-red-900/60 text-destructive';
     case 'PENDING':
@@ -68,7 +69,7 @@ export function MeetingsTable({
               <td className="px-4 py-3 text-muted-foreground">{meetingFormatLabel(m.format)}</td>
               <td className="px-4 py-3">
                 <span className={`text-xs px-2 py-0.5 rounded-full ${
-                  m.hasFeedback ? 'bg-green-900/60 text-emerald-600 dark:text-emerald-400' : 'bg-muted text-muted-foreground'
+                  m.hasFeedback ? SUCCESS_PILL_CLASS : 'bg-muted text-muted-foreground'
                 }`}>
                   {m.hasFeedback ? 'Var' : 'Yok'}
                 </span>
