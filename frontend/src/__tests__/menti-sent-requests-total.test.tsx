@@ -5,6 +5,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import MentiDashboardPage from '@/app/(dashboard)/menti/page';
+import { MENTOR_POOL_PAGE_SIZE } from '@/lib/api/matching';
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
@@ -35,7 +36,7 @@ const firstPageItems = Array.from({ length: PAGE_SIZE }, (_, i) => ({
 }));
 
 const apiMock = vi.fn(async (path: string) => {
-  if (path === '/api/mentis/menti-1/mentor-matches?limit=100') return { ok: true, data: { items: [] } };
+  if (path === `/api/mentis/menti-1/mentor-matches?limit=${MENTOR_POOL_PAGE_SIZE}`) return { ok: true, data: { items: [] } };
   if (path === '/api/agreements/active') return { ok: false, error: { error: 'NOT_FOUND', message: 'yok' }, status: 404 };
   if (path === '/api/meetings') return { ok: true, data: { items: [] } };
   if (path === '/api/conversations') {
