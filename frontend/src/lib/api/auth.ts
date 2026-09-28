@@ -23,9 +23,10 @@ export interface RegisterPayload {
   captchaToken?: string;
 }
 
+// AJ-112: backend kayıtlı ve kayıtsız e-posta için AYNI gövdeyi döner (hesap varlığı gövdeden
+// okunamasın) → kullanıcı nesnesi yok. Kayıt sonrası oturum ayrıca /login ile açılır.
 export interface RegisterResponse {
   message: string;
-  user: { id: string; email: string; fullName: string; role: string; approvalStatus: string };
 }
 
 export interface ChangePasswordResponse {
