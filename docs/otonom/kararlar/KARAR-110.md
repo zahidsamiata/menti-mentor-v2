@@ -1,7 +1,7 @@
 ### KARAR-110 · Periyodik anket (mentörlük ilişkisinin genel değerlendirmesi) ne olsun? (1 işi açar: AJ-14)  [ÜRÜN KARARI]
 > ⭐ Kaynak: E-3e yan bulgusu + 7b incelemesi (2026-09-27); kuyrukta AJ-14.
 
-**Şu an ne var:** `/periodic-survey` adında bir sayfa var (tavsiye puanı, güven, özgüven, kariyer katkısı soruları; `frontend/src/app/(dashboard)/periodic-survey/page.tsx`). Ama (1) hiçbir ekrandan ya da e-postadan bu sayfaya bağlantı yok; (2) sayfa açılsa bile gönderim her seferinde "En az bir değerlendirme puanı girilmelidir" hatasıyla reddediliyor (`backend/src/controllers/feedbackController.ts:11-30`); (3) cevaplar görüşme başına TEK satırlık geri bildirim kaydına yazılmaya çalışılıyor — mentör ve menti ikisi de doldurursa biri diğerinin cevabını ezer, ve menti'nin notu mentöre görünür (`feedbackController.ts:185-189`).
+**Şu an ne var:** `/periodic-survey` adında bir sayfa var (tavsiye puanı, güven, özgüven, kariyer katkısı soruları; `frontend/src/app/(dashboard)/periodic-survey/page.tsx`). Ama (1) hiçbir ekrandan ya da e-postadan bu sayfaya bağlantı yok; (2) sayfa açılsa bile gönderim her seferinde "En az bir değerlendirme puanı girilmelidir" hatasıyla reddediliyor (`backend/src/controllers/feedbackController.ts:11-30`); (3) cevaplar görüşme başına TEK satırlık geri bildirim kaydına yazılmaya çalışılıyor (`backend/prisma/schema.prisma:623`) — mentör ve menti ikisi de doldurursa ikincinin gönderimi "zaten gönderildi" diye reddedilir (`feedbackController.ts:63-65`); şema onarılırsa mentinin dönemlik cevapları mentöre görünür, çünkü mentör görünümü yalnız üç puanı gizliyor (`feedbackController.ts:188-190`); mentinin açık notu ise bugün "yetkisiz alan" olarak reddediliyor (`:91-96`).
 **Sorun ne:** Yarım kalmış bir özellik: kimse ulaşamıyor, ulaşsa kaydedemiyor, kaydedebilse gizlilik kuralını (KARAR-80 M22 "herkes yalnız kendi yazdığını görür") bozar.
 **Neden sana soruyorum:** Periyodik anketin hiç olup olmayacağı, kime ve ne sıklıkta gösterileceği ürün kararı; düzgün çalışması yeni bir kayıt yapısı (migration) istiyor.
 **Seçenekler:**
@@ -10,6 +10,7 @@
 - **C) Şimdilik dokunulmasın** — Kullanıcı: değişiklik yok (sayfa zaten erişilemez) · Kazanç: iş yok · Kayıp: yarım kod durur; biri sayfayı bağlarsa hem hata hem gizlilik sorunu çıkar · Süre — · Geri alınır · Migration yok.
 **Karşılaştırma:** Tek ve tutarlı bir anket sistemi istiyorsan A; dönemsel e-posta ölçümü ayrı bir hedefse B; ilk kurumlarla canlıya çıkış öncelikliyse C.
 **Benim önerim:** A — gizlilik sorununu yeni kodla değil mevcut planlanan altyapıyla çözer, iki anket sistemi doğmaz.
-**Cevap vermezsen:** AJ-14 bekler; sayfa erişilemez olduğu için kullanıcı etkisi yok.
+**Cevap vermezsen:** AJ-14 ve AJ-49 (KARAR-89 ile birlikte) bekler; sayfa erişilemez olduğu için kullanıcı etkisi yok.
+**İlgili kartlar:** KARAR-78 (aynı /periodic-survey sayfası — mükerrer soru) · KARAR-89 (anketin yazdığı Feedback kutusunun geleceği) · KARAR-106 (A seçeneğinin önkoşulu olan tablo) — birlikte cevaplanması önerilir: KARAR-110 + KARAR-78 + KARAR-106
 **CEVAP:**
 

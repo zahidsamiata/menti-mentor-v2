@@ -29,6 +29,18 @@ import { weeklyLimitText, WEEKLY_LIMIT_FALLBACK } from '@/components/molecules/W
 import type { MentorMatch } from '@/types/matching';
 import { UI_TEXT } from '@/lib/uiText';
 
+/** AJ-90: sayfaları birleştirir; sayfa sınırında kayma olursa aynı mentörü iki kez göstermez. */
+function mergeUniqueMentors(first: MentorMatch[], rest: MentorMatch[]): MentorMatch[] {
+  const seen = new Set(first.map((m) => m.mentorId));
+  const merged = [...first];
+  for (const m of rest) {
+    if (seen.has(m.mentorId)) continue;
+    seen.add(m.mentorId);
+    merged.push(m);
+  }
+  return merged;
+}
+
 export default function MentiDashboardPage() {
   const { user, isLoading } = useAuth();
   const { tenant } = useTenant();
@@ -60,6 +72,30 @@ export default function MentiDashboardPage() {
     [api, user?.id],
     { enabled: isApproved && !needsDiscTest && !!user?.id, cacheKey: `matching:mentors:${user?.id}` },
   );
+
+  // AJ-90: havuz sayfalı — ilk sayfa useQuery ile gelir, "Daha fazla göster" ile eklenen
+  // sayfalar ayrı tutulur (şikayet paneli AN-39 / mesajlar AJ-83 ile aynı desen).
+  const [moreMentors, setMoreMentors] = useState<MentorMatch[]>([]);
+  const [moreMentorsTotal, setMoreMentorsTotal] = useState<number | null>(null);
+  const [loadingMoreMentors, setLoadingMoreMentors] = useState(false);
+  const [moreMentorsError, setMoreMentorsError] = useState<string | null>(null);
+  const mentorItems = mentorsData ? mergeUniqueMentors(mentorsData.items, moreMentors) : [];
+  const mentorTotal = moreMentorsTotal ?? mentorsData?.total ?? mentorItems.length;
+  const hasMoreMentors = !mentorsLoading && mentorItems.length < mentorTotal;
+
+  async function loadMoreMentors() {
+    if (!user?.id) return;
+    setLoadingMoreMentors(true);
+    setMoreMentorsError(null);
+    const res = await matchingApi.mentorMatches(api, user.id, { offset: mentorItems.length });
+    setLoadingMoreMentors(false);
+    if (res.ok) {
+      setMoreMentors((prev) => [...prev, ...res.data.items]);
+      setMoreMentorsTotal(res.data.total);
+    } else {
+      setMoreMentorsError('Daha fazla mentör yüklenemedi. Lütfen tekrar deneyin.');
+    }
+  }
 
   // PENDING + DISC tamamsa: PII-free sayım (KVKK — mentor isimleri tarayıcıya gönderilmez)
   const { data: mentorCountData } = useQuery(
@@ -294,7 +330,7 @@ export default function MentiDashboardPage() {
                 <div key={i} className="h-16 rounded-xl bg-muted animate-pulse" />
               ))}
             </div>
-          ) : !mentorsData?.items.length ? (
+          ) : !mentorItems.length ? (
             <div className="text-center py-8 space-y-2">
               {/* PS-10: menti tarafında DISC'e bağlı eleme YOK (matching.ts rankMentorsForMenti) — liste yalnız
                   programda onaylı ve erişilebilir mentor yoksa boş kalır. Profili suçlama, teste gönderme. */}
@@ -308,7 +344,7 @@ export default function MentiDashboardPage() {
             // KARAR 5: menti mentörün DISC tipini GÖRMEZ — kart yalnız skor + jenerik
             // gerekçe + sektör gösterir; backend discType göndermez (ek savunma katmanı).
             <div className="grid gap-3 sm:grid-cols-2">
-              {mentorsData.items.map((mentor) => (
+              {mentorItems.map((mentor) => (
                 <div
                   key={mentor.mentorId}
                   // AN-28 · KARAR-80/M7: meşgul/eksik-profil/görünürlük-kapalı mentör kartı
@@ -379,6 +415,22 @@ export default function MentiDashboardPage() {
                   )}
                 </div>
               ))}
+            </div>
+          )}
+          {/* AJ-90: sayfalı havuz — kalan uygun mentörler varsa sonraki sayfa listeye eklenir. */}
+          {moreMentorsError && (
+            <p className="mt-3 text-center text-xs text-destructive" role="alert">{moreMentorsError}</p>
+          )}
+          {hasMoreMentors && (
+            <div className="mt-3 flex justify-center">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={loadingMoreMentors}
+                onClick={() => void loadMoreMentors()}
+              >
+                {loadingMoreMentors ? UI_TEXT.status.loading : 'Daha fazla göster'}
+              </Button>
             </div>
           )}
         </CardContent>

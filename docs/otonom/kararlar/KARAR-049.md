@@ -1,9 +1,10 @@
+> ⚪ gereksiz olabilir — seçenek B 2026-09-24'te fiilen uygulandı (`devir/01-felsefe-ve-calisma-tarzi.md:3-4,32-33,61-62` · commit 0c01c97; `devir/06-devir-kilavuzu.md:3,51` · 6d64e23); kalan yalnız 📸 03:61/04:75 ve belge haritası etiketi; kapatma PO'nun
 ### KARAR-49 · `devir/01` ve `devir/06`: "dondurulmuş" mu, "kalıcı referans" mı?  [BELGE POLİTİKASI] (2 işi açar)
 > ⭐ **Kaynak:** yönetişim konseyi (`docs/raporlar/kesif/konsey-yonetisim-2026-09-21.md`), 2026-09-21.
 
-**Şu an ne var:** İki devir belgesi künyesinde **tek cümle içinde** hem 📸 DONDURULMUŞ hem *"kalıcı referans"* yazıyor (`devir/01-felsefe-ve-calisma-tarzi.md:3` · `devir/06-devir-kilavuzu.md:3`). Üstelik `01`'in başlığı **"yeni sohbet önce bunu oku"**. İçlerinde bugün geçersiz olan **6 "PR aç, merge etme" satırı** var (`01`'de 2 · `06`'da 2 · `03`'te 1 · `04`'te 1). Kanıt: `docs/00-BELGE-HARITASI.md:61`. İkinci kat çelişki: `00-BELGE-HARITASI.md:38` bu iki dosyayı **🔄** etiketliyor, dosyalar kendini **📸** diyor.
+**Şu an ne var:** Kartın sorduğu iki belge 2026-09-24'te düzeltildi (DC turu): `devir/01-felsefe-ve-calisma-tarzi.md:3-4` künyesi artık "🔄 YAŞAYAN (kısmen)", eski 📸 künyesi ve 2 bayat "PR aç, merge etme" satırı üstü çizili + GÜNCELLEME notlu (`:32-33` · `:61-62`, commit 0c01c97) — yani seçenek B bu iki satırda fiilen uygulanmış. `devir/06-devir-kilavuzu.md` baştan yazıldı (6d64e23): `:3` "🔄 YAŞAYAN giriş belgesi", `:51` doğru kapı kuralını veriyor (yalnız 🟡'de merge etme). Kalan 2 eski satır: `devir/03-kvkk-is-paketi.md:61` · `devir/04-13-admin-bulgusu.md:75` — ikisi de 📸 belgede, başlıkta "BUGÜNÜ ANLATMAZ" + güncel karşılık yönlendirmesi var (`:3-5`). Yeni çelişki ters yönde: `00-BELGE-HARITASI.md:27` · `:94` · `:99` bu iki dosyayı 📸 gösteriyor, dosyalar kendini 🔄 diyor.
 
-**Sorun ne:** Yeni bir oturum "önce bunu oku" diyen belgeyi açıp **artık geçerli olmayan merge kuralını** öğreniyor. Doğrusu kapıya bağlı (🟢 merge et · 🟡 PR'da bekle · 🔴 dokunma). Sonuç: ajan 🟢 işleri merge etmiyor, otonom kuyruk tıkanıyor. BB turu 9 yeri düzeltti, bu 6'sına "dondurulmuş belgeye dokunulmaz" gerekçesiyle dokunmadı — **iki turdur açık**.
+**Sorun ne:** Asıl tuzak (yeni oturumun "önce bunu oku" belgesinden eski merge kuralını öğrenmesi) kapandı. Kalan: 📸 03/04'te iki eski satır (başlık uyarısıyla korunuyor) ve belge haritasının 01/06 için yanlış etiketi.
 
 **Neden sana soruyorum:** Dondurulmuş belgeye dokunmak "tarihsel iz" ilkesini deler; dokunmamak yanlış kuralı yürürlükte bırakır. İkisi de belge politikası kararı, teknik değil.
 
@@ -16,7 +17,8 @@
 
 **Benim önerim:** **B** — çünkü BB zaten 9 yeri bu desenle düzeltti; 6'sını dışarıda bırakmak kuralın kendisini yarım uygulamak oluyor, ve damga hiçbir tarihsel izi silmiyor.
 
-**Cevap vermezsen:** Belge işleri ilerler ama **yeni her oturum yanlış merge kuralını okumaya devam eder**; otonom kuyruk 🟢 işlerde tıkanmayı sürdürür.
+**Cevap vermezsen:** 📸 03/04'teki iki eski satır başlık uyarısıyla yerinde kalır; `00-BELGE-HARITASI.md` 01/06'yı yanlış (📸) etiketlemeye devam eder. Kuyrukta bu karta kilitli iş yok (`00-KUYRUK.md` · `00-KUYRUK-KARAR-BEKLEYEN.md` grep 0).
+**İlgili kartlar:** KARAR-50 (bayat kural satırları, aynı birikme sorunu) · KARAR-51 (📸/🔄 etiket tutarsızlığı, aynı belge haritası) · KARAR-52 (çift/bayat kural metni, belge politikası)
 
 **CEVAP:**
 

@@ -9,6 +9,7 @@
 **Karşılaştırma:** İlk kurumlarda sade kalmak istiyorsan A; kurumlar teşekkür/tören kültürü istiyorsa B; mentör sayısı büyük ve ölçüt güvenilirse C.
 **Benim önerim:** A (şimdilik) — gerçek kullanıcı yokken takdir düzeni tasarlamak erken; bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** T10'un "dönemsel takdir" ayağı bekler; başka iş kilitlenmez.
+**İlgili kartlar:** KARAR-44 (otomatik ölçüt için değerlendirme verisinin güvenilirliği) · KARAR-71 (öne çıkarma/rekabetin tutundurma etiği sınırı) · KARAR-103 (md.8 rozet çeşitliliği aynı takdir konusu) — birlikte cevaplanması önerilir: KARAR-117 + KARAR-103
 **CEVAP:**
 
 

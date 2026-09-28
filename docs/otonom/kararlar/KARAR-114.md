@@ -1,5 +1,5 @@
 ### KARAR-114 · Tarayıcı bildirimi gerçekten gönderilsin mi? (0 iş kilitliyor — yeni özellik sorusu) [ÜRÜN KARARI]
-**Şu an ne var:** Menti panelinde "🔔 Bildirimlere izin ver" düğmesi var; izin verilince artık vaat içermeyen bir metin görünüyor (AJ-39, #399), ama uygulama hiçbir tarayıcı bildirimi göndermiyor. Kanıt: `frontend/src/components/organisms/NotificationOptInButton.tsx:21-25` · kodda `new Notification`/push/service worker yok (grep `frontend/src`, 2026-09-27).
+**Şu an ne var:** Menti panelinde "🔔 Bildirimlere izin ver" düğmesi var; izin verilince artık vaat içermeyen bir metin görünüyor (AJ-39, #399), ama uygulama hiçbir tarayıcı bildirimi göndermiyor. Kanıt: `frontend/src/components/organisms/NotificationOptInButton.tsx:22-26` · düğme yeri `frontend/src/app/(dashboard)/menti/page.tsx:245` · kodda `new Notification`/push/service worker yok (grep `frontend/src`, 2026-09-27).
 **Sorun ne:** Düğme, kullanılmayan bir izni istiyor; kullanıcı izin verse de bir şey değişmiyor.
 **Neden sana soruyorum:** Bildirim göndermek yeni bir özellik; tam hâli kişisel veri (tarayıcı abonelik bilgisi) saklamayı ve KVKK değerlendirmesini gerektirir.
 **Seçenekler:**
@@ -10,6 +10,7 @@
 **Karşılaştırma:** Gerçek kullanıcı azken A yeterli; kullanıcılar panele sık dönüyorsa B ucuz bir kazanç; bildirim ürünün ana kanalı olacaksa C.
 **Benim önerim:** A — bugün gerçek kullanıcı yok, B ya da C'ye kullanıcı geri bildirimiyle karar vermek daha doğru; bu senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** Bugünkü davranış sürer (A); hiçbir iş kilitli değil.
+**İlgili kartlar:** KARAR-71 (bildirim izni tutundurma öğesi, etik sınırı) · KARAR-103 (md.11 gerçek telefon bildirimi aynı gönderim altyapısı) — birlikte cevaplanması önerilir: KARAR-114 + KARAR-103
 **CEVAP:**
 
 

@@ -372,3 +372,47 @@ Kural metnindeki eski eşik satırı: `docs/otonom/arsiv/kural-gecmisi-OTONOM-PR
 - **Neden değişti:** yalnız ilk sayfa görünüyordu (30'dan sonrası erişilemez). Artık ilk sayfa + "Daha fazla göster" ile eklenen sayfalar id ile tekilleştirilerek gösteriliyor; ilk sayfa hatasında "Henüz mesajınız yok" yerine Türkçe hata görünüyor. Liste satırının biçimi değişmedi (yalnız bir kat girinti).
 - **Son commit (değişiklikten önce):** dosyaya son dokunan `cefa2c439ac16a97c1a7015bc46bb32d4352a554` · çatı main `a99fe89ff22f24fa268f681207f55e1d6d099897`
 - **Geri alma:** çatıda `git revert <AJ-83 commit>`.
+
+## AJ-60 · Sertifika molası: sayfa yeniden açılınca kalan süre (değişen satırlar)
+
+### 1) `backend/src/controllers/sjtScoringController.ts` — `certQuestionsHandler`
+- **Eski hâl (AYNEN, değişen satırlar):**
+```ts
+    select: { certWrongTopics: true, certAttempts: true },
+```
+```ts
+  return res.status(200).json({ questions, retryTopics });
+```
+- **Neden yazılmıştı:** soru ucu yalnız sınav sırası (yanlış konular başa, diğer varyant) için kişinin kendi `certWrongTopics`/`certAttempts` verisini okuyordu (madde 157).
+- **Neden değişti:** mola bitiş anı yalnız değerlendirme yanıtında (AJ-37) dönüyordu; sayfa mola sırasında açılınca kalan süre görünmüyordu. Select'e `cooldownUntil` eklendi, yanıt `cooldownUntil` (gelecekteyse ISO, değilse null) alanıyla genişledi — eski alanlar aynen duruyor.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `cd95f0f53fda028a478d19a6e0751fdf1bd39d22` · backend main `b3502a52d4ac21952c41fc82016d75a972ebe501`
+- **Geri alma:** backend'de `git revert <AJ-60 commit>` (şema/migration yok).
+
+### 2) `frontend/src/app/(dashboard)/mentor/certification/page.tsx` — son adım düğmesi ve mola uyarısı
+- **Eski hâl (AYNEN, değişen satırlar):**
+```tsx
+              <Button onClick={() => void proceed()} size="sm">
+                {topicIdx >= topics.length - 1 &&
+                !(variantIdx === 0 && !reveal.firstAttemptPass && currentTopic.variants.length > 1)
+                  ? 'Bitir ve değerlendir →'
+                  : 'Devam →'}
+              </Button>
+```
+```tsx
+            <AlertMessage
+              type="error"
+              message={
+                cooldownRunning && cooldownUntil
+                  ? CERT_COOLDOWN_TEXT.alreadyActive(formatRemaining(cooldownUntil, now))
+                  : CERT_COOLDOWN_TEXT.alreadyActiveUnknown
+              }
+            />
+```
+```tsx
+          {cooldownActive && (
+            <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+```
+- **Neden yazılmıştı:** AJ-37 kalan süreyi yalnız değerlendirme gönderildikten sonra (409 / sonuç ekranı) gösterdi; son adım düğmesi her zaman açıktı.
+- **Neden değişti:** mola sürerken "Bitir ve değerlendir" kilitlenir (koşul `isFinalStep` sabitine çıkarıldı — metin seçimi aynı); süre ekran açıkken dolunca uyarı "mola bitince" metninde takılı kalmak yerine `CERT_COOLDOWN_TEXT.ended` gösterir ve Öğrenme Yolculuğu köprüsü gizlenir.
+- **Son commit (değişiklikten önce):** dosyaya son dokunan `23a7431ec8575428c7dd45ce1ecb6163dabe71af` · çatı main `23f761a517dd9041f4e7a1abac4c566fb9c4a8a0`
+- **Geri alma:** çatıda `git revert <AJ-60 commit>`.

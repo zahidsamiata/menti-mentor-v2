@@ -1,5 +1,5 @@
 ### KARAR-30 · Senaryo isimleri: seed'den ÖNCE mi SONRA mı değişken yapılsın  [ÜRÜN + SIRA KARARI] (2 işi açar)
-**Şu an ne var:** Senaryo metinlerindeki kişi isimleri koda gömülü. Kurum kendi bağlamına uygun isim kullanamıyor. Kanıt: 9 terim (`menti_denge`·`mentor_mimar`·`sert_1` …) iki repo tamamında harf duyarsız → **kodda 0 dosya** (7 isabetin hepsi belge). İçerik hazır: `docs/raporlar/icerik/menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md:56` (14 değişken).
+**Şu an ne var:** Senaryo metinlerindeki kişi isimleri koda gömülü. Kurum kendi bağlamına uygun isim kullanamıyor. Kanıt: 9 terim (`menti_denge`·`mentor_mimar`·`sert_1` …) iki repo tamamında harf duyarsız → **kodda 0 dosya** (7 isabetin hepsi belge). İçerik hazır: `docs/raporlar/icerik/menti-yolculugu-ve-eslesme-metinleri-2026-09-03.md:58` (14 değişken).
 **Sorun ne:** Bu iş **tek başına** bir sıra sorusu doğuruyor: sertifika (K-16) ve öğrenme yolculuğu (K-18) içerikleri **canlı veritabanına yazılacak**. İsim değişkeni altyapısı bu yazımdan ÖNCE yapılırsa isimler baştan değişken olarak girer; SONRA yapılırsa **aynı içeriği ikinci kez yazmak** gerekir.
 **Neden sana soruyorum:** Canlı veritabanına içerik yazımı geri dönülmez bir işlem ve onayın şart; sıranın yanlış seçilmesi aynı işi iki kez yaptırır.
 **Seçenekler:**
@@ -9,6 +9,7 @@
 **Karşılaştırma:** Sertifika/yolculuk içeriğini yakında canlıya almak istiyorsan B hızlıdır ama ikinci yazım maliyetini kabul etmiş olursun. İçerik birkaç hafta bekleyebiliyorsa A toplamda daha ucuz. C yalnız "isim özelleştirme bizim için önemli değil" diyorsan doğrudur.
 **Benim önerim:** **A** — çünkü canlı veritabanına içerik yazımı bu projede onay + yedek gerektiren ağır bir işlem; onu iki kez yapmaktansa bir kez doğru yapmak daha ucuz.
 **Cevap vermezsen:** **I-09** kuyrukta bekler; ayrıca **K-16** ve **K-18** seed işleri "hangi sıra" sorusu cevapsız olduğu için güvenle başlatılamaz.
+**İlgili kartlar:** KARAR-3 (kriz şıkları `{sert_1}` değişkeni taşıyor) · KARAR-4 (aynı sertifika seed'i) · KARAR-5 (sıra: öğrenme yolculuğu seed'i) · KARAR-46 (sertifika içerik taşıma, aynı seed) · KARAR-59 (kurgu ad yasaksa değişken zorunlulaşır) — birlikte cevaplanması önerilir: KARAR-59 + KARAR-30 + KARAR-5
 **CEVAP:**
 
 ---

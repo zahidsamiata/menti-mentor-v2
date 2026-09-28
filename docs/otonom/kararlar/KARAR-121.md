@@ -9,6 +9,7 @@
 **Karşılaştırma:** Ölçüm kalitesi hemen önemliyse A; hafif iyileştirme yeterliyse B; test zaten Big Five'a geçecekse C emek israfını önler.
 **Benim önerim:** C — KARAR-58 cevapsızken biçim tasarlamak iki kez iş demek; bu senin ürün kararın, önerime güvenme (uzman paketi G-6 ile birlikte düşün).
 **Cevap vermezsen:** Test biçimi olduğu gibi kalır; başka iş kilitlenmez.
+**İlgili kartlar:** KARAR-42 (tekrar test aynı cevap biçimini yeniden kullanır) · KARAR-57 (hangi testin biçimi esas sayılacak) · KARAR-58 (Big Five geçişinde biçim baştan tasarlanır; öneri C buna bağlı) · KARAR-103 md.12 (ters kodlu soru eksikliği aynı konu) — birlikte cevaplanması önerilir: KARAR-121 + KARAR-103 md.12
 **CEVAP:**
 
 
