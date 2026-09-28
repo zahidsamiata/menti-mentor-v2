@@ -22,7 +22,7 @@ Seçim ölçüsü: kilitlediği iş sayısı (güncel indeks + `00-KUYRUK.md` §
 | 6 | KARAR-58 | Eski DISC'ten yeni Big Five'a geçiş nasıl? | PS-A2, PS-A3, AN-04 | 2 | AN-04 (+KARAR-62) |
 | 7 | KARAR-95 | Kendine zarar ifadesinde kim haberdar olsun? (can güvenliği) | I-18, IC-13 | 2 | — |
 | 8 | KARAR-72 | Sessiz/kalıcı red ("ghost") özelliği olsun mu? (KVKK+hukuk) | KR-20, AN-33 | 2 | — |
-| 9 | KARAR-110 | Kırık periyodik anket yeni anket altyapısına katılsın mı? | AJ-14, AJ-49 (89 ile ortak) | 1 | — |
+| 9 | KARAR-110 | Kırık periyodik anket yeni anket altyapısına katılsın mı? | AJ-14, AJ-49 (89 ile ortak) | 1 (kartın A önerisi seçilirse KARAR-106'ya EVET de gerekir) | — |
 | 10 | KARAR-44 | Resmî memnuniyet ölçüsü + algoritma öğrensin mi? | F-08, AJ-38 | 1 | AJ-38 (+KARAR-12) |
 
 **Bu 10 kararla 24 iş tamamen açılır; 4 iş daha (K-16, AN-49, AN-04, AJ-38) birer ek kararla açılır (KARAR-3+4, 67, 62, 12) → toplam 28 iş.**
@@ -156,7 +156,7 @@ Hepsi "tarihli yedek + tek seferlik veritabanı erişimi" ister. EVET gelse de v
 | 106 | Ürün-içi anket için yeni tablo (mevcut veri etkilenmez) | AN-52 | #185 · — | ✅ MERGEABLE | gerekmez | [kart](kararlar/KARAR-106.md) | |
 | 111 | Müsaitliğe görüşme türü + süre (mevcutlar Online · 60 dk olur) | K-15 | #189 · #374 | ✅ MERGEABLE | `AvailabilityBlock` + önce sayım | [kart](kararlar/KARAR-111.md) | |
 | 116 | Eski kişilik kartlarındaki ham test puanları temizlenir | AJ-50 | #212 (veri) · — (kod kısmı #194 merge edildi) | ✅ MERGEABLE | `User.discResultCard` (30 gün) | [kart](kararlar/KARAR-116.md) | |
-| 99 | İki soru metnindeki yazım hatası canlıda düzelir (2 satır) | AN-02 | #160 · — | ✅ MERGEABLE | 2 satır | [kart](kararlar/KARAR-099.md) | |
+| 99 | İki soru metnindeki yazım hatası canlıda düzelir (2 satır) | AN-02 | #160 · — | ✅ MERGEABLE | `Question` + `SjtQuestion` (etkilenen 2 satır) | [kart](kararlar/KARAR-099.md) | |
 | 128 | 13 durum alanı yalnız bilinen değerleri kabul eder | AJ-77 | #227 ✅ · #420 ⚠️ | ⚠️ çatı CONFLICTING — **önce güncelleme gerekir** | 5 tablo + önce sayım = 0 | [kart](kararlar/KARAR-128.md) | |
 | 97 | Mentör mesaj talebini reddedebilir (1 yeni alan) | U-18, E-3 (ayak) | #148 · #326 | ⚠️ ikisi CONFLICTING — **önce güncelleme gerekir** | `Conversation` (98 ile tek yedek) | [kart](kararlar/KARAR-097.md) | |
 | 98 | Yanıtsız mentöre 3/7/10. gün hatırlatma + yöneticiye bildirim (3 alan) | AN-26 | #157 · #337 | ⚠️ ikisi CONFLICTING — **önce güncelleme gerekir** (+ alt soru: bildirim kime) | `Conversation` | [kart](kararlar/KARAR-098.md) | |
@@ -243,7 +243,7 @@ Kaynak: `docs/raporlar/kod-denetimi/sahipsiz-kalanlar-2026-09-27.md` §7-§9. "O
 | S13 | Kalite çarpanı çift uygulanıyor | Hata yok, bir kez uygulanıyor | `scoring.ts:109` | — | |
 | S14 | Şüphe bildiriminde kurum kimliği yok | Herkese açık oluşturma + yalnız platform okuması tasarım gereği | `suspicionController.ts:21` · `platformController.ts:447,477` | — | |
 
-| # | Teyit kalemi | Ajan hükmü | Kanıt | PO |
+| # | Teyit kalemi | Ajan önerisi | Kanıt | PO |
 |---|---|---|---|---|
 | T1 | İçerik/soru felsefesi keşfi | Kapandı sayılabilir (çıktısı KARAR-54…71) | içerik raporları 2026-09-23 | |
 | T2 | Menti/mentör "sevdirme" deneyimi | Kapandı sayılabilir (etik ayağı KARAR-71'de) | G4-36 | |
@@ -275,4 +275,4 @@ Kuyrukla uyuşmazlık: 35 "5+ iş" diyor, kilitli iş 0 · 91 ve 92 "1 iş" diyo
 
 ---
 
-**Kaynaklar:** analiz 2026-09-28 (taban çatı `03da006` · backend `07d71a2`; `scratchpad/g3/` kart-analiz.tsv, gruplar.md, s5-teyit.md, ozet.md) · güncel sayılar çatı `origin/main 6e24fde` · backend `f5ba23b`: `docs/otonom/01-KARARLAR.md` indeksi (108 açık), `00-KUYRUK.md` § 🔴 KİLİT HARİTASI, `00-KUYRUK-KARAR-BEKLEYEN.md` · PR durumları `gh pr view --json mergeable` (2026-09-28).
+**Kaynaklar:** analiz 2026-09-28 (taban çatı `03da006` · backend `07d71a2`; ajan çalışma dosyaları — repoda yok, bulgular bu pakette) · güncel sayılar çatı `origin/main 6e24fde` · backend `f5ba23b`: `docs/otonom/01-KARARLAR.md` indeksi (108 açık), `00-KUYRUK.md` § 🔴 KİLİT HARİTASI, `00-KUYRUK-KARAR-BEKLEYEN.md` · PR durumları `gh pr view --json mergeable` (2026-09-28).
