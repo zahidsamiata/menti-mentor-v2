@@ -2689,3 +2689,29 @@ Kaynak: `docs/otonom/kararlar/KARAR-128.md` (origin/main, değişiklik öncesi).
 **CEVAP:**
 ```
 
+
+### 01-KARARLAR indeks — değişen 19 satırın eski hâli (2026-09-28, 3.1/3.4)
+
+Yalnız Durum/Öneri hücreleri değişti (⚪ adayı, PR CONFLICTING, kodla bayatlayan notlar, KARAR-95/105 "öneri A" düzeltmesi, KARAR-106 öneri). Eski satırlar AYNEN:
+
+```text
+| KARAR-95 | Kriz kanalı — güvenlik sorusu olarak yeniden | **2** (I-18, IC-13) · 🔴 KARAR-BEKLEYEN: I-18, IC-13 | ⬜ boş · ⭐ KARAR-80/M20'den doğdu (2026-09-26), KARAR-69 (c) gereği · öneri A | C | [kart](kararlar/KARAR-095.md) |
+| KARAR-97 | 🔵 EVET/HAYIR — U-18 mentör mesaj talebini reddedebilsin (veritabanına 1 yeni alan) | **1** (U-18) · aktif kuyrukta: U-18 (🔵 PR-ACIK — EVET/HAYIR kartı), E-3 (kalan ayak: bağlamsal geri bildirim kartı, U-18 üzerinden) · kart metni eski: "(1 iş açar: U-18)"; güncel: 2 iş — U-18, E-3 | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #148 + çatı #326 | — | [kart](kararlar/KARAR-097.md) |
+| KARAR-38 | Sunucu ülkesi + KVKK aydınlatma metni | **1** (GV-09) · 🔴 KARAR-BEKLEYEN: GV-09 | ⬜ boş · ⭐ güvenlik konseyi · ⛔ AVUKAT ön koşulu (03-PO #19/#20) · KARAR-47 paketinde | C → sonra A. Çünkü "BK'ye aktarım ek rıza ister mi" sorusunu… | [kart](kararlar/KARAR-038.md) |
+| KARAR-40 | Eski `POST /api/meetings` ucu: düzelt mi karantina mı | **1** (GV-06 kalıcı çözümü) · 🔴 KARAR-BEKLEYEN: V-15 | ⬜ boş · ⭐ güvenlik konseyi · ⚠️ acil yama karardan BAĞIMSIZ · K-13/E-4 kümesi | A şimdi, B sonra | [kart](kararlar/KARAR-040.md) |
+| KARAR-76 | `Tenant.verifiedBy` alanı ne olsun (silme protokolü boşluğu) | **1** (AN-08 · AN-54) · 🔴 KARAR-BEKLEYEN: AN-08 | ⬜ boş · ⭐ silme protokolü · VERİ · öneri B (karantina) | B | [kart](kararlar/KARAR-076.md) |
+| KARAR-78 | Dönemlik anket: bağla / karantina / beklet | **1** (KR-11) · 🔴 KARAR-BEKLEYEN: KR-11 | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) | B | [kart](kararlar/KARAR-078.md) |
+| KARAR-79 | Zamanlanmış iş tetikleme yetkisi kimde | **1** (KR-05) · 🔴 KARAR-BEKLEYEN: KR-05 | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı | A | [kart](kararlar/KARAR-079.md) |
+| KARAR-96 | 🔵 EVET/HAYIR — AN-30 ayrı ayrı rıza kutuları (veritabanına 6 yeni rıza türü) | **1** (AN-30) · aktif kuyrukta: AN-30 (🔵 PR-ACIK — EVET/HAYIR kartı) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #142 + çatı #320 | — | [kart](kararlar/KARAR-096.md) |
+| KARAR-98 | 🔵 EVET/HAYIR — AN-26 yanıtsız mentöre hatırlatma + yöneticiye bildirim (veritabanına 3 yeni alan) | **1** (AN-26) · aktif kuyrukta: AN-26 (🔵 PR-ACIK — EVET/HAYIR kartı) | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #157 + çatı #337 | — | [kart](kararlar/KARAR-098.md) |
+| KARAR-105 | Kurumlar arası anonim karşılaştırma: izni kim açar, hangi sayılar paylaşılır | **1** (AN-31) · 🔴 KARAR-BEKLEYEN: AN-31 | ⬜ boş · KARAR-34 SORU 2 (B) ayrıntısı · migration gerekir · öneri A | C şimdilik, sonra A | [kart](kararlar/KARAR-105.md) |
+| KARAR-106 | 🔵 EVET/HAYIR — AN-52-1 ürün-içi anket cevap tablosu (yeni tablo, mevcut veri etkilenmez) | **1** (AN-52-3) · aktif kuyrukta: AN-52 (🔵 PR-ACIK — EVET/HAYIR kartı (AN-52-1)) | ⬜ boş · 🔵 canlı DB değişikliği (yeni tablo, yedek gerekmez) · PR backend #185 | — | [kart](kararlar/KARAR-106.md) |
+| KARAR-9 | Kulüp modülü + İş İlanları | 0 (eklenmezse B) | ⬜ boş · ⚠️ ağustos G1-13 kulüp kurumu aktif / G10-12 modül ⏸️ | B | [kart](kararlar/KARAR-009.md) |
+| KARAR-26 | İki yedek tablo (S26/S37) düşürülsün mü | 0 (DB) | ⬜ boş · W §4.4 · GERİ DÖNÜLMEZ | Bu senin veri kararın, önerime güvenme | [kart](kararlar/KARAR-026.md) |
+| KARAR-31 | Kriz bildirimi (kendine zarar) + yaş sınırı | **2** (I-18, G1-01) · kart metni eski: "(2 işi açar)"; güncel: 0 iş · kartta sayılıp burada olmayan: I-18 → KARAR-95 bekliyor (KARAR-BEKLEYEN) | ⬜ boş · ⭐ BB turu · ⛔ AVUKAT ön koşulu, öneri YOK | Yok | [kart](kararlar/KARAR-031.md) |
+| KARAR-35 | Canlı DB'ye salt-okuma izni | **5+** (md.30·33·118, S10, Y6) · kart metni eski: "(5+ işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ BB turu · en çok iş açan yeni kart | A | [kart](kararlar/KARAR-035.md) |
+| KARAR-37 | madde 103 — kart mı özet mi kazanır | 1 (md.103) | ⬜ boş · ⭐ BB turu · G1-23 vakasının tekrarı riski | B | [kart](kararlar/KARAR-037.md) |
+| KARAR-39 | Anonimleştirme kapsamı: arketip kopyası + başkasının yorumu | **1** (GV-08 yorum ayağı) · kart metni eski: "(1 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ güvenlik konseyi · arketip ayağı karardan BAĞIMSIZ | B + taahhüt metninin netleştirilmesi | [kart](kararlar/KARAR-039.md) |
+| KARAR-49 | `devir/01` ve `devir/06`: dondurulmuş mu, kalıcı referans mı | **2** (6 bayat "merge etme" satırı) · kart metni eski: "(2 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ yönetişim konseyi · BELGE POLİTİKASI | B | [kart](kararlar/KARAR-049.md) |
+| KARAR-101 | Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi) | **1** (Y1-B8 — PR #164/#343) · kart metni eski: "(1 iş açar: Y1-B8)"; güncel: 0 iş | ⬜ boş · güvenlik + ürün · öneri B | B | [kart](kararlar/KARAR-101.md) |
+```
