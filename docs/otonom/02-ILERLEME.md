@@ -145,3 +145,4 @@
 - 2026-09-29 · **AJ-123 PR-ACIK** (🟡 kuruma görünen metin): çatı #481, opus ONAY (2 tur) — bekleme sayfası artık tutulmayacak e-posta sözü vermiyor; PO metin onayı bekliyor.
 - 2026-09-29 · **AJ-124 BITTI** (backend #296 + pointer #482; 7b ONAY 2 tur; mutasyon #297) — CANLIDA BAK: "verilerimi indir" dosyasında kişinin tüm kurum üyelikleri var; misafir üye olduğu kurumda indirme 200 (önceden 500). Canlı ok:true · db:up · site 200.
 - 2026-09-29 · **AJ-125 merge** (backend #298; 7b ONAY; mutasyon #299) — pointer #483 CI. Yeni: **AJ-126** (dışa aktarmada eksik kendi verileri, 🟢) + **KARAR-138** (başkalarının kişi hakkında yazdıkları dışa aktarılsın mı — ürün+KVKK).
+- 2026-09-29 · **AJ-125 BITTI** (backend #298 + pointer #483; 7b ONAY; mutasyon #299) — CANLIDA BAK: "verilerimi indir" dosyasında kişinin tüm kurumlardaki kendi görüşme geri bildirimleri ve gönderdiği eşleşme istekleri var. Canlı ok:true · db:up · site 200.
