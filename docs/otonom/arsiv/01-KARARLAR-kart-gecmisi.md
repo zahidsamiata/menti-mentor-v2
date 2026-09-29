@@ -2748,3 +2748,11 @@ Yalnız Durum/Öneri hücreleri değişti (⚪ adayı, PR CONFLICTING, kodla bay
 ⚠️ Sayıya girmeyen ama önce cevaplanması önerilen: **KARAR-101** — canlıda açık güvenlik boşluğu (onay bekleyen kişi Google/LinkedIn ile oturum alıyor, `oauthService.ts:116-117,153`); PR'ı hazır ama çakışmalı. **KARAR-82…85** — her biri tek bir ⛔ çıkış blokerini açar.
 | 101 | Onay bekleyen kişi girip yalnız "Bekleme Odası"nı görsün mü? | B — açık kapanır, bekleme odası korunur | Y1-B8 (PR #164/#343, çakışmalı; kuyrukta satırı yok) | ✅ | 🛡️ canlıda açık | [kart](kararlar/KARAR-101.md) | |
 ```
+
+## KARAR-138 · 2026-09-29 (AJ-126 sonrası "Şu an ne var" güncellemesi — eski satır AYNEN)
+
+> NEDEN: AJ-126 (backend #302) kişinin kendi verisini dışa aktarmaya ekledi; 7b incelemesi (https://github.com/zahidsamiata/menti-mentor/pull/302#issuecomment-5881149621) targetId ve kendi mesajında üçüncü kişi verisi notunu önerdi. Seçenekler, öneri ve CEVAP değişmedi.
+
+```text
+**Şu an ne var:** Kişi profilinden "verilerimi indir" dediğinde bir JSON dosyası alıyor (`backend/src/services/gdprService.ts` `exportUserData`). İçinde profilinin bir kısmı, kurum üyelikleri (AJ-124), cevapları, rıza kayıtları, kendi gönderdiği eşleşme istekleri ve görüşme geri bildirim kayıtları (AJ-125), mesajlarının yalnız SAYISI var. Kişinin KENDİ ürettiği başka verilerin dışa aktarılması teknik iş olarak ayrıca yapılacak (AJ-126 (a)). Bu kart yalnız **başka birinin kişi hakkında yazdığı** veriyi soruyor. Bugün bunlardan yalnız biri çıktıda: mentörün menti hakkında yazdığı görüşme puanı/zorluk notu (FeedbackLog — menti olarak). Kaynak: AJ-125 bağımsız incelemesi (https://github.com/zahidsamiata/menti-mentor/pull/298#issuecomment-5880604690).
+```
