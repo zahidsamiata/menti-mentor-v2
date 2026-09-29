@@ -1,4 +1,5 @@
 import { apiClient } from './client';
+import type { TenantKind } from '@/lib/enumLabels';
 
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
@@ -177,6 +178,7 @@ export interface PendingTenant {
   slug: string;
   isActive: boolean;
   verificationStatus: string;
+  kind: TenantKind | null; // AN-29 — NULL = kurum
   verificationNote: string | null;
   createdAt: string;
   users: { fullName: string; email: string }[];
@@ -189,6 +191,7 @@ export interface TenantItem {
   slug: string;
   isActive: boolean;
   verificationStatus: string;
+  kind?: TenantKind | null; // AN-29 — NULL = kurum
   plan: string;
   createdAt: string;
   _count?: { users: number };
@@ -265,6 +268,7 @@ export interface TenantOverview {
     name: string;
     slug: string;
     verificationStatus: string;
+    kind?: TenantKind | null; // AN-29 — NULL = kurum
     plan: string;
     isActive: boolean;
     createdAt: string;

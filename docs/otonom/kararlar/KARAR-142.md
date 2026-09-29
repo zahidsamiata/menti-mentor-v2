@@ -1,0 +1,30 @@
+### KARAR-142 · 🔵 EVET/HAYIR — Kurum kaydına "Topluluk" seçeneği: kurum tablosuna 1 boş "tür" alanı eklensin mi? (1 işi açar: AN-29)  [🔵 MIGRATION]
+**Şu an ne var:** Kurum kayıt sihirbazı (`/onboarding/stk`) yalnız "kurum" kaydı açıyor; bir meslek topluluğu ya da mezun ağı lideri de kendini "kurum" olarak kaydediyor. Onaya düşüp düşmemesi yalnız e-posta adresine bağlı: kurumsal alan adlı e-posta otomatik onay alıyor, gmail/.edu.tr gibi adresler platform onayına düşüyor (`backend/src/controllers/selfServeController.ts` kayıt ucu). Kurum tablosunda "bu bir topluluk" bilgisini tutacak alan yok (`backend/prisma/schema.prisma` `model Tenant`), platform onay ekranında da başvurunun türü görünmüyor. Kaynak: **KARAR-34 SORU 1** (cevap 2026-09-23: *"Lider bir TALEP oluşturur → PO yalnız LİDERİ onaylar (üyeler PO onayına DÜŞMEZ) → lider kendi ekosistemini açar, üyelerini KENDİSİ davet eder (topluluk = yöneticisi bir kişi olan kurum, mevcut kurum akışıyla aynı iskelet)"*), kuyruk satırı AN-29.
+**Neden migration (veritabanı yapısı değişikliği) gerekti:** "Kurum mu topluluk mu" bilgisini koyabileceğimiz mevcut bir alan yok. Program şablonu ("Kulüp", "Mezun"…) kurulum tercihidir ve sonradan değişebilir; türü oraya yazmak iki farklı anlamı karıştırırdı.
+**Kullanıcı ne görür (EVET):**
+  · **Kaydolan kişi:** sihirbazın ilk adımında "Ne kuruyorsun?" sorusu ve iki seçenek görür: **Kurum** (varsayılan) ya da **Topluluk**. Topluluk seçerse ad alanı "Topluluk Adı" olur; hesap adımında e-postası kurumsal olsa bile **görev + kanıt** (bağlantı/açıklama) ister ve kayıt her zaman **platform onayına** düşer (bugünkü "başvurunuz incelenecek" sayfasına gider). Onay gelene kadar üye davet edemez (bugünkü kural); onaylanınca üyelerini **kendisi** davet eder — üyeler platform onayına düşmez.
+  · **Kurum seçen:** hiçbir şey değişmez (aynı alanlar, aynı otomatik onay kuralı).
+  · **Platform yöneticisi:** "Bekleyen Başvurular" listesinde her başvurunun yanında **Kurum / Topluluk** rozeti, "Tüm Kurumlar" tablosunda yeni **Tür** sütunu, kurum detay sayfasının başlığında tür etiketi görür.
+  · Mentör, menti ve kurum yöneticisinin panellerinde değişiklik yok. Tür kayıttan sonra **hiçbir ekrandan değiştirilemez** (kurum yöneticisi gönderse de reddedilir).
+**Ne değişir:** Kurum (`Tenant`) tablosuna 1 yeni BOŞ alan (`kind`: Kurum / Topluluk) ve bu alanın iki değerlik listesi eklenir. **Mevcut kurumların hiçbirine dokunulmaz** (hepsi "boş" kalır ve "Kurum" gibi davranır); hiçbir veri silinmez ya da değiştirilmez. Kod: backend PR #310 (dal `otonom/AN-29-topluluk-kurum-20260929`), çatı PR (aynı dal: sihirbaz + platform ekranı + bu kart).
+**Geri alınır mı:** Evet. Kod tek commit geri alınarak eski hâle döner; eklenen boş alan kalsa da hiçbir şeyi bozmaz (istenirse ayrıca kaldırılır). Bu arada "Topluluk" olarak kaydolmuş kurumlar olursa, geri alındığında sıradan kurum gibi görünmeye devam eder.
+**Yedeği alınacak tablo:** `Tenant` — uygulamadan hemen önce tarihli kopya (`Tenant_yedek_YYYYMMDD`), satır sayısı `02-ILERLEME.md`'ye. (Uygulama komutu yalnız "yoksa ekle" der — `ADD COLUMN IF NOT EXISTS`; iki kez çalışsa da zarar vermez.)
+**EVET** → ajan yedeği alır, iki PR'ı merge eder (açılışta alan otomatik eklenir), pointer'ı taşır, canlıda sağlık kontrolü yapar.
+**HAYIR** → PR'lar kapatılır; topluluk liderleri "kurum" olarak kaydolmaya devam eder, kurumsal e-postalı topluluk platform onayı olmadan açılabilir, AN-29 açık kalır.
+**Ne kaybedersin:** EVET → canlı veritabanında küçük bir yapı değişikliği (geri alınabilir ama dikkat ister); kurumsal e-postalı topluluk liderleri artık otomatik onay alamaz, senin onayını bekler (her topluluk başvurusu onay kuyruğuna düşer = sana ek iş). HAYIR → KARAR-34'ün "PO yalnız lideri onaylar" modeli kodda kurulamaz; topluluk ile kurum ayırt edilemediği için ileride topluluğa özel kural (fiyat, KVKK rolü, kayıt metni) da uygulanamaz.
+**PO'ya sorular (KARAR-34 cevabında olmayan noktalar — CEVAP'a not düşebilirsin; cevapsız kalırsa aşağıdaki "şu an" davranışı geçerli):**
+  1. **Kurumsal e-postalı topluluk da senin onayına mı düşsün?** Şu an: EVET, e-postadan bağımsız her topluluk başvurusu onay bekler ("PO yalnız lideri onaylar" cümlesinden çıkardım). İstemezsen topluluk da kurum gibi e-postaya göre otomatik onay alır.
+  2. **Mevcut kurumlardan biri aslında topluluksa** platform yöneticisi türü değiştirebilsin mi? Şu an: hiçbir ekran değiştiremez (yeni bir yetki = ayrı iş).
+  3. **Topluluğa özel fark var mı?** (üye sayısı sınırı · plan/fiyat — KARAR-34'ün "satış" boyutu cevaplanmadı · ortak havuz varsayılanı). Şu an: topluluk, kurumla aynı kurallarla çalışır.
+  4. **"Kulüp" program şablonu ile "Topluluk" türü** ilişkili mi? Şu an: bağımsız (kulüp şablonu seçen kurum da, topluluk da olabilir).
+  5. **Onay bekleme sayfası** topluluk liderine ayrı bir metin göstersin mi? Şu an: kurumlarla aynı mevcut metin.
+  6. **Taslak metinler** (kuruma görünen metin — onayın gerekiyor; "EVET — metinler tamam" ya da "şunu değiştir: …"):
+     · Seçim sorusu: "Ne kuruyorsun?" · seçenekler "Kurum" / "Topluluk"
+     · Kurum açıklaması: "Dernek, vakıf, şirket ya da okul birimi."
+     · Topluluk açıklaması: "Meslek topluluğu, mezun ağı gibi senin yönettiğin bir topluluk. Başvurunu platform ekibi inceler; onaylanınca üyelerini sen davet edersin."
+     · Hesap adımı uyarısı: "Topluluk başvuruları platform ekibi tarafından incelenir. Onaylanınca üyelerini davet edebilirsin."
+     · Alan adları: "Topluluk Adı" · "Topluluktaki Göreviniz" (hata: "Topluluktaki görevinizi belirtin.")
+**Bu işte YOK (bilerek):** kayıt ekranındaki KVKK/onay metni **değişmedi** — KARAR-34'e göre topluluk liderinin "veri sorumlusu" olması ve ayrı ayrı işaretlenen zorunlu/isteğe bağlı onaylar avukat onayı bekliyor (AN-30). Topluluklar arası anonim toplu veri paylaşımı (KARAR-34 SORU 2) ayrı iş.
+**Benim önerim:** EVET — mevcut kurumlara dokunmuyor, KARAR-34'ün "PO yalnız lideri onaylar" modelinin ilk adımı ve tür bilgisi olmadan topluluğa özel hiçbir kural (KVKK rolü, kayıt metni) uygulanamaz.
+**Cevap vermezsen:** AN-29 PR-ACIK bekler; topluluk liderleri kurum olarak kaydolmaya devam eder.
+**CEVAP:**

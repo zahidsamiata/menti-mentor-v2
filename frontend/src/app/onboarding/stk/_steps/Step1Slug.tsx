@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/molecules/FormField';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { checkSlugAvailability } from '@/lib/api/selfServe';
+import { TENANT_KIND_LABELS, type TenantKind } from '@/lib/enumLabels';
+import { cn } from '@/lib/utils';
 import type { WizardData } from '../_StkOnboardingContent';
 
 interface Props {
@@ -24,6 +26,15 @@ function toSlug(name: string): string {
     .replace(/-+/g, '-')
     .slice(0, 50);
 }
+
+// AN-29 / KARAR-34 — ⚠️ TASLAK metin (PO onayı bekliyor; kuruma görünen metin).
+const KIND_OPTIONS: { value: TenantKind; hint: string }[] = [
+  { value: 'ORGANIZATION', hint: 'Dernek, vakıf, şirket ya da okul birimi.' },
+  {
+    value: 'COMMUNITY',
+    hint: 'Meslek topluluğu, mezun ağı gibi senin yönettiğin bir topluluk. Başvurunu platform ekibi inceler; onaylanınca üyelerini sen davet edersin.',
+  },
+];
 
 type SlugStatus = 'idle' | 'checking' | 'available' | 'taken' | 'invalid';
 
@@ -47,6 +58,9 @@ export function Step1Slug({ data, onUpdate, onNext }: Props) {
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [data.slug]);
 
+  const isCommunity = data.tenantKind === 'COMMUNITY';
+  const nameLabel = isCommunity ? 'Topluluk adı' : 'Kurum adı';
+
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
     onUpdate({ tenantName: name, slug: toSlug(name) });
@@ -60,7 +74,7 @@ export function Step1Slug({ data, onUpdate, onNext }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!data.tenantName.trim()) { setNameError('Kurum adı zorunludur.'); return; }
+    if (!data.tenantName.trim()) { setNameError(`${nameLabel} zorunludur.`); return; }
     if (slugStatus !== 'available') return;
     onNext();
   };
@@ -76,8 +90,39 @@ export function Step1Slug({ data, onUpdate, onNext }: Props) {
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-5">
 
+        <fieldset className="space-y-2">
+          <legend className="text-sm font-medium text-foreground mb-2">Ne kuruyorsun?</legend>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {KIND_OPTIONS.map((opt) => {
+              const selected = data.tenantKind === opt.value;
+              return (
+                <label
+                  key={opt.value}
+                  className={cn(
+                    'flex cursor-pointer flex-col gap-1 rounded-xl border p-3 text-sm transition-colors',
+                    selected ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/40',
+                  )}
+                >
+                  <span className="flex items-center gap-2 font-medium text-foreground">
+                    <input
+                      type="radio"
+                      name="tenantKind"
+                      value={opt.value}
+                      checked={selected}
+                      onChange={() => onUpdate({ tenantKind: opt.value })}
+                      className="h-4 w-4 accent-primary"
+                    />
+                    {TENANT_KIND_LABELS[opt.value]}
+                  </span>
+                  <span className="text-xs text-muted-foreground leading-relaxed">{opt.hint}</span>
+                </label>
+              );
+            })}
+          </div>
+        </fieldset>
+
         <FormField
-          label="Kurum Adı"
+          label={isCommunity ? 'Topluluk Adı' : 'Kurum Adı'}
           name="tenantName"
           placeholder="ör: Ankara Mezunlar Derneği"
           value={data.tenantName}

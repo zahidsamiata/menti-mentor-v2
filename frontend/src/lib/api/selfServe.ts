@@ -5,6 +5,7 @@
 
 import { apiClient } from './client';
 import type { ApiResult } from '@/types/api';
+import type { TenantKind } from '@/lib/enumLabels';
 
 export interface SlugCheckResponse {
   available: boolean;
@@ -31,6 +32,7 @@ export interface SelfServeRegisterResponse {
     slug: string;
     onboardingStep: string;
     programTemplate: string;
+    kind?: TenantKind | null; // AN-29 — eski backend alanı döndürmez
     verificationStatus: TenantVerificationStatus;
   } | null;
   user: {
@@ -76,6 +78,7 @@ export function selfServeRegister(data: {
   tenantName: string;
   slug: string;
   programTemplate: 'MEZUN' | 'KULUP' | 'GONULLU' | 'OZEL';
+  kind?: TenantKind; // AN-29 / KARAR-34: kurum ya da topluluk
   kvkkConsent: boolean;
   institutionRole?: string;
   verificationNote?: string;

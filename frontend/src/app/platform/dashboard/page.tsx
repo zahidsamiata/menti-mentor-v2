@@ -30,7 +30,7 @@ import {
   type AnomalyFlag,
 } from '@/lib/api/platform';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
-import { logLevelLabel, logBadgeLabel, reportReasonLabel, reportStatusLabel } from '@/lib/enumLabels';
+import { logLevelLabel, logBadgeLabel, reportReasonLabel, reportStatusLabel, tenantKindLabel } from '@/lib/enumLabels';
 import { useModalDialog } from '@/hooks/useModalDialog';
 import { UI_TEXT } from '@/lib/uiText';
 import { AUDIT_PILL_CLASS, DANGER_PILL_CLASS, SUCCESS_PILL_CLASS, WARNING_PILL_CLASS } from '@/lib/a11y/statusColors';
@@ -345,7 +345,17 @@ export default function PlatformDashboard() {
               <div key={t.id} className="rounded-xl border border-border bg-card p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-1">
-                    <p className="font-semibold text-foreground">{t.displayName ?? t.name}</p>
+                    <p className="font-semibold text-foreground">
+                      {t.displayName ?? t.name}
+                      {/* AN-29 / KARAR-34: başvurunun türü — topluluk başvurusunda PO lideri onaylar */}
+                      <span
+                        className={`ml-2 align-middle text-xs font-medium px-2 py-0.5 rounded-full ${
+                          t.kind === 'COMMUNITY' ? AUDIT_PILL_CLASS : 'bg-muted text-muted-foreground'
+                        }`}
+                      >
+                        {tenantKindLabel(t.kind)}
+                      </span>
+                    </p>
                     <p className="text-xs text-muted-foreground">slug: {t.slug}</p>
                     {t.users[0] && (
                       <p className="text-sm text-muted-foreground">
@@ -451,6 +461,7 @@ export default function PlatformDashboard() {
                 <tr>
                   <th className="px-4 py-3 text-left">Kurum</th>
                   <th className="px-4 py-3 text-left">Slug</th>
+                  <th className="px-4 py-3 text-left">Tür</th>
                   <th className="px-4 py-3 text-left">Durum</th>
                   <th className="px-4 py-3 text-left">Plan</th>
                   <th className="px-4 py-3 text-left">Kullanıcı</th>
@@ -466,6 +477,7 @@ export default function PlatformDashboard() {
                   >
                     <td className="px-4 py-3 text-foreground">{t.displayName ?? t.name}</td>
                     <td className="px-4 py-3 text-muted-foreground font-mono text-xs">{t.slug}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{tenantKindLabel(t.kind)}</td>
                     <td className="px-4 py-3">
                       <span className={`text-xs px-2 py-0.5 rounded-full ${
                         !t.isActive            ? DANGER_PILL_CLASS :
