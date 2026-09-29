@@ -25,8 +25,10 @@
 
 > ⚠️ GÜNCELLEME (2026-08-23): `kararlar/` ve `raporlar/` şişince **alt-klasörlere** ayrıldı (git mv, içerik değişmedi).
 > Tür=klasör kuralı korunur, bir kademe derinleşti. Yeni belge doğru alt-klasöre konur:
-> - **`kararlar/`** (kök) → yalnız yaşayan canonical taşıyıcılar: `00-INDEX` · `09-DURUM` · `00-KARAR-TAKIP` ·
->   `10-yol-haritasi` · `10-yol-tamamlananlar` (bunlar kökte kalır, taşınmaz).
+> - ~~[ESKİ · 2026-09-29] **`kararlar/`** (kök) → yalnız yaşayan canonical taşıyıcılar: `00-INDEX` · `09-DURUM` · `00-KARAR-TAKIP` ·
+>   `10-yol-haritasi` · `10-yol-tamamlananlar` (bunlar kökte kalır, taşınmaz).~~
+>   ⚠️ GÜNCELLEME (2026-09-29, AJ-120): taşıyıcı 5 aynı; ama kökte 4 taşıyıcı-olmayan dosya daha duruyordu (KURAL 7 · 22 onları anıyor).
+>   Kökün kesin listesi (9, kapalı) → **KURAL 2-C (c)**. Yaşayan içerik taslakları için yeni alt klasör `kararlar/icerik-taslak/` → **KURAL 2-C (a1)**.
 > - **`kararlar/konu/`** → konu bazlı kalıcı karar belgeleri (vizyon, mimari, güvenlik, tasarım, çalışma tarzı,
 >   DISC/yaşam-döngüsü, `belge-duzeni-rehberi`, tasarım-kararları, teslim/metrik tasarımı).
 > - **`kararlar/oz-denetim/`** → belgelerin/kararların **kendi iç** denetimi (belge hijyeni, karar-statü haritası,
@@ -63,6 +65,57 @@
   Biçim: `<konu> kod denetimi → ../<yöntem-klasörü>/<dosya>.md (tarih, satır aralığı)`
 
 Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `panel/` altında arandı, bulunamadı, **bir tur tamamen tekrar edildi** (bkz. `docs/00-BELGE-HARITASI.md` B.0).
+
+## KURAL 2-C — Hedef tanımları: KURAL 2'nin boş bıraktığı dört yer *(eklendi 2026-09-29, AJ-120 dilim 2 · teknik karar)*
+> **Neden:** 2026-09-28 envanteri (`docs/raporlar/kod-denetimi/belge-ad-envanteri-2026-09-28.md` §5) kurala uymayan 77 dosyanın
+> taşınamadığını gösterdi, çünkü rehber bu dört yer için **hedef yol vermiyordu**. Hedefsiz kural, her turda aynı "nereye koyayım?"
+> sorusunu yeniden açar. Bu kararlar dosya/klasör yapısıdır → teknik karar, ajan verir (`CLAUDE.md` § KARAR AYRIMI).
+> Kanıt ve sayım: `docs/raporlar/kod-denetimi/belge-ad-envanteri-2026-09-29.md`.
+
+**(a) `raporlar/` altındaki 🔄 YAŞAYAN belgeler — iki alt tür**
+- **(a1) İçerik taslağı** = kullanıcıya görünecek metnin onay bekleyen hâli (PO/içerik onayı, ad↔kod kararı vb. ile değişir).
+  **Hedef: `docs/kararlar/icerik-taslak/<konu>.md`** — adı **tarihsiz** (KURAL 4: yaşayan). Klasör girişi `00-INDEX.md` (KURAL 2-B).
+  Taslak onaylanıp koda girince 📸'ye çekilir (KURAL 3) ve yerinde kalır; kaynak (📸 içerik belgesi) `raporlar/icerik/`'te kalır,
+  `raporlar/icerik/00-INDEX.md` yeni yere tek satır ÇAPRAZ ATIF verir.
+  *Gerekçe:* `raporlar/` = dondurulmuş (KURAL 2); içinde yaşayan taslak durursa okuyan "bu güncel mi?" sorusuna klasörden cevap alamaz.
+  *Örnek:* `docs/raporlar/icerik/birlikte-calisma-kombinasyonlari.md` → `docs/kararlar/icerik-taslak/birlikte-calisma-kombinasyonlari.md`.
+- **(a2) Kalem işareti alan tarihli keşif/sınıflama raporu** = doğduğu günün sınıflaması; kalemleri kuyrukta iş olmuş, kapanınca kural (h)
+  (`OTONOM-PROMPT.txt` 5c-h) gereği `✅ yapıldı` işareti alır. **Hedef: yerinde kalır** (`raporlar/<yöntem>/…-<tarih>.md`, ad tarihli).
+  Üstteki 🔄 etiketi bu belgede yalnız "kural (h) işareti alır" anlamındadır; gövde yeniden yazılmaz, durum kuyrukta (KURAL 22).
+  *Gerekçe:* taşımak ya da tarihsiz ad vermek, işaretleri yazan otomatik akışı ve 📸 raporlardaki satır atıflarını bozar; kazanç yok.
+  *Örnek:* `docs/raporlar/kesif/e3-baglanmamis-uclar-2026-09-25.md` (E-3) — olduğu gibi kurala uygun.
+- Bu ikisine girmeyen 🔄 `raporlar/` belgesi (ör. "yaşayan ama ölü" adayları) hakkında karar **KARAR-51**'dedir (bkz. (d)).
+
+**(b) `docs/devir/` — tür: DEVİR KAYDI klasörü (📸 tarihsel, yerinde dondurulmuş)**
+- İçeriğe bakılarak: 10 dosyanın 8'i dondurulmuş (📸 `02`-`05` · `08` · `gunluk/*`; 📓 `07` günlük — son kayıt 2026-09-20);
+  yaşayan olanlar yalnız giriş belgesi `06-devir-kilavuzu.md`, kısmen yaşayan `01-felsefe-ve-calisma-tarzi.md` ve iki `00-INDEX.md`
+  (`docs/devir/00-INDEX.md` 2026-09-24 DC turu kararı).
+- **Kural:** `devir/` bir **tür klasörüdür** ("yeni oturuma devir paketi + eski oturum kayıtları"). Dosyaları **taşınmaz, yeniden adlandırılmaz**
+  (numaralı seri `01`-`08` KURAL 4 istisnasıdır: numara = okuma sırası, atıflar numarayla veriliyor). **Yeni dosya AÇILMAZ** — oturum/tur kaydı
+  `docs/otonom/02-ILERLEME.md`'ye, açık iş `docs/otonom/00-KUYRUK.md`'ye yazılır. Yalnız `06` ve `01` güncellenir.
+- *Gerekçe:* klasör artık yaşayan iş taşımıyor; taşımak 📸 raporlardaki onlarca `devir/0N-…` atfını kırar, düzen kazancı sağlamaz.
+- *Örnek:* `docs/devir/04-13-admin-bulgusu.md` (📸, tarihsiz, numaralı) — kurala uygun, dokunulmaz.
+
+**(c) `docs/kararlar/` kökü — KAPALI LİSTE (9 dosya; yeni dosya kökte açılmaz)**
+
+| Grup | Dosya | Neden kökte |
+|---|---|---|
+| Taşıyıcı (KURAL 2) | `00-INDEX.md` · `09-DURUM.md` · `00-KARAR-TAKIP.md` · `10-yol-haritasi.md` · `10-yol-tamamlananlar.md` | 2026-08-23 kararı; `10-yol-haritasi` 2026-09-21'den beri 📸 ama taşıyıcı olarak kökte kalır |
+| Köprü (KURAL 22) | `00-KART-INDEKSI.md` | G-kart → iş işaretçisi; `CLAUDE.md` · `OTONOM-PROMPT.txt` · `scripts/` bu yolu anıyor |
+| 📸 planlama (KURAL 7 tablosu) | `00-CIKIS-PLANI.md` | 2026-09-21'den beri 📸; `CLAUDE.md` § AKTİF İŞ KAYNAĞI TEKTİR bu yolu anıyor |
+| 📸 tarihsel konum | `dokploy-foto-volume-talimati.md` · `sertifika-soru-standardi-gerekce-2026-09-21.md` | dondurulmuş belge yolu değişmez (KURAL 3/6); bugün açılsa hedefleri sırasıyla `raporlar/kesif/` ve `kararlar/konu/` olurdu |
+
+- **Kural:** kökte bu 9'dan başka dosya bulunmaz; yeni karar belgesi `kararlar/konu/`, yeni içerik taslağı `kararlar/icerik-taslak/` (a1),
+  yeni öz-denetim `kararlar/oz-denetim/`'e gider. Bu liste KURAL 2 (2026-08-23) "5 taşıyıcı" listesini **genişletmez, tamamlar**: taşıyıcı 5'tir,
+  diğer 4 kökte **durur ama taşıyıcı değildir**.
+- *Gerekçe:* KURAL 2 "kökte yalnız 5", KURAL 7 tablosu `00-CIKIS-PLANI`'nı, KURAL 22 `00-KART-INDEKSI`'ni kökte anıyordu → üç kural üç ayrı liste
+  veriyordu. Kapalı liste çelişkiyi tek yerde kapatır.
+- *Örnek:* yeni bir "çıkış kontrol listesi" belgesi kökte açılmaz → `kararlar/konu/`.
+
+**(d) `docs/raporlar/icerik/kod-kalemleri-2026-09-03.md` — KARAR-51 bekliyor**
+- Dosya 🔄 etiketli ama tarihli ve `raporlar/` altında; "yaşayan mı, dondurulsun mu" sorusu **KARAR-51**'de (YN-06) PO cevabı bekliyor
+  (`docs/otonom/kararlar/KARAR-051.md` CEVAP boş, 2026-09-29). Ad/yer kararı o cevaba bağlıdır: 📸 ise ad doğru (yerinde kalır),
+  🔄 kalırsa (a1)/(a2)'den uygun olana göre yer alır. **Bu maddeye karar gelmeden dokunulmaz.**
 
 ## KURAL 3 — Yaşayan mı, dondurulmuş mu (üst etiket)
 - Her belgenin **en üstünde** net etiket olur: **🔄 YAŞAYAN** (sürekli güncellenir; ör. `09-DURUM`) veya
@@ -103,6 +156,9 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
 | `00-INDEX.md` | Belge **haritası**: hangi bilgi hangi belgede, canonical mı/arşiv mi, 🔄 mı 📸 mı, okuma yolu | iş statüsü/durum içeriği (→09/10/KARAR-TAKIP) · karar gövdeleri (→konu/). *(Yalnız işaret eder, içerik tutmaz.)* |
 | `00-CIKIS-PLANI.md` | Çıkış **önceliği sınıflandırması** (K0-K5 + tur planı): "hangi iş çıkıştan önce/sonra" bakışı | iş statüsü (→KARAR-TAKIP/09) · kuyruk detayı (→10-yol) · kanıt (→KARAR-TAKIP). *(Maddelere referans verir, statü/detay tutmaz.)* |
 
+> ⚠️ GÜNCELLEME (2026-09-29, AJ-120): `00-CIKIS-PLANI.md` 2026-09-21'den beri 📸 DONDURULMUŞ (belge künyesi `:3-4`) ve `10-yol-haritasi.md` de 📸; tablodaki satırları
+> tarihsel iş bölümünü gösterir, bugün yazılan statü/öncelik bu iki belgeye girmez (durum → `docs/otonom/00-KUYRUK.md`, KURAL 22). Kökte kalma gerekçeleri: KURAL 2-C (c).
+
 - **Yazımdan önce sor:** (1) "ne oldu" mu (→09), "ne kalacak" mı (→10/KARAR-TAKIP), "nerede" mi (→INDEX)? (2) Aynı statüyü ikinci yaşayan belgeye mi yazıyorum → DUR, biri referans versin. (3) Statü kaynağı hep KOD.
 
 ## KURAL 8 — Bulgu yaşam döngüsü (bulgu nasıl akar) *(eklendi 2026-08-23)*
@@ -123,6 +179,7 @@ Gerekçe (2026-09-19): mentör/menti kıyası `kod-denetimi/` altındaydı, `pan
 |---|---|---|
 | 1 | Tek gerçek kaynağı | Kopyalama, link ver; çelişkide canonical kazanır |
 | 2 | Tür = klasör (+ alt-klasör 2026-08-23) | kararlar/ yaşayan (kök: canonical · konu/ · oz-denetim/) · raporlar/ dondurulmuş (kesif/ · kod-denetimi/ · panel/ · persona/ · icerik/) · arsiv/ eskiyen |
+| 2-C | Hedef tanımları (2026-09-29) | 🔄 içerik taslağı → `kararlar/icerik-taslak/` · işaretli keşif raporu yerinde · `devir/` 📸 tür klasörü (yeni dosya yok) · `kararlar/` kökü kapalı liste (9) · `kod-kalemleri` → KARAR-51 |
 | 3 | Yaşayan/dondurulmuş etiketi | Belge üstünde 🔄 veya 📸 (tarih) |
 | 4 | Adlandırma | Dondurulmuş=tarihli · yaşayan=tarihsiz/numaralı |
 | 5 | INDEX = harita | Yeni belge → 00-INDEX güncelle |

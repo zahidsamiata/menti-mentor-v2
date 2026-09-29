@@ -41,9 +41,11 @@ docs/
 ├── kararlar/                 → konu bazlı karar/durum belgeleri (canonical hafıza)
 │   │                           buraya ne girer: yaşayan canonical taşıyıcılar (00-INDEX · 09-DURUM ·
 │   │                           00-KARAR-TAKIP · 10-yol-haritasi · 10-yol-tamamlananlar) kökte durur
+│   │                           (⚠️ 2026-09-29: kökün kapalı listesi 9 dosya — rehber KURAL 2-C c)
 │   ├── konu/                 → konu bazlı kalıcı karar belgeleri (01–11 + tasarım/rehber/teslim)
 │   │                           buraya ne girer: "şu konuda ne karar verdik" — vizyon, mimari, güvenlik,
 │   │                           tasarım, çalışma tarzı, DISC/yaşam-döngüsü, belge-düzeni rehberi
+│   ├── icerik-taslak/        → (2026-09-29, KURAL 2-C a1) onay bekleyen yaşayan kullanıcı metni taslakları
 │   └── oz-denetim/           → belgelerin/kararların KENDİ iç denetimi (öz-denetim)
 │                               buraya ne girer: belge hijyeni, karar-statü haritası, unutulmuş-niyet
 │                               envanteri, durum panosu — "kararlarımız gerçekle uyumlu mu?" fotoğrafı
@@ -90,6 +92,13 @@ docs/
 | `degerlendirme-sistemi-tasarim.md` *(2026-09-28 AJ-71: eski adı `…-2026-08-27.md`, orada yönlendirme var)* | Değerlendirme + eşleştirme sistemi tasarım belgesi (16 bölüm, iki tur): DISC→Big Five model kararı, metafor arketipler, Likert→senaryo ölçme + çekirdek 12 senaryo, derinleşme, sertifika, eşleştirme algoritması (%45/30/25), üç soru veri boşluğu, süreç/göç/kalibrasyon; Bölüm 16 KALEM LİSTESİ | 🔄 YAŞAYAN (kalemler 00-KARAR-TAKIP'e girecek) |
 | `consent-modeli-plani-2026-08-28.md` | **Consent (rıza) modeli** şema tasarımı + migration planı — G1-07/G1-08 uygulama turunun kaynağı: tipli+sürümlü `Consent` tablosu, backfill (yalnız ACIK_RIZA, G1-16), geri-çekme davranışı (pasifleştir, otomatik anonimleştirme YOK), adım-adım migration + rollback. Migration ÇALIŞTIRILMADI | 📸 DONDURULMUŞ (2026-08-28) |
 | `kvkk-metinleri/` (klasör) | ⚠️ **TASLAK** KVKK belge paketi (9 md belge + kapak) — envantere dayalı. **Avukata sunum:** `KVKK-BELGE-PAKETI-2026-08-25.docx` (profesyonel tek dosya; md=canonical, docx=türev — `README.md` + üretici `scripts/kvkk-docx-gen.py`) | ⚠️ TASLAK (hukukçu onayı öncesi) |
+
+## İçerik taslakları — `docs/kararlar/icerik-taslak/` (🔄 onay bekleyen kullanıcı metinleri) *(eklendi 2026-09-29, AJ-120 · rehber KURAL 2-C a1)*
+| Belge | İçerik | Ne zaman okunur |
+|---|---|---|
+| `icerik-taslak/00-INDEX.md` | Klasör girişi | Taslak ararken |
+| `icerik-taslak/birlikte-calisma-kombinasyonlari.md` | "Birlikte nasıl çalışırsınız" 16 kombinasyon metni (AN-05) — onay bekliyor | Eşleşme detay sayfası işi |
+| `icerik-taslak/menti-simdilik-varyantlari.md` | Menti 4 "şimdilik" varyantı (IC-10 → I-15) — onay bekliyor | Menti sonuç ekranı işi |
 
 ## Öz-denetim — `docs/kararlar/oz-denetim/` (belgelerin/kararların iç denetimi)
 > "Kararlarımız gerçekle uyumlu mu, belge düzeni sağlıklı mı?" fotoğrafları. Farklı kapsam/tarih — birleştirilmez, çapraz referanslıdır.
