@@ -129,3 +129,17 @@ export function userStatusBadge(user: { isActive: boolean; approvalStatus: Appro
   if (user.isActive === false) return INACTIVE_STATUS_BADGE;
   return APPROVAL_STATUS_BADGE[user.approvalStatus] ?? { label: user.approvalStatus || '—', variant: 'secondary' };
 }
+
+/**
+ * AN-29 / KARAR-34: kurum türü. Backend `Tenant.kind` NULL olabilir (bu alandan önce açılan ya da
+ * türü gönderilmeden kaydolan kurumlar) → NULL "Kurum" sayılır (backend de öyle davranır).
+ */
+export type TenantKind = 'ORGANIZATION' | 'COMMUNITY';
+
+export const TENANT_KIND_LABELS: Record<TenantKind, string> = {
+  ORGANIZATION: 'Kurum',
+  COMMUNITY: 'Topluluk',
+};
+
+export const tenantKindLabel = (kind: string | null | undefined): string =>
+  kind === 'COMMUNITY' ? TENANT_KIND_LABELS.COMMUNITY : TENANT_KIND_LABELS.ORGANIZATION;

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import type { TenantKind } from '@/lib/enumLabels';
 import { Step1Slug }      from './_steps/Step1Slug';
 import { Step2Template }  from './_steps/Step2Template';
 import { Step3Branding }  from './_steps/Step3Branding';
@@ -12,6 +13,8 @@ import { Step5Invite }    from './_steps/Step5Invite';
 
 export interface WizardData {
   // Adım 1
+  // AN-29 / KARAR-34: kurum mu topluluk mu. Topluluk başvurusu her zaman platform onayına düşer.
+  tenantKind: TenantKind;
   tenantName: string;
   slug: string;
   // Adım 2
@@ -30,6 +33,7 @@ export interface WizardData {
 }
 
 const INITIAL: WizardData = {
+  tenantKind: 'ORGANIZATION',
   tenantName: '', slug: '',
   programTemplate: 'MEZUN',
   logoUrl: '', primaryColor: '#6366f1',

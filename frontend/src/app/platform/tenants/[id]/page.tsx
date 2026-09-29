@@ -20,6 +20,7 @@ import { MembersTable, type RoleFilter } from './_components/MembersTable';
 import { MeetingsTable } from './_components/MeetingsTable';
 import { DiscSummary } from './_components/DiscSummary';
 import { UI_TEXT } from '@/lib/uiText';
+import { tenantKindLabel } from '@/lib/enumLabels';
 import { DANGER_PILL_CLASS, SUCCESS_PILL_CLASS, WARNING_PILL_CLASS } from '@/lib/a11y/statusColors';
 
 type DetailTab = 'members' | 'meetings' | 'analytics';
@@ -170,6 +171,10 @@ export default function TenantDetailPage() {
                     {badge.label}
                   </span>
                 )}
+                {/* AN-29: kurum türü (NULL = kurum) */}
+                <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground" data-testid="tenant-kind">
+                  {tenantKindLabel(overview.tenant.kind)}
+                </span>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
                   {overview.tenant.plan}
                 </span>

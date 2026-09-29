@@ -86,6 +86,7 @@ const makeUser = (overrides: Partial<{ role: string; approvalStatus: string; dis
 });
 
 const BASE_WIZARD_DATA: WizardData = {
+  tenantKind: 'ORGANIZATION',
   tenantName: 'Test Tenant', slug: 'test',
   programTemplate: 'MEZUN',
   logoUrl: '', primaryColor: '#6366f1',

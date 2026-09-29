@@ -37,7 +37,7 @@ function classifyDomain(email: string): DomainTier {
   return 'INSTITUTION';
 }
 
-function validate(data: WizardData, tier: DomainTier, institutionRole: string, verificationNote: string): Record<string, string> {
+function validate(data: WizardData, needsVerification: boolean, institutionRole: string, verificationNote: string): Record<string, string> {
   const errs: Record<string, string> = {};
   if (!data.fullName.trim()) errs['fullName'] = 'Ad soyad zorunludur.';
   if (!data.email.includes('@')) errs['email'] = 'Geçerli bir e-posta adresi girin.';
@@ -45,8 +45,8 @@ function validate(data: WizardData, tier: DomainTier, institutionRole: string, v
   const passwordError = passwordRuleError(data.password);
   if (passwordError) errs['password'] = passwordError;
   if (!data.kvkkConsent) errs['kvkk'] = 'Devam etmek için onay vermeniz gerekiyor.';
-  if (tier !== 'INSTITUTION') {
-    if (!institutionRole.trim()) errs['institutionRole'] = 'Kurumunuzdaki görevinizi belirtin.';
+  if (needsVerification) {
+    if (!institutionRole.trim()) errs['institutionRole'] = data.tenantKind === 'COMMUNITY' ? 'Topluluktaki görevinizi belirtin.' : 'Kurumunuzdaki görevinizi belirtin.';
     if (!verificationNote.trim()) errs['verificationNote'] = 'Kanıt linki veya açıklama zorunludur.';
   }
   return errs;
@@ -72,11 +72,14 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
     }
   }, [data.email]);
 
-  const needsVerification = domainTier !== 'INSTITUTION';
+  // AN-29 / KARAR-34: topluluk başvurusu e-posta alan adından bağımsız platform onayına düşer
+  // (backend `initialVerificationStatus`) → görev + kanıt her zaman istenir.
+  const isCommunity = data.tenantKind === 'COMMUNITY';
+  const needsVerification = isCommunity || domainTier !== 'INSTITUTION';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const errs = validate(data, domainTier, institutionRole, verificationNote);
+    const errs = validate(data, needsVerification, institutionRole, verificationNote);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
 
     setLoading(true);
@@ -89,6 +92,7 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
       tenantName:       data.tenantName,
       slug:             data.slug,
       programTemplate:  data.programTemplate,
+      kind:             data.tenantKind,
       kvkkConsent:      data.kvkkConsent,
       captchaToken,
       ...(needsVerification && {
@@ -212,7 +216,10 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
         {needsVerification && data.email.includes('@') && (
           <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-300 space-y-1">
             <p className="font-medium">
-              {domainTier === 'EDU'
+              {/* AN-29: topluluk cümlesi ⚠️ TASLAK (PO onayı bekliyor) */}
+              {isCommunity
+                ? 'Topluluk başvuruları platform ekibi tarafından incelenir. Onaylanınca üyelerini davet edebilirsin.'
+                : domainTier === 'EDU'
                 ? '.edu.tr e-posta adresiyle kayıt — başvurunuz incelenecektir.'
                 : 'Kurumsal e-posta adresiyle daha hızlı onaylanırsınız. Aşağıdaki alanları doldurarak devam edebilirsiniz.'}
             </p>
@@ -222,7 +229,7 @@ export function Step4Account({ data, onUpdate, onNext }: Props) {
         {needsVerification && (
           <>
             <FormField
-              label="Kurumunuzdaki Göreviniz"
+              label={isCommunity ? 'Topluluktaki Göreviniz' : 'Kurumunuzdaki Göreviniz'}
               name="institutionRole"
               placeholder="Örn: Kulüp Başkanı, Koordinatör"
               value={institutionRole}

@@ -113,6 +113,7 @@ describe('F-05 takip: Step4Account başarısız gönderimden sonra CAPTCHA sıf�
     } as never);
 
     const data = {
+      tenantKind: 'ORGANIZATION' as const,
       tenantName: 'Test Tenant', slug: 'test', programTemplate: 'MEZUN' as const,
       logoUrl: '', primaryColor: '#6366f1',
       fullName: 'Test User', email: 'test@example.com', password: 'password123',

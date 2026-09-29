@@ -26,6 +26,7 @@ import { selfServeRegister, updateOnboarding } from '@/lib/api/selfServe';
 import type { WizardData } from '@/app/onboarding/stk/_StkOnboardingContent';
 
 const BASE: WizardData = {
+  tenantKind: 'ORGANIZATION',
   tenantName: 'Test Tenant', slug: 'test', programTemplate: 'MEZUN',
   logoUrl: '', primaryColor: '#6366f1',
   fullName: 'Test User', email: 'test@example.com', password: 'password123',
