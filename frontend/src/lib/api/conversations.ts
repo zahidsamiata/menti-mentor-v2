@@ -28,7 +28,12 @@ export interface ConversationListResponse {
 export interface ChatMessage {
   id: string;
   senderUserId: string;
+  /** Sıradan mesajda metin; zaman önerisinde (AN-27) menti'nin gerekçesi. */
   content: string;
+  /** AN-27: null/yok = sıradan mesaj · 'TIME_PROPOSAL' = zaman önerisi. */
+  kind?: 'TIME_PROPOSAL' | null;
+  /** AN-27: yalnız zaman önerisinde dolu (ISO). */
+  proposedStartAt?: string | null;
   createdAt: string;
 }
 
@@ -74,6 +79,18 @@ export const conversationsApi = {
 
   send: (api: BoundClient, id: string, message: string): Promise<ApiResult<{ message: ChatMessage }>> =>
     api<{ message: ChatMessage }>(`/api/conversations/${id}/messages`, { method: 'POST', body: { message } }),
+
+  // AN-27 (KARAR-53 ②④): menti'nin zaman önerisi — mevcut mesaj ucu, yapılandırılmış gövde.
+  // Randevu OLUŞTURMAZ; yalnız mentörün ayırt ettiği bir mesajdır.
+  proposeTime: (
+    api: BoundClient,
+    id: string,
+    payload: { reason: string; proposedStartAt: string },
+  ): Promise<ApiResult<{ message: ChatMessage }>> =>
+    api<{ message: ChatMessage }>(`/api/conversations/${id}/messages`, {
+      method: 'POST',
+      body: { message: payload.reason, kind: 'TIME_PROPOSAL', proposedStartAt: payload.proposedStartAt },
+    }),
 
   markRead: (api: BoundClient, id: string): Promise<ApiResult<{ ok: boolean; readAt: string }>> =>
     api<{ ok: boolean; readAt: string }>(`/api/conversations/${id}/read`, { method: 'POST' }),
