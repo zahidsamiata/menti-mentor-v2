@@ -10,6 +10,16 @@
 | 2026-W39 (21-27 Eylül) | `docs/otonom/arsiv/02-ILERLEME-2026-W39.md` | Devir analizi + dört konsey (GV/PS/IC/YN) kuyruğa · KARAR cevapları (KARAR-80 çelişki paketi dahil) · 4 renk kapı ve uzun çalışma kipi · 209 BITTI biriminin son doğrulaması · AJ güvenlik/KVKK negatif test kovaları | Altı ayrı plan belgesi PO önceliğini 21 gün kuyruktan kaçırmıştı; turlar erken duruyordu; "BITTI" denen işlerin bir kısmı koda karşı tutmuyordu |
 | 2026-W40 (28 Eylül →) | bu dosya | T1 güvenlik/KVKK/veri kaybı işleri (AJ-51…AJ-87) · belge düzeni (GÖREV 2.x: bağlam ön ekleri, kart indeksi senkronu, duruma göre bölme) | Çıkış öncesi kalan güvenlik açıkları kapanıyor; sıcak dosyalar her turda gereksiz içerik okutuyordu |
 
+## TUR ÖZETİ — devam turu 2026-09-29 (PO NOTU sonrası normal kuyruk · DURDU K1-a)
+
+**BITTI ve CANLIDA: 27 iş** (liste ve "kullanıcı artık şunu görüyor" cümleleri aşağıdaki tarihli satırlarda; özet `00-SIMDI.md`) — AJ-96 · 99-110 · 112-119 · 121 · 124 · 125 · 127 + DK-02 kod kısmı · kısmen: F-01 · AJ-120 (dilim 2 #488; kalan KARAR-51) · AJ-122 (cleanDb deadlock düzeltmesi #288 sonrası gözlenen CI koşularında 40P01 yok) · AJ-126 (a).
+**KARAR BEKLİYOR (bu turda açılan/hazırlanan):** 🔵 EVET/HAYIR: KARAR-134 (E-4) · 135 (I-08) · 137 (P-08) · 139 (AN-36) · 140 (AN-27) · 141 (AJ-111) · 142 (AN-29) — hepsinin PR'ı hazır, 7b opus ONAY, CI yeşil · ürün sorusu: KARAR-136 · 138 · 🟡 metin onayı bekleyen PR'lar: DK-03 · DK-01 · AN-41 · AJ-91 · AJ-123.
+**BASARISIZ:** 0. **Süreç notu:** AJ-120 #488 merge'ünden önce 00-SIMDI güncellenmedi (sonra d910f30 ile kapatıldı).
+**CANLIDA KONTROL EDİLECEKLER:** `/health` ok:true · db:up (yalnız GET) · durum rozetlerinin koyu tema rengi (#469).
+**PO'NUN KENDİ YAPMASI GEREKENLER:** `03-PO-ELLE-ISLER.md` — en kritik 3: canlı `DATABASE_URL` hangi sunucu teyidi (en üst madde) · DK-01 Sentry adımları · 🔵 kartlara EVET/HAYIR (birden çok migration: I-08+P-08 ortak TenantMembership, AN-36+AN-29 ortak Tenant yedeği).
+**KUYRUK SON DAĞILIMI (kapı sütunu sayımı):** 🟢 27 (hepsi kilitli/notlu: PS-A3 · Y-17 · Y-12 #110 kuralı · AN-06 · AJ-98 tarih kapısı 2026-10-29 · AN-49 · Y-05 DB EXPLAIN · I-17 içerik · F-02 avukat · F-05/AJ-29/AJ-76 PO) · 🔵 17 · 🟡 10 · karar bekleyenler `00-KUYRUK-KARAR-BEKLEYEN.md`.
+**BACKEND:** pointer `358e085` = backend main HEAD (eşit). **STASH:** yok. **Bekçi:** HATA yok.
+
 ## TUR ÖZETİ — PO NOTU 2026-09-28 (İŞ 1-3) · tamam ~19:00 UTC
 
 **BITTI ve CANLIDA: 3 iş**

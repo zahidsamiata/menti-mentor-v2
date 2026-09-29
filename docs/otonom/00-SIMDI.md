@@ -3,7 +3,7 @@
 
 **Son güncelleme:** 2026-09-29 ~10:30 UTC · çatı main HEAD (bu commit) · backend main HEAD `358e085` (= çatı pointer)
 
-**Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (02-ILERLEME başı). 🟢 kuyruk bitti (kalanlar kilitli/notlu); 🔵/🟡 hazırlama neredeyse bitti (AN-29 hazırlanıyor).
+**Durum:** DURDU (K1-a) — çalışılabilir iş kalmadı: 🟢 satırların hepsi kilitli/notlu; 🔵/🟡 PR'ları hazır, PO kararı bekliyor. TUR ÖZETİ: `02-ILERLEME.md` başı.
 
 **Bu oturumda BITTI (27):** AJ-96 · 104 · 103 · 99 · 112 · 100 · 113 · 106 · 102 · 101 · 108 · 109 · 105 · 114 · 115 · 116 · 107 · 110 · 117 · 121 · 118 · 119 · 124 · 125 · 127 + DK-02 kod kısmı + kısmen: F-01 · AJ-120 (dilim 2 #488 merge; kalan KARAR-51) · AJ-122 (gözlem: sonraki CI koşularında deadlock yok) · AJ-126 (a) (b → KARAR-138). Ajan-ekledi: AJ-112 … AJ-127.
 
@@ -19,7 +19,7 @@
 - Ürün sorusu: **KARAR-138** (dışa aktarmada başkasının yazdıkları, KVKK)
 - ⚠️ Birden çok migration PR'ı merge sırası: her merge öncesi ilgili tablo yedeği; I-08 + P-08 ortak TenantMembership yedeği yeter; AN-27 Message; AN-36 + AN-29 ortak Tenant yedeği yeter.
 
-**Şu an yapılan:** tur kapanışı — çalışılabilir 🟢 iş kalmadı.
+**Şu an yapılan:** yok (DURDU). Aynı prompt tekrar gönderilince: KARAR cevapları → EVET gelen 🔵 PR'lar (yedek + merge + pointer).
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
