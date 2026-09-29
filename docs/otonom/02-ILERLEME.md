@@ -153,3 +153,6 @@
 
 - 2026-09-29 · AJ-120 dilim 2 · çatı #488 merge (387fddb) · opus doğrulama ONAY · NE: belge-düzeni rehberine KURAL 2-C (4 hedef tanımı) + 2 içerik taslağı `docs/kararlar/icerik-taslak/`'e taşındı (yönlendirmeli) · NEDEN: F-01/G9-12 dağınık ad kalanı · DURUM: BITTI (kısmen — `kod-kalemleri` KARAR-51 bekliyor; 58 📸 bilinçli yerinde) · not: 00-SIMDI bu merge'den ÖNCE güncellenmedi (sıra hatası) — bu commit'le kapatıldı.
   CANLIDA BAK: kullanıcıya görünen değişiklik yok (yalnız belge). REPODA BAK: `docs/kararlar/konu/belge-duzeni-rehberi.md` KURAL 2-C · `docs/kararlar/icerik-taslak/00-INDEX.md`
+
+- 2026-09-29 · AN-29 topluluk tipi kurum · 🔵 PR-ACIK · backend #310 + çatı #489 · NE: kayıtta Kurum/Topluluk seçimi, topluluk başvurusu her zaman platform onayına · NEDEN: KARAR-34 SORU 1 ("PO yalnız lideri onaylar") · 7b opus ONAY (1. tur kart yanıltıcıydı: tür beyana dayalı, "Kurum" seçen kurumsal e-posta yine otomatik onay — karta yazıldı, 3. turda ONAY) · mutasyon #311 · KARAR-142 main'e taşındı · DURUM: PO EVET + `Tenant` yedeği bekliyor.
+  REPODA BAK: `docs/otonom/kararlar/KARAR-142.md`

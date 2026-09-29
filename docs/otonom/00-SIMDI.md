@@ -13,12 +13,13 @@
 - 🔵 ⛔ P-08 yolculuk ilerlemesi — backend #293 + çatı #479 · **KARAR-137**
 - 🔵 ⛔ AN-36 kurum yasal bilgileri — backend #300 + çatı #484 · **KARAR-139** (⚠️ #484 pointer merge öncesi main HEAD'e)
 - 🔵 ⛔ AN-27 zaman önerisi mesajı — backend #309 + çatı #487 · **KARAR-140**
+- 🔵 ⛔ AN-29 topluluk tipi kurum — backend #310 + çatı #489 · **KARAR-142** (yedek Tenant; 6 PO sorusu kartta)
 - 🔵 ⛔ AJ-111 gevşetme oranı — backend #307 + çatı #486 · **KARAR-141** (yeni tablo, yedek gerekmez)
 - 🟡 DK-03 iz kaydı (#286/#472) · DK-01 Sentry (#290/#475) · AN-41 KVKK paket (#477) · AJ-91 panel metinleri (#478) · AJ-123 bekleme sayfası metni (#481)
 - Ürün sorusu: **KARAR-138** (dışa aktarmada başkasının yazdıkları, KVKK)
-- ⚠️ Birden çok migration PR'ı merge sırası: her merge öncesi ilgili tablo yedeği; I-08 + P-08 ortak TenantMembership yedeği yeter; AN-27 Message; AN-36 Tenant.
+- ⚠️ Birden çok migration PR'ı merge sırası: her merge öncesi ilgili tablo yedeği; I-08 + P-08 ortak TenantMembership yedeği yeter; AN-27 Message; AN-36 + AN-29 ortak Tenant yedeği yeter.
 
-**Şu an yapılan:** AN-29 (topluluk tipi kurum, 🔵) — uygulayıcı.
+**Şu an yapılan:** tur kapanışı — çalışılabilir 🟢 iş kalmadı.
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
