@@ -1,11 +1,11 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-29 ~09:00 UTC · çatı main HEAD (bu commit) · backend main HEAD `358e085` (= çatı pointer)
+**Son güncelleme:** 2026-09-29 ~10:30 UTC · çatı main HEAD (bu commit) · backend main HEAD `358e085` (= çatı pointer)
 
 **Durum:** CALISIYOR — PO NOTU İŞ 1-3 TAMAM (02-ILERLEME başı). 🟢 kuyruk bitti (kalanlar kilitli/notlu); 🔵/🟡 hazırlama neredeyse bitti (AN-29 hazırlanıyor).
 
-**Bu oturumda BITTI (27):** AJ-96 · 104 · 103 · 99 · 112 · 100 · 113 · 106 · 102 · 101 · 108 · 109 · 105 · 114 · 115 · 116 · 107 · 110 · 117 · 121 · 118 · 119 · 124 · 125 · 127 + DK-02 kod kısmı + kısmen: F-01 · AJ-120 · AJ-122 (gözlem) · AJ-126 (a) (b → KARAR-138). Ajan-ekledi: AJ-112 … AJ-127.
+**Bu oturumda BITTI (27):** AJ-96 · 104 · 103 · 99 · 112 · 100 · 113 · 106 · 102 · 101 · 108 · 109 · 105 · 114 · 115 · 116 · 107 · 110 · 117 · 121 · 118 · 119 · 124 · 125 · 127 + DK-02 kod kısmı + kısmen: F-01 · AJ-120 (dilim 2 #488 merge; kalan KARAR-51) · AJ-122 (gözlem: sonraki CI koşularında deadlock yok) · AJ-126 (a) (b → KARAR-138). Ajan-ekledi: AJ-112 … AJ-127.
 
 **PO bekleyen hazır PR'lar (hepsi 7b ONAY):**
 - 🔵 E-4 karantina — backend #289 + çatı #474 · **KARAR-134**
