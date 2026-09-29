@@ -90,6 +90,11 @@
 - `stk-admin-bulgu-envanteri-2026-08-11.md` 📸 STK Admin Paneli — 13 Bulgu Envanteri…
 - `unutulmus-niyet-envanteri-2026-08-10.md` 📸 Unutulmuş Niyet Envanteri (2026-08-10)
 
+**`docs/kararlar/icerik-taslak/`** (3 · 2026-09-29, AJ-120 — rehber KURAL 2-C a1):
+- `00-INDEX.md` 🔄 klasör girişi
+- `birlikte-calisma-kombinasyonlari.md` 🔄 "Birlikte nasıl çalışırsınız" — 16 kombinasyon (onay bekliyor)
+- `menti-simdilik-varyantlari.md` 🔄 Menti "şimdilik" varyantları — 4 metin (onay bekliyor)
+
 **`docs/devir/`** (8):
 - `01-felsefe-ve-calisma-tarzi.md` 📸 01 — FELSEFE VE ÇALIŞMA TARZI (yeni sohbet…
 - `02-proje-durumu.md` 📸 02 — PROJE DURUMU (şu an nerede, kanıtlı)
