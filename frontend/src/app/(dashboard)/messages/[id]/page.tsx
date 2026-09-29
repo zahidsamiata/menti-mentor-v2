@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, CalendarClock } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { UserAvatar } from '@/components/atoms/UserAvatar';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,9 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
 import { conversationsApi } from '@/lib/api/conversations';
 import { UI_TEXT } from '@/lib/uiText';
+import { TimeProposalCard } from '@/components/molecules/TimeProposalCard';
+import { TimeProposalForm } from '@/components/molecules/TimeProposalForm';
+import { TIME_PROPOSAL_KIND, TIME_PROPOSAL_TEXT } from '@/lib/timeProposal';
 
 const MESSAGE_MAX = 2000;
 
@@ -28,6 +31,7 @@ export default function ConversationThreadPage() {
   const [text, setText] = useState('');
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
+  const [proposing, setProposing] = useState(false);
   const markedRef = useRef(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -70,7 +74,17 @@ export default function ConversationThreadPage() {
     }
   }
 
+  // AN-27: zaman önerisini yalnız konuşmanın menti tarafı gönderir (sunucu da zorlar — 403).
+  async function handleProposeTime(reason: string, proposedStartAt: string): Promise<string | null> {
+    const result = await conversationsApi.proposeTime(api, conversationId, { reason, proposedStartAt });
+    if (!result.ok) return result.error.message ?? TIME_PROPOSAL_TEXT.sendFailed;
+    setProposing(false);
+    refetch();
+    return null;
+  }
+
   const counterpart = data?.counterpart;
+  const iAmMenti = !!data && !!user && data.menti.id === user.id;
 
   return (
     <div className="mx-auto flex h-[calc(100vh-6rem)] max-w-2xl flex-col animate-fade-in">
@@ -96,6 +110,18 @@ export default function ConversationThreadPage() {
         ) : (
           data.messages.map((m) => {
             const mine = m.senderUserId === user?.id;
+            if (m.kind === TIME_PROPOSAL_KIND && m.proposedStartAt) {
+              return (
+                <div key={m.id} className={mine ? 'flex justify-end' : 'flex justify-start'}>
+                  <TimeProposalCard
+                    proposedStartAt={m.proposedStartAt}
+                    reason={m.content}
+                    timeLabel={formatTime(m.createdAt)}
+                    mine={mine}
+                  />
+                </div>
+              );
+            }
             return (
               <div key={m.id} className={mine ? 'flex justify-end' : 'flex justify-start'}>
                 <div
@@ -119,7 +145,16 @@ export default function ConversationThreadPage() {
 
       {/* Gönderme kutusu */}
       <div className="border-t border-border pt-3">
+        {proposing && <TimeProposalForm onSubmit={handleProposeTime} onCancel={() => setProposing(false)} />}
         {sendError && <p className="mb-2 text-xs text-destructive" role="alert">{sendError}</p>}
+        {iAmMenti && !proposing && (
+          <div className="mb-2">
+            <Button type="button" variant="outline" size="sm" onClick={() => setProposing(true)}>
+              <CalendarClock className="mr-1 h-4 w-4" aria-hidden="true" />
+              {TIME_PROPOSAL_TEXT.openButton}
+            </Button>
+          </div>
+        )}
         <div className="flex items-end gap-2">
           <textarea
             className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
