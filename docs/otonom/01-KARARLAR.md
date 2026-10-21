@@ -20,7 +20,33 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 ## ✍️ PO NOTU
 > Serbest not alanı (karar kartına sığmayan kısa bir yön notu). Ajan bu dosyayı okurken görür; işlediğinde notu 02-ILERLEME'ye kaydedip alanı boşaltır.
 
-(boş)
+> ⚙️ Ajan durumu (2026-10-21): aşağıdaki not AYNEN yazıldı; 6 kararın CEVAP'ı kart dosyalarına aktarıldı (KARAR-101 · 64 · 95 · 57 · 45 · 63 → indekste ✍️). KARAR-45'in "yeni 2 ad"ı için KARAR-143 açıldı. Uygulama normal otonom turda; not, normal tur işleyince 02-ILERLEME'ye kaydedilip boşaltılır.
+
+```text
+PO NOTU · 2026-10-21 · strateji katmanı üzerinden (PO'nun sohbetteki cevapları)
+
+KARAR-101 → B (genişletilmiş, PO tarifi). Onay bekleyen herkes şifre, Google ya da LinkedIn ile giriş yapabilir; iki giriş yolu eşit davranır. Kayıt sürecinin tamamını doldurabilir: kişilik testi (8 soru), mentör/menti soruları, profil. Eşleşme, mentör listesi, mesaj, randevu, talep ve anlaşma yönetici onayına kadar KAPALI (varsayılan kapalı, izin listesiyle). Geçerli davetle gelen onay beklemez (bu zaten var: authController register approvalStatus + oauthService U-06). PR backend #164 + çatı #343 bu kapsama göre yeniden yazılır.
+
+KARAR-64 → C (Kişilik). Kullanıcıya görünen her yerde "kişilik" kullanılır.
+
+KARAR-95 → Hiçbiri; kriz algılama/bildirim/yardım ekranı yapılmaz. KURAL: hiçbir metin (sertifika, kurum sayfası, pazarlama, belge) platformda bir kriz prosedürü ya da algılama sistemi olduğunu vaat etmez. Sertifika KONU 10 mentörün kişisel davranışını (dinle, ciddiye al, profesyonele yönlendir) öğretmeye devam eder. I-18 ve IC-13 "yapılmayacak" olarak işaretlenir.
+
+KARAR-57 → A (tek havuz, tek formül). PO tasarımı:
+(1) İlk girişte yalnız 8 soruluk bölüm etkin; diğer bölümler görünür ama bulanık ve tıklanamaz; 8 soru bitince açılır.
+(2) Sonra kişi her sayfaya girdiğinde ekranın ortasında günlük soru çıkar. Kapatma düğmesi var; kapatırsa o gün tekrar sorulmaz.
+(3) Soru sınırı yok: her cevaptan sonra sıradaki soru gelir; kişi isterse tek oturumda tüm havuzu bitirir, isterse zamana yayar.
+(4) Kayıt 8 sorusu, günlük sorular ve 32 soruluk havuz aynı hesaba girer; tek formül.
+(5) /disc-test ayrı bir akış olmaktan çıkar; ona giden düğmeler (mentor/page.tsx, profile/page.tsx, menti/page.tsx) bu akışa bağlanır. Sayfa SİLİNMEZ (silme kuralı).
+(6) Profilde ve panelde ilerleme oranı görünür: "Kişilik profilin %X tamamlandı" (cevaplanan / toplam soru). Amaç teşvik. ⚠️ Bu, KARAR-60 (kişinin kendi kişilik puan yüzdesini görmesi) DEĞİLDİR; KARAR-60 avukatı bekliyor ve bu cevapla açılmaz.
+(7) Tip değişince bildirim/mesaj yok. Soru ekranında önceden bilgi notu: "Çözdüğünüz sorular eşleşmenizi daha sağlıklı hale getirir; cevaplarınıza göre ana kişilik tipiniz ya da yakın tipleriniz değişebilir." (anlam korunur, ifade düzeltilebilir)
+(8) "8 soruyu bitir" kilidi ile "yönetici onayı bekleniyor" kilidi ekranda ayrı nedenlerle yazılır.
+
+KARAR-45 → C. 8 yeni arketip adı kullanılır; "Kâşif" ve onaysız "İz Açan" yeniden adlandırılır. Yeni 2 adı ajan önerir, PO onaylar (yeni kart; kullanıcıya görünen metin).
+
+KARAR-63 → A + C. Herkes ana tipini ve yakın (ikinci) tipini görür; fark azsa "şimdilik" dili. 45/55/60 eşikleri ve "eşik aşılmazsa varsayılan M1/m1" kuralı kaldırılır. Kişilik motoru, kişinin kararsız kaldığı boyutlara odaklı sorular sorarak belirsizliği gidermeye çalışır (günlük soru akışında). Sıra: önce A; C, soru hedefleme motoruna (KARAR-62) bağlı.
+
+AVUKATA AYRILANLAR: ⚖️ işaretli KARAR-3, 31, 38, 47, 72, 75, 91 ve 🔒 KVKK işaretli kartlar şimdilik avukata bırakıldı. Bu kartlara öneri/zorlama yapılmaz; kilitledikleri işler kilitli kalır.
+```
 
 ---
 
@@ -28,14 +54,14 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 Durum: ⬜ cevap bekliyor · ✍️ CEVAP yazıldı, henüz işlenmedi · ✅ cevaplandı. Kilitlediği işler = eski indeksteki "kaç işi açar" bilgisi + `00-KUYRUK-KARAR-BEKLEYEN.md`'deki satırlar (🔴 ya da ATLANDI(karar)) + aktif kuyrukta kalan ayağı ya da 🔵 EVET/HAYIR kartı bu karara bağlı satırlar; kart başlığındaki sayı eskiyse "kart metni eski" notu (kart gövdesi değişmez).
 Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) göre (çoktan aza), eşitse numara; cevaplanmışlar numara sırasıyla.
 
-### ⬜ / ✍️ Cevap bekleyen (112)
+### ⬜ / ✍️ Cevap bekleyen (122)
 
 | # | Konu | Kilitlediği işler | Durum | Öneri | Kart |
 |---|---|---|---|---|---|
-| KARAR-64 | "Mizaç" mı "karakter" mi "kişilik" mi | **1** (MUT §4-5 · `onboardingController.ts:492`) · 🔴 KARAR-BEKLEYEN: I-01, I-11, AN-50, AN-51 · aktif kuyrukta: AN-10 (kalan ayak: mizaç/karakter/kişilik adlandırması) · kart metni eski: "(1 işi açar)"; güncel: 5 iş — I-01, I-11, AN-50, AN-51, AN-10 — kartın saydığı I-15, PS-A3'e katlandı (KARAR-80/M9) | ⬜ boş · ⭐ analiz turu · öneri C (kişilik) | C | [kart](kararlar/KARAR-064.md) |
+| KARAR-64 | "Mizaç" mı "karakter" mi "kişilik" mi | **1** (MUT §4-5 · `onboardingController.ts:492`) · 🔴 KARAR-BEKLEYEN: I-01, I-11, AN-50, AN-51 · aktif kuyrukta: AN-10 (kalan ayak: mizaç/karakter/kişilik adlandırması) · kart metni eski: "(1 işi açar)"; güncel: 5 iş — I-01, I-11, AN-50, AN-51, AN-10 — kartın saydığı I-15, PS-A3'e katlandı (KARAR-80/M9) | ✍️ CEVAP (PO NOTU 2026-10-21): C (Kişilik) · uygulama bekliyor · ⭐ analiz turu · öneri C (kişilik) | C | [kart](kararlar/KARAR-064.md) |
 | KARAR-46 | Sertifika içeriğinin hangi sürümü canlıya gidecek | **2** (P-99 → K-16) · 🔴 KARAR-BEKLEYEN: F-14, P-99, AN-03, K-16 · kart metni eski: "(P-99'u açar)"; güncel: 4 iş — F-14, P-99, AN-03, K-16 | ⬜ boş · ⭐ içerik konseyi · SEED · ⚠️ 88 şıkın TAMAMI + 15 senaryo eler | A | [kart](kararlar/KARAR-046.md) |
-| KARAR-45 | Arketip adları: hangi metin hangi koda bağlanacak | **4** (IC-14, I-01, I-15, IC-03'ün `M1`/`m1` ayağı) · 🔴 KARAR-BEKLEYEN: IC-14 · aktif kuyrukta: IC-10 (kalan ayak: arketip adları (metinde yer tutucu)), AN-05 (kalan ayak: arketip adları) · kart metni eski: "(4 işi açar)"; güncel: 3 iş — IC-14, IC-10, AN-05 · kartta sayılıp burada olmayan: I-01 → KARAR-64 bekliyor (KARAR-BEKLEYEN) | ⬜ boş · ⭐ içerik konseyi · ⚠️ "Kâşif" üç ayrı anlamda · KARAR-10'dan AYRI | C | [kart](kararlar/KARAR-045.md) |
-| KARAR-57 | Kullanıcının mizaç sonucunu hangi test belirlesin | **4** (TO §0-2) · 🔴 KARAR-BEKLEYEN: F-09, PS-03, I-12 · kart metni eski: "(4 işi açar)"; güncel: 3 iş — F-09, PS-03, I-12 | ⬜ boş · ⭐ analiz turu · öneri A (32 soru esas) | A | [kart](kararlar/KARAR-057.md) |
+| KARAR-45 | Arketip adları: hangi metin hangi koda bağlanacak | **4** (IC-14, I-01, I-15, IC-03'ün `M1`/`m1` ayağı) · 🔴 KARAR-BEKLEYEN: IC-14 · aktif kuyrukta: IC-10 (kalan ayak: arketip adları (metinde yer tutucu)), AN-05 (kalan ayak: arketip adları) · kart metni eski: "(4 işi açar)"; güncel: 3 iş — IC-14, IC-10, AN-05 · kartta sayılıp burada olmayan: I-01 → KARAR-64 bekliyor (KARAR-BEKLEYEN) | ✍️ CEVAP (PO NOTU 2026-10-21): C · yeni 2 ad → KARAR-143 (ajan önerir, PO onaylar) · uygulama bekliyor · ⭐ içerik konseyi · ⚠️ "Kâşif" üç ayrı anlamda · KARAR-10'dan AYRI | C | [kart](kararlar/KARAR-045.md) |
+| KARAR-57 | Kullanıcının mizaç sonucunu hangi test belirlesin | **4** (TO §0-2) · 🔴 KARAR-BEKLEYEN: F-09, PS-03, I-12 · kart metni eski: "(4 işi açar)"; güncel: 3 iş — F-09, PS-03, I-12 | ✍️ CEVAP (PO NOTU 2026-10-21): A (tek havuz, tek formül; 8 maddelik PO tasarımı kartta) · uygulama bekliyor · ⭐ analiz turu · öneri A (32 soru esas) | A | [kart](kararlar/KARAR-057.md) |
 | KARAR-58 | Eski DISC ↔ yeni Big Five geçiş dönemi | **2+** (IK:223 · TO Y-23) · 🔴 KARAR-BEKLEYEN: PS-A2, AN-04 · aktif kuyrukta: PS-A3 (ön koşul PS-A2 üzerinden) · kart metni eski: "(2+ işi açar)"; güncel: 3 iş — PS-A2, AN-04, PS-A3 | ⬜ boş · ⭐ analiz turu · MIGRATION/GERİ DÖNÜLMEZ, öneri YOK; yedek zorunlu | öneri YOK | [kart](kararlar/KARAR-058.md) |
 | KARAR-89 | Görüşme değerlendirmesinin tek kutusu | **3** (KR-08, AN-49, KR-11) · 🔴 KARAR-BEKLEYEN: KR-08, AJ-49 · aktif kuyrukta: AN-49 (kart KARAR-89 bu işi kilitlediğini söylüyor (tek değerlendirme kutusu)) · kart metni eski: "(3 iş açar: KR-08, AN-49, KR-11)"; güncel: 3 iş — KR-08, AJ-49, AN-49 · kartta sayılıp burada olmayan: KR-11 → KARAR-78 bekliyor (KARAR-BEKLEYEN) | ⬜ boş · MIGRATION · ⚠️ KARAR-77 ile çelişki · öneri B | B | [kart](kararlar/KARAR-089.md) |
 | KARAR-12 | Görüşme geri bildirim kayıt sistemi | 0 · 🔴 KARAR-BEKLEYEN: AJ-38 · aktif kuyrukta: AJ-99 (olası ürün sorusu: mentör kendi geri bildirimini görsün mü (uygulayıcı önce kontrol eder)) | ⬜ boş | A | [kart](kararlar/KARAR-012.md) |
@@ -45,7 +71,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-61 | Yeni formül arketip motoruyla aynı anda mı açılsın | **2** (MUT §4 · `scoring.ts:89-90`) · 🔴 KARAR-BEKLEYEN: F-11, AJ-92 | ⬜ boş · ⭐ analiz turu · öneri B (iki adım) | B | [kart](kararlar/KARAR-061.md) |
 | KARAR-72 | Ghost / "kalıcı red" özelliği olacak mı | **1** (AN-33) · 🔴 KARAR-BEKLEYEN: KR-20, AN-33 · kart metni eski: "(1 iş açar: AN-33)"; güncel: 2 iş — KR-20, AN-33 | ⬜ boş · ⭐ CS bilanço · ÜRÜN+HUKUK · öneri B (koru) | B (koru), gerçek kötüye-kullanım görülene kadar | [kart](kararlar/KARAR-072.md) |
 | KARAR-88 | Hakkımızda / İletişim + yüzen WhatsApp | **2** (Y-07, Y-11) · 🔴 KARAR-BEKLEYEN: Y-07, Y-11 | ⬜ boş · kurumlara görünen metin · öneri A (iki sayfa + e-posta) | A | [kart](kararlar/KARAR-088.md) |
-| KARAR-95 | Kriz kanalı — güvenlik sorusu olarak yeniden | **2** (I-18, IC-13) · 🔴 KARAR-BEKLEYEN: I-18, IC-13 | ⬜ boş · ⭐ KARAR-80/M20'den doğdu (2026-09-26), KARAR-69 (c) gereği · öneri C | C | [kart](kararlar/KARAR-095.md) |
+| KARAR-95 | Kriz kanalı — güvenlik sorusu olarak yeniden | **2** (I-18, IC-13) · 🔴 KARAR-BEKLEYEN: I-18, IC-13 | ✍️ CEVAP (PO NOTU 2026-10-21): Hiçbiri — kriz algılama/bildirim/yardım ekranı yapılmaz; I-18 + IC-13 "yapılmayacak" · uygulama bekliyor · ⭐ KARAR-80/M20'den doğdu (2026-09-26), KARAR-69 (c) gereği · öneri C | C | [kart](kararlar/KARAR-095.md) |
 | KARAR-97 | 🔵 EVET/HAYIR — U-18 mentör mesaj talebini reddedebilsin (veritabanına 1 yeni alan) | **1** (U-18) · aktif kuyrukta: U-18 (🔵 PR-ACIK — EVET/HAYIR kartı), E-3 (kalan ayak: bağlamsal geri bildirim kartı, U-18 üzerinden) · kart metni eski: "(1 iş açar: U-18)"; güncel: 2 iş — U-18, E-3 | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #148 + çatı #326 · ⚠️ #148 ve #326 CONFLICTING (2026-09-28): EVET gelse de rebase + CI + 7b tekrarı | — | [kart](kararlar/KARAR-097.md) |
 | KARAR-103 | Eski planlardaki 13 yapılmamış özellik — hangileri yapılsın | **13** (AJ-11) · 🔴 KARAR-BEKLEYEN: AJ-11 · aktif kuyrukta: AJ-78 (kalan ayak: dönemsel tarih aralığı (md.10)) · kart metni eski: "(13 işi açar)"; güncel: 2 iş — AJ-11, AJ-78 | ⬜ boş · ajan-ekledi (K-C) · öneri B (4 küçük şemasız özellik) | B | [kart](kararlar/KARAR-103.md) |
 | KARAR-110 | Periyodik anket (ilişki geneli değerlendirme) ne olsun | **1** (AJ-14) · 🔴 KARAR-BEKLEYEN: AJ-14, AJ-49 · kart metni eski: "(1 işi açar: AJ-14)"; güncel: 2 iş — AJ-14, AJ-49 | ⬜ boş · ajan-ekledi · öneri A | A | [kart](kararlar/KARAR-110.md) |
@@ -129,7 +155,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-55 | Sertifikada geri bildirim ne zaman gösterilsin | **2** (TO §8.2 · TAS:369-371) · kart metni eski: "(2 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ analiz turu · öneri B (sonda) | B | [kart](kararlar/KARAR-055.md) |
 | KARAR-59 | Kurgu/persona kişi adları yasağa dahil mi | **2** (IK:229 · PP:165,247) · kart metni eski: "(2 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ analiz turu · KURAL/KVKK, öneri YOK | öneri YOK | [kart](kararlar/KARAR-059.md) |
 | KARAR-60 | Kullanıcı kişilik boyut yüzdesini görür mü | **1** (TO Z-15,Y-19) · kart metni eski: "(1 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ analiz turu · öneri A (yüzde gizli) | A | [kart](kararlar/KARAR-060.md) |
-| KARAR-63 | Arketip eşiği 45/55/60 belgelensin mi kaldırılsın mı | **1** (MUT §4 · `scoring.config.ts:31`) · kart metni eski: "(1 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ analiz turu · öneri A (P3) | A | [kart](kararlar/KARAR-063.md) |
+| KARAR-63 | Arketip eşiği 45/55/60 belgelensin mi kaldırılsın mı | **1** (MUT §4 · `scoring.config.ts:31`) · kart metni eski: "(1 işi açar)"; güncel: 0 iş | ✍️ CEVAP (PO NOTU 2026-10-21): A + C (önce A; C → KARAR-62'ye bağlı) · uygulama bekliyor · ⭐ analiz turu · öneri A (P3) | A | [kart](kararlar/KARAR-063.md) |
 | KARAR-65 | "D mentör + S menti" yasağı menti tarafında da mı | **2** (TO §8.2 · `matching.ts:200-216`) · kart metni eski: "(2 işi açar)"; güncel: 1 iş — F-11 (KARAR-61 ile birlikte kilit, F-11 Not'u) | ⬜ boş · ⭐ analiz turu · öneri B; KARAR-61 ile birlikte | B | [kart](kararlar/KARAR-065.md) |
 | KARAR-68 | Persona/panel belgeleri nasıl gelişmeli A/B/C | **2** (PP §7 E · §5.1) · kart metni eski: "(2 işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ analiz turu · BELGE POLİTİKASI · öneri tetikleyicili B | Tetikleyicili B (o zamana kadar C) | [kart](kararlar/KARAR-068.md) |
 | KARAR-71 | Kırılgan kullanıcıda tutundurma etiğinin sınırı | **1+** (PP:237 C3 · prompt) · kart metni eski: "(1+ işi açar)"; güncel: 0 iş | ⬜ boş · ⭐ analiz turu · ETİK/UZMAN, öneri YOK | öneri YOK | [kart](kararlar/KARAR-071.md) |
@@ -138,7 +164,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-91 | Görüşme değerlendirmeleri saklama süresi | **1** · kart metni eski: "(1 iş açar)"; güncel: 0 iş | ⬜ boş · KVKK/hukuki · öneri C şimdi | C şimdi (dışa aktarım teknik bir düzeltme, 🟡), süre için huk… | [kart](kararlar/KARAR-091.md) |
 | KARAR-92 | Oryantasyon kilidi tetiklensin mi | **1** · kart metni eski: "(1 iş açar)"; güncel: 0 iş | ⬜ boş · öneri B (2 ardışık) | B | [kart](kararlar/KARAR-092.md) |
 | KARAR-100 | `ProfileSource.SJT_ENRICHED` değeri ne olsun (silme protokolü — gerekçe bulunamadı) | **0** (AN-54 bulgusu) | ⬜ boş · KARAR-76 ile aynı tür soru | A | [kart](kararlar/KARAR-100.md) |
-| KARAR-101 | Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi) | **1** (Y1-B8 — PR #164/#343) · kart metni eski: "(1 iş açar: Y1-B8)"; güncel: 0 iş | ⬜ boş · güvenlik + ürün · öneri B · ⚠️ PR backend #164 + çatı #343 CONFLICTING (2026-09-28) | B | [kart](kararlar/KARAR-101.md) |
+| KARAR-101 | Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi) | **1** (Y1-B8 — PR #164/#343) · kart metni eski: "(1 iş açar: Y1-B8)"; güncel: 0 iş | ✍️ CEVAP (PO NOTU 2026-10-21): B (genişletilmiş, PO tarifi) · uygulama bekliyor — PR #164/#343 bu kapsama göre yeniden yazılır · güvenlik + ürün · öneri B · ⚠️ PR backend #164 + çatı #343 CONFLICTING (2026-09-28) | B | [kart](kararlar/KARAR-101.md) |
 | KARAR-104 | Uyum eşiğini geçen tek mentör randevuya kapalıysa menti ne görsün | **0** (PS-A4 sonrası ince ayar) | ⬜ boş · ajan-ekledi (PS-A4 7b notu) · öneri A | A | [kart](kararlar/KARAR-104.md) |
 | KARAR-108 | DISC eşitlik sırası iki yerde farklı — tek kaynak hangisi | **0** (bugün etkisi yok) | ⬜ boş · psikometri · öneri A | A | [kart](kararlar/KARAR-108.md) |
 | KARAR-114 | Tarayıcı bildirimi gerçekten gönderilsin mi? (AJ-39 sonrası) | **0** (yeni özellik sorusu) | ⬜ boş · ajan-ekledi · öneri A | A | [kart](kararlar/KARAR-114.md) |
@@ -153,6 +179,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-124 | Platform yöneticisinin "mentör/menti sayısı" neyi saysın: kişiyi mi, kurum üyeliğini mi | **0** (cevap 1 küçük iş açar) | ⬜ boş · ajan-ekledi · öneri C | C | [kart](kararlar/KARAR-124.md) |
 | KARAR-125 | Mentör/menti kendi kurumunu platforma önerebilsin mi ("ters çekim") | **0** | ⬜ boş · ajan-ekledi · öneri A | A (şimdilik) | [kart](kararlar/KARAR-125.md) |
 | KARAR-126 | Az yanıtlı ilk ayda "NPS düşüşü" önerisi çıkmasın mı (KVKK çıkarımı) | **0** | ⬜ boş · ajan-ekledi (AJ-69) · öneri B | B | [kart](kararlar/KARAR-126.md) |
+| KARAR-143 | Yeniden adlandırılacak iki menti arketipinin yeni adı ("Kâşif" · "İz Açan") | **0** · KARAR-45 (✍️ C) uygulamasının ad ayağı buna bağlı (IC-14 · IC-10 · AN-05 arketip adı ayağı) | ⬜ boş · ajan-ekledi (KARAR-45 C, PO NOTU 2026-10-21) · kullanıcıya görünen metin · öneri A | A | [kart](kararlar/KARAR-143.md) |
 
 ### ✅ Cevaplanmış (22)
 

@@ -11,7 +11,8 @@
 **Benim önerim:** C — can güvenliği konusunda "ya biri ya diğeri" riskli; ikisi de ucuz eklenir (e-posta altyapısı zaten var, statik ekran S efor).
 **Cevap vermezsen:** I-18/IC-13 🔴 KARAR-95 kilidinde kalır.
 **İlgili kartlar:** KARAR-4 (yardım ekranında gösterilecek destek kaynağı metni) · KARAR-31 (kriz bildirimi + yaş sınırı; bu kart onun kriz ayağı) · KARAR-71 (kırılgan kullanıcı, aynı ruh sağlığı uzmanı görüşü) — birlikte cevaplanması önerilir: KARAR-95 + KARAR-31 + KARAR-4
-**CEVAP:**
+**CEVAP:** Hiçbiri; kriz algılama/bildirim/yardım ekranı yapılmaz. KURAL: hiçbir metin (sertifika, kurum sayfası, pazarlama, belge) platformda bir kriz prosedürü ya da algılama sistemi olduğunu vaat etmez. Sertifika KONU 10 mentörün kişisel davranışını (dinle, ciddiye al, profesyonele yönlendir) öğretmeye devam eder. I-18 ve IC-13 "yapılmayacak" olarak işaretlenir.
+*kaynak: PO NOTU 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU · ajan yalnız aktardı (metin aynen).*
 
 ---
 

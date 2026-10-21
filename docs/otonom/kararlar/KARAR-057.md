@@ -10,7 +10,16 @@
 **Benim önerim:** A — md.162'nin "ortak buildDiscVector" önerisiyle aynı yön.
 **Cevap vermezsen:** kuyrukta bekleyen F-09, PS-03, I-12 bağlanamaz (`00-KUYRUK.md:129`; kaynak maddeler md.162, md.168, md.169). Eski listedeki PS-02 ✅ kapandı.
 **İlgili kartlar:** KARAR-42 (tekrar test aynı `discVector`'ı yeniden yazar) · KARAR-45 (sonuç kartının adı bu sonuçtan doğar) · KARAR-58 (Big Five geçişi hangi testin yaşayacağını belirler) · KARAR-62 (yeni senaryo ölçümünün akışı) · KARAR-108 (yollar arasında eşitlik sırası farkı) · KARAR-121 (testin cevap biçimi)
-**CEVAP:**
+**CEVAP:** A (tek havuz, tek formül). PO tasarımı:
+(1) İlk girişte yalnız 8 soruluk bölüm etkin; diğer bölümler görünür ama bulanık ve tıklanamaz; 8 soru bitince açılır.
+(2) Sonra kişi her sayfaya girdiğinde ekranın ortasında günlük soru çıkar. Kapatma düğmesi var; kapatırsa o gün tekrar sorulmaz.
+(3) Soru sınırı yok: her cevaptan sonra sıradaki soru gelir; kişi isterse tek oturumda tüm havuzu bitirir, isterse zamana yayar.
+(4) Kayıt 8 sorusu, günlük sorular ve 32 soruluk havuz aynı hesaba girer; tek formül.
+(5) /disc-test ayrı bir akış olmaktan çıkar; ona giden düğmeler (mentor/page.tsx, profile/page.tsx, menti/page.tsx) bu akışa bağlanır. Sayfa SİLİNMEZ (silme kuralı).
+(6) Profilde ve panelde ilerleme oranı görünür: "Kişilik profilin %X tamamlandı" (cevaplanan / toplam soru). Amaç teşvik. ⚠️ Bu, KARAR-60 (kişinin kendi kişilik puan yüzdesini görmesi) DEĞİLDİR; KARAR-60 avukatı bekliyor ve bu cevapla açılmaz.
+(7) Tip değişince bildirim/mesaj yok. Soru ekranında önceden bilgi notu: "Çözdüğünüz sorular eşleşmenizi daha sağlıklı hale getirir; cevaplarınıza göre ana kişilik tipiniz ya da yakın tipleriniz değişebilir." (anlam korunur, ifade düzeltilebilir)
+(8) "8 soruyu bitir" kilidi ile "yönetici onayı bekleniyor" kilidi ekranda ayrı nedenlerle yazılır.
+*kaynak: PO NOTU 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU · ajan yalnız aktardı (metin aynen).*
 
 ---
 

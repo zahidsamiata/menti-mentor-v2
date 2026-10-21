@@ -1,9 +1,18 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-09-29 ~10:30 UTC · çatı main HEAD (bu commit) · backend main HEAD `358e085` (= çatı pointer)
+**Son güncelleme:** 2026-10-21 · çatı main HEAD (bu commit) · backend pointer `358e085` (= backend origin/main, 2026-10-21 kontrol)
 
-**Durum:** DURDU (K1-a) — çalışılabilir iş kalmadı: 🟢 satırların hepsi kilitli/notlu; 🔵/🟡 PR'ları hazır, PO kararı bekliyor. TUR ÖZETİ: `02-ILERLEME.md` başı.
+**Durum:** DURDU (K1-a) → PO NOTU 2026-10-21 ile 6 karar cevaplandı (✍️, uygulama bekliyor). Sıradaki adım: PO OTONOM-PROMPT.txt'yi göndererek normal turu başlatır; tur önce ✍️ kartları işler. TUR NOTU: `02-ILERLEME.md` başı.
+
+**PO NOTU 2026-10-21 — cevaplanan kararlar (kart CEVAP satırında, metin aynen):** KARAR-101 → B (genişletilmiş) · KARAR-64 → C (Kişilik) · KARAR-95 → Hiçbiri · KARAR-57 → A (tek havuz, tek formül) · KARAR-45 → C · KARAR-63 → A + C. Yeni kart: **KARAR-143** (2 yeni arketip adı; öneri A "Gezgin" + "Adım Atan"). Avukata ayrılan ⚖️/🔒 kartlara dokunulmadı.
+**Kilidi açılan işler (00-KUYRUK + KARAR-BEKLEYEN işaretçilerine göre; satırların işlenmesi normal turda):**
+- KARAR-101 → Y1-B8 (PR backend #164 + çatı #343, genişletilmiş B kapsamına göre yeniden yazılacak)
+- KARAR-64 → I-11 · AN-10 (adlandırma ayağı) · AN-50 · AN-51 (diğer bağı KARAR-66 zaten ✅) · I-01 (KARAR-10/45/64 üçü de cevaplı)
+- KARAR-57 → F-09 · I-12 · PS-03 (⚠️ KARAR-42 "tekrar test" ile ilişkili, açık)
+- KARAR-45 → IC-14 · IC-10 (ad ayağı) · AN-05 (ad ayağı) — iki menti adı KARAR-143'e bağlı
+- KARAR-95 → I-18 · IC-13 "yapılmayacak" olarak kapanır (IC-13'ün menti ayağı KARAR-31'e — avukat — bağlı notu var)
+- KARAR-63 → kartta 0 iş; A ayağı (`scoring.config.ts:31` eşikleri) için iş satırı normal turda; C ayağı KARAR-62 bekler
 
 **Bu oturumda BITTI (27):** AJ-96 · 104 · 103 · 99 · 112 · 100 · 113 · 106 · 102 · 101 · 108 · 109 · 105 · 114 · 115 · 116 · 107 · 110 · 117 · 121 · 118 · 119 · 124 · 125 · 127 + DK-02 kod kısmı + kısmen: F-01 · AJ-120 (dilim 2 #488 merge; kalan KARAR-51) · AJ-122 (gözlem: sonraki CI koşularında deadlock yok) · AJ-126 (a) (b → KARAR-138). Ajan-ekledi: AJ-112 … AJ-127.
 
@@ -26,7 +35,7 @@
 |---|---|---|---|---|
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil (#420 main gerisinde) | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | backend #212 | AJ-50 ham DISC kart temizliği · 🔵 | yeşil | ✅ ONAY | KARAR-116 EVET + yedek (DB erişimi) |
-| backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | CONFLICTING | SORUN VAR (ürün) | KARAR-101 |
+| backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | CONFLICTING (2026-09-29) | SORUN VAR (ürün) | KARAR-101 ✍️ B (genişletilmiş) — kapsama göre yeniden yazılacak |
 | backend #157 + çatı #337 | AN-26 hatırlatma · 🔵 ⛔ | CONFLICTING | ✅ | KARAR-98 |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 ⛔ | CONFLICTING | ✅ | KARAR-97 |
 | backend #142 + çatı #320 | AN-30 granüler rıza · 🔵 ⛔ · çıkış blokeri | CONFLICTING | ✅ | KARAR-96 |

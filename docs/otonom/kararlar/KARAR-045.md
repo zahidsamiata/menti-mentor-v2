@@ -38,7 +38,8 @@ turda kapatmak ucuz.
 **Cevap vermezsen:** I-01 (yaklaşım metinleri), I-15 (arketip kartı), IC-14 (ham `M1` kodları) ve madde 139'un
 menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı. Kuyruk karşılığı: IC-14 + IC-10/AN-05'in arketip adı ayağı (`00-KUYRUK.md:128`); I-15 artık PS-A3 içinde.
 **İlgili kartlar:** KARAR-10 (cevaplı; arketip kodlarını üreten motor) · KARAR-48 (sonuç kartındaki kimlik etiketi dili) · KARAR-54 (havuz kartında arketip adı/rozet) · KARAR-57 (sonuç kartı hangi testten doğar) · KARAR-63 (hangi arketip kodu atanır — eşik kuralı) · KARAR-64 (kartın genel adı: mizaç/karakter/kişilik)
-**CEVAP:**
+**CEVAP:** C. 8 yeni arketip adı kullanılır; "Kâşif" ve onaysız "İz Açan" yeniden adlandırılır. Yeni 2 adı ajan önerir, PO onaylar (yeni kart; kullanıcıya görünen metin).
+*kaynak: PO NOTU 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU · ajan yalnız aktardı (metin aynen).*
 
 ---
 

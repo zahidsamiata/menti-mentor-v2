@@ -10,6 +10,16 @@
 | 2026-W39 (21-27 Eylül) | `docs/otonom/arsiv/02-ILERLEME-2026-W39.md` | Devir analizi + dört konsey (GV/PS/IC/YN) kuyruğa · KARAR cevapları (KARAR-80 çelişki paketi dahil) · 4 renk kapı ve uzun çalışma kipi · 209 BITTI biriminin son doğrulaması · AJ güvenlik/KVKK negatif test kovaları | Altı ayrı plan belgesi PO önceliğini 21 gün kuyruktan kaçırmıştı; turlar erken duruyordu; "BITTI" denen işlerin bir kısmı koda karşı tutmuyordu |
 | 2026-W40 (28 Eylül →) | bu dosya | T1 güvenlik/KVKK/veri kaybı işleri (AJ-51…AJ-87) · belge düzeni (GÖREV 2.x: bağlam ön ekleri, kart indeksi senkronu, duruma göre bölme) | Çıkış öncesi kalan güvenlik açıkları kapanıyor; sıcak dosyalar her turda gereksiz içerik okutuyordu |
 
+## TUR NOTU — PO NOTU 2026-10-21 kaydı (yalnız belge · uygulama YOK)
+
+- **NE:** PO'nun strateji katmanı üzerinden verdiği 6 karar repoya kaydedildi. PO NOTU metni `01-KARARLAR.md` § ✍️ PO NOTU alanına AYNEN yazıldı; her kararın metni kart dosyasının `**CEVAP:**` satırına aynen aktarıldı (kaynak satırı: "PO NOTU 2026-10-21"); indekste 6 satır ⬜ → ✍️ (uygulama bekliyor).
+- **CEVAPLAR:** KARAR-101 → B (genişletilmiş, PO tarifi) · KARAR-64 → C (Kişilik) · KARAR-95 → Hiçbiri (I-18 + IC-13 "yapılmayacak") · KARAR-57 → A (tek havuz, tek formül; 8 maddelik tasarım) · KARAR-45 → C · KARAR-63 → A + C (C → KARAR-62'ye bağlı).
+- **YENİ KART:** KARAR-143 — "Kâşif" ve "İz Açan" yerine iki ad (KARAR-45 C'nin istediği gibi ajan önerdi: A "Gezgin" + "Adım Atan" · B "Meraklı" + "Deneyen" · C "Ufuk Arayan" + "Yola Çıkan"; öneri A; CEVAP boş).
+- **AVUKATA AYRILANLAR:** ⚖️ KARAR-3 · 31 · 38 · 47 · 72 · 75 · 91 ve 🔒 KVKK kartları — dokunulmadı.
+- **İNDEKS SAYISI:** "Cevap bekleyen" başlığı (112) tablodaki gerçek satır sayısını tutmuyordu (121); KARAR-143 eklendikten sonra **(122)**. ✍️ satırlar normal tur işleyene kadar bu bölümde kalır.
+- **NEDEN:** PO toplu karar verdi; KARAR-PAKETI.md:2 kuralı ("cevaplar PO NOTU olarak gelir, ajan kart CEVAP satırına işler"). **KAYNAK:** PO NOTU 2026-10-21. **DURUM:** kayıt BITTI; uygulama normal otonom turda (00-KUYRUK / KARAR-BEKLEYEN satırlarının işlenmesi, PR #164/#343'ün yeniden yazılması dahil).
+- ⚠️ Haftalık döndürme (bu dosyada yalnız W40) bu kayıt turunda yapılmadı — normal turun işi.
+
 ## TUR ÖZETİ — devam turu 2026-09-29 (PO NOTU sonrası normal kuyruk · DURDU K1-a)
 
 **BITTI ve CANLIDA: 27 iş** (liste ve "kullanıcı artık şunu görüyor" cümleleri aşağıdaki tarihli satırlarda; özet `00-SIMDI.md`) — AJ-96 · 99-110 · 112-119 · 121 · 124 · 125 · 127 + DK-02 kod kısmı · kısmen: F-01 · AJ-120 (dilim 2 #488; kalan KARAR-51) · AJ-122 (cleanDb deadlock düzeltmesi #288 sonrası gözlenen CI koşularında 40P01 yok) · AJ-126 (a).

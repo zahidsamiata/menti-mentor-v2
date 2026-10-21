@@ -13,7 +13,8 @@
 **Cevap vermezsen:** Y1-B8 PR'ları (backend #164 / çatı #343) açık kalır; güvenlik açığı sürer. İki PR da bugün (2026-09-28, `gh pr view`) CONFLICTING: hangi seçenek gelirse gelsin rebase + yeni CI + bağımsız inceleme tekrarı gerekir; B seçilirse PR kapsamı da değişir.
 **İlgili işler:** AJ-20 · AJ-59 (neden: AJ-20 onay kapısını mentör sıralama ucuna ekledi — B seçeneğinin diğer uçlara yayacağı aynı `approvalGate.ts` yardımcısı; AJ-59 OAuth girişinde kurum durumuna göre yönlendirmeyi şifreli girişle eşitledi — bu kart aynı eşitlemeyi kullanıcının onay durumu için soruyor; ikisi de BITTI: `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md:445,624`)
 **İlgili kartlar:** KARAR-102 (doğrulanmamış yeni hesap girişten hemen sonra ne görür) · KARAR-84 (giriş kapısı: kim, hangi yoldan hesaba girer)
-**CEVAP:**
+**CEVAP:** B (genişletilmiş, PO tarifi). Onay bekleyen herkes şifre, Google ya da LinkedIn ile giriş yapabilir; iki giriş yolu eşit davranır. Kayıt sürecinin tamamını doldurabilir: kişilik testi (8 soru), mentör/menti soruları, profil. Eşleşme, mentör listesi, mesaj, randevu, talep ve anlaşma yönetici onayına kadar KAPALI (varsayılan kapalı, izin listesiyle). Geçerli davetle gelen onay beklemez (bu zaten var: authController register approvalStatus + oauthService U-06). PR backend #164 + çatı #343 bu kapsama göre yeniden yazılır.
+*kaynak: PO NOTU 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU · ajan yalnız aktardı (metin aynen).*
 
 ---
 
