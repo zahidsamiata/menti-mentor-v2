@@ -10,5 +10,6 @@
 **Benim önerim:** B — derneklerin toplu paylaşım alışkanlığını korurken sızıntıda yöneticiye kapatma imkânı verir.
 **Cevap vermezsen:** U-12 (çıkış blokeri) kilitli kalır.
 **İlgili kartlar:** KARAR-84 (C seçeneği e-postaya bağlı — aynı SMTP güvenilirliği) · KARAR-102 (kayıtta e-postayla kimlik kanıtı — aynı soru)
-**CEVAP:**
+**CEVAP:** A + B + C. Kurum yöneticisinin iki davet yolu olur: (1) toplu link — 7 gün geçerli, "linki iptal et" düğmesiyle kapatılabilir; (2) kişiye özel, e-postaya bağlı, tek kullanımlık davet. Sıra: önce A + B (çıkış blokeri bunlarla kapanır), C sonra (SMTP'nin canlıda çalıştığı teyit edilince). B/C migration ister → kural gereği yedek + PO onayı.
+*kaynak: PO NOTU EK 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU › PO NOTU EK · ajan yalnız aktardı (metin aynen).*
 

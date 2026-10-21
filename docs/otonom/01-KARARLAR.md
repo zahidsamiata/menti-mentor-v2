@@ -48,6 +48,22 @@ KARAR-63 → A + C. Herkes ana tipini ve yakın (ikinci) tipini görür; fark az
 AVUKATA AYRILANLAR: ⚖️ işaretli KARAR-3, 31, 38, 47, 72, 75, 91 ve 🔒 KVKK işaretli kartlar şimdilik avukata bırakıldı. Bu kartlara öneri/zorlama yapılmaz; kilitledikleri işler kilitli kalır.
 ```
 
+### PO NOTU EK · 2026-10-21
+
+> ⚙️ Ajan durumu (2026-10-21): aşağıdaki ek AYNEN yazıldı; KARAR-82 · 83 · 84 CEVAP'ları kart dosyalarına aktarıldı (indekste ✍️); KARAR-101 CEVAP satırının sonuna "GÜNCELLEME (PO NOTU EK 2026-10-21)" eklendi (önceki CEVAP silinmedi). Uygulama normal otonom turda.
+
+```text
+PO NOTU EK · 2026-10-21 · strateji katmanı üzerinden
+
+KARAR-101 → GÜNCELLEME (önceki notun "mentör listesi KAPALI" kısmının yerine geçer). Onay bekleyen kişi: giriş yapar, kayıt sürecini tamamlar, 8 soruyu ve günlük soruların tamamını çözer, sistemde gezinip inceleme yapabilir. Mentörleri YALNIZ isimsiz önizleme olarak görür (ör. "Bu programda 12 mentör var: 4'ü yazılım, 3'ü pazarlama"); ad, fotoğraf, profil detayı görünmez. Eşleşme, mesaj, talep, randevu ve anlaşma yönetici onayına kadar KAPALI. Gerekçe: onaylanmamış kişiye mentörlerin kişisel verisi açılmaz.
+
+KARAR-82 → A + B + C. Kurum yöneticisinin iki davet yolu olur: (1) toplu link — 7 gün geçerli, "linki iptal et" düğmesiyle kapatılabilir; (2) kişiye özel, e-postaya bağlı, tek kullanımlık davet. Sıra: önce A + B (çıkış blokeri bunlarla kapanır), C sonra (SMTP'nin canlıda çalıştığı teyit edilince). B/C migration ister → kural gereği yedek + PO onayı.
+
+KARAR-83 → A + C. Kurum yöneticisi kullanıcının rolünü değiştirebilir (MENTOR↔MENTI; yöneticilikten düşürmede hedef rol seçilir — bugünkü "her zaman MENTOR yazma" hatası biter). Rol değişince aktif eşleşmeler OLDUĞU GİBİ sürer. Sistemde önceki rol ve yeni rol görünür (rol tarihçesi). Bir kişi aynı kurumda hem yönetici hem mentör olmak isterse AYRI HESAP açar (hesap değiştirme özelliği yapılmaz; e-posta global benzersiz olduğu için ikinci e-posta gerekir). Rol tarihçesi migration isterse → yedek + PO onayı.
+
+KARAR-84 → B. E-posta çalışmazsa şifre sıfırlama bağlantısını YALNIZ platform yöneticisi üretir; her üretim iz kaydına yazılır.
+```
+
 ---
 
 ## 📑 İNDEKS
@@ -100,9 +116,9 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-76 | `Tenant.verifiedBy` alanı ne olsun (silme protokolü boşluğu) | **1** (AN-08 · AN-54) · 🔴 KARAR-BEKLEYEN: AN-08 | ⬜ boş · ⭐ silme protokolü · VERİ · öneri B (karantina) · ⚪ gereksiz adayı (niyet bulundu: backend 7365600 / schema.prisma:224; kalan iş AN-08 bağlaması — 3.4) | B | [kart](kararlar/KARAR-076.md) |
 | KARAR-78 | Dönemlik anket: bağla / karantina / beklet | **1** (KR-11) · 🔴 KARAR-BEKLEYEN: KR-11 | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) · ⚪ gereksiz adayı (KARAR-110 aynı sayfayı soruyor; KR-11 ≡ AJ-14 — 3.4) | B | [kart](kararlar/KARAR-078.md) |
 | KARAR-79 | Zamanlanmış iş tetikleme yetkisi kimde | **1** (KR-05) · 🔴 KARAR-BEKLEYEN: KR-05 | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı · ⚠️ B bugün kodda (AJ-17, adminController.ts:599-620); soru: B onay mı, A/C daraltma mı | A | [kart](kararlar/KARAR-079.md) |
-| KARAR-82 | Davet bağlantısı modeli | **1** (U-12) · 🔴 KARAR-BEKLEYEN: U-12 | ⬜ boş · çıkış blokeri · öneri B (iptal edilebilir toplu link) | B | [kart](kararlar/KARAR-082.md) |
-| KARAR-83 | Rolü kim, nasıl değiştirir | **1** (U-13) · 🔴 KARAR-BEKLEYEN: U-13 | ⬜ boş · çıkış blokeri · YETKİ · öneri B (yalnız düşürme hatası) | B şimdi, A ihtiyaç doğunca | [kart](kararlar/KARAR-083.md) |
-| KARAR-84 | E-posta yokken şifre sıfırlama | **1** (U-15) · 🔴 KARAR-BEKLEYEN: U-15 | ⬜ boş · çıkış blokeri · YETKİ · öneri B (platform yöneticisi) | B | [kart](kararlar/KARAR-084.md) |
+| KARAR-82 | Davet bağlantısı modeli | **1** (U-12) · 🔴 KARAR-BEKLEYEN: U-12 | ✍️ CEVAP (PO NOTU EK 2026-10-21): A + B + C (önce A + B; C SMTP teyidi sonra; B/C migration → yedek + PO onayı) · uygulama bekliyor · çıkış blokeri · öneri B (iptal edilebilir toplu link) | B | [kart](kararlar/KARAR-082.md) |
+| KARAR-83 | Rolü kim, nasıl değiştirir | **1** (U-13) · 🔴 KARAR-BEKLEYEN: U-13 | ✍️ CEVAP (PO NOTU EK 2026-10-21): A + C (kurum yöneticisi rol değiştirir + rol tarihçesi; tarihçe migration isterse → yedek + PO onayı) · uygulama bekliyor · çıkış blokeri · YETKİ · öneri B (yalnız düşürme hatası) | B şimdi, A ihtiyaç doğunca | [kart](kararlar/KARAR-083.md) |
+| KARAR-84 | E-posta yokken şifre sıfırlama | **1** (U-15) · 🔴 KARAR-BEKLEYEN: U-15 | ✍️ CEVAP (PO NOTU EK 2026-10-21): B (yalnız platform yöneticisi; her üretim iz kaydına) · uygulama bekliyor · çıkış blokeri · YETKİ · öneri B (platform yöneticisi) | B | [kart](kararlar/KARAR-084.md) |
 | KARAR-85 | Yeni ortamda DISC soru havuzu | **1** (U-17) · 🔴 KARAR-BEKLEYEN: U-17 | ⬜ boş · çıkış blokeri · SEED · öneri A (silmeyen betik) | A | [kart](kararlar/KARAR-085.md) |
 | KARAR-87 | Birden çok platform yöneticisi olacak mı? | **1** (AN-38) · 🔴 KARAR-BEKLEYEN: AN-38 | ⬜ boş · yetki · öneri A (tek hesap kalsın) | A | [kart](kararlar/KARAR-087.md) |
 | KARAR-93 | Üyeyi kurumdan çıkarma — 30 gün sonra kişilik verisi silme onayı | **1** (Y-14) · 🔴 KARAR-BEKLEYEN: Y-14 | ⬜ boş · CANLI VERİ SİLME · evet/hayır · öneri B şimdi | B şimdi, silme adımı A olarak ayrı PR'da (sen "evet" dersen) | [kart](kararlar/KARAR-093.md) |
@@ -164,7 +180,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-91 | Görüşme değerlendirmeleri saklama süresi | **1** · kart metni eski: "(1 iş açar)"; güncel: 0 iş | ⬜ boş · KVKK/hukuki · öneri C şimdi | C şimdi (dışa aktarım teknik bir düzeltme, 🟡), süre için huk… | [kart](kararlar/KARAR-091.md) |
 | KARAR-92 | Oryantasyon kilidi tetiklensin mi | **1** · kart metni eski: "(1 iş açar)"; güncel: 0 iş | ⬜ boş · öneri B (2 ardışık) | B | [kart](kararlar/KARAR-092.md) |
 | KARAR-100 | `ProfileSource.SJT_ENRICHED` değeri ne olsun (silme protokolü — gerekçe bulunamadı) | **0** (AN-54 bulgusu) | ⬜ boş · KARAR-76 ile aynı tür soru | A | [kart](kararlar/KARAR-100.md) |
-| KARAR-101 | Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi) | **1** (Y1-B8 — PR #164/#343) · kart metni eski: "(1 iş açar: Y1-B8)"; güncel: 0 iş | ✍️ CEVAP (PO NOTU 2026-10-21): B (genişletilmiş, PO tarifi) · uygulama bekliyor — PR #164/#343 bu kapsama göre yeniden yazılır · güvenlik + ürün · öneri B · ⚠️ PR backend #164 + çatı #343 CONFLICTING (2026-09-28) | B | [kart](kararlar/KARAR-101.md) |
+| KARAR-101 | Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8'in kapatılma biçimi) | **1** (Y1-B8 — PR #164/#343) · kart metni eski: "(1 iş açar: Y1-B8)"; güncel: 0 iş | ✍️ CEVAP (PO NOTU 2026-10-21): B (genişletilmiş, PO tarifi) + GÜNCELLEME (PO NOTU EK 2026-10-21): mentörler yalnız isimsiz önizleme · uygulama bekliyor — PR #164/#343 bu kapsama göre yeniden yazılır · güvenlik + ürün · öneri B · ⚠️ PR backend #164 + çatı #343 CONFLICTING (2026-09-28) | B | [kart](kararlar/KARAR-101.md) |
 | KARAR-104 | Uyum eşiğini geçen tek mentör randevuya kapalıysa menti ne görsün | **0** (PS-A4 sonrası ince ayar) | ⬜ boş · ajan-ekledi (PS-A4 7b notu) · öneri A | A | [kart](kararlar/KARAR-104.md) |
 | KARAR-108 | DISC eşitlik sırası iki yerde farklı — tek kaynak hangisi | **0** (bugün etkisi yok) | ⬜ boş · psikometri · öneri A | A | [kart](kararlar/KARAR-108.md) |
 | KARAR-114 | Tarayıcı bildirimi gerçekten gönderilsin mi? (AJ-39 sonrası) | **0** (yeni özellik sorusu) | ⬜ boş · ajan-ekledi · öneri A | A | [kart](kararlar/KARAR-114.md) |

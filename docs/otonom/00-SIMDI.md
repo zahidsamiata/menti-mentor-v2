@@ -3,11 +3,14 @@
 
 **Son güncelleme:** 2026-10-21 · çatı main HEAD (bu commit) · backend pointer `358e085` (= backend origin/main, 2026-10-21 kontrol)
 
-**Durum:** DURDU (K1-a) → PO NOTU 2026-10-21 ile 6 karar cevaplandı (✍️, uygulama bekliyor). Sıradaki adım: PO OTONOM-PROMPT.txt'yi göndererek normal turu başlatır; tur önce ✍️ kartları işler. TUR NOTU: `02-ILERLEME.md` başı.
+**Durum:** DURDU (K1-a) → PO NOTU 2026-10-21 ile 6 karar + PO NOTU EK 2026-10-21 ile 3 karar cevaplandı, KARAR-101 güncellendi (✍️, uygulama bekliyor). Sıradaki adım: PO OTONOM-PROMPT.txt'yi göndererek normal turu başlatır; tur önce ✍️ kartları işler. TUR NOTU: `02-ILERLEME.md` başı.
 
 **PO NOTU 2026-10-21 — cevaplanan kararlar (kart CEVAP satırında, metin aynen):** KARAR-101 → B (genişletilmiş) · KARAR-64 → C (Kişilik) · KARAR-95 → Hiçbiri · KARAR-57 → A (tek havuz, tek formül) · KARAR-45 → C · KARAR-63 → A + C. Yeni kart: **KARAR-143** (2 yeni arketip adı; öneri A "Gezgin" + "Adım Atan"). Avukata ayrılan ⚖️/🔒 kartlara dokunulmadı.
 **Kilidi açılan işler (00-KUYRUK + KARAR-BEKLEYEN işaretçilerine göre; satırların işlenmesi normal turda):**
-- KARAR-101 → Y1-B8 (PR backend #164 + çatı #343, genişletilmiş B kapsamına göre yeniden yazılacak)
+- KARAR-101 → Y1-B8 (PR backend #164 + çatı #343, genişletilmiş B kapsamına göre yeniden yazılacak; ⭐ EK güncellemesi: onay bekleyen mentörleri YALNIZ isimsiz önizleme olarak görür — ad/fotoğraf/profil yok)
+- KARAR-82 (EK) → U-12 — önce A + B; C SMTP teyidinden sonra; B/C migration → 🔵 yedek + PO onayı
+- KARAR-83 (EK) → U-13 — A + C; rol tarihçesi migration isterse → 🔵 yedek + PO onayı · ilişkili açık kart: KARAR-124
+- KARAR-84 (EK) → U-15 — B (yalnız platform yöneticisi, iz kaydıyla)
 - KARAR-64 → I-11 · AN-10 (adlandırma ayağı) · AN-50 · AN-51 (diğer bağı KARAR-66 zaten ✅) · I-01 (KARAR-10/45/64 üçü de cevaplı)
 - KARAR-57 → F-09 · I-12 · PS-03 (⚠️ KARAR-42 "tekrar test" ile ilişkili, açık)
 - KARAR-45 → IC-14 · IC-10 (ad ayağı) · AN-05 (ad ayağı) — iki menti adı KARAR-143'e bağlı

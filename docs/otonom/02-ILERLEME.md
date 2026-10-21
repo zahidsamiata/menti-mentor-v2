@@ -10,6 +10,12 @@
 | 2026-W39 (21-27 Eylül) | `docs/otonom/arsiv/02-ILERLEME-2026-W39.md` | Devir analizi + dört konsey (GV/PS/IC/YN) kuyruğa · KARAR cevapları (KARAR-80 çelişki paketi dahil) · 4 renk kapı ve uzun çalışma kipi · 209 BITTI biriminin son doğrulaması · AJ güvenlik/KVKK negatif test kovaları | Altı ayrı plan belgesi PO önceliğini 21 gün kuyruktan kaçırmıştı; turlar erken duruyordu; "BITTI" denen işlerin bir kısmı koda karşı tutmuyordu |
 | 2026-W40 (28 Eylül →) | bu dosya | T1 güvenlik/KVKK/veri kaybı işleri (AJ-51…AJ-87) · belge düzeni (GÖREV 2.x: bağlam ön ekleri, kart indeksi senkronu, duruma göre bölme) | Çıkış öncesi kalan güvenlik açıkları kapanıyor; sıcak dosyalar her turda gereksiz içerik okutuyordu |
 
+## TUR NOTU — PO NOTU EK 2026-10-21 kaydı (yalnız belge · uygulama YOK)
+
+- **NE:** PO'nun aynı oturumdaki eki kaydedildi. Ek, `01-KARARLAR.md` § ✍️ PO NOTU altında "PO NOTU EK · 2026-10-21" başlığıyla AYNEN yazıldı (önceki not silinmedi). KARAR-82 → A + B + C · KARAR-83 → A + C · KARAR-84 → B kart CEVAP satırlarına aynen aktarıldı (kaynak "PO NOTU EK 2026-10-21"); indekste ⬜ → ✍️. KARAR-101: önceki CEVAP silinmedi, satır sonuna "· GÜNCELLEME (PO NOTU EK 2026-10-21): …" eklendi (PO yetkilendirdi) — mentörler yalnız isimsiz önizleme.
+- **KİLİDİ AÇILAN:** U-12 (KARAR-82) · U-13 (KARAR-83) · U-15 (KARAR-84) — üçünün tek kilidi bu kartlardı; B/C (82) ve rol tarihçesi (83) migration isterse 🔵 yedek + PO onayı.
+- **NEDEN / KAYNAK:** PO NOTU EK 2026-10-21 (strateji katmanı). **DURUM:** kayıt BITTI; uygulama normal turda. İndeks başlığı değişmedi (122): ✍️ satırlar aynı bölümde kalır.
+
 ## TUR NOTU — PO NOTU 2026-10-21 kaydı (yalnız belge · uygulama YOK)
 
 - **NE:** PO'nun strateji katmanı üzerinden verdiği 6 karar repoya kaydedildi. PO NOTU metni `01-KARARLAR.md` § ✍️ PO NOTU alanına AYNEN yazıldı; her kararın metni kart dosyasının `**CEVAP:**` satırına aynen aktarıldı (kaynak satırı: "PO NOTU 2026-10-21"); indekste 6 satır ⬜ → ✍️ (uygulama bekliyor).
