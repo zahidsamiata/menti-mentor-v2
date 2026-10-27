@@ -1,15 +1,15 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `7d53871` · backend main `bfe0af9` (çatı pointer `e69a2c1`; U-15 backend merge edildi, çatı #493 CI'da)
+**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `8d6fec3` · backend main `bfe0af9` (= çatı pointer)
 
 **Durum:** ÇALIŞIYOR. Oturum PO'nun Windows bilgisayarında (Cursor): Node 24 (CI/canlı 22 — kanıt CI), gh girişli, Python 3.15 (`py`). ⚠️ Bu bilgisayarda bekçi için iki ortam ayarı gerekiyor: (1) `python3` → `py` kısayolu (PATH başı), (2) bekçinin öz-testleri (`belge-bekci.test.sh`) Windows'ta 4-5 vakada düşüyor — Git Bash grep 3.0 emoji eşleştiremiyor ve Python yolları `\` ile yazıyor; ortamsal, CI'da (Linux) aynı testler yeşil. Bu yüzden `npm run verify` burada bekçi adımında kırmızı; diğer adımlar tek tek koşuluyor (tsc · tsc-test · eslint · birim · fe tsc · vitest · build), bekçinin repo denetimi ayrıca koşuyor (HATA yok).
 
-**Şu an yapılan:** → U-15 (çatı #493 CI) · 🔵 PO bekleyen: → U-12B (KARAR-144) · → U-13C (KARAR-145). Sıradaki: AN-50 + AN-10 kalan ayak.
+**Şu an yapılan:** AN-50 + AN-10 kalan ayak (kişilik + yönlendirme dili) — envanter. 🔵 PO bekleyen: → U-12B (KARAR-144) · → U-13C (KARAR-145).
 
 **Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** AN-50 + AN-10 kalan ayak (kişilik + yönlendirme dili, tek PR) → PN-06 → PN-03 → PS-03 → I-12.
 
-**Son merge'ler:** Y1-B8 onay bekleyen kapısı — backend #313 + çatı #491 (`7d53871`; canlı yeniden başladı, `/health` ok:true db:up) · U-13 rol değiştirme — #315 + #492 (`7a15fcc`) · U-12 davet 7 gün — #312 + #490 (`3004219`) · backend merge, çatısı bekleyen: U-15 #317 (`bfe0af9`).
+**Son merge'ler:** U-15 sıfırlama bağlantısı — backend #317 + çatı #493 (`8d6fec3`; canlı yeniden başladı, `/health` ok:true db:up smtp:verified) · Y1-B8 — #313 + #491 (`7d53871`) · U-13 — #315 + #492 (`7a15fcc`) · U-12 — #312 + #490 (`3004219`).
 
 **PO bekleyen hazır PR'lar (hepsi 7b ONAY):**
 - 🔵 E-4 karantina — backend #289 + çatı #474 · **KARAR-134**
@@ -27,7 +27,6 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #493 | U-15 sıfırlama bağlantısı · 🟢+7b | bekliyor | ✅ ONAY | backend #317 merge ✓; main birleştir + CI → merge |
 | backend #319 + çatı #494 | U-12B davet iptal · 🔵 ⛔ MIGRATION | bekliyor | ✅ ONAY | **KARAR-144** EVET (yedek gerekmez) |
 | backend #320 + çatı #495 | U-13C rol tarihçesi · 🔵 ⛔ MIGRATION | bekliyor | ✅ ONAY | **KARAR-145** EVET (yedek gerekmez) |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil (#420 main gerisinde) | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
