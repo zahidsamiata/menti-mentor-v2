@@ -53,18 +53,6 @@
 |---|---|---|---|---|---|---|
 | E-5 | Ş0 | **GERÇEK SİLME** — yalnız karantina bir tur sorunsuz geçtiyse ve KARAR-11 "sil" diyorsa. Arşiv belgesi zaten hazır. | 🔴 KARAR-11 + karantina turu geçmiş | Silinenler listesi + arşivden geri alma yolu çalışıyor | BEKLIYOR | ⚠️ **KİLİT AÇILMADI (2026-09-21) — kasıtlı.** KARAR-11 cevaplandı (**A = karantina → bir tur bekle → sonra sil**) ama bu satırın kapısı **İKİ şartlıydı**: *"KARAR-11 + karantina turu geçmiş"*. **İkinci şart hâlâ sağlanmadı** (karantina turu yapılmadı). Ayrıca `CLAUDE.md` § SİLME PROTOKOLÜ adım 5 açık: *"Karantina 🟡'dır, **gerçek silme 🔴'dır**"* ve silme **PO'nun İKİNCİ onayını** ister ⇒ bu satır cevap gelse de 🔴 kalır. ⭐ **Açılan kısım `K-13`'tedir** (karantina ayağı, zaten 🟡) — oradan ilerlenir, bu satır karantina turu sorunsuz geçince PO'nun ikinci onayıyla açılır. |
 
-## KARAR-12
-
-**Konu:** Görüşme geri bildirim kayıt sistemi · kart: `docs/otonom/kararlar/KARAR-012.md`
-
-**Aktif kuyrukta ayrıca bekleyen (satır `00-KUYRUK.md`'de kalır):** AJ-99 (olası ürün sorusu: mentör kendi geri bildirimini görsün mü (uygulayıcı önce kontrol eder))
-
-**Geri dönüş yeri:** AJ-38 → 00-KUYRUK § AJAN-EKLEDİ SATIRLAR (K-C · PO kararı 2026-09-26, kalıcı)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| AJ-38 | Ş0 | **Yöneticinin "Başarı oranı" kartı hiç dolmayacak** — ekran "yeterli değerlendirme yok" diyor ama değerlendirme toplayan ekran yok (PS-05 kalanı). | 🔴 KARAR-12 / KARAR-44 | Kart gerçek veriyle doluyor ya da neden boş olduğunu doğru söylüyor | BEKLIYOR | ajan-ekledi 2026-09-27 · kaynak: `docs/raporlar/kod-denetimi/bitti-dogrulama-2026-09-27.md` (PS-05, QE2) · kanıt: `backend/src/controllers/feedbackLogController.ts:86` tek yazıcı; ön yüzden çağrı 0 · eski BITTI: PS-05 `docs/otonom/arsiv/00-KUYRUK-bitti-2026-09.md:268` · karar gerekebilir: hangi memnuniyet ölçüsü toplanacak (KARAR-12/44) |
-
 ## KARAR-15
 
 **Konu:** Çok-kuruma üye kurumlar arası geçiş · kart: `docs/otonom/kararlar/KARAR-015.md`
@@ -146,18 +134,6 @@
 | # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
 |---|---|---|---|---|---|---|
 | P-15 | Ş0 | **Mentör kapasite/doluluk dengesi yok.** "Aktif Mentilerim" bir tavanla kıyaslanmıyor; "hangi noktadan sonra yük" kavramı kodlanmamış. NEDEN: mentörün kaç menti alabileceğine dair bir tavan yok; aşırı yüklenme görünmüyor (MT13). | 🔴 KARAR-41 | Mentör doluluk/kapasite durumunu görüyor | BEKLIYOR | hassasiyet: kapsam belirsiz — "kapasite kavramı olsun mu" ürün kararı (kart gerekebilir). =MT13 (⬜). Kanıt: capacity/kapasite/maxMenti 0 sonuç (mentör-bazlı). Efor M ⚠️ = psikometri konseyi §5 D.5, Kanıt: kapasite kavramı kodda YOK (kapsam BE src/ · prisma/ · tests/, 7 terim iki dilli harf duyarsız → ilgili 0 eşleşme) ve scoreAndFilter'ın hiçbir continue koşulu (matching.ts:267,270,274,278,283) aktif menti sayısını sorgulamıyor. · aile: Y-? (belirsiz — kapsam/ürün kararı, KARAR-41 bekliyor) · geçmiş: bkz. arsiv/00-KUYRUK-gecmis.md § P-15 (2026-09-28, AJ-68) |
-
-## KARAR-44
-
-**Konu:** Algoritma kendi sonuçlarından öğrensin mi + hangi memnuniyet "gerçek" · kart: `docs/otonom/kararlar/KARAR-044.md`
-
-**Geri dönüş yeri:** F-08 → 00-KUYRUK § AŞAMA F — BİLANÇO DEVRİ (2026-08-28 öncelik sırası → koda karşı doğrulandı 2026-09-19)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| F-08 | Ş0 | **Sektör asimetri paydası (G2-09).** Sektör skoru paydası menti-etiket sayısı yerine iki tarafın etiket **birleşimi** olmalı (B9.4). NEDEN: sektör skoru tek tarafın etiket sayısına bölünüyor; eşleşme puanı asimetrik ve yanıltıcı (G2-09). | 🔴 KARAR-44 | Sektör skoru simetrik paydayla hesaplanıyor | BEKLIYOR | hassasiyet: matching/skorlama (`scoring.ts`). =G2-09, Faz 5. KARAR-10'dan bağımsız küçük iş. Kanıt: `scoring.ts:34-40` payda `mentiSet.size` ⚠️ = psikometri konseyi §2 A.2, ek bulgu: güncel main'de HÂLÂ AÇIK — scoring.ts:40 paydası mentiSet.size (2026-09-21 teyidi); ayrıca ağırlık DÖRT yerde tanımlı (scoring.ts:89-90 · algorithmTuner.ts:28-33 · matching.ts:38 · scoring.config.ts:48) ve dördüncüsü ölü zincire ait. · aile: Y-C · ⛔ **çelişki: KARAR-80/M19** (2026-09-25) · KARAR-80 işlendi (2026-09-26, A kabul) — M19: açık karara bağlandı, CEVAPSIZ. |
-
-→ bkz. AJ-38 (KARAR-12 grubunda)
 
 ## KARAR-46
 
@@ -358,12 +334,14 @@
 
 **Aktif kuyrukta ayrıca bekleyen (satır `00-KUYRUK.md`'de kalır):** AN-49 (kart KARAR-89 bu işi kilitlediğini söylüyor (tek değerlendirme kutusu))
 
-**Geri dönüş yeri:** KR-08 → 00-KUYRUK § ⛔⛔⛔ EN ÜST — KOD İNCELEMESİ BULGULARI (KR, 2026-09-24 taraması · 2026-09-25 kuyruğa işlendi) · AJ-49 → 00-KUYRUK § AJAN-EKLEDİ SATIRLAR (K-C · PO kararı 2026-09-26, kalıcı)
+**Geri dönüş yeri:** KR-08 → 00-KUYRUK § ⛔⛔⛔ EN ÜST — KOD İNCELEMESİ BULGULARI (KR, 2026-09-24 taraması · 2026-09-25 kuyruğa işlendi) · AJ-49 → 00-KUYRUK § AJAN-EKLEDİ SATIRLAR (K-C · PO kararı 2026-09-26, kalıcı) · PN-10 · PN-11 → 00-KUYRUK § ⭐ AŞAMA PN
 
 | # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
 |---|---|---|---|---|---|---|
 | KR-08 | Ş0 | **Bir görüşmeye yalnız bir taraf değerlendirme yazabiliyor (rapor A5).** NEDEN: görüşmede ilk yazan tarafın değerlendirmesi kaydediliyor, diğerininki kayboluyor (kod inceleme A5). | 🔴 KARAR-89 | (karara göre) Mentör ve menti aynı görüşmeye ayrı ayrı değerlendirme yazabiliyor | BEKLIYOR | Dosyalar: `backend/prisma/schema.prisma` · `backend/src/controllers/feedbackController.ts`. Rapor: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A5 [D]. ⛔ **MIGRATION** → tarihli yedek tablo + PO onayı (Y-G kuralları). İlişkili: AN-47 (geri bildirim modelleri envanteri). · aile: Y-KR · ⭐ **KARAR-77=A (2026-09-25).** Görünürlük testle kanıtlanacak (karşı taraf göremez · yönetici görür · yazan kendini görür). Önce AN-47 envanterine bak; çelişki varsa BASARISIZ + sebep. Mevcut kayıtların 'yazan kim' yorumu PR açıklamasında örnekle gösterilecek. · ⛔ **ÇELİŞKİ (2026-09-25, AN-47):** `MeetingCheckIn` KARAR-77=A'nın istediği taraf-başına kaydı zaten uyguluyor; `Feedback` bölünürse ikinci kutu doğar → **KARAR-89** cevaplanana kadar dokunulmaz. · geçmiş: bkz. arsiv/00-KUYRUK-gecmis.md § KR-08 (2026-09-28, AJ-68) |
 | AJ-49 | Ş0 | **Görüşme değerlendirmesini (Feedback) okuma ucunun sahibi yok** — `GET /api/meetings/:meetingId/feedback` korumalı ama hiçbir ekran çağırmıyor; tabloya yazan tek ekran (dönemsel anket) AJ-14'te bozuk. E-3e bunu değil check-in'i okuyor. | 🔴 KARAR-89 (+KARAR-110) | Değerlendirme ekranda görünüyor ya da uç bilinçli iç kullanımda bırakıldı ve belgede yazılı | BEKLIYOR | ajan-ekledi 2026-09-27 · kaynak: `bitti-dogrulama-2026-09-27.md` § GÖREV B teyit (e3:30/:66), 7b #379 N1 · kanıt: `backend/src/controllers/feedbackController.ts:153-200` (tenant `:163`, taraf kapısı `:173-175`); ön yüz GET çağrısı yok (`frontend/src`, yalnız POST `periodic-survey/page.tsx:55`); iç okuyucu `backend/src/services/scoring.ts:129` · karar gerekebilir: Feedback tablosu kalsın mı (KARAR-89) · `PATCH /api/meetings/:id` ön yüzde çağrılmıyor → silme protokolü adayı (SİLME YOK) |
+| PN-10 | Ş0 | **NPS sorusu 3. ay görüşme değerlendirmesine TEK soru olarak (KARAR-44 C md.4).** "Bu mentörlük programını bir arkadaşına önerir misin? 0-10" (anlam korunur, ifade düzeltilebilir). Yönetici KPI "NPS" kartı ve mentör paneli "Ortalama NPS" kartı bu tek kaynaktan dolar; küçük grup gizlilik maskesi korunur. NEDEN: memnuniyet bugün hiçbir ekrandan toplanmıyor; iki NPS alanı da boş, iki kart da daima boş. | 🔴 KARAR-89 | Eşleşmesinin 3. ayındaki görüşmeyi değerlendiren kişi formda tek NPS sorusunu görüyor; cevaplar yönetici KPI ve mentör panelindeki NPS kartlarında (en az 3 yanıtla) görünüyor | BEKLIYOR | ajan-ekledi 2026-10-27 · kaynak: KARAR-44 ✅ C md.4 + KARAR-12 ✅ (PO NOTU 2026-10-27) · **kilit: hangi kutuya yazılacağı KARAR-89** (PO: "KARAR-89'a bağlıdır"; ajan önerisi kartta: B — `MeetingCheckIn`'e tek NPS alanı; migrationsız ara yol: check-in formundan `FeedbackLog` phase 3) · kanıt: check-in'de aşama/ay ayrımı yok (`backend/prisma/schema.prisma:586-619`); "3. ay" yalnız `FeedbackLog.phase` (`feedbackLogController.ts:24,36-38`), ön yüz çağrısı 0; NPS okuyanları `algorithmTuner.ts:175-194` · `kpiReport.service.ts:127-132` · `mentorMetricsController.ts:55-60,111-115`; maske `utils/mask.ts:52,70,106`. "3. ay" tanımı (eşleşme başlangıcından ≥ 90 gün sonraki ilk değerlendirme) ajan kararı, PR'da belgelenir. ⚠️ Ölçek hatası (0-10 ortalama ↔ 70 eşiği) KODDA ZATEN DÜZELTİLMİŞ: `algorithmTuner.ts:48-60` (KR-07); kalan yalnız `backend/README.md:359` örnek `"npsScore": 85` → bu PR'da düzeltilir. Sonra: PN-11. |
+| PN-11 | Ş2 | **Periyodik anket sayfası (`/periodic-survey`) + kullanılmayan NPS alanı — SİLME PROTOKOLÜ (KARAR-44 C md.4).** NEDEN: NPS 3. ay değerlendirmesine taşınınca ayrı anket sayfası ve ikinci NPS alanı mükerrer kalır; PO "ayrı anket kalkar" dedi. | 🔴 KARAR-89 (sonra 🔵 karantina) | `/periodic-survey` açılınca kullanıcı panele yönlendiriliyor (karantina); kullanılmayan NPS alanı yazılmıyor; arşiv kaydı `docs/arsiv/silinenler-*.md`'de; gerçek silme PO'nun ikinci onayıyla | BEKLIYOR | ajan-ekledi 2026-10-27 · kaynak: KARAR-44 ✅ C md.4 ("SİLME KURALI ile") · niyet: sayfa `d94c285` (2026-07-07 "complete final frontend forms and surveys"), alanlar backend `36746b2` (migration `20260707100000_add_meeting_checkin`) · ikame: PN-10 (önce o canlıda olmalı) · bağlantı: sayfaya giden bağlantı 0 (kapsam `frontend/src` + `backend/src`, desen `periodic-survey`). Hangi NPS alanının "kullanılmayan" olduğu KARAR-89'a bağlı (B → `Feedback.periodicNpsScore` + `FeedbackLog.npsScore`; ara yol → yalnız `Feedback.periodicNpsScore`). Karantina 🔵 (EVET kartı), gerçek silme 🔴 (ikinci onay). Kapsamı değişen satırlar: KR-11 (KARAR-78) · AJ-14 (KARAR-110) — kart başı notları. PN-10'dan SONRA. |
 
 ## KARAR-93
 

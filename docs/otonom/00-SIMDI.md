@@ -1,13 +1,13 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-10-27 · çatı main HEAD (bu commit) · backend pointer `358e085` (= backend origin/main, 2026-10-27 `git fetch` ile; submodule'de yeni commit yok)
+**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main HEAD (bu commit) · backend pointer `358e085` (= backend origin/main)
 
-**Durum:** DURDU (K1-a — BU ORTAMDA yapılabilir iş kalmadı). Oturum PO'nun Windows bilgisayarında (Cursor); `node`/`npm`, `gh`, `python` yok → verify, bekçi, PR, merge yapılamıyor. Belge işi (PO NOTU md.4) yapıldı ve push edildi. Kuyrukta 15 çalışılabilir 🟢 iş var ama araç bekliyor. TUR ÖZETİ: `02-ILERLEME.md`.
+**Durum:** ÇALIŞIYOR. Oturum PO'nun Windows bilgisayarında (Cursor), araçlar kurulu: Node 24 (CI/canlı 22 — kanıt CI), gh girişli, Python 3.15 (`py`). ⚠️ Bekçi `python3` çağırıyor → bu bilgisayarda `py`'ye yönlenen geçici kısayolla (PATH başına `python3` → `exec py "$@"`) çalıştırılıyor; HATA yok.
 
-**Şu an yapılan:** yok. Bu turda yapılan (yalnız belge): PO NOTU 2026-10-21 + EK'teki 9 kararın açtığı işler `00-KUYRUK.md` § ⭐ AŞAMA PN'ye alındı ve en üste çekildi; 9 kart arşive; 02-ILERLEME haftalık döndürme (W40 + W43 → arşiv); git kimliği ayarlandı.
+**Şu an yapılan:** PO NOTU 2026-10-27 (KARAR-143 · 44 · 12) işlendi → § AŞAMA PN'ye AJ-38 · F-08 · PN-09 · PN-12; KARAR-89'a PN-10 · PN-11. Sıradaki: § AŞAMA PN kod işleri.
 
-**Sıradaki 5 iş (araçlı ilk oturumda, § AŞAMA PN öncelik sırası):** Y1-B8 (onay bekleyen kullanıcı kapısı, güvenlik — eski PR #164/#343 yerine yeni dal) → U-12 (davet 7 gün) → U-13 (rol değiştirme + düşürmede hedef rol) → U-15 (platform yöneticisi sıfırlama bağlantısı) → U-12B (🔵 iptal edilebilir davet linki).
+**Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** Y1-B8 (onay bekleyen kullanıcı kapısı, güvenlik — eski PR #164/#343 yerine yeni dal) → U-12 (davet 7 gün) → U-13 (rol değiştirme + düşürmede hedef rol) → U-15 (platform yöneticisi sıfırlama bağlantısı) → U-12B (🔵 iptal edilebilir davet linki).
 
 **Son merge'ler:** bu turda yok (son: AJ-120 dilim 2 #488, 2026-09-29).
 
@@ -45,11 +45,10 @@
 **Push edilmemiş iş:** yok. **Stash:** yok. **Worktree:** yok.
 
 **Engeller:**
-- ⛔ **ORTAM (2026-10-27): bu bilgisayarda `node`/`npm`, `gh`, `python` yok.** `npm run verify` koşamaz · bekçi çalışmadı: python3 yok (PO NOTU md.2 — 🟢 iş merge edilmez) · `gh` olmadığı için PR açılamaz/merge edilemez/CI okunamaz. Kod işi başlatılmadı. Çözüm (kurulum komutları ya da VPS): `03-PO-ELLE-ISLER.md` en üstteki 2026-10-27 maddesi.
-- ✅ Bekçi lokalde çalışmadı (python yok) ama `b299fc7` için CI "Belge bekçisi (aktif/arşiv)" işi YEŞİL (çatı CI run 40469273751, tüm işler success; herkese açık GitHub API ile okundu). UYARI satırları log ister (gh yok) — araçlı ilk oturumda `bash scripts/belge-bekci.sh` ile bakılmalı.
+- ✅ ORTAM çözüldü (2. oturum, 2026-10-27): node · gh · py var; bekçi lokalde koştu (HATA yok, 33 UYARI — boyut eşikleri + bilinen "kısmen" satırları).
 - 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + 5 tablo yedeği) · AJ-50 · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek: AN-30 · U-18 · AN-26 · AN-02. (DATABASE_URL bu bilgisayarda yok ve kurulmaz — K8.3.)
 
-**PO'ya sorular:** KARAR-143 (iki menti arketipinin yeni adı — IC-14 · I-01 · IC-10 · AN-05'in ad ayağını kilitliyor; öneri A "Gezgin" + "Adım Atan") · 🔵 EVET/HAYIR: KARAR-134 · 135 · 137 · 139 · 140 · 141 · 142 · 96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ürün: KARAR-136 · 138 · toplu paket: `docs/otonom/KARAR-PAKETI.md` (⚠️ paket 2026-10-21 cevaplarından önce yazıldı; 9 kart artık ✅).
+**PO'ya sorular:** KARAR-89 (NPS hangi kutuya — ajan önerisi kartta; PN-10 · PN-11 bekliyor) · 🔵 EVET/HAYIR: KARAR-134 · 135 · 137 · 139 · 140 · 141 · 142 · 96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ürün: KARAR-136 · 138 · toplu paket: `docs/otonom/KARAR-PAKETI.md` (⚠️ paket 2026-10-21 cevaplarından önce yazıldı; 9 kart artık ✅).
 
 **Strateji katmanına not:** (YENİ 2026-10-27) KARAR-83: kartın C seçeneği "yalnız platform yöneticisi" iken CEVAP metni C'yi "rol tarihçesi" olarak tanımlıyor → CEVAP metni uygulandı (U-13C). PO farklı niyetliyse kartı düzeltsin. · AŞAMA PN satırları 5c-n "geri dönüş yeri" yerine PN bölümüne alındı (PO md.4 "öne al") — bekçi (i2)/(n) bu sapmayı uyarırsa gerekçe budur. · I-18/IC-13 IPTAL(PO) aktif kuyrukta (PN bölümü sonu) duruyor; arşiv yeri (bitti arşivi IPTAL satırı almıyor) bir sonraki belge turunda netleşir. · Önceki notlar: (000) AJ-113 7b notu: randevu ucu mentörün onay durumuna (approvalStatus) bakmıyor — KARAR-101 (onay bekleyen kullanıcı) ile birlikte ele alınmalı. (00) AJ-99 7b notu: `GET /api/feedback-logs` mentöre kendi FeedbackLog kayıtlarını ham puan + menti adıyla döndürüyor; bugün FeedbackLog'a menti yazmıyor → risk yok, ama KARAR-12 "B" seçilirse (menti yazarsa) liste ucu k-anonimlik maskesini aşar — KARAR-12 cevabında dikkate alınmalı. (0) İŞ 2 teyit listesi (#455): G7-10 "mobil" ayağı AJ-86 ölçütünde yok · G7-14 "sanallaştırma" kodda yok (AJ-83 sayfalama yaptı) — ikisi de 🟨, bitip bitmediği PO/strateji teyidi · 7b notu: Y3 (00-KARAR-TAKIP) PDF/Excel biçimi istenirse ayrı iş. İŞ 2 CI: bekçi mevcut docs-guard job'unda koşuyor, iş akışı dosyası değişmedi.  (1) Bekçi (i5) E-5 uyarısı bilinçli: KARAR-11 ✅ ama gerçek silme PO ikinci onayı + karantina turu bekliyor. (2) 00-KUYRUK 116 KB > 90 KB eşiği — kalan uzunluk AJ-96…111 yeni satırlarından ve gerekçeli uzun satırlardan (AJ-68 kısmen). (3) 🔵 PR'ların 4'ü main ile çakışıyor — EVET gelince rebase gerekir. (4) Paylaşılan backend `.gitignore` artık `node_modules` sembolik bağını da yakalıyor (AJ-69 dersi).
 

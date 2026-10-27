@@ -20,22 +20,7 @@ renk paleti, hata mesajı metni, hangi mükerrer ucun kalacağı, çeviri).
 ## ✍️ PO NOTU
 > Serbest not alanı (karar kartına sığmayan kısa bir yön notu). Ajan bu dosyayı okurken görür; işlediğinde notu 02-ILERLEME'ye kaydedip alanı boşaltır.
 
-**PO NOTU 2026-10-27** (AYNEN):
-
-=== KARARLAR (AYNEN YAZ) ===
-KARAR-143 → PO kendi seçimi: "Kâşif" yerine "Merak Eden", "İz Açan" yerine "Yola Çıkan". Menti seti: Rotacı · Merak Eden · Denge Arayan · Yola Çıkan. Kart gövde metinleri değişmez; yalnız ad ve adın geçtiği cümleler.
-
-KARAR-44 → C (PO tasarımı, güven ağırlıklı öğrenme):
-(1) Görüşme sonrası check-in puanı eşleşme kombinasyon skoruna OTOMATİK yansır ve sıralamada kullanılır.
-(2) Etkisi iki tarafın kişilik profili doluluk oranıyla orantılıdır (cevaplanan / toplam soru); profil az doluyken etki küçük, tam doluyken tam. Amaç: sistemin kişiyi yanlış tipte bildiği dönemde o tipe haksız ödül/ceza yazmamak.
-(3) Bir kombinasyon için asgari görüşme sayısına ulaşılmadan öğrenme başlamaz (eşiği ajan belirler, gerekçesiyle belgeler). Öğrenme tek bayrakla kapatılabilir kalır. Haftalık algoritma ayarlayıcı ile bu öğrenme çelişmemeli — ajan tek tutarlı yol önerir ve belgeler.
-(4) Memnuniyet puanı (NPS) KALIR ama AYRI ANKET KALKAR: periyodik anket sayfası (/periodic-survey) kaldırılır; NPS sorusu ("Bu mentörlük programını bir arkadaşına önerir misin? 0-10" — anlam korunur, ifade düzeltilebilir) 3. ay görüşme değerlendirmesine TEK SORU olarak eklenir. Tek NPS alanı kalır; hangi kutuya yazılacağı KARAR-89'a bağlıdır — ajan önerisini KARAR-89 kartına ekler. Kullanılmayan NPS alanı ve anket sayfası SİLME KURALI ile kaldırılır (gerekçe → ikame kanıtı → docs/arsiv/silinenler-*.md → karantina → PO'nun ikinci onayı). Ölçek hatası (0-10 ortalamanın 70 eşiğiyle kıyaslanması) düzeltilir. Yönetici KPI'daki NPS kartı ve mentör panelindeki "Ortalama NPS" kartı bu tek kaynaktan dolar; küçük grup gizlilik maskesi korunur. Migration gerekiyorsa yedek + PO onayı.
-(5) Yönetici panelindeki "Başarı oranı" kartı görüşme değerlendirmelerinden hesaplanır; NPS ayrı gösterge olarak kalır.
-(6) Yeni özellik: herkesin platform için öneri/hata bildirebileceği genel geri bildirim alanı (05-ozellikler-ve-paneller.md'deki "her sayfada hata/öneri bildir" planının tamamlanması). Yazılanları YALNIZ platform yöneticisi okur; kurum yöneticisi ve diğer kullanıcılar görmez.
-Not: KARAR-110 ve KARAR-78 periyodik ankete bağlı; anket kalktığı için kapsamları değişti — iki kartın başına not düş, cevap yazma (KARAR-110 avukat bekliyor).
-
-KARAR-12 → KARAR-44 ile birlikte cevaplandı: ikinci geri bildirim kayıt sistemi kullanıcıya açılmaz; görüşme değerlendirme kaynağı check-in'dir; NPS tek alanda, 3. ay değerlendirmesinde toplanır.
-=== KARARLAR SONU ===
+_(boş — PO NOTU 2026-10-27 (KARAR-143 · 44 · 12) aynı gün kuyruğa alındı; metin AYNEN `02-ILERLEME.md` § "PO NOTU 2026-10-27 (KARAR-143 · 44 · 12) — kuyruğa alındı" kaydında)_
 
 ---
 
@@ -43,23 +28,21 @@ KARAR-12 → KARAR-44 ile birlikte cevaplandı: ikinci geri bildirim kayıt sist
 Durum: ⬜ cevap bekliyor · ✍️ CEVAP yazıldı, henüz işlenmedi · ✅ cevaplandı. Kilitlediği işler = eski indeksteki "kaç işi açar" bilgisi + `00-KUYRUK-KARAR-BEKLEYEN.md`'deki satırlar (🔴 ya da ATLANDI(karar)) + aktif kuyrukta kalan ayağı ya da 🔵 EVET/HAYIR kartı bu karara bağlı satırlar; kart başlığındaki sayı eskiyse "kart metni eski" notu (kart gövdesi değişmez).
 Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) göre (çoktan aza), eşitse numara; cevaplanmışlar numara sırasıyla.
 
-### ⬜ / ✍️ Cevap bekleyen (113)
+### ⬜ / ✍️ Cevap bekleyen (110)
 
 | # | Konu | Kilitlediği işler | Durum | Öneri | Kart |
 |---|---|---|---|---|---|
 | KARAR-46 | Sertifika içeriğinin hangi sürümü canlıya gidecek | **2** (P-99 → K-16) · 🔴 KARAR-BEKLEYEN: F-14, P-99, AN-03, K-16 · kart metni eski: "(P-99'u açar)"; güncel: 4 iş — F-14, P-99, AN-03, K-16 | ⬜ boş · ⭐ içerik konseyi · SEED · ⚠️ 88 şıkın TAMAMI + 15 senaryo eler | A | [kart](kararlar/KARAR-046.md) |
 | KARAR-58 | Eski DISC ↔ yeni Big Five geçiş dönemi | **2+** (IK:223 · TO Y-23) · 🔴 KARAR-BEKLEYEN: PS-A2, AN-04 · aktif kuyrukta: PS-A3 (ön koşul PS-A2 üzerinden) · kart metni eski: "(2+ işi açar)"; güncel: 3 iş — PS-A2, AN-04, PS-A3 | ⬜ boş · ⭐ analiz turu · MIGRATION/GERİ DÖNÜLMEZ, öneri YOK; yedek zorunlu | öneri YOK | [kart](kararlar/KARAR-058.md) |
-| KARAR-89 | Görüşme değerlendirmesinin tek kutusu | **3** (KR-08, AN-49, KR-11) · 🔴 KARAR-BEKLEYEN: KR-08, AJ-49 · aktif kuyrukta: AN-49 (kart KARAR-89 bu işi kilitlediğini söylüyor (tek değerlendirme kutusu)) · kart metni eski: "(3 iş açar: KR-08, AN-49, KR-11)"; güncel: 3 iş — KR-08, AJ-49, AN-49 · kartta sayılıp burada olmayan: KR-11 → KARAR-78 bekliyor (KARAR-BEKLEYEN) | ⬜ boş · MIGRATION · ⚠️ KARAR-77 ile çelişki · öneri B | B | [kart](kararlar/KARAR-089.md) |
-| KARAR-12 | Görüşme geri bildirim kayıt sistemi | 0 · 🔴 KARAR-BEKLEYEN: AJ-38 · aktif kuyrukta: AJ-99 (olası ürün sorusu: mentör kendi geri bildirimini görsün mü (uygulayıcı önce kontrol eder)) | ✍️ CEVAP (PO NOTU 2026-10-27) | A | [kart](kararlar/KARAR-012.md) |
+| KARAR-89 | Görüşme değerlendirmesinin tek kutusu | **3** (KR-08, AN-49, KR-11) · 🔴 KARAR-BEKLEYEN: KR-08, AJ-49, PN-10, PN-11 · aktif kuyrukta: AN-49 (kart KARAR-89 bu işi kilitlediğini söylüyor (tek değerlendirme kutusu)) · kart metni eski: "(3 iş açar: KR-08, AN-49, KR-11)"; güncel: 3 iş — KR-08, AJ-49, AN-49 · kartta sayılıp burada olmayan: KR-11 → KARAR-78 bekliyor (KARAR-BEKLEYEN) | ⬜ boş · MIGRATION · ⚠️ KARAR-77 ile çelişki · öneri B · ⭐ ajan önerisi kartta: NPS kutusu (KARAR-44 C md.4, 2026-10-27) | B | [kart](kararlar/KARAR-089.md) |
 | KARAR-36 | Yarım 3 teknik kalem (`answeredFollowup` · ikiz alan · 2 yedek tablo) | **4** (Y-18, D3, S26, S37) · 🔴 KARAR-BEKLEYEN: Y-18, AJ-10 · kart metni eski: "(4 işi açar)"; güncel: 2 iş — Y-18, AJ-10 | ⬜ boş · ⭐ BB turu · ⚠️ `migrate dev` yedek tabloyu silebilir | (a)+(b) için B (karantina), (c) için A (şemaya ekle) | [kart](kararlar/KARAR-036.md) |
-| KARAR-44 | Algoritma kendi sonuçlarından öğrensin mi + hangi memnuniyet "gerçek" | **2-3** (PS-05, F-08, KARAR-12) · 🔴 KARAR-BEKLEYEN: F-08, AJ-38 | ✍️ CEVAP (PO NOTU 2026-10-27) · ⭐ psikometri konseyi | B | [kart](kararlar/KARAR-044.md) |
 | KARAR-50 | Kuralların "geçersizleşme koşulu" zorunlu olsun mu | **4** (YN-04, YN-05 + 2 takip) · 🔴 KARAR-BEKLEYEN: YN-04, YN-05 · kart metni eski: "(4 işi açar)"; güncel: 2 iş — YN-04, YN-05 | ⬜ boş · ⭐ yönetişim konseyi · ⚠️ "KURAL 17" diye bir kural HİÇ YAZILMADI | A şimdi, C sonra | [kart](kararlar/KARAR-050.md) |
 | KARAR-61 | Yeni formül arketip motoruyla aynı anda mı açılsın | **2** (MUT §4 · `scoring.ts:89-90`) · 🔴 KARAR-BEKLEYEN: F-11, AJ-92 | ⬜ boş · ⭐ analiz turu · öneri B (iki adım) | B | [kart](kararlar/KARAR-061.md) |
 | KARAR-72 | Ghost / "kalıcı red" özelliği olacak mı | **1** (AN-33) · 🔴 KARAR-BEKLEYEN: KR-20, AN-33 · kart metni eski: "(1 iş açar: AN-33)"; güncel: 2 iş — KR-20, AN-33 | ⬜ boş · ⭐ CS bilanço · ÜRÜN+HUKUK · öneri B (koru) | B (koru), gerçek kötüye-kullanım görülene kadar | [kart](kararlar/KARAR-072.md) |
 | KARAR-88 | Hakkımızda / İletişim + yüzen WhatsApp | **2** (Y-07, Y-11) · 🔴 KARAR-BEKLEYEN: Y-07, Y-11 | ⬜ boş · kurumlara görünen metin · öneri A (iki sayfa + e-posta) | A | [kart](kararlar/KARAR-088.md) |
 | KARAR-97 | 🔵 EVET/HAYIR — U-18 mentör mesaj talebini reddedebilsin (veritabanına 1 yeni alan) | **1** (U-18) · aktif kuyrukta: U-18 (🔵 PR-ACIK — EVET/HAYIR kartı), E-3 (kalan ayak: bağlamsal geri bildirim kartı, U-18 üzerinden) · kart metni eski: "(1 iş açar: U-18)"; güncel: 2 iş — U-18, E-3 | ⬜ boş · 🔵 canlı DB değişikliği · PR backend #148 + çatı #326 · ⚠️ #148 ve #326 CONFLICTING (2026-09-28): EVET gelse de rebase + CI + 7b tekrarı | — | [kart](kararlar/KARAR-097.md) |
 | KARAR-103 | Eski planlardaki 13 yapılmamış özellik — hangileri yapılsın | **13** (AJ-11) · 🔴 KARAR-BEKLEYEN: AJ-11 · aktif kuyrukta: AJ-78 (kalan ayak: dönemsel tarih aralığı (md.10)) · kart metni eski: "(13 işi açar)"; güncel: 2 iş — AJ-11, AJ-78 | ⬜ boş · ajan-ekledi (K-C) · öneri B (4 küçük şemasız özellik) | B | [kart](kararlar/KARAR-103.md) |
-| KARAR-110 | Periyodik anket (ilişki geneli değerlendirme) ne olsun | **1** (AJ-14) · 🔴 KARAR-BEKLEYEN: AJ-14, AJ-49 · kart metni eski: "(1 işi açar: AJ-14)"; güncel: 2 iş — AJ-14, AJ-49 | ⬜ boş · ajan-ekledi · öneri A | A | [kart](kararlar/KARAR-110.md) |
+| KARAR-110 | Periyodik anket (ilişki geneli değerlendirme) ne olsun | **1** (AJ-14) · 🔴 KARAR-BEKLEYEN: AJ-14, AJ-49 · kart metni eski: "(1 işi açar: AJ-14)"; güncel: 2 iş — AJ-14, AJ-49 | ⬜ boş · ajan-ekledi · öneri A · ⚠️ kapsam değişti: KARAR-44 C anketi kaldırdı (kart başı notu, 2026-10-27) | A | [kart](kararlar/KARAR-110.md) |
 | KARAR-2 | Profile serbest bağlantı alanı | 1 (K-17) · 🔴 KARAR-BEKLEYEN: K-17 | ⬜ boş | A | [kart](kararlar/KARAR-002.md) |
 | KARAR-3 | Sertifika "bildirim yükümlülüğü" hukuki metni | 1 (K-16) · 🔴 KARAR-BEKLEYEN: K-16 | ⬜ boş | A | [kart](kararlar/KARAR-003.md) |
 | KARAR-4 | Kriz destek kaynağı metni | 1 (K-16) · 🔴 KARAR-BEKLEYEN: K-16 | ⬜ boş | A şimdi, B'yi kuyruk adayı yap | [kart](kararlar/KARAR-004.md) |
@@ -83,7 +66,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-74 | Kurum (tenant) kalıcı silme hakkı (G1-29) | **1** (AN-37) · 🔴 KARAR-BEKLEYEN: AN-37 | ⬜ boş · ⭐ CS bilanço · KVKK/GERİ DÖNÜLMEZ · öneri A (yedek+çift-onay) | A | [kart](kararlar/KARAR-074.md) |
 | KARAR-75 | KVKK yasal metinlerinde kişi adı: yasak mı istisna mı | **0** (AN-41/YN-13 etkiler) · aktif kuyrukta: AN-41 (bağlı: yasal metinde kişi adı (Ç-16)) | ⬜ boş · ⭐ CS bilanço · HUKUK/POLİTİKA · öneri B (kurum/unvan) | B (kurum/unvan) + avukat teyidi | [kart](kararlar/KARAR-075.md) |
 | KARAR-76 | `Tenant.verifiedBy` alanı ne olsun (silme protokolü boşluğu) | **1** (AN-08 · AN-54) · 🔴 KARAR-BEKLEYEN: AN-08 | ⬜ boş · ⭐ silme protokolü · VERİ · öneri B (karantina) · ⚪ gereksiz adayı (niyet bulundu: backend 7365600 / schema.prisma:224; kalan iş AN-08 bağlaması — 3.4) | B | [kart](kararlar/KARAR-076.md) |
-| KARAR-78 | Dönemlik anket: bağla / karantina / beklet | **1** (KR-11) · 🔴 KARAR-BEKLEYEN: KR-11 | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) · ⚪ gereksiz adayı (KARAR-110 aynı sayfayı soruyor; KR-11 ≡ AJ-14 — 3.4) | B | [kart](kararlar/KARAR-078.md) |
+| KARAR-78 | Dönemlik anket: bağla / karantina / beklet | **1** (KR-11) · 🔴 KARAR-BEKLEYEN: KR-11 | ⬜ boş · ⭐ kod incelemesi · SİLME PROTOKOLÜ · öneri B (karantina) · ⚪ gereksiz adayı (KARAR-110 aynı sayfayı soruyor; KR-11 ≡ AJ-14 — 3.4) · ⚠️ kapsam değişti: KARAR-44 C anketi kaldırdı, karantina PN-11'de (kart başı notu, 2026-10-27) | B | [kart](kararlar/KARAR-078.md) |
 | KARAR-79 | Zamanlanmış iş tetikleme yetkisi kimde | **1** (KR-05) · 🔴 KARAR-BEKLEYEN: KR-05 | ⬜ boş · ⭐ kod incelemesi · GÜVENLİK/YETKİ · öneri A · KARAR-13 ile birlikte cevaplanmalı · ⚠️ B bugün kodda (AJ-17, adminController.ts:599-620); soru: B onay mı, A/C daraltma mı | A | [kart](kararlar/KARAR-079.md) |
 | KARAR-85 | Yeni ortamda DISC soru havuzu | **1** (U-17) · 🔴 KARAR-BEKLEYEN: U-17 | ⬜ boş · çıkış blokeri · SEED · öneri A (silmeyen betik) | A | [kart](kararlar/KARAR-085.md) |
 | KARAR-87 | Birden çok platform yöneticisi olacak mı? | **1** (AN-38) · 🔴 KARAR-BEKLEYEN: AN-38 | ⬜ boş · yetki · öneri A (tek hesap kalsın) | A | [kart](kararlar/KARAR-087.md) |
@@ -159,9 +142,8 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-124 | Platform yöneticisinin "mentör/menti sayısı" neyi saysın: kişiyi mi, kurum üyeliğini mi | **0** (cevap 1 küçük iş açar) | ⬜ boş · ajan-ekledi · öneri C | C | [kart](kararlar/KARAR-124.md) |
 | KARAR-125 | Mentör/menti kendi kurumunu platforma önerebilsin mi ("ters çekim") | **0** | ⬜ boş · ajan-ekledi · öneri A | A (şimdilik) | [kart](kararlar/KARAR-125.md) |
 | KARAR-126 | Az yanıtlı ilk ayda "NPS düşüşü" önerisi çıkmasın mı (KVKK çıkarımı) | **0** | ⬜ boş · ajan-ekledi (AJ-69) · öneri B | B | [kart](kararlar/KARAR-126.md) |
-| KARAR-143 | Yeniden adlandırılacak iki menti arketipinin yeni adı ("Kâşif" · "İz Açan") | **0** · KARAR-45 (✍️ C) uygulamasının ad ayağı buna bağlı (IC-14 · IC-10 · AN-05 arketip adı ayağı) | ✍️ CEVAP (PO NOTU 2026-10-27) · ajan-ekledi (KARAR-45 C, PO NOTU 2026-10-21) · kullanıcıya görünen metin · öneri A | A | [kart](kararlar/KARAR-143.md) |
 
-### ✅ Cevaplanmış (32)
+### ✅ Cevaplanmış (35)
 
 | # | Konu | Kilitlediği işler | Durum | Öneri | Kart |
 |---|---|---|---|---|---|
@@ -171,6 +153,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-7 | Online toplantı linkini kim girer | 1 (K-19 içerik) | ✅ **CEVAPLANDI (2026-09-21): A** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
 | KARAR-10 | OCEAN/SJT psikometri motoru | 1 (F-11) | ✅ **CEVAPLANDI (2026-09-21): C** · ⭐ AŞAMALI (3 aşama, feature flag) · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` · uygulama: F-11 → KARAR-61 bekliyor (KARAR-BEKLEYEN) | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
 | KARAR-11 | Kullanılmayan/mükerrer kod ne olsun | **2** (K-13, E-5) · 🔴 KARAR-BEKLEYEN: E-5 | ✅ **CEVAPLANDI (2026-09-21): A** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
+| KARAR-12 | Görüşme geri bildirim kayıt sistemi | AJ-38 · PN-10 | ✅ **CEVAPLANDI (2026-10-27, PO NOTU): KARAR-44 ile birlikte — FeedbackLog kullanıcıya açılmaz; değerlendirme kaynağı check-in; NPS tek alanda, 3. ayda** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-012.md) |
 | KARAR-20 | Mentör menti talebini reddedebilsin mi | 1 (F-17) | ✅ **CEVAPLANDI (2026-09-21): A** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
 | KARAR-22 | Mentör reddederken ne olsun (ret deneyimi) | 1 (P-05) | ✅ **CEVAPLANDI (2026-09-21): B** · ⚠️ e-posta ayağı SMTP bekler · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
 | KARAR-23 | Kurum bildirimleri açılsın mı (onay/ret/düzeltme maili) | 1 (U-04) | ✅ **CEVAPLANDI (2026-09-21): ÖZEL — onay+düzeltme maili, ret maili YOK** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
@@ -180,6 +163,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-32 | Mentör kendini havuzdan çekebilsin mi | **2** (Y-15, `mentorVisibilityEnabled`) | ✅ **CEVAPLANDI (2026-09-23 REVİZYON): havuzdan ÇIKMAZ — soluk görünür, yalnız mesaj, randevu almaz** (KARAR-53 ③); ~~2026-09-21: A~~ · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
 | KARAR-33 | Kurumdan üye çıkarma + red tipi | **2** (Y-14/md.36, md.35) | ✅ **CEVAPLANDI (2026-09-21): B — dondur, sebep seç, 30 gün sonra psikometri sil** · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` · uygulama: Y-14 → KARAR-93 bekliyor (KARAR-BEKLEYEN) | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
 | KARAR-34 | Kulüp tipi kurum + kurumlar arası görünürlük | **3** (md.91·115·116) | ✅ **CEVAPLANDI (2026-09-23): ÖZEL — topluluk lideri modeli** (lider onaylanır, üyeler değil; lider=veri sorumlusu) + kayıt ekranı zorunlu/isteğe-bağlı + SORU2→B anonim toplu; ⛔ AVUKAT · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
+| KARAR-44 | Algoritma kendi sonuçlarından öğrensin mi + hangi memnuniyet "gerçek" | AJ-38 · F-08 · PN-09 · PN-12 · PN-10 + PN-11 (→ KARAR-89) | ✅ **CEVAPLANDI (2026-10-27, PO NOTU): C (güven ağırlıklı öğrenme; NPS 3. ay değerlendirmesinde, ayrı anket kalkar; genel geri bildirim alanı)** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-044.md) |
 | KARAR-45 | Arketip adları: hangi metin hangi koda bağlanacak | IC-14 · I-01 · IC-10 · AN-05 (ad ayağı → KARAR-143) | ✅ **CEVAPLANDI (2026-10-21, PO NOTU): C** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-045.md) |
 | KARAR-53 | Menti müsait olmayan saati önerebilsin mi (booking ↔ müsaitlik çelişkisi) | **1** (K-05) ⛔ çıkış blokeri | ✅ **CEVAPLANDI (2026-09-23): ÖZEL — mentörün 4 hâli** (blok=kat+takvim · koşul=esnek · meşgul=soluk/mesaj · boş=dürt+eskalasyon); KARAR-1 ile TEK migration · 📦 tam metin: `docs/otonom/arsiv/01-KARARLAR-cevaplanmis.md` | — | [arşiv](arsiv/01-KARARLAR-cevaplanmis.md) |
 | KARAR-57 | Kullanıcının mizaç sonucunu hangi test belirlesin | PN-01…05 · PS-03 · I-12 · F-09 | ✅ **CEVAPLANDI (2026-10-21, PO NOTU): A (tek havuz, tek formül; 8 maddelik PO tasarımı)** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-057.md) |
@@ -196,3 +180,4 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-84 | E-posta yokken şifre sıfırlama | U-15 | ✅ **CEVAPLANDI (2026-10-21, PO NOTU): B (yalnız platform yöneticisi, iz kaydıyla)** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-084.md) |
 | KARAR-95 | Kriz kanalı — güvenlik sorusu olarak yeniden | I-18 + IC-13 IPTAL(PO) · PN-08 (vaat taraması) | ✅ **CEVAPLANDI (2026-10-21, PO NOTU): Hiçbiri** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-095.md) |
 | KARAR-101 | Onay bekleyen kullanıcı giriş yapıp "Bekleme Odası"nı görebilsin mi (güvenlik açığı B8) | Y1-B8 (PR #164/#343 yeniden yazılacak) | ✅ **CEVAPLANDI (2026-10-21, PO NOTU): B genişletilmiş + GÜNCELLEME (EK): mentörler yalnız isimsiz önizleme** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-101.md) |
+| KARAR-143 | Yeniden adlandırılacak iki menti arketipinin yeni adı | IC-14 · I-01 · IC-10 · AN-05 (ad ayağı) | ✅ **CEVAPLANDI (2026-10-27, PO NOTU): "Merak Eden" + "Yola Çıkan" (PO kendi seçimi)** · kart CEVAP'ı kuyruğa alındı 2026-10-27 → 00-KUYRUK § ⭐ AŞAMA PN | — | [arşiv](arsiv/kararlar/KARAR-143.md) |

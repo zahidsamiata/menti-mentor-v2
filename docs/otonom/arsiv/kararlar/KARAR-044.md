@@ -23,6 +23,6 @@
 (6) Yeni özellik: herkesin platform için öneri/hata bildirebileceği genel geri bildirim alanı (05-ozellikler-ve-paneller.md'deki "her sayfada hata/öneri bildir" planının tamamlanması). Yazılanları YALNIZ platform yöneticisi okur; kurum yöneticisi ve diğer kullanıcılar görmez.
 Not: KARAR-110 ve KARAR-78 periyodik ankete bağlı; anket kalktığı için kapsamları değişti — iki kartın başına not düş, cevap yazma (KARAR-110 avukat bekliyor).
 _(kaynak: PO NOTU 2026-10-27, `01-KARARLAR.md` § PO NOTU — ajan aktardı)_
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 "açtıkları işleri § AŞAMA PN'ye ekle"). Kart arşive taşındı (5c-c). Açtığı: AJ-38 (başarı oranı) · F-08 (kilit kalktı) · PN-09 (öğrenme) · PN-12 (genel geri bildirim, 🔵) · PN-10 + PN-11 (KARAR-89'u bekliyor). Ajan önerisi KARAR-89 kartına eklendi; KARAR-110 ve KARAR-78 kart başına not düşüldü.
 
 ---
-

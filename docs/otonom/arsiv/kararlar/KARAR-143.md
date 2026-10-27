@@ -17,5 +17,6 @@
 **Cevap vermezsen:** KARAR-45 C'nin uygulamasında iki menti arketipi yer tutucuyla kalır; IC-14 · IC-10 · AN-05'in arketip adı ayağı tamamlanamaz.
 **İlgili kartlar:** KARAR-45 (✍️ C — bu kartı doğurdu) · KARAR-64 (✍️ C — genel ad "kişilik") · KARAR-48 (sonuç kartındaki kimlik etiketi dili) · KARAR-54 (havuz kartında arketip adı/rozet)
 **CEVAP:** PO kendi seçimi: "Kâşif" yerine "Merak Eden", "İz Açan" yerine "Yola Çıkan". Menti seti: Rotacı · Merak Eden · Denge Arayan · Yola Çıkan. Kart gövde metinleri değişmez; yalnız ad ve adın geçtiği cümleler. _(kaynak: PO NOTU 2026-10-27, `01-KARARLAR.md` § PO NOTU — ajan aktardı)_
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 "açtıkları işleri § AŞAMA PN'ye ekle"). Kart arşive taşındı (5c-c). Açtığı/kilidini kaldırdığı: IC-14 · I-01 · IC-10 · AN-05 (ad ayağı).
 
 ---

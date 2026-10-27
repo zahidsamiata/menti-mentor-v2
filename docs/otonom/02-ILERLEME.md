@@ -87,4 +87,38 @@ KARAR-83 → A + C. Kurum yöneticisi kullanıcının rolünü değiştirebilir 
 KARAR-84 → B. E-posta çalışmazsa şifre sıfırlama bağlantısını YALNIZ platform yöneticisi üretir; her üretim iz kaydına yazılır.
 ```
 
+## TUR BAŞLANGICI — 2026-10-27 (2. oturum) · Windows/Cursor (PO bilgisayarı, araçlar kuruldu) · uzun çalışma kipi
 
+- Başlangıç: çatı main `5a128f5` · backend pointer `358e085`. Çalışma ağacı temiz, stash yok.
+- Araç teyidi (PO NOTU md.1): `node -v` = v24.22.1 (CI/canlı Node 22 — lokal sonuç ön kontroldür, kanıt CI) · `gh auth status` = zahidsamiata girişli · `py --version` = Python 3.15.2. DATABASE_URL yok ve kurulmaz (K8.3).
+- Kalan 🟢 BEKLIYOR (§ AŞAMA PN, çalışılabilir): Y1-B8 · U-12 · U-13 · U-15 · AN-50 · AN-51 · PN-06 · PN-03 · PS-03 · I-12 · PN-01 · PN-02 · PN-04 · PN-05 · IC-14 · I-01 · I-11 · PN-08 · AJ-38 · F-08 · PN-09 (21).
+
+## PO NOTU 2026-10-27 (KARAR-143 · 44 · 12) — kuyruğa alındı (2026-10-27)
+
+- **NE:** üç kartın CEVAP'ı kart dosyalarına aktarıldı (commit `93ad6bf`), sonra işlendi: kartlar `docs/otonom/arsiv/kararlar/`'a (İŞLENDİ notu); indekste ✅ (bekleyen 113 → 110 · cevaplanmış 32 → 35).
+- **NEDEN bu işler:** KARAR-44 C (güven ağırlıklı öğrenme + NPS 3. ayda + genel geri bildirim) ve KARAR-12 (FeedbackLog kullanıcıya açılmaz) ile memnuniyet/öğrenme zincirinin kilidi açıldı; KARAR-143 ile 8 arketip adının hepsi belli.
+- **§ AŞAMA PN'ye eklenen (aktif):** AJ-38 (başarı oranı check-in'den — KARAR-BEKLEYEN'den döndü, kapı 🟢) · F-08 (sektör paydası — M19 kilidi kalktı, 🟢 +7b) · **PN-09** (öğrenen eşleştirme, 🟢 +7b, migration yok) · **PN-12** (genel öneri/hata bildirimi, 🔵 yeni tablo).
+- **KARAR-BEKLEYEN § KARAR-89'a eklenen:** **PN-10** (NPS sorusu 3. ay değerlendirmesine — PO: "hangi kutuya yazılacağı KARAR-89'a bağlıdır") · **PN-11** (periyodik anket + kullanılmayan NPS alanı silme protokolü, PN-10'dan sonra).
+- **Kilit kalkan:** IC-14 · I-01 · IC-10 · AN-05 ad ayağı (KARAR-143 ✅: "Merak Eden" · "Yola Çıkan").
+- **Kart notları:** KARAR-89'a ajan önerisi (NPS kutusu: `MeetingCheckIn`, migrationsız ara yol `FeedbackLog` phase 3) · KARAR-110 ve KARAR-78 başına "kapsam değişti" notu (cevap yazılmadı).
+- **Kod teyidi (envanter):** PO'nun andığı ölçek hatası (0-10 NPS ortalaması ↔ 70 eşiği) kodda ZATEN düzeltilmiş — `backend/src/services/algorithmTuner.ts:48-60` (KR-07); kalan yalnız `backend/README.md:359` örnek değer → PN-10'a yazıldı.
+- KİLİT HARİTASI: KARAR-12 · 44 · 143 işaretçileri kalktı; KARAR-89 → 4 iş (KR-08 · AJ-49 · PN-10 · PN-11).
+
+Not metni (AYNEN, `01-KARARLAR.md` § PO NOTU'ndan taşındı):
+
+```text
+=== KARARLAR (AYNEN YAZ) ===
+KARAR-143 → PO kendi seçimi: "Kâşif" yerine "Merak Eden", "İz Açan" yerine "Yola Çıkan". Menti seti: Rotacı · Merak Eden · Denge Arayan · Yola Çıkan. Kart gövde metinleri değişmez; yalnız ad ve adın geçtiği cümleler.
+
+KARAR-44 → C (PO tasarımı, güven ağırlıklı öğrenme):
+(1) Görüşme sonrası check-in puanı eşleşme kombinasyon skoruna OTOMATİK yansır ve sıralamada kullanılır.
+(2) Etkisi iki tarafın kişilik profili doluluk oranıyla orantılıdır (cevaplanan / toplam soru); profil az doluyken etki küçük, tam doluyken tam. Amaç: sistemin kişiyi yanlış tipte bildiği dönemde o tipe haksız ödül/ceza yazmamak.
+(3) Bir kombinasyon için asgari görüşme sayısına ulaşılmadan öğrenme başlamaz (eşiği ajan belirler, gerekçesiyle belgeler). Öğrenme tek bayrakla kapatılabilir kalır. Haftalık algoritma ayarlayıcı ile bu öğrenme çelişmemeli — ajan tek tutarlı yol önerir ve belgeler.
+(4) Memnuniyet puanı (NPS) KALIR ama AYRI ANKET KALKAR: periyodik anket sayfası (/periodic-survey) kaldırılır; NPS sorusu ("Bu mentörlük programını bir arkadaşına önerir misin? 0-10" — anlam korunur, ifade düzeltilebilir) 3. ay görüşme değerlendirmesine TEK SORU olarak eklenir. Tek NPS alanı kalır; hangi kutuya yazılacağı KARAR-89'a bağlıdır — ajan önerisini KARAR-89 kartına ekler. Kullanılmayan NPS alanı ve anket sayfası SİLME KURALI ile kaldırılır (gerekçe → ikame kanıtı → docs/arsiv/silinenler-*.md → karantina → PO'nun ikinci onayı). Ölçek hatası (0-10 ortalamanın 70 eşiğiyle kıyaslanması) düzeltilir. Yönetici KPI'daki NPS kartı ve mentör panelindeki "Ortalama NPS" kartı bu tek kaynaktan dolar; küçük grup gizlilik maskesi korunur. Migration gerekiyorsa yedek + PO onayı.
+(5) Yönetici panelindeki "Başarı oranı" kartı görüşme değerlendirmelerinden hesaplanır; NPS ayrı gösterge olarak kalır.
+(6) Yeni özellik: herkesin platform için öneri/hata bildirebileceği genel geri bildirim alanı (05-ozellikler-ve-paneller.md'deki "her sayfada hata/öneri bildir" planının tamamlanması). Yazılanları YALNIZ platform yöneticisi okur; kurum yöneticisi ve diğer kullanıcılar görmez.
+Not: KARAR-110 ve KARAR-78 periyodik ankete bağlı; anket kalktığı için kapsamları değişti — iki kartın başına not düş, cevap yazma (KARAR-110 avukat bekliyor).
+
+KARAR-12 → KARAR-44 ile birlikte cevaplandı: ikinci geri bildirim kayıt sistemi kullanıcıya açılmaz; görüşme değerlendirme kaynağı check-in'dir; NPS tek alanda, 3. ay değerlendirmesinde toplanır.
+=== KARARLAR SONU ===
+```
