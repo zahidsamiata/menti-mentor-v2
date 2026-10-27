@@ -25,6 +25,7 @@ import { DiscRecallCard } from '@/components/organisms/DiscRecallCard';
 import type { DiscType, MentorFilter } from '@/types/matching';
 import { discDimensionLabel } from '@/types/discTest';
 import { UI_TEXT } from '@/lib/uiText';
+import { MentorPendingApprovalPanel } from '@/components/molecules/PendingApprovalNotice';
 
 const DISC_OPTIONS: { value: DiscType; label: string; color: string }[] = [
   { value: 'D', label: discDimensionLabel('D'), color: 'text-red-600 dark:text-red-400' },
@@ -71,25 +72,30 @@ export default function MentorDashboardPage() {
     }
   }, [user, isLoading, router]);
 
+  // Y1-B8 (KARAR-101): onay bekleyen mentörün aday/talep/görüşme/ölçüm uçları backend'de kapalı (403);
+  // istek atılmaz, panel yerine bekleme açıklaması gösterilir.
+  const isPendingApproval = user?.approvalStatus === 'PENDING';
+  const canUsePanel = Boolean(user?.id) && !isPendingApproval;
+
   // ── Aday listesi ────────────────────────────────────────────────────────────
   const { data: candidatesData, isLoading: candidatesLoading } = useQuery(
     () => matchingApi.getRankedMentis(api, user?.id ?? ''),
     [api, user?.id],
-    { enabled: Boolean(user?.id), cacheKey: `matching:ranked-mentis:${user?.id}` },
+    { enabled: canUsePanel, cacheKey: `matching:ranked-mentis:${user?.id}` },
   );
 
   // ── Onay bekleyen toplantı talepleri ────────────────────────────────────────
   const { data: pendingMeetings, refetch: refetchPending } = useQuery(
     () => meetingsApi.list(api, { status: 'PENDING' }),
     [api],
-    { enabled: Boolean(user?.id), cacheKey: 'meetings:list:PENDING' },
+    { enabled: canUsePanel, cacheKey: 'meetings:list:PENDING' },
   );
 
   // ── Panel özet metrikleri ───────────────────────────────────────────────────
   const { data: metrics } = useQuery(
     () => mentorMetricsApi.get(api, user?.id ?? ''),
     [api, user?.id],
-    { enabled: Boolean(user?.id), cacheKey: `mentor-metrics:${user?.id}` },
+    { enabled: canUsePanel, cacheKey: `mentor-metrics:${user?.id}` },
   );
 
   // ── Yaklaşan (onaylı) toplantılar ───────────────────────────────────────────
@@ -98,7 +104,7 @@ export default function MentorDashboardPage() {
   const { data: scheduledMeetings } = useQuery(
     () => meetingsApi.list(api, { status: 'SCHEDULED' }),
     [api],
-    { enabled: Boolean(user?.id), cacheKey: 'meetings:list:SCHEDULED' },
+    { enabled: canUsePanel, cacheKey: 'meetings:list:SCHEDULED' },
   );
   const upcomingMeetings = (scheduledMeetings?.items ?? [])
     .filter((m) => new Date(m.startsAt).getTime() >= Date.now())
@@ -127,7 +133,7 @@ export default function MentorDashboardPage() {
   const { data: savedFilter, isLoading: filterLoading } = useQuery(
     () => mentorFilterApi.get(api, user?.id ?? ''),
     [api, user?.id],
-    { enabled: Boolean(user?.id) },
+    { enabled: canUsePanel },
   );
 
   const [filter, setFilter] = useState<Omit<MentorFilter, 'mentorId'>>({
@@ -168,6 +174,14 @@ export default function MentorDashboardPage() {
     const result = await mentorFilterApi.upsert(api, user.id, filter);
     setFilterSaving(false);
     if (result.ok) setFilterSaved(true);
+  }
+
+  if (isPendingApproval) {
+    return (
+      <div className="space-y-8 animate-fade-in">
+        <MentorPendingApprovalPanel correctionNote={user?.correctionNote} />
+      </div>
+    );
   }
 
   return (

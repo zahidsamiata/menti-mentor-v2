@@ -58,15 +58,16 @@ export function getTenantReviewRedirect(
 }
 
 // E-posta girişi sonrası akıllı yönlendirme (dokümandaki durum tablosuna birebir uyar):
-//   status PENDING  → /pending-approval  (backend 403 → LoginForm catch bloğu da yakalar)
-//   status APPROVED → rol bazlı:
+//   Y1-B8 (KARAR-101): onay bekleyen (PENDING) de giriş yapar ve onaylı kişiyle AYNI yere gider —
+//   kayıt sürecini tamamlar; kapalı bölümler ekranda "yönetici onayı bekleniyor" der, backend 403 verir.
+//   (Eskiden PENDING → /pending-approval; sayfa eski 403 yanıtı için LoginForm catch bloğunda kaldı.)
+//   rol bazlı:
 //     ADMIN   → kurum başvurusu inceleniyor/reddedildi ise /onboarding/stk/pending-review (AJ-35),
 //               kurum askıdaysa /kurum-askida (AJ-72), değilse /admin/waiting-room
 //     MENTOR  → discType yoksa /onboarding (8-soru DISC), varsa /mentor
 //     MENTI   → discType yoksa /onboarding (8-soru DISC), varsa /menti
 // Not: Platform admin (/platform) ayrı endpoint'ten giriş yapar; buradan yönlendirilmez.
 export function getSmartRedirect(user: PostLoginUser): string {
-  if (user.approvalStatus === 'PENDING') return PENDING_APPROVAL_PATH;
   if (user.role === 'ADMIN') return getTenantReviewRedirect(user) ?? '/admin/waiting-room';
   // /disc-test = adaptif Likert (mevcut kullanıcı). Yeni kullanıcı (discType=null) → /onboarding.
   if (!user.discType) return '/onboarding';
