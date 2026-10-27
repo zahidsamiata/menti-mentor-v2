@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { ArrowLeft, CheckCircle2, XCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Metodoloji — MentiMentor Nasıl Eşleştirir?',
+  title: 'Metodoloji — MentiMentor Nasıl Yönlendirir?',
   description:
-    'MentiMentor eşleştirme metodolojisi: uyuma göre eşleştirmenin araştırma temeli, '
+    'MentiMentor yönlendirme metodolojisi: uyuma göre yönlendirmenin araştırma temeli, '
     + 'DISC modelinin dürüst konumlandırılması, eşleşme matrisi ve Jaccard sektör uyumu.',
 };
 
@@ -74,10 +74,10 @@ export default function MetodolojiPage() {
             Metodoloji
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-            MentiMentor nasıl eşleştirir?
+            MentiMentor nasıl yönlendirir?
           </h1>
           <p className="mt-4 text-slate-400 leading-relaxed">
-            Eşleştirme motorumuzun dayandığı ilkeleri, hangi araçları neden kullandığımızı ve
+            Öneri motorumuzun dayandığı ilkeleri, hangi araçları neden kullandığımızı ve
             bunların bilimsel temelini olduğu gibi paylaşıyoruz — abartmadan, kaynağıyla.
           </p>
         </header>
@@ -87,7 +87,7 @@ export default function MetodolojiPage() {
           {/* ── Bölüm 1 ─────────────────────────────────────────────────── */}
           <section>
             <h2 className="text-xl font-bold text-white mb-4">
-              1. Neden uyuma göre eşleştirme?
+              1. Neden uyuma göre yönlendirme?
             </h2>
             <p className="text-slate-300 leading-relaxed">
               Mentorluğun başarısını belirleyen tek en güçlü faktör ilişkinin kalitesidir; ilişki
@@ -95,7 +95,7 @@ export default function MetodolojiPage() {
               mentiyi ilgi ve uyuma göre eşleştiren programlarda etkinin belirgin şekilde arttığını;
               yüzeysel/demografik benzerlik yerine değer, tarz ve kişilikteki &lsquo;derin
               düzey&rsquo; benzerliğin daha güçlü bir belirleyici olduğunu gösteriyor. MentiMentor bu
-              nedenle eşleştirmeyi rastgele ya da elle değil, çok boyutlu uyum sinyallerine göre yapar.
+              nedenle önerilerini rastgele ya da elle değil, çok boyutlu uyum sinyallerine göre yapar.
             </p>
             <Sources
               items={[
@@ -235,7 +235,7 @@ export default function MetodolojiPage() {
             <p className="text-slate-300 leading-relaxed">
               Belirli DISC kombinasyonları (örneğin iki yüksek baskınlık profili) görev ve kontrol
               bağlamında güç çatışması eğilimi gösterebilir. MentiMentor bu tür yüksek riskli
-              kombinasyonları eşleştirme havuzundan çıkarır. Bu, kanıtlanmış bir kesinlik değil;
+              kombinasyonları öneri havuzundan çıkarır. Bu, kanıtlanmış bir kesinlik değil;
               uygulama gözlemine dayalı bir risk azaltma tercihidir ve sistem geri bildirimiyle
               güncellenir.
             </p>

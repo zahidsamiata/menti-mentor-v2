@@ -17,7 +17,7 @@ export function EngineSection() {
 
         <div className="text-center mb-16">
           <p className="text-xs font-semibold uppercase tracking-widest text-indigo-700 dark:text-indigo-300 mb-3">
-            Eşleştirme Motoru
+            Öneri Motoru
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-landing-fg leading-tight">
             Sadece takvime değil,{' '}
@@ -73,11 +73,11 @@ export function EngineSection() {
               <div>
                 <p className="text-2xl font-extrabold text-landing-fg">%40</p>
                 <p className="text-sm font-semibold text-violet-700 dark:text-violet-400">
-                  DISC Mizaç Uyumu
+                  DISC Kişilik Uyumu
                   <InfoTooltip
                     className="ml-1.5"
                     label="Neden DISC?"
-                    detail="DISC, davranış tarzlarını dört boyutta tanımlayan bir modeldir: Dominance (Baskınlık), Influence (Etki), Steadiness (İstikrar), Conscientiousness (Titizlik). Temeli, psikolog William Moulton Marston'ın 1928 tarihli 'Emotions of Normal People' kitabına dayanır. DISC'i seçtik çünkü iş ve iletişim bağlamında basit, anlaşılır ve yaygın kullanılan bir çerçevedir; kişilerin nasıl iletişim kurmayı ve çalışmayı tercih ettiğini hızlıca ortak bir dile döker. DISC bir iletişim/tarz aracıdır — kişilik tanısı ya da performans tahmini aracı değildir; eşleştirmede yalnızca tarz uyumunu değerlendirmek için kullanılır."
+                    detail="DISC, davranış tarzlarını dört boyutta tanımlayan bir modeldir: Dominance (Baskınlık), Influence (Etki), Steadiness (İstikrar), Conscientiousness (Titizlik). Temeli, psikolog William Moulton Marston'ın 1928 tarihli 'Emotions of Normal People' kitabına dayanır. DISC'i seçtik çünkü iş ve iletişim bağlamında basit, anlaşılır ve yaygın kullanılan bir çerçevedir; kişilerin nasıl iletişim kurmayı ve çalışmayı tercih ettiğini hızlıca ortak bir dile döker. DISC bir iletişim/tarz aracıdır — kişilik tanısı ya da performans tahmini aracı değildir; önerilerde yalnızca tarz uyumunu değerlendirmek için kullanılır."
                     sources={[
                       {
                         label: 'DISC assessment — Wikipedia (Marston, 1928)',
@@ -114,7 +114,7 @@ export function EngineSection() {
         <div className="rounded-xl border border-rose-500/20 bg-rose-50 dark:bg-rose-950/15 p-4 mb-10 text-sm text-landing-muted leading-relaxed text-center">
           <span className="font-semibold text-rose-700 dark:text-rose-400">Toksik eşleşme koruması:</span>{' '}
           Belirli DISC kombinasyonları (örn. iki yüksek D profili) mentorluk bağlamında sistematik
-          çatışma üretir. Bu çiftler algoritmik hard-gate ile eşleştirme havuzundan tamamen çıkarılır —
+          çatışma üretir. Bu çiftler algoritmik hard-gate ile öneri havuzundan tamamen çıkarılır —
           skor düşürme değil, tam engelleme.
           <InfoTooltip
             className="ml-1.5"

@@ -15,7 +15,7 @@ export const BRAND_NAME = 'MentiMentor';
 
 /** Ana sayfa açıklaması — hem `<meta name="description">` hem JSON-LD tek kaynaktan okur. */
 export const HOME_DESCRIPTION =
-  'Dernekler, vakıflar ve üniversite kulüpleri için DISC mizaç tabanlı, ' +
+  'Dernekler, vakıflar ve üniversite kulüpleri için DISC kişilik tabanlı, ' +
   'kapalı devre mentörlük platformu. Kurulum 10 dakika, sonsuza kadar ücretsiz.';
 
 export type JsonLdObject = Record<string, unknown>;

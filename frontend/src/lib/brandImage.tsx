@@ -39,7 +39,7 @@ export const BRAND_TEXT = {
   namePrefix: 'Menti',
   nameSuffix: 'Mentor',
   slogan: 'Mentörlük programınızı zahmetsizce yönetin',
-  tagline: 'DISC mizaç tabanlı mentörlük platformu',
+  tagline: 'DISC tabanlı mentörlük platformu',
 } as const;
 
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 } as const;

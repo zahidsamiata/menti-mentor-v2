@@ -110,7 +110,7 @@ describe('OnboardingContent — akış sırası (I-02) + kart öncesi geçiş (A
     // Adım 3: ÜÇ SORU görünür — KART HENÜZ GÖRÜNMEZ
     expect(screen.queryByText('ARKETIP_KARTI')).not.toBeInTheDocument();
     // Ara cümle gösterilir
-    expect(screen.getByText(/Son üç soru\. Sonra karakter kartın hazır/)).toBeInTheDocument();
+    expect(screen.getByText(/Son üç soru\. Sonra kişilik kartın hazır/)).toBeInTheDocument();
 
     // Üç soruyu bitir → önce GEÇİŞ: form kalkar, durum duyurulur, kart henüz yok
     await submitThreeQuestionsWithFakeTimers();

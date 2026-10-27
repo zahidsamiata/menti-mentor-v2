@@ -9,4 +9,4 @@
 export const CARD_REVEAL_DELAY_MS = 900;
 
 /** Geçiş ekranında gösterilen ve ekran okuyucuya duyurulan durum metni (madde 141 cümlesinden). */
-export const CARD_REVEAL_STATUS_TEXT = 'Karakter kartın hazır.';
+export const CARD_REVEAL_STATUS_TEXT = 'Kişilik kartın hazır.';

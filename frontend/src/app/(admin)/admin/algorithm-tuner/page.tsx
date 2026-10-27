@@ -133,7 +133,7 @@ export default function AlgorithmTunerPage() {
       <div>
         <h1 className="text-2xl font-bold">Algoritma Kalibrasyon Merkezi</h1>
         <p className="text-sm text-muted-foreground">
-          Eşleştirme ağırlıklarını NPS verilerine göre optimize edin.
+          Öneri ağırlıklarını NPS verilerine göre optimize edin.
         </p>
       </div>
 
@@ -145,7 +145,7 @@ export default function AlgorithmTunerPage() {
       {weights && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Mevcut Eşleştirme Ağırlıkları</CardTitle>
+            <CardTitle className="text-base">Mevcut Öneri Ağırlıkları</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-3 sm:grid-cols-2">
@@ -157,7 +157,7 @@ export default function AlgorithmTunerPage() {
                 <p className="mt-1 text-xs text-muted-foreground">Ortak sektör ve ilgi alanları</p>
               </div>
               <div className="rounded-xl border border-border p-4 text-center">
-                <p className="text-xs text-muted-foreground">Karakter / DISC Uyumu</p>
+                <p className="text-xs text-muted-foreground">Kişilik / DISC Uyumu</p>
                 <p className="mt-1 text-3xl font-bold text-primary tabular-nums">
                   %{Math.round(weights.discWeight * 100)}
                 </p>
@@ -169,7 +169,7 @@ export default function AlgorithmTunerPage() {
               <strong className="text-foreground"> %{Math.round(weights.sectorWeight * 100)}</strong>&apos;i
               sektör/ilgi alanı örtüşmesinden,
               <strong className="text-foreground"> %{Math.round(weights.discWeight * 100)}</strong>&apos;i
-              DISC karakter uyumundan gelir. Yüksek toplam skor, daha uyumlu bir eşleşme demektir.
+              DISC kişilik uyumundan gelir. Yüksek toplam skor, daha uyumlu bir eşleşme demektir.
               Bu oranları aşağıdan %5&apos;er adımla elle ayarlayabilirsiniz.
             </p>
 
@@ -322,7 +322,7 @@ export default function AlgorithmTunerPage() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-3">Karakter/DISC Ağırlığı</td>
+                      <td className="px-4 py-3">Kişilik/DISC Ağırlığı</td>
                       <td className="px-4 py-3 text-center">%{Math.round(pending.previousWeights.discWeight * 100)}</td>
                       <td className="px-4 py-3 text-center font-bold text-primary">
                         %{Math.round(pending.newWeights.discWeight * 100)}

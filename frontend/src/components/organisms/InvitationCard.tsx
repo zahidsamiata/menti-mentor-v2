@@ -94,11 +94,11 @@ export function InvitationCard({ data, token }: InvitationCardProps) {
         </h1>
 
         <p className="text-base text-muted-foreground leading-relaxed text-balance">
-          {roleDesc} Sizi, karakter ve uzmanlık uyumuna göre{' '}
+          {roleDesc} Size, kişilik ve uzmanlık uyumuna göre{' '}
           <strong className="text-foreground font-medium">
-            size en uygun kişiyle
+            en uygun kişileri
           </strong>{' '}
-          eşleştireceğiz.
+          önereceğiz.
           <br />
           <span className="inline-flex items-center gap-1 mt-1 text-sm text-primary font-medium">
             <Sparkles className="h-4 w-4" aria-hidden />
@@ -116,8 +116,8 @@ export function InvitationCard({ data, token }: InvitationCardProps) {
         <ol className="text-left space-y-2.5" aria-label="Kayıt adımları">
           {[
             'Kısa profilini doldur',
-            'Oyunlaştırılmış mizaç testini çöz',
-            'Eşleşmeni ve mizaç kartını al',
+            'Oyunlaştırılmış kişilik testini çöz',
+            'Önerilerini ve kişilik kartını al',
           ].map((step, i) => (
             <li key={step} className="flex items-start gap-3 text-sm text-muted-foreground">
               <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
