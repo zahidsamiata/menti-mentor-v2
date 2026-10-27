@@ -13,6 +13,26 @@
 | 2026-W43 (19-25 Ekim) | `docs/otonom/arsiv/02-ILERLEME-2026-W43.md` | PO NOTU 2026-10-21 + EK: 9 kartın CEVAP'ı kart dosyalarına aktarıldı, KARAR-143 açıldı (yalnız belge) | PO strateji katmanı üzerinden toplu karar verdi; uygulama normal tura bırakıldı |
 | 2026-W44 (26 Ekim →) | bu dosya | PO NOTU 2026-10-21 kararlarının açtığı işler kuyruğa alınıp öne çekildi (§ AŞAMA PN) · Windows/Cursor ortamında araç eksikliği | PO "açtıkları işleri kuyrukta öne al" dedi; bu bilgisayarda node/gh/python olmadığı için kod işi merge edilemiyor |
 
+## TUR ÖZETİ — 2026-10-27 (2. oturum) · Windows/Cursor, araçlar kurulu · ara özet (tur sürüyor)
+
+**BITTI ve CANLIDA: 6 iş** (her biri: 7b bağımsız inceleme ONAY · CI iki repoda yeşil · mutasyon kanıtı · merge sonrası `/health` ok:true db:up)
+- **U-12** davet 7 gün (backend #312 · çatı #490) — kurum yöneticisinin davet linki 7 gün sonra açılmıyor; ekranda "7 gün geçerli".
+- **Y1-B8** onay bekleyen kapısı (backend #313 · çatı #491) — onay bekleyen kişi şifre/Google/LinkedIn ile girip kayıt sürecini tamamlıyor; mentörleri yalnız "N onaylı mentör · Alanlar: yazılım (4) …" olarak görüyor; mesaj/talep/randevu/anlaşma/eşleşme/mentör listesi kapalı.
+- **U-13** rol değiştirme (backend #315 · çatı #492) — Yöneticiler sayfasında "Üye rolleri" ile Mentör↔Menti; yöneticilikten çıkarırken yeni rol seçiliyor.
+- **U-15** sıfırlama bağlantısı (backend #317 · çatı #493) — e-posta çalışmazsa platform yöneticisi kişi detayında 60 dk'lık tek kullanımlık bağlantı üretiyor (iz kaydıyla).
+- **AN-50 + AN-10** kişilik/yönlendirme dili (backend #323 · çatı #496) — ekranlarda "Kişilik Testi", "Kişilik kartın hazır", "Kişilik uyumu"; ana sayfa/metodoloji "Öneri Motoru", "nasıl yönlendirir?".
+
+**PO EVET'İ BEKLEYEN (🔵, hazır, 7b ONAY, CI yeşil, mutasyon ✓):** **KARAR-144** U-12B davet linki iptali (backend #319 + çatı #494, yeni tablo, yedek gerekmez) · **KARAR-145** U-13C rol tarihçesi (backend #320 + çatı #495, yeni tablo, yedek gerekmez).
+**KARAR BEKLİYOR (bu turda açılan/etkilenen):** KARAR-89 (NPS hangi kutuya — PN-10 · PN-11; ajan önerisi kartta) · KARAR-138 (U-13C notu: rol tarihçesi kişinin kendi veri dışa aktarımına eklensin mi). PO NOTU 2026-10-27'nin 3 kararı (KARAR-143 · 44 · 12) işlendi.
+**BASARISIZ: 0.**
+**CANLIDA KONTROL EDİLECEKLER:** onay bekleyen bir test kullanıcısıyla giriş → menti bekleme kartı (isimsiz alan özeti) · Yöneticiler → Üye rolleri · platform → kişi detayı → sıfırlama bağlantısı · kayıt ekranında "Kişilik Testi".
+**PO'NUN KENDİ YAPMASI GEREKENLER:** `03-PO-ELLE-ISLER.md` — en kritik 3: (1) KARAR-144 ve KARAR-145'e EVET/HAYIR (yedek gerekmiyor, ikisi de yeni boş tablo) · (2) SMTP gerçek gönderim teyidi — canlı `/health` artık `smtp: verified` diyor; bir test e-postasının ulaştığını doğrulaman U-12C'yi (kişiye özel davet) açar · (3) canlı `DATABASE_URL`'in hangi sunucu olduğu teyidi (03-PO en üst madde).
+**KUYRUK SON DAĞILIMI (§ AŞAMA PN):** 🟢 BEKLIYOR 15 (PN-06 · PN-03 · PS-03 · I-12 · PN-01 · PN-02 · PN-04 · PN-05 · IC-14 · I-01 · I-11 · PN-08 · AN-51 · AJ-38 · F-08 · PN-09 içinden; AN-51 belge) · 🔵 PR-ACIK 2 (U-12B · U-13C) + BEKLIYOR 3 (U-12C SMTP teyidi sonrası · F-09 seed · PN-12 genel geri bildirim) · 🔴 KARAR-BEKLEYEN: PN-07 (KARAR-62) · PN-10 · PN-11 (KARAR-89).
+**BACKEND:** pointer `358e085` → `6917448` = backend main HEAD (eşit, `git ls-tree` ile doğrulandı).
+**STASH:** yok.
+**Ortam notu:** bu bilgisayarda bekçinin öz-testleri (`belge-bekci.test.sh`) Windows'a özgü 4-5 vakada düşüyor (Git Bash grep 3.0 emoji eşleştiremiyor; Python yolları `\` ile yazıyor) → `npm run verify` bekçi adımında kırmızı; diğer adımlar tek tek koşuldu, bekçinin repo denetimi ayrıca koştu (HATA yok), CI docs-guard yeşil. Kalıcı çözüm VPS ya da betikte yol ayırıcısı normalizasyonu (ayrı iş).
+**Limitin en çok gittiği yer:** submodule pointer çakışmaları — birden çok çatı PR'ı aynı anda açıkken her merge sonrası diğerlerine main birleştirip CI'ı yeniden beklemek. Sonraki turda çatı PR'larını sırayla açmak daha ucuz.
+
 ## TUR ÖZETİ — 2026-10-27 · Windows/Cursor (PO bilgisayarı) · DURDU K1-a (bu ortamda yapılabilir iş kalmadı)
 
 **BITTI ve CANLIDA: 0 iş** — bu turda kod değişikliği yok, canlıya bir şey çıkmadı. Kullanıcı ekranında değişiklik YOK.

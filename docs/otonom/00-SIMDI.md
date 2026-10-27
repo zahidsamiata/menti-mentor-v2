@@ -1,15 +1,15 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `8d6fec3` · backend main `bfe0af9` (= çatı pointer)
+**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `33523a2` · backend main `6917448` (= çatı pointer)
 
 **Durum:** ÇALIŞIYOR. Oturum PO'nun Windows bilgisayarında (Cursor): Node 24 (CI/canlı 22 — kanıt CI), gh girişli, Python 3.15 (`py`). ⚠️ Bu bilgisayarda bekçi için iki ortam ayarı gerekiyor: (1) `python3` → `py` kısayolu (PATH başı), (2) bekçinin öz-testleri (`belge-bekci.test.sh`) Windows'ta 4-5 vakada düşüyor — Git Bash grep 3.0 emoji eşleştiremiyor ve Python yolları `\` ile yazıyor; ortamsal, CI'da (Linux) aynı testler yeşil. Bu yüzden `npm run verify` burada bekçi adımında kırmızı; diğer adımlar tek tek koşuluyor (tsc · tsc-test · eslint · birim · fe tsc · vitest · build), bekçinin repo denetimi ayrıca koşuyor (HATA yok).
 
-**Şu an yapılan:** AN-50 + AN-10 kalan ayak (kişilik + yönlendirme dili) — envanter. 🔵 PO bekleyen: → U-12B (KARAR-144) · → U-13C (KARAR-145).
+**Şu an yapılan:** ara TUR ÖZETİ yazıldı (02-ILERLEME başı); sıradaki PN-06. 🔵 PO bekleyen: → U-12B (KARAR-144) · → U-13C (KARAR-145).
 
-**Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** AN-50 + AN-10 kalan ayak (kişilik + yönlendirme dili, tek PR) → PN-06 → PN-03 → PS-03 → I-12.
+**Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** PN-06 (arketip eşikleri → ana + yakın tip, matching 7b) → PN-03 → PS-03 → I-12 → PN-01.
 
-**Son merge'ler:** U-15 sıfırlama bağlantısı — backend #317 + çatı #493 (`8d6fec3`; canlı yeniden başladı, `/health` ok:true db:up smtp:verified) · Y1-B8 — #313 + #491 (`7d53871`) · U-13 — #315 + #492 (`7a15fcc`) · U-12 — #312 + #490 (`3004219`).
+**Son merge'ler:** AN-50 + AN-10 — backend #323 + çatı #496 (`33523a2`; canlı yeniden başladı, ok:true db:up, site 200) · U-15 — #317 + #493 (`8d6fec3`) · Y1-B8 — #313 + #491 (`7d53871`) · U-13 — #315 + #492 (`7a15fcc`) · U-12 — #312 + #490 (`3004219`).
 
 **PO bekleyen hazır PR'lar (hepsi 7b ONAY):**
 - 🔵 E-4 karantina — backend #289 + çatı #474 · **KARAR-134**
