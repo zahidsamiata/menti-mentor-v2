@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   // F-29: metadataBase → OG/canonical gibi göreli URL'ler mutlak URL'e çözülür.
   metadataBase: new URL(getSiteUrl()),
   title: { template: '%s — Mentorluk Platformu', default: 'Mentorluk Platformu' },
-  description: 'Mentor-menti eşleştirme platformu',
+  description: 'Mentör-menti yönlendirme platformu',
   // Y-09: paylaşım (OG/Twitter) meta'sı site geneli — önceden yalnız ana sayfadaydı.
   // ⚠️ Burada BİLİNÇLİ olarak title/description YOK: Next, og/twitter title+description
   // BOŞSA her sayfanın kendi title/description'ını kopyalar (resolve-metadata

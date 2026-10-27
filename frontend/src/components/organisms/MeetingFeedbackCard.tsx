@@ -173,7 +173,7 @@ export default function MeetingFeedbackCard({
           Bu eşleşme bana uygun değil, farklı birini dene
         </button>
         <p className="mt-1 text-center text-[10px] text-muted-foreground">
-          Geri bildirim eşleşme algoritmasını iyileştirir, kimliğin paylaşılmaz.
+          Geri bildirim öneri algoritmasını iyileştirir, kimliğin paylaşılmaz.
         </p>
       </div>
     </div>

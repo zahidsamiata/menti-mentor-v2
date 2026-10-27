@@ -312,7 +312,7 @@ export default function MentorDashboardPage() {
               const compatReason = m.match
                 ? [
                     m.match.sectorScore > 0.4 ? 'Ortak sektör' : null,
-                    m.match.characterScore > 0.4 ? 'Karakter uyumu' : null,
+                    m.match.characterScore > 0.4 ? 'Kişilik uyumu' : null,
                   ].filter(Boolean).join(' · ')
                 : null;
               return (

@@ -122,7 +122,7 @@ export default function EslesmelerPage() {
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Menti</th>
                 <th className="px-4 py-3 text-right font-medium text-muted-foreground">Puan</th>
                 <th className="px-4 py-3 text-right font-medium text-muted-foreground">Sektör</th>
-                <th className="px-4 py-3 text-right font-medium text-muted-foreground">Karakter</th>
+                <th className="px-4 py-3 text-right font-medium text-muted-foreground">Kişilik</th>
                 <th className="px-4 py-3 text-right font-medium text-muted-foreground">Görüşme</th>
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Risk</th>
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Durum</th>

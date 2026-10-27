@@ -95,7 +95,7 @@ describe('Y-09 kök layout paylaşım meta\'sı', () => {
 
   it('ana sayfa kendi başlık/açıklamasını korur, OG\'yi yeniden tanımlamaz', () => {
     expect(homeMetadata.title).toBe('MentiMentor — Mentörlük Programınızı Zahmetsizce Yönetin');
-    expect(String(homeMetadata.description)).toContain('DISC mizaç tabanlı');
+    expect(String(homeMetadata.description)).toContain('DISC kişilik tabanlı');
     expect(homeMetadata.openGraph).toBeUndefined();
     expect(homeMetadata.twitter).toBeUndefined();
   });
