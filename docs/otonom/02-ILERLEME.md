@@ -122,3 +122,13 @@ Not: KARAR-110 ve KARAR-78 periyodik ankete bağlı; anket kalktığı için kap
 KARAR-12 → KARAR-44 ile birlikte cevaplandı: ikinci geri bildirim kayıt sistemi kullanıcıya açılmaz; görüşme değerlendirme kaynağı check-in'dir; NPS tek alanda, 3. ay değerlendirmesinde toplanır.
 === KARARLAR SONU ===
 ```
+
+## İŞ KAYITLARI — 2026-10-27 (2. oturum)
+
+- ⚠️ **Sıra sapması:** PN önceliği Y1-B8 → U-12 idi; U-12 (küçük, bağımsız) Y1-B8 haritalaması sürerken önce yazıldı. Y1-B8 aynı oturumda tamamlandı (PR-ACIK).
+- ✅ **U-12 BITTI** — backend #312 + çatı #490 merge · 7b ONAY · CI iki repoda yeşil (backend 242 test dosyası; `u12-davet-7-gun.unit` 5 + `u12-davet-join-7-gun` 2 test koştu) · mutasyon: yaş kontrolü geri alınınca negatif test kırmızı. **CANLIDA BAK:** yönetici davet ekranında "Davet Linki (7 gün geçerli)"; 7 günü geçmiş (değişiklikten önce üretilmiş 30 günlük olanlar dahil) bağlantı "Davet linki geçersiz veya süresi dolmuş" der. Canlı: `/health` ok:true · db:up · smtp:verified · site 200.
+- ⏳ **Y1-B8 PR-ACIK** — backend #313 + çatı #491: onay bekleyen kişi şifre/Google/LinkedIn ile girer, kayıt sürecini tamamlar; mentörleri yalnız "N onaylı mentör · Alanlar: yazılım (4) …" özetiyle görür; mesaj/talep/randevu/anlaşma/eşleşme/mentör listesi 403 (varsayılan kapalı + izin listesi, `pendingApprovalGate.ts`). 7b ONAY (not 1 '#' bypass düzeltildi). §MUTASYON-CI #314: y1b8 + auth PENDING testleri KIRMIZI ✓. Mutasyon CI'ı `mentor-count-membership` testinin tam eşitlik beklediğini de gösterdi → testte alt-küme eşleşmesine geçildi.
+- ⏳ **U-13 PR-ACIK** — backend #315 + çatı #492: Yöneticiler sayfasında "Üye rolleri" (Mentör↔Menti) + "Yöneticilikten çıkar" → yeni rol seçimi. Havuz kartına konmadı (KARAR-133 açık). 7b sürüyor; mutasyon taslağı #316.
+- 🧰 Ortam notu: bekçi öz-testleri Windows'ta ortamsal düşüyor (grep 3.0 emoji + `\` yol ayırıcısı); bekçinin repo denetimi ve CI docs-guard yeşil.
+- Kalan 🟢 (PN, çalışılabilir): U-15 · AN-50 · AN-51 · PN-06 · PN-03 · PS-03 · I-12 · PN-01 · PN-02 · PN-04 · PN-05 · IC-14 · I-01 · I-11 · PN-08 · AJ-38 · F-08 · PN-09 (18) + PR-ACIK 2 (Y1-B8, U-13).
+

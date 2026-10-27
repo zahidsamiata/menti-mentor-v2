@@ -1,15 +1,15 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main HEAD (bu commit) · backend pointer `358e085` (= backend origin/main)
+**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `3004219` · backend main `d7080e9` (= çatı pointer)
 
-**Durum:** ÇALIŞIYOR. Oturum PO'nun Windows bilgisayarında (Cursor), araçlar kurulu: Node 24 (CI/canlı 22 — kanıt CI), gh girişli, Python 3.15 (`py`). ⚠️ Bekçi `python3` çağırıyor → bu bilgisayarda `py`'ye yönlenen geçici kısayolla (PATH başına `python3` → `exec py "$@"`) çalıştırılıyor; HATA yok.
+**Durum:** ÇALIŞIYOR. Oturum PO'nun Windows bilgisayarında (Cursor): Node 24 (CI/canlı 22 — kanıt CI), gh girişli, Python 3.15 (`py`). ⚠️ Bu bilgisayarda bekçi için iki ortam ayarı gerekiyor: (1) `python3` → `py` kısayolu (PATH başı), (2) bekçinin öz-testleri (`belge-bekci.test.sh`) Windows'ta 4-5 vakada düşüyor — Git Bash grep 3.0 emoji eşleştiremiyor ve Python yolları `\` ile yazıyor; ortamsal, CI'da (Linux) aynı testler yeşil. Bu yüzden `npm run verify` burada bekçi adımında kırmızı; diğer adımlar tek tek koşuluyor (tsc · tsc-test · eslint · birim · fe tsc · vitest · build), bekçinin repo denetimi ayrıca koşuyor (HATA yok).
 
-**Şu an yapılan:** PO NOTU 2026-10-27 (KARAR-143 · 44 · 12) işlendi → § AŞAMA PN'ye AJ-38 · F-08 · PN-09 · PN-12; KARAR-89'a PN-10 · PN-11. Sıradaki: § AŞAMA PN kod işleri.
+**Şu an yapılan:** → Y1-B8 · → U-13 (ikisi de 7b ONAY; CI ve merge bekliyor — durum kuyrukta). Sıradaki: U-15.
 
-**Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** Y1-B8 (onay bekleyen kullanıcı kapısı, güvenlik — eski PR #164/#343 yerine yeni dal) → U-12 (davet 7 gün) → U-13 (rol değiştirme + düşürmede hedef rol) → U-15 (platform yöneticisi sıfırlama bağlantısı) → U-12B (🔵 iptal edilebilir davet linki).
+**Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** U-15 (platform yöneticisi sıfırlama bağlantısı) → U-12B (🔵 iptal edilebilir davet linki) → U-13C (🔵 rol tarihçesi) → AN-50 + AN-10 kalan ayak (kişilik + yönlendirme dili, tek PR) → PN-06.
 
-**Son merge'ler:** bu turda yok (son: AJ-120 dilim 2 #488, 2026-09-29).
+**Son merge'ler:** U-12 davet 7 gün — backend #312 (`d7080e9`) + çatı #490 (`3004219`) · 7b ONAY · CI iki repoda yeşil · canlı `/health` ok:true db:up smtp:verified (dağıtım sonrası tekrar bakılacak — ilk bakışta uptime 38 dk, yeni sürüm henüz başlamamıştı).
 
 **PO bekleyen hazır PR'lar (hepsi 7b ONAY):**
 - 🔵 E-4 karantina — backend #289 + çatı #474 · **KARAR-134**
@@ -27,6 +27,8 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
+| backend #313 + çatı #491 | Y1-B8 onay bekleyen kapısı · 🟢+7b | bekliyor | ✅ ONAY | CI bitince merge; mutasyon taslağı backend #314 (kırmızı ✓, kapatılacak); eski #164/#343 kapatılacak |
+| backend #315 + çatı #492 | U-13 rol değiştirme · 🟢+7b | bekliyor | sürüyor | 7b + CI; mutasyon taslağı backend #316 |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil (#420 main gerisinde) | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | backend #212 | AJ-50 ham DISC kart temizliği · 🔵 | yeşil | ✅ ONAY | KARAR-116 EVET + yedek (DB erişimi) |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | CONFLICTING (2026-09-29) | SORUN VAR (ürün) | KARAR-101 ✅ B genişletilmiş + EK — kuyrukta Y1-B8 (§ AŞAMA PN, 1. sıra); yeni dalda yeniden yazılacak, yeni PR açılınca bu ikisi kapatılır |

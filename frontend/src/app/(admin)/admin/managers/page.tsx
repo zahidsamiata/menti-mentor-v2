@@ -3,16 +3,21 @@
 import { useState } from 'react';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useQuery } from '@/hooks/useQuery';
-import { adminApi } from '@/lib/api/admin';
+import { adminApi, type MemberRole } from '@/lib/api/admin';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Button } from '@/components/ui/button';
 import { UI_TEXT } from '@/lib/uiText';
+
+const ROLE_LABEL: Record<MemberRole, string> = { MENTOR: 'Mentör', MENTI: 'Menti' };
 
 export default function ManagersPage() {
   const api       = useApiClient();
   const [msg, setMsg] = useState<string | null>(null);
   const [showAssign, setShowAssign] = useState(false);
   const [busyId, setBusyId] = useState<string | null>(null);
+  // U-13: yöneticilikten çıkarırken yeni rolün seçildiği satır.
+  const [demoteFor, setDemoteFor] = useState<string | null>(null);
+  const [showRoles, setShowRoles] = useState(false);
 
   const { data, isLoading, error, refetch } = useQuery(
     () => adminApi.listAdmins(api),
@@ -20,11 +25,11 @@ export default function ManagersPage() {
     { enabled: true, cacheKey: 'admin:admins' },
   );
 
-  // Atama listesi yalnızca panel açılınca çekilir (onaylı kullanıcılar).
+  // Atama / rol listesi yalnızca panel açılınca çekilir (onaylı kullanıcılar).
   const approved = useQuery(
     () => adminApi.listUsers(api, { approvalStatus: 'APPROVED' }),
-    [showAssign],
-    { enabled: showAssign },
+    [showAssign, showRoles],
+    { enabled: showAssign || showRoles },
   );
 
   function notify(m: string) {
@@ -32,13 +37,22 @@ export default function ManagersPage() {
     setTimeout(() => setMsg(null), 3000);
   }
 
-  async function handleDemote(userId: string, name: string) {
-    if (!window.confirm(`${name} kullanıcısını yöneticilikten çıkarmak istediğinize emin misiniz?`)) return;
+  async function handleDemote(userId: string, name: string, targetRole: MemberRole) {
     setBusyId(userId);
-    const result = await adminApi.demoteFromAdmin(api, userId);
+    const result = await adminApi.demoteFromAdmin(api, userId, targetRole);
     setBusyId(null);
-    if (result.ok) { notify(`${name} yöneticilikten çıkarıldı.`); refetch(); approved.refetch(); }
+    setDemoteFor(null);
+    if (result.ok) { notify(`${name} yöneticilikten çıkarıldı; yeni rolü: ${ROLE_LABEL[targetRole]}.`); refetch(); approved.refetch(); }
     else notify((result as { ok: false; error?: { message?: string } }).error?.message ?? 'Hata oluştu.');
+  }
+
+  async function handleChangeRole(userId: string, name: string, role: MemberRole) {
+    if (!window.confirm(`${name} kullanıcısının rolü "${ROLE_LABEL[role]}" olacak. Aktif eşleşmeleri olduğu gibi sürer. Emin misiniz?`)) return;
+    setBusyId(userId);
+    const result = await adminApi.changeMemberRole(api, userId, role);
+    setBusyId(null);
+    if (result.ok) { notify(`${name} artık ${ROLE_LABEL[role]}.`); approved.refetch(); }
+    else notify((result as { ok: false; error?: { message?: string } }).error?.message ?? 'Rol değiştirilemedi.');
   }
 
   async function handlePromote(userId: string, name: string) {
@@ -54,6 +68,9 @@ export default function ManagersPage() {
   const adminIds = new Set((data?.items ?? []).map((a) => a.id));
   const assignable = (approved.data?.items ?? []).filter((u) => !adminIds.has(u.id));
   const atAdminLimit = (data?.items.length ?? 0) >= 3;
+  const roleChangeable = (approved.data?.items ?? []).filter(
+    (u) => !adminIds.has(u.id) && (u.role === 'MENTOR' || u.role === 'MENTI'),
+  );
 
   return (
     <div className="max-w-2xl mx-auto py-8 px-4 space-y-6">
@@ -64,9 +81,14 @@ export default function ManagersPage() {
             Kurumunuzdaki tüm yöneticiler. Onaylı kullanıcıları buradan yönetici atayabilir veya çıkarabilirsiniz (en fazla 3 yönetici).
           </p>
         </div>
-        <Button size="sm" onClick={() => setShowAssign((v) => !v)} disabled={atAdminLimit && !showAssign}>
-          {showAssign ? UI_TEXT.actions.close : '+ Yönetici Ata'}
-        </Button>
+        <div className="flex gap-2">
+          <Button size="sm" variant="outline" onClick={() => setShowRoles((v) => !v)}>
+            {showRoles ? UI_TEXT.actions.close : 'Üye rolleri'}
+          </Button>
+          <Button size="sm" onClick={() => setShowAssign((v) => !v)} disabled={atAdminLimit && !showAssign}>
+            {showAssign ? UI_TEXT.actions.close : '+ Yönetici Ata'}
+          </Button>
+        </div>
       </div>
 
       {msg && <AlertMessage type="success" message={msg} />}
@@ -103,6 +125,41 @@ export default function ManagersPage() {
         </div>
       )}
 
+      {/* U-13 (KARAR-83 A): mentör ↔ menti rol değiştirme. Yöneticinin rolü burada değişmez. */}
+      {showRoles && (
+        <div className="rounded-xl border p-4 space-y-3">
+          <p className="text-sm font-medium">Üye rolleri</p>
+          <p className="text-xs text-muted-foreground">
+            Yanlış rolle kayıt olan üyeyi düzeltebilirsiniz. Aktif eşleşmeler, görüşmeler ve mesajlar olduğu gibi sürer.
+          </p>
+          {approved.isLoading && <p className="text-sm text-muted-foreground">{UI_TEXT.status.loading}</p>}
+          {approved.error && <AlertMessage type="error" message={approved.error} />}
+          {approved.data && roleChangeable.length === 0 && (
+            <p className="text-sm text-muted-foreground">Rolü değiştirilebilecek onaylı üye yok.</p>
+          )}
+          {roleChangeable.map((u) => {
+            const current = u.role as MemberRole;
+            const next: MemberRole = current === 'MENTOR' ? 'MENTI' : 'MENTOR';
+            return (
+              <div key={u.id} className="flex items-center justify-between gap-3 border-b last:border-0 pb-2 last:pb-0">
+                <div className="min-w-0">
+                  <p className="font-medium text-sm truncate">{u.fullName}</p>
+                  <p className="text-xs text-muted-foreground truncate">Şu anki rol: {ROLE_LABEL[current]}</p>
+                </div>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  disabled={busyId === u.id}
+                  onClick={() => handleChangeRole(u.id, u.fullName, next)}
+                >
+                  {busyId === u.id ? 'Değiştiriliyor…' : `${ROLE_LABEL[next]} yap`}
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
       {isLoading && <p className="text-sm text-muted-foreground">{UI_TEXT.status.loading}</p>}
 
       {data && (
@@ -116,14 +173,37 @@ export default function ManagersPage() {
                 <p className="font-medium text-sm">{admin.fullName}</p>
                 <p className="text-xs text-muted-foreground">{admin.email}</p>
               </div>
-              {data.items.length > 1 && (
+              {data.items.length > 1 && demoteFor !== admin.id && (
                 <button
-                  onClick={() => handleDemote(admin.id, admin.fullName)}
+                  onClick={() => setDemoteFor(admin.id)}
                   disabled={busyId === admin.id}
                   className="text-xs text-destructive hover:text-destructive/80 transition-colors disabled:opacity-50"
                 >
                   Yöneticilikten çıkar
                 </button>
+              )}
+              {data.items.length > 1 && demoteFor === admin.id && (
+                // U-13: yeni rol açıkça seçilir — eskiden herkes sessizce "Mentör" oluyordu.
+                <div className="flex items-center gap-2" role="group" aria-label="Yeni rol seçin">
+                  <span className="text-xs text-muted-foreground">Yeni rolü:</span>
+                  {(['MENTOR', 'MENTI'] as const).map((role) => (
+                    <Button
+                      key={role}
+                      size="sm"
+                      variant="outline"
+                      disabled={busyId === admin.id}
+                      onClick={() => handleDemote(admin.id, admin.fullName, role)}
+                    >
+                      {ROLE_LABEL[role]}
+                    </Button>
+                  ))}
+                  <button
+                    onClick={() => setDemoteFor(null)}
+                    className="text-xs text-muted-foreground hover:text-foreground"
+                  >
+                    {UI_TEXT.actions.cancel}
+                  </button>
+                </div>
               )}
               {data.items.length === 1 && (
                 <span className="text-xs text-muted-foreground italic">Son yönetici</span>

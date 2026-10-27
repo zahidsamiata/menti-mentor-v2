@@ -244,7 +244,7 @@ export default function InvitePage() {
       {/* Davet linki */}
       <div className="flex gap-3 items-end">
         <div className="flex-1">
-          <label className="block text-sm font-medium mb-1">Davet Linki (30 gün geçerli)</label>
+          <label className="block text-sm font-medium mb-1">Davet Linki (7 gün geçerli)</label>
           <input
             value={inviteLink}
             readOnly
