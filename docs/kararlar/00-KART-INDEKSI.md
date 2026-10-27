@@ -66,7 +66,7 @@
 | G2-03 | Tiebreak D>I>S>C | 🗑️ | md.103 | — | G-kartı |
 | G2-04 | Psikometrik gerekçe | 🗑️ | md.103 | — | G-kartı |
 | G2-05 | %60/40 varsayılan oran | 🗑️ | md.9-alt | — | G-kartı |
-| G2-06 | "Varsayılana düşen oran" metriği | 🟨 kısmen — AJ-79; kalan → AJ-111 | **madde 111** | — | G-kartı |
+| G2-06 | "Varsayılana düşen oran" metriği | ✅ AJ-111 · PR #307 (backend #324 toplu + çatı #498) — AJ-79 + AJ-111 ile yapıldı | **madde 111** | — | G-kartı |
 | G2-07 | md.101 SJT/OCEAN okunmuyor | 🔴 KARAR-61 (→ F-11) | md.101 | F-11 · KARAR-10 | KUYRUK |
 | G2-08 | md.14 sector-scorer uyuyor | 🔴 KARAR-61 (→ F-11) | md.14 | F-11 · KARAR-10 | KUYRUK |
 | G2-09 | CORE-eşiği tutarsızlığı (kart) | 🟨 kısmen — AJ-80; kalan → KARAR-57 | md.102 | — | G-kartı |
