@@ -82,7 +82,7 @@ function DefaultProfileLine({ profile }: { profile?: TenantDefaultProfile }) {
 
 /**
  * AJ-111 (md.111): son 30 günde aday listesi istenen eşleştirmelerin yüzde kaçı, tüm kurallarla
- * aday çıkmadığı için gevşetilmiş kurallarla (zaman → mizaç uyumsuzluğu → yalnız sektör) sonuçlandı.
+ * aday çıkmadığı için gevşetilmiş kurallarla (zaman → kişilik uyumsuzluğu → yalnız sektör) sonuçlandı.
  * Toplu sayaç; kişi yok. Az istekte oran yanıltıcı olduğu için backend "yetersiz veri" der.
  */
 function MatchingFallbackLine({ stat }: { stat?: TenantMatchingFallback }) {
@@ -99,7 +99,7 @@ function MatchingFallbackLine({ stat }: { stat?: TenantMatchingFallback }) {
       </p>
       {!stat.insufficientData && stat.relaxedRequests > 0 && (
         <p className="text-xs text-muted-foreground">
-          Zaman uyumu gevşetildi: {stat.byLevel.level1} · Mizaç uyumsuzluğu filtresi kaldırıldı:{' '}
+          Zaman uyumu gevşetildi: {stat.byLevel.level1} · Kişilik uyumsuzluğu filtresi kaldırıldı:{' '}
           {stat.byLevel.level2} · Yalnız sektör uyumu: {stat.byLevel.level3}
         </p>
       )}
