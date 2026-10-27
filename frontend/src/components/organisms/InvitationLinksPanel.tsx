@@ -65,8 +65,9 @@ export function InvitationLinksPanel({
       token: accessToken,
     });
     setBusyId(null);
-    if (!res.ok) setError(res.error.message ?? 'Link iptal edilemedi.');
     await load();
+    // Liste yüklemesi hatayı temizler; iptal hatası ondan SONRA yazılır ki yönetici görsün (7b notu).
+    if (!res.ok) setError(res.error.message ?? 'Link iptal edilemedi.');
   }
 
   return (

@@ -44,4 +44,16 @@ describe('U-12B davet linkleri paneli', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Linki iptal et' }));
     expect(apiClient).not.toHaveBeenCalledWith(expect.stringContaining('/revoke'), expect.anything());
   });
+
+  it('iptal başarısızsa hata mesajı görünür kalır', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    apiClient.mockImplementation((path: string) =>
+      Promise.resolve(path.endsWith('/revoke')
+        ? { ok: false, error: { message: 'Davet linki bulunamadı ya da zaten iptal edilmiş.' } }
+        : { ok: true, data: { items: rows } }),
+    );
+    render(<InvitationLinksPanel tenantId="t1" accessToken="tok" refreshKey={0} />);
+    fireEvent.click(await screen.findByRole('button', { name: 'Linki iptal et' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('zaten iptal edilmiş');
+  });
 });
