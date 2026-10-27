@@ -16,6 +16,6 @@
 **Benim önerim:** A — setin yol/yön diliyle uyumlu, hiçbir adla çakışmıyor ve "İz Açan"daki kahramanlık notunu karşılıyor. ⚠️ Bu, kullanıcının kendisi hakkında okuduğu ad; ad zevki senin ürün kararın, önerime güvenme.
 **Cevap vermezsen:** KARAR-45 C'nin uygulamasında iki menti arketipi yer tutucuyla kalır; IC-14 · IC-10 · AN-05'in arketip adı ayağı tamamlanamaz.
 **İlgili kartlar:** KARAR-45 (✍️ C — bu kartı doğurdu) · KARAR-64 (✍️ C — genel ad "kişilik") · KARAR-48 (sonuç kartındaki kimlik etiketi dili) · KARAR-54 (havuz kartında arketip adı/rozet)
-**CEVAP:**
+**CEVAP:** PO kendi seçimi: "Kâşif" yerine "Merak Eden", "İz Açan" yerine "Yola Çıkan". Menti seti: Rotacı · Merak Eden · Denge Arayan · Yola Çıkan. Kart gövde metinleri değişmez; yalnız ad ve adın geçtiği cümleler. _(kaynak: PO NOTU 2026-10-27, `01-KARARLAR.md` § PO NOTU — ajan aktardı)_
 
 ---
