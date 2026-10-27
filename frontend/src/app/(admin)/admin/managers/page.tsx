@@ -7,6 +7,7 @@ import { adminApi, type MemberRole } from '@/lib/api/admin';
 import { AlertMessage } from '@/components/molecules/AlertMessage';
 import { Button } from '@/components/ui/button';
 import { UI_TEXT } from '@/lib/uiText';
+import { RoleHistory } from '@/components/molecules/RoleHistory';
 
 const ROLE_LABEL: Record<MemberRole, string> = { MENTOR: 'Mentör', MENTI: 'Menti' };
 
@@ -18,6 +19,8 @@ export default function ManagersPage() {
   // U-13: yöneticilikten çıkarırken yeni rolün seçildiği satır.
   const [demoteFor, setDemoteFor] = useState<string | null>(null);
   const [showRoles, setShowRoles] = useState(false);
+  // U-13C: rol geçmişi açık olan üye.
+  const [historyFor, setHistoryFor] = useState<string | null>(null);
 
   const { data, isLoading, error, refetch } = useQuery(
     () => adminApi.listAdmins(api),
@@ -145,7 +148,17 @@ export default function ManagersPage() {
                 <div className="min-w-0">
                   <p className="font-medium text-sm truncate">{u.fullName}</p>
                   <p className="text-xs text-muted-foreground truncate">Şu anki rol: {ROLE_LABEL[current]}</p>
+                  {historyFor === u.id && <RoleHistory userId={u.id} />}
                 </div>
+                <div className="flex gap-2 shrink-0">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  aria-expanded={historyFor === u.id}
+                  onClick={() => setHistoryFor((cur) => (cur === u.id ? null : u.id))}
+                >
+                  Geçmiş
+                </Button>
                 <Button
                   size="sm"
                   variant="outline"
@@ -154,6 +167,7 @@ export default function ManagersPage() {
                 >
                   {busyId === u.id ? 'Değiştiriliyor…' : `${ROLE_LABEL[next]} yap`}
                 </Button>
+                </div>
               </div>
             );
           })}

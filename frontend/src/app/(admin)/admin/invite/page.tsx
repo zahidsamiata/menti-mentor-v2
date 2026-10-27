@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { apiClient } from '@/lib/api/client';
+import { InvitationLinksPanel } from '@/components/organisms/InvitationLinksPanel';
 
 type Role   = 'MENTI' | 'MENTOR';
 type Format = 'EMAIL' | 'WHATSAPP';
@@ -106,6 +107,8 @@ export default function InvitePage() {
   const [saved, setSaved]             = useState(false);
   const [copied, setCopied]           = useState(false);
   const [msg, setMsg]                 = useState<string | null>(null);
+  // U-12B: yeni link üretilince liste tazelensin.
+  const [linksRefresh, setLinksRefresh] = useState(0);
 
   // Şablonu yükle: DB'deki kayıtlı metin varsa onu kullan, yoksa default
   useEffect(() => {
@@ -141,6 +144,7 @@ export default function InvitePage() {
     setLoadingLink(false);
     if (result.ok) {
       setInviteLink(result.data.invitationLink);
+      setLinksRefresh((n) => n + 1);
     } else {
       // Eskiden hata sessizce yutuluyordu (403 dahil) → kullanıcı neden link
       // gelmediğini anlayamıyordu (U-03).
@@ -260,6 +264,10 @@ export default function InvitePage() {
           {loadingLink ? 'Oluşturuluyor…' : 'Oluştur'}
         </button>
       </div>
+
+      {user?.tenantId && accessToken && (
+        <InvitationLinksPanel tenantId={user.tenantId} accessToken={accessToken} refreshKey={linksRefresh} />
+      )}
 
       {/* Metin editörü */}
       <div className="space-y-2">
