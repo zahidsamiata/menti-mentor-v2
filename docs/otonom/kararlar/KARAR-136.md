@@ -9,4 +9,4 @@
 **Karşılaştırma:** Sertifika "yaşayan bir kalite ölçüsü" olacaksa A; "bir kez kazanılan yeterlilik" olacaksa B; iki ihtiyaç birden varsa C. Bugün gerçek kullanıcı ~0 olduğundan acil değil, ama canlıya çıkış öncesi netleşmesi iyi olur.
 **Benim önerim:** B — kazara kayıp, mentörün güvenini sarsar; kalite düşüşü için zaten kalite çarpanı var (sertifika = giriş kapısı, çarpan = performans — `docs/kararlar/konu/03-psikometri-ve-algoritma.md` "Önce Eğit, Sonra Kalibre Et").
 **Cevap vermezsen:** bugünkü davranış (A) sürer; I-08 (günlük deneme sınırı) bu kararı beklemez.
-**CEVAP:**
+**CEVAP:** A (bugünkü gibi): her deneme sertifikayı yeniden belirler; geçemeyen sertifika alamaz/kaybeder. Ek uyarı metni YOK. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_

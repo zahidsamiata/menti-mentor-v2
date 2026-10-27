@@ -20,4 +20,4 @@
 
 **Ayrıca (ayrı soru, bu karar olmadan da yanıtlanabilir):** iki ucun **neden yazıldığı hiçbir belgede yok** — silme protokolü gereği bunlar karantinaya bile alınmadı: `PATCH /api/users/:id/self-profile` (bir kişinin "kendini tanıt" bilgisini numarasıyla güncelleme; işi bugün profil sayfası yapıyor) ve `POST /api/users/:id/temperament-test` (eski mizaç testi; işi bugün DISC testi yapıyor). Bunların da bir sonraki karantina turuna alınmasını istiyorsan CEVAP'a "+ iki uç" yaz; istemiyorsan açık kalırlar.
 **İlgili kartlar:** KARAR-11 (cevaplı: A — bu kartın dayanağı) · KARAR-107 (ayrı karantina: `interactionStyle`) · KARAR-40 (eski randevu ucu — bu pakete KATILMADI, kendi kararını bekliyor)
-**CEVAP:**
+**CEVAP:** EVET (karantina). Bir tur çağrı gelmezse silme için kısa onay kartı aç. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_

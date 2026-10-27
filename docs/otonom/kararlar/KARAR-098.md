@@ -11,7 +11,7 @@
 **Benim önerim:** ana soruda yok — süreler ve kapsam KARAR-53 ④ cevabınla seçildi, burada sorulan yalnız canlı veritabanı değişikliğine onay; alt soru için önerim yukarıda (B).
 **Cevap vermezsen:** AN-26 PR-ACIK kalır.
 **İlgili kartlar:** KARAR-53 (④ hâli: 3/7/10 gün süreleri bu kartın kaynağı) · KARAR-56 (yanıtsız mentör mentiyi haftalık talep sınırında kilitler) · KARAR-97 (aynı Conversation tablosu, tek yedek yeter) — birlikte cevaplanması önerilir: KARAR-97 + KARAR-98
-**CEVAP:**
+**CEVAP:** EVET + PO tarifi: 3. gün mentöre 1. hatırlatma, 7. gün 2. hatırlatma, 10. gün kurum yöneticisine haber. Kanallar: e-posta (SMTP kurulunca) + uygulama içi bildirim (AN-09 hazır olunca). Yöneticiye panelde uyarı; yanında eylemler: mentöre mesaj, iletişim bilgisi, "yoksay". Yöneticinin mentöre mesaj atma yolu yoksa ayrı iş olarak kuyruğa ekle. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_
 
 ---
 

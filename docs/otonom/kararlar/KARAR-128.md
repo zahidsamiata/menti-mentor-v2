@@ -13,4 +13,4 @@
 **Not (ayrı ürün sorusu, bu karta dahil değil):** `Tenant.plan` (paket) alanı migration'a KONMADI — paket kümesi (FREE/PRO/…) gelir modeli kararına bağlı → KARAR-119.
 **Cevap vermezsen:** AJ-77 PR-ACIK kalır; başka iş kilitlenmez.
 **İlgili kartlar:** KARAR-35 (§3b ön sayımı salt-okuma DB iznine bağlı) · KARAR-119 (`Tenant.plan` paket alanı bu migration'ın dışında, gelir modeline bağlı)
-**CEVAP:**
+**CEVAP:** EVET (PO teknik kararı strateji katmanına bıraktı; §3b sayım + 5 tablo yedeği DB oturumunda). _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_

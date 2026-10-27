@@ -11,4 +11,4 @@
 **Ayrıca (seçenek — farklı istersen CEVAP'a yaz):** Veritabanına dokunmadan "yalnız aynı cihaz ve tarayıcıda hatırla" da yapılabilir (tarayıcı hafızası). Kaybı: başka cihazdan girince ya da tarayıcı temizlenince baştan başlar ve panel kartı güvenilir "Aşama X/Y" gösteremez. Bunu istersen CEVAP'a "HAYIR — tarayıcıda hatırla" yaz; ayrı küçük bir iş olarak yapılır.
 **Benim önerim:** EVET — "kalıcı" ölçütünü her cihazda karşılayan tek yol bu ve mevcut veriye dokunmuyor.
 **Cevap vermezsen:** P-08 PR-ACIK bekler; kullanıcı yolculuğu her seferinde baştan görmeye devam eder.
-**CEVAP:**
+**CEVAP:** EVET (yalnız aşama ilerlemesi saklanır; verilen cevaplar SAKLANMAZ). _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_

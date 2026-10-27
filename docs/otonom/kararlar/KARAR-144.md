@@ -15,4 +15,4 @@
 **Ne kaybedersin:** EVET → canlı veritabanına yeni bir tablo eklenir (küçük ve bağımsız ama yine de yapı değişikliği); her davet linki üretiminde ve davetle katılımda bir veritabanı okuması/yazması daha yapılır. HAYIR → sızan bir link 7 gün boyunca açık kalır ve o sürede katılanlar otomatik onay alır; çıkış blokerinin "iptal edilemez" ayağı açık kalır.
 **Benim önerim:** EVET — mevcut veriye dokunmuyor, kişi bilgisi (ad/e-posta) tutmuyor ve PO'nun "çıkış blokeri A + B ile kapanır" kararının kalan ayağı.
 **Cevap vermezsen:** U-12B PR-ACIK bekler; U-12C başlayamaz (aynı tabloyu kullanacak).
-**CEVAP:**
+**CEVAP:** EVET (KARAR-82 B'nin uygulaması; yedek gerekmez). _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_

@@ -11,7 +11,7 @@
 **Benim önerim:** yok — ürün davranışı KARAR-22 (B) cevabınla zaten seçildi; burada sorulan yalnız canlı veritabanı değişikliğine onay, o onay yalnız senin.
 **Cevap vermezsen:** U-18 PR-ACIK kalır; AN-20 (uyum rozeti dili) sırası U-18'e bağlı (KARAR-80/M5).
 **İlgili kartlar:** KARAR-22 (ret deneyimi B cevabı; bildirim ayağı eksik) · KARAR-98 (aynı Conversation tablosu, tek yedek yeter) · KARAR-109 (ikisi de mentör-menti ilişkisinin başlangıç akışı) — birlikte cevaplanması önerilir: KARAR-97 + KARAR-98
-**CEVAP:**
+**CEVAP:** EVET (7b SORUN VAR maddeleri giderilip ONAY gelmeden merge yok). _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_
 
 ---
 

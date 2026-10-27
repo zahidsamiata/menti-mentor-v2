@@ -12,4 +12,4 @@
 **Ne kaybedersin:** EVET → canlı veritabanına yeni bir tablo eklenir (küçük ve bağımsız ama yine de yapı değişikliği); her rol değişikliğinde bir satır daha yazılır; bu satır kişi hakkında bir bilgidir (rol geçmişi) ve kişinin kendi verisini indirme dosyasına eklenmesi ayrı bir iş olarak değerlendirilmelidir. HAYIR → "kim, ne zaman, neden mentörken menti oldu" sorusu 90 gün sonra cevapsız kalır; yanlış rol değişikliği sonradan fark edilirse izi bulunmaz.
 **Benim önerim:** EVET — mevcut veriye dokunmuyor ve PO'nun "önceki ve yeni rol görünür" kararını kalıcı biçimde karşılıyor.
 **Cevap vermezsen:** U-13C PR-ACIK bekler; rol geçmişi ekranda görünmez.
-**CEVAP:**
+**CEVAP:** EVET (KARAR-83 C'nin uygulaması; yedek gerekmez). _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_

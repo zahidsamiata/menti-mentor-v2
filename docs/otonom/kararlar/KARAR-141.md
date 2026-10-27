@@ -10,4 +10,4 @@
 **Ne kaybedersin:** EVET → canlı veritabanına yeni bir tablo eklenir (küçük ve bağımsız ama yine de yapı değişikliği); her aday listesi açılışında arka planda bir sayaç artar (ekranı bekletmez). Oran "istek" sayar, "kişi" değil: aynı mentör listeyi 5 kez yenilerse 5 istek sayılır. HAYIR → kurumun eşleştirme havuzunun yetersiz ya da kurallarının fazla sıkı olduğunu ancak şikâyet gelince öğrenirsin; algoritma ayarı (ör. kurum barajı) verisiz kalır.
 **Benim önerim:** EVET — mevcut veriye dokunmuyor, kişi verisi tutmuyor ve eşleştirme kalitesini izlemenin tek ölçüsü.
 **Cevap vermezsen:** AJ-111 PR-ACIK bekler; gevşetme oranı görünmez.
-**CEVAP:**
+**CEVAP:** EVET. Not: görüşme sıklığı kaldırılınca "zaman uyumu" gevşetme kademesi kalkar; sayaç kalan kademelere göre düzenlenir. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_

@@ -13,6 +13,16 @@
 | 2026-W43 (19-25 Ekim) | `docs/otonom/arsiv/02-ILERLEME-2026-W43.md` | PO NOTU 2026-10-21 + EK: 9 kartın CEVAP'ı kart dosyalarına aktarıldı, KARAR-143 açıldı (yalnız belge) | PO strateji katmanı üzerinden toplu karar verdi; uygulama normal tura bırakıldı |
 | 2026-W44 (26 Ekim →) | bu dosya | PO NOTU 2026-10-21 kararlarının açtığı işler kuyruğa alınıp öne çekildi (§ AŞAMA PN) · Windows/Cursor ortamında araç eksikliği | PO "açtıkları işleri kuyrukta öne al" dedi; bu bilgisayarda node/gh/python olmadığı için kod işi merge edilemiyor |
 
+## 3. oturum 2026-10-27 · başlangıç 15:21 (yerel saat, `date`) · ⏱ PO zaman sınırı 45 dk
+
+## PO NOTU 2026-10-27 (2) — 14 karar + silme istisnası işlendi (2026-10-27)
+- **NE:** 14 kartın CEVAP'ı (KARAR-97 · 98 · 99 · 107 · 116 · 128 · 134 · 135 · 136 · 137 · 140 · 141 · 144 · 145) PO metniyle kart dosyalarına aktarıldı; indekste ✅ (bekleyen 112 → 98 · cevaplanmış 35 → 49). PO NOTU metni AYNEN `01-KARARLAR.md` § PO NOTU'nda. Kartlar henüz `arsiv/kararlar/`'a taşınmadı (zaman sınırı; sonraki belge turu).
+- **KURAL:** CLAUDE.md § SİLME PROTOKOLÜ'ne "SİLME KURALI İSTİSNASI (PO 2026-10-27)" eklendi; değişen son satırın eski hâli AYNEN `docs/otonom/arsiv/kural-gecmisi-CLAUDE.md` (K-A).
+- **NEDEN:** PO toplu karar verdi; 🔵 hazır PR'ların kilidi açıldı, yeni PO kararı (görüşme sıklığı kaldırılır) iş açtı.
+- **Kuyruğa eklenen (§ AŞAMA PN):** PN-13 interactionStyle tam kaldırma · PN-14 yazım taraması · PN-15 görüşme sıklığı (timeCommitment) kaldırma · PN-16 AN-26 PO tarifiyle · PN-17 yönetici→mentör mesaj yolu (koşullu) · PN-18 E-4 sonrası silme onay kartı.
+- **Satır notu eklenen:** E-4 · U-18 · AN-26 · AN-02 · AN-12 · I-08 (kayan 24 saat — PR yeniden düzenlenecek) · P-08 · AN-27 · AJ-111 (zaman kademesi kalkacak) · U-12B · U-13C · AJ-50 · AJ-77.
+- **DB oturumu bekleyenler:** 00-SIMDI § Engeller.
+
 ## TUR ÖZETİ — 2026-10-27 (2. oturum) · Windows/Cursor, araçlar kurulu · ara özet (tur sürüyor)
 
 **BITTI ve CANLIDA: 6 iş** (her biri: 7b bağımsız inceleme ONAY · CI iki repoda yeşil · mutasyon kanıtı · merge sonrası `/health` ok:true db:up)

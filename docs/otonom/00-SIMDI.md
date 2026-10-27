@@ -44,10 +44,13 @@
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | kalıcı kural |
 
 
+**YN-07 neden merge edilmedi:** PR-ACIK değil, BASARISIZ — hiç PR açılmadı; teslimat CLAUDE.md sözlük düzenlemesi gerektiriyor ve PO talimatı (2026-09-25) "CLAUDE.md'ye DOKUNMA" idi (kanıt: 00-KUYRUK YN-07 Not). PO yeniden izin verirse küçük belge işi.
+
 **Push edilmemiş iş:** yok. **Stash:** yok. **Worktree:** yok.
 
 **Engeller:**
 - ✅ ORTAM çözüldü (2. oturum, 2026-10-27): node · gh · py var; bekçi lokalde koştu (HATA yok, 33 UYARI — boyut eşikleri + bilinen "kısmen" satırları).
+- 🗄️ **DB oturumu bekler (PO NOTU 2026-10-27 (2) EVET'leri):** AJ-77 (KARAR-128 · §3b sayım + 5 tablo yedeği) · AJ-50 (KARAR-116 · yedek) · I-08 (KARAR-135 · PR önce kayan-24-saate yeniden düzenlenecek; TenantMembership yedeği) · P-08 (KARAR-137 · TenantMembership yedeği, I-08 ile ortak) · AN-27 (KARAR-140 · Message yedeği) · U-18 (KARAR-97 · rebase + 7b) · AN-26/PN-16 (KARAR-98) · AN-02 + PN-14 DB metinleri (KARAR-99) · PN-13 interactionStyle kolon silme (KARAR-107) · PN-15 timeCommitment kolon silme. Yedek gerekmeyen (DB'siz merge edilebilir): U-12B (KARAR-144) · U-13C (KARAR-145) · AJ-111 (KARAR-141) · E-4 (KARAR-134).
 - 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + 5 tablo yedeği) · AJ-50 · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek: AN-30 · U-18 · AN-26 · AN-02. (DATABASE_URL bu bilgisayarda yok ve kurulmaz — K8.3.)
 
 **PO'ya sorular:** 🔵 KARAR-145 (U-13C rol tarihçesi tablosu, yedek gerekmez) · 🔵 KARAR-144 (U-12B davet linki iptal tablosu, yedek gerekmez) · KARAR-89 (NPS hangi kutuya — ajan önerisi kartta; PN-10 · PN-11 bekliyor) · 🔵 EVET/HAYIR: KARAR-134 · 135 · 137 · 139 · 140 · 141 · 142 · 96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ürün: KARAR-136 · 138 · toplu paket: `docs/otonom/KARAR-PAKETI.md` (⚠️ paket 2026-10-21 cevaplarından önce yazıldı; 9 kart artık ✅).

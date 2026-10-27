@@ -11,4 +11,4 @@
 **Ayrıca (teknik tercih — farklı istersen CEVAP'a yaz):** mola süresini "ertesi gün 00:00'a kadar" yaptım (madde "günde 2" dediği için). "Günün ikinci denemesinden sonra yine 24 saat" istersen CEVAP'a "EVET — 24 saat" yaz; kod küçük bir değişiklikle ona uyarlanır.
 **Benim önerim:** EVET — madde 158'i tam karşılayan tek yol bu ve mevcut veriye dokunmuyor.
 **Cevap vermezsen:** I-08 PR-ACIK bekler; kullanıcı eski 24 saat kuralını görmeye devam eder.
-**CEVAP:**
+**CEVAP:** EVET, DEĞİŞİKLİKLE: takvim günü DEĞİL, KAYAN 24 SAAT — son 24 saatte en fazla 2 deneme; 3. hak ilk denemenin üzerinden 24 saat geçince açılır. Kural ve kalan süre ekranda açıkça yazılır ("Son 24 saatte en fazla 2 deneme… bir sonraki hakkın yaklaşık X saat sonra"). PR buna göre yeniden düzenlenir. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_
