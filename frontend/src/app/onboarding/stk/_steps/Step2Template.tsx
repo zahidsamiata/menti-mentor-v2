@@ -39,7 +39,7 @@ const TEMPLATES: Array<{
     icon: Heart,
     title: 'Gönüllü Gelişimi',
     description: 'Gönüllülerin becerilerini geliştirdiği yapılandırılmış program.',
-    bullets: ['Beceri bazlı eşleştirme', 'Sertifikasyon desteği', 'Sosyal etki metrikleri'],
+    bullets: ['Beceri bazlı yönlendirme', 'Sertifikasyon desteği', 'Sosyal etki metrikleri'],
   },
   {
     value: 'OZEL',

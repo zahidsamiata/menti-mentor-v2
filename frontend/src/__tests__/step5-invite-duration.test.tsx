@@ -1,8 +1,8 @@
 /**
  * Step5Invite — davet süresi metni (U-11).
  *
- * Ekranda "90 gün" yazıyordu ama kod gerçeği 30 gün (invitation JWT expiresIn '30d';
- * config.invitationTokenExpiry=90d ölü ayar). Metin koda hizalandı.
+ * Ekranda "90 gün" yazıyordu; U-11 kod gerçeğine (30 gün) hizaladı. U-12 (KARAR-82 A) süreyi 7 güne
+ * indirdi (backend services/invitationToken.ts INVITATION_TTL_DAYS). Metin koda hizalı.
  */
 
 import { describe, it, expect, vi } from 'vitest';
@@ -15,11 +15,12 @@ vi.mock('@/lib/api/selfServe', () => ({
 }));
 
 describe('Step5Invite — davet süresi', () => {
-  it('davet linki geçerlilik süresi 30 gün gösterir (90 değil)', () => {
+  it('davet linki geçerlilik süresi 7 gün gösterir (30/90 değil)', () => {
     // tenantId yok → useEffect erken döner, ağ çağrısı olmaz.
     render(<Step5Invite data={{} as WizardData} />);
 
-    expect(screen.getByText(/30 gün geçerlidir/)).toBeInTheDocument();
+    expect(screen.getByText(/7 gün geçerlidir/)).toBeInTheDocument();
+    expect(screen.queryByText(/30 gün geçerlidir/)).not.toBeInTheDocument();
     expect(screen.queryByText(/90 gün geçerlidir/)).not.toBeInTheDocument();
   });
 });

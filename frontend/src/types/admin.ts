@@ -250,7 +250,7 @@ export interface NudgeResponse { ok: boolean; targetUserId: string; sentAt: stri
 export const CORRECTION_NOTE_PRESETS = [
   'Mezuniyet yılınızı profilinizde doğrulayamadık. Profilinizden kontrol edip güncelleyebilirsiniz.',
   'Kurum bilginizi doğrulayabilmemiz için LinkedIn profilinizi eklemeniz bize çok yardımcı olur.',
-  'Uzmanlık etiketlerinize birkaç daha ayrıntılı alan eklerseniz, size en uygun eşleşmeyi bulmamız kolaylaşır.',
+  'Uzmanlık etiketlerinize birkaç daha ayrıntılı alan eklerseniz, size en uygun kişileri önermemiz kolaylaşır.',
   'Profilinizde henüz bir fotoğraf göremedik. Bir fotoğraf eklediğinizde profiliniz tamamlanmış olacak.',
   'Biyografinizi biraz genişletmenizi rica ederiz; en az 50 kelimelik bir tanıtım, eşleşeceğiniz kişilerin sizi tanımasına yardımcı olur.',
 ] as const;

@@ -10,7 +10,7 @@
 **Benim önerim:** yok — değişiklik küçük ve geri alınır ama canlı veriye yazma onayı kuralı gereği yalnız senin.
 **Cevap vermezsen:** AN-02 PR-ACIK kalır; iki soru hatalı yazımla görünmeye devam eder.
 **İlgili kartlar:** KARAR-85 (yeni ortamda DISC soru havuzu aynı `seed.ts` metinlerinden doluyor)
-**CEVAP:**
+**CEVAP:** EVET + ek iş: kullanıcıya görünen tüm metinlerde yazım hatası taraması. Kod/ekran metinleri normal iş; veritabanındaki metinler listelenir, DB oturumunda yedekle düzeltilir. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_
 
 ---
 

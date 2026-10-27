@@ -174,7 +174,7 @@ function PsychometricBento() {
           <span className="text-sm font-semibold text-landing-soft">Psikometrik Derinlik</span>
         </div>
         <p className="text-xs text-landing-muted leading-relaxed">
-          DISC davranış modeline dayalı mizaç motoru. Tamamlayıcı profiller güçlü, çakışanlar engellenir.
+          DISC davranış modeline dayalı kişilik motoru. Tamamlayıcı profiller güçlü, çakışanlar engellenir.
         </p>
       </div>
 
@@ -249,10 +249,10 @@ export function AlgorithmBento() {
         {/* Bölüm başlığı */}
         <div className="text-center mb-12">
           <span className="text-xs font-semibold uppercase tracking-widest text-indigo-700 dark:text-indigo-300">
-            Eşleştirme Motoru
+            Öneri Motoru
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-landing-fg text-balance">
-            Akıllı Eşleştirmenin İki Bileşeni
+            Yönlendirmenin İki Bileşeni
           </h2>
           <p className="mt-3 text-landing-muted max-w-xl mx-auto text-sm leading-relaxed">
             Sadece uzmanlığa değil, insan kimyasına da bak. Bu ikisinin özel ağırlıklı bileşimi

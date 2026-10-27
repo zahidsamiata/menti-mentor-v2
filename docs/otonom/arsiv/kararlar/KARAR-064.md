@@ -10,7 +10,10 @@
 **Benim önerim:** C — ürünün temkinli metodoloji diliyle (KARAR-48) en tutarlısı. ⚠️ Bu tamamen bir ton kararı; önerime güvenme.
 **Cevap vermezsen:** yeni içerik (I-15 kartı, BANKA metinleri) koda "karakter" diye, canlı ekran "mizaç" diye girer; kullanıcı iki ad görür. Kuyrukta I-01, I-11, AN-50, AN-51 ve AN-10'un kalan ayağı bu cevabı bekliyor (`00-KUYRUK.md:125`).
 **İlgili kartlar:** KARAR-45 (arketip kartı bu terimle anılır) · KARAR-48 (aynı ton: kimlik etiketi yerine eğilim dili) · KARAR-54 (havuz kartında mizaç alanının adı) · KARAR-60 (kişilik kartında yüzde, aynı ton) · KARAR-66 (cevaplı B; AN-50 metin işi bu karta kilitli) — birlikte cevaplanması önerilir: KARAR-48 + KARAR-60 + KARAR-64
-**CEVAP:**
+**CEVAP:** C (Kişilik). Kullanıcıya görünen her yerde "kişilik" kullanılır.
+*kaynak: PO NOTU 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU · ajan yalnız aktardı (metin aynen).*
 
 ---
 
+
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 md.4 "öne al"). Kart arşive taşındı (5c-c).

@@ -14,6 +14,6 @@
 **Benim önerim:** EVET — geri alınabilir, kullanıcıya görünmez ve KVKK veri minimizasyonunu kapatır; acil değil.
 **Cevap vermezsen:** Yalnız AJ-50 bekler; başka iş etkilenmez.
 **İlgili kartlar:** KARAR-86 (aynı DISC verisinin kime görüneceği)
-**CEVAP:**
+**CEVAP:** EVET. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_
 
 

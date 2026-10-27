@@ -349,3 +349,12 @@ Kural değişikliği DEĞİL (yeni public uç listeye eklendi, CLAUDE.md'nin ken
   **diğer:** `POST /api/suspicion-reports` · `GET /health` · `GET /uploads/**` (statik, CSP-sandbox).
   `selfServeRoutes.ts:24-40` · `suspicionRoutes.ts:11` · `server.ts:63,74`.)
 ```
+
+
+## 2026-10-27 — § SİLME PROTOKOLÜ son satırı (PO NOTU 2026-10-27 (2) silme istisnası ile değişti)
+
+Eski metin (AYNEN):
+
+```text
+⚠️ İstisna YOK. "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz.
+```

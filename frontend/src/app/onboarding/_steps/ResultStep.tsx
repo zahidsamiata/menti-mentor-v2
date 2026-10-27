@@ -97,7 +97,7 @@ export function ResultStep({ resultCard, onContinue }: ResultStepProps) {
 
         <p className="text-center text-xs text-muted-foreground">
           Profilin onaylandığında en uygun{' '}
-          {resultCard.compatibleWith.join(' veya ')} profilli kişiyle eşleştirileceksin.
+          {resultCard.compatibleWith.join(' veya ')} profilli kişiler sana önerilecek.
         </p>
       </div>
     </>

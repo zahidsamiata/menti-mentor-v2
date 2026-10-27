@@ -11,7 +11,7 @@
 **Benim önerim:** A — check-in kullanıcı tarafını zaten karşılıyor; bu sistemin değeri sana ölçüm verisi vermesinde, kullanıcıyı tekrar yormadan.
 **Cevap vermezsen:** feedbackLog uçları bağlanmaz, öğrenme döngüsü kapalı kalır. AJ-38 (yöneticinin "Başarı oranı" kartı) KARAR-44 ile birlikte bekler.
 **İlgili kartlar:** KARAR-44 (aynı FeedbackLog + rewardPenalty kapsamı) · KARAR-89 (FeedbackLog dört değerlendirme kutusundan biri) · KARAR-90 (yeni soruların verisi nereye akar) — birlikte cevaplanması önerilir: KARAR-12 + KARAR-44
-**CEVAP:**
+**CEVAP:** KARAR-44 ile birlikte cevaplandı: ikinci geri bildirim kayıt sistemi kullanıcıya açılmaz; görüşme değerlendirme kaynağı check-in'dir; NPS tek alanda, 3. ay değerlendirmesinde toplanır. _(kaynak: PO NOTU 2026-10-27, `01-KARARLAR.md` § PO NOTU — ajan aktardı)_
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 "açtıkları işleri § AŞAMA PN'ye ekle"). Kart arşive taşındı (5c-c). Açtığı: AJ-38 (KARAR-44 ile) · PN-10 (NPS tek alanda). FeedbackLog kullanıcıya açılmaz.
 
 ---
-

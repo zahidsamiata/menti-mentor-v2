@@ -6,6 +6,8 @@ import Link from 'next/link';
 import {
   isPlatformAuthError,
   getTenantUserDetail,
+  issueUserPasswordResetLink,
+  type PasswordResetLink,
   type TenantUserDetail,
   type TenantMemberRole,
 } from '@/lib/api/platform';
@@ -45,6 +47,10 @@ export default function TenantUserDetailPage() {
   const [user, setUser] = useState<TenantUserDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  // U-15: üretilen sıfırlama bağlantısı yalnız bu ekranda, sayfa kapanınca kaybolur (saklanmaz).
+  const [resetLink, setResetLink] = useState<PasswordResetLink | null>(null);
+  const [resetBusy, setResetBusy] = useState(false);
+  const [resetError, setResetError] = useState<string | null>(null);
 
   const handleError = useCallback(
     (e: unknown) => {
@@ -77,6 +83,20 @@ export default function TenantUserDetailPage() {
   }, [tenantId, userId, handleError]);
 
   const cert = user ? certStatusBadge(user.certificationStatus) : null;
+
+  async function handleIssueResetLink() {
+    if (!window.confirm('Bu kişi için şifre sıfırlama bağlantısı üretilsin mi? İşlem iz kaydına yazılır; bağlantıyı kişiye siz ileteceksiniz.')) return;
+    setResetBusy(true);
+    setResetError(null);
+    try {
+      setResetLink(await issueUserPasswordResetLink(tenantId, userId));
+    } catch (e) {
+      if (isPlatformAuthError(e)) router.push('/platform/login');
+      else setResetError(e instanceof Error ? e.message : 'Bağlantı üretilemedi.');
+    } finally {
+      setResetBusy(false);
+    }
+  }
 
   return (
     <div className="min-h-screen">
@@ -147,6 +167,40 @@ export default function TenantUserDetailPage() {
                 <dd className="text-foreground">{user.hasKvkkConsent ? 'Var' : 'Yok'}</dd>
               </div>
             </dl>
+          </div>
+        )}
+
+        {/* U-15 (KARAR-84 B): e-posta çalışmadığında şifresini unutan kişiye yönetici bağlantı iletir. */}
+        {!loading && !error && user && (
+          <div className="rounded-xl bg-card border border-border p-5 space-y-3">
+            <h2 className="text-sm font-semibold text-foreground">Şifre sıfırlama</h2>
+            <p className="text-xs text-muted-foreground">
+              E-posta çalışmıyorsa bu kişi için tek kullanımlık bir bağlantı üretip kendisine güvenli bir yoldan iletin.
+              Bağlantı 60 dakika geçerlidir; her üretim iz kaydına yazılır.
+            </p>
+            <button
+              type="button"
+              onClick={handleIssueResetLink}
+              disabled={resetBusy}
+              className="text-sm px-3 py-1.5 rounded-lg border border-border hover:bg-muted transition-colors disabled:opacity-50"
+            >
+              {resetBusy ? UI_TEXT.status.loading : 'Şifre sıfırlama bağlantısı üret'}
+            </button>
+            {resetError && <p role="alert" className="text-destructive text-sm">{resetError}</p>}
+            {resetLink && (
+              <div role="status" className="space-y-1">
+                <p className="text-xs text-muted-foreground">
+                  Bağlantı {resetLink.expiresInMinutes} dakika geçerli, tek kullanımlık:
+                </p>
+                <input
+                  readOnly
+                  aria-label="Şifre sıfırlama bağlantısı"
+                  value={resetLink.resetUrl}
+                  onFocus={(e) => e.currentTarget.select()}
+                  className="w-full text-xs font-mono px-2 py-1.5 rounded border border-border bg-muted"
+                />
+              </div>
+            )}
           </div>
         )}
       </main>

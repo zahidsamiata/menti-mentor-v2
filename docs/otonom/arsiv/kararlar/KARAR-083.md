@@ -10,5 +10,8 @@
 **Benim önerim:** B şimdi, A ihtiyaç doğunca — düşürmedeki sessiz bozulma bugünkü tek gerçek hata.
 **Cevap vermezsen:** U-13 (çıkış blokeri) kilitli kalır.
 **İlgili kartlar:** KARAR-124 (rol değişince kullanıcı rolü ve kurum üyeliği rolü birlikte değişir; 124 hangisinin sayıldığını soruyor)
-**CEVAP:**
+**CEVAP:** A + C. Kurum yöneticisi kullanıcının rolünü değiştirebilir (MENTOR↔MENTI; yöneticilikten düşürmede hedef rol seçilir — bugünkü "her zaman MENTOR yazma" hatası biter). Rol değişince aktif eşleşmeler OLDUĞU GİBİ sürer. Sistemde önceki rol ve yeni rol görünür (rol tarihçesi). Bir kişi aynı kurumda hem yönetici hem mentör olmak isterse AYRI HESAP açar (hesap değiştirme özelliği yapılmaz; e-posta global benzersiz olduğu için ikinci e-posta gerekir). Rol tarihçesi migration isterse → yedek + PO onayı.
+*kaynak: PO NOTU EK 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU › PO NOTU EK · ajan yalnız aktardı (metin aynen).*
 
+
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 md.4 "öne al"). Kart arşive taşındı (5c-c).

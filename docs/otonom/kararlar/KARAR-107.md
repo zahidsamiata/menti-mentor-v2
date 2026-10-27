@@ -10,5 +10,5 @@
 **Benim önerim:** yok — karantina, silme protokolü gereği senin tek "EVET"ine bağlı bir adım; teknik olarak hazır (PR durumu 2026-09-28 gh: #186 ve #370 main ile temiz).
 **Cevap vermezsen:** AN-12 PR-ACIK bekler; kullanıcıya etkisi yok.
 **İlgili kartlar:** KARAR-108 (aynı AN-12 incelemesinin B kısmı: DISC eşitlik sırası)
-**CEVAP:**
+**CEVAP:** EVET + eski "görev bazlı / sohbet bazlı" (interactionStyle) alanı ve verisi tamamen kaldırılır — PO kararıyla supportApproach ile değiştirildi → SİLME İSTİSNASI (arşiv + yedek). Kolon silme migration'ı DB oturumunda. _(PO NOTU 2026-10-27 (2) — PO metni, ajan karta aktardı)_
 

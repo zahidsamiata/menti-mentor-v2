@@ -10,7 +10,7 @@ const BEFORE = [
 ];
 
 const AFTER = [
-  'Bir tıkla DISC + sektör tabanlı akıllı eşleştirme',
+  'DISC + sektör uyumuna göre mentör önerileri — seçim kişide',
   'Çatışma riskli eşleşmeleri sistem otomatik engeller',
   'Tüm eşleşmeler ve ilerleme tek ekranda',
   'Her eşleşmenin ilerleme takibi otomatik',

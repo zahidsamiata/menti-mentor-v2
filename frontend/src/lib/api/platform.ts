@@ -351,11 +351,28 @@ export interface TenantDefaultProfile {
   minGroupSize: number;
 }
 
+/**
+ * AJ-111: son `windowDays` günde eşleştirme isteklerinin kaçı gevşetilmiş kurallarla
+ * (fallbackLevel > 0) sonuçlandı. Kurum+gün toplu sayacı — kişi yok. Toplam `minSample`'dan
+ * azsa `insufficientData: true`, oran null gelir.
+ */
+export interface TenantMatchingFallback {
+  windowDays: number;
+  totalRequests: number;
+  relaxedRequests: number;
+  byLevel: { level1: number; level2: number; level3: number };
+  ratePercent: number | null;
+  insufficientData: boolean;
+  minSample: number;
+}
+
 export interface TenantAnalytics {
   totalWithDisc: number;
   discDistribution: DiscDistributionItem[];
   /** Eski backend yanıtında yoktur — alan gelmezse satır gösterilmez. */
   defaultProfile?: TenantDefaultProfile;
+  /** AJ-111 — eski backend yanıtında yoktur; alan gelmezse satır gösterilmez. */
+  matchingFallback?: TenantMatchingFallback;
 }
 
 export async function getTenantOverview(id: string) {
@@ -375,6 +392,18 @@ export async function listTenantMembers(
 
 export async function getTenantUserDetail(id: string, userId: string) {
   return platformFetch<TenantUserDetail>(`/api/platform/tenants/${id}/users/${userId}`);
+}
+
+/** U-15 (KARAR-84 B): e-posta çalışmazsa sıfırlama bağlantısını yalnız platform yöneticisi üretir (iz kaydıyla). */
+export interface PasswordResetLink {
+  resetUrl: string;
+  expiresInMinutes: number;
+}
+
+export async function issueUserPasswordResetLink(id: string, userId: string) {
+  return platformFetch<PasswordResetLink>(`/api/platform/tenants/${id}/users/${userId}/password-reset-link`, {
+    method: 'POST',
+  });
 }
 
 export async function listTenantMeetings(

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useTenant } from '@/providers/TenantProvider';
 import { apiClient } from '@/lib/api/client';
+import { InvitationLinksPanel } from '@/components/organisms/InvitationLinksPanel';
 
 type Role   = 'MENTI' | 'MENTOR';
 type Format = 'EMAIL' | 'WHATSAPP';
@@ -31,7 +32,7 @@ Tamamen size kalmış. Görüşme sıklığını sen ve eşleştiğin kişi birl
 Bu bir sınav değil, bir sohbet. İlk görüşme tanışmaktan ibaret — kim olduğunuzu, neler yaptığınızı paylaşırsınız. Deneyim aktarımı zaten kendiliğinden gelir.
 
 **Neden kısa bir test var?**
-Karakterine ve çalışma tarzına uygun kişileri sana önerebilmemiz için. Mizaç uyumu, sohbetin gerçekten verimli geçmesini sağlıyor. 5 dakika sürüyor.
+Kişiliğine ve çalışma tarzına uygun kişileri sana önerebilmemiz için. Kişilik uyumu, sohbetin gerçekten verimli geçmesini sağlıyor. 5 dakika sürüyor.
 
 [Programa Katıl] {Link}
 
@@ -43,7 +44,7 @@ Bu daveti tanımıyor musun? Bildir: {ŞüpheLinki}`,
 Kısaca: senden önce aynı yollardan geçmiş, deneyimli isimlerle tanışma ve *kendi seçeceğin biriyle* eşleşme imkânı.
 
 🤝 Kimi seçeceğine sen karar veriyorsun.
-🎯 Kısa bir mizaç testi var — karakterine uygun kişileri önerebilmemiz için.
+🎯 Kısa bir kişilik testi var — kişiliğine uygun kişileri önerebilmemiz için.
 💬 İlk görüşme sadece tanışma. Sınav değil, sohbet.
 ⏱️ Görüşme sıklığını siz belirliyorsunuz.
 
@@ -69,7 +70,7 @@ Haftada yarım saat ayırmanız bile yeterli. Sıklığı siz ve eşleştiğiniz
 Kimse sizden uzman olmanızı beklemiyor. Kendi yolunuzu anlatmanız, karşılaştığınız durumları paylaşmanız yeterli. En değerli şey teori değil, yaşanmışlık.
 
 **Kiminle eşleşeceksiniz?**
-Kısa bir mizaç değerlendirmesi yapıyoruz — böylece daha rahat iletişim kurabileceğiniz, anlattıklarınızın gerçekten karşılık bulacağı kişilerle eşleşme imkânı doğuyor. Kimi kabul edeceğinize siz karar veriyorsunuz.
+Kısa bir kişilik değerlendirmesi yapıyoruz — böylece daha rahat iletişim kurabileceğiniz, anlattıklarınızın gerçekten karşılık bulacağı kişilerle eşleşme imkânı doğuyor. Kimi kabul edeceğinize siz karar veriyorsunuz.
 
 [Mentör Olarak Katıl] {Link}
 
@@ -83,7 +84,7 @@ Bugün bulunduğunuz noktaya bakan, sizin bir zamanlar sorduğunuz soruları sor
 🤝 Sosyal sorumluluk — sizden faydalanmak isteyen bir kuşak var.
 ⏱️ Haftada yarım saat bile yeterli. Sıklığı siz belirliyorsunuz.
 💡 Uzman olmanıza gerek yok — kendi yolunuzu anlatmanız yeterli.
-🎯 Mizaç uyumuna göre, daha rahat iletişim kuracağınız kişilerle eşleşme imkânı.
+🎯 Kişilik uyumuna göre, daha rahat iletişim kuracağınız kişilerle eşleşme imkânı.
 
 👉 {Link}`,
   },
@@ -106,6 +107,8 @@ export default function InvitePage() {
   const [saved, setSaved]             = useState(false);
   const [copied, setCopied]           = useState(false);
   const [msg, setMsg]                 = useState<string | null>(null);
+  // U-12B: yeni link üretilince liste tazelensin.
+  const [linksRefresh, setLinksRefresh] = useState(0);
 
   // Şablonu yükle: DB'deki kayıtlı metin varsa onu kullan, yoksa default
   useEffect(() => {
@@ -141,6 +144,7 @@ export default function InvitePage() {
     setLoadingLink(false);
     if (result.ok) {
       setInviteLink(result.data.invitationLink);
+      setLinksRefresh((n) => n + 1);
     } else {
       // Eskiden hata sessizce yutuluyordu (403 dahil) → kullanıcı neden link
       // gelmediğini anlayamıyordu (U-03).
@@ -244,7 +248,7 @@ export default function InvitePage() {
       {/* Davet linki */}
       <div className="flex gap-3 items-end">
         <div className="flex-1">
-          <label className="block text-sm font-medium mb-1">Davet Linki (30 gün geçerli)</label>
+          <label className="block text-sm font-medium mb-1">Davet Linki (7 gün geçerli)</label>
           <input
             value={inviteLink}
             readOnly
@@ -260,6 +264,10 @@ export default function InvitePage() {
           {loadingLink ? 'Oluşturuluyor…' : 'Oluştur'}
         </button>
       </div>
+
+      {user?.tenantId && accessToken && (
+        <InvitationLinksPanel tenantId={user.tenantId} accessToken={accessToken} refreshKey={linksRefresh} />
+      )}
 
       {/* Metin editörü */}
       <div className="space-y-2">

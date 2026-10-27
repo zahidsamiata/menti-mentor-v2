@@ -18,7 +18,7 @@ function ProgressHeader({ current, total, percent }: ProgressHeaderProps) {
   return (
     <div className="space-y-2 mb-8">
       <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
-        <span>Mizaç Testi</span>
+        <span>Kişilik Testi</span>
         <span>
           Soru <strong className="text-foreground">{current}</strong> / {total}
         </span>
@@ -198,7 +198,7 @@ export function DiscTestStep({
         {/* Gönderim / hata durumları */}
         {isSubmitting && (
           <p className="mt-4 text-sm text-center text-muted-foreground animate-pulse">
-            Mizaç profilin hesaplanıyor…
+            Kişilik profilin hesaplanıyor…
           </p>
         )}
         {error && (

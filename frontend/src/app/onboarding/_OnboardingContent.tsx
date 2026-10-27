@@ -37,7 +37,7 @@ import { CARD_REVEAL_DELAY_MS, CARD_REVEAL_STATUS_TEXT } from '@/lib/onboardingR
 // Akış sırası (madde 141 · arketip §4, 2026-09-04'te tersine çevrildi):
 // üç soru (Tercihler) arketip kartından ÖNCE gelir, kart EN SONDA — böylece
 // kişi ödül anını (kartı) ancak formu bitirince görür ve S2 bias riski kapalı kalır.
-const STEPS = ['Profil', 'Mizaç Testi', 'Tercihler', 'Sonuç'] as const;
+const STEPS = ['Profil', 'Kişilik Testi', 'Tercihler', 'Sonuç'] as const;
 type StepIndex = 0 | 1 | 2 | 3;
 
 interface StepIndicatorProps {
@@ -223,16 +223,16 @@ export default function OnboardingContent() {
         <div className="text-center mb-6">
           <h1 className="text-xl font-bold text-foreground">
             {step === 0 && 'Profilini Tamamla'}
-            {step === 1 && 'Mizaç Testini Çöz'}
+            {step === 1 && 'Kişilik Testini Çöz'}
             {step === 2 && 'Son Birkaç Soru'}
             {step === 3 && 'Sonucun Hazır! 🎉'}
           </h1>
           {step < 3 && (
             <p className="text-sm text-muted-foreground mt-1">
-              {step === 0 && 'Seni doğru eşleştirebilmemiz için birkaç bilgi alalım.'}
+              {step === 0 && 'Sana doğru kişileri önerebilmemiz için birkaç bilgi alalım.'}
               {step === 1 && 'Senaryo sorularına sezgisel olarak cevap ver — yanlış cevap yoktur.'}
               {/* Araya tek cümle (arketip §4): kişi ne kadar kaldığını bilir, bekleme dayanılır olur. */}
-              {step === 2 && 'Son üç soru. Sonra karakter kartın hazır.'}
+              {step === 2 && 'Son üç soru. Sonra kişilik kartın hazır.'}
             </p>
           )}
         </div>
@@ -267,7 +267,7 @@ export default function OnboardingContent() {
             <div className="text-center py-12 space-y-3" role="status">
               <p className="text-base font-semibold text-foreground">Şu an gösterilecek soru yok</p>
               <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-                Mizaç testi soruları henüz hazır değil. Biraz sonra yeniden deneyebilir ya da kurum yöneticinle iletişime geçebilirsin.
+                Kişilik testi soruları henüz hazır değil. Biraz sonra yeniden deneyebilir ya da kurum yöneticinle iletişime geçebilirsin.
               </p>
               <button
                 className="text-sm text-primary underline"

@@ -10,7 +10,10 @@
 **Benim önerim:** A — P3 zaten senin kararın; C'nin fazlası derinleşme motoru gelince eklenebilir.
 **Cevap vermezsen:** PS-A1 ölçeği düzeltti ama eşikleri olduğu gibi bıraktı (sessiz kalıcılaşma sürüyor); arketip kartı işi (I-15, artık PS-A3 içinde) hangi kuralla dolacağını bilmez.
 **İlgili kartlar:** KARAR-45 (atanan kodun hangi ada bağlanacağı) · KARAR-62 (C seçeneğinin derinleşme ayağı seçim motoruna bağlı)
-**CEVAP:**
+**CEVAP:** A + C. Herkes ana tipini ve yakın (ikinci) tipini görür; fark azsa "şimdilik" dili. 45/55/60 eşikleri ve "eşik aşılmazsa varsayılan M1/m1" kuralı kaldırılır. Kişilik motoru, kişinin kararsız kaldığı boyutlara odaklı sorular sorarak belirsizliği gidermeye çalışır (günlük soru akışında). Sıra: önce A; C, soru hedefleme motoruna (KARAR-62) bağlı.
+*kaynak: PO NOTU 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU · ajan yalnız aktardı (metin aynen).*
 
 ---
 
+
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 md.4 "öne al"). Kart arşive taşındı (5c-c).

@@ -26,7 +26,7 @@ function CoreQuestions() {
       {/* Progress header */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">
-          <span className="font-medium text-landing-soft">Mizaç Testi</span>
+          <span className="font-medium text-landing-soft">Kişilik Testi</span>
           <span className="text-landing-muted">Soru <strong className="text-landing-fg">3</strong> / 8</span>
         </div>
         <div className="h-2 w-full rounded-full bg-landing-raised overflow-hidden">

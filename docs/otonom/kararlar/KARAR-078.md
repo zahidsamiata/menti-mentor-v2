@@ -1,4 +1,5 @@
 > ⚪ gereksiz olabilir — KARAR-110 aynı `/periodic-survey` sayfasını daha güncel seçeneklerle soruyor (KR-11 ile AJ-14 aynı arıza: `backend/src/controllers/feedbackController.ts:11-30`); kapatma PO'nun
+> ⚠️ **KAPSAM DEĞİŞTİ (PO NOTU 2026-10-27, KARAR-44 C md.4):** dönemlik anket sayfası (`/periodic-survey`) KALKIYOR — "bağla" seçeneği düştü; sayfanın karantinası ve silinmesi PN-11'de (silme protokolü, KARAR-89'a bağlı). KR-11 bu yolla kapanır; kart yalnız KARAR-110 ile birlikte kalan dönemsel sorular için açık. Cevap yazılmadı (PO talimatı).
 ### KARAR-78 · Dönemlik anket özelliği kalsın mı, bağlansın mı, kaldırılsın mı? (1 iş açar: KR-11) [ÜRÜN KARARI · SİLME PROTOKOLÜ]
 > ⏸️ PO 2026-09-25: karar aşamasına bırakıldı, önce bağlam konuşması.
 > ⭐ Kaynak: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` A8 [D].

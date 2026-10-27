@@ -14,7 +14,15 @@
 **Benim önerim:** **B** — çünkü sözü tutuyor, insan onayını koruyor ve az veriyle yanlış öğrenme riskini almıyor. *(Bu senin ürün kararın.)*
 **Cevap vermezsen:** F-08 ve AJ-38 bekler. Cron her hafta boşa koşar, KPI kartı boş kalır, toplanan check-in verisi hiçbir işe yaramaz; **KARAR-12 de fiilen cevapsız kalır.**
 **İlgili kartlar:** KARAR-12 (birlikte; aynı FeedbackLog + rewardPenalty kapsamı) · KARAR-67 (kalite verisinde yönetici kişisel notu görür mü) · KARAR-73 (öğrenen kalite verisi otomatik pasifleştirmeyi besler) · KARAR-89 (resmî memnuniyet hangi kutudan okunur) · KARAR-117 (dönemsel mentör takdiri hangi memnuniyet ölçüsüne dayanır) · KARAR-126 (aynı ayarlayıcının NPS düşüş kuralı) — birlikte cevaplanması önerilir: KARAR-44 + KARAR-12
-**CEVAP:**
+**CEVAP:** C (PO tasarımı, güven ağırlıklı öğrenme):
+(1) Görüşme sonrası check-in puanı eşleşme kombinasyon skoruna OTOMATİK yansır ve sıralamada kullanılır.
+(2) Etkisi iki tarafın kişilik profili doluluk oranıyla orantılıdır (cevaplanan / toplam soru); profil az doluyken etki küçük, tam doluyken tam. Amaç: sistemin kişiyi yanlış tipte bildiği dönemde o tipe haksız ödül/ceza yazmamak.
+(3) Bir kombinasyon için asgari görüşme sayısına ulaşılmadan öğrenme başlamaz (eşiği ajan belirler, gerekçesiyle belgeler). Öğrenme tek bayrakla kapatılabilir kalır. Haftalık algoritma ayarlayıcı ile bu öğrenme çelişmemeli — ajan tek tutarlı yol önerir ve belgeler.
+(4) Memnuniyet puanı (NPS) KALIR ama AYRI ANKET KALKAR: periyodik anket sayfası (/periodic-survey) kaldırılır; NPS sorusu ("Bu mentörlük programını bir arkadaşına önerir misin? 0-10" — anlam korunur, ifade düzeltilebilir) 3. ay görüşme değerlendirmesine TEK SORU olarak eklenir. Tek NPS alanı kalır; hangi kutuya yazılacağı KARAR-89'a bağlıdır — ajan önerisini KARAR-89 kartına ekler. Kullanılmayan NPS alanı ve anket sayfası SİLME KURALI ile kaldırılır (gerekçe → ikame kanıtı → docs/arsiv/silinenler-*.md → karantina → PO'nun ikinci onayı). Ölçek hatası (0-10 ortalamanın 70 eşiğiyle kıyaslanması) düzeltilir. Yönetici KPI'daki NPS kartı ve mentör panelindeki "Ortalama NPS" kartı bu tek kaynaktan dolar; küçük grup gizlilik maskesi korunur. Migration gerekiyorsa yedek + PO onayı.
+(5) Yönetici panelindeki "Başarı oranı" kartı görüşme değerlendirmelerinden hesaplanır; NPS ayrı gösterge olarak kalır.
+(6) Yeni özellik: herkesin platform için öneri/hata bildirebileceği genel geri bildirim alanı (05-ozellikler-ve-paneller.md'deki "her sayfada hata/öneri bildir" planının tamamlanması). Yazılanları YALNIZ platform yöneticisi okur; kurum yöneticisi ve diğer kullanıcılar görmez.
+Not: KARAR-110 ve KARAR-78 periyodik ankete bağlı; anket kalktığı için kapsamları değişti — iki kartın başına not düş, cevap yazma (KARAR-110 avukat bekliyor).
+_(kaynak: PO NOTU 2026-10-27, `01-KARARLAR.md` § PO NOTU — ajan aktardı)_
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 "açtıkları işleri § AŞAMA PN'ye ekle"). Kart arşive taşındı (5c-c). Açtığı: AJ-38 (başarı oranı) · F-08 (kilit kalktı) · PN-09 (öğrenme) · PN-12 (genel geri bildirim, 🔵) · PN-10 + PN-11 (KARAR-89'u bekliyor). Ajan önerisi KARAR-89 kartına eklendi; KARAR-110 ve KARAR-78 kart başına not düşüldü.
 
 ---
-

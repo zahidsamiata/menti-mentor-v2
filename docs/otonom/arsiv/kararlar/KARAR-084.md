@@ -10,5 +10,8 @@
 **Benim önerim:** B — başkasının hesabına erişim üretmek hassas; ilk kurumlarda talep sayısı düşük. *(Yetki kararı senin.)*
 **Cevap vermezsen:** U-15 (çıkış blokeri) kilitli kalır.
 **İlgili kartlar:** KARAR-82 (davetin C seçeneği de SMTP'ye bağlı) · KARAR-101 (giriş kapısı: kim, hangi yoldan hesaba girer) · KARAR-102 (SMTP: e-posta doğrulaması da aynı e-posta güvenilirliğine bağlı)
-**CEVAP:**
+**CEVAP:** B. E-posta çalışmazsa şifre sıfırlama bağlantısını YALNIZ platform yöneticisi üretir; her üretim iz kaydına yazılır.
+*kaynak: PO NOTU EK 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU › PO NOTU EK · ajan yalnız aktardı (metin aynen).*
 
+
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 md.4 "öne al"). Kart arşive taşındı (5c-c).
