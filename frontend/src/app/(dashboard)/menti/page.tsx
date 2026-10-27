@@ -28,6 +28,7 @@ import { NotificationOptInButton } from '@/components/organisms/NotificationOptI
 import { weeklyLimitText, WEEKLY_LIMIT_FALLBACK } from '@/components/molecules/WeeklyMeetingLimitNote';
 import type { MentorMatch } from '@/types/matching';
 import { UI_TEXT } from '@/lib/uiText';
+import { MentorSectorPreview, PendingCorrectionNote } from '@/components/molecules/PendingApprovalNotice';
 
 /** AJ-90: sayfaları birleştirir; sayfa sınırında kayma olursa aynı mentörü iki kez göstermez. */
 function mergeUniqueMentors(first: MentorMatch[], rest: MentorMatch[]): MentorMatch[] {
@@ -266,6 +267,9 @@ export default function MentiDashboardPage() {
               DISC testiniz tamamlandı. Yöneticiniz profilinizi onayladığında mentör listesine erişebilirsiniz.
             </p>
           )}
+          {/* Y1-B8: mentörlerin isimsiz alan dağılımı (ad/fotoğraf yok; eşik altı alan backend'de gizli). */}
+          <MentorSectorPreview sectors={mentorCountData?.sectors} />
+          <PendingCorrectionNote note={user?.correctionNote} />
           {/* F-15: umut/anlam sinyali — bekleme "boş" hissettirmesin (sayı uydurmadan). */}
           <p className="text-xs text-amber-700 dark:text-amber-400">
             💛 Sen yalnız değilsin — onay çoğunlukla kısa sürede gelir. Beklerken aşağıdaki{' '}

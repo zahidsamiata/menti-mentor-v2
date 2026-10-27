@@ -24,13 +24,15 @@ export interface AuthUser {
   // GV-18: rıza metni sürümü güncellenip aktif rıza eskide kalırsa true (bugün hep false —
   // CONSENT_VERSION yer tutucu, avukat metni gelene kadar hiçbir aktif kullanıcı tetiklemez).
   needsReconsent: boolean;
+  // IC-08 / Y1-B8: onay bekleyene yöneticinin "düzeltme iste" notu (yalnız PENDING'de dolu; backend correctionNoteFor).
+  correctionNote?: string | null;
 }
 
 /** POST /api/auth/login yanıtı — refreshToken artık HttpOnly cookie'de */
 export interface LoginResponse {
   accessToken: string;
   expiresIn: number;
-  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'discLetters' | 'needsOrientation' | 'needsReconsent'>;
+  user: Pick<AuthUser, 'id' | 'tenantId' | 'role' | 'fullName' | 'email' | 'approvalStatus' | 'discType' | 'discLetters' | 'needsOrientation' | 'needsReconsent' | 'correctionNote'>;
   tenant: {
     id: string;
     name: string;

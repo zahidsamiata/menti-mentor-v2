@@ -9,6 +9,13 @@ import type {
   MentorFilter,
 } from '@/types/matching';
 
+/** GET /api/users/mentor-count — eşik (3) altındaki sayı ve alan backend'de gizlenir. */
+export interface MentorPreview {
+  count: number;
+  suppressed?: boolean;
+  sectors?: { sector: string; count: number }[];
+}
+
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
 // AJ-90: menti mentör havuzunda bir sayfada kaç kart gelir. TEK SABİT — ürün kararı
@@ -40,8 +47,9 @@ export const matchingApi = {
   },
 
   // PENDING menti için: PII içermeyen mentor sayısı (KVKK — isim/e-posta gönderilmez)
-  countMentors: (api: BoundClient): Promise<ApiResult<{ count: number }>> =>
-    api<{ count: number }>('/api/users/mentor-count'),
+  // Y1-B8: onay bekleyene mentörlerin İSİMSİZ özeti — sayı + alan dağılımı (backend k-anonim; ad/fotoğraf yok).
+  countMentors: (api: BoundClient): Promise<ApiResult<MentorPreview>> =>
+    api<MentorPreview>('/api/users/mentor-count'),
 
   // Mentor için: algoritmik sıralanmış menti adaylarını getir
   getRankedMentis: (

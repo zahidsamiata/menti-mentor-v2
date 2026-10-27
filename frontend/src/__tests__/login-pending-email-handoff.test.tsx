@@ -35,8 +35,8 @@ function submitLogin() {
 }
 
 /** Yönlendirilen adreste e-postanın hiçbir biçimi (ham / kodlanmış / parametre adı) yok. */
-function expectNoEmailInUrl(href: string) {
-  expect(href).toBe('/pending-approval');
+function expectNoEmailInUrl(href: string, path = '/pending-approval') {
+  expect(href).toBe(path);
   expect(href).not.toContain('?');
   expect(href).not.toContain('email');
   expect(href).not.toContain(EMAIL);
@@ -66,17 +66,14 @@ describe('AJ-24 · giriş → bekleme ekranı: e-posta URL dışında taşınır
     expect(await screen.findByText(EMAIL)).toBeInTheDocument();
   });
 
-  it('PENDING kullanıcı başarıyla dönerse de URL e-postasız, e-posta ekranda', async () => {
+  // Y1-B8 (KARAR-101): oturum alan onay bekleyen kişi bekleme sayfasına değil kayıt sürecine (8 soru) gider.
+  it('PENDING kullanıcı başarıyla dönerse kayıt sürecine gider, URL e-postasız', async () => {
     loginMock.mockResolvedValue({ role: 'MENTI', approvalStatus: 'PENDING', discType: null });
-    const { unmount } = render(<LoginForm />);
+    render(<LoginForm />);
     submitLogin();
 
     await waitFor(() => expect(pushMock).toHaveBeenCalledTimes(1));
-    expectNoEmailInUrl(pushMock.mock.calls[0][0] as string);
-
-    unmount();
-    render(<PendingApprovalPage />);
-    expect(await screen.findByText(EMAIL)).toBeInTheDocument();
+    expectNoEmailInUrl(pushMock.mock.calls[0][0] as string, '/onboarding');
   });
 
   it('onaylı kullanıcı girişinde önceki bekleme e-postası sekme belleğinden silinir', async () => {

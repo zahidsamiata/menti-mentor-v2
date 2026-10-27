@@ -131,4 +131,8 @@ KARAR-12 → KARAR-44 ile birlikte cevaplandı: ikinci geri bildirim kayıt sist
 - ⏳ **U-13 PR-ACIK** — backend #315 + çatı #492: Yöneticiler sayfasında "Üye rolleri" (Mentör↔Menti) + "Yöneticilikten çıkar" → yeni rol seçimi. Havuz kartına konmadı (KARAR-133 açık). 7b sürüyor; mutasyon taslağı #316.
 - 🧰 Ortam notu: bekçi öz-testleri Windows'ta ortamsal düşüyor (grep 3.0 emoji + `\` yol ayırıcısı); bekçinin repo denetimi ve CI docs-guard yeşil.
 - Kalan 🟢 (PN, çalışılabilir): U-15 · AN-50 · AN-51 · PN-06 · PN-03 · PS-03 · I-12 · PN-01 · PN-02 · PN-04 · PN-05 · IC-14 · I-01 · I-11 · PN-08 · AJ-38 · F-08 · PN-09 (18) + PR-ACIK 2 (Y1-B8, U-13).
+- ✅ **U-13 BITTI** — backend #315 + çatı #492 merge · 7b ONAY · CI iki repoda yeşil · mutasyon #316 (3 U-13 testi kırmızı). **CANLIDA BAK:** kurum yöneticisi "Yöneticiler" sayfasında "Üye rolleri" → onaylı üyeyi "Menti yap"/"Mentör yap"; "Yöneticilikten çıkar" → "Yeni rolü: Mentör | Menti". Çatı PR'ı #490 merge'ünden sonra submodule pointer çakışması verdi → main birleştirildi, pointer U-13 merge commit'inde tutuldu (ata kontrolü ✓).
+- ⏳ **Y1-B8** — backend #313 MERGE (`e69a2c1`); eski #164/#343 gerekçeyle kapatıldı; mutasyon #314 kapatıldı (kanıt #313 yorumunda). Backend CI ilk koşuda `rank-mentors-approval-gate` mesaj eşitliği yakaladı → test kapı 4c mesajına güncellendi. Çatı #491 CI bekliyor.
+- ⏳ **U-15** — backend #317 MERGE (`bfe0af9`); 7b ONAY (CSRF: platform çerezi sameSite strict); mutasyon #318 (4 test kırmızı). Çatı #493 main birleştirme + CI bekliyor.
+- 🔵 **U-12B PR-ACIK** — backend #319 + çatı #494 (⛔ MIGRATION, yeni tablo `InvitationLink`, yedek gerekmez) · 7b ONAY · **KARAR-144** EVET/HAYIR kartı açıldı. EVET gelince merge + canlı kontrol; sonra U-12C.
 
