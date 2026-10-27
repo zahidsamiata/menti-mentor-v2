@@ -201,7 +201,7 @@ export default function ManagersPage() {
                     onClick={() => setDemoteFor(null)}
                     className="text-xs text-muted-foreground hover:text-foreground"
                   >
-                    Vazgeç
+                    {UI_TEXT.actions.cancel}
                   </button>
                 </div>
               )}
