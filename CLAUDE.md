@@ -83,7 +83,10 @@ Hiçbir kod · uç · alan · tablo · bileşen · dosya · test şu beş adım 
    (rota kapalı / `@deprecated` / export kaldırıldı). Bir tur sorunsuz geçerse, **PO'nun İKİNCİ onayıyla** silinir.
    Karantina 🔵'dır (PO'nun tek "EVET"i), gerçek silme 🔴'dır (İKİNCİ onay).
 
-⚠️ İstisna YOK. "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz.
+⚠️ "Zaten ölü" · "kimse kullanmıyor" · "mükerrer" gerekçeleri protokolü atlatmaz. Tek istisna aşağıdadır.
+
+**SİLME KURALI İSTİSNASI (PO 2026-10-27):** PO kararıyla yerine yenisi konmuş şeylerde arşiv belgesi (docs/arsiv/silinenler-*.md) + veritabanı yedeği yeterlidir; karantina ve ikinci onay ATLANIR. Gerekçesi bilinmeyen / PO kararıyla değiştirilmemiş her şey için tam kural AYNEN geçerli.
+(Uygulama: adım 1 NİYET yerine "hangi PO kararı neyi neyle değiştirdi" kart no ile yazılır; adım 4 ARŞİV aynen zorunlu; veri varsa tarihli yedek tablo + satır sayısı `02-ILERLEME.md`'ye; kolon/tablo silme yine 🔵 migration kapısıdır. İlk uygulamalar: KARAR-107 `interactionStyle` · görüşme sıklığı `timeCommitment`.)
 
 ## ⭐ YANLIŞ SORU TUZAĞI (2026-09-09'da üç kez yaşandı)
 Bir uç/bileşen çağrılmıyor diye **"özellik yok" DEME.** Önce sor: *bu işi yapan BAŞKA bir yol var mı?*
