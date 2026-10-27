@@ -32,6 +32,15 @@ import type { RequestOptions, DownloadedFile } from './client';
 /** U-13: yöneticinin atayabileceği kurum-içi roller (ADMIN ayrı uçlarda). */
 export type MemberRole = 'MENTOR' | 'MENTI';
 
+/** U-13C: rol tarihçesi satırı (GET /api/admin/users/:id/role-history). */
+export interface RoleHistoryItem {
+  id: string;
+  previousRole: 'ADMIN' | 'MENTOR' | 'MENTI';
+  newRole: 'ADMIN' | 'MENTOR' | 'MENTI';
+  createdAt: string;
+  changedByName: string | null;
+}
+
 type BoundClient = <T>(path: string, options?: Omit<RequestOptions, 'token' | 'tenantId'>) => Promise<ApiResult<T>>;
 
 export const adminApi = {
@@ -161,6 +170,10 @@ export const adminApi = {
     api<{ ok: boolean; role: MemberRole }>(`/api/admin/users/${userId}/demote-admin`, { method: 'POST', body: { targetRole } }),
 
   // U-13: kurum yöneticisi üyenin rolünü MENTOR↔MENTI değiştirir (yöneticinin rolü burada değişmez).
+  // U-13C (KARAR-83 C): üyenin rol tarihçesi.
+  getRoleHistory: (api: BoundClient, userId: string) =>
+    api<{ items: RoleHistoryItem[] }>(`/api/admin/users/${userId}/role-history`),
+
   changeMemberRole: (api: BoundClient, userId: string, role: MemberRole) =>
     api<{ ok: boolean; role: MemberRole }>(`/api/admin/users/${userId}/role`, { method: 'POST', body: { role } }),
 
