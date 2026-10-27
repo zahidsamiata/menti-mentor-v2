@@ -45,6 +45,6 @@ describe('AN-50 · kişilik ve yönlendirme dili', () => {
   });
 
   it('sistemin eşleştirdiği iddiası yok (KARAR-66 B → öneri/yönlendirme)', () => {
-    expect(offenders(/akıllı eşleştirme|Eşleştirme Motoru|nasıl eşleştirir|eşleştirme platformu|eşleştirileceksin|eşleştirebilmemiz/i)).toEqual([]);
+    expect(offenders(/akıllı eşleştirme|Eşleştirme Motoru|nasıl eşleştirir|eşleştirme platformu|eşleştirileceksin|eşleştirebilmemiz|eşleşme algoritması|en uygun eşleşmeyi/i)).toEqual([]);
   });
 });
