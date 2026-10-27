@@ -28,7 +28,7 @@ _(boş — PO NOTU 2026-10-27 (KARAR-143 · 44 · 12) aynı gün kuyruğa alınd
 Durum: ⬜ cevap bekliyor · ✍️ CEVAP yazıldı, henüz işlenmedi · ✅ cevaplandı. Kilitlediği işler = eski indeksteki "kaç işi açar" bilgisi + `00-KUYRUK-KARAR-BEKLEYEN.md`'deki satırlar (🔴 ya da ATLANDI(karar)) + aktif kuyrukta kalan ayağı ya da 🔵 EVET/HAYIR kartı bu karara bağlı satırlar; kart başlığındaki sayı eskiyse "kart metni eski" notu (kart gövdesi değişmez).
 Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) göre (çoktan aza), eşitse numara; cevaplanmışlar numara sırasıyla.
 
-### ⬜ / ✍️ Cevap bekleyen (111)
+### ⬜ / ✍️ Cevap bekleyen (112)
 
 | # | Konu | Kilitlediği işler | Durum | Öneri | Kart |
 |---|---|---|---|---|---|
@@ -143,6 +143,7 @@ Sıra: cevap bekleyenler kilitledikleri iş sayısına (KARAR-BEKLEYEN + aktif) 
 | KARAR-125 | Mentör/menti kendi kurumunu platforma önerebilsin mi ("ters çekim") | **0** | ⬜ boş · ajan-ekledi · öneri A | A (şimdilik) | [kart](kararlar/KARAR-125.md) |
 | KARAR-126 | Az yanıtlı ilk ayda "NPS düşüşü" önerisi çıkmasın mı (KVKK çıkarımı) | **0** | ⬜ boş · ajan-ekledi (AJ-69) · öneri B | B | [kart](kararlar/KARAR-126.md) |
 | KARAR-144 | 🔵 EVET/HAYIR — davet linki iptal edilebilsin diye yeni küçük "davet linkleri" tablosu (U-12B, ⛔ MIGRATION) | **1** (U-12B) · aktif kuyrukta: U-12B (🔵 PR-ACIK — EVET/HAYIR kartı) · ardından U-12C | ⬜ boş · 🔵 · ⛔ migration (yeni tablo, CREATE TABLE IF NOT EXISTS) · yedek: gerekmez · PR backend #319 + çatı #494 · 7b ONAY | EVET | [kart](kararlar/KARAR-144.md) |
+| KARAR-145 | 🔵 EVET/HAYIR — rol geçmişi kalıcı tutulsun diye yeni küçük "rol değişiklikleri" tablosu (U-13C, ⛔ MIGRATION) | **1** (U-13C) · aktif kuyrukta: U-13C (🔵 PR-ACIK — EVET/HAYIR kartı) | ⬜ boş · 🔵 · ⛔ migration (yeni tablo, CREATE TABLE IF NOT EXISTS) · yedek: gerekmez · PR backend #320 + çatı #495 · 7b ONAY · not: dışa aktarıma ekleme KARAR-138'e bağlı | EVET | [kart](kararlar/KARAR-145.md) |
 
 ### ✅ Cevaplanmış (35)
 

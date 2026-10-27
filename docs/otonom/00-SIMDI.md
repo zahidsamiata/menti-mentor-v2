@@ -1,15 +1,15 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `7a15fcc` · backend main `bfe0af9` (çatı pointer `407ea93`; Y1-B8 + U-15 backend'i merge edildi, çatı PR'ları bekliyor)
+**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `7d53871` · backend main `bfe0af9` (çatı pointer `e69a2c1`; U-15 backend merge edildi, çatı #493 CI'da)
 
 **Durum:** ÇALIŞIYOR. Oturum PO'nun Windows bilgisayarında (Cursor): Node 24 (CI/canlı 22 — kanıt CI), gh girişli, Python 3.15 (`py`). ⚠️ Bu bilgisayarda bekçi için iki ortam ayarı gerekiyor: (1) `python3` → `py` kısayolu (PATH başı), (2) bekçinin öz-testleri (`belge-bekci.test.sh`) Windows'ta 4-5 vakada düşüyor — Git Bash grep 3.0 emoji eşleştiremiyor ve Python yolları `\` ile yazıyor; ortamsal, CI'da (Linux) aynı testler yeşil. Bu yüzden `npm run verify` burada bekçi adımında kırmızı; diğer adımlar tek tek koşuluyor (tsc · tsc-test · eslint · birim · fe tsc · vitest · build), bekçinin repo denetimi ayrıca koşuyor (HATA yok).
 
-**Şu an yapılan:** → Y1-B8 (çatı #491 CI) · → U-15 (çatı #493 main birleştirme + CI) · → U-12B (🔵 PR-ACIK, KARAR-144 EVET bekler). Sıradaki: U-13C.
+**Şu an yapılan:** → U-15 (çatı #493 CI) · 🔵 PO bekleyen: → U-12B (KARAR-144) · → U-13C (KARAR-145). Sıradaki: AN-50 + AN-10 kalan ayak.
 
-**Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** U-13C (🔵 rol tarihçesi) → AN-50 + AN-10 kalan ayak (kişilik + yönlendirme dili, tek PR) → PN-06 → PN-03 → PS-03.
+**Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** AN-50 + AN-10 kalan ayak (kişilik + yönlendirme dili, tek PR) → PN-06 → PN-03 → PS-03 → I-12.
 
-**Son merge'ler:** U-13 rol değiştirme — backend #315 + çatı #492 (`7a15fcc`) · U-12 davet 7 gün — backend #312 + çatı #490 (`3004219`; canlı yeniden başladı, `/health` ok:true db:up smtp:verified) · backend'de merge, çatısı bekleyen: Y1-B8 #313 (`e69a2c1`) · U-15 #317 (`bfe0af9`).
+**Son merge'ler:** Y1-B8 onay bekleyen kapısı — backend #313 + çatı #491 (`7d53871`; canlı yeniden başladı, `/health` ok:true db:up) · U-13 rol değiştirme — #315 + #492 (`7a15fcc`) · U-12 davet 7 gün — #312 + #490 (`3004219`) · backend merge, çatısı bekleyen: U-15 #317 (`bfe0af9`).
 
 **PO bekleyen hazır PR'lar (hepsi 7b ONAY):**
 - 🔵 E-4 karantina — backend #289 + çatı #474 · **KARAR-134**
@@ -27,9 +27,9 @@
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
-| çatı #491 | Y1-B8 onay bekleyen kapısı · 🟢+7b | bekliyor | ✅ ONAY | backend #313 merge ✓; çatı CI → merge |
 | çatı #493 | U-15 sıfırlama bağlantısı · 🟢+7b | bekliyor | ✅ ONAY | backend #317 merge ✓; main birleştir + CI → merge |
 | backend #319 + çatı #494 | U-12B davet iptal · 🔵 ⛔ MIGRATION | bekliyor | ✅ ONAY | **KARAR-144** EVET (yedek gerekmez) |
+| backend #320 + çatı #495 | U-13C rol tarihçesi · 🔵 ⛔ MIGRATION | bekliyor | ✅ ONAY | **KARAR-145** EVET (yedek gerekmez) |
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil (#420 main gerisinde) | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | backend #212 | AJ-50 ham DISC kart temizliği · 🔵 | yeşil | ✅ ONAY | KARAR-116 EVET + yedek (DB erişimi) |
 | backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | CONFLICTING (2026-09-29) | SORUN VAR (ürün) | KARAR-101 ✅ B genişletilmiş + EK — kuyrukta Y1-B8 (§ AŞAMA PN, 1. sıra); yeni dalda yeniden yazılacak, yeni PR açılınca bu ikisi kapatılır |
@@ -51,7 +51,7 @@
 - ✅ ORTAM çözüldü (2. oturum, 2026-10-27): node · gh · py var; bekçi lokalde koştu (HATA yok, 33 UYARI — boyut eşikleri + bilinen "kısmen" satırları).
 - 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + 5 tablo yedeği) · AJ-50 · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek: AN-30 · U-18 · AN-26 · AN-02. (DATABASE_URL bu bilgisayarda yok ve kurulmaz — K8.3.)
 
-**PO'ya sorular:** 🔵 KARAR-144 (U-12B davet linki iptal tablosu, yedek gerekmez) · KARAR-89 (NPS hangi kutuya — ajan önerisi kartta; PN-10 · PN-11 bekliyor) · 🔵 EVET/HAYIR: KARAR-134 · 135 · 137 · 139 · 140 · 141 · 142 · 96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ürün: KARAR-136 · 138 · toplu paket: `docs/otonom/KARAR-PAKETI.md` (⚠️ paket 2026-10-21 cevaplarından önce yazıldı; 9 kart artık ✅).
+**PO'ya sorular:** 🔵 KARAR-145 (U-13C rol tarihçesi tablosu, yedek gerekmez) · 🔵 KARAR-144 (U-12B davet linki iptal tablosu, yedek gerekmez) · KARAR-89 (NPS hangi kutuya — ajan önerisi kartta; PN-10 · PN-11 bekliyor) · 🔵 EVET/HAYIR: KARAR-134 · 135 · 137 · 139 · 140 · 141 · 142 · 96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ürün: KARAR-136 · 138 · toplu paket: `docs/otonom/KARAR-PAKETI.md` (⚠️ paket 2026-10-21 cevaplarından önce yazıldı; 9 kart artık ✅).
 
 **Strateji katmanına not:** (YENİ 2026-10-27) KARAR-83: kartın C seçeneği "yalnız platform yöneticisi" iken CEVAP metni C'yi "rol tarihçesi" olarak tanımlıyor → CEVAP metni uygulandı (U-13C). PO farklı niyetliyse kartı düzeltsin. · AŞAMA PN satırları 5c-n "geri dönüş yeri" yerine PN bölümüne alındı (PO md.4 "öne al") — bekçi (i2)/(n) bu sapmayı uyarırsa gerekçe budur. · I-18/IC-13 IPTAL(PO) aktif kuyrukta (PN bölümü sonu) duruyor; arşiv yeri (bitti arşivi IPTAL satırı almıyor) bir sonraki belge turunda netleşir. · Önceki notlar: (000) AJ-113 7b notu: randevu ucu mentörün onay durumuna (approvalStatus) bakmıyor — KARAR-101 (onay bekleyen kullanıcı) ile birlikte ele alınmalı. (00) AJ-99 7b notu: `GET /api/feedback-logs` mentöre kendi FeedbackLog kayıtlarını ham puan + menti adıyla döndürüyor; bugün FeedbackLog'a menti yazmıyor → risk yok, ama KARAR-12 "B" seçilirse (menti yazarsa) liste ucu k-anonimlik maskesini aşar — KARAR-12 cevabında dikkate alınmalı. (0) İŞ 2 teyit listesi (#455): G7-10 "mobil" ayağı AJ-86 ölçütünde yok · G7-14 "sanallaştırma" kodda yok (AJ-83 sayfalama yaptı) — ikisi de 🟨, bitip bitmediği PO/strateji teyidi · 7b notu: Y3 (00-KARAR-TAKIP) PDF/Excel biçimi istenirse ayrı iş. İŞ 2 CI: bekçi mevcut docs-guard job'unda koşuyor, iş akışı dosyası değişmedi.  (1) Bekçi (i5) E-5 uyarısı bilinçli: KARAR-11 ✅ ama gerçek silme PO ikinci onayı + karantina turu bekliyor. (2) 00-KUYRUK 116 KB > 90 KB eşiği — kalan uzunluk AJ-96…111 yeni satırlarından ve gerekçeli uzun satırlardan (AJ-68 kısmen). (3) 🔵 PR'ların 4'ü main ile çakışıyor — EVET gelince rebase gerekir. (4) Paylaşılan backend `.gitignore` artık `node_modules` sembolik bağını da yakalıyor (AJ-69 dersi).
 

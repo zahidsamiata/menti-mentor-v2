@@ -135,4 +135,6 @@ KARAR-12 → KARAR-44 ile birlikte cevaplandı: ikinci geri bildirim kayıt sist
 - ⏳ **Y1-B8** — backend #313 MERGE (`e69a2c1`); eski #164/#343 gerekçeyle kapatıldı; mutasyon #314 kapatıldı (kanıt #313 yorumunda). Backend CI ilk koşuda `rank-mentors-approval-gate` mesaj eşitliği yakaladı → test kapı 4c mesajına güncellendi. Çatı #491 CI bekliyor.
 - ⏳ **U-15** — backend #317 MERGE (`bfe0af9`); 7b ONAY (CSRF: platform çerezi sameSite strict); mutasyon #318 (4 test kırmızı). Çatı #493 main birleştirme + CI bekliyor.
 - 🔵 **U-12B PR-ACIK** — backend #319 + çatı #494 (⛔ MIGRATION, yeni tablo `InvitationLink`, yedek gerekmez) · 7b ONAY · **KARAR-144** EVET/HAYIR kartı açıldı. EVET gelince merge + canlı kontrol; sonra U-12C.
+- ✅ **Y1-B8 BITTI** — çatı #491 merge (`7d53871`) · canlı yeniden başladı, `/health` ok:true db:up. **CANLIDA BAK:** onay bekleyen kişi şifre/Google/LinkedIn ile giriş yapıp 8 soruya / paneline gidiyor; menti bekleme kartında "N onaylı mentör · Alanlar: …" (isimsiz) ve yöneticinin notu; mesaj/talep/randevu/anlaşma/eşleşme/mentör listesi açılmıyor.
+- 🔵 **U-13C PR-ACIK** — backend #320 + çatı #495 (⛔ MIGRATION, yeni tablo `RoleChange`, yedek gerekmez) · 7b ONAY · **KARAR-145** EVET/HAYIR kartı. Neden tablo: rol değişiklikleri bugün yalnız 90 günde silinen sistem günlüğünde.
 
