@@ -377,6 +377,18 @@ export async function getTenantUserDetail(id: string, userId: string) {
   return platformFetch<TenantUserDetail>(`/api/platform/tenants/${id}/users/${userId}`);
 }
 
+/** U-15 (KARAR-84 B): e-posta çalışmazsa sıfırlama bağlantısını yalnız platform yöneticisi üretir (iz kaydıyla). */
+export interface PasswordResetLink {
+  resetUrl: string;
+  expiresInMinutes: number;
+}
+
+export async function issueUserPasswordResetLink(id: string, userId: string) {
+  return platformFetch<PasswordResetLink>(`/api/platform/tenants/${id}/users/${userId}/password-reset-link`, {
+    method: 'POST',
+  });
+}
+
 export async function listTenantMeetings(
   id: string,
   opts: { status?: string; page?: number } = {}
