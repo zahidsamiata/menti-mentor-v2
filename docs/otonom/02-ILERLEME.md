@@ -24,7 +24,7 @@
 **KUYRUK SON DAĞILIMI (AŞAMA PN):** 🟢 18 satır (15'i hemen çalışılabilir; IC-14 · I-01 · I-11 kısmi kilitli) · 🔵 4 (U-12B · U-12C · U-13C · F-09) · IPTAL(PO) 2 · 🔴 1 (PN-07, KARAR-BEKLEYEN). Kuyruğun geri kalanı önceki turla aynı (önceki dağılım: `docs/otonom/arsiv/02-ILERLEME-2026-W40.md` başı).
 **BACKEND:** pointer `358e085` = backend origin/main `358e085` (eşit; değişiklik yok).
 **STASH:** yok.
-**Bekçi:** ÇALIŞMADI — python3 yok. Bu turun commit'leri yalnız `docs/` (muaf). Araçlı ilk oturum ilk iş olarak bekçiyi koşmalı.
+**Bekçi:** lokalde çalışmadı (python3 yok); CI docs-guard `b299fc7` için YEŞİL (run 40469273751). UYARI ayrıntısı araçlı oturumda.
 **Limitin en çok gittiği yer:** uzun kuyruk satırlarını aynen taşımak için yapılan satır düzeyinde belge cerrahisi.
 
 ## TUR BAŞLANGICI — 2026-10-27 · Windows/Cursor (PO bilgisayarı) · uzun çalışma kipi

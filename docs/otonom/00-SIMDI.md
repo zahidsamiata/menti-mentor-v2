@@ -46,7 +46,7 @@
 
 **Engeller:**
 - ⛔ **ORTAM (2026-10-27): bu bilgisayarda `node`/`npm`, `gh`, `python` yok.** `npm run verify` koşamaz · bekçi çalışmadı: python3 yok (PO NOTU md.2 — 🟢 iş merge edilmez) · `gh` olmadığı için PR açılamaz/merge edilemez/CI okunamaz. Kod işi başlatılmadı. Çözüm (kurulum komutları ya da VPS): `03-PO-ELLE-ISLER.md` en üstteki 2026-10-27 maddesi.
-- ⚠️ Bu turun belge commit'leri bekçiden geçmedi (python yok; docs muafiyeti, PO NOTU md.2). Araçlı ilk oturumda ilk iş `bash scripts/belge-bekci.sh` — HATA çıkarsa önce o düzeltilir.
+- ✅ Bekçi lokalde çalışmadı (python yok) ama `b299fc7` için CI "Belge bekçisi (aktif/arşiv)" işi YEŞİL (çatı CI run 40469273751, tüm işler success; herkese açık GitHub API ile okundu). UYARI satırları log ister (gh yok) — araçlı ilk oturumda `bash scripts/belge-bekci.sh` ile bakılmalı.
 - 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + 5 tablo yedeği) · AJ-50 · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek: AN-30 · U-18 · AN-26 · AN-02. (DATABASE_URL bu bilgisayarda yok ve kurulmaz — K8.3.)
 
 **PO'ya sorular:** KARAR-143 (iki menti arketipinin yeni adı — IC-14 · I-01 · IC-10 · AN-05'in ad ayağını kilitliyor; öneri A "Gezgin" + "Adım Atan") · 🔵 EVET/HAYIR: KARAR-134 · 135 · 137 · 139 · 140 · 141 · 142 · 96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ürün: KARAR-136 · 138 · toplu paket: `docs/otonom/KARAR-PAKETI.md` (⚠️ paket 2026-10-21 cevaplarından önce yazıldı; 9 kart artık ✅).
