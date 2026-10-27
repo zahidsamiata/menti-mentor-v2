@@ -13,6 +13,17 @@
 | 2026-W43 (19-25 Ekim) | `docs/otonom/arsiv/02-ILERLEME-2026-W43.md` | PO NOTU 2026-10-21 + EK: 9 kartın CEVAP'ı kart dosyalarına aktarıldı, KARAR-143 açıldı (yalnız belge) | PO strateji katmanı üzerinden toplu karar verdi; uygulama normal tura bırakıldı |
 | 2026-W44 (26 Ekim →) | bu dosya | PO NOTU 2026-10-21 kararlarının açtığı işler kuyruğa alınıp öne çekildi (§ AŞAMA PN) · Windows/Cursor ortamında araç eksikliği | PO "açtıkları işleri kuyrukta öne al" dedi; bu bilgisayarda node/gh/python olmadığı için kod işi merge edilemiyor |
 
+## TUR ÖZETİ — 2026-10-27 (3. oturum) · 15:21–16:03 · PO 45 dk sınırı
+
+**BITTI (merge edildi): 3 iş** — 7b ONAY (önceki tur) · birleşik CI iki repoda yeşil · pointer = backend main HEAD
+- **U-12B** davet linki iptali (KARAR-144) · **U-13C** rol tarihçesi (KARAR-145) · **AJ-111** gevşetme oranı (KARAR-141) — dört PR'ı ayrı ayrı yeniden CI'a sokmak süreyi aşacağı için tek entegrasyon dalında birleştirildi: backend #324 (tek çakışma `schema.prisma`, iki model yan yana) + çatı #498. Birleşik CI'da AJ-111'in eski dalı panelde "mizaç" yazıyordu (AN-50 dil testi kırmızı) → "kişilik" yapıldı, tekrar yeşil.
+- **CANLIDA BAK:** kurum yöneticisi Davet sayfasında davet linklerini görüp "iptal" edebiliyor · Yöneticiler sayfasında üyenin rol geçmişi (önceki → yeni · tarih) · platform → kurum detayı → "gevşetilen eşleştirme" oranı. ⚠️ 16:02'de canlı henüz eski sürümdeydi (uptime 27 dk) — deploy + 3 yeni tablo (InvitationLink · RoleChange · MatchingFallbackDailyStat) sonraki oturumda teyit edilecek.
+- **KURAL:** CLAUDE.md silme istisnası çatı #497 ile merge edildi.
+
+**MERGE EDİLMEDİ:** E-4 (KARAR-134 EVET) — AJ-127 testiyle çakışma (karantinadaki uç 410 dönüyor, test 200 bekliyor); 00-KUYRUK E-4 Not.
+**DB OTURUMU BEKLER:** 00-SIMDI § Engeller (AJ-77 · AJ-50 · I-08 · P-08 · AN-27 · U-18 · AN-26/PN-16 · AN-02/PN-14 · PN-13 · PN-15).
+**YARIM İŞ:** yok. **PO'ya yeni soru:** yok. **Belge senkronu:** 09-DURUM/00-KARAR-TAKIP güncellemesi gerekmedi (rutin turda okunmaz; kapanış kaydı burada + 00-SIMDI). BITTI satırlarının arşive taşınması ve 14 kartın `arsiv/kararlar/`'a taşınması sonraki belge turuna kaldı.
+
 ## 3. oturum 2026-10-27 · başlangıç 15:21 (yerel saat, `date`) · ⏱ PO zaman sınırı 45 dk
 
 ## PO NOTU 2026-10-27 (2) — 14 karar + silme istisnası işlendi (2026-10-27)

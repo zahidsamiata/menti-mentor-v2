@@ -1,15 +1,15 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-10-27 (2. oturum) · çatı main `33523a2` · backend main `6917448` (= çatı pointer)
+**Son güncelleme:** 2026-10-27 (3. oturum, 15:21–16:03, PO 45 dk sınırı) · çatı main `4b2fb2a` · backend main `f1263a0` (= çatı pointer)
 
 **Durum:** ÇALIŞIYOR. Oturum PO'nun Windows bilgisayarında (Cursor): Node 24 (CI/canlı 22 — kanıt CI), gh girişli, Python 3.15 (`py`). ⚠️ Bu bilgisayarda bekçi için iki ortam ayarı gerekiyor: (1) `python3` → `py` kısayolu (PATH başı), (2) bekçinin öz-testleri (`belge-bekci.test.sh`) Windows'ta 4-5 vakada düşüyor — Git Bash grep 3.0 emoji eşleştiremiyor ve Python yolları `\` ile yazıyor; ortamsal, CI'da (Linux) aynı testler yeşil. Bu yüzden `npm run verify` burada bekçi adımında kırmızı; diğer adımlar tek tek koşuluyor (tsc · tsc-test · eslint · birim · fe tsc · vitest · build), bekçinin repo denetimi ayrıca koşuyor (HATA yok).
 
-**Şu an yapılan:** ara TUR ÖZETİ yazıldı (02-ILERLEME başı); sıradaki PN-06. 🔵 PO bekleyen: → U-12B (KARAR-144) · → U-13C (KARAR-145).
+**Şu an yapılan:** DURDU (zaman sınırı). Yarım iş YOK. PO NOTU 2026-10-27 (2) işlendi; U-12B + U-13C + AJ-111 merge edildi. ⚠️ Canlı sağlık 16:02: ok:true db:up ama uptime 27 dk → yeni sürüm henüz deploy olmamıştı; sonraki oturum ilk iş: `/health` uptime sıfırlandı mı + 3 yeni tablonun migration'ı uygulandı mı (CANLIDA BAK aşağıda).
 
 **Sıradaki 5 iş (§ AŞAMA PN öncelik sırası):** PN-06 (arketip eşikleri → ana + yakın tip, matching 7b) → PN-03 → PS-03 → I-12 → PN-01.
 
-**Son merge'ler:** AN-50 + AN-10 — backend #323 + çatı #496 (`33523a2`; canlı yeniden başladı, ok:true db:up, site 200) · U-15 — #317 + #493 (`8d6fec3`) · Y1-B8 — #313 + #491 (`7d53871`) · U-13 — #315 + #492 (`7a15fcc`) · U-12 — #312 + #490 (`3004219`).
+**Son merge'ler:** U-12B + U-13C + AJ-111 — backend #324 (toplu; #319/#320/#307 merged) + çatı #498 (`4b2fb2a`; #494/#495/#486 merged) · CLAUDE.md silme istisnası — çatı #497 · AN-50 + AN-10 — backend #323 + çatı #496 (`33523a2`; canlı yeniden başladı, ok:true db:up, site 200) · U-15 — #317 + #493 (`8d6fec3`) · Y1-B8 — #313 + #491 (`7d53871`) · U-13 — #315 + #492 (`7a15fcc`) · U-12 — #312 + #490 (`3004219`).
 
 **PO bekleyen hazır PR'lar (hepsi 7b ONAY):**
 - 🔵 E-4 karantina — backend #289 + çatı #474 · **KARAR-134**
@@ -43,6 +43,8 @@
 | backend #286 + çatı #472 | DK-03 platform iz kaydı · 🟡 KVKK | yeşil | ✅ ONAY (2 tur) | satır notu: merge yok |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | kalıcı kural |
 
+
+**E-4 (KARAR-134 EVET) merge EDİLMEDİ:** toplu CI'da AJ-127 testi (`GET /api/tenants/:id` 200 bekliyor) karantinanın 410'una çarptı → ayrıntı 00-KUYRUK E-4 Not. #289/#474 açık.
 
 **YN-07 neden merge edilmedi:** PR-ACIK değil, BASARISIZ — hiç PR açılmadı; teslimat CLAUDE.md sözlük düzenlemesi gerektiriyor ve PO talimatı (2026-09-25) "CLAUDE.md'ye DOKUNMA" idi (kanıt: 00-KUYRUK YN-07 Not). PO yeniden izin verirse küçük belge işi.
 
