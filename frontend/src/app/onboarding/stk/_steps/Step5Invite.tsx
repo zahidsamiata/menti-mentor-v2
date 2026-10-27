@@ -101,9 +101,9 @@ export function Step5Invite({ data }: Props) {
         })}
 
         <p className="text-xs text-muted-foreground">
-          {/* U-11: kod gerçeği 30 gün (selfServeController invitation JWT expiresIn 30d);
-              config.invitationTokenExpiry=90d ölü ayar. Ekran metni koda hizalandı. */}
-          Bu linkler 30 gün geçerlidir. Yönetici panelinden yeni link üretebilirsin.
+          {/* U-12 (KARAR-82 A): davet bağlantısı 7 gün (backend services/invitationToken.ts
+              INVITATION_TTL_DAYS); config.invitationTokenExpiry=90d ölü ayar. Ekran metni koda hizalı. */}
+          Bu linkler 7 gün geçerlidir. Yönetici panelinden yeni link üretebilirsin.
         </p>
       </div>
 
