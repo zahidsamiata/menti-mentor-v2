@@ -13,3 +13,5 @@
 **CEVAP:** A + B + C. Kurum yöneticisinin iki davet yolu olur: (1) toplu link — 7 gün geçerli, "linki iptal et" düğmesiyle kapatılabilir; (2) kişiye özel, e-postaya bağlı, tek kullanımlık davet. Sıra: önce A + B (çıkış blokeri bunlarla kapanır), C sonra (SMTP'nin canlıda çalıştığı teyit edilince). B/C migration ister → kural gereği yedek + PO onayı.
 *kaynak: PO NOTU EK 2026-10-21 (strateji katmanı üzerinden) — `docs/otonom/01-KARARLAR.md` § ✍️ PO NOTU › PO NOTU EK · ajan yalnız aktardı (metin aynen).*
 
+
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 md.4 "öne al"). Kart arşive taşındı (5c-c).

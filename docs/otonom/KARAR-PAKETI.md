@@ -10,8 +10,8 @@
 
 ## ⭐ RİSK SIRASI (PO oturum sırası) — PO NOTU 2026-09-28
 Önce bu üçü, sonra aşağıdaki (e) listesi (o sıralama silinmedi; iş sayısına göre, bu ise riske göre):
-1. **KARAR-101** — canlıda AÇIK güvenlik boşluğu: onay bekleyen kişi Google/LinkedIn ile oturum alıp kurumun iç özelliklerine istek atabiliyor. [kart](kararlar/KARAR-101.md) · öneri B (izin listesiyle) · alternatif: A şimdi + B sonra.
-2. **KARAR-95** — can güvenliği: kendine zarar ifadesinde kim haberdar olsun. [kart](kararlar/KARAR-095.md) · öneri C.
+1. **KARAR-101** — canlıda AÇIK güvenlik boşluğu: onay bekleyen kişi Google/LinkedIn ile oturum alıp kurumun iç özelliklerine istek atabiliyor. [kart](arsiv/kararlar/KARAR-101.md) · öneri B (izin listesiyle) · alternatif: A şimdi + B sonra.
+2. **KARAR-95** — can güvenliği: kendine zarar ifadesinde kim haberdar olsun. [kart](arsiv/kararlar/KARAR-095.md) · öneri C.
 3. **KARAR-72** — KVKK + hukuk: sessiz/kalıcı red ("ghost") özelliği olsun mu. [kart](kararlar/KARAR-072.md) · öneri B.
 Sonra: (e) İLK 10 KARAR (aşağıda, sıra aynen).
 
@@ -46,14 +46,14 @@ Seçim ölçüsü: kilitlediği iş sayısı (güncel indeks + `00-KUYRUK.md` §
 
 | No | Soru | Öneri (kartın) | Açtığı işler | Geri al. | Risk | Kart | PO seçimi (→ PO NOTU) |
 |---|---|---|---|---|---|---|---|
-| 101 | Onay bekleyen kişi girip yalnız "Bekleme Odası"nı görsün mü? | B — açık kapanır, bekleme odası İZİN LİSTESİYLE korunur (alternatif: A şimdi + B sonra) | Y1-B8 (PR #164/#343 CONFLICTING — A dahil rebase + CI + 7b gerekir; kuyrukta satırı yok) | ✅ | 🛡️ canlıda açık | [kart](kararlar/KARAR-101.md) | |
+| 101 | Onay bekleyen kişi girip yalnız "Bekleme Odası"nı görsün mü? | B — açık kapanır, bekleme odası İZİN LİSTESİYLE korunur (alternatif: A şimdi + B sonra) | Y1-B8 (PR #164/#343 CONFLICTING — A dahil rebase + CI + 7b gerekir; kuyrukta satırı yok) | ✅ | 🛡️ canlıda açık | [kart](arsiv/kararlar/KARAR-101.md) | |
 | 46 | Sertifikaya 22 senaryoluk yeni içerik tam taşınsın mı? | A — en olgun içerik; 3 ve 4 önce | F-14, P-99, AN-03, K-16 | ✅ (yedekle) | ⛔ÇB · 🌱 | [kart](kararlar/KARAR-046.md) | |
-| 95 | Kendine zarar ifadesinde kim haberdar olsun? | C — yönetici bildirimi + yardım ekranı, ikisi de ucuz | I-18, IC-13 | ✅ | 🛡️ can | [kart](kararlar/KARAR-095.md) | |
+| 95 | Kendine zarar ifadesinde kim haberdar olsun? | C — yönetici bildirimi + yardım ekranı, ikisi de ucuz | I-18, IC-13 | ✅ | 🛡️ can | [kart](arsiv/kararlar/KARAR-095.md) | |
 | 72 | Uygunsuz kişiyi sessiz ve kalıcı reddetme olsun mu? | B — yok, bugünkü şeffaf red kalsın | KR-20, AN-33 | ✅ | 🔒 ⚖️ | [kart](kararlar/KARAR-072.md) | |
 | 110 | Periyodik anket AN-52 anket altyapısına katılsın mı? | A — KARAR-106 EVET'ine bağlı | AJ-14, AJ-49 | ✅ | 🔒 | [kart](kararlar/KARAR-110.md) | |
-| 82 | Davet bağlantısı iptal edilebilir olsun mu? | B — iptal edilebilir toplu link | U-12 | ✅ 🗄️ | ⛔ÇB 🛡️ | [kart](kararlar/KARAR-082.md) | |
-| 83 | Rolü kim, nasıl değiştirir? | B — yalnız düşürme hatası düzelsin | U-13 | ✅ | ⛔ÇB 🛡️ | [kart](kararlar/KARAR-083.md) | |
-| 84 | E-posta çalışmazsa şifre sıfırlamayı kim yapsın? | B — yalnız platform yöneticisi | U-15 | ✅ | ⛔ÇB 🛡️ | [kart](kararlar/KARAR-084.md) | |
+| 82 | Davet bağlantısı iptal edilebilir olsun mu? | B — iptal edilebilir toplu link | U-12 | ✅ 🗄️ | ⛔ÇB 🛡️ | [kart](arsiv/kararlar/KARAR-082.md) | |
+| 83 | Rolü kim, nasıl değiştirir? | B — yalnız düşürme hatası düzelsin | U-13 | ✅ | ⛔ÇB 🛡️ | [kart](arsiv/kararlar/KARAR-083.md) | |
+| 84 | E-posta çalışmazsa şifre sıfırlamayı kim yapsın? | B — yalnız platform yöneticisi | U-15 | ✅ | ⛔ÇB 🛡️ | [kart](arsiv/kararlar/KARAR-084.md) | |
 | 85 | Yeni ortamda DISC soru havuzu nasıl dolsun? | A — silmeyen ayrı betik | U-17 | ✅ | ⛔ÇB 🌱 | [kart](kararlar/KARAR-085.md) | |
 | 5 | Öğrenme yolculuğu içeriği canlıya yazılsın mı? | B — önce PO okur | K-18 | ✅ (yedekle) | ⛔ÇB (koşullu) 🌱 | [kart](kararlar/KARAR-005.md) | |
 | 3 | Kriz senaryosunda yasal iddia yerine "kurum politikası" metni mi? | A — avukat gelince tek satır | K-16 (+46, 4) | ✅ | ⛔ÇB (dolaylı) ⚖️ | [kart](kararlar/KARAR-003.md) | |
@@ -91,11 +91,11 @@ Seçim ölçüsü: kilitlediği iş sayısı (güncel indeks + `00-KUYRUK.md` §
 
 | No | Soru | Öneri (kartın) | Açtığı işler | Geri al. | Risk | Kart | PO seçimi (→ PO NOTU) |
 |---|---|---|---|---|---|---|---|
-| 64 | Ekranda "mizaç", "karakter" ya da "kişilik"? | C — kişilik | I-01, I-11, AN-50, AN-51, AN-10 (ayak) | ✅ | ürün | [kart](kararlar/KARAR-064.md) | |
+| 64 | Ekranda "mizaç", "karakter" ya da "kişilik"? | C — kişilik | I-01, I-11, AN-50, AN-51, AN-10 (ayak) | ✅ | ürün | [kart](arsiv/kararlar/KARAR-064.md) | |
 | 89 | Değerlendirmenin tek kutusu MeetingCheckIn mi olsun? | B — KARAR-77 ile birlikte oku | KR-08, AJ-49, AN-49 | ✅ 🗄️ | veri | [kart](kararlar/KARAR-089.md) | |
-| 57 | Kişilik sonucunu tek test mi belirlesin? | A — 32 soruluk test esas | F-09, PS-03, I-12 | ✅ | ürün | [kart](kararlar/KARAR-057.md) | |
+| 57 | Kişilik sonucunu tek test mi belirlesin? | A — 32 soruluk test esas | F-09, PS-03, I-12 | ✅ | ürün | [kart](arsiv/kararlar/KARAR-057.md) | |
 | 58 | Yeni kişilik bankasına geçiş: kesme mi, paralel mi? | öneri yok (yedek zorunlu) | PS-A2, AN-04, PS-A3 | ❌ (A) 🗄️ | veri | [kart](kararlar/KARAR-058.md) | |
-| 45 | Yeni 8 arketip adı eski adların yerini alsın mı? | C — çakışan 2 ad yeniden adlanır | IC-14, IC-10 (ayak), AN-05 (ayak) | ✅ | ürün | [kart](kararlar/KARAR-045.md) | |
+| 45 | Yeni 8 arketip adı eski adların yerini alsın mı? | C — çakışan 2 ad yeniden adlanır | IC-14, IC-10 (ayak), AN-05 (ayak) | ✅ | ürün | [kart](arsiv/kararlar/KARAR-045.md) | |
 | 12 | Görüşme geri bildirimi iç analiz aracı mı olsun? | A — KARAR-44 ile tek cevap | AJ-38, AJ-99 (olası) | ✅ | ürün | [kart](kararlar/KARAR-012.md) | |
 | 36 | 3 yarım teknik kalem: karantina mı, tamamla mı? | (a)(b) B, (c) A | Y-18, AJ-10 | ✅ | veri | [kart](kararlar/KARAR-036.md) | |
 | 44 | Tek resmî memnuniyet ölçüsü + insan onaylı öğrenme? | B | F-08, AJ-38 | ✅ | ürün | [kart](kararlar/KARAR-044.md) | |
@@ -125,7 +125,7 @@ Seçim ölçüsü: kilitlediği iş sayısı (güncel indeks + `00-KUYRUK.md` §
 | 42 | DISC testi yeniden alınabilsin mi? | B — üzerine yaz | — | ⚠️ (eski profil gelmez) | veri | [kart](kararlar/KARAR-042.md) | |
 | 43 | Menti, mentörün eleyeceği eşleşmeyi görsün mü? | C — iki yönlü filtre | — | ✅ | ürün | [kart](kararlar/KARAR-043.md) | |
 | 55 | Sertifikada şık açıklaması ne zaman gösterilsin? | B — sınav sonunda | — | ✅ | ürün | [kart](kararlar/KARAR-055.md) | |
-| 63 | Arketip sabit eşikle mi, "en yüksek boyut" kuralıyla mı? | A | — | ✅ | ürün | [kart](kararlar/KARAR-063.md) | |
+| 63 | Arketip sabit eşikle mi, "en yüksek boyut" kuralıyla mı? | A | — | ✅ | ürün | [kart](arsiv/kararlar/KARAR-063.md) | |
 | 90 | Görüşme sonrası yeni davranış soruları eklensin mi? | A şimdi, gerisi 89 paketinde | — | ✅ | ürün | [kart](kararlar/KARAR-090.md) | |
 | 92 | "Hazırlıksızdı" cevabı menti'yi kilitlesin mi? | B — 2 ardışık cevapta | — | ✅ | ürün | [kart](kararlar/KARAR-092.md) | |
 | 104 | Uyumlu mentörler kapalıysa baraj altındakiler gösterilsin mi? | A | — | ✅ | ürün | [kart](kararlar/KARAR-104.md) | |

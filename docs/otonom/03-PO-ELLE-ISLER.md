@@ -23,6 +23,11 @@
 > 5. İki PR'ı **CI yeşilken merge et** (backend önce, sonra çatı pointer'ı re-bump — bkz. CLAUDE.md "Merge sonrası pointer bump").
 > **Doğrulama:** her iki anahtar da girilip yeniden deploy sonrası `/register`, `/bildir`, `/onboarding/stk` (Adım 4), `/forgot-password` sayfalarında "robot değilim" kutusu görünmeli; kutu işaretlenmeden gönderim "Lütfen robot olmadığınızı doğrulayın" hatası dönmeli. **Yalnız backend anahtarı girilir, frontend anahtarı girilmezse:** widget hiç görünmez ama form yine de gönderilebilir (backend token bekler, kullanıcı hep 400 alır) — bu yüzden ikisi BİRLİKTE girilmeli. **Acil değil** — anahtar girilene kadar hiçbir davranış değişmez, mevcut IP rate-limit koruması olduğu gibi çalışmaya devam eder.
 
+> 🔴 **YENİ (2026-10-27) — Windows bilgisayarında (Cursor) ajanın kod işi yapabilmesi için 3 araç eksik.** 2026-10-27 turunda bu bilgisayarda `node`/`npm`, `gh` ve `python` bulunamadı → ajan `npm run verify`'ı, belge bekçisini (python3 ister) koşamadı, PR açamadı; PO NOTU md.2 gereği hiçbir kod işi yapılmadı, yalnız belge işi yapıldı. Kuyruğun başındaki 15 🟢 iş (§ ⭐ AŞAMA PN: Y1-B8 · U-12 · U-13 · U-15 …) bunu bekliyor. İki yoldan biri:
+> **Yol 1 — bu bilgisayara kur (PowerShell, yönetici gerekmez):** `winget install OpenJS.NodeJS.LTS` · `winget install GitHub.cli` · `winget install Python.Python.3.12` → Cursor'ı kapatıp aç → `gh auth login` (tarayıcıyla GitHub girişi) → Ayarlar › Uygulamalar › Gelişmiş › "Uygulama yürütme takma adları"nda `python.exe` / `python3.exe` Store kısayollarını kapat. Ardından proje kökünde bir kez `npm ci` (çatı + `backend` + `frontend`).
+> **Yol 2 — oturumu araçların kurulu olduğu VPS'te başlat** (K8 kuralları orada zaten tanımlı).
+> **Doğrulama:** PowerShell'de `node -v` (CI ile aynı ana sürüm — `.github/workflows/ci.yml` `NODE_VERSION`) · `gh auth status` "Logged in" · `python --version` 3.x. ⚠️ `DATABASE_URL` bu bilgisayara KURULMAZ (K8.3) — entegrasyon testleri lokalde guard'la durur, kanıt CI'dır.
+
 ## ⛔ GÜVENLİK — bu belgeye ASLA gerçek değer yazılmaz
 Repo **PUBLIC**. Şifre · API anahtarı · token · SMTP parolası · JWT secret **buraya YAZILMAZ.**
 Yalnız "hangi değişken · nereye · neden · nasıl doğrularım" yazılır. Değerler PO'da/Dokploy'da kalır.

@@ -43,3 +43,5 @@ menti varyantları **bağlanamaz** — dördü de bu eşlemeye bağlı. Kuyruk k
 
 ---
 
+
+> ✅ İŞLENDİ (2026-10-27): CEVAP kuyruğa alındı → `00-KUYRUK.md` § ⭐ AŞAMA PN (PO NOTU 2026-10-27 md.4 "öne al"). Kart arşive taşındı (5c-c).

@@ -159,18 +159,6 @@
 
 → bkz. AJ-38 (KARAR-12 grubunda)
 
-## KARAR-45
-
-**Konu:** Arketip adları: hangi metin hangi koda bağlanacak · kart: `docs/otonom/kararlar/KARAR-045.md`
-
-**Aktif kuyrukta ayrıca bekleyen (satır `00-KUYRUK.md`'de kalır):** IC-10 (kalan ayak: arketip adları (metinde yer tutucu)) · AN-05 (kalan ayak: arketip adları)
-
-**Geri dönüş yeri:** IC-14 → 00-KUYRUK § AŞAMA IC — İÇERİK KONSEYİ (2026-09-21)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| IC-14 | Ş0 | **`M1`/`m1` ham arketip kodları yöneticiye çıplak görünüyor.** NEDEN: yönetici eşleşme tablosunda anlamsız `M1`/`m1` kodlarını görüyor, arketip adını değil. | 🔴 KARAR-45 | Yönetici eşleşme tablosunda kod yerine arketip adı görüyor | BEKLIYOR | §6.1②. `admin/eslesmeler/page.tsx:134,142` (`{match.mentorArchetype}`) — **hiçbir sözlük yok**, yönetici çıplak `M1`…`m4` görüyor. Sözlük yazılabilmesi için **hangi ad hangi koda** kararı şart: kodun tanıdığı değerler `disc-to-ocean.adapter.ts:27-43` · `scoring.config.ts:33-44` · `schema.prisma:997`; yeni 8 ad için **0 eşleme** (kapsam: `docs/**/*.md` + BE `src`/`prisma`, 8 ad × 8 kod, harf duyarsız → tek isabet, o da **eski** adlarla `03-psikometri-ve-algoritma.md:14-15`). ⚠️ `IC-03`'ten AYRI tutuldu: diğer 12 enum'un sözlüğü bugün yazılabilir, bu yazılamaz. Efor S (karar sonrası) |
-
 ## KARAR-46
 
 **Konu:** Sertifika içeriğinin hangi sürümü canlıya gidecek · kart: `docs/otonom/kararlar/KARAR-046.md`
@@ -236,18 +224,6 @@
 |---|---|---|---|---|---|---|
 | AN-21 | Ş1 | **Bekleme "senin gibi N kişi bekliyor" akran sinyali** (mentör<3 gizlenme senaryosu dahil). NEDEN: bekleyen menti yalnız olmadığını bilmiyor; bekleme yalnızlık hissi yaratıyor (PP §6). | 🔴 KARAR-56 | Menti beklerken yalnız olmadığını görüyor | BEKLIYOR | Kaynak: PP §6 · M-A3, R1. 🔴: KVKK eşiği (küçük sayıda ifşa) + ürün kararı; KARAR-56 (çoklu talep) ile ilişkili. · ⛔ **çelişki: KARAR-80/M6** (2026-09-25) · KARAR-80 işlendi (2026-09-26, A kabul) — M6: ana satır (P-06 katlandı); küçük sayı k-anonimlik ile gizlenir; KARAR-56 CEVAPSIZ, kilit korunuyor. |
 
-## KARAR-57
-
-**Konu:** Kullanıcının mizaç sonucunu hangi test belirlesin · kart: `docs/otonom/kararlar/KARAR-057.md`
-
-**Geri dönüş yeri:** F-09 → 00-KUYRUK § AŞAMA F — BİLANÇO DEVRİ (2026-08-28 öncelik sırası → koda karşı doğrulandı 2026-09-19) · PS-03 → 00-KUYRUK § AŞAMA PS — PSİKOMETRİ KONSEYİ (2026-09-21) · I-12 → 00-KUYRUK § AŞAMA I — İÇERİK (PO "EN ÖN SIRA", 2026-09-03)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| F-09 | Ş0 | **12 SJT senaryo + arketip seed.** Şema/model ✅ (`SjtQuestion.triggersOn/signalsArchetype`); seed'de yalnız 3 senaryo var (12 değil). NEDEN: seed'de 12 yerine yalnız 3 SJT senaryosu var; arketip ölçümü eksik veriyle yapılıyor. | 🔴 KARAR-57 | Canlıda 12 SJT senaryosu + arketipler | BEKLIYOR | =Faz5 "12 senaryo+arketip". Seed=PO onayı + yedek. Kanıt: `seed.ts:530-573` 3 senaryo ⚠️ **KAPI DÜZELTİLDİ (2026-09-21): `🔴 seed` → 🟡.** Cevaplanacak bir KARAR **numarası yoktu** → sonsuz kilit; 13 🔴'nın numarasız tek'iydi. Emsal: **P-99 🟡** (*"seed dosyası değişir, seed çalıştırılmaz"*). ⛔ Seed **çalıştırılmaz**; yalnız dosya hazırlanır, çalıştırma PO onayı + yedek ister. · aile: Y-G · ⛔ **çelişki: KARAR-80/M9** (2026-09-25) · KARAR-80 işlendi (2026-09-26, A kabul) — M9: KARAR-57/58 (hangi test, geçiş dönemi) SONRASINA; ikisi de CEVAPSIZ, kilit korunuyor. |
-| PS-03 | Ş0 | **Likert yolu (`/disc-test`) `discType`'ı hiç yazmıyor** → testini güncelleyen kullanıcı onboarding'den kalma ESKİ `discType` ile eşleştirilmeye devam ediyor. NEDEN: DISC testini güncelleyen kullanıcı hâlâ eski tipine göre eşleştiriliyor. | 🔴 KARAR-57 | Kullanıcı DISC testini güncelleyince eşleştirmesi gerçekten değişiyor | BEKLIYOR | hassasiyet: matching/scoring. Kapsam beyanı (rapor): `discVectorService.ts` tamamı, `discType` harf duyarsız → **0 eşleşme**. Matris skoru (`scoring.ts:74,83`) ve anti-match (`:24-29`) `discType`'a dayanıyor. ⚠️ **PS-02 ile AYNI DOSYA AİLESİ → SIRALI.** ⚠️ **KARAR-42 (DISC tekrar testi) ile ilişkili**: tekrar test açılmazsa bu satırın kullanıcı faydası yalnız *ilk* Likert turunda görünür. = psikometri konseyi §4 C.2 · aile: Y-C · ⛔ **çelişki: KARAR-80/M8** (2026-09-25) · KARAR-80 işlendi (2026-09-26, A kabul) — M8: hangi test mizacı belirleyeceği (Likert/discType yazımı) KARAR-57'ye kilitlendi; CEVAPSIZ. |
-| I-12 | Ş1 | **madde 142 — karakter kartı derinleştikçe yeniden hesaplanmıyor (15→35 soru).** Kart onboarding'de bir kez üretiliyor, sonra hiç tazelenmiyor. NEDEN: karakter kartı onboarding'de bir kez üretiliyor; kullanıcı daha çok soru cevaplasa da kartı değişmiyor (madde 142). | 🟢 | Kullanıcı daha fazla soru cevaplayınca kartı güncelleniyor | ATLANDI(karar) | hassasiyet: matching/skorlama dosyası. ⚠️ I-13'ün ölçek düzeltmesinden SONRA anlamlı. · aile: Y-C · ⏭️ **ATLANDI(karar) 2026-09-26:** kartı derinleşen cevaplardan yeniden hesaplamak, "mizaç sonucunu hangi test belirler" sorusunu fiilen A (32 soruluk test esas) yönünde cevaplamak demek → **KARAR-57** cevaplanınca açılır. Kanıt: kart yalnız `onboardingController.ts:482-498` (8 soruluk test) üretiyor; `recalcDiscVector` (`discVectorService.ts:107-174`) `discType`/`discResultCard`'a dokunmuyor. |
-
 ## KARAR-58
 
 **Konu:** Eski DISC ↔ yeni Big Five geçiş dönemi · kart: `docs/otonom/kararlar/KARAR-058.md`
@@ -278,20 +254,11 @@
 
 → bkz. AN-04 (KARAR-58 grubunda)
 
-## KARAR-64
-
-**Konu:** "Mizaç" mı "karakter" mi "kişilik" mi · kart: `docs/otonom/kararlar/KARAR-064.md`
-
-**Aktif kuyrukta ayrıca bekleyen (satır `00-KUYRUK.md`'de kalır):** AN-10 (kalan ayak: mizaç/karakter/kişilik adlandırması)
-
-**Geri dönüş yeri:** I-01 → 00-KUYRUK § AŞAMA I — İÇERİK (PO "EN ÖN SIRA", 2026-09-03) · I-11 → 00-KUYRUK § AŞAMA I — İÇERİK (PO "EN ÖN SIRA", 2026-09-03) · AN-50 → 00-KUYRUK § AŞAMA AN — ANALİZ TURU BULGULARI (2026-09-23) · AN-51 → 00-KUYRUK § AŞAMA AN — ANALİZ TURU BULGULARI (2026-09-23)
+**Geri dönüş yeri:** PN-07 → 00-KUYRUK § ⭐ AŞAMA PN — PO NOTU 2026-10-21 KARARLARININ AÇTIĞI İŞLER
 
 | # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
 |---|---|---|---|---|---|---|
-| I-01 | Ş2 | **madde 31+151 — eşleşen taraflar birbirine nasıl yaklaşacağını hiçbir yerde okumuyor.** 8 hazır metin (4 mentöre + 4 mentiye) YAZILI ama ekranda gösterilmiyor. NEDEN: eşleşen taraflar birbirine nasıl yaklaşacağını okuyamıyor; 8 hazır metin ekrana bağlı değil (madde 31+151). | 🔴 KARAR-64 | Eşleşme kurulunca iki taraf da karşısındakine nasıl yaklaşacağını okuyor | BEKLIYOR | ⭐ **İÇERİK HAZIR — iş "sıfırdan yaz" değil "hazır metni bağla".** ⚠️ **İÇERİK KONSEYİ TEYİDİ (2026-09-21): metin ✅ 8/8 TAM** (yer tutucu/editör notu yok, redaksiyonsuz ekrana konabilir) — **AMA bağlanamaz durumda:** 8 adın hiçbirinin kod değerine (`M1..M4`/`m1..m4`) **eşlemesi yazılı değil** ve "Kâşif" adı üç ayrı anlamda kullanılıyor (canlı DISC kartı C harfi `onboardingController.ts:94,97-98` ↔ canonical mentör M2 `03-psikometri-ve-algoritma.md:14` ↔ yeni menti arketipi `arketip-ve-yaklasim-icerigi-2026-09-03.md:53`). **Ad↔kod eşlemesi bir ÜRÜN KARARIDIR** → I-15/KARAR-10 ile birlikte. Kanıt: `docs/raporlar/kesif/konsey-icerik-2026-09-21.md` §0② / §2.1③. 8/8 metin: `docs/raporlar/icerik/arketip-ve-yaklasim-icerigi-2026-09-03.md:307` (başlık) · mentöre `:322-363` · mentiye `:364-405`. Kod kanıtı (⬜): 5 terim (`approachGuide`·`mentorApproach`·`approachText`·`yaklasim`·`yaklaşım`) × BE `src/`+`prisma/` + FE `src/` harf duyarsız → 11 satır, **0'ı alakalı**. madde 152'den BAĞIMSIZ. Migration yok. ⚠️ = içerik konseyi §2.1, ek bulgu: iş "S" değil: şema/seed gerekmiyor, buna karşılık metni gösterecek **eşleşme-detay ekranı FE'de hiç yok** (metin S, uçtan uca **L**) ve ön koşul **ad↔kod eşlemesi** (**KARAR-45**) — anahtarlar `M1..M4`/`m1..m4`, yeni 8 ad için 0 eşleme. · KARAR-80 işlendi (2026-09-26, A kabul) — M16: hazır metinler AN-50 'yönlendirme' diline çevrilerek bağlanacak; AN-50'nin kendisi KARAR-64'e kilitli (CEVAPSIZ) → zincirleme kilit. Ayrıca ad↔kod eşlemesi KARAR-45 (CEVAPSIZ) gerektiriyor. · geçmiş: bkz. arsiv/00-KUYRUK-gecmis.md § I-01 (2026-09-28, AJ-68) |
-| I-11 | Ş1 | **madde 151+152+153 — eşleşme detay sayfası yok.** Bugün yalnız tek cümlelik "neden uyumlu" var. NEDEN: menti "neden bu mentör, nasıl çalışırız, ilk görüşmede ne konuşulur" bilgisini göremiyor; yalnız tek cümle var (madde 151-153). | 🔴 KARAR-64 | Menti "neden bu mentör · nasıl çalışırsınız · ilk görüşmede ne konuşulur" bölümlerini görüyor | BEKLIYOR | hassasiyet: **içerik ön koşullu** — Bölüm 2'nin 16 kombinasyonundan **15'i YAZILMADI**. Katman-1 VAR: `compatibilityReason` render ediliyor (`menti/page.tsx:318`, `mentor/page.tsx:482-484`). Detay rotası YOK (FE dizin listesi teyitli). madde 153: cümle S1/S2/S3'ten DEĞİL, skor eşiğinden üretiliyor (`matchingController.ts:12-15,48-60`; `supportApproach\|needStatement\|threeQuestion` → 0). ⚠️ **Bölüm 1 ve 3 BAĞIMSIZ ilerler** — PO isterse ikiye bölünsün. ⚠️ S1 (`mentiNeeds`) karşı tarafa GÖSTERİLMEZ, yalnız örtüşme cümlesi. ⚠️ = psikometri konseyi §5 D.2 (KOPMA 3), ek bulgu: üç sorunun (mentiNeeds · mentorStrengths · supportApproach · priorityValue) tek yazanı onboardingController.ts; matching.ts · scoring.ts · scoring.service.ts · sector-scorer.service.ts içinde 0 eşleşme ⇒ veri toplanıyor ama hiçbir skorlama dosyasında okunmuyor (I-11'in "detay sayfası" ayağından ayrı, SKORLAMA ayağı). · aile: Y-C · KARAR-80 işlendi (2026-09-26, A kabul) — M16: hazır metinler AN-50 diline çevrilerek bağlanacak; AN-50 KARAR-64'e kilitli (CEVAPSIZ) → zincirleme kilit. · ⛔ **çelişki: KARAR-80/M16** (2026-09-25) |
-| AN-50 | Ş3 | ⭐ **"eşleştirme" → "yönlendirme" (kullanıcıya GÖRÜNEN metin).** Ekran metinleri · kartlar · e-posta şablonları · sertifika metinleri · landing'de "eşleştirme" gözden geçir; doğrusu "öneri"/"yönlendirme". | 🔴 KARAR-64 | Kullanıcı "sistem eşleştirir" değil "yönlendirir/önerir" dilini görüyor | BEKLIYOR | kaynak: **KARAR-66 B + PO düzeltmesi** (E.2a). ⛔ **KOD İÇİ teknik adlar DEĞİŞMEZ** (`matching.ts` · `matchScore` · `Match` tablosu) — yalnız kullanıcıya görünen metin. Kapsam beyanı ver (dizin · desen · harf duyarsız · iki dilli). ⚠️ **KARAR-64 (mizaç/karakter/kişilik adı) ile BİRLİKTE yapılmalı** — ayrı yapılırsa kullanıcıya İKİ KEZ metin değişikliği gider. Neden gerekli: sistem eşleştirmiyor, ÖNERİYOR (yanlış vaat). · ⚠️ **2026-09-25 kapı düzeltmesi:** Not'taki bağımlılık: KARAR-64 (mizaç/karakter/kişilik adı) ile BİRLİKTE yapılmalı; KARAR-64 cevapsız. |
-| AN-51 | Ş4 | **BELGELERDE "eşleştirme" iddiası gözden geçir** (düşük öncelik). "Eşleştirme" iddiası geçen yerlere `~~üstü çizili~~` + "⚠️ DÜZELTME (2026-09-23, PO): sistem eşleştirmez, YÖNLENDİRİR." | 🔴 KARAR-64 | (belgeler "eşleştirme" değil "yönlendirme" der) | BEKLIYOR | kaynak: KARAR-66 B (E.2b). ⛔ 📸 DONDURULMUŞ belgelerin gövdesini DEĞİŞTİRME; not SONA eklenir. Neden gerekli: iddia belgelerde de yanlış. · ⚠️ **2026-09-25 kapı düzeltmesi:** AN-50 ile aynı terim kararına bağlı (KARAR-64 cevapsız). |
+| PN-07 | Ş0 | **Kişilik motoru, kişinin kararsız kaldığı boyutlara odaklı sorular sorarak belirsizliği gidermeye çalışır (KARAR-63 C ayağı, günlük soru akışında).** NEDEN: ana tip ile yakın tip arasında kalan kullanıcıya rastgele soru gelirse belirsizlik uzun süre kalır. | 🔴 KARAR-62 | Ana/yakın tipi birbirine yakın kullanıcıya günlük soru akışında o boyutu ayırt eden sorular öncelikli geliyor | BEKLIYOR | ajan-ekledi 2026-10-27 · kaynak: KARAR-63 ✅ A + C (PO NOTU 2026-10-21: "Sıra: önce A; C, soru hedefleme motoruna (KARAR-62) bağlı") · önce PN-06 (A) ve PN-03 (tek havuz). Hassas: matching/skorlama → 7b. |
 
 ## KARAR-72
 
@@ -353,36 +320,6 @@
 | # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
 |---|---|---|---|---|---|---|
 | KR-05 | Ş4 | **Zamanlanmış iş tetikleme uçlarında yetki kapsamı hatalı (rapor B5).** Ayrıntı rapora kapanışta eklenir. NEDEN: zamanlanmış işler karardaki rol ve kapsamın dışında da tetiklenebiliyor (kod inceleme B5 [D]; güvenlik ayrıntısı public repoda yazılmıyor). | 🔴 KARAR-79 | Zamanlanmış işleri yalnız karardaki rol, karardaki kapsamda tetikleyebiliyor | BEKLIYOR | ⭐ Öncelik 3 (B bloğu). Dosyalar: `backend/src/routes/adminRoutes.ts` · `backend/src/controllers/adminController.ts`. Rapor: `docs/raporlar/kesif/kod-inceleme-2026-09-24.md` B5 [D]. SIRALI: KR-20 bundan SONRA (aynı `adminController.ts`). · aile: Y-KR |
-
-## KARAR-82
-
-**Konu:** Davet bağlantısı modeli · kart: `docs/otonom/kararlar/KARAR-082.md`
-
-**Geri dönüş yeri:** U-12 → 00-KUYRUK § AŞAMA U — UÇTAN UCA YOLCULUK BULGULARI (2026-09-19)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| U-12 | Ş0 | **Davet token'ı e-postaya bağlı değil, tek kullanımlık değil, iptal edilemez, 30 gün geçerli.** NEDEN: davet bağlantısı sızarsa yabancı biri kalıcı üye olabiliyor (e-postaya bağlı değil, iptal edilemez, 30 gün). | 🔴 KARAR-82 | Karara göre davet token modeli güçlendirildi | BEKLIYOR | ⛔ **ÇIKIŞ BLOKERİ (T1)** — davet token'ı e-postaya bağlı değil, iptal edilemez, 30 gün — link sızarsa yabancı kalıcı üye olur = X §10#16. Kanıt: `selfServeController.ts:562-572`. Efor M ⚠️ = güvenlik konseyi §2.C.3, ek bulgu: token modelinden BAĞIMSIZ bir sızıntı kanalı var — davet JWT'si URL path'inde taşınıyor (`invitationRoutes.ts:13`) ve `requestLogger.ts:22-23` `originalUrl`'i olduğu gibi stdout'a basıyor → log'a erişen herkes geçerli davet token'ı toplar. Bu kanal ayrı ve daha ucuz kapanır → **GV-14** olarak ayrı satır açıldı; U-12 kartı beklerken GV-14 ilerleyebilir. · aile: Y-E · geçmiş: bkz. arsiv/00-KUYRUK-gecmis.md § U-12 (2026-09-28, AJ-68) |
-
-## KARAR-83
-
-**Konu:** Rolü kim, nasıl değiştirir · kart: `docs/otonom/kararlar/KARAR-083.md`
-
-**Geri dönüş yeri:** U-13 → 00-KUYRUK § AŞAMA U — UÇTAN UCA YOLCULUK BULGULARI (2026-09-19)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| U-13 | Ş4 | **Rol değiştiren (MENTOR↔MENTI) hiçbir uç yok; ADMIN düşürme körlemesine `MENTOR` yazıyor** (`adminController.ts:959`) → aslında MENTI ise rolü bozulur. NEDEN: yanlış rolle kayıt olan düzeltilemiyor; yönetici yetkisi düşürülen menti sessizce MENTOR oluyor. | 🔴 KARAR-83 | Yanlış rolle kayıt düzeltilebiliyor; ADMIN düşürme rolü bozmuyor | BEKLIYOR | ⛔ **ÇIKIŞ BLOKERİ (T1+T3)** — rol değiştirme ucu yok, ADMIN düşürme körlemesine `MENTOR` yazıyor — rol sessizce bozulur · hassasiyet: auth/yetki (rol atama). = X §4.5 / §10#17. İki parça: (a) rol-değiştirme ucu yok (ürün) · (b) `:959` hardcoded MENTOR bug'ı. Kanıt: `UpdateUserSchema` `.strict()` (role yok); `adminController.ts:959`. Efor M ⚠️ = güvenlik konseyi §2.A.4 (G-8), ek bulgu: rol kaynağı sorunu yazma ucuyla sınırlı değil — `requireTenant` rolü `TenantMembership`'ten DEĞİL JWT payload'ından okuyor (`tenant.ts:82-85` membership'i çekiyor ama `select:{isActive:true}`, rol seçilmiyor; `:102` `role: payload.role`) → `demoteFromAdmin` (`adminController.ts:951-978`) iki tabloyu da güncellese bile token ≤1 saat ADMIN kalır. Ayrıca admin SAYIMLARI `prisma.user.count({role:'ADMIN'})` ile yapılıyor (`:909,929,960`) → `ensureMembershipSafe` non-fatal olduğu için senkron bozulursa `MAX_ADMINS` ve "son admin" koruması yanlış sayıya dayanır. Token iptali ayağı GV-10'da. · aile: Y-A · 🔴 **kart açıldı (2026-09-25): KARAR-83** |
-
-## KARAR-84
-
-**Konu:** E-posta yokken şifre sıfırlama · kart: `docs/otonom/kararlar/KARAR-084.md`
-
-**Geri dönüş yeri:** U-15 → 00-KUYRUK § AŞAMA U — UÇTAN UCA YOLCULUK BULGULARI (2026-09-19)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| U-15 | Ş0 | **Şifre sıfırlama tek kanala (SMTP) bağımlı;** SMTP hatası kullanıcıya hiç yansımıyor, admin tarafında sıfırlama ucu yok → mail kapalıyken şifresini unutan geri giremez. NEDEN: e-posta çalışmazsa şifresini unutan kullanıcı geri giremiyor ve kimse bunu görmüyor. | 🔴 KARAR-84 | SMTP hatası kullanıcıya yansıyor / admin sıfırlama yolu var | BEKLIYOR | ⛔ **ÇIKIŞ BLOKERİ (T2+T3)** — şifre sıfırlama tek kanala bağlı, hata yansımıyor — şifresini unutan geri giremez, kimse görmez · hassasiyet: auth (şifre sıfırlama). ⚠️ PO ADIMI: SMTP teyidi (`03-PO`). = X §4.4 / §10#19. Kanıt: `authController.ts:534-550`; `UpdateUserSchema` password yok. Efor M ⚠️ = güvenlik konseyi §2.C.5, ek bulgu: sıfırlama akışının KENDİSİ örnek nitelikte (256-bit entropi `:534` · SHA-256 hash'li DB kaydı `:535-541` · 60 dk · tek kullanımlık `:580-587` · kullanımda tüm refresh token'lar silinir `:586` · pasif hesaba token verilmez `:531,568`) — sorun kanal bağımlılığında. Ayrı eksik: oturum-içi şifre DEĞİŞTİRME ucu hiç yok ve karmaşıklık kuralı yok → GV-19 (aynı dosya, SIRALI). · aile: Y-E · 🔴 **kart açıldı (2026-09-25): KARAR-84** |
 
 ## KARAR-85
 
@@ -447,17 +384,6 @@
 | # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
 |---|---|---|---|---|---|---|
 | GV-17 | Ş3 | **Kişi kendi psikometrik profilini dışa aktaramıyor.** OCEAN/arketip/DISC türevlerinin tamamı ve kendi yazdığı mesajların içeriği dışa aktarımda yok. NEDEN: kullanıcı KVKK dışa aktarımında kendi psikometrik profilini ve mesajlarını alamıyor (güvenlik konseyi §2.B.3). | 🔴 KARAR-94 | Kullanıcı verilerini indirdiğinde artık kendi psikometrik profilini ve kendi yazdığı mesajları da görüyor | BEKLIYOR | 🟡 KVKK. **B.3 · güvenlik konseyi §2.B.3.** Kanıt: `exportUserData` `gdprService.ts:284-333` yalnız **6 kaynak**; `UserProfile` **hiç yok**; `:314` mesaj **yalnız `count`** (tip `:280-281` → FE `kvkk.ts:20-22`). **16 tablo + ≈22 `User` alanı** eksik. · aile: Y-B · KARAR-80 işlendi (2026-09-26, A kabul) — M18: GV-17 (dışa aktarım hakkı) için PO'ya ayrı karar kartı açıldı — bkz. KARAR-94 (çıkış blokeri olsun mu). CEVAPSIZ. · geçmiş: bkz. arsiv/00-KUYRUK-gecmis.md § GV-17 (2026-09-28, AJ-68) |
-
-## KARAR-95
-
-**Konu:** Kriz kanalı — güvenlik sorusu olarak yeniden · kart: `docs/otonom/kararlar/KARAR-095.md`
-
-**Geri dönüş yeri:** I-18 → 00-KUYRUK § AŞAMA I — İÇERİK (PO "EN ÖN SIRA", 2026-09-03) · IC-13 → 00-KUYRUK § AŞAMA IC — İÇERİK KONSEYİ (2026-09-21)
-
-| # | Şerit | İş | Kapı | Bitti demek | Durum | Not |
-|---|---|---|---|---|---|---|
-| I-18 | Ş0 | **madde 159 — kriz bildirimi akışı yok.** Kendine zarar ifadesinde kimse haberdar olmuyor; sertifikada senaryo olarak SINANIYOR ama canlı karşılığı yok. NEDEN: kendine zarar ifadesinde kimse haberdar olmuyor; kriz akışı yok (madde 159). | 🔴 KARAR-95 | Kriz ifadesinde kurum yöneticisine bildirim gidiyor | BEKLIYOR | Kanıt (7 terim, İKİ DİLLİ, harf duyarsız, BE `src/`+`prisma/seed.ts`+FE `src/`): `kriz`·`crisis`·`selfharm`·`self-harm`·`kendine zarar`·`acil durum`·`emergency` → **2 satır, 0'ı akış** (`analyticsEngine.ts:299` iş unvanı listesi · `admin/certification/page.tsx:23` sınav konu etiketi); ayrıca `seed-certification.ts` `topic:'kriz-yonetimi'` = **sınav konusu**, bildirim akışı değil. ⚠️ **G1-01 ÇELİŞKİSİ:** 18 yaş altı menti kabul edilecekse gerçek yaş + veli onayı gerekir → "18+ beyanı yeterli" çöker. Avukat paketine TEK SORU.M20: KARAR-69 (c) gereği kriz kanalı HUKUK değil GÜVENLİK sorusu; yeni kart KARAR-95 açıldı. CEVAPSIZ. · geçmiş: bkz. arsiv/00-KUYRUK-gecmis.md § I-18 (2026-09-28, AJ-68) |
-| IC-13 | Ş1 | **Menti tarafında kriz/kötü-muamele içeriği ve bildirim kanalı YOK.** NEDEN: menti kriz ya da kötü muamele yaşarsa ne yapacağını ve nereye başvuracağını ekranda göremiyor. | 🔴 KARAR-95 | Menti, kendisi ya da mentörü kaynaklı bir sorunda ne yapacağını ekranda okuyor ve nereye başvuracağını biliyor | BEKLIYOR | §4.3. `menti/orientation-guide/page.tsx:17-63` dört senaryo içeriyor, **hiçbiri** kriz/kötü muamele/sınır ihlali değil. Menti *"sadece konuşacak biri lazım"* diyebiliyor (`threeQuestionsText.ts:30`) ama bu yalnız eşleştirme sinyali, hiçbir destek çerçevesine bağlanmıyor. Tek "bildir" kanalı kriz için değil: `/bildir` kapsamı sahte kurum kaydı/yetkisiz davet (`bildir/page.tsx:55`). ⚠️ **`I-18`/KARAR-31'in MENTİ ayağı** — I-18 yalnız "kurum yöneticisine bildirim" tarafını kapsıyor. ⚠️ KARAR-4 (somut destek kaynağı adı) buraya da bağlı: ürün içindeki tek somut kaynak adı *"okul psikoloğu"* (`seed-learning-journey.ts:196`) — yetişkin menti/STK için karşılığı yok. Efor M · ⛔ **çelişki: KARAR-80/M20** (2026-09-25) · KARAR-80 işlendi (2026-09-26, A kabul) — M20: I-18 ile birlikte KARAR-95'e bağlandı. CEVAPSIZ. |
 
 ## KARAR-102
 

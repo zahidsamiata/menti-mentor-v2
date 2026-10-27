@@ -1,23 +1,15 @@
 > Bu dosya ANLIK DURUM FOTOĞRAFIDIR — her güncellemede ÜZERİNE YAZILIR, büyümez. Geçmiş `02-ILERLEME.md`'de.
 > Okuma kuralı: OTONOM-PROMPT.txt § Bölüm 14 (UZUN ÇALIŞMA KİPİ) · kapılar 4 renk (Bölüm 7).
 
-**Son güncelleme:** 2026-10-21 · çatı main HEAD (bu commit) · backend pointer `358e085` (= backend origin/main, 2026-10-21 kontrol)
+**Son güncelleme:** 2026-10-27 · çatı main HEAD (bu commit) · backend pointer `358e085` (= backend origin/main, 2026-10-27 `git fetch` ile; submodule'de yeni commit yok)
 
-**Durum:** DURDU (K1-a) → PO NOTU 2026-10-21 ile 6 karar + PO NOTU EK 2026-10-21 ile 3 karar cevaplandı, KARAR-101 güncellendi (✍️, uygulama bekliyor). Sıradaki adım: PO OTONOM-PROMPT.txt'yi göndererek normal turu başlatır; tur önce ✍️ kartları işler. TUR NOTU: `02-ILERLEME.md` başı.
+**Durum:** DURDU (K1-a — BU ORTAMDA yapılabilir iş kalmadı). Oturum PO'nun Windows bilgisayarında (Cursor); `node`/`npm`, `gh`, `python` yok → verify, bekçi, PR, merge yapılamıyor. Belge işi (PO NOTU md.4) yapıldı ve push edildi. Kuyrukta 15 çalışılabilir 🟢 iş var ama araç bekliyor. TUR ÖZETİ: `02-ILERLEME.md`.
 
-**PO NOTU 2026-10-21 — cevaplanan kararlar (kart CEVAP satırında, metin aynen):** KARAR-101 → B (genişletilmiş) · KARAR-64 → C (Kişilik) · KARAR-95 → Hiçbiri · KARAR-57 → A (tek havuz, tek formül) · KARAR-45 → C · KARAR-63 → A + C. Yeni kart: **KARAR-143** (2 yeni arketip adı; öneri A "Gezgin" + "Adım Atan"). Avukata ayrılan ⚖️/🔒 kartlara dokunulmadı.
-**Kilidi açılan işler (00-KUYRUK + KARAR-BEKLEYEN işaretçilerine göre; satırların işlenmesi normal turda):**
-- KARAR-101 → Y1-B8 (PR backend #164 + çatı #343, genişletilmiş B kapsamına göre yeniden yazılacak; ⭐ EK güncellemesi: onay bekleyen mentörleri YALNIZ isimsiz önizleme olarak görür — ad/fotoğraf/profil yok)
-- KARAR-82 (EK) → U-12 — önce A + B; C SMTP teyidinden sonra; B/C migration → 🔵 yedek + PO onayı
-- KARAR-83 (EK) → U-13 — A + C; rol tarihçesi migration isterse → 🔵 yedek + PO onayı · ilişkili açık kart: KARAR-124
-- KARAR-84 (EK) → U-15 — B (yalnız platform yöneticisi, iz kaydıyla)
-- KARAR-64 → I-11 · AN-10 (adlandırma ayağı) · AN-50 · AN-51 (diğer bağı KARAR-66 zaten ✅) · I-01 (KARAR-10/45/64 üçü de cevaplı)
-- KARAR-57 → F-09 · I-12 · PS-03 (⚠️ KARAR-42 "tekrar test" ile ilişkili, açık)
-- KARAR-45 → IC-14 · IC-10 (ad ayağı) · AN-05 (ad ayağı) — iki menti adı KARAR-143'e bağlı
-- KARAR-95 → I-18 · IC-13 "yapılmayacak" olarak kapanır (IC-13'ün menti ayağı KARAR-31'e — avukat — bağlı notu var)
-- KARAR-63 → kartta 0 iş; A ayağı (`scoring.config.ts:31` eşikleri) için iş satırı normal turda; C ayağı KARAR-62 bekler
+**Şu an yapılan:** yok. Bu turda yapılan (yalnız belge): PO NOTU 2026-10-21 + EK'teki 9 kararın açtığı işler `00-KUYRUK.md` § ⭐ AŞAMA PN'ye alındı ve en üste çekildi; 9 kart arşive; 02-ILERLEME haftalık döndürme (W40 + W43 → arşiv); git kimliği ayarlandı.
 
-**Bu oturumda BITTI (27):** AJ-96 · 104 · 103 · 99 · 112 · 100 · 113 · 106 · 102 · 101 · 108 · 109 · 105 · 114 · 115 · 116 · 107 · 110 · 117 · 121 · 118 · 119 · 124 · 125 · 127 + DK-02 kod kısmı + kısmen: F-01 · AJ-120 (dilim 2 #488 merge; kalan KARAR-51) · AJ-122 (gözlem: sonraki CI koşularında deadlock yok) · AJ-126 (a) (b → KARAR-138). Ajan-ekledi: AJ-112 … AJ-127.
+**Sıradaki 5 iş (araçlı ilk oturumda, § AŞAMA PN öncelik sırası):** Y1-B8 (onay bekleyen kullanıcı kapısı, güvenlik — eski PR #164/#343 yerine yeni dal) → U-12 (davet 7 gün) → U-13 (rol değiştirme + düşürmede hedef rol) → U-15 (platform yöneticisi sıfırlama bağlantısı) → U-12B (🔵 iptal edilebilir davet linki).
+
+**Son merge'ler:** bu turda yok (son: AJ-120 dilim 2 #488, 2026-09-29).
 
 **PO bekleyen hazır PR'lar (hepsi 7b ONAY):**
 - 🔵 E-4 karantina — backend #289 + çatı #474 · **KARAR-134**
@@ -31,14 +23,13 @@
 - Ürün sorusu: **KARAR-138** (dışa aktarmada başkasının yazdıkları, KVKK)
 - ⚠️ Birden çok migration PR'ı merge sırası: her merge öncesi ilgili tablo yedeği; I-08 + P-08 ortak TenantMembership yedeği yeter; AN-27 Message; AN-36 + AN-29 ortak Tenant yedeği yeter.
 
-**Şu an yapılan:** yok (DURDU). Aynı prompt tekrar gönderilince: KARAR cevapları → EVET gelen 🔵 PR'lar (yedek + merge + pointer).
 
 **Açık PR'lar:**
 | PR | İş | CI | İnceleme | Neden açık |
 |---|---|---|---|---|
 | backend #227 + çatı #420 | AJ-77 13 durum alanı enum · 🔵 ⛔ MIGRATION | yeşil (#420 main gerisinde) | ✅ ONAY | KARAR-128 EVET + §3b sayım + 5 tablo yedeği (DB erişimi) |
 | backend #212 | AJ-50 ham DISC kart temizliği · 🔵 | yeşil | ✅ ONAY | KARAR-116 EVET + yedek (DB erişimi) |
-| backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | CONFLICTING (2026-09-29) | SORUN VAR (ürün) | KARAR-101 ✍️ B (genişletilmiş) — kapsama göre yeniden yazılacak |
+| backend #164 + çatı #343 | Y1-B8 OAuth onay kapısı (güvenlik) | CONFLICTING (2026-09-29) | SORUN VAR (ürün) | KARAR-101 ✅ B genişletilmiş + EK — kuyrukta Y1-B8 (§ AŞAMA PN, 1. sıra); yeni dalda yeniden yazılacak, yeni PR açılınca bu ikisi kapatılır |
 | backend #157 + çatı #337 | AN-26 hatırlatma · 🔵 ⛔ | CONFLICTING | ✅ | KARAR-98 |
 | backend #148 + çatı #326 | U-18 mesaj talebi reddi · 🔵 ⛔ | CONFLICTING | ✅ | KARAR-97 |
 | backend #142 + çatı #320 | AN-30 granüler rıza · 🔵 ⛔ · çıkış blokeri | CONFLICTING | ✅ | KARAR-96 |
@@ -50,14 +41,16 @@
 | backend #286 + çatı #472 | DK-03 platform iz kaydı · 🟡 KVKK | yeşil | ✅ ONAY (2 tur) | satır notu: merge yok |
 | çatı #110 | ⛔ MERGE ETME (analytics/çerez) | — | — | kalıcı kural |
 
-**Push edilmemiş iş:** yok. **Stash:** yok.
+
+**Push edilmemiş iş:** yok. **Stash:** yok. **Worktree:** yok.
 
 **Engeller:**
-- 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + 5 tablo yedeği) · AJ-50 · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek: AN-30 · U-18 · AN-26 · AN-02.
-- ⛔ Sınıflandırıcı reddi 2 (ardışık değil): AJ-75 ve AJ-66 7b inceleme yorumları `Excess Sensitive Detail` → kısa yorumla geçildi.
+- ⛔ **ORTAM (2026-10-27): bu bilgisayarda `node`/`npm`, `gh`, `python` yok.** `npm run verify` koşamaz · bekçi çalışmadı: python3 yok (PO NOTU md.2 — 🟢 iş merge edilmez) · `gh` olmadığı için PR açılamaz/merge edilemez/CI okunamaz. Kod işi başlatılmadı. Çözüm (kurulum komutları ya da VPS): `03-PO-ELLE-ISLER.md` en üstteki 2026-10-27 maddesi.
+- ⚠️ Bu turun belge commit'leri bekçiden geçmedi (python yok; docs muafiyeti, PO NOTU md.2). Araçlı ilk oturumda ilk iş `bash scripts/belge-bekci.sh` — HATA çıkarsa önce o düzeltilir.
+- 🗄️ Tek seferlik DB erişimi gerekiyor: AJ-77 (§3b sayım + 5 tablo yedeği) · AJ-50 · K-15 · Y-05 (EXPLAIN) · 🔵 EVET gelirse yedek: AN-30 · U-18 · AN-26 · AN-02. (DATABASE_URL bu bilgisayarda yok ve kurulmaz — K8.3.)
 
-**PO'ya sorular:** ⭐ YENİ: KARAR-134 … 141 (🔵 EVET/HAYIR: 134 · 135 · 137 · 139 · 140 · 141; ürün: 136 · 138) · KARAR-134 · 135 · 136 · 137 (üçü 🔵 EVET/HAYIR, biri ürün sorusu) · KARAR-134 (E-4 karantina EVET/HAYIR + niyeti bulunamayan 2 uç) ·  ⭐ **toplu karar paketi: `docs/otonom/KARAR-PAKETI.md`** — ilk 10 karar 28 iş açar · 🔵 EVET/HAYIR: KARAR-96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ⭐ güvenlik: KARAR-101 · bu oturumun yeni kartları: KARAR-126…133 · kabul testleri: `03-PO-ELLE-ISLER.md` 13.1 (sosyal giriş) · 13.2 (8 madde) · 13.3 (landing teması).
+**PO'ya sorular:** KARAR-143 (iki menti arketipinin yeni adı — IC-14 · I-01 · IC-10 · AN-05'in ad ayağını kilitliyor; öneri A "Gezgin" + "Adım Atan") · 🔵 EVET/HAYIR: KARAR-134 · 135 · 137 · 139 · 140 · 141 · 142 · 96 · 97 · 98 · 99 · 106 · 107 · 111 · 116 · 128 · ürün: KARAR-136 · 138 · toplu paket: `docs/otonom/KARAR-PAKETI.md` (⚠️ paket 2026-10-21 cevaplarından önce yazıldı; 9 kart artık ✅).
 
-**Strateji katmanına not:** (000) AJ-113 7b notu: randevu ucu mentörün onay durumuna (approvalStatus) bakmıyor — KARAR-101 (onay bekleyen kullanıcı) ile birlikte ele alınmalı. (00) AJ-99 7b notu: `GET /api/feedback-logs` mentöre kendi FeedbackLog kayıtlarını ham puan + menti adıyla döndürüyor; bugün FeedbackLog'a menti yazmıyor → risk yok, ama KARAR-12 "B" seçilirse (menti yazarsa) liste ucu k-anonimlik maskesini aşar — KARAR-12 cevabında dikkate alınmalı. (0) İŞ 2 teyit listesi (#455): G7-10 "mobil" ayağı AJ-86 ölçütünde yok · G7-14 "sanallaştırma" kodda yok (AJ-83 sayfalama yaptı) — ikisi de 🟨, bitip bitmediği PO/strateji teyidi · 7b notu: Y3 (00-KARAR-TAKIP) PDF/Excel biçimi istenirse ayrı iş. İŞ 2 CI: bekçi mevcut docs-guard job'unda koşuyor, iş akışı dosyası değişmedi.  (1) Bekçi (i5) E-5 uyarısı bilinçli: KARAR-11 ✅ ama gerçek silme PO ikinci onayı + karantina turu bekliyor. (2) 00-KUYRUK 116 KB > 90 KB eşiği — kalan uzunluk AJ-96…111 yeni satırlarından ve gerekçeli uzun satırlardan (AJ-68 kısmen). (3) 🔵 PR'ların 4'ü main ile çakışıyor — EVET gelince rebase gerekir. (4) Paylaşılan backend `.gitignore` artık `node_modules` sembolik bağını da yakalıyor (AJ-69 dersi).
+**Strateji katmanına not:** (YENİ 2026-10-27) KARAR-83: kartın C seçeneği "yalnız platform yöneticisi" iken CEVAP metni C'yi "rol tarihçesi" olarak tanımlıyor → CEVAP metni uygulandı (U-13C). PO farklı niyetliyse kartı düzeltsin. · AŞAMA PN satırları 5c-n "geri dönüş yeri" yerine PN bölümüne alındı (PO md.4 "öne al") — bekçi (i2)/(n) bu sapmayı uyarırsa gerekçe budur. · I-18/IC-13 IPTAL(PO) aktif kuyrukta (PN bölümü sonu) duruyor; arşiv yeri (bitti arşivi IPTAL satırı almıyor) bir sonraki belge turunda netleşir. · Önceki notlar: (000) AJ-113 7b notu: randevu ucu mentörün onay durumuna (approvalStatus) bakmıyor — KARAR-101 (onay bekleyen kullanıcı) ile birlikte ele alınmalı. (00) AJ-99 7b notu: `GET /api/feedback-logs` mentöre kendi FeedbackLog kayıtlarını ham puan + menti adıyla döndürüyor; bugün FeedbackLog'a menti yazmıyor → risk yok, ama KARAR-12 "B" seçilirse (menti yazarsa) liste ucu k-anonimlik maskesini aşar — KARAR-12 cevabında dikkate alınmalı. (0) İŞ 2 teyit listesi (#455): G7-10 "mobil" ayağı AJ-86 ölçütünde yok · G7-14 "sanallaştırma" kodda yok (AJ-83 sayfalama yaptı) — ikisi de 🟨, bitip bitmediği PO/strateji teyidi · 7b notu: Y3 (00-KARAR-TAKIP) PDF/Excel biçimi istenirse ayrı iş. İŞ 2 CI: bekçi mevcut docs-guard job'unda koşuyor, iş akışı dosyası değişmedi.  (1) Bekçi (i5) E-5 uyarısı bilinçli: KARAR-11 ✅ ama gerçek silme PO ikinci onayı + karantina turu bekliyor. (2) 00-KUYRUK 116 KB > 90 KB eşiği — kalan uzunluk AJ-96…111 yeni satırlarından ve gerekçeli uzun satırlardan (AJ-68 kısmen). (3) 🔵 PR'ların 4'ü main ile çakışıyor — EVET gelince rebase gerekir. (4) Paylaşılan backend `.gitignore` artık `node_modules` sembolik bağını da yakalıyor (AJ-69 dersi).
 
-**Sıradaki 5 iş:** kuyruk: AJ-97…111 (örn. AJ-103/104 güvenlik) · AJ-95b/c.
+**Karar kilidi tablosu:** cevapsız 113 kart — sıralı liste `01-KARARLAR.md` § ⬜ / ✍️ ve `00-KUYRUK.md` § 🔴 KİLİT HARİTASI (en çok kilitleyen: KARAR-80 bağları, KARAR-46 (4 iş), KARAR numarasız (4 iş), KARAR-58 · 89 (2+ iş)).
