@@ -1,4 +1,4 @@
-import type { TenantAnalytics, TenantDefaultProfile } from '@/lib/api/platform';
+import type { TenantAnalytics, TenantDefaultProfile, TenantMatchingFallback } from '@/lib/api/platform';
 import { UI_TEXT } from '@/lib/uiText';
 
 export function DiscSummary({
@@ -13,6 +13,7 @@ export function DiscSummary({
     return (
       <div className="space-y-4">
         <DefaultProfileLine profile={analytics?.defaultProfile} />
+        <MatchingFallbackLine stat={analytics?.matchingFallback} />
         <p className="text-muted-foreground text-sm">DISC analizi için yeterli veri yok.</p>
       </div>
     );
@@ -23,6 +24,7 @@ export function DiscSummary({
   return (
     <div className="space-y-4">
       <DefaultProfileLine profile={analytics.defaultProfile} />
+      <MatchingFallbackLine stat={analytics.matchingFallback} />
       <p className="text-sm text-muted-foreground">
         DISC tipi belirlenmiş üye sayısı:{' '}
         <span className="text-foreground font-semibold">{analytics.totalWithDisc}</span>
@@ -75,5 +77,32 @@ function DefaultProfileLine({ profile }: { profile?: TenantDefaultProfile }) {
       Varsayılana düşen profil (DISC vektörü olmayan aktif üye):{' '}
       <span className="text-foreground font-semibold">{value}</span>
     </p>
+  );
+}
+
+/**
+ * AJ-111 (md.111): son 30 günde aday listesi istenen eşleştirmelerin yüzde kaçı, tüm kurallarla
+ * aday çıkmadığı için gevşetilmiş kurallarla (zaman → mizaç uyumsuzluğu → yalnız sektör) sonuçlandı.
+ * Toplu sayaç; kişi yok. Az istekte oran yanıltıcı olduğu için backend "yetersiz veri" der.
+ */
+function MatchingFallbackLine({ stat }: { stat?: TenantMatchingFallback }) {
+  if (!stat) return null;
+  const value =
+    stat.insufficientData || stat.ratePercent === null
+      ? `yetersiz veri (<${stat.minSample} istek)`
+      : `%${stat.ratePercent.toLocaleString('tr-TR')} (${stat.relaxedRequests}/${stat.totalRequests} istek)`;
+  return (
+    <div className="space-y-0.5" data-testid="matching-fallback-rate">
+      <p className="text-sm text-muted-foreground">
+        Gevşetilen eşleştirme (son {stat.windowDays} gün):{' '}
+        <span className="text-foreground font-semibold">{value}</span>
+      </p>
+      {!stat.insufficientData && stat.relaxedRequests > 0 && (
+        <p className="text-xs text-muted-foreground">
+          Zaman uyumu gevşetildi: {stat.byLevel.level1} · Mizaç uyumsuzluğu filtresi kaldırıldı:{' '}
+          {stat.byLevel.level2} · Yalnız sektör uyumu: {stat.byLevel.level3}
+        </p>
+      )}
+    </div>
   );
 }
