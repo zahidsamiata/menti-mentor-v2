@@ -15,6 +15,12 @@ export interface AvailabilityBlockLike {
   startTime: string | null;
   endTime: string | null;
   timezone?: string | null;
+  // K-15 (KARAR-1 → A): mentörün bu blokta tanımladığı format+süre. Opsiyonel tutulur —
+  // bu dosyanın saf zaman fonksiyonları (fitsAvailability/listBookableSlots) hâlâ yalnız
+  // gün+saat penceresine bakar; format/süre eşleşmesi book-meeting sayfasında, mentörün
+  // sunduğu (format, durationMin) KOMBİNASYONLARI arasından seçim yaptırılarak uygulanır.
+  format?: string | null;
+  durationMin?: number | null;
 }
 
 // Intl kısa-gün (en-US) → gün kodu
@@ -30,6 +36,64 @@ export const WEEKDAY_LABELS_TR: Record<WeekdayCode, string> = {
 /** Gün kodunu (MON…) Türkçe tam ada çevirir; bilinmeyen kod olduğu gibi döner. */
 export function weekdayLabelTr(code: string): string {
   return WEEKDAY_LABELS_TR[code as WeekdayCode] ?? code;
+}
+
+// ── K-15: mentörün sunduğu (format, süre) kombinasyonları ───────────────────────────────
+//
+// Neden: eskiden menti format+süreyi SERBEST seçiyordu (aşağıdaki DURATIONS/FORMATS sabitleri
+// book-meeting/page.tsx'te idi). KARAR-1 (→ A) bunu tersine çevirdi — mentör slot açarken
+// format+süreyi belirler, menti yalnız hazır bir slotu (dolayısıyla o slotun format+süresini)
+// seçer. Backend (meetingController bookMeeting) da AYNI kuralı uygular — burada menti'ye
+// gösterilecek "seçilebilir slot türleri" backend'in kabul edeceği kombinasyonlarla birebir
+// aynı kaynaktan (mentörün blokları) türetilir.
+
+export type MeetingFormatCode = 'ONLINE' | 'IN_PERSON' | 'PHONE';
+
+/** Schema.prisma AvailabilityBlock varsayılanıyla AYNI — eski/kısmi veri için. */
+export const DEFAULT_BLOCK_FORMAT: MeetingFormatCode = 'ONLINE';
+export const DEFAULT_BLOCK_DURATION_MIN = 60;
+
+export interface AvailabilityOffer {
+  format: MeetingFormatCode;
+  durationMin: number;
+}
+
+function offerKey(offer: AvailabilityOffer): string {
+  return `${offer.format}|${offer.durationMin}`;
+}
+
+/** Bir bloğun format+süresi — alan boşsa (eski/kısmi veri) şema varsayılanı uygulanır. */
+export function blockOffer(blk: AvailabilityBlockLike): AvailabilityOffer {
+  return {
+    format:      (blk.format as MeetingFormatCode | null | undefined) ?? DEFAULT_BLOCK_FORMAT,
+    durationMin: blk.durationMin ?? DEFAULT_BLOCK_DURATION_MIN,
+  };
+}
+
+/**
+ * Mentörün aktif bloklarından TEKİLLEŞTİRİLMİŞ (format, süre) kombinasyonlarını çıkarır —
+ * menti yalnız bu listeden seçebilir. Sıra, blokların geliş sırasını (backend weekday/startTime
+ * artan) izler — kullanıcıya kararlı bir sırayla gösterilsin diye.
+ */
+export function listAvailabilityOffers(
+  blocks: ReadonlyArray<AvailabilityBlockLike>,
+): AvailabilityOffer[] {
+  const seen = new Map<string, AvailabilityOffer>();
+  for (const blk of blocks) {
+    const offer = blockOffer(blk);
+    const key = offerKey(offer);
+    if (!seen.has(key)) seen.set(key, offer);
+  }
+  return Array.from(seen.values());
+}
+
+/** Yalnız verilen (format, süre) kombinasyonuna sahip blokları süzer. */
+export function filterBlocksByOffer<T extends AvailabilityBlockLike>(
+  blocks: ReadonlyArray<T>,
+  offer: AvailabilityOffer,
+): T[] {
+  const key = offerKey(offer);
+  return blocks.filter((blk) => offerKey(blockOffer(blk)) === key);
 }
 
 /**

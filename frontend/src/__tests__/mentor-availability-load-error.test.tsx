@@ -100,6 +100,8 @@ describe('Mentör müsaitlik — liste yüklenemezse', () => {
     fireEvent.click(saveButton());
     await waitFor(() => expect(saveAvailability).toHaveBeenCalledTimes(1));
     const payload = saveAvailability.mock.calls[0][1] as { blocks: unknown[] };
-    expect(payload.blocks).toEqual([{ weekday: 'MON', startTime: '09:00', endTime: '17:00' }]);
+    // K-15: sunucudan format/durationMin gelmeyen (eski/kısmi) satırlara da şema
+    // varsayılanı (ONLINE/60dk) uygulanır — geri gönderilen yükte hâlâ yer alır.
+    expect(payload.blocks).toEqual([{ weekday: 'MON', startTime: '09:00', endTime: '17:00', format: 'ONLINE', durationMin: 60 }]);
   });
 });

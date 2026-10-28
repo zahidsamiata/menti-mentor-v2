@@ -128,14 +128,29 @@ describe('BookMeeting — availability null-safety regression', () => {
       });
     });
 
-    it('süre uzayınca artık sığmayan seçili saat düşer, buton yeniden pasifleşir', () => {
-      availabilityMock.data = { blocks: [{ weekday: 'MON', startTime: '14:00', endTime: '16:00' }] };
+    // K-15 (KARAR-1 → A): menti artık serbest bir "süre" düğmesiyle oynamıyor — format+süre
+    // mentörün tanımladığı slota bağlı. Bu test aynı regresyonu (tür değişince eski seçim
+    // sessizce gönderilmesin) mentörün BİRDEN FAZLA görüşme türü sunduğu senaryoyla doğrular.
+    it('görüşme türü değişince artık sığmayan seçili saat düşer, buton yeniden pasifleşir', () => {
+      availabilityMock.data = {
+        blocks: [
+          { weekday: 'MON', startTime: '14:00', endTime: '16:00', format: 'ONLINE', durationMin: 60 },
+          { weekday: 'MON', startTime: '14:00', endTime: '16:00', format: 'PHONE',  durationMin: 30 },
+        ],
+      };
       render(<BookMeetingPage />);
       fireEvent.change(document.querySelector('textarea') as HTMLTextAreaElement, { target: { value: 'B'.repeat(60) } });
+
+      // Birden fazla teklif var — otomatik seçim yok, önce tür seçilmeli.
+      expect(screen.getByText(/önce bir görüşme türü seçin/i)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole('button', { name: /online \(video\) · 60 dk/i }));
       fireEvent.click(screen.getByRole('button', { name: '4 Ocak Pazartesi' }));
       fireEvent.click(screen.getByRole('button', { name: '15:00' }));
       expect(screen.getByRole('button', { name: /görüşme talebini gönder/i })).not.toBeDisabled();
-      fireEvent.click(screen.getByRole('button', { name: '90 dk' }));
+
+      // Türü değiştir (Telefon/30dk) — eski gün+saat seçimi artık geçersiz, düşürülür.
+      fireEvent.click(screen.getByRole('button', { name: /telefon · 30 dk/i }));
       expect(screen.queryByRole('button', { name: '15:00' })).not.toBeInTheDocument();
       expect(screen.getByRole('button', { name: /görüşme talebini gönder/i })).toBeDisabled();
     });
